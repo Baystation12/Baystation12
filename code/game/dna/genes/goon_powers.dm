@@ -515,7 +515,7 @@
 		if (61 to 80)
 			usr << "\blue <b>Condition</b>: [M.name] is suffering mild pain."
 		if (41 to 60)
-			usr << "\blue <b>Condition</b>: [M.name] is suffering significant pain."
+			usr << "\blue	 <b>Condition</b>: [M.name] is suffering significant pain."
 		if (21 to 40)
 			usr << "\blue <b>Condition</b>: [M.name] is suffering severe pain."
 		else
@@ -524,13 +524,13 @@
 
 	switch(M.a_intent)
 		if ("help")
-			usr << "\blue <b>Mood</b>: You sense benevolent thoughts from [M.name]."
+			usr << "\blue <b>Mood</b>: You sense benign thoughts from [M.name]."
 		if ("disarm")
 			usr << "\blue <b>Mood</b>: You sense cautious thoughts from [M.name]."
 		if ("grab")
-			usr << "\blue <b>Mood</b>: You sense hostile thoughts from [M.name]."
+			usr << "\blue <b>Mood</b>: You sense aggressive thoughts from [M.name]."
 		if ("harm")
-			usr << "\blue <b>Mood</b>: You sense cruel thoughts from [M.name]."
+			usr << "\blue <b>Mood</b>: You sense violent thoughts from [M.name]."
 			for(var/mob/living/L in view(7,M))
 				if (L == M)
 					continue
