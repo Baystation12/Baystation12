@@ -231,7 +231,9 @@ turf/proc/update_lumcount(amount, _lcolor, removing = 0)
 				l_color = null // All our color is gone, no color for us.
 			else if (colors && colors.len > 1)
 				var/maxdepth = 3 // Will blend 3 colors, anymore than that and it looks bad or we will get lag on every tile update.
-				var/currentblended = MixColors(colors.Copy(1,maxdepth+1))
+				var/currentblended = colors
+				if (colors.len > maxdepth)
+					currentblended = MixColors(colors.Copy(1,maxdepth+1))
 
 				if (currentblended)
 					//world << "Ended up with [currentblended]"
