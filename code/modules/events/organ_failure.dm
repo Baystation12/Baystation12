@@ -39,5 +39,7 @@ datum/event/organ_failure/start()
 				O.germ_level = max(INFECTION_LEVEL_TWO, O.germ_level)
 			else
 				O.germ_level = max(rand(INFECTION_LEVEL_ONE,INFECTION_LEVEL_ONE*2), O.germ_level)
+			
+			C.bad_external_organs |= O
 
 		severity--

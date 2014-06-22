@@ -22,6 +22,8 @@ var/global/list/side_effects = list()				//list of all medical sideeffects types
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 var/global/list/flag_list = list()					//list of flags during Nations gamemode
+var/global/list/clothing_list = list()					//list of all /obj/item/clothing instances in the world
+
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
@@ -108,6 +110,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
+
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species

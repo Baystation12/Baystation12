@@ -56,7 +56,7 @@
 				if ((type & 1 && sdisabilities & BLIND))
 					return
 	// Added voice muffling for Issue 41.
-	if(stat == UNCONSCIOUS || sleeping > 0)
+	if(stat == UNCONSCIOUS || (sleeping > 0 && stat != 2))
 		src << "<I>... You can almost hear someone talking ...</I>"
 	else
 		src << msg
