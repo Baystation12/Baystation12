@@ -333,6 +333,25 @@ This function completely restores a damaged organ to perfect condition.
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
+/*
+The INFECTION_LEVEL values defined in setup.dm control the time it takes to reach the different 
+infection levels. Since infection growth is exponential, you can adjust the time it takes to get
+from one germ_level to another using the rough formula:
+
+desired_germ_level = initial_germ_level*e^(desired_time_in_seconds/1000)
+
+So if I wanted it to take an average of 15 minutes to get from level one (100) to level two
+I would set INFECTION_LEVEL_TWO to 100*e^(15*60/1000) = 245. Note that this is the average time,
+the actual time is dependent on RNG.
+
+INFECTION_LEVEL_ONE		below this germ level nothing happens, and the infection doesn't grow
+INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to internal and adjacent organs
+INFECTION_LEVEL_THREE	above this germ level the player will take additional toxin damage per second, and will die in minutes without 
+						antitox. also, above this germ level you will need to overdose on spaceacillin to reduce the germ_level.
+
+Note that amputating the affected organ does in fact remove the infection from the 
+player's body, though, antitox and spaceacillin are easy enough to get I doubt it will ever be needed.
+*/
 /datum/organ/external/proc/update_germs()
 
 	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
@@ -353,7 +372,7 @@ This function completely restores a damaged organ to perfect condition.
 
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		if (germ_level > 0 && antibiotics > 5)
-			if (prob(4*antibiotics)) germ_level--
+			if (prob(4*antibiotics)) germ_level--	//the higher the germ level the more antibiotics you'll need.
 		
 		if(germ_level >= INFECTION_LEVEL_ONE)
 			//having an infection raises your body temperature
@@ -362,10 +381,10 @@ This function completely restores a damaged organ to perfect condition.
 				//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
 				owner.bodytemperature++
 			
-			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-				if (prob(5))
-					germ_level++
-				owner.adjustToxLoss(1)
+			if(prob(round(germ_level/10)))
+				germ_level++
+				if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
+					owner.adjustToxLoss(1)
 		
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			//spread the infection

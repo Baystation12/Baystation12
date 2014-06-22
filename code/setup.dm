@@ -768,10 +768,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define SHUTTLE_INTRANSIT	2
 
 //Germs and infection
-//These numbers have been calculated so that an untreated cut will become a serious infection after 50 minutes.
 #define GERM_LEVEL_AMBIENT		110		//maximum germ level you can reach by standing still
 #define GERM_LEVEL_MOVE_CAP		200		//maximum germ level you can reach by running around
+
 #define INFECTION_LEVEL_ONE		100
 #define INFECTION_LEVEL_TWO		500
 #define INFECTION_LEVEL_THREE	1000
-#define INFECTION_LEVEL_TERMINAL	2500
