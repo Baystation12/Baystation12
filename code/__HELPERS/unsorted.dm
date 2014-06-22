@@ -1491,6 +1491,8 @@ proc/rotate_icon(file, state, step = 1, aa = FALSE)
 
 	return result
 
+/proc/format_text(text)
+	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
 /*
 Standard way to write links -Sayu
@@ -1500,6 +1502,7 @@ Standard way to write links -Sayu
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+
 
 
 /proc/get_location_accessible(mob/M, location)

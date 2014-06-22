@@ -33,7 +33,6 @@
 /datum/browser/proc/set_title(ntitle)
 	title = format_text(ntitle)
 
-
 /datum/browser/proc/add_head_content(nhead_content)
 	head_content = nhead_content
 
@@ -144,8 +143,6 @@
 // to pass a "close=1" parameter to the atom's Topic() proc for special handling.
 // Otherwise, the user mob's machine var will be reset directly.
 //
-/proc/format_text(text)
-	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
 /proc/onclosed(mob/user, windowid, var/atom/ref=null)
 	if(!user || !user.client) return
