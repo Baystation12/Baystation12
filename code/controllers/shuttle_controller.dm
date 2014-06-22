@@ -14,6 +14,7 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 
 /datum/shuttle_controller/emergency_shuttle
 	var/datum/shuttle/ferry/shuttle
+	var/list/escape_pods
 	
 	var/launch_time			//the time at which the shuttle will be launched
 	var/auto_recall = 0		//if set, the shuttle will be auto-recalled
@@ -40,6 +41,50 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 		//shuttle.docking_controller_tag = "supply_shuttle"
 		//shuttle.dock_target_station = "cargo_bay"
 		shuttles["Escape"] = shuttle
+	
+	if (!escape_pods)
+		escape_pods = list()
+		
+		var/datum/shuttle/ferry/escape_pod/pod
+		
+		pod = new()
+		pod.location = 0
+		pod.warmup_time = 0
+		pod.area_station = locate(/area/shuttle/escape_pod1/station)
+		pod.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
+		pod.area_transition = locate(/area/shuttle/escape_pod1/transit)
+		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+		escape_pods += pod
+
+		pod = new()
+		pod.location = 0
+		pod.warmup_time = 0
+		pod.area_station = locate(/area/shuttle/escape_pod2/station)
+		pod.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
+		pod.area_transition = locate(/area/shuttle/escape_pod2/transit)
+		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+		escape_pods += pod
+		
+		pod = new()
+		pod.location = 0
+		pod.warmup_time = 0
+		pod.area_station = locate(/area/shuttle/escape_pod3/station)
+		pod.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
+		pod.area_transition = locate(/area/shuttle/escape_pod3/transit)
+		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+		escape_pods += pod
+		
+		//There is no pod 4, apparently.
+		
+		pod = new()
+		pod.location = 0
+		pod.warmup_time = 0
+		pod.area_station = locate(/area/shuttle/escape_pod5/station)
+		pod.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
+		pod.area_transition = locate(/area/shuttle/escape_pod5/transit)
+		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+		escape_pods += pod
+
 
 /datum/shuttle_controller/emergency_shuttle/proc/process()
 	if (wait_for_launch)
@@ -49,9 +94,13 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 			
 			//set the travel time
 			if (!shuttle.location)	//at station
-				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
 				departed = 1	//technically we haven't left yet, but this should be good enough
-				//TODO launch pods
+				
+				//launch the pods!
+				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+					pod.launch(src)
+				
+				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
 			else
 				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
 			
