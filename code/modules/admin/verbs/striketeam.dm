@@ -30,7 +30,7 @@ var/global/sent_strike_team = 0
 
 	sent_strike_team = 1
 
-	if (emergency_shuttle.direction == 1 && emergency_shuttle.online == 1)
+	if (emergency_shuttle.can_recall())
 		emergency_shuttle.recall()
 
 	var/commando_number = commandos_possible //for selecting a leader
