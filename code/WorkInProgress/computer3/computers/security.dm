@@ -14,7 +14,7 @@
 	name 		= "Security Records"
 	desc 		= "Used to view and edit personnel's security records"
 	active_state = "security"
-	image			= 'icons/NTOS/records.png'
+	image			= 'icons/ntos/records.png'
 
 	req_one_access = list(access_security, access_forensics_lockers)
 

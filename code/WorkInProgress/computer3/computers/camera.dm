@@ -65,7 +65,7 @@
 			prog.key = src
 			prog.camera_list = null
 			return
-		if(istype(source,/datum/file/program/NTOS))
+		if(istype(source,/datum/file/program/ntos))
 			for(var/obj/item/part/computer/storage/S in list(computer.hdd,computer.floppy))
 				for(var/datum/file/F in S.files)
 					if(istype(F,/datum/file/program/security))
@@ -175,7 +175,7 @@
 /datum/file/program/security
 	name			= "camera monitor"
 	desc			= "Connets to the Nanotrasen Camera Network"
-	image			= 'icons/NTOS/camera.png'
+	image			= 'icons/ntos/camera.png'
 	active_state	= "camera-static"
 
 	var/datum/file/camnet_key/key = null
