@@ -2,8 +2,8 @@
 	name = "portable suit cooling unit"
 	desc = "A portable heat sink and liquid cooled radiator that can be hooked up to a space suit's existing temperature controls to provide industrial levels of cooling."
 	w_class = 4
-	icon = 'icons/obj/power.dmi'	//temporary, I hope
-	icon_state = "portgen0"
+	icon = 'icons/obj/device.dmi'	//temporary, I hope
+	icon_state = "suitcooler0"
 	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
 	
 	var/on = 0				//is it turned on?
@@ -14,6 +14,10 @@
 	var/thermostat = T20C
 	
 	//TODO: make it heat up the surroundings when not in space
+
+/obj/item/device/suit_cooling_unit/New()
+	cell = new/obj/item/weapon/cell()	//comes with the crappy default power cell - high-capacity ones shouldn't be hard to find
+	cell.loc = src
 
 /obj/item/device/suit_cooling_unit/proc/cool_mob(mob/M)
 	if (!on || !cell) return
@@ -134,7 +138,13 @@
 	return ..()
 
 /obj/item/device/suit_cooling_unit/proc/updateicon()
-	return 0	//TODO
+	if (cover_open)
+		if (cell)
+			icon_state = "suitcooler1"
+		else
+			icon_state = "suitcooler2"
+	else
+		icon_state = "suitcooler0"
 
 /obj/item/device/suit_cooling_unit/examine()
 	set src in view(1)
