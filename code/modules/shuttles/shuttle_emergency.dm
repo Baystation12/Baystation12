@@ -39,31 +39,3 @@
 	for(var/obj/machinery/door/D in destination)
 		spawn(0)
 			D.open()
-
-//Escape pod garbage, copied from the controller
-/*
-							//pods
-					start_location = locate(/area/shuttle/escape_pod1/station)
-					end_location = locate(/area/shuttle/escape_pod1/transit)
-					end_location = locate(/area/shuttle/escape_pod1/centcom)
-					start_location.move_contents_to(end_location, null, NORTH)
-
-				start_location = locate(/area/shuttle/escape_pod2/station)
-				end_location = locate(/area/shuttle/escape_pod2/transit)
-					end_location = locate(/area/shuttle/escape_pod2/centcom)
-					start_location.move_contents_to(end_location, null, NORTH)
-
-				start_location = locate(/area/shuttle/escape_pod3/station)
-				end_location = locate(/area/shuttle/escape_pod3/transit)
-					end_location = locate(/area/shuttle/escape_pod3/centcom)
-					start_location.move_contents_to(end_location, null, NORTH)
-
-				//There is no pod 4, apparently.
-				
-				start_location = locate(/area/shuttle/escape_pod5/station)
-				end_location = locate(/area/shuttle/escape_pod5/transit)
-					end_location = locate(/area/shuttle/escape_pod5/centcom)
-					start_location.move_contents_to(end_location, null, EAST)
-
-
-*/
