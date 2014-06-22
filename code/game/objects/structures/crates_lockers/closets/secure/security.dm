@@ -71,6 +71,7 @@
 	New()
 		..()
 		sleep(2)
+		new /obj/item/clothing/head/fez(src)
 		new /obj/item/clothing/under/rank/head_of_personnel(src)
 		new /obj/item/clothing/under/dress/dress_hop(src)
 		new /obj/item/clothing/under/dress/dress_hr(src)

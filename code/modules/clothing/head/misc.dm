@@ -204,6 +204,8 @@
 
 /obj/item/clothing/head/fez
 	name = "\improper fez"
+	icon = 'tauceti/items/clothing/hats/hats.dmi'
+	tc_custom = 'tauceti/items/clothing/hats/hats.dmi'
 	icon_state = "fez"
 	item_state = "fez"
 	desc = "You should wear a fez. Fezzes are cool."
