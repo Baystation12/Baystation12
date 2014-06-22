@@ -147,7 +147,7 @@ var/list/mechtoys = list(
 
 	New()
 		ordernum = rand(1,9000)
-		if (shuttle_tag in shuttles && istype(shuttles[shuttle_tag], /datum/shuttle/ferry/supply))
+		if ("Supply" in shuttles && istype(shuttles["Supply"], /datum/shuttle/ferry/supply))
 			shuttle = shuttles["Supply"]
 		
 		//still don't have the shuttle, so create one
