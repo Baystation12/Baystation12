@@ -129,12 +129,10 @@
 		G.process()
 
 
-/mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
-	..()
-	var/pressure_difference = abs( pressure - ONE_ATMOSPHERE )
-
+//Much like get_heat_protection(), this returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+/mob/living/carbon/human/proc/get_pressure_protection()
 	var/pressure_adjustment_coefficient = 1	//Determins how much the clothing you are wearing protects you in percent.
-
+	
 	if(head && (head.flags & STOPSPRESSUREDMAGE))
 		pressure_adjustment_coefficient -= PRESSURE_HEAD_REDUCTION_COEFFICIENT
 
@@ -147,10 +145,16 @@
 			if(S.can_breach && S.damage)
 				var/pressure_loss = S.damage * 0.1
 				pressure_adjustment_coefficient += pressure_loss
-
+	
 	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) //So it isn't less than 0 or larger than 1.
+	
+	return 1 - pressure_adjustment_coefficient	//want 0 to be bad protection, 1 to be good protection
 
-	pressure_difference = pressure_difference * pressure_adjustment_coefficient
+/mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
+	..()
+	var/pressure_difference = abs( pressure - ONE_ATMOSPHERE )
+
+	pressure_difference = pressure_difference * (1 - get_pressure_protection())
 
 	if(pressure > ONE_ATMOSPHERE)
 		return ONE_ATMOSPHERE + pressure_difference
@@ -315,9 +319,6 @@
 		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
-
-		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
-		L.process()
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
@@ -619,14 +620,14 @@
 			adjustOxyLoss(-5)
 		
 		// Hot air hurts :(
-		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) 
+		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations)) 
 
 			if(status_flags & GODMODE)
 				return 1
 
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
-					src << "\red You feel your face freezing and an icicle forming in your lungs!"
+					src << "\red You feel your face freezing and icicles forming in your lungs!"
 			else if(breath.temperature > species.heat_level_1)
 				if(prob(20))
 					src << "\red You feel your face burning and a searing heat in your lungs!"
@@ -650,9 +651,21 @@
 				if(species.heat_level_3 to INFINITY)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-
-		//Temporary fixes to the alerts.
-
+			
+			//breathing in hot/cold air also heats/cools you a bit
+			var/temp_adj = breath.temperature - bodytemperature
+			if (temp_adj < 0)
+				temp_adj /= (BODYTEMP_COLD_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
+			else
+				temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
+			
+			var/relative_density = breath.total_moles() / (MOLES_CELLSTANDARD * BREATH_PERCENTAGE)
+			temp_adj *= relative_density
+			
+			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
+			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
+			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
+			bodytemperature += temp_adj
 		return 1
 
 	proc/handle_environment(datum/gas_mixture/environment)
@@ -668,60 +681,63 @@
 			if(istype(loc, /obj/mecha))
 				var/obj/mecha/M = loc
 				loc_temp =  M.return_temperature()
-			else if(istype(get_turf(src), /turf/space))
 			else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				loc_temp = loc:air_contents.temperature
 			else
 				loc_temp = environment.temperature
 
-			if(adjusted_pressure < species.warning_low_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
+			if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && environment.phoron < MOLES_PHORON_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
-			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
-			if(stat != 2)
-				stabilize_temperature_from_calories()
-
-			//After then, it reacts to the surrounding atmosphere based on your thermal protection
-			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
+			//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
+			var/temp_adj = 0
+			if(loc_temp < bodytemperature)			//Place is colder than we are
 				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-					bodytemperature += amt
-			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
+					temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR)	//this will be negative
+			else if (loc_temp > bodytemperature)			//Place is hotter than we are
 				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-					bodytemperature += amt
+					temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
+			
+			//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
+			var/relative_density = environment.total_moles() / MOLES_CELLSTANDARD
+			temp_adj *= relative_density
+			
+			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
+			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
+			//world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
+			bodytemperature += temp_adj
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
+		if(bodytemperature > species.heat_level_1)
 			//Body temperature is too hot.
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
 			switch(bodytemperature)
-				if(360 to 400)
-					apply_damage(HEAT_DAMAGE_LEVEL_1, BURN, used_weapon = "High Body Temperature")
+				if(species.heat_level_1 to species.heat_level_2)
+					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
-				if(400 to 1000)
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
+				if(species.heat_level_2 to species.heat_level_3)
+					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
-				if(1000 to INFINITY)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "High Body Temperature")
+				if(species.heat_level_3 to INFINITY)
+					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
 
-		else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
+		else if(bodytemperature < species.cold_level_1)
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				switch(bodytemperature)
-					if(200 to 260)
-						apply_damage(COLD_DAMAGE_LEVEL_1, BURN, used_weapon = "Low Body Temperature")
+					if(species.cold_level_2 to species.cold_level_1)
+						take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
 						fire_alert = max(fire_alert, 1)
-					if(120 to 200)
-						apply_damage(COLD_DAMAGE_LEVEL_2, BURN, used_weapon = "Low Body Temperature")
+					if(species.cold_level_3 to species.cold_level_2)
+						take_overall_damage(burn=COLD_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
 						fire_alert = max(fire_alert, 1)
-					if(-INFINITY to 120)
-						apply_damage(COLD_DAMAGE_LEVEL_3, BURN, used_weapon = "Low Body Temperature")
+					if(-INFINITY to species.cold_level_3)
+						take_overall_damage(burn=COLD_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
 						fire_alert = max(fire_alert, 1)
 
 		// Account for massive pressure differences.  Done by Polymorph
@@ -729,7 +745,8 @@
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		if(adjusted_pressure >= species.hazard_high_pressure)
-			adjustBruteLoss( min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
+			var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)
+			take_overall_damage(brute=pressure_damage, used_weapon = "High Pressure")
 			pressure_alert = 2
 		else if(adjusted_pressure >= species.warning_high_pressure)
 			pressure_alert = 1
@@ -737,17 +754,9 @@
 			pressure_alert = 0
 		else if(adjusted_pressure >= species.hazard_low_pressure)
 			pressure_alert = -1
-
-			if(species && species.flags & IS_SYNTHETIC)
-				bodytemperature += 0.5 * TEMPERATURE_DAMAGE_COEFFICIENT //Synthetics suffer overheating in a vaccuum. ~Z
-
 		else
-
-			if(species && species.flags & IS_SYNTHETIC)
-				bodytemperature += 1 * TEMPERATURE_DAMAGE_COEFFICIENT
-
 			if( !(COLD_RESISTANCE in mutations))
-				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+				take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 				pressure_alert = -2
 			else
 				pressure_alert = -1
@@ -774,27 +783,40 @@
 		temp_change = (temperature - current)
 		return temp_change
 	*/
-
-	proc/stabilize_temperature_from_calories()
-		var/body_temperature_difference = 310.15 - bodytemperature
+	
+	proc/stabilize_body_temperature()
+		//TODO find a better place to put this
+		if (s_store && istype(s_store, /obj/item/device/suit_cooling_unit))
+			var/obj/item/device/suit_cooling_unit/CU = s_store
+			CU.cool_mob(src)
+		
+		if (species.flags & IS_SYNTHETIC)
+			bodytemperature += species.synth_temp_gain		//that CPU/posibrain just keeps putting out heat.
+			return
+	
+		var/body_temperature_difference = species.body_temperature - bodytemperature
+		
 		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
-		switch(bodytemperature)
-			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
-				if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-					nutrition -= 2
-				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
+		
+		if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
+			if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
+				nutrition -= 2
+			var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
+			//world << "Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
 //				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
-			if(260.15 to 360.15)
-				var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
+			bodytemperature += recovery_amt
+		else if(species.cold_level_1 <= bodytemperature && bodytemperature <= species.heat_level_1)
+			var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
+			//world << "Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
 //				log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
-			if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
-				//We totally need a sweat system cause it totally makes sense...~
-				var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
+			bodytemperature += recovery_amt
+		else if(bodytemperature > species.heat_level_1) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
+			//We totally need a sweat system cause it totally makes sense...~
+			var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
+			//world << "Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]"
 //				log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
-				bodytemperature += recovery_amt
+			bodytemperature += recovery_amt
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 	proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
@@ -1074,12 +1096,6 @@
 
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
-		var/datum/organ/internal/liver/liver = internal_organs["liver"]
-		liver.process()
-
-		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
-		eyes.process()
-
 		updatehealth()
 
 		return //TODO: DEFERRED
@@ -1091,6 +1107,7 @@
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
 			if(!in_stasis)
+				stabilize_body_temperature()	//Body temperature adjusts itself
 				handle_organs()	//Optimized.
 				handle_blood()
 
@@ -1215,14 +1232,11 @@
 
 			if(druggy)
 				druggy = max(druggy-1, 0)
-/*
-			// Increase germ_level regularly
-			if(prob(40))
-				germ_level += 1
+
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
 				gloves.germ_level += 1
-*/
+
 		return 1
 
 	proc/handle_regular_hud_updates()
@@ -1449,17 +1463,46 @@
 				else									fire.icon_state = "fire0"
 
 			if(bodytemp)
-				switch(bodytemperature) //310.055 optimal body temp
-					if(370 to INFINITY)		bodytemp.icon_state = "temp4"
-					if(350 to 370)			bodytemp.icon_state = "temp3"
-					if(335 to 350)			bodytemp.icon_state = "temp2"
-					if(320 to 335)			bodytemp.icon_state = "temp1"
-					if(300 to 320)			bodytemp.icon_state = "temp0"
-					if(295 to 300)			bodytemp.icon_state = "temp-1"
-					if(280 to 295)			bodytemp.icon_state = "temp-2"
-					if(260 to 280)			bodytemp.icon_state = "temp-3"
-					else					bodytemp.icon_state = "temp-4"
-
+				if (!species)
+					switch(bodytemperature) //310.055 optimal body temp
+						if(370 to INFINITY)		bodytemp.icon_state = "temp4"
+						if(350 to 370)			bodytemp.icon_state = "temp3"
+						if(335 to 350)			bodytemp.icon_state = "temp2"
+						if(320 to 335)			bodytemp.icon_state = "temp1"
+						if(300 to 320)			bodytemp.icon_state = "temp0"
+						if(295 to 300)			bodytemp.icon_state = "temp-1"
+						if(280 to 295)			bodytemp.icon_state = "temp-2"
+						if(260 to 280)			bodytemp.icon_state = "temp-3"
+						else					bodytemp.icon_state = "temp-4"
+				else
+					var/temp_step
+					if (bodytemperature >= species.body_temperature)
+						temp_step = (species.heat_level_1 - species.body_temperature)/4
+						
+						if (bodytemperature >= species.heat_level_1)
+							bodytemp.icon_state = "temp4"
+						else if (bodytemperature >= species.body_temperature + temp_step*3)
+							bodytemp.icon_state = "temp3"
+						else if (bodytemperature >= species.body_temperature + temp_step*2)
+							bodytemp.icon_state = "temp2"
+						else if (bodytemperature >= species.body_temperature + temp_step*1)
+							bodytemp.icon_state = "temp1"
+						else
+							bodytemp.icon_state = "temp0"
+						
+					else if (bodytemperature < species.body_temperature)
+						temp_step = (species.body_temperature - species.cold_level_1)/4
+						
+						if (bodytemperature <= species.cold_level_1)
+							bodytemp.icon_state = "temp-4"
+						else if (bodytemperature <= species.body_temperature - temp_step*3)
+							bodytemp.icon_state = "temp-3"
+						else if (bodytemperature <= species.body_temperature - temp_step*2)
+							bodytemp.icon_state = "temp-2"
+						else if (bodytemperature <= species.body_temperature - temp_step*1)
+							bodytemp.icon_state = "temp-1"
+						else
+							bodytemp.icon_state = "temp0"
 			if(blind)
 				if(blinded)		blind.layer = 18
 				else			blind.layer = 0
