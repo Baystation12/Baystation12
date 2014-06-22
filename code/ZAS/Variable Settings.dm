@@ -1,7 +1,7 @@
 var/global/vs_control/vsc = new
 
 /vs_control
-	var/fire_consuption_rate = 0.25
+	var/fire_consuption_rate = 1
 	var/fire_consuption_rate_NAME = "Fire - Air Consumption Ratio"
 	var/fire_consuption_rate_DESC = "Ratio of air removed and combusted per tick."
 
