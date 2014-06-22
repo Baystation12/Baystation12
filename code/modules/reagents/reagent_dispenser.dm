@@ -106,20 +106,6 @@
 	ex_act()
 		explode()
 
-	temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-		if(exposed_temperature >= AUTOIGNITION_WELDERFUEL)
-			explode()
-
-
-	proc/explode()
-		if (reagents.total_volume > 500)
-			explosion(src.loc,1,2,4)
-		else if (reagents.total_volume > 100)
-			explosion(src.loc,0,1,3)
-		else
-			explosion(src.loc,-1,1,2)
-		if(src)
-			del(src)
 
 /obj/structure/reagent_dispensers/fueltank/examine()
 	set src in view()
@@ -170,6 +156,21 @@
 
 		return ..()
 
+
+/obj/structure/reagent_dispensers/fueltank/proc/explode()
+	if (reagents.total_volume > 500)
+		explosion(src.loc,1,2,4)
+	else if (reagents.total_volume > 100)
+		explosion(src.loc,0,1,3)
+	else
+		explosion(src.loc,-1,1,2)
+	if(src)
+		del(src)
+
+/obj/structure/reagent_dispensers/fueltank/fire_act(datum/gas_mixture/air, temperature, volume)
+	if(temperature > T0C+500)
+		explode()
+	return ..()
 
 /obj/structure/reagent_dispensers/fueltank/Move()
 	..()

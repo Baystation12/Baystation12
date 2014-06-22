@@ -365,7 +365,7 @@
 /obj/structure/window/update_icon()
 	return
 
-/obj/structure/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 800)
 		hit(round(exposed_volume / 100), 0)
 	..()
@@ -391,7 +391,7 @@
 	update_nearby_icons()
 	return
 
-/obj/structure/window/plasmabasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/plasmabasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
 		hit(round(exposed_volume / 1000), 0)
 	..()
@@ -406,8 +406,6 @@
 	health = 160
 	explosion_resistance = 4
 
-/obj/structure/window/plasmareinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	return
 
 /obj/structure/window/plasmareinforced/New(Loc,re=0)
 	..()
@@ -415,6 +413,9 @@
 	color = null
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
+	return
+
+/obj/structure/window/plasmareinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
 /obj/structure/window/reinforced
