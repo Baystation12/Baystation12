@@ -308,7 +308,7 @@ datum/objective/hijack
 	check_completion()
 		if(!owner.current || owner.current.stat)
 			return 0
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.returned())
 			return 0
 		if(issilicon(owner.current))
 			return 0
@@ -333,7 +333,7 @@ datum/objective/speciesist
 		return 1
 
 	check_completion()
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.location())
 			return 0
 		var/area/shuttle = locate(/area/shuttle/escape/centcom)
 		for(var/mob/living/carbon/human/player in player_list)
@@ -351,7 +351,7 @@ datum/objective/block
 	check_completion()
 		if(!istype(owner.current, /mob/living/silicon))
 			return 0
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.returned())
 			return 0
 		if(!owner.current)
 			return 0
@@ -369,7 +369,7 @@ datum/objective/silence
 	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
 
 	check_completion()
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.returned())
 			return 0
 
 		for(var/mob/living/player in player_list)
@@ -393,7 +393,7 @@ datum/objective/escape
 			return 0
 		if(isbrain(owner.current))
 			return 0
-		if(emergency_shuttle.location<2)
+		if(!emergency_shuttle.returned())
 			return 0
 		if(!owner.current || owner.current.stat ==2)
 			return 0
@@ -684,7 +684,7 @@ datum/objective/absorb
 			explanation_text = "Our knowledge must live on. Make sure at least 5 acolytes escape on the shuttle to spread their work on an another station."
 
 			check_completion()
-				if(emergency_shuttle.location<2)
+				if(!emergency_shuttle.returned())
 					return 0
 
 				var/cultists_escaped = 0

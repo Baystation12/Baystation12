@@ -303,14 +303,11 @@ var/list/ai_list = list()
 		call_shuttle_proc(src)
 
 	// hack to display shuttle timer
-	if(emergency_shuttle.online)
-		var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
-		if(!frequency) return
-		var/datum/signal/status_signal = new
-		status_signal.source = src
-		status_signal.transmission_method = 1
-		status_signal.data["command"] = "shuttle"
-		frequency.post_signal(src, status_signal)
+	if(emergency_shuttle.online())
+		var/obj/machinery/computer/communications/C = locate() in machines
+		if(C)
+			C.post_status("shuttle")
+
 	return
 
 /mob/living/silicon/ai/verb/toggle_anchor()
@@ -337,7 +334,7 @@ var/list/ai_list = list()
 		if(AI.control_disabled)
 			src	 << "Wireless control is disabled!"
 			return
-	recall_shuttle(src)
+	cancel_call_proc(src)
 	return
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)

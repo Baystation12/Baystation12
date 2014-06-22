@@ -111,7 +111,7 @@ var/list/blob_nodes = list()
 		greet_blob(blob)
 
 	if(emergency_shuttle)
-		emergency_shuttle.always_fake_recall = 1
+		emergency_shuttle.auto_recall = 1
 
 	/*// Disable the blob event for this round.
 	if(events)
