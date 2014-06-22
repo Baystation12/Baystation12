@@ -155,6 +155,7 @@ Programs are a file that can be executed
 			popup = new(user, "\ref[computer]", name, nref=src)
 			popup.set_title_image(usr.browse_rsc_icon(overlay.icon, overlay.icon_state))
 			popup.set_title_buttons(topic_link(src,"quit","<img src=\ref['icons/NTOS/tb_close.png']>"))
+		//	popup.set_title_buttons("<a href='?src=\ref[src];quit'><img src=\ref['icons/NTOS/tb_close.png']></a>")
 		if(popup.user != user)
 			popup.user = user
 			popup.set_title_image(usr.browse_rsc_icon(overlay.icon, overlay.icon_state))
