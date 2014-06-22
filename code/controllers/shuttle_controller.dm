@@ -105,6 +105,13 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
 			
 			shuttle.launch(src)
+	
+	//process the shuttles
+	if (shuttle.in_use)
+		shuttle.process_shuttle()
+	for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+		if (pod.in_use) 
+			pod.process_shuttle()
 
 //called when the shuttle has arrived.
 /datum/shuttle_controller/emergency_shuttle/proc/shuttle_arrived()
