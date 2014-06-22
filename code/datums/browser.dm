@@ -13,6 +13,7 @@
 	var/body_elements
 	var/head_content = ""
 	var/content = ""
+	var/title_buttons = ""
 
 
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
@@ -29,8 +30,14 @@
 		ref = nref
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
 
+/datum/browser/proc/set_title(ntitle)
+	title = format_text(ntitle)
+
 /datum/browser/proc/add_head_content(nhead_content)
 	head_content = nhead_content
+
+/datum/browser/proc/set_title_buttons(ntitle_buttons)
+	title_buttons = ntitle_buttons
 
 /datum/browser/proc/set_window_options(nwindow_options)
 	window_options = nwindow_options
