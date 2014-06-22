@@ -174,7 +174,8 @@
 				dat = show_manifest()
 
 
-		popup = new(usr, "ID Computer", name, 940, 520)
+		popup.width = 940
+		popup.height = 520
 		popup.set_content(dat)
 		popup.open()
 		return

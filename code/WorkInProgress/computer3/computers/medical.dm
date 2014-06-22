@@ -44,7 +44,8 @@
 			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 			return
 		var/dat
-		if (src.temp)
+
+		if (temp)
 			dat = text("<TT>[src.temp]</TT><BR><BR><A href='?src=\ref[src];temp=1'>Clear Screen</A>")
 		else
 			dat = text("Confirm Identity: <A href='?src=\ref[];scan=1'>[]</A><HR>", src, (src.scan ? text("[]", src.scan.name) : "----------"))
@@ -138,7 +139,8 @@
 					else
 			else
 				dat += text("<A href='?src=\ref[];login=1'>{Log In}</A>", src)
-		var/datum/browser/popup = new(usr, "med_comp", "Medical Records", 600, 400)
+		popup.width = 600
+		popup.height = 400
 		popup.set_content(dat)
 		popup.set_title_image(usr.browse_rsc_icon(computer.icon, computer.icon_state))
 		popup.open()
@@ -147,14 +149,10 @@
 	Topic(href, href_list)
 		if(!interactable() || !computer.cardslot || ..(href,href_list))
 			return
-
 		if (!( data_core.general.Find(src.active1) ))
 			src.active1 = null
-
 		if (!( data_core.medical.Find(src.active2) ))
 			src.active2 = null
-
-		usr.set_machine(src)
 
 		if (href_list["temp"])
 			src.temp = null

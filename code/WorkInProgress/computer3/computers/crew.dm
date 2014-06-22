@@ -67,5 +67,6 @@
 	Topic(href, list/href_list)
 		if(!interactable() || !computer.cardslot || ..(href,href_list))
 			return
-		computer.updateUsrDialog()
+		if("update" in href_list)
+			interact()
 		return

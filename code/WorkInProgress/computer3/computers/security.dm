@@ -193,7 +193,8 @@
 					else
 			else
 				dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
-		var/datum/browser/popup = new(usr, "secure_rec", "Security Records", 600, 400)
+		popup.width = 600
+		popup.height = 400
 		popup.set_content(dat)
 		popup.set_title_image(usr.browse_rsc_icon(computer.icon, computer.icon_state))
 		popup.open()

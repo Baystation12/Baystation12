@@ -144,7 +144,7 @@
 // Otherwise, the user mob's machine var will be reset directly.
 //
 
-/proc/onclosed(mob/user, windowid, var/atom/ref=null)
+/proc/onclose(mob/user, windowid, var/atom/ref=null)
 	if(!user || !user.client) return
 	var/param = "null"
 	if(ref)
@@ -170,7 +170,7 @@
 		if(hsrc)
 			//world << "[src] Topic [href] [hsrc]"
 			usr = src.mob
-			src.Topic("close=1", list("close"="1"), hsrc)  // this will direct to the atom's
+			src.Topic("close=1", list("close"="1"), hsrc)	// this will direct to the atom's
 			return										// Topic() proc via client.Topic()
 
 	// no atomref specified (or not found)
