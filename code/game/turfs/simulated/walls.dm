@@ -11,6 +11,8 @@
 	var/damage_overlay
 	var/global/damage_overlays[8]
 
+	var/max_temperature = 1800 //K, walls will take damage if they're next to a fire hotter than this
+
 	opacity = 1
 	density = 1
 	blocks_air = 1
@@ -96,6 +98,12 @@
 		update_icon()
 
 	return
+
+/turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
+	if(adj_temp > max_temperature)
+		take_damage(rand(10, 20) * (adj_temp / max_temperature))
+
+	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
 	if(istype(src,/turf/simulated/wall/r_wall))
