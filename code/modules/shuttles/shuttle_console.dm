@@ -9,8 +9,7 @@
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 	var/process_state = IDLE_STATE
 
-	//this mutex ensures that only one console is processing the shuttle's controls at a time
-	var/obj/machinery/computer/shuttle_control/in_use = null	//this doesn't have to be a console...
+	var/in_use = null	//tells the controller whether this shuttle needs processing
 
 	var/area_transition
 	var/travel_time = 0
@@ -68,7 +67,7 @@
 		return area_station
 	return area_offsite
 
-/datum/shuttle/ferry/proc/process_shuttle()
+/datum/shuttle/ferry/proc/process()
 	switch(process_state)
 		if (WAIT_LAUNCH)
 			if (skip_docking_checks() || docking_controller.can_launch())
@@ -98,7 +97,7 @@
 	return dock_target
 
 
-/datum/shuttle/ferry/proc/launch(var/obj/machinery/computer/shuttle_control/user)
+/datum/shuttle/ferry/proc/launch(var/user)
 	if (!can_launch()) return
 
 	in_use = user	//obtain an exclusive lock on the shuttle
@@ -106,12 +105,15 @@
 	process_state = WAIT_LAUNCH
 	undock()
 
-/datum/shuttle/ferry/proc/force_launch(var/obj/machinery/computer/shuttle_control/user)
+/datum/shuttle/ferry/proc/force_launch(var/user)
 	if (!can_force()) return
 
 	in_use = user	//obtain an exclusive lock on the shuttle
 
-	short_jump()
+	if (travel_time && area_transition)
+		long_jump(null, null, area_transition, travel_time)
+	else
+		short_jump()
 
 	process_state = WAIT_ARRIVE
 
@@ -166,27 +168,6 @@
 	var/launch_override = 0
 
 
-
-//TODO move this stuff into the shuttle datum itself, instead of manipulating the shuttle's members
-/obj/machinery/computer/shuttle_control/process()
-	if (!shuttles || !(shuttle_tag in shuttles))
-		return
-
-	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
-	if (!istype(shuttle))
-		return
-
-	if (shuttle.in_use == src)
-		shuttle.process_shuttle()
-
-/obj/machinery/computer/shuttle_control/Del()
-	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
-	if (!istype(shuttle))
-		return
-
-	if (shuttle.in_use == src)
-		shuttle.in_use = null	//shuttle may not dock properly if this gets deleted while in transit, but its not a big deal
-
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
 	if(..(user))
 		return
@@ -196,7 +177,7 @@
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
-	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 
@@ -241,7 +222,6 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-//TODO: Canceling launches, dock overrides using the console, forcing dock/undock
 /obj/machinery/computer/shuttle_control/Topic(href, href_list)
 	if(..())
 		return
@@ -249,7 +229,7 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	var/datum/shuttle/ferry/shuttle = shuttle_controller.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 
@@ -260,11 +240,11 @@
 	else if(href_list["cancel"])
 		shuttle.cancel_launch()
 
-
 /obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if (istype(W, /obj/item/weapon/card/emag))
 		src.req_access = list()
+		src.req_one_access = list()
 		hacked = 1
 		usr << "You short out the console's ID checking system. It's now available to everyone!"
 	else
@@ -272,9 +252,4 @@
 
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)
 	visible_message("[Proj] ricochets off [src]!")
-
-#undef IDLE_STATE
-#undef WAIT_LAUNCH
-#undef WAIT_ARRIVE
-#undef WAIT_FINISH
 
