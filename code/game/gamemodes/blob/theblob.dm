@@ -87,7 +87,7 @@
 			return 1
 		return 0
 
-/*	temperature_expose(datum/gas_mixture/air, temperature, volume) Blob is currently fireproof
+/*	fire_act(datum/gas_mixture/air, temperature, volume) Blob is currently fireproof
 		if(temperature > T0C+200)
 			health -= 0.01 * temperature
 			update()
