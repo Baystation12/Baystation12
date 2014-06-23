@@ -127,6 +127,9 @@
 		update_icon()
 
 
+	proc/update_spawn_files()
+		for(var/typekey in spawn_files)
+			hdd.addfile(new typekey,1)
 
 	proc/spawn_parts()
 		for(var/typekey in spawn_parts)

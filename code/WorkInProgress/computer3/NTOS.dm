@@ -5,7 +5,7 @@
 /datum/file/program/ntos
 	name = "Nanotrasen Operating System"
 	extension = "prog"
-	active_state = "NTOS"
+	active_state = "ntos"
 	var/obj/item/part/computer/storage/current // the drive being viewed, null for desktop/computer
 	var/fileop = "runfile"
 

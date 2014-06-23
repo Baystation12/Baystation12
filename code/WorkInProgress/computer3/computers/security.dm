@@ -10,7 +10,7 @@
 	icon_state = "laptop"
 
 
-/datum/file/program/secure_data//TODO:SANITY
+/datum/file/program/secure_data
 	name 		= "Security Records"
 	desc 		= "Used to view and edit personnel's security records"
 	active_state = "security"

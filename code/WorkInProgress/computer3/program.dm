@@ -281,7 +281,7 @@ Programs are a file that can be executed
 
 /datum/file/program/Genetics
 	name = "Genetics Suite"
-	image = 'icons/nots/genetics.png'
+	image = 'icons/ntos/genetics.png'
 	desc = "A sophisticated software suite containing read-only genetics hardware specifications and a highly compressed genome databank."
 	active_state = "dna"
 	volume = 8000

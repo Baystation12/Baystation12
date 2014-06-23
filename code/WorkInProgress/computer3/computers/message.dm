@@ -2,6 +2,9 @@
 	default_prog = /datum/file/program/message_mon
 	spawn_parts = list(/obj/item/part/computer/storage/hdd,/obj/item/part/computer/networking/prox)
 
+
+//BROKEN AS HELL, DON'T USE UNTIL FIXED
+
 /datum/file/program/message_mon
 	name = "Message Monitor Console"
 	desc = "Used to Monitor the crew's messages, that are sent via PDA. Can also be used to view Request Console messages."
@@ -35,6 +38,13 @@
 	var/custommessage 	= "This is a test, please ignore."
 
 
+	procinitialize()
+		if(!linkedServer)
+			if(message_servers && message_servers.len > 0)
+				linkedServer = message_servers[1]
+		return
+
+
 	update_icon()
 		if(emag || hacking)
 			overlay.icon_state = hack_icon
@@ -45,12 +55,12 @@
 	interact()
 		if(!interactable())
 			return
-
 		//If the computer is being hacked or is emagged, display the reboot message.
 		if(hacking || emag)
 			message = rebootmsg
-
-		var/dat = "<center><font color='blue'[message]</font>/</center>"
+		var/dat = "<head><title>Message Monitor Console</title></head><body>"
+		dat += "<center><h2>Message Monitor Console</h2></center><hr>"
+		dat += "<center><h4><font color='blue'[message]</h5></center>"
 
 		if(auth)
 			dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='green'>\[Authenticated\]</font></a>&#09;/"
@@ -61,12 +71,9 @@
 
 		if(hacking || emag)
 			screen = 2
-		else
-			if(!auth)
-				screen = 0
-			if( !linkedServer || (linkedServer.stat & (NOPOWER|BROKEN)) )
-				message = noserver
-				screen = 0
+		else if(!auth || !linkedServer || (linkedServer.stat & (NOPOWER|BROKEN)))
+			if(!linkedServer || (linkedServer.stat & (NOPOWER|BROKEN))) message = noserver
+			screen = 0
 
 		switch(screen)
 			//Main menu
@@ -202,9 +209,11 @@
 					<td width='15%'>[rc.rec_dpt]</td><td width='300px'>[rc.message]</td><td width='15%'>[rc.stamp]</td><td width='15%'>[rc.id_auth]</td><td width='15%'>[rc.priority]</td></tr>"}
 				dat += "</table>"
 
-		message = defaultmsg
 
+		popup.width = 700
+		popup.height = 700
 		popup.set_content(dat)
+		popup.set_title_image(usr.browse_rsc_icon(computer.icon, computer.icon_state))
 		popup.open()
 		return
 
