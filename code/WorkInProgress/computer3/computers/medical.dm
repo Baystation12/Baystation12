@@ -11,6 +11,11 @@
 	default_prog	= /datum/file/program/med_data
 	spawn_parts		= list(/obj/item/part/computer/storage/hdd,/obj/item/part/computer/cardslot,/obj/item/part/computer/networking/radio)
 
+
+/obj/machinery/computer3/laptop/medical
+	spawn_parts = list(/obj/item/part/computer/storage/hdd,/obj/item/part/computer/cardslot,/obj/item/part/computer/networking/radio)
+	spawn_files = list(/datum/file/program/arcade,/datum/file/program/crew,/datum/file/program/med_data)
+
 /datum/file/program/med_data
 	name = "Medical Records"
 	desc = "This can be used to check medical records."

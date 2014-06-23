@@ -31,28 +31,85 @@
 	// the list of jobs won't change after all...
 	proc/scriptblock()
 		var/global/dat = null
-		if(!dat)
-			var/jobs_all = ""
-			for(var/job in list_jobs())
-				jobs_all += topic_link(src,"assign=[job]",replacetext(job," ","&nbsp;")) + " "//make sure there isn't a line break in the middle of a job
+		var/counter = 0
+		var jobs_all = ""
+		jobs_all += "<table><tr><td></td><td><b>Command</b></td>"
+
+		jobs_all += "</tr><tr height='20'><td><b>Special</b></font></td>"//Captain in special because he is head of heads ~Intercross21
+		jobs_all += "<td weight='100'><a href='?src=\ref[src];;assign=Captain'>Captain</a></td>"
+		jobs_all += "<td weight='100'><a href='?src=\ref[src];;assign=Custom'>Custom</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr><td><font color='#A50000'><b>Security</b></font></td>"//Red
+		for(var/job in security_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr><td><font color='#FFA500'><b>Engineering</b></font></td>"//Orange
+		for(var/job in engineering_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#008000'><b>Medical</b></font></td>"//Green
+		for(var/job in medical_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#800080'><b>Science</b></font></td>"//Purple
+		for(var/job in science_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Civilian</b></font></td>"//Grey
+		for(var/job in civilian_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
 			dat = {"<script type="text/javascript">
-					function markRed(){
-						var nameField = document.getElementById('namefield');
-						nameField.style.backgroundColor = "#FFDDDD";
-					}
-					function markGreen(){
-						var nameField = document.getElementById('namefield');
-						nameField.style.backgroundColor = "#DDFFDD";
-					}
-					function showAll(){
-						var allJobsSlot = document.getElementById('alljobsslot');
-						allJobsSlot.innerHTML = "<a href='#' onclick='hideAll()'>hide</a><br>[jobs_all]";
-					}
-					function hideAll(){
-						var allJobsSlot = document.getElementById('alljobsslot');
-						allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>change</a>";
-					}
-				</script>"}
+								function markRed(){
+									var nameField = document.getElementById('namefield');
+									nameField.style.backgroundColor = "#FFDDDD";
+								}
+								function markGreen(){
+									var nameField = document.getElementById('namefield');
+									nameField.style.backgroundColor = "#DDFFDD";
+								}
+								function markAccountGreen(){
+									var nameField = document.getElementById('accountfield');
+									nameField.style.backgroundColor = "#DDFFDD";
+								}
+								function markAccountRed(){
+									var nameField = document.getElementById('accountfield');
+									nameField.style.backgroundColor = "#FFDDDD";
+								}
+								function showAll(){
+									var allJobsSlot = document.getElementById('alljobsslot');
+									allJobsSlot.innerHTML = "<a href='#' onclick='hideAll()'>hide</a><br>"+ "[jobs_all]";
+								}
+								function hideAll(){
+									var allJobsSlot = document.getElementById('alljobsslot');
+									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>[(writer.assignment) ? writer.assignment : "Unassgied"]</a>";
+								}
+							</script>"}
 		return dat
 
 	// creates the list of access rights on the card
