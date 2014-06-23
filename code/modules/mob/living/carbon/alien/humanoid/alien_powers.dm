@@ -50,7 +50,7 @@ Doesn't work on other aliens/AI.*/
 
 	if(powerc(10))
 		adjustToxLoss(-10)
-		var/msg = sanitize(input("Message:", "Alien Whisper") as text|null)
+		var/msg = sanitize_alt(copytext(input("Message:", "Alien Whisper") as text|null, 1, MAX_MESSAGE_LEN))
 		if(msg)
 			log_say("AlienWhisper: [key_name(src)]->[M.key] : [msg]")
 			M << "\green You hear a strange, alien voice in your head... \italic [msg]"

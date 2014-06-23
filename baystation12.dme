@@ -1418,6 +1418,7 @@
 #include "tauceti\modules\Colored-windows.dm"
 #include "tauceti\modules\paint.dm"
 #include "tauceti\modules\procs.dm"
+#include "tauceti\modules\procs_text.dm"
 #include "tauceti\modules\_adminverbs\dice.dm"
 #include "tauceti\modules\_adminverbs\FUNadm(disco!).dm"
 #include "tauceti\modules\_adminverbs\library.dm"

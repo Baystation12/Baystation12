@@ -10,9 +10,9 @@
 
 	var/input
 	if(!message)
-		input = copytext(sanitize(input(src,"Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
+		input = sanitize(copytext(input(src,"Choose an emote to display.") as text|null,1,MAX_MESSAGE_LEN))
 	else
-		input = message
+		input = sanitize_plus_chat(message)
 	if(input)
 		message = "<B>[src]</B> [input]"
 	else
@@ -83,9 +83,9 @@
 
 	var/input
 	if(!message)
-		input = copytext(sanitize(input(src, "Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+		input = sanitize(copytext(input(src, "Choose an emote to display.") as text|null, 1, MAX_MESSAGE_LEN))
 	else
-		input = message
+		input = sanitize_plus_chat(message)
 
 	if(input)
 		message = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[src]</span> <span class='message'>[message]</span></span>"

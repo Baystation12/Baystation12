@@ -6,7 +6,7 @@
 // in the logs.  ascii character 13 = CR
 
 /var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
-								
+
 
 /proc/error(msg)
 	world.log << "## ERROR: [msg][log_end]"
@@ -22,7 +22,7 @@
 /proc/log_admin(text)
 	admin_log.Add(text)
 	if (config.log_admin)
-		diary << "\[[time_stamp()]]ADMIN: [text][log_end]"
+		diary << "\[[time_stamp()]]ADMIN: [revert_ja(text)][log_end]"
 
 
 /proc/log_debug(text)
@@ -40,7 +40,7 @@
 
 /proc/log_vote(text)
 	if (config.log_vote)
-		diary << "\[[time_stamp()]]VOTE: [text][log_end]"
+		diary << "\[[time_stamp()]]VOTE: [revert_ja(text)][log_end]"
 
 /proc/log_access(text)
 	if (config.log_access)
@@ -48,19 +48,19 @@
 
 /proc/log_say(text)
 	if (config.log_say)
-		diary << "\[[time_stamp()]]SAY: [text][log_end]"
+		diary << "\[[time_stamp()]]SAY: [revert_ja(text)][log_end]"
 
 /proc/log_ooc(text)
 	if (config.log_ooc)
-		diary << "\[[time_stamp()]]OOC: [text][log_end]"
+		diary << "\[[time_stamp()]]OOC: [revert_ja(text)][log_end]"
 
 /proc/log_whisper(text)
 	if (config.log_whisper)
-		diary << "\[[time_stamp()]]WHISPER: [text][log_end]"
+		diary << "\[[time_stamp()]]WHISPER: [revert_ja(text)][log_end]"
 
 /proc/log_emote(text)
 	if (config.log_emote)
-		diary << "\[[time_stamp()]]EMOTE: [text][log_end]"
+		diary << "\[[time_stamp()]]EMOTE: [revert_ja(text)][log_end]"
 
 /proc/log_attack(text)
 	if (config.log_attack)
@@ -68,15 +68,15 @@
 
 /proc/log_adminsay(text)
 	if (config.log_adminchat)
-		diary << "\[[time_stamp()]]ADMINSAY: [text][log_end]"
+		diary << "\[[time_stamp()]]ADMINSAY: [revert_ja(text)][log_end]"
 
 /proc/log_adminwarn(text)
 	if (config.log_adminwarn)
-		diary << "\[[time_stamp()]]ADMINWARN: [text][log_end]"
+		diary << "\[[time_stamp()]]ADMINWARN: [revert_ja(text)][log_end]"
 
 /proc/log_pda(text)
 	if (config.log_pda)
-		diary << "\[[time_stamp()]]PDA: [text][log_end]"
+		diary << "\[[time_stamp()]]PDA: [revert_ja(text)][log_end]"
 
 /proc/log_misc(text)
-	diary << "\[[time_stamp()]]MISC: [text][log_end]" 
+	diary << "\[[time_stamp()]]MISC: [text][log_end]"

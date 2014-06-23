@@ -245,36 +245,25 @@ proc/slur(phrase)
 	var/newphrase=""
 	var/newletter=""
 	var/lletter=""
-	var/newLnum
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		lletter = newletter
-		newLnum = text2ascii(newletter)
-		switch(newLnum)
-			if(65 to 90)
-				lletter = ascii2text(newLnum + 32)
-			if (192 to 223)
-				lletter = ascii2text(newLnum + 32)
 		if(rand(1,3)==3)
 			if(lletter=="o")	newletter="u"
 			if(lletter=="s")	newletter="ch"
 			if(lletter=="a")	newletter="ah"
 			if(lletter=="c")	newletter="k"
-			if(text2ascii(lletter) == 247)	newletter = ascii2text(249)
-			if(text2ascii(lletter) == 229)	newletter = ascii2text(232)
+			if(lletter=="ч")	newletter="щ" //246->249
+			if(lletter=="е")	newletter="и" //229->232
 		switch(rand(1,15))
 			if(1 to 4)
-				newletter = "[lowertext(newletter)]"
-				if(text2ascii(newletter) >223 && text2ascii(newletter) < 256)
-					newletter = ascii2text(text2ascii(newletter) - 32)
+				newletter = "[lowertext_plus(newletter)]"
 			if(5 to 8)
-				newletter = "[uppertext(newletter)]"
-				if(text2ascii(newletter) >191 && text2ascii(newletter) < 224)
-					newletter = ascii2text(text2ascii(newletter) + 32)
+				newletter = "[uppertext_plus(newletter)]"
 			if(9)	newletter+="'"
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
+// TODO:CYRILLIC использовать lowertext_plus
 /proc/stutter(text)
 	text = html_decode(text)
 	var/t = ""
@@ -307,7 +296,8 @@ proc/slur(phrase)
 						letter = text("[letter]-[letter]")
 		t = text("[t][letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	//return sanitize(copytext(t,1,MAX_MESSAGE_LEN))
+	return copytext(t,1,MAX_MESSAGE_LEN)
 
 
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added

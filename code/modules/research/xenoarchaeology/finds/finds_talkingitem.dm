@@ -57,6 +57,7 @@
 		for(var/X in d)
 			world << "[X]"*/
 
+// TODO:CYRILLIC
 /obj/item/weapon/proc/SaySomething(var/word = null)
 
 	var/msg

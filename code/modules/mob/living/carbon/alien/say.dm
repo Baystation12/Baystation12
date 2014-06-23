@@ -6,7 +6,7 @@
 	if (length(message) >= 2)
 		if (department_radio_keys[copytext(message, 1, 3)] == "alientalk")
 			message = copytext(message, 3)
-			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+			message = trim(sanitize_plus(copytext(message, 1, MAX_MESSAGE_LEN)))
 			if (stat == 2)
 				return say_dead(message)
 			else
@@ -25,7 +25,7 @@
 	if (!message)
 		return
 
-	var/message_a = say_quote(message)
+	var/message_a = sanitize_plus_chat(say_quote(message))
 	var/rendered = "<i><span class='game say'>Hivemind, <span class='name'>[name]</span> <span class='message'>[message_a]</span></span></i>"
 	for (var/mob/living/S in player_list)
 		if(!S.stat)

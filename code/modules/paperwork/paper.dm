@@ -78,7 +78,7 @@
 	if((CLUMSY in usr.mutations) && prob(50))
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
 		return
-	var/n_name = copytext(sanitize_u(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
+	var/n_name = sanitize_alt(copytext(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, 1, MAX_NAME_LEN))
 	if((loc == usr && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "paper")]"
 	add_fingerprint(usr)
@@ -285,12 +285,13 @@
 		if((!in_range(src, usr) && loc != usr && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != usr && usr.get_active_hand() != i)) // Some check to see if he's allowed to write
 			return
 
-		t = checkhtml(t)
+		/*t = checkhtml(t)
 
-		var/index = findtext(t, "____255_")
+		var/index = findtext(t, LETTER_255)
 		while(index)
 			t = copytext(t, 1, index) + "&#1103;" + copytext(t, index+8)
-			index = findtext(t, "____255_")
+			index = findtext(t, LETTER_255)*/
+		t = sanitize_alt(t, list("\n"="\[br\]","ÿ"=LETTER_255))
 
 		// check for exploits
 		for(var/bad in paper_blacklist)
@@ -300,7 +301,7 @@
 				message_admins("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				return
 
-		t = replacetext(t, "\n", "<BR>")
+		//t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
 		if(id!="end")

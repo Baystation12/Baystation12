@@ -262,7 +262,7 @@ AI MODULES
 		lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
 	lawpos = min(lawpos, 50)
 	var/newlaw = ""
-	var/targName = copytext(sanitize(input(usr, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw)),1,MAX_MESSAGE_LEN)
+	var/targName = sanitize(copytext(input(usr, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw),1,MAX_MESSAGE_LEN))
 	newFreeFormLaw = targName
 	desc = "A 'freeform' AI module: ([lawpos]) '[newFreeFormLaw]'"
 

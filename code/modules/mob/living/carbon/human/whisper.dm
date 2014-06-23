@@ -1,14 +1,11 @@
 //Lallander was here
-/mob/living/carbon/human/whisper(message as text, already_sanitize as num)
+/mob/living/carbon/human/whisper(message as text)
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	//if from say(), text already been sanitize
-	if(!already_sanitize)
-		message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
-		message = sanitize(copytext(message,1,MAX_MESSAGE_LEN))
+	message = trim(sanitize_plus(copytext(message,1,MAX_MESSAGE_LEN)))
 
 	if (!message || silent || miming)
 		return
@@ -58,6 +55,7 @@
 				if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
 				temp_message[H] = ninjaspeak(temp_message[H])
 				pick_list -= H
+			// TODO:CYRILLIC
 			message = list2text(temp_message, " ")
 			message = replacetext(message, "o", "¤")
 			message = replacetext(message, "p", "ş")
@@ -115,7 +113,7 @@
 		M.show_message(rendered, 2)
 
 	if (length(heard_a))
-		var/message_a = message
+		var/message_a = sanitize_plus_chat(message)
 
 		if (italics)
 			message_a = "<i>[message_a]</i>"
@@ -128,7 +126,7 @@
 	if (length(heard_b))
 		var/message_b
 
-		message_b = stars(message)
+		message_b = sanitize_plus_chat(stars(message))
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"
@@ -141,7 +139,7 @@
 	for (var/mob/M in eavesdropping)
 		if (M.say_understands(src))
 			var/message_c
-			message_c = stars(message)
+			message_c = sanitize_plus_chat(stars(message))
 			rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message_c]\"</span></span>"
 			M.show_message(rendered, 2)
 		else
@@ -150,7 +148,7 @@
 
 	if (italics)
 		message = "<i>[message]</i>"
-	rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[message]\"</span></span>"
+	rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] whispers, <span class='message'>\"[sanitize_plus_chat(message)]\"</span></span>"
 
 	for (var/mob/M in dead_mob_list)
 		if (!(M.client))

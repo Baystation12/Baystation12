@@ -245,7 +245,7 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message =  trim(sanitize_plus(copytext(message, 1, MAX_MESSAGE_LEN)))
 
 	if(stat == 2)
 		return say_dead(message)
@@ -264,7 +264,7 @@
 	if(speaking)
 		message = trim(copytext(message,3))
 
-	message = capitalize(trim_left(message))
+	message = sanitize_plus_chat(capitalize(trim_left(message)))
 
 	if(!message || stat)
 		return

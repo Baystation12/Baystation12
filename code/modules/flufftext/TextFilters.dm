@@ -7,6 +7,7 @@ proc/Intoxicated(phrase)
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
+		// TODO:CYRILLIC
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
 		if(rand(1,3)==3)
 			if(lowertext(newletter)=="o")	newletter="u"
@@ -14,8 +15,8 @@ proc/Intoxicated(phrase)
 			if(lowertext(newletter)=="a")	newletter="ah"
 			if(lowertext(newletter)=="c")	newletter="k"
 		switch(rand(1,7))
-			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
+			if(1,3,5,8)	newletter="[lowertext_plus(newletter)]"
+			if(2,4,6,15)	newletter="[uppertext_plus(newletter)]"
 			if(7)	newletter+="'"
 			//if(9,10)	newletter="<b>[newletter]</b>"
 			//if(11,12)	newletter="<big>[newletter]</big>"
@@ -42,6 +43,7 @@ proc/NewStutter(phrase,stunned)
 		//Search for dipthongs (two letters that make one sound.)
 		var/first_sound = copytext(word,1,3)
 		var/first_letter = copytext(word,1,2)
+		// TODO:CYRILLIC
 		if(lowertext(first_sound) in list("ch","th","sh"))
 			first_letter = first_sound
 

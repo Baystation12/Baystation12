@@ -214,10 +214,10 @@ mob/living/parasite/meme/verb/Thought()
 
 	if(!target) return
 
-	var/speaker = sanitize(input("Select the voice in which you would like to make yourself heard.", "Voice") as null|text)
+	var/speaker = sanitize(copytext(input("Select the voice in which you would like to make yourself heard.", "Voice") as null|text, 1, MAX_NAME_LEN))
 	if(!speaker) return
 
-	var/message = sanitize(input("What would you like to say?", "Message") as null)
+	var/message = sanitize(copytext(input("What would you like to say?", "Message") as null, 1, MAX_MESSAGE_LEN))
 	if(!message) return
 
 	// Use the points at the end rather than the beginning, because the user might cancel
