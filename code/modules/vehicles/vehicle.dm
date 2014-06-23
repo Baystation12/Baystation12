@@ -1,11 +1,7 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-<<<<<<< HEAD
-	layer = 2.9
-=======
 	layer = MOB_LAYER + 0.1 //so it sits above objects including mobs
->>>>>>> 3aa3c41... Cargo train update
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -51,7 +47,7 @@
 			if(on && powered)
 				cell.use(power_use)
 		anchored = init_anc
-		
+
 		if(load)
 			load.loc = loc
 			load.dir = dir
@@ -292,7 +288,7 @@
 /obj/vehicle/proc/unload(var/mob/user, var/direction)
 	if(!load)
 		return
-	
+
 	var/turf/dest = null
 
 	//find a turf to unload to
