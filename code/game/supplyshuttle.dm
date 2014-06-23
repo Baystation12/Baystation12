@@ -162,15 +162,6 @@ var/list/mechtoys = list(
 					points += points_per_process
 
 				sleep(processing_interval)
-		
-		spawn(0)
-			set background = 1
-			while(1)
-				if(processing)
-					if (shuttle.in_use)
-						shuttle.process_shuttle()
-				
-				sleep(10)
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)

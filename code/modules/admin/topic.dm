@@ -1924,15 +1924,15 @@
 
 			if("moveshuttle")
 
-				if(!shuttles) return // Something is very wrong, the global shuttle list has not been created.
+				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
 
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShA")
 
-				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles
+				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttle_controller.shuttles
 
 				if(shuttle_tag)
-					var/datum/shuttle/S = shuttles[shuttle_tag]
+					var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
 					if(istype(S) && S.moving_status == 0)
 						S.move()
 						message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)

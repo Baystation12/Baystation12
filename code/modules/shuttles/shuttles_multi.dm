@@ -4,8 +4,8 @@
 	var/cloaked = 1
 	var/at_origin = 1
 	var/move_time = 240
-	var/cooldown = 200
-	var/last_move = 0
+	var/cooldown = 20
+	var/last_move = 0	//the time at which we last moved
 
 	var/announcer
 	var/arrival_message
@@ -20,6 +20,10 @@
 /datum/shuttle/multi_shuttle/New()
 	..()
 	if(origin) last_departed = origin
+
+/datum/shuttle/multi_shuttle/move()
+	..()
+	last_move = world.time
 
 /datum/shuttle/multi_shuttle/proc/announce_departure()
 
@@ -44,7 +48,7 @@
 		return
 	src.add_fingerprint(user)
 
-	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
 	var/dat
@@ -57,7 +61,7 @@
 		var/area/areacheck = get_area(src)
 		dat += "Location: [areacheck.name]<br>"
 
-	if((MS.last_move + MS.cooldown) > world.time)
+	if((MS.last_move + MS.cooldown*10) > world.time)
 		dat += "<font color='red'>Engines charging.</font><br>"
 	else
 		dat += "<font color='green'>Engines ready.</font><br>"
@@ -76,15 +80,11 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
 	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
-		return
-
-	if((MS.last_move + MS.cooldown) > world.time)
-		usr << "\red The ship is inoperable while the engines are charging."
 		return
 
 	if(href_list["start"])
@@ -109,6 +109,9 @@
 		usr << "\red Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival."
 
 	if(href_list["move_multi"])
+		if((MS.last_move + MS.cooldown) > world.time)
+			usr << "\red The ship's drive is inoperable while the engines are charging."
+			return
 
 		var/choice = input("Select a destination.") as null|anything in MS.destinations
 		if(!choice) return
