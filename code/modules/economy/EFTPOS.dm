@@ -143,7 +143,7 @@
 				if(linked_db)
 					var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
 					var/attempt_pin = input("Enter pin code", "Account pin") as num
-					linked_account = linked_db.attempt_account_access(attempt_account_num, attempt_pin, 1)
+					linked_account = attempt_account_access(attempt_account_num, attempt_pin, 1)
 				else
 					usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
 			if("trans_purpose")
@@ -195,7 +195,7 @@
 		if(transaction_locked && !transaction_paid)
 			if(linked_account)
 				var/attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
-				var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
+				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 				if(D)
 					if(transaction_amount <= D.money)
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)

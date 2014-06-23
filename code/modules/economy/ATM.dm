@@ -256,7 +256,7 @@ log transactions
 						tried_account_num = held_card.associated_account_number
 					var/tried_pin = text2num(href_list["account_pin"])
 
-					authenticated_account = linked_db.attempt_account_access(tried_account_num, tried_pin, held_card && held_card.associated_account_number == tried_account_num ? 2 : 1)
+					authenticated_account = attempt_account_access(tried_account_num, tried_pin, held_card && held_card.associated_account_number == tried_account_num ? 2 : 1)
 					if(!authenticated_account)
 						number_incorrect_tries++
 						if(previous_account_number == tried_account_num)
@@ -389,7 +389,7 @@ log transactions
 				var/obj/item/device/pda/P = human_user.wear_id
 				I = P.id
 			if(I)
-				authenticated_account = linked_db.attempt_account_access(I.associated_account_number)
+				authenticated_account = attempt_account_access(I.associated_account_number)
 				if(authenticated_account)
 					human_user << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
 
