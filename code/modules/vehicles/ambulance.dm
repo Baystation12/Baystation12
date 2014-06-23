@@ -6,11 +6,11 @@
 	on = 0
 	powered = 1
 	locked = 0
-
+	layer = MOB_LAYER + 0.1
 	standing_mob = 1
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 5
+	load_offset_y = 7
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
@@ -28,10 +28,10 @@
 	icon = 'icons/vehicles/CargoTrain.dmi'
 	icon_state = "trolley"
 	anchored = 0
-	passenger_allowed = 0
+	passenger_allowed = 1
 	locked = 0
 
-	standing_mob = 1
+	standing_mob = 0
 	load_item_visible = 1
 	load_offset_x = 1
 	load_offset_y = 7
@@ -54,6 +54,9 @@
 
 	if(is_train_head() && !on)
 		return 0
+
+	handle_rotation()
+	update_mob()
 
 	return ..()
 
@@ -108,6 +111,30 @@
 		return //so people can't knock others over by pushing a trolley around
 	..()
 
+/obj/vehicle/train/ambulance/engine/proc/handle_rotation()
+	if(dir == SOUTH)
+		layer = FLY_LAYER
+	else
+		layer = OBJ_LAYER
+
+/obj/vehicle/train/ambulance/engine/proc/update_mob()
+	if(load)
+		load.dir = dir
+		switch(dir)
+			if(SOUTH)
+				load.pixel_x = 0
+				load.pixel_y = 7
+			if(WEST)
+				load.pixel_x = 13
+				load.pixel_y = 7
+			if(NORTH)
+				load.pixel_x = 0
+				load.pixel_y = 4
+			if(EAST)
+				load.pixel_x = -13
+				load.pixel_y = 7
+
+
 //-------------------------------------------
 // Train procs
 //-------------------------------------------
@@ -149,8 +176,6 @@
 	if(user != load)
 		return 0
 
-	update_mob()
-
 	if(is_train_head())
 		if(direction == reverse_direction(dir))
 			return 0
@@ -160,22 +185,6 @@
 	else
 		return ..()
 
-/obj/vehicle/train/ambulance/engine/proc/update_mob()
-	if(load)
-		load.dir = dir
-		switch(dir)
-			if(SOUTH)
-				load.pixel_x = 0
-				load.pixel_y = 7
-			if(WEST)
-				load.pixel_x = 13
-				load.pixel_y = 7
-			if(NORTH)
-				load.pixel_x = 0
-				load.pixel_y = 4
-			if(EAST)
-				load.pixel_x = -13
-				load.pixel_y = 7
 
 /obj/vehicle/train/ambulance/engine/examine()
 	..()
