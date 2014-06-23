@@ -16,7 +16,6 @@ var/global/datum/controller/gameticker/ticker
 	var/event_time = null
 	var/event = 0
 
-	var/login_music			// music played in pregame lobby
 
 	var/list/datum/mind/minds = list()//The people in the game. Used for objective tracking.
 
@@ -39,14 +38,6 @@ var/global/datum/controller/gameticker/ticker
 	var/initialtpass = 0 //holder for inital autotransfer vote timer
 
 /datum/controller/gameticker/proc/pregame()
-	login_music = pick(\
-	'sound/music/therock.ogg',\
-	'sound/music/klendathu.ogg',\
-	'sound/music/knights.ogg',\
-	'sound/music/space.ogg',\
-	'sound/music/Title1.ogg',\
-	'sound/music/Title2.ogg',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"

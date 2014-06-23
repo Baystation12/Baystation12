@@ -7895,7 +7895,7 @@
 "cVQ" = (/obj/structure/shuttle/engine/propulsion,/turf/space,/area/syndicate_station/start)
 "cVR" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-propulsion_r"; icon_state = "propulsion_r"},/turf/space,/area/syndicate_station/start)
 "cVS" = (/turf/unsimulated/wall,/area/start)
-"cVT" = (/obj/effect/landmark/start,/turf/unsimulated/floor,/area/start)
+"cVT" = (/obj/effect/landmark/start,/obj/machinery/media/jukebox/lobby,/turf/unsimulated/floor,/area/start)
 "cVU" = (/turf/unsimulated/wall/splashscreen,/area/start)
 "cVV" = (/turf/unsimulated/wall,/area/shuttle/gamma/space)
 "cVW" = (/obj/machinery/mech_bay_recharge_port,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/shuttle/gamma/space)

@@ -322,3 +322,11 @@ var/global/loopModeNames=list(
 	)
 	invisibility=101 // FAK U NO SONG 4 U
 
+/obj/machinery/media/jukebox/lobby
+	playlist_id="lobby"
+	// Must be defined on your server.
+	playlists=list(
+		"lobby" = "Lobby Mix"
+	)
+	invisibility=101
+	autoplay = 1
