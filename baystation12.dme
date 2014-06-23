@@ -1465,6 +1465,7 @@
 #include "code\modules\surgery\ribcage.dm"
 #include "code\modules\surgery\robolimbs.dm"
 #include "code\modules\surgery\surgery.dm"
+#include "code\modules\vehicles\ambulance.dm"
 #include "code\modules\vehicles\cargo_train.dm"
 #include "code\modules\vehicles\train.dm"
 #include "code\modules\vehicles\vehicle.dm"
