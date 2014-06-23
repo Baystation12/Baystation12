@@ -621,7 +621,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if ("Edit")
 			var/n = input(U, "Please enter message", name, notehtml) as message
 			if (in_range(src, U) && loc == U)
-				n = copytext(sanitize_u(n), 1, MAX_MESSAGE_LEN)
+				n = copytext(sanitize_alt(n), 1, MAX_MESSAGE_LEN)
 				if (mode == 1)
 					note = html_decode(n)
 					notehtml = note
@@ -656,7 +656,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = copytext(sanitize_simple(t), 1, 20)
+						t = sanitize_alt(copytext(t, 1, 20))
 						ttone = t
 			else
 				ui.close()
@@ -886,7 +886,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P)
 
 	var/t = input(U, "Please enter message", name, null) as text
-	t = copytext(sanitize_simple(t), 1, MAX_MESSAGE_LEN)
+	t = sanitize_alt(copytext(t, 1, MAX_MESSAGE_LEN))
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -930,14 +930,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			U << "ERROR: Cannot reach recipient."
 			return
 
-		useMS.send_pda_message("[P.owner]","[owner]","[sanitize_u(t)]")
-		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[sanitize_u(t)]", "target" = "\ref[P]")))
-		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[sanitize_u(t)]", "target" = "\ref[src]")))
+		useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS)) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
-				M.show_message(sanitize("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[sanitize_u(t)]</span></span>"))
+				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[sanitize_chat(t)]</span></span>")
 
 		if(!conversations.Find("\ref[P]"))
 			conversations.Add("\ref[P]")
@@ -951,13 +951,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			for(var/mob/living/silicon/ai/ai in mob_list)
 				// Allows other AIs to intercept the message but the AI won't intercept their own message.
 				if(ai.aiPDA != P && ai.aiPDA != src)
-					ai.show_message("<i>Intercepted message from <b>[who]</b>: [sanitize(t)]</i>")
+					ai.show_message("<i>Intercepted message from <b>[who]</b>: [sanitize_chat(t)]</i>")
 
 
 		if (!P.silent)
 			playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		for (var/mob/O in hearers(3, P.loc))
-			if(!P.silent) O.show_message(text("\icon[P] *[sanitize(P.ttone)]*"))
+			if(!P.silent) O.show_message(text("\icon[P] *[sanitize_chat(P.ttone)]*"))
 		//Search for holder of the PDA.
 		var/mob/living/L = null
 		if(P.loc && isliving(P.loc))
@@ -968,7 +968,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 		if(L)
-			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[sanitize(t)]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[sanitize_chat(t)]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 			nanomanager.update_user_uis(L, P) // Update the receiving user's PDA UI so that they can see the new message
 
 		nanomanager.update_user_uis(U, P) // Update the sending user's PDA UI so that they can see the new message

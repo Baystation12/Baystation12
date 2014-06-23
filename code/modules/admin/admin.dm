@@ -719,7 +719,7 @@ var/global/floorIsLava = 0
 	if(!check_rights(0))	return
 
 	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
-	message = sanitize(message, list("ÿ"="____255_"))
+	message = sanitize(message, list("ÿ"=LETTER_255))
 
 	if(message)
 		if(!check_rights(R_SERVER,0))

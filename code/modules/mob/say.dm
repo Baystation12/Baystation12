@@ -22,7 +22,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim(sanitize_plus(copytext(message, 1, MAX_MESSAGE_LEN)))
 
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
@@ -53,7 +53,7 @@
 	if(name != real_name)
 		alt_name = " (died as [real_name])"
 
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
+	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[sanitize_plus_chat(message)]\"</span></span>"
 
 	for(var/mob/M in player_list)
 		if(istype(M, /mob/new_player))
@@ -157,7 +157,7 @@
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
 		return department_radio_keys[channel_prefix]
-	
+
 	return null
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.

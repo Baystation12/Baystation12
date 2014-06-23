@@ -2,6 +2,10 @@
 
 #define DEBUG
 
+#define LETTER_255	"¶"
+#define LETTER_255_CODE 182
+//#define DEBAG_CYRILLIC		//открыть при проблемах с "я"
+
 #define PI 3.1415
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)

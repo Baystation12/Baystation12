@@ -398,7 +398,7 @@
 
 					//Select Your Name
 					if("Sender")
-						customsender 	= input(usr, "Please enter the sender's name.") as text|null
+						customsender 	= copytext(input(usr, "Please enter the sender's name.") as text|null, 1, MAX_NAME_LEN)
 
 					//Select Receiver
 					if("Recepient")
@@ -414,12 +414,12 @@
 
 					//Enter custom job
 					if("RecJob")
-						customjob	 	= input(usr, "Please enter the sender's job.") as text|null
+						customjob	 	= copytext(input(usr, "Please enter the sender's job.") as text|null, 1, MAX_NAME_LEN)
 
 					//Enter message
 					if("Message")
 						custommessage	= input(usr, "Please enter your message.") as text|null
-						custommessage	= copytext(sanitize(custommessage), 1, MAX_MESSAGE_LEN)
+						custommessage	= sanitize_alt(copytext(custommessage, 1, MAX_MESSAGE_LEN))
 
 					//Send message
 					if("Send")
@@ -449,7 +449,7 @@
 									O.show_message(text("\icon[customrecepient] *[customrecepient.ttone]*"))
 								if( customrecepient.loc && ishuman(customrecepient.loc) )
 									var/mob/living/carbon/human/H = customrecepient.loc
-									H << "\icon[customrecepient] <b>Message from [customsender] ([customjob]), </b>\"[custommessage]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+									H << "\icon[customrecepient] <b>Message from [customsender] ([customjob]), </b>\"[sanitize_chat(custommessage)]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 								log_pda("[usr] (PDA: [customsender]) sent \"[custommessage]\" to [customrecepient.owner]")
 								customrecepient.overlays.Cut()
 								customrecepient.overlays += image('icons/obj/pda.dmi', "pda-r")
@@ -468,7 +468,7 @@
 									O.show_message(text("\icon[customrecepient] *[customrecepient.ttone]*"))
 								if( customrecepient.loc && ishuman(customrecepient.loc) )
 									var/mob/living/carbon/human/H = customrecepient.loc
-									H << "\icon[customrecepient] <b>Message from [PDARec.owner] ([customjob]), </b>\"[custommessage]\" (<a href='byond://?src=\ref[customrecepient];choice=Message;skiprefresh=1;target=\ref[PDARec]'>Reply</a>)"
+									H << "\icon[customrecepient] <b>Message from [PDARec.owner] ([customjob]), </b>\"[sanitize_chat(custommessage)]\" (<a href='byond://?src=\ref[customrecepient];choice=Message;skiprefresh=1;target=\ref[PDARec]'>Reply</a>)"
 								log_pda("[usr] (PDA: [PDARec.owner]) sent \"[custommessage]\" to [customrecepient.owner]")
 								customrecepient.overlays.Cut()
 								customrecepient.overlays += image('icons/obj/pda.dmi', "pda-r")

@@ -9,7 +9,7 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message =  trim(sanitize_plus(copytext(message, 1, MAX_MESSAGE_LEN)))
 
 	if(stat == 2)
 		return say_dead(message)
@@ -22,7 +22,7 @@
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
-	
+
 	//parse the radio code and consume it
 	var/message_mode = parse_message_mode(message)
 	if (message_mode)
@@ -30,13 +30,13 @@
 			message = copytext(message,2)
 		else
 			message = copytext(message,3)
-	
+
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
-	
+
 	message = capitalize(trim(message))
 
 	if(speech_problem_flag)
@@ -109,7 +109,7 @@
 			if(mind && mind.changeling)
 				for(var/mob/Changeling in mob_list)
 					if((Changeling.mind && Changeling.mind.changeling) || istype(Changeling, /mob/dead/observer))
-						Changeling << "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
+						Changeling << "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [sanitize_plus_chat(message)]</font></i>"
 			return
 		else
 			if(message_mode)
@@ -185,7 +185,7 @@
 	return special_voice
 
 
-/* 
+/*
    ***Deprecated***
    let this be handled at the hear_say or hear_radio proc
    This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
@@ -204,7 +204,7 @@
 
 	return verb
 
-	
+
 
 
 /mob/living/carbon/human/proc/handle_speech_problems(var/message)
@@ -227,7 +227,7 @@
 					handled = 1
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[uppertext_plus(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		handled = 1
 	if(slurring)
@@ -242,7 +242,7 @@
 			message = stutter(message)
 			verb = pick("stammers", "stutters")
 		if(prob(braindam))
-			message = uppertext(message)
+			message = uppertext_plus(message)
 			verb = pick("yells like an idiot","says rather loudly")
 
 	returns[1] = message

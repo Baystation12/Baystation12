@@ -197,7 +197,7 @@
 				<b><font size='3px'>pAI Request Module</font></b><br><br>
 				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
 				<img src='loading.gif' /> Searching for personalities<br><br>
-				
+
 				<table>
 					<tr>
 						<td class="button">
@@ -259,12 +259,12 @@
 		else
 			radio.wires |= t1
 	if(href_list["setlaws"])
-		var/newlaws = copytext(sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message),1,MAX_MESSAGE_LEN)
+		var/newlaws = sanitize_alt(copytext(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", revert_ja(pai.pai_laws)) as message,1,MAX_MESSAGE_LEN))
 		if(newlaws)
 			pai.pai_laws = newlaws
 			pai << "Your supplemental directives have been updated. Your new directives are:"
-			pai << "Prime Directive: <br>[pai.pai_law0]"
-			pai << "Supplemental Directives: <br>[pai.pai_laws]"
+			pai << "Prime Directive: <br>[sanitize_chat(pai.pai_law0)]"
+			pai << "Supplemental Directives: <br>[sanitize_chat(pai.pai_laws)]"
 	attack_self(usr)
 
 // 		WIRE_SIGNAL = 1

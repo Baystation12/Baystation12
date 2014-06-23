@@ -139,13 +139,13 @@
 		var/verb = say_quote(message)
 
 		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
+		var/rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[sanitize_plus_chat(message)]\"</span></span>"
 
 		//Speach distorted, heard by those who do not understand AIs.
 		var/message_stars = stars(message)
-		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
+		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[sanitize_plus_chat(message_stars)]\"</span></span>"
 
-		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>[message]</span></span></i>"//The AI can "hear" its own message.
+		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>[sanitize_plus_chat(message)]</span></span></i>"//The AI can "hear" its own message.
 		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
 			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
 				M.show_message(rendered_a, 2)

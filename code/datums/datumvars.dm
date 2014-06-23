@@ -427,7 +427,7 @@ client
 			usr << "This can only be used on instances of type /mob"
 			return
 
-		var/new_name = copytext(sanitize(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null),1,MAX_NAME_LEN)
+		var/new_name = sanitize(copytext(input(usr,"What would you like to name this mob?","Input a name",M.real_name) as text|null,1,MAX_NAME_LEN))
 		if( !new_name || !M )	return
 
 		message_admins("Admin [key_name_admin(usr)] renamed [key_name_admin(M)] to [new_name].")
@@ -496,7 +496,7 @@ client
 
 		src.give_disease(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
-		
+
 	else if(href_list["give_disease2"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
@@ -884,7 +884,7 @@ client
 			return
 
 		nanomanager.send_resources(H.client)
-		
+
 		usr << "Resource files sent"
 		H << "Your NanoUI Resource files have been refreshed"
 

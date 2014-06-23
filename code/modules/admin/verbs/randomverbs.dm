@@ -73,7 +73,7 @@
 
 	var/age = alert(src, "Age check", "Show accounts yonger then _____ days","7", "30" , "All")
 
-	if(age == "All") 
+	if(age == "All")
 		age = 9999999
 	else
 		age = text2num(age)
@@ -91,7 +91,7 @@
 			continue
 		if(C.player_age < age)
 			msg += "[key_name(C, 1, 1, highlight_special_characters)]: account is [C.player_age] days old<br>"
-	
+
 	if(missing_ages)
 		src << "Some accounts did not have proper ages set in their clients.  This function requires database to be present"
 
@@ -636,8 +636,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			P.name = "'[command_name()] Update.'"
 			P.info = input
 			P.update_icon()
-			C.messagetitle.Add("[command_name()] Update")
-			C.messagetext.Add(P.info)
+			C.messagetitle.Add("[sanitize_popup(command_name())] Update")
+			C.messagetext.Add(sanitize_popup(P.info))
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")

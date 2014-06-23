@@ -75,21 +75,21 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	if(href_list["settitle"])
 		var/newtitle = input("Enter a title to search for:") as text|null
 		if(newtitle)
-			title = sanitize(newtitle)
+			title = sanitize_alt(newtitle)
 		else
 			title = null
 		title = sanitizeSQL(title)
 	if(href_list["setcategory"])
 		var/newcategory = input("Choose a category to search for:") in list("Any", "Fiction", "Non-Fiction", "Adult", "Reference", "Religion")
 		if(newcategory)
-			category = sanitize(newcategory)
+			category = sanitize_alt(newcategory)
 		else
 			category = "Any"
 		category = sanitizeSQL(category)
 	if(href_list["setauthor"])
 		var/newauthor = input("Enter an author to search for:") as text|null
 		if(newauthor)
-			author = sanitize(newauthor)
+			author = sanitize_alt(newauthor)
 		else
 			author = null
 		author = sanitizeSQL(author)
@@ -300,13 +300,13 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		if(checkoutperiod < 1)
 			checkoutperiod = 1
 	if(href_list["editbook"])
-		buffer_book = copytext(sanitize(input("Enter the book's title:") as text|null),1,MAX_MESSAGE_LEN)
+		buffer_book = sanitize_alt(copytext(input("Enter the book's title:") as text|null,1,MAX_MESSAGE_LEN))
 	if(href_list["editmob"])
-		buffer_mob = copytext(sanitize(input("Enter the recipient's name:") as text|null),1,MAX_NAME_LEN)
+		buffer_mob = sanitize_alt(copytext(input("Enter the recipient's name:") as text|null,1,MAX_NAME_LEN))
 	if(href_list["checkout"])
 		var/datum/borrowbook/b = new /datum/borrowbook
-		b.bookname = sanitize(buffer_book)
-		b.mobname = sanitize(buffer_mob)
+		b.bookname = sanitize_alt(buffer_book)//нужно ли, TODO:CYRILLIC
+		b.mobname = sanitize_alt(buffer_mob)
 		b.getdate = world.time
 		b.duedate = world.time + (checkoutperiod * 600)
 		checkouts.Add(b)
@@ -317,7 +317,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		var/obj/item/weapon/book/b = locate(href_list["delbook"])
 		inventory.Remove(b)
 	if(href_list["setauthor"])
-		var/newauthor = copytext(sanitize(input("Enter the author's name: ") as text|null),1,MAX_MESSAGE_LEN)
+		var/newauthor = sanitize_alt(copytext(input("Enter the author's name: ") as text|null,1,MAX_MESSAGE_LEN))
 		if(newauthor)
 			scanner.cache.author = newauthor
 	if(href_list["setcategory"])

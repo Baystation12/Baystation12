@@ -25,10 +25,10 @@
 		user << "\red \The [src] needs to recharge!"
 		return
 
-	var/message = copytext(sanitize(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
+	var/message = sanitize_plus(copytext(input(user, "Shout a message?", "Megaphone", null)  as text,1,MAX_MESSAGE_LEN))
 	if(!message)
 		return
-	message = capitalize(message)
+	message = sanitize_plus_chat(capitalize(message))
 	if ((src.loc == user && usr.stat == 0))
 		if(emagged)
 			if(insults)

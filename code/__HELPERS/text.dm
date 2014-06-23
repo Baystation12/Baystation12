@@ -34,38 +34,6 @@
 			index = findtext(t, char)
 	return t
 
-//Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"=" ","\t"="","я"="____255_"))
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
-			index = findtext(t, char)
-	return t
-
-//Runs byond's sanitization proc along-side sanitize_simple
-/proc/sanitize(var/t,var/list/repl_chars = null)//ansi
-
-	t = html_encode(sanitize_simple(t, repl_chars))
-
-	var/index = findtext(t, "____255_")
-	while(index)
-		t = copytext(t, 1, index) + "&#255;" + copytext(t, index+8)
-		index = findtext(t, "____255_")
-
-	return t
-
-/proc/sanitize_u(var/t,var/list/repl_chars = null)//unicode
-
-	t = html_encode(sanitize_simple(t,repl_chars))
-
-	var/index = findtext(t, "____255_")
-	while(index)
-		t = copytext(t, 1, index) + "&#1103;" + copytext(t, index+8)
-		index = findtext(t, "____255_")
-
-	return t
-
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
@@ -162,8 +130,9 @@
 //checks text for html tags
 //if tag is not in whitelist (var/list/paper_tag_whitelist in global.dm)
 //relpaces < with &lt;
+//hm, better use pencode + sanitize()
 proc/checkhtml(var/t)
-	t = sanitize_simple(t, list("&#"=".", "я"="____255_"))//для листков. само "я" подставляется уже после chekhtml, в paper.dm
+	t = sanitize_simple(t, list("&#"="."))
 
 	var/p = findtext(t,"<",1)
 	while (p)	//going through all the tags
@@ -260,7 +229,7 @@ proc/checkhtml(var/t)
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext_plus(copytext(t, 1, 2)) + copytext(t, 2)
 
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)

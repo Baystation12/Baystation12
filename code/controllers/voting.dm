@@ -145,7 +145,7 @@ datum/controller/vote
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 		log_vote(text)
-		world << "<font color='purple'>[text]</font>"
+		world << "<font color='purple'>[sanitize_chat(text)]</font>"
 		return .
 
 	proc/result()
@@ -233,10 +233,10 @@ datum/controller/vote
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
-					question = sanitize_u(input(usr,"What is the vote for?") as text|null)
+					question = sanitize_alt(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
 					for(var/i=1,i<=10,i++)
-						var/option = capitalize(sanitize_u(input(usr,"Please enter an option or hit cancel to finish") as text|null))
+						var/option = capitalize(sanitize_alt(input(usr,"Please enter an option or hit cancel to finish") as text|null))
 						if(!option || mode || !usr.client)	break
 						choices.Add(option)
 				else			return 0
@@ -248,7 +248,7 @@ datum/controller/vote
 				text += "\n[question]"
 
 			log_vote(text)
-			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
+			world << "<font color='purple'><b>[sanitize_chat(text)]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
 					world << sound('sound/ambience/alarm4.ogg')
