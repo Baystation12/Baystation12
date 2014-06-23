@@ -411,7 +411,7 @@
 
 	if(mode==47)
 		var/supplyData[0]
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			supplyData["shuttle_moving"] = shuttle.has_eta()
 			supplyData["shuttle_eta"] = shuttle.eta_minutes()

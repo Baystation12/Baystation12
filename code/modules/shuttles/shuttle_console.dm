@@ -6,11 +6,15 @@
 
 /datum/shuttle/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
+	var/direction = 0	//0 = going to station, 1 = going to offsite.
 	var/process_state = IDLE_STATE
-	
+
 	//this mutex ensures that only one console is processing the shuttle's controls at a time
-	var/obj/machinery/computer/shuttle_control/in_use = null
-	
+	var/obj/machinery/computer/shuttle_control/in_use = null	//this doesn't have to be a console...
+
+	var/area_transition
+	var/travel_time = 0
+
 	var/area_station
 	var/area_offsite
 	//TODO: change location to a string and use a mapping for area and dock targets.
@@ -25,7 +29,8 @@
 		destination = get_location_area(!location)
 	if(!origin)
 		origin = get_location_area(location)
-	
+
+	direction = !location
 	..(origin, destination)
 
 /datum/shuttle/ferry/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
@@ -36,7 +41,8 @@
 		destination = get_location_area(!location)
 	if(!departing)
 		departing = get_location_area(location)
-	
+
+	direction = !location
 	..(departing, destination, interim, travel_time)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
@@ -44,16 +50,20 @@
 		destination = get_location_area(!location)
 	if(!origin)
 		origin = get_location_area(location)
-	
+
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
 	..(origin, destination)
-	location = !location
+
+
+	if (destination == area_station) location = 0
+	if (destination == area_offsite) location = 1
+		//if this is a long_jump retain the location we were last at until we get to the new one
 
 /datum/shuttle/ferry/proc/get_location_area(location_id = null)
 	if (isnull(location_id))
 		location_id = location
-	
+
 	if (!location_id)
 		return area_station
 	return area_offsite
@@ -62,12 +72,12 @@
 	switch(process_state)
 		if (WAIT_LAUNCH)
 			if (skip_docking_checks() || docking_controller.can_launch())
-				
-				//once you have a transition area, making ferry shuttles have a transition would merely requre replacing this with
-				//if (transition_area) long_jump(...)
-				//else short_jump ()
-				short_jump()
-				
+
+				if (travel_time && area_transition)
+					long_jump(null, null, area_transition, travel_time)
+				else
+					short_jump()
+
 				process_state = WAIT_ARRIVE
 		if (WAIT_ARRIVE)
 			if (moving_status == SHUTTLE_IDLE)
@@ -77,6 +87,7 @@
 			if (skip_docking_checks() || docking_controller.docked())
 				process_state = IDLE_STATE
 				in_use = null	//release lock
+				arrived()
 
 /datum/shuttle/ferry/current_dock_target()
 	var/dock_target
@@ -89,42 +100,42 @@
 
 /datum/shuttle/ferry/proc/launch(var/obj/machinery/computer/shuttle_control/user)
 	if (!can_launch()) return
-	
+
 	in_use = user	//obtain an exclusive lock on the shuttle
-	
+
 	process_state = WAIT_LAUNCH
 	undock()
 
 /datum/shuttle/ferry/proc/force_launch(var/obj/machinery/computer/shuttle_control/user)
 	if (!can_force()) return
-	
+
 	in_use = user	//obtain an exclusive lock on the shuttle
-	
+
 	short_jump()
-	
+
 	process_state = WAIT_ARRIVE
 
 /datum/shuttle/ferry/proc/cancel_launch(var/obj/machinery/computer/shuttle_control/user)
 	if (!can_cancel()) return
-	
+
 	moving_status = SHUTTLE_IDLE
 	process_state = WAIT_FINISH
-	
+
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
-	
+
 	spawn(10)
 		dock()
-	
+
 	return
 
 /datum/shuttle/ferry/proc/can_launch()
 	if (moving_status != SHUTTLE_IDLE)
 		return 0
-	
+
 	if (in_use)
 		return 0
-	
+
 	return 1
 
 /datum/shuttle/ferry/proc/can_force()
@@ -137,6 +148,10 @@
 		return 1
 	return 0
 
+//This gets called when the shuttle finishes arriving at it's destination
+//This can be used by subtypes to do things when the shuttle arrives.
+/datum/shuttle/ferry/proc/arrived()
+	return	//do nothing for now
 
 
 /obj/machinery/computer/shuttle_control
@@ -145,7 +160,7 @@
 	icon_state = "shuttle"
 	req_access = list(access_engine)
 	circuit = null
-	
+
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
 	var/launch_override = 0
@@ -156,11 +171,11 @@
 /obj/machinery/computer/shuttle_control/process()
 	if (!shuttles || !(shuttle_tag in shuttles))
 		return
-	
+
 	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
-	
+
 	if (shuttle.in_use == src)
 		shuttle.process_shuttle()
 
@@ -168,7 +183,7 @@
 	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
-	
+
 	if (shuttle.in_use == src)
 		shuttle.in_use = null	//shuttle may not dock properly if this gets deleted while in transit, but its not a big deal
 
@@ -206,7 +221,7 @@
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)
 			shuttle_status = "Arriving at destination now."
-	
+
 	data = list(
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
@@ -237,7 +252,7 @@
 	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
-	
+
 	if(href_list["move"])
 		shuttle.launch(src)
 	if(href_list["force"])
