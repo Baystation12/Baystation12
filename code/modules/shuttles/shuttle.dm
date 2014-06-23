@@ -124,6 +124,33 @@ var/global/list/shuttles
 	shuttles = list()
 
 	var/datum/shuttle/ferry/shuttle
+	
+	// Escape shuttle and pods
+	shuttle = new/datum/shuttle/ferry/emergency()
+	shuttle.location = 1
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/shuttle/escape/centcom)
+	shuttle.area_station = locate(/area/shuttle/escape/station)
+	shuttle.area_transition = locate(/area/shuttle/escape/transit)
+	shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
+	//shuttle.docking_controller_tag = "supply_shuttle"
+	//shuttle.dock_target_station = "cargo_bay"
+	shuttles["Escape"] = shuttle
+	
+	emergency_shuttle.shuttle = shuttle
+	emergency_shuttle.setup_pods()
+	
+	// Supply shuttle
+	shuttle = new/datum/shuttle/ferry/supply()
+	shuttle.location = 1
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/supply/dock)
+	shuttle.area_station = locate(/area/supply/station)
+	shuttle.docking_controller_tag = "supply_shuttle"
+	shuttle.dock_target_station = "cargo_bay"
+	shuttles["Supply"] = shuttle
+	
+	supply_controller.shuttle = shuttle
 
 	// Admin shuttles.
 	shuttle = new()
