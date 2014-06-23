@@ -186,6 +186,14 @@
 			interact()
 			return
 		// else ???
+		if(istype(C,/obj/item/part/computer/cardslot))
+			if(computer.cardslot.reader != null)
+				computer.cardslot.remove()
+		if(istype(C,/obj/item/part/computer/cardslot/dual))
+			if(computer.cardslot.writer != null)
+				computer.cardslot.remove(computer.cardslot.writer)
+			if(computer.cardslot.reader != null)
+				computer.cardslot.remove(computer.cardslot.reader)
 		interact()
 		return
 
