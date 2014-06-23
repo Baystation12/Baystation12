@@ -44,9 +44,13 @@
 		return 0
 
 	interact()
+		if(!computer.cardslot)
+			computer.Crash(MISSING_PERIPHERAL)
+			return
 		usr.set_machine(src)
 		scan = computer.cardslot.reader
 		if(!interactable())
+			return
 			return
 		if (computer.z > 6)
 			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
