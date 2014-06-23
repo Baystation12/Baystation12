@@ -111,6 +111,8 @@
 		var/mob/living/carbon/human/user = usr
 		if(istype(user) && !user.get_active_hand())
 			user.put_in_hands(reader)
+		else
+			reader.loc = computer.loc
 		reader = null
 
 	// Authorizes the user based on the computer's requirements
@@ -190,5 +192,7 @@
 		var/mob/living/carbon/human/user = usr
 		if(ishuman(user) && !user.get_active_hand())
 			user.put_in_hands(card)
+		else
+			card.loc = computer.loc
 
 
