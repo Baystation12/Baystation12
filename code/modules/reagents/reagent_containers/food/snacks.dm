@@ -1550,6 +1550,51 @@
 		if(wrapped)
 			Unwrap(user)
 
+	On_Consume(var/mob/M)
+		M << "<span class = 'warning'>Something inside of you suddently expands!</span>"
+		//Do not try to understand.
+		var/obj/item/weapon/surprise = new/obj/item/weapon(M)
+		surprise.icon = 'icons/mob/monkey.dmi'
+		surprise.icon_state = "monkey1"
+		var/specie = "monkey"
+		if(monkey_type)
+			switch(monkey_type)
+				if("tajara")
+					surprise.icon_state = "tajkey1"
+					specie = "farwa"
+				if("unathi")
+					surprise.icon_state = "stokkey1"
+					specie = "stok"
+				if("skrell")
+					surprise.icon_state = "skrellkey1"
+					specie = "neaera"
+		surprise.name = "malformed [specie]"
+		surprise.desc = "Looks like \a very deformed [specie], a little small for its kind."
+		surprise.transform *= 0.6
+		surprise.add_blood(M)
+
+		if (istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			var/datum/organ/external/E = H.get_organ("chest")
+			E.fracture()
+			for (var/datum/organ/internal/I in E.internal_organs)
+				I.take_damage(rand(I.min_bruised_damage, I.min_broken_damage+5))
+
+			if (!E.hidden && prob(60)) //set it snuggly
+				E.hidden = surprise
+				E.cavity = 0
+			else 		//someone is having a bad day
+				E.createwound(CUT, 30)
+				E.implants += surprise
+				H.visible_message("<span class='danger'>Something that looks like \a [surprise] sticks out of a wound!</span>")
+				H.embedded_flag = 1
+				H.verbs += /mob/proc/yank_out_object
+		else if (ismonkey(M))
+			M.visible_message("<span class='danger'>[M] suddenly tears in half!</span>")
+			surprise.loc = M.loc
+			M.gib()
+		..()
+
 	proc/Expand()
 		for(var/mob/M in viewers(src,7))
 			M << "\red \The [src] expands!"
