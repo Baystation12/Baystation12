@@ -25,65 +25,48 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
 
-/datum/shuttle_controller/emergency_shuttle/New()
-	if ("Escape" in shuttles && istype(shuttles["Escape"], /datum/shuttle/ferry/emergency))
-		shuttle = shuttles["Escape"]
+/datum/shuttle_controller/emergency_shuttle/proc/setup_pods()
+	escape_pods = list()
 	
-	//still don't have the shuttle, so create one
-	if (!shuttle)
-		shuttle = new/datum/shuttle/ferry/emergency()
-		shuttle.location = 1
-		shuttle.warmup_time = 10
-		shuttle.area_offsite = locate(/area/shuttle/escape/centcom)
-		shuttle.area_station = locate(/area/shuttle/escape/station)
-		shuttle.area_transition = locate(/area/shuttle/escape/transit)
-		shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
-		//shuttle.docking_controller_tag = "supply_shuttle"
-		//shuttle.dock_target_station = "cargo_bay"
-		shuttles["Escape"] = shuttle
+	var/datum/shuttle/ferry/escape_pod/pod
 	
-	if (!escape_pods)
-		escape_pods = list()
-		
-		var/datum/shuttle/ferry/escape_pod/pod
-		
-		pod = new()
-		pod.location = 0
-		pod.warmup_time = 0
-		pod.area_station = locate(/area/shuttle/escape_pod1/station)
-		pod.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
-		pod.area_transition = locate(/area/shuttle/escape_pod1/transit)
-		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
-		escape_pods += pod
+	pod = new()
+	pod.location = 0
+	pod.warmup_time = 0
+	pod.area_station = locate(/area/shuttle/escape_pod1/station)
+	pod.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
+	pod.area_transition = locate(/area/shuttle/escape_pod1/transit)
+	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	escape_pods += pod
 
-		pod = new()
-		pod.location = 0
-		pod.warmup_time = 0
-		pod.area_station = locate(/area/shuttle/escape_pod2/station)
-		pod.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
-		pod.area_transition = locate(/area/shuttle/escape_pod2/transit)
-		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
-		escape_pods += pod
-		
-		pod = new()
-		pod.location = 0
-		pod.warmup_time = 0
-		pod.area_station = locate(/area/shuttle/escape_pod3/station)
-		pod.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
-		pod.area_transition = locate(/area/shuttle/escape_pod3/transit)
-		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
-		escape_pods += pod
-		
-		//There is no pod 4, apparently.
-		
-		pod = new()
-		pod.location = 0
-		pod.warmup_time = 0
-		pod.area_station = locate(/area/shuttle/escape_pod5/station)
-		pod.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
-		pod.area_transition = locate(/area/shuttle/escape_pod5/transit)
-		pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
-		escape_pods += pod
+	pod = new()
+	pod.location = 0
+	pod.warmup_time = 0
+	pod.area_station = locate(/area/shuttle/escape_pod2/station)
+	pod.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
+	pod.area_transition = locate(/area/shuttle/escape_pod2/transit)
+	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	escape_pods += pod
+	
+	pod = new()
+	pod.location = 0
+	pod.warmup_time = 0
+	pod.area_station = locate(/area/shuttle/escape_pod3/station)
+	pod.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
+	pod.area_transition = locate(/area/shuttle/escape_pod3/transit)
+	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	escape_pods += pod
+	
+	//There is no pod 4, apparently.
+	
+	pod = new()
+	pod.location = 0
+	pod.warmup_time = 0
+	pod.area_station = locate(/area/shuttle/escape_pod5/station)
+	pod.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
+	pod.area_transition = locate(/area/shuttle/escape_pod5/transit)
+	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	escape_pods += pod
 
 
 /datum/shuttle_controller/emergency_shuttle/proc/process()
@@ -91,6 +74,7 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 		if (auto_recall && can_recall() && world.time >= auto_recall_time)
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
+			wait_for_launch = 0
 			
 			//set the travel time
 			if (!shuttle.location)	//at station
@@ -116,17 +100,17 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 //called when the shuttle has arrived.
 /datum/shuttle_controller/emergency_shuttle/proc/shuttle_arrived()
 	if (!shuttle.location)	//at station
-		launch_time = world.time + SHUTTLE_LEAVETIME
+		launch_time = world.time + SHUTTLE_LEAVETIME*10
 		wait_for_launch = 1		//get ready to return
 
-//returns the time left until the shuttle arrives at it's destination, in ticks
+//returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/shuttle_controller/emergency_shuttle/proc/estimate_arrival_time()
 	var/eta = launch_time + shuttle.travel_time
-	return (eta - world.time)
+	return (eta - world.time)/10
 
-//returns the time left until the shuttle launches, in ticks
+//returns the time left until the shuttle launches, in seconds
 /datum/shuttle_controller/emergency_shuttle/proc/estimate_launch_time()
-	return (launch_time - world.time)
+	return (launch_time - world.time)/10
 
 /datum/shuttle_controller/emergency_shuttle/proc/has_eta()
 	return (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
@@ -173,8 +157,8 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 	if(!can_call()) return
 	
 	//set the launch timer
-	launch_time = world.time + get_shuttle_prep_time()
-	auto_recall_time = world.time + rand(300,500)
+	launch_time = world.time + get_shuttle_prep_time()*10
+	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	wait_for_launch = 1
 	
 	evac = 1
@@ -190,7 +174,7 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 
 	//set the launch timer
 	launch_time = world.time + get_shuttle_prep_time()
-	auto_recall_time = world.time + rand(100,SHUTTLE_PREPTIME-30)
+	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	wait_for_launch = 1
 	
 	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in [round(estimate_arrival_time()/60)] minutes.")

@@ -883,7 +883,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Admin"
 	set name = "Call Shuttle"
 
-	if ((!( ticker ) || emergency_shuttle.location()))
+	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
 	if(!check_rights(R_ADMIN))	return

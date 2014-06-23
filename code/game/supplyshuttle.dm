@@ -147,19 +147,6 @@ var/list/mechtoys = list(
 
 	New()
 		ordernum = rand(1,9000)
-		if ("Supply" in shuttles && istype(shuttles["Supply"], /datum/shuttle/ferry/supply))
-			shuttle = shuttles["Supply"]
-		
-		//still don't have the shuttle, so create one
-		if (!shuttle)
-			shuttle = new/datum/shuttle/ferry/supply()
-			shuttle.location = 1
-			shuttle.warmup_time = 10
-			shuttle.area_offsite = locate(/area/supply/dock)
-			shuttle.area_station = locate(/area/supply/station)
-			shuttle.docking_controller_tag = "supply_shuttle"
-			shuttle.dock_target_station = "cargo_bay"
-			shuttles["Supply"] = shuttle
 
 	//Supply shuttle ticker - handles supply point regenertion and shuttle travelling between centcomm and the station
 	proc/process()
