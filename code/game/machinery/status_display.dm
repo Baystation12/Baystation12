@@ -168,15 +168,15 @@
 
 	proc/get_shuttle_timer_arrival()
 		var/timeleft = emergency_shuttle.estimate_arrival_time()
-		if(timeleft)
-			return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
-		return ""
+		if(timeleft < 0)
+			return ""
+		return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 
 	proc/get_shuttle_timer_departure()
 		var/timeleft = emergency_shuttle.estimate_launch_time()
-		if(timeleft)
-			return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
-		return ""
+		if(timeleft < 0)
+			return ""
+		return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 
 	proc/get_supply_shuttle_timer()
 		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
