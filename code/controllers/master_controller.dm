@@ -32,6 +32,8 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
+	
+	var/list/shuttle_list	//for debugging and VV
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -65,6 +67,9 @@ datum/controller/game_controller/proc/setup()
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
 
+	if(!shuttles) setup_shuttles()
+	shuttle_list = shuttles
+
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -75,6 +80,10 @@ datum/controller/game_controller/proc/setup()
 
 	for(var/i=0, i<max_secret_rooms, i++)
 		make_mining_asteroid_secret()
+
+	//Create the mining ore distribution map.
+	var/datum/ore_distribution/O = new()
+	O.populate_distribution_map()
 
 	spawn(0)
 		if(ticker)
@@ -280,7 +289,7 @@ datum/controller/game_controller/proc/process_machines_power()
 					if(M)
 						if(M.use_power)
 							M.auto_use_power()
-			
+
 		if(A.apc.len && A.master == A)
 			i++
 			continue
@@ -295,7 +304,7 @@ datum/controller/game_controller/proc/process_machines_rebuild()
 				A.powerupdate += 1
 				active_areas |= A
 		rebuild_active_areas = 0
-		
+
 
 datum/controller/game_controller/proc/process_objects()
 	var/i = 1

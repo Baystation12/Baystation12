@@ -259,6 +259,8 @@ This function restores all organs.
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 
+	handle_suit_punctures(damagetype, damage)
+
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 	if((damagetype != BRUTE) && (damagetype != BURN))
 		..(damage, damagetype, def_zone, blocked)

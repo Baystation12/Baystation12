@@ -14,9 +14,10 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"pAI candidate" = 1, // -- TLE                       // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"ninja" = "true",									 // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"ninja" = "true",                                    // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
+	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -952,11 +953,12 @@ datum/preferences
 					if("language")
 						var/languages_available
 						var/list/new_languages = list("None")
+						var/datum/species/S = all_species[species]
 
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
 									languages_available = 1
 
@@ -1329,6 +1331,17 @@ datum/preferences
 				I.mechanize()
 
 			else continue
+
+		// Wheelchair necessary?
+		var/datum/organ/external/l_foot = character.get_organ("l_foot")
+		var/datum/organ/external/r_foot = character.get_organ("r_foot")
+		if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+			var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair (character.loc)
+			character.buckled = W
+			character.update_canmove()
+			W.dir = character.dir
+			W.buckled_mob = character
+			W.add_fingerprint(character)
 
 		if(underwear > underwear_m.len || underwear < 1)
 			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES

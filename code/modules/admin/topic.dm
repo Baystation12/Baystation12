@@ -6,6 +6,10 @@
 		message_admins("[usr.key] has attempted to override the admin panel!")
 		return
 
+	if(ticker.mode && ticker.mode.check_antagonists_topic(href, href_list))
+		check_antagonists()
+		return
+
 	if(href_list["makeAntag"])
 		switch(href_list["makeAntag"])
 			if("1")
@@ -1916,32 +1920,23 @@
 					ticker.mode.finalize_traitor(A.mind)
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
-			if("moveminingshuttle")
-				if(mining_shuttle_moving)
-					return
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShM")
-				move_mining_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
-				log_admin("[key_name(usr)] moved the mining shuttle")
-			if("moveadminshuttle")
+
+			if("moveshuttle")
+
+				if(!shuttles) return // Something is very wrong, the global shuttle list has not been created.
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShA")
-				move_admin_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom administration shuttle", 1)
-				log_admin("[key_name(usr)] moved the centcom administration shuttle")
-			if("moveferry")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShF")
-				move_ferry()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom ferry", 1)
-				log_admin("[key_name(usr)] moved the centcom ferry")
-			if("movealienship")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShX")
-				move_alien_ship()
-				message_admins("\blue [key_name_admin(usr)] moved the alien dinghy", 1)
-				log_admin("[key_name(usr)] moved the alien dinghy")
+
+				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles
+
+				if(shuttle_tag)
+					var/datum/shuttle/S = shuttles[shuttle_tag]
+					if(istype(S) && S.moving_status == 0)
+						S.move()
+						message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
+						log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
+
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")

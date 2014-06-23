@@ -6,6 +6,7 @@
 	icon = 'icons/obj/tank.dmi'
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BACK
+	w_class = 3
 
 	pressure_resistance = ONE_ATMOSPHERE*5
 

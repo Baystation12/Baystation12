@@ -600,6 +600,20 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/is_active()
 	return (0 >= usr.stat)
 
+/mob/proc/is_dead()
+	return stat == DEAD
+
+/mob/proc/is_mechanical()
+	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
+		return 1
+	return istype(src, /mob/living/silicon) || get_species() == "Machine"
+
+/mob/proc/is_ready()
+	return client && !!mind
+
+/mob/proc/get_gender()
+	return gender
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0
@@ -746,6 +760,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 		canmove = 0
 		if( istype(buckled,/obj/structure/stool/bed/chair) )
 			lying = 0
+		else if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/V = buckled
+			if(V.standing_mob)
+				lying = 0
+			else
+				lying = 1
 		else
 			lying = 1
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))

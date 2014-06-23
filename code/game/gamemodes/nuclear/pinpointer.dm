@@ -8,7 +8,7 @@
 	item_state = "electronic"
 	throw_speed = 4
 	throw_range = 20
-	m_amt = 500
+	matter = list("metal" = 500)
 	var/obj/item/weapon/disk/nuclear/the_disk = null
 	var/active = 0
 
@@ -179,8 +179,7 @@
 
 /obj/item/weapon/pinpointer/nukeop
 	var/mode = 0	//Mode 0 locates disk, mode 1 locates the shuttle
-	var/obj/machinery/computer/syndicate_station/home = null
-
+	var/obj/machinery/computer/shuttle_control/multi/syndicate/home = null
 
 /obj/item/weapon/pinpointer/nukeop/attack_self(mob/user as mob)
 	if(!active)

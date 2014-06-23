@@ -15,7 +15,7 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	g_amt = 3750
+	matter = list("glass" = 3750)
 	origin_tech = "materials=1"
 	var/created_window = /obj/structure/window/basic
 
@@ -24,7 +24,7 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	g_amt = 0
+	matter = null
 	created_window = /obj/structure/window/basic
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -123,8 +123,9 @@
 	desc = "Glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
-	g_amt = 3750
-	m_amt = 1875
+
+	matter = list("metal" = 1875,"glass" = 3750)
+
 	origin_tech = "materials=2"
 
 /obj/item/stack/sheet/rglass/cyborg
@@ -132,8 +133,6 @@
 	desc = "Glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
-	g_amt = 0
-	m_amt = 0
 
 /obj/item/stack/sheet/rglass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -317,7 +316,7 @@
 	desc = "A very strong and very resistant sheet of a phoron-glass alloy."
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
-	g_amt = 7500
+	matter = list("glass" = 7500)
 	origin_tech = "materials=3;phoron=2"
 	created_window = /obj/structure/window/phoronbasic
 
@@ -349,8 +348,8 @@
 	desc = "Phoron glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-phoronrglass"
-	g_amt = 7500
-	m_amt = 1875
+	matter = list("glass" = 7500,"metal" = 1875)
+
 	origin_tech = "materials=4;phoron=2"
 	created_window = /obj/structure/window/phoronreinforced
 

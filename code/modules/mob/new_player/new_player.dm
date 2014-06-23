@@ -293,6 +293,10 @@
 		EquipCustomItems(character)
 		character.loc = pick(latejoin)
 		character.lastarea = get_area(loc)
+		// Moving wheelchair if they have one
+		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
+			character.buckled.loc = character.loc
+			character.buckled.dir = character.dir
 
 		ticker.mode.latespawn(character)
 
@@ -355,7 +359,8 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
+			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
+			if(is_species_whitelisted(chosen_species) || has_admin_rights())
 				new_character = new(loc, client.prefs.species)
 
 		if(!new_character)
@@ -367,7 +372,7 @@
 		if(client.prefs.language)
 			chosen_language = all_languages["[client.prefs.language]"]
 		if(chosen_language)
-			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED))
+			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
 				new_character.add_language("[client.prefs.language]")
 
 		if(ticker.random_players)
@@ -413,11 +418,36 @@
 	Move()
 		return 0
 
-
 	proc/close_spawn_windows()
 		src << browse(null, "window=latechoices") //closes late choices window
 		src << browse(null, "window=playersetup") //closes the player setup window
 
+	proc/has_admin_rights()
+		return client.holder.rights & R_ADMIN
+
+	proc/is_species_whitelisted(datum/species/S)
+		if(!S) return 1
+		return is_alien_whitelisted(src, S.name) || !config.usealienwhitelist || !(S.flags & IS_WHITELISTED)
+
+/mob/new_player/get_species()
+	var/datum/species/chosen_species
+	if(client.prefs.species)
+		chosen_species = all_species[client.prefs.species]
+
+	if(!chosen_species)
+		return "Human"
+
+	if(is_species_whitelisted(chosen_species) || has_admin_rights())
+		return chosen_species.name
+
+	return "Human"
+
+/mob/new_player/get_gender()
+	if(!client || !client.prefs) ..()
+	return client.prefs.gender
+
+/mob/new_player/is_ready()
+	return ready && ..()
 
 /mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
