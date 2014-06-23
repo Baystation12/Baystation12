@@ -67,8 +67,9 @@
 		return 0
 
 	if(user != load)
-		if(user in src)		//for handling players stuck in src
-			unload(user, direction, 1)
+		if(user in src)		//for handling players stuck in src - this shouldn't happen - but just in case it does
+			user.loc = T
+			contents -= user
 			return 1
 		return 0
 
@@ -81,19 +82,19 @@
 /obj/vehicle/train/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr) || !user.Adjacent(C))
 		return
-
 	if(istype(C,/obj/vehicle/train))
-		latch(C)
+		latch(C, user)
 	else
 		if(!load(C))
 			user << "\red You were unable to load [C] on [src]."
 
 /obj/vehicle/train/attack_hand(mob/user as mob)
-	if(!user.canmove || user.stat || user.restrained() || !Adjacent(user))
+	if(user.stat || user.restrained() || !Adjacent(user))
 		return 0
 
 	if(user != load && (user in src))
-		unload(user, null, 1)	//for handling players stuck in src
+		user.loc = loc			//for handling players stuck in src
+		contents -= user
 	else if(load)
 		unload(user)			//unload if loaded
 	else if(!load)
@@ -106,6 +107,9 @@
 	set desc = "Unhitches this train from the one in front of it."
 	set category = "Object"
 	set src in view(1)
+	
+	if(!istype(usr, /mob/living/carbon/human))
+		return
 
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))
 		return
@@ -130,12 +134,13 @@
 	if (T.tow)
 		user << "\red [T] is already towing something."
 		return
-	
 	//latch with src as the follower
 	lead = T
 	T.tow = src
+	dir = lead.dir
 	
-	user << "\blue You hitch [src] to [T]."
+	if(user)
+		user << "\blue You hitch [src] to [T]."
 	
 	update_stats()
 
@@ -152,15 +157,12 @@
 	user << "\blue You unhitch [src] from [lead]."
 	lead = null
 
-/obj/vehicle/train/proc/latch(mob/user, obj/vehicle/train/T)
+	update_stats()
+
+/obj/vehicle/train/proc/latch(obj/vehicle/train/T, mob/user)
 	if(!istype(T) || !Adjacent(T))
 		return 0
 
-	/* --- commented out until we get directional sprites ---
-	if(dir != T.dir)	//cars need to be inline to latch
-		return 0
-	*/
-	
 	var/T_dir = get_dir(src, T)	//figure out where T is wrt src
 
 	if(dir == T_dir) 	//if car is ahead
