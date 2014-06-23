@@ -43,12 +43,14 @@
 	proc/process_chambered()
 		return 0
 
+
 	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
 		return 1
 
 
 	proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
 		user << "<span class='warning'>*click*</span>"
+		playsound(user, 'sound/weapons/emptyclick.ogg', 40, 1)
 		return
 
 	emp_act(severity)
