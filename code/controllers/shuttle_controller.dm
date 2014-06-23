@@ -13,7 +13,7 @@
 var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 
 /datum/shuttle_controller/emergency_shuttle
-	var/datum/shuttle/ferry/shuttle
+	var/datum/shuttle/ferry/emergency/shuttle
 	var/list/escape_pods
 	
 	var/launch_time			//the time at which the shuttle will be launched
@@ -71,15 +71,13 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 
 /datum/shuttle_controller/emergency_shuttle/proc/process()
 	if (wait_for_launch)
-		if (auto_recall && can_recall() && world.time >= auto_recall_time)
+		if (auto_recall && world.time >= auto_recall_time)
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
 			wait_for_launch = 0
 			
 			//set the travel time
-			if (!shuttle.location)	//at station
-				departed = 1	//technically we haven't left yet, but this should be good enough
-				
+			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					pod.launch(src)
@@ -102,49 +100,6 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 	if (!shuttle.location)	//at station
 		launch_time = world.time + SHUTTLE_LEAVETIME*10
 		wait_for_launch = 1		//get ready to return
-
-//returns the time left until the shuttle arrives at it's destination, in seconds
-/datum/shuttle_controller/emergency_shuttle/proc/estimate_arrival_time()
-	var/eta = launch_time + shuttle.travel_time
-	return (eta - world.time)/10
-
-//returns the time left until the shuttle launches, in seconds
-/datum/shuttle_controller/emergency_shuttle/proc/estimate_launch_time()
-	return (launch_time - world.time)/10
-
-/datum/shuttle_controller/emergency_shuttle/proc/has_eta()
-	return (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
-
-//returns 1 if the shuttle has gone to the station and come back at least once,
-//used for game completion checking purposes
-/datum/shuttle_controller/emergency_shuttle/proc/returned()
-	return 0	//TODO
-
-//returns 1 if the shuttle is not idle at centcom
-/datum/shuttle_controller/emergency_shuttle/proc/online()
-	if (!shuttle.location)	//not at centcom
-		return 1
-	if (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
-		return 1
-	return 0
-
-//returns 1 if the shuttle is currently in transit (or just leaving) to the station
-/datum/shuttle_controller/emergency_shuttle/proc/going_to_station()
-	return (!shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
-
-//returns 1 if the shuttle is currently in transit (or just leaving) to centcom
-/datum/shuttle_controller/emergency_shuttle/proc/going_to_centcom()
-	return (shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
-
-//returns 1 if the shuttle is docked at the station and waiting to leave
-/datum/shuttle_controller/emergency_shuttle/proc/waiting_to_leave()
-	if (shuttle.location)
-		return 0	//not at station
-	if (!wait_for_launch)
-		return 0	//not going anywhere
-	if (shuttle.moving_status != SHUTTLE_IDLE)
-		return 0	//shuttle is doing stuff
-	return 1
 
 //so we don't have emergency_shuttle.shuttle.location everywhere
 /datum/shuttle_controller/emergency_shuttle/proc/location()
@@ -224,6 +179,59 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 		return SHUTTLE_PREPTIME * 3		//15 minutes
 
 	return SHUTTLE_PREPTIME
+	
+
+/*
+	These procs are not really used by the controller itself, but are for other parts of the
+	game whose logic depends on the emergency shuttle.
+*/
+
+//returns the time left until the shuttle arrives at it's destination, in seconds
+/datum/shuttle_controller/emergency_shuttle/proc/estimate_arrival_time()
+	var/eta
+	if (isnull(shuttle.jump_time))
+		eta = launch_time + shuttle.travel_time
+	else
+		eta = shuttle.jump_time + shuttle.travel_time
+	return (eta - world.time)/10
+
+//returns the time left until the shuttle launches, in seconds
+/datum/shuttle_controller/emergency_shuttle/proc/estimate_launch_time()
+	return (launch_time - world.time)/10
+
+/datum/shuttle_controller/emergency_shuttle/proc/has_eta()
+	return (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
+
+//returns 1 if the shuttle has gone to the station and come back at least once,
+//used for game completion checking purposes
+/datum/shuttle_controller/emergency_shuttle/proc/returned()
+	return (departed && shuttle.moving_status != SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
+
+//returns 1 if the shuttle is not idle at centcom
+/datum/shuttle_controller/emergency_shuttle/proc/online()
+	if (!shuttle.location)	//not at centcom
+		return 1
+	if (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
+		return 1
+	return 0
+
+//returns 1 if the shuttle is currently in transit (or just leaving) to the station
+/datum/shuttle_controller/emergency_shuttle/proc/going_to_station()
+	return (!shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
+
+//returns 1 if the shuttle is currently in transit (or just leaving) to centcom
+/datum/shuttle_controller/emergency_shuttle/proc/going_to_centcom()
+	return (shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
+
+//returns 1 if the shuttle is docked at the station and waiting to leave
+/datum/shuttle_controller/emergency_shuttle/proc/waiting_to_leave()
+	if (shuttle.location)
+		return 0	//not at station
+	if (!wait_for_launch)
+		return 0	//not going anywhere
+	if (shuttle.moving_status != SHUTTLE_IDLE)
+		return 0	//shuttle is doing stuff
+	return 1
 
 /*
 	Some slapped-together star effects for maximum spess immershuns. Basically consists of a

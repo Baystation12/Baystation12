@@ -1,18 +1,22 @@
 
 
-
 /datum/shuttle/ferry/emergency
-	//pass
+	var/jump_time = null	//the time at which the shuttle last jumped. Used for ETAs
 
 /datum/shuttle/ferry/emergency/arrived()
 	emergency_shuttle.shuttle_arrived()
 
-/*
-/datum/shuttle/ferry/emergency/move()
+/datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
+	if (destination == area_transition)
+		jump_time = world.time
+	else
+		jump_time = null
+	
 	if (!location)	//leaving the station
 		emergency_shuttle.departed = 1
-	..()
-*/
+		captain_announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+	..(origin, destination)
+
 
 /datum/shuttle/ferry/escape_pod
 	//pass
@@ -34,7 +38,7 @@
 		spawn(0)
 			D.close()
 	
-	..(origin, destination)	//might need to adjust shuttle/move so that it can take into account the direction argument to area/move_contents_to, I dunno.
+	..(origin, destination)
 	
 	for(var/obj/machinery/door/D in destination)
 		spawn(0)

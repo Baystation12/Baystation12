@@ -101,7 +101,7 @@ var/global/list/shuttles
 	for(var/mob/living/simple_animal/pest in destination)
 		pest.gib()
 
-	origin.move_contents_to(destination)
+	origin.move_contents_to(destination)	//might need to use the "direction" argument here, I dunno.
 
 	for(var/mob/M in destination)
 		if(M.client)
