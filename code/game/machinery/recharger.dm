@@ -13,7 +13,7 @@
 /obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
-	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton) || istype(G,/obj/item/device/laptop))
+	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton))
 		if(charging)
 			return
 
@@ -29,11 +29,6 @@
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
 			return
-		if(istype(G,/obj/item/device/laptop))
-			var/obj/item/device/laptop/L = G
-			if(!L.stored_computer.battery)
-				user << "There's no battery in it!"
-				return
 		user.drop_item()
 		G.loc = src
 		charging = G
@@ -83,15 +78,6 @@
 			else
 				icon_state = "recharger2"
 			return
-		if(istype(charging, /obj/item/device/laptop))
-			var/obj/item/device/laptop/L = charging
-			if(L.stored_computer.battery.charge < L.stored_computer.battery.maxcharge)
-				L.stored_computer.battery.give(1000)
-				icon_state = "recharger1"
-				use_power(2500)
-			else
-				icon_state = "recharger2"
-			return
 
 
 /obj/machinery/recharger/emp_act(severity)
@@ -108,8 +94,6 @@
 		var/obj/item/weapon/melee/baton/B = charging
 		if(B.bcell)
 			B.bcell.charge = 0
-	else if(istype(charging, /obj/item/device/laptop))
-		charging.emp_act(severity)
 	..(severity)
 
 /obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
