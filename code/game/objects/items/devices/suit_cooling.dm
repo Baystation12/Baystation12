@@ -16,23 +16,28 @@
 	//TODO: make it heat up the surroundings when not in space
 
 /obj/item/device/suit_cooling_unit/New()
+	processing_objects |= src
+	
 	cell = new/obj/item/weapon/cell()	//comes with the crappy default power cell - high-capacity ones shouldn't be hard to find
 	cell.loc = src
 
-/obj/item/device/suit_cooling_unit/proc/cool_mob(mob/M)
-	if (!on || !cell) return
-	
-	//make sure they have a suit and we are attached to it
-	if (!attached_to_suit(M))
+/obj/item/device/suit_cooling_unit/process()
+	if (!on || !cell) 
 		return
 	
-	var/mob/living/carbon/human/H = M
+	if (!ismob(loc))
+		return
+	
+	if (!attached_to_suit(loc))		//make sure they have a suit and we are attached to it
+		return
+	
+	var/mob/living/carbon/human/H = loc
 	
 	var/efficiency = H.get_pressure_protection()		//you need to have a good seal for effective cooling
 	var/env_temp = get_environment_temperature()		//wont save you from a fire
 	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
 	
-	if (temp_adj < 0)	//only cools, doesn't heat
+	if (temp_adj < 0.5)	//only cools, doesn't heat, also we don't need extreme precision
 		return
 	
 	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
@@ -85,7 +90,7 @@
 
 /obj/item/device/suit_cooling_unit/proc/turn_off()
 	if (ismob(src.loc))
-		src.loc << "\The [src] clicks and whines as it powers down."	//let them know
+		src.loc:show_message("\The [src] clicks and whines as it powers down.", 2)	//let them know in case it's run out of power.
 	on = 0
 	updateicon()
 

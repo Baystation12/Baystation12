@@ -785,13 +785,8 @@
 	*/
 	
 	proc/stabilize_body_temperature()
-		//TODO find a better place to put this
-		if (s_store && istype(s_store, /obj/item/device/suit_cooling_unit))
-			var/obj/item/device/suit_cooling_unit/CU = s_store
-			CU.cool_mob(src)
-		
 		if (species.flags & IS_SYNTHETIC)
-			bodytemperature += species.synth_temp_gain		//that CPU/posibrain just keeps putting out heat.
+			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
 			return
 	
 		var/body_temperature_difference = species.body_temperature - bodytemperature
