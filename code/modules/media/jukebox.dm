@@ -314,6 +314,17 @@ var/global/loopModeNames=list(
 		return
 	..()
 
+/obj/machinery/media/jukebox/techno
+	name = "Techno disc"
+	desc = "Looks like an oldschool mixing board that somehow plays music, don't ask us how, we don't know."
+	state_base = "mixer"
+	playlist_id="club"
+
+	playlists=list(
+		"club"	= "Club Mix",
+
+	)
+
 /obj/machinery/media/jukebox/shuttle
 	playlist_id="shuttle"
 	// Must be defined on your server.
