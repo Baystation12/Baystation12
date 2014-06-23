@@ -68,10 +68,44 @@
 	src.opened = 1
 
 	for(var/mob/living/M in get_turf(src))
+
+		if(M.lying) return //No spamming this on people.
+
 		M.Weaken(5)
 		M << "\red You topple as \the [src] moves under you!"
 
-	return 1
+		if(prob(100))
+
+			var/mob/living/carbon/human/H = M
+			if(!istype(M))
+				H << "\red You land heavily!"
+				M.adjustBruteLoss(rand(15,30))
+				return
+
+			var/datum/organ/external/affecting
+
+			switch(pick(list("ankle","wrist","head","knee","elbow")))
+				if("ankle")
+					affecting = H.get_organ(pick("l_foot", "r_foot"))
+				if("knee")
+					affecting = H.get_organ(pick("l_leg", "r_leg"))
+				if("wrist")
+					affecting = H.get_organ(pick("l_hand", "r_hand"))
+				if("elbow")
+					affecting = H.get_organ(pick("l_arm", "r_arm"))
+				if("head")
+					affecting = H.get_organ("head")
+
+			if(affecting)
+				M << "\red You land heavily on your [affecting.display_name]!"
+				affecting.take_damage(rand(15,30), 0)
+			else
+				H << "\red You land heavily!"
+				H.adjustBruteLoss(rand(15,30))
+
+			H.UpdateDamageIcon()
+			H.updatehealth()
+	return
 
 /obj/structure/closet/crate/close()
 	if(!src.opened)
