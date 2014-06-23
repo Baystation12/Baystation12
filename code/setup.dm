@@ -4,7 +4,7 @@
 
 #define LETTER_255	"ґ"
 #define LETTER_255_CODE 182
-#define DEBAG_CYRILLIC		//открыть при проблемах с "€"
+//#define DEBAG_CYRILLIC		//открыть при проблемах с "€"
 
 #define PI 3.1415
 
