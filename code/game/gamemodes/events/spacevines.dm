@@ -239,7 +239,7 @@
 				return
 	return
 
-/obj/effect/spacevine/temperature_expose(null, temperature, volume) //hotspots kill vines
+/obj/effect/spacevine/fire_act(null, temperature, volume) //hotspots kill vines
 	if(temperature > T0C+100)
 		del(src)
 

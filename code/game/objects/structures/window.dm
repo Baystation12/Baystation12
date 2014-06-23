@@ -386,7 +386,7 @@
 
 		return
 
-/obj/structure/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 800)
 		hit(round(exposed_volume / 100), 0)
 	..()
@@ -406,7 +406,7 @@
 	shardtype = /obj/item/weapon/shard/phoron
 	health = 120
 
-/obj/structure/window/phoronbasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
 		hit(round(exposed_volume / 1000), 0)
 	..()
@@ -420,7 +420,7 @@
 	reinf = 1
 	health = 160
 
-/obj/structure/window/phoronreinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/phoronreinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
 /obj/structure/window/reinforced

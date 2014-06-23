@@ -154,10 +154,9 @@
 				return
 	return
 
-/obj/effect/biomass/temperature_expose(null, temperature, volume) //hotspots kill biomass
+/obj/effect/biomass/fire_act(null, temperature, volume) //hotspots kill biomass
 	if(temperature > T0C+100)
 		del(src)
-
 
 /proc/biomass_infestation()
 

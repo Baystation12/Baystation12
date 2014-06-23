@@ -28,13 +28,11 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/weapon/clipboard(H), slot_l_hand)
 		switch(H.backbag)
+			if(1) H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/backpack_tox(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_tox(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
 
 
@@ -59,6 +57,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/science(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/science(H), slot_wear_suit)
+
 		switch(H.mind.role_alt_title)
 			if("Scientist")
 				minimal_access = list(access_tox, access_research)
@@ -68,17 +67,14 @@
 				minimal_access = list(access_xenoarch, access_research)
 			if("Phoron Researcher")
 				minimal_access = list(access_research, access_tox_storage)
+
 		switch(H.backbag)
+			if(1) H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/backpack_tox(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_tox(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
-
-
 
 /datum/job/xenobiologist
 	title = "Xenobiologist"
@@ -100,13 +96,11 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda/science(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/science(H), slot_wear_suit)
 		switch(H.backbag)
+			if(1) H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/backpack_tox(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_tox(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
 
 
