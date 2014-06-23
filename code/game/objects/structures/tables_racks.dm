@@ -413,10 +413,35 @@
 		var/obj/structure/table/reinforced/R = T
 		if (R.status == 2)
 			return 0
-	if (!T)
-		return 1
-	else
-		return T.straight_table_check(direction)
+	return T.straight_table_check(direction)
+
+/obj/structure/table/proc/can_touch(var/mob/user)
+	if (!user)
+		return 0
+	if (user.stat)	//zombie goasts go away
+		return 0
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
+		return 0
+	return 1
+
+/obj/structure/table/verb/do_climb()
+	set name = "Climb table"
+	set desc = "Climbs onto a table."
+	set category = "Object"
+	set src in oview(1)
+
+	if (!can_touch(usr))
+		return
+
+	usr.visible_message("<span class='warning'>[usr] starts climbing onto \the [src]!</span>")
+
+	if(!do_after(usr,50))
+		return
+
+	usr.loc = get_turf(src)
+	if (get_turf(usr) == get_turf(src))
+		usr.visible_message("<span class='warning'>[usr] climbs onto \the [src]!</span>")
 
 /obj/structure/table/verb/do_flip()
 	set name = "Flip table"
@@ -424,17 +449,20 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if (issilicon(usr))
-		usr << "<span class='notice'>You need hands for this.</span>"
+	if (!can_touch(usr) || ismouse(usr))
 		return
-	if (isobserver(usr))
-		usr << "<span class='notice'>No haunting outside halloween.</span>n"
-		return
+
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
 	else
 		usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
-		return
+
+
+	for(var/mob/living/M in get_turf(src))
+		M.Weaken(5)
+		M << "\red You topple as \the [src] moves under you!"
+
+	return
 
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"

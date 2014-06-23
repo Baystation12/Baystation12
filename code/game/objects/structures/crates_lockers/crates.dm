@@ -10,6 +10,36 @@
 //	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
 	var/rigged = 0
 
+//Maybe move both of these procs to a root structure somewhere and have a 'climbable' var on structures.
+/obj/structure/closet/crate/proc/can_touch(var/mob/user)
+	if (!user)
+		return 0
+	if (user.stat)	//zombie goasts go away
+		return 0
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
+		return 0
+	return 1
+
+/obj/structure/closet/crate/verb/do_climb()
+
+	set name = "Climb crate"
+	set desc = "Climbs onto a crate."
+	set category = "Object"
+	set src in oview(1)
+
+	if (!can_touch(usr))
+		return
+
+	usr.visible_message("<span class='warning'>[usr] starts climbing onto \the [src]!</span>")
+
+	if(!do_after(usr,50))
+		return
+
+	usr.loc = get_turf(src)
+	if (get_turf(usr) == get_turf(src))
+		usr.visible_message("<span class='warning'>[usr] climbs onto \the [src]!</span>")
+
 /obj/structure/closet/crate/can_open()
 	return 1
 
@@ -36,6 +66,11 @@
 		O.loc = get_turf(src)
 	icon_state = icon_opened
 	src.opened = 1
+
+	for(var/mob/living/M in get_turf(src))
+		M.Weaken(5)
+		M << "\red You topple as \the [src] moves under you!"
+
 	return 1
 
 /obj/structure/closet/crate/close()
