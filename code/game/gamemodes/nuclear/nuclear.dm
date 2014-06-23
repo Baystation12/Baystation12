@@ -279,7 +279,7 @@
 		if(!is_type_in_list(disk_area, centcom_areas))
 			disk_rescued = 0
 			break
-	var/crew_evacuated = (emergency_shuttle.location==2)
+	var/crew_evacuated = (emergency_shuttle.returned())
 	//var/operatives_are_dead = is_operatives_are_dead()
 
 
