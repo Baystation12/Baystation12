@@ -25,16 +25,16 @@
 		i++
 		if(i==1)
 			dat += "<tr>"
-		if(i>= 7)
+		if(i>= 6)
 			i = 0
 			dat += "</tr>"
 			continue
 		dat += {"
 		<td>
-			<a href='?src=\ref[src];[fileop]=\ref[F]'>
+			<center><a href='?src=\ref[src];[fileop]=\ref[F]'>
 				<img src=\ref[F.image]><br>
 				<span>[F.name]</span>
-			</a>
+			</a></center>
 		</td>"}
 
 	dat += "</tr></table>"
@@ -53,7 +53,7 @@
 		i++
 		if(i==1)
 			dat += "<tr>"
-		if(i>= 8)
+		if(i>= 6)
 			i = 0
 			dat += "</tr>"
 			continue

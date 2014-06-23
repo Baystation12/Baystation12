@@ -5,7 +5,7 @@
 	icon_state = "frame-sec"
 
 /datum/file/program/prisoner
-	name = "Prisoner Management Comsole"
+	name = "Prisoner Management Console"
 	active_state = "explosive"
 	req_access = list(access_armory)
 

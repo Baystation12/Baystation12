@@ -349,20 +349,20 @@ Programs are a file that can be executed
 	active_state = "computer_generic"
 	volume = 520
 
-/datum/file/program/PowerMonitor
+/datum/file/program/powermon
 	name = "Power Grid"
 	image = 'icons/ntos/power.png'
 	active_state = "power"
 	volume = 7200
 
-/datum/file/program/PrisonerManagement
+/datum/file/program/prisoner
 	name = "Prisoner Control"
 	image = 'icons/ntos/prison.png'
 	drm = 1
 	active_state = "power"
 	volume = 5000
 
-/datum/file/program/Roboticscontrol
+/datum/file/program/borg_control
 	name = "Cyborg Maint"
 	image = 'icons/ntos/borgcontrol.png'
 	active_state = "robot"
