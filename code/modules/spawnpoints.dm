@@ -29,7 +29,7 @@ var/list/spawntypes = list()
 
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
-	msg = "has completed cryogenic revival and clocked in"
+	msg = "has completed cryogenic revival"
 
 /datum/spawnpoint/cryo/New()
 	..()
