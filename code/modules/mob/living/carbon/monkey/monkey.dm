@@ -15,6 +15,7 @@
 	var/list/uni_append = list(0x12C,0x4E2)    // Same as above for DNA2.
 	var/update_muts = 1                        // Monkey gene must be set at start.
 	var/alien = 0				   //Used for reagent metabolism.
+	holder_type = /obj/item/weapon/holder/monkey
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
@@ -22,6 +23,7 @@
 	speak_emote = list("mews")
 	icon_state = "tajkey1"
 	uni_append = list(0x0A0,0xE00) // 0A0E00
+	holder_type = /obj/item/weapon/holder/monkey/farwa
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
@@ -29,6 +31,7 @@
 	speak_emote = list("squicks")
 	icon_state = "skrellkey1"
 	uni_append = list(0x01C,0xC92) // 01CC92
+	holder_type = /obj/item/weapon/holder/monkey/neaera
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
@@ -36,6 +39,7 @@
 	speak_emote = list("hisses")
 	icon_state = "stokkey1"
 	uni_append = list(0x044,0xC5D) // 044C5D
+	holder_type = /obj/item/weapon/holder/monkey/stok
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
@@ -244,6 +248,7 @@
 
 	if (M.a_intent == "help")
 		help_shake_act(M)
+		get_scooped(M)
 	else
 		if (M.a_intent == "hurt")
 			if ((prob(75) && health > 0))
