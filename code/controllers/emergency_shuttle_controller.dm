@@ -21,6 +21,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/auto_recall_time	//the time at which the shuttle will be auto-recalled
 	var/evac = 0			//1 = emergency evacuation, 0 = crew transfer
 	var/wait_for_launch = 0	//if the shuttle is waiting to launch
+	var/autopilot = 1		//set to 0 to disable the shuttle automatically launching
 	
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
@@ -76,32 +77,23 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()
 			
-			//set the travel time
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					pod.launch(src)
-				
-				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
-			else
-				shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
 			
-			shuttle.launch(src)
+			if(autopilot)
+				shuttle.launch(src)
 
 //called when the shuttle has arrived.
 /datum/emergency_shuttle_controller/proc/shuttle_arrived()
-	if (!shuttle.location)	//at station
+	if (!shuttle.location && autopilot)	//at station
 		set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
 
 //begins the launch countdown and sets the amount of time left until launch
-//if the launch countdown has already been set then this may reduce the countdown time, but not extend it
-//to reset for a later time, just stop the timer first
 /datum/emergency_shuttle_controller/proc/set_launch_countdown(var/seconds)
-	if (wait_for_launch)
-		launch_time = min(world.time + seconds*10, launch_time)
-	else
-		wait_for_launch = 1
-		launch_time = world.time + seconds*10
+	wait_for_launch = 1
+	launch_time = world.time + seconds*10
 
 /datum/emergency_shuttle_controller/proc/stop_launch_countdown()
 	wait_for_launch = 0
@@ -111,6 +103,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	if(!can_call()) return
 	
 	//set the launch timer
+	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	
@@ -126,10 +119,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	if(!can_call()) return
 
 	//set the launch timer
+	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	
-	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in [round(estimate_arrival_time()/60)] minutes.")
+	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
@@ -192,10 +186,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
 	var/eta
-	if (isnull(shuttle.jump_time))
-		eta = launch_time + shuttle.travel_time
+	if (isnull(shuttle.last_move_time))
+		eta = launch_time + shuttle.travel_time*10
 	else
-		eta = shuttle.jump_time + shuttle.travel_time
+		eta = shuttle.last_move_time + shuttle.travel_time*10
 	return (eta - world.time)/10
 
 //returns the time left until the shuttle launches, in seconds
@@ -286,8 +280,3 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		S.direction = spawndir
 		spawn()
 			S.startmove()
-
-#undef SHUTTLE_PREPTIME
-#undef SHUTTLE_LEAVETIME
-#undef SHUTTLE_TRANSIT_DURATION
-#undef SHUTTLE_TRANSIT_DURATION_RETURN

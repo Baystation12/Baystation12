@@ -24,9 +24,9 @@
 				{{/if}}
 			{{else docking_status == "undocked"}}
 				{{if !override_enabled}}
-					<span class="idle">UNDOCKED</span>
+					<span class="idle">NOT IN USE</span>
 				{{else}}
-					<span class="bad">UNDOCKED-OVERRIDE ENABLED</span>
+					<span class="bad" style="float:left">OVERRIDE ENABLED</span>
 				{{/if}}
 			{{else}}
 				<span class="bad">ERROR</span>
