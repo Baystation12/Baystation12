@@ -1090,9 +1090,41 @@ var/list/ghostteleportlocs = list()
 
 
 
+//Embassies
+/area/embassy/
+	name = "\improper Embassy Hallway"
 
+/area/embassy/tajaran
+	name = "\improper Tajaran Embassy"
+	icon_state = "tajaran"
 
+/area/embassy/skrell
+	name = "\improper Skrell Embassy"
+	icon_state = "skrell"
 
+/area/embassy/unathi
+	name = "\improper Unathi Embassy"
+	icon_state = "unathi"
+
+/area/embassy/kidan
+	name = "\improper Kidan Embassy"
+	icon_state = "kidan"
+
+/area/embassy/diona
+	name = "\improper Diona Embassy"
+	icon_state = "diona"
+
+/area/embassy/slime
+	name = "\improper Slime Person Embassy"
+	icon_state = "slime"
+
+/area/embassy/grey
+	name = "\improper Grey Embassy"
+	icon_state = "grey"
+
+/area/embassy/vox
+	name = "\improper Vox Embassy"
+	icon_state = "vox"
 
 
 
