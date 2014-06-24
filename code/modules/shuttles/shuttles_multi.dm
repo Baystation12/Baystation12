@@ -73,7 +73,6 @@
 	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=300x600")
 
 /obj/machinery/computer/shuttle_control/multi/Topic(href, href_list)
-
 	if(..())
 		return
 
@@ -82,6 +81,8 @@
 
 	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
+	
+	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
 
 	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
@@ -98,7 +99,7 @@
 			//TODO: Actually end the mission.
 			MS.return_warning = 1
 			return
-
+		
 		MS.long_jump(MS.last_departed,MS.origin,MS.interim,MS.move_time)
 		MS.last_departed = MS.origin
 		MS.at_origin = 1

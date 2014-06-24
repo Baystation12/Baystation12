@@ -2,14 +2,6 @@
 
 // Controls the emergency shuttle
 
-
-// these define the time taken for the shuttle to get to SS13
-// and the time before it leaves again
-#define SHUTTLE_PREPTIME 				300	// 5 minutes = 300 seconds - after this time, the shuttle cannot be recalled
-#define SHUTTLE_LEAVETIME 				180	// 3 minutes = 180 seconds - the duration for which the shuttle will wait at the station
-#define SHUTTLE_TRANSIT_DURATION		300	// 5 minutes = 300 seconds - how long it takes for the shuttle to get to the station
-#define SHUTTLE_TRANSIT_DURATION_RETURN 120	// 2 minutes = 120 seconds - for some reason it takes less time to come back, go figure.
-
 var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 /datum/emergency_shuttle_controller
@@ -37,7 +29,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.area_station = locate(/area/shuttle/escape_pod1/station)
 	pod.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
 	pod.area_transition = locate(/area/shuttle/escape_pod1/transit)
-	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	pod.transit_direction = NORTH
+	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
 
 	pod = new()
@@ -46,7 +39,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.area_station = locate(/area/shuttle/escape_pod2/station)
 	pod.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
 	pod.area_transition = locate(/area/shuttle/escape_pod2/transit)
-	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	pod.transit_direction = NORTH
+	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
 	
 	pod = new()
@@ -55,7 +49,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.area_station = locate(/area/shuttle/escape_pod3/station)
 	pod.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
 	pod.area_transition = locate(/area/shuttle/escape_pod3/transit)
-	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	pod.transit_direction = EAST
+	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
 	
 	//There is no pod 4, apparently.
@@ -66,7 +61,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.area_station = locate(/area/shuttle/escape_pod5/station)
 	pod.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
 	pod.area_transition = locate(/area/shuttle/escape_pod5/transit)
-	pod.travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	pod.transit_direction = EAST //should this be WEST? I have no idea.
+	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
 
 
@@ -187,9 +183,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
 	var/eta
 	if (isnull(shuttle.last_move_time))
-		eta = launch_time + shuttle.travel_time*10
+		eta = launch_time + shuttle.move_time*10
 	else
-		eta = shuttle.last_move_time + shuttle.travel_time*10
+		eta = shuttle.last_move_time + shuttle.move_time*10
 	return (eta - world.time)/10
 
 //returns the time left until the shuttle launches, in seconds

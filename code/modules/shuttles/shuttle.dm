@@ -22,7 +22,8 @@
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+/datum/shuttle/proc/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
+	//world << "shuttle/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]"
 	if(moving_status != SHUTTLE_IDLE) return
 
 	//it would be cool to play a sound here
@@ -31,11 +32,11 @@
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
 		
-		move(departing, interim)
+		move(departing, interim, direction)
 
 		sleep(travel_time*10)
 
-		move(interim, destination)
+		move(interim, destination, direction)
 
 		moving_status = SHUTTLE_IDLE
 
@@ -65,7 +66,7 @@
 	return 0
 
 //just moves the shuttle from A to B, if it can be moved
-/datum/shuttle/proc/move(var/area/origin,var/area/destination)
+/datum/shuttle/proc/move(var/area/origin, var/area/destination, var/direction=null)
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
 
@@ -99,7 +100,7 @@
 	for(var/mob/living/simple_animal/pest in destination)
 		pest.gib()
 
-	origin.move_contents_to(destination)	//might need to use the "direction" argument here, I dunno.
+	origin.move_contents_to(destination, direction=direction)
 
 	for(var/mob/M in destination)
 		if(M.client)

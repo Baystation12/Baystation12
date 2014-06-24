@@ -5,26 +5,17 @@
 /datum/shuttle/ferry/emergency/arrived()
 	emergency_shuttle.shuttle_arrived()
 
-/datum/shuttle/ferry/emergency/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+/datum/shuttle/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
+	//world << "shuttle/ferry/emergency/long_jump: departing=[departing], destination=[destination], interim=[interim], travel_time=[travel_time]"
 	if (!location)
 		travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	else
 		travel_time = SHUTTLE_TRANSIT_DURATION
+	
+	//update move_time so we get correct ETAs
+	move_time = travel_time
+	
 	..()
-
-/*
-/area/shuttle/escape/centcom/verb/shuttle_long_jump(var/area/A as area, var/area/B as area, var/area/I as area, var/travel_time as num)
-	set category = "Debug"
-	//set src in world
-	var/datum/shuttle/ferry/emergency/E = shuttle_controller.shuttles["Escape"]
-	E.long_jump(A, B, I, travel_time)
-
-/area/shuttle/escape/centcom/verb/shuttle_move(var/area/A as area, var/area/B as area)
-	set category = "Debug"
-	//set src in world
-	var/datum/shuttle/ferry/emergency/E = shuttle_controller.shuttles["Escape"]
-	E.long_jump(A, B)
-*/
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
 	if (destination == area_transition)
@@ -32,7 +23,7 @@
 	else
 		last_move_time = null
 	
-	if (!location)	//leaving the station
+	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
 		captain_announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
 	..(origin, destination)
@@ -174,11 +165,11 @@
 		for (var/dna_hash in authorized)
 			auth_list[i++] = list("auth_name"=authorized[dna_hash], "auth_hash"=dna_hash)
 
-		while (i <= req_authorizations)	//for some reason dream maker gives warnings if you use for(; i <= req_authorizations; i++) here.
-			auth_list[i++] = list("auth_name"="", "auth_hash"=-1)
+		while (i <= req_authorizations)	//fill up the rest of the list with blank entries
+			auth_list[i++] = list("auth_name"="", "auth_hash"=null)
 	else
 		for (var/i = 1; i <= req_authorizations; i++)
-			auth_list[i] = list("auth_name"="<font color=\"red\">ERROR</font>", "auth_hash"=-1)
+			auth_list[i] = list("auth_name"="<font color=\"red\">ERROR</font>", "auth_hash"=null)
 	
 	var/has_auth = has_authorization()
 	
@@ -209,6 +200,8 @@
 		return
 
 	if(href_list["auth"])
+		/*
+		//This doesn't work at all.
 		if (!emagged && href_list["auth"] == -1)
 			//They selected an empty entry. Try to scan their id.
 			if (ishuman(usr))
@@ -216,9 +209,10 @@
 				if (!read_authorization(H.get_active_hand()))	//try to read what's in their hand first
 					read_authorization(H.wear_id)
 		else
-			//remove the authorization
-			var/dna_hash = href_list["auth"]
-			authorized -= dna_hash
+		*/
+		//remove the authorization
+		var/dna_hash = href_list["auth"]
+		authorized -= dna_hash
 
 
 
