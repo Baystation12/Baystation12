@@ -259,7 +259,8 @@
 
 		if(4)
 			if(pa.Find("left"))
-				holder.throw_atom = object
+				if(istype(object, /atom/movable))
+					holder.throw_atom = object
 			if(pa.Find("right"))
 				if(holder.throw_atom)
 					holder.throw_atom.throw_at(object, 10, 1)

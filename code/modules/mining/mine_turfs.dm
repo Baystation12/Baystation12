@@ -1,9 +1,6 @@
 /**********************Mineral deposits**************************/
 
 
-datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
-var/list/artifact_spawn = list() // Runtime fix for geometry loading before controller is instantiated.
-
 /turf/simulated/mineral //wall piece
 	name = "Rock"
 	icon = 'icons/turf/walls.dmi'
@@ -39,19 +36,19 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			if((istype(get_step(src, NORTH), /turf/simulated/floor)) || (istype(get_step(src, NORTH), /turf/space)) || (istype(get_step(src, NORTH), /turf/simulated/shuttle/floor)))
 				T = get_step(src, NORTH)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_s")
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_s", layer=2)
 			if((istype(get_step(src, SOUTH), /turf/simulated/floor)) || (istype(get_step(src, SOUTH), /turf/space)) || (istype(get_step(src, SOUTH), /turf/simulated/shuttle/floor)))
 				T = get_step(src, SOUTH)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_n", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_n", layer=2)
 			if((istype(get_step(src, EAST), /turf/simulated/floor)) || (istype(get_step(src, EAST), /turf/space)) || (istype(get_step(src, EAST), /turf/simulated/shuttle/floor)))
 				T = get_step(src, EAST)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=2)
 			if((istype(get_step(src, WEST), /turf/simulated/floor)) || (istype(get_step(src, WEST), /turf/space)) || (istype(get_step(src, WEST), /turf/simulated/shuttle/floor)))
 				T = get_step(src, WEST)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_e", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_e", layer=2)
 
 
 	ex_act(severity)
@@ -479,6 +476,12 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		if(S.collection_mode)
 			for(var/obj/item/weapon/ore/O in contents)
 				O.attackby(W,user)
+				return
+	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
+		var/obj/item/weapon/storage/bag/fossils/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/fossil/F in contents)
+				F.attackby(W,user)
 				return
 
 	else

@@ -154,7 +154,7 @@
 				return
 	return
 
-/obj/effect/biomass/temperature_expose(null, temp, volume) //hotspots kill biomass
+/obj/effect/biomass/fire_act(null, temp, volume) //hotspots kill biomass
 	del src
 
 

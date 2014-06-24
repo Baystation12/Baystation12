@@ -1220,7 +1220,7 @@
 		return
 
 	usr << "Don't move until counting is finished."
-	var/time = world.timeofday
+	var/time = world.time
 	sleep(60)
 	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
 		usr << "You moved while counting. Try again."

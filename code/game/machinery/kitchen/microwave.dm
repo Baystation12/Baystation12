@@ -26,7 +26,7 @@
 ********************/
 
 /obj/machinery/microwave/New()
-	//..() //do not need this
+	..()
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 	if (!available_recipes)

@@ -27,24 +27,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		reagents.delete()
 	return
 
-
-/obj/effect/effect/water/New()
-	..()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
-	spawn( 70 )
-		delete()
-		return
-	return
-
-/obj/effect/effect/water/Del()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
-	..()
-	return
-
 /obj/effect/effect/water/Move(turf/newloc)
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
@@ -559,7 +541,7 @@ steam.start() -- spawns the effect
 
 // foam disolves when heated
 // except metal foams
-/obj/effect/effect/foam/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/effect/effect/foam/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!metal && prob(max(0, exposed_temperature - 475)))
 		flick("[icon_state]-disolve", src)
 

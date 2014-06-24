@@ -366,3 +366,36 @@ datum/projectile_data
 	var/dest_y = src_y + distance*cos(rotation);
 
 	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
+
+/proc/GetRedPart(const/hexa)
+	return hex2num(copytext(hexa,2,4))
+
+/proc/GetGreenPart(const/hexa)
+	return hex2num(copytext(hexa,4,6))
+
+/proc/GetBluePart(const/hexa)
+	return hex2num(copytext(hexa,6,8))
+
+/proc/GetHexColors(const/hexa)
+	return list(
+			GetRedPart(hexa),
+			GetGreenPart(hexa),
+			GetBluePart(hexa)
+		)
+
+/proc/MixColors(const/list/colors)
+	var/list/reds = list()
+	var/list/blues = list()
+	var/list/greens = list()
+	var/list/weights = list()
+
+	for (var/i = 0, ++i <= colors.len)
+		reds.Add(GetRedPart(colors[i]))
+		blues.Add(GetBluePart(colors[i]))
+		greens.Add(GetGreenPart(colors[i]))
+		weights.Add(1)
+
+	var/r = mixOneColor(weights, reds)
+	var/g = mixOneColor(weights, greens)
+	var/b = mixOneColor(weights, blues)
+	return rgb(r,g,b)

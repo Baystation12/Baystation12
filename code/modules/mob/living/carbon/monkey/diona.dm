@@ -10,6 +10,8 @@
 	icon_state = "nymph1"
 	var/list/donors = list()
 	var/ready_evolve = 0
+	universal_understand = 0 // Dionaea do not need to speak to people
+	universal_speak = 0      // before becoming an adult. Use *chirp.
 
 /mob/living/carbon/monkey/diona/attack_hand(mob/living/carbon/human/M as mob)
 
@@ -207,7 +209,7 @@
 	src.visible_message("\red [src] flicks out a feeler and neatly steals a sample of [M]'s blood.","\red You flick out a feeler and neatly steal a sample of [M]'s blood.")
 	donors += M.real_name
 	for(var/datum/language/L in M.languages)
-		languages += L
+		languages |= L
 
 	spawn(25)
 		update_progression()
@@ -245,13 +247,10 @@
 
 	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
-
 	if(stat == 2)
 		return say_dead(message)
 
 	var/datum/language/speaking = null
-
-
 
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
@@ -269,7 +268,5 @@
 
 	if(!message || stat)
 		return
-
-
 
 	..(message, speaking, verb, null, null, message_range, null)
