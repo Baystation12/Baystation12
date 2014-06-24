@@ -1532,7 +1532,7 @@
 	filling_color = "#ADAC7F"
 
 	var/wrapped = 0
-	var/monkey_type = null
+	var/monkey_type = /mob/living/carbon/monkey
 
 	New()
 		..()
@@ -1552,28 +1552,19 @@
 
 	On_Consume(var/mob/M)
 		M << "<span class = 'warning'>Something inside of you suddently expands!</span>"
-		//Do not try to understand.
-		var/obj/item/weapon/surprise = new/obj/item/weapon(M)
-		surprise.icon = 'icons/mob/monkey.dmi'
-		surprise.icon_state = "monkey1"
-		var/specie = "monkey"
-		if(monkey_type)
-			switch(monkey_type)
-				if("tajara")
-					surprise.icon_state = "tajkey1"
-					specie = "farwa"
-				if("unathi")
-					surprise.icon_state = "stokkey1"
-					specie = "stok"
-				if("skrell")
-					surprise.icon_state = "skrellkey1"
-					specie = "neaera"
-		surprise.name = "malformed [specie]"
-		surprise.desc = "Looks like \a very deformed [specie], a little small for its kind. It shows no signs of life."
-		surprise.transform *= 0.6
-		surprise.add_blood(M)
+
 
 		if (istype(M, /mob/living/carbon/human))
+			//Do not try to understand.
+			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
+			var/mob/living/carbon/monkey/ook = new monkey_type(null) //no other way to get access to the vars, alas
+			surprise.icon = ook.icon
+			surprise.icon_state = ook.icon_state
+			surprise.name = "malformed [ook.name]"
+			surprise.desc = "Looks like \a very deformed [ook.name], a little small for its kind. It shows no signs of life."
+			del(ook)	//rip nullspace monkey
+			surprise.transform *= 0.6
+			surprise.add_blood(M)
 			var/mob/living/carbon/human/H = M
 			var/datum/organ/external/E = H.get_organ("chest")
 			E.fracture()
@@ -1588,23 +1579,17 @@
 				E.embed(surprise)
 		else if (ismonkey(M))
 			M.visible_message("<span class='danger'>[M] suddenly tears in half!</span>")
-			surprise.loc = M.loc
+			var/mob/living/carbon/monkey/ook = new monkey_type(M.loc)
+			ook.name = "malformed [ook.name]"
+			ook.transform *= 0.6
+			ook.add_blood(M)
 			M.gib()
 		..()
 
 	proc/Expand()
 		for(var/mob/M in viewers(src,7))
 			M << "\red \The [src] expands!"
-		if(monkey_type)
-			switch(monkey_type)
-				if("tajara")
-					new /mob/living/carbon/monkey/tajara(get_turf(src))
-				if("unathi")
-					new /mob/living/carbon/monkey/unathi(get_turf(src))
-				if("skrell")
-					new /mob/living/carbon/monkey/skrell(get_turf(src))
-		else
-			new /mob/living/carbon/monkey(get_turf(src))
+		new monkey_type(src)
 		del(src)
 
 	proc/Unwrap(mob/user as mob)
@@ -1622,18 +1607,18 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube
 	name = "farwa cube"
-	monkey_type ="tajara"
+	monkey_type = /mob/living/carbon/monkey/tajara
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube
 	name = "farwa cube"
-	monkey_type ="tajara"
+	monkey_type =/mob/living/carbon/monkey/tajara
 
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
 	name = "stok cube"
-	monkey_type ="unathi"
+	monkey_type = /mob/living/carbon/monkey/unathi
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
 	name = "stok cube"
-	monkey_type ="unathi"
+	monkey_type =/mob/living/carbon/monkey/unathi
 
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
@@ -1641,7 +1626,7 @@
 	monkey_type ="skrell"
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type ="skrell"
+	monkey_type =/mob/living/carbon/monkey/skrell
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
