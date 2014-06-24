@@ -99,11 +99,8 @@ emp_act
 		(SP.name) = "[P.name] shrapnel"
 		(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
 		(SP.loc) = organ
-		organ.implants += SP
-		visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-		embedded_flag = 1
-		src.verbs += /mob/proc/yank_out_object
-		SP.add_blood(src)
+		organ.embed(SP)
+
 	return (..(P , def_zone))
 
 
