@@ -1,8 +1,9 @@
 /obj/vehicle/train/cargo/engine
 	name = "cargo train tug"
+	desc = "A ridable electric car designed for pulling cargo trolleys."
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "mulebot1"			//mulebot icons until I get some proper icons
-	on = 1
+	on = 0
 	powered = 1
 	locked = 0
 
@@ -12,8 +13,15 @@
 	load_offset_y = 9
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
-	var/lead_engine = 1		//if the engine is the lead engine - set automatically
 	active_engines = 1
+	var/obj/item/weapon/key/cargo_train/key
+
+/obj/item/weapon/key/cargo_train
+	name = "key"
+	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\"."
+	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "train_keys"
+	w_class = 1
 
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
@@ -35,17 +43,16 @@
 	..()
 	cell = new /obj/item/weapon/cell/high
 	verbs -= /atom/movable/verb/pull
-
-/obj/vehicle/train/cargo/engine/initialize()
-	..()
+	key = new()
 
 /obj/vehicle/train/cargo/engine/Move()
 	if(on && cell.charge < power_use)
 		turn_off()
 		update_stats()
-		if(load && lead_engine)
-			load << "The drive motor briefly whines, then crawls to a stop."
-	if(lead_engine && !on)
+		if(load && is_train_head())
+			load << "The drive motor briefly whines, then drones to a stop."
+	
+	if(is_train_head() && !on)
 		return 0
 
 	return ..()
@@ -56,6 +63,16 @@
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 	else
 		..()
+
+/obj/vehicle/train/cargo/engine/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/key/cargo_train))
+		if(!key)
+			user.drop_item()
+			key = W
+			W.loc = src
+			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key
+		return
+	..()
 
 /obj/vehicle/train/cargo/update_icon()
 	if(open)
@@ -94,6 +111,13 @@
 //-------------------------------------------
 // Train procs
 //-------------------------------------------
+/obj/vehicle/train/cargo/engine/turn_on()
+	if(!key)
+		return
+	else
+		..()
+		update_stats()
+
 /obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
 	var/list/parts = list("head", "chest", "l_leg", "r_leg", "l_arm", "r_arm")
 
@@ -108,7 +132,7 @@
 /obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
 	..()
 
-	if(lead_engine && istype(load, /mob/living/carbon/human))
+	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
 		D << "\red \b You ran over [H]!"
 		visible_message("<B>\red \The [src] ran over [H]!</B>")
@@ -121,44 +145,11 @@
 //-------------------------------------------
 // Interaction procs
 //-------------------------------------------
-/obj/vehicle/train/cargo/trolley/verb/rotate()
-	set name = "Rotate"
-	set category = "Object"
-	set src in view(1)
-
-	if(anchored)
-		usr << "You cannot turn the trolley while it is latched onto a train."
-		return
-
-	var/cur_dir = null
-	switch(dir)
-		if(NORTH)
-			cur_dir = "North"
-		if(SOUTH)
-			cur_dir = "South"
-		if(EAST)
-			cur_dir = "East"
-		if(WEST)
-			cur_dir = "West"
-
-	var/new_dir = input("Select a new direction:", "Rotate", cur_dir) in list("North", "South", "East", "West")
-
-	switch(new_dir)
-		if("North")
-			dir = NORTH
-		if("South")
-			dir = SOUTH
-		if("East")
-			dir = EAST
-		if("West")
-			dir = WEST
-
-
 /obj/vehicle/train/cargo/engine/relaymove(mob/user, direction)
 	if(user != load)
 		return 0
 
-	if(lead_engine)
+	if(is_train_head())
 		if(direction == reverse_direction(dir))
 			return 0
 		if(Move(get_step(src, direction)))
@@ -167,83 +158,86 @@
 	else
 		return ..()
 
+/obj/vehicle/train/cargo/engine/examine()
+	..()
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+	
+	if(get_dist(usr,src) <= 1)
+		usr << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
+
+/obj/vehicle/train/cargo/engine/verb/check_power()
+	set name = "Check power level"
+	set category = "Object"
+	set src in view(1)
+	
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+
+	if(!cell)
+		usr << "There is no power cell installed in [src]."
+		return
+
+	usr << "The power meter reads [round(cell.percent(), 0.01)]%"
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
 	set category = "Object"
 	set src in view(1)
 
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+	
 	if(on)
 		usr << "The engine is already running."
 		return
 
-	if(turn_on())
-		usr << "You start [src]."
+	turn_on()
+	if (on)
+		usr << "You start [src]'s engine."
 	else
 		if(cell.charge < power_use)
 			usr << "[src] is out of power."
 		else
-			usr << "[src] won't start."
+			usr << "[src]'s engine won't start."
 
-/obj/vehicle/train/cargo/engine/verb/climb_down(mob/user as mob)
-	set name = "Exit vehicle"
+/obj/vehicle/train/cargo/engine/verb/stop_engine()
+	set name = "Stop engine"
 	set category = "Object"
-	set src in range(0)
+	set src in view(1)
 	
-	if(!load)
-		return
-	if(user != load)
+	if(!istype(usr, /mob/living/carbon/human))
 		return
 	
-	unload(user)
+	if(!on)
+		usr << "The engine is already stopped."
+		return
+
+	turn_off()
+	if (!on)
+		usr << "You stop [src]'s engine."
+
+/obj/vehicle/train/cargo/engine/verb/remove_key()
+	set name = "Remove key"
+	set category = "Object"
+	set src in view(1)
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
 	
+	if(!key || (load && load != usr))
+		return
+	
+	if(on)
+		turn_off()
 
-//-------------------------------------------
-// Latching/unlatching procs
-//-------------------------------------------
-/obj/vehicle/train/cargo/trolley/latch(var/obj/vehicle/train/T)
-	if(..())
-		//if this is a trolley, and is now part of a train, anchor it so it cant be pushed around
-		if(lead)
-			anchored = 1
-			lead.anchored = 1
-		if(tow)
-			anchored = 1
-			tow.anchored = 1
-		return 1
-	else
-		return 0
+	key.loc = usr.loc
+	if(!usr.get_active_hand())
+		usr.put_in_hands(key)
+	key = null
 
-/obj/vehicle/train/cargo/trolley/unlatch()
-	if(..())
-		//if this carraige isn't part of a train anymore; unanchor it so it can be pushed around
-		if(!tow && !lead)
-			anchored = 0
-		return 1
-	else
-		return 0
-
-
-/obj/vehicle/train/cargo/engine/latch(var/obj/vehicle/train/T)
-	if(..())
-		//check if this is not the lead engine
-		if(lead)
-			lead_engine = 0
-		if(tow)
-			tow.anchored = 1
-		return 1
-	else
-		return 0
-
-/obj/vehicle/train/cargo/engine/unlatch()
-	if(..())
-		//check if this is now the lead engine
-		if(!lead)
-			lead_engine = 1
-		return 1
-	else
-		return 0
-
+	verbs -= /obj/vehicle/train/cargo/engine/verb/remove_key
 
 //-------------------------------------------
 // Loading/unloading procs
@@ -277,13 +271,23 @@
 /obj/vehicle/train/cargo/engine/update_train_stats()
 	..()
 
-	speed_calc()
+	update_move_delay()
 
-	if(!lead) //check if this is the lead engine
-		lead_engine = 1
+/obj/vehicle/train/cargo/trolley/update_train_stats()
+	..()
+	
+	if(!lead && !tow)
+		anchored = 0
+		if(verbs.Find(/atom/movable/verb/pull))
+			return
+		else
+			verbs += /atom/movable/verb/pull
+	else
+		anchored = 1
+		verbs -= /atom/movable/verb/pull
 
-/obj/vehicle/train/cargo/engine/proc/speed_calc()
-	if(!lead_engine)
+/obj/vehicle/train/cargo/engine/proc/update_move_delay()
+	if(!is_train_head() || !on)
 		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
 	else
 		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains

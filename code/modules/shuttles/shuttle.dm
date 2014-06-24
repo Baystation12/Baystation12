@@ -101,7 +101,7 @@ var/global/list/shuttles
 	for(var/mob/living/simple_animal/pest in destination)
 		pest.gib()
 
-	origin.move_contents_to(destination)
+	origin.move_contents_to(destination)	//might need to use the "direction" argument here, I dunno.
 
 	for(var/mob/M in destination)
 		if(M.client)
@@ -124,8 +124,23 @@ var/global/list/shuttles
 	shuttles = list()
 
 	var/datum/shuttle/ferry/shuttle
-
-	//Supply and escape shuttles.
+	
+	// Escape shuttle and pods
+	shuttle = new/datum/shuttle/ferry/emergency()
+	shuttle.location = 1
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/shuttle/escape/centcom)
+	shuttle.area_station = locate(/area/shuttle/escape/station)
+	shuttle.area_transition = locate(/area/shuttle/escape/transit)
+	shuttle.travel_time = SHUTTLE_TRANSIT_DURATION
+	//shuttle.docking_controller_tag = "supply_shuttle"
+	//shuttle.dock_target_station = "cargo_bay"
+	shuttles["Escape"] = shuttle
+	
+	emergency_shuttle.shuttle = shuttle
+	emergency_shuttle.setup_pods()
+	
+	// Supply shuttle
 	shuttle = new/datum/shuttle/ferry/supply()
 	shuttle.location = 1
 	shuttle.warmup_time = 10
@@ -134,6 +149,8 @@ var/global/list/shuttles
 	shuttle.docking_controller_tag = "supply_shuttle"
 	shuttle.dock_target_station = "cargo_bay"
 	shuttles["Supply"] = shuttle
+	
+	supply_controller.shuttle = shuttle
 
 	// Admin shuttles.
 	shuttle = new()

@@ -143,22 +143,11 @@ var/list/mechtoys = list(
 	var/list/supply_packs = list()
 	//shuttle movement
 	var/movetime = 1200
-	var/shuttle_tag = "Supply"
+	var/datum/shuttle/ferry/supply/shuttle
 
 	New()
 		ordernum = rand(1,9000)
 
-	proc/get_shuttle()
-		if (!shuttles || !(shuttle_tag in shuttles))
-			return null
-		
-		var/datum/shuttle/ferry/supply/shuttle = shuttles[shuttle_tag]
-		
-		if (!istype(shuttle))
-			return null
-		
-		return shuttle
-	
 	//Supply shuttle ticker - handles supply point regenertion and shuttle travelling between centcomm and the station
 	proc/process()
 		for(var/typepath in (typesof(/datum/supply_packs) - /datum/supply_packs))
@@ -178,8 +167,7 @@ var/list/mechtoys = list(
 			set background = 1
 			while(1)
 				if(processing)
-					var/datum/shuttle/ferry/supply/shuttle = get_shuttle()
-					if (shuttle && shuttle.in_use)
+					if (shuttle.in_use)
 						shuttle.process_shuttle()
 				
 				sleep(10)
@@ -202,21 +190,18 @@ var/list/mechtoys = list(
 
 	//Sellin
 	proc/sell()
-		var/datum/shuttle/ferry/supply/shuttle_datum = get_shuttle()
-		if (!shuttle_datum) return
-
-		var/area/shuttle = shuttle_datum.get_location_area()
-		if(!shuttle)	return
+		var/area/area_shuttle = shuttle.get_location_area()
+		if(!area_shuttle)	return
 
 		var/phoron_count = 0
 		var/plat_count = 0
 
-		for(var/atom/movable/MA in shuttle)
+		for(var/atom/movable/MA in area_shuttle)
 			if(MA.anchored)	continue
 
 			// Must be in a crate!
 			if(istype(MA,/obj/structure/closet/crate))
-				callHook("sell_crate", list(MA, shuttle))
+				callHook("sell_crate", list(MA, area_shuttle))
 
 				points += points_per_crate
 				var/find_slip = 1
@@ -253,15 +238,12 @@ var/list/mechtoys = list(
 	proc/buy()
 		if(!shoppinglist.len) return
 
-		var/datum/shuttle/ferry/supply/shuttle_datum = get_shuttle()
-		if (!shuttle_datum) return
-
-		var/area/shuttle = shuttle_datum.get_location_area()
-		if(!shuttle)	return
+		var/area/area_shuttle = shuttle.get_location_area()
+		if(!area_shuttle)	return
 
 		var/list/clear_turfs = list()
 
-		for(var/turf/T in shuttle)
+		for(var/turf/T in area_shuttle)
 			if(T.density || T.contents.len)	continue
 			clear_turfs += T
 
@@ -339,7 +321,7 @@ var/list/mechtoys = list(
 	if(temp)
 		dat = temp
 	else
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			dat += {"<BR><B>Supply shuttle</B><HR>
 			Location: [shuttle.has_eta() ? "Moving to station ([shuttle.eta_minutes()] Mins.)":shuttle.at_station() ? "Docked":"Away"]<BR>
@@ -466,7 +448,7 @@ var/list/mechtoys = list(
 	if (temp)
 		dat = temp
 	else
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			dat += "<BR><B>Supply shuttle</B><HR>"
 			dat += "\nLocation: "
@@ -525,7 +507,7 @@ var/list/mechtoys = list(
 	if(!supply_controller)
 		world.log << "## ERROR: Eek. The supply_controller controller datum is missing somehow."
 		return
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
+	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 	if (!shuttle)
 		world.log << "## ERROR: Eek. The supply/shuttle datum is missing somehow."
 		return
