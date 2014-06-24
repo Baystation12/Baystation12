@@ -768,8 +768,17 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 		spawn(10)
 			del(spark_system)
 
-
-/****************************************************
+/datum/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
+	if(!silent)
+		owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+	implants += W
+	owner.embedded_flag = 1
+	owner.verbs += /mob/proc/yank_out_object
+	W.add_blood(owner)
+	if(ismob(W.loc))
+		var/mob/living/H = W.loc
+		H.drop_item()
+	W.loc = owner/****************************************************
 			   ORGAN DEFINES
 ****************************************************/
 
