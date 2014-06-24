@@ -13,3 +13,21 @@
 	icon_state = "mantle-unathi"
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
+
+//Taj clothing.
+
+/obj/item/clothing/suit/tajaran/furs
+	name = "heavy furs"
+	desc = "A traditional Zhan-Khazan garment."
+	icon_state = "zhan_furs"
+	item_state = "zhan_furs"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+	sprite_sheets = list(
+		"Tajaran" = 'icons/mob/species/tajaran/suit.dmi',
+		)
+
+/obj/item/clothing/head/tajaran/scarf
+	name = "headscarf"
+	desc = "A scarf of coarse fabric. Seems to have ear-holes."
+	icon_state = "zhan_scarf"
