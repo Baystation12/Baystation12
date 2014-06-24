@@ -7525,7 +7525,7 @@
 "cOK" = (/turf/unsimulated/beach/sand{tag = "icon-seashallow"; icon_state = "seashallow"},/area/centcom/ferry)
 "cOL" = (/obj/machinery/air_sensor{frequency = 1441; id_tag = "engine_sensor"; output = 63},/turf/simulated/floor/plating{dir = 2; icon_state = "warnplate"},/area/engine/engine_room)
 "cOM" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/shuttle/floor,/area/shuttle/escape/centcom)
-"cON" = (/obj/machinery/computer/shuttle,/turf/simulated/shuttle/floor,/area/shuttle/escape/centcom)
+"cON" = (/obj/machinery/computer/shuttle_control/emergency,/turf/simulated/shuttle/floor,/area/shuttle/escape/centcom)
 "cOO" = (/turf/unsimulated/beach/sand{tag = "icon-beachcorner"; icon_state = "beachcorner"},/area/centcom/ferry)
 "cOP" = (/turf/unsimulated/beach/sand{tag = "icon-beach (SOUTHEAST)"; icon_state = "beach"; dir = 6},/area/centcom/ferry)
 "cOQ" = (/obj/structure/shuttle/engine/propulsion{icon_state = "burst_r"; dir = 4},/turf/space,/area/shuttle/specops/centcom)

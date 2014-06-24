@@ -57,7 +57,7 @@
 
 	if (destination == area_station) location = 0
 	if (destination == area_offsite) location = 1
-		//if this is a long_jump retain the location we were last at until we get to the new one
+	//if this is a long_jump retain the location we were last at until we get to the new one
 
 /datum/shuttle/ferry/proc/get_location_area(location_id = null)
 	if (isnull(location_id))
@@ -73,7 +73,7 @@
 			if (skip_docking_checks() || docking_controller.can_launch())
 
 				if (travel_time && area_transition)
-					long_jump(null, null, area_transition, travel_time)
+					long_jump(interim=area_transition, travel_time=travel_time)
 				else
 					short_jump()
 
@@ -115,9 +115,10 @@
 	else
 		short_jump()
 
+
 	process_state = WAIT_ARRIVE
 
-/datum/shuttle/ferry/proc/cancel_launch(var/obj/machinery/computer/shuttle_control/user)
+/datum/shuttle/ferry/proc/cancel_launch(var/user)
 	if (!can_cancel()) return
 
 	moving_status = SHUTTLE_IDLE
@@ -165,7 +166,6 @@
 
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
-	var/launch_override = 0
 
 
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
@@ -238,7 +238,7 @@
 	if(href_list["force"])
 		shuttle.force_launch(src)
 	else if(href_list["cancel"])
-		shuttle.cancel_launch()
+		shuttle.cancel_launch(src)
 
 /obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
