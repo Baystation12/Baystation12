@@ -7,38 +7,9 @@
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
+	climbable = 1
 //	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
 	var/rigged = 0
-
-//Maybe move both of these procs to a root structure somewhere and have a 'climbable' var on structures.
-/obj/structure/closet/crate/proc/can_touch(var/mob/user)
-	if (!user)
-		return 0
-	if (user.stat)	//zombie goasts go away
-		return 0
-	if (issilicon(user))
-		user << "<span class='notice'>You need hands for this.</span>"
-		return 0
-	return 1
-
-/obj/structure/closet/crate/verb/do_climb()
-
-	set name = "Climb crate"
-	set desc = "Climbs onto a crate."
-	set category = "Object"
-	set src in oview(1)
-
-	if (!can_touch(usr))
-		return
-
-	usr.visible_message("<span class='warning'>[usr] starts climbing onto \the [src]!</span>")
-
-	if(!do_after(usr,50))
-		return
-
-	usr.loc = get_turf(src)
-	if (get_turf(usr) == get_turf(src))
-		usr.visible_message("<span class='warning'>[usr] climbs onto \the [src]!</span>")
 
 /obj/structure/closet/crate/can_open()
 	return 1
@@ -67,44 +38,9 @@
 	icon_state = icon_opened
 	src.opened = 1
 
-	for(var/mob/living/M in get_turf(src))
+	if(climbable)
+		structure_shaken()
 
-		if(M.lying) return //No spamming this on people.
-
-		M.Weaken(5)
-		M << "\red You topple as \the [src] moves under you!"
-
-		if(prob(100))
-
-			var/mob/living/carbon/human/H = M
-			if(!istype(M))
-				H << "\red You land heavily!"
-				M.adjustBruteLoss(rand(15,30))
-				return
-
-			var/datum/organ/external/affecting
-
-			switch(pick(list("ankle","wrist","head","knee","elbow")))
-				if("ankle")
-					affecting = H.get_organ(pick("l_foot", "r_foot"))
-				if("knee")
-					affecting = H.get_organ(pick("l_leg", "r_leg"))
-				if("wrist")
-					affecting = H.get_organ(pick("l_hand", "r_hand"))
-				if("elbow")
-					affecting = H.get_organ(pick("l_arm", "r_arm"))
-				if("head")
-					affecting = H.get_organ("head")
-
-			if(affecting)
-				M << "\red You land heavily on your [affecting.display_name]!"
-				affecting.take_damage(rand(15,30), 0)
-			else
-				H << "\red You land heavily!"
-				H.adjustBruteLoss(rand(15,30))
-
-			H.UpdateDamageIcon()
-			H.updatehealth()
 	return
 
 /obj/structure/closet/crate/close()
