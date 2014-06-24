@@ -159,7 +159,7 @@
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-			AttemptLateSpawn(href_list["SelectedJob"])
+			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return
 
 		if(href_list["privacy_poll"])
@@ -270,7 +270,7 @@
 		return 1
 
 
-	proc/AttemptLateSpawn(rank)
+	proc/AttemptLateSpawn(rank,var/spawning_at)
 		if (src != usr)
 			return 0
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
@@ -291,7 +291,21 @@
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
 		job_master.EquipRank(character, rank, 1)					//equips the human
 		EquipCustomItems(character)
-		character.loc = pick(latejoin)
+
+		//Find our spawning point.
+		var/join_message
+		var/datum/spawnpoint/S
+
+		if(spawning_at)
+			S = spawntypes[spawning_at]
+
+		if(S && istype(S))
+			character.loc = pick(S.turfs)
+			join_message = S.msg
+		else
+			character.loc = pick(latejoin)
+			join_message = "has arrived on the station"
+
 		character.lastarea = get_area(loc)
 		// Moving wheelchair if they have one
 		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
@@ -305,18 +319,18 @@
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-			AnnounceArrival(character, rank)
+			AnnounceArrival(character, rank, join_message)
 
 		else
 			character.Robotize()
 		del(src)
 
-	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
+	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
 			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
 			if(character.mind.role_alt_title)
 				rank = character.mind.role_alt_title
-			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] has arrived on the station.", "Arrivals Announcement Computer")
+			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 			del(a)
 
 	proc/LateChoices()
