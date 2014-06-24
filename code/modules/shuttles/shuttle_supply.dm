@@ -58,7 +58,7 @@
 		if (!at_station())	//at centcom
 			supply_controller.sell()
 
-/datum/shuttle/ferry/emergency/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+/datum/shuttle/ferry/supply/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
 	short_jump(departing, destination)	//long jumps are disabled
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
