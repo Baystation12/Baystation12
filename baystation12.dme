@@ -668,6 +668,7 @@
 #include "code\game\verbs\who.dm"
 #include "code\js\byjax.dm"
 #include "code\js\menus.dm"
+#include "code\modules\spawnpoints.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_memo.dm"
