@@ -135,7 +135,7 @@ datum/controller/game_controller/proc/process()
 				controller_iteration++
 
 				vote.process()
-				transfer_controller.process()
+//				transfer_controller.process()
 				shuttle_controller.process()
 				process_newscaster()
 
