@@ -84,6 +84,17 @@
 /var/const/access_cent_creed = 108//Creed's office.
 /var/const/access_cent_captain = 109//Captain's office/ID comp/AI.
 
+	//EMBASSIES
+
+/var/const/embassy_tajaran = 120
+/var/const/embassy_skrell = 121
+/var/const/embassy_unathi = 122
+/var/const/embassy_diona = 123
+/var/const/embassy_kidan = 124
+/var/const/embassy_slime = 125
+/var/const/embassy_grey = 126
+/var/const/embassy_vox = 127
+
 	//The Syndicate
 /var/const/access_syndicate = 150//General Syndicate Access
 
