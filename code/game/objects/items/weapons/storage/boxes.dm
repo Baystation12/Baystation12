@@ -342,11 +342,11 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/farwacube")
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube")
 	New()
 		..()
 		for(var/i = 1; i <= 5; i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/farwacube/wrapped(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube(src)
 
 /obj/item/weapon/storage/box/stokcubes
 	name = "stok cube box"
@@ -354,11 +354,11 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/stokcube")
+	can_hold = list("/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube")
 	New()
 		..()
 		for(var/i = 1; i <= 5; i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/stokcube/wrapped(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube(src)
 
 /obj/item/weapon/storage/box/neaeracubes
 	name = "neaera cube box"
@@ -366,11 +366,11 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/stokcube")
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube")
 	New()
 		..()
 		for(var/i = 1; i <= 5; i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/neaeracube/wrapped(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube(src)
 
 /obj/item/weapon/storage/box/ids
 	name = "spare IDs"
