@@ -60,6 +60,25 @@
 				stop_automated_movement = 1
 				walk_to(src,movement_target,0,3)
 
+
+/mob/living/simple_animal/cat/MouseDrop(atom/over_object)
+
+	var/mob/living/carbon/human/H = over_object
+	if(!istype(H)) return ..()
+
+	//This REALLY needs to be moved to a general mob proc somewhere.
+	if(H.a_intent == "help")
+		var/obj/item/weapon/holder/cat/C = new(loc)
+		src.loc = C
+		C.name = loc.name
+		C.attack_hand(H)
+		H << "You scoop up [src]."
+		src << "[H] scoops you up."
+		H.status_flags |= PASSEMOTES
+		return
+	else
+		return ..()
+
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/Runtime
 	name = "Runtime"
