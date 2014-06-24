@@ -1569,7 +1569,7 @@
 					surprise.icon_state = "skrellkey1"
 					specie = "neaera"
 		surprise.name = "malformed [specie]"
-		surprise.desc = "Looks like \a very deformed [specie], a little small for its kind."
+		surprise.desc = "Looks like \a very deformed [specie], a little small for its kind. It shows no signs of life."
 		surprise.transform *= 0.6
 		surprise.add_blood(M)
 
@@ -1585,10 +1585,7 @@
 				E.cavity = 0
 			else 		//someone is having a bad day
 				E.createwound(CUT, 30)
-				E.implants += surprise
-				H.visible_message("<span class='danger'>Something that looks like \a [surprise] sticks out of a wound!</span>")
-				H.embedded_flag = 1
-				H.verbs += /mob/proc/yank_out_object
+				E.embed(surprise)
 		else if (ismonkey(M))
 			M.visible_message("<span class='danger'>[M] suddenly tears in half!</span>")
 			surprise.loc = M.loc

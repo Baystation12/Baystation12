@@ -703,6 +703,19 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/is_usable()
 	return !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
 
+/datum/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
+	if(!silent)
+		owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+	implants += W
+	owner.embedded_flag = 1
+	owner.verbs += /mob/proc/yank_out_object
+	W.add_blood(owner)
+	if(ismob(W.loc))
+		var/mob/living/H = W.loc
+		H.drop_item()
+	W.loc = owner
+
+
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
