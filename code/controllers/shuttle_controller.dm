@@ -128,7 +128,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	//Vox Shuttle.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
-	VS.origin = /area/shuttle/vox/station
+	VS.origin = locate(/area/shuttle/vox/station)
 
 	VS.destinations = list(
 		"Fore Starboard Solars" = locate(/area/vox_station/northeast_solars),
@@ -148,7 +148,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 
 	//Nuke Ops shuttle.
 	var/datum/shuttle/multi_shuttle/MS = new/datum/shuttle/multi_shuttle()
-	MS.origin = /area/syndicate_station/start
+	MS.origin = locate(/area/syndicate_station/start)
 
 	MS.destinations = list(
 		"Northwest of the station" = locate(/area/syndicate_station/northwest),
