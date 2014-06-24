@@ -129,7 +129,7 @@
 
 	for(var/obj/effect/landmark/A in landmarks_list)
 		if(A.name == "Syndicate-Spawn")
-			synd_spawn += get_turf(A)
+			synd_spawn = get_turf(A)
 			del(A)
 			continue
 
@@ -138,7 +138,7 @@
 
 	var/nuke_code = "[rand(10000, 99999)]"
 	var/leader_selected = 0
-	var/spawnpos = 1
+//	var/spawnpos = 1
 	var/max_age = 0
 	for(var/datum/mind/synd_mind in syndicates)
 		if(isnum(synd_mind.current.client.player_age))
@@ -149,23 +149,25 @@
 		if(!leader_selected)
 			if (max_age > 0)
 				if (max_age <= synd_mind.current.client.player_age)
+					synd_mind.current.loc = synd_comm_spawn
 					prepare_syndicate_leader(synd_mind, nuke_code)
 					leader_selected = 1
 					greet_syndicate(synd_mind, 0, 1)
 					equip_syndicate(synd_mind.current, 1)
-					synd_mind.current.loc = synd_comm_spawn
+
 			else
+				synd_mind.current.loc = synd_comm_spawn
 				prepare_syndicate_leader(synd_mind, nuke_code)
 				leader_selected = 1
 				greet_syndicate(synd_mind, 0, 1)
 				equip_syndicate(synd_mind.current, 1)
-				synd_mind.current.loc = synd_comm_spawn
+
 		else
 			greet_syndicate(synd_mind)
 			equip_syndicate(synd_mind.current)
-			if(spawnpos > synd_spawn.len)
-				spawnpos = 1
-				synd_mind.current.loc = synd_spawn[spawnpos]
+		//	if(spawnpos > synd_spawn.len)
+		//		spawnpos = 1
+			synd_mind.current.loc = synd_spawn
 
 		synd_mind.current.faction = "syndicate"
 		synd_mind.current.real_name = "Gorlex Maradeurs Operative" // placeholder while we get their actual name
@@ -175,7 +177,7 @@
 		if(!config.objectives_disabled)
 			forge_syndicate_objectives(synd_mind)
 
-		spawnpos++
+	//	spawnpos++
 		update_synd_icons_added(synd_mind)
 
 	update_all_synd_icons()
