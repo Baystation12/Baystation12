@@ -67,8 +67,9 @@
 				if(computer.program)
 					computer.program.update_icon()
 				computer.update_icon()
-				return
+				computer.occupant = occupant
 		..()
+		return
 
 /*
 	ID computer cardslot - reading and writing slots
@@ -110,6 +111,8 @@
 		var/mob/living/carbon/human/user = usr
 		if(istype(user) && !user.get_active_hand())
 			user.put_in_hands(reader)
+		else
+			reader.loc = computer.loc
 		reader = null
 
 	// Authorizes the user based on the computer's requirements
@@ -166,12 +169,15 @@
 			card.loc = src
 			if(reader)
 				writer = card
+				computer.updateUsrDialog()
 				return 1
 			if(istype(card,/obj/item/weapon/card/id) && !(access_change_ids in card:access) && !writer) // not authorized
 				writer = card
+				computer.updateUsrDialog()
 				return 1
 			if(!reader)
 				reader = card
+				computer.updateUsrDialog()
 				return 1
 			return 0
 
@@ -186,5 +192,7 @@
 		var/mob/living/carbon/human/user = usr
 		if(ishuman(user) && !user.get_active_hand())
 			user.put_in_hands(card)
+		else
+			card.loc = computer.loc
 
 

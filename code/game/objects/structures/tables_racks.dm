@@ -19,6 +19,8 @@
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
+	climbable = 1
+
 	var/parts = /obj/item/weapon/table_parts
 	var/flipped = 0
 	var/health = 100
@@ -413,10 +415,7 @@
 		var/obj/structure/table/reinforced/R = T
 		if (R.status == 2)
 			return 0
-	if (!T)
-		return 1
-	else
-		return T.straight_table_check(direction)
+	return T.straight_table_check(direction)
 
 /obj/structure/table/verb/do_flip()
 	set name = "Flip table"
@@ -424,17 +423,19 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if (issilicon(usr))
-		usr << "<span class='notice'>You need hands for this.</span>"
+	if (!can_touch(usr) || ismouse(usr))
 		return
-	if (isobserver(usr))
-		usr << "<span class='notice'>No haunting outside halloween.</span>n"
-		return
+
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
-	else
-		usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
 		return
+
+	usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
+
+	if(climbable)
+		structure_shaken()
+
+	return
 
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"

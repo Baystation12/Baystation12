@@ -2,7 +2,7 @@
 	The Big Bad NT Operating System
 */
 
-/datum/file/program/NTOS
+/datum/file/program/ntos
 	name = "Nanotrasen Operating System"
 	extension = "prog"
 	active_state = "ntos"
@@ -13,28 +13,28 @@
 	Generate a basic list of files in the selected scope
 */
 
-/datum/file/program/NTOS/proc/list_files()
+/datum/file/program/ntos/proc/list_files()
 	if(!computer || !current) return null
 	return current.files
 
 
-/datum/file/program/NTOS/proc/filegrid(var/list/filelist)
+/datum/file/program/ntos/proc/filegrid(var/list/filelist)
 	var/dat = "<table border='0' align='left'>"
 	var/i = 0
 	for(var/datum/file/F in filelist)
 		i++
 		if(i==1)
 			dat += "<tr>"
-		if(i>= 7)
+		if(i>= 6)
 			i = 0
 			dat += "</tr>"
 			continue
 		dat += {"
 		<td>
-			<a href='?src=\ref[src];[fileop]=\ref[F]'>
+			<center><a href='?src=\ref[src];[fileop]=\ref[F]'>
 				<img src=\ref[F.image]><br>
 				<span>[F.name]</span>
-			</a>
+			</a></center>
 		</td>"}
 
 	dat += "</tr></table>"
@@ -44,7 +44,7 @@
 // I am separating this from filegrid so that I don't have to
 // make metadata peripheral files
 //
-/datum/file/program/NTOS/proc/desktop(var/peripheralop = "viewperipheral")
+/datum/file/program/ntos/proc/desktop(var/peripheralop = "viewperipheral")
 	var/dat = "<table border='0' align='left'>"
 	var/i = 0
 	var/list/peripherals = list(computer.hdd,computer.floppy,computer.cardslot)
@@ -53,7 +53,7 @@
 		i++
 		if(i==1)
 			dat += "<tr>"
-		if(i>= 8)
+		if(i>= 6)
 			i = 0
 			dat += "</tr>"
 			continue
@@ -69,20 +69,20 @@
 	return dat
 
 
-/datum/file/program/NTOS/proc/window(var/title,var/buttonbar,var/content)
+/datum/file/program/ntos/proc/window(var/title,var/buttonbar,var/content)
 	return {"
 	<div class='filewin'>
-		<div class='titlebar'>[title] <a href='?src=\ref[src];winclose'><img src=\ref['icons/NTOS/tb_close.png']></a></div>
+		<div class='titlebar'>[title] <a href='?src=\ref[src];winclose'><img src=\ref['icons/ntos/tb_close.png']></a></div>
 		<div class='buttonbar'>[buttonbar]</div>
 		<div class='contentpane'>[content]</div>
 	</div>"}
 
-/datum/file/program/NTOS/proc/buttonbar(var/type = 0)
+/datum/file/program/ntos/proc/buttonbar(var/type = 0)
 	switch(type)
 		if(0) // FILE OPERATIONS
 			return {""}
 
-/datum/file/program/NTOS/interact()
+/datum/file/program/ntos/interact()
 	if(!interactable())
 		return
 	var/dat = {"
@@ -162,7 +162,7 @@
 	</style>
 	</head>
 
-	<body><div style='width:640px;height:480px;	border:2px solid black;padding:8px;background-image:url(\ref['icons/NTOS/ntos.png'])'>"}
+	<body><div style='width:640px;height:480px;	border:2px solid black;padding:8px;background-position:center;background-image:url(\ref['nano/images/uiBackground.png'])'>"}
 
 	var/list/files = list_files()
 	if(current)
@@ -175,7 +175,7 @@
 	usr << browse(dat, "window=\ref[computer];size=670x510")
 	onclose(usr, "\ref[computer]")
 
-/datum/file/program/NTOS/Topic(href, list/href_list)
+/datum/file/program/ntos/Topic(href, list/href_list)
 	if(!interactable() || ..(href,href_list))
 		return
 
@@ -186,6 +186,14 @@
 			interact()
 			return
 		// else ???
+		if(istype(C,/obj/item/part/computer/cardslot))
+			if(computer.cardslot.reader != null)
+				computer.cardslot.remove()
+		if(istype(C,/obj/item/part/computer/cardslot/dual))
+			if(computer.cardslot.writer != null)
+				computer.cardslot.remove(computer.cardslot.writer)
+			if(computer.cardslot.reader != null)
+				computer.cardslot.remove(computer.cardslot.reader)
 		interact()
 		return
 

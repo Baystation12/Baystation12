@@ -1,7 +1,7 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	layer = 2.9
+	layer = MOB_LAYER + 0.1 //so it sits above objects including mobs
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -47,7 +47,7 @@
 			if(on && powered)
 				cell.use(power_use)
 		anchored = init_anc
-		
+
 		if(load)
 			load.loc = loc
 			load.dir = dir
@@ -275,6 +275,7 @@
 	if(load_item_visible)
 		C.pixel_x += load_offset_x
 		C.pixel_y += load_offset_y
+		C.layer = layer + 0.1		//so it sits above the vehicle
 
 	if(ismob(C))
 		var/mob/M = C
@@ -284,7 +285,10 @@
 	return 1
 
 
-/obj/vehicle/proc/unload(var/mob/user, var/direction, var/exception = 0)
+/obj/vehicle/proc/unload(var/mob/user, var/direction)
+	if(!load)
+		return
+
 	var/turf/dest = null
 
 	//find a turf to unload to

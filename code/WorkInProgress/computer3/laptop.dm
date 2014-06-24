@@ -22,9 +22,10 @@
 	desc		= "A clamshell portable computer.  It is closed."
 	icon		= 'icons/obj/computer3.dmi'
 	icon_state	=  "laptop-closed"
+	item_state	=  "laptop-inhand"
 	pixel_x		= 2
 	pixel_y		= -3
-	w_class		= 4
+	w_class		= 3
 
 	var/obj/machinery/computer3/laptop/stored_computer = null
 
@@ -122,7 +123,7 @@
 		else
 			stat &= ~NOPOWER
 
-	Destroy()
+	Del()
 		if(istype(loc,/obj/item/device/laptop))
 			var/obj/O = loc
 			spawn(5)

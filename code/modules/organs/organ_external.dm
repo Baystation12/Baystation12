@@ -338,6 +338,25 @@ This function completely restores a damaged organ to perfect condition.
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
+/*
+The INFECTION_LEVEL values defined in setup.dm control the time it takes to reach the different
+infection levels. Since infection growth is exponential, you can adjust the time it takes to get
+from one germ_level to another using the rough formula:
+
+desired_germ_level = initial_germ_level*e^(desired_time_in_seconds/1000)
+
+So if I wanted it to take an average of 15 minutes to get from level one (100) to level two
+I would set INFECTION_LEVEL_TWO to 100*e^(15*60/1000) = 245. Note that this is the average time,
+the actual time is dependent on RNG.
+
+INFECTION_LEVEL_ONE		below this germ level nothing happens, and the infection doesn't grow
+INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to internal and adjacent organs
+INFECTION_LEVEL_THREE	above this germ level the player will take additional toxin damage per second, and will die in minutes without
+						antitox. also, above this germ level you will need to overdose on spaceacillin to reduce the germ_level.
+
+Note that amputating the affected organ does in fact remove the infection from the
+player's body, though, antitox and spaceacillin are easy enough to get I doubt it will ever be needed.
+*/
 /datum/organ/external/proc/update_germs()
 
 	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
@@ -350,7 +369,7 @@ This function completely restores a damaged organ to perfect condition.
 			//Open wounds can become infected
 			if (owner.germ_level > W.germ_level && W.infection_check())
 				W.germ_level++
-			
+
 			//Infected wounds raise the organ's germ level
 			W.germ_level = max(W.germ_level, germ_level)	//Wounds get all the germs
 			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
@@ -358,42 +377,42 @@ This function completely restores a damaged organ to perfect condition.
 
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		if (germ_level > 0 && antibiotics > 5)
-			if (prob(4*antibiotics)) germ_level--
-		
+			if (prob(4*antibiotics)) germ_level--	//the higher the germ level the more antibiotics you'll need.
+
 		if(germ_level >= INFECTION_LEVEL_ONE)
 			//having an infection raises your body temperature
 			var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1) + owner.species.body_temperature
 			if (owner.bodytemperature < fever_temperature)
 				//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
 				owner.bodytemperature++
-			
-			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-				if (prob(5))
-					germ_level++
-				owner.adjustToxLoss(1)
-		
+
+			if(prob(round(germ_level/10)))
+				germ_level++
+				if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
+					owner.adjustToxLoss(1)
+
 		if(germ_level >= INFECTION_LEVEL_TWO)
 			//spread the infection
 			for (var/datum/organ/internal/I in internal_organs)
 				if (I.germ_level < germ_level)
 					I.germ_level++
-			
+
 			if (children)	//To child organs
 				for (var/datum/organ/external/child in children)
 					if (child.germ_level < germ_level && !(child.status & ORGAN_ROBOT))
 						if (child.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
 							child.germ_level++
-			
+
 			if (parent)
 				if (parent.germ_level < germ_level && !(parent.status & ORGAN_ROBOT))
 					if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
 						parent.germ_level++
-		
+
 		if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
 			if (!(status & ORGAN_DEAD))
 				status |= ORGAN_DEAD
 				owner << "<span class='notice'>You can't feel your [display_name] anymore...</span>"
-			
+
 			germ_level++
 			owner.adjustToxLoss(1)
 
@@ -770,7 +789,7 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/process_grasp(var/obj/item/c_hand, var/hand_name)
 	if (!c_hand)
 		return
-	
+
 	if(is_broken())
 		owner.u_equip(c_hand)
 		var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
@@ -784,6 +803,18 @@ This function completely restores a damaged organ to perfect condition.
 		spark_system.start()
 		spawn(10)
 			del(spark_system)
+
+/datum/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
+	if(!silent)
+		owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+	implants += W
+	owner.embedded_flag = 1
+	owner.verbs += /mob/proc/yank_out_object
+	W.add_blood(owner)
+	if(ismob(W.loc))
+		var/mob/living/H = W.loc
+		H.drop_item()
+	W.loc = owner
 
 
 /****************************************************
@@ -814,7 +845,7 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 50
 	min_broken_damage = 20
 	body_part = ARM_LEFT
-	
+
 	process()
 		..()
 		process_grasp(owner.l_hand, "left hand")
@@ -835,7 +866,7 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 50
 	min_broken_damage = 20
 	body_part = ARM_RIGHT
-	
+
 	process()
 		..()
 		process_grasp(owner.r_hand, "right hand")
@@ -874,7 +905,7 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_RIGHT
-	
+
 	process()
 		..()
 		process_grasp(owner.r_hand, "right hand")
@@ -886,7 +917,7 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_LEFT
-	
+
 	process()
 		..()
 		process_grasp(owner.l_hand, "left hand")

@@ -51,8 +51,8 @@ datum/controller/game_controller/New()
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
-	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
-//	if(!supply_shuttle)				supply_shuttle = new /datum/controller/supply_shuttle()
+	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
+	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
@@ -70,9 +70,6 @@ datum/controller/game_controller/proc/setup()
 
 	if(!garbage)
 		garbage = new /datum/controller/garbage_collector()
-
-	if(!shuttles) setup_shuttles()
-	shuttle_list = shuttles
 
 	setup_objects()
 	setupgenetics()
@@ -138,6 +135,8 @@ datum/controller/game_controller/proc/process()
 				controller_iteration++
 
 				vote.process()
+//				transfer_controller.process()
+				shuttle_controller.process()
 				process_newscaster()
 
 				//AIR
@@ -245,7 +244,7 @@ datum/controller/game_controller/proc/process()
 				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + puddles_cost + ticker_cost + gc_cost
 
 				var/end_time = world.timeofday
-				if(end_time < start_time)
+				if(end_time < start_time)	//why not just use world.time instead?
 					start_time -= 864000    //deciseconds in a day
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else

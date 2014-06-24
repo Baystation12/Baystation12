@@ -45,6 +45,7 @@
 	// Misc & special purpose
 	var/obj/item/part/computer/ai_holder/cradle				= null
 	var/obj/item/part/computer/toybox/toybox				= null
+	var/mob/living/silicon/ai/occupant						= null
 
 
 	// Legacy variables
@@ -125,6 +126,11 @@
 			program.execute(os)
 		update_icon()
 
+
+	proc/update_spawn_files()
+		for(var/typekey in spawn_files)
+			hdd.addfile(new typekey,1)
+
 	proc/spawn_parts()
 		for(var/typekey in spawn_parts)
 
@@ -191,9 +197,6 @@
 		for(var/x in verbs)
 			verbs -= x
 		set_broken()
-		var/datum/effect/effect/system/harmless_smoke_spread/smoke = new /datum/effect/effect/system/harmless_smoke_spread()
-		smoke.set_up(5, 0, src)
-		smoke.start()
 		return
 
 
@@ -315,7 +318,7 @@
 			|IMPORTANT| If you add a peripheral, put it in this list
 			+++++++++++ --------------------------------------------
 		*/
-		var/list/peripherals = list(hdd,floppy,radio,camnet,net,cardslot,cradle,toybox)
+		var/list/peripherals = list(hdd,floppy,radio,net,cardslot,cradle) //camnet, toybox removed
 
 		var/list/p_list = list()
 		for(var/obj/item/part/computer/C in peripherals)

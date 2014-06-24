@@ -29,7 +29,7 @@
 		if (istype(G, /obj/item/weapon/gun/energy/gun/nuclear) || istype(G, /obj/item/weapon/gun/energy/crossbow))
 			user << "<span class='notice'>Your gun's recharge port was removed to make room for a miniaturized reactor.</span>"
 			return
-		if(istype(G,/obj/item/device/laptop))
+		if(istype(G, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = G
 			if(!L.stored_computer.battery)
 				user << "There's no battery in it!"
@@ -86,9 +86,9 @@
 		if(istype(charging, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = charging
 			if(L.stored_computer.battery.charge < L.stored_computer.battery.maxcharge)
-				L.stored_computer.battery.give(1000)
+				L.stored_computer.battery.give(100)
 				icon_state = "recharger1"
-				use_power(2500)
+				use_power(250)
 			else
 				icon_state = "recharger2"
 			return
@@ -108,8 +108,6 @@
 		var/obj/item/weapon/melee/baton/B = charging
 		if(B.bcell)
 			B.bcell.charge = 0
-	else if(istype(charging, /obj/item/device/laptop))
-		charging.emp_act(severity)
 	..(severity)
 
 /obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.

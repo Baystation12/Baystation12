@@ -352,6 +352,8 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
+	if(dir & (dir - 1))
+		return 1
 	return 0
 
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!

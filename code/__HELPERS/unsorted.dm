@@ -563,31 +563,6 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 	return loc
 
 
-// Registers the on-close verb for a browse window (client/verb/.windowclose)
-// this will be called when the close-button of a window is pressed.
-//
-// This is usually only needed for devices that regularly update the browse window,
-// e.g. canisters, timers, etc.
-//
-// windowid should be the specified window name
-// e.g. code is	: user << browse(text, "window=fred")
-// then use 	: onclose(user, "fred")
-//
-// Optionally, specify the "ref" parameter as the controlled atom (usually src)
-// to pass a "close=1" parameter to the atom's Topic() proc for special handling.
-// Otherwise, the user mob's machine var will be reset directly.
-//
-/proc/onclose(mob/user, windowid, var/atom/ref=null)
-	if(!user.client) return
-	var/param = "null"
-	if(ref)
-		param = "\ref[ref]"
-
-	winset(user, windowid, "on-close=\".windowclose [param]\"")
-
-	//world << "OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]"
-
-
 // the on-close client verb
 // called when a browser popup window is closed after registering with proc/onclose()
 // if a valid atom reference is supplied, call the atom's Topic() with "close=1"
@@ -1491,6 +1466,8 @@ proc/rotate_icon(file, state, step = 1, aa = FALSE)
 
 	return result
 
+/proc/format_text(text)
+	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
 /*
 Standard way to write links -Sayu
@@ -1500,6 +1477,7 @@ Standard way to write links -Sayu
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+
 
 
 /proc/get_location_accessible(mob/M, location)
