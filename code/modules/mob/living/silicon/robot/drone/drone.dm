@@ -104,15 +104,8 @@
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 	else if(length(message) >= 2)
-		if(copytext(message, 1 ,3) == ":b" || copytext(message, 1 ,3) == ":B")
 
-			if(!is_component_functioning("comms"))
-				src << "\red Your binary communications component isn't functional."
-				return
-
-			robot_talk(trim(copytext(message,3)))
-
-		else if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":d")
+		if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":D")
 
 			if(!is_component_functioning("radio"))
 				src << "\red Your radio transmitter isn't functional."
@@ -209,7 +202,7 @@
 			if(!allowed(usr))
 				user << "\red Access denied."
 				return
-			
+
 			user.visible_message("\red \the [user] swipes \his ID card through \the [src], attempting to reboot it.", "\red You swipe your ID card through \the [src], attempting to reboot it.")
 			var/drones = 0
 			for(var/mob/living/silicon/robot/drone/D in world)
