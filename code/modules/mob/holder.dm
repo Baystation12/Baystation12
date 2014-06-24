@@ -49,3 +49,11 @@
 	desc = "It's a small maintenance robot."
 	icon_state = "drone"
 	origin_tech = "magnets=3;engineering=5"
+
+
+/obj/item/weapon/holder/cat
+
+	name = "cat"
+	desc = "It's a cat. Meow."
+	icon_state = "cat"
+	origin_tech = null

@@ -32,7 +32,7 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
-	
+
 	var/list/shuttle_list	//for debugging and VV
 
 datum/controller/game_controller/New()
@@ -82,6 +82,9 @@ datum/controller/game_controller/proc/setup()
 	//Create the mining ore distribution map.
 	var/datum/ore_distribution/O = new()
 	O.populate_distribution_map()
+
+	//Set up spawn points.
+	populate_spawn_points()
 
 	spawn(0)
 		if(ticker)
