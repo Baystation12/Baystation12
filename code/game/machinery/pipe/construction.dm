@@ -428,7 +428,7 @@ Buildable meters
 			//P.level = T.intact ? 2 : 1
 			P.initialize()
 			if (!P)
-				usr << "There's nothing to connect this junction to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << "There's nothing to connect this pipe to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			P.build_network()
 			if (P.node1)
