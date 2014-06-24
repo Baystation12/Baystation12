@@ -109,7 +109,7 @@
 		usr << "\red Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival."
 
 	if(href_list["move_multi"])
-		if((MS.last_move + MS.cooldown) > world.time)
+		if((MS.last_move + MS.cooldown*10) > world.time)
 			usr << "\red The ship's drive is inoperable while the engines are charging."
 			return
 
@@ -124,7 +124,7 @@
 			MS.at_origin = 0
 
 			
-			MS.long_jump(MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
+			MS.long_jump(MS.last_departed, MS.destinations[choice], MS.interim, MS.move_time)
 			MS.last_departed = MS.destinations[choice]
 			return
 
@@ -132,7 +132,7 @@
 
 			MS.announce_departure()
 
-		MS.short_jump(locate(MS.last_departed),locate(MS.destinations[choice]))
+		MS.short_jump(MS.last_departed, MS.destinations[choice])
 		MS.last_departed = MS.destinations[choice]
 
 	updateUsrDialog()

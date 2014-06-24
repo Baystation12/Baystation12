@@ -31,11 +31,11 @@
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
 		
-		move(locate(departing),locate(interim))
+		move(departing, interim)
 
 		sleep(travel_time*10)
 
-		move(locate(interim),locate(destination))
+		move(interim, destination)
 
 		moving_status = SHUTTLE_IDLE
 
@@ -69,7 +69,7 @@
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
 
-	//world << "area_coming_from: [area_coming_from]"
+	//world << "area_coming_from: [origin]"
 	//world << "destination: [destination]"
 
 	if(origin == destination)
