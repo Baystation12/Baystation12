@@ -61,7 +61,10 @@
 			usr << browse("", "window=[name]") //Closes the dialog
 		P = src[page]
 		P.attackby(W, user)
+
+
 	update_icon()
+	attack_self(usr) //Update the browsed page.
 	add_fingerprint(usr)
 	return
 
