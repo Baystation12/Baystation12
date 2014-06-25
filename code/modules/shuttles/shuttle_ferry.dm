@@ -47,15 +47,11 @@
 	..(departing, destination, interim, travel_time, direction)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
-	if(!destination)
-		destination = get_location_area(!location)
-	if(!origin)
-		origin = get_location_area(location)
 
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
-	..(origin, destination)
 
+	..(origin, destination)
 
 	if (destination == area_station) location = 0
 	if (destination == area_offsite) location = 1
