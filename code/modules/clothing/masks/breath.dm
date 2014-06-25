@@ -45,8 +45,7 @@
 	permeability_coefficient = 0.01
 	species_restricted = list("Vox","Vox Armalis")
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/mask.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi'
 		)
 
 	toggle()
