@@ -119,37 +119,6 @@
 	brightness_on = 2
 	w_class = 1
 
-
-// the desk lamps are a bit special
-/obj/item/device/flashlight/lamp
-	name = "desk lamp"
-	desc = "A desk lamp with an adjustable mount."
-	icon_state = "lamp"
-	item_state = "lamp"
-	brightness_on = 5
-	w_class = 4
-	flags = FPRINT | TABLEPASS | CONDUCT
-	m_amt = 0
-	g_amt = 0
-	on = 1
-
-
-// green-shaded desk lamp
-/obj/item/device/flashlight/lamp/green
-	desc = "A classic green-shaded desk lamp."
-	icon_state = "lampgreen"
-	item_state = "lampgreen"
-	brightness_on = 5
-
-
-/obj/item/device/flashlight/lamp/verb/toggle_light()
-	set name = "Toggle light"
-	set category = "Object"
-	set src in oview(1)
-
-	if(!usr.stat)
-		attack_self(usr)
-
 // FLARES
 
 /obj/item/device/flashlight/flare
