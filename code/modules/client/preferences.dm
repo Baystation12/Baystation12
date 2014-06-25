@@ -73,8 +73,9 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
-	var/species = "Human"
+	var/species = "Human"               //Species datum to use.
 	var/language = "None"				//Secondary language
+	var/datum/gear						//Custom/fluff item loadout.
 
 		//Mob preview
 	var/icon/preview_icon = null
@@ -104,7 +105,6 @@ datum/preferences
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
-
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/flavor_text = ""
@@ -131,6 +131,8 @@ datum/preferences
 					return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
+
+	gear = new /datum/gear()
 
 /datum/preferences
 	proc/ZeroSkills(var/forced = 0)

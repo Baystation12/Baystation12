@@ -28,7 +28,7 @@
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
-	
+
 	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
 	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
 
@@ -51,6 +51,9 @@
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
+
+	//Used for character generation fluff items.
+	var/list/custom_gear_options
 
 /datum/species/New()
 	unarmed = new unarmed_type()
@@ -137,6 +140,11 @@
 
 	flesh_color = "#34AF10"
 
+	custom_gear_options = list(
+		"Unathi robe" = /obj/item/clothing/suit/unathi/robe,
+		"Unathi mantle" = /obj/item/clothing/suit/unathi/mantle
+		)
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -160,6 +168,11 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
+
+	custom_gear_options = list(
+	/obj/item/clothing/head/tajaran/scarf
+	/obj/item/clothing/suit/tajaran/furs
+		)
 
 /datum/species/skrell
 	name = "Skrell"
@@ -331,7 +344,7 @@
 	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
-	
+
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
@@ -348,7 +361,7 @@
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
 	var/sharp = 0
 	var/edge = 0
-	
+
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
 
