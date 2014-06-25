@@ -116,11 +116,15 @@
 			cycleDoors(TARGET_INOPEN)
 
 		if("abort")
+			stop_cycling()
+			/*
+			//dont do this. If the airlock can't get enough air to pressurize the person inside is stuck
 			state = STATE_PRESSURIZE
 			target_state = TARGET_NONE
 			memory["target_pressure"] = ONE_ATMOSPHERE
 			signalPump(tag_airpump, 1, 1, memory["target_pressure"])
 			process()
+			*/
 
 		if("force_ext")
 			toggleDoor(memory["exterior_status"], tag_exterior_door, memory["secure"], "toggle")
