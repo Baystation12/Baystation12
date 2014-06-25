@@ -67,7 +67,6 @@
 	var/mob/living/carbon/H = over_object
 	if(!istype(H)) return ..()
 
-	//This REALLY needs to be moved to a general mob proc somewhere.
 	if(H.a_intent == "help")
 		get_scooped(H)
 		return
