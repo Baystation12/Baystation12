@@ -73,12 +73,16 @@ obj/machinery/recharger/process()
 			return
 		if(istype(charging, /obj/item/weapon/melee/baton))
 			var/obj/item/weapon/melee/baton/B = charging
-			if(B.charges < initial(B.charges))
-				B.charges++
-				icon_state = "recharger1"
-				use_power(150)
-			else
-				icon_state = "recharger2"
+			if(B.bcell)
+				if(B.bcell.give(1500)) //Because otherwise it takes two minutes to fully charge due to 15k cells. - Neerti
+					icon_state = "recharger1"
+					use_power(200)
+				else
+					icon_state = "recharger2"
+		else
+			icon_state = "recharger3"
+
+
 
 obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)
@@ -92,7 +96,8 @@ obj/machinery/recharger/emp_act(severity)
 
 	else if(istype(charging, /obj/item/weapon/melee/baton))
 		var/obj/item/weapon/melee/baton/B = charging
-		B.charges = 0
+		if(B.bcell)
+			B.bcell.charge = 0
 	..(severity)
 
 obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
@@ -122,12 +127,14 @@ obj/machinery/recharger/wallcharger/process()
 			return
 		if(istype(charging, /obj/item/weapon/melee/baton))
 			var/obj/item/weapon/melee/baton/B = charging
-			if(B.charges < initial(B.charges))
-				B.charges++
-				icon_state = "wrecharger1"
-				use_power(150)
+			if(B.bcell)
+				if(B.bcell.give(1500)) //Because otherwise it takes two minutes to fully charge due to 15k cells. - Neerti
+					icon_state = "wrecharger1"
+					use_power(200)
+				else
+					icon_state = "wrecharger2"
 			else
-				icon_state = "wrecharger2"
+				icon_state = "wrecharger0"
 
 obj/machinery/recharger/wallcharger/update_icon()
 	if(charging)
