@@ -77,8 +77,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					pod.launch(src)
-			
-			if(autopilot)
+				
 				shuttle.launch(src)
 
 //called when the shuttle has arrived.
@@ -119,7 +118,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	
-	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	captain_announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
@@ -198,7 +197,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns 1 if the shuttle has gone to the station and come back at least once,
 //used for game completion checking purposes
 /datum/emergency_shuttle_controller/proc/returned()
-	return (departed && shuttle.moving_status != SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
+	return (departed && shuttle.moving_status == SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
 
 //returns 1 if the shuttle is not idle at centcom
 /datum/emergency_shuttle_controller/proc/online()
