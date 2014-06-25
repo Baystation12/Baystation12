@@ -26,6 +26,9 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.area_offsite = locate(/area/shuttle/escape/centcom)
 	shuttle.area_station = locate(/area/shuttle/escape/station)
 	shuttle.area_transition = locate(/area/shuttle/escape/transit)
+	shuttle.docking_controller_tag = "escape_shuttle"
+	shuttle.dock_target_station = "escape_dock"
+	shuttle.dock_target_offsite = "centcom_dock"
 	shuttle.transit_direction = NORTH
 	shuttle.move_time = 300
 	//shuttle.docking_controller_tag = "supply_shuttle"
