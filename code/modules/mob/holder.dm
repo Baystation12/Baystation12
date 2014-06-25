@@ -34,6 +34,22 @@
 	for(var/mob/living/M in contents)
 		M.show_message(message,m_type)
 
+//Mob procs and vars for scooping up
+/mob/living/var/holder_type
+
+/mob/living/proc/get_scooped(var/mob/living/carbon/grabber)
+	if(!holder_type)
+		return
+	var/obj/item/weapon/holder/H = new holder_type(loc)
+	src.loc = H
+	H.name = loc.name
+	H.attack_hand(grabber)
+
+	grabber << "You scoop up [src]."
+	src << "[grabber] scoops you up."
+	grabber.status_flags |= PASSEMOTES
+	return
+
 //Mob specific holders.
 
 /obj/item/weapon/holder/diona
