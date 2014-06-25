@@ -2,13 +2,8 @@
 // Gas mixer - omni variant
 //--------------------------------------------
 /obj/machinery/atmospherics/omni/mixer
-	name = "Omni gas mixer"
+	name = "omni gas mixer"
 	icon = 'icons/obj/atmospherics/omni_devices.dmi'
-
-	tag_north = ATM_OUTPUT
-	tag_south = ATM_INPUT
-	tag_east = ATM_INPUT
-	tag_west = ATM_INPUT
 
 	var/list/inputs = new()
 	var/datum/omni_port/output
@@ -112,7 +107,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "omni_mixer.tmpl", name, 360, 330)
+		ui = new(user, src, ui_key, "omni_mixer.tmpl", "Omni Mixer Control", 360, 330)
 		ui.set_initial_data(data)
 
 		ui.open()
