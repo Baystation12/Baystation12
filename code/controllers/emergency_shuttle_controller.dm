@@ -18,53 +18,6 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
 
-/datum/emergency_shuttle_controller/proc/setup_pods()
-	escape_pods = list()
-	
-	var/datum/shuttle/ferry/escape_pod/pod
-	
-	pod = new()
-	pod.location = 0
-	pod.warmup_time = 0
-	pod.area_station = locate(/area/shuttle/escape_pod1/station)
-	pod.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
-	pod.area_transition = locate(/area/shuttle/escape_pod1/transit)
-	pod.transit_direction = NORTH
-	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	escape_pods += pod
-
-	pod = new()
-	pod.location = 0
-	pod.warmup_time = 0
-	pod.area_station = locate(/area/shuttle/escape_pod2/station)
-	pod.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
-	pod.area_transition = locate(/area/shuttle/escape_pod2/transit)
-	pod.transit_direction = NORTH
-	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	escape_pods += pod
-	
-	pod = new()
-	pod.location = 0
-	pod.warmup_time = 0
-	pod.area_station = locate(/area/shuttle/escape_pod3/station)
-	pod.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
-	pod.area_transition = locate(/area/shuttle/escape_pod3/transit)
-	pod.transit_direction = EAST
-	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	escape_pods += pod
-	
-	//There is no pod 4, apparently.
-	
-	pod = new()
-	pod.location = 0
-	pod.warmup_time = 0
-	pod.area_station = locate(/area/shuttle/escape_pod5/station)
-	pod.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
-	pod.area_transition = locate(/area/shuttle/escape_pod5/transit)
-	pod.transit_direction = EAST //should this be WEST? I have no idea.
-	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-	escape_pods += pod
-
 
 /datum/emergency_shuttle_controller/proc/process()
 	if (wait_for_launch)
@@ -76,14 +29,29 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
-					pod.launch(src)
-				
+					if (!pod.arming_controller || pod.arming_controller.armed)
+						pod.launch(src)
+			
+			if (autopilot)
 				shuttle.launch(src)
 
 //called when the shuttle has arrived.
 /datum/emergency_shuttle_controller/proc/shuttle_arrived()
-	if (!shuttle.location && autopilot)	//at station
-		set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
+	if (!shuttle.location)	//at station
+		if (autopilot)
+			set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
+			
+			if (evac)
+				captain_announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
+				world << sound('sound/AI/shuttledock.ogg')
+			else
+				captain_announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(emergency_shuttle.estimate_launch_time()/60,1)] minutes.")
+		
+		//arm the escape pods
+		if (evac)
+			for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+				if (pod.arming_controller)
+					pod.arming_controller.arm()
 
 //begins the launch countdown and sets the amount of time left until launch
 /datum/emergency_shuttle_controller/proc/set_launch_countdown(var/seconds)

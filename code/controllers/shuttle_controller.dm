@@ -30,16 +30,68 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_dock"
 	shuttle.dock_target_offsite = "centcom_dock"
 	shuttle.transit_direction = NORTH
-	shuttle.move_time = 300
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	//shuttle.docking_controller_tag = "supply_shuttle"
 	//shuttle.dock_target_station = "cargo_bay"
 	shuttles["Escape"] = shuttle
 	process_shuttles += shuttle
 	
-	//give the emergency shuttle controller it's shuttle
-	emergency_shuttle.shuttle = shuttle
-	emergency_shuttle.setup_pods()
-	process_shuttles += emergency_shuttle.escape_pods
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod1/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod1/transit)
+	shuttle.docking_controller_tag = "escape_pod_1"
+	shuttle.dock_target_station = "escape_pod_bay_1"
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 1"] = shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod2/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod2/transit)
+	shuttle.transit_direction = NORTH
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 2"] = shuttle
+	
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod3/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod3/transit)
+	shuttle.transit_direction = EAST
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 3"] = shuttle
+	
+	//There is no pod 4, apparently.
+	
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/escape_pod5/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod5/transit)
+	shuttle.transit_direction = EAST //should this be WEST? I have no idea.
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	process_shuttles += shuttle
+	shuttles["Escape Pod 5"] = shuttle
+	
+	//give the emergency shuttle controller it's shuttles
+	emergency_shuttle.shuttle = shuttles["Escape"]
+	emergency_shuttle.escape_pods = list(
+		shuttles["Escape Pod 1"],
+		shuttles["Escape Pod 2"],
+		shuttles["Escape Pod 3"],
+		shuttles["Escape Pod 5"],
+	)
 	
 	// Supply shuttle
 	shuttle = new/datum/shuttle/ferry/supply()
@@ -191,6 +243,13 @@ var/global/datum/shuttle_controller/shuttle_controller
 			multidock = shuttle
 			dock_controller_map_station[multidock.docking_controller_tag_station] = multidock
 			dock_controller_map_offsite[multidock.docking_controller_tag_offsite] = multidock
+	
+	//escape pod arming controllers
+	var/datum/shuttle/ferry/escape_pod/pod
+	var/list/pod_controller_map = list()
+	for (var/datum/shuttle/ferry/escape_pod/P in emergency_shuttle.escape_pods)
+		if (P.dock_target_station)
+			pod_controller_map[P.dock_target_station] = P
 
 	//search for the controllers, if we have one.
 	if (dock_controller_map.len)
@@ -210,6 +269,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 					if (istype(multidock))
 						multidock.docking_controller_offsite = C.program
 						dock_controller_map_offsite -= C.id_tag
+				
+				//escape pods
+				if (C.id_tag in pod_controller_map)
+					pod = pod_controller_map[C.id_tag]
+					if (istype(C.program, /datum/computer/file/embedded_program/docking/simple/escape_pod/))
+						pod.arming_controller = C.program
 	
 	//sanity check
 	if (dock_controller_map.len || dock_controller_map_station.len || dock_controller_map_offsite.len)
