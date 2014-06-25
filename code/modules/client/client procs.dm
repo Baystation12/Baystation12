@@ -331,6 +331,8 @@
 
 	nanomanager.send_resources(src)
 
+	media.update_music()
+
 	//////////////
 	//DISCONNECT//
 	//////////////
