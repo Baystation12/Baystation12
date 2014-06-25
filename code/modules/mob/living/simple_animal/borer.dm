@@ -11,6 +11,8 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
+	message = sanitize(copytext(message, 1, MAX_MESSAGE_LEN))
+
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc
 		src << "You whisper silently, \"[message]\""
