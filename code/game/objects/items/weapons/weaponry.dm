@@ -177,7 +177,6 @@
 	item_state = "metalbat"
 	force = 18
 	w_class = 3.0
-	m_amt = 18750 //5 sheets of metal per bat in the autolathe
 
 /obj/item/weapon/butterfly
 	name = "butterfly knife"
@@ -268,7 +267,6 @@ obj/item/weapon/wirerod
 	force = 8
 	throwforce = 10
 	w_class = 3
-	m_amt = 1875
 	attack_verb = list("hit", "bludgeoned", "whacked", "bonked")
 
 
