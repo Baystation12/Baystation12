@@ -118,7 +118,7 @@ emp_act
 		flash_pain()
 		src <<"\red You have been shot!"
 		del P
-	return
+		return
 //Конец ребаланса арбалета синди
 
 	var/datum/organ/external/organ = get_organ(check_zone(def_zone))

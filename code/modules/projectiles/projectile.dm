@@ -114,49 +114,52 @@
 			for(var/mob/living/simple_animal/smart_animal/SA in view(7))
 				SA.fight(firer , M)
 
-/*		if(A)
-			if (!forcedodge)
-				forcedodge = A.bullet_act(src, def_zone) // searches for return value
-			if(forcedodge == -1) // the bullet passes through a dense object!
-				bumped = 0 // reset bumped variable!
-				if(istype(A, /turf))
-					loc = A
-				else
-					loc = A.loc
-				permutated.Add(A)
-				return 0
-			if(istype(A,/turf))
-				for(var/obj/O in A)
-					O.bullet_act(src)
-				for(var/mob/M in A)
-					M.bullet_act(src, def_zone)
-			density = 0
-			invisibility = 101
-			del(src)
-		return 1 */
+		if(istype(src, /obj/item/projectile/beam))
 
-		spawn(0)
 			if(A)
-				// We get the location before running A.bullet_act, incase the proc deletes A and makes it null
-				var/turf/new_loc = null
-				if(istype(A, /turf))
-					new_loc = A
-				else
-					new_loc = A.loc
-
-				var/permutation = A.bullet_act(src, def_zone) // searches for return value, could be deleted after run so check A isn't null
-
-				if(permutation == -1 || (forcedodge && !istype(A, /turf)))// the bullet passes through a dense object!
+				if (!forcedodge)
+					forcedodge = A.bullet_act(src, def_zone) // searches for return value
+				if(forcedodge == -1) // the bullet passes through a dense object!
 					bumped = 0 // reset bumped variable!
-					loc = new_loc
+					if(istype(A, /turf))
+						loc = A
+					else
+						loc = A.loc
 					permutated.Add(A)
 					return 0
-
+				if(istype(A,/turf))
+					for(var/obj/O in A)
+						O.bullet_act(src)
+					for(var/mob/M in A)
+						M.bullet_act(src, def_zone)
 				density = 0
 				invisibility = 101
 				del(src)
-				return 0
-		return 1	//с ТГ, работает лучше
+			return 1
+
+		else
+			spawn(0)
+				if(A)
+							// We get the location before running A.bullet_act, incase the proc deletes A and makes it null
+					var/turf/new_loc = null
+					if(istype(A, /turf))
+						new_loc = A
+					else
+						new_loc = A.loc
+
+					var/permutation = A.bullet_act(src, def_zone) // searches for return value, could be deleted after run so check A isn't null
+					if(permutation == -1 || (forcedodge && !istype(A, /turf)))// the bullet passes through a dense object!
+						bumped = 0 // reset bumped variable!
+						loc = new_loc
+						permutated.Add(A)
+						return 0
+
+					density = 0
+					invisibility = 101
+					del(src)
+					return 0
+			return 1	//с ТГ, работает лучше
+
 
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
