@@ -11,7 +11,6 @@
 #define ATM_P		6	//Phoron
 #define ATM_N2O		7
 
-
 //--------------------------------------------
 // Omni device cached icon list
 //--------------------------------------------
@@ -52,7 +51,6 @@ var/global/list/omni_icons[]
 	var/mode = 0
 	var/concentration = 1
 	var/con_lock = 0
-	var/target_pressure = 0
 	var/transfer_moles = 0
 	var/datum/gas_mixture/air
 	var/obj/machinery/atmospherics/node
@@ -92,10 +90,7 @@ var/global/list/omni_icons[]
 #define PIPE_COLOR_YELLOW	"#ffcc00"
 #define PIPE_COLOR_PURPLE	"#5c1ec0"
 
-var/global/list/pipe_colors = list("Grey" = null, "Red" = PIPE_COLOR_RED, "Blue" = PIPE_COLOR_BLUE, "Cyan" = PIPE_COLOR_CYAN, "Green" = PIPE_COLOR_GREEN, "Yellow" = PIPE_COLOR_YELLOW, "Purple" = PIPE_COLOR_PURPLE)
-
-/proc/dout(var/string)
-	world << "<B>\blue DEBUG: [string]<B>"
+var/global/list/pipe_colors = list("grey" = null, "red" = PIPE_COLOR_RED, "blue" = PIPE_COLOR_BLUE, "cyan" = PIPE_COLOR_CYAN, "green" = PIPE_COLOR_GREEN, "yellow" = PIPE_COLOR_YELLOW, "purple" = PIPE_COLOR_PURPLE)
 
 /proc/dir_name(var/dir = 0)
 	switch(dir)

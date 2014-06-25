@@ -15,8 +15,6 @@
 	var/icon/icon_off
 	var/icon/icon_error
 
-	var/config_error = 0
-
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
 	var/tag_east = ATM_NONE
@@ -31,9 +29,9 @@
 
 /obj/machinery/atmospherics/omni/New()
 	..()
+	icon_state = "base"
 	
 	ports = new()
-
 	for(var/d in cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
@@ -51,20 +49,21 @@
 	
 	build_icons()
 
-/obj/machinery/atmospherics/omni/mixer/update_icon()
+/obj/machinery/atmospherics/omni/update_icon()
 	if(stat & NOPOWER)
 		overlays = overlays_off
-	else if(config_error)
+		on = 0
+	else if(error_check())
 		overlays = overlays_error
 		on = 0
-	else if(inputs.len > 0 && output)
-		overlays = on ? (overlays_on) : (overlays_off)
 	else
-		overlays = overlays_off
-		on = 0
+		overlays = on ? (overlays_on) : (overlays_off)
 
 	underlays = underlays_current
 
+	return
+
+/obj/machinery/atmospherics/omni/proc/error_check()
 	return
 
 /obj/machinery/atmospherics/omni/power_change()

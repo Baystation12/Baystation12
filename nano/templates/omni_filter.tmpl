@@ -1,0 +1,82 @@
+<div class="item">
+	<div class="itemContent" style="padding: 5px">
+		{{:~link(power ? 'On' : 'Off', null, {'command' : 'power'}, null, power ? 'selected' : 'redBackground')}}
+	</div>
+	<div class="itemContent" style="padding: 5px">
+		{{:~link('Configure', null, {'command' : 'configure'}, null, config ? 'selected' : null)}}
+	</div>
+
+	{{if config}}
+
+	<div style="width: 315px; text-align: center">
+		<div style="float: left">
+			<div class="white" style="height: 26">Port</div>
+			{{for ports}}
+				<div class="average" style="height: 26">{{:dir}} Port</div>
+			{{/for}}
+		</div>
+		<div style="float: left; margin-left: 10">
+			<div class="white" style="height: 26">Input</div>
+			{{for ports}}
+				<div style="height: 26">
+					{{:~link(' ', null, {'command' : 'switch_mode', 'mode' : 'in', 'dir' : dir}, null, input ? 'selected' : null)}}
+				</div>
+			{{/for}}
+		</div>
+		<div style="float: left; margin-left: 10">
+			<div class="white" style="height: 26">Output</div>
+			{{for ports}}
+				<div style="height: 26">
+					{{:~link(' ', null, {'command' : 'switch_mode', 'mode' : 'out', 'dir' : dir}, null, output ? 'selected' : null)}}
+				</div>
+			{{/for}}
+		</div>
+		<div style="float: left; margin-left: 10">
+			<div class="white" style="height: 26">Filter</div>
+			{{for ports}}
+				<div style="height: 26">
+					{{:~link(f_type ? f_type : 'None', null, {'command' : 'switch_filter', 'mode' : f_type, 'dir' : dir}, filter ? null : 'disabled', f_type ? 'selected' : null)}}
+				</div>
+			{{/for}}
+		</div>
+	</div>
+
+	<div class="itemContent" style="padding: 5px">
+		Target Output Pressure: {{:~round(pressure)}} kPa
+	</div>
+	<div class="itemContent" style="padding: 5px">
+		{{:~link('Set Target Pressure', null, {'command' : 'set_pressure'})}}
+	</div>
+
+	{{else}}
+
+	<div style="width: 315px; text-align: center">
+		<div style="float: left">
+			<div class="white" style="height: 26">Port</div>
+			{{for ports}}
+				<div class="average" style="height: 26">{{:dir}} Port</div>
+			{{/for}}
+		</div>
+		<div style="float: left; margin-left: 10">
+			<div class="white" style="height: 26">Mode</div>
+			{{for ports}}
+				<div style="height: 26">
+						{{if input}}
+							Input
+						{{else output}}
+							Output
+						{{else f_type}}
+							{{:f_type}}
+						{{else}}
+							Disabled
+						{{/if}}
+				</div>
+			{{/for}}
+		</div>
+	</div>
+
+	<div class="itemContent" style="padding: 5px">
+		Target Output Pressure: {{:~round(pressure)}} kPa
+	</div>
+	{{/if}}
+</div>

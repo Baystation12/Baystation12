@@ -13,10 +13,6 @@
 	var/list/inputs = new()
 	var/datum/omni_port/output
 
-/obj/machinery/atmospherics/omni/mixer/New()
-	..()
-	icon_state = "base"
-
 /obj/machinery/atmospherics/omni/mixer/Del()
 	inputs.Cut()
 	output = null
@@ -31,7 +27,6 @@
 				inputs -= P
 
 			P.air.volume = 200
-			P.target_pressure = 0
 			switch(P.mode)
 				if(ATM_INPUT)
 					inputs += P
@@ -43,13 +38,15 @@
 
 	if(output)
 		output.air.volume *= 0.75 * inputs.len
-		output.target_pressure = target_pressure
 		output.concentration = 1
 
-	if(!output || inputs.len > 3 || inputs.len < 2)
-		config_error = 1
-	else
-		config_error = 0
+/obj/machinery/atmospherics/omni/mixer/error_check()
+	if(!output || !inputs)
+		return 1
+	if(inputs.len < 2 || inputs.len > 3) //requires 2 or 3 inputs ~otherwise why are you using a mixer?
+		return 1
+
+	return 0
 
 /obj/machinery/atmospherics/omni/mixer/process()
 	..()
@@ -60,13 +57,13 @@
 	var/output_pressure = output_air.return_pressure()
 
 
-	if(output_pressure >= output.target_pressure * 0.999)
+	if(output_pressure >= target_pressure * 0.999)
 		//No need to mix if target is already full! - 0.1% margin of error so we minimize processing minor gas volumes
 		return 1
 
 	//Calculate necessary moles to transfer using PV=nRT
 
-	var/pressure_delta = output.target_pressure - output_pressure
+	var/pressure_delta = target_pressure - output_pressure
 
 	for(var/datum/omni_port/P in inputs)
 		if(P.air.return_temperature() > 0)
@@ -96,16 +93,14 @@
 	for(var/datum/omni_port/P in inputs)
 		if(P.transfer_moles > 0)
 			output_air.merge(P.air.remove(P.transfer_moles))
-
-	for(var/datum/omni_port/P in inputs)
-		if(P.network && P.transfer_moles)
-			P.network.update = 1
+			if(P.network)
+				P.network.update = 1
+			P.transfer_moles = 0
 
 	if(output.network)
 		output.network.update = 1
 
 	return 1
-
 
 /obj/machinery/atmospherics/omni/mixer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	usr.set_machine(src)
@@ -117,7 +112,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "omni_mixer.tmpl", src.name, 360, 330)
+		ui = new(user, src, ui_key, "omni_mixer.tmpl", name, 360, 330)
 		ui.set_initial_data(data)
 
 		ui.open()
@@ -135,26 +130,26 @@
 
 		var/input = 0
 		var/output = 0
-		if(P.mode == ATM_INPUT)
-			input = 1
-		else if(P.mode == ATM_OUTPUT)
-			output = 1
+		switch(P.mode)
+			if(ATM_INPUT)
+				input = 1
+			if(ATM_OUTPUT)
+				output = 1
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir), \
 										"concentration" = P.concentration, \
 										"input" = input, \
 										"output" = output, \
-										"pressure" = P.target_pressure, \
 										"con_lock" = P.con_lock)
 
 	if(portData.len)
 		data["ports"] = portData
 	if(output)
-		data["pressure"] = output.target_pressure
+		data["pressure"] = target_pressure
 
 	return data
 
-/obj/machinery/atmospherics/omni/mixer/Topic(href,href_list)
+/obj/machinery/atmospherics/omni/mixer/Topic(href, href_list)
 	if(..()) return
 
 	switch(href_list["command"])
@@ -168,13 +163,12 @@
 			if(configuring)
 				on = 0
 
-	//only allows config changes when in configuring mode
+	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if(configuring && !on)
 		switch(href_list["command"])
 			if("set_pressure")
 				var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",target_pressure) as num
-				target_pressure = between(0, new_pressure, 4500) // max(0, min(4500, new_pressure))
-				output.target_pressure = target_pressure
+				target_pressure = between(0, new_pressure, 4500)
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), href_list["mode"])
 			if("switch_con")
@@ -187,13 +181,14 @@
 	return
 
 /obj/machinery/atmospherics/omni/mixer/proc/switch_mode(var/port = NORTH, var/mode = ATM_NONE)
-	switch(mode)
-		if("in")
-			mode = ATM_INPUT
-		if("out")
-			mode = ATM_OUTPUT
-		if("none")
-			mode = ATM_NONE
+	if(mode != ATM_INPUT && mode != ATM_OUTPUT)
+		switch(mode)
+			if("in")
+				mode = ATM_INPUT
+			if("out")
+				mode = ATM_OUTPUT
+			else
+				mode = ATM_NONE
 
 	for(var/datum/omni_port/P in ports)
 		var/old_mode = P.mode
@@ -217,13 +212,9 @@
 				if(ATM_NONE)
 					initialize_directions &= ~P.dir
 					P.disconnect()
-				if(ATM_INPUT)
+				else
 					initialize_directions |= P.dir
 					P.connect()
-				if(ATM_OUTPUT)
-					initialize_directions |= P.dir
-					P.connect()
-
 			P.update = 1
 
 	update_ports()
