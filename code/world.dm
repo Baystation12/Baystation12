@@ -268,6 +268,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	fdel(F)
 	F << the_mode
 
+/hook/startup/proc/loadMusic()
+	for(var/obj/machinery/media/jukebox/J in machines)
+		J.process()
+	return 1
 
 /hook/startup/proc/loadMOTD()
 	world.load_motd()
