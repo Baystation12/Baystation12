@@ -26,7 +26,7 @@
 /obj/vehicle/train/ambulance/trolley
 	name = "ambulance train trolley"
 	icon = 'icons/vehicles/CargoTrain.dmi'
-	icon_state = "trolley"
+	icon_state = "ambulance"
 	anchored = 0
 	passenger_allowed = 1
 	locked = 0
