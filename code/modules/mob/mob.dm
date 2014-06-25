@@ -987,10 +987,10 @@ mob/proc/yank_out_object()
 					affected = organ
 
 		affected.implants -= selection
-		H.shock_stage+=10
+		H.shock_stage+=20
 		H.bloody_hands(S)
 
-		if(prob(40)) //I'M SO ANEMIC I COULD JUST -DIE-.
+		if(prob(25)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (15)
 			affected.wounds += I
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
