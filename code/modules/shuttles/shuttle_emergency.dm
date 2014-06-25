@@ -11,10 +11,10 @@
 		travel_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	else
 		travel_time = SHUTTLE_TRANSIT_DURATION
-	
+
 	//update move_time so we get correct ETAs
 	move_time = travel_time
-	
+
 	..()
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
@@ -22,10 +22,23 @@
 		last_move_time = world.time
 	else
 		last_move_time = null
-	
+
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
-		captain_announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+
+		if (emergency_shuttle.evac)
+			captain_announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+		else
+			captain_announce("The Crew Transfer Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
+
+	if (destination == area_station) //arrived at the station
+		if(autopilot)
+			if (evac)
+				captain_announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
+				world << sound('sound/AI/shuttledock.ogg')
+			else
+				captain_announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(estimate_launch_time()/60,1)] minutes.")
+
 	..(origin, destination)
 
 /datum/shuttle/ferry/emergency/launch(var/user)
@@ -35,25 +48,25 @@
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
 		if (!C.has_authorization())
 			return
-		
+
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</B>"
-	
+
 	..(user)
 
 /datum/shuttle/ferry/emergency/force_launch(var/user)
 	if (!can_force()) return
-	
+
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
 		if (!C.has_authorization())
 			return
-		
+
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</B>"
-	
+
 	..(user)
 
 /datum/shuttle/ferry/emergency/cancel_launch(var/user)
@@ -63,17 +76,17 @@
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
 		if (!C.has_authorization())
 			return
-		
+
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</B>"
-	
+
 	..(user)
 
 /obj/machinery/computer/shuttle_control/emergency
 	shuttle_tag = "Escape"
 	var/debug = 0
-	var/req_authorizations = 3
+	var/req_authorizations = 2
 	var/list/authorized = list()
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
@@ -81,32 +94,34 @@
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/ident)
+	if (!ident)
+		return 0
 	if (authorized.len >= req_authorizations)
 		return 0	//don't need any more
 
 	var/list/access
 	var/auth_name
 	var/dna_hash
-	
+
 	if(istype(ident, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/ID = ident
 		access = ID.access
 		auth_name = "[ID.registered_name] ([ID.assignment])"
 		dna_hash = ID.dna_hash
-		
+
 	if(istype(ident, /obj/item/device/pda))
 		var/obj/item/device/pda/PDA = ident
 		access = PDA.id.access
 		auth_name = "[PDA.id.registered_name] ([PDA.id.assignment])"
 		dna_hash = PDA.id.dna_hash
-	
+
 	if (!access || !istype(access))
 		return 0	//not an ID
-	
+
 	if (dna_hash in authorized)
 		src.visible_message("[src] buzzes. That ID has already been scanned.")
 		return 0
-	
+
 	if (!(access_heads in access))
 		src.visible_message("[src] buzzes, rejecting [ident].")
 		return 0
@@ -114,18 +129,18 @@
 	src.visible_message("[src] beeps as it scans [ident].")
 	authorized[dna_hash] = auth_name
 	if (req_authorizations - authorized.len)
-		world << "\blue <B>Alert: [req_authorizations - authorized.len] authorization\s needed override the shuttle autopilot.</B>"
+		world << "\blue <B>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</B>"
 	return 1
-	
-	
-		
+
+
+
 
 /obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
 		user << "\blue You short out the [src]'s authorization protocols."
 		emagged = 1
 		return
-	
+
 	read_authorization(W)
 	..()
 
@@ -159,7 +174,7 @@
 
 	//build a list of authorizations
 	var/list/auth_list[req_authorizations]
-	
+
 	if (!emagged)
 		var/i = 1
 		for (var/dna_hash in authorized)
@@ -170,9 +185,9 @@
 	else
 		for (var/i = 1; i <= req_authorizations; i++)
 			auth_list[i] = list("auth_name"="<font color=\"red\">ERROR</font>", "auth_hash"=null)
-	
+
 	var/has_auth = has_authorization()
-	
+
 	data = list(
 		"shuttle_status" = shuttle_status,
 		"shuttle_state" = shuttle_state,
@@ -236,9 +251,9 @@
 	for(var/obj/machinery/door/D in origin)
 		spawn(0)
 			D.close()
-	
+
 	..(origin, destination)
-	
+
 	for(var/obj/machinery/door/D in destination)
 		spawn(0)
 			D.open()

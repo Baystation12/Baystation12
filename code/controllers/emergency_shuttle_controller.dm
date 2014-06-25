@@ -77,8 +77,6 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					pod.launch(src)
-
-			if(autopilot)
 				shuttle.launch(src)
 
 //called when the shuttle has arrived.
@@ -119,7 +117,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
 
-	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+	captain_announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
