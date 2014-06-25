@@ -318,8 +318,8 @@
 		src.modules += new /obj/item/weapon/matter_decompiler(src)
 		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
 
-		src.emag = new /obj/item/weapon/card/emag(src)
-		src.emag.name = "Cryptographic Sequencer"
+		src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+		src.emag.name = "Plasma Cutter"
 
 		for(var/T in stacktypes)
 			var/obj/item/stack/sheet/W = new T(src)
