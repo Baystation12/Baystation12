@@ -139,8 +139,9 @@
 			if (radiation > 100)
 				radiation = 100
 				Weaken(10)
-				src << "\red You feel weak."
-				emote("collapse")
+				if(!lying)
+					src << "\red You feel weak."
+					emote("collapse")
 
 			switch(radiation)
 				if(1 to 49)
@@ -154,8 +155,9 @@
 					if(prob(5))
 						radiation -= 5
 						Weaken(3)
-						src << "\red You feel weak."
-						emote("collapse")
+						if(!lying)
+							src << "\red You feel weak."
+							emote("collapse")
 
 				if(75 to 100)
 					radiation -= 3
