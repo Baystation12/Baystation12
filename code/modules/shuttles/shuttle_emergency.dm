@@ -31,14 +31,6 @@
 		else
 			captain_announce("The Crew Transfer Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
 
-	if (destination == area_station) //arrived at the station
-		if(autopilot)
-			if (evac)
-				captain_announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
-				world << sound('sound/AI/shuttledock.ogg')
-			else
-				captain_announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(estimate_launch_time()/60,1)] minutes.")
-
 	..(origin, destination)
 
 /datum/shuttle/ferry/emergency/launch(var/user)
@@ -233,9 +225,11 @@
 
 
 /datum/shuttle/ferry/escape_pod
-	//pass
+	var/datum/computer/file/embedded_program/docking/simple/escape_pod/arming_controller
 
 /datum/shuttle/ferry/escape_pod/can_launch()
+	if(arming_controller && !arming_controller.armed)
+		return 0
 	if(location)
 		return 0	//it's a one-way trip.
 	return ..()
@@ -245,15 +239,3 @@
 
 /datum/shuttle/ferry/escape_pod/can_cancel()
 	return 0
-
-//TODO replace this with proper door controllers
-/datum/shuttle/ferry/escape_pod/move(var/area/origin,var/area/destination)
-	for(var/obj/machinery/door/D in origin)
-		spawn(0)
-			D.close()
-
-	..(origin, destination)
-
-	for(var/obj/machinery/door/D in destination)
-		spawn(0)
-			D.open()
