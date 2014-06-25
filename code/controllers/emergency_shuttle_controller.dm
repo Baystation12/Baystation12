@@ -7,22 +7,22 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 /datum/emergency_shuttle_controller
 	var/datum/shuttle/ferry/emergency/shuttle
 	var/list/escape_pods
-	
+
 	var/launch_time			//the time at which the shuttle will be launched
 	var/auto_recall = 0		//if set, the shuttle will be auto-recalled
 	var/auto_recall_time	//the time at which the shuttle will be auto-recalled
 	var/evac = 0			//1 = emergency evacuation, 0 = crew transfer
 	var/wait_for_launch = 0	//if the shuttle is waiting to launch
 	var/autopilot = 1		//set to 0 to disable the shuttle automatically launching
-	
+
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
 
 /datum/emergency_shuttle_controller/proc/setup_pods()
 	escape_pods = list()
-	
+
 	var/datum/shuttle/ferry/escape_pod/pod
-	
+
 	pod = new()
 	pod.location = 0
 	pod.warmup_time = 0
@@ -42,7 +42,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.transit_direction = NORTH
 	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
-	
+
 	pod = new()
 	pod.location = 0
 	pod.warmup_time = 0
@@ -52,9 +52,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	pod.transit_direction = EAST
 	pod.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 	escape_pods += pod
-	
+
 	//There is no pod 4, apparently.
-	
+
 	pod = new()
 	pod.location = 0
 	pod.warmup_time = 0
@@ -72,12 +72,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()
-			
+
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					pod.launch(src)
-			
+
 			if(autopilot)
 				shuttle.launch(src)
 
@@ -97,12 +97,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //calls the shuttle for an emergency evacuation
 /datum/emergency_shuttle_controller/proc/call_evac()
 	if(!can_call()) return
-	
+
 	//set the launch timer
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
-	
+
 	evac = 1
 	captain_announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 	world << sound('sound/AI/shuttlecalled.ogg')
@@ -118,7 +118,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
-	
+
 	captain_announce("A crew transfer has been initiated. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
@@ -131,7 +131,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	if (evac)
 		captain_announce("The emergency shuttle has been recalled.")
 		world << sound('sound/AI/shuttlerecalled.ogg')
-		
+
 		for(var/area/A in world)
 			if(istype(A, /area/hallway))
 				A.readyreset()
@@ -166,7 +166,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return SHUTTLE_PREPTIME * 3		//15 minutes
 
 	return SHUTTLE_PREPTIME
-	
+
 
 /*
 	These procs are not really used by the controller itself, but are for other parts of the
@@ -198,7 +198,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns 1 if the shuttle has gone to the station and come back at least once,
 //used for game completion checking purposes
 /datum/emergency_shuttle_controller/proc/returned()
-	return (departed && shuttle.moving_status != SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
+	(departed && shuttle.moving_status == SHUTTLE_IDLE && shuttle.location)	//we've gone to the station at least once, no longer in transit and are idle back at centcom
 
 //returns 1 if the shuttle is not idle at centcom
 /datum/emergency_shuttle_controller/proc/online()
