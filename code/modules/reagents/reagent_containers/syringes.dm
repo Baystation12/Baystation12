@@ -11,7 +11,7 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
-	g_amt = 150
+	matter = list("glass" = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
@@ -236,7 +236,7 @@
 
 		if(istype(target, /mob/living/carbon/human))
 
-			var/target_zone = check_zone(user.zone_sel.selecting, target)
+			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
 			var/datum/organ/external/affecting = target:get_organ(target_zone)
 
 			if (!affecting)

@@ -285,10 +285,8 @@
 				data = " - Mundane object (archaic xenos origins)<br>"
 
 				var/obj/item/weapon/archaeological_find/A = scanned_item
-				if(A.speaking_to_players)
-					data = " - Exhibits properties consistent with sonic reproduction.<br>"
-				if(A.listening_to_players)
-					data = " - Exhibits properties similar to audio capture technology.<br>"
+				if(A.talking_atom)
+					data = " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
 
 		var/anom_found = 0
 		if(G)

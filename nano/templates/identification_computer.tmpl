@@ -1,0 +1,236 @@
+{{if printing}}
+  <h5 class='average'>The computer is currently busy.</h5>
+  <div class='notice'>
+    <center><span class='bad'>Printing...</span></center>
+  </div>
+  <p>
+    Thank you for your patience!
+  </p>
+{{else}}
+  {{:~link('Access Modification', 'home', {'choice' : 'mode', 'mode_target' : 0}, !mode ? 'disabled' : null)}}
+  {{:~link('Crew Manifest', 'folder-open', {'choice' : 'mode', 'mode_target' : 1}, mode ? 'disabled' : null)}}
+  {{:~link('Print', 'print', {'choice' : 'print'}, (mode || has_modify) ? null : 'disabled')}}
+
+  {{if mode}}
+    <div class='item'>
+      <h2>Crew Manifest</h2>
+    </div>
+    <div class='item'>
+      {{:manifest}}
+    </div>
+  {{else}}
+    <div class='item'>
+      <h2>Access Modification</h2>
+    </div>
+
+    {{if !authenticated}}
+      <span class='alert'><i>Please insert the IDs into the terminal to proceed.</i></span><br>
+    {{/if}}
+
+    <div class='item'>
+      <div class='itemLabel'>
+        Target Identity:
+      </div>
+      <div class='itemContent'>
+        {{:~link(target_name, 'eject', {'choice' : 'modify'})}}
+      </div>
+    </div>
+    <div class='item'>
+      <div class='itemLabel'>
+        Authorized Identity:
+      </div>
+      <div class='itemContent'>
+        {{:~link(scan_name, 'eject', {'choice' : 'scan'})}}
+      </div>
+    </div>
+    <hr>
+
+    {{if authenticated}}
+      <script type="text/javascript">
+        function markRed(){
+          var nameField = document.getElementById('namefield');
+          nameField.style.backgroundColor = "#FFDDDD";
+        }
+        function markGreen(){
+          var nameField = document.getElementById('namefield');
+          nameField.style.backgroundColor = "#DDFFDD";
+        }
+        function markAccountGreen(){
+          var nameField = document.getElementById('accountfield');
+          nameField.style.backgroundColor = "#DDFFDD";
+        }
+        function markAccountRed(){
+          var nameField = document.getElementById('accountfield');
+          nameField.style.backgroundColor = "#FFDDDD";
+        }
+        function showAll(){
+          var allJobsSlot = document.getElementById('alljobsslot');
+          allJobsSlot.innerHTML = "<a href='#' onclick='hideAll()'>Hide</a><br>";
+          var allJobs = document.getElementById('all-jobs');
+          allJobs.style.display = 'block';
+        }
+        function hideAll(){
+          var allJobsSlot = document.getElementById('alljobsslot');
+          allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>{{:target_rank}}</a>";
+          var allJobs = document.getElementById('all-jobs');
+          allJobs.style.display = 'none';
+        }
+      </script>
+
+      {{if has_modify}}
+        <div class='item'>
+          <h2>Details</h2>
+        </div>
+
+        <form name='cardcomp' action='?src={{:src}}' method='get'>
+          <div class='item'>
+            <div class='itemLabel'>
+              <input type='hidden' name='src' value='{{:src}}'>
+              <input type='hidden' name='choice' value='reg'>
+              Registered Name:
+            </div>
+            <div class='itemContent'>
+              <input type='text' id='namefield' name='reg' value='{{:target_owner}}' onchange='markRed()'>
+              <input type='submit' value='Rename' onclick='markGreen()'>
+            </div>
+          </div>
+        </form>
+
+        <form name='accountnum' action='?src={{:src}}' method='get'>
+          <div class='item'>
+            <div class='itemLabel'>
+              <input type='hidden' name='src' value='{{:src}}'>
+              <input type='hidden' name='choice' value='account'>
+              Account Number:
+            </div>
+            <div class='itemContent'>
+              <input type='text' id='accountfield' name='account' value='{{:account_number}}' onchange='markAccountRed()'>
+              <input type='submit' value='Modify' onclick='markAccountGreen()'>
+            </div>
+          </div>
+        </form>
+
+        <div class='item'>
+          <div class='itemLabel'>
+            Terminations:
+          </div>
+          <div class='itemContent'>
+            {{:~link('Terminate ' + target_owner, 'gear', {'choice' : 'terminate'}, target_rank == "Terminated" ? 'disabled' : null, target_rank == "Terminated" ? 'disabled' : 'linkDanger')}}
+          </div>
+        </div>
+
+        <div class='item'>
+          <h2>Assignment</h2>
+        </div>
+
+        <div class='item'>
+          <span id='alljobsslot'>
+            <a href='#' onclick='showAll()'>{{:target_rank}}</a>
+          </span>
+        </div>
+        <div class='item'>
+          <div id="all-jobs" style='display: none;'>
+            <table>
+              <tr>
+                <th></th><th>Command</th>
+              </tr>
+              <tr>
+                <th>Special</th>
+                <td>
+                  {{:~link("Captain", '', {'choice' : 'assign', 'assign_target' : 'Captain'}, target_rank == 'Captain' ? 'disabled' : null)}}
+                  {{:~link("Custom", '', {'choice' : 'assign', 'assign_target' : 'Custom'})}}
+                </td>
+              </tr>
+              <tr>
+                <th style="color: '#FFA500';">Engineering</th>
+                <td>
+                  {{for engineering_jobs}}
+                    {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>
+                <th style="color: '#008000';">Medical</th>
+                <td>
+                  {{for medical_jobs}}
+                    {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>
+                <th style="color: '#800080';">Science</th>
+                <td>
+                  {{for science_jobs}}
+                    {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>
+                <th style="color: '#DD0000';">Security</th>
+                <td>
+                  {{for security_jobs}}
+                    {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>
+                <th style="color: '#808080';">Civilian</th>
+                <td>
+                  {{for civilian_jobs}}
+                    {{if #index && #index % 6 === 0}}
+                      </td></tr><tr><th></th><td>
+                    {{/if}}
+                    {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              {{if centcom_access}}
+                <tr>
+                  <th style="color: '#A52A2A';">CentCom</th>
+                  <td>
+                    {{for centcom_jobs}}
+                      {{if #index % 6 === 0}}
+                        </td></tr><tr><th></th><td>
+                      {{/if}}
+
+                      {{:~link(display_name, '', {'choice' : 'assign', 'assign_target' : job}, target_rank == job ? 'disabled' : null)}}
+                    {{/for}}
+                  </td>
+                </tr>
+              {{/if}}
+            </table>
+          </div>
+        </div>
+
+        {{if centcom_access}}
+          <div class='item'>
+            <h2>Central Command</h2>
+          </div>
+          <div class='item' style='width: 100%'>
+            {{for all_centcom_access}}
+              <div class='itemContentWide'>
+              {{:~link(desc, '', {'choice' : 'access', 'access_target' : ref, 'allowed' : allowed}, null, allowed ? 'selected' : null)}}
+              </div>
+            {{/for}}
+          </div>
+        {{else}}
+          <div class='item'>
+            <h2>{{:station_name}}</h2>
+          </div>
+          <div class='item' style='width: 100%'>
+            {{for regions}}
+              <div style='float: left; width: 175px; min-height: 250px'>
+                <div class='average'><b>{{:name}}</b></div>
+                {{for accesses}}
+                  <div class='itemContentWide'>
+                    {{:~link(desc, '', {'choice' : 'access', 'access_target' : ref, 'allowed' : allowed}, null, allowed ? 'selected' : null)}}
+                  </div>
+                {{/for}}
+              </div>
+            {{/for}}
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+{{/if}}

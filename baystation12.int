@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\carbon\human\human_damage.dm;code\game\objects\items\weapons\stunbaton.dm;interface\interface.dm
-LAST_COMPILE_VERSION: 501.1217
-DIR: code code\game code\game\area code\game\machinery\bots code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human interface 
-FILE: code\modules\mob\living\carbon\human\human_damage.dm
-LAST_COMPILE_TIME: 1403690764
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

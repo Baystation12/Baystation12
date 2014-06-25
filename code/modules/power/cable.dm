@@ -212,8 +212,7 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	m_amt = 50
-	g_amt = 20
+	matter = list("metal" = 50, "glass" = 20)
 	flags = TABLEPASS | FPRINT | CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"
@@ -229,6 +228,8 @@
 	src.amount = length
 	if (param_color)
 		color = param_color
+	else
+		color = item_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
@@ -237,6 +238,7 @@
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!color)
 		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+		item_color = color
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"

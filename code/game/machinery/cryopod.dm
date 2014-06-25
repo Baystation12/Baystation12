@@ -26,7 +26,7 @@ var/global/list/frozen_items = list()
 /obj/machinery/computer/cryopod/attack_ai()
 	src.attack_hand()
 
-obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
+/obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	if(stat & (NOPOWER|BROKEN))
 		return
 
@@ -43,12 +43,11 @@ obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
 	dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 	dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
-	dat += "<a href='?src=\ref[src];crew=1'>Revive crew</a>.<br/><hr/>"
 
 	user << browse(dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
-obj/machinery/computer/cryopod/Topic(href, href_list)
+/obj/machinery/computer/cryopod/Topic(href, href_list)
 
 	if(..())
 		return
@@ -94,9 +93,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		for(var/obj/item/I in frozen_items)
 			I.loc = get_turf(src)
 			frozen_items -= I
-
-	else if(href_list["crew"])
-		user << "\red Functionality unavailable at this time."
 
 	src.updateUsrDialog()
 	return
@@ -240,7 +236,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
-			
+
 			if(PDA_Manifest.len)
 				PDA_Manifest.Cut()
 			for(var/datum/data/record/R in data_core.medical)

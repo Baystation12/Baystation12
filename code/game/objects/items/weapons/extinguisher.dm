@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10.0
-	m_amt = 90
+	matter = list("metal" = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
 	var/last_use = 1.0
@@ -28,7 +28,6 @@
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
-	m_amt = 0
 	max_water = 30
 	sprite_name = "miniFE"
 
@@ -78,8 +77,12 @@
 
 		if(usr.buckled && isobj(usr.buckled) && !usr.buckled.anchored )
 			spawn(0)
+				var/obj/structure/stool/bed/chair/C = null
+				if(istype(usr.buckled, /obj/structure/stool/bed/chair))
+					C = usr.buckled
 				var/obj/B = usr.buckled
 				var/movementdirection = turn(direction,180)
+				if(C)	C.propelled = 1
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(1)
 				B.Move(get_step(usr,movementdirection), movementdirection)
@@ -91,6 +94,7 @@
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(2)
 				B.Move(get_step(usr,movementdirection), movementdirection)
+				if(C)	C.propelled = 0
 				sleep(3)
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(3)

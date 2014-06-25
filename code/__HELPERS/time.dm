@@ -1,3 +1,9 @@
+#define SECOND *10
+#define SECONDS *10
+
+#define MINUTE *600
+#define MINUTES *600
+
 //Returns the world time in english
 proc/worldtime2text(time = world.time)
 	return "[round(time / 36000)+12]:[(time / 600 % 60) < 10 ? add_zero(time / 600 % 60, 1) : time / 600 % 60]"

@@ -6,6 +6,10 @@
 		message_admins("[usr.key] has attempted to override the admin panel!")
 		return
 
+	if(ticker.mode && ticker.mode.check_antagonists_topic(href, href_list))
+		check_antagonists()
+		return
+
 	if(href_list["makeAntag"])
 		switch(href_list["makeAntag"])
 			if("1")
@@ -210,36 +214,37 @@
 
 		switch(href_list["call_shuttle"])
 			if("1")
-				if ((!( ticker ) || emergency_shuttle.location))
+				if ((!( ticker ) || !emergency_shuttle.location()))
 					return
-				emergency_shuttle.incall()
-				captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
-				log_admin("[key_name(usr)] called the Emergency Shuttle")
-				message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
+				if (emergency_shuttle.can_call())
+					emergency_shuttle.call_evac()
+					log_admin("[key_name(usr)] called the Emergency Shuttle")
+					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
 
 			if("2")
-				if ((!( ticker ) || emergency_shuttle.location || emergency_shuttle.direction == 0))
+				if (!( ticker ) || !emergency_shuttle.location())
 					return
-				switch(emergency_shuttle.direction)
-					if(-1)
-						emergency_shuttle.incall()
-						captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
-						log_admin("[key_name(usr)] called the Emergency Shuttle")
-						message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
-					if(1)
-						emergency_shuttle.recall()
-						log_admin("[key_name(usr)] sent the Emergency Shuttle back")
-						message_admins("\blue [key_name_admin(usr)] sent the Emergency Shuttle back", 1)
+				if (emergency_shuttle.can_call())
+					emergency_shuttle.call_evac()
+					log_admin("[key_name(usr)] called the Emergency Shuttle")
+					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
+				
+				else if (emergency_shuttle.can_recall())
+					emergency_shuttle.recall()
+					log_admin("[key_name(usr)] sent the Emergency Shuttle back")
+					message_admins("\blue [key_name_admin(usr)] sent the Emergency Shuttle back", 1)
 
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["edit_shuttle_time"])
 		if(!check_rights(R_SERVER))	return
 
-		emergency_shuttle.settimeleft( input("Enter new shuttle duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.timeleft() ) as num )
-		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [emergency_shuttle.timeleft()]")
-		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
-		message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [emergency_shuttle.timeleft()]", 1)
+		var/new_time_left = input("Enter new shuttle launch duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.estimate_launch_time() ) as num
+
+		emergency_shuttle.launch_time = world.time + new_time_left*10
+
+		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [new_time_left]")
+		message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [new_time_left*10]", 1)
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])
@@ -1916,32 +1921,23 @@
 					ticker.mode.finalize_traitor(A.mind)
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
-			if("moveminingshuttle")
-				if(mining_shuttle_moving)
-					return
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShM")
-				move_mining_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
-				log_admin("[key_name(usr)] moved the mining shuttle")
-			if("moveadminshuttle")
+
+			if("moveshuttle")
+
+				if(!shuttles) return // Something is very wrong, the global shuttle list has not been created.
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShA")
-				move_admin_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom administration shuttle", 1)
-				log_admin("[key_name(usr)] moved the centcom administration shuttle")
-			if("moveferry")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShF")
-				move_ferry()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom ferry", 1)
-				log_admin("[key_name(usr)] moved the centcom ferry")
-			if("movealienship")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShX")
-				move_alien_ship()
-				message_admins("\blue [key_name_admin(usr)] moved the alien dinghy", 1)
-				log_admin("[key_name(usr)] moved the alien dinghy")
+
+				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles
+
+				if(shuttle_tag)
+					var/datum/shuttle/S = shuttles[shuttle_tag]
+					if(istype(S) && S.moving_status == 0)
+						S.move()
+						message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
+						log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
+
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")

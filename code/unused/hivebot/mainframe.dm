@@ -23,10 +23,11 @@
 	..()
 	statpanel("Status")
 	if (src.client.statpanel == "Status")
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		if(emergency_shuttle)
+			if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
+				var/timeleft = emergency_shuttle.estimate_arrival_time()
+				if (timeleft)
+					stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 /*
 		if(ticker.mode.name == "AI malfunction")
 			stat(null, "Points left until the AI takes over: [AI_points]/[AI_points_win]")
@@ -63,16 +64,16 @@
 
 
 /mob/living/silicon/hive_mainframe/say_understands(var/other)
-	if (istype(other, /mob/living/carbon/human))
-		return 1
-	if (istype(other, /mob/living/silicon/robot))
-		return 1
-	if (istype(other, /mob/living/silicon/hivebot))
-		return 1
-	if (istype(other, /mob/living/silicon/ai))
-		return 1
-	if (istype(other, /mob/living/carbon/human/tajaran))
-		return 1
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/human))
+			return 1
+		if (istype(other, /mob/living/silicon/robot))
+			return 1
+		if (istype(other, /mob/living/silicon/hivebot))
+			return 1
+		if (istype(other, /mob/living/silicon/ai))
+			return 1
 	return ..()
 
 /mob/living/silicon/hive_mainframe/say_quote(var/text)

@@ -86,9 +86,6 @@
 					for(var/coin_type in typesof(/obj/item/weapon/coin))
 						possible_spawns += coin_type
 
-					//no icon_state for mythril coins
-					possible_spawns -= /obj/item/weapon/coin/mythril
-
 					var/coin_type = pick(possible_spawns)
 					for(var/i=0,i<amount,i++)
 						new coin_type(C)

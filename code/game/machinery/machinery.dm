@@ -258,3 +258,28 @@ Class Procs:
 
   state(text, "blue")
   playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+
+/obj/machinery/proc/shock(mob/user, prb)
+	if(stat & (BROKEN|NOPOWER))
+		return 0
+	if(!prob(prb))
+		return 0
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(5, 1, src)
+	s.start()
+	if (electrocute_mob(user, get_area(src), src, 0.7))
+		return 1
+	else
+		return 0
+
+/obj/machinery/proc/dismantle()
+	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.state = 2
+	M.icon_state = "box_1"
+	for(var/obj/I in component_parts)
+		if(I.reliability != 100 && crit_fail)
+			I.crit_fail = 1
+		I.loc = loc
+	del(src)
+	return 1

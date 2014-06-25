@@ -518,9 +518,8 @@
 
 	can_attach(obj/mecha/M as obj)
 		if(..())
-			if(!istype(M, /obj/mecha/combat/honker))
-				if(!M.proc_res["dynattackby"])
-					return 1
+			if(!M.proc_res["dynattackby"])
+				return 1
 		return 0
 
 	attach(obj/mecha/M as obj)
@@ -569,9 +568,8 @@
 
 	can_attach(obj/mecha/M as obj)
 		if(..())
-			if(!istype(M, /obj/mecha/combat/honker))
-				if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
-					return 1
+			if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
+				return 1
 		return 0
 
 	attach(obj/mecha/M as obj)
