@@ -21,6 +21,7 @@
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
+	holder_type = /obj/item/weapon/holder/cat
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!
@@ -63,18 +64,11 @@
 
 /mob/living/simple_animal/cat/MouseDrop(atom/over_object)
 
-	var/mob/living/carbon/human/H = over_object
+	var/mob/living/carbon/H = over_object
 	if(!istype(H)) return ..()
 
-	//This REALLY needs to be moved to a general mob proc somewhere.
 	if(H.a_intent == "help")
-		var/obj/item/weapon/holder/cat/C = new(loc)
-		src.loc = C
-		C.name = loc.name
-		C.attack_hand(H)
-		H << "You scoop up [src]."
-		src << "[H] scoops you up."
-		H.status_flags |= PASSEMOTES
+		get_scooped(H)
 		return
 	else
 		return ..()
