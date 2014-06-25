@@ -43,7 +43,8 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.area_offsite = locate(/area/shuttle/escape_pod1/centcom)
 	shuttle.area_transition = locate(/area/shuttle/escape_pod1/transit)
 	shuttle.docking_controller_tag = "escape_pod_1"
-	shuttle.dock_target_station = "escape_pod_bay_1"
+	shuttle.dock_target_station = "escape_pod_1_berth"
+	shuttle.dock_target_offsite = "escape_pod_1_recovery"
 	shuttle.transit_direction = NORTH
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
@@ -55,6 +56,9 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.area_station = locate(/area/shuttle/escape_pod2/station)
 	shuttle.area_offsite = locate(/area/shuttle/escape_pod2/centcom)
 	shuttle.area_transition = locate(/area/shuttle/escape_pod2/transit)
+	shuttle.docking_controller_tag = "escape_pod_2"
+	shuttle.dock_target_station = "escape_pod_2_berth"
+	shuttle.dock_target_offsite = "escape_pod_2_recovery"
 	shuttle.transit_direction = NORTH
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
@@ -66,6 +70,9 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.area_station = locate(/area/shuttle/escape_pod3/station)
 	shuttle.area_offsite = locate(/area/shuttle/escape_pod3/centcom)
 	shuttle.area_transition = locate(/area/shuttle/escape_pod3/transit)
+	shuttle.docking_controller_tag = "escape_pod_3"
+	shuttle.dock_target_station = "escape_pod_3_berth"
+	shuttle.dock_target_offsite = "escape_pod_3_recovery"
 	shuttle.transit_direction = EAST
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
@@ -79,6 +86,9 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.area_station = locate(/area/shuttle/escape_pod5/station)
 	shuttle.area_offsite = locate(/area/shuttle/escape_pod5/centcom)
 	shuttle.area_transition = locate(/area/shuttle/escape_pod5/transit)
+	shuttle.docking_controller_tag = "escape_pod_5"
+	shuttle.dock_target_station = "escape_pod_5_berth"
+	shuttle.dock_target_offsite = "escape_pod_5_recovery"
 	shuttle.transit_direction = EAST //should this be WEST? I have no idea.
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
