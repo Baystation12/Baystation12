@@ -58,12 +58,12 @@
 	dizziness = 0
 	jitteriness = 0
 
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
 
 	handle_hud_list()
-	
+
 	//Handle species-specific deaths.
 	if(species) species.handle_death(src)
 
@@ -85,6 +85,8 @@
 			B.host_brain.real_name = "host brain"
 
 		verbs -= /mob/living/carbon/proc/release_control
+
+	callHook("death", list(src, gibbed))
 
 	//Check for heist mode kill count.
 	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist) ) )

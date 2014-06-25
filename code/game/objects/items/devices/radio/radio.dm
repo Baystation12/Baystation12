@@ -30,8 +30,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2
-	g_amt = 25
-	m_amt = 75
+
+	matter = list("glass" = 25,"metal" = 75)
+
 	var/const/WIRE_SIGNAL = 1 //sends a signal, like to set off a bomb or electrocute someone
 	var/const/WIRE_RECEIVE = 2
 	var/const/WIRE_TRANSMIT = 4
@@ -761,10 +762,10 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += keyslot.channels[ch_name]
-			
+
 		if(keyslot.syndie)
 			src.syndie = 1
-	
+
 
 	for (var/ch_name in src.channels)
 		if(!radio_controller)

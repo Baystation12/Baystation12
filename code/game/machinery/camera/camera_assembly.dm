@@ -6,8 +6,7 @@
 	w_class = 2
 	anchored = 0
 
-	m_amt = 700
-	g_amt = 300
+	matter = list("metal" = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray
 	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/phoron, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)

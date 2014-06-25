@@ -33,16 +33,19 @@
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
 
+/mob/living/silicon/robot/drone/verb/light()
+	set name = "Light On/Off"
+	set desc = "Activate a low power omnidirectional LED. Toggled on or off."
+	set category = "Drone"
+
+	if(luminosity)
+		SetLuminosity(0)
+		return
+	SetLuminosity(2)
+
 //Actual picking-up event.
 /mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
 
 	if(M.a_intent == "help")
-		var/obj/item/weapon/holder/drone/D = new(loc)
-		src.loc = D
-		D.attack_hand(M)
-		M << "You scoop up [src]."
-		src << "[M] scoops you up."
-		M.status_flags |= PASSEMOTES
-		return
-
+		get_scooped(M)
 	..()

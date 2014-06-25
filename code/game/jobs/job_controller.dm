@@ -366,6 +366,10 @@ var/global/datum/controller/occupations/job_master
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
+			// Moving wheelchair if they have one
+			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
+				H.buckled.loc = H.loc
+				H.buckled.dir = H.dir
 
 		//give them an account in the station database
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)

@@ -14,7 +14,8 @@
 /datum/game_mode/revolution
 	name = "revolution"
 	config_tag = "revolution"
-	restricted_jobs = list("Security Officer", "Warden", "Detective", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	restricted_jobs = list("Lawyer", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	protected_jobs = list("Security Officer", "Warden", "Detective")
 	required_players = 4
 	required_players_secret = 15
 	required_enemies = 3
@@ -91,7 +92,7 @@
 		greet_revolutionary(rev_mind)
 	modePlayer += head_revolutionaries
 	if(emergency_shuttle)
-		emergency_shuttle.always_fake_recall = 1
+		emergency_shuttle.auto_recall = 1
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 	..()
@@ -175,7 +176,7 @@
 	if(config.continous_rounds)
 		if(finished != 0)
 			if(emergency_shuttle)
-				emergency_shuttle.always_fake_recall = 0
+				emergency_shuttle.auto_recall = 0
 		return ..()
 	if(finished != 0)
 		return 1

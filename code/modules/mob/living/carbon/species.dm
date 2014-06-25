@@ -14,11 +14,12 @@
 	var/language                 // Default racial language, if any.
 	var/unarmed                  //For empty hand harm-intent attack
 	var/unarmed_type = /datum/unarmed_attack
+	var/secondary_langs = list() // The names of secondary languages that are available to this species.
 	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"   // Poisonous air.
-	var/exhale_type = "C02"      // Exhaled gas type.
+	var/exhale_type = "carbon_dioxide"      // Exhaled gas type.
 
 	var/cold_level_1 = 260  // Cold damage level 1 below this point.
 	var/cold_level_2 = 200  // Cold damage level 2 below this point.
@@ -27,6 +28,9 @@
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
+	
+	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
+	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
 
 	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
@@ -47,26 +51,6 @@
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
-
-	/* Species-specific sprites, concept stolen from Paradise//vg/.
-	ex:
-	sprite_sheets = list(
-		"held" = 'icons/mob/path',
-		"uniform" = 'icons/mob/path',
-		"suit" = 'icons/mob/path',
-		"belt" = 'icons/mob/path'
-		"head" = 'icons/mob/path',
-		"back" = 'icons/mob/path',
-		"mask" = 'icons/mob/path',
-		"ears" = 'icons/mob/path',
-		"eyes" = 'icons/mob/path',
-		"feet" = 'icons/mob/path',
-		"gloves" = 'icons/mob/path'
-		)
-	If index term exists and icon_override is not set, this sprite sheet will be used.
-	*/
-
-	var/list/sprite_sheets = list()
 
 /datum/species/New()
 	unarmed = new unarmed_type()
@@ -157,7 +141,8 @@
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
-	language = "Siik'tajr"
+	language = "Siik'maas"
+	secondary_langs = list("Siik'tajr")
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	darksight = 8
@@ -212,14 +197,6 @@
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
 
-	sprite_sheets = list(
-		"suit" = 'icons/mob/species/vox/suit.dmi',
-		"head" = 'icons/mob/species/vox/head.dmi',
-		"mask" = 'icons/mob/species/vox/mask.dmi',
-		"feet" = 'icons/mob/species/vox/feet.dmi',
-		"gloves" = 'icons/mob/species/vox/gloves.dmi'
-		)
-
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
 	H.verbs += /mob/living/carbon/human/proc/leap
@@ -263,14 +240,6 @@
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
-	sprite_sheets = list(
-		"suit" = 'icons/mob/species/armalis/suit.dmi',
-		"gloves" = 'icons/mob/species/armalis/gloves.dmi',
-		"feet" = 'icons/mob/species/armalis/feet.dmi',
-		"head" = 'icons/mob/species/armalis/head.dmi',
-		"held" = 'icons/mob/species/armalis/held.dmi'
-		)
-
 /datum/species/vox/create_organs(var/mob/living/carbon/human/H)
 
 	..() //create organs first.
@@ -313,6 +282,8 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
+	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
+
 	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 
 	blood_color = "#004400"
@@ -351,15 +322,17 @@
 	burn_mod = 1
 
 	warning_low_pressure = 50
-	hazard_low_pressure = 10
+	hazard_low_pressure = 0
 
 	cold_level_1 = 50
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
+	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
+	heat_level_2 = 1000
+	heat_level_3 = 2000
+	
+	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 

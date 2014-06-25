@@ -324,7 +324,7 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
-	if(dir in list(5,6,9,10))
+	if(dir & (dir - 1))
 		return 1
 	return 0
 

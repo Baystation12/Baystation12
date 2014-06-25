@@ -22,6 +22,10 @@
 	var/icon_old = null
 	var/pathweight = 1
 
+	//Mining resource generation stuff.
+	var/has_resources
+	var/list/resources
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -143,6 +147,9 @@
 			if ((A && M))
 				A.HasProximity(M, 1)
 			return
+	return
+
+/turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
 /turf/proc/is_plating()

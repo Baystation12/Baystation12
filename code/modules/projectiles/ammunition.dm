@@ -51,7 +51,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	m_amt = 50000
+	matter = list("metal" = 50000)
 	throwforce = 2
 	w_class = 2.0
 	throw_speed = 4
