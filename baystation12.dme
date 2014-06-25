@@ -739,6 +739,7 @@
 #include "code\modules\client\client defines.dm"
 #include "code\modules\client\client procs.dm"
 #include "code\modules\client\preferences.dm"
+#include "code\modules\client\preferences_gear.dm"
 #include "code\modules\client\preferences_savefile.dm"
 #include "code\modules\client\preferences_toggles.dm"
 #include "code\modules\clothing\clothing.dm"
