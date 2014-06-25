@@ -195,7 +195,7 @@ Deep minerals:
 		tx = origin_x
 		ty += chunk_size
 
-	world << "<b><font color='red'Resource map generation complete.</font></b>"
+	world << "<b><font color='red'>Resource map generation complete.</font></b>"
 	return
 
 #undef MAP_CELL
