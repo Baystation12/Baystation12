@@ -98,8 +98,8 @@
 	if (charge==0)
 		return
 	var/devastation_range = -1 //round(charge/11000)
-	var/heavy_impact_range = round(sqrt(charge)/60)
-	var/light_impact_range = round(sqrt(charge)/30)
+	var/heavy_impact_range = round(sqrt(charge)/58)
+	var/light_impact_range = round(sqrt(charge)/27)
 	var/flash_range = light_impact_range
 	if (light_impact_range==0)
 		rigged = 0

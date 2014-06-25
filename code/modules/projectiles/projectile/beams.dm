@@ -65,29 +65,6 @@ var/list/beam_master = list()
 				first = 0
 		cleanup(reference)
 		return
-/*
-	Bump(atom/A as mob|obj|turf|area)
-		..()
-		if(A)
-			if (!forcedodge)
-				forcedodge = A.bullet_act(src, def_zone) // searches for return value
-			if(forcedodge == -1) // the bullet passes through a dense object!
-				bumped = 0 // reset bumped variable!
-				if(istype(A, /turf))
-					loc = A
-				else
-					loc = A.loc
-				permutated.Add(A)
-				return 0
-			if(istype(A,/turf))
-				for(var/obj/O in A)
-					O.bullet_act(src)
-				for(var/mob/M in A)
-					M.bullet_act(src, def_zone)
-			density = 0
-			invisibility = 101
-			del(src)
-		return 1*/
 
 	Del()
 		cleanup("\ref[src]")
