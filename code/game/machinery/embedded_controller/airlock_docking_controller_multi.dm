@@ -2,52 +2,48 @@
 //this is the master controller, that things will try to dock with.
 /obj/machinery/embedded_controller/radio/docking_port_multi
 	name = "docking port controller"
-	var/child_tags_txt //for mapping
+	
+	var/child_tags_txt
+	var/child_names_txt
+	var/list/child_names = list()
+	
 	var/datum/computer/file/embedded_program/docking/multi/docking_program
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/initialize()
 	..()
 	docking_program = new/datum/computer/file/embedded_program/docking/multi(src)
 	program = docking_program
+	
+	var/list/names = text2list(child_names_txt, ";")
+	var/list/tags = text2list(child_tags_txt, ";")
+	
+	if (names.len == tags.len)
+		for (var/i = 1; i <= tags.len; i++)
+			child_names[tags[i]] = names[i]
 
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
+	var/list/airlocks[child_names.len]
+	var/i = 1
+	for (var/child_tag in child_names)
+		airlocks[i++] = list("name"=child_names[child_tag], "override_enabled"=(docking_program.children_override[child_tag] == "enabled"))
+
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
-		//child override status
+		"airlocks" = airlocks,
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "simple_docking_console.tmpl", name, 470, 290)
+		ui = new(user, src, ui_key, "multi_docking_console.tmpl", name, 470, 290)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /obj/machinery/embedded_controller/radio/docking_port_multi/Topic(href, href_list)
-	if(..())
-		return
-	
-	/*
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-	
-	var/clean = 0
-	switch(href_list["command"])	//anti-HTML-hacking checks
-		if("force_door")
-			clean = 1
-		if("toggle_override")
-			clean = 1
-
-	
-	if(clean)
-		program.receive_user_command(href_list["command"])
-
-	return 1
-	*/
 	return
 
 
@@ -114,7 +110,7 @@
 
 
 
-/*** DEBUG VERBS ***/
+/*** DEBUG VERBS ***
 
 /datum/computer/file/embedded_program/docking/multi/proc/print_state()
 	world << "id_tag: [id_tag]"
@@ -154,4 +150,4 @@
 	set src in view(1)
 	src.program:initiate_undocking()
 
-/**/
+*/
