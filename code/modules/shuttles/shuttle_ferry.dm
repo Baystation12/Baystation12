@@ -3,6 +3,7 @@
 #define WAIT_ARRIVE		2
 #define WAIT_FINISH		3
 
+#define DOCK_ATTEMPT_TIMEOUT 450	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
@@ -20,6 +21,8 @@
 	//TODO: change location to a string and use a mapping for area and dock targets.
 	var/dock_target_station
 	var/dock_target_offsite
+	
+	var/last_dock_attempt_time = 0
 
 /datum/shuttle/ferry/short_jump(var/area/origin,var/area/destination)
 	if(isnull(location))
@@ -47,15 +50,15 @@
 	..(departing, destination, interim, travel_time, direction)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
-
-	if (docking_controller && !docking_controller.undocked())
-		docking_controller.force_undock()
-
 	..(origin, destination)
 
 	if (destination == area_station) location = 0
 	if (destination == area_offsite) location = 1
 	//if this is a long_jump retain the location we were last at until we get to the new one
+
+/datum/shuttle/ferry/dock()
+	..()
+	last_dock_attempt_time = world.time
 
 /datum/shuttle/ferry/proc/get_location_area(location_id = null)
 	if (isnull(location_id))
@@ -80,11 +83,11 @@
 		if (WAIT_ARRIVE)
 			if (moving_status == SHUTTLE_IDLE)
 				dock()
+				in_use = null	//release lock
 				process_state = WAIT_FINISH
 		if (WAIT_FINISH)
-			if (skip_docking_checks() || docking_controller.docked())
+			if (skip_docking_checks() || docking_controller.docked() || world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT)
 				process_state = IDLE_STATE
-				in_use = null	//release lock
 				arrived()
 
 /datum/shuttle/ferry/current_dock_target()
