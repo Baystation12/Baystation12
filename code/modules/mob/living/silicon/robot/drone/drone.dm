@@ -59,7 +59,6 @@
 
 	//Some tidying-up.
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
-	updatename()
 	updateicon()
 
 //Redefining some robot procs...
@@ -103,15 +102,8 @@
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 	else if(length(message) >= 2)
-		if(copytext(message, 1 ,3) == ":b" || copytext(message, 1 ,3) == ":B")
 
-			if(!is_component_functioning("comms"))
-				src << "\red Your binary communications component isn't functional."
-				return
-
-			robot_talk(trim(copytext(message,3)))
-
-		else if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":D")
+		if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":D")
 
 			if(!is_component_functioning("radio"))
 				src << "\red Your radio transmitter isn't functional."
@@ -328,8 +320,8 @@
 	full_law_reset()
 	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
 	src << "You have no individual will, no personality, and no drives or urges other than your laws."
-	src << "Use <b>:b</b> to talk to your fellow synthetics, <b>:d</b> to talk to other drones, and <b>say</b> to speak silently to your nearby fellows."
-	src << "Remember,  you are <b>lawed against interference with the crew</b>."
+	src << "Use <b>:d</b> to talk to other drones and <b>say</b> to speak silently to your nearby fellows."
+	src << "Remember,  you are <b>lawed against interference with the crew</b>. Also remember, <b>you DO NOT take orders from the AI.</b>"
 	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 

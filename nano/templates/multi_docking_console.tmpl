@@ -1,0 +1,37 @@
+<div class="item" style="padding-top: 10px">
+	<div class="item">
+		<div class="itemLabel">
+			Docking Port Status:
+		</div>
+		<div class="itemContent">
+			{{if docking_status == "docked"}}
+				<span class="good">DOCKED</span>
+			{{else docking_status == "docking"}}
+				<span class="average">DOCKING</span>
+			{{else docking_status == "undocking"}}
+				<span class="average">UNDOCKING</span>
+			{{else docking_status == "undocked"}}
+				<span class="idle">NOT IN USE</span>
+			{{else}}
+				<span class="bad">ERROR</span>
+			{{/if}}
+		</div>
+	</div>
+</div>
+
+{{for airlocks}}
+	<div class="item" style="padding-top: 10px">
+		<div class="item">
+			<div class="itemLabel">
+				{{:name}}
+			</div>
+			<div class="itemContent">
+				{{if override_enabled}}
+					<span class="bad">OVERRIDE ENABLED</span>
+				{{else}}
+					<span class="good">STATUS OK</span>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+{{/for}}

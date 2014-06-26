@@ -10,7 +10,7 @@ datum/directive/research_to_ripleys
 	proc/get_researchers()
 		var/list/researchers[0]
 		for(var/mob/M in player_list)
-			if (is_researcher(M) && M.is_ready())
+			if (M.is_ready() && is_researcher(M))
 				researchers.Add(M)
 		return researchers
 

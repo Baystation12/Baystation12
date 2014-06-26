@@ -6,7 +6,7 @@ datum/directive/bluespace_contagion
 	proc/get_infection_candidates()
 		var/list/candidates[0]
 		for(var/mob/M in player_list)
-			if (!M.is_mechanical() && M.is_ready())
+			if (M.is_ready() && !M.is_mechanical())
 				candidates.Add(M)
 		return candidates
 

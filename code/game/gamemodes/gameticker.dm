@@ -130,7 +130,7 @@ var/global/datum/controller/gameticker/ticker
 	//here to initialize the random events nicely at round start
 	setup_economy()
 
-	setup_shuttle_docks()
+	shuttle_controller.setup_shuttle_docks()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
