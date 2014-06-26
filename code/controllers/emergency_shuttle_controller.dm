@@ -149,15 +149,17 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
 	var/eta
-	if (isnull(shuttle.last_move_time))
-		eta = launch_time + shuttle.move_time*10
-	else
+	if (!isnull(shuttle.last_move_time))
+		//if we have a last_move_time than we are in transition and can get an accurate ETA
 		eta = shuttle.last_move_time + shuttle.move_time*10
+	else
+		//otherwise we need to estimate the arrival time using the scheduled launch time
+		eta = launch_time + shuttle.move_time*10 + shuttle.warmup_time*10
 	return (eta - world.time)/10
 
 //returns the time left until the shuttle launches, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_launch_time()
-	return (launch_time - world.time)/10
+	return (launch_time + shuttle.warmup_time*10 - world.time)/10
 
 /datum/emergency_shuttle_controller/proc/has_eta()
 	return (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
@@ -189,8 +191,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return 0	//not at station
 	if (!wait_for_launch)
 		return 0	//not going anywhere
-	if (shuttle.moving_status != SHUTTLE_IDLE)
-		return 0	//shuttle is doing stuff
+	if (shuttle.moving_status == SHUTTLE_INTRANSIT)
+		return 0
 	return 1
 
 /*
