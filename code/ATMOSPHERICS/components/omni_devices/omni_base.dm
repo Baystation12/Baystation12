@@ -125,8 +125,6 @@
 		overlays_error[1] = omni_icons[core_icon]
 		overlays_error[2] = omni_icons["error"]
 
-	update_icon()
-
 /obj/machinery/atmospherics/omni/proc/update_port_icons()
 	for(var/datum/omni_port/P in ports)
 		if(P.update)
