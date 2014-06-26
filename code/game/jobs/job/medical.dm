@@ -106,7 +106,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_chemistry, access_maint_tunnels)
-	alt_titles = list("Pharmacist","Drug Dealer")
+	alt_titles = list("Pharmacist","Pharmacologist")
 
 
 	equip(var/mob/living/carbon/human/H)
