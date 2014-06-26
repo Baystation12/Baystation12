@@ -314,10 +314,12 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 
 		if (radiation)
 			if (radiation > 100)
-				Weaken(10)
-				if(!lying)
-					src << "\red You feel weak."
-					emote("collapse")
+				radiation = 100
+				if(!(species.flags & RAD_ABSORB))
+					Weaken(10)
+					if(!lying)
+						src << "\red You feel weak."
+						emote("collapse")
 
 			if (radiation < 0)
 				radiation = 0
