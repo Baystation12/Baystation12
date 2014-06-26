@@ -17,20 +17,32 @@
 /obj/machinery/atmospherics/omni/mixer/New()
 	..()
 	if(mapper_set())
+		var/con = 0
 		for(var/datum/omni_port/P in ports)
 			switch(P.dir)
 				if(NORTH)
-					if(tag_north_con)
+					if(tag_north_con && tag_north == 1)
 						P.concentration = tag_north_con
+						con += max(0, tag_north_con)
 				if(SOUTH)
-					if(tag_south_con)
+					if(tag_south_con && tag_south == 1)
 						P.concentration = tag_south_con
+						con += max(0, tag_south_con)
 				if(EAST)
-					if(tag_east_con)
+					if(tag_east_con && tag_east == 1)
 						P.concentration = tag_east_con
+						con += max(0, tag_east_con)
 				if(WEST)
-					if(tag_west_con)
+					if(tag_west_con && tag_west == 1)
 						P.concentration = tag_west_con
+						con += max(0, tag_west_con)
+
+		//mappers who are bad at maths will be punished (total concentration must be 100%)
+		if(con != 1)
+			tag_north_con = null
+			tag_south_con = null
+			tag_east_con = null
+			tag_west_con = null
 
 /obj/machinery/atmospherics/omni/mixer/Del()
 	inputs.Cut()
