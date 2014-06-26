@@ -56,8 +56,7 @@
 		if(H.species && H.species.abilities)
 			client.verbs |= H.species.abilities
 
-	update_music()
-
 	CallHook("Login", list("client" = src.client, "mob" = src))
 
+	update_music()
 

@@ -405,12 +405,14 @@
 	return
 
 /obj/structure/table/proc/straight_table_check(var/direction)
-	var/turf/left = get_step(src,turn(direction,90))
-	var/turf/right = get_step(src,turn(direction,-90))
-	var/turf/next = get_step(src,direction)
-	if(locate(/obj/structure/table,left) || locate(/obj/structure/table,right))
-		return 0
-	var/obj/structure/table/T = locate(/obj/structure/table, next)
+	var/obj/structure/table/T
+	for(var/angle in list(-90,90))
+		T = locate() in get_step(src.loc,turn(direction,angle))
+		if(T && !T.flipped)
+			return 0
+	T = locate() in get_step(src.loc,direction)
+	if (!T || T.flipped)
+		return 1
 	if (istype(T,/obj/structure/table/reinforced/))
 		var/obj/structure/table/reinforced/R = T
 		if (R.status == 2)

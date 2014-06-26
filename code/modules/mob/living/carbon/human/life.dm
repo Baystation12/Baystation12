@@ -315,8 +315,9 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 		if (radiation)
 			if (radiation > 100)
 				Weaken(10)
-				src << "\red You feel weak."
-				emote("collapse")
+				if(!lying)
+					src << "\red You feel weak."
+					emote("collapse")
 
 			if (radiation < 0)
 				radiation = 0
@@ -349,8 +350,9 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 						if(prob(5))
 							radiation -= 5
 							Weaken(3)
-							src << "\red You feel weak."
-							emote("collapse")
+							if(!lying)
+								src << "\red You feel weak."
+								emote("collapse")
 						updatehealth()
 
 					if(75 to 100)
