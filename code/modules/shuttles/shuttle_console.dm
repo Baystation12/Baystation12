@@ -2,7 +2,6 @@
 	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
-	req_access = list(access_engine)
 	circuit = null
 
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
