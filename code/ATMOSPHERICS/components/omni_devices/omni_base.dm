@@ -3,8 +3,8 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni
 	name = "omni device"
-	icon_state = ""
-	dir = SOUTH
+	icon = 'icons/obj/atmospherics/omni_devices.dmi'
+	icon_state = "base"
 	use_power = 1
 	initialize_directions = 0
 
@@ -12,19 +12,15 @@
 	var/configuring = 0
 	var/target_pressure = ONE_ATMOSPHERE
 
-	var/icon/icon_on
-	var/icon/icon_off
-	var/icon/icon_error
-
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
 	var/tag_east = ATM_NONE
 	var/tag_west = ATM_NONE
 
-	var/overlays_on[8]
-	var/overlays_off[8]
+	var/overlays_on[5]
+	var/overlays_off[5]
 	var/overlays_error[2]
-	var/underlays_current[8]
+	var/underlays_current[4]
 
 	var/list/ports = new()
 
@@ -83,6 +79,14 @@
 	if(!istype(W, /obj/item/weapon/wrench))
 		return ..()
 
+	var/int_pressure = 0
+	for(var/datum/omni_port/P in ports)
+		int_pressure += P.air.return_pressure()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	if ((int_pressure - env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		user << "<span class='warning'>You cannot unwrench [src], it is too exerted due to internal pressure.</span>"
+		add_fingerprint(user)
+		return 1
 	user << "\blue You begin to unfasten \the [src]..."
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	if(do_after(user, 40))
@@ -113,10 +117,10 @@
 	else
 		return
 
-	//directional icons are layers 1,2,4,8, so the core icon is layer 3
+	//directional icons are layers 1-4, with the core icon on layer 5
 	if(core_icon)
-		overlays_off[3] = omni_icons[core_icon]
-		overlays_on[3] = omni_icons[core_icon + "_glow"]
+		overlays_off[5] = omni_icons[core_icon]
+		overlays_on[5] = omni_icons[core_icon + "_glow"]
 
 		overlays_error[1] = omni_icons[core_icon]
 		overlays_error[2] = omni_icons["error"]
@@ -126,18 +130,32 @@
 /obj/machinery/atmospherics/omni/proc/update_port_icons()
 	for(var/datum/omni_port/P in ports)
 		if(P.update)
+			var/ref_layer = 0
+			switch(P.dir)
+				if(NORTH)
+					ref_layer = 1
+				if(SOUTH)
+					ref_layer = 2
+				if(EAST)
+					ref_layer = 3
+				if(WEST)
+					ref_layer = 4
+
+			if(!ref_layer)
+				continue
+
 			var/list/port_icons = select_port_icons(P)
 			if(port_icons)
 				if(P.node)
-					underlays_current[P.dir] = omni_icons[port_icons["pipe_icon"]]
+					underlays_current[ref_layer] = omni_icons[port_icons["pipe_icon"]]
 				else
-					underlays_current[P.dir] = null
-				overlays_off[P.dir] = omni_icons[port_icons["off_icon"]]
-				overlays_on[P.dir] = omni_icons[port_icons["on_icon"]]
+					underlays_current[ref_layer] = null
+				overlays_off[ref_layer] = omni_icons[port_icons["off_icon"]]
+				overlays_on[ref_layer] = omni_icons[port_icons["on_icon"]]
 			else
-				underlays_current[P.dir] = null
-				overlays_off[P.dir] = null
-				overlays_on[P.dir] = null
+				underlays_current[ref_layer] = null
+				overlays_off[ref_layer] = null
+				overlays_on[ref_layer] = null
 
 	update_icon()
 
@@ -146,36 +164,26 @@
 		return
 
 	if(P.mode > 0)
-		var/ic_dir = null
-		switch(P.dir)
-			if(NORTH)
-				ic_dir = "north"
-			if(SOUTH)
-				ic_dir = "south"
-			if(EAST)
-				ic_dir = "east"
-			if(WEST)
-				ic_dir = "west"
-
-		var/ic_on = null
-		var/ic_off = null
+		var/ic_dir = dir_name(P.dir)
+		var/ic_on = ic_dir
+		var/ic_off = ic_dir
 		switch(P.mode)
 			if(ATM_INPUT)
-				ic_on = "_in_glow"
-				ic_off = "_in"
+				ic_on += "_in_glow"
+				ic_off += "_in"
 			if(ATM_OUTPUT)
-				ic_on = "_out_glow"
-				ic_off = "_out"
+				ic_on += "_out_glow"
+				ic_off += "_out"
 			if(ATM_O2 to ATM_N2O)
-				ic_on = "_filter"
-				ic_off = "_out"
+				ic_on += "_filter"
+				ic_off += "_out"
 
 		var/pipe_state = ic_dir + "_pipe"
 		if(P.node)
 			if(P.node.color)
 				pipe_state += "_[P.node.color]"
 		
-		return list("on_icon" = ic_dir + ic_on, "off_icon" = ic_dir + ic_off, "pipe_icon" = pipe_state)
+		return list("on_icon" = ic_on, "off_icon" = ic_off, "pipe_icon" = pipe_state)
 
 /obj/machinery/atmospherics/omni/proc/update_ports()
 	sort_ports()

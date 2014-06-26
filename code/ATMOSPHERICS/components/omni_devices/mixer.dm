@@ -3,10 +3,34 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni/mixer
 	name = "omni gas mixer"
-	icon = 'icons/obj/atmospherics/omni_devices.dmi'
+	icon_state = "map_mixer"
 
 	var/list/inputs = new()
 	var/datum/omni_port/output
+
+	//setup tags for initial concentration values (must be decimal)
+	var/tag_north_con 
+	var/tag_south_con
+	var/tag_east_con
+	var/tag_west_con
+
+/obj/machinery/atmospherics/omni/mixer/New()
+	..()
+	if(mapper_set())
+		for(var/datum/omni_port/P in ports)
+			switch(P.dir)
+				if(NORTH)
+					if(tag_north_con)
+						P.concentration = tag_north_con
+				if(SOUTH)
+					if(tag_south_con)
+						P.concentration = tag_south_con
+				if(EAST)
+					if(tag_east_con)
+						P.concentration = tag_east_con
+				if(WEST)
+					if(tag_west_con)
+						P.concentration = tag_west_con
 
 /obj/machinery/atmospherics/omni/mixer/Del()
 	inputs.Cut()
@@ -28,12 +52,16 @@
 				if(ATM_OUTPUT)
 					output = P
 
-	for(var/datum/omni_port/P in inputs)
-		P.concentration = 1 / inputs.len
+	if(!mapper_set())
+		for(var/datum/omni_port/P in inputs)
+			P.concentration = 1 / max(1, inputs.len)
 
 	if(output)
 		output.air.volume *= 0.75 * inputs.len
 		output.concentration = 1
+
+/obj/machinery/atmospherics/omni/mixer/proc/mapper_set()
+	return (tag_north_con || tag_south_con || tag_east_con || tag_west_con)
 
 /obj/machinery/atmospherics/omni/mixer/error_check()
 	if(!output || !inputs)
@@ -131,7 +159,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir), \
+		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"concentration" = P.concentration, \
 										"input" = input, \
 										"output" = output, \
@@ -215,6 +243,11 @@
 	update_ports()
 
 /obj/machinery/atmospherics/omni/mixer/proc/change_concentration(var/port = NORTH)
+	tag_north_con = null
+	tag_south_con = null
+	tag_east_con = null
+	tag_west_con = null
+
 	var/old_con = 0
 	var/non_locked = 0
 	var/remain_con = 1

@@ -3,8 +3,7 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni/filter
 	name = "omni gas filter"
-	icon = 'icons/obj/atmospherics/omni_devices.dmi'
-	icon_state = ""
+	icon_state = "map_filter"
 
 	var/list/filters = new()
 	var/datum/omni_port/input
@@ -153,7 +152,7 @@
 			if(ATM_O2 to ATM_N2O)
 				f_type = mode_send_switch(P.mode)
 
-		portData[++portData.len] = list("dir" = dir_name(P.dir), \
+		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
 										"input" = input, \
 										"output" = output, \
 										"filter" = filter, \

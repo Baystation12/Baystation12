@@ -21,7 +21,7 @@ var/global/list/omni_icons[]
 	var/icon/omni = new('icons/obj/atmospherics/omni_devices.dmi')
 
 	for(var/state in omni.IconStates())
-		if(!state)
+		if(!state || findtext(state, "map"))
 			continue
 
 		var/image/I = image('icons/obj/atmospherics/omni_devices.dmi', icon_state = state)
@@ -49,7 +49,7 @@ var/global/list/omni_icons[]
 	var/dir
 	var/update = 1
 	var/mode = 0
-	var/concentration = 1
+	var/concentration = 0
 	var/con_lock = 0
 	var/transfer_moles = 0
 	var/datum/gas_mixture/air
@@ -92,28 +92,39 @@ var/global/list/omni_icons[]
 
 var/global/list/pipe_colors = list("grey" = null, "red" = PIPE_COLOR_RED, "blue" = PIPE_COLOR_BLUE, "cyan" = PIPE_COLOR_CYAN, "green" = PIPE_COLOR_GREEN, "yellow" = PIPE_COLOR_YELLOW, "purple" = PIPE_COLOR_PURPLE)
 
-/proc/dir_name(var/dir = 0)
+
+//returns a text string based on the direction flag input
+// if capitalize is true, it will return the string capitalized
+// otherwise it will return the direction string in lower case
+/proc/dir_name(var/dir, var/capitalize = 0)
+	var/string = null
 	switch(dir)
 		if(NORTH)
-			return "North"
+			string = "North"
 		if(SOUTH)
-			return "South"
+			string = "South"
 		if(EAST)
-			return "East"
+			string = "East"
 		if(WEST)
-			return "West"
-		else
-			return "None"
+			string = "West"
+	
+	if(!capitalize && string)
+		string = lowertext(string)
+	
+	return string
 
-/proc/dir_flag(var/dir = "None")
+//returns a direction flag based on the string passed to it
+// case insensitive
+/proc/dir_flag(var/dir)
+	dir = lowertext(dir)
 	switch(dir)
-		if("North")
+		if("north")
 			return NORTH
-		if("South")
+		if("south")
 			return SOUTH
-		if("East")
+		if("east")
 			return EAST
-		if("West")
+		if("west")
 			return WEST
 		else
 			return 0
