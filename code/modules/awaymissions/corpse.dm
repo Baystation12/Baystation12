@@ -126,7 +126,7 @@
 
 
 
-///////////Civilians//////////////////////
+///////////Support//////////////////////
 
 /obj/effect/landmark/corpse/chef
 	name = "Chef"

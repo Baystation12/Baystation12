@@ -1,4 +1,4 @@
-//Alphabetical order of civilian jobs.
+//Alphabetical order of support jobs.
 
 /obj/item/clothing/under/rank/bartender
 	desc = "It looks like it could use some more flair."

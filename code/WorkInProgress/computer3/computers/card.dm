@@ -76,8 +76,8 @@
 			jobs_all += "<td weight='100'><a href='?src=\ref[src];assign=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
 
 		counter = 0
-		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Civilian</b></font></td>"//Grey
-		for(var/job in civilian_positions)
+		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Support</b></font></td>"//Grey
+		for(var/job in support_positions)
 			counter++
 			if(counter >= 6)
 				jobs_all += "</tr><tr height='20'><td></td><td></td>"

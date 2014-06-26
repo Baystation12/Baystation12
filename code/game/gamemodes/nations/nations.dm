@@ -115,7 +115,7 @@ datum/game_mode/nations
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
-			else if(H.mind.assigned_role in civilian_positions)
+			else if(H.mind.assigned_role in support_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.hud_updateflag |= 1 << NATIONS_HUD
 				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
@@ -402,7 +402,7 @@ datum/game_mode/nations
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return 1
-		else if(H.mind.assigned_role in civilian_positions)
+		else if(H.mind.assigned_role in support_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << NATIONS_HUD
 			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")

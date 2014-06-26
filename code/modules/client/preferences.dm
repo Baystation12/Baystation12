@@ -84,9 +84,9 @@ datum/preferences
 	var/icon/preview_icon_side = null
 
 		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
+	var/job_support_high = 0
+	var/job_support_med = 0
+	var/job_support_low = 0
 
 	var/job_medsci_high = 0
 	var/job_medsci_med = 0
@@ -400,7 +400,7 @@ datum/preferences
 				var/available_in_days = job.available_in_days(user.client)
 				HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 				continue
-			if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
+			if((job_support_low & ASSISTANT) && (rank != "Assistant"))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 				continue
 			if((rank in command_positions) || (rank == "AI"))//Bold head jobs
@@ -442,7 +442,7 @@ datum/preferences
 //			HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank]'>"
 
 			if(rank == "Assistant")//Assistant is special
-				if(job_civilian_low & ASSISTANT)
+				if(job_support_low & ASSISTANT)
 					HTML += " <font color=green>\[Yes]</font>"
 				else
 					HTML += " <font color=red>\[No]</font>"
@@ -498,27 +498,27 @@ datum/preferences
 
 		if (level == 1) // to high
 			// remove any other job(s) set to high
-			job_civilian_med |= job_civilian_high
+			job_support_med |= job_support_high
 			job_engsec_med |= job_engsec_high
 			job_medsci_med |= job_medsci_high
 			job_karma_med |= job_karma_high
-			job_civilian_high = 0
+			job_support_high = 0
 			job_engsec_high = 0
 			job_medsci_high = 0
 			job_karma_high = 0
 
-		if (job.department_flag == CIVILIAN)
-			job_civilian_low &= ~job.flag
-			job_civilian_med &= ~job.flag
-			job_civilian_high &= ~job.flag
+		if (job.department_flag == SUPPORT)
+			job_support_low &= ~job.flag
+			job_support_med &= ~job.flag
+			job_support_high &= ~job.flag
 
 			switch(level)
 				if (1)
-					job_civilian_high |= job.flag
+					job_support_high |= job.flag
 				if (2)
-					job_civilian_med |= job.flag
+					job_support_med |= job.flag
 				if (3)
-					job_civilian_low |= job.flag
+					job_support_low |= job.flag
 
 			return 1
 		else if (job.department_flag == ENGSEC)
@@ -580,10 +580,10 @@ datum/preferences
 			return
 
 		if(role == "Assistant")
-			if(job_civilian_low & job.flag)
-				job_civilian_low &= ~job.flag
+			if(job_support_low & job.flag)
+				job_support_low &= ~job.flag
 			else
-				job_civilian_low |= job.flag
+				job_support_low |= job.flag
 			SetChoices(user)
 			return 1
 
@@ -677,10 +677,10 @@ datum/preferences
 			return
 
 		if(role == "Assistant")
-			if(job_civilian_low & job.flag)
-				job_civilian_low &= ~job.flag
+			if(job_support_low & job.flag)
+				job_support_low &= ~job.flag
 			else
-				job_civilian_low |= job.flag
+				job_support_low |= job.flag
 			SetChoices(user)
 			return 1
 
@@ -697,9 +697,9 @@ datum/preferences
 		return 1
 
 	proc/ResetJobs()
-		job_civilian_high = 0
-		job_civilian_med = 0
-		job_civilian_low = 0
+		job_support_high = 0
+		job_support_med = 0
+		job_support_low = 0
 
 		job_medsci_high = 0
 		job_medsci_med = 0
@@ -717,14 +717,14 @@ datum/preferences
 	proc/GetJobDepartment(var/datum/job/job, var/level)
 		if(!job || !level)	return 0
 		switch(job.department_flag)
-			if(CIVILIAN)
+			if(SUPPORT)
 				switch(level)
 					if(1)
-						return job_civilian_high
+						return job_support_high
 					if(2)
-						return job_civilian_med
+						return job_support_med
 					if(3)
-						return job_civilian_low
+						return job_support_low
 			if(MEDSCI)
 				switch(level)
 					if(1)
@@ -755,32 +755,32 @@ datum/preferences
 		if(!job || !level)	return 0
 		switch(level)
 			if(1)//Only one of these should ever be active at once so clear them all here
-				job_civilian_high = 0
+				job_support_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
 				job_karma_high = 0
 				return 1
 			if(2)//Set current highs to med, then reset them
-				job_civilian_med |= job_civilian_high
+				job_support_med |= job_support_high
 				job_medsci_med |= job_medsci_high
 				job_engsec_med |= job_engsec_high
 				job_karma_med |= job_karma_high
-				job_civilian_high = 0
+				job_support_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
 				job_karma_high = 0
 
 		switch(job.department_flag)
-			if(CIVILIAN)
+			if(SUPPORT)
 				switch(level)
 					if(2)
-						job_civilian_high = job.flag
-						job_civilian_med &= ~job.flag
+						job_support_high = job.flag
+						job_support_med &= ~job.flag
 					if(3)
-						job_civilian_med |= job.flag
-						job_civilian_low &= ~job.flag
+						job_support_med |= job.flag
+						job_support_low &= ~job.flag
 					else
-						job_civilian_low |= job.flag
+						job_support_low |= job.flag
 			if(MEDSCI)
 				switch(level)
 					if(2)

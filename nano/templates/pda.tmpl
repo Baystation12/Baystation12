@@ -322,9 +322,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                                         {{/if}}
 				{{/for}}
 			{{/if}}
-			{{if manifest.civ.length}}
-				<tr><th colspan="3" class="civ">Civilian</th></tr>
-				{{for manifest["civ"]}}
+			{{if manifest.supp.length}}
+				<tr><th colspan="3" class="supp">Support</th></tr>
+				{{for manifest["supp"]}}
                                         {{if rank == "Head of Personnel"}}
                                         <tr><td><span class="good">{{:name}}</span></td><td><span class="good">{{:rank}}</span></td><td><span class="good">{{:active}}</span></td></tr>
                                         {{else}}

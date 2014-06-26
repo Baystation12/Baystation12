@@ -28,7 +28,7 @@ var/const/XENOBIOLOGIST		=(1<<9)
 var/const/PARAMEDIC			=(1<<10)
 
 
-var/const/CIVILIAN			=(1<<2)
+var/const/SUPPORT			=(1<<2)
 
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)
@@ -98,7 +98,7 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
-var/list/civilian_positions = list(
+var/list/support_positions = list(
 	"Head of Personnel",
 	"Bartender",
 	"Botanist",

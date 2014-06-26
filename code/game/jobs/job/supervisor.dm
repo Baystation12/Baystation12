@@ -48,7 +48,7 @@
 /datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
-	department_flag = CIVILIAN
+	department_flag = SUPPORT
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -236,7 +236,7 @@
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
 	flag = LAWYER
-	department_flag = CIVILIAN
+	department_flag = SUPPORT
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
