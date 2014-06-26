@@ -1480,6 +1480,14 @@
 		update_hair()
 		update_body()
 
+/mob/living/carbon/human/proc/unexpose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=0
+		update_hair()
+		update_body()
+
+
 /mob/living/carbon/human/canSingulothPull(var/obj/machinery/singularity/singulo)
 	if(!..())
 		return 0

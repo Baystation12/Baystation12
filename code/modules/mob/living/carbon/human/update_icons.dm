@@ -262,7 +262,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			var/datum/organ/external/head/head = part
 			if(head.brained==1)
 				brain_showing = 1
-
+			else brain_showing = 0
 
 		if(part.status & ORGAN_DESTROYED)
 			icon_key = "[icon_key]0"
