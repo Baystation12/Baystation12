@@ -2,6 +2,7 @@
 //Shuttle controller is instantiated in master_controller.dm.
 
 //shuttle moving state defines are in setup.dm
+#define DOCK_ATTEMPT_TIMEOUT 450	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle
 	var/warmup_time = 0
@@ -9,6 +10,8 @@
 	
 	var/docking_controller_tag	//tag of the controller used to coordinate docking
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
+	
+	var/last_dock_attempt_time = 0
 
 /datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -49,12 +52,14 @@
 	if (!dock_target)
 		return
 
+	last_dock_attempt_time = world.time
 	docking_controller.initiate_docking(dock_target)
 
 /datum/shuttle/proc/undock()
 	if (!docking_controller)
 		return
 
+	last_dock_attempt_time = world.time
 	docking_controller.initiate_undocking()
 
 /datum/shuttle/proc/current_dock_target()
@@ -63,6 +68,8 @@
 /datum/shuttle/proc/skip_docking_checks()
 	if (!docking_controller || !current_dock_target())
 		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
+	if (world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT)
+		return 1
 	return 0
 
 //just moves the shuttle from A to B, if it can be moved
