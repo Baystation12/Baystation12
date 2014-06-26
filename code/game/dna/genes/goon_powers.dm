@@ -170,7 +170,7 @@
 		C.ExtinguishMob()
 
 		C.visible_message("\red A cloud of fine ice crystals engulfs [C]!")
-		log_admin("[ckey(src.key)] has used cryokinesis on [ckey(C.key)].")
+		log_admin("[ckey(usr.key)] has used cryokinesis on [ckey(C.key)].")
 
 	//playsound(usr.loc, 'bamf.ogg', 50, 0)
 
