@@ -111,14 +111,15 @@
 	if(!status)
 		L.visible_message("<span class='warning'>[L] has been prodded with [src] by [user]. Luckily it was off.</span>")
 		return
-
+		
+	var/stunroll/X = (rand(1,100))
+	
 	if(ishuman(L) && status)
-		var/stunroll/X = (rand(1,100))
 		user.lastattacked = L
 		L.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
-			continue
-		else if(X < 34)
+			X = 100
+		if(X < 40)
 			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 			return
