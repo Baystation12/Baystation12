@@ -113,12 +113,12 @@
 		return
 
 	if(ishuman(L) && status)
-		var/stunroll/X = rand(1,100)
+		var/stunroll/X = (rand(1,100))
 		user.lastattacked = L
 		L.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
 			continue
-		else if(X =< 33)
+		else if(X < 34)
 			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 			return
