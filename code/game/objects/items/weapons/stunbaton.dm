@@ -117,8 +117,8 @@
 		user.lastattacked = L
 		L.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
-			X = 100
-		if(X < 66)
+			continue
+		else if(X =< 33)
 			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 			return
