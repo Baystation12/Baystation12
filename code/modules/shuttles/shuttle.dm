@@ -54,7 +54,6 @@
 /datum/shuttle/proc/undock()
 	if (!docking_controller)
 		return
-
 	docking_controller.initiate_undocking()
 
 /datum/shuttle/proc/current_dock_target()
@@ -76,6 +75,9 @@
 	if(origin == destination)
 		//world << "cancelling move, shuttle will overlap."
 		return
+	
+	if (docking_controller && !docking_controller.undocked())
+		docking_controller.force_undock()
 
 	moving_status = SHUTTLE_INTRANSIT
 	

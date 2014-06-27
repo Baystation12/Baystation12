@@ -9,7 +9,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 /datum/shuttle_controller/proc/process()
 	//process ferry shuttles
 	for (var/datum/shuttle/ferry/shuttle in process_shuttles)
-		if (shuttle.in_use)
+		if (shuttle.process_state)
 			shuttle.process()
 
 
@@ -291,7 +291,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 		var/dat = ""
 		for (var/dock_tag in dock_controller_map + dock_controller_map_station + dock_controller_map_offsite)
 			dat += "\"[dock_tag]\", "
-		world << "/red /b warning: shuttles with docking tags [dat] could not find their controllers!"
+		world << "\red \b warning: shuttles with docking tags [dat] could not find their controllers!"
 	
 	//makes all shuttles docked to something at round start go into the docked state
 	for (var/shuttle_tag in shuttles)
