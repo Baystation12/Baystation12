@@ -11,7 +11,7 @@ var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pagetur
 //var/list/footsteps_sound = list('tauceti/sounds/effects/footsteps.ogg','tauceti/sounds/effects/footsteps2.ogg')
 var/list/footsteps_sound = list('tauceti/sounds/effects/tile1.wav','tauceti/sounds/effects/tile2.wav','tauceti/sounds/effects/tile3.wav','tauceti/sounds/effects/tile4.wav')
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, channel = 0)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
@@ -30,7 +30,7 @@ var/list/footsteps_sound = list('tauceti/sounds/effects/tile1.wav','tauceti/soun
 		if(get_dist(M, turf_source) <= world.view + extrarange)
 			var/turf/T = get_turf(M)
 			if(T && T.z == turf_source.z)
-				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff)
+				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, channel)
 
 var/const/FALLOFF_SOUNDS = 1
 var/const/SURROUND_CAP = 7
