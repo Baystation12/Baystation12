@@ -219,7 +219,7 @@
 		..()
 		reagents.add_reagent("tea", 30)
 		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
+		src.pixel_y = rand(0, 20)       // the teacup is very low on the 32x32 grid so if it's -y then it clips into the tile below it.
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "Ice Cup"
