@@ -119,7 +119,8 @@
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
-		L.fields["image"]		= getFlatIcon(H)	//This is god-awful
+		//L.fields["image"]		= getFlatIcon(H)	//This is god-awful
+		L.fields["image"]		= get_id_photo(H)
 		locked += L
 	return
 
@@ -146,7 +147,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		if(E.status & ORGAN_ROBOT)
 			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 		preview_icon.Blend(temp, ICON_OVERLAY)
-	
+
 	//Tail
 	if(H.species.tail && H.species.flags & HAS_TAIL)
 		temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[H.species.tail]_s")
