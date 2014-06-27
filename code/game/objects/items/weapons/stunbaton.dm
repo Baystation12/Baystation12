@@ -118,12 +118,10 @@
 		M.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
 			target_zone = user.zone_sel.selecting
-			
-        	if(!target_zone)
-        		L.visible_message("\red <B>[user] misses [L] with \the [src]!")
-        		msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
-        		return
-        		
+		if(!target_zone)
+			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
+			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
+			return
 		L.Stun(stunforce)
 		L.Weaken(stunforce)
 		L.apply_effect(STUTTER, stunforce)
