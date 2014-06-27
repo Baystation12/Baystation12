@@ -25,7 +25,7 @@ var/const/MAX_SAVE_SLOTS = 10
 
 //used for alternate_option
 #define GET_RANDOM_JOB 0
-#define BE_ASSISTANT 1
+#define BE_CIVILIAN 1
 #define RETURN_TO_LOBBY 2
 
 datum/preferences
@@ -400,7 +400,7 @@ datum/preferences
 				var/available_in_days = job.available_in_days(user.client)
 				HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 				continue
-			if((job_support_low & ASSISTANT) && (rank != "Assistant"))
+			if((job_support_low & CIVILIAN) && (rank != "Civilian"))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 				continue
 			if((rank in command_positions) || (rank == "AI"))//Bold head jobs
@@ -441,8 +441,8 @@ datum/preferences
 
 //			HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank]'>"
 
-			if(rank == "Assistant")//Assistant is special
-				if(job_support_low & ASSISTANT)
+			if(rank == "Civilian")//Civilian is special
+				if(job_support_low & CIVILIAN)
 					HTML += " <font color=green>\[Yes]</font>"
 				else
 					HTML += " <font color=red>\[No]</font>"
@@ -476,10 +476,10 @@ datum/preferences
 		switch(alternate_option)
 			if(GET_RANDOM_JOB)
 				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=white>Get random job if preferences unavailable</font></a></u></center><br>"
-			if(BE_ASSISTANT)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=white>Be assistant if preference unavailable</font></a></u></center><br>"
+			if(BE_CIVILIAN)
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=white>Be a civilian if preferences unavailable</font></a></u></center><br>"
 			if(RETURN_TO_LOBBY)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=white>Return to lobby if preference unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=white>Return to lobby if preferences unavailable</font></a></u></center><br>"
 
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a></center>"
 		HTML += "</tt>"
@@ -579,7 +579,7 @@ datum/preferences
 			ShowChoices(user)
 			return
 
-		if(role == "Assistant")
+		if(role == "Civilian")
 			if(job_support_low & job.flag)
 				job_support_low &= ~job.flag
 			else
@@ -676,7 +676,7 @@ datum/preferences
 			ShowChoices(user)
 			return
 
-		if(role == "Assistant")
+		if(role == "Civilian")
 			if(job_support_low & job.flag)
 				job_support_low &= ~job.flag
 			else
@@ -826,7 +826,7 @@ datum/preferences
 					ResetJobs()
 					SetChoices(user)
 				if("random")
-					if(alternate_option == GET_RANDOM_JOB || alternate_option == BE_ASSISTANT)
+					if(alternate_option == GET_RANDOM_JOB || alternate_option == BE_CIVILIAN)
 						alternate_option += 1
 					else if(alternate_option == RETURN_TO_LOBBY)
 						alternate_option = 0

@@ -277,7 +277,7 @@
 		if(!is_job_whitelisted(src, rank))	 return 0
 		if(!job.player_old_enough(src.client))	return 0
 		if(config.assistantlimit)
-			if(job.title == "Assistant")
+			if(job.title == "Civilian")
 				var/count = 0
 				var/datum/job/officer = job_master.GetJob("Security Officer")
 				var/datum/job/warden = job_master.GetJob("Warden")
