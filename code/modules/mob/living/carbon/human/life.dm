@@ -244,10 +244,11 @@
 		if (radiation)
 			if (radiation > 100)
 				radiation = 100
-				Weaken(10)
-				if(!lying)
-					src << "\red You feel weak."
-					emote("collapse")
+				if(!(species.flags & RAD_ABSORB))
+					Weaken(10)
+					if(!lying)
+						src << "\red You feel weak."
+						emote("collapse")
 
 			if (radiation < 0)
 				radiation = 0
