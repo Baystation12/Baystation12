@@ -113,12 +113,12 @@
 		return
 
 	if(ishuman(L) && status)
-		var/target_zone = L.get_zone_with_miss_chance(user.zone_sel.selecting, L)
+		var/stunroll/X = rand(1,100)
 		user.lastattacked = L
-		M.lastattacker = user
+		L.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
-			target_zone = user.zone_sel.selecting
-		if(!target_zone)
+			X = 100
+		if(X < 66)
 			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 			return
