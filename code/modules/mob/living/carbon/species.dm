@@ -28,7 +28,7 @@
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
-	
+
 	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
 	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
 
@@ -192,7 +192,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD
+	flags = NO_SCAN | NO_BLOOD | IS_WHITELISTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -239,29 +239,6 @@
 
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
-
-/datum/species/vox/create_organs(var/mob/living/carbon/human/H)
-
-	..() //create organs first.
-
-	//Now apply cortical stack.
-	var/datum/organ/external/affected = H.get_organ("head")
-
-	//To avoid duplicates.
-	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
-		affected.implants -= imp
-		del(imp)
-
-	var/obj/item/weapon/implant/cortical/I = new(H)
-	I.imp_in = H
-	I.implanted = 1
-	affected.implants += I
-	I.part = affected
-
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-		var/datum/game_mode/heist/M = ticker.mode
-		M.cortical_stacks += I
-		M.raiders[H.mind] = I
 
 /datum/species/diona
 	name = "Diona"
@@ -331,7 +308,7 @@
 	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
-	
+
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
@@ -348,7 +325,7 @@
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
 	var/sharp = 0
 	var/edge = 0
-	
+
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
 
