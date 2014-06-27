@@ -96,7 +96,7 @@
 	add_fingerprint(user)
 
 
-/obj/item/weapon/melee/baton/attack(mob/M, mob/user)
+/obj/item/weapon/melee/baton/attack(mob/M, mob/user, var/X)
 	if(isrobot(M))
 		..()
 		return
