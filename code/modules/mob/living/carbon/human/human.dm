@@ -1510,7 +1510,7 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
+	if(stat || paralysis || stunned || weakened || lying || handcuffed)
 		src << "You cannot leap in your current state."
 		return
 
