@@ -96,7 +96,7 @@
 	add_fingerprint(user)
 
 
-/obj/item/weapon/melee/baton/attack(mob/M, mob/user, var/X)
+/obj/item/weapon/melee/baton/attack(mob/M, mob/user, var/stunroll)
 	if(isrobot(M))
 		..()
 		return
@@ -112,14 +112,14 @@
 		L.visible_message("<span class='warning'>[L] has been prodded with [src] by [user]. Luckily it was off.</span>")
 		return
 		
-	var/stunroll/X = (rand(1,100))
+	var/stunroll = (rand(1,100))
 	
 	if(ishuman(L) && status)
 		user.lastattacked = L
 		L.lastattacker = user
 		if(user == L) // Attacking yourself can't miss
-			X = 100
-		if(X < 40)
+			stunroll = 100
+		if(stunroll < 40)
 			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 			return
