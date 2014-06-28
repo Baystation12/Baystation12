@@ -327,7 +327,13 @@
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
 /mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
-	if (!yes || ( !istype(AM,/obj/machinery/door) && !istype(AM,/obj/machinery/recharge_station) && !istype(AM,/obj/machinery/disposal/deliveryChute) ) ) return
+	if (!yes || ( \
+	 !istype(AM,/obj/machinery/door) && \
+	 !istype(AM,/obj/machinery/recharge_station) && \
+	 !istype(AM,/obj/machinery/disposal/deliveryChute && \
+	 !istype(AM,/obj/machinery/teleport/hub) && \
+	 !istype(AM,/obj/effect/portal)
+	))) return
 	..()
 	return
 

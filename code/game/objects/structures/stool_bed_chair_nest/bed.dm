@@ -15,7 +15,7 @@
 	var/mob/living/buckled_mob
 
 /obj/structure/stool/bed/psych
-	name = "psych bed"
+	name = "psychiatrists couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "psychbed"

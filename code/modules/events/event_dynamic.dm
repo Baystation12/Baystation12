@@ -79,11 +79,10 @@ var/list/event_last_fired = list()
 		possibleEvents[/datum/event/anomaly_vortex] = 5 + 2.5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
 		possibleEvents[/datum/event/anomaly_bluespace] = 5 + 2.5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
 
-	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 15
 	if(active_with_role["Medical"] > 0)
 		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
 		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
-		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 20
+		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 10
 		possibleEvents[/datum/event/organ_failure] = active_with_role["Medical"] * 50
 
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
