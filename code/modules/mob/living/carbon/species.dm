@@ -170,7 +170,7 @@
 	flesh_color = "#AFA59E"
 
 	custom_gear_options = list(
-	/obj/item/clothing/head/tajaran/scarf
+	/obj/item/clothing/head/tajaran/scarf,
 	/obj/item/clothing/suit/tajaran/furs
 		)
 

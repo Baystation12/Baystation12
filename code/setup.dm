@@ -807,3 +807,4 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
  #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
  #define NETWORK_FAILURE  32
 
+#define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
