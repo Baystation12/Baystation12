@@ -88,7 +88,7 @@ var/list/department_radio_keys = list(
 	//handle nonverbal and sign languages here
 	if (speaking)
 		if (speaking.flags & NONVERBAL)
-			if (prob(50))
+			if (prob(30))
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 		
 		if (speaking.flags & SIGNLANG)
