@@ -1065,10 +1065,11 @@
 
 /obj/item/clothing/shoes/jackboots/fluff/kecer_eldraran
 	name = "Toe-less Jackboots"
-	desc = "Modified pair of jackboots, particularly friendly to those species, whose toes hold claws."
+	desc = "Modified pair of jackboots, particularly friendly to those species whose toes hold claws."
 	icon = 'icons/obj/custom_items.dmi'
 	item_state = "digiboots"
 	icon_state = "digiboots"
+	species_restricted = null
 
 
 //////////// Sets ////////////
