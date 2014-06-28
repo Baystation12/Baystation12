@@ -103,6 +103,9 @@
 	var/phoron_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
+	
+	var/alarm_sound_cooldown = 100
+	var/last_sound_time = 0
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -167,6 +170,10 @@
 
 	var/turf/simulated/location = loc
 	if(!istype(location))	return//returns if loc is not simulated
+
+	if ((alarm_area.fire || alarm_area.atmosalm >= 2) && world.time > last_sound_time + alarm_sound_cooldown)
+		playsound(src.loc, 'sound/machines/airalarm.ogg', 40, 0, 5)
+		last_sound_time = world.time
 
 	var/datum/gas_mixture/environment = location.return_air()
 
