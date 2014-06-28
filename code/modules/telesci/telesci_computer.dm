@@ -1,6 +1,7 @@
 /obj/machinery/computer/telescience
 	name = "\improper Telepad Control Console"
 	desc = "Used to teleport objects to and from the telescience telepad."
+	icon = 'tauceti/icons/obj/computer_telescience.dmi'
 	icon_state = "teleport"
 	var/sending = 1
 	var/obj/machinery/telepad/telepad = null
