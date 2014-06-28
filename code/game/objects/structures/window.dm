@@ -194,6 +194,11 @@
 					M.apply_damage(20)
 					hit(50)
 					visible_message("\red <big><b>[user] crushes [M] against \the [src]!</b></big>")
+				if(4)
+					M.Weaken(5)
+					M.apply_damage(30)
+					hit(75)
+					visible_message("\red <big><b>[user] smashes [M] against \the [src]!</b></big>")
 			return
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(reinf && state >= 1)
