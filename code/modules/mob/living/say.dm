@@ -81,9 +81,30 @@ var/list/department_radio_keys = list(
 		if(!istype(dongle)) return
 		if(dongle.translate_binary) return 1
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list())
+/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list(), var/sound/speech_sound, var/sound_vol)
 
 	var/turf/T = get_turf(src)
+	
+	if(used_radios.len)
+		italics = 1
+		message_range = 1
+		
+		for(var/mob/living/M in hearers(5, src))
+			if(M != src)
+				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
+				if (speech_sound)
+					var/turf/source = speaker? get_turf(speaker) : get_turf(src)
+					src.playsound_local(source, speech_sound, sound_vol * 0.5, 1)
+
+	var/datum/gas_mixture/environment = T.return_air()
+	if(environment)
+		var/pressure = environment.return_pressure()
+		if(pressure < SAY_MINIMUM_PRESSURE)
+			italics = 1
+			message_range = 1
+			
+			if (speech_sound)
+				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
 
 	var/list/listening = list()
 	if(T)
@@ -120,15 +141,9 @@ var/list/department_radio_keys = list(
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 	spawn(30) del(speech_bubble)
 
-	if(used_radios.len)
-		for(var/mob/living/M in hearers(5, src))
-			if(M != src)
-				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
-
-
 	for(var/mob/M in listening)
 		M << speech_bubble
-		M.hear_say(message,verb,speaking,alt_name, italics, src)
+		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 
 
 	log_say("[name]/[key] : [message]")

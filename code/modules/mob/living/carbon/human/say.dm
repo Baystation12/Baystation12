@@ -121,23 +121,14 @@
 					else if(r_ear && istype(r_ear,/obj/item/device/radio))
 						r_ear.talk_into(src,message, message_mode, verb, speaking)
 						used_radios += r_ear
-
-
-	if(used_radios.len)
-		italics = 1
-		message_range = 1
-
-	var/datum/gas_mixture/environment = loc.return_air()
-	if(environment)
-		var/pressure = environment.return_pressure()
-		if(pressure < SAY_MINIMUM_PRESSURE)
-			italics = 1
-			message_range =1
-
+	
+	var/sound/speech_sound
+	var/sound_vol
 	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
-		playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
-
-	..(message, speaking, verb, alt_name, italics, message_range, used_radios)
+		speech_sound = sound('sound/voice/shriek1.ogg')
+		sound_vol = 50
+	
+	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
 
 /mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
 
