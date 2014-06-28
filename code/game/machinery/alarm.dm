@@ -104,7 +104,7 @@
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
 	
-	var/alarm_sound_cooldown = 100
+	var/alarm_sound_cooldown = 200
 	var/last_sound_time = 0
 
 /obj/machinery/alarm/server/New()
