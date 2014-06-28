@@ -125,6 +125,7 @@
 
 	moving_status = SHUTTLE_IDLE
 	process_state = WAIT_FINISH
+	in_use = null
 
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
