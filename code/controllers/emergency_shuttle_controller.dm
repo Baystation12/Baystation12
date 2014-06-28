@@ -70,6 +70,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
 	
+	//reset the shuttle transit time if we need to
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
+	
 	evac = 1
 	captain_announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 	world << sound('sound/AI/shuttlecalled.ogg')
@@ -85,6 +88,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
+	
+	//reset the shuttle transit time if we need to
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
 	
 	captain_announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
