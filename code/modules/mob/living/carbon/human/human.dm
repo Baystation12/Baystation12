@@ -1347,7 +1347,7 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
 		src << "You cannot leap in your current state."
 		return
 
@@ -1357,13 +1357,20 @@
 			choices += M
 	choices -= src
 
-	var/mob/living/T = input(src,"Who do you wish to leap at?") in null|choices
+	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
 
 	if(!T || !src || src.stat) return
 
 	if(get_dist(get_turf(T), get_turf(src)) > 6) return
 
-	last_special = world.time + 100
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	last_special = world.time + 75
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
