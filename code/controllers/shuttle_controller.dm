@@ -269,6 +269,12 @@ var/global/datum/shuttle_controller/shuttle_controller
 					shuttle = dock_controller_map[C.id_tag]
 					shuttle.docking_controller = C.program
 					dock_controller_map -= C.id_tag
+					
+					//escape pods
+					if(istype(C, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
+						var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/EPC = C
+						EPC.pod = shuttle
+					
 				if (C.id_tag in dock_controller_map_station)
 					multidock = dock_controller_map_station[C.id_tag]
 					if (istype(multidock))
