@@ -634,10 +634,10 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
 			P.name = "'[command_name()] Update.'"
-			P.info = input
+			P.info = sanitize_alt(copytext(input, 1, MAX_MESSAGE_LEN), list("ÿ"=LETTER_255))
 			P.update_icon()
-			C.messagetitle.Add("[sanitize_popup(command_name())] Update")
-			C.messagetext.Add(sanitize_popup(P.info))
+			C.messagetitle.Add("[command_name()] Update")
+			C.messagetext.Add(P.info)
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")
