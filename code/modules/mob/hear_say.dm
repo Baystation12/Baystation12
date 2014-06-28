@@ -9,6 +9,12 @@
 		return
 
 	var/style = "body"
+	
+	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
+	if (language && (language.flags & NONVERBAL))
+		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
+			message = stars(message)
+	
 	if(!say_understands(speaker,language))
 		if(istype(speaker,/mob/living/simple_animal))
 			var/mob/living/simple_animal/S = speaker
@@ -62,6 +68,11 @@
 
 	var/style = "body"
 
+	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
+	if (language && (language.flags & NONVERBAL))
+		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
+			message = stars(message)
+	
 	if(!say_understands(speaker,language))
 		if(istype(speaker,/mob/living/simple_animal))
 			var/mob/living/simple_animal/S = speaker
@@ -144,6 +155,22 @@
 		src << "[part_a][track][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
 	else
 		src << "[part_a][speaker_name][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
+
+/mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
+	if(!client)
+		return
+	
+	if(say_understands(speaker, language))
+		message = "<B>[src]</B> [verb], \"[message]\""
+	else
+		message = "<B>[src]</B> [verb]."
+
+	if(src.status_flags & PASSEMOTES)
+		for(var/obj/item/weapon/holder/H in src.contents)
+			H.show_message(message)
+		for(var/mob/living/M in src.contents)
+			M.show_message(message)
+	src.show_message(message)
 
 /mob/proc/hear_sleep(var/message)
 	var/heard = ""

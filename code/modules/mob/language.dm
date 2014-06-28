@@ -6,6 +6,7 @@
 	var/name = "an unknown language" // Fluff name of language if any.
 	var/desc = "A language."         // Short description for 'Check Languages'.
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
+	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"         // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
@@ -33,6 +34,10 @@
 	speech_verb = "mrowls"
 	colour = "tajaran_signlang"
 	key = "y"		//only "dfpqxyz" left.
+	
+	//need to find a way to resolve possesive macros
+	signlang_verb = list("flicks their left ear", "flicks their right ear", "swivels their ears", "twitches their tail", "curls the end of their tail", "arches their tail", "wiggles the end of their tail", "waves their tail about", "holds up a claw", "gestures with their left hand", "gestures with their right hand", "gestures with their tail", "gestures with their ears", "gestures with their whiskers")	
+	
 	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
