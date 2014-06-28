@@ -156,12 +156,14 @@
 				src.updateUsrDialog()
 			return
 
-		if(href_list["atmos_unlock"])
-			switch(href_list["atmos_unlock"])
-				if("0")
-					current.air_doors_close(1)
-				if("1")
-					current.air_doors_open(1)
+		//commenting this out because it causes compile errors
+		//I tried fixing it but wasn't sucessful.
+		//if(href_list["atmos_unlock"])
+		//	switch(href_list["atmos_unlock"])
+		//		if("0")
+		//			current.alarm_area.air_doors_close()
+		//		if("1")
+		//			current.alarm_area.air_doors_open()
 
 		if(href_list["atmos_alarm"])
 			if (current.alarm_area.atmosalert(2))
