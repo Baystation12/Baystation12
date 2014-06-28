@@ -175,7 +175,7 @@
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
 			if("Title")
-				var/newtitle = reject_bad_text(stripped_input(usr, "Write a new title:"))
+				var/newtitle = sanitize(copytext(input(usr, "Write a new title:"), 1, MAX_NAME_LEN))
 				if(!newtitle)
 					usr << "The title is invalid."
 					return
@@ -183,14 +183,14 @@
 					src.name = newtitle
 					src.title = newtitle
 			if("Contents")
-				var/content = strip_html(input(usr, "Write your book's contents (HTML NOT allowed):"),8192) as message|null
+				var/content = sanitize_alt(copytext(input(usr, "Write your book's contents (HTML NOT allowed):") as message|null,1, 8192))
 				if(!content)
 					usr << "The content is invalid."
 					return
 				else
 					src.dat += content
 			if("Author")
-				var/newauthor = stripped_input(usr, "Write the author's name:")
+				var/newauthor = sanitize_alt(copytext(input(usr, "Write the author's name:"),1, MAX_NAME_LEN))
 				if(!newauthor)
 					usr << "The name is invalid."
 					return

@@ -220,7 +220,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				dat += "<FONT color=red>No data found in scanner memory.</FONT><BR>"
 			else
 				dat += {"<TT>Data marked for upload...</TT><BR>
-				<TT>Title: </TT>[scanner.cache.name]<BR>"}
+				<TT>Title: </TT>[sanitize_popup(scanner.cache.name)]<BR>"}
 				if(!scanner.cache.author)
 					scanner.cache.author = "Anonymous"
 				dat += {"<TT>Author: </TT><A href='?src=\ref[src];setauthor=1'>[scanner.cache.author]</A><BR>
@@ -339,7 +339,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 						var/sqlcontent = dbcon.Quote(scanner.cache.dat)
 						var/sqlcategory = dbcon.Quote(upload_category)
 						*/
-						var/sqltitle = sanitizeSQL(scanner.cache.name)
+						var/sqltitle = sanitizeSQL(sanitize_popup(scanner.cache.name))
 						var/sqlauthor = sanitizeSQL(scanner.cache.author)
 						var/sqlcontent = sanitizeSQL(scanner.cache.dat)
 						var/sqlcategory = sanitizeSQL(upload_category)
@@ -367,7 +367,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 
 			while(query.NextRow())
 				var/author = query.item[2]
-				var/title = query.item[3]
+				var/title = sanitize_chat(query.item[3])
 				var/content = query.item[4]
 				var/obj/item/weapon/book/B = new(src.loc)
 				B.name = "Book: [title]"

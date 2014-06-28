@@ -126,15 +126,15 @@
 		if(istype(src[page], /obj/item/weapon/paper))
 			var/obj/item/weapon/paper/P = W
 			if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
+				dat+= "<HTML><HEAD><TITLE>[sanitize_popup(P.name)]</TITLE></HEAD><BODY>[sanitize_plus_popup(stars(revert_ja(P.info)))][P.stamps]</BODY></HTML>"
 			else
-				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
+				dat+= "<HTML><HEAD><TITLE>[sanitize_popup(P.name)]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
 			human_user << browse(dat, "window=[name]")
 			P.add_fingerprint(usr)
 		else if(istype(src[page], /obj/item/weapon/photo))
 			var/obj/item/weapon/photo/P = W
 			human_user << browse_rsc(P.img, "tmp_photo.png")
-			human_user << browse(dat + "<html><head><title>[P.name]</title></head>" \
+			human_user << browse(dat + "<html><head><title>[sanitize_popup(P.name)]</title></head>" \
 			+ "<body style='overflow:hidden'>" \
 			+ "<div> <img src='tmp_photo.png' width = '180'" \
 			+ "[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]"\
