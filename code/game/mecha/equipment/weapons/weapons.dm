@@ -120,7 +120,7 @@
 	projectile = /obj/item/projectile/beam/stun
 	fire_sound = 'sound/weapons/Taser.ogg'
 
-
+/* Commenting this out rather than removing it because it may be useful for reference.
 /obj/item/mecha_parts/mecha_equipment/weapon/honker
 	name = "HoNkER BlAsT 5000"
 	icon_state = "mecha_honker"
@@ -175,6 +175,7 @@
 		log_message("Honked from [src.name]. HONK!")
 		do_after_cooldown()
 		return
+*/
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic
 	name = "General Ballisic Weapon"
@@ -287,31 +288,3 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited/rearm()
 	return//Extra bit of security
-
-/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar
-	name = "Banana Mortar"
-	icon_state = "mecha_bananamrtr"
-	projectile = /obj/item/weapon/bananapeel
-	fire_sound = 'sound/items/bikehorn.ogg'
-	projectiles = 15
-	missile_speed = 1.5
-	projectile_energy_cost = 100
-	equip_cooldown = 20
-	construction_time = 300
-	construction_cost = list("metal"=20000,"bananium"=5000)
-
-	can_attach(obj/mecha/combat/honker/M as obj)
-		if(!istype(M))
-			return 0
-		return ..()
-
-/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar
-	name = "Mousetrap Mortar"
-	icon_state = "mecha_mousetrapmrtr"
-	projectile = /obj/item/device/assembly/mousetrap
-	equip_cooldown = 10
-
-/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar/Fire(atom/movable/AM, atom/target, turf/aimloc)
-	var/obj/item/device/assembly/mousetrap/M = AM
-	M.secured = 1
-	..()

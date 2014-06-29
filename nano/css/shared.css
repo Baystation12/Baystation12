@@ -70,6 +70,15 @@ a.icon img, .linkOn.icon img, .linkOff.icon img, .selected.icon img, .disabled.i
     width: 18px;
     height: 18px;
 }
+.linkDanger, a.linkDanger:link, a.linkDanger:visited, a.linkDanger:active {
+    color: #ffffff;
+    background-color: #ff0000;
+    border-color: #aa0000;
+}
+.linkDanger:hover {
+    background-color: #ff6666;
+}
+
 ul {
     padding: 4px 0 0 10px;
     margin: 0;
@@ -168,6 +177,12 @@ h4 {
     color: #ee0000;
     font-weight: bold;
 }
+
+.idle {
+    color: #272727;
+    font-weight: bold;
+}
+
 .redBackground {
 	background: #ea0000;
 }
@@ -450,15 +465,15 @@ div.notice {
 }
 
 /* Table stuffs for power monitor */
-table.pmon 
-{ 
+table.pmon
+{
 border:2px solid RoyalBlue;
 }
 
-table.pmon td, table.pmon th 
-{ 
+table.pmon td, table.pmon th
+{
 border-bottom:1px dotted black;
-padding:0px 5px 0px 5px; 
+padding:0px 5px 0px 5px;
 }
 
 
@@ -510,5 +525,24 @@ th.misc
 }
 
 
+/* Damage colors for crew monitoring computer */
 
+.burn
+{
+	color: orange;
+}
 
+.brute
+{
+	color: red;
+}
+
+.toxin
+{
+	color: green;
+}
+
+.oxyloss
+{
+	color: blue;
+}

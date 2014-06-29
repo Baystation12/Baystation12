@@ -497,7 +497,7 @@
 // Universal Translator
 /mob/living/silicon/pai/proc/softwareTranslator()
 	var/dat = {"<h2>Universal Translator</h2><hr>
-				When enabled, this device will automatically convert all spoken and written language into a format that any known recipient can understand.<br><br>
+				When enabled, this device will automatically convert all spoken and written languages into a format that any known recipient can understand.<br><br>
 				The device is currently [ (src.universal_speak) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled</font>.<br>
 				<a href='byond://?src=\ref[src];software=translator;sub=0;toggle=1'>Toggle Device</a><br>
 				"}

@@ -4,8 +4,9 @@
 	icon_state = "taperecorderidle"
 	item_state = "analyzer"
 	w_class = 2.0
-	m_amt = 60
-	g_amt = 30
+
+	matter = list("metal" = 60,"glass" = 30)
+
 	var/emagged = 0.0
 	var/recording = 0.0
 	var/playing = 0.0

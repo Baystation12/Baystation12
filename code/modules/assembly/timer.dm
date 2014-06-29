@@ -2,9 +2,7 @@
 	name = "timer"
 	desc = "Used to time things. Works well with contraptions which has to count down. Tick tock."
 	icon_state = "timer"
-	m_amt = 500
-	g_amt = 50
-	w_amt = 10
+	matter = list("metal" = 500, "glass" = 50, "waste" = 10)
 	origin_tech = "magnets=1"
 
 	wires = WIRE_PULSE
@@ -20,7 +18,7 @@
 
 	activate()
 		if(!..())	return 0//Cooldown check
-		
+
 		timing = !timing
 
 		update_icon()

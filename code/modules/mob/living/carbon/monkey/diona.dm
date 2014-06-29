@@ -12,6 +12,7 @@
 	var/ready_evolve = 0
 	universal_understand = 0 // Dionaea do not need to speak to people
 	universal_speak = 0      // before becoming an adult. Use *chirp.
+	holder_type = /obj/item/weapon/holder/diona
 
 /mob/living/carbon/monkey/diona/attack_hand(mob/living/carbon/human/M as mob)
 
@@ -24,14 +25,7 @@
 			src.verbs -= /mob/living/carbon/monkey/diona/proc/merge
 			src.loc = M
 		else
-			var/obj/item/weapon/holder/diona/D = new(loc)
-			src.loc = D
-			D.name = loc.name
-			D.attack_hand(M)
-			M << "You scoop up [src]."
-			src << "[M] scoops you up."
-		M.status_flags |= PASSEMOTES
-		return
+			get_scooped(M)
 
 	..()
 

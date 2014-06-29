@@ -24,10 +24,10 @@
 		alt_name = "(as [get_id_name("Unknown")])"
 	
 	//parse the radio code and consume it
-	var/message_mode = parse_message_mode(message)
+	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)
+			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
 			message = copytext(message,3)
 	
@@ -48,11 +48,12 @@
 	if(!message || stat)
 		return
 
-	var/ending = copytext(message, length(message))
-	if(ending=="!")
-		verb=pick("exclaims","shouts","yells")
-	if(ending=="?")
-		verb="asks"
+	if (!speaking)
+		var/ending = copytext(message, length(message))
+		if(ending=="!")
+			verb=pick("exclaims","shouts","yells")
+		if(ending=="?")
+			verb="asks"
 
 	var/list/obj/item/used_radios = new
 
@@ -99,7 +100,7 @@
 				I.talk_into(src, message, verb, speaking)
 				used_radios += I
 		if("whisper")
-			whisper(message)
+			whisper_say(message, speaking, alt_name)
 			return
 		if("binary")
 			if(robot_talk_understand || binarycheck())
@@ -142,20 +143,24 @@
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
-	if (istype(other, /mob/living/carbon/monkey/diona) && !speaking)
-		if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
-			return 1
 
-	if (istype(other, /mob/living/silicon))
-		return 1
-	if (istype(other, /mob/living/carbon/brain))
-		return 1
-	if (istype(other, /mob/living/carbon/slime))
-		return 1
-	if (istype(other, /mob/living/simple_animal))
-		if(other.universal_speak || src.universal_speak || src.universal_understand)
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/monkey/diona))
+			if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+				return 1
+		if (istype(other, /mob/living/silicon))
 			return 1
-		return 0
+		if (istype(other, /mob/living/carbon/brain))
+			return 1
+		if (istype(other, /mob/living/carbon/slime))
+			return 1
+	
+	//This is already covered by mob/say_understands()
+	//if (istype(other, /mob/living/simple_animal))
+	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
+	//		return 1
+	//	return 0
 
 	return ..()
 

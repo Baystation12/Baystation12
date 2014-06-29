@@ -19,20 +19,20 @@
 /obj/item/weapon/card/id/guest/examine()
 	..()
 	if (world.time < expiration_time)
-		usr << "\blue This pass expires at [worldtime2text(expiration_time)]."
+		usr << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
 	else
-		usr << "\red It expired at [worldtime2text(expiration_time)]."
+		usr << "<span class='warning'>It expired at [worldtime2text(expiration_time)].</span>"
 
 /obj/item/weapon/card/id/guest/read()
 	if (world.time > expiration_time)
-		usr << "This pass expired at [worldtime2text(expiration_time)]."
+		usr << "<span class='notice'>This pass expired at [worldtime2text(expiration_time)].</span>"
 	else
-		usr << "This pass expires at [worldtime2text(expiration_time)]."
+		usr << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
 
-	usr << "It grants access to following areas:"
+	usr << "<span class='notice'>It grants access to following areas:</span>"
 	for (var/A in temp_access)
-		usr << "[get_access_desc(A)]."
-	usr << "Issuing reason: [reason]."
+		usr << "<span class='notice'>[get_access_desc(A)].</span>"
+	usr << "<span class='notice'>Issuing reason: [reason].</span>"
 	return
 
 /////////////////////////////////////////////
@@ -60,10 +60,13 @@
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/card/id))
-		user.drop_item()
-		O.loc = src
-		giver = O
-		updateUsrDialog()
+		if(!giver)
+			user.drop_item()
+			O.loc = src
+			giver = O
+			updateUsrDialog()
+		else
+			user << "<span class='warning'>There is already ID card inside.</span>"
 
 /obj/machinery/computer/guestpass/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
@@ -116,16 +119,16 @@
 			if ("giv_name")
 				var/nam = input("Person pass is issued to", "Name", name)
 				if (nam)
-					giv_name = nam
+					giv_name = strip_html_simple(nam)
 			if ("reason")
 				var/reas = input("Reason why pass is issued", "Reason", reason)
-				reason = reas
+				reason = strip_html_simple(reas)
 			if ("duration")
 				var/dur = input("Duration (in minutes) during which pass is valid.", "Duration") as num
 				if (dur > 0 && dur < 30)
 					duration = dur
 				else
-					usr << "\red Invalid duration."
+					usr << "<span class='warning'>Invalid duration.</span>"
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)

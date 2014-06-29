@@ -30,13 +30,6 @@
 	walltype = "diamond"
 	mineral = "diamond"
 
-/turf/simulated/wall/mineral/clown
-	name = "bananium wall"
-	desc = "A wall with bananium plating. Honk!"
-	icon_state = "clown0"
-	walltype = "clown"
-	mineral = "clown"
-
 /turf/simulated/wall/mineral/sandstone
 	name = "sandstone wall"
 	desc = "A wall with sandstone plating."

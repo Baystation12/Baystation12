@@ -63,6 +63,11 @@
 			card.radio = new /obj/item/device/radio(src.card)
 		radio = card.radio
 
+	//Default languages without universal translator software
+	add_language("Sol Common", 1)
+	add_language("Tradeband", 1)
+	add_language("Gutter", 1)
+	
 	//PDA
 	pda = new(src)
 	spawn(5)

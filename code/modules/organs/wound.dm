@@ -119,7 +119,7 @@
 
 	// checks if wound is considered open for external infections
 	// untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
-	proc/can_infect()
+	proc/infection_check()
 		if (is_treated() && damage < 10)
 			return 0
 		if (disinfected)

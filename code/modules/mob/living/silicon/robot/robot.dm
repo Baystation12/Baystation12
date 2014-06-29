@@ -5,8 +5,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	universal_speak = 1
-
+	
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -237,6 +236,9 @@
 			module_sprites["Combat Android"] = "droid-combat"
 			module.channels = list("Security" = 1)
 
+	//languages
+	module.add_languages(src)
+	
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"

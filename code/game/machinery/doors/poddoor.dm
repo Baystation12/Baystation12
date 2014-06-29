@@ -1,6 +1,6 @@
 /obj/machinery/door/poddoor
 	name = "Podlock"
-	desc = "Why it no open!!!"
+	desc = "That looks like it doesn't open easily."
 	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
 	var/id = 1.0

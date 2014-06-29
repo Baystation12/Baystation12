@@ -171,8 +171,8 @@
 		if(ticker.mode:malf_mode_declared)
 			stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
 	if(emergency_shuttle)
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
+		if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
+			var/timeleft = emergency_shuttle.estimate_arrival_time()
 			if (timeleft)
 				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
@@ -440,11 +440,16 @@
 	return
 
 // called when something steps onto a human
-// this could be made more general, but for now just handle mulebot
+// this handles mulebots and vehicles
 /mob/living/carbon/human/HasEntered(var/atom/movable/AM)
-	var/obj/machinery/bot/mulebot/MB = AM
-	if(istype(MB))
+	if(istype(AM, /obj/machinery/bot/mulebot))
+		var/obj/machinery/bot/mulebot/MB = AM
 		MB.RunOver(src)
+
+	if(istype(AM, /obj/vehicle))
+		var/obj/vehicle/V = AM
+		V.RunOver(src)
+
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
@@ -1215,7 +1220,7 @@
 		return
 
 	usr << "Don't move until counting is finished."
-	var/time = world.timeofday
+	var/time = world.time
 	sleep(60)
 	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
 		usr << "You moved while counting. Try again."
@@ -1342,7 +1347,7 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
 		src << "You cannot leap in your current state."
 		return
 
@@ -1352,13 +1357,20 @@
 			choices += M
 	choices -= src
 
-	var/mob/living/T = input(src,"Who do you wish to leap at?") in null|choices
+	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
 
 	if(!T || !src || src.stat) return
 
 	if(get_dist(get_turf(T), get_turf(src)) > 6) return
 
-	last_special = world.time + 100
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	last_special = world.time + 75
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")

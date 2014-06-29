@@ -54,8 +54,109 @@ should be listed in the changelog upon commit though. Thanks. -->
 
 <!-- You can simply add changelogs using AddToChangelog.exe -->
 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Baystation 12 Changelog</title>
+  <link rel="stylesheet" type="text/css" href="changelog.css">
+  <script type='text/javascript'>
+  
+	function changeText(tagID, newText, linkTagID){
+		var tag = document.getElementById(tagID);
+		tag.innerHTML = newText;
+		var linkTag = document.getElementById(linkTagID);
+		linkTag.removeAttribute("href");
+		linkTag.removeAttribute("onclick");
+	}
+
+  </script>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<!-- 
+Header Section 
+-->
+<table align='center' width='650'><tr><td>
+<table align='center' class="top">
+	<tr>
+		<td valign='top'>
+			<div align='center'><font size='3'><b>Space Station 13</b></font></div>
+			<p><div align='center'><font size='3'><a href="http://baystation12.net/wiki/">Wiki</a> | <a href="https://github.com/Baystation12/Baystation12/">Source code</a></font></div></p>
+			<font size='2'>Code licensed under <a href="http://www.gnu.org/licenses/gpl.html">GPLv3</a>. Content licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.<br><br>
+			</td>
+	</tr>
+</table>
+<br><b>Baystation 12 Credit List</b>
+<table align='center' class="top">
+	<tr>
+		<td valign='top'>
+			<font size='2'><b>Code:</b> Abi79, Aryn, Cael_Aislinn, Ccomp5950, Chinsky, cib, CompactNinja, DopeGhoti, Erthilo, Hawk_v3, Head, Ispil, JoeyJo0, Lexusjjss, Melonstorm, Miniature, Mloc, NerdyBoy1104, SkyMarshal, Snapshot, Spectre, Strumpetplaya, Sunfall, Tastyfish, Uristqwerty<br></font>
+			<font size='2'><b>Sprites:</b> Apple_Master, Arcalane, Chinsky, CompactNinja, Deus Dactyl, Erthilo, Flashkirby, JoeyJo0, Miniature, Searif, Xenone, faux<br></font>
+			<font size='2'><b>Sounds:</b> Aryn<br></font>
+			<font size='2'><b>Thanks To:</b> /tg/ station, Goonstation, Animus Station, Daedalus, and original Spacestation 13 devs. Skibiliano for the IRC bot.</font>
+		</td>
+	</tr>
+</table>
+
+<!-- 
+Changelog Section 
+-->
+
+<!-- NOTE TO UPDATERS!! Please only list things which are important to players. 
+Stuff which is in development and not yet visible to players or just code related 
+(ie. code improvements for expandability, etc.) should not be listed here. They 
+should be listed in the changelog upon commit though. Thanks. -->
+
+<!-- You can simply add changelogs using AddToChangelog.exe -->
+
 <!-- DO NOT REMOVE, MOVE, OR COPY THIS COMMENT! THIS MUST BE THE LAST NON-EMPTY LINE BEFORE THE LOGS #ADDTOCHANGELOGMARKER# -->
 
+<div class='commit sansserif'>
+	<h2 class='date'>19 июня 2014</h2>
+	<h3 class='author'>Chinsky updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>Adds guest terminals on the map. These wall terminals let anyone issue temporary IDs. Only access that issuer has can be granted, and maximum time pass can be issued for is 20 minutes. All operations are logged in terminals.</li>
+	</ul>
+</div>
+
+
+<div class='commit sansserif'>
+	<h2 class='date'>20 June 2014</h2>
+	<h3 class='author'>Cael_Aislinn updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>New discoverable items added to xenoarchaeology, and new features for some existing ones. Artifact harvesters can now harvest the secondary effect of artifacts as well as the primary one.<br>
+		</li>
+		<li class='tweak'>Artifact utilisers should be much nicer/easier to use now.<br>
+		<li class='bugfix'>Alden-Saraspova counters and talking items should work properly now.<br>
+		</li>
+	</ul>
+</div>
+
+<div class='commit sansserif'>
+	<h2 class='date'>3 Juni 2014</h2>
+	<h3 class='author'>Hubblenaut updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>Added wheelchairs</li>
+		<li class='tweak'>Replaced stool in Medical Examination with wheelchair</li>
+		<li class='tweak'>Using a fire-extinguisher to propel you on a chair can have consequences (drive into walls and people, do it!)</li>
+	</ul>
+</div>
+
+
+<div class='commit sansserif'>
+	<h2 class='date'>31 May 2014</h2>
+	<h3 class='author'>Jarcolr updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>21 New cargo crates, go check them out!</li>
+		<li class='rscadd'>Peanuts have now been added, food items are now being developed.</li>
+		<li class='rscadd'>2 new cargo groups, Miscellaneous and Supply.</li>
+		<li class='rscadd'>Sugarcane seeds can now be gotten from the seed dispenser.</li>
+		<li class='rscadd'>5 new satchels when selecting "satchel" for RD, scientist, botanist, virologist, geneticist (disabled) and chemist.</li>
+		<li class='rscadd'>Clicking on a player with a paper/book when you have the eyes selected shows them the book/paper forcefully.</li>
+	</ul>
+</div>
 
 <div class='commit sansserif'>
 	<h2 class='date'>23 Mai 2014</h2>
@@ -81,6 +182,33 @@ should be listed in the changelog upon commit though. Thanks. -->
 		<li class='imageadd'>Adds icons for copied stamps</li>
 	</ul>
 </div>
+
+
+<div class='commit sansserif'>
+	<h2 class='date'>3 May 2014</h2>
+	<h3 class='author'>Cael_Aislinn updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>Coming out of nowhere the past few months, the Garland Corporation has made headlines with a new prehistoric theme park delighting travellers with species thought extinct. Now available  for research stations everywhere is the technology that made it all possible! Features include: <br>
+			- 13 discoverable prehistoric species to clone from fossils (including 5 brand new ones).<br>
+			- 11 discoverable prehistoric plants to clone from fossils (including 9 brand new ones).<br>
+			- New minigame that involves correctly ordering the genomes inside each genetic sequence to unlock an animal/plant.<br>
+			- Some prehistoric animals and plants may seem strangely familiar... while others may bring more than the erstwhile scientist bargains for.<br>
+		</li>
+	</ul>
+</div>
+
+
+
+<div class='commit sansserif'>
+	<h2 class='date'>28 мая 2014</h2>
+	<h3 class='author'>Chinsky updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>Adds few new paperBBcode tags, to make up for HTML removal.</li>
+		<li class='rscadd'>[logo] tag draws NT logo image (one from wiki).</li>
+		<li class='rscadd'>[table] [/table] tags mark borders of tables. [grid] [/grid] are borderless tables, useful of making layouts. Inside tables following tags are used: [row] marks beginning of new table row, [cell] - beginning of new table cell.</li>
+	</ul>
+</div>
+<div class='commit sansserif'>
 
 
 

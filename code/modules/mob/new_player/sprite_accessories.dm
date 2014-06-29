@@ -223,6 +223,14 @@
 		name = "Emo"
 		icon_state = "hair_emo"
 
+	shortovereye
+		name = "Overeye Short"
+		icon_state = "hair_shortovereye"
+
+	longovereye
+		name = "Overeye Long"
+		icon_state = "hair_longovereye"
+
 	fag
 		name = "Flow Hair"
 		icon_state = "hair_f"

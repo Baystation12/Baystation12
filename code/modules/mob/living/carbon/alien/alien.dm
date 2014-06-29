@@ -159,8 +159,8 @@
 		stat(null, "Plasma Stored: [getPlasma()]/[max_plasma]")
 
 	if(emergency_shuttle)
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
+		if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
+			var/timeleft = emergency_shuttle.estimate_arrival_time()
 			if (timeleft)
 				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 

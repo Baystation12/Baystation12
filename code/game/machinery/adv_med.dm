@@ -308,6 +308,13 @@
 							robot = "Prosthetic:"
 						if(e.open)
 							open = "Open:"
+						switch (e.germ_level)
+							if (INFECTION_LEVEL_ONE + 50 to INFECTION_LEVEL_TWO)
+								infected = "Mild Infection:"
+							if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
+								infected = "Acute Infection:"
+							if (INFECTION_LEVEL_THREE to INFINITY)
+								infected = "Septic:"
 
 						var/unknown_body = 0
 						for(var/I in e.implants)
@@ -332,8 +339,16 @@
 							mech = "Assisted:"
 						if(i.robotic == 2)
 							mech = "Mechanical:"
+							
+						var/infection = "None"
+						switch (i.germ_level)
+							if (1 to INFECTION_LEVEL_TWO)
+								infection = "Mild Infection:"
+							if (INFECTION_LEVEL_TWO to INFINITY)
+								infection = "Acute Infection:"
+							
 						dat += "<tr>"
-						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>None:[mech]</td><td></td>"
+						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
 						dat += "</tr>"
 					dat += "</table>"
 					if(occupant.sdisabilities & BLIND)
