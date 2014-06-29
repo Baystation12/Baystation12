@@ -107,7 +107,7 @@ var/global/datum/crafting_controller/crafting_master
 /datum/crafting_holder/New(atom/location, family_name)
 	location.craft_holder = src
 	holder = location
-	spawn(10)
+	spawn(50)
 		crafting_master.all_crafting_points |= src
 		if(family_name)
 			family = crafting_master.get_family_by_name(family_name)
