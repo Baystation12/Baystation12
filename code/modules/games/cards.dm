@@ -48,7 +48,7 @@
 		for(var/datum/playingcard/P in H.cards)
 			cards += P
 		del(O)
-		user << "You place your cards on top of the deck."
+		user << "You place your cards on the bottom of the deck."
 		return
 	..()
 
@@ -57,6 +57,7 @@
 	set category = "Object"
 	set name = "Draw"
 	set desc = "Draw a card from a deck."
+	set src in oview(1)
 
 	if(usr.stat || !Adjacent(usr)) return
 
