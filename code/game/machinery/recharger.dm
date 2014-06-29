@@ -72,7 +72,7 @@ obj/machinery/recharger/process()
 			if(E.power_supply.charge < E.power_supply.maxcharge)
 				E.power_supply.give(100)
 				icon_state = "recharger1"
-				use_power(250)
+				use_power(250*CELLRATE)
 			else
 				icon_state = "recharger2"
 			return
@@ -81,7 +81,7 @@ obj/machinery/recharger/process()
 			if(B.bcell)
 				if(B.bcell.give(1500)) //Because otherwise it takes two minutes to fully charge due to 15k cells. - Neerti
 					icon_state = "recharger1"
-					use_power(200)
+					use_power(200*CELLRATE)
 				else
 					icon_state = "recharger2"
 		else
@@ -92,7 +92,7 @@ obj/machinery/recharger/process()
 			if(L.stored_computer.battery.charge < L.stored_computer.battery.maxcharge)
 				L.stored_computer.battery.give(100)
 				icon_state = "recharger1"
-				use_power(250)
+				use_power(250*CELLRATE)
 			else
 				icon_state = "recharger2"
 			return
@@ -136,7 +136,7 @@ obj/machinery/recharger/wallcharger/process()
 			if(E.power_supply.charge < E.power_supply.maxcharge)
 				E.power_supply.give(100)
 				icon_state = "wrecharger1"
-				use_power(250)
+				use_power(250*CELLRATE)
 			else
 				icon_state = "wrecharger2"
 			return
@@ -145,7 +145,7 @@ obj/machinery/recharger/wallcharger/process()
 			if(B.bcell)
 				if(B.bcell.give(1500)) //Because otherwise it takes two minutes to fully charge due to 15k cells. - Neerti
 					icon_state = "wrecharger1"
-					use_power(200)
+					use_power(200*CELLRATE)
 				else
 					icon_state = "wrecharger2"
 			else

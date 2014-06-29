@@ -301,9 +301,9 @@ This function restores all organs.
 	if(!organ) return
 	if(istype(used_weapon,/obj/item/weapon))
 		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
-		if( (damage > (4*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob((damage*1.5)/W.w_class) ) )
+		if( (damage > (5*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob((damage*1.5)/W.w_class) ) )
 			organ.embed(W)
-		else if( (damage > (4*W.w_class)) && ((!ismob(W.loc) && !sharp)) || (prob(damage/W.w_class) ) )
+		else if( (damage > (5*W.w_class)) && ((!ismob(W.loc) && !sharp)) || (prob((damage - 2)/W.w_class) ) )
 			organ.embed(W)
 
 	return 1

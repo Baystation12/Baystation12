@@ -111,11 +111,18 @@
 	if(!status)
 		L.visible_message("<span class='warning'>[L] has been prodded with [src] by [user]. Luckily it was off.</span>")
 		return
-
-	if(status)
+		
+	var/stunroll = (rand(1,100))
+	
+	if(ishuman(L) && status)
 		user.lastattacked = L
 		L.lastattacker = user
-
+		if(user == L) // Attacking yourself can't miss
+			stunroll = 100
+		if(stunroll < 40)
+			L.visible_message("\red <B>[user] misses [L] with \the [src]!")
+			msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
+			return
 		L.Stun(stunforce)
 		L.Weaken(stunforce)
 		L.apply_effect(STUTTER, stunforce)
@@ -124,7 +131,7 @@
 		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
 		msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
-
+		
 		if(isrobot(loc))
 			var/mob/living/silicon/robot/R = loc
 			if(R && R.cell)

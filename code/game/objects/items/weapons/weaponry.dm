@@ -177,7 +177,6 @@
 	item_state = "metalbat"
 	force = 18
 	w_class = 3.0
-	m_amt = 18750 //5 sheets of metal per bat in the autolathe
 
 /obj/item/weapon/butterfly
 	name = "butterfly knife"
@@ -213,12 +212,14 @@
 	desc = "A knife blade. Unusable as a weapon without a grip."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly2"
+	matter = list("metal" = 5000)
 
 /obj/item/butterflyhandle
 	name = "concealed knife grip"
 	desc = "A plasteel grip with screw fittings for a blade."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly1"
+	matter = list("metal" = 4000)
 
 /obj/item/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/butterflyblade))
@@ -268,7 +269,6 @@ obj/item/weapon/wirerod
 	force = 8
 	throwforce = 10
 	w_class = 3
-	m_amt = 1875
 	attack_verb = list("hit", "bludgeoned", "whacked", "bonked")
 
 
