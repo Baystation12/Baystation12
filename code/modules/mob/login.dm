@@ -58,5 +58,3 @@
 
 	CallHook("Login", list("client" = src.client, "mob" = src))
 
-	update_music()
-
