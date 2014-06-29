@@ -99,7 +99,7 @@ var/global/list/map_sectors = list()
 	desc = "Space faring vessel."
 	icon_state = "sheet-sandstone"
 	density = 1
-	var/current_sector
+	var/obj/effect/map/current_sector
 
 /obj/effect/map/ship/relaymove(mob/user, direction)
 	step(src,direction)
