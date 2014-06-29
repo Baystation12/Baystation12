@@ -92,10 +92,6 @@
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
-			if (L.flags & NONVERBAL)
-				if ((src.sdisabilities & BLIND || src.blinded || src.stat) || !(other in view(src)))
-					return 0
-			
 			return 1
 	
 	return 0
