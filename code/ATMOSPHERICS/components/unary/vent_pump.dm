@@ -1,3 +1,8 @@
+#define EXTERNAL_PRESSURE_BOUND ONE_ATMOSPHERE
+#define INTERNAL_PRESSURE_BOUND 0
+#define PRESSURE_CHECKS 1
+#undefine
+
 /obj/machinery/atmospherics/unary/vent_pump
 	icon = 'icons/obj/atmospherics/vent_pump.dmi'
 	icon_state = "off"
@@ -14,13 +19,18 @@
 	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
-	var/external_pressure_bound = ONE_ATMOSPHERE
-	var/internal_pressure_bound = 0
+	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
+	var/internal_pressure_bound = INTERNAL_PRESSURE_BOUND
 
-	var/pressure_checks = 1
+	var/pressure_checks = PRESSURE_CHECKS
 	//1: Do not pass external_pressure_bound
 	//2: Do not pass internal_pressure_bound
 	//3: Do not pass either
+
+	// Used when handling incoming radio signals requesting default settings
+	var/external_pressure_bound_default = EXTERNAL_PRESSURE_BOUND
+	var/internal_pressure_bound_default = INTERNAL_PRESSURE_BOUND
+	var/pressure_checks_default = PRESSURE_CHECKS
 
 	var/welded = 0 // Added for aliens -- TLE
 
@@ -205,7 +215,10 @@
 			on = !on
 
 		if(signal.data["checks"] != null)
-			pressure_checks = text2num(signal.data["checks"])
+			if (signal.data["set_internal_pressure"] == "default")
+				pressure_checks = pressure_checks_default
+			else
+				pressure_checks = text2num(signal.data["checks"])
 
 		if(signal.data["checks_toggle"] != null)
 			pressure_checks = (pressure_checks?0:3)
@@ -214,18 +227,24 @@
 			pump_direction = text2num(signal.data["direction"])
 
 		if(signal.data["set_internal_pressure"] != null)
-			internal_pressure_bound = between(
-				0,
-				text2num(signal.data["set_internal_pressure"]),
-				ONE_ATMOSPHERE*50
-			)
+			if (signal.data["set_internal_pressure"] == "default")
+				internal_pressure_bound = internal_pressure_bound_default
+			else
+				internal_pressure_bound = between(
+					0,
+					text2num(signal.data["set_internal_pressure"]),
+					ONE_ATMOSPHERE*50
+				)
 
 		if(signal.data["set_external_pressure"] != null)
-			external_pressure_bound = between(
-				0,
-				text2num(signal.data["set_external_pressure"]),
-				ONE_ATMOSPHERE*50
-			)
+			if (signal.data["set_external_pressure"] == "default")
+				external_pressure_bound = external_pressure_bound_default
+			else
+				external_pressure_bound = between(
+					0,
+					text2num(signal.data["set_external_pressure"]),
+					ONE_ATMOSPHERE*50
+				)
 
 		if(signal.data["adjust_internal_pressure"] != null)
 			internal_pressure_bound = between(
@@ -235,6 +254,8 @@
 			)
 
 		if(signal.data["adjust_external_pressure"] != null)
+
+
 			external_pressure_bound = between(
 				0,
 				external_pressure_bound + text2num(signal.data["adjust_external_pressure"]),
