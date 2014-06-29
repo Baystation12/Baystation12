@@ -24,26 +24,40 @@
 /obj/structure/New()
 	..()
 	if(climbable)
-		verbs += /obj/structure/proc/do_climb
+		verbs += /obj/structure/proc/climb_on
 
-/obj/structure/proc/do_climb()
+/obj/structure/proc/climb_on()
 
 	set name = "Climb structure"
 	set desc = "Climbs onto a structure."
 	set category = "Object"
 	set src in oview(1)
 
-	if (!can_touch(usr) || !climbable)
+	do_climb(usr)
+
+/obj/structure/MouseDrop(atom/over_object)
+
+	var/mob/living/H = over_object
+	if(!istype(H)) return ..()
+
+	do_climb(H)
+
+/obj/structure/proc/do_climb(var/mob/living/user)
+
+	if (!can_touch(user) || !climbable)
 		return
 
-	usr.visible_message("<span class='warning'>[usr] starts climbing onto \the [src]!</span>")
+	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 
-	if(!do_after(usr,50))
+	if(!do_after(user,50))
+		return
+
+	if (!can_touch(user) || !climbable)
 		return
 
 	usr.loc = get_turf(src)
-	if (get_turf(usr) == get_turf(src))
-		usr.visible_message("<span class='warning'>[usr] climbs onto \the [src]!</span>")
+	if (get_turf(user) == get_turf(src))
+		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
 
 /obj/structure/proc/structure_shaken()
 
@@ -93,7 +107,12 @@
 /obj/structure/proc/can_touch(var/mob/user)
 	if (!user)
 		return 0
-	if (user.stat || user.restrained() || user.paralysis || user.sleeping || user.lying || user.weakened)
+	if(!Adjacent(user))
+		return 0
+	if (user.restrained() || user.buckled)
+		user << "<span class='notice'>You need your hands and legs free for this.</span>"
+		return 0
+	if (user.stat || user.paralysis || user.sleeping || user.lying || user.weakened)
 		return 0
 	if (issilicon(user))
 		user << "<span class='notice'>You need hands for this.</span>"

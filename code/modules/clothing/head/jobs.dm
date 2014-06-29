@@ -4,7 +4,7 @@
 	name = "chef's hat"
 	desc = "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
 	icon_state = "chef"
-	item_state = "chef"
+	item_state = "chefhat"
 	desc = "The commander in chef's head wear."
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9

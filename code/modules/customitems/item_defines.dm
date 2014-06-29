@@ -224,6 +224,16 @@
 	icon_on = "redzippoon"
 	icon_off = "redzippo"
 
+////////////////////////////// Vivallion - Isaac Jachym - Butterfly Lighter ////////////
+
+/obj/item/weapon/lighter/zippo/fluff/isaac_jachym
+	name = "Butterfly lighter"
+	desc = "A custom-made zippo lighter, looks rather expensive. On one of it's sides, a clean inscription has been made, 'Butterfly, what is your wisdom?' And I looked down at it's majestic form, flexing it's wings as if to show it's strength. 'Fuck chechenya.' Had it whispered, before fluttering away, and so we went to war."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "che_zippo"
+	icon_on = "che_zippoon"
+	icon_off = "che_zippo"
+
 /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
 	name = "Riley's black zippo"
 	desc = "A black zippo lighter, which holds some form of sentimental value."
@@ -1050,6 +1060,16 @@
 /obj/item/clothing/shoes/jackboots/fluff/hal_ishimaru_1	//YankeeSamurai: Hal Ishimaru
 	name = "duty boots"
 	desc = "Eight-inch black leather boots with side zips and NT-approved safety toes."
+
+////////////////////////////////////////// Vivallion - Kecer Eldraran - Toe-less Jackboots //////////////
+
+/obj/item/clothing/shoes/jackboots/fluff/kecer_eldraran
+	name = "Toe-less Jackboots"
+	desc = "Modified pair of jackboots, particularly friendly to those species whose toes hold claws."
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "digiboots"
+	icon_state = "digiboots"
+	species_restricted = null
 
 
 //////////// Sets ////////////

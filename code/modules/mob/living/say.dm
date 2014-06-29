@@ -81,14 +81,48 @@ var/list/department_radio_keys = list(
 		if(!istype(dongle)) return
 		if(dongle.translate_binary) return 1
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list())
+/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list(), var/sound/speech_sound, var/sound_vol)
 
 	var/turf/T = get_turf(src)
+	
+	//handle nonverbal and sign languages here
+	if (speaking)
+		if (speaking.flags & NONVERBAL)
+			if (prob(30))
+				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
+		
+		if (speaking.flags & SIGNLANG)
+			say_signlang(message, pick(speaking.signlang_verb), speaking)
+			return
+	
+	//speaking into radios
+	if(used_radios.len)
+		italics = 1
+		message_range = 1
+		
+		for(var/mob/living/M in hearers(5, src))
+			if(M != src)
+				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "the radio."]</span>")
+			if (speech_sound)
+				src.playsound_local(get_turf(src), speech_sound, sound_vol * 0.5, 1)
+		
+		speech_sound = null	//so we don't play it twice.
+
+	//make sure the air can transmit speech
+	var/datum/gas_mixture/environment = T.return_air()
+	if(environment)
+		var/pressure = environment.return_pressure()
+		if(pressure < SAY_MINIMUM_PRESSURE)
+			italics = 1
+			message_range = 1
+			
+			if (speech_sound)
+				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
 
 	var/list/listening = list()
+	var/list/listening_obj = list()
+	
 	if(T)
-
-		var/list/objects = list()
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 
@@ -98,11 +132,11 @@ var/list/department_radio_keys = list(
 				listening += M
 				hearturfs += M.locs[1]
 				for(var/obj/O in M.contents)
-					objects |= O
+					listening_obj |= O
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]
-				objects |= O
+				listening_obj |= O
 
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
@@ -111,27 +145,24 @@ var/list/department_radio_keys = list(
 			if(M.loc && M.locs[1] in hearturfs)
 				listening |= M
 
-		for(var/obj/O in objects)
-			spawn(0)
-				if(O) //It's possible that it could be deleted in the meantime.
-					O.hear_talk(src, message, verb, speaking)
-
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 	spawn(30) del(speech_bubble)
 
-	if(used_radios.len)
-		for(var/mob/living/M in hearers(5, src))
-			if(M != src)
-				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
-
-
 	for(var/mob/M in listening)
 		M << speech_bubble
-		M.hear_say(message,verb,speaking,alt_name, italics, src)
+		M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 
-
+	for(var/obj/O in listening_obj)
+		spawn(0)
+			if(O) //It's possible that it could be deleted in the meantime.
+				O.hear_talk(src, message, verb, speaking)
+	
 	log_say("[name]/[key] : [message]")
+
+/mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
+	for (var/mob/O in viewers(src, null))
+		O.hear_signlang(message, verb, language, src)
 
 /obj/effect/speech_bubble
 	var/mob/parent
