@@ -30,6 +30,29 @@
 
 		return formatted
 
+/obj/machinery/computer/card/verb/eject_id()
+	set category = "Object"
+	set name = "Eject ID Card"
+	set src in oview(1)
+
+	if(!usr || usr.stat || usr.lying)	return
+
+	if(scan)
+		usr << "You remove \the [scan] from \the [src]."
+		scan.loc = get_turf(src)
+		if(!usr.get_active_hand())
+			usr.put_in_hands(scan)
+		scan = null
+	else if(modify)
+		usr << "You remove \the [modify] from \the [src]."
+		modify.loc = get_turf(src)
+		if(!usr.get_active_hand())
+			usr.put_in_hands(modify)
+		modify = null
+	else
+		usr << "There is nothing to remove from the console."
+	return
+
 /obj/machinery/computer/card/attackby(obj/item/weapon/card/id/id_card, mob/user)
 	if(!istype(id_card))
 		return ..()
