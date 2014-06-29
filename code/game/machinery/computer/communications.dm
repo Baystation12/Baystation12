@@ -309,7 +309,7 @@
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=RestoreBackup'>Restore Backup Routing Data</A> \]"
 
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=changeseclevel'>Change alert level</A> \]"
-				if(!emergency_shuttle.location())
+				if(emergency_shuttle.location())
 					if (emergency_shuttle.online())
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=cancelshuttle'>Cancel Shuttle Call</A> \]"
 					else
@@ -377,7 +377,7 @@
 	var/dat = ""
 	switch(src.aistate)
 		if(STATE_DEFAULT)
-			if(!emergency_shuttle.location() && !emergency_shuttle.online())
+			if(emergency_shuttle.location() && !emergency_shuttle.online())
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-callshuttle'>Call Emergency Shuttle</A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-messagelist'>Message List</A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-status'>Set Status Display</A> \]"
