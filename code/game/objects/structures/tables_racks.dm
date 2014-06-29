@@ -299,6 +299,8 @@
 		return (check_cover(mover,target))
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
+	if(locate(/obj/structure/table) in get_turf(mover))
+		return 1
 	if (flipped)
 		if (get_dir(loc, target) == dir)
 			return !density

@@ -120,8 +120,9 @@
 	return 1
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
+	var/orig = src.opened
 	. = src.opened ? src.close() : src.open()
-	if(!.)
+	if(. == orig)
 		user << "<span class='notice'>It won't budge!</span>"
 	return
 
