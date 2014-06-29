@@ -433,7 +433,7 @@ var/global/datum/controller/occupations/job_master
 			if(H.species.name == "Tajaran" || H.species.name == "Unathi")
 				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
 			else if(H.species.name == "Vox")
-				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath/vox(src), slot_wear_mask)
+				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
 				if(!H.r_hand)
 					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(src), slot_r_hand)
 					H.internal = H.r_hand
