@@ -129,7 +129,7 @@
 
 	for(var/obj/effect/landmark/A in landmarks_list)
 		if(A.name == "Syndicate-Spawn")
-			synd_spawn = get_turf(A)
+			synd_spawn += A.loc
 			del(A)
 			continue
 
@@ -167,7 +167,7 @@
 			equip_syndicate(synd_mind.current)
 		//	if(spawnpos > synd_spawn.len)
 		//		spawnpos = 1
-			synd_mind.current.loc = synd_spawn
+			synd_mind.current.loc = pick(synd_spawn)
 
 		synd_mind.current.faction = "syndicate"
 		synd_mind.current.real_name = "Gorlex Maradeurs Operative" // placeholder while we get their actual name
@@ -184,7 +184,7 @@
 
 	if(uplinklocker)
 		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
-	if(nuke_spawn && synd_spawn.len > 0)
+	if(nuke_spawn)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
 
