@@ -38,8 +38,8 @@
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (!C.has_authorization())
-			return
+		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
+			return	//need authorization to launch early
 
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
@@ -52,8 +52,8 @@
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (!C.has_authorization())
-			return
+		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
+			return	//need authorization to launch early
 
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
@@ -66,7 +66,7 @@
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
 		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (!C.has_authorization())
+		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
 			return
 
 		if (emergency_shuttle.autopilot)
@@ -186,9 +186,9 @@
 		"has_docking" = shuttle.docking_controller? 1 : 0,
 		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
 		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
-		"can_launch" = shuttle.can_launch() && has_auth,
-		"can_cancel" = shuttle.can_cancel() && has_auth,
-		"can_force" = shuttle.can_force() && has_auth,
+		"can_launch" = shuttle.can_launch() && (!emergency_shuttle.waiting_to_leave() || has_auth),
+		"can_cancel" = shuttle.can_cancel() && (!emergency_shuttle.waiting_to_leave() || has_auth),
+		"can_force" = shuttle.can_force() && (!emergency_shuttle.waiting_to_leave() || has_auth),
 		"auth_list" = auth_list,
 		"has_auth" = has_auth,
 		"user" = debug? user : null,
