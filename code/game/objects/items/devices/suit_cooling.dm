@@ -2,9 +2,18 @@
 	name = "portable suit cooling unit"
 	desc = "A portable heat sink and liquid cooled radiator that can be hooked up to a space suit's existing temperature controls to provide industrial levels of cooling."
 	w_class = 4
-	icon = 'icons/obj/device.dmi'	//temporary, I hope
+	icon = 'icons/obj/device.dmi'
 	icon_state = "suitcooler0"
 	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
+	
+	//copied from tank.dm
+	flags = FPRINT | TABLEPASS | CONDUCT
+	force = 5.0
+	throwforce = 10.0
+	throw_speed = 1
+	throw_range = 4
+	
+	origin_tech = "magnets=2;materials=2"
 	
 	var/on = 0				//is it turned on?
 	var/cover_open = 0		//is the cover open?
