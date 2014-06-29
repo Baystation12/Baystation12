@@ -49,18 +49,13 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/weapon/melee/baton(src)
+		src.modules += new /obj/item/weapon/melee/baton/loaded(src)
 		src.modules += new /obj/item/weapon/extinguisher(src)
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/device/healthanalyzer(src)
 		src.emag = new /obj/item/weapon/melee/energy/sword(src)
 		return
-
-/obj/item/weapon/robot_module/standard/respawn_consumable(var/mob/living/silicon/robot/R)
-	var/obj/item/weapon/melee/baton/B = locate() in src.modules
-	if(B.charges < 10)
-		B.charges += 1
 
 /obj/item/weapon/robot_module/medical
 	name = "medical robot module"
@@ -155,7 +150,7 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/hud/sec(src)
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
-		src.modules += new /obj/item/weapon/melee/baton(src)
+		src.modules += new /obj/item/weapon/melee/baton/loaded(src)
 		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
 		src.modules += new /obj/item/taperoll/police(src)
 		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
@@ -175,9 +170,6 @@
 		T.update_icon()
 	else
 		T.charge_tick = 0
-	var/obj/item/weapon/melee/baton/B = locate() in src.modules
-	if(B.charges < 10)
-		B.charges += 1
 
 /obj/item/weapon/robot_module/janitor
 	name = "janitorial robot module"
