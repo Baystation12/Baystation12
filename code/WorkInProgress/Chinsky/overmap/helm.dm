@@ -6,6 +6,8 @@
 	var/manual_control = 0
 	var/dx		//desitnation
 	var/dy		//coordinates
+	var/ship_last_move = 0
+	var/ship_move_delay = 10
 
 
 /obj/machinery/computer/helm/initialize()
@@ -15,9 +17,20 @@
 	else
 		testing("Helm console at level [z] found a corresponding overmap object '[linked.name]'.")
 
+/obj/machinery/computer/helm/process()
+	..()
+	if (autopilot && dx && dy && world.time > ship_last_move + ship_move_delay)
+		ship_last_move = world.time
+		var/turf/T = locate(dx,dy,1)
+		if (T)
+			step_towards(linked,T)
+		return
+
 /obj/machinery/computer/helm/relaymove(var/mob/user, direction)
 	if(manual_control && linked)
-		linked.relaymove(user,direction)
+		if (world.time > ship_last_move + ship_move_delay)
+			linked.relaymove(user,direction)
+			ship_last_move = world.time
 		return 1
 
 /obj/machinery/computer/helm/check_eye(var/mob/user as mob)
@@ -101,7 +114,6 @@
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
-		manual_control = 0
 
 	if (href_list["manual"])
 		manual_control = !manual_control
@@ -110,10 +122,6 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 
-/obj/machinery/computer/helm/process()
-	..()
-	if (autopilot && dx && dy)
-		return
 //Shuttle controller computer for shuttles going from ship to sectors
 
 /obj/machinery/computer/shuttle_control/explore
