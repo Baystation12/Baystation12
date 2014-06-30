@@ -76,9 +76,13 @@
 			if(1)				//emergency shuttle timer
 				if(emergency_shuttle.waiting_to_leave())
 					var/line1 = "-ETD-"
-					var/line2 = get_shuttle_timer_departure()
-					if(length(line2) > CHARS_PER_LINE)
-						line2 = "Error!"
+					var/line2
+					if (emergency_shuttle.shuttle.moving_status == SHUTTLE_WARMUP)
+						line2 = "Launch"
+					else
+						line2 = get_shuttle_timer_departure()
+						if(length(line2) > CHARS_PER_LINE)
+							line2 = "Error!"
 					update_display(line1, line2)
 				else if(emergency_shuttle.has_eta())
 					var/line1 = "-ETA-"

@@ -1,8 +1,12 @@
 
 /datum/shuttle/ferry/emergency
-	var/last_move_time = null		//the time at which the shuttle last moved. Used for ETAs
+	//pass
 
 /datum/shuttle/ferry/emergency/arrived()
+	if (istype(in_use, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = in_use
+		C.reset_authorization()
+	
 	emergency_shuttle.shuttle_arrived()
 
 /datum/shuttle/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
@@ -18,11 +22,6 @@
 	..()
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
-	if (destination == area_transition)
-		last_move_time = world.time
-	else
-		last_move_time = null
-
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
 
@@ -83,6 +82,10 @@
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
 	return (authorized.len >= req_authorizations || emagged)
+
+/obj/machinery/computer/shuttle_control/emergency/proc/reset_authorization()
+	//no need to reset emagged status. If they really want to go back to the station they can.
+	authorized = initial(authorized)
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/ident)
