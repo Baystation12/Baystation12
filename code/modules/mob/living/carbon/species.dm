@@ -31,6 +31,7 @@
 
 	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
 	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
+	var/reagent_tag                 //Used for metabolizing reagents.
 
 	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
@@ -137,6 +138,8 @@
 
 	flesh_color = "#34AF10"
 
+	reagent_tag = IS_UNATHI
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -173,6 +176,8 @@
 
 	flesh_color = "#8CD7A3"
 
+	reagent_tag = IS_SKRELL
+
 /datum/species/vox
 	name = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
@@ -196,6 +201,8 @@
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
+
+	reagent_tag = IS_VOX
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -240,6 +247,8 @@
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
+	reagent_tag = IS_VOX
+
 /datum/species/diona
 	name = "Diona"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
@@ -265,6 +274,8 @@
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
+
+	reagent_tag = IS_DIONA
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
