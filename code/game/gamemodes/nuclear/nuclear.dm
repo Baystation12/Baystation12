@@ -5,8 +5,8 @@
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 25
-	required_players_secret = 30
+	required_players = 15
+	required_players_secret = 25
 	required_enemies = 1
 	recommended_enemies = 5
 
@@ -129,7 +129,7 @@
 
 	for(var/obj/effect/landmark/A in landmarks_list)
 		if(A.name == "Syndicate-Spawn")
-			synd_spawn += A.loc
+			synd_spawn += get_turf(A)
 			del(A)
 			continue
 
@@ -138,46 +138,42 @@
 
 	var/nuke_code = "[rand(10000, 99999)]"
 	var/leader_selected = 0
-//	var/spawnpos = 1
-	var/max_age = 0
-	for(var/datum/mind/synd_mind in syndicates)
+	var/spawnpos = 1
+//	var/max_age = 0
+/*	for(var/datum/mind/synd_mind in syndicates)
 		if(isnum(synd_mind.current.client.player_age))
 			if(max_age<synd_mind.current.client.player_age)
-				max_age = synd_mind.current.client.player_age
+				max_age = synd_mind.current.client.player_age */
 
 	for(var/datum/mind/synd_mind in syndicates)
-		if(!leader_selected)
-			if (max_age > 0)
-				if (max_age <= synd_mind.current.client.player_age)
-					synd_mind.current.loc = synd_comm_spawn
-					prepare_syndicate_leader(synd_mind, nuke_code)
-					leader_selected = 1
-					greet_syndicate(synd_mind, 0, 1)
-					equip_syndicate(synd_mind.current, 1)
-
-			else
-				synd_mind.current.loc = synd_comm_spawn
-				prepare_syndicate_leader(synd_mind, nuke_code)
-				leader_selected = 1
-				greet_syndicate(synd_mind, 0, 1)
-				equip_syndicate(synd_mind.current, 1)
-
-		else
-			greet_syndicate(synd_mind)
-			equip_syndicate(synd_mind.current)
-		//	if(spawnpos > synd_spawn.len)
-		//		spawnpos = 1
-			synd_mind.current.loc = pick(synd_spawn)
-
+		log_debug("Starting cycle - Ckey:[synd_mind.key] - [synd_mind]")
 		synd_mind.current.faction = "syndicate"
 		synd_mind.current.real_name = "Gorlex Maradeurs Operative" // placeholder while we get their actual name
+		log_debug("Leader status [leader_selected]")
+		if(!leader_selected)
+			log_debug("Leader - [synd_mind]")
+			synd_mind.current.loc = synd_comm_spawn
+			prepare_syndicate_leader(synd_mind, nuke_code)
+			leader_selected = 1
+			greet_syndicate(synd_mind, 0, 1)
+			equip_syndicate(synd_mind.current, 1)
+
+		else
+			log_debug("[synd_mind] - not a leader")
+			greet_syndicate(synd_mind)
+			equip_syndicate(synd_mind.current)
+			if(spawnpos > synd_spawn.len)
+				spawnpos = 1
+			log_debug("[synd_mind] telepoting to [synd_spawn[spawnpos]]")
+			synd_mind.current.loc = synd_spawn[spawnpos]
+
 		spawn(0)
 			NukeNameAssign(synd_mind)
 
 		if(!config.objectives_disabled)
 			forge_syndicate_objectives(synd_mind)
 
-	//	spawnpos++
+		spawnpos++
 		update_synd_icons_added(synd_mind)
 
 	update_all_synd_icons()
