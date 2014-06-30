@@ -1252,17 +1252,22 @@
 	if(species.language)
 		add_language(species.language)
 
+	if(species.base_color && default_colour)
+		//Apply colour.
+		r_skin = hex2num(copytext(species.base_color,2,4))
+		g_skin = hex2num(copytext(species.base_color,4,6))
+		b_skin = hex2num(copytext(species.base_color,6,8))
+	else
+		r_skin = 0
+		g_skin = 0
+		b_skin = 0
+
+	species.handle_post_spawn(src)
+
+	spawn(0)
+		update_icons()
+
 	if(species)
-		if(species.base_color && default_colour)
-			//Apply colour.
-			r_skin = hex2num(copytext(species.base_color,2,3))
-			g_skin = hex2num(copytext(species.base_color,4,5))
-			b_skin = hex2num(copytext(species.base_color,6,7))
-		species.handle_post_spawn(src)
-
-		spawn(0)
-			update_icons()
-
 		return 1
 	else
 		return 0
