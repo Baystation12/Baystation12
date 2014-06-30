@@ -341,7 +341,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				if(istype(M, /mob/living/carbon) && M.stat != DEAD)
+				if(istype(M, /mob/living/carbon))
 					M << "\red Your flesh rapidly mutates!"
 					if(M.monkeyizing)	return
 					M.monkeyizing = 1
@@ -499,7 +499,6 @@ datum
 			custom_metabolism = 0.01
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2) return
 				if(istype(species, /datum/species/vox))	//both vox and vox armalis
 					M.adjustToxLoss(REAGENTS_METABOLISM)
 					holder.remove_reagent(src.id, REAGENTS_METABOLISM) //By default it slowly disappears.
@@ -1025,8 +1024,6 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
-				if(M.stat == 2.0)
-					return
 				if(!M) M = holder.my_atom
 				//This needs a diona check but if one is added they won't be able to heal burn damage at all.
 				M.heal_organ_damage(0,2*REM)
@@ -1042,8 +1039,6 @@ datum
 			overdose = REAGENTS_OVERDOSE/2
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
-					return
 				if(!M) M = holder.my_atom
 				if(!species || !istype(species, /datum/species/diona))
 					M.heal_organ_damage(0,3*REM)
@@ -1059,8 +1054,6 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2.0)
-					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
 
 				if(istype(species, /datum/species/vox))	//both vox and vox armalis
@@ -1082,8 +1075,6 @@ datum
 			overdose = REAGENTS_OVERDOSE/2
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2.0)
-					return
 				if(!M) M = holder.my_atom
 
 				if(istype(species, /datum/species/vox))	//both vox and vox armalis
@@ -1104,8 +1095,6 @@ datum
 			color = "#C8A5DC" // rgb: 200, 165, 220
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2.0)
-					return
 				if(!M) M = holder.my_atom
 				if(!species || !istype(species, /datum/species/diona))
 					if(M.getOxyLoss()) M.adjustOxyLoss(-1*REM)
@@ -1235,8 +1224,6 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
-				if(M.stat == 2.0)
-					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
 				M.radiation = max(M.radiation-7*REM,0)
 				M.adjustToxLoss(-1*REM)
@@ -1309,8 +1296,6 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob, var/datum/species/species)
-				if(M.stat == 2.0)
-					return
 				if(!M) M = holder.my_atom
 				if(!istype(species, /datum/species/diona))
 					M.heal_organ_damage(2*REM,0)
@@ -1591,8 +1576,6 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
-				if(M.stat == 2.0)
-					return
 				if(!M) M = holder.my_atom
 				if(prob(33))
 					M.take_organ_damage(1*REM, 0)

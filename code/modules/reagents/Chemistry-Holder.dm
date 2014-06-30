@@ -251,7 +251,9 @@ datum
 */
 
 			metabolize(var/mob/M,var/datum/species/species)
-
+				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
+					return
+			
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
 					if(M && R)
