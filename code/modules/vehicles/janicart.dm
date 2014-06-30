@@ -39,7 +39,7 @@
 	load_offset_y = 7
 
 	var/openTop = 0
-
+	var/organs = 0
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
@@ -68,16 +68,32 @@
 	return ..()
 
 /obj/vehicle/train/janitor/trolley/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(openTop)
+		W.loc = src
+		user.visible_message("<span class='notice'>[user] puts [W] in [src].</span>","<span class='notice'>You put [W] in [src].</span>")
+		if(istype(W,/obj/item/weapon/organ))
+			organs = 1
+			update_icon()
+	else
+		user << "The top is closed!"
+
+/obj/vehicle/train/janitor/trolley/attack_hand(mob/user)
 	openTop = !openTop
-	user.visible_message("<span class='notice'>[user] [openTop ? "opens" : "closes"] a the top of [src].</span>","<span class='notice'>You [openTop ? "open" : "close"] the the top of [src].</span>")
+	user.visible_message("<span class='notice'>[user] [openTop ? "opens" : "closes"] the top of [src].</span>","<span class='notice'>You [openTop ? "open" : "close"] the the top of [src].</span>")
 	update_icon()
 	..()
 
 /obj/vehicle/train/janitor/trolley/update_icon()
 	if(openTop)
-		icon_state = "trashcartopen"
+		if(organs)
+			icon_state = "trashcartopengib"
+		else
+			icon_state = "trashcartopen"
 	else
-		icon_state = initial(icon_state)
+		if(organs)
+			icon_state = "trashcartgib"
+		else
+			icon_state = "trashcart"
 
 /obj/vehicle/train/janitor/engine/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/key/janitor_train))
