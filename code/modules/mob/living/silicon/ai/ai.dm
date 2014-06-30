@@ -103,7 +103,7 @@ var/list/ai_list = list()
 	add_language("Rootspeak", 0)
 	add_language("Tradeband", 1)
 	add_language("Gutter", 0)
-	
+
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
@@ -410,8 +410,8 @@ var/list/ai_list = list()
 
 		if(target && (!istype(target, /mob/living/carbon/human) || html_decode(href_list["trackname"]) == target:get_face_name()))
 			ai_actual_track(target)
-
-		src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
+		else
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])

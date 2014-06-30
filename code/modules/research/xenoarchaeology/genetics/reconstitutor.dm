@@ -32,7 +32,7 @@ datum/genesequence
 	var/list/accepted_fossil_types = list(/obj/item/weapon/fossil/plant)
 
 
-/obj/machinery/computer/reconstitutor/New()
+/obj/machinery/computer/reconstitutor/initialize()
 	if(!undiscovered_genesequences)
 		undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
 	..()
@@ -43,7 +43,7 @@ datum/genesequence
 	pod1 = null
 	circuit = "/obj/item/weapon/circuitboard/reconstitutor/animal"
 
-/obj/machinery/computer/reconstitutor/animal/New()
+/obj/machinery/computer/reconstitutor/animal/initialize()
 	undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
 	..()
 

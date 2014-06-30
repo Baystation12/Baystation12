@@ -138,7 +138,3 @@
 			take_victim(W:affecting,usr)
 			del(W)
 			return
-	user.drop_item()
-	if(W && W.loc)
-		W.loc = src.loc
-	return
