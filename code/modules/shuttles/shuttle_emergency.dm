@@ -1,6 +1,6 @@
 
 /datum/shuttle/ferry/emergency
-	var/last_move_time = null		//the time at which the shuttle last moved. Used for ETAs
+	//pass
 
 /datum/shuttle/ferry/emergency/arrived()
 	emergency_shuttle.shuttle_arrived()
@@ -18,11 +18,6 @@
 	..()
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
-	if (destination == area_transition)
-		last_move_time = world.time
-	else
-		last_move_time = null
-
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
 
