@@ -155,9 +155,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
 	var/eta
-	if (!isnull(shuttle.last_move_time))
-		//if we have a last_move_time than we are in transition and can get an accurate ETA
-		eta = shuttle.last_move_time + shuttle.move_time*10
+	if (shuttle.has_arrive_time())
+		//we are in transition and can get an accurate ETA
+		eta = shuttle.arrive_time
 	else
 		//otherwise we need to estimate the arrival time using the scheduled launch time
 		eta = launch_time + shuttle.move_time*10 + shuttle.warmup_time*10
