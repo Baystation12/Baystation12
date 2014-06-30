@@ -1697,6 +1697,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
 
+/area/turret_protected/ai_cyborg_station
+	name = "\improper Cyborg Station"
+	icon_state = "ai_cyborg"
+
 /area/turret_protected/aisat
 	name = "\improper AI Satellite"
 	icon_state = "ai"
