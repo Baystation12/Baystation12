@@ -250,12 +250,12 @@ datum
 				return total_transfered
 */
 
-			metabolize(var/mob/M,var/alien)
+			metabolize(var/mob/M,var/datum/species/species)
 
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
 					if(M && R)
-						R.on_mob_life(M,alien)
+						R.on_mob_life(M,species)
 				update_total()
 
 			conditional_update_move(var/atom/A, var/Running = 0)

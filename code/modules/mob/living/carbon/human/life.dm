@@ -991,12 +991,7 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
-			var/alien = 0 //Not the best way to handle it, but neater than checking this for every single reagent proc.
-			if(species && species.name == "Diona")
-				alien = 1
-			else if(species && species.name == "Vox")
-				alien = 2
-			reagents.metabolize(src,alien)
+			reagents.metabolize(src, species)
 
 		var/total_phoronloss = 0
 		for(var/obj/item/I in src)

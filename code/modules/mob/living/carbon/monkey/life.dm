@@ -455,7 +455,7 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(alien) //Diona nymphs are the only alien monkey currently.
+		if(greaterform == "Diona")
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -475,7 +475,7 @@
 				adjustOxyLoss(-1)
 
 		if(reagents && reagents.reagent_list.len)
-			reagents.metabolize(src,alien)
+			reagents.metabolize(src, all_species[greaterform])
 
 		if (drowsyness)
 			drowsyness--
