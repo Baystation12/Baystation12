@@ -3,6 +3,10 @@
 	//pass
 
 /datum/shuttle/ferry/emergency/arrived()
+	if (istype(in_use, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = in_use
+		C.reset_authorization()
+	
 	emergency_shuttle.shuttle_arrived()
 
 /datum/shuttle/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
@@ -78,6 +82,10 @@
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
 	return (authorized.len >= req_authorizations || emagged)
+
+/obj/machinery/computer/shuttle_control/emergency/proc/reset_authorization()
+	//no need to reset emagged status. If they really want to go back to the station they can.
+	authorized = initial(authorized)
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/ident)
