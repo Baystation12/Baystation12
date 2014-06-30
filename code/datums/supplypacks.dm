@@ -908,20 +908,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Pizza crate"
 	group = "Hospitality"
 
-
-/datum/supply_packs/Ducks
-	contains = list(/obj/item/weapon/bikehorn/rubberducky,
-					/obj/item/weapon/bikehorn/rubberducky,
-					/obj/item/weapon/bikehorn/rubberducky,
-					/obj/item/weapon/bikehorn/rubberducky,
-					/obj/item/weapon/bikehorn/rubberducky)
-	name = "Surprise pack of five dozen pizzas"
-	cost = 15
-	containertype = "/obj/structure/closet/crate"
-	containername = "Rubbery Ducky Crate"
-	group = "Hospitality"
-
-
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/that,
 					/obj/item/clothing/suit/storage/lawyer/bluejacket,
