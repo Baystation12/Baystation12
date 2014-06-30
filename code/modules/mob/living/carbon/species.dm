@@ -48,6 +48,7 @@
 
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
+	var/base_color      //Used when setting species.
 
 	//Used in icon caching.
 	var/race_key = 0
@@ -139,6 +140,7 @@
 	flesh_color = "#34AF10"
 
 	reagent_tag = IS_UNATHI
+	base_color = "#066000"
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -163,6 +165,7 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
+	base_color = "#333333"
 
 /datum/species/skrell
 	name = "Skrell"
