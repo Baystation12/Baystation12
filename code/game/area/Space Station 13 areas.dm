@@ -1362,8 +1362,12 @@ var/list/ghostteleportlocs = list()
 	icon_state = "janitor"
 
 /area/hydroponics
-	name = "Hydroponics"
+	name = "\improper Hydroponics"
 	icon_state = "hydro"
+
+/area/hydroponics/garden
+	name = "\improper Garden"
+	icon_state = "garden"
 
 //rnd (Research and Development
 
