@@ -1389,7 +1389,15 @@ var/list/ghostteleportlocs = list()
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
-	icon_state = "toxlab"
+	icon_state = "xeno_lab"
+
+/area/rnd/xenobiology/xenoflora_storage
+	name = "\improper Xenoflora Storage"
+	icon_state = "xeno_f_store"
+
+/area/rnd/xenobiology/xenoflora
+	name = "\improper Xenoflora Lab"
+	icon_state = "xeno_f_lab"
 
 /area/rnd/storage
 	name = "\improper Toxins Storage"
