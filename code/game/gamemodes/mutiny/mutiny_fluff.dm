@@ -104,7 +104,8 @@ Both keys are required to activate the <b>Emergency Authentication Device (EAD)<
 NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive and activating their on-board emergency authentication device.
-[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their successful efforts, at a ceremony this coming Thursday.
+[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.
+NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their successful efforts, at a ceremony this coming Thursday.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
 		"}
