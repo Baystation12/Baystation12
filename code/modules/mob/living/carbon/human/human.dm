@@ -174,7 +174,7 @@
 		var/eta_status = emergency_shuttle.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
-	
+
 	if (client.statpanel == "Status")
 		if (internal)
 			if (!internal.air_contents)
@@ -1396,6 +1396,11 @@
 		return
 
 	T.Weaken(5)
+
+	//Only official raider vox get the grab and no self-prone."
+	if(src.mind && src.mind.special_role != "Vox Raider")
+		src.Weaken(5)
+		return
 
 	var/use_hand = "left"
 	if(l_hand)
