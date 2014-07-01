@@ -139,22 +139,18 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return SHUTTLE_PREPTIME * 3		//15 minutes
 
 	return SHUTTLE_PREPTIME
-	
+
+
 /*
 	These procs are not really used by the controller itself, but are for other parts of the
 	game whose logic depends on the emergency shuttle.
 */
 
 //returns 1 if the shuttle is docked at the station and waiting to leave
-//The shuttle cannot be launched without swiping authorization if this is true
 /datum/emergency_shuttle_controller/proc/waiting_to_leave()
 	if (shuttle.location)
 		return 0	//not at station
-	if (!wait_for_launch)
-		return 0	//not going anywhere
-	if (shuttle.moving_status == SHUTTLE_INTRANSIT)
-		return 0
-	return 1
+	return (wait_for_launch || shuttle.moving_status != SHUTTLE_INTRANSIT)
 
 //so we don't have emergency_shuttle.shuttle.location everywhere
 /datum/emergency_shuttle_controller/proc/location()
