@@ -78,7 +78,7 @@
 		..(L,built)
 
 	verb/close_computer()
-		set name = "close laptop"
+		set name = "Close Laptop"
 		set category = "Object"
 		set src in view(1)
 
