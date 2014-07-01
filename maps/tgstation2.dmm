@@ -5604,7 +5604,7 @@
 "cdN" = (/obj/structure/grille,/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/meter,/turf/simulated/wall/r_wall,/area/atmos)
 "cdO" = (/obj/machinery/door/airlock/maintenance{req_access_txt = "12"; req_one_access_txt = "11;24"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/engine/engine_hallway)
 "cdP" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/engine/engine_hallway)
-"cdQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor{tag = "icon-whiteblue (NORTHWEST)"; icon_state = "whiteblue"; dir = 9},/area/medical/medbay2)
+"cdQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor{tag = "icon-whiteblue (NORTHWEST)"; icon_state = "whiteblue"; dir = 9},/area/medical/medbay2)
 "cdR" = (/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/alarm{pixel_y = 22},/turf/simulated/floor,/area/engine/engine_hallway)
 "cdS" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = 25},/turf/simulated/floor,/area/engine/engine_hallway)
 "cdT" = (/obj/machinery/light{dir = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor,/area/engine/engine_hallway)
