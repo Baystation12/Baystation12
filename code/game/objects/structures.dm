@@ -58,7 +58,7 @@
 	if (!can_touch(user) || !climbable)
 		return
 
-	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
+	S = locate() in src.contents
 	if(S && S.density) return
 
 	usr.loc = get_turf(src)
