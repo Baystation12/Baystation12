@@ -50,6 +50,8 @@
 	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
 	if(S && S.density) return
 
+	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+
 	if(!do_after(user,50))
 		return
 
