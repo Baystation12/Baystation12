@@ -816,7 +816,6 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 		H.drop_item()
 	W.loc = owner
 
-
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
