@@ -47,8 +47,6 @@
 	if (!can_touch(user) || !climbable)
 		return
 
-	if(locate(/obj/machinery/door/poddoor/shutters) in src.contents) return
-
 	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
 	if(S && S.density) return
 
