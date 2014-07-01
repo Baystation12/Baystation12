@@ -299,7 +299,7 @@ This function restores all organs.
 
 	//Embedded object code.
 	if(!organ) return
-	if(istype(used_weapon,/obj/item))
+	if(istype(used_weapon,/obj/item) && !istype(used_weapon.loc,/mob/living/silicon/robot))
 		var/obj/item/W = used_weapon  //Sharp objects will always embed if they do enough damage.
 		if((damage > (10*W.w_class)) || ((sharp && !ismob(W.loc)) || prob(damage/W.w_class)))
 			organ.embed(W)
