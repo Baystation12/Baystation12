@@ -297,11 +297,11 @@ This function restores all organs.
 	updatehealth()
 	hud_updateflag |= 1 << HEALTH_HUD
 
-	//Embedded projectile code.
+	//Embedded object code.
 	if(!organ) return
-	if(istype(used_weapon,/obj/item/weapon))
-		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
-		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
+	if(istype(used_weapon,/obj/item))
+		var/obj/item/W = used_weapon  //Sharp objects will always embed if they do enough damage.
+		if((damage > (10*W.w_class)) || ((sharp && !ismob(W.loc)) || prob(damage/W.w_class)))
 			organ.embed(W)
 
 	return 1
