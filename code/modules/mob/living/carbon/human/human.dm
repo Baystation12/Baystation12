@@ -1564,6 +1564,11 @@
 
 	T.Weaken(5)
 
+	//Only official raider vox get the grab and no self-prone."
+	if(src.mind && src.mind.special_role != "Vox Raider")
+		src.Weaken(5)
+		return
+
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
