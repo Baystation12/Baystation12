@@ -16,7 +16,7 @@ datum/directive/terminations/financial_crisis/get_description()
 	return {"
 		<p>
 			[system_name()] system banks in financial crisis. Local emergency situation ongoing.
-			NT Funds redistributed, impact upon civilian department expected.
+			NT Funds redistributed in accordance with financial regulations covered by employee contracts, impact upon civilian department expected.
 			Further information is classified.
 		</p>
 	"}

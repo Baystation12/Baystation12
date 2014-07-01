@@ -104,8 +104,7 @@ Both keys are required to activate the <b>Emergency Authentication Device (EAD)<
 NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive and activating their on-board emergency authentication device.
-[mode.mutineers.len] members of the station's personnel were charged with sedition against the company and if found guilty will be sentenced to life incarceration.
-NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their successful efforts, at a ceremony this coming Thursday.
+[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their successful efforts, at a ceremony this coming Thursday.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
 		"}
@@ -115,7 +114,7 @@ NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [l
 NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive. Unfortunately, they failed to notify Central Command of their successes due to a breach in the chain of command.
-[mode.mutineers.len] members of the station's personnel were charged with sedition against the Company and if found guilty will be sentenced to life incarceration.
+[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.
 NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their mostly successful efforts, at a ceremony this coming Thursday.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
@@ -127,7 +126,7 @@ NanoTrasen has been thrust into turmoil following an apparent mutiny by key pers
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 No further information has yet emerged from the station or its crew, who are presumed to be in holding with NanoTrasen investigators.
 NanoTrasen officials refuse to comment.
-Sources indicate that [mode.mutineers.len] members of the station's personnel are currently under investigation for mutiny, and [mode.loyalists.len] crew are currently providing evidence to investigators, believed to be the 'loyal' station personnel.
+Sources indicate that [mode.mutineers.len] members of the station's personnel are currently under investigation for terrorist activity, and [mode.loyalists.len] crew are currently providing evidence to investigators, believed to be the 'loyal' station personnel.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
 		"}
@@ -145,7 +144,7 @@ NanoTrasen has reprimanded [mode.loyalists.len] members of the crew for failing 
 
 	proc/mutineer_major_victory()
 		return {"
-NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a research station in [system_name()]--<b>[station_name()]</b>--amid a local interstellar crisis.
+NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a company station in [system_name()]--<b>[station_name()]</b>--amid a local interstellar crisis.
 What appears to have been a "legitimate" mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 It has been revealed that the directive was invalid and fraudulent. Company officials have not released a statement about the source of the directive.
 Thanks to the efforts of the resistant members of the crew, the directive was not carried out.
