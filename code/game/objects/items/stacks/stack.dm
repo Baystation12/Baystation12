@@ -148,7 +148,7 @@
 			src = null //dont kill proc after del()
 			usr.before_take_item(oldsrc)
 			del(oldsrc)
-			if (istype(O,/obj/item))
+			if (istype(O,/obj/item) && istype(usr,/mob/living/carbon))
 				usr.put_in_hands(O)
 		O.add_fingerprint(usr)
 		//BubbleWrap - so newly formed boxes are empty

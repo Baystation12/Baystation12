@@ -4,12 +4,15 @@
 //for multiple items just add mutliple entries, unless i change it to be a listlistlist
 //yes, it has to be an item, you can't pick up nonitems
 
-/proc/EquipCustomItems(mob/living/carbon/human/M)
-	// load lines
-	var/file = file2text("config/custom_items.txt")
-	var/lines = text2list(file, "\n")
+/var/list/custom_items = list()
 
-	for(var/line in lines)
+/hook/startup/proc/loadCustomItems()
+	var/custom_items_file = file2text("config/custom_items.txt")
+	custom_items = text2list(custom_items_file, "\n")
+	return 1
+
+/proc/EquipCustomItems(mob/living/carbon/human/M)
+	for(var/line in custom_items)
 		// split & clean up
 		var/list/Entry = text2list(line, ":")
 		for(var/i = 1 to Entry.len)
@@ -24,6 +27,8 @@
 				var/ok = 0  // 1 if the item was placed successfully
 				P = trim(P)
 				var/path = text2path(P)
+				if(!path) continue
+
 				var/obj/item/Item = new path()
 				if(istype(Item,/obj/item/weapon/card/id))
 					//id card needs to replace the original ID

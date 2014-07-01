@@ -12,6 +12,17 @@
 #define IS_ROBOT 2
 #define IS_PAI 3
 
+/mob/living/silicon/say_understands(var/other,var/datum/language/speaking = null)
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/human))
+			return 1
+		if (istype(other, /mob/living/silicon))
+			return 1
+		if (istype(other, /mob/living/carbon/brain))
+			return 1
+	return ..()
+
 /mob/living/silicon/say(var/message)
 	if (!message)
 		return
@@ -23,7 +34,7 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) 
+	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	if (stat == 2)
 		return say_dead(message)
@@ -49,38 +60,38 @@
 		return
 
 	var/verb = say_quote(message)
-	var/message_mode = null
-
-
-	if(copytext(message,1,2) == ";")
-		message_mode = "general"  			// I don't know why but regular radio = fuck you we ain't broadcasting, pAI mode was what was in old say code.
-		message = trim(copytext(message,2))
-
-	else if(length(message) >= 2)
-		var/channel_prefix = copytext(message, 1 ,3)
-		if(!message_mode)
-			message_mode = department_radio_keys[channel_prefix]
-
-	if(message_mode && bot_type == IS_ROBOT)
-		if(message_mode != "binary" && !R.is_component_functioning("radio"))
-			src << "\red Your radio isn't functional at this time."
-			return
-			
-
-	if(message_mode && message_mode != "general")
-		message = trim(copytext(message,3))
-
+	
+	//parse radio key and consume it
+	var/message_mode = parse_message_mode(message, "general")
+	if (message_mode)
+		if (message_mode == "general")
+			message = trim(copytext(message,2))
+		else
+			message = trim(copytext(message,3))
+	
+	if(message_mode && bot_type == IS_ROBOT && message_mode != "binary" && !R.is_component_functioning("radio"))
+		src << "\red Your radio isn't functional at this time."
+		return
+	
+	
+	//parse language key and consume it
+	var/datum/language/speaking = parse_language(message)
+	if (speaking)
+		verb = speaking.speech_verb
+		message = copytext(message,3)
+	
+	
 	switch(message_mode)
 		if("department")
 			switch(bot_type)
-				if(IS_AI)			
+				if(IS_AI)
 					AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,message_mode,verb)
+					R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,message_mode,verb)
+					P.radio.talk_into(src,message,message_mode,verb,speaking)
 			return
 
 		if("binary")
@@ -101,10 +112,10 @@
 					src << "Yeah, not yet, sorry"
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,null,verb)
+					R.radio.talk_into(src,message,null,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,null,verb)
+					P.radio.talk_into(src,message,null,verb,speaking)
 			return
 
 		else
@@ -115,14 +126,13 @@
 						return
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
-						R.radio.talk_into(src,message,message_mode,verb)
+						R.radio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
-						P.radio.talk_into(src,message,message_mode,verb)	
+						P.radio.talk_into(src,message,message_mode,verb,speaking)
 				return
-		
 
-	return ..(message,null,verb)
+	return ..(message,speaking,verb)
 
 //For holopads only. Usable by AI.
 /mob/living/silicon/ai/proc/holopad_talk(var/message)
@@ -167,14 +177,14 @@
 		return
 
 	var/verb = say_quote(message)
-	
+
 
 	var/rendered = "<i><span class='game say'>Robotic Talk, <span class='name'>[name]</span> <span class='message'>[verb], \"[message]\"</span></span></i>"
 
 	for (var/mob/living/S in living_mob_list)
 		if(S.robot_talk_understand && (S.robot_talk_understand == robot_talk_understand)) // This SHOULD catch everything caught by the one below, but I'm not going to change it.
 			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
+				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
 				S.show_message(renderedAI, 2)
 			else
 				S.show_message(rendered, 2)
@@ -182,14 +192,13 @@
 
 		else if (S.binarycheck())
 			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
+				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
 				S.show_message(renderedAI, 2)
 			else
 				S.show_message(rendered, 2)
 
 	var/list/listening = hearers(1, src)
 	listening -= src
-	listening += src
 
 	var/list/heard = list()
 	for (var/mob/M in listening)
@@ -199,7 +208,7 @@
 		var/message_beep
 		verb = "beeps"
 		message_beep = "beep beep beep"
-		
+
 		rendered = "<i><span class='game say'><span class='name'>[voice_name]</span> <span class='message'>[verb], \"[message_beep]\"</span></span></i>"
 
 		for (var/mob/M in heard)

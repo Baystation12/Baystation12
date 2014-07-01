@@ -34,7 +34,7 @@
 	for(var/spell in construct_spells)
 		spell_list += new spell(src)
 
-/mob/living/simple_animal/construct/Die()
+/mob/living/simple_animal/construct/death()
 	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
 	for(var/mob/M in viewers(src, null))
@@ -247,8 +247,7 @@
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/floor,
-							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,
-							/obj/effect/proc_holder/spell/targeted/projectile/magic_missile)
+							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,)
 
 
 /////////////////////////////Behemoth/////////////////////////

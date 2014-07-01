@@ -222,7 +222,7 @@ var/global/chicken_count = 0
 	pixel_y = rand(0, 10)
 	chicken_count += 1
 
-/mob/living/simple_animal/chicken/Die()
+/mob/living/simple_animal/chicken/death()
 	..()
 	chicken_count -= 1
 

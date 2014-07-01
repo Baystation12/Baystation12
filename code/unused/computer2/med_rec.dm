@@ -191,7 +191,7 @@
 <BR><b>Possible Cure:</b> Inaprovaline
 <BR><b>Affected Species:</b> Human and Monkey
 <BR>
-<BR><b>Notes:</b> With this disease the victim will need plasma to breathe.
+<BR><b>Notes:</b> With this disease the victim will need phoron to breathe.
 <BR>
 <BR><b>Severity:</b> Major"}
 				if("dna")

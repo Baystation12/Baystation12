@@ -11,7 +11,7 @@
 	force = 5.0
 	var/list/grenades = new/list()
 	var/max_grenades = 3
-	m_amt = 2000
+	matter = list("metal" = 2000)
 
 	examine()
 		set src in view()

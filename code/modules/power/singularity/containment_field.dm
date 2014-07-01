@@ -50,7 +50,7 @@
 
 
 
-/obj/machinery/containment_field/proc/shock(mob/living/user as mob)
+/obj/machinery/containment_field/shock(mob/living/user as mob)
 	if(hasShocked)
 		return 0
 	if(!FG1 || !FG2)

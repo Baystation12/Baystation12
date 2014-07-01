@@ -48,6 +48,8 @@
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
 	desc = "Contains white gloves."
+	icon_state = "latex"
+
 	New()
 		..()
 		new /obj/item/clothing/gloves/latex(src)
@@ -132,7 +134,33 @@
 		new /obj/item/ammo_casing/shotgun/blank(src)
 		new /obj/item/ammo_casing/shotgun/blank(src)
 
+/obj/item/weapon/storage/box/beanbags
+	name = "box of beanbag shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+
+/obj/item/weapon/storage/box/shotgunammo
+	name = "box of shotgun shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"
@@ -410,7 +438,7 @@
 
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
-	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
+	desc = "A small box of 'Space-Proof' premium matches."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
@@ -452,7 +480,7 @@
 	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
 	storage_slots=21
 	can_hold = list("/obj/item/weapon/light/tube", "/obj/item/weapon/light/bulb")
-	max_combined_w_class = 21
+	max_combined_w_class = 42	//holds 21 items of w_class 2
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
 /obj/item/weapon/storage/box/lights/bulbs/New()

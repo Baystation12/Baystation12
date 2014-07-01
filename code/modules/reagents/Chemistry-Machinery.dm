@@ -63,7 +63,7 @@
 		options[/obj/item/weapon/stock_parts/matter_bin/adv] = "Give it an advanced matter bin to fix it."
 		options[/obj/item/stack/sheet/mineral/diamond] = "Line up a cut diamond with the nozzle to fix it."
 		options[/obj/item/stack/sheet/mineral/uranium] = "Position a uranium sheet inside to fix it."
-		options[/obj/item/stack/sheet/mineral/plasma] = "Enter a block of plasma to fix it."
+		options[/obj/item/stack/sheet/mineral/phoron] = "Enter a block of phoron to fix it."
 		options[/obj/item/stack/sheet/mineral/silver] = "Cover the internals with a silver lining to fix it."
 		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
@@ -293,6 +293,7 @@
 	var/max_pill_count = 20
 
 /obj/machinery/chem_master/New()
+	..()
 	var/datum/reagents/R = new/datum/reagents(100)
 	reagents = R
 	R.my_atom = src
@@ -599,8 +600,9 @@
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
-	use_power = 1
-	idle_power_usage = 20
+	circuit = /obj/item/weapon/circuitboard/pandemic
+	//use_power = 1
+	//idle_power_usage = 20		//defaults make more sense.
 	var/temphtml = ""
 	var/wait = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
@@ -829,33 +831,7 @@
 
 
 /obj/machinery/computer/pandemic/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe(src.loc)
-				new /obj/item/weapon/shard(src.loc)
-				var/obj/item/weapon/circuitboard/pandemic/M = new /obj/item/weapon/circuitboard/pandemic(A)
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				del(src)
-			else
-				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/pandemic/M = new /obj/item/weapon/circuitboard/pandemic(A)
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				del(src)
-	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(stat & (NOPOWER|BROKEN)) return
 		if(src.beaker)
 			user << "A beaker is already loaded into the machine."
@@ -890,9 +866,8 @@
 	var/list/blend_items = list (
 
 		//Sheets
-		/obj/item/stack/sheet/mineral/plasma = list("plasma" = 20),
+		/obj/item/stack/sheet/mineral/phoron = list("phoron" = 20),
 		/obj/item/stack/sheet/mineral/uranium = list("uranium" = 20),
-		/obj/item/stack/sheet/mineral/clown = list("banana" = 20),
 		/obj/item/stack/sheet/mineral/silver = list("silver" = 20),
 		/obj/item/stack/sheet/mineral/gold = list("gold" = 20),
 		/obj/item/weapon/grown/nettle = list("sacid" = 0),

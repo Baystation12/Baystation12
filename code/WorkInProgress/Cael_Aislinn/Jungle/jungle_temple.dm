@@ -86,9 +86,6 @@
 					for(var/coin_type in typesof(/obj/item/weapon/coin))
 						possible_spawns += coin_type
 
-					//no icon_state for mythril coins
-					possible_spawns -= /obj/item/weapon/coin/mythril
-
 					var/coin_type = pick(possible_spawns)
 					for(var/i=0,i<amount,i++)
 						new coin_type(C)
@@ -289,8 +286,8 @@
 	var/trap_type
 
 	New()
-		trap_type = pick(50;"thrower","sawburst","poison_dart","flame_burst",10;"plasma_gas",5;"n2_gas")
-		if( (trap_type == "plasma_gas" || trap_type == "n2_gas") && prob(10))
+		trap_type = pick(50;"thrower","sawburst","poison_dart","flame_burst",10;"phoron_gas",5;"n2_gas")
+		if( (trap_type == "phoron_gas" || trap_type == "n2_gas") && prob(10))
 			new /obj/effect/glowshroom(src.loc)
 
 		//hint that this tile is dangerous
@@ -306,7 +303,7 @@
 	switch(trap_type)
 		if("sawburst")
 			M << "\red <b>A sawblade shoots out of the ground and strikes you!</b>"
-			M.apply_damage(rand(5,10), BRUTE)
+			M.apply_damage(rand(5,10), BRUTE, sharp=1, edge=1)
 
 			var/atom/myloc = src.loc
 			var/image/flicker = image('code/WorkInProgress/Cael_Aislinn/Jungle/jungle.dmi',"sawblade")
@@ -337,8 +334,8 @@
 				myloc.overlays -= flicker
 				del flicker
 			//flick("flameburst",src)
-		if("plasma_gas")
-			//spawn a bunch of plasma
+		if("phoron_gas")
+			//spawn a bunch of phoron
 		if("n2_gas")
 			//spawn a bunch of sleeping gas
 		if("thrower")

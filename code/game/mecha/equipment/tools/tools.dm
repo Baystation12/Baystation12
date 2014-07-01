@@ -262,7 +262,7 @@
 	energy_drain = 250
 	range = MELEE|RANGED
 	construction_time = 1200
-	construction_cost = list("metal"=30000,"plasma"=25000,"silver"=20000,"gold"=20000)
+	construction_cost = list("metal"=30000,"phoron"=25000,"silver"=20000,"gold"=20000)
 	var/mode = 0 //0 - deconstruct, 1 - wall or floor, 2 - airlock.
 	var/disabled = 0 //malf
 
@@ -518,9 +518,8 @@
 
 	can_attach(obj/mecha/M as obj)
 		if(..())
-			if(!istype(M, /obj/mecha/combat/honker))
-				if(!M.proc_res["dynattackby"])
-					return 1
+			if(!M.proc_res["dynattackby"])
+				return 1
 		return 0
 
 	attach(obj/mecha/M as obj)
@@ -569,9 +568,8 @@
 
 	can_attach(obj/mecha/M as obj)
 		if(..())
-			if(!istype(M, /obj/mecha/combat/honker))
-				if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
-					return 1
+			if(!M.proc_res["dynbulletdamage"] && !M.proc_res["dynhitby"])
+				return 1
 		return 0
 
 	attach(obj/mecha/M as obj)
@@ -830,10 +828,10 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/generator
-	name = "Plasma Converter"
-	desc = "Generates power using solid plasma as fuel. Pollutes the environment."
+	name = "Phoron Generator"
+	desc = "Generates power using solid phoron as fuel. Pollutes the environment."
 	icon_state = "tesla"
-	origin_tech = "plasmatech=2;powerstorage=2;engineering=1"
+	origin_tech = "phorontech=2;powerstorage=2;engineering=1"
 	equip_cooldown = 10
 	energy_drain = 0
 	range = MELEE
@@ -853,7 +851,7 @@
 		return
 
 	proc/init()
-		fuel = new /obj/item/stack/sheet/mineral/plasma(src)
+		fuel = new /obj/item/stack/sheet/mineral/phoron(src)
 		fuel.amount = 0
 		pr_mech_generator = new /datum/global_iterator/mecha_generator(list(src),0)
 		pr_mech_generator.set_delay(equip_cooldown)
@@ -926,14 +924,14 @@
 			return
 		var/datum/gas_mixture/GM = new
 		if(prob(10))
-			GM.toxins += 100
+			GM.phoron += 100
 			GM.temperature = 1500+T0C //should be enough to start a fire
-			T.visible_message("The [src] suddenly disgorges a cloud of heated plasma.")
+			T.visible_message("The [src] suddenly disgorges a cloud of heated phoron.")
 			destroy()
 		else
-			GM.toxins += 5
+			GM.phoron += 5
 			GM.temperature = istype(T) ? T.air.temperature : T20C
-			T.visible_message("The [src] suddenly disgorges a cloud of plasma.")
+			T.visible_message("The [src] suddenly disgorges a cloud of phoron.")
 		T.assume_air(GM)
 		return
 

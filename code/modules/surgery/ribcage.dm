@@ -19,7 +19,7 @@
 	max_duration = 70
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if (!istype(target))
+		if (!hasorgans(target))
 			return
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return ..() && target.op_stage.ribcage == 0 && affected.open >= 2
@@ -197,6 +197,9 @@
 	max_duration = 90
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if(!hasorgans(target))
+			return 0
+
 		var/is_chest_organ_damaged = 0
 		var/datum/organ/external/chest/chest = target.get_organ("chest")
 		for(var/datum/organ/internal/I in chest.internal_organs) if(I.damage > 0)
@@ -220,7 +223,7 @@
 					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 					"You start treating damage to [target]'s [I.name] with [tool_name]." )
 				else
-					user.visible_message("\blue [user] attempts to repair [target]'s mechanical [I.name] with [tool_name]...", \
+					user.visible_message("[user] attempts to repair [target]'s mechanical [I.name] with [tool_name]...", \
 					"\blue You attempt to repair [target]'s mechanical [I.name] with [tool_name]...")
 
 		target.custom_pain("The pain in your chest is living hell!",1)
@@ -239,7 +242,7 @@
 		for(var/datum/organ/internal/I in chest.internal_organs)
 			if(I && I.damage > 0)
 				if(I.robotic < 2)
-					user.visible_message("[user] treats damage to [target]'s [I.name] with [tool_name].", \
+					user.visible_message("\blue [user] treats damage to [target]'s [I.name] with [tool_name].", \
 					"You treat damage to [target]'s [I.name] with [tool_name]." )
 				else
 					user.visible_message("\blue [user] pokes [target]'s mechanical [I.name] with [tool_name]...", \
@@ -278,6 +281,9 @@
 	max_duration = 90
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if(!hasorgans(target))
+			return 0
+
 		var/is_chest_organ_damaged = 0
 		var/datum/organ/internal/heart/heart = target.internal_organs["heart"]
 		var/datum/organ/external/chest/chest = target.get_organ("chest")

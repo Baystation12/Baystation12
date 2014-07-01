@@ -61,7 +61,7 @@
 
 		var/datum/gas_mixture/G = src.air_contents.remove(num)
 
-		var/allgases = G.carbon_dioxide + G.nitrogen + G.oxygen + G.toxins	//fuck trace gases	-Pete
+		var/allgases = G.carbon_dioxide + G.nitrogen + G.oxygen + G.phoron	//fuck trace gases	-Pete
 		if(allgases >= 0.005)
 			return 1
 

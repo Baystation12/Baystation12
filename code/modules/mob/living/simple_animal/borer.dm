@@ -58,7 +58,6 @@
 
 	..()
 
-
 	if(host)
 
 		if(!stat && !host.stat)
@@ -147,10 +146,9 @@
 	statpanel("Status")
 
 	if(emergency_shuttle)
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 	if (client.statpanel == "Status")
 		stat("Chemicals", chemicals)
@@ -338,7 +336,13 @@ mob/living/simple_animal/borer/proc/detatch()
 		host_brain.name = "host brain"
 		host_brain.real_name = "host brain"
 
+	var/mob/living/H = host
 	host = null
+
+	for(var/atom/A in H.contents)
+		if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+			return
+	H.status_flags &= ~PASSEMOTES
 
 /mob/living/simple_animal/borer/verb/infest()
 	set category = "Alien"
@@ -406,6 +410,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 		host_brain.name = M.name
 		host_brain.real_name = M.real_name
+		host.status_flags |= PASSEMOTES
 
 		return
 	else

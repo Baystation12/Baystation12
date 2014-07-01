@@ -9,6 +9,7 @@
 	throwforce = 8
 	w_class = 3.0
 	sharp = 1
+	edge = 0
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
@@ -203,3 +204,87 @@
 		arrow = null
 		tension = 0
 		icon_state = "crossbow"
+
+// Crossbow construction.
+
+/obj/item/weapon/crossbowframe
+	name = "crossbow frame"
+	desc = "A half-finished crossbow."
+	icon_state = "crossbowframe0"
+	item_state = "crossbow-solid"
+
+	var/buildstate = 0
+
+/obj/item/weapon/crossbowframe/update_icon()
+	icon_state = "crossbowframe[buildstate]"
+
+/obj/item/weapon/crossbowframe/examine()
+	..()
+	switch(buildstate)
+		if(1) usr << "It has a loose rod frame in place."
+		if(2) usr << "It has a steel backbone welded in place."
+		if(3) usr << "It has a steel backbone and a cell mount installed."
+		if(4) usr << "It has a steel backbone, plastic lath and a cell mount installed."
+		if(5) usr << "It has a steel cable loosely strung across the lath."
+
+/obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack/rods))
+		if(buildstate == 0)
+			var/obj/item/stack/rods/R = W
+			if(R.amount >= 3)
+				R.use(3)
+				user << "\blue You assemble a backbone of rods around the wooden stock."
+				buildstate++
+				update_icon()
+			else
+				user << "\blue You need at least three rods to complete this task."
+			return
+	else if(istype(W,/obj/item/weapon/weldingtool))
+		if(buildstate == 1)
+			var/obj/item/weapon/weldingtool/T = W
+			if(T.remove_fuel(0,user))
+				if(!src || !T.isOn()) return
+				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
+				user << "\blue You weld the rods into place."
+			buildstate++
+			update_icon()
+		return
+	else if(istype(W,/obj/item/weapon/cable_coil))
+		var/obj/item/weapon/cable_coil/C = W
+		if(buildstate == 2)
+			if(C.amount >= 5)
+				C.use(5)
+				user << "\blue You wire a crude cell mount into the top of the crossbow."
+				buildstate++
+				update_icon()
+			else
+				user << "\blue You need at least five segments of cable coil to complete this task."
+			return
+		else if(buildstate == 4)
+			if(C.amount >= 5)
+				C.use(5)
+				user << "\blue You string a steel cable across the crossbow's lath."
+				buildstate++
+				update_icon()
+			else
+				user << "\blue You need at least five segments of cable coil to complete this task."
+			return
+	else if(istype(W,/obj/item/stack/sheet/mineral/plastic))
+		if(buildstate == 3)
+			var/obj/item/stack/sheet/mineral/plastic/P = W
+			if(P.amount >= 3)
+				P.use(3)
+				user << "\blue You assemble and install a heavy plastic lath onto the crossbow."
+				buildstate++
+				update_icon()
+			else
+				user << "\blue You need at least three plastic sheets to complete this task."
+			return
+	else if(istype(W,/obj/item/weapon/screwdriver))
+		if(buildstate == 5)
+			user << "\blue You secure the crossbow's various parts."
+			new /obj/item/weapon/crossbow(get_turf(src))
+			del(src)
+		return
+	else
+		..()

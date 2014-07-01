@@ -108,6 +108,9 @@
 
 
 /datum/game_mode/proc/forge_meme_objectives(var/datum/mind/meme, var/datum/mind/first_host)
+	if (config.objectives_disabled)
+		return
+
 	// meme always needs to attune X hosts
 	var/datum/objective/meme_attune/attune_objective = new
 	attune_objective.owner = meme

@@ -3,7 +3,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector
 	name = "Radiation Collector Array"
-	desc = "A device which uses Hawking Radiation and plasma to produce power."
+	desc = "A device which uses Hawking Radiation and phoron to produce power."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "ca"
 	anchored = 0
@@ -11,7 +11,7 @@ var/global/list/rad_collectors = list()
 	directwired = 1
 	req_access = list(access_engine_equip)
 //	use_power = 0
-	var/obj/item/weapon/tank/plasma/P = null
+	var/obj/item/weapon/tank/phoron/P = null
 	var/last_power = 0
 	var/active = 0
 	var/locked = 0
@@ -27,9 +27,9 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/process()
 	if(P)
-		if(P.air_contents.toxins <= 0)
+		if(P.air_contents.phoron <= 0)
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
-			P.air_contents.toxins = 0
+			P.air_contents.phoron = 0
 			eject()
 		else
 			P.air_contents.adjust(tx = -0.001*drainratio)
@@ -42,7 +42,7 @@ var/global/list/rad_collectors = list()
 			toggle_power()
 			user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 			"You turn the [src.name] [active? "on":"off"].")
-			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.toxins/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.phoron/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 			return
 		else
 			user << "\red The controls are locked!"
@@ -54,12 +54,12 @@ var/global/list/rad_collectors = list()
 	if(istype(W, /obj/item/device/analyzer))
 		user << "\blue The [W.name] detects that [last_power]W were recently produced."
 		return 1
-	else if(istype(W, /obj/item/weapon/tank/plasma))
+	else if(istype(W, /obj/item/weapon/tank/phoron))
 		if(!src.anchored)
 			user << "\red The [src] needs to be secured to the floor first."
 			return 1
 		if(src.P)
-			user << "\red There's already a plasma tank loaded."
+			user << "\red There's already a phoron tank loaded."
 			return 1
 		user.drop_item()
 		src.P = W
@@ -71,7 +71,7 @@ var/global/list/rad_collectors = list()
 			return 1
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(P)
-			user << "\blue Remove the plasma tank first."
+			user << "\blue Remove the phoron tank first."
 			return 1
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		src.anchored = !src.anchored
@@ -107,7 +107,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/proc/eject()
 	locked = 0
-	var/obj/item/weapon/tank/plasma/Z = src.P
+	var/obj/item/weapon/tank/phoron/Z = src.P
 	if (!Z)
 		return
 	Z.loc = get_turf(src)
@@ -121,7 +121,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(P && active)
 		var/power_produced = 0
-		power_produced = P.air_contents.toxins*pulse_strength*20
+		power_produced = P.air_contents.phoron*pulse_strength*20
 		add_avail(power_produced)
 		last_power = power_produced
 		return

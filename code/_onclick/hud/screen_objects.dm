@@ -36,9 +36,6 @@
 		if(istype(master, /obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = master
 			S.close(usr)
-		else if(istype(master,/obj/item/clothing/suit/storage))
-			var/obj/item/clothing/suit/storage/S = master
-			S.close(usr)
 	return 1
 
 
@@ -308,14 +305,14 @@
 												contents.Add(0)	
 
 										if ("oxygen")
-											if(t.air_contents.oxygen && !t.air_contents.toxins) 
+											if(t.air_contents.oxygen && !t.air_contents.phoron) 
 												contents.Add(t.air_contents.oxygen)
 											else
 												contents.Add(0)
 
 										// No races breath this, but never know about downstream servers.
 										if ("carbon dioxide")
-											if(t.air_contents.carbon_dioxide && !t.air_contents.toxins)
+											if(t.air_contents.carbon_dioxide && !t.air_contents.phoron)
 												contents.Add(t.air_contents.carbon_dioxide)
 											else
 												contents.Add(0)

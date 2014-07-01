@@ -111,19 +111,16 @@
 			return 1
 
 		if("hurt")
+			var/datum/unarmed_attack/attack = M.species.unarmed
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
-			msg_admin_attack("[key_name(M)] [M.species.attack_verb]ed [key_name(src)]")
+			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [M.name] ([M.ckey])</font>")
+			msg_admin_attack("[key_name(M)] [pick(attack.attack_verb)]ed [key_name(src)]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
 			if(!damage)
-				if(M.species.attack_verb == "punch")
-					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				else
-					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-
-				visible_message("\red <B>[M] has attempted to [M.species.attack_verb] [src]!</B>")
+				playsound(loc, attack.miss_sound, 25, 1, -1)
+				visible_message("\red <B>[M] tried to [pick(attack.attack_verb)] [src]!</B>")
 				return 0
 
 
@@ -133,20 +130,16 @@
 			if(HULK in M.mutations)			damage += 5
 
 
-			if(M.species.attack_verb == "punch")
-				playsound(loc, "punch", 25, 1, -1)
-			else
-				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
+			playsound(loc, attack.attack_sound, 25, 1, -1)
 
-			visible_message("\red <B>[M] has [M.species.attack_verb]ed [src]!</B>")
+			visible_message("\red <B>[M] [pick(attack.attack_verb)]ed [src]!</B>")
 			//Rearranged, so claws don't increase weaken chance.
 			if(damage >= 5 && prob(50))
 				visible_message("\red <B>[M] has weakened [src]!</B>")
 				apply_effect(2, WEAKEN, armor_block)
 
-			if(M.species.punch_damage)
-				damage += M.species.punch_damage
-			apply_damage(damage, BRUTE, affecting, armor_block)
+			damage += attack.damage
+			apply_damage(damage, BRUTE, affecting, armor_block, sharp=attack.sharp, edge=attack.edge)
 
 
 		if("disarm")

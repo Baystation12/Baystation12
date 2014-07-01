@@ -6,7 +6,7 @@
 	w_class = 3
 	origin_tech = "engineering=4;materials=4;bluespace=2;programming=4"
 
-	construction_cost = list("metal"=500,"glass"=500,"silver"=200,"gold"=200,"plasma"=100,"diamond"=10)
+	construction_cost = list("metal"=500,"glass"=500,"silver"=200,"gold"=200,"phoron"=100,"diamond"=10)
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
@@ -52,6 +52,7 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna
 		brainmob.timeofhostdeath = H.timeofdeath
+		brainmob.stat = 0
 		if(brainmob.mind)
 			brainmob.mind.assigned_role = "Positronic Brain"
 		if(H.mind)

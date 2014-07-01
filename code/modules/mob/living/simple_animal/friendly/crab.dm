@@ -46,7 +46,7 @@
 		if(prob(50))
 			user << "\red \b This kills the crab."
 			health -= 20
-			Die()
+			death()
 		else
 			GetMad()
 			get

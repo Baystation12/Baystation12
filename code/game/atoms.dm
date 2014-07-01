@@ -10,7 +10,7 @@
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
-	var/germ_level = 0 // The higher the germ level, the more germ on the atom.
+	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -371,17 +371,22 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/transfer_fingerprints_to(var/atom/A)
+
 	if(!istype(A.fingerprints,/list))
 		A.fingerprints = list()
+
 	if(!istype(A.fingerprintshidden,/list))
 		A.fingerprintshidden = list()
+
+	if(!istype(fingerprintshidden, /list))
+		fingerprintshidden = list()
 
 	//skytodo
 	//A.fingerprints |= fingerprints            //detective
 	//A.fingerprintshidden |= fingerprintshidden    //admin
-	if(fingerprints)
+	if(A.fingerprints && fingerprints)
 		A.fingerprints |= fingerprints.Copy()            //detective
-	if(fingerprintshidden)
+	if(A.fingerprintshidden && fingerprintshidden)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
 
 

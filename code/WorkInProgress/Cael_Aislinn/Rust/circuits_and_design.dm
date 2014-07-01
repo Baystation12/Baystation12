@@ -56,15 +56,15 @@ datum/design/rust_fuel_port
 /obj/item/weapon/module/rust_fuel_compressor
 	name = "Internal circuitry (RUST fuel compressor)"
 	icon_state = "card_mod"
-	origin_tech = "materials=6;plasmatech=4"
+	origin_tech = "materials=6;phorontech=4"
 
 datum/design/rust_fuel_compressor
 	name = "Circuit Design (RUST fuel compressor)"
 	desc = "Allows for the construction of circuit boards used to build a fuel compressor of the RUST fusion engine."
 	id = "rust_fuel_compressor"
-	req_tech = list("materials" = 6, "plasmatech" = 4)
+	req_tech = list("materials" = 6, "phorontech" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$diamond" = 1000)
+	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 3000, "$diamond" = 1000)
 	build_path = "/obj/item/weapon/module/rust_fuel_compressor"
 
 //////////////////////////////////////
@@ -74,7 +74,7 @@ datum/design/rust_fuel_compressor
 	name = "Internal circuitry (RUST tokamak core)"
 	build_path = "/obj/machinery/power/rust_core"
 	board_type = "machine"
-	origin_tech = "bluespace=3;plasmatech=4;magnets=5;powerstorage=6"
+	origin_tech = "bluespace=3;phorontech=4;magnets=5;powerstorage=6"
 	frame_desc = "Requires 2 Pico Manipulators, 1 Ultra Micro-Laser, 5 Pieces of Cable, 1 Subspace Crystal and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,
@@ -87,10 +87,10 @@ datum/design/rust_core
 	name = "Internal circuitry (RUST tokamak core)"
 	desc = "The circuit board that for a RUST-pattern tokamak fusion core."
 	id = "pacman"
-	req_tech = list(bluespace = 3, plasmatech = 4, magnets = 5, powerstorage = 6)
+	req_tech = list(bluespace = 3, phorontech = 4, magnets = 5, powerstorage = 6)
 	build_type = IMPRINTER
 	reliability_base = 79
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$diamond" = 2000)
+	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 3000, "$diamond" = 2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"
 
 //////////////////////////////////////
@@ -100,7 +100,7 @@ datum/design/rust_core
 	name = "Internal circuitry (RUST fuel injector)"
 	build_path = "/obj/machinery/power/rust_fuel_injector"
 	board_type = "machine"
-	origin_tech = "powerstorage=3;engineering=4;plasmatech=4;materials=6"
+	origin_tech = "powerstorage=3;engineering=4;phorontech=4;materials=6"
 	frame_desc = "Requires 2 Pico Manipulators, 1 Phasic Scanning Module, 1 Super Matter Bin, 1 Console Screen and 5 Pieces of Cable."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,
@@ -113,8 +113,8 @@ datum/design/rust_injector
 	name = "Internal circuitry (RUST tokamak core)"
 	desc = "The circuit board that for a RUST-pattern particle accelerator."
 	id = "pacman"
-	req_tech = list(powerstorage = 3, engineering = 4, plasmatech = 4, materials = 6)
+	req_tech = list(powerstorage = 3, engineering = 4, phorontech = 4, materials = 6)
 	build_type = IMPRINTER
 	reliability_base = 79
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$uranium" = 2000)
+	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 3000, "$uranium" = 2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"

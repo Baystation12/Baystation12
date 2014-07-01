@@ -85,6 +85,8 @@
 		return 1
 
 /datum/game_mode/ninja/proc/forge_ninja_objectives(var/datum/mind/ninja)
+	if (config.objectives_disabled)
+		return
 
 	var/objective_list = list(1,2,3,4,5)
 	for(var/i=rand(2,4),i>0,i--)

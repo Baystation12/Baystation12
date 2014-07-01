@@ -34,7 +34,7 @@ When thinking about new stuff, check here to see if there are any slots unfilled
 
 //MATERIALS
 1	|	Metal
-2	|	Solid Plasma
+2	|	Solid Phoron
 3	|	Silver
 4	|	Gold, Super Capacitor
 5	|	Uranium, Nuclear Gun, SUPERPACMAN
@@ -54,9 +54,9 @@ When thinking about new stuff, check here to see if there are any slots unfilled
 19	|
 20	|
 
-//PLASMA TECH
+//PHORON TECH
 1	|
-2	|	Solid Plasma
+2	|	Solid Phoron
 3	|	Pacman Generator
 4	|
 5	|

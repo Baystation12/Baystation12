@@ -212,8 +212,7 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	m_amt = 50
-	g_amt = 20
+	matter = list("metal" = 50, "glass" = 20)
 	flags = TABLEPASS | FPRINT | CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"
@@ -229,6 +228,8 @@
 	src.amount = length
 	if (param_color)
 		color = param_color
+	else
+		color = item_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
@@ -237,6 +238,7 @@
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!color)
 		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+		item_color = color
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -640,39 +642,19 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(S.burn_dam > 0 && use(1))
-			S.heal_damage(0,15,0,1)
-
-			if(user != M)
-				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]'s [S.display_name] with \the [src]</span>",\
-				"<span class='notice'>\The [user] repairs some burn damage on your [S.display_name]</span>",\
-				"You hear wires being cut.")
-			else
-				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on their [S.display_name] with \the [src]</span>",\
-				"<span class='notice'>You repair some burn damage on your [S.display_name]</span>",\
-				"You hear wires being cut.")
-
-			return
-
 		if(istype(M,/mob/living/carbon/human))
-
 			var/mob/living/carbon/human/H = M
-
 			if(H.species.flags & IS_SYNTHETIC)
-
-				if(H.getFireLoss() > 0)
-
-					if(M == user)
-						user << "\red You can't repair damage to your own body - it's against OH&S."
-						return
-
-					user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]  with \the [src]</span>",\
-						"<span class='notice'>You repair some of \the [M]'s burn damage.</span>",\
-						"You hear wires being cut.")
-					H.heal_overall_damage(0,5)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
 					return
 
-		user << "Nothing to fix!"
+		if(S.burn_dam > 0 && use(1))
+			S.heal_damage(0,15,0,1)
+			user.visible_message("\red \The [user] repairs some burn damage on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
 
 	else
 		return ..()

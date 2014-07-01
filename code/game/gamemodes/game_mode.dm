@@ -22,12 +22,13 @@
 	var/explosion_in_progress = 0 //sit back and relax
 	var/list/datum/mind/modePlayer = new
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
-	var/list/protected_jobs = list()	// Jobs that can't be tratiors because
+	var/list/protected_jobs = list()	// Jobs that can't be traitors because
 	var/required_players = 0
 	var/required_players_secret = 0 //Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
+	var/ert_disabled = 0
 	var/uplink_welcome = "Syndicate Uplink Console:"
 	var/uplink_uses = 10
 	var/uplink_items = {"Highly Visible and Dangerous Weapons;
@@ -111,8 +112,6 @@ Implants;
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)
 		feedback_set_details("game_mode","[ticker.mode]")
-	if(revdata)
-		feedback_set_details("revision","[revdata.revision]")
 	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
@@ -124,10 +123,12 @@ Implants;
 
 
 /datum/game_mode/proc/check_finished() //to be called by ticker
-	if(emergency_shuttle.location==2 || station_was_nuked)
+	if(emergency_shuttle.returned() || station_was_nuked)
 		return 1
 	return 0
 
+/datum/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.
+	return
 
 /datum/game_mode/proc/declare_completion()
 	var/clients = 0
@@ -248,7 +249,7 @@ Implants;
 	for (var/obj/machinery/computer/communications/comm in machines)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper - 'Cent. Com. Status Summary'"
+			intercept.name = "Cent. Com. Status Summary"
 			intercept.info = intercepttext
 
 			comm.messagetitle.Add("Cent. Com. Status Summary")
@@ -406,6 +407,9 @@ Implants;
 		if(player.mind && (player.mind.assigned_role in command_positions))
 			heads += player.mind
 	return heads
+
+/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+	return 0
 
 /datum/game_mode/New()
 	newscaster_announcements = pick(newscaster_standard_feeds)

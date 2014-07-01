@@ -1,9 +1,6 @@
 /**********************Mineral deposits**************************/
 
 
-datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
-var/list/artifact_spawn = list() // Runtime fix for geometry loading before controller is instantiated.
-
 /turf/simulated/mineral //wall piece
 	name = "Rock"
 	icon = 'icons/turf/walls.dmi'
@@ -27,6 +24,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
 
+	has_resources = 1
 
 	New()
 		. = ..()
@@ -38,19 +36,19 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			if((istype(get_step(src, NORTH), /turf/simulated/floor)) || (istype(get_step(src, NORTH), /turf/space)) || (istype(get_step(src, NORTH), /turf/simulated/shuttle/floor)))
 				T = get_step(src, NORTH)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_s")
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_s", layer=2)
 			if((istype(get_step(src, SOUTH), /turf/simulated/floor)) || (istype(get_step(src, SOUTH), /turf/space)) || (istype(get_step(src, SOUTH), /turf/simulated/shuttle/floor)))
 				T = get_step(src, SOUTH)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_n", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_n", layer=2)
 			if((istype(get_step(src, EAST), /turf/simulated/floor)) || (istype(get_step(src, EAST), /turf/space)) || (istype(get_step(src, EAST), /turf/simulated/shuttle/floor)))
 				T = get_step(src, EAST)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=2)
 			if((istype(get_step(src, WEST), /turf/simulated/floor)) || (istype(get_step(src, WEST), /turf/space)) || (istype(get_step(src, WEST), /turf/simulated/shuttle/floor)))
 				T = get_step(src, WEST)
 				if (T)
-					T.overlays += image('icons/turf/walls.dmi', "rock_side_e", layer=6)
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_e", layer=2)
 
 
 	ex_act(severity)
@@ -349,7 +347,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 				if(6)
 					var/quantity = rand(1,3)
 					for(var/i=0, i<quantity, i++)
-						new /obj/item/weapon/shard/plasma(src)
+						new /obj/item/weapon/shard/phoron(src)
 
 				if(7)
 					var/obj/item/stack/sheet/mineral/uranium/R = new(src)
@@ -358,7 +356,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
@@ -377,7 +375,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25)
+	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 25)
 
 
 /**********************Asteroid**************************/
@@ -392,6 +390,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	temperature = T0C
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	has_resources = 1
 
 /turf/simulated/floor/plating/airless/asteroid/New()
 	var/proper_name = name
@@ -477,6 +476,12 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		if(S.collection_mode)
 			for(var/obj/item/weapon/ore/O in contents)
 				O.attackby(W,user)
+				return
+	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
+		var/obj/item/weapon/storage/bag/fossils/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/fossil/F in contents)
+				F.attackby(W,user)
 				return
 
 	else

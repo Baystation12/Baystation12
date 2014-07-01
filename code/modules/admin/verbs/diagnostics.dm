@@ -56,7 +56,7 @@
 		if(T.active_hotspot)
 			burning = 1
 
-	usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.toxins] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
+	usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.phoron] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
 	for(var/datum/gas/trace_gas in GM.trace_gases)
 		usr << "[trace_gas.type]: [trace_gas.moles]"
 	feedback_add_details("admin_verb","DAST") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -139,6 +139,16 @@
 	message_admins("[usr] manually reloaded admins")
 	load_admins()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/reload_mentors()
+	set name = "Reload Mentors"
+	set category = "Debug"
+
+	if(!check_rights(R_SERVER)) return
+	
+	message_admins("[usr] manually reloaded Mentors")
+	world.load_mods()
+
 
 //todo:
 /client/proc/jump_to_dead_group()

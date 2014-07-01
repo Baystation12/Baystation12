@@ -157,7 +157,7 @@
 	hostile_drone = 0
 	walk(src,0)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Die()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/death()
 	src.visible_message("\blue \icon[src] [src] suddenly breaks apart.")
 	..()
 	del(src)
@@ -258,8 +258,8 @@
 
 		if(spawnees & 128)
 			C = new(src.loc)
-			C.name = "Drone plasma overcharge counter"
-			C.origin_tech = "plasma=[rand(3,6)]"
+			C.name = "Drone phoron overcharge counter"
+			C.origin_tech = "phoron=[rand(3,6)]"
 
 		if(spawnees & 256)
 			C = new(src.loc)

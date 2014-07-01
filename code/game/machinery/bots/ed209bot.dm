@@ -269,7 +269,7 @@ Auto Patrol: []"},
 				walk_to(src,0)
 
 			if (target)		// make sure target exists
-				if (get_dist(src, src.target) <= 1)		// if right next to perp
+				if (Adjacent(target))		// if right next to perp
 					playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 					src.icon_state = "[lasercolor]ed209-c"
 					spawn(2)
@@ -731,7 +731,7 @@ Auto Patrol: []"},
 /obj/machinery/bot/ed209/Bump(M as mob|obj) //Leave no door unopened!
 	if ((istype(M, /obj/machinery/door)) && (!isnull(src.botcard)))
 		var/obj/machinery/door/D = M
-		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard))
+		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/poddoor))
 			D.open()
 			src.frustration = 0
 	else if ((istype(M, /mob/living/)) && (!src.anchored))

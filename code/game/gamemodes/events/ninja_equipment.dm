@@ -323,13 +323,13 @@ ________________________________________________________________________________
 					var/o2_level = environment.oxygen/total_moles
 					var/n2_level = environment.nitrogen/total_moles
 					var/co2_level = environment.carbon_dioxide/total_moles
-					var/plasma_level = environment.toxins/total_moles
-					var/unknown_level =  1-(o2_level+n2_level+co2_level+plasma_level)
+					var/phoron_level = environment.phoron/total_moles
+					var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 					dat += "<ul>"
 					dat += "<li>Nitrogen: [round(n2_level*100)]%</li>"
 					dat += "<li>Oxygen: [round(o2_level*100)]%</li>"
 					dat += "<li>Carbon Dioxide: [round(co2_level*100)]%</li>"
-					dat += "<li>Plasma: [round(plasma_level*100)]%</li>"
+					dat += "<li>Phoron: [round(phoron_level*100)]%</li>"
 					dat += "</ul>"
 					if(unknown_level > 0.01)
 						dat += "OTHER: [round(unknown_level)]%<br>"
@@ -1367,17 +1367,20 @@ It is possible to destroy the net by the occupant or someone else.
 				playsound(M.loc, 'sound/effects/sparks4.ogg', 50, 1)
 				anim(M.loc,M,'icons/mob/mob.dmi',,"phaseout",,M.dir)
 
-			M.loc = pick(holdingfacility)//Throw mob in to the holding facility.
-			M << "\red You appear in a strange place!"
+			if(holdingfacility.len)
+				M.loc = pick(holdingfacility)//Throw mob in to the holding facility.
+				spawn(0)
+					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+					spark_system.set_up(5, 0, M.loc)
+					spark_system.start()
+					playsound(M.loc, 'sound/effects/phasein.ogg', 25, 1)
+					playsound(M.loc, 'sound/effects/sparks2.ogg', 50, 1)
+					anim(M.loc,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
+					del(src)//Wait for everything to finish, delete the net. Else it will stop everything once net is deleted, including the spawn(0).
+			else
+				M.loc = null
 
-			spawn(0)
-				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-				spark_system.set_up(5, 0, M.loc)
-				spark_system.start()
-				playsound(M.loc, 'sound/effects/phasein.ogg', 25, 1)
-				playsound(M.loc, 'sound/effects/sparks2.ogg', 50, 1)
-				anim(M.loc,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
-				del(src)//Wait for everything to finish, delete the net. Else it will stop everything once net is deleted, including the spawn(0).
+			M << "\red You appear in a strange place!"
 
 			for(var/mob/O in viewers(src, 3))
 				O.show_message(text("[] vanished!", M), 1, text("You hear sparks flying!"), 2)

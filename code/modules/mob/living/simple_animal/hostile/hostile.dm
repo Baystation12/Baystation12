@@ -116,7 +116,7 @@
 	L += mechas_list
 	return L
 
-/mob/living/simple_animal/hostile/Die()
+/mob/living/simple_animal/hostile/death()
 	..()
 	walk(src, 0)
 

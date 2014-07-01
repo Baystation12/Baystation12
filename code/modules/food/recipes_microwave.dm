@@ -1047,14 +1047,6 @@ I said no!
 	items = list()
 	result = /obj/item/weapon/reagent_containers/food/snacks/slimesoup
 
-/datum/recipe/clownstears
-	reagents = list("water" = 10)
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
-		/obj/item/weapon/ore/clown,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/clownstears
-
 /datum/recipe/boiledslimeextract
 	reagents = list("water" = 5)
 	items = list(

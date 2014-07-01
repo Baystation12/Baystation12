@@ -627,6 +627,14 @@ var/list/ghostteleportlocs = list()
 	name = "Medbay Maintenance"
 	icon_state = "asmaint"
 
+/area/maintenance/engi_shuttle
+	name = "Engineering Shuttle Access"
+	icon_state = "asmaint"
+
+/area/maintenance/engi_engine
+	name = "Engine Maintenance"
+	icon_state = "asmaint"
+
 /area/maintenance/asmaint2
 	name = "Science Maintenance"
 	icon_state = "asmaint"
@@ -791,6 +799,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering Dormitories"
 	icon_state = "Sleep"
 
+/area/crew_quarters/sleep/engi_wash
+	name = "\improper Engineering Washroom"
+	icon_state = "toilet"
+
 /area/crew_quarters/sleep/sec
 	name = "\improper Security Dormitories"
 	icon_state = "Sleep"
@@ -936,6 +948,11 @@ var/list/ghostteleportlocs = list()
 //Engineering
 
 /area/engine
+
+	drone_fabrication
+		name = "\improper Drone Fabrication"
+		icon_state = "engine"
+
 	engine_smes
 		name = "Engineering SMES"
 		icon_state = "engine_smes"
@@ -955,6 +972,10 @@ var/list/ghostteleportlocs = list()
 
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
+
+	atmos_monitoring
+		name = "\improper Atmospherics Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engineering
@@ -977,8 +998,16 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
 
+	engine_hallway
+		name = "\improper Engine Room Hallway"
+		icon_state = "engine_hallway"
+
 	engine_eva
 		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
+
+	engine_eva_maintenance
+		name = "\improper Engine EVA Maintenance"
 		icon_state = "engine_eva"
 
 	workshop
@@ -1341,44 +1370,56 @@ var/list/ghostteleportlocs = list()
 	icon_state = "janitor"
 
 /area/hydroponics
-	name = "Hydroponics"
+	name = "\improper Hydroponics"
 	icon_state = "hydro"
 
-//Toxins
+/area/hydroponics/garden
+	name = "\improper Garden"
+	icon_state = "garden"
 
-/area/toxins/lab
+//rnd (Research and Development
+
+/area/rnd/lab
 	name = "\improper Research and Development"
 	icon_state = "toxlab"
 
-/area/toxins/hallway
+/area/rnd/hallway
 	name = "\improper Research Lab"
 	icon_state = "toxlab"
 
-/area/toxins/rdoffice
+/area/rnd/rdoffice
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
 
-/area/toxins/supermatter
+/area/rnd/supermatter
 	name = "\improper Supermatter Lab"
 	icon_state = "toxlab"
 
-/area/toxins/xenobiology
+/area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
-	icon_state = "toxlab"
+	icon_state = "xeno_lab"
 
-/area/toxins/storage
+/area/rnd/xenobiology/xenoflora_storage
+	name = "\improper Xenoflora Storage"
+	icon_state = "xeno_f_store"
+
+/area/rnd/xenobiology/xenoflora
+	name = "\improper Xenoflora Lab"
+	icon_state = "xeno_f_lab"
+
+/area/rnd/storage
 	name = "\improper Toxins Storage"
 	icon_state = "toxstorage"
 
-/area/toxins/test_area
+/area/rnd/test_area
 	name = "\improper Toxins Test Area"
 	icon_state = "toxtest"
 
-/area/toxins/mixing
+/area/rnd/mixing
 	name = "\improper Toxins Mixing Room"
 	icon_state = "toxmix"
 
-/area/toxins/misc_lab
+/area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
@@ -1440,11 +1481,11 @@ var/list/ghostteleportlocs = list()
 //DJSTATION
 
 /area/djstation
-	name = "\improper Ruskie DJ Station"
+	name = "\improper Listening Post"
 	icon_state = "DJ"
 
 /area/djstation/solars
-	name = "\improper DJ Station Solars"
+	name = "\improper Listening Post Solars"
 	icon_state = "DJ"
 
 //DERELICT
@@ -1535,6 +1576,71 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Derelict Singularity Engine"
 	icon_state = "engine"
 
+//HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
+
+/area/shuttle/constructionsite
+	name = "\improper Construction Site Shuttle"
+	icon_state = "yellow"
+
+/area/shuttle/constructionsite/station
+	name = "\improper Construction Site Shuttle"
+
+/area/shuttle/constructionsite/site
+	name = "\improper Construction Site Shuttle"
+
+/area/constructionsite
+	name = "\improper Construction Site"
+	icon_state = "storage"
+
+/area/constructionsite/storage
+	name = "\improper Construction Site Storage Area"
+
+/area/constructionsite/science
+	name = "\improper Construction Site Research"
+
+/area/constructionsite/bridge
+	name = "\improper Construction Site Bridge"
+	icon_state = "bridge"
+
+/area/constructionsite/maintenance
+	name = "\improper Construction Site Maintenance"
+	icon_state = "yellow"
+
+/area/constructionsite/hallway/aft
+	name = "\improper Construction Site Aft Hallway"
+	icon_state = "hallP"
+
+/area/constructionsite/hallway/fore
+	name = "\improper Construction Site Fore Hallway"
+	icon_state = "hallS"
+
+/area/constructionsite/atmospherics
+	name = "\improper Construction Site Atmospherics"
+	icon_state = "green"
+
+/area/constructionsite/medical
+	name = "\improper Construction Site Medbay"
+	icon_state = "medbay"
+
+/area/constructionsite/ai
+	name = "\improper Construction Computer Core"
+	icon_state = "ai"
+
+/area/constructionsite/engineering
+	name = "\improper Construction Site Engine Bay"
+	icon_state = "engine"
+
+/area/solar/constructionsite
+	name = "\improper Construction Site Solars"
+	icon_state = "aft"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
+
 //Construction
 
 /area/construction
@@ -1591,9 +1697,17 @@ var/list/ghostteleportlocs = list()
 	name = "AI Upload Access"
 	icon_state = "ai_foyer"
 
+/area/turret_protected/ai_server_room
+	name = "AI Server Room"
+	icon_state = "ai_server"
+
 /area/turret_protected/ai
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
+
+/area/turret_protected/ai_cyborg_station
+	name = "\improper Cyborg Station"
+	icon_state = "ai_cyborg"
 
 /area/turret_protected/aisat
 	name = "\improper AI Satellite"
@@ -1894,7 +2008,7 @@ var/list/the_station_areas = list (
 	/area/quartermaster,
 	/area/janitor,
 	/area/hydroponics,
-	/area/toxins,
+	/area/rnd,
 	/area/storage,
 	/area/construction,
 	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0

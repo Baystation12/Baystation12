@@ -26,7 +26,7 @@
 	var/emag = 0		// When it is emagged.
 	var/message = "<span class='notice'>System bootup complete. Please select an option.</span>"	// The message that shows on the main menu.
 	var/auth = 0 // Are they authenticated?
-	var/optioncount = 7
+	var/optioncount = 8
 	// Custom Message Properties
 	var/customsender = "System Administrator"
 	var/obj/item/device/pda/customrecepient = null
@@ -122,6 +122,7 @@
 					dat += "<dd><A href='?src=\ref[src];clearr=1'>&#09;[++i]. Clear Request Console Logs</a><br></dd>"
 					dat += "<dd><A href='?src=\ref[src];pass=1'>&#09;[++i]. Set Custom Key</a><br></dd>"
 					dat += "<dd><A href='?src=\ref[src];msg=1'>&#09;[++i]. Send Admin Message</a><br></dd>"
+					dat += "<dd><A href='?src=\ref[src];spam=1'>&#09;[++i]. Modify Spam Filter</a><br></dd>"
 			else
 				for(var/n = ++i; n <= optioncount; n++)
 					dat += "<dd><font color='blue'>&#09;[n]. ---------------</font><br></dd>"
@@ -239,6 +240,19 @@
 				dat += {"<tr><td width = '5%'><center><A href='?src=\ref[src];deleter=\ref[rc]' style='color: rgb(255,0,0)'>X</a></center></td><td width='15%'>[rc.send_dpt]</td>
 				<td width='15%'>[rc.rec_dpt]</td><td width='300px'>[rc.message]</td><td width='15%'>[rc.stamp]</td><td width='15%'>[rc.id_auth]</td><td width='15%'>[rc.priority]</td></tr>"}
 			dat += "</table>"
+
+		//Spam filter modification
+		if(5)
+			dat += "<center><A href='?src=\ref[src];back=1'>Back</a> - <A href='?src=\ref[src];refresh=1'>Refresh</center><hr>"
+			var/index = 0
+			for(var/token in src.linkedServer.spamfilter)
+				index++
+				if(index > 3000)
+					break
+				dat += "<dd>[index]&#09; <a href='?src=\ref[src];deltoken=[index]'>\[[token]\]</a><br></dd>"
+			dat += "<hr>"
+			if (linkedServer.spamfilter.len < linkedServer.spamfilter_limit)
+				dat += "<a href='?src=\ref[src];addtoken=1'>Add token</a><br>"
 
 
 	dat += "</body>"
@@ -485,6 +499,26 @@
 
 			//usr << href_list["select"]
 
+		if(href_list["spam"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				if(auth)
+					src.screen = 5
+
+		if(href_list["addtoken"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				src.linkedServer.spamfilter += input(usr,"Enter text you want to be filtered out","Token creation") as text|null
+
+		if(href_list["deltoken"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				var/tokennum = text2num(href_list["deltoken"])
+				src.linkedServer.spamfilter.Cut(tokennum,tokennum+1)
+
 		if (href_list["back"])
 			src.screen = 0
 
@@ -505,5 +539,5 @@
 					if(!isnull(server.decryptkey))
 						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret and away from the clown.<br>If necessary, change the password to a more secure one."
 						info_links = info
-						overlays += "paper_words"
+						icon_state = "paper_words"
 						break

@@ -32,6 +32,7 @@
 	return 0
 
 
+//if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
 /mob/living/proc/getarmor(var/def_zone, var/type)
 	return 0
 
@@ -53,11 +54,14 @@
 			signaler.signal()
 
 	var/absorb = run_armor_check(def_zone, P.flag)
-	if(absorb >= 2)
-		P.on_hit(src,2)
-		return 2
+	var/proj_sharp = is_sharp(P)
+	var/proj_edge = has_edge(P)
+	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.flag)))
+		proj_sharp = 0
+		proj_edge = 0
+
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P)
+		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
 	P.on_hit(src, absorb, def_zone)
 	return absorb
 
@@ -71,8 +75,9 @@
 			dtype = W.damtype
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
+
 		if(armor < 2)
-			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O.sharp, O)
+			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, is_sharp(O), has_edge(O), O)
 
 		if(!O.fingerprintslast)
 			return
@@ -88,13 +93,15 @@
 
 			// Begin BS12 momentum-transfer code.
 
-			if(speed >= 20)
+			if(speed >= 15)
 				var/obj/item/weapon/W = O
 				var/momentum = speed/2
 				var/dir = get_dir(M,src)
 
 				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+
+				if(!W || !src) return
 
 				if(istype(W.loc,/mob/living) && W.sharp) //Projectile is embedded and suitable for pinning.
 

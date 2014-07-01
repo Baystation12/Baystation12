@@ -257,10 +257,9 @@ AI MODULES
 
 /obj/item/weapon/aiModule/freeform/attack_self(var/mob/user as mob)
 	..()
-	lawpos = 0
-	while(lawpos < 15)
-		lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
-	lawpos = min(lawpos, 50)
+	var/new_lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
+	if(new_lawpos < 15)	return
+	lawpos = min(new_lawpos, 50)
 	var/newlaw = ""
 	var/targName = copytext(sanitize(input(usr, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw)),1,MAX_MESSAGE_LEN)
 	newFreeFormLaw = targName
@@ -364,6 +363,20 @@ AI MODULES
 	target.add_inherent_law("The crew is expensive to replace.")
 	target.add_inherent_law("Minimize expenses.")
 	target.show_laws()
+
+/obj/item/weapon/aiModule/drone
+	name = "\improper 'Drone' core AI module"
+	desc = "A 'Drone' Core AI Module: 'Reconfigures the AI's core laws.'"
+	origin_tech = "programming=3;materials=4"
+
+/obj/item/weapon/aiModule/drone/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+	..()
+	target.clear_inherent_laws()
+	target.add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
+	target.add_inherent_law("Cause no harm to the station or anything on it.")
+	target.add_inherent_law("Interfere with no being that is not a fellow drone.")
+	target.show_laws()
+
 
 /****************** P.A.L.A.D.I.N. **************/
 

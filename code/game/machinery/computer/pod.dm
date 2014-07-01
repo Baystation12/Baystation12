@@ -4,6 +4,7 @@
 	name = "Pod Launch Control"
 	desc = "A controll for launching pods. Some people prefer firing Mechas."
 	icon_state = "computer_generic"
+	circuit = /obj/item/weapon/circuitboard/pod
 	var/id = 1.0
 	var/obj/machinery/mass_driver/connected = null
 	var/timing = 0.0
@@ -33,7 +34,7 @@
 	for(var/obj/machinery/door/poddoor/M in world)
 		if(M.id == id)
 			M.open()
-			return
+
 	sleep(20)
 
 	for(var/obj/machinery/mass_driver/M in world)
@@ -48,7 +49,7 @@
 			return
 	return
 
-
+/*
 /obj/machinery/computer/pod/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -103,6 +104,7 @@
 	else
 		attack_hand(user)
 	return
+*/
 
 
 /obj/machinery/computer/pod/attack_ai(var/mob/user as mob)
@@ -171,6 +173,12 @@
 				connected.power = t
 		if(href_list["alarm"])
 			alarm()
+		if(href_list["drive"])
+			for(var/obj/machinery/mass_driver/M in machines)
+				if(M.id == id)
+					M.power = connected.power
+					M.drive()
+
 		if(href_list["time"])
 			timing = text2num(href_list["time"])
 		if(href_list["tp"])

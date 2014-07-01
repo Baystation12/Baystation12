@@ -243,11 +243,11 @@
 				"Do you think that caused a trauma with you?",
 				"Have you ever previously spoken to anybody about this?")),
 		new/datum/text_parser/keyword(
-			list("bomb", "explosive", "toxin", "plasma"),
+			list("bomb", "explosive", "toxin", "phoron"),
 			list(
 				"Do you worry about bombs often?",
-				"Do you work in toxins?",
-				"Do you find it odd to worry about bombs on a toxins research vessel?")),
+				"Do you work in science?",
+				"Do you find it odd to worry about bombs on a science research vessel?")),
 		new/datum/text_parser/keyword(
 			list("work", "job", "head", "staff", "transen"),
 			list(

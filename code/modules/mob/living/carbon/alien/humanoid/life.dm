@@ -2,7 +2,7 @@
 
 /mob/living/carbon/alien/humanoid
 	oxygen_alert = 0
-	toxins_alert = 0
+	phoron_alert = 0
 	fire_alert = 0
 
 	var/temperature_alert = 0
@@ -171,25 +171,25 @@
 			//Aliens breathe in vaccuum
 			return 0
 
-		var/toxins_used = 0
+		var/phoron_used = 0
 		var/breath_pressure = (breath.total_moles()*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
 
-		//Partial pressure of the toxins in our breath
-		var/Toxins_pp = (breath.toxins/breath.total_moles())*breath_pressure
+		//Partial pressure of the phoron in our breath
+		var/Toxins_pp = (breath.phoron/breath.total_moles())*breath_pressure
 
-		if(Toxins_pp) // Detect toxins in air
+		if(Toxins_pp) // Detect phoron in air
 
-			adjustToxLoss(breath.toxins*250)
-			toxins_alert = max(toxins_alert, 1)
+			adjustToxLoss(breath.phoron*250)
+			phoron_alert = max(phoron_alert, 1)
 
-			toxins_used = breath.toxins
+			phoron_used = breath.phoron
 
 		else
-			toxins_alert = 0
+			phoron_alert = 0
 
-		//Breathe in toxins and out oxygen
-		breath.toxins -= toxins_used
-		breath.oxygen += toxins_used
+		//Breathe in phoron and out oxygen
+		breath.phoron -= phoron_used
+		breath.oxygen += phoron_used
 
 		if(breath.temperature > (T0C+66) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
 			if(prob(20))
@@ -412,7 +412,7 @@
 		if(pullin)	pullin.icon_state = "pull[pulling ? 1 : 0]"
 
 
-		if (toxin)	toxin.icon_state = "tox[toxins_alert ? 1 : 0]"
+		if (toxin)	toxin.icon_state = "tox[phoron_alert ? 1 : 0]"
 		if (oxygen) oxygen.icon_state = "oxy[oxygen_alert ? 1 : 0]"
 		if (fire) fire.icon_state = "fire[fire_alert ? 1 : 0]"
 		//NOTE: the alerts dont reset when youre out of danger. dont blame me,

@@ -220,15 +220,16 @@ obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
 	return list(node1, node2)
 
 obj/machinery/atmospherics/pipe/simple/update_icon()
-	if(node1&&node2)
-		switch(pipe_color)
-			if ("red") color = COLOR_RED
-			if ("blue") color = COLOR_BLUE
-			if ("cyan") color = COLOR_CYAN
-			if ("green") color = COLOR_GREEN
-			if ("yellow") color = "#FFCC00"
-			if ("purple") color = "#5C1EC0"
-			if ("grey") color = null
+	switch(pipe_color)
+		if ("red") color = COLOR_RED
+		if ("blue") color = COLOR_BLUE
+		if ("cyan") color = COLOR_CYAN
+		if ("green") color = COLOR_GREEN
+		if ("yellow") color = "#FFCC00"
+		if ("purple") color = "#5C1EC0"
+		if ("grey") color = null
+
+	if(node1 && node2)
 		icon_state = "intact[invisibility ? "-f" : "" ]"
 
 		//var/node1_direction = get_dir(src, node1)
@@ -237,8 +238,14 @@ obj/machinery/atmospherics/pipe/simple/update_icon()
 		//dir = node1_direction|node2_direction
 
 	else
-		if(!node1&&!node2)
-			del(src) //TODO: silent deleting looks weird
+		if(!node1 && !node2)
+			var/turf/T = get_turf(src)
+			new /obj/item/pipe(loc, make_from=src)
+			for (var/obj/machinery/meter/meter in T)
+				if (meter.target == src)
+					new /obj/item/pipe_meter(T)
+					del(meter)
+			del(src)
 		var/have_node1 = node1?1:0
 		var/have_node2 = node2?1:0
 		icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
@@ -265,6 +272,9 @@ obj/machinery/atmospherics/pipe/simple/initialize()
 			node2 = target
 			break
 
+	if(!node1 && !node2)
+		del(src)
+		return
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	hide(T.intact)
@@ -884,22 +894,22 @@ obj/machinery/atmospherics/pipe/tank/carbon_dioxide
 
 		..()
 
-obj/machinery/atmospherics/pipe/tank/toxins
+obj/machinery/atmospherics/pipe/tank/phoron
 	icon = 'icons/obj/atmospherics/orange_pipe_tank.dmi'
-	name = "Pressure Tank (Plasma)"
+	name = "Pressure Tank (Phoron)"
 
 	New()
 		air_temporary = new
 		air_temporary.volume = volume
 		air_temporary.temperature = T20C
 
-		air_temporary.toxins = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+		air_temporary.phoron = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
 
 		..()
 
 obj/machinery/atmospherics/pipe/tank/oxygen_agent_b
 	icon = 'icons/obj/atmospherics/red_orange_pipe_tank.dmi'
-	name = "Pressure Tank (Oxygen + Plasma)"
+	name = "Pressure Tank (Oxygen + Phoron)"
 
 	New()
 		air_temporary = new
@@ -1005,15 +1015,15 @@ obj/machinery/atmospherics/pipe/tank/attackby(var/obj/item/weapon/W as obj, var/
 			var/o2_concentration = parent.air.oxygen/total_moles
 			var/n2_concentration = parent.air.nitrogen/total_moles
 			var/co2_concentration = parent.air.carbon_dioxide/total_moles
-			var/plasma_concentration = parent.air.toxins/total_moles
+			var/phoron_concentration = parent.air.phoron/total_moles
 
-			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
 			user << "\blue Pressure: [round(pressure,0.1)] kPa"
 			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 			user << "\blue Oxygen: [round(o2_concentration*100)]%"
 			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Plasma: [round(plasma_concentration*100)]%"
+			user << "\blue Phoron: [round(phoron_concentration*100)]%"
 			if(unknown_concentration>0.01)
 				user << "\red Unknown: [round(unknown_concentration*100)]%"
 			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"

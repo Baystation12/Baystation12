@@ -9,7 +9,7 @@
 	var/oxygen = 0
 	var/carbon_dioxide = 0
 	var/nitrogen = 0
-	var/toxins = 0
+	var/phoron = 0
 
 	//Properties for airtight tiles (/wall)
 	var/thermal_conductivity = 0.05
@@ -21,6 +21,10 @@
 	var/blocks_air = 0
 	var/icon_old = null
 	var/pathweight = 1
+
+	//Mining resource generation stuff.
+	var/has_resources
+	var/list/resources
 
 /turf/New()
 	..()
@@ -143,6 +147,9 @@
 			if ((A && M))
 				A.HasProximity(M, 1)
 			return
+	return
+
+/turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return
 
 /turf/proc/is_plating()

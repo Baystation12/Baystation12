@@ -16,9 +16,9 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PLASMA_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
-#define MIN_PLASMA_DAMAGE 1
-#define MAX_PLASMA_DAMAGE 10
+#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
+#define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN_DAMAGE are for when a mob breathes poisonous air
+#define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN_DAMAGE are for when a mob breathes poisonous air
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
@@ -35,10 +35,10 @@
 
 #define TEMPERATURE_DAMAGE_COEFFICIENT 1.5	//This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
 #define BODYTEMP_AUTORECOVERY_DIVISOR 12 //This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
-#define BODYTEMP_AUTORECOVERY_MINIMUM 10 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
+#define BODYTEMP_AUTORECOVERY_MINIMUM 1 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
 #define BODYTEMP_COLD_DIVISOR 6 //Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is lower than their body temperature. Make it lower to lose bodytemp faster.
 #define BODYTEMP_HEAT_DIVISOR 6 //Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is higher than their body temperature. Make it lower to gain bodytemp faster.
-#define BODYTEMP_COOLING_MAX 30 //The maximum number of degrees that your body can cool in 1 tick, when in a cold area.
+#define BODYTEMP_COOLING_MAX -30 //The maximum number of degrees that your body can cool in 1 tick, when in a cold area.
 #define BODYTEMP_HEATING_MAX 30 //The maximum number of degrees that your body can heat up in 1 tick, when in a hot area.
 
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
@@ -112,7 +112,7 @@
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
 #define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
+#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt phoron into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
 #define WATER_BOIL_TEMP 393 */
@@ -121,13 +121,13 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
 #define CARBON_LIFEFORM_FIRE_DAMAGE		4
 
-//Plasma fire properties
-#define PLASMA_MINIMUM_BURN_TEMPERATURE		100+T0C
-#define PLASMA_FLASHPOINT 					246+T0C
-#define PLASMA_UPPER_TEMPERATURE			1370+T0C
-#define PLASMA_MINIMUM_OXYGEN_NEEDED		2
-#define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
-#define PLASMA_OXYGEN_FULLBURN				10
+//Phoron fire properties
+#define PHORON_MINIMUM_BURN_TEMPERATURE		100+T0C
+#define PHORON_FLASHPOINT 					246+T0C
+#define PHORON_UPPER_TEMPERATURE			1370+T0C
+#define PHORON_MINIMUM_OXYGEN_NEEDED		2
+#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO	20
+#define PHORON_OXYGEN_FULLBURN				10
 
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
@@ -206,7 +206,7 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 8192
-#define PLASMAGUARD 16384			//Does not get contaminated by plasma.
+#define PHORONGUARD 16384			//Does not get contaminated by phoron.
 
 #define	NOREACT		16384 			//Reagents dont' react inside this container.
 
@@ -228,6 +228,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
 #define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
 #define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
@@ -451,6 +452,8 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANWEAKEN	2
 #define CANPARALYSE	4
 #define CANPUSH		8
+#define LEAPING		16
+#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
@@ -549,15 +552,6 @@ var/list/liftable_structures = list(\
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
 
-// Reference list for disposal sort junctions. Set the sortType variable on disposal sort junctions to
-// the index of the sort department that you want. For example, sortType set to 2 will reroute all packages
-// tagged for the Cargo Bay.
-var/list/TAGGERLOCATIONS = list("Disposals",
-	"Cargo Bay", "QM Office", "Engineering", "CE Office",
-	"Atmospherics", "Security", "HoS Office", "Medbay",
-	"CMO Office", "Chemistry", "Research", "RD Office",
-	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
-	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics")
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
@@ -646,19 +640,20 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
-#define BE_TRAITOR		1
-#define BE_OPERATIVE	2
-#define BE_CHANGELING	4
-#define BE_WIZARD		8
-#define BE_MALF			16
-#define BE_REV			32
-#define BE_ALIEN		64
-#define BE_PAI			128
-#define BE_CULTIST		256
-#define BE_MONKEY		512
-#define BE_NINJA		1024
-#define BE_RAIDER		2048
-#define BE_PLANT		4096
+#define BE_TRAITOR    1
+#define BE_OPERATIVE  2
+#define BE_CHANGELING 4
+#define BE_WIZARD     8
+#define BE_MALF       16
+#define BE_REV        32
+#define BE_ALIEN      64
+#define BE_PAI        128
+#define BE_CULTIST    256
+#define BE_MONKEY     512
+#define BE_NINJA      1024
+#define BE_RAIDER     2048
+#define BE_PLANT      4096
+#define BE_MUTINEER   8192
 
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
@@ -673,7 +668,8 @@ var/list/be_special_flags = list(
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
 	"Raider" = BE_RAIDER,
-	"Diona" = BE_PLANT
+	"Diona" = BE_PLANT,
+	"Mutineer" = BE_MUTINEER
 	)
 
 #define AGE_MIN 17			//youngest a character can be
@@ -733,22 +729,25 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_PAIN 8
 
 #define HAS_SKIN_TONE 16
-#define HAS_LIPS 32
-#define HAS_UNDERWEAR 64
-#define HAS_TAIL 128
+#define HAS_SKIN_COLOR 32
+#define HAS_LIPS 64
+#define HAS_UNDERWEAR 128
+#define HAS_TAIL 256
 
-#define IS_SLOW 256
-#define IS_PLANT 512
-#define IS_WHITELISTED 1024
+#define IS_SLOW 512
+#define IS_PLANT 1024
+#define IS_WHITELISTED 2048
 
-#define RAD_ABSORB 2048
-#define REQUIRE_LIGHT 4096
+#define RAD_ABSORB 4096
+#define REQUIRE_LIGHT 8192
 
-#define IS_SYNTHETIC 8192
+#define IS_SYNTHETIC 16384
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+#define NONVERBAL 4    // Language has a significant non-verbal component. Speech is garbled without line-of-sight
+#define SIGNLANG 8     // Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -763,3 +762,53 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
+
+
+
+/*
+	Germs and infections
+*/
+
+#define GERM_LEVEL_AMBIENT		110		//maximum germ level you can reach by standing still
+#define GERM_LEVEL_MOVE_CAP		200		//maximum germ level you can reach by running around
+
+#define INFECTION_LEVEL_ONE		100
+#define INFECTION_LEVEL_TWO		500
+#define INFECTION_LEVEL_THREE	1000
+
+
+/*
+	Shuttles
+*/
+
+// these define the time taken for the shuttle to get to SS13
+// and the time before it leaves again
+#define SHUTTLE_PREPTIME 				300	// 5 minutes = 300 seconds - after this time, the shuttle departs centcom and cannot be recalled
+#define SHUTTLE_LEAVETIME 				180	// 3 minutes = 180 seconds - the duration for which the shuttle will wait at the station after arriving
+#define SHUTTLE_TRANSIT_DURATION		300	// 5 minutes = 300 seconds - how long it takes for the shuttle to get to the station
+#define SHUTTLE_TRANSIT_DURATION_RETURN 120	// 2 minutes = 120 seconds - for some reason it takes less time to come back, go figure.
+
+//Shuttle moving status
+#define SHUTTLE_IDLE		0
+#define SHUTTLE_WARMUP		1
+#define SHUTTLE_INTRANSIT	2
+
+//Ferry shuttle processing status
+#define IDLE_STATE		0
+#define WAIT_LAUNCH		1
+#define WAIT_ARRIVE		2
+#define WAIT_FINISH		3
+
+//computer3 error codes, move lower in the file when it passes dev -Sayu
+ #define PROG_CRASH      1  // Generic crash
+ #define MISSING_PERIPHERAL  2  // Missing hardware
+ #define BUSTED_ASS_COMPUTER  4  // Self-perpetuating error.  BAC will continue to crash forever.
+ #define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
+ #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
+ #define NETWORK_FAILURE  32
+
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+#define IS_SKRELL 3
+#define IS_UNATHI 4

@@ -8,29 +8,6 @@
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 
-
-/obj/item/weapon/storage/belt/proc/can_use()
-	return is_equipped()
-
-
-/obj/item/weapon/storage/belt/MouseDrop(obj/over_object as obj, src_location, over_location)
-	var/mob/M = usr
-	if(!istype(over_object, /obj/screen))
-		return ..()
-	playsound(src.loc, "rustle", 50, 1, -5)
-	if (!M.restrained() && !M.stat && can_use())
-		switch(over_object.name)
-			if("r_hand")
-				M.u_equip(src)
-				M.put_in_r_hand(src)
-			if("l_hand")
-				M.u_equip(src)
-				M.put_in_l_hand(src)
-		src.add_fingerprint(usr)
-		return
-
-
-
 /obj/item/weapon/storage/belt/utility
 	name = "tool-belt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
 	desc = "Can hold various tools."
@@ -156,12 +133,6 @@
 	can_hold = list(
 		"/obj/item/clothing/mask/luchador"
 		)
-
-/obj/item/weapon/storage/belt/inflatable
-	name = "inflatable duck"
-	desc = "No bother to sink or swim when you can just float!"
-	icon_state = "inflatable"
-	item_state = "inflatable"
 
 /obj/item/weapon/storage/belt/security/tactical
 	name = "combat belt"

@@ -31,6 +31,7 @@
 	desc = "A computer to remotely control a gas turbine"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "airtunnel0e"
+	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
@@ -50,6 +51,9 @@
 		turbine = locate() in get_step(src, get_dir(inturf, src))
 		if(!turbine)
 			stat |= BROKEN
+		else
+			turbine.stat &= !BROKEN
+			turbine.compressor = src
 
 
 #define COMPFRICTION 5e5
@@ -104,6 +108,9 @@
 		compressor = locate() in get_step(src, get_dir(outturf, src))
 		if(!compressor)
 			stat |= BROKEN
+		else
+			compressor.stat &= !BROKEN
+			compressor.turbine = src
 
 
 #define TURBPRES 9000000
@@ -220,6 +227,7 @@
 			if(P.id == id)
 				doors += P
 
+/*
 /obj/machinery/computer/turbine_computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -252,6 +260,7 @@
 	else
 		src.attack_hand(user)
 	return
+*/
 
 /obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
 	user.machine = src

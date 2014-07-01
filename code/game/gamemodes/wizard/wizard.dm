@@ -64,6 +64,9 @@
 
 
 /datum/game_mode/proc/forge_wizard_objectives(var/datum/mind/wizard)
+	if (config.objectives_disabled)
+		return
+
 	switch(rand(1,100))
 		if(1 to 30)
 

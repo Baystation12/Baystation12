@@ -25,7 +25,7 @@
 	var/plasma_rate = 5
 
 	var/oxygen_alert = 0
-	var/toxins_alert = 0
+	var/phoron_alert = 0
 	var/fire_alert = 0
 
 	var/heat_protection = 0.5
@@ -58,7 +58,7 @@
 
 /mob/living/carbon/alien/proc/handle_environment(var/datum/gas_mixture/environment)
 
-	//If there are alien weeds on the ground then heal if needed or give some toxins
+	//If there are alien weeds on the ground then heal if needed or give some plasma
 	if(locate(/obj/effect/alien/weeds) in loc)
 		if(health >= maxHealth - getCloneLoss())
 			adjustToxLoss(plasma_rate)
@@ -159,10 +159,9 @@
 		stat(null, "Plasma Stored: [getPlasma()]/[max_plasma]")
 
 	if(emergency_shuttle)
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 /mob/living/carbon/alien/Stun(amount)
 	if(status_flags & CANSTUN)

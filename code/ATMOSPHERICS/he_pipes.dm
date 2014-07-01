@@ -4,6 +4,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	icon_state = "intact"
 	level = 2
 	var/initialize_directions_he
+	var/surface = 2
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -49,12 +50,11 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 				else
 					var/datum/gas_mixture/environment = loc.return_air()
 					environment_temperature = environment.temperature
+				var/datum/gas_mixture/pipe_air = return_air()
+				if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
+					parent.temperature_interact(loc, volume, thermal_conductivity)
 			else
-				environment_temperature = loc:temperature
-			var/datum/gas_mixture/pipe_air = return_air()
-			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
-				parent.temperature_interact(loc, volume, thermal_conductivity)
-
+				parent.radiate_heat(surface, 1)
 
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction

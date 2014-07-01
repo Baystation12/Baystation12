@@ -88,6 +88,9 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	//No escape alone because changelings aren't suited for it and it'd probably just lead to rampant robusting
 	//If it seems like they'd be able to do it in play, add a 10% chance to have to escape alone
 
+	if (config.objectives_disabled)
+		return
+
 	var/datum/objective/absorb/absorb_objective = new
 	absorb_objective.owner = changeling
 	absorb_objective.gen_amount_goal(2, 3)

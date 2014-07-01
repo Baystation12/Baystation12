@@ -10,7 +10,7 @@
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	m_amt = 500
+	matter = list("metal" = 500)
 	origin_tech = "materials=1"
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
@@ -112,7 +112,7 @@ var/last_chew = 0
 	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
 	log_attack("[s] ([H.ckey])")
 
-	if(O.take_damage(3,0,1,"teeth marks"))
+	if(O.take_damage(3,0,1,1,"teeth marks"))
 		H:UpdateDamageIcon()
 
 	last_chew = world.time

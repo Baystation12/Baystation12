@@ -18,6 +18,11 @@
 
 	var/s_tone = 0	//Skin tone
 
+	//Skin colour
+	var/r_skin = 0
+	var/g_skin = 0
+	var/b_skin = 0
+
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/age = 30		//Player's age (pure fluff)
@@ -48,7 +53,7 @@
 
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
-	
+
 	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
 
 	var/speech_problem_flag = 0

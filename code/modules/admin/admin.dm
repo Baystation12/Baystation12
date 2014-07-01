@@ -80,7 +80,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];getmob=\ref[M]'>Get</A> |
 		<A href='?src=\ref[src];sendmob=\ref[M]'>Send To</A>
 		<br><br>
-		<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> |
+		[check_rights(R_ADMIN|R_MOD,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
 		<A href='?src=\ref[src];narrateto=\ref[M]'>Narrate to</A> |
 		<A href='?src=\ref[src];subtlemessage=\ref[M]'>Subtle message</A>
 	"}
@@ -563,7 +563,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
 		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
 		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
-		<A href='?src=\ref[src];vsc=plasma'>Edit Plasma Settings</A><br>
+		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
@@ -637,10 +637,10 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 			<A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR>
 			<A href='?src=\ref[src];secretsfun=eagles'>Egalitarian Station Mode</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveadminshuttle'>Move Administration Shuttle</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveferry'>Move Ferry</A><BR>
-			<A href='?src=\ref[src];secretsfun=movealienship'>Move Alien Dinghy</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveminingshuttle'>Move Mining Shuttle</A><BR>
+			<A href='?src=\ref[src];secretsfun=launchshuttle'>Launch a shuttle</A><BR>
+			<A href='?src=\ref[src];secretsfun=forcelaunchshuttle'>Force launch a shuttle</A><BR>
+			<A href='?src=\ref[src];secretsfun=jumpshuttle'>Jump a shuttle</A><BR>
+			<A href='?src=\ref[src];secretsfun=moveshuttle'>Move a shuttle</A><BR>
 			<A href='?src=\ref[src];secretsfun=blackout'>Break all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
@@ -961,7 +961,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/get_sab_desc(var/target)
 	switch(target)
 		if(1)
-			return "Destroy at least 70% of the plasma canisters on the station"
+			return "Destroy at least 70% of the phoron canisters on the station"
 		if(2)
 			return "Destroy the AI"
 		if(3)
@@ -1099,7 +1099,22 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
-proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
+
+/*
+	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
+*/
+/proc/is_mentor(client/C)
+
+	if(!istype(C))
+		return 0
+	if(!C.holder)
+		return 0
+
+	if(C.holder.rights == R_MENTOR)
+		return 1
+	return 0
+
+/proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 	if(!whom)
 		return "<b>(*null*)</b>"
 	var/mob/M
@@ -1127,67 +1142,4 @@ proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 //
 //ALL DONE
 //*********************************************************************************************************
-//TO-DO:
 //
-//
-
-
-/**********************Administration Shuttle**************************/
-
-var/admin_shuttle_location = 0 // 0 = centcom 13, 1 = station
-
-proc/move_admin_shuttle()
-	var/area/fromArea
-	var/area/toArea
-	if (admin_shuttle_location == 1)
-		fromArea = locate(/area/shuttle/administration/station)
-		toArea = locate(/area/shuttle/administration/centcom)
-	else
-		fromArea = locate(/area/shuttle/administration/centcom)
-		toArea = locate(/area/shuttle/administration/station)
-	fromArea.move_contents_to(toArea)
-	if (admin_shuttle_location)
-		admin_shuttle_location = 0
-	else
-		admin_shuttle_location = 1
-	return
-
-/**********************Centcom Ferry**************************/
-
-var/ferry_location = 0 // 0 = centcom , 1 = station
-
-proc/move_ferry()
-	var/area/fromArea
-	var/area/toArea
-	if (ferry_location == 1)
-		fromArea = locate(/area/shuttle/transport1/station)
-		toArea = locate(/area/shuttle/transport1/centcom)
-	else
-		fromArea = locate(/area/shuttle/transport1/centcom)
-		toArea = locate(/area/shuttle/transport1/station)
-	fromArea.move_contents_to(toArea)
-	if (ferry_location)
-		ferry_location = 0
-	else
-		ferry_location = 1
-	return
-
-/**********************Alien ship**************************/
-
-var/alien_ship_location = 1 // 0 = base , 1 = mine
-
-proc/move_alien_ship()
-	var/area/fromArea
-	var/area/toArea
-	if (alien_ship_location == 1)
-		fromArea = locate(/area/shuttle/alien/mine)
-		toArea = locate(/area/shuttle/alien/base)
-	else
-		fromArea = locate(/area/shuttle/alien/base)
-		toArea = locate(/area/shuttle/alien/mine)
-	fromArea.move_contents_to(toArea)
-	if (alien_ship_location)
-		alien_ship_location = 0
-	else
-		alien_ship_location = 1
-	return

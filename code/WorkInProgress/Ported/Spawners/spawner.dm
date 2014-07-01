@@ -57,7 +57,7 @@
 		// radio
 		if (0)
 			var/obj/item/assembly/r_i_ptank/R = new /obj/item/assembly/r_i_ptank(src.loc)
-			var/obj/item/weapon/tank/plasma/p3 = new /obj/item/weapon/tank/plasma(R)
+			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
 			var/obj/item/device/radio/signaler/p1 = new /obj/item/device/radio/signaler(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -74,7 +74,7 @@
 		// proximity
 		if (1)
 			var/obj/item/assembly/m_i_ptank/R = new /obj/item/assembly/m_i_ptank(src.loc)
-			var/obj/item/weapon/tank/plasma/p3 = new /obj/item/weapon/tank/plasma(R)
+			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
 			var/obj/item/device/prox_sensor/p1 = new /obj/item/device/prox_sensor(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -96,7 +96,7 @@
 		// timer
 		if (2)
 			var/obj/item/assembly/t_i_ptank/R = new /obj/item/assembly/t_i_ptank(src.loc)
-			var/obj/item/weapon/tank/plasma/p3 = new /obj/item/weapon/tank/plasma(R)
+			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
 			var/obj/item/device/timer/p1 = new /obj/item/device/timer(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			R.part1 = p1
@@ -112,7 +112,7 @@
 		//bombvest
 		if(3)
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/R = new /obj/item/clothing/suit/armor/a_i_a_ptank(src.loc)
-			var/obj/item/weapon/tank/plasma/p4 = new /obj/item/weapon/tank/plasma(R)
+			var/obj/item/weapon/tank/phoron/p4 = new /obj/item/weapon/tank/phoron(R)
 			var/obj/item/device/healthanalyzer/p1 = new /obj/item/device/healthanalyzer(R)
 			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
 			var/obj/item/clothing/suit/armor/vest/p3 = new /obj/item/clothing/suit/armor/vest(R)
@@ -140,7 +140,7 @@
 		if (0)
 
 			var/obj/item/device/transfer_valve/V = new(src.loc)
-			var/obj/item/weapon/tank/plasma/PT = new(V)
+			var/obj/item/weapon/tank/phoron/PT = new(V)
 			var/obj/item/weapon/tank/oxygen/OT = new(V)
 
 			var/obj/item/device/radio/signaler/S = new(V)
@@ -164,7 +164,7 @@
 		if (1)
 
 			var/obj/item/device/transfer_valve/V = new(src.loc)
-			var/obj/item/weapon/tank/plasma/PT = new(V)
+			var/obj/item/weapon/tank/phoron/PT = new(V)
 			var/obj/item/weapon/tank/oxygen/OT = new(V)
 
 			var/obj/item/device/prox_sensor/P = new(V)
@@ -187,7 +187,7 @@
 		// timer
 		if (2)
 			var/obj/item/device/transfer_valve/V = new(src.loc)
-			var/obj/item/weapon/tank/plasma/PT = new(V)
+			var/obj/item/weapon/tank/phoron/PT = new(V)
 			var/obj/item/weapon/tank/oxygen/OT = new(V)
 
 			var/obj/item/device/timer/T = new(V)

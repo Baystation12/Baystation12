@@ -79,6 +79,8 @@
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
+	sharp = 1
+	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -99,6 +101,8 @@
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
+	sharp = 1
+	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -122,6 +126,8 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
 	throwforce = 10
+	sharp = 1
+	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -139,6 +145,7 @@
 /obj/item/weapon/harpoon
 	name = "harpoon"
 	sharp = 1
+	edge = 0
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
 	item_state = "harpoon"

@@ -160,7 +160,7 @@
 //Machine Frame Circuit Boards
 /*Common Parts: Parts List: Ignitor, Timer, Infra-red laser, Infra-red sensor, t_scanner, Capacitor, Valve, sensor unit,
 micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
-Note: Once everything is added to the public areas, will add m_amt and g_amt to circuit boards since autolathe won't be able
+Note: Once everything is added to the public areas, will add materials to circuit boards since autolathe won't be able
 to destroy them and players will be able to make replacements.
 */
 /obj/item/weapon/circuitboard/destructive_analyzer
@@ -212,7 +212,7 @@ to destroy them and players will be able to make replacements.
 	name = "Circuit Board (PACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman"
 	board_type = "machine"
-	origin_tech = "programming=3:powerstorage=3;plasmatech=3;engineering=3"
+	origin_tech = "programming=3:powerstorage=3;phorontech=3;engineering=3"
 	frame_desc = "Requires 1 Matter Bin, 1 Micro-Laser, 2 Pieces of Cable, and 1 Capacitor."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,

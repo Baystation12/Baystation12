@@ -162,7 +162,7 @@
 	spawn(30)
 		src.eject_wait = 0
 
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
+	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
 	if(!R.dna.real_name)	//to prevent null names
@@ -183,6 +183,7 @@
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
+	callHook("clone", list(H))
 
 	switch(ticker.mode.name)
 		if("revolution")
@@ -212,10 +213,8 @@
 	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
-	H.set_species(R.dna.species)
-
-	//for(var/datum/language/L in languages)
-	//	H.add_language(L.name)
+	for(var/datum/language/L in R.languages)
+		H.add_language(L.name)
 	H.suiciding = 0
 	src.attempting = 0
 	return 1
@@ -305,6 +304,21 @@
 		user.drop_item()
 		del(W)
 		return
+	else if (istype(W, /obj/item/weapon/wrench))
+		if(src.locked && (src.anchored || src.occupant))
+			user << "\red Can not do that while [src] is in use."
+		else
+			if(src.anchored)
+				src.anchored = 0
+				connected.pod1 = null
+				connected = null
+			else
+				src.anchored = 1
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+			if(anchored)
+				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
+			else
+				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
 	else
 		..()
 
@@ -435,7 +449,7 @@
  */
 
 /obj/item/weapon/paper/Cloning
-	name = "paper - 'H-87 Cloning Apparatus Manual"
+	name = "H-87 Cloning Apparatus Manual"
 	info = {"<h4>Getting Started</h4>
 	Congratulations, your station has purchased the H-87 industrial cloning device!<br>
 	Using the H-87 is almost as simple as brain surgery! Simply insert the target humanoid into the scanning chamber and select the scan option to create a new profile!<br>

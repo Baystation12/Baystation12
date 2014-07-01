@@ -5,10 +5,6 @@
 #define REAGENTS_OVERDOSE 30
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
-//Some on_mob_life() procs check for alien races.
-#define IS_DIONA 1
-#define IS_VOX 2
-
 //The reaction procs must ALWAYS set src = null, this detaches the proc from the object (the reagent)
 //so that it can continue working when the reagent is deleted while the proc is still active.
 
@@ -118,10 +114,15 @@ datum
 						else //injected
 							M.contract_disease(D, 1, 0)
 				if(self.data && self.data["virus2"] && istype(M, /mob/living/carbon))//infecting...
-					if(method == TOUCH)
-						infect_virus2(M,self.data["virus2"])
-					else
-						infect_virus2(M,self.data["virus2"],1) //injected, force infection!
+					var/list/vlist = self.data["virus2"]
+					if (vlist.len)
+						for (var/ID in vlist)
+							var/datum/disease2/disease/V = vlist[ID]
+
+							if(method == TOUCH)
+								infect_virus2(M,V.getcopy())
+							else
+								infect_virus2(M,V.getcopy(),1) //injected, force infection!
 				if(self.data && self.data["antibodies"] && istype(M, /mob/living/carbon))//... and curing
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
@@ -145,6 +146,9 @@ datum
 						var/datum/disease/newVirus = D.Copy(1)
 						blood_prop.viruses += newVirus
 						newVirus.holder = blood_prop
+
+					if(self.data["virus2"])
+						blood_prop.virus2 = virus_copylist(self.data["virus2"])
 
 
 				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
@@ -778,6 +782,8 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if (volume > overdose)
 					M.hallucination = max(M.hallucination, 2)
+				..()
+				return
 
 		tramadol
 			name = "Tramadol"
@@ -790,6 +796,8 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if (volume > overdose)
 					M.hallucination = max(M.hallucination, 2)
+				..()
+				return
 
 		oxycodone
 			name = "Oxycodone"
@@ -803,6 +811,8 @@ datum
 				if (volume > overdose)
 					M.druggy = max(M.druggy, 10)
 					M.hallucination = max(M.hallucination, 3)
+				..()
+				return
 
 
 		virus_food
@@ -1543,10 +1553,10 @@ datum
 				..()
 				return
 
-		toxin/plasma
-			name = "Plasma"
-			id = "plasma"
-			description = "Plasma in its liquid form."
+		toxin/phoron
+			name = "Phoron"
+			id = "phoron"
+			description = "Phoron in its liquid form."
 			reagent_state = LIQUID
 			color = "#E71B00" // rgb: 231, 27, 0
 			toxpwr = 3
@@ -1567,14 +1577,14 @@ datum
 				var/turf/the_turf = get_turf(O)
 				var/datum/gas_mixture/napalm = new
 				var/datum/gas/volatile_fuel/fuel = new
-				fuel.moles = 5
+				fuel.moles = volume
 				napalm.trace_gases += fuel
 				the_turf.assume_air(napalm)
 			reaction_turf(var/turf/T, var/volume)
 				src = null
 				var/datum/gas_mixture/napalm = new
 				var/datum/gas/volatile_fuel/fuel = new
-				fuel.moles = 5
+				fuel.moles = volume
 				napalm.trace_gases += fuel
 				T.assume_air(napalm)
 				return
@@ -2956,7 +2966,7 @@ datum
 			var/blur_start = 300	//amount absorbed after which mob starts getting blurred vision
 			var/pass_out = 400	//amount absorbed after which mob starts passing out
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				M:nutrition += nutriment_factor
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
@@ -2971,6 +2981,9 @@ datum
 				// make all the beverages work together
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
 					if(isnum(A.data)) d += A.data
+
+				if(alien && alien == IS_SKRELL) //Skrell get very drunk very quickly.
+					d*=5
 
 				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)

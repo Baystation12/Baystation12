@@ -284,7 +284,7 @@
 				continue
 
 
-	if(src.patient && (get_dist(src,src.patient) <= 1))
+	if(src.patient && Adjacent(patient))
 		if(!src.currently_healing)
 			src.currently_healing = 1
 			src.frustration = 0
@@ -480,7 +480,7 @@
 /obj/machinery/bot/medbot/Bump(M as mob|obj) //Leave no door unopened!
 	if ((istype(M, /obj/machinery/door)) && (!isnull(src.botcard)))
 		var/obj/machinery/door/D = M
-		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard))
+		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/poddoor))
 			D.open()
 			src.frustration = 0
 	else if ((istype(M, /mob/living/)) && (!src.anchored))

@@ -312,7 +312,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 /datum/controller/air_system/proc/has_same_air(turf/A, turf/B)
 	if(A.oxygen != B.oxygen) return 0
 	if(A.nitrogen != B.nitrogen) return 0
-	if(A.toxins != B.toxins) return 0
+	if(A.phoron != B.phoron) return 0
 	if(A.carbon_dioxide != B.carbon_dioxide) return 0
 	if(A.temperature != B.temperature) return 0
 	return 1

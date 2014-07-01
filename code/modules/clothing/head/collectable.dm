@@ -9,6 +9,7 @@
 	name = "ultra rare hat"
 	desc = "an ultra rare hat. It commands a certain respect."
 	icon_state = "petehat"
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime cap!"
@@ -24,7 +25,7 @@
 	name = "collectable chef's hat"
 	desc = "A rare Chef's Hat meant for hat collectors!"
 	icon_state = "chef"
-	item_state = "chef"
+	item_state = "chefhat"
 
 /obj/item/clothing/head/collectable/paper
 	name = "collectable paper hat"

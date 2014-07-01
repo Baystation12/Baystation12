@@ -44,7 +44,7 @@
 	ranged = 1
 
 
-/mob/living/simple_animal/hostile/hivebot/Die()
+/mob/living/simple_animal/hostile/hivebot/death()
 	..()
 	visible_message("<b>[src]</b> blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)

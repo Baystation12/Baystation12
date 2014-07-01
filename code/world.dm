@@ -71,7 +71,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
-	
+
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
@@ -108,7 +108,6 @@ var/world_topic_spam_protect_time = world.timeofday
 			n++
 		s["players"] = n
 
-		if(revdata)	s["revision"] = revdata.revision
 		s["admins"] = admins
 
 		return list2params(s)
@@ -127,7 +126,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				
+
 				spawn(50)
 					world_topic_spam_protect_time = world.time
 					return "Bad Key (Throttled)"
@@ -136,9 +135,9 @@ var/world_topic_spam_protect_time = world.timeofday
 			world_topic_spam_protect_ip = addr
 
 			return "Bad Key"
-		
+
 		var/client/C
-		
+
 		for(var/client/K in clients)
 			if(K.ckey == input["adminmsg"])
 				C = K
@@ -155,7 +154,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		C << 'sound/effects/adminhelp.ogg'
 		C << message
 
-		
+
 		for(var/client/A in admins)
 			if(A != C)
 				A << amessage
@@ -182,9 +181,9 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Bad Key"
 
 		return show_player_info_irc(input["notes"])
-		
 
-		
+
+
 
 
 /world/Reboot(var/reason)
@@ -271,7 +270,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				var/title = "Moderator"
 				if(config.mods_are_mentors) title = "Mentor"
 				var/rights = admin_ranks[title]
-				
+
 				var/ckey = copytext(line, 1, length(line)+1)
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(directory[ckey])

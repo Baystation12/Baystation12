@@ -7,6 +7,7 @@
 	icon_state = "crate"
 	icon_opened = "crateopen"
 	icon_closed = "crate"
+	climbable = 1
 //	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
 	var/rigged = 0
 
@@ -36,7 +37,11 @@
 		O.loc = get_turf(src)
 	icon_state = icon_opened
 	src.opened = 1
-	return 1
+
+	if(climbable)
+		structure_shaken()
+
+	return
 
 /obj/structure/closet/crate/close()
 	if(!src.opened)
@@ -322,7 +327,7 @@
 		newgas.oxygen = gas.oxygen
 		newgas.carbon_dioxide = gas.carbon_dioxide
 		newgas.nitrogen = gas.nitrogen
-		newgas.toxins = gas.toxins
+		newgas.phoron = gas.phoron
 		newgas.volume = gas.volume
 		newgas.temperature = gas.temperature
 		if(newgas.temperature <= target_temp)	return
@@ -375,12 +380,12 @@
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
-/obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
-	name = "Plasma crate"
-	icon_state = "plasmacrate"
-	icon_opened = "plasmacrateopen"
-	icon_closed = "plasmacrate"
+/obj/structure/closet/crate/secure/phoron
+	desc = "A secure phoron crate."
+	name = "Phoron crate"
+	icon_state = "phoroncrate"
+	icon_opened = "phoroncrateopen"
+	icon_closed = "phoroncrate"
 
 /obj/structure/closet/crate/secure/gear
 	desc = "A secure gear crate."

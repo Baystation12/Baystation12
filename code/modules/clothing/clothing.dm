@@ -5,6 +5,10 @@
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
+	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
+	if (!..())
+		return 0
+
 	if(species_restricted && istype(M,/mob/living/carbon/human))
 
 		var/wearable = null
@@ -26,7 +30,7 @@
 				M << "\red Your species cannot wear [src]."
 				return 0
 
-	return ..()
+	return 1
 
 //Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
@@ -100,7 +104,7 @@
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/invisa_view = 0
-
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/eyes.dmi')
 /*
 SEE_SELF  // can see self, no matter what
 SEE_MOBS  // can see all mobs, no matter what
@@ -126,6 +130,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	species_restricted = list("exclude","Unathi","Tajaran")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 
 /obj/item/clothing/gloves/examine()
 	set src in usr
@@ -134,6 +139,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/gloves/emp_act(severity)
 	if(cell)
+		//why is this not part of the powercell code?
 		cell.charge -= 1000 / severity
 		if (cell.charge < 0)
 			cell.charge = 0
@@ -151,7 +157,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/hats.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
-
+	w_class = 2.0
 
 //Mask
 /obj/item/clothing/mask
@@ -159,6 +165,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/masks.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
 
 //Shoes
 /obj/item/clothing/shoes
@@ -166,7 +173,6 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/shoes.dmi'
 	desc = "Comfortable-looking shoes."
 	gender = PLURAL //Carn: for grammarically correct text-parsing
-	var/chained = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = FEET
 	slot_flags = SLOT_FEET
@@ -174,6 +180,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	species_restricted = list("exclude","Unathi","Tajaran")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
 //Suit
 /obj/item/clothing/suit
@@ -186,6 +193,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
+	w_class = 3
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
@@ -214,10 +222,10 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.02
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/device/suit_cooling_unit)
 	slowdown = 3
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
@@ -232,6 +240,7 @@ BLIND     // can't see anything
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	w_class = 3
 	var/has_sensor = 1//For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
@@ -243,20 +252,17 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = 0
 	var/basecolor
-
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
+	if(hastie)
+		hastie.attackby(I, user)
+		return
+
 	if(!hastie && istype(I, /obj/item/clothing/tie))
 		user.drop_item()
 		hastie = I
-		I.loc = src
-		user << "<span class='notice'>You attach [I] to [src].</span>"
-
-		if (istype(hastie,/obj/item/clothing/tie/holster))
-			verbs += /obj/item/clothing/under/proc/holster
-
-		if (istype(hastie,/obj/item/clothing/tie/storage))
-			verbs += /obj/item/clothing/under/proc/storage
+		hastie.on_attached(src, user)
 
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -265,6 +271,35 @@ BLIND     // can't see anything
 		return
 
 	..()
+
+/obj/item/clothing/under/attack_hand(mob/user as mob)
+	//only forward to the attached accessory if the clothing is equipped (not in a storage)
+	if(hastie && src.loc == user)
+		hastie.attack_hand(user)
+		return
+
+	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
+		return
+
+	..()
+
+/obj/item/clothing/under/MouseDrop(obj/over_object as obj)
+	if (ishuman(usr) || ismonkey(usr))
+		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
+		if (!(src.loc == usr))
+			return
+
+		if (!( usr.restrained() ) && !( usr.stat ))
+			switch(over_object.name)
+				if("r_hand")
+					usr.u_equip(src)
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.u_equip(src)
+					usr.put_in_l_hand(src)
+			src.add_fingerprint(usr)
+			return
+	return
 
 /obj/item/clothing/under/examine()
 	set src in view()
@@ -281,13 +316,10 @@ BLIND     // can't see anything
 	if(hastie)
 		usr << "\A [hastie] is clipped to it."
 
-/obj/item/clothing/under/verb/toggle()
-	set name = "Toggle Suit Sensors"
-	set category = "Object"
-	set src in usr
+/obj/item/clothing/under/proc/set_sensors(mob/usr as mob)
 	var/mob/M = usr
 	if (istype(M, /mob/dead/)) return
-	if (usr.stat) return
+	if (usr.stat || usr.restrained()) return
 	if(has_sensor >= 2)
 		usr << "The controls are locked."
 		return 0
@@ -297,17 +329,41 @@ BLIND     // can't see anything
 
 	var/list/modes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
+	if(get_dist(usr, src) > 1)
+		usr << "You have moved too far away."
+		return
 	sensor_mode = modes.Find(switchMode) - 1
 
-	switch(sensor_mode)
-		if(0)
-			usr << "You disable your suit's remote sensing equipment."
-		if(1)
-			usr << "Your suit will now report whether you are live or dead."
-		if(2)
-			usr << "Your suit will now report your vital lifesigns."
-		if(3)
-			usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
+	if (src.loc == usr)
+		switch(sensor_mode)
+			if(0)
+				usr << "You disable your suit's remote sensing equipment."
+			if(1)
+				usr << "Your suit will now report whether you are live or dead."
+			if(2)
+				usr << "Your suit will now report your vital lifesigns."
+			if(3)
+				usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
+	else if (istype(src.loc, /mob))
+		switch(sensor_mode)
+			if(0)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("\red [usr] disables [src.loc]'s remote sensing equipment.", 1)
+			if(1)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] turns [src.loc]'s remote sensors to binary.", 1)
+			if(2)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] sets [src.loc]'s sensors to track vitals.", 1)
+			if(3)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] sets [src.loc]'s sensors to maximum.", 1)
+
+/obj/item/clothing/under/verb/toggle()
+	set name = "Toggle Suit Sensors"
+	set category = "Object"
+	set src in usr
+	set_sensors(usr)
 	..()
 
 /obj/item/clothing/under/verb/rollsuit()
@@ -325,6 +381,17 @@ BLIND     // can't see anything
 	else
 		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
 
+/obj/item/clothing/under/proc/remove_accessory(mob/user as mob)
+	if(!hastie)
+		return
+
+	hastie.on_removed(user)
+	hastie = null
+
+	if(istype(loc, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = loc
+		H.update_inv_w_uniform()
+
 /obj/item/clothing/under/verb/removetie()
 	set name = "Remove Accessory"
 	set category = "Object"
@@ -332,80 +399,10 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(hastie)
-		if (istype(hastie,/obj/item/clothing/tie/holster))
-			verbs -= /obj/item/clothing/under/proc/holster
-
-		if (istype(hastie,/obj/item/clothing/tie/storage))
-			verbs -= /obj/item/clothing/under/proc/storage
-			var/obj/item/clothing/tie/storage/W = hastie
-			if (W.hold)
-				W.hold.close(usr)
-
-		usr.put_in_hands(hastie)
-		hastie = null
-
-		if(istype(loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = loc
-			H.update_inv_w_uniform()
+	src.remove_accessory(usr)
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
 	..()
-
-/obj/item/clothing/under/proc/holster()
-	set name = "Holster"
-	set category = "Object"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	if (!hastie || !istype(hastie,/obj/item/clothing/tie/holster))
-		usr << "\red You need a holster for that!"
-		return
-	var/obj/item/clothing/tie/holster/H = hastie
-
-	if(!H.holstered)
-		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
-			usr << "\blue You need your gun equiped to holster it."
-			return
-		var/obj/item/weapon/gun/W = usr.get_active_hand()
-		if (!W.isHandgun())
-			usr << "\red This gun won't fit in \the [H]!"
-			return
-		H.holstered = usr.get_active_hand()
-		usr.drop_item()
-		H.holstered.loc = src
-		usr.visible_message("\blue \The [usr] holsters \the [H.holstered].", "You holster \the [H.holstered].")
-	else
-		if(istype(usr.get_active_hand(),/obj) && istype(usr.get_inactive_hand(),/obj))
-			usr << "\red You need an empty hand to draw the gun!"
-		else
-			if(usr.a_intent == "hurt")
-				usr.visible_message("\red \The [usr] draws \the [H.holstered], ready to shoot!", \
-				"\red You draw \the [H.holstered], ready to shoot!")
-			else
-				usr.visible_message("\blue \The [usr] draws \the [H.holstered], pointing it at the ground.", \
-				"\blue You draw \the [H.holstered], pointing it at the ground.")
-			usr.put_in_hands(H.holstered)
-			H.holstered = null
-
-/obj/item/clothing/under/proc/storage()
-	set name = "Look in storage"
-	set category = "Object"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	if (!hastie || !istype(hastie,/obj/item/clothing/tie/storage))
-		usr << "\red You need something to store items in for that!"
-		return
-	var/obj/item/clothing/tie/storage/W = hastie
-
-	if (!istype(W.hold))
-		return
-
-	W.hold.loc = usr
-	W.hold.attack_hand(usr)
 
 

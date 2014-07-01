@@ -9,12 +9,10 @@
 	icon_state = "capacitor"
 	var/active = 1
 	density = 1
-	anchored = 1
 	var/stored_charge = 0
 	var/time_since_fail = 100
-	var/max_charge = 1000000
-	var/max_charge_rate = 100000
-	var/min_charge_rate = 0
+	var/max_charge = 5e6
+	var/charge_limit = 200000
 	var/locked = 0
 	//
 	use_power = 1			//0 use nothing
@@ -23,6 +21,7 @@
 	idle_power_usage = 10
 	active_power_usage = 100
 	var/charge_rate = 100
+	var/obj/machinery/shield_gen/owned_gen
 
 /obj/machinery/shield_capacitor/New()
 	spawn(10)
@@ -55,17 +54,17 @@
 		src.anchored = !src.anchored
 		src.visible_message("\blue \icon[src] [src] has been [anchored ? "bolted to the floor" : "unbolted from the floor"] by [user].")
 
-		spawn(0)
-			for(var/obj/machinery/shield_gen/gen in range(1, src))
-				if(get_dir(src, gen) == src.dir)
-					if(!src.anchored && gen.owned_capacitor == src)
-						gen.owned_capacitor = null
-						break
-					else if(src.anchored && !gen.owned_capacitor)
-						gen.owned_capacitor = src
-						break
-					gen.updateDialog()
-					updateDialog()
+		if(anchored)
+			spawn(0)
+				for(var/obj/machinery/shield_gen/gen in range(1, src))
+					if(get_dir(src, gen) == src.dir && !gen.owned_capacitor)
+						owned_gen = gen
+						owned_gen.owned_capacitor = src
+						owned_gen.updateDialog()
+		else
+			if(owned_gen && owned_gen.owned_capacitor == src)
+				owned_gen.owned_capacitor = null
+			owned_gen = null
 	else
 		..()
 
@@ -94,17 +93,19 @@
 		t += "[time_since_fail > 2 ? "<font color=green>Charging stable.</font>" : "<font color=red>Warning, low charge!</font>"]<br>"
 		t += "Charge: [stored_charge] Watts ([100 * stored_charge/max_charge]%)<br>"
 		t += "Charge rate: \
-		<a href='?src=\ref[src];charge_rate=[-max_charge_rate]'>\[min\]</a> \
+		<a href='?src=\ref[src];charge_rate=-100000'>\[----\]</a> \
+		<a href='?src=\ref[src];charge_rate=-10000'>\[---\]</a> \
 		<a href='?src=\ref[src];charge_rate=-1000'>\[--\]</a> \
 		<a href='?src=\ref[src];charge_rate=-100'>\[-\]</a>[charge_rate] Watts/sec \
 		<a href='?src=\ref[src];charge_rate=100'>\[+\]</a> \
 		<a href='?src=\ref[src];charge_rate=1000'>\[++\]</a> \
-		<a href='?src=\ref[src];charge_rate=[max_charge_rate]'>\[max\]</a><br>"
+		<a href='?src=\ref[src];charge_rate=10000'>\[+++\]</a> \
+		<a href='?src=\ref[src];charge_rate=100000'>\[+++\]</a><br>"
 	t += "<hr>"
 	t += "<A href='?src=\ref[src]'>Refresh</A> "
 	t += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
 
-	user << browse(t, "window=shield_capacitor;size=500x800")
+	user << browse(t, "window=shield_capacitor;size=500x400")
 	user.set_machine(src)
 
 /obj/machinery/shield_capacitor/process()
@@ -137,10 +138,10 @@
 			use_power = 1
 	if( href_list["charge_rate"] )
 		charge_rate += text2num(href_list["charge_rate"])
-		if(charge_rate > max_charge_rate)
-			charge_rate = max_charge_rate
-		else if(charge_rate < min_charge_rate)
-			charge_rate = min_charge_rate
+		if(charge_rate > charge_limit)
+			charge_rate = charge_limit
+		else if(charge_rate < 0)
+			charge_rate = 0
 	//
 	updateDialog()
 

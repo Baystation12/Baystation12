@@ -29,6 +29,7 @@
 	w_class = 2.0
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
+	var/icon/tiny
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	examine()
@@ -67,7 +68,7 @@
 	var/n_name = copytext(sanitize(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text), 1, MAX_NAME_LEN)
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
-		name = "photo[(n_name ? text("- '[n_name]'") : null)]"
+		name = "[(n_name ? text("[n_name]") : "photo")]"
 	add_fingerprint(usr)
 	return
 
@@ -118,7 +119,7 @@
 	w_class = 2.0
 	flags = FPRINT | CONDUCT | TABLEPASS
 	slot_flags = SLOT_BELT
-	m_amt = 2000
+	matter = list("metal" = 2000)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1
@@ -242,10 +243,15 @@
 	if(!user.get_inactive_hand())
 		user.put_in_inactive_hand(P)
 	var/icon/small_img = icon(temp)
+	var/icon/tiny_img = icon(temp)
 	var/icon/ic = icon('icons/obj/items.dmi',"photo")
+	var/icon/pc = icon('icons/obj/bureaucracy.dmi', "photo")
 	small_img.Scale(8, 8)
+	tiny_img.Scale(4, 4)
 	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
+	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 	P.icon = ic
+	P.tiny = pc
 	P.img = temp
 	P.desc = mobs
 	P.pixel_x = rand(-10, 10)

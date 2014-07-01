@@ -19,6 +19,8 @@
 	flags = FPRINT | CONDUCT | NOSHIELD | TABLEPASS | NOBLOODY
 	origin_tech = "combat=3"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	sharp = 1
+	edge = 1
 
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] swings the [src.name] towards /his head! It looks like \he's trying to commit suicide.</b>"
@@ -37,6 +39,8 @@
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"
@@ -48,6 +52,8 @@
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
 	force = 70.0//Normal attacks deal very high damage.
+	sharp = 1
+	edge = 1
 	throwforce = 1//Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1

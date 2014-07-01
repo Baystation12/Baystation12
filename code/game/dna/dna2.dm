@@ -24,13 +24,16 @@
 #define DNA_UI_BEARD_G     5
 #define DNA_UI_BEARD_B     6
 #define DNA_UI_SKIN_TONE   7
-#define DNA_UI_EYES_R      8
-#define DNA_UI_EYES_G      9
-#define DNA_UI_EYES_B      10
-#define DNA_UI_GENDER      11
-#define DNA_UI_BEARD_STYLE 12
-#define DNA_UI_HAIR_STYLE  13
-#define DNA_UI_LENGTH      13 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_SKIN_R      8
+#define DNA_UI_SKIN_G      9
+#define DNA_UI_SKIN_B      10
+#define DNA_UI_EYES_R      11
+#define DNA_UI_EYES_G      12
+#define DNA_UI_EYES_B      13
+#define DNA_UI_GENDER      14
+#define DNA_UI_BEARD_STYLE 15
+#define DNA_UI_HAIR_STYLE  16
+#define DNA_UI_LENGTH      16 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -139,6 +142,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_EYES_R,    character.r_eyes,    255,    1)
 	SetUIValueRange(DNA_UI_EYES_G,    character.g_eyes,    255,    1)
 	SetUIValueRange(DNA_UI_EYES_B,    character.b_eyes,    255,    1)
+
+	SetUIValueRange(DNA_UI_SKIN_R,    character.r_skin,    255,    1)
+	SetUIValueRange(DNA_UI_SKIN_G,    character.g_skin,    255,    1)
+	SetUIValueRange(DNA_UI_SKIN_B,    character.b_skin,    255,    1)
 
 	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.s_tone, 220,    1) // Value can be negative.
 

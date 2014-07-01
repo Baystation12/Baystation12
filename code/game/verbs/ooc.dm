@@ -43,7 +43,7 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/display_colour = normal_ooc_colour
 	if(holder && !holder.fakekey)
-		display_colour = "#0099cc"	//light blue
+		display_colour = "#2e78d9"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
 			display_colour = "#184880"	//dark blue
 		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))

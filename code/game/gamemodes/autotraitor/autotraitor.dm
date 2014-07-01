@@ -188,7 +188,8 @@
 			//message_admins("The probability of a new traitor is [traitor_prob]%")
 			if(prob(traitor_prob))
 				message_admins("New traitor roll passed.  Making a new Traitor.")
-				forge_traitor_objectives(character.mind)
+				if (!config.objectives_disabled)
+					forge_traitor_objectives(character.mind)
 				equip_traitor(character)
 				traitors += character.mind
 				character << "\red <B>You are the traitor.</B>"

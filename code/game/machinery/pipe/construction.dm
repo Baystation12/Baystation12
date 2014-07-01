@@ -27,6 +27,11 @@ Buildable meters
 #define PIPE_UP					21
 #define PIPE_DOWN				22
 ///// Z-Level stuff
+#define PIPE_GAS_FILTER_M		23
+#define PIPE_GAS_MIXER_T		24
+#define PIPE_GAS_MIXER_M		25
+#define PIPE_OMNI_MIXER			26
+#define PIPE_OMNI_FILTER		27
 
 /obj/item/pipe
 	name = "pipe"
@@ -71,6 +76,12 @@ Buildable meters
 			src.pipe_type = PIPE_MVALVE
 		else if(istype(make_from, /obj/machinery/atmospherics/binary/pump))
 			src.pipe_type = PIPE_PUMP
+		else if(istype(make_from, /obj/machinery/atmospherics/trinary/filter/m_filter))
+			src.pipe_type = PIPE_GAS_FILTER_M
+		else if(istype(make_from, /obj/machinery/atmospherics/trinary/mixer/t_mixer))
+			src.pipe_type = PIPE_GAS_MIXER_T
+		else if(istype(make_from, /obj/machinery/atmospherics/trinary/mixer/m_mixer))
+			src.pipe_type = PIPE_GAS_MIXER_M
 		else if(istype(make_from, /obj/machinery/atmospherics/trinary/filter))
 			src.pipe_type = PIPE_GAS_FILTER
 		else if(istype(make_from, /obj/machinery/atmospherics/trinary/mixer))
@@ -89,6 +100,10 @@ Buildable meters
 			src.pipe_type = PIPE_MANIFOLD4W
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap))
 			src.pipe_type = PIPE_CAP
+		else if(istype(make_from, /obj/machinery/atmospherics/omni/mixer))
+			src.pipe_type = PIPE_OMNI_MIXER
+		else if(istype(make_from, /obj/machinery/atmospherics/omni/filter))
+			src.pipe_type = PIPE_OMNI_FILTER
 ///// Z-Level stuff
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up))
 			src.pipe_type = PIPE_UP
@@ -132,6 +147,11 @@ Buildable meters
 		"pipe up", \
 		"pipe down", \
 ///// Z-Level stuff
+		"gas filter m", \
+		"gas mixer t", \
+		"gas mixer m", \
+		"omni mixer", \
+		"omni filter"
 	)
 	name = nlist[pipe_type+1] + " fitting"
 	var/list/islist = list( \
@@ -160,6 +180,11 @@ Buildable meters
 		"cap", \
 		"cap", \
 ///// Z-Level stuff
+		"m_filter", \
+		"t_mixer", \
+		"m_mixer", \
+		"omni_mixer", \
+		"omni_filter"
 	)
 	icon_state = islist[pipe_type + 1]
 
@@ -224,12 +249,16 @@ Buildable meters
 			return dir //dir|acw
 		if(PIPE_CONNECTOR,PIPE_UVENT,PIPE_SCRUBBER,PIPE_HEAT_EXCHANGE)
 			return dir
-		if(PIPE_MANIFOLD4W)
+		if(PIPE_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER)
 			return dir|flip|cw|acw
 		if(PIPE_MANIFOLD)
 			return flip|cw|acw
 		if(PIPE_GAS_FILTER, PIPE_GAS_MIXER,PIPE_MTVALVE)
 			return dir|flip|cw
+		if(PIPE_GAS_FILTER_M, PIPE_GAS_MIXER_M)
+			return dir|flip|acw
+		if(PIPE_GAS_MIXER_T)
+			return dir|cw|acw
 		if(PIPE_CAP)
 			return flip
 ///// Z-Level stuff
@@ -285,7 +314,7 @@ Buildable meters
 			dir = 1
 		else if(dir==8)
 			dir = 4
-	else if (pipe_type == PIPE_MANIFOLD4W)
+	else if (pipe_type in list(PIPE_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER))
 		dir = 2
 	var/pipe_dir = get_pipe_dir()
 
@@ -409,7 +438,7 @@ Buildable meters
 			//P.level = T.intact ? 2 : 1
 			P.initialize()
 			if (!P)
-				usr << "There's nothing to connect this junction to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << "There's nothing to connect this pipe to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -490,8 +519,68 @@ Buildable meters
 				P.node3.initialize()
 				P.node3.build_network()
 
-		if(PIPE_GAS_MIXER)		//gas filter
+		if(PIPE_GAS_MIXER)		//gas mixer
 			var/obj/machinery/atmospherics/trinary/mixer/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+			if (P.node3)
+				P.node3.initialize()
+				P.node3.build_network()
+
+		if(PIPE_GAS_FILTER_M)		//gas filter mirrored
+			var/obj/machinery/atmospherics/trinary/filter/m_filter/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+			if (P.node3)
+				P.node3.initialize()
+				P.node3.build_network()
+
+		if(PIPE_GAS_MIXER_T)		//gas mixer-t
+			var/obj/machinery/atmospherics/trinary/mixer/t_mixer/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+			if (P.node3)
+				P.node3.initialize()
+				P.node3.build_network()
+
+		if(PIPE_GAS_MIXER_M)		//gas mixer mirrored
+			var/obj/machinery/atmospherics/trinary/mixer/m_mixer/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)
@@ -653,6 +742,18 @@ Buildable meters
 				P.node2.initialize()
 				P.node2.build_network()
 ///// Z-Level stuff
+		if(PIPE_OMNI_MIXER)
+			var/obj/machinery/atmospherics/omni/mixer/P = new(loc)
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+		if(PIPE_OMNI_FILTER)
+			var/obj/machinery/atmospherics/omni/filter/P = new(loc)
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
 
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \
@@ -709,4 +810,7 @@ Buildable meters
 #undef PIPE_VOLUME_PUMP
 #undef PIPE_OUTLET_INJECT
 #undef PIPE_MTVALVE
+#undef PIPE_GAS_FILTER_M
+#undef PIPE_GAS_MIXER_T
+#undef PIPE_GAS_MIXER_M
 //#undef PIPE_MANIFOLD4W

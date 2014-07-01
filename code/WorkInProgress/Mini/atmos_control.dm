@@ -156,12 +156,14 @@
 				src.updateUsrDialog()
 			return
 
-		if(href_list["atmos_unlock"])
-			switch(href_list["atmos_unlock"])
-				if("0")
-					current.air_doors_close(1)
-				if("1")
-					current.air_doors_open(1)
+		//commenting this out because it causes compile errors
+		//I tried fixing it but wasn't sucessful.
+		//if(href_list["atmos_unlock"])
+		//	switch(href_list["atmos_unlock"])
+		//		if("0")
+		//			current.alarm_area.air_doors_close()
+		//		if("1")
+		//			current.alarm_area.air_doors_open()
 
 		if(href_list["atmos_alarm"])
 			if (current.alarm_area.atmosalert(2))
@@ -282,7 +284,7 @@ siphoning
 Carbon Dioxide
 <A href='?src=\ref[src];alarm=\ref[current];id_tag=[id_tag];command=co2_scrub;val=[!data["filter_co2"]]'>[data["filter_co2"]?"on":"off"]</A>;
 Toxins
-<A href='?src=\ref[src];alarm=\ref[current];id_tag=[id_tag];command=tox_scrub;val=[!data["filter_toxins"]]'>[data["filter_toxins"]?"on":"off"]</A>;
+<A href='?src=\ref[src];alarm=\ref[current];id_tag=[id_tag];command=tox_scrub;val=[!data["filter_phoron"]]'>[data["filter_phoron"]?"on":"off"]</A>;
 Nitrous Oxide
 <A href='?src=\ref[src];alarm=\ref[current];id_tag=[id_tag];command=n2o_scrub;val=[!data["filter_n2o"]]'>[data["filter_n2o"]?"on":"off"]</A>
 <BR>
@@ -332,7 +334,7 @@ table tr:first-child th:first-child { border: none;}
 			var/list/gases = list(
 				"oxygen"         = "O<sub>2</sub>",
 				"carbon dioxide" = "CO<sub>2</sub>",
-				"plasma"         = "Toxin",
+				"phoron"         = "Toxin",
 				"other"          = "Other",
 			)
 			var/list/tlv

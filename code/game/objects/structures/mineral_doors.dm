@@ -82,6 +82,7 @@
 		state = 1
 		update_icon()
 		isSwitchingStates = 0
+		update_nearby_tiles()
 
 	proc/Close()
 		isSwitchingStates = 1
@@ -93,6 +94,7 @@
 		state = 0
 		update_icon()
 		isSwitchingStates = 0
+		update_nearby_tiles()
 
 	update_icon()
 		if(state)
@@ -188,8 +190,8 @@
 		..()
 		opacity = 0
 
-/obj/structure/mineral_door/transparent/plasma
-	mineralType = "plasma"
+/obj/structure/mineral_door/transparent/phoron
+	mineralType = "phoron"
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W,/obj/item/weapon/weldingtool))
@@ -198,7 +200,7 @@
 				TemperatureAct(100)
 		..()
 
-	temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 		if(exposed_temperature > 300)
 			TemperatureAct(exposed_temperature)
 
@@ -207,15 +209,15 @@
 
 			var/datum/gas_mixture/napalm = new
 
-			var/toxinsToDeduce = temperature/10
+			var/phoronToDeduce = temperature/10
 
-			napalm.toxins = toxinsToDeduce
+			napalm.phoron = phoronToDeduce
 			napalm.temperature = 200+T0C
 
 			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
 
-			hardness -= toxinsToDeduce/100
+			hardness -= phoronToDeduce/100
 			CheckHardness()
 
 /obj/structure/mineral_door/transparent/diamond

@@ -21,7 +21,7 @@
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	m_amt = 10
+	matter = list("metal" = 10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 
@@ -109,7 +109,6 @@
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("zombiepowder", 10)
-	R.add_reagent("impedrezene", 25)
 	R.add_reagent("cryptobiolin", 15)
 	..()
 	return
