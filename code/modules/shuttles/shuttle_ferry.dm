@@ -3,7 +3,7 @@
 #define WAIT_ARRIVE		2
 #define WAIT_FINISH		3
 
-#define DOCK_ATTEMPT_TIMEOUT 450	//how long in ticks we wait before assuming the docking controller is broken or blown up.
+#define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
