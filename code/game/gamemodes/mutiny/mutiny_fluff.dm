@@ -4,19 +4,6 @@
 	New(datum/game_mode/mutiny/M)
 		mode = M
 
-	proc/centcom_announce(text)
-		world << {"
-<font color='#FFA500'><hr><center><b>:-:=:-: CENTRAL COMMAND ANNOUNCEMENT :-:=:-:</b></center><hr></font>
-[text]
-			"}
-		world << sound('sound/AI/commandreport.ogg')
-
-	proc/announce_incoming_fax()
-		centcom_announce({"
-<b>Incoming Emergency Directive:</b>
-<i>Captain's Office Fax Machine, [station_name()]</i>
-			"})
-
 	proc/announce_directives()
 		for (var/obj/machinery/faxmachine/fax in world)
 			if (fax.department == "Captain's Office")
@@ -83,46 +70,6 @@
 They don't care about us they only care about WEALTH and POWER... Share this message with people you trust.
 
 Be safe, friend.\" (Unable to Reply)</p>"}
-
-
-	proc/announce_ert_unavailable()
-		// I might have gotten a little carried away.
-		centcom_announce({"
-<p>The presence of [pick(
-	"political instability",
-	"quantum fluctuations",
-	"hostile raiders",
-	"derelict station debris",
-	"REDACTED",
-	"ancient alien artillery",
-	"solar magnetic storms",
-	"sentient time-travelling killbots",
-	"gravitational anomalies",
-	"wormholes to another dimension",
-	"a telescience mishap",
-	"radiation flares",
-	"supermatter dust",
-	"leaks into a negative reality",
-	"antiparticle clouds",
-	"residual bluespace energy",
-	"suspected syndicate operatives",
-	"malfunctioning von Neumann probe swarms",
-	"shadowy interlopers",
-	"a stranded Vox arkship",
-	"haywire IPC constructs",
-	"rogue Unathi exiles",
-	"artifacts of eldritch horror",
-	"a brain slug infestation",
-	"killer bugs that lay eggs in the husks of the living",
-	"a deserted transport carrying xenomorph specimens",
-	"an emissary for the gestalt requesting a security detail",
-	"a Tajaran slave rebellion",
-	"radical Skrellian transevolutionaries",
-	"classified security operations",
-	"science-defying raw elemental chaos")]
-in the region is tying up all available local emergency resources;
-<b>emergency response teams</b> can not be called at this time.</p>
-		"})
 
 	proc/announce()
 		world << "<B>The current game mode is - Mutiny!</B>"
