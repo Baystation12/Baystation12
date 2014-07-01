@@ -67,8 +67,6 @@ datum/game_mode/mutiny
 						"classified security operations",
 						"science-defying raw elemental chaos"
 						)
-
-
 					command_alert("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time.","Emergency Transmission")
 
 	// Returns an array in case we want to expand on this later.
