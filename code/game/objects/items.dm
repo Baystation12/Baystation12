@@ -38,6 +38,15 @@
 	var/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
+
+	/* Species-specific sprites, concept stolen from Paradise//vg/.
+	ex:
+	sprite_sheets = list(
+		"Tajaran" = 'icons/cat/are/bad'
+		)
+	If index term exists and icon_override is not set, this sprite sheet will be used.
+	*/
+	var/list/sprite_sheets = null
 	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 
 /obj/item/device
@@ -475,6 +484,12 @@
 
 /obj/item/proc/IsShield()
 	return 0
+
+/obj/item/proc/get_loc_turf()
+	var/atom/L = loc
+	while(L && !istype(L, /turf/))
+		L = L.loc
+	return loc
 
 /obj/item/proc/eyestab(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 

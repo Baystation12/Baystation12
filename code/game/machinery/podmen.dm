@@ -126,6 +126,8 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	podman.dna.real_name = podman.real_name
 
 	// Update mode specific HUD icons.
+	callHook("harvest_podman", list(podman))
+
 	switch(ticker.mode.name)
 		if ("revolution")
 			if (podman.mind in ticker.mode:revolutionaries)

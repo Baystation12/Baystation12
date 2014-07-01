@@ -63,10 +63,3 @@ mineral/phoron
 	result_amount = 5
 	spread_chance = 25
 	ore = /obj/item/weapon/ore/phoron
-
-mineral/clown
-	display_name = "Bananium"
-	name = "Clown"
-	result_amount = 3
-	spread = 0
-	ore = /obj/item/weapon/ore/clown

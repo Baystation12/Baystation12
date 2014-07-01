@@ -45,8 +45,8 @@
 	flag = CHEF
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
@@ -70,12 +70,12 @@
 
 
 /datum/job/hydro
-	title = "Botanist"
+	title = "Gardener"
 	flag = BOTANIST
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 2
+	total_positions = 2
+	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.

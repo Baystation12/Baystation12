@@ -42,13 +42,13 @@
 	flag = SCIENTIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 5
+	total_positions = 6
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Xenobotanist")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

@@ -192,6 +192,13 @@
 		t = replacetext(t, "\[/small\]", "</font>")
 		t = replacetext(t, "\[list\]", "<ul>")
 		t = replacetext(t, "\[/list\]", "</ul>")
+		t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+		t = replacetext(t, "\[/table\]", "</td></tr></table>")
+		t = replacetext(t, "\[grid\]", "<table>")
+		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
+		t = replacetext(t, "\[row\]", "</td><tr>")
+		t = replacetext(t, "\[cell\]", "<td>")
+		t = replacetext(t, "\[logo\]", "<img src = http://baystation12.net/wiki/logo.png>")
 
 		t = "<font face=\"[deffont]\" color=[P.colour]>[t]</font>"
 	else // If it is a crayon, and he still tries to use these, make them empty!
@@ -201,6 +208,11 @@
 		t = replacetext(t, "\[/small\]", "")
 		t = replacetext(t, "\[list\]", "")
 		t = replacetext(t, "\[/list\]", "")
+		t = replacetext(t, "\[table\]", "")
+		t = replacetext(t, "\[/table\]", "")
+		t = replacetext(t, "\[row\]", "")
+		t = replacetext(t, "\[cell\]", "")
+		t = replacetext(t, "\[logo\]", "")
 
 		t = "<font face=\"[crayonfont]\" color=[P.colour]><b>[t]</b></font>"
 
@@ -284,7 +296,7 @@
 
 		if((!in_range(src, usr) && loc != usr && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != usr && usr.get_active_hand() != i)) // Some check to see if he's allowed to write
 			return
-
+/*
 		t = checkhtml(t)
 
 		// check for exploits
@@ -294,7 +306,8 @@
 				log_admin("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				message_admins("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				return
-
+*/
+		t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 

@@ -14,9 +14,10 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"pAI candidate" = 1, // -- TLE                       // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"ninja" = "true",									 // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"ninja" = "true",                                    // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
+	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -52,6 +53,7 @@ datum/preferences
 	var/be_random_name = 0				//whether we are a random name every round
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
+	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
 	var/undershirt = 1					//undershirt type
@@ -245,7 +247,8 @@ datum/preferences
 		dat += "<br>"
 
 		dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
-		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a>"
+		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
+		dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
@@ -952,12 +955,21 @@ datum/preferences
 					if("language")
 						var/languages_available
 						var/list/new_languages = list("None")
+						var/datum/species/S = all_species[species]
 
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
+									
+									//Apparently there's some PHP script that needs to be updated in order to give people whitelist languages.
+									//This workaround should be removed once that has been properly updated
+									if (lang.name == "Siik'maas")
+										new_languages |= all_languages["Siik'tajr"]
+									if (lang.name == "Siik'tajr")
+										new_languages |= all_languages["Siik'maas"]
+									
 									languages_available = 1
 
 							if(!(languages_available))
@@ -1177,6 +1189,16 @@ datum/preferences
 						var/skin_style_name = input(user, "Select a new skin style") as null|anything in list("default1", "default2", "default3")
 						if(!skin_style_name) return
 
+					if("spawnpoint")
+						var/list/spawnkeys = list()
+						for(var/S in spawntypes)
+							spawnkeys += S
+						var/choice = input(user, "Where would you like to spawn when latejoining?") as null|anything in spawnkeys
+						if(!choice || !spawntypes[choice])
+							spawnpoint = "Arrivals Shuttle"
+							return
+						spawnpoint = choice
+
 			else
 				switch(href_list["preference"])
 					if("gender")
@@ -1329,6 +1351,17 @@ datum/preferences
 				I.mechanize()
 
 			else continue
+
+		// Wheelchair necessary?
+		var/datum/organ/external/l_foot = character.get_organ("l_foot")
+		var/datum/organ/external/r_foot = character.get_organ("r_foot")
+		if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+			var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair (character.loc)
+			character.buckled = W
+			character.update_canmove()
+			W.dir = character.dir
+			W.buckled_mob = character
+			W.add_fingerprint(character)
 
 		if(underwear > underwear_m.len || underwear < 1)
 			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES

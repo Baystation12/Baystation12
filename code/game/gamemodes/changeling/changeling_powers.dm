@@ -111,12 +111,13 @@
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.verbs -= /mob/proc/changeling_change_species
-	spawn(10)	src.verbs += /mob/proc/changeling_change_species
+	H.set_species(S,null,1) //Until someone moves body colour into DNA, they're going to have to use the default.
 
-	H.set_species(S)
+	spawn(10)
+		src.verbs += /mob/proc/changeling_change_species
+		src.regenerate_icons()
 
 	changeling_update_languages(changeling.absorbed_languages)
-
 	feedback_add_details("changeling_powers","TR")
 
 	return 1

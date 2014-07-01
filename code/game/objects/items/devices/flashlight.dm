@@ -7,8 +7,9 @@
 	w_class = 2
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
-	m_amt = 50
-	g_amt = 20
+
+	matter = list("metal" = 50,"glass" = 20)
+
 	icon_action_button = "action_flashlight"
 	var/on = 0
 	var/brightness_on = 4 //luminosity when on
@@ -128,8 +129,7 @@
 	brightness_on = 5
 	w_class = 4
 	flags = FPRINT | TABLEPASS | CONDUCT
-	m_amt = 0
-	g_amt = 0
+
 	on = 1
 
 
@@ -204,7 +204,7 @@
 		src.force = on_damage
 		src.damtype = "fire"
 		processing_objects += src
-		
+
 /obj/item/device/flashlight/slime
 	gender = PLURAL
 	name = "glowing slime extract"
@@ -213,16 +213,14 @@
 	icon_state = "floor1" //not a slime extract sprite but... something close enough!
 	item_state = "slime"
 	w_class = 1
-	m_amt = 0
-	g_amt = 0
 	brightness_on = 6
 	on = 1 //Bio-luminesence has one setting, on.
-	
+
 /obj/item/device/flashlight/slime/New()
 	SetLuminosity(brightness_on)
 	spawn(1) //Might be sloppy, but seems to be necessary to prevent further runtimes and make these work as intended... don't judge me!
 		update_brightness()
 		icon_state = initial(icon_state)
-	
+
 /obj/item/device/flashlight/slime/attack_self(mob/user)
 	return //Bio-luminescence does not toggle.

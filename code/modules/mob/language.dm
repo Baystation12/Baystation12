@@ -6,6 +6,7 @@
 	var/name = "an unknown language" // Fluff name of language if any.
 	var/desc = "A language."         // Short description for 'Check Languages'.
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
+	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"         // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
@@ -20,12 +21,24 @@
 	flags = WHITELISTED
 
 /datum/language/tajaran
-	name = "Siik'tajr"
-	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Native to the Tajaran."
+	name = "Siik'maas"
+	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+
+/datum/language/tajaran_sign
+	name = "Siik'tajr"
+	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Spoken by many Tajaran."
+	speech_verb = "mrowls"
+	colour = "tajaran_signlang"
+	key = "y"		//only "dfpqxyz" left.
+	
+	//need to find a way to resolve possesive macros
+	signlang_verb = list("flicks their left ear", "flicks their right ear", "swivels their ears", "twitches their tail", "curls the end of their tail", "arches their tail", "wiggles the end of their tail", "waves their tail about", "holds up a claw", "gestures with their left hand", "gestures with their right hand", "gestures with their tail", "gestures with their ears")
+	
+	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -89,6 +102,11 @@
 	languages.Remove(all_languages[rem_language])
 
 	return 0
+
+// Can we speak this language, as opposed to just understanding it?
+/mob/proc/can_speak(datum/language/speaking)
+
+	return (universal_speak || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()

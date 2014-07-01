@@ -480,7 +480,7 @@ client/proc/one_click_antag()
 					break
 
 				new_vox.key = theghost.key
-				new_vox << "\blue You are a Vox Primalis, fresh out of the Shoal. Your ship has arrived at the Tau Ceti system hosting the NSV Exodus... or was it the Luna? NSS? Utopia? Nobody is really sure, but everyong is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
+				new_vox << "\blue You are a Vox Primalis, fresh out of the Shoal. Your ship has arrived at a human-meat system hosting the NSV Exodus... or was it the Luna? NSS? Utopia? Nobody is really sure, who cares about stupid meat-names anyway? Everyone is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
 				new_vox << "\red Don't forget to turn on your nitrogen internals!"
 
 				raiders--
@@ -516,6 +516,25 @@ client/proc/one_click_antag()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"
 	new_vox.mutations |= NOCLONE //Stops the station crew from messing around with their DNA.
+
+	//Now apply cortical stack.
+	var/datum/organ/external/affected = new_vox.get_organ("head")
+
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in new_vox.contents)
+		affected.implants -= imp
+		del(imp)
+
+	var/obj/item/weapon/implant/cortical/I = new(new_vox)
+	I.imp_in = new_vox
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
+
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
+		var/datum/game_mode/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[new_vox.mind] = I
 
 	ticker.mode.traitors += new_vox.mind
 	new_vox.equip_vox_raider()

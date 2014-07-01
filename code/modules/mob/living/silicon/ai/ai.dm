@@ -94,6 +94,15 @@ var/list/ai_list = list()
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
 		/mob/living/silicon/ai/proc/toggle_camera_light)
 
+	//Languages
+	add_language("Sol Common", 0)
+	add_language("Sinta'unathi", 0)
+	add_language("Siik'maas", 0)
+	add_language("Siik'tajr", 0)
+	add_language("Skrellian", 0)
+	add_language("Rootspeak", 0)
+	add_language("Tradeband", 1)
+	add_language("Gutter", 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -282,7 +291,7 @@ var/list/ai_list = list()
 		call_shuttle_proc(src)
 
 	// hack to display shuttle timer
-	if(emergency_shuttle.online)
+	if(emergency_shuttle.online())
 		var/obj/machinery/computer/communications/C = locate() in machines
 		if(C)
 			C.post_status("shuttle")
@@ -401,8 +410,8 @@ var/list/ai_list = list()
 
 		if(target && (!istype(target, /mob/living/carbon/human) || html_decode(href_list["trackname"]) == target:get_face_name()))
 			ai_actual_track(target)
-
-		src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
+		else
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])

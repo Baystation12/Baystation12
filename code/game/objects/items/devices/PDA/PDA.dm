@@ -917,7 +917,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(useTC != 2) // Does our recipient have a broadcaster on their level?
 			U << "ERROR: Cannot reach recipient."
 			return
-		useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		var/send_result = useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		if (send_result)
+			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
+			return
+
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)

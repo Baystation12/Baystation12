@@ -6,6 +6,7 @@
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
 	immune_to_ssd = 1
 	var/list/hud_list[9]
+	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
 /mob/living/silicon/proc/show_laws()
 	return
@@ -96,10 +97,10 @@
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
 /mob/living/silicon/proc/show_emergency_shuttle_eta()
-	if(emergency_shuttle.online && emergency_shuttle.location < 2)
-		var/timeleft = emergency_shuttle.timeleft()
-		if (timeleft)
-			stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+	if(emergency_shuttle)
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
@@ -127,3 +128,33 @@
 	if(error_msg)
 		user << "<span class='alert'>The armoured plating is too tough.</span>"
 	return 0
+
+
+//Silicon mob language procs
+
+/mob/living/silicon/can_speak(datum/language/speaking)
+	return universal_speak || (speaking in src.speech_synthesizer_langs)	//need speech synthesizer support to vocalize a language
+
+/mob/living/silicon/add_language(var/language, var/can_speak=1)
+	if (..(language) && can_speak)
+		speech_synthesizer_langs.Add(all_languages[language])
+
+/mob/living/silicon/remove_language(var/rem_language)
+	..(rem_language)
+	
+	for (var/datum/language/L in speech_synthesizer_langs)
+		if (L.name == rem_language)
+			speech_synthesizer_langs -= L
+
+/mob/living/silicon/check_languages()
+	set name = "Check Known Languages"
+	set category = "IC"
+	set src = usr
+
+	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
+
+	for(var/datum/language/L in languages)
+		dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+
+	src << browse(dat, "window=checklanguage")
+	return

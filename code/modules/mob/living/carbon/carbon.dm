@@ -1,3 +1,10 @@
+/mob/living/carbon/Life()
+	..()
+	
+	// Increase germ_level regularly
+	if(germ_level < GERM_LEVEL_AMBIENT && prob(80))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+		germ_level++
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
@@ -7,6 +14,10 @@
 				src.nutrition -= HUNGER_FACTOR/10
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
+			
+		// Moving around increases germ_level faster
+		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
+			germ_level++
 
 /mob/living/carbon/relaymove(var/mob/user, direction)
 	if(user in src.stomach_contents)

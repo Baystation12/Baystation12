@@ -223,7 +223,7 @@
 					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 					"You start treating damage to [target]'s [I.name] with [tool_name]." )
 				else
-					user.visible_message("\blue [user] attempts to repair [target]'s mechanical [I.name] with [tool_name]...", \
+					user.visible_message("[user] attempts to repair [target]'s mechanical [I.name] with [tool_name]...", \
 					"\blue You attempt to repair [target]'s mechanical [I.name] with [tool_name]...")
 
 		target.custom_pain("The pain in your chest is living hell!",1)
@@ -242,7 +242,7 @@
 		for(var/datum/organ/internal/I in chest.internal_organs)
 			if(I && I.damage > 0)
 				if(I.robotic < 2)
-					user.visible_message("[user] treats damage to [target]'s [I.name] with [tool_name].", \
+					user.visible_message("\blue [user] treats damage to [target]'s [I.name] with [tool_name].", \
 					"You treat damage to [target]'s [I.name] with [tool_name]." )
 				else
 					user.visible_message("\blue [user] pokes [target]'s mechanical [I.name] with [tool_name]...", \

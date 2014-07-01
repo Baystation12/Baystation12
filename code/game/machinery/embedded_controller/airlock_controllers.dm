@@ -1,8 +1,23 @@
+//base type for controllers of two-door systems
+/obj/machinery/embedded_controller/radio/airlock
+	// Setup parameters only
+	var/tag_exterior_door
+	var/tag_interior_door
+	var/tag_airpump
+	var/tag_chamber_sensor
+	var/tag_exterior_sensor
+	var/tag_interior_sensor
+	var/tag_secure = 0
+
+/obj/machinery/embedded_controller/radio/airlock/initialize()
+	..()
+	program = new/datum/computer/file/embedded_program/airlock(src)
+
 //Advanced airlock controller for when you want a more versatile airlock controller - useful for turning simple access control rooms into airlocks
-/obj/machinery/embedded_controller/radio/advanced_airlock_controller
+/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 	name = "Advanced Airlock Controller"
 
-/obj/machinery/embedded_controller/radio/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -25,7 +40,13 @@
 
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/advanced_airlock_controller/Topic(href, href_list)
+/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/Topic(href, href_list)
+	if(..())
+		return
+	
+	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -50,11 +71,11 @@
 
 
 //Airlock controller for airlock control - most airlocks on the station use this
-/obj/machinery/embedded_controller/radio/airlock_controller
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller
 	name = "Airlock Controller"
 	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -75,7 +96,13 @@
 
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/airlock_controller/Topic(href, href_list)
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller/Topic(href, href_list)
+	if(..())
+		return
+	
+	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -96,7 +123,7 @@
 
 
 //Access controller for door control - used in virology and the like
-/obj/machinery/embedded_controller/radio/access_controller
+/obj/machinery/embedded_controller/radio/airlock/access_controller
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "access_control_standby"
 
@@ -104,7 +131,7 @@
 	tag_secure = 1
 
 
-/obj/machinery/embedded_controller/radio/access_controller/update_icon()
+/obj/machinery/embedded_controller/radio/airlock/access_controller/update_icon()
 	if(on && program)
 		if(program.memory["processing"])
 			icon_state = "access_control_process"
@@ -113,7 +140,7 @@
 	else
 		icon_state = "access_control_off"
 
-/obj/machinery/embedded_controller/radio/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -133,7 +160,13 @@
 
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/access_controller/Topic(href, href_list)
+/obj/machinery/embedded_controller/radio/airlock/access_controller/Topic(href, href_list)
+	if(..())
+		return
+	
+	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext_door")

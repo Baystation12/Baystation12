@@ -183,6 +183,7 @@
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
+	callHook("clone", list(H))
 
 	switch(ticker.mode.name)
 		if("revolution")
@@ -303,6 +304,21 @@
 		user.drop_item()
 		del(W)
 		return
+	else if (istype(W, /obj/item/weapon/wrench))
+		if(src.locked && (src.anchored || src.occupant))
+			user << "\red Can not do that while [src] is in use."
+		else
+			if(src.anchored)
+				src.anchored = 0
+				connected.pod1 = null
+				connected = null
+			else
+				src.anchored = 1
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+			if(anchored)
+				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
+			else
+				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
 	else
 		..()
 
