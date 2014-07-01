@@ -47,6 +47,9 @@
 	if (!can_touch(user) || !climbable)
 		return
 
+	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
+	if(S && S.density) return
+
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 
 	if(!do_after(user,50))
@@ -54,6 +57,9 @@
 
 	if (!can_touch(user) || !climbable)
 		return
+
+	S = locate() in src.contents
+	if(S && S.density) return
 
 	usr.loc = get_turf(src)
 	if (get_turf(user) == get_turf(src))
