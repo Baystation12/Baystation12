@@ -47,13 +47,19 @@
 	if (!can_touch(user) || !climbable)
 		return
 
-	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
+	if(locate(/obj/machinery/door/poddoor/shutters) in src.contents) return
+
+	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
+	if(S && S.density) return
 
 	if(!do_after(user,50))
 		return
 
 	if (!can_touch(user) || !climbable)
 		return
+
+	var/obj/machinery/door/poddoor/shutters/S = locate() in src.contents
+	if(S && S.density) return
 
 	usr.loc = get_turf(src)
 	if (get_turf(user) == get_turf(src))
