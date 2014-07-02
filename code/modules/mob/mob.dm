@@ -909,7 +909,7 @@ var/list/slot_equipment_priority = list( \
 	else
 		lying = 0
 		canmove = 1
-	if(buckled)
+	if(buckled && (!buckled.movable))
 		anchored = 1
 		canmove = 0
 		if( istype(buckled,/obj/structure/stool/bed/chair) )
@@ -928,9 +928,9 @@ var/list/slot_equipment_priority = list( \
 	else if( stunned )
 //		lying = 0
 		canmove = 0
-	else
+	else if (!buckled)
 		lying = !can_stand
-		canmove = has_limbs
+		//canmove = has_limbs
 
 	if(lying)
 		density = 0

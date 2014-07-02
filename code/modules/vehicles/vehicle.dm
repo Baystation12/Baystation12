@@ -19,6 +19,7 @@
 	var/emagged = 0
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
+	var/movable = 1
 
 	var/obj/item/weapon/cell/cell
 	var/power_use = 5	//set this to adjust the amount of power the vehicle uses per move

@@ -3,9 +3,11 @@
 	desc = "You sit in this. Either by will or force."
 	icon_state = "wheelchair"
 	anchored = 0
+	movable = 1
 
 	var/driving = 0
 	var/mob/living/pulling = null
+	var/bloodiness
 
 
 /obj/structure/stool/bed/chair/wheelchair/handle_rotation()
@@ -22,7 +24,7 @@
 			user.pulledby = null
 			user << "\red You lost your grip!"
 		return
-	if(user.pulling)
+	if(user.pulling && (user == pulling))
 		pulling = null
 		user.pulledby = null
 		return
@@ -31,7 +33,8 @@
 	if(pulling && (get_dist(src, pulling) > 1))
 		pulling = null
 		user.pulledby = null
-		return
+		if(user==pulling)
+			return
 	if(pulling && (get_dir(src.loc, pulling.loc) == direction))
 		user << "\red You cannot go there."
 		return
@@ -67,26 +70,36 @@
 				pulling = null
 				user.pulledby = null
 			pulling.dir = get_dir(pulling, src) // When everything is right, face the wheelchair
+	if(bloodiness)
+		create_track()
 	driving = 0
 
 /obj/structure/stool/bed/chair/wheelchair/Move()
 	..()
-	if(!driving && buckled_mob)
+	if(buckled_mob)
 		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle()
+		if(!driving)
+			occupant.buckled = null
+			occupant.Move(src.loc)
+			occupant.buckled = src
+			if (occupant && (src.loc != occupant.loc))
+				if (propelled)
+					for (var/mob/O in src.loc)
+						if (O != occupant)
+							Bump(O)
+				else
+					unbuckle()
+			if (pulling && (get_dist(src, pulling) > 1))
+				pulling.pulledby = null
+				pulling << "\red You lost your grip!"
+				pulling = null
+		else
+			if (occupant && (src.loc != occupant.loc))
+				src.loc = occupant.loc // Failsafe to make sure the wheelchair stays beneath the occupant after driving
 	handle_rotation()
 
 /obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/user as mob)
-	if (pulling && (pulling == usr))
+	if (pulling)
 		MouseDrop(usr)
 	else
 		manual_unbuckle(user)
@@ -137,11 +150,25 @@
 		if(pulling)
 			occupant.visible_message("<span class='danger'>[pulling] has thrusted \the [name] into \the [A], throwing \the [occupant] out of it!</span>")
 
-			pulling.attack_log += "\[[time_stamp()]\]<font color='red'> Clashed [occupant.name]'s ([occupant.ckey]) [name] into \a [A]</font>"
+			pulling.attack_log += "\[[time_stamp()]\]<font color='red'> Crashed [occupant.name]'s ([occupant.ckey]) [name] into \a [A]</font>"
 			occupant.attack_log += "\[[time_stamp()]\]<font color='orange'> Thrusted into \a [A] by [pulling.name] ([pulling.ckey]) with \the [name]</font>"
 			msg_admin_attack("[pulling.name] ([pulling.ckey]) has thrusted [occupant.name]'s ([occupant.ckey]) [name] into \a [A] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[pulling.x];Y=[pulling.y];Z=[pulling.z]'>JMP</a>)")
 		else
-			occupant.visible_message("<span class='danger'>[occupant] clashed into \the [A]!</span>")
+			occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
+
+/obj/structure/stool/bed/chair/wheelchair/proc/create_track()
+	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)
+	var/newdir = get_dir(get_step(loc, dir), loc)
+	if(newdir == dir)
+		B.dir = newdir
+	else
+		newdir = newdir | dir
+		if(newdir == 3)
+			newdir = 1
+		else if(newdir == 12)
+			newdir = 4
+		B.dir = newdir
+	bloodiness--
 
 /obj/structure/stool/bed/chair/wheelchair/buckle_mob(mob/M as mob, mob/user as mob)
 	if(M == pulling)
