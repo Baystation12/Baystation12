@@ -271,7 +271,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 					dock_controller_map -= C.id_tag
 					
 					//escape pods
-					if(istype(C, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod))
+					if(istype(C, /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod) && istype(shuttle, /datum/shuttle/ferry/escape_pod))
 						var/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/EPC = C
 						EPC.pod = shuttle
 					
