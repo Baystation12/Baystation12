@@ -276,6 +276,8 @@
 					set_picture("ai_sad")
 				if("Surprised")
 					set_picture("ai_surprised")
+				if("Upset")
+					set_picture("ai_upset")
 				if("Angry")
 					set_picture("ai_angry")
 				if("BSOD")
