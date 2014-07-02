@@ -100,6 +100,7 @@
 		for(var/metal in ore_types)
 
 			if(contents.len >= get_storage_capacity())
+				system_error("insufficient storage space")
 				active = 0
 				need_player_check = 1
 				update_icon()
