@@ -228,6 +228,7 @@
 		if(5) usr << "It has a steel cable loosely strung across the lath."
 
 /obj/item/weapon/crossbowframe/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(user, /mob/living/silicon/robot)) return
 	if(istype(W,/obj/item/stack/rods))
 		if(buildstate == 0)
 			var/obj/item/stack/rods/R = W

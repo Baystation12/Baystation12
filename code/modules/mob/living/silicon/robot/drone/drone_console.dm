@@ -23,7 +23,7 @@
 	if(..())
 		return
 
-	if(!allowed(user))
+	if(!allowed(user) || istype(user, /mob/living/silicon/robot/drone))
 		user << "\red Access denied."
 		return
 

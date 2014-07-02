@@ -3,8 +3,8 @@
 	real_name = "drone"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "repairbot"
-	maxHealth = 35
-	health = 35
+	maxHealth = 15
+	health = 15
 	universal_speak = 0
 	universal_understand = 1
 	gender = NEUTER
@@ -135,7 +135,7 @@
 //Sick of trying to get this to display properly without redefining it.
 /mob/living/silicon/robot/drone/show_system_integrity()
 	if(!src.stat)
-		var/temphealth = health+35 //Brings it to 0.
+		var/temphealth = health+15 //Brings it to 0.
 		if(temphealth<0)	temphealth = 0
 		//Convert to percentage.
 		temphealth = (temphealth / (maxHealth*2)) * 100
@@ -231,10 +231,10 @@
 //For some goddamn reason robots have this hardcoded. Redefining it for our fragile friends here.
 /mob/living/silicon/robot/drone/updatehealth()
 	if(status_flags & GODMODE)
-		health = 35
+		health = 15
 		stat = CONSCIOUS
 		return
-	health = 35 - (getBruteLoss() + getFireLoss())
+	health = 15 - (getBruteLoss() + getFireLoss())
 	return
 
 //Easiest to check this here, then check again in the robot proc.
@@ -242,7 +242,7 @@
 //Drones killed by damage will gib.
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 
-	if(health <= -35 && src.stat != 2)
+	if(health <= -10 && src.stat != 2)
 		timeofdeath = world.time
 		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()

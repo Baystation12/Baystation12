@@ -65,13 +65,13 @@
 
 	if (organ_name in organs_by_name)
 		var/datum/organ/external/O = get_organ(organ_name)
-	
+
 		if(amount > 0)
 			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
@@ -80,26 +80,36 @@
 
 	if (organ_name in organs_by_name)
 		var/datum/organ/external/O = get_organ(organ_name)
-	
+
 		if(amount > 0)
 			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(0, -amount, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/Stun(amount)
-	if(HULK in mutations)	return
-	..()
+	if(HULK in mutations)
+		if(status_flags & CANSTUN)
+			stunned = max(max(stunned,amount/2),0)
+	else
+		..()
 
 /mob/living/carbon/human/Weaken(amount)
-	if(HULK in mutations)	return
-	..()
+	if(HULK in mutations)
+		if(status_flags & CANWEAKEN)
+			weakened = max(amount/2,0)
+			update_canmove()	//updates lying, canmove and icons	return
+	else
+		..()
 
 /mob/living/carbon/human/Paralyse(amount)
-	if(HULK in mutations)	return
-	..()
+	if(HULK in mutations)
+		if(status_flags & CANPARALYSE)
+			paralysis = max(max(paralysis,amount),0)
+	else
+		..()
 
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
