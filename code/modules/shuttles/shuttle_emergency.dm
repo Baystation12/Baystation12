@@ -45,7 +45,7 @@
 		
 		//initiating or cancelling a launch ALWAYS requires authorization, but if we are already set to launch anyways than forcing does not.
 		//this is so that people can force launch if the docking controller cannot safely undock without needing X heads to swipe.
-		if (process_state == WAIT_LAUNCH && !C.has_authorization())
+		if (process_state != WAIT_LAUNCH && !C.has_authorization())
 			return 0
 	return ..()
 
