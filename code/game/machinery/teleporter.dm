@@ -198,6 +198,8 @@
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
+		accurate = 1
+		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
 		for(var/mob/B in hearers(src, null))
 			B.show_message("\blue Test fire completed.")
 	return
@@ -339,6 +341,7 @@
 
 	if (com)
 		com.icon_state = "tele0"
+		com.accurate = 0
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\blue Teleporter disengaged!", 2)
 	src.add_fingerprint(usr)
