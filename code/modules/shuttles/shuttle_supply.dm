@@ -67,10 +67,6 @@
 /datum/shuttle/ferry/supply/proc/at_station()
 	return (!location)
 
-//returns 1 if the shuttle is moving and we can show valid ETAs
-/datum/shuttle/ferry/supply/proc/has_eta()
-	return (moving_status == SHUTTLE_INTRANSIT)
-
 //returns 1 if the shuttle is idle and we can still mess with the cargo shopping list
 /datum/shuttle/ferry/supply/proc/idle()
 	return (moving_status == SHUTTLE_IDLE)

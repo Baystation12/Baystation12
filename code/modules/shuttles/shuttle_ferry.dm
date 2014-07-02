@@ -154,6 +154,10 @@
 		return 1
 	return 0
 
+//returns 1 if the shuttle is getting ready to move, but is not in transit yet
+/datum/shuttle/ferry/proc/is_launching()
+	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)	
+
 //This gets called when the shuttle finishes arriving at it's destination
 //This can be used by subtypes to do things when the shuttle arrives.
 /datum/shuttle/ferry/proc/arrived()
