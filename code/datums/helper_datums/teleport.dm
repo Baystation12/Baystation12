@@ -108,12 +108,19 @@
 
 		playSpecials(curturf,effectin,soundin)
 
+		var/obj/structure/stool/bed/chair/C = null
+		if(isliving(teleatom))
+			var/mob/living/L = teleatom
+			if(L.buckled)
+				C = L.buckled
 		if(force_teleport)
 			teleatom.forceMove(destturf)
 			playSpecials(destturf,effectout,soundout)
 		else
 			if(teleatom.Move(destturf))
 				playSpecials(destturf,effectout,soundout)
+		if(C)
+			C.forceMove(destturf)
 
 		destarea.Entered(teleatom)
 
