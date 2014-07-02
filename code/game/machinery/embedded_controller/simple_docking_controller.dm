@@ -29,7 +29,7 @@
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
@@ -44,7 +44,7 @@
 	if(clean)
 		program.receive_user_command(href_list["command"])
 
-	return 1
+	return 0
 
 
 //A docking controller program for a simple door based docking port
