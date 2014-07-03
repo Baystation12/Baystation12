@@ -112,7 +112,7 @@
 			return
 
 		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
-		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && canmove) // mutual brohugs all around!
+		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
 			var/turf/oldloc = loc
 			loc = tmob.loc
 			tmob.loc = oldloc
