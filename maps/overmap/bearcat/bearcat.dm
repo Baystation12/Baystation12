@@ -105,6 +105,11 @@
 	icon_state = "tcomsatcham"
 	music = list('sound/ambience/signal.ogg')
 
+/area/ship/scrap/shuttle/
+	requires_power = 0
+	luminosity = 1
+	lighting_use_dynamic = 0
+
 /area/ship/scrap/shuttle/ingoing
 	name = "\improper Docking Bay #1"
 	icon_state = "tcomsatcham"
