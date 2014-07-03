@@ -9,13 +9,13 @@
 "ai" = (/obj/machinery/computer/station_alert,/turf/simulated/floor/bluegrid,/area/ship/scrap/command)
 "aj" = (/obj/effect/mapinfo/ship/bearcat,/turf/space,/area)
 "ak" = (/obj/structure/table,/obj/machinery/light,/obj/item/device/radio,/obj/item/device/radio/intercom{pixel_y = -32},/turf/simulated/floor{tag = "icon-gcircuit (SOUTHEAST)"; icon_state = "gcircuit"; dir = 6},/area/ship/scrap/command)
-"al" = (/obj/structure/stool/bed/chair/comfy/teal{tag = "icon-comfychair_teal (NORTH)"; icon_state = "comfychair_teal"; dir = 1},/obj/machinery/atmospherics/unary/vent_pump{dir = 2; on = 1},/obj/machinery/atmospherics/unary/vent_pump{dir = 2; on = 1},/obj/effect/landmark/start{name = "Captain"},/turf/simulated/floor{tag = "icon-gcircuitoff"; icon_state = "gcircuitoff"; dir = 2},/area/ship/scrap/command)
+"al" = (/obj/structure/stool/bed/chair/comfy/teal{tag = "icon-comfychair_teal (NORTH)"; icon_state = "comfychair_teal"; dir = 1},/obj/machinery/atmospherics/unary/vent_pump{dir = 2; on = 1},/obj/effect/landmark/start{name = "Captain"},/turf/simulated/floor{tag = "icon-gcircuitoff"; icon_state = "gcircuitoff"; dir = 2},/area/ship/scrap/command)
 "am" = (/obj/structure/table,/obj/machinery/light,/obj/machinery/newscaster{pixel_y = -32},/obj/machinery/door_control{id = "scraplock"; name = "External Lockdown"},/turf/simulated/floor{tag = "icon-gcircuit (SOUTHEAST)"; icon_state = "gcircuit"; dir = 6},/area/ship/scrap/command)
 "an" = (/turf/simulated/wall/r_wall,/area/ship/scrap/command)
 "ao" = (/obj/machinery/door/airlock/hatch,/obj/machinery/atmospherics/pipe/simple{dir = 2; icon_state = "intact"; level = 1; tag = "icon-intact"},/turf/simulated/floor,/area/ship/scrap/command)
 "ap" = (/turf/simulated/wall/r_wall,/area/ship/scrap/comms)
 "aq" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/grille,/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/comms)
-"ar" = (/obj/machinery/atmospherics/pipe/simple{dir = 2; icon_state = "intact"; level = 1; tag = "icon-intact"},/obj/machinery/light_switch{pixel_x = 28},/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/command)
+"ar" = (/obj/machinery/light_switch{pixel_x = 28},/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/command)
 "as" = (/turf/simulated/wall/r_wall,/area/ship/scrap/command/captain)
 "at" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/grille,/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/command/captain)
 "au" = (/obj/machinery/account_database,/turf/simulated/floor/bluegrid,/area/ship/scrap/comms)
@@ -29,7 +29,7 @@
 "aC" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/bluegrid,/area/ship/scrap/comms)
 "aD" = (/obj/machinery/door/window/westleft,/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"; tag = ""},/obj/machinery/atmospherics/unary/vent_pump{dir = 4; layer = 2.4; level = 2; on = 1},/turf/simulated/floor{tag = "icon-vault (NORTHEAST)"; icon_state = "vault"; dir = 5},/area/ship/scrap/comms)
 "aE" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/obj/machinery/atmospherics/pipe/simple{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8; level = 1},/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/comms)
-"aF" = (/obj/structure/cable{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/machinery/atmospherics/pipe/manifold4w{level = 1},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"; tag = ""},/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/command)
+"aF" = (/obj/structure/cable{tag = "icon-2-8"; icon_state = "2-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"; tag = ""},/obj/machinery/atmospherics/pipe/manifold4w/hidden,/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/command)
 "aG" = (/obj/machinery/door/airlock/hatch,/obj/machinery/atmospherics/pipe/simple{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8; level = 1},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0; tag = ""},/turf/simulated/floor{tag = "icon-neutralfull (EAST)"; icon_state = "neutralfull"; dir = 4},/area/ship/scrap/command/captain)
 "aH" = (/obj/machinery/atmospherics/pipe/simple{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8; level = 1},/obj/structure/cable{tag = "icon-6-8"; icon_state = "6-8"},/turf/simulated/floor{tag = "icon-cult"; icon_state = "cult"; dir = 2},/area/ship/scrap/command/captain)
 "aI" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; level = 1; on = 1},/turf/simulated/floor{tag = "icon-cult"; icon_state = "cult"; dir = 2},/area/ship/scrap/command/captain)
@@ -339,7 +339,7 @@
 "gA" = (/obj/machinery/atmospherics/pipe/tank/air,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/atmos)
 "gB" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/alarm{pixel_y = 25},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/atmos)
 "gC" = (/obj/machinery/pipedispenser,/obj/machinery/light/small{dir = 4},/obj/machinery/light_switch{pixel_y = 25},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/atmos)
-"gD" = (/obj/machinery/power/apc{dir = 1; name = "Maintenance APC"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/disposalpipe/segment,/turf/simulated/floor{tag = "icon-bot"; icon_state = "bot"; dir = 2},/area/ship/scrap/maintenance)
+"gD" = (/obj/machinery/power/apc{dir = 1; name = "Maintenance APC"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/disposalpipe/segment,/obj/machinery/computer/engines,/turf/simulated/floor{tag = "icon-bot"; icon_state = "bot"; dir = 2},/area/ship/scrap/maintenance)
 "gE" = (/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/obj/machinery/alarm{pixel_y = 32},/obj/structure/closet/secure_closet/engineering_electrical,/turf/simulated/floor{tag = "icon-bot"; icon_state = "bot"; dir = 2},/area/ship/scrap/maintenance)
 "gF" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/item/device/radio/intercom{pixel_y = 32},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/obj/structure/closet/toolcloset,/turf/simulated/floor{tag = "icon-bot"; icon_state = "bot"; dir = 2},/area/ship/scrap/maintenance)
 "gG" = (/obj/machinery/atmospherics/pipe/simple{tag = "icon-intact"; icon_state = "intact"; dir = 2; level = 2},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"; tag = ""},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor{tag = "icon-floorgrime (SOUTHEAST)"; icon_state = "floorgrime"; dir = 6},/area/ship/scrap/maintenance)
@@ -381,17 +381,27 @@
 "hq" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall/r_wall,/area/ship/scrap/maintenance/atmos)
 "hr" = (/obj/structure/cable{tag = "icon-5-6"; icon_state = "5-6"},/obj/machinery/door/airlock/maintenance_hatch{name = "Hatch"; normalspeed = 0},/turf/simulated/floor{tag = "icon-floorgrime (SOUTHEAST)"; icon_state = "floorgrime"; dir = 6},/area/ship/scrap/maintenance/engine)
 "hs" = (/obj/structure/disposaloutlet,/obj/structure/disposalpipe/trunk{tag = "icon-pipe-t (NORTH)"; icon_state = "pipe-t"; dir = 1},/turf/space,/area)
-"ht" = (/turf/simulated/floor{tag = "icon-warnplate (SOUTHWEST)"; icon_state = "warnplate"; dir = 10},/area/ship/scrap/maintenance/engine)
-"hu" = (/obj/structure/cable{tag = "icon-4-9"; icon_state = "4-9"},/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
-"hv" = (/obj/machinery/power/apc{dir = 1; name = "Engine APC"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
-"hw" = (/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
-"hx" = (/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
-"hy" = (/obj/effect/decal/cleanable/cobweb2,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor{tag = "icon-warnplate (SOUTHEAST)"; icon_state = "warnplate"; dir = 6},/area/ship/scrap/maintenance/engine)
-"hz" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/sign{tag = "icon-radiation"; icon_state = "radiation"},/turf/simulated/wall,/area/ship/scrap/maintenance/engine)
-"hA" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor{tag = "icon-wall_thermite"; icon_state = "wall_thermite"; dir = 2},/area/ship/scrap/maintenance/engine)
-"hB" = (/turf/space,/area/ship/scrap/maintenance/engine)
-"hC" = (/obj/machinery/door/poddoor{density = 0; icon_state = "pdoor0"; id = "scraplock"; name = "External Blast Doors"; opacity = 0},/turf/space,/area/ship/scrap/maintenance/engine)
-"hD" = (/obj/structure/shuttle/engine/propulsion/burst,/turf/space,/area/ship/scrap/maintenance/engine)
+"ht" = (/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hu" = (/obj/structure/cable{tag = "icon-4-9"; icon_state = "4-9"},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hv" = (/obj/machinery/power/apc{dir = 1; name = "Engine APC"},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hw" = (/obj/machinery/light/small{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hx" = (/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hy" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hz" = (/obj/effect/decal/cleanable/cobweb2,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/atmospherics/pipe/tank/phoron{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hA" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hB" = (/obj/machinery/atmospherics/tvalve{tag = "icon-tvalve0 (WEST)"; icon_state = "tvalve0"; dir = 8},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hC" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{tag = "icon-manifold (WEST)"; icon_state = "manifold"; dir = 8},/obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers,/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hD" = (/obj/machinery/atmospherics/pipe/tank/oxygen{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hE" = (/obj/machinery/atmospherics/unary/heat_reservoir/heater{tag = "icon-freezer_0 (EAST)"; icon_state = "freezer_0"; dir = 4},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hF" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hG" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{tag = "icon-manifold (NORTH)"; icon_state = "manifold"; dir = 1},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hH" = (/obj/machinery/atmospherics/valve/open{tag = "icon-valve1 (EAST)"; icon_state = "valve1"; dir = 4},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hI" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/turf/simulated/floor/plating,/area/ship/scrap/maintenance/engine)
+"hJ" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/obj/structure/window/reinforced,/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
+"hK" = (/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{tag = "icon-manifold (NORTH)"; icon_state = "manifold"; dir = 1},/obj/structure/window/reinforced,/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
+"hL" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers,/obj/structure/window/reinforced,/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
+"hM" = (/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{tag = "icon-intact (SOUTHWEST)"; icon_state = "intact"; dir = 10},/obj/structure/window/reinforced,/turf/simulated/floor{tag = "icon-warnplate"; icon_state = "warnplate"; dir = 2},/area/ship/scrap/maintenance/engine)
+"hN" = (/obj/machinery/atmospherics/unary/engine{tag = "icon-nozzle (NORTH)"; icon_state = "nozzle"; dir = 1},/turf/simulated/floor/plating{dir = 2; icon_state = "warnplate"; tag = "icon-warnplate (NORTH)"},/area/ship/scrap/maintenance/engine)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -441,14 +451,14 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafAgsgsgsgsgtgugvgvgwgvgxgvgygzgzgzgz
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgAgBgCgtgDgEgFgGgHgIgJgygKgLgMgzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagNgOgPgQgRgSgTgUgVgWgWgXgYgZhahbhcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagshdhdhehfhghhhihjhkhlhmgzhnhohpgzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgNhqdwhreedwdwdwdwdweFgzhcgzgzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahseFhthuhvhwhxhxhyeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFhzevevevevevhAeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahBdxeGeGeGeGeGdwhBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahBhChDhDhDhDhDhChBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahBhChBhBhBhBhBhChBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagsgsgNhqdwhrdwdwdwdwdwdweFgzhcgzgzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahseFhthuhvhwhxhyhzeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFhthththAhBhChDeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFeFhEhFhGhHhIeFeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFhJhKhLhKhMeFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadxhNhNhNhNhNdwaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeXaaaaaaaaaaeXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeXaaaaaaaaaaeXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
