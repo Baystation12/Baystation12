@@ -4,19 +4,6 @@
 	New(datum/game_mode/mutiny/M)
 		mode = M
 
-	proc/centcom_announce(text)
-		world << {"
-<font color='#FFA500'><hr><center><b>:-:=:-: CENTRAL COMMAND ANNOUNCEMENT :-:=:-:</b></center><hr></font>
-[text]
-			"}
-		world << sound('sound/AI/commandreport.ogg')
-
-	proc/announce_incoming_fax()
-		centcom_announce({"
-<b>Incoming Emergency Directive:</b>
-<i>Captain's Office Fax Machine, [station_name()]</i>
-			"})
-
 	proc/announce_directives()
 		for (var/obj/machinery/faxmachine/fax in world)
 			if (fax.department == "Captain's Office")
@@ -84,46 +71,6 @@ They don't care about us they only care about WEALTH and POWER... Share this mes
 
 Be safe, friend.\" (Unable to Reply)</p>"}
 
-
-	proc/announce_ert_unavailable()
-		// I might have gotten a little carried away.
-		centcom_announce({"
-<p>The presence of [pick(
-	"political instability",
-	"quantum fluctuations",
-	"hostile raiders",
-	"derelict station debris",
-	"REDACTED",
-	"ancient alien artillery",
-	"solar magnetic storms",
-	"sentient time-travelling killbots",
-	"gravitational anomalies",
-	"wormholes to another dimension",
-	"a telescience mishap",
-	"radiation flares",
-	"supermatter dust",
-	"leaks into a negative reality",
-	"antiparticle clouds",
-	"residual bluespace energy",
-	"suspected syndicate operatives",
-	"malfunctioning von Neumann probe swarms",
-	"shadowy interlopers",
-	"a stranded Vox arkship",
-	"haywire IPC constructs",
-	"rogue Unathi exiles",
-	"artifacts of eldritch horror",
-	"a brain slug infestation",
-	"killer bugs that lay eggs in the husks of the living",
-	"a deserted transport carrying xenomorph specimens",
-	"an emissary for the gestalt requesting a security detail",
-	"a Tajaran slave rebellion",
-	"radical Skrellian transevolutionaries",
-	"classified security operations",
-	"science-defying raw elemental chaos")]
-in the region is tying up all available local emergency resources;
-<b>emergency response teams</b> can not be called at this time.</p>
-		"})
-
 	proc/announce()
 		world << "<B>The current game mode is - Mutiny!</B>"
 		world << {"
@@ -157,7 +104,7 @@ Both keys are required to activate the <b>Emergency Authentication Device (EAD)<
 NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive and activating their on-board emergency authentication device.
-[mode.mutineers.len] members of the station's personnel were charged with sedition against the company and if found guilty will be sentenced to life incarceration.
+[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.
 NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their successful efforts, at a ceremony this coming Thursday.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
@@ -168,7 +115,7 @@ NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [l
 NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive. Unfortunately, they failed to notify Central Command of their successes due to a breach in the chain of command.
-[mode.mutineers.len] members of the station's personnel were charged with sedition against the Company and if found guilty will be sentenced to life incarceration.
+[mode.mutineers.len] members of the station's personnel were charged with terrorist action against the Company and, if found guilty by a Sol magistrate, will be sentenced to life incarceration.
 NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [loyalist_tag("Star of Loyalty")], following their mostly successful efforts, at a ceremony this coming Thursday.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
@@ -180,7 +127,7 @@ NanoTrasen has been thrust into turmoil following an apparent mutiny by key pers
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 No further information has yet emerged from the station or its crew, who are presumed to be in holding with NanoTrasen investigators.
 NanoTrasen officials refuse to comment.
-Sources indicate that [mode.mutineers.len] members of the station's personnel are currently under investigation for mutiny, and [mode.loyalists.len] crew are currently providing evidence to investigators, believed to be the 'loyal' station personnel.
+Sources indicate that [mode.mutineers.len] members of the station's personnel are currently under investigation for terrorist activity, and [mode.loyalists.len] crew are currently providing evidence to investigators, believed to be the 'loyal' station personnel.
 [mode.body_count.len] are believed to have died during the coup.
 <p>NanoTrasen's image will forever be haunted by the fact that a mutiny took place on one of its own stations.</p>
 		"}
@@ -198,7 +145,7 @@ NanoTrasen has reprimanded [mode.loyalists.len] members of the crew for failing 
 
 	proc/mutineer_major_victory()
 		return {"
-NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a research station in [system_name()]--<b>[station_name()]</b>--amid a local interstellar crisis.
+NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a company station in [system_name()]--<b>[station_name()]</b>--amid a local interstellar crisis.
 What appears to have been a "legitimate" mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 It has been revealed that the directive was invalid and fraudulent. Company officials have not released a statement about the source of the directive.
 Thanks to the efforts of the resistant members of the crew, the directive was not carried out.

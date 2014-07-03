@@ -27,13 +27,47 @@ datum/game_mode/mutiny
 
 	proc/reveal_directives()
 		spawn(rand(1 MINUTE, 3 MINUTES))
-			fluff.announce_incoming_fax()
+			command_alert("Incoming emergency directive: Captain's office fax machine, [station_name()].","Emergency Transmission")
 			spawn(rand(3 MINUTES, 5 MINUTES))
 				send_pda_message()
 			spawn(rand(3 MINUTES, 5 MINUTES))
 				fluff.announce_directives()
 				spawn(rand(2 MINUTES, 3 MINUTE))
-					fluff.announce_ert_unavailable()
+
+					var/list/reasons = list(
+						"political instability",
+						"quantum fluctuations",
+						"hostile raiders",
+						"derelict station debris",
+						"REDACTED",
+						"ancient alien artillery",
+						"solar magnetic storms",
+						"sentient time-travelling killbots",
+						"gravitational anomalies",
+						"wormholes to another dimension",
+						"a telescience mishap",
+						"radiation flares",
+						"supermatter dust",
+						"leaks into a negative reality",
+						"antiparticle clouds",
+						"residual bluespace energy",
+						"suspected syndicate operatives",
+						"malfunctioning von Neumann probe swarms",
+						"shadowy interlopers",
+						"a stranded Vox arkship",
+						"haywire IPC constructs",
+						"rogue Unathi exiles",
+						"artifacts of eldritch horror",
+						"a brain slug infestation",
+						"killer bugs that lay eggs in the husks of the living",
+						"a deserted transport carrying xenomorph specimens",
+						"an emissary for the gestalt requesting a security detail",
+						"a Tajaran slave rebellion",
+						"radical Skrellian transevolutionaries",
+						"classified security operations",
+						"science-defying raw elemental chaos"
+						)
+					command_alert("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time.","Emergency Transmission")
 
 	// Returns an array in case we want to expand on this later.
 	proc/get_head_loyalist_candidates()
