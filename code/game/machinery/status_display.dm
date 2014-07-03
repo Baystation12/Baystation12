@@ -77,7 +77,7 @@
 				if(emergency_shuttle.waiting_to_leave())
 					var/line1 = "-ETD-"
 					var/line2
-					if (emergency_shuttle.shuttle.moving_status == SHUTTLE_WARMUP)
+					if (emergency_shuttle.shuttle.is_launching())
 						line2 = "Launch"
 					else
 						line2 = get_shuttle_timer_departure()
@@ -121,11 +121,11 @@
 				var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 				if (!shuttle)
 					line2 = "Error"
-				else if(shuttle.has_eta())
+				else if(shuttle.has_arrive_time())
 					line2 = get_supply_shuttle_timer()
 					if(lentext(line2) > CHARS_PER_LINE)
 						line2 = "Error"
-				else if (shuttle.moving_status == SHUTTLE_WARMUP)
+				else if (shuttle.is_launching())
 					if (shuttle.at_station())
 						line2 = "Launch"
 					else
@@ -187,7 +187,7 @@
 		if (!shuttle)
 			return "Error"
 
-		if(shuttle.has_eta())
+		if(shuttle.has_arrive_time())
 			var/timeleft = round((shuttle.arrive_time - world.time) / 10,1)
 			if(timeleft < 0)
 				return "Late"

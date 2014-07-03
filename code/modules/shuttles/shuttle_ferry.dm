@@ -3,7 +3,7 @@
 #define WAIT_ARRIVE		2
 #define WAIT_FINISH		3
 
-#define DOCK_ATTEMPT_TIMEOUT 450	//how long in ticks we wait before assuming the docking controller is broken or blown up.
+#define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/ferry
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
@@ -153,6 +153,10 @@
 	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)
 		return 1
 	return 0
+
+//returns 1 if the shuttle is getting ready to move, but is not in transit yet
+/datum/shuttle/ferry/proc/is_launching()
+	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)	
 
 //This gets called when the shuttle finishes arriving at it's destination
 //This can be used by subtypes to do things when the shuttle arrives.

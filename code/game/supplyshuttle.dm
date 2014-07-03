@@ -315,7 +315,7 @@ var/list/mechtoys = list(
 		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			dat += {"<BR><B>Supply shuttle</B><HR>
-			Location: [shuttle.has_eta() ? "Moving to station ([shuttle.eta_minutes()] Mins.)":shuttle.at_station() ? "Docked":"Away"]<BR>
+			Location: [shuttle.has_arrive_time() ? "Moving to station ([shuttle.eta_minutes()] Mins.)":shuttle.at_station() ? "Docked":"Away"]<BR>
 			<HR>Supply points: [supply_controller.points]<BR>
 		<BR>\n<A href='?src=\ref[src];order=categories'>Request items</A><BR><BR>
 		<A href='?src=\ref[src];vieworders=1'>View approved orders</A><BR><BR>
@@ -443,7 +443,7 @@ var/list/mechtoys = list(
 		if (shuttle)
 			dat += "<BR><B>Supply shuttle</B><HR>"
 			dat += "\nLocation: "
-			if (shuttle.has_eta())
+			if (shuttle.has_arrive_time())
 				dat += "In transit ([shuttle.eta_minutes()] Mins.)<BR>"
 			else
 				if (shuttle.at_station())
@@ -451,8 +451,8 @@ var/list/mechtoys = list(
 						switch(shuttle.docking_controller.get_docking_status())
 							if ("docked") dat += "Docked at station<BR>"
 							if ("undocked") dat += "Undocked from station<BR>"
-							if ("docking") dat += "Docking with station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>OVERRIDE</A></span>" : ""]<BR>"
-							if ("undocking") dat += "Undocking from station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>OVERRIDE</A></span>" : ""]<BR>"
+							if ("docking") dat += "Docking with station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>Force Launch</A></span>" : ""]<BR>"
+							if ("undocking") dat += "Undocking from station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>Force Launch</A></span>" : ""]<BR>"
 					else
 						dat += "Station<BR>"
 					
