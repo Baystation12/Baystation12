@@ -3928,7 +3928,7 @@
 "bxB" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/wall/r_wall,/area/bridge/meeting_room)
 "bxC" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/maintenance/asmaint2)
 "bxD" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/plating,/area/maintenance/asmaint2)
-"bxE" = (/obj/structure/extinguisher_cabinet{pixel_x = 5; pixel_y = -32},/turf/simulated/floor{icon_state = "white"},/area/medical/medbay2)
+"bxE" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay2)
 "bxF" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/turf/simulated/floor,/area/quartermaster/office)
 "bxG" = (/obj/structure/stool/bed/chair{dir = 8},/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -35},/obj/machinery/light,/turf/simulated/floor,/area/quartermaster/office)
 "bxH" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "bluecorner"},/area/hallway/primary/central)
