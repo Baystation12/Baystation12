@@ -255,10 +255,6 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	if(!allowed(user))
-		user << "\red Access Denied."
-		return 1
-
 	var/area/A = get_area(src)
 	A.powerupdate = 1
 
@@ -334,4 +330,17 @@ Class Procs:
 			for(var/var/obj/item/C in component_parts)
 				user << "<span class='notice'>    [C.name]</span>"
 		return 1
-	return 0
+	else
+		return 0
+
+/obj/machinery/proc/dismantle()
+	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
+	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.state = 2
+	M.icon_state = "box_1"
+	for(var/obj/I in component_parts)
+		if(I.reliability != 100 && crit_fail)
+			I.crit_fail = 1
+		I.loc = loc
+	del(src)
+	return 1
