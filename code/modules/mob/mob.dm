@@ -780,7 +780,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		lying = 0
 	else if (!buckled)
 		lying = !can_stand
-		//canmove = has_limbs
+		canmove = has_limbs
 
 	if(lying)
 		density = 0
