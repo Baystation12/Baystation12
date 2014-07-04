@@ -235,10 +235,6 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	if(!allowed(user))
-		user << "\red Access Denied."
-		return 1
-
 	var/area/A = get_area(src)
 	A.master.powerupdate = 1
 
