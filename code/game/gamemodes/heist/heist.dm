@@ -273,7 +273,7 @@ datum/game_mode/proc/auto_declare_completion_heist()
 
 /datum/game_mode/heist/check_finished()
 	var/datum/shuttle/multi_shuttle/skipjack = shuttle_controller.shuttles["Vox Skipjack"]
-	if (!(is_raider_crew_alive()) || (skipjack && skipjack.at_origin))
+	if (!(is_raider_crew_alive()) || (skipjack && skipjack.returned_home))
 		return 1
 	return ..()
 
