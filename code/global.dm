@@ -5,8 +5,6 @@ var/global/obj/effect/datacore/data_core = null
 var/global/obj/effect/overlay/plmaster = null
 var/global/obj/effect/overlay/slmaster = null
 
-var/list/list/all_networks = list( )
-
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
@@ -139,6 +137,9 @@ var/list/ninjastart = list()
 //	list/traitors = list()	//traitor list
 var/list/cardinal = list( NORTH, SOUTH, EAST, WEST )
 var/list/alldirs = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+
+var/list/cardinal8 = list(NORTH, NORTHEAST, NORTHWEST, SOUTH, SOUTHEAST, SOUTHWEST, EAST, WEST)
+var/list/cardinal3d = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 
 var/datum/station_state/start_state = null
 var/datum/configuration/config = null

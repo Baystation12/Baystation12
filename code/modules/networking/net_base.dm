@@ -1,31 +1,55 @@
 /obj/machinery/networking
 	name = "network object"
-	icon = 'icons/obj/networking.dmi'
+	//icon = 'icons/obj/networking.dmi'
 	icon_state = ""
 
 
 
 //Datum to store IP addresses (IPv4 4-byte style)
-/ip_addr
-	var/blocks[4]
+/sockaddr_in
+	var/_high_word
+	var/_low_word
 
-/ip_addr/New(var/text_in)
-	text2ip(text_in, src)
-	..()
+/sockaddr_in/New(var/text_in)
+	inet_pton(text_in, src)
+	return ..()
 
-/ip_addr/proc/to_text()
-	return ip2text(src)
+/sockaddr_in/proc/get_oc(o)
+	if(o == 1)
+		return _high_word >> 8
+	if(o == 2)
+		return _high_word & 255
+	if(o == 3)
+		return _low_word >> 8
+	if(o == 4)
+		return _low_word & 255
+	return -1
 
-/ip_addr/proc/from_text(var/text_in)
-	return text2ip(text_in, src)
+/sockaddr_in/proc/set_oc(o, v)
+	v &= 255
+	if(o == 1)
+		_high_word = (v << 8) | (_high_word & 255)
+	else if(o == 2)
+		_high_word = v | (_high_word & 65280)
+	else if(o == 3)
+		_low_word = (v << 8) | (_low_word & 255)
+	else if(o == 4)
+		_low_word = v | (_low_word & 65280)
+	return
 
-//Helper functions for converting ip_addr
-/proc/ip2text(var/ip_addr/ip_in)
-	if(istype(ip_in) && length(ip_in.blocks) == 4)
-		return "[num2text(ip_in.blocks[1])].[num2text(ip_in.blocks[2])].[num2text(ip_in.blocks[3])].[num2text(ip_in.blocks[4])]"
+/sockaddr_in/proc/to_text()
+	return inet_ntop(src)
+
+/sockaddr_in/proc/from_text(var/text_in)
+	return inet_pton(text_in, src)
+
+//Helper functions for converting sockaddr_in
+/proc/inet_ntop(var/sockaddr_in/ip_in)
+	if(istype(ip_in))
+		return "[ip_in.get_oc(1)].[ip_in.get_oc(2)].[ip_in.get_oc(3)].[ip_in.get_oc(4)]"
 	return null
 
-/proc/text2ip(var/text_in, var/ip_addr/ip_out = null)
+/proc/inet_pton(var/text_in, var/sockaddr_in/ip_out = null)
 	var/list/blocks_out = stringsplit(text_in, ".")
 	if(length(blocks_out) != 4)
 		return null
@@ -34,20 +58,9 @@
 		ip_out = new()
 
 	for(var/i = 1; i <= 4; i++)
-		//sanitize the blocks to byte limits
-		ip_out.blocks[i] = max(0, blocks_out[i])
-		ip_out.blocks[i] = min(255, blocks_out[i])
+		ip_out.set_oc(i, max(0, min(255, blocks_out[i])))
 
 	return ip_out
-
-//just because.
-/proc/ntop(var/ip_addr/ip_in)
-	return ip2text(ip_in)
-
-/proc/pton(var/text_in, var/ip_addr/ip_out = null)
-	return text2ip(text_in, ip_out)
-
-
 
 //Distance 2-point proc.  Not defined anywhere, and I need to use it.
 /proc/distance2p(var/x1, var/y1, var/x2, var/y2)

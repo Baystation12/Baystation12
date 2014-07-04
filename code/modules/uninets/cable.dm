@@ -1,5 +1,5 @@
 // =
-// = The Unified (-Type-Tree) cable Network System
+// = The Unified (-Type-Tree) Cable Network System
 // = Written by Sukasa with assistance from Googolplexed
 // =
 // = Cleans up the type tree and reduces future code maintenance
@@ -14,13 +14,13 @@
 /var/list/list/cable_connectables_lookup = list()
 
 /hook/startup/proc/createUninetLookups()
-	generateCablingLookups(/obj/structure/cabling)
+	generateCablingLookups(/obj/structure/uninet_link/cable)
 	return 1
 
 //Recursive function to generate values for the lookup lists.
 /proc/generateCablingLookups(var/cable_type)
 	for(var/check_type in (typesof(cable_type) - cable_type))
-		var/obj/structure/cabling/cable = new check_type(null)
+		var/obj/structure/uninet_link/cable/cable = new check_type(null)
 
 		equiv_cable_type_lookup[check_type] = cable.equivalent_cable_type
 		if(cable.cable_piece_type && !coil_to_cable_lookup[cable.cable_piece_type])
@@ -32,7 +32,7 @@
 	return
 
 
-/obj/structure/cabling
+/obj/structure/uninet_link/cable
 	icon_state = "0-1"
 	layer = 2.5
 	level = 1
@@ -43,10 +43,10 @@
 	var/list/connectable_types = list( /obj/machinery )
 	var/network_controller_type = /datum/controller/uninet_controller
 	var/cable_piece_type = null
-	var/equivalent_cable_type = /obj/structure/cabling
+	var/equivalent_cable_type = /obj/structure/uninet_link/cable
 
 
-/obj/structure/cabling/New(var/loc, var/new_dir_1 = -1, var/new_dir_2 = -1)
+/obj/structure/uninet_link/cable/New(var/loc, var/new_dir_1 = -1, var/new_dir_2 = -1)
 	if(!loc)
 		return
 
@@ -71,8 +71,8 @@
 	if(ticker)
 		var/list/P = getAllConnections(get_step_3d(loc, dir1), 1) | getAllConnections(get_step_3d(loc, dir2), 1)
 
-		if(locate(/obj/structure/cabling) in P)
-			var/obj/structure/cabling/cable = locate(/obj/structure/cabling) in P
+		if(locate(/obj/structure/uninet_link/cable) in P)
+			var/obj/structure/uninet_link/cable/cable = locate(/obj/structure/uninet_link/cable) in P
 			var/unified_network/new_network = cable.networks[cable.equivalent_cable_type]
 			new_network.cableBuilt(src, P)
 		else
@@ -81,55 +81,57 @@
 	return
 
 
-/obj/structure/cabling/proc/userTouched(var/mob/user)
-	var/unified_network/network = networks[equivalent_cable_type]
-	network.controller.cableTouched(src, user)
+/obj/structure/uninet_link/cable/proc/userTouched(var/mob/user)
+	var/unified_network/network = networks[link_type]
+	network.controller.linkTouched(src, user)
 	return
 
 
-/obj/structure/cabling/hide(var/intact)
+/obj/structure/uninet_link/cable/hide(var/intact)
 	if(!istype(loc, /turf/space) && level == 1)
 		invisibility = intact ? 101 : 0
 	update_icon()
 	return
 
 
-/obj/structure/cabling/update_icon()
+/obj/structure/uninet_link/cable/update_icon()
 	icon_state = "[dir1]-[dir2][invisibility?"-f":""]"
 	return
 
 
-/obj/structure/cabling/Del()
-	if(!defer_cables_rebuild)
-		var/unified_network/network = networks[equivalent_cable_type]
-		if(network)
-			network.cutCable(src)
-	else
-		if(Debug)
-			//check_diary()
-			diary << "Deferring U.C. deletion at \[[x], [y], [z]]: #[network_number]"
+/obj/structure/uninet_link/cable/Del()
+	destroy()
 	..()
 
 
-/obj/structure/cabling/proc/cableConnections(var/turf/target, var/include_already_connected = 0)
+//GC del
+/obj/structure/uninet_link/cable/proc/destroy()
+	if(!defer_uninet_rebuild)
+		var/unified_network/network = networks[equivalent_cable_type]
+		if(network)
+			network.cutCable(src)
+	loc = null
+	return
+
+
+/obj/structure/uninet_link/cable/proc/cableConnections(var/turf/target, var/include_already_connected = 0)
 	var/list/cables = list()
 	var/Direction = get_dir_3d(target, src)
 
-	for(var/obj/structure/cabling/cable in target)
+	for(var/obj/structure/uninet_link/cable/cable in target)
 		if((!include_already_connected || !cable.network_number[equivalent_cable_type]) && cable.equivalent_cable_type == equivalent_cable_type)
 			if(cable.dir1 == Direction || cable.dir2 == Direction)
 				cables += cable
 
 	cables -= src
-
 	return cables
 
 
-/obj/structure/cabling/proc/getAllConnections(var/turf/target, var/include_already_connected = 0)
+/obj/structure/uninet_link/cable/proc/getAllConnections(var/turf/target, var/include_already_connected = 0)
 	var/list/connections = list( )
 	var/direction = get_dir_3d(target, src)
 
-	for(var/obj/structure/cabling/cable in target)
+	for(var/obj/structure/uninet_link/cable/cable in target)
 		if((include_already_connected || !cable.network_number[equivalent_cable_type]) && cable.equivalent_cable_type == equivalent_cable_type)
 			if(cable.dir1 == direction || cable.dir2 == direction)
 				connections += cable
@@ -137,7 +139,7 @@
 	direction = reverse_dir_3d(direction)
 
 	for(var/obj/O in target)
-		if(istype(O, /obj/structure/cabling))
+		if(istype(O, /obj/structure/uninet_link/cable))
 			continue
 		if((include_already_connected || !O.network_number[equivalent_cable_type]) && canConnect(O))
 			if(direction == dir1 || direction == dir2)
@@ -147,14 +149,14 @@
 	return connections
 
 
-/obj/structure/cabling/proc/canConnect(var/obj/connect_to)
+/obj/structure/uninet_link/cable/proc/canConnect(var/obj/connect_to)
 	for(var/type in connectable_types)
 		if(istype(connect_to, type))
 			return 1
 	return 0
 
 
-/obj/structure/cabling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/structure/uninet_link/cable/attackby(var/obj/item/weapon/W, var/mob/user)
 	var/unified_network/network = networks[equivalent_cable_type]
 	add_fingerprint(user)
 
@@ -177,25 +179,20 @@
 
 		del src
 
-	else if(istype(W, /obj/item/cable_coil))
-		var/obj/item/cable_coil/coil = W
-
-		coil.joinCable(src, user)
-
 	else if(istype(W, /obj/item/device))
 		network.controller.deviceUsed(W, src, user)
 
 	return
 
 
-/obj/structure/cabling/proc/dropCablePieces()
+/obj/structure/uninet_link/cable/proc/dropCablePieces()
 	if(cable_piece_type)
 		new cable_piece_type(loc, dir1 ? 2 : 1)
 
 	return
 
 
-/obj/structure/cabling/ex_act(severity)
+/obj/structure/uninet_link/cable/ex_act(severity)
 	switch(severity)
 		if(1)
 			var/unified_network/network = networks[equivalent_cable_type]
@@ -216,7 +213,7 @@
 				del(src)
 	return
 
-/obj/structure/cabling/proc/objectBuilt(var/obj/object)
+/obj/structure/uninet_link/cable/proc/objectBuilt(var/obj/object)
 	var/direction = get_dir_3d(src, object)
 	if(dir1 != direction && dir2 != direction)
 		return
@@ -229,6 +226,6 @@
 	..()
 	if(ticker)
 		for(var/direction in list(0) | cardinal8)
-			for (var/obj/structure/cabling/cable in get_step(src, direction))
+			for (var/obj/structure/uninet_link/cable/cable in get_step(src, direction))
 				cable.objectBuilt(src)
 	return

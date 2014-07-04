@@ -312,11 +312,24 @@ datum/controller/game_controller/proc/process_nano()
 		nanomanager.processing_uis.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_uninets()
-	for(var/outer_key in all_networks)
-		var/list/network_set = all_networks[outer_key]
-		for(var/unified_network/network in network_set)
-			if(network)
-				network.controller.process()
+	last_thing_processed = /unified_network
+	var/i = 1
+	while(i <= all_networks.len)
+		var/list/network_set = all_networks[all_networks[i]]
+		var/j = 1
+		while(j <= network_set.len)
+			var/unified_network/uninet = network_set[j]
+			if(uninet)
+				uninet.controller.process()
+				j++
+				continue
+			network_set.Cut(j, j + 1)
+
+		if(network_set.len)
+			i++
+			continue
+
+		all_networks.Cut(i, i + 1)
 
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event

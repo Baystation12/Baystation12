@@ -78,7 +78,7 @@
 			debug_variables(transfer_controller)
 			feedback_add_details("admin_verb","DAutovoter")
 		if("UnifiedCabling")
-			DebugUC(src)
+			debug_uninets(src)
 			feedback_add_details("admin_verb","DUnifiedCabling")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

@@ -7,7 +7,7 @@
 	name = "Area Network Controller"
 	desc = "A small network router capable of serving a single room with wireless signal."
 
-	icon = 'icons/obj/networking.dmi'
+	//icon = 'icons/obj/networking.dmi'
 	icon_state = "anc0"
 
 	anchored = 1
