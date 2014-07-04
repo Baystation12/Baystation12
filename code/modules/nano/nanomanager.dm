@@ -5,13 +5,30 @@
 	var/open_uis[0]
 	// a list of current open /nanoui UIs, not grouped, for use in processing
 	var/list/processing_uis = list()
+	// a list of asset filenames which are to be sent to the client on user logon
+	var/list/asset_files = list()
 
  /**
   * Create a new nanomanager instance.
+  * This proc generates a list of assets which are to be sent to each client on connect
   *
   * @return /nanomanager new nanomanager object
   */
 /datum/nanomanager/New()
+	var/list/nano_asset_dirs = list(\
+		"nano/css/",\
+		"nano/images/",\
+		"nano/js/",\
+		"nano/templates/"\
+	)
+	
+	var/list/filenames = null
+	for (var/path in nano_asset_dirs)
+		filenames = flist(path)
+		for(var/filename in filenames)
+			if(copytext(filename, length(filename)) != "/") // filenames which end in "/" are actually directories, which we want to ignore
+				asset_files.Add(file(path + filename)) // add this file to asset_files for sending to clients when they connect
+	
 	return
 
  /**
@@ -208,17 +225,6 @@
   */
 
 /datum/nanomanager/proc/send_resources(client)
-	var/list/nano_asset_dirs = list(\
-		"nano/css/",\
-		"nano/images/",\
-		"nano/js/",\
-		"nano/templates/"\
-	)
-	
-	var/list/files = null
-	for (var/path in nano_asset_dirs)
-		files = flist(path)
-		for(var/file in files)
-			if(copytext(file, length(file)) != "/") // files which end in "/" are actually directories, which we want to ignore
-				client << browse_rsc(file(path + file))	// send the file to the client
+	for(var/file in asset_files)			
+		client << browse_rsc(file)	// send the file to the client
 
