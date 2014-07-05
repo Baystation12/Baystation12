@@ -200,7 +200,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | IS_WHITELISTED
+	flags = NO_SCAN | IS_WHITELISTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
