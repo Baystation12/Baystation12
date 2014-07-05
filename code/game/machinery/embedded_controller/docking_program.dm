@@ -6,7 +6,9 @@
 
 #define MODE_NONE			0
 #define MODE_SERVER			1
-#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking. (Think server == station, client == shuttle)
+#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
+
+#define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
 /*
 	*** STATE TABLE ***
@@ -64,6 +66,7 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
+	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 	
 	var/override_enabled = 0	//skips checks for the docking port being ready
 	var/received_confirm = 0	//for undocking, whether the client has recieved a confirmation from the server
@@ -158,10 +161,12 @@
 						finish_undocking()
 					reset()		//server is done undocking!
 					
-
+	if (response_sent || resend_counter > 0)
+		resend_counter++
 	
-	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
+	if (resend_counter >= MESSAGE_RESEND_TIME || (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING))
 		response_sent = 0
+		resend_counter = 0
 	
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
