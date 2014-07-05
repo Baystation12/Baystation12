@@ -6,7 +6,9 @@
 
 #define MODE_NONE			0
 #define MODE_SERVER			1
-#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking. (Think server == station, client == shuttle)
+#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
+
+#define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
 /*
 	*** STATE TABLE ***
@@ -14,13 +16,8 @@
 	MODE_CLIENT|STATE_UNDOCKED		sent a request for docking and now waiting for a reply.
 	MODE_CLIENT|STATE_DOCKING		server told us they are OK to dock, waiting for our docking port to be ready.
 	MODE_CLIENT|STATE_DOCKED		idle - docked as client.
-<<<<<<< HEAD
-	MODE_CLIENT|STATE_UNDOCKING		we are either waiting for our docking port to be ready or for the server to give us the OK to undock.
-
-=======
 	MODE_CLIENT|STATE_UNDOCKING		we are either waiting for our docking port to be ready or for the server to give us the OK to finish undocking.
 
->>>>>>> 232e50e... Shuttle console refactoring
 	MODE_SERVER|STATE_UNDOCKED		should never happen.
 	MODE_SERVER|STATE_DOCKING		someone requested docking, we are waiting for our docking port to be ready.
 	MODE_SERVER|STATE_DOCKED		idle - docked as server
@@ -28,34 +25,12 @@
 
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-
->>>>>>> ed4fb8d... Shuttles now dock on arrival and departure
-=======
-
-=======
 
 	*** Docking Signals ***
 
 	Docking
 	Client sends request_dock
-<<<<<<< HEAD
-	When server is ready, sends confirm_dock
-	Client sends confirm_dock back
 
-	Undocking
-	Client sends request_undock
-	When server is ready, sends confirm_dock
-	Client sends confirm_dock back
-
-	Note that in both cases each side exchanges confirm_dock before the docking operation is considered done.
-
->>>>>>> dc7d8fa... Adjusts how undocking signals are used
-=======
 	Server sends confirm_dock to say that yes, we will serve your request
 	When client is ready, sends confirm_dock
 	Server sends confirm_dock back to indicate that docking is complete
@@ -73,7 +48,6 @@
 	the server and client do not have a defined relationship. Before undocking, the server and client are already
 	related to each other, thus the extra confirm message is not needed.
 
->>>>>>> d837e5d... Streamlined docking code
 	*** Override, what is it? ***
 
 	The purpose of enabling the override is to prevent the docking program from automatically doing things with the docking port when docking or undocking.
@@ -83,14 +57,8 @@
 	The docking controller will still check the state of the docking port, and thus prevent the shuttle from launching unless they force the launch (handling forced
 	launches is not the docking controller's responsibility). In this case it is up to the players to manually get the docking port into a good state to undock
 	(which usually just means closing and locking the doors).
-<<<<<<< HEAD
-
-	In line with this, docking controllers should prevent players from manually doing things when the override is disabled.
->>>>>>> acec01f... Docking overrides now have a clear purpose
-=======
 
 	In line with this, docking controllers should prevent players from manually doing things when the override is NOT enabled.
->>>>>>> 232e50e... Shuttle console refactoring
 */
 
 
@@ -99,6 +67,7 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
+	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 
 	var/override_enabled = 0	//skips checks for the docking port being ready
 	var/received_confirm = 0	//for undocking, whether the client has recieved a confirmation from the server
@@ -193,11 +162,12 @@
 						finish_undocking()
 					reset()		//server is done undocking!
 
+	if (response_sent || resend_counter > 0)
+		resend_counter++
 
-
-
-	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
+	if (resend_counter >= MESSAGE_RESEND_TIME || (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING))
 		response_sent = 0
+		resend_counter = 0
 
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
