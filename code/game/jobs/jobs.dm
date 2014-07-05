@@ -98,11 +98,7 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
-)
-
-//Space Assholes
-var/list/entertaiment_positions = list(
+	"Assistant",
 	"Clown",
 	"Mime"
 )

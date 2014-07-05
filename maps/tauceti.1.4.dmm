@@ -1810,7 +1810,7 @@
 "aIP" = (/obj/structure/extinguisher_cabinet{pixel_x = 27; pixel_y = 0},/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor{icon_state = "neutral"; dir = 4},/area/hallway/primary/central)
 "aIQ" = (/obj/machinery/camera{c_tag = "Dormitory Toilets"; dir = 1},/turf/simulated/floor{icon_state = "freezerfloor"},/area/crew_quarters/toilet)
 "aIR" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/wall,/area/crew_quarters/toilet)
-"aIS" = (/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock{name = "Theater Backroom"; req_access_txt = "0"; req_one_access_txt = "43;44"},/turf/simulated/floor/wood,/area/crew_quarters/bar)
+"aIS" = (/obj/structure/disposalpipe/segment,/obj/machinery/door/airlock{name = "Theater Backroom"; req_access_txt = "46"; req_one_access = null; req_one_access_txt = "0"},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "aIT" = (/obj/machinery/atmospherics/pipe/simple{pipe_color = "blue"; icon_state = "intact-b-f"; level = 1; name = "pipe"},/turf/simulated/wall,/area/crew_quarters/bar)
 "aIU" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/door/airlock/maintenance{name = "Bar Maintenance"; req_access_txt = "0"; req_one_access_txt = "12;25;28"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plating,/area/crew_quarters/bar)
 "aIV" = (/obj/structure/disposalpipe/segment,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/wall,/area/crew_quarters/bar)

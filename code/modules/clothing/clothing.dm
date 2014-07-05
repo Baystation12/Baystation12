@@ -278,6 +278,13 @@ BLIND     // can't see anything
 		return
 	..()
 
+/obj/item/clothing/under/attack_self(mob/user)
+	if(hastie && src.loc == user)
+		if (istype(hastie, /obj/item/clothing/tie/holster))
+			hastie.attack_hand(user)
+		if (istype(hastie, /obj/item/clothing/tie/storage))
+			hastie.attack_hand(user)
+
 //This is to ensure people can take off suits when there is an attached accessory
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr))
@@ -387,6 +394,8 @@ BLIND     // can't see anything
 	if(istype(loc, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = loc
 		H.update_inv_w_uniform()
+		action_button_name = null
+		icon_action_button = null
 
 /obj/item/clothing/under/verb/removetie()
 	set name = "Remove Accessory"

@@ -591,7 +591,7 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'>AntagHUD</a></td>"
 
-
+/*
 	//Clown&Mime
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
@@ -611,7 +611,7 @@
 			if(counter >= 5) //So things dont get squiiiiished!
 				jobs += "</tr><tr align='center'>"
 				counter = 0
-		jobs += "</tr></table>"
+		jobs += "</tr></table>" */
 
 	//Antagonist (Orange)
 		var/isbanned_dept = jobban_isbanned(M, "Syndicate")
@@ -769,12 +769,12 @@
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
 					joblist += temp.title
-			if("entertaimentdept")
+/*			if("entertaimentdept")
 				for(var/jobPos in entertaiment_positions)
 					if(!jobPos)	continue
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
-					joblist += temp.title
+					joblist += temp.title */
 			if("nonhumandept")
 				joblist += "pAI"
 				for(var/jobPos in nonhuman_positions)
