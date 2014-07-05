@@ -46,12 +46,12 @@
 		while (world.time <= arrive_time)
 			sleep(5)
 
-		if (destination != away_area)
-			move(away_area, destination)
-
 		//late
 		if (prob(late_chance))
 			sleep(rand(0,max_late_time))
+		
+		if (destination != away_area)
+			move(away_area, destination)
 		
 		moving_status = SHUTTLE_IDLE
 		
