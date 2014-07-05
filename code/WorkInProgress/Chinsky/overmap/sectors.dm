@@ -1,4 +1,4 @@
-#define OVERMAP_ZLEVEL 1
+
 //===================================================================================
 //Hook for building overmap
 //===================================================================================
@@ -29,6 +29,7 @@ var/global/list/map_sectors = list()
 	var/zlevel
 	var/mapx			//coordinates on the
 	var/mapy			//overmap zlevel
+	var/known = 1
 
 /obj/effect/mapinfo/New()
 	tag = "sector[z]"
@@ -43,9 +44,6 @@ var/global/list/map_sectors = list()
 	name = "generic ship"
 	obj_type = /obj/effect/map/ship
 
-/obj/effect/mapinfo/ship/relaymove(var/mob/user, direction)
-	step(src,direction)
-
 
 //===================================================================================
 //Overmap object representing zlevel
@@ -57,17 +55,19 @@ var/global/list/map_sectors = list()
 	icon_state = "sheet-plasteel"
 	var/map_z = 0
 	var/area/shuttle/shuttle_landing
+	var/always_known = 1
 
 /obj/effect/map/New(var/obj/effect/mapinfo/data)
 	map_z = data.zlevel
 	name = data.name
+	always_known = data.known
 	if (data.icon != 'icons/mob/screen1.dmi')
 		icon = data.icon
 		icon_state = data.icon_state
 	if(data.desc)
 		desc = data.desc
-	var/new_x = data.mapx ? data.mapx : rand(2,world.maxx-2)
-	var/new_y = data.mapy ? data.mapy : rand(2,world.maxy-2)
+	var/new_x = data.mapx ? data.mapx : rand(OVERMAP_EDGE, world.maxx - OVERMAP_EDGE)
+	var/new_y = data.mapy ? data.mapy : rand(OVERMAP_EDGE, world.maxy - OVERMAP_EDGE)
 	loc = locate(new_x, new_y, OVERMAP_ZLEVEL)
 
 	if(data.landing_area)
@@ -93,13 +93,3 @@ var/global/list/map_sectors = list()
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	anchored = 1
-
-/obj/effect/map/ship
-	name = "generic ship"
-	desc = "Space faring vessel."
-	icon_state = "sheet-sandstone"
-	density = 1
-	var/obj/effect/map/current_sector
-
-/obj/effect/map/ship/relaymove(mob/user, direction)
-	step(src,direction)

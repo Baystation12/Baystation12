@@ -260,22 +260,21 @@
 "eZ" = (/obj/machinery/atmospherics/pipe/tank/air,/turf/simulated/floor{dir = 9; icon_state = "warning"},/area/tcommsat/entrance)
 "fa" = (/obj/item/weapon/cell,/turf/simulated/floor,/area/tcommsat/entrance)
 "fb" = (/obj/structure/closet/malf/suits,/turf/simulated/floor,/area/tcommsat/entrance)
-"fc" = (/obj/machinery/access_button{command = "cycle_interior"; frequency = 1381; master_tag = "telecoms_airlock"; name = "interior access button"; pixel_x = 25; pixel_y = 25; req_access_txt = "13"},/turf/space,/area/shuttle/escape_pod1/centcom)
-"fd" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_outer"; locked = 1; name = "External Access"; req_access = null; req_access_txt = "10;13"},/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"fe" = (/obj/machinery/camera/xray{c_tag = "External Airlock"; network = list("Tcomsat")},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 4; frequency = 1381; id_tag = "telecoms_pump"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "telecoms_pump"; tag_exterior_door = "telecoms_outer"; frequency = 1381; id_tag = "telecoms_airlock"; tag_interior_door = "telecoms_inner"; pixel_x = 0; pixel_y = -25; req_access_txt = "13"; tag_chamber_sensor = "telecoms_sensor"},/obj/machinery/airlock_sensor{frequency = 1381; id_tag = "telecoms_sensor"; pixel_x = 12; pixel_y = -25},/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"ff" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_inner"; locked = 1; name = "External Access"; req_access = null; req_access_txt = "13"},/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"fg" = (/obj/machinery/access_button{command = "cycle_interior"; frequency = 1381; master_tag = "telecoms_airlock"; name = "interior access button"; pixel_x = -25; pixel_y = -25; req_access_txt = "13"},/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/tcommsat/entrance)
-"fh" = (/obj/machinery/bluespace_beacon,/turf/simulated/floor,/area/tcommsat/entrance)
-"fi" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_x = 29; pixel_y = 0},/turf/simulated/floor,/area/tcommsat/entrance)
-"fj" = (/obj/structure/closet/crate,/obj/item/clothing/glasses/night,/turf/simulated/floor{dir = 10; icon_state = "warning"},/area/tcommsat/entrance)
-"fk" = (/turf/simulated/floor{icon_state = "warningcorner"; dir = 1},/area/tcommsat/entrance)
-"fl" = (/obj/structure/closet/crate,/obj/item/device/aicard,/obj/item/device/multitool,/obj/machinery/camera{c_tag = "Entrance South"; dir = 1; network = list("Tcomsat")},/turf/simulated/floor{dir = 10; icon_state = "warning"},/area/tcommsat/entrance)
-"fm" = (/turf/simulated/floor{dir = 2; icon_state = "warning"},/area/tcommsat/entrance)
-"fn" = (/obj/machinery/light{dir = 4},/obj/structure/closet/emcloset,/turf/simulated/floor{dir = 6; icon_state = "warning"},/area/tcommsat/entrance)
-"fo" = (/obj/machinery/computer/teleporter,/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"fp" = (/obj/machinery/teleport/station,/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"fq" = (/obj/machinery/teleport/hub,/turf/simulated/floor/plating,/area/tcommsat/entrance)
-"fr" = (/obj/effect/mapinfo/sector{icon = 'icons/obj/stock_parts.dmi'; icon_state = "treatment_disk"; landing_area = /area/shuttle/escape_pod1/centcom; mapx = 7; mapy = 3; name = "Communications Relay"},/turf/space,/area)
+"fc" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_outer"; locked = 1; name = "External Access"; req_access = null; req_access_txt = "10;13"},/obj/machinery/access_button{command = "cycle_interior"; frequency = 1381; master_tag = "telecoms_airlock"; name = "interior access button"; pixel_x = -7; pixel_y = 25; req_access_txt = "13"},/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"fd" = (/obj/machinery/camera/xray{c_tag = "External Airlock"; network = list("Tcomsat")},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 4; frequency = 1381; id_tag = "telecoms_pump"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "telecoms_pump"; tag_exterior_door = "telecoms_outer"; frequency = 1381; id_tag = "telecoms_airlock"; tag_interior_door = "telecoms_inner"; pixel_x = 0; pixel_y = -25; req_access_txt = "13"; tag_chamber_sensor = "telecoms_sensor"},/obj/machinery/airlock_sensor{frequency = 1381; id_tag = "telecoms_sensor"; pixel_x = 12; pixel_y = -25},/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"fe" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_inner"; locked = 1; name = "External Access"; req_access = null; req_access_txt = "13"},/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"ff" = (/obj/machinery/access_button{command = "cycle_interior"; frequency = 1381; master_tag = "telecoms_airlock"; name = "interior access button"; pixel_x = -25; pixel_y = -25; req_access_txt = "13"},/obj/machinery/atmospherics/pipe/simple/visible{tag = "icon-intact (NORTHWEST)"; icon_state = "intact"; dir = 9},/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/tcommsat/entrance)
+"fg" = (/obj/machinery/bluespace_beacon,/turf/simulated/floor,/area/tcommsat/entrance)
+"fh" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_x = 29; pixel_y = 0},/turf/simulated/floor,/area/tcommsat/entrance)
+"fi" = (/obj/structure/closet/crate,/obj/item/clothing/glasses/night,/turf/simulated/floor{dir = 10; icon_state = "warning"},/area/tcommsat/entrance)
+"fj" = (/turf/simulated/floor{icon_state = "warningcorner"; dir = 1},/area/tcommsat/entrance)
+"fk" = (/obj/structure/closet/crate,/obj/item/device/aicard,/obj/item/device/multitool,/obj/machinery/camera{c_tag = "Entrance South"; dir = 1; network = list("Tcomsat")},/turf/simulated/floor{dir = 10; icon_state = "warning"},/area/tcommsat/entrance)
+"fl" = (/turf/simulated/floor{dir = 2; icon_state = "warning"},/area/tcommsat/entrance)
+"fm" = (/obj/machinery/light{dir = 4},/obj/structure/closet/emcloset,/turf/simulated/floor{dir = 6; icon_state = "warning"},/area/tcommsat/entrance)
+"fn" = (/obj/machinery/computer/teleporter,/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"fo" = (/obj/machinery/teleport/station,/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"fp" = (/obj/machinery/teleport/hub,/turf/simulated/floor/plating,/area/tcommsat/entrance)
+"fq" = (/obj/effect/mapinfo/sector{icon = 'icons/obj/stock_parts.dmi'; icon_state = "treatment_disk"; landing_area = /area/shuttle/escape_pod1/centcom; mapx = 7; mapy = 3; name = "Communications Relay"},/turf/space,/area)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -315,10 +314,10 @@ aaaaaaaaaaaaaaaaababadadadadadadadadadadadeoeNeOePeoadadadadadadadadadadadababaa
 aaaaaaaaaaaaaaaaaaabababababababababababeoeoeQeReSeoeoabababababababababababaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTababeoeoeUeVeWeHeXeoeoababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTeoeoeYeZfaezezezezfbeoabaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTfcfdfefffgezezfhezezfieoabaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTeMeoeofjfkezezezezfbeoababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTababeoeoflfmfmfmfneoeoababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTabababeoeofofpfqeoeoabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTfcfdfeffezezfgezezfheoabaSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTeMeoeofifjezezezezfbeoababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTababeoeofkflflflfmeoeoababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaeTeTeTeTabababeoeofnfofpeoeoabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababeoeoeoeoeoababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaabababacabababaaababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -326,6 +325,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-fraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+fqaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

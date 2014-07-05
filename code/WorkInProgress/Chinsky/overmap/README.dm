@@ -58,10 +58,14 @@ Currently no modifications were made to interface to display availability of lan
 Guide to how make new sector
 *************************************************************
 0.Map
-Remember to put a helm console on ship maps.
-Remember to define shuttle areas - both for sectors and ships.
+Remember to define shuttle areas if you want sector be accessible via shuttles.
 Currently there are no other ways to reach sectors from ships.
 In examples, 4x6 shuttle area is used. In case of shuttle area being too big, it will apear in bottom left corner of it.
+
+Remember to put a helm console and engine control console on ship maps.
+Ships need engines to move. Currently there are only thermal engines.
+Thermal engines are just a unary atmopheric machine, like a vent. They need high-pressure gas input to produce more thrust.
+
 
 1.Metaobject
 All vars needed for it to work could be set directly in map editor, so in most cases you won't have to define new in code.
@@ -76,24 +80,31 @@ Remember to place one on the actual shuttle too, or it won't be able to return f
 Remember to set landing_type var to ship-side shuttle area type.
 shuttle_tag can be set to custom name (it shows up in console interface)
 
-4.Tick map in and compile.
+5.Engines
+Actual engines could be any type of machinery, as long as it creates a ship_engine datum for itself.
+
+6.Tick map in and compile.
 Sector should appear on overmap (in random place if you didn't set mapx,mapy)
 
 
 TODO:
-sector-to-ship shuttles.
-ship-ship interactions
-helm console interface:
-	current coordinates
-	list of known locations
-	autopilot
-	manual control
 more mechanics to moving ship:
-	overmap movement delay
-	engine objects
-	'moving stars' effect
+	actually working engine objects
+		unary atmospheric machinery
+		give more thrust the more pressure gas has
+		ships have mass var, which is used to caalculate how much acceleration those engines give
 better space travel / stragglers handling
 shuttle console:
-	showing if shuttle has nowhere to be sent to
+	checking occupied pad or not with docking controllers
 	?landing pad size detection
+non-zlevel overmap objects
+	field generator
+		meteor fields
+			speed-based chance for a rock in the ship
+		debris fields
+			speed-based chance of
+				debirs in the ship
+				a drone
+				EMP
+		nebulaes
 */
