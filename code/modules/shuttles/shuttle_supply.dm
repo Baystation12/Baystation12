@@ -31,6 +31,7 @@
 		
 		if (at_station() && forbidden_atoms_check())
 			//cancel the launch because of forbidden atoms. announce over supply channel?
+			moving_status = SHUTTLE_IDLE
 			return
 		
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
