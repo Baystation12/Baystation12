@@ -41,21 +41,27 @@
 		germ_level = 0
 		return
 
+	//** Handle antibiotics and curing infections
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
-	if (germ_level > 0 && antibiotics > 5)
-		if (prob(4*antibiotics)) germ_level--
-		if (antibiotics > 30) germ_level--
+	if (antibiotics > 5)
+		if (germ_level < INFECTION_LEVEL_ONE)
+			germ_level = 0	//cure instantly
+		else
+			germ_level -= 2
 
+	//** Handle the effects of infections
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
-		if(prob(round(germ_level/6)))	//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+		if(antibiotics < 5 && prob(round(germ_level/6)))
 			germ_level++
 		if(prob(1))
 			take_damage(1,silent=0)
 
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		var/datum/organ/external/parent = owner.get_organ(parent_organ)
-		if (parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+		//spread germs
+		if (antibiotics < 10 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
 			parent.germ_level++
 		
 		if (prob(5))	//about once every 20 seconds
