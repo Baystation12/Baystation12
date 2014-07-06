@@ -76,7 +76,7 @@
 			else
 				user << "<span class='notice'>You need a tighter grip.</span>"
 
-	if(cistern)
+	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > 3)
 			user << "<span class='notice'>\The [I] does not fit.</span>"
 			return

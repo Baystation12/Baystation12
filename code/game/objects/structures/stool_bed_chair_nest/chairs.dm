@@ -39,7 +39,7 @@
 		rotate()
 	return
 
-/obj/structure/stool/bed/chair/proc/handle_rotation()	//making this into a seperate proc so office chairs can call it on Move()
+/obj/structure/stool/bed/chair/handle_rotation()	//making this into a seperate proc so office chairs can call it on Move()
 	if(src.dir == NORTH)
 		src.layer = FLY_LAYER
 	else
@@ -107,6 +107,7 @@
 
 /obj/structure/stool/bed/chair/office
 	anchored = 0
+	movable = 1
 
 /obj/structure/stool/bed/chair/comfy/black
 	icon_state = "comfychair_black"
@@ -148,7 +149,7 @@
 			victim.apply_effect(6, WEAKEN, 0)
 			victim.apply_effect(6, STUTTER, 0)
 			victim.take_organ_damage(10)
-		occupant.visible_message("<span class='danger'>[occupant] clashed into \the [A]!</span>")
+		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/stool/bed/chair/office/light
 	icon_state = "officechair_white"

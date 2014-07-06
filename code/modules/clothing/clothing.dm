@@ -158,8 +158,6 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
-
 
 //Mask
 /obj/item/clothing/mask
@@ -196,7 +194,6 @@ BLIND     // can't see anything
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = 3
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
@@ -214,7 +211,6 @@ BLIND     // can't see anything
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox")
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/clothing/suit/space
 	name = "Space suit"

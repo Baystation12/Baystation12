@@ -139,12 +139,18 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		return SHUTTLE_PREPTIME * 3		//15 minutes
 
 	return SHUTTLE_PREPTIME
-	
+
 
 /*
 	These procs are not really used by the controller itself, but are for other parts of the
 	game whose logic depends on the emergency shuttle.
 */
+
+//returns 1 if the shuttle is docked at the station and waiting to leave
+/datum/emergency_shuttle_controller/proc/waiting_to_leave()
+	if (shuttle.location)
+		return 0	//not at station
+	return (wait_for_launch || shuttle.moving_status != SHUTTLE_INTRANSIT)
 
 //so we don't have emergency_shuttle.shuttle.location everywhere
 /datum/emergency_shuttle_controller/proc/location()
@@ -155,9 +161,9 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //returns the time left until the shuttle arrives at it's destination, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_arrival_time()
 	var/eta
-	if (!isnull(shuttle.last_move_time))
-		//if we have a last_move_time than we are in transition and can get an accurate ETA
-		eta = shuttle.last_move_time + shuttle.move_time*10
+	if (shuttle.has_arrive_time())
+		//we are in transition and can get an accurate ETA
+		eta = shuttle.arrive_time
 	else
 		//otherwise we need to estimate the arrival time using the scheduled launch time
 		eta = launch_time + shuttle.move_time*10 + shuttle.warmup_time*10
@@ -165,7 +171,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns the time left until the shuttle launches, in seconds
 /datum/emergency_shuttle_controller/proc/estimate_launch_time()
-	return (launch_time + shuttle.warmup_time*10 - world.time)/10
+	return (launch_time - world.time)/10
 
 /datum/emergency_shuttle_controller/proc/has_eta()
 	return (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
@@ -191,16 +197,21 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 /datum/emergency_shuttle_controller/proc/going_to_centcom()
 	return (shuttle.direction && shuttle.moving_status != SHUTTLE_IDLE)
 
-//returns 1 if the shuttle is docked at the station and waiting to leave
-/datum/emergency_shuttle_controller/proc/waiting_to_leave()
-	if (shuttle.location)
-		return 0	//not at station
-	if (!wait_for_launch)
-		return 0	//not going anywhere
-	if (shuttle.moving_status == SHUTTLE_INTRANSIT)
-		return 0
-	return 1
 
+/datum/emergency_shuttle_controller/proc/get_status_panel_eta()
+	if (online())
+		if (shuttle.has_arrive_time())
+			var/timeleft = emergency_shuttle.estimate_arrival_time()
+			return "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
+		
+		if (waiting_to_leave())
+			if (shuttle.moving_status == SHUTTLE_WARMUP)
+				return "Departing..."
+			
+			var/timeleft = emergency_shuttle.estimate_launch_time()
+			return "ETD-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
+	
+	return ""
 /*
 	Some slapped-together star effects for maximum spess immershuns. Basically consists of a
 	spawner, an ender, and bgstar. Spawners create bgstars, bgstars shoot off into a direction

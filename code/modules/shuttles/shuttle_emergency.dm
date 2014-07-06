@@ -1,8 +1,12 @@
 
 /datum/shuttle/ferry/emergency
-	var/last_move_time = null		//the time at which the shuttle last moved. Used for ETAs
+	//pass
 
 /datum/shuttle/ferry/emergency/arrived()
+	if (istype(in_use, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = in_use
+		C.reset_authorization()
+	
 	emergency_shuttle.shuttle_arrived()
 
 /datum/shuttle/ferry/emergency/long_jump(var/area/departing, var/area/destination, var/area/interim, var/travel_time, var/direction)
@@ -18,11 +22,6 @@
 	..()
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
-	if (destination == area_transition)
-		last_move_time = world.time
-	else
-		last_move_time = null
-
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
 
@@ -33,14 +32,34 @@
 
 	..(origin, destination)
 
+/datum/shuttle/ferry/emergency/can_launch(var/user)
+	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = user
+		if (!C.has_authorization())
+			return 0
+	return ..()
+
+/datum/shuttle/ferry/emergency/can_force(var/user)
+	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = user
+		
+		//initiating or cancelling a launch ALWAYS requires authorization, but if we are already set to launch anyways than forcing does not.
+		//this is so that people can force launch if the docking controller cannot safely undock without needing X heads to swipe.
+		if (process_state != WAIT_LAUNCH && !C.has_authorization())
+			return 0
+	return ..()
+
+/datum/shuttle/ferry/emergency/can_cancel(var/user)
+	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
+		var/obj/machinery/computer/shuttle_control/emergency/C = user
+		if (!C.has_authorization())
+			return 0
+	return ..()
+
 /datum/shuttle/ferry/emergency/launch(var/user)
-	if (!can_launch()) return
+	if (!can_launch(user)) return
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
-		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
-			return	//need authorization to launch early
-
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</B>"
@@ -48,13 +67,9 @@
 	..(user)
 
 /datum/shuttle/ferry/emergency/force_launch(var/user)
-	if (!can_force()) return
+	if (!can_force(user)) return
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
-		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
-			return	//need authorization to launch early
-
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</B>"
@@ -62,18 +77,16 @@
 	..(user)
 
 /datum/shuttle/ferry/emergency/cancel_launch(var/user)
-	if (!can_cancel()) return
+	if (!can_cancel(user)) return
 
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))	//if we were given a command by an emergency shuttle console
-		var/obj/machinery/computer/shuttle_control/emergency/C = user
-		if (emergency_shuttle.waiting_to_leave() && !C.has_authorization())
-			return
-
 		if (emergency_shuttle.autopilot)
 			emergency_shuttle.autopilot = 0
 			world << "\blue <B>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</B>"
 
 	..(user)
+
+
 
 /obj/machinery/computer/shuttle_control/emergency
 	shuttle_tag = "Escape"
@@ -83,6 +96,10 @@
 
 /obj/machinery/computer/shuttle_control/emergency/proc/has_authorization()
 	return (authorized.len >= req_authorizations || emagged)
+
+/obj/machinery/computer/shuttle_control/emergency/proc/reset_authorization()
+	//no need to reset emagged status. If they really want to go back to the station they can.
+	authorized = initial(authorized)
 
 //returns 1 if the ID was accepted and a new authorization was added, 0 otherwise
 /obj/machinery/computer/shuttle_control/emergency/proc/read_authorization(var/ident)
@@ -186,9 +203,9 @@
 		"has_docking" = shuttle.docking_controller? 1 : 0,
 		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
 		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
-		"can_launch" = shuttle.can_launch() && (!emergency_shuttle.waiting_to_leave() || has_auth),
-		"can_cancel" = shuttle.can_cancel() && (!emergency_shuttle.waiting_to_leave() || has_auth),
-		"can_force" = shuttle.can_force() && (!emergency_shuttle.waiting_to_leave() || has_auth),
+		"can_launch" = shuttle.can_launch(src),
+		"can_cancel" = shuttle.can_cancel(src),
+		"can_force" = shuttle.can_force(src),
 		"auth_list" = auth_list,
 		"has_auth" = has_auth,
 		"user" = debug? user : null,
@@ -197,7 +214,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "escape_shuttle_control_console.tmpl", "Shuttle Control", 470, 380)
+		ui = new(user, src, ui_key, "escape_shuttle_control_console.tmpl", "Shuttle Control", 470, 420)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)

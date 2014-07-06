@@ -16,6 +16,23 @@
 	var/temp = null
 	var/printing = null
 
+/obj/machinery/computer/med_data/verb/eject_id()
+	set category = "Object"
+	set name = "Eject ID Card"
+	set src in oview(1)
+
+	if(!usr || usr.stat || usr.lying)	return
+
+	if(scan)
+		usr << "You remove \the [scan] from \the [src]."
+		scan.loc = get_turf(src)
+		if(!usr.get_active_hand())
+			usr.put_in_hands(scan)
+		scan = null
+	else
+		usr << "There is nothing to remove from the console."
+	return
+
 /obj/machinery/computer/med_data/attackby(obj/item/O as obj, user as mob)
 	if(istype(O, /obj/item/weapon/card/id) && !scan)
 		usr.drop_item()
