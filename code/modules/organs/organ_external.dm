@@ -357,7 +357,7 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 */
 /datum/organ/external/proc/update_germs()
 
-	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED) || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
 		germ_level = 0
 		return
 

@@ -37,7 +37,7 @@
 	if (!germ_level)
 		return
 
-	if (robotic >= 2)	//TODO make robotic internal and external organs separate types of organ instead of a flag
+	if (robotic >= 2 || (owner.species && owner.species.flags & IS_PLANT))	//TODO make robotic internal and external organs separate types of organ instead of a flag
 		germ_level = 0
 		return
 
