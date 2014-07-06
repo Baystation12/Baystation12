@@ -352,8 +352,7 @@ INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to
 INFECTION_LEVEL_THREE	above this germ level the player will take additional toxin damage per second, and will die in minutes without
 						antitox. also, above this germ level you will need to overdose on spaceacillin to reduce the germ_level.
 
-Note that amputating the affected organ does in fact remove the infection from the
-player's body, though, antitox and spaceacillin are easy enough to get I doubt it will ever be needed.
+Note that amputating the affected organ does in fact remove the infection from the player's body.
 */
 /datum/organ/external/proc/update_germs()
 
