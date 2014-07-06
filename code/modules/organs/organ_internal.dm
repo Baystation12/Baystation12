@@ -41,31 +41,28 @@
 		germ_level = 0
 		return
 
-	//** Handle antibiotics and curing infections
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
+		//** Handle antibiotics and curing infections
+		handle_antibiotics()
 
-	if (antibiotics > 5)
-		if (germ_level < INFECTION_LEVEL_ONE)
-			germ_level = 0	//cure instantly
-		else
-			germ_level -= 2
-
-	//** Handle the effects of infections
-	if (germ_level >= INFECTION_LEVEL_ONE/2)
-		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
-		if(antibiotics < 5 && prob(round(germ_level/6)))
-			germ_level++
-		if(prob(1))
-			take_damage(1,silent=0)
-
-	if (germ_level >= INFECTION_LEVEL_TWO)
-		var/datum/organ/external/parent = owner.get_organ(parent_organ)
-		//spread germs
-		if (antibiotics < 10 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
-			parent.germ_level++
+		//** Handle the effects of infections
+		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		
-		if (prob(5))	//about once every 20 seconds
-			take_damage(1,silent=prob(30))
+		if (germ_level >= INFECTION_LEVEL_ONE/2)
+			//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+			if(antibiotics < 5 && prob(round(germ_level/6)))
+				germ_level++
+			if(prob(1))
+				take_damage(1,silent=0)
+
+		if (germ_level >= INFECTION_LEVEL_TWO)
+			var/datum/organ/external/parent = owner.get_organ(parent_organ)
+			//spread germs
+			if (antibiotics < get_cure_threshold() - 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+				parent.germ_level++
+			
+			if (prob(5))	//about once every 20 seconds
+				take_damage(1,silent=prob(30))
 
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)

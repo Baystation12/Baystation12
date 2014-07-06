@@ -379,21 +379,9 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 		//** Handle the effects of infections
 		handle_germ_effects()
 
-/datum/organ/external/proc/handle_antibiotics()
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
-	
-	if (antibiotics < 5) return
-	
-	if (germ_level < INFECTION_LEVEL_TWO)
-		//If the infection has not reached level two then spaceacillin cures the infection instantly
-		germ_level = 0
-	else
-		//If it's a serious infection then it will take a bit of time. At INFECTION_LEVEL_THREE it should take around four minutes.
-		germ_level -= 2
-		
-
 /datum/organ/external/proc/handle_germ_effects()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/cure_threshold = get_cure_threshold()
 	
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		//having an infection raises your body temperature
@@ -403,13 +391,13 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 			owner.bodytemperature++
 
 		if(prob(round(germ_level/10)))
-			if (antibiotics < 5)
+			if (antibiotics < cure_threshold)
 				germ_level++
 			
 			if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
 				owner.adjustToxLoss(1)
 
-	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < 10)	//having 10 units in your system will prevent infections from spreading
+	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold - 5)	//should start at around 8 units of spaceacillin
 		//spread the infection
 		for (var/datum/organ/internal/I in internal_organs)
 			if (I.germ_level < germ_level)
