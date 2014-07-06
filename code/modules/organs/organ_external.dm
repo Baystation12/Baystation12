@@ -362,21 +362,24 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Syncing germ levels with external wounds
-		for(var/datum/wound/W in wounds)
-			//Open wounds can become infected
-			if (owner.germ_level > W.germ_level && W.infection_check())
-				W.germ_level++
-
-			//Infected wounds raise the organ's germ level
-			W.germ_level = max(W.germ_level, germ_level)	//Wounds get all the germs
-			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
-				germ_level++
+		handle_germ_sync()
 		
 		//** Handle antibiotics and curing infections
 		handle_antibiotics()
 
 		//** Handle the effects of infections
 		handle_germ_effects()
+
+/datum/organ/external/proc/handle_germ_sync()
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	for(var/datum/wound/W in wounds)
+		//Open wounds can become infected
+		if (owner.germ_level > W.germ_level && W.infection_check())
+			W.germ_level++
+
+		//Infected wounds raise the organ's germ level
+		if (W.germ_level > germ_level && antibiotics < 5)	//Badly infected wounds raise internal germ levels
+			germ_level++
 
 /datum/organ/external/proc/handle_germ_effects()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
