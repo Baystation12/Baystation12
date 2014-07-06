@@ -413,7 +413,7 @@
 		var/supplyData[0]
 		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
-			supplyData["shuttle_moving"] = shuttle.has_eta()
+			supplyData["shuttle_moving"] = shuttle.has_arrive_time()
 			supplyData["shuttle_eta"] = shuttle.eta_minutes()
 			supplyData["shuttle_loc"] = shuttle.at_station() ? "Station" : "Dock"
 		var/supplyOrderCount = 0

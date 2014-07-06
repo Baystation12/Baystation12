@@ -9,6 +9,8 @@
 	
 	var/docking_controller_tag	//tag of the controller used to coordinate docking
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself. (micro-controller, not game controller)
+	
+	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 
 /datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -34,12 +36,14 @@
 		
 		move(departing, interim, direction)
 
-		sleep(travel_time*10)
+		moving_status = SHUTTLE_INTRANSIT
+		arrive_time = world.time + travel_time*10
+		while (world.time < arrive_time)
+			sleep(5)
 
 		move(interim, destination, direction)
 
 		moving_status = SHUTTLE_IDLE
-
 
 /datum/shuttle/proc/dock()
 	if (!docking_controller)
@@ -78,8 +82,6 @@
 	
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
-
-	moving_status = SHUTTLE_INTRANSIT
 	
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
@@ -118,3 +120,7 @@
 				M.Weaken(3)
 
 	return
+
+//returns 1 if the shuttle has a valid arrive time
+/datum/shuttle/proc/has_arrive_time()
+	return (moving_status == SHUTTLE_INTRANSIT)

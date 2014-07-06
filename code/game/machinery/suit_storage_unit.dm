@@ -827,9 +827,11 @@
 		helmet.loc = get_turf(src)
 		helmet = null
 	else if(href_list["select_department"])
-		target_department = input("Please select the target department paintjob.","Suit cycler",null) as null|anything in departments
+		var/choice = input("Please select the target department paintjob.","Suit cycler",null) as null|anything in departments
+		if(choice) target_department = choice
 	else if(href_list["select_species"])
-		target_species = input("Please select the target species configuration.","Suit cycler",null) as null|anything in species
+		var/choice = input("Please select the target species configuration.","Suit cycler",null) as null|anything in species
+		if(choice) target_species = choice
 	else if(href_list["select_rad_level"])
 		var/choices = list(1,2,3)
 		if(emagged)

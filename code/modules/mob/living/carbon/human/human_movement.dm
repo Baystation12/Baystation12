@@ -35,7 +35,7 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 
-	if(pulledby && istype(pulledby, /obj/structure/stool/bed/chair/wheelchair))
+	if(buckled && istype(buckled, /obj/structure/stool/bed/chair/wheelchair))
 		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
 			var/datum/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))

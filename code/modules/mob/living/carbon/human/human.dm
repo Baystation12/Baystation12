@@ -43,7 +43,7 @@
 
 	if(!species)
 		if(new_species)
-			set_species(new_species)
+			set_species(new_species,null,1)
 		else
 			set_species()
 
@@ -112,7 +112,7 @@
 			return
 
 		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
-		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && canmove) // mutual brohugs all around!
+		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
 			var/turf/oldloc = loc
 			loc = tmob.loc
 			tmob.loc = oldloc
@@ -171,10 +171,9 @@
 		if(ticker.mode:malf_mode_declared)
 			stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
 	if(emergency_shuttle)
-		if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
-			var/timeleft = emergency_shuttle.estimate_arrival_time()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 	if (client.statpanel == "Status")
 		if (internal)
@@ -1227,7 +1226,7 @@
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs, var/default_colour)
 
 	if(!dna)
 		if(!new_species)
@@ -1252,11 +1251,22 @@
 	if(species.language)
 		add_language(species.language)
 
+	if(species.base_color && default_colour)
+		//Apply colour.
+		r_skin = hex2num(copytext(species.base_color,2,4))
+		g_skin = hex2num(copytext(species.base_color,4,6))
+		b_skin = hex2num(copytext(species.base_color,6,8))
+	else
+		r_skin = 0
+		g_skin = 0
+		b_skin = 0
+
+	species.handle_post_spawn(src)
+
 	spawn(0)
 		update_icons()
 
 	if(species)
-		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
@@ -1386,6 +1396,11 @@
 		return
 
 	T.Weaken(5)
+
+	//Only official raider vox get the grab and no self-prone."
+	if(src.mind && src.mind.special_role != "Vox Raider")
+		src.Weaken(5)
+		return
 
 	var/use_hand = "left"
 	if(l_hand)

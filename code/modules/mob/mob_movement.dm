@@ -199,8 +199,7 @@
 
 
 	if(!mob.canmove)
-		if (mob.buckled && (istype(mob.buckled, /obj/structure/stool/bed/chair/wheelchair) || istype(mob.buckled, /obj/vehicle))) // Exception for wheelchairs
-		else	return
+		return
 
 	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
 	//	if(!mob.Process_Spacemove(0))	return 0
@@ -264,7 +263,7 @@
 					var/mob/living/carbon/human/driver = mob.buckled
 					var/datum/organ/external/l_hand = driver.get_organ("l_hand")
 					var/datum/organ/external/r_hand = driver.get_organ("r_hand")
-					if((!l_hand || l_hand.status & ORGAN_DESTROYED) && (!r_hand || r_hand.status & ORGAN_DESTROYED))
+					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 						return // No hands to drive your chair? Tough luck!
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)

@@ -239,12 +239,23 @@
 	else if(href_list["edit_shuttle_time"])
 		if(!check_rights(R_SERVER))	return
 
-		var/new_time_left = input("Enter new shuttle launch duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.estimate_launch_time() ) as num
+		if (emergency_shuttle.wait_for_launch)
+			var/new_time_left = input("Enter new shuttle launch countdown (seconds):","Edit Shuttle Launch Time", emergency_shuttle.estimate_launch_time() ) as num
 
-		emergency_shuttle.launch_time = world.time + new_time_left*10
+			emergency_shuttle.launch_time = world.time + new_time_left*10
 
-		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [new_time_left]")
-		message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [new_time_left*10]", 1)
+			log_admin("[key_name(usr)] edited the Emergency Shuttle's launch time to [new_time_left]")
+			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's launch time to [new_time_left*10]", 1)
+		else if (emergency_shuttle.shuttle.has_arrive_time())
+			
+			var/new_time_left = input("Enter new shuttle arrival time (seconds):","Edit Shuttle Arrival Time", emergency_shuttle.estimate_arrival_time() ) as num
+			emergency_shuttle.shuttle.arrive_time = world.time + new_time_left*10
+
+			log_admin("[key_name(usr)] edited the Emergency Shuttle's arrival time to [new_time_left]")
+			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's arrival time to [new_time_left*10]", 1)
+		else
+			alert("The shuttle is neither counting down to launch nor is it in transit. Please try again when it is.")
+		
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])

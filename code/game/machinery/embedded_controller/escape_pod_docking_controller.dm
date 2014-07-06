@@ -1,6 +1,6 @@
 //This controller goes on the escape pod itself
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod
-	var/datum/shuttle/ferry/pod
+	var/datum/shuttle/ferry/escape_pod/pod
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
@@ -11,36 +11,28 @@
 		"door_state" = 	docking_program.memory["door_status"]["state"],
 		"door_lock" = 	docking_program.memory["door_status"]["lock"],
 		"can_force" = pod.can_force(),
+		"is_armed" = pod.arming_controller.armed,
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "simple_docking_console_pod.tmpl", name, 470, 290)
+		ui = new(user, src, ui_key, "escape_pod_console.tmpl", name, 470, 290)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod/Topic(href, href_list)
-	if(..())
-		return
+	if(..())	//I hate this "return 1 to indicate they are not allowed to use the controller" crap, but not sure how else to do it without being able to call machinery/Topic() directly.
+		return 1
 	
-	usr.set_machine(src)
-	src.add_fingerprint(usr)
-	
-	var/clean = 0
-	switch(href_list["command"])	//anti-HTML-hacking checks
-		if("force_door")
-			clean = 1
-		if("toggle_override")
-			clean = 1
-		if("force_launch")
-			pod.force_launch(src)
-	
-	if(clean)
-		program.receive_user_command(href_list["command"])
+	if("manual_arm")
+		pod.arming_controller.arm()
+	if("force_launch")
+		pod.force_launch(src)
 
-	return 1
+	return 0
+
 
 
 //This controller is for the escape pod berth (station side)
@@ -69,7 +61,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "escape_pod_console.tmpl", name, 470, 290)
+		ui = new(user, src, ui_key, "escape_pod_berth_console.tmpl", name, 470, 290)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -78,11 +70,13 @@
 	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
 		user << "\blue You emag the [src], arming the escape pod!"
 		emagged = 1
-		
 		if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
 			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program
-			P.arm()
+			if (!P.armed)
+				P.arm()
 		return
+	
+	..()
 
 
 

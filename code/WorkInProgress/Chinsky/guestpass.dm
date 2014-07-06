@@ -49,7 +49,7 @@
 	var/list/accesses = list()
 	var/giv_name = "NOT SPECIFIED"
 	var/reason = "NOT SPECIFIED"
-	var/duration = 0
+	var/duration = 5
 
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
@@ -117,18 +117,20 @@
 	if (href_list["choice"])
 		switch(href_list["choice"])
 			if ("giv_name")
-				var/nam = input("Person pass is issued to", "Name", name)
+				var/nam = strip_html_simple(input("Person pass is issued to", "Name", giv_name) as text|null)
 				if (nam)
-					giv_name = strip_html_simple(nam)
+					giv_name = nam
 			if ("reason")
-				var/reas = input("Reason why pass is issued", "Reason", reason)
-				reason = strip_html_simple(reas)
+				var/reas = strip_html_simple(input("Reason why pass is issued", "Reason", reason) as text|null)
+				if(reas)
+					reason = reas
 			if ("duration")
-				var/dur = input("Duration (in minutes) during which pass is valid.", "Duration") as num
-				if (dur > 0 && dur < 30)
-					duration = dur
-				else
-					usr << "<span class='warning'>Invalid duration.</span>"
+				var/dur = input("Duration (in minutes) during which pass is valid (up to 30 minutes).", "Duration") as num|null
+				if (dur)
+					if (dur > 0 && dur <= 30)
+						duration = dur
+					else
+						usr << "<span class='warning'>Invalid duration.</span>"
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
@@ -147,6 +149,7 @@
 					else
 						giver.loc = src.loc
 						giver = null
+					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card/id))

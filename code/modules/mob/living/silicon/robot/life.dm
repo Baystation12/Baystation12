@@ -132,10 +132,6 @@
 	else
 		src.blinded = 1
 
-	if(!is_component_functioning("actuator"))
-		src.Paralyse(3)
-
-
 	return 1
 
 /mob/living/silicon/robot/proc/handle_regular_hud_updates()
@@ -321,6 +317,6 @@
 			weaponlock_time = 120
 
 /mob/living/silicon/robot/update_canmove()
-	if(paralysis || stunned || weakened || buckled || lockcharge) canmove = 0
+	if(paralysis || stunned || weakened || buckled || lockcharge || !is_component_functioning("actuator")) canmove = 0
 	else canmove = 1
 	return canmove

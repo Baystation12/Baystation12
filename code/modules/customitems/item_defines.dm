@@ -870,9 +870,9 @@
 	name = "RN Uniform"
 	desc = "A nurse's uniform that is dark blue and gold. It looks like it's been tailored for a short person."
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "sasha_s"
-	item_state = "sasha_s"
-	item_color = "sasha_s"
+	icon_state = "sasha"
+	item_state = "sasha"
+	item_color = "sasha"
 
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
