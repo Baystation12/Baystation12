@@ -1,59 +1,59 @@
 <div class="item">
 	<div class="itemContent" style="padding: 5px">
-		{{:~link(power ? 'On' : 'Off', null, {'command' : 'power'}, null, power ? 'selected' : 'redBackground')}}
+		{{:helper.link(power ? 'On' : 'Off', null, {'command' : 'power'}, null, power ? 'selected' : 'redBackground')}}
 	</div>
 	<div class="itemContent" style="padding: 5px">
-		{{:~link('Configure', null, {'command' : 'configure'}, null, config ? 'selected' : null)}}
+		{{:helper.link('Configure', null, {'command' : 'configure'}, null, config ? 'selected' : null)}}
 	</div>
 	
-	{{if config}}
+	{{if data.config}}
 	
 	<div style="width: 315px; text-align: center">
 		<div style="float: left">
 			<div class="white" style="height: 26">Port</div>
-			{{for ports}}
-				<div class="average" style="height: 26">{{:dir}} Port</div>
+			{{for data.ports}}
+				<div class="average" style="height: 26">{{:data.dir}} Port</div>
 			{{/for}}
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Input</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-					{{:~link(' ', null, input ? {'command' : 'switch_mode', 'mode' : 'none', 'dir' : dir} : {'command' : 'switch_mode', 'mode' : 'in', 'dir' : dir}, output ? 'disabled' : null, input ? 'selected' : null)}}
+					{{:helper.link(' ', null, input ? {'command' : 'switch_mode', 'mode' : 'none', 'dir' : dir} : {'command' : 'switch_mode', 'mode' : 'in', 'dir' : dir}, output ? 'disabled' : null, input ? 'selected' : null)}}
 				</div>
 			{{/for}}
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Output</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-					{{:~link(' ', null, output ? null : {'command' : 'switch_mode', 'mode' : 'out', 'dir' : dir}, null, output ? 'selected' : null)}}
+					{{:helper.link(' ', null, output ? null : {'command' : 'switch_mode', 'mode' : 'out', 'dir' : dir}, null, output ? 'selected' : null)}}
 				</div>
 			{{/for}}
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Concentration</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-					{{:~link( input ? ~round(concentration*100)+' %' : '-', null, {'command' : 'switch_con', 'dir' : dir}, input ? null : 'disabled')}}
+					{{:helper.link( input ? ~round(concentration*100)+' %' : '-', null, {'command' : 'switch_con', 'dir' : dir}, input ? null : 'disabled')}}
 				</div>
 			{{/for}}
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Lock</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-					{{:~link(' ', con_lock ? 'locked' : 'unlocked', {'command' : 'switch_conlock', 'dir' : dir}, input ? null : 'disabled', con_lock ? 'selected' : null)}}
+					{{:helper.link(' ', con_lock ? 'locked' : 'unlocked', {'command' : 'switch_conlock', 'dir' : dir}, input ? null : 'disabled', con_lock ? 'selected' : null)}}
 				</div>
 			{{/for}}
 		</div>
 	</div>
 	
 	<div class="itemContent" style="padding: 5px">
-		Target Output Pressure: {{:~round(pressure)}} kPa
+		Target Output Pressure: {{:helper.round(pressure)}} kPa
 	</div>
 	<div class="itemContent" style="padding: 5px">
-		{{:~link('Set Target Pressure', null, {'command' : 'set_pressure'})}}
+		{{:helper.link('Set Target Pressure', null, {'command' : 'set_pressure'})}}
 	</div>
 	
 	{{else}}
@@ -61,17 +61,17 @@
 	<div style="width: 315px; text-align: center">
 		<div style="float: left">
 			<div class="white" style="height: 26">Port</div>
-			{{for ports}}
-				<div class="average" style="height: 26">{{:dir}} Port</div>
+			{{for data.ports}}
+				<div class="average" style="height: 26">{{:data.dir}} Port</div>
 			{{/for}}
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Mode</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-						{{if input}}
+						{{if data.input}}
 							Input
-						{{else output}}
+						{{else data.output}}
 							Output
 						{{else}}
 							Disabled
@@ -81,10 +81,10 @@
 		</div>
 		<div style="float: left; margin-left: 10">
 			<div class="white" style="height: 26">Concentration</div>
-			{{for ports}}
+			{{for data.ports}}
 				<div style="height: 26">
-					{{if input}}
-						{{:~round(concentration*100)}} %
+					{{if data.input}}
+						{{:helper.round(concentration*100)}} %
 					{{else}}
 						-
 					{{/if}}
@@ -94,7 +94,7 @@
 	</div>
 
 	<div class="itemContent" style="padding: 5px">
-		Target Output Pressure: {{:~round(pressure)}} kPa
+		Target Output Pressure: {{:helper.round(pressure)}} kPa
 	</div>
 	{{/if}}
 </div>
