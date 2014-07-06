@@ -735,7 +735,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /datum/organ/external/proc/has_infected_wound()
 	for(var/datum/wound/W in wounds)
-		if(W.germ_level > 150)
+		if(W.germ_level > INFECTION_LEVEL_ONE)
 			return 1
 	return 0
 
