@@ -53,7 +53,7 @@
 			if(antibiotics < 5 && prob(round(germ_level/6)))
 				germ_level++
 			if(prob(1))
-				take_damage(1,silent=0)
+				take_damage(1,silent=prob(60))
 
 		if (germ_level >= INFECTION_LEVEL_TWO)
 			var/datum/organ/external/parent = owner.get_organ(parent_organ)
@@ -61,7 +61,7 @@
 			if (antibiotics < get_cure_threshold() - 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
 				parent.germ_level++
 			
-			if (prob(5))	//about once every 20 seconds
+			if (prob(3))	//about once every 30 seconds
 				take_damage(1,silent=prob(30))
 
 

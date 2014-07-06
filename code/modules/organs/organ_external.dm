@@ -394,7 +394,7 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 			if (antibiotics < cure_threshold)
 				germ_level++
 			
-			if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
+			if (prob(3))	//adjust this to tweak how fast people take toxin damage from infections
 				owner.adjustToxLoss(1)
 
 	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold - 5)	//should start at around 8 units of spaceacillin
