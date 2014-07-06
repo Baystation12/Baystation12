@@ -17,6 +17,25 @@
 /datum/organ/proc/get_icon()
 	return icon('icons/mob/human.dmi',"blank")
 
+//Germs
+/datum/organ/proc/get_cure_threshold()
+	//before reaching level three, the amount of spaceacillin required to cure infections scales between 5 and 30 units
+	var/germ_scale = max((germ_level - INFECTION_LEVEL_ONE)/(INFECTION_LEVEL_THREE - INFECTION_LEVEL_ONE), 0)
+	return min(5 + germ_scale*25, 30)
+
+/datum/organ/proc/handle_antibiotics()
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	
+	if (antibiotics <= get_cure_threshold())
+		return
+		
+	if (germ_level < INFECTION_LEVEL_ONE)
+		germ_level = 0	//cure instantly
+	else if (germ_level < INFECTION_LEVEL_TWO)
+		germ_level -= 6	//at germ_level == 500, this should cure the infection in a minute
+	else
+		germ_level -= 2 //at germ_level == 1000, this will cure the infection in 5 minutes
+
 //Handles chem traces
 /mob/living/carbon/human/proc/handle_trace_chems()
 	//New are added for reagents to random organs.
