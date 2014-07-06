@@ -208,17 +208,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 //AI verb and proc for sending PDA messages.
-/mob/living/silicon/ai/proc/cmd_send_pdamesg()
-	if(usr.stat == 2)
-		usr << "You can't send PDA messages because you are dead!"
+/mob/living/silicon/ai/proc/cmd_send_pdamesg(mob/user as mob)
+	if(user.stat == 2)
+		user << "You can't send PDA messages because you are dead!"
 		return
 	var/list/plist = aiPDA.available_pdas()
 	if (plist)
-		var/c = input(usr, "Please select a PDA") as null|anything in sortList(plist)
+		var/c = input(user, "Please select a PDA") as null|anything in sortList(plist)
 		if (!c) // if the user hasn't selected a PDA file we can't send a message
 			return
 		var/selected = plist[c]
-		aiPDA.create_message(usr, selected)
+		aiPDA.create_message(user, selected)
 
 
 /obj/item/device/pda/ai/verb/cmd_toggle_pda_receiver()
@@ -243,9 +243,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	usr << "<span class='notice'>PDA ringer toggled [(silent ? "Off" : "On")]!</span>"
 
 
-/mob/living/silicon/ai/proc/cmd_show_message_log()
-	if(usr.stat == 2)
-		usr << "You can't do that because you are dead!"
+/mob/living/silicon/ai/proc/cmd_show_message_log(mob/user as mob)
+	if(user.stat == 2)
+		user << "You can't do that because you are dead!"
 		return
 	var/HTML = "<html><head><title>AI PDA Message Log</title></head><body>"
 	for(var/index in aiPDA.tnote)
@@ -254,7 +254,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			HTML += addtext("<i><b>&larr; From <a href='byond://?src=\ref[src];choice=Message;target=",index["target"],"'>", index["owner"],"</a>:</b></i><br>", index["message"], "<br>")
 	HTML +="</body></html>"
-	usr << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
+	user << browse(HTML, "window=log;size=400x444;border=1;can_resize=1;can_close=1;can_minimize=0")
 
 
 /obj/item/device/pda/ai/can_use()
