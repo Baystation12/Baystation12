@@ -399,7 +399,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if (prob(3))	//adjust this to tweak how fast people take toxin damage from infections
 				owner.adjustToxLoss(1)
 
-	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold - 5)	//should start at around 8 units of spaceacillin
+	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold)
 		//spread the infection
 		for (var/datum/organ/internal/I in internal_organs)
 			if (I.germ_level < germ_level)

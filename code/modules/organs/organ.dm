@@ -20,8 +20,9 @@
 //Germs
 /datum/organ/proc/get_cure_threshold()
 	//before reaching level three, the amount of spaceacillin required to cure infections scales between 5 and 30 units
-	var/germ_scale = max((germ_level - INFECTION_LEVEL_ONE)/(INFECTION_LEVEL_THREE - INFECTION_LEVEL_ONE), 0)
-	return min(5 + germ_scale*25, 30)
+	//var/germ_scale = max((germ_level - INFECTION_LEVEL_ONE)/(INFECTION_LEVEL_THREE - INFECTION_LEVEL_ONE), 0)
+	//return min(5 + germ_scale*25, 30)
+	return 5	//Based on Hubble's suggestion
 
 /datum/organ/proc/handle_antibiotics()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")

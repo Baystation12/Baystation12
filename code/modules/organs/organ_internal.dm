@@ -58,7 +58,7 @@
 		if (germ_level >= INFECTION_LEVEL_TWO)
 			var/datum/organ/external/parent = owner.get_organ(parent_organ)
 			//spread germs
-			if (antibiotics < get_cure_threshold() - 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+			if (antibiotics < get_cure_threshold() && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
 				parent.germ_level++
 			
 			if (prob(3))	//about once every 30 seconds
