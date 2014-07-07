@@ -234,8 +234,4 @@ NanoUpdate = function ()
 		}
 	};
 } ();
-
-$(document).ready(function() 
-{
-	NanoUpdate.init();	
-});
+ 
