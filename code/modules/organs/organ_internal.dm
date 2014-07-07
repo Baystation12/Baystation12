@@ -47,7 +47,7 @@
 		//** Handle the effects of infections
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		
-		if (germ_level < INFECTION_LEVEL_ONE/2 && prob(60))
+		if (germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
 			germ_level--
 		
 		if (germ_level >= INFECTION_LEVEL_ONE/2)
