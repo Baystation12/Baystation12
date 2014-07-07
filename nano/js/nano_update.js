@@ -100,7 +100,12 @@ NanoUpdate = function ()
 		{
 			if (templateData.hasOwnProperty(key))
 			{
-				$.when($.get(templateData[key]))
+				$.when($.ajax({
+					url: templateData[key],
+					cache: false,
+					dataType: 'text'
+				}))
+				//$.when($.get(templateData[key]))
 					.done(function(templateMarkup) {					
 						
 						//templateMarkup = templateMarkup.replace(/ +\) *\}\}/g, ')}}');
@@ -132,7 +137,10 @@ NanoUpdate = function ()
 							alert('ERROR: An error occurred while loading the UI: ' + error.message);
 							return;
 						}
-					});    
+					})					
+					.fail(function () {
+						alert('Loading template ' + key + '(' + templateData[key] + ') failed!');
+					});;    
 			}
 		}	
 	};
@@ -192,9 +200,12 @@ NanoUpdate = function ()
 	// Execute all callbacks in the callbacks array/object provided, updateData is passed to them for processing and potential modification
 	var executeCallbacks = function (callbacks, updateData)
 	{	
-		for (var index in callbacks)
+		for (var key in callbacks)
 		{
-			updateData = callbacks[index].call(this, updateData);
+			if (callbacks.hasOwnProperty(key) && jQuery.isFunction(callbacks[key]))
+			{
+				updateData = callbacks[key].call(this, updateData);
+			}
 		}
 		
 		return updateData;
