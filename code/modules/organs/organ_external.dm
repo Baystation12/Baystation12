@@ -377,13 +377,18 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if (owner.germ_level > W.germ_level && W.infection_check())
 			W.germ_level++
 
-		//Infected wounds raise the organ's germ level
-		if (W.germ_level > germ_level && antibiotics < 5)	//Badly infected wounds raise internal germ levels
-			germ_level++
+	if (antibiotics < 5)
+		for(var/datum/wound/W in wounds)
+			//Infected wounds raise the organ's germ level
+			if (W.germ_level > germ_level)
+				germ_level++
+				break	//limit increase to a maximum of one per second
 
 /datum/organ/external/proc/handle_germ_effects()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
-	var/cure_threshold = get_cure_threshold()
+	
+	if (germ_level < INFECTION_LEVEL_ONE & prob(60))	//this could be an else clause, but it looks cleaner this way
+		germ_level--	//since germ_level increases at a rate of 1 per second with dirty wounds, prob(60) should give us about 5 minutes before level one.
 	
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		//having an infection raises your body temperature
@@ -393,17 +398,29 @@ Note that amputating the affected organ does in fact remove the infection from t
 			owner.bodytemperature++
 
 		if(prob(round(germ_level/10)))
-			if (antibiotics < cure_threshold)
+			if (antibiotics < 5)
 				germ_level++
 			
-			if (prob(3))	//adjust this to tweak how fast people take toxin damage from infections
+			if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
 				owner.adjustToxLoss(1)
 
-	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold)
+	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < 5)
 		//spread the infection
+		var/datum/organ/internal/target_organ	//make internal organs become infected one at a time instead of all at once
 		for (var/datum/organ/internal/I in internal_organs)
-			if (I.germ_level < germ_level)
-				I.germ_level++
+			if (I.germ_level > 0 && I.germ_level < min(germ_level, INFECTION_LEVEL_TWO))	//once the organ reaches whatever we can give it, or level two, switch to a different one
+				if (!target_organ || I.germ_level > target_organ.germ_level)	//choose the organ with the highest germ_level
+					target_organ = I
+		
+		if (!target_organ)
+			//figure out which organs we can spread germs to and pick one at random
+			var/list/candidate_organs = list()
+			for (var/datum/organ/internal/I in internal_organs)
+				if (I.germ_level < germ_level)
+					candidate_organs += I
+			target_organ = pick(candidate_organs)
+		
+		target_organ.germ_level++
 
 		if (children)	//To child organs
 			for (var/datum/organ/external/child in children)
@@ -470,8 +487,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		// Salving also helps against infection
 		if(W.germ_level > 0 && W.salved && prob(2))
-			W.germ_level = 0
 			W.disinfected = 1
+			W.germ_level = 0
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
