@@ -768,6 +768,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 				lying = 1
 		else
 			lying = 1
+	else if(buckled && (buckled.movable))
+		anchored = 0
+		canmove = 1
+		lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -805,6 +809,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 	set hidden = 1
 	if(!canface())	return 0
 	dir = EAST
+	if(buckled && buckled.movable)
+		buckled.dir = EAST
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
 
@@ -813,6 +820,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 	set hidden = 1
 	if(!canface())	return 0
 	dir = WEST
+	if(buckled && buckled.movable)
+		buckled.dir = WEST
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
 
@@ -821,6 +831,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 	set hidden = 1
 	if(!canface())	return 0
 	dir = NORTH
+	if(buckled && buckled.movable)
+		buckled.dir = NORTH
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
 
@@ -829,6 +842,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 	set hidden = 1
 	if(!canface())	return 0
 	dir = SOUTH
+	if(buckled && buckled.movable)
+		buckled.dir = SOUTH
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
 
