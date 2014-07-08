@@ -1170,6 +1170,7 @@ datum
 			overdose = 60
 			addictiveness = 5
 			scannable = 1
+			custom_metabolism = 0.025 // Lasts 10 minutes for 15 units
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1214,6 +1215,7 @@ datum
 			color = "#C8A5DC"
 			overdose = 30
 			scannable = 1
+			custom_metabolism = 0.025 // Lasts 10 minutes for 15 units
 
 			on_mob_life(var/mob/living/M as mob)
 				if (volume > overdose)
@@ -1226,8 +1228,18 @@ datum
 			id = "oxycodone"
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
-			color = "#8A2BE2" // rgb 138, 43, 226
 			addictiveness = 80
+			color = "#C805DC"
+			overdose = 20
+			custom_metabolism = 0.25 // Lasts 10 minutes for 15 units
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.druggy = max(M.druggy, 10)
+					M.hallucination = max(M.hallucination, 3)
+				..()
+				return
+
 
 		virus_food
 			name = "Virus Food"
@@ -1429,7 +1441,9 @@ datum
 			id = "plantbgone"
 			description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 			reagent_state = LIQUID
-			color = "#49002E" // rgb: 73, 0, 46
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = REAGENTS_OVERDOSE
+			scannable = 1
 
 			on_mob_life(var/mob/living/carbon/M)
 				if(!M) M = holder.my_atom
@@ -1779,8 +1793,10 @@ datum
 			id = "synaptizine"
 			description = "Synaptizine is used to treat various diseases."
 			reagent_state = LIQUID
-			color = "#FF4040" // rgb: 255, 64, 64
-			custom_metabolism = 0.05
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			custom_metabolism = 0.01
+			overdose = REAGENTS_OVERDOSE
+			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1817,7 +1833,10 @@ datum
 			id = "hyronalin"
 			description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
 			reagent_state = LIQUID
-			color = "#74C365" // rgb: 116, 195, 101
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			custom_metabolism = 0.05
+			overdose = REAGENTS_OVERDOSE
+			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1864,7 +1883,9 @@ datum
 			id = "imidazoline"
 			description = "Heals eye damage"
 			reagent_state = LIQUID
-			color = "#FFA500" // rgb: 255, 165, 0
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = REAGENTS_OVERDOSE
+			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1964,7 +1985,8 @@ datum
 			id = "cryoxadone"
 			description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 			reagent_state = LIQUID
-			color = "#BF00FF" // rgb: 191, 0, 255
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1981,7 +2003,8 @@ datum
 			id = "clonexadone"
 			description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' clones that get ejected early when used in conjunction with a cryo tube."
 			reagent_state = LIQUID
-			color = "#FF77FF" // rgb: 255, 119, 255
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
