@@ -112,7 +112,7 @@ var/list/sacrificed = list()
 					// Mostly for the benefit of those who resist, but it makes sense for even those who join to have some.. effect.
 					M.take_overall_damage(0, 10)
 
-					var/choice = alert(M,"Do you want to join the cult?","Submit to Nar'Sie","Submit","Resist")
+					var/choice = alert(M,"Do you want to join the cult?","Submit to Nar'Sie","Resist","Submit")
 					if(choice == "Submit")
 						ticker.mode.add_cultist(M.mind)
 						M.mind.special_role = "Cultist"
