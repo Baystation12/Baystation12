@@ -1214,8 +1214,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					user << "\blue Tank is empty!"
 
 	if (!scanmode && istype(A, /obj/item/weapon/paper) && owner)
-		// JMO 20140705: Makes scanned document show up in edit window if you edit notes. Not pretty for formatted documents,
-		// as this will clobber the HTML, but at least it lets you scan a document and add notes after the end.
+		// JMO 20140705: Makes scanned document show up properly in the notes. Not pretty for formatted documents,
+		// as this will clobber the HTML, but at least it lets you scan a document. You can restore the original
+		// notes by editing the note again. (Was going to allow you to edit, but scanned documents are too long.)
 		var/raw_scan = (A:info)
 		var/formatted_scan = ""
 		// Scrub out the tags (replacing a few formatting ones along the way)
