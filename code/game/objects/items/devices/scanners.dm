@@ -142,17 +142,17 @@ REAGENT SCANNER
 	if (istype(M, /mob/living/carbon))
 		if(M:reagents.total_volume > 0)
 			var/unknown = 0
-			var/reagentlist[0]
+			var/reagentdata[0]
 			for(var/A in M.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
-					reagentlist["[R.id]"] = "\t \blue [round(M.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
+					reagentdata["[R.id]"] = "\t \blue [round(M.reagents.get_reagent_amount(R.id), 1)]u [R.name]"
 				else
 					unknown++
-			if(data.len)
+			if(reagentdata.len)
 				user.show_message("\blue Beneficial reagents detected in subject's blood:")
-				for(var/d in reagentlist)
-					user.show_message(data[d])
+				for(var/d in reagentdata)
+					user.show_message(reagentdata[d])
 			if(unknown)
 				user.show_message(text("\red Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood."))
 		if(M:virus2.len)
