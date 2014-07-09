@@ -387,7 +387,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /datum/organ/external/proc/handle_germ_effects()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 	
-	if (germ_level < INFECTION_LEVEL_ONE & prob(60))	//this could be an else clause, but it looks cleaner this way
+	if (germ_level < INFECTION_LEVEL_ONE && prob(60))	//this could be an else clause, but it looks cleaner this way
 		germ_level--	//since germ_level increases at a rate of 1 per second with dirty wounds, prob(60) should give us about 5 minutes before level one.
 	
 	if(germ_level >= INFECTION_LEVEL_ONE)
