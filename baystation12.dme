@@ -997,6 +997,7 @@
 #include "code\modules\mining\surprise.dm"
 #include "code\modules\mining\drilling\distribution.dm"
 #include "code\modules\mining\drilling\drill.dm"
+#include "code\modules\mining\drilling\scanner.dm"
 #include "code\modules\mining\laborcamp\laborminerals.dm"
 #include "code\modules\mining\laborcamp\laborshuttle.dm"
 #include "code\modules\mining\laborcamp\laborstacker.dm"

@@ -33,7 +33,9 @@ datum/controller/game_controller
 
 	var/last_thing_processed
 
-	var/list/shuttle_list	//for debugging and VV
+	var/list/shuttle_list	                    // For debugging and VV
+	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
+
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -84,8 +86,8 @@ datum/controller/game_controller/proc/setup()
 	color_windows_init()
 
 	//Create the mining ore distribution map.
-	var/datum/ore_distribution/O = new()
-	O.populate_distribution_map()
+	asteroid_ore_map = new /datum/ore_distribution()
+	asteroid_ore_map.populate_distribution_map()
 
 	spawn(0)
 		if(ticker)
