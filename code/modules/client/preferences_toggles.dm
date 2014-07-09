@@ -172,10 +172,9 @@
 	icons.Add(usr.zone_sel)
 
 	for(var/obj/screen/I in icons)
-		if(I.color && I.alpha)
-			I.icon = ui_style2icon(UI_style_new)
-			I.color = UI_style_color_new
-			I.alpha = UI_style_alpha_new
+		I.icon = ui_style2icon(UI_style_new)
+		I.color = UI_style_color_new
+		I.alpha = UI_style_alpha_new
 
 
 
