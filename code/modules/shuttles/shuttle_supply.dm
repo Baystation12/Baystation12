@@ -47,11 +47,11 @@
 			sleep(5)
 
 		if (destination != away_area)
+			//late
+			if (prob(late_chance))
+				sleep(rand(0,max_late_time))
+		
 			move(away_area, destination)
-
-		//late
-		if (prob(late_chance))
-			sleep(rand(0,max_late_time))
 		
 		moving_status = SHUTTLE_IDLE
 		

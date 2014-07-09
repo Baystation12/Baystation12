@@ -768,6 +768,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 				lying = 1
 		else
 			lying = 1
+	else if(buckled && (buckled.movable))
+		anchored = 0
+		canmove = 1
+		lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -801,36 +805,34 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return canmove
 
 
-/mob/verb/eastface()
-	set hidden = 1
+/mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = EAST
+	dir = ndir
+	if(buckled && buckled.movable)
+		buckled.dir = ndir
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
+
+
+/mob/verb/eastface()
+	set hidden = 1
+	return facedir(EAST)
 
 
 /mob/verb/westface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = WEST
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(WEST)
 
 
 /mob/verb/northface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = NORTH
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(NORTH)
 
 
 /mob/verb/southface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = SOUTH
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(SOUTH)
 
 
 /mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
