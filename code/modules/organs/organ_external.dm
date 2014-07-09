@@ -352,68 +352,77 @@ INFECTION_LEVEL_TWO		above this germ level the infection will start to spread to
 INFECTION_LEVEL_THREE	above this germ level the player will take additional toxin damage per second, and will die in minutes without
 						antitox. also, above this germ level you will need to overdose on spaceacillin to reduce the germ_level.
 
-Note that amputating the affected organ does in fact remove the infection from the
-player's body, though, antitox and spaceacillin are easy enough to get I doubt it will ever be needed.
+Note that amputating the affected organ does in fact remove the infection from the player's body.
 */
 /datum/organ/external/proc/update_germs()
 
-	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED) || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
 		germ_level = 0
 		return
 
 	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
-		//Syncing germ levels with external wounds
-		for(var/datum/wound/W in wounds)
-			//Open wounds can become infected
-			if (owner.germ_level > W.germ_level && W.infection_check())
-				W.germ_level++
+		//** Syncing germ levels with external wounds
+		handle_germ_sync()
+		
+		//** Handle antibiotics and curing infections
+		handle_antibiotics()
 
-			//Infected wounds raise the organ's germ level
-			W.germ_level = max(W.germ_level, germ_level)	//Wounds get all the germs
-			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
-				germ_level++
+		//** Handle the effects of infections
+		handle_germ_effects()
 
-		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
-		if (germ_level > 0 && antibiotics > 5)
-			if (prob(4*antibiotics)) germ_level--	//the higher the germ level the more antibiotics you'll need.
+/datum/organ/external/proc/handle_germ_sync()
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	for(var/datum/wound/W in wounds)
+		//Open wounds can become infected
+		if (owner.germ_level > W.germ_level && W.infection_check())
+			W.germ_level++
 
-		if(germ_level >= INFECTION_LEVEL_ONE)
-			//having an infection raises your body temperature
-			var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1) + owner.species.body_temperature
-			if (owner.bodytemperature < fever_temperature)
-				//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
-				owner.bodytemperature++
-
-			if(prob(round(germ_level/10)))
-				germ_level++
-				if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
-					owner.adjustToxLoss(1)
-
-		if(germ_level >= INFECTION_LEVEL_TWO)
-			//spread the infection
-			for (var/datum/organ/internal/I in internal_organs)
-				if (I.germ_level < germ_level)
-					I.germ_level++
-
-			if (children)	//To child organs
-				for (var/datum/organ/external/child in children)
-					if (child.germ_level < germ_level && !(child.status & ORGAN_ROBOT))
-						if (child.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
-							child.germ_level++
-
-			if (parent)
-				if (parent.germ_level < germ_level && !(parent.status & ORGAN_ROBOT))
-					if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
-						parent.germ_level++
-
-		if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
-			if (!(status & ORGAN_DEAD))
-				status |= ORGAN_DEAD
-				owner << "<span class='notice'>You can't feel your [display_name] anymore...</span>"
-
+		//Infected wounds raise the organ's germ level
+		if (W.germ_level > germ_level && antibiotics < 5)	//Badly infected wounds raise internal germ levels
 			germ_level++
-			owner.adjustToxLoss(1)
 
+/datum/organ/external/proc/handle_germ_effects()
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/cure_threshold = get_cure_threshold()
+	
+	if(germ_level >= INFECTION_LEVEL_ONE)
+		//having an infection raises your body temperature
+		var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1) + owner.species.body_temperature
+		if (owner.bodytemperature < fever_temperature)
+			//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
+			owner.bodytemperature++
+
+		if(prob(round(germ_level/10)))
+			if (antibiotics < cure_threshold)
+				germ_level++
+			
+			if (prob(3))	//adjust this to tweak how fast people take toxin damage from infections
+				owner.adjustToxLoss(1)
+
+	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < cure_threshold)
+		//spread the infection
+		for (var/datum/organ/internal/I in internal_organs)
+			if (I.germ_level < germ_level)
+				I.germ_level++
+
+		if (children)	//To child organs
+			for (var/datum/organ/external/child in children)
+				if (child.germ_level < germ_level && !(child.status & ORGAN_ROBOT))
+					if (child.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
+						child.germ_level++
+
+		if (parent)
+			if (parent.germ_level < germ_level && !(parent.status & ORGAN_ROBOT))
+				if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
+					parent.germ_level++
+
+	if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
+		if (!(status & ORGAN_DEAD))
+			status |= ORGAN_DEAD
+			owner << "<span class='notice'>You can't feel your [display_name] anymore...</span>"
+
+		germ_level++
+		owner.adjustToxLoss(1)
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /datum/organ/external/proc/update_wounds()
@@ -726,7 +735,7 @@ player's body, though, antitox and spaceacillin are easy enough to get I doubt i
 
 /datum/organ/external/proc/has_infected_wound()
 	for(var/datum/wound/W in wounds)
-		if(W.germ_level > 150)
+		if(W.germ_level > INFECTION_LEVEL_ONE)
 			return 1
 	return 0
 

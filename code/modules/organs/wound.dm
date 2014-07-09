@@ -183,10 +183,20 @@
 		
 		return 1
 
-	
 	proc/bleeding()
-		// internal wounds don't bleed in the sense of this function
-		return ((wound_damage() > 30 || bleed_timer > 0) && !(bandaged||clamped) && (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5) && current_stage <= max_bleeding_stage && !src.internal)
+		if (src.internal)
+			return 0	// internal wounds don't bleed in the sense of this function
+		
+		if (current_stage > max_bleeding_stage)
+			return 0
+		
+		if (bandaged||clamped)
+			return 0
+		
+		if (wound_damage() <= 30 && bleed_timer <= 0)
+			return 0	//Bleed timer has run out. Wounds with more than 30 damage don't stop bleeding on their own.
+		
+		return (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5)
 
 /** CUTS **/
 /datum/wound/cut/small

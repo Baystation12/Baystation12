@@ -37,29 +37,32 @@
 	if (!germ_level)
 		return
 
-	if (robotic >= 2)	//TODO make robotic internal and external organs separate types of organ instead of a flag
+	if (robotic >= 2 || (owner.species && owner.species.flags & IS_PLANT))	//TODO make robotic internal and external organs separate types of organ instead of a flag
 		germ_level = 0
 		return
 
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
+		//** Handle antibiotics and curing infections
+		handle_antibiotics()
 
-	if (germ_level > 0 && antibiotics > 5)
-		if (prob(4*antibiotics)) germ_level--
-		if (antibiotics > 30) germ_level--
-
-	if (germ_level >= INFECTION_LEVEL_ONE/2)
-		if(prob(round(germ_level/6)))	//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
-			germ_level++
-		if(prob(1))
-			take_damage(1,silent=0)
-
-	if (germ_level >= INFECTION_LEVEL_TWO)
-		var/datum/organ/external/parent = owner.get_organ(parent_organ)
-		if (parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
-			parent.germ_level++
+		//** Handle the effects of infections
+		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		
-		if (prob(5))	//about once every 20 seconds
-			take_damage(1,silent=prob(30))
+		if (germ_level >= INFECTION_LEVEL_ONE/2)
+			//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+			if(antibiotics < 5 && prob(round(germ_level/6)))
+				germ_level++
+			if(prob(1))
+				take_damage(1,silent=prob(60))
+
+		if (germ_level >= INFECTION_LEVEL_TWO)
+			var/datum/organ/external/parent = owner.get_organ(parent_organ)
+			//spread germs
+			if (antibiotics < get_cure_threshold() && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+				parent.germ_level++
+			
+			if (prob(3))	//about once every 30 seconds
+				take_damage(1,silent=prob(30))
 
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
