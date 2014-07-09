@@ -1036,8 +1036,11 @@
 		return
 
 	switch(target_species)
-		if("Human" || "Skrell")
-			if(helmet) helmet.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Skrell")
+			if(helmet) helmet.species_restricted = list("Skrell")
+			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			if(helmet) helmet.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox","Skrell")
 			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 		if("Unathi")
 			if(helmet) helmet.species_restricted = list("Unathi")
@@ -1107,3 +1110,6 @@
 				suit.name = "blood-red hardsuit"
 				suit.item_state = "syndie_hardsuit"
 				suit.icon_state = "rig-syndie"
+
+		if(helmet) helmet.name = "refitted [helmet.name]"
+		if(suit) suit.name = "refitted [suit.name]"
