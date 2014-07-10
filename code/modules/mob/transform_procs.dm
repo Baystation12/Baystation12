@@ -249,7 +249,6 @@
 		if(adult)
 			new_slime.is_adult = 1
 		else
-	new_slime.a_intent = "hurt"
 	new_slime.key = key
 
 	new_slime << "<B>You are now a slime. Skreee!</B>"
