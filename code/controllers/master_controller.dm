@@ -33,7 +33,9 @@ datum/controller/game_controller
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
 
-	var/list/shuttle_list	//for debugging and VV
+	var/list/shuttle_list	                    // For debugging and VV
+	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
+
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -80,8 +82,8 @@ datum/controller/game_controller/proc/setup()
 		make_mining_asteroid_secret()
 
 	//Create the mining ore distribution map.
-	var/datum/ore_distribution/O = new()
-	O.populate_distribution_map()
+	asteroid_ore_map = new /datum/ore_distribution()
+	asteroid_ore_map.populate_distribution_map()
 
 	//Set up spawn points.
 	populate_spawn_points()
