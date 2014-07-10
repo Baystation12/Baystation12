@@ -1,8 +1,6 @@
 /mob/living/carbon/slime/say(var/message)
-	if (silent)
-		return
-	else
-		return ..()
+	var/verb = say_quote(message)
+	return ..(message, null, verb)
 
 /mob/living/carbon/slime/say_quote(var/text)
 	var/ending = copytext(text, length(text))
