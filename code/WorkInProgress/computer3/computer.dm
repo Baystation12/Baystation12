@@ -75,6 +75,11 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		Reset()
 
 	New(var/L, var/built = 0)
