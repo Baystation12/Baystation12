@@ -5,7 +5,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	
+
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -238,7 +238,7 @@
 
 	//languages
 	module.add_languages(src)
-	
+
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
@@ -869,7 +869,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(src, /mob/living/carbon/slime/adult))
+		if(M.is_adult)
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)
