@@ -33,7 +33,11 @@
 		set name = "open laptop"
 		set category = "Object"
 		set src in view(1)
-
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		if(!istype(loc,/turf))
 			usr << "[src] is too bulky!  You'll have to set it down."
 			return
@@ -82,7 +86,11 @@
 		set name = "Close Laptop"
 		set category = "Object"
 		set src in view(1)
-
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		if(istype(loc,/obj/item/device/laptop))
 			testing("Close closed computer")
 			return
