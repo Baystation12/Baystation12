@@ -346,6 +346,11 @@
 /obj/machinery/mining/brace/proc/connect()
 
 	var/turf/T = get_step(get_turf(src), src.dir)
+
+	if(!T.has_resources)
+		src.visible_message("\red The terrain near the brace is unsuitable!")
+		return
+
 	for(var/thing in T.contents)
 		if(istype(thing,/obj/machinery/mining/drill))
 			connected = thing
