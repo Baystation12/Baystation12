@@ -73,8 +73,9 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
-	var/species = "Human"
+	var/species = "Human"               //Species datum to use.
 	var/language = "None"				//Secondary language
+	var/list/gear						//Custom/fluff item loadout.
 
 		//Mob preview
 	var/icon/preview_icon = null
@@ -104,7 +105,6 @@ datum/preferences
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
-
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/flavor_text = ""
@@ -131,6 +131,8 @@ datum/preferences
 					return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
+
+	gear = list()
 
 /datum/preferences
 	proc/ZeroSkills(var/forced = 0)
@@ -339,6 +341,22 @@ datum/preferences
 			dat += "\[...\]<br><br>"
 		else
 			dat += "<br><br>"
+
+		dat += "<b>Custom Loadout:</b> "
+		var/total_cost = 0
+		if(gear && gear.len)
+			dat += "<br>"
+			for(var/gear_name in gear)
+				if(gear_datums[gear_name])
+					var/datum/gear/G = gear_datums[gear_name]
+					total_cost += G.cost
+					dat += "[gear_name] ([G.cost]) "
+					dat += "<a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
+			if(total_cost < MAX_GEAR_COST)
+				dat += "<a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a><br>"
+			dat += "<b>Used:</b> [total_cost] points.<br>"
+		else
+			dat += "none.<br>"
 
 		if(gender == MALE)
 			dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
@@ -834,6 +852,22 @@ datum/preferences
 				user << browse(null, "window=antagoptions")
 				ShowChoices(user)
 			return 1
+
+		else if (href_list["preference"] == "loadout")
+
+			if(href_list["task"] == "input")
+
+				var/choice = input("Select gear to add.") as null|anything in gear_datums
+				if(choice && gear_datums[choice])
+					gear += choice
+
+			else if(href_list["task"] == "remove")
+				var/to_remove = href_list["gear"]
+				if(!to_remove) return
+				for(var/gear_name in gear)
+					if(gear_name == to_remove)
+						gear -= gear_name
+						break
 
 		switch(href_list["task"])
 			if("random")

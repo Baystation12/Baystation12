@@ -54,6 +54,9 @@
 	var/race_key = 0
 	var/icon/icon_template
 
+	//Used for character generation fluff items.
+	var/list/custom_gear_options
+
 /datum/species/New()
 	unarmed = new unarmed_type()
 
@@ -142,6 +145,11 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 
+	custom_gear_options = list(
+		"Unathi robe" = /obj/item/clothing/suit/unathi/robe,
+		"Unathi mantle" = /obj/item/clothing/suit/unathi/mantle
+		)
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -166,6 +174,11 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+	custom_gear_options = list(
+	/obj/item/clothing/head/tajaran/scarf,
+	/obj/item/clothing/suit/tajaran/furs
+		)
 
 /datum/species/skrell
 	name = "Skrell"
