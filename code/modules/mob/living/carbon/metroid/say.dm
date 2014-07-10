@@ -1,5 +1,9 @@
 /mob/living/carbon/slime/say(var/message)
 	var/verb = say_quote(message)
+
+	if(copytext(message,1,2) == "*")
+		return emote(copytext(message,2))
+
 	return ..(message, null, verb)
 
 /mob/living/carbon/slime/say_quote(var/text)

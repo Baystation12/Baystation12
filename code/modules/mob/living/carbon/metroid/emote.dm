@@ -1,4 +1,4 @@
-/mob/living/carbon/slime/emote(var/act)
+/mob/living/carbon/slime/emote(var/act, var/m_type=1, var/message = null)
 
 
 	if (findtext(act, "-", 1, null))
@@ -9,13 +9,27 @@
 	if(findtext(act,"s",-1) && !findtext(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
 		act = copytext(act,1,length(act))
 
-	var/m_type = 1
-	var/message
-
 	switch(act) //Alphabetical please
+		if ("me")
+			if(silent)
+				return
+			if (src.client)
+				if (client.prefs.muted & MUTE_IC)
+					src << "\red You cannot send IC messages (muted)."
+					return
+				if (src.client.handle_spam_prevention(message,MUTE_IC))
+					return
+				if (stat)
+					return
+				if(!(message))
+					return
+				return custom_emote(m_type, message)
 		if("bounce")
 			message = "<B>The [src.name]</B> bounces in place."
 			m_type = 1
+
+		if ("custom")
+			return custom_emote(m_type, message)
 
 		if("jiggle")
 			message = "<B>The [src.name]</B> jiggles!"
@@ -46,7 +60,7 @@
 			m_type = 1
 
 		if ("help") //This is an exception
-			src << "Help for slime emotes. You can use these emotes with say \"*emote\":\n\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate"
+			src << "Help for slime emotes. You can use these emotes with say \"*emote\":\n\nbounce, custom, jiggle, light, moan, shiver, sway, twitch, vibrate"
 
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."
