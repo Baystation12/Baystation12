@@ -58,7 +58,8 @@
 			del src
 
 	AltClick()
-		open_computer()
+		if(Adjacent(usr))
+			open_computer()
 
 /obj/machinery/computer3/laptop
 	name = "Laptop Computer"
@@ -133,5 +134,5 @@
 
 
 	AltClick()
-		close_computer()
-
+		if(Adjacent(usr))
+			close_computer()
