@@ -27,11 +27,11 @@
 	meat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
-
+/* The meat recipe handles all of these.
 	meat2
-		input = /obj/item/weapon/syntiflesh
+		input = /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
-/*
+
 	monkeymeat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
