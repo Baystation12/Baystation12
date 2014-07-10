@@ -4,6 +4,7 @@
 	icon_state = "grey baby slime"
 	pass_flags = PASSTABLE
 	var/is_adult = 0
+	speak_emote = list("telepathically chirps")
 
 	layer = 5
 
@@ -459,7 +460,7 @@
 		if ("help")
 			visible_message("<span class='notice'>[M] caresses [src] with its scythe like arm.</span>")
 
-		if ("harm")
+		if ("hurt")
 
 			if (prob(95))
 				attacked += 10
@@ -1058,7 +1059,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 /obj/item/weapon/reagent_containers/food/snacks/egg/slime/process()
 	var/turf/location = get_turf(src)
 	var/datum/gas_mixture/environment = location.return_air()
-	if (environment.toxins > MOLES_PLASMA_VISIBLE)//plasma exposure causes the egg to hatch
+	if (environment.phoron > MOLES_PHORON_VISIBLE)//phoron exposure causes the egg to hatch
 		src.Hatch()
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/slime/attackby(obj/item/weapon/W as obj, mob/user as mob)

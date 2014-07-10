@@ -108,6 +108,7 @@
 				if(Target in view(7, src))
 					if(!Target.Adjacent(src)) // Bug of the month candidate: slimes were attempting to move to target only if it was directly next to them, which caused them to target things, but not approach them
 						step_to(src, Target)
+						sleep(5)
 
 				else
 					Target = null

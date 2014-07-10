@@ -54,8 +54,6 @@
 /obj/machinery/smartfridge/secure/extract/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/slime_extract))
 		return 1
-	if(istype(O,/obj/item/device/slime_scanner))
-		return 1
 	return 0
 
 /obj/machinery/smartfridge/secure/medbay
