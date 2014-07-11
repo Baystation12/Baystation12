@@ -426,7 +426,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/drugs
 	name = "Syringe (drugs)"
-	desc = "Contains aggressive drugs ment for torture."
+	desc = "Contains aggressive drugs meant for torture."
 	New()
 		..()
 		reagents.add_reagent("space_drugs",  5)
