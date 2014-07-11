@@ -1,4 +1,3 @@
-#define STEFAN_BOLTZMANN_CONSTANT 0.0000000567
 
 datum/pipeline
 	var/datum/gas_mixture/air

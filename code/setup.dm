@@ -7,6 +7,8 @@
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
 
+#define STEFAN_BOLTZMANN_CONSTANT 0.0000000567	//W/(m^2*K^4)
+
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
 
