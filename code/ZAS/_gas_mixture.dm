@@ -141,6 +141,30 @@ What are the archived variables for?
 
 	return max(MINIMUM_HEAT_CAPACITY,heat_capacity_archived)
 
+//this seems like such a common thing to do I can't believe this hasn't been made into it's own proc yet.
+/datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
+	//Purpose: Adjusting temperature based on thermal energy transfer
+	//Called by: Anyone who wants to add or remove energy from the gas mix
+	//Inputs: An amount of energy in J to be added. Negative values remove energy.
+	//Outputs: The actual thermal energy change.
+	
+	var/old_temperature = temperature
+	var/heat_capacity = heat_capacity()
+	
+	temperature += thermal_energy/heat_capacity
+	if (temperature < 0)
+		temperature = 0
+	
+	return (temperature - old_temperature)*heat_capacity
+
+/datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
+	//Purpose: Determining how much thermal energy is required
+	//Called by: Anyone. Machines that want to adjust the temperature of a gas mix.
+	//Inputs: None
+	//Outputs: The amount of energy required to get to the new temperature in J. A negative value means that energy needs to be removed.
+	
+	return heat_capacity()*(new_temperature - temperature)
+
 /datum/gas_mixture/proc/total_moles()
 	return total_moles
 	/*var/moles = oxygen + carbon_dioxide + nitrogen + phoron
