@@ -22,8 +22,11 @@
 	set name = "Msay"
 	set hidden = 1
 
-	if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
-
+	if(config.mods_are_mentors && !check_rights(R_MENTOR))
+		return
+	else if(!check_rights(R_ADMIN|R_MOD))
+		return
+	
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	log_admin("MOD: [key_name(src)] : [msg]")
 
