@@ -112,7 +112,7 @@
 			return
 
 		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
-		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && canmove) // mutual brohugs all around!
+		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
 			var/turf/oldloc = loc
 			loc = tmob.loc
 			tmob.loc = oldloc
@@ -174,7 +174,7 @@
 		var/eta_status = emergency_shuttle.get_status_panel_eta()
 		if(eta_status)
 			stat(null, eta_status)
-	
+
 	if (client.statpanel == "Status")
 		if (internal)
 			if (!internal.air_contents)
@@ -1397,6 +1397,11 @@
 
 	T.Weaken(5)
 
+	//Only official raider vox get the grab and no self-prone."
+	if(src.mind && src.mind.special_role != "Vox Raider")
+		src.Weaken(5)
+		return
+
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
@@ -1453,3 +1458,39 @@
 		M.apply_damage(50,BRUTE)
 		if(M.stat == 2)
 			M.gib()
+
+/mob/living/carbon/human/proc/commune()
+	set category = "IC"
+	set name = "Commune with creature"
+	set desc = "Send a telepathic message to an unlucky recipient."
+
+	var/list/targets = list()
+	var/target = null
+	var/text = null
+
+	targets += getmobs() //Fill list, prompt user with list
+	target = input("Select a creature!", "Speak to creature", null, null) as null|anything in targets
+
+	if(!target) return
+
+	text = input("What would you like to say?", "Speak to creature", null, null)
+
+	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
+
+	if(!text) return
+
+	var/mob/M = targets[target]
+
+	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
+		src << "Not even a [src.species.name] can speak to the dead."
+		return
+
+	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
+
+	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.species.name == src.species.name)
+			return
+		H << "\red Your nose begins to bleed..."
+		H.drip(1)

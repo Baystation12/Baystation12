@@ -131,18 +131,6 @@
 				else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 					if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
 
-//Sick of trying to get this to display properly without redefining it.
-/mob/living/silicon/robot/drone/show_system_integrity()
-	if(!src.stat)
-		var/temphealth = health+35 //Brings it to 0.
-		if(temphealth<0)	temphealth = 0
-		//Convert to percentage.
-		temphealth = (temphealth / (maxHealth*2)) * 100
-
-		stat(null, text("System integrity: [temphealth]%"))
-	else
-		stat(null, text("Systems nonfunctional"))
-
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
 /mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
 

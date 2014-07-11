@@ -215,7 +215,7 @@
 			on = !on
 
 		if(signal.data["checks"] != null)
-			if (signal.data["set_internal_pressure"] == "default")
+			if (signal.data["checks"] == "default")
 				pressure_checks = pressure_checks_default
 			else
 				pressure_checks = text2num(signal.data["checks"])

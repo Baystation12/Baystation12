@@ -755,7 +755,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-	if(buckled)
+	if(buckled && (!buckled.movable))
 		anchored = 1
 		canmove = 0
 		if( istype(buckled,/obj/structure/stool/bed/chair) )
@@ -768,6 +768,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 				lying = 1
 		else
 			lying = 1
+	else if(buckled && (buckled.movable))
+		anchored = 0
+		canmove = 1
+		lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -778,7 +782,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		anchored = 1
 		canmove = 0
 		lying = 0
-	else
+	else if (!buckled)
 		lying = !can_stand
 		canmove = has_limbs
 
@@ -801,36 +805,34 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return canmove
 
 
-/mob/verb/eastface()
-	set hidden = 1
+/mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = EAST
+	dir = ndir
+	if(buckled && buckled.movable)
+		buckled.dir = ndir
+		buckled.handle_rotation()
 	client.move_delay += movement_delay()
 	return 1
+
+
+/mob/verb/eastface()
+	set hidden = 1
+	return facedir(EAST)
 
 
 /mob/verb/westface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = WEST
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(WEST)
 
 
 /mob/verb/northface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = NORTH
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(NORTH)
 
 
 /mob/verb/southface()
 	set hidden = 1
-	if(!canface())	return 0
-	dir = SOUTH
-	client.move_delay += movement_delay()
-	return 1
+	return facedir(SOUTH)
 
 
 /mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
@@ -987,10 +989,11 @@ mob/proc/yank_out_object()
 					affected = organ
 
 		affected.implants -= selection
-		H.shock_stage+=10
+		H.shock_stage+=20
 		H.bloody_hands(S)
+		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
 
-		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (15)
 			affected.wounds += I
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)

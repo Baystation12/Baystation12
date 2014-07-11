@@ -1179,7 +1179,10 @@ About the new airlock wires panel:
 				user << "\blue You removed the airlock electronics!"
 
 				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
-				da.anchored = 1
+				if (istype(da, /obj/structure/door_assembly/multi_tile))
+					da.dir = src.dir
+
+ 				da.anchored = 1
 				if(mineral)
 					da.glass = mineral
 				//else if(glass)
@@ -1304,7 +1307,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/proc/lock(var/forced=0)
 	if (src.locked) return
-	
+
 	src.locked = 1
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
@@ -1312,7 +1315,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/proc/unlock(var/forced=0)
 	if (!src.locked) return
-	
+
 	if(forced || src.arePowerSystemsOn()) //only can raise bolts if power's on
 		src.locked = 0
 		for(var/mob/M in range(1,src))

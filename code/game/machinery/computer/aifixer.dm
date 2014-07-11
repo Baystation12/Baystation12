@@ -3,7 +3,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"
 	circuit = /obj/item/weapon/circuitboard/aifixer
-	req_access = list(access_captain, access_robotics, access_heads)
+	req_one_access = list(access_robotics, access_heads)
 	var/mob/living/silicon/ai/occupant = null
 	var/active = 0
 
@@ -17,7 +17,7 @@
 			user << "This terminal isn't functioning right now, get it working!"
 			return
 		I:transfer_ai("AIFIXER","AICARD",src,user)
-	
+
 	..()
 	return
 

@@ -492,37 +492,89 @@
 	new_icon = "earth"
 	allowed_types = list("ripley","firefighter")
 
-///////// Salvage crew hardsuit - Cybele Petit - solaruin ///////////////
+// Root hardsuit kit defines.
+// Icons for modified hardsuits need to be in the proper .dmis because suit cyclers may cock them up.
+/obj/item/device/kit/suit/fluff
 
-/obj/item/device/kit/fluff/salvage
-	name = "salvage hardsuit modification kit"
-	desc = "A kit containing all the needed tools and parts to modify a hardsuit into a salvage hardsuit."
+	name = "hardsuit modification kit"
+	desc = "A kit for modifying a hardsuit."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "salvage_kit"
+
+	var/new_name        // Modifier for new item name - '[new_name] hardsuit'.
+	var/new_helmet_desc // Sets helmet desc.
+	var/new_suit_desc   // Sets suit desc.
+	var/helmet_icon     // Sets helmet icon_state and item_state.
+	var/suit_icon       // Sets suit icon_state and item_state.
+	var/helmet_color    // Sets item_color.
+	var/uses = 2        // Uses before the kit deletes itself.
 
 /obj/item/clothing/head/helmet/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
-	if(istype(O,/obj/item/device/kit/fluff/salvage))
-		name = "Salvage Hardsuit helmet"
-		desc = "An orange hardsuit helmet used by salvage flotillas. Has reinforced plating."
-		icon = 'icons/obj/custom_items.dmi'
-		icon_state = "salvage_helmet"
-		item_state = "salvage_helmet"
+	if(istype(O,/obj/item/device/kit/suit/fluff))
+
+		var/obj/item/device/kit/suit/fluff/kit = O
+		name = "[kit.new_name] hardsuit helmet"
+		desc = kit.new_helmet_desc
+		icon_state = kit.helmet_icon
+		item_state = kit.helmet_icon
+		item_color = kit.helmet_color
+
+		user << "You set about modifying the helmet into [src]."
+		playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+
+		kit.uses--
+		if(kit.uses<1)
+			user.drop_item()
+			del(O)
 
 /obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
-	if(istype(O,/obj/item/device/kit/fluff/salvage))
-		name = "Salvage Hardsuit"
-		desc = "An orange hardsuit used by salvage flotillas. Has reinforced plating."
-		icon = 'icons/obj/custom_items.dmi'
-		icon_state = "salvage_suit"
-		item_state = "salvage_suit"
+	if(istype(O,/obj/item/device/kit/suit/fluff))
+
+		var/obj/item/device/kit/suit/fluff/kit = O
+		name = "[kit.new_name] hardsuit"
+		desc = kit.new_suit_desc
+		icon_state = kit.suit_icon
+		item_state = kit.suit_icon
+
+		user << "You set about modifying the suit into [src]."
+		playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+
+		kit.uses--
+		if(kit.uses<1)
+			user.drop_item()
+			del(O)
+
+///////// Salvage crew hardsuit - Cybele Petit - solaruin ///////////////
+/obj/item/device/kit/suit/fluff/salvage
+	name = "salvage hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit into a salvage hardsuit."
+
+	new_name = "salvage"
+	new_suit_desc = "An orange hardsuit used by salvage flotillas. Has reinforced plating."
+	new_helmet_desc = "An orange hardsuit helmet used by salvage flotillas. Has reinforced plating."
+	helmet_icon = "salvage_helmet"
+	suit_icon = "salvage_suit"
+	helmet_color = "salvage"
+
+///////// Salvage crew hardsuit - Callum Leamas - roaper ///////////////
+/obj/item/device/kit/suit/fluff/roaper
+	name = "Callum's hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit."
+
+	new_name = "weathered"
+	new_suit_desc = " A jury-rigged and modified engineering hardsuit. It looks slightly damaged and dinged."
+	new_helmet_desc = "A jury-rigged and modified engineering hardsuit helmet. It looks slightly damaged and dinged"
+	helmet_icon = "rig0-roaper"
+	suit_icon = "rig-roaper"
+	helmet_color = "roaper"
 
 //////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
 
-/obj/item/device/kit/fluff/hook
+/obj/item/device/kit/weapon/fluff/hook
 	name = "hook modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a knife or a butcher's knife into a hook."
 	icon = 'icons/obj/custom_items.dmi'
@@ -531,7 +583,7 @@
 /obj/item/weapon/kitchenknife/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
-	if(istype(O,/obj/item/device/kit/fluff/hook))
+	if(istype(O,/obj/item/device/kit/weapon/fluff/hook))
 		name = "meat hook"
 		desc = "A sharp, metal hook what sticks into things."
 		icon = 'icons/obj/custom_items.dmi'
@@ -541,7 +593,7 @@
 /obj/item/weapon/butch/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
-	if(istype(O,/obj/item/device/kit/fluff/hook))
+	if(istype(O,/obj/item/device/kit/weapon/fluff/hook))
 		name = "meat hook"
 		desc = "A sharp, metal hook what sticks into things."
 		icon = 'icons/obj/custom_items.dmi'
@@ -870,9 +922,9 @@
 	name = "RN Uniform"
 	desc = "A nurse's uniform that is dark blue and gold. It looks like it's been tailored for a short person."
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "sasha_s"
-	item_state = "sasha_s"
-	item_color = "sasha_s"
+	icon_state = "sasha"
+	item_state = "sasha"
+	item_color = "sasha"
 
 /////// NT-SID Suit //Zuhayr: Jane Doe
 

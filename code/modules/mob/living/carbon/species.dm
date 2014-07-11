@@ -200,7 +200,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | IS_WHITELISTED
+	flags = NO_SCAN | IS_WHITELISTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -215,6 +215,7 @@
 /datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
 
 	H.verbs += /mob/living/carbon/human/proc/gut
+	H.verbs += /mob/living/carbon/human/proc/commune
 	..()
 
 /datum/species/vox/armalis
