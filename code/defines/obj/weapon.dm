@@ -451,16 +451,6 @@
 	usr.client.eye = target
 
 /*
-/obj/item/weapon/syntiflesh
-	name = "syntiflesh"
-	desc = "Meat that appears...strange..."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "meat"
-	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 2.0
-	origin_tech = "biotech=2"
-*/
-/*
 /obj/item/weapon/cigarpacket
 	name = "Pete's Cuban Cigars"
 	desc = "The most robust cigars on the planet."

@@ -27,19 +27,7 @@
 	meat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
-/* The meat recipe handles all of these.
-	meat2
-		input = /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh
-		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
-	monkeymeat
-		input = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
-
-	humanmeat
-		input = /obj/item/weapon/reagent_containers/food/snacks/meat/human
-		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
-*/
 	potato
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
 		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
