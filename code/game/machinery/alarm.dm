@@ -210,12 +210,13 @@
 				//Assume the heat is being pumped into the hull which is fixed at 20 C
 				//none of this is really proper thermodynamics but whatever
 				
-				//heat transfer is limited by the max amount of power the heat pump can put out, which lets say is also MAX_ENERGY_CHANGE
-				heat_transfer = min(heat_transfer, gas.temperature/T20C*MAX_ENERGY_CHANGE)
-				var/energy_used = heat_transfer * T20C/gas.temperature
+				var/cop = gas.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
 				
-				gas.add_thermal_energy(-heat_transfer)
-				use_power(energy_used * 1.1, ENVIRON)	//heat pump inefficiencies
+				heat_transfer = min(heat_transfer, cop * MAX_ENERGY_CHANGE)	//this ensures that we don't use more than MAX_ENERGY_CHANGE amount of power - the machine can only do so much cooling
+				
+				heat_transfer = -gas.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
+				
+				use_power(heat_transfer / cop, ENVIRON)
 			
 			environment.merge(gas)
 

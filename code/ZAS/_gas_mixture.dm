@@ -152,8 +152,8 @@ What are the archived variables for?
 	var/heat_capacity = heat_capacity()
 	
 	temperature += thermal_energy/heat_capacity
-	if (temperature < 0)
-		temperature = 0
+	if (temperature < TCMB)
+		temperature = TCMB
 	
 	return (temperature - old_temperature)*heat_capacity
 
