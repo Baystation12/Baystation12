@@ -181,21 +181,21 @@
 							if(removed.temperature < set_temperature + T0C)	//heating air
 								// Added min(set_temperature + T0C, 1000) check to try and avoid wacky superheating issues in low gas scenarios
 								var/energy_used = min( removed.get_thermal_energy_change(min(set_temperature + T0C, 1000)) , heating_power )
-								
+
 								removed.add_thermal_energy(energy_used)
 								cell.use(energy_used*CELLRATE)
 							else	//cooling air
-								var/heat_transfer = min(abs(removed.get_thermal_energy_change(target_temperature)), heating_power)
-								
+								var/heat_transfer = min(abs(removed.get_thermal_energy_change(set_temperature + T0C)), heating_power)
+
 								//Assume the heat is being pumped into the hull which is fixed at 20 C
 								//none of this is really proper thermodynamics but whatever
-								
+
 								var/cop = removed.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
-								
+
 								heat_transfer = min(heat_transfer, cop * heating_power)	//this ensures that we don't use more than MAX_ENERGY_CHANGE amount of power - the machine can only do so much cooling
-								
+
 								heat_transfer = -removed.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
-								
+
 								cell.use(heat_transfer/cop*CELLRATE)
 
 						env.merge(removed)
