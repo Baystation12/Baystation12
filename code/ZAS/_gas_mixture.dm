@@ -141,7 +141,6 @@ What are the archived variables for?
 
 	return max(MINIMUM_HEAT_CAPACITY,heat_capacity_archived)
 
-//this seems like such a common thing to do I can't believe this hasn't been made into it's own proc yet.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
 	//Purpose: Adjusting temperature based on thermal energy transfer
 	//Called by: Anyone who wants to add or remove energy from the gas mix

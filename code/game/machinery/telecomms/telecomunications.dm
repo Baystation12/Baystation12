@@ -29,7 +29,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/toggled = 1 	// Is it toggled on
 	var/on = 1
 	var/integrity = 100 // basically HP, loses integrity by heat
-	var/heatgen = 20 // how much heat to transfer to the environment
+	var/operating_temperature = 20 + T0C // the temperature that the machine will raise the environment to, null for no heat production
 	var/delay = 10 // how many process() ticks to delay per heat
 	var/heating_power = 40000
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
@@ -227,26 +227,25 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			produce_heat(heatgen)
 			delay = initial(delay)
 
-/obj/machinery/telecomms/proc/produce_heat(heat_amt)
-	if(heatgen == 0)
+/obj/machinery/telecomms/proc/produce_heat(new_temperature)
+	if(isnull(new_temperature))
 		return
 
 	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			if(env.temperature < (heat_amt+T0C))
+			
+			if(env.temperature < new_temperature)
 
 				var/transfer_moles = 0.25 * env.total_moles()
 
 				var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
 				if(removed)
-
-					var/heat_capacity = removed.heat_capacity()
-					if(heat_capacity == 0 || heat_capacity == null)
-						heat_capacity = 1
-					removed.temperature = min((removed.temperature*heat_capacity + heating_power)/heat_capacity, 1000)
+					
+					var/heat_produced = min(removed.get_thermal_energy_change(new_temperature), idle_power_usage)	//obviously can't produce more heat than the machine draws from it's power source
+					removed.add_thermal_energy(heat_produced)
 
 				env.merge(removed)
 /*
@@ -265,9 +264,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 1
-	heatgen = 0
+	operating_temperature = null
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/receiver"
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
@@ -322,9 +321,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 80
+	idle_power_usage = 1600
 	machinetype = 7
-	heatgen = 40
+	operating_temperature = 40 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/hub"
 	long_range_link = 1
 	netspeed = 40
@@ -357,9 +356,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 8
-	heatgen = 0
+	operating_temperature = null
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/relay"
 	netspeed = 5
 	long_range_link = 1
@@ -409,9 +408,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 50
+	idle_power_usage = 1000
 	machinetype = 2
-	heatgen = 20
+	operating_temperature = 20 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/bus"
 	netspeed = 40
 	var/change_frequency = 0
@@ -462,9 +461,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 30
+	idle_power_usage = 600
 	machinetype = 3
-	heatgen = 100
+	operating_temperature = 100 + T0C
 	delay = 5
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/processor"
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
@@ -501,9 +500,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	density = 1
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 15
+	idle_power_usage = 300
 	machinetype = 4
-	heatgen = 50
+	operating_temperature = 50 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/server"
 	var/list/log_entries = list()
 	var/list/stored_names = list()
