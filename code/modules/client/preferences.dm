@@ -266,7 +266,27 @@ datum/preferences
 		if(config.allow_Metadata)
 			dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
 
-		dat += "<br><b>Occupation Choices</b><br>"
+		dat += "<br><b>Custom Loadout:</b> "
+		var/total_cost = 0
+
+		if(isnull(gear) || !islist(gear)) gear = list()
+
+		if(gear && gear.len)
+			dat += "<br>"
+			for(var/gear_name in gear)
+				if(gear_datums[gear_name])
+					var/datum/gear/G = gear_datums[gear_name]
+					total_cost += G.cost
+					dat += "[gear_name] <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
+
+			dat += "<b>Used:</b> [total_cost] points."
+		else
+			dat += "none."
+
+		if(total_cost < MAX_GEAR_COST)
+			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
+
+		dat += "<br><br><b>Occupation Choices</b><br>"
 		dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
 
 		dat += "<br><table><tr><td><b>Body</b> "
@@ -341,22 +361,6 @@ datum/preferences
 			dat += "\[...\]<br><br>"
 		else
 			dat += "<br><br>"
-
-		dat += "<b>Custom Loadout:</b> "
-		var/total_cost = 0
-		if(gear && gear.len)
-			dat += "<br>"
-			for(var/gear_name in gear)
-				if(gear_datums[gear_name])
-					var/datum/gear/G = gear_datums[gear_name]
-					total_cost += G.cost
-					dat += "[gear_name] ([G.cost]) "
-					dat += "<a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
-			if(total_cost < MAX_GEAR_COST)
-				dat += "<a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a><br>"
-			dat += "<b>Used:</b> [total_cost] points.<br>"
-		else
-			dat += "none.<br>"
 
 		if(gender == MALE)
 			dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
@@ -857,9 +861,35 @@ datum/preferences
 
 			if(href_list["task"] == "input")
 
-				var/choice = input("Select gear to add.") as null|anything in gear_datums
+				var/list/valid_gear_choices = list()
+
+				for(var/gear_name in gear_datums)
+					var/datum/gear/G = gear_datums[gear_name]
+					if(G.whitelisted && !is_alien_whitelisted(user, G.whitelisted))
+						continue
+					valid_gear_choices += gear_name
+
+				var/choice = input(user, "Select gear to add: ") as null|anything in valid_gear_choices
+
 				if(choice && gear_datums[choice])
-					gear += choice
+
+					var/total_cost = 0
+
+					if(isnull(gear) || !islist(gear)) gear = list()
+
+					if(gear && gear.len)
+						for(var/gear_name in gear)
+							if(gear_datums[gear_name])
+								var/datum/gear/G = gear_datums[gear_name]
+								total_cost += G.cost
+
+					var/datum/gear/C = gear_datums[choice]
+					total_cost += C.cost
+					if(C && total_cost <= MAX_GEAR_COST)
+						gear += choice
+						user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+					else
+						user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
 
 			else if(href_list["task"] == "remove")
 				var/to_remove = href_list["gear"]
@@ -996,14 +1026,14 @@ datum/preferences
 								var/datum/language/lang = all_languages[L]
 								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
-									
+
 									//Apparently there's some PHP script that needs to be updated in order to give people whitelist languages.
 									//This workaround should be removed once that has been properly updated
 									if (lang.name == "Siik'maas")
 										new_languages |= all_languages["Siik'tajr"]
 									if (lang.name == "Siik'tajr")
 										new_languages |= all_languages["Siik'maas"]
-									
+
 									languages_available = 1
 
 							if(!(languages_available))
