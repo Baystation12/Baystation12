@@ -64,7 +64,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
+			return affected.status & ORGAN_CUT_AWAY && target.op_stage.head_reattach == 0 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -73,10 +73,9 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished repositioning flesh and tissue to something anatomically recognizable where [target]'s head used to be with \the [tool].",	\
 		"\blue You have finished repositioning flesh and tissue to something anatomically recognizable where [target]'s head used to be with \the [tool].")
-		affected.open = 3
+		target.op_stage.head_reattach = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -97,8 +96,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.open == 3
+			return target.op_stage.head_reattach == 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] is stapling and suturing flesh into place in [target]'s esophagal and vocal region with \the [tool].", \
@@ -106,10 +104,9 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished stapling [target]'s neck into place with \the [tool].",	\
 		"\blue You have finished stapling [target]'s neck into place with \the [tool].")
-		affected.open = 4
+		target.op_stage.head_reattach = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -132,8 +129,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.open == 4
+			return target.op_stage.head_reattach == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts adjusting area around [target]'s neck with \the [tool].", \
@@ -144,6 +140,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished adjusting the area around [target]'s neck with \the [tool].",	\
 		"\blue You have finished adjusting the area around [target]'s neck with \the [tool].")
+		target.op_stage.head_reattach = 0
 		affected.status |= ORGAN_ATTACHABLE
 		affected.amputated = 1
 		affected.setAmputatedTree()
