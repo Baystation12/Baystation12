@@ -163,7 +163,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Security")
+	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
 	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
@@ -183,6 +183,14 @@
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
+			module_sprites["Waitress"] = "Service"
+			module_sprites["Kent"] = "toiletbot"
+			module_sprites["Bro"] = "Brobot"
+			module_sprites["Rich"] = "maximillion"
+			module_sprites["Default"] = "Service2"
+
+		if("Clerical")
+			module = new /obj/item/weapon/robot_module/clerical(src)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -237,7 +245,7 @@
 			module_sprites["Landmate"] = "landmate"
 
 		if("Construction")
-			module = new /obj/item/weapon/robot_module/engineering(src)
+			module = new /obj/item/weapon/robot_module/construction(src)
 			module.channels = list("Engineering" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Engineering")
