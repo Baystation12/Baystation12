@@ -124,7 +124,7 @@
 			del(A)
 			continue
 
-	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
+	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
@@ -153,8 +153,9 @@
 
 	update_all_synd_icons()
 
-	if(uplinklocker)
-		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
+	if(uplinkdevice)
+		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
@@ -166,6 +167,7 @@
 
 
 /datum/game_mode/proc/prepare_syndicate_leader(var/datum/mind/synd_mind, var/nuke_code)
+	var/obj/effect/landmark/code_spawn = locate("landmark*Nuclear-Code")
 	if (nuke_code)
 		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
@@ -173,7 +175,7 @@
 		P.info = "The nuclear authorization code is: <b>[nuke_code]</b>"
 		P.name = "nuclear bomb code"
 		if (ticker.mode.config_tag=="nuclear")
-			P.loc = synd_mind.current.loc
+			P.loc = code_spawn.loc
 		else
 			var/mob/living/carbon/human/H = synd_mind.current
 			P.loc = H.loc
@@ -245,8 +247,8 @@
 			if("Skrell")
 				new_suit.species_restricted = list("Skrell")
 
-	synd_mob.equip_to_slot_or_del(new_suit, slot_wear_suit)
-	synd_mob.equip_to_slot_or_del(new_helmet, slot_head)
+	synd_mob.equip_to_slot_or_del(new_suit, slot_in_backpack)
+	synd_mob.equip_to_slot_or_del(new_helmet, slot_in_backpack)
 
 //	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
 //	E.imp_in = synd_mob
