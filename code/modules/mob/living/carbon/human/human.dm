@@ -1475,6 +1475,8 @@
 
 	text = input("What would you like to say?", "Speak to creature", null, null)
 
+	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
+
 	if(!text) return
 
 	var/mob/M = targets[target]
@@ -1482,6 +1484,8 @@
 	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
 		src << "Not even a [src.species.name] can speak to the dead."
 		return
+
+	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
 	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
 	if(istype(M,/mob/living/carbon/human))
