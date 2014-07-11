@@ -337,10 +337,12 @@ nanoui is used to open and update nano browser uis
 			[title ? "<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>[title]</div><div id='uiTitleFluff'></div></div>" : ""]
 			<div id='uiContent'>
 				<div id='uiLoadingNotice'>Initiating...</div>
-				<noscript id='uiNoScript'>
-					<h2>JAVASCRIPT REQUIRED</h2>
-					<p>Your Internet Explorer's Javascript is disabled (or broken).<br/>
-					Enable Javascript and then open this UI again.</p>
+				<noscript>
+					<div id='uiNoScript'>
+						<h2>JAVASCRIPT REQUIRED</h2>
+						<p>Your Internet Explorer's Javascript is disabled (or broken).<br/>
+						Enable Javascript and then open this UI again.</p>
+					</div>
 				</noscript>
 	"}
 
