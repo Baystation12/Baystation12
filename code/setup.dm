@@ -812,3 +812,5 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_VOX 2
 #define IS_SKRELL 3
 #define IS_UNATHI 4
+
+#define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
