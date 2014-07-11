@@ -14,6 +14,22 @@ proc/populate_gear_list()
 	var/whitelisted        //Term to check the whitelist for..
 
 //Standard gear datums.
+
+/datum/gear/cards
+	display_name = "deck of cards"
+	path = /obj/item/weapon/deck
+	cost = 2
+
+/datum/gear/dice
+	display_name = "d20"
+	path = /obj/item/weapon/dice/d20
+	cost = 1
+
+/datum/gear/comb
+	display_name = "purple comb"
+	path = /obj/item/weapon/fluff/cado_keppel_1
+	cost = 1
+
 /datum/gear/tie_horrible
 	display_name = "horrible tie"
 	path = /obj/item/clothing/tie/horrible
@@ -346,6 +362,19 @@ proc/populate_gear_list()
 	path = /obj/item/clothing/tie/storage/brown_vest
 	cost = 3
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+
+/datum/gear/engineer_bandana
+	display_name = "engineering bandana"
+	path = /obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1
+	cost = 2
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
+
+//Science
+/datum/gear/scanning_goggles
+	display_name = "scanning goggles"
+	path = /obj/item/clothing/glasses/fluff/uzenwa_sissra_1
+	cost = 2
+	allowed_roles = list("Roboticist", "Scientist", "Research Director")
 
 //Species-specific gear datums.
 /datum/gear/zhan_furs

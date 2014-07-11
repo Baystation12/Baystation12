@@ -350,6 +350,7 @@ var/global/datum/controller/occupations/job_master
 		if(!H)	return 0
 
 		var/datum/job/job = GetJob(rank)
+		var/list/spawn_in_storage = list()
 
 		if(job)
 
@@ -377,8 +378,8 @@ var/global/datum/controller/occupations/job_master
 						if(G.slot)
 							H.equip_to_slot_or_del(new G.path(H), G.slot)
 						else
-							spawn(1)
-								new G.path(get_turf(H))
+							spawn_in_storage += thing
+
 
 			//Equip job items.
 			job.equip(H)
@@ -459,6 +460,17 @@ var/global/datum/controller/occupations/job_master
 							var/obj/item/weapon/storage/backpack/BPK = new/obj/item/weapon/storage/backpack/satchel(H)
 							new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
+
+					//Deferred item spawning.
+					var/obj/item/weapon/storage/B = locate(/obj/item/weapon/storage/backpack) in H.contents
+
+					if(isnull(B) || istype(B))
+						B = locate(/obj/item/weapon/storage/box) in H.contents
+
+					if(!isnull(B))
+						for(var/thing in spawn_in_storage)
+							var/datum/gear/G = gear_datums[thing]
+							new G.path(B)
 
 		//TODO: Generalize this by-species
 		if(H.species)
