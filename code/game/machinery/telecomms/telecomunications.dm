@@ -31,7 +31,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/integrity = 100 // basically HP, loses integrity by heat
 	var/operating_temperature = 20 + T0C // the temperature that the machine will raise the environment to, null for no heat production
 	var/delay = 10 // how many process() ticks to delay per heat
-	var/heating_power = 40000
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
 	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
@@ -224,7 +223,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else
 		// If the machine is on, ready to produce heat, and has positive traffic, genn some heat
 		if(on && traffic > 0)
-			produce_heat(heatgen)
+			produce_heat(operating_temperature)
 			delay = initial(delay)
 
 /obj/machinery/telecomms/proc/produce_heat(new_temperature)
