@@ -277,7 +277,6 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
-		src.modules += new /obj/item/weapon/pen/robopen(src)
 
 		var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
 		M.matter = 30
@@ -318,6 +317,10 @@
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
+		src.modules += new /obj/item/weapon/form_printer(src)
+		src.modules += new /obj/item/weapon/gripper/paperwork(src)
+
+		src.emag = new /obj/item/weapon/stamp/denied(src)
 
 	add_languages(var/mob/living/silicon/robot/R)
 		R.add_language("Sol Common", 1)
@@ -344,6 +347,7 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/meson(src)
 		src.modules += new /obj/item/weapon/wrench(src)
+		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)
 		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 		src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
@@ -430,7 +434,7 @@
 /obj/item/proc/is_robot_module()
 	if (!istype(src.loc, /mob/living/silicon/robot))
 		return 0
-	
+
 	var/mob/living/silicon/robot/R = src.loc
-	
+
 	return (src in R.module.modules)
