@@ -68,8 +68,8 @@
 	var/response_sent = 0		//so we don't spam confirmation messages
 	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 	
-	var/override_enabled = 0	//skips checks for the docking port being ready
-	var/received_confirm = 0	//for undocking, whether the client has recieved a confirmation from the server
+	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
+	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id

@@ -401,7 +401,7 @@
 		occupantData["structuralEnzymes"] = null
 		occupantData["radiationLevel"] = null
 	else
-		occupantData["name"] = connected.occupant.name
+		occupantData["name"] = connected.occupant.real_name
 		occupantData["stat"] = connected.occupant.stat
 		occupantData["isViableSubject"] = 1
 		if (NOCLONE in connected.occupant.mutations || !src.connected.occupant.dna)
@@ -551,7 +551,7 @@
 	if (href_list["selectUIBlock"] && href_list["selectUISubblock"]) // This chunk of code updates selected block / sub-block based on click
 		var/select_block = text2num(href_list["selectUIBlock"])
 		var/select_subblock = text2num(href_list["selectUISubblock"])
-		if ((select_block <= 13) && (select_block >= 1))
+		if ((select_block <= DNA_UI_LENGTH) && (select_block >= 1))
 			src.selected_ui_block = select_block
 		if ((select_subblock <= DNA_BLOCK_SIZE) && (select_subblock >= 1))
 			src.selected_ui_subblock = select_subblock
@@ -704,7 +704,7 @@
 				databuf.types = DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.name
+					databuf.dna.real_name=connected.occupant.dna.real_name
 				databuf.name = "Unique Identifier"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -715,7 +715,7 @@
 				databuf.types = DNA2_BUF_UI|DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.name
+					databuf.dna.real_name=connected.occupant.dna.real_name
 				databuf.name = "Unique Identifier + Unique Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -726,7 +726,7 @@
 				databuf.types = DNA2_BUF_SE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.name
+					databuf.dna.real_name=connected.occupant.dna.real_name
 				databuf.name = "Structural Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
