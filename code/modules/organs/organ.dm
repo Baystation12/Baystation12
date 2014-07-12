@@ -21,7 +21,7 @@
 /datum/organ/proc/handle_antibiotics()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 	
-	if (antibiotics < 5)
+	if (!germ_level || antibiotics < 5)
 		return
 		
 	if (germ_level < INFECTION_LEVEL_ONE)
