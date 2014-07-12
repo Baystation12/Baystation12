@@ -6,8 +6,6 @@
 	temperature = T0C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 
-	sound_reduction = 255 //In space, no-one can hear you etc.
-
 //	heat_capacity = 700000 No.
 
 /turf/space/New()

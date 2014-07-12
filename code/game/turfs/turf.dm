@@ -26,9 +26,6 @@
 	var/has_resources
 	var/list/resources
 
-	//Sound reduction stuff, do not commit.
-	var/sound_reduction = 1
-
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)

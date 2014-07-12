@@ -36,8 +36,6 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/mineral = "metal"
 	var/obj/item/stack/tile/floor_tile = new/obj/item/stack/tile/plasteel
 
-	sound_reduction = 1
-
 /turf/simulated/floor/New()
 	..()
 	if(icon_state in icons_to_ignore_at_floor_init) //so damaged/burned tiles or plating icons aren't saved as the default
