@@ -6,7 +6,7 @@
 	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 5		//internal circuitry
-	active_power_usage = 25000	//25 kW charging station
+	active_power_usage = 75000	//75 kW charging station
 	var/mob/occupant = null
 
 

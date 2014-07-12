@@ -10,7 +10,7 @@
 	power_channel = EQUIP
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
-	var/power_rating = 50000	//50 kW. A measure of how powerful this charger is for charging cells (this the power drawn when charging)
+	var/power_rating = 40000	//40 kW. A measure of how powerful this charger is for charging cells (this the power drawn when charging)
 	
 	
 	proc
