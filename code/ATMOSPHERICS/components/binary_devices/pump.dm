@@ -21,7 +21,11 @@ obj/machinery/atmospherics/binary/pump
 
 	var/on = 0
 	var/target_pressure = ONE_ATMOSPHERE
+	var/power_rating = 7500		//A measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
 
+	use_power = 1
+	idle_power_usage = 10	//10 W for internal circuitry and stuff
+	
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
@@ -64,13 +68,40 @@ obj/machinery/atmospherics/binary/pump
 			return 1
 
 		//Calculate necessary moles to transfer using PV=nRT
-		if((air1.total_moles() > 0) && (air1.temperature>0))
+		if((air1.total_moles() > 0) && (air1.temperature > 0 || air2.temperature > 0))
+			var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
 			var/pressure_delta = target_pressure - output_starting_pressure
-			var/transfer_moles = pressure_delta*air2.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-			//Actually transfer the gas
+			var/transfer_moles = pressure_delta*air2.volume/(air_temperature * R_IDEAL_GAS_EQUATION)	//The number of moles that would have to be transfered to bring air2 to the target pressure
+			
+			//estimate the amount of energy required
+			var/specific_entropy = air2.specific_entropy() - air1.specific_entropy()	//air2 is gaining moles, air1 is loosing
+			var/specific_power = 0
+			
+			src.visible_message("DEBUG: [src] >>> terminal pressures: sink = [air2.return_pressure()] kPa, source = [air1.return_pressure()] kPa")
+			src.visible_message("DEBUG: [src] >>> specific entropy = [air2.specific_entropy()] - [air1.specific_entropy()] = [specific_entropy] J/K")
+			
+			//if specific_entropy >= 0 then gas just flows naturally and we are not limited by how powerful the pump is.
+			if (specific_entropy < 0)
+				specific_power = -specific_entropy*air_temperature		//how much power we need per mole
+				
+				src.visible_message("DEBUG: [src] >>> limiting transfer_moles to [power_rating / (air_temperature * -specific_entropy)] mol")
+				transfer_moles = min(transfer_moles, power_rating / specific_power)
+			
+			//Actually transfer the gas		
 			var/datum/gas_mixture/removed = air1.remove(transfer_moles)
 			air2.merge(removed)
+			
+			src.visible_message("DEBUG: [src] >>> entropy_change = [specific_entropy*transfer_moles] J/K")
+			
+			//if specific_entropy >= 0 then gas is flowing naturally and we don't need to use extra power
+			if (specific_entropy < 0)
+				//pump draws power and heats gas according to 2nd law of thermodynamics
+				
+				var/power_draw = transfer_moles*specific_power
+				air2.add_thermal_energy(power_draw)
+				use_power(power_draw)
+				
+				src.visible_message("DEBUG: [src] >>> drawing [power_draw] W of power.")
 
 			if(network1)
 				network1.update = 1
