@@ -90,3 +90,98 @@ var/const/SURROUND_CAP = 255
 			if ("pageturn") soundin = pick(page_sound)
 			//if ("gunshot") soundin = pick(gun_sound)
 	return soundin
+
+/*
+ *  This is a kind of crude flood-filling directional sound method
+ *  loosely based on A* pathfinding with some potentially costly list
+ *  operations to try and preserve smooth/sane sound falloff.
+ *  ~ Z
+ */
+
+//Do not commit this.
+/obj/item/test_sound_flood
+	name = "damp fart"
+	desc = "Go see a doctor."
+	var/soundvol = 50
+
+/obj/item/test_sound_flood/big
+	soundvol = 100
+
+/obj/item/test_sound_flood/biggest
+	soundvol = 255
+
+/obj/item/test_sound_flood/New()
+	..()
+	playsound_flood(get_turf(src),'sound/items/Screwdriver.ogg',soundvol)
+//Do not commit the above.
+
+
+#define SOUND_FLOOD_FAILSAFE 200
+/proc/playsound_flood(var/turf/origin, var/soundfile, var/volume)
+
+	if(!origin || !soundfile || !volume || !isturf(origin)) return
+
+	var/list/open_turfs = list()
+	var/list/closed_turfs = list()
+
+	// The open list stores both the turf and the volume of the sound when
+	// it was added to the list; this is passed onto neighbors later.
+	open_turfs[origin] = volume*2
+	var/attempts = 0
+
+	while(open_turfs.len && attempts < SOUND_FLOOD_FAILSAFE)
+
+		attempts++
+
+		// Modifying the overall open turf list during the loop will cause some
+		// turfs closer to the origin to have a lower volume than turfs farther
+		// away, so we just copy it over and loop over the copy.
+
+		var/list/current_open_turfs = open_turfs.Copy()
+
+		for(var/turf/T in current_open_turfs)
+
+			if(isnull(current_open_turfs[T]))
+				continue
+
+			//Switch turf from list of viable turfs to list of checked turfs.
+			closed_turfs[T] = 1
+			open_turfs[T] = null
+
+			T.color = "#FF[num2hex(Floor(255-(current_open_turfs[T]/2)))][num2hex(Floor(current_open_turfs[T]/2))]"
+
+			//Actually play the desired sound file.
+			var/sound_dir
+			for(var/mob/M in T.contents)
+				//Get the sound dir once per turf loop.
+				if(!sound_dir) sound_dir = get_dir(origin,T)
+				//playsound(M.loc, soundfile, Floor(current_open_turfs[T]/2), 1)
+
+			//Add the neighbors to the list of viable turfs...
+			for(var/turf/N in range(1,T))
+
+				//...assuming we haven't checked them already.
+				if(!isnull(closed_turfs[N]))
+					continue
+
+				//Some turfs are going to muffle sound more than others.
+				var/newvolume = current_open_turfs[T] - N.sound_reduction
+
+				//Doors will muffle sound.
+				var/obj/machinery/door/D = locate() in N.contents
+				if(D && D.density == 1)
+					newvolume = max(0,newvolume - 50)
+
+				//Increase loss on diagonals to smooth it out a little.
+				if(T.x != N.x && T.y != N.y)
+					newvolume = Floor(newvolume*0.8)
+
+				if(newvolume && newvolume > 0)
+					//We will check this turf next pass.
+					if(!isnull(open_turfs[N]))
+						open_turfs[N] = Floor((open_turfs[N] + newvolume)/2)
+					else
+						open_turfs[N] = newvolume
+				else
+					//Volume is 0, don't do anything with this turf.
+					closed_turfs[N] = 1
