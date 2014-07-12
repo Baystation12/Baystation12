@@ -150,25 +150,82 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return destination
 
+///////////////////
+//A* helpers procs
+///////////////////
 
+// Returns true if a link between A and B is blocked
+// Movement through doors allowed if ID has access
+/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/weapon/card/id/ID)
 
-/proc/LinkBlocked(turf/A, turf/B)
 	if(A == null || B == null) return 1
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
-	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
-		var/iStep = get_step(A,adir&(NORTH|SOUTH))
-		if(!LinkBlocked(A,iStep) && !LinkBlocked(iStep,B)) return 0
+	if(adir & (adir-1))	//	diagonal
+		var/turf/iStep = get_step(A,adir&(NORTH|SOUTH))
+		if(!iStep.density && !LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
+			return 0
 
-		var/pStep = get_step(A,adir&(EAST|WEST))
-		if(!LinkBlocked(A,pStep) && !LinkBlocked(pStep,B)) return 0
+		var/turf/pStep = get_step(A,adir&(EAST|WEST))
+		if(!pStep.density && !LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
+			return 0
+
+		return 1
+
+	if(DirBlockedWithAccess(A,adir, ID))
+		return 1
+
+	if(DirBlockedWithAccess(B,rdir, ID))
+		return 1
+
+	for(var/obj/O in B)
+		if(O.density && !istype(O, /obj/machinery/door) && !(O.flags & ON_BORDER))
+			return 1
+
+	return 0
+
+// Returns true if direction is blocked from loc
+// Checks doors against access with given ID
+/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/weapon/card/id/ID)
+	for(var/obj/structure/window/D in loc)
+		if(!D.density)			continue
+		if(D.dir == SOUTHWEST)	return 1 //full-tile window
+		if(D.dir == dir)		return 1 //matching border window
+
+	for(var/obj/machinery/door/D in loc)
+		if(!D.CanAStarPass(ID,dir))
+			return 1
+	return 0
+
+// Returns true if a link between A and B is blocked
+// Movement through doors allowed if door is open
+/proc/LinkBlocked(turf/A, turf/B)
+	if(A == null || B == null)
+		return 1
+	var/adir = get_dir(A,B)
+	var/rdir = get_dir(B,A)
+	if(adir & (adir-1)) //diagonal
+		var/turf/iStep = get_step(A,adir & (NORTH|SOUTH)) //check the north/south component
+		if(!iStep.density && !LinkBlocked(A,iStep) && !LinkBlocked(iStep,B))
+			return 0
+
+		var/turf/pStep = get_step(A,adir & (EAST|WEST)) //check the east/west component
+		if(!pStep.density && !LinkBlocked(A,pStep) && !LinkBlocked(pStep,B))
+			return 0
+
 		return 1
 
 	if(DirBlocked(A,adir)) return 1
 	if(DirBlocked(B,rdir)) return 1
+
+	for(var/obj/O in B)
+		if(O.density && !istype(O, /obj/machinery/door) && !(O.flags & ON_BORDER))
+			return 1
+
 	return 0
 
-
+// Returns true if direction is blocked from loc
+// Checks if doors are open
 /proc/DirBlocked(turf/loc,var/dir)
 	for(var/obj/structure/window/D in loc)
 		if(!D.density)			continue
@@ -176,18 +233,12 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		if(D.dir == dir)		return 1
 
 	for(var/obj/machinery/door/D in loc)
-		if(!D.density)			continue
-		if(istype(D, /obj/machinery/door/window))
-			if((dir & SOUTH) && (D.dir & (EAST|WEST)))		return 1
-			if((dir & EAST ) && (D.dir & (NORTH|SOUTH)))	return 1
-		else return 1	// it's a real, air blocking door
+		if(!D.density)//if the door is open
+			continue
+		else return 1	// if closed, it's a real, air blocking door
 	return 0
 
-/proc/TurfBlockedNonWindow(turf/loc)
-	for(var/obj/O in loc)
-		if(O.density && !istype(O, /obj/structure/window))
-			return 1
-	return 0
+/////////////////////////////////////////////////////////////////////////
 
 /proc/sign(x)
 	return x!=0?x/abs(x):0
@@ -1555,41 +1606,6 @@ proc/check_target_facings(mob/living/initator, mob/living/target)
 		return 3
 
 
-/proc/texttospeechstrip(var/t_in)
-    var/t_out = ""
-    for(var/i=1, i<=length(t_in), i++)
-        var/ascii_char = text2ascii(t_in,i)
-        switch(ascii_char)
-            // A .. Z
-            if(65 to 90)                        //Uppercase Letters
-                if(lentext(t_out) <= 150)
-                    t_out += ascii2text(ascii_char)
-            // a .. z
-            if(97 to 122)                        //Lowercase Letters
-                if(lentext(t_out) <= 150)
-                    t_out += ascii2text(ascii_char)
-            // 0 .. 9
-            if(48 to 57)                        //Numbers
-                if(lentext(t_out) <= 150)
-                    t_out += ascii2text(ascii_char)
-            // ` , - . ! ? : '
-            if(39,44,45,46,33,63,58,96,60,62)                        //Common name punctuation
-                if(lentext(t_out) <= 150)
-                    t_out += ascii2text(ascii_char)
-            //Space
-            if(32)
-                if(lentext(t_out) <= 150)
-                    t_out += ascii2text(ascii_char)
-    return t_out
-/var/lastspeak = ""
-
-
-/mob/proc/texttospeech(var/text, var/speed, var/pitch, var/accent, var/voice, var/echo)
-    text = texttospeechstrip(text)
-    lastspeak = text
-    ext_python("voice.py", "\"[accent]\" \"[voice]\" \"[pitch]\" \"[echo]\" \"[speed]\" \"[text]\" \"[src.ckey]\"")
-
-
 atom/proc/GetTypeInAllContents(typepath)
 	var/list/processing_list = list(src)
 	var/list/processed = list()
@@ -1610,3 +1626,11 @@ atom/proc/GetTypeInAllContents(typepath)
 		processed |= A
 
 	return found
+
+/proc/random_step(atom/movable/AM, steps, chance)
+	var/initial_chance = chance
+	while(steps > 0)
+		if(prob(chance))
+			step(AM, pick(alldirs))
+		chance = max(chance - (initial_chance / steps), 0)
+		steps--

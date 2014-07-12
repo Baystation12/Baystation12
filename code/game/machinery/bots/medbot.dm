@@ -446,11 +446,6 @@
 	return
 
 
-/obj/machinery/bot/medbot/proc/speak(var/message)
-	if((!src.on) || (!message))
-		return
-	visible_message("[src] beeps, \"[message]\"")
-	return
 
 /obj/machinery/bot/medbot/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.flag == "taser")

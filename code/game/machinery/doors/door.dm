@@ -99,6 +99,10 @@
 	return !density
 
 
+//used in the AStar algorithm to determinate if the turf the door is on is passable
+/obj/machinery/door/proc/CanAStarPass(var/obj/item/weapon/card/id/ID)
+	return !density || check_access(ID)
+
 /obj/machinery/door/proc/bumpopen(mob/user as mob)
 	if(operating)	return
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit

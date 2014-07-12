@@ -26,6 +26,8 @@
 	var/has_resources
 	var/list/resources
 
+	var/PathNode/PNode = null //associated PathNode in the A* algorithm
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
@@ -336,31 +338,102 @@
 		return
 	flags |= NOJAUNT
 
-/turf/proc/AdjacentTurfs()
-	var/L[] = new()
-	for(var/turf/simulated/t in oview(src,1))
-		if(!t.density)
-			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
-				L.Add(t)
-	return L
-/turf/proc/Distance(turf/t)
-	if(get_dist(src,t) == 1)
-		var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
-		cost *= (pathweight+t.pathweight)/2
-		return cost
-	else
-		return get_dist(src,t)
-/turf/proc/AdjacentTurfsSpace()
-	var/L[] = new()
-	for(var/turf/t in oview(src,1))
-		if(!t.density)
-			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
-				L.Add(t)
+/////////////////////////////////////////////////////////////////////////
+// Navigation procs
+// Used for A-star pathfinding
+////////////////////////////////////////////////////////////////////////
+
+///////////////////////////
+//Cardinal only movements
+///////////////////////////
+
+// Returns the surrounding cardinal turfs with open links
+// Including through doors openable with the ID
+/turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
+	var/list/L = new()
+	var/turf/simulated/T
+
+	for(var/dir in cardinal)
+		T = get_step(src, dir)
+		if(istype(T) && !T.density)
+			if(!LinkBlockedWithAccess(src, T, ID))
+				L.Add(T)
 	return L
 
-// This Distance proc assumes that only cardinal movement is
+// Returns the surrounding cardinal turfs with open links
+// Don't check for ID, doors passable only if open
+/turf/proc/CardinalTurfs()
+	var/list/L = new()
+	var/turf/simulated/T
+
+	for(var/dir in cardinal)
+		T = get_step(src, dir)
+		if(istype(T) && !T.density)
+			if(!LinkBlocked(src, T))
+				L.Add(T)
+	return L
+
+///////////////////////////
+//All directions movements
+///////////////////////////
+
+// Returns the surrounding simulated turfs with open links
+// Including through doors openable with the ID
+/turf/proc/AdjacentTurfsWithAccess(var/obj/item/weapon/card/id/ID = null,var/list/closed)//check access if one is passed
+	var/list/L = new()
+	var/turf/simulated/T
+	for(var/dir in list(NORTHWEST,NORTHEAST,SOUTHEAST,SOUTHWEST,NORTH,EAST,SOUTH,WEST)) //arbitrarily ordered list to favor non-diagonal moves in case of ties
+		T = get_step(src,dir)
+		if(T in closed) //turf already proceeded in A*
+			continue
+		if(istype(T) && !T.density)
+			if(!LinkBlockedWithAccess(src, T, ID))
+				L.Add(T)
+	return L
+
+//Idem, but don't check for ID and goes through open doors
+/turf/proc/AdjacentTurfs(var/list/closed)
+	var/list/L = new()
+	var/turf/simulated/T
+	for(var/dir in list(NORTHWEST,NORTHEAST,SOUTHEAST,SOUTHWEST,NORTH,EAST,SOUTH,WEST)) //arbitrarily ordered list to favor non-diagonal moves in case of ties
+		T = get_step(src,dir)
+		if(T in closed) //turf already proceeded by A*
+			continue
+		if(istype(T) && !T.density)
+			if(!LinkBlocked(src, T))
+				L.Add(T)
+	return L
+
+// check for all turfs, including unsimulated ones
+/turf/proc/AdjacentTurfsSpace(var/obj/item/weapon/card/id/ID = null, var/list/closed)//check access if one is passed
+	var/list/L = new()
+	var/turf/T
+	for(var/dir in list(NORTHWEST,NORTHEAST,SOUTHEAST,SOUTHWEST,NORTH,EAST,SOUTH,WEST)) //arbitrarily ordered list to favor non-diagonal moves in case of ties
+		T = get_step(src,dir)
+		if(T in closed) //turf already proceeded by A*
+			continue
+		if(istype(T) && !T.density)
+			if(!ID)
+				if(!LinkBlocked(src, T))
+					L.Add(T)
+			else
+				if(!LinkBlockedWithAccess(src, T, ID))
+					L.Add(T)
+	return L
+
+//////////////////////////////
+//Distance procs
+//////////////////////////////
+
+//Distance associates with all directions movement
+/turf/proc/Distance(var/turf/T)
+	return get_dist(src,T)
+
+//  This Distance proc assumes that only cardinal movement is
 //  possible. It results in more efficient (CPU-wise) pathing
 //  for bots and anything else that only moves in cardinal dirs.
-/turf/proc/Distance_cardinal(turf/t)
-	if(!src || !t) return 0
-	return abs(src.x - t.x) + abs(src.y - t.y)
+/turf/proc/Distance_cardinal(turf/T)
+	if(!src || !T) return 0
+	return abs(src.x - T.x) + abs(src.y - T.y)
+
+////////////////////////////////////////////////////
