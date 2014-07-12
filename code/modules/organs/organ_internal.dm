@@ -33,8 +33,6 @@
 
 /datum/organ/internal/process()
 	//Process infections
-	if (!germ_level)
-		return
 
 	if (robotic >= 2 || (owner.species && owner.species.flags & IS_PLANT))	//TODO make robotic internal and external organs separate types of organ instead of a flag
 		germ_level = 0
@@ -47,7 +45,7 @@
 		//** Handle the effects of infections
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		
-		if (germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
+		if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
 			germ_level--
 		
 		if (germ_level >= INFECTION_LEVEL_ONE/2)
