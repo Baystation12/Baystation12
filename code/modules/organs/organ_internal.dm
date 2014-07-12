@@ -27,8 +27,8 @@
 	var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
 	if(E.internal_organs == null)
 		E.internal_organs = list()
-	E.internal_organs += src
-	H.internal_organs[src.name] = src
+	E.internal_organs |= src
+	H.internal_organs |= src
 	src.owner = H
 
 /datum/organ/internal/process()

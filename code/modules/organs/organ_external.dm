@@ -98,7 +98,7 @@
 				return
 
 	// High brute damage or sharp objects may damage internal organs
-	if(internal_organs != null) if( (sharp && brute >= 5) || brute >= 10) if(prob(5))
+	if(internal_organs && ( (sharp && brute >= 5) || brute >= 10) && prob(5))
 		// Damage an internal organ
 		var/datum/organ/internal/I = pick(internal_organs)
 		I.take_damage(brute / 2)
