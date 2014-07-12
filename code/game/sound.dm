@@ -25,7 +25,7 @@ var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pagetur
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
-		if(get_dist(M, turf_source) <= (world.view + extrarange) * 6)
+		if(get_dist(M, turf_source) <= (world.view + extrarange) * 3)
 			var/turf/T = get_turf(M)
 			if(T && T.z == turf_source.z)
 				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff)
@@ -52,7 +52,7 @@ var/const/SURROUND_CAP = 255
 	if(isturf(turf_source))
 		// 3D sounds, the technology is here!
 		var/turf/T = get_turf(src)
-		S.volume -= get_dist(T, turf_source) * 0.5
+		S.volume -= get_dist(T, turf_source) * 0.75
 		if (S.volume < 0)
 			S.volume = 0
 		var/dx = turf_source.x - T.x // Hearing from the right/left
