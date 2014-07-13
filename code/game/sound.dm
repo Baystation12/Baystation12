@@ -1,4 +1,4 @@
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, surround = 1)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
@@ -17,12 +17,12 @@
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 6)
 			var/turf/T = get_turf(M)
 			if(T && T.z == turf_source.z)
-				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, surround)
+				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff)
 
 var/const/FALLOFF_SOUNDS = 2
 var/const/SURROUND_CAP = 255
 
-/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, surround = 1)
+/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff)
 	if(!src.client || ear_deaf > 0)	return
 	soundin = get_sfx(soundin)
 
@@ -48,8 +48,8 @@ var/const/SURROUND_CAP = 255
 
 		S.x = round(max(-SURROUND_CAP, min(SURROUND_CAP, dx)), 1)
 
-			var/dz = turf_source.y - T.y // Hearing from infront/behind
-			S.z = round(max(-SURROUND_CAP, min(SURROUND_CAP, dz)), 1)
+		var/dz = turf_source.y - T.y // Hearing from infront/behind
+		S.z = round(max(-SURROUND_CAP, min(SURROUND_CAP, dz)), 1)
 
 		// The y value is for above your head, but there is no ceiling in 2d spessmens.
 		S.y = 1
