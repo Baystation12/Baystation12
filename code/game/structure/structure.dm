@@ -5,3 +5,5 @@
 	icon_state = "snowman"
 	anchored = 1
 	density = 1
+
+/obj/structure/poopiepants
