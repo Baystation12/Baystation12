@@ -275,7 +275,7 @@ emp_act
 
 			if("chest")//Easier to score a stun but lasts less time
 				if(prob((I.force + 10)))
-					apply_effect(5, WEAKEN, armor)
+					apply_effect(6, WEAKEN, armor)
 					visible_message("\red <B>[src] has been knocked down!</B>")
 
 				if(bloody)

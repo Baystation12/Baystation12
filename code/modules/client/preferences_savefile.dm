@@ -155,6 +155,7 @@
 	S["skills"]				>> skills
 	S["skill_specialization"] >> skill_specialization
 	S["organ_data"]			>> organ_data
+	S["gear"]				>> gear
 
 	S["nanotrasen_relation"] >> nanotrasen_relation
 	//S["skin_style"]			>> skin_style
@@ -211,6 +212,7 @@
 	if(isnull(disabilities)) disabilities = 0
 	if(!player_alt_titles) player_alt_titles = new()
 	if(!organ_data) src.organ_data = list()
+	if(!gear) src.gear = list()
 	//if(!skin_style) skin_style = "Default"
 
 	return 1
@@ -248,6 +250,7 @@
 	S["undershirt"]			<< undershirt
 	S["backbag"]			<< backbag
 	S["b_type"]				<< b_type
+	S["spawnpoint"]			<< spawnpoint
 
 	//Jobs
 	S["alternate_option"]	<< alternate_option
@@ -273,6 +276,7 @@
 	S["skills"]				<< skills
 	S["skill_specialization"] << skill_specialization
 	S["organ_data"]			<< organ_data
+	S["gear"]				<< gear
 
 	S["nanotrasen_relation"] << nanotrasen_relation
 	//S["skin_style"]			<< skin_style
