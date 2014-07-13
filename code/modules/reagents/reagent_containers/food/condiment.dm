@@ -12,6 +12,7 @@
 	icon_state = "emptycondiment"
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 	possible_transfer_amounts = list(1,5,10)
+	CoM = list("x"=16, "y"=6)
 	volume = 50
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -90,37 +91,46 @@
 					name = "Ketchup"
 					desc = "You feel more American already."
 					icon_state = "ketchup"
+					CoM = list("x"=16, "y"=6)
 				if("capsaicin")
 					name = "Hotsauce"
 					desc = "You can almost TASTE the stomach ulcers now!"
 					icon_state = "hotsauce"
+					CoM = list("x"=16, "y"=6)
 				if("enzyme")
 					name = "Universal Enzyme"
 					desc = "Used in cooking various dishes."
 					icon_state = "enzyme"
+					CoM = list("x"=16, "y"=6)
 				if("soysauce")
 					name = "Soy Sauce"
 					desc = "A salty soy-based flavoring."
 					icon_state = "soysauce"
+					CoM = list("x"=16, "y"=6)
 				if("frostoil")
 					name = "Coldsauce"
 					desc = "Leaves the tongue numb in its passage."
 					icon_state = "coldsauce"
+					CoM = list("x"=16, "y"=6)
 				if("sodiumchloride")
 					name = "Salt Shaker"
 					desc = "Salt. From space oceans, presumably."
 					icon_state = "saltshaker"
+					CoM = list("x"=16, "y"=10)
 				if("blackpepper")
 					name = "Pepper Mill"
 					desc = "Often used to flavor food or make people sneeze."
 					icon_state = "peppermillsmall"
+					CoM = list("x"=16, "y"=10)
 				if("cornoil")
 					name = "Corn Oil"
 					desc = "A delicious oil used in cooking. Made from corn."
 					icon_state = "oliveoil"
+					CoM = list("x"=16, "y"=6)
 				if("sugar")
 					name = "Sugar"
 					desc = "Tastey space sugar!"
+					CoM = list("x"=16, "y"=6)
 				else
 					name = "Misc Condiment Bottle"
 					if (reagents.reagent_list.len==1)
@@ -128,10 +138,12 @@
 					else
 						desc = "A mixture of various condiments. [reagents.get_master_reagent_name()] is one of them."
 					icon_state = "mixedcondiments"
+					CoM = list("x"=16, "y"=6)
 		else
 			icon_state = "emptycondiment"
 			name = "Condiment Bottle"
 			desc = "An empty condiment bottle."
+			CoM = list("x"=16, "y"=6)
 			return
 
 /obj/item/weapon/reagent_containers/food/condiment/enzyme

@@ -120,7 +120,7 @@
 					reagents.add_reagent(refill, trans)
 					user << "Cyborg [src] refilled."
 
-		return
+		return ..()
 
 	examine()
 		set src in view()
@@ -169,11 +169,10 @@
 	desc = "It's milk. White and nutritious goodness!"
 	icon_state = "milk"
 	item_state = "carton"
+	CoM = list("x"=16, "y"=9)
 	New()
 		..()
 		reagents.add_reagent("milk", 50)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /* Flour is no longer a reagent
 /obj/item/weapon/reagent_containers/food/drinks/flour
@@ -194,63 +193,57 @@
 	desc = "It's soy milk. White and nutritious goodness!"
 	icon_state = "soymilk"
 	item_state = "carton"
+	CoM = list("x"=16, "y"=9)
 	New()
 		..()
 		reagents.add_reagent("soymilk", 50)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/coffee
 	name = "Robust Coffee"
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
+	CoM = list("x"=15, "y"=10)
 	New()
 		..()
 		reagents.add_reagent("coffee", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/tea
 	name = "Duke Purple Tea"
 	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
 	icon_state = "teacup"
 	item_state = "coffee"
+	CoM = list("x"=16, "y"=14)
 	New()
 		..()
 		reagents.add_reagent("tea", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "Ice Cup"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
+	CoM = list("x"=15, "y"=10)
 	New()
 		..()
 		reagents.add_reagent("ice", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
 	name = "Dutch Hot Coco"
 	desc = "Made in Space South America."
 	icon_state = "hot_coco"
 	item_state = "coffee"
+	CoM = list("x"=15, "y"=13)
 	New()
 		..()
 		reagents.add_reagent("hot_coco", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen
 	name = "Cup Ramen"
 	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
 	icon_state = "ramen"
+	CoM = list("x"=16, "y"=11)
 	New()
 		..()
 		reagents.add_reagent("dry_ramen", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
@@ -259,10 +252,9 @@
 	icon_state = "water_cup_e"
 	possible_transfer_amounts = null
 	volume = 10
+	CoM = list("x"=16, "y"=12)
 	New()
 		..()
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 	on_reagent_change()
 		if(reagents.total_volume)
 			icon_state = "water_cup"
@@ -281,33 +273,39 @@
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
 	volume = 100
+	CoM = list("x"=17, "y"=10)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "Captain's Flask"
 	desc = "A metal flask belonging to the captain"
 	icon_state = "flask"
 	volume = 60
+	CoM = list("x"=17, "y"=7)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/detflask
 	name = "Detective's Flask"
 	desc = "A metal flask with a leather band and golden badge belonging to the detective."
 	icon_state = "detflask"
 	volume = 60
+	CoM = list("x"=17, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/barflask
 	name = "flask"
 	desc = "For those who can't be bothered to hang out at the bar to drink."
 	icon_state = "barflask"
 	volume = 60
+	CoM = list("x"=17, "y"=7)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
 	name = "vacuum flask"
 	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
 	volume = 60
+	CoM = list("x"=15, "y"=4)
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
 	desc = "A cup with the British flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+	CoM = list("x"=15, "y"=13)
