@@ -134,7 +134,7 @@
 "acD" = (/obj/structure/stool/bed/chair{dir = 1},/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/machinery/atmospherics/unary/vent_pump{dir = 1; external_pressure_bound = 101.325; on = 1; pressure_checks = 1},/turf/simulated/floor{icon_state = "red"; dir = 6},/area/security/prison)
 "acE" = (/obj/structure/rack,/obj/item/weapon/gun/energy/laser,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/window/brigdoor{dir = 4; name = "Weapons locker"; req_access_txt = "3"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/warden)
 "acF" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/camera{c_tag = "Brig East"; dir = 8},/turf/simulated/floor{icon_state = "redcorner"; dir = 4},/area/security/brig)
-"acG" = (/obj/structure/rack,/obj/item/weapon/storage/lockbox/loyalty,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/warden)
+"acG" = (/obj/structure/rack,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/warden)
 "acH" = (/obj/machinery/flasher/portable,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/warden)
 "acI" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/security/brig)
 "acJ" = (/obj/structure/rack,/obj/item/clothing/suit/armor/riot,/obj/item/weapon/melee/baton,/obj/item/weapon/shield/riot,/obj/item/clothing/head/helmet/riot,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/window/brigdoor{dir = 8; name = "Weapons locker"; req_access_txt = "3"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/security/warden)
