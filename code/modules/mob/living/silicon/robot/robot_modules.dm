@@ -59,6 +59,7 @@
 	R.add_language("Tradeband", 1)
 	R.add_language("Sol Common", 1)
 
+
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
 
