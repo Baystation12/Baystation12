@@ -33,7 +33,15 @@
 		set name = "open laptop"
 		set category = "Object"
 		set src in view(1)
-
+		
+		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
+			usr << "\red You can't do that."
+			return
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		if(!istype(loc,/turf))
 			usr << "[src] is too bulky!  You'll have to set it down."
 			return
@@ -58,7 +66,8 @@
 			del src
 
 	AltClick()
-		open_computer()
+		if(Adjacent(usr))
+			open_computer()
 
 /obj/machinery/computer3/laptop
 	name = "Laptop Computer"
@@ -81,7 +90,15 @@
 		set name = "Close Laptop"
 		set category = "Object"
 		set src in view(1)
-
+		
+		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
+			usr << "\red You can't do that."
+			return
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		if(istype(loc,/obj/item/device/laptop))
 			testing("Close closed computer")
 			return
@@ -133,5 +150,5 @@
 
 
 	AltClick()
-		close_computer()
-
+		if(Adjacent(usr))
+			close_computer()

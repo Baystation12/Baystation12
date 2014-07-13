@@ -885,6 +885,7 @@
 #include "code\modules\mining\satchel_ore_boxdm.dm"
 #include "code\modules\mining\drilling\distribution.dm"
 #include "code\modules\mining\drilling\drill.dm"
+#include "code\modules\mining\drilling\scanner.dm"
 #include "code\modules\mob\abilities.dm"
 #include "code\modules\mob\death.dm"
 #include "code\modules\mob\emote.dm"

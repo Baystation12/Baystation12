@@ -58,6 +58,7 @@
 /obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
 	R.add_language("Tradeband", 1)
 	R.add_language("Sol Common", 1)
+	R.add_language("Gutter", 0)
 
 
 /obj/item/weapon/robot_module/standard

@@ -575,7 +575,7 @@
 /obj/machinery/suit_cycler
 
 	name = "suit cycler"
-	desc = "An industrial machine for repairing, painting and equipping hardsuits."
+	desc = "An industrial machine for painting and refitting hardsuits."
 	anchored = 1
 	density = 1
 
@@ -591,6 +591,7 @@
 	var/model_text = ""     // Some flavour text for the topic box.
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
 	var/panel_open = 0      // Hacking!
+	var/can_repair          // If set, the cycler can repair hardsuits.
 
 	// Wiring bollocks.
 	var/wires = 15
@@ -604,26 +605,54 @@
 	//Species that the suits can be configured to fit.
 	var/list/species = list("Human","Skrell","Unathi","Tajaran")
 
-	var/target_department = "Engineering"
-	var/target_species = "Human"
+	var/target_department
+	var/target_species
 
 	var/mob/living/carbon/human/occupant = null
 	var/obj/item/clothing/suit/space/rig/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
+
+/obj/machinery/suit_cycler/New()
+	..()
+	target_department = departments[1]
+	target_species = species[1]
+	if(!target_department || !target_species) del(src)
 
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	departments = list("Engineering","Atmos")
-	species = list("Human","Unathi","Tajaran")
+	species = list("Human","Tajaran") //Add Unathi when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
 	req_access = list(access_mining)
 	departments = list("Mining")
-	species = list("Human","Unathi","Tajaran")
+	species = list("Human","Tajaran")
+
+/obj/machinery/suit_cycler/security
+	name = "Security suit cycler"
+	model_text = "Security"
+	req_access = list(access_security)
+	departments = list("Security")
+	species = list("Human","Tajaran")
+
+/obj/machinery/suit_cycler/medical
+	name = "Medical suit cycler"
+	model_text = "Medical"
+	req_access = list(access_medical)
+	departments = list("Medical")
+	species = list("Human","Tajaran")
+
+/obj/machinery/suit_cycler/syndicate
+	name = "Nonstandard suit cycler"
+	model_text = "Nonstandard"
+	req_access = list(access_syndicate)
+	departments = list("Mercenary")
+	species = list("Human","Tajaran","Unathi","Skrell")
+	can_repair = 1
 
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -780,7 +809,7 @@
 		dat += "<b>Helmet: </b> [helmet ? "\the [helmet]" : "no helmet stored" ]. <A href='?src=\ref[src];eject_helmet=1'>\[eject\]</a><br/>"
 		dat += "<b>Suit: </b> [suit ? "\the [suit]" : "no suit stored" ]. <A href='?src=\ref[src];eject_suit=1'>\[eject\]</a>"
 
-		if(suit && istype(suit))
+		if(can_repair && suit && istype(suit))
 			dat += "[(suit.damage ? " <A href='?src=\ref[src];repair_suit=1'>\[repair\]</a>" : "")]"
 
 		dat += "<br/><b>UV decontamination systems:</b> <font color = '[emagged ? "red'>SYSTEM ERROR" : "green'>READY"]</font><br>"
@@ -839,7 +868,7 @@
 		radiation_level = input("Please select the desired radiation level.","Suit cycler",null) as null|anything in choices
 	else if(href_list["repair_suit"])
 
-		if(!suit) return
+		if(!suit || !can_repair) return
 		active = 1
 		spawn(100)
 			repair_suit()
@@ -943,7 +972,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("\The [src] pings loudly.")
+	T.visible_message("\icon[src] \blue The [src] pings loudly.")
 	icon_state = initial(icon_state)
 	active = 0
 	src.updateUsrDialog()
@@ -1036,8 +1065,11 @@
 		return
 
 	switch(target_species)
-		if("Human" || "Skrell")
-			if(helmet) helmet.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Skrell")
+			if(helmet) helmet.species_restricted = list("Skrell")
+			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			if(helmet) helmet.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox","Skrell")
 			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 		if("Unathi")
 			if(helmet) helmet.species_restricted = list("Unathi")
@@ -1097,7 +1129,7 @@
 				suit.name = "atmospherics hardsuit"
 				suit.icon_state = "rig-atmos"
 				suit.item_state = "atmos_hardsuit"
-		if("^%###^%$")
+		if("^%###^%$" || "Mercenary")
 			if(helmet)
 				helmet.name = "blood-red hardsuit helmet"
 				helmet.icon_state = "rig0-syndie"
@@ -1107,3 +1139,6 @@
 				suit.name = "blood-red hardsuit"
 				suit.item_state = "syndie_hardsuit"
 				suit.icon_state = "rig-syndie"
+
+	if(helmet) helmet.name = "refitted [helmet.name]"
+	if(suit) suit.name = "refitted [suit.name]"
