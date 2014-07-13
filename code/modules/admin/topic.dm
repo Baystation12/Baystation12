@@ -239,12 +239,23 @@
 	else if(href_list["edit_shuttle_time"])
 		if(!check_rights(R_SERVER))	return
 
-		var/new_time_left = input("Enter new shuttle launch duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.estimate_launch_time() ) as num
+		if (emergency_shuttle.wait_for_launch)
+			var/new_time_left = input("Enter new shuttle launch countdown (seconds):","Edit Shuttle Launch Time", emergency_shuttle.estimate_launch_time() ) as num
 
-		emergency_shuttle.launch_time = world.time + new_time_left*10
+			emergency_shuttle.launch_time = world.time + new_time_left*10
 
-		log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [new_time_left]")
-		message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [new_time_left*10]", 1)
+			log_admin("[key_name(usr)] edited the Emergency Shuttle's launch time to [new_time_left]")
+			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's launch time to [new_time_left*10]", 1)
+		else if (emergency_shuttle.shuttle.has_arrive_time())
+			
+			var/new_time_left = input("Enter new shuttle arrival time (seconds):","Edit Shuttle Arrival Time", emergency_shuttle.estimate_arrival_time() ) as num
+			emergency_shuttle.shuttle.arrive_time = world.time + new_time_left*10
+
+			log_admin("[key_name(usr)] edited the Emergency Shuttle's arrival time to [new_time_left]")
+			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's arrival time to [new_time_left*10]", 1)
+		else
+			alert("The shuttle is neither counting down to launch nor is it in transit. Please try again when it is.")
+		
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])
@@ -1922,21 +1933,111 @@
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
 
+			if("launchshuttle")
+				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
+			
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShL")
+				
+				var/list/valid_shuttles = list()
+				for (var/shuttle_tag in shuttle_controller.shuttles)
+					if (istype(shuttle_controller.shuttles[shuttle_tag], /datum/shuttle/ferry))
+						valid_shuttles += shuttle_tag
+				
+				var/shuttle_tag = input("Which shuttle do you want to launch?") as null|anything in valid_shuttles
+				
+				if (!shuttle_tag)
+					return
+				
+				var/datum/shuttle/ferry/S = shuttle_controller.shuttles[shuttle_tag]
+				if (S.can_launch())
+					S.launch(usr)
+					message_admins("\blue [key_name_admin(usr)] launched the [shuttle_tag] shuttle", 1)
+					log_admin("[key_name(usr)] launched the [shuttle_tag] shuttle")
+				else
+					alert("The [shuttle_tag] shuttle cannot be launched at this time. It's probably busy.")
+				
+			if("forcelaunchshuttle")
+				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
+			
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShFL")
+				
+				var/list/valid_shuttles = list()
+				for (var/shuttle_tag in shuttle_controller.shuttles)
+					if (istype(shuttle_controller.shuttles[shuttle_tag], /datum/shuttle/ferry))
+						valid_shuttles += shuttle_tag
+				
+				var/shuttle_tag = input("Which shuttle's launch do you want to force?") as null|anything in valid_shuttles
+				
+				if (!shuttle_tag)
+					return
+				
+				var/datum/shuttle/ferry/S = shuttle_controller.shuttles[shuttle_tag]
+				if (S.can_force())
+					S.force_launch(usr)
+					message_admins("\blue [key_name_admin(usr)] has forced the [shuttle_tag] shuttle launch", 1)
+					log_admin("[key_name(usr)] has forced the [shuttle_tag] shuttle launch")
+				else
+					alert("The [shuttle_tag] shuttle launch cannot be forced at this time. It's busy, or hasn't been launched yet.")
+				
+			if("jumpshuttle")
+				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
+			
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","ShJ")
+				
+				var/shuttle_tag = input("Which shuttle do you want to jump?") as null|anything in shuttle_controller.shuttles
+				if (!shuttle_tag) return
+				
+				var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
+				
+				var/origin_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+				if (!origin_area) return
+				
+				var/destination_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+				if (!destination_area) return
+				
+				var/long_jump = alert("Is there a transition area for this jump?","", "Yes", "No")
+				if (long_jump == "Yes")
+					var/transition_area = input("Which area is the transition area? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+					if (!transition_area) return
+					
+					var/move_duration = input("How many seconds will this jump take?") as num
+					
+					S.long_jump(origin_area, destination_area, transition_area, move_duration)
+					message_admins("\blue [key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] lasting [move_duration] seconds for the [shuttle_tag] shuttle", 1)
+					log_admin("[key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] lasting [move_duration] seconds for the [shuttle_tag] shuttle")
+				else
+					S.short_jump(origin_area, destination_area)
+					message_admins("\blue [key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] for the [shuttle_tag] shuttle", 1)
+					log_admin("[key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] for the [shuttle_tag] shuttle")
+			
 			if("moveshuttle")
 
-				if(!shuttles) return // Something is very wrong, the global shuttle list has not been created.
+				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
 
 				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShA")
+				feedback_add_details("admin_secrets_fun_used","ShM")
+				
+				var/confirm = alert("This command directly moves a shuttle from one area to another. DO NOT USE THIS UNLESS YOU ARE DEBUGGING A SHUTTLE AND YOU KNOW WHAT YOU ARE DOING.", "Are you sure?", "Ok", "Cancel")
+				if (confirm == "Cancel")
+					return
 
-				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles
-
-				if(shuttle_tag)
-					var/datum/shuttle/S = shuttles[shuttle_tag]
-					if(istype(S) && S.moving_status == 0)
-						S.move()
-						message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
-						log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
+				var/shuttle_tag = input("Which shuttle do you want to jump?") as null|anything in shuttle_controller.shuttles
+				if (!shuttle_tag) return
+				
+				var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
+				
+				var/origin_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+				if (!origin_area) return
+				
+				var/destination_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
+				if (!destination_area) return
+				
+				S.move(origin_area, destination_area)
+				message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
+				log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
 
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)

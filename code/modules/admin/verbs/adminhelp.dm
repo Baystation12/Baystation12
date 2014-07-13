@@ -91,8 +91,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(!mob)	return						//this doesn't happen
 
 	var/ref_mob = "\ref[mob]"
+	var/mentor_msg = "\blue <b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
 	msg = "\blue <b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
-
 	//send this msg to all admins
 	var/admin_number_afk = 0
 	for(var/client/X in admins)
@@ -101,7 +101,10 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				admin_number_afk++
 			if(X.prefs.toggles & SOUND_ADMINHELP)
 				X << 'sound/effects/adminhelp.ogg'
-			X << msg
+			if(X.holder.rights == R_MENTOR)
+				X << mentor_msg		// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
+			else
+				X << msg
 
 	//show it to the person adminhelping too
 	src << "<font color='blue'>PM to-<b>Admins</b>: [original_msg]</font>"

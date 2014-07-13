@@ -429,8 +429,18 @@ var/global/datum/controller/occupations/job_master
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 
 		//TODO: Generalize this by-species
-		if(H.species && (H.species.name == "Tajaran" || H.species.name == "Unathi"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+		if(H.species)
+			if(H.species.name == "Tajaran" || H.species.name == "Unathi")
+				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+			else if(H.species.name == "Vox")
+				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
+				if(!H.r_hand)
+					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(src), slot_r_hand)
+					H.internal = H.r_hand
+				else if (!H.l_hand)
+					H.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(src), slot_l_hand)
+					H.internal = H.l_hand
+				H.internals.icon_state = "internal1"
 
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"

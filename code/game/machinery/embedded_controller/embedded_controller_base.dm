@@ -1,5 +1,5 @@
 /obj/machinery/embedded_controller
-	var/datum/computer/file/embedded_program/program
+	var/datum/computer/file/embedded_program/program	//the currently executing program
 
 	name = "Embedded Controller"
 	anchored = 1

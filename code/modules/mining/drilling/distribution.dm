@@ -18,10 +18,10 @@
 #define MAX_DEEP_COUNT 300
 #define ITERATE_BEFORE_FAIL 200
 
-#define RESOURCE_HIGH_MAX 8
-#define RESOURCE_HIGH_MIN 5
-#define RESOURCE_MID_MAX 4
-#define RESOURCE_MID_MIN 2
+#define RESOURCE_HIGH_MAX 4
+#define RESOURCE_HIGH_MIN 2
+#define RESOURCE_MID_MAX 3
+#define RESOURCE_MID_MIN 1
 #define RESOURCE_LOW_MAX 1
 #define RESOURCE_LOW_MIN 0
 
@@ -52,10 +52,6 @@ Deep minerals:
 	var/random_variance_chance = 25
 	var/random_element = 0.5
 
-//Called by the drilling rigs each process().
-/datum/ore_distribution/proc/get_ore(var/x,var/y)
-	return "Nope."
-
 /datum/ore_distribution/proc/map_is_sane()
 	if(!map) return 0
 
@@ -79,12 +75,13 @@ Deep minerals:
 //Halfassed diamond-square algorithm with some fuckery since it's a single dimension array.
 /datum/ore_distribution/proc/populate_distribution_map()
 
-	//Seed beginning values.
+	//Announce it!
+	world << "<b><font color='red'>Generating resource distribution map.</b></font>"
 
+	//Seed beginning values.
 	var/x = 1
 	var/y = 1
 	var/size = real_size-1
-
 	map[MAP_TOP_LEFT] =     (range/3)+rand(range/5)
 	map[MAP_TOP_RIGHT] =    (range/3)+rand(range/5)
 	map[MAP_BOTTOM_LEFT] =  (range/3)+rand(range/5)
@@ -109,6 +106,14 @@ Deep minerals:
 		for(var/y = 1, y <= real_size, y++)
 			map[MAP_CELL] = 0
 
+/datum/ore_distribution/proc/print_distribution_map()
+	var/line = ""
+	for(var/x = 1, x <= real_size, x++)
+		for(var/y = 1, y <= real_size, y++)
+			line += num2text(round(map[MAP_CELL]/25.5))
+		world << line
+		line = ""
+
 /datum/ore_distribution/proc/generate_distribution_map(var/x,var/y,var/input_size)
 
 	var/size = input_size
@@ -131,11 +136,16 @@ Deep minerals:
 
 /datum/ore_distribution/proc/apply_to_asteroid()
 
-	var/origin_x = 13
-	var/origin_y = 32
-	var/limit_x = 217
-	var/limit_y = 223
-	var/asteroid_z = 5
+	// THESE VALUES DETERMINE THE AREA THAT THE DISTRIBUTION MAP IS APPLIED TO.
+	// IF YOU DO NOT RUN OFFICIAL BAYCODE ASTEROID MAP YOU NEED TO CHANGE THEM.
+	// ORIGIN IS THE BOTTOM LEFT CORNER OF THE SQUARE CONTAINING ALL ASTEROID
+	// TILES YOU WISH TO APPLY THE DISTRIBUTION MAP TO.
+
+	var/origin_x = 13  //We start here...
+	var/origin_y = 32  //...and here...
+	var/limit_x = 217  //...and iterate until here...
+	var/limit_y = 223  //...and here...
+	var/asteroid_z = 5 //...on this Z-level.
 
 	var/tx = origin_x
 	var/ty = origin_y
@@ -155,71 +165,47 @@ Deep minerals:
 
 					target_turf = locate(tx+j, ty+i, asteroid_z)
 
-					if(target_turf.has_resources)
+					if(target_turf && target_turf.has_resources)
 
-						var/printcolor
-						if(map[MAP_CELL] > (range*0.60))
-							printcolor = "#FF0000"
-						else if(map[MAP_CELL] > (range*0.40))
-							printcolor = "#00FF00"
-						else
-							printcolor = "#0000FF"
-						target_turf.color = "#[printcolor]"
 						target_turf.resources = list()
+						target_turf.resources["silicates"] = rand(3,5)
+						target_turf.resources["carbonaceous rock"] = rand(3,5)
 
-						target_turf.resources["silicates"] = rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
-						target_turf.resources["carbonaceous rock"] = rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
-
-						if(map[MAP_CELL] > (range*0.60))
-							target_turf.resources["iron"] =       0
-							target_turf.resources["gold"] =       0
-							target_turf.resources["silver"] =     0
-							target_turf.resources["uranium"] =    rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
-							target_turf.resources["diamond"] =    rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
-							target_turf.resources["phoron"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["osmium"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["hydrogen"] =   rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-						else if(map[MAP_CELL] > (range*0.40))
-							target_turf.resources["iron"] =       rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["gold"] =       rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["silver"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["uranium"] =    rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["diamond"] =    rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
-							target_turf.resources["phoron"] =     rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["osmium"] =     rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["hydrogen"] =   rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-						else
-							target_turf.resources["iron"] =       rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["gold"] =       rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["silver"] =     rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["uranium"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["diamond"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-							target_turf.resources["phoron"] =     0
-							target_turf.resources["osmium"] =     0
-							target_turf.resources["hydrogen"] =   0
+						switch(map[MAP_CELL])
+							if(0 to 100)
+								target_turf.resources["iron"] =       rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
+								target_turf.resources["gold"] =       rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
+								target_turf.resources["silver"] =     rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
+								target_turf.resources["uranium"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
+								target_turf.resources["diamond"] =    0
+								target_turf.resources["phoron"] =     0
+								target_turf.resources["osmium"] =     0
+								target_turf.resources["hydrogen"] =   0
+							if(100 to 124)
+								target_turf.resources["iron"] =       0
+								target_turf.resources["gold"] =       rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["silver"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["uranium"] =    rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["diamond"] =    0
+								target_turf.resources["phoron"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["osmium"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["hydrogen"] =   0
+							if(125 to 255)
+								target_turf.resources["iron"] =       0
+								target_turf.resources["gold"] =       0
+								target_turf.resources["silver"] =     0
+								target_turf.resources["uranium"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
+								target_turf.resources["diamond"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
+								target_turf.resources["phoron"] =     rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
+								target_turf.resources["osmium"] =     rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
+								target_turf.resources["hydrogen"] =   rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 
 			tx += chunk_size
 		tx = origin_x
 		ty += chunk_size
 
-/datum/ore_distribution/proc/print_map()
-	world << "---"
-	var/string = ""
-	for(var/y = 1, y <= real_size, y++)
-		for(var/x = 1, x <= real_size, x++)
-
-			var/printcolor
-			if(map[MAP_CELL] > (range*0.60))
-				printcolor = "#FF0000"
-			else if(map[MAP_CELL] > (range*0.40))
-				printcolor = "#00FF00"
-			else
-				printcolor = "#0000FF"
-			string += "<font color='[printcolor]'>#</font>"
-
-		world << string
-		string = ""
-	world << "---"
+	world << "<b><font color='red'>Resource map generation complete.</font></b>"
+	return
 
 #undef MAP_CELL
 #undef MAP_CENTRE

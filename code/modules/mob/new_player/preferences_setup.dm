@@ -198,12 +198,7 @@ datum/preferences
 		preview_icon.Blend(new /icon(icobase, "groin_[g]"), ICON_OVERLAY)
 		preview_icon.Blend(new /icon(icobase, "head_[g]"), ICON_OVERLAY)
 
-		for(var/name in list("l_arm","r_arm","l_leg","r_leg","l_foot","r_foot","l_hand","r_hand"))
-			// make sure the organ is added to the list so it's drawn
-			if(organ_data[name] == null)
-				organ_data[name] = null
-
-		for(var/name in organ_data)
+		for(var/name in list("r_arm","r_hand","r_leg","r_foot","l_leg","l_foot","l_arm","l_hand"))
 			if(organ_data[name] == "amputated") continue
 
 			var/icon/temp = new /icon(icobase, "[name]")
@@ -216,7 +211,7 @@ datum/preferences
 		if(current_species && (current_species.flags & HAS_TAIL))
 			var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
 			preview_icon.Blend(temp, ICON_OVERLAY)
-		
+
 		// Skin color
 		if(current_species && (current_species.flags & HAS_SKIN_COLOR))
 			preview_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)

@@ -53,6 +53,7 @@ datum/preferences
 	var/be_random_name = 0				//whether we are a random name every round
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
+	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
 	var/undershirt = 1					//undershirt type
@@ -246,7 +247,8 @@ datum/preferences
 		dat += "<br>"
 
 		dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
-		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a>"
+		dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
+		dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
@@ -960,6 +962,14 @@ datum/preferences
 								var/datum/language/lang = all_languages[L]
 								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
+									
+									//Apparently there's some PHP script that needs to be updated in order to give people whitelist languages.
+									//This workaround should be removed once that has been properly updated
+									if (lang.name == "Siik'maas")
+										new_languages |= all_languages["Siik'tajr"]
+									if (lang.name == "Siik'tajr")
+										new_languages |= all_languages["Siik'maas"]
+									
 									languages_available = 1
 
 							if(!(languages_available))
@@ -1178,6 +1188,16 @@ datum/preferences
 					if("skin_style")
 						var/skin_style_name = input(user, "Select a new skin style") as null|anything in list("default1", "default2", "default3")
 						if(!skin_style_name) return
+
+					if("spawnpoint")
+						var/list/spawnkeys = list()
+						for(var/S in spawntypes)
+							spawnkeys += S
+						var/choice = input(user, "Where would you like to spawn when latejoining?") as null|anything in spawnkeys
+						if(!choice || !spawntypes[choice])
+							spawnpoint = "Arrivals Shuttle"
+							return
+						spawnpoint = choice
 
 			else
 				switch(href_list["preference"])

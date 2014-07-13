@@ -17,7 +17,7 @@
 
 /mob/living/carbon/human/getBrainLoss()
 	var/res = brainloss
-	var/datum/organ/internal/brain/sponge = internal_organs["brain"]
+	var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
 	if (sponge.is_bruised())
 		res += 20
 	if (sponge.is_broken())
@@ -65,13 +65,13 @@
 
 	if (organ_name in organs_by_name)
 		var/datum/organ/external/O = get_organ(organ_name)
-	
+
 		if(amount > 0)
 			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
@@ -80,13 +80,13 @@
 
 	if (organ_name in organs_by_name)
 		var/datum/organ/external/O = get_organ(organ_name)
-	
+
 		if(amount > 0)
 			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(0, -amount, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/Stun(amount)
@@ -297,19 +297,17 @@ This function restores all organs.
 	updatehealth()
 	hud_updateflag |= 1 << HEALTH_HUD
 
-	//Embedded projectile code.
+	//Embedded object code.
 	if(!organ) return
-	if(istype(used_weapon,/obj/item/weapon))
-		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
-		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
-			organ.implants += W
-			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
-			embedded_flag = 1
-			src.verbs += /mob/proc/yank_out_object
-			W.add_blood(src)
-			if(ismob(W.loc))
-				var/mob/living/H = W.loc
-				H.drop_item()
-			W.loc = src
+	if(istype(used_weapon,/obj/item))
+		var/obj/item/W = used_weapon
+		if (!W.is_robot_module())
+			//blunt objects should really not be embedding in things unless a huge amount of force is involved
+			var/embed_chance = sharp? damage/W.w_class : damage/(W.w_class*3)
+			var/embed_threshold = sharp? 5*W.w_class : 15*W.w_class
+			
+			//Sharp objects will always embed if they do enough damage.
+			if((sharp && damage > (10*W.w_class)) || (sharp && !ismob(W.loc)) || (damage > embed_threshold && prob(embed_chance)))
+				organ.embed(W)
 
 	return 1

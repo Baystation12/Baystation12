@@ -1,6 +1,27 @@
 //TODO: rewrite and standardise all controller datums to the datum/controller type
 //TODO: allow all controllers to be deleted for clean restarts (see WIP master controller stuff) - MC done - lighting done
 
+/client/proc/show_distribution_map()
+	set category = "Debug"
+	set name = "Show Distribution Map"
+	set desc = "Print the asteroid ore distribution map to the world."
+
+	if(!holder)	return
+
+	if(master_controller && master_controller.asteroid_ore_map)
+		master_controller.asteroid_ore_map.print_distribution_map()
+
+/client/proc/remake_distribution_map()
+	set category = "Debug"
+	set name = "Remake Distribution Map"
+	set desc = "Rebuild the asteroid ore distribution map."
+
+	if(!holder)	return
+
+	if(master_controller && master_controller.asteroid_ore_map)
+		master_controller.asteroid_ore_map = new /datum/ore_distribution()
+		master_controller.asteroid_ore_map.populate_distribution_map()
+
 /client/proc/restart_controller(controller in list("Master","Failsafe","Lighting","Supply"))
 	set category = "Debug"
 	set name = "Restart Controller"
@@ -27,8 +48,7 @@
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
 	return
 
-
-/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller"))
+/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -62,6 +82,9 @@
 		if("Supply")
 			debug_variables(supply_controller)
 			feedback_add_details("admin_verb","DSupply")
+		if("Shuttles")
+			debug_variables(shuttle_controller)
+			feedback_add_details("admin_verb","DShuttles")
 		if("Emergency Shuttle")
 			debug_variables(emergency_shuttle)
 			feedback_add_details("admin_verb","DEmergency")

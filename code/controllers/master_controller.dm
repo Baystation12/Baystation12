@@ -32,8 +32,10 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
-	
-	var/list/shuttle_list	//for debugging and VV
+
+	var/list/shuttle_list	                    // For debugging and VV
+	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
+
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -52,7 +54,8 @@ datum/controller/game_controller/New()
 
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
-	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
+	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
+	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
@@ -67,9 +70,6 @@ datum/controller/game_controller/proc/setup()
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
 
-	if(!shuttles) setup_shuttles()
-	shuttle_list = shuttles
-
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -82,8 +82,11 @@ datum/controller/game_controller/proc/setup()
 		make_mining_asteroid_secret()
 
 	//Create the mining ore distribution map.
-	var/datum/ore_distribution/O = new()
-	O.populate_distribution_map()
+	asteroid_ore_map = new /datum/ore_distribution()
+	asteroid_ore_map.populate_distribution_map()
+
+	//Set up spawn points.
+	populate_spawn_points()
 
 	spawn(0)
 		if(ticker)
@@ -135,6 +138,7 @@ datum/controller/game_controller/proc/process()
 
 				vote.process()
 				transfer_controller.process()
+				shuttle_controller.process()
 				process_newscaster()
 
 				//AIR
@@ -230,7 +234,7 @@ datum/controller/game_controller/proc/process()
 				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
 
 				var/end_time = world.timeofday
-				if(end_time < start_time)
+				if(end_time < start_time)	//why not just use world.time instead?
 					start_time -= 864000    //deciseconds in a day
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else

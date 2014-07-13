@@ -104,7 +104,7 @@
 	var/vision_flags = 0
 	var/darkness_view = 0//Base human is 2
 	var/invisa_view = 0
-
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/eyes.dmi')
 /*
 SEE_SELF  // can see self, no matter what
 SEE_MOBS  // can see all mobs, no matter what
@@ -130,6 +130,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
 	species_restricted = list("exclude","Unathi","Tajaran")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 
 /obj/item/clothing/gloves/examine()
 	set src in usr
@@ -158,13 +159,13 @@ BLIND     // can't see anything
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
 
-
 //Mask
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/masks.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
 
 //Shoes
 /obj/item/clothing/shoes
@@ -179,6 +180,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	species_restricted = list("exclude","Unathi","Tajaran")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
 //Suit
 /obj/item/clothing/suit
@@ -250,6 +252,7 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = 0
 	var/basecolor
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
 	if(hastie)
@@ -274,10 +277,10 @@ BLIND     // can't see anything
 	if(hastie && src.loc == user)
 		hastie.attack_hand(user)
 		return
-	
+
 	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
 		return
-	
+
 	..()
 
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)
@@ -402,4 +405,8 @@ BLIND     // can't see anything
 	sensor_mode = pick(0,1,2,3)
 	..()
 
+/obj/item/clothing/under/emp_act(severity)
+	if (hastie)
+		hastie.emp_act(severity)
+	..()
 

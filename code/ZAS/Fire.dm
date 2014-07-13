@@ -63,9 +63,11 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	if(!istype(S))
 		del src
+		return
 
 	if(!S.zone)
 		del src
+		return
 
 	var/datum/gas_mixture/air_contents = S.return_air()
 	//get liquid fuels on the ground.
@@ -84,9 +86,10 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 			air_contents.trace_gases.Remove(fuel)
 
 	//check if there is something to combust
-	if(!air_contents.check_recombustability(liquid))
+	if(!air_contents.check_combustability(liquid))
 		//del src
 		RemoveFire()
+		return
 
 	//get a firelevel and set the icon
 	firelevel = air_contents.calculate_firelevel(liquid)
@@ -104,19 +107,20 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 	for(var/mob/living/carbon/human/M in loc)
 		M.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure() ) //Burn the humans!
+
+	loc.fire_act(air_contents, air_contents.temperature, air_contents.return_volume())
 	for(var/atom/A in loc)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.return_volume())
 	//spread
 	for(var/direction in cardinal)
-		if(S.open_directions & direction) //Grab all valid bordering tiles
+		var/turf/simulated/enemy_tile = get_step(S, direction)
 
-			var/turf/simulated/enemy_tile = get_step(S, direction)
-
-			if(istype(enemy_tile))
+		if(istype(enemy_tile))
+			if(S.open_directions & direction) //Grab all valid bordering tiles
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
 				var/obj/effect/decal/cleanable/liquid_fuel/liq = locate() in enemy_tile
 				if(!acs) continue
-				if(!acs.check_recombustability(liq)) continue
+				if(!acs.check_combustability(liq)) continue
 				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
 				//reduce firelevel.
 				if(enemy_tile.fire_protection > world.time-30)
@@ -128,22 +132,17 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 					if( prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && S.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, S, 0,0))
 						new/obj/fire(enemy_tile,firelevel)
 
+			else
+				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.return_volume())
+
 	//seperate part of the present gas
 	//this is done to prevent the fire burning all gases in a single pass
 	var/datum/gas_mixture/flow = air_contents.remove_ratio(vsc.fire_consuption_rate)
 ///////////////////////////////// FLOW HAS BEEN CREATED /// DONT DELETE THE FIRE UNTIL IT IS MERGED BACK OR YOU WILL DELETE AIR ///////////////////////////////////////////////
 
 	if(flow)
-
-		if(flow.check_recombustability(liquid))
-			//Ensure flow temperature is higher than minimum fire temperatures.
-				//this creates some energy ex nihilo but is necessary to get a fire started
-				//lets just pretend this energy comes from the ignition source and dont mention this again
-			//flow.temperature = max(PHORON_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
-
-			//burn baby burn!
-
-			flow.zburn(liquid,1)
+		//burn baby burn!
+		flow.zburn(liquid,1)
 		//merge the air back
 		S.assume_air(flow)
 
@@ -275,9 +274,9 @@ datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fu
 	if(oxygen && (phoron || fuel || liquid))
 		if(liquid)
 			return 1
-		if (phoron >= 0.1)
+		if(QUANTIZE(phoron * vsc.fire_consuption_rate) >= 0.1)
 			return 1
-		if(fuel && fuel.moles >= 0.1)
+		if(fuel && QUANTIZE(fuel.moles * vsc.fire_consuption_rate) >= 0.1)
 			return 1
 
 	return 0

@@ -15,6 +15,8 @@
 	data = list(
 		"docking_status" = docking_program.get_docking_status(),
 		"override_enabled" = docking_program.override_enabled,
+		"door_state" = 	docking_program.memory["door_status"]["state"],
+		"door_lock" = 	docking_program.memory["door_status"]["lock"],
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
@@ -27,7 +29,7 @@
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
@@ -42,7 +44,7 @@
 	if(clean)
 		program.receive_user_command(href_list["command"])
 
-	return 1
+	return 0
 
 
 //A docking controller program for a simple door based docking port
@@ -52,7 +54,6 @@
 /datum/computer/file/embedded_program/docking/simple/New(var/obj/machinery/embedded_controller/M)
 	..(M)
 	memory["door_status"] = list(state = "closed", lock = "locked")		//assume closed and locked in case the doors dont report in
-	memory["door_status"] = list(state = "closed", lock = "locked")
 
 	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller))
 		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = M

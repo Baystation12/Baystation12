@@ -26,6 +26,10 @@
 	#endif
 
 		var/turf/unsim = get_step(src, d)
+
+		if(!unsim)
+			continue
+
 		block = unsim.c_airblock(src)
 
 		if(block & AIR_BLOCKED)
@@ -75,6 +79,10 @@
 	#endif
 
 		var/turf/unsim = get_step(src, d)
+
+		if(!unsim) //edge of map
+			continue
+
 		var/block = unsim.c_airblock(src)
 		if(block & AIR_BLOCKED)
 
@@ -108,6 +116,8 @@
 		if(istype(unsim, /turf/simulated))
 
 			var/turf/simulated/sim = unsim
+			sim.open_directions |= reverse_dir[d]
+
 			if(air_master.has_valid_zone(sim))
 
 				//Might have assigned a zone, since this happens for each direction.

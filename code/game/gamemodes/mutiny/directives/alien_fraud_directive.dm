@@ -11,7 +11,7 @@ datum/directive/terminations/alien_fraud
 datum/directive/terminations/alien_fraud/get_crew_to_terminate()
 	var/list/aliens[0]
 	for(var/mob/M in player_list)
-		if (is_alien(M) && M.is_ready())
+		if (M.is_ready() && is_alien(M))
 			aliens.Add(M)
 	return aliens
 

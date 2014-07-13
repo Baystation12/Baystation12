@@ -149,6 +149,9 @@
 			return
 	return
 
+/turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
+	return
+
 /turf/proc/is_plating()
 	return 0
 /turf/proc/is_asteroid_floor()

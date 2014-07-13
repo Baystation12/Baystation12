@@ -98,11 +98,7 @@ emp_act
 		(SP.name) = "[P.name] shrapnel"
 		(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
 		(SP.loc) = organ
-		organ.implants += SP
-		visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-		embedded_flag = 1
-		src.verbs += /mob/proc/yank_out_object
-		SP.add_blood(src)
+		organ.embed(SP)
 
 	return (..(P , def_zone))
 
@@ -236,11 +232,11 @@ emp_act
 	if ((weapon_sharp || weapon_edge) && prob(getarmor(def_zone, "melee")))
 		weapon_sharp = 0
 		weapon_edge = 0
-	
+
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, I)
+	apply_damage(I.force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
@@ -312,6 +308,6 @@ emp_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	var/obj/item/clothing/suit/space/SS = wear_suit
-	var/penetrated_dam = max(0,(damage - max(0,(SS.breach_threshold - SS.damage))))
+	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
 
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)

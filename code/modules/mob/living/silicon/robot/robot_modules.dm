@@ -41,7 +41,15 @@
 			modules += O
 
 /obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+	//full set of languages
+	R.add_language("Sol Common", 0)
+	R.add_language("Sinta'unathi", 0)
+	R.add_language("Siik'maas", 0)
+	R.add_language("Siik'tajr", 0)
+	R.add_language("Skrellian", 0)
+	R.add_language("Rootspeak", 0)
 	R.add_language("Tradeband", 0)
+	R.add_language("Gutter", 0)
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
@@ -318,8 +326,8 @@
 		src.modules += new /obj/item/weapon/matter_decompiler(src)
 		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
 
-		src.emag = new /obj/item/weapon/card/emag(src)
-		src.emag.name = "Cryptographic Sequencer"
+		src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
+		src.emag.name = "Plasma Cutter"
 
 		for(var/T in stacktypes)
 			var/obj/item/stack/sheet/W = new T(src)
@@ -352,3 +360,12 @@
 	LR.Charge(R)
 
 	return
+
+//checks whether this item is a module of the robot it is located in.
+/obj/item/proc/is_robot_module()
+	if (!istype(src.loc, /mob/living/silicon/robot))
+		return 0
+	
+	var/mob/living/silicon/robot/R = src.loc
+	
+	return (src in R.module.modules)

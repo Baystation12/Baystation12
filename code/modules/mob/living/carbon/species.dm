@@ -28,9 +28,10 @@
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
-	
+
 	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
 	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
+	var/reagent_tag                 //Used for metabolizing reagents.
 
 	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
@@ -47,6 +48,7 @@
 
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
+	var/base_color      //Used when setting species.
 
 	//Used in icon caching.
 	var/race_key = 0
@@ -137,6 +139,9 @@
 
 	flesh_color = "#34AF10"
 
+	reagent_tag = IS_UNATHI
+	base_color = "#066000"
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -160,6 +165,7 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
+	base_color = "#333333"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -172,6 +178,8 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
+
+	reagent_tag = IS_SKRELL
 
 /datum/species/vox
 	name = "Vox"
@@ -192,10 +200,12 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD
+	flags = NO_SCAN
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
+
+	reagent_tag = IS_VOX
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -240,28 +250,7 @@
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
-/datum/species/vox/create_organs(var/mob/living/carbon/human/H)
-
-	..() //create organs first.
-
-	//Now apply cortical stack.
-	var/datum/organ/external/affected = H.get_organ("head")
-
-	//To avoid duplicates.
-	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
-		affected.implants -= imp
-		del(imp)
-
-	var/obj/item/weapon/implant/cortical/I = new(H)
-	I.imp_in = H
-	I.implanted = 1
-	affected.implants += I
-	I.part = affected
-
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-		var/datum/game_mode/heist/M = ticker.mode
-		M.cortical_stacks += I
-		M.raiders[H.mind] = I
+	reagent_tag = IS_VOX
 
 /datum/species/diona
 	name = "Diona"
@@ -288,6 +277,8 @@
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
+
+	reagent_tag = IS_DIONA
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
@@ -331,7 +322,7 @@
 	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
 	heat_level_2 = 1000
 	heat_level_3 = 2000
-	
+
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
@@ -348,7 +339,7 @@
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
 	var/sharp = 0
 	var/edge = 0
-	
+
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
 

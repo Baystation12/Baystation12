@@ -71,6 +71,7 @@
 	active_power_usage = 8
 	power_channel = ENVIRON
 	req_one_access = list(access_atmospherics, access_engine_equip)
+	var/breach_detection = 1 // Whether to use automatic breach detection or not
 	var/frequency = 1439
 	//var/skipprocess = 0 //Experimenting
 	var/alarm_frequency = 1437
@@ -214,8 +215,7 @@
 	danger_level = overall_danger_level()
 
 	if (old_level != danger_level)
-		refresh_danger_level()
-		update_icon()
+		apply_danger_level(danger_level)
 
 	if (old_pressurelevel != pressure_dangerlevel)
 		if (breach_detected())
@@ -276,17 +276,20 @@
 
 	if(!istype(location))
 		return 0
-	
+
+	if(breach_detection	== 0)
+		return 0
+
 	var/datum/gas_mixture/environment = location.return_air()
 	var/environment_pressure = environment.return_pressure()
 	var/pressure_levels = TLV["pressure"]
-	
+
 	if (environment_pressure <= pressure_levels[1])		//low pressures
 		if (!(mode == AALARM_MODE_PANIC || mode == AALARM_MODE_CYCLE))
 			return 1
-	
+
 	return 0
-	
+
 
 /obj/machinery/alarm/proc/master_is_operating()
 	return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
@@ -314,7 +317,12 @@
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
 		return
-	switch(max(danger_level, alarm_area.atmosalm))
+	
+	var/icon_level = danger_level
+	if (alarm_area.atmosalm)
+		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
+	
+	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
 		if (1)
@@ -397,14 +405,12 @@
 	return 1
 
 /obj/machinery/alarm/proc/apply_mode()
-	var/current_pressures = TLV["pressure"]
-	var/target_pressure = (current_pressures[2] + current_pressures[3])/2
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
 				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "scrubbing"= 1, "panic_siphon"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
-				send_signal(device_id, list("power"= 1, "checks"= 1, "set_external_pressure"= target_pressure) )
+				send_signal(device_id, list("power"= 1, "checks"= "default", "set_external_pressure"= "default") )
 
 		if(AALARM_MODE_PANIC, AALARM_MODE_CYCLE)
 			for(var/device_id in alarm_area.air_scrub_names)
@@ -416,13 +422,13 @@
 			for(var/device_id in alarm_area.air_scrub_names)
 				send_signal(device_id, list("power"= 1, "panic_siphon"= 1) )
 			for(var/device_id in alarm_area.air_vent_names)
-				send_signal(device_id, list("power"= 1, "checks"= 1, "set_external_pressure"= target_pressure) )
+				send_signal(device_id, list("power"= 1, "checks"= "default", "set_external_pressure"= "default") )
 
 		if(AALARM_MODE_FILL)
 			for(var/device_id in alarm_area.air_scrub_names)
 				send_signal(device_id, list("power"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
-				send_signal(device_id, list("power"= 1, "checks"= 1, "set_external_pressure"= target_pressure) )
+				send_signal(device_id, list("power"= 1, "checks"= "default", "set_external_pressure"= "default") )
 
 		if(AALARM_MODE_OFF)
 			for(var/device_id in alarm_area.air_scrub_names)
@@ -433,16 +439,6 @@
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
 	if (alarm_area.atmosalert(new_danger_level))
 		post_alert(new_danger_level)
-
-	for (var/area/A in alarm_area.related)
-		for (var/obj/machinery/alarm/AA in A)
-			if ( !(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted && AA.danger_level != new_danger_level)
-				AA.update_icon()
-
-	if(danger_level > 1)
-		air_doors_close(0)
-	else
-		air_doors_open(0)
 
 	update_icon()
 
@@ -466,71 +462,6 @@
 
 	frequency.post_signal(src, alert_signal)
 
-/obj/machinery/alarm/proc/refresh_danger_level()
-	var/level = 0
-	for (var/area/A in alarm_area.related)
-		for (var/obj/machinery/alarm/AA in A)
-			if ( !(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted)
-				if (AA.danger_level > level)
-					level = AA.danger_level
-	apply_danger_level(level)
-
-/obj/machinery/alarm/proc/air_doors_close(manual)
-	var/area/A = get_area(src)
-	if(!A.master.air_doors_activated)
-		A.master.air_doors_activated = 1
-		for(var/obj/machinery/door/E in A.master.all_doors)
-			if(istype(E,/obj/machinery/door/firedoor))
-				if(!E:blocked)
-					if(E.operating)
-						E:nextstate = CLOSED
-					else if(!E.density)
-						spawn(0)
-							E.close()
-				continue
-
-/*				if(istype(E, /obj/machinery/door/airlock))
-				if((!E:arePowerSystemsOn()) || (E.stat & NOPOWER) || E:air_locked) continue
-				if(!E.density)
-					spawn(0)
-						E.close()
-						spawn(10)
-							if(E.density)
-								E:air_locked = E.req_access
-								E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
-								E.update_icon()
-				else if(E.operating)
-					spawn(10)
-						E.close()
-						if(E.density)
-							E:air_locked = E.req_access
-							E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
-							E.update_icon()
-				else if(!E:locked) //Don't lock already bolted doors.
-					E:air_locked = E.req_access
-					E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
-					E.update_icon()*/
-
-/obj/machinery/alarm/proc/air_doors_open(manual)
-	var/area/A = get_area(loc)
-	if(A.master.air_doors_activated)
-		A.master.air_doors_activated = 0
-		for(var/obj/machinery/door/E in A.master.all_doors)
-			if(istype(E, /obj/machinery/door/firedoor))
-				if(!E:blocked)
-					if(E.operating)
-						E:nextstate = OPEN
-					else if(E.density)
-						spawn(0)
-							E.open()
-				continue
-
-/*				if(istype(E, /obj/machinery/door/airlock))
-				if((!E:arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
-				if(!isnull(E:air_locked)) //Don't mess with doors locked for other reasons.
-					E:req_access = E:air_locked
-					E:air_locked = null
-					E.update_icon()*/
 
 ///////////
 //HACKING//
@@ -773,19 +704,24 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 
 	output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K ([round(environment.temperature - T0C, 0.1)]C)<br>"
 
-	//Overall status
+	//'Local Status' should report the LOCAL status, damnit.
 	output += "Local Status: "
 	switch(max(pressure_dangerlevel,oxygen_dangerlevel,co2_dangerlevel,phoron_dangerlevel,other_dangerlevel,temperature_dangerlevel))
 		if(2)
-			output += "<span class='dl2'>DANGER: Internals Required</span>"
+			output += "<span class='dl2'>DANGER: Internals Required</span><br>"
 		if(1)
-			output += "<span class='dl1'>Caution</span>"
+			output += "<span class='dl1'>Caution</span><br>"
 		if(0)
-			if(alarm_area.atmosalm)
-				output += {"<span class='dl1'>Caution: Atmos alert in area</span>"}
-			else
-				output += {"<span class='dl0'>Optimal</span>"}
+			output += "<span class='dl0'>Optimal</span><br>"
 
+	output += "Area Status: "
+	if(alarm_area.atmosalm)
+		output += "<span class='dl1'>Atmos alert in area</span>"
+	else if (alarm_area.fire)
+		output += "<span class='dl1'>Fire alarm in area</span>"
+	else
+		output += "No alerts"
+	
 	return output
 
 /obj/machinery/alarm/proc/rcon_text()
@@ -816,9 +752,9 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 	switch(screen)
 		if (AALARM_SCREEN_MAIN)
 			if(alarm_area.atmosalm)
-				output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Atmospheric Alarm</a><hr>"
+				output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Area Atmospheric Alarm</a><hr>"
 			else
-				output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Atmospheric Alarm</a><hr>"
+				output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Area Atmospheric Alarm</a><hr>"
 
 			output += {"
 <a href='?src=\ref[src];screen=[AALARM_SCREEN_SCRUB]'>Scrubbers Control</a><br>
@@ -1081,9 +1017,9 @@ table tr:first-child th:first-child { border: none;}
 		if(href_list["atmos_unlock"])
 			switch(href_list["atmos_unlock"])
 				if("0")
-					air_doors_close(1)
+					alarm_area.air_doors_close()
 				if("1")
-					air_doors_open(1)
+					alarm_area.air_doors_open()
 
 		if(href_list["atmos_alarm"])
 			if (alarm_area.atmosalert(2))
@@ -1325,7 +1261,7 @@ FIRE ALARM
 	else
 		icon_state = "fire0"
 
-/obj/machinery/firealarm/temperature_expose(datum/gas_mixture/air, temperature, volume)
+/obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
 	if(src.detecting)
 		if(temperature > T0C+200)
 			src.alarm()			// added check of detector status here

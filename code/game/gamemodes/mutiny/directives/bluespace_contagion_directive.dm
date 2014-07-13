@@ -6,7 +6,7 @@ datum/directive/bluespace_contagion
 	proc/get_infection_candidates()
 		var/list/candidates[0]
 		for(var/mob/M in player_list)
-			if (!M.is_mechanical() && M.is_ready())
+			if (M.is_ready() && !M.is_mechanical())
 				candidates.Add(M)
 		return candidates
 
@@ -14,7 +14,7 @@ datum/directive/bluespace_contagion/get_description()
 	return {"
 		<p>
 			A manufactured and near-undetectable virus is spreading on NanoTrasen stations.
-			The pathogen travels by bluespace after maturing for one day.
+			The pathogen travels by bluespace after maturing for one day and meets the Sol Health Organisation standards for a class X biological threat, warranting use of lethal force to contain an outbreak.
 			No treatment has yet been discovered. Personnel onboard [station_name()] have been infected. Further information is classified.
 		</p>
 	"}
@@ -34,7 +34,7 @@ datum/directive/bluespace_contagion/initialize()
 	special_orders = list(
 		"Quarantine these personnel: [list2text(infected_names, ", ")].",
 		"Allow one hour for a cure to be manufactured.",
-		"If no cure arrives after that time, execute the infected.")
+		"If no cure arrives after that time, execute and burn the infected.")
 
 datum/directive/bluespace_contagion/meets_prerequisites()
 	var/list/candidates = get_infection_candidates()

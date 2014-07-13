@@ -5,42 +5,51 @@
 		</div>
 		{{if docking_status == "docked"}}
 			<div class="itemContent" style="float:left">
-				{{if airlock_disabled}}
+				{{if !override_enabled}}
 					<span class="good" style="float:left">DOCKED</span>
 				{{else}}
 					<span class="bad" style="float:left">DOCKED-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, airlock_disabled ? null : 'redBackground')}}
+					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, override_enabled ? 'redBackground' : null)}}
 				</span>
 			</div>
 		{{else docking_status == "docking"}}
 			<div class="itemContent" style="float:left">
-				{{if airlock_disabled}}
+				{{if !override_enabled}}
 					<span class="average" style="float:left">DOCKING</span>
 				{{else}}
 					<span class="bad" style="float:left">DOCKING-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, airlock_disabled ? null : 'redBackground')}}
+					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, override_enabled ? 'redBackground' : null)}}
 				</span>
 			</div>
 		{{else docking_status == "undocking"}}
 			<div class="itemContent" style="float:left">
-				{{if airlock_disabled}}
+				{{if !override_enabled}}
 					<span class="average" style="float:left">UNDOCKING</span>
 				{{else}}
 					<span class="bad" style="float:left">UNDOCKING-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, airlock_disabled ? null : 'redBackground')}}
+					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, override_enabled ? 'redBackground' : null)}}
 				</span>
 			</div>
 		{{else docking_status == "undocked"}}
-			<span class="idle">NOT IN USE</span>
+			<div class="itemContent" style="float:left">
+				{{if !override_enabled}}
+					<span class="idle" style="float:left">NOT IN USE</span>
+				{{else}}
+					<span class="bad" style="float:left">OVERRIDE ENABLED</span>
+				{{/if}}
+				<span style="float:right">
+					{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, override_enabled ? 'redBackground' : null)}}
+				</span>
+			</div>
 		{{else}}
 			<span class="bad">ERROR</span>
-			{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, airlock_disabled ? null : 'redBackground')}}
+			{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, override_enabled ? 'redBackground' : null)}}
 		{{/if}}
 	</div>
 </div>

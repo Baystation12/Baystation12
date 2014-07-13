@@ -76,9 +76,13 @@
 			if(1)				//emergency shuttle timer
 				if(emergency_shuttle.waiting_to_leave())
 					var/line1 = "-ETD-"
-					var/line2 = get_shuttle_timer_departure()
-					if(length(line2) > CHARS_PER_LINE)
-						line2 = "Error!"
+					var/line2
+					if (emergency_shuttle.shuttle.is_launching())
+						line2 = "Launch"
+					else
+						line2 = get_shuttle_timer_departure()
+						if(length(line2) > CHARS_PER_LINE)
+							line2 = "Error!"
 					update_display(line1, line2)
 				else if(emergency_shuttle.has_eta())
 					var/line1 = "-ETA-"
@@ -117,11 +121,11 @@
 				var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
 				if (!shuttle)
 					line2 = "Error"
-				else if(shuttle.has_eta())
+				else if(shuttle.has_arrive_time())
 					line2 = get_supply_shuttle_timer()
 					if(lentext(line2) > CHARS_PER_LINE)
 						line2 = "Error"
-				else if (shuttle.moving_status == SHUTTLE_WARMUP)
+				else if (shuttle.is_launching())
 					if (shuttle.at_station())
 						line2 = "Launch"
 					else
@@ -183,7 +187,7 @@
 		if (!shuttle)
 			return "Error"
 
-		if(shuttle.has_eta())
+		if(shuttle.has_arrive_time())
 			var/timeleft = round((shuttle.arrive_time - world.time) / 10,1)
 			if(timeleft < 0)
 				return "Late"
@@ -270,6 +274,12 @@
 					set_picture("ai_confused")
 				if("Sad")
 					set_picture("ai_sad")
+				if("Surprised")
+					set_picture("ai_surprised")
+				if("Upset")
+					set_picture("ai_upset")
+				if("Angry")
+					set_picture("ai_angry")
 				if("BSOD")
 					set_picture("ai_bsod")
 				if("Blank")

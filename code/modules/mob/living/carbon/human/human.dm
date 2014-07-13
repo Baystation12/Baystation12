@@ -43,7 +43,7 @@
 
 	if(!species)
 		if(new_species)
-			set_species(new_species)
+			set_species(new_species,null,1)
 		else
 			set_species()
 
@@ -112,7 +112,7 @@
 			return
 
 		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
-		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && canmove) // mutual brohugs all around!
+		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
 			var/turf/oldloc = loc
 			loc = tmob.loc
 			tmob.loc = oldloc
@@ -171,10 +171,9 @@
 		if(ticker.mode:malf_mode_declared)
 			stat(null, "Time left: [max(ticker.mode:AI_win_timeleft/(ticker.mode:apcs/3), 0)]")
 	if(emergency_shuttle)
-		if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
-			var/timeleft = emergency_shuttle.estimate_arrival_time()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 	if (client.statpanel == "Status")
 		if (internal)
@@ -1087,8 +1086,7 @@
 					H.brainmob.mind.transfer_to(src)
 					del(H)
 
-	for(var/E in internal_organs)
-		var/datum/organ/internal/I = internal_organs[E]
+	for(var/datum/organ/internal/I in internal_organs)
 		I.damage = 0
 
 	for (var/datum/disease/virus in viruses)
@@ -1100,11 +1098,11 @@
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/datum/organ/internal/lungs/L = internal_organs["lungs"]
+	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/datum/organ/internal/lungs/L = internal_organs["lungs"]
+	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 
 	if(!L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
@@ -1167,7 +1165,7 @@
 	var/list/visible_implants = list()
 	for(var/datum/organ/external/organ in src.organs)
 		for(var/obj/item/weapon/O in organ.implants)
-			if(!istype(O,/obj/item/weapon/implant) && O.w_class > class)
+			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class) && !istype(O,/obj/item/weapon/shard/shrapnel))
 				visible_implants += O
 
 	return(visible_implants)
@@ -1227,7 +1225,7 @@
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs, var/default_colour)
 
 	if(!dna)
 		if(!new_species)
@@ -1252,11 +1250,22 @@
 	if(species.language)
 		add_language(species.language)
 
+	if(species.base_color && default_colour)
+		//Apply colour.
+		r_skin = hex2num(copytext(species.base_color,2,4))
+		g_skin = hex2num(copytext(species.base_color,4,6))
+		b_skin = hex2num(copytext(species.base_color,6,8))
+	else
+		r_skin = 0
+		g_skin = 0
+		b_skin = 0
+
+	species.handle_post_spawn(src)
+
 	spawn(0)
 		update_icons()
 
 	if(species)
-		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
@@ -1347,7 +1356,7 @@
 	if(last_special > world.time)
 		return
 
-	if(stat || paralysis || stunned || weakened || lying)
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
 		src << "You cannot leap in your current state."
 		return
 
@@ -1357,13 +1366,20 @@
 			choices += M
 	choices -= src
 
-	var/mob/living/T = input(src,"Who do you wish to leap at?") in null|choices
+	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
 
 	if(!T || !src || src.stat) return
 
 	if(get_dist(get_turf(T), get_turf(src)) > 6) return
 
-	last_special = world.time + 100
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	last_special = world.time + 75
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
@@ -1379,6 +1395,11 @@
 		return
 
 	T.Weaken(5)
+
+	//Only official raider vox get the grab and no self-prone."
+	if(src.mind && src.mind.special_role != "Vox Raider")
+		src.Weaken(5)
+		return
 
 	var/use_hand = "left"
 	if(l_hand)

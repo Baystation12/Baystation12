@@ -746,7 +746,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
-#define NONVERBAL 4    // Language has a significant non-verbal component.
+#define NONVERBAL 4    // Language has a significant non-verbal component. Speech is garbled without line-of-sight
+#define SIGNLANG 8     // Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -762,15 +763,52 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
 
-//Shuttle moving status
-#define SHUTTLE_IDLE		0
-#define SHUTTLE_WARMUP		1
-#define SHUTTLE_INTRANSIT	2
 
-//Germs and infection
+
+/*
+	Germs and infections
+*/
+
 #define GERM_LEVEL_AMBIENT		110		//maximum germ level you can reach by standing still
 #define GERM_LEVEL_MOVE_CAP		200		//maximum germ level you can reach by running around
 
 #define INFECTION_LEVEL_ONE		100
 #define INFECTION_LEVEL_TWO		500
 #define INFECTION_LEVEL_THREE	1000
+
+
+/*
+	Shuttles
+*/
+
+// these define the time taken for the shuttle to get to SS13
+// and the time before it leaves again
+#define SHUTTLE_PREPTIME 				300	// 5 minutes = 300 seconds - after this time, the shuttle departs centcom and cannot be recalled
+#define SHUTTLE_LEAVETIME 				180	// 3 minutes = 180 seconds - the duration for which the shuttle will wait at the station after arriving
+#define SHUTTLE_TRANSIT_DURATION		300	// 5 minutes = 300 seconds - how long it takes for the shuttle to get to the station
+#define SHUTTLE_TRANSIT_DURATION_RETURN 120	// 2 minutes = 120 seconds - for some reason it takes less time to come back, go figure.
+
+//Shuttle moving status
+#define SHUTTLE_IDLE		0
+#define SHUTTLE_WARMUP		1
+#define SHUTTLE_INTRANSIT	2
+
+//Ferry shuttle processing status
+#define IDLE_STATE		0
+#define WAIT_LAUNCH		1
+#define WAIT_ARRIVE		2
+#define WAIT_FINISH		3
+
+//computer3 error codes, move lower in the file when it passes dev -Sayu
+ #define PROG_CRASH      1  // Generic crash
+ #define MISSING_PERIPHERAL  2  // Missing hardware
+ #define BUSTED_ASS_COMPUTER  4  // Self-perpetuating error.  BAC will continue to crash forever.
+ #define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
+ #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
+ #define NETWORK_FAILURE  32
+
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+#define IS_SKRELL 3
+#define IS_UNATHI 4

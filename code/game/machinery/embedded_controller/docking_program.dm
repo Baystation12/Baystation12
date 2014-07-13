@@ -6,7 +6,9 @@
 
 #define MODE_NONE			0
 #define MODE_SERVER			1
-#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking. (Think server == station, client == shuttle)
+#define MODE_CLIENT			2	//The one who initiated the docking, and who can initiate the undocking. The server cannot initiate undocking, and is the one responsible for deciding to accept a docking request and signals when docking and undocking is complete. (Think server == station, client == shuttle)
+
+#define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
 /*
 	*** STATE TABLE ***
@@ -64,9 +66,10 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
+	var/resend_counter = 0		//for periodically resending confirmation messages in case they are missed
 	
-	var/override_enabled = 0	//skips checks for the docking port being ready
-	var/received_confirm = 0	//for undocking, whether the client has recieved a confirmation from the server
+	var/override_enabled = 0	//when enabled, do not open/close doors or cycle airlocks and wait for the player to do it manually
+	var/received_confirm = 0	//for undocking, whether the server has recieved a confirmation from the client
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
@@ -80,11 +83,13 @@
 		if ("confirm_dock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKED && receive_tag == tag_target)
 				dock_state = STATE_DOCKING
+				broadcast_docking_status()
 				if (!override_enabled)
 					prepare_for_docking()
 			
 			else if (control_mode == MODE_CLIENT && dock_state == STATE_DOCKING && receive_tag == tag_target)
 				dock_state = STATE_DOCKED
+				broadcast_docking_status()
 				if (!override_enabled)
 					finish_docking()	//client done docking!
 				response_sent = 0
@@ -94,7 +99,10 @@
 		if ("request_dock")
 			if (control_mode == MODE_NONE && dock_state == STATE_UNDOCKED)
 				control_mode = MODE_SERVER
+				
 				dock_state = STATE_DOCKING
+				broadcast_docking_status()
+				
 				tag_target = receive_tag
 				if (!override_enabled)
 					prepare_for_docking()
@@ -111,6 +119,8 @@
 		if ("request_undock")
 			if (control_mode == MODE_SERVER && dock_state == STATE_DOCKED && receive_tag == tag_target)
 				dock_state = STATE_UNDOCKING
+				broadcast_docking_status()
+				
 				if (!override_enabled)
 					prepare_for_undocking()
 
@@ -129,7 +139,10 @@
 				
 				else if (control_mode == MODE_SERVER && received_confirm)
 					send_docking_command(tag_target, "confirm_dock")	//tell the client we are done docking.
+					
 					dock_state = STATE_DOCKED
+					broadcast_docking_status()
+					
 					if (!override_enabled)
 						finish_docking()	//server done docking!
 					response_sent = 0
@@ -148,10 +161,12 @@
 						finish_undocking()
 					reset()		//server is done undocking!
 					
-
+	if (response_sent || resend_counter > 0)
+		resend_counter++
 	
-	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
+	if (resend_counter >= MESSAGE_RESEND_TIME || (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING))
 		response_sent = 0
+		resend_counter = 0
 	
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
@@ -176,6 +191,8 @@
 		return
 	
 	dock_state = STATE_UNDOCKING
+	broadcast_docking_status()
+	
 	if (!override_enabled)
 		prepare_for_undocking()
 	
@@ -213,6 +230,8 @@
 
 /datum/computer/file/embedded_program/docking/proc/reset()
 	dock_state = STATE_UNDOCKED
+	broadcast_docking_status()
+	
 	control_mode = MODE_NONE
 	tag_target = null
 	response_sent = 0
@@ -241,6 +260,12 @@
 	signal.data["recipient"] = recipient
 	post_signal(signal)
 
+/datum/computer/file/embedded_program/docking/proc/broadcast_docking_status()
+	var/datum/signal/signal = new
+	signal.data["tag"] = id_tag
+	signal.data["dock_status"] = get_docking_status()
+	post_signal(signal)
+
 //this is mostly for NanoUI
 /datum/computer/file/embedded_program/docking/proc/get_docking_status()
 	switch (dock_state)
@@ -248,10 +273,8 @@
 		if (STATE_DOCKING) return "docking"
 		if (STATE_UNDOCKING) return "undocking"
 		if (STATE_DOCKED) return "docked"
-	
-	
 
-	
+
 #undef STATE_UNDOCKED
 #undef STATE_DOCKING
 #undef STATE_UNDOCKING

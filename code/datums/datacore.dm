@@ -146,7 +146,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		if(E.status & ORGAN_ROBOT)
 			temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 		preview_icon.Blend(temp, ICON_OVERLAY)
-	
+
 	//Tail
 	if(H.species.tail && H.species.flags & HAS_TAIL)
 		temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[H.species.tail]_s")
@@ -188,7 +188,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		if("Bartender")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "ba_suit_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
-		if("Botanist")
+		if("Gardener")
 			clothes_s = new /icon('icons/mob/uniform.dmi', "hydroponics_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 		if("Chef")

@@ -5,7 +5,6 @@
 
 /datum/shuttle/ferry/supply
 	var/away_location = 1	//the location to hide at while pretending to be in-transit
-	var/arrive_time = 0
 	var/late_chance = 80
 	var/max_late_time = 300
 
@@ -32,6 +31,7 @@
 		
 		if (at_station() && forbidden_atoms_check())
 			//cancel the launch because of forbidden atoms. announce over supply channel?
+			moving_status = SHUTTLE_IDLE
 			return
 		
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
@@ -47,19 +47,16 @@
 			sleep(5)
 
 		if (destination != away_area)
+			//late
+			if (prob(late_chance))
+				sleep(rand(0,max_late_time))
+		
 			move(away_area, destination)
-
-		//late
-		if (prob(late_chance))
-			sleep(rand(0,max_late_time))
 		
 		moving_status = SHUTTLE_IDLE
 		
 		if (!at_station())	//at centcom
 			supply_controller.sell()
-
-/datum/shuttle/ferry/emergency/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
-	short_jump(departing, destination)	//long jumps are disabled
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/ferry/supply/proc/forbidden_atoms_check()
@@ -70,10 +67,6 @@
 
 /datum/shuttle/ferry/supply/proc/at_station()
 	return (!location)
-
-//returns 1 if the shuttle is moving and we can show valid ETAs
-/datum/shuttle/ferry/supply/proc/has_eta()
-	return (moving_status == SHUTTLE_INTRANSIT)
 
 //returns 1 if the shuttle is idle and we can still mess with the cargo shopping list
 /datum/shuttle/ferry/supply/proc/idle()

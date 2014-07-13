@@ -3,9 +3,10 @@
 
 	var/cloaked = 1
 	var/at_origin = 1
+	var/returned_home = 0
 	var/move_time = 240
-	var/cooldown = 200
-	var/last_move = 0
+	var/cooldown = 20
+	var/last_move = 0	//the time at which we last moved
 
 	var/announcer
 	var/arrival_message
@@ -21,6 +22,12 @@
 	..()
 	if(origin) last_departed = origin
 
+/datum/shuttle/multi_shuttle/move(var/area/origin, var/area/destination)
+	..()
+	last_move = world.time
+	if (destination == src.origin)
+		returned_home = 1
+
 /datum/shuttle/multi_shuttle/proc/announce_departure()
 
 	if(cloaked || isnull(departure_message))
@@ -35,6 +42,7 @@
 
 	command_alert(arrival_message,(announcer ? announcer : "Central Command"))
 
+
 /obj/machinery/computer/shuttle_control/multi
 	icon_state = "syndishuttle"
 
@@ -44,7 +52,7 @@
 		return
 	src.add_fingerprint(user)
 
-	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
 	var/dat
@@ -57,7 +65,7 @@
 		var/area/areacheck = get_area(src)
 		dat += "Location: [areacheck.name]<br>"
 
-	if((MS.last_move + MS.cooldown) > world.time)
+	if((MS.last_move + MS.cooldown*10) > world.time)
 		dat += "<font color='red'>Engines charging.</font><br>"
 	else
 		dat += "<font color='green'>Engines ready.</font><br>"
@@ -69,22 +77,19 @@
 	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=300x600")
 
 /obj/machinery/computer/shuttle_control/multi/Topic(href, href_list)
-
 	if(..())
 		return
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
+	
+	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
 
 	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
-		return
-
-	if((MS.last_move + MS.cooldown) > world.time)
-		usr << "\red The ship is inoperable while the engines are charging."
 		return
 
 	if(href_list["start"])
@@ -98,7 +103,7 @@
 			//TODO: Actually end the mission.
 			MS.return_warning = 1
 			return
-
+		
 		MS.long_jump(MS.last_departed,MS.origin,MS.interim,MS.move_time)
 		MS.last_departed = MS.origin
 		MS.at_origin = 1
@@ -109,6 +114,9 @@
 		usr << "\red Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival."
 
 	if(href_list["move_multi"])
+		if((MS.last_move + MS.cooldown*10) > world.time)
+			usr << "\red The ship's drive is inoperable while the engines are charging."
+			return
 
 		var/choice = input("Select a destination.") as null|anything in MS.destinations
 		if(!choice) return
@@ -121,7 +129,7 @@
 			MS.at_origin = 0
 
 			
-			MS.long_jump(MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
+			MS.long_jump(MS.last_departed, MS.destinations[choice], MS.interim, MS.move_time)
 			MS.last_departed = MS.destinations[choice]
 			return
 
@@ -129,7 +137,7 @@
 
 			MS.announce_departure()
 
-		MS.short_jump(locate(MS.last_departed),locate(MS.destinations[choice]))
+		MS.short_jump(MS.last_departed, MS.destinations[choice])
 		MS.last_departed = MS.destinations[choice]
 
 	updateUsrDialog()

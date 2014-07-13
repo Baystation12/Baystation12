@@ -13,7 +13,7 @@ datum/directive/tau_ceti_needs_women
 	proc/get_crew_of_target_gender()
 		var/list/targets[0]
 		for(var/mob/M in player_list)
-			if(is_target_gender(M) && !M.is_mechanical() && M.is_ready())
+			if(M.is_ready() && is_target_gender(M) && !M.is_mechanical())
 				targets.Add(M)
 		return targets
 
@@ -63,7 +63,7 @@ datum/directive/tau_ceti_needs_women/meets_prerequisites()
 	var/females = 0
 	var/males = 0
 	for(var/mob/M in player_list)
-		if(!M.is_mechanical() && M.get_species() != "Diona" && M.is_ready())
+		if(M.is_ready() && !M.is_mechanical() && M.get_species() != "Diona")
 			var/gender = M.get_gender()
 			if(gender == MALE)
 				males++

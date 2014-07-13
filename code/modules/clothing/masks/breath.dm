@@ -7,6 +7,11 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
+
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/masks.dmi'
+		)
+
 	var/hanging = 0
 
 	verb/toggle()
@@ -36,22 +41,3 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
-
-/obj/item/clothing/mask/breath/vox
-	desc = "A weirdly-shaped breath mask."
-	name = "vox breath mask"
-	icon_state = "voxmask"
-	item_state = "voxmask"
-	permeability_coefficient = 0.01
-	species_restricted = list("Vox","Vox Armalis")
-	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/mask.dmi',
-		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi',
-		)
-
-	toggle()
-		set category = "Object"
-		set name = "Adjust mask"
-		set src in usr
-
-		usr << "You can't really adjust this mask - it's moulded to your beak!"

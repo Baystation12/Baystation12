@@ -85,24 +85,25 @@
 	proc/wound_damage()
 		return src.damage / src.amount
 	
-	// checks whether the wound has been appropriately treated
-	// always returns 1 for wounds that are too minor to need treatment
-	proc/is_treated()
+	proc/can_autoheal()
 		if(src.wound_damage() <= autoheal_cutoff)
 			return 1
-
+		
+		return is_treated()
+	
+	// checks whether the wound has been appropriately treated
+	proc/is_treated()
 		if(damage_type == BRUISE || damage_type == CUT)
 			return bandaged
 		else if(damage_type == BURN)
 			return salved
-	
 	
 	// Checks whether other other can be merged into src.
 	proc/can_merge(var/datum/wound/other)
 		if (other.type != src.type) return 0
 		if (other.current_stage != src.current_stage) return 0
 		if (other.damage_type != src.damage_type) return 0
-		if (!(other.is_treated()) != !(src.is_treated())) return 0
+		if (!(other.can_autoheal()) != !(src.can_autoheal())) return 0
 		if (!(other.bandaged) != !(src.bandaged)) return 0
 		if (!(other.clamped) != !(src.clamped)) return 0
 		if (!(other.salved) != !(src.salved)) return 0
@@ -120,20 +121,28 @@
 	// checks if wound is considered open for external infections
 	// untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
 	proc/infection_check()
-		if (is_treated() && damage < 10)
+		if (damage < 10)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
+			return 0
+		if (is_treated() && damage < 25)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
 			return 0
 		if (disinfected)
+			germ_level = 0	//reset this, just in case
 			return 0
+		
+		if (damage_type == BRUISE && !bleeding()) //bruises only infectable if bleeding
+			return 0
+		
 		var/dam_coef = round(damage/10)
 		switch (damage_type)
 			if (BRUISE)
-				return prob(dam_coef*5) && bleeding() //bruises only infectable if bleeding
+				return prob(dam_coef*5)
 			if (BURN)
 				return prob(dam_coef*10)
 			if (CUT)
 				return prob(dam_coef*20)
 
 		return 0
+
 	// heal the given amount of damage, and if the given amount of damage was more
 	// than what needed to be healed, return how much heal was left
 	// set @heals_internal to also heal internal organ damage
@@ -183,10 +192,20 @@
 		
 		return 1
 
-	
 	proc/bleeding()
-		// internal wounds don't bleed in the sense of this function
-		return ((wound_damage() > 30 || bleed_timer > 0) && !(bandaged||clamped) && (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5) && current_stage <= max_bleeding_stage && !src.internal)
+		if (src.internal)
+			return 0	// internal wounds don't bleed in the sense of this function
+		
+		if (current_stage > max_bleeding_stage)
+			return 0
+		
+		if (bandaged||clamped)
+			return 0
+		
+		if (wound_damage() <= 30 && bleed_timer <= 0)
+			return 0	//Bleed timer has run out. Wounds with more than 30 damage don't stop bleeding on their own.
+		
+		return (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5)
 
 /** CUTS **/
 /datum/wound/cut/small

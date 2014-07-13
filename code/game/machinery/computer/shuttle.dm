@@ -41,7 +41,7 @@
 						message_admins("[key_name_admin(user)] has launched the shuttle")
 						log_game("[user.ckey] has launched the shuttle early")
 						world << "\blue <B>Alert: Shuttle launch time shortened to 10 seconds!</B>"
-						emergency_shuttle.launch_time = min(world.time + 100, emergency_shuttle.launch_time)
+						emergency_shuttle.set_launch_countdown(10)
 						//src.authorized = null
 						del(src.authorized)
 						src.authorized = list(  )
@@ -62,7 +62,7 @@
 				switch(choice)
 					if("Launch")
 						world << "\blue <B>Alert: Shuttle launch time shortened to 10 seconds!</B>"
-						emergency_shuttle.launch_time = min(world.time + 100, emergency_shuttle.launch_time)
+						emergency_shuttle.set_launch_countdown(10)
 						emagged = 1
 					if("Cancel")
 						return

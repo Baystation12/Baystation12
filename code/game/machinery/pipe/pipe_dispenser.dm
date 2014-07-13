@@ -38,6 +38,8 @@
 <A href='?src=\ref[src];make=14;dir=1'>Gas Mixer</A><BR>
 <A href='?src=\ref[src];make=25;dir=1'>Gas Mixer-Mirrored</A><BR>
 <A href='?src=\ref[src];make=24;dir=1'>Gas Mixer-T</A><BR>
+<A href='?src=\ref[src];make=26;dir=1'>Omni Gas Mixer</A><BR>
+<A href='?src=\ref[src];make=27;dir=1'>Omni Gas Filter</A><BR>
 <b>Heat exchange:</b><BR>
 <A href='?src=\ref[src];make=2;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>

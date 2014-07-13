@@ -21,6 +21,7 @@
 		"processing" = airlock_program.memory["processing"],
 		"docking_status" = docking_program.get_docking_status(),
 		"airlock_disabled" = !(docking_program.undocked() || docking_program.override_enabled),
+		"override_enabled" = docking_program.override_enabled,
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
