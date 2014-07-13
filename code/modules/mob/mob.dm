@@ -930,7 +930,7 @@ var/list/slot_equipment_priority = list( \
 		canmove = 0
 	else if (!buckled)
 		lying = !can_stand
-		//canmove = has_limbs
+		canmove = has_limbs
 
 	if(lying)
 		density = 0
