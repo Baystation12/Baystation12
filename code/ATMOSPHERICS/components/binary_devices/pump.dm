@@ -22,14 +22,13 @@ obj/machinery/atmospherics/binary/pump
 	var/on = 0
 	var/target_pressure = ONE_ATMOSPHERE
 
-	//The maximum amount of volume in Liters the pump can transfer in 1 second. 
-	//This is limited by how fast the pump can spin without breaking, and means you can't instantly fill up the distro even when it's empty (at 10000, it will take about 15 seconds)
-	var/max_volume_transfer = 10000
+	//var/max_volume_transfer = 10000
 
 	use_power = 1
 	idle_power_usage = 10		//10 W for internal circuitry and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-	last_power_draw = 0			//for UI
+	var/last_power_draw = 0			//for UI
+	var/max_pressure_setting = 9000	//kPa
 	
 	var/frequency = 0
 	var/id = null
@@ -68,16 +67,17 @@ obj/machinery/atmospherics/binary/pump
 			return 0
 
 		var/output_starting_pressure = air2.return_pressure()
-		if( (target_pressure - output_starting_pressure) < 0.01)
-			//No need to pump gas if target is already reached!
+		if( (target_pressure - output_starting_pressure) < 0.01) //No need to pump gas if target is already reached!
 			update_power_usage(0)
 			return 1
 		
 		var/output_volume = air2.volume
 		if (network2 && network2.air_transient)
-			output_volume = network2.air_transient.volume
-		output_volume = min(output_volume, max_volume_transfer)
+			output_volume = network2.air_transient.volume	//note that the amount of gas in the adjacent pipe will still limit what we can transfer
 
+		//This is pointless since gas_mixure/remove() won't let as remove more than is in the adjacent pipe anyways and removing gas directly from the network is not going to work.
+		//output_volume = min(output_volume, max_volume_transfer)
+		
 		//Calculate necessary moles to transfer using PV=nRT
 		if((air1.total_moles() > 0) && (air1.temperature > 0 || air2.temperature > 0))
 			var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
@@ -86,7 +86,7 @@ obj/machinery/atmospherics/binary/pump
 			
 			//estimate the amount of energy required
 			var/specific_entropy = air2.specific_entropy() - air1.specific_entropy()	//air2 is gaining moles, air1 is loosing
-			var/specific_power = 0
+			var/specific_power = 0	// W/mol
 			
 			//src.visible_message("DEBUG: [src] >>> terminal pressures: sink = [air2.return_pressure()] kPa, source = [air1.return_pressure()] kPa")
 			//src.visible_message("DEBUG: [src] >>> specific entropy = [air2.specific_entropy()] - [air1.specific_entropy()] = [specific_entropy] J/K")
@@ -95,7 +95,7 @@ obj/machinery/atmospherics/binary/pump
 			if (specific_entropy < 0)
 				specific_power = -specific_entropy*air_temperature		//how much power we need per mole
 				
-				//src.visible_message("DEBUG: [src] >>> limiting transfer_moles to [power_rating / (air_temperature * -specific_entropy)] mol")
+				//src.visible_message("DEBUG: [src] >>> limiting transfer_moles to [active_power_usage / specific_power] mol")
 				transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 			
 			//Actually transfer the gas		
@@ -164,15 +164,43 @@ obj/machinery/atmospherics/binary/pump
 					use_power(usage_amount)
 			
 			last_power_draw = usage_amount
+			if (use_power > 0)
+				last_power_draw = max(last_power_draw, idle_power_usage)
+		
+		turn_on()
+			on = 1
+			update_use_power(1)
+		
+		turn_off()
+			on = 0
+			last_power_draw = 0
+			update_use_power(0)
 
-	interact(mob/user as mob)
-		var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-					<b>Desirable output pressure: </b>
-					[round(target_pressure,0.1)]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
-					"}
+	ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	
+		if(stat & (BROKEN|NOPOWER))
+			return
 
-		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmo_pump")
-		onclose(user, "atmo_pump")
+		// this is the data which will be sent to the ui
+		var/data[0]
+		
+		data = list(
+			"on" = on,
+			"pressure_set" = round(target_pressure, 0.01),
+			"max_pressure" = max_pressure_setting,
+			"last_power_draw" = round(last_power_draw),
+			"max_power_draw" = active_power_usage,
+		)
+
+		// update the ui if it exists, returns null if no ui is passed/found
+		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+		if (!ui)
+			// the ui does not exist, so we'll create a new() one
+			// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+			ui = new(user, src, ui_key, "gas_pump.tmpl", name, 470, 290)
+			ui.set_initial_data(data)	// when the ui is first opened this is the data it will use
+			ui.open()					// open the new ui window
+			ui.set_auto_update(1)		// auto update every Master Controller tick
 
 	initialize()
 		..()
@@ -184,11 +212,16 @@ obj/machinery/atmospherics/binary/pump
 			return 0
 
 		if("power" in signal.data)
-			on = text2num(signal.data["power"])
+			if(text2num(signal.data["power"]))
+				turn_on()
+			else
+				turn_off()
 
 		if("power_toggle" in signal.data)
-			on = !on
-			update_use_power(on)
+			if (on)
+				turn_off()
+			else
+				turn_on()
 
 		if("set_output_pressure" in signal.data)
 			target_pressure = between(
@@ -216,20 +249,31 @@ obj/machinery/atmospherics/binary/pump
 			user << "\red Access denied."
 			return
 		usr.set_machine(src)
-		interact(user)
+		ui_interact(user)
 		return
 
 	Topic(href,href_list)
 		if(..()) return
+		
 		if(href_list["power"])
-			on = !on
-			update_use_power(on)
-		if(href_list["set_press"])
-			var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
-			src.target_pressure = max(0, min(4500, new_pressure))
+			if (on)
+				turn_off()
+			else
+				turn_on()
+		
+		switch(href_list["set_press"])
+			if ("min")
+				target_pressure = 0
+			if ("max")
+				target_pressure = max_pressure_setting
+			if ("set")
+				var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
+				src.target_pressure = max(0, min(max_pressure_setting, new_pressure))
+		
 		usr.set_machine(src)
+		src.add_fingerprint(usr)
+		
 		src.update_icon()
-		src.updateUsrDialog()
 		return
 
 	power_change()
