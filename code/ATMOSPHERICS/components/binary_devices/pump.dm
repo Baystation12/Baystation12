@@ -21,29 +21,26 @@ obj/machinery/atmospherics/binary/pump
 
 	var/on = 0
 	var/target_pressure = ONE_ATMOSPHERE
-	var/power_rating = 7500		//A measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-	
+
 	//The maximum amount of volume in Liters the pump can transfer in 1 second. 
 	//This is limited by how fast the pump can spin without breaking, and means you can't instantly fill up the distro even when it's empty (at 10000, it will take about 15 seconds)
 	var/max_volume_transfer = 10000
 
 	use_power = 1
-	idle_power_usage = 10	//10 W for internal circuitry and stuff
+	idle_power_usage = 10		//10 W for internal circuitry and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	last_power_draw = 0			//for UI
 	
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
-	
-	New()
-		..()
-		active_power_usage = power_rating	//make sure this is equal to the max power rating so that auto use power works correctly
 
 	highcap
 		name = "High capacity gas pump"
 		desc = "A high capacity pump"
 
 		target_pressure = 15000000	//15 GPa? Really?
-		power_rating = 112500	//150 Horsepower
+		active_power_usage = 112500	//150 Horsepower
 
 	on
 		on = 1
@@ -73,8 +70,7 @@ obj/machinery/atmospherics/binary/pump
 		var/output_starting_pressure = air2.return_pressure()
 		if( (target_pressure - output_starting_pressure) < 0.01)
 			//No need to pump gas if target is already reached!
-			if (use_power >= 2)
-				update_use_power(1)
+			update_power_usage(0)
 			return 1
 		
 		var/output_volume = air2.volume
@@ -100,7 +96,7 @@ obj/machinery/atmospherics/binary/pump
 				specific_power = -specific_entropy*air_temperature		//how much power we need per mole
 				
 				//src.visible_message("DEBUG: [src] >>> limiting transfer_moles to [power_rating / (air_temperature * -specific_entropy)] mol")
-				transfer_moles = min(transfer_moles, power_rating / specific_power)
+				transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 			
 			//Actually transfer the gas		
 			var/datum/gas_mixture/removed = air1.remove(transfer_moles)
@@ -113,23 +109,10 @@ obj/machinery/atmospherics/binary/pump
 				//pump draws power and heats gas according to 2nd law of thermodynamics
 				var/power_draw = round(transfer_moles*specific_power)
 				air2.add_thermal_energy(power_draw)
-			
-				if (power_draw >= power_rating - 5)	//if we are close enough to max power just active_power_usage
-					if (use_power < 2)
-						update_use_power(2)
-				else
-					if (use_power >= 2)
-						update_use_power(1)
-						//src.visible_message("DEBUG: [src] >>> Forcing area power update: use_power changed to [use_power]")
-					
-					if (power_draw > idle_power_usage)
-						use_power(power_draw)
-			else
-				if (use_power >= 2)
-					update_use_power(1)
-					//src.visible_message("DEBUG: [src] >>> Forcing area power update: use_power changed to [use_power]")
-				
+				update_power_usage(power_draw)
 				//src.visible_message("DEBUG: [src] >>> drawing [power_draw] W of power.")
+			else
+				update_power_usage(0)
 
 			if(network1)
 				network1.update = 1
@@ -167,6 +150,20 @@ obj/machinery/atmospherics/binary/pump
 			radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 
 			return 1
+		
+		//this proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
+		update_power_usage(var/usage_amount)
+			if (usage_amount > active_power_usage - 5)
+				if (use_power < 2)
+					update_use_power(2)
+			else
+				if (use_power >= 2)
+					update_use_power(1)
+				
+				if (usage_amount > idle_power_usage)
+					use_power(usage_amount)
+			
+			last_power_draw = usage_amount
 
 	interact(mob/user as mob)
 		var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
@@ -226,6 +223,7 @@ obj/machinery/atmospherics/binary/pump
 		if(..()) return
 		if(href_list["power"])
 			on = !on
+			update_use_power(on)
 		if(href_list["set_press"])
 			var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
 			src.target_pressure = max(0, min(4500, new_pressure))
