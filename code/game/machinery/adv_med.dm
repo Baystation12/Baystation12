@@ -164,7 +164,8 @@
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
-	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking)
+	// Loyalty implants removed from the known_implants list below via commenting out. It's with three for special readability. - Decius
+	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /*/*/* /obj/item/weapon/implant/loyalty, */*/*/ /obj/item/weapon/implant/tracking)
 	var/delete
 	var/temphtml
 	name = "Body Scanner Console"
@@ -339,14 +340,14 @@
 							mech = "Assisted:"
 						if(i.robotic == 2)
 							mech = "Mechanical:"
-							
+
 						var/infection = "None"
 						switch (i.germ_level)
 							if (1 to INFECTION_LEVEL_TWO)
 								infection = "Mild Infection:"
 							if (INFECTION_LEVEL_TWO to INFINITY)
 								infection = "Acute Infection:"
-							
+
 						dat += "<tr>"
 						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
 						dat += "</tr>"

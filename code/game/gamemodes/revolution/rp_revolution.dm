@@ -156,12 +156,15 @@
 		..()
 	return 1
 
+/* //Commented out for loyalty implant removal. - Decius
 /datum/game_mode/revolution/proc/is_convertible(mob/M)
 	for(var/obj/item/weapon/implant/loyalty/L in M)//Checking that there is a loyalty implant in the contents
 		if(L.imp_in == M)//Checking that it's actually implanted
 			return 0
 
 	return 1
+*/
+
 
 /mob/living/carbon/human/proc/RevConvert()
 	set name = "Rev-Convert"

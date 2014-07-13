@@ -104,7 +104,7 @@
 	..()
 	return
 
-
+/* // Commented out for loyalty implant removal. - Decius
 /obj/item/weapon/implantcase/loyalty
 	name = "Glass Case- 'Loyalty'"
 	desc = "A case containing a loyalty implant."
@@ -116,7 +116,7 @@
 		src.imp = new /obj/item/weapon/implant/loyalty( src )
 		..()
 		return
-
+*/
 
 /obj/item/weapon/implantcase/death_alarm
 	name = "Glass Case- 'Death Alarm'"

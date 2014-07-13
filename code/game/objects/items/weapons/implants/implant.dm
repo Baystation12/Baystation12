@@ -313,6 +313,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		spawn(20)
 			malfunction--
 
+/* //Commented out for loyalty implant removal. - Decius
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
@@ -329,7 +330,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 <b>Special Features:</b> Will prevent and cure most forms of brainwashing.<BR>
 <b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 		return dat
-
+*/
 
 	implanted(mob/M)
 		if(!istype(M, /mob/living/carbon/human))	return 0

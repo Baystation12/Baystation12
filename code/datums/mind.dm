@@ -129,6 +129,8 @@ datum/mind
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
+
+/* // Commented out for loyalty implant removal. - Decius
 				if(H.is_loyalty_implanted(H))
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
@@ -136,12 +138,14 @@ datum/mind
 			else
 				text = "Loyalty Implant: Don't implant that monkey!</br>"
 			sections["implant"] = text
+*/
+
 			/** REVOLUTION ***/
 			text = "revolution"
 			if (ticker.mode.config_tag=="revolution")
 				text += uppertext(text)
-			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			text = "<i><b>[text]</b></i>: " //            // Commented out for loyalty implant removal. - Decius
+			if (istype(current, /mob/living/carbon/monkey) /*/*/* || H.is_loyalty_implanted(H) */*/*/ )
 				text += "<b>LOYAL EMPLOYEE</b>|headrev|rev"
 			else if (src in ticker.mode.head_revolutionaries)
 				text = "<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
@@ -170,8 +174,8 @@ datum/mind
 			text = "cult"
 			if (ticker.mode.config_tag=="cult")
 				text = uppertext(text)
-			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
+			text = "<i><b>[text]</b></i>: "// Commented out for loyalty implant removal. - Decius
+			if (istype(current, /mob/living/carbon/monkey) /*/*/*|| H.is_loyalty_implanted(H)*/*/*/ )
 				text += "<B>LOYAL EMPLOYEE</B>|cultist"
 			else if (src in ticker.mode.cult)
 				text += "<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"
@@ -241,15 +245,21 @@ datum/mind
 			text = uppertext(text)
 		text = "<i><b>[text]</b></i>: "
 		if(istype(current, /mob/living/carbon/human))
+
+/* // Commented out for loyalty implant removal. - Decius
 			if (H.is_loyalty_implanted(H))
 				text +="traitor|<b>LOYAL EMPLOYEE</b>"
+			else // If you re-add this, you need tab out the following statements by one. - Decius
+*/
+
+			if (src in ticker.mode.traitors)
+				text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
+				if (objectives.len==0)
+					text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
 			else
-				if (src in ticker.mode.traitors)
-					text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
-					if (objectives.len==0)
-						text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
-				else
-					text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
+				text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
+			// Until you get here. - Decius
+
 		sections["traitor"] = text
 
 		/** MONKEY ***/
@@ -497,6 +507,9 @@ datum/mind
 			if(!istype(objective))	return
 			objective.completed = !objective.completed
 
+
+
+/* //Commented out for loyalty implant removal. - Decius
 		else if(href_list["implant"])
 			var/mob/living/carbon/human/H = current
 
@@ -541,6 +554,8 @@ datum/mind
 						special_role = null
 						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+*/
+
 
 		else if (href_list["revolution"])
 			current.hud_updateflag |= (1 << SPECIALROLE_HUD)

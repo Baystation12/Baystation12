@@ -54,8 +54,7 @@
 
 	return
 
-
-
+/* // Commented out for loyalty implant removal. - Decius
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"
 
@@ -64,8 +63,7 @@
 	..()
 	update()
 	return
-
-
+*/
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"

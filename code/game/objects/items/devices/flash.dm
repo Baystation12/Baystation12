@@ -72,10 +72,14 @@
 			if(ishuman(M) && ishuman(user) && M.stat!=DEAD)
 				if(user.mind && user.mind in ticker.mode.head_revolutionaries && ticker.mode.name == "revolution")
 					var/revsafe = 0
+
+/* //Commented out for loyalty implant removal. - Decius
 					for(var/obj/item/weapon/implant/loyalty/L in M)
 						if(L && L.implanted)
 							revsafe = 1
 							break
+*/
+
 					M.mind_initialize()		//give them a mind datum if they don't have one.
 					if(M.mind.has_been_rev)
 						revsafe = 2
