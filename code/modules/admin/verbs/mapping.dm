@@ -37,12 +37,6 @@ var/intercom_range_display_status = 0
 /obj/effect/debugging/marker/Move()
 	return 0
 
-/client/proc/do_not_use_these()
-	set category = "Mapping"
-	set name = "-None of these are for ingame use!!"
-
-	..()
-
 /client/proc/camera_view()
 	set category = "Mapping"
 	set name = "Camera Range Display"
@@ -130,7 +124,6 @@ var/intercom_range_display_status = 0
 
 	if(!check_rights(R_DEBUG)) return
 
-	src.verbs += /client/proc/do_not_use_these 			//-errorage
 	src.verbs += /client/proc/camera_view 				//-errorage
 	src.verbs += /client/proc/sec_camera_report 		//-errorage
 	src.verbs += /client/proc/intercom_view 			//-errorage
@@ -141,7 +134,6 @@ var/intercom_range_display_status = 0
 	src.verbs += /client/proc/count_objects_all
 	src.verbs += /client/proc/cmd_assume_direct_control	//-errorage
 	src.verbs += /client/proc/startSinglo
-	src.verbs += /client/proc/ticklag	//allows you to set the ticklag.
 	src.verbs += /client/proc/cmd_admin_grantfullaccess
 	src.verbs += /client/proc/kaboom
 	src.verbs += /client/proc/splash

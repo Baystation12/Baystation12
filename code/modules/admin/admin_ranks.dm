@@ -60,7 +60,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 	//clear the datums references
 	admin_datums.Cut()
 	for(var/client/C in admins)
-		C.remove_admin_verbs()
 		C.holder = null
 	admins.Cut()
 
