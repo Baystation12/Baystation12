@@ -65,7 +65,7 @@
 			..()
 		return
 
-
+/* // Commented out with removal of loyalty implants. - Decius
 /obj/item/weapon/storage/lockbox/loyalty
 	name = "lockbox of loyalty implants"
 	req_access = list(access_security)
@@ -76,7 +76,7 @@
 		new /obj/item/weapon/implantcase/loyalty(src)
 		new /obj/item/weapon/implantcase/loyalty(src)
 		new /obj/item/weapon/implanter/loyalty(src)
-
+*/
 
 /obj/item/weapon/storage/lockbox/clusterbang
 	name = "lockbox of clusterbangs"

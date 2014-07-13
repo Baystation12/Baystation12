@@ -125,12 +125,12 @@ datum/mind
 			"malfunction",
 		)
 		var/text = ""
-		var/mob/living/carbon/human/H = current
+//		var/mob/living/carbon/human/H = current // As part of the below loyalty implant removal. Only used there.
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
-			/** Impanted**/
-			if(istype(current, /mob/living/carbon/human))
 
 /* // Commented out for loyalty implant removal. - Decius
+			/** Implanted**/
+			if(istype(current, /mob/living/carbon/human))
 				if(H.is_loyalty_implanted(H))
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else

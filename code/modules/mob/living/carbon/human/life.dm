@@ -1806,7 +1806,7 @@
 		var/image/holder3 = hud_list[IMPCHEM_HUD]
 
 		holder1.icon_state = "hudblank"
-		holder2.icon_state = "hudblank"
+//		holder2.icon_state = "hudblank"
 		holder3.icon_state = "hudblank"
 
 		for(var/obj/item/weapon/implant/I in src)
