@@ -1,5 +1,11 @@
 #define MALFUNCTION_TEMPORARY 1
 #define MALFUNCTION_PERMANENT 2
+
+
+/mob/living/carbon/human/
+
+
+
 /obj/item/weapon/implant
 	name = "implant"
 	icon = 'icons/obj/device.dmi'
