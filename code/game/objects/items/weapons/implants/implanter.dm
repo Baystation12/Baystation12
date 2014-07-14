@@ -60,12 +60,11 @@
 	name = "implanter-loyalty"
 
 /obj/item/weapon/implanter/loyalty/New()
-	src.imp = new /obj/item/weapon/implant/loyalty( src )
+	if(config.use_loyalty_implants)
+		src.imp = new /obj/item/weapon/implant/loyalty( src )
 	..()
 	update()
 	return
-
-
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"
