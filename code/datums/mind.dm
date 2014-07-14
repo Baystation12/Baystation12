@@ -512,34 +512,31 @@ datum/mind
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
 
 				if("add")
-					H.implant_loyalty(src)
-
-					if(config.use_loyalty_implants) // The following won't occur if there are not loyalty implants.
-						H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
-						if(src in ticker.mode.revolutionaries)
-							special_role = null
-							ticker.mode.revolutionaries -= src
-							src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
-						if(src in ticker.mode.head_revolutionaries)
-							special_role = null
-							ticker.mode.head_revolutionaries -=src
-							src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
-						if(src in ticker.mode.cult)
-							ticker.mode.cult -= src
-							ticker.mode.update_cult_icons_removed(src)
-							special_role = null
-							var/datum/game_mode/cult/cult = ticker.mode
-							if (istype(cult))
-								cult.memorize_cult_objectives(src)
-							current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being in a cult.  Have a productive day!</B></FONT>"
-							memory = ""
-						if(src in ticker.mode.traitors)
-							ticker.mode.traitors -= src
-							special_role = null
-							current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
-							log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
-					else
-						usr << "Loyalty implants are currently disabled for your server in the configuration files."
+					H.implant_loyalty(H, override = TRUE)
+					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
+					if(src in ticker.mode.revolutionaries)
+						special_role = null
+						ticker.mode.revolutionaries -= src
+						src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
+					if(src in ticker.mode.head_revolutionaries)
+						special_role = null
+						ticker.mode.head_revolutionaries -=src
+						src << "\red <Font size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a revolutionary.  Get back to work!</B></Font>"
+					if(src in ticker.mode.cult)
+						ticker.mode.cult -= src
+						ticker.mode.update_cult_icons_removed(src)
+						special_role = null
+						var/datum/game_mode/cult/cult = ticker.mode
+						if (istype(cult))
+							cult.memorize_cult_objectives(src)
+						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being in a cult.  Have a productive day!</B></FONT>"
+						memory = ""
+					if(src in ticker.mode.traitors)
+						ticker.mode.traitors -= src
+						special_role = null
+						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+				else
 
 
 		else if (href_list["revolution"])

@@ -113,8 +113,7 @@
 
 
 	New()
-		if (config.use_loyalty_implants)
-			src.imp = new /obj/item/weapon/implant/loyalty( src )
+		src.imp = new /obj/item/weapon/implant/loyalty( src )
 		..()
 		return
 
