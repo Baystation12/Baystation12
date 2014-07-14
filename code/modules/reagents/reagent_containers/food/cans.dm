@@ -32,7 +32,7 @@
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
 			if (canopened == 0)
-				user << "<span class='notice'> You need to open the drink!</span>"
+				user << "<span class='notice'>You need to open the drink!</span>"
 				return
 
 		else if (canopened == 1)
@@ -66,6 +66,9 @@
 		if(!proximity) return
 
 		if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
+			if (canopened == 0)
+				user << "<span class='notice'>You need to open the drink!</span>"
+				return
 
 			if(!target.reagents.total_volume)
 				user << "\red [target] is empty."
@@ -77,10 +80,19 @@
 
 				var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
 				user << "\blue You fill [src] with [trans] units of the contents of [target]."
-		if (canopened == 0)
-			user << "<span class='notice'>You need to open the drink!</span>"
+
 
 		else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
+			if (canopened == 0)
+				user << "<span class='notice'>You need to open the drink!</span>"
+				return
+
+			if (istype(target, /obj/item/weapon/reagent_containers/food/drinks/cans))
+				var/obj/item/weapon/reagent_containers/food/drinks/cans/cantarget = target
+				if(cantarget.canopened == 0)
+					user << "<span class='notice'>You need to open the drink you want to pour into!</span>"
+					return
+
 			if(!reagents.total_volume)
 				user << "\red [src] is empty."
 				return
