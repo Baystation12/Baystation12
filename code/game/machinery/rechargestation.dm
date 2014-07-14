@@ -61,7 +61,10 @@
 						R.module.respawn_consumable(R)
 					if(!R.cell)
 						return
-					R.cell.give(active_power_usage*CELLRATE)
+					if(!R.cell.fully_charged())
+						R.cell.give(active_power_usage*CELLRATE)
+					else
+						update_use_power(1)
 		go_out()
 			if(!( src.occupant ))
 				return
@@ -73,8 +76,7 @@
 			src.occupant.loc = src.loc
 			src.occupant = null
 			build_icon()
-			src.use_power = 1
-			use_power(0)	//update area power usage
+			update_use_power(1)
 			return
 
 
@@ -114,6 +116,5 @@
 				O.loc = src.loc*/
 			src.add_fingerprint(usr)
 			build_icon()
-			src.use_power = 2
-			use_power(0)	//update area power usage
+			update_use_power(2)
 			return
