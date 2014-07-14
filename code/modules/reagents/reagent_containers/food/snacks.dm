@@ -9,7 +9,7 @@
 	var/trash = null
 	var/slice_path
 	var/slices_num
-	CoM = list("x"=15, "y"=15)
+	center_of_mass = list("x"=15, "y"=15)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
