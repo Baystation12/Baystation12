@@ -1,20 +1,61 @@
-// NanoConfig is the place to store utility functions
-var NanoConfig = function () 
+// NanoUtility is the place to store utility functions
+var NanoUtility = function () 
 {
-    return {
+    var _urlParameters = {}; // This is populated with the base url parameters (used by all links), which is probaby just the "src" parameter
+
+	return {
         init: function () 
 		{
-			if (typeof jQuery == 'undefined') {  
-				alert('ERROR: jQuery failed to load!');
-			}
-			if (typeof $.views == 'undefined') {  
-				alert('ERROR: JSRender failed to load!');
-			}					
-        }        
-    }
-} ();
+			var body = $('body'); // We store data in the body tag, it's as good a place as any
 
-NanoConfig.init();
+			_urlParameters = body.data('urlParameters');
+        },
+		// generate a Byond href, combines _urlParameters with parameters
+		generateHref: function (parameters)
+		{
+			var queryString = '?';
+
+			for (var key in _urlParameters)
+			{
+				if (_urlParameters.hasOwnProperty(key))
+				{
+					if (queryString !== '?')
+					{
+						queryString += ';';
+					}
+					queryString += key + '=' + _urlParameters[key];
+				}
+			}
+
+			for (var key in parameters)
+			{
+				if (parameters.hasOwnProperty(key))
+				{
+					if (queryString !== '?')
+					{
+						queryString += ';';
+					}
+					queryString += key + '=' + parameters[key];
+				}
+			}
+			return queryString;
+		}
+    }
+} (); 
+
+if (typeof jQuery == 'undefined') {  
+	alert('ERROR: Javascript library failed to load!');
+}
+if (typeof doT == 'undefined') {  
+	alert('ERROR: Template engine failed to load!');
+}	
+
+// All scripts are initialised here, this allows control of init order
+$(document).ready(function () {
+	NanoUtility.init();
+	NanoStateManager.init();
+	NanoTemplate.init();
+});
 
 if (!Array.prototype.indexOf)
 {
@@ -98,3 +139,10 @@ String.prototype.toTitleCase = function () {
 $.ajaxSetup({
     cache: false
 });
+
+Function.prototype.inheritsFrom = function (parentClassOrObject) {
+    this.prototype = new parentClassOrObject;
+    this.prototype.constructor = this;
+    this.prototype.parent = parentClassOrObject.prototype;
+    return this;
+};
