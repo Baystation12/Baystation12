@@ -156,15 +156,8 @@
 		..()
 	return 1
 
-/datum/game_mode/revolution/proc/is_convertible(mob/M)
-
-/* // Commented out for loyalty implant removal. - Decius
-	for(var/obj/item/weapon/implant/loyalty/L in M)//Checking that there is a loyalty implant in the contents
-		if(L.imp_in == M)//Checking that it's actually implanted
-			return 0
-
+/datum/game_mode/revolution/proc/is_convertible(mob/M) // Place any conditions on conversion here.
 	return 1
-*/
 
 
 /mob/living/carbon/human/proc/RevConvert()
@@ -181,8 +174,6 @@
 	if(((src.mind in ticker.mode:head_revolutionaries) || (src.mind in ticker.mode:revolutionaries)))
 		if((M.mind in ticker.mode:head_revolutionaries) || (M.mind in ticker.mode:revolutionaries))
 			src << "\red <b>[M] is already be a revolutionary!</b>"
-		else if(!ticker.mode:is_convertible(M))
-			src << "\red <b>[M] is implanted with a loyalty implant - Remove it first!</b>"
 		else
 			if(world.time < M.mind.rev_cooldown)
 				src << "\red Wait five seconds before reconversion attempt."

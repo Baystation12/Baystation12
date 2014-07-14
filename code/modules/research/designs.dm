@@ -1358,17 +1358,6 @@ datum/design/nanopaste
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/stack/nanopaste"
 
-/* // Commented out for loyalty implant removal.
-datum/design/implant_loyal
-	name = "loyalty implant"
-	desc = "Makes you loyal or such."
-	id = "implant_loyal"
-	req_tech = list("materials" = 2, "biotech" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 7000, "$glass" = 7000)
-	build_path = "/obj/item/weapon/implant/loyalty"
-*/
-
 datum/design/implant_chem
 	name = "chemical implant"
 	desc = "Injects things."

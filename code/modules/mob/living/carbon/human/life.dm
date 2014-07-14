@@ -1802,11 +1802,9 @@
 
 	if(hud_updateflag & 1 << IMPLOYAL_HUD || hud_updateflag & 1 << IMPCHEM_HUD || hud_updateflag & 1 << IMPTRACK_HUD)
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
-//		var/image/holder2 = hud_list[IMPLOYAL_HUD] // Commented out for loyalty implant removal. - Decius
 		var/image/holder3 = hud_list[IMPCHEM_HUD]
 
 		holder1.icon_state = "hudblank"
-//		holder2.icon_state = "hudblank"
 		holder3.icon_state = "hudblank"
 
 		for(var/obj/item/weapon/implant/I in src)
@@ -1814,16 +1812,10 @@
 				if(istype(I,/obj/item/weapon/implant/tracking))
 					holder1.icon_state = "hud_imp_tracking"
 
-/* //Commented out for loyalty implant removal. - Decius
-				if(istype(I,/obj/item/weapon/implant/loyalty))
-					holder2.icon_state = "hud_imp_loyal"
-*/
-
 				if(istype(I,/obj/item/weapon/implant/chem))
 					holder3.icon_state = "hud_imp_chem"
 
 		hud_list[IMPTRACK_HUD] = holder1
-//		hud_list[IMPLOYAL_HUD] = holder2 // // Commented out for loyalty implant removal. - Decius
 		hud_list[IMPCHEM_HUD] = holder3
 
 	if(hud_updateflag & 1 << SPECIALROLE_HUD)

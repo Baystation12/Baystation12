@@ -164,8 +164,8 @@
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
-	// Loyalty implants removed from the known_implants list below via commenting out. It's with three for special readability. - Decius
-	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /*/*/* /obj/item/weapon/implant/loyalty, */*/*/ /obj/item/weapon/implant/tracking)
+
+	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/tracking)
 	var/delete
 	var/temphtml
 	name = "Body Scanner Console"
