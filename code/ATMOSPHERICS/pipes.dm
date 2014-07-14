@@ -49,11 +49,11 @@ obj/machinery/atmospherics/pipe/return_network(obj/machinery/atmospherics/refere
 
 	return parent.return_network(reference)
 
-obj/machinery/atmospherics/pipe/Del()
+obj/machinery/atmospherics/pipe/Destroy()
 	del(parent)
 	if(air_temporary)
 		loc.assume_air(air_temporary)
-
+		del(air_temporary)
 	..()
 
 obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -88,8 +88,8 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 		for (var/obj/machinery/meter/meter in T)
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
-				del(meter)
-		del(src)
+				qdel(meter)
+		qdel(src)
 
 
 obj/machinery/atmospherics/pipe/simple
@@ -200,7 +200,7 @@ obj/machinery/atmospherics/pipe/simple/proc/burst()
 	var/datum/effect/effect/system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
-	del(src)
+	qdel(src)
 
 obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	if(dir==3)
@@ -208,7 +208,7 @@ obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	else if(dir==12)
 		dir = 4
 
-obj/machinery/atmospherics/pipe/simple/Del()
+obj/machinery/atmospherics/pipe/simple/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	if(node2)
@@ -238,7 +238,7 @@ obj/machinery/atmospherics/pipe/simple/update_icon()
 
 	else
 		if(!node1&&!node2)
-			del(src) //TODO: silent deleting looks weird
+			qdel(src) //TODO: silent deleting looks weird
 		var/have_node1 = node1?1:0
 		var/have_node2 = node2?1:0
 		icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
@@ -413,7 +413,7 @@ obj/machinery/atmospherics/pipe/manifold/process()
 	else if (nodealert)
 		nodealert = 0
 */
-obj/machinery/atmospherics/pipe/manifold/Del()
+obj/machinery/atmospherics/pipe/manifold/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	if(node2)
@@ -985,7 +985,7 @@ obj/machinery/atmospherics/pipe/tank/initialize()
 obj/machinery/atmospherics/pipe/tank/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node1 = null
 
 	update_icon()
@@ -1095,7 +1095,7 @@ obj/machinery/atmospherics/pipe/vent/initialize()
 obj/machinery/atmospherics/pipe/vent/disconnect(obj/machinery/atmospherics/reference)
 	if(reference == node1)
 		if(istype(node1, /obj/machinery/atmospherics/pipe))
-			del(parent)
+			qdel(parent)
 		node1 = null
 
 	update_icon()

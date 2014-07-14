@@ -142,7 +142,7 @@
 		return
 	put_in(G.affecting)
 	src.add_fingerprint(user)
-	del(G)
+	qdel(G)
 	return
 
 /obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
@@ -185,7 +185,7 @@
 				ex_act(severity)
 				//Foreach goto(35)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
@@ -194,7 +194,7 @@
 					ex_act(severity)
 					//Foreach goto(108)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -203,7 +203,7 @@
 					ex_act(severity)
 					//Foreach goto(181)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -213,7 +213,7 @@
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
 			A.loc = src.loc
-		del(src)
+		qdel(src)
 
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
@@ -260,12 +260,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -273,7 +273,7 @@
 /obj/machinery/computer/scan_consolenew/blob_act()
 
 	if(prob(75))
-		del(src)
+		qdel(src)
 
 /obj/machinery/computer/scan_consolenew/power_change()
 	if(stat & BROKEN)
@@ -423,15 +423,15 @@
 		if (connected.beaker.reagents && connected.beaker.reagents.reagent_list.len)
 			for(var/datum/reagent/R in connected.beaker.reagents.reagent_list)
 				data["beakerVolume"] += R.volume
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "dna_modifier.tmpl", "DNA Modifier Console", 660, 700)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick

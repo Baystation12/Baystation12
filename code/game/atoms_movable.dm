@@ -12,6 +12,7 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 
+
 /atom/movable/Move()
 	var/atom/A = src.loc
 	. = ..()
@@ -21,6 +22,25 @@
 	if ((A != src.loc && A && A.z == src.z))
 		src.last_move = get_dir(A, src.loc)
 	return
+
+/atom/movable/Del()
+	if(isnull(gc_destroyed) && loc)
+		testing("GC: -- [type] was deleted via del() rather than qdel() --")
+//	else if(isnull(gc_destroyed))
+//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
+//	else
+//		testing("GC: [type] was deleted via GC with qdel()")
+	..()
+
+/atom/movable/Destroy()
+	if(reagents)
+		qdel(reagents)
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
+	tag = null
+	loc = null
+	invisibility = 101
+	// Do not call ..()
 
 /atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
 	if(src.throwing)

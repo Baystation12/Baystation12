@@ -28,10 +28,12 @@ datum/controller/game_controller
 	var/events_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
+	var/gc_cost			= 0
 
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
+
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -217,8 +219,14 @@ datum/controller/game_controller/proc/process()
 				ticker.process()
 				ticker_cost = (world.timeofday - timer) / 10
 
+				//GC
+				timer = world.timeofday
+				last_thing_processed = garbage.type
+				garbage.process()
+				gc_cost = (world.timeofday - timer) / 10
+
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost + gc_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)
@@ -232,7 +240,7 @@ datum/controller/game_controller/proc/process_mobs()
 	expensive_mobs.Cut()
 	while(i<=mob_list.len)
 		var/mob/M = mob_list[i]
-		if(M)
+		if(M && !M.gc_destroyed)
 			var/clock = world.timeofday
 			last_thing_processed = M.type
 			M.Life()
@@ -261,7 +269,7 @@ datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)
 		var/obj/machinery/Machine = machines[i]
-		if(Machine)
+		if(Machine && !Machine.gc_destroyed)
 			last_thing_processed = Machine.type
 			if(Machine.process() != PROCESS_KILL)
 				if(Machine)
@@ -280,7 +288,7 @@ datum/controller/game_controller/proc/process_machines_power()
 					if(M)
 						if(M.use_power)
 							M.auto_use_power()
-			
+
 		if(A.apc.len && A.master == A)
 			i++
 			continue
@@ -295,13 +303,13 @@ datum/controller/game_controller/proc/process_machines_rebuild()
 				A.powerupdate += 1
 				active_areas |= A
 		rebuild_active_areas = 0
-		
+
 
 datum/controller/game_controller/proc/process_objects()
 	var/i = 1
 	while(i<=processing_objects.len)
 		var/obj/Object = processing_objects[i]
-		if(Object)
+		if(Object && !Object.gc_destroyed)
 			last_thing_processed = Object.type
 			Object.process()
 			i++

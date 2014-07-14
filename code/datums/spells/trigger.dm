@@ -14,7 +14,7 @@
 
 /obj/effect/proc_holder/spell/targeted/trigger/Del()
 	for(var/spell in contents)
-		del(spell)
+		qdel(spell)
 
 	..()
 

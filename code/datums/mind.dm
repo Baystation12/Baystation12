@@ -616,7 +616,7 @@ datum/mind
 					var/obj/item/device/flash/flash = locate() in L
 					if (!flash)
 						usr << "\red Deleting flash failed!"
-					del(flash)
+					qdel(flash)
 
 				if("repairflash")
 					var/list/L = current.get_contents()
@@ -789,16 +789,16 @@ datum/mind
 				if("lair")
 					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
 				if("dressup")
-					del(H.belt)
-					del(H.back)
-					del(H.l_ear)
-					del(H.r_ear)
-					del(H.gloves)
-					del(H.head)
-					del(H.shoes)
-					del(H.wear_id)
-					del(H.wear_suit)
-					del(H.w_uniform)
+					qdel(H.belt)
+					qdel(H.back)
+					qdel(H.l_ear)
+					qdel(H.r_ear)
+					qdel(H.gloves)
+					qdel(H.head)
+					qdel(H.shoes)
+					qdel(H.wear_id)
+					qdel(H.wear_suit)
+					qdel(H.w_uniform)
 
 					if (!ticker.mode.equip_syndicate(current))
 						usr << "\red Equipping a syndicate failed!"
@@ -917,7 +917,7 @@ datum/mind
 							/client/proc/reactivate_camera)
 
 						current:laws = new /datum/ai_laws/nanotrasen
-						del(current:malf_picker)
+						qdel(current:malf_picker)
 						current:show_laws()
 						current.icon_state = "ai"
 
@@ -1036,7 +1036,7 @@ datum/mind
 	proc/take_uplink()
 		var/obj/item/device/uplink/hidden/H = find_syndicate_uplink()
 		if(H)
-			del(H)
+			qdel(H)
 
 
 	proc/make_AI_Malf()
@@ -1079,16 +1079,16 @@ datum/mind
 			current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
 
 			var/mob/living/carbon/human/H = current
-			del(H.belt)
-			del(H.back)
-			del(H.l_ear)
-			del(H.r_ear)
-			del(H.gloves)
-			del(H.head)
-			del(H.shoes)
-			del(H.wear_id)
-			del(H.wear_suit)
-			del(H.w_uniform)
+			qdel(H.belt)
+			qdel(H.back)
+			qdel(H.l_ear)
+			qdel(H.r_ear)
+			qdel(H.gloves)
+			qdel(H.head)
+			qdel(H.shoes)
+			qdel(H.wear_id)
+			qdel(H.wear_suit)
+			qdel(H.w_uniform)
 
 			ticker.mode.equip_syndicate(current)
 
@@ -1178,7 +1178,7 @@ datum/mind
 
 		var/list/L = current.get_contents()
 		var/obj/item/device/flash/flash = locate() in L
-		del(flash)
+		qdel(flash)
 		take_uplink()
 		var/fail = 0
 	//	fail |= !ticker.mode.equip_traitor(current, 1)

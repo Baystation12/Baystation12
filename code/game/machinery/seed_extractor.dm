@@ -24,7 +24,7 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 			t_prod.yield = F.yield
 			t_prod.potency = F.potency
 			t_amount++
-		del(O)
+		qdel(O)
 
 	else if(istype(O, /obj/item/weapon/grown/))
 		var/obj/item/weapon/grown/F = O
@@ -43,7 +43,7 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 			t_prod.yield = F.yield
 			t_prod.potency = F.potency
 			t_amount++
-		del(O)
+		qdel(O)
 
 	else if(istype(O, /obj/item/stack/tile/grass))
 		var/obj/item/stack/tile/grass/S = O

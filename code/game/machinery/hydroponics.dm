@@ -204,7 +204,7 @@ obj/machinery/hydroponics/proc/updateicon()
 obj/machinery/hydroponics/proc/weedinvasion() // If a weed growth is sufficient, this happens.
 	dead = 0
 	if(myseed) // In case there's nothing in the tray beforehand
-		del(myseed)
+		qdel(myseed)
 	switch(rand(1,18))		// randomly pick predominative weed
 		if(16 to 18)
 			myseed = new /obj/item/seeds/reishimycelium
@@ -316,35 +316,35 @@ obj/machinery/hydroponics/proc/hardmutate() // Strongly mutates the current seed
 obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 
 	if ( istype(myseed, /obj/item/seeds/nettleseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/deathnettleseed
 
 	else if ( istype(myseed, /obj/item/seeds/amanitamycelium ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/angelmycelium
 
 	else if ( istype(myseed, /obj/item/seeds/lemonseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/cashseed
 
 	else if ( istype(myseed, /obj/item/seeds/ambrosiavulgarisseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/ambrosiadeusseed
 
 	else if ( istype(myseed, /obj/item/seeds/plumpmycelium ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/walkingmushroommycelium
 
 	else if ( istype(myseed, /obj/item/seeds/chiliseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/icepepperseed
 
 	else if ( istype(myseed, /obj/item/seeds/appleseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/goldappleseed
 
 	else if ( istype(myseed, /obj/item/seeds/berryseed ))
-		del(myseed)
+		qdel(myseed)
 		switch(rand(1,100))
 			if(1 to 50)
 				myseed = new /obj/item/seeds/poisonberryseed
@@ -352,11 +352,11 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 				myseed = new /obj/item/seeds/glowberryseed
 
 	else if ( istype(myseed, /obj/item/seeds/poisonberryseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/deathberryseed
 
 	else if ( istype(myseed, /obj/item/seeds/tomatoseed ))
-		del(myseed)
+		qdel(myseed)
 		switch(rand(1,100))
 			if(1 to 35)
 				myseed = new /obj/item/seeds/bluetomatoseed
@@ -366,11 +366,11 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 				myseed = new /obj/item/seeds/killertomatoseed
 
 	else if ( istype(myseed, /obj/item/seeds/bluetomatoseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/bluespacetomatoseed
 
 	else if ( istype(myseed, /obj/item/seeds/grapeseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/greengrapeseed
 /*
 	else if ( istype(myseed, /obj/item/seeds/tomatoseed ))
@@ -378,7 +378,7 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 		myseed = new /obj/item/seeds/gibtomatoseed
 */
 	else if ( istype(myseed, /obj/item/seeds/eggplantseed ))
-		del(myseed)
+		qdel(myseed)
 		myseed = new /obj/item/seeds/eggyseed
 
 	else
@@ -403,7 +403,7 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 
 obj/machinery/hydroponics/proc/mutateweed() // If the weeds gets the mutagent instead. Mind you, this pretty much destroys the old plant
 	if ( weedlevel > 5 )
-		del(myseed)
+		qdel(myseed)
 		var/newWeed = pick(/obj/item/seeds/libertymycelium, /obj/item/seeds/angelmycelium, /obj/item/seeds/deathnettleseed, /obj/item/seeds/kudzuseed)
 		myseed = new newWeed
 		dead = 0
@@ -476,7 +476,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		yieldmod = myNut.yieldmod
 		mutmod = myNut.mutmod
 		user << "You replace the nutrient solution in the [src]."
-		del(O)
+		qdel(O)
 		updateicon()
 
 	else if(istype(O, /obj/item/weapon/reagent_containers/syringe))  // Syringe stuff
@@ -737,7 +737,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			toxic = 100
 		user << "You apply the weedkiller solution into the [src]."
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-		del(O)
+		qdel(O)
 		updateicon()
 
 	else if (istype(O, /obj/item/weapon/storage/bag/plants))
@@ -759,7 +759,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			toxic = 100
 		user << "You apply the pestkiller solution into the [src]."
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-		del(O)
+		qdel(O)
 		updateicon()
 	else if(istype(O, /obj/item/weapon/wrench))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -768,19 +768,19 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	else if(istype(O, /obj/item/weapon/shovel))
 		if(istype(src, /obj/machinery/hydroponics/soil))
 			user << "You clear up the [src]!"
-			del(src)
+			qdel(src)
 	else if(istype(O, /obj/item/apiary))
 		if(planted)
 			user << "\red The hydroponics tray is already occupied!"
 		else
 			user.drop_item()
-			del(O)
+			qdel(O)
 
 			var/obj/machinery/apiary/A = new(src.loc)
 			A.icon = src.icon
 			A.icon_state = src.icon_state
 			A.hydrotray_type = src.type
-			del(src)
+			qdel(src)
 	return
 
 /obj/machinery/hydroponics/attack_tk(mob/user as mob)
@@ -790,7 +790,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		planted = 0
 		dead = 0
 		usr << text("You remove the dead plant from the [src].")
-		del(myseed)
+		qdel(myseed)
 		updateicon()
 
 /obj/machinery/hydroponics/attack_hand(mob/user as mob)
@@ -804,7 +804,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		planted = 0
 		dead = 0
 		usr << text("You remove the dead plant from the [src].")
-		del(myseed)
+		qdel(myseed)
 		updateicon()
 	else
 		if(planted && !dead)
@@ -932,7 +932,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	else
 		user << text("You harvest from the [myseed.plantname].")
 	if(myseed.oneharvest)
-		del(myseed)
+		qdel(myseed)
 		planted = 0
 		dead = 0
 	updateicon()

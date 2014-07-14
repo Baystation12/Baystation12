@@ -301,7 +301,7 @@
 		user << "\blue \The [src] processes \the [W]."
 		biomass += 50
 		user.drop_item()
-		del(W)
+		qdel(W)
 		return
 	else
 		..()
@@ -372,7 +372,7 @@
 		src.icon_state = "pod_g"
 		src.occupant.ghostize()
 		spawn(5)
-			del(src.occupant)
+			qdel(src.occupant)
 	return
 
 /obj/machinery/clonepod/relaymove(mob/user as mob)
@@ -391,21 +391,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		else
 	return

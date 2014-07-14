@@ -966,4 +966,4 @@
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	unload(0)
-	del(src)
+	qdel(src)

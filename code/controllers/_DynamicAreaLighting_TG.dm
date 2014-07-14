@@ -158,7 +158,7 @@ turf/Del()
 	..()
 
 //Objects with opacity will trigger nearby lights to update at next lighting process.
-atom/movable/Del()
+atom/movable/Destroy()
 	if(opacity)
 		UpdateAffectingLights()
 	..()

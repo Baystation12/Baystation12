@@ -609,7 +609,7 @@ client
 				for(var/obj/Obj in world)
 					if(Obj.type == O_type)
 						i++
-						del(Obj)
+						qdel(Obj)
 				if(!i)
 					usr << "No objects of this type exist"
 					return
@@ -620,7 +620,7 @@ client
 				for(var/obj/Obj in world)
 					if(istype(Obj,O_type))
 						i++
-						del(Obj)
+						qdel(Obj)
 				if(!i)
 					usr << "No objects of this type exist"
 					return

@@ -26,7 +26,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "abed"
 
-/obj/structure/stool/bed/Del()
+/obj/structure/stool/bed/Destroy()
 	unbuckle()
 	..()
 	return
@@ -145,7 +145,7 @@
 	attack_self(mob/user)
 		var/obj/structure/stool/bed/roller/R = new /obj/structure/stool/bed/roller(user.loc)
 		R.add_fingerprint(user)
-		del(src)
+		qdel(src)
 
 /obj/structure/stool/bed/roller/Move()
 	..()
@@ -184,6 +184,5 @@
 		if(buckled_mob)	return 0
 		visible_message("[usr] collapses \the [src.name].")
 		new/obj/item/roller(get_turf(src))
-		spawn(0)
-			del(src)
+		qdel(src)
 		return

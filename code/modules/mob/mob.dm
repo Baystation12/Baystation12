@@ -1,7 +1,18 @@
-/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/*/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
+	ghostize()
+	..() */
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+	mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
+	qdel(hud_used)
+	if(mind && mind.current == src)
+		spellremove(src)
+/*	for(var/infection in viruses)
+		qdel(infection) */
 	ghostize()
 	..()
 
@@ -702,6 +713,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"GC-[master_controller.gc_cost]\t#[garbage.destroyed.len]-#dels[garbage.dels]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")

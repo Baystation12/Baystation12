@@ -279,17 +279,17 @@
 
 	if(!istype(location))
 		return 0
-	
+
 	var/datum/gas_mixture/environment = location.return_air()
 	var/environment_pressure = environment.return_pressure()
 	var/pressure_levels = TLV["pressure"]
-	
+
 	if (environment_pressure <= pressure_levels[1])		//low pressures
 		if (!(mode == AALARM_MODE_PANIC || mode == AALARM_MODE_CYCLE))
 			return 1
-	
+
 	return 0
-	
+
 
 /obj/machinery/alarm/proc/master_is_operating()
 	return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
@@ -317,11 +317,11 @@
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
 		return
-	
+
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
-	
+
 	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
@@ -735,7 +735,7 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 		output += "<span class='dl1'>Fire alarm in area</span>"
 	else
 		output += "No alerts"
-	
+
 	return output
 
 /obj/machinery/alarm/proc/rcon_text()
@@ -933,11 +933,11 @@ table tr:first-child th:first-child { border: none;}
 
 	add_fingerprint(usr)
 	usr.set_machine(src)
-	
+
 	// hrefs that can always be called -walter0o
 	if(href_list["rcon"])
 		var/attempted_rcon_setting = text2num(href_list["rcon"])
-		
+
 		switch(attempted_rcon_setting)
 			if(RCON_NO)
 				rcon_setting = RCON_NO
@@ -947,7 +947,7 @@ table tr:first-child th:first-child { border: none;}
 				rcon_setting = RCON_YES
 			else
 				return
-	
+
 	if(href_list["temperature"])
 		var/list/selected = TLV["temperature"]
 		var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
@@ -963,7 +963,7 @@ table tr:first-child th:first-child { border: none;}
 
 	// hrefs that need the AA unlocked -walter0o
 	if(!locked || istype(usr, /mob/living/silicon))
-	
+
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
@@ -976,9 +976,9 @@ table tr:first-child th:first-child { border: none;}
 					"n2o_scrub",
 					"panic_siphon",
 					"scrubbing")
-	
+
 					send_signal(device_id, list(href_list["command"] = text2num(href_list["val"]) ) )
-	
+
 				if("set_threshold")
 					var/env = href_list["env"]
 					var/threshold = text2num(href_list["var"])
@@ -1026,36 +1026,36 @@ table tr:first-child th:first-child { border: none;}
 							selected[2] = selected[4]
 						if(selected[3] > selected[4])
 							selected[3] = selected[4]
-	
+
 					apply_mode()
-	
+
 		if(href_list["screen"])
 			screen = text2num(href_list["screen"])
-	
+
 		if(href_list["atmos_unlock"])
 			switch(href_list["atmos_unlock"])
 				if("0")
 					alarm_area.air_doors_close()
 				if("1")
 					alarm_area.air_doors_open()
-	
+
 		if(href_list["atmos_alarm"])
 			if (alarm_area.atmosalert(2))
 				apply_danger_level(2)
 			update_icon()
-	
+
 		if(href_list["atmos_reset"])
 			if (alarm_area.atmosalert(0))
 				apply_danger_level(0)
 			update_icon()
-	
+
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
-	
+
 	// hrefs that need the AA wires exposed, note that borgs should be in range here too -walter0o
 	if(wiresexposed && Adjacent(usr))
-	
+
 		if (href_list["AAlarmwires"])
 			var/t1 = text2num(href_list["AAlarmwires"])
 			if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
@@ -1070,7 +1070,7 @@ table tr:first-child th:first-child { border: none;}
 					update_icon()
 					buildstage = 1
 				return
-	
+
 		else if (href_list["pulse"])
 			var/t1 = text2num(href_list["pulse"])
 			if (!istype(usr.equipped(), /obj/item/device/multitool))
@@ -1131,7 +1131,7 @@ table tr:first-child th:first-child { border: none;}
 				user << "You wire \the [src]!"
 				coil.amount -= 5
 				if(!coil.amount)
-					del(coil)
+					qdel(coil)
 
 				buildstage = 2
 				update_icon()
@@ -1151,7 +1151,7 @@ table tr:first-child th:first-child { border: none;}
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
 				user << "You insert the circuit!"
-				del(W)
+				qdel(W)
 				buildstage = 1
 				update_icon()
 				return
@@ -1161,7 +1161,7 @@ table tr:first-child th:first-child { border: none;}
 				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
 				frame.loc = user.loc
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-				del(src)
+				qdel(src)
 
 	return ..()
 
@@ -1208,7 +1208,7 @@ Code shamelessly copied from apc_frame
 /obj/item/alarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
-		del(src)
+		qdel(src)
 		return
 	..()
 
@@ -1234,7 +1234,7 @@ Code shamelessly copied from apc_frame
 		return
 
 	new /obj/machinery/alarm(loc, ndir, 1)
-	del(src)
+	qdel(src)
 
 /*
 FIRE ALARM
@@ -1325,7 +1325,7 @@ FIRE ALARM
 
 					coil.amount -= 5
 					if(!coil.amount)
-						del(coil)
+						qdel(coil)
 
 					buildstage = 2
 					user << "You wire \the [src]!"
@@ -1342,7 +1342,7 @@ FIRE ALARM
 			if(0)
 				if(istype(W, /obj/item/weapon/firealarm_electronics))
 					user << "You insert the circuit!"
-					del(W)
+					qdel(W)
 					buildstage = 1
 					update_icon()
 
@@ -1351,7 +1351,7 @@ FIRE ALARM
 					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
 					frame.loc = user.loc
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-					del(src)
+					qdel(src)
 		return
 
 	src.alarm()
@@ -1536,7 +1536,7 @@ Code shamelessly copied from apc_frame
 /obj/item/firealarm_frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), 2 )
-		del(src)
+		qdel(src)
 		return
 	..()
 
@@ -1563,7 +1563,7 @@ Code shamelessly copied from apc_frame
 
 	new /obj/machinery/firealarm(loc, ndir, 1)
 
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/partyalarm

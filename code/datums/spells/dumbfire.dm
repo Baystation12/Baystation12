@@ -83,4 +83,4 @@
 				sleep(proj_step_delay)
 
 			if(projectile)
-				del(projectile)
+				qdel(projectile)

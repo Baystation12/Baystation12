@@ -35,32 +35,32 @@
 /obj/structure/window/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			new /obj/item/weapon/shard(loc)
 			if(reinf) new /obj/item/stack/rods(loc)
-			del(src)
+			qdel(src)
 			return
 		if(3.0)
 			if(prob(50))
 				new /obj/item/weapon/shard(loc)
 				if(reinf) new /obj/item/stack/rods(loc)
-				del(src)
+				qdel(src)
 				return
 
 
 /obj/structure/window/blob_act()
 	new /obj/item/weapon/shard(loc)
 	if(reinf) new /obj/item/stack/rods(loc)
-	del(src)
+	qdel(src)
 
 
 /obj/structure/window/meteorhit()
 	//world << "glass at [x],[y],[z] Mhit"
 	new /obj/item/weapon/shard( loc )
 	if(reinf) new /obj/item/stack/rods( loc)
-	del(src)
+	qdel(src)
 
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -324,7 +324,7 @@
 	return
 
 
-/obj/structure/window/Del()
+/obj/structure/window/Destroy()
 	density = 0
 	update_nearby_tiles()
 	playsound(src, "shatter", 70, 1)

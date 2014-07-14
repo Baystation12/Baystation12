@@ -23,6 +23,8 @@ obj/machinery/atmospherics/var/initialize_directions = 0
 obj/machinery/atmospherics/var/pipe_color
 
 obj/machinery/atmospherics/process()
+	if(gc_destroyed) //comments on /vg/ imply that GC'd pipes still process
+		return PROCESS_KILL
 	build_network()
 
 obj/machinery/atmospherics/proc/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)

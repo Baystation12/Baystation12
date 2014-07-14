@@ -557,7 +557,7 @@
 
 	..()
 
-/obj/item/weapon/circuitboard/communications/Del()
+/obj/item/weapon/circuitboard/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf))

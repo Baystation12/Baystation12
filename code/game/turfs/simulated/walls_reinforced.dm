@@ -118,7 +118,7 @@
 				if (O.amount > 1)
 					O.amount--
 				else
-					del(O)
+					qdel(O)
 				return
 
 		if(2)
@@ -264,7 +264,7 @@
 			if (MS.amount > 1)
 				MS.amount--
 			else
-				del(MS)
+				qdel(MS)
 
 	//APC
 	else if( istype(W,/obj/item/apc_frame) )

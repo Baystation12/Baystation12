@@ -26,7 +26,7 @@
 			L = locate(/obj/structure/lattice, get_step(src, dir))
 			L.updateOverlays()
 
-/obj/structure/lattice/Del()
+/obj/structure/lattice/Destroy()
 	for (var/dir in cardinal)
 		var/obj/structure/lattice/L
 		if(locate(/obj/structure/lattice, get_step(src, dir)))
@@ -35,16 +35,16 @@
 	..()
 
 /obj/structure/lattice/blob_act()
-	del(src)
+	qdel(src)
 	return
 
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
-			del(src)
+			qdel(src)
 			return
 		if(3.0)
 			return

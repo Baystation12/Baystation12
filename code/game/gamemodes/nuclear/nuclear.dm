@@ -124,13 +124,13 @@
 	for(var/obj/effect/landmark/A in landmarks_list) //Add commander spawn places first, really should only be one though.
 		if(A.name == "Syndicate-Commander")
 			synd_comm_spawn = get_turf(A)
-			del(A)
+			qdel(A)
 			continue
 
 	for(var/obj/effect/landmark/A in landmarks_list)
 		if(A.name == "Syndicate-Spawn")
 			synd_spawn += get_turf(A)
-			del(A)
+			qdel(A)
 			continue
 
 	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly

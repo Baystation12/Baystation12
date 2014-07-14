@@ -27,10 +27,10 @@
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
 
-	processing_objects.Add(src)	
+	processing_objects.Add(src)
 	return
 
-/obj/item/weapon/tank/Del()
+/obj/item/weapon/tank/Destroy()
 	if(air_contents)
 		del(air_contents)
 
@@ -70,12 +70,12 @@
 	if(prob(50))
 		var/turf/location = src.loc
 		if (!( istype(location, /turf) ))
-			del(src)
+			qdel(src)
 
 		if(src.air_contents)
 			location.assume_air(air_contents)
 
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -141,8 +141,8 @@
 	data["defaultReleasePressure"] = round(TANK_DEFAULT_RELEASE_PRESSURE)
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 	data["valveOpen"] = using_internal ? 1 : 0
-	
-	data["maskConnected"] = 0	
+
+	data["maskConnected"] = 0
 	if(istype(loc,/mob/living/carbon))
 		var/mob/living/carbon/location = loc
 		if(location.internal == src || (location.wear_mask && (location.wear_mask.flags & MASKINTERNALS)))
@@ -253,7 +253,7 @@
 		//world << "\blue Exploding Pressure: [pressure] kPa, intensity: [range]"
 
 		explosion(epicenter, round(range*0.25), round(range*0.5), round(range), round(range*1.5))
-		del(src)
+		qdel(src)
 
 	else if(pressure > TANK_RUPTURE_PRESSURE)
 		//world << "\blue[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]"
@@ -263,7 +263,7 @@
 				return
 			T.assume_air(air_contents)
 			playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
-			del(src)
+			qdel(src)
 		else
 			integrity--
 

@@ -1,0 +1,34 @@
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+	Failure /obj/effect/gibspawner/generic @ (74, 74, 7)  fields:
+	Failure /obj/effect/gibspawner/human @ (86, 63, 7)  fields:
+	Failure /obj/effect/gibspawner/xeno @ (62, 60, 7)  fields:
+	Failure /obj/effect/gibspawner/robot @ (59, 53, 7)  fields:
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+Starting Map Load @ (0, 0, 7), 100 tiles per second.
+	Building turf array.
+	Failure /obj/effect/gibspawner/generic @ (74, 74, 7)  fields:
+	Failure /obj/effect/gibspawner/human @ (86, 63, 7)  fields:
+	Failure /obj/effect/gibspawner/xeno @ (62, 60, 7)  fields:
+	Failure /obj/effect/gibspawner/robot @ (59, 53, 7)  fields:
