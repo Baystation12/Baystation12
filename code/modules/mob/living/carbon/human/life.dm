@@ -1098,6 +1098,9 @@
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()
+
+		if(status_flags & GODMODE)	return 0
+
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
 			silent = 0
