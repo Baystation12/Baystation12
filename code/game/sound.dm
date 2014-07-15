@@ -37,8 +37,8 @@ var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pagetur
 					if (distance > 1) 
 						continue
 					
-					var/new_frequency = 32000 + (frequency - 32000)*0.75	//lower the frequency a bit. very rudimentary
-					var/new_volume = vol*0.5								//muffle the sound, like we're hearing through contact
+					var/new_frequency = 32000 + (frequency - 32000)*0.125	//lower the frequency. very rudimentary
+					var/new_volume = vol*0.15								//muffle the sound, like we're hearing through contact
 					M.playsound_local(turf_source, soundin, new_volume, vary, new_frequency, falloff)
 				else
 					M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff)
