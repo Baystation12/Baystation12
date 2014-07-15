@@ -510,14 +510,9 @@ datum/mind
 								I.Del()
 								break
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
-				if("add")
-					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-					L.imp_in = H
-					L.implanted = 1
-					var/datum/organ/external/affected = H.organs_by_name["head"]
-					affected.implants += L
-					L.part = affected
 
+				if("add")
+					H.implant_loyalty(H, override = TRUE)
 					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
 					if(src in ticker.mode.revolutionaries)
 						special_role = null
@@ -541,6 +536,8 @@ datum/mind
 						special_role = null
 						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+				else
+
 
 		else if (href_list["revolution"])
 			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
