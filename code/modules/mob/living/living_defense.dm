@@ -69,21 +69,31 @@
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
 		var/obj/O = AM
-		var/zone = ran_zone("chest",75)//Hits a random part of the body, geared towards the chest
 		var/dtype = BRUTE
 		if(istype(O,/obj/item/weapon))
 			var/obj/item/weapon/W = O
 			dtype = W.damtype
 		var/throw_damage = O.throwforce*(speed/5)
 		
+		var/zone
+		if (istype(O.thrower, /mob/living))
+			var/mob/living/L = O.thrower
+			zone = check_zone(L.zone_sel.selecting)
+		else
+			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
+		
 		//def_zone = get_zone_with_miss_chance(zone, src, 15*AM.throwing_dist_travelled)	
-		zone = get_zone_with_miss_chance(zone, src)	//TODO: store the location of the thrower and adjust miss chance with distance
+		if (O.throw_source)
+			var/distance = get_dist(O.throw_source, loc)
+			zone = get_zone_with_miss_chance(zone, src, min(15*(distance-2), 0))
+		else
+			zone = get_zone_with_miss_chance(zone, src, 15)
 
 		if(!zone)
-			visible_message("\blue \The [AM] misses [src] narrowly!")
+			visible_message("\blue \The [O] misses [src] narrowly!")
 			return
 		
-		AM.throwing = 0		//it hit, so stop moving
+		O.throwing = 0		//it hit, so stop moving
 		
 		if (istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
@@ -136,7 +146,7 @@
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
-	src.take_organ_damage(speed*4)
+	src.take_organ_damage(speed*5)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
