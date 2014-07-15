@@ -309,7 +309,7 @@ This function restores all organs.
 			//Sharp objects will always embed if they do enough damage.
 			if((sharp && damage > (10*W.w_class)) || (sharp && !ismob(W.loc)) || (damage > embed_threshold && prob(embed_chance)))
 				organ.embed(W)
-		else if( (damage > (5*W.w_class)) && ((!ismob(W.loc) && !sharp)) || (prob((damage - 2)/W.w_class) ) )
-			organ.embed(W)
+			else if( (damage > (5*W.w_class)) && ((!ismob(W.loc) && !sharp)) || (prob((damage - 2)/W.w_class) ) )
+				organ.embed(W)
 
 	return 1
