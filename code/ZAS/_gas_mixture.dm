@@ -153,7 +153,7 @@ What are the archived variables for?
 	//Purpose: Adjusting temperature based on thermal energy transfer
 	//Called by: Anyone who wants to add or remove energy from the gas mix
 	//Inputs: An amount of energy in J to be added. Negative values remove energy.
-	//Outputs: The actual thermal energy change.
+	//Outputs: The actual thermal energy change. Only relevant if you are removing energy.
 	
 	var/old_temperature = temperature
 	var/heat_capacity = heat_capacity()
