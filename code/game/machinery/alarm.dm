@@ -405,6 +405,12 @@
 	return 1
 
 /obj/machinery/alarm/proc/apply_mode()
+	//propagate mode to other air alarms in the area
+	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
+	for (var/area/RA in alarm_area.related)
+		for (var/obj/machinery/alarm/AA in RA)
+			AA.mode = mode
+	
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
