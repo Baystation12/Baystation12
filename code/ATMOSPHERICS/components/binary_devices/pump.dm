@@ -28,7 +28,9 @@ Thus, the two variables affect pump operation are set in New():
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+
 	var/last_power_draw = 0			//for UI
+	var/last_flow_rate = 0			//for UI
 	var/max_pressure_setting = 9000	//kPa
 	
 	var/frequency = 0
@@ -64,7 +66,10 @@ Thus, the two variables affect pump operation are set in New():
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/pump/process()
-//		..()
+	//reset these each iteration
+	last_power_draw = 0
+	last_flow_rate = 0
+	
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(!on)
@@ -88,7 +93,7 @@ Thus, the two variables affect pump operation are set in New():
 		var/pressure_delta = target_pressure - output_starting_pressure
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)	//The number of moles that would have to be transfered to bring air2 to the target pressure
 		
-		//estimate the amount of energy required
+		//calculate the amount of energy required
 		var/specific_entropy = air2.specific_entropy() - air1.specific_entropy()	//air2 is gaining moles, air1 is loosing
 		var/specific_power = 0	// W/mol
 		
@@ -99,6 +104,7 @@ Thus, the two variables affect pump operation are set in New():
 		
 		//Actually transfer the gas
 		var/datum/gas_mixture/removed = air1.remove(transfer_moles)
+		last_flow_rate = output_starting_pressure? transfer_moles*R_IDEAL_GAS_EQUATION*removed.temperature/air1.return_pressure() : 0	//need to calculate this here because gas_mixture/remove() is dumb
 		air2.merge(removed)
 		
 		//if specific_entropy >= 0 then gas is flowing naturally and we don't need to use extra power
@@ -148,7 +154,7 @@ Thus, the two variables affect pump operation are set in New():
 
 
 //this proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
-/obj/machinery/atmospherics/binary/proc/update_power_usage(var/usage_amount)
+/obj/machinery/atmospherics/binary/pump/proc/update_power_usage(var/usage_amount)
 	if (usage_amount > active_power_usage - 5)
 		if (use_power < 2)
 			update_use_power(2)
@@ -162,15 +168,6 @@ Thus, the two variables affect pump operation are set in New():
 	last_power_draw = usage_amount
 	if (use_power > 0)
 		last_power_draw = max(last_power_draw, idle_power_usage)
-		
-/obj/machinery/atmospherics/binary/proc/turn_on()
-	on = 1
-	update_use_power(1)
-		
-/obj/machinery/atmospherics/binary/proc/turn_off()
-	on = 0
-	last_power_draw = 0
-	update_use_power(0)
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & (BROKEN|NOPOWER))
@@ -181,8 +178,9 @@ Thus, the two variables affect pump operation are set in New():
 	
 	data = list(
 		"on" = on,
-		"pressure_set" = round(target_pressure, 0.01),
+		"pressure_set" = round(target_pressure, 0.05),
 		"max_pressure" = max_pressure_setting,
+		"last_flow_rate" = round(last_flow_rate),
 		"last_power_draw" = round(last_power_draw),
 		"max_power_draw" = active_power_usage,
 	)
@@ -206,17 +204,16 @@ Thus, the two variables affect pump operation are set in New():
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
 
-	if("power" in signal.data)
+	if(signal.data["power"])
 		if(text2num(signal.data["power"]))
-			turn_on()
+			on = 1
 		else
-			turn_off()
+			on = 0
+		update_use_power(on)
 
 	if("power_toggle" in signal.data)
-		if (on)
-			turn_off()
-		else
-			turn_on()
+		on = !on
+		update_use_power(on)
 
 	if(signal.data["set_output_pressure"])
 		target_pressure = between(
@@ -250,10 +247,8 @@ Thus, the two variables affect pump operation are set in New():
 	if(..()) return
 	
 	if(href_list["power"])
-		if (on)
-			turn_off()
-		else
-			turn_on()
+		on = !on
+		update_use_power(on)
 	
 	switch(href_list["set_press"])
 		if ("min")

@@ -12,11 +12,8 @@
 		Desirable output pressure:
 	</div>
 	<div class="itemContent">
-		{{:~displayBar(pressure_set, 0, max_pressure)}}
 		<div style="clear: both; padding-top: 4px;">
-			{{:~link('MIN', null, {'set_press' : 'min'}, (pressure_set > 0) ? null : 'disabled')}}
-			{{:~link('SET', null, {'set_press' : 'set'}, null)}}			
-			{{:~link('MAX', null, {'set_press' : 'max'}, (pressure_set < max_pressure) ? null : 'disabled')}}
+			{{:~link('SET', null, {'set_press' : 'set'}, null)}}
 			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:pressure_set}} kPa&nbsp;</div>
 		</div>
 	</div>
@@ -30,6 +27,17 @@
 		{{:~displayBar(last_power_draw, 0, max_power_draw, (last_power_draw < max_power_draw - 5) ? 'good' : 'average')}}
 		<div class="statusValue">
 			{{:last_power_draw}} W
+		</div>
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
+		Flow Rate:
+	</div>
+	<div class="itemContent">
+		<div class="statusValue">
+			{{:last_flow_rate}} L/s
 		</div>
 	</div>
 </div>
