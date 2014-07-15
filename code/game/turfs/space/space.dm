@@ -71,9 +71,10 @@
 
 	if(ticker && ticker.mode)
 
+
 		// Okay, so let's make it so that people can travel z levels but not nuke disks!
 		// if(ticker.mode.name == "nuclear emergency")	return
-		if(A.z > 6) return
+		if(A.z > 6 && !config.use_overmap) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
 			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
 				del(A)
@@ -82,7 +83,9 @@
 			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
 				del(A) //The disk's Del() proc ensures a new one is created
 				return
-
+			if(config.use_overmap)
+				overmap_spacetravel(src,A)
+				return
 			var/list/disk_search = A.search_contents_for(/obj/item/weapon/disk/nuclear)
 			if(!isemptylist(disk_search))
 				if(istype(A, /mob/living))
