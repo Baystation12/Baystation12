@@ -74,6 +74,8 @@ Buildable meters
 			src.pipe_type = PIPE_UVENT
 		else if(istype(make_from, /obj/machinery/atmospherics/valve))
 			src.pipe_type = PIPE_MVALVE
+		else if(istype(make_from, /obj/machinery/atmospherics/binary/pump/high_power))
+			src.pipe_type = PIPE_VOLUME_PUMP
 		else if(istype(make_from, /obj/machinery/atmospherics/binary/pump))
 			src.pipe_type = PIPE_PUMP
 		else if(istype(make_from, /obj/machinery/atmospherics/trinary/filter/m_filter))
@@ -90,8 +92,6 @@ Buildable meters
 			src.pipe_type = PIPE_SCRUBBER
 		else if(istype(make_from, /obj/machinery/atmospherics/binary/passive_gate))
 			src.pipe_type = PIPE_PASSIVE_GATE
-		else if(istype(make_from, /obj/machinery/atmospherics/binary/volume_pump))
-			src.pipe_type = PIPE_VOLUME_PUMP
 		else if(istype(make_from, /obj/machinery/atmospherics/unary/heat_exchanger))
 			src.pipe_type = PIPE_HEAT_EXCHANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/tvalve))
@@ -679,7 +679,7 @@ Buildable meters
 				P.node2.build_network()
 
 		if(PIPE_VOLUME_PUMP)		//volume pump
-			var/obj/machinery/atmospherics/binary/volume_pump/P = new(src.loc)
+			var/obj/machinery/atmospherics/binary/pump/high_power/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)

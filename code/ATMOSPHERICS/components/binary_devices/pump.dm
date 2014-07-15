@@ -17,7 +17,7 @@ Thus, the two variables affect pump operation are set in New():
 	icon_state = "map"
 	level = 1
 
-	name = "Gas pump"
+	name = "gas pump"
 	desc = "A pump"
 
 	var/on = 0
@@ -31,21 +31,16 @@ Thus, the two variables affect pump operation are set in New():
 
 	var/last_power_draw = 0			//for UI
 	var/last_flow_rate = 0			//for UI
-	var/max_pressure_setting = 9000	//kPa
+	var/max_pressure_setting = 15000	//kPa
 	
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/binary/pump/highcap
-	name = "High capacity gas pump"
-	desc = "A high capacity pump"
-
-	target_pressure = 15000000	//15 GPa? Really?
-	active_power_usage = 112500	//150 Horsepower
-
 /obj/machinery/atmospherics/binary/pump/on
 	on = 1
+
+
 
 /obj/machinery/atmospherics/binary/pump/update_icon()
 	if(!powered())
@@ -103,8 +98,12 @@ Thus, the two variables affect pump operation are set in New():
 			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 		
 		//Actually transfer the gas
+		var/input_pressure = air1.return_pressure()
+		
 		var/datum/gas_mixture/removed = air1.remove(transfer_moles)
-		last_flow_rate = output_starting_pressure? transfer_moles*R_IDEAL_GAS_EQUATION*removed.temperature/air1.return_pressure() : 0	//need to calculate this here because gas_mixture/remove() is dumb
+		if (input_pressure > 0)
+			last_flow_rate = removed.total_moles()*R_IDEAL_GAS_EQUATION*removed.temperature/input_pressure
+		
 		air2.merge(removed)
 		
 		//if specific_entropy >= 0 then gas is flowing naturally and we don't need to use extra power
@@ -178,9 +177,9 @@ Thus, the two variables affect pump operation are set in New():
 	
 	data = list(
 		"on" = on,
-		"pressure_set" = round(target_pressure, 0.05),
+		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
 		"max_pressure" = max_pressure_setting,
-		"last_flow_rate" = round(last_flow_rate),
+		"last_flow_rate" = round(last_flow_rate*10),
 		"last_power_draw" = round(last_power_draw),
 		"max_power_draw" = active_power_usage,
 	)

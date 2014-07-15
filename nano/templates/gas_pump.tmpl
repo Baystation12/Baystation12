@@ -14,7 +14,7 @@
 	<div class="itemContent">
 		<div style="clear: both; padding-top: 4px;">
 			{{:~link('SET', null, {'set_press' : 'set'}, null)}}
-			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:pressure_set}} kPa&nbsp;</div>
+			<div style="float: left; width: 80px; text-align: center;">&nbsp;{{:(pressure_set/100)}} kPa&nbsp;</div>
 		</div>
 	</div>
 </div>
@@ -37,7 +37,7 @@
 	</div>
 	<div class="itemContent">
 		<div class="statusValue">
-			{{:last_flow_rate}} L/s
+			{{:(last_flow_rate/10)}} L/s
 		</div>
 	</div>
 </div>
