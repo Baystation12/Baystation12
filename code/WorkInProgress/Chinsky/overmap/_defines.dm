@@ -35,6 +35,9 @@ proc/toggle_move_stars(zlevel, direction)
 								AM.throw_at(get_step(T,reverse_direction(direction)), 5, 1)
 
 
+//list used to cache empty zlevels to avoid nedless map bloat
+var/list/cached_space = list()
+
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/obj/effect/map/M = map_sectors["[T.z]"]
 	if (!M)
@@ -73,11 +76,26 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 		nz = TM.map_z
 		testing("Destination: [TM]")
 	else
-		world.maxz++
-		nz = world.maxz
-		TM = new /obj/effect/map/sector/temporary(mapx, mapy, nz)
-		testing("Destination: *new* [TM]")
+		if(cached_space.len)
+			var/obj/effect/map/sector/temporary/cache = cached_space[cached_space.len]
+			cached_space -= cache
+			nz = cache.map_z
+			cache.x = mapx
+			cache.y = mapy
+			testing("Destination: *cached* [TM]")
+		else
+			world.maxz++
+			nz = world.maxz
+			TM = new /obj/effect/map/sector/temporary(mapx, mapy, nz)
+			testing("Destination: *new* [TM]")
 
 	var/turf/dest = locate(nx,ny,nz)
 	if(dest)
 		A.loc = dest
+
+	if(istype(M, /obj/effect/map/sector/temporary))
+		var/obj/effect/map/sector/temporary/source = M
+		if (source.can_die())
+			testing("Catching [M] for future use")
+			source.loc = null
+			cached_space += source

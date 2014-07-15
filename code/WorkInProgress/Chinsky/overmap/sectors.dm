@@ -117,9 +117,6 @@ var/global/list/map_sectors = list()
 
 /obj/effect/map/sector/temporary/proc/can_die(var/mob/observer)
 	testing("Checking if sector at [map_z] can die.")
-	if(src.map_z < world.maxz)	//can't specify which zlevel to remove
-		testing("It is not last sector in the stack.")
-		return 0
 	for(var/mob/M in player_list)
 		if(M != observer && M.z == map_z)
 			testing("There are people on it.")
