@@ -52,7 +52,7 @@ Buildable meters
 	if (make_from)
 		src.dir = make_from.dir
 		src.pipename = make_from.name
-		color = make_from.color
+		color = make_from.pipe_color
 		var/is_bent
 		if  (make_from.initialize_directions in list(NORTH|SOUTH, WEST|EAST))
 			is_bent = 0
@@ -324,12 +324,12 @@ Buildable meters
 			return 1
 	// no conflicts found
 
-	var/pipefailtext = "\red There's nothing to connect this pipe section to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+	var/pipefailtext = "\red There's nothing to connect this pipe section to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 
 	switch(pipe_type)
 		if(PIPE_SIMPLE_STRAIGHT, PIPE_SIMPLE_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/P = new( src.loc )
-			P.color = color
+			P.pipe_color = color
 			P.dir = src.dir
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
@@ -382,7 +382,7 @@ Buildable meters
 
 		if(PIPE_MANIFOLD)		//manifold
 			var/obj/machinery/atmospherics/pipe/manifold/M = new( src.loc )
-			M.color = color
+			M.pipe_color = color
 			M.dir = dir
 			M.initialize_directions = pipe_dir
 			//M.New()
@@ -390,7 +390,7 @@ Buildable meters
 			M.level = T.intact ? 2 : 1
 			M.initialize()
 			if (!M)
-				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << "There's nothing to connect this manifold to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -405,7 +405,7 @@ Buildable meters
 
 		if(PIPE_MANIFOLD4W)		//4-way manifold
 			var/obj/machinery/atmospherics/pipe/manifold4w/M = new( src.loc )
-			M.color = color
+			M.pipe_color = color
 			M.dir = dir
 			M.initialize_directions = pipe_dir
 			//M.New()
@@ -413,7 +413,7 @@ Buildable meters
 			M.level = T.intact ? 2 : 1
 			M.initialize()
 			if (!M)
-				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << "There's nothing to connect this manifold to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -438,7 +438,7 @@ Buildable meters
 			//P.level = T.intact ? 2 : 1
 			P.initialize()
 			if (!P)
-				usr << "There's nothing to connect this pipe to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << pipefailtext //"There's nothing to connect this pipe to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			P.build_network()
 			if (P.node1)
@@ -709,7 +709,7 @@ Buildable meters
 				C.node.initialize()
 				C.node.build_network()
 ///// Z-Level stuff
-		if(PIPE_UP)		//volume pump
+		if(PIPE_UP)
 			var/obj/machinery/atmospherics/pipe/zpipe/up/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
@@ -725,7 +725,7 @@ Buildable meters
 			if (P.node2)
 				P.node2.initialize()
 				P.node2.build_network()
-		if(PIPE_DOWN)		//volume pump
+		if(PIPE_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
