@@ -14,7 +14,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump
 	icon = 'icons/atmos/pump.dmi'
-	icon_state = "map"
+	icon_state = "map_off"
 	level = 1
 
 	name = "gas pump"
@@ -38,6 +38,7 @@ Thus, the two variables affect pump operation are set in New():
 	var/datum/radio_frequency/radio_connection
 
 /obj/machinery/atmospherics/binary/pump/on
+	icon_state = "map_on"
 	on = 1
 
 
