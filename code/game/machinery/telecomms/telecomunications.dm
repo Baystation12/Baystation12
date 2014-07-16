@@ -224,7 +224,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			damage_chance = 50
 		if((T0C + 200) to INFINITY)					// More than 200C, INFERNO. Takes damage every tick.
 			damage_chance = 100
-	if (damage_chance > 100 || prob(damage_chance))
+	if (damage_chance && prob(damage_chance))
 		integrity = between(0, integrity - 1, 100)
 
 
