@@ -982,6 +982,7 @@
 #include "code\modules\mob\living\carbon\metroid\login.dm"
 #include "code\modules\mob\living\carbon\metroid\metroid.dm"
 #include "code\modules\mob\living\carbon\metroid\powers.dm"
+#include "code\modules\mob\living\carbon\metroid\say.dm"
 #include "code\modules\mob\living\carbon\metroid\subtypes.dm"
 #include "code\modules\mob\living\carbon\metroid\update_icons.dm"
 #include "code\modules\mob\living\carbon\monkey\death.dm"

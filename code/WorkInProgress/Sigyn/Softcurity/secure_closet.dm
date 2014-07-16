@@ -70,7 +70,7 @@
 		new /obj/item/weapon/storage/backpack/satchel_sec(src)
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos(src)
-		new /obj/item/weapon/storage/lockbox/loyalty(src)
+		if (config.use_loyalty_implants) new /obj/item/weapon/storage/lockbox/loyalty(src)
 		new /obj/item/weapon/storage/flashbang_kit(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/device/flash(src)
