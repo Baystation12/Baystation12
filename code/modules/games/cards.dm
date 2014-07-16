@@ -116,7 +116,7 @@
 	H.concealed = 1
 	H.update_icon()
 	usr.visible_message("\The [usr] deals a card to \the [M].")
-	H.throw_at(get_step(M,M.dir),10,1)
+	H.throw_at(get_step(M,M.dir),10,1,H)
 
 /obj/item/weapon/hand/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/hand))

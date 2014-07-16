@@ -63,7 +63,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 		// Damaged heart virtually reduces the blood volume, as the blood isn't
 		// being pumped properly anymore.
-		var/datum/organ/internal/heart/heart = internal_organs["heart"]
+		var/datum/organ/internal/heart/heart = internal_organs_by_name["heart"]
 
 		if(heart.damage > 1 && heart.damage < heart.min_bruised_damage)
 			blood_volume *= 0.8

@@ -265,13 +265,13 @@
 	update_icon()
 
 /obj/machinery/mining/drill/proc/get_harvest_capacity()
-	return 3 * (cutter ? cutter.rating : 0)
+	return (cutter ? cutter.rating : 0)
 
 /obj/machinery/mining/drill/proc/get_storage_capacity()
-	return 100 * (storage ? storage.rating : 0)
+	return 200 * (storage ? storage.rating : 0)
 
 /obj/machinery/mining/drill/proc/get_charge_use()
-	return 100 - (20 * (cellmount ? cellmount.rating : 0))
+	return 50 - (10 * (cellmount ? cellmount.rating : 0))
 
 /obj/machinery/mining/drill/proc/get_resource_field()
 
@@ -346,6 +346,11 @@
 /obj/machinery/mining/brace/proc/connect()
 
 	var/turf/T = get_step(get_turf(src), src.dir)
+
+	if(!T.has_resources)
+		src.visible_message("\red The terrain near the brace is unsuitable!")
+		return
+
 	for(var/thing in T.contents)
 		if(istype(thing,/obj/machinery/mining/drill))
 			connected = thing
