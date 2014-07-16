@@ -63,6 +63,7 @@
 		if("Engineering") prefix = ":e "
 		if("Security") prefix = ":s "
 		if("Supply") prefix = ":u "
+		if("Binary") prefix = ":b "
 
 	src.say("[prefix]Current Active Laws:")
 	//src.laws_sanity_check()
