@@ -356,7 +356,7 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
 		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
