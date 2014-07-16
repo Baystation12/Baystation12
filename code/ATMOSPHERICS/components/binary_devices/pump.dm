@@ -68,11 +68,12 @@ Thus, the two variables affect pump operation are set in New():
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(!on)
+		update_use_power(0)
 		return 0
 
 	var/output_starting_pressure = air2.return_pressure()
 	if( (target_pressure - output_starting_pressure) < 0.01) //No need to pump gas if target is already reached!
-		update_power_usage(0)
+		update_use_power(0)
 		return 1
 	
 	var/output_volume = air2.volume
@@ -111,9 +112,9 @@ Thus, the two variables affect pump operation are set in New():
 			//pump draws power and heats gas according to 2nd law of thermodynamics
 			var/power_draw = round(transfer_moles*specific_power)
 			air2.add_thermal_energy(power_draw)
-			update_power_usage(power_draw)
+			handle_power_draw(power_draw)
 		else
-			update_power_usage(0)
+			handle_power_draw(idle_power_usage)
 
 		if(network1)
 			network1.update = 1
@@ -122,6 +123,18 @@ Thus, the two variables affect pump operation are set in New():
 			network2.update = 1
 
 	return 1
+
+//This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
+/obj/machinery/atmospherics/binary/pump/proc/handle_power_draw(var/usage_amount)
+	if (usage_amount > active_power_usage - 5)
+		update_use_power(2)
+	else
+		update_use_power(1)
+		
+		if (usage_amount > idle_power_usage)
+			use_power(usage_amount)	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
+	
+	last_power_draw = usage_amount
 
 //Radio remote control
 
@@ -150,23 +163,6 @@ Thus, the two variables affect pump operation are set in New():
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
 
 	return 1
-
-
-//this proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
-/obj/machinery/atmospherics/binary/pump/proc/update_power_usage(var/usage_amount)
-	if (usage_amount > active_power_usage - 5)
-		if (use_power < 2)
-			update_use_power(2)
-	else
-		if (use_power >= 2)
-			update_use_power(1)
-		
-		if (usage_amount > idle_power_usage)
-			use_power(usage_amount)	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
-	
-	last_power_draw = usage_amount
-	if (use_power > 0)
-		last_power_draw = max(last_power_draw, idle_power_usage)
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & (BROKEN|NOPOWER))
