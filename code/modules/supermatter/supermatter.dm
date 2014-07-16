@@ -123,19 +123,21 @@
 		shift_light(5, warning_color)
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
+			var/alert_msg
 
 			if(damage > emergency_point)
 				shift_light(7, emergency_color)
-				radio.autosay(addtext(emergency_alert, " Instability: ",stability,"%"), "Supermatter Monitor")
+				alert_msg = addtext(emergency_alert, " Instability: ",stability,"%")
 				lastwarning = world.timeofday
-
 			else if(damage >= damage_archived) // The damage is still going up
-				radio.autosay(addtext(warning_alert," Instability: ",stability,"%"), "Supermatter Monitor")
+				alert_msg = addtext(warning_alert," Instability: ",stability,"%")
 				lastwarning = world.timeofday - 150
-
-			else                                                 // Phew, we're safe
-				radio.autosay(safe_alert, "Supermatter Monitor")
+			else // Phew, we're safe
+				alert_msg = safe_alert
 				lastwarning = world.timeofday
+
+			if(!istype(L, /turf/space) && alert_msg)
+				radio.autosay(alert_msg, "Supermatter Monitor")
 
 		if(damage > explosion_point)
 			for(var/mob/living/mob in living_mob_list)

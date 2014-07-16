@@ -681,14 +681,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_armory
 	group = "Security"
 
-/datum/supply_packs/loyalty
-	name = "Loyalty implant crate"
-	contains = list (/obj/item/weapon/storage/lockbox/loyalty)
-	cost = 60
-	containertype = /obj/structure/closet/crate/secure
-	containername = "Loyalty implant crate"
-	access = access_armory
-	group = "Security"
 
 /datum/supply_packs/ballistic
 	name = "Ballistic gear crate"
@@ -724,6 +716,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Shotgun shells"
 	access = access_armory
 	group = "Security"
+
+/*
+/datum/supply_packs/loyalty
+	name = "Loyalty implant crate"
+	contains = list (/obj/item/weapon/storage/lockbox/loyalty)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Loyalty implant crate"
+	access = access_armory
+	group = "Security"
+*/
 
 /datum/supply_packs/expenergy
 	name = "Experimental energy gear crate"

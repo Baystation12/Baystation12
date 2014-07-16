@@ -328,7 +328,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return
 
 
-/obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	ui_tick++
 	var/datum/nanoui/old_ui = nanomanager.get_open_ui(user, src, "main")
 	var/auto_update = 1
@@ -462,7 +462,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			data["aircontents"] = list("reading" = 0)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -1214,8 +1214,54 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					user << "\blue Tank is empty!"
 
 	if (!scanmode && istype(A, /obj/item/weapon/paper) && owner)
-		note = A:info
-		user << "\blue Paper scanned." //concept of scanning paper copyright brainoblivion 2009
+		// JMO 20140705: Makes scanned document show up properly in the notes. Not pretty for formatted documents,
+		// as this will clobber the HTML, but at least it lets you scan a document. You can restore the original
+		// notes by editing the note again. (Was going to allow you to edit, but scanned documents are too long.)
+		var/raw_scan = (A:info)
+		var/formatted_scan = ""
+		// Scrub out the tags (replacing a few formatting ones along the way)
+
+		// Find the beginning and end of the first tag.
+		var/tag_start = findtext(raw_scan,"<")
+		var/tag_stop = findtext(raw_scan,">")
+
+		// Until we run out of complete tags...
+		while(tag_start&&tag_stop)
+			var/pre = copytext(raw_scan,1,tag_start) // Get the stuff that comes before the tag
+			var/tag = lowertext(copytext(raw_scan,tag_start+1,tag_stop)) // Get the tag so we can do intellegent replacement
+			var/tagend = findtext(tag," ") // Find the first space in the tag if there is one.
+
+			// Anything that's before the tag can just be added as is.
+			formatted_scan = formatted_scan+pre
+
+			// If we have a space after the tag (and presumably attributes) just crop that off.
+			if (tagend)
+				tag=copytext(tag,1,tagend)
+
+			if (tag=="p"||tag=="/p"||tag=="br") // Check if it's I vertical space tag.
+				formatted_scan=formatted_scan+"<br>" // If so, add some padding in.
+
+			raw_scan = copytext(raw_scan,tag_stop+1) // continue on with the stuff after the tag
+
+			// Look for the next tag in what's left
+			tag_start = findtext(raw_scan,"<")
+			tag_stop = findtext(raw_scan,">")
+
+		// Anything that is left in the page. just tack it on to the end as is
+		formatted_scan=formatted_scan+raw_scan
+
+    	// If there is something in there already, pad it out.
+		if (length(note)>0)
+			note = note + "<br><br>"
+
+    	// Store the scanned document to the notes
+		note = "Scanned Document. Edit to restore previous notes/delete scan.<br>----------<br>" + formatted_scan + "<br>"
+		// notehtml ISN'T set to allow user to get their old notes back. A better implementation would add a "scanned documents"
+		// feature to the PDA, which would better convey the availability of the feature, but this will work for now.
+
+		// Inform the user
+		user << "\blue Paper scanned and OCRed to notekeeper." //concept of scanning paper copyright brainoblivion 2009
+
 
 
 /obj/item/device/pda/proc/explode() //This needs tuning. //Sure did.
