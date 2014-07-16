@@ -71,6 +71,10 @@
 				dat += "<br>"
 				dat += {"<a href='byond://?src=\ref[src];choice=Wireless'>[A.control_disabled ? "Enable" : "Disable"] Wireless Activity</a>"}
 				dat += "<br>"
+				dat += "Subspace Transceiver is: [A.aiRadio.disabledAi ? "Disabled" : "Enabled"]"
+				dat += "<br>"
+				dat += {"<a href='byond://?src=\ref[src];choice=Radio'>[A.aiRadio.disabledAi ? "Enable" : "Disable"] Subspace Transceiver</a>"}
+				dat += "<br>"
 				dat += {"<a href='byond://?src=\ref[src];choice=Close'> Close</a>"}
 		user << browse(dat, "window=aicard")
 		onclose(user, "aicard")
@@ -91,6 +95,12 @@
 				U << browse(null, "window=aicard")
 				U.unset_machine()
 				return
+
+			if ("Radio")
+				for(var/mob/living/silicon/ai/A in src)
+					A.aiRadio.disabledAi = !A.aiRadio.disabledAi
+					A << "Your Subspace Transceiver has been: [A.aiRadio.disabledAi ? "disabled" : "enabled"]"
+					U << "You [A.aiRadio.disabledAi ? "Disable" : "Enable"] the AI's Subspace Transceiver"
 
 			if ("Wipe")
 				var/confirm = alert("Are you sure you want to wipe this card's memory? This cannot be undone once started.", "Confirm Wipe", "Yes", "No")

@@ -65,58 +65,69 @@
 	P.on_hit(src, absorb, def_zone)
 	return absorb
 
+//this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
 		var/obj/O = AM
-		var/zone = ran_zone("chest",75)//Hits a random part of the body, geared towards the chest
 		var/dtype = BRUTE
 		if(istype(O,/obj/item/weapon))
 			var/obj/item/weapon/W = O
 			dtype = W.damtype
+		var/throw_damage = O.throwforce*(speed/5)
+		
+		var/miss_chance = 15
+		if (O.throw_source)
+			var/distance = get_dist(O.throw_source, loc)
+			miss_chance = min(15*(distance-2), 0)
+		
+		if (prob(miss_chance))
+			visible_message("\blue \The [O] misses [src] narrowly!")
+			return
+		
 		src.visible_message("\red [src] has been hit by [O].")
-		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
+		var/armor = run_armor_check(null, "melee")
 
 		if(armor < 2)
-			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, is_sharp(O), has_edge(O), O)
+			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
 
-		if(!O.fingerprintslast)
-			return
+		O.throwing = 0		//it hit, so stop moving
+		
+		if(ismob(O.thrower))
+			var/mob/M = O.thrower
+			var/client/assailant = M.client
+			if(assailant)
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a [O], thrown by [M.name] ([assailant.ckey])</font>")
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
+				if(!istype(src,/mob/living/simple_animal/mouse))
+					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
-		var/client/assailant = directory[ckey(O.fingerprintslast)]
-		if(assailant && assailant.mob && istype(assailant.mob,/mob))
-			var/mob/M = assailant.mob
+		// Begin BS12 momentum-transfer code.
+		if(O.throw_source && speed >= 15)
+			var/obj/item/weapon/W = O
+			var/momentum = speed/2
+			var/dir = get_dir(O.throw_source, src)
 
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a thrown [O], last touched by [M.name] ([assailant.ckey])</font>")
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
-			if(!istype(src,/mob/living/simple_animal/mouse))
-				msg_admin_attack("[src.name] ([src.ckey]) was hit by a thrown [O], last touched by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
-			// Begin BS12 momentum-transfer code.
+			if(!W || !src) return
+			
+			if(W.sharp) //Projectile is suitable for pinning.
+				//Handles embedding for non-humans and simple_animals.
+				O.loc = src
+				src.embedded += O
 
-			if(speed >= 15)
-				var/obj/item/weapon/W = O
-				var/momentum = speed/2
-				var/dir = get_dir(M,src)
+				var/turf/T = near_wall(dir,2)
 
-				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
-				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+				if(T)
+					src.loc = T
+					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+					src.anchored = 1
+					src.pinned += O
 
-				if(!W || !src) return
-
-				if(istype(W.loc,/mob/living) && W.sharp) //Projectile is embedded and suitable for pinning.
-
-					if(!istype(src,/mob/living/carbon/human)) //Handles embedding for non-humans and simple_animals.
-						O.loc = src
-						src.embedded += O
-
-					var/turf/T = near_wall(dir,2)
-
-					if(T)
-						src.loc = T
-						visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-						src.anchored = 1
-						src.pinned += O
-
+//This is called when the mob is thrown into a dense turf
+/mob/living/proc/turf_collision(var/turf/T, var/speed)
+	src.take_organ_damage(speed*5)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)

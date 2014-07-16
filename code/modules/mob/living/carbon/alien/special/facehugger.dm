@@ -107,6 +107,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	if(stat == CONSCIOUS)
 		icon_state = "[initial(icon_state)]"
 		Attach(hit_atom)
+		throwing = 0
 
 /obj/item/clothing/mask/facehugger/proc/Attach(M as mob)
 	if( (!iscorgi(M) && !iscarbon(M)) || isalien(M))

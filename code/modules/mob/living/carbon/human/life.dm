@@ -690,6 +690,7 @@
 				loc_temp = environment.temperature
 
 			if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && environment.phoron < MOLES_PHORON_VISIBLE)
+				pressure_alert = 0
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
@@ -1098,6 +1099,9 @@
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()
+
+		if(status_flags & GODMODE)	return 0
+
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
 			silent = 0

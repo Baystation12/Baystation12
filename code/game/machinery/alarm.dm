@@ -104,7 +104,7 @@
 	var/phoron_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
-	
+
 	var/alarm_sound_cooldown = 200
 	var/last_sound_time = 0
 
@@ -173,7 +173,6 @@
 	if(!istype(location))	return//returns if loc is not simulated
 
 	if ((alarm_area.fire || alarm_area.atmosalm >= 2) && world.time > last_sound_time + alarm_sound_cooldown)
-		playsound(src.loc, 'sound/machines/airalarm.ogg', 40, 0, 5)
 		last_sound_time = world.time
 
 	var/datum/gas_mixture/environment = location.return_air()
@@ -324,11 +323,11 @@
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
 		return
-	
+
 	var/icon_level = danger_level
 	if (alarm_area.atmosalm)
 		icon_level = max(icon_level, 1)	//if there's an atmos alarm but everything is okay locally, no need to go past yellow
-	
+
 	switch(icon_level)
 		if (0)
 			icon_state = "alarm0"
@@ -412,6 +411,12 @@
 	return 1
 
 /obj/machinery/alarm/proc/apply_mode()
+	//propagate mode to other air alarms in the area
+	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
+	for (var/area/RA in alarm_area.related)
+		for (var/obj/machinery/alarm/AA in RA)
+			AA.mode = mode
+	
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
@@ -728,7 +733,7 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 		output += "<span class='dl1'>Fire alarm in area</span>"
 	else
 		output += "No alerts"
-	
+
 	return output
 
 /obj/machinery/alarm/proc/rcon_text()

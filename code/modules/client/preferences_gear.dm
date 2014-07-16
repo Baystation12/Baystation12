@@ -367,6 +367,7 @@ proc/populate_gear_list()
 	display_name = "engineering bandana"
 	path = /obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1
 	cost = 2
+	slot = slot_head
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 
 //Science
@@ -381,12 +382,14 @@ proc/populate_gear_list()
 	display_name = "Zhan-Khazan furs"
 	path = /obj/item/clothing/suit/tajaran/furs
 	cost = 3
+	slot = slot_wear_suit
 	whitelisted = "Tajaran"
 
 /datum/gear/zhan_scarf
 	display_name = "Zhan-Khazan headscarf"
 	path = /obj/item/clothing/head/tajaran/scarf
 	cost = 2
+	slot = slot_head
 	whitelisted = "Tajaran"
 
 /datum/gear/unathi_robe
