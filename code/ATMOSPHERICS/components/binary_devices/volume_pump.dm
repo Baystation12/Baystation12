@@ -14,7 +14,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/volume_pump
 	icon = 'icons/atmos/volume_pump.dmi'
-	icon_state = "map"
+	icon_state = "map_off"
 	level = 1
 
 	name = "Volumetric gas pump"
@@ -29,6 +29,7 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/volume_pump/on
 	on = 1
+	icon_state = "map_on"
 
 /obj/machinery/atmospherics/binary/volume_pump/update_icon()
 	if(!powered())

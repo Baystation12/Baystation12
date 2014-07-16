@@ -52,9 +52,6 @@
 	if(!istype(T))
 		return
 
-	if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
-		scrubber_icon += "h"
-		
 	if(!powered())
 		scrubber_icon += "off"
 	else
