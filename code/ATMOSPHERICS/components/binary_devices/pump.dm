@@ -71,47 +71,40 @@ Thus, the two variables affect pump operation are set in New():
 		update_use_power(0)
 		return 0
 
-	var/output_starting_pressure = air2.return_pressure()
-	if( (target_pressure - output_starting_pressure) < 0.01) //No need to pump gas if target is already reached!
-		update_use_power(0)
-		return 1
+	var/datum/gas_mixture/source = air1
+	var/datum/gas_mixture/sink = air2
 	
-	var/output_volume = air2.volume
-	if (network2 && network2.air_transient)
-		output_volume = network2.air_transient.volume	//note that the amount of gas in the adjacent pipe will still limit what we can transfer
+	var/pressure_delta = target_pressure - sink.return_pressure()
 
-	//This is pointless since gas_mixure/remove() won't let as remove more than is in the adjacent pipe anyways and removing gas directly from the network is not going to work.
-	//output_volume = min(output_volume, max_volume_transfer)
-	
 	//Calculate necessary moles to transfer using PV=nRT
-	if((air1.total_moles() > 0) && (air1.temperature > 0 || air2.temperature > 0))
-		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
-		var/pressure_delta = target_pressure - output_starting_pressure
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)	//The number of moles that would have to be transfered to bring air2 to the target pressure
+	if(pressure_delta > 0.01 && (source.total_moles() > 0) && (source.temperature > 0 || sink.temperature > 0))
+		//Figure out how much gas to transfer
+		var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+		var/transfer_moles = calc_transfer_amount(pressure_delta)
 		
-		//calculate the amount of energy required
-		var/specific_entropy = air2.specific_entropy() - air1.specific_entropy()	//air2 is gaining moles, air1 is loosing
+		//Calculate the amount of energy required
+		var/specific_entropy = sink.specific_entropy() - source.specific_entropy()	//air2 is gaining moles, air1 is loosing
 		var/specific_power = 0	// W/mol
 		
-		//if specific_entropy >= 0 then gas just flows naturally and we are not limited by how powerful the pump is.
+		//If specific_entropy is < 0 then transfer_moles is limited by how powerful the pump is
 		if (specific_entropy < 0)
 			specific_power = -specific_entropy*air_temperature		//how much power we need per mole
 			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 		
 		//Actually transfer the gas
-		var/input_pressure = air1.return_pressure()
+		var/input_pressure = source.return_pressure()
 		
-		var/datum/gas_mixture/removed = air1.remove(transfer_moles)
+		var/datum/gas_mixture/removed = source.remove(transfer_moles)
 		if (input_pressure > 0)
 			last_flow_rate = removed.total_moles()*R_IDEAL_GAS_EQUATION*removed.temperature/input_pressure
 		
-		air2.merge(removed)
+		sink.merge(removed)
 		
-		//if specific_entropy >= 0 then gas is flowing naturally and we don't need to use extra power
+		//If specific_entropy is < 0 then extra power needs to be supplied to move gas
 		if (specific_entropy < 0)
 			//pump draws power and heats gas according to 2nd law of thermodynamics
 			var/power_draw = round(transfer_moles*specific_power)
-			air2.add_thermal_energy(power_draw)
+			sink.add_thermal_energy(power_draw)
 			handle_power_draw(power_draw)
 		else
 			handle_power_draw(idle_power_usage)
@@ -121,8 +114,24 @@ Thus, the two variables affect pump operation are set in New():
 
 		if(network2)
 			network2.update = 1
+	else
+		update_use_power(0)
+		return 1
 
 	return 1
+
+/obj/machinery/atmospherics/binary/pump/proc/calc_transfer_amount(var/pressure_delta)
+	var/datum/gas_mixture/source = air1
+	var/datum/gas_mixture/sink = air2
+
+	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+	
+	var/output_volume = sink.volume
+	if (network2 && network2.air_transient)
+		output_volume = network2.air_transient.volume	//use the network volume if we can get it
+	
+	//Return the number of moles that would have to be transfered to bring sink to the target pressure
+	return pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 
 //This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
 /obj/machinery/atmospherics/binary/pump/proc/handle_power_draw(var/usage_amount)
@@ -132,7 +141,7 @@ Thus, the two variables affect pump operation are set in New():
 		update_use_power(1)
 		
 		if (usage_amount > idle_power_usage)
-			use_power(usage_amount)	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
+			use_power(round(usage_amount))	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
 	
 	last_power_draw = usage_amount
 
@@ -204,11 +213,9 @@ Thus, the two variables affect pump operation are set in New():
 			on = 1
 		else
 			on = 0
-		update_use_power(on)
 
 	if("power_toggle" in signal.data)
 		on = !on
-		update_use_power(on)
 
 	if(signal.data["set_output_pressure"])
 		target_pressure = between(
@@ -243,7 +250,6 @@ Thus, the two variables affect pump operation are set in New():
 	
 	if(href_list["power"])
 		on = !on
-		update_use_power(on)
 	
 	switch(href_list["set_press"])
 		if ("min")
