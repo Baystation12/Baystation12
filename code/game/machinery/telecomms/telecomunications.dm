@@ -215,18 +215,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	// Checks heat from the environment and applies any integrity damage
 	var/datum/gas_mixture/environment = loc.return_air()
 	switch(environment.temperature)
-		if(0 to (T0C + 40))                         // Absolute zero to 40�C, safe
+		if(0 to (T0C + 40))                         // Absolute zero to 40C, safe
 			integrity = between(0, integrity, 100)
-		if((T0C + 40) to (T0C + 70))                // 40�C-70�C, minor overheat, 10% chance of taking damage
+		if((T0C + 40) to (T0C + 70))                // 40C-70C, minor overheat, 10% chance of taking damage
 			if (prob(10))
 				integrity = max(0, integrity - 1)
-		if((T0C + 70) to (T0C + 130))				// 70�C-130�C, major overheat, 25% chance of taking damage
+		if((T0C + 70) to (T0C + 130))				// 70C-130C, major overheat, 25% chance of taking damage
 			if (prob(25))
 				integrity = max(0, integrity - 1)
-		if((T0C + 130) to (T0C + 200))              // 130�C-200�C, dangerous overheat, 50% chance of taking damage
+		if((T0C + 130) to (T0C + 200))              // 130C-200C, dangerous overheat, 50% chance of taking damage
 			if (prob(50))
 				integrity = max(0, integrity - 1)
-		if((T0C + 200) to INFINITY)					// More than 200�C, INFERNO. Takes damage every tick.
+		if((T0C + 200) to INFINITY)					// More than 200C, INFERNO. Takes damage every tick.
 			integrity = max(0, integrity - 1)
 
 	if(delay)
