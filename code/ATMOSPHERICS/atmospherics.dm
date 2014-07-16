@@ -9,7 +9,6 @@ Pipes -> Pipelines
 Pipelines + Other Objects -> Pipe network
 
 */
-
 /obj/machinery/atmospherics
 	anchored = 1
 	idle_power_usage = 0

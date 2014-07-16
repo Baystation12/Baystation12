@@ -22,6 +22,8 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 			return "[C]"
 
 /proc/pipe_color_check(var/color)
+	if(!color)
+		return 1
 	for(var/C in pipe_colors)
 		if(color == pipe_colors[C])
 			return 1
