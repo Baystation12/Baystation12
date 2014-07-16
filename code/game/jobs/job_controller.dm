@@ -377,6 +377,8 @@ var/global/datum/controller/occupations/job_master
 
 						if(G.slot)
 							H.equip_to_slot_or_del(new G.path(H), G.slot)
+							H << "\blue Equipping you with [thing]!"
+
 						else
 							spawn_in_storage += thing
 
@@ -462,15 +464,19 @@ var/global/datum/controller/occupations/job_master
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 
 					//Deferred item spawning.
-					var/obj/item/weapon/storage/B = locate(/obj/item/weapon/storage/backpack) in H.contents
+					if(spawn_in_storage && spawn_in_storage.len)
+						var/obj/item/weapon/storage/B
+						for(var/obj/item/weapon/storage/S in H.contents)
+							B = S
+							break
 
-					if(isnull(B) || istype(B))
-						B = locate(/obj/item/weapon/storage/box) in H.contents
-
-					if(!isnull(B))
-						for(var/thing in spawn_in_storage)
-							var/datum/gear/G = gear_datums[thing]
-							new G.path(B)
+						if(!isnull(B))
+							for(var/thing in spawn_in_storage)
+								H << "\blue Placing [thing] in your [B]!"
+								var/datum/gear/G = gear_datums[thing]
+								new G.path(B)
+						else
+							H << "\red Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug."
 
 		//TODO: Generalize this by-species
 		if(H.species)

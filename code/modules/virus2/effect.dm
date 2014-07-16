@@ -202,7 +202,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			var/datum/organ/internal/brain/B = H.internal_organs["brain"]
+			var/datum/organ/internal/brain/B = H.internal_organs_by_name["brain"]
 			if (B.damage < B.min_broken_damage)
 				B.take_damage(5)
 		else

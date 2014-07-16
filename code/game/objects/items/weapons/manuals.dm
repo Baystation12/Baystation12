@@ -737,11 +737,11 @@
 
 
 /obj/item/weapon/book/manual/security_space_law
-	name = "Space Law"
+	name = "Corporate Regulations"
 	desc = "A set of NanoTrasen guidelines for keeping law and order on their space stations."
 	icon_state = "bookSpaceLaw"
 	author = "NanoTrasen"
-	title = "Space Law"
+	title = "Corporate Regulations"
 
 	dat = {"
 
