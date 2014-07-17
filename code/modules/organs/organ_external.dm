@@ -91,13 +91,6 @@
 		brute *= brmod //~2/3 damage for ROBOLIMBS
 		burn *= bumod //~2/3 damage for ROBOLIMBS
 
-	//If limb took enough damage, try to cut or tear it off
-	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
-		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
-				droplimb(1)
-				return
-
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs && ( (sharp && brute >= 5) || brute >= 10) && prob(5))
 		// Damage an internal organ
@@ -162,6 +155,14 @@
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
+	
+	//If limb took enough damage, try to cut or tear it off
+	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
+		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
+			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+				droplimb(1)
+				return
+	
 	owner.updatehealth()
 
 	var/result = update_icon()
@@ -804,8 +805,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		owner.u_equip(c_hand)
 		owner.emote("me", 1, "drops what they were holding, their [hand_name] malfunctioning!")
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src)
-		spark_system.attach(src)
+		spark_system.set_up(5, 0, owner)
+		spark_system.attach(owner)
 		spark_system.start()
 		spawn(10)
 			del(spark_system)
