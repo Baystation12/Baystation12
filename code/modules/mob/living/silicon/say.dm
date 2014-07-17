@@ -60,7 +60,7 @@
 		return
 
 	var/verb = say_quote(message)
-	
+
 	//parse radio key and consume it
 	var/message_mode = parse_message_mode(message, "general")
 	if (message_mode)
@@ -68,31 +68,31 @@
 			message = trim(copytext(message,2))
 		else
 			message = trim(copytext(message,3))
-	
+
 	if(message_mode && bot_type == IS_ROBOT && message_mode != "binary" && !R.is_component_functioning("radio"))
 		src << "\red Your radio isn't functional at this time."
 		return
-	
-	
+
+
 	//parse language key and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
-	
-	
+
+
 	switch(message_mode)
 		if("department")
 			switch(bot_type)
 				if(IS_AI)
-					AI.holopad_talk(message)
+					return AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
 					R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
 					P.radio.talk_into(src,message,message_mode,verb,speaking)
-			return
+			return 1
 
 		if("binary")
 			switch(bot_type)
@@ -105,12 +105,13 @@
 					return
 
 			robot_talk(message)
-			return
+			return 1
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
 					if (AI.aiRadio.disabledAi)
 						src << "\red System Error - Transceiver Disabled"
+						return
 					else
 						log_say("[key_name(src)] : [message]")
 						AI.aiRadio.talk_into(src,message,null,verb,speaking)
@@ -120,7 +121,7 @@
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
 					P.radio.talk_into(src,message,null,verb,speaking)
-			return
+			return 1
 
 		else
 			if(message_mode && message_mode in radiochannels)
@@ -128,6 +129,7 @@
 					if(IS_AI)
 						if (AI.aiRadio.disabledAi)
 							src << "\red System Error - Transceiver Disabled"
+							return
 						else
 							log_say("[key_name(src)] : [message]")
 							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
@@ -137,7 +139,7 @@
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
 						P.radio.talk_into(src,message,message_mode,verb,speaking)
-				return
+				return 1
 
 	return ..(message,speaking,verb)
 
@@ -172,7 +174,8 @@
 		This is another way of saying that we won't bother dealing with them.*/
 	else
 		src << "No holopad connected."
-	return
+		return
+	return 1
 
 /mob/living/proc/robot_talk(var/message)
 

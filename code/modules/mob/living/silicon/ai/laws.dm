@@ -64,8 +64,12 @@
 		if("Security") prefix = ":s "
 		if("Supply") prefix = ":u "
 		if("Binary") prefix = ":b "
+		if("Holopad") prefix = ":h "
+		else prefix = ""
 
-	src.say("[prefix]Current Active Laws:")
+	if(src.say("[prefix]Current Active Laws:") != 1)
+		return
+
 	//src.laws_sanity_check()
 	//src.laws.show_laws(world)
 	var/number = 1

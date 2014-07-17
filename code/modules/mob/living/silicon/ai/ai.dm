@@ -392,11 +392,10 @@ var/list/ai_list = list()
 		checklaws()
 
 	if (href_list["lawr"]) // Selects on which channel to state laws
-		var/setchannel = input(usr, "Specify channel.", "Channel selection") in list("State","Common","Science","Command","Medical","Engineering","Security","Supply","Binary","Cancel")
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in list("State","Common","Science","Command","Medical","Engineering","Security","Supply","Binary","Holopad", "Cancel")
 		if(setchannel == "Cancel")
 			return
 		lawchannel = setchannel
-
 		checklaws()
 
 	//Uncomment this line of code if you are enabling the AI Vocal (VOX) announcements.
