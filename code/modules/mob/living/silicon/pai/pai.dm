@@ -260,7 +260,47 @@
 	src.unset_machine()
 	src:cameraFollow = null
 
-//This is used to convert the stationary pai item into a mobile pai mob.
+//Addition by Mord_Sith to define AI's network change ability
+/*
+/mob/living/silicon/pai/proc/pai_network_change()
+	set category = "pAI Commands"
+	set name = "Change Camera Network"
+	src.reset_view(null)
+	src.unset_machine()
+	src:cameraFollow = null
+	var/cameralist[0]
+
+	if(usr.stat == 2)
+		usr << "You can't change your camera network because you are dead!"
+		return
+
+	for (var/obj/machinery/camera/C in Cameras)
+		if(!C.status)
+			continue
+		else
+			if(C.network != "CREED" && C.network != "thunder" && C.network != "RD" && C.network != "phoron" && C.network != "Prison") COMPILE ERROR! This will have to be updated as camera.network is no longer a string, but a list instead
+				cameralist[C.network] = C.network
+
+	src.network = input(usr, "Which network would you like to view?") as null|anything in cameralist
+	src << "\blue Switched to [src.network] camera network."
+//End of code by Mord_Sith
+*/
+
+
+/*
+// Debug command - Maybe should be added to admin verbs later
+/mob/verb/makePAI(var/turf/t in view())
+	var/obj/item/device/paicard/card = new(t)
+	var/mob/living/silicon/pai/pai = new(card)
+	pai.key = src.key
+	card.setPersonality(pai)
+
+*/
+
+// Procs/code after this point is used to convert the stationary pai item into a
+// mobile pai mob. This also includes handling some of the general shit that can occur
+// to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
+
 /mob/living/silicon/pai/proc/fold_out()
 	set category = "pAI Commands"
 	set name = "Unfold Chassis"
@@ -271,6 +311,10 @@
 	if(src.loc != card)
 		return
 
+	if(world.time <= last_special)
+		return
+
+	last_special = world.time + 100
 	verbs -= /mob/living/silicon/pai/proc/fold_out
 	verbs += /mob/living/silicon/pai/proc/fold_up
 
@@ -299,6 +343,9 @@
 		return
 
 	if(src.loc == card)
+		return
+
+	if(world.time <= last_special)
 		return
 
 	close_up()
@@ -358,8 +405,14 @@
 	if(stat != 2) close_up()
 	return
 
+/mob/living/silicon/pai/attack_hand(mob/user as mob)
+	visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
+	close_up()
+
 //I'm not sure how much of this is necessary, but I would rather avoid issues.
 /mob/living/silicon/pai/proc/close_up()
+
+	last_special = world.time + 100
 
 	verbs -= /mob/living/silicon/pai/proc/fold_up
 	verbs += /mob/living/silicon/pai/proc/fold_out
@@ -376,40 +429,3 @@
 	src.forceMove(card)
 	card.forceMove(card.loc)
 	canmove = 0
-
-//Addition by Mord_Sith to define AI's network change ability
-/*
-/mob/living/silicon/pai/proc/pai_network_change()
-	set category = "pAI Commands"
-	set name = "Change Camera Network"
-	src.reset_view(null)
-	src.unset_machine()
-	src:cameraFollow = null
-	var/cameralist[0]
-
-	if(usr.stat == 2)
-		usr << "You can't change your camera network because you are dead!"
-		return
-
-	for (var/obj/machinery/camera/C in Cameras)
-		if(!C.status)
-			continue
-		else
-			if(C.network != "CREED" && C.network != "thunder" && C.network != "RD" && C.network != "phoron" && C.network != "Prison") COMPILE ERROR! This will have to be updated as camera.network is no longer a string, but a list instead
-				cameralist[C.network] = C.network
-
-	src.network = input(usr, "Which network would you like to view?") as null|anything in cameralist
-	src << "\blue Switched to [src.network] camera network."
-//End of code by Mord_Sith
-*/
-
-
-/*
-// Debug command - Maybe should be added to admin verbs later
-/mob/verb/makePAI(var/turf/t in view())
-	var/obj/item/device/paicard/card = new(t)
-	var/mob/living/silicon/pai/pai = new(card)
-	pai.key = src.key
-	card.setPersonality(pai)
-
-*/
