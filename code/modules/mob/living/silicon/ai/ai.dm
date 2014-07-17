@@ -27,6 +27,7 @@ var/list/ai_list = list()
 	var/viewalerts = 0
 	var/lawcheck[1]
 	var/ioncheck[1]
+	var/lawchannel = "Common" // Default channel on which to state laws
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
@@ -388,6 +389,13 @@ var/list/ai_list = list()
 			if ("Yes") lawcheck[L+1] = "No"
 			if ("No") lawcheck[L+1] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
+		checklaws()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in list("State","Common","Science","Command","Medical","Engineering","Security","Supply","Binary","Holopad", "Cancel")
+		if(setchannel == "Cancel")
+			return
+		lawchannel = setchannel
 		checklaws()
 
 	//Uncomment this line of code if you are enabling the AI Vocal (VOX) announcements.
