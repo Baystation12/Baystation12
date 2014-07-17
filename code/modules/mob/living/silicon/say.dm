@@ -109,7 +109,11 @@
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
-					src << "Yeah, not yet, sorry"
+					if (AI.aiRadio.disabledAi)
+						src << "\red System Error - Transceiver Disabled"
+					else
+						log_say("[key_name(src)] : [message]")
+						AI.aiRadio.talk_into(src,message,null,verb,speaking)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
 					R.radio.talk_into(src,message,null,verb,speaking)
@@ -122,8 +126,11 @@
 			if(message_mode && message_mode in radiochannels)
 				switch(bot_type)
 					if(IS_AI)
-						src << "You don't have this function yet, I'm working on it"
-						return
+						if (AI.aiRadio.disabledAi)
+							src << "\red System Error - Transceiver Disabled"
+						else
+							log_say("[key_name(src)] : [message]")
+							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
 						R.radio.talk_into(src,message,message_mode,verb,speaking)
