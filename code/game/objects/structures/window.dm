@@ -255,7 +255,7 @@
 		else
 			new shardtype(loc)
 			if(reinf) new /obj/item/stack/rods(loc)
-		del(src)
+		Destroy(src)
 		return
 
 
