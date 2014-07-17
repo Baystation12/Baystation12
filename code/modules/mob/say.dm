@@ -72,11 +72,11 @@
 
 	if (src.stat == 2)		//Dead
 		return 1
-	
+
 	//Universal speak makes everything understandable, for obvious reasons.
-	else if(src.universal_speak || src.universal_understand)
+	else if((src.universal_speak || src.universal_understand) && !(speaking.flags & UNTRANSLATABLE))
 		return 1
-	
+
 	//Languages are handled after.
 	if (!speaking)
 		if(!other)
@@ -88,12 +88,12 @@
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
 		return 0
-	
+
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
 			return 1
-	
+
 	return 0
 
 /mob/proc/say_quote(var/text,var/datum/language/speaking)
@@ -156,7 +156,7 @@
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
 		return department_radio_keys[channel_prefix]
-	
+
 	return null
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
@@ -167,6 +167,6 @@
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L
-	
+
 	return null
 

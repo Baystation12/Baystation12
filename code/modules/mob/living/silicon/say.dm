@@ -15,7 +15,7 @@
 /mob/living/silicon/say_understands(var/other,var/datum/language/speaking = null)
 	//These only pertain to common. Languages are handled by mob/say_understands()
 	if (!speaking)
-		if (istype(other, /mob/living/carbon/human))
+		if (istype(other, /mob/living/carbon))
 			return 1
 		if (istype(other, /mob/living/silicon))
 			return 1
@@ -60,7 +60,7 @@
 		return
 
 	var/verb = say_quote(message)
-	
+
 	//parse radio key and consume it
 	var/message_mode = parse_message_mode(message, "general")
 	if (message_mode)
@@ -68,19 +68,19 @@
 			message = trim(copytext(message,2))
 		else
 			message = trim(copytext(message,3))
-	
+
 	if(message_mode && bot_type == IS_ROBOT && message_mode != "binary" && !R.is_component_functioning("radio"))
 		src << "\red Your radio isn't functional at this time."
 		return
-	
-	
+
+
 	//parse language key and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
-	
-	
+
+
 	switch(message_mode)
 		if("department")
 			switch(bot_type)
