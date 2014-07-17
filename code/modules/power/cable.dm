@@ -308,7 +308,7 @@
 			return
 
 		else
-			user << "<span class='notice'>You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other.</span>"
+			user << "<span class='notice'>You transfer [MAXCOIL - C.amount ] length\s of cable from one coil to the other.</span>"
 			src.amount -= (MAXCOIL-C.amount)
 			src.updateicon()
 			src.update_wclass()
