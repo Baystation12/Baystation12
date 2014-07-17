@@ -2,11 +2,11 @@
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")
-		return "queries"
+		return speak_query
 	else if (ending == "!")
-		return "declares"
+		return speak_exclamation
 
-	return "states"
+	return speak_statement
 
 #define IS_AI 1
 #define IS_ROBOT 2
