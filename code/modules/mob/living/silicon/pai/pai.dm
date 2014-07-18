@@ -1,18 +1,3 @@
-var/global/list/possible_chassis = list(
-	"Drone" = "repairbot",
-	"Cat" = "cat",
-	"Mouse" = "mouse",
-	"Monkey" = "monkey"
-	)
-
-var/global/list/possible_say_verbs = list(
-	"Robotic" = list("states","declares","queries"),
-	"Natural" = list("says","yells","asks"),
-	"Beep" = list("beeps","beeps loudly","boops"),
-	"Chirp" = list("chirps","chirrups","cheeps"),
-	"Feline" = list("purrs","yowls","meows")
-	)
-
 /mob/living/silicon/pai
 	name = "pAI"
 	icon = 'icons/mob/pai.dmi'
@@ -33,7 +18,21 @@ var/global/list/possible_say_verbs = list(
 	var/obj/item/device/radio/radio		// Our primary radio
 
 	var/chassis = "repairbot"   // A record of your chosen chassis.
+	var/global/list/possible_chassis = list(
+		"Drone" = "repairbot",
+		"Cat" = "cat",
+		"Mouse" = "mouse",
+		"Monkey" = "monkey"
+		)
 
+	var/global/list/possible_say_verbs = list(
+		"Robotic" = list("states","declares","queries"),
+		"Natural" = list("says","yells","asks"),
+		"Beep" = list("beeps","beeps loudly","boops"),
+		"Chirp" = list("chirps","chirrups","cheeps"),
+		"Feline" = list("purrs","yowls","meows")
+		)
+	
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
