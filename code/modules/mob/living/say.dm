@@ -92,7 +92,7 @@ var/list/department_radio_keys = list(
 
 		if (speaking.flags & SIGNLANG)
 			say_signlang(message, pick(speaking.signlang_verb), speaking)
-			return
+			return 1
 
 	//speaking into radios
 	if(used_radios.len)
@@ -115,13 +115,13 @@ var/list/department_radio_keys = list(
 		if(pressure < SOUND_MINIMUM_PRESSURE)
 			italics = 1
 			message_range = 1
-			
+
 			if (speech_sound)
 				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
 
 	var/list/listening = list()
 	var/list/listening_obj = list()
-	
+
 	if(T)
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
@@ -143,7 +143,7 @@ var/list/department_radio_keys = list(
 				var/obj/O = I
 				hearturfs += O.locs[1]
 				listening_obj |= O
-			
+
 
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
@@ -164,8 +164,9 @@ var/list/department_radio_keys = list(
 		spawn(0)
 			if(O) //It's possible that it could be deleted in the meantime.
 				O.hear_talk(src, message, verb, speaking)
-	
+
 	log_say("[name]/[key] : [message]")
+	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))

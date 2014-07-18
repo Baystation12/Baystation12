@@ -736,10 +736,10 @@
 	// this will be revealed if a T-scanner is used
 	// if visible, use regular icon_state
 	proc/updateicon()
-		if(invisibility)
+/*		if(invisibility)	//we hide things with alpha now, no need for transparent icons
 			icon_state = "[base_icon_state]f"
 		else
-			icon_state = base_icon_state
+			icon_state = base_icon_state*/
 		return
 
 

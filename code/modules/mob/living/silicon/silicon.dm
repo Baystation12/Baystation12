@@ -8,6 +8,11 @@
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
+	//Used in say.dm.
+	var/speak_statement = "states"
+	var/speak_exclamation = "declares"
+	var/speak_query = "queries"
+
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -141,7 +146,7 @@
 
 /mob/living/silicon/remove_language(var/rem_language)
 	..(rem_language)
-	
+
 	for (var/datum/language/L in speech_synthesizer_langs)
 		if (L.name == rem_language)
 			speech_synthesizer_langs -= L
