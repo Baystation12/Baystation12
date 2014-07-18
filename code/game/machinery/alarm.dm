@@ -173,6 +173,7 @@
 	if(!istype(location))	return//returns if loc is not simulated
 
 	if ((alarm_area.fire || alarm_area.atmosalm >= 2) && world.time > last_sound_time + alarm_sound_cooldown)
+		playsound(src.loc, 'sound/ambience/alarm4.ogg', 40, 0, 0)
 		last_sound_time = world.time
 
 	var/datum/gas_mixture/environment = location.return_air()
