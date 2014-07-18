@@ -104,7 +104,6 @@ var/list/ai_list = list()
 	add_language("Siik'maas", 0)
 	add_language("Siik'tajr", 0)
 	add_language("Skrellian", 0)
-	add_language("Rootspeak", 0)
 	add_language("Tradeband", 1)
 	add_language("Gutter", 0)
 
