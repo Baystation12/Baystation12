@@ -1,3 +1,5 @@
+#define DEFAULT_PRESSURE_DELTA 10000
+
 #define EXTERNAL_PRESSURE_BOUND ONE_ATMOSPHERE
 #define INTERNAL_PRESSURE_BOUND 0
 #define PRESSURE_CHECKS 1
@@ -48,6 +50,9 @@
 
 	var/radio_filter_out
 	var/radio_filter_in
+	
+	//this is used to ensure process() is run before broadcasting status
+	var/broadcast_status_update = 0
 
 /obj/machinery/atmospherics/unary/vent_pump/on
 	on = 1
@@ -87,9 +92,6 @@
 		return
 	if (!node)
 		on = 0
-	//broadcast_status() // from now air alarm/control computer should request update purposely --rastaf0
-	if(!on)
-		return 0
 
 	overlays.Cut()
 	
@@ -144,141 +146,91 @@
 
 	if(welded)
 		return 0
+	
+	
+	var/datum/gas_mixture/environment = loc.return_air()
+	var/environment_pressure = environment.return_pressure()
+	if(air_contents.temperature == 0 && environment.temperature == 0)
+		return 0
 
-	if(pump_direction) //internal -> external
-		pump_to_external()
-	else //external -> internal
-		pump_to_internal()
+	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 
+	if(pressure_delta > 0.5)
+		if(pump_direction) //internal -> external
+			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+				pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
+			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+				pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
+		
+			//Unfortunately there's no good way to get the volume of the room, so assume 10 tiles
+			//We will overshoot in small rooms when dealing with huge pressures but it won't be so bad
+			var/output_volume = environment.volume * 10
+			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
+			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+			
+			transfer_gas(air_contents, environment, transfer_moles)
+		else //external -> internal
+			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+				pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
+			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+				pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
+		
+			var/output_volume = air_contents.volume
+			if (network && network.air_transient)
+				output_volume = network.air_transient.volume	//use the network volume if we can get it
+			
+			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
+			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+			
+			transfer_gas(environment, air_contents, transfer_moles)
+		
+		if(network)
+			network.update = 1
+	else
+		update_use_power(0)
+
+	process_broadcast_status()
+	
 	return 1
 
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/pump_to_external()
-	var/datum/gas_mixture/environment = loc.return_air()
-	var/environment_pressure = environment.return_pressure()
-	
-	var/pressure_delta = 10000
-
-	if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
-		pressure_delta = min(pressure_delta, (external_pressure_bound - environment_pressure))
-	if(pressure_checks & PRESSURE_CHECK_INTERNAL)
-		pressure_delta = min(pressure_delta, (air_contents.return_pressure() - internal_pressure_bound))
-
-	if(pressure_delta > 0.5 && (air_contents.temperature > 0 || environment.temperature > 0))
-		//Figure out how much gas to transfer
-		
-		//unfortunately there's no good way to get the volume of the room, so assume 10 tiles
-		//we might overshoot in small rooms when dealing with huge pressures but it won't be so bad
-		var/output_volume = environment.volume * 10
-		var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
-		
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		
-		//Calculate the amount of energy required
-		var/specific_entropy = environment.specific_entropy() - air_contents.specific_entropy()	//environment is gaining moles, air_contents is loosing
-		var/specific_power = 0	// W/mol
-		
-		//If specific_entropy is < 0 then transfer_moles is limited by how powerful the pump is
-		if (specific_entropy < 0)
-			specific_power = -specific_entropy*air_temperature		//how much power we need per mole
-			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
-		
-		//Get the gas to be transferred
-		var/input_pressure = air_contents.return_pressure()
-		var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-		
-		if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
-			update_use_power(0)
-			return
-		
-		if (input_pressure > 0)
-			last_flow_rate = removed.total_moles()*R_IDEAL_GAS_EQUATION*removed.temperature/input_pressure
-
-		//If specific_entropy is < 0 then extra power needs to be supplied to move gas
-		if (specific_entropy < 0)
-			//pump draws power and heats gas according to 2nd law of thermodynamics
-			var/power_draw = round(transfer_moles*specific_power)
-			removed.add_thermal_energy(power_draw)
-			handle_power_draw(power_draw)
-		else
-			handle_power_draw(idle_power_usage)
-			
-		loc.assume_air(removed)
-
-		if(network)
-			network.update = 1
-	else
+/obj/machinery/atmospherics/unary/vent_pump/proc/transfer_gas(datum/gas_mixture/source, datum/gas_mixture/sink, var/transfer_moles)
+	if(source.total_moles() == 0)
 		update_use_power(0)
+		return
 
-//This is largely identical to pump_to_external(), except since the source and sink are two different types we can't just reuse the same proc :(
-/obj/machinery/atmospherics/unary/vent_pump/proc/pump_to_internal()
-	var/datum/gas_mixture/environment = loc.return_air()
-	var/environment_pressure = environment.return_pressure()
+	//limit transfer_moles by available power
+	var/specific_power = calculate_specific_power(source, sink) //this has to be calculated before we modify any gas mixtures
+	if (specific_power > 0)
+		transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 	
-	var/pressure_delta = 10000
+	//Get the gas to be transferred
+	var/datum/gas_mixture/removed = source.remove(transfer_moles)
 	
-	if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
-		pressure_delta = min(pressure_delta, (environment_pressure - external_pressure_bound))
-	if(pressure_checks & PRESSURE_CHECK_INTERNAL)
-		pressure_delta = min(pressure_delta, (internal_pressure_bound - air_contents.return_pressure()))
-
-	if(pressure_delta > 0.5 && (air_contents.temperature > 0 || environment.temperature > 0))
-		//Figure out how much gas to transfer
-		var/output_volume = air_contents.volume
-		if (network && network.air_transient)
-			output_volume = network.air_transient.volume	//use the network volume if we can get it
-		
-		var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
-		
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		
-		//Calculate the amount of energy required
-		var/specific_entropy = air_contents.specific_entropy() - environment.specific_entropy()	//air_contents is gaining moles, environment is loosing
-		var/specific_power = 0	// W/mol
-		
-		//If specific_entropy is < 0 then transfer_moles is limited by how powerful the pump is
-		if (specific_entropy < 0)
-			specific_power = -specific_entropy*air_temperature		//how much power we need per mole
-			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
-		
-		//Get the gas to be transferred
-		var/input_pressure = environment.return_pressure()
-		var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-		
-		if (isnull(removed)) //in space
-			update_use_power(0)
-			return
-		
-		if (input_pressure > 0)
-			last_flow_rate = removed.total_moles()*R_IDEAL_GAS_EQUATION*removed.temperature/input_pressure
-
-		//If specific_entropy is < 0 then extra power needs to be supplied to move gas
-		if (specific_entropy < 0)
-			//pump draws power and heats gas according to 2nd law of thermodynamics
-			var/power_draw = round(transfer_moles*specific_power)
-			removed.add_thermal_energy(power_draw)
-			handle_power_draw(power_draw)
-		else
-			handle_power_draw(idle_power_usage)
-			
-		air_contents.merge(removed)
-
-		if(network)
-			network.update = 1
+	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
+		return
+	
+	last_flow_rate = (removed.total_moles()/(removed.total_moles() + source.total_moles()))*source.volume
+	
+	var/power_draw = specific_power*transfer_moles
+	if (power_draw > 0)
+		removed.add_thermal_energy(power_draw)
+		handle_pump_power_draw(power_draw)
+		last_power_draw = power_draw
 	else
-		update_use_power(0)
-
-//This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
-/obj/machinery/atmospherics/unary/vent_pump/proc/handle_power_draw(var/usage_amount)
-	if (usage_amount > active_power_usage - 5)
-		update_use_power(2)
-	else
-		update_use_power(1)
-		
-		if (usage_amount > idle_power_usage)
-			use_power(round(usage_amount))
+		handle_pump_power_draw(idle_power_usage)
+		last_power_draw = idle_power_usage
 	
-	last_power_draw = usage_amount
+	//merge the removed gas into the sink
+	sink.merge(removed)
+	
+	/* Uncomment this in case it actually matters whether we call assume_air() or just merge with the returned air directly
+	if (istype(sink, /datum/gas_mixture)
+		var/datum/gas_mixture/M = sink
+		M.merge(removed)
+	else if (istype(sink, /turf)
+		var/turf/T = sink
+		T.assume_air(removed)
+	*/
 
 //Radio remote control
 
@@ -289,6 +241,14 @@
 		radio_connection = radio_controller.add_object(src, frequency,radio_filter_in)
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/broadcast_status()
+	broadcast_status_update = 1
+	
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/process_broadcast_status()
+	if (!broadcast_status_update)
+		return 0
+	broadcast_status_update = 0
+
 	if(!radio_connection)
 		return 0
 
