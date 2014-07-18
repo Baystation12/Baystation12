@@ -86,7 +86,8 @@
 	possible_chassis = list(
 		"Drone" = "repairbot",
 		"Cat" = "cat",
-		"Mouse" = "mouse"
+		"Mouse" = "mouse",
+		"Monkey" = "monkey"
 		)
 
 	possible_say_verbs = list(
