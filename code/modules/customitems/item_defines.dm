@@ -752,7 +752,7 @@
 	name = "Robotics labcoat"
 	desc = "A labcoat with a few markings denoting it as the labcoat of roboticist."
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "aeneasrinil_open"
+	icon_state = "aeneasrinil"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/pink //spaceman96: Trenna Seber
 	name = "pink labcoat"

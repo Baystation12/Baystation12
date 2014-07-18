@@ -28,7 +28,7 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		if(!isarea(a))
 			user << "\red The [name] blinks red as you try to insert the item!"
 			return
-		if(a.power_equip == 0)
+		if(a.power_equip == 0 && !a.unlimited_power)
 			user << "\red The [name] blinks red as you try to insert the item!"
 			return
 
@@ -59,7 +59,7 @@ obj/machinery/recharger/attack_hand(mob/user as mob)
 
 	if(charging)
 		charging.update_icon()
-		charging.loc = loc
+		user.put_in_hands(charging)
 		charging = null
 		update_icon()
 

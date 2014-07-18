@@ -197,7 +197,7 @@
 				<b><font size='3px'>pAI Request Module</font></b><br><br>
 				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
 				<img src='loading.gif' /> Searching for personalities<br><br>
-				
+
 				<table>
 					<tr>
 						<td class="button">
@@ -303,4 +303,3 @@
 	for(var/mob/M in src)
 		M.emp_act(severity)
 	..()
-

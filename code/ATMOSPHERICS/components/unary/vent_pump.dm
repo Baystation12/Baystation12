@@ -85,6 +85,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
+	if (!node)
+		on = 0
+	//broadcast_status() // from now air alarm/control computer should request update purposely --rastaf0
+	if(!on)
+		return 0
 
 	overlays.Cut()
 	

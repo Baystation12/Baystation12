@@ -134,7 +134,7 @@
 
 /obj/machinery/atmospherics/pipe/simple
 	icon = 'icons/atmos/pipes.dmi'
-	icon_state = "intact"
+	icon_state = ""
 	name = "pipe"
 	desc = "A one meter section of regular pipe"
 
@@ -306,6 +306,7 @@
 	return null
 
 /obj/machinery/atmospherics/pipe/simple/visible
+	icon_state = "intact"
 	level = 2
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
@@ -329,6 +330,7 @@
 	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/simple/hidden
+	icon_state = "intact"
 	level = 1
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
@@ -367,7 +369,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold
 	icon = 'icons/atmos/manifold.dmi'
-	icon_state = "map"
+	icon_state = ""
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
@@ -527,6 +529,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold/visible
+	icon_state = "map"
 	level = 2
 
 /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers
@@ -550,6 +553,7 @@
 	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/manifold/hidden
+	icon_state = "map"
 	level = 1
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
@@ -575,7 +579,7 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/atmos/manifold.dmi'
-	icon_state = "map_4way"
+	icon_state = ""
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
@@ -722,6 +726,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible
+	icon_state = "map_4way"
 	level = 2
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers
@@ -745,6 +750,7 @@
 	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden
+	icon_state = "map_4way"
 	level = 1
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
