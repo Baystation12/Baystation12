@@ -330,14 +330,12 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
 
-	src.loc = get_turf(card)
-	card.loc = src
 	src.forceMove(get_turf(card))
 	card.forceMove(src)
 
 /mob/living/silicon/pai/proc/fold_up()
 	set category = "pAI Commands"
-	set name = "Condense Chassis"
+	set name = "Collapse Chassis"
 
 	if(stat || sleeping || paralysis || weakened)
 		return
@@ -424,8 +422,18 @@
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
 
+	//This seems redundant but not including the forced loc setting messes the behavior up.
 	src.loc = card
 	card.loc = get_turf(card)
 	src.forceMove(card)
 	card.forceMove(card.loc)
 	canmove = 0
+
+/mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
+
+	if(istype(AM,/obj/item))
+		var/obj/item/O = AM
+		if(O.w_class == 1)
+			..()
+		else
+			src << "<span class='warning'>You are too small to pull that.</span>"
