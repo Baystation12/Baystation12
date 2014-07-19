@@ -17,7 +17,7 @@
 		var/fillevel = gulp_size
 
 		if(!R.total_volume || !R)
-			user << "\red None of [src] left, oh no!"
+			user << "\red The [src.name] is empty!"
 			return 0
 
 		if(M == user)
