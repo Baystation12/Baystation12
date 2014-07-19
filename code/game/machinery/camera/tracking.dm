@@ -1,3 +1,14 @@
+/mob/living/silicon/ai/var/stored_location = null // The last stored camera location
+
+/mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
+	if(!T)
+		return 1
+	if(T.z == 2)
+		return 1
+	if(T.z > 6)
+		return 1
+	return 0
+
 /mob/living/silicon/ai/proc/get_camera_list()
 
 	if(src.stat == 2)
@@ -38,6 +49,30 @@
 
 	return
 
+/mob/living/silicon/ai/proc/ai_store_location()
+	set category = "AI Commands"
+	set name = "Store Camera Location"
+	set desc = "Stores your current camera location"
+
+	var/L = src.eyeobj.getLoc()
+	if (InvalidTurf(get_turf(L)))
+		src << "\red Unable to store this location"
+		return
+
+	stored_location = L
+	src << "Location stored"
+
+/mob/living/silicon/ai/proc/ai_goto_location()
+	set category = "AI Commands"
+	set name = "Goto Camera Location"
+	set desc = "Returns to your last stored camera location"
+
+	if (stored_location == null)
+		src << "\red No location stored"
+		return
+
+	src.eyeobj.setLoc(stored_location)
+
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable
 	var/list/names = list()
@@ -55,12 +90,7 @@
 	for(var/mob/living/M in mob_list)
 		// Easy checks first.
 		// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
-		var/turf/T = get_turf(M)
-		if(!T)
-			continue
-		if(T.z == 2)
-			continue
-		if(T.z > 6)
+		if(InvalidTurf(get_turf(M)))
 			continue
 		if(M == usr)
 			continue
