@@ -1,4 +1,5 @@
-/mob/living/silicon/ai/var/stored_location = null // The last stored camera location
+/mob/living/silicon/ai/var/max_locations = 5
+/mob/living/silicon/ai/var/stored_locations[0]
 
 /mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
 	if(!T)
@@ -49,29 +50,58 @@
 
 	return
 
-/mob/living/silicon/ai/proc/ai_store_location()
+/mob/living/silicon/ai/proc/ai_store_location(loc as text)
 	set category = "AI Commands"
 	set name = "Store Camera Location"
-	set desc = "Stores your current camera location"
+	set desc = "Stores your current camera location by the given name"
+
+	if(stored_locations.len >= max_locations)
+		src << "\red Cannot store additional locations. Remove one first"
+		return
+
+	loc = trim(loc)
+	if(!loc)
+		src << "\red Must supply a location name"
+		return
+
+	if(loc in stored_locations)
+		src << "\red There is already a stored location by this name"
+		return
 
 	var/L = src.eyeobj.getLoc()
 	if (InvalidTurf(get_turf(L)))
 		src << "\red Unable to store this location"
 		return
 
-	stored_location = L
-	src << "Location stored"
+	stored_locations[loc] = L
+	src << "Location '[loc]' stored"
 
-/mob/living/silicon/ai/proc/ai_goto_location()
+/mob/living/silicon/ai/proc/sorted_stored_locations()
+	return sortList(stored_locations)
+
+/mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
 	set category = "AI Commands"
 	set name = "Goto Camera Location"
-	set desc = "Returns to your last stored camera location"
+	set desc = "Returns to the selected camera location"
 
-	if (stored_location == null)
-		src << "\red No location stored"
+	if (!(loc in stored_locations))
+		src << "\red Location [loc] not found"
 		return
 
-	src.eyeobj.setLoc(stored_location)
+	var/L = stored_locations[loc]
+	src.eyeobj.setLoc(L)
+
+/mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
+	set category = "AI Commands"
+	set name = "Remove Camera Location"
+	set desc = "Removes the selected camera location"
+
+	if (!(loc in stored_locations))
+		src << "\red Location [loc] not found"
+		return
+
+	stored_locations.Remove(loc)
+	src << "Location [loc] removed"
 
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable
