@@ -10,6 +10,8 @@
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
+	
+	var/list/other_overlays = new()
 
 	var/max_temperature = 1800 //K, walls will take damage if they're next to a fire hotter than this
 
@@ -55,17 +57,19 @@
 
 	if(!damage)
 		overlays.Cut()
+		overlays += other_overlays
 		return
 
 	var/overlay = round(damage / damage_cap * damage_overlays.len) + 1
 	if(overlay > damage_overlays.len)
 		overlay = damage_overlays.len
-
+/*
 	if(damage_overlay && overlay == damage_overlay) //No need to update.
 		return
-
+*/
 	overlays.Cut()
 	overlays += damage_overlays[overlay]
+	overlays += other_overlays
 	damage_overlay = overlay
 
 	return
@@ -442,6 +446,19 @@
 	//Poster stuff
 	else if(istype(W,/obj/item/weapon/contraband/poster))
 		place_poster(W,user)
+		return
+
+	else if(istype(W, /obj/item/weapon/tape_roll))
+		if(damage)
+			user << "You patch up [src]."
+			var/image/I = image(icon = 'icons/obj/bureaucracy.dmi', icon_state = "tape")
+			I.transform = turn(I.transform, rand(0,360))
+			I.pixel_x = rand(-6,6)
+			I.pixel_y = rand(-6,6)
+			other_overlays += I
+			take_damage(-min(10, damage))
+	
+	else if(istype(W, /obj/item/weapon/ducttape))
 		return
 
 	else
