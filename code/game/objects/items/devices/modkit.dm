@@ -7,7 +7,7 @@
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user."
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/list/target_species = list("Human","Skrell")
+	var/target_species = null
 
 	var/list/permitted_types = list(
 		/obj/item/clothing/head/helmet/space/rig,
@@ -38,20 +38,21 @@
 
 	var/obj/item/clothing/I = O
 	if(istype(I))
-		I.species_restricted = target_species.Copy()
+		if (target_species)
+			I.refit_for_species(target_species)
+		else
+			I.refit_for_species("Human")
 
 	parts--
 	if(!parts)
 		user.drop_from_inventory(src)
 		del(src)
 
+/obj/item/device/modkit/examine()
+	..()
+	usr << "It looks as though it modifies hardsuits to fit the following [target_species? target_species : "Human"] users."
+
 /obj/item/device/modkit/tajaran
 	name = "tajaran hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajara."
-	target_species = list("Tajaran")
-
-/obj/item/device/modkit/examine()
-	..()
-	usr << "It looks as though it modifies hardsuits to fit the following users:"
-	for(var/species in target_species)
-		usr << "- [species]"
+	target_species = "Tajaran"
