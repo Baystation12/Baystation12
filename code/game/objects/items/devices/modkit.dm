@@ -7,7 +7,7 @@
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user."
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/target_species = null
+	var/target_species = "Human"
 
 	var/list/permitted_types = list(
 		/obj/item/clothing/head/helmet/space/rig,
@@ -15,6 +15,8 @@
 		)
 
 /obj/item/device/modkit/afterattack(obj/O, mob/user as mob)
+	if (!target_species)
+		return	//it shouldn't be null, okay?
 
 	if(!parts)
 		user << "<span class='warning'>This kit has no parts for this modification left.</span>"
@@ -45,11 +47,7 @@
 
 	user.visible_message("\red [user] opens \the [src] and modifies \the [O].","\red You open \the [src] and modify \the [O].")
 
-	if (target_species)
-		I.refit_for_species(target_species)
-	else
-		I.refit_for_species("Human")
-
+	I.refit_for_species(target_species)
 
 	if (istype(I, /obj/item/clothing/head/helmet))
 		parts &= ~MODKIT_HELMET
@@ -62,9 +60,9 @@
 
 /obj/item/device/modkit/examine()
 	..()
-	usr << "It looks as though it modifies hardsuits to fit the following [target_species? target_species : "Human"] users."
+	usr << "It looks as though it modifies hardsuits to fit [target_species] users."
 
 /obj/item/device/modkit/tajaran
 	name = "tajaran hardsuit modification kit"
-	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajara."
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajaran."
 	target_species = "Tajaran"

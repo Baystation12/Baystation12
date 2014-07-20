@@ -44,8 +44,10 @@
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	switch(target_species)
-		if("Human")
+		if("Skrell")
 			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
 		else 
 			species_restricted = list(target_species)
 	
