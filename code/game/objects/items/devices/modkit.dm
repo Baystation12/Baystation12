@@ -22,11 +22,20 @@
 		del(src)
 		return
 
-	/* TODO: list comparison
-	if(istype(O,to_type))
-		user << "<span class='notice'>[O] is already modified.</span>"
+	var/allowed = 0
+	for (var/permitted_type in permitted_types)
+		if(istype(O, permitted_type))
+			allowed = 1
+	
+	var/obj/item/clothing/I = O
+	if (!istype(I) || !allowed)
+		user << "<span class='notice'>[src] is unable to modify that.</span>"
 		return
-	*/
+	
+	var/excluding = ("exclude" in I.species_restricted)
+	var/in_list = (target_species in I.species_restricted)
+	if (excluding ^ in_list)
+		user << "<span class='notice'>[I] is already modified.</span>"
 
 	if(!isturf(O.loc))
 		user << "<span class='warning'>[O] must be safely placed on the ground for modification.</span>"
@@ -36,14 +45,17 @@
 
 	user.visible_message("\red [user] opens \the [src] and modifies \the [O].","\red You open \the [src] and modify \the [O].")
 
-	var/obj/item/clothing/I = O
-	if(istype(I))
-		if (target_species)
-			I.refit_for_species(target_species)
-		else
-			I.refit_for_species("Human")
+	if (target_species)
+		I.refit_for_species(target_species)
+	else
+		I.refit_for_species("Human")
 
-	parts--
+
+	if (istype(I, /obj/item/clothing/head/helmet))
+		parts &= ~MODKIT_HELMET
+	if (istype(I, /obj/item/clothing/suit))
+		parts &= ~MODKIT_SUIT
+	
 	if(!parts)
 		user.drop_from_inventory(src)
 		del(src)
