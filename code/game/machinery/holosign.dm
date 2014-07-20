@@ -30,13 +30,19 @@
 	name = "surgery holosign"
 	desc = "Small wall-mounted holographic projector. This one reads SURGERY."
 	on_icon = "surgery"
+
+/obj/machinery/holosign/emergency
+	name = "emergency exit holosign"
+	desc = "Small wall-mounted holographic projector. This one reads EXIT."
+	on_icon = "emergencyexit"
+
 ////////////////////SWITCH///////////////////////////////////////
 
 /obj/machinery/holosign_switch
 	name = "holosign switch"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "light1"
-	desc = "A remote control switch for holosign."
+	desc = "A remote control switch for a holosign."
 	var/id = null
 	var/active = 0
 	anchored = 1.0
