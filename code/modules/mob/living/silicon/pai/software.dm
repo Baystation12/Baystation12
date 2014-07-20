@@ -706,7 +706,7 @@
 
 		add_language("Sinta'unathi")
 		add_language("Siik'maas")
-		add_language("Siik'tajr")
+		add_language("Siik'tajr", 0)
 		add_language("Skrellian")
 
 		src << "\blue Translator Module toggled ON."
