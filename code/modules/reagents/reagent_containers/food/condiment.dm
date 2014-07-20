@@ -24,7 +24,7 @@
 		var/datum/reagents/R = src.reagents
 
 		if(!R || !R.total_volume)
-			user << "\red None of [src] left, oh no!"
+			user << "\red The [src.name] is empty!"
 			return 0
 
 		if(M == user)
