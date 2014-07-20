@@ -106,7 +106,7 @@
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
 
-	return ((universal_speak && !(speaking.flags & UNTRANSLATABLE)) || speaking in src.languages)
+	return (universal_speak || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()
