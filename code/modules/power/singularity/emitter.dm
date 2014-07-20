@@ -8,6 +8,7 @@
 	anchored = 0
 	density = 1
 	req_access = list(access_engine_equip)
+	var/id = null
 
 	use_power = 0
 	idle_power_usage = 10
@@ -51,9 +52,11 @@
 	else
 		icon_state = "emitter"
 
-
 /obj/machinery/power/emitter/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
+	activate(user)
+
+/obj/machinery/power/emitter/proc/activate(mob/user as mob)
 	if(state == 2)
 		if(!powernet)
 			user << "The emitter isn't connected to a wire."

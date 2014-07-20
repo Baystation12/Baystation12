@@ -52,8 +52,10 @@
 	icon_state = "soapnt"
 
 /obj/item/weapon/soap/deluxe
-	desc = "A deluxe Waffle Co. brand bar of soap. Smells of condoms."
 	icon_state = "soapdeluxe"
+    
+/obj/item/weapon/soap/deluxe/New()
+	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
 
 /obj/item/weapon/soap/syndie
 	desc = "An untrustworthy bar of soap. Smells of fear."
@@ -449,16 +451,6 @@
 	if (usr.stat == 2) return
 
 	usr.client.eye = target
-
-
-/obj/item/weapon/syntiflesh
-	name = "syntiflesh"
-	desc = "Meat that appears...strange..."
-	icon = 'icons/obj/food.dmi'
-	icon_state = "meat"
-	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 2.0
-	origin_tech = "biotech=2"
 
 /*
 /obj/item/weapon/cigarpacket

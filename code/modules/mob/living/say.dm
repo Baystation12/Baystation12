@@ -1,4 +1,3 @@
-#define SAY_MINIMUM_PRESSURE 10
 var/list/department_radio_keys = list(
 	  ":r" = "right ear",	"#r" = "right ear",		".r" = "right ear",
 	  ":l" = "left ear",	"#l" = "left ear",		".l" = "left ear",
@@ -84,44 +83,45 @@ var/list/department_radio_keys = list(
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list(), var/sound/speech_sound, var/sound_vol)
 
 	var/turf/T = get_turf(src)
-	
+
 	//handle nonverbal and sign languages here
 	if (speaking)
 		if (speaking.flags & NONVERBAL)
 			if (prob(30))
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
-		
+
 		if (speaking.flags & SIGNLANG)
 			say_signlang(message, pick(speaking.signlang_verb), speaking)
-			return
-	
+			return 1
+
 	//speaking into radios
 	if(used_radios.len)
 		italics = 1
 		message_range = 1
-		
-		for(var/mob/living/M in hearers(5, src))
-			if(M != src)
-				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "the radio."]</span>")
-			if (speech_sound)
-				src.playsound_local(get_turf(src), speech_sound, sound_vol * 0.5, 1)
-		
+
+		if (!istype(src, /mob/living/silicon/ai)) // Atlantis: Prevents nearby people from hearing the AI when it talks using it's integrated radio.
+			for(var/mob/living/M in hearers(5, src))
+				if(M != src)
+					M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "the radio."]</span>")
+				if (speech_sound)
+					src.playsound_local(get_turf(src), speech_sound, sound_vol * 0.5, 1)
+
 		speech_sound = null	//so we don't play it twice.
 
 	//make sure the air can transmit speech
 	var/datum/gas_mixture/environment = T.return_air()
 	if(environment)
 		var/pressure = environment.return_pressure()
-		if(pressure < SAY_MINIMUM_PRESSURE)
+		if(pressure < SOUND_MINIMUM_PRESSURE)
 			italics = 1
 			message_range = 1
-			
+
 			if (speech_sound)
 				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
 
 	var/list/listening = list()
 	var/list/listening_obj = list()
-	
+
 	if(T)
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
@@ -133,10 +133,17 @@ var/list/department_radio_keys = list(
 				hearturfs += M.locs[1]
 				for(var/obj/O in M.contents)
 					listening_obj |= O
+				if (isslime(I))
+					var/mob/living/carbon/slime/S = I
+					if (src in S.Friends)
+						S.speech_buffer = list()
+						S.speech_buffer.Add(src)
+						S.speech_buffer.Add(lowertext(html_decode(message)))
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]
 				listening_obj |= O
+
 
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
@@ -157,8 +164,9 @@ var/list/department_radio_keys = list(
 		spawn(0)
 			if(O) //It's possible that it could be deleted in the meantime.
 				O.hear_talk(src, message, verb, speaking)
-	
+
 	log_say("[name]/[key] : [message]")
+	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))

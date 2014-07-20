@@ -134,6 +134,7 @@
 				return 1
 
 		if(href_list["late_join"])
+
 			if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 				usr << "\red The round is either not ready, or has already finished..."
 				return
@@ -141,6 +142,11 @@
 			if(client.prefs.species != "Human")
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
+
+				var/datum/species/S = all_species[client.prefs.species]
+				if(!(S.flags & IS_WHITELISTED))
+					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
 					return 0
 
 			LateChoices()
@@ -157,6 +163,11 @@
 			if(client.prefs.species != "Human")
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
+
+				var/datum/species/S = all_species[client.prefs.species]
+				if(!(S.flags & IS_WHITELISTED))
+					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
 					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)

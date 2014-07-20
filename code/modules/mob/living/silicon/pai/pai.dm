@@ -1,10 +1,12 @@
 /mob/living/silicon/pai
 	name = "pAI"
-	icon = 'icons/mob/mob.dmi'//
-	icon_state = "shadow"
+	icon = 'icons/mob/pai.dmi'
+	icon_state = "repairbot"
 
 	robot_talk_understand = 0
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
+	small = 1
+	pass_flags = 1
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -15,11 +17,22 @@
 	var/obj/item/device/paicard/card	// The card we inhabit
 	var/obj/item/device/radio/radio		// Our primary radio
 
-	var/speakStatement = "states"
-	var/speakExclamation = "declares"
-	var/speakQuery = "queries"
+	var/chassis = "repairbot"   // A record of your chosen chassis.
+	var/global/list/possible_chassis = list(
+		"Drone" = "repairbot",
+		"Cat" = "cat",
+		"Mouse" = "mouse",
+		"Monkey" = "monkey"
+		)
 
-
+	var/global/list/possible_say_verbs = list(
+		"Robotic" = list("states","declares","queries"),
+		"Natural" = list("says","yells","asks"),
+		"Beep" = list("beeps","beeps loudly","boops"),
+		"Chirp" = list("chirps","chirrups","cheeps"),
+		"Feline" = list("purrs","yowls","meows")
+		)
+	
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
@@ -54,6 +67,7 @@
 
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
+
 	canmove = 0
 	src.loc = paicard
 	card = paicard
@@ -67,6 +81,10 @@
 	add_language("Sol Common", 1)
 	add_language("Tradeband", 1)
 	add_language("Gutter", 1)
+
+	verbs += /mob/living/silicon/pai/proc/fold_out
+	verbs += /mob/living/silicon/pai/proc/choose_chassis
+	verbs += /mob/living/silicon/pai/proc/choose_verbs
 
 	//PDA
 	pda = new(src)
@@ -113,7 +131,9 @@
 	return 0
 
 /mob/living/silicon/pai/restrained()
-	return 0
+	if(istype(src.loc,/obj/item/device/paicard))
+		return 0
+	..()
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -231,7 +251,6 @@
 	src.reset_view(C)
 	return 1
 
-
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
 	set name = "Cancel Camera View"
@@ -275,3 +294,144 @@
 	card.setPersonality(pai)
 
 */
+
+// Procs/code after this point is used to convert the stationary pai item into a
+// mobile pai mob. This also includes handling some of the general shit that can occur
+// to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
+
+/mob/living/silicon/pai/proc/fold_out()
+	set category = "pAI Commands"
+	set name = "Unfold Chassis"
+
+	if(stat || sleeping || paralysis || weakened)
+		return
+
+	if(src.loc != card)
+		return
+
+	if(world.time <= last_special)
+		return
+
+	last_special = world.time + 100
+	verbs -= /mob/living/silicon/pai/proc/fold_out
+	verbs += /mob/living/silicon/pai/proc/fold_up
+
+	var/turf/T = get_turf(src)
+	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+	canmove = 1
+
+	//I'm not sure how much of this is necessary, but I would rather avoid issues.
+	if(istype(card.loc,/mob))
+		var/mob/M = card.loc
+		M.drop_item(card)
+
+	src.client.perspective = EYE_PERSPECTIVE
+	src.client.eye = src
+
+	src.forceMove(get_turf(card))
+	card.forceMove(src)
+
+/mob/living/silicon/pai/proc/fold_up()
+	set category = "pAI Commands"
+	set name = "Collapse Chassis"
+
+	if(stat || sleeping || paralysis || weakened)
+		return
+
+	if(src.loc == card)
+		return
+
+	if(world.time <= last_special)
+		return
+
+	close_up()
+
+/mob/living/silicon/pai/proc/choose_chassis()
+	set category = "pAI Commands"
+	set name = "Choose Chassis"
+
+	var/choice
+	var/finalized = "No"
+	while(finalized == "No" && src.client)
+
+		choice = input(usr,"What would you like to use for your mobile chassis icon? This decision can only be made once.") as null|anything in possible_chassis
+		if(!choice) return
+
+		icon_state = possible_chassis[choice]
+		finalized = alert("Look at your sprite. Is this what you wish to use?",,"No","Yes")
+
+	chassis = possible_chassis[choice]
+	verbs -= /mob/living/silicon/pai/proc/choose_chassis
+
+/mob/living/silicon/pai/proc/choose_verbs()
+	set category = "pAI Commands"
+	set name = "Choose Speech Verbs"
+
+	var/choice = input(usr,"What theme would you like to use for your speech verbs? This decision can only be made once.") as null|anything in possible_say_verbs
+	if(!choice) return
+
+	var/list/sayverbs = possible_say_verbs[choice]
+	speak_statement = sayverbs[1]
+	speak_exclamation = sayverbs[(sayverbs.len>1 ? 2 : sayverbs.len)]
+	speak_query = sayverbs[(sayverbs.len>2 ? 3 : sayverbs.len)]
+
+	verbs -= /mob/living/silicon/pai/proc/choose_verbs
+
+/mob/living/silicon/pai/lay_down()
+	set name = "Rest"
+	set category = "IC"
+
+	if(istype(src.loc,/obj/item/device/paicard))
+		resting = 0
+	else
+		resting = !resting
+		icon_state = resting ? "[chassis]_rest" : "[chassis]"
+		src << "\blue You are now [resting ? "resting" : "getting up"]"
+
+	canmove = !resting
+
+//Overriding this will stop a number of headaches down the track.
+/mob/living/silicon/pai/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(W.force)
+		visible_message("<span class='danger'>[user.name] attacks [src] with [W]!</span>")
+		src.adjustBruteLoss(W.force)
+		src.updatehealth()
+	else
+		visible_message("<span class='warning'>[user.name] bonks [src] harmlessly with [W].</span>")
+	if(stat != 2) close_up()
+	return
+
+/mob/living/silicon/pai/attack_hand(mob/user as mob)
+	visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
+	close_up()
+
+//I'm not sure how much of this is necessary, but I would rather avoid issues.
+/mob/living/silicon/pai/proc/close_up()
+
+	last_special = world.time + 100
+
+	verbs -= /mob/living/silicon/pai/proc/fold_up
+	verbs += /mob/living/silicon/pai/proc/fold_out
+
+	var/turf/T = get_turf(src)
+	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
+
+	src.stop_pulling()
+	src.client.perspective = EYE_PERSPECTIVE
+	src.client.eye = card
+
+	//This seems redundant but not including the forced loc setting messes the behavior up.
+	src.loc = card
+	card.loc = get_turf(card)
+	src.forceMove(card)
+	card.forceMove(card.loc)
+	canmove = 0
+
+/mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
+
+	if(istype(AM,/obj/item))
+		var/obj/item/O = AM
+		if(O.w_class == 1)
+			..()
+		else
+			src << "<span class='warning'>You are too small to pull that.</span>"

@@ -32,6 +32,7 @@
 	var/damage_msg = "\red You feel an intense pain"
 	var/broken_description
 
+	var/vital //Lose a vital limb, die immediately.
 	var/status = 0
 	var/open = 0
 	var/stage = 0
@@ -667,6 +668,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
 			release_restraints()
 
+			if(vital)
+				owner.death()
+
 /****************************************************
 			   HELPERS
 ****************************************************/
@@ -830,7 +834,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	max_damage = 75
 	min_broken_damage = 40
 	body_part = UPPER_TORSO
-
+	vital = 1
 
 /datum/organ/external/groin
 	name = "groin"
@@ -839,6 +843,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	max_damage = 50
 	min_broken_damage = 30
 	body_part = LOWER_TORSO
+	vital = 1
 
 /datum/organ/external/l_arm
 	name = "l_arm"
@@ -932,6 +937,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	min_broken_damage = 40
 	body_part = HEAD
 	var/disfigured = 0
+	vital = 1
 
 /datum/organ/external/head/get_icon()
 	if (!owner)

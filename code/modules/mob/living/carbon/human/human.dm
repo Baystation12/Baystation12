@@ -317,6 +317,16 @@
 		if(armor >= 2)	return
 
 
+/mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
+	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
+	L.imp_in = M
+	L.implanted = 1
+	var/datum/organ/external/affected = M.organs_by_name["head"]
+	affected.implants += L
+	L.part = affected
+
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
@@ -336,7 +346,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(M, /mob/living/carbon/slime/adult))
+		if(M.is_adult)
 			damage = rand(10, 35)
 		else
 			damage = rand(5, 25)
@@ -1383,7 +1393,7 @@
 	status_flags |= LEAPING
 
 	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
-	src.throw_at(get_step(get_turf(T),get_turf(src)), 5, 1)
+	src.throw_at(get_step(get_turf(T),get_turf(src)), 5, 1, src)
 	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
 
 	sleep(5)
@@ -1457,3 +1467,39 @@
 		M.apply_damage(50,BRUTE)
 		if(M.stat == 2)
 			M.gib()
+
+/mob/living/carbon/human/proc/commune()
+	set category = "IC"
+	set name = "Commune with creature"
+	set desc = "Send a telepathic message to an unlucky recipient."
+
+	var/list/targets = list()
+	var/target = null
+	var/text = null
+
+	targets += getmobs() //Fill list, prompt user with list
+	target = input("Select a creature!", "Speak to creature", null, null) as null|anything in targets
+
+	if(!target) return
+
+	text = input("What would you like to say?", "Speak to creature", null, null)
+
+	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
+
+	if(!text) return
+
+	var/mob/M = targets[target]
+
+	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
+		src << "Not even a [src.species.name] can speak to the dead."
+		return
+
+	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
+
+	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.species.name == src.species.name)
+			return
+		H << "\red Your nose begins to bleed..."
+		H.drip(1)

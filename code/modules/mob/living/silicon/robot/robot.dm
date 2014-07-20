@@ -5,7 +5,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	
+
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -163,7 +163,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
+	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
 	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
@@ -189,6 +189,14 @@
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 
+		if("Clerical")
+			module = new /obj/item/weapon/robot_module/clerical(src)
+			module_sprites["Waitress"] = "Service"
+			module_sprites["Kent"] = "toiletbot"
+			module_sprites["Bro"] = "Brobot"
+			module_sprites["Rich"] = "maximillion"
+			module_sprites["Default"] = "Service2"
+
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
 			module.channels = list("Supply" = 1)
@@ -198,15 +206,26 @@
 			module_sprites["Advanced Droid"] = "droid-miner"
 			module_sprites["Treadhead"] = "Miner"
 
-		if("Medical")
-			module = new /obj/item/weapon/robot_module/medical(src)
+		if("Crisis")
+			module = new /obj/item/weapon/robot_module/crisis(src)
 			module.channels = list("Medical" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Medical")
 			module_sprites["Basic"] = "Medbot"
+			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
+
+		if("Surgeon")
+			module = new /obj/item/weapon/robot_module/surgeon(src)
+			module.channels = list("Medical" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Medical")
+
+			module_sprites["Basic"] = "Medbot"
 			module_sprites["Standard"] = "surgeon"
+			module_sprites["Advanced Droid"] = "droid-medical"
+			module_sprites["Needles"] = "medicalrobot"
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
@@ -218,6 +237,15 @@
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
+			module.channels = list("Engineering" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Engineering")
+			module_sprites["Basic"] = "Engineering"
+			module_sprites["Antique"] = "engineerrobot"
+			module_sprites["Landmate"] = "landmate"
+
+		if("Construction")
+			module = new /obj/item/weapon/robot_module/construction(src)
 			module.channels = list("Engineering" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Engineering")
@@ -238,7 +266,7 @@
 
 	//languages
 	module.add_languages(src)
-	
+
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
@@ -869,7 +897,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(src, /mob/living/carbon/slime/adult))
+		if(M.is_adult)
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)
