@@ -47,7 +47,6 @@
 	R.add_language("Siik'maas", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
-	R.add_language("Rootspeak", 0)
 	R.add_language("Tradeband", 0)
 	R.add_language("Gutter", 0)
 
