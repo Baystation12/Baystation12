@@ -145,6 +145,11 @@
 	desc = "Next to the extremely long list of names and job titles, there is a drawing of a little child. The child appears to be retarded. Beneath the image, someone has scratched the word \"PACKETS\""
 	icon_state = "kiddieplaque"
 
+/obj/structure/sign/rogueai
+	name = "AI warning sign"
+	desc = "A sign detailing the signs of a rampant artificial intelligence."
+	icon_state = "rogueai"
+
 /obj/structure/sign/atmosplaque
 	name = "\improper FEA Atmospherics Division plaque"
 	desc = "This plaque commemorates the fall of the Atmos FEA division. For all the charred, dizzy, and brittle men who have died in its hands."
