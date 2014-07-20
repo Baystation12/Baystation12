@@ -1,3 +1,15 @@
+/mob/living/silicon/ai/var/max_locations = 5
+/mob/living/silicon/ai/var/stored_locations[0]
+
+/mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
+	if(!T)
+		return 1
+	if(T.z == 2)
+		return 1
+	if(T.z > 6)
+		return 1
+	return 0
+
 /mob/living/silicon/ai/proc/get_camera_list()
 
 	if(src.stat == 2)
@@ -38,6 +50,59 @@
 
 	return
 
+/mob/living/silicon/ai/proc/ai_store_location(loc as text)
+	set category = "AI Commands"
+	set name = "Store Camera Location"
+	set desc = "Stores your current camera location by the given name"
+
+	if(stored_locations.len >= max_locations)
+		src << "\red Cannot store additional locations. Remove one first"
+		return
+
+	loc = trim(loc)
+	if(!loc)
+		src << "\red Must supply a location name"
+		return
+
+	if(loc in stored_locations)
+		src << "\red There is already a stored location by this name"
+		return
+
+	var/L = src.eyeobj.getLoc()
+	if (InvalidTurf(get_turf(L)))
+		src << "\red Unable to store this location"
+		return
+
+	stored_locations[loc] = L
+	src << "Location '[loc]' stored"
+
+/mob/living/silicon/ai/proc/sorted_stored_locations()
+	return sortList(stored_locations)
+
+/mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
+	set category = "AI Commands"
+	set name = "Goto Camera Location"
+	set desc = "Returns to the selected camera location"
+
+	if (!(loc in stored_locations))
+		src << "\red Location [loc] not found"
+		return
+
+	var/L = stored_locations[loc]
+	src.eyeobj.setLoc(L)
+
+/mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
+	set category = "AI Commands"
+	set name = "Remove Camera Location"
+	set desc = "Removes the selected camera location"
+
+	if (!(loc in stored_locations))
+		src << "\red Location [loc] not found"
+		return
+
+	stored_locations.Remove(loc)
+	src << "Location [loc] removed"
+
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable
 	var/list/names = list()
@@ -55,12 +120,7 @@
 	for(var/mob/living/M in mob_list)
 		// Easy checks first.
 		// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
-		var/turf/T = get_turf(M)
-		if(!T)
-			continue
-		if(T.z == 2)
-			continue
-		if(T.z > 6)
+		if(InvalidTurf(get_turf(M)))
 			continue
 		if(M == usr)
 			continue
