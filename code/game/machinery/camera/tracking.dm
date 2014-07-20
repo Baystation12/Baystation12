@@ -55,13 +55,13 @@
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
-	if(stored_locations.len >= max_locations)
-		src << "\red Cannot store additional locations. Remove one first"
-		return
-
-	loc = trim(loc)
+	loc = copytext(sanitize(loc), 1, MAX_MESSAGE_LEN)
 	if(!loc)
 		src << "\red Must supply a location name"
+		return
+
+	if(stored_locations.len >= max_locations)
+		src << "\red Cannot store additional locations. Remove one first"
 		return
 
 	if(loc in stored_locations)
