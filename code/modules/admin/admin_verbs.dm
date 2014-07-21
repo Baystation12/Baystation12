@@ -127,7 +127,8 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
-	/client/proc/check_customitem_activity
+	/client/proc/check_customitem_activity,
+	/client/proc/nanomapgen_DumpImage
 	)
 var/list/admin_verbs_debug = list(
         /client/proc/getruntimelog,                     /*allows us to access runtime logs to somebody*/
