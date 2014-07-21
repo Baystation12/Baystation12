@@ -87,8 +87,6 @@ obj/machinery/recharger/process()
 					use_power(200/CELLRATE)
 				else
 					icon_state = icon_state_charged
-		else
-			icon_state = icon_state_idle
 			return
 		if(istype(charging, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = charging
@@ -99,8 +97,6 @@ obj/machinery/recharger/process()
 			else
 				icon_state = icon_state_charged
 			return
-
-
 
 obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)
@@ -127,5 +123,6 @@ obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to 
 // Atlantis: No need for that copy-pasta code, just use var to store icon_states instead.
 obj/machinery/recharger/wallcharger
 	name = "wall recharger"
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "wrecharger0"
+	icon_state_charged = "wrecharger2"
+	icon_state_charging = "wrecharger1"
+	icon_state_idle = "wrecharger0"
