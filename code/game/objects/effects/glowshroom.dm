@@ -8,6 +8,8 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "glowshroomf"
 	layer = 2.1
+	l_color = "#003300"
+
 	var/endurance = 30
 	var/potency = 30
 	var/delay = 1200
@@ -44,7 +46,7 @@
 
 	processing_objects += src
 
-	SetLuminosity(round(potency/10))
+	SetLuminosity(round(potency/15))
 	lastTick = world.timeofday
 
 /obj/effect/glowshroom/Del()

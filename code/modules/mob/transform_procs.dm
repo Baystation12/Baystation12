@@ -127,6 +127,9 @@
 	O.verbs += /mob/living/silicon/ai/proc/ai_camera_list
 	O.verbs += /mob/living/silicon/ai/proc/ai_statuschange
 	O.verbs += /mob/living/silicon/ai/proc/ai_roster
+	O.verbs += /mob/living/silicon/ai/proc/ai_store_location
+	O.verbs += /mob/living/silicon/ai/proc/ai_goto_location
+	O.verbs += /mob/living/silicon/ai/proc/ai_remove_location
 
 	O.job = "AI"
 
@@ -245,11 +248,10 @@
 			babies += M
 		new_slime = pick(babies)
 	else
+		new_slime = new /mob/living/carbon/slime(loc)
 		if(adult)
-			new_slime = new /mob/living/carbon/slime/adult(loc)
+			new_slime.is_adult = 1
 		else
-			new_slime = new /mob/living/carbon/slime(loc)
-	new_slime.a_intent = "hurt"
 	new_slime.key = key
 
 	new_slime << "<B>You are now a slime. Skreee!</B>"

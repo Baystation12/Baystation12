@@ -528,14 +528,22 @@
 		dat += {"<h2>Medical Analysis Suite</h2><hr>
 				 <h4>Host Bioscan</h4>
 				"}
-		var/mob/living/M = src.loc
-		if(!istype(M, /mob/living))
-			while (!istype(M, /mob/living))
-				M = M.loc
-				if(istype(M, /turf))
-					src.temp = "Error: No biological host found. <br>"
-					src.subscreen = 0
-					return dat
+
+		var/mob/living/M
+		//If we are not deployed, check the holder of the card.
+		if(src.loc == card)
+			M = card.loc
+
+		//If we are deployed or the card is not held, check the first living mob in our turf.
+		if(!M || !istype(M))
+			var/turf/T = get_turf(src)
+			M = locate(/mob/living/) in T.contents
+
+		if(!M || !istype(M))
+			src.temp = "Error: No biological host found. <br>"
+			src.subscreen = 0
+			return dat
+
 		dat += {"<b>Bioscan Results for [M]</b>: <br>
 		Overall Status: [M.stat > 1 ? "dead" : "[M.health]% healthy"] <br><br>
 
