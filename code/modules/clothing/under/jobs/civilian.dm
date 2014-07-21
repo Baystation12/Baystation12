@@ -113,24 +113,28 @@
 
 
 /obj/item/clothing/under/lawyer/black
+	name = "black Lawyer suit"
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
 	item_color = "lawyer_black"
 
 
 /obj/item/clothing/under/lawyer/female
+	name = "black Lawyer suit"
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	item_color = "black_suit_fem"
 
 
 /obj/item/clothing/under/lawyer/red
+	name = "red Lawyer suit"
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	item_color = "lawyer_red"
 
 
 /obj/item/clothing/under/lawyer/blue
+	name = "blue Lawyer suit"
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	item_color = "lawyer_blue"

@@ -1,10 +1,10 @@
 //Regular rig suits
 /obj/item/clothing/head/helmet/space/rig
-	name = "engineering hardsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding."
+	name = "hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	icon_state = "rig0-engineering"
 	item_state = "eng_helm"
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	allowed = list(/obj/item/device/flashlight)
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
@@ -49,13 +49,13 @@
 			SetLuminosity(brightness_on)
 
 /obj/item/clothing/suit/space/rig
-	name = "engineering hardsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding."
+	name = "hardsuit"
+	desc = "A special space suit for environments that might pose hazards beyond just the vacuum of space. Provides more protection than a standard space suit."
 	icon_state = "rig-engineering"
 	item_state = "eng_hardsuit"
 	slowdown = 1
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
@@ -292,21 +292,46 @@
 
 	..()
 
+//Engineering rig
+/obj/item/clothing/head/helmet/space/rig/engineering
+	name = "engineering hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding."
+	icon_state = "rig0-engineering"
+	item_state = "eng_helm"
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+	sprite_sheets_obj = list(
+		"Tajaran" = 'icons/obj/clothing/species/tajaran/hats.dmi',
+		)
+
+/obj/item/clothing/suit/space/rig/engineering
+	name = "engineering hardsuit"
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding."
+	icon_state = "rig-engineering"
+	item_state = "eng_hardsuit"
+	slowdown = 1
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	sprite_sheets_obj = list(
+		"Tajaran" = 'icons/obj/clothing/species/tajaran/suits.dmi',
+		)
+
 //Chief Engineer's rig
-/obj/item/clothing/head/helmet/space/rig/elite
+/obj/item/clothing/head/helmet/space/rig/engineering/chief
 	name = "advanced hardsuit helmet"
 	desc = "An advanced helmet designed for work in a hazardous, low pressure environment. Shines with a high polish."
 	icon_state = "rig0-white"
 	item_state = "ce_helm"
 	item_color = "white"
 	sprite_sheets = null
+	sprite_sheets_obj = null
 
-/obj/item/clothing/suit/space/rig/elite
+/obj/item/clothing/suit/space/rig/engineering/chief
 	icon_state = "rig-white"
 	name = "advanced hardsuit"
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
 	sprite_sheets = null
+	sprite_sheets_obj = null
 
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
@@ -336,6 +361,13 @@
 	siemens_coefficient = 0.6
 	var/obj/machinery/camera/camera
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Vox")
+	sprite_sheets_obj = list(
+		"Tajaran" = 'icons/obj/clothing/species/tajaran/hats.dmi',
+		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
+		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
+		)
+
+
 /obj/item/clothing/head/helmet/space/rig/syndi/attack_self(mob/user)
 	if(camera)
 		..(user)
@@ -362,6 +394,11 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Vox")
+	sprite_sheets_obj = list(
+		"Tajaran" = 'icons/obj/clothing/species/tajaran/suits.dmi',
+		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
+		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
+		)
 
 
 //Wizard Rig

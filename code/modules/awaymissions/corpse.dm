@@ -161,9 +161,9 @@
 	corpseidaccess = "Station Engineer"
 
 /obj/effect/landmark/corpse/engineer/rig
-	corpsesuit = /obj/item/clothing/suit/space/rig
+	corpsesuit = /obj/item/clothing/suit/space/rig/engineering
 	corpsemask = /obj/item/clothing/mask/breath
-	corpsehelmet = /obj/item/clothing/head/helmet/space/rig
+	corpsehelmet = /obj/item/clothing/head/helmet/space/rig/engineering
 
 /obj/effect/landmark/corpse/clown
 	name = "Clown"

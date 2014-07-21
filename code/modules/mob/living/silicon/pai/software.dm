@@ -266,7 +266,7 @@
 				src.medHUD = !src.medHUD
 		if("translator")
 			if(href_list["toggle"])
-				src.universal_speak = !src.universal_speak
+				src.translator_toggle()
 		if("doorjack")
 			if(href_list["jack"])
 				if(src.cable && src.cable.machine)
@@ -325,7 +325,7 @@
 		if(s == "medical HUD")	//This file has to be saved as ANSI or this will not display correctly
 			dat += "<a href='byond://?src=\ref[src];software=medicalhud;sub=0'>Medical Analysis Suite</a> [(src.medHUD) ? "<font color=#55FF55>•</font>" : "<font color=#FF5555>•</font>"] <br>"
 		if(s == "universal translator")	//This file has to be saved as ANSI or this will not display correctly
-			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a> [(src.universal_speak) ? "<font color=#55FF55>•</font>" : "<font color=#FF5555>•</font>"] <br>"
+			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a> [(src.translator_on) ? "<font color=#55FF55>•</font>" : "<font color=#FF5555>•</font>"] <br>"
 		if(s == "projection array")
 			dat += "<a href='byond://?src=\ref[src];software=projectionarray;sub=0'>Projection Array</a> <br>"
 		if(s == "camera jack")
@@ -498,7 +498,7 @@
 /mob/living/silicon/pai/proc/softwareTranslator()
 	var/dat = {"<h2>Universal Translator</h2><hr>
 				When enabled, this device will automatically convert all spoken and written languages into a format that any known recipient can understand.<br><br>
-				The device is currently [ (src.universal_speak) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled</font>.<br>
+				The device is currently [ (src.translator_on) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled</font>.<br>
 				<a href='byond://?src=\ref[src];software=translator;sub=0;toggle=1'>Toggle Device</a><br>
 				"}
 	return dat
@@ -694,3 +694,27 @@
 			dat += addtext("<tr><td class='a'><i><b>From</b></i></td><td class='a'><i><b>&rarr;</b></i></td><td><i><b><a href='byond://?src=\ref[src];software=pdamessage;target=",index["target"],"'>", index["owner"],"</a>: </b></i>", index["message"], "<br></td></tr>")
 	dat += "</table>"
 	return dat
+
+/mob/living/silicon/pai/proc/translator_toggle()
+
+	// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
+
+	if(translator_on)
+		translator_on = 0
+
+		remove_language("Sinta'unathi")
+		remove_language("Siik'maas")
+		remove_language("Siik'tajr")
+		remove_language("Skrellian")
+
+		src << "\blue Translator Module toggled OFF."
+
+	else
+		translator_on = 1
+
+		add_language("Sinta'unathi")
+		add_language("Siik'maas")
+		add_language("Siik'tajr", 0)
+		add_language("Skrellian")
+
+		src << "\blue Translator Module toggled ON."
