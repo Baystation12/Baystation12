@@ -54,7 +54,7 @@
 	speech_verb = "shrieks"
 	colour = "vox"
 	key = "v"
-	flags = RESTRICTED | UNTRANSLATABLE
+	flags = RESTRICTED
 
 /datum/language/diona
 	name = "Rootspeak"
@@ -62,7 +62,7 @@
 	speech_verb = "creaks and rustles"
 	colour = "soghun"
 	key = "q"
-	flags = RESTRICTED | UNTRANSLATABLE
+	flags = RESTRICTED
 
 /datum/language/human
 	name = "Sol Common"
@@ -106,7 +106,7 @@
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
 
-	return ((universal_speak && !(speaking.flags & UNTRANSLATABLE)) || speaking in src.languages)
+	return (universal_speak || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()

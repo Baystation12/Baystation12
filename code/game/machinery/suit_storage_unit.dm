@@ -1064,19 +1064,9 @@
 	if(!target_species || !target_department)
 		return
 
-	switch(target_species)
-		if("Skrell")
-			if(helmet) helmet.species_restricted = list("Skrell")
-			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
-		if("Human")
-			if(helmet) helmet.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox","Skrell")
-			if(suit) suit.species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
-		if("Unathi")
-			if(helmet) helmet.species_restricted = list("Unathi")
-			if(suit) suit.species_restricted = list("Unathi")
-		if("Tajaran")
-			if(helmet) helmet.species_restricted = list("Tajaran")
-			if(suit) suit.species_restricted = list("Tajaran")
+	if(target_species)
+		if(helmet) helmet.refit_for_species(target_species)
+		if(suit) suit.refit_for_species(target_species)
 
 	switch(target_department)
 		if("Engineering")

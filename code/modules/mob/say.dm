@@ -74,7 +74,7 @@
 		return 1
 
 	//Universal speak makes everything understandable, for obvious reasons.
-	else if((src.universal_speak || src.universal_understand) && !(speaking.flags & UNTRANSLATABLE))
+	else if(src.universal_speak || src.universal_understand)
 		return 1
 
 	//Languages are handled after.
