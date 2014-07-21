@@ -750,7 +750,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
 #define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
 #define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
-#define UNTRANSLATABLE 16 	// Language is not translated by universal_speak or universal_understand.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
