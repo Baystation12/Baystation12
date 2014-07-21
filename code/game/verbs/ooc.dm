@@ -14,7 +14,7 @@ var/global/normal_ooc_colour = "#002eb8"
 		src << "Guests may not use OOC."
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_OOC))
@@ -102,7 +102,7 @@ var/global/normal_ooc_colour = "#002eb8"
 		src << "Guests may not use OOC."
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_LOOC))
@@ -131,9 +131,12 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/list/heard = get_mobs_in_view(7, src.mob)
 	var/mob/S = src.mob
+	
 	var/display_name = S.key
 	if(S.stat != DEAD)
 		display_name = S.name
+	
+	// Handle non-admins
 	for(var/mob/M in heard)
 		if(!M.client)
 			continue
@@ -149,6 +152,12 @@ var/global/normal_ooc_colour = "#002eb8"
 					else
 						display_name = holder.fakekey
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+	
+	// Now handle admins
+	display_name = S.key
+	if(S.stat != DEAD)
+		display_name = "[S.name]/([S.key])"
+	
 	for(var/client/C in admins)
 		if(C.prefs.toggles & CHAT_LOOC)
 			var/prefix = "(R)LOOC"
