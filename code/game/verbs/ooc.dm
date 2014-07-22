@@ -14,7 +14,7 @@ var/global/normal_ooc_colour = "#002eb8"
 		src << "Guests may not use OOC."
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_OOC))
@@ -102,7 +102,7 @@ var/global/normal_ooc_colour = "#002eb8"
 		src << "Guests may not use OOC."
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_LOOC))
