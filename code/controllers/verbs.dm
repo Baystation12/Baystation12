@@ -48,7 +48,7 @@
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
 	return
 
-/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller"))
+/client/proc/debug_controller(controller in list("Master","Failsafe","Ticker","Lighting","Air","Jobs","Sun","Radio","Supply","Shuttles","Emergency Shuttle","Configuration","pAI", "Cameras", "Transfer Controller", "Gas Data"))
 	set category = "Debug"
 	set name = "Debug Controller"
 	set desc = "Debug the various periodic loop controllers for the game (be careful!)"
@@ -100,5 +100,8 @@
 		if("Transfer Controller")
 			debug_variables(transfer_controller)
 			feedback_add_details("admin_verb","DAutovoter")
+		if("Gas Data")
+			debug_variables(gas_data)
+			feedback_add_details("admin_verv","DGasdata")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return
