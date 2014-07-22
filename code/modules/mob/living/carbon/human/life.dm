@@ -358,17 +358,10 @@
 
 					breath = loc.remove_air(breath_moles)
 
-					if(istype(wear_mask, /obj/item/clothing/mask/gas) && breath)
-						var/obj/item/clothing/mask/gas/G = wear_mask
-						var/datum/gas_mixture/filtered = new
-
-						filtered.copy_from(breath)
-						filtered.gas["phoron"] *= G.gas_filter_strength
-						filtered.update_values()
+					if(istype(wear_mask, /obj/item/clothing/mask) && breath)
+						var/obj/item/clothing/mask/M = wear_mask
+						var/datum/gas_mixture/filtered = M.filter_air(breath)
 						loc.assume_air(filtered)
-
-						breath.gas["phoron"] *= 1 - G.gas_filter_strength
-						breath.update_values()
 
 					if(!is_lung_ruptured())
 						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
