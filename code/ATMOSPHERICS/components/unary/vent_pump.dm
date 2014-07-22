@@ -50,9 +50,6 @@
 
 	var/radio_filter_out
 	var/radio_filter_in
-	
-	//this is used to ensure process() is run before broadcasting status
-	var/broadcast_status_update = 0
 
 /obj/machinery/atmospherics/unary/vent_pump/on
 	on = 1
@@ -139,7 +136,6 @@
 		return
 	if (!node)
 		on = 0
-	//broadcast_status() // from now air alarm/control computer should request update purposely --rastaf0
 	if(!on)
 		update_use_power(0)
 		return 0
@@ -151,6 +147,7 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/environment_pressure = environment.return_pressure()
 	if(air_contents.temperature == 0 && environment.temperature == 0)
+		process_broadcast_status()
 		return 0
 
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
@@ -188,8 +185,6 @@
 			network.update = 1
 	else
 		update_use_power(0)
-
-	process_broadcast_status()
 	
 	return 1
 
@@ -241,14 +236,6 @@
 		radio_connection = radio_controller.add_object(src, frequency,radio_filter_in)
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/broadcast_status()
-	broadcast_status_update = 1
-	
-
-/obj/machinery/atmospherics/unary/vent_pump/proc/process_broadcast_status()
-	if (!broadcast_status_update)
-		return 0
-	broadcast_status_update = 0
-
 	if(!radio_connection)
 		return 0
 
