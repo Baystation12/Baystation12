@@ -257,7 +257,7 @@ REAGENT SCANNER
 	var/datum/gas_mixture/environment = location.return_air()
 
 	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles()
+	var/total_moles = environment.total_moles
 
 	user.show_message("\blue <B>Results:</B>", 1)
 	if(abs(pressure - ONE_ATMOSPHERE) < 10)
@@ -265,32 +265,8 @@ REAGENT SCANNER
 	else
 		user.show_message("\red Pressure: [round(pressure,0.1)] kPa", 1)
 	if(total_moles)
-		var/o2_concentration = environment.oxygen/total_moles
-		var/n2_concentration = environment.nitrogen/total_moles
-		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/phoron_concentration = environment.phoron/total_moles
-
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-		if(abs(n2_concentration - N2STANDARD) < 20)
-			user.show_message("\blue Nitrogen: [round(n2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Nitrogen: [round(n2_concentration*100)]%", 1)
-
-		if(abs(o2_concentration - O2STANDARD) < 2)
-			user.show_message("\blue Oxygen: [round(o2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Oxygen: [round(o2_concentration*100)]%", 1)
-
-		if(co2_concentration > 0.01)
-			user.show_message("\red CO2: [round(co2_concentration*100)]%", 1)
-		else
-			user.show_message("\blue CO2: [round(co2_concentration*100)]%", 1)
-
-		if(phoron_concentration > 0.01)
-			user.show_message("\red Phoron: [round(phoron_concentration*100)]%", 1)
-
-		if(unknown_concentration > 0.01)
-			user.show_message("\red Unknown: [round(unknown_concentration*100)]%", 1)
+		for(var/g in environment.gas)
+			user.show_message("\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%", 1)
 
 		user.show_message("\blue Temperature: [round(environment.temperature-T0C)]&deg;C", 1)
 

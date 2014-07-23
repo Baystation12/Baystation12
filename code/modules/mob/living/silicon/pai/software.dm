@@ -576,22 +576,13 @@
 		var/datum/gas_mixture/environment = T.return_air()
 
 		var/pressure = environment.return_pressure()
-		var/total_moles = environment.total_moles()
+		var/total_moles = environment.total_moles
 
 		dat += "Air Pressure: [round(pressure,0.1)] kPa<br>"
 
-		if (total_moles)
-			var/o2_level = environment.oxygen/total_moles
-			var/n2_level = environment.nitrogen/total_moles
-			var/co2_level = environment.carbon_dioxide/total_moles
-			var/phoron_level = environment.phoron/total_moles
-			var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
-			dat += "Nitrogen: [round(n2_level*100)]%<br>"
-			dat += "Oxygen: [round(o2_level*100)]%<br>"
-			dat += "Carbon Dioxide: [round(co2_level*100)]%<br>"
-			dat += "Phoron: [round(phoron_level*100)]%<br>"
-			if(unknown_level > 0.01)
-				dat += "OTHER: [round(unknown_level)]%<br>"
+		if(total_moles)
+			for(var/g in environment.gas)
+				dat += "[gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%<br>"
 		dat += "Temperature: [round(environment.temperature-T0C)]&deg;C<br>"
 	dat += "<br><a href='byond://?src=\ref[src];software=atmosensor;sub=0'>Refresh Reading</a>"
 	return dat

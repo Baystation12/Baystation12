@@ -406,16 +406,7 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-
-					var/datum/gas_mixture/napalm = new
-					var/datum/gas/volatile_fuel/fuel = new
-					fuel.moles = created_volume
-					napalm.trace_gases += fuel
-
-					napalm.temperature = 400+T0C
-					napalm.update_values()
-
-					target_tile.assume_air(napalm)
+					target_tile.assume_gas("volatile_fuel", created_volume, 400+T0C)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 				holder.del_reagent("napalm")
 				return
@@ -1183,13 +1174,7 @@ datum
 				sleep(50)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-
-					var/datum/gas_mixture/napalm = new
-
-					napalm.phoron = 25
-					napalm.temperature = 1400
-
-					target_tile.assume_air(napalm)
+					target_tile.assume_gas("phoron", 25, 1400)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 
 //Yellow
