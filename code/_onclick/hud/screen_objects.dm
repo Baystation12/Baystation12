@@ -276,7 +276,7 @@
 							var/list/nicename = null
 							var/list/tankcheck = null
 							var/breathes = "oxygen"    //default, we'll check later
-							var/list/contents = list()							
+							var/list/contents = list()
 
 							if(ishuman(C))
 								var/mob/living/carbon/human/H = C
@@ -284,7 +284,7 @@
 								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
 								tankcheck = list (H.s_store, C.back, H.belt, C.r_hand, C.l_hand, H.l_store, H.r_store)
 
-							else    
+							else
 
 								nicename = list("Right Hand", "Left Hand", "Back")
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
@@ -295,30 +295,30 @@
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									switch(breathes)					
+									switch(breathes)
 																		//These tanks we're sure of their contents
 										if("nitrogen") 							//So we're a bit more picky about them.
-											
-											if(t.air_contents.nitrogen && !t.air_contents.oxygen)
-												contents.Add(t.air_contents.nitrogen)
+
+											if(t.air_contents.gas["nitrogen"] && !t.air_contents.gas["oxygen"])
+												contents.Add(t.air_contents.gas["nitrogen"])
 											else
-												contents.Add(0)	
+												contents.Add(0)
 
 										if ("oxygen")
-											if(t.air_contents.oxygen && !t.air_contents.phoron) 
-												contents.Add(t.air_contents.oxygen)
+											if(t.air_contents.gas["oxygen"] && !t.air_contents.gas["phoron"])
+												contents.Add(t.air_contents.gas["oxygen"])
 											else
 												contents.Add(0)
 
 										// No races breath this, but never know about downstream servers.
 										if ("carbon dioxide")
-											if(t.air_contents.carbon_dioxide && !t.air_contents.phoron)
-												contents.Add(t.air_contents.carbon_dioxide)
+											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas["phoron"])
+												contents.Add(t.air_contents.gas["carbon_dioxide"])
 											else
 												contents.Add(0)
-										
-	
-								else									
+
+
+								else
 									//no tank so we set contents to 0
 									contents.Add(0)
 
@@ -328,19 +328,19 @@
 							var/bestcontents = 0
 							for(var/i=1, i <  contents.len + 1 , ++i)
 								if(!contents[i])
-									continue	
+									continue
 								if(contents[i] > bestcontents)
 									best = i
 									bestcontents = contents[i]
-							
-							
+
+
 							//We've determined the best container now we set it as our internals
 
 							if(best)
 								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] on your [nicename[best]].</span>"
 								C.internal = tankcheck[best]
-							
-								
+
+
 							if(C.internal)
 								if(C.internals)
 									C.internals.icon_state = "internal1"

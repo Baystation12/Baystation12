@@ -106,7 +106,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/add_underlay(var/obj/machinery/atmospherics/node, var/direction)
-	if(istype(src, /obj/machinery/atmospherics/pipe/tank))	//todo: move tanks to unary devices 
+	if(istype(src, /obj/machinery/atmospherics/pipe/tank))	//todo: move tanks to unary devices
 		return ..()
 
 	if(node)
@@ -157,7 +157,7 @@
 
 /obj/machinery/atmospherics/pipe/simple/New()
 	..()
-	
+
 	// Pipe colors and icon states are handled by an image cache - so color and icon should
 	//  be null. For mapping purposes color is defined in the object definitions.
 	icon = null
@@ -473,7 +473,7 @@
 		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "core")
 		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps")
 		underlays.Cut()
-		
+
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
 		directions -= dir
 
@@ -678,7 +678,7 @@
 		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "4way")
 		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps_4way")
 		underlays.Cut()
-		
+
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
 
 		directions -= add_underlay(node1)
@@ -931,24 +931,13 @@
 			O << "\red [user] has used the analyzer on \icon[icon]"
 
 		var/pressure = parent.air.return_pressure()
-		var/total_moles = parent.air.total_moles()
+		var/total_moles = parent.air.total_moles
 
 		user << "\blue Results of analysis of \icon[icon]"
 		if (total_moles>0)
-			var/o2_concentration = parent.air.oxygen/total_moles
-			var/n2_concentration = parent.air.nitrogen/total_moles
-			var/co2_concentration = parent.air.carbon_dioxide/total_moles
-			var/phoron_concentration = parent.air.phoron/total_moles
-
-			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-
 			user << "\blue Pressure: [round(pressure,0.1)] kPa"
-			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
-			user << "\blue Oxygen: [round(o2_concentration*100)]%"
-			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Phoron: [round(phoron_concentration*100)]%"
-			if(unknown_concentration>0.01)
-				user << "\red Unknown: [round(unknown_concentration*100)]%"
+			for(var/g in parent.air.gas)
+				user << "\blue [gas_data.name[g]]: [round((parent.air.gas[g] / total_moles) * 100)]%"
 			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"
 		else
 			user << "\blue Tank is empty!"
@@ -962,10 +951,11 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T20C
 
-	air_temporary.oxygen = (25*ONE_ATMOSPHERE*O2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
-	air_temporary.nitrogen = (25*ONE_ATMOSPHERE*N2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+	air_temporary.adjust_multi("oxygen",  (25*ONE_ATMOSPHERE*O2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature), \
+	                           "nitrogen",(25*ONE_ATMOSPHERE*N2STANDARD)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
-	..()	
+
+	..()
 	icon_state = "air"
 
 /obj/machinery/atmospherics/pipe/tank/oxygen
@@ -977,7 +967,7 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T20C
 
-	air_temporary.oxygen = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+	air_temporary.adjust_gas("oxygen", (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
 	..()
 	icon_state = "o2"
@@ -991,7 +981,7 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T20C
 
-	air_temporary.nitrogen = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+	air_temporary.adjust_gas("nitrogen", (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
 	..()
 	icon_state = "n2"
@@ -1005,7 +995,7 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T20C
 
-	air_temporary.carbon_dioxide = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+	air_temporary.adjust_gas("carbon_dioxide", (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
 	..()
 	icon_state = "co2"
@@ -1019,7 +1009,7 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T20C
 
-	air_temporary.phoron = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+	air_temporary.adjust_gas("phoron", (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
 	..()
 	icon_state = "phoron"
@@ -1033,10 +1023,7 @@
 	air_temporary.volume = volume
 	air_temporary.temperature = T0C
 
-	var/datum/gas/sleeping_agent/trace_gas = new
-	trace_gas.moles = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
-
-	air_temporary.trace_gases += trace_gas
+	air_temporary.adjust_gas("sleeping_agent", (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature))
 
 	..()
 	icon_state = "n2o"

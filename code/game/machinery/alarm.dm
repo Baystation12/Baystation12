@@ -198,23 +198,24 @@
 		gas = location.remove_air(0.25*environment.total_moles)
 		if(gas)
 			var/heat_capacity = gas.heat_capacity()
-			var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
+			if(heat_capacity)
+				var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
 
-			//Use power.  Assuming that each power unit represents 1 watts....
-			use_power(energy_used, ENVIRON)
+				//Use power.  Assuming that each power unit represents 1 watts....
+				use_power(energy_used, ENVIRON)
 
-			//We need to cool ourselves.
-			if(environment.temperature > target_temperature)
-				gas.temperature -= energy_used/heat_capacity
-			else
-				gas.temperature += energy_used/heat_capacity
+				//We need to cool ourselves.
+				if(environment.temperature > target_temperature)
+					gas.temperature -= energy_used/heat_capacity
+				else
+					gas.temperature += energy_used/heat_capacity
 
-			environment.merge(gas)
+				environment.merge(gas)
 
-			if(abs(environment.temperature - target_temperature) <= 0.5)
-				regulating_temperature = 0
-				visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
-				"You hear a click as a faint electronic humming stops.")
+				if(abs(environment.temperature - target_temperature) <= 0.5)
+					regulating_temperature = 0
+					visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+					"You hear a click as a faint electronic humming stops.")
 
 	var/old_level = danger_level
 	var/old_pressurelevel = pressure_dangerlevel
@@ -256,23 +257,23 @@
 
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
-	var/other_moles = 0.0
-	for(var/datum/gas/G in environment.trace_gases)
-		other_moles+=G.moles
+	//var/other_moles = 0.0
+	////for(var/datum/gas/G in environment.trace_gases)
+	//	other_moles+=G.moles
 
 	pressure_dangerlevel = get_danger_level(environment_pressure, TLV["pressure"])
-	oxygen_dangerlevel = get_danger_level(environment.oxygen*partial_pressure, TLV["oxygen"])
-	co2_dangerlevel = get_danger_level(environment.carbon_dioxide*partial_pressure, TLV["carbon dioxide"])
-	phoron_dangerlevel = get_danger_level(environment.phoron*partial_pressure, TLV["phoron"])
+	oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, TLV["oxygen"])
+	co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, TLV["carbon dioxide"])
+	phoron_dangerlevel = get_danger_level(environment.gas["phoron"]*partial_pressure, TLV["phoron"])
 	temperature_dangerlevel = get_danger_level(environment.temperature, TLV["temperature"])
-	other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
+	//other_dangerlevel = get_danger_level(other_moles*partial_pressure, TLV["other"])
 
 	return max(
 		pressure_dangerlevel,
 		oxygen_dangerlevel,
 		co2_dangerlevel,
 		phoron_dangerlevel,
-		other_dangerlevel,
+		//other_dangerlevel,
 		temperature_dangerlevel
 		)
 
@@ -661,7 +662,7 @@
 /obj/machinery/alarm/proc/return_status()
 	var/turf/location = get_turf(src)
 	var/datum/gas_mixture/environment = location.return_air()
-	var/total = environment.oxygen + environment.carbon_dioxide + environment.phoron + environment.nitrogen
+	var/total = environment.total_moles
 	var/output = "<b>Air Status:</b><br>"
 
 	if(total == 0)
@@ -683,22 +684,22 @@
 	var/pressure_dangerlevel = get_danger_level(environment_pressure, current_settings)
 
 	current_settings = TLV["oxygen"]
-	var/oxygen_dangerlevel = get_danger_level(environment.oxygen*partial_pressure, current_settings)
-	var/oxygen_percent = round(environment.oxygen / total * 100, 2)
+	var/oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
+	var/oxygen_percent = round(environment.gas["oxygen"] / total * 100, 2)
 
 	current_settings = TLV["carbon dioxide"]
-	var/co2_dangerlevel = get_danger_level(environment.carbon_dioxide*partial_pressure, current_settings)
-	var/co2_percent = round(environment.carbon_dioxide / total * 100, 2)
+	var/co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
+	var/co2_percent = round(environment.gas["carbon_dioxide"] / total * 100, 2)
 
 	current_settings = TLV["phoron"]
-	var/phoron_dangerlevel = get_danger_level(environment.phoron*partial_pressure, current_settings)
-	var/phoron_percent = round(environment.phoron / total * 100, 2)
+	var/phoron_dangerlevel = get_danger_level(environment.gas["phoron"]*partial_pressure, current_settings)
+	var/phoron_percent = round(environment.gas["phoron"] / total * 100, 2)
 
-	current_settings = TLV["other"]
-	var/other_moles = 0.0
-	for(var/datum/gas/G in environment.trace_gases)
-		other_moles+=G.moles
-	var/other_dangerlevel = get_danger_level(other_moles*partial_pressure, current_settings)
+	//current_settings = TLV["other"]
+	//var/other_moles = 0.0
+	//for(var/datum/gas/G in environment.trace_gases)
+	//	other_moles+=G.moles
+	//var/other_dangerlevel = get_danger_level(other_moles*partial_pressure, current_settings)
 
 	current_settings = TLV["temperature"]
 	var/temperature_dangerlevel = get_danger_level(environment.temperature, current_settings)
@@ -709,10 +710,10 @@ Oxygen: <span class='dl[oxygen_dangerlevel]'>[oxygen_percent]</span>%<br>
 Carbon dioxide: <span class='dl[co2_dangerlevel]'>[co2_percent]</span>%<br>
 Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 "}
-	if (other_dangerlevel==2)
-		output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
-	else if (other_dangerlevel==1)
-		output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
+	//if (other_dangerlevel==2)
+	//	output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"
+	//else if (other_dangerlevel==1)
+	//	output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
 
 	output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K ([round(environment.temperature - T0C, 0.1)]C)<br>"
 
