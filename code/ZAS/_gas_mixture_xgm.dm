@@ -89,6 +89,42 @@
 	for(var/g in gas)
 		. += gas_data.specific_heat[g] * gas[g]
 
+//Adds or removes thermal energy
+/datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
+	var/heat_capacity = heat_capacity()	
+	if (thermal_energy < 0)
+		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
+		thermal_energy = max( thermal_energy, thermal_energy_limit )
+	temperature += thermal_energy/heat_capacity
+	return thermal_energy
+
+//Returns the thermal energy change required to get to a new temperature
+/datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
+	return heat_capacity()*(new_temperature - temperature)
+
+//Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
+#define SPECIFIC_ENTROPY_VACUUM		15000
+
+//Returns the ideal gas specific entropy of the whole mix
+/datum/gas_mixture/proc/specific_entropy()
+	if (!gas.len || total_moles == 0)
+		return SPECIFIC_ENTROPY_VACUUM
+	
+	. = 0
+	for(var/g in gas)
+		. += specific_entropy_gas(g)
+	. /= total_moles
+
+//Returns the ideal gas specific entropy of a specific gas in the mix
+/datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
+	if (!(gasid in gas) || total_moles == 0)
+		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
+	
+	var/ratio = gas[gasid] / total_moles
+	var/molar_mass = gas_data.molar_mass[gasid]
+	var/specific_heat = gas_data.specific_heat[gasid]
+	return R_IDEAL_GAS_EQUATION * ratio * ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / gas[gasid] * sqrt( ( molar_mass * specific_heat * temperature ) ** 3 ) + 1 ) +  5/2 )
+
 //Updates the total_moles count and trims any empty gases.
 /datum/gas_mixture/proc/update_values()
 	total_moles = 0

@@ -77,13 +77,11 @@ Thus, the two variables affect pump operation are set in New():
 	var/pressure_delta = target_pressure - sink.return_pressure()
 
 	//Calculate necessary moles to transfer using PV=nRT
-	if(pressure_delta > 0.01 && (source.total_moles() > 0) && (source.temperature > 0 || sink.temperature > 0))
+	if(pressure_delta > 0.01 && (source.total_moles > 0) && (source.temperature > 0 || sink.temperature > 0))
 		//Figure out how much gas to transfer
 		var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 		
 		var/output_volume = sink.volume
-		if (network2 && network2.air_transient)
-			output_volume = network2.air_transient.volume	//use the network volume if we can get it
 		
 		//Return the number of moles that would have to be transfered to bring sink to the target pressure
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
@@ -98,7 +96,7 @@ Thus, the two variables affect pump operation are set in New():
 		var/power_draw = specific_power*transfer_moles
 		
 		var/datum/gas_mixture/removed = source.remove(transfer_moles)
-		last_flow_rate = (removed.total_moles()/(removed.total_moles() + source.total_moles()))*source.volume
+		last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
 		
 		if (power_draw > 0)
 			sink.add_thermal_energy(power_draw)

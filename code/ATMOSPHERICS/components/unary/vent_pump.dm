@@ -146,8 +146,8 @@
 	
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/environment_pressure = environment.return_pressure()
+	
 	if(air_contents.temperature == 0 && environment.temperature == 0)
-		process_broadcast_status()
 		return 0
 
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
@@ -173,8 +173,6 @@
 				pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
 		
 			var/output_volume = air_contents.volume
-			if (network && network.air_transient)
-				output_volume = network.air_transient.volume	//use the network volume if we can get it
 			
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
@@ -189,7 +187,7 @@
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/transfer_gas(datum/gas_mixture/source, datum/gas_mixture/sink, var/transfer_moles)
-	if(source.total_moles() == 0)
+	if(source.total_moles == 0)
 		update_use_power(0)
 		return
 
@@ -204,7 +202,7 @@
 	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
 		return
 	
-	last_flow_rate = (removed.total_moles()/(removed.total_moles() + source.total_moles()))*source.volume
+	last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
 	
 	var/power_draw = specific_power*transfer_moles
 	if (power_draw > 0)
