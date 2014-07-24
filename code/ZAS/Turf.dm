@@ -6,12 +6,10 @@
 /turf/var/datum/gas_mixture/air
 
 /turf/simulated/proc/set_graphic(new_graphic)
-	if(isnum(new_graphic))
-		if(new_graphic == 1) new_graphic = plmaster
-		else if(new_graphic == 2) new_graphic = slmaster
-	if(gas_graphic) overlays -= gas_graphic
-	if(new_graphic) overlays += new_graphic
 	gas_graphic = new_graphic
+	overlays.Cut()
+	for(var/i in gas_graphic)
+		overlays += i
 
 /turf/proc/update_air_properties()
 	var/block = c_airblock(src)
@@ -185,17 +183,15 @@
 /turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
 	return 0
 
+/turf/proc/assume_gas(gasid, moles, temp = 0)
+	return 0
+
 /turf/return_air()
 	//Create gas mixture to hold data for passing
 	var/datum/gas_mixture/GM = new
 
-	GM.oxygen = oxygen
-	GM.carbon_dioxide = carbon_dioxide
-	GM.nitrogen = nitrogen
-	GM.phoron = phoron
-
+	GM.adjust_multi("oxygen", oxygen, "carbon_dioxide", carbon_dioxide, "nitrogen", nitrogen, "phoron", phoron)
 	GM.temperature = temperature
-	GM.update_values()
 
 	return GM
 
@@ -204,10 +200,10 @@
 
 	var/sum = oxygen + carbon_dioxide + nitrogen + phoron
 	if(sum>0)
-		GM.oxygen = (oxygen/sum)*amount
-		GM.carbon_dioxide = (carbon_dioxide/sum)*amount
-		GM.nitrogen = (nitrogen/sum)*amount
-		GM.phoron = (phoron/sum)*amount
+		GM.gas["oxygen"] = (oxygen/sum)*amount
+		GM.gas["carbon_dioxide"] = (carbon_dioxide/sum)*amount
+		GM.gas["nitrogen"] = (nitrogen/sum)*amount
+		GM.gas["phoron"] = (phoron/sum)*amount
 
 	GM.temperature = temperature
 	GM.update_values()
@@ -217,6 +213,16 @@
 /turf/simulated/assume_air(datum/gas_mixture/giver)
 	var/datum/gas_mixture/my_air = return_air()
 	my_air.merge(giver)
+
+/turf/simulated/assume_gas(gasid, moles, temp = null)
+	var/datum/gas_mixture/my_air = return_air()
+
+	if(isnull(temp))
+		my_air.adjust_gas(gasid, moles)
+	else
+		my_air.adjust_gas_temp(gasid, moles, temp)
+
+	return 1
 
 /turf/simulated/remove_air(amount as num)
 	var/datum/gas_mixture/my_air = return_air()
@@ -240,7 +246,7 @@
 /turf/proc/make_air()
 	air = new/datum/gas_mixture
 	air.temperature = temperature
-	air.adjust(oxygen, carbon_dioxide, nitrogen, phoron)
+	air.adjust_multi("oxygen", oxygen, "carbon_dioxide", carbon_dioxide, "nitrogen", nitrogen, "phoron", phoron)
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
 

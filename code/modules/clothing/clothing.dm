@@ -36,9 +36,9 @@
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
 			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
-		else 
+		else
 			species_restricted = list(target_species)
-	
+
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
 
@@ -48,9 +48,9 @@
 			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 		if("Human")
 			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
-		else 
+		else
 			species_restricted = list(target_species)
-	
+
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
 
@@ -189,6 +189,8 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
+
+/obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 
 //Shoes
 /obj/item/clothing/shoes
