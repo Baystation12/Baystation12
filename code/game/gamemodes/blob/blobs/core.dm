@@ -24,15 +24,14 @@
 		qdel(overmind)
 	processing_objects.Remove(src)
 	..()
-	return
+//	return
 
 /obj/effect/blob/core/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
 /obj/effect/blob/core/update_icon()
 	if(health <= 0)
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-		Destroy()
+		qdel(src)
 		return
 	// update_icon is called when health changes so... call update_health in the overmind
 	return
@@ -59,9 +58,9 @@
 	..()
 
 
-/obj/effect/blob/core/proc/create_overmind(var/client/new_overmind)
+/obj/effect/blob/core/proc/create_overmind(var/client/new_overmind, var/override_delay)
 
-	if(overmind_get_delay > world.time)
+	if(overmind_get_delay > world.time && !override_delay)
 		return
 
 	overmind_get_delay = world.time + 300 // 30 seconds

@@ -27,7 +27,6 @@
 
 /obj/effect/blob/node/update_icon()
 	if(health <= 0)
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-		Destroy()
+		qdel(src)
 		return
 	return

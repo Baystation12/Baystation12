@@ -111,6 +111,7 @@ var/global/floorIsLava = 0
 					<A href='?src=\ref[src];makerobot=\ref[M]'>Make Robot</A> |
 					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A> |
 					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A>
+					<A href='?src=\ref[src];makeblob=\ref[M]'>Make Blob</A> |
 				"}
 
 			//Simple Animals

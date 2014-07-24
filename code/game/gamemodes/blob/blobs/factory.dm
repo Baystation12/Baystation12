@@ -10,10 +10,13 @@
 
 /obj/effect/blob/factory/update_icon()
 	if(health <= 0)
-		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-		Destroy()
-		return
-	return
+		qdel(src)
+
+/obj/effect/blob/factory/Destroy()
+	for(var/mob/living/simple_animal/hostile/blobspore/spore in spores)
+		if(spore.factory == src)
+			spore.factory = null
+	..()
 
 /obj/effect/blob/factory/PulseAnimation(var/activate = 0)
 	if(activate)
@@ -45,6 +48,7 @@
 	attacktext = "hits"
 	attack_sound = 'sound/weapons/genhit1.ogg'
 	var/obj/effect/blob/factory/factory = null
+	var/is_zombie = 0
 	faction = "blob"
 	min_oxy = 0
 	max_oxy = 0
@@ -75,6 +79,36 @@
 		factory.spores += src
 	..()
 
+/mob/living/simple_animal/hostile/blobspore/Life()
+
+	if(!is_zombie && isturf(src.loc))
+		for(var/mob/living/carbon/human/H in oview(src,1)) //Only for corpse right next to/on same tile
+			if(H.stat == DEAD)
+				Zombify(H)
+				break
+	..()
+
+/mob/living/simple_animal/hostile/blobspore/proc/Zombify(var/mob/living/carbon/human/H)
+	if(H.wear_suit)
+		var/obj/item/clothing/suit/armor/A = H.wear_suit
+		if(A.armor && A.armor["melee"])
+			maxHealth += A.armor["melee"] //That zombie's got armor, I want armor!
+	maxHealth += 40
+	health = maxHealth
+	name = "blob zombie"
+	desc = "A shambling corpse animated by the blob."
+	melee_damage_lower = 10
+	melee_damage_upper = 15
+	icon = H.icon
+	icon_state = "husk_s"
+	H.h_style = null
+	H.update_hair()
+	overlays = H.overlays
+	overlays += image('tauceti/icons/mob/blob.dmi', icon_state = "blob_head")
+	H.loc = src
+	is_zombie = 1
+	loc.visible_message("<span class='warning'> The corpse of [H.name] suddenly rises!</span>")
+
 /mob/living/simple_animal/hostile/blobspore/death()
 // On death, create a small smoke of harmful gas (s-Acid)
 	var/datum/effect/effect/system/smoke_spread/chem/S = new
@@ -91,7 +125,23 @@
 
 	qdel(src)
 
-/mob/living/simple_animal/hostile/blobspore/Del()
+/mob/living/simple_animal/hostile/blobspore/Destroy()
 	if(factory)
 		factory.spores -= src
+	if(contents)
+		for(var/mob/M in contents)
+			M.loc = src.loc
 	..()
+
+/datum/reagent/toxin/spore
+	name = "Spore Toxin"
+	id = "spore"
+	description = "A toxic spore cloud which blocks vision when ingested."
+	color = "#9ACD32"
+	toxpwr = 0.5
+
+	on_mob_life(var/mob/living/M as mob)
+		..()
+		M.damageoverlaytemp = 60
+		M.eye_blurry = max(M.eye_blurry, 3)
+		return
