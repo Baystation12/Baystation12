@@ -5,6 +5,8 @@
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it"
 	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
 
 	level = 1
 
@@ -15,11 +17,8 @@
 
 	var/on = 0
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
-	var/scrub_CO2 = 1
-	var/scrub_Toxins = 0
-	var/scrub_N2O = 0
+	var/list/scrubbing_gas = list()
 
-	var/volume_rate = 120
 	var/panic = 0 //is this scrubber panicked?
 
 	var/area_uid
@@ -90,9 +89,9 @@
 		"power" = on,
 		"scrubbing" = scrubbing,
 		"panic" = panic,
-		"filter_co2" = scrub_CO2,
-		"filter_phoron" = scrub_Toxins,
-		"filter_n2o" = scrub_N2O,
+		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
+		"filter_phoron" = ("phoron" in scrubbing_gas),
+		"filter_n2o" = ("sleeping_agent" in scrubbing_gas),
 		"sigtype" = "status"
 	)
 	if(!initial_loc.air_scrub_names[id_tag])
@@ -119,57 +118,79 @@
 		on = 0
 	//broadcast_status()
 	if(!on)
+		update_use_power(0)
 		return 0
 
-
 	var/datum/gas_mixture/environment = loc.return_air()
+	if ((environment.total_moles == 0) || (environment.temperature == 0 && air_contents.temperature == 0))
+		update_use_power(0)
+		return
 
-	if(scrubbing)
-		if((environment.gas["phoron"]>0.001) || (environment.gas["carbon_dioxide"]>0.001) || (environment.gas["oxygen_agent_b"]>0.001) || (environment.gas["sleeping_agent"]>0.001))
-			var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
-
-			//Take a gas sample
-			var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-			if (isnull(removed)) //in space
-				return
-
-			//Filter it
-			var/datum/gas_mixture/filtered_out = new
-			filtered_out.temperature = removed.temperature
-			if(scrub_Toxins)
-				filtered_out.gas["phoron"] = removed.gas["phoron"]
-				removed.gas["phoron"] = 0
-			if(scrub_CO2)
-				filtered_out.gas["carbon_dioxide"] = removed.gas["carbon_dioxide"]
-				removed.gas["carbon_dioxide"] = 0
-			if(scrub_N2O)
-				filtered_out.gas["sleeping_agent"] = removed.gas["sleeping_agent"]
-				removed.gas["sleeping_agent"] = 0
-			if(removed.gas["oxygen_agent_b"])
-				filtered_out.gas["oxygen_agent_b"] = removed.gas["oxygen_agent_b"]
-				removed.gas["oxygen_agent_b"] = 0
-
-			//Remix the resulting gases
-			air_contents.merge(filtered_out)
-
-			loc.assume_air(removed)
-
-			if(network)
-				network.update = 1
-
-	else //Just siphoning all air
-		if (air_contents.return_pressure()>=50*ONE_ATMOSPHERE)
+	var/power_draw
+	if(scrubbing)	
+		//Filter it
+		var/total_specific_power = 0		//the power required to remove one mole of filterable gas
+		var/total_filterable_moles = 0
+		var/list/specific_power_gas = list()
+		for (var/g in scrubbing_gas)
+			if (environment.gas[g] < 0.1)
+				continue	//don't bother
+		
+			var/specific_power = calculate_specific_power_gas(g, environment, air_contents)
+			specific_power_gas[g] = specific_power
+			total_specific_power += specific_power
+			total_filterable_moles += environment.gas[g]
+		
+		if (total_filterable_moles == 0)
+			update_use_power(0)
 			return
+		
+		//Calculate the amount of energy required and limit transfer_moles based on available power
+		power_draw = 0
+		var/total_transfer_moles = total_filterable_moles
+		if (total_specific_power > 0)
+			total_transfer_moles = min(total_transfer_moles, active_power_usage/total_specific_power)
+		
+		for (var/g in scrubbing_gas)
+			var/transfer_moles = environment.gas[g]
+			if (specific_power_gas[g] > 0)
+				//if our flow rate is limited by available power, the proportion of the filtered gas is based on mole ratio
+				transfer_moles = min(transfer_moles, total_transfer_moles*(environment.gas[g]/total_filterable_moles))
+			
+			environment.gas[g] -= transfer_moles
+			air_contents.gas[g] += transfer_moles
+			power_draw += specific_power_gas[g]*transfer_moles
+		
+		//Remix the resulting gases
+		air_contents.update_values()
+		environment.update_values()
 
-		var/transfer_moles = environment.total_moles*(volume_rate/environment.volume)
+	else //Just siphon all air
+		var/transfer_moles = environment.total_moles
 
-		var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
+		//Calculate the amount of energy required
+		var/specific_power = calculate_specific_power(environment, air_contents) //this has to be calculated before we modify any gas mixtures
+		if (specific_power > 0)
+			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
+		
+		if (transfer_moles < 0.01)
+			update_use_power(0)
+			return	//don't bother
 
-		air_contents.merge(removed)
+		power_draw = specific_power*transfer_moles
+		air_contents.merge(environment.remove(transfer_moles))
 
-		if(network)
-			network.update = 1
-
+	if (power_draw > 0)
+		air_contents.add_thermal_energy(power_draw)
+		//last_power_draw = power_draw
+		handle_pump_power_draw(power_draw)
+	else
+		//last_power_draw = idle_power_usage
+		handle_pump_power_draw(idle_power_usage)
+	
+	if(network)
+		network.update = 1
+	
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_scrubber/hide(var/i) //to make the little pipe section invisible, the icon changes.
@@ -191,39 +212,39 @@
 		if(panic)
 			on = 1
 			scrubbing = 0
-			volume_rate = 2000
 		else
 			scrubbing = 1
-			volume_rate = initial(volume_rate)
 	if(signal.data["toggle_panic_siphon"] != null)
 		panic = !panic
 		if(panic)
 			on = 1
 			scrubbing = 0
-			volume_rate = 2000
 		else
 			scrubbing = 1
-			volume_rate = initial(volume_rate)
 
 	if(signal.data["scrubbing"] != null)
 		scrubbing = text2num(signal.data["scrubbing"])
 	if(signal.data["toggle_scrubbing"])
 		scrubbing = !scrubbing
 
-	if(signal.data["co2_scrub"] != null)
-		scrub_CO2 = text2num(signal.data["co2_scrub"])
-	if(signal.data["toggle_co2_scrub"])
-		scrub_CO2 = !scrub_CO2
+	var/list/toggle = list()
+	
+	if(!isnull(signal.data["co2_scrub"]) && text2num(signal.data["co2_scrub"]) != ("carbon_dioxide" in scrubbing_gas))
+		toggle += "carbon_dioxide"
+	else if(signal.data["toggle_co2_scrub"])
+		toggle += "carbon_dioxide"
 
-	if(signal.data["tox_scrub"] != null)
-		scrub_Toxins = text2num(signal.data["tox_scrub"])
-	if(signal.data["toggle_tox_scrub"])
-		scrub_Toxins = !scrub_Toxins
+	if(!isnull(signal.data["tox_scrub"]) && text2num(signal.data["tox_scrub"]) != ("phoron" in scrubbing_gas))
+		toggle += "phoron"
+	else if(signal.data["toggle_tox_scrub"])
+		toggle += "phoron"
 
-	if(signal.data["n2o_scrub"] != null)
-		scrub_N2O = text2num(signal.data["n2o_scrub"])
-	if(signal.data["toggle_n2o_scrub"])
-		scrub_N2O = !scrub_N2O
+	if(!isnull(signal.data["n2o_scrub"]) && text2num(signal.data["n2o_scrub"]) != ("sleeping_agent" in scrubbing_gas))
+		toggle += "sleeping_agent"
+	else if(signal.data["toggle_n2o_scrub"])
+		toggle += "sleeping_agent"
+
+	scrubbing_gas ^= toggle
 
 	if(signal.data["init"] != null)
 		name = signal.data["init"]

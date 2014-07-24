@@ -89,8 +89,11 @@
 	for(var/g in gas)
 		. += gas_data.specific_heat[g] * gas[g]
 
-//Adds or removes thermal energy
+//Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
+	if (temperature < TCMB || total_moles == 0)
+		return 0
+	
 	var/heat_capacity = heat_capacity()	
 	if (thermal_energy < 0)
 		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
@@ -103,27 +106,28 @@
 	return heat_capacity()*(new_temperature - temperature)
 
 //Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
-#define SPECIFIC_ENTROPY_VACUUM		15000
+#define SPECIFIC_ENTROPY_VACUUM		150000
 
-//Returns the ideal gas specific entropy of the whole mix
+//Returns the ideal gas specific entropy of the whole mix. This is the entropy per mole of /mixed/ gas.
 /datum/gas_mixture/proc/specific_entropy()
 	if (!gas.len || total_moles == 0)
 		return SPECIFIC_ENTROPY_VACUUM
 	
 	. = 0
 	for(var/g in gas)
-		. += specific_entropy_gas(g)
+		var/ratio = gas[g] / total_moles
+		. += ratio * specific_entropy_gas(g)
 	. /= total_moles
 
-//Returns the ideal gas specific entropy of a specific gas in the mix
+//Returns the ideal gas specific entropy of a specific gas in the mix. This is the entropy per mole of /pure/ gas.
+//It's important not to get that mixed up with the mixed entropy, which takes into account mole ratios (I did, it was bad).
 /datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
-	if (!(gasid in gas) || total_moles == 0)
+	if (!(gasid in gas) || gas[gasid] == 0)
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
 	
-	var/ratio = gas[gasid] / total_moles
 	var/molar_mass = gas_data.molar_mass[gasid]
 	var/specific_heat = gas_data.specific_heat[gasid]
-	return R_IDEAL_GAS_EQUATION * ratio * ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / gas[gasid] * sqrt( ( molar_mass * specific_heat * temperature ) ** 3 ) + 1 ) +  5/2 )
+	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/gas[gasid]) * sqrt((molar_mass*specific_heat*temperature)**3) + 1 ) +  5/2 )
 
 //Updates the total_moles count and trims any empty gases.
 /datum/gas_mixture/proc/update_values()

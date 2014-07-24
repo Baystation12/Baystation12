@@ -18,7 +18,7 @@
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-
+	
 	var/area/initial_loc
 	level = 1
 	var/area_uid
@@ -125,24 +125,25 @@
 	update_icon()
 	update_underlays()
 
+/obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
+	if(stat & (NOPOWER|BROKEN))
+		return 0
+	if(!on)
+		return 0
+	if(welded)
+		return 0
+	return 1
+
 /obj/machinery/atmospherics/unary/vent_pump/process()
 	..()
 	
-	//reset these each iteration
-	last_power_draw = 0
-	last_flow_rate = 0
-	
-	if(stat & (NOPOWER|BROKEN))
-		return
 	if (!node)
 		on = 0
-	if(!on)
+	if(!can_pump())
 		update_use_power(0)
+		last_power_draw = 0
+		last_flow_rate = 0
 		return 0
-
-	if(welded)
-		return 0
-	
 	
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/environment_pressure = environment.return_pressure()
@@ -161,7 +162,7 @@
 		
 			//Unfortunately there's no good way to get the volume of the room, so assume 10 tiles
 			//We will overshoot in small rooms when dealing with huge pressures but it won't be so bad
-			var/output_volume = environment.volume * 10
+			var/output_volume = environment.volume * environment.group_multiplier
 			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
@@ -172,7 +173,7 @@
 			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
 				pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
 		
-			var/output_volume = air_contents.volume
+			var/output_volume = air_contents.volume * air_contents.group_multiplier
 			
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
@@ -182,6 +183,8 @@
 		if(network)
 			network.update = 1
 	else
+		last_power_draw = 0
+		last_flow_rate = 0
 		update_use_power(0)
 	
 	return 1
@@ -215,15 +218,6 @@
 	
 	//merge the removed gas into the sink
 	sink.merge(removed)
-	
-	/* Uncomment this in case it actually matters whether we call assume_air() or just merge with the returned air directly
-	if (istype(sink, /datum/gas_mixture)
-		var/datum/gas_mixture/M = sink
-		M.merge(removed)
-	else if (istype(sink, /turf)
-		var/turf/T = sink
-		T.assume_air(removed)
-	*/
 
 //Radio remote control
 

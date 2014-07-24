@@ -61,15 +61,11 @@ Thus, the two variables affect pump operation are set in New():
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/pump/process()
-	//reset these each iteration
-	last_power_draw = 0
-	last_flow_rate = 0
-	
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(!on)
+	if((stat & (NOPOWER|BROKEN)) || !on)
 		update_use_power(0)
-		return 0
+		last_power_draw = 0
+		last_flow_rate = 0
+		return
 
 	var/datum/gas_mixture/source = air1
 	var/datum/gas_mixture/sink = air2
@@ -78,17 +74,19 @@ Thus, the two variables affect pump operation are set in New():
 
 	//Calculate necessary moles to transfer using PV=nRT
 	if(pressure_delta > 0.01 && (source.total_moles > 0) && (source.temperature > 0 || sink.temperature > 0))
-		//Figure out how much gas to transfer
+		
+		var/transfer_moles = source.total_moles
+		/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
+		//Figure out how much gas to transfer to meet the target pressure.
 		var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 		
-		var/output_volume = sink.volume
+		var/output_volume = sink.volume * sink.group_multiplier
 		
 		//Return the number of moles that would have to be transfered to bring sink to the target pressure
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+		*/
 		
-		//Actually transfer the gas
-		
-		//Calculate the amount of energy required
+		//Calculate the amount of energy required and limit transfer_moles based on available power
 		var/specific_power = calculate_specific_power(source, sink) //this has to be calculated before we modify any gas mixtures
 		if (specific_power > 0)
 			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
@@ -99,11 +97,11 @@ Thus, the two variables affect pump operation are set in New():
 		last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
 		
 		if (power_draw > 0)
-			sink.add_thermal_energy(power_draw)
-			handle_power_draw(power_draw)
+			removed.add_thermal_energy(power_draw)	//1st law - energy is conserved
+			handle_pump_power_draw(power_draw)
 			last_power_draw = power_draw
 		else
-			handle_power_draw(idle_power_usage)
+			handle_pump_power_draw(idle_power_usage)
 			last_power_draw = idle_power_usage
 		
 		sink.merge(removed)
@@ -115,21 +113,11 @@ Thus, the two variables affect pump operation are set in New():
 			network2.update = 1
 	else
 		update_use_power(0)
+		last_power_draw = 0
+		last_flow_rate = 0
 		return 1
 
 	return 1
-
-//This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
-/obj/machinery/atmospherics/binary/pump/proc/handle_power_draw(var/usage_amount)
-	if (usage_amount > active_power_usage - 5)
-		update_use_power(2)
-	else
-		update_use_power(1)
-		
-		if (usage_amount > idle_power_usage)
-			use_power(usage_amount)	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
-	
-	last_power_draw = usage_amount
 
 //Radio remote control
 
