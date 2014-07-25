@@ -189,16 +189,19 @@
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 		var/datum/money_account/CH = get_account(C.associated_account_number)
 		if (CH) // Only proceed if card contains proper account number.
-			if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-				if(vendor_account)
-					var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-					var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-					transfer_and_vend(D)
+			if(!CH.suspended)
+				if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+					if(vendor_account)
+						var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+						var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+						transfer_and_vend(D)
+					else
+						usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 				else
-					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+					//Just Vend it.
+					transfer_and_vend(CH)
 			else
-				//Just Vend it.
-				transfer_and_vend(CH)
+				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
 			usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
 
