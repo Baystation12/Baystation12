@@ -32,6 +32,29 @@
 
 	return 1
 
+/obj/item/clothing/proc/refit_for_species(var/target_species)
+	switch(target_species)
+		if("Human", "Skrell")	//humanoid bodytypes
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		else 
+			species_restricted = list(target_species)
+	
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+
+/obj/item/clothing/head/helmet/refit_for_species(var/target_species)
+	switch(target_species)
+		if("Skrell")
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
+		else 
+			species_restricted = list(target_species)
+	
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+
+
 //Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
@@ -405,4 +428,8 @@ BLIND     // can't see anything
 	sensor_mode = pick(0,1,2,3)
 	..()
 
+/obj/item/clothing/under/emp_act(severity)
+	if (hastie)
+		hastie.emp_act(severity)
+	..()
 

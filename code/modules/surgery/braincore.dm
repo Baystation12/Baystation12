@@ -107,6 +107,7 @@
 			B.transfer_identity(target)
 
 		target.internal_organs -= B
+		target.internal_organs_by_name -= "brain"
 
 		target:brain_op_stage = 4.0
 		target.death()//You want them to die after the brain was transferred, so not to trigger client death() twice.
@@ -173,7 +174,7 @@
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\blue [user] mends hematoma in [target]'s brain with \the [tool].",	\
 		"\blue You mend hematoma in [target]'s brain with \the [tool].")
-		var/datum/organ/internal/brain/sponge = target.internal_organs["brain"]
+		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
 		if (sponge)
 			sponge.damage = 0
 
@@ -187,9 +188,12 @@
 //				SLIME CORE EXTRACTION							//
 //////////////////////////////////////////////////////////////////
 
-/datum/surgery_step/slime/
+/datum/surgery_step/slime
+	is_valid_target(mob/living/carbon/slime/target)
+		return istype(target, /mob/living/carbon/slime/)
+
 	can_use(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		return istype(target, /mob/living/carbon/slime/) && target.stat == 2
+		return target.stat == 2
 
 /datum/surgery_step/slime/cut_flesh
 	allowed_tools = list(

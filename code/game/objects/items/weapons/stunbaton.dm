@@ -97,26 +97,6 @@
 
 	add_fingerprint(user)
 
-/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom)
-	. = ..()
-	if (prob(50))
-		if(istype(hit_atom, /mob/living))
-			var/mob/living/carbon/human/H = hit_atom
-			if(status)
-				H.apply_effect(10, STUN, 0)
-				H.apply_effect(10, WEAKEN, 0)
-				H.apply_effect(10, STUTTER, 0)
-				charges--
-
-				for(var/mob/M in player_list) if(M.key == src.fingerprintslast)
-					foundmob = M
-					break
-
-				H.visible_message("<span class='danger'>[src], thrown by [foundmob.name], strikes [H] and stuns them!</span>")
-
-				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] last touched by ([src.fingerprintslast])</font>"
-				msg_admin_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [key_name(H)]" )
-
 /obj/item/weapon/melee/baton/emp_act(severity)
 	switch(severity)
 		if(1)

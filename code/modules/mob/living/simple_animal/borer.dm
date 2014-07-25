@@ -31,7 +31,7 @@
 	desc = "A small, quivering sluglike creature."
 	speak_emote = list("chirrups")
 	emote_hear = list("chirrups")
-	response_help  = "pokes the"
+	response_help  = "pokes"
 	response_disarm = "prods the"
 	response_harm   = "stomps on the"
 	icon_state = "brainslug"
@@ -234,13 +234,44 @@
 			src << "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>"
 			host << "\red <B>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</B>"
 
+			// host -> brain
+			var/h2b_id = host.computer_id
+			var/h2b_ip= host.lastKnownIP
+			host.computer_id = null
+			host.lastKnownIP = null
+
+			del(host_brain)
+			host_brain = new(src)
+
 			host_brain.ckey = host.ckey
+
+			if(!host_brain.computer_id)
+				host_brain.computer_id = h2b_id
+
+			if(!host_brain.lastKnownIP)
+				host_brain.lastKnownIP = h2b_ip
+
+			// self -> host
+			var/s2h_id = src.computer_id
+			var/s2h_ip= src.lastKnownIP
+			src.computer_id = null
+			src.lastKnownIP = null
+
 			host.ckey = src.ckey
+
+			if(!host.computer_id)
+				host.computer_id = s2h_id
+
+			if(!host.lastKnownIP)
+				host.lastKnownIP = s2h_ip
+
 			controlling = 1
 
 			host.verbs += /mob/living/carbon/proc/release_control
 			host.verbs += /mob/living/carbon/proc/punish_host
 			host.verbs += /mob/living/carbon/proc/spawn_larvae
+
+			return
 
 /mob/living/simple_animal/borer/verb/secrete_chemicals()
 	set category = "Alien"
@@ -329,20 +360,45 @@ mob/living/simple_animal/borer/proc/detatch()
 	host.verbs -= /mob/living/carbon/proc/punish_host
 	host.verbs -= /mob/living/carbon/proc/spawn_larvae
 
-	if(host_brain.ckey)
+
+	if(host_brain)
+
+		// host -> self
+		var/h2s_id = host.computer_id
+		var/h2s_ip= host.lastKnownIP
+		host.computer_id = null
+		host.lastKnownIP = null
+
 		src.ckey = host.ckey
+
+		if(!src.computer_id)
+			src.computer_id = h2s_id
+
+		if(!host_brain.lastKnownIP)
+			src.lastKnownIP = h2s_ip
+
+		// brain -> host
+		var/b2h_id = host_brain.computer_id
+		var/b2h_ip= host_brain.lastKnownIP
+		host_brain.computer_id = null
+		host_brain.lastKnownIP = null
+
 		host.ckey = host_brain.ckey
-		host_brain.ckey = null
-		host_brain.name = "host brain"
-		host_brain.real_name = "host brain"
+
+		if(!host.computer_id)
+			host.computer_id = b2h_id
+
+		if(!host.lastKnownIP)
+			host.lastKnownIP = b2h_ip
+
+	del(host_brain)
 
 	var/mob/living/H = host
+	H.status_flags &= ~PASSEMOTES
+
 	host = null
 
-	for(var/atom/A in H.contents)
-		if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
-			return
-	H.status_flags &= ~PASSEMOTES
+	return
 
 /mob/living/simple_animal/borer/verb/infest()
 	set category = "Alien"
@@ -408,8 +464,6 @@ mob/living/simple_animal/borer/proc/detatch()
 			var/datum/organ/external/head = H.get_organ("head")
 			head.implants += src
 
-		host_brain.name = M.name
-		host_brain.real_name = M.real_name
 		host.status_flags |= PASSEMOTES
 
 		return

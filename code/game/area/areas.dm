@@ -87,8 +87,6 @@
 			for(var/area/RA in related)
 				for(var/obj/machinery/camera/C in RA)
 					C.network.Remove("Atmosphere Alarms")
-				for (var/obj/machinery/alarm/AA in RA)
-					AA.update_icon()
 			for(var/mob/living/silicon/aiPlayer in player_list)
 				aiPlayer.cancelAlarm("Atmosphere", src, src)
 			for(var/obj/machinery/computer/station_alert/a in machines)
@@ -101,8 +99,6 @@
 				for(var/obj/machinery/camera/C in RA)
 					cameras += C
 					C.network.Add("Atmosphere Alarms")
-				for (var/obj/machinery/alarm/AA in RA)
-					AA.update_icon()
 			for(var/mob/living/silicon/aiPlayer in player_list)
 				aiPlayer.triggerAlarm("Atmosphere", src, cameras, src)
 			for(var/obj/machinery/computer/station_alert/a in machines)
@@ -110,6 +106,10 @@
 			air_doors_close()
 		
 		atmosalm = danger_level
+		for(var/area/RA in related)
+			for (var/obj/machinery/alarm/AA in RA)
+				AA.update_icon()
+		
 		return 1
 	return 0
 
