@@ -1815,13 +1815,13 @@
 				if("Ninja")
 					holder.icon_state = "hudninja"
 				if("head_loyalist")
-					holder.icon_state = "loyalist"
+					holder.icon_state = "hudloyalist"
 				if("loyalist")
-					holder.icon_state = "loyalist"
+					holder.icon_state = "hudloyalist"
 				if("head_mutineer")
-					holder.icon_state = "mutineer"
+					holder.icon_state = "hudmutineer"
 				if("mutineer")
-					holder.icon_state = "mutineer"
+					holder.icon_state = "hudmutineer"
 
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0

@@ -85,7 +85,8 @@
 				crewmemberData["fire"] = round(H.getFireLoss(), 1)
 				crewmemberData["brute"] = round(H.getBruteLoss(), 1)
 				crewmemberData["name"] = (H.wear_id ? H.wear_id.name : "Unknown")
-				crewmemberData["area"] = get_area(H)
+				var/area/A = get_area(H)
+				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
 				crewmemberData["y"] = pos.y
 
