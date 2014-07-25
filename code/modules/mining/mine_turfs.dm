@@ -99,7 +99,8 @@
 			icon_state = "rock"
 			return
 		name = "\improper [mineral.display_name] deposit"
-		icon_state = "rock_[mineral.name]"
+		overlays.Cut()
+		overlays += "rock_[mineral.name]"
 
 
 	//Not even going to touch this pile of spaghetti
@@ -356,7 +357,7 @@
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 5, "Iron" = 35, "Coal" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 10)
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
@@ -375,7 +376,7 @@
 
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 25)
+	mineralSpawnChanceList = list("Uranium" = 10, "Platinum" = 10, "Iron" = 20, "Coal" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 20)
 
 
 /**********************Asteroid**************************/
@@ -390,6 +391,7 @@
 	temperature = T0C
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	var/overlay_detail
 	has_resources = 1
 
 /turf/simulated/floor/plating/airless/asteroid/New()
@@ -400,7 +402,7 @@
 	//	seedName = pick(list("1","2","3","4"))
 	//	seedAmt = rand(1,4)
 	if(prob(20))
-		icon_state = "asteroid[rand(0,12)]"
+		overlay_detail = "asteroid[rand(0,9)]"
 	spawn(2)
 		updateMineralOverlays()
 
@@ -504,6 +506,17 @@
 /turf/simulated/floor/plating/airless/asteroid/proc/updateMineralOverlays()
 
 	overlays.Cut()
+
+	if(istype(get_step(src, NORTH), /turf/space))
+		overlays += image('icons/turf/floors.dmi', "asteroid_edge_north")
+	if(istype(get_step(src, SOUTH), /turf/space))
+		overlays += image('icons/turf/floors.dmi', "asteroid_edge_south")
+	if(istype(get_step(src, EAST), /turf/space))
+		overlays += image('icons/turf/floors.dmi', "asteroid_edge_east")
+	if(istype(get_step(src, WEST), /turf/space))
+		overlays += image('icons/turf/floors.dmi', "asteroid_edge_west")
+
+	if(overlay_detail) overlays += overlay_detail
 
 	if(istype(get_step(src, NORTH), /turf/simulated/mineral))
 		overlays += image('icons/turf/walls.dmi', "rock_side_n")

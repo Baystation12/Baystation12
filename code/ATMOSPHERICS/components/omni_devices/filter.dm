@@ -46,7 +46,7 @@
 	..()
 	if(!on)
 		return 0
-	
+
 	if(!input || !output)
 		return
 
@@ -54,7 +54,7 @@
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
 
 	var/output_pressure = output_air.return_pressure()
-	
+
 	if(output_pressure >= target_pressure)
 		return
 	for(var/datum/omni_port/P in filters)
@@ -63,63 +63,60 @@
 
 	var/pressure_delta = target_pressure - output_pressure
 
-	if(input_air.return_temperature() > 0)
-		input.transfer_moles = pressure_delta * output_air.volume / (input_air.return_temperature() * R_IDEAL_GAS_EQUATION)
+	if(input_air.temperature > 0)
+		input.transfer_moles = pressure_delta * output_air.volume / (input_air.temperature * R_IDEAL_GAS_EQUATION)
 
 	if(input.transfer_moles > 0)
 		var/datum/gas_mixture/removed = input_air.remove(input.transfer_moles)
-		
+
 		if(!removed)
 			return
-		
+
 		for(var/datum/omni_port/P in filters)
 			var/datum/gas_mixture/filtered_out = new
-			filtered_out.temperature = removed.return_temperature()
-			
+			filtered_out.temperature = removed.temperature
+
 			switch(P.mode)
 				if(ATM_O2)
-					filtered_out.oxygen = removed.oxygen
-					removed.oxygen = 0
+					filtered_out.gas["oxygen"] = removed.gas["oxygen"]
+					removed.gas["oxygen"] = null
 				if(ATM_N2)
-					filtered_out.nitrogen = removed.nitrogen
-					removed.nitrogen = 0
+					filtered_out.gas["nitrogen"] = removed.gas["nitrogen"]
+					removed.gas["nitrogen"] = null
 				if(ATM_CO2)
-					filtered_out.carbon_dioxide = removed.carbon_dioxide
-					removed.carbon_dioxide = 0
+					filtered_out.gas["carbon_dioxide"] = removed.gas["carbon_dioxide"]
+					removed.gas["carbon_dioxide"] = null
 				if(ATM_P)
-					filtered_out.phoron = removed.phoron
-					removed.phoron = 0
+					filtered_out.gas["phoron"] = removed.gas["phoron"]
+					removed.gas["phoron"] = null
 				if(ATM_N2O)
-					if(removed.trace_gases.len>0)
-						for(var/datum/gas/sleeping_agent/trace_gas in removed.trace_gases)
-							if(istype(trace_gas))
-								removed.trace_gases -= trace_gas
-								filtered_out.trace_gases += trace_gas
+					filtered_out.gas["sleeping_agent"] = removed.gas["sleeping_agent"]
+					removed.gas["sleeping_agent"] = null
 				else
 					filtered_out = null
-			
+
 			P.air.merge(filtered_out)
 			if(P.network)
 				P.network.update = 1
-		
+
 		output_air.merge(removed)
 		if(output.network)
 			output.network.update = 1
-		
+
 		input.transfer_moles = 0
 		if(input.network)
 			input.network.update = 1
 
 	return
 
-/obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	usr.set_machine(src)
 
 	var/list/data = new()
 
 	data = build_uidata()
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "omni_filter.tmpl", "Omni Filter Control", 330, 330)

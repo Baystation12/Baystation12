@@ -27,9 +27,11 @@ var/list/ai_list = list()
 	var/viewalerts = 0
 	var/lawcheck[1]
 	var/ioncheck[1]
+	var/lawchannel = "Common" // Default channel on which to state laws
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
+	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
 	var/custom_sprite = 0 //For our custom sprites
 //Hud stuff
 
@@ -87,12 +89,14 @@ var/list/ai_list = list()
 	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
+	aiRadio = new(src)
+	aiRadio.myAi = src
 
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
 		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light)
+		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/control_integrateed_radio)
 
 	//Languages
 	add_language("Sol Common", 0)
@@ -384,6 +388,13 @@ var/list/ai_list = list()
 			if ("Yes") lawcheck[L+1] = "No"
 			if ("No") lawcheck[L+1] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
+		checklaws()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in list("State","Common","Science","Command","Medical","Engineering","Security","Supply","Binary","Holopad", "Cancel")
+		if(setchannel == "Cancel")
+			return
+		lawchannel = setchannel
 		checklaws()
 
 	//Uncomment this line of code if you are enabling the AI Vocal (VOX) announcements.
@@ -737,3 +748,12 @@ var/list/ai_list = list()
 			return
 	else
 		return ..()
+
+/mob/living/silicon/ai/proc/control_integrateed_radio()
+	set name = "Radio Settings"
+	set desc = "Allows you to change settings of your radio."
+	set category = "AI Commands"
+
+	src << "Accessing Subspace Transceiver control..."
+	if (src.aiRadio)
+		src.aiRadio.interact(src)

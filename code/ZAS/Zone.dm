@@ -43,6 +43,7 @@ Class Procs:
 /zone/var/name
 /zone/var/invalid = 0
 /zone/var/list/contents = list()
+/zone/var/list/fire_tiles = list()
 
 /zone/var/needs_update = 0
 
@@ -67,6 +68,9 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
+	if(T.fire)
+		fire_tiles.Add(T)
+		air_master.active_fire_zones.Add(src)
 	T.set_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
@@ -77,6 +81,7 @@ Class Procs:
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
+	fire_tiles.Remove(T)
 	T.zone = null
 	T.set_graphic(0)
 	if(contents.len)
@@ -123,16 +128,16 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
-	air.archive()
 	if(air.check_tile_graphic())
 		for(var/turf/simulated/T in contents)
 			T.set_graphic(air.graphic)
 
 /zone/proc/dbg_data(mob/M)
 	M << name
-	M << "O2: [air.oxygen] N2: [air.nitrogen] CO2: [air.carbon_dioxide] P: [air.phoron]"
+	for(var/g in air.gas)
+		M << "[gas_data.name[g]]: [air.gas[g]]"
 	M << "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)"
-	M << "O2 per N2: [(air.nitrogen ? air.oxygen/air.nitrogen : "N/A")] Moles: [air.total_moles]"
+	M << "O2 per N2: [(air.gas["nitrogen"] ? air.gas["oxygen"]/air.gas["nitrogen"] : "N/A")] Moles: [air.total_moles]"
 	M << "Simulated: [contents.len] ([air.group_multiplier])"
 	//M << "Unsimulated: [unsimulated_contents.len]"
 	//M << "Edges: [edges.len]"

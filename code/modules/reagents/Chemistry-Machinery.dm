@@ -104,7 +104,7 @@
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	if(broken_requirements.len)
 		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
 		return
@@ -114,8 +114,8 @@
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["amount"] = amount
-	data["energy"] = energy
-	data["maxEnergy"] = max_energy
+	data["energy"] = round(energy)
+	data["maxEnergy"] = round(max_energy)
 	data["isBeakerLoaded"] = beaker ? 1 : 0
 	data["glass"] = accept_glass
 	var beakerContents[0]
@@ -141,7 +141,7 @@
 	data["chemicals"] = chemicals
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

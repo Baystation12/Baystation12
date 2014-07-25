@@ -52,8 +52,10 @@
 	icon_state = "soapnt"
 
 /obj/item/weapon/soap/deluxe
-	desc = "A deluxe Waffle Co. brand bar of soap. Smells of condoms."
 	icon_state = "soapdeluxe"
+    
+/obj/item/weapon/soap/deluxe/New()
+	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
 
 /obj/item/weapon/soap/syndie
 	desc = "An untrustworthy bar of soap. Smells of fear."
@@ -162,7 +164,7 @@
 		icon_state = "beartrap[armed]"
 		user << "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>"
 
-/obj/item/weapon/legcuffs/beartrap/HasEntered(AM as mob|obj)
+/obj/item/weapon/legcuffs/beartrap/Crossed(AM as mob|obj)
 	if(armed)
 		if(ishuman(AM))
 			if(isturf(src.loc))
