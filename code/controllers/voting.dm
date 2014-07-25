@@ -300,7 +300,9 @@ datum/controller/vote
 			if(question)	. += "<h2>Vote: '[question]'</h2>"
 			else			. += "<h2>Vote: [capitalize(mode)]</h2>"
 			. += "Time Left: [time_remaining] s<hr>"
-			. += "<table width = '100%'><tr><td align = 'center'><b>Mode</b></td><td align = 'center'><b>Votes</b></td><td align = 'center'><b>Needs Players</b></td></b></tr>"
+			. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td align = 'center'><b>Votes</b></td>"
+			if(capitalize(mode) == "Gamemode") .+= "<td align = 'center'><b>Minimum Players</b></td></b></tr>"
+
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
