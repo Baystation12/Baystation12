@@ -671,7 +671,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-	//verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
 
 	s_initialized=1
 	slowdown=0
