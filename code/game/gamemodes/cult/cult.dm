@@ -99,7 +99,7 @@
 		update_cult_icons_added(cult_mind)
 		cult_mind.current << "\blue You are a member of the cult!"
 		if(!config.objectives_disabled)
-			memoize_cult_objectives(cult_mind)
+			memorize_cult_objectives(cult_mind)
 		else
 			cult_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 		cult_mind.special_role = "Cultist"
@@ -109,7 +109,7 @@
 	..()
 
 
-/datum/game_mode/cult/proc/memoize_cult_objectives(var/datum/mind/cult_mind)
+/datum/game_mode/cult/proc/memorize_cult_objectives(var/datum/mind/cult_mind)
 	for(var/obj_count = 1,obj_count <= objectives.len,obj_count++)
 		var/explanation
 		switch(objectives[obj_count])
@@ -186,7 +186,7 @@
 	if (!..(cult_mind))
 		return
 	if (!config.objectives_disabled)
-		memoize_cult_objectives(cult_mind)
+		memorize_cult_objectives(cult_mind)
 
 
 /datum/game_mode/proc/remove_cultist(datum/mind/cult_mind, show_message = 1)

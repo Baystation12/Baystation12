@@ -249,6 +249,10 @@
 		if(istype(mob.buckled, /obj/vehicle))
 			return mob.buckled.relaymove(mob,direct)
 
+		if(istype(mob.machine, /obj/machinery))
+			if(mob.machine.relaymove(mob,direct))
+				return
+
 		if(mob.pulledby || mob.buckled) // Wheelchair driving!
 			if(istype(mob.loc, /turf/space))
 				return // No wheelchair driving in space
