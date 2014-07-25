@@ -16,80 +16,78 @@
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 
-	attack_self(mob/user as mob)
-		if(brainmob && !brainmob.key && searching == 0)
-			//Start the process of searching for a new user.
-			user << "\blue You carefully locate the manual activation switch and start the positronic brain's boot process."
-			icon_state = "posibrain-searching"
-			src.searching = 1
-			src.request_player()
-			spawn(600) reset_search()
+/obj/item/device/mmi/posibrain/attack_self(mob/user as mob)
+	if(brainmob && !brainmob.key && searching == 0)
+		//Start the process of searching for a new user.
+		user << "\blue You carefully locate the manual activation switch and start the positronic brain's boot process."
+		icon_state = "posibrain-searching"
+		src.searching = 1
+		src.request_player()
+		spawn(600) reset_search()
 
-	proc/request_player()
-		for(var/mob/dead/observer/O in player_list)
-			if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-				continue
-			if(jobban_isbanned(O, "pAI"))
-				continue
-			if(O.client)
-				if(O.client.prefs.be_special & BE_PAI)
-					question(O.client)
+/obj/item/device/mmi/posibrain/proc/request_player()
+	for(var/mob/dead/observer/O in player_list)
+		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+			continue
+		if(jobban_isbanned(O, "pAI"))
+			continue
+		if(O.client)
+			if(O.client.prefs.be_special & BE_PAI)
+				question(O.client)
 
-	proc/question(var/client/C)
-		spawn(0)
-			if(!C)	return
-			var/response = alert(C, "Someone is requesting a personality for a positronic brain. Would you like to play as one?", "Positronic brain request", "Yes", "No", "Never for this round")
-			if(!C || brainmob.key || 0 == searching)	return		//handle logouts that happen whilst the alert is waiting for a response, and responses issued after a brain has been located.
-			if(response == "Yes")
-				transfer_personality(C.mob)
-			else if (response == "Never for this round")
-				C.prefs.be_special ^= BE_PAI
+/obj/item/device/mmi/posibrain/proc/question(var/client/C)
+	spawn(0)
+		if(!C)	return
+		var/response = alert(C, "Someone is requesting a personality for a positronic brain. Would you like to play as one?", "Positronic brain request", "Yes", "No", "Never for this round")
+		if(!C || brainmob.key || 0 == searching)	return		//handle logouts that happen whilst the alert is waiting for a response, and responses issued after a brain has been located.
+		if(response == "Yes")
+			transfer_personality(C.mob)
+		else if (response == "Never for this round")
+			C.prefs.be_special ^= BE_PAI
 
 
-	transfer_identity(var/mob/living/carbon/H)
-		name = "positronic brain ([H])"
-		brainmob.name = H.real_name
-		brainmob.real_name = H.real_name
-		brainmob.dna = H.dna
-		brainmob.timeofhostdeath = H.timeofdeath
-		brainmob.stat = 0
-		if(brainmob.mind)
-			brainmob.mind.assigned_role = "Positronic Brain"
-		if(H.mind)
-			H.mind.transfer_to(brainmob)
-		brainmob << "\blue You feel slightly disoriented. That's normal when you're just a metal cube."
-		icon_state = "posibrain-occupied"
-		return
+/obj/item/device/mmi/posibrain/transfer_identity(var/mob/living/carbon/H)
+	name = "positronic brain ([H])"
+	brainmob.name = H.real_name
+	brainmob.real_name = H.real_name
+	brainmob.dna = H.dna
+	brainmob.timeofhostdeath = H.timeofdeath
+	brainmob.stat = 0
+	if(brainmob.mind)
+		brainmob.mind.assigned_role = "Positronic Brain"
+	if(H.mind)
+		H.mind.transfer_to(brainmob)
+	brainmob << "\blue You feel slightly disoriented. That's normal when you're just a metal cube."
+	icon_state = "posibrain-occupied"
+	return
 
-	proc/transfer_personality(var/mob/candidate)
+/obj/item/device/mmi/posibrain/proc/transfer_personality(var/mob/candidate)
 
-		src.searching = 0
-		src.brainmob.mind = candidate.mind
-		//src.brainmob.key = candidate.key
-		src.brainmob.ckey = candidate.ckey
-		src.name = "positronic brain ([src.brainmob.name])"
+	src.searching = 0
+	src.brainmob.mind = candidate.mind
+	src.brainmob.ckey = candidate.ckey
+	src.name = "positronic brain ([src.brainmob.name])"
+	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
+	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
+	src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
+	src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
+	src.brainmob.mind.assigned_role = "Positronic Brain"
 
-		src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
-		src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
-		src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-		src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
-		src.brainmob.mind.assigned_role = "Positronic Brain"
+	var/turf/T = get_turf_or_move(src.loc)
+	for (var/mob/M in viewers(T))
+		M.show_message("\blue The positronic brain chimes quietly.")
+	icon_state = "posibrain-occupied"
 
-		var/turf/T = get_turf_or_move(src.loc)
-		for (var/mob/M in viewers(T))
-			M.show_message("\blue The positronic brain chimes quietly.")
-		icon_state = "posibrain-occupied"
+/obj/item/device/mmi/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
 
-	proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+	if(src.brainmob && src.brainmob.key) return
 
-		if(src.brainmob && src.brainmob.key) return
+	src.searching = 0
+	icon_state = "posibrain"
 
-		src.searching = 0
-		icon_state = "posibrain"
-
-		var/turf/T = get_turf_or_move(src.loc)
-		for (var/mob/M in viewers(T))
-			M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
+	var/turf/T = get_turf_or_move(src.loc)
+	for (var/mob/M in viewers(T))
+		M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
 
 /obj/item/device/mmi/posibrain/examine()
 
