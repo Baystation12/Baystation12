@@ -1271,7 +1271,6 @@
 #include "code\modules\research\xenoarchaeology\finds\finds_talkingitem.dm"
 #include "code\modules\research\xenoarchaeology\genetics\prehistoric_animals.dm"
 #include "code\modules\research\xenoarchaeology\genetics\prehistoric_plants.dm"
-#include "code\modules\research\xenoarchaeology\genetics\prehistoric_seeds.dm"
 #include "code\modules\research\xenoarchaeology\genetics\reconstitutor.dm"
 #include "code\modules\research\xenoarchaeology\machinery\artifact_analyser.dm"
 #include "code\modules\research\xenoarchaeology\machinery\artifact_harvester.dm"

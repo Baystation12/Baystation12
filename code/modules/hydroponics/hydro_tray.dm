@@ -191,10 +191,11 @@
 	var/turf/T = loc
 	var/datum/gas_mixture/environment
 
+	//TODO: Fix this. Dev atmos changes impacted it most likely.
 	// If we're a closed system, take from any connected network.
-	if(closed_system && atmos_source)
-		if(atmos_source.network)
-			environment = atmos_source.network.air_transient
+	//if(closed_system && atmos_source)
+	//	if(atmos_source.network)
+	//		environment = atmos_source.network.air_transient
 
 	// If atmos input is not there, grab from turf.
 	if(!environment)
