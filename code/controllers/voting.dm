@@ -217,7 +217,7 @@ datum/controller/vote
 						for (var/T in L)
 							var/datum/game_mode/M = new T()
 							if (M.config_tag == F)
-								additional_text.Add(" - [M.required_players] players required")
+								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 								break
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
@@ -299,20 +299,22 @@ datum/controller/vote
 		if(mode)
 			if(question)	. += "<h2>Vote: '[question]'</h2>"
 			else			. += "<h2>Vote: [capitalize(mode)]</h2>"
-			. += "Time Left: [time_remaining] s<hr><ul>"
+			. += "Time Left: [time_remaining] s<hr>"
+			. += "<table width = '100%'><tr><td align = 'center'><b>Mode</b></td><td align = 'center'><b>Votes</b></td><td align = 'center'><b>Needs Players</b></td></b></tr>"
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
+				. += "<tr>"
 				if(current_votes[C.ckey] == i)
-					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></b>"
+					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 				else
-					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a>"
+					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 
 				if (additional_text.len >= i)
 					. += additional_text[i]
-				. += "</li>"
+				. += "</tr>"
 
-			. += "</ul><hr>"
+			. += "</table><hr>"
 			if(admin)
 				. += "(<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a>) "
 		else
