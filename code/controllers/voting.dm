@@ -12,6 +12,7 @@ datum/controller/vote
 	var/list/voted = list()
 	var/list/voting = list()
 	var/list/current_votes = list()
+	var/list/additional_text = list()
 	var/auto_muted = 0
 
 	New()
@@ -63,6 +64,7 @@ datum/controller/vote
 		voted.Cut()
 		voting.Cut()
 		current_votes.Cut()
+		additional_text.Cut()
 
 	/*	if(auto_muted && !ooc_allowed)
 			auto_muted = 0
@@ -210,6 +212,13 @@ datum/controller/vote
 					if(ticker.current_state >= 2)
 						return 0
 					choices.Add(config.votable_modes)
+					var/list/L = typesof(/datum/game_mode) - /datum/game_mode
+					for (var/F in choices)
+						for (var/T in L)
+							var/datum/game_mode/M = new T()
+							if (M.config_tag == F)
+								additional_text.Add(" - [M.required_players] players required")
+								break
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
@@ -295,9 +304,13 @@ datum/controller/vote
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
 				if(current_votes[C.ckey] == i)
-					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></b></li>"
+					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></b>"
 				else
-					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></li>"
+					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a>"
+
+				if (additional_text.len >= i)
+					. += additional_text[i]
+				. += "</li>"
 
 			. += "</ul><hr>"
 			if(admin)
