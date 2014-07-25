@@ -16,7 +16,6 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
 #define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN_DAMAGE are for when a mob breathes poisonous air
 #define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN_DAMAGE are for when a mob breathes poisonous air
 
@@ -134,6 +133,11 @@
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
+
+//XGM gas flags
+#define XGM_GAS_FUEL 1
+#define XGM_GAS_OXIDIZER 2
+#define XGM_GAS_CONTAMINANT 4
 
 //Used to be used by FEA
 //var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.

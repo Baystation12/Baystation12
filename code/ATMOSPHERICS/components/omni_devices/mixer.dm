@@ -9,7 +9,7 @@
 	var/datum/omni_port/output
 
 	//setup tags for initial concentration values (must be decimal)
-	var/tag_north_con 
+	var/tag_north_con
 	var/tag_south_con
 	var/tag_east_con
 	var/tag_west_con
@@ -101,22 +101,22 @@
 	var/pressure_delta = target_pressure - output_pressure
 
 	for(var/datum/omni_port/P in inputs)
-		if(P.air.return_temperature() > 0)
-			P.transfer_moles = (P.concentration * pressure_delta) * output_air.return_volume() / (P.air.return_temperature() * R_IDEAL_GAS_EQUATION)
+		if(P.air.temperature > 0)
+			P.transfer_moles = (P.concentration * pressure_delta) * output_air.volume / (P.air.temperature * R_IDEAL_GAS_EQUATION)
 
 	var/ratio_check = null
 
 	for(var/datum/omni_port/P in inputs)
 		if(!P.transfer_moles)
 			return
-		if(P.air.total_moles() < P.transfer_moles)
+		if(P.air.total_moles < P.transfer_moles)
 			ratio_check = 1
 			continue
 
 	if(ratio_check)
 		var/list/ratio_list = new()
 		for(var/datum/omni_port/P in inputs)
-			ratio_list.Add(P.air.total_moles() / P.transfer_moles)
+			ratio_list.Add(P.air.total_moles / P.transfer_moles)
 
 		var/ratio = min(ratio_list)
 

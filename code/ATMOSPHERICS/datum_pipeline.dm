@@ -37,22 +37,9 @@ datum/pipeline
 
 		for(var/obj/machinery/atmospherics/pipe/member in members)
 			member.air_temporary = new
+			member.air_temporary.copy_from(air)
 			member.air_temporary.volume = member.volume
-
-			member.air_temporary.oxygen = air.oxygen*member.volume/air.volume
-			member.air_temporary.nitrogen = air.nitrogen*member.volume/air.volume
-			member.air_temporary.phoron = air.phoron*member.volume/air.volume
-			member.air_temporary.carbon_dioxide = air.carbon_dioxide*member.volume/air.volume
-
-			member.air_temporary.temperature = air.temperature
-
-			if(air.trace_gases.len)
-				for(var/datum/gas/trace_gas in air.trace_gases)
-					var/datum/gas/corresponding = new trace_gas.type()
-					member.air_temporary.trace_gases += corresponding
-
-					corresponding.moles = trace_gas.moles*member.volume/air.volume
-			member.air_temporary.update_values()
+			member.air_temporary.multiply(member.volume / air.volume)
 
 	proc/build_pipeline(obj/machinery/atmospherics/pipe/base)
 		air = new
@@ -213,7 +200,7 @@ datum/pipeline
 				air.temperature -= heat/total_heat_capacity
 		if(network)
 			network.update = 1
-			
+
 	proc/radiate_heat(surface, thermal_conductivity)
 		var/total_heat_capacity = air.heat_capacity()
 		var/heat = STEFAN_BOLTZMANN_CONSTANT * surface * air.temperature ** 4 * thermal_conductivity

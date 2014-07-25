@@ -13,25 +13,6 @@
 		living_mob_list += src
 	..()
 
-/mob/proc/Cell()
-	set category = "Admin"
-	set hidden = 1
-
-	if(!loc) return 0
-
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/t = "\blue Coordinates: [x],[y] \n"
-	t+= "\red Temperature: [environment.temperature] \n"
-	t+= "\blue Nitrogen: [environment.nitrogen] \n"
-	t+= "\blue Oxygen: [environment.oxygen] \n"
-	t+= "\blue Phoron : [environment.phoron] \n"
-	t+= "\blue Carbon Dioxide: [environment.carbon_dioxide] \n"
-	for(var/datum/gas/trace_gas in environment.trace_gases)
-		usr << "\blue [trace_gas.type]: [trace_gas.moles] \n"
-
-	usr.show_message(t, 1)
-
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
 	if(!client)	return
