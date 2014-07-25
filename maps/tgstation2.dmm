@@ -614,7 +614,7 @@
 "alP" = (/obj/structure/grille,/obj/structure/lattice,/turf/space,/area)
 "alQ" = (/obj/structure/grille,/turf/space,/area)
 "alR" = (/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/hallway/primary/fore)
-"alS" = (/obj/structure/stool,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
+"alS" = (/obj/structure/stool,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/effect/landmark/start{name = "Detective"},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
 "alT" = (/obj/structure/stool/bed/chair,/obj/machinery/computer/security/telescreen{layer = 4; name = "Observation Screen"; network = list("Interrogation"); pixel_x = 0; pixel_y = -32},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/brig)
 "alU" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9; pixel_y = 0},/turf/simulated/floor{icon_state = "dark"},/area/security/warden)
 "alV" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/security/range)
