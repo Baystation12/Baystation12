@@ -13,8 +13,10 @@
 
 	if(reagents.has_reagent("nuka_cola")) return -1
 
-	var/health_deficiency = (100 - health + halloss)
+	var/health_deficiency = (100 - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
+
+	if(halloss >= 10) tally += (halloss / 10)
 
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
@@ -35,7 +37,7 @@
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 
-	if(pulledby && istype(pulledby, /obj/structure/stool/bed/chair/wheelchair))
+	if(buckled && istype(buckled, /obj/structure/stool/bed/chair/wheelchair))
 		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
 			var/datum/organ/external/E = get_organ(organ_name)
 			if(!E || (E.status & ORGAN_DESTROYED))

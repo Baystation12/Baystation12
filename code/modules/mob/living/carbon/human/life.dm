@@ -132,7 +132,7 @@
 //Much like get_heat_protection(), this returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 /mob/living/carbon/human/proc/get_pressure_protection()
 	var/pressure_adjustment_coefficient = 1	//Determins how much the clothing you are wearing protects you in percent.
-	
+
 	if(head && (head.flags & STOPSPRESSUREDMAGE))
 		pressure_adjustment_coefficient -= PRESSURE_HEAD_REDUCTION_COEFFICIENT
 
@@ -145,9 +145,9 @@
 			if(S.can_breach && S.damage)
 				var/pressure_loss = S.damage * 0.1
 				pressure_adjustment_coefficient += pressure_loss
-	
+
 	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) //So it isn't less than 0 or larger than 1.
-	
+
 	return 1 - pressure_adjustment_coefficient	//want 0 to be bad protection, 1 to be good protection
 
 /mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
@@ -261,9 +261,11 @@
 		if (radiation)
 			if (radiation > 100)
 				radiation = 100
-				Weaken(10)
-				src << "\red You feel weak."
-				emote("collapse")
+				if(!(species.flags & RAD_ABSORB))
+					Weaken(10)
+					if(!lying)
+						src << "\red You feel weak."
+						emote("collapse")
 
 			if (radiation < 0)
 				radiation = 0
@@ -296,8 +298,9 @@
 						if(prob(5))
 							radiation -= 5
 							Weaken(3)
-							src << "\red You feel weak."
-							emote("collapse")
+							if(!lying)
+								src << "\red You feel weak."
+								emote("collapse")
 						updatehealth()
 
 					if(75 to 100)
@@ -464,7 +467,7 @@
 		var/exhaling
 		var/poison
 		var/no_exhale
-		
+
 		var/failed_inhale = 0
 		var/failed_exhale = 0
 
@@ -555,30 +558,30 @@
 			if (!co2_alert|| prob(15))
 				var/word = pick("extremely dizzy","short of breath","faint","confused")
 				src << "\red <b>You feel [word].</b>"
-			
+
 			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 			co2_alert = 1
 			failed_exhale = 1
-			
+
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
 			if (!co2_alert || prob(1))
 				var/word = pick("dizzy","short of breath","faint","momentarily confused")
 				src << "\red You feel [word]."
-			
+
 			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
-			
+
 			//give them some oxyloss, up to the limit - we don't want people falling unconcious due to CO2 alone until they're pretty close to safe_exhaled_max.
 			if (getOxyLoss() < 50*ratio)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 			co2_alert = 1
 			failed_exhale = 1
-			
+
 		else if(exhaled_pp > safe_exhaled_max * 0.6)
 			if (prob(0.3))
 				var/word = pick("a little dizzy","short of breath")
 				src << "\red You feel [word]."
-			
+
 		else
 			co2_alert = 0
 
@@ -611,16 +614,16 @@
 					if(prob(20))
 						spawn(0) emote(pick("giggle", "laugh"))
 				SA.moles = 0
-		
+
 		// Were we able to breathe?
 		if (failed_inhale || failed_exhale)
 			failed_last_breath = 1
 		else
 			failed_last_breath = 0
 			adjustOxyLoss(-5)
-		
+
 		// Hot air hurts :(
-		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations)) 
+		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
 
 			if(status_flags & GODMODE)
 				return 1
@@ -651,17 +654,17 @@
 				if(species.heat_level_3 to INFINITY)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-			
+
 			//breathing in hot/cold air also heats/cools you a bit
 			var/temp_adj = breath.temperature - bodytemperature
 			if (temp_adj < 0)
 				temp_adj /= (BODYTEMP_COLD_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
 			else
 				temp_adj /= (BODYTEMP_HEAT_DIVISOR * 5)	//don't raise temperature as much as if we were directly exposed
-			
+
 			var/relative_density = breath.total_moles() / (MOLES_CELLSTANDARD * BREATH_PERCENTAGE)
 			temp_adj *= relative_density
-			
+
 			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
@@ -699,11 +702,11 @@
 				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
 					temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
-			
+
 			//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
 			var/relative_density = environment.total_moles() / MOLES_CELLSTANDARD
 			temp_adj *= relative_density
-			
+
 			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
@@ -783,17 +786,17 @@
 		temp_change = (temperature - current)
 		return temp_change
 	*/
-	
+
 	proc/stabilize_body_temperature()
 		if (species.flags & IS_SYNTHETIC)
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
 			return
-	
+
 		var/body_temperature_difference = species.body_temperature - bodytemperature
-		
+
 		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
-		
+
 		if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 			if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
 				nutrition -= 2
@@ -991,19 +994,18 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
-			var/alien = 0 //Not the best way to handle it, but neater than checking this for every single reagent proc.
-			if(species && species.name == "Diona")
-				alien = 1
-			else if(species && species.name == "Vox")
-				alien = 2
+			var/alien = 0
+			if(species && species.reagent_tag)
+				alien = species.reagent_tag
 			reagents.metabolize(src,alien)
 
-		var/total_phoronloss = 0
-		for(var/obj/item/I in src)
-			if(I.contaminated)
-				total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+			var/total_phoronloss = 0
+			for(var/obj/item/I in src)
+				if(I.contaminated)
+					total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+			if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
+
 		if(status_flags & GODMODE)	return 0	//godmode
-		adjustToxLoss(total_phoronloss)
 
 		if(species.flags & REQUIRE_LIGHT)
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
@@ -1473,7 +1475,7 @@
 					var/temp_step
 					if (bodytemperature >= species.body_temperature)
 						temp_step = (species.heat_level_1 - species.body_temperature)/4
-						
+
 						if (bodytemperature >= species.heat_level_1)
 							bodytemp.icon_state = "temp4"
 						else if (bodytemperature >= species.body_temperature + temp_step*3)
@@ -1484,10 +1486,10 @@
 							bodytemp.icon_state = "temp1"
 						else
 							bodytemp.icon_state = "temp0"
-						
+
 					else if (bodytemperature < species.body_temperature)
 						temp_step = (species.body_temperature - species.cold_level_1)/4
-						
+
 						if (bodytemperature <= species.cold_level_1)
 							bodytemp.icon_state = "temp-4"
 						else if (bodytemperature <= species.body_temperature - temp_step*3)
@@ -1843,13 +1845,13 @@
 				if("Ninja")
 					holder.icon_state = "hudninja"
 				if("head_loyalist")
-					holder.icon_state = "loyalist"
+					holder.icon_state = "hudloyalist"
 				if("loyalist")
-					holder.icon_state = "loyalist"
+					holder.icon_state = "hudloyalist"
 				if("head_mutineer")
-					holder.icon_state = "mutineer"
+					holder.icon_state = "hudmutineer"
 				if("mutineer")
-					holder.icon_state = "mutineer"
+					holder.icon_state = "hudmutineer"
 
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0

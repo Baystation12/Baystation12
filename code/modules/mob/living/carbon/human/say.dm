@@ -14,7 +14,9 @@
 	if(stat == 2)
 		return say_dead(message)
 
-	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))  //Todo:  Add this to speech_problem_flag checks.
+	var/message_mode = parse_message_mode(message, "headset")
+
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle) && message_mode != "changeling")  //Todo:  Add this to speech_problem_flag checks.
 		return
 
 	if(copytext(message,1,2) == "*")
@@ -22,21 +24,20 @@
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
-	
+
 	//parse the radio code and consume it
-	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
 			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
 			message = copytext(message,3)
-	
+
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
-	
+
 	message = capitalize(trim(message))
 
 	if(speech_problem_flag)
@@ -121,13 +122,13 @@
 					else if(r_ear && istype(r_ear,/obj/item/device/radio))
 						r_ear.talk_into(src,message, message_mode, verb, speaking)
 						used_radios += r_ear
-	
+
 	var/sound/speech_sound
 	var/sound_vol
 	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
 		speech_sound = sound('sound/voice/shriek1.ogg')
 		sound_vol = 50
-	
+
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
 
 /mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
@@ -146,7 +147,7 @@
 			return 1
 		if (istype(other, /mob/living/carbon/slime))
 			return 1
-	
+
 	//This is already covered by mob/say_understands()
 	//if (istype(other, /mob/living/simple_animal))
 	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
@@ -181,7 +182,7 @@
 	return special_voice
 
 
-/* 
+/*
    ***Deprecated***
    let this be handled at the hear_say or hear_radio proc
    This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
@@ -200,7 +201,7 @@
 
 	return verb
 
-	
+
 
 
 /mob/living/carbon/human/proc/handle_speech_problems(var/message)

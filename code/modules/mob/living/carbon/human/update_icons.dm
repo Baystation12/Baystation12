@@ -113,13 +113,13 @@ Please contact me on #coderbus IRC. ~Carn x
 #define ID_LAYER				6
 #define SHOES_LAYER				7
 #define GLOVES_LAYER			8
-#define EARS_LAYER				9
-#define SUIT_LAYER				10
-#define GLASSES_LAYER			11
-#define BELT_LAYER				12		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		13
-#define BACK_LAYER				14
-#define HAIR_LAYER				15		//TODO: make part of head layer?
+#define SUIT_LAYER				9
+#define GLASSES_LAYER			10
+#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		12
+#define BACK_LAYER				13
+#define HAIR_LAYER				14		//TODO: make part of head layer?
+#define EARS_LAYER				15
 #define FACEMASK_LAYER			16
 #define HEAD_LAYER				17
 #define COLLAR_LAYER			18
@@ -639,6 +639,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
+	overlays_standing[EARS_LAYER] = null
+	if( (head && (head.flags & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags & (BLOCKHAIR | BLOCKHEADHAIR))))
+		if(update_icons)   update_icons()
+		return
+
 	if(l_ear || r_ear)
 		if(l_ear)
 
@@ -863,9 +868,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(r_hand.icon_override)
 			t_state = "[t_state]_r"
 			overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.icon_override, "icon_state" = "[t_state]")
-		else if(r_hand.sprite_sheets && r_hand.sprite_sheets[species.name])
-			t_state = "[t_state]_r"
-			overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.sprite_sheets[species.name], "icon_state" = "[t_state]")
 		else
 			overlays_standing[R_HAND_LAYER] = image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = "[t_state]")
 
@@ -884,9 +886,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(l_hand.icon_override)
 			t_state = "[t_state]_l"
 			overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.icon_override, "icon_state" = "[t_state]")
-		else if(l_hand.sprite_sheets && l_hand.sprite_sheets[species.name])
-			t_state = "[t_state]_l"
-			overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.sprite_sheets[species.name], "icon_state" = "[t_state]")
 		else
 			overlays_standing[L_HAND_LAYER] = image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = "[t_state]")
 

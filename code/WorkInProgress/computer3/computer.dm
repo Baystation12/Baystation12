@@ -75,6 +75,15 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
+		
+		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
+			usr << "\red You can't do that."
+			return
+		
+		if(!Adjacent(usr))
+			usr << "You can't reach it."
+			return
+		
 		Reset()
 
 	New(var/L, var/built = 0)
@@ -439,6 +448,16 @@
 			if(show_keyboard)
 				overlays += kb
 			name = initial(name) + " (orange screen of death)"
+
+	//Returns percentage of battery charge remaining. Returns -1 if no battery is installed.
+	proc/check_battery_status()
+		if (battery)
+			var/obj/item/weapon/cell/B = battery
+			return round(B.charge / (B.maxcharge / 100))
+		else
+			return -1
+
+
 
 /obj/machinery/computer3/wall_comp
 	name			= "terminal"

@@ -72,11 +72,11 @@
 
 	if (src.stat == 2)		//Dead
 		return 1
-	
+
 	//Universal speak makes everything understandable, for obvious reasons.
 	else if(src.universal_speak || src.universal_understand)
 		return 1
-	
+
 	//Languages are handled after.
 	if (!speaking)
 		if(!other)
@@ -88,43 +88,33 @@
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
 		return 0
-	
+
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
 			return 1
-	
+
 	return 0
 
-/mob/proc/say_quote(var/text,var/datum/language/speaking)
+/*
+   ***Deprecated***
+   let this be handled at the hear_say or hear_radio proc
+   This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
+   robot_talk() proc.
+   There is no language handling build into it however there is at the /mob level so we accept the call
+   for it but just ignore it.
+*/
 
-	if(!text)
-		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
-		//tcomms code is still runtiming somewhere here
-	var/ending = copytext(text, length(text))
+/mob/proc/say_quote(var/message, var/datum/language/speaking = null)
+        var/verb = "says"
+        var/ending = copytext(message, length(message))
+        if(ending=="!")
+                verb=pick("exclaims","shouts","yells")
+        else if(ending=="?")
+                verb="asks"
 
-	var/speech_verb = "says"
-	var/speech_style = "body"
+        return verb
 
-	if (speaking)
-		speech_verb = speaking.speech_verb
-		speech_style = speaking.colour
-	else if(speak_emote && speak_emote.len)
-		speech_verb = pick(speak_emote)
-	else if (src.stuttering)
-		speech_verb = "stammers"
-	else if (src.slurring)
-		speech_verb = "slurrs"
-	else if (ending == "?")
-		speech_verb = "asks"
-	else if (ending == "!")
-		speech_verb = "exclaims"
-	else if(isliving(src))
-		var/mob/living/L = src
-		if (L.getBrainLoss() >= 60)
-			speech_verb = "gibbers"
-
-	return "<span class='say_quote'>[speech_verb],</span> \"<span class='[speech_style]'>[text]</span>\""
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")
@@ -156,7 +146,7 @@
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
 		return department_radio_keys[channel_prefix]
-	
+
 	return null
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
@@ -167,6 +157,6 @@
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L
-	
+
 	return null
 

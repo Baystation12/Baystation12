@@ -63,7 +63,7 @@ var/list/event_last_fired = list()
 	possibleEvents[/datum/event/ionstorm] = active_with_role["AI"] * 25 + active_with_role["Cyborg"] * 25 + active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
 	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
+	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Gardener"]
 
 	if(!spacevines_spawned)
 		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role["Engineer"]
@@ -72,12 +72,10 @@ var/list/event_last_fired = list()
 		possibleEvents[/datum/event/meteor_shower] = 20 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/blob] = 10 * active_with_role["Engineer"]
 
-	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 15
 	if(active_with_role["Medical"] > 0)
 		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
 		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
-		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 20
-		possibleEvents[/datum/event/organ_failure] = active_with_role["Medical"] * 50
+		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 10
 
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
 	if(active_with_role["Security"] > 0)
@@ -190,7 +188,7 @@ var/list/event_last_fired = list()
 	active_with_role["AI"] = 0
 	active_with_role["Cyborg"] = 0
 	active_with_role["Janitor"] = 0
-	active_with_role["Botanist"] = 0
+	active_with_role["Gardener"] = 0
 
 	for(var/mob/M in player_list)
 		if(!M.mind || !M.client || M.client.inactivity > 10 * 10 * 60) // longer than 10 minutes AFK counts them as inactive
@@ -223,7 +221,7 @@ var/list/event_last_fired = list()
 		if(M.mind.assigned_role == "Janitor")
 			active_with_role["Janitor"]++
 
-		if(M.mind.assigned_role == "Botanist")
-			active_with_role["Botanist"]++
+		if(M.mind.assigned_role == "Gardener")
+			active_with_role["Gardener"]++
 
 	return active_with_role

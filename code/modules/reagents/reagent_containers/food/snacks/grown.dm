@@ -731,7 +731,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato/HasEntered(AM as mob|obj)
 	if (istype(AM, /mob/living/carbon))
 		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (isobj(M:shoes) && M:shoes.flags&NOSLIP))
+		if (istype(M, /mob/living/carbon/human) && (isobj(M:shoes) && M:shoes.flags&NOSLIP) || M.buckled)
 			return
 
 		M.stop_pulling()

@@ -73,6 +73,12 @@
 
 				bloodDNA = null
 
+		var/noslip = 0
+		for (var/obj/structure/stool/bed/chair/C in loc)
+			if (C.buckled_mob == M)
+				noslip = 1
+		if (noslip)
+			return // no slipping while sitting in a chair, plz
 		switch (src.wet)
 			if(1)
 				if(istype(M, /mob/living/carbon/human)) // Added check since monkeys don't have shoes
@@ -99,7 +105,7 @@
 						return
 
 			if(2) //lube                //can cause infinite loops - needs work
-				if(!istype(M, /mob/living/carbon/slime))
+				if(!istype(M, /mob/living/carbon/slime) && !M.buckled)
 					M.stop_pulling()
 					step(M, M.dir)
 					spawn(1) step(M, M.dir)

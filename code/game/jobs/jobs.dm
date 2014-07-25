@@ -87,7 +87,7 @@ var/list/science_positions = list(
 var/list/civilian_positions = list(
 	"Head of Personnel",
 	"Bartender",
-	"Botanist",
+	"Gardener",
 	"Chef",
 	"Janitor",
 	"Librarian",

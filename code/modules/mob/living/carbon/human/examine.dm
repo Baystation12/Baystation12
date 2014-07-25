@@ -237,9 +237,7 @@
 
 	msg += "</span>"
 
-	if(stat == UNCONSCIOUS)
-		msg += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.\n"
-	else if(getBrainLoss() >= 60)
+	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 
 	if(!key && brain_op_stage != 4 && stat != DEAD)
@@ -388,7 +386,7 @@
 	if(display_gloves)
 		msg += "<span class='warning'><b>[src] has blood running from under [t_his] gloves!</b></span>\n"
 
-	for(var/implant in get_visible_implants(1))
+	for(var/implant in get_visible_implants(0))
 		msg += "<span class='warning'><b>[src] has \a [implant] sticking out of [t_his] flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[t_He] [t_is] repulsively uncanny!\n"

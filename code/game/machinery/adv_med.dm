@@ -309,10 +309,18 @@
 						if(e.open)
 							open = "Open:"
 						switch (e.germ_level)
-							if (INFECTION_LEVEL_ONE + 50 to INFECTION_LEVEL_TWO)
+							if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
 								infected = "Mild Infection:"
-							if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
+							if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
+								infected = "Mild Infection+:"
+							if (INFECTION_LEVEL_ONE + 300 to INFECTION_LEVEL_ONE + 400)
+								infected = "Mild Infection++:"
+							if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + 200)
 								infected = "Acute Infection:"
+							if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
+								infected = "Acute Infection+:"
+							if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_TWO + 400)
+								infected = "Acute Infection++:"
 							if (INFECTION_LEVEL_THREE to INFINITY)
 								infected = "Septic:"
 
@@ -332,8 +340,7 @@
 						else
 							dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
 						dat += "</tr>"
-					for(var/organ_name in occupant.internal_organs)
-						var/datum/organ/internal/i = occupant.internal_organs[organ_name]
+					for(var/datum/organ/internal/i in occupant.internal_organs)
 						var/mech = ""
 						if(i.robotic == 1)
 							mech = "Assisted:"
@@ -342,10 +349,18 @@
 							
 						var/infection = "None"
 						switch (i.germ_level)
-							if (1 to INFECTION_LEVEL_TWO)
+							if (1 to INFECTION_LEVEL_ONE + 200)
 								infection = "Mild Infection:"
-							if (INFECTION_LEVEL_TWO to INFINITY)
+							if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
+								infection = "Mild Infection+:"
+							if (INFECTION_LEVEL_ONE + 300 to INFECTION_LEVEL_ONE + 400)
+								infection = "Mild Infection++:"
+							if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + 200)
 								infection = "Acute Infection:"
+							if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
+								infection = "Acute Infection+:"
+							if (INFECTION_LEVEL_TWO + 300 to INFINITY)
+								infection = "Acute Infection++:"
 							
 						dat += "<tr>"
 						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"

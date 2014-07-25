@@ -19,6 +19,7 @@
 	var/emagged = 0
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
+	var/movable = 1
 
 	var/obj/item/weapon/cell/cell
 	var/power_use = 5	//set this to adjust the amount of power the vehicle uses per move
@@ -47,7 +48,7 @@
 			if(on && powered)
 				cell.use(power_use)
 		anchored = init_anc
-		
+
 		if(load)
 			load.loc = loc
 			load.dir = dir
@@ -156,6 +157,8 @@
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
+/obj/vehicle/proc/handle_rotation()
+	return
 
 //-------------------------------------------
 // Vehicle procs
@@ -288,7 +291,7 @@
 /obj/vehicle/proc/unload(var/mob/user, var/direction)
 	if(!load)
 		return
-	
+
 	var/turf/dest = null
 
 	//find a turf to unload to

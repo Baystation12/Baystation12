@@ -32,6 +32,29 @@
 
 	return 1
 
+/obj/item/clothing/proc/refit_for_species(var/target_species)
+	switch(target_species)
+		if("Human", "Skrell")	//humanoid bodytypes
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		else 
+			species_restricted = list(target_species)
+	
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+
+/obj/item/clothing/head/helmet/refit_for_species(var/target_species)
+	switch(target_species)
+		if("Skrell")
+			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+		if("Human")
+			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
+		else 
+			species_restricted = list(target_species)
+	
+	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
+		icon = sprite_sheets_obj[target_species]
+
+
 //Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
@@ -158,8 +181,6 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
-
 
 //Mask
 /obj/item/clothing/mask
@@ -196,7 +217,6 @@ BLIND     // can't see anything
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
 	w_class = 3
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
@@ -214,7 +234,6 @@ BLIND     // can't see anything
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox")
-	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
@@ -409,4 +428,8 @@ BLIND     // can't see anything
 	sensor_mode = pick(0,1,2,3)
 	..()
 
+/obj/item/clothing/under/emp_act(severity)
+	if (hastie)
+		hastie.emp_act(severity)
+	..()
 

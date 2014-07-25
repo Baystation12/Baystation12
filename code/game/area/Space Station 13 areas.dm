@@ -631,6 +631,10 @@ var/list/ghostteleportlocs = list()
 	name = "Engineering Shuttle Access"
 	icon_state = "asmaint"
 
+/area/maintenance/engi_engine
+	name = "Engine Maintenance"
+	icon_state = "asmaint"
+
 /area/maintenance/asmaint2
 	name = "Science Maintenance"
 	icon_state = "asmaint"
@@ -794,6 +798,10 @@ var/list/ghostteleportlocs = list()
 /area/crew_quarters/sleep/engi
 	name = "\improper Engineering Dormitories"
 	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/engi_wash
+	name = "\improper Engineering Washroom"
+	icon_state = "toilet"
 
 /area/crew_quarters/sleep/sec
 	name = "\improper Security Dormitories"
@@ -1362,8 +1370,12 @@ var/list/ghostteleportlocs = list()
 	icon_state = "janitor"
 
 /area/hydroponics
-	name = "Hydroponics"
+	name = "\improper Hydroponics"
 	icon_state = "hydro"
+
+/area/hydroponics/garden
+	name = "\improper Garden"
+	icon_state = "garden"
 
 //rnd (Research and Development
 
@@ -1385,7 +1397,15 @@ var/list/ghostteleportlocs = list()
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
-	icon_state = "toxlab"
+	icon_state = "xeno_lab"
+
+/area/rnd/xenobiology/xenoflora_storage
+	name = "\improper Xenoflora Storage"
+	icon_state = "xeno_f_store"
+
+/area/rnd/xenobiology/xenoflora
+	name = "\improper Xenoflora Lab"
+	icon_state = "xeno_f_lab"
 
 /area/rnd/storage
 	name = "\improper Toxins Storage"
@@ -1684,6 +1704,10 @@ var/list/ghostteleportlocs = list()
 /area/turret_protected/ai
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
+
+/area/turret_protected/ai_cyborg_station
+	name = "\improper Cyborg Station"
+	icon_state = "ai_cyborg"
 
 /area/turret_protected/aisat
 	name = "\improper AI Satellite"

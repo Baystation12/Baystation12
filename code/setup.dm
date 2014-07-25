@@ -744,10 +744,10 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_SYNTHETIC 16384
 
 //Language flags.
-#define WHITELISTED 1  // Language is available if the speaker is whitelisted.
-#define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
-#define NONVERBAL 4    // Language has a significant non-verbal component. Speech is garbled without line-of-sight 
-#define SIGNLANG 8     // Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
+#define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
+#define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
+#define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
+#define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -799,7 +799,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define WAIT_ARRIVE		2
 #define WAIT_FINISH		3
 
-
 //computer3 error codes, move lower in the file when it passes dev -Sayu
  #define PROG_CRASH      1  // Generic crash
  #define MISSING_PERIPHERAL  2  // Missing hardware
@@ -808,3 +807,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
  #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
  #define NETWORK_FAILURE  32
 
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+#define IS_SKRELL 3
+#define IS_UNATHI 4

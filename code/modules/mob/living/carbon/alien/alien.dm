@@ -159,10 +159,9 @@
 		stat(null, "Plasma Stored: [getPlasma()]/[max_plasma]")
 
 	if(emergency_shuttle)
-		if(emergency_shuttle.has_eta() && !emergency_shuttle.returned())
-			var/timeleft = emergency_shuttle.estimate_arrival_time()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+		var/eta_status = emergency_shuttle.get_status_panel_eta()
+		if(eta_status)
+			stat(null, eta_status)
 
 /mob/living/carbon/alien/Stun(amount)
 	if(status_flags & CANSTUN)

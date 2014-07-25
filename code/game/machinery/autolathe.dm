@@ -119,6 +119,11 @@
 		return
 
 	if (opened)
+		//Don't eat multitools or wirecutters used on an open lathe.
+		if(istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters))
+			attack_hand(user)
+			return
+
 		//Dismantle the frame.
 		if(istype(O, /obj/item/weapon/crowbar))
 			dismantle()

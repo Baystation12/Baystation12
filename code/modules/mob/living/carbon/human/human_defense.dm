@@ -51,11 +51,6 @@ emp_act
 
 				return -1 // complete projectile permutation
 
-	if(check_shields(P.damage, "the [P.name]"))
-		P.on_hit(src, 2, def_zone)
-		handle_suit_punctures(P.damage_type, P.damage)
-		return 2
-
 //BEGIN BOOK'S TASER NERF.
 	if(istype(P, /obj/item/projectile/beam/stun))
 		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
@@ -89,6 +84,10 @@ emp_act
 		return
 //END TASER NERF
 
+	if(check_shields(P.damage, "the [P.name]"))
+		P.on_hit(src, 2, def_zone)
+		return 2
+	
 	var/datum/organ/external/organ = get_organ(check_zone(def_zone))
 
 	var/armor = getarmor_organ(organ, "bullet")
@@ -190,7 +189,8 @@ emp_act
 /mob/living/carbon/human/proc/attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone)
 	if(!I || !user)	return 0
 
-	var/target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, src)
+	var/target_zone = def_zone? def_zone : get_zone_with_miss_chance(user.zone_sel.selecting, src)
+	
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
@@ -229,14 +229,14 @@ emp_act
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
-	if ((weapon_sharp || weapon_edge) && prob(getarmor(def_zone, "melee")))
+	if ((weapon_sharp || weapon_edge) && prob(getarmor(target_zone, "melee")))
 		weapon_sharp = 0
 		weapon_edge = 0
 
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, I)
+	apply_damage(I.force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
@@ -308,6 +308,6 @@ emp_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	var/obj/item/clothing/suit/space/SS = wear_suit
-	var/penetrated_dam = max(0,(damage - max(0,(SS.breach_threshold - SS.damage))))
+	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
 
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)

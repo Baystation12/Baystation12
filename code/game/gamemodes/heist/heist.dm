@@ -106,9 +106,19 @@ VOX HEIST ROUNDTYPE
 		vox.f_style = "Shaved"
 		for(var/datum/organ/external/limb in vox.organs)
 			limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
+		
+		//Now apply cortical stack.
+		var/datum/organ/external/E = vox.get_organ("head")	
+		var/obj/item/weapon/implant/cortical/I = new(vox)
+		I.imp_in = vox
+		I.implanted = 1
+		I.part = E
+		E.implants += I
+		cortical_stacks += I
+		
 		vox.equip_vox_raider()
 		vox.regenerate_icons()
-
+		
 		raider.objectives = raid_objectives
 		greet_vox(raider)
 
@@ -272,9 +282,9 @@ datum/game_mode/proc/auto_declare_completion_heist()
 	return 1
 
 /datum/game_mode/heist/check_finished()
-	// DO NOT FORGET TO FIX THIS.
-	//if (!(is_raider_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
-	//	return 1
+	var/datum/shuttle/multi_shuttle/skipjack = shuttle_controller.shuttles["Vox Skipjack"]
+	if (!(is_raider_crew_alive()) || (skipjack && skipjack.returned_home))
+		return 1
 	return ..()
 
 /datum/game_mode/heist/cleanup()

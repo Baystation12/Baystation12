@@ -7,4 +7,4 @@
 	icon = 'icons/obj/doors/Door2x1glass.dmi'
 	opacity = 0
 	glass = 1
-	assembly_type = "obj/structure/door_assembly/multi_tile"
+	assembly_type = /obj/structure/door_assembly/multi_tile
