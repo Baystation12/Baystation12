@@ -552,6 +552,8 @@
 		)
 	if(istype(M, /mob/living/carbon/human))
 		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
+		if(!eyes)
+			return
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)
@@ -631,4 +633,3 @@
 	var/obj/item/I = get_active_hand()
 	if(I && !I.abstract)
 		I.showoff(src)
-
