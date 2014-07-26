@@ -1324,6 +1324,7 @@ datum/preferences
 
 
 		character.skills = skills
+		character.used_skillpoints = used_skillpoints
 
 		// Destroy/cyborgize organs
 
