@@ -973,6 +973,10 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
+	engine_waste
+		name = "\improper Engine Waste Handling"
+		icon_state = "engine_waste"
+
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
 		icon_state = "engine_monitoring"

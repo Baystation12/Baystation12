@@ -175,9 +175,12 @@
 				var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
 				var/attempt_pin = input("Enter pin code", "Account pin") as num
 				linked_account = attempt_account_access(attempt_account_num, attempt_pin, 1)
-				if(linked_account.suspended)
-					linked_account = null
-					usr << "\icon[src]<span class='warning'>Account has been suspended.</span>"
+				if(linked_account)
+					if(linked_account.suspended)
+						linked_account = null
+						usr << "\icon[src]<span class='warning'>Account has been suspended.</span>"
+				else
+					usr << "\icon[src]<span class='warning'>Account not found.</span>"
 			if("trans_purpose")
 				transaction_purpose = input("Enter reason for EFTPOS transaction", "Transaction purpose")
 			if("trans_value")
@@ -199,7 +202,7 @@
 				else if(linked_account)
 					transaction_locked = 1
 				else
-					usr << "\icon[src] <span class='warning'>No account connected to send transactions to.</span>"
+					usr << "\icon[src]<span class='warning'>No account connected to send transactions to.</span>"
 			if("scan_card")
 				if(linked_account)
 					var/obj/item/I = usr.get_active_hand()
@@ -228,8 +231,12 @@
 		if(transaction_locked && !transaction_paid)
 			if(linked_account)
 				if(!linked_account.suspended)
-					var/attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
-					var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+					var/attempt_pin = ""
+					var/datum/money_account/D = get_account(C.associated_account_number)
+					if(D.security_level)
+						attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
+						D = null
+					D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 					if(D)
 						if(!D.suspended)
 							if(transaction_amount <= D.money)

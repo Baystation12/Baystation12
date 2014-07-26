@@ -123,7 +123,7 @@
 					reagents.add_reagent(refill, trans)
 					user << "Cyborg [src] refilled."
 
-		return
+		return ..()
 
 /*	examine()
 		set src in view()

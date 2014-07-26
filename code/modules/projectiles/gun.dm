@@ -218,7 +218,7 @@
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
-			in_chamber.damage *= 1.3
+			if(istype(in_chamber)) in_chamber.damage *= 1.3
 			Fire(M,user)
 			return
 		else if(target && M in target)
