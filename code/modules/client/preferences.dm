@@ -1027,13 +1027,6 @@ datum/preferences
 								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
 
-									//Apparently there's some PHP script that needs to be updated in order to give people whitelist languages.
-									//This workaround should be removed once that has been properly updated
-									if (lang.name == "Siik'maas")
-										new_languages |= all_languages["Siik'tajr"]
-									if (lang.name == "Siik'tajr")
-										new_languages |= all_languages["Siik'maas"]
-
 									languages_available = 1
 
 							if(!(languages_available))
@@ -1395,6 +1388,7 @@ datum/preferences
 
 
 		character.skills = skills
+		character.used_skillpoints = used_skillpoints
 
 		// Destroy/cyborgize organs
 
