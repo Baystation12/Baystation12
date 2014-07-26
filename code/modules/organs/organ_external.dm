@@ -32,6 +32,7 @@
 	var/damage_msg = "\red You feel an intense pain"
 	var/broken_description
 
+	var/vital //Lose a vital limb, die immediately.
 	var/status = 0
 	var/open = 0
 	var/stage = 0
@@ -393,16 +394,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		//having an infection raises your body temperature
-		var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/(INFECTION_LEVEL_ONE+300), 1) + owner.species.body_temperature
-		if (owner.bodytemperature < fever_temperature)
-			//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
-			owner.bodytemperature++
+		var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
+		if (fever_temperature > owner.bodytemperature)
+			//need to make sure we raise temperature fast enough to get around environmental cooling preventing us from reaching fever_temperature
+			owner.bodytemperature += (fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1
 
 		if(prob(round(germ_level/10)))
 			if (antibiotics < 5)
 				germ_level++
 
-			if (prob(5))	//adjust this to tweak how fast people take toxin damage from infections
+			if (prob(10))	//adjust this to tweak how fast people take toxin damage from infections
 				owner.adjustToxLoss(1)
 
 	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < 5)
@@ -441,6 +442,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if (!(status & ORGAN_DEAD))
 			status |= ORGAN_DEAD
 			owner << "<span class='notice'>You can't feel your [display_name] anymore...</span>"
+			owner.update_body(1)
 
 		germ_level++
 		owner.adjustToxLoss(1)
@@ -667,6 +669,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
 			release_restraints()
 
+			if(vital)
+				owner.death()
+
 /****************************************************
 			   HELPERS
 ****************************************************/
@@ -830,7 +835,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	max_damage = 75
 	min_broken_damage = 40
 	body_part = UPPER_TORSO
-
+	vital = 1
 
 /datum/organ/external/groin
 	name = "groin"
@@ -839,6 +844,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	max_damage = 50
 	min_broken_damage = 30
 	body_part = LOWER_TORSO
+	vital = 1
 
 /datum/organ/external/l_arm
 	name = "l_arm"
@@ -932,6 +938,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	min_broken_damage = 40
 	body_part = HEAD
 	var/disfigured = 0
+	vital = 1
 
 /datum/organ/external/head/get_icon()
 	if (!owner)

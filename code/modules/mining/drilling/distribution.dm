@@ -75,9 +75,6 @@ Deep minerals:
 //Halfassed diamond-square algorithm with some fuckery since it's a single dimension array.
 /datum/ore_distribution/proc/populate_distribution_map()
 
-	//Announce it!
-	world << "<b><font color='red'>Generating resource distribution map.</b></font>"
-
 	//Seed beginning values.
 	var/x = 1
 	var/y = 1

@@ -81,13 +81,6 @@ datum/controller/game_controller/proc/setup()
 	for(var/i=0, i<max_secret_rooms, i++)
 		make_mining_asteroid_secret()
 
-	//Create the mining ore distribution map.
-	asteroid_ore_map = new /datum/ore_distribution()
-	asteroid_ore_map.populate_distribution_map()
-
-	//Set up spawn points.
-	populate_spawn_points()
-
 	spawn(0)
 		if(ticker)
 			ticker.pregame()
@@ -115,6 +108,17 @@ datum/controller/game_controller/proc/setup_objects()
 		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
+
+	//Create the mining ore distribution map.
+	//Create the mining ore distribution map.
+	asteroid_ore_map = new /datum/ore_distribution()
+	asteroid_ore_map.populate_distribution_map()
+
+	//Set up spawn points.
+	populate_spawn_points()
+
+	//Set up gear list.
+	populate_gear_list()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)

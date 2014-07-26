@@ -75,25 +75,25 @@ obj/machinery/recharger/process()
 			if(E.power_supply.charge < E.power_supply.maxcharge)
 				E.power_supply.give(100)
 				icon_state = icon_state_charging
-				use_power(250)
+				use_power(250/CELLRATE)
 			else
 				icon_state = icon_state_charged
 			return
 		if(istype(charging, /obj/item/weapon/melee/baton))
 			var/obj/item/weapon/melee/baton/B = charging
-			if(B.charges < initial(B.charges))
-				B.charges++
-				icon_state = icon_state_charging
-				use_power(150)
-			else
-				icon_state = icon_state_charged
+			if(B.bcell)
+				if(B.bcell.give(1500)) //Because otherwise it takes two minutes to fully charge due to 15k cells. - Neerti
+					icon_state = icon_state_charging
+					use_power(200/CELLRATE)
+				else
+					icon_state = icon_state_charged
 			return
 		if(istype(charging, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = charging
 			if(L.stored_computer.battery.charge < L.stored_computer.battery.maxcharge)
 				L.stored_computer.battery.give(100)
 				icon_state = icon_state_charging
-				use_power(250)
+				use_power(250/CELLRATE)
 			else
 				icon_state = icon_state_charged
 			return
@@ -110,7 +110,8 @@ obj/machinery/recharger/emp_act(severity)
 
 	else if(istype(charging, /obj/item/weapon/melee/baton))
 		var/obj/item/weapon/melee/baton/B = charging
-		B.charges = 0
+		if(B.bcell)
+			B.bcell.charge = 0
 	..(severity)
 
 obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
@@ -122,8 +123,6 @@ obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to 
 // Atlantis: No need for that copy-pasta code, just use var to store icon_states instead.
 obj/machinery/recharger/wallcharger
 	name = "wall recharger"
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "wrecharger0"
-	icon_state_idle = "wrecharger0"
-	icon_state_charging = "wrecharger1"
 	icon_state_charged = "wrecharger2"
+	icon_state_charging = "wrecharger1"
+	icon_state_idle = "wrecharger0"
