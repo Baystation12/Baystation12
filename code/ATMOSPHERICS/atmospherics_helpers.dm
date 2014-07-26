@@ -1,3 +1,99 @@
+//Generalized gas pumping proc.
+//Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
+//transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
+//available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power, however power will still be used!
+
+/obj/machinery/atmospherics/var/last_flow_rate = 0	//Can't return multiple values, unfortunately...
+
+/obj/machinery/atmospherics/proc/pump_gas(var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null, var/available_power = null)
+	if (source.total_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	if (!transfer_moles)
+		transfer_moles = source.total_moles
+	
+	//Calculate the amount of energy required and limit transfer_moles based on available power
+	var/specific_power = calculate_specific_power(source, sink)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
+	if (available_power && specific_power > 0)
+		transfer_moles = min(transfer_moles, available_power / specific_power)
+	
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	last_flow_rate = (transfer_moles/source.total_moles)*source.volume	//group_multiplier gets divided out here
+	
+	var/datum/gas_mixture/removed = source.remove(transfer_moles)
+	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
+		return -1
+	
+	var/power_draw = specific_power*transfer_moles
+	if (power_draw > 0)
+		removed.add_thermal_energy(power_draw)	//1st law - energy is conserved
+	
+	sink.merge(removed)
+	
+	return power_draw
+
+//Generalized gas filtering proc.
+//Filters the gasses specified by filtering from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was filtered.
+//filtering - A list of gasids to be filtered from source
+//total_transfer_moles - Limits the amount of moles to filter. The actual amount of gas filtered may also be limited by available_power, if given.
+//available_power - the maximum amount of power that may be used when filtering gas. If null then the filtering is not limited by power, however power will still be used!
+/obj/machinery/atmospherics/proc/filter_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+	if (source.total_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+
+	filtering &= source.gas		//only filter gasses that are actually there.
+	
+	//Filter it
+	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
+	var/total_filterable_moles = 0
+	var/list/specific_power_gas = list()
+	for (var/g in filtering)
+		if (source.gas[g] < MINUMUM_MOLES_TO_PUMP)
+			continue
+	
+		var/specific_power = calculate_specific_power_gas(g, source, sink)/ATMOS_FILTER_EFFICIENCY
+		specific_power_gas[g] = specific_power
+		total_specific_power += specific_power
+		total_filterable_moles += source.gas[g]
+	
+	if (total_filterable_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	//Figure out how much of each gas to filter
+	if (!total_transfer_moles)
+		total_transfer_moles = total_filterable_moles
+	else
+		total_transfer_moles = min(total_transfer_moles, total_filterable_moles)
+	
+	//limit transfer_moles based on available power
+	if (available_power && total_specific_power > 0)
+		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
+	
+	if (total_transfer_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	var/power_draw = 0
+	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume	//group_multiplier gets divided out here
+	for (var/g in filtering)
+		var/transfer_moles = source.gas[g]
+		//filter gas in proportion to the mole ratio
+		transfer_moles = min(transfer_moles, total_transfer_moles*(source.gas[g]/total_filterable_moles))
+		
+		source.gas[g] -= transfer_moles
+		sink.gas[g] += transfer_moles		//do we need to check if g is in sink.gas first?
+		power_draw += specific_power_gas[g]*transfer_moles
+	
+	if (power_draw > 0)
+		sink.add_thermal_energy(power_draw)	//gotta conserve that energy
+	
+	//Remix the resulting gases
+	sink.update_values()
+	source.update_values()
+	
+	return power_draw
+
 //Calculates the amount of power needed to move one mole from source to sink.
 /obj/machinery/atmospherics/proc/calculate_specific_power(datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
@@ -33,4 +129,3 @@
 		
 		if (usage_amount > idle_power_usage)
 			use_power(round(usage_amount))	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
-

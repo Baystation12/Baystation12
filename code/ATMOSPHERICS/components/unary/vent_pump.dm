@@ -28,7 +28,6 @@
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
 	var/last_power_draw = 0
-	var/last_flow_rate = 0
 
 	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
 	var/internal_pressure_bound = INTERNAL_PRESSURE_BOUND
@@ -158,13 +157,11 @@
 			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
 				pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
 		
-			//Unfortunately there's no good way to get the volume of the room, so assume 10 tiles
-			//We will overshoot in small rooms when dealing with huge pressures but it won't be so bad
 			var/output_volume = environment.volume * environment.group_multiplier
 			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
-			power_draw = transfer_gas(air_contents, environment, transfer_moles)
+			power_draw = pump_gas(air_contents, environment, transfer_moles, active_power_usage)
 		else //external -> internal
 			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
 				pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
@@ -172,14 +169,13 @@
 				pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
 		
 			var/output_volume = air_contents.volume * air_contents.group_multiplier
-			
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 			
-			power_draw = transfer_gas(environment, air_contents, transfer_moles)
+			power_draw =  pump_gas(environment, air_contents, transfer_moles, active_power_usage)
 		
 		if(network)
 			network.update = 1
