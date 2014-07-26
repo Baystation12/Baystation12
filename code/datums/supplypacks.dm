@@ -1206,7 +1206,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Hydroponics tray crate"
 	group = "Hydroponics"
-	contains = list(/obj/machinery/hydroponics{anchored = 0})
+	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
 	access = access_hydroponics
 
 /datum/supply_packs/canister_empty
