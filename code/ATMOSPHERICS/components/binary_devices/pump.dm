@@ -67,57 +67,66 @@ Thus, the two variables affect pump operation are set in New():
 		last_flow_rate = 0
 		return
 
-	var/datum/gas_mixture/source = air1
-	var/datum/gas_mixture/sink = air2
-	
-	var/pressure_delta = target_pressure - sink.return_pressure()
-
-	//Calculate necessary moles to transfer using PV=nRT
-	if(pressure_delta > 0.01 && (source.total_moles > 0) && (source.temperature > 0 || sink.temperature > 0))
-		
-		var/transfer_moles = source.total_moles
-		/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
-		//Figure out how much gas to transfer to meet the target pressure.
-		var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
-		
-		var/output_volume = sink.volume * sink.group_multiplier
-		
-		//Return the number of moles that would have to be transfered to bring sink to the target pressure
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		*/
-		
-		//Calculate the amount of energy required and limit transfer_moles based on available power
-		var/specific_power = calculate_specific_power(source, sink) //this has to be calculated before we modify any gas mixtures
-		if (specific_power > 0)
-			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
-		
-		var/power_draw = specific_power*transfer_moles
-		
-		var/datum/gas_mixture/removed = source.remove(transfer_moles)
-		last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
-		
-		if (power_draw > 0)
-			removed.add_thermal_energy(power_draw)	//1st law - energy is conserved
-			handle_pump_power_draw(power_draw)
-			last_power_draw = power_draw
-		else
-			handle_pump_power_draw(idle_power_usage)
-			last_power_draw = idle_power_usage
-		
-		sink.merge(removed)
+	var/power_draw = -1
+	if (air1.temperature > 0 || air2.temperature > 0)
+		power_draw = pump_gas(air1, air2)
 		
 		if(network1)
 			network1.update = 1
 
 		if(network2)
 			network2.update = 1
-	else
+	
+	if (power_draw < 0)
 		update_use_power(0)
 		last_power_draw = 0
 		last_flow_rate = 0
-		return 1
+	else if (power_draw > 0)
+		handle_pump_power_draw(power_draw)
+		last_power_draw = power_draw
+	else
+		handle_pump_power_draw(idle_power_usage)
+		last_power_draw = idle_power_usage
 
 	return 1
+
+//pumps gas from source to sink, and returns the power used, or -1 if no pumping was done
+/obj/machinery/atmospherics/binary/pump/proc/pump_gas(var/datum/gas_mixture/source, var/datum/gas_mixture/sink)
+	var/pressure_delta = target_pressure - sink.return_pressure()
+
+	if(pressure_delta < 0.01 || source.total_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	var/transfer_moles = source.total_moles
+	/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
+	//Figure out how much gas to transfer to meet the target pressure.
+	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+	
+	var/output_volume = sink.volume * sink.group_multiplier
+	
+	//Return the number of moles that would have to be transfered to bring sink to the target pressure
+	var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+	*/
+	
+	//Calculate the amount of energy required and limit transfer_moles based on available power
+	var/specific_power = calculate_specific_power(source, sink)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
+	if (specific_power > 0)
+		transfer_moles = min(transfer_moles, active_power_usage / specific_power)
+	
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	var/power_draw = specific_power*transfer_moles
+	
+	var/datum/gas_mixture/removed = source.remove(transfer_moles)
+	last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
+	
+	if (power_draw > 0)
+		removed.add_thermal_energy(power_draw)	//1st law - energy is conserved
+	
+	sink.merge(removed)
+	
+	return power_draw
 
 //Radio remote control
 

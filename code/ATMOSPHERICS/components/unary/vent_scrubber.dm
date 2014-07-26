@@ -122,66 +122,17 @@
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	if ((environment.total_moles == 0) || (environment.temperature == 0 && air_contents.temperature == 0))
+
+	var/power_draw = -1
+	if (environment.temperature > 0 || air_contents.temperature > 0)
+		if(scrubbing)
+			power_draw = filter_gas(environment)
+		else //Just siphon all air
+			power_draw = siphon_gas(environment)
+
+	if (power_draw < 0)
 		update_use_power(0)
-		return
-
-	var/power_draw
-	if(scrubbing)	
-		//Filter it
-		var/total_specific_power = 0		//the power required to remove one mole of filterable gas
-		var/total_filterable_moles = 0
-		var/list/specific_power_gas = list()
-		for (var/g in scrubbing_gas)
-			if (environment.gas[g] < 0.1)
-				continue	//don't bother
-		
-			var/specific_power = calculate_specific_power_gas(g, environment, air_contents)
-			specific_power_gas[g] = specific_power
-			total_specific_power += specific_power
-			total_filterable_moles += environment.gas[g]
-		
-		if (total_filterable_moles == 0)
-			update_use_power(0)
-			return
-		
-		//Calculate the amount of energy required and limit transfer_moles based on available power
-		power_draw = 0
-		var/total_transfer_moles = total_filterable_moles
-		if (total_specific_power > 0)
-			total_transfer_moles = min(total_transfer_moles, active_power_usage/total_specific_power)
-		
-		for (var/g in scrubbing_gas)
-			var/transfer_moles = environment.gas[g]
-			if (specific_power_gas[g] > 0)
-				//if our flow rate is limited by available power, the proportion of the filtered gas is based on mole ratio
-				transfer_moles = min(transfer_moles, total_transfer_moles*(environment.gas[g]/total_filterable_moles))
-			
-			environment.gas[g] -= transfer_moles
-			air_contents.gas[g] += transfer_moles
-			power_draw += specific_power_gas[g]*transfer_moles
-		
-		//Remix the resulting gases
-		air_contents.update_values()
-		environment.update_values()
-
-	else //Just siphon all air
-		var/transfer_moles = environment.total_moles
-
-		//Calculate the amount of energy required
-		var/specific_power = calculate_specific_power(environment, air_contents) //this has to be calculated before we modify any gas mixtures
-		if (specific_power > 0)
-			transfer_moles = min(transfer_moles, active_power_usage / specific_power)
-		
-		if (transfer_moles < 0.01)
-			update_use_power(0)
-			return	//don't bother
-
-		power_draw = specific_power*transfer_moles
-		air_contents.merge(environment.remove(transfer_moles))
-
-	if (power_draw > 0)
-		air_contents.add_thermal_energy(power_draw)
+	else if (power_draw > 0)
 		//last_power_draw = power_draw
 		handle_pump_power_draw(power_draw)
 	else
@@ -192,6 +143,80 @@
 		network.update = 1
 	
 	return 1
+
+//filters gas from environment and returns the amount of power used, or -1 if no filtering was done
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/filter_gas(datum/gas_mixture/environment)
+	//Filter it
+	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
+	var/total_filterable_moles = 0
+	var/list/specific_power_gas = list()
+	for (var/g in scrubbing_gas)
+		if (environment.gas[g] < MINUMUM_MOLES_TO_PUMP)
+			continue	//don't bother
+	
+		var/specific_power = calculate_specific_power_gas(g, environment, air_contents)/ATMOS_FILTER_EFFICIENCY
+		specific_power_gas[g] = specific_power
+		total_specific_power += specific_power
+		total_filterable_moles += environment.gas[g]
+	
+	if (total_filterable_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
+	
+	//Figure out how much of each gas to filter
+	var/total_transfer_moles = total_filterable_moles
+	
+	//limit flow rate from turfs
+	total_transfer_moles = min(total_transfer_moles, environment.total_moles*MAX_FILTER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+	
+	//limit transfer_moles based on available power
+	var/power_draw = 0
+	if (total_specific_power > 0)
+		total_transfer_moles = min(total_transfer_moles, active_power_usage/total_specific_power)
+	
+	for (var/g in scrubbing_gas)
+		var/transfer_moles = environment.gas[g]
+		if (specific_power_gas[g] > 0)
+			//if our flow rate is being limited by available power, the proportion of the filtered gas is based on mole ratio
+			transfer_moles = min(transfer_moles, total_transfer_moles*(environment.gas[g]/total_filterable_moles))
+		
+		environment.gas[g] -= transfer_moles
+		air_contents.gas[g] += transfer_moles
+		power_draw += specific_power_gas[g]*transfer_moles
+	
+	if (power_draw > 0)
+		air_contents.add_thermal_energy(power_draw)
+	
+	//Remix the resulting gases
+	air_contents.update_values()
+	environment.update_values()
+	
+	return power_draw
+
+//siphons gas from environment and returns the power used, or -1 if no siphoning was done
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/siphon_gas(datum/gas_mixture/environment)
+	if (environment.total_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1	//no point doing all this processing when source is a vacuum
+	
+	var/transfer_moles = environment.total_moles
+	
+	//limit flow rate from turfs
+	transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+
+	//Calculate the amount of energy required and limit transfer_moles based on available power
+	var/specific_power = calculate_specific_power(environment, air_contents)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
+	if (specific_power > 0)
+		transfer_moles = min(transfer_moles, active_power_usage / specific_power)
+	
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1	//don't bother
+
+	var/power_draw = specific_power*transfer_moles
+	var/datum/gas_mixture/removed = environment.remove(transfer_moles)
+	if (power_draw > 0)
+		removed.add_thermal_energy(power_draw)
+	air_contents.merge(removed)
+	
+	return power_draw
 
 /obj/machinery/atmospherics/unary/vent_scrubber/hide(var/i) //to make the little pipe section invisible, the icon changes.
 	update_icon()

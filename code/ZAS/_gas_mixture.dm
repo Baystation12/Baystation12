@@ -4,23 +4,15 @@ What are the archived variables for?
 	This prevents race conditions that arise based on the order of tile processing.
 */
 
-#define SPECIFIC_HEAT_TOXIN		200		// J/(mol*K)
-#define SPECIFIC_HEAT_AIR		20		// J/(mol*K)
-#define SPECIFIC_HEAT_CDO		30		// J/(mol*K)
+#define SPECIFIC_HEAT_TOXIN		200
+#define SPECIFIC_HEAT_AIR		20
+#define SPECIFIC_HEAT_CDO		30
 #define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,phoron) \
 	max(0, carbon_dioxide * SPECIFIC_HEAT_CDO + (oxygen + nitrogen) * SPECIFIC_HEAT_AIR + phoron * SPECIFIC_HEAT_TOXIN)
-
-//we should really have a datum for each gas instead of a bunch of constants
-#define MOL_MASS_O2			0.032	// kg/mol
-#define MOL_MASS_N2			0.028	// kg/mol
-#define MOL_MASS_CDO		0.044	// kg/mol
-#define MOL_MASS_PHORON		0.289	// kg/mol
 
 #define MINIMUM_HEAT_CAPACITY	0.0003
 #define QUANTIZE(variable)		(round(variable,0.0001))
 #define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
-
-#define SPECIFIC_ENTROPY_VACUUM		1500	//technically vacuum doesn't have a specific entropy. Just use a really big number here to show that it's easy to add gas to vacuum and hard to take gas out.
 
 /hook/startup/proc/createGasOverlays()
 	plmaster = new /obj/effect/overlay()
@@ -36,11 +28,11 @@ What are the archived variables for?
 	slmaster.mouse_opacity = 0
 	return 1
 
-/datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy. //J/(mol*K)
+/datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
 
-/datum/gas/oxygen_agent_b/specific_heat = 300	//J/(mol*K)
+/datum/gas/oxygen_agent_b/specific_heat = 300
 
-/datum/gas/volatile_fuel/specific_heat = 30		//J/(mol*K)
+/datum/gas/volatile_fuel/specific_heat = 30
 
 /datum/gas
 	var/moles = 0
@@ -148,65 +140,6 @@ What are the archived variables for?
 			heat_capacity_archived += trace_gas.moles_archived*trace_gas.specific_heat
 
 	return max(MINIMUM_HEAT_CAPACITY,heat_capacity_archived)
-
-/datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
-	//Purpose: Adjusting temperature based on thermal energy transfer
-	//Called by: Anyone who wants to add or remove energy from the gas mix
-	//Inputs: An amount of energy in J to be added. Negative values remove energy.
-	//Outputs: The actual thermal energy change. Only relevant if you are removing energy.
-	
-	var/old_temperature = temperature
-	var/heat_capacity = heat_capacity()
-	
-	temperature += thermal_energy/heat_capacity
-	if (temperature < TCMB)
-		temperature = TCMB
-	
-	return (temperature - old_temperature)*heat_capacity
-
-/datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
-	//Purpose: Determining how much thermal energy is required
-	//Called by: Anyone. Machines that want to adjust the temperature of a gas mix.
-	//Inputs: None
-	//Outputs: The amount of energy required to get to the new temperature in J. A negative value means that energy needs to be removed.
-	
-	return heat_capacity()*(new_temperature - temperature)
-
-
-//This is so overkill for spessmen it's hilarious.
-//While this proc will return an accurate measure of the entropy, it's much easier to use the specific_entropy_change() proc.
-/datum/gas_mixture/proc/specific_entropy()
-	//Purpose: Returning the specific entropy of the gas mix, i.e. the entropy gained or lost per mole of gas added or removed.
-	//Called by: Anyone who wants to know how much energy it takes to move gases around in a steady state process (e.g. gas pumps)
-	//Inputs: None
-	//Outputs: Specific Entropy.
-	
-	//Jut assume everything is an ideal gas, so we can use the Ideal Gas Sackur-Tetrode equation.
-	//After we convert to moles and Liters and extract all those crazy constants inside the ln() we end up with:
-	//S = R * moles * ( ln[ constant * volume / moles * (molecular_mass * internal_energy / moles)^(3/2) ] + 5/2 )
-	//Where constant is IDEAL_GAS_ENTROPY_CONSTANT defined in setup.dm
-	
-	//We need to do this calculation for each type of gas in the mix and add them all up, to properly capture the entropy of mixing.
-	//It would be nice if each gas type was a datum, then we could just iterate through a list
-	
-	//the number of moles inside the square root gets divided out
-	var/sp_entropy_oxygen = ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / (oxygen + 0.001) * sqrt( ( MOL_MASS_O2 * SPECIFIC_HEAT_AIR * (temperature + 1) ) ** 3 ) + 1) +  5/2  )
-	
-	var/sp_entropy_nitrogen = ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / (nitrogen + 0.001) * sqrt( ( MOL_MASS_N2 * SPECIFIC_HEAT_AIR * (temperature + 1) ) ** 3 ) + 1 ) +  5/2  )
-	
-	var/sp_entropy_carbon_dioxide = ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / (carbon_dioxide + 0.001) * sqrt( ( MOL_MASS_CDO * SPECIFIC_HEAT_CDO * (temperature + 1) + 1 ) ** 3 ) ) +  5/2  )
-	
-	var/sp_entropy_phoron = ( log( IDEAL_GAS_ENTROPY_CONSTANT * volume / (phoron + 0.001) * sqrt( ( MOL_MASS_PHORON * SPECIFIC_HEAT_TOXIN * (temperature + 1) ) ** 3 ) + 1 ) +  5/2  )
-	
-	if (total_moles > 0)
-		var/oxygen_ratio = oxygen/total_moles
-		var/nitrogen_ratio = nitrogen/total_moles
-		var/carbon_dioxide_ratio = carbon_dioxide/total_moles
-		var/phoron_ratio = phoron/total_moles
-		
-		return R_IDEAL_GAS_EQUATION * ( oxygen_ratio*sp_entropy_oxygen + nitrogen_ratio*sp_entropy_nitrogen  + carbon_dioxide_ratio*sp_entropy_carbon_dioxide  + phoron_ratio*sp_entropy_phoron )
-	
-	return SPECIFIC_ENTROPY_VACUUM
 
 /datum/gas_mixture/proc/total_moles()
 	return total_moles

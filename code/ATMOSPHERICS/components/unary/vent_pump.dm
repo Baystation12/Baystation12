@@ -144,16 +144,14 @@
 		last_power_draw = 0
 		last_flow_rate = 0
 		return 0
-	
+
 	var/datum/gas_mixture/environment = loc.return_air()
 	var/environment_pressure = environment.return_pressure()
-	
-	if(air_contents.temperature == 0 && environment.temperature == 0)
-		return 0
 
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 
-	if(pressure_delta > 0.5)
+	var/power_draw = -1
+	if((air_contents.temperature > 0 || environment.temperature > 0) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
 			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
 				pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
@@ -166,7 +164,7 @@
 			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
-			transfer_gas(air_contents, environment, transfer_moles)
+			power_draw = transfer_gas(air_contents, environment, transfer_moles)
 		else //external -> internal
 			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
 				pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
@@ -178,46 +176,57 @@
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
-			transfer_gas(environment, air_contents, transfer_moles)
+			//limit flow rate from turfs
+			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			
+			power_draw = transfer_gas(environment, air_contents, transfer_moles)
 		
 		if(network)
 			network.update = 1
-	else
+
+	if (power_draw < 0)
 		last_power_draw = 0
 		last_flow_rate = 0
 		update_use_power(0)
+	if (power_draw > 0)
+		handle_pump_power_draw(power_draw)
+		last_power_draw = power_draw
+	else
+		handle_pump_power_draw(idle_power_usage)
+		last_power_draw = idle_power_usage
+
 	
 	return 1
 
+//pumps gas from source to sink and returns the power used, or -1 if no pumping was done.
 /obj/machinery/atmospherics/unary/vent_pump/proc/transfer_gas(datum/gas_mixture/source, datum/gas_mixture/sink, var/transfer_moles)
-	if(source.total_moles == 0)
-		update_use_power(0)
-		return
+	if(source.total_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1
 
 	//limit transfer_moles by available power
-	var/specific_power = calculate_specific_power(source, sink) //this has to be calculated before we modify any gas mixtures
+	var/specific_power = calculate_specific_power(source, sink)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
 	if (specific_power > 0)
 		transfer_moles = min(transfer_moles, active_power_usage / specific_power)
 	
 	//Get the gas to be transferred
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
+		return -1	//don't bother
+	
 	var/datum/gas_mixture/removed = source.remove(transfer_moles)
 	
 	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
-		return
+		return -1
 	
 	last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
 	
 	var/power_draw = specific_power*transfer_moles
 	if (power_draw > 0)
 		removed.add_thermal_energy(power_draw)
-		handle_pump_power_draw(power_draw)
-		last_power_draw = power_draw
-	else
-		handle_pump_power_draw(idle_power_usage)
-		last_power_draw = idle_power_usage
 	
 	//merge the removed gas into the sink
 	sink.merge(removed)
+	
+	return power_draw
 
 //Radio remote control
 
