@@ -5,7 +5,7 @@
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 
-var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics", "Supply", "Miscellaneous")
+var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Atmospherics","Medical","Science","Hydroponics", "Supply", "Miscellaneous")
 
 /datum/supply_packs
 	var/name = null
@@ -149,7 +149,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 10
 	containertype = /obj/structure/closet/crate/internals
 	containername = "Internals crate"
-	group = "Engineering"
+	group = "Atmospherics"
 
 /datum/supply_packs/evacuation
 	name = "Emergency equipment"
@@ -170,7 +170,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 35
 	containertype = /obj/structure/closet/crate/internals
 	containername = "Emergency crate"
-	group = "Engineering"
+	group = "Atmospherics"
 
 /datum/supply_packs/inflatable
 	name = "Inflatable barriers"
@@ -180,7 +180,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Inflatable Barrier Crate"
-	group = "Engineering"
+	group = "Atmospherics"
 
 /datum/supply_packs/janitor
 	name = "Janitorial supplies"
@@ -380,7 +380,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 10
 	containertype = /obj/structure/closet/crate/medical
 	containername = "Medical crate"
-	group = "Medical / Science"
+	group = "Medical"
 
 /datum/supply_packs/virus
 	name = "Virus sample crate"
@@ -404,7 +404,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "Virus sample crate"
 	access = access_cmo
-	group = "Medical / Science"
+	group = "Science"
 
 /datum/supply_packs/metal50
 	name = "50 metal sheets"
@@ -486,7 +486,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 16
 	containertype = /obj/structure/largecrate
 	containername = "coolant tank crate"
-	group = "Medical / Science"
+	group = "Science"
 
 /datum/supply_packs/solar
 	name = "Solar Pack crate"
@@ -578,7 +578,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/secure
 	containername = "APLU \"Ripley\" Circuit Crate"
 	access = access_robotics
-	group = "Engineering"
+	group = "Science"
 
 /datum/supply_packs/mecha_odysseus
 	name = "Circuit Crate (\"Odysseus\")"
@@ -588,7 +588,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\"Odysseus\" Circuit Crate"
 	access = access_robotics
-	group = "Engineering"
+	group = "Science"
 
 
 /datum/supply_packs/robotics
@@ -627,7 +627,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "Phoron assembly crate"
 	access = access_tox_storage
-	group = "Medical / Science"
+	group = "Science"
 
 /datum/supply_packs/weapons
 	name = "Weapons crate"
@@ -897,7 +897,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "Surgery crate"
 	access = access_medical
-	group = "Medical / Science"
+	group = "Medical"
 
 /datum/supply_packs/sterile
 	name = "Sterile equipment crate"
@@ -908,7 +908,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 15
 	containertype = "/obj/structure/closet/crate"
 	containername = "Sterile equipment crate"
-	group = "Medical / Science"
+	group = "Medical"
 
 /datum/supply_packs/randomised/pizza
 	num_contained = 5
@@ -1215,14 +1215,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Empty gas canister crate"
 	containertype = /obj/structure/largecrate
 	contains = list(/obj/machinery/portable_atmospherics/canister)
-	group = "Engineering"
+	group = "Atmospherics"
 
 /datum/supply_packs/canister_air
 	name = "Air canister"
 	cost = 10
 	containername = "Air canister crate"
 	containertype = /obj/structure/largecrate
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/air)
 
 /datum/supply_packs/canister_oxygen
@@ -1230,7 +1230,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 15
 	containername = "Oxygen canister crate"
 	containertype = /obj/structure/largecrate
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/oxygen)
 
 /datum/supply_packs/canister_nitrogen
@@ -1238,7 +1238,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 10
 	containername = "Nitrogen canister crate"
 	containertype = /obj/structure/largecrate
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/nitrogen)
 
 /datum/supply_packs/canister_phoron
@@ -1247,7 +1247,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Phoron gas canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/phoron)
 
 /datum/supply_packs/canister_sleeping_agent
@@ -1256,7 +1256,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "N2O gas canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/sleeping_agent)
 
 /datum/supply_packs/canister_carbon_dioxide
@@ -1265,7 +1265,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "CO2 canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
-	group = "Engineering"
+	group = "Atmospherics"
 	contains = list(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
 
 /datum/supply_packs/pacman_parts
@@ -1280,7 +1280,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/stock_parts/matter_bin,
 					/obj/item/weapon/circuitboard/pacman)
 
-/datum/supply_packs/pacman_parts
+/datum/supply_packs/super_pacman_parts
 	name = "Super P.A.C.M.A.N. portable generator parts"
 	cost = 55
 	containername = "Super P.A.C.M.A.N. portable generator construction kit"
