@@ -34,7 +34,11 @@
 					H << "\red You have a monitor for a head, where do you think you're going to put that?"
 					return
 
-			M << "\blue You swallow a gulp of [src]."
+			var/drink_name = "liquid"
+			if(R.reagent_list.len == 1)
+				var/datum/reagent/D = R.reagent_list[1]
+				drink_name = D.name
+			M << "\blue You swallow a gulp of [drink_name]."
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, gulp_size)
 
