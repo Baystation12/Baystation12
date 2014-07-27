@@ -280,7 +280,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								if(!(I in linked_destroy.component_parts))
 									del(I)
 									linked_destroy.icon_state = "d_analyzer"
-						use_power(250)
+						use_power(linked_destroy.active_power_usage)
 						screen = 1.0
 						updateUsrDialog()
 
@@ -332,10 +332,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					being_built = D
 					break
 			if(being_built)
-				var/power = 2000
+				var/power = linked_lathe.active_power_usage
 				for(var/M in being_built.materials)
 					power += round(being_built.materials[M] / 5)
-				power = max(2000, power)
+				power = max(linked_lathe.active_power_usage, power)
 				screen = 0.3
 				linked_lathe.busy = 1
 				flick("protolathe_n",linked_lathe)
@@ -386,10 +386,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					being_built = D
 					break
 			if(being_built)
-				var/power = 2000
+				var/power = linked_imprinter.active_power_usage
 				for(var/M in being_built.materials)
 					power += round(being_built.materials[M] / 5)
-				power = max(2000, power)
+				power = max(linked_imprinter.active_power_usage, power)
 				screen = 0.4
 				linked_imprinter.busy = 1
 				flick("circuit_imprinter_ani",linked_imprinter)
