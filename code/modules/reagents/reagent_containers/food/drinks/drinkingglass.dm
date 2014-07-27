@@ -71,7 +71,7 @@
 					center_of_mass = list("x"=16, "y"=10)
 				if("tomatojuice")
 					icon_state = "glass_red"
-					name = "Glass of Tomato juf"
+					name = "Glass of Tomato juice"
 					desc = "Are you sure this is tomato juice?"
 					center_of_mass = list("x"=16, "y"=10)
 				if("blood")
