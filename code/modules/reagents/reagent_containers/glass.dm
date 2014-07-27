@@ -40,7 +40,7 @@
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
-		/obj/machinery/hydroponics,
+		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/machinery/constructable_frame)
 
 	New()

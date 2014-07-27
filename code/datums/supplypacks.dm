@@ -848,6 +848,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Arts and Crafts crate"
 	group = "Operations"
 
+
 /datum/supply_packs/randomised/contraband
 	num_contained = 5
 	contains = list(/obj/item/seeds/bloodtomatoseed,
@@ -1205,7 +1206,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Hydroponics tray crate"
 	group = "Hydroponics"
-	contains = list(/obj/machinery/hydroponics{anchored = 0})
+	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
 	access = access_hydroponics
 
 /datum/supply_packs/canister_empty

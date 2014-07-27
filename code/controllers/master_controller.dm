@@ -110,7 +110,6 @@ datum/controller/game_controller/proc/setup_objects()
 			T.broadcast_status()
 
 	//Create the mining ore distribution map.
-	//Create the mining ore distribution map.
 	asteroid_ore_map = new /datum/ore_distribution()
 	asteroid_ore_map.populate_distribution_map()
 
@@ -119,6 +118,9 @@ datum/controller/game_controller/proc/setup_objects()
 
 	//Set up gear list.
 	populate_gear_list()
+
+	//Set up roundstart seed list.
+	populate_seed_list()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)
