@@ -7,6 +7,7 @@
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
+	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/suit/bio_suit
@@ -29,10 +30,11 @@
 //Standard biosuit, orange stripe
 /obj/item/clothing/head/bio_hood/general
 	icon_state = "bio_general"
+	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/suit/bio_suit/general
 	icon_state = "bio_general"
-
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 //Virology biosuit, green stripe
 /obj/item/clothing/head/bio_hood/virology
@@ -40,7 +42,7 @@
 
 /obj/item/clothing/suit/bio_suit/virology
 	icon_state = "bio_virology"
-
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 //Security biosuit, grey with red stripe across the chest
 /obj/item/clothing/head/bio_hood/security
@@ -48,7 +50,7 @@
 
 /obj/item/clothing/suit/bio_suit/security
 	icon_state = "bio_security"
-
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 //Janitor's biosuit, grey with purple arms
 /obj/item/clothing/head/bio_hood/janitor
@@ -56,6 +58,7 @@
 
 /obj/item/clothing/suit/bio_suit/janitor
 	icon_state = "bio_janitor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 
 //Scientist's biosuit, white with a pink-ish hue
@@ -64,11 +67,12 @@
 
 /obj/item/clothing/suit/bio_suit/scientist
 	icon_state = "bio_scientist"
-
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 //CMO's biosuit, blue stripe
 /obj/item/clothing/suit/bio_suit/cmo
 	icon_state = "bio_cmo"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/head/bio_hood/cmo
 	icon_state = "bio_cmo"
