@@ -57,7 +57,7 @@
 
 /obj/machinery/mech_sensor/update_icon(var/safety = 0)
 	if (enabled())
-		icon_state = "airlock_sensor_on"
+		icon_state = "airlock_sensor_standby"
 	else
 		icon_state = "airlock_sensor_off"
 
