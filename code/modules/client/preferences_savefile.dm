@@ -144,7 +144,7 @@
 	S["job_engsec_low"]		>> job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		>> flavor_text
+	S["flavor_texts"]		>> flavor_texts
 	S["med_record"]			>> med_record
 	S["sec_record"]			>> sec_record
 	S["gen_record"]			>> gen_record
@@ -265,7 +265,7 @@
 	S["job_engsec_low"]		<< job_engsec_low
 
 	//Miscellaneous
-	S["flavor_text"]		<< flavor_text
+	S["flavor_texts"]		<< flavor_texts
 	S["med_record"]			<< med_record
 	S["sec_record"]			<< sec_record
 	S["gen_record"]			<< gen_record
