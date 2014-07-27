@@ -74,18 +74,6 @@
 	prev_gender = gender // Debug for plural genders
 	make_blood()
 
-	/*
-	flavor_texts["general"] = flavor_general
-	flavor_texts["head"] = flavor_head
-	flavor_texts["face"] = flavor_face
-	flavor_texts["eyes"] = flavor_eyes
-	flavor_texts["torso"] = flavor_torso
-	flavor_texts["arms"] = flavor_arms
-	flavor_texts["hands"] = flavor_hands
-	flavor_texts["legs"] = flavor_legs
-	flavor_texts["feet"] = flavor_feet*/
-
-
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!( yes ) || now_pushing))
 		return

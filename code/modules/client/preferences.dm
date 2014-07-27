@@ -945,6 +945,48 @@ datum/preferences
 				ShowChoices(user)
 			return 1
 
+		else if (href_list["preference"] == "loadout")
+
+			if(href_list["task"] == "input")
+
+				var/list/valid_gear_choices = list()
+
+				for(var/gear_name in gear_datums)
+					var/datum/gear/G = gear_datums[gear_name]
+					if(G.whitelisted && !is_alien_whitelisted(user, G.whitelisted))
+						continue
+					valid_gear_choices += gear_name
+
+				var/choice = input(user, "Select gear to add: ") as null|anything in valid_gear_choices
+
+				if(choice && gear_datums[choice])
+
+					var/total_cost = 0
+
+					if(isnull(gear) || !islist(gear)) gear = list()
+
+					if(gear && gear.len)
+						for(var/gear_name in gear)
+							if(gear_datums[gear_name])
+								var/datum/gear/G = gear_datums[gear_name]
+								total_cost += G.cost
+
+					var/datum/gear/C = gear_datums[choice]
+					total_cost += C.cost
+					if(C && total_cost <= MAX_GEAR_COST)
+						gear += choice
+						user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+					else
+						user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
+
+			else if(href_list["task"] == "remove")
+				var/to_remove = href_list["gear"]
+				if(!to_remove) return
+				for(var/gear_name in gear)
+					if(gear_name == to_remove)
+						gear -= gear_name
+						break
+
 		switch(href_list["task"])
 			if("random")
 				switch(href_list["preference"])
