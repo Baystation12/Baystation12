@@ -315,24 +315,15 @@ ________________________________________________________________________________
 				var/datum/gas_mixture/environment = T.return_air()
 
 				var/pressure = environment.return_pressure()
-				var/total_moles = environment.total_moles()
+				var/total_moles = environment.total_moles
 
 				dat += "Air Pressure: [round(pressure,0.1)] kPa"
 
 				if (total_moles)
-					var/o2_level = environment.oxygen/total_moles
-					var/n2_level = environment.nitrogen/total_moles
-					var/co2_level = environment.carbon_dioxide/total_moles
-					var/phoron_level = environment.phoron/total_moles
-					var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 					dat += "<ul>"
-					dat += "<li>Nitrogen: [round(n2_level*100)]%</li>"
-					dat += "<li>Oxygen: [round(o2_level*100)]%</li>"
-					dat += "<li>Carbon Dioxide: [round(co2_level*100)]%</li>"
-					dat += "<li>Phoron: [round(phoron_level*100)]%</li>"
+					for(var/g in environment.gas)
+						dat += "<li>[gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%</li>"
 					dat += "</ul>"
-					if(unknown_level > 0.01)
-						dat += "OTHER: [round(unknown_level)]%<br>"
 
 					dat += "Temperature: [round(environment.temperature-T0C)]&deg;C"
 		if(2)
@@ -1377,19 +1368,17 @@ It is possible to destroy the net by the occupant or someone else.
 					playsound(M.loc, 'sound/effects/sparks2.ogg', 50, 1)
 					anim(M.loc,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
 					del(src)//Wait for everything to finish, delete the net. Else it will stop everything once net is deleted, including the spawn(0).
-			else
-				M.loc = null
 
-			M << "\red You appear in a strange place!"
+				M << "\red You appear in a strange place!"
 
-			for(var/mob/O in viewers(src, 3))
-				O.show_message(text("[] vanished!", M), 1, text("You hear sparks flying!"), 2)
+				for(var/mob/O in viewers(src, 3))
+					O.show_message(text("[] vanished!", M), 1, text("You hear sparks flying!"), 2)
 
-			if(!isnull(master))//As long as they still exist.
-				master << "\blue <b>SUCCESS</b>: \black transport procedure of \the [affecting] complete."
+				if(!isnull(master))//As long as they still exist.
+					master << "\blue <b>SUCCESS</b>: \black transport procedure of \the [affecting] complete."
 
-			M.captured = 0 //Important.
-			M.anchored = initial(M.anchored) //Changes the mob's anchored status to the original one; this is not handled by the can_move proc.
+				M.captured = 0 //Important.
+				M.anchored = initial(M.anchored) //Changes the mob's anchored status to the original one; this is not handled by the can_move proc.
 
 		else//And they are free.
 			M << "\blue You are free of the net!"

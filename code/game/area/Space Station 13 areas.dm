@@ -973,6 +973,10 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
+	engine_waste
+		name = "\improper Engine Waste Handling"
+		icon_state = "engine_waste"
+
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
 		icon_state = "engine_monitoring"
@@ -1180,10 +1184,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Robotics"
 	icon_state = "medresearch"
 
-/area/medical/research
-	name = "\improper Medical Research"
-	icon_state = "medresearch"
-
 /area/medical/virology
 	name = "\improper Virology"
 	icon_state = "virology"
@@ -1381,12 +1381,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "garden"
 
 //rnd (Research and Development
+/area/rnd/research
+	name = "\improper Research and Development"
+	icon_state = "research"
 
 /area/rnd/lab
-	name = "\improper Research and Development"
-	icon_state = "toxlab"
-
-/area/rnd/hallway
 	name = "\improper Research Lab"
 	icon_state = "toxlab"
 

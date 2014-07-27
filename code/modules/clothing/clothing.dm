@@ -191,6 +191,8 @@ BLIND     // can't see anything
 	body_parts_covered = FACE|EYES
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
 
+/obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
+
 //Shoes
 /obj/item/clothing/shoes
 	name = "shoes"
