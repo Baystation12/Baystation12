@@ -111,33 +111,33 @@
 		set_frequency(frequency)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
-	..()
+	..()	
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if (!node)
 		on = 0
 	//broadcast_status()
 	if(!on)
-		update_use_power(0)
+		update_use_power(0)	//we got here because a player turned a pump off - definitely want to update.
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/power_draw = -1
-	if (environment.temperature > 0 || air_contents.temperature > 0)
-		if(scrubbing)
-			//limit flow rate from turfs
-			var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_FILTER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
-			
-			power_draw = filter_gas(scrubbing_gas, environment, air_contents, transfer_moles, active_power_usage)
-		else //Just siphon all air
-			//limit flow rate from turfs
-			var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+	if(scrubbing)
+		//limit flow rate from turfs
+		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_FILTER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+		
+		power_draw = filter_gas(scrubbing_gas, environment, air_contents, transfer_moles, active_power_usage)
+	else //Just siphon all air
+		//limit flow rate from turfs
+		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 
-			power_draw = pump_gas(environment, air_contents, transfer_moles, active_power_usage)
+		power_draw = pump_gas(environment, air_contents, transfer_moles, active_power_usage)
 
 	if (power_draw < 0)
-		update_use_power(0)
+		//update_use_power(0)
+		use_power = 0	//don't force update. Sure, we will continue to use power even though we're not pumping anything, but it is easier on the CPU
 	else if (power_draw > 0)
 		//last_power_draw = power_draw
 		handle_pump_power_draw(power_draw)

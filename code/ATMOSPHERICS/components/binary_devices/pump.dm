@@ -61,17 +61,17 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/process()
 	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
 		last_power_draw = 0
 		last_flow_rate = 0
 		return
 
 	var/power_draw = -1
-	if (air1.temperature > 0 || air2.temperature > 0)
-		var/pressure_delta = target_pressure - air2.return_pressure()
+	var/pressure_delta = target_pressure - air2.return_pressure()
 
-		if(pressure_delta > 0.01)
-			/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
+	if(pressure_delta > 0.01)
+		/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
+		if (air1.temperature > 0 || air2.temperature > 0)
 			//Figure out how much gas to transfer to meet the target pressure.
 			var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 			
@@ -79,8 +79,8 @@ Thus, the two variables affect pump operation are set in New():
 			
 			//Return the number of moles that would have to be transfered to bring sink to the target pressure
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-			*/
-			power_draw = pump_gas(air1, air2, air1.total_moles, active_power_usage)
+		*/
+		power_draw = pump_gas(air1, air2, air1.total_moles, active_power_usage)
 		
 		if(network1)
 			network1.update = 1
@@ -89,7 +89,8 @@ Thus, the two variables affect pump operation are set in New():
 			network2.update = 1
 	
 	if (power_draw < 0)
-		update_use_power(0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
 		last_power_draw = 0
 		last_flow_rate = 0
 	else if (power_draw > 0)

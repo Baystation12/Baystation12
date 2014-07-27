@@ -40,7 +40,7 @@
 //total_transfer_moles - Limits the amount of moles to filter. The actual amount of gas filtered may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when filtering gas. If null then the filtering is not limited by power, however power will still be used!
 /obj/machinery/atmospherics/proc/filter_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
-	if (source.total_moles < MINUMUM_MOLES_TO_PUMP)
+	if (source.total_moles < MINUMUM_MOLES_TO_FILTER)
 		return -1
 
 	filtering &= source.gas		//only filter gasses that are actually there.
@@ -50,7 +50,7 @@
 	var/total_filterable_moles = 0
 	var/list/specific_power_gas = list()
 	for (var/g in filtering)
-		if (source.gas[g] < MINUMUM_MOLES_TO_PUMP)
+		if (source.gas[g] < MINUMUM_MOLES_TO_FILTER)
 			continue
 	
 		var/specific_power = calculate_specific_power_gas(g, source, sink)/ATMOS_FILTER_EFFICIENCY
@@ -58,7 +58,7 @@
 		total_specific_power += specific_power
 		total_filterable_moles += source.gas[g]
 	
-	if (total_filterable_moles < MINUMUM_MOLES_TO_PUMP)
+	if (total_filterable_moles < MINUMUM_MOLES_TO_FILTER)
 		return -1
 	
 	//Figure out how much of each gas to filter
@@ -71,7 +71,7 @@
 	if (available_power && total_specific_power > 0)
 		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
 	
-	if (total_transfer_moles < MINUMUM_MOLES_TO_PUMP)
+	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER)
 		return -1
 	
 	var/power_draw = 0
@@ -125,7 +125,38 @@
 	if (usage_amount > active_power_usage - 5)
 		update_use_power(2)
 	else
+		use_power = 1	//Don't update here. Sure, we will use more power than we are supposed to, but it's easier on CPU
+		
+		/* 
+		//This is the correct way to update pump power usage. Unfortunately it is also pretty laggy.
+		//Leaving this here in case someone finds a way to do this that doesn't involve doing area power updates all the time.
 		update_use_power(1)
 		
 		if (usage_amount > idle_power_usage)
-			use_power(round(usage_amount))	//in practice it's pretty rare that we will get here, so calling use_power() is alright.
+			use_power(round(usage_amount))
+		*/
+
+/*
+//DEBUG
+/var/global/enable_scrubbing = 0
+/var/global/enable_vent_pump = 0
+/var/global/enable_power_net = 0
+
+/mob/verb/toggle_scrubbing()
+	set name = "Toggle Scrubbing"
+	set category = "Debug"
+	enable_scrubbing = !enable_scrubbing
+	world << "enable_scrubbing set to [enable_scrubbing]"
+
+/mob/verb/toggle_vent_pump()
+	set name = "Toggle Vent Pumps"
+	set category = "Debug"
+	enable_vent_pump = !enable_vent_pump
+	world << "enable_vent_pump set to [enable_vent_pump]"
+
+/mob/verb/toggle_pump_powernet()
+	set name = "Toggle Pump Power Update"
+	set category = "Debug"
+	enable_power_net = !enable_power_net
+	world << "enable_power_net set to [enable_power_net]"
+*/

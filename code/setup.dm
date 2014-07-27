@@ -841,3 +841,4 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define ATMOS_FILTER_EFFICIENCY	0.9
 
 #define MINUMUM_MOLES_TO_PUMP	0.01	//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
+#define MINUMUM_MOLES_TO_FILTER	0.1

@@ -139,35 +139,26 @@
 	if (!node)
 		on = 0
 	if(!can_pump())
-		update_use_power(0)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
 		last_power_draw = 0
 		last_flow_rate = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	var/environment_pressure = environment.return_pressure()
-
-	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 
 	var/power_draw = -1
-	if((air_contents.temperature > 0 || environment.temperature > 0) && pressure_delta > 0.5)
-		if(pump_direction) //internal -> external
-			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
-				pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
-			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
-				pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
-		
+	
+	//Figure out the target pressure difference
+	var/pressure_delta = get_pressure_delta(environment)
+
+	if(pressure_delta > 0.5)
+		if(pump_direction) //internal -> external	
 			var/output_volume = environment.volume * environment.group_multiplier
 			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
 			power_draw = pump_gas(air_contents, environment, transfer_moles, active_power_usage)
 		else //external -> internal
-			if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
-				pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
-			if(pressure_checks & PRESSURE_CHECK_INTERNAL)
-				pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
-		
 			var/output_volume = air_contents.volume * air_contents.group_multiplier
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
@@ -175,7 +166,7 @@
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 			
-			power_draw =  pump_gas(environment, air_contents, transfer_moles, active_power_usage)
+			power_draw = pump_gas(environment, air_contents, transfer_moles, active_power_usage)
 		
 		if(network)
 			network.update = 1
@@ -183,7 +174,8 @@
 	if (power_draw < 0)
 		last_power_draw = 0
 		last_flow_rate = 0
-		update_use_power(0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
 	if (power_draw > 0)
 		handle_pump_power_draw(power_draw)
 		last_power_draw = power_draw
@@ -194,35 +186,25 @@
 	
 	return 1
 
-//pumps gas from source to sink and returns the power used, or -1 if no pumping was done.
-/obj/machinery/atmospherics/unary/vent_pump/proc/transfer_gas(datum/gas_mixture/source, datum/gas_mixture/sink, var/transfer_moles)
-	if(source.total_moles < MINUMUM_MOLES_TO_PUMP)
-		return -1
-
-	//limit transfer_moles by available power
-	var/specific_power = calculate_specific_power(source, sink)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
-	if (specific_power > 0)
-		transfer_moles = min(transfer_moles, active_power_usage / specific_power)
+/obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)
+	if (air_contents.temperature == 0 && environment.temperature == 0) 
+		return 0
 	
-	//Get the gas to be transferred
-	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
-		return -1	//don't bother
+	var/pressure_delta = DEFAULT_PRESSURE_DELTA
+	var/environment_pressure = environment.return_pressure()
 	
-	var/datum/gas_mixture/removed = source.remove(transfer_moles)
+	if(pump_direction) //internal -> external
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+			pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
+	else //external -> internal
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+			pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
 	
-	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
-		return -1
-	
-	last_flow_rate = (removed.total_moles/(removed.total_moles + source.total_moles))*source.volume
-	
-	var/power_draw = specific_power*transfer_moles
-	if (power_draw > 0)
-		removed.add_thermal_energy(power_draw)
-	
-	//merge the removed gas into the sink
-	sink.merge(removed)
-	
-	return power_draw
+	return pressure_delta
 
 //Radio remote control
 

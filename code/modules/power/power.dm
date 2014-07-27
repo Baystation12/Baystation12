@@ -42,8 +42,10 @@
 	if(!src.loc)
 		return 0
 
-	if(!use_power)
-		return 1
+	//This is bad. This makes machines which are switched off not update their stat flag correctly when power_change() is called.
+	//If use_power is 0, then you probably shouldn't be checking power to begin with.
+	//if(!use_power)
+	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)
