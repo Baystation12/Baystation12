@@ -34,7 +34,7 @@
 					H << "\red You have a monitor for a head, where do you think you're going to put that?"
 					return
 
-			M << "\blue You swallow a gulp from your [src]."
+			M << "\blue You swallow a gulp from \the [src]."
 			if(reagents.total_volume)
 				reagents.trans_to_ingest(M, gulp_size)
 
