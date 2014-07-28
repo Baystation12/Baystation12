@@ -21,14 +21,14 @@ var/list/mechtoys = list(
 )
 
 /area/supply/station //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
-	name = "supply shuttle"
+	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	luminosity = 1
 	lighting_use_dynamic = 0
 	requires_power = 0
 
 /area/supply/dock //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
-	name = "supply shuttle"
+	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	luminosity = 1
 	lighting_use_dynamic = 0
@@ -455,7 +455,7 @@ var/list/mechtoys = list(
 							if ("undocking") dat += "Undocking from station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>Force Launch</A></span>" : ""]<BR>"
 					else
 						dat += "Station<BR>"
-					
+
 					if (shuttle.can_launch())
 						dat += "<A href='?src=\ref[src];send=1'>Send away</A>"
 					else if (shuttle.can_cancel())
@@ -472,14 +472,14 @@ var/list/mechtoys = list(
 					else
 						dat += "*Shuttle is busy*"
 					dat += "<BR>\n<BR>"
-		
-		
+
+
 		dat += {"<HR>\nSupply points: [supply_controller.points]<BR>\n<BR>
 		\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];viewrequests=1'>View requests</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];vieworders=1'>View orders</A><BR>\n<BR>
 		\n<A href='?src=\ref[user];mach_close=computer'>Close</A>"}
-		
+
 
 	user << browse(dat, "window=computer;size=575x450")
 	onclose(user, "computer")
@@ -520,13 +520,13 @@ var/list/mechtoys = list(
 			shuttle.launch(src)
 			temp = "The supply shuttle has been called and will arrive in approximately [round(supply_controller.movetime/600,1)] minutes.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 			post_signal("supply")
-	
+
 	if (href_list["force_send"])
 		shuttle.force_launch(src)
 
 	if (href_list["cancel_send"])
 		shuttle.cancel_launch(src)
-	
+
 	else if (href_list["order"])
 		//if(!shuttle.idle()) return	//this shouldn't be necessary it seems
 		if(href_list["order"] == "categories")
