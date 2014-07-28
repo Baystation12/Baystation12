@@ -77,6 +77,14 @@
 		stat |= NOPOWER
 	return
 
+//This is used by the master controller to update the NOPOWER flag
+//This will allow machines to update NOPOWER if they are moved from one area to another.
+//Does the same thing as power_change() but is optimized for the master controller.
+/obj/machinery/proc/update_powered_status(var/area/master_area)
+	if(master_area.powered(power_channel))
+		stat &= ~NOPOWER
+	else
+		stat |= NOPOWER
 
 // the powernet datum
 // each contiguous network of cables & nodes
