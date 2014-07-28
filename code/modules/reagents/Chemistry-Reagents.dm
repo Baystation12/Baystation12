@@ -1332,7 +1332,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					
+
 					//Peridaxon is hard enough to get, it's probably fair to make this all internal organs
 					for(var/datum/organ/internal/I in H.internal_organs)
 						if(I.damage > 0)
@@ -1760,7 +1760,7 @@ datum
 					alien_weeds.healthcheck()
 				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
 					del(O)
-				else if(istype(O,/obj/effect/spacevine))
+				else if(istype(O,/obj/effect/plantsegment))
 					if(prob(50)) del(O) //Kills kudzu too.
 				// Damage that is done to growing plants is separately at code/game/machinery/hydroponics at obj/item/hydroponics
 
