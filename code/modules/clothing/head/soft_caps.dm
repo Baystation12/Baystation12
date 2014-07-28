@@ -7,6 +7,7 @@
 	item_color = "cargo"
 	var/flipped = 0
 	siemens_coefficient = 0.9
+	body_parts_covered = 0
 
 	dropped()
 		src.icon_state = "[item_color]soft"
