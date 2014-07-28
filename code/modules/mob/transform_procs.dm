@@ -130,8 +130,6 @@
 	O.verbs += /mob/living/silicon/ai/proc/ai_store_location
 	O.verbs += /mob/living/silicon/ai/proc/ai_goto_location
 	O.verbs += /mob/living/silicon/ai/proc/ai_remove_location
-	O.verbs += /mob/living/silicon/ai/proc/ai_take_image
-	O.verbs += /mob/living/silicon/ai/proc/ai_view_images
 
 	O.job = "AI"
 

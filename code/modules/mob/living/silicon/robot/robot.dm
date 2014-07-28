@@ -65,6 +65,7 @@
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
 	var/pose
+	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -97,6 +98,7 @@
 		if(connected_ai)
 			connected_ai.connected_robots += src
 			lawsync()
+			photosync()
 			lawupdate = 1
 		else
 			lawupdate = 0
@@ -137,7 +139,6 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
-
 
 	if(istype(src,/mob/living/silicon/robot/drone))
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
