@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 503.1224
+WINDOW: code\modules\paperwork\photography.dm;code\modules\mob\living\silicon\ai\ai.dm;code\_onclick\click.dm;code\_onclick\ai.dm;code\modules\mob\transform_procs.dm;code\game\objects\items\blueprints.dm;code\modules\paperwork\ai_photography.dm
+DIR: code code\_onclick code\game\gamemodes code\game\gamemodes\mutiny code\game\gamemodes\mutiny\directives code\game\objects code\game\objects\items code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai code\modules\paperwork code\WorkInProgress\AI_Visibility icons icons\mob icons\obj icons\obj\atmospherics sound sound\vox 
+FILE: code\modules\paperwork\ai_photography.dm
+LAST_COMPILE_TIME: 1406556860
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

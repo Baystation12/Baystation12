@@ -212,7 +212,31 @@
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
+	captureimage(target, user, flag)
 
+	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
+
+	pictures_left--
+	desc = "A polaroid camera. It has [pictures_left] photos left."
+	user << "<span class='notice'>[pictures_left] photos left.</span>"
+	icon_state = icon_off
+	on = 0
+	spawn(64)
+		icon_state = icon_on
+		on = 1
+
+/obj/item/device/camera/proc/can_capture_turf(turf/T, mob/user)
+	var/mob/dummy = new(T)	//Go go visibility check dummy
+	var/viewer = user
+	if(user.client)		//To make shooting through security cameras possible
+		viewer = user.client.eye
+	var/can_see = (dummy in viewers(world.view, viewer)) != null
+
+	dummy.loc = null
+	dummy = null	//Alas, nameless creature	//garbage collect it instead
+	return can_see
+
+/obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
 	var/x_c = target.x - 1
 	var/y_c = target.y + 1
 	var/z_c	= target.z
@@ -223,21 +247,18 @@
 	for(var/i = 1; i <= 3; i++)
 		for(var/j = 1; j <= 3; j++)
 			var/turf/T = locate(x_c, y_c, z_c)
-			var/mob/dummy = new(T)	//Go go visibility check dummy
-			var/viewer = user
-			if(user.client)		//To make shooting through security cameras possible
-				viewer = user.client.eye
-			if(dummy in viewers(world.view, viewer))
+			if(can_capture_turf(T, user))
 				temp.Blend(get_icon(T), ICON_OVERLAY, 32 * (j-1-1), 32 - 32 * (i-1))
+				mobs += get_mobs(T, user)
 			else
 				temp.Blend(black, ICON_OVERLAY, 32 * (j-1), 64 - 32 * (i-1))
-			mobs += get_mobs(T)
-			dummy.loc = null
-			dummy = null	//Alas, nameless creature	//garbage collect it instead
 			x_c++
 		y_c--
 		x_c = x_c - 3
 
+	printpicture(user, temp, mobs, flag)
+
+/obj/item/device/camera/proc/printpicture(mob/user, icon/temp, mobs, flag)
 	var/obj/item/weapon/photo/P = new/obj/item/weapon/photo()
 	P.loc = user.loc
 	if(!user.get_inactive_hand())
@@ -256,13 +277,3 @@
 	P.desc = mobs
 	P.pixel_x = rand(-10, 10)
 	P.pixel_y = rand(-10, 10)
-	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
-
-	pictures_left--
-	desc = "A polaroid camera. It has [pictures_left] photos left."
-	user << "<span class='notice'>[pictures_left] photos left.</span>"
-	icon_state = icon_off
-	on = 0
-	spawn(64)
-		icon_state = icon_on
-		on = 1

@@ -53,6 +53,11 @@
 		return
 	next_move = world.time + 9
 
+	if(aicamera.in_camera_mode)
+		aicamera.camera_mode_off()
+		aicamera.captureimage(A, usr)
+		return
+
 	/*
 		AI restrained() currently does nothing
 	if(restrained())
