@@ -65,7 +65,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 		var/turf/T = get_turf(src)
 		S.volume -= get_dist(T, turf_source) * 2 //multiplicative falloff to add on top of natural audio falloff.
 		var/datum/gas_mixture/environment = T.return_air()
-		S.volume -= environment.return_pressure()/100 + 1
+		if(get_dist(T, turf_source) > 2)
+			S.volume -= environment.return_pressure()/100 + 1
 		if (S.volume < 0)
 			S.volume = 0
 		var/dx = turf_source.x - T.x // Hearing from the right/left
