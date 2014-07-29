@@ -126,6 +126,15 @@
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
 
+//////////////////////// AIsForAxolotl - Tea Flask - Margaret Stewart //////////
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask/fluff/margaret
+	name = "Tea Flask"
+	desc = "A plastic vacuum flask with an ugly tartan pattern. 'M.S.' has been written on the bottom with a silver marker."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "margaret_flask"
+
+
 /obj/item/weapon/pen/fluff/fancypen //orangebottle: Lillian Levett, Lilliana Reade
 	name = "fancy pen"
 	desc = "A fancy metal pen. It uses blue ink. An inscription on one side reads,\"L.L. - L.R.\""
@@ -771,6 +780,13 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
+
+/obj/item/weapon/storage/belt/utility/full/fluff/sophie
+	name = "Sophie's belt"
+	desc = "A tool-belt in Atmos colours."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sophie_belt"
+	item_state = "sophie_belt"
 
 /obj/item/weapon/storage/belt/medical/fluff/nashi_belt
 	name = "rainbow medical belt"
