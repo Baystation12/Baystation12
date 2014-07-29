@@ -9,8 +9,8 @@
 	var/id_with_upload_string = ""		//String versions for easy editing in map editor.
 	var/id_with_download_string = ""
 	var/server_id = 0
-	var/operating_temperature = 100 + T0C
-	idle_power_usage = 600
+	var/produces_heat = 1
+	idle_power_usage = 800
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
 
@@ -32,7 +32,6 @@
 	var/tot_rating = 0
 	for(var/obj/item/weapon/stock_parts/SP in src)
 		tot_rating += SP.rating
-	operating_temperature /= max(1, tot_rating)
 	idle_power_usage /= max(1, tot_rating)
 
 /obj/machinery/r_n_d/server/initialize()
@@ -68,7 +67,7 @@
 	if(delay)
 		delay--
 	else
-		produce_heat(operating_temperature)
+		produce_heat()
 		delay = initial(delay)
 
 /obj/machinery/r_n_d/server/meteorhit(var/obj/O as obj)
@@ -101,24 +100,28 @@
 			C.files.AddDesign2Known(D)
 		C.files.RefreshResearch()
 
-/obj/machinery/r_n_d/server/proc/produce_heat(new_temperature)
-	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
+/obj/machinery/r_n_d/server/proc/produce_heat()
+	if (!produces_heat)
+		return
+	
+	if (!use_power)
+		return
+
+	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from telecoms
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			
-			if(env.temperature < new_temperature)
 
-				var/transfer_moles = 0.25 * env.total_moles
+			var/transfer_moles = 0.25 * env.total_moles
 
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
+			var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				if(removed)
+			if(removed)
+				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
+				
+				removed.add_thermal_energy(heat_produced)
 
-					var/heat_produced = min(removed.get_thermal_energy_change(new_temperature), idle_power_usage)	//obviously can't produce more heat than the machine draws from it's power source
-					removed.add_thermal_energy(heat_produced)
-
-				env.merge(removed)
+			env.merge(removed)
 
 /obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if (disabled)

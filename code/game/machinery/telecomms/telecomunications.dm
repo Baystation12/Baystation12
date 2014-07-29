@@ -29,7 +29,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/toggled = 1 	// Is it toggled on
 	var/on = 1
 	var/integrity = 100 // basically HP, loses integrity by heat
-	var/operating_temperature = 20 + T0C // the temperature that the machine will raise the environment to, or null for no heat production
+	var/produces_heat = 1	//whether the machine will produce heat when on.
 	var/delay = 10 // how many process() ticks to delay per heat
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
 	var/circuitboard = null // string pointing to a circuitboard type
@@ -227,35 +227,39 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		integrity = between(0, integrity - 1, 100)
 
 
-	if(delay)
+	if(delay > 0)
 		delay--
-	else
-		// If the machine is on, ready to produce heat, and has positive traffic, genn some heat
-		if(on && traffic > 0)
-			produce_heat(operating_temperature)
-			delay = initial(delay)
+	else if(on)
+		produce_heat()
+		delay = initial(delay)
+		
+		
 
-/obj/machinery/telecomms/proc/produce_heat(new_temperature)
-	if(isnull(new_temperature))
+/obj/machinery/telecomms/proc/produce_heat()
+	if (!produces_heat)
+		return
+	
+	if (!use_power)
 		return
 
-	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
+	if(!(stat & (NOPOWER|BROKEN)))
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			
-			if(env.temperature < new_temperature)
 
-				var/transfer_moles = 0.25 * env.total_moles
+			var/transfer_moles = 0.25 * env.total_moles
 
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
+			var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
-				if(removed)
-					
-					var/heat_produced = min(removed.get_thermal_energy_change(new_temperature), idle_power_usage)	//obviously can't produce more heat than the machine draws from it's power source
-					removed.add_thermal_energy(heat_produced)
+			if(removed)
+				
+				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
+				if (traffic <= 0)
+					heat_produced *= 0.30	//if idle, produce less heat.
+				
+				removed.add_thermal_energy(heat_produced)
 
-				env.merge(removed)
+			env.merge(removed)
 /*
 	The receiver idles and receives messages from subspace-compatible radio equipment;
 	primarily headsets. They then just relay this information to all linked devices,
@@ -274,7 +278,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 600
 	machinetype = 1
-	operating_temperature = null
+	produces_heat = 0
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/receiver"
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
@@ -331,7 +335,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1600
 	machinetype = 7
-	operating_temperature = 40 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/hub"
 	long_range_link = 1
 	netspeed = 40
@@ -366,7 +369,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 600
 	machinetype = 8
-	operating_temperature = null
+	produces_heat = 0
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/relay"
 	netspeed = 5
 	long_range_link = 1
@@ -418,7 +421,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1000
 	machinetype = 2
-	operating_temperature = 20 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/bus"
 	netspeed = 40
 	var/change_frequency = 0
@@ -471,7 +473,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 600
 	machinetype = 3
-	operating_temperature = 100 + T0C
 	delay = 5
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/processor"
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
@@ -510,7 +511,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 300
 	machinetype = 4
-	operating_temperature = 50 + T0C
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/server"
 	var/list/log_entries = list()
 	var/list/stored_names = list()
