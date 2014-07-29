@@ -3,8 +3,15 @@
 	desc = "A small disk used for carrying data on plant genetics."
 	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "disk"
+	w_class = 1.0
+
 	var/list/genes = list()
 	var/genesource = "unknown"
+
+/obj/item/weapon/disk/botany/New()
+	..()
+	pixel_x = rand(-5,5)
+	pixel_y = rand(-5,5)
 
 /obj/item/weapon/disk/botany/attack_self(var/mob/user as mob)
 	if(genes.len)
@@ -24,6 +31,7 @@
 	..()
 	for(var/i = 0;i<7;i++)
 		new /obj/item/weapon/disk/botany(src)
+
 /obj/machinery/botany
 	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "hydrotray3"
@@ -77,16 +85,18 @@
 /obj/machinery/botany/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/seeds))
 		if(seed)
-			if(seed.seed.immutable)
-				user << "That seed is not compatible with our genetics technology."
-			else
-				user << "There is already a seed loaded."
+			user << "There is already a seed loaded."
+
+		var/obj/item/seeds/S =W
+		if(S.seed && S.seed.immutable > 0)
+			user << "That seed is not compatible with our genetics technology."
 		else
 			user.drop_item(W)
 			W.loc = src
 			seed = W
 			user << "You load [W] into [src]."
 		return
+
 	if(istype(W,/obj/item/weapon/screwdriver))
 		open = !open
 		user << "\blue You [open ? "open" : "close"] the maintenance panel."
@@ -181,7 +191,7 @@
 
 		if(seed.seed.name == "new line" || isnull(seed_types[seed.seed.name]))
 			seed.seed.uid = seed_types.len + 1
-			seed.seed.name = "[uid]"
+			seed.seed.name = "[seed.seed.uid]"
 			seed_types[seed.seed.name] = seed.seed
 
 		seed.update_seed()
@@ -215,6 +225,8 @@
 
 		if(seed && seed.seed)
 			genetics = seed.seed
+			degradation = 0
+
 		del(seed)
 		seed = null
 
@@ -233,7 +245,7 @@
 		if(!genetics.roundstart)
 			loaded_disk.genesource += " (variety #[genetics.uid])"
 
-		loaded_disk.name += " ([gene_tag_masks[href_list["get_gene"]]])"
+		loaded_disk.name += " ([gene_tag_masks[href_list["get_gene"]]], #[genetics.uid])"
 		loaded_disk.desc += " The label reads \'gene [gene_tag_masks[href_list["get_gene"]]], sampled from [genetics.display_name]\'."
 		eject_disk = 1
 
