@@ -112,6 +112,16 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "syrus_notebook"
 
+/////////////////////// Cataguettes - Lucy's Stethoscope - Lucy Kemmerer //////
+
+/obj/item/clothing/tie/stethoscope/fluff/lucystethos
+   name = "Lucy's Stethoscope"
+   desc = "A medical apparatus intended to ease in listening to the sounds of the human body. This one looks cleaner and sparklier than the rest. There is a small silver plaque attached to the tubing, with the words 'Lucy Kemmerer' engraved on it."
+   icon_state = "lucystethos"
+   item_state = "lucystethos"
+   item_color ="lucystethos"
+   icon = 'icons/obj/custom_items.dmi'
+
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
@@ -751,6 +761,43 @@
 	icon_state = "adapted_h"
 	icon = 'icons/obj/custom_items.dmi'
 
+//////////////////////////////////////////////////////////
+///////////////////// Belts //////////////////////////////
+//////////////////////////////////////////////////////////
+
+/obj/item/weapon/storage/belt/medical/fluff/ems
+	name = "EMS utility belt"
+	desc = "A sturdy black webbing belt with attached pouches. H. ISHIMARU is scratched on the interior of the buckle."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "emsbelt"
+	item_state = "emsbelt"
+
+/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
+	name = "rainbow medical belt"
+	desc = "A somewhat-worn, modified, rainbow belt."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nashi_belt"
+	item_state = "fluff_rbelt"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
+		new /obj/item/weapon/reagent_containers/syringe/(src)
+		new /obj/item/device/healthanalyzer(src)
+
+/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
+	icon = 'icons/obj/chemical.dmi'
+	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
+	New(loc, var/color, var/labeled)
+		..()
+		name = "[labeled] bottle"
+		desc = "A small bottle.  Contains [labeled]"
+		icon_state = "bottle[color]"
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
@@ -997,9 +1044,11 @@
 
 /obj/item/clothing/tie/fluff/radi
 	name = "Blood Red Pendant"
-	desc = "A pendant that has been painted a metallic red, it seems to have a ruby in it."
+	desc = "A blue chained necklace with a ruby in the middle, it looks pretty!"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "radi_pendant"
+	item_state = "radi_pendant"
+	item_color = "radi_pendant"
 	flags = FPRINT|TABLEPASS
 	w_class = 2.0
 	slot_flags = 0
@@ -1215,34 +1264,6 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
-
-
-///// Custom Items coded by Iamgoofball are Below /////
-/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
-	name = "rainbow medical belt"
-	desc = "A somewhat-worn, modified, rainbow belt."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "nashi_belt"
-	item_state = "fluff_rbelt"
-
-	New()
-		..()
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
-		new /obj/item/weapon/reagent_containers/syringe/(src)
-		new /obj/item/device/healthanalyzer(src)
-
-/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
-	icon = 'icons/obj/chemical.dmi'
-	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
-	New(loc, var/color, var/labeled)
-		..()
-		name = "[labeled] bottle"
-		desc = "A small bottle.  Contains [labeled]"
-		icon_state = "bottle[color]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
 	name = "Yuri's Flask"
