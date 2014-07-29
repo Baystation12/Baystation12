@@ -1,4 +1,8 @@
-//Analyzer, pestkillers, weedkillers, nutrients, hatchets.
+//Analyzer, pestkillers, weedkillers, nutrients, hatchets, cutters.
+
+/obj/item/weapon/wirecutters/clippers
+	name = "plant clippers"
+	desc = "A tool used to take samples from plants."
 
 /obj/item/device/analyzer/plant_analyzer
 	name = "plant analyzer"
@@ -67,7 +71,9 @@
 	if(grown_seed.harvest_repeat)
 		dat += "This plant can be harvested repeatedly.<br>"
 
-	if(grown_seed.immutable)
+	if(grown_seed.immutable == -1)
+		dat += "This plant is highly mutable.<br>"
+	else if(grown_seed.immutable > 0)
 		dat += "This plant does not possess genetics that are alterable.<br>"
 
 	if(grown_seed.products && grown_seed.products.len)
