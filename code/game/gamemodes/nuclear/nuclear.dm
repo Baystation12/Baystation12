@@ -1,3 +1,10 @@
+/*
+	NUCLEAR EMERGENCY ROUNDTYPE
+*/
+
+var/global/list/turf/synd_spawn = list()
+
+
 /datum/game_mode
 	var/list/datum/mind/syndicates = list()
 
@@ -115,14 +122,6 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/game_mode/nuclear/post_setup()
-
-	var/list/turf/synd_spawn = list()
-
-	for(var/obj/effect/landmark/A in landmarks_list)
-		if(A.name == "Syndicate-Spawn")
-			synd_spawn += get_turf(A)
-			del(A)
-			continue
 
 	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
