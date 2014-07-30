@@ -720,6 +720,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "norah_briggs_1"
 
+//////////////// Painted Welding Mask - Kuratas Dotaavi - supercotton ////////////////////
+
+/obj/item/clothing/head/welding/fluff/kuratas
+	name =	"Painted Welding Mask"
+	desc =  "A blood-red welding mask with an intricate pattern. Smells like burnt rubber."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "paintedwelding"
+
 /obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "Hey, I think we're missing a hazard vest..."
