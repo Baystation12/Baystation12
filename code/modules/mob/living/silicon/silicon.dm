@@ -13,6 +13,8 @@
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
 
+	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+
 /mob/living/silicon/proc/show_laws()
 	return
 
