@@ -54,14 +54,12 @@
 //Mob specific holders.
 
 /obj/item/weapon/holder/diona
-
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
 	icon_state = "nymph"
 	origin_tech = "magnets=3;biotech=5"
 
 /obj/item/weapon/holder/drone
-
 	name = "maintenance drone"
 	desc = "It's a small maintenance robot."
 	icon_state = "drone"
@@ -69,8 +67,13 @@
 
 
 /obj/item/weapon/holder/cat
-
 	name = "cat"
 	desc = "It's a cat. Meow."
 	icon_state = "cat"
 	origin_tech = null
+
+/obj/item/weapon/holder/borer
+	name = "cortical borer"
+	desc = "It's a slimy brain slug. Gross."
+	icon_state = "borer"
+	origin_tech = "biotech=6"
