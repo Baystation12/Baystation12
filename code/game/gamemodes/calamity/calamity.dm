@@ -7,7 +7,7 @@
  * ~ Zuhayr
  */
 
-//temp, move these somewhere appropriate and change all the other references to use it.
+//temp, move these somewhere appropriate
 /proc/show_generic_antag_text(var/datum/mind/player)
 	if(player.current)
 		player.current << \
@@ -19,7 +19,13 @@
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
 
 /proc/show_objectives(var/datum/mind/player)
+
 	if(!player || !player.current) return
+
+	if(config.objectives_disabled)
+		show_generic_antag_text(player)
+		return
+
 	var/obj_count = 1
 	player.current << "\blue Your current objectives:"
 	for(var/datum/objective/objective in player.objectives)
@@ -262,11 +268,7 @@
 		spawn(0)
 			NukeNameAssign(player)
 
-		if(!config.objectives_disabled)
-			forge_syndicate_objectives(player)
-		else
-			show_generic_antag_text(player)
-
+		forge_syndicate_objectives(player)
 		greet_syndicate(player)
 		equip_syndicate(player.current)
 
@@ -296,9 +298,8 @@
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
 			player.objectives += new /datum/objective/survive()
-		else
-			show_generic_antag_text(player)
 
+		show_objectives(player)
 		greet_changeling(player)
 
 /datum/game_mode/calamity/proc/spawn_traitors(var/list/candidates)
@@ -309,8 +310,8 @@
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
 			player.objectives += new /datum/objective/survive()
-		else
-			show_generic_antag_text(player)
+
+		show_objectives(player)
 
 		finalize_traitor(player)
 		greet_traitor(player)
@@ -323,8 +324,8 @@
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
 			player.objectives += new /datum/objective/survive()
-		else
-			show_generic_antag_text(player)
+
+		show_objectives(player)
 
 		player.current.loc = pick(wizardstart)
 
@@ -353,8 +354,8 @@
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/ninja_highlander()
 			player.objectives += new /datum/objective/survive()
-		else
-			show_generic_antag_text(player)
+
+		show_objectives(player)
 
 		//Ninja objective announcement goes here.
 
@@ -435,9 +436,8 @@
 			player.objectives += new /datum/objective/borer_survive()
 			player.objectives += new /datum/objective/borer_reproduce()
 			player.objectives += new /datum/objective/escape()
-			show_objectives(player)
-		else
-			show_generic_antag_text(player)
+
+		show_objectives(player)
 
 /datum/game_mode/calamity/proc/spawn_cultists(var/list/candidates)
 
@@ -471,7 +471,6 @@
 
 			player.objectives += new /datum/objective/escape()
 			player.objectives += new /datum/objective/survive()
-			show_objectives(player)
-		else
-			show_generic_antag_text(player)
+
+		show_objectives(player)
 		player.special_role = "Cultist"
