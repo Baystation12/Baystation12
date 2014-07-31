@@ -59,18 +59,7 @@ emp_act
 	
 	//BEGIN BOOK'S TASER NERF.
 	if(istype(P, /obj/item/projectile/beam/stun))
-		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
-		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
-		
-		for(var/obj/item/clothing/CL in clothing_items) //Make an unregulated var to pass around.
-			if(!istype(CL))	//This isn't necessary, is it?
-				continue
-			if(CL.body_parts_covered & select_area.body_part) // Is that body part being targeted covered by CL?
-				P.agony *= CL.siemens_coefficient
-		
-		//blocked = 0 here as we've already adjused based on siemens_coefficient.
-		apply_effect(P.agony,AGONY,0)
-		flash_pain()
+		stun_effect_act(0, P.agony, def_zone)
 		src <<"\red You have been hit by [P]!"
 		del P
 		return
@@ -88,6 +77,19 @@ emp_act
 
 	return (..(P , def_zone))
 
+/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
+	switch (def_zone)
+		if("head")
+			agony_amount *= 1.25
+		//if("l_hand", "r_hand")	//TODO
+		//if("l_foot", "r_foot")	//TODO
+
+	var/datum/organ/external/affected = get_organ(check_zone(def_zone))
+	var/siemens_coeff = get_siemens_coefficient_organ(affected)
+	stun_amount *= siemens_coeff
+	agony_amount *= siemens_coeff
+	
+	..(stun_amount, agony_amount, def_zone)
 
 /mob/living/carbon/human/getarmor(var/def_zone, var/type)
 	var/armorval = 0
@@ -191,7 +193,7 @@ emp_act
 /mob/living/carbon/human/proc/attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone)
 	if(!I || !user)	return 0
 
-	var/target_zone = def_zone? def_zone : get_zone_with_miss_chance(user.zone_sel.selecting, src)
+	var/target_zone = def_zone? check_zone(def_zone) : get_zone_with_miss_chance(user.zone_sel.selecting, src)
 	
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
