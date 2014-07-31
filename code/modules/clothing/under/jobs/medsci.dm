@@ -139,7 +139,21 @@
 	item_color = "scrubspurple"
 	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/under/rank/psych
+	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
+	name = "psychiatrist's jumpsuit"
+	icon_state = "psych"
+	item_state = "w_suit"
+	item_color = "psych"
+	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/under/rank/psych/turtleneck
+	desc = "A turqouise turtleneck and a pair of dark blue slacks, belonging to a psychologist."
+	name = "psychologist's turtleneck"
+	icon_state = "psychturtle"
+	item_state = "b_suit"
+	item_color = "psychturtle"
+	flags = FPRINT | TABLEPASS
 
 
 /*
