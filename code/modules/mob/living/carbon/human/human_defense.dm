@@ -57,13 +57,12 @@ emp_act
 
 				return -1 // complete projectile permutation
 	
-	//BEGIN BOOK'S TASER NERF.
+	//Tasers
 	if(istype(P, /obj/item/projectile/beam/stun))
-		stun_effect_act(0, P.agony, def_zone)
+		stun_effect_act(0, P.agony, def_zone, P)
 		src <<"\red You have been hit by [P]!"
 		del P
 		return
-	//END TASER NERF
 
 	//Shrapnel
 	if (P.damage_type == BRUTE)
