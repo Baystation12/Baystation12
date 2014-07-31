@@ -1094,18 +1094,24 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-
+	
+	if(usr != src)
+		return
+	
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
-		if (O)
+		if (isytpe(O) && (O.loc == src))
 			O.attack_self(src)
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
+		if (!isytpe(O) || !(O.loc == src || O.loc == src.module))
+			return
+		
 		if(activated(O))
 			src << "Already activated"
 			return
