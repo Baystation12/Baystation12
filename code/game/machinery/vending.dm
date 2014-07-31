@@ -1,9 +1,14 @@
+#define CAT_NORMAL 0
+#define CAT_HIDDEN 1
+#define CAT_COIN   2
+
 /datum/data/vending_product
 	var/product_name = "generic"
 	var/product_path = null
 	var/amount = 0
 	var/price = 0
 	var/display_color = "blue"
+	var/category = CAT_NORMAL
 
 
 
@@ -16,6 +21,7 @@
 	anchored = 1
 	density = 1
 	var/active = 1 //No sales pitches if off!
+	var/delay_product_spawn // If set, uses sleep() in product spawn proc (mostly for seeds to retrieve correct names).
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
 	var/vend_delay = 10 //How long does it take to vend?
 	var/datum/data/vending_product/currently_vending = null // A /datum/data/vending_product instance of what we're paying for right now.
@@ -111,18 +117,28 @@
 
 		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
-		R.product_name = temp.name
+
 		R.product_path = typepath
 		R.amount = amount
 		R.price = price
 		R.display_color = pick("red","blue","green")
 
 		if(hidden)
+			R.category=CAT_HIDDEN
 			hidden_records += R
 		else if(req_coin)
+			R.category=CAT_COIN
 			coin_records += R
 		else
+			R.category=CAT_NORMAL
 			product_records += R
+
+		if(delay_product_spawn)
+			sleep(1)
+			R.product_name = temp.name
+		else
+			R.product_name = temp.name
+
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
 
@@ -189,16 +205,19 @@
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 		var/datum/money_account/CH = get_account(C.associated_account_number)
 		if (CH) // Only proceed if card contains proper account number.
-			if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-				if(vendor_account)
-					var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-					var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-					transfer_and_vend(D)
+			if(!CH.suspended)
+				if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+					if(vendor_account)
+						var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+						var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+						transfer_and_vend(D)
+					else
+						usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 				else
-					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+					//Just Vend it.
+					transfer_and_vend(CH)
 			else
-				//Just Vend it.
-				transfer_and_vend(CH)
+				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
 			usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
 
@@ -248,6 +267,31 @@
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
+/obj/machinery/vending/proc/GetProductIndex(var/datum/data/vending_product/P)
+	var/list/plist
+	switch(P.category)
+		if(CAT_NORMAL)
+			plist=product_records
+		if(CAT_HIDDEN)
+			plist=hidden_records
+		if(CAT_COIN)
+			plist=coin_records
+		else
+			warning("UNKNOWN CATEGORY [P.category] IN TYPE [P.product_path] INSIDE [type]!")
+	return plist.Find(P)
+
+/obj/machinery/vending/proc/GetProductByID(var/pid, var/category)
+	switch(category)
+		if(CAT_NORMAL)
+			return product_records[pid]
+		if(CAT_HIDDEN)
+			return hidden_records[pid]
+		if(CAT_COIN)
+			return coin_records[pid]
+		else
+			warning("UNKNOWN PRODUCT: PID: [pid], CAT: [category] INSIDE [type]!")
+			return null
+
 /obj/machinery/vending/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -280,12 +324,11 @@
 		dat += "<font color = 'red'>No product loaded!</font>"
 	else
 		var/list/display_records = src.product_records
+
 		if(src.extended_inventory)
-			display_records = src.product_records + src.hidden_records
+			display_records += src.hidden_records
 		if(src.coin)
-			display_records = src.product_records + src.coin_records
-		if(src.coin && src.extended_inventory)
-			display_records = src.product_records + src.hidden_records + src.coin_records
+			display_records += src.coin_records
 
 		for (var/datum/data/vending_product/R in display_records)
 			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
@@ -293,7 +336,8 @@
 			if(R.price)
 				dat += " <b>(Price: [R.price])</b>"
 			if (R.amount > 0)
-				dat += " <a href='byond://?src=\ref[src];vend=\ref[R]'>(Vend)</A>"
+				var/idx=GetProductIndex(R)
+				dat += " <a href='byond://?src=\ref[src];vend=[idx];cat=[R.category]'>(Vend)</A>"
 			else
 				dat += " <font color = 'red'>SOLD OUT</font>"
 			dat += "<br>"
@@ -377,7 +421,10 @@
 				flick(src.icon_deny,src)
 				return
 
-			var/datum/data/vending_product/R = locate(href_list["vend"])
+			var/idx=text2num(href_list["vend"])
+			var/cat=text2num(href_list["cat"])
+
+			var/datum/data/vending_product/R = GetProductByID(idx,cat)
 			if (!R || !istype(R) || !R.product_path || R.amount <= 0)
 				return
 
@@ -801,7 +848,7 @@
 	product_ads = "We like plants!;Don't you want some?;The greenest thumbs ever.;We like big plants.;Soft soil..."
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
-	products = list(/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/pestspray = 20,
+	products = list(/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/plantspray/pests = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 
@@ -811,6 +858,8 @@
 	product_slogans = "THIS'S WHERE TH' SEEDS LIVE! GIT YOU SOME!;Hands down the best seed selection on the station!;Also certain mushroom varieties available, more for experts! Get certified today!"
 	product_ads = "We like plants!;Grow some crops!;Grow, baby, growww!;Aw h'yeah son!"
 	icon_state = "seeds"
+	delay_product_spawn = 1
+
 	products = list(/obj/item/seeds/bananaseed = 3,/obj/item/seeds/berryseed = 3,/obj/item/seeds/carrotseed = 3,/obj/item/seeds/chantermycelium = 3,/obj/item/seeds/chiliseed = 3,
 					/obj/item/seeds/cornseed = 3, /obj/item/seeds/eggplantseed = 3, /obj/item/seeds/potatoseed = 3, /obj/item/seeds/replicapod = 3,/obj/item/seeds/soyaseed = 3,
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,

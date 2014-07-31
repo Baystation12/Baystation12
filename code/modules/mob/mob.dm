@@ -736,10 +736,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-	if(buckled && (!buckled.movable))
+
+	var/is_movable
+	if(buckled && istype(buckled))
+		is_movable = buckled.movable
+
+	if(buckled && !is_movable)
 		anchored = 1
 		canmove = 0
-		if( istype(buckled,/obj/structure/stool/bed/chair) )
+		if(istype(buckled,/obj/structure/stool/bed/chair) )
 			lying = 0
 		else if(istype(buckled, /obj/vehicle))
 			var/obj/vehicle/V = buckled
@@ -749,7 +754,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				lying = 1
 		else
 			lying = 1
-	else if(buckled && (buckled.movable))
+	else if(buckled && is_movable)
 		anchored = 0
 		canmove = 1
 		lying = 0
@@ -757,7 +762,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 		lying = 1
 		canmove = 0
 	else if( stunned )
-//		lying = 0
 		canmove = 0
 	else if(captured)
 		anchored = 1

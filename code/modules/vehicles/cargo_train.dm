@@ -1,8 +1,8 @@
 /obj/vehicle/train/cargo/engine
 	name = "cargo train tug"
 	desc = "A ridable electric car designed for pulling cargo trolleys."
-	icon = 'icons/obj/aibots.dmi'
-	icon_state = "mulebot1"			//mulebot icons until I get some proper icons
+	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "cargo_engine"
 	on = 0
 	powered = 1
 	locked = 0
@@ -10,7 +10,7 @@
 	standing_mob = 1
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 9
+	load_offset_y = 7
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
@@ -25,8 +25,8 @@
 
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
-	icon = 'icons/obj/aibots.dmi'
-	icon_state = "mulebot0"
+	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "cargo_trailer"
 	anchored = 0
 	passenger_allowed = 0
 	locked = 0
@@ -34,7 +34,7 @@
 	standing_mob = 1
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 9
+	load_offset_y = 4
 
 //-------------------------------------------
 // Standard procs
@@ -43,7 +43,10 @@
 	..()
 	cell = new /obj/item/weapon/cell/high
 	verbs -= /atom/movable/verb/pull
+	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
 	key = new()
+	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
+	overlays += I
 
 /obj/vehicle/train/cargo/engine/Move()
 	if(on && cell.charge < power_use)
@@ -68,21 +71,17 @@
 	if(istype(W, /obj/item/weapon/key/cargo_train))
 		if(!key)
 			user.drop_item()
+			W.forceMove(src)
 			key = W
-			W.loc = src
 			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key
 		return
 	..()
 
 /obj/vehicle/train/cargo/update_icon()
 	if(open)
-		icon_state = "mulebot-hatch"
+		icon_state = initial(icon_state) + "_open"
 	else
 		icon_state = initial(icon_state)
-
-/obj/vehicle/train/cargo/engine/Emag(mob/user as mob)
-	..()
-	flick("mulebot-emagged", src)
 
 /obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
 	return
@@ -99,7 +98,7 @@
 	var/obj/machinery/door/D = Obstacle
 	var/mob/living/carbon/human/H = load
 	if(istype(D) && istype(H))
-		D.Bumped(H)		//a little hacky, but hey, it works, and repects access rights
+		D.Bumped(H)		//a little hacky, but hey, it works, and respects access rights
 
 	..()
 
@@ -196,6 +195,8 @@
 	turn_on()
 	if (on)
 		usr << "You start [src]'s engine."
+		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
+		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
 	else
 		if(cell.charge < power_use)
 			usr << "[src] is out of power."
@@ -217,6 +218,8 @@
 	turn_off()
 	if (!on)
 		usr << "You stop [src]'s engine."
+		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
+		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
 
 /obj/vehicle/train/cargo/engine/verb/remove_key()
 	set name = "Remove key"
@@ -245,13 +248,19 @@
 /obj/vehicle/train/cargo/trolley/load(var/atom/movable/C)
 	if(ismob(C) && !passenger_allowed)
 		return 0
-	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !ismob(C))
+	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !istype(C, /mob/living/carbon/human))
 		return 0
 
-	return ..()
+	..()
+	
+	if(istype(load, /mob/living/carbon/human))
+		load.pixel_y += 4
+	
+	if(load)
+		return 1
 
 /obj/vehicle/train/cargo/engine/load(var/atom/movable/C)
-	if(!ismob(C))
+	if(!istype(C, /mob/living/carbon/human))
 		return 0
 
 	return ..()

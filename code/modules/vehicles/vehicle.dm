@@ -50,7 +50,7 @@
 		anchored = init_anc
 
 		if(load)
-			load.loc = loc
+			load.forceMove(loc)// = loc
 			load.dir = dir
 
 		return 1
@@ -58,6 +58,8 @@
 		return 0
 
 /obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/hand_labeler))
+		return
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(!locked)
 			open = !open
@@ -157,6 +159,8 @@
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
+/obj/vehicle/proc/handle_rotation()
+	return
 
 //-------------------------------------------
 // Vehicle procs
@@ -192,7 +196,7 @@
 	new /obj/item/weapon/cable_coil/cut(Tsec)
 
 	if(cell)
-		cell.loc = Tsec
+		cell.forceMove(Tsec)
 		cell.update_icon()
 		cell = null
 
@@ -230,8 +234,8 @@
 		return
 
 	H.drop_from_inventory(C)
+	C.forceMove(src)
 	cell = C
-	C.loc = null	//this wont be GC'd since it's referrenced above
 	powercheck()
 	usr << "<span class='notice'>You install [C] in [src].</span>"
 
@@ -240,7 +244,8 @@
 		return
 
 	usr << "<span class='notice'>You remove [cell] from [src].</span>"
-	cell.loc = get_turf(H)
+	cell.forceMove(get_turf(H))
+	H.put_in_hands(cell)
 	cell = null
 	powercheck()
 
@@ -267,7 +272,7 @@
 	if(istype(crate))
 		crate.close()
 
-	C.loc = loc
+	C.forceMove(loc)
 	C.dir = dir
 	C.anchored = 1
 
@@ -306,7 +311,7 @@
 		var/list/options = new()
 		for(var/test_dir in alldirs)
 			var/new_dir = get_step_to(src, get_step(src, test_dir))
-			if(new_dir)
+			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir
 		if(options.len)
 			dest = pick(options)
@@ -316,8 +321,7 @@
 	if(!isturf(dest))	//if there still is nowhere to unload, cancel out since the vehicle is probably in nullspace
 		return 0
 
-
-	load.loc = dest
+	load.forceMove(dest)
 	load.dir = get_dir(loc, dest)
 	load.anchored = initial(load.anchored)
 	load.pixel_x = initial(load.pixel_x)

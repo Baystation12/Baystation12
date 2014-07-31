@@ -31,8 +31,6 @@
 			return 0
 	if (istype(M,/mob/living/carbon/brain))
 		messagesource = M:container
-	if (hitsound)
-		playsound(loc, hitsound, 50, 1, -1)
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user
@@ -140,8 +138,13 @@
 
 
 	if(istype(M, /mob/living/carbon/human))
-		return M:attacked_by(src, user, def_zone)	//make sure to return whether we have hit or miss
+		var/hit = M:attacked_by(src, user, def_zone)
+		if (hit && hitsound)
+			playsound(loc, hitsound, 50, 1, -1)
+		return hit
 	else
+		if (hitsound)
+			playsound(loc, hitsound, 50, 1, -1)
 		switch(damtype)
 			if("brute")
 				if(istype(src, /mob/living/carbon/slime))

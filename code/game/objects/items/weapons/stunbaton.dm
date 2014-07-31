@@ -97,10 +97,14 @@
 
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
+	if(status && (CLUMSY in user.mutations) && prob(50))
+		user << "span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		user.Weaken(30)
+		deductcharge(hitcost)
+		return
+
 	if(isrobot(M))
 		..()
-		return
-	if(!isliving(M))
 		return
 
 	var/agony = agonyforce
@@ -136,10 +140,11 @@
 				L.visible_message("<span class='warning'>[L] has been prodded with [src] by [user]. Luckily it was off.</span>")
 			else
 				L.visible_message("<span class='danger'>[L] has been prodded with [src] by [user]!</span>")
-				msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
 
 	//stun effects
 	if (contact)
+		msg_admin_attack("[key_name(user)] attempted to stun [key_name(L)] with the [src].")
+		
 		if (stunforce)
 			L.Stun(stunforce)
 			L.Weaken(stunforce)

@@ -49,7 +49,7 @@ hr {
     padding: 0px 4px 4px 0px;
 }
 
-a:hover, .linkActive:hover {
+a:hover, .zoomLink:hover, .linkActive:hover {
     background: #507aac;
 }
 
@@ -71,6 +71,10 @@ a.white, a.white:link, a.white:visited, a.white:active {
 a.white:hover {
     color: #ffffff;
     background: #40628a;
+}
+
+.hidden {
+    display: none;
 }
 
 .linkOn, a.linkOn:link, a.linkOn:visited, a.linkOn:active, a.linkOn:hover, .selected, a.selected:link, a.selected:visited, a.selected:active, a.selected:hover {

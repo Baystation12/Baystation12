@@ -146,3 +146,16 @@ Function.prototype.inheritsFrom = function (parentClassOrObject) {
     this.prototype.parent = parentClassOrObject.prototype;
     return this;
 };
+
+if (!String.prototype.trim) {
+    String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+    };
+}
+
+// Replicate the ckey proc from BYOND
+if (!String.prototype.ckey) {
+    String.prototype.ckey = function () {
+        return this.replace(/\W/g, '').toLowerCase();
+    };
+}

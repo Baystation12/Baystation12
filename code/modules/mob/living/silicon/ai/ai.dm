@@ -91,6 +91,7 @@ var/list/ai_list = list()
 	aiMulti = new(src)
 	aiRadio = new(src)
 	aiRadio.myAi = src
+	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 
 	if (istype(loc, /turf))
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \

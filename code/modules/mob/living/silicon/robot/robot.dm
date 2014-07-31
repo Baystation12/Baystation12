@@ -97,6 +97,7 @@
 		if(connected_ai)
 			connected_ai.connected_robots += src
 			lawsync()
+			photosync()
 			lawupdate = 1
 		else
 			lawupdate = 0
@@ -137,12 +138,11 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	init()
 
-
-	if(istype(src,/mob/living/silicon/robot/drone))
-		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
-	else
-		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+/mob/living/silicon/robot/proc/init()
+	new/obj/item/device/camera/siliconcam/robot_camera(src)
+	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()

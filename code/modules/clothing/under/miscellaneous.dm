@@ -54,6 +54,7 @@
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
 	item_color = "sexyclown"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
@@ -137,6 +138,7 @@
 	icon_state = "psysuit"
 	item_state = "psysuit"
 	item_color = "psysuit"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /obj/item/clothing/under/gentlesuit
 	name = "Gentlemans Suit"
@@ -200,7 +202,7 @@
 	icon_state = "schoolgirl"
 	item_state = "schoolgirl"
 	item_color = "schoolgirl"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/overalls
 	name = "laborer's overalls"
@@ -215,6 +217,7 @@
 	icon_state = "pirate"
 	item_state = "pirate"
 	item_color = "pirate"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/soviet
 	name = "soviet uniform"
@@ -252,9 +255,11 @@
 	icon_state = "gladiator"
 	item_state = "gladiator"
 	item_color = "gladiator"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	body_parts_covered = LOWER_TORSO
 
 //dress
+/obj/item/clothing/under/dress/
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/dress/dress_fire
 	name = "flame dress"
@@ -298,18 +303,21 @@
 	desc = "Feminine fashion for the style concious captain."
 	icon_state = "dress_cap"
 	item_color = "dress_cap"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personnel dress uniform"
 	desc = "Feminine fashion for the style concious HoP."
 	icon_state = "dress_hop"
 	item_color = "dress_hop"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/dress/dress_hr
 	name = "human resources director uniform"
 	desc = "Superior class for the nosy H.R. Director."
 	icon_state = "huresource"
 	item_color = "huresource"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/dress/plaid_blue
 	name = "blue plaid skirt"
@@ -330,6 +338,8 @@
 	item_color = "plaid_purple"
 
 //wedding stuff
+/obj/item/clothing/under/wedding/
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/wedding/bride_orange
 	name = "orange wedding dress"
@@ -365,6 +375,7 @@
 	icon_state = "bride_white"
 	item_color = "bride_white"
 	flags_inv = HIDESHOES
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/sundress
 	name = "sundress"
