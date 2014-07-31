@@ -1104,12 +1104,12 @@
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
-		if (isytpe(O) && (O.loc == src))
+		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
-		if (!isytpe(O) || !(O.loc == src || O.loc == src.module))
+		if (!istype(O) || !(O.loc == src || O.loc == src.module))
 			return
 		
 		if(activated(O))
