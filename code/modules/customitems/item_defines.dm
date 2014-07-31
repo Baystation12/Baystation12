@@ -134,7 +134,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "margaret_flask"
 
-
 /obj/item/weapon/pen/fluff/fancypen //orangebottle: Lillian Levett, Lilliana Reade
 	name = "fancy pen"
 	desc = "A fancy metal pen. It uses blue ink. An inscription on one side reads,\"L.L. - L.R.\""
@@ -579,7 +578,7 @@
 	suit_icon = "salvage_suit"
 	helmet_color = "salvage"
 
-///////// Salvage crew hardsuit - Callum Leamas - roaper ///////////////
+///////// Weathered hardsuit - Callum Leamas - roaper ///////////////
 /obj/item/device/kit/suit/fluff/roaper
 	name = "Callum's hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit."
@@ -590,6 +589,18 @@
 	helmet_icon = "rig0-roaper"
 	suit_icon = "rig-roaper"
 	helmet_color = "roaper"
+
+///////// Hazard Hardsuit - Ronan Harper - Raptor1628 //////////////////
+/obj/item/device/kit/suit/fluff/ronan_harper
+	name = "hazard hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit."
+
+	new_name = "hazard"
+	new_suit_desc = "An older model of armored NT Hardsuit emblazoned in security colors. The crest of the NAS Rhodes, a copper rose, is painted onto the chestplate."
+	new_helmet_desc = "An older NT Hardsuit Helmet with built-in atmospheric filters. The name HARPER has been printed on the back."
+	helmet_icon = "rig0-hazardhardsuit"
+	suit_icon = "rig-hazardhardsuit"
+	helmet_color = "hazardhardsuit"
 
 //////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
 
