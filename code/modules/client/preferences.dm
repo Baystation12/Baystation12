@@ -77,6 +77,12 @@ datum/preferences
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
 
+		//Some faction information.
+	var/home_system = "None"            //System of birth.
+	var/citizenship = "None"            //Current home system.
+	var/faction = "None"                //Antag faction/general associated faction.
+	var/religion = "None"               //Religious association.
+
 		//Mob preview
 	var/icon/preview_icon = null
 	var/icon/preview_icon_front = null
@@ -404,7 +410,14 @@ datum/preferences
 		dat += "<br><b>Body Color</b><br>"
 		dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
 
+		dat += "<br><br><b>Background Information</b><br>"
+		dat += "<b>Home system</b>: <a href='byond://?src=\ref[user];preference=home_system;task=input'>[home_system]</a><br/>"
+		dat += "<b>Citizenship</b>: <a href='byond://?src=\ref[user];preference=citizenship;task=input'>[citizenship]</a><br/>"
+		dat += "<b>Faction</b>: <a href='byond://?src=\ref[user];preference=faction;task=input'>[faction]</a><br/>"
+		dat += "<b>Religion</b>: <a href='byond://?src=\ref[user];preference=religion;task=input'>[religion]</a><br/>"
+
 		dat += "<br><br>"
+
 		if(jobban_isbanned(user, "Syndicate"))
 			dat += "<b>You are banned from antagonist roles.</b>"
 			src.be_special = 0
@@ -1336,6 +1349,48 @@ datum/preferences
 							spawnpoint = "Arrivals Shuttle"
 							return
 						spawnpoint = choice
+
+					if("home_system")
+						var/choice = input(user, "Please choose a home system.") as null|anything in home_system_choices + list("None","Other")
+						if(!choice)
+							return
+						if(choice == "Other")
+							var/raw_choice = input(user, "Please enter a home system.")  as text|null
+							if(raw_choice)
+								home_system = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							return
+						home_system = choice
+					if("citizenship")
+						var/choice = input(user, "Please choose your current citizenship.") as null|anything in citizenship_choices + list("None","Other")
+						if(!choice)
+							return
+						if(choice == "Other")
+							var/raw_choice = input(user, "Please enter your current citizenship.", "Character Preference") as text|null
+							if(raw_choice)
+								citizenship = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							return
+						citizenship = choice
+					if("faction")
+						var/choice = input(user, "Please choose a faction to work for.") as null|anything in faction_choices + list("None","Other")
+						if(!choice)
+							return
+						if(choice == "Other")
+							var/raw_choice = input(user, "Please enter a faction.")  as text|null
+							if(raw_choice)
+								faction = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							return
+						faction = choice
+					if("religion")
+						var/choice = input(user, "Please choose a religion.") as null|anything in religion_choices + list("None","Other")
+						if(!choice)
+							return
+						if(choice == "Other")
+							var/raw_choice = input(user, "Please enter a religon.")  as text|null
+							if(raw_choice)
+								religion = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
+							return
+						religion = choice
+
 
 			else
 				switch(href_list["preference"])
