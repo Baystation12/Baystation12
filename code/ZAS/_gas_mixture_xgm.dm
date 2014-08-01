@@ -119,8 +119,7 @@
 		. += ratio * specific_entropy_gas(g)
 	. /= total_moles
 
-//Returns the ideal gas specific entropy of a specific gas in the mix. This is the entropy per mole of /pure/ gas.
-//It's important not to get that mixed up with the mixed entropy, which takes into account mole ratios (I did, it was bad).
+//Returns the ideal gas specific entropy of a specific gas in the mix. This is the entropy due to that gas per mole of /that/ gas in the mixture, not the entropy due to that gas per mole of gas mixture.
 /datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
 	if (!(gasid in gas) || gas[gasid] == 0)
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here

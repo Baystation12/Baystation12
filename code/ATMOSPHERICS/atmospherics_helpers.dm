@@ -1,7 +1,14 @@
+/*
+	Atmos processes
+	
+	These procs generalize various processes used by atmos machinery, such as pumping, filtering, or scrubbing gas, allowing them to be reused elsewhere.
+*/
+
+
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
 //transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
-//available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power, however power will still be used!
+//available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power.
 
 /obj/machinery/atmospherics/var/last_flow_rate = 0	//Can't return multiple values, unfortunately...
 
@@ -17,10 +24,10 @@
 	if (available_power && specific_power > 0)
 		transfer_moles = min(transfer_moles, available_power / specific_power)
 	
-	if (transfer_moles < MINUMUM_MOLES_TO_PUMP)
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP) //we check this repeatedly so that we do as little processing as possible
 		return -1
 	
-	last_flow_rate = (transfer_moles/source.total_moles)*source.volume	//group_multiplier gets divided out here
+	last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	
 	var/datum/gas_mixture/removed = source.remove(transfer_moles)
 	if (isnull(removed)) //not sure why this would happen, but it does at the very beginning of the game
@@ -28,38 +35,41 @@
 	
 	var/power_draw = specific_power*transfer_moles
 	if (power_draw > 0)
-		removed.add_thermal_energy(power_draw)	//1st law - energy is conserved
+		removed.add_thermal_energy(power_draw) //1st law - energy is conserved
 	
 	sink.merge(removed)
 	
 	return power_draw
 
-//Generalized gas filtering proc.
-//Filters the gasses specified by filtering from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was filtered.
-//filtering - A list of gasids to be filtered from source
-//total_transfer_moles - Limits the amount of moles to filter. The actual amount of gas filtered may also be limited by available_power, if given.
-//available_power - the maximum amount of power that may be used when filtering gas. If null then the filtering is not limited by power, however power will still be used!
-/obj/machinery/atmospherics/proc/filter_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+//Generalized gas scrubbing proc.
+//Selectively moves specified gasses one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was filtered.
+//filtering - A list of gasids to be scrubbed from source
+//total_transfer_moles - Limits the amount of moles to scrub. The actual amount of gas scrubbed may also be limited by available_power, if given.
+//available_power - the maximum amount of power that may be used when scrubbing gas. If null then the scrubbing is not limited by power.
+/obj/machinery/atmospherics/proc/scrub_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER)
 		return -1
 
 	filtering &= source.gas		//only filter gasses that are actually there.
 	
-	//Filter it
-	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
+	//Determine the specific power of each filterable gas type, and the total amount of filterable gas
 	var/total_filterable_moles = 0
-	var/list/specific_power_gas = list()
+	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
 	for (var/g in filtering)
 		if (source.gas[g] < MINUMUM_MOLES_TO_FILTER)
 			continue
 	
 		var/specific_power = calculate_specific_power_gas(g, source, sink)/ATMOS_FILTER_EFFICIENCY
 		specific_power_gas[g] = specific_power
-		total_specific_power += specific_power
 		total_filterable_moles += source.gas[g]
 	
 	if (total_filterable_moles < MINUMUM_MOLES_TO_FILTER)
 		return -1
+	
+	var/total_specific_power = 0		//the power required to remove one mole of filterable gas
+	for (var/g in filtering)
+		var/ratio = source.gas[g]/total_filterable_moles //converts the specific power per mole of pure gas to specific power per mole of filterable gas mix
+		total_specific_power = specific_power_gas[g]*ratio
 	
 	//Figure out how much of each gas to filter
 	if (!total_transfer_moles)
@@ -71,11 +81,11 @@
 	if (available_power && total_specific_power > 0)
 		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
 	
-	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER)
+	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //we check this repeatedly so that we do as little processing as possible
 		return -1
 	
 	var/power_draw = 0
-	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume	//group_multiplier gets divided out here
+	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	for (var/g in filtering)
 		var/transfer_moles = source.gas[g]
 		//filter gas in proportion to the mole ratio
