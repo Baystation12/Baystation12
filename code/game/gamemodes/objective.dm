@@ -958,7 +958,8 @@ datum/objective/heist/inviolate_death
 /datum/objective/ninja_highlander/check_completion()
 	if(owner)
 		for(var/datum/mind/ninja in ticker.mode.ninjas)
-			if(ninja.current.stat < 2 || owner == ninja) return 0
+			if(ninja != owner)
+				if(ninja.current.stat < 2) return 0
 		return 1
 	return 0
 
