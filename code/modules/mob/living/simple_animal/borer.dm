@@ -1,3 +1,5 @@
+/datum/game_mode/var/list/borers = list()
+
 /mob/living/captive_brain
 	name = "host brain"
 	real_name = "host brain"

@@ -470,7 +470,7 @@
 		return
 
 	if(B.chemicals >= 100)
-		src << "\red <B>Your host twitches and quivers as you rapdly excretea larva from your sluglike body.</B>"
+		src << "\red <B>Your host twitches and quivers as you rapidly excrete a larva from your sluglike body.</B>"
 		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
 		B.chemicals -= 100
 		B.has_reproduced = 1
