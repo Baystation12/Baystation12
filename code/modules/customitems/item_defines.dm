@@ -112,9 +112,27 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "syrus_notebook"
 
+/////////////////////// Cataguettes - Lucy's Stethoscope - Lucy Kemmerer //////
+
+/obj/item/clothing/tie/stethoscope/fluff/lucystethos
+   name = "Lucy's Stethoscope"
+   desc = "A medical apparatus intended to ease in listening to the sounds of the human body. This one looks cleaner and sparklier than the rest. There is a small silver plaque attached to the tubing, with the words 'Lucy Kemmerer' engraved on it."
+   icon_state = "lucystethos"
+   item_state = "lucystethos"
+   item_color ="lucystethos"
+   icon = 'icons/obj/custom_items.dmi'
+
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
+
+//////////////////////// AIsForAxolotl - Tea Flask - Margaret Stewart //////////
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask/fluff/margaret
+	name = "Tea Flask"
+	desc = "A plastic vacuum flask with an ugly tartan pattern. 'M.S.' has been written on the bottom with a silver marker."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "margaret_flask"
 
 /obj/item/weapon/pen/fluff/fancypen //orangebottle: Lillian Levett, Lilliana Reade
 	name = "fancy pen"
@@ -560,7 +578,7 @@
 	suit_icon = "salvage_suit"
 	helmet_color = "salvage"
 
-///////// Salvage crew hardsuit - Callum Leamas - roaper ///////////////
+///////// Weathered hardsuit - Callum Leamas - roaper ///////////////
 /obj/item/device/kit/suit/fluff/roaper
 	name = "Callum's hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit."
@@ -571,6 +589,18 @@
 	helmet_icon = "rig0-roaper"
 	suit_icon = "rig-roaper"
 	helmet_color = "roaper"
+
+///////// Hazard Hardsuit - Ronan Harper - Raptor1628 //////////////////
+/obj/item/device/kit/suit/fluff/ronan_harper
+	name = "hazard hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit."
+
+	new_name = "hazard"
+	new_suit_desc = "An older model of armored NT Hardsuit emblazoned in security colors. The crest of the NAS Rhodes, a copper rose, is painted onto the chestplate."
+	new_helmet_desc = "An older NT Hardsuit Helmet with built-in atmospheric filters. The name HARPER has been printed on the back."
+	helmet_icon = "rig0-hazardhardsuit"
+	suit_icon = "rig-hazardhardsuit"
+	helmet_color = "hazardhardsuit"
 
 //////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
 
@@ -701,6 +731,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "norah_briggs_1"
 
+//////////////// Painted Welding Mask - Kuratas Dotaavi - supercotton ////////////////////
+
+/obj/item/clothing/head/welding/fluff/kuratas
+	name =	"Painted Welding Mask"
+	desc =  "A blood-red welding mask with an intricate pattern. Smells like burnt rubber."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "paintedwelding"
+
 /obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "Hey, I think we're missing a hazard vest..."
@@ -750,6 +788,50 @@
 	item_state = "adapted_h"
 	icon_state = "adapted_h"
 	icon = 'icons/obj/custom_items.dmi'
+
+//////////////////////////////////////////////////////////
+///////////////////// Belts //////////////////////////////
+//////////////////////////////////////////////////////////
+
+/obj/item/weapon/storage/belt/medical/fluff/ems
+	name = "EMS utility belt"
+	desc = "A sturdy black webbing belt with attached pouches. H. ISHIMARU is scratched on the interior of the buckle."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "emsbelt"
+	item_state = "emsbelt"
+
+/obj/item/weapon/storage/belt/utility/full/fluff/sophie
+	name = "Sophie's belt"
+	desc = "A tool-belt in Atmos colours."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sophie_belt"
+	item_state = "sophie_belt"
+
+/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
+	name = "rainbow medical belt"
+	desc = "A somewhat-worn, modified, rainbow belt."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nashi_belt"
+	item_state = "fluff_rbelt"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
+		new /obj/item/weapon/reagent_containers/syringe/(src)
+		new /obj/item/device/healthanalyzer(src)
+
+/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
+	icon = 'icons/obj/chemical.dmi'
+	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
+	New(loc, var/color, var/labeled)
+		..()
+		name = "[labeled] bottle"
+		desc = "A small bottle.  Contains [labeled]"
+		icon_state = "bottle[color]"
 
 //////////// Suits ////////////
 
@@ -997,9 +1079,11 @@
 
 /obj/item/clothing/tie/fluff/radi
 	name = "Blood Red Pendant"
-	desc = "A pendant that has been painted a metallic red, it seems to have a ruby in it."
+	desc = "A blue chained necklace with a ruby in the middle, it looks pretty!"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "radi_pendant"
+	item_state = "radi_pendant"
+	item_color = "radi_pendant"
 	flags = FPRINT|TABLEPASS
 	w_class = 2.0
 	slot_flags = 0
@@ -1215,34 +1299,6 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
-
-
-///// Custom Items coded by Iamgoofball are Below /////
-/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
-	name = "rainbow medical belt"
-	desc = "A somewhat-worn, modified, rainbow belt."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "nashi_belt"
-	item_state = "fluff_rbelt"
-
-	New()
-		..()
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
-		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
-		new /obj/item/weapon/reagent_containers/syringe/(src)
-		new /obj/item/device/healthanalyzer(src)
-
-/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
-	icon = 'icons/obj/chemical.dmi'
-	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
-	New(loc, var/color, var/labeled)
-		..()
-		name = "[labeled] bottle"
-		desc = "A small bottle.  Contains [labeled]"
-		icon_state = "bottle[color]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
 	name = "Yuri's Flask"
