@@ -301,6 +301,7 @@
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
 		job_master.EquipRank(character, rank, 1)					//equips the human
+		UpdateFactionList(character)
 		EquipCustomItems(character)
 
 		//Find our spawning point.
