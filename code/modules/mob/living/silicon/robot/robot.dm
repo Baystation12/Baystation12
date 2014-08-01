@@ -345,7 +345,7 @@
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
 	set category = "Robot Commands"
-	set name = "Show Station Manifest"
+	set name = "Show Crew Manifest"
 	show_station_manifest()
 
 
