@@ -154,7 +154,7 @@
 	if(pressure_delta > 0.5)
 		if(pump_direction) //internal -> external	
 			var/output_volume = environment.volume * environment.group_multiplier
-			var/air_temperature = environment.temperature? environment.volume : air_contents.temperature
+			var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
 			power_draw = pump_gas(air_contents, environment, transfer_moles, active_power_usage)
@@ -176,12 +176,8 @@
 		last_flow_rate = 0
 		//update_use_power(0)
 		use_power = 0	//don't force update - easier on CPU
-	if (power_draw > 0)
-		handle_power_draw(power_draw)
-		last_power_draw = power_draw
 	else
-		handle_power_draw(idle_power_usage)
-		last_power_draw = idle_power_usage
+		last_power_draw = handle_power_draw(power_draw)
 
 	return 1
 
@@ -367,6 +363,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/examine()
 	set src in oview(1)
 	..()
+	usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	if(welded)
 		usr << "It seems welded shut."
 

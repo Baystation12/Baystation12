@@ -6,7 +6,15 @@
 
 	name = "Gas mixer"
 
-	var/target_pressure = ONE_ATMOSPHERE
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 3700	//This also doubles as a measure of how powerful the mixer is, in Watts. 3700 W ~ 5 HP
+
+	var/max_flow_rate = 200	//L/s
+	var/set_flow_rate = 200
+	var/list/mixing_inputs
+	
+	//for mapping
 	var/node1_concentration = 0.5
 	var/node2_concentration = 0.5
 
@@ -62,56 +70,39 @@
 
 /obj/machinery/atmospherics/trinary/mixer/process()
 	..()
-	if(!on)
-		return 0
+	
+	//For some reason this doesn't work even in initialize(), so it goes here.
+	if (!mixing_inputs)
+		mixing_inputs = list(src.air1 = node1_concentration, src.air2 = node2_concentration)
+	
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		return
+	
+	//Figure out the amount of moles to transfer
+	var/transfer_moles = (set_flow_rate*mixing_inputs[air1]/air1.volume)*air1.total_moles + (set_flow_rate*mixing_inputs[air1]/air2.volume)*air2.total_moles
+	
+	var/power_draw = -1
+	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
+		power_draw = mix_gas(mixing_inputs, air3, transfer_moles, active_power_usage)
+		
+		if(network1 && mixing_inputs[air1])
+			network1.update = 1
 
-	var/output_starting_pressure = air3.return_pressure()
+		if(network2 && mixing_inputs[air2])
+			network2.update = 1
 
-	if(output_starting_pressure >= target_pressure)
-		//No need to mix if target is already full!
-		return 1
+		if(network3)
+			network3.update = 1
 
-	//Calculate necessary moles to transfer using PV=nRT
-
-	var/pressure_delta = target_pressure - output_starting_pressure
-	var/transfer_moles1 = 0
-	var/transfer_moles2 = 0
-
-	if(air1.temperature > 0)
-		transfer_moles1 = (node1_concentration*pressure_delta)*air3.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-	if(air2.temperature > 0)
-		transfer_moles2 = (node2_concentration*pressure_delta)*air3.volume/(air2.temperature * R_IDEAL_GAS_EQUATION)
-
-	var/air1_moles = air1.total_moles
-	var/air2_moles = air2.total_moles
-
-	if((air1_moles < transfer_moles1) || (air2_moles < transfer_moles2))
-		if(!transfer_moles1 || !transfer_moles2) return
-		var/ratio = min(air1_moles/transfer_moles1, air2_moles/transfer_moles2)
-
-		transfer_moles1 *= ratio
-		transfer_moles2 *= ratio
-
-	//Actually transfer the gas
-
-	if(transfer_moles1 > 0)
-		var/datum/gas_mixture/removed1 = air1.remove(transfer_moles1)
-		air3.merge(removed1)
-
-	if(transfer_moles2 > 0)
-		var/datum/gas_mixture/removed2 = air2.remove(transfer_moles2)
-		air3.merge(removed2)
-
-	if(network1 && transfer_moles1)
-		network1.update = 1
-
-	if(network2 && transfer_moles2)
-		network2.update = 1
-
-	if(network3)
-		network3.update = 1
-
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else
+		handle_power_draw(power_draw)
+	
 	return 1
 
 /obj/machinery/atmospherics/trinary/mixer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -142,20 +133,22 @@
 		return
 	usr.set_machine(src)
 	var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-				<b>Desirable output pressure: </b>
-				[target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
+				<b>Set Flow Rate Limit: </b>
+				[set_flow_rate]L/s | <a href='?src=\ref[src];set_press=1'>Change</a>
 				<br>
+				<b>Flow Rate: </b>[round(last_flow_rate, 0.1)]L/s
+				<br><hr>
 				<b>Node 1 Concentration:</b>
 				<a href='?src=\ref[src];node1_c=-0.1'><b>-</b></a>
 				<a href='?src=\ref[src];node1_c=-0.01'>-</a>
-				[node1_concentration]([node1_concentration*100]%)
+				[mixing_inputs[air1]]([mixing_inputs[air1]*100]%)
 				<a href='?src=\ref[src];node1_c=0.01'><b>+</b></a>
 				<a href='?src=\ref[src];node1_c=0.1'>+</a>
 				<br>
 				<b>Node 2 Concentration:</b>
 				<a href='?src=\ref[src];node2_c=-0.1'><b>-</b></a>
 				<a href='?src=\ref[src];node2_c=-0.01'>-</a>
-				[node2_concentration]([node2_concentration*100]%)
+				[mixing_inputs[air2]]([mixing_inputs[air2]*100]%)
 				<a href='?src=\ref[src];node2_c=0.01'><b>+</b></a>
 				<a href='?src=\ref[src];node2_c=0.1'>+</a>
 				"}
@@ -169,16 +162,16 @@
 	if(href_list["power"])
 		on = !on
 	if(href_list["set_press"])
-		var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
-		src.target_pressure = max(0, min(4500, new_pressure))
+		var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",src.set_flow_rate) as num
+		src.set_flow_rate = max(0, min(max_flow_rate, new_flow_rate))
 	if(href_list["node1_c"])
 		var/value = text2num(href_list["node1_c"])
-		src.node1_concentration = max(0, min(1, src.node1_concentration + value))
-		src.node2_concentration = max(0, min(1, src.node2_concentration - value))
+		src.mixing_inputs[air1] = max(0, min(1, src.mixing_inputs[air1] + value))
+		src.mixing_inputs[air2] = 1.0 - mixing_inputs[air1]
 	if(href_list["node2_c"])
 		var/value = text2num(href_list["node2_c"])
-		src.node2_concentration = max(0, min(1, src.node2_concentration + value))
-		src.node1_concentration = max(0, min(1, src.node1_concentration - value))
+		src.mixing_inputs[air2] = max(0, min(1, src.mixing_inputs[air2] + value))
+		src.mixing_inputs[air1] = 1.0 - mixing_inputs[air2]
 	src.update_icon()
 	src.updateUsrDialog()
 	return
@@ -204,6 +197,7 @@ obj/machinery/atmospherics/trinary/mixer/t_mixer/New()
 			initialize_directions = WEST|NORTH|SOUTH
 
 obj/machinery/atmospherics/trinary/mixer/t_mixer/initialize()
+	..()
 	if(node1 && node2 && node3) return
 
 	var/node1_connect = turn(dir, -90)
@@ -249,6 +243,7 @@ obj/machinery/atmospherics/trinary/mixer/m_mixer/New()
 			initialize_directions = WEST|SOUTH|EAST
 
 obj/machinery/atmospherics/trinary/mixer/m_mixer/initialize()
+	..()
 	if(node1 && node2 && node3) return
 
 	var/node1_connect = turn(dir, -180)

@@ -25,7 +25,7 @@
 	
 	//Calculate the amount of energy required and limit transfer_moles based on available power
 	var/specific_power = calculate_specific_power(source, sink)/ATMOS_PUMP_EFFICIENCY //this has to be calculated before we modify any gas mixtures
-	if (available_power && specific_power > 0)
+	if (!isnull(available_power) && specific_power > 0)
 		transfer_moles = min(transfer_moles, available_power / specific_power)
 	
 	if (transfer_moles < MINUMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
@@ -82,7 +82,7 @@
 		total_transfer_moles = min(total_transfer_moles, total_filterable_moles)
 	
 	//limit transfer_moles based on available power
-	if (available_power && total_specific_power > 0)
+	if (!isnull(available_power) && total_specific_power > 0)
 		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
 	
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
@@ -122,6 +122,7 @@
 
 	filtering &= source.gas		//only filter gasses that are actually there.
 	
+	var/total_specific_power = 0		//the power required to remove one mole of input gas
 	var/total_filterable_moles = 0
 	var/total_unfilterable_moles = 0
 	var/list/specific_power_gas = list()	//the power required to remove one mole of pure gas, for each gas type
@@ -135,9 +136,7 @@
 		else
 			specific_power_gas[g] = calculate_specific_power_gas(g, source, sink_clean)/ATMOS_FILTER_EFFICIENCY
 			total_unfilterable_moles += source.gas[g]
-	
-	var/total_specific_power = 0		//the power required to remove one mole of input gas
-	for (var/g in source.gas)
+			
 		var/ratio = source.gas[g]/source.total_moles //converts the specific power per mole of pure gas to specific power per mole of input gas mix
 		total_specific_power = specific_power_gas[g]*ratio
 	
@@ -148,7 +147,7 @@
 		total_transfer_moles = min(total_transfer_moles, source.total_moles)
 	
 	//limit transfer_moles based on available power
-	if (available_power && total_specific_power > 0)
+	if (!isnull(available_power) && total_specific_power > 0)
 		total_transfer_moles = min(total_transfer_moles, available_power/total_specific_power)
 	
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
@@ -175,12 +174,78 @@
 	sink_filtered.update_values()
 	sink_clean.merge(removed)
 	
+	//1LTD energy is conserved
 	if (filtered_power_used > 0)
-		sink_filtered.add_thermal_energy(filtered_power_used) //1st law - energy is conserved
+		sink_filtered.add_thermal_energy(filtered_power_used)
 	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used) //1st law - energy is conserved
+		sink_clean.add_thermal_energy(unfiltered_power_used)
 	
 	return filtered_power_used + unfiltered_power_used
+
+//Similar deal as the other atmos process procs.
+//mix_sources maps input gas mixtures to mix ratios. The mix ratios MUST add up to 1.
+/obj/machinery/atmospherics/proc/mix_gas(var/list/mix_sources, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+	if (!mix_sources.len)
+		return -1
+	
+	var/total_specific_power = 0
+	var/total_mixing_moles = null
+	var/total_input_volume = 0	//for flow rate calculation
+	var/total_input_moles = 0	//for flow rate calculation
+	var/list/source_specific_power = list()
+	for (var/datum/gas_mixture/source in mix_sources)
+		if (source.total_moles < MINUMUM_MOLES_TO_FILTER)
+			return -1	//either mix at the set ratios or mix no gas at all
+		
+		var/mix_ratio = mix_sources[source]
+		if (!mix_ratio)
+			continue
+		
+		//mixing rate is limited by the source with the least amount of available gas
+		if (isnull(total_mixing_moles))
+			total_mixing_moles = source.total_moles/mix_ratio
+		else
+			total_mixing_moles = min(total_mixing_moles, source.total_moles/mix_ratio)
+		
+		source_specific_power[source] = calculate_specific_power(source, sink)*mix_ratio/ATMOS_FILTER_EFFICIENCY
+		total_specific_power += source_specific_power[source]
+		total_input_volume += source.volume
+		total_input_moles += source.total_moles
+	
+	if (total_mixing_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
+		return -1
+	
+	if (!total_transfer_moles)
+		total_transfer_moles = total_mixing_moles
+	else
+		total_transfer_moles = min(total_mixing_moles, total_transfer_moles)
+	
+	//limit transfer_moles based on available power
+	if (!isnull(available_power) && total_specific_power > 0)
+		total_transfer_moles = min(total_transfer_moles, available_power / total_specific_power)
+	
+	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
+		return -1
+	
+	last_flow_rate = (total_transfer_moles/total_input_moles)*total_input_volume //group_multiplier gets divided out here
+	
+	var/total_power_draw = 0
+	for (var/datum/gas_mixture/source in mix_sources)
+		var/mix_ratio = mix_sources[source]
+		if (!mix_ratio)
+			continue
+		
+		var/transfer_moles = total_transfer_moles * mix_ratio
+		
+		var/datum/gas_mixture/removed = source.remove(transfer_moles)
+		
+		var/power_draw = transfer_moles * source_specific_power[source]
+		removed.add_thermal_energy(power_draw)	//conservation of energy
+		total_power_draw += power_draw
+		
+		sink.merge(removed)
+	
+	return total_power_draw
 
 /*
 	Helper procs for various things.
@@ -212,21 +277,42 @@
 	
 	return specific_power
 
-//This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
+//This proc handles power usages.
+//Calling update_use_power() or use_power() too often will result in lag since updating area power can be costly.
+//This proc implements an approximation scheme that will cause area power updates to be triggered less often.
+//By having atmos machinery use this proc it is easy to change the power usage approximation for all atmos machines
 /obj/machinery/atmospherics/proc/handle_power_draw(var/usage_amount)
+	//***This scheme errs on the side of using more power. Using this will mean that sometimes atmos machines use more power than they need, but won't get power for free.
+	if (usage_amount > idle_power_usage)
+		update_use_power(1)
+	else
+		use_power = 1	//Don't update here. We will use more power than we are supposed to, but trigger less area power updates.
+	
+	switch (use_power)
+		if (0) return 0
+		if (1) return idle_power_usage
+		if (2 to INFINITY) return active_power_usage
+	
+	/* Alternate power usage schemes
+	
+	//***This scheme has the most accurate power usage, but triggers area power updates too often.
 	if (usage_amount > active_power_usage - 5)
 		update_use_power(2)
 	else
-		use_power = 1	//Don't update here. Sure, we will use more power than we are supposed to, but it's easier on CPU
-		
-		/* 
-		//This is the correct way to update pump power usage. Unfortunately it is also pretty laggy.
-		//Leaving this here in case someone finds a way to do this that doesn't involve doing area power updates all the time.
 		update_use_power(1)
 		
 		if (usage_amount > idle_power_usage)
 			use_power(round(usage_amount))
-		*/
+	
+	//***This scheme errs on the side of using less power. Using this will mean that sometimes atmos machines get free power.
+	if (usage_amount > active_power_usage - 5)
+		update_use_power(2)
+	else
+		use_power = 1	//Don't need to update here.
+	
+	*/
+	
+	
 
 /*
 //DEBUG

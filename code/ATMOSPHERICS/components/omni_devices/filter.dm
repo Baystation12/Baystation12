@@ -8,6 +8,8 @@
 	var/list/filters = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
+	
+	var/target_pressure = ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/omni/filter/Del()
 	input = null

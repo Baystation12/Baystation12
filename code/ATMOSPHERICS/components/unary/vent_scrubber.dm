@@ -138,12 +138,9 @@
 	if (power_draw < 0)
 		//update_use_power(0)
 		use_power = 0	//don't force update. Sure, we will continue to use power even though we're not pumping anything, but it is easier on the CPU
-	else if (power_draw > 0)
+	else
 		//last_power_draw = power_draw
 		handle_power_draw(power_draw)
-	else
-		//last_power_draw = idle_power_usage
-		handle_power_draw(idle_power_usage)
 	
 	if(network)
 		network.update = 1
@@ -249,6 +246,11 @@
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
+
+/obj/machinery/atmospherics/unary/vent_scrubber/examine()
+	set src in oview(1)
+	..()
+	usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

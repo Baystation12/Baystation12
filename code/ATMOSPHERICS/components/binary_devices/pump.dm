@@ -93,12 +93,8 @@ Thus, the two variables affect pump operation are set in New():
 		use_power = 0	//don't force update - easier on CPU
 		last_power_draw = 0
 		last_flow_rate = 0
-	else if (power_draw > 0)
-		handle_power_draw(power_draw)
-		last_power_draw = power_draw
 	else
-		handle_power_draw(idle_power_usage)
-		last_power_draw = idle_power_usage
+		last_power_draw = handle_power_draw(power_draw)
 
 	return 1
 

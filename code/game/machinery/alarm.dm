@@ -102,9 +102,6 @@
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
 
-	var/alarm_sound_cooldown = 200
-	var/last_sound_time = 0
-
 /obj/machinery/alarm/server/New()
 	..()
 	req_access = list(access_rd, access_atmospherics, access_engine_equip)
@@ -161,7 +158,6 @@
 	if (!master_is_operating())
 		elect_master()
 
-
 /obj/machinery/alarm/process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
@@ -169,12 +165,43 @@
 	var/turf/simulated/location = loc
 	if(!istype(location))	return//returns if loc is not simulated
 
-	if ((alarm_area.fire || alarm_area.atmosalm >= 2) && world.time > last_sound_time + alarm_sound_cooldown)
-		last_sound_time = world.time
-
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
+	handle_heating_cooling(environment)
+
+	var/old_level = danger_level
+	var/old_pressurelevel = pressure_dangerlevel
+	danger_level = overall_danger_level(environment)
+
+	if (old_level != danger_level)
+		apply_danger_level(danger_level)
+
+	if (old_pressurelevel != pressure_dangerlevel)
+		if (breach_detected())
+			mode = AALARM_MODE_OFF
+			apply_mode()
+
+	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
+		mode=AALARM_MODE_FILL
+		apply_mode()
+
+	//atmos computer remote controll stuff
+	switch(rcon_setting)
+		if(RCON_NO)
+			remote_control = 0
+		if(RCON_AUTO)
+			if(danger_level == 2)
+				remote_control = 1
+			else
+				remote_control = 0
+		if(RCON_YES)
+			remote_control = 1
+
+	updateDialog()
+	return
+
+/obj/machinery/alarm/proc/handle_heating_cooling(var/datum/gas_mixture/environment)
 	if (!regulating_temperature)
 		//check for when we should start adjusting temperature
 		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
@@ -198,7 +225,7 @@
 			target_temperature = T0C + MIN_TEMPERATURE
 
 		var/datum/gas_mixture/gas
-		gas = location.remove_air(0.25*environment.total_moles)
+		gas = environment.remove(0.25*environment.total_moles)
 		if(gas)
 			
 			if (gas.temperature <= target_temperature)	//gas heating
@@ -222,44 +249,7 @@
 			
 			environment.merge(gas)
 
-	var/old_level = danger_level
-	var/old_pressurelevel = pressure_dangerlevel
-	danger_level = overall_danger_level()
-
-	if (old_level != danger_level)
-		apply_danger_level(danger_level)
-
-	if (old_pressurelevel != pressure_dangerlevel)
-		if (breach_detected())
-			mode = AALARM_MODE_OFF
-			apply_mode()
-
-	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
-		mode=AALARM_MODE_FILL
-		apply_mode()
-
-
-	//atmos computer remote controll stuff
-	switch(rcon_setting)
-		if(RCON_NO)
-			remote_control = 0
-		if(RCON_AUTO)
-			if(danger_level == 2)
-				remote_control = 1
-			else
-				remote_control = 0
-		if(RCON_YES)
-			remote_control = 1
-
-	updateDialog()
-	return
-
-/obj/machinery/alarm/proc/overall_danger_level()
-	var/turf/simulated/location = loc
-	if(!istype(location))	return//returns if loc is not simulated
-
-	var/datum/gas_mixture/environment = location.return_air()
-
+/obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
 	//var/other_moles = 0.0

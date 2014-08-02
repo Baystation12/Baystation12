@@ -829,16 +829,15 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	Atmos Machinery
 */
 
-//These limit the flow rate when taking gas away from turfs. This is necessary because moving 2500 L in a single iteration causes a huge amount of error with pressure and gas calculations. 
-//This error is related to the fact that we do everything in 1 second steps instead of continuous time. Limiting the flow rate will prevent pressures from overshooting too much.
-#define MAX_SIPHON_FLOWRATE	500	//L/s
-#define MAX_FILTER_FLOWRATE	200	//L/s
+//Note: anything higher than these values has no effect at the moment.
+#define MAX_SIPHON_FLOWRATE	2500	//L/s	This can be used to balance how fast a room is siphoned.
+#define MAX_FILTER_FLOWRATE	200		//L/s
 
-//These control how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences. 
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences. 
 //If you want to limit the ability of players to create very high pressures then it makes more sense to adjust these instead of artificially limiting the pump settings. 
 //Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
-#define ATMOS_PUMP_EFFICIENCY	1.0
-#define ATMOS_FILTER_EFFICIENCY	0.9
+#define ATMOS_PUMP_EFFICIENCY	0.6
+#define ATMOS_FILTER_EFFICIENCY	0.45
 
 #define MINUMUM_MOLES_TO_PUMP	0.01	//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
 #define MINUMUM_MOLES_TO_FILTER	0.1

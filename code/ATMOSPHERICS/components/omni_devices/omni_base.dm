@@ -11,7 +11,7 @@
 
 	var/on = 0
 	var/configuring = 0
-	var/target_pressure = ONE_ATMOSPHERE
+	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE

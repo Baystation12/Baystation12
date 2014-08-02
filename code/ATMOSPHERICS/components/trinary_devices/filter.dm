@@ -15,16 +15,18 @@
 	var/max_flow_rate = 200	//L/s
 	var/set_flow_rate = 200
 
+	/*
+	Filter types:
+	-1: Nothing
+	 0: Phoron: Phoron, Oxygen Agent B
+	 1: Oxygen: Oxygen ONLY
+	 2: Nitrogen: Nitrogen ONLY
+	 3: Carbon Dioxide: Carbon Dioxide ONLY
+	 4: Sleeping Agent (N2O)
+	*/
 	var/filter_type = 0
-/*
-Filter types:
--1: Nothing
- 0: Phoron: Phoron, Oxygen Agent B
- 1: Oxygen: Oxygen ONLY
- 2: Nitrogen: Nitrogen ONLY
- 3: Carbon Dioxide: Carbon Dioxide ONLY
- 4: Sleeping Agent (N2O)
-*/
+	var/list/filtered_out = list()
+
 
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
@@ -90,23 +92,7 @@ Filter types:
 	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
 	
 	var/power_draw = -1
-	if (transfer_moles > 0)
-		
-		var/list/filtered_out
-		switch(filter_type)
-			if(0) //removing hydrocarbons
-				filtered_out = list("phoron", "oxygen_agent_b")
-			if(1) //removing O2
-				filtered_out = list("oxygen")
-			if(2) //removing N2
-				filtered_out = list("nitrogen")
-			if(3) //removing CO2
-				filtered_out = list("carbon_dioxide")
-			if(4)//removing N2O
-				filtered_out = list("sleeping_agent")
-			else
-				filtered_out = null
-		
+	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = filter_gas(filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
 		
 		if(network2)
@@ -122,10 +108,8 @@ Filter types:
 		//update_use_power(0)
 		use_power = 0	//don't force update - easier on CPU
 		last_flow_rate = 0
-	else if (power_draw > 0)
-		handle_power_draw(power_draw)
 	else
-		handle_power_draw(idle_power_usage)
+		handle_power_draw(power_draw)
 	
 	return 1
 
@@ -190,9 +174,9 @@ Filter types:
 			<A href='?src=\ref[src];filterset=4'>Nitrous Oxide</A><BR>
 			<A href='?src=\ref[src];filterset=-1'>Nothing</A><BR>
 			<HR>
-			<B>Desirable input flow rate:</B>
+			<B>Set Flow Rate Limit:</B>
 			[src.set_flow_rate]L/s | <a href='?src=\ref[src];set_flow_rate=1'>Change</a><BR>
-			<B>Flow rate:</B>[last_flow_rate]L/s
+			<B>Flow rate: </B>[round(last_flow_rate, 0.1)]L/s
 			"}
 /*
 		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD>[dat]","window=atmo_filter")
@@ -214,7 +198,22 @@ Filter types:
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	if(href_list["filterset"])
-		src.filter_type = text2num(href_list["filterset"])
+		filter_type = text2num(href_list["filterset"])
+		
+		filtered_out.Cut()	//no need to create new lists unnecessarily
+		switch(filter_type)
+			if(0) //removing hydrocarbons
+				filtered_out += "phoron"
+				filtered_out += "oxygen_agent_b"
+			if(1) //removing O2
+				filtered_out += "oxygen"
+			if(2) //removing N2
+				filtered_out += "nitrogen"
+			if(3) //removing CO2
+				filtered_out += "carbon_dioxide"
+			if(4)//removing N2O
+				filtered_out += "sleeping_agent"
+		
 	if (href_list["temp"])
 		src.temp = null
 	if(href_list["set_flow_rate"])

@@ -13,6 +13,8 @@
 	var/tag_south_con
 	var/tag_east_con
 	var/tag_west_con
+	
+	var/target_pressure = ONE_ATMOSPHERE
 
 /obj/machinery/atmospherics/omni/mixer/New()
 	..()

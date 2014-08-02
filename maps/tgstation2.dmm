@@ -6226,7 +6226,7 @@
 "cpL" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor{dir = 8; icon_state = "yellowcorner"},/area/hallway/primary/aft)
 "cpM" = (/obj/machinery/light{dir = 1},/obj/machinery/disposal,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/structure/disposalpipe/trunk{dir = 8},/turf/simulated/floor{tag = "icon-cafeteria (NORTHEAST)"; icon_state = "cafeteria"; dir = 5},/area/medical/exam_room)
 "cpN" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 4},/turf/simulated/floor{dir = 1; icon_state = "blue"},/area/medical/morgue)
-"cpO" = (/obj/machinery/atmospherics/trinary/mixer{dir = 8; icon_state = "map"; name = "Gas mixer (N2/O2)"; node1_concentration = 0.8; node2_concentration = 0.2; on = 1; pixel_x = 0; pixel_y = 0; req_access = null; target_pressure = 4500},/turf/simulated/floor,/area/atmos)
+"cpO" = (/obj/machinery/atmospherics/trinary/mixer{dir = 8; icon_state = "map"; name = "Gas mixer (N2/O2)"; node1_concentration = 0.8; node2_concentration = 0.2; on = 1; pixel_x = 0; pixel_y = 0; req_access = null},/turf/simulated/floor,/area/atmos)
 "cpP" = (/obj/structure/lattice,/obj/structure/grille,/obj/structure/lattice,/turf/space,/area)
 "cpQ" = (/obj/machinery/atmospherics/binary/pump{dir = 4; name = "N2 to Pure"},/turf/simulated/floor,/area/atmos)
 "cpR" = (/obj/structure/disposalpipe/segment,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor,/area/construction)
