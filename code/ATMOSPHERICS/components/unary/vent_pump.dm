@@ -177,13 +177,12 @@
 		//update_use_power(0)
 		use_power = 0	//don't force update - easier on CPU
 	if (power_draw > 0)
-		handle_pump_power_draw(power_draw)
+		handle_power_draw(power_draw)
 		last_power_draw = power_draw
 	else
-		handle_pump_power_draw(idle_power_usage)
+		handle_power_draw(idle_power_usage)
 		last_power_draw = idle_power_usage
 
-	
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)

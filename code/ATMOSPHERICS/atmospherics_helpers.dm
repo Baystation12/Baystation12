@@ -28,7 +28,7 @@
 	if (available_power && specific_power > 0)
 		transfer_moles = min(transfer_moles, available_power / specific_power)
 	
-	if (transfer_moles < MINUMUM_MOLES_TO_PUMP) //we check this repeatedly so that we do as little processing as possible
+	if (transfer_moles < MINUMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
 	last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
@@ -95,7 +95,7 @@
 		//filter gas in proportion to the mole ratio
 		transfer_moles = min(transfer_moles, total_transfer_moles*(source.gas[g]/total_filterable_moles))
 		
-		//use update=0. All the filtered gasses get added simultaneously, so we update after the for loop.
+		//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
 		source.adjust_gas(g, -transfer_moles, update=0)
 		sink.adjust_gas_temp(g, transfer_moles, source.temperature, update=0)
 		
@@ -121,7 +121,6 @@
 		return -1
 
 	filtering &= source.gas		//only filter gasses that are actually there.
-	var/list/not_filtering = source.gas - filtering
 	
 	var/total_filterable_moles = 0
 	var/total_unfilterable_moles = 0
@@ -166,18 +165,15 @@
 	for (var/g in removed.gas)
 		var/power_used = specific_power_gas[g]*removed.gas[g]
 		
-		//use update=0. All the filtered gasses get added simultaneously, so we update after the for loop.
 		if (g in filtering)
+			//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
 			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
 			filtered_power_used += power_used
 		else
-			sink_clean.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
 			unfiltered_power_used += power_used
 	
 	sink_filtered.update_values()
-	sink_clean.update_values()
-	
-	del(removed) //removed should have nothing in it now, so we can just get rid of it.
+	sink_clean.merge(removed)
 	
 	if (filtered_power_used > 0)
 		sink_filtered.add_thermal_energy(filtered_power_used) //1st law - energy is conserved
@@ -217,7 +213,7 @@
 	return specific_power
 
 //This proc handles power usages so that we only have to call use_power() when the pump is loaded but not at full load. 
-/obj/machinery/atmospherics/proc/handle_pump_power_draw(var/usage_amount)
+/obj/machinery/atmospherics/proc/handle_power_draw(var/usage_amount)
 	if (usage_amount > active_power_usage - 5)
 		update_use_power(2)
 	else

@@ -5,10 +5,15 @@
 	level = 1
 
 	name = "Gas filter"
+	
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
 
 	var/temp = null // -- TLE
 
-	var/target_pressure = ONE_ATMOSPHERE
+	var/max_flow_rate = 200	//L/s
+	var/set_flow_rate = 200
 
 	var/filter_type = 0
 /*
@@ -30,12 +35,11 @@ Filter types:
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/* I don't know why this is here, but it's ugly, so I'm disabling it
 /obj/machinery/atmospherics/trinary/filter/New()
 	..()
 	if(radio_controller)
 		initialize()
-*/
+
 /obj/machinery/atmospherics/trinary/filter/update_icon()
 	if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
 		icon_state = "m"
@@ -77,72 +81,52 @@ Filter types:
 
 /obj/machinery/atmospherics/trinary/filter/process()
 	..()
-	if(!on)
-		return 0
-
-	var/output_starting_pressure = air3.return_pressure()
-
-	if(output_starting_pressure >= target_pressure || air2.return_pressure() >= target_pressure )
-		//No need to mix if target is already full!
-		return 1
-
-	//Calculate necessary moles to transfer using PV=nRT
-
-	var/pressure_delta = target_pressure - output_starting_pressure
-	var/transfer_moles
-
-	if(air1.temperature > 0)
-		transfer_moles = pressure_delta*air3.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-	//Actually transfer the gas
-
-	if(transfer_moles > 0)
-		var/datum/gas_mixture/removed = air1.remove(transfer_moles)
-
-		if(!removed)
-			return
-		var/datum/gas_mixture/filtered_out = new
-		filtered_out.temperature = removed.temperature
-
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		return
+	
+	//Figure out the amount of moles to transfer
+	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
+	
+	var/power_draw = -1
+	if (transfer_moles > 0)
+		
+		var/list/filtered_out
 		switch(filter_type)
 			if(0) //removing hydrocarbons
-				filtered_out.gas["phoron"] = removed.gas["phoron"]
-				removed.gas["phoron"] = 0
-
-				filtered_out.gas["oxygen_agent_b"] = removed.gas["oxygen_agent_b"]
-				removed.gas["oxygen_agent_b"] = 0
-
+				filtered_out = list("phoron", "oxygen_agent_b")
 			if(1) //removing O2
-				filtered_out.gas["oxygen"] = removed.gas["oxygen"]
-				removed.gas["oxygen"] = 0
-
+				filtered_out = list("oxygen")
 			if(2) //removing N2
-				filtered_out.gas["nitrogen"] = removed.gas["nitrogen"]
-				removed.gas["nitrogen"] = 0
-
+				filtered_out = list("nitrogen")
 			if(3) //removing CO2
-				filtered_out.gas["carbon_dioxide"] = removed.gas["carbon_dioxide"]
-				removed.gas["carbon_dioxide"] = 0
-
+				filtered_out = list("carbon_dioxide")
 			if(4)//removing N2O
-				filtered_out.gas["sleeping_agent"] = removed.gas["sleeping_agent"]
-				removed.gas["sleeping_agent"] = 0
-
+				filtered_out = list("sleeping_agent")
 			else
 				filtered_out = null
+		
+		power_draw = filter_gas(filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
+		
+		if(network2)
+			network2.update = 1
 
-		air2.merge(filtered_out)
-		air3.merge(removed)
+		if(network3)
+			network3.update = 1
 
-	if(network2)
-		network2.update = 1
+		if(network1)
+			network1.update = 1
 
-	if(network3)
-		network3.update = 1
-
-	if(network1)
-		network1.update = 1
-
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else if (power_draw > 0)
+		handle_power_draw(power_draw)
+	else
+		handle_power_draw(idle_power_usage)
+	
 	return 1
 
 /obj/machinery/atmospherics/trinary/filter/initialize()
@@ -205,8 +189,10 @@ Filter types:
 			<A href='?src=\ref[src];filterset=3'>Carbon Dioxide</A><BR>
 			<A href='?src=\ref[src];filterset=4'>Nitrous Oxide</A><BR>
 			<A href='?src=\ref[src];filterset=-1'>Nothing</A><BR>
-			<HR><B>Desirable output pressure:</B>
-			[src.target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
+			<HR>
+			<B>Desirable input flow rate:</B>
+			[src.set_flow_rate]L/s | <a href='?src=\ref[src];set_flow_rate=1'>Change</a><BR>
+			<B>Flow rate:</B>[last_flow_rate]L/s
 			"}
 /*
 		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD>[dat]","window=atmo_filter")
@@ -231,9 +217,9 @@ Filter types:
 		src.filter_type = text2num(href_list["filterset"])
 	if (href_list["temp"])
 		src.temp = null
-	if(href_list["set_press"])
-		var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
-		src.target_pressure = max(0, min(4500, new_pressure))
+	if(href_list["set_flow_rate"])
+		var/new_pressure = input(usr,"Enter new flow rate (0-[max_flow_rate]L/s)","Flow Rate Control",src.set_flow_rate) as num
+		src.set_flow_rate = max(0, min(max_flow_rate, new_pressure))
 	if(href_list["power"])
 		on=!on
 	src.update_icon()

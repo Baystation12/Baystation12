@@ -140,10 +140,10 @@
 		use_power = 0	//don't force update. Sure, we will continue to use power even though we're not pumping anything, but it is easier on the CPU
 	else if (power_draw > 0)
 		//last_power_draw = power_draw
-		handle_pump_power_draw(power_draw)
+		handle_power_draw(power_draw)
 	else
 		//last_power_draw = idle_power_usage
-		handle_pump_power_draw(idle_power_usage)
+		handle_power_draw(idle_power_usage)
 	
 	if(network)
 		network.update = 1
