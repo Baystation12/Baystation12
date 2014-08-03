@@ -93,8 +93,8 @@
 
 /mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
 	set category = "AI Commands"
-	set name = "Remove Camera Location"
-	set desc = "Removes the selected camera location"
+	set name = "Delete Camera Location"
+	set desc = "Deletes the selected camera location"
 
 	if (!(loc in stored_locations))
 		src << "\red Location [loc] not found"
