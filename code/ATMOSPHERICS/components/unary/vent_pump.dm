@@ -151,7 +151,7 @@
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
 
-	if(pressure_delta > 0.5)
+	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external	
 			var/output_volume = environment.volume * environment.group_multiplier
 			var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
@@ -182,9 +182,6 @@
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)
-	if (air_contents.temperature == 0 && environment.temperature == 0) 
-		return 0
-	
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 	var/environment_pressure = environment.return_pressure()
 	
