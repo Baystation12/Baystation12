@@ -53,6 +53,11 @@
 		return
 	next_move = world.time + 9
 
+	if(aiCamera.in_camera_mode)
+		aiCamera.camera_mode_off()
+		aiCamera.captureimage(A, usr)
+		return
+
 	/*
 		AI restrained() currently does nothing
 	if(restrained())
@@ -122,8 +127,8 @@
 	src.enabled = !src.enabled
 	src.updateTurrets()
 
-/atom/proc/AIAltClick()
-	return
+/atom/proc/AIAltClick(var/atom/A)
+	AltClick(A)
 
 /obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
 	if(!secondsElectrified)
@@ -137,10 +142,10 @@
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	src.lethal = !src.lethal
 	src.updateTurrets()
-    
+
 /atom/proc/AIMiddleClick()
 	return
-    
+
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
 	if(!src.lights)
 		Topic("aiEnable=10", list("aiEnable"="10"), 1) // 1 meaning no window (consistency!)

@@ -58,9 +58,9 @@ proc/populate_seed_list()
 
 	//Tolerances.
 	var/requires_nutrients = 1      // The plant can starve.
-	var/nutrient_consumption = 0.1 // Plant eats this much per tick.
+	var/nutrient_consumption = 0.25 // Plant eats this much per tick.
 	var/requires_water = 1          // The plant can become dehydrated.
-	var/water_consumption = 1     // Plant drinks this much per tick.
+	var/water_consumption = 3       // Plant drinks this much per tick.
 	var/ideal_heat = 293            // Preferred temperature in Kelvin.
 	var/heat_tolerance = 20         // Departure from ideal that is survivable.
 	var/ideal_light = 8             // Preferred light level in luminosity.
@@ -83,7 +83,7 @@ proc/populate_seed_list()
 	var/spread = 0                  // 0 limits plant to tray, 1 = creepers, 2 = vines.
 	var/carnivorous = 0             // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
 	var/parasite = 0                // 0 = no, 1 = gain health from weed level.
-	var/immutable                   // If set, plant will never mutate.
+	var/immutable = 0                // If set, plant will never mutate. If -1, plant is  highly mutable.
 	var/alter_temp                  // If set, the plant will periodically alter local temp by this amount.
 
 	// Cosmetics.
@@ -99,14 +99,15 @@ proc/populate_seed_list()
 
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()
-	if(!mutants || !mutants.len || immutable) return 0
+	if(!mutants || !mutants.len || immutable > 0) return 0
 	return pick(mutants)
 
 //Mutates the plant overall (randomly).
 /datum/seed/proc/mutate(var/degree,var/turf/source_turf)
-	if(!degree || immutable) return
 
-	source_turf.visible_message("[display_name] quivers uneasily!")
+	if(!degree || immutable > 0) return
+
+	source_turf.visible_message("\blue \The [display_name] quivers!")
 
 	//This looks like shit, but it's a lot easier to read/change this way.
 	var/total_mutations = rand(1,1+degree)
@@ -115,7 +116,7 @@ proc/populate_seed_list()
 			if(0) //Plant cancer!
 				lifespan = max(0,lifespan-rand(1,5))
 				endurance = max(0,endurance-rand(10,20))
-				source_turf.visible_message("[display_name] withers rapidly!")
+				source_turf.visible_message("\red \The [display_name] withers rapidly!")
 			if(1)
 				nutrient_consumption =      max(0,  min(5,   nutrient_consumption + rand(-(degree*0.1),(degree*0.1))))
 				water_consumption =         max(0,  min(50,  water_consumption    + rand(-degree,degree)))
@@ -134,7 +135,7 @@ proc/populate_seed_list()
 				if(prob(degree*5))
 					carnivorous =           max(0,  min(2,   carnivorous          + rand(-degree,degree)))
 					if(carnivorous)
-						source_turf.visible_message("[display_name] shudders hungrily.")
+						source_turf.visible_message("\blue \The [display_name] shudders hungrily.")
 			if(6)
 				weed_tolerance  =           max(0,  min(10,  weed_tolerance       + (rand(-2,2)   * degree)))
 				if(prob(degree*5))          parasite = !parasite
@@ -148,7 +149,7 @@ proc/populate_seed_list()
 				potency =                   max(0,  min(200, potency              + (rand(-20,20) * degree)))
 				if(prob(degree*5))
 					spread =                max(0,  min(2,   spread               + rand(-1,1)))
-					source_turf.visible_message("[display_name] spasms visibly, shifting in the tray.")
+					source_turf.visible_message("\blue \The [display_name] spasms visibly, shifting in the tray.")
 			if(9)
 				maturation =                max(0,  min(30,  maturation      + (rand(-1,1)   * degree)))
 				if(prob(degree*5))
@@ -157,28 +158,28 @@ proc/populate_seed_list()
 				if(prob(degree*2))
 					biolum = !biolum
 					if(biolum)
-						source_turf.visible_message("[display_name] begins to glow!")
+						source_turf.visible_message("\blue \The [display_name] begins to glow!")
 						if(prob(degree*2))
 							biolum_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-							source_turf.visible_message("[display_name]'s glow <font=[biolum_colour]>changes colour</font>!")
+							source_turf.visible_message("\blue \The [display_name]'s glow <font=[biolum_colour]>changes colour</font>!")
 					else
-						source_turf.visible_message("[display_name]'s glow dims...")
+						source_turf.visible_message("\blue \The [display_name]'s glow dims...")
 			if(11)
 				if(prob(degree*2))
 					flowers = !flowers
 					if(flowers)
-						source_turf.visible_message("[display_name] sprouts a bevy of flowers!")
+						source_turf.visible_message("\blue \The [display_name] sprouts a bevy of flowers!")
 						if(prob(degree*2))
 							flower_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-						source_turf.visible_message("[display_name]'s flowers <font=[flower_colour]>changes colour</font>!")
+						source_turf.visible_message("\blue \The [display_name]'s flowers <font=[flower_colour]>changes colour</font>!")
 					else
-						source_turf.visible_message("[display_name]'s flowers wither and fall off.")
+						source_turf.visible_message("\blue \The [display_name]'s flowers wither and fall off.")
 	return
 
 //Mutates a specific trait/set of traits.
 /datum/seed/proc/apply_gene(var/datum/plantgene/gene)
 
-	if(!gene || !gene.values || immutable) return
+	if(!gene || !gene.values || immutable > 0) return
 
 	switch(gene.genetype)
 
@@ -208,11 +209,12 @@ proc/populate_seed_list()
 				else
 					chems[rid] = gene.values[2][rid]
 
-			//TODO.
-			//if(!exude_gasses) exude_gasses = list()
-			//exude_gasses |= gene.values[3]
-			//for(var/gas in exude_gasses)
-			//	exude_gasses[gas] = max(1,round(exude_gasses[gas]/2))
+			var/list/new_gasses = gene.values[3]
+			if(istype(new_gasses))
+				if(!exude_gasses) exude_gasses = list()
+				exude_gasses |= new_gasses
+				for(var/gas in exude_gasses)
+					exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
 
 			alter_temp =           gene.values[4]
 			potency =              gene.values[5]
@@ -343,11 +345,10 @@ proc/populate_seed_list()
 	return (P ? P : 0)
 
 //Place the plant products at the feet of the user.
-/datum/seed/proc/harvest(var/mob/user,var/yield_mod)
+/datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample)
 	if(!user)
 		return
 
-	//TODO: check for failing to harvest.
 	var/got_product
 	if(!isnull(products) && products.len && yield > 0)
 		got_product = 1
@@ -355,7 +356,7 @@ proc/populate_seed_list()
 	if(!got_product)
 		user << "\red You fail to harvest anything useful."
 	else
-		user << "You harvest from the [display_name]."
+		user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
 
 		//This may be a new line. Update the global if it is.
 		if(name == "new line" || !(name in seed_types))
@@ -363,12 +364,18 @@ proc/populate_seed_list()
 			name = "[uid]"
 			seed_types[name] = src
 
+		if(harvest_sample)
+			var/obj/item/seeds/seeds = new(get_turf(user))
+			seeds.seed_type = name
+			seeds.update_seed()
+			return
+
 		var/total_yield
 		if(isnull(yield_mod) || yield_mod < 1)
 			yield_mod = 0
 			total_yield = yield
 		else
-			total_yield = max(1,rand(1,((yield_mod+yield))))
+			total_yield = max(1,rand(yield_mod,yield_mod+yield))
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
@@ -382,7 +389,6 @@ proc/populate_seed_list()
 				handle_living_product(product)
 
 			// Make sure the product is inheriting the correct seed type reference.
-			// TODO: can this be collapsed into one type check since they share vars?
 			else if(istype(product,/obj/item/weapon/reagent_containers/food/snacks/grown))
 				var/obj/item/weapon/reagent_containers/food/snacks/grown/current_product = product
 				current_product.plantname = name
@@ -396,7 +402,7 @@ proc/populate_seed_list()
 // be put into the global datum list until the product is harvested, though.
 /datum/seed/proc/diverge(var/modified)
 
-	if(immutable) return
+	if(immutable > 0) return
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
@@ -1163,6 +1169,7 @@ proc/populate_seed_list()
 	yield = -1
 	potency = -1
 	growth_stages = 4
+	immutable = -1
 
 /datum/seed/whitebeets
 	name = "whitebeet"

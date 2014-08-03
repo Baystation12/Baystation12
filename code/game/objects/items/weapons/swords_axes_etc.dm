@@ -91,7 +91,7 @@
 */
 	if (user.a_intent == "hurt")
 		if(!..()) return
-		playsound(src.loc, "swing_hit", 50, 1, -1)
+		//playsound(src.loc, "swing_hit", 50, 1, -1)
 		if (M.stuttering < 8 && (!(HULK in M.mutations))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 			M.stuttering = 8
 		M.Stun(8)
@@ -177,7 +177,7 @@
 				user.take_organ_damage(2*force)
 			return
 		if(..())
-			playsound(src.loc, "swing_hit", 50, 1, -1)
+			//playsound(src.loc, "swing_hit", 50, 1, -1)
 			return
 	else
 		return ..()

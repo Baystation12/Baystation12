@@ -13,6 +13,8 @@
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
 
+	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -31,6 +33,9 @@
 	src << "\red <B>*BZZZT*</B>"
 	src << "\red Warning: Electromagnetic pulse detected."
 	..()
+
+/mob/living/silicon/stun_effect_act(var/stun_amount, var/agony_amount)
+	return	//immune
 
 /mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
 	return

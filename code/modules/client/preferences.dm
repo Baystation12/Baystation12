@@ -107,7 +107,8 @@ datum/preferences
 	var/list/organ_data = list()
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
-	var/flavor_text = ""
+	var/list/flavor_texts = list()
+
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -386,14 +387,7 @@ datum/preferences
 
 		dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
-		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=input'><b>Set Flavor Text</b></a><br>"
-		if(lentext(flavor_text) <= 40)
-			if(!lentext(flavor_text))
-				dat += "\[...\]"
-			else
-				dat += "[flavor_text]"
-		else
-			dat += "[copytext(flavor_text, 1, 37)]...<br>"
+		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 		dat += "<br>"
 
 		dat += "<br><b>Hair</b><br>"
@@ -558,24 +552,15 @@ datum/preferences
 
 		HTML += "<a href=\"byond://?src=\ref[user];preference=records;task=med_record\">Medical Records</a><br>"
 
-		if(lentext(med_record) <= 40)
-			HTML += "[med_record]"
-		else
-			HTML += "[copytext(med_record, 1, 37)]..."
+		HTML += TextPreview(med_record,40)
 
 		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=gen_record\">Employment Records</a><br>"
 
-		if(lentext(gen_record) <= 40)
-			HTML += "[gen_record]"
-		else
-			HTML += "[copytext(gen_record, 1, 37)]..."
+		HTML += TextPreview(gen_record,40)
 
 		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=sec_record\">Security Records</a><br>"
 
-		if(lentext(sec_record) <= 40)
-			HTML += "[sec_record]<br>"
-		else
-			HTML += "[copytext(sec_record, 1, 37)]...<br>"
+		HTML += TextPreview(sec_record,40)
 
 		HTML += "<br>"
 		HTML += "<a href=\"byond://?src=\ref[user];preference=records;records=-1\">\[Done\]</a>"
@@ -603,7 +588,44 @@ datum/preferences
 		user << browse(HTML, "window=antagoptions")
 		return
 
-
+	proc/SetFlavorText(mob/user)
+		var/HTML = "<body>"
+		HTML += "<tt><center>"
+		HTML += "<b>Set Flavour Text</b> <hr />"
+		HTML += "<br></center>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=general'>General:</a> "
+		HTML += TextPreview(flavor_texts["general"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=head'>Head:</a> "
+		HTML += TextPreview(flavor_texts["head"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=face'>Face:</a> "
+		HTML += TextPreview(flavor_texts["face"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=eyes'>Eyes:</a> "
+		HTML += TextPreview(flavor_texts["eyes"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=torso'>Body:</a> "
+		HTML += TextPreview(flavor_texts["torso"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=arms'>Arms:</a> "
+		HTML += TextPreview(flavor_texts["arms"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=hands'>Hands:</a> "
+		HTML += TextPreview(flavor_texts["hands"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=legs'>Legs:</a> "
+		HTML += TextPreview(flavor_texts["legs"])
+		HTML += "<br>"
+		HTML += "<a href='byond://?src=\ref[user];preference=flavor_text;task=feet'>Feet:</a> "
+		HTML += TextPreview(flavor_texts["feet"])
+		HTML += "<br>"
+		HTML += "<hr />"
+		HTML +="<a href='?src=\ref[user];preference=flavor_text;task=done'>\[Done\]</a>"
+		HTML += "<tt>"
+		user << browse(null, "window=preferences")
+		user << browse(HTML, "window=flavor_text;size=430x300")
+		return
 
 	proc/GetPlayerAltTitle(datum/job/job)
 		return player_alt_titles.Find(job.title) > 0 \
@@ -805,6 +827,72 @@ datum/preferences
 				SetSkills(user)
 			return 1
 
+		else if (href_list["preference"] == "loadout")
+
+			if(href_list["task"] == "input")
+
+				var/list/valid_gear_choices = list()
+
+				for(var/gear_name in gear_datums)
+					var/datum/gear/G = gear_datums[gear_name]
+					if(G.whitelisted && !is_alien_whitelisted(user, G.whitelisted))
+						continue
+					valid_gear_choices += gear_name
+
+				var/choice = input(user, "Select gear to add: ") as null|anything in valid_gear_choices
+
+				if(choice && gear_datums[choice])
+
+					var/total_cost = 0
+
+					if(isnull(gear) || !islist(gear)) gear = list()
+
+					if(gear && gear.len)
+						for(var/gear_name in gear)
+							if(gear_datums[gear_name])
+								var/datum/gear/G = gear_datums[gear_name]
+								total_cost += G.cost
+
+					var/datum/gear/C = gear_datums[choice]
+					total_cost += C.cost
+					if(C && total_cost <= MAX_GEAR_COST)
+						gear += choice
+						user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+					else
+						user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
+
+			else if(href_list["task"] == "remove")
+				var/to_remove = href_list["gear"]
+				if(!to_remove) return
+				for(var/gear_name in gear)
+					if(gear_name == to_remove)
+						gear -= gear_name
+						break
+
+		else if(href_list["preference"] == "flavor_text")
+			switch(href_list["task"])
+				if("open")
+					SetFlavorText(user)
+					return
+				if("done")
+					user << browse(null, "window=flavor_text")
+					ShowChoices(user)
+					return
+				if("general")
+					var/msg = input(usr,"Give a general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+					if(msg != null)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+						msg = html_encode(msg)
+					flavor_texts[href_list["task"]] = msg
+				else
+					var/msg = input(usr,"Set the flavor text for your [href_list["task"]].","Flavor Text",html_decode(flavor_texts[href_list["task"]])) as message
+					if(msg != null)
+						msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+						msg = html_encode(msg)
+					flavor_texts[href_list["task"]] = msg
+			SetFlavorText(user)
+			return
+
 		else if(href_list["preference"] == "records")
 			if(text2num(href_list["record"]) >= 1)
 				SetRecords(user)
@@ -943,11 +1031,13 @@ datum/preferences
 			if("input")
 				switch(href_list["preference"])
 					if("name")
-						var/new_name = reject_bad_name( input(user, "Choose your character's name:", "Character Preference")  as text|null )
-						if(new_name)
-							real_name = new_name
-						else
-							user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
+						var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
+						if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
+							var/new_name = reject_bad_name(raw_name)
+							if(new_name)
+								real_name = new_name
+							else
+								user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
 
 					if("age")
 						var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
@@ -1152,15 +1242,6 @@ datum/preferences
 						if(new_relation)
 							nanotrasen_relation = new_relation
 
-					if("flavor_text")
-						var/msg = input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!","Flavor Text",html_decode(flavor_text)) as message
-
-						if(msg != null)
-							msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-							msg = html_encode(msg)
-
-							flavor_text = msg
-
 					if("disabilities")
 						if(text2num(href_list["disabilities"]) >= -1)
 							if(text2num(href_list["disabilities"]) >= 0)
@@ -1356,7 +1437,16 @@ datum/preferences
 		if(character.dna)
 			character.dna.real_name = character.real_name
 
-		character.flavor_text = flavor_text
+		character.flavor_texts["general"] = flavor_texts["general"]
+		character.flavor_texts["head"] = flavor_texts["head"]
+		character.flavor_texts["face"] = flavor_texts["face"]
+		character.flavor_texts["eyes"] = flavor_texts["eyes"]
+		character.flavor_texts["torso"] = flavor_texts["torso"]
+		character.flavor_texts["arms"] = flavor_texts["arms"]
+		character.flavor_texts["hands"] = flavor_texts["hands"]
+		character.flavor_texts["legs"] = flavor_texts["legs"]
+		character.flavor_texts["feet"] = flavor_texts["feet"]
+
 		character.med_record = med_record
 		character.sec_record = sec_record
 		character.gen_record = gen_record
