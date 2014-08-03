@@ -190,9 +190,9 @@
 								//Assume the heat is being pumped into the hull which is fixed at 20 C
 								//none of this is really proper thermodynamics but whatever
 
-								var/cop = removed.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
+								var/cop = removed.temperature/T20C	//coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 
-								heat_transfer = min(heat_transfer, cop * heating_power)	//this ensures that we don't use more than MAX_ENERGY_CHANGE amount of power - the machine can only do so much cooling
+								heat_transfer = min(heat_transfer, cop * heating_power)	//limit heat transfer by available power
 
 								heat_transfer = -removed.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
 

@@ -14,14 +14,21 @@
 	var/on = 0
 	use_power = 0
 	idle_power_usage = 5	//5 Watts for thermostat related circuitry
-	active_power_usage = 50000		//50 kW. Also doubles as the power rating of the heater
+	active_power_usage = 50000		//50 kW. The power rating of the heater
 	
 	var/heating = 0		//mainly for icon updates
+	var/opened = 0		//for deconstruction
 
 /obj/machinery/atmospherics/unary/heater/New()
 	..()
 	air_contents.volume = internal_volume
 	initialize_directions = dir
+	
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/gas_heater(src)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
+	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 
 /obj/machinery/atmospherics/unary/heater/initialize()
 	if(node) return
@@ -49,11 +56,9 @@
 
 /obj/machinery/atmospherics/unary/heater/process()
 	..()
-	heating = 0
 	
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(!on)
+	if(stat & (NOPOWER|BROKEN) || !on)
+		heating = 0
 		update_use_power(0)
 		return
 	
@@ -64,6 +69,7 @@
 		heating = 1
 		network.update = 1
 	else
+		heating = 0
 		update_use_power(1)
 	
 	update_icon()
@@ -119,3 +125,43 @@
 	
 	src.add_fingerprint(usr)
 	return 1
+
+//upgrading parts
+/obj/machinery/atmospherics/unary/heater/RefreshParts() 
+	..()
+	
+	var/cap_rating = 0
+	var/cap_count = 0
+	var/bin_rating = 0
+	var/bin_count = 0
+	for(var/obj/item/weapon/stock_parts/P in component_parts)
+		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
+			cap_rating += P.rating
+			cap_count++
+		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
+			bin_rating += P.rating
+			bin_count++
+	cap_rating /= cap_count
+	bin_rating /= bin_count
+	
+	active_power_usage = initial(active_power_usage)*cap_rating
+	max_temperature = max(initial(max_temperature) - T20C, 0)*cap_rating + T20C
+	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200*bin_rating
+
+//dismantling code. copied from autolathe
+/obj/machinery/atmospherics/unary/heater/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(istype(O, /obj/item/weapon/screwdriver))
+		opened = !opened
+		user << "You [opened ? "open" : "close"] the maintenance hatch of [src]."
+		return
+
+	if (opened && istype(O, /obj/item/weapon/crowbar))
+		dismantle()
+		return
+	
+	..()
+
+/obj/machinery/atmospherics/unary/heater/examine()
+	..()
+	if (opened)
+		usr << "The maintenance hatch is open."

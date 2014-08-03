@@ -281,11 +281,24 @@ obj/item/weapon/circuitboard/rdserver
 	name = "Circuit Board (Gas Heating System)"
 	build_path = "/obj/machinery/atmospherics/unary/heater"
 	board_type = "machine"
-	origin_tech = "powerstorage=1;engineering=3"
-	frame_desc = "Requires 5 Pieces of Cable and 2 Capacitors."
+	origin_tech = "powerstorage=2;engineering=1"
+	frame_desc = "Requires 5 Pieces of Cable, 1 Matter Bin, and 2 Capacitors."
 	req_components = list(
 							"/obj/item/weapon/cable_coil" = 5,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/capacitor" = 2)
+
+/obj/item/weapon/circuitboard/gas_cooler
+	name = "Circuit Board (Gas Cooling System)"
+	build_path = "/obj/machinery/atmospherics/unary/freezer"
+	board_type = "machine"
+	origin_tech = "magnets=2;engineering=2"
+	frame_desc = "Requires 2 Pieces of Cable, 1 Matter Bin, 1 Micro Manipulator, and 2 Capacitors."
+	req_components = list(
+							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
+							"/obj/item/weapon/stock_parts/capacitor" = 2,
+							"/obj/item/weapon/stock_parts/manipulator" = 1)
 
 // Telecomms circuit boards:
 
