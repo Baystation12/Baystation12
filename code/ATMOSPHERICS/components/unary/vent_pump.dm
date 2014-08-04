@@ -80,6 +80,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
+	active_power_usage = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
@@ -161,7 +162,7 @@
 			
 			power_draw = pump_gas(air_contents, environment, transfer_moles, active_power_usage)
 		else //external -> internal
-			var/output_volume = air_contents.volume * air_contents.group_multiplier
+			var/output_volume = air_contents.volume + (network? network.volume : 0)
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
@@ -362,7 +363,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/examine()
 	set src in oview(1)
 	..()
-	usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+	if (get_dist(usr, src) <= 1)
+		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	if(welded)
 		usr << "It seems welded shut."
 

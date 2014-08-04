@@ -7,6 +7,7 @@
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	var/last_power_draw = 0
 
 	level = 1
 
@@ -113,14 +114,14 @@
 		set_frequency(frequency)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
-	..()	
-	if(stat & (NOPOWER|BROKEN))
-		return
+	..()
 	if (!node)
 		on = 0
 	//broadcast_status()
-	if(!on)
+	if(!on || (stat & (NOPOWER|BROKEN)))
 		update_use_power(0)	//we got here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		last_power_draw = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -140,9 +141,10 @@
 	if (power_draw < 0)
 		//update_use_power(0)
 		use_power = 0	//don't force update. Sure, we will continue to use power even though we're not pumping anything, but it is easier on the CPU
+		last_power_draw = 0
+		last_flow_rate = 0
 	else
-		//last_power_draw = power_draw
-		handle_power_draw(power_draw)
+		last_power_draw = handle_power_draw(power_draw)
 	
 	if(network)
 		network.update = 1
@@ -252,7 +254,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/examine()
 	set src in oview(1)
 	..()
-	usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s"
+	if (get_dist(usr, src) <= 1)
+		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

@@ -124,7 +124,7 @@
 					network1.update = 1
 		else //external -> internal
 			if (node2 && (environment.temperature || air2.temperature))
-				var/output_volume = air2.volume * air2.group_multiplier
+				var/output_volume = air2.volume + (network2? network2.volume : 0)
 				var/air_temperature = air2.temperature? air2.temperature : environment.temperature
 				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 				
@@ -203,7 +203,9 @@
 /obj/machinery/atmospherics/binary/dp_vent_pump/examine()
 	set src in oview(1)
 	..()
-	usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+	
+	if (get_dist(usr, src) <= 1)
+		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat

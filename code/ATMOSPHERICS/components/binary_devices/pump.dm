@@ -74,18 +74,15 @@ Thus, the two variables affect pump operation are set in New():
 	var/power_draw = -1
 	var/pressure_delta = target_pressure - air2.return_pressure()
 
-	if(pressure_delta > 0.01)
-		/* TODO Uncomment this once we have a good way to get the volume of a pipe network.
-		if (air1.temperature > 0 || air2.temperature > 0)
-			//Figure out how much gas to transfer to meet the target pressure.
-			var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
-			
-			var/output_volume = sink.volume * sink.group_multiplier
-			
-			//Return the number of moles that would have to be transfered to bring sink to the target pressure
-			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		*/
-		power_draw = pump_gas(air1, air2, air1.total_moles, active_power_usage)
+	if(pressure_delta > 0.01 && (air1.temperature > 0 || air2.temperature > 0))
+		//Figure out how much gas to transfer to meet the target pressure.
+		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
+		var/output_volume = air2.volume + (network2? network2.volume : 0)
+		
+		//get the number of moles that would have to be transfered to bring sink to the target pressure
+		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+		
+		power_draw = pump_gas(air1, air2, transfer_moles, active_power_usage)
 		
 		if(network1)
 			network1.update = 1
