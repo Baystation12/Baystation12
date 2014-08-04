@@ -2160,17 +2160,17 @@ datum
 				if(!data) data = 1
 				switch(data)
 					if(1 to 10)
-						M.bodytemperature += 8 * TEMPERATURE_DAMAGE_COEFFICIENT
+						M.bodytemperature += 7 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(holder.has_reagent("frostoil"))
 							holder.remove_reagent("frostoil", 5)
 						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(5,20)
 					if(10 to 20)
-						M.bodytemperature += 13 * TEMPERATURE_DAMAGE_COEFFICIENT
+						M.bodytemperature += 12 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(10,20)
 					if(20 to INFINITY)
-						M.bodytemperature += 23 * TEMPERATURE_DAMAGE_COEFFICIENT
+						M.bodytemperature += 17 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(15,20)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
