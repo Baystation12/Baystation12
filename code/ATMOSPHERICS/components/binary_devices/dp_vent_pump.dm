@@ -120,7 +120,7 @@
 				
 				power_draw = pump_gas(air1, environment, transfer_moles, active_power_usage)
 				
-				if(network1)
+				if(power_draw >= 0 && network1)
 					network1.update = 1
 		else //external -> internal
 			if (node2 && (environment.temperature || air2.temperature))
@@ -133,7 +133,7 @@
 				
 				power_draw = pump_gas(environment, air2, transfer_moles, active_power_usage)
 				
-				if(network2)
+				if(power_draw >= 0 && network2)
 					network2.update = 1
 	
 	if (power_draw < 0)

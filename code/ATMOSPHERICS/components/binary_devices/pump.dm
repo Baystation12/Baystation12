@@ -74,7 +74,7 @@ Thus, the two variables affect pump operation are set in New():
 	var/power_draw = -1
 	var/pressure_delta = target_pressure - air2.return_pressure()
 
-	if(pressure_delta > 0.01 && (air1.temperature > 0 || air2.temperature > 0))
+	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
 		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
 		var/output_volume = air2.volume + (network2? network2.volume : 0)
@@ -83,12 +83,6 @@ Thus, the two variables affect pump operation are set in New():
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 		
 		power_draw = pump_gas(air1, air2, transfer_moles, active_power_usage)
-		
-		if(network1)
-			network1.update = 1
-
-		if(network2)
-			network2.update = 1
 	
 	if (power_draw < 0)
 		//update_use_power(0)
@@ -97,6 +91,12 @@ Thus, the two variables affect pump operation are set in New():
 		last_flow_rate = 0
 	else
 		last_power_draw = handle_power_draw(power_draw)
+		
+		if(network1)
+			network1.update = 1
+
+		if(network2)
+			network2.update = 1
 
 	return 1
 
@@ -213,7 +213,7 @@ Thus, the two variables affect pump operation are set in New():
 			target_pressure = max_pressure_setting
 		if ("set")
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
-			src.target_pressure = max(0, min(max_pressure_setting, new_pressure))
+			src.target_pressure = between(0, new_pressure, max_pressure_setting)
 	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)

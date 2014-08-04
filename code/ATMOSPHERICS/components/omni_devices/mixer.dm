@@ -115,13 +115,6 @@
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(mixing_inputs, output, transfer_moles, active_power_usage)
-		
-		for(var/datum/omni_port/P in inputs)
-			if(P.concentration && P.network)
-				P.network.update = 1
-
-		if(output.network)
-			output.network.update = 1
 
 	if (power_draw < 0)
 		//update_use_power(0)
@@ -129,6 +122,13 @@
 		last_flow_rate = 0
 	else
 		handle_power_draw(power_draw)
+		
+		for(var/datum/omni_port/P in inputs)
+			if(P.concentration && P.network)
+				P.network.update = 1
+
+		if(output.network)
+			output.network.update = 1
 	
 	return 1
 

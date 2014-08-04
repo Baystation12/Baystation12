@@ -170,9 +170,6 @@
 			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 			
 			power_draw = pump_gas(environment, air_contents, transfer_moles, active_power_usage)
-		
-		if(network)
-			network.update = 1
 
 	if (power_draw < 0)
 		last_power_draw = 0
@@ -181,7 +178,9 @@
 		use_power = 0	//don't force update - easier on CPU
 	else
 		last_power_draw = handle_power_draw(power_draw)
-
+		if(network)
+			network.update = 1
+	
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)

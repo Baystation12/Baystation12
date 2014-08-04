@@ -830,10 +830,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 /*
 	Atmos Machinery
 */
-
-//Note: anything higher than these values has no effect at the moment.
-#define MAX_SIPHON_FLOWRATE	2500	//L/s	This can be used to balance how fast a room is siphoned.
-#define MAX_FILTER_FLOWRATE	200		//L/s
+#define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
+#define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
 
 //These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences. 
 //Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
@@ -844,7 +842,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define MINUMUM_MOLES_TO_PUMP	0.01
 #define MINUMUM_MOLES_TO_FILTER	0.1
 
-//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so these will control maximum flow rates in L/s
+//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so for many atmos devices these will control maximum flow rates in L/s
 #define ATMOS_DEFAULT_VOLUME_PUMP	200	//L
 #define ATMOS_DEFAULT_VOLUME_FILTER	200	//L
 #define ATMOS_DEFAULT_VOLUME_MIXER	200	//L

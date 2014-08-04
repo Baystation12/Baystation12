@@ -76,6 +76,13 @@
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = filter_gas_multi(filtering_outputs, input_air, output_air, transfer_moles, active_power_usage)
+	
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else
+		handle_power_draw(power_draw)
 		
 		if(input.network)
 			input.network.update = 1
@@ -84,13 +91,6 @@
 		for(var/datum/omni_port/P in filters)
 			if(P.network)
 				P.network.update = 1
-
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-		last_flow_rate = 0
-	else
-		handle_power_draw(power_draw)
 	
 	return 1
 
