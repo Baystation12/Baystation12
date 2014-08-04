@@ -26,6 +26,9 @@
 	var/radio_filter_in
 
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
+	..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	
 	icon = null
 	initial_loc = get_area(loc)
 	if (initial_loc.master)
@@ -37,7 +40,6 @@
 	if(ticker && ticker.current_state == 3)//if the game is running
 		src.initialize()
 		src.broadcast_status()
-	..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_icon(var/safety = 0)
 	if(!check_icon_cache())

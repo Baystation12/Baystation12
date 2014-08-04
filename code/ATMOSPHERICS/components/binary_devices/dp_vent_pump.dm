@@ -45,6 +45,8 @@
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/New()
 	..()
+	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/high_volume
@@ -52,8 +54,8 @@
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/high_volume/New()
 	..()
-	air1.volume = 1000
-	air2.volume = 1000
+	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
+	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())

@@ -45,6 +45,9 @@
 					if(tag_west_con && tag_west == 1)
 						P.concentration = tag_west_con
 						con += max(0, tag_west_con)
+	
+	for(var/datum/omni_port/P in ports)
+		P.air.volume = ATMOS_DEFAULT_VOLUME_MIXER
 
 	rebuild_mixing_inputs()
 
@@ -61,7 +64,6 @@
 			if(inputs.Find(P))
 				inputs -= P
 
-			P.air.volume = 200
 			switch(P.mode)
 				if(ATM_INPUT)
 					inputs += P
@@ -73,7 +75,7 @@
 			P.concentration = 1 / max(1, inputs.len)
 
 	if(output)
-		output.air.volume = 200 * 0.75 * inputs.len
+		output.air.volume = ATMOS_DEFAULT_VOLUME_MIXER * 0.75 * inputs.len
 		output.concentration = 1
 
 /obj/machinery/atmospherics/omni/mixer/proc/mapper_set()

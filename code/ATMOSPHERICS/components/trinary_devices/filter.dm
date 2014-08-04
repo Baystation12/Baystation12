@@ -12,8 +12,7 @@
 
 	var/temp = null // -- TLE
 
-	var/max_flow_rate = 200	//L/s
-	var/set_flow_rate = 200
+	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	/*
 	Filter types:
@@ -39,6 +38,10 @@
 
 /obj/machinery/atmospherics/trinary/filter/New()
 	..()
+	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	
 	if(radio_controller)
 		initialize()
 
@@ -217,8 +220,8 @@
 	if (href_list["temp"])
 		src.temp = null
 	if(href_list["set_flow_rate"])
-		var/new_pressure = input(usr,"Enter new flow rate (0-[max_flow_rate]L/s)","Flow Rate Control",src.set_flow_rate) as num
-		src.set_flow_rate = max(0, min(max_flow_rate, new_pressure))
+		var/new_flow_rate = input(usr,"Enter new flow rate (0-[air1.volume]L/s)","Flow Rate Control",src.set_flow_rate) as num
+		src.set_flow_rate = max(0, min(air1.volume, new_flow_rate))
 	if(href_list["power"])
 		on=!on
 	src.update_icon()

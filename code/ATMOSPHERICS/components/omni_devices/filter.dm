@@ -21,6 +21,8 @@
 /obj/machinery/atmospherics/omni/filter/New()
 	..()
 	rebuild_filtering_list()
+	for(var/datum/omni_port/P in ports)
+		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/omni/filter/Del()
 	input = null

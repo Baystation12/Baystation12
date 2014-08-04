@@ -10,8 +10,7 @@
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 3700	//This also doubles as a measure of how powerful the mixer is, in Watts. 3700 W ~ 5 HP
 
-	var/max_flow_rate = 200	//L/s
-	var/set_flow_rate = 200
+	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 	var/list/mixing_inputs
 	
 	//for mapping
@@ -66,7 +65,9 @@
 
 /obj/machinery/atmospherics/trinary/mixer/New()
 	..()
-	air3.volume = 300
+	air1.volume = ATMOS_DEFAULT_VOLUME_MIXER
+	air2.volume = ATMOS_DEFAULT_VOLUME_MIXER
+	air3.volume = ATMOS_DEFAULT_VOLUME_MIXER * 1.5
 
 /obj/machinery/atmospherics/trinary/mixer/process()
 	..()
@@ -162,6 +163,7 @@
 	if(href_list["power"])
 		on = !on
 	if(href_list["set_press"])
+		var/max_flow_rate = min(air1.volume, air2.volume)
 		var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",src.set_flow_rate) as num
 		src.set_flow_rate = max(0, min(max_flow_rate, new_flow_rate))
 	if(href_list["node1_c"])
