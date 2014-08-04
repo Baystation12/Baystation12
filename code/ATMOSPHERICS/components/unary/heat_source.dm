@@ -8,7 +8,7 @@
 	anchored = 1.0
 
 	var/set_temperature = T20C	//thermostat
-	var/max_temperature = T20C + 980
+	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L
 
 	var/on = 0
@@ -145,7 +145,7 @@
 	bin_rating /= bin_count
 	
 	active_power_usage = initial(active_power_usage)*cap_rating
-	max_temperature = max(initial(max_temperature) - T20C, 0)*cap_rating + T20C
+	max_temperature = max(initial(max_temperature) - T20C, 0)*((bin_rating*2 + cap_rating)/3) + T20C
 	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200*bin_rating
 
 //dismantling code. copied from autolathe
