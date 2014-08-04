@@ -252,6 +252,7 @@
 #include "code\game\gamemodes\mutiny\directives\research_to_ripleys_directive.dm"
 #include "code\game\gamemodes\mutiny\directives\tau_ceti_needs_women_directive.dm"
 #include "code\game\gamemodes\mutiny\directives\terminations_directive.dm"
+#include "code\game\gamemodes\mutiny\directives\vox_heist.dm"
 #include "code\game\gamemodes\ninja\ninja.dm"
 #include "code\game\gamemodes\nuclear\nuclear.dm"
 #include "code\game\gamemodes\nuclear\nuclearbomb.dm"
