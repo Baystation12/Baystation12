@@ -82,7 +82,7 @@ Thus, the two variables affect pump operation are set in New():
 		//get the number of moles that would have to be transfered to bring sink to the target pressure
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 		
-		power_draw = pump_gas(air1, air2, transfer_moles, active_power_usage)
+		power_draw = pump_gas(src, air1, air2, transfer_moles, active_power_usage)
 	
 	if (power_draw < 0)
 		//update_use_power(0)

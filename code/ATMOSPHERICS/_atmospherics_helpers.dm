@@ -8,13 +8,14 @@
 */
 
 
-/obj/machinery/atmospherics/var/last_flow_rate = 0	//Can't return multiple values, unfortunately
+/obj/machinery/atmospherics/var/last_flow_rate = 0
+/obj/machinery/portable_atmospherics/var/last_flow_rate = 0
 
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
 //transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power.
-/obj/machinery/atmospherics/proc/pump_gas(var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null, var/available_power = null)
+/proc/pump_gas(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null, var/available_power = null)
 	if (source.total_moles < MINUMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
@@ -31,7 +32,13 @@
 	if (transfer_moles < MINUMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
-	last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	//Update flow rate meter
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	
 	var/datum/gas_mixture/removed = source.remove(transfer_moles)
 	if (!removed) //Just in case
@@ -50,7 +57,7 @@
 //filtering - A list of gasids to be scrubbed from source
 //total_transfer_moles - Limits the amount of moles to scrub. The actual amount of gas scrubbed may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when scrubbing gas. If null then the scrubbing is not limited by power.
-/obj/machinery/atmospherics/proc/scrub_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+/proc/scrub_gas(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -89,8 +96,15 @@
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
+	//Update flow rate var
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	
 	var/power_draw = 0
-	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	for (var/g in filtering)
 		var/transfer_moles = source.gas[g]
 		//filter gas in proportion to the mole ratio
@@ -117,7 +131,7 @@
 //filtering - A list of gasids to be filtered. These gasses get moved to sink_filtered, while the other gasses get moved to sink_clean.
 //total_transfer_moles - Limits the amount of moles to input. The actual amount of gas filtered may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when filtering gas. If null then the filtering is not limited by power.
-/obj/machinery/atmospherics/proc/filter_gas(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_filtered, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
+/proc/filter_gas(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_filtered, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -154,7 +168,13 @@
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
-	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	//Update flow rate var
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	
 	var/datum/gas_mixture/removed = source.remove(total_transfer_moles)
 	if (!removed) //Just in case
@@ -188,7 +208,7 @@
 //For omni devices. Instead filtering is an associative list mapping gasids to gas mixtures.
 //I don't like the copypasta, but I decided to keep both versions of gas filtering as filter_gas is slightly faster (doesn't create as many temporary lists, doesn't call update_values() as much)
 //filter_gas can be removed and replaced with this proc if need be.
-/obj/machinery/atmospherics/proc/filter_gas_multi(var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
+/proc/filter_gas_multi(var/obj/machinery/M, var/list/filtering, var/datum/gas_mixture/source, var/datum/gas_mixture/sink_clean, var/total_transfer_moles = null, var/available_power = null)
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
@@ -226,7 +246,13 @@
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
-	last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	//Update Flow Rate var
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (total_transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
 	
 	var/datum/gas_mixture/removed = source.remove(total_transfer_moles)
 	if (!removed) //Just in case
@@ -262,7 +288,7 @@
 
 //Similar deal as the other atmos process procs.
 //mix_sources maps input gas mixtures to mix ratios. The mix ratios MUST add up to 1.
-/obj/machinery/atmospherics/proc/mix_gas(var/list/mix_sources, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
+/proc/mix_gas(var/obj/machinery/M, var/list/mix_sources, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
 	if (!mix_sources.len)
 		return -1
 	
@@ -304,7 +330,13 @@
 	if (total_transfer_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
-	last_flow_rate = (total_transfer_moles/total_input_moles)*total_input_volume //group_multiplier gets divided out here
+	//Update flow rate var
+	if (istype(M, /obj/machinery/atmospherics))
+		var/obj/machinery/atmospherics/A = M
+		A.last_flow_rate = (total_transfer_moles/total_input_moles)*total_input_volume //group_multiplier gets divided out here
+	if (istype(M, /obj/machinery/portable_atmospherics))
+		var/obj/machinery/portable_atmospherics/P = M
+		P.last_flow_rate = (total_transfer_moles/total_input_moles)*total_input_volume //group_multiplier gets divided out here
 	
 	var/total_power_draw = 0
 	for (var/datum/gas_mixture/source in mix_sources)
@@ -329,7 +361,7 @@
 */
 
 //Calculates the amount of power needed to move one mole from source to sink.
-/obj/machinery/atmospherics/proc/calculate_specific_power(datum/gas_mixture/source, datum/gas_mixture/sink)
+/proc/calculate_specific_power(datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
 	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 	var/specific_entropy = sink.specific_entropy() - source.specific_entropy()	//environment is gaining moles, air_contents is loosing
@@ -342,7 +374,7 @@
 	return specific_power
 
 //Calculates the amount of power needed to move one mole of a certain gas from source to sink.
-/obj/machinery/atmospherics/proc/calculate_specific_power_gas(var/gasid, datum/gas_mixture/source, datum/gas_mixture/sink)
+/proc/calculate_specific_power_gas(var/gasid, datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
 	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
 	var/specific_entropy = sink.specific_entropy_gas(gasid) - source.specific_entropy_gas(gasid)	//environment is gaining moles, air_contents is loosing

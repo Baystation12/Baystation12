@@ -118,7 +118,7 @@
 				var/air_temperature = environment.temperature? environment.temperature : air1.temperature
 				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 				
-				power_draw = pump_gas(air1, environment, transfer_moles, active_power_usage)
+				power_draw = pump_gas(src, air1, environment, transfer_moles, active_power_usage)
 				
 				if(power_draw >= 0 && network1)
 					network1.update = 1
@@ -131,7 +131,7 @@
 				//limit flow rate from turfs
 				transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 				
-				power_draw = pump_gas(environment, air2, transfer_moles, active_power_usage)
+				power_draw = pump_gas(src, environment, air2, transfer_moles, active_power_usage)
 				
 				if(power_draw >= 0 && network2)
 					network2.update = 1

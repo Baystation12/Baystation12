@@ -96,7 +96,7 @@
 	
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
-		power_draw = filter_gas(filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
+		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
 		
 		if(network2)
 			network2.update = 1

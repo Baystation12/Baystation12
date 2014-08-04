@@ -82,7 +82,7 @@
 				transfer_moles = min(transfer_moles, pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION))	
 		
 		//pump_gas() will return a negative number if no flow occurred
-		var/flow = pump_gas(air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
+		var/flow = pump_gas(src, air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
 		
 		if (flow >= 0)
 			if(network1)

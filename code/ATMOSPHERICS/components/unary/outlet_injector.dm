@@ -87,7 +87,7 @@
 	injecting = 1
 
 	if(air_contents.temperature > 0)
-		var/power_used = pump_gas(air_contents, environment, air_contents.total_moles, inject_power)
+		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, inject_power)
 		use_power(power_used)
 
 		if(network)

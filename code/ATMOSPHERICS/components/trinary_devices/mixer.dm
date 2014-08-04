@@ -86,7 +86,7 @@
 	
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
-		power_draw = mix_gas(mixing_inputs, air3, transfer_moles, active_power_usage)
+		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, active_power_usage)
 		
 		if(network1 && mixing_inputs[air1])
 			network1.update = 1
