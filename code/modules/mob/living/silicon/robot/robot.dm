@@ -1112,7 +1112,7 @@
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O) || !(O.loc == src || O.loc == src.module))
+		if (!istype(O) || !(O in src.module.modules))
 			return
 		
 		if(activated(O))
