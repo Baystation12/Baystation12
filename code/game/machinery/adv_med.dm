@@ -9,6 +9,10 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
+	
+	use_power = 1
+	idle_power_usage = 60
+	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
 /*/obj/machinery/bodyscanner/allow_drop()
 	return 0*/
@@ -48,6 +52,7 @@
 	usr.client.eye = src
 	usr.loc = src
 	src.occupant = usr
+	update_use_power(2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		//O = null
@@ -67,6 +72,7 @@
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.loc = src.loc
 	src.occupant = null
+	update_use_power(1)
 	src.icon_state = "body_scanner_0"
 	return
 
@@ -85,6 +91,7 @@
 		M.client.eye = src
 	M.loc = src
 	src.occupant = M
+	update_use_power(2)
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		O.loc = src.loc
@@ -214,6 +221,12 @@
 /obj/machinery/body_scanconsole/attack_hand(user as mob)
 	if(..())
 		return
+	if(stat & (NOPOWER|BROKEN))
+		return
+	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
+		user << "\red This console is not connected to a functioning body scanner."
+		return
+	
 	if(!ishuman(connected.occupant))
 		user << "\red This device can only scan compatible lifeforms."
 		return
