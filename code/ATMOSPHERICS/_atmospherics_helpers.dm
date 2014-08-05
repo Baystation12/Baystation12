@@ -61,7 +61,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering &= source.gas		//only filter gasses that are actually there.
+	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	//Determine the specific power of each filterable gas type, and the total amount of filterable gas (gasses selected to be scrubbed)
 	var/total_filterable_moles = 0			//the total amount of filterable gas
@@ -135,7 +135,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering &= source.gas		//only filter gasses that are actually there.
+	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
 	var/total_filterable_moles = 0		//the total amount of filterable gas
@@ -212,7 +212,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	filtering &= source.gas		//only filter gasses that are actually there.
+	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
 	var/total_filterable_moles = 0		//the total amount of filterable gas
@@ -390,12 +390,15 @@
 //Calling update_use_power() or use_power() too often will result in lag since updating area power can be costly.
 //This proc implements an approximation scheme that will cause area power updates to be triggered less often.
 //By having atmos machinery use this proc it is easy to change the power usage approximation for all atmos machines
-/obj/machinery/atmospherics/proc/handle_power_draw(var/usage_amount)
+/obj/machinery/proc/handle_power_draw(var/usage_amount)
 	//***This scheme errs on the side of using more power. Using this will mean that sometimes atmos machines use more power than they need, but won't get power for free.
 	if (usage_amount > idle_power_usage)
-		update_use_power(1)
+		update_use_power(2)
 	else
-		use_power = 1	//Don't update here. We will use more power than we are supposed to, but trigger less area power updates.
+		if (use_power >= 2)
+			use_power = 1	//Don't update here. We will use more power than we are supposed to, but trigger less area power updates.
+		else
+			update_use_power(1)
 	
 	switch (use_power)
 		if (0) return 0

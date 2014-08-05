@@ -22,7 +22,10 @@
 	if(moles == 0)
 		return
 
-	gas[gasid] += moles
+	if (group_multiplier != 1)
+		gas[gasid] += moles/group_multiplier
+	else
+		gas[gasid] += moles
 
 	if(update)
 		update_values()
@@ -39,7 +42,10 @@
 		if(combined_heat_capacity != 0)
 			temperature = (temp * giver_heat_capacity + temperature * self_heat_capacity) / combined_heat_capacity
 
-	gas[gasid] += moles
+	if (group_multiplier != 1)
+		gas[gasid] += moles/group_multiplier
+	else
+		gas[gasid] += moles
 
 	if(update)
 		update_values()
@@ -94,7 +100,7 @@
 	if (temperature < TCMB || total_moles == 0)
 		return 0
 	
-	var/heat_capacity = heat_capacity()	
+	var/heat_capacity = heat_capacity()*group_multiplier
 	if (thermal_energy < 0)
 		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
 		thermal_energy = max( thermal_energy, thermal_energy_limit )
@@ -103,7 +109,7 @@
 
 //Returns the thermal energy change required to get to a new temperature
 /datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
-	return heat_capacity()*(new_temperature - temperature)
+	return heat_capacity()*group_multiplier*(new_temperature - temperature)
 
 //Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
 #define SPECIFIC_ENTROPY_VACUUM		150000
@@ -126,6 +132,7 @@
 	
 	var/molar_mass = gas_data.molar_mass[gasid]
 	var/specific_heat = gas_data.specific_heat[gasid]
+	//group_multiplier gets divided out in volume/gas[gasid]
 	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/gas[gasid]) * sqrt((molar_mass*specific_heat*temperature)**3) + 1 ) +  5/2 )
 
 //Updates the total_moles count and trims any empty gases.
