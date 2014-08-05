@@ -137,8 +137,8 @@ Buildable meters
 		"bent insulated pipe", \
 		"gas filter", \
 		"gas mixer", \
-		"passive gate", \
-		"volume pump", \
+		"pressure regulator", \
+		"high power pump", \
 		"heat exchanger", \
 		"t-valve", \
 		"4-way manifold", \

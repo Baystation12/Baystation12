@@ -364,10 +364,10 @@
 /proc/calculate_specific_power(datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
 	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
-	var/specific_entropy = sink.specific_entropy() - source.specific_entropy()	//environment is gaining moles, air_contents is loosing
+	var/specific_entropy = sink.specific_entropy() - source.specific_entropy() //sink is gaining moles, source is loosing
 	var/specific_power = 0	// W/mol
 	
-	//If specific_entropy is < 0 then transfer_moles is limited by how powerful the pump is
+	//If specific_entropy is < 0 then power is required to move gas
 	if (specific_entropy < 0)
 		specific_power = -specific_entropy*air_temperature		//how much power we need per mole
 	
@@ -377,10 +377,10 @@
 /proc/calculate_specific_power_gas(var/gasid, datum/gas_mixture/source, datum/gas_mixture/sink)
 	//Calculate the amount of energy required
 	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
-	var/specific_entropy = sink.specific_entropy_gas(gasid) - source.specific_entropy_gas(gasid)	//environment is gaining moles, air_contents is loosing
+	var/specific_entropy = sink.specific_entropy_gas(gasid) - source.specific_entropy_gas(gasid) //sink is gaining moles, source is loosing
 	var/specific_power = 0	// W/mol
 	
-	//If specific_entropy is < 0 then transfer_moles is limited by how powerful the pump is
+	//If specific_entropy is < 0 then power is required to move gas
 	if (specific_entropy < 0)
 		specific_power = -specific_entropy*air_temperature		//how much power we need per mole
 	
@@ -391,7 +391,7 @@
 //This proc implements an approximation scheme that will cause area power updates to be triggered less often.
 //By having atmos machinery use this proc it is easy to change the power usage approximation for all atmos machines
 /obj/machinery/proc/handle_power_draw(var/usage_amount)
-	//***This scheme errs on the side of using more power. Using this will mean that sometimes atmos machines use more power than they need, but won't get power for free.
+	//This code errs on the side of using more power. Using this will mean that sometimes atmos machines use more power than they need, but won't get power for free.
 	if (usage_amount > idle_power_usage)
 		update_use_power(2)
 	else
@@ -403,50 +403,4 @@
 	switch (use_power)
 		if (0) return 0
 		if (1) return idle_power_usage
-		if (2 to INFINITY) return active_power_usage
-	
-	/* Alternate power usage schemes
-	
-	//***This scheme has the most accurate power usage, but triggers area power updates too often.
-	if (usage_amount > active_power_usage - 5)
-		update_use_power(2)
-	else
-		update_use_power(1)
-		
-		if (usage_amount > idle_power_usage)
-			use_power(round(usage_amount))
-	
-	//***This scheme errs on the side of using less power. Using this will mean that sometimes atmos machines get free power.
-	if (usage_amount > active_power_usage - 5)
-		update_use_power(2)
-	else
-		use_power = 1	//Don't need to update here.
-	
-	*/
-	
-	
-
-/*
-//DEBUG
-/var/global/enable_scrubbing = 0
-/var/global/enable_vent_pump = 0
-/var/global/enable_power_net = 0
-
-/mob/verb/toggle_scrubbing()
-	set name = "Toggle Scrubbing"
-	set category = "Debug"
-	enable_scrubbing = !enable_scrubbing
-	world << "enable_scrubbing set to [enable_scrubbing]"
-
-/mob/verb/toggle_vent_pump()
-	set name = "Toggle Vent Pumps"
-	set category = "Debug"
-	enable_vent_pump = !enable_vent_pump
-	world << "enable_vent_pump set to [enable_vent_pump]"
-
-/mob/verb/toggle_pump_powernet()
-	set name = "Toggle Pump Power Update"
-	set category = "Debug"
-	enable_power_net = !enable_power_net
-	world << "enable_power_net set to [enable_power_net]"
-*/
+		if (2 to INFINITY) return max(idle_power_usage, usage_amount)

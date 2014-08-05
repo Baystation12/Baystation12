@@ -54,7 +54,7 @@
 	..()
 	injecting = 0
 
-	if(!on || stat & NOPOWER)
+	if(!on)	//only uses power when injecting
 		return 0
 	
 	var/datum/gas_mixture/environment = loc.return_air()

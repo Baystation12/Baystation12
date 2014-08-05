@@ -36,7 +36,7 @@
 		return
 
 	if(moles > 0 && abs(temperature - temp) > MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
-		var/self_heat_capacity = heat_capacity()*group_multiplier
+		var/self_heat_capacity = heat_capacity()
 		var/giver_heat_capacity = gas_data.specific_heat[gasid] * moles
 		var/combined_heat_capacity = giver_heat_capacity + self_heat_capacity
 		if(combined_heat_capacity != 0)
@@ -68,14 +68,14 @@
 
 	update_values()
 
-//Merges all the gas from another mixture into this one.  Respects group_multiplies and adjusts temperature correctly.
+//Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
 /datum/gas_mixture/proc/merge(datum/gas_mixture/giver)
 	if(!giver)
 		return
 
 	if(abs(temperature-giver.temperature)>MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER)
-		var/self_heat_capacity = heat_capacity()*group_multiplier
-		var/giver_heat_capacity = giver.heat_capacity()*giver.group_multiplier
+		var/self_heat_capacity = heat_capacity()
+		var/giver_heat_capacity = giver.heat_capacity()
 		var/combined_heat_capacity = giver_heat_capacity + self_heat_capacity
 		if(combined_heat_capacity != 0)
 			temperature = (giver.temperature*giver_heat_capacity + temperature*self_heat_capacity)/combined_heat_capacity
@@ -94,22 +94,25 @@
 	. = 0
 	for(var/g in gas)
 		. += gas_data.specific_heat[g] * gas[g]
+	. *= group_multiplier
 
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
-	if (temperature < TCMB || total_moles == 0)
+	if (total_moles == 0)
 		return 0
 	
-	var/heat_capacity = heat_capacity()*group_multiplier
+	var/heat_capacity = heat_capacity()
 	if (thermal_energy < 0)
+		if (temperature < TCMB)
+			return 0
 		var/thermal_energy_limit = -(temperature - TCMB)*heat_capacity	//ensure temperature does not go below TCMB
-		thermal_energy = max( thermal_energy, thermal_energy_limit )
+		thermal_energy = max( thermal_energy, thermal_energy_limit )	//thermal_energy and thermal_energy_limit are negative here.
 	temperature += thermal_energy/heat_capacity
 	return thermal_energy
 
 //Returns the thermal energy change required to get to a new temperature
 /datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
-	return heat_capacity()*group_multiplier*(new_temperature - temperature)
+	return heat_capacity()*(new_temperature - temperature)
 
 //Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
 #define SPECIFIC_ENTROPY_VACUUM		150000
@@ -152,15 +155,14 @@
 
 //Removes moles from the gas mixture and returns a gas_mixture containing the removed air.
 /datum/gas_mixture/proc/remove(amount)
-	var/sum = total_moles
-	amount = min(amount, sum) //Can not take more air than tile has!
+	amount = min(amount, total_moles * group_multiplier) //Can not take more air than the gas mixture has!
 	if(amount <= 0)
 		return null
 
 	var/datum/gas_mixture/removed = new
 
 	for(var/g in gas)
-		removed.gas[g] = QUANTIZE((gas[g] / sum) * amount)
+		removed.gas[g] = QUANTIZE((gas[g] / total_moles) * amount)
 		gas[g] -= removed.gas[g] / group_multiplier
 
 	removed.temperature = temperature
@@ -181,8 +183,8 @@
 	removed.group_multiplier = out_group_multiplier
 
 	for(var/g in gas)
-		removed.gas[g] = QUANTIZE(gas[g] * ratio)
-		gas[g] = ((gas[g] * group_multiplier) - (removed.gas[g] * out_group_multiplier)) / group_multiplier
+		removed.gas[g] = (gas[g] * ratio * group_multiplier / out_group_multiplier)
+		gas[g] = gas[g] * (1 - ratio)
 
 	removed.temperature = temperature
 	update_values()
@@ -327,13 +329,13 @@
 	for(var/g in gas)
 		full_gas[g] = gas[g] * size
 
-	var/full_heat_capacity = heat_capacity() * size
+	var/full_heat_capacity = heat_capacity()
 
 	var/list/s_full_gas = list()
 	for(var/g in other.gas)
 		s_full_gas[g] = other.gas[g] * share_size
 
-	var/s_full_heat_capacity = other.heat_capacity() * share_size
+	var/s_full_heat_capacity = other.heat_capacity()
 
 	var/list/avg_gas = list()
 
