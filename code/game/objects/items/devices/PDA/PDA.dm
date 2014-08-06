@@ -32,6 +32,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/tnote[0]  //Current Texts
 	var/last_text //No text spamming
 	var/last_honk //Also no honk spamming that's bad too
+	var/recieved_icon = "pda-r"	//icon state used for the recieved mail overlay
 	var/ttone = "beep" //The ringtone!
 	var/lock_code = "" // Lockcode to unlock uplink
 	var/honkamt = 0 //How many honks left when infected with honk.exe
@@ -144,6 +145,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/syndicate
 	default_cartridge = /obj/item/weapon/cartridge/syndicate
 	icon_state = "pda-syn"
+	recieved_icon = "pda-r-syn"
 	name = "Military PDA"
 	owner = "John Doe"
 	hidden = 1
@@ -967,7 +969,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()
-		P.overlays += image('icons/obj/pda.dmi', "pda-r")
+		P.overlays += image('icons/obj/pda.dmi', recieved_icon)
 		P.newmessage = 1
 	else
 		U << "<span class='notice'>ERROR: Messaging server is not responding.</span>"
