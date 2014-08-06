@@ -21,7 +21,7 @@
 		"Skrell" = 'icons/mob/species/skrell/helmet.dmi'
 		)
 	sprite_sheets_obj = list(
-		"Tajaran" = 'icons/obj/clothing/species/tajaran/suits.dmi',
+		"Tajaran" = 'icons/obj/clothing/species/tajaran/hats.dmi',
 		)
 
 	attack_self(mob/user)
