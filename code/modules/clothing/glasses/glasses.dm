@@ -20,11 +20,13 @@
 			icon_state = "degoggles"
 			vision_flags = 0
 			user.update_inv_glasses()
+			usr << "You deactivate the optical matrix on the [src]."
 		else
 			active = 1
 			icon_state = initial(icon_state)
 			vision_flags = initial(vision_flags)
 			user.update_inv_glasses()
+			usr << "You activate the optical matrix on the [src]."
 
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
