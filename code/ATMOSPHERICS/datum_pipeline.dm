@@ -202,8 +202,6 @@ datum/pipeline
 
 	//surface must be the surface area in m^2
 	proc/radiate_heat_to_space(surface, thermal_conductivity)
-		var/total_heat_capacity = air.heat_capacity()
-		
 		//if the h/e pipes radiate less than the AVERAGE_SOLAR_RADIATION, then they will heat up, otherwise they will cool down. It turns out the critical temperature is -26 C
 		var/heat_gain = surface*(AVERAGE_SOLAR_RADIATION - STEFAN_BOLTZMANN_CONSTANT*thermal_conductivity*(air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4)
 		

@@ -64,7 +64,7 @@
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	flick("[base_state]_flash", src)
 	src.last_flash = world.time
-	use_power(1000)
+	use_power(1500)
 
 	for (var/mob/O in viewers(src, null))
 		if (get_dist(src, O) > src.range)
