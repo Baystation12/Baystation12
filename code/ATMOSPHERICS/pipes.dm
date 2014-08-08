@@ -138,7 +138,7 @@
 	name = "pipe"
 	desc = "A one meter section of regular pipe"
 
-	volume = 70
+	volume = ATMOS_DEFAULT_VOLUME_PIPE
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
@@ -373,7 +373,7 @@
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
-	volume = 105
+	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
 
 	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST
@@ -583,7 +583,7 @@
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes"
 
-	volume = 140
+	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
 	dir = SOUTH
 	initialize_directions = NORTH|SOUTH|EAST|WEST

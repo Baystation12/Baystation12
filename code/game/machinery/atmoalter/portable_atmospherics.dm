@@ -133,3 +133,39 @@
 		return
 
 	return
+
+
+
+/obj/machinery/portable_atmospherics/powered
+	var/power_rating
+	var/power_losses
+	var/last_power_draw = 0
+	var/obj/item/weapon/cell/cell
+
+/obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/cell))
+		if(cell)
+			user << "There is already a power cell installed."
+			return
+		
+		var/obj/item/weapon/cell/C = I
+		
+		user.drop_item()
+		C.add_fingerprint(user)
+		cell = C
+		C.loc = src
+		user.visible_message("\blue [user] opens the panel on [src] and inserts [C].", "\blue You open the panel on [src] and insert [C].")
+		return
+	
+	if(istype(I, /obj/item/weapon/screwdriver))
+		if(!cell)
+			user << "\red There is no power cell installed."
+			return
+		
+		user.visible_message("\blue [user] opens the panel on [src] and removes [cell].", "\blue You open the panel on [src] and remove [cell].")
+		cell.add_fingerprint(user)
+		cell.loc = src.loc
+		cell = null
+		return
+	
+	..()
