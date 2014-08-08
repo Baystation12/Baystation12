@@ -1,5 +1,7 @@
 //TODO: Flash range does nothing currently
 
+var/big_explosion = 0
+
 //A very crude linear approximatiaon of pythagoras theorem.
 /proc/cheap_pythag(var/dx, var/dy)
 	dx = abs(dx); dy = abs(dy);
@@ -15,6 +17,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
 			explosion_rec(epicenter, power)
 			return
+		var/power = devastation_range * 2 + heavy_impact_range + light_impact_range
 
 ///// Z-Level Stuff
 		if(z_transfer && (devastation_range > 0 || heavy_impact_range > 0))
@@ -27,13 +30,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		if(!epicenter) return
 
 		var/max_range = max(devastation_range, heavy_impact_range, light_impact_range, flash_range)
-		//playsound(epicenter, 'sound/effects/explosionfar.ogg', 100, 1, round(devastation_range*2,1) )
-		//playsound(epicenter, "explosion", 100, 1, round(devastation_range,1) )
 
 // Play sounds; we want sounds to be different depending on distance so we will manually do it ourselves.
-
 // Stereo users will also hear the direction of the explosion!
-
 // Calculate far explosion sound range. Only allow the sound effect for heavy/devastating explosions.
 
 // 3/7/14 will calculate to 80 + 35
@@ -60,7 +59,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		var/close = range(world.view+round(devastation_range,1), epicenter)
 		// to all distanced mobs play a different sound
-		for(var/mob/M in world) if(M.z == epicenter.z) if(!(M in close))
+		for(var/mob/M in mob_list) if(M.z == epicenter.z) if(!(M in close))
 			// check if the mob can hear
 			if(M.ear_deaf <= 0 || !M.ear_deaf) if(!istype(M.loc,/turf/space))
 				M << 'sound/effects/explosionfar.ogg'
@@ -68,11 +67,17 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
 
-		var/lighting_controller_was_processing = lighting_controller.processing	//Pause the lighting updates for a bit
-		lighting_controller.processing = 0
-		var/powernet_rebuild_was_deferred_already = defer_powernet_rebuild
-		if(defer_powernet_rebuild != 2)
-			defer_powernet_rebuild = 1
+		var/lighting_controller_was_processing = 1
+		var/powernet_rebuild_was_deferred_already = 2
+
+		if(power > 50)
+			big_explosion = 1
+			lighting_controller_was_processing = lighting_controller.processing	//Pause the lighting updates for a bit
+			lighting_controller.processing = 0
+			powernet_rebuild_was_deferred_already = defer_powernet_rebuild // Pause powernet updating for a bit.
+			if(defer_powernet_rebuild != 2)
+				defer_powernet_rebuild = 1
+			air_processing_killed = 1 // Pause airflow updating for a bit.
 
 		if(heavy_impact_range > 1)
 			var/datum/effect/system/explosion/E = new/datum/effect/system/explosion()
@@ -83,7 +88,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/y0 = epicenter.y
 		var/z0 = epicenter.z
 
-		for(var/turf/T in range(epicenter, max_range))
+		for(var/turf/T in trange(epicenter, max_range))
 			var/dist = cheap_pythag(T.x - x0,T.y - y0)
 
 			if(dist < devastation_range)		dist = 1
@@ -92,6 +97,8 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			else								continue
 
 			T.ex_act(dist)
+			sleep(-1)
+
 			if(T)
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					var/atom/movable/AM = atom_movable
@@ -107,19 +114,24 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			if(Array)
 				Array.sense_explosion(x0,y0,z0,devastation_range,heavy_impact_range,light_impact_range,took)
 
-		sleep(8)
+		big_explosion = 0
 
-		if(!lighting_controller.processing)	lighting_controller.processing = lighting_controller_was_processing
-		if(!powernet_rebuild_was_deferred_already)
-			if(defer_powernet_rebuild != 2)
-				defer_powernet_rebuild = 0
+		if(power > 50)
+			spawn(10) // 4 seconds later.
+				if(!lighting_controller.processing)	lighting_controller.processing = lighting_controller_was_processing
+				sleep(15)
+				if(!powernet_rebuild_was_deferred_already)
+					if(defer_powernet_rebuild != 2)
+						defer_powernet_rebuild = 0
+				sleep(25)
+				air_processing_killed = 0
 
 	return 1
 
 
 
 proc/secondaryexplosion(turf/epicenter, range)
-	for(var/turf/tile in range(range, epicenter))
+	for(var/turf/tile in trange(range, epicenter))
 		tile.ex_act(2)
 
 ///// Z-Level Stuff
