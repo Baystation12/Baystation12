@@ -1,14 +1,16 @@
 /obj/machinery/shield
-		name = "Emergency energy shield"
-		desc = "An energy shield used to contain hull breaches."
-		icon = 'icons/effects/effects.dmi'
-		icon_state = "shield-old"
-		density = 1
-		opacity = 0
-		anchored = 1
-		unacidable = 1
-		var/const/max_health = 200
-		var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
+	name = "Emergency energy shield"
+	desc = "An energy shield used to contain hull breaches."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "shield-old"
+	density = 1
+	opacity = 0
+	anchored = 1
+	unacidable = 1
+	var/const/max_health = 200
+	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
+	var/shield_generate_power = 7500	//how much power we use when regenerating
+	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
 /obj/machinery/shield/New()
 	src.dir = pick(1,2,3,4)
@@ -136,22 +138,26 @@
 
 
 /obj/machinery/shieldgen
-		name = "Emergency shield projector"
-		desc = "Used to seal minor hull breaches."
-		icon = 'icons/obj/objects.dmi'
-		icon_state = "shieldoff"
-		density = 1
-		opacity = 0
-		anchored = 0
-		pressure_resistance = 2*ONE_ATMOSPHERE
-		req_access = list(access_engine)
-		var/const/max_health = 100
-		var/health = max_health
-		var/active = 0
-		var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
-		var/list/deployed_shields = list()
-		var/is_open = 0 //Whether or not the wires are exposed
-		var/locked = 0
+	name = "Emergency shield projector"
+	desc = "Used to seal minor hull breaches."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "shieldoff"
+	density = 1
+	opacity = 0
+	anchored = 0
+	pressure_resistance = 2*ONE_ATMOSPHERE
+	req_access = list(access_engine)
+	var/const/max_health = 100
+	var/health = max_health
+	var/active = 0
+	var/malfunction = 0 //Malfunction causes parts of the shield to slowly dissapate
+	var/list/deployed_shields = list()
+	var/list/regenerating = list()
+	var/is_open = 0 //Whether or not the wires are exposed
+	var/locked = 0
+	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
+	use_power = 0
+	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Del()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
@@ -165,10 +171,12 @@
 	src.active = 1
 	update_icon()
 
-	for(var/turf/target_tile in range(2, src))
-		if (istype(target_tile,/turf/space) && !(locate(/obj/machinery/shield) in target_tile))
-			if (malfunction && prob(33) || !malfunction)
-				deployed_shields += new /obj/machinery/shield(target_tile)
+	create_shields()
+	
+	idle_power_usage = 0
+	for(var/obj/machinery/shield/shield_tile in deployed_shields)
+		idle_power_usage += shield_tile.shield_idle_power
+	update_use_power(1)
 
 /obj/machinery/shieldgen/proc/shields_down()
 	if(!active) return 0 //If it's already off, how did this get called?
@@ -178,13 +186,39 @@
 
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		del(shield_tile)
+	
+	update_use_power(0)
+
+/obj/machinery/shieldgen/proc/create_shields()
+	for(var/turf/target_tile in range(2, src))
+		if (istype(target_tile,/turf/space) && !(locate(/obj/machinery/shield) in target_tile))
+			if (malfunction && prob(33) || !malfunction)
+				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
+				deployed_shields += S
+				use_power(S.shield_generate_power)
 
 /obj/machinery/shieldgen/process()
-	if(malfunction && active)
+	if (!active)
+		return
+	
+	if(malfunction)
 		if(deployed_shields.len && prob(5))
 			del(pick(deployed_shields))
-
-	return
+	else
+		if (check_delay <= 0)
+			create_shields()
+			
+			var/new_power_usage = 0
+			for(var/obj/machinery/shield/shield_tile in deployed_shields)
+				new_power_usage += shield_tile.shield_idle_power
+			
+			if (new_power_usage != idle_power_usage)
+				idle_power_usage = new_power_usage
+				use_power(0)
+			
+			check_delay = 60
+		else
+			check_delay--
 
 /obj/machinery/shieldgen/proc/checkhp()
 	if(health <= 30)
@@ -314,7 +348,6 @@
 	return
 
 ////FIELD GEN START //shameless copypasta from fieldgen, powersink, and grille
-#define maxstoredpower 500
 /obj/machinery/shieldwallgen
 		name = "Shield Generator"
 		desc = "A shield generator."
@@ -337,34 +370,10 @@
 		var/obj/structure/cable/attached		// the attached cable
 		var/storedpower = 0
 		flags = FPRINT | CONDUCT
-		use_power = 0
-
-/obj/machinery/shieldwallgen/proc/power()
-	if(!anchored)
-		power = 0
-		return 0
-	var/turf/T = src.loc
-
-	var/obj/structure/cable/C = T.get_cable_node()
-	var/datum/powernet/PN
-	if(C)	PN = C.powernet		// find the powernet of the connected cable
-
-	if(!PN)
-		power = 0
-		return 0
-
-	var/surplus = max(PN.avail-PN.load, 0)
-	var/shieldload = min(rand(50,200), surplus)
-	if(shieldload==0 && !storedpower)		// no cable or no power, and no power stored
-		power = 0
-		return 0
-	else
-		power = 1	// IVE GOT THE POWER!
-		if(PN) //runtime errors fixer. They were caused by PN.newload trying to access missing network in case of working on stored power.
-			storedpower += shieldload
-			PN.newload += shieldload //uses powernet power.
-//		message_admins("[PN.load]", 1)
-//		use_power(250) //uses APC power
+		//There have to be at least two posts, so these are effectively doubled
+		var/power_draw = 30000 //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
+		var/max_stored_power = 50000 //50 kW
+		use_power = 0	//Draws directly from power net. Does not use APC power.
 
 /obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
 	if(state != 1)
@@ -393,13 +402,42 @@
 			"You hear heavy droning.")
 	src.add_fingerprint(user)
 
+/obj/machinery/shieldwallgen/proc/power()
+	if(!anchored)
+		power = 0
+		return 0
+	var/turf/T = src.loc
+
+	var/obj/structure/cable/C = T.get_cable_node()
+	var/datum/powernet/PN
+	if(C)	PN = C.powernet		// find the powernet of the connected cable
+
+	if(!PN)
+		power = 0
+		return 0
+
+	var/surplus = max(PN.avail-PN.load, 0)
+	var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we draw
+	shieldload = min(shieldload, surplus)	//what we actually get
+	
+	if (shieldload)
+		power = 1	// IVE GOT THE POWER!
+		if(PN) //runtime errors fixer. They were caused by PN.newload trying to access missing network in case of working on stored power.
+			storedpower += shieldload
+			PN.newload += shieldload //use powernet power.
+	
+	//If we're still in the red, then there must not be enough available power to cover our load.
+	if(storedpower <= 0)
+		power = 0
+		return 0
+
 /obj/machinery/shieldwallgen/process()
 	spawn(100)
 		power()
 		if(power)
-			storedpower -= 50 //this way it can survive longer and survive at all
-	if(storedpower >= maxstoredpower)
-		storedpower = maxstoredpower
+			storedpower -= 2500 //the generator post itself uses some power
+	if(storedpower >= max_stored_power)
+		storedpower = max_stored_power
 	if(storedpower <= 0)
 		storedpower = 0
 //	if(shieldload >= maxshieldload) //there was a loop caused by specifics of process(), so this was needed.
@@ -528,7 +566,7 @@
 	..()
 
 /obj/machinery/shieldwallgen/bullet_act(var/obj/item/projectile/Proj)
-	storedpower -= Proj.damage
+	storedpower -= 400 * Proj.damage
 	..()
 	return
 
@@ -551,13 +589,21 @@
 		var/mob/U
 		var/obj/machinery/shieldwallgen/gen_primary
 		var/obj/machinery/shieldwallgen/gen_secondary
+		var/power_usage = 2500	//how much power it takes to sustain the shield
+		var/generate_power_usage = 7500	//how much power it takes to start up the shield
 
 /obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
 	..()
 	src.gen_primary = A
 	src.gen_secondary = B
-	if(A && B)
+	if(A && B && A.active && B.active)
 		needs_power = 1
+		if(prob(50))
+			A.storedpower -= generate_power_usage
+		else
+			B.storedpower -= generate_power_usage
+	else
+		del(src) //need at least two generator posts
 
 /obj/machinery/shieldwall/attack_hand(mob/user as mob)
 	return
@@ -572,11 +618,11 @@
 		if(!(gen_primary.active)||!(gen_secondary.active))
 			del(src)
 			return
-//
+
 		if(prob(50))
-			gen_primary.storedpower -= 10
+			gen_primary.storedpower -= power_usage
 		else
-			gen_secondary.storedpower -=10
+			gen_secondary.storedpower -= power_usage
 
 
 /obj/machinery/shieldwall/bullet_act(var/obj/item/projectile/Proj)
@@ -586,7 +632,7 @@
 			G = gen_primary
 		else
 			G = gen_secondary
-		G.storedpower -= Proj.damage
+		G.storedpower -= 400 * Proj.damage
 	..()
 	return
 
@@ -600,21 +646,21 @@
 					G = gen_primary
 				else
 					G = gen_secondary
-				G.storedpower -= 200
+				G.storedpower -= 120000
 
 			if(2.0) //medium boom
 				if(prob(50))
 					G = gen_primary
 				else
 					G = gen_secondary
-				G.storedpower -= 50
+				G.storedpower -= 30000
 
 			if(3.0) //lil boom
 				if(prob(50))
 					G = gen_primary
 				else
 					G = gen_secondary
-				G.storedpower -= 20
+				G.storedpower -= 12000
 	return
 
 
