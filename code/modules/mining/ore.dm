@@ -19,7 +19,7 @@
 
 /obj/item/weapon/ore/coal
 	name = "carbonaceous rock"
-	icon_state = "Coal ore"
+	icon_state = "Iron ore" //TODO
 	origin_tech = "materials=1"
 	oretag = "coal"
 
@@ -55,12 +55,12 @@
 
 /obj/item/weapon/ore/osmium
 	name = "raw platinum"
-	icon_state = "Platinum ore"
+	icon_state = "slag" //TODO
 	oretag = "platinum"
 
 /obj/item/weapon/ore/hydrogen
 	name = "raw hydrogen"
-	icon_state = "Phazon"
+	icon_state = "slag" //TODO
 	oretag = "hydrogen"
 
 /obj/item/weapon/ore/slag

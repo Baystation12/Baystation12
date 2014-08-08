@@ -103,9 +103,7 @@
 
 
 	attack_slime(mob/user as mob)
-		var/mob/living/carbon/slime/S = user
-		if (!S.is_adult)
-			return
+		if(!isslimeadult(user)) return
 		attack_generic(user, rand(10, 15))
 
 

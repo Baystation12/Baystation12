@@ -7,7 +7,6 @@
 	var/tag_chamber_sensor
 	var/tag_exterior_sensor
 	var/tag_interior_sensor
-	var/tag_mech_sensor
 	var/tag_secure = 0
 
 /obj/machinery/embedded_controller/radio/airlock/initialize()
@@ -18,7 +17,7 @@
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 	name = "Advanced Airlock Controller"
 
-/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -30,7 +29,7 @@
 		"secure" = program.memory["secure"]
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "advanced_airlock_console.tmpl", name, 470, 290)
@@ -44,10 +43,10 @@
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/Topic(href, href_list)
 	if(..())
 		return
-
+	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -76,7 +75,7 @@
 	name = "Airlock Controller"
 	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -86,7 +85,7 @@
 		"processing" = program.memory["processing"],
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "simple_airlock_console.tmpl", name, 470, 290)
@@ -100,10 +99,10 @@
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller/Topic(href, href_list)
 	if(..())
 		return
-
+	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -141,7 +140,7 @@
 	else
 		icon_state = "access_control_off"
 
-/obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
@@ -150,7 +149,7 @@
 		"processing" = program.memory["processing"]
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "door_access_console.tmpl", name, 330, 220)
@@ -164,10 +163,10 @@
 /obj/machinery/embedded_controller/radio/airlock/access_controller/Topic(href, href_list)
 	if(..())
 		return
-
+	
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext_door")

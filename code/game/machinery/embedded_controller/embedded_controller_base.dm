@@ -3,9 +3,6 @@
 
 	name = "Embedded Controller"
 	anchored = 1
-	
-	use_power = 1
-	idle_power_usage = 10
 
 	var/on = 1
 
@@ -46,7 +43,6 @@
 	density = 0
 	
 	var/id_tag
-	//var/radio_power_use = 50 //power used to xmit signals
 
 	var/frequency = 1379
 	var/datum/radio_frequency/radio_connection
@@ -67,7 +63,6 @@
 /obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
-		//use_power(radio_power_use)	//neat idea, but causes way too much lag.
 		return radio_connection.post_signal(src, signal)
 	else
 		del(signal)

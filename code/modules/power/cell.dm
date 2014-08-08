@@ -22,9 +22,6 @@
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
 	return 100.0*charge/maxcharge
 
-/obj/item/weapon/cell/proc/fully_charged()
-	return (charge == maxcharge)
-
 // use power from a cell
 /obj/item/weapon/cell/proc/use(var/amount)
 	if(rigged && amount > 0)
@@ -42,15 +39,15 @@
 		return 0
 
 	if(maxcharge < amount)	return 0
-	var/amount_used = min(maxcharge-charge,amount)
+	var/power_used = min(maxcharge-charge,amount)
 	if(crit_fail)	return 0
 	if(!prob(reliability))
 		minor_fault++
 		if(prob(minor_fault))
 			crit_fail = 1
 			return 0
-	charge += amount_used
-	return amount_used
+	charge += power_used
+	return power_used
 
 
 /obj/item/weapon/cell/examine()

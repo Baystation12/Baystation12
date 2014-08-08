@@ -25,11 +25,9 @@
 	icon_state = "capcap"
 	flags = FPRINT|TABLEPASS
 	flags_inv = 0
-	body_parts_covered = 0
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood
@@ -38,7 +36,6 @@
 	icon_state = "chaplain_hood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|EYES
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
@@ -55,7 +52,6 @@
 	icon_state = "beret"
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
-	body_parts_covered = 0
 
 //Security
 /obj/item/clothing/head/beret/sec

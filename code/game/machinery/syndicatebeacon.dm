@@ -86,7 +86,11 @@
 				M << "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>"
 
 				message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
-				show_objectives(M.mind)
+
+				var/obj_count = 1
+				for(var/datum/objective/OBJ in M.mind.objectives)
+					M << "<B>Objective #[obj_count]</B>: [OBJ.explanation_text]"
+					obj_count++
 
 		src.add_fingerprint(usr)
 		src.updateUsrDialog()

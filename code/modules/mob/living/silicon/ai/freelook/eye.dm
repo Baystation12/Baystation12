@@ -51,12 +51,6 @@
 			var/obj/machinery/hologram/holopad/H = ai.current
 			H.move_hologram()
 
-/mob/aiEye/proc/getLoc()
-
-	if(ai)
-		if(!isturf(ai.loc) || !ai.client)
-			return
-		return ai.eyeobj.loc
 
 // AI MOVEMENT
 

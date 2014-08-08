@@ -13,6 +13,25 @@
 		living_mob_list += src
 	..()
 
+/mob/proc/Cell()
+	set category = "Admin"
+	set hidden = 1
+
+	if(!loc) return 0
+
+	var/datum/gas_mixture/environment = loc.return_air()
+
+	var/t = "\blue Coordinates: [x],[y] \n"
+	t+= "\red Temperature: [environment.temperature] \n"
+	t+= "\blue Nitrogen: [environment.nitrogen] \n"
+	t+= "\blue Oxygen: [environment.oxygen] \n"
+	t+= "\blue Phoron : [environment.phoron] \n"
+	t+= "\blue Carbon Dioxide: [environment.carbon_dioxide] \n"
+	for(var/datum/gas/trace_gas in environment.trace_gases)
+		usr << "\blue [trace_gas.type]: [trace_gas.moles] \n"
+
+	usr.show_message(t, 1)
+
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
 	if(!client)	return
@@ -702,7 +721,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"MasterController-ERROR")
 
 	if(listed_turf && client)
-		if(!TurfAdjacent(listed_turf))
+		if(get_dist(listed_turf,src) > 1)
 			listed_turf = null
 		else
 			statpanel(listed_turf.name, null, listed_turf)
@@ -736,25 +755,24 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-
-	var/is_movable
-	if(buckled && istype(buckled))
-		is_movable = buckled.movable
-
-	if(buckled && !is_movable)
+	if(istype(buckled, /obj/vehicle))
+		var/obj/vehicle/V = buckled
+		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
+			lying = 1
+			canmove = 0
+			pixel_y = V.mob_offset_y - 5
+		else
+			lying = 0
+			canmove = 1
+			pixel_y = V.mob_offset_y
+	else if(buckled && (!buckled.movable))
 		anchored = 1
 		canmove = 0
-		if(istype(buckled,/obj/structure/stool/bed/chair) )
+		if( istype(buckled,/obj/structure/stool/bed/chair) )
 			lying = 0
-		else if(istype(buckled, /obj/vehicle))
-			var/obj/vehicle/V = buckled
-			if(V.standing_mob)
-				lying = 0
-			else
-				lying = 1
 		else
 			lying = 1
-	else if(buckled && is_movable)
+	else if(buckled && (buckled.movable))
 		anchored = 0
 		canmove = 1
 		lying = 0
@@ -762,6 +780,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		lying = 1
 		canmove = 0
 	else if( stunned )
+//		lying = 0
 		canmove = 0
 	else if(captured)
 		anchored = 1

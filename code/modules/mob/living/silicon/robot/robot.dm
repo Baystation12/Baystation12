@@ -88,7 +88,18 @@
 		hands.icon_state = "standard"
 		icon_state = "secborg"
 		modtype = "Security"
-	init()
+	else if(istype(src,/mob/living/silicon/robot/drone))
+		laws = new /datum/ai_laws/drone()
+		connected_ai = null
+	else
+		laws = new /datum/ai_laws/nanotrasen()
+		connected_ai = select_active_ai_with_fewest_borgs()
+		if(connected_ai)
+			connected_ai.connected_robots += src
+			lawsync()
+			lawupdate = 1
+		else
+			lawupdate = 0
 
 	radio = new /obj/item/device/radio/borg(src)
 	if(!scrambledcodes && !camera)
@@ -127,19 +138,11 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
-/mob/living/silicon/robot/proc/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
-	laws = new /datum/ai_laws/nanotrasen()
-	connected_ai = select_active_ai_with_fewest_borgs()
-	if(connected_ai)
-		connected_ai.connected_robots += src
-		lawsync()
-		photosync()
-		lawupdate = 1
-	else
-		lawupdate = 0
 
-	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+	if(istype(src,/mob/living/silicon/robot/drone))
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+	else
+		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
@@ -281,10 +284,13 @@
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
 		modtype = prefix
-	if(istype(mmi, /obj/item/device/mmi/posibrain))
-		braintype = "Android"
+	if(mmi)
+		if(istype(mmi, /obj/item/device/mmi/posibrain))
+			braintype = "Android"
+		else
+			braintype = "Cyborg"
 	else
-		braintype = "Cyborg"
+		braintype = "Robot"
 
 	var/changed_name = ""
 	if(custom_name)
@@ -342,7 +348,7 @@
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
 	set category = "Robot Commands"
-	set name = "Show Crew Manifest"
+	set name = "Show Station Manifest"
 	show_station_manifest()
 
 
@@ -894,7 +900,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(M.is_adult)
+		if(istype(src, /mob/living/carbon/slime/adult))
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)
@@ -1091,18 +1097,24 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-
+	
+	if(usr != src)
+		return
+	
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
-		if (O)
+		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
+		if (!istype(O) || !(O in src.module.modules))
+			return
+		
 		if(activated(O))
 			src << "Already activated"
 			return

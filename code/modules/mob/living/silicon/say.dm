@@ -2,11 +2,11 @@
 	var/ending = copytext(text, length(text))
 
 	if (ending == "?")
-		return speak_query
+		return "queries"
 	else if (ending == "!")
-		return speak_exclamation
+		return "declares"
 
-	return speak_statement
+	return "states"
 
 #define IS_AI 1
 #define IS_ROBOT 2
@@ -85,14 +85,14 @@
 		if("department")
 			switch(bot_type)
 				if(IS_AI)
-					return AI.holopad_talk(message)
+					AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
 					R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
 					P.radio.talk_into(src,message,message_mode,verb,speaking)
-			return 1
+			return
 
 		if("binary")
 			switch(bot_type)
@@ -105,41 +105,32 @@
 					return
 
 			robot_talk(message)
-			return 1
+			return
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
-					if (AI.aiRadio.disabledAi)
-						src << "\red System Error - Transceiver Disabled"
-						return
-					else
-						log_say("[key_name(src)] : [message]")
-						AI.aiRadio.talk_into(src,message,null,verb,speaking)
+					src << "Yeah, not yet, sorry"
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
 					R.radio.talk_into(src,message,null,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
 					P.radio.talk_into(src,message,null,verb,speaking)
-			return 1
+			return
 
 		else
 			if(message_mode && message_mode in radiochannels)
 				switch(bot_type)
 					if(IS_AI)
-						if (AI.aiRadio.disabledAi)
-							src << "\red System Error - Transceiver Disabled"
-							return
-						else
-							log_say("[key_name(src)] : [message]")
-							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
+						src << "You don't have this function yet, I'm working on it"
+						return
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
 						R.radio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
 						P.radio.talk_into(src,message,message_mode,verb,speaking)
-				return 1
+				return
 
 	return ..(message,speaking,verb)
 
@@ -174,8 +165,7 @@
 		This is another way of saying that we won't bother dealing with them.*/
 	else
 		src << "No holopad connected."
-		return
-	return 1
+	return
 
 /mob/living/proc/robot_talk(var/message)
 

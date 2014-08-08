@@ -406,7 +406,16 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-					target_tile.assume_gas("volatile_fuel", created_volume, 400+T0C)
+
+					var/datum/gas_mixture/napalm = new
+					var/datum/gas/volatile_fuel/fuel = new
+					fuel.moles = created_volume
+					napalm.trace_gases += fuel
+
+					napalm.temperature = 400+T0C
+					napalm.update_values()
+
+					target_tile.assume_air(napalm)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 				holder.del_reagent("napalm")
 				return
@@ -1174,7 +1183,13 @@ datum
 				sleep(50)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-					target_tile.assume_gas("phoron", 25, 1400)
+
+					var/datum/gas_mixture/napalm = new
+
+					napalm.phoron = 25
+					napalm.temperature = 1400
+
+					target_tile.assume_air(napalm)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 
 //Yellow
@@ -1215,7 +1230,7 @@ datum
 					O.show_message(text("\red The contents of the slime core harden and begin to emit a warm, bright light."), 1)
 				var/obj/item/device/flashlight/slime/F = new /obj/item/device/flashlight/slime
 				F.loc = get_turf(holder.my_atom)
-
+			
 //Purple
 
 		slimepsteroid
@@ -1277,6 +1292,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
+					slime.tame = 0
 					slime.rabid = 1
 					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
 						O.show_message(text("\red The [slime] is driven into a frenzy!."), 1)

@@ -20,7 +20,10 @@
 		H.mind.objectives += hijack_objective
 
 		H << "<B>You are the traitor.</B>"
-		show_objectives(H.mind)
+		var/obj_count = 1
+		for(var/datum/objective/OBJ in H.mind.objectives)
+			H << "<B>Objective #[obj_count]</B>: [OBJ.explanation_text]"
+			obj_count++
 
 		for (var/obj/item/I in H)
 			if (istype(I, /obj/item/weapon/implant))

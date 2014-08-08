@@ -1,10 +1,3 @@
-/*
-	NUCLEAR EMERGENCY ROUNDTYPE
-*/
-
-var/global/list/turf/synd_spawn = list()
-
-
 /datum/game_mode
 	var/list/datum/mind/syndicates = list()
 
@@ -123,7 +116,15 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/nuclear/post_setup()
 
-	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
+	var/list/turf/synd_spawn = list()
+
+	for(var/obj/effect/landmark/A in landmarks_list)
+		if(A.name == "Syndicate-Spawn")
+			synd_spawn += get_turf(A)
+			del(A)
+			continue
+
+	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
@@ -138,8 +139,8 @@ var/global/list/turf/synd_spawn = list()
 		synd_mind.current.real_name = "[syndicate_name()] Operative" // placeholder while we get their actual name
 		spawn(0)
 			NukeNameAssign(synd_mind)
-
-		forge_syndicate_objectives(synd_mind)
+		if(!config.objectives_disabled)
+			forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
 
@@ -152,9 +153,8 @@ var/global/list/turf/synd_spawn = list()
 
 	update_all_synd_icons()
 
-	if(uplinkdevice)
-		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
-		U.hidden_uplink.uses = 40
+	if(uplinklocker)
+		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
@@ -166,7 +166,6 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/proc/prepare_syndicate_leader(var/datum/mind/synd_mind, var/nuke_code)
-	var/obj/effect/landmark/code_spawn = locate("landmark*Nuclear-Code")
 	if (nuke_code)
 		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
@@ -174,7 +173,7 @@ var/global/list/turf/synd_spawn = list()
 		P.info = "The nuclear authorization code is: <b>[nuke_code]</b>"
 		P.name = "nuclear bomb code"
 		if (ticker.mode.config_tag=="nuclear")
-			P.loc = code_spawn.loc
+			P.loc = synd_mind.current.loc
 		else
 			var/mob/living/carbon/human/H = synd_mind.current
 			P.loc = H.loc
@@ -187,18 +186,25 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/proc/forge_syndicate_objectives(var/datum/mind/syndicate)
-
 	if (config.objectives_disabled)
 		return
-
 	var/datum/objective/nuclear/syndobj = new
 	syndobj.owner = syndicate
 	syndicate.objectives += syndobj
 
+
 /datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1)
 	if (you_are)
 		syndicate.current << "\blue You are a [syndicate_name()] agent!"
-	show_objectives(syndicate)
+	var/obj_count = 1
+	if(!config.objectives_disabled)
+		for(var/datum/objective/objective in syndicate.objectives)
+			syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
+	else
+		syndicate.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+	return
+
 
 /datum/game_mode/proc/random_radio_frequency()
 	return 1337 // WHY??? -- Doohl
@@ -224,7 +230,6 @@ var/global/list/turf/synd_spawn = list()
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/c20r(synd_mob), slot_belt)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
 
-/*	Commented; nukes now have a suit cycler for changing rig-suits, they don't need to spawn with them
 	var/obj/item/clothing/suit/space/rig/syndi/new_suit = new(synd_mob)
 	var/obj/item/clothing/head/helmet/space/rig/syndi/new_helmet = new(synd_mob)
 
@@ -240,8 +245,8 @@ var/global/list/turf/synd_spawn = list()
 			if("Skrell")
 				new_suit.species_restricted = list("Skrell")
 
-	synd_mob.equip_to_slot_or_del(new_suit, slot_in_backpack)
-	synd_mob.equip_to_slot_or_del(new_helmet, slot_in_backpack)*/
+	synd_mob.equip_to_slot_or_del(new_suit, slot_wear_suit)
+	synd_mob.equip_to_slot_or_del(new_helmet, slot_head)
 
 //	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
 //	E.imp_in = synd_mob

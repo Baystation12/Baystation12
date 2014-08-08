@@ -39,7 +39,12 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
-		H.implant_loyalty(H)
+		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+		L.imp_in = H
+		L.implanted = 1
+		var/datum/organ/external/affected = H.organs_by_name["head"]
+		affected.implants += L
+		L.part = affected
 		return 1
 
 
@@ -86,8 +91,8 @@
 	flag = DETECTIVE
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	alt_titles = list("Forensic Technician")

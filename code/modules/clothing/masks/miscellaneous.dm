@@ -4,7 +4,6 @@
 	icon_state = "muzzle"
 	item_state = "muzzle"
 	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
-	body_parts_covered = 0
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -24,7 +23,6 @@
 	item_state = "sterile"
 	w_class = 2
 	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
-	body_parts_covered = 0
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 25, rad = 0)
@@ -35,7 +33,6 @@
 	icon_state = "fake-moustache"
 	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
-	body_parts_covered = 0
 
 /obj/item/clothing/mask/snorkel
 	name = "Snorkel"
@@ -43,7 +40,6 @@
 	icon_state = "snorkel"
 	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
-	body_parts_covered = 0
 
 //scarves (fit in in mask slot)
 
@@ -93,7 +89,6 @@
 	flags_inv = HIDEFACE
 	w_class = 2
 	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/horsehead
 	name = "horse head mask"
@@ -102,7 +97,6 @@
 	item_state = "horsehead"
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
-	body_parts_covered = HEAD|FACE|EYES
 	w_class = 2
 	var/voicechange = 0
 	siemens_coefficient = 0.9

@@ -315,15 +315,24 @@ ________________________________________________________________________________
 				var/datum/gas_mixture/environment = T.return_air()
 
 				var/pressure = environment.return_pressure()
-				var/total_moles = environment.total_moles
+				var/total_moles = environment.total_moles()
 
 				dat += "Air Pressure: [round(pressure,0.1)] kPa"
 
 				if (total_moles)
+					var/o2_level = environment.oxygen/total_moles
+					var/n2_level = environment.nitrogen/total_moles
+					var/co2_level = environment.carbon_dioxide/total_moles
+					var/phoron_level = environment.phoron/total_moles
+					var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 					dat += "<ul>"
-					for(var/g in environment.gas)
-						dat += "<li>[gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%</li>"
+					dat += "<li>Nitrogen: [round(n2_level*100)]%</li>"
+					dat += "<li>Oxygen: [round(o2_level*100)]%</li>"
+					dat += "<li>Carbon Dioxide: [round(co2_level*100)]%</li>"
+					dat += "<li>Phoron: [round(phoron_level*100)]%</li>"
 					dat += "</ul>"
+					if(unknown_level > 0.01)
+						dat += "OTHER: [round(unknown_level)]%<br>"
 
 					dat += "Temperature: [round(environment.temperature-T0C)]&deg;C"
 		if(2)
@@ -510,7 +519,7 @@ ________________________________________________________________________________
 			var/damage = min(cell.charge, rand(50,150))//Uses either the current energy left over or between 50 and 150.
 			if(damage>1)//So they don't spam it when energy is a factor.
 				spark_system.start()//SPARKS THERE SHALL BE SPARKS
-				U.electrocute_act(damage, src,0.1,1)//The last argument is a safety for the human proc that checks for gloves.
+				U.electrocute_act(damage, src, 0.1)
 				if(cell.charge < damage)
 					cell.use(cell.charge)
 				else

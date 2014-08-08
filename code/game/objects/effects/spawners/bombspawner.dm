@@ -137,10 +137,13 @@
 	OT.master = V
 
 	PT.air_contents.temperature = PHORON_FLASHPOINT
-	PT.air_contents.adjust_multi("phoron", 12, "carbon_dioxide", 8)
+	PT.air_contents.phoron = 12
+	PT.air_contents.carbon_dioxide = 8	
+	PT.air_contents.update_values()
 
 	OT.air_contents.temperature = PHORON_FLASHPOINT
-	OT.air_contents.adjust_gas("oxygen", 20)
+	OT.air_contents.oxygen = 20
+	OT.air_contents.update_values()
 
 	var/obj/item/device/assembly/S
 

@@ -155,14 +155,13 @@
 
 
 /obj/structure/window/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
+	if(!isslimeadult(user)) return
 	attack_generic(user, rand(10, 15))
 
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
+	if(W.flags & NOBLUDGEON) return
 
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W

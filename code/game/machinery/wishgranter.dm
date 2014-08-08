@@ -66,7 +66,11 @@
 		silence.owner = user.mind
 		user.mind.objectives += silence
 
-		show_objectives(user.mind)
+		var/obj_count = 1
+		for(var/datum/objective/OBJ in user.mind.objectives)
+			user << "<B>Objective #[obj_count]</B>: [OBJ.explanation_text]"
+			obj_count++
+
 		user << "You have a very bad feeling about this."
 
 	return

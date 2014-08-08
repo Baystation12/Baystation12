@@ -9,7 +9,8 @@
 	var/frequency = 0
 	var/id
 	use_power = 1
-	idle_power_usage = 15
+	idle_power_usage = 2
+	active_power_usage = 5
 
 /obj/machinery/meter/New()
 	..()
@@ -28,6 +29,8 @@
 	if(stat & (BROKEN|NOPOWER))
 		icon_state = "meter0"
 		return 0
+
+	//use_power(5)
 
 	var/datum/gas_mixture/environment = target.return_air()
 	if(!environment)

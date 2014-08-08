@@ -19,8 +19,7 @@ client/proc/Zone_Info(turf/T as null|turf)
 			mob << "No zone here."
 			var/datum/gas_mixture/mix = T.return_air()
 			mob << "[mix.return_pressure()] kPa [mix.temperature]C"
-			for(var/g in mix.gas)
-				mob << "[g]: [mix.gas[g]]\n"
+			mob << "O2: [mix.oxygen] N2: [mix.nitrogen] CO2: [mix.carbon_dioxide] TX: [mix.phoron]"
 	else
 		if(zone_debug_images)
 			for(var/zone in  zone_debug_images)

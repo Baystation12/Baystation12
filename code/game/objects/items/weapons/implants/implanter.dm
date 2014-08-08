@@ -65,6 +65,8 @@
 	update()
 	return
 
+
+
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"
 

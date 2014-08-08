@@ -8,13 +8,6 @@
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
-	//Used in say.dm.
-	var/speak_statement = "states"
-	var/speak_exclamation = "declares"
-	var/speak_query = "queries"
-
-	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
-
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -33,9 +26,6 @@
 	src << "\red <B>*BZZZT*</B>"
 	src << "\red Warning: Electromagnetic pulse detected."
 	..()
-
-/mob/living/silicon/stun_effect_act(var/stun_amount, var/agony_amount)
-	return	//immune
 
 /mob/living/silicon/proc/damage_mob(var/brute = 0, var/fire = 0, var/tox = 0)
 	return
@@ -151,7 +141,7 @@
 
 /mob/living/silicon/remove_language(var/rem_language)
 	..(rem_language)
-
+	
 	for (var/datum/language/L in speech_synthesizer_langs)
 		if (L.name == rem_language)
 			speech_synthesizer_langs -= L

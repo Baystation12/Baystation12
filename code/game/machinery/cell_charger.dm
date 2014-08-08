@@ -1,6 +1,6 @@
 /obj/machinery/cell_charger
-	name = "heavy-duty cell charger"
-	desc = "A much more powerful version of the standard recharger that is specially designed for charging power cells."
+	name = "cell charger"
+	desc = "It charges power cells."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "ccharger0"
 	anchored = 1
@@ -10,9 +10,7 @@
 	power_channel = EQUIP
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
-	var/power_rating = 40000	//40 kW. A measure of how powerful this charger is for charging cells (this the power drawn when charging)
-	
-	
+	var/efficiency = 0.875	//<1.0 means some power is lost in the charging process, >1.0 means free energy.
 	proc
 		updateicon()
 			icon_state = "ccharger[charging ? 1 : 0]"
@@ -95,8 +93,9 @@
 		if(!charging || (stat & (BROKEN|NOPOWER)) || !anchored)
 			return
 		
-		if (!charging.fully_charged())
-			var/charge_used = charging.give(power_rating*CELLRATE)
-			use_power(charge_used/CELLRATE)		//It's only while charging something, so I'm going to say use_power() is fine here...
+		var/power_used = 100000	//for 200 units of charge. Yes, thats right, 100 kW. Is something wrong with CELLRATE?
+		
+		power_used = charging.give(power_used*CELLRATE*efficiency)
+		use_power(power_used)
 		
 		updateicon()

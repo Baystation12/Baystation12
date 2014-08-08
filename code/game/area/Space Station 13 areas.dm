@@ -35,7 +35,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/debug = 0
 	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
-	var/unlimited_power = 0
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
 	var/power_equip = 1
@@ -365,7 +364,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Mothership"
 	icon_state = "syndie-ship"
 	requires_power = 0
-	unlimited_power = 1
 
 /area/syndicate_mothership/control
 	name = "\improper Syndicate Control Room"
@@ -438,7 +436,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Syndicate Station"
 	icon_state = "yellow"
 	requires_power = 0
-	unlimited_power = 1
 
 /area/syndicate_station/start
 	name = "\improper Syndicate Forward Operating Base"
@@ -973,10 +970,6 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
-	engine_waste
-		name = "\improper Engine Waste Handling"
-		icon_state = "engine_waste"
-
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
 		icon_state = "engine_monitoring"
@@ -1184,6 +1177,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Robotics"
 	icon_state = "medresearch"
 
+/area/medical/research
+	name = "\improper Medical Research"
+	icon_state = "medresearch"
+
 /area/medical/virology
 	name = "\improper Virology"
 	icon_state = "virology"
@@ -1381,11 +1378,12 @@ var/list/ghostteleportlocs = list()
 	icon_state = "garden"
 
 //rnd (Research and Development
-/area/rnd/research
-	name = "\improper Research and Development"
-	icon_state = "research"
 
 /area/rnd/lab
+	name = "\improper Research and Development"
+	icon_state = "toxlab"
+
+/area/rnd/hallway
 	name = "\improper Research Lab"
 	icon_state = "toxlab"
 

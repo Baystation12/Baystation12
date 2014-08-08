@@ -4,13 +4,13 @@
 			Docking Port Status:
 		</div>
 		<div class="itemContent">
-			{{if data.docking_status == "docked"}}
+			{{if docking_status == "docked"}}
 				<span class="good">DOCKED</span>
-			{{else data.docking_status == "docking"}}
+			{{else docking_status == "docking"}}
 				<span class="average">DOCKING</span>
-			{{else data.docking_status == "undocking"}}
+			{{else docking_status == "undocking"}}
 				<span class="average">UNDOCKING</span>
-			{{else data.docking_status == "undocked"}}
+			{{else docking_status == "undocked"}}
 				<span class="idle">NOT IN USE</span>
 			{{else}}
 				<span class="bad">ERROR</span>
@@ -19,14 +19,14 @@
 	</div>
 </div>
 
-{{for data.airlocks}}
+{{for airlocks}}
 	<div class="item" style="padding-top: 10px">
 		<div class="item">
 			<div class="itemLabel">
-				{{:value.name}}
+				{{:name}}
 			</div>
 			<div class="itemContent">
-				{{if value.override_enabled}}
+				{{if override_enabled}}
 					<span class="bad">OVERRIDE ENABLED</span>
 				{{else}}
 					<span class="good">STATUS OK</span>

@@ -206,9 +206,15 @@
 
 	proc/TemperatureAct(temperature)
 		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			var/phoronToDeduce = temperature/10
-			target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
 
+			var/datum/gas_mixture/napalm = new
+
+			var/phoronToDeduce = temperature/10
+
+			napalm.phoron = phoronToDeduce
+			napalm.temperature = 200+T0C
+
+			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
 
 			hardness -= phoronToDeduce/100

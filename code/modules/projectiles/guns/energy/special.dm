@@ -91,50 +91,41 @@ obj/item/weapon/gun/energy/staff
 	var/charge_tick = 0
 	var/mode = 0 //0 = mutate, 1 = yield boost
 
-/obj/item/weapon/gun/energy/floragun/New()
-	..()
-	processing_objects.Add(src)
+	New()
+		..()
+		processing_objects.Add(src)
 
-/obj/item/weapon/gun/energy/floragun/Del()
-	processing_objects.Remove(src)
-	..()
 
-/obj/item/weapon/gun/energy/floragun/process()
-	charge_tick++
-	if(charge_tick < 4) return 0
-	charge_tick = 0
-	if(!power_supply) return 0
-	power_supply.give(100)
-	update_icon()
-	return 1
+	Del()
+		processing_objects.Remove(src)
+		..()
 
-/obj/item/weapon/gun/energy/floragun/attack_self(mob/living/user as mob)
-	switch(mode)
-		if(0)
-			mode = 1
-			charge_cost = 100
-			user << "\red The [src.name] is now set to increase yield."
-			projectile_type = "/obj/item/projectile/energy/florayield"
-			modifystate = "florayield"
-		if(1)
-			mode = 0
-			charge_cost = 100
-			user << "\red The [src.name] is now set to induce mutations."
-			projectile_type = "/obj/item/projectile/energy/floramut"
-			modifystate = "floramut"
-	update_icon()
-	return
 
-/obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, flag)
+	process()
+		charge_tick++
+		if(charge_tick < 4) return 0
+		charge_tick = 0
+		if(!power_supply) return 0
+		power_supply.give(100)
+		update_icon()
+		return 1
 
-	if(flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		var/obj/machinery/portable_atmospherics/hydroponics/tray = target
-		if(load_into_chamber())
-			user.visible_message("\red <b> \The [user] fires \the [src] into \the [tray]!</b>")
-			Fire(target,user)
+	attack_self(mob/living/user as mob)
+		switch(mode)
+			if(0)
+				mode = 1
+				charge_cost = 100
+				user << "\red The [src.name] is now set to increase yield."
+				projectile_type = "/obj/item/projectile/energy/florayield"
+				modifystate = "florayield"
+			if(1)
+				mode = 0
+				charge_cost = 100
+				user << "\red The [src.name] is now set to induce mutations."
+				projectile_type = "/obj/item/projectile/energy/floramut"
+				modifystate = "floramut"
+		update_icon()
 		return
-
-	..()
 
 /obj/item/weapon/gun/energy/meteorgun
 	name = "meteor gun"
@@ -233,7 +224,7 @@ obj/item/weapon/gun/energy/staff/focus
 
 
 /*
-This is called from
+This is called from 
 modules/mob/mob_movement.dm if you move you will be zoomed out
 modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */

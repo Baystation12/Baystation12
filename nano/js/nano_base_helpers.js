@@ -1,8 +1,21 @@
 // NanoBaseHelpers is where the base template helpers (common to all templates) are stored
 NanoBaseHelpers = function ()
 {
-	var _baseHelpers = {
-            // change ui styling to "syndicate mode"
+	var _urlParameters = {}; // This is populated with the base url parameters (used by all links), which is probaby just the "src" parameter
+
+	var init = function ()
+	{
+		var body = $('body'); // We store data in the body tag, it's as good a place as any
+
+		_urlParameters = body.data('urlParameters');
+
+		initHelpers();
+	};
+
+	var initHelpers = function ()
+	{
+		$.views.helpers({
+
 			syndicateMode: function() {
 				$('body').css("background-color","#8f1414");
 				$('body').css("background-image","url('uiBackground-Syndicate.png')");
@@ -13,8 +26,9 @@ NanoBaseHelpers = function ()
 				$('#uiTitleFluff').css("background-position","50% 50%");
 				$('#uiTitleFluff').css("background-repeat", "no-repeat");
 
-				return '';
+			return '';
 			},
+
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
 
@@ -28,7 +42,7 @@ NanoBaseHelpers = function ()
 
 				if (typeof elementClass == 'undefined' || !elementClass)
 				{
-					elementClass = 'link';
+					elementClass = '';
 				}
 
 				var elementIdHtml = '';
@@ -42,7 +56,7 @@ NanoBaseHelpers = function ()
 					return '<div unselectable="on" class="link ' + iconClass + ' ' + elementClass + ' ' + status + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
 				}
 
-				return '<div unselectable="on" class="linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + NanoUtility.generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
+				return '<div unselectable="on" class="link linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
 			},
 			// Round a number to the nearest integer
 			round: function(number) {
@@ -77,12 +91,12 @@ NanoBaseHelpers = function ()
 				}
 				return '';
 			},
-			formatNumber: function(x) {
-				// From http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
-				var parts = x.toString().split(".");
-				parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-				return parts.join(".");
-			},
+      formatNumber: function(x) {
+        // From http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+      },
 			// Display a bar. Used to show health, capacity, etc.
 			displayBar: function(value, rangeMin, rangeMax, styleClass, showText) {
 
@@ -158,7 +172,7 @@ NanoBaseHelpers = function ()
                         status = 'selected';
                     }
 
-                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + NanoUtility.generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
+                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
 
                     index++;
                     if (index % blockSize == 0 && index < characters.length)
@@ -177,26 +191,52 @@ NanoBaseHelpers = function ()
 
 				return html;
 			}
-		};
-		
-	return {
-        addHelpers: function ()
+		});
+	};
+
+	// generate a Byond href, combines _urlParameters with parameters
+	var generateHref = function (parameters)
+	{
+		var queryString = '?';
+
+		for (var key in _urlParameters)
 		{
-            NanoTemplate.addHelpers(_baseHelpers);
-        },
-		removeHelpers: function ()
-		{
-			for (var helperKey in _baseHelpers)
+			if (_urlParameters.hasOwnProperty(key))
 			{
-				if (_baseHelpers.hasOwnProperty(helperKey))
+				if (queryString !== '?')
 				{
-					NanoTemplate.removeHelper(helperKey);
+					queryString += ';';
 				}
-			}            
+				queryString += key + '=' + _urlParameters[key];
+			}
+		}
+
+		for (var key in parameters)
+		{
+			if (parameters.hasOwnProperty(key))
+			{
+				if (queryString !== '?')
+				{
+					queryString += ';';
+				}
+				queryString += key + '=' + parameters[key];
+			}
+		}
+		return queryString;
+	};
+
+	return {
+        init: function ()
+		{
+            init();
         }
 	};
 } ();
- 
+
+$(document).ready(function()
+{
+	NanoBaseHelpers.init();
+});
 
 
 

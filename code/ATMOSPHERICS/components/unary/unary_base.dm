@@ -50,7 +50,6 @@
 				break
 
 		update_icon()
-		update_underlays()
 
 	build_network()
 		if(!network && node)
@@ -85,8 +84,5 @@
 		if(reference==node)
 			del(network)
 			node = null
-
-		update_icon()
-		update_underlays()
 
 		return null

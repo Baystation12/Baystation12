@@ -33,7 +33,6 @@
 	item_state = "lb_suit"
 	item_color = "cargo"
 	flags = FPRINT | TABLEPASS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
 /obj/item/clothing/under/rank/chaplain

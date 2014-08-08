@@ -234,11 +234,11 @@ datum
 							T.wet_overlay = null
 
 				for(var/mob/living/carbon/slime/M in T)
-					M.apply_water()
+					M.adjustToxLoss(rand(15,20))
 
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot && !istype(T, /turf/space))
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles )
+					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
@@ -249,7 +249,7 @@ datum
 				var/turf/T = get_turf(O)
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot && !istype(T, /turf/space))
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles )
+					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
@@ -842,18 +842,18 @@ datum
 			description = "Sterilizes wounds in preparation for surgery."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-
+			
 			//makes you squeaky clean
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (method == TOUCH)
 					M.germ_level -= min(volume*20, M.germ_level)
-
+			
 			reaction_obj(var/obj/O, var/volume)
 				O.germ_level -= min(volume*20, O.germ_level)
-
+			
 			reaction_turf(var/turf/T, var/volume)
 				T.germ_level -= min(volume*20, T.germ_level)
-
+			
 	/*		reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				src = null
 				if (method==TOUCH)
@@ -1332,7 +1332,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-
+					
 					//Peridaxon is hard enough to get, it's probably fair to make this all internal organs
 					for(var/datum/organ/internal/I in H.internal_organs)
 						if(I.damage > 0)
@@ -1612,10 +1612,18 @@ datum
 						egg.Hatch()*/
 				if((!O) || (!volume))	return 0
 				var/turf/the_turf = get_turf(O)
-				the_turf.assume_gas("volatile_fuel", volume, T20C)
+				var/datum/gas_mixture/napalm = new
+				var/datum/gas/volatile_fuel/fuel = new
+				fuel.moles = volume
+				napalm.trace_gases += fuel
+				the_turf.assume_air(napalm)
 			reaction_turf(var/turf/T, var/volume)
 				src = null
-				T.assume_gas("volatile_fuel", volume, T20C)
+				var/datum/gas_mixture/napalm = new
+				var/datum/gas/volatile_fuel/fuel = new
+				fuel.moles = volume
+				napalm.trace_gases += fuel
+				T.assume_air(napalm)
 				return
 
 		toxin/lexorin
@@ -1734,27 +1742,6 @@ datum
 				..()
 				return
 
-		//Reagents used for plant fertilizers.
-		toxin/fertilizer
-			name = "fertilizer"
-			id = "fertilizer"
-			description = "A chemical mix good for growing plants with."
-			reagent_state = LIQUID
-			toxpwr = 0.2 //It's not THAT poisonous.
-			color = "#664330" // rgb: 102, 67, 48
-
-		toxin/fertilizer/eznutrient
-			name = "EZ Nutrient"
-			id = "eznutrient"
-
-		toxin/fertilizer/left4zed
-			name = "Left-4-Zed"
-			id = "left4zed"
-
-		toxin/fertilizer/robustharvest
-			name = "Robust Harvest"
-			id = "robustharvest"
-
 		toxin/plantbgone
 			name = "Plant-B-Gone"
 			id = "plantbgone"
@@ -1781,7 +1768,7 @@ datum
 					alien_weeds.healthcheck()
 				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
 					del(O)
-				else if(istype(O,/obj/effect/plantsegment))
+				else if(istype(O,/obj/effect/spacevine))
 					if(prob(50)) del(O) //Kills kudzu too.
 				// Damage that is done to growing plants is separately at code/game/machinery/hydroponics at obj/item/hydroponics
 
@@ -2352,7 +2339,7 @@ datum
 							T.wet_overlay = null
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot)
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles )
+					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)

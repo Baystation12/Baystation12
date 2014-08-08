@@ -533,7 +533,7 @@ client/proc/one_click_antag()
 
 	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
 		var/datum/game_mode/heist/M = ticker.mode
-		cortical_stacks += I
+		M.cortical_stacks += I
 		M.raiders[new_vox.mind] = I
 
 	ticker.mode.traitors += new_vox.mind

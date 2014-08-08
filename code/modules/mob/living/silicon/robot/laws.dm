@@ -18,7 +18,6 @@
 
 			else
 				lawsync()
-				photosync()
 				src << "<b>Laws synced with AI, be sure to note any changes.</b>"
 				if(mind && mind.special_role == "traitor" && mind.original == src)
 					src << "<b>Remember, your AI does NOT share or know about your law 0."

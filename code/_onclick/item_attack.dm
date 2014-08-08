@@ -24,13 +24,15 @@
 /obj/item/proc/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 
 	if (!istype(M)) // not sure if this is the right thing...
-		return 0
+		return
 	var/messagesource = M
 	if (can_operate(M))        //Checks if mob is lying down on table for surgery
 		if (do_surgery(M,user,src))
-			return 0
+			return
 	if (istype(M,/mob/living/carbon/brain))
 		messagesource = M:container
+	if (hitsound)
+		playsound(loc, hitsound, 50, 1, -1)
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user
@@ -61,7 +63,7 @@
 				slime.Discipline = 0
 
 			if(power >= 3)
-				if(slime.is_adult)
+				if(istype(slime, /mob/living/carbon/slime/adult))
 					if(prob(5 + round(power/2)))
 
 						if(slime.Victim)
@@ -138,13 +140,8 @@
 
 
 	if(istype(M, /mob/living/carbon/human))
-		var/hit = M:attacked_by(src, user, def_zone)
-		if (hit && hitsound)
-			playsound(loc, hitsound, 50, 1, -1)
-		return hit
+		return M:attacked_by(src, user, def_zone)
 	else
-		if (hitsound)
-			playsound(loc, hitsound, 50, 1, -1)
 		switch(damtype)
 			if("brute")
 				if(istype(src, /mob/living/carbon/slime))

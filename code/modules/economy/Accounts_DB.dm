@@ -59,7 +59,7 @@
 	if(stat & (NOPOWER|BROKEN)) return
 	ui_interact(user)
 
-/obj/machinery/account_database/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/account_database/ui_interact(mob/user, ui_key="main", datum/nanoui/ui=null)
 	user.set_machine(src)
 
 	var/data[0]
@@ -105,7 +105,7 @@
 	if (accounts.len > 0)
 		data["accounts"] = accounts
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		ui = new(user, src, ui_key, "accounts_terminal.tmpl", src.name, 400, 640)
 		ui.set_initial_data(data)

@@ -70,6 +70,9 @@
 /atom/proc/CheckExit()
 	return 1
 
+/atom/proc/HasEntered(atom/movable/AM as mob|obj)
+	return
+
 /atom/proc/HasProximity(atom/movable/AM as mob|obj)
 	return
 

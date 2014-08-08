@@ -2,8 +2,6 @@ obj/machinery/atmospherics/trinary
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|WEST
 	use_power = 1
-	
-	var/on = 0
 
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
@@ -96,7 +94,6 @@ obj/machinery/atmospherics/trinary
 				break
 
 		update_icon()
-		update_underlays()
 
 	build_network()
 		if(!network1 && node1)
@@ -163,7 +160,5 @@ obj/machinery/atmospherics/trinary
 		else if(reference==node3)
 			del(network3)
 			node3 = null
-		
-		update_underlays()
 
 		return null

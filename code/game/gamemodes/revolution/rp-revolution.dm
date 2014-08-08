@@ -87,8 +87,11 @@
 		update_rev_icons_added(rev_mind)
 
 	for(var/datum/mind/rev_mind in head_revolutionaries)
+		var/obj_count = 1
 		rev_mind.current << "\blue You are a member of the revolutionaries' leadership!"
-		show_objectives(rev_mind)
+		for(var/datum/objective/objective in rev_mind.objectives)
+			rev_mind.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

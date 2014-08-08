@@ -198,7 +198,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(M.is_adult)
+		if(istype(src, /mob/living/carbon/slime/adult))
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)

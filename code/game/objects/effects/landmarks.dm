@@ -81,14 +81,6 @@
 			ninjastart += loc
 			del(src)
 
-		if("voxstart")
-			raider_spawn += loc
-			del(src)
-
-		if("Syndicate-Spawn")
-			synd_spawn += loc
-			del(src)
-
 	landmarks_list += src
 	return 1
 
