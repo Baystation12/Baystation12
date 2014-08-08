@@ -42,13 +42,14 @@ var/admin_requested_enfmod = 0
 	admin_requested_enfmod = 0 // Reset the value.
 
 /world/proc/EnfModProcessor()
-	while(src)
-		if(Check_EnfMod_Need())
-			for(var/client/C in Draft_Enfmods())
-				var/title = "Moderator"
-				if(config.mods_are_mentors) title = "Mentor"
-				var/rights = admin_ranks[title]
-				var/datum/admins/D = new /datum/admins(title, rights, C.ckey)
-				D.associate(directory[C.ckey])
-				return
-		sleep(600)
+	spawn(0)
+		while(src)
+			if(Check_EnfMod_Need())
+				for(var/client/C in Draft_Enfmods())
+					var/title = "Moderator"
+					if(config.mods_are_mentors) title = "Mentor"
+					var/rights = admin_ranks[title]
+					var/datum/admins/D = new /datum/admins(title, rights, C.ckey)
+					D.associate(directory[C.ckey])
+					return
+			sleep(600)
