@@ -60,6 +60,14 @@
 #undef k1
 #undef k2
 
+/proc/trange(var/turf/Center = null, var/Dist = 0)//alternative to range (ONLY processes turfs and thus less intensive)
+	if(!Center || !Dist)
+		return
+
+	var/turf/x1y1 = locate(((Center.x-Dist)<1 ? 1 : Center.x-Dist),((Center.y-Dist)<1 ? 1 : Center.y-Dist),Center.z)
+	var/turf/x2y2 = locate(((Center.x+Dist)>world.maxx ? world.maxx : Center.x+Dist),((Center.y+Dist)>world.maxy ? world.maxy : Center.y+Dist),Center.z)
+	return block(x1y1, x2y2)
+
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)

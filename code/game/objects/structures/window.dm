@@ -306,6 +306,7 @@
 	playsound(src, "shatter", 70, 1)
 	update_nearby_icons()
 	..()
+	loc = null
 
 
 /obj/structure/window/Move()

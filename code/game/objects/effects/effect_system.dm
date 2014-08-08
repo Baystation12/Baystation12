@@ -133,7 +133,7 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	spawn (100)
+	spawn (100+rand(0,20))
 		delete()
 	return
 
@@ -182,7 +182,7 @@ steam.start() -- spawns the effect
 				for(i=0, i<pick(1,2,3), i++)
 					sleep(5)
 					step(sparks,direction)
-				spawn(20)
+				spawn(20+rand(0,5))
 					if(sparks)
 						sparks.delete()
 					src.total_sparks--
