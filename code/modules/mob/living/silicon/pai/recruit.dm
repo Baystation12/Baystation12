@@ -92,9 +92,10 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 							p.alertUpdate()
 				usr << browse(null, "window=paiRecruit")
 				return
-		recruitWindow(usr)
 
-/datum/paiController/proc/recruitWindow(var/mob/M as mob)
+		recruitWindow(usr, href_list["allow_submit"] != "0")
+
+/datum/paiController/proc/recruitWindow(var/mob/M as mob, allowSubmit = 1)
 	var/datum/paiCandidate/candidate
 	for(var/datum/paiCandidate/c in pai_candidates)
 		if(!istype(c) || !istype(M))
@@ -173,28 +174,28 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 		<table>
 			<tr class="d0">
-				<th rowspan="2"><a href='byond://?src=\ref[src];option=name;new=1;candidate=\ref[candidate]'>Name</a>:</th>
+				<th rowspan="2"><a href='byond://?src=\ref[src];option=name;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]'>Name</a>:</th>
 				<td class="desc">[candidate.name]&nbsp;</td>
 			</tr>
 			<tr class="d1">
 				<td>What you plan to call yourself. Suggestions: Any character name you would choose for a station character OR an AI.</td>
 			</tr>
 			<tr class="d0">
-				<th rowspan="2"><a href='byond://?src=\ref[src];option=desc;new=1;candidate=\ref[candidate]'>Description</a>:</th>
+				<th rowspan="2"><a href='byond://?src=\ref[src];option=desc;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]'>Description</a>:</th>
 				<td class="desc">[candidate.description]&nbsp;</td>
 			</tr>
 			<tr class="d1">
 				<td>What sort of pAI you typically play; your mannerisms, your quirks, etc. This can be as sparse or as detailed as you like.</td>
 			</tr>
 			<tr class="d0">
-				<th rowspan="2"><a href='byond://?src=\ref[src];option=role;new=1;candidate=\ref[candidate]'>Preferred Role</a>:</th>
+				<th rowspan="2"><a href='byond://?src=\ref[src];option=role;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]'>Preferred Role</a>:</th>
 				<td class="desc">[candidate.role]&nbsp;</td>
 			</tr>
 			<tr class="d1">
 				<td>Do you like to partner with sneaky social ninjas? Like to help security hunt down thugs? Enjoy watching an engineer's back while he saves the station yet again? This doesn't have to be limited to just station jobs. Pretty much any general descriptor for what you'd like to be doing works here.</td>
 			</tr>
 			<tr class="d0">
-				<th rowspan="2"><a href='byond://?src=\ref[src];option=ooc;new=1;candidate=\ref[candidate]'>OOC Comments</a>:</th>
+				<th rowspan="2"><a href='byond://?src=\ref[src];option=ooc;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]'>OOC Comments</a>:</th>
 				<td class="desc">[candidate.comments]&nbsp;</td>
 			</tr>
 			<tr class="d1">
@@ -205,19 +206,23 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		<table>
 			<tr>
 				<td class="button">
-					<a href='byond://?src=\ref[src];option=save;new=1;candidate=\ref[candidate]' class="button">Save Personality</a>
+					<a href='byond://?src=\ref[src];option=save;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]' class="button">Save Personality</a>
 				</td>
 			</tr>
 			<tr>
 				<td class="button">
-					<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]' class="button">Load Personality</a>
+					<a href='byond://?src=\ref[src];option=load;new=1;allow_submit=[allowSubmit];candidate=\ref[candidate]' class="button">Load Personality</a>
 				</td>
 			</tr>
 		</table><br>
-		<table>
-			<td class="button"><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]' class="button"><b><font size="4px">Submit Personality</font></b></a></td>
-		</table><br>
-
+	"}
+	if(allowSubmit)
+		dat += {"
+			<table>
+				<td class="button"><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]' class="button"><b><font size="4px">Submit Personality</font></b></a></td>
+			</table><br>
+			"}
+	dat += {"
 	<body>
 	"}
 

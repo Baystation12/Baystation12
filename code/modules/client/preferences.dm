@@ -388,6 +388,8 @@ datum/preferences
 	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
+
+	dat += "<a href='byond://?src=\ref[user];preference=pAI><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
 
 	dat += "<br><b>Hair</b><br>"
@@ -892,6 +894,10 @@ datum/preferences
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
 		return
+
+	else if(href_list["preference"] == "pAI")
+		paiController.recruitWindow(user, 0)
+		return 1
 
 	else if(href_list["preference"] == "records")
 		if(text2num(href_list["record"]) >= 1)
