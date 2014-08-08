@@ -1419,6 +1419,7 @@
 #include "code\WorkInProgress\computer3\computers\security.dm"
 #include "code\WorkInProgress\computer3\computers\welcome.dm"
 #include "code\WorkInProgress\kilakk\fax.dm"
+#include "code\WorkInProgress\laser50\enforcingmoderators.dm"
 #include "code\WorkInProgress\Mini\atmos_control.dm"
 #include "code\WorkInProgress\Ported\policetape.dm"
 #include "code\WorkInProgress\SkyMarshal\officer_stuff.dm"

@@ -33,6 +33,7 @@
 	callHook("startup")
 	//Emergency Fix
 	load_mods()
+	load_enfmods()
 	//end-emergency fix
 
 	src.update_status()
@@ -50,6 +51,7 @@
 			ToRban_autoupdate()
 		if(config.kick_inactive)
 			KickInactiveClients()
+		EnfModProcessor()
 
 #undef RECOMMENDED_VERSION
 
