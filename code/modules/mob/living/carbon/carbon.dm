@@ -104,6 +104,7 @@
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
+	
 	src.take_overall_damage(0,shock_damage,used_weapon="Electrocution")
 	//src.burn_skin(shock_damage)
 	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
@@ -117,6 +118,11 @@
 	Stun(10)//This should work for now, more is really silly and makes you lay there forever
 //	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff
 	Weaken(10)
+	
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(5, 1, loc)
+	s.start()
+	
 	return shock_damage
 
 
