@@ -17,6 +17,9 @@
 	new /obj/item/clothing/under/rank/security2(src)
 	new /obj/item/clothing/under/rank/security2(src)
 	new /obj/item/clothing/under/rank/security2(src)
+	new /obj/item/clothing/under/rank/dispatch(src)
+	new /obj/item/clothing/under/rank/dispatch(src)
+	new /obj/item/clothing/under/rank/dispatch(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/shoes/jackboots(src)
@@ -26,6 +29,9 @@
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
+	new /obj/item/clothing/head/beret/sec/alt(src)
+	new /obj/item/clothing/head/beret/sec/alt(src)
+	new /obj/item/clothing/head/beret/sec/alt(src)
 	return
 
 

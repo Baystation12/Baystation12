@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\clothing\head\jobs.dm
+DIR: code code\modules code\modules\clothing code\modules\clothing\head 
+FILE: code\modules\clothing\head\jobs.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
