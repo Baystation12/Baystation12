@@ -42,8 +42,10 @@
 	if(!src.loc)
 		return 0
 
-	if(!use_power)
-		return 1
+	//This is bad. This makes machines which are switched off not update their stat flag correctly when power_change() is called.
+	//If use_power is 0, then you probably shouldn't be checking power to begin with.
+	//if(!use_power)
+	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)
@@ -62,6 +64,7 @@
 		chan = power_channel
 	A.master.use_power(amount, chan)
 	if(!autocalled)
+		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
 /obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
@@ -74,6 +77,14 @@
 		stat |= NOPOWER
 	return
 
+//This is used by the master controller to update the NOPOWER flag
+//This will allow machines to update NOPOWER if they are moved from one area to another.
+//Does the same thing as power_change() but is optimized for the master controller.
+/obj/machinery/proc/update_powered_status(var/area/master_area)
+	if(master_area.powered(power_channel))
+		stat &= ~NOPOWER
+	else
+		stat |= NOPOWER
 
 // the powernet datum
 // each contiguous network of cables & nodes

@@ -6,6 +6,12 @@
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
+#define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
+
+//radiation constants
+#define STEFAN_BOLTZMANN_CONSTANT		0.0000000567	//W/(m^2*K^4)
+#define COSMIC_RADIATION_TEMPERATURE	3.15		//K
+#define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -34,6 +40,7 @@
 #define WARNING_LOW_PRESSURE 50 	//This is when the gray low pressure icon is displayed. (it is 2.5 * HAZARD_LOW_PRESSURE)
 #define HAZARD_LOW_PRESSURE 20		//This is when the black ultra-low pressure icon is displayed. (This one is set as a constant)
 
+#define HEAT_CAPACITY_HUMAN 249840	//J/K, for a 72 kg person. Only used by cryo at the moment, perhaps it will be used for environment effect on body temperature in the future.
 #define TEMPERATURE_DAMAGE_COEFFICIENT 1.5	//This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
 #define BODYTEMP_AUTORECOVERY_DIVISOR 12 //This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
 #define BODYTEMP_AUTORECOVERY_MINIMUM 1 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
@@ -822,3 +829,25 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_UNATHI 4
 
 #define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
+
+
+/*
+	Atmos Machinery
+*/
+#define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
+#define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
+
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences. 
+//Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
+#define ATMOS_PUMP_EFFICIENCY	0.6
+#define ATMOS_FILTER_EFFICIENCY	0.45
+
+//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
+#define MINUMUM_MOLES_TO_PUMP	0.01
+#define MINUMUM_MOLES_TO_FILTER	0.1
+
+//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so for many atmos devices these will control maximum flow rates in L/s
+#define ATMOS_DEFAULT_VOLUME_PUMP	200	//L
+#define ATMOS_DEFAULT_VOLUME_FILTER	200	//L
+#define ATMOS_DEFAULT_VOLUME_MIXER	200	//L
+#define ATMOS_DEFAULT_VOLUME_PIPE	70	//L

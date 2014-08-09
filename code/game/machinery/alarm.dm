@@ -47,9 +47,6 @@
 #define RCON_AUTO	2
 #define RCON_YES	3
 
-//1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
-#define MAX_ENERGY_CHANGE 1000
-
 #define MAX_TEMPERATURE 90
 #define MIN_TEMPERATURE -40
 
@@ -67,8 +64,8 @@
 	icon_state = "alarm0"
 	anchored = 1
 	use_power = 1
-	idle_power_usage = 4
-	active_power_usage = 8
+	idle_power_usage = 80
+	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
@@ -104,9 +101,6 @@
 	var/phoron_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
-
-	var/alarm_sound_cooldown = 200
-	var/last_sound_time = 0
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -164,7 +158,6 @@
 	if (!master_is_operating())
 		elect_master()
 
-
 /obj/machinery/alarm/process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
@@ -172,54 +165,14 @@
 	var/turf/simulated/location = loc
 	if(!istype(location))	return//returns if loc is not simulated
 
-	if ((alarm_area.fire || alarm_area.atmosalm >= 2) && world.time > last_sound_time + alarm_sound_cooldown)
-		last_sound_time = world.time
-
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	if(environment.temperature < target_temperature - 2 || environment.temperature > target_temperature + 2 || regulating_temperature)
-		//If it goes too far, we should adjust ourselves back before stopping.
-		if(get_danger_level(target_temperature, TLV["temperature"]))
-			return
-
-		if(!regulating_temperature)
-			regulating_temperature = 1
-			visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
-			"You hear a click and a faint electronic hum.")
-
-		if(target_temperature > T0C + MAX_TEMPERATURE)
-			target_temperature = T0C + MAX_TEMPERATURE
-
-		if(target_temperature < T0C + MIN_TEMPERATURE)
-			target_temperature = T0C + MIN_TEMPERATURE
-
-		var/datum/gas_mixture/gas
-		gas = location.remove_air(0.25*environment.total_moles)
-		if(gas)
-			var/heat_capacity = gas.heat_capacity()
-			if(heat_capacity)
-				var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
-
-				//Use power.  Assuming that each power unit represents 1 watts....
-				use_power(energy_used, ENVIRON)
-
-				//We need to cool ourselves.
-				if(environment.temperature > target_temperature)
-					gas.temperature -= energy_used/heat_capacity
-				else
-					gas.temperature += energy_used/heat_capacity
-
-				environment.merge(gas)
-
-				if(abs(environment.temperature - target_temperature) <= 0.5)
-					regulating_temperature = 0
-					visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
-					"You hear a click as a faint electronic humming stops.")
+	handle_heating_cooling(environment)
 
 	var/old_level = danger_level
 	var/old_pressurelevel = pressure_dangerlevel
-	danger_level = overall_danger_level()
+	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
 		apply_danger_level(danger_level)
@@ -232,7 +185,6 @@
 	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
 		mode=AALARM_MODE_FILL
 		apply_mode()
-
 
 	//atmos computer remote controll stuff
 	switch(rcon_setting)
@@ -249,12 +201,55 @@
 	updateDialog()
 	return
 
-/obj/machinery/alarm/proc/overall_danger_level()
-	var/turf/simulated/location = loc
-	if(!istype(location))	return//returns if loc is not simulated
+/obj/machinery/alarm/proc/handle_heating_cooling(var/datum/gas_mixture/environment)
+	if (!regulating_temperature)
+		//check for when we should start adjusting temperature
+		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
+			update_use_power(2)
+			regulating_temperature = 1
+			visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+			"You hear a click and a faint electronic hum.")
+	else
+		//check for when we should stop adjusting temperature
+		if (get_danger_level(target_temperature, TLV["temperature"]) || abs(environment.temperature - target_temperature) <= 0.5)
+			update_use_power(1)
+			regulating_temperature = 0
+			visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+			"You hear a click as a faint electronic humming stops.")
+	
+	if (regulating_temperature)
+		if(target_temperature > T0C + MAX_TEMPERATURE)
+			target_temperature = T0C + MAX_TEMPERATURE
 
-	var/datum/gas_mixture/environment = location.return_air()
+		if(target_temperature < T0C + MIN_TEMPERATURE)
+			target_temperature = T0C + MIN_TEMPERATURE
 
+		var/datum/gas_mixture/gas
+		gas = environment.remove(0.25*environment.total_moles)
+		if(gas)
+			
+			if (gas.temperature <= target_temperature)	//gas heating
+				var/energy_used = min( gas.get_thermal_energy_change(target_temperature) , active_power_usage)
+				
+				gas.add_thermal_energy(energy_used)
+				//use_power(energy_used, ENVIRON) //handle by update_use_power instead
+			else	//gas cooling
+				var/heat_transfer = min(abs(gas.get_thermal_energy_change(target_temperature)), active_power_usage)
+				
+				//Assume the heat is being pumped into the hull which is fixed at 20 C
+				//none of this is really proper thermodynamics but whatever
+				
+				var/cop = gas.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
+				
+				heat_transfer = min(heat_transfer, cop * active_power_usage)	//this ensures that we don't use more than active_power_usage amount of power
+				
+				heat_transfer = -gas.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
+				
+				//use_power(heat_transfer / cop, ENVIRON)	//handle by update_use_power instead
+			
+			environment.merge(gas)
+
+/obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
 	var/partial_pressure = R_IDEAL_GAS_EQUATION*environment.temperature/environment.volume
 	var/environment_pressure = environment.return_pressure()
 	//var/other_moles = 0.0

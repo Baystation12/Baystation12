@@ -7,6 +7,10 @@
 	layer = 2.8
 
 	var/on = 0
+	use_power = 1
+	idle_power_usage = 20
+	active_power_usage = 200
+	
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
@@ -256,9 +260,14 @@
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
 //	occupant.metabslow = 0
 	occupant = null
+	current_heat_capacity = initial(current_heat_capacity)
+	update_use_power(1)
 	update_icon()
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
+	if (stat & (NOPOWER|BROKEN))
+		usr << "\red The cryo cell is not functioning."
+		return
 	if (!istype(M))
 		usr << "\red <B>The cryo cell cannot handle such a lifeform!</B>"
 		return
@@ -279,6 +288,8 @@
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		M << "\blue <b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"
 	occupant = M
+	current_heat_capacity = HEAT_CAPACITY_HUMAN
+	update_use_power(2)
 //	M.metabslow = 1
 	add_fingerprint(usr)
 	update_icon()
@@ -311,7 +322,7 @@
 		if(M.Victim == usr)
 			usr << "You're too busy getting your life sucked out of you."
 			return
-	if (usr.stat != 0 || stat & (NOPOWER|BROKEN))
+	if (usr.stat != 0)
 		return
 	put_mob(usr)
 	return

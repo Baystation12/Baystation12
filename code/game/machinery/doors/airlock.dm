@@ -1250,7 +1250,7 @@ About the new airlock wires panel:
 	if(!forced)
 		if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return 0
-	use_power(50)
+	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	else
@@ -1292,7 +1292,7 @@ About the new airlock wires panel:
 			if(istype(location, /turf/simulated))
 				location.add_blood(M)
 
-	use_power(50)
+	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 30, 1)
 	else

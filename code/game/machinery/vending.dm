@@ -20,6 +20,10 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
+	
+	use_power = 1
+	idle_power_usage = 10
+	
 	var/active = 1 //No sales pitches if off!
 	var/delay_product_spawn // If set, uses sleep() in product spawn proc (mostly for seeds to retrieve correct names).
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
@@ -507,7 +511,7 @@
 			src.speak(src.vend_reply)
 			src.last_reply = world.time
 
-	use_power(5)
+	use_power(150)	//actuators and stuff
 	if (src.icon_vend) //Show the vending animation if needed
 		flick(src.icon_vend,src)
 	spawn(src.vend_delay)
