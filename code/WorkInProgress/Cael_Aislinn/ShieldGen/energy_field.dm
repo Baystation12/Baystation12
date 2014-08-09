@@ -40,6 +40,8 @@
 
 /obj/effect/energy_field/proc/Strengthen(var/severity)
 	strength += severity
+	if (strength < 0)
+		strength = 0
 
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
 	if(strength >= 1)

@@ -7,6 +7,7 @@
 /obj/machinery/shield_gen/external/New()
 	..()
 
+//Search for space turfs within range that are adjacent to a simulated turf.
 /obj/machinery/shield_gen/external/get_shielded_turfs()
 	var
 		list

@@ -7,20 +7,16 @@
 	desc = "Machine that charges a shield generator."
 	icon = 'code/WorkInProgress/Cael_Aislinn/ShieldGen/shielding.dmi'
 	icon_state = "capacitor"
-	var/active = 1
+	var/active = 0
 	density = 1
-	var/stored_charge = 0
+	var/stored_charge = 0	//not to be confused with power cell charge, this is in Joules
+	var/last_stored_charge = 0
 	var/time_since_fail = 100
-	var/max_charge = 5e6
-	var/charge_limit = 200000
+	var/max_charge = 8e6	//8 MJ
+	var/max_charge_rate = 400000	//400 kW
 	var/locked = 0
-	//
-	use_power = 1			//0 use nothing
-							//1 use idle power
-							//2 use active power
-	idle_power_usage = 10
-	active_power_usage = 100
-	var/charge_rate = 100
+	use_power = 0 //doesn't use APC power
+	var/charge_rate = 100000	//100 kW
 	var/obj/machinery/shield_gen/owned_gen
 
 /obj/machinery/shield_capacitor/New()
@@ -75,12 +71,12 @@
 	return src.attack_hand(user)
 
 /obj/machinery/shield_capacitor/attack_hand(mob/user)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (BROKEN))
 		return
 	interact(user)
 
 /obj/machinery/shield_capacitor/interact(mob/user)
-	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
+	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN)) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
 			user << browse(null, "window=shield_capacitor")
@@ -90,13 +86,13 @@
 		t += "<i>Swipe your ID card to begin.</i>"
 	else
 		t += "This capacitor is: [active ? "<font color=green>Online</font>" : "<font color=red>Offline</font>" ] <a href='?src=\ref[src];toggle=1'>[active ? "\[Deactivate\]" : "\[Activate\]"]</a><br>"
-		t += "[time_since_fail > 2 ? "<font color=green>Charging stable.</font>" : "<font color=red>Warning, low charge!</font>"]<br>"
-		t += "Charge: [stored_charge] Watts ([100 * stored_charge/max_charge]%)<br>"
-		t += "Charge rate: \
+		t += "Capacitor Status: [time_since_fail > 2 ? "<font color=green>OK.</font>" : "<font color=red>Discharging!</font>"]<br>"
+		t += "Charge: [stored_charge] J ([100 * stored_charge/max_charge]%)<br>"
+		t += "Charge Rate: \
 		<a href='?src=\ref[src];charge_rate=-100000'>\[----\]</a> \
 		<a href='?src=\ref[src];charge_rate=-10000'>\[---\]</a> \
 		<a href='?src=\ref[src];charge_rate=-1000'>\[--\]</a> \
-		<a href='?src=\ref[src];charge_rate=-100'>\[-\]</a>[charge_rate] Watts/sec \
+		<a href='?src=\ref[src];charge_rate=-100'>\[-\]</a>[charge_rate] W \
 		<a href='?src=\ref[src];charge_rate=100'>\[+\]</a> \
 		<a href='?src=\ref[src];charge_rate=1000'>\[++\]</a> \
 		<a href='?src=\ref[src];charge_rate=10000'>\[+++\]</a> \
@@ -109,20 +105,27 @@
 	user.set_machine(src)
 
 /obj/machinery/shield_capacitor/process()
-	//
-	if(active)
-		use_power = 2
-		if(stored_charge + charge_rate > max_charge)
-			active_power_usage = max_charge - stored_charge
-		else
-			active_power_usage = charge_rate
-		stored_charge += active_power_usage
-	else
-		use_power = 1
+	if (!anchored)
+		active = 0
+	
+	//see if we can connect to a power net.
+	var/datum/powernet/PN
+	var/turf/T = src.loc
+	var/obj/structure/cable/C = T.get_cable_node()
+	if (C)
+		PN = C.powernet
+	
+	if (PN)
+		var/power_draw = between(0, max_charge - stored_charge, charge_rate) //what we are trying to draw
+		power_draw = min(power_draw, surplus) //what we actually get
+		if (power_draw > 0)
+			stored_charge += power_draw
+			PN.newload += power_draw //use powernet power
 
 	time_since_fail++
-	if(stored_charge < active_power_usage * 1.5)
-		time_since_fail = 0
+	if(stored_charge < last_stored_charge)
+		time_since_fail = 0 //losing charge faster than we can draw from PN
+	last_stored_charge = stored_charge
 
 /obj/machinery/shield_capacitor/Topic(href, href_list[])
 	..()
@@ -132,33 +135,16 @@
 		return
 	if( href_list["toggle"] )
 		active = !active
-		if(active)
-			use_power = 2
-		else
-			use_power = 1
 	if( href_list["charge_rate"] )
-		charge_rate += text2num(href_list["charge_rate"])
-		if(charge_rate > charge_limit)
-			charge_rate = charge_limit
-		else if(charge_rate < 0)
-			charge_rate = 0
-	//
+		charge_rate = between(10000, charge_rate + text2num(href_list["charge_rate"]), max_charge_rate)
+	
 	updateDialog()
 
 /obj/machinery/shield_capacitor/power_change()
 	if(stat & BROKEN)
 		icon_state = "broke"
 	else
-		if( powered() )
-			if (src.active)
-				icon_state = "capacitor"
-			else
-				icon_state = "capacitor"
-			stat &= ~NOPOWER
-		else
-			spawn(rand(0, 15))
-				src.icon_state = "capacitor"
-				stat |= NOPOWER
+		..()
 
 /obj/machinery/shield_capacitor/verb/rotate()
 	set name = "Rotate capacitor clockwise"
