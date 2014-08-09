@@ -699,6 +699,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/Stat()
 	..()
+	if(!client)	return // No updating without client.
 
 	if(statpanel("Status"))	//not looking at that panel
 

@@ -143,7 +143,7 @@ Please contact me on #coderbus IRC. ~Carn x
 /mob/living/carbon/human/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
-	overlays.Cut()
+	overlays.len = 0
 
 	var/stealth = 0
 	//cloaking devices. //TODO: get rid of this :<
@@ -274,7 +274,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//No icon stored, so we need to start with a basic one.
 		var/datum/organ/external/chest = get_organ("chest")
 		base_icon = chest.get_icon(g)
-		
+
 		if(chest.status & ORGAN_DEAD)
 			base_icon.ColorTone(necrosis_color_mod)
 			base_icon.SetIntensity(0.7)

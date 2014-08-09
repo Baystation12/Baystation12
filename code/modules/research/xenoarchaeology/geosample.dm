@@ -52,7 +52,7 @@
 
 //this should only need to be called once
 /datum/geosample/proc/UpdateTurf(var/turf/simulated/mineral/container)
-	set background = 1
+
 	if(!container || !istype(container))
 		return
 

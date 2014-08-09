@@ -127,7 +127,7 @@ datum/controller/game_controller/proc/setup_objects()
 datum/controller/game_controller/proc/process()
 	processing = 1
 	spawn(0)
-		set background = 1
+
 		while(1)	//far more efficient than recursively calling ourself
 			if(!Failsafe)	new /datum/controller/failsafe()
 
@@ -274,6 +274,7 @@ datum/controller/game_controller/proc/process_machines()
 	process_machines_process()
 	process_machines_power()
 	process_machines_rebuild()
+
 datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)

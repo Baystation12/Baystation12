@@ -7,7 +7,7 @@
 
 
 
-#define RECOMMENDED_VERSION 501
+#define RECOMMENDED_VERSION 504
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -201,13 +201,14 @@ var/world_topic_spam_protect_time = world.timeofday
 	..(reason)
 
 
-#define INACTIVITY_KICK	6000	//10 minutes in ticks (approx.)
+#define INACTIVITY_KICK	18000	//30 minutes in ticks (approx.)
 /world/proc/KickInactiveClients()
 	spawn(-1)
-		set background = 1
 		while(1)
 			sleep(INACTIVITY_KICK)
 			for(var/client/C in clients)
+				if(C.holder || C in admins)
+					continue
 				if(C.is_afk(INACTIVITY_KICK))
 					if(!istype(C.mob, /mob/dead))
 						log_access("AFK: [key_name(C)]")
@@ -246,7 +247,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
-	config.loadforumsql("config/forumdbconfig.txt")
+//	config.loadforumsql("config/forumdbconfig.txt")
 	// apply some settings from config..
 	abandon_allowed = config.respawn
 
@@ -336,7 +337,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (src.status != s)
 		src.status = s
 
-#define FAILED_DB_CONNECTION_CUTOFF 5
+#define FAILED_DB_CONNECTION_CUTOFF 7
 var/failed_db_connections = 0
 var/failed_old_db_connections = 0
 

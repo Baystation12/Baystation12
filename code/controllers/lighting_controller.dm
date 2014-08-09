@@ -33,7 +33,7 @@ datum/controller/lighting/New()
 datum/controller/lighting/proc/process()
 	processing = 1
 	spawn(0)
-		set background = 1
+
 		while(1)
 			if(processing)
 				iteration++
@@ -54,7 +54,7 @@ datum/controller/lighting/proc/process()
 					var/turf/T = changed_turfs[i]
 					if(T && T.lighting_changed)
 						T.shift_to_subarea()
-				changed_turfs.Cut()		// reset the changed list
+				changed_turfs.len = 0		// reset the changed list
 
 				process_cost = (world.timeofday - started)
 
@@ -67,7 +67,7 @@ datum/controller/lighting/proc/process()
 datum/controller/lighting/proc/Initialize(var/z_level)
 	processing = 0
 	spawn(-1)
-		set background = 1
+
 		for(var/i=1, i<=lights.len, i++)
 			var/datum/light_source/L = lights[i]
 			if(L.check())

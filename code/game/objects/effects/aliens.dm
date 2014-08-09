@@ -213,7 +213,7 @@
 	return
 
 /obj/effect/alien/weeds/proc/Life()
-	set background = 1
+
 	var/turf/U = get_turf(src)
 /*
 	if (locate(/obj/movable, U))
@@ -234,7 +234,7 @@ Alien plants should do something if theres a lot of poison
 
 	if(!linked_node || (get_dist(linked_node, src) > linked_node.node_range) )
 		return
-	
+
 	direction_loop:
 		for(var/dirn in cardinal)
 			var/turf/T = get_step(src, dirn)

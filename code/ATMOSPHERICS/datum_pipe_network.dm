@@ -106,9 +106,9 @@ datum/pipe_network
 
 					corresponding.moles += trace_gas.moles
 
-		if(air_transient.volume > 0)
+		if(air_transient.volume > 0.01)
 
-			if(total_heat_capacity > 0)
+			if(total_heat_capacity > 0.01)
 				air_transient.temperature = total_thermal_energy/total_heat_capacity
 
 				//Allow air mixture to react
@@ -174,12 +174,12 @@ proc/equalize_gases(datum/gas_mixture/list/gases)
 
 				corresponding.moles += trace_gas.moles
 
-	if(total_volume > 0)
+	if(total_volume > 0.01)
 
 		//Calculate temperature
 		var/temperature = 0
 
-		if(total_heat_capacity > 0)
+		if(total_heat_capacity > 0.01)
 			temperature = total_thermal_energy/total_heat_capacity
 
 		//Update individual gas_mixtures by volume ratio

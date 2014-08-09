@@ -158,7 +158,7 @@ var/list/mechtoys = list(
 			supply_packs[P.name] = P
 
 		spawn(0)
-			set background = 1
+
 			while(1)
 				if(processing)
 					iteration++
