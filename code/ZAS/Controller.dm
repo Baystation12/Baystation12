@@ -93,7 +93,7 @@ Class Procs:
 	//Outputs: None.
 
 	#ifndef ZASDBG
-	set background = 1
+
 	#endif
 
 	world << "\red \b Processing Geometry..."
@@ -122,7 +122,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	//Outputs: None.
 
 	#ifndef ZASDBG
-	set background = 1
+
 	#endif
 
 	while(1)

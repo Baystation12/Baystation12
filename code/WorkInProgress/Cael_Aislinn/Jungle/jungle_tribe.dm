@@ -31,7 +31,7 @@
 	processing_objects.Remove(src)
 
 /obj/effect/jungle_tribe_spawn/process()
-	set background = 1
+
 	for(var/mob/living/simple_animal/hostile/tribesman/T in tribesmen)
 		if(T.stat == DEAD)
 			tribesmen.Remove(T)

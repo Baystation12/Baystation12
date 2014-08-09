@@ -1,6 +1,6 @@
 /mob/living/carbon/slime/Life()
 	set invisibility = 0
-	set background = 1
+
 
 	if (src.monkeyizing)
 		return

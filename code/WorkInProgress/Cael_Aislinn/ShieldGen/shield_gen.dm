@@ -254,7 +254,7 @@
 			*/
 
 /obj/machinery/shield_gen/proc/toggle()
-	set background = 1
+
 	active = !active
 	power_change()
 	if(active)
