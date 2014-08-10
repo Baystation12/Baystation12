@@ -28,12 +28,11 @@
 	src.sd_SetLuminosity(2)
 */
 /obj/machinery/flasher/power_change()
-	if ( powered() )
-		stat &= ~NOPOWER
+	..()
+	if ( !(stat & NOPOWER) )
 		icon_state = "[base_state]1"
 //		src.sd_SetLuminosity(2)
 	else
-		stat |= ~NOPOWER
 		icon_state = "[base_state]1-p"
 //		src.sd_SetLuminosity(0)
 

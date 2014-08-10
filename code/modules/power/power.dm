@@ -68,24 +68,22 @@
 		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
-/obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
+//The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
+/obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
 										// can override if needed
-	if(powered(power_channel))
+	var/has_power
+	if (master_area)
+		has_power = master_area.powered(power_channel)
+	else
+		has_power = powered(power_channel)
+	
+	if(has_power)
 		stat &= ~NOPOWER
 	else
 
 		stat |= NOPOWER
 	return
-
-//This is used by the master controller to update the NOPOWER flag
-//This will allow machines to update NOPOWER if they are moved from one area to another.
-//Does the same thing as power_change() but is optimized for the master controller.
-/obj/machinery/proc/update_powered_status(var/area/master_area)
-	if(master_area.powered(power_channel))
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
 
 // the powernet datum
 // each contiguous network of cables & nodes

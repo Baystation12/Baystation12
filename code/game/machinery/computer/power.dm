@@ -127,15 +127,14 @@
 
 
 /obj/machinery/power/monitor/power_change()
-
+	..()
 	if(stat & BROKEN)
 		icon_state = "broken"
 	else
-		if( powered() )
-			icon_state = initial(icon_state)
-			stat &= ~NOPOWER
-		else
+		if (stat & NOPOWER)
 			spawn(rand(0, 15))
 				src.icon_state = "c_unpowered"
-				stat |= NOPOWER
+		else
+			icon_state = initial(icon_state)
+			
 
