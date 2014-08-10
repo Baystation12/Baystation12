@@ -2639,7 +2639,7 @@
 "aYM" = (/obj/structure/grille{density = 0; icon_state = "brokengrille"},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor/plating,/area/maintenance/fpmaint2)
 "aYN" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/sign/double/map/right,/turf/simulated/wall,/area/maintenance/fpmaint2)
 "aYO" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/wall,/area/maintenance/fpmaint2)
-"aYP" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/door/firedoor/border_only{dir = 1; name = "Firelock North"},/obj/machinery/door/window{dir = 1; name = "Security Checkpoint"; req_access_txt = "0"},/turf/simulated/floor{icon_state = "delivery"},/area/hallway/secondary/entry)
+"aYP" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/door/firedoor/border_only{dir = 1; name = "Firelock North"},/obj/machinery/door/window/brigdoor{dir = 1; name = "Security Checkpoint"; req_access_txt = "63"},/turf/simulated/floor{icon_state = "delivery"},/area/hallway/secondary/entry)
 "aYQ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/maintenance/fpmaint2)
 "aYR" = (/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/wall,/area/crew_quarters/sleep/sec)
 "aYS" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/wall,/area/storage/tools)
