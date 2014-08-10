@@ -224,7 +224,7 @@
 
 	return 1
 
-//Checks if we are within acceptable range of another gas_mixture to suspend processing.
+//Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
 /datum/gas_mixture/proc/compare(datum/gas_mixture/sample)
 	if(!sample) return 0
 
@@ -317,7 +317,7 @@
 	return 1
 
 //Shares gas with another gas_mixture based on the amount of connecting tiles and a fixed lookup table.
-/datum/gas_mixture/proc/share_ratio(datum/gas_mixture/other, connecting_tiles, share_size = null)
+/datum/gas_mixture/proc/share_ratio(datum/gas_mixture/other, connecting_tiles, share_size = null, one_way = 0)
 	var/static/list/sharing_lookup_table = list(0.30, 0.40, 0.48, 0.54, 0.60, 0.66)
 	//Shares a specific ratio of gas between mixtures using simple weighted averages.
 	var/ratio = sharing_lookup_table[6]
@@ -325,26 +325,19 @@
 	var/size = max(1, group_multiplier)
 	if(isnull(share_size)) share_size = max(1, other.group_multiplier)
 
-	var/list/full_gas = list()
-	for(var/g in gas)
-		full_gas[g] = gas[g] * size
-
 	var/full_heat_capacity = heat_capacity()
-
-	var/list/s_full_gas = list()
-	for(var/g in other.gas)
-		s_full_gas[g] = other.gas[g] * share_size
-
 	var/s_full_heat_capacity = other.heat_capacity()
 
 	var/list/avg_gas = list()
 
-	for(var/g in full_gas)
-		avg_gas[g] = (full_gas[g] + s_full_gas[g]) / (size + share_size)
+	for(var/g in gas)
+		avg_gas[g] += gas[g] * size
 
-	for(var/g in s_full_gas)
-		if(avg_gas[g] == null)
-			avg_gas[g] = (full_gas[g] + s_full_gas[g]) / (size + share_size)
+	for(var/g in other.gas)
+		avg_gas[g] += other.gas[g] * share_size
+
+	for(var/g in avg_gas)
+		avg_gas[g] /= (size + share_size)
 
 	var/temp_avg = 0
 	if(full_heat_capacity + s_full_heat_capacity)
@@ -356,11 +349,13 @@
 	//WOOT WOOT TOUCH THIS AND YOU ARE A RETARD
 
 	for(var/g in avg_gas)
-		gas[g]       = max(0, (gas[g]       - avg_gas[g]) * (1 - ratio) + avg_gas[g])
-		other.gas[g] = max(0, (other.gas[g] - avg_gas[g]) * (1 - ratio) + avg_gas[g])
+		gas[g] = max(0, (gas[g] - avg_gas[g]) * (1 - ratio) + avg_gas[g])
+		if(!one_way)
+			other.gas[g] = max(0, (other.gas[g] - avg_gas[g]) * (1 - ratio) + avg_gas[g])
 
-	temperature       = max(0, (temperature       - temp_avg) * (1-ratio) + temp_avg)
-	other.temperature = max(0, (other.temperature - temp_avg) * (1-ratio) + temp_avg)
+	temperature = max(0, (temperature - temp_avg) * (1-ratio) + temp_avg)
+	if(!one_way)
+		other.temperature = max(0, (other.temperature - temp_avg) * (1-ratio) + temp_avg)
 
 	update_values()
 	other.update_values()
@@ -375,7 +370,7 @@
 
 	var/old_pressure = return_pressure()
 
-	share_ratio(unsim_air, unsim_air.group_multiplier, max(1, max(group_multiplier + 3, 1) + unsim_air.group_multiplier))
+	share_ratio(unsim_air, unsim_air.group_multiplier, max(1, max(group_multiplier + 3, 1) + unsim_air.group_multiplier), one_way = 1)
 
 	return abs(old_pressure - return_pressure())
 
