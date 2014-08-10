@@ -91,7 +91,7 @@
 /obj/machinery/meter/Click()
 
 	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
-		usr << examine()
+		examine()
 		return 1
 	
 	return ..()
