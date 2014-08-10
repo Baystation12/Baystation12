@@ -2068,25 +2068,29 @@ datum
 			description = "This is what makes chilis hot."
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 179, 16, 8
-
+			
 			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(!data) data = 1
-				switch(data)
-					if(1 to 15)
-						M.bodytemperature += 5 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(holder.has_reagent("frostoil"))
-							holder.remove_reagent("frostoil", 5)
-						if(istype(M, /mob/living/carbon/slime))
-							M.bodytemperature += rand(5,20)
-					if(15 to 25)
-						M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/slime))
-							M.bodytemperature += rand(10,20)
-					if(25 to INFINITY)
-						M.bodytemperature += 15 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/slime))
-							M.bodytemperature += rand(15,20)
+				if(!M)
+					M = holder.my_atom
+				if(!data)
+					data = 1
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.species && !(H.species.flags & (NO_PAIN | IS_SYNTHETIC)) )
+						switch(data)
+							if(1 to 2)
+								H << "\red <b>Your insides feel uncomfortably hot !</b>"
+							if(2 to 20)
+								if(prob(5))
+									H << "\red <b>Your insides feel uncomfortably hot !</b>"									
+							if(20 to INFINITY)
+								H.apply_effect(2,AGONY,0)
+								if(prob(5))
+									H.visible_message("<span class='warning'>[H] [pick("dry heaves!","coughs!","splutters!")]</span>")
+									H << "\red <b>You feel like your insides are burning !</b>"
+				else if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature += rand(10,25)
+				holder.remove_reagent("frostoil", 5)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 				data++
 				..()
@@ -2152,10 +2156,29 @@ datum
 							victim.Weaken(5)
 							//victim.Paralyse(10)
 							//victim.drop_item()
+
 			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(prob(5))
-					M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
+				if(!M)
+					M = holder.my_atom
+				if(!data)
+					data = 1
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.species && !(H.species.flags & (NO_PAIN | IS_SYNTHETIC)) )
+						switch(data)
+							if(1)
+								H << "\red <b>You feel like your insides are burning !</b>"
+							if(2 to INFINITY)
+								H.apply_effect(4,AGONY,0)
+								if(prob(5))
+									H.visible_message("<span class='warning'>[H] [pick("dry heaves!","coughs!","splutters!")]</span>")
+									H << "\red <b>You feel like your insides are burning !</b>"
+				else if(istype(M, /mob/living/carbon/slime))
+					M.bodytemperature += rand(15,30)
+				holder.remove_reagent("frostoil", 5)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				data++
+				..()
 				return
 
 		frostoil
