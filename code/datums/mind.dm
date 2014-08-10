@@ -668,7 +668,7 @@ datum/mind
 				if("tome")
 					var/mob/living/carbon/human/H = current
 					if (istype(H))
-						var/obj/item/weapon/tome/T = new(H)
+						var/obj/item/weapon/book/tome/T = new(H)
 
 						var/list/slots = list (
 							"backpack" = slot_in_backpack,
@@ -1136,7 +1136,7 @@ datum/mind
 
 		var/mob/living/carbon/human/H = current
 		if (istype(H))
-			var/obj/item/weapon/tome/T = new(H)
+			var/obj/item/weapon/book/tome/T = new(H)
 
 			var/list/slots = list (
 				"backpack" = slot_in_backpack,
