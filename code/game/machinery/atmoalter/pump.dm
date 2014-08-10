@@ -89,6 +89,8 @@
 		cell.use(power_draw * CELLRATE)
 		last_power_draw = power_draw
 		
+		update_connected_network()
+		
 		//ran out of charge
 		if (!cell.charge)
 			update_icon()
