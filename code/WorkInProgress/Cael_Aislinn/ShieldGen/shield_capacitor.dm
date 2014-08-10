@@ -132,6 +132,9 @@
 		usr.unset_machine()
 		return
 	if( href_list["toggle"] )
+		if(!active && !anchored)
+			usr << "\red The [src] needs to be firmly secured to the floor first."
+			return
 		active = !active
 	if( href_list["charge_rate"] )
 		charge_rate = between(10000, charge_rate + text2num(href_list["charge_rate"]), max_charge_rate)

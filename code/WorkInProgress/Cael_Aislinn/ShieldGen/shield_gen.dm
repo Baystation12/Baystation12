@@ -6,7 +6,7 @@
 //explosion damage is cumulative. if a tile is in range of light, medium and heavy damage, it will take a hit from all three
 
 /obj/machinery/shield_gen
-	name = "shield generator"
+	name = "bubble shield generator"
 	desc = "Machine that generates an impenetrable field of energy when activated."
 	icon = 'code/WorkInProgress/Cael_Aislinn/ShieldGen/shielding.dmi'
 	icon_state = "generator0"
@@ -180,6 +180,9 @@
 		usr.unset_machine()
 		return
 	else if( href_list["toggle"] )
+		if (!active && !anchored)
+			usr << "\red The [src] needs to be firmly secured to the floor first."
+			return
 		toggle()
 	else if( href_list["change_radius"] )
 		field_radius = between(0, field_radius + text2num(href_list["change_radius"]), max_field_radius)
