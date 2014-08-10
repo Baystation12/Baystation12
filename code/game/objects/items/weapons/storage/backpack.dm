@@ -126,6 +126,36 @@
 	icon_state = "engiepack"
 	item_state = "engiepack"
 
+/obj/item/weapon/storage/backpack/toxins
+	name = "laboratory backpack"
+	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
+	icon_state = "toxpack"
+	item_state = "toxpack"
+
+/obj/item/weapon/storage/backpack/hydroponics
+	name = "herbalist's backpack"
+	desc = "It's a green backpack with many pockets to store plants and tools in."
+	icon_state = "hydpack"
+	item_state = "hydpack"
+
+/obj/item/weapon/storage/backpack/genetics
+	name = "geneticist backpack"
+	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
+	icon_state = "genpack"
+	item_state = "genpack"
+
+/obj/item/weapon/storage/backpack/virology
+	name = "sterile backpack"
+	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
+	icon_state = "viropack"
+	item_state = "viropack"
+
+/obj/item/weapon/storage/backpack/chemistry
+	name = "chemistry backpack"
+	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
+	icon_state = "chempack"
+	item_state = "chempack"
+
 /*
  * Satchel Types
  */
