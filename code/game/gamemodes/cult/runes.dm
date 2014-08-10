@@ -87,9 +87,9 @@ var/list/sacrificed = list()
 			"\red You are blinded by the flash of red light! After you're able to see again, you see that now instead of the rune there's a book.", \
 			"\red You hear a pop and smell ozone.")
 			if(istype(src,/obj/effect/rune))
-				new /obj/item/weapon/tome(src.loc)
+				new /obj/item/weapon/book/tome(src.loc)
 			else
-				new /obj/item/weapon/tome(usr.loc)
+				new /obj/item/weapon/book/tome(usr.loc)
 			del(src)
 			return
 
