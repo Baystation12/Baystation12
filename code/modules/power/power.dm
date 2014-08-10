@@ -20,11 +20,12 @@
 
 /obj/machinery/power/proc/add_load(var/amount)
 	if(powernet)
-		powernet.newload += amount
+		return powernet.draw_power(amount)
+	return 0
 
 /obj/machinery/power/proc/surplus()
 	if(powernet)
-		return powernet.avail-powernet.load
+		return powernet.surplus()
 	else
 		return 0
 
@@ -402,6 +403,19 @@
 					error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
 					nodes.Remove(S)
 
+
+//Returns the amount of available power
+/datum/powernet/proc/surplus()
+	return max(avail - newload, 0)
+
+//Attempts to draw power from a powernet. Returns the actual amount of power drawn
+/datum/powernet/proc/draw_power(var/requested_amount)
+	var/surplus = max(avail - newload, 0)
+	var/actual_draw = min(requested_amount, surplus)
+	newload += actual_draw
+	
+	return actual_draw
+
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)/*
 		if (1300000 to INFINITY)
@@ -551,11 +565,11 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power(drained_energy/CELLRATE)
+		source_area.use_power(drained_energy)
 	else if (istype(power_source,/datum/powernet))
-		var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"
-		PN.newload+=drained_power
+		//var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"  <<< NO. THIS IS WRONG. CELLRATE DOES NOT CONVERT TO OR FROM JOULES.
+		PN.draw_power(drained_energy)
 	else if (istype(power_source, /obj/item/weapon/cell))
-		cell.use(drained_energy)
+		cell.use(drained_energy*CELLRATE) //convert to units of charge.
 	return drained_energy
 

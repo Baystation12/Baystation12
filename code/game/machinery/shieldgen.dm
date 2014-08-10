@@ -416,20 +416,17 @@
 		power = 0
 		return 0
 
-	var/surplus = max(PN.avail-PN.load, 0)
-	var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we draw
-	shieldload = min(shieldload, surplus)	//what we actually get
-	
-	if (shieldload)
-		power = 1	// IVE GOT THE POWER!
-		if(PN) //runtime errors fixer. They were caused by PN.newload trying to access missing network in case of working on stored power.
-			storedpower += shieldload
-			PN.newload += shieldload //use powernet power.
+	var/shieldload = between(500, max_stored_power - storedpower, power_draw)	//what we try to draw
+	shieldload = PN.draw_power(shieldload) //what we actually get
+	storedpower += shieldload
 	
 	//If we're still in the red, then there must not be enough available power to cover our load.
 	if(storedpower <= 0)
 		power = 0
 		return 0
+	
+	power = 1	// IVE GOT THE POWER!
+	return 1
 
 /obj/machinery/shieldwallgen/process()
 	spawn(100)

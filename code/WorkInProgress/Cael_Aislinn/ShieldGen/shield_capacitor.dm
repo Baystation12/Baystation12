@@ -117,10 +117,8 @@
 	
 	if (PN)
 		var/power_draw = between(0, max_charge - stored_charge, charge_rate) //what we are trying to draw
-		power_draw = min(power_draw, surplus) //what we actually get
-		if (power_draw > 0)
-			stored_charge += power_draw
-			PN.newload += power_draw //use powernet power
+		power_draw = PN.draw_power(power_draw) //what we actually get
+		stored_charge += power_draw
 
 	time_since_fail++
 	if(stored_charge < last_stored_charge)
