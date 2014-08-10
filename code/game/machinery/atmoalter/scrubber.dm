@@ -70,6 +70,8 @@
 		cell.use(power_draw * CELLRATE)
 		last_power_draw = power_draw
 		
+		update_connected_network()
+		
 		//ran out of charge
 		if (!cell.charge)
 			update_icon()
@@ -152,7 +154,7 @@ Flow Rate Regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?s
 
 	chan
 	use_power = 1
-	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	active_power_usage = 100000	//100 kW ~ 135 HP
 	
 	var/global/gid = 1
@@ -168,7 +170,7 @@ Flow Rate Regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?s
 	name = "[name] (ID [id])"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
-		usr << "\blue You can't directly interact with this machine. Use the area atmos computer."
+		usr << "\blue You can't directly interact with this machine. Use the scrubber control console."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/update_icon()
 	src.overlays = 0
@@ -204,6 +206,7 @@ Flow Rate Regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?s
 		last_power_draw = 0
 	else
 		last_power_draw = handle_power_draw(power_draw)
+		update_connected_network()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/wrench))
