@@ -355,7 +355,7 @@ var/global/datum/controller/occupations/job_master
 		if(job)
 
 			//Equip custom gear loadout.
-			if(H.client.prefs.gear && H.client.prefs.gear.len)
+			if(H.client.prefs.gear && H.client.prefs.gear.len && job.title != "Cyborg" && job.title != "AI")
 
 				for(var/thing in H.client.prefs.gear)
 					var/datum/gear/G = gear_datums[thing]

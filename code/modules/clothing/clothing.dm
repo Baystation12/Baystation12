@@ -33,16 +33,21 @@
 	return 1
 
 /obj/item/clothing/proc/refit_for_species(var/target_species)
+	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
 			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 		else
 			species_restricted = list(target_species)
 
+	//Set icon
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
+	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
 			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
@@ -51,8 +56,11 @@
 		else
 			species_restricted = list(target_species)
 
+	//Set icon
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
+	else
+		icon = initial(icon)
 
 
 //Ears: headsets, earmuffs and tiny objects

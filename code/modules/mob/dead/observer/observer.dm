@@ -79,7 +79,7 @@
 
 
 /mob/dead/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/tome))
+	if(istype(W,/obj/item/weapon/book/tome))
 		var/mob/dead/M = src
 		if(src.invisibility != 0)
 			M.invisibility = 0
