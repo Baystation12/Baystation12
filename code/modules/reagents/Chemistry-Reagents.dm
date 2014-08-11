@@ -1099,8 +1099,7 @@ datum
 				else if(!alien || alien != IS_DIONA)
 					M.adjustOxyLoss(-2*REM)
 
-				if(holder.has_reagent("lexorin"))
-					holder.remove_reagent("lexorin", 2*REM)
+				holder.remove_reagent("lexorin", 2*REM)
 				..()
 				return
 
@@ -1123,8 +1122,7 @@ datum
 				else if(!alien || alien != IS_DIONA)
 					M.adjustOxyLoss(-M.getOxyLoss())
 
-				if(holder.has_reagent("lexorin"))
-					holder.remove_reagent("lexorin", 2*REM)
+				holder.remove_reagent("lexorin", 2*REM)
 				..()
 				return
 
@@ -1221,8 +1219,7 @@ datum
 				M.AdjustParalysis(-1)
 				M.AdjustStunned(-1)
 				M.AdjustWeakened(-1)
-				if(holder.has_reagent("mindbreaker"))
-					holder.remove_reagent("mindbreaker", 5)
+				holder.remove_reagent("mindbreaker", 5)
 				M.hallucination = max(0, M.hallucination - 10)
 				if(prob(60))	M.adjustToxLoss(1)
 				..()
@@ -1600,8 +1597,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				if(holder.has_reagent("inaprovaline"))
-					holder.remove_reagent("inaprovaline", 2*REM)
+				holder.remove_reagent("inaprovaline", 2*REM)
 				..()
 				return
 			reaction_obj(var/obj/O, var/volume)
@@ -2605,8 +2601,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
-				if(holder.has_reagent("capsaicin"))
-					holder.remove_reagent("capsaicin", 10*REAGENTS_METABOLISM)
+				holder.remove_reagent("capsaicin", 10*REAGENTS_METABOLISM)
 				..()
 				return
 
@@ -2649,7 +2644,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				..()
 				M.make_jittery(5)
-				if(adj_temp > 0 && holder.has_reagent("frostoil"))
+				if(adj_temp > 0)
 					holder.remove_reagent("frostoil", 10*REAGENTS_METABOLISM)
 
 				holder.remove_reagent(src.id, 0.1)
@@ -2821,9 +2816,9 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
 					M = holder.my_atom
-				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 				if(prob(1))
 					M.emote("shiver")
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 				if(istype(M, /mob/living/carbon/slime))
 					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 				holder.remove_reagent("capsaicin", 5)
