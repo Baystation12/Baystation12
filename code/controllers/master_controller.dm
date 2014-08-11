@@ -300,7 +300,7 @@ datum/controller/game_controller/proc/process_machines_power()
 					if(M)
 						//check if the area has power for M's channel
 						//this will keep stat updated in case the machine is moved from one area to another.
-						M.update_powered_status(A)	//we've already made sure A is a master area, above.
+						M.power_change(A)	//we've already made sure A is a master area, above.
 							
 						if(!(M.stat & NOPOWER) && M.use_power)
 							M.auto_use_power()

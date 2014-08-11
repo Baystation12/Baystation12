@@ -142,9 +142,6 @@
 	return
 
 
-/obj/machinery/sleep_console/power_change()
-	return
-	// no change - sleeper works without power (you just can't inject more)
 
 
 

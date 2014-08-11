@@ -159,15 +159,15 @@
 		del(src)
 
 /obj/machinery/body_scanconsole/power_change()
+	..()
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
-	else if(powered())
-		icon_state = initial(icon_state)
-		stat &= ~NOPOWER
 	else
-		spawn(rand(0, 15))
-			src.icon_state = "body_scannerconsole-p"
-			stat |= NOPOWER
+		if (stat & NOPOWER)
+			spawn(rand(0, 15))
+				src.icon_state = "body_scannerconsole-p"
+		else
+			icon_state = initial(icon_state)
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected

@@ -14,14 +14,14 @@
 	req_access = list(access_ai_upload)
 
 /obj/machinery/ai_slipper/power_change()
+	..()
 	if(stat & BROKEN)
 		return
 	else
-		if( powered() )
-			stat &= ~NOPOWER
-		else
+		if (stat & NOPOWER)
 			icon_state = "motion0"
-			stat |= NOPOWER
+		else
+			icon_state = initial(icon_state)
 
 /obj/machinery/ai_slipper/proc/setState(var/enabled, var/uses)
 	src.disabled = disabled

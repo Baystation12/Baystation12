@@ -34,12 +34,6 @@
 		else
 			user << "The robot part maker is full. Please remove metal from the robot part maker in order to insert more."
 
-/obj/machinery/robotic_fabricator/power_change()
-	if (powered())
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
-
 /obj/machinery/robotic_fabricator/attack_paw(user as mob)
 	return src.attack_hand(user)
 

@@ -34,11 +34,7 @@
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
-	if(powered())
-		stat &= ~NOPOWER
-	else
-		spawn(rand(0, 15))
-			stat |= NOPOWER
+	..()
 	nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/process()
@@ -315,13 +311,6 @@
 /obj/machinery/chem_master/meteorhit()
 	del(src)
 	return
-
-/obj/machinery/chem_master/power_change()
-	if(powered())
-		stat &= ~NOPOWER
-	else
-		spawn(rand(0, 15))
-			stat |= NOPOWER
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
@@ -614,18 +603,16 @@
 
 
 /obj/machinery/computer/pandemic/power_change()
-
+	..()
 	if(stat & BROKEN)
 		icon_state = (src.beaker?"mixer1_b":"mixer0_b")
 
-	else if(powered())
+	else if(!(stat & NOPOWER))
 		icon_state = (src.beaker?"mixer1":"mixer0")
-		stat &= ~NOPOWER
 
 	else
 		spawn(rand(0, 15))
 			src.icon_state = (src.beaker?"mixer1_nopower":"mixer0_nopower")
-			stat |= NOPOWER
 
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
