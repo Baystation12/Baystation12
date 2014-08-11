@@ -301,6 +301,7 @@
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
 		job_master.EquipRank(character, rank, 1)					//equips the human
+		UpdateFactionList(character)
 		EquipCustomItems(character)
 
 		//Find our spawning point.
@@ -330,6 +331,9 @@
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
+
+			//Grab some data from the character prefs for use in random news procs.
+
 			AnnounceArrival(character, rank, join_message)
 
 		else
