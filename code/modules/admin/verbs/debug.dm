@@ -310,7 +310,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		else
 			if(alert("Spawn that person a tome?",,"Yes","No")=="Yes")
 				M << "\red You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie. A tome, a message from your new master, appears on the ground."
-				new /obj/item/weapon/tome(M.loc)
+				new /obj/item/weapon/book/tome(M.loc)
 			else
 				M << "\red You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie."
 			var/glimpse=pick("1","2","3","4","5","6","7","8")

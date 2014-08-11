@@ -123,6 +123,7 @@ obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to 
 // Atlantis: No need for that copy-pasta code, just use var to store icon_states instead.
 obj/machinery/recharger/wallcharger
 	name = "wall recharger"
+	icon_state = "wrecharger0"
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"
