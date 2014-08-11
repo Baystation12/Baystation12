@@ -14,14 +14,14 @@
 		paycuts_suspicion
 			round_time = 60*10
 			message = {"Reports have leaked that Nanotrasen Inc. is planning to put paycuts into
-						effect on many of its Research Stations in Tau Ceti. Apparently these research
+						effect on many of its Research Stations in the Nyx system. Apparently these research
 						stations haven't been able to yield the expected revenue, and thus adjustments
 						have to be made."}
 			author = "Unauthorized"
 
 		paycuts_confirmation
 			round_time = 60*40
-			message = {"Earlier rumours about paycuts on Research Stations in the Tau Ceti system have
+			message = {"Earlier rumours about paycuts on Research Stations in the Nyx system have
 						been confirmed. Shockingly, however, the cuts will only affect lower tier
 						personnel. Heads of Staff will, according to our sources, not be affected."}
 			author = "Unauthorized"
@@ -29,12 +29,27 @@
 		human_experiments
 			round_time = 60*90
 			message = {"Unbelievable reports about human experimentation have reached our ears. According
-			 			to a refugee from one of the Tau Ceti Research Stations, their station, in order
+			 			to a refugee from one of the Nyx Research Stations, their station, in order
 			 			to increase revenue, has refactored several of their facilities to perform experiments
 			 			on live humans, including virology research, genetic manipulation, and \"feeding them
 			 			to the slimes to see what happens\". Allegedly, these test subjects were neither
 			 			humanified monkeys nor volunteers, but rather unqualified staff that were forced into
 			 			the experiments, and reported to have died in a \"work accident\" by Nanotrasen Inc."}
+			author = "Unauthorized"
+		
+		lost_contact
+			round_time = 60*120
+			message = {"Word has spread that NanoTrasen Central Command has lost direct contact with several research 
+						stations in the Nyx system! NanoTrasen officials deny these reports, and have refused 
+						to comment further on the matter."}
+			author = "Unauthorized"
+		
+		signals_confirm
+			round_time = 60*140
+			message = {"Station bounced signals originating from purportedly isolated stations have been discussing a 
+						\“revolution\” taking place! NanoTrasen officials have denied all rumors of mutiny 
+						aboard stations, and have sent multiple highly-armed ERT squads to many stations as 
+						part of, \“recently enacted security protocols\”. "}
 			author = "Unauthorized"
 
 	bluespace_research
@@ -43,7 +58,7 @@
 			round_time = 60*20
 			message = {"The new field of research trying to explain several interesting spacetime oddities,
 						also known as \"Bluespace Research\", has reached new heights. Of the several
-						hundred space stations now orbiting in Tau Ceti, fifteen are now specially equipped
+						hundred space stations now orbiting in Nyx, fifteen are now specially equipped
 						to experiment with and research Bluespace effects. Rumours have it some of these
 						stations even sport functional \"travel gates\" that can instantly move a whole research
 						team to an alternate reality."}
@@ -106,12 +121,22 @@
 			author = "Reporter Ro'kii Ar-Raqis"
 
 			message = {"More on the Refuge food riots: The Refuge Council has condemned NanoTrasen's withdrawal from
-			the colony, claiming \"there has been no increase in anti-NanoTrasen activity\", and \"\[the only] reason
-			NanoTrasen withdrew was because the \[Tenebrae Lupus] system's Phoron deposits have been completely mined out.
-			We have little to trade with them now\". NanoTrasen officials have denied these allegations, calling them
-			\"further proof\" of the colony's anti-NanoTrasen stance. Meanwhile, Refuge Security has been unable to quell
-			the riots. More on this at 6."}
+						the colony, claiming \"there has been no increase in anti-NanoTrasen activity\", and \"\[the only] reason
+						NanoTrasen withdrew was because the \[Tenebrae Lupus] system's Phoron deposits have been completely mined out.
+						We have little to trade with them now\". NanoTrasen officials have denied these allegations, calling them
+						\"further proof\" of the colony's anti-NanoTrasen stance. Meanwhile, Refuge Security has been unable to quell
+						the riots. More on this at 6."}
 			round_time = 60 * 60
+		
+		even_more
+			channel_name = "Nyx Daily"
+			author = "Reporter Ro'kii Ar-Raqis"
+			
+			message = {"The situation aboard the Refuge asteroid colony has grown increasingly desperate, as citizens continue to loot and rampage 
+						through the streets. What few spacecraft that the colony had owned have been stolen. NanoTrasen officials have used 
+						this, \“rampant display of barbarism\” as reason to refuse providing supplies. Currently, no outside group intends to 
+						provide relief support until the riots have subsided."}
+			round_time = 60*360
 
 
 var/global/list/newscaster_standard_feeds = list(/datum/news_announcement/bluespace_research, /datum/news_announcement/lotus_tree, /datum/news_announcement/random_junk,  /datum/news_announcement/food_riots)
