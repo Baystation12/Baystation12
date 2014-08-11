@@ -17,6 +17,7 @@
 	return
 
 /obj/machinery/computer/teleporter/initialize()
+	..()
 	var/obj/machinery/teleport/station/station = locate(/obj/machinery/teleport/station, get_step(src, dir))
 	var/obj/machinery/teleport/hub/hub
 	if(station)
