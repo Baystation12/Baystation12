@@ -1945,7 +1945,7 @@
 "aLu" = (/obj/machinery/door/airlock/glass{name = "Central Access"},/turf/simulated/floor,/area/hallway/primary/port)
 "aLv" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/plating,/area/maintenance/fsmaint)
 "aLw" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"; tag = "icon-intact-f (EAST)"},/turf/simulated/floor,/area/hallway/secondary/entry)
-"aLx" = (/obj/machinery/portable_atmospherics/scrubber/huge/stationary,/turf/simulated/floor,/area/security/brig)
+"aLx" = (/obj/machinery/portable_atmospherics/scrubber/huge,/turf/simulated/floor,/area/security/brig)
 "aLy" = (/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/floor,/area/hallway/primary/port)
 "aLz" = (/turf/simulated/floor,/area/hallway/primary/port)
 "aLA" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/hallway/primary/port)
