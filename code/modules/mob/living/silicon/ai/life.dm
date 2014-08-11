@@ -36,8 +36,7 @@
 			adjustOxyLoss(-1)
 
 		// Handle EMP-stun
-		if(stunned)
-			AdjustStunned(-1)
+		handle_stunned()
 
 		//stage = 1
 		//if (istype(src, /mob/living/silicon/ai)) // Are we not sure what we are?
