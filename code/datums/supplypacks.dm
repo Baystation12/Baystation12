@@ -235,7 +235,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/cargotrain
 	name = "Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
-	cost = 30
+	cost = 45
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Tug Crate"
 	group = "Operations"
@@ -243,7 +243,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/cargotrailer
 	name = "Cargo Train Trolley"
 	contains = list(/obj/vehicle/train/cargo/trolley)
-	cost = 20
+	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Trolley Crate"
 	group = "Operations"
