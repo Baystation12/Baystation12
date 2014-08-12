@@ -95,13 +95,13 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	captain_announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
-/datum/emergency_shuttle_controller/proc/recall()
+/datum/emergency_shuttle_controller/proc/recall(var/mob/user)
 	if (!can_recall()) return
 
-	wait_for_launch = 0
-	shuttle.cancel_launch(src)
-
 	if (evac)
+		wait_for_launch = 0
+		shuttle.cancel_launch(src)
+
 		captain_announce("The emergency shuttle has been recalled.")
 		world << sound('sound/AI/shuttlerecalled.ogg')
 
@@ -110,7 +110,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 				A.readyreset()
 		evac = 0
 	else
-		captain_announce("The scheduled crew transfer has been cancelled.")
+		user << "The crew transfer shuttle cannot be recalled."
 
 /datum/emergency_shuttle_controller/proc/can_call()
 	if (deny_shuttle)
