@@ -88,7 +88,7 @@
 	switch(type)
 		if("solid")
 			tile_dir_mode = 0
-			var/design = input("Which color?", "Floor painter") in list("standard", "red", "blue", "green", "yellow", "purple", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
+			var/design = input("Which color?", "Floor painter") in list("standard", "dark", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple", "freezer", "hydro", "showroom")
 			if(design == "standard")
 				mode = "floor"
 				mode_nice = "standard"
@@ -97,10 +97,14 @@
 				mode = "white"
 				mode_nice = "white"
 				return
+			if(design == "showroom" || design == "hydro" || design == "freezer")
+				mode = "[design]floor"
+				mode_nice = design
+				return
 			mode_nice = design
 			mode = "[replacetext(design, "-", "")]full"
 		if("corner")
-			var/design = input("Which design?", "Floor painter") in list("red", "blue", "green", "yellow", "purple", "white", "white-grey", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
+			var/design = input("Which design?", "Floor painter") in list("black", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-grey", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
 			mode_nice = "[design] corner"
 			mode = "[replacetext(design, "-", "")]corner"
 			tile_dir_mode = 2
@@ -116,7 +120,7 @@
 			else
 				tile_dir_mode = 0
 		if("side/three corners")
-			var/design = input("Which design?", "Floor painter") in list("red", "blue", "green", "yellow", "purple", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
+			var/design = input("Which design?", "Floor painter") in list("black", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
 			if(design == "white")
 				mode = "whitehall"
 				mode_nice = "white side"
