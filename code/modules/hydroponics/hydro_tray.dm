@@ -46,6 +46,7 @@
 	else
 		return 0
 
+<<<<<<< HEAD
 obj/machinery/hydroponics/process()
 
 	if(myseed && (myseed.loc != src))
@@ -140,6 +141,111 @@ obj/machinery/hydroponics/process()
 					lastproduce = age
 			if(prob(5))  // On each tick, there's a 5 percent chance the pest population will increase
 				pestlevel += 1 * HYDRO_SPEED_MULTIPLIER
+=======
+/obj/machinery/portable_atmospherics/hydroponics/process()
+
+	//Do this even if we're not ready for a plant cycle.
+	process_reagents()
+
+	// Update values every cycle rather than every process() tick.
+	if(force_update)
+		force_update = 0
+	else if(world.time < (lastcycle + cycledelay))
+		return
+	lastcycle = world.time
+
+	// Weeds like water and nutrients, there's a chance the weed population will increase.
+	// Bonus chance if the tray is unoccupied.
+	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 6 : 3))
+		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
+
+	// There's a chance for a weed explosion to happen if the weeds take over.
+	// Plants that are themselves weeds (weed_tolernace > 10) are unaffected.
+	if (weedlevel >= 10 && prob(10))
+		if(!seed || weedlevel >= seed.weed_tolerance)
+			weed_invasion()
+
+	// If there is no seed data (and hence nothing planted),
+	// or the plant is dead, process nothing further.
+	if(!seed || dead)
+		return
+
+	// Advance plant age.
+	if(prob(25)) age += 1 * HYDRO_SPEED_MULTIPLIER
+
+	//Highly mutable plants have a chance of mutating every tick.
+	if(seed.immutable == -1)
+		var/mut_prob = rand(1,100)
+		if(mut_prob <= 5) mutate(mut_prob == 1 ? 2 : 1)
+
+	// Maintain tray nutrient and water levels.
+	if(seed.nutrient_consumption > 0 && nutrilevel > 0 && prob(25))
+		nutrilevel -= max(0,seed.nutrient_consumption * HYDRO_SPEED_MULTIPLIER)
+	if(seed.water_consumption > 0 && waterlevel > 0  && prob(25))
+		waterlevel -= max(0,seed.water_consumption * HYDRO_SPEED_MULTIPLIER)
+
+	// Make sure the plant is not starving or thirsty. Adequate
+	// water and nutrients will cause a plant to become healthier.
+	var/healthmod = rand(1,3) * HYDRO_SPEED_MULTIPLIER
+	if(seed.requires_nutrients && prob(35))
+		health += (nutrilevel < 2 ? -healthmod : healthmod)
+	if(seed.requires_water && prob(35))
+		health += (waterlevel < 10 ? -healthmod : healthmod)
+
+	// Check that pressure, heat and light are all within bounds.
+	// First, handle an open system or an unconnected closed system.
+
+	var/turf/T = loc
+	var/datum/gas_mixture/environment
+
+	// If we're closed, take from our internal sources.
+	if(closed_system && (connected_port || holding))
+		environment = air_contents
+
+	// If atmos input is not there, grab from turf.
+	if(!environment)
+		if(istype(T))
+			environment = T.return_air()
+
+	if(!environment) return
+
+	// Handle gas consumption.
+	if(seed.consume_gasses && seed.consume_gasses.len)
+		var/missing_gas = 0
+		for(var/gas in seed.consume_gasses)
+			if(environment && environment.gas && environment.gas[gas] && \
+			 environment.gas[gas] >= seed.consume_gasses[gas])
+				environment.adjust_gas(gas,-seed.consume_gasses[gas],1)
+			else
+				missing_gas++
+
+		if(missing_gas > 0)
+			health -= missing_gas * HYDRO_SPEED_MULTIPLIER
+
+	// Process it.
+	var/pressure = environment.return_pressure()
+	if(pressure < seed.lowkpa_tolerance || pressure > seed.highkpa_tolerance)
+		health -= healthmod
+
+	if(abs(environment.temperature - seed.ideal_heat) > seed.heat_tolerance)
+		health -= healthmod
+
+	// Handle gas production.
+	if(seed.exude_gasses && seed.exude_gasses.len)
+		for(var/gas in seed.exude_gasses)
+			environment.adjust_gas(gas, max(1,round((seed.exude_gasses[gas]*seed.potency)/seed.exude_gasses.len)))
+	
+	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
+	if (closed_system && connected_port)
+		update_connected_network()
+
+	// Handle light requirements.
+	var/area/A = T.loc
+	if(A)
+		var/light_available
+		if(A.lighting_use_dynamic)
+			light_available = max(0,min(10,T.lighting_lumcount)-5)
+>>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 		else
 			if(waterlevel > 10 && nutrilevel > 0 && prob(10))  // If there's no plant, the percentage chance is 10%
 				weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
