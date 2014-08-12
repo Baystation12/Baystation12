@@ -231,7 +231,7 @@
 	update_icon(user)
 
 /obj/item/weapon/butterfly/switchblade
-	name = "\proper switchblade"
+	name = "switchblade"
 	desc = "A classic switchblade with gold engraving. Just holding it makes you feel like a gangster."
 	icon_state = "switchblade"
 
