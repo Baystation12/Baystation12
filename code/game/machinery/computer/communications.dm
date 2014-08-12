@@ -505,9 +505,9 @@
 		return
 
 	if(!emergency_shuttle.going_to_centcom()) //check that shuttle isn't already heading to centcomm
-		emergency_shuttle.recall()
-		log_game("[key_name(user)] has recalled the shuttle.")
-		message_admins("[key_name_admin(user)] has recalled the shuttle.", 1)
+		emergency_shuttle.recall(user)
+		log_game("[key_name(user)] has used the console to recall the shuttle.")
+		message_admins("[key_name_admin(user)] has used the console to recall the shuttle.", 1)
 	return
 
 /obj/machinery/computer/communications/proc/post_status(var/command, var/data1, var/data2)
