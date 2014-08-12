@@ -28,12 +28,13 @@ obj/machinery/scanner/New()
 	use_power(50)
 
 /obj/machinery/scanner/power_change()
-	..()
-	if(stat & NOPOWER)
+	if(!powered())
 		spawn(rand(0, 15))
 			icon_state = "scanner_off"
+			stat |= NOPOWER
 	else
 		icon_state = "scanner_idle"
+		stat &= ~NOPOWER
 
 obj/machinery/scanner/attack_hand(mob/living/carbon/human/user)
 	if(stat & NOPOWER)

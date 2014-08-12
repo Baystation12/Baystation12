@@ -38,7 +38,6 @@
 	icon_state = "igniter[on]"
 
 /obj/machinery/igniter/power_change()
-	..()
 	if(!( stat & NOPOWER) )
 		icon_state = "igniter[src.on]"
 	else
@@ -61,12 +60,12 @@
 	..()
 
 /obj/machinery/sparker/power_change()
-	..()
-	if ( !(stat & NOPOWER) && disable == 0 )
-		
+	if ( powered() && disable == 0 )
+		stat &= ~NOPOWER
 		icon_state = "[base_state]"
 //		src.sd_SetLuminosity(2)
 	else
+		stat |= ~NOPOWER
 		icon_state = "[base_state]-p"
 //		src.sd_SetLuminosity(0)
 

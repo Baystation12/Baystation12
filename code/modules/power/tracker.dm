@@ -11,8 +11,7 @@
 	anchored = 1
 	density = 1
 	directwired = 1
-	use_power = 0 // doesn't use APC power
-	var/power_usage = 500	//W
+	use_power = 0
 
 	var/sun_angle = 0		// sun angle as set by sun datum
 
@@ -74,7 +73,10 @@
 // make sure we can draw power from the powernet
 /obj/machinery/power/tracker/process()
 
-	if(surplus() >= power_usage && add_load(power_usage) >= power_usage)
+	var/avail = surplus()
+
+	if(avail > 500)
+		add_load(500)
 		stat &= ~NOPOWER
 	else
 		stat |= NOPOWER

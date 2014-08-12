@@ -14,10 +14,6 @@
 	var/net_id
 	var/list/areas_added
 	var/list/users_to_open
-	
-	power_channel = ENVIRON
-	use_power = 1
-	idle_power_usage = 5
 
 /obj/machinery/door/firedoor/New()
 	. = ..()
@@ -70,6 +66,15 @@
 			attack_hand(M)
 	return 0
 
+
+/obj/machinery/door/firedoor/power_change()
+	if(powered(ENVIRON))
+		stat &= ~NOPOWER
+	else
+		stat |= NOPOWER
+	return
+
+
 /obj/machinery/door/firedoor/attack_hand(mob/user as mob)
 	add_fingerprint(user)
 	if(operating)
@@ -95,9 +100,6 @@
 		return
 	if(user.stat || user.stunned || user.weakened || user.paralysis || (!user.canmove && !isAI(user)) || (get_dist(src, user) > 1  && !isAI(user)))
 		user << "Sorry, you must remain able bodied and close to \the [src] in order to use it."
-		return
-	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
-		user << "\The [src] is not functioning, you'll have to force it open manually."
 		return
 
 	var/needs_to_close = 0
@@ -161,10 +163,10 @@
 			else
 				user.visible_message("\red \The [user] forces \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \a [C]!",\
 					"You force \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \the [C]!",\
-					"You hear metal strain and groan, and a door [density ? "opening" : "closing"].")
+					"You hear metal strain and groan, and a door [density ? "open" : "close"].")
 			if(density)
 				spawn(0)
-					open(1)
+					open()
 			else
 				spawn(0)
 					close()
@@ -173,7 +175,7 @@
 
 
 /obj/machinery/door/firedoor/proc/latetoggle()
-	if(operating || !nextstate)
+	if(operating || stat & NOPOWER || !nextstate)
 		return
 	switch(nextstate)
 		if(OPEN)
@@ -188,12 +190,7 @@
 	latetoggle()
 	return ..()
 
-/obj/machinery/door/firedoor/open(var/forced = 0)
-	if (!forced)
-		if (stat & BROKEN|NOPOWER)
-			return //needs power to open unless it was forced
-		else
-			use_power(360)
+/obj/machinery/door/firedoor/open()
 	latetoggle()
 	return ..()
 

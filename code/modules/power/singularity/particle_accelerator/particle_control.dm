@@ -10,7 +10,7 @@
 	density = 1
 	use_power = 0
 	idle_power_usage = 500
-	active_power_usage = 70000 //70 kW per unit of strength
+	active_power_usage = 10000
 	construction_state = 0
 	active = 0
 	dir = 1
@@ -20,7 +20,6 @@
 
 /obj/machinery/particle_accelerator/control_box/New()
 	connected_parts = list()
-	active_power_usage = initial(active_power_usage) * (strength + 1)
 	..()
 
 
@@ -30,7 +29,7 @@
 
 /obj/machinery/particle_accelerator/control_box/update_state()
 	if(construction_state < 3)
-		update_use_power(0)
+		use_power = 0
 		assembled = 0
 		active = 0
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
@@ -40,7 +39,7 @@
 		connected_parts = list()
 		return
 	if(!part_scan())
-		update_use_power(1)
+		use_power = 1
 		active = 0
 		connected_parts = list()
 
@@ -88,7 +87,6 @@
 	else if(href_list["scan"])
 		src.part_scan()
 	else if(href_list["strengthup"])
-		var/old_strength = strength
 		strength++
 		if(strength > 2)
 			strength = 2
@@ -99,13 +97,8 @@
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = strength
 			part.update_icon()
-		
-		if (strength != old_strength)
-			active_power_usage = initial(active_power_usage) * (strength + 1)
-			use_power(0) //update power usage
 
 	else if(href_list["strengthdown"])
-		var/old_strength = strength
 		strength--
 		if(strength < 0)
 			strength = 0
@@ -114,10 +107,6 @@
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = strength
 			part.update_icon()
-		
-		if (strength != old_strength)
-			active_power_usage = initial(active_power_usage) * (strength + 1)
-			use_power(0) //update power usage
 	src.updateDialog()
 	src.update_icon()
 	return
@@ -127,9 +116,9 @@
 	..()
 	if(stat & NOPOWER)
 		active = 0
-		update_use_power(0)
+		use_power = 0
 	else if(!stat && construction_state == 3)
-		update_use_power(1)
+		use_power = 1
 	return
 
 
@@ -199,13 +188,13 @@
 /obj/machinery/particle_accelerator/control_box/proc/toggle_power()
 	src.active = !src.active
 	if(src.active)
-		update_use_power(2)
+		src.use_power = 2
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = src.strength
 			part.powered = 1
 			part.update_icon()
 	else
-		update_use_power(1)
+		src.use_power = 1
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = null
 			part.powered = 0

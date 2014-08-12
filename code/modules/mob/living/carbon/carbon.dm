@@ -105,7 +105,6 @@
 	if (shock_damage<1)
 		return 0
 	
-<<<<<<< HEAD
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
 	
 	playsound(loc, "sparks", 50, 1, -1)
@@ -123,26 +122,6 @@
 			"\red You feel a mild shock course through your body.", \
 			"\red You hear a light zapping." \
 		)
-=======
-	src.take_overall_damage(0,shock_damage,used_weapon="Electrocution")
-	//src.burn_skin(shock_damage)
-	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
-	//src.updatehealth()
-	src.visible_message(
-		"\red [src] was shocked by the [source]!", \
-		"\red <B>You feel a powerful shock course through your body!</B>", \
-		"\red You hear a heavy electrical crack." \
-	)
-//	if(src.stunned < shock_damage)	src.stunned = shock_damage
-	Stun(10)//This should work for now, more is really silly and makes you lay there forever
-//	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff
-	Weaken(10)
-	
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, loc)
-	s.start()
-	
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 	return shock_damage
 
 

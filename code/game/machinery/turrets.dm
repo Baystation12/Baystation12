@@ -93,11 +93,10 @@
 	return (popping!=0)
 
 /obj/machinery/turret/power_change()
-	..()
 	if(stat & BROKEN)
 		icon_state = "grey_target_prism"
 	else
-		if( !(stat & NOPOWER) )
+		if( powered() )
 			if (src.enabled)
 				if (src.lasers)
 					icon_state = "orange_target_prism"

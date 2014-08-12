@@ -296,15 +296,7 @@ datum/controller/game_controller/proc/process_machines_power()
 			for(var/area/SubArea in A.related)
 				for(var/obj/machinery/M in SubArea)
 					if(M)
-<<<<<<< HEAD
 						if(M.use_power)
-=======
-						//check if the area has power for M's channel
-						//this will keep stat updated in case the machine is moved from one area to another.
-						M.power_change(A)	//we've already made sure A is a master area, above.
-							
-						if(!(M.stat & NOPOWER) && M.use_power)
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 							M.auto_use_power()
 
 		if(A.apc.len && A.master == A)

@@ -488,11 +488,12 @@ var/list/solars_list = list()
 
 
 /obj/machinery/power/solar_control/power_change()
-	..()
-	if(!(stat & NOPOWER))
+	if(powered())
+		stat &= ~NOPOWER
 		update_icon()
 	else
 		spawn(rand(0, 15))
+			stat |= NOPOWER
 			update_icon()
 
 

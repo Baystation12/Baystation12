@@ -118,16 +118,17 @@
 		src.throw_item()
 
 /obj/machinery/smartfridge/power_change()
-	..()
-	if( !(stat & NOPOWER) )
+	if( powered() )
 		src.ispowered = 1
+		stat &= ~NOPOWER
 		if(!isbroken)
 			icon_state = icon_on
 	else
 		spawn(rand(0, 15))
-			src.ispowered = 0
-			if(!isbroken)
-				icon_state = icon_off
+		src.ispowered = 0
+		stat |= NOPOWER
+		if(!isbroken)
+			icon_state = icon_off
 
 /*******************
 *   Item Adding

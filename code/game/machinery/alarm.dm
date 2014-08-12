@@ -1160,7 +1160,10 @@ table tr:first-child th:first-child { border: none;}
 	return ..()
 
 /obj/machinery/alarm/power_change()
-	..()
+	if(powered(power_channel))
+		stat &= ~NOPOWER
+	else
+		stat |= NOPOWER
 	spawn(rand(0,15))
 		update_icon()
 
@@ -1368,9 +1371,13 @@ FIRE ALARM
 	return
 
 /obj/machinery/firealarm/power_change()
-	..()
-	spawn(rand(0,15))
+	if(powered(ENVIRON))
+		stat &= ~NOPOWER
 		update_icon()
+	else
+		spawn(rand(0,15))
+			stat |= NOPOWER
+			update_icon()
 
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))

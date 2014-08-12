@@ -276,15 +276,15 @@
 		del(src)
 
 /obj/machinery/computer/scan_consolenew/power_change()
-	..()
 	if(stat & BROKEN)
 		icon_state = "broken"
+	else if(powered())
+		icon_state = initial(icon_state)
+		stat &= ~NOPOWER
 	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "c_unpowered"
-		else
-			icon_state = initial(icon_state)
+		spawn(rand(0, 15))
+			src.icon_state = "c_unpowered"
+			stat |= NOPOWER
 
 /obj/machinery/computer/scan_consolenew/New()
 	..()

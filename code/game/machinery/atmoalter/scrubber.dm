@@ -98,7 +98,6 @@
 			environment = holding.air_contents
 		else
 			environment = loc.return_air()
-<<<<<<< HEAD
 		var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles()
 
 		//Take a gas sample
@@ -141,28 +140,6 @@
 			else
 				loc.assume_air(removed)
 		//src.update_icon()
-=======
-		
-		var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
-		
-		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
-	
-	if (power_draw < 0)
-		last_flow_rate = 0
-		last_power_draw = 0
-	else
-		power_draw = max(power_draw, power_losses)
-		cell.use(power_draw * CELLRATE)
-		last_power_draw = power_draw
-		
-		update_connected_network()
-		
-		//ran out of charge
-		if (!cell.charge)
-			update_icon()
-	
-	//src.update_icon()
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 	src.updateDialog()
 	return
 
@@ -226,108 +203,4 @@ Power regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?src=\
 	else
 		usr << browse(null, "window=scrubber")
 		return
-<<<<<<< HEAD
 	return
-=======
-	return
-
-
-//Huge scrubber
-/obj/machinery/portable_atmospherics/powered/scrubber/huge
-	name = "Huge Air Scrubber"
-	icon_state = "scrubber:0"
-	anchored = 1
-	volume = 50000
-	volume_rate = 5000
-
-	chan
-	use_power = 1
-	idle_power_usage = 500		//internal circuitry, friction losses and stuff
-	active_power_usage = 100000	//100 kW ~ 135 HP
-	
-	var/global/gid = 1
-	var/id = 0
-	
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/New()
-	..()
-	cell = null
-	
-	id = gid
-	gid++
-
-	name = "[name] (ID [id])"
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
-		usr << "\blue You can't directly interact with this machine. Use the scrubber control console."
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/update_icon()
-	src.overlays = 0
-
-	if(on && !(stat & (NOPOWER|BROKEN)))
-		icon_state = "scrubber:1"
-	else
-		icon_state = "scrubber:0"
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/power_change()
-	var/old_stat = stat
-	..()
-	if (old_stat != stat)
-		update_icon()
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/process()
-	if(!on || (stat & (NOPOWER|BROKEN)))
-		update_use_power(0)
-		last_flow_rate = 0
-		last_power_draw = 0
-		return 0
-	
-	var/power_draw = -1
-
-	var/datum/gas_mixture/environment = loc.return_air()
-	
-	var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
-	
-	power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, active_power_usage)
-	
-	if (power_draw < 0)
-		last_flow_rate = 0
-		last_power_draw = 0
-	else
-		last_power_draw = handle_power_draw(power_draw)
-		update_connected_network()
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/wrench))
-		if(on)
-			user << "\blue Turn it off first!"
-			return
-
-		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		user << "\blue You [anchored ? "wrench" : "unwrench"] \the [src]."
-
-		return
-	
-	//doesn't use power cells
-	if(istype(I, /obj/item/weapon/cell))
-		return
-	if (istype(I, /obj/item/weapon/screwdriver))
-		return
-	
-	//doesn't hold tanks
-	if(istype(I, /obj/item/weapon/tank))
-		return
-
-	..()
-
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
-	name = "Stationary Air Scrubber"
-
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/wrench))
-		user << "\blue The bolts are too tight for you to unscrew!"
-		return
-
-	..()
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72

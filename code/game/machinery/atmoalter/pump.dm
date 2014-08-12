@@ -67,7 +67,6 @@
 				else
 					loc.assume_air(removed)
 		else
-<<<<<<< HEAD
 			var/pressure_delta = target_pressure - air_contents.return_pressure()
 			//Can not have a pressure delta that would cause environment pressure > tank pressure
 
@@ -85,34 +84,6 @@
 				air_contents.merge(removed)
 		//src.update_icon()
 
-=======
-			pressure_delta = target_pressure - air_contents.return_pressure()
-			output_volume = air_contents.volume * air_contents.group_multiplier
-			air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
-		
-		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		
-		if (pressure_delta > 0.01)
-			if (direction_out)
-				power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
-			else
-				power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
-	
-	if (power_draw < 0)
-		last_flow_rate = 0
-		last_power_draw = 0
-	else
-		power_draw = max(power_draw, power_losses)
-		cell.use(power_draw * CELLRATE)
-		last_power_draw = power_draw
-		
-		update_connected_network()
-		
-		//ran out of charge
-		if (!cell.charge)
-			update_icon()
-	
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 	src.updateDialog()
 	return
 

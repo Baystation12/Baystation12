@@ -88,8 +88,8 @@
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
 				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				load = add_load(load)		// add the load to the terminal side network
 				charge += load * SMESRATE	// increase the charge
+				add_load(load)		// add the load to the terminal side network
 
 			else					// if not enough capcity
 				charging = 0		// stop charging
@@ -186,8 +186,7 @@
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		return terminal.powernet.draw_power(amount)
-	return 0
+		terminal.powernet.newload += amount
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)

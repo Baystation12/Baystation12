@@ -20,12 +20,11 @@
 
 /obj/machinery/power/proc/add_load(var/amount)
 	if(powernet)
-		return powernet.draw_power(amount)
-	return 0
+		powernet.newload += amount
 
 /obj/machinery/power/proc/surplus()
 	if(powernet)
-		return powernet.surplus()
+		return powernet.avail-powernet.load
 	else
 		return 0
 
@@ -65,27 +64,17 @@
 	if(!autocalled)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
-//The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
-/obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change
+/obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
 										// can override if needed
-	var/has_power
-	if (master_area)
-		has_power = master_area.powered(power_channel)
-	else
-		has_power = powered(power_channel)
-	
-	if(has_power)
+	if(powered(power_channel))
 		stat &= ~NOPOWER
 	else
 
 		stat |= NOPOWER
 	return
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a2945a00d76b7f9e74d29ad50d35584f8e980b72
 // the powernet datum
 // each contiguous network of cables & nodes
 
@@ -402,19 +391,6 @@
 					error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
 					nodes.Remove(S)
 
-
-//Returns the amount of available power
-/datum/powernet/proc/surplus()
-	return max(avail - newload, 0)
-
-//Attempts to draw power from a powernet. Returns the actual amount of power drawn
-/datum/powernet/proc/draw_power(var/requested_amount)
-	var/surplus = max(avail - newload, 0)
-	var/actual_draw = min(requested_amount, surplus)
-	newload += actual_draw
-	
-	return actual_draw
-
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)/*
 		if (1300000 to INFINITY)
@@ -567,11 +543,11 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power(drained_energy)
+		source_area.use_power(drained_energy/CELLRATE)
 	else if (istype(power_source,/datum/powernet))
-		//var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"  <<< NO. THIS IS WRONG. CELLRATE DOES NOT CONVERT TO OR FROM JOULES.
-		PN.draw_power(drained_energy)
+		var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"
+		PN.newload+=drained_power
 	else if (istype(power_source, /obj/item/weapon/cell))
-		cell.use(drained_energy*CELLRATE) //convert to units of charge.
+		cell.use(drained_energy)
 	return drained_energy
 

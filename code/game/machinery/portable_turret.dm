@@ -264,12 +264,10 @@ Status: []<BR>"},
 	if(!anchored)
 		icon_state = "turretCover"
 		return
-	
-	..()
 	if(stat & BROKEN)
 		icon_state = "[lasercolor]destroyed_target_prism"
 	else
-		if( !(stat & NOPOWER) )
+		if( powered() )
 			if (on)
 				if (installation == /obj/item/weapon/gun/energy/laser || installation == /obj/item/weapon/gun/energy/pulse_rifle)
 					// laser guns and pulse rifles have an orange icon
@@ -279,9 +277,11 @@ Status: []<BR>"},
 					icon_state = "[lasercolor]target_prism"
 			else
 				icon_state = "[lasercolor]grey_target_prism"
+			stat &= ~NOPOWER
 		else
 			spawn(rand(0, 15))
 				src.icon_state = "[lasercolor]grey_target_prism"
+				stat |= NOPOWER
 
 
 

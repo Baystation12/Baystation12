@@ -1144,8 +1144,7 @@
 
 /obj/machinery/power/apc/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		return terminal.powernet.draw_power(amount)
-	return 0
+		terminal.powernet.newload += amount
 
 /obj/machinery/power/apc/avail()
 	if(terminal)
@@ -1177,7 +1176,13 @@
 	var/last_ch = charging
 
 	var/excess = surplus()
-	var/power_excess = 0
+
+	if(!src.avail())
+		main_status = 0
+	else if(excess < 0)
+		main_status = 1
+	else
+		main_status = 2
 
 	var/perapc = 0
 	if(terminal && terminal.powernet)
@@ -1190,35 +1195,36 @@
 		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
 
-		// try to draw power from the grid
-		if (!src.avail())
-			main_status = 0
-		else
-			var/power_drawn = add_load(perapc)
-			
-			//figure out how much power is left over after meeting demand
-			power_excess = power_drawn - lastused_total
-			
-			if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
-				main_status = 1
+		// draw power from cell as before
+
+		var/cellused = min(cell.charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
+		cell.use(cellused)
+
+		if(excess > 0 || perapc > lastused_total)		// if power excess, or enough anyway, recharge the cell
+														// by the same amount just used
+			cell.give(cellused)
+			add_load(cellused/CELLRATE)		// add the load used to recharge the cell
+
+
+		else		// no excess, and not enough per-apc
+
+			if( (cell.charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
+
+				cell.give(CELLRATE * perapc)	//recharge with what we can
+				add_load(perapc)		// so draw what we can from the grid
 				charging = 0
-			
-				var/required_power = -power_excess
-				if( (cell.charge/CELLRATE) >= required_power)	// can we draw enough from cell to cover what's left over?
-					cell.use(required_power*CELLRATE)
 
-				else if (autoflag != 0)	// not enough power available to run the last tick!
-					chargecount = 0
-					// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
-					equipment = autoset(equipment, 0)
-					lighting = autoset(lighting, 0)
-					environ = autoset(environ, 0)
-					autoflag = 0
-			
-			else
-				main_status = 2
+			else if (autoflag != 0)	// not enough power available to run the last tick!
+				charging = 0
+				chargecount = 0
+				// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
+				equipment = autoset(equipment, 0)
+				lighting = autoset(lighting, 0)
+				environ = autoset(environ, 0)
+				autoflag = 0
 
-		// Set channels depending on how much charge we have left
+
+		// set channels depending on how much charge we have left
 
 		// Allow the APC to operate as normal if the cell can charge
 		if(charging && longtermpower < 10)
@@ -1261,9 +1267,10 @@
 		// now trickle-charge the cell
 
 		if(chargemode && charging == 1 && operating)
-			if(power_excess > 0) // check to make sure we have enough to charge
-				// Max charge is available excess power, capped to cell capacity, or % per second constant (Whichever is smallest)
-				var/ch = min(power_excess*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
+			if(excess > 0)		// check to make sure we have enough to charge
+				// Max charge is perapc share, capped to cell capacity, or % per second constant (Whichever is smallest)
+				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
+				add_load(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch) // actually recharge the cell
 
 			else
@@ -1271,13 +1278,13 @@
 				chargecount = 0
 
 		// show cell as fully charged if so
+
 		if(cell.charge >= cell_maxcharge)
 			charging = 2
 
-		//if we have excess power for long enough, think about re-enable charging.
 		if(chargemode)
 			if(!charging)
-				if(power_excess*CELLRATE >= cell_maxcharge*CHARGELEVEL)
+				if(excess > cell_maxcharge*CHARGELEVEL)
 					chargecount++
 				else
 					chargecount = 0
@@ -1313,21 +1320,21 @@
 	src.updateDialog()
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
-// on 0=off, 1=auto-on, 2=auto-off
+// on 0=off, 1=on, 2=autooff
 
 /proc/autoset(var/val, var/on)
 
-	if(on==0) // turn things off
+	if(on==0)
 		if(val==2)			// if on, return off
 			return 0
 		else if(val==3)		// if auto-on, return auto-off
 			return 1
 
-	else if(on==1) // turn things auto-on
+	else if(on==1)
 		if(val==1)			// if auto-off, return auto-on
 			return 3
 
-	else if(on==2) // turn things auto-off
+	else if(on==2)
 		if(val==3)			// if auto-on, return auto-off
 			return 1
 
