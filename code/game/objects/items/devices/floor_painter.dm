@@ -120,7 +120,7 @@
 			else
 				tile_dir_mode = 0
 		if("side/three corners")
-			var/design = input("Which design?", "Floor painter") in list("black", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple")
+			var/design = input("Which design?", "Floor painter") in list("black", "red", "blue", "green", "yellow", "purple", "neutral", "white", "white-red", "white-blue", "white-green", "white-yellow", "white-purple", "red-yellow", "red-blue", "blue-red", "red-green", "green-yellow", "green-blue", "blue-yellow")
 			if(design == "white")
 				mode = "whitehall"
 				mode_nice = "white side"
@@ -130,7 +130,7 @@
 				mode = replacetext(design, "-", "")
 				tile_dir_mode = 1
 		if("special")
-			var/design = input("Which design?", "Floor painter") in list("arrival", "escape", "caution", "warning", "white-warning", "white-blue-green", "loadingarea", "delivery", "bot")
+			var/design = input("Which design?", "Floor painter") in list("arrival", "escape", "caution", "warning", "white-warning", "white-blue-green", "loadingarea", "delivery", "bot", "white-delivery", "white-bot")
 			if(design == "white-blue-green")
 				mode_nice = design
 				mode = "whitebluegreencorners"
