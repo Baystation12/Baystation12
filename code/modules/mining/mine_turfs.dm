@@ -27,8 +27,22 @@
 	has_resources = 1
 
 /turf/simulated/mineral/New()
+
 	. = ..()
+
 	MineralSpread()
+
+	spawn(2)
+		var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
+		for(var/direction in step_overlays)
+			var/turf/turf_to_check = get_step(src,step_overlays[direction])
+
+			if(istype(turf_to_check,/turf/simulated/floor/plating/airless/asteroid))
+				var/turf/simulated/floor/plating/airless/asteroid/T = turf_to_check
+				T.updateMineralOverlays()
+
+			else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
+				turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
 /turf/simulated/mineral/ex_act(severity)
 	switch(severity)
@@ -122,7 +136,7 @@
 			var/datum/find/F = finds[1]
 			if(excavation_level + P.excavation_amount > F.excavation_required)
 				//Chance to destroy / extract any finds here
-				fail_message = ", <b>[pick("there is a crunching noise","[W] collides with some different rock","part of the rock face crumbles away","something breaks under [W]")]</b>"
+				fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
 
 		user << "\red You start [P.drill_verb][fail_message ? fail_message : ""]."
 
@@ -199,13 +213,6 @@
 				excav_overlay = "overlay_excv[excav_quadrant]_[rand(1,3)]"
 				overlays += excav_overlay
 
-			/* Nope.
-			//extract pesky minerals while we're excavating
-			while(excavation_minerals.len && excavation_level > excavation_minerals[excavation_minerals.len])
-				DropMineral()
-				pop(excavation_minerals)
-				mineralAmt-- */
-
 			//drop some rocks
 			next_rock += P.excavation_amount * 10
 			while(next_rock > 100)
@@ -254,6 +261,7 @@
 			M.apply_effect(25, IRRADIATE)
 
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
+	for(var/i=0;i<rand(5);i++) N.overlay_detail = "asteroid[rand(0,9)]" //Add some rubble,  you did just clear out a big chunk of rock.
 	N.updateMineralOverlays(1)
 
 	if(rand(1,500) == 1)
@@ -346,7 +354,6 @@
 
 	. = ..()
 
-
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
 	mineralSpawnChanceList = list("Uranium" = 10, "Platinum" = 10, "Iron" = 20, "Coal" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 20)
@@ -369,14 +376,10 @@
 
 /turf/simulated/floor/plating/airless/asteroid/New()
 
-	var/proper_name = name
-	name = proper_name
+	. = ..()
 
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
-
-	updateMineralOverlays()
-	..()
 
 /turf/simulated/floor/plating/airless/asteroid/ex_act(severity)
 	switch(severity)
@@ -456,19 +459,16 @@
 
 /turf/simulated/floor/plating/airless/asteroid/proc/updateMineralOverlays(var/update_neighbors)
 
-	world << "updateMineralOverlays called with [update_neighbors]."
-	spawn(1)
-		world << "spawn called"
-
+	spawn(2)
 		overlays.Cut()
-		var/list/step_overlays = list(NORTH = "s", SOUTH = "n", EAST = "w", WEST = "e")
+		var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
 		for(var/direction in step_overlays)
 
-			if(istype(get_step(src, direction), /turf/space))
-				overlays += image('icons/turf/floors.dmi', "asteroid_edge_[step_overlays[direction]]")
+			if(istype(get_step(src, step_overlays[direction]), /turf/space))
+				overlays += image('icons/turf/floors.dmi', "asteroid_edge_[direction]")
 
-			if(istype(get_step(src, direction), /turf/simulated/mineral))
-				overlays += image('icons/turf/walls.dmi', "rock_side_[step_overlays[direction]]")
+			if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
+				overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
 		if(overlay_detail) overlays += overlay_detail
 
@@ -480,7 +480,6 @@
 				if(istype(get_step(src, direction), /turf/simulated/floor/plating/airless/asteroid))
 					A = get_step(src, direction)
 					A.updateMineralOverlays()
-
 
 /turf/simulated/floor/plating/airless/asteroid/Entered(atom/movable/M as mob|obj)
 	..()

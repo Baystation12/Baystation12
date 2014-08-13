@@ -113,6 +113,11 @@ datum/controller/game_controller/proc/setup_objects()
 	asteroid_ore_map = new /datum/ore_distribution()
 	asteroid_ore_map.populate_distribution_map()
 
+	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
+	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+		T.updateMineralOverlays()
+		T.name = "asteroid"
+
 	//Set up spawn points.
 	populate_spawn_points()
 
@@ -301,7 +306,7 @@ datum/controller/game_controller/proc/process_machines_power()
 						//check if the area has power for M's channel
 						//this will keep stat updated in case the machine is moved from one area to another.
 						M.power_change(A)	//we've already made sure A is a master area, above.
-							
+
 						if(!(M.stat & NOPOWER) && M.use_power)
 							M.auto_use_power()
 

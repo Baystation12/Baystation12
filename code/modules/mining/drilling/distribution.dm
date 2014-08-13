@@ -162,11 +162,6 @@ Deep minerals:
 
 					target_turf = locate(tx+j, ty+i, asteroid_z)
 
-					//Very shitty fix for the asteroid turf overlays being screwy.
-					if(target_turf && istype(target_turf,/turf/simulated/floor/plating/airless/asteroid))
-						var/turf/simulated/floor/plating/airless/asteroid/T = target_turf
-						T.updateMineralOverlays()
-
 					if(target_turf && target_turf.has_resources)
 						target_turf.resources = list()
 						target_turf.resources["silicates"] = rand(3,5)
