@@ -851,7 +851,7 @@
 /obj/item/clothing/suit/storage/labcoat/fluff/mit
 	name = "MiT Labcoat"
 	desc = "A lab coat from the Martian Institute of Technology with the name 'Dr. Lucina Franco' embroidered onto the right breast pocket."
-	icon = 'icons/obj/custom_tiems.dmi'
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mitlabcoat"
 	item_state = "mitlabcoat"
 
