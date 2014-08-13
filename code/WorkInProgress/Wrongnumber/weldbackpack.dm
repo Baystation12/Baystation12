@@ -34,13 +34,15 @@
 	user << "\blue The tank scoffs at your insolence.  It only provides services to welders."
 	return
 
-/obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob)
-	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.reagents.total_volume < max_fuel)
+/obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
+	if(!proximity) // this replaces and improves the get_dist checks commented out below
+		return
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) /*&& get_dist(src,O) <= 1*/ && src.reagents.total_volume < max_fuel)
 		O.reagents.trans_to(src, max_fuel)
 		user << "\blue You crack the cap off the top of the pack and fill it back up again from the tank."
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
-	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.reagents.total_volume == max_fuel)
+	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) /*&& get_dist(src,O) <= 1*/ && src.reagents.total_volume == max_fuel)
 		user << "\blue The pack is already full!"
 		return
 

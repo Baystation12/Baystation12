@@ -114,7 +114,9 @@
 		return
 	..()
 
-/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob)
+/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob, proximity)
+	if(!proximity)
+		return
 	if(istype(A,/obj/item) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
