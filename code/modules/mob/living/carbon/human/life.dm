@@ -459,6 +459,7 @@
 		var/safe_toxins_max = 0.005
 		var/SA_para_min = 1
 		var/SA_sleep_min = 5
+		var/inhaled_gas_used = 0
 
 		var/breath_pressure = (breath.total_moles()*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
 
@@ -517,6 +518,7 @@
 				 // The hell? By definition ratio > 1, and HUMAN_MAX_OXYLOSS = 1... why do we even have this?
 				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS))
 				failed_inhale = 1
+				inhaled_gas_used = inhaling*ratio/6
 
 			else
 
@@ -527,39 +529,29 @@
 
 		else
 			// We're in safe limits
+			inhaled_gas_used = inhaling/6
 			oxygen_alert = 0
-		var/exhale_amt = 0
+
 		switch(species.breath_type)
 			if("nitrogen")
-				exhale_amt = breath.nitrogen
-				breath.nitrogen = 0
+				breath.nitrogen -= inhaled_gas_used
 			if("phoron")
-				exhale_amt = breath.phoron
-				breath.phoron = 0
+				breath.phoron -= inhaled_gas_used
 			if("carbon_dioxide")
-				exhale_amt = breath.carbon_dioxide
-				breath.carbon_dioxide = 0
+				breath.carbon_dioxide-= inhaled_gas_used
 			else
-				exhale_amt = (breath.oxygen + breath.nitrogen) // Haxy fix (see below)
-				breath.oxygen = 0
-				breath.nitrogen = 0
-		// Haxy fix - N2 buildup caused by breathing
-		// If you have room filled with breathing human mobs the oxygen level eventually reaches 0 even with vent.
-		// Our distro has 80% nitrogen and 20% oxygen (+-). However, humans take only part of this oxygen and convert it to CO2
-		// Basically, we change some oxygen into CO2, CO2 gets scrubbed, pressure drops a little, vents refill with N2 O2 mix.
-		// However, we didn't breath any nitrogen which eventually leads to O2 being mostly replaced with N2.
-		// This only happens with lots of mobs on one place, but may be actual for, for example, Dormitories.
-		// This fix causes mobs to turn all inhaled gas into CO2, which while hacky prevents this from happening.
+				breath.oxygen -= inhaled_gas_used
+
 		if(!no_exhale)
 			switch(species.exhale_type)
 				if("oxygen")
-					breath.oxygen += exhale_amt
+					breath.oxygen += inhaled_gas_used
 				if("nitrogen")
-					breath.nitrogen += exhale_amt
+					breath.nitrogen += inhaled_gas_used
 				if("phoron")
-					breath.phoron += exhale_amt
+					breath.phoron += inhaled_gas_used
 				if("carbon_dioxide")
-					breath.carbon_dioxide += exhale_amt
+					breath.carbon_dioxide += inhaled_gas_used
 
 		// Too much exhaled gas in the air
 		if(exhaled_pp > safe_exhaled_max)
