@@ -11,76 +11,82 @@
 
 	var/maximum_pressure = 90*ONE_ATMOSPHERE
 
-	New()
-		..()
+/obj/machinery/portable_atmospherics/New()
+	..()
 
-		air_contents.volume = volume
-		air_contents.temperature = T20C
+	air_contents.volume = volume
+	air_contents.temperature = T20C
 
-		return 1
+	return 1
 
-	initialize()
-		. = ..()
-		spawn()
-			var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
-			if(port)
-				connect(port)
-				update_icon()
-
-	process()
-		if(!connected_port) //only react when pipe_network will ont it do it for you
-			//Allow for reactions
-			air_contents.react()
-		else
+/obj/machinery/portable_atmospherics/initialize()
+	. = ..()
+	spawn()
+		var/obj/machinery/atmospherics/portables_connector/port = locate() in loc
+		if(port)
+			connect(port)
 			update_icon()
 
-	Del()
-		del(air_contents)
+/obj/machinery/portable_atmospherics/process()
+	if(!connected_port) //only react when pipe_network will ont it do it for you
+		//Allow for reactions
+		air_contents.react()
+	else
+		update_icon()
 
-		..()
+/obj/machinery/portable_atmospherics/Del()
+	del(air_contents)
 
-	update_icon()
-		return null
+	..()
 
-	proc
+/obj/machinery/portable_atmospherics/update_icon()
+	return null
 
-		connect(obj/machinery/atmospherics/portables_connector/new_port)
-			//Make sure not already connected to something else
-			if(connected_port || !new_port || new_port.connected_device)
-				return 0
+/obj/machinery/portable_atmospherics/proc/connect(obj/machinery/atmospherics/portables_connector/new_port)
+	//Make sure not already connected to something else
+	if(connected_port || !new_port || new_port.connected_device)
+		return 0
 
-			//Make sure are close enough for a valid connection
-			if(new_port.loc != loc)
-				return 0
+	//Make sure are close enough for a valid connection
+	if(new_port.loc != loc)
+		return 0
 
-			//Perform the connection
-			connected_port = new_port
-			connected_port.connected_device = src
+	//Perform the connection
+	connected_port = new_port
+	connected_port.connected_device = src
 
-			anchored = 1 //Prevent movement
+	anchored = 1 //Prevent movement
 
-			//Actually enforce the air sharing
-			var/datum/pipe_network/network = connected_port.return_network(src)
-			if(network && !network.gases.Find(air_contents))
-				network.gases += air_contents
-				network.update = 1
+	//Actually enforce the air sharing
+	var/datum/pipe_network/network = connected_port.return_network(src)
+	if(network && !network.gases.Find(air_contents))
+		network.gases += air_contents
+		network.update = 1
 
-			return 1
+	return 1
 
-		disconnect()
-			if(!connected_port)
-				return 0
+/obj/machinery/portable_atmospherics/proc/disconnect()
+	if(!connected_port)
+		return 0
 
-			var/datum/pipe_network/network = connected_port.return_network(src)
-			if(network)
-				network.gases -= air_contents
+	var/datum/pipe_network/network = connected_port.return_network(src)
+	if(network)
+		network.gases -= air_contents
 
-			anchored = 0
+	anchored = 0
 
-			connected_port.connected_device = null
-			connected_port = null
+	connected_port.connected_device = null
+	connected_port = null
 
-			return 1
+	return 1
+
+/obj/machinery/portable_atmospherics/proc/update_connected_network()
+	if(!connected_port)
+		return
+	
+	var/datum/pipe_network/network = connected_port.return_network(src)
+	if (network)
+		network.update = 1
 
 /obj/machinery/portable_atmospherics/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	var/obj/icon = src
@@ -133,3 +139,39 @@
 		return
 
 	return
+
+
+
+/obj/machinery/portable_atmospherics/powered
+	var/power_rating
+	var/power_losses
+	var/last_power_draw = 0
+	var/obj/item/weapon/cell/cell
+
+/obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/cell))
+		if(cell)
+			user << "There is already a power cell installed."
+			return
+		
+		var/obj/item/weapon/cell/C = I
+		
+		user.drop_item()
+		C.add_fingerprint(user)
+		cell = C
+		C.loc = src
+		user.visible_message("\blue [user] opens the panel on [src] and inserts [C].", "\blue You open the panel on [src] and insert [C].")
+		return
+	
+	if(istype(I, /obj/item/weapon/screwdriver))
+		if(!cell)
+			user << "\red There is no power cell installed."
+			return
+		
+		user.visible_message("\blue [user] opens the panel on [src] and removes [cell].", "\blue You open the panel on [src] and remove [cell].")
+		cell.add_fingerprint(user)
+		cell.loc = src.loc
+		cell = null
+		return
+	
+	..()

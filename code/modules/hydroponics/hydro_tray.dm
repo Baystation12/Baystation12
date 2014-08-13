@@ -242,6 +242,10 @@
 	if(seed.exude_gasses && seed.exude_gasses.len)
 		for(var/gas in seed.exude_gasses)
 			environment.adjust_gas(gas, max(1,round((seed.exude_gasses[gas]*seed.potency)/seed.exude_gasses.len)))
+	
+	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
+	if (closed_system && connected_port)
+		update_connected_network()
 
 	// Handle light requirements.
 	var/area/A = T.loc

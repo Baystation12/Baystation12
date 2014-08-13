@@ -6,7 +6,8 @@ proc
 emit_particle()
 
 1 power box
-the only part of this thing that uses power, can hack to mess with the pa/make it better
+the only part of this thing that uses power, can hack to mess with the pa/make it better.
+Lies, only the control computer draws power.
 
 1 fuel chamber
 contains procs for mixing gas and whatever other fuel it uses

@@ -1031,8 +1031,7 @@ ________________________________________________________________________________
 						drain = rand(G.mindrain,G.maxdrain)
 						var/drained = 0
 						if(PN&&do_after(U,10))
-							drained = min(drain, PN.avail)
-							PN.newload += drained
+							drained = PN.draw_power(drain)
 							if(drained < drain)//if no power on net, drain apcs
 								for(var/obj/machinery/power/terminal/T in PN.nodes)
 									if(istype(T.master, /obj/machinery/power/apc))
@@ -1083,8 +1082,7 @@ ________________________________________________________________________________
 				drain = (round((rand(G.mindrain,G.maxdrain))/2))
 				var/drained = 0
 				if(PN&&do_after(U,10))
-					drained = min(drain, PN.avail)
-					PN.newload += drained
+					drained = PN.draw_power(drain)
 					if(drained < drain)//if no power on net, drain apcs
 						for(var/obj/machinery/power/terminal/T in PN.nodes)
 							if(istype(T.master, /obj/machinery/power/apc))

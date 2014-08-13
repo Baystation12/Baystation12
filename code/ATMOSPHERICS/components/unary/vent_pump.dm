@@ -1,6 +1,12 @@
+#define DEFAULT_PRESSURE_DELTA 10000
+
 #define EXTERNAL_PRESSURE_BOUND ONE_ATMOSPHERE
 #define INTERNAL_PRESSURE_BOUND 0
 #define PRESSURE_CHECKS 1
+
+#define PRESSURE_CHECK_EXTERNAL 1
+#define PRESSURE_CHECK_INTERNAL 2
+
 #undefine
 
 /obj/machinery/atmospherics/unary/vent_pump
@@ -10,7 +16,9 @@
 	name = "Air Vent"
 	desc = "Has a valve and pump attached to it"
 	use_power = 1
-
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	
 	var/area/initial_loc
 	level = 1
 	var/area_uid
@@ -18,6 +26,8 @@
 
 	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
+
+	var/last_power_draw = 0
 
 	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
 	var/internal_pressure_bound = INTERNAL_PRESSURE_BOUND
@@ -52,6 +62,9 @@
 	icon_state = "map_vent_in"
 
 /obj/machinery/atmospherics/unary/vent_pump/New()
+	..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	
 	icon = null
 	initial_loc = get_area(loc)
 	if (initial_loc.master)
@@ -63,19 +76,21 @@
 	if(ticker && ticker.current_state == 3)//if the game is running
 		src.initialize()
 		src.broadcast_status()
-	..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
+	active_power_usage = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
-	air_contents.volume = 1000
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/unary/vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
+	if (!node)
+		on = 0
 
 	overlays.Cut()
 	
@@ -112,62 +127,80 @@
 	update_icon()
 	update_underlays()
 
-/obj/machinery/atmospherics/unary/vent_pump/process()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
 	if(stat & (NOPOWER|BROKEN))
-		return
-	if (!node)
-		on = 0
-	//broadcast_status() // from now air alarm/control computer should request update purposely --rastaf0
+		return 0
 	if(!on)
 		return 0
-
 	if(welded)
+		return 0
+	return 1
+
+/obj/machinery/atmospherics/unary/vent_pump/process()
+	..()
+	
+	if (!node)
+		on = 0
+	if(!can_pump())
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_power_draw = 0
+		last_flow_rate = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	var/environment_pressure = environment.return_pressure()
 
-	if(pump_direction) //internal -> external
-		var/pressure_delta = 10000
+	var/power_draw = -1
+	
+	//Figure out the target pressure difference
+	var/pressure_delta = get_pressure_delta(environment)
+	//src.visible_message("DEBUG >>> [src]: pressure_delta = [pressure_delta]")
 
-		if(pressure_checks&1)
-			pressure_delta = min(pressure_delta, (external_pressure_bound - environment_pressure))
-		if(pressure_checks&2)
-			pressure_delta = min(pressure_delta, (air_contents.return_pressure() - internal_pressure_bound))
+	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
+		if(pump_direction) //internal -> external	
+			var/output_volume = environment.volume * environment.group_multiplier
+			var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
+			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+			//src.visible_message("DEBUG >>> [src]: output_volume = [output_volume]L; air_temperature = [air_temperature]K; transfer_moles = [transfer_moles] mol")
+			
+			power_draw = pump_gas(src, air_contents, environment, transfer_moles, active_power_usage)
+		else //external -> internal
+			var/output_volume = air_contents.volume + (network? network.volume : 0)
+			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
+			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+			
+			//limit flow rate from turfs
+			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			
+			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
 
-		if(pressure_delta > 0.5)
-			if(air_contents.temperature > 0)
-				var/transfer_moles = pressure_delta*environment.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
-
-				var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-
-				loc.assume_air(removed)
-
-				if(network)
-					network.update = 1
-
-	else //external -> internal
-		var/pressure_delta = 10000
-		if(pressure_checks&1)
-			pressure_delta = min(pressure_delta, (environment_pressure - external_pressure_bound))
-		if(pressure_checks&2)
-			pressure_delta = min(pressure_delta, (internal_pressure_bound - air_contents.return_pressure()))
-
-		if(pressure_delta > 0.5)
-			if(environment.temperature > 0)
-				var/transfer_moles = pressure_delta*air_contents.volume/(environment.temperature * R_IDEAL_GAS_EQUATION)
-
-				var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-				if (isnull(removed)) //in space
-					return
-
-				air_contents.merge(removed)
-
-				if(network)
-					network.update = 1
-
+	if (power_draw < 0)
+		last_power_draw = 0
+		last_flow_rate = 0
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+	else
+		last_power_draw = handle_power_draw(power_draw)
+		if(network)
+			network.update = 1
+	
 	return 1
+
+/obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)
+	var/pressure_delta = DEFAULT_PRESSURE_DELTA
+	var/environment_pressure = environment.return_pressure()
+	
+	if(pump_direction) //internal -> external
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+			pressure_delta = min(pressure_delta, air_contents.return_pressure() - internal_pressure_bound) //decreasing the pressure here
+	else //external -> internal
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
+			pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
+	
+	return pressure_delta
 
 //Radio remote control
 
@@ -195,7 +228,9 @@
 		"internal" = internal_pressure_bound,
 		"external" = external_pressure_bound,
 		"timestamp" = world.time,
-		"sigtype" = "status"
+		"sigtype" = "status",
+		"power_draw" = last_power_draw,
+		"flow_rate" = last_flow_rate,
 	)
 
 	if(!initial_loc.air_vent_names[id_tag])
@@ -329,6 +364,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/examine()
 	set src in oview(1)
 	..()
+	if (get_dist(usr, src) <= 1)
+		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+	else
+		usr << "You are too far away to read the gauge."
 	if(welded)
 		usr << "It seems welded shut."
 

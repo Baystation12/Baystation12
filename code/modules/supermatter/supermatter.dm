@@ -207,7 +207,7 @@
 		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
 		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
 
-		removed.temperature += ((device_energy * thermal_power) / removed.heat_capacity())
+		removed.add_thermal_energy(device_energy * thermal_power)
 
 		removed.temperature = max(0, min(removed.temperature, 10000))
 
