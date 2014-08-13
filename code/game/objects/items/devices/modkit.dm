@@ -14,7 +14,10 @@
 		/obj/item/clothing/suit/space/rig
 		)
 
-/obj/item/device/modkit/afterattack(obj/O, mob/user as mob)
+/obj/item/device/modkit/afterattack(obj/O, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	
 	if (!target_species)
 		return	//it shouldn't be null, okay?
 
@@ -38,6 +41,7 @@
 	var/in_list = (target_species in I.species_restricted)
 	if (excluding ^ in_list)
 		user << "<span class='notice'>[I] is already modified.</span>"
+		return
 
 	if(!isturf(O.loc))
 		user << "<span class='warning'>[O] must be safely placed on the ground for modification.</span>"
