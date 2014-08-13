@@ -14,8 +14,8 @@
 	// mode 3  cardinal
 	// mode 4  warningcorner and warnwhitecorner direction fix
 	// mode 5  Opposite corner tiles where the second icon_state is "[mode]_inv"
-/obj/item/device/floor_painter/afterattack(atom/A, mob/user as mob)
-	if (get_dist(A,user) > 1)
+/obj/item/device/floor_painter/afterattack(atom/A, mob/user as mob, proximity)
+	if(!proximity)
 		return
 
 	if(istype(A, /turf/simulated/floor))
