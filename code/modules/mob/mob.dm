@@ -736,28 +736,23 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
-
-	var/is_movable
-	if(buckled && istype(buckled))
-		is_movable = buckled.movable
-
-	if(buckled && !is_movable)
+	if(istype(buckled, /obj/vehicle))
+		var/obj/vehicle/V = buckled
+		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
+			lying = 1
+			canmove = 0
+			pixel_y = V.mob_offset_y - 5
+		else
+			lying = 0
+			canmove = 1
+			pixel_y = V.mob_offset_y
+	else if(buckled && (!buckled.movable))
 		anchored = 1
 		canmove = 0
 		if(istype(buckled,/obj/structure/stool/bed/chair) )
 			lying = 0
-		else if(istype(buckled, /obj/vehicle))
-			var/obj/vehicle/V = buckled
-			if(V.standing_mob)
-				lying = 0
-			else
-				lying = 1
 		else
 			lying = 1
-	else if(buckled && is_movable)
-		anchored = 0
-		canmove = 1
-		lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -963,8 +958,7 @@ mob/proc/yank_out_object()
 	if(valid_objects.len == 1) //Yanking out last object - removing verb.
 		src.verbs -= /mob/proc/yank_out_object
 
-	if(istype(src,/mob/living/carbon/human))
-
+	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/datum/organ/external/affected
 
@@ -975,13 +969,16 @@ mob/proc/yank_out_object()
 
 		affected.implants -= selection
 		H.shock_stage+=20
-		H.bloody_hands(S)
 		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
 
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (15)
 			affected.wounds += I
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+
+		if (ishuman(U))
+			var/mob/living/carbon/human/human_user = U
+			human_user.bloody_hands(H)
 
 	selection.loc = get_turf(src)
 

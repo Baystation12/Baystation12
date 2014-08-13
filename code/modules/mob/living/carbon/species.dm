@@ -291,7 +291,6 @@
 
 	if(H.mind)
 		H.mind.transfer_to(S)
-		S.key = H
 
 	for(var/mob/living/carbon/monkey/diona/D in H.contents)
 		if(D.client)

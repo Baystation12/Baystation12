@@ -605,8 +605,8 @@
 					center_of_mass = list("x"=16, "y"=10)
 		else
 			icon_state = "glass_empty"
-			name = "Drinking glass"
-			desc = "Your standard drinking glass"
+			name = "glass"
+			desc = "Your standard drinking glass."
 			center_of_mass = list("x"=16, "y"=10)
 			return
 
