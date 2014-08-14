@@ -281,10 +281,13 @@
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
 		modtype = prefix
-	if(istype(mmi, /obj/item/device/mmi/posibrain))
-		braintype = "Android"
+	if(mmi)
+		if(istype(mmi, /obj/item/device/mmi/posibrain))
+			braintype = "Android"
+		else
+			braintype = "Cyborg"
 	else
-		braintype = "Cyborg"
+		braintype = "Robot"
 
 	var/changed_name = ""
 	if(custom_name)
@@ -592,6 +595,10 @@
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
+		if (src == user)
+			user << "<span class='warning'>You lack the reach to be able to repair yourself.</span>"
+			return
+
 		if (!getBruteLoss())
 			user << "Nothing to fix here!"
 			return
@@ -1091,18 +1098,24 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-
+	
+	if(usr != src)
+		return
+	
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
-		if (O)
+		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
+		if (!istype(O) || !(O in src.module.modules))
+			return
+		
 		if(activated(O))
 			src << "Already activated"
 			return

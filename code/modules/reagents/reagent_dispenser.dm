@@ -147,6 +147,10 @@
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
+		if(istype(Proj.firer))
+			message_admins("[key_name_admin(Proj.firer)] shot fueltank at ([loc.x],[loc.y],[loc.z]).")
+			log_game("[key_name(Proj.firer)] shot fueltank at ([loc.x],[loc.y],[loc.z]).")
+
 		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
