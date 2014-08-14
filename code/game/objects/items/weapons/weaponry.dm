@@ -65,7 +65,9 @@
 				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
 			return
 
-/obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob)
+/obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
+	if(!proximity)
+		return
 	if (istype(A, /turf/simulated/floor))
 		user << "\blue You hit the floor with the [src]."
 		call(/obj/effect/rune/proc/revealrunes)(src)
