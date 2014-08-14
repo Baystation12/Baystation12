@@ -166,6 +166,10 @@
 	S["skill_specialization"] >> skill_specialization
 	S["organ_data"]			>> organ_data
 	S["gear"]				>> gear
+	S["home_system"] 		>> home_system
+	S["citizenship"] 		>> citizenship
+	S["faction"] 			>> faction
+	S["religion"] 			>> religion
 
 	S["nanotrasen_relation"] >> nanotrasen_relation
 	//S["skin_style"]			>> skin_style
@@ -224,6 +228,11 @@
 	if(!organ_data) src.organ_data = list()
 	if(!gear) src.gear = list()
 	//if(!skin_style) skin_style = "Default"
+
+	if(!home_system) home_system = "Unset"
+	if(!citizenship) citizenship = "None"
+	if(!faction)     faction =     "None"
+	if(!religion)    religion =    "None"
 
 	return 1
 
@@ -297,6 +306,10 @@
 	S["skill_specialization"] << skill_specialization
 	S["organ_data"]			<< organ_data
 	S["gear"]				<< gear
+	S["home_system"] 		<< home_system
+	S["citizenship"] 		<< citizenship
+	S["faction"] 			<< faction
+	S["religion"] 			<< religion
 
 	S["nanotrasen_relation"] << nanotrasen_relation
 	//S["skin_style"]			<< skin_style

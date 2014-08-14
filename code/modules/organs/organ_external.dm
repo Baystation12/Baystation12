@@ -155,14 +155,14 @@
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
-	
+
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
 			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
 				droplimb(1)
 				return
-	
+
 	owner.updatehealth()
 
 	var/result = update_icon()
@@ -291,6 +291,8 @@ This function completely restores a damaged organ to perfect condition.
 //Determines if we even need to process this organ.
 
 /datum/organ/external/proc/need_process()
+	if(destspawn)	//Missing limb is missing
+		return 0
 	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
 		return 1
 	if(brute_dam || burn_dam)
@@ -305,17 +307,6 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/process()
-	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
-	if(owner.life_tick % wound_update_accuracy == 0)
-		update_wounds()
-
-	//Chem traces slowly vanish
-	if(owner.life_tick % 10 == 0)
-		for(var/chemID in trace_chemicals)
-			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
-			if(trace_chemicals[chemID] <= 0)
-				trace_chemicals.Remove(chemID)
-
 	//Dismemberment
 	if(status & ORGAN_DESTROYED)
 		if(!destspawn && config.limbs_can_break)
@@ -326,6 +317,17 @@ This function completely restores a damaged organ to perfect condition.
 			status |= ORGAN_DESTROYED
 			owner.update_body(1)
 			return
+
+	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
+	if(owner.life_tick % wound_update_accuracy == 0)
+		update_wounds()
+
+	//Chem traces slowly vanish
+	if(owner.life_tick % 10 == 0)
+		for(var/chemID in trace_chemicals)
+			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
+			if(trace_chemicals[chemID] <= 0)
+				trace_chemicals.Remove(chemID)
 
 	//Bone fracurtes
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
@@ -585,13 +587,27 @@ Note that amputating the affected organ does in fact remove the infection from t
 		src.status &= ~ORGAN_BROKEN
 		src.status &= ~ORGAN_BLEEDING
 		src.status &= ~ORGAN_SPLINTED
+		src.status &= ~ORGAN_DEAD
 		for(var/implant in implants)
 			del(implant)
 
+		germ_level = 0
+
+		//Replace all wounds on that arm with one wound on parent organ.
+		wounds.Cut()
+		if (parent)
+			var/datum/wound/W
+			if(max_damage < 50)
+				W = new/datum/wound/lost_limb/small(max_damage)
+			else
+				W = new/datum/wound/lost_limb(max_damage)
+			parent.wounds += W
+			parent.update_damages()
+		update_damages()
+
 		// If any organs are attached to this, destroy them
-		for(var/datum/organ/external/O in owner.organs)
-			if(O.parent == src)
-				O.droplimb(1)
+		for(var/datum/organ/external/O in children)
+			O.droplimb(1)
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
