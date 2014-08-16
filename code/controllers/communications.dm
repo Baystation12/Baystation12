@@ -228,7 +228,14 @@ var/global/datum/controller/radio/radio_controller
 				continue
 			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
 				continue
-		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+		
+		//allow sequential signals before round start, so that every air alarm sounding off at once doesn't cause trouble.
+		if(!ticker || ticker.current_state < 3)
+			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+		else
+			spawn(0)
+				if(device) //in case the device got destroyed somehow
+					device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)
