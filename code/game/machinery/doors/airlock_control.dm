@@ -245,6 +245,12 @@ obj/machinery/access_button/update_icon()
 	else
 		icon_state = "access_button_off"
 
+obj/machinery/access_button/attackby(obj/item/I as obj, mob/user as mob)
+	//Swiping ID on the access button
+	if (istype(I, /obj/item/weapon/card/id) || istype(I, /obj/item/device/pda))
+		attack_hand(user)
+		return
+	..()
 
 obj/machinery/access_button/attack_hand(mob/user)
 	add_fingerprint(usr)
