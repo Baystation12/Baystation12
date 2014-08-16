@@ -16,16 +16,6 @@
 	active_areas += src
 	all_areas += src
 
-	if(type == /area)	// override defaults for space. TODO: make space areas of type /area/space rather than /area
-		requires_power = 1
-		always_unpowered = 1
-		lighting_use_dynamic = 1
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
-//		lighting_state = 4
-		//has_gravity = 0    // Space has gravity.  Because.. because.
-
 	if(requires_power)
 		luminosity = 0
 	else
@@ -183,8 +173,6 @@
 			a.cancelAlarm("Fire", src, src)
 
 /area/proc/readyalert()
-	if(name == "Space")
-		return
 	if(!eject)
 		eject = 1
 		updateicon()
@@ -197,8 +185,6 @@
 	return
 
 /area/proc/partyalert()
-	if(name == "Space") //no parties in space!!!
-		return
 	if (!( party ))
 		party = 1
 		updateicon()
@@ -323,11 +309,8 @@
 		L.client.ambience_playing = 1
 		L << sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 35, channel = 2)
 
-	if((src.ambience.len || type == /area) && prob(35)) //hate hate space being /area hate hate
-		if(type == /area)
-			sound = pick('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
-		else
-			sound = pick(ambience)
+	if(src.ambience.len && prob(35))
+		sound = pick(ambience)
 
 		if(world.time > L.client.played + 600)
 			L << sound(sound, repeat = 0, wait = 0, volume = musVolume, channel = 1)

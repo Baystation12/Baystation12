@@ -22,7 +22,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/poweralm = 1
 	var/party = null
 	level = null
-	name = "Space"
+	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = 10
@@ -92,7 +92,24 @@ var/list/ghostteleportlocs = list()
 	return 1
 
 /*-----------------------------------------------------------------------------*/
+/area/space
+	name = "\improper Space"
+	requires_power = 1
+	always_unpowered = 1
+	lighting_use_dynamic = 1
+	power_light = 0
+	power_equip = 0
+	power_environ = 0
+	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
+/area/space/firealert()
+	return
+
+/area/space/readyalert()
+	return
+
+/area/space/partyalert()
+	return
 /area/engine/
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 /area/turret_protected/
