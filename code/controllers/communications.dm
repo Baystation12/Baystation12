@@ -132,7 +132,9 @@ var/const/SUP_FREQ = 1347
 //Other devices can then choose to send signals to only those devices that belong to a particular filter.
 //This is done for performance, so we don't send signals to lots of machines unnecessarily.
 
-var/const/RADIO_DEFAULT = "radio_default" //all devices not belonging to another filter go here.
+//This filter is special because devices belonging to default also recieve signals sent to any other filter.
+var/const/RADIO_DEFAULT = "radio_default"
+
 var/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
 var/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
 var/const/RADIO_CHAT = "radio_telecoms"
@@ -198,61 +200,35 @@ var/global/datum/controller/radio/radio_controller
 	var/list/list/obj/devices = list()
 
 /datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = null as num|null)
-	//log_admin("DEBUG \[[world.timeofday]\]: post_signal {source=\"[source]\", [signal.debug_print()], filter=[filter]}")
-//			var/N_f=0
-//			var/N_nf=0
-//			var/Nt=0
 	var/turf/start_point
 	if(range)
 		start_point = get_turf(source)
 		if(!start_point)
 			del(signal)
 			return 0
-	if (filter) //here goes some copypasta. It is for optimisation. -rastaf0
-		for(var/obj/device in devices[filter])
-			if(device == source)
-				continue
-			if(range)
-				var/turf/end_point = get_turf(device)
-				if(!end_point)
-					continue
-				//if(max(abs(start_point.x-end_point.x), abs(start_point.y-end_point.y)) <= range)
-				if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-					continue
-			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-		for(var/obj/device in devices[RADIO_DEFAULT])
-			if(device == source)
-				continue
-			if(range)
-				var/turf/end_point = get_turf(device)
-				if(!end_point)
-					continue
-				//if(max(abs(start_point.x-end_point.x), abs(start_point.y-end_point.y)) <= range)
-				if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-					continue
-			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-//					N_f++
+	if (filter)
+		send_to_filter(source, signal, filter, start_point, range)
+		send_to_filter(source, signal, RADIO_DEFAULT, start_point, range)
 	else
+		//Broadcast the signal to everyone!
 		for (var/next_filter in devices)
-//					var/list/obj/DDD = devices[next_filter]
-//					Nt+=DDD.len
-			for(var/obj/device in devices[next_filter])
-				if(device == source)
-					continue
-				if(range)
-					var/turf/end_point = get_turf(device)
-					if(!end_point)
-						continue
-					//if(max(abs(start_point.x-end_point.x), abs(start_point.y-end_point.y)) <= range)
-					if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
-						continue
-				device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-//						N_nf++
+			send_to_filter(source, signal, next_filter, start_point, range)
 
-//			log_admin("DEBUG: post_signal(source=[source] ([source.x], [source.y], [source.z]),filter=[filter]) frequency=[frequency], N_f=[N_f], N_nf=[N_nf]")
-
-
-//			del(signal)
+//Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
+/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = null)
+	if (range && !start_point)
+		return
+	
+	for(var/obj/device in devices[filter])
+		if(device == source)
+			continue
+		if(range)
+			var/turf/end_point = get_turf(device)
+			if(!end_point)
+				continue
+			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
+				continue
+		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)
