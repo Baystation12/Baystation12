@@ -128,15 +128,20 @@ var/const/SUP_FREQ = 1347
 #define TRANSMISSION_RADIO	1
 
 /* filters */
-var/const/RADIO_TO_AIRALARM = "1"
-var/const/RADIO_FROM_AIRALARM = "2"
-var/const/RADIO_CHAT = "3"
-var/const/RADIO_ATMOSIA = "4"
-var/const/RADIO_NAVBEACONS = "5"
-var/const/RADIO_AIRLOCK = "6"
-var/const/RADIO_SECBOT = "7"
-var/const/RADIO_MULEBOT = "8"
-var/const/RADIO_MAGNETS = "9"
+//When devices register with the radio controller, they might register under a certain filter.
+//Other devices can then choose to send signals to only those devices that belong to a particular filter.
+//This is done for performance, so we don't send signals to lots of machines unnecessarily.
+
+var/const/RADIO_DEFAULT = "radio_default" //all devices not belonging to another filter go here.
+var/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
+var/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
+var/const/RADIO_CHAT = "radio_telecoms"
+var/const/RADIO_ATMOSIA = "radio_atmos"
+var/const/RADIO_NAVBEACONS = "radio_navbeacon"
+var/const/RADIO_AIRLOCK = "radio_airlock"
+var/const/RADIO_SECBOT = "radio_secbot"
+var/const/RADIO_MULEBOT = "radio_mulebot"
+var/const/RADIO_MAGNETS = "radio_magnet"
 
 var/global/datum/controller/radio/radio_controller
 
@@ -215,7 +220,7 @@ var/global/datum/controller/radio/radio_controller
 				if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
 					continue
 			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-		for(var/obj/device in devices["_default"])
+		for(var/obj/device in devices[RADIO_DEFAULT])
 			if(device == source)
 				continue
 			if(range)
@@ -251,7 +256,7 @@ var/global/datum/controller/radio/radio_controller
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)
-		filter = "_default"
+		filter = RADIO_DEFAULT
 	//log_admin("add_listener(device=[device],filter=[filter]) frequency=[frequency]")
 	var/list/obj/devices_line = devices[filter]
 	if (!devices_line)
