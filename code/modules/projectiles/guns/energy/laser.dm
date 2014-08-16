@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/energy/laser
-	name = "laser gun"
+	name = "laser carbine"
 	desc = "a basic weapon designed kill with concentrated energy bolts"
 	icon_state = "laser"
 	item_state = "laser"
