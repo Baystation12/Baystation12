@@ -21,6 +21,8 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
+#define RADIATION_SPEED_COEFFICIENT 0.1
+
 /mob/living/carbon/human
 	var/oxygen_alert = 0
 	var/phoron_alert = 0
@@ -259,62 +261,53 @@
 				gene.OnMobLife(src)
 
 		if (radiation)
-			if (radiation > 100)
-				radiation = 100
-				if(!(species.flags & RAD_ABSORB))
-					Weaken(10)
+			radiation = Clamp(radiation,0,100)
+
+			if(species.flags & RAD_ABSORB)
+				var/rads = radiation/25
+				radiation -= rads
+				nutrition += rads
+				adjustBruteLoss(-(rads))
+				adjustOxyLoss(-(rads))
+				adjustToxLoss(-(rads))
+				updatehealth()
+				return
+
+			var/damage = 0
+			radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+			if(prob(25))
+				damage = 1
+
+			if (radiation > 50)
+				damage = 1
+				radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+				if(prob(5))
+					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
+					src << "<span class='warning'>You feel weak.</span>"
+					Weaken(3)
 					if(!lying)
-						src << "\red You feel weak."
 						emote("collapse")
+				if(prob(5) && species.name == "Human") //apes go bald
+					if((h_style != "Bald" || f_style != "Shaved" ))
+						src << "<span class='warning'>Your hair fall out.</span>"
+						h_style = "Bald"
+						f_style = "Shaved"
+						update_hair()
 
-			if (radiation < 0)
-				radiation = 0
+			if (radiation > 75)
+				radiation -= 1 * RADIATION_SPEED_COEFFICIENT
+				damage = 3
+				if(prob(5))
+					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
+				if(prob(1))
+					src << "<span class='warning'>You feel strange!</span>"
+					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
+					emote("gasp")
 
-			else
-
-				if(species.flags & RAD_ABSORB)
-					var/rads = radiation/25
-					radiation -= rads
-					nutrition += rads
-					adjustBruteLoss(-(rads))
-					adjustOxyLoss(-(rads))
-					adjustToxLoss(-(rads))
-					updatehealth()
-					return
-
-				var/damage = 0
-				switch(radiation)
-					if(1 to 49)
-						radiation--
-						if(prob(25))
-							adjustToxLoss(1)
-							damage = 1
-							updatehealth()
-
-					if(50 to 74)
-						radiation -= 2
-						damage = 1
-						adjustToxLoss(1)
-						if(prob(5))
-							radiation -= 5
-							Weaken(3)
-							if(!lying)
-								src << "\red You feel weak."
-								emote("collapse")
-						updatehealth()
-
-					if(75 to 100)
-						radiation -= 3
-						adjustToxLoss(3)
-						damage = 1
-						if(prob(1))
-							src << "\red You mutate!"
-							randmutb(src)
-							domutcheck(src,null)
-							emote("gasp")
-						updatehealth()
-
-				if(damage && organs.len)
+			if(damage)
+				adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+				updatehealth()
+				if(organs.len)
 					var/datum/organ/external/O = pick(organs)
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
