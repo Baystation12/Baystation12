@@ -260,9 +260,9 @@
 				speech_problem_flag = 1
 				gene.OnMobLife(src)
 
-		if (radiation)
-			radiation = Clamp(radiation,0,100)
+		radiation = Clamp(radiation,0,100)
 
+		if (radiation)
 			if(species.flags & RAD_ABSORB)
 				var/rads = radiation/25
 				radiation -= rads
@@ -281,15 +281,15 @@
 			if (radiation > 50)
 				damage = 1
 				radiation -= 1 * RADIATION_SPEED_COEFFICIENT
-				if(prob(5))
+				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
 					src << "<span class='warning'>You feel weak.</span>"
 					Weaken(3)
 					if(!lying)
 						emote("collapse")
-				if(prob(5) && species.name == "Human") //apes go bald
+				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.name == "Human") //apes go bald
 					if((h_style != "Bald" || f_style != "Shaved" ))
-						src << "<span class='warning'>Your hair fall out.</span>"
+						src << "<span class='warning'>Your hair falls out.</span>"
 						h_style = "Bald"
 						f_style = "Shaved"
 						update_hair()
