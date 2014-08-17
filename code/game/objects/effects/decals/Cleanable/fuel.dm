@@ -6,7 +6,10 @@ obj/effect/decal/cleanable/liquid_fuel
 	anchored = 1
 	var/amount = 1 //Basically moles.
 
-	New(newLoc,amt=1)
+	New(turf/newLoc,amt=1,spreading=0)
+		if(!spreading)
+			message_admins("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[newLoc.x];Y=[newLoc.y];Z=[newLoc.z]'>JMP</a>)")
+			log_game("Liquid fuel has spilled in [newLoc.loc.name] ([newLoc.x],[newLoc.y],[newLoc.z])")
 		src.amount = amt
 
 		//Be absorbed by any other liquid fuel in the tile.
@@ -30,7 +33,7 @@ obj/effect/decal/cleanable/liquid_fuel
 				var/turf/simulated/origin = get_turf(src)
 				if(origin.CanPass(null, target, 0, 0) && target.CanPass(null, origin, 0, 0))
 					if(!locate(/obj/effect/decal/cleanable/liquid_fuel) in target)
-						new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25)
+						new/obj/effect/decal/cleanable/liquid_fuel(target, amount*0.25,1)
 						amount *= 0.75
 
 	flamethrower_fuel
