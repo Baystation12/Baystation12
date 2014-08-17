@@ -648,9 +648,11 @@ About the new airlock wires panel:
 			else
 				flick("door_closing", src)
 		if("spark")
-			flick("door_spark", src)
+			if(density)
+				flick("door_spark", src)
 		if("deny")
-			flick("door_deny", src)
+			if(density)
+				flick("door_deny", src)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
