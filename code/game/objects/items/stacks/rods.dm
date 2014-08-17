@@ -52,15 +52,19 @@
 				use(1)
 			else
 				return 1
-	else
+
+	else if(!in_use)
 		if(amount < 2)
 			user << "\blue You need at least two rods to do this."
 			return
 		usr << "\blue Assembling grille..."
+		in_use = 1
 		if (!do_after(usr, 10))
+			in_use = 0
 			return
 		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
 		usr << "\blue You assemble a grille"
+		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)
 	return
