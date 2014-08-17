@@ -1,8 +1,9 @@
 //Handles the control of airlocks
 
-#define STATE_WAIT			0
-#define STATE_DEPRESSURIZE	1
-#define STATE_PRESSURIZE	2
+#define STATE_IDLE			0
+#define STATE_PREPARE		1
+#define STATE_DEPRESSURIZE	2
+#define STATE_PRESSURIZE	3
 
 #define TARGET_NONE			0
 #define TARGET_INOPEN		-1
@@ -18,7 +19,7 @@
 	var/tag_interior_sensor
 	var/tag_mech_sensor
 
-	var/state = STATE_WAIT
+	var/state = STATE_IDLE
 	var/target_state = TARGET_NONE
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
@@ -157,7 +158,7 @@
 
 
 /datum/computer/file/embedded_program/airlock/process()
-	if(!state)
+	if(!state) //Idle
 		if(target_state)
 			switch(target_state)
 				if(TARGET_INOPEN)
@@ -168,38 +169,45 @@
 			//lock down the airlock before activating pumps
 			close_doors()
 
-			var/chamber_pressure = memory["chamber_sensor_pressure"]
-			var/target_pressure = memory["target_pressure"]
-
-			if(memory["purge"])
-				target_pressure = 0
-
-			if(chamber_pressure <= target_pressure)
-				state = STATE_PRESSURIZE
-				signalPump(tag_airpump, 1, 1, target_pressure)	//send a signal to start pressurizing
-
-			else if(chamber_pressure > target_pressure)
-				state = STATE_DEPRESSURIZE
-				signalPump(tag_airpump, 1, 0, target_pressure)	//send a signal to start depressurizing
-
-			//Check for vacuum - this is set after the pumps so the pumps are aiming for 0
-			if(!memory["target_pressure"])
-				memory["target_pressure"] = ONE_ATMOSPHERE * 0.05
+			state = STATE_PREPARE
 		else
 			//make sure to return to a sane idle state
 			if(memory["pump_status"] != "off")	//send a signal to stop pumping
 				signalPump(tag_airpump, 0)
 
-	//the airlock will not allow itself to continue to cycle when any of the doors are forced open.
-	if (state && !check_doors_secured())
+	if ((state == STATE_PRESSURIZE || state == STATE_DEPRESSURIZE) && !check_doors_secured())
+		//the airlock will not allow itself to continue to cycle when any of the doors are forced open.
 		stop_cycling()
 
 	switch(state)
+		if(STATE_PREPARE)
+			if (check_doors_secured())
+				var/chamber_pressure = memory["chamber_sensor_pressure"]
+				var/target_pressure = memory["target_pressure"]
+
+				if(memory["purge"])
+					target_pressure = 0
+				
+				if(memory["purge"])
+					target_pressure = 0
+
+				if(chamber_pressure <= target_pressure)
+					state = STATE_PRESSURIZE
+					signalPump(tag_airpump, 1, 1, target_pressure)	//send a signal to start pressurizing
+
+				else if(chamber_pressure > target_pressure)
+					state = STATE_DEPRESSURIZE
+					signalPump(tag_airpump, 1, 0, target_pressure)	//send a signal to start depressurizing
+
+				//Check for vacuum - this is set after the pumps so the pumps are aiming for 0
+				if(!memory["target_pressure"])
+					memory["target_pressure"] = ONE_ATMOSPHERE * 0.05
+		
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] * 0.95)
 				cycleDoors(target_state)
 
-				state = STATE_WAIT
+				state = STATE_IDLE
 				target_state = TARGET_NONE
 
 				if(memory["pump_status"] != "off")
@@ -216,7 +224,7 @@
 			else if(memory["chamber_sensor_pressure"] <= memory["target_pressure"] * 1.05)
 				cycleDoors(target_state)
 
-				state = STATE_WAIT
+				state = STATE_IDLE
 				target_state = TARGET_NONE
 
 				//send a signal to stop pumping
@@ -231,11 +239,11 @@
 //these are here so that other types don't have to make so many assuptions about our implementation
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_in()
-	state = STATE_WAIT
+	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
-	state = STATE_WAIT
+	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
@@ -243,11 +251,11 @@
 	toggleDoor(memory["exterior_status"], tag_exterior_door, 1, "close")
 
 /datum/computer/file/embedded_program/airlock/proc/stop_cycling()
-	state = STATE_WAIT
+	state = STATE_IDLE
 	target_state = TARGET_NONE
 
 /datum/computer/file/embedded_program/airlock/proc/done_cycling()
-	return (state == STATE_WAIT && target_state == TARGET_NONE)
+	return (state == STATE_IDLE && target_state == TARGET_NONE)
 
 //are the doors closed and locked?
 /datum/computer/file/embedded_program/airlock/proc/check_exterior_door_secured()
@@ -265,7 +273,7 @@
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
 	signal.data["command"] = command
-	post_signal(signal)
+	post_signal(signal, RADIO_AIRLOCK)
 
 /datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
 	var/datum/signal/signal = new
@@ -355,7 +363,7 @@ send an additional command to open the door again.
 		signalDoor(doorTag, doorCommand)
 
 
-#undef STATE_WAIT
+#undef STATE_IDLE
 #undef STATE_DEPRESSURIZE
 #undef STATE_PRESSURIZE
 
