@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\clothing\under\miscellaneous.dm;icons\mob\uniform.dmi;code\modules\clothing\suits\armor.dm;icons\obj\clothing\uniforms.dmi;code\modules\clothing\head\helmet.dm;icons\mob\head.dmi
+DIR: code code\game code\modules code\modules\clothing code\modules\clothing\head code\modules\clothing\spacesuits code\modules\clothing\suits code\modules\clothing\under icons icons\mob icons\obj icons\obj\clothing maps 
+FILE: icons\mob\head.dmi
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
