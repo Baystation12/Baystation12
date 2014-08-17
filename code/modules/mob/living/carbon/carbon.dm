@@ -1,6 +1,6 @@
 /mob/living/carbon/Life()
 	..()
-	
+
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -14,7 +14,7 @@
 				src.nutrition -= HUNGER_FACTOR/10
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
-			
+
 		// Moving around increases germ_level faster
 		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 			germ_level++
@@ -104,9 +104,9 @@
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
-	
+
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-	
+
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 10)
 		src.visible_message(
@@ -211,8 +211,8 @@
 			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
-				
-			if(lying)
+
+			if(lying || src.sleeping)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
@@ -221,7 +221,7 @@
 			else
 				M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-								
+
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
