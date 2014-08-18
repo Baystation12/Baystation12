@@ -270,7 +270,7 @@ datum/wound/cut/massive
 
 /datum/wound/internal_bleeding
 	internal = 1
-	stages = list("severed vein" = 30, "cut vein" = 20, "damaged vein" = 10, "bruised vein" = 5)
+	stages = list("severed artery" = 30, "cut artery" = 20, "damaged artery" = 10, "bruised artery" = 5)
 	autoheal_cutoff = 5
 	max_bleeding_stage = 0	//all stages bleed. It's called internal bleeding after all.
 
