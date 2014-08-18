@@ -34,15 +34,14 @@
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
 		
-		move(departing, interim, direction)
-
 		moving_status = SHUTTLE_INTRANSIT
+		move(departing, interim, direction)
+		
 		arrive_time = world.time + travel_time*10
 		while (world.time < arrive_time)
 			sleep(5)
 
 		move(interim, destination, direction)
-
 		moving_status = SHUTTLE_IDLE
 
 /datum/shuttle/proc/dock()
@@ -69,6 +68,8 @@
 	return 0
 
 //just moves the shuttle from A to B, if it can be moved
+//A note to anyone overriding move in a subtype. move() must absolutely not, under any circumstances, fail to move the shuttle.
+//If you want to conditionally cancel shuttle launches, that logic must go in short_jump() or long_jump()
 /datum/shuttle/proc/move(var/area/origin, var/area/destination, var/direction=null)
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."

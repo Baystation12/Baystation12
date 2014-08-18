@@ -137,10 +137,3 @@
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/prepare_for_undocking()
 	eject_time = world.time + eject_delay*10
-
-/*
-/datum/computer/file/embedded_program/docking/simple/escape_pod/ready_for_undocking()
-	if (world.time < eject_time)
-		return 0
-	return ..()
-*/
