@@ -309,6 +309,7 @@
 		dead_mob_list -= src
 		living_mob_list += src
 		tod = null
+		timeofdeath = 0
 
 	// restore us to conciousness
 	stat = CONSCIOUS

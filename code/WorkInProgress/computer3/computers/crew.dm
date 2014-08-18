@@ -47,7 +47,7 @@
 							log += "<td width='20%'>[life_status] [damage_report]</td><td width='40%'>Not Available</td></tr>"
 						if(3)
 							var/area/player_area = get_area(H)
-							log += "<td width='20%'>[life_status] [damage_report]</td><td width='40%'>[player_area.name] ([pos.x], [pos.y])</td></tr>"
+							log += "<td width='20%'>[life_status] [damage_report]</td><td width='40%'>[sanitize(player_area.name)] ([pos.x], [pos.y])</td></tr>"
 			logs += log
 		logs = sortList(logs)
 		for(var/log in logs)

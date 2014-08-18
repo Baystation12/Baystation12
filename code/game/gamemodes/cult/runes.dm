@@ -775,6 +775,7 @@ var/list/sacrificed = list()
 			for(var/mob/living/carbon/C in orange(1,src))
 				if(iscultist(C) && !C.stat)
 					users+=C
+			var/dam = round(15 / users.len)
 			if(users.len>=3)
 				var/mob/living/carbon/cultist = input("Choose the one who you want to free", "Followers of Geometer") as null|anything in (cultists - users)
 				if(!cultist)
@@ -804,7 +805,7 @@ var/list/sacrificed = list()
 				if(istype(cultist.loc, /obj/machinery/dna_scannernew)&&cultist.loc:locked)
 					cultist.loc:locked = 0
 				for(var/mob/living/carbon/C in users)
-					user.take_overall_damage(15, 0)
+					user.take_overall_damage(dam, 0)
 					C.say("Khari[pick("'","`")]d! Gual'te nikka!")
 				del(src)
 			return fizzle()
@@ -820,7 +821,7 @@ var/list/sacrificed = list()
 			var/list/mob/living/carbon/users = new
 			for(var/mob/living/carbon/C in orange(1,src))
 				if(iscultist(C) && !C.stat)
-					users+=C
+					users += C
 			if(users.len>=3)
 				var/mob/living/carbon/cultist = input("Choose the one who you want to summon", "Followers of Geometer") as null|anything in (cultists - user)
 				if(!cultist)
@@ -833,10 +834,16 @@ var/list/sacrificed = list()
 				cultist.loc = src.loc
 				cultist.lying = 1
 				cultist.regenerate_icons()
-				for(var/mob/living/carbon/human/C in orange(1,src))
+
+				var/dam = round(25 / (users.len/2))	//More people around the rune less damage everyone takes. Minimum is 3 cultists
+
+				for(var/mob/living/carbon/human/C in users)
 					if(iscultist(C) && !C.stat)
 						C.say("N'ath reth sh'yro eth d[pick("'","`")]rekkathnor!")
-						C.take_overall_damage(25, 0)
+						C.take_overall_damage(dam, 0)
+						if(users.len <= 4)				// You did the minimum, this is going to hurt more and we're going to stun you.
+							C.apply_effect(rand(3,6), STUN)
+							C.apply_effect(1, WEAKEN)
 				user.visible_message("\red Rune disappears with a flash of red light, and in its place now a body lies.", \
 				"\red You are blinded by the flash of red light! After you're able to see again, you see that now instead of the rune there's a body.", \
 				"\red You hear a pop and smell ozone.")

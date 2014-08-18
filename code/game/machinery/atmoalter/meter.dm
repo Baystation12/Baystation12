@@ -68,9 +68,16 @@
 		)
 		radio_connection.post_signal(src, signal)
 
-/obj/machinery/meter/proc/status()
-	var/t = ""
-	if (src.target)
+/obj/machinery/meter/examine()
+	var/t = "A gas flow meter. "
+	
+	if(get_dist(usr, src) > 3 && !(istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/dead)))
+		t += "\blue <B>You are too far away to read it.</B>"
+	
+	else if(stat & (NOPOWER|BROKEN))
+		t += "\red <B>The display is off.</B>"	
+	
+	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
 			t += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]&deg;K ([round(environment.temperature-T0C,0.01)]&deg;C)"
@@ -78,31 +85,16 @@
 			t += "The sensor error light is blinking."
 	else
 		t += "The connect error light is blinking."
-	return t
-
-/obj/machinery/meter/examine()
-	set src in view(3)
-
-	var/t = "A gas flow meter. "
-	t += status()
+	
 	usr << t
-
-
 
 /obj/machinery/meter/Click()
 
-	if(stat & (NOPOWER|BROKEN))
+	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
+		examine()
 		return 1
-
-	var/t = null
-	if (get_dist(usr, src) <= 3 || istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/dead))
-		t += status()
-	else
-		usr << "\blue <B>You are too far away.</B>"
-		return 1
-
-	usr << t
-	return 1
+	
+	return ..()
 
 /obj/machinery/meter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))

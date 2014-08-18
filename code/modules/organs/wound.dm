@@ -7,7 +7,7 @@
 	var/current_stage = 0
 
 	// description of the wound
-	var/desc = ""
+	var/desc = "wound" //default in case something borks
 
 	// amount of damage this wound causes
 	var/damage = 0
@@ -207,6 +207,44 @@
 		
 		return (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5)
 
+/** WOUND DEFINITIONS **/
+
+//Note that the MINIMUM damage before a wound can be applied should correspond to 
+//the damage amount for the stage with the same name as the wound.
+//e.g. /datum/wound/cut/deep should only be applied for 15 damage and up, 
+//because in it's stages list, "deep cut" = 15.
+/proc/get_wound_type(var/type = CUT, var/damage)
+	switch(type)
+		if(CUT)
+			switch(damage)
+				if(70 to INFINITY)
+					return /datum/wound/cut/massive
+				if(60 to 70)
+					return /datum/wound/cut/gaping_big
+				if(50 to 60)
+					return /datum/wound/cut/gaping
+				if(25 to 50)
+					return /datum/wound/cut/flesh
+				if(15 to 25)
+					return /datum/wound/cut/deep
+				if(0 to 15)
+					return /datum/wound/cut/small
+		if(BRUISE)
+			return /datum/wound/bruise
+		if(BURN)
+			switch(damage)
+				if(50 to INFINITY)
+					return /datum/wound/burn/carbonised
+				if(40 to 50)
+					return /datum/wound/burn/deep
+				if(30 to 40)
+					return /datum/wound/burn/severe
+				if(15 to 30)
+					return /datum/wound/burn/large
+				if(0 to 15)
+					return /datum/wound/burn/moderate
+	return null //no wound
+
 /** CUTS **/
 /datum/wound/cut/small
 	// link wound descriptions to amounts of damage
@@ -220,7 +258,7 @@
 	damage_type = CUT
 
 /datum/wound/cut/flesh
-	max_bleeding_stage = 3
+	max_bleeding_stage = 4
 	stages = list("ugly ripped flesh wound" = 35, "ugly flesh wound" = 30, "flesh wound" = 25, "blood soaked clot" = 15, "large scab" = 5, "fresh skin" = 0)
 	damage_type = CUT
 
@@ -249,25 +287,26 @@ datum/wound/cut/massive
 
 /** BURNS **/
 /datum/wound/burn/moderate
-	stages = list("ripped burn" = 10, "moderate burn" = 5, "moderate salved burn" = 2, "fresh skin" = 0)
+	stages = list("ripped burn" = 10, "moderate burn" = 5, "healing moderate burn" = 2, "fresh skin" = 0)
 	damage_type = BURN
 
 /datum/wound/burn/large
-	stages = list("ripped large burn" = 20, "large burn" = 15, "large salved burn" = 5, "fresh skin" = 0)
+	stages = list("ripped large burn" = 20, "large burn" = 15, "healing large burn" = 5, "fresh skin" = 0)
 	damage_type = BURN
 
 /datum/wound/burn/severe
-	stages = list("ripped severe burn" = 35, "severe burn" = 30, "severe salved burn" = 10, "burn scar" = 0)
+	stages = list("ripped severe burn" = 35, "severe burn" = 30, "healing severe burn" = 10, "burn scar" = 0)
 	damage_type = BURN
 
 /datum/wound/burn/deep
-	stages = list("ripped deep burn" = 45, "deep burn" = 40, "deep salved burn" = 15,  "large burn scar" = 0)
+	stages = list("ripped deep burn" = 45, "deep burn" = 40, "healing deep burn" = 15,  "large burn scar" = 0)
 	damage_type = BURN
 
 /datum/wound/burn/carbonised
-	stages = list("carbonised area" = 50, "treated carbonised area" = 20, "massive burn scar" = 0)
+	stages = list("carbonised area" = 50, "healing carbonised area" = 20, "massive burn scar" = 0)
 	damage_type = BURN
 
+/** INTERNAL BLEEDING **/
 /datum/wound/internal_bleeding
 	internal = 1
 	stages = list("severed vein" = 30, "cut vein" = 20, "damaged vein" = 10, "bruised vein" = 5)

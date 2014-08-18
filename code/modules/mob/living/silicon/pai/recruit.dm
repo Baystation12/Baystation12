@@ -19,6 +19,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 
 /datum/paiController
+	var/inquirer = null
 	var/list/pai_candidates = list()
 	var/list/asked = list()
 
@@ -224,6 +225,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		M << browse(dat, "window=paiRecruit;size=580x580;")
 
 	proc/findPAI(var/obj/item/device/paicard/p, var/mob/user)
+		inquirer = user
 		requestRecruits()
 		var/list/available = list()
 		for(var/datum/paiCandidate/c in paiController.pai_candidates)
@@ -363,7 +365,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			if(!C)	return
 			asked.Add(C.key)
 			asked[C.key] = world.time
-			var/response = alert(C, "Someone is requesting a pAI personality. Would you like to play as a personal AI?", "pAI Request", "Yes", "No", "Never for this round")
+			var/response = alert(C, "[inquirer] is requesting a pAI personality. Would you like to play as a personal AI?", "pAI Request", "Yes", "No", "Never for this round")
 			if(!C)	return		//handle logouts that happen whilst the alert is waiting for a response.
 			if(response == "Yes")
 				recruitWindow(C.mob)

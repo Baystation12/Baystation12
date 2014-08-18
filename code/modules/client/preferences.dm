@@ -277,7 +277,7 @@ datum/preferences
 				if(gear_datums[gear_name])
 					var/datum/gear/G = gear_datums[gear_name]
 					total_cost += G.cost
-					dat += "[gear_name] <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
+					dat += "[G.display_name]<br>"
 
 			dat += "<b>Used:</b> [total_cost] points."
 		else
@@ -285,6 +285,8 @@ datum/preferences
 
 		if(total_cost < MAX_GEAR_COST)
 			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
+		if(gear && gear.len)
+			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=remove'>\[remove\]</a>"
 
 		dat += "<br><br><b>Occupation Choices</b><br>"
 		dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
@@ -892,10 +894,18 @@ datum/preferences
 						user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
 
 			else if(href_list["task"] == "remove")
-				var/to_remove = href_list["gear"]
-				if(!to_remove) return
+			
+				if(isnull(gear) || !islist(gear))
+					gear = list()
+				if(!gear.len)
+					return
+				
+				var/choice = input(user, "Select gear to remove: ") as null|anything in gear				
+				if(!choice)
+					return
+				
 				for(var/gear_name in gear)
-					if(gear_name == to_remove)
+					if(gear_name == choice)
 						gear -= gear_name
 						break
 

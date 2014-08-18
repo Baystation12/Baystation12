@@ -430,6 +430,9 @@
 		// And uncomment this, too.
 		//new_character.dna.UpdateSE()
 
+		// Do the initial caching of the player's body icons.
+		new_character.regenerate_icons()
+
 		new_character.key = key		//Manually transfer the key to log them in
 
 		return new_character
