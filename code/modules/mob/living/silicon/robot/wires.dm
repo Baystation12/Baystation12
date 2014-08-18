@@ -74,6 +74,7 @@
 		if(BORG_WIRE_LAWCHECK)	//Forces a law update if the borg is set to receive them. Since an update would happen when the borg checks its laws anyway, not much use, but eh
 			if (src.lawupdate)
 				src.lawsync()
+				src.photosync()
 
 		if (BORG_WIRE_AI_CONTROL) //pulse the AI wire to make the borg reselect an AI
 			if(!src.emagged)

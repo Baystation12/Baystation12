@@ -129,17 +129,6 @@ proc/hasorgans(A)
 			zone = "head"
 		if("mouth")
 			zone = "head"
-/*		if("l_hand")
-			zone = "l_arm"
-		if("r_hand")
-			zone = "r_arm"
-		if("l_foot")
-			zone = "l_leg"
-		if("r_foot")
-			zone = "r_leg"
-		if("groin")
-			zone = "chest"
-*/
 	return zone
 
 // Returns zone with a certain probability.
@@ -328,17 +317,25 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)
+	if(!M || !M.client || M.shakecamera)  
 		return
+	M.shakecamera = 1
 	spawn(1)
-		var/oldeye=M.client.eye
+		
+		var/atom/oldeye=M.client.eye
+		var/aiEyeFlag = 0
+		if(istype(oldeye, /mob/aiEye))
+			aiEyeFlag = 1
+
 		var/x
-		M.shakecamera = 1
 		for(x=0; x<duration, x++)
-			M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
+			if(aiEyeFlag)
+				M.client.eye = locate(dd_range(1,oldeye.loc.x+rand(-strength,strength),world.maxx),dd_range(1,oldeye.loc.y+rand(-strength,strength),world.maxy),oldeye.loc.z)
+			else
+				M.client.eye = locate(dd_range(1,M.loc.x+rand(-strength,strength),world.maxx),dd_range(1,M.loc.y+rand(-strength,strength),world.maxy),M.loc.z)
 			sleep(1)
-		M.shakecamera = 0
 		M.client.eye=oldeye
+		M.shakecamera = 0
 
 
 /proc/findname(msg)

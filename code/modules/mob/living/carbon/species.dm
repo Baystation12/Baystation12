@@ -146,8 +146,7 @@
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
-	language = "Siik'maas"
-	secondary_langs = list("Siik'tajr")
+	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	darksight = 8
@@ -292,7 +291,6 @@
 
 	if(H.mind)
 		H.mind.transfer_to(S)
-		S.key = H
 
 	for(var/mob/living/carbon/monkey/diona/D in H.contents)
 		if(D.client)

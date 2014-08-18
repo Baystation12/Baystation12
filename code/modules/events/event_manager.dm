@@ -30,6 +30,10 @@ var/scheduledEvent = null
 				playercount_modifier = 0.9
 			if(36 to 100000)
 				playercount_modifier = 0.8
+
+		if(ticker.mode && ticker.mode.name == "calamity") //Calamity mode lowers the time required between events drastically.
+			playercount_modifier = playercount_modifier * 0.3
+
 		var/next_event_delay = rand(eventTimeLower, eventTimeUpper) * playercount_modifier
 		scheduledEvent = world.timeofday + next_event_delay
 		log_debug("Next event in [next_event_delay/600] minutes.")

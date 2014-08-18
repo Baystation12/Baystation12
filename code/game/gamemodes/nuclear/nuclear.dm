@@ -1,3 +1,10 @@
+/*
+	NUCLEAR EMERGENCY ROUNDTYPE
+*/
+
+var/global/list/turf/synd_spawn = list()
+
+
 /datum/game_mode
 	var/list/datum/mind/syndicates = list()
 
@@ -116,14 +123,6 @@
 
 /datum/game_mode/nuclear/post_setup()
 
-	var/list/turf/synd_spawn = list()
-
-	for(var/obj/effect/landmark/A in landmarks_list)
-		if(A.name == "Syndicate-Spawn")
-			synd_spawn += get_turf(A)
-			del(A)
-			continue
-
 	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
@@ -139,8 +138,8 @@
 		synd_mind.current.real_name = "[syndicate_name()] Operative" // placeholder while we get their actual name
 		spawn(0)
 			NukeNameAssign(synd_mind)
-		if(!config.objectives_disabled)
-			forge_syndicate_objectives(synd_mind)
+
+		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
 
@@ -188,25 +187,18 @@
 
 
 /datum/game_mode/proc/forge_syndicate_objectives(var/datum/mind/syndicate)
+
 	if (config.objectives_disabled)
 		return
+
 	var/datum/objective/nuclear/syndobj = new
 	syndobj.owner = syndicate
 	syndicate.objectives += syndobj
 
-
 /datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1)
 	if (you_are)
 		syndicate.current << "\blue You are a [syndicate_name()] agent!"
-	var/obj_count = 1
-	if(!config.objectives_disabled)
-		for(var/datum/objective/objective in syndicate.objectives)
-			syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-	else
-		syndicate.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
-	return
-
+	show_objectives(syndicate)
 
 /datum/game_mode/proc/random_radio_frequency()
 	return 1337 // WHY??? -- Doohl

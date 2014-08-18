@@ -36,6 +36,7 @@
 	item_color = "dispatch"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security2
@@ -105,6 +106,7 @@
 	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
 	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	body_parts_covered = 0
 
 /obj/item/clothing/head/det_hat/black
 	icon_state = "detective2"
@@ -134,8 +136,8 @@
 	icon_state = "hoscap"
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 10, bomb = 25, bio = 10, rad = 0)
-	flags_inv = 0
 	flags_inv = HIDEEARS
+	body_parts_covered = 0
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/armor/hos
@@ -172,3 +174,4 @@
 	item_state = "jensencoat"
 	flags_inv = 0
 	siemens_coefficient = 0.6
+	body_parts_covered = UPPER_TORSO|ARMS

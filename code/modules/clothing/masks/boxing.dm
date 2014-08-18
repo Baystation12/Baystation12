@@ -5,6 +5,7 @@
 	item_state = "balaclava"
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
+	body_parts_covered = FACE
 	w_class = 2
 
 /obj/item/clothing/mask/balaclava/tactical
@@ -23,6 +24,7 @@
 	item_state = "luchag"
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
+	body_parts_covered = HEAD|FACE
 	w_class = 2
 	siemens_coefficient = 3.0
 

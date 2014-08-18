@@ -288,13 +288,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
-//		if(target_tile.parent && target_tile.parent.group_processing) // THESE PROBABLY DO SOMETHING IMPORTANT BUT I DON'T KNOW HOW TO FIX IT - Erthilo
-//			target_tile.parent.suspend_group_processing()
-		var/datum/gas_mixture/napalm = new
-		var/phoronToDeduce = 35
-		napalm.phoron = phoronToDeduce
-		napalm.temperature = 400+T0C
-		target_tile.assume_air(napalm)
+		target_tile.assume_gas("phoron", 35, 400+T0C)
 		spawn (0) target_tile.hotspot_expose(temperature, 400)
 	for(var/obj/structure/falsewall/phoron/F in range(3,src))//Hackish as fuck, but until temperature_expose works, there is nothing I can do -Sieve
 		var/turf/T = get_turf(F)
@@ -1256,7 +1250,7 @@ About the new airlock wires panel:
 	if(!forced)
 		if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return 0
-	use_power(50)
+	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	else
@@ -1298,7 +1292,7 @@ About the new airlock wires panel:
 			if(istype(location, /turf/simulated))
 				location.add_blood(M)
 
-	use_power(50)
+	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 30, 1)
 	else

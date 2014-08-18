@@ -40,7 +40,6 @@
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
-		/obj/machinery/hydroponics,
 		/obj/machinery/constructable_frame)
 
 	New()
@@ -108,6 +107,7 @@
 			user << "\blue You fill [src] with [trans] units of the contents of [target]."
 
 		else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
+
 			if(!reagents.total_volume)
 				user << "\red [src] is empty."
 				return

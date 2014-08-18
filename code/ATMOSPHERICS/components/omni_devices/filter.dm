@@ -8,6 +8,21 @@
 	var/list/filters = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
+	
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
+	
+	var/max_flow_rate = 200
+	var/set_flow_rate = 200
+	
+	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
+
+/obj/machinery/atmospherics/omni/filter/New()
+	..()
+	rebuild_filtering_list()
+	for(var/datum/omni_port/P in ports)
+		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 /obj/machinery/atmospherics/omni/filter/Del()
 	input = null
@@ -37,80 +52,47 @@
 /obj/machinery/atmospherics/omni/filter/error_check()
 	if(!input || !output || !filters)
 		return 1
-	if(filters.len < 1 || filters.len > 2) //requires 1 or 2 filters ~otherwise why are you using a filter?
+	if(filters.len < 1) //requires at least 1 filter ~otherwise why are you using a filter?
 		return 1
 
 	return 0
 
 /obj/machinery/atmospherics/omni/filter/process()
 	..()
-	if(!on)
-		return 0
+	if(error_check())
+		on = 0
 	
-	if(!input || !output)
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
 		return
-
+	
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
-
-	var/output_pressure = output_air.return_pressure()
 	
-	if(output_pressure >= target_pressure)
-		return
-	for(var/datum/omni_port/P in filters)
-		if(P.air.return_pressure() >= target_pressure)
-			return
-
-	var/pressure_delta = target_pressure - output_pressure
-
-	if(input_air.return_temperature() > 0)
-		input.transfer_moles = pressure_delta * output_air.volume / (input_air.return_temperature() * R_IDEAL_GAS_EQUATION)
-
-	if(input.transfer_moles > 0)
-		var/datum/gas_mixture/removed = input_air.remove(input.transfer_moles)
+	//Figure out the amount of moles to transfer
+	var/transfer_moles = (set_flow_rate/input_air.volume)*input_air.total_moles
+	
+	var/power_draw = -1
+	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
+		power_draw = filter_gas_multi(src, filtering_outputs, input_air, output_air, transfer_moles, active_power_usage)
+	
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else
+		handle_power_draw(power_draw)
 		
-		if(!removed)
-			return
-		
-		for(var/datum/omni_port/P in filters)
-			var/datum/gas_mixture/filtered_out = new
-			filtered_out.temperature = removed.return_temperature()
-			
-			switch(P.mode)
-				if(ATM_O2)
-					filtered_out.oxygen = removed.oxygen
-					removed.oxygen = 0
-				if(ATM_N2)
-					filtered_out.nitrogen = removed.nitrogen
-					removed.nitrogen = 0
-				if(ATM_CO2)
-					filtered_out.carbon_dioxide = removed.carbon_dioxide
-					removed.carbon_dioxide = 0
-				if(ATM_P)
-					filtered_out.phoron = removed.phoron
-					removed.phoron = 0
-				if(ATM_N2O)
-					if(removed.trace_gases.len>0)
-						for(var/datum/gas/sleeping_agent/trace_gas in removed.trace_gases)
-							if(istype(trace_gas))
-								removed.trace_gases -= trace_gas
-								filtered_out.trace_gases += trace_gas
-				else
-					filtered_out = null
-			
-			P.air.merge(filtered_out)
-			if(P.network)
-				P.network.update = 1
-		
-		output_air.merge(removed)
-		if(output.network)
-			output.network.update = 1
-		
-		input.transfer_moles = 0
 		if(input.network)
 			input.network.update = 1
-
-	return
+		if(output.network)
+			output.network.update = 1
+		for(var/datum/omni_port/P in filters)
+			if(P.network)
+				P.network.update = 1
+	
+	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	usr.set_machine(src)
@@ -161,7 +143,8 @@
 	if(portData.len)
 		data["ports"] = portData
 	if(output)
-		data["pressure"] = target_pressure
+		data["set_flow_rate"] = round(set_flow_rate*10)		//because nanoui can't handle rounded decimals.
+		data["last_flow_rate"] = round(last_flow_rate*10)
 
 	return data
 
@@ -196,9 +179,9 @@
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if(configuring && !on)
 		switch(href_list["command"])
-			if("set_pressure")
-				var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",target_pressure) as num
-				target_pressure = between(0, new_pressure, 4500)
+			if("set_flow_rate")
+				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
+				set_flow_rate = between(0, new_flow_rate, max_flow_rate)
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
@@ -257,6 +240,7 @@
 		target_port.mode = mode
 		if(target_port.mode != previous_mode)
 			handle_port_change(target_port)
+			rebuild_filtering_list()
 		else
 			return
 	else
@@ -268,8 +252,15 @@
 			P.mode = previous_mode
 			if(P.mode != old_mode)
 				handle_port_change(P)
-
+	
 	update_ports()
+
+/obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
+	filtering_outputs.Cut()
+	for(var/datum/omni_port/P in ports)
+		var/gasid = mode_to_gasid(P.mode)
+		if(gasid)
+			filtering_outputs[gasid] = P.air
 
 /obj/machinery/atmospherics/omni/filter/proc/handle_port_change(var/datum/omni_port/P)
 	switch(P.mode)

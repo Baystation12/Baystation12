@@ -61,6 +61,13 @@
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT logo and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	updateicon()
 
+/mob/living/silicon/robot/drone/init()
+	laws = new /datum/ai_laws/drone()
+	connected_ai = null
+
+	aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+
 //Redefining some robot procs...
 /mob/living/silicon/robot/drone/updatename()
 	real_name = "maintenance drone ([rand(100,999)])"
@@ -103,7 +110,7 @@
 		return emote(copytext(message,2))
 	else if(length(message) >= 2)
 
-		if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":D")
+		if(parse_message_mode(message, "NONE") == "dronechat")
 
 			if(!is_component_functioning("radio"))
 				src << "\red Your radio transmitter isn't functional."

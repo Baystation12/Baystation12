@@ -17,25 +17,34 @@ Thus, the two variables affect pump operation are set in New():
 	icon_state = "map_off"
 	level = 1
 
-	name = "Gas pump"
+	name = "gas pump"
 	desc = "A pump"
 
 	var/on = 0
 	var/target_pressure = ONE_ATMOSPHERE
 
+	//var/max_volume_transfer = 10000
+
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+
+	var/last_power_draw = 0			//for UI
+	var/max_pressure_setting = 15000	//kPa
+	
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/binary/pump/highcap
-	name = "High capacity gas pump"
-	desc = "A high capacity pump"
-
-	target_pressure = 15000000
+/obj/machinery/atmospherics/binary/pump/New()
+	..()
+	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
 /obj/machinery/atmospherics/binary/pump/on
 	icon_state = "map_on"
 	on = 1
+
 
 /obj/machinery/atmospherics/binary/pump/update_icon()
 	if(!powered())
@@ -56,27 +65,33 @@ Thus, the two variables affect pump operation are set in New():
 	update_underlays()
 
 /obj/machinery/atmospherics/binary/pump/process()
-//		..()
-	if(stat & (NOPOWER|BROKEN))
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_power_draw = 0
+		last_flow_rate = 0
 		return
-	if(!on)
-		return 0
 
-	var/output_starting_pressure = air2.return_pressure()
+	var/power_draw = -1
+	var/pressure_delta = target_pressure - air2.return_pressure()
 
-	if( (target_pressure - output_starting_pressure) < 0.01)
-		//No need to pump gas if target is already reached!
-		return 1
-
-	//Calculate necessary moles to transfer using PV=nRT
-	if((air1.total_moles() > 0) && (air1.temperature>0))
-		var/pressure_delta = target_pressure - output_starting_pressure
-		var/transfer_moles = pressure_delta*air2.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-		//Actually transfer the gas
-		var/datum/gas_mixture/removed = air1.remove(transfer_moles)
-		air2.merge(removed)
-
+	if(pressure_delta > 0.01 && air1.temperature > 0)
+		//Figure out how much gas to transfer to meet the target pressure.
+		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
+		var/output_volume = air2.volume + (network2? network2.volume : 0)
+		
+		//get the number of moles that would have to be transfered to bring sink to the target pressure
+		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+		
+		power_draw = pump_gas(src, air1, air2, transfer_moles, active_power_usage)
+	
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_power_draw = 0
+		last_flow_rate = 0
+	else
+		last_power_draw = handle_power_draw(power_draw)
+		
 		if(network1)
 			network1.update = 1
 
@@ -113,14 +128,31 @@ Thus, the two variables affect pump operation are set in New():
 
 	return 1
 
-/obj/machinery/atmospherics/binary/pump/interact(mob/user as mob)
-	var/dat = {"<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
-				<b>Desirable output pressure: </b>
-				[round(target_pressure,0.1)]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
-				"}
+/obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	if(stat & (BROKEN|NOPOWER))
+		return
 
-	user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmo_pump")
-	onclose(user, "atmo_pump")
+	// this is the data which will be sent to the ui
+	var/data[0]
+	
+	data = list(
+		"on" = on,
+		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
+		"max_pressure" = max_pressure_setting,
+		"last_flow_rate" = round(last_flow_rate*10),
+		"last_power_draw" = round(last_power_draw),
+		"max_power_draw" = active_power_usage,
+	)
+
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "gas_pump.tmpl", name, 470, 290)
+		ui.set_initial_data(data)	// when the ui is first opened this is the data it will use
+		ui.open()					// open the new ui window
+		ui.set_auto_update(1)		// auto update every Master Controller tick
 
 /obj/machinery/atmospherics/binary/pump/initialize()
 	..()
@@ -132,9 +164,12 @@ Thus, the two variables affect pump operation are set in New():
 		return 0
 
 	if(signal.data["power"])
-		on = text2num(signal.data["power"])
+		if(text2num(signal.data["power"]))
+			on = 1
+		else
+			on = 0
 
-	if(signal.data["power_toggle"])
+	if("power_toggle" in signal.data)
 		on = !on
 
 	if(signal.data["set_output_pressure"])
@@ -154,7 +189,6 @@ Thus, the two variables affect pump operation are set in New():
 	update_icon()
 	return
 
-
 /obj/machinery/atmospherics/binary/pump/attack_hand(user as mob)
 	if(..())
 		return
@@ -163,20 +197,28 @@ Thus, the two variables affect pump operation are set in New():
 		user << "\red Access denied."
 		return
 	usr.set_machine(src)
-	interact(user)
+	ui_interact(user)
 	return
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
 	if(..()) return
+	
 	if(href_list["power"])
 		on = !on
-	if(href_list["set_press"])
-		var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
-		src.target_pressure = max(0, min(4500, new_pressure))
+	
+	switch(href_list["set_press"])
+		if ("min")
+			target_pressure = 0
+		if ("max")
+			target_pressure = max_pressure_setting
+		if ("set")
+			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
+			src.target_pressure = between(0, new_pressure, max_pressure_setting)
+	
 	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	
 	src.update_icon()
-	src.updateUsrDialog()
-	return
 
 /obj/machinery/atmospherics/binary/pump/power_change()
 	var/old_stat = stat

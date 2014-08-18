@@ -93,7 +93,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_belt)
 		switch(H.backbag)
 			if(1) H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/hydroponics(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
@@ -171,7 +171,7 @@
 	selection_color = "#dddddd"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mint, access_mining_station, access_mailsorting)
-
+	alt_titles = list("Drill Technician","Prospector")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

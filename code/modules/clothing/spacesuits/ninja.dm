@@ -7,6 +7,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 25)
 	siemens_coefficient = 0.2
 	species_restricted = null
+	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/suit/space/space_ninja
 	name = "ninja suit"
@@ -18,6 +19,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.2
 	species_restricted = null //Workaround for spawning alien ninja without internals.
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 		//Important parts of the suit.
 	var/mob/living/carbon/affecting = null//The wearer.

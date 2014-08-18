@@ -65,24 +65,4 @@
 	else
 		user << "<span class='notice'>Where are the lips on that?</span>"
 
-//you can wipe off lipstick with paper!
-/obj/item/weapon/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(user.zone_sel.selecting == "mouth")
-		if(!istype(M, /mob))	return
-
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H == user)
-				user << "<span class='notice'>You wipe off the lipstick with [src].</span>"
-				H.lip_style = null
-				H.update_body()
-			else
-				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
-								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
-				if(do_after(user, 10) && do_after(H, 10, 5, 0))	//user needs to keep their active hand, H does not.
-					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
-										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
-					H.lip_style = null
-					H.update_body()
-	else
-		..()
+//you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()

@@ -375,12 +375,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 			var/directive = generate_ninja_directive(side)
 			new_ninja << "\blue \nYou are an elite mercenary assassin of the Spider Clan, [new_ninja.real_name]. The dreaded \red <B>SPACE NINJA</B>!\blue You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor. Remember your training (initialize your suit by right clicking on it)! \nYour current directive is: \red <B>[directive]</B>"
 			new_ninja.mind.store_memory("<B>Directive:</B> \red [directive]<br>")
-
-			var/obj_count = 1
-			new_ninja << "\blue Your current objectives:"
-			for(var/datum/objective/objective in ninja_mind.objectives)
-				new_ninja << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-				obj_count++
+			show_objectives(new_ninja.mind)
 
 		sent_ninja_to_station = 1//And we're done.
 		return new_ninja//Return the ninja in case we need to reference them later.
@@ -682,7 +677,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	//verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
 
 //=======//KAMIKAZE VERBS//=======//
 

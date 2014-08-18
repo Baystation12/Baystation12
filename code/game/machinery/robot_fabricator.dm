@@ -8,8 +8,8 @@
 	var/operating = 0
 	var/obj/item/robot_parts/being_built = null
 	use_power = 1
-	idle_power_usage = 20
-	active_power_usage = 5000
+	idle_power_usage = 40
+	active_power_usage = 10000
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if (istype(O, /obj/item/stack/sheet/metal))
@@ -33,12 +33,6 @@
 					updateDialog()
 		else
 			user << "The robot part maker is full. Please remove metal from the robot part maker in order to insert more."
-
-/obj/machinery/robotic_fabricator/power_change()
-	if (powered())
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
 
 /obj/machinery/robotic_fabricator/attack_paw(user as mob)
 	return src.attack_hand(user)
@@ -126,7 +120,7 @@ Please wait until completion...</TT><BR>
 			if (!isnull(building))
 				if (src.metal_amount >= build_cost)
 					src.operating = 1
-					src.use_power = 2
+					src.update_use_power(2)
 
 					src.metal_amount = max(0, src.metal_amount - build_cost)
 
@@ -139,7 +133,7 @@ Please wait until completion...</TT><BR>
 						if (!isnull(src.being_built))
 							src.being_built.loc = get_turf(src)
 							src.being_built = null
-						src.use_power = 1
+						src.update_use_power(1)
 						src.operating = 0
 						src.overlays -= "fab-active"
 		return

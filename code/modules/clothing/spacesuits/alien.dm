@@ -120,6 +120,7 @@
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
@@ -161,6 +162,7 @@
 	icon_state = "vox-casual-1"
 	item_color = "vox-casual-1"
 	item_state = "vox-casual-1"
+	body_parts_covered = LEGS
 
 /obj/item/clothing/under/vox/vox_robes
 	name = "alien robes"

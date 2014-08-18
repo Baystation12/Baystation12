@@ -19,7 +19,7 @@
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
 	var/defaultmsg = "<span class='notice'>Welcome. Please select an option.</span>"
-	var/rebootmsg = "<span class='warning'>%$&(£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
+	var/rebootmsg = "<span class='warning'>%$&(Â£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
 	//Computer properties
 	var/screen = 0 		// 0 = Main menu, 1 = Message Logs, 2 = Hacked screen, 3 = Custom Message
 	var/hacking = 0		// Is it being hacked into by the AI/Cyborg
@@ -36,6 +36,7 @@
 
 /obj/machinery/computer/message_monitor/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))
+		..()
 		return
 	if(!istype(user))
 		return
@@ -52,7 +53,7 @@
 				var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
 				MK.loc = src.loc
 				// Will help make emagging the console not so easy to get away with.
-				MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
+				MK.info += "<br><br><font color='red'>Â£%@%(*$%&(Â£&?*(%&Â£/{}</font>"
 				spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
 				message = rebootmsg
 			else

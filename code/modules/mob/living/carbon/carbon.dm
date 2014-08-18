@@ -1,6 +1,6 @@
 /mob/living/carbon/Life()
 	..()
-	
+
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -14,7 +14,7 @@
 				src.nutrition -= HUNGER_FACTOR/10
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
-			
+
 		// Moving around increases germ_level faster
 		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 			germ_level++
@@ -99,24 +99,34 @@
 
 	return
 
-/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
-	src.take_overall_damage(0,shock_damage,used_weapon="Electrocution")
-	//src.burn_skin(shock_damage)
-	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
-	//src.updatehealth()
-	src.visible_message(
-		"\red [src] was shocked by the [source]!", \
-		"\red <B>You feel a powerful shock course through your body!</B>", \
-		"\red You hear a heavy electrical crack." \
-	)
-//	if(src.stunned < shock_damage)	src.stunned = shock_damage
-	Stun(10)//This should work for now, more is really silly and makes you lay there forever
-//	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff
-	Weaken(10)
+	
+	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
+	
+	playsound(loc, "sparks", 50, 1, -1)
+	if (shock_damage > 10)
+		src.visible_message(
+			"\red [src] was shocked by the [source]!", \
+			"\red <B>You feel a powerful shock course through your body!</B>", \
+			"\red You hear a heavy electrical crack." \
+		)
+		Stun(10)//This should work for now, more is really silly and makes you lay there forever
+		Weaken(10)
+	else
+		src.visible_message(
+			"\red [src] was mildly shocked by the [source].", \
+			"\red You feel a mild shock course through your body.", \
+			"\red You hear a light zapping." \
+		)
+	
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(5, 1, loc)
+	s.start()
+	
 	return shock_damage
 
 
@@ -206,7 +216,7 @@
 			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
-				
+
 			if(lying)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
@@ -216,7 +226,7 @@
 			else
 				M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
 								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
-								
+
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
@@ -470,9 +480,10 @@
 		return
 
 	if(B.chemicals >= 100)
-		src << "\red <B>Your host twitches and quivers as you rapdly excrete several larvae from your sluglike body.</B>"
+		src << "\red <B>Your host twitches and quivers as you rapidly excrete a larva from your sluglike body.</B>"
 		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
 		B.chemicals -= 100
+		B.has_reproduced = 1
 
 		new /obj/effect/decal/cleanable/vomit(get_turf(src))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)

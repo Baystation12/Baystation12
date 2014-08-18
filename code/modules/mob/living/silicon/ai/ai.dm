@@ -53,6 +53,20 @@ var/list/ai_list = list()
 	var/datum/trackable/track = null
 	var/last_announcement = ""
 
+proc/add_ai_verbs(var/mob/M)
+	M.verbs += /mob/living/silicon/ai/proc/ai_call_shuttle
+	M.verbs += /mob/living/silicon/ai/proc/ai_camera_track
+	M.verbs += /mob/living/silicon/ai/proc/ai_camera_list
+	M.verbs += /mob/living/silicon/ai/proc/ai_goto_location
+	M.verbs += /mob/living/silicon/ai/proc/ai_remove_location
+	M.verbs += /mob/living/silicon/ai/proc/ai_hologram_change
+	M.verbs += /mob/living/silicon/ai/proc/ai_network_change
+	M.verbs += /mob/living/silicon/ai/proc/ai_roster
+	M.verbs += /mob/living/silicon/ai/proc/ai_statuschange
+	M.verbs += /mob/living/silicon/ai/proc/ai_store_location
+	M.verbs += /mob/living/silicon/ai/proc/control_integrated_radio
+	M.verbs += /mob/living/silicon/ai/proc/toggle_camera_light
+
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	var/list/possibleNames = ai_names
 
@@ -91,12 +105,10 @@ var/list/ai_list = list()
 	aiMulti = new(src)
 	aiRadio = new(src)
 	aiRadio.myAi = src
+	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 
 	if (istype(loc, /turf))
-		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
-		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
-		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/control_integrateed_radio)
+		add_ai_verbs(src)
 
 	//Languages
 	add_language("Sol Common", 0)
@@ -749,7 +761,7 @@ var/list/ai_list = list()
 	else
 		return ..()
 
-/mob/living/silicon/ai/proc/control_integrateed_radio()
+/mob/living/silicon/ai/proc/control_integrated_radio()
 	set name = "Radio Settings"
 	set desc = "Allows you to change settings of your radio."
 	set category = "AI Commands"

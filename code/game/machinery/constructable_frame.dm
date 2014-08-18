@@ -212,7 +212,7 @@ to destroy them and players will be able to make replacements.
 	name = "Circuit Board (PACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman"
 	board_type = "machine"
-	origin_tech = "programming=3:powerstorage=3;phorontech=3;engineering=3"
+	origin_tech = "programming=3;powerstorage=3;phorontech=3;engineering=3"
 	frame_desc = "Requires 1 Matter Bin, 1 Micro-Laser, 2 Pieces of Cable, and 1 Capacitor."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
@@ -277,6 +277,28 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
 							"/obj/item/weapon/cable_coil" = 2,)
 
+/obj/item/weapon/circuitboard/gas_heater
+	name = "Circuit Board (Gas Heating System)"
+	build_path = "/obj/machinery/atmospherics/unary/heater"
+	board_type = "machine"
+	origin_tech = "powerstorage=2;engineering=1"
+	frame_desc = "Requires 5 Pieces of Cable, 1 Matter Bin, and 2 Capacitors."
+	req_components = list(
+							"/obj/item/weapon/cable_coil" = 5,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
+							"/obj/item/weapon/stock_parts/capacitor" = 2)
+
+/obj/item/weapon/circuitboard/gas_cooler
+	name = "Circuit Board (Gas Cooling System)"
+	build_path = "/obj/machinery/atmospherics/unary/freezer"
+	board_type = "machine"
+	origin_tech = "magnets=2;engineering=2"
+	frame_desc = "Requires 2 Pieces of Cable, 1 Matter Bin, 1 Micro Manipulator, and 2 Capacitors."
+	req_components = list(
+							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
+							"/obj/item/weapon/stock_parts/capacitor" = 2,
+							"/obj/item/weapon/stock_parts/manipulator" = 1)
 
 // Telecomms circuit boards:
 

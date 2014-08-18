@@ -73,6 +73,7 @@ Class Procs:
 //Geometry updates lists
 /datum/controller/air_system/var/list/tiles_to_update = list()
 /datum/controller/air_system/var/list/zones_to_update = list()
+/datum/controller/air_system/var/list/active_fire_zones = list()
 /datum/controller/air_system/var/list/active_hotspots = list()
 
 /datum/controller/air_system/var/active_zones = 0
@@ -171,9 +172,16 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	for(var/connection_edge/edge in edges)
 		edge.tick()
 
-	//Process fires.
+	//Process fire zones.
 	if(.)
-		tick_progress = "processing fire"
+		tick_progress = "processing fire zones"
+
+	for(var/zone/Z in active_fire_zones)
+		Z.process_fire()
+
+	//Process hotspots.
+	if(.)
+		tick_progress = "processing hotspots"
 
 	for(var/obj/fire/fire in active_hotspots)
 		fire.process()

@@ -34,11 +34,7 @@
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
-	if(powered())
-		stat &= ~NOPOWER
-	else
-		spawn(rand(0, 15))
-			stat |= NOPOWER
+	..()
 	nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/process()
@@ -145,7 +141,7 @@
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 380, 650)
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 390, 655)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
 		// open the new ui window
@@ -315,13 +311,6 @@
 /obj/machinery/chem_master/meteorhit()
 	del(src)
 	return
-
-/obj/machinery/chem_master/power_change()
-	if(powered())
-		stat &= ~NOPOWER
-	else
-		spawn(rand(0, 15))
-			stat |= NOPOWER
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
@@ -614,18 +603,16 @@
 
 
 /obj/machinery/computer/pandemic/power_change()
-
+	..()
 	if(stat & BROKEN)
 		icon_state = (src.beaker?"mixer1_b":"mixer0_b")
 
-	else if(powered())
+	else if(!(stat & NOPOWER))
 		icon_state = (src.beaker?"mixer1":"mixer0")
-		stat &= ~NOPOWER
 
 	else
 		spawn(rand(0, 15))
 			src.icon_state = (src.beaker?"mixer1_nopower":"mixer0_nopower")
-			stat |= NOPOWER
 
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
@@ -855,8 +842,8 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "juicer1"
 	layer = 2.9
-	density = 1
-	anchored = 1
+	density = 0
+	anchored = 0
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 100

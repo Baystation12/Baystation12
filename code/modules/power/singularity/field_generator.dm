@@ -12,7 +12,7 @@ field_generator power level display
    -Aygar
 */
 
-#define field_generator_max_power 250
+#define field_generator_max_power 250000
 /obj/machinery/field_generator
 	name = "Field Generator"
 	desc = "A large thermal battery that projects a high amount of energy when powered."
@@ -25,12 +25,16 @@ field_generator power level display
 	var/Varedit_start = 0
 	var/Varpower = 0
 	var/active = 0
-	var/power = 20  // Current amount of power
+	var/power = 30000  // Current amount of power
 	var/state = 0
 	var/warming_up = 0
 	var/list/obj/machinery/containment_field/fields
 	var/list/obj/machinery/field_generator/connected_gens
 	var/clean_up = 0
+	
+	//If keeping field generators powered is hard then increase the emitter active power usage.
+	var/gen_power_draw = 5500	//power needed per generator
+	var/field_power_draw = 2000	//power needed per field object
 
 
 /obj/machinery/field_generator/update_icon()
@@ -167,8 +171,8 @@ field_generator power level display
 	return 0
 
 /obj/machinery/field_generator/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.flag != "bullet")
-		power += Proj.damage
+	if(istype(Proj, /obj/item/projectile/beam))
+		power += Proj.damage * EMITTER_DAMAGE_POWER_TRANSFER
 		update_icon()
 	return 0
 
@@ -206,51 +210,44 @@ field_generator power level display
 	if(src.power > field_generator_max_power)
 		src.power = field_generator_max_power
 
-	var/power_draw = 2
+	var/power_draw = gen_power_draw
+	for(var/obj/machinery/field_generator/FG in connected_gens)
+		if (!isnull(FG))
+			power_draw += gen_power_draw
 	for (var/obj/machinery/containment_field/F in fields)
-		if (isnull(F))
-			continue
-		power_draw++
-	if(draw_power(round(power_draw/2,1)))
+		if (!isnull(F))
+			power_draw += field_power_draw
+	power_draw /= 2	//because this will be mirrored for both generators
+	if(draw_power(round(power_draw)) >= power_draw)
 		return 1
 	else
 		for(var/mob/M in viewers(src))
-			M.show_message("\red The [src.name] shuts down!")
+			M.show_message("\red \The [src] shuts down!")
 		turn_off()
 		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
 		src.power = 0
 		return 0
 
-//This could likely be better, it tends to start loopin if you have a complex generator loop setup.  Still works well enough to run the engine fields will likely recode the field gens and fields sometime -Mport
-/obj/machinery/field_generator/proc/draw_power(var/draw = 0, var/failsafe = 0, var/obj/machinery/field_generator/G = null, var/obj/machinery/field_generator/last = null)
-	if(Varpower)
-		return 1
-	if((G && G == src) || (failsafe >= 8))//Loopin, set fail
-		return 0
-	else
-		failsafe++
+//Tries to draw the needed power from our own power reserve, or connected generators if we can. Returns the amount of power we were able to get.
+/obj/machinery/field_generator/proc/draw_power(var/draw = 0, var/list/flood_list = list())
+	flood_list += src
+	
 	if(src.power >= draw)//We have enough power
 		src.power -= draw
-		return 1
-	else//Need more power
-		draw -= src.power
-		src.power = 0
-		for(var/obj/machinery/field_generator/FG in connected_gens)
-			if(isnull(FG))
-				continue
-			if(FG == last)//We just asked you
-				continue
-			if(G)//Another gen is askin for power and we dont have it
-				if(FG.draw_power(draw,failsafe,G,src))//Can you take the load
-					return 1
-				else
-					return 0
-			else//We are askin another for power
-				if(FG.draw_power(draw,failsafe,src,src))
-					return 1
-				else
-					return 0
-
+		return draw
+		
+	//Need more power
+	var/actual_draw = src.power	//already checked that power < draw
+	src.power = 0
+	
+	for(var/obj/machinery/field_generator/FG in connected_gens)
+		if (FG in flood_list)
+			continue
+		actual_draw += FG.draw_power(draw - actual_draw, flood_list) //since the flood list reference is shared this actually works.
+		if (actual_draw >= draw)
+			return actual_draw
+	
+	return actual_draw
 
 /obj/machinery/field_generator/proc/start_fields()
 	if(!src.state == 2 || !anchored)

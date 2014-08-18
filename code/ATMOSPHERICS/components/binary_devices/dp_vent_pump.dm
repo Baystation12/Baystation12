@@ -1,3 +1,15 @@
+#define DEFAULT_PRESSURE_DELTA 10000
+
+#define EXTERNAL_PRESSURE_BOUND ONE_ATMOSPHERE
+#define INTERNAL_PRESSURE_BOUND 0
+#define PRESSURE_CHECKS 1
+
+#define PRESSURE_CHECK_EXTERNAL 1
+#define PRESSURE_CHECK_INPUT 2
+#define PRESSURE_CHECK_OUTPUT 4
+
+#undefine
+
 /obj/machinery/atmospherics/binary/dp_vent_pump
 	icon = 'icons/atmos/vent_pump.dmi'
 	icon_state = "map_dp_vent"
@@ -10,24 +22,31 @@
 
 	level = 1
 
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	var/last_power_draw = 0
+
 	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
-	var/external_pressure_bound = ONE_ATMOSPHERE
-	var/input_pressure_min = 0
-	var/output_pressure_max = 0
+	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
+	var/input_pressure_min = INTERNAL_PRESSURE_BOUND
+	var/output_pressure_max = DEFAULT_PRESSURE_DELTA
 
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-	var/pressure_checks = 1
+	var/pressure_checks = PRESSURE_CHECK_EXTERNAL
 	//1: Do not pass external_pressure_bound
 	//2: Do not pass input_pressure_min
 	//4: Do not pass output_pressure_max
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/New()
 	..()
+	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/high_volume
@@ -35,8 +54,8 @@
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/high_volume/New()
 	..()
-	air1.volume = 1000
-	air2.volume = 1000
+	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
+	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -78,54 +97,74 @@
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/process()
 	..()
-
-	if(!on)
+	
+	if(stat & (NOPOWER|BROKEN) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_power_draw = 0
+		last_flow_rate = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
-	var/environment_pressure = environment.return_pressure()
 
-	if(pump_direction) //input -> external
-		var/pressure_delta = 10000
+	var/power_draw = -1
+	
+	//Figure out the target pressure difference
+	var/pressure_delta = get_pressure_delta(environment)
 
-		if(pressure_checks&1)
-			pressure_delta = min(pressure_delta, (external_pressure_bound - environment_pressure))
-		if(pressure_checks&2)
-			pressure_delta = min(pressure_delta, (air1.return_pressure() - input_pressure_min))
-
-		if(pressure_delta > 0)
-			if(air1.temperature > 0)
-				var/transfer_moles = pressure_delta*environment.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-				var/datum/gas_mixture/removed = air1.remove(transfer_moles)
-
-				loc.assume_air(removed)
-
-				if(network1)
+	if(pressure_delta > 0.5)
+		if(pump_direction) //internal -> external	
+			if (node1 && (environment.temperature || air1.temperature))
+				var/output_volume = environment.volume * environment.group_multiplier
+				var/air_temperature = environment.temperature? environment.temperature : air1.temperature
+				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+				
+				power_draw = pump_gas(src, air1, environment, transfer_moles, active_power_usage)
+				
+				if(power_draw >= 0 && network1)
 					network1.update = 1
-
-	else //external -> output
-		var/pressure_delta = 10000
-
-		if(pressure_checks&1)
-			pressure_delta = min(pressure_delta, (environment_pressure - external_pressure_bound))
-		if(pressure_checks&4)
-			pressure_delta = min(pressure_delta, (output_pressure_max - air2.return_pressure()))
-
-		if(pressure_delta > 0)
-			if(environment.temperature > 0)
-				var/transfer_moles = pressure_delta*air2.volume/(environment.temperature * R_IDEAL_GAS_EQUATION)
-
-				var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-
-				air2.merge(removed)
-
-				if(network2)
+		else //external -> internal
+			if (node2 && (environment.temperature || air2.temperature))
+				var/output_volume = air2.volume + (network2? network2.volume : 0)
+				var/air_temperature = air2.temperature? air2.temperature : environment.temperature
+				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+				
+				//limit flow rate from turfs
+				transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+				
+				power_draw = pump_gas(src, environment, air2, transfer_moles, active_power_usage)
+				
+				if(power_draw >= 0 && network2)
 					network2.update = 1
+	
+	if (power_draw < 0)
+		last_power_draw = 0
+		last_flow_rate = 0
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+	else
+		last_power_draw = handle_power_draw(power_draw)
 
 	return 1
 
-	//Radio remote control
+/obj/machinery/atmospherics/binary/dp_vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)
+	var/pressure_delta = DEFAULT_PRESSURE_DELTA
+	var/environment_pressure = environment.return_pressure()
+	
+	if(pump_direction) //internal -> external
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_INPUT)
+			pressure_delta = min(pressure_delta, air1.return_pressure() - input_pressure_min) //decreasing the pressure here
+	else //external -> internal
+		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
+			pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
+		if(pressure_checks & PRESSURE_CHECK_OUTPUT)
+			pressure_delta = min(pressure_delta, output_pressure_max - air2.return_pressure()) //increasing the pressure here
+	
+	return pressure_delta
+	
+
+//Radio remote control
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -160,6 +199,19 @@
 	..()
 	if(frequency)
 		set_frequency(frequency)
+
+/obj/machinery/atmospherics/binary/dp_vent_pump/examine()
+	set src in oview(1)
+	..()
+	
+	if (get_dist(usr, src) <= 1)
+		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+
+/obj/machinery/atmospherics/unary/vent_pump/power_change()
+	var/old_stat = stat
+	..()
+	if(old_stat != stat)
+		update_icon()
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
