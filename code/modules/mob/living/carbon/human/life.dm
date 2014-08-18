@@ -490,31 +490,23 @@
 		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
-			if(inhale_pp > 0)
-				var/ratio = inhale_pp/safe_pressure_min
-
-				 // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
-				 // The hell? By definition ratio > 1, and HUMAN_MAX_OXYLOSS = 1... why do we even have this?
-				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS))
-				failed_inhale = 1
-				inhaled_gas_used = inhaling*ratio/6
-
-			else
-
-				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-				failed_inhale = 1
-
+			
+			var/ratio = inhale_pp/safe_pressure_min
+			// Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
+			adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(1-ratio), 0))
+			failed_inhale = 1
+			
 			oxygen_alert = max(oxygen_alert, 1)
-
 		else
 			// We're in safe limits
-			inhaled_gas_used = inhaling/6
 			oxygen_alert = 0
+
+		inhaled_gas_used = inhaling/6
 
 		breath.adjust_gas(breath_type, -inhaled_gas_used)
 
 		if(!no_exhale)
-			breath.adjust_gas(exhale_type, inhaled_gas_used)
+			breath.adjust_gas_temp(exhale_type, inhaled_gas_used, bodytemperature)
 
 		// Too much exhaled gas in the air
 		if(exhaled_pp > safe_exhaled_max)
