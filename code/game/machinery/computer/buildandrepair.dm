@@ -41,8 +41,18 @@
 	req_access = list(access_security)
 	var/locked = 1
 	var/emagged = 0
+/obj/item/weapon/circuitboard/security/engineering
+	name = "Circuit board (Engineering)"
+	build_path = "/obj/machinery/computer/security/engineering"
+	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
+	req_access = list()
+/obj/item/weapon/circuitboard/security/mining
+	name = "Circuit board (Mining)"
+	build_path = "/obj/machinery/computer/security/mining"
+	network = list("MINE")
+	req_access = list()
 /obj/item/weapon/circuitboard/aicore
-	name = "Circuit board (AI core)"
+	name = "Circuit board (AI Core)"
 	origin_tech = "programming=4;biotech=2"
 	board_type = "other"
 /obj/item/weapon/circuitboard/aiupload
@@ -91,13 +101,13 @@
 	name = "Circuit board (Station Alerts)"
 	build_path = "/obj/machinery/computer/station_alert"
 /obj/item/weapon/circuitboard/atmospheresiphonswitch
-	name = "Circuit board (Atmosphere siphon control)"
+	name = "Circuit board (Atmosphere Siphon Control)"
 	build_path = "/obj/machinery/computer/atmosphere/siphonswitch"
 /obj/item/weapon/circuitboard/air_management
-	name = "Circuit board (Atmospheric monitor)"
+	name = "Circuit board (Atmospheric Monitor)"
 	build_path = "/obj/machinery/computer/general_air_control"
 /obj/item/weapon/circuitboard/injector_control
-	name = "Circuit board (Injector control)"
+	name = "Circuit board (Injector Control)"
 	build_path = "/obj/machinery/computer/general_air_control/fuel_injection"
 /obj/item/weapon/circuitboard/atmos_alert
 	name = "Circuit board (Atmospheric Alert)"
