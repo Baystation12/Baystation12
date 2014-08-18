@@ -6,97 +6,98 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 5
-	active_power_usage = 60
+	active_power_usage = 40000	//40 kW. (this the power drawn when charging)
 	power_channel = EQUIP
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
-	var/power_rating = 40000	//40 kW. A measure of how powerful this charger is for charging cells (this the power drawn when charging)
 	
+/obj/machinery/cell_charger/proc/updateicon()
+	icon_state = "ccharger[charging ? 1 : 0]"
+
+	if(charging && !(stat & (BROKEN|NOPOWER)) )
+
+		var/newlevel = 	round(charging.percent() * 4.0 / 99)
+		//world << "nl: [newlevel]"
+
+		if(chargelevel != newlevel)
+
+			overlays.Cut()
+			overlays += "ccharger-o[newlevel]"
+
+			chargelevel = newlevel
+	else
+		overlays.Cut()
 	
-	proc
-		updateicon()
-			icon_state = "ccharger[charging ? 1 : 0]"
+/obj/machinery/cell_charger/examine()
+	set src in oview(5)
+	..()
+	usr << "There's [charging ? "a" : "no"] cell in the charger."
+	if(charging)
+		usr << "Current charge: [charging.charge]"
 
-			if(charging && !(stat & (BROKEN|NOPOWER)) )
-
-				var/newlevel = 	round(charging.percent() * 4.0 / 99)
-				//world << "nl: [newlevel]"
-
-				if(chargelevel != newlevel)
-
-					overlays.Cut()
-					overlays += "ccharger-o[newlevel]"
-
-					chargelevel = newlevel
-			else
-				overlays.Cut()
-	examine()
-		set src in oview(5)
-		..()
-		usr << "There's [charging ? "a" : "no"] cell in the charger."
-		if(charging)
-			usr << "Current charge: [charging.charge]"
-
-	attackby(obj/item/weapon/W, mob/user)
-		if(stat & BROKEN)
-			return
-
-		if(istype(W, /obj/item/weapon/cell) && anchored)
-			if(charging)
-				user << "\red There is already a cell in the charger."
-				return
-			else
-				var/area/a = loc.loc // Gets our locations location, like a dream within a dream
-				if(!isarea(a))
-					return
-				if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-					user << "\red The [name] blinks red as you try to insert the cell!"
-					return
-
-				user.drop_item()
-				W.loc = src
-				charging = W
-				user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
-				chargelevel = -1
-			updateicon()
-		else if(istype(W, /obj/item/weapon/wrench))
-			if(charging)
-				user << "\red Remove the cell first!"
-				return
-
-			anchored = !anchored
-			user << "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground"
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-
-	attack_hand(mob/user)
-		if(charging)
-			usr.put_in_hands(charging)
-			charging.add_fingerprint(user)
-			charging.updateicon()
-
-			src.charging = null
-			user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
-			chargelevel = -1
-			updateicon()
-
-	attack_ai(mob/user)
+/obj/machinery/cell_charger/attackby(obj/item/weapon/W, mob/user)
+	if(stat & BROKEN)
 		return
 
-	emp_act(severity)
-		if(stat & (BROKEN|NOPOWER))
-			return
+	if(istype(W, /obj/item/weapon/cell) && anchored)
 		if(charging)
-			charging.emp_act(severity)
-		..(severity)
-
-
-	process()
-		//world << "ccpt [charging] [stat]"
-		if(!charging || (stat & (BROKEN|NOPOWER)) || !anchored)
+			user << "\red There is already a cell in the charger."
 			return
-		
-		if (!charging.fully_charged())
-			var/charge_used = charging.give(power_rating*CELLRATE)
-			use_power(charge_used/CELLRATE)		//It's only while charging something, so I'm going to say use_power() is fine here...
+		else
+			var/area/a = loc.loc // Gets our locations location, like a dream within a dream
+			if(!isarea(a))
+				return
+			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+				user << "\red The [name] blinks red as you try to insert the cell!"
+				return
+
+			user.drop_item()
+			W.loc = src
+			charging = W
+			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
+			chargelevel = -1
+		updateicon()
+	else if(istype(W, /obj/item/weapon/wrench))
+		if(charging)
+			user << "\red Remove the cell first!"
+			return
+
+		anchored = !anchored
+		user << "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+
+/obj/machinery/cell_charger/attack_hand(mob/user)
+	if(charging)
+		usr.put_in_hands(charging)
+		charging.add_fingerprint(user)
+		charging.updateicon()
+
+		src.charging = null
+		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
+		chargelevel = -1
+		updateicon()
+
+/obj/machinery/cell_charger/attack_ai(mob/user)
+	return
+
+/obj/machinery/cell_charger/emp_act(severity)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	if(charging)
+		charging.emp_act(severity)
+	..(severity)
+
+
+/obj/machinery/cell_charger/process()
+	//world << "ccpt [charging] [stat]"
+	if((stat & (BROKEN|NOPOWER)) || !anchored)
+		update_use_power(0)
+		return
+	
+	if (charging && !charging.fully_charged())
+		charging.give(active_power_usage*CELLRATE)
+		update_use_power(2)
 		
 		updateicon()
+	else
+		update_use_power(1)

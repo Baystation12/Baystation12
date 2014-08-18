@@ -157,15 +157,15 @@
 			return
 		if(use_power && istype(battery) && battery.charge > 0)
 			if(use_power == 1)
-				battery.use(idle_power_usage)
+				battery.use(idle_power_usage*CELLRATE) //idle and active_power_usage are in WATTS. battery.use() expects CHARGE.
 			else
-				battery.use(active_power_usage)
+				battery.use(active_power_usage*CELLRATE)
 			return 1
 		return 0
 
 	use_power(var/amount, var/chan = -1)
 		if(battery && battery.charge > 0)
-			battery.use(amount)
+			battery.use(amount*CELLRATE)
 
 	power_change()
 		if( !battery || battery.charge <= 0 )
