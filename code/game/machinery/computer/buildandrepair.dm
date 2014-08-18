@@ -24,11 +24,17 @@
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
-	var/powernet = null
 	var/list/records = null
 	var/frame_desc = null
 	var/contain_parts = 1
 
+//TODO: move this into constructable_frame.dm, as circuitboards are used to construct all kinds of machines
+/obj/item/weapon/circuitboard/proc/construct_machine(var/obj/machinery/M)
+	return
+
+/*
+	Circuit Board Definitions
+*/
 
 /obj/item/weapon/circuitboard/message_monitor
 	name = "Circuit board (Message Monitor)"
@@ -135,12 +141,12 @@
 	name = "Circuit board (Turbine control)"
 	build_path = "/obj/machinery/computer/turbine_computer"
 /obj/item/weapon/circuitboard/solar_control
-	name = "Circuit board (Solar Control)"  //name fixed 250810
+	name = "Circuit board (Solar Control)"
 	build_path = "/obj/machinery/power/solar_control"
 	origin_tech = "programming=2;powerstorage=2"
 /obj/item/weapon/circuitboard/powermonitor
-	name = "Circuit board (Power Monitor)"  //name fixed 250810
-	build_path = "/obj/machinery/power/monitor"
+	name = "Circuit board (Power Monitor)"
+	build_path = "/obj/machinery/computer/power_monitor"
 /obj/item/weapon/circuitboard/olddoor
 	name = "Circuit board (DoorMex)"
 	build_path = "/obj/machinery/computer/pod/old"
@@ -397,7 +403,6 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "\blue You connect the monitor."
 				var/B = new src.circuit.build_path ( src.loc )
-				if(circuit.powernet) B:powernet = circuit.powernet
 				if(circuit.id) B:id = circuit.id
 				if(circuit.records) B:records = circuit.records
 				if(circuit.frequency) B:frequency = circuit.frequency
