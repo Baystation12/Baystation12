@@ -444,7 +444,7 @@
 
 		var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
 		//var/safe_pressure_max = 140 // Maximum safe partial pressure of breathable gas in kPa (Not used for now)
-		var/safe_exhaled_max = 10 // Yes it's an arbitrary value who cares?
+		var/safe_exhaled_max = 10
 		var/safe_toxins_max = 0.005
 		var/SA_para_min = 1
 		var/SA_sleep_min = 5
@@ -455,7 +455,6 @@
 		var/inhaling
 		var/poison
 		var/exhaling
-		var/no_exhale
 
 		var/breath_type
 		var/poison_type
@@ -466,21 +465,21 @@
 
 		if(species.breath_type)
 			breath_type = species.breath_type
-			inhaling = breath.gas[breath_type]
 		else
-			inhaling = "oxygen"
+			breath_type = "oxygen"
+		inhaling = breath.gas[breath_type]
 
 		if(species.poison_type)
 			poison_type = species.poison_type
-			poison = breath.gas[poison_type]
 		else
-			poison = "phoron"
+			poison_type = "phoron"
+		poison = breath.gas[poison_type]
 
 		if(species.exhale_type)
 			exhale_type = species.exhale_type
 			exhaling = breath.gas[exhale_type]
 		else
-			no_exhale = 1
+			exhaling = 0
 
 		var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
 		var/toxins_pp = (poison/breath.total_moles)*breath_pressure
@@ -503,53 +502,52 @@
 
 		inhaled_gas_used = inhaling/6
 
-		breath.adjust_gas(breath_type, -inhaled_gas_used)
+		breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-		if(!no_exhale)
-			breath.adjust_gas_temp(exhale_type, inhaled_gas_used, bodytemperature)
+		if(exhale_type)
+			breath.adjust_gas_temp(exhale_type, inhaled_gas_used, bodytemperature, update = 0) //update afterwards
 
-		// Too much exhaled gas in the air
-		if(exhaled_pp > safe_exhaled_max)
-			if (!co2_alert|| prob(15))
-				var/word = pick("extremely dizzy","short of breath","faint","confused")
-				src << "<span class='danger'>You feel [word].</span>"
+			// Too much exhaled gas in the air
+			if(exhaled_pp > safe_exhaled_max)
+				if (!co2_alert|| prob(15))
+					var/word = pick("extremely dizzy","short of breath","faint","confused")
+					src << "<span class='danger'>You feel [word].</span>"
 
-			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-			co2_alert = 1
-			failed_exhale = 1
-
-		else if(exhaled_pp > safe_exhaled_max * 0.7)
-			if (!co2_alert || prob(1))
-				var/word = pick("dizzy","short of breath","faint","momentarily confused")
-				src << "<span class='warning>You feel [word].</span>"
-
-			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
-			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
-
-			//give them some oxyloss, up to the limit - we don't want people falling unconcious due to CO2 alone until they're pretty close to safe_exhaled_max.
-			if (getOxyLoss() < 50*ratio)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-			co2_alert = 1
-			failed_exhale = 1
+				co2_alert = 1
+				failed_exhale = 1
 
-		else if(exhaled_pp > safe_exhaled_max * 0.6)
-			if (prob(0.3))
-				var/word = pick("a little dizzy","short of breath")
-				src << "<span class='warning>You feel [word].</span>"
+			else if(exhaled_pp > safe_exhaled_max * 0.7)
+				if (!co2_alert || prob(1))
+					var/word = pick("dizzy","short of breath","faint","momentarily confused")
+					src << "<span class='warning>You feel [word].</span>"
 
-		else
-			co2_alert = 0
+				//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
+				var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
+
+				//give them some oxyloss, up to the limit - we don't want people falling unconcious due to CO2 alone until they're pretty close to safe_exhaled_max.
+				if (getOxyLoss() < 50*ratio)
+					adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+				co2_alert = 1
+				failed_exhale = 1
+
+			else if(exhaled_pp > safe_exhaled_max * 0.6)
+				if (prob(0.3))
+					var/word = pick("a little dizzy","short of breath")
+					src << "<span class='warning>You feel [word].</span>"
+
+			else
+				co2_alert = 0
 
 		// Too much poison in the air.
 		if(toxins_pp > safe_toxins_max)
 			var/ratio = (poison/safe_toxins_max) * 10
 			if(reagents)
 				reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+				breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
 			phoron_alert = max(phoron_alert, 1)
 		else
 			phoron_alert = 0
-
-
 
 		// If there's some other shit in the air lets deal with it here.
 		if(breath.gas["sleeping_agent"])
@@ -569,7 +567,7 @@
 			else if(SA_pp > 0.15)
 				if(prob(20))
 					spawn(0) emote(pick("giggle", "laugh"))
-			breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"])
+			breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"]/6, update = 0) //update after
 
 		// Were we able to breathe?
 		if (failed_inhale || failed_exhale)
@@ -580,9 +578,6 @@
 
 		// Hot air hurts :(
 		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
-
-			if(status_flags & GODMODE)
-				return 1
 
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
@@ -625,6 +620,9 @@
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
+		
+		
+		breath.update_values()
 		return 1
 
 	proc/handle_environment(datum/gas_mixture/environment)
