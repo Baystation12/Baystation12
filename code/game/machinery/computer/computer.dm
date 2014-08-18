@@ -6,7 +6,7 @@
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
-	var/obj/item/weapon/circuitboard/circuit = null //if circuit==null, computer can't disassembly
+	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
 	var/processing = 0
 
 /obj/machinery/computer/New()
@@ -120,6 +120,7 @@
 				user << "\blue You disconnect the monitor."
 				A.state = 4
 				A.icon_state = "4"
+			M.deconstruct_computer(src)
 			del(src)
 	else
 		src.attack_hand(user)

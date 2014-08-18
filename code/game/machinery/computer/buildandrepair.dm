@@ -25,9 +25,17 @@
 	var/frame_desc = null
 	var/contain_parts = 1
 
-//TODO: move this into constructable_frame.dm, as circuitboards are used to construct all kinds of machines
-/obj/item/weapon/circuitboard/proc/construct_machine(var/obj/machinery/M)
-	return
+//Called when the circuitboard is used to contruct a new computer.
+/obj/item/weapon/circuitboard/proc/construct_computer(var/obj/machinery/computer/C)
+	if (istype(C, build_path))
+		return 1
+	return 0
+
+//Called when a computer is deconstructed to produce a circuitboard
+/obj/item/weapon/circuitboard/proc/deconstruct_computer(var/obj/machinery/computer/C)
+	if (istype(C, build_path))
+		return 1
+	return 0
 
 /*
 	Circuit Board Definitions
@@ -37,20 +45,31 @@
 	name = "Circuit board (Message Monitor)"
 	build_path = "/obj/machinery/computer/message_monitor"
 	origin_tech = "programming=3"
+
+//TODO: Move these into computer/camera.dm
 /obj/item/weapon/circuitboard/security
-	name = "Circuit board (Security)"
+	name = "Circuit board (Security Camera Monitor)"
 	build_path = "/obj/machinery/computer/security"
 	var/network = list("SS13")
 	req_access = list(access_security)
 	var/locked = 1
 	var/emagged = 0
+
+/obj/item/weapon/circuitboard/security/construct_computer(var/obj/machinery/computer/security/C)
+	if (..(C))
+		C.network = network
+
+/obj/item/weapon/circuitboard/security/deconstruct_computer(var/obj/machinery/computer/security/C)
+	if (..(C))
+		network = C.network
+
 /obj/item/weapon/circuitboard/security/engineering
-	name = "Circuit board (Engineering)"
+	name = "Circuit board (Engineering Camera Monitor)"
 	build_path = "/obj/machinery/computer/security/engineering"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	req_access = list()
 /obj/item/weapon/circuitboard/security/mining
-	name = "Circuit board (Mining)"
+	name = "Circuit board (Mining Camera Monitor)"
 	build_path = "/obj/machinery/computer/security/mining"
 	network = list("MINE")
 	req_access = list()
@@ -109,9 +128,19 @@
 /obj/item/weapon/circuitboard/air_management
 	name = "Circuit board (Atmospheric Monitor)"
 	build_path = "/obj/machinery/computer/general_air_control"
-/obj/item/weapon/circuitboard/injector_control
+	var/frequency = 1439
+/obj/item/weapon/circuitboard/air_management/injector_control
 	name = "Circuit board (Injector Control)"
 	build_path = "/obj/machinery/computer/general_air_control/fuel_injection"
+
+/obj/item/weapon/circuitboard/air_management/construct_computer(var/obj/machinery/computer/general_air_control/C)
+	if (..(C))
+		C.frequency = frequency
+
+/obj/item/weapon/circuitboard/air_management/deconstruct_computer(var/obj/machinery/computer/general_air_control/C)
+	if (..(C))
+		frequency = C.frequency
+
 /obj/item/weapon/circuitboard/atmos_alert
 	name = "Circuit board (Atmospheric Alert)"
 	build_path = "/obj/machinery/computer/atmos_alert"
@@ -177,11 +206,20 @@
 	name = "Circuit board (Supply ordering console)"
 	build_path = "/obj/machinery/computer/ordercomp"
 	origin_tech = "programming=2"
+
 /obj/item/weapon/circuitboard/supplycomp
 	name = "Circuit board (Supply shuttle console)"
 	build_path = "/obj/machinery/computer/supplycomp"
 	origin_tech = "programming=3"
 	var/contraband_enabled = 0
+
+/obj/item/weapon/circuitboard/supplycomp/construct_computer(var/obj/machinery/computer/supplycomp/SC)
+	if (..(SC))
+		SC.can_order_contraband = contraband_enabled
+
+/obj/item/weapon/circuitboard/supplycomp/deconstruct_computer(var/obj/machinery/computer/supplycomp/SC)
+	if (..(SC))
+		contraband_enabled = SC.can_order_contraband
 
 /obj/item/weapon/circuitboard/operating
 	name = "Circuit board (Operating Computer)"
@@ -400,12 +438,5 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "\blue You connect the monitor."
 				var/B = new src.circuit.build_path ( src.loc )
-				if(istype(circuit,/obj/item/weapon/circuitboard/supplycomp))
-					var/obj/machinery/computer/supplycomp/SC = B
-					var/obj/item/weapon/circuitboard/supplycomp/C = circuit
-					SC.can_order_contraband = C.contraband_enabled
-				if(istype(circuit,/obj/item/weapon/circuitboard/security))
-					var/obj/machinery/computer/security/C = B
-					var/obj/item/weapon/circuitboard/security/CB = circuit
-					C.network = CB.network
+				src.circuit.construct_computer(B)
 				del(src)
