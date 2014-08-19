@@ -219,10 +219,10 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 		var/starting_energy = temperature * heat_capacity()
 
 		//determine the amount of oxygen used
-		var/used_oxidizers = min(total_oxidizers, 2 * total_fuel)
+		var/used_oxidizers = min(total_oxidizers, total_fuel / 2)
 
 		//determine the amount of fuel actually used
-		var/used_fuel_ratio = min(total_oxidizers / 2 , total_fuel) / total_fuel
+		var/used_fuel_ratio = min(2 * total_oxidizers , total_fuel) / total_fuel
 		total_fuel = total_fuel * used_fuel_ratio
 
 		var/total_reactants = total_fuel + used_oxidizers
@@ -232,9 +232,9 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 
 		//remove and add gasses as calculated
 		remove_by_flag(XGM_GAS_OXIDIZER, used_oxidizers * used_reactants_ratio)
-		remove_by_flag(XGM_GAS_FUEL, total_fuel * used_reactants_ratio * 3)
+		remove_by_flag(XGM_GAS_FUEL, total_fuel * used_reactants_ratio)
 
-		adjust_gas("carbon_dioxide", max(2 * total_fuel, 0))
+		adjust_gas("carbon_dioxide", max(total_fuel*used_reactants_ratio, 0))
 
 		if(liquid)
 			liquid.amount -= (liquid.amount * used_fuel_ratio * used_reactants_ratio) * 5 // liquid fuel burns 5 times as quick
