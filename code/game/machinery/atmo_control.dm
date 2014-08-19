@@ -8,8 +8,6 @@ obj/machinery/air_sensor
 
 	var/id_tag
 	var/frequency = 1439
-	
-	circuit = /obj/item/weapon/circuitboard/air_management
 
 	var/on = 1
 	var/output = 3
@@ -87,6 +85,7 @@ obj/machinery/computer/general_air_control
 
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
+	circuit = /obj/item/weapon/circuitboard/air_management
 
 	attack_hand(mob/user)
 		if(..(user))
@@ -165,6 +164,7 @@ obj/machinery/computer/general_air_control
 		var/list/output_info
 
 		var/pressure_setting = ONE_ATMOSPHERE * 45
+		circuit = /obj/item/weapon/circuitboard/air_management/tank_control
 
 
 		return_text()

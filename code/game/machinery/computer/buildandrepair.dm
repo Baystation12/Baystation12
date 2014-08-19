@@ -129,6 +129,9 @@
 	name = "Circuit board (Atmospheric Monitor)"
 	build_path = "/obj/machinery/computer/general_air_control"
 	var/frequency = 1439
+/obj/item/weapon/circuitboard/air_management/tank_control
+	name = "Circuit board (Tank Control)"
+	build_path = "/obj/machinery/computer/general_air_control/large_tank_control"
 /obj/item/weapon/circuitboard/air_management/injector_control
 	name = "Circuit board (Injector Control)"
 	build_path = "/obj/machinery/computer/general_air_control/fuel_injection"
@@ -172,7 +175,7 @@
 	origin_tech = "programming=2;powerstorage=2"
 /obj/item/weapon/circuitboard/powermonitor
 	name = "Circuit board (Power Monitor)"
-	build_path = "/obj/machinery/computer/power_monitor"
+	build_path = "/obj/machinery/power/monitor"
 /obj/item/weapon/circuitboard/olddoor
 	name = "Circuit board (DoorMex)"
 	build_path = "/obj/machinery/computer/pod/old"
