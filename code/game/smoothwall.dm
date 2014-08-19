@@ -101,11 +101,14 @@
 	..()*/
 
 /turf/simulated/wall/Del()
+
+	var/temploc = src.loc
+
 	spawn(10)
-		for(var/turf/simulated/wall/W in range(src,1))
+		for(var/turf/simulated/wall/W in range(temploc,1))
 			W.relativewall()
 
-		for(var/obj/structure/falsewall/W in range(src,1))
+		for(var/obj/structure/falsewall/W in range(temploc,1))
 			W.relativewall()
 
 	for(var/direction in cardinal)
@@ -117,6 +120,16 @@
 				shroom.pixel_y = 0
 
 	..()
+
+/*/turf/simulated/shuttle/wall/Del()
+
+	var/temploc = src.loc
+
+	spawn(10)
+		for(var/turf/simulated/shuttle/wall/W in range(temploc,1))
+			W.relativewall()
+
+	..()*/
 
 /turf/simulated/wall/relativewall()
 	if(istype(src,/turf/simulated/wall/vault)) //HACK!!!
