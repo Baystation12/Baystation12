@@ -1194,7 +1194,11 @@
 		if (!src.avail())
 			main_status = 0
 		else
-			var/power_drawn = add_load(perapc)
+			var/target_draw = perapc
+			if (charging == 2)
+				target_draw = min(target_draw, lastused_total) //if we're fully charged, only take what we need to meet demand
+			
+			var/power_drawn = add_load(target_draw) //get some power from the powernet
 			
 			//figure out how much power is left over after meeting demand
 			power_excess = power_drawn - lastused_total

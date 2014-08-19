@@ -190,7 +190,7 @@
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
 	if (!forced)
-		if (stat & BROKEN|NOPOWER)
+		if (stat & (BROKEN|NOPOWER))
 			return //needs power to open unless it was forced
 		else
 			use_power(360)
