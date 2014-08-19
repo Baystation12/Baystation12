@@ -131,26 +131,32 @@ proc/hasorgans(A)
 			zone = "head"
 	return zone
 
-// Returns zone with a certain probability.
-// If the probability misses, returns "chest" instead.
-// If "chest" was passed in as zone, then on a "miss" will return "head", "l_arm", or "r_arm"
+// Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
 // Use get_zone_with_miss_chance() for that.
 /proc/ran_zone(zone, probability)
-	zone = check_zone(zone)
-	if(!probability)	probability = 90
-	if(probability == 100)	return zone
+	if (zone)
+		zone = check_zone(zone)
+		if (prob(probability))
+			return zone
 
-	if(zone == "chest")
-		if(prob(probability))	return "chest"
-		var/t = rand(1, 9)
-		switch(t)
-			if(1 to 3)	return "head"
-			if(4 to 6)	return "l_arm"
-			if(7 to 9)	return "r_arm"
-
-	if(prob(probability * 0.75))	return zone
-	return "chest"
+	var/ran_zone = zone
+	while (ran_zone == zone)
+		ran_zone = pick ( 
+			20; "head",
+			40; "chest",
+			30; "groin",
+			30; "l_arm",
+			30; "r_arm",
+			30; "l_leg",
+			30; "r_leg",
+			10; "l_hand",
+			10; "r_hand",
+			10; "l_foot",
+			10; "r_foot",
+		)
+	
+	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
@@ -167,6 +173,8 @@ proc/hasorgans(A)
 			if("l_leg")
 				miss_chance = 20
 			if("r_leg")
+				miss_chance = 20
+			if("groin")
 				miss_chance = 20
 			if("l_arm")
 				miss_chance = 20
@@ -185,18 +193,19 @@ proc/hasorgans(A)
 			if(prob(70))
 				return null
 			else
-				var/t = rand(1, 10)
+				var/t = rand(1, 11)
 				switch(t)
 					if(1)	return "head"
 					if(2)	return "l_arm"
 					if(3)	return "r_arm"
 					if(4) 	return "chest"
-					if(5) 	return "l_foot"
-					if(6)	return "r_foot"
-					if(7)	return "l_hand"
-					if(8)	return "r_hand"
-					if(9)	return "l_leg"
-					if(10)	return "r_leg"
+					if(5) 	return "groin"
+					if(6) 	return "l_foot"
+					if(7)	return "r_foot"
+					if(8)	return "l_hand"
+					if(9)	return "r_hand"
+					if(10)	return "l_leg"
+					if(11)	return "r_leg"
 
 	return zone
 
