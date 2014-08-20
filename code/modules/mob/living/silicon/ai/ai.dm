@@ -76,6 +76,7 @@ var/list/ai_verbs_default = list(
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
+	var/datum/announcement/priority/announcement
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs += ai_verbs_default
@@ -167,6 +168,9 @@ var/list/ai_verbs_default = list(
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
+	announcement = new()
+	announcement.announcer = name
+	announcement.title = "A.I. announcement"
 
 	ai_list += src
 	..()
@@ -321,7 +325,7 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
 		return
 
-	captain_announce(input, "A.I. Announcement", src.name)
+	announcement.Announce(input)
 	log_say("[key_name(usr)] has made an AI announcement: [input]")
 	message_admins("[key_name_admin(usr)] has made an AI announcement.", 1)
 	message_cooldown = 1

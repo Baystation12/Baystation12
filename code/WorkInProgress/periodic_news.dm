@@ -8,6 +8,7 @@
 		author = "NanoTrasen Editor"
 		channel_name = "Nyx Daily"
 		can_be_redacted = 0
+		message_type = "Story"
 
 	revolution_inciting_event
 
@@ -134,6 +135,7 @@ proc/announce_newscaster_news(datum/news_announcement/news)
 	newMsg.is_admin_message = !news.can_be_redacted
 
 	newMsg.body = news.message
+	newMsg.message_type = news.message_type
 
 	var/datum/feed_channel/sendto
 	for(var/datum/feed_channel/FC in news_network.network_channels)

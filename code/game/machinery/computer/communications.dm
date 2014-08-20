@@ -33,7 +33,11 @@
 	var/stat_msg1
 	var/stat_msg2
 
+	var/datum/announcement/priority/crew_announcement = new
 
+/obj/machinery/computer/communications/New()
+	..()
+	crew_announcement.newscast = 1
 
 /obj/machinery/computer/communications/process()
 	if(..())
@@ -64,10 +68,12 @@
 			if (I && istype(I))
 				if(src.check_access(I))
 					authenticated = 1
-				if(20 in I.access)
+				if(access_captain in I.access)
 					authenticated = 2
+					crew_announcement.announcer = GetNameAndAssignmentFromId(I)
 		if("logout")
 			authenticated = 0
+			crew_announcement.announcer = ""
 
 		if("swipeidseclevel")
 			var/mob/M = usr
@@ -101,13 +107,13 @@
 
 		if("announce")
 			if(src.authenticated==2)
-				if(message_cooldown)	return
-				var/input = stripped_input(usr, "Please choose a message to announce to the station crew.", "What?")
+				if(message_cooldown)
+					usr << "Please allow at least one minute to pass between announcements"
+					return
+				var/input = stripped_input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
 				if(!input || !(usr in view(1,src)))
 					return
-				captain_announce(input)//This should really tell who is, IE HoP, CE, HoS, RD, Captain
-				log_say("[key_name(usr)] has made a captain announcement: [input]")
-				message_admins("[key_name_admin(usr)] has made a captain announcement.", 1)
+				crew_announcement.Announce(input)
 				message_cooldown = 1
 				spawn(600)//One minute cooldown
 					message_cooldown = 0
