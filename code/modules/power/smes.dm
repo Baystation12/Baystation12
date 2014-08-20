@@ -385,11 +385,11 @@
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
+	capacity = 9000000
 	output = SMESMAXOUTPUT
 
 /obj/machinery/power/smes/magical/process()
-	capacity = INFINITY
-	charge = INFINITY
+	charge = 9000000
 	..()
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
