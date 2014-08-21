@@ -446,13 +446,6 @@ var/list/ai_verbs_default = list(
 		lawchannel = setchannel
 		checklaws()
 
-	//Uncomment this line of code if you are enabling the AI Vocal (VOX) announcements.
-/*
-	if(href_list["say_word"])
-		play_vox_word(href_list["say_word"], null, src)
-		return
-*/
-
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawi"])
 		switch(ioncheck[L])

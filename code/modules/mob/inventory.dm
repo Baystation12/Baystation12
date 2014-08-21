@@ -85,15 +85,18 @@
 	return 0
 
 
-/mob/proc/drop_from_inventory(var/obj/item/W)
+/mob/proc/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W)
+		if(!Target)
+			Target = loc
+
 		if(client)	client.screen -= W
 		u_equip(W)
 		if(!W) return 1 // self destroying objects (tk, grabs)
 		W.layer = initial(W.layer)
-		W.loc = loc
+		W.loc = Target
 
-		var/turf/T = get_turf(loc)
+		var/turf/T = get_turf(Target)
 		if(isturf(T))
 			T.Entered(W)
 
@@ -316,4 +319,3 @@
 		if (del_on_fail)
 			del(W)
 	return equipped
-

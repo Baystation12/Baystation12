@@ -94,6 +94,7 @@
 			spawn(5) src.reagents.clear_reagents()
 			return
 		else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
+			target.add_fingerprint(user)
 
 			if(!target.reagents.total_volume && target.reagents)
 				user << "\red [target] is empty."

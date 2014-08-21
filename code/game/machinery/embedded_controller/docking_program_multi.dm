@@ -199,7 +199,9 @@
 
 //checks if we are ready for undocking
 /datum/computer/file/embedded_program/airlock/multi_docking/proc/ready_for_undocking()
-	return check_doors_secured()
+	var/ext_closed = check_exterior_door_secured()
+	var/int_closed = check_interior_door_secured()
+	return (ext_closed || int_closed)
 
 /datum/computer/file/embedded_program/airlock/multi_docking/proc/open_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, memory["secure"], "open")
