@@ -189,7 +189,12 @@ Buildable meters
 	icon_state = islist[pipe_type + 1]
 
 //called when a turf is attacked with a pipe item
-// place the pipe on the turf, setting pipe level to 1 (underfloor) if the turf is not intact
+/obj/item/pipe/afterattack(turf/simulated/floor/target, mob/user, proximity)
+	if(!proximity) return
+	if(istype(target))
+		user.drop_from_inventory(src, target)
+	else
+		return ..()
 
 // rotate the pipe item clockwise
 
