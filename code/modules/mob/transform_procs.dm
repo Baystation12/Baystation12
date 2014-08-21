@@ -120,7 +120,7 @@
 		O.show_laws()
 		O << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
-	add_ai_verbs(O)
+	O.add_ai_verbs()
 	O.job = "AI"
 
 	O.rename_self("ai",1)
