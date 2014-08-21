@@ -1,3 +1,5 @@
+var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
+
 /datum/job/captain
 	title = "Captain"
 	flag = CAPTAIN
@@ -32,7 +34,7 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
-		world << "<b>[H.real_name] is the captain!</b>"
+		captain_announcement.Announce("All hands, captain [H.real_name] on deck!")
 
 		H.implant_loyalty(src)
 

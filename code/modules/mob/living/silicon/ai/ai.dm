@@ -86,6 +86,11 @@ var/list/ai_verbs_default = list(
 
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
+	announcement = new()
+	announcement.title = "A.I. Announcement"
+	announcement.announcement_type = "A.I. Announcement"
+	announcement.newscast = 1
+
 	var/list/possibleNames = ai_names
 
 	var/pickedName = null
@@ -96,8 +101,8 @@ var/list/ai_verbs_default = list(
 				possibleNames -= pickedName
 				pickedName = null
 
-	real_name = pickedName
-	name = real_name
+	aiPDA = new/obj/item/device/pda/ai(src)
+	SetName(pickedName)
 	anchored = 1
 	canmove = 0
 	density = 1
@@ -112,11 +117,6 @@ var/list/ai_verbs_default = list(
 			laws = L
 	else
 		laws = new base_law_type
-
-	aiPDA = new/obj/item/device/pda/ai(src)
-	aiPDA.owner = name
-	aiPDA.ownjob = "AI"
-	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
 	aiRadio = new(src)
@@ -168,10 +168,6 @@ var/list/ai_verbs_default = list(
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
-	announcement = new()
-	announcement.announcer = name
-	announcement.title = "A.I. announcement"
-
 	ai_list += src
 	..()
 	return
@@ -180,6 +176,18 @@ var/list/ai_verbs_default = list(
 	ai_list -= src
 	..()
 
+/mob/living/silicon/ai/proc/SetName(pickedName as text)
+	real_name = pickedName
+	name = pickedName
+	announcement.announcer = pickedName
+	if(eyeobj)
+		eyeobj.name = "[pickedName] (AI Eye)"
+
+	// Set ai pda name
+	if(aiPDA)
+		aiPDA.ownjob = "AI"
+		aiPDA.owner = pickedName
+		aiPDA.name = pickedName + " (" + aiPDA.ownjob + ")"
 
 /*
 	The AI Power supply is a dummy object used for powering the AI since only machinery should be using power.
@@ -326,8 +334,6 @@ var/list/ai_verbs_default = list(
 		return
 
 	announcement.Announce(input)
-	log_say("[key_name(usr)] has made an AI announcement: [input]")
-	message_admins("[key_name_admin(usr)] has made an AI announcement.", 1)
 	message_cooldown = 1
 	spawn(600)//One minute cooldown
 		message_cooldown = 0
