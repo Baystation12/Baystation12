@@ -1191,36 +1191,40 @@
 		var/cell_maxcharge = cell.maxcharge
 
 		// try to draw power from the grid
-		if (!src.avail())
-			main_status = 0
-		else
+		var/power_drawn = 0
+		if (src.avail())
 			var/target_draw = perapc
 			if (charging == 2)
 				target_draw = min(target_draw, lastused_total) //if we're fully charged, only take what we need to meet demand
 			
 			var/power_drawn = add_load(target_draw) //get some power from the powernet
+		
+		//figure out how much power is left over after meeting demand
+		power_excess = power_drawn - lastused_total
+		
+		if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
 			
-			//figure out how much power is left over after meeting demand
-			power_excess = power_drawn - lastused_total
-			
-			if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
-				main_status = 1
-				charging = 0
-			
-				var/required_power = -power_excess
-				if( (cell.charge/CELLRATE) >= required_power)	// can we draw enough from cell to cover what's left over?
-					cell.use(required_power*CELLRATE)
+			charging = 0
+		
+			var/required_power = -power_excess
+			if( (cell.charge/CELLRATE) >= required_power)	// can we draw enough from cell to cover what's left over?
+				cell.use(required_power*CELLRATE)
 
-				else if (autoflag != 0)	// not enough power available to run the last tick!
-					chargecount = 0
-					// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
-					equipment = autoset(equipment, 0)
-					lighting = autoset(lighting, 0)
-					environ = autoset(environ, 0)
-					autoflag = 0
-			
-			else
-				main_status = 2
+			else if (autoflag != 0)	// not enough power available to run the last tick!
+				chargecount = 0
+				// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
+				equipment = autoset(equipment, 0)
+				lighting = autoset(lighting, 0)
+				environ = autoset(environ, 0)
+				autoflag = 0
+		
+		//Set external power status
+		if (!power_drawn)
+			main_status = 0
+		else if (power_excess < 0)
+			main_status = 1
+		else
+			main_status = 2
 
 		// Set channels depending on how much charge we have left
 
