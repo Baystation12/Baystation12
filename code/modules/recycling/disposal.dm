@@ -190,7 +190,8 @@
 /obj/machinery/disposal/relaymove(mob/user as mob)
 	if(user.stat || src.flushing)
 		return
-	src.go_out(user)
+	if(user.loc == src)
+		src.go_out(user)
 	return
 
 // leave the disposal
