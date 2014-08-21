@@ -19,7 +19,7 @@ datum
 		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM
+		var/custom_metabolism = REAGENTS_METABOLISM //setup.dm sets this as 0.2
 		var/overdose = 0
 		var/overdose_dam = 1
 		var/scannable = 0 //shows up on health analyzers
@@ -2064,7 +2064,7 @@ datum
 			description = "This is what makes chilis hot."
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 179, 16, 8
-			
+
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
 					M = holder.my_atom
@@ -2078,7 +2078,7 @@ datum
 								H << "\red <b>Your insides feel uncomfortably hot !</b>"
 							if(2 to 20)
 								if(prob(5))
-									H << "\red <b>Your insides feel uncomfortably hot !</b>"									
+									H << "\red <b>Your insides feel uncomfortably hot !</b>"
 							if(20 to INFINITY)
 								H.apply_effect(2,AGONY,0)
 								if(prob(5))
@@ -2186,10 +2186,10 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
-					M = holder.my_atom				
-				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)				
+					M = holder.my_atom
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 				if(prob(1))
-					M.emote("shiver")				
+					M.emote("shiver")
 				if(istype(M, /mob/living/carbon/slime))
 					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 				holder.remove_reagent("capsaicin", 5)
