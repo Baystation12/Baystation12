@@ -19,6 +19,7 @@
 #define O2STANDARD 0.21
 #define N2STANDARD 0.79
 
+#define MOLES_PHORON_VISIBLE 0.7 //Moles in a standard cell after which phoron is visible
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
@@ -834,7 +835,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
 #define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
 
-//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences. 
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
 //Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
 #define ATMOS_PUMP_EFFICIENCY	0.6
 #define ATMOS_FILTER_EFFICIENCY	0.45

@@ -384,7 +384,7 @@
 
 		//Moved these vars here for use in the fuck-it-skip-processing check.
 		var/pressure = environment.return_pressure()
-		if(pressure < WARNING_HIGH_PRESSURE && pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
+		if(pressure < WARNING_HIGH_PRESSURE && pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.gas["phoron"] < MOLES_PHORON_VISIBLE)
 
 
 			//Hopefully should fix the walk-inside-still-pressure-warning issue.
