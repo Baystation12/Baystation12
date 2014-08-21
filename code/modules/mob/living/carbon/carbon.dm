@@ -104,9 +104,9 @@
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
-	
+
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-	
+
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 10)
 		src.visible_message(
@@ -217,7 +217,7 @@
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
 
-			if(lying)
+			if(lying || src.sleeping)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0

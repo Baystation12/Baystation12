@@ -202,7 +202,7 @@
 
 		var/is_chest_organ_damaged = 0
 		var/datum/organ/external/chest/chest = target.get_organ("chest")
-		for(var/datum/organ/internal/I in chest.internal_organs) 
+		for(var/datum/organ/internal/I in chest.internal_organs)
 			if(I.damage > 0)
 				is_chest_organ_damaged = 1
 				break
@@ -244,7 +244,7 @@
 			if(I && I.damage > 0)
 				if(I.robotic < 2)
 					user.visible_message("\blue [user] treats damage to [target]'s [I.name] with [tool_name].", \
-					"You treat damage to [target]'s [I.name] with [tool_name]." )
+					"\blue You treat damage to [target]'s [I.name] with [tool_name]." )
 				else
 					user.visible_message("\blue [user] pokes [target]'s mechanical [I.name] with [tool_name]...", \
 					"\blue You poke [target]'s mechanical [I.name] with [tool_name]... \red For no effect, since it's robotic.")

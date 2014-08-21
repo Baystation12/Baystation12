@@ -35,6 +35,9 @@
 /obj/machinery/power/smes/New()
 	..()
 	spawn(5)
+		if(!powernet)
+			connect_to_network()
+		
 		dir_loop:
 			for(var/d in cardinal)
 				var/turf/T = get_step(src, d)
@@ -46,6 +49,8 @@
 			stat |= BROKEN
 			return
 		terminal.master = src
+		if(!terminal.powernet)
+			terminal.connect_to_network()
 		updateicon()
 	return
 

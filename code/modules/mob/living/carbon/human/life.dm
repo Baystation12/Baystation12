@@ -2,7 +2,7 @@
 
 //NOTE: Breathing happens once per FOUR TICKS, unless the last breath fails. In which case it happens once per ONE TICK! So oxyloss healing is done once per 4 ticks while oxyloss damage is applied once per tick!
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
-#define HUMAN_CRIT_MAX_OXYLOSS ( (last_tick_duration) /5) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 100HP to get through, so (1/3)*last_tick_duration per second. Breaths however only happen every 4 ticks.
+#define HUMAN_CRIT_MAX_OXYLOSS ( (last_tick_duration) /6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks.
 
 #define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
@@ -35,6 +35,8 @@
 
 
 /mob/living/carbon/human/Life()
+
+
 	set invisibility = 0
 	set background = 1
 
@@ -73,7 +75,7 @@
 
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
-		if(air_master.current_cycle%4==2 || failed_last_breath) 	//First, resolve location and get a breath
+		if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 			breathe() 				//Only try to take a breath every 4 ticks, unless suffocating
 
 		else //Still give containing object the chance to interact
@@ -130,38 +132,52 @@
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
 
+// Calculate how vulnerable the human is to under- and overpressure.
+// Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
+// Suitdamage can modifiy this in 10% steps.
+/mob/living/carbon/human/proc/get_pressure_weakness()
 
-//Much like get_heat_protection(), this returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-/mob/living/carbon/human/proc/get_pressure_protection()
-	var/pressure_adjustment_coefficient = 1	//Determins how much the clothing you are wearing protects you in percent.
+	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
-	if(head && (head.flags & STOPSPRESSUREDMAGE))
-		pressure_adjustment_coefficient -= PRESSURE_HEAD_REDUCTION_COEFFICIENT
+	if(wear_suit && (wear_suit.flags & STOPSPRESSUREDMAGE) && head && (head.flags & STOPSPRESSUREDMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
+		pressure_adjustment_coefficient = 0
 
-	if(wear_suit && (wear_suit.flags & STOPSPRESSUREDMAGE))
-		pressure_adjustment_coefficient -= PRESSURE_SUIT_REDUCTION_COEFFICIENT
-
-		//Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure reduction.
+		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
 		if(istype(wear_suit,/obj/item/clothing/suit/space))
 			var/obj/item/clothing/suit/space/S = wear_suit
 			if(S.can_breach && S.damage)
-				var/pressure_loss = S.damage * 0.1
-				pressure_adjustment_coefficient += pressure_loss
+				pressure_adjustment_coefficient += S.damage * 0.1
 
-	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) //So it isn't less than 0 or larger than 1.
+	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) // So it isn't less than 0 or larger than 1.
 
-	return 1 - pressure_adjustment_coefficient	//want 0 to be bad protection, 1 to be good protection
+	return pressure_adjustment_coefficient
 
+// Calculate how much of the enviroment pressure-difference affects the human.
 /mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
-	..()
-	var/pressure_difference = abs( pressure - ONE_ATMOSPHERE )
+	var/pressure_difference
 
-	pressure_difference = pressure_difference * (1 - get_pressure_protection())
+	// First get the absolute pressure difference.
+	if(pressure < ONE_ATMOSPHERE) // We are in an underpressure.
+		pressure_difference = ONE_ATMOSPHERE - pressure
 
-	if(pressure > ONE_ATMOSPHERE)
-		return ONE_ATMOSPHERE + pressure_difference
+	else //We are in an overpressure or standard atmosphere.
+		pressure_difference = pressure - ONE_ATMOSPHERE
+
+	if(pressure_difference < 5) // If the difference is small, don't bother calculating the fraction.
+		pressure_difference = 0
+
 	else
+		// Otherwise calculate how much of that absolute pressure difference affects us, can be 0 to 1 (equals 0% to 100%).
+		// This is our relative difference.
+		pressure_difference *= get_pressure_weakness()
+
+	// The difference is always positive to avoid extra calculations.
+	// Apply the relative difference on a standard atmosphere to get the final result.
+	// The return value will be the adjusted_pressure of the human that is the basis of pressure warnings and damage.
+	if(pressure < ONE_ATMOSPHERE)
 		return ONE_ATMOSPHERE - pressure_difference
+	else
+		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human
 	proc/handle_disabilities()

@@ -89,7 +89,7 @@ proc/do_surgery(mob/living/M, mob/living/user, obj/item/tool)
 			//We had proper tools! (or RNG smiled.) and User did not move or change hands.
 			if( prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
 				S.end_step(user, M, user.zone_sel.selecting, tool)		//finish successfully
-			else														//or
+			else if (tool in user.contents && user.Adjacent(M))											//or
 				S.fail_step(user, M, user.zone_sel.selecting, tool)		//malpractice~
 			return	1	  												//don't want to do weapony things after surgery
 	return 0

@@ -19,6 +19,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 
 /datum/paiController
+	var/inquirer = null
 	var/list/pai_candidates = list()
 	var/list/asked = list()
 
@@ -344,6 +345,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	user << browse(dat, "window=findPai")
 
+
 /datum/paiController/proc/requestRecruits()
 	for(var/mob/dead/observer/O in player_list)
 		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
@@ -368,7 +370,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		if(!C)	return
 		asked.Add(C.key)
 		asked[C.key] = world.time
-		var/response = alert(C, "Someone is requesting a pAI personality. Would you like to play as a personal AI?", "pAI Request", "Yes", "No", "Never for this round")
+		var/response = alert(C, "[inquirer] is requesting a pAI personality. Would you like to play as a personal AI?", "pAI Request", "Yes", "No", "Never for this round")
 		if(!C)	return		//handle logouts that happen whilst the alert is waiting for a response.
 		if(response == "Yes")
 			recruitWindow(C.mob)
