@@ -481,6 +481,9 @@
 		if(ticker.mode.traitors.len)
 			dat += check_role_table("Traitors", ticker.mode.traitors, src)
 
+		if(ticker.mode.borers.len)
+			dat += check_role_table("Cortical Borers", ticker.mode.borers, src)
+
 		var/datum/game_mode/mutiny/mutiny = get_mutiny_mode()
 		if(mutiny)
 			dat += mutiny.check_antagonists_ui(src)

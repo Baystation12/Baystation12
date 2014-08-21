@@ -673,7 +673,7 @@
 		return
 
 	// do APC interaction
-	user.set_machine(src)
+	//user.set_machine(src)
 	src.interact(user)
 
 /obj/machinery/power/apc/attack_alien(mob/living/carbon/alien/humanoid/user)
@@ -741,7 +741,7 @@
 	else
 		return 0 // 0 = User is not a Malf AI
 
-/obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!user)
 		return
 
@@ -752,7 +752,7 @@
 		"powerCellStatus" = cell ? cell.percent() : null,
 		"chargeMode" = chargemode,
 		"chargingStatus" = charging,
-		"totalLoad" = lastused_equip + lastused_light + lastused_environ,
+		"totalLoad" = round(lastused_equip + lastused_light + lastused_environ),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
 		"malfStatus" = get_malf_status(user),
@@ -760,7 +760,7 @@
 		"powerChannels" = list(
 			list(
 				"title" = "Equipment",
-				"powerLoad" = lastused_equip,
+				"powerLoad" = round(lastused_equip),
 				"status" = equipment,
 				"topicParams" = list(
 					"auto" = list("eqp" = 3),
@@ -770,7 +770,7 @@
 			),
 			list(
 				"title" = "Lighting",
-				"powerLoad" = lastused_light,
+				"powerLoad" = round(lastused_light),
 				"status" = lighting,
 				"topicParams" = list(
 					"auto" = list("lgt" = 3),
@@ -780,7 +780,7 @@
 			),
 			list(
 				"title" = "Environment",
-				"powerLoad" = lastused_environ,
+				"powerLoad" = round(lastused_environ),
 				"status" = environ,
 				"topicParams" = list(
 					"auto" = list("env" = 3),
@@ -792,7 +792,7 @@
 	)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -961,14 +961,14 @@
 /obj/machinery/power/apc/Topic(href, href_list, var/usingUI = 1)
 	if(!(isrobot(usr) && (href_list["apcwires"] || href_list["pulse"])))
 		if(!can_use(usr, 1))
-			return
+			return 0
 	src.add_fingerprint(usr)
 
 	if (href_list["apcwires"])
 		var/t1 = text2num(href_list["apcwires"])
 		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
 			usr << "You need wirecutters!"
-			return
+			return 0
 		if (src.isWireColorCut(t1))
 			src.mend(t1)
 		else
@@ -977,10 +977,10 @@
 		var/t1 = text2num(href_list["pulse"])
 		if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
 			usr << "You need a multitool!"
-			return
+			return 0
 		if (src.isWireColorCut(t1))
 			usr << "You can't pulse a cut wire."
-			return
+			return 0
 		else
 			src.pulse(t1)
 	else if (href_list["lock"])
@@ -1027,11 +1027,11 @@
 	else if( href_list["close"] )
 		nanomanager.close_user_uis(usr, src)
 
-		return
+		return 0
 	else if (href_list["close2"])
 		usr << browse(null, "window=apcwires")
 
-		return
+		return 0
 
 	else if (href_list["overload"])
 		if( istype(usr, /mob/living/silicon) && !src.aidisabled )
@@ -1042,7 +1042,7 @@
 		if( istype(malfai, /mob/living/silicon/ai) && !src.aidisabled )
 			if (malfai.malfhacking)
 				malfai << "You are already hacking an APC."
-				return
+				return 0
 			malfai << "Beginning override of APC systems. This takes some time, and you cannot perform other actions during the process."
 			malfai.malfhack = src
 			malfai.malfhacking = 1
@@ -1071,7 +1071,7 @@
 	if(usingUI)
 		src.updateDialog()
 
-	return
+	return 1
 
 /*/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
 	if(!istype(malf))
@@ -1144,7 +1144,8 @@
 
 /obj/machinery/power/apc/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.newload += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 /obj/machinery/power/apc/avail()
 	if(terminal)
@@ -1176,13 +1177,7 @@
 	var/last_ch = charging
 
 	var/excess = surplus()
-
-	if(!src.avail())
-		main_status = 0
-	else if(excess < 0)
-		main_status = 1
-	else
-		main_status = 2
+	var/power_excess = 0
 
 	var/perapc = 0
 	if(terminal && terminal.powernet)
@@ -1195,36 +1190,39 @@
 		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
 
-		// draw power from cell as before
-
-		var/cellused = min(cell.charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
-		cell.use(cellused)
-
-		if(excess > 0 || perapc > lastused_total)		// if power excess, or enough anyway, recharge the cell
-														// by the same amount just used
-			cell.give(cellused)
-			add_load(cellused/CELLRATE)		// add the load used to recharge the cell
-
-
-		else		// no excess, and not enough per-apc
-
-			if( (cell.charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
-
-				cell.give(CELLRATE * perapc)	//recharge with what we can
-				add_load(perapc)		// so draw what we can from the grid
+		// try to draw power from the grid
+		if (!src.avail())
+			main_status = 0
+		else
+			var/target_draw = perapc
+			if (charging == 2)
+				target_draw = min(target_draw, lastused_total) //if we're fully charged, only take what we need to meet demand
+			
+			var/power_drawn = add_load(target_draw) //get some power from the powernet
+			
+			//figure out how much power is left over after meeting demand
+			power_excess = power_drawn - lastused_total
+			
+			if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
+				main_status = 1
 				charging = 0
+			
+				var/required_power = -power_excess
+				if( (cell.charge/CELLRATE) >= required_power)	// can we draw enough from cell to cover what's left over?
+					cell.use(required_power*CELLRATE)
 
-			else if (autoflag != 0)	// not enough power available to run the last tick!
-				charging = 0
-				chargecount = 0
-				// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
-				equipment = autoset(equipment, 0)
-				lighting = autoset(lighting, 0)
-				environ = autoset(environ, 0)
-				autoflag = 0
+				else if (autoflag != 0)	// not enough power available to run the last tick!
+					chargecount = 0
+					// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
+					equipment = autoset(equipment, 0)
+					lighting = autoset(lighting, 0)
+					environ = autoset(environ, 0)
+					autoflag = 0
+			
+			else
+				main_status = 2
 
-
-		// set channels depending on how much charge we have left
+		// Set channels depending on how much charge we have left
 
 		// Allow the APC to operate as normal if the cell can charge
 		if(charging && longtermpower < 10)
@@ -1267,10 +1265,9 @@
 		// now trickle-charge the cell
 
 		if(chargemode && charging == 1 && operating)
-			if(excess > 0)		// check to make sure we have enough to charge
-				// Max charge is perapc share, capped to cell capacity, or % per second constant (Whichever is smallest)
-				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
-				add_load(ch/CELLRATE) // Removes the power we're taking from the grid
+			if(power_excess > 0) // check to make sure we have enough to charge
+				// Max charge is available excess power, capped to cell capacity, or % per second constant (Whichever is smallest)
+				var/ch = min(power_excess*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
 				cell.give(ch) // actually recharge the cell
 
 			else
@@ -1278,13 +1275,13 @@
 				chargecount = 0
 
 		// show cell as fully charged if so
-
 		if(cell.charge >= cell_maxcharge)
 			charging = 2
 
+		//if we have excess power for long enough, think about re-enable charging.
 		if(chargemode)
 			if(!charging)
-				if(excess > cell_maxcharge*CHARGELEVEL)
+				if(power_excess*CELLRATE >= cell_maxcharge*CHARGELEVEL)
 					chargecount++
 				else
 					chargecount = 0
@@ -1320,21 +1317,21 @@
 	src.updateDialog()
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
-// on 0=off, 1=on, 2=autooff
+// on 0=off, 1=auto-on, 2=auto-off
 
 /proc/autoset(var/val, var/on)
 
-	if(on==0)
+	if(on==0) // turn things off
 		if(val==2)			// if on, return off
 			return 0
 		else if(val==3)		// if auto-on, return auto-off
 			return 1
 
-	else if(on==1)
+	else if(on==1) // turn things auto-on
 		if(val==1)			// if auto-off, return auto-on
 			return 3
 
-	else if(on==2)
+	else if(on==2) // turn things auto-off
 		if(val==3)			// if auto-on, return auto-off
 			return 1
 

@@ -19,11 +19,9 @@
 	..()
 
 /obj/machinery/drone_fabricator/power_change()
-	if (powered())
-		stat &= ~NOPOWER
-	else
+	..()
+	if (stat & NOPOWER)
 		icon_state = "drone_fab_nopower"
-		stat |= NOPOWER
 
 /obj/machinery/drone_fabricator/process()
 

@@ -55,15 +55,20 @@
 				del src
 			return
 
+		if(!stored_computer.manipulating)
+			stored_computer.manipulating = 1
+			stored_computer.loc = loc
+			stored_computer.stat &= ~MAINT
+			stored_computer.update_icon()
+			loc = null
+			usr << "You open \the [src]."
 
-		stored_computer.loc = loc
-		stored_computer.stat &= ~MAINT
-		stored_computer.update_icon()
-		loc = null
-		usr << "You open \the [src]."
+			spawn(5)
+				stored_computer.manipulating = 0
+				del src
+		else
+			usr << "\red You are already opening the computer!"
 
-		spawn(5)
-			del src
 
 	AltClick()
 		if(Adjacent(usr))
@@ -112,6 +117,7 @@
 	pixel_y			= -3
 	show_keyboard	= 0
 
+	var/manipulating = 0 // To prevent disappearing bug
 	var/obj/item/device/laptop/portable = null
 
 	New(var/L, var/built = 0)
@@ -147,25 +153,26 @@
 			portable=new
 			portable.stored_computer = src
 
-		portable.loc = loc
-		loc = portable
-		stat |= MAINT
-		usr << "You close \the [src]."
+		if(!manipulating)
+			portable.loc = loc
+			loc = portable
+			stat |= MAINT
+			usr << "You close \the [src]."
 
 	auto_use_power()
 		if(stat&MAINT)
 			return
 		if(use_power && istype(battery) && battery.charge > 0)
 			if(use_power == 1)
-				battery.use(idle_power_usage)
+				battery.use(idle_power_usage*CELLRATE) //idle and active_power_usage are in WATTS. battery.use() expects CHARGE.
 			else
-				battery.use(active_power_usage)
+				battery.use(active_power_usage*CELLRATE)
 			return 1
 		return 0
 
 	use_power(var/amount, var/chan = -1)
 		if(battery && battery.charge > 0)
-			battery.use(amount)
+			battery.use(amount*CELLRATE)
 
 	power_change()
 		if( !battery || battery.charge <= 0 )

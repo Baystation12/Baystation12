@@ -7,10 +7,9 @@
 	powered = 1
 	locked = 0
 
-	standing_mob = 1
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 8
+	mob_offset_y = 7
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
@@ -31,10 +30,10 @@
 	passenger_allowed = 0
 	locked = 0
 
-	standing_mob = 1
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 5
+	load_offset_y = 4
+	mob_offset_y = 8
 
 //-------------------------------------------
 // Standard procs
@@ -44,9 +43,12 @@
 	cell = new /obj/item/weapon/cell/high
 	verbs -= /atom/movable/verb/pull
 	key = new()
+	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
+	overlays += I
+	turn_off()	//so engine verbs are correctly set
 
 /obj/vehicle/train/cargo/engine/Move()
-	if(on && cell.charge < power_use)
+	if(on && cell.charge < charge_use)
 		turn_off()
 		update_stats()
 		if(load && is_train_head())
@@ -68,8 +70,8 @@
 	if(istype(W, /obj/item/weapon/key/cargo_train))
 		if(!key)
 			user.drop_item()
+			W.forceMove(src)
 			key = W
-			W.loc = src
 			verbs += /obj/vehicle/train/cargo/engine/verb/remove_key
 		return
 	..()
@@ -95,7 +97,7 @@
 	var/obj/machinery/door/D = Obstacle
 	var/mob/living/carbon/human/H = load
 	if(istype(D) && istype(H))
-		D.Bumped(H)		//a little hacky, but hey, it works, and repects access rights
+		D.Bumped(H)		//a little hacky, but hey, it works, and respects access rights
 
 	..()
 
@@ -113,6 +115,25 @@
 	else
 		..()
 		update_stats()
+
+		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
+		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
+		
+		if(on)
+			verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
+		else
+			verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
+
+/obj/vehicle/train/cargo/engine/turn_off()
+	..()
+
+	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
+	verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
+	
+	if(!on)
+		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
+	else
+		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 
 /obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
 	var/list/parts = list("head", "chest", "l_leg", "r_leg", "l_arm", "r_arm")
@@ -146,7 +167,7 @@
 		return 0
 
 	if(is_train_head())
-		if(direction == reverse_direction(dir))
+		if(direction == reverse_direction(dir) && tow)
 			return 0
 		if(Move(get_step(src, direction)))
 			return 1
@@ -162,20 +183,7 @@
 	
 	if(get_dist(usr,src) <= 1)
 		usr << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
-
-/obj/vehicle/train/cargo/engine/verb/check_power()
-	set name = "Check power level"
-	set category = "Object"
-	set src in view(1)
-	
-	if(!istype(usr, /mob/living/carbon/human))
-		return
-
-	if(!cell)
-		usr << "There is no power cell installed in [src]."
-		return
-
-	usr << "The power meter reads [round(cell.percent(), 0.01)]%"
+		usr << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
@@ -193,7 +201,7 @@
 	if (on)
 		usr << "You start [src]'s engine."
 	else
-		if(cell.charge < power_use)
+		if(cell.charge < charge_use)
 			usr << "[src] is out of power."
 		else
 			usr << "[src]'s engine won't start."
@@ -241,16 +249,16 @@
 /obj/vehicle/train/cargo/trolley/load(var/atom/movable/C)
 	if(ismob(C) && !passenger_allowed)
 		return 0
-	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !ismob(C))
+	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !istype(C, /mob/living/carbon/human))
 		return 0
 
 	..()
-	
-	if(istype(load, /mob/living/carbon/human))
-		load.pixel_y += 4
+
+	if(load)
+		return 1
 
 /obj/vehicle/train/cargo/engine/load(var/atom/movable/C)
-	if(!ismob(C))
+	if(!istype(C, /mob/living/carbon/human))
 		return 0
 
 	return ..()
@@ -267,13 +275,22 @@
 // more engines increases this limit by car_limit per
 // engine.
 //-------------------------------------------------------
-/obj/vehicle/train/cargo/engine/update_train_stats()
-	..()
+/obj/vehicle/train/cargo/engine/update_car(var/train_length, var/active_engines)
+	src.train_length = train_length
+	src.active_engines = active_engines
 
-	update_move_delay()
+	//Update move delay
+	if(!is_train_head() || !on)
+		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
+	else
+		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
+		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
+		move_delay += config.run_speed 														//base reference speed
+		move_delay *= 1.1																	//makes cargo trains 10% slower than running when not overweight
 
-/obj/vehicle/train/cargo/trolley/update_train_stats()
-	..()
+/obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)
+	src.train_length = train_length
+	src.active_engines = active_engines
 	
 	if(!lead && !tow)
 		anchored = 0
@@ -284,12 +301,3 @@
 	else
 		anchored = 1
 		verbs -= /atom/movable/verb/pull
-
-/obj/vehicle/train/cargo/engine/proc/update_move_delay()
-	if(!is_train_head() || !on)
-		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
-	else
-		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
-		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
-		move_delay += config.run_speed 														//base reference speed
-		move_delay *= 1.05 																	//makes cargo trains 5% slower than running when not overweight

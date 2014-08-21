@@ -136,14 +136,9 @@
 				newtraitor << "<B>You are now a traitor.</B>"
 				newtraitor.mind.special_role = "traitor"
 				newtraitor.hud_updateflag |= 1 << SPECIALROLE_HUD
-				var/obj_count = 1
-				newtraitor << "\blue Your current objectives:"
-				if(!config.objectives_disabled)
-					for(var/datum/objective/objective in newtraitor.mind.objectives)
-						newtraitor << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-						obj_count++
-				else
-					newtraitor << "<i>You have been selected this round as an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
+				newtraitor << "<i>You have been selected this round as an antagonist!</i>"
+				show_objectives(newtraitor.mind)
+
 			//else
 				//message_admins("No new traitor being added.")
 		//else
@@ -194,14 +189,9 @@
 				traitors += character.mind
 				character << "\red <B>You are the traitor.</B>"
 				character.mind.special_role = "traitor"
-				if (config.objectives_disabled)
-					character << "<i>You have been selected this round as an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
-				else
-					var/obj_count = 1
-					character << "\blue Your current objectives:"
-					for(var/datum/objective/objective in character.mind.objectives)
-						character << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-						obj_count++
+				character << "<i>You have been selected this round as an antagonist</i>!"
+				show_objectives(character.mind)
+
 			//else
 				//message_admins("New traitor roll failed.  No new traitor.")
 	//else

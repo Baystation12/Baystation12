@@ -21,6 +21,7 @@
 	var/up = 0
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+	body_parts_covered = HEAD|FACE|EYES
 	icon_action_button = "action_welding"
 	siemens_coefficient = 0.9
 	w_class = 3
@@ -62,6 +63,7 @@
 	var/status = 0
 	var/fire_resist = T0C+1300	//this is the max temp it can stand before you start to cook. although it might not burn away, you take damage
 	var/processing = 0 //I dont think this is used anywhere.
+	body_parts_covered = EYES
 
 /obj/item/clothing/head/cakehat/process()
 	if(!onfire)
@@ -123,6 +125,7 @@
 	item_color = "pumpkin"
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = HEAD|EYES
 	var/brightness_on = 2 //luminosity when on
 	var/on = 0
 	w_class = 3
@@ -158,6 +161,7 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
 	flags = FPRINT | TABLEPASS
+	body_parts_covered = 0
 	var/icon/mob
 	var/icon/mob2
 	siemens_coefficient = 1.5

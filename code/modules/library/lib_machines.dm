@@ -147,7 +147,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(src.emagged)
 				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
 			if(src.arcanecheckout)
-				new /obj/item/weapon/tome(src.loc)
+				new /obj/item/weapon/book/tome(src.loc)
 				user << "<span class='warning'>Your sanity barely endures the seconds spent in the vault's browsing window. The only thing to remind you of this when you stop browsing is a dusty old tome sitting on the desk. You don't really remember printing it.</span>"
 				user.visible_message("[user] stares at the blank screen for a few moments, his expression frozen in fear. When he finally awakens from it, he looks a lot older.", 2)
 				src.arcanecheckout = 0
@@ -329,26 +329,29 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(scanner.cache)
 				var/choice = input("Are you certain you wish to upload this title to the Archive?") in list("Confirm", "Abort")
 				if(choice == "Confirm")
-					establish_old_db_connection()
-					if(!dbcon_old.IsConnected())
-						alert("Connection to Archive has been severed. Aborting.")
+					if(scanner.cache.unique)
+						alert("This book has been rejected from the database. Aborting!")
 					else
-						/*
-						var/sqltitle = dbcon.Quote(scanner.cache.name)
-						var/sqlauthor = dbcon.Quote(scanner.cache.author)
-						var/sqlcontent = dbcon.Quote(scanner.cache.dat)
-						var/sqlcategory = dbcon.Quote(upload_category)
-						*/
-						var/sqltitle = sanitizeSQL(scanner.cache.name)
-						var/sqlauthor = sanitizeSQL(scanner.cache.author)
-						var/sqlcontent = sanitizeSQL(scanner.cache.dat)
-						var/sqlcategory = sanitizeSQL(upload_category)
-						var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
-						if(!query.Execute())
-							usr << query.ErrorMsg()
+						establish_old_db_connection()
+						if(!dbcon_old.IsConnected())
+							alert("Connection to Archive has been severed. Aborting.")
 						else
-							log_game("[usr.name]/[usr.key] has uploaded the book titled [scanner.cache.name], [length(scanner.cache.dat)] signs")
-							alert("Upload Complete.")
+							/*
+							var/sqltitle = dbcon.Quote(scanner.cache.name)
+							var/sqlauthor = dbcon.Quote(scanner.cache.author)
+							var/sqlcontent = dbcon.Quote(scanner.cache.dat)
+							var/sqlcategory = dbcon.Quote(upload_category)
+							*/
+							var/sqltitle = sanitizeSQL(scanner.cache.name)
+							var/sqlauthor = sanitizeSQL(scanner.cache.author)
+							var/sqlcontent = sanitizeSQL(scanner.cache.dat)
+							var/sqlcategory = sanitizeSQL(upload_category)
+							var/DBQuery/query = dbcon_old.NewQuery("INSERT INTO library (author, title, content, category) VALUES ('[sqlauthor]', '[sqltitle]', '[sqlcontent]', '[sqlcategory]')")
+							if(!query.Execute())
+								usr << query.ErrorMsg()
+							else
+								log_game("[usr.name]/[usr.key] has uploaded the book titled [scanner.cache.name], [length(scanner.cache.dat)] signs")
+								alert("Upload Complete.")
 
 	if(href_list["targetid"])
 		var/sqlid = sanitizeSQL(href_list["targetid"])

@@ -141,11 +141,13 @@
 
 		if(damage > explosion_point)
 			for(var/mob/living/mob in living_mob_list)
-				if(istype(mob, /mob/living/carbon/human))
-					//Hilariously enough, running into a closet should make you get hit the hardest.
-					mob:hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-				var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-				mob.apply_effect(rads, IRRADIATE)
+				if(loc.z == mob.loc.z)
+					if(istype(mob, /mob/living/carbon/human))
+						//Hilariously enough, running into a closet should make you get hit the hardest.
+						var/mob/living/carbon/human/H = mob
+						H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
+					var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+					mob.apply_effect(rads, IRRADIATE)
 
 			explode()
 	else
@@ -175,7 +177,7 @@
 		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
 		var/temp_factor = 100
 
@@ -207,16 +209,13 @@
 		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
 		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
 
-		removed.temperature += ((device_energy * thermal_power) / removed.heat_capacity())
+		removed.add_thermal_energy(device_energy * thermal_power)
 
 		removed.temperature = max(0, min(removed.temperature, 10000))
 
 		//Calculate how much gas to release
-		removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
-
-		removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
-
-		removed.update_values()
+		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
+		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
 
 		env.merge(removed)
 
@@ -331,10 +330,15 @@
 			if(is_type_in_list(X, uneatable))	continue
 			if(((X) && (!istype(X,/mob/living/carbon/human))))
 				step_towards(X,src)
-				if(!X:anchored) //unanchored objects pulled twice as fast
+				if(istype(X, /obj)) //unanchored objects pulled twice as fast
+					var/obj/O = X
+					if(!O.anchored)
+						step_towards(X,src)
+				else
 					step_towards(X,src)
 				if(istype(X, /obj/structure/window)) //shatter windows
-					X.ex_act(2.0)
+					var/obj/structure/window/W = X
+					W.ex_act(2.0)
 			else if(istype(X,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = X
 				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))

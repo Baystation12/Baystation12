@@ -22,13 +22,13 @@
 	var/movable = 1
 
 	var/obj/item/weapon/cell/cell
-	var/power_use = 5	//set this to adjust the amount of power the vehicle uses per move
+	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
-	var/standing_mob = 0		//if a mob loaded on the vehicle should be standing
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
 	var/load_offset_y = 0		//pixel_y offset for item overlay
+	var/mob_offset_y = 0		//pixel_y offset for mob overlay
 
 //-------------------------------------------
 // Standard procs
@@ -39,18 +39,22 @@
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
-		if(on && powered && cell.charge < power_use)
+		if(on && powered && cell.charge < charge_use)
 			turn_off()
 
 		var/init_anc = anchored
 		anchored = 0
-		if(..())
-			if(on && powered)
-				cell.use(power_use)
+		if(!..())
+			anchored = init_anc
+			return 0
+
 		anchored = init_anc
 
+		if(on && powered)
+			cell.use(charge_use)
+
 		if(load)
-			load.loc = loc
+			load.forceMove(loc)// = loc
 			load.dir = dir
 
 		return 1
@@ -58,6 +62,8 @@
 		return 0
 
 /obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/hand_labeler))
+		return
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(!locked)
 			open = !open
@@ -166,7 +172,7 @@
 /obj/vehicle/proc/turn_on()
 	if(stat)
 		return 0
-	if(powered && cell.charge < power_use)
+	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
 	luminosity = initial(luminosity)
@@ -194,9 +200,14 @@
 	new /obj/item/weapon/cable_coil/cut(Tsec)
 
 	if(cell)
-		cell.loc = Tsec
+		cell.forceMove(Tsec)
 		cell.update_icon()
 		cell = null
+
+	//stuns people who are thrown off a train that has been blown up
+	if(istype(load, /mob/living))
+		var/mob/living/M = load
+		M.apply_effects(5, 5)
 
 	unload()
 
@@ -217,7 +228,7 @@
 		turn_off()
 		return
 
-	if(cell.charge < power_use)
+	if(cell.charge < charge_use)
 		turn_off()
 		return
 
@@ -232,8 +243,8 @@
 		return
 
 	H.drop_from_inventory(C)
+	C.forceMove(src)
 	cell = C
-	C.loc = null	//this wont be GC'd since it's referrenced above
 	powercheck()
 	usr << "<span class='notice'>You install [C] in [src].</span>"
 
@@ -242,7 +253,8 @@
 		return
 
 	usr << "<span class='notice'>You remove [cell] from [src].</span>"
-	cell.loc = get_turf(H)
+	cell.forceMove(get_turf(H))
+	H.put_in_hands(cell)
 	cell = null
 	powercheck()
 
@@ -269,7 +281,7 @@
 	if(istype(crate))
 		crate.close()
 
-	C.loc = loc
+	C.forceMove(loc)
 	C.dir = dir
 	C.anchored = 1
 
@@ -277,7 +289,10 @@
 
 	if(load_item_visible)
 		C.pixel_x += load_offset_x
-		C.pixel_y += load_offset_y
+		if(ismob(C))
+			C.pixel_y += mob_offset_y
+		else
+			C.pixel_y += load_offset_y
 		C.layer = layer + 0.1		//so it sits above the vehicle
 
 	if(ismob(C))
@@ -308,7 +323,7 @@
 		var/list/options = new()
 		for(var/test_dir in alldirs)
 			var/new_dir = get_step_to(src, get_step(src, test_dir))
-			if(new_dir)
+			if(new_dir && load.Adjacent(new_dir))
 				options += new_dir
 		if(options.len)
 			dest = pick(options)
@@ -318,8 +333,7 @@
 	if(!isturf(dest))	//if there still is nowhere to unload, cancel out since the vehicle is probably in nullspace
 		return 0
 
-
-	load.loc = dest
+	load.forceMove(dest)
 	load.dir = get_dir(loc, dest)
 	load.anchored = initial(load.anchored)
 	load.pixel_x = initial(load.pixel_x)

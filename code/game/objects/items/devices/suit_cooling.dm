@@ -42,7 +42,7 @@
 	
 	var/mob/living/carbon/human/H = loc
 	
-	var/efficiency = H.get_pressure_protection()		//you need to have a good seal for effective cooling
+	var/efficiency = 1 - H.get_pressure_weakness()		//you need to have a good seal for effective cooling
 	var/env_temp = get_environment_temperature()		//wont save you from a fire
 	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
 	

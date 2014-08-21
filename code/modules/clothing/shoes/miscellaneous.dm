@@ -56,11 +56,13 @@
 	name = "sandals"
 	icon_state = "wizard"
 	species_restricted = null
+	body_parts_covered = 0
 
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."
 	name = "magic shoes"
 	icon_state = "black"
+	body_parts_covered = FEET
 
 /obj/item/clothing/shoes/galoshes
 	desc = "Rubber boots"
@@ -131,7 +133,7 @@
 /obj/item/clothing/shoes/swimmingfins
 	desc = "Help you swim good."
 	name = "swimming fins"
-	icon_state = "flipperfeet"
+	icon_state = "flippers"
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null

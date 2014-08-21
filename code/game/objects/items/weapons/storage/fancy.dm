@@ -68,6 +68,7 @@
 	icon_type = "egg"
 	name = "egg box"
 	storage_slots = 12
+	max_combined_w_class = 24
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/egg")
 
 /obj/item/weapon/storage/fancy/egg_box/New()
@@ -202,6 +203,55 @@
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
 
+/obj/item/weapon/storage/fancy/cigar
+	name = "cigar case"
+	desc = "A case for holding your cigars when you are not smoking them."
+	icon_state = "cigarcase"
+	item_state = "cigarcase"
+	icon = 'icons/obj/cigarettes.dmi'
+	w_class = 1
+	throwforce = 2
+	flags = TABLEPASS
+	slot_flags = SLOT_BELT
+	storage_slots = 7
+	can_hold = list("/obj/item/clothing/mask/cigarette/cigar")
+	icon_type = "cigar"
+
+/obj/item/weapon/storage/fancy/cigar/New()
+	..()
+	flags |= NOREACT
+	for(var/i = 1 to storage_slots)
+		new /obj/item/clothing/mask/cigarette/cigar(src)
+	create_reagents(15 * storage_slots)
+
+/obj/item/weapon/storage/fancy/cigar/Del()
+	del(reagents)
+	..()
+
+/obj/item/weapon/storage/fancy/cigar/update_icon()
+	icon_state = "[initial(icon_state)][contents.len]"
+	return
+
+/obj/item/weapon/storage/fancy/cigar/remove_from_storage(obj/item/W as obj, atom/new_location)
+		var/obj/item/clothing/mask/cigarette/cigar/C = W
+		if(!istype(C)) return
+		reagents.trans_to(C, (reagents.total_volume/contents.len))
+		..()
+
+/obj/item/weapon/storage/fancy/cigar/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!istype(M, /mob))
+		return
+
+	if(M == user && user.zone_sel.selecting == "mouth" && contents.len > 0 && !user.wear_mask)
+		var/obj/item/clothing/mask/cigarette/cigar/W = new /obj/item/clothing/mask/cigarette/cigar(user)
+		reagents.trans_to(W, (reagents.total_volume/contents.len))
+		user.equip_to_slot_if_possible(W, slot_wear_mask)
+		reagents.maximum_volume = 15 * contents.len
+		contents.len--
+		user << "<span class='notice'>You take a cigar out of the case.</span>"
+		update_icon()
+	else
+		..()
 
 /*
  * Vial Box
