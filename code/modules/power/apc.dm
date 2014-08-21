@@ -1142,6 +1142,16 @@
 	else
 		return 0
 
+/obj/machinery/power/apc/proc/last_surplus()
+	if(terminal && terminal.powernet)
+		return terminal.powernet.last_surplus()
+	else
+		return 0
+
+//Returns 1 if the APC should attempt to charge
+/obj/machinery/power/apc/proc/attempt_charging()
+	return (chargemode && charging == 1 && operating)
+
 /obj/machinery/power/apc/add_load(var/amount)
 	if(terminal && terminal.powernet)
 		return terminal.powernet.draw_power(amount)
@@ -1189,15 +1199,17 @@
 	if(cell && !shorted)
 		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
+		
+		// Calculate how much power the APC will try to get from the grid.
+		var/target_draw = lastused_total
+		if (src.attempt_charging())
+			target_draw += min((cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))/CELLRATE
+		target_draw = min(target_draw, perapc) //limit power draw by perapc
 
 		// try to draw power from the grid
 		var/power_drawn = 0
 		if (src.avail())
-			var/target_draw = perapc
-			if (charging == 2)
-				target_draw = min(target_draw, lastused_total) //if we're fully charged, only take what we need to meet demand
-			
-			var/power_drawn = add_load(target_draw) //get some power from the powernet
+			power_drawn = add_load(target_draw) //get some power from the powernet
 		
 		//figure out how much power is left over after meeting demand
 		power_excess = power_drawn - lastused_total
@@ -1207,7 +1219,7 @@
 			charging = 0
 		
 			var/required_power = -power_excess
-			if( (cell.charge/CELLRATE) >= required_power)	// can we draw enough from cell to cover what's left over?
+			if(cell.charge >= required_power*CELLRATE)	// can we draw enough from cell to cover what's left over?
 				cell.use(required_power*CELLRATE)
 
 			else if (autoflag != 0)	// not enough power available to run the last tick!
@@ -1267,13 +1279,9 @@
 				autoflag = 0
 
 		// now trickle-charge the cell
-
-		if(chargemode && charging == 1 && operating)
-			if(power_excess > 0) // check to make sure we have enough to charge
-				// Max charge is available excess power, capped to cell capacity, or % per second constant (Whichever is smallest)
-				var/ch = min(power_excess*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
-				cell.give(ch) // actually recharge the cell
-
+		if(src.attempt_charging())
+			if (power_excess > 0) // check to make sure we have enough to charge
+				cell.give(power_excess*CELLRATE) // actually recharge the cell
 			else
 				charging = 0		// stop charging
 				chargecount = 0
@@ -1285,14 +1293,14 @@
 		//if we have excess power for long enough, think about re-enable charging.
 		if(chargemode)
 			if(!charging)
-				if(power_excess*CELLRATE >= cell_maxcharge*CHARGELEVEL)
+				//last_surplus() overestimates the amount of power available for charging, but it's equivalent to what APCs were doing before.
+				if(src.last_surplus()*CELLRATE >= cell_maxcharge*CHARGELEVEL)
 					chargecount++
 				else
 					chargecount = 0
 					charging = 0
 
-				if(chargecount == 10)
-
+				if(chargecount >= 10)
 					chargecount = 0
 					charging = 1
 

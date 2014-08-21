@@ -406,6 +406,11 @@
 /datum/powernet/proc/surplus()
 	return max(avail - newload, 0)
 
+//Returns the amount of excess power (before refunding to SMESs) from last tick.
+//This is for machines that might adjust their power consumption using this data.
+/datum/powernet/proc/last_surplus()
+	return max(avail - load, 0)
+
 //Attempts to draw power from a powernet. Returns the actual amount of power drawn
 /datum/powernet/proc/draw_power(var/requested_amount)
 	var/surplus = max(avail - newload, 0)
