@@ -81,9 +81,7 @@
 	if(has_power)
 		stat &= ~NOPOWER
 	else
-
 		stat |= NOPOWER
-	return
 
 // the powernet datum
 // each contiguous network of cables & nodes
@@ -387,10 +385,13 @@
 			if( istype( term.master, /obj/machinery/power/apc ) )
 				numapc++
 
-	if(numapc)
-		perapc = avail/numapc
-
 	netexcess = avail - load
+	
+	if(numapc)
+		//very simple load balancing. If there was a net excess this tick then it must have been that some APCs used less than perapc, since perapc*numapc = avail
+		//Therefore we can raise the amount of power rationed out to APCs on the assumption that those APCs that used less than perapc will continue to do so.
+		//If that assumption fails, then some APCs will miss out on power next tick, however it will be rebalanced for the tick after.
+		perapc = (avail + netexcess)/numapc
 
 	if( netexcess > 100)		// if there was excess power last cycle
 		if(nodes && nodes.len)
