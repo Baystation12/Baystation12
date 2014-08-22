@@ -145,13 +145,13 @@ var/list/global/base_miss_chance = list(
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
 //Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
 var/list/global/organ_rel_size = list(
-	"head" = 20,
-	"chest" = 40,
+	"head" = 25,
+	"chest" = 70,
 	"groin" = 30,
-	"l_leg" = 30,
-	"r_leg" = 30,
-	"l_arm" = 30,
-	"r_arm" = 30,
+	"l_leg" = 25,
+	"r_leg" = 25,
+	"l_arm" = 25,
+	"r_arm" = 25,
 	"l_hand" = 10,
 	"r_hand" = 10,
 	"l_foot" = 10,
@@ -191,21 +191,6 @@ var/list/global/organ_rel_size = list(
 			organ_rel_size["l_foot"]; "l_foot",
 			organ_rel_size["r_foot"]; "r_foot",
 		)
-/*
-		ran_zone = pick ( 
-			20; "head",
-			40; "chest",
-			30; "groin",
-			30; "l_arm",
-			30; "r_arm",
-			30; "l_leg",
-			30; "r_leg",
-			10; "l_hand",
-			10; "r_hand",
-			10; "l_foot",
-			10; "r_foot",
-		)
-*/
 	
 	return ran_zone
 
