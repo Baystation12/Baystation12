@@ -80,11 +80,6 @@
 			emote(pick("scratch","jump","roll","tail"))
 	updatehealth()
 
-
-/mob/living/carbon/monkey/calculate_affecting_pressure(var/pressure)
-	..()
-	return pressure
-
 /mob/living/carbon/monkey
 
 	proc/handle_disabilities()
@@ -389,9 +384,8 @@
 
 		//Moved these vars here for use in the fuck-it-skip-processing check.
 		var/pressure = environment.return_pressure()
-		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
+		if(pressure < WARNING_HIGH_PRESSURE && pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.gas["phoron"] < MOLES_PHORON_VISIBLE)
 
-		if(adjusted_pressure < WARNING_HIGH_PRESSURE && adjusted_pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.gas["phoron"] < gas_data.overlay_limit["phoron"])
 
 			//Hopefully should fix the walk-inside-still-pressure-warning issue.
 			if(pressure_alert)
@@ -413,9 +407,9 @@
 			bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
 
 		//Account for massive pressure differences
-		switch(adjusted_pressure)
+		switch(pressure)
 			if(HAZARD_HIGH_PRESSURE to INFINITY)
-				adjustBruteLoss( min( ( (adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
+				adjustBruteLoss( min( ( (pressure / HAZARD_HIGH_PRESSURE) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
 				pressure_alert = 2
 			if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
 				pressure_alert = 1

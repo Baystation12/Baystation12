@@ -18,12 +18,17 @@
 		buckled_mob.dir = dir
 
 /obj/structure/stool/bed/chair/wheelchair/relaymove(mob/user, direction)
+	// Redundant check?
 	if(user.stat || user.stunned || user.weakened || user.paralysis || user.lying || user.restrained())
 		if(user==pulling)
 			pulling = null
 			user.pulledby = null
 			user << "\red You lost your grip!"
 		return
+	if(buckled_mob && pulling && user == buckled_mob)
+		if(pulling.stat || pulling.stunned || pulling.weakened || pulling.paralysis || pulling.lying || pulling.restrained())
+			pulling.pulledby = null
+			pulling = null
 	if(user.pulling && (user == pulling))
 		pulling = null
 		user.pulledby = null
@@ -136,12 +141,12 @@
 	if(propelled || (pulling && (pulling.a_intent == "hurt")))
 		var/mob/living/occupant = buckled_mob
 		unbuckle()
-		
+
 		if (pulling && (pulling.a_intent == "hurt"))
 			occupant.throw_at(A, 3, 3, pulling)
 		else if (propelled)
 			occupant.throw_at(A, 3, propelled)
-		
+
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
 		occupant.throw_at(A, 3, propelled)

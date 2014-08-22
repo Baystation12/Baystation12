@@ -133,7 +133,7 @@
 /obj/item/clothing/shoes/swimmingfins
 	desc = "Help you swim good."
 	name = "swimming fins"
-	icon_state = "flipperfeet"
+	icon_state = "flippers"
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null

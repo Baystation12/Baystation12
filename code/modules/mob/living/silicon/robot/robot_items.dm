@@ -6,7 +6,9 @@
 	name = "RoboTray"
 	desc = "An autoloading tray specialized for carrying refreshments."
 
-/obj/item/weapon/tray/robotray/afterattack(atom/target, mob/user as mob)
+/obj/item/weapon/tray/robotray/afterattack(atom/target, mob/user as mob, proximity)
+	if(!proximity)
+		return
 	if ( !target )
 		return
 	// pick up items, mostly copied from base tray pickup proc

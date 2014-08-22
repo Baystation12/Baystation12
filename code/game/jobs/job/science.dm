@@ -17,7 +17,7 @@
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
-	minimal_player_age = 7
+	minimal_player_age = 14
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -50,6 +50,8 @@
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Xenobotanist")
 
+	minimal_player_age = 14
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_l_ear)
@@ -79,6 +81,8 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
 	minimal_access = list(access_research, access_xenobiology)
 
+	minimal_player_age = 14
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H) return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_l_ear)
@@ -107,6 +111,8 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+
+	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

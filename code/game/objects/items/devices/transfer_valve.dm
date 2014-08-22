@@ -16,6 +16,7 @@
 	return 1
 
 /obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
+	var/turf/location = get_turf(src) // For admin logs
 	if(istype(item, /obj/item/weapon/tank))
 		if(tank_one && tank_two)
 			user << "<span class='warning'>There are already two tanks attached, remove one first.</span>"
@@ -31,6 +32,8 @@
 			user.drop_item()
 			item.loc = src
 			user << "<span class='notice'>You attach the tank to the transfer valve.</span>"
+			message_admins("[key_name_admin(user)] attached both tanks to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
+			log_game("[key_name_admin(user)] attached both tanks to a transfer valve.")
 
 		update_icon()
 		nanomanager.update_uis(src) // update all UIs attached to src
@@ -51,7 +54,7 @@
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
 
 		bombers += "[key_name(user)] attached a [item] to a transfer valve."
-		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve.")
+		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
 		nanomanager.update_uis(src) // update all UIs attached to src
@@ -83,7 +86,7 @@
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "transfer_valve.tmpl", "Tank Transfer Valve", 460, 280)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
