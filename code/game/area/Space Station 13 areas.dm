@@ -79,11 +79,11 @@ var/list/ghostteleportlocs = list()
 /hook/startup/proc/setupGhostTeleportLocs()
 	for(var/area/AR in world)
 		if(ghostteleportlocs.Find(AR.name)) continue
-		if(istype(AR, /area/turret_protected/aisat) || istype(AR, /area/derelict) || istype(AR, /area/tdome))
+		if(istype(AR, /area/turret_protected/aisat) || istype(AR, /area/derelict) || istype(AR, /area/tdome) || istype(AR, /area/shuttle/specops/centcom))
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1 || picked.z == 5 || picked.z == 3)
+		if (picked.z == 1 || picked.z == 3 || picked.z == 4 || picked.z == 5)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
@@ -1505,11 +1505,11 @@ var/list/ghostteleportlocs = list()
 
 /area/djstation
 	name = "\improper Listening Post"
-	icon_state = "DJ"
+	icon_state = "LP"
 
 /area/djstation/solars
 	name = "\improper Listening Post Solars"
-	icon_state = "DJ"
+	icon_state = "LPS"
 
 //DERELICT
 
