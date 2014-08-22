@@ -75,6 +75,20 @@ proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
 	if(user.gloves)
 		germ_level = user.gloves.germ_level
 
+	var/turf.T = get_turf(user)
+	var/area/A = T.loc
+	if(A)
+		for (var/mob/living/carbon/human/H in A.contents)
+			if (H.lying || germ_level >= 200)
+				continue
+			if (!(istype(H.head, /obj/item/clothing/head/helmet/space/rig/medical)||istype(H.head, /obj/item/clothing/head/helmet/space/rig/ert/medical)))
+				if (!istype(H.wear_mask, /obj/item/clothing/mask/surgical))
+					germ_level += 30 // Malus for masks
+				if (!istype(H.head, /obj/item/clothing/head/surgery))
+					germ_level += 30 // Malus for unproper head wear
+			if (!(istype(H.wear_suit, /obj/item/clothing/suit/space/rig/medical)||istype(H.wear_suit, /obj/item/clothing/suit/space/rig/ert/medical)))
+				if (!istype(H.w_uniform, /obj/item/clothing/under/rank/medical))
+					germ_level += 60 // Malus for unproper body wear
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
 proc/do_surgery(mob/living/M, mob/living/user, obj/item/tool)
