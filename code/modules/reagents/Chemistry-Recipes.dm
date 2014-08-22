@@ -130,7 +130,7 @@ datum
 		water //I can't believe we never had this.
 			name = "Water"
 			id = "water"
-			result = null
+			result = "water"
 			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
 			result_amount = 1
 
