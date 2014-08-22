@@ -229,3 +229,34 @@
 					"\blue You draw \the [holstered], pointing it at the ground.")
 				usr.put_in_hands(holstered)
 			holstered = null
+
+//Non-hardsuit ERT armor.
+/obj/item/clothing/suit/armor/vest/ert
+	name = "emergency response team armor"
+	desc = "A set of armor worn by members of the NanoTrasen Emergency Response Team."
+	icon_state = "ertarmor_cmd"
+	item_state = "armor"
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
+
+//Commander
+/obj/item/clothing/suit/armor/vest/ert/command
+	name = "emergency response team commander armor"
+	desc = "A set of armor worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights."
+
+//Security
+/obj/item/clothing/suit/armor/vest/ert/security
+	name = "emergency response team security armor"
+	desc = "A set of armor worn by security members of the NanoTrasen Emergency Response Team. Has red highlights."
+	icon_state = "ertarmor_sec"
+
+//Engineer
+/obj/item/clothing/suit/armor/vest/ert/engineer
+	name = "emergency response team engineer armor"
+	desc = "A set of armor worn by engineering members of the NanoTrasen Emergency Response Team. Has orange highlights."
+	icon_state = "ertarmor_eng"
+
+//Medical
+/obj/item/clothing/suit/armor/vest/ert/medical
+	name = "emergency response team medical armor"
+	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
+	icon_state = "ertarmor_med"

@@ -77,6 +77,13 @@
 	item_state = "dg_suit"
 	item_color = "centcom"
 
+/obj/item/clothing/under/ert
+	name = "ERT tactical uniform"
+	desc = "A short-sleeved black uniform, paired with grey digital-camo cargo pants. It looks very tactical."
+	icon_state = "ert_uniform"
+	item_state = "bl_suit"
+	item_color = "ert_uniform"
+
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
