@@ -498,12 +498,12 @@
 		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
-			
+
 			var/ratio = inhale_pp/safe_pressure_min
 			// Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
 			adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(1-ratio), 0))
 			failed_inhale = 1
-			
+
 			oxygen_alert = max(oxygen_alert, 1)
 		else
 			// We're in safe limits
@@ -629,8 +629,8 @@
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
-		
-		
+
+
 		breath.update_values()
 		return 1
 
@@ -724,6 +724,8 @@
 		else
 			if( !(COLD_RESISTANCE in mutations))
 				take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+				if(getOxyLoss() < 55) // 11 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
+					adjustOxyLoss(4)  // 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 				pressure_alert = -2
 			else
 				pressure_alert = -1
