@@ -52,7 +52,8 @@
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
 
-
+		var/icon/front = new(get_id_photo(H), dir = SOUTH)
+		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
 		var/datum/data/record/G = new()
 		G.fields["id"]			= id
@@ -65,7 +66,8 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
-		G.fields["photo"]		= get_id_photo(H)
+		G.fields["photo_front"]	= front
+		G.fields["photo_side"]	= side
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 		else
