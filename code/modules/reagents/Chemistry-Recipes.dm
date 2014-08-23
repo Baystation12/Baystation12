@@ -64,7 +64,7 @@ datum
 			result_amount = 3
 */
 		stoxin
-			name = "Sleep Toxin"
+			name = "Soporific"
 			id = "stoxin"
 			result = "stoxin"
 			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
@@ -85,7 +85,7 @@ datum
 			result_amount = 3
 
 		anti_toxin
-			name = "Anti-Toxin (Dylovene)"
+			name = "Dylovene"
 			id = "anti_toxin"
 			result = "anti_toxin"
 			required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
@@ -478,7 +478,7 @@ datum
 			result_amount = 4
 
 		stoxin
-			name = "Sleep Toxin"
+			name = "Soporific"
 			id = "stoxin"
 			result = "stoxin"
 			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)

@@ -55,8 +55,8 @@
 		reagents.add_reagent("cyanide", 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin
-	name = "sleep-toxin bottle"
-	desc = "A small bottle of sleep toxins. Just the fumes make you sleepy."
+	name = "soporific bottle"
+	desc = "A small bottle of soporific. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle20"
 
@@ -75,8 +75,8 @@
 		reagents.add_reagent("chloralhydrate", 15)		//Intentionally low since it is so strong. Still enough to knock someone out.
 
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
-	name = "anti-toxin bottle"
-	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
+	name = "dylovene bottle"
+	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 
