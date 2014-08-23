@@ -758,11 +758,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		photo.loc = src
 	else if(istype(user,/mob/living/silicon))
 		var/mob/living/silicon/tempAI = user
-		var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
-
-		if(!camera)
-			return
-		var/datum/picture/selection = camera.selectpicture()
+		var/datum/picture/selection = tempAI.GetPicture()
 		if (!selection)
 			return
 
