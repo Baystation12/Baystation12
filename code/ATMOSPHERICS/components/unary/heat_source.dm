@@ -62,7 +62,7 @@
 		update_use_power(0)
 		return
 	
-	if (network && air_contents.temperature < set_temperature)
+	if (network && air_contents.total_moles && air_contents.temperature < set_temperature)
 		update_use_power(2)
 		air_contents.add_thermal_energy(active_power_usage)
 	
