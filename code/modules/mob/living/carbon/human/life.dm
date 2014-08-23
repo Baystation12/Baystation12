@@ -1188,15 +1188,13 @@
 		return 1
 
 	proc/handle_regular_hud_updates()
-		if(hud_updateflag)
+		if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 			handle_hud_list()
 
+		// now handle what we see on our screen
 
-		if(!client)	return 0
-
-		if(hud_updateflag)
-			handle_hud_list()
-
+		if(!client)
+			return 0
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
