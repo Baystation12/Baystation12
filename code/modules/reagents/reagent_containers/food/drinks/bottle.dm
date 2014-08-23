@@ -49,32 +49,8 @@
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
 
 	//Calculating duration and calculating damage.
-	if(ishuman(target))
-
-		var/mob/living/carbon/human/H = target
-		var/headarmor = 0 // Target's head armour
-		armor_block = H.run_armor_check(affecting, "melee") // For normal attack damage
-
-		//If they have a hat/helmet and the user is targeting their head.
-		if(istype(H.head, /obj/item/clothing/head) && affecting == "head")
-
-			// If their head has an armour value, assign headarmor to it, else give it 0.
-			if(H.head.armor["melee"])
-				headarmor = H.head.armor["melee"]
-			else
-				headarmor = 0
-		else
-			headarmor = 0
-
-		//Calculate the weakening duration for the target.
-		armor_duration = (duration - headarmor) + force
-
-	else
-		//Only humans can have armour, right?
-		armor_block = target.run_armor_check(affecting, "melee")
-		if(affecting == "head")
-			armor_duration = duration + force
-	armor_duration /= 10
+	armor_block = target.run_armor_check(affecting, "melee")
+	armor_duration = duration + force - target.getarmor(affecting, "melee")
 
 	//Apply the damage!
 	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)
@@ -88,7 +64,7 @@
 			else O.show_message(text("\red <B>[target] hit himself with a bottle of [src.name] on the head!</B>"), 1)
 		//Weaken the target for the duration that we calculated and divide it by 5.
 		if(armor_duration)
-			target.apply_effect(min(armor_duration, 10) , WEAKEN) // Never weaken more than a flash!
+			target.apply_effect(min(armor_duration, 10) , WEAKEN, armor_block) // Never weaken more than a flash!
 
 	else
 		//Default attack message and don't weaken the target.
