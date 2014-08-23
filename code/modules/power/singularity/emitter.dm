@@ -1,5 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-#define EMITTER_DAMAGE_POWER_TRANSFER 350 //used to transfer power to containment field generators
+#define EMITTER_DAMAGE_POWER_TRANSFER 400 //used to transfer power to containment field generators
 
 /obj/machinery/power/emitter
 	name = "Emitter"

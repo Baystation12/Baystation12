@@ -6,9 +6,9 @@
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
 //Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
-#define POWER_FACTOR 0.35              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level.
+#define POWER_FACTOR 0.5              //Obtained from testing. Aiming to make the ideal running output (400 kW) run the SM to ~85% of the safety level.
 
-#define CHARGING_FACTOR 0.55
+#define CHARGING_FACTOR 0.11
 #define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 900, scales linearly with power
 
 
