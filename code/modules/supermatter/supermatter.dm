@@ -5,10 +5,20 @@
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
-//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
-#define POWER_FACTOR 0.35              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level.
+/*
+	How to tweak the SM
+	
+	POWER_FACTOR		directly controls how much power the SM puts out at a given level of excitation (power var). Making this lower means you have to work the SM harder to get the same amount of power.
+	CRITICAL_TEMPERATURE	The temperature at which the SM starts taking damage.
+	
+	CHARGING_FACTOR		Controls how much emitter shots excite the SM.
+	DAMAGE_RATE_LIMIT	Controls the maximum rate at which the SM will take damage due to high temperatures.
+*/
 
-#define CHARGING_FACTOR 0.55
+//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
+#define POWER_FACTOR 0.5              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level.
+#define CRITICAL_TEMPERATURE 800       //K
+#define CHARGING_FACTOR 0.11
 #define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 900, scales linearly with power
 
 
@@ -168,28 +178,31 @@
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
 	if(!env || !removed || !removed.total_moles)
-		damage += max(((power-(1600*POWER_FACTOR)))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+		damage += max((power-(2*CRITICAL_TEMPERATURE*POWER_FACTOR))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
 	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
 		env.remove(env.total_moles)
 	else
 		damage_archived = damage
 
-		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
+		damage = max( damage + min( ( (removed.temperature - CRITICAL_TEMPERATURE) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
 		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
-		var/temp_factor = 100
-
-		if(oxygen > 0.8)
-			// with a perfect gas mix, make the power less based on heat
+		//calculate power gain for oxygen reaction
+		var/temp_factor
+		if (oxygen > 0.8)
+			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a level of 1200*POWER_FACTOR
+			var/equilibrium_power = 1200*POWER_FACTOR
+			temp_factor = ( (equilibrium_power/500)**3 )/800
 			icon_state = "[base_icon_state]_glow"
 		else
-			// in normal mode, base the produced energy around the heat
-			temp_factor = 60
+			//If chain reacting at oxygen == 0.8, we want the power at 700 K to stabilize at a power level of 300
+			var/equilibrium_power = 860*POWER_FACTOR
+			temp_factor = ( (equilibrium_power/500)**3 )/(700*0.8)
 			icon_state = base_icon_state
-
-		power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
+		
+		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
 		//We've generated power, now let's transfer it to the collectors for storing/usage
 		transfer_energy()
@@ -241,8 +254,8 @@
 				// Then bring it inside to explode instantly upon landing on a valid turf.
 
 
-	if(Proj.flag != "bullet")
-		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR
+	if(istype(Proj, /obj/item/projectile/beam))
+		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR 
 	else
 		damage += Proj.damage * config_bullet_energy
 	return 0
@@ -272,7 +285,7 @@
 /obj/machinery/power/supermatter/proc/transfer_energy()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
 		if(get_dist(R, src) <= 15) // Better than using orange() every process
-			R.receive_pulse(power * POWER_FACTOR)
+			R.receive_pulse(power * POWER_FACTOR) //for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
