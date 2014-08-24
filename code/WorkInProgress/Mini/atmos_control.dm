@@ -35,7 +35,7 @@
 	if(current)
 		dat += specific()
 	else
-		for(var/obj/machinery/alarm/alarm in machines)
+		for(var/obj/machinery/alarm/alarm in dd_sortedObjectList(machines))
 			dat += "<a href='?src=\ref[src]&alarm=\ref[alarm]'>"
 			switch(max(alarm.danger_level, alarm.alarm_area.atmosalm))
 				if (0)
@@ -44,7 +44,7 @@
 					dat += "<font color=blue>"
 				if (2)
 					dat += "<font color=red>"
-			dat += "[alarm]</font></a><br/>"
+			dat += "[sanitize(alarm.name)]</font></a><br/>"
 	user << browse(dat, "window=atmoscontrol")
 
 /obj/machinery/computer/atmoscontrol/attackby(var/obj/item/I as obj, var/mob/user as mob)
