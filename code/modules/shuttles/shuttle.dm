@@ -34,10 +34,11 @@
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
 		
+		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
 		move(departing, interim, direction)
 		
-		arrive_time = world.time + travel_time*10
+		
 		while (world.time < arrive_time)
 			sleep(5)
 

@@ -16,12 +16,15 @@
 	else
 		travel_time = SHUTTLE_TRANSIT_DURATION
 
-	//update move_time so we get correct ETAs
+	//update move_time and launch_time so we get correct ETAs
 	move_time = travel_time
+	emergency_shuttle.launch_time = world.time
 
 	..()
 
 /datum/shuttle/ferry/emergency/move(var/area/origin,var/area/destination)
+	..(origin, destination)
+
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
 
@@ -29,8 +32,6 @@
 			captain_announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
 		else
 			captain_announce("The Crew Transfer Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
-
-	..(origin, destination)
 
 /datum/shuttle/ferry/emergency/can_launch(var/user)
 	if (istype(user, /obj/machinery/computer/shuttle_control/emergency))
