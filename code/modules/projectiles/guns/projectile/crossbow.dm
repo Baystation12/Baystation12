@@ -228,8 +228,8 @@
 			buildstate++
 			update_icon()
 		return
-	else if(istype(W,/obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = W
+	else if(istype(W,/obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
 		if(buildstate == 2)
 			if(C.amount >= 5)
 				C.use(5)

@@ -125,7 +125,7 @@
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
 		new /obj/item/weapon/shard(src.loc)
-		var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src.loc)
+		var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 		CC.amount = 2
 		var/obj/item/weapon/airlock_electronics/ae
 		if(!electronics)
