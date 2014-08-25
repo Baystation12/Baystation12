@@ -102,6 +102,14 @@
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
 
+	var/apply_danger_level = 1
+	var/post_alert = 1
+
+/obj/machinery/alarm/monitor
+	apply_danger_level = 0
+	breach_detection = 0
+	post_alert = 0
+
 /obj/machinery/alarm/server/New()
 	..()
 	req_access = list(access_rd, access_atmospherics, access_engine_equip)
@@ -216,7 +224,7 @@
 			regulating_temperature = 0
 			visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click as a faint electronic humming stops.")
-	
+
 	if (regulating_temperature)
 		if(target_temperature > T0C + MAX_TEMPERATURE)
 			target_temperature = T0C + MAX_TEMPERATURE
@@ -227,26 +235,26 @@
 		var/datum/gas_mixture/gas
 		gas = environment.remove(0.25*environment.total_moles)
 		if(gas)
-			
+
 			if (gas.temperature <= target_temperature)	//gas heating
 				var/energy_used = min( gas.get_thermal_energy_change(target_temperature) , active_power_usage)
-				
+
 				gas.add_thermal_energy(energy_used)
 				//use_power(energy_used, ENVIRON) //handle by update_use_power instead
 			else	//gas cooling
 				var/heat_transfer = min(abs(gas.get_thermal_energy_change(target_temperature)), active_power_usage)
-				
+
 				//Assume the heat is being pumped into the hull which is fixed at 20 C
 				//none of this is really proper thermodynamics but whatever
-				
+
 				var/cop = gas.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
-				
+
 				heat_transfer = min(heat_transfer, cop * active_power_usage)	//this ensures that we don't use more than active_power_usage amount of power
-				
+
 				heat_transfer = -gas.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
-				
+
 				//use_power(heat_transfer / cop, ENVIRON)	//handle by update_use_power instead
-			
+
 			environment.merge(gas)
 
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
@@ -412,7 +420,7 @@
 	for (var/area/RA in alarm_area.related)
 		for (var/obj/machinery/alarm/AA in RA)
 			AA.mode = mode
-	
+
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
@@ -445,12 +453,15 @@
 				send_signal(device_id, list("power"= 0) )
 
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
-	if (alarm_area.atmosalert(new_danger_level))
+	if (apply_danger_level && alarm_area.atmosalert(new_danger_level))
 		post_alert(new_danger_level)
 
 	update_icon()
 
 /obj/machinery/alarm/proc/post_alert(alert_level)
+	if(!post_alert)
+		return
+
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(alarm_frequency)
 	if(!frequency)
 		return
