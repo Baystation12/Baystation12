@@ -278,9 +278,17 @@ datum/controller/game_controller/proc/process_diseases()
 		active_diseases.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_machines()
+	process_machines_sort()
 	process_machines_process()
 	process_machines_power()
 	process_machines_rebuild()
+
+/var/global/machinery_sort_required = 0
+datum/controller/game_controller/proc/process_machines_sort()
+	if(machinery_sort_required)
+		machinery_sort_required = 0
+		machines = dd_sortedObjectList(machines)
+
 datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)
