@@ -114,6 +114,7 @@ Class Procs:
 /obj/machinery/New()
 	..()
 	machines += src
+	machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
@@ -161,15 +162,15 @@ Class Procs:
 /obj/machinery/proc/update_use_power(var/new_use_power)
 	if (new_use_power == use_power)
 		return	//don't need to do anything
-	
+
 	use_power = new_use_power
-	
+
 	//force area power update
 	//use_power() forces an area power update on the next tick so have to pass the correct power amount for this tick
 	if (use_power >= 2)
 		use_power(active_power_usage)
 	else if (use_power == 1)
-		use_power(idle_power_usage) 
+		use_power(idle_power_usage)
 	else
 		use_power(0)
 

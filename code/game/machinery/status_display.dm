@@ -45,14 +45,11 @@
 	var/const/STATUS_DISPLAY_TIME = 4
 	var/const/STATUS_DISPLAY_CUSTOM = 99
 
-// new display
 // register for radio system
-/obj/machinery/status_display/New()
+/obj/machinery/status_display/initialize()
 	..()
-	spawn(5)	// must wait for map loading to finish
-		if(radio_controller)
-			radio_controller.add_object(src, frequency)
-
+	if(radio_controller)
+		radio_controller.add_object(src, frequency)
 
 // timed process
 /obj/machinery/status_display/process()

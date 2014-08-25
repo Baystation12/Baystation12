@@ -183,8 +183,6 @@
 		if("setmsg2" in href_list)
 			stat_msg2 = reject_bad_text(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 40)
 			computer.updateDialog()
-		if("settime")
-			post_status(href_list["time"])
 
 		// OMG CENTCOMM LETTERHEAD
 		if("MessageCentcomm" in href_list)

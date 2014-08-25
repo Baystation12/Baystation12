@@ -180,8 +180,6 @@
 		if("setmsg2")
 			stat_msg2 = input("Line 2", "Enter Message Text", stat_msg2) as text|null
 			src.updateDialog()
-		if("settime")
-			post_status(href_list["time"])
 
 		// OMG CENTCOMM LETTERHEAD
 		if("MessageCentcomm")
