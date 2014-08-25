@@ -498,14 +498,15 @@ proc/get_all_job_icons() //For all existing HUD icons
 	var/jobName
 
 	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			jobName = src:id:assignment
+		var/obj/item/device/pda/P = src
+		if(P.id)
+			jobName = P.id.rank
 	if(istype(src, /obj/item/weapon/card/id))
-		jobName = src:assignment
+		var/obj/item/weapon/card/id/I = src
+		jobName = I.rank
 
 	if(jobName in get_all_job_icons()) //Check if the job has a hud icon
 		return jobName
 	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a Centcom job
 		return "Centcom"
 	return "Unknown" //Return unknown if none of the above apply
-

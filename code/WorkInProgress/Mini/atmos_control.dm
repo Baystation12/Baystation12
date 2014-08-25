@@ -20,8 +20,15 @@
 	desc = "Cheap Nanotrasen Laptop."
 	icon_state = "medlaptop"
 
-/obj/machinery/computer/atmoscontrol/New()
+/obj/machinery/computer/atmoscontrol/initialize()
 	..()
+	if(!monitored_alarms && monitored_alarm_ids)
+		monitored_alarms = new
+		for(var/obj/machinery/alarm/alarm in machines)
+			if(alarm.alarm_id && alarm.alarm_id in monitored_alarm_ids)
+				monitored_alarms += alarm
+		// machines may not yet be ordered at this point
+		monitored_alarms = dd_sortedObjectList(monitored_alarms)
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
 	return interact(user)
@@ -34,17 +41,7 @@
 		return
 	return interact(user)
 
-// Original implementation used "in typesof(/obj/machinery/alarm/)" in New()
-// but would throw runtime errors when attempting to access alarm_id
-obj/machinery/computer/atmoscontrol/proc/setup_monitor()
-	if(!monitored_alarms && monitored_alarm_ids)
-		monitored_alarms = new
-		for(var/obj/machinery/alarm/alarm in machines)
-			if(alarm.alarm_id && alarm.alarm_id in monitored_alarm_ids)
-				monitored_alarms += alarm
-
 /obj/machinery/computer/atmoscontrol/interact(mob/user)
-	setup_monitor()
 	user.set_machine(src)
 	if(allowed(user))
 		overridden = 1
@@ -56,7 +53,7 @@ obj/machinery/computer/atmoscontrol/proc/setup_monitor()
 	if(current)
 		dat += specific()
 	else
-		for(var/obj/machinery/alarm/alarm in dd_sortedObjectList(monitored_alarms ? monitored_alarms : machines))
+		for(var/obj/machinery/alarm/alarm in monitored_alarms ? monitored_alarms : machines)
 			dat += "<a href='?src=\ref[src]&alarm=\ref[alarm]'>"
 			switch(max(alarm.danger_level, alarm.alarm_area.atmosalm))
 				if (0)
