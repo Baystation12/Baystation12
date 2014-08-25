@@ -19,6 +19,7 @@
 	name = "Atmospherics Laptop"
 	desc = "Cheap Nanotrasen Laptop."
 	icon_state = "medlaptop"
+	density = 0
 
 /obj/machinery/computer/atmoscontrol/initialize()
 	..()
