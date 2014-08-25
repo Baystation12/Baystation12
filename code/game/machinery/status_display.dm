@@ -1,4 +1,3 @@
-#define CHARS_PER_LINE 5
 #define FONT_SIZE "5pt"
 #define FONT_COLOR "#09f"
 #define FONT_STYLE "Arial Black"
@@ -31,12 +30,20 @@
 	var/index2
 
 	var/frequency = 1435		// radio frequency
-	var/supply_display = 0		// true if a supply shuttle display
 
 	var/friendc = 0      // track if Friend Computer mode
+	var/ignore_friendc = 0
 
 	maptext_height = 26
 	maptext_width = 32
+
+	var/const/CHARS_PER_LINE = 5
+	var/const/STATUS_DISPLAY_BLANK = 0
+	var/const/STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME = 1
+	var/const/STATUS_DISPLAY_MESSAGE = 2
+	var/const/STATUS_DISPLAY_ALERT = 3
+	var/const/STATUS_DISPLAY_TIME = 4
+	var/const/STATUS_DISPLAY_CUSTOM = 99
 
 // new display
 // register for radio system
@@ -63,33 +70,34 @@
 
 // set what is displayed
 /obj/machinery/status_display/proc/update()
-	if(friendc && mode!=4) //Makes all status displays except supply shuttle timer display the eye -- Urist
+	if(friendc && !ignore_friendc)
 		set_picture("ai_friend")
-		return
+		return 1
 
 	switch(mode)
-		if(0)				//blank
+		if(STATUS_DISPLAY_BLANK)	//blank
 			remove_display()
-		if(1)				//emergency shuttle timer
+			return 1
+		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
 			if(emergency_shuttle.waiting_to_leave())
-				var/line1 = "-ETD-"
-				var/line2
+				message1 = "-ETD-"
 				if (emergency_shuttle.shuttle.is_launching())
-					line2 = "Launch"
+					message2 = "Launch"
 				else
-					line2 = get_shuttle_timer_departure()
-					if(length(line2) > CHARS_PER_LINE)
-						line2 = "Error!"
-				update_display(line1, line2)
+					message2 = get_shuttle_timer_departure()
+					if(length(message2) > CHARS_PER_LINE)
+						message2 = "Error"
+				update_display(message1, message2)
 			else if(emergency_shuttle.has_eta())
-				var/line1 = "-ETA-"
-				var/line2 = get_shuttle_timer_arrival()
-				if(length(line2) > CHARS_PER_LINE)
-					line2 = "Error!"
-				update_display(line1, line2)
+				message1 = "-ETA-"
+				message2 = get_shuttle_timer_arrival()
+				if(length(message2) > CHARS_PER_LINE)
+					message2 = "Error"
+				update_display(message1, message2)
 			else
 				remove_display()
-		if(2)				//custom messages
+			return 1
+		if(STATUS_DISPLAY_MESSAGE)	//custom messages
 			var/line1
 			var/line2
 
@@ -111,36 +119,17 @@
 				if(index2 > message2_len)
 					index2 -= message2_len
 			update_display(line1, line2)
-		if(4)				// supply shuttle timer
-			var/line1 = "SUPPLY"
-			var/line2 = ""
-
-			var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
-			if (!shuttle)
-				line2 = "Error"
-			else if(shuttle.has_arrive_time())
-				line2 = get_supply_shuttle_timer()
-				if(lentext(line2) > CHARS_PER_LINE)
-					line2 = "Error"
-			else if (shuttle.is_launching())
-				if (shuttle.at_station())
-					line2 = "Launch"
-				else
-					line2 = "ETA"
-			else
-				if(shuttle.at_station())
-					line2 = "Docked"
-				else
-					line1 = ""
-			update_display(line1, line2)
+			return 1
+		if(STATUS_DISPLAY_TIME)
+			update_display("TIME", worldtime2text())
+	return 0
 
 /obj/machinery/status_display/examine()
 	set src in view()
 	. = ..()
 	switch(mode)
-		if(1,2,4)
+		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME,2)
 			usr << "The display says:<br>\t<xmp>[message1]</xmp><br>\t<xmp>[message2]</xmp>"
-
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)
@@ -200,22 +189,21 @@
 /obj/machinery/status_display/receive_signal(datum/signal/signal)
 	switch(signal.data["command"])
 		if("blank")
-			mode = 0
+			mode = STATUS_DISPLAY_BLANK
 
 		if("shuttle")
-			mode = 1
+			mode = STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME
 
 		if("message")
-			mode = 2
+			mode = STATUS_DISPLAY_MESSAGE
 			set_message(signal.data["msg1"], signal.data["msg2"])
 
 		if("alert")
-			mode = 3
+			mode = STATUS_DISPLAY_ALERT
 			set_picture(signal.data["picture_state"])
 
-		if("supply")
-			if(supply_display)
-				mode = 4
+		if("time")
+			mode = STATUS_DISPLAY_TIME
 
 /obj/machinery/ai_status_display
 	icon = 'icons/obj/status_display.dmi'

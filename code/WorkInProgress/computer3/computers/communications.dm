@@ -183,6 +183,8 @@
 		if("setmsg2" in href_list)
 			stat_msg2 = reject_bad_text(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 40)
 			computer.updateDialog()
+		if("settime")
+			post_status(href_list["time"])
 
 		// OMG CENTCOMM LETTERHEAD
 		if("MessageCentcomm" in href_list)
@@ -348,6 +350,7 @@
 				dat += "\[ <A HREF='?src=\ref[src];main'>Back</A> \]<BR>"
 				dat += "Set Status Displays<BR>"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=blank'>Clear</A> \]<BR>"
+				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=time'>Station Time</A> \]"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=message'>Message</A> \]"
 				dat += "<ul><li> Line 1: <A HREF='?src=\ref[src];setmsg1'>[ stat_msg1 ? stat_msg1 : "(none)"]</A>"

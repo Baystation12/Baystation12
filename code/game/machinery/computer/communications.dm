@@ -180,6 +180,8 @@
 		if("setmsg2")
 			stat_msg2 = input("Line 2", "Enter Message Text", stat_msg2) as text|null
 			src.updateDialog()
+		if("settime")
+			post_status(href_list["time"])
 
 		// OMG CENTCOMM LETTERHEAD
 		if("MessageCentcomm")
@@ -352,6 +354,7 @@
 		if(STATE_STATUSDISPLAY)
 			dat += "Set Status Displays<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=blank'>Clear</A> \]<BR>"
+			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=time'>Station Time</A> \]<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=message'>Message</A> \]"
 			dat += "<ul><li> Line 1: <A HREF='?src=\ref[src];operation=setmsg1'>[ stat_msg1 ? stat_msg1 : "(none)"]</A>"
@@ -412,6 +415,7 @@
 		if(STATE_STATUSDISPLAY)
 			dat += "Set Status Displays<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=blank'>Clear</A> \]<BR>"
+			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=time'>Station Time</A> \]<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 			dat += "\[ <A HREF='?src=\ref[src];operation=setstat;statdisp=message'>Message</A> \]"
 			dat += "<ul><li> Line 1: <A HREF='?src=\ref[src];operation=setmsg1'>[ stat_msg1 ? stat_msg1 : "(none)"]</A>"
