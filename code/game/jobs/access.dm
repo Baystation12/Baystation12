@@ -492,21 +492,27 @@ proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
-		return
-
-	var/jobName
-
+	var/obj/item/weapon/card/id/I
 	if(istype(src, /obj/item/device/pda))
 		var/obj/item/device/pda/P = src
-		if(P.id)
-			jobName = P.id.rank
-	if(istype(src, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/I = src
-		jobName = I.rank
+		I = P.id
+	else if(istype(src, /obj/item/weapon/card/id))
+		I = src
 
-	if(jobName in get_all_job_icons()) //Check if the job has a hud icon
-		return jobName
-	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a Centcom job
-		return "Centcom"
+	if(I)
+		var/job_icons = get_all_job_icons()
+		var/centcom = get_all_centcom_jobs()
+
+		if(I.assignment	in job_icons) //Check if the job has a hud icon
+			return I.assignment
+		if(I.rank in job_icons)
+			return I.rank
+
+		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
+			return "Centcom"
+		if(I.rank in centcom)
+			return "Centcom"
+	else
+		return
+
 	return "Unknown" //Return unknown if none of the above apply
