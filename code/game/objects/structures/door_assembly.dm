@@ -184,8 +184,8 @@ obj/structure/door_assembly
 			user << "\blue You [anchored? "un" : ""]secured the airlock assembly!"
 			anchored = !anchored
 
-	else if(istype(W, /obj/item/weapon/cable_coil) && state == 0 && anchored )
-		var/obj/item/weapon/cable_coil/coil = W
+	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored )
+		var/obj/item/stack/cable_coil/coil = W
 		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
 		if(do_after(user, 40))
 			if(!src) return
@@ -200,7 +200,7 @@ obj/structure/door_assembly
 		if(do_after(user, 40))
 			if(!src) return
 			user << "\blue You cut the airlock wires.!"
-			new/obj/item/weapon/cable_coil(src.loc, 1)
+			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
 	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1 && W:icon_state != "door_electronics_smoked")

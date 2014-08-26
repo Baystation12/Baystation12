@@ -243,7 +243,7 @@
 	var/datum/event/event
 	var/turf/old_turf
 	var/obj/structure/cable/last_piece
-	var/obj/item/weapon/cable_coil/cable
+	var/obj/item/stack/cable_coil/cable
 	var/max_cable = 1000
 
 	New()
@@ -270,7 +270,7 @@
 		chassis.events.clearEvent("onMove",event)
 		return ..()
 
-	action(var/obj/item/weapon/cable_coil/target)
+	action(var/obj/item/stack/cable_coil/target)
 		if(!action_checks(target))
 			return
 		var/result = load_cable(target)
@@ -298,7 +298,7 @@
 				m = min(m, cable.amount)
 				if(m)
 					use_cable(m)
-					var/obj/item/weapon/cable_coil/CC = new (get_turf(chassis))
+					var/obj/item/stack/cable_coil/CC = new (get_turf(chassis))
 					CC.amount = m
 			else
 				occupant_message("There's no more cable on the reel.")
@@ -310,7 +310,7 @@
 			return "[output] \[Cable: [cable ? cable.amount : 0] m\][(cable && cable.amount) ? "- <a href='?src=\ref[src];toggle=1'>[!equip_ready?"Dea":"A"]ctivate</a>|<a href='?src=\ref[src];cut=1'>Cut</a>" : null]"
 		return
 
-	proc/load_cable(var/obj/item/weapon/cable_coil/CC)
+	proc/load_cable(var/obj/item/stack/cable_coil/CC)
 		if(istype(CC) && CC.amount)
 			var/cur_amount = cable? cable.amount : 0
 			var/to_load = max(max_cable - cur_amount,0)

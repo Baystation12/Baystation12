@@ -44,8 +44,8 @@
 	icon_state = "coin_adamantine"
 
 /obj/item/weapon/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/cable_coil) )
-		var/obj/item/weapon/cable_coil/CC = W
+	if(istype(W,/obj/item/stack/cable_coil) )
+		var/obj/item/stack/cable_coil/CC = W
 		if(string_attached)
 			user << "\blue There already is a string attached to this coin."
 			return
@@ -64,7 +64,7 @@
 			..()
 			return
 
-		var/obj/item/weapon/cable_coil/CC = new/obj/item/weapon/cable_coil(user.loc)
+		var/obj/item/stack/cable_coil/CC = new/obj/item/stack/cable_coil(user.loc)
 		CC.amount = 1
 		CC.updateicon()
 		overlays = list()
