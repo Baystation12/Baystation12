@@ -348,6 +348,7 @@
 				dat += "\[ <A HREF='?src=\ref[src];main'>Back</A> \]<BR>"
 				dat += "Set Status Displays<BR>"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=blank'>Clear</A> \]<BR>"
+				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=time'>Station Time</A> \]"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 				dat += "\[ <A HREF='?src=\ref[src];setstat;statdisp=message'>Message</A> \]"
 				dat += "<ul><li> Line 1: <A HREF='?src=\ref[src];setmsg1'>[ stat_msg1 ? stat_msg1 : "(none)"]</A>"
