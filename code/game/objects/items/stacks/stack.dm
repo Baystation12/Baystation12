@@ -162,15 +162,24 @@
 			return
 	return
 
-/obj/item/stack/proc/use(var/amount)
-	src.amount-=amount
-	if (src.amount<=0)
+/obj/item/stack/proc/use(var/used)
+	if (amount < used)
+		return 0
+	amount -= used
+	if (amount <= 0)
 		var/oldsrc = src
 		src = null //dont kill proc after del()
 		if(usr)
 			usr.before_take_item(oldsrc)
 		del(oldsrc)
-	return
+	return 1
+
+/obj/item/stack/proc/add(var/extra)
+	if(amount + extra > max_amount)
+		return 0
+	else
+		amount += extra
+	return 1
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
 	var/obj/item/stack/oldsrc = src
@@ -189,7 +198,7 @@
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = new src.type( user, 1)
+		var/obj/item/stack/F = new src.type(user, 1)
 		F.copy_evidences(src)
 		user.put_in_hands(F)
 		src.add_fingerprint(user)
@@ -212,7 +221,7 @@
 			to_transfer = 1
 		else
 			to_transfer = min(src.amount, S.max_amount-S.amount)
-		S.amount+=to_transfer
+		S.add(to_transfer)
 		if (S && usr.machine==S)
 			spawn(0) S.interact(usr)
 		src.use(to_transfer)

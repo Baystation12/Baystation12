@@ -11,8 +11,25 @@
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
 	var/obj/machinery/alarm/current
 	var/overridden = 0 //not set yet, can't think of a good way to do it
-	req_access = list(access_atmospherics)
+	req_access = list(access_ce)
+	var/list/monitored_alarm_ids = null
+	var/list/monitored_alarms = null
 
+/obj/machinery/computer/atmoscontrol/laptop
+	name = "Atmospherics Laptop"
+	desc = "Cheap Nanotrasen Laptop."
+	icon_state = "medlaptop"
+	density = 0
+
+/obj/machinery/computer/atmoscontrol/initialize()
+	..()
+	if(!monitored_alarms && monitored_alarm_ids)
+		monitored_alarms = new
+		for(var/obj/machinery/alarm/alarm in machines)
+			if(alarm.alarm_id && alarm.alarm_id in monitored_alarm_ids)
+				monitored_alarms += alarm
+		// machines may not yet be ordered at this point
+		monitored_alarms = dd_sortedObjectList(monitored_alarms)
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
 	return interact(user)
@@ -32,10 +49,12 @@
 	else if(!emagged)
 		overridden = 0
 	var/dat = "<a href='?src=\ref[src]&reset=1'>Main Menu</a><hr>"
+	if(monitored_alarms && monitored_alarms.len == 1)
+		current = monitored_alarms[1]
 	if(current)
 		dat += specific()
 	else
-		for(var/obj/machinery/alarm/alarm in dd_sortedObjectList(machines))
+		for(var/obj/machinery/alarm/alarm in monitored_alarms ? monitored_alarms : machines)
 			dat += "<a href='?src=\ref[src]&alarm=\ref[alarm]'>"
 			switch(max(alarm.danger_level, alarm.alarm_area.atmosalm))
 				if (0)

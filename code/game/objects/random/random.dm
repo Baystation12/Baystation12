@@ -99,7 +99,7 @@
 					prob(2);/obj/random/bomb_supply,\
 					prob(1);/obj/item/weapon/extinguisher,\
 					prob(1);/obj/item/clothing/gloves/fyellow,\
-					prob(3);/obj/item/weapon/cable_coil,\
+					prob(3);/obj/item/stack/cable_coil,\
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
 					prob(5);/obj/random/tool)

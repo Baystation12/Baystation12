@@ -2,9 +2,9 @@
 
 /obj/machinery/power/attackby(obj/item/weapon/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/cable_coil))
+	if(istype(W, /obj/item/stack/cable_coil))
 
-		var/obj/item/weapon/cable_coil/coil = W
+		var/obj/item/stack/cable_coil/coil = W
 
 		var/turf/T = user.loc
 
@@ -125,9 +125,9 @@
 			return
 
 		if(src.d1)	// 0-X cables are 1 unit, X-X cables are 2 units long
-			new/obj/item/weapon/cable_coil(T, 2, color)
+			new/obj/item/stack/cable_coil(T, 2, color)
 		else
-			new/obj/item/weapon/cable_coil(T, 1, color)
+			new/obj/item/stack/cable_coil(T, 1, color)
 
 		for(var/mob/O in viewers(src, null))
 			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
@@ -148,8 +148,8 @@
 		return	// not needed, but for clarity
 
 
-	else if(istype(W, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/coil = W
+	else if(istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/coil = W
 		coil.cable_join(src, user)
 
 	else if(istype(W, /obj/item/device/multitool))
@@ -189,23 +189,24 @@
 			del(src)
 		if(2.0)
 			if (prob(50))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
+				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 
 		if(3.0)
 			if (prob(25))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
+				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 	return
 
 // the cable coil object, used for laying cable
 
 #define MAXCOIL 30
-/obj/item/weapon/cable_coil
+/obj/item/stack/cable_coil
 	name = "cable coil"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil"
-	var/amount = MAXCOIL
+	amount = MAXCOIL
+	max_amount = MAXCOIL
 	item_color = COLOR_RED
 	desc = "A coil of power cable."
 	throwforce = 10
@@ -223,7 +224,7 @@
 		return(OXYLOSS)
 
 
-/obj/item/weapon/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
+/obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
 	..()
 	src.amount = length
 	if (param_color)
@@ -235,7 +236,7 @@
 	updateicon()
 	update_wclass()
 
-/obj/item/weapon/cable_coil/proc/updateicon()
+/obj/item/stack/cable_coil/proc/updateicon()
 	if (!color)
 		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 		item_color = color
@@ -249,13 +250,13 @@
 		icon_state = "coil"
 		name = "cable coil"
 
-/obj/item/weapon/cable_coil/proc/update_wclass()
+/obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
 		w_class = 1.0
 	else
 		w_class = 2.0
 
-/obj/item/weapon/cable_coil/examine()
+/obj/item/stack/cable_coil/examine()
 	set src in view(1)
 
 	if(amount == 1)
@@ -265,7 +266,7 @@
 	else
 		usr << "A coil of power cable. There are [amount] lengths of cable in the coil."
 
-/obj/item/weapon/cable_coil/verb/make_restraint()
+/obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
 	set category = "Object"
 	var/mob/M = usr
@@ -283,54 +284,61 @@
 		usr << "<span class='notice'>\blue You cannot do that.</span>"
 	..()
 
-/obj/item/weapon/cable_coil/attackby(obj/item/weapon/W, mob/user)
-	..()
+/obj/item/stack/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	if( istype(W, /obj/item/weapon/wirecutters) && src.amount > 1)
 		src.amount--
-		new/obj/item/weapon/cable_coil(user.loc, 1,item_color)
+		new/obj/item/stack/cable_coil(user.loc, 1,item_color)
 		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
 		src.updateicon()
 		src.update_wclass()
 		return
 
-	else if( istype(W, /obj/item/weapon/cable_coil) )
-		var/obj/item/weapon/cable_coil/C = W
-		if(C.amount == MAXCOIL)
-			user << "<span class='notice'>The coil is too long, you cannot add any more cable to it.</span>"
+	else if( istype(W, /obj/item/stack/cable_coil) )
+		var/obj/item/stack/cable_coil/C = W
+		if(C.amount >= MAXCOIL)
+			user << "The coil is too long, you cannot add any more cable to it."
 			return
 
 		if( (C.amount + src.amount <= MAXCOIL) )
-			C.amount += src.amount
-			user << "<span class='notice'>You join the cable coils together.</span>"
-			C.updateicon()
-			C.update_wclass()
-			del(src)
-			return
+			user << "You join the cable coils together."
+			C.add(src.amount) // give it cable
+			src.use(src.amount) // make sure this one cleans up right
 
 		else
-			user << "<span class='notice'>You transfer [MAXCOIL - C.amount ] length\s of cable from one coil to the other.</span>"
-			src.amount -= (MAXCOIL-C.amount)
-			src.updateicon()
-			src.update_wclass()
-			C.amount = MAXCOIL
-			C.updateicon()
-			C.update_wclass()
-			return
+			var/amt = MAXCOIL - C.amount
+			user << "You transfer [amt] length\s of cable from one coil to the other."
+			C.add(amt)
+			src.use(amt)
+		return
+	..()
 
-/obj/item/weapon/cable_coil/proc/use(var/used)
-	if(src.amount < used)
-		return 0
-	else if (src.amount == used)
-		del(src)
+/obj/item/stack/cable_coil/attack_hand(mob/user as mob)
+	if (user.get_inactive_hand() == src)
+		var/obj/item/stack/cable_coil/F = new /obj/item/stack/cable_coil(user, 1, color)
+		F.copy_evidences(src)
+		user.put_in_hands(F)
+		src.add_fingerprint(user)
+		F.add_fingerprint(user)
+		use(1)
 	else
-		amount -= used
-		updateicon()
-		update_wclass()
-		return 1
+		..()
+	return
+
+/obj/item/stack/cable_coil/use(var/used)
+	. = ..()
+	updateicon()
+	update_wclass()
+	return
+
+/obj/item/stack/cable_coil/add(var/extra)
+	. = ..()
+	updateicon()
+	update_wclass()
+	return
 
 // called when cable_coil is clicked on a turf/simulated/floor
 
-/obj/item/weapon/cable_coil/proc/turf_place(turf/simulated/floor/F, mob/user)
+/obj/item/stack/cable_coil/proc/turf_place(turf/simulated/floor/F, mob/user)
 
 	if(!isturf(user.loc))
 		return
@@ -422,7 +430,7 @@
 			use(1)
 			if (C.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(C.loc, 1, C.color)
+					new/obj/item/stack/cable_coil(C.loc, 1, C.color)
 					del(C)
 		//src.laying = 1
 		//last = C
@@ -430,7 +438,7 @@
 
 // called when cable_coil is click on an installed obj/cable
 
-/obj/item/weapon/cable_coil/proc/cable_join(obj/structure/cable/C, mob/user)
+/obj/item/stack/cable_coil/proc/cable_join(obj/structure/cable/C, mob/user)
 
 	var/turf/U = user.loc
 	if(!isturf(U))
@@ -482,7 +490,7 @@
 			use(1)
 			if (NC.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(NC.loc, 1, NC.color)
+					new/obj/item/stack/cable_coil(NC.loc, 1, NC.color)
 					del(NC)
 
 			return
@@ -521,7 +529,7 @@
 		use(1)
 		if (C.shock(user, 50))
 			if (prob(50)) //fail
-				new/obj/item/weapon/cable_coil(C.loc, 2, C.color)
+				new/obj/item/stack/cable_coil(C.loc, 2, C.color)
 				del(C)
 
 		return
@@ -599,10 +607,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		color_n = colorC
 	color = color_n
 
-/obj/item/weapon/cable_coil/cut
+/obj/item/stack/cable_coil/cut
 	item_state = "coil2"
 
-/obj/item/weapon/cable_coil/cut/New(loc)
+/obj/item/stack/cable_coil/cut/New(loc)
 	..()
 	src.amount = rand(1,2)
 	pixel_x = rand(-2,2)
@@ -610,32 +618,32 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	updateicon()
 	update_wclass()
 
-/obj/item/weapon/cable_coil/yellow
+/obj/item/stack/cable_coil/yellow
 	item_color = COLOR_YELLOW
 
-/obj/item/weapon/cable_coil/blue
+/obj/item/stack/cable_coil/blue
 	item_color = COLOR_BLUE
 
-/obj/item/weapon/cable_coil/green
+/obj/item/stack/cable_coil/green
 	item_color = COLOR_GREEN
 
-/obj/item/weapon/cable_coil/pink
+/obj/item/stack/cable_coil/pink
 	item_color = COLOR_PINK
 
-/obj/item/weapon/cable_coil/orange
+/obj/item/stack/cable_coil/orange
 	item_color = COLOR_ORANGE
 
-/obj/item/weapon/cable_coil/cyan
+/obj/item/stack/cable_coil/cyan
 	item_color = COLOR_CYAN
 
-/obj/item/weapon/cable_coil/white
+/obj/item/stack/cable_coil/white
 	item_color = COLOR_WHITE
 
-/obj/item/weapon/cable_coil/random/New()
+/obj/item/stack/cable_coil/random/New()
 	item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
 
-/obj/item/weapon/cable_coil/attack(mob/M as mob, mob/user as mob)
+/obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
 	if(hasorgans(M))
 
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)

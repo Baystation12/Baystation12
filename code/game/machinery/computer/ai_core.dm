@@ -62,7 +62,7 @@
 				user << "\blue You unfasten the circuit board."
 				state = 1
 				icon_state = "1"
-			if(istype(P, /obj/item/weapon/cable_coil))
+			if(istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))
@@ -80,7 +80,7 @@
 					user << "\blue You remove the cables."
 					state = 2
 					icon_state = "2"
-					var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( loc )
+					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
 			if(istype(P, /obj/item/stack/sheet/rglass))

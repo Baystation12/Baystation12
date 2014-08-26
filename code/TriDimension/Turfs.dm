@@ -80,7 +80,7 @@
 
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/weapon/cable_coil) && src.hasbelow())
+	if (istype(C, /obj/item/stack/cable_coil) && src.hasbelow())
 		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
 		W.attackby(C, user)
 		return
@@ -92,8 +92,8 @@
 
 /turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
 	(..)
-	if (istype(C, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/cable = C
+	if (istype(C, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/cable = C
 		cable.turf_place(src, user)
 		return
 

@@ -105,8 +105,8 @@
 					user << "You fail to [ locked ? "unlock" : "lock"] the compressor interface."
 		return
 
-	else if (istype(W, /obj/item/weapon/cable_coil) && opened && !(has_electronics & 2))
-		var/obj/item/weapon/cable_coil/C = W
+	else if (istype(W, /obj/item/stack/cable_coil) && opened && !(has_electronics & 2))
+		var/obj/item/stack/cable_coil/C = W
 		if(C.amount < 10)
 			user << "\red You need more wires."
 			return
@@ -124,7 +124,7 @@
 		user << "You begin to cut the cables..."
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 50))
-			new /obj/item/weapon/cable_coil(loc,10)
+			new /obj/item/stack/cable_coil(loc,10)
 			user.visible_message(\
 				"\red [user.name] cut the cabling inside the compressor.",\
 				"You cut the cabling inside the port.")

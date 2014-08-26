@@ -214,9 +214,9 @@
 			open_hatch = 0
 			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
 	if (open_hatch)
-		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
+		if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 			building_terminal = 1
-			var/obj/item/weapon/cable_coil/CC = W
+			var/obj/item/stack/cable_coil/CC = W
 			if (CC.amount < 10)
 				user << "<span class='warning'>You need more cables.</span>"
 				building_terminal = 0
@@ -248,7 +248,7 @@
 							s.start()
 							building_terminal = 0
 							return
-						new /obj/item/weapon/cable_coil(loc,10)
+						new /obj/item/stack/cable_coil(loc,10)
 						user.visible_message(\
 							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
 							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
