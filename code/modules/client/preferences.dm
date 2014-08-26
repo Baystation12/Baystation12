@@ -1231,6 +1231,8 @@ datum/preferences
 								organ_data[limb] = "cyborg"
 								if(second_limb)
 									organ_data[second_limb] = "cyborg"
+								if(organ_data[third_limb] == "amputated")
+									organ_data[third_limb] = null
 
 					if("organs")
 						var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes")
