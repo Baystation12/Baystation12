@@ -58,7 +58,8 @@ datum/controller/lighting/proc/process()
 						changed_areas |= T.loc
 						T.shift_to_subarea()
 				changed_turfs.Cut()		// reset the changed list
-
+				/*
+				ATL: This is probalby breaking stuff - deleting subareas,
 				for(var/i = 1; i <= changed_areas.len, i++)
 					var/area/A = changed_areas[i]
 					if(A.master != A && !A.contents.len)
@@ -66,6 +67,7 @@ datum/controller/lighting/proc/process()
 						active_areas -= A
 						all_areas -= A
 				changed_areas.Cut()
+				*/
 
 				process_cost = (world.timeofday - started)
 
