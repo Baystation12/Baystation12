@@ -169,7 +169,7 @@
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
 			//limit flow rate from turfs
-			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
 			
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
 
