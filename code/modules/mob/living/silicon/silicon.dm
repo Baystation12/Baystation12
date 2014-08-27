@@ -15,6 +15,10 @@
 
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 
+	var/sensor_mode = 0 //Determines the current HUD.
+	#define SEC_HUD 1 //Security HUD mode
+	#define MED_HUD 2 //Medical HUD mode
+
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -38,12 +42,12 @@
 	return	//immune
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	
+
 	if (istype(source, /obj/machinery/containment_field))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, loc)
 		s.start()
-		
+
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
 		visible_message("\red [src] was shocked by \the [source]!", \
@@ -184,3 +188,18 @@
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+/mob/living/silicon/proc/toggle_sensor_mode()
+	set name = "Set Sensor Augmentation"
+	set desc = "Augment visual feed with internal sensor overlays."
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	switch(sensor_type)
+		if ("Security")
+			sensor_mode = SEC_HUD
+			src << "<span class='notice'>Security records overlay enabled.</span>"
+		if ("Medical")
+			sensor_mode = MED_HUD
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+		if ("Disable")
+			sensor_mode = 0
+			src << "Sensor augmentations disabled."
