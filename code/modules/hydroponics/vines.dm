@@ -240,7 +240,7 @@
 	del src
 
 /obj/effect/plantsegment/proc/die()
-	if(seed && harvest)
+	if(seed && harvest && rand(5))
 		seed.harvest(src,1)
 		del(src)
 
