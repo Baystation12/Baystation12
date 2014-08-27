@@ -4,7 +4,7 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	icon_state = "intact"
 	level = 2
 	var/initialize_directions_he
-	var/surface = 2
+	var/surface = 2	//surface area in m^2
 
 	minimum_temperature_difference = 20
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -53,8 +53,8 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 				var/datum/gas_mixture/pipe_air = return_air()
 				if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
 					parent.temperature_interact(loc, volume, thermal_conductivity)
-			else
-				parent.radiate_heat(surface, 1)
+			else if(istype(loc, /turf/space/))
+				parent.radiate_heat_to_space(surface, 1)
 
 
 obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction

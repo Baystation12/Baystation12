@@ -20,11 +20,12 @@
 
 /obj/machinery/power/proc/add_load(var/amount)
 	if(powernet)
-		powernet.newload += amount
+		return powernet.draw_power(amount)
+	return 0
 
 /obj/machinery/power/proc/surplus()
 	if(powernet)
-		return powernet.avail-powernet.load
+		return powernet.surplus()
 	else
 		return 0
 
@@ -42,8 +43,10 @@
 	if(!src.loc)
 		return 0
 
-	if(!use_power)
-		return 1
+	//This is bad. This makes machines which are switched off not update their stat flag correctly when power_change() is called.
+	//If use_power is 0, then you probably shouldn't be checking power to begin with.
+	//if(!use_power)
+	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)
@@ -62,18 +65,23 @@
 		chan = power_channel
 	A.master.use_power(amount, chan)
 	if(!autocalled)
+		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
-/obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
+//The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
+/obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
 										// can override if needed
-	if(powered(power_channel))
+	var/has_power
+	if (master_area)
+		has_power = master_area.powered(power_channel)
+	else
+		has_power = powered(power_channel)
+	
+	if(has_power)
 		stat &= ~NOPOWER
 	else
-
 		stat |= NOPOWER
-	return
-
 
 // the powernet datum
 // each contiguous network of cables & nodes
@@ -377,10 +385,13 @@
 			if( istype( term.master, /obj/machinery/power/apc ) )
 				numapc++
 
-	if(numapc)
-		perapc = avail/numapc
-
 	netexcess = avail - load
+	
+	if(numapc)
+		//very simple load balancing. If there was a net excess this tick then it must have been that some APCs used less than perapc, since perapc*numapc = avail
+		//Therefore we can raise the amount of power rationed out to APCs on the assumption that those APCs that used less than perapc will continue to do so.
+		//If that assumption fails, then some APCs will miss out on power next tick, however it will be rebalanced for the tick after.
+		perapc = (avail + netexcess)/numapc
 
 	if( netexcess > 100)		// if there was excess power last cycle
 		if(nodes && nodes.len)
@@ -390,6 +401,24 @@
 				else
 					error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
 					nodes.Remove(S)
+
+
+//Returns the amount of available power
+/datum/powernet/proc/surplus()
+	return max(avail - newload, 0)
+
+//Returns the amount of excess power (before refunding to SMESs) from last tick.
+//This is for machines that might adjust their power consumption using this data.
+/datum/powernet/proc/last_surplus()
+	return max(avail - load, 0)
+
+//Attempts to draw power from a powernet. Returns the actual amount of power drawn
+/datum/powernet/proc/draw_power(var/requested_amount)
+	var/surplus = max(avail - newload, 0)
+	var/actual_draw = min(requested_amount, surplus)
+	newload += actual_draw
+	
+	return actual_draw
 
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)/*
@@ -543,11 +572,11 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power(drained_energy/CELLRATE)
+		source_area.use_power(drained_energy)
 	else if (istype(power_source,/datum/powernet))
-		var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"
-		PN.newload+=drained_power
+		//var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"  <<< NO. THIS IS WRONG. CELLRATE DOES NOT CONVERT TO OR FROM JOULES.
+		PN.draw_power(drained_energy)
 	else if (istype(power_source, /obj/item/weapon/cell))
-		cell.use(drained_energy)
+		cell.use(drained_energy*CELLRATE) //convert to units of charge.
 	return drained_energy
 

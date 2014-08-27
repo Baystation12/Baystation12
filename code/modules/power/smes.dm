@@ -93,8 +93,8 @@
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
 				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+				load = add_load(load)		// add the load to the terminal side network
 				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
 
 			else					// if not enough capcity
 				charging = 0		// stop charging
@@ -191,7 +191,8 @@
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.newload += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
@@ -255,7 +256,7 @@
 			building_terminal = 0
 
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(stat & BROKEN)
 		return
@@ -274,7 +275,7 @@
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -386,12 +387,12 @@
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
-	process()
-		capacity = INFINITY
-		charge = INFINITY
-		..()
+	output = SMESMAXOUTPUT
 
-
+/obj/machinery/power/smes/magical/process()
+	capacity = INFINITY
+	charge = INFINITY
+	..()
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"

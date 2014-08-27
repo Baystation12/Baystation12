@@ -122,6 +122,11 @@
 			"\red You feel a mild shock course through your body.", \
 			"\red You hear a light zapping." \
 		)
+	
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(5, 1, loc)
+	s.start()
+	
 	return shock_damage
 
 
@@ -475,9 +480,10 @@
 		return
 
 	if(B.chemicals >= 100)
-		src << "\red <B>Your host twitches and quivers as you rapdly excrete several larvae from your sluglike body.</B>"
+		src << "\red <B>Your host twitches and quivers as you rapidly excrete a larva from your sluglike body.</B>"
 		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
 		B.chemicals -= 100
+		B.has_reproduced = 1
 
 		new /obj/effect/decal/cleanable/vomit(get_turf(src))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)

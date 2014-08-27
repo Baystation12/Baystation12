@@ -1,3 +1,7 @@
+#define CONTROL_POD_DOORS 0
+#define CONTROL_NORMAL_DOORS 1
+#define CONTROL_EMITTERS 2
+
 /obj/machinery/door_control
 	name = "remote door-control"
 	desc = "It controls doors, remotely."
@@ -7,7 +11,7 @@
 	power_channel = ENVIRON
 	var/id = null
 	var/range = 10
-	var/normaldoorcontrol = 0
+	var/normaldoorcontrol = CONTROL_POD_DOORS
 	var/desiredstate = 0 // Zero is closed, 1 is open.
 	var/specialfunctions = 1
 	/*
@@ -63,8 +67,59 @@
 		playsound(src.loc, "sparks", 100, 1)
 	return src.attack_hand(user)
 
+/obj/machinery/door_control/proc/handle_door()
+	for(var/obj/machinery/door/airlock/D in range(range))
+		if(D.id_tag == src.id)
+			if(specialfunctions & OPEN)
+				if (D.density)
+					spawn(0)
+						D.open()
+						return
+				else
+					spawn(0)
+						D.close()
+						return
+			if(desiredstate == 1)
+				if(specialfunctions & IDSCAN)
+					D.aiDisabledIdScanner = 1
+				if(specialfunctions & BOLTS)
+					D.lock()
+				if(specialfunctions & SHOCK)
+					D.secondsElectrified = -1
+				if(specialfunctions & SAFE)
+					D.safe = 0
+			else
+				if(specialfunctions & IDSCAN)
+					D.aiDisabledIdScanner = 0
+				if(specialfunctions & BOLTS)
+					if(!D.isWireCut(4) && D.arePowerSystemsOn())
+						D.unlock()
+				if(specialfunctions & SHOCK)
+					D.secondsElectrified = 0
+				if(specialfunctions & SAFE)
+					D.safe = 1
+
+/obj/machinery/door_control/proc/handle_pod()
+	for(var/obj/machinery/door/poddoor/M in world)
+		if(M.id == src.id)
+			if(M.density)
+				spawn(0)
+					M.open()
+					return
+			else
+				spawn(0)
+					M.close()
+					return
+
+/obj/machinery/door_control/proc/handle_emitters(mob/user as mob)
+	for(var/obj/machinery/power/emitter/E in range(range))
+		if(E.id == src.id)
+			spawn(0)
+				E.activate(user)
+				return
+
 /obj/machinery/door_control/attack_hand(mob/user as mob)
-	src.add_fingerprint(usr)
+	src.add_fingerprint(user)
 	if(stat & (NOPOWER|BROKEN))
 		return
 
@@ -77,49 +132,13 @@
 	icon_state = "doorctrl1"
 	add_fingerprint(user)
 
-	if(normaldoorcontrol)
-		for(var/obj/machinery/door/airlock/D in range(range))
-			if(D.id_tag == src.id)
-				if(specialfunctions & OPEN)
-					if (D.density)
-						spawn(0)
-							D.open()
-							return
-					else
-						spawn(0)
-							D.close()
-							return
-				if(desiredstate == 1)
-					if(specialfunctions & IDSCAN)
-						D.aiDisabledIdScanner = 1
-					if(specialfunctions & BOLTS)
-						D.lock()
-					if(specialfunctions & SHOCK)
-						D.secondsElectrified = -1
-					if(specialfunctions & SAFE)
-						D.safe = 0
-				else
-					if(specialfunctions & IDSCAN)
-						D.aiDisabledIdScanner = 0
-					if(specialfunctions & BOLTS)
-						if(!D.isWireCut(4) && D.arePowerSystemsOn())
-							D.unlock()
-					if(specialfunctions & SHOCK)
-						D.secondsElectrified = 0
-					if(specialfunctions & SAFE)
-						D.safe = 1
-
-	else
-		for(var/obj/machinery/door/poddoor/M in world)
-			if (M.id == src.id)
-				if (M.density)
-					spawn( 0 )
-						M.open()
-						return
-				else
-					spawn( 0 )
-						M.close()
-						return
+	switch(normaldoorcontrol)
+		if(CONTROL_NORMAL_DOORS)
+			handle_door()
+		if(CONTROL_POD_DOORS)
+			handle_pod()
+		if(CONTROL_EMITTERS)
+			handle_emitters(user)
 
 	desiredstate = !desiredstate
 	spawn(15)

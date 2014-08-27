@@ -315,24 +315,15 @@ ________________________________________________________________________________
 				var/datum/gas_mixture/environment = T.return_air()
 
 				var/pressure = environment.return_pressure()
-				var/total_moles = environment.total_moles()
+				var/total_moles = environment.total_moles
 
 				dat += "Air Pressure: [round(pressure,0.1)] kPa"
 
 				if (total_moles)
-					var/o2_level = environment.oxygen/total_moles
-					var/n2_level = environment.nitrogen/total_moles
-					var/co2_level = environment.carbon_dioxide/total_moles
-					var/phoron_level = environment.phoron/total_moles
-					var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 					dat += "<ul>"
-					dat += "<li>Nitrogen: [round(n2_level*100)]%</li>"
-					dat += "<li>Oxygen: [round(o2_level*100)]%</li>"
-					dat += "<li>Carbon Dioxide: [round(co2_level*100)]%</li>"
-					dat += "<li>Phoron: [round(phoron_level*100)]%</li>"
+					for(var/g in environment.gas)
+						dat += "<li>[gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]%</li>"
 					dat += "</ul>"
-					if(unknown_level > 0.01)
-						dat += "OTHER: [round(unknown_level)]%<br>"
 
 					dat += "Temperature: [round(environment.temperature-T0C)]&deg;C"
 		if(2)
@@ -1040,8 +1031,7 @@ ________________________________________________________________________________
 						drain = rand(G.mindrain,G.maxdrain)
 						var/drained = 0
 						if(PN&&do_after(U,10))
-							drained = min(drain, PN.avail)
-							PN.newload += drained
+							drained = PN.draw_power(drain)
 							if(drained < drain)//if no power on net, drain apcs
 								for(var/obj/machinery/power/terminal/T in PN.nodes)
 									if(istype(T.master, /obj/machinery/power/apc))
@@ -1092,8 +1082,7 @@ ________________________________________________________________________________
 				drain = (round((rand(G.mindrain,G.maxdrain))/2))
 				var/drained = 0
 				if(PN&&do_after(U,10))
-					drained = min(drain, PN.avail)
-					PN.newload += drained
+					drained = PN.draw_power(drain)
 					if(drained < drain)//if no power on net, drain apcs
 						for(var/obj/machinery/power/terminal/T in PN.nodes)
 							if(istype(T.master, /obj/machinery/power/apc))

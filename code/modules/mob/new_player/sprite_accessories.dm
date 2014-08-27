@@ -118,6 +118,11 @@
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
 
+	ponytail4
+		name = "Ponytail 4"
+		icon_state = "hair_ponytail4"
+		gender = FEMALE
+
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
@@ -156,6 +161,11 @@
 		gender = FEMALE
 		species_allowed = list("Human","Unathi")
 
+	beehive2
+		name = "Beehive 2"
+		icon_state = "hair_beehive2"
+		gender = FEMALE
+
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
@@ -187,6 +197,16 @@
 	combover
 		name = "Combover"
 		icon_state = "hair_combover"
+		gender = MALE
+
+	father
+		name = "Father"
+		icon_state = "hair_father"
+		gender = MALE
+
+	reversemohawk
+		name = "Reverse Mohawk"
+		icon_state = "hair_reversemohawk"
 		gender = MALE
 
 	devillock
@@ -222,6 +242,11 @@
 	emo
 		name = "Emo"
 		icon_state = "hair_emo"
+
+	longemo
+		name = "Long Emo"
+		icon_state = "hair_emolong"
+		gender = FEMALE
 
 	shortovereye
 		name = "Overeye Short"
@@ -286,6 +311,11 @@
 		icon_state = "hair_braid"
 		gender = FEMALE
 
+	mbraid
+		name = "Medium Braid"
+		icon_state = "hair_shortbraid"
+		gender = FEMALE
+
 	braid2
 		name = "Long Braid"
 		icon_state = "hair_hbraid"
@@ -314,6 +344,61 @@
 		name = "Balding Hair"
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
+
+	familyman
+		name = "The Family Man"
+		icon_state = "hair_thefamilyman"
+		gender = MALE
+
+	mahdrills
+		name = "Drillruru"
+		icon_state = "hair_drillruru"
+		gender = FEMALE
+
+	dandypomp
+		name = "Dandy Pompadour"
+		icon_state = "hair_dandypompadour"
+		gender = MALE
+
+	poofy
+		name = "Poofy"
+		icon_state = "hair_poofy"
+		gender = FEMALE
+
+	crono
+		name = "Chrono"
+		icon_state = "hair_toriyama"
+		gender = MALE
+
+	vegeta
+		name = "Vegeta"
+		icon_state = "hair_toriyama2"
+		gender = MALE
+
+	cia
+		name = "CIA"
+		icon_state = "hair_cia"
+		gender = MALE
+
+	mulder
+		name = "Mulder"
+		icon_state = "hair_mulder"
+		gender = MALE
+
+	scully
+		name = "Scully"
+		icon_state = "hair_scully"
+		gender = FEMALE
+
+	nitori
+		name = "Nitori"
+		icon_state = "hair_nitori"
+		gender = FEMALE
+
+	joestar
+		name = "Joestar"
+		icon_state = "hair_joestar"
+		gender = MALE
 
 	bald
 		name = "Bald"

@@ -41,6 +41,7 @@ var/global/list/frozen_items = list()
 	dat += "<hr/><br/><b>Cryogenic Oversight Control</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
+	dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
 	dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 	dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
 
@@ -65,16 +66,27 @@ var/global/list/frozen_items = list()
 
 		user << browse(dat, "window=cryolog")
 
+	if(href_list["view"])
+
+		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
+		for(var/obj/item/I in frozen_items)
+			dat += "[I.name]<br/>"
+		dat += "<hr/>"
+
+		user << browse(dat, "window=cryoitems")
+
 	else if(href_list["item"])
 
 		if(frozen_items.len == 0)
 			user << "\blue There is nothing to recover from storage."
 			return
 
-		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as obj in frozen_items
+		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
+		if(!I)
+			return
 
-		if(!I || frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+		if(!(I in frozen_items))
+			user << "\blue \The [I] is no longer in storage."
 			return
 
 		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
@@ -173,7 +185,6 @@ var/global/list/frozen_items = list()
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/process()
 	if(occupant)
-
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		if(world.time - time_entered < time_till_despawn)
 			return

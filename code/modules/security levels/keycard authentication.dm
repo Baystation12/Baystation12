@@ -45,11 +45,9 @@
 				broadcast_request() //This is the device making the initial event request. It needs to broadcast to other devices
 
 /obj/machinery/keycard_auth/power_change()
-	if(powered(ENVIRON))
-		stat &= ~NOPOWER
+	..()
+	if(stat &NOPOWER)
 		icon_state = "auth_off"
-	else
-		stat |= NOPOWER
 
 /obj/machinery/keycard_auth/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))

@@ -135,16 +135,7 @@
 /datum/game_mode/proc/greet_wizard(var/datum/mind/wizard, var/you_are=1)
 	if (you_are)
 		wizard.current << "<B>\red You are the Space Wizard!</B>"
-	wizard.current << "<B>The Space Wizards Federation has given you the following tasks:</B>"
-	if(!config.objectives_disabled)
-		var/obj_count = 1
-		for(var/datum/objective/objective in wizard.objectives)
-			wizard.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-	else
-		wizard.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
-	return
-
+	show_objectives(wizard)
 
 /*/datum/game_mode/proc/learn_basic_spells(mob/living/carbon/human/wizard_mob)
 	if (!istype(wizard_mob))

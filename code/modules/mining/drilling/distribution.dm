@@ -163,7 +163,6 @@ Deep minerals:
 					target_turf = locate(tx+j, ty+i, asteroid_z)
 
 					if(target_turf && target_turf.has_resources)
-
 						target_turf.resources = list()
 						target_turf.resources["silicates"] = rand(3,5)
 						target_turf.resources["carbonaceous rock"] = rand(3,5)

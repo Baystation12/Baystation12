@@ -1,4 +1,28 @@
+#define AI_CHECK_WIRELESS 1
+#define AI_CHECK_RADIO 2
+
 var/list/ai_list = list()
+var/list/ai_verbs_default = list(
+	/mob/living/silicon/ai/proc/ai_announcement,
+	/mob/living/silicon/ai/proc/ai_call_shuttle,
+	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
+	/mob/living/silicon/ai/proc/ai_camera_track,
+	/mob/living/silicon/ai/proc/ai_camera_list,
+	/mob/living/silicon/ai/proc/ai_goto_location,
+	/mob/living/silicon/ai/proc/ai_remove_location,
+	/mob/living/silicon/ai/proc/ai_hologram_change,
+	/mob/living/silicon/ai/proc/ai_network_change,
+	/mob/living/silicon/ai/proc/pick_icon,
+	/mob/living/silicon/ai/proc/ai_roster,
+	/mob/living/silicon/ai/proc/ai_statuschange,
+	/mob/living/silicon/ai/proc/ai_store_location,
+	/mob/living/silicon/ai/proc/checklaws,
+	/mob/living/silicon/ai/proc/control_integrated_radio,
+	/mob/living/silicon/ai/proc/core,
+	/mob/living/silicon/ai/proc/show_laws_verb,
+	/mob/living/silicon/ai/proc/toggle_acceleration,
+	/mob/living/silicon/ai/proc/toggle_camera_light
+)
 
 //Not sure why this is necessary...
 /proc/AutoUpdateAI(obj/subject)
@@ -27,9 +51,11 @@ var/list/ai_list = list()
 	var/viewalerts = 0
 	var/lawcheck[1]
 	var/ioncheck[1]
+	var/lawchannel = "Common" // Default channel on which to state laws
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
+	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
 	var/custom_sprite = 0 //For our custom sprites
 //Hud stuff
 
@@ -50,6 +76,13 @@ var/list/ai_list = list()
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
+
+/mob/living/silicon/ai/proc/add_ai_verbs()
+	src.verbs += ai_verbs_default
+
+/mob/living/silicon/ai/proc/remove_ai_verbs()
+	src.verbs -= ai_verbs_default
+
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	var/list/possibleNames = ai_names
@@ -79,20 +112,18 @@ var/list/ai_list = list()
 	else
 		laws = new base_law_type
 
-	verbs += /mob/living/silicon/ai/proc/show_laws_verb
-
 	aiPDA = new/obj/item/device/pda/ai(src)
 	aiPDA.owner = name
 	aiPDA.ownjob = "AI"
 	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
 
 	aiMulti = new(src)
+	aiRadio = new(src)
+	aiRadio.myAi = src
+	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 
 	if (istype(loc, /turf))
-		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
-		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
-		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light)
+		add_ai_verbs(src)
 
 	//Languages
 	add_language("Sol Common", 0)
@@ -177,7 +208,7 @@ var/list/ai_list = list()
 	if(powered_ai.anchored)
 		use_power = 2
 
-/mob/living/silicon/ai/verb/pick_icon()
+/mob/living/silicon/ai/proc/pick_icon()
 	set category = "AI Commands"
 	set name = "Set AI Core Display"
 	if(stat || aiRestorePowerRoutine)
@@ -272,19 +303,42 @@ var/list/ai_list = list()
 	set name = "Show Crew Manifest"
 	show_station_manifest()
 
+/mob/living/silicon/ai/var/message_cooldown = 0
+/mob/living/silicon/ai/proc/ai_announcement()
+	set category = "AI Commands"
+	set name = "Make Station Announcement"
+
+	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
+		return
+
+	if(message_cooldown)
+		src << "Please allow one minute to pass between announcements."
+		return
+	var/input = stripped_input(usr, "Please write a message to announce to the station crew.", "A.I. Announcement")
+	if(!input)
+		return
+
+	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
+		return
+
+	captain_announce(input, "A.I. Announcement", src.name)
+	log_say("[key_name(usr)] has made an AI announcement: [input]")
+	message_admins("[key_name_admin(usr)] has made an AI announcement.", 1)
+	message_cooldown = 1
+	spawn(600)//One minute cooldown
+		message_cooldown = 0
+
 /mob/living/silicon/ai/proc/ai_call_shuttle()
 	set category = "AI Commands"
 	set name = "Call Emergency Shuttle"
-	if(src.stat == 2)
-		src << "You can't call the shuttle because you are dead!"
+
+	if(check_unable(AI_CHECK_WIRELESS))
 		return
-	if(istype(usr,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = src
-		if(AI.control_disabled)
-			usr << "Wireless control is disabled!"
-			return
 
 	var/confirm = alert("Are you sure you want to call the shuttle?", "Confirm Shuttle Call", "Yes", "No")
+
+	if(check_unable(AI_CHECK_WIRELESS))
+		return
 
 	if(confirm == "Yes")
 		call_shuttle_proc(src)
@@ -295,20 +349,19 @@ var/list/ai_list = list()
 		if(C)
 			C.post_status("shuttle")
 
-	return
-
-/mob/living/silicon/ai/proc/ai_cancel_call()
+/mob/living/silicon/ai/proc/ai_recall_shuttle()
 	set category = "AI Commands"
-	if(src.stat == 2)
-		src << "You can't send the shuttle back because you are dead!"
+	set name = "Recall Emergency Shuttle"
+
+	if(check_unable(AI_CHECK_WIRELESS))
 		return
-	if(istype(usr,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = src
-		if(AI.control_disabled)
-			src	 << "Wireless control is disabled!"
-			return
-	cancel_call_proc(src)
-	return
+
+	var/confirm = alert("Are you sure you want to recall the shuttle?", "Confirm Shuttle Recall", "Yes", "No")
+	if(check_unable(AI_CHECK_WIRELESS))
+		return
+
+	if(confirm == "Yes")
+		cancel_call_proc(src)
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
@@ -384,6 +437,13 @@ var/list/ai_list = list()
 			if ("Yes") lawcheck[L+1] = "No"
 			if ("No") lawcheck[L+1] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
+		checklaws()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in list("State","Common","Science","Command","Medical","Engineering","Security","Supply","Binary","Holopad", "Cancel")
+		if(setchannel == "Cancel")
+			return
+		lawchannel = setchannel
 		checklaws()
 
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
@@ -504,7 +564,7 @@ var/list/ai_list = list()
 
 	src.cameraFollow = null
 
-	if (!C || stat == 2) //C.can_use())
+	if (!C || stat == DEAD) //C.can_use())
 		return 0
 
 	if(!src.eyeobj)
@@ -557,8 +617,7 @@ var/list/ai_list = list()
 	src.cameraFollow = null
 	var/cameralist[0]
 
-	if(usr.stat == 2)
-		usr << "You can't change your camera network because you are dead!"
+	if(check_unable())
 		return
 
 	var/mob/living/silicon/ai/U = usr
@@ -601,9 +660,9 @@ var/list/ai_list = list()
 	set category = "AI Commands"
 	set name = "AI Status"
 
-	if(usr.stat == 2)
-		usr <<"You cannot change your emotional status because you are dead!"
+	if(check_unable(AI_CHECK_WIRELESS))
 		return
+
 	var/list/ai_emotions = list("Very Happy", "Happy", "Neutral", "Unsure", "Confused", "Surprised", "Sad", "Upset", "Angry", "Awesome", "BSOD", "Blank", "Problems?", "Facepalm", "Friend Computer")
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	for (var/obj/machinery/M in machines) //change status
@@ -625,6 +684,9 @@ var/list/ai_list = list()
 	set name = "Change Hologram"
 	set desc = "Change the default hologram available to AI to something else."
 	set category = "AI Commands"
+
+	if(check_unable())
+		return
 
 	var/input
 	if(alert("Would you like to select a hologram based on a crew member or switch to unique avatar?",,"Crew Member","Unique")=="Crew Member")
@@ -673,6 +735,9 @@ var/list/ai_list = list()
 	set name = "Toggle Camera Light"
 	set desc = "Toggles the light on the camera the AI is looking through."
 	set category = "AI Commands"
+
+	if(check_unable())
+		return
 
 	camera_light_on = !camera_light_on
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
@@ -730,3 +795,31 @@ var/list/ai_list = list()
 			return
 	else
 		return ..()
+
+/mob/living/silicon/ai/proc/control_integrated_radio()
+	set name = "Radio Settings"
+	set desc = "Allows you to change settings of your radio."
+	set category = "AI Commands"
+
+	if(check_unable(AI_CHECK_RADIO))
+		return
+
+	src << "Accessing Subspace Transceiver control..."
+	if (src.aiRadio)
+		src.aiRadio.interact(src)
+
+/mob/living/silicon/ai/proc/check_unable(var/flags = 0)
+	if(stat == DEAD)
+		usr << "\red You are dead!"
+		return 1
+
+	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
+		usr << "\red Wireless control is disabled!"
+		return 1
+	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
+		src << "\red System Error - Transceiver Disabled!"
+		return 1
+	return 0
+
+#undef AI_CHECK_WIRELESS
+#undef AI_CHECK_RADIO

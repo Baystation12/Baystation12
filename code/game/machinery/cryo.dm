@@ -7,6 +7,10 @@
 	layer = 2.8
 
 	var/on = 0
+	use_power = 1
+	idle_power_usage = 20
+	active_power_usage = 200
+	
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
@@ -73,7 +77,7 @@
   *
   * @return nothing
   */
-/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(user == occupant || user.stat)
 		return
@@ -121,13 +125,13 @@
 				data["beakerVolume"] += R.volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
@@ -194,7 +198,7 @@
 	icon_state = "cell-off"
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
-	if(air_contents.total_moles() < 10)
+	if(air_contents.total_moles < 10)
 		return
 	if(occupant)
 		if(occupant.stat == 2)
@@ -205,7 +209,7 @@
 		if(occupant.bodytemperature < T0C)
 			occupant.sleeping = max(5, (1/occupant.bodytemperature)*2000)
 			occupant.Paralyse(max(5, (1/occupant.bodytemperature)*3000))
-			if(air_contents.oxygen > 2)
+			if(air_contents.gas["oxygen"] > 2)
 				if(occupant.getOxyLoss()) occupant.adjustOxyLoss(-1)
 			else
 				occupant.adjustOxyLoss(-1)
@@ -224,7 +228,7 @@
 			beaker.reagents.reaction(occupant)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
-	if(air_contents.total_moles() < 1)
+	if(air_contents.total_moles < 1)
 		return
 	var/air_heat_capacity = air_contents.heat_capacity()
 	var/combined_heat_capacity = current_heat_capacity + air_heat_capacity
@@ -233,7 +237,7 @@
 		air_contents.temperature = combined_energy/combined_heat_capacity
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/expel_gas()
-	if(air_contents.total_moles() < 1)
+	if(air_contents.total_moles < 1)
 		return
 //	var/datum/gas_mixture/expel_gas = new
 //	var/remove_amount = air_contents.total_moles()/50
@@ -256,9 +260,14 @@
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
 //	occupant.metabslow = 0
 	occupant = null
+	current_heat_capacity = initial(current_heat_capacity)
+	update_use_power(1)
 	update_icon()
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
+	if (stat & (NOPOWER|BROKEN))
+		usr << "\red The cryo cell is not functioning."
+		return
 	if (!istype(M))
 		usr << "\red <B>The cryo cell cannot handle such a lifeform!</B>"
 		return
@@ -279,6 +288,8 @@
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		M << "\blue <b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"
 	occupant = M
+	current_heat_capacity = HEAT_CAPACITY_HUMAN
+	update_use_power(2)
 //	M.metabslow = 1
 	add_fingerprint(usr)
 	update_icon()
@@ -311,7 +322,7 @@
 		if(M.Victim == usr)
 			usr << "You're too busy getting your life sucked out of you."
 			return
-	if (usr.stat != 0 || stat & (NOPOWER|BROKEN))
+	if (usr.stat != 0)
 		return
 	put_mob(usr)
 	return

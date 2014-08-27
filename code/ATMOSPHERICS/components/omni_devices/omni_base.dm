@@ -3,14 +3,15 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni
 	name = "omni device"
-	icon = 'icons/obj/atmospherics/omni_devices.dmi'
+	icon = 'icons/atmos/omni_devices.dmi'
 	icon_state = "base"
 	use_power = 1
 	initialize_directions = 0
+	level = 1
 
 	var/on = 0
 	var/configuring = 0
-	var/target_pressure = ONE_ATMOSPHERE
+	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
@@ -70,12 +71,6 @@
 		update_icon()
 
 /obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/device/pipe_painter))	//for updating the color of connected pipe ends
-		for(var/datum/omni_port/P in ports)
-			P.update = 1
-		update_ports()
-		return
-
 	if(!istype(W, /obj/item/weapon/wrench))
 		return ..()
 
@@ -106,8 +101,8 @@
 	return
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
-	if(!omni_icons)
-		gen_omni_icons()
+	if(!check_icon_cache())
+		return
 
 	var/core_icon = null
 	if(istype(src, /obj/machinery/atmospherics/omni/mixer))
@@ -119,13 +114,16 @@
 
 	//directional icons are layers 1-4, with the core icon on layer 5
 	if(core_icon)
-		overlays_off[5] = omni_icons[core_icon]
-		overlays_on[5] = omni_icons[core_icon + "_glow"]
+		overlays_off[5] = icon_manager.get_atmos_icon("omni", , , core_icon)
+		overlays_on[5] = icon_manager.get_atmos_icon("omni", , , core_icon + "_glow")
 
-		overlays_error[1] = omni_icons[core_icon]
-		overlays_error[2] = omni_icons["error"]
+		overlays_error[1] = icon_manager.get_atmos_icon("omni", , , core_icon)
+		overlays_error[2] = icon_manager.get_atmos_icon("omni", , , "error")
 
 /obj/machinery/atmospherics/omni/proc/update_port_icons()
+	if(!check_icon_cache())
+		return
+
 	for(var/datum/omni_port/P in ports)
 		if(P.update)
 			var/ref_layer = 0
@@ -145,11 +143,11 @@
 			var/list/port_icons = select_port_icons(P)
 			if(port_icons)
 				if(P.node)
-					underlays_current[ref_layer] = omni_icons[port_icons["pipe_icon"]]
+					underlays_current[ref_layer] = port_icons["pipe_icon"]
 				else
 					underlays_current[ref_layer] = null
-				overlays_off[ref_layer] = omni_icons[port_icons["off_icon"]]
-				overlays_on[ref_layer] = omni_icons[port_icons["on_icon"]]
+				overlays_off[ref_layer] = port_icons["off_icon"]
+				overlays_on[ref_layer] = port_icons["on_icon"]
 			else
 				underlays_current[ref_layer] = null
 				overlays_off[ref_layer] = null
@@ -175,13 +173,28 @@
 			if(ATM_O2 to ATM_N2O)
 				ic_on += "_filter"
 				ic_off += "_out"
-
-		var/pipe_state = ic_dir + "_pipe"
-		if(P.node)
-			if(P.node.color)
-				pipe_state += "_[P.node.color]"
 		
+		ic_on = icon_manager.get_atmos_icon("omni", , , ic_on)
+		ic_off = icon_manager.get_atmos_icon("omni", , , ic_off)
+
+		var/pipe_state
+		var/turf/T = get_turf(src)
+		if(!istype(T))
+			return
+		if(T.intact && istype(P.node, /obj/machinery/atmospherics/pipe) && P.node.level == 1 )
+			pipe_state = icon_manager.get_atmos_icon("underlay_down", P.dir, color_cache_name(P.node))
+		else
+			pipe_state = icon_manager.get_atmos_icon("underlay_intact", P.dir, color_cache_name(P.node))
+
 		return list("on_icon" = ic_on, "off_icon" = ic_off, "pipe_icon" = pipe_state)
+
+/obj/machinery/atmospherics/omni/update_underlays()
+	for(var/datum/omni_port/P in ports)
+		P.update = 1
+	update_ports()
+
+/obj/machinery/atmospherics/omni/hide(var/i)
+	update_underlays()
 
 /obj/machinery/atmospherics/omni/proc/update_ports()
 	sort_ports()
