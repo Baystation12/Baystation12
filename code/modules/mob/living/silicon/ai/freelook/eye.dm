@@ -47,9 +47,8 @@
 		if(ai.client)
 			ai.client.eye = src
 		//Holopad
-		if(istype(ai.current, /obj/machinery/hologram/holopad))
-			var/obj/machinery/hologram/holopad/H = ai.current
-			H.move_hologram()
+		if(ai.holo)
+			ai.holo.move_hologram()
 
 /mob/aiEye/proc/getLoc()
 
@@ -67,7 +66,7 @@
 	var/sprint = 10
 	var/cooldown = 0
 	var/acceleration = 1
-
+	var/obj/machinery/hologram/holopad/holo = null
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
 /mob/living/silicon/ai/New()
@@ -127,8 +126,7 @@
 
 
 /mob/living/silicon/ai/proc/view_core()
-
-	current = null
+	camera = null
 	cameraFollow = null
 	unset_machine()
 

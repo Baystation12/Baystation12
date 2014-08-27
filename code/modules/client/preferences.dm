@@ -1212,6 +1212,8 @@ datum/preferences
 					var/new_f_style = input(user, "Choose your character's facial-hair style:", "Character Preference")  as null|anything in valid_facialhairstyles
 					if(new_f_style)
 						f_style = new_f_style
+								if(organ_data[third_limb] == "amputated")
+									organ_data[third_limb] = null
 
 				if("underwear")
 					var/list/underwear_options
