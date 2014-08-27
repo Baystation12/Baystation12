@@ -170,10 +170,10 @@
 					post_status(href_list["statdisp"])
 
 		if("setmsg1" in href_list)
-			stat_msg1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", stat_msg1) as text|null, 40), 1, MAX_MESSAGE_LEN)))
+			stat_msg1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", stat_msg1) as text|null), 1, 40)), 40)
 			computer.updateDialog()
 		if("setmsg2" in href_list)
-			stat_msg2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 40), 1, MAX_MESSAGE_LEN)))			
+			stat_msg2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", stat_msg2) as text|null), 1, 40)), 40)
 			computer.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
