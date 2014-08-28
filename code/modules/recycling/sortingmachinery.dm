@@ -43,7 +43,7 @@
 		else if(istype(W, /obj/item/weapon/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
-					var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN)
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN))
 					if(!str || !length(str))
 						usr << "<span class='warning'> Invalid text.</span>"
 						return
@@ -57,7 +57,7 @@
 					else
 						nameset = 1
 				if("Description")
-					var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN)
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN))
 					if(!str || !length(str))
 						usr << "\red Invalid text."
 						return
@@ -152,7 +152,7 @@
 		else if(istype(W, /obj/item/weapon/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
-					var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN)
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN))
 					if(!str || !length(str))
 						usr << "<span class='warning'> Invalid text.</span>"
 						return
@@ -167,7 +167,7 @@
 						nameset = 1
 
 				if("Description")
-					var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN)
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN))
 					if(!str || !length(str))
 						usr << "\red Invalid text."
 						return
