@@ -188,26 +188,35 @@ proc/populate_seed_list()
 
 			if(gene.values.len < 6) return
 
-			yield =     round(yield*0.5)
-			endurance = round(endurance*0.5)
+			yield =     round(yield*0.8)
+			endurance = round(endurance*0.8)
 			lifespan =  round(lifespan*0.8)
 
 			if(!products) products = list()
 			products |= gene.values[1]
 
 			if(!chems) chems = list()
-			for(var/rid in gene.values[2])
-				var/existing_chem
-				for(var/chem in chems)
-					if(rid == chem)
-						existing_chem = 1
-						break
 
-				if(existing_chem)
-					chems[rid][1] = max(1,round((chems[rid][1]+gene.values[2][rid][1])/2))
-					chems[rid][2] = max(1,round((chems[rid][2]+gene.values[2][rid][2])/2))
+			var/list/gene_value = gene.values[2]
+			for(var/rid in gene_value)
+
+				var/list/gene_chem = gene_value[rid]
+
+				if(chems[rid])
+
+					var/list/chem_value = chems[rid]
+
+					chems[rid][1] = max(1,round((gene_chem[1] + chem_value[1])/2))
+
+					if(gene_chem.len > 1)
+						if(chem_value > 1)
+							chems[rid][2] = max(1,round((gene_chem[2] + chem_value[2])/2))
+						else
+							chems[rid][2] = gene_chem[2]
+
 				else
-					chems[rid] = gene.values[2][rid]
+					var/list/new_chem = gene_chem[rid]
+					chems[rid] = new_chem.Copy()
 
 			var/list/new_gasses = gene.values[3]
 			if(istype(new_gasses))
@@ -375,7 +384,7 @@ proc/populate_seed_list()
 			yield_mod = 0
 			total_yield = yield
 		else
-			total_yield = max(1,rand(yield_mod,yield_mod+yield))
+			total_yield = yield + rand(yield_mod)
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)

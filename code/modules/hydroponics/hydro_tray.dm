@@ -104,7 +104,7 @@
 		"cryoxadone" =     list(  3,    0,   0   ),
 		"ammonia" =        list(  0.5,  0,   0   ),
 		"diethylamine" =   list(  1,    0,   0   ),
-		"nutriment" =      list(  0.5,  1,   0   ),
+		"nutriment" =      list(  0.5,  0.1,   0 ),
 		"radium" =         list( -1.5,  0,   0.2 ),
 		"adminordrazine" = list(  1,    1,   1   ),
 		"robustharvest" =  list(  0,    0.2, 0   ),
@@ -242,7 +242,7 @@
 	if(seed.exude_gasses && seed.exude_gasses.len)
 		for(var/gas in seed.exude_gasses)
 			environment.adjust_gas(gas, max(1,round((seed.exude_gasses[gas]*seed.potency)/seed.exude_gasses.len)))
-	
+
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && connected_port)
 		update_connected_network()
@@ -302,7 +302,7 @@
 		lastproduce = age
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
-		pestlevel += 1 * HYDRO_SPEED_MULTIPLIER
+		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
 
 	check_level_sanity()
 	update_icon()
@@ -326,9 +326,9 @@
 			if(toxic_reagents[R.id])
 				toxins += toxic_reagents[R.id]         * reagent_total
 			if(weedkiller_reagents[R.id])
-				weedlevel += weedkiller_reagents[R.id] * reagent_total
+				weedlevel -= weedkiller_reagents[R.id] * reagent_total
 			if(pestkiller_reagents[R.id])
-				pestlevel += pestkiller_reagents[R.id] * reagent_total
+				pestlevel -= pestkiller_reagents[R.id] * reagent_total
 
 			// Beneficial reagents have a few impacts along with health buffs.
 			if(beneficial_reagents[R.id])
