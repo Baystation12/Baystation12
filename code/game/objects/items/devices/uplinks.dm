@@ -6,292 +6,109 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 */
 
-/obj/item/device/uplink
+/datum/uplink_item/
+	var/name = ""
+	var/cost = 0
+	var/path = null
+	var/reference = ""
 
-	var/welcome 					// Welcoming menu message
-	var/items						// List of items
-	var/valid_items = list()
-	var/item_data					// raw item text
-	var/list/ItemList				// Parsed list of items
-	var/uses 						// Numbers of crystals
-	var/nanoui_items[0]
-	// List of items not to shove in their hands.
-	var/list/NotInHand = list(/obj/machinery/singularity_beacon/syndicate)
+datum/uplink_item/New(var/itemPath, var/itemCost as num, var/itemName as text, var/itemReference as text)
+	cost = itemCost
+	path = itemPath
+	name = itemName
+	reference = itemReference
+
+datum/nano_item_lists
+	var/list/items_nano
+	var/list/items_reference
+
+/obj/item/device/uplink
+	var/welcome 			// Welcoming menu message
+	var/uses 				// Numbers of crystals
+	var/list/ItemsCategory	// List of categories with lists of items
+	var/list/ItemsReference	// List of references with an associated item
+	var/list/nanoui_items	// List of items for NanoUI use
 
 /obj/item/device/uplink/New()
 	welcome = ticker.mode.uplink_welcome
-	if(!item_data)
-		items = replacetext(ticker.mode.uplink_items, "\n", "")	// Getting the text string of items
-	else
-		items = replacetext(item_data)
-	ItemList = text2list(src.items, ";")	// Parsing the items text string
 	uses = ticker.mode.uplink_uses
-	nanoui_items = generate_nanoui_items()
-	for(var/D in ItemList)
-		var/list/O = text2list(D, ":")
-		if(O.len>0)
-			valid_items += O[1]		
+	ItemsCategory = ticker.mode.uplink_items
 
+	var/datum/nano_item_lists/IL = generate_item_lists()
+	nanoui_items = IL.items_nano
+	ItemsReference = IL.items_reference
 
-
-/*
-	Built the Items List for use with NanoUI
-*/
-
-/obj/item/device/uplink/proc/generate_nanoui_items()
-	var/items_nano[0]
-	for(var/D in ItemList)
-		var/list/O = text2list(D, ":")
-		if(O.len != 3)  //If it is not an actual item, make a break in the menu.
-			if(O.len == 1)  //If there is one item, it's probably a title
-				items_nano[++items_nano.len] = list("Category" = "[O[1]]", "items" = list())
-			continue
-
-		var/path_text = O[1]
-		var/cost = text2num(O[2])
-
-		var/path_obj = text2path(path_text)
-
-		// Because we're using strings, this comes up if item paths change.
-		// Failure to handle this error borks uplinks entirely.  -Sayu
-		if(!path_obj)
-			error("Syndicate item is not a valid path: [path_text]")
-		else
-			var/itemname = O[3]
-			items_nano[items_nano.len]["items"] += list(list("Name" = itemname, "Cost" = cost, "obj_path" = path_text))
-
-	return items_nano
-
-//Let's build a menu!
+// BS12 no longer use this menu but there are forks that do, hency why we keep it
 /obj/item/device/uplink/proc/generate_menu()
-
 	var/dat = "<B>[src.welcome]</B><BR>"
 	dat += "Tele-Crystals left: [src.uses]<BR>"
 	dat += "<HR>"
 	dat += "<B>Request item:</B><BR>"
-	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br><BR>"
+	dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><br>"
 
-	var/cost
-	var/item
-	var/name
-	var/path_obj
-	var/path_text
-	var/category_items = 1 //To prevent stupid :P
+	var/category_items = 1
+	for(var/category in ItemsCategory)
+		if(category_items < 1)
+			dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
+		dat += "<br>"
+		dat += "<b>[category]</b><br>"
+		category_items = 0
 
-	for(var/D in ItemList)
-		var/list/O = text2list(D, ":")
-		if(O.len != 3)	//If it is not an actual item, make a break in the menu.
-			if(O.len == 1)	//If there is one item, it's probably a title
-				dat += "<b>[O[1]]</b><br>"
-				category_items = 0
-			else	//Else, it's a white space.
-				if(category_items < 1)	//If there were no itens in the last category...
-					dat += "<i>We apologize, as you could not afford anything from this category.</i><br>"
-				dat += "<br>"
-			continue
-
-		path_text = O[1]
-		cost = Clamp(text2num(O[2]),1,20) //Another halfassed fix for href exploit ~Z
-
-		if(cost>uses)
-			continue
-
-		path_obj = text2path(path_text)
-
-		// Because we're using strings, this comes up if item paths change.
-		// Failure to handle this error borks uplinks entirely.  -Sayu
-		if(!path_obj)
-			error("Syndicate item is not a valid path: [path_text]")
-		else
-			item = new path_obj()
-			name = O[3]
-			del item
-
-			dat += "<A href='byond://?src=\ref[src];buy_item=[path_text];cost=[cost]'>[name]</A> ([cost])<BR>"
+		for(var/datum/uplink_item/I in ItemsCategory[category])
+			if(I.cost > uses)
+				continue
+			dat += "<A href='byond://?src=\ref[src];buy_item=[I.reference];cost=[I.cost]'>[I.name]</A> ([I.cost])<BR>"
 			category_items++
 
 	dat += "<A href='byond://?src=\ref[src];buy_item=random'>Random Item (??)</A><br>"
 	dat += "<HR>"
 	return dat
 
+/*
+	Built the item lists for use with NanoUI
+*/
+/obj/item/device/uplink/proc/generate_item_lists()
+	var/list/nano = new
+	var/list/reference = new
+
+	for(var/category in ItemsCategory)
+		nano[++nano.len] = list("Category" = category, "items" = list())
+		for(var/datum/uplink_item/I in ItemsCategory[category])
+			nano[nano.len]["items"] += list(list("Name" = I.name, "Cost" = I.cost, "obj_path" = I.reference))
+			reference[I.reference] = I
+
+	var/datum/nano_item_lists/result = new
+	result.items_nano = nano
+	result.items_reference = reference
+	return result
+
 //If 'random' was selected
 /obj/item/device/uplink/proc/chooseRandomItem()
-	var/list/randomItems = list()
+	if(uses <= 0)
+		return
 
-	//Sorry for all the ifs, but it makes it 1000 times easier for other people/servers to add or remove items from this list
-	//Add only items the player can afford:
-	if(uses > 19)
-		randomItems.Add("/obj/item/weapon/circuitboard/teleporter") //Teleporter Circuit Board (costs 20, for nuke ops)
-
-	if(uses > 9)
-		randomItems.Add("/obj/item/toy/syndicateballoon")//Syndicate Balloon
-		randomItems.Add("/obj/item/weapon/storage/box/syndie_kit/imp_uplink") //Uplink Implanter
-		randomItems.Add("/obj/item/weapon/storage/box/syndicate") //Syndicate bundle
-
-	//if(uses > 8)	//Nothing... yet.
-	//if(uses > 7)	//Nothing... yet.
-
-	if(uses > 6)
-		randomItems.Add("/obj/item/weapon/aiModule/syndicate") //Hacked AI Upload Module
-		randomItems.Add("/obj/item/device/radio/beacon/syndicate") //Singularity Beacon
-
-	if(uses > 5)
-		randomItems.Add("/obj/item/weapon/gun/projectile") //Revolver
-
-	if(uses > 4)
-		randomItems.Add("/obj/item/weapon/gun/energy/crossbow") //Energy Crossbow
-		randomItems.Add("/obj/item/device/powersink") //Powersink
-
-	if(uses > 3)
-		randomItems.Add("/obj/item/weapon/melee/energy/sword") //Energy Sword
-		randomItems.Add("/obj/item/clothing/mask/gas/voice") //Voice Changer
-		randomItems.Add("/obj/item/device/chameleon") //Chameleon Projector
-
-	if(uses > 2)
-		randomItems.Add("/obj/item/weapon/storage/box/emps") //EMP Grenades
-		randomItems.Add("/obj/item/weapon/pen/paralysis") //Paralysis Pen
-		randomItems.Add("/obj/item/weapon/cartridge/syndicate") //Detomatix Cartridge
-		randomItems.Add("/obj/item/clothing/under/chameleon") //Chameleon Jumpsuit
-		randomItems.Add("/obj/item/weapon/card/id/syndicate") //Agent ID Card
-		randomItems.Add("/obj/item/weapon/card/emag") //Cryptographic Sequencer
-		randomItems.Add("/obj/item/weapon/storage/box/syndie_kit/space") //Syndicate Space Suit
-		randomItems.Add("/obj/item/device/encryptionkey/binary") //Binary Translator Key
-		randomItems.Add("/obj/item/weapon/storage/box/syndie_kit/imp_freedom") //Freedom Implant
-		randomItems.Add("/obj/item/clothing/glasses/thermal/syndi") //Thermal Imaging Goggles
-
-	if(uses > 1)
-/*
-		var/list/usrItems = usr.get_contents() //Checks to see if the user has a revolver before giving ammo
-		var/hasRevolver = 0
-		for(var/obj/I in usrItems) //Only add revolver ammo if the user has a gun that can shoot it
-			if(istype(I,/obj/item/weapon/gun/projectile))
-				hasRevolver = 1
-
-		if(hasRevolver) randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
-*/
-		randomItems.Add("/obj/item/ammo_magazine/a357") //Revolver ammo
-		randomItems.Add("/obj/item/clothing/shoes/syndigaloshes") //No-Slip Syndicate Shoes
-		randomItems.Add("/obj/item/weapon/plastique") //C4
-
-	if(uses > 0)
-		randomItems.Add("/obj/item/weapon/soap/syndie") //Syndicate Soap
-		randomItems.Add("/obj/item/weapon/storage/toolbox/syndicate") //Syndicate Toolbox
-
-	if(!randomItems.len)
-		del(randomItems)
-		return 0
-	else
-		var/buyItem = pick(randomItems)
-
-		switch(buyItem) //Ok, this gets a little messy, sorry.
-			if("/obj/item/weapon/circuitboard/teleporter")
-				uses -= 20
-			if("/obj/item/toy/syndicateballoon" , "/obj/item/weapon/storage/box/syndie_kit/imp_uplink" , "/obj/item/weapon/storage/box/syndicate")
-				uses -= 10
-			if("/obj/item/weapon/aiModule/syndicate" , "/obj/item/device/radio/beacon/syndicate")
-				uses -= 7
-			if("/obj/item/weapon/gun/projectile")
-				uses -= 6
-			if("/obj/item/weapon/gun/energy/crossbow" , "/obj/item/device/powersink")
-				uses -= 5
-			if("/obj/item/weapon/melee/energy/sword" , "/obj/item/clothing/mask/gas/voice" , "/obj/item/device/chameleon")
-				uses -= 4
-			if("/obj/item/weapon/storage/box/emps" , "/obj/item/weapon/pen/paralysis" , "/obj/item/weapon/cartridge/syndicate" , "/obj/item/clothing/under/chameleon" , \
-			"/obj/item/weapon/card/emag" , "/obj/item/weapon/storage/box/syndie_kit/space" , "/obj/item/device/encryptionkey/binary" , \
-			"/obj/item/weapon/storage/box/syndie_kit/imp_freedom" , "/obj/item/clothing/glasses/thermal/syndi")
-				uses -= 3
-			if("/obj/item/ammo_magazine/a357" , "/obj/item/clothing/shoes/syndigaloshes" , "/obj/item/weapon/plastique", "/obj/item/weapon/card/id/syndicate")
-				uses -= 2
-			if("/obj/item/weapon/soap/syndie" , "/obj/item/weapon/storage/toolbox/syndicate")
-				uses -= 1
-		del(randomItems)
-		return buyItem
-
-/obj/item/device/uplink/proc/handleStatTracking(var/boughtItem)
-//For stat tracking, sorry for making it so ugly
-	if(!boughtItem) return
-
-	switch(boughtItem)
-		if("/obj/item/weapon/circuitboard/teleporter")
-			feedback_add_details("traitor_uplink_items_bought","TP")
-		if("/obj/item/toy/syndicateballoon")
-			feedback_add_details("traitor_uplink_items_bought","BS")
-		if("/obj/item/weapon/storage/box/syndie_kit/imp_uplink")
-			feedback_add_details("traitor_uplink_items_bought","UI")
-		if("/obj/item/weapon/storage/box/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","BU")
-		if("/obj/item/weapon/aiModule/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","AI")
-		if("/obj/item/device/radio/beacon/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","SB")
-		if("/obj/item/weapon/gun/projectile")
-			feedback_add_details("traitor_uplink_items_bought","RE")
-		if("/obj/item/weapon/gun/energy/crossbow")
-			feedback_add_details("traitor_uplink_items_bought","XB")
-		if("/obj/item/device/powersink")
-			feedback_add_details("traitor_uplink_items_bought","PS")
-		if("/obj/item/weapon/melee/energy/sword")
-			feedback_add_details("traitor_uplink_items_bought","ES")
-		if("/obj/item/clothing/mask/gas/voice")
-			feedback_add_details("traitor_uplink_items_bought","VC")
-		if("/obj/item/device/chameleon")
-			feedback_add_details("traitor_uplink_items_bought","CP")
-		if("/obj/item/weapon/storage/box/emps")
-			feedback_add_details("traitor_uplink_items_bought","EM")
-		if("/obj/item/weapon/pen/paralysis")
-			feedback_add_details("traitor_uplink_items_bought","PP")
-		if("/obj/item/weapon/cartridge/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","DC")
-		if("/obj/item/clothing/under/chameleon")
-			feedback_add_details("traitor_uplink_items_bought","CJ")
-		if("/obj/item/weapon/card/id/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","AC")
-		if("/obj/item/weapon/card/emag")
-			feedback_add_details("traitor_uplink_items_bought","EC")
-		if("/obj/item/weapon/storage/box/syndie_kit/space")
-			feedback_add_details("traitor_uplink_items_bought","SS")
-		if("/obj/item/device/encryptionkey/binary")
-			feedback_add_details("traitor_uplink_items_bought","BT")
-		if("/obj/item/weapon/storage/box/syndie_kit/imp_freedom")
-			feedback_add_details("traitor_uplink_items_bought","FI")
-		if("/obj/item/clothing/glasses/thermal/syndi")
-			feedback_add_details("traitor_uplink_items_bought","TM")
-		if("/obj/item/ammo_magazine/a357")
-			feedback_add_details("traitor_uplink_items_bought","RA")
-		if("/obj/item/clothing/shoes/syndigaloshes")
-			feedback_add_details("traitor_uplink_items_bought","SH")
-		if("/obj/item/weapon/plastique")
-			feedback_add_details("traitor_uplink_items_bought","C4")
-		if("/obj/item/weapon/soap/syndie")
-			feedback_add_details("traitor_uplink_items_bought","SP")
-		if("/obj/item/weapon/storage/toolbox/syndicate")
-			feedback_add_details("traitor_uplink_items_bought","ST")
+	var/list/random_items = new
+	for(var/IR in ItemsReference)
+		var/datum/uplink_item/UI = ItemsReference[IR]
+		if(UI.cost <= uses)
+			random_items += UI
+	return pick(random_items)
 
 /obj/item/device/uplink/Topic(href, href_list)
-	if (href_list["buy_item"])
-
-		if(href_list["buy_item"] == "random")
-			var/boughtItem = chooseRandomItem()
-			if(boughtItem)
-				href_list["buy_item"] = boughtItem
-				feedback_add_details("traitor_uplink_items_bought","RN")
-				return 1
-			else
-				return 0
-
-		else
-			if(text2num(href_list["cost"]) > uses) // Not enough crystals for the item
-				return 0
-
-			//if(usr:mind && ticker.mode.traitors[usr:mind])
-				//var/datum/traitorinfo/info = ticker.mode.traitors[usr:mind]
-				//info.spawnlist += href_list["buy_item"]
-
-			uses -= text2num(href_list["cost"])
-			handleStatTracking(href_list["buy_item"]) //Note: chooseRandomItem handles it's own stat tracking. This proc is not meant for 'random'.
-		return 1
-
-
+	if(href_list["buy_item"] == "random")
+		var/datum/uplink_item/boughtItem = chooseRandomItem()
+		if(boughtItem && boughtItem.cost <= uses)
+			uses -= boughtItem.cost
+			href_list["buy_item"] = boughtItem.reference
+			feedback_add_details("traitor_uplink_items_bought","RN")
+			return 1
+	else
+		var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
+		if(UI && UI.cost <= uses)
+			uses -= UI.cost
+			feedback_add_details("traitor_uplink_items_bought", UI.reference)
+			return 1
+	return 0
 
 // HIDDEN UPLINK - Can be stored in anything but the host item has to have a trigger for it.
 /* How to create an uplink in 3 easy steps!
@@ -361,7 +178,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
 /obj/item/device/uplink/hidden/interact(mob/user)
-
 	ui_interact(user)
 
 // The purchasing code.
@@ -381,13 +197,11 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			return 1
 
 		if(..(href, href_list) == 1)
-
-			if(!(href_list["buy_item"] in valid_items))
+			var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
+			if(!UI)
 				return
 
-			var/path_obj = text2path(href_list["buy_item"])
-
-			var/obj/I = new path_obj(get_turf(usr))
+			var/obj/I = new UI.path(get_turf(usr))
 			if(ishuman(usr))
 				var/mob/living/carbon/human/A = usr
 				A.put_in_any_hand_if_possible(I)
