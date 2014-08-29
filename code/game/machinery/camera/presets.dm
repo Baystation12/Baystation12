@@ -57,8 +57,10 @@
 	return O
 
 /obj/machinery/camera/proc/isXRay()
-	var/O = locate(/obj/item/clothing/glasses/thermal) in assembly.upgrades
-	return O
+	var/obj/item/weapon/stock_parts/scanning_module/O = locate(/obj/item/weapon/stock_parts/scanning_module) in assembly.upgrades
+	if (O.rating >= 2)
+		return O
+	return null
 
 /obj/machinery/camera/proc/isMotion()
 	var/O = locate(/obj/item/device/assembly/prox_sensor) in assembly.upgrades
@@ -71,7 +73,7 @@
 	setPowerUsage()
 
 /obj/machinery/camera/proc/upgradeXRay()
-	assembly.upgrades.Add(new /obj/item/clothing/glasses/thermal(assembly))
+	assembly.upgrades.Add(new /obj/item/weapon/stock_parts/scanning_module/adv(assembly))
 	setPowerUsage()
 
 // If you are upgrading Motion, and it isn't in the camera's New(), add it to the machines list.
