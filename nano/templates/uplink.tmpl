@@ -31,7 +31,7 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
     <div class="item">
 	    <H3><span class="white">{{:value.Category}}</span></H3>
     </div>
-	{{for data.items :itemValue:itemIndex}}
+	{{for value.items :itemValue:itemIndex}}
         <div class="item">
             {{:helper.link( itemValue.Name, 'gear', {'buy_item' : itemValue.obj_path, 'cost' : itemValue.Cost}, itemValue.Cost > data.crystals ? 'disabled' : null, null)}} - <span class="white">{{:itemValue.Cost}}</span>
         </div>
