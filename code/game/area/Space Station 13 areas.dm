@@ -700,6 +700,33 @@ var/list/ghostteleportlocs = list()
 	name = "\improper EVA Hallway"
 	icon_state = "eva"
 
+// SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
+
+/area/maintenance/substation
+	name = "Substation"
+	icon_state = "substation"
+
+/area/maintenance/substation/engineering // Probably will be connected to engineering SMES room, as wires cannot be crossed properly without them sharing powernets.
+	name = "Engineering Substation"
+
+/area/maintenance/substation/medical_science // Medbay and Science. Each has it's own separated machinery, but it originates from the same room.
+	name = "Medical Research Substation"
+
+/area/maintenance/substation/civilian_east // Bar, kitchen, dorms, ...
+	name = "Civilian East Substation"
+
+/area/maintenance/substation/civilian_west // Cargo, PTS, locker room, probably arrivals, ...)
+	name = "Civilian West Substation"
+
+/area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
+	name = "Command Substation"
+
+/area/maintenance/substation/security // Security, Brig, Permabrig, etc.
+	name = "Security Substation"
+
+
+
+
 //Hallway
 
 /area/hallway/primary/fore
