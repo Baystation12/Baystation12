@@ -9,7 +9,7 @@
 	matter = list("metal" = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/phoron, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
+	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/osmium, /obj/item/clothing/glasses/thermal)
 	var/list/upgrades = list()
 	var/state = 0
 	var/busy = 0
