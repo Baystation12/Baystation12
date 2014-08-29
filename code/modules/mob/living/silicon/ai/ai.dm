@@ -12,13 +12,14 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
 	/mob/living/silicon/ai/proc/ai_network_change,
-	/mob/living/silicon/ai/proc/pick_icon,
 	/mob/living/silicon/ai/proc/ai_roster,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/checklaws,
 	/mob/living/silicon/ai/proc/control_integrated_radio,
 	/mob/living/silicon/ai/proc/core,
+	/mob/living/silicon/ai/proc/pick_icon,
+	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light
@@ -79,11 +80,10 @@ var/list/ai_verbs_default = list(
 	var/datum/announcement/priority/announcement
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
-	src.verbs += ai_verbs_default
+	src.verbs |= ai_verbs_default
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
-
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -817,6 +817,12 @@ var/list/ai_verbs_default = list(
 	src << "Accessing Subspace Transceiver control..."
 	if (src.aiRadio)
 		src.aiRadio.interact(src)
+
+/mob/living/silicon/ai/proc/sensor_mode()
+	set name = "Set Sensor Augmentation"
+	set category = "AI Commands"
+	set desc = "Augment visual feed with internal sensor overlays"
+	toggle_sensor_mode()
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0)
 	if(stat == DEAD)
