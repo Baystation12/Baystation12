@@ -149,11 +149,11 @@ macro "macro"
 		is-disabled = false
 	elem 
 		name = "F3"
-		command = "say"
+		command = ".say"
 		is-disabled = false
 	elem 
 		name = "F4"
-		command = "me"
+		command = ".me"
 		is-disabled = false
 	elem 
 		name = "F5"
@@ -403,11 +403,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F3"
-		command = "say"
+		command = "say_wrapper"
 		is-disabled = false
 	elem 
 		name = "F4"
-		command = "me"
+		command = "me_wrapper"
 		is-disabled = false
 	elem 
 		name = "F5"
