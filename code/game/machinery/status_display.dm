@@ -118,15 +118,17 @@
 			update_display(line1, line2)
 			return 1
 		if(STATUS_DISPLAY_TIME)
-			update_display("TIME", worldtime2text())
+			message1 = "TIME"
+			message2 = worldtime2text()
+			update_display(message1, message2)
+			return 1
 	return 0
 
 /obj/machinery/status_display/examine()
 	set src in view()
 	. = ..()
-	switch(mode)
-		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME,2)
-			usr << "The display says:<br>\t<xmp>[message1]</xmp><br>\t<xmp>[message2]</xmp>"
+	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
+		usr << "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]"
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)

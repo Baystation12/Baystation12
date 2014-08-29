@@ -27,12 +27,6 @@
 		return 1
 	return 0
 
-/obj/machinery/status_display/supply_display/examine()
-	if(mode == STATUS_DISPLAY_CUSTOM)
-		usr << "The display says:<br>\t<xmp>[message1]</xmp><br>\t<xmp>[message2]</xmp>"
-	else
-		..()
-
 /obj/machinery/status_display/supply_display/receive_signal/(datum/signal/signal)
 	if(signal.data["command"] == "supply")
 		mode = STATUS_DISPLAY_CUSTOM
