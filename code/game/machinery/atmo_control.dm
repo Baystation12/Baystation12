@@ -162,6 +162,7 @@
 	var/list/input_info
 	var/list/output_info
 
+	var/input_flow_setting = 200
 	var/pressure_setting = ONE_ATMOSPHERE * 45
 	circuit = /obj/item/weapon/circuitboard/air_management/tank_control
 
@@ -174,13 +175,14 @@
 	output += "<B>Tank Control System</B><BR>"
 	if(input_info)
 		var/power = (input_info["power"])
-		var/volume_rate = input_info["volume_rate"]
-		output += {"<B>Input</B>: [power?("Injecting"):("On Hold")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>
-Rate: [volume_rate] L/sec<BR>"}
-		output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A><BR>"
+		var/volume_rate = round(input_info["volume_rate"], 0.1)
+		output += "<B>Input</B>: [power?("Injecting"):("On Hold")] <A href='?src=\ref[src];in_refresh_status=1'>Refresh</A><BR>Flow Rate Limit: [volume_rate] L/s<BR>"
+		output += "Command: <A href='?src=\ref[src];in_toggle_injector=1'>Toggle Power</A> <A href='?src=\ref[src];in_set_flowrate=1'>Set Flow Rate</A><BR><BR>"
 
 	else
 		output += "<FONT color='red'>ERROR: Can not find input port</FONT> <A href='?src=\ref[src];in_refresh_status=1'>Search</A><BR>"
+	
+	output += "Flow Rate Limit: <A href='?src=\ref[src];adj_input_flow_rate=-100'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-10'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-1'>-</A> <A href='?src=\ref[src];adj_input_flow_rate=-0.1'>-</A> [round(input_flow_setting, 0.1)] L/s <A href='?src=\ref[src];adj_input_flow_rate=0.1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=1'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=10'>+</A> <A href='?src=\ref[src];adj_input_flow_rate=100'>+</A><BR>"
 
 	output += "<BR>"
 
@@ -221,6 +223,13 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 			src.updateUsrDialog()
 		return
 
+	if(href_list["adj_input_flow_rate"])
+		var/change = text2num(href_list["adj_input_flow_rate"])
+		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
+		spawn(1)
+			src.updateUsrDialog()
+		return
+	
 	if(!radio_connection)
 		return 0
 	var/datum/signal/signal = new
@@ -233,6 +242,10 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle")
+
+	if(href_list["in_set_flowrate"])
+		input_info = null
+		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
 
 	if(href_list["out_refresh_status"])
 		output_info = null
