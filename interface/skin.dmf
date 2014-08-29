@@ -403,11 +403,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F3"
-		command = "say_wrapper"
+		command = ".say"
 		is-disabled = false
 	elem 
 		name = "F4"
-		command = "me_wrapper"
+		command = ".me"
 		is-disabled = false
 	elem 
 		name = "F5"
