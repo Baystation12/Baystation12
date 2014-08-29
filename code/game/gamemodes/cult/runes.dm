@@ -398,7 +398,7 @@ var/list/sacrificed = list()
 			if(!chose_name)
 				D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 			D.universal_speak = 1
-			D.status_flags &= CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH
+			D.status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH
 			D.s_tone = 35
 			D.b_eyes = 200
 			D.r_eyes = 200
