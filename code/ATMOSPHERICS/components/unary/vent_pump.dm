@@ -86,6 +86,15 @@
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
+/obj/machinery/atmospherics/unary/vent_pump/engine
+	name = "Engine Core Vent"
+	power_channel = ENVIRON
+	active_power_usage = 15000	//15 kW ~ 20 HP
+
+/obj/machinery/atmospherics/unary/vent_pump/engine/New()
+	..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
+
 /obj/machinery/atmospherics/unary/vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
