@@ -959,16 +959,18 @@ Auto Patrol: []"},
 				icon_state = "[lasercolor]ed209_prox"
 
 		if(6)
-			if( istype(W, /obj/item/stack/cable_coil) )
-				var/obj/item/stack/cable_coil/coil = W
-				var/turf/T = get_turf(user)
-				user << "<span class='notice'>You start to wire [src]...</span>"
-				sleep(40)
-				if(get_turf(user) == T && build_step == 6)
-					coil.use(1)
-					build_step++
-					user << "<span class='notice'>You wire the ED-209 assembly.</span>"
-					name = "wired ED-209 assembly"
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/C = W
+				if (C.get_amount() < 1)
+					user << "<span class='warning'>You need one coil of wire to do wire [src].</span>"
+					return
+				user << "<span class='notice'>You start to wire [src].</span>"
+				if (do_after(user, 40) && build_step == 6)
+					if (C.use(1))
+						build_step++
+						user << "<span class='notice'>You wire the ED-209 assembly.</span>"
+						name = "wired ED-209 assembly"
+				return
 
 		if(7)
 			switch(lasercolor)

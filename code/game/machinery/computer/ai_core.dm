@@ -62,15 +62,19 @@
 				user << "\blue You unfasten the circuit board."
 				state = 1
 				icon_state = "1"
-			if(istype(P, /obj/item/stack/cable_coil))
-				if(P:amount >= 5)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-					if(do_after(user, 20))
-						P:amount -= 5
-						if(!P:amount) del(P)
-						user << "\blue You add cables to the frame."
+			if (istype(P, /obj/item/stack/cable_coil)
+				var/obj/item/stack/cable_coil/C = P
+				if (C.get_amount() < 5)
+					user << "<span class='warning'>You need five coils of wire to add them to the frame.</span>"
+					return
+				user << "<span class='notice'>You start to add cables to the frame.</span>"
+				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				if (do_after(user, 20) && state == 2)
+					if (W.use(5))
 						state = 3
 						icon_state = "3"
+						user << "<span class='notice'>You add cables to the frame.</span>"
+				return
 		if(3)
 			if(istype(P, /obj/item/weapon/wirecutters))
 				if (brain)

@@ -928,8 +928,10 @@ datum
 					var/target_amount = 10
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/diamond/D = I
+						found_amount += D.get_amount()
 					return found_amount>=target_amount
 
 			gold
@@ -957,8 +959,10 @@ datum
 					var/target_amount = 50
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/gold/G = I
+						found_amount += G.get_amount()
 					return found_amount>=target_amount
 
 			uranium
@@ -986,8 +990,10 @@ datum
 					var/target_amount = 25
 					var/found_amount = 0.0//Always starts as zero.
 					for(var/obj/item/I in owner.current.get_contents())
-						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						found_amount += I:amount
+						if(!istype(I, steal_target))
+							continue//If it's not actually that item.
+						var/obj/item/stack/sheet/uranium/U = I
+						found_amount += U.get_amount()
 					return found_amount>=target_amount
 
 
