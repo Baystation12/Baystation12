@@ -32,6 +32,29 @@
 	var/cells_amount = 0
 	var/capacitors_amount = 0
 
+	// Smaller capacity, but higher I/O
+	// Starts fully charged, as it's used in substations. This replaces Engineering SMESs round start charge.
+/obj/machinery/power/smes/batteryrack/substation
+	name = "Substation PSU"
+	desc = "A rack of power cells working as a PSU. This one seems to be equipped for higher power loads."
+	output = 150000
+	chargelevel = 150000
+	chargemode = 1
+	online = 1
+
+	// One high capacity cell, two regular cells. Lots of room for engineer upgrades
+	// Also five basic capacitors. Again, upgradeable.
+/obj/machinery/power/smes/batteryrack/substation/add_parts()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/batteryrack
+	component_parts += new /obj/item/weapon/cell/high
+	component_parts += new /obj/item/weapon/cell
+	component_parts += new /obj/item/weapon/cell
+	component_parts += new /obj/item/weapon/stock_parts/capacitor
+	component_parts += new /obj/item/weapon/stock_parts/capacitor
+	component_parts += new /obj/item/weapon/stock_parts/capacitor
+	component_parts += new /obj/item/weapon/stock_parts/capacitor
+	component_parts += new /obj/item/weapon/stock_parts/capacitor
 
 /obj/machinery/power/smes/batteryrack/New()
 	..()
@@ -224,7 +247,7 @@
 				var/load = min((capacity * 1.5 - charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
 				load = add_load(load)		// add the load to the terminal side network
 				charge += load * SMESRATE	// increase the charge
-				
+
 
 			else					// if not enough capacity
 				charging = 0		// stop charging
