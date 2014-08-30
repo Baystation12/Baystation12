@@ -58,8 +58,9 @@
 
 /obj/machinery/camera/proc/isXRay()
 	var/obj/item/weapon/stock_parts/scanning_module/O = locate(/obj/item/weapon/stock_parts/scanning_module) in assembly.upgrades
-	if (O.rating >= 2)
-		return O
+	if(O)
+		if (O.rating >= 2)
+			return O
 	return null
 
 /obj/machinery/camera/proc/isMotion()
