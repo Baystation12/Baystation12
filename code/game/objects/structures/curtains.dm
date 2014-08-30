@@ -6,6 +6,11 @@
 	opacity = 1
 	density = 0
 
+/obj/structure/curtain/open
+	icon_state = "open"
+	layer = OBJ_LAYER
+	opacity = 0
+
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.nodamage)
 		visible_message("<span class='warning'>[P] tears [src] down!</span>")
@@ -34,4 +39,9 @@
 /obj/structure/curtain/medical
 	name = "plastic curtain"
 	color = "#B8F5E3"
+	alpha = 200
+
+/obj/structure/curtain/open/shower
+	name = "shower curtain"
+	color = "#ACD1E9"
 	alpha = 200
