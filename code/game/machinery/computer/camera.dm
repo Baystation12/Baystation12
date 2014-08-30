@@ -21,7 +21,7 @@
 
 
 	check_eye(var/mob/user as mob)
-		if ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded || !( current ) || !( current.status )) && (!istype(user, /mob/living/silicon)))
+		if ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded || !( current ) || !( current.can_use() )) && (!istype(user, /mob/living/silicon)))
 			return null
 		user.reset_view(current)
 		return 1
@@ -46,7 +46,7 @@
 		D["Cancel"] = "Cancel"
 		for(var/obj/machinery/camera/C in L)
 			if(can_access_camera(C))
-				D[text("[][]", C.c_tag, (C.status ? null : " (Deactivated)"))] = C
+				D[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
 		if(!t)
