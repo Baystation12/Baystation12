@@ -317,8 +317,8 @@
 					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
 			else
 				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
-		else if(istype(W, /obj/item/weapon/smes_coil))
-			if (cur_coils < 5)
+		else if(istype(W, /obj/item/weapon/smes_coil) && !(istype(src, /obj/machinery/power/smes/batteryrack)))
+			if (cur_coils < max_coils)
 				usr << "You install the coil into the SMES unit!"
 				user.drop_item()
 				cur_coils ++
