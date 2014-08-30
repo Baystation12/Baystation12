@@ -124,8 +124,7 @@
 	
 	. = 0
 	for(var/g in gas)
-		var/ratio = gas[g] / total_moles
-		. += ratio * specific_entropy_gas(g)
+		. += gas[g] * specific_entropy_gas(g)
 	. /= total_moles
 
 /*
