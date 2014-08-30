@@ -36,7 +36,7 @@
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
 	color = COLOR_RED
-	var/obj/structure/breakerbox/breaker_box
+	var/obj/machinery/power/breakerbox/breaker_box
 
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
