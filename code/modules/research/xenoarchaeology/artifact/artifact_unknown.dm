@@ -282,9 +282,9 @@ var/list/valid_secondary_effect_types = list(\
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_ENERGY && prob(25))
 			secondary_effect.ToggleActivate(0)
 
-	else if (istype(W,/obj/item/weapon/match) && W:lit ||\
+	else if (istype(W,/obj/item/weapon/flame/match) && W:lit ||\
 			istype(W,/obj/item/weapon/weldingtool) && W:welding ||\
-			istype(W,/obj/item/weapon/lighter) && W:lit)
+			istype(W,/obj/item/weapon/flame/lighter) && W:lit)
 		if(my_effect.trigger == TRIGGER_HEAT)
 			my_effect.ToggleActivate()
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_HEAT && prob(25))
