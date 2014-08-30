@@ -13,8 +13,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 */
 
 /obj/item/weapon/flame/
-	icon = 'icons/obj/cigarettes.dmi'
-	w_class = 1
 	var/lit = 0
 
 ///////////

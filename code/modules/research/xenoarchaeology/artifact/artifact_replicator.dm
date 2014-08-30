@@ -55,7 +55,6 @@
 	/obj/item/weapon/hemostat,\
 	/obj/item/weapon/kitchenknife,\
 	/obj/item/weapon/flame/lighter,\
-	/obj/item/weapon/flame/lighter,\
 	/obj/item/weapon/light/bulb,\
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\

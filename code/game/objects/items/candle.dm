@@ -28,13 +28,9 @@
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.isOn()) //Badasses dont get blinded by lighting their candle with a welding tool
 				light("\red [user] casually lights the [name] with [W].")
-		else if(istype(W, /obj/item/weapon/flame/lighter))
-			var/obj/item/weapon/flame/lighter/L = W
-			if(L.lit)
-				light()
-		else if(istype(W, /obj/item/weapon/flame/match))
-			var/obj/item/weapon/flame/match/M = W
-			if(M.lit)
+		else if(istype(W, /obj/item/weapon/flame))
+			var/obj/item/weapon/flame/F = W
+			if(F.lit)
 				light()
 		else if(istype(W, /obj/item/candle))
 			var/obj/item/candle/C = W
