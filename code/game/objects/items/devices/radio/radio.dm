@@ -229,6 +229,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return
 
+	M.last_target_click = world.time
 
 	if(GLOBAL_RADIO_TYPE == 1) // NEW RADIO SYSTEMS: By Doohl
 
