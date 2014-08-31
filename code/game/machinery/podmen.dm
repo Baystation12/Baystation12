@@ -76,7 +76,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	else // If no sample was injected or revival is not allowed, we grab an interested observer.
 		request_player()
 
-	spawn(75) //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
+	spawn(200) //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
 		if(!found_player)
 			parent.visible_message("The pod has formed badly, and all you can do is salvage some of the seeds.")
 			var/seed_count = 1
