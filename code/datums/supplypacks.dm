@@ -436,6 +436,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Wooden planks crate"
 	group = "Engineering"
 
+/datum/supply_packs/smescoil
+	name = "Superconducting Magnetic Coil"
+	contains = list(/obj/item/weapon/smes_coil)
+	cost = 75
+	containertype = /obj/structure/closet/crate
+	containername = "Superconducting Magnetic Coil crate"
+	group = "Engineering"
+
 /datum/supply_packs/electrical
 	name = "Electrical maintenance crate"
 	contains = list(/obj/item/weapon/storage/toolbox/electrical,
