@@ -84,7 +84,7 @@ On the map:
 1311 for prison shuttle console (in fact, it is not used)
 1435 for status displays
 1437 for atmospherics/fire alerts
-1439 for engine components
+1438 for engine components
 1439 for air pumps, air scrubbers, atmo control
 1441 for atmospherics - supply tanks
 1443 for atmospherics - distribution loop/mixed air tank

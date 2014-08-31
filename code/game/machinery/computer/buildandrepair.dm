@@ -132,6 +132,11 @@
 /obj/item/weapon/circuitboard/air_management/tank_control
 	name = "Circuit board (Tank Control)"
 	build_path = "/obj/machinery/computer/general_air_control/large_tank_control"
+	frequency = 1441
+/obj/item/weapon/circuitboard/air_management/supermatter_core
+	name = "Circuit board (Core Control)"
+	build_path = "/obj/machinery/computer/general_air_control/supermatter_core"
+	frequency = 1438
 /obj/item/weapon/circuitboard/air_management/injector_control
 	name = "Circuit board (Injector Control)"
 	build_path = "/obj/machinery/computer/general_air_control/fuel_injection"
