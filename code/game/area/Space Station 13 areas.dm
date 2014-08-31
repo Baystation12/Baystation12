@@ -778,14 +778,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Head of Personnel's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/hor
-	name = "\improper Research Director's Office"
-	icon_state = "head_quarters"
-
-/area/crew_quarters/hos
-	name = "\improper Head of Security's Office"
-	icon_state = "head_quarters"
-
 /area/crew_quarters/chief
 	name = "\improper Chief Engineer's Office"
 	icon_state = "head_quarters"
@@ -1016,10 +1008,6 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Break Room"
 		icon_state = "engine"
 
-	chiefs_office
-		name = "\improper Chief Engineer's office"
-		icon_state = "engine_control"
-
 	hallway
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
@@ -1163,7 +1151,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
-/area/medical/medbreak
+/area/crew_quarters/medbreak
 	name = "\improper Break Room"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
@@ -1282,10 +1270,6 @@ var/list/ghostteleportlocs = list()
 /area/security/armoury
 	name = "\improper Armory"
 	icon_state = "Warden"
-
-/area/security/hos
-	name = "\improper Head of Security's Office"
-	icon_state = "sec_hos"
 
 /area/security/detectives_office
 	name = "\improper Detective's Office"
