@@ -62,6 +62,7 @@
 			new/datum/uplink_item(/obj/item/weapon/plastique, 2, "C-4 (Destroys walls)", "C4"),
 			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
 			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
+			new/datum/uplink_item(/obj/item/weapon/cartridge/information_uplink, 2, "Exploitable Information Uplink", "IU"),
 			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP")
 			),
 		"Implants" = list(

@@ -44,9 +44,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/list/conversations = list()    // For keeping up with who we have PDA messsages from.
 	var/newmessage = 0			//To remove hackish overlay check
 
-	var/list/cartmodes = list(40, 42, 43, 433, 44, 441, 45, 451, 46, 48, 47, 49) // If you add more cartridge modes add them to this list as well.
-	var/list/no_auto_update = list(1, 40, 43, 44, 441, 45, 451)		     // These modes we turn off autoupdate
-	var/list/update_every_five = list(3, 41, 433, 46, 47, 48, 49)			     // These we update every 5 ticks
+	var/list/cartmodes = list(40, 42, 43, 433, 44, 441, 45, 451, 46, 48, 47, 49, 50, 501) // If you add more cartridge modes add them to this list as well.
+	var/list/no_auto_update = list(1, 40, 43, 44, 441, 45, 451, 50, 501)		     // These modes we turn off autoupdate
+	var/list/update_every_five = list(3, 41, 433, 46, 47, 48, 49)		 // These we update every 5 ticks
 
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
@@ -385,7 +385,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					"access_hydroponics" = cartridge.access_hydroponics,\
 					"access_reagent_scanner" = cartridge.access_reagent_scanner,\
 					"access_remote_door" = cartridge.access_remote_door,\
-					"access_status_display" = cartridge.access_status_display\
+					"access_status_display" = cartridge.access_status_display,\
+					"access_exploit_information" = cartridge.access_exploit_information\
 			)
 			if(isnull(cartridge.radio))
 				cartdata["radio"] = 0
@@ -531,9 +532,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				mode = round(mode/10)
 				if(mode==2)
 					active_conversation = null
-				if(mode==4)//Fix for cartridges. Redirects to hub.
+				if(mode >= 4 && mode <= 5)//Fix for cartridges. Redirects to hub.
 					mode = 0
-				else if(mode >= 40 && mode <= 49)//Fix for cartridges. Redirects to refresh the menu.
+				else if(mode >= 40 && mode <= 50)//Fix for cartridges. Redirects to refresh the menu.
 					cartridge.mode = mode
 		if ("Authenticate")//Checks for ID
 			id_check(U, 1)

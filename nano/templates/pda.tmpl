@@ -68,7 +68,11 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             <div class="itemContent">
                 {{:helper.link('Notekeeper', 'note', {'choice' : "1"}, null, 'fixedLeftWide')}}
                 {{:helper.link('Messenger', data.newMessage ? 'mail-closed' : 'mail-open', {'choice' : "2"}, null, 'fixedLeftWide')}}
-                {{:helper.link('Crew Manifest', 'contact', {'choice' : "41"}, null, 'fixedLeftWide')}}
+                {{:helper.link('Crew Manifest', 'contact', {'choice' : "41"}, null, 'fixedLeftWide')}}           
+
+                {{if data.cartridge && data.cartridge.access.access_exploit_information == 1}}
+                    {{:helper.link('Information Uplink', 'alert', {'choice' : "50"}, null, 'fixedLeftWider')}}  
+                {{/if}}
             </div>
         </div>
         <br>
@@ -559,7 +563,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 	{{else data.mode == 44}}
 	    <H2>Medical Record List</H2>
         <div class="item">
-	        Select A record
+	        Select a Record
 	    </div>
 	    <br>
 		{{for data.records.medical_records}}
@@ -615,7 +619,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
  	{{else data.mode == 45}}
         <H2>Security Record List</H2>
         <div class="item">
-            Select A record
+            Select a Record
         </div>
         <br>
         {{for data.records.security_records}}
@@ -944,10 +948,56 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                     {{/if}}
                 {{/for}}
             </div>
+            
+            
+    {{else data.mode == 50}}
+	    <H2>Information Record List</H2>
+        <div class="item">
+	        Select a Record
+	    </div>
+	    <br>
+		{{for data.records.exploit_records}}
+            <div class="item">
+                 {{:helper.link(value.Name, 'gear', {'cartmenu' : "1", 'choice' : "Exploitative Information",'target' : value.ref}, null, null)}}
+            </div>
+		{{/for}}
+
+	{{else data.mode == 501}}
+        <H2>Information Record</H2>
+        <div class="statusDisplayRecords">
+            <div class="item">
+                <div class="itemContent" style="width: 100%;">
+                    {{if data.records.general_exists == 1}}
+                        <span class="good">Name:		</span> <span class="average">{{:data.records.general.name}}	</span><br>
+                        <span class="good">Sex:			</span> <span class="average">{{:data.records.general.sex}}		</span><br>
+                        <span class="good">Species:		</span> <span class="average">{{:data.records.general.species}}	</span><br>
+                        <span class="good">Age:			</span> <span class="average">{{:data.records.general.age}}		</span><br>
+                        <span class="good">Rank:		</span> <span class="average">{{:data.records.general.rank}}	</span><br>
+                        <span class="good">Fingerprint:		</span> <span class="average">{{:data.records.general.fingerprint}}	</span><br>
+                        <span class="good">Physical Status:	</span> <span class="average">{{:data.records.general.p_stat}}	</span><br>
+                        <span class="good">Mental Status:	</span> <span class="average">{{:data.records.general.m_stat}}	</span><br><br>
+                    {{else}}
+                        <span class="bad">
+                            General Record Lost!<br><br>
+                        </span>
+                    {{/if}}
+                    {{if data.records.exploit_exists == 1}}
+                        Acquired Information:<br>
+                        <span class="good">Notes:		</span> <span class="average">{{:data.records.exploit.notes}}	</span><br><br>
+                    {{else}}
+                        <span class="bad">
+                            No exploitative information acquired!
+                            <br>
+                            <br>
+                        </span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
     {{/if}}
 {{else}}
     <div class="wholeScreen">
         <br><br><br><br><br><br><br>No Owner information found, please swipe ID
     </div>
 {{/if}}
-
