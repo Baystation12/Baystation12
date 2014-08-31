@@ -36,7 +36,7 @@
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
 	color = COLOR_RED
-	var/obj/structure/powerswitch/power_switch
+	var/obj/machinery/power/breakerbox/breaker_box
 
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
@@ -117,9 +117,9 @@
 			return
 ///// Z-Level Stuff
 
-//		if(power_switch)
-//			user << "\red This piece of cable is tied to a power switch. Flip the switch to remove it."
-//			return
+		if(breaker_box)
+			user << "\red This cable is connected to nearby breaker box. Use breaker box to interact with it."
+			return
 
 		if (shock(user, 50))
 			return
