@@ -110,6 +110,16 @@
 			S.fields["notes"] = "No notes."
 		security += S
 
+        // Records with exploitative information
+		var/datum/data/record/E = new()
+		E.fields["id"]			= id
+		E.fields["name"]		= H.real_name
+		if(H.exploit_record && !jobban_isbanned(H, "Records"))
+			E.fields["notes"] = H.exploit_record
+		else
+			E.fields["notes"] = "No additional information acquired."
+		exploit += E
+
 		//Locked Record
 		var/datum/data/record/L = new()
 		L.fields["id"]			= md5("[H.real_name][H.mind.assigned_role]")
