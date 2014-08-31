@@ -2588,7 +2588,7 @@
 "aXN" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor,/area/hallway/primary/central)
 "aXO" = (/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor,/area/hallway/primary/central)
 "aXP" = (/obj/item/device/radio/intercom{dir = 4; name = "Station Intercom (General)"; pixel_x = 27},/turf/simulated/floor,/area/hallway/primary/central)
-"aXQ" = (/obj/structure/table/woodentable,/obj/item/candle,/turf/simulated/floor/wood,/area/crew_quarters/bar)
+"aXQ" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle,/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "aXR" = (/obj/structure/disposalpipe/segment,/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 1},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "aXS" = (/obj/structure/stool/bed/chair/wood/wings{icon_state = "wooden_chair_wings"; dir = 1},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "aXT" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/food/snacks/pie,/turf/simulated/floor{icon_state = "grimy"},/area/crew_quarters/bar)
