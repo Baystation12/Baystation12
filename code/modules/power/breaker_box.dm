@@ -17,6 +17,13 @@
 	var/busy = 0
 	var/directions = list(1,2,4,8,5,6,9,10)
 
+/obj/machinery/power/breakerbox/activated
+	icon_state = "bbox_on"
+
+	// Enabled on server startup. Used in substations to keep them in bypass mode.
+/obj/machinery/power/breakerbox/activated/New()
+	set_state(1)
+
 /obj/machinery/power/breakerbox/examine()
 	usr << "Large machine with heavy duty switching circuits used for advanced grid control"
 	if(on)

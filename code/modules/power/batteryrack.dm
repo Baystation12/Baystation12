@@ -39,7 +39,6 @@
 	desc = "A rack of power cells working as a PSU. This one seems to be equipped for higher power loads."
 	output = 150000
 	chargelevel = 150000
-	chargemode = 1
 	online = 1
 
 	// One high capacity cell, two regular cells. Lots of room for engineer upgrades
