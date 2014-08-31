@@ -118,6 +118,7 @@ datum/preferences
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
+	var/exploit_record = ""
 	var/disabilities = 0
 
 	var/nanotrasen_relation = "Neutral"
@@ -397,7 +398,7 @@ datum/preferences
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 
-	dat += "<a href='byond://?src=\ref[user];preference=pAI><b>pAI Configuration</b></a><br>"
+	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
 
 	dat += "<br><b>Hair</b><br>"
@@ -595,6 +596,13 @@ datum/preferences
 	HTML += "<b>Antagonist Options</b> <hr />"
 	HTML += "<br>"
 	HTML +="Uplink Type : <b><a href='?src=\ref[user];preference=antagoptions;antagtask=uplinktype;active=1'>[uplinklocation]</a></b>"
+	HTML +="<br>"
+	HTML +="Exploitable information about you : "
+	HTML += "<br>"
+	if(jobban_isbanned(user, "Records"))
+		HTML += "<b>You are banned from using character records.</b><br>"
+	else
+		HTML +="<b><a href=\"byond://?src=\ref[user];preference=records;task=exploitable_record\">[TextPreview(exploit_record,40)]</a></b>"
 	HTML +="<br>"
 	HTML +="<hr />"
 	HTML +="<a href='?src=\ref[user];preference=antagoptions;antagtask=done;active=1'>\[Done\]</a>"
@@ -949,6 +957,16 @@ datum/preferences
 				gen_record = genmsg
 				SetRecords(user)
 
+		if(href_list["task"] == "exploitable_record")
+			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
+
+			if(exploitmsg != null)
+				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				exploitmsg = html_encode(exploitmsg)
+
+				exploit_record = exploitmsg
+				SetAntagoptions(user)
+
 	else if (href_list["preference"] == "antagoptions")
 		if(text2num(href_list["active"]) == 0)
 			SetAntagoptions(user)
@@ -1001,16 +1019,16 @@ datum/preferences
 					user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
 
 		else if(href_list["task"] == "remove")
-		
+
 			if(isnull(gear) || !islist(gear))
 				gear = list()
 			if(!gear.len)
 				return
-			
+
 			var/choice = input(user, "Select gear to remove: ") as null|anything in gear
 			if(!choice)
 				return
-			
+
 			for(var/gear_name in gear)
 				if(gear_name == choice)
 					gear -= gear_name
@@ -1519,6 +1537,7 @@ datum/preferences
 	character.med_record = med_record
 	character.sec_record = sec_record
 	character.gen_record = gen_record
+	character.exploit_record = exploit_record
 
 	character.gender = gender
 	character.age = age

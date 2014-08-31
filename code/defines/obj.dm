@@ -48,6 +48,7 @@
 	var/medical[] = list()
 	var/general[] = list()
 	var/security[] = list()
+	var/exploit[] = list()
 	//This list tracks characters spawned in the world and cannot be modified in-game. Currently referenced by respawn_character().
 	var/locked[] = list()
 
@@ -303,7 +304,7 @@ var/global/list/PDA_Manifest = list()
 	throw_speed = 1
 	throw_range = 20
 	flags = FPRINT | TABLEPASS | CONDUCT
-	
+
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		user.drop_item()
 		src.throw_at(target, throw_range, throw_speed, user)
