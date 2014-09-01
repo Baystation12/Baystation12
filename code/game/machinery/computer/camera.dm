@@ -21,8 +21,10 @@
 
 
 	check_eye(var/mob/user as mob)
-		if ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded || !( current ) || !( current.status )) && (!istype(user, /mob/living/silicon)))
+		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return null
+		if ( !current || !current.can_use() ) //camera doesn't work
+			current = null
 		user.reset_view(current)
 		return 1
 
@@ -46,7 +48,7 @@
 		D["Cancel"] = "Cancel"
 		for(var/obj/machinery/camera/C in L)
 			if(can_access_camera(C))
-				D[text("[][]", C.c_tag, (C.status ? null : " (Deactivated)"))] = C
+				D[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
 		if(!t)
@@ -72,19 +74,18 @@
 		return 0
 
 	proc/switch_to_camera(var/mob/user, var/obj/machinery/camera/C)
-		if ((get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) || !( C.can_use() )) && (!istype(user, /mob/living/silicon/ai)))
-			if(!C.can_use() && !isAI(user))
-				src.current = null
-			return 0
-		else
-			if(isAI(user))
-				var/mob/living/silicon/ai/A = user
-				A.eyeobj.setLoc(get_turf(C))
-				A.client.eye = A.eyeobj
-			else
-				src.current = C
-				use_power(50)
+		//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
+		if(isAI(user))
+			var/mob/living/silicon/ai/A = user
+			A.eyeobj.setLoc(get_turf(C))
+			A.client.eye = A.eyeobj
 			return 1
+		
+		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
+			return 0
+		src.current = C
+		use_power(50)
+		return 1
 
 //Camera control: moving.
 	proc/jump_on_click(var/mob/user,var/A)

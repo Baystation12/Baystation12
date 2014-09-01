@@ -59,6 +59,8 @@
 	..()
 	if (old != stat)
 		update_icon()
+	if (stat & NOPOWER)
+		kick_viewers()
 
 /obj/machinery/camera/update_icon()
 	if (!status || (stat & NOPOWER))
@@ -85,13 +87,7 @@
 				cancelCameraAlarm()
 				if(can_use())
 					cameranet.addCamera(src)
-			for(var/mob/O in mob_list)
-				if (istype(O.machine, /obj/machinery/computer/security))
-					var/obj/machinery/computer/security/S = O.machine
-					if (S.current == src)
-						O.unset_machine()
-						O.reset_view(null)
-						O << "The screen bursts into static."
+			kick_viewers()
 			..()
 
 
@@ -207,6 +203,10 @@
 	// now disconnect anyone using the camera
 	//Apparently, this will disconnect anyone even if the camera was re-activated.
 	//I guess that doesn't matter since they can't use it anyway?
+	kick_viewers()
+
+//This might be redundant, because of check_eye()
+/obj/machinery/camera/proc/kick_viewers()
 	for(var/mob/O in player_list)
 		if (istype(O.machine, /obj/machinery/computer/security))
 			var/obj/machinery/computer/security/S = O.machine
