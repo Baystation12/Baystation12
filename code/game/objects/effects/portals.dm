@@ -22,6 +22,12 @@
 		return
 	return
 
+/obj/effect/portal/attack_hand(mob/user as mob)
+	spawn(0)
+		src.teleport(user)
+		return
+	return
+
 /obj/effect/portal/New()
 	spawn(300)
 		del(src)
