@@ -80,6 +80,9 @@
 		throw_item(A)
 		return
 
+	if(!istype(A,/obj/item/weapon/gun) && !isturf(A) && !istype(A,/obj/screen))
+		last_target_click = world.time
+
 	var/obj/item/W = get_active_hand()
 
 	if(W == A)

@@ -721,8 +721,13 @@
 			return 0
 	var/result = 0
 	var/obj/item/stack/sheet/res = new type(src)
+
+	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
-	res.amount = min(total_amount,amount)
+
+	// number of stacks we're going to take out
+	res.amount = round(min(total_amount,amount))
+
 	if(res.amount>0)
 		resources[mat_string] -= res.amount*res.perunit
 		res.Move(src.loc)
@@ -783,6 +788,7 @@
 	if(istype(W, /obj/item/weapon/card/emag))
 		emag()
 		return
+
 	var/material
 	switch(W.type)
 		if(/obj/item/stack/sheet/mineral/gold)
@@ -805,14 +811,17 @@
 	if(src.being_built)
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
+
 	var/obj/item/stack/sheet/stack = W
+
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit
 	if(src.resources[material] < res_max_amount)
-		var/count = 0
-		src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
-		sleep(10)
-		if(stack && stack.amount)
+		if(stack && stack.amount >= 1)
+			var/count = 0
+			src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
+			sleep(10)
+
 			while(src.resources[material] < res_max_amount && stack)
 				src.resources[material] += amnt
 				stack.use(1)
@@ -820,6 +829,9 @@
 			src.overlays -= "fab-load-[material]"
 			user << "You insert [count] [sname] into the fabricator."
 			src.updateUsrDialog()
+		else
+			user << "The fabricator can only accept full sheets of [sname]."
+			return
 	else
 		user << "The fabricator cannot hold more [sname]."
 	return
