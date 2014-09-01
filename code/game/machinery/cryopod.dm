@@ -255,9 +255,6 @@ var/global/list/frozen_items = list()
 			for(var/datum/data/record/G in data_core.general)
 				if ((G.fields["name"] == occupant.real_name))
 					del(G)
-			for(var/datum/data/record/P in data_core.permanent)
-				if ((P.fields["name"] == occupant.real_name))
-					del(P)
 
 			if(orient_right)
 				icon_state = "body_scanner_0-r"

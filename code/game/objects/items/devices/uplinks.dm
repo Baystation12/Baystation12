@@ -221,25 +221,17 @@ datum/nano_item_lists
 /obj/item/device/uplink/hidden/proc/update_nano_data(var/id)
 	if(nanoui_menu == 1)
 		var/permanentData[0]
-		for(var/datum/data/record/P in sortRecord(data_core.permanent))
-			permanentData[++permanentData.len] = list(Name = P.fields["name"],"id" = P.fields["id"])
+		for(var/datum/data/record/L in sortRecord(data_core.locked))
+			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
 		nanoui_data["exploit_records"] = permanentData
 
 	if(nanoui_menu == 11)
-		nanoui_data["general_exists"] = 0
 		nanoui_data["exploit_exists"] = 0
 
-		for(var/datum/data/record/R in data_core.general)
-			if(R.fields["id"] == id)
-				nanoui_data["general"] = R.fields
-				nanoui_data["general_exists"] = 1
-				break
-
-		for(var/datum/data/record/P in data_core.permanent)
-			if(P.fields["id"] == id)
-				if(!nanoui_data["exploit"])
-					nanoui_data["exploit"] = new
-				nanoui_data["exploit"]["notes"] = replacetext(P.fields["exploit_record"], "\n", "<br>")
+		for(var/datum/data/record/L in data_core.locked)
+			if(L.fields["id"] == id)
+				nanoui_data["exploit"] = L.fields
+				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["exploit_record"], "\n", "<br>")
 				nanoui_data["exploit_exists"] = 1
 				break
 

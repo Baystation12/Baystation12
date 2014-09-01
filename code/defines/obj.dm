@@ -48,7 +48,6 @@
 	var/medical[] = list()
 	var/general[] = list()
 	var/security[] = list()
-	var/permanent[] = list()
 	//This list tracks characters spawned in the world and cannot be modified in-game. Currently referenced by respawn_character().
 	var/locked[] = list()
 
