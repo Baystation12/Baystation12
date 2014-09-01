@@ -706,15 +706,15 @@ Status: []<BR>"},
 				return
 
 		if(1)
-			if(istype(W, /obj/item/stack/sheet/metal))
-				if(W:amount>=2) // requires 2 metal sheets
-					user << "\blue You add some metal armor to the interior frame."
+			if (istype(W, /obj/item/stack/sheet/metal))
+				var/obj/item/stack/sheet/metal/M = W
+				if (M.use(2))
+					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
-					W:amount -= 2
 					icon_state = "turret_frame2"
-					if(W:amount <= 0)
-						del(W)
-					return
+				else
+					user << "<span class='warning'>You need two sheets of metal to add armor ot the frame.</span>"
+				return
 
 			else if(istype(W, /obj/item/weapon/wrench))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -783,14 +783,14 @@ Status: []<BR>"},
 			// attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(W, /obj/item/stack/sheet/metal))
-				if(W:amount>=2)
-					user << "\blue You add some metal armor to the exterior frame."
+			if (istype(W, /obj/item/stack/sheet/metal))
+				var/obj/item/stack/sheet/metal/M = W
+				if (M.use(2))
+					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7
-					W:amount -= 2
-					if(W:amount <= 0)
-						del(W)
-					return
+				else
+					user << "<span class='warning'>You need two sheets of metal to add armor to the frame.</span>"
+				return
 
 			else if(istype(W, /obj/item/weapon/screwdriver))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)

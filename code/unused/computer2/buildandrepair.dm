@@ -84,7 +84,7 @@
 					W.loc = src.loc
 					src.peripherals.Remove(W)
 
-			if(istype(P, /obj/item/stack/cable_coil))
+			if (istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))
@@ -117,7 +117,7 @@
 				src.hd.loc = src.loc
 				src.hd = null
 
-			if(istype(P, /obj/item/stack/sheet/glass))
+			if (istype(P, /obj/item/stack/sheet/glass))
 				if(P:amount >= 2)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))

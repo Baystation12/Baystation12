@@ -38,20 +38,20 @@
 		if(L)
 			return
 		var/obj/item/stack/rods/R = C
-		user << "\blue Constructing support lattice ..."
-		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-		ReplaceWithLattice()
-		R.use(1)
+		if (R.use(1))
+			user << "\blue Constructing support lattice ..."
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			ReplaceWithLattice()
 		return
 
 	if (istype(C, /obj/item/stack/tile/plasteel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
-			del(L)
-			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.build(src)
-			S.use(1)
+			if (S.use(1))
+				del(L)
+				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+				S.build(src)
 			return
 		else
 			user << "\red The plating is going to need some support."

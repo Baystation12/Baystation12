@@ -33,7 +33,7 @@
 		return
 	switch(state)
 		if(1)
-			if(istype(P, /obj/item/stack/cable_coil))
+			if (istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << "\blue You start to add cables to the frame."
@@ -136,7 +136,7 @@
 				for(var/I in req_components)
 					if(istype(P, text2path(I)) && (req_components[I] > 0))
 						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						if(istype(P, /obj/item/stack/cable_coil))
+						if (istype(P, /obj/item/stack/cable_coil))
 							var/obj/item/stack/cable_coil/CP = P
 							if(CP.amount > 1)
 								var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided

@@ -154,7 +154,7 @@
 					user << "\red There's already \an [battery] in [src]!"
 
 
-			if(istype(P, /obj/item/stack/cable_coil))
+			if (istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))
@@ -179,7 +179,7 @@
 			if(istype(P, /obj/item/weapon/crowbar)) // complicated check
 				remove_peripheral()
 
-			if(istype(P, /obj/item/stack/sheet/glass))
+			if (istype(P, /obj/item/stack/sheet/glass))
 				if(P:amount >= 2)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))

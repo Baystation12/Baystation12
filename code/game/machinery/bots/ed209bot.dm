@@ -959,7 +959,7 @@ Auto Patrol: []"},
 				icon_state = "[lasercolor]ed209_prox"
 
 		if(6)
-			if(istype(W, /obj/item/stack/cable_coil))
+			if (istype(W, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.get_amount() < 1)
 					user << "<span class='warning'>You need one coil of wire to do wire [src].</span>"

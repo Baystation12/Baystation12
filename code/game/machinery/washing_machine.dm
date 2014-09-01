@@ -216,14 +216,14 @@
 				state = 3
 		else
 			..()
-	else if(istype(W,/obj/item/stack/sheet/hairlesshide) || \
-		istype(W,/obj/item/clothing/under) || \
-		istype(W,/obj/item/clothing/mask) || \
-		istype(W,/obj/item/clothing/head) || \
-		istype(W,/obj/item/clothing/gloves) || \
-		istype(W,/obj/item/clothing/shoes) || \
-		istype(W,/obj/item/clothing/suit) || \
-		istype(W,/obj/item/weapon/bedsheet))
+	else if (istype(W, /obj/item/stack/sheet/hairlesshide) || \
+		istype(W, /obj/item/clothing/under) || \
+		istype(W, /obj/item/clothing/mask) || \
+		istype(W, /obj/item/clothing/head) || \
+		istype(W, /obj/item/clothing/gloves) || \
+		istype(W, /obj/item/clothing/shoes) || \
+		istype(W, /obj/item/clothing/suit) || \
+		istype(W, /obj/item/weapon/bedsheet))
 
 		//YES, it's hardcoded... saves a var/can_be_washed for every single clothing item.
 		if ( istype(W,/obj/item/clothing/suit/space ) )

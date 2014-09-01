@@ -150,7 +150,7 @@
 		var/total_material = eating.matter[material]
 
 		//If it's a stack, we eat multiple sheets.
-		if(istype(eating,/obj/item/stack))
+		if (istype(eating, /obj/item/stack))
 			var/obj/item/stack/stack = eating
 			total_material *= stack.get_amount()
 
@@ -174,7 +174,7 @@
 
 	flick("autolathe_o",src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
 
-	if(istype(eating,/obj/item/stack))
+	if (istype(eating, /obj/item/stack))
 		var/obj/item/stack/stack = eating
 		stack.use(max(1,round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
 	else

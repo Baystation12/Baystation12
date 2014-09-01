@@ -99,7 +99,7 @@
 
 
 /obj/machinery/bot/floorbot/attackby(var/obj/item/W , mob/user as mob)
-	if(istype(W, /obj/item/stack/tile/plasteel))
+	if (istype(W, /obj/item/stack/tile/plasteel))
 		var/obj/item/stack/tile/plasteel/T = W
 		if(src.amount >= 50)
 			return
@@ -257,9 +257,9 @@
 		src.path = new()
 
 	if(src.loc == src.target || src.loc == src.target.loc)
-		if(istype(src.target, /obj/item/stack/tile/plasteel))
+		if (istype(src.target, /obj/item/stack/tile/plasteel))
 			src.eattile(src.target)
-		else if(istype(src.target, /obj/item/stack/sheet/metal))
+		else if (istype(src.target, /obj/item/stack/sheet/metal))
 			src.maketile(src.target)
 		else if(istype(src.target, /turf/) && emagged < 2)
 			repair(src.target)

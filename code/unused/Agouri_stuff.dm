@@ -1418,19 +1418,19 @@ turf/simulated/floor/return_siding_icon_state()
 	break_tile()
 
 /turf/simulated/floor/is_plasteel_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/plasteel))
+	if (istype(floor_tile, /obj/item/stack/tile/plasteel))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_light_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/light))
+	if (istype(floor_tile, /obj/item/stack/tile/light))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_grass_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/grass))
+	if (istype(floor_tile, /obj/item/stack/tile/grass))
 		return 1
 	else
 		return 0
@@ -1506,7 +1506,7 @@ turf/simulated/floor/return_siding_icon_state()
 	intact = 1
 	sd_SetLuminosity(0)
 	if(T)
-		if(istype(T,/obj/item/stack/tile/plasteel))
+		if (istype(T, /obj/item/stack/tile/plasteel))
 			floor_tile = T
 			if (icon_regular_floor)
 				icon_state = icon_regular_floor
@@ -1532,7 +1532,7 @@ turf/simulated/floor/return_siding_icon_state()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/light))
+		if (istype(T, /obj/item/stack/tile/light))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -1550,7 +1550,7 @@ turf/simulated/floor/return_siding_icon_state()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/grass))
+		if (istype(T, /obj/item/stack/tile/grass))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -1590,7 +1590,7 @@ turf/simulated/floor/return_siding_icon_state()
 
 		return
 
-	if(istype(C, /obj/item/stack/rods))
+	if (istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
 		if (is_plating())
 			if (R.amount >= 2)
@@ -1606,18 +1606,18 @@ turf/simulated/floor/return_siding_icon_state()
 			user << "\red You must remove the plating first."
 		return
 
-	if(istype(C, /obj/item/stack/tile))
+	if (istype(C, /obj/item/stack/tile))
 		if(is_plating())
 			if(!broken && !burnt)
 				var/obj/item/stack/tile/T = C
 				floor_tile = new T.type
 				intact = 1
-				if(istype(T,/obj/item/stack/tile/light))
+				if (istype(T, /obj/item/stack/tile/light))
 					var/obj/item/stack/tile/light/L = T
 					var/obj/item/stack/tile/light/F = floor_tile
 					F.state = L.state
 					F.on = L.on
-				if(istype(T,/obj/item/stack/tile/grass))
+				if (istype(T, /obj/item/stack/tile/grass))
 					for(var/direction in cardinal)
 						if(istype(get_step(src,direction),/turf/simulated/floor))
 							var/turf/simulated/floor/FF = get_step(src,direction)
@@ -1630,7 +1630,7 @@ turf/simulated/floor/return_siding_icon_state()
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
 
-	if(istype(C, /obj/item/stack/cable_coil))
+	if (istype(C, /obj/item/stack/cable_coil))
 		if(is_plating())
 			var/obj/item/stack/cable_coil/coil = C
 			coil.turf_place(src, user)

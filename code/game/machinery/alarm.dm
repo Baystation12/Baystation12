@@ -1124,10 +1124,10 @@ table tr:first-child th:first-child { border: none;}
 			return
 
 		if(1)
-			if(istype(W, /obj/item/stack/cable_coil))
+			if (istype(W, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.use(5))
-					user << <span class='notice'>"You wire \the [src].</span>"
+					user << "<span class='notice'>You wire \the [src].</span>"
 					buildstage = 2
 					update_icon()
 					first_run()
@@ -1311,10 +1311,10 @@ FIRE ALARM
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
 			if(1)
-				if(istype(W, /obj/item/stack/cable_coil))
+				if (istype(W, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = W
 					if (C.use(5))
-						user << <span class='notice'>"You wire \the [src].</span>"
+						user << "<span class='notice'>You wire \the [src].</span>"
 						buildstage = 2
 						return
 					else

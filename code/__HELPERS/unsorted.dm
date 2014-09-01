@@ -1199,7 +1199,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iscoil(O)
-	if(istype(O, /obj/item/stack/cable_coil))
+	if (istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
@@ -1224,7 +1224,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iswire(O)
-	if(istype(O, /obj/item/stack/cable_coil))
+	if (istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
