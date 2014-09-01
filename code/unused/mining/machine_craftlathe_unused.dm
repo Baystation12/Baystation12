@@ -157,7 +157,7 @@ proc/check_craftlathe_recipe(var/list/param_recipe)
 	return
 
 /obj/machinery/autolathe2/proc/rmv_item(obj/item/W as obj)
-	if (istype(W, /obj/item/stack))
+	if(istype(W,/obj/item/stack))
 		var/obj/item/stack/S = W
 		S.amount--
 		if (S.amount <= 0)

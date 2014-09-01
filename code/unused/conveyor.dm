@@ -97,7 +97,7 @@
 		G.affecting.Move(src.loc)
 		del(G)
 		return
-	else if (istype(I, /obj/item/stack/cable_coil))	// if cable, see if a mob is present
+	else if(istype(I, /obj/item/stack/cable_coil))	// if cable, see if a mob is present
 		var/mob/M = locate() in src.loc
 		if(M)
 			if (M == user)
