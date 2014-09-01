@@ -1418,7 +1418,7 @@ turf/simulated/floor/return_siding_icon_state()
 	break_tile()
 
 /turf/simulated/floor/is_plasteel_floor()
-	if(istype(floor_tile,/obj/item/stackz/tile/plasteel))
+	if(istype(floor_tile,/obj/item/stack/tile/plasteel))
 		return 1
 	else
 		return 0
@@ -1590,7 +1590,7 @@ turf/simulated/floor/return_siding_icon_state()
 
 		return
 
-	if(istype(C,/obj/item/stack/rods))
+	if(istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
 		if (is_plating())
 			if (R.amount >= 2)
@@ -1606,7 +1606,7 @@ turf/simulated/floor/return_siding_icon_state()
 			user << "\red You must remove the plating first."
 		return
 
-	if(istype(C,/obj/item/stack/tile))
+	if(istype(C, /obj/item/stack/tile))
 		if(is_plating())
 			if(!broken && !burnt)
 				var/obj/item/stack/tile/T = C
@@ -1630,9 +1630,9 @@ turf/simulated/floor/return_siding_icon_state()
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
 
-	if(istype(C,/obj/item/stack/cable_coil))
+	if(istype(C, /obj/item/weapon/cable_coil))
 		if(is_plating())
-			var/obj/item/stack/cable_coil/coil = C
+			var/obj/item/weapon/cable_coil/coil = C
 			coil.turf_place(src, user)
 		else
 			user << "\red You must remove the plating first."
