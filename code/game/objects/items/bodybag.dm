@@ -106,6 +106,8 @@
 	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant at the cost of genetic damage."
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
+	open_sound = 'sound/items/zip.ogg'
+	close_sound = 'sound/items/zip.ogg'
 	var/used = 0
 
 	open()
