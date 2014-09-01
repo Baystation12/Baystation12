@@ -3,6 +3,7 @@
 /datum/artifact_effect/celldrain
 	effecttype = "celldrain"
 	effect_type = 3
+	var/last_message
 
 /datum/artifact_effect/celldrain/DoEffectTouch(var/mob/user)
 	if(user)
@@ -26,7 +27,9 @@
 		for (var/mob/living/silicon/robot/M in range(50, T))
 			for (var/obj/item/weapon/cell/D in M.contents)
 				D.charge = max(D.charge - 50,0)
-				if(prob(10)) M << "\red SYSTEM ALERT: Energy drain detected!"
+				if(world.time - last_message > 200)
+					M << "\red SYSTEM ALERT: Energy drain detected!"
+					last_message = world.time
 	return 1
 
 /datum/artifact_effect/celldrain/DoEffectPulse()
@@ -40,5 +43,7 @@
 		for (var/mob/living/silicon/robot/M in range(100, T))
 			for (var/obj/item/weapon/cell/D in M.contents)
 				D.charge = max(D.charge - rand() * 150,0)
-				if(prob(10)) M << "\red SYSTEM ALERT: Energy drain detected!"
+				if(world.time - last_message > 200)
+					M << "\red SYSTEM ALERT: Energy drain detected!"
+					last_message = world.time
 	return 1
