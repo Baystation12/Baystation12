@@ -220,10 +220,10 @@ datum/nano_item_lists
 
 /obj/item/device/uplink/hidden/proc/update_nano_data(var/id)
 	if(nanoui_menu == 1)
-		var/exploitData[0]
-		for(var/datum/data/record/R in sortRecord(data_core.exploit))
-			exploitData[++exploitData.len] = list(Name = R.fields["name"],"id" = R.fields["id"])
-		nanoui_data["exploit_records"] = exploitData
+		var/permanentData[0]
+		for(var/datum/data/record/P in sortRecord(data_core.permanent))
+			permanentData[++permanentData.len] = list(Name = P.fields["name"],"id" = P.fields["id"])
+		nanoui_data["exploit_records"] = permanentData
 
 	if(nanoui_menu == 11)
 		nanoui_data["general_exists"] = 0
@@ -235,11 +235,13 @@ datum/nano_item_lists
 				nanoui_data["general_exists"] = 1
 				break
 
-		for(var/datum/data/record/E in data_core.exploit)
-			if(E.fields["id"] == id)
-				nanoui_data["exploit"] = E.fields
-				nanoui_data["exploit"]["notes"] = replacetext(nanoui_data["exploit"]["notes"], "\n", "<br>")
+		for(var/datum/data/record/P in data_core.permanent)
+			if(P.fields["id"] == id)
+				if(!nanoui_data["exploit"])
+					nanoui_data["exploit"] = new
+				nanoui_data["exploit"]["notes"] = replacetext(P.fields["exploit_record"], "\n", "<br>")
 				nanoui_data["exploit_exists"] = 1
+				break
 
 // I placed this here because of how relevant it is.
 // You place this in your uplinkable item to check if an uplink is active or not.

@@ -1564,6 +1564,10 @@ datum/preferences
 	character.h_style = h_style
 	character.f_style = f_style
 
+	character.home_system = home_system
+	character.citizenship = citizenship
+	character.personal_faction = faction
+	character.religion = religion
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints

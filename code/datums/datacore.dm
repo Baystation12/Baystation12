@@ -66,6 +66,10 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
+		G.fields["home_system"]	= H.home_system
+		G.fields["citizenship"]	= H.citizenship
+		G.fields["faction"]		= H.personal_faction
+		G.fields["religion"]	= H.religion
 		G.fields["photo_front"]	= front
 		G.fields["photo_side"]	= side
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
@@ -110,15 +114,15 @@
 			S.fields["notes"] = "No notes."
 		security += S
 
-        // Records with exploitative information
-		var/datum/data/record/E = new()
-		E.fields["id"]			= id
-		E.fields["name"]		= H.real_name
+        // Records with oermanently available information
+		var/datum/data/record/P = new()
+		P.fields["id"]			= id
+		P.fields["name"]		= H.real_name
 		if(H.exploit_record && !jobban_isbanned(H, "Records"))
-			E.fields["notes"] = H.exploit_record
+			P.fields["exploit_record"] = H.exploit_record
 		else
-			E.fields["notes"] = "No additional information acquired."
-		exploit += E
+			P.fields["exploit_record"] = "No additional information acquired."
+		permanent += P
 
 		//Locked Record
 		var/datum/data/record/L = new()
