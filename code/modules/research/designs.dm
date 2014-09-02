@@ -1227,6 +1227,23 @@ datum/design/mechfab
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mechfab"
 
+datum/design/gas_heater
+	name = "Gas Heating System Board"
+	desc =  "The circuit board for a gas heating system"
+	id = "gasheater"
+	req_tech = list("powerstorage" = 2, "engineering" = 1)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/gas_heater"
+
+datum/design/gas_cooler
+	name = "Gas Cooling System Board"
+	desc =  "The circuit board for a gas cooling system"
+	id = "gascooler"
+	req_tech = list("magnets" = 2, "engineering" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/gas_cooler"
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
