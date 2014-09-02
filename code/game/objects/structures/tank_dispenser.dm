@@ -50,6 +50,8 @@
 			oxytanks.Add(I)
 			oxygentanks++
 			user << "<span class='notice'>You put [I] in [src].</span>"
+			if(oxygentanks < 5)
+				update_icon()
 		else
 			user << "<span class='notice'>[src] is full.</span>"
 		updateUsrDialog()
@@ -61,6 +63,8 @@
 			platanks.Add(I)
 			phorontanks++
 			user << "<span class='notice'>You put [I] in [src].</span>"
+			if(oxygentanks < 6)
+				update_icon()
 		else
 			user << "<span class='notice'>[src] is full.</span>"
 		updateUsrDialog()
