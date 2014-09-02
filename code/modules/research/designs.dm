@@ -376,7 +376,7 @@ datum/design/aifixer
 	build_path = "/obj/item/weapon/circuitboard/aifixer"
 
 // VERY VERY EXPENSIVE (needs diamonds and stuff)
-datum/design/aifixer
+datum/design/smes_cell
 	name = "Circuit Design (SMES Cell)"
 	desc = "Allows for the construction of circuit boards used to build an SMES Cell."
 	id = "smes_cell"
