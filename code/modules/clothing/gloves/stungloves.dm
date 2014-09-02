@@ -15,7 +15,7 @@
 			user << "<span class='notice'>The [src] are already wired.</span>"
 			return
 			
-		if(C.amount < 2)
+		if(C.get_amount() < 2)
 			user << "<span class='notice'>There is not enough wire to cover the [src].</span>"
 			return
 			

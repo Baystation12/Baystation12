@@ -36,8 +36,8 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 	//Grass.
 	else if(istype(O, /obj/item/stack/tile/grass))
 		var/obj/item/stack/tile/grass/S = O
-		user << "<span class='notice'>You extract some seeds from the [S.name].</span>"
-		S.use(1)
-		new /obj/item/seeds/grassseed(loc)
+		if (S.use(1))
+			user << "<span class='notice'>You extract some seeds from the [S.name].</span>"
+			new /obj/item/seeds/grassseed(loc)
 
 	return

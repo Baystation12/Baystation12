@@ -184,14 +184,16 @@ obj/structure/door_assembly
 			user << "\blue You [anchored? "un" : ""]secured the airlock assembly!"
 			anchored = !anchored
 
-	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored )
-		var/obj/item/stack/cable_coil/coil = W
+	else if(istype(W, /obj/item/stack/cable_coil) && state == 0 && anchored)
+		var/obj/item/stack/cable_coil/C = W
+		if (C.get_amount() < 1)
+			user << "<span class='warning'>You need one length of coil to wire the airlock assembly.</span>"
+			return
 		user.visible_message("[user] wires the airlock assembly.", "You start to wire the airlock assembly.")
-		if(do_after(user, 40))
-			if(!src) return
-			coil.use(1)
-			src.state = 1
-			user << "\blue You wire the Airlock!"
+		if(do_after(user, 40) && state == 0 && anchored)
+			if (C.use(1))
+				src.state = 1
+				user << "<span class='notice'>You wire the airlock.</span>"
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && state == 1 )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -236,23 +238,23 @@ obj/structure/door_assembly
 	else if(istype(W, /obj/item/stack/sheet) && !glass)
 		var/obj/item/stack/sheet/S = W
 		if (S)
-			if (S.amount>=1)
+			if (S.get_amount() >= 1)
 				if(istype(S, /obj/item/stack/sheet/rglass))
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 					user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
-					if(do_after(user, 40))
-						user << "\blue You installed reinforced glass windows into the airlock assembly!"
-						S.use(1)
-						glass = 1
+					if(do_after(user, 40) && !glass)
+						if (S.use(1))
+							user << "<span class='notice'>You installed reinforced glass windows into the airlock assembly.</span>"
+							glass = 1
 				else if(istype(S, /obj/item/stack/sheet/mineral) && S.sheettype)
 					var/M = S.sheettype
-					if(S.amount>=2)
+					if(S.get_amount() >= 2)
 						playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 						user.visible_message("[user] adds [S.name] to the airlock assembly.", "You start to install [S.name] into the airlock assembly.")
-						if(do_after(user, 40))
-							user << "\blue You installed [M] plating into the airlock assembly!"
-							S.use(2)
-							glass = "[M]"
+						if(do_after(user, 40) && !glass)
+							if (S.use(2))
+								user << "<span class='notice'>You installed [M] plating into the airlock assembly.</span>"
+								glass = "[M]"
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 )
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)

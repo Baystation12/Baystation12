@@ -74,6 +74,6 @@ datum/directive/research_to_ripleys/get_remaining_orders()
 	for(var/atom/A in sold)
 		if(istype(A, /obj/item/stack/sheet/mineral) || istype(A, /obj/item/stack/sheet/metal))
 			var/obj/item/stack/S = A
-			D.materials_shipped += S.amount
+			D.materials_shipped += S.get_amount()
 
 	return 1
