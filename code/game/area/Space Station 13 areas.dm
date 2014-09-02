@@ -624,37 +624,53 @@ var/list/ghostteleportlocs = list()
 
 //Maintenance
 
+/area/maintenance/aft
+	name = "Aft Maintenance"
+	icon_state = "amaint"
+
+/area/maintenance/fore
+	name = "Fore Maintenance"
+	icon_state = "fmaint"
+
+/area/maintenance/starboard
+	name = "Starboard Maintenance"
+	icon_state = "smaint"
+
+/area/maintenance/port
+	name = "Port Maintenance"
+	icon_state = "pmaint"
+
 /area/maintenance/atmos_control
 	name = "Atmospherics Maintenance"
 	icon_state = "fpmaint"
 
 /area/maintenance/fpmaint
-	name = "EVA Maintenance"
+	name = "Fore Port Maintenance - 1"
 	icon_state = "fpmaint"
 
 /area/maintenance/fpmaint2
-	name = "Arrivals North Maintenance"
+	name = "Fore Port Maintenance - 2"
 	icon_state = "fpmaint"
 
 /area/maintenance/fsmaint
-	name = "Dormitory Maintenance"
+	name = "Fore Starboard Maintenance - 1"
 	icon_state = "fsmaint"
 
 /area/maintenance/fsmaint2
-	name = "Bar Maintenance"
+	name = "Fore Starboard Maintenance - 2"
 	icon_state = "fsmaint"
 
 /area/maintenance/asmaint
-	name = "Medbay Maintenance"
+	name = "Aft Starboard Maintenance"
 	icon_state = "asmaint"
 
 /area/maintenance/engi_shuttle
 	name = "Engineering Shuttle Access"
-	icon_state = "asmaint"
+	icon_state = "maint_e_shuttle"
 
 /area/maintenance/engi_engine
 	name = "Engine Maintenance"
-	icon_state = "asmaint"
+	icon_state = "maint_engine"
 
 /area/maintenance/asmaint2
 	name = "Science Maintenance"
@@ -668,37 +684,69 @@ var/list/ghostteleportlocs = list()
 	name = "Bridge Maintenance"
 	icon_state = "maintcentral"
 
-/area/maintenance/fore
-	name = "Fore Maintenance"
-	icon_state = "fmaint"
+/area/maintenance/arrivals
+	name = "Arrivals Maintenance"
+	icon_state = "maint_arrivals"
 
-/area/maintenance/starboard
-	name = "Starboard Maintenance"
-	icon_state = "smaint"
+/area/maintenance/bar
+	name = "Bar Maintenance"
+	icon_state = "maint_bar"
 
-/area/maintenance/port
-	name = "Locker Room Maintenance"
-	icon_state = "pmaint"
-
-/area/maintenance/aft
-	name = "Engineering Maintenance"
-	icon_state = "amaint"
-
-/area/maintenance/storage
-	name = "Atmospherics"
-	icon_state = "green"
-
-/area/maintenance/incinerator
-	name = "\improper Incinerator"
-	icon_state = "disposal"
+/area/maintenance/cargo
+	name = "Cargo Maintenance"
+	icon_state = "maint_cargo"
 
 /area/maintenance/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
+/area/maintenance/engineering
+	name = "Engineering Maintenance"
+	icon_state = "maint_engineering"
+
 /area/maintenance/evahallway
-	name = "\improper EVA Hallway"
-	icon_state = "eva"
+	name = "\improper EVA Maintenance"
+	icon_state = "maint_eva"
+
+/area/maintenance/incinerator
+	name = "\improper Incinerator"
+	icon_state = "disposal"
+
+/area/maintenance/locker
+	name = "Locker Room Maintenance"
+	icon_state = "maint_locker"
+
+/area/maintenance/medbay
+	name = "Medbay Maintenance"
+	icon_state = "maint_medbay"
+
+/area/maintenance/misc_research
+	name = "Misc. Research Maintenance"
+	icon_state = "maint_misc_research"
+
+/area/maintenance/research_shuttle
+	name = "Research Shuttle Dock Maintenance"
+	icon_state = "maint_r_shuttle"
+
+/area/maintenance/security_port
+	name = "Port Security Maintenance"
+	icon_state = "maint_security_port"
+
+/area/maintenance/security_starboard
+	name = "Starboard Security Maintenance"
+	icon_state = "maint_security_starboard"
+
+/area/maintenance/storage
+	name = "Atmospherics"
+	icon_state = "green"
+
+/area/maintenance/virology
+	name = "Virology Maintenance"
+	icon_state = "maint_viro"
+
+/area/maintenance/xeno
+	name = "Xeno Maintenance"
+	icon_state = "maint_xeno"
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 
@@ -1099,6 +1147,9 @@ var/list/ghostteleportlocs = list()
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
 
+/area/maintenance/foresolar
+	name = "Fore Solar Maintenance"
+	icon_state = "SolarcontrolA"
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
