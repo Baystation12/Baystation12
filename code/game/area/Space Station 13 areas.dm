@@ -1147,6 +1147,9 @@ var/list/ghostteleportlocs = list()
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
 
+/area/maintenance/foresolar
+	name = "Fore Solar Maintenance"
+	icon_state = "SolarcontrolA"
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"
