@@ -252,10 +252,10 @@
 			open_hatch = 0
 			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
 	if (open_hatch)
-		if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
+		if (istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 			building_terminal = 1
 			var/obj/item/stack/cable_coil/CC = W
-			if (CC.amount < 10)
+			if (CC.get_amount() < 10)
 				user << "<span class='warning'>You need more cables.</span>"
 				building_terminal = 0
 				return

@@ -50,7 +50,7 @@
 		else
 			GetMad()
 			get
-	if(istype(O, /obj/item/stack/medical))
+	if (istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)

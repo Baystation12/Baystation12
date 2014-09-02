@@ -231,31 +231,31 @@ turf/simulated/floor/proc/update_icon()
 	break_tile()
 
 /turf/simulated/floor/is_plasteel_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/plasteel))
+	if (istype(floor_tile, /obj/item/stack/tile/plasteel))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_light_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/light))
+	if (istype(floor_tile, /obj/item/stack/tile/light))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_grass_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/grass))
+	if (istype(floor_tile, /obj/item/stack/tile/grass))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_wood_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/wood))
+	if (istype(floor_tile, /obj/item/stack/tile/wood))
 		return 1
 	else
 		return 0
 
 /turf/simulated/floor/is_carpet_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/carpet))
+	if (istype(floor_tile, /obj/item/stack/tile/carpet))
 		return 1
 	else
 		return 0
@@ -351,7 +351,7 @@ turf/simulated/floor/proc/update_icon()
 	intact = 1
 	SetLuminosity(0)
 	if(T)
-		if(istype(T,/obj/item/stack/tile/plasteel))
+		if (istype(T, /obj/item/stack/tile/plasteel))
 			floor_tile = T
 			if (icon_regular_floor)
 				icon_state = icon_regular_floor
@@ -377,7 +377,7 @@ turf/simulated/floor/proc/update_icon()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/light))
+		if (istype(T, /obj/item/stack/tile/light))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -395,7 +395,7 @@ turf/simulated/floor/proc/update_icon()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/grass))
+		if (istype(T, /obj/item/stack/tile/grass))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -413,7 +413,7 @@ turf/simulated/floor/proc/update_icon()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/wood))
+		if (istype(T, /obj/item/stack/tile/wood))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -431,7 +431,7 @@ turf/simulated/floor/proc/update_icon()
 	burnt = 0
 	intact = 1
 	if(T)
-		if(istype(T,/obj/item/stack/tile/carpet))
+		if (istype(T, /obj/item/stack/tile/carpet))
 			floor_tile = T
 			update_icon()
 			levelupdate()
@@ -487,52 +487,53 @@ turf/simulated/floor/proc/update_icon()
 
 		return
 
-	if(istype(C, /obj/item/stack/rods))
+	if (istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
 		if (is_plating())
-			if (R.amount >= 2)
-				user << "\blue Reinforcing the floor..."
-				if(do_after(user, 30) && R && R.amount >= 2 && is_plating())
+			if (R.get_amount() < 2)
+				user << "<span class='warning'>You need more rods.</span>"
+				return
+			user << "\blue Reinforcing the floor..."
+			if(do_after(user, 30) && is_plating())
+				if (R.use(2))
 					ChangeTurf(/turf/simulated/floor/engine)
 					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
-					R.use(2)
-					return
+				return
 			else
-				user << "\red You need more rods."
 		else
 			user << "\red You must remove the plating first."
 		return
 
-	if(istype(C, /obj/item/stack/tile))
+	if (istype(C, /obj/item/stack/tile))
 		if(is_plating())
 			if(!broken && !burnt)
 				var/obj/item/stack/tile/T = C
-				floor_tile = new T.type
-				intact = 1
-				if(istype(T,/obj/item/stack/tile/light))
-					var/obj/item/stack/tile/light/L = T
-					var/obj/item/stack/tile/light/F = floor_tile
-					F.state = L.state
-					F.on = L.on
-				if(istype(T,/obj/item/stack/tile/grass))
-					for(var/direction in cardinal)
-						if(istype(get_step(src,direction),/turf/simulated/floor))
-							var/turf/simulated/floor/FF = get_step(src,direction)
-							FF.update_icon() //so siding gets updated properly
-				else if(istype(T,/obj/item/stack/tile/carpet))
-					for(var/direction in list(1,2,4,8,5,6,9,10))
-						if(istype(get_step(src,direction),/turf/simulated/floor))
-							var/turf/simulated/floor/FF = get_step(src,direction)
-							FF.update_icon() //so siding gets updated properly
-				T.use(1)
-				update_icon()
-				levelupdate()
-				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+				if (T.use(1))
+					floor_tile = new T.type
+					intact = 1
+					if (istype(T, /obj/item/stack/tile/light))
+						var/obj/item/stack/tile/light/L = T
+						var/obj/item/stack/tile/light/F = floor_tile
+						F.state = L.state
+						F.on = L.on
+					if (istype(T, /obj/item/stack/tile/grass))
+						for(var/direction in cardinal)
+							if(istype(get_step(src,direction),/turf/simulated/floor))
+								var/turf/simulated/floor/FF = get_step(src,direction)
+								FF.update_icon() //so siding gets updated properly
+					else if (istype(T, /obj/item/stack/tile/carpet))
+						for(var/direction in list(1,2,4,8,5,6,9,10))
+							if(istype(get_step(src,direction),/turf/simulated/floor))
+								var/turf/simulated/floor/FF = get_step(src,direction)
+								FF.update_icon() //so siding gets updated properly
+					update_icon()
+					levelupdate()
+					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			else
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
 
-	if(istype(C, /obj/item/stack/cable_coil))
+	if (istype(C, /obj/item/stack/cable_coil))
 		if(is_plating())
 			var/obj/item/stack/cable_coil/coil = C
 			coil.turf_place(src, user)

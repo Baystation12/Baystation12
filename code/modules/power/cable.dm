@@ -2,7 +2,7 @@
 
 /obj/machinery/power/attackby(obj/item/weapon/W, mob/user)
 
-	if(istype(W, /obj/item/stack/cable_coil))
+	if (istype(W, /obj/item/stack/cable_coil))
 
 		var/obj/item/stack/cable_coil/coil = W
 
@@ -148,7 +148,7 @@
 		return	// not needed, but for clarity
 
 
-	else if(istype(W, /obj/item/stack/cable_coil))
+	else if (istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/coil = W
 		coil.cable_join(src, user)
 

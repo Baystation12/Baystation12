@@ -99,11 +99,11 @@
 
 
 /obj/machinery/bot/floorbot/attackby(var/obj/item/W , mob/user as mob)
-	if(istype(W, /obj/item/stack/tile/plasteel))
+	if (istype(W, /obj/item/stack/tile/plasteel))
 		var/obj/item/stack/tile/plasteel/T = W
 		if(src.amount >= 50)
 			return
-		var/loaded = min(50-src.amount, T.amount)
+		var/loaded = min(50-src.amount, T.get_amount())
 		T.use(loaded)
 		src.amount += loaded
 		user << "<span class='notice'>You load [loaded] tiles into the floorbot. He now contains [src.amount] tiles.</span>"
@@ -257,9 +257,9 @@
 		src.path = new()
 
 	if(src.loc == src.target || src.loc == src.target.loc)
-		if(istype(src.target, /obj/item/stack/tile/plasteel))
+		if (istype(src.target, /obj/item/stack/tile/plasteel))
 			src.eattile(src.target)
-		else if(istype(src.target, /obj/item/stack/sheet/metal))
+		else if (istype(src.target, /obj/item/stack/sheet/metal))
 			src.maketile(src.target)
 		else if(istype(src.target, /turf/) && emagged < 2)
 			repair(src.target)
@@ -325,12 +325,12 @@
 			src.target = null
 			src.repairing = 0
 			return
-		if(src.amount + T.amount > 50)
+		if(src.amount + T.get_amount() > 50)
 			var/i = 50 - src.amount
 			src.amount += i
-			T.amount -= i
+			T.use(i)
 		else
-			src.amount += T.amount
+			src.amount += T.get_amount()
 			del(T)
 		src.updateicon()
 		src.target = null
@@ -339,7 +339,7 @@
 /obj/machinery/bot/floorbot/proc/maketile(var/obj/item/stack/sheet/metal/M)
 	if(!istype(M, /obj/item/stack/sheet/metal))
 		return
-	if(M.amount > 1)
+	if(M.get_amount() > 1)
 		return
 	visible_message("\red [src] begins to create tiles.")
 	src.repairing = 1
@@ -400,12 +400,15 @@
 		return
 	if(user.s_active)
 		user.s_active.close(user)
-	del(T)
-	var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
-	user.put_in_hands(B)
-	user << "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>"
-	user.drop_from_inventory(src)
-	del(src)
+	if (T.use(10))
+		var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
+		user.put_in_hands(B)
+		user << "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>"
+		user.drop_from_inventory(src)
+		del(src)
+	else
+		user << "<span class='warning'>You need 10 floortiles for a floorbot.</span>"
+	return
 
 /obj/item/weapon/toolbox_tiles/attackby(var/obj/item/W, mob/user as mob)
 	..()

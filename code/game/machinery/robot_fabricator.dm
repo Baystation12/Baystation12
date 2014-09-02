@@ -18,14 +18,14 @@
 			src.overlays += "fab-load-metal"
 			spawn(15)
 				if(O)
-					if(!O:amount)
+					if(!O:get_amount())
 						return
 					while(metal_amount < 150000 && O:amount)
 						src.metal_amount += O.matter["metal"] /*O:height * O:width * O:length * 100000.0*/
-						O:amount--
+						O:use(1)
 						count++
 
-					if (O:amount < 1)
+					if (O:get_amount() < 1)
 						del(O)
 
 					user << "You insert [count] metal sheet\s into the fabricator."

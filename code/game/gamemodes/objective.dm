@@ -891,24 +891,24 @@ datum/objective/heist/salvage
 		for(var/obj/item/O in locate(/area/shuttle/vox/station))
 
 			var/obj/item/stack/sheet/S
-			if(istype(O,/obj/item/stack/sheet))
+			if (istype(O, /obj/item/stack/sheet))
 				if(O.name == target)
 					S = O
-					total_amount += S.amount
+					total_amount += S.get_amount()
 			for(var/obj/I in O.contents)
-				if(istype(I,/obj/item/stack/sheet))
+				if (istype(I, /obj/item/stack/sheet))
 					if(I.name == target)
 						S = I
-						total_amount += S.amount
+						total_amount += S.get_amount()
 
 		var/datum/game_mode/heist/H = ticker.mode
 		for(var/datum/mind/raider in H.raiders)
 			if(raider.current)
 				for(var/obj/item/O in raider.current.get_contents())
-					if(istype(O,/obj/item/stack/sheet))
+					if (istype(O, /obj/item/stack/sheet))
 						if(O.name == target)
 							var/obj/item/stack/sheet/S = O
-							total_amount += S.amount
+							total_amount += S.get_amount()
 
 		if(total_amount >= target_amount) return 1
 		return 0

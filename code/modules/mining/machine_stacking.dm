@@ -109,7 +109,7 @@
 		var/turf/T = get_turf(input)
 		for(var/obj/item/O in T.contents)
 			if(!O) return
-			if(istype(O,/obj/item/stack))
+			if (istype(O, /obj/item/stack))
 				if(!isnull(stack_storage[O.name]))
 					stack_storage[O.name]++
 					O.loc = null
