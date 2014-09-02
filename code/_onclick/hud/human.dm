@@ -532,3 +532,15 @@
 					break //5 slots available, so no more can be added.
 			num++
 	src.client.screen += src.hud_used.item_action_list
+
+//Used for new human mobs created by cloning/goleming/etc.
+/mob/living/carbon/human/proc/set_cloned_appearance()
+	f_style = "Shaved"
+	if(dna.species == "Human") //no more xenos losing ears/tentacles
+		h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
+	undershirt = undershirt_t.Find("None")
+	if(gender == MALE)
+		underwear = underwear_m.Find("None")
+	else
+		underwear = underwear_f.Find("None")
+	regenerate_icons()
