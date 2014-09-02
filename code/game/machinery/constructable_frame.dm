@@ -36,16 +36,16 @@
 			if(1)
 				if(istype(P, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = P
-					if(C.amount >= 5)
-						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						user << "\blue You start to add cables to the frame."
-						if(do_after(user, 20))
-							if(C)
-								C.amount -= 5
-								if(!C.amount) del(C)
-								user << "\blue You add cables to the frame."
-								state = 2
-								icon_state = "box_1"
+					if (C.get_amount() < 5)
+						user << "<span class='warning'>You need five lengths of cable to add them to the frame.</span>"
+						return
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					user << "<span class='notice'>You start to add cables to the frame.</span>"
+					if(do_after(user, 20) && state == 1)
+						if(C.use(5))
+							user << "<span class='notice'>You add cables to the frame.</span>"
+							state = 2
+							icon_state = "box_1"
 				else
 					if(istype(P, /obj/item/weapon/wrench))
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -134,7 +134,7 @@
 									playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 									if(istype(P, /obj/item/stack/cable_coil))
 										var/obj/item/stack/cable_coil/CP = P
-										if(CP.amount > 1)
+										if(CP.get_amount() > 1)
 											var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
 											var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src)
 											CC.amount = camt

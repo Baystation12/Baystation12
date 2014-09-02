@@ -1125,20 +1125,16 @@ table tr:first-child th:first-child { border: none;}
 
 		if(1)
 			if(istype(W, /obj/item/stack/cable_coil))
-				var/obj/item/stack/cable_coil/coil = W
-				if(coil.amount < 5)
-					user << "You need more cable for this!"
+				var/obj/item/stack/cable_coil/C = W
+				if (C.use(5))
+					user << "<span class='notice'>You wire \the [src].</span>"
+					buildstage = 2
+					update_icon()
+					first_run()
 					return
-
-				user << "You wire \the [src]!"
-				coil.amount -= 5
-				if(!coil.amount)
-					del(coil)
-
-				buildstage = 2
-				update_icon()
-				first_run()
-				return
+				else
+					user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+					return
 
 			else if(istype(W, /obj/item/weapon/crowbar))
 				user << "You start prying out the circuit."
@@ -1316,19 +1312,14 @@ FIRE ALARM
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
 			if(1)
 				if(istype(W, /obj/item/stack/cable_coil))
-					var/obj/item/stack/cable_coil/coil = W
-					if(coil.amount < 5)
-						user << "You need more cable for this!"
+					var/obj/item/stack/cable_coil/C = W
+					if (C.use(5))
+						user << "<span class='notice'>You wire \the [src].</span>"
+						buildstage = 2
 						return
-
-					coil.amount -= 5
-					if(!coil.amount)
-						del(coil)
-
-					buildstage = 2
-					user << "You wire \the [src]!"
-					update_icon()
-
+					else
+						user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+						return
 				else if(istype(W, /obj/item/weapon/crowbar))
 					user << "You pry out the circuit!"
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)

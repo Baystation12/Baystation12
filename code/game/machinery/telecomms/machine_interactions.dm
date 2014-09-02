@@ -26,9 +26,9 @@
 	if(istype(P, /obj/item/stack/nanopaste))
 		var/obj/item/stack/nanopaste/T = P
 		if (integrity < 100)               								//Damaged, let's repair!
-			integrity = between(0, integrity + rand(10,20), 100)
-			T.use(1)
-			usr << "You apply the Nanopaste to [src], repairing some of the damage."
+			if (T.use(1))
+				integrity = between(0, integrity + rand(10,20), 100)
+				usr << "You apply the Nanopaste to [src], repairing some of the damage."
 		else
 			usr << "This machine is already in perfect condition."
 		return
@@ -64,14 +64,12 @@
 		if(3)
 			if(istype(P, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/A = P
-				if(A.amount >= 5)
-					user << "You insert the cables."
-					A.amount -= 5
-					if(A.amount <= 0)
-						user.drop_item()
-						del(A)
-					construct_op --
+				if (A.use(5))
+					user << "<span class='notice'>You insert the cables.</span>"
+					construct_op--
 					stat &= ~BROKEN // the machine's not borked anymore!
+				else
+					user << "<span class='warning'>You need five coils of wire for this.</span>"
 			if(istype(P, /obj/item/weapon/crowbar))
 				user << "You begin prying out the circuit board other components..."
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
