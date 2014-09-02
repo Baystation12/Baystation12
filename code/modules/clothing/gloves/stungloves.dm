@@ -5,8 +5,8 @@
 		return
 	
 	//add wires
-	if(istype(W, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = W
+	if(istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
 		if (clipped)
 			user << "<span class='notice'>The [src] are too badly mangled for wiring.</span>"
 			return
@@ -15,7 +15,7 @@
 			user << "<span class='notice'>The [src] are already wired.</span>"
 			return
 			
-		if(C.amount < 2)
+		if(C.get_amount() < 2)
 			user << "<span class='notice'>There is not enough wire to cover the [src].</span>"
 			return
 			

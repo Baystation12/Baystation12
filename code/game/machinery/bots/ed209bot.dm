@@ -729,14 +729,21 @@ Auto Patrol: []"},
 	return threatcount
 
 /obj/machinery/bot/ed209/Bump(M as mob|obj) //Leave no door unopened!
-	if ((istype(M, /obj/machinery/door)) && (!isnull(src.botcard)))
+	if ((istype(M, /obj/machinery/door)) && !isnull(src.botcard))
 		var/obj/machinery/door/D = M
 		if (!istype(D, /obj/machinery/door/firedoor) && D.check_access(src.botcard) && !istype(D,/obj/machinery/door/poddoor))
 			D.open()
 			src.frustration = 0
-	else if ((istype(M, /mob/living/)) && (!src.anchored))
-		src.loc = M:loc
-		src.frustration = 0
+	else if(!src.anchored)
+		if ((istype(M, /mob/living/)))
+			var/mob/living/O = M
+			src.loc = O.loc
+			src.frustration = 0
+		else if (istype(M, /obj/machinery/bot))
+			var/obj/machinery/bot/B = M
+			if (B.dir != src.dir) // Avoids issues if two bots are currently patrolling in the same direction
+				src.loc = B.loc
+				src.frustration = 0
 	return
 
 /* terrible
@@ -952,16 +959,18 @@ Auto Patrol: []"},
 				icon_state = "[lasercolor]ed209_prox"
 
 		if(6)
-			if( istype(W, /obj/item/weapon/cable_coil) )
-				var/obj/item/weapon/cable_coil/coil = W
-				var/turf/T = get_turf(user)
-				user << "<span class='notice'>You start to wire [src]...</span>"
-				sleep(40)
-				if(get_turf(user) == T && build_step == 6)
-					coil.use(1)
-					build_step++
-					user << "<span class='notice'>You wire the ED-209 assembly.</span>"
-					name = "wired ED-209 assembly"
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/C = W
+				if (C.get_amount() < 1)
+					user << "<span class='warning'>You need one coil of wire to do wire [src].</span>"
+					return
+				user << "<span class='notice'>You start to wire [src].</span>"
+				if (do_after(user, 40) && build_step == 6)
+					if (C.use(1))
+						build_step++
+						user << "<span class='notice'>You wire the ED-209 assembly.</span>"
+						name = "wired ED-209 assembly"
+				return
 
 		if(7)
 			switch(lasercolor)

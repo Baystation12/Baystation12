@@ -7,17 +7,20 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 /datum/emergency_shuttle_controller
 	var/datum/shuttle/ferry/emergency/shuttle
 	var/list/escape_pods
-	
+
 	var/launch_time			//the time at which the shuttle will be launched
 	var/auto_recall = 0		//if set, the shuttle will be auto-recalled
 	var/auto_recall_time	//the time at which the shuttle will be auto-recalled
 	var/evac = 0			//1 = emergency evacuation, 0 = crew transfer
 	var/wait_for_launch = 0	//if the shuttle is waiting to launch
 	var/autopilot = 1		//set to 0 to disable the shuttle automatically launching
-	
+
 	var/deny_shuttle = 0	//allows admins to prevent the shuttle from being called
 	var/departed = 0		//if the shuttle has left the station at least once
 
+	var/datum/announcement/priority/emergency_shuttle_docked = new(0, new_sound = sound('sound/AI/shuttledock.ogg'))
+	var/datum/announcement/priority/emergency_shuttle_called = new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
+	var/datum/announcement/priority/emergency_shuttle_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
 /datum/emergency_shuttle_controller/proc/process()
 	if (wait_for_launch)
@@ -25,28 +28,28 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()
-			
+
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
 					if (!pod.arming_controller || pod.arming_controller.armed)
 						pod.launch(src)
-			
+
 			if (autopilot)
 				shuttle.launch(src)
 
 //called when the shuttle has arrived.
+
 /datum/emergency_shuttle_controller/proc/shuttle_arrived()
 	if (!shuttle.location)	//at station
 		if (autopilot)
 			set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
-			
+
 			if (evac)
-				captain_announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
-				world << sound('sound/AI/shuttledock.ogg')
+				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
 			else
-				captain_announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(emergency_shuttle.estimate_launch_time()/60,1)] minutes.")
-		
+				priority_announcement.Announce("The scheduled Crew Transfer Shuttle has docked with the station. It will depart in approximately [round(emergency_shuttle.estimate_launch_time()/60,1)] minutes.")
+
 		//arm the escape pods
 		if (evac)
 			for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
@@ -64,18 +67,17 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 //calls the shuttle for an emergency evacuation
 /datum/emergency_shuttle_controller/proc/call_evac()
 	if(!can_call()) return
-	
+
 	//set the launch timer
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
-	
+
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
-	
+
 	evac = 1
-	captain_announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
-	world << sound('sound/AI/shuttlecalled.ogg')
+	emergency_shuttle_called.Announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 	for(var/area/A in world)
 		if(istype(A, /area/hallway))
 			A.readyalert()
@@ -88,11 +90,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
-	
+
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
-	
-	captain_announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
+
+	priority_announcement.Announce("A crew transfer has been scheduled. The shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
@@ -102,15 +104,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.cancel_launch(src)
 
 	if (evac)
-		captain_announce("The emergency shuttle has been recalled.")
-		world << sound('sound/AI/shuttlerecalled.ogg')
-		
+		emergency_shuttle_recalled.Announce("The emergency shuttle has been recalled.")
+
 		for(var/area/A in world)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		evac = 0
 	else
-		captain_announce("The scheduled crew transfer has been cancelled.")
+		priority_announcement.Announce("The scheduled crew transfer has been cancelled.")
 
 /datum/emergency_shuttle_controller/proc/can_call()
 	if (deny_shuttle)
@@ -203,14 +204,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		if (shuttle.has_arrive_time())
 			var/timeleft = emergency_shuttle.estimate_arrival_time()
 			return "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
-		
+
 		if (waiting_to_leave())
 			if (shuttle.moving_status == SHUTTLE_WARMUP)
 				return "Departing..."
-			
+
 			var/timeleft = emergency_shuttle.estimate_launch_time()
 			return "ETD-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
-	
+
 	return ""
 /*
 	Some slapped-together star effects for maximum spess immershuns. Basically consists of a

@@ -41,27 +41,6 @@
 
 	usr << browse(output,"window=airreport")
 
-
-/client/proc/air_status(turf/target as turf)
-	set category = "Debug"
-	set name = "Display Air Status"
-
-	/*(!isturf(target))
-		return
-
-	var/datum/gas_mixture/GM = target.return_air()
-	var/burning = 0
-	if(istype(target, /turf/simulated))
-		var/turf/simulated/T = target
-		if(T.active_hotspot)
-			burning = 1
-
-	usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.phoron] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
-	for(var/datum/gas/trace_gas in GM.trace_gases)
-		usr << "[trace_gas.type]: [trace_gas.moles]"
-	feedback_add_details("admin_verb","DAST") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	*/
-
 /client/proc/fix_next_move()
 	set category = "Debug"
 	set name = "Unfreeze Everyone"
@@ -97,17 +76,6 @@
 	set category = "Debug"
 	set name = "Radio report"
 
-	var/filters = list(
-		"1" = "RADIO_TO_AIRALARM",
-		"2" = "RADIO_FROM_AIRALARM",
-		"3" = "RADIO_CHAT",
-		"4" = "RADIO_ATMOSIA",
-		"5" = "RADIO_NAVBEACONS",
-		"6" = "RADIO_AIRLOCK",
-		"7" = "RADIO_SECBOT",
-		"8" = "RADIO_MULEBOT",
-		"_default" = "NO_FILTER"
-		)
 	var/output = "<b>Radio Report</b><hr>"
 	for (var/fq in radio_controller.frequencies)
 		output += "<b>Freq: [fq]</b><br>"
@@ -118,9 +86,9 @@
 		for (var/filter in fqs.devices)
 			var/list/f = fqs.devices[filter]
 			if (!f)
-				output += "&nbsp;&nbsp;[filters[filter]]: ERROR<br>"
+				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filters[filter]]: [f.len]<br>"
+			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
 			for (var/device in f)
 				if (isobj(device))
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device:loc)])<br>"
@@ -145,7 +113,7 @@
 	set category = "Debug"
 
 	if(!check_rights(R_SERVER)) return
-	
+
 	message_admins("[usr] manually reloaded Mentors")
 	world.load_mods()
 

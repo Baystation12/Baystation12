@@ -40,16 +40,16 @@ obj/machinery/air_sensor
 				signal.data["temperature"] = round(air_sample.temperature,0.1)
 
 			if(output>4)
-				var/total_moles = air_sample.total_moles()
+				var/total_moles = air_sample.total_moles
 				if(total_moles > 0)
 					if(output&4)
-						signal.data["oxygen"] = round(100*air_sample.oxygen/total_moles,0.1)
+						signal.data["oxygen"] = round(100*air_sample.gas["oxygen"]/total_moles,0.1)
 					if(output&8)
-						signal.data["phoron"] = round(100*air_sample.phoron/total_moles,0.1)
+						signal.data["phoron"] = round(100*air_sample.gas["phoron"]/total_moles,0.1)
 					if(output&16)
-						signal.data["nitrogen"] = round(100*air_sample.nitrogen/total_moles,0.1)
+						signal.data["nitrogen"] = round(100*air_sample.gas["nitrogen"]/total_moles,0.1)
 					if(output&32)
-						signal.data["carbon_dioxide"] = round(100*air_sample.carbon_dioxide/total_moles,0.1)
+						signal.data["carbon_dioxide"] = round(100*air_sample.gas["carbon_dioxide"]/total_moles,0.1)
 				else
 					signal.data["oxygen"] = 0
 					signal.data["phoron"] = 0
@@ -85,6 +85,7 @@ obj/machinery/computer/general_air_control
 
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
+	circuit = /obj/item/weapon/circuitboard/air_management
 
 	attack_hand(mob/user)
 		if(..(user))
@@ -96,39 +97,6 @@ obj/machinery/computer/general_air_control
 	process()
 		..()
 		src.updateUsrDialog()
-
-	attackby(I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/screwdriver))
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20))
-				if (src.stat & BROKEN)
-					user << "\blue The broken glass falls out."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					new /obj/item/weapon/shard( src.loc )
-					var/obj/item/weapon/circuitboard/air_management/M = new /obj/item/weapon/circuitboard/air_management( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					M.frequency = src.frequency
-					A.circuit = M
-					A.state = 3
-					A.icon_state = "3"
-					A.anchored = 1
-					del(src)
-				else
-					user << "\blue You disconnect the monitor."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					var/obj/item/weapon/circuitboard/air_management/M = new /obj/item/weapon/circuitboard/air_management( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					M.frequency = src.frequency
-					A.circuit = M
-					A.state = 4
-					A.icon_state = "4"
-					A.anchored = 1
-					del(src)
-		else
-			src.attack_hand(user)
-		return
 
 	receive_signal(datum/signal/signal)
 		if(!signal || signal.encryption) return
@@ -196,6 +164,7 @@ obj/machinery/computer/general_air_control
 		var/list/output_info
 
 		var/pressure_setting = ONE_ATMOSPHERE * 45
+		circuit = /obj/item/weapon/circuitboard/air_management/tank_control
 
 
 		return_text()
@@ -295,39 +264,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 		var/cutoff_temperature = 2000
 		var/on_temperature = 1200
-
-		attackby(I as obj, user as mob)
-			if(istype(I, /obj/item/weapon/screwdriver))
-				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				if(do_after(user, 20))
-					if (src.stat & BROKEN)
-						user << "\blue The broken glass falls out."
-						var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-						new /obj/item/weapon/shard( src.loc )
-						var/obj/item/weapon/circuitboard/injector_control/M = new /obj/item/weapon/circuitboard/injector_control( A )
-						for (var/obj/C in src)
-							C.loc = src.loc
-						M.frequency = src.frequency
-						A.circuit = M
-						A.state = 3
-						A.icon_state = "3"
-						A.anchored = 1
-						del(src)
-					else
-						user << "\blue You disconnect the monitor."
-						var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-						var/obj/item/weapon/circuitboard/injector_control/M = new /obj/item/weapon/circuitboard/injector_control( A )
-						for (var/obj/C in src)
-							C.loc = src.loc
-						M.frequency = src.frequency
-						A.circuit = M
-						A.state = 4
-						A.icon_state = "4"
-						A.anchored = 1
-						del(src)
-			else
-				src.attack_hand(user)
-			return
+		circuit = /obj/item/weapon/circuitboard/air_management/injector_control
 
 		process()
 			if(automation)

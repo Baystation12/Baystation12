@@ -93,10 +93,11 @@
 	return (popping!=0)
 
 /obj/machinery/turret/power_change()
+	..()
 	if(stat & BROKEN)
 		icon_state = "grey_target_prism"
 	else
-		if( powered() )
+		if( !(stat & NOPOWER) )
 			if (src.enabled)
 				if (src.lasers)
 					icon_state = "orange_target_prism"
@@ -435,8 +436,9 @@
 
 
 
-/obj/machinery/turretid/Topic(href, href_list)
-	..()
+/obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
+	if(..(href, href_list))
+		return
 	if (src.locked)
 		if (!istype(usr, /mob/living/silicon))
 			usr << "Control panel is locked!"
@@ -448,7 +450,8 @@
 		else if (href_list["toggleLethal"])
 			src.lethal = !src.lethal
 			src.updateTurrets()
-	src.attack_hand(usr)
+	if(!nowindow)
+		src.attack_hand(usr)
 
 /obj/machinery/turretid/proc/updateTurrets()
 	if(control_area)

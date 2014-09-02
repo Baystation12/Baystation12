@@ -263,29 +263,35 @@
 	/*		Power Monitor (Mode: 43 / 433)			*/
 	if(mode==43 || mode==433)
 		var/pMonData[0]
+		var/apcData[0]
 		for(var/obj/machinery/power/monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
-				pMonData[++pMonData.len] = list ("Name" = pMon.name, "ref" = "\ref[pMon]")
+				var/turf/monitorturf = locate(pMon.x,pMon.y,pMon.z)
+				var/area/monitorarea = monitorturf.loc
+				pMonData[++pMonData.len] = list ("Name" = html_encode(monitorarea ? pMon.name + " in " + monitorarea.name : pMon.name), "ref" = "\ref[pMon]")
 				if(isnull(powmonitor)) powmonitor = pMon
 
 		values["powermonitors"] = pMonData
 
-		values["poweravail"] = powmonitor.powernet.avail
-		values["powerload"] = num2text(powmonitor.powernet.viewload,10)
+		if (!isnull(powmonitor.powernet))
+			values["powerconnected"] = 1
+			values["poweravail"] = powmonitor.powernet.avail
+			values["powerload"] = num2text(powmonitor.powernet.viewload,10)
+			var/list/L = list()
+			for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
+				if(istype(term.master, /obj/machinery/power/apc))
+					var/obj/machinery/power/apc/A = term.master
+					L += A
 
-		var/list/L = list()
-		for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
-			if(istype(term.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/A = term.master
-				L += A
+			var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
+			var/list/chg = list(0,1,1)	// Charging: nope, charging, full
+			for(var/obj/machinery/power/apc/A in L)
+				apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
 
-		var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
-		var/list/chg = list(0,1,1)	// Charging: nope, charging, full
-		var/apcData[0]
-		for(var/obj/machinery/power/apc/A in L)
-			apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
+			values["apcs"] = apcData
+		else
+			values["powerconnected"] = 0
 
-		values["apcs"] = apcData
 
 
 
@@ -577,10 +583,10 @@
 				if("alert")
 					post_status("alert", href_list["alert"])
 				if("setmsg1")
-					message1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", message1) as text|null), 1, 40)), 40)
+					message1 = input("Line 1", "Enter Message Text", message1) as text|null
 					updateSelfDialog()
 				if("setmsg2")
-					message2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", message2) as text|null), 1, 40)), 40)
+					message2 = input("Line 2", "Enter Message Text", message2) as text|null
 					updateSelfDialog()
 				else
 					post_status(href_list["statdisp"])

@@ -78,6 +78,13 @@ var/global/economy_init = 0
 		return 2
 
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
+	newChannel.channel_name = "Public Station Announcements"
+	newChannel.author = "Automated Announcement Listing"
+	newChannel.locked = 1
+	newChannel.is_admin_channel = 1
+	news_network.network_channels += newChannel
+
+	newChannel = new /datum/feed_channel
 	newChannel.channel_name = "Nyx Daily"
 	newChannel.author = "CentComm Minister of Information"
 	newChannel.locked = 1

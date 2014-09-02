@@ -1,3 +1,20 @@
+var/global/list/holodeck_programs = list(
+	"emptycourt" = /area/holodeck/source_emptycourt,		\
+	"boxingcourt" =	/area/holodeck/source_boxingcourt,	\
+	"basketball" =	/area/holodeck/source_basketball,	\
+	"thunderdomecourt" =	/area/holodeck/source_thunderdomecourt,	\
+	"beach" =	/area/holodeck/source_beach,	\
+	"desert" =	/area/holodeck/source_desert,	\
+	"space" =	/area/holodeck/source_space,	\
+	"picnicarea" = /area/holodeck/source_picnicarea,	\
+	"snowfield" =	/area/holodeck/source_snowfield,	\
+	"theatre" =	/area/holodeck/source_theatre,	\
+	"meetinghall" =	/area/holodeck/source_meetinghall,	\
+	"burntest" = 	/area/holodeck/source_burntest,	\
+	"wildlifecarp" = 	/area/holodeck/source_wildlife,	\
+	"turnoff" = 	/area/holodeck/source_plating	\
+	)
+
 /obj/machinery/computer/HolodeckControl
 	name = "Holodeck Control Computer"
 	desc = "A computer used to control a nearby holodeck."
@@ -8,7 +25,20 @@
 	var/list/holographic_items = list()
 	var/damaged = 0
 	var/last_change = 0
-
+	var/list/supported_programs = list( \
+	"Empty Court" = "emptycourt", \
+	"Boxing Court"="boxingcourt",	\
+	"Basketball Court" = "basketball",	\
+	"Thunderdome Court" = "thunderdomecourt",	\
+	"Beach" = "beach",	\
+	"Desert" = "desert",	\
+	"Space" = "space",	\
+	"Picnic Area" = "picnicarea",	\
+	"Snow Field" = "snowfield",	\
+	"Theatre" = "theatre",	\
+	"Meeting Hall" = "meetinghall"	\
+	)
+	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "ildlife Simulation" = "wildlifecarp")
 
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
@@ -23,44 +53,30 @@
 		user.set_machine(src)
 		var/dat
 
-
 		dat += "<B>Holodeck Control System</B><BR>"
 		dat += "<HR>Current Loaded Programs:<BR>"
-
-		dat += "<A href='?src=\ref[src];emptycourt=1'>((Empty Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];boxingcourt=1'>((Boxing Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];basketball=1'>((Basketball Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];thunderdomecourt=1'>((Thunderdome Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];beach=1'>((Beach)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];desert=1'>((Desert)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];space=1'>((Space)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];picnicarea=1'>((Picnic Area)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];snowfield=1'>((Snow Field)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];theatre=1'>((Theatre)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];meetinghall=1'>((Meeting Hall)</font>)</A><BR>"
-//		dat += "<A href='?src=\ref[src];turnoff=1'>((Shutdown System)</font>)</A><BR>"
+		for(var/prog in supported_programs)
+			dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>(([prog]))</A><BR>"
 
 		dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
-		if(emagged)
-			dat += "<A href='?src=\ref[src];burntest=1'>(<font color=red>Begin Atmospheric Burn Simulation</font>)</A><BR>"
-			dat += "Ensure the holodeck is empty before testing.<BR>"
-			dat += "<BR>"
-			dat += "<A href='?src=\ref[src];wildlifecarp=1'>(<font color=red>Begin Wildlife Simulation</font>)</A><BR>"
-			dat += "Ensure the holodeck is empty before testing.<BR>"
-			dat += "<BR>"
-			if(issilicon(user))
+		if(issilicon(user))
+			if(emagged)
 				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
+			else
+				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+
+		if(emagged)
+			for(var/prog in restricted_programs)
+				dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
+				dat += "Ensure the holodeck is empty before testing.<BR>"
+				dat += "<BR>"
 			dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
 		else
-			if(issilicon(user))
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
-			dat += "<BR>"
 			dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
 
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
-
 
 		return
 
@@ -71,77 +87,12 @@
 		if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 			usr.set_machine(src)
 
-			if(href_list["emptycourt"])
-				target = locate(/area/holodeck/source_emptycourt)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["boxingcourt"])
-				target = locate(/area/holodeck/source_boxingcourt)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["basketball"])
-				target = locate(/area/holodeck/source_basketball)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["thunderdomecourt"])
-				target = locate(/area/holodeck/source_thunderdomecourt)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["beach"])
-				target = locate(/area/holodeck/source_beach)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["desert"])
-				target = locate(/area/holodeck/source_desert)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["space"])
-				target = locate(/area/holodeck/source_space)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["picnicarea"])
-				target = locate(/area/holodeck/source_picnicarea)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["snowfield"])
-				target = locate(/area/holodeck/source_snowfield)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["theatre"])
-				target = locate(/area/holodeck/source_theatre)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["meetinghall"])
-				target = locate(/area/holodeck/source_meetinghall)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["turnoff"])
-				target = locate(/area/holodeck/source_plating)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["burntest"])
-				if(!emagged)	return
-				target = locate(/area/holodeck/source_burntest)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["wildlifecarp"])
-				if(!emagged)	return
-				target = locate(/area/holodeck/source_wildlife)
-				if(target)
-					loadProgram(target)
+			if(href_list["program"])
+				var/prog = href_list["program"]
+				if(prog in holodeck_programs)
+					target = locate(holodeck_programs[prog])
+					if(target)
+						loadProgram(target)
 
 			else if(href_list["AIoverride"])
 				if(!issilicon(usr))	return
@@ -158,38 +109,7 @@
 		return
 
 
-
 /obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-//Warning, uncommenting this can have concequences. For example, deconstructing the computer may cause holographic eswords to never derez
-
-/*		if(istype(D, /obj/item/weapon/screwdriver))
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20))
-				if (src.stat & BROKEN)
-					user << "\blue The broken glass falls out."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					new /obj/item/weapon/shard( src.loc )
-					var/obj/item/weapon/circuitboard/comm_traffic/M = new /obj/item/weapon/circuitboard/comm_traffic( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					A.circuit = M
-					A.state = 3
-					A.icon_state = "3"
-					A.anchored = 1
-					del(src)
-				else
-					user << "\blue You disconnect the monitor."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					var/obj/item/weapon/circuitboard/comm_traffic/M = new /obj/item/weapon/circuitboard/comm_traffic( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					A.circuit = M
-					A.state = 4
-					A.icon_state = "4"
-					A.anchored = 1
-					del(src)
-
-*/
 	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
@@ -447,7 +367,7 @@
 
 	if(isrobot(user))
 		return
-		
+
 	..()
 
 /obj/structure/table/holotable/wood

@@ -264,10 +264,12 @@ Status: []<BR>"},
 	if(!anchored)
 		icon_state = "turretCover"
 		return
+	
+	..()
 	if(stat & BROKEN)
 		icon_state = "[lasercolor]destroyed_target_prism"
 	else
-		if( powered() )
+		if( !(stat & NOPOWER) )
 			if (on)
 				if (installation == /obj/item/weapon/gun/energy/laser || installation == /obj/item/weapon/gun/energy/pulse_rifle)
 					// laser guns and pulse rifles have an orange icon
@@ -277,11 +279,9 @@ Status: []<BR>"},
 					icon_state = "[lasercolor]target_prism"
 			else
 				icon_state = "[lasercolor]grey_target_prism"
-			stat &= ~NOPOWER
 		else
 			spawn(rand(0, 15))
 				src.icon_state = "[lasercolor]grey_target_prism"
-				stat |= NOPOWER
 
 
 
@@ -707,14 +707,14 @@ Status: []<BR>"},
 
 		if(1)
 			if(istype(W, /obj/item/stack/sheet/metal))
-				if(W:amount>=2) // requires 2 metal sheets
-					user << "\blue You add some metal armor to the interior frame."
+				var/obj/item/stack/sheet/metal/M = W
+				if (M.use(2))
+					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
-					W:amount -= 2
 					icon_state = "turret_frame2"
-					if(W:amount <= 0)
-						del(W)
-					return
+				else
+					user << "<span class='warning'>You need two sheets of metal to add armor ot the frame.</span>"
+				return
 
 			else if(istype(W, /obj/item/weapon/wrench))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -784,13 +784,13 @@ Status: []<BR>"},
 
 		if(6)
 			if(istype(W, /obj/item/stack/sheet/metal))
-				if(W:amount>=2)
-					user << "\blue You add some metal armor to the exterior frame."
+				var/obj/item/stack/sheet/metal/M = W
+				if (M.use(2))
+					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7
-					W:amount -= 2
-					if(W:amount <= 0)
-						del(W)
-					return
+				else
+					user << "<span class='warning'>You need two sheets of metal to add armor to the frame.</span>"
+				return
 
 			else if(istype(W, /obj/item/weapon/screwdriver))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)

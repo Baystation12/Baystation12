@@ -1,3 +1,5 @@
+var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
+
 /datum/job/captain
 	title = "Captain"
 	flag = CAPTAIN
@@ -32,13 +34,10 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/ids(H.back), slot_in_backpack)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		world << "<b>[H.real_name] is the captain!</b>"
-		var/datum/organ/external/affected = H.organs_by_name["head"]
-		affected.implants += L
-		L.part = affected
+		captain_announcement.Announce("All hands, captain [H.real_name] on deck!")
+
+		H.implant_loyalty(src)
+
 		return 1
 
 	get_access()

@@ -59,14 +59,13 @@
 
 
 /obj/machinery/suit_storage_unit/power_change()
-	if( powered() )
+	..()
+	if( !(stat & NOPOWER) )
 		src.ispowered = 1
-		stat &= ~NOPOWER
 		src.update_icon()
 	else
 		spawn(rand(0, 15))
 			src.ispowered = 0
-			stat |= NOPOWER
 			src.islocked = 0
 			src.isopen = 1
 			src.dump_everything()
