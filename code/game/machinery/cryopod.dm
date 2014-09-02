@@ -146,10 +146,10 @@ var/global/list/frozen_items = list()
 	density = 1
 	anchored = 1
 
-	var/mob/occupant = null      // Person waiting to be despawned.
-	var/orient_right = null      // Flips the sprite.
-	var/time_till_despawn = 9000 // 15 minutes-ish safe period before being despawned.
-	var/time_entered = 0         // Used to keep track of the safe period.
+	var/mob/occupant = null       // Person waiting to be despawned.
+	var/orient_right = null       // Flips the sprite.
+	var/time_till_despawn = 18000 // 30 minutes-ish safe period before being despawned.
+	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
 
 	// These items are preserved when the process() despawn proc occurs.
@@ -198,7 +198,7 @@ var/global/list/frozen_items = list()
 
 				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
 					for(var/obj/item/O in W.contents)
-						if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets you fuck!
+						if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
 							continue
 						O.loc = src
 
@@ -344,6 +344,7 @@ var/global/list/frozen_items = list()
 			src.add_fingerprint(M)
 
 /obj/machinery/cryopod/verb/eject()
+
 	set name = "Eject Pod"
 	set category = "Object"
 	set src in oview(1)
@@ -354,6 +355,14 @@ var/global/list/frozen_items = list()
 		icon_state = "body_scanner_0-r"
 	else
 		icon_state = "body_scanner_0"
+
+	//Eject any items that aren't meant to be in the pod.
+	var/list/items = src.contents
+	if(occupant) items -= occupant
+	if(announce) items -= announce
+
+	for(var/obj/item/W in items)
+		W.loc = get_turf(src)
 
 	src.go_out()
 	add_fingerprint(usr)

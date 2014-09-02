@@ -294,7 +294,7 @@
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 
 		var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
-		M.matter = 30
+		M.stored_matter = 30
 		src.modules += M
 
 		src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
