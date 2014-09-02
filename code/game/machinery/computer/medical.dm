@@ -78,8 +78,8 @@
 				if(3.0)
 					dat += text("<B>Records Maintenance</B><HR>\n<A href='?src=\ref[];back=1'>Backup To Disk</A><BR>\n<A href='?src=\ref[];u_load=1'>Upload From disk</A><BR>\n<A href='?src=\ref[];del_all=1'>Delete All Records</A><BR>\n<BR>\n<A href='?src=\ref[];screen=1'>Back</A>", src, src, src, src)
 				if(4.0)
-					var/icon/front = new(active1.fields["photo"], dir = SOUTH)
-					var/icon/side = new(active1.fields["photo"], dir = WEST)
+					var/icon/front = active1.fields["photo_front"]
+					var/icon/side = active1.fields["photo_side"]
 					user << browse_rsc(front, "front.png")
 					user << browse_rsc(side, "side.png")
 					dat += "<CENTER><B>Medical Record</B></CENTER><BR>"

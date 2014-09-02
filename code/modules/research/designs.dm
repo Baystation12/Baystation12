@@ -375,6 +375,16 @@ datum/design/aifixer
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/aifixer"
 
+// VERY VERY EXPENSIVE (needs diamonds and stuff)
+datum/design/aifixer
+	name = "Circuit Design (SMES Cell)"
+	desc = "Allows for the construction of circuit boards used to build an SMES Cell."
+	id = "smes_cell"
+	req_tech = list("powerstorage" = 7, "engineering" = 5) // Higher than obtained by deconstructing existing boards. Needs more RnD effor to make
+	build_type = IMPRINTER
+	materials = list("$glass" = 4000, "sacid" = 40, "$gold" = 1000, "$silver" = 1000, "$diamond" = 500)
+	build_path = "/obj/item/weapon/circuitboard/smes"
+
 ///////////////////////////////////
 //////////AI Module Disks//////////
 ///////////////////////////////////
@@ -1358,6 +1368,7 @@ datum/design/nanopaste
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/stack/nanopaste"
 
+/* // Removal of loyalty implants. Can't think of a way to add this to the config option.
 datum/design/implant_loyal
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
@@ -1366,6 +1377,7 @@ datum/design/implant_loyal
 	build_type = PROTOLATHE
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/weapon/implant/loyalty"
+*/
 
 datum/design/implant_chem
 	name = "chemical implant"

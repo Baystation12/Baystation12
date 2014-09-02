@@ -5,26 +5,39 @@
 /obj/item/weapon/grown // Grown weapons
 	name = "grown_weapon"
 	icon = 'icons/obj/weapons.dmi'
-	var/seed = ""
-	var/plantname = ""
-	var/productname = ""
-	var/species = ""
-	var/lifespan = 20
-	var/endurance = 15
-	var/maturation = 7
-	var/production = 7
-	var/yield = 2
+	var/plantname
 	var/potency = 1
-	var/plant_type = 0
-	New()
-		var/datum/reagents/R = new/datum/reagents(50)
-		reagents = R
-		R.my_atom = src
+
+/obj/item/weapon/grown/New()
+
+	..()
+
+	var/datum/reagents/R = new/datum/reagents(50)
+	reagents = R
+	R.my_atom = src
+
+	//Handle some post-spawn var stuff.
+	spawn(1)
+		// Fill the object up with the appropriate reagents.
+		if(!isnull(plantname))
+			var/datum/seed/S = seed_types[plantname]
+			if(!S || !S.chems)
+				return
+
+			potency = S.potency
+
+			for(var/rid in S.chems)
+				var/list/reagent_data = S.chems[rid]
+				var/rtotal = reagent_data[1]
+				if(reagent_data.len > 1 && potency > 0)
+					rtotal += round(potency/reagent_data[2])
+				reagents.add_reagent(rid,max(1,rtotal))
 
 /obj/item/weapon/grown/proc/changePotency(newValue) //-QualityVan
 	potency = newValue
 
 /obj/item/weapon/grown/log
+	name = "towercap"
 	name = "tower-cap log"
 	desc = "It's better than bad, it's good!"
 	icon = 'icons/obj/harvest.dmi'
@@ -35,9 +48,7 @@
 	w_class = 3.0
 	throw_speed = 3
 	throw_range = 3
-	plant_type = 2
 	origin_tech = "materials=1"
-	seed = "/obj/item/seeds/towermycelium"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -55,8 +66,8 @@
 			del(src)
 			return
 
-
 /obj/item/weapon/grown/sunflower // FLOWER POWER!
+	plantname = "sunflowers"
 	name = "sunflower"
 	desc = "It's beautiful! A certain person might beat you to death if you trample these."
 	icon = 'icons/obj/harvest.dmi'
@@ -68,40 +79,13 @@
 	w_class = 1.0
 	throw_speed = 1
 	throw_range = 3
-	plant_type = 1
-	seed = "/obj/item/seeds/sunflower"
-
 
 /obj/item/weapon/grown/sunflower/attack(mob/M as mob, mob/user as mob)
 	M << "<font color='green'><b> [user] smacks you with a sunflower!</font><font color='yellow'><b>FLOWER POWER<b></font>"
 	user << "<font color='green'> Your sunflower's </font><font color='yellow'><b>FLOWER POWER</b></font><font color='green'> strikes [M]</font>"
 
-/*
-/obj/item/weapon/grown/gibtomato
-	desc = "A plump tomato."
-	icon = 'icons/obj/harvest.dmi'
-	name = "Gib Tomato"
-	icon_state = "gibtomato"
-	damtype = "fire"
-	force = 0
-	flags = TABLEPASS
-	throwforce = 1
-	w_class = 2.0
-	throw_speed = 1
-	throw_range = 3
-	plant_type = 1
-	seed = "/obj/item/seeds/gibtomato"
-	New()
-		..()
-
-
-/obj/item/weapon/grown/gibtomato/New()
-	..()
-	src.gibs = new /obj/effect/gibspawner/human(get_turf(src))
-	src.gibs.attach(src)
-	src.smoke.set_up(10, 0, usr.loc)
-*/
 /obj/item/weapon/grown/nettle // -- Skie
+	plantname = "nettle"
 	desc = "It's probably <B>not</B> wise to touch it with bare hands..."
 	icon = 'icons/obj/weapons.dmi'
 	name = "nettle"
@@ -113,16 +97,11 @@
 	w_class = 2.0
 	throw_speed = 1
 	throw_range = 3
-	plant_type = 1
 	origin_tech = "combat=1"
-	seed = "/obj/item/seeds/nettleseed"
 	New()
 		..()
-		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", 1+round((potency / 50), 1))
-			reagents.add_reagent("sacid", round(potency, 1))
+		spawn(5)
 			force = round((5+potency/5), 1)
-
 
 /obj/item/weapon/grown/nettle/pickup(mob/living/carbon/human/user as mob)
 	if(!user.gloves)
@@ -135,7 +114,6 @@
 		else
 			user.take_organ_damage(0,force)
 
-
 /obj/item/weapon/grown/nettle/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if(force > 0)
@@ -145,14 +123,12 @@
 		usr << "All the leaves have fallen off the nettle from violent whacking."
 		del(src)
 
-
 /obj/item/weapon/grown/nettle/changePotency(newValue) //-QualityVan
 	potency = newValue
 	force = round((5+potency/5), 1)
 
-
-
 /obj/item/weapon/grown/deathnettle // -- Skie
+	plantname = "deathnettle"
 	desc = "The \red glowing \black nettle incites \red<B>rage</B>\black in you just from looking at it!"
 	icon = 'icons/obj/weapons.dmi'
 	name = "deathnettle"
@@ -164,21 +140,16 @@
 	w_class = 2.0
 	throw_speed = 1
 	throw_range = 3
-	plant_type = 1
-	seed = "/obj/item/seeds/deathnettleseed"
 	origin_tech = "combat=3"
 	attack_verb = list("stung")
 	New()
 		..()
-		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", 1+round((potency / 50), 1))
-			reagents.add_reagent("pacid", round(potency, 1))
+		spawn(5)
 			force = round((5+potency/2.5), 1)
 
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] is eating some of the [src.name]! It looks like \he's trying to commit suicide.</b>"
 		return (BRUTELOSS|TOXLOSS)
-
 
 /obj/item/weapon/grown/deathnettle/pickup(mob/living/carbon/human/user as mob)
 	if(!user.gloves)
@@ -192,7 +163,6 @@
 		if(prob(50))
 			user.Paralyse(5)
 			user << "\red You are stunned by the Deathnettle when you try picking it up!"
-
 
 /obj/item/weapon/grown/deathnettle/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(!..()) return
@@ -211,7 +181,6 @@
 			M.Weaken(force/15)
 		M.drop_item()
 
-
 /obj/item/weapon/grown/deathnettle/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 	if (force > 0)
@@ -221,12 +190,9 @@
 		usr << "All the leaves have fallen off the deathnettle from violent whacking."
 		del(src)
 
-
 /obj/item/weapon/grown/deathnettle/changePotency(newValue) //-QualityVan
 	potency = newValue
 	force = round((5+potency/2.5), 1)
-
-
 
 /obj/item/weapon/corncob
 	name = "corn cob"
@@ -238,7 +204,6 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
-
 
 /obj/item/weapon/corncob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()

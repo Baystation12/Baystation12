@@ -36,8 +36,7 @@
 			adjustOxyLoss(-1)
 
 		// Handle EMP-stun
-		if(stunned)
-			AdjustStunned(-1)
+		handle_stunned()
 
 		//stage = 1
 		//if (istype(src, /mob/living/silicon/ai)) // Are we not sure what we are?
@@ -174,6 +173,13 @@
 							sleep(50)
 							theAPC = null
 
+	regular_hud_updates()
+	switch(src.sensor_mode)
+		if (SEC_HUD)
+			process_sec_hud(src,0,src.eyeobj)
+		if (MED_HUD)
+			process_med_hud(src,0,src.eyeobj)
+
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
 		health = 100
@@ -183,3 +189,7 @@
 			health = 100 - getOxyLoss() - getToxLoss() - getBruteLoss()
 		else
 			health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
+
+/mob/living/silicon/ai/rejuvenate()
+	..()
+	add_ai_verbs(src)

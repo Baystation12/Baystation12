@@ -16,6 +16,8 @@ datum/controller/lighting
 	var/list/changed_turfs = list()
 	var/changed_turfs_workload_max = 0
 
+	var/list/changed_areas = list()
+
 datum/controller/lighting/New()
 	lighting_states = max( 0, length(icon_states(LIGHTING_ICON))-1 )
 	if(lighting_controller != src)
@@ -53,8 +55,17 @@ datum/controller/lighting/proc/process()
 				for(var/i=1, i<=changed_turfs.len, i++)
 					var/turf/T = changed_turfs[i]
 					if(T && T.lighting_changed)
+						changed_areas |= T.loc
 						T.shift_to_subarea()
 				changed_turfs.Cut()		// reset the changed list
+
+				for(var/i = 1; i <= changed_areas.len, i++)
+					var/area/A = changed_areas[i]
+					if(A.master != A && !A.contents.len)
+						A.related -= A
+						active_areas -= A
+						all_areas -= A
+				changed_areas.Cut()
 
 				process_cost = (world.timeofday - started)
 

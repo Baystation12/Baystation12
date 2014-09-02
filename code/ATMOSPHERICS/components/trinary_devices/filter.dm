@@ -1,124 +1,103 @@
-obj/machinery/atmospherics/trinary/filter
-	icon = 'icons/obj/atmospherics/filter.dmi'
-	icon_state = "intact_off"
+/obj/machinery/atmospherics/trinary/filter
+	icon = 'icons/atmos/filter.dmi'
+	icon_state = "map"
 	density = 0
+	level = 1
 
 	name = "Gas filter"
+	
+	use_power = 1
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
 
-	var/on = 0
 	var/temp = null // -- TLE
 
-	var/target_pressure = ONE_ATMOSPHERE
+	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
+	/*
+	Filter types:
+	-1: Nothing
+	 0: Phoron: Phoron, Oxygen Agent B
+	 1: Oxygen: Oxygen ONLY
+	 2: Nitrogen: Nitrogen ONLY
+	 3: Carbon Dioxide: Carbon Dioxide ONLY
+	 4: Sleeping Agent (N2O)
+	*/
 	var/filter_type = 0
-/*
-Filter types:
--1: Nothing
- 0: Phoron: Phoron, Oxygen Agent B
- 1: Oxygen: Oxygen ONLY
- 2: Nitrogen: Nitrogen ONLY
- 3: Carbon Dioxide: Carbon Dioxide ONLY
- 4: Sleeping Agent (N2O)
-*/
+	var/list/filtered_out = list()
+
 
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
 
-	proc
-		set_frequency(new_frequency)
-			radio_controller.remove_object(src, frequency)
-			frequency = new_frequency
-			if(frequency)
-				radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+/obj/machinery/atmospherics/trinary/filter/proc/set_frequency(new_frequency)
+	radio_controller.remove_object(src, frequency)
+	frequency = new_frequency
+	if(frequency)
+		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-	New()
-		if(radio_controller)
-			initialize()
-		..()
+/obj/machinery/atmospherics/trinary/filter/New()
+	..()
+	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
+	
+	if(radio_controller)
+		initialize()
 
-	update_icon()
-		if(stat & NOPOWER)
-			icon_state = "intact_off"
-		else if(node2 && node3 && node1)
-			icon_state = "intact_[on?("on"):("off")]"
+/obj/machinery/atmospherics/trinary/filter/update_icon()
+	if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
+		icon_state = "m"
+	else
+		icon_state = ""
+
+	if(!powered())
+		icon_state += "off"
+	else if(node2 && node3 && node1)
+		icon_state += on ? "on" : "off"
+	else
+		icon_state += "off"
+		on = 0
+
+/obj/machinery/atmospherics/trinary/filter/update_underlays()
+	if(..())
+		underlays.Cut()
+		var/turf/T = get_turf(src)
+		if(!istype(T))
+			return
+
+		add_underlay(T, node1, turn(dir, -180))
+
+		if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
+			add_underlay(T, node2, turn(dir, 90))
 		else
-			icon_state = "intact_off"
-			on = 0
+			add_underlay(T, node2, turn(dir, -90))
 
+		add_underlay(T, node3, dir)
+
+/obj/machinery/atmospherics/trinary/filter/hide(var/i)
+	update_underlays()
+
+/obj/machinery/atmospherics/trinary/filter/power_change()
+	var/old_stat = stat
+	..()
+	if(old_stat != stat)
+		update_icon()
+
+/obj/machinery/atmospherics/trinary/filter/process()
+	..()
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
 		return
-
-	power_change()
-		var/old_stat = stat
-		..()
-		if(old_stat != stat)
-			update_icon()
-
-	process()
-		..()
-		if(!on)
-			return 0
-
-		var/output_starting_pressure = air3.return_pressure()
-
-		if(output_starting_pressure >= target_pressure || air2.return_pressure() >= target_pressure )
-			//No need to mix if target is already full!
-			return 1
-
-		//Calculate necessary moles to transfer using PV=nRT
-
-		var/pressure_delta = target_pressure - output_starting_pressure
-		var/transfer_moles
-
-		if(air1.temperature > 0)
-			transfer_moles = pressure_delta*air3.volume/(air1.temperature * R_IDEAL_GAS_EQUATION)
-
-		//Actually transfer the gas
-
-		if(transfer_moles > 0)
-			var/datum/gas_mixture/removed = air1.remove(transfer_moles)
-
-			if(!removed)
-				return
-			var/datum/gas_mixture/filtered_out = new
-			filtered_out.temperature = removed.temperature
-
-			switch(filter_type)
-				if(0) //removing hydrocarbons
-					filtered_out.phoron = removed.phoron
-					removed.phoron = 0
-
-					if(removed.trace_gases.len>0)
-						for(var/datum/gas/trace_gas in removed.trace_gases)
-							if(istype(trace_gas, /datum/gas/oxygen_agent_b))
-								removed.trace_gases -= trace_gas
-								filtered_out.trace_gases += trace_gas
-
-				if(1) //removing O2
-					filtered_out.oxygen = removed.oxygen
-					removed.oxygen = 0
-
-				if(2) //removing N2
-					filtered_out.nitrogen = removed.nitrogen
-					removed.nitrogen = 0
-
-				if(3) //removing CO2
-					filtered_out.carbon_dioxide = removed.carbon_dioxide
-					removed.carbon_dioxide = 0
-
-				if(4)//removing N2O
-					if(removed.trace_gases.len>0)
-						for(var/datum/gas/trace_gas in removed.trace_gases)
-							if(istype(trace_gas, /datum/gas/sleeping_agent))
-								removed.trace_gases -= trace_gas
-								filtered_out.trace_gases += trace_gas
-
-				else
-					filtered_out = null
-
-
-			air2.merge(filtered_out)
-			air3.merge(removed)
-
+	
+	//Figure out the amount of moles to transfer
+	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
+	
+	var/power_draw = -1
+	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
+		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
+		
 		if(network2)
 			network2.update = 1
 
@@ -128,37 +107,40 @@ Filter types:
 		if(network1)
 			network1.update = 1
 
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else
+		handle_power_draw(power_draw)
+	
+	return 1
+
+/obj/machinery/atmospherics/trinary/filter/initialize()
+	set_frequency(frequency)
+	..()
+
+/obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if (!istype(W, /obj/item/weapon/wrench))
+		return ..()
+	var/datum/gas_mixture/int_air = return_air()
+	var/datum/gas_mixture/env_air = loc.return_air()
+	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+		user << "\red You cannot unwrench this [src], it too exerted due to internal pressure."
+		add_fingerprint(user)
 		return 1
-
-	initialize()
-		set_frequency(frequency)
-		..()
-
-	attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-		if (!istype(W, /obj/item/weapon/wrench))
-			return ..()
-		var/turf/T = src.loc
-		if (level==1 && isturf(T) && T.intact)
-			user << "\red You must remove the plating first."
-			return 1
-		var/datum/gas_mixture/int_air = return_air()
-		var/datum/gas_mixture/env_air = loc.return_air()
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			user << "\red You cannot unwrench this [src], it too exerted due to internal pressure."
-			add_fingerprint(user)
-			return 1
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		user << "\blue You begin to unfasten \the [src]..."
-		if (do_after(user, 40))
-			user.visible_message( \
-				"[user] unfastens \the [src].", \
-				"\blue You have unfastened \the [src].", \
-				"You hear ratchet.")
-			new /obj/item/pipe(loc, make_from=src)
-			del(src)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	user << "\blue You begin to unfasten \the [src]..."
+	if (do_after(user, 40))
+		user.visible_message( \
+			"[user] unfastens \the [src].", \
+			"\blue You have unfastened \the [src].", \
+			"You hear ratchet.")
+		new /obj/item/pipe(loc, make_from=src)
+		del(src)
 
 
-obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
+/obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 	if(..())
 		return
 
@@ -194,8 +176,10 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 			<A href='?src=\ref[src];filterset=3'>Carbon Dioxide</A><BR>
 			<A href='?src=\ref[src];filterset=4'>Nitrous Oxide</A><BR>
 			<A href='?src=\ref[src];filterset=-1'>Nothing</A><BR>
-			<HR><B>Desirable output pressure:</B>
-			[src.target_pressure]kPa | <a href='?src=\ref[src];set_press=1'>Change</a>
+			<HR>
+			<B>Set Flow Rate Limit:</B>
+			[src.set_flow_rate]L/s | <a href='?src=\ref[src];set_flow_rate=1'>Change</a><BR>
+			<B>Flow rate: </B>[round(last_flow_rate, 0.1)]L/s
 			"}
 /*
 		user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD>[dat]","window=atmo_filter")
@@ -211,18 +195,33 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 	onclose(user, "atmo_filter")
 	return
 
-obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
+/obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
 	if(..())
 		return
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	if(href_list["filterset"])
-		src.filter_type = text2num(href_list["filterset"])
+		filter_type = text2num(href_list["filterset"])
+		
+		filtered_out.Cut()	//no need to create new lists unnecessarily
+		switch(filter_type)
+			if(0) //removing hydrocarbons
+				filtered_out += "phoron"
+				filtered_out += "oxygen_agent_b"
+			if(1) //removing O2
+				filtered_out += "oxygen"
+			if(2) //removing N2
+				filtered_out += "nitrogen"
+			if(3) //removing CO2
+				filtered_out += "carbon_dioxide"
+			if(4)//removing N2O
+				filtered_out += "sleeping_agent"
+		
 	if (href_list["temp"])
 		src.temp = null
-	if(href_list["set_press"])
-		var/new_pressure = input(usr,"Enter new output pressure (0-4500kPa)","Pressure control",src.target_pressure) as num
-		src.target_pressure = max(0, min(4500, new_pressure))
+	if(href_list["set_flow_rate"])
+		var/new_flow_rate = input(usr,"Enter new flow rate (0-[air1.volume]L/s)","Flow Rate Control",src.set_flow_rate) as num
+		src.set_flow_rate = max(0, min(air1.volume, new_flow_rate))
 	if(href_list["power"])
 		on=!on
 	src.update_icon()
@@ -234,9 +233,8 @@ obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
 */
 	return
 
-obj/machinery/atmospherics/trinary/filter/m_filter
-	icon = 'icons/obj/atmospherics/m_filter.dmi'
-	icon_state = "intact_off"
+/obj/machinery/atmospherics/trinary/filter/m_filter
+	icon_state = "mmap"
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|EAST
@@ -253,7 +251,9 @@ obj/machinery/atmospherics/trinary/filter/m_filter/New()
 		if(WEST)
 			initialize_directions = WEST|SOUTH|EAST
 
-obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
+/obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
+	set_frequency(frequency)
+
 	if(node1 && node2 && node3) return
 
 	var/node1_connect = turn(dir, -180)
@@ -276,3 +276,4 @@ obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
 			break
 
 	update_icon()
+	update_underlays()

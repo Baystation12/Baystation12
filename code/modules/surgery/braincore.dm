@@ -157,7 +157,7 @@
 /datum/surgery_step/brain/hematoma
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/weapon/cable_coil = 75
+	/obj/item/stack/cable_coil = 75
 	)
 
 	min_duration = 90
@@ -271,8 +271,7 @@
 		if(target.cores >= 0)
 			new target.coretype(target.loc)
 		if(target.cores <= 0)
-			var/origstate = initial(target.icon_state)
-			target.icon_state = "[origstate] dead-nocore"
+			target.icon_state = "[target.colour] baby slime dead-nocore"
 
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)

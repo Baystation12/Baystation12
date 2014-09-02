@@ -127,14 +127,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			if(!(temp.status & ORGAN_BLEEDING) || temp.status & ORGAN_ROBOT)
 				continue
 			for(var/datum/wound/W in temp.wounds) if(W.bleeding())
-				blood_max += W.damage / 4
-			if(temp.status & ORGAN_DESTROYED && !(temp.status & ORGAN_GAUZED) && !temp.amputated)
-				blood_max += 20 //Yer missing a fucking limb.
+				blood_max += W.damage / 40
 			if (temp.open)
 				blood_max += 2  //Yer stomach is cut open
 		drip(blood_max)
 
-//Makes a blood drop, leaking certain amount of blood from the mob
+//Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt as num)
 
 	if(species && species.flags & NO_BLOOD) //TODO: Make drips come from the reagents instead.
@@ -143,12 +141,11 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	if(!amt)
 		return
 
-	var/amm = 0.1 * amt
 	var/turf/T = get_turf(src)
 	var/list/obj/effect/decal/cleanable/blood/drip/nums = list()
 	var/list/iconL = list("1","2","3","4","5")
 
-	vessel.remove_reagent("blood",amm)
+	vessel.remove_reagent("blood",amt)
 
 	for(var/obj/effect/decal/cleanable/blood/drip/G in T)
 		nums += G

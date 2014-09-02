@@ -1,8 +1,23 @@
 // the SMES
 // stores power
 
-#define SMESMAXCHARGELEVEL 200000
-#define SMESMAXOUTPUT 200000
+//Board
+/obj/item/weapon/circuitboard/smes
+	name = "Circuit board (SMES Cell)"
+	build_path = "/obj/machinery/power/smes"
+	board_type = "machine"
+	origin_tech = "powerstorage=6;engineering=4" // Board itself is high tech. Coils have to be ordered from cargo or salvaged from existing SMESs.
+	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
+	req_components = list("/obj/item/weapon/smes_coil" = 1, "/obj/item/stack/cable_coil" = 30)
+
+//Construction Item
+/obj/item/weapon/smes_coil
+	name = "Superconducting Magnetic Coil"
+	desc = "Heavy duty superconducting magnetic coil, mainly used in construction of SMES units."
+	icon = 'icons/obj/stock_parts.dmi'
+	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
+	w_class = 4.0 						// It's LARGE (backpack size)
+
 
 /obj/machinery/power/smes
 	name = "power storage unit"
@@ -11,15 +26,15 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	var/output = 50000		//Amount of power it tries to output
+	var/output = 0			//Amount of power it tries to output
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
 	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 1e6		//Current amount of power it holds
+	var/charge = 0			//Current amount of power it holds
 	var/charging = 0		//1 if it's actually charging, 0 if not
 	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
 	//var/chargecount = 0
-	var/chargelevel = 50000	//Amount of power it tries to charge from powernet
+	var/chargelevel = 0		//Amount of power it tries to charge from powernet
 	var/online = 1			//1 if it's outputting power, 0 if not.
 	var/name_tag = null
 	var/obj/machinery/power/terminal/terminal = null
@@ -29,15 +44,29 @@
 	var/last_online = 0
 	var/open_hatch = 0
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
-	var/input_level_max = SMESMAXCHARGELEVEL
-	var/output_level_max = SMESMAXOUTPUT
+	var/input_level_max = 250000		// It is now coil amount based, so no need for DEFINE
+	var/output_level_max = 250000
+
+	var/storage_per_coil = 5000000
+	var/IO_per_coil = 250000
+	var/max_coils = 6 //30M capacity, 1.5MW input/output when fully upgraded
+	var/cur_coils = 1 // Current amount of installed coils
 
 /obj/machinery/power/smes/New()
+	component_parts = list()
+	component_parts += new /obj/item/stack/cable_coil(src,30)
+	component_parts += new /obj/item/weapon/circuitboard/smes(src)
+
+	// Allows for mapped-in SMESs with larger capacity/IO
+	for(var/i = 1, i <= cur_coils, i++)
+		component_parts += new /obj/item/weapon/smes_coil(src)
+
 	..()
+	recalc_coils()
 	spawn(5)
 		if(!powernet)
 			connect_to_network()
-		
+
 		dir_loop:
 			for(var/d in cardinal)
 				var/turf/T = get_step(src, d)
@@ -53,6 +82,15 @@
 			terminal.connect_to_network()
 		updateicon()
 	return
+
+/obj/machinery/power/smes/proc/recalc_coils()
+	if ((cur_coils <= max_coils) && (cur_coils >= 1))
+		capacity = cur_coils * storage_per_coil
+		charge = between(0, charge, capacity)
+		output_level_max = cur_coils * IO_per_coil
+		output = between(0, output, output_level_max)
+		input_level_max = cur_coils * IO_per_coil
+		chargelevel = between(0, chargelevel, input_level_max)
 
 
 /obj/machinery/power/smes/proc/updateicon()
@@ -93,8 +131,8 @@
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
 				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+				load = add_load(load)		// add the load to the terminal side network
 				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
 
 			else					// if not enough capcity
 				charging = 0		// stop charging
@@ -191,7 +229,8 @@
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.newload += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
@@ -213,10 +252,10 @@
 			open_hatch = 0
 			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
 	if (open_hatch)
-		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
+		if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 			building_terminal = 1
-			var/obj/item/weapon/cable_coil/CC = W
-			if (CC.amount < 10)
+			var/obj/item/stack/cable_coil/CC = W
+			if (CC.get_amount() < 10)
 				user << "<span class='warning'>You need more cables.</span>"
 				building_terminal = 0
 				return
@@ -247,15 +286,49 @@
 							s.start()
 							building_terminal = 0
 							return
-						new /obj/item/weapon/cable_coil(loc,10)
+						new /obj/item/stack/cable_coil(loc,10)
 						user.visible_message(\
 							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
 							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 						del(terminal)
 			building_terminal = 0
 
+		// PSUs have their own code in batteryrack.dm
+		else if(istype(W, /obj/item/weapon/crowbar) && !(istype(src, /obj/machinery/power/smes/batteryrack)))
+			if (charge < (capacity / 100))
+				if (!online && !chargemode)
+					if (!terminal)
+						playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+						usr << "\red You begin to disassemble the SMES cell!"
+						if (do_after(usr, 100 * cur_coils)) // More coils = takes longer to disassemble. It's complex so largest one with 5 coils will take 50s
+							usr << "\red You have disassembled the SMES cell!"
+							var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+							M.state = 2
+							M.icon_state = "box_1"
+							for(var/obj/I in component_parts)
+								if(I.reliability != 100 && crit_fail)
+									I.crit_fail = 1
+								I.loc = src.loc
+							del(src)
+						return 1
+					else
+						user << "<span class='warning'>You have to disassemble the terminal first!</span>"
+				else
+					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
+			else
+				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
+		else if(istype(W, /obj/item/weapon/smes_coil) && !(istype(src, /obj/machinery/power/smes/batteryrack)))
+			if (cur_coils < max_coils)
+				usr << "You install the coil into the SMES unit!"
+				user.drop_item()
+				cur_coils ++
+				component_parts += W
+				W.loc = src
+				recalc_coils()
+			else
+				usr << "\red You can't insert more coils to this SMES unit!"
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(stat & BROKEN)
 		return
@@ -274,7 +347,7 @@
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -386,12 +459,12 @@
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
-	process()
-		capacity = INFINITY
-		charge = INFINITY
-		..()
+	capacity = 9000000
+	output = 250000
 
-
+/obj/machinery/power/smes/magical/process()
+	charge = 5000000
+	..()
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"
