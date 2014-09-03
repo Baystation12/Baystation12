@@ -14,7 +14,8 @@
 	name = "tape"
 	icon = 'icons/policetape.dmi'
 	anchored = 1
-	density = 1
+	var/lifted = 0
+	var/crumpled = 0
 	var/icon_base
 
 /obj/item/taperoll/police
@@ -97,8 +98,8 @@
 	//is_blocked_turf(var/turf/T)
 		usr << "\blue You finish placing the [src]."	//Git Test
 
-/obj/item/taperoll/afterattack(var/atom/A, mob/user as mob, proximity)
-	if (proximity && istype(A, /obj/machinery/door/airlock))
+/obj/item/taperoll/afterattack(var/atom/A, mob/user as mob)
+	if (istype(A, /obj/machinery/door/airlock))
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T.x,T.y,T.z)
 		P.loc = locate(T.x,T.y,T.z)
@@ -106,19 +107,20 @@
 		P.layer = 3.2
 		user << "\blue You finish placing the [src]."
 
-/obj/item/tape/Bumped(M as mob)
-	if(src.allowed(M))
-		var/turf/T = get_turf(src)
-		M:loc = T
+/obj/item/tape/proc/crumple()
+	if(!crumpled)
+		crumpled = 1
+		icon_state = "[icon_state]_c"
+		name = "crumpled [name]"
 
 /obj/item/tape/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(!density) return 1
-	if(air_group || (height==0)) return 1
-
-	if ((mover.flags & 2 || istype(mover, /obj/effect/meteor) || mover.throwing == 1) )
-		return 1
-	else
-		return 0
+	if(!lifted && ismob(mover))
+		var/mob/M = mover
+		add_fingerprint(M)
+		if (!allowed(M))	//only select few learn art of not crumpling the tape
+			M << "<span class='warning'>You are not supposed to go past [src]...</span>"
+			crumple()
+	return ..(mover)
 
 /obj/item/tape/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	breaktape(W, user)
@@ -126,9 +128,10 @@
 /obj/item/tape/attack_hand(mob/user as mob)
 	if (user.a_intent == "help" && src.allowed(user))
 		user.show_viewers("\blue [user] lifts [src], allowing passage.")
-		src.density = 0
+		crumple()
+		lifted = 1
 		spawn(200)
-			src.density = 1
+			lifted = 0
 	else
 		breaktape(null, user)
 
