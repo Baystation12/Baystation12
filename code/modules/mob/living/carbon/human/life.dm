@@ -498,12 +498,12 @@
 		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
-			
+
 			var/ratio = inhale_pp/safe_pressure_min
 			// Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
 			adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(1-ratio), 0))
 			failed_inhale = 1
-			
+
 			oxygen_alert = max(oxygen_alert, 1)
 		else
 			// We're in safe limits
@@ -629,8 +629,8 @@
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
-		
-		
+
+
 		breath.update_values()
 		return 1
 
@@ -641,6 +641,12 @@
 		//Moved pressure calculations here for use in skip-processing check.
 		var/pressure = environment.return_pressure()
 		var/adjusted_pressure = calculate_affecting_pressure(pressure)
+
+		//Check for contaminants before anything else because we don't want to skip it.
+		for(var/g in environment.gas)
+			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
+				pl_effects()
+				break
 
 		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
 			var/loc_temp = T0C
@@ -728,10 +734,6 @@
 			else
 				pressure_alert = -1
 
-		for(var/g in environment.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
-				pl_effects()
-				break
 		return
 
 	/*
