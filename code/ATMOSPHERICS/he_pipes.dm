@@ -35,6 +35,10 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging
 			if(target.initialize_directions_he & get_dir(target,src))
 				node2 = target
 				break
+		if(!node1 && !node2)
+			del(src)
+			return
+
 		update_icon()
 		return
 
@@ -101,6 +105,10 @@ obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
 			if(target.initialize_directions_he & get_dir(target,src))
 				node2 = target
 				break
+
+		if(!node1&&!node2)
+			del(src)
+			return
 
 		update_icon()
 		return

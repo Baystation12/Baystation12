@@ -390,7 +390,7 @@ Buildable meters
 			M.level = T.intact ? 2 : 1
 			M.initialize()
 			if (!M)
-				usr << "There's nothing to connect this manifold to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << pipefailtext
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -413,7 +413,7 @@ Buildable meters
 			M.level = T.intact ? 2 : 1
 			M.initialize()
 			if (!M)
-				usr << "There's nothing to connect this manifold to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				usr << pipefailtext
 				return 1
 			M.build_network()
 			if (M.node1)

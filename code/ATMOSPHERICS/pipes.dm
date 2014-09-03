@@ -523,6 +523,10 @@
 			if (node3)
 				break
 
+	if(!node1 && !node2 && !node3)
+		del(src)
+		return
+
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		hide(T.intact)
@@ -719,6 +723,10 @@
 		if(target.initialize_directions & 4)
 			node4 = target
 			break
+
+	if(!node1 && !node2 && !node3 && !node4)
+		del(src)
+		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T))
