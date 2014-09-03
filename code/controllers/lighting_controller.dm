@@ -62,6 +62,7 @@ datum/controller/lighting/proc/process()
 				for(var/i = 1; i <= changed_areas.len, i++)
 					var/area/A = changed_areas[i]
 					if(A.master != A && !A.contents.len)
+						A.tag = null
 						A.related -= A
 						active_areas -= A
 						all_areas -= A
