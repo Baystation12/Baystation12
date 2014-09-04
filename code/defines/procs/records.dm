@@ -14,6 +14,10 @@
 	G.fields["p_stat"] = "Active"
 	G.fields["m_stat"] = "Stable"
 	G.fields["species"] = "Human"
+	G.fields["home_system"]	= "Unknown"
+	G.fields["citizenship"]	= "Unknown"
+	G.fields["faction"]		= "Unknown"
+	G.fields["religion"]	= "Unknown"
 	G.fields["photo_front"]	= front
 	G.fields["photo_side"]	= side
 	data_core.general += G

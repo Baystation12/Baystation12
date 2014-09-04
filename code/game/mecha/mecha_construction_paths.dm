@@ -20,15 +20,14 @@
 
 	else if(istype(used_atom, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = used_atom
-		if(C.amount<4)
+		if(C.use(4))
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
+		else
 			user << ("There's not enough cable to finish the task.")
 			return 0
-		else
-			C.use(4)
-			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
-		if(S.amount < 5)
+		if(S.get_amount() < 5)
 			user << ("There's not enough material in this stack.")
 			return 0
 		else
@@ -53,15 +52,14 @@
 
 	else if(istype(used_atom, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = used_atom
-		if(C.amount<4)
+		if(C.use(4))
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
+		else
 			user << ("There's not enough cable to finish the task.")
 			return 0
-		else
-			C.use(4)
-			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
-		if(S.amount < 5)
+		if(S.get_amount() < 5)
 			user << ("There's not enough material in this stack.")
 			return 0
 		else

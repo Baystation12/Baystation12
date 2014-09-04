@@ -58,8 +58,10 @@
 			if(iscoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(C.use(2))
-					user << "You add wires to the assembly."
+					user << "<span class='notice'>You add wires to the assembly.</span>"
 					state = 3
+				else
+					user << "<span class='warning'>You need 2 coils of wire to wire the assembly.</span>"
 				return
 
 			else if(iswelder(W))

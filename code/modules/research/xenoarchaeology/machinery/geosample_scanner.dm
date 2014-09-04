@@ -71,7 +71,7 @@
 			var/choice = alert("What do you want to do with the nanopaste?","Radiometric Scanner","Scan nanopaste","Fix seal integrity")
 			if(choice == "Fix seal integrity")
 				var/obj/item/stack/nanopaste/N = I
-				var/amount_used = min(N.amount, 10 - scanner_seal_integrity / 10)
+				var/amount_used = min(N.get_amount(), 10 - scanner_seal_integrity / 10)
 				N.use(amount_used)
 				scanner_seal_integrity = round(scanner_seal_integrity + amount_used * 10)
 				return

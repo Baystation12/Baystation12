@@ -109,36 +109,33 @@ obj/structure/windoor_assembly/Del()
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
 			else if(istype(W, /obj/item/stack/rods) && !secure)
 				var/obj/item/stack/rods/R = W
-				if(R.amount < 4)
-					user << "\red You need more rods to do this."
+				if(R.get_amount() < 4)
+					user << "<span class='warning'>You need more rods to do this.</span>"
 					return
-				user << "\blue You start to reinforce the windoor with rods."
+				user << "<span class='notice'>You start to reinforce the windoor with rods.</span>"
 
-				if(do_after(user,40))
-					if(!src) return
-
-					R.use(4)
-					user << "\blue You reinforce the windoor."
-					src.secure = "secure_"
-					if(src.anchored)
-						src.name = "Secure Anchored Windoor Assembly"
-					else
-						src.name = "Secure Windoor Assembly"
+				if(do_after(user,40) && !secure)
+					if (R.use(4))
+						user << "<span class='notice'>You reinforce the windoor.</span>"
+						src.secure = "secure_"
+						if(src.anchored)
+							src.name = "Secure Anchored Windoor Assembly"
+						else
+							src.name = "Secure Windoor Assembly"
 
 			//Adding cable to the assembly. Step 5 complete.
 			else if(istype(W, /obj/item/stack/cable_coil) && anchored)
 				user.visible_message("[user] wires the windoor assembly.", "You start to wire the windoor assembly.")
 
+				var/obj/item/stack/cable_coil/CC = W
 				if(do_after(user, 40))
-					if(!src) return
-					var/obj/item/stack/cable_coil/CC = W
-					CC.use(1)
-					user << "\blue You wire the windoor!"
-					src.state = "02"
-					if(src.secure)
-						src.name = "Secure Wired Windoor Assembly"
-					else
-						src.name = "Wired Windoor Assembly"
+					if (CC.use(1))
+						user << "<span class='notice'>You wire the windoor!</span>"
+						src.state = "02"
+						if(src.secure)
+							src.name = "Secure Wired Windoor Assembly"
+						else
+							src.name = "Wired Windoor Assembly"
 			else
 				..()
 

@@ -30,6 +30,7 @@
 	var/idcheck = 1 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
+	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
 	var/projectile = null//Holder for projectile type, to avoid so many else if chains
 
 	var/mode = 0
@@ -131,11 +132,13 @@ Maintenance panel panel is [src.open ? "opened" : "closed"]"},
 Check for Weapon Authorization: []<BR>
 Check Security Records: []<BR>
 Operating Mode: []<BR>
+Report Arrests: []<BR>
 Auto Patrol: []"},
 
 "<A href='?src=\ref[src];operation=idcheck'>[src.idcheck ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=ignorerec'>[src.check_records ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=switchmode'>[src.arrest_type ? "Detain" : "Arrest"]</A>",
+"<A href='?src=\ref[src];operation=declarearrests'>[src.declare_arrests ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
 		else
 			dat += text({"<BR>
@@ -180,6 +183,9 @@ Auto Patrol: []"},
 			auto_patrol = !auto_patrol
 			mode = SECBOT_IDLE
 			updateUsrDialog()
+		if("declarearrests")
+			src.declare_arrests = !src.declare_arrests
+			src.updateUsrDialog()
 
 /obj/machinery/bot/ed209/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
@@ -288,6 +294,10 @@ Auto Patrol: []"},
 					maxstuns--
 					if (maxstuns <= 0)
 						target = null
+
+					if(declare_arrests)
+						var/area/location = get_area(src)
+						broadcast_security_hud_message("[src.name] is [arrest_type ? "detaining" : "arresting"] level [threatlevel] suspect <b>[target]</b> in <b>[location]</b>", src)
 					visible_message("\red <B>[src.target] has been stunned by [src]!</B>")
 
 					mode = SECBOT_PREP_ARREST
@@ -959,16 +969,18 @@ Auto Patrol: []"},
 				icon_state = "[lasercolor]ed209_prox"
 
 		if(6)
-			if( istype(W, /obj/item/stack/cable_coil) )
-				var/obj/item/stack/cable_coil/coil = W
-				var/turf/T = get_turf(user)
-				user << "<span class='notice'>You start to wire [src]...</span>"
-				sleep(40)
-				if(get_turf(user) == T && build_step == 6)
-					coil.use(1)
-					build_step++
-					user << "<span class='notice'>You wire the ED-209 assembly.</span>"
-					name = "wired ED-209 assembly"
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/C = W
+				if (C.get_amount() < 1)
+					user << "<span class='warning'>You need one coil of wire to do wire [src].</span>"
+					return
+				user << "<span class='notice'>You start to wire [src].</span>"
+				if (do_after(user, 40) && build_step == 6)
+					if (C.use(1))
+						build_step++
+						user << "<span class='notice'>You wire the ED-209 assembly.</span>"
+						name = "wired ED-209 assembly"
+				return
 
 		if(7)
 			switch(lasercolor)
