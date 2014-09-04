@@ -349,7 +349,7 @@ Buildable meters
 		if(PIPE_HE_STRAIGHT, PIPE_HE_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/heat_exchanging/P = new ( src.loc )
 			P.dir = src.dir
-			P.initialize_directions = 0
+			P.initialize_directions = pipe_dir //this var it's used to know if the pipe is bent or not
 			P.initialize_directions_he = pipe_dir
 			//var/turf/T = P.loc
 			//P.level = T.intact ? 2 : 1
