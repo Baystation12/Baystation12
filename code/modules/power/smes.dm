@@ -206,50 +206,57 @@
 		if(!open_hatch)
 			open_hatch = 1
 			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
+			return 0
 		else
 			open_hatch = 0
 			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
-	if (open_hatch)
-		if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
-			building_terminal = 1
-			var/obj/item/stack/cable_coil/CC = W
-			if (CC.amount < 10)
-				user << "<span class='warning'>You need more cables.</span>"
-				building_terminal = 0
-				return
-			if (make_terminal(user))
-				building_terminal = 0
-				return
-			building_terminal = 0
-			CC.use(10)
-			user.visible_message(\
-					"<span class='notice'>[user.name] has added cables to the [src].</span>",\
-					"<span class='notice'>You added cables to the [src].</span>")
-			terminal.connect_to_network()
-			stat = 0
+			return 0
 
-		else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
-			building_terminal = 1
-			var/turf/tempTDir = terminal.loc
-			if (istype(tempTDir))
-				if(tempTDir.intact)
-					user << "<span class='warning'>You must remove the floor plating first.</span>"
-				else
-					user << "<span class='notice'>You begin to cut the cables...</span>"
-					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-					if(do_after(user, 50))
-						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
-							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-							s.set_up(5, 1, src)
-							s.start()
-							building_terminal = 0
-							return
-						new /obj/item/stack/cable_coil(loc,10)
-						user.visible_message(\
-							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
-							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
-						del(terminal)
+	if (!open_hatch)
+		user << "<span class='warning'>You need to open access hatch on [src] first!</spann>"
+		return 0
+
+	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
+		building_terminal = 1
+		var/obj/item/stack/cable_coil/CC = W
+		if (CC.amount < 10)
+			user << "<span class='warning'>You need more cables.</span>"
 			building_terminal = 0
+			return 0
+		if (make_terminal(user))
+			building_terminal = 0
+			return 0
+		building_terminal = 0
+		CC.use(10)
+		user.visible_message(\
+				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
+				"<span class='notice'>You added cables to the [src].</span>")
+		terminal.connect_to_network()
+		stat = 0
+
+	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+		building_terminal = 1
+		var/turf/tempTDir = terminal.loc
+		if (istype(tempTDir))
+			if(tempTDir.intact)
+				user << "<span class='warning'>You must remove the floor plating first.</span>"
+			else
+				user << "<span class='notice'>You begin to cut the cables...</span>"
+				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+				if(do_after(user, 50))
+					if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+						s.set_up(5, 1, src)
+						s.start()
+						building_terminal = 0
+						return 0
+					new /obj/item/stack/cable_coil(loc,10)
+					user.visible_message(\
+						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
+						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+					del(terminal)
+		building_terminal = 0
+	return 1
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 

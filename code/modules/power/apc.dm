@@ -1401,12 +1401,15 @@
 		if (ticker.mode.config_tag == "malfunction")
 			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--
-	stat |= BROKEN
-	operating = 0
-	/*if(occupant)
-		malfvacate(1)*/
-	update_icon()
-	update()
+
+	// Aesthetically much better!
+	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
+	spawn(rand(2,5))
+		src.visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
+		stat |= BROKEN
+		operating = 0
+		update_icon()
+		update()
 
 // overload all the lights in this APC area
 
