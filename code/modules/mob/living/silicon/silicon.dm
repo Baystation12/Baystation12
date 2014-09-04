@@ -190,8 +190,6 @@
 	return
 
 /mob/living/silicon/proc/toggle_sensor_mode()
-	set name = "Set Sensor Augmentation"
-	set desc = "Augment visual feed with internal sensor overlays."
 	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
 	switch(sensor_type)
 		if ("Security")
