@@ -215,7 +215,7 @@ var/list/forbidden_varedit_object_types = list(
 	var/list/choices = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 	if(src.holder && src.holder.marked_datum)
 		choices += "marked datum ([holder.marked_datum.type])"
-	if(!isnull(default) && default != "num" && !isnull(L[variable]))
+	if(!isnull(default) && default != "num")
 		choices += "edit associated variable"
 	choices += "DELETE FROM LIST"
 
