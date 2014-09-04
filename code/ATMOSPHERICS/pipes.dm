@@ -135,6 +135,7 @@
 /obj/machinery/atmospherics/pipe/simple
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
+	var/pipe_icon = "" //what kind of pipe it is and from which dmi is the icon manager getting its icons, "" for simple pipes, "hepipe" for HE pipes, "hejunction" for HE junctions
 	name = "pipe"
 	desc = "A one meter section of regular pipe"
 
@@ -253,9 +254,9 @@
 				del(meter)
 		del(src)
 	else if(node1 && node2)
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "intact")
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, pipe_icon + "intact")
 	else
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "exposed[node1?1:0][node2?1:0]")
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, pipe_icon + "exposed[node1?1:0][node2?1:0]")
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
@@ -523,6 +524,10 @@
 			if (node3)
 				break
 
+	if(!node1 && !node2 && !node3)
+		del(src)
+		return
+
 	var/turf/T = get_turf(src)
 	if(istype(T))
 		hide(T.intact)
@@ -719,6 +724,10 @@
 		if(target.initialize_directions & 4)
 			node4 = target
 			break
+
+	if(!node1 && !node2 && !node3 && !node4)
+		del(src)
+		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T))
