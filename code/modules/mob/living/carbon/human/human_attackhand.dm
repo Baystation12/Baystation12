@@ -173,7 +173,7 @@
 					return W.afterattack(target,src)
 
 			var/randn = rand(1, 100)
-			if (randn <= 25)
+			if (randn <= 5)
 				apply_effect(3, WEAKEN, run_armor_check(affecting, "melee"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				visible_message("\red <B>[M] has pushed [src]!</B>")
