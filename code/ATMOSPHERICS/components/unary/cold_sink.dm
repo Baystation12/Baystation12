@@ -113,6 +113,7 @@
 	if(stat & (NOPOWER|BROKEN) || !on)
 		cooling = 0
 		update_use_power(0)
+		update_icon()
 		return
 	
 	if (network && air_contents.temperature > set_temperature)

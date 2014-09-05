@@ -60,6 +60,7 @@
 	if(stat & (NOPOWER|BROKEN) || !on)
 		heating = 0
 		update_use_power(0)
+		update_icon()
 		return
 	
 	if (network && air_contents.total_moles && air_contents.temperature < set_temperature)
