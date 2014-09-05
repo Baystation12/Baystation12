@@ -979,9 +979,45 @@
 	level = 2
 	icon_state = "cap"
 
+/obj/machinery/atmospherics/pipe/cap/visible/scrubbers
+	name = "scrubbers pipe endcap"
+	desc = "An endcap for scrubbers pipes"
+	icon_state = "cap-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/visible/supply
+	name = "supply pipe endcap"
+	desc = "An endcap for supply pipes"
+	icon_state = "cap-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE
+
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
 	icon_state = "cap-f"
+
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+	name = "scrubbers pipe endcap"
+	desc = "An endcap for scrubbers pipes"
+	icon_state = "cap-f-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/hidden/supply
+	name = "supply pipe endcap"
+	desc = "An endcap for supply pipes"
+	icon_state = "cap-f-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE
 
 
 /obj/machinery/atmospherics/pipe/tank
