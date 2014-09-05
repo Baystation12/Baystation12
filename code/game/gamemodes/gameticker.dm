@@ -374,12 +374,12 @@ var/global/datum/controller/gameticker/ticker
 /datum/controller/gameticker/proc/declare_completion()
 	world << "<br><br><br><font size=3><b>The round has ended.</b></font>"
 	for(var/mob/Player in player_list)
-		if(Player.mind)
+		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
 				if(emergency_shuttle.departed && emergency_shuttle.evac)
 					if(playerTurf.z != 2)
-						Player << "<font color='red'><b>You managed to survive, but were marooned on [station_name()]...</b></font>"
+						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()]...</b></font>"
 					else
 						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
 				else if(playerTurf.z == 2)
