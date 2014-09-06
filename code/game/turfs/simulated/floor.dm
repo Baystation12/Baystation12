@@ -508,27 +508,29 @@ turf/simulated/floor/proc/update_icon()
 		if(is_plating())
 			if(!broken && !burnt)
 				var/obj/item/stack/tile/T = C
-				if (T.use(1))
-					floor_tile = new T.type
-					intact = 1
-					if(istype(T,/obj/item/stack/tile/light))
-						var/obj/item/stack/tile/light/L = T
-						var/obj/item/stack/tile/light/F = floor_tile
-						F.state = L.state
-						F.on = L.on
-					if(istype(T,/obj/item/stack/tile/grass))
-						for(var/direction in cardinal)
-							if(istype(get_step(src,direction),/turf/simulated/floor))
-								var/turf/simulated/floor/FF = get_step(src,direction)
-								FF.update_icon() //so siding gets updated properly
-					else if(istype(T,/obj/item/stack/tile/carpet))
-						for(var/direction in list(1,2,4,8,5,6,9,10))
-							if(istype(get_step(src,direction),/turf/simulated/floor))
-								var/turf/simulated/floor/FF = get_step(src,direction)
-								FF.update_icon() //so siding gets updated properly
-					update_icon()
-					levelupdate()
-					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+				if (T.get_amount() < 1)
+					return
+				floor_tile = new T.type
+				intact = 1
+				if(istype(T,/obj/item/stack/tile/light))
+					var/obj/item/stack/tile/light/L = T
+					var/obj/item/stack/tile/light/F = floor_tile
+					F.state = L.state
+					F.on = L.on
+				if(istype(T,/obj/item/stack/tile/grass))
+					for(var/direction in cardinal)
+						if(istype(get_step(src,direction),/turf/simulated/floor))
+							var/turf/simulated/floor/FF = get_step(src,direction)
+							FF.update_icon() //so siding gets updated properly
+				else if(istype(T,/obj/item/stack/tile/carpet))
+					for(var/direction in list(1,2,4,8,5,6,9,10))
+						if(istype(get_step(src,direction),/turf/simulated/floor))
+							var/turf/simulated/floor/FF = get_step(src,direction)
+							FF.update_icon() //so siding gets updated properly
+				T.use(1)
+				update_icon()
+				levelupdate()
+				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			else
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
