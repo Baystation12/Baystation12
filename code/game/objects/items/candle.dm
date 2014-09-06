@@ -16,7 +16,7 @@
 		var/i
 		if(wax>1500)
 			i = 1
-		else if(wax>640)
+		else if(wax>800)
 			i = 2
 		else i = 3
 		icon_state = "candle[i][lit ? "_lit" : ""]"
