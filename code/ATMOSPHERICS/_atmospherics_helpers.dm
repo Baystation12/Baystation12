@@ -11,6 +11,16 @@
 /obj/machinery/atmospherics/var/last_flow_rate = 0
 /obj/machinery/portable_atmospherics/var/last_flow_rate = 0
 
+
+/obj/machinery/atmospherics/var/debug = 0
+
+/obj/machinery/atmospherics/verb/toggle_debug()
+	set name = "Toggle Debug Messages"
+	set category = "Debug"
+	set src in view()
+	debug = !debug
+	usr << "[src]: Debug messages toggled [debug? "on" : "off"]."
+
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
 //transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
@@ -36,6 +46,13 @@
 	if (istype(M, /obj/machinery/atmospherics))
 		var/obj/machinery/atmospherics/A = M
 		A.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here
+		
+		if (A.debug)
+			A.visible_message("[A]: source entropy: [round(source.specific_entropy(), 0.01)] J/Kmol --> sink entropy: [round(sink.specific_entropy(), 0.01)] J/Kmol")
+			A.visible_message("[A]: specific entropy change = [round(sink.specific_entropy() - source.specific_entropy(), 0.01)] J/Kmol")
+			A.visible_message("[A]: specific power = [round(specific_power, 0.1)] W/mol")
+			A.visible_message("[A]: moles transferred = [transfer_moles] mol")
+		
 	if (istype(M, /obj/machinery/portable_atmospherics))
 		var/obj/machinery/portable_atmospherics/P = M
 		P.last_flow_rate = (transfer_moles/source.total_moles)*source.volume //group_multiplier gets divided out here

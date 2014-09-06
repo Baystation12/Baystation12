@@ -127,7 +127,9 @@
 		var/cop = air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * active_power_usage)	//limit heat transfer by available power
 
-		air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
+		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
+		if (debug)
+			visible_message("[src]: Removing [removed] W.")
 	
 		network.update = 1
 	else

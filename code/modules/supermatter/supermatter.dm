@@ -76,6 +76,8 @@
 	var/config_hallucination_power = 0.1
 
 	var/obj/item/device/radio/radio
+	
+	var/debug = 0
 
 	shard //Small subtype, less efficient and more sensitive, but less boom.
 		name = "Supermatter Shard"
@@ -217,18 +219,20 @@
 		//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
 		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
 
-		var/thermal_power = THERMAL_RELEASE_MODIFIER
+		var/thermal_power = THERMAL_RELEASE_MODIFIER * device_energy
 
-		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
-		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
-
-		removed.add_thermal_energy(device_energy * thermal_power)
-
-		removed.temperature = max(0, min(removed.temperature, 10000))
-
-		//Calculate how much gas to release
+		//Release reaction gasses
+		var/heat_capacity = removed.heat_capacity()
 		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
 		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
+		
+		if (debug)
+			var/heat_capacity_new = removed.heat_capacity()
+			visible_message("[src]: Releasing [round(thermal_power)] W.")
+			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
+		
+		removed.add_thermal_energy(thermal_power)
+		removed.temperature = between(0, removed.temperature, 10000)
 
 		env.merge(removed)
 
