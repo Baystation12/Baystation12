@@ -1174,10 +1174,7 @@
 	lastused_light = area.usage(LIGHT)
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
-	if(area.powerupdate)
-		if(debug) log_debug("power update in [area.name] / [name]")
-		area.clear_usage()
-
+	
 	lastused_total = lastused_light + lastused_equip + lastused_environ
 
 	//store states to update icon if any change
@@ -1195,6 +1192,9 @@
 
 	if(debug)
 		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
+		
+		if(area.powerupdate)
+			log_debug("power update in [area.name] / [name]")
 
 	if(cell && !shorted)
 		//var/cell_charge = cell.charge

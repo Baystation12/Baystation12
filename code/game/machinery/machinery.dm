@@ -165,13 +165,9 @@ Class Procs:
 	use_power = new_use_power
 	
 	//force area power update
-	//use_power() forces an area power update on the next tick so have to pass the correct power amount for this tick
-	if (use_power >= 2)
-		use_power(active_power_usage)
-	else if (use_power == 1)
-		use_power(idle_power_usage) 
-	else
-		use_power(0)
+	var/area/A = get_area(src)
+	if(A && A.master)
+		A.master.powerupdate = 1
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))

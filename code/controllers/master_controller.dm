@@ -299,6 +299,7 @@ datum/controller/game_controller/proc/process_machines_power()
 		var/area/A = active_areas[i]
 		if(A.powerupdate && A.master == A)
 			A.powerupdate -= 1
+			A.clear_usage()
 			for(var/j = 1; j <= A.related.len; j++)
 				var/area/SubArea = A.related[j]
 				for(var/obj/machinery/M in SubArea)
