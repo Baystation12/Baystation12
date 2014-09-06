@@ -120,7 +120,7 @@
 		cooling = 1
 		update_use_power(2)
 		
-		var/heat_transfer = min(abs(air_contents.get_thermal_energy_change(set_temperature - 5)), active_power_usage)
+		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
 
 		//Assume the heat is being pumped into the hull which is fixed at heatsink_temperature
 		//not /really/ proper thermodynamics but whatever
