@@ -355,7 +355,7 @@ datum/controller/game_controller/proc/process_powernets()
 	while(i<=powernets.len)
 		var/datum/powernet/Powernet = powernets[i]
 		if(Powernet)
-			Powernet.reset()
+			Powernet.process()
 			i++
 			continue
 		powernets.Cut(i,i+1)

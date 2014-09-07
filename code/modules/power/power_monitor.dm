@@ -67,7 +67,7 @@
 		t += "<FONT SIZE=-1>"
 
 		if(L.len > 0)
-
+			var/total_demand = 0
 			t += "Area                           Eqp./Lgt./Env.  Load   Cell<HR>"
 
 			var/list/S = list(" Off","AOff","  On", " AOn")
@@ -77,8 +77,10 @@
 
 				t += copytext(add_tspace("\The [A.area]", 30), 1, 30)
 				t += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(A.lastused_total, 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
+				total_demand += A.lastused_total
 
-		t += "</FONT></PRE></TT>"
+			t += "<HR>Total demand: [total_demand] W</FONT>"
+		t += "</PRE></TT>"
 
 	user << browse(t, "window=powcomp;size=420x900")
 	onclose(user, "powcomp")
