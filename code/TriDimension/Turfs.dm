@@ -26,6 +26,11 @@
 					var/soft = 0
 					for(var/atom/A in floorbelow.contents)
 						if(A.density)
+							if(istype(A, /obj/structure/window))
+								var/obj/structure/window/W = A
+								blocked = W.is_fulltile()
+								if(blocked)
+									break
 							blocked = 1
 							break
 						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
@@ -80,7 +85,7 @@
 
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/stack/cable_coil) && src.hasbelow())
+	if (istype(C, /obj/item/weapon/cable_coil) && src.hasbelow())
 		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
 		W.attackby(C, user)
 		return
@@ -92,8 +97,8 @@
 
 /turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
 	(..)
-	if (istype(C, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/cable = C
+	if (istype(C, /obj/item/weapon/cable_coil))
+		var/obj/item/weapon/cable_coil/cable = C
 		cable.turf_place(src, user)
 		return
 
@@ -102,20 +107,20 @@
 		if(L)
 			return
 		var/obj/item/stack/rods/R = C
-		if (R.use(1))
-			user << "\blue Constructing support lattice ..."
-			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-			ReplaceWithLattice()
+		user << "\blue Constructing support lattice ..."
+		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+		ReplaceWithLattice()
+		R.use(1)
 		return
 
 	if (istype(C, /obj/item/stack/tile/plasteel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
-			if (S.use(1))
-				del(L)
-				playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-				S.build(src)
+			del(L)
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+			S.build(src)
+			S.use(1)
 			return
 		else
 			user << "\red The plating is going to need some support."
