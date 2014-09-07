@@ -852,6 +852,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = list("orangejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = list("limejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = list("watermelonjuice" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = list("grapejuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = list("poisonberryjuice" = 0),
 	)
 
