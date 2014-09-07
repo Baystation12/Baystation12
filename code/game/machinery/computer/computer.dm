@@ -120,7 +120,7 @@
 				user << "\blue You disconnect the monitor."
 				A.state = 4
 				A.icon_state = "4"
-			M.deconstruct_computer(src)
+			M.deconstruct(src)
 			del(src)
 	else
 		src.attack_hand(user)

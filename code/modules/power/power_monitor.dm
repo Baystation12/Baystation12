@@ -5,7 +5,7 @@
 	desc = "It monitors power levels across the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "power"
-	
+
 	//computer stuff
 	density = 1
 	anchored = 1.0
@@ -107,7 +107,7 @@
 				src.icon_state = "c_unpowered"
 		else
 			icon_state = initial(icon_state)
-			
+
 
 //copied from computer.dm
 /obj/machinery/power/monitor/attackby(I as obj, user as mob)
@@ -129,7 +129,7 @@
 				user << "\blue You disconnect the monitor."
 				A.state = 4
 				A.icon_state = "4"
-			M.deconstruct_computer(src)
+			M.deconstruct(src)
 			del(src)
 	else
 		src.attack_hand(user)
