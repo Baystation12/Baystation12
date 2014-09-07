@@ -48,10 +48,12 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
-			if (S.use(1))
-				del(L)
-				playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-				S.build(src)
+			if (S.get_amount() < 1)
+				return
+			del(L)
+			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+			S.build(src)
+			S.use(1)
 			return
 		else
 			user << "\red The plating is going to need some support."
