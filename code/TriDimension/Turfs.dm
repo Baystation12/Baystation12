@@ -26,8 +26,14 @@
 					var/soft = 0
 					for(var/atom/A in floorbelow.contents)
 						if(A.density)
-							blocked = 1
-							break
+							if(istype(A, /obj/structure/window))
+								var/obj/structure/window/W = A
+								blocked = W.is_fulltile()
+								if(blocked)
+									break
+							else
+								blocked = 1
+								break
 						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
 							blocked = 1
 							break
