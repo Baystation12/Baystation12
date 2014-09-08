@@ -196,15 +196,15 @@
 		var/temp_factor
 		var/equilibrium_power
 		if (oxygen > 0.8)
-			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a level of 1200*POWER_FACTOR
+			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 400
 			equilibrium_power = 400
 			icon_state = "[base_icon_state]_glow"
 		else
-			//If chain reacting at oxygen == 0.8, we want the power at 800 K to stabilize at a power level of 250
+			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
 			equilibrium_power = 250
 			icon_state = base_icon_state
 		
-		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/(800*0.8)
+		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
 		//We've generated power, now let's transfer it to the collectors for storing/usage
