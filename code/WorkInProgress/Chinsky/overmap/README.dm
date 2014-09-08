@@ -88,12 +88,6 @@ Sector should appear on overmap (in random place if you didn't set mapx,mapy)
 
 
 TODO:
-more mechanics to moving ship:
-	actually working engine objects
-		unary atmospheric machinery
-		give more thrust the more pressure gas has
-		ships have mass var, which is used to caalculate how much acceleration those engines give
-better space travel / stragglers handling
 shuttle console:
 	checking occupied pad or not with docking controllers
 	?landing pad size detection
