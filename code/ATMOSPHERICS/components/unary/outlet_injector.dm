@@ -1,6 +1,6 @@
 //Basically a one way passive valve. If the pressure inside is greater than the environment then gas will flow passively, 
 //but it does not permit gas to flow back from the environment into the injector. Can be turned off to prevent any gas flow.
-//When it recieves the "inject" signal, it will try to pump it's entire contents into the environment regardless of pressure, using power.
+//When it receives the "inject" signal, it will try to pump it's entire contents into the environment regardless of pressure, using power.
 
 /obj/machinery/atmospherics/unary/outlet_injector
 	icon = 'icons/atmos/injector.dmi'

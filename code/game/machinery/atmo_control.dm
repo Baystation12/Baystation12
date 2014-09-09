@@ -238,11 +238,11 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	signal.source = src
 	if(href_list["in_refresh_status"])
 		input_info = null
-		signal.data = list ("tag" = input_tag, "status")
+		signal.data = list ("tag" = input_tag, "status" = 1)
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
-		signal.data = list ("tag" = input_tag, "power_toggle")
+		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
@@ -250,11 +250,11 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 	if(href_list["out_refresh_status"])
 		output_info = null
-		signal.data = list ("tag" = output_tag, "status")
+		signal.data = list ("tag" = output_tag, "status" = 1)
 
 	if(href_list["out_toggle_power"])
 		output_info = null
-		signal.data = list ("tag" = output_tag, "power_toggle")
+		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
 
 	if(href_list["out_set_pressure"])
 		output_info = null
@@ -304,7 +304,7 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	if(output_info)
 		var/power = (output_info["power"])
 		var/pressure_limit = output_info["external"]
-		output += {"<B>Core Outpump</B>: [power?("On"):("Off")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>
+		output += {"<B>Core Outpump</B>: [power?("Open"):("On Hold")] <A href='?src=\ref[src];out_refresh_status=1'>Refresh</A><BR>
 Min Core Pressure: [pressure_limit] kPa<BR>"}
 		output += "Command: <A href='?src=\ref[src];out_toggle_power=1'>Toggle Power</A> <A href='?src=\ref[src];out_set_pressure=1'>Set Pressure</A><BR>"
 
@@ -352,11 +352,11 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 	signal.source = src
 	if(href_list["in_refresh_status"])
 		input_info = null
-		signal.data = list ("tag" = input_tag, "status")
+		signal.data = list ("tag" = input_tag, "status" = 1)
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
-		signal.data = list ("tag" = input_tag, "power_toggle")
+		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
@@ -364,11 +364,11 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 	if(href_list["out_refresh_status"])
 		output_info = null
-		signal.data = list ("tag" = output_tag, "status")
+		signal.data = list ("tag" = output_tag, "status" = 1)
 
 	if(href_list["out_toggle_power"])
 		output_info = null
-		signal.data = list ("tag" = output_tag, "power_toggle")
+		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
 
 	if(href_list["out_set_pressure"])
 		output_info = null
@@ -468,7 +468,7 @@ Rate: [volume_rate] L/sec<BR>"}
 		signal.source = src
 		signal.data = list(
 			"tag" = device_tag,
-			"status",
+			"status" = 1,
 			"sigtype"="command"
 		)
 		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -486,7 +486,7 @@ Rate: [volume_rate] L/sec<BR>"}
 		signal.source = src
 		signal.data = list(
 			"tag" = device_tag,
-			"power_toggle",
+			"power_toggle" = 1,
 			"sigtype"="command"
 		)
 
@@ -501,7 +501,7 @@ Rate: [volume_rate] L/sec<BR>"}
 		signal.source = src
 		signal.data = list(
 			"tag" = device_tag,
-			"inject",
+			"inject" = 1,
 			"sigtype"="command"
 		)
 
