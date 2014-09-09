@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/unary
 	dir = SOUTH
 	initialize_directions = SOUTH
-	layer = TURF_LAYER+0.1
+	//layer = TURF_LAYER+0.1
 
 	var/datum/gas_mixture/air_contents
 
@@ -46,8 +46,12 @@
 
 		for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
 			if(target.initialize_directions & get_dir(target,src))
-				node = target
-				break
+				var/c = check_connect_types(target,src)
+				if (c)
+					target.connected_to = c
+					src.connected_to = c
+					node = target
+					break
 
 		update_icon()
 		update_underlays()

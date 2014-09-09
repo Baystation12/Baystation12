@@ -32,6 +32,22 @@ Buildable meters
 #define PIPE_GAS_MIXER_M		25
 #define PIPE_OMNI_MIXER			26
 #define PIPE_OMNI_FILTER		27
+///// Supply, scrubbers and universal pipes
+#define PIPE_UNIVERSAL				28
+#define PIPE_SUPPLY_STRAIGHT		29
+#define PIPE_SUPPLY_BENT			30
+#define PIPE_SCRUBBERS_STRAIGHT		31
+#define PIPE_SCRUBBERS_BENT			32
+#define PIPE_SUPPLY_MANIFOLD		33
+#define PIPE_SCRUBBERS_MANIFOLD		34
+#define PIPE_SUPPLY_MANIFOLD4W		35
+#define PIPE_SCRUBBERS_MANIFOLD4W	36
+#define PIPE_SUPPLY_UP				37
+#define PIPE_SCRUBBERS_UP			38
+#define PIPE_SUPPLY_DOWN			39
+#define PIPE_SCRUBBERS_DOWN			40
+#define PIPE_SUPPLY_CAP				41
+#define PIPE_SCRUBBERS_CAP			42
 
 /obj/item/pipe
 	name = "pipe"
@@ -39,6 +55,7 @@ Buildable meters
 	var/pipe_type = 0
 	//var/pipe_dir = 0
 	var/pipename
+	var/connect_types[] = list(1) //1=regular, 2=supply, 3=scrubber
 	force = 7
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "simple"
@@ -64,10 +81,29 @@ Buildable meters
 			src.pipe_type = PIPE_HE_STRAIGHT + is_bent
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/insulated))
 			src.pipe_type = PIPE_INSULATED_STRAIGHT + is_bent
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/supply))
+			src.pipe_type = PIPE_SUPPLY_STRAIGHT + is_bent
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/scrubbers) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_STRAIGHT + is_bent
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/visible/universal) || istype(make_from, /obj/machinery/atmospherics/pipe/simple/hidden/universal))
+			src.pipe_type = PIPE_UNIVERSAL
+			connect_types = list(1,2,3)
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple))
 			src.pipe_type = PIPE_SIMPLE_STRAIGHT + is_bent
 		else if(istype(make_from, /obj/machinery/atmospherics/portables_connector))
 			src.pipe_type = PIPE_CONNECTOR
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold/hidden/supply))
+			src.pipe_type = PIPE_SUPPLY_MANIFOLD
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_MANIFOLD
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold))
 			src.pipe_type = PIPE_MANIFOLD
 		else if(istype(make_from, /obj/machinery/atmospherics/unary/vent_pump))
@@ -96,8 +132,24 @@ Buildable meters
 			src.pipe_type = PIPE_HEAT_EXCHANGE
 		else if(istype(make_from, /obj/machinery/atmospherics/tvalve))
 			src.pipe_type = PIPE_MTVALVE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply))
+			src.pipe_type = PIPE_SUPPLY_MANIFOLD4W
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers) || istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_MANIFOLD4W
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/manifold4w))
 			src.pipe_type = PIPE_MANIFOLD4W
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap/visible/supply) || istype(make_from, /obj/machinery/atmospherics/pipe/cap/hidden/supply))
+			src.pipe_type = PIPE_SUPPLY_CAP
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap/visible/scrubbers) || istype(make_from, /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_CAP
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap))
 			src.pipe_type = PIPE_CAP
 		else if(istype(make_from, /obj/machinery/atmospherics/omni/mixer))
@@ -105,14 +157,38 @@ Buildable meters
 		else if(istype(make_from, /obj/machinery/atmospherics/omni/filter))
 			src.pipe_type = PIPE_OMNI_FILTER
 ///// Z-Level stuff
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up/supply))
+			src.pipe_type = PIPE_SUPPLY_UP
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_UP
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up))
 			src.pipe_type = PIPE_UP
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down/supply))
+			src.pipe_type = PIPE_SUPPLY_DOWN
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers))
+			src.pipe_type = PIPE_SCRUBBERS_DOWN
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down))
 			src.pipe_type = PIPE_DOWN
 ///// Z-Level stuff
 	else
 		src.pipe_type = pipe_type
 		src.dir = dir
+		if (pipe_type == 29 || pipe_type == 30 || pipe_type == 33 || pipe_type == 35 || pipe_type == 37 || pipe_type == 39 || pipe_type == 41)
+			connect_types = list(2)
+			src.color = PIPE_COLOR_BLUE
+		else if (pipe_type == 31 || pipe_type == 32 || pipe_type == 34 || pipe_type == 36 || pipe_type == 38 || pipe_type == 40 || pipe_type == 42)
+			connect_types = list(3)
+			src.color = PIPE_COLOR_RED
+		else if (pipe_type == 28)
+			connect_types = list(1,2,3)
 	//src.pipe_dir = get_pipe_dir()
 	update()
 	src.pixel_x = rand(-5, 5)
@@ -151,7 +227,23 @@ Buildable meters
 		"gas mixer t", \
 		"gas mixer m", \
 		"omni mixer", \
-		"omni filter"
+		"omni filter", \
+///// Supply and scrubbers pipes
+		"universal pipe adapter", \
+		"supply pipe", \
+		"bent supply pipe", \
+		"scrubbers pipe", \
+		"bent scrubbers pipe", \
+		"supply manifold", \
+		"scrubbers manifold", \
+		"supply 4-way manifold", \
+		"scrubbers 4-way manifold", \
+		"supply pipe up", \
+		"scrubbers pipe up", \
+		"supply pipe down", \
+		"scrubbers pipe down", \
+		"supply pipe cap", \
+		"scrubbers pipe cap", \
 	)
 	name = nlist[pipe_type+1] + " fitting"
 	var/list/islist = list( \
@@ -184,7 +276,23 @@ Buildable meters
 		"t_mixer", \
 		"m_mixer", \
 		"omni_mixer", \
-		"omni_filter"
+		"omni_filter", \
+///// Supply and scrubbers pipes
+		"universal", \
+		"simple", \
+		"simple", \
+		"simple", \
+		"simple", \
+		"manifold", \
+		"manifold", \
+		"manifold4w", \
+		"manifold4w", \
+		"cap", \
+		"cap", \
+		"cap", \
+		"cap", \
+		"cap", \
+		"cap", \
 	)
 	icon_state = islist[pipe_type + 1]
 
@@ -208,22 +316,22 @@ Buildable meters
 
 	src.dir = turn(src.dir, -90)
 
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			dir = 1
 		else if(dir==8)
 			dir = 4
-	else if (pipe_type == PIPE_MANIFOLD4W)
+	else if (pipe_type in list (PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W))
 		dir = 2
 	//src.pipe_dir = get_pipe_dir()
 	return
 
 /obj/item/pipe/Move()
 	..()
-	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_HE_BENT, PIPE_INSULATED_BENT)) \
+	if ((pipe_type in list (PIPE_SIMPLE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT, PIPE_HE_BENT, PIPE_INSULATED_BENT)) \
 		&& (src.dir in cardinal))
 		src.dir = src.dir|turn(src.dir, 90)
-	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_UNIVERSAL, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			dir = 1
 		else if(dir==8)
@@ -247,16 +355,19 @@ Buildable meters
 			PIPE_PUMP ,\
 			PIPE_VOLUME_PUMP ,\
 			PIPE_PASSIVE_GATE ,\
-			PIPE_MVALVE \
+			PIPE_MVALVE, \
+			PIPE_SUPPLY_STRAIGHT, \
+			PIPE_SCRUBBERS_STRAIGHT, \
+			PIPE_UNIVERSAL, \
 		)
 			return dir|flip
-		if(PIPE_SIMPLE_BENT, PIPE_INSULATED_BENT, PIPE_HE_BENT)
+		if(PIPE_SIMPLE_BENT, PIPE_INSULATED_BENT, PIPE_HE_BENT, PIPE_SUPPLY_BENT, PIPE_SCRUBBERS_BENT)
 			return dir //dir|acw
 		if(PIPE_CONNECTOR,PIPE_UVENT,PIPE_SCRUBBER,PIPE_HEAT_EXCHANGE)
 			return dir
-		if(PIPE_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER)
+		if(PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER)
 			return dir|flip|cw|acw
-		if(PIPE_MANIFOLD)
+		if(PIPE_MANIFOLD, PIPE_SUPPLY_MANIFOLD, PIPE_SCRUBBERS_MANIFOLD)
 			return flip|cw|acw
 		if(PIPE_GAS_FILTER, PIPE_GAS_MIXER,PIPE_MTVALVE)
 			return dir|flip|cw
@@ -264,10 +375,10 @@ Buildable meters
 			return dir|flip|acw
 		if(PIPE_GAS_MIXER_T)
 			return dir|cw|acw
-		if(PIPE_CAP)
+		if(PIPE_CAP, PIPE_SUPPLY_CAP, PIPE_SCRUBBERS_CAP)
 			return flip
 ///// Z-Level stuff
-		if(PIPE_UP,PIPE_DOWN)
+		if(PIPE_UP,PIPE_DOWN,PIPE_SUPPLY_UP,PIPE_SUPPLY_DOWN,PIPE_SCRUBBERS_UP,PIPE_SCRUBBERS_DOWN)
 			return dir
 ///// Z-Level stuff
 	return 0
@@ -314,18 +425,18 @@ Buildable meters
 		return ..()
 	if (!isturf(src.loc))
 		return 1
-	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
+	if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_SUPPLY_STRAIGHT, PIPE_SCRUBBERS_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE))
 		if(dir==2)
 			dir = 1
 		else if(dir==8)
 			dir = 4
-	else if (pipe_type in list(PIPE_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER))
+	else if (pipe_type in list(PIPE_MANIFOLD4W, PIPE_SUPPLY_MANIFOLD4W, PIPE_SCRUBBERS_MANIFOLD4W, PIPE_OMNI_MIXER, PIPE_OMNI_FILTER))
 		dir = 2
 	var/pipe_dir = get_pipe_dir()
 
 	for(var/obj/machinery/atmospherics/M in src.loc)
-		if(M.initialize_directions & pipe_dir)	// matches at least one direction on either type of pipe
-			user << "\red There is already a pipe at that location."
+		if((M.initialize_directions & pipe_dir) && M.check_connect_types_construction(M,src))	// matches at least one direction on either type of pipe & same connection type
+			user << "\red There is already a pipe of the same type at this location."
 			return 1
 	// no conflicts found
 
@@ -335,6 +446,63 @@ Buildable meters
 		if(PIPE_SIMPLE_STRAIGHT, PIPE_SIMPLE_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/P = new( src.loc )
 			P.pipe_color = color
+			P.dir = src.dir
+			P.initialize_directions = pipe_dir
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			if (!P)
+				usr << pipefailtext
+				return 1
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+
+		if(PIPE_SUPPLY_STRAIGHT, PIPE_SUPPLY_BENT)
+			var/obj/machinery/atmospherics/pipe/simple/hidden/supply/P = new( src.loc )
+			P.color = color
+			P.dir = src.dir
+			P.initialize_directions = pipe_dir
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			if (!P)
+				usr << pipefailtext
+				return 1
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+
+		if(PIPE_SCRUBBERS_STRAIGHT, PIPE_SCRUBBERS_BENT)
+			var/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers/P = new( src.loc )
+			P.color = color
+			P.dir = src.dir
+			P.initialize_directions = pipe_dir
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			if (!P)
+				usr << pipefailtext
+				return 1
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+
+		if(PIPE_UNIVERSAL)
+			var/obj/machinery/atmospherics/pipe/simple/hidden/universal/P = new( src.loc )
+			P.color = color
 			P.dir = src.dir
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
@@ -408,6 +576,52 @@ Buildable meters
 				M.node3.initialize()
 				M.node3.build_network()
 
+		if(PIPE_SUPPLY_MANIFOLD)		//manifold
+			var/obj/machinery/atmospherics/pipe/manifold/hidden/supply/M = new( src.loc )
+			M.color = color
+			M.dir = dir
+			M.initialize_directions = pipe_dir
+			//M.New()
+			var/turf/T = M.loc
+			M.level = T.intact ? 2 : 1
+			M.initialize()
+			if (!M)
+				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				return 1
+			M.build_network()
+			if (M.node1)
+				M.node1.initialize()
+				M.node1.build_network()
+			if (M.node2)
+				M.node2.initialize()
+				M.node2.build_network()
+			if (M.node3)
+				M.node3.initialize()
+				M.node3.build_network()
+
+		if(PIPE_SCRUBBERS_MANIFOLD)		//manifold
+			var/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers/M = new( src.loc )
+			M.color = color
+			M.dir = dir
+			M.initialize_directions = pipe_dir
+			//M.New()
+			var/turf/T = M.loc
+			M.level = T.intact ? 2 : 1
+			M.initialize()
+			if (!M)
+				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				return 1
+			M.build_network()
+			if (M.node1)
+				M.node1.initialize()
+				M.node1.build_network()
+			if (M.node2)
+				M.node2.initialize()
+				M.node2.build_network()
+			if (M.node3)
+				M.node3.initialize()
+				M.node3.build_network()
+
 		if(PIPE_MANIFOLD4W)		//4-way manifold
 			var/obj/machinery/atmospherics/pipe/manifold4w/M = new( src.loc )
 			M.pipe_color = color
@@ -419,6 +633,60 @@ Buildable meters
 			M.initialize()
 			if (!M)
 				usr << "There's nothing to connect this manifold to!" //(with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				return 1
+			M.build_network()
+			if (M.node1)
+				M.node1.initialize()
+				M.node1.build_network()
+			if (M.node2)
+				M.node2.initialize()
+				M.node2.build_network()
+			if (M.node3)
+				M.node3.initialize()
+				M.node3.build_network()
+			if (M.node4)
+				M.node4.initialize()
+				M.node4.build_network()
+
+		if(PIPE_SUPPLY_MANIFOLD4W)		//4-way manifold
+			var/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply/M = new( src.loc )
+			M.color = color
+			M.dir = dir
+			M.initialize_directions = pipe_dir
+			M.connect_types = src.connect_types
+			//M.New()
+			var/turf/T = M.loc
+			M.level = T.intact ? 2 : 1
+			M.initialize()
+			if (!M)
+				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
+				return 1
+			M.build_network()
+			if (M.node1)
+				M.node1.initialize()
+				M.node1.build_network()
+			if (M.node2)
+				M.node2.initialize()
+				M.node2.build_network()
+			if (M.node3)
+				M.node3.initialize()
+				M.node3.build_network()
+			if (M.node4)
+				M.node4.initialize()
+				M.node4.build_network()
+
+		if(PIPE_SCRUBBERS_MANIFOLD4W)		//4-way manifold
+			var/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers/M = new( src.loc )
+			M.color = color
+			M.dir = dir
+			M.initialize_directions = pipe_dir
+			M.connect_types = src.connect_types
+			//M.New()
+			var/turf/T = M.loc
+			M.level = T.intact ? 2 : 1
+			M.initialize()
+			if (!M)
+				usr << "There's nothing to connect this manifold to! (with how the pipe code works, at least one end needs to be connected to something, otherwise the game deletes the segment)"
 				return 1
 			M.build_network()
 			if (M.node1)
@@ -666,6 +934,26 @@ Buildable meters
 				C.node.initialize()
 				C.node.build_network()
 
+		if(PIPE_SUPPLY_CAP)
+			var/obj/machinery/atmospherics/pipe/cap/hidden/supply/C = new(src.loc)
+			C.dir = dir
+			C.initialize_directions = pipe_dir
+			C.initialize()
+			C.build_network()
+			if(C.node)
+				C.node.initialize()
+				C.node.build_network()
+
+		if(PIPE_SCRUBBERS_CAP)
+			var/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers/C = new(src.loc)
+			C.dir = dir
+			C.initialize_directions = pipe_dir
+			C.initialize()
+			C.build_network()
+			if(C.node)
+				C.node.initialize()
+				C.node.build_network()
+
 		if(PIPE_PASSIVE_GATE)		//passive gate
 			var/obj/machinery/atmospherics/binary/passive_gate/P = new(src.loc)
 			P.dir = dir
@@ -732,6 +1020,70 @@ Buildable meters
 				P.node2.build_network()
 		if(PIPE_DOWN)
 			var/obj/machinery/atmospherics/pipe/zpipe/down/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+		if(PIPE_SUPPLY_UP)
+			var/obj/machinery/atmospherics/pipe/zpipe/up/supply/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+		if(PIPE_SUPPLY_DOWN)
+			var/obj/machinery/atmospherics/pipe/zpipe/down/supply/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+		if(PIPE_SCRUBBERS_UP)
+			var/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+		if(PIPE_SCRUBBERS_DOWN)
+			var/obj/machinery/atmospherics/pipe/zpipe/down/scrubbers/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)
@@ -818,4 +1170,11 @@ Buildable meters
 #undef PIPE_GAS_FILTER_M
 #undef PIPE_GAS_MIXER_T
 #undef PIPE_GAS_MIXER_M
+#undef PIPE_SUPPLY_STRAIGHT
+#undef PIPE_SUPPLY_BENT
+#undef PIPE_SCRUBBERS_STRAIGHT
+#undef PIPE_SCRUBBERS_BENT
+#undef PIPE_SUPPLY_MANIFOLD
+#undef PIPE_SCRUBBERS_MANIFOLD
+#undef PIPE_UNIVERSAL
 //#undef PIPE_MANIFOLD4W
