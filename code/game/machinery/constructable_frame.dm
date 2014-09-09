@@ -115,6 +115,7 @@
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
 							new_machine.component_parts.Cut()
+							src.circuit.construct(new_machine)
 							for(var/obj/O in src)
 								if(circuit.contain_parts) // things like disposal don't want their parts in them
 									O.loc = new_machine
@@ -275,10 +276,35 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
 							"/obj/item/weapon/cable_coil" = 2,)
 
-/obj/item/weapon/circuitboard/gas_heater
+/obj/item/weapon/circuitboard/unary_atmos
+	board_type = "machine"
+	var/machine_dir = SOUTH
+	var/init_dirs = SOUTH
+
+/obj/item/weapon/circuitboard/unary_atmos/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/screwdriver))
+		machine_dir = turn(machine_dir, 90)
+		init_dirs = machine_dir
+		user.visible_message("\blue \The [user] adjusts the jumper on the [src]'s port configuration pins.", "\blue You adjust the jumper on the port configuration pins. Now set to [dir2text(machine_dir)].")
+	return
+
+/obj/item/weapon/circuitboard/unary_atmos/examine()
+	..()
+	usr << "The jumper is connecting the [dir2text(machine_dir)] pins."
+
+/obj/item/weapon/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
+	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
+	U.dir = src.machine_dir
+	U.initialize_directions = src.init_dirs
+	U.initialize()
+	U.build_network()
+	if (U.node)
+		U.node.initialize()
+		U.node.build_network()
+
+/obj/item/weapon/circuitboard/unary_atmos/heater
 	name = "Circuit Board (Gas Heating System)"
 	build_path = "/obj/machinery/atmospherics/unary/heater"
-	board_type = "machine"
 	origin_tech = "powerstorage=2;engineering=1"
 	frame_desc = "Requires 5 Pieces of Cable, 1 Matter Bin, and 2 Capacitors."
 	req_components = list(
@@ -286,10 +312,9 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/capacitor" = 2)
 
-/obj/item/weapon/circuitboard/gas_cooler
+/obj/item/weapon/circuitboard/unary_atmos/cooler
 	name = "Circuit Board (Gas Cooling System)"
 	build_path = "/obj/machinery/atmospherics/unary/freezer"
-	board_type = "machine"
 	origin_tech = "magnets=2;engineering=2"
 	frame_desc = "Requires 2 Pieces of Cable, 1 Matter Bin, 1 Micro Manipulator, and 2 Capacitors."
 	req_components = list(

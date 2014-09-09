@@ -25,15 +25,16 @@
 	var/frame_desc = null
 	var/contain_parts = 1
 
-//Called when the circuitboard is used to contruct a new computer.
-/obj/item/weapon/circuitboard/proc/construct_computer(var/obj/machinery/computer/C)
-	if (istype(C, build_path))
+//Called when the circuitboard is used to contruct a new machine.
+/obj/item/weapon/circuitboard/proc/construct(var/obj/machinery/M)
+	if (istype(M, build_path))
 		return 1
 	return 0
 
-//Called when a computer is deconstructed to produce a circuitboard
-/obj/item/weapon/circuitboard/proc/deconstruct_computer(var/obj/machinery/computer/C)
-	if (istype(C, build_path))
+//Called when a computer is deconstructed to produce a circuitboard.
+//Only used by computers, as other machines store their circuitboard instance.
+/obj/item/weapon/circuitboard/proc/deconstruct(var/obj/machinery/M)
+	if (istype(M, build_path))
 		return 1
 	return 0
 
@@ -55,11 +56,11 @@
 	var/locked = 1
 	var/emagged = 0
 
-/obj/item/weapon/circuitboard/security/construct_computer(var/obj/machinery/computer/security/C)
+/obj/item/weapon/circuitboard/security/construct(var/obj/machinery/computer/security/C)
 	if (..(C))
 		C.network = network
 
-/obj/item/weapon/circuitboard/security/deconstruct_computer(var/obj/machinery/computer/security/C)
+/obj/item/weapon/circuitboard/security/deconstruct(var/obj/machinery/computer/security/C)
 	if (..(C))
 		network = C.network
 
@@ -141,11 +142,11 @@
 	name = "Circuit board (Injector Control)"
 	build_path = "/obj/machinery/computer/general_air_control/fuel_injection"
 
-/obj/item/weapon/circuitboard/air_management/construct_computer(var/obj/machinery/computer/general_air_control/C)
+/obj/item/weapon/circuitboard/air_management/construct(var/obj/machinery/computer/general_air_control/C)
 	if (..(C))
 		C.frequency = frequency
 
-/obj/item/weapon/circuitboard/air_management/deconstruct_computer(var/obj/machinery/computer/general_air_control/C)
+/obj/item/weapon/circuitboard/air_management/deconstruct(var/obj/machinery/computer/general_air_control/C)
 	if (..(C))
 		frequency = C.frequency
 
@@ -221,11 +222,11 @@
 	origin_tech = "programming=3"
 	var/contraband_enabled = 0
 
-/obj/item/weapon/circuitboard/supplycomp/construct_computer(var/obj/machinery/computer/supplycomp/SC)
+/obj/item/weapon/circuitboard/supplycomp/construct(var/obj/machinery/computer/supplycomp/SC)
 	if (..(SC))
 		SC.can_order_contraband = contraband_enabled
 
-/obj/item/weapon/circuitboard/supplycomp/deconstruct_computer(var/obj/machinery/computer/supplycomp/SC)
+/obj/item/weapon/circuitboard/supplycomp/deconstruct(var/obj/machinery/computer/supplycomp/SC)
 	if (..(SC))
 		contraband_enabled = SC.can_order_contraband
 
@@ -446,5 +447,5 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "\blue You connect the monitor."
 				var/B = new src.circuit.build_path ( src.loc )
-				src.circuit.construct_computer(B)
+				src.circuit.construct(B)
 				del(src)

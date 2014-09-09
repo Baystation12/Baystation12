@@ -88,32 +88,18 @@
 	var/last_onln = online
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		//If chargemod is set, try to charge
+		//Use charging to let the player know whether we were able to obtain our target load.
+		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
+		if(chargemode)
+			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				load = add_load(load)		// add the load to the terminal side network
-				charge += load * SMESRATE	// increase the charge
-
-			else					// if not enough capcity
-				charging = 0		// stop charging
-				//chargecount  = 0
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
 				charging = 1
-		/*	if(chargemode)
-				if(chargecount > rand(3,6))
-					charging = 1
-					chargecount = 0
-
-				if(excess > chargelevel)
-					chargecount++
-				else
-					chargecount = 0
 			else
-				chargecount = 0   */
+				charging = 0
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored

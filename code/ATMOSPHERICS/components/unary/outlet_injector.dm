@@ -1,6 +1,6 @@
 //Basically a one way passive valve. If the pressure inside is greater than the environment then gas will flow passively, 
 //but it does not permit gas to flow back from the environment into the injector. Can be turned off to prevent any gas flow.
-//When it recieves the "inject" signal, it will try to pump it's entire contents into the environment regardless of pressure, using power.
+//When it receives the "inject" signal, it will try to pump it's entire contents into the environment regardless of pressure, using power.
 
 /obj/machinery/atmospherics/unary/outlet_injector
 	icon = 'icons/atmos/injector.dmi'
@@ -12,8 +12,8 @@
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
 
 	use_power = 1
-	idle_power_usage = 5	//internal circuitry
-	var/inject_power = 15000	//15000 kW ~ 20 HP
+	idle_power_usage = 150		//internal circuitry, friction losses and stuff
+	active_power_usage = 15000	//This also doubles as a measure of how powerful the pump is, in Watts. 15000 W ~ 20 HP
 	
 	var/on = 0
 	var/injecting = 0
@@ -54,26 +54,28 @@
 	..()
 	injecting = 0
 
-	if(!on)	//only uses power when injecting
-		return 0
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		return
 	
+	var/power_draw = -1
 	var/datum/gas_mixture/environment = loc.return_air()
-
+	
 	if(environment && air_contents.temperature > 0)
-		var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
-		var/pressure_delta = air_contents.return_pressure() - environment.return_pressure()
-		var/output_volume = environment.volume * environment.group_multiplier
-
-		if (pressure_delta > 0.01)
-			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-			transfer_moles = min(transfer_moles, (volume_rate/air_contents.volume)*air_contents.total_moles) //apply flow rate limit
-
-			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
-			loc.assume_air(removed)
-
-			if(network)
-				network.update = 1
-
+		var/transfer_moles = (volume_rate/air_contents.volume)*air_contents.total_moles //apply flow rate limit
+		power_draw = pump_gas(src, air_contents, environment, transfer_moles, active_power_usage)
+	
+	if (power_draw < 0)
+		//update_use_power(0)
+		use_power = 0	//don't force update - easier on CPU
+		last_flow_rate = 0
+	else
+		handle_power_draw(power_draw)
+		
+		if(network)
+			network.update = 1
+	
 	return 1
 
 /obj/machinery/atmospherics/unary/outlet_injector/proc/inject()
@@ -87,7 +89,7 @@
 	injecting = 1
 
 	if(air_contents.temperature > 0)
-		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, inject_power)
+		var/power_used = pump_gas(src, air_contents, environment, air_contents.total_moles, active_power_usage)
 		use_power(power_used)
 
 		if(network)

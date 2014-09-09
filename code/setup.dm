@@ -12,6 +12,7 @@
 #define STEFAN_BOLTZMANN_CONSTANT		0.0000000567	//W/(m^2*K^4)
 #define COSMIC_RADIATION_TEMPERATURE	3.15		//K
 #define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
+#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
