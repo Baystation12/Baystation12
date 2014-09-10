@@ -104,7 +104,7 @@
 /obj/item/weapon/storage/fancy/candle_box/New()
 	..()
 	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/candle(src)
+		new /obj/item/weapon/flame/candle(src)
 	return
 
 /*
