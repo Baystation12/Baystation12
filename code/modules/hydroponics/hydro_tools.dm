@@ -166,7 +166,7 @@
 /obj/item/weapon/plantspray
 	icon = 'icons/obj/hydroponics.dmi'
 	item_state = "spray"
-	flags = TABLEPASS | OPENCONTAINER | FPRINT | NOBLUDGEON
+	flags = TABLEPASS | FPRINT | NOBLUDGEON
 	slot_flags = SLOT_BELT
 	throwforce = 4
 	w_class = 2.0
@@ -181,13 +181,13 @@
 	name = "weed-spray"
 	desc = "It's a toxic mixture, in spray form, to kill small weeds."
 	icon_state = "weedspray"
-	weed_kill_str = 2
+	weed_kill_str = 6
 
 /obj/item/weapon/plantspray/pests
 	name = "pest-spray"
 	desc = "It's some pest eliminator spray! <I>Do not inhale!</I>"
 	icon_state = "pestspray"
-	pest_kill_str = 2
+	pest_kill_str = 6
 
 /obj/item/weapon/plantspray/pests/old
 	name = "bottle of pestkiller"
