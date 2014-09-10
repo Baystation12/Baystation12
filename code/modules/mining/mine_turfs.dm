@@ -28,8 +28,6 @@
 
 /turf/simulated/mineral/New()
 
-	. = ..()
-
 	MineralSpread()
 
 	spawn(2)
@@ -260,8 +258,23 @@
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE)
 
+
+	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
+
+	//Add some rubble,  you did just clear out a big chunk of rock.
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
-	for(var/i=0;i<rand(5);i++) N.overlay_detail = "asteroid[rand(0,9)]" //Add some rubble,  you did just clear out a big chunk of rock.
+	N.overlay_detail = "asteroid[rand(0,9)]"
+
+	// Kill and update the space overlays around us.
+	for(var/direction in step_overlays)
+		var/turf/space/T = get_step(src, step_overlays[direction])
+		if(istype(T))
+			T.overlays.Cut()
+			for(var/next_direction in step_overlays)
+				if(istype(get_step(T, step_overlays[next_direction]),/turf/simulated/mineral))
+					T.overlays += image('icons/turf/walls.dmi', "rock_side_[next_direction]")
+
+	// Update the
 	N.updateMineralOverlays(1)
 
 	if(rand(1,500) == 1)
@@ -363,7 +376,7 @@
 
 
 /turf/simulated/floor/plating/airless/asteroid //floor piece
-	name = "Asteroid"
+	name = "asteroid"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "asteroid"
 	oxygen = 0.01
@@ -375,8 +388,6 @@
 	has_resources = 1
 
 /turf/simulated/floor/plating/airless/asteroid/New()
-
-	. = ..()
 
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
@@ -459,27 +470,27 @@
 
 /turf/simulated/floor/plating/airless/asteroid/proc/updateMineralOverlays(var/update_neighbors)
 
-	spawn(2)
-		overlays.Cut()
-		var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
-		for(var/direction in step_overlays)
+	overlays.Cut()
 
-			if(istype(get_step(src, step_overlays[direction]), /turf/space))
-				overlays += image('icons/turf/floors.dmi', "asteroid_edge_[direction]")
+	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
+	for(var/direction in step_overlays)
 
-			if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
-				overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
+		if(istype(get_step(src, step_overlays[direction]), /turf/space))
+			overlays += image('icons/turf/floors.dmi', "asteroid_edge_[direction]")
 
-		if(overlay_detail) overlays += overlay_detail
+		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
+			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
-		if(update_neighbors)
-			var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
+	if(overlay_detail) overlays += overlay_detail
 
-			for(var/direction in all_step_directions)
-				var/turf/simulated/floor/plating/airless/asteroid/A
-				if(istype(get_step(src, direction), /turf/simulated/floor/plating/airless/asteroid))
-					A = get_step(src, direction)
-					A.updateMineralOverlays()
+	if(update_neighbors)
+		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
+
+		for(var/direction in all_step_directions)
+			var/turf/simulated/floor/plating/airless/asteroid/A
+			if(istype(get_step(src, direction), /turf/simulated/floor/plating/airless/asteroid))
+				A = get_step(src, direction)
+				A.updateMineralOverlays()
 
 /turf/simulated/floor/plating/airless/asteroid/Entered(atom/movable/M as mob|obj)
 	..()
