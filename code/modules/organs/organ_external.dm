@@ -225,7 +225,6 @@ This function completely restores a damaged organ to perfect condition.
 
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
-
 	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
@@ -573,20 +572,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		for(var/implant in implants)
 			del(implant)
 
-		germ_level = 0
-
-		//Replace all wounds on that arm with one wound on parent organ.
-		wounds.Cut()
-		if (parent)
-			var/datum/wound/W
-			if(max_damage < 50)
-				W = new/datum/wound/lost_limb/small(max_damage)
-			else
-				W = new/datum/wound/lost_limb(max_damage)
-			parent.wounds += W
-			parent.update_damages()
-		update_damages()
-
 		// If any organs are attached to this, destroy them
 		for(var/datum/organ/external/O in children)
 			O.droplimb(1)
@@ -639,36 +624,51 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
+		destspawn = 1
+		//Robotic limbs explode if sabotaged.
+		if((status & ORGAN_ROBOT) && !no_explode && sabotaged)
+			owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
+			"\red <b>Your [display_name] explodes!</b>",\
+			"You hear an explosion followed by a scream!")
+			explosion(get_turf(owner),-1,-1,2,3)
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, owner)
+			spark_system.attach(owner)
+			spark_system.start()
+			spawn(10)
+				del(spark_system)
+
+		owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+		"You hear a terrible sound of ripping tendons and flesh.")
+
+		germ_level = 0
+
+		//Replace all wounds on that arm with one wound on parent organ.
+		wounds.Cut()
+		if (parent)
+			var/datum/wound/W
+			testing("Creating lost limb wound on [parent.display_name] with damage [max_damage]")
+			if(max_damage < 50)
+				W = new/datum/wound/lost_limb/small(max_damage)
+			else
+				W = new/datum/wound/lost_limb(max_damage)
+			parent.wounds += W
+			parent.update_damages()
+		update_damages()
+
 		if(organ)
-			destspawn = 1
-			//Robotic limbs explode if sabotaged.
-			if(status & ORGAN_ROBOT && !no_explode && sabotaged)
-				owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
-				"\red <b>Your [display_name] explodes!</b>",\
-				"You hear an explosion followed by a scream!")
-				explosion(get_turf(owner),-1,-1,2,3)
-				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-				spark_system.set_up(5, 0, owner)
-				spark_system.attach(owner)
-				spark_system.start()
-				spawn(10)
-					del(spark_system)
-
-			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
-			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
-			"You hear a terrible sound of ripping tendons and flesh.")
-
 			//Throw organs around
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.update_body(1)
+		owner.update_body(1)
 
-			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
-			release_restraints()
+		// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
+		release_restraints()
 
-			if(vital)
-				owner.death()
+		if(vital)
+			owner.death()
 
 /****************************************************
 			   HELPERS
