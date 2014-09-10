@@ -485,7 +485,6 @@
 
 	if(update_neighbors)
 		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
-
 		for(var/direction in all_step_directions)
 			var/turf/simulated/floor/plating/airless/asteroid/A
 			if(istype(get_step(src, direction), /turf/simulated/floor/plating/airless/asteroid))
