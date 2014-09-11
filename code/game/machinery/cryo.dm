@@ -1,3 +1,5 @@
+#define HEAT_CAPACITY_HUMAN 24984 //249840 J/K, for a 72 kg person. Making this one-tenth of that as a quick workaround for cryo not cooling people enough.
+
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
