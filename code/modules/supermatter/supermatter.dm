@@ -20,7 +20,7 @@
 #define DECAY_FACTOR 700             //Affects how fast the supermatter power decays
 #define CRITICAL_TEMPERATURE 800     //K
 #define CHARGING_FACTOR 0.05
-#define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 300, scales linearly with power
+#define DAMAGE_RATE_LIMIT 3                 //damage rate cap at power = 300, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
