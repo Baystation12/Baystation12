@@ -203,7 +203,7 @@
 		user << "<span class='danger'>\The [src] is welded solid!</span>"
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || ( istype(C,/obj/item/weapon/twohanded/fireaxe) && C:wielded == 1))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/melee/energy/blade) || istype(C,/obj/item/weapon/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -212,6 +212,11 @@
 			"You try to pry \the [src] [density ? "open" : "closed"], but it is welded in place!",\
 			"You hear someone struggle and metal straining.")
 			return
+
+		if(istype(C,/obj/item/weapon/twohanded/fireaxe))
+			var/obj/item/weapon/twohanded/fireaxe/F = C
+			if(!F.wielded)
+				return
 
 		user.visible_message("<span class='danger'>\The [user] starts to force \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
 				"You start forcing \the [src] [density ? "open" : "closed"] with \the [C]!",\
