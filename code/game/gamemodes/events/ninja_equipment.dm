@@ -1173,16 +1173,25 @@ ________________________________________________________________________________
 
 /*
 ===================================================================================
-<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<SPACE NINJA MASK>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<SPACE NINJA HUD>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ===================================================================================
 */
 
-/obj/item/clothing/mask/gas/voice/space_ninja/New()
-	verbs += /obj/item/clothing/mask/gas/voice/space_ninja/proc/togglev
-	verbs += /obj/item/clothing/mask/gas/voice/space_ninja/proc/switchm
+/obj/item/clothing/glasses/hud/ninja
+	name = "Ninja Scanner HUD"
+	desc = "Assesses targets"
+	body_parts_covered = 0
 
-//This proc is linked to human life.dm. It determines what hud icons to display based on mind special role for most mobs.
-/obj/item/clothing/mask/gas/voice/space_ninja/proc/assess_targets(list/target_list, mob/living/carbon/U)
+/obj/item/clothing/glasses/hud/ninja/process_hud(var/mob/M)
+	var/target_list[] = list()
+	for(var/mob/living/target in oview(M))
+		if(target.mind && (target.mind.special_role || issilicon(target))) //They need to have a mind.
+			target_list += target
+	if(target_list.len)
+		assess_targets(target_list, M)
+	if(!M.druggy)	M.see_invisible = SEE_INVISIBLE_LIVING
+
+/obj/item/clothing/glasses/hud/ninja/proc/assess_targets(list/target_list, mob/living/carbon/U)
 	var/icon/tempHud = 'icons/mob/hud.dmi'
 	for(var/mob/living/target in target_list)
 		if(iscarbon(target))
@@ -1216,6 +1225,42 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,silicon_target,"hudmalai")
 	return 1
 
+/*
+===================================================================================
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<SPACE NINJA MASK>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+===================================================================================
+*/
+
+/datum/ninja_vision
+	var/mode
+	var/obj/item/clothing/glasses/glasses
+
+/datum/ninja_vision/scouter
+	mode = "Scouter"
+	glasses = new/obj/item/clothing/glasses/hud/ninja
+
+/datum/ninja_vision/nvg
+	mode = "Night Vision"
+	glasses = new/obj/item/clothing/glasses/night
+
+/datum/ninja_vision/thermal
+	mode = "Thermal Scanner"
+	glasses = new/obj/item/clothing/glasses/thermal
+
+/datum/ninja_vision/meson
+	mode = "Meson Scanner"
+	glasses = new/obj/item/clothing/glasses/meson
+
+/obj/item/clothing/mask/gas/voice/space_ninja
+	var/datum/ninja_vision/ninja_vision
+	var/list/datum/ninja_vision/ninja_visions
+
+/obj/item/clothing/mask/gas/voice/space_ninja/New()
+	ninja_visions = list(new/datum/ninja_vision/scouter, new/datum/ninja_vision/nvg, new/datum/ninja_vision/thermal, new/datum/ninja_vision/meson)
+	ninja_vision = ninja_visions[1]
+	verbs += /obj/item/clothing/mask/gas/voice/space_ninja/proc/togglev
+	verbs += /obj/item/clothing/mask/gas/voice/space_ninja/proc/switchm
+
 /obj/item/clothing/mask/gas/voice/space_ninja/proc/togglev()
 	set name = "Toggle Voice"
 	set desc = "Toggles the voice synthesizer on or off."
@@ -1248,42 +1293,20 @@ ________________________________________________________________________________
 	set name = "Switch Mode"
 	set desc = "Switches between Night Vision, Meson, or Thermal vision modes."
 	set category = "Ninja Equip"
-	//Have to reset these manually since life.dm is retarded like that. Go figure.
-	//This will only work for humans because only they have the appropriate code for the mask.
+
+	var/index = ninja_visions.Find(ninja_vision) + 1
+	if(index > ninja_visions.len)
+		index = 1
+	ninja_vision = ninja_visions[index]
+
 	var/mob/U = loc
-	switch(mode)
-		if(0)
-			mode=1
-			U << "Switching mode to <B>Night Vision</B>."
-		if(1)
-			mode=2
-			U.see_in_dark = 2
-			U << "Switching mode to <B>Thermal Scanner</B>."
-		if(2)
-			mode=3
-			U.see_invisible = SEE_INVISIBLE_LIVING
-			U.sight &= ~SEE_MOBS
-			U << "Switching mode to <B>Meson Scanner</B>."
-		if(3)
-			mode=0
-			U.sight &= ~SEE_TURFS
-			U << "Switching mode to <B>Scouter</B>."
+	U << "Switching mode to <B>[ninja_vision.mode]</B>."
 
 /obj/item/clothing/mask/gas/voice/space_ninja/examine()
 	set src in view()
 	..()
 
-	var/mode
-	switch(mode)
-		if(0)
-			mode = "Scouter"
-		if(1)
-			mode = "Night Vision"
-		if(2)
-			mode = "Thermal Scanner"
-		if(3)
-			mode = "Meson Scanner"
-	usr << "<B>[mode]</B> is active."//Leaving usr here since it may be on the floor or on a person.
+	usr << "<B>[ninja_vision.mode]</B> is active."//Leaving usr here since it may be on the floor or on a person.
 	usr << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
 
 /*
