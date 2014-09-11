@@ -1,3 +1,5 @@
+//TODO: Put this under a common parent type with heaters to cut down on the copypasta
+
 /obj/machinery/atmospherics/unary/freezer
 	name = "gas cooling system"
 	desc = "Cools gas when connected to pipe network"
@@ -12,8 +14,11 @@
 
 	var/on = 0
 	use_power = 0
-	idle_power_usage = 5	//5 Watts for thermostat related circuitry
+	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	active_power_usage = 50000		//50 kW. The power rating of the freezer
+
+	var/max_power_usage = 50000	//power rating when the usage is turned up to 1
+	var/power_setting = 100
 
 	var/set_temperature = T20C	//thermostat
 	var/cooling = 0
@@ -72,6 +77,7 @@
 	data["minGasTemperature"] = 0
 	data["maxGasTemperature"] = round(T20C+500)
 	data["targetGasTemperature"] = round(set_temperature)
+	data["powerSetting"] = power_setting
 
 	var/temp_class = "good"
 	if (air_contents.temperature > (T0C - 20))
@@ -104,6 +110,10 @@
 			src.set_temperature = min(src.set_temperature+amount, 1000)
 		else
 			src.set_temperature = max(src.set_temperature+amount, 0)
+	if(href_list["setPower"]) //setting power to 0 is redundant anyways
+		world << "href_list\[\"setPower\"\] = [href_list["setPower"]]"
+		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
+		set_power_level(new_setting)
 
 	src.add_fingerprint(usr)
 	return 1
@@ -165,6 +175,16 @@
 	active_power_usage = initial(active_power_usage)*cap_rating			//more powerful
 	heatsink_temperature = initial(heatsink_temperature)/((manip_rating+bin_rating)/2)	//more efficient
 	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200*bin_rating
+	set_power_level(power_setting)
+
+/obj/machinery/atmospherics/unary/freezer/proc/set_power_level(var/new_power_setting)
+	power_setting = new_power_setting
+	
+	var/old_power_usage = active_power_usage
+	active_power_usage = max_power_usage * (power_setting/100)
+	
+	if (use_power >= 2 && old_power_usage != active_power_usage)
+		force_power_update()
 
 //dismantling code. copied from autolathe
 /obj/machinery/atmospherics/unary/freezer/attackby(var/obj/item/O as obj, var/mob/user as mob)
