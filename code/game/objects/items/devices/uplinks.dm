@@ -28,6 +28,8 @@ datum/nano_item_lists
 	var/list/ItemsCategory	// List of categories with lists of items
 	var/list/ItemsReference	// List of references with an associated item
 	var/list/nanoui_items	// List of items for NanoUI use
+	var/nanoui_menu = 0		// The current menu we are in
+	var/list/nanoui_data = new // Additional data for NanoUI use
 
 /obj/item/device/uplink/New()
 	welcome = ticker.mode.uplink_welcome
@@ -161,9 +163,11 @@ datum/nano_item_lists
 	var/title = "Syndicate Uplink"
 	var/data[0]
 
-	data["crystals"] = uses
-	data["nano_items"] = nanoui_items
 	data["welcome"] = welcome
+	data["crystals"] = uses
+	data["menu"] = nanoui_menu
+	data["nano_items"] = nanoui_items
+	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -195,8 +199,13 @@ datum/nano_item_lists
 			toggle()
 			ui.close()
 			return 1
-
-		if(..(href, href_list) == 1)
+		if(href_list["return"])
+			nanoui_menu = round(nanoui_menu/10)
+			update_nano_data()
+		if(href_list["menu"])
+			nanoui_menu = text2num(href_list["menu"])
+			update_nano_data(href_list["id"])
+		else if(..(href, href_list) == 1)
 			var/datum/uplink_item/UI = ItemsReference[href_list["buy_item"]]
 			if(!UI)
 				return
@@ -208,6 +217,23 @@ datum/nano_item_lists
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)
 	return 1
+
+/obj/item/device/uplink/hidden/proc/update_nano_data(var/id)
+	if(nanoui_menu == 1)
+		var/permanentData[0]
+		for(var/datum/data/record/L in sortRecord(data_core.locked))
+			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
+		nanoui_data["exploit_records"] = permanentData
+
+	if(nanoui_menu == 11)
+		nanoui_data["exploit_exists"] = 0
+
+		for(var/datum/data/record/L in data_core.locked)
+			if(L.fields["id"] == id)
+				nanoui_data["exploit"] = L.fields
+				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["exploit_record"], "\n", "<br>")
+				nanoui_data["exploit_exists"] = 1
+				break
 
 // I placed this here because of how relevant it is.
 // You place this in your uplinkable item to check if an uplink is active or not.

@@ -403,15 +403,17 @@
 				src.state = 1
 				src.icon_state = "1"
 			if(istype(P, /obj/item/stack/cable_coil))
-				if(P:amount >= 5)
-					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-					if(do_after(user, 20))
-						if(P)
-							P:amount -= 5
-							if(!P:amount) del(P)
-							user << "\blue You add cables to the frame."
-							src.state = 3
-							src.icon_state = "3"
+				var/obj/item/stack/cable_coil/C = P
+				if (C.get_amount() < 5)
+					user << "<span class='warning'>You need five coils of wire to add them to the frame.</span>"
+					return
+				user << "<span class='notice'>You start to add cables to the frame.</span>"
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				if(do_after(user, 20) && state == 2)
+					if (C.use(5))
+						user << "<span class='notice'>You add cables to the frame.</span>"
+						state = 3
+						icon_state = "3"
 		if(3)
 			if(istype(P, /obj/item/weapon/wirecutters))
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
@@ -422,14 +424,17 @@
 				A.amount = 5
 
 			if(istype(P, /obj/item/stack/sheet/glass))
-				if(P:amount >= 2)
-					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-					if(do_after(user, 20))
-						if(P)
-							P:use(2)
-							user << "\blue You put in the glass panel."
-							src.state = 4
-							src.icon_state = "4"
+				var/obj/item/stack/sheet/glass/G = P
+				if (G.get_amount() < 2)
+					user << "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>"
+					return
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				user << "<span class='notice'>You start to put in the glass panel.</span>"
+				if(do_after(user, 20) && state == 3)
+					if (G.use(2))
+						user << "<span class='notice'>You put in the glass panel.</span>"
+						src.state = 4
+						src.icon_state = "4"
 		if(4)
 			if(istype(P, /obj/item/weapon/crowbar))
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)

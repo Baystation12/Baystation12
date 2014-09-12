@@ -62,7 +62,7 @@
 		"/obj/item/weapon/reagent_containers/pill",
 		"/obj/item/weapon/reagent_containers/syringe",
 		"/obj/item/weapon/reagent_containers/glass/dispenser",
-		"/obj/item/weapon/lighter/zippo",
+		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/storage/fancy/cigarettes",
 		"/obj/item/weapon/storage/pill_bottle",
 		"/obj/item/stack/medical",
@@ -93,15 +93,14 @@
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
 		"/obj/item/weapon/melee/baton",
 		"/obj/item/weapon/gun/energy/taser",
-		"/obj/item/weapon/lighter/zippo",
+		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/clothing/glasses/hud/security",
 		"/obj/item/device/flashlight",
 		"/obj/item/device/pda",
 		"/obj/item/device/radio/headset",
 		"/obj/item/weapon/melee",
-		"/obj/item/taperoll/police",
-		"/obj/item/weapon/gun/energy/taser"
+		"/obj/item/taperoll/police"
 		)
 
 /obj/item/weapon/storage/belt/soulstone
@@ -142,23 +141,3 @@
 	storage_slots = 9
 	max_w_class = 3
 	max_combined_w_class = 21
-	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
-		"/obj/item/weapon/reagent_containers/spray/pepper",
-		"/obj/item/weapon/handcuffs",
-		"/obj/item/device/flash",
-		"/obj/item/clothing/glasses",
-		"/obj/item/ammo_casing/shotgun",
-		"/obj/item/ammo_magazine",
-		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
-		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
-		"/obj/item/weapon/melee/baton",
-		"/obj/item/weapon/gun/energy/taser",
-		"/obj/item/weapon/lighter/zippo",
-		"/obj/item/weapon/cigpacket",
-		"/obj/item/clothing/glasses/hud/security",
-		"/obj/item/device/flashlight",
-		"/obj/item/device/pda",
-		"/obj/item/device/radio/headset",
-		"/obj/item/weapon/melee"
-		)

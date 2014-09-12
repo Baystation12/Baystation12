@@ -32,6 +32,12 @@
 	var/undershirt = 0	//Which undershirt the player wants.
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
+	// General information
+	var/home_system = ""
+	var/citizenship = ""
+	var/personal_faction = ""
+	var/religion = ""
+
 	//Equipment slots
 	var/obj/item/wear_suit = null
 	var/obj/item/w_uniform = null

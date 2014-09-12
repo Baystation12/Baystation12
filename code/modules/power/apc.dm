@@ -496,17 +496,17 @@
 					update_icon()
 				else
 					user << "You fail to [ locked ? "unlock" : "lock"] the APC interface."
-	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
+	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics != 2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
 			return
 		var/obj/item/stack/cable_coil/C = W
-		if(C.amount < 10)
-			user << "\red You need more wires."
+		if(C.get_amount() < 10)
+			user << "<span class='warning'>You need more wires.</span>"
 			return
 		user << "You start adding cables to the APC frame..."
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 20) && C.amount >= 10)
+		if(do_after(user, 20) && !terminal && opened && has_electronics != 2)
 			var/turf/T = get_turf(src)
 			var/obj/structure/cable/N = T.get_cable_node()
 			if (prob(50) && electrocute_mob(usr, N, N))
@@ -514,12 +514,12 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			C.use(10)
-			user.visible_message(\
-				"\red [user.name] has added cables to the APC frame!",\
-				"You add cables to the APC frame.")
-			make_terminal()
-			terminal.connect_to_network()
+			if (C.use(10))
+				user.visible_message(\
+					"\red [user.name] has added cables to the APC frame!",\
+					"You add cables to the APC frame.")
+				make_terminal()
+				terminal.connect_to_network()
 	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
@@ -1199,7 +1199,7 @@
 	if(cell && !shorted)
 		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
-		
+
 		// Calculate how much power the APC will try to get from the grid.
 		var/target_draw = lastused_total
 		if (src.attempt_charging())
@@ -1210,14 +1210,14 @@
 		var/power_drawn = 0
 		if (src.avail())
 			power_drawn = add_load(target_draw) //get some power from the powernet
-		
+
 		//figure out how much power is left over after meeting demand
 		power_excess = power_drawn - lastused_total
-		
+
 		if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
-			
+
 			charging = 0
-		
+
 			var/required_power = -power_excess
 			if(cell.charge >= required_power*CELLRATE)	// can we draw enough from cell to cover what's left over?
 				cell.use(required_power*CELLRATE)
@@ -1229,7 +1229,7 @@
 				lighting = autoset(lighting, 0)
 				environ = autoset(environ, 0)
 				autoflag = 0
-		
+
 		//Set external power status
 		if (!power_drawn)
 			main_status = 0

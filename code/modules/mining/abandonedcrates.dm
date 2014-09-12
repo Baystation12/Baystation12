@@ -20,7 +20,7 @@
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/rum(src)
 			new/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus(src)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey(src)
-			new/obj/item/weapon/lighter/zippo(src)
+			new/obj/item/weapon/flame/lighter/zippo(src)
 		if(2)
 			new/obj/item/weapon/pickaxe/drill(src)
 			new/obj/item/device/taperecorder(src)

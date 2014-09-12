@@ -26,8 +26,14 @@
 					var/soft = 0
 					for(var/atom/A in floorbelow.contents)
 						if(A.density)
-							blocked = 1
-							break
+							if(istype(A, /obj/structure/window))
+								var/obj/structure/window/W = A
+								blocked = W.is_fulltile()
+								if(blocked)
+									break
+							else
+								blocked = 1
+								break
 						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
 							blocked = 1
 							break
@@ -102,16 +108,18 @@
 		if(L)
 			return
 		var/obj/item/stack/rods/R = C
-		user << "\blue Constructing support lattice ..."
-		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
-		ReplaceWithLattice()
-		R.use(1)
+		if (R.use(1))
+			user << "\blue Constructing support lattice ..."
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+			ReplaceWithLattice()
 		return
 
 	if (istype(C, /obj/item/stack/tile/plasteel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
+			if (S.get_amount() < 1)
+				return
 			del(L)
 			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.build(src)

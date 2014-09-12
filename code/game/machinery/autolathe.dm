@@ -152,7 +152,7 @@
 		//If it's a stack, we eat multiple sheets.
 		if(istype(eating,/obj/item/stack))
 			var/obj/item/stack/stack = eating
-			total_material *= stack.amount
+			total_material *= stack.get_amount()
 
 		if(stored_material[material] + total_material > storage_capacity[material])
 			total_material = storage_capacity[material] - stored_material[material]

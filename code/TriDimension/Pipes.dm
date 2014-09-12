@@ -134,8 +134,12 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 
 	var/turf/controllerlocation = locate(1, 1, src.z)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -144,8 +148,12 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 			if(above)
 				for(var/obj/machinery/atmospherics/target in above)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
-						node2 = target
-						break
+						var/c = check_connect_types(target,src)
+						if (c)
+							target.connected_to = c
+							src.connected_to = c
+							node2 = target
+							break
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
@@ -173,8 +181,12 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 
 	var/turf/controllerlocation = locate(1, 1, src.z)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -183,9 +195,53 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 			if(below)
 				for(var/obj/machinery/atmospherics/target in below)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
-						node2 = target
-						break
+						var/c = check_connect_types(target,src)
+						if (c)
+							target.connected_to = c
+							src.connected_to = c
+							node2 = target
+							break
 
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	hide(T.intact)
+
+///////////////////////
+// supply/scrubbers  //
+///////////////////////
+
+obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
+	icon_state = "up-scrubbers"
+	name = "upwards scrubbers pipe"
+	desc = "A scrubbers pipe segment to connect upwards."
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+obj/machinery/atmospherics/pipe/zpipe/up/supply
+	icon_state = "up-supply"
+	name = "upwards supply pipe"
+	desc = "A supply pipe segment to connect upwards."
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE
+
+obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
+	icon_state = "down-scrubbers"
+	name = "downwards scrubbers pipe"
+	desc = "A scrubbers pipe segment to connect downwards."
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+obj/machinery/atmospherics/pipe/zpipe/down/supply
+	icon_state = "down-supply"
+	name = "downwards supply pipe"
+	desc = "A supply pipe segment to connect downwards."
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE

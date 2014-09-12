@@ -163,15 +163,23 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node2 = target
+				break
 
 	build_network()
-	
+
 	update_icon()
 	update_underlays()
 
@@ -230,7 +238,7 @@
 	name = "digital valve"
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_valve.dmi'
-	
+
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection

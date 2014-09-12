@@ -6,7 +6,7 @@
 	var/volume = 0
 	force = 20
 
-	layer = 2.4 //under wires with their 2.44
+	//layer = 2.4 //under wires with their 2.44
 	use_power = 0
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
@@ -105,6 +105,7 @@
 	pipe_color = new_color
 	update_icon()
 
+/*
 /obj/machinery/atmospherics/pipe/add_underlay(var/obj/machinery/atmospherics/node, var/direction)
 	if(istype(src, /obj/machinery/atmospherics/pipe/tank))	//todo: move tanks to unary devices
 		return ..()
@@ -117,6 +118,7 @@
 		underlays += icon_manager.get_atmos_icon("pipe_underlay_exposed", direction, pipe_color)
 	else
 		return null
+*/
 
 /obj/machinery/atmospherics/pipe/color_cache_name(var/obj/machinery/atmospherics/node)
 	if(istype(src, /obj/machinery/atmospherics/pipe/tank))
@@ -253,9 +255,9 @@
 				del(meter)
 		del(src)
 	else if(node1 && node2)
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "intact")
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "intact" + icon_connect_type)
 	else
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "exposed[node1?1:0][node2?1:0]")
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "exposed[node1?1:0][node2?1:0]" + icon_connect_type)
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
@@ -274,12 +276,20 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node2 = target
+				break
 
 	if(!node1 && !node2)
 		del(src)
@@ -311,10 +321,20 @@
 
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
 	name = "Scrubbers pipe"
+	desc = "A one meter section of scrubbers pipe"
+	icon_state = "intact-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/visible/supply
 	name = "Air supply pipe"
+	desc = "A one meter section of supply pipe"
+	icon_state = "intact-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/simple/visible/yellow
@@ -336,10 +356,20 @@
 
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
 	name = "Scrubbers pipe"
+	desc = "A one meter section of scrubbers pipe"
+	icon_state = "intact-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name = "Air supply pipe"
+	desc = "A one meter section of supply pipe"
+	icon_state = "intact-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow
@@ -470,19 +500,25 @@
 		del(src)
 	else
 		overlays.Cut()
-		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "core")
-		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps")
+		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "core" + icon_connect_type)
+		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps" + icon_connect_type)
 		underlays.Cut()
 
+		var/turf/T = get_turf(src)
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
+		var/node1_direction = get_dir(src, node1)
+		var/node2_direction = get_dir(src, node2)
+		var/node3_direction = get_dir(src, node3)
+
 		directions -= dir
 
-		directions -= add_underlay(node1)
-		directions -= add_underlay(node2)
-		directions -= add_underlay(node3)
+		directions -= add_underlay(T,node1,node1_direction,icon_connect_type)
+		directions -= add_underlay(T,node2,node2_direction,icon_connect_type)
+		directions -= add_underlay(T,node3,node3_direction,icon_connect_type)
 
 		for(var/D in directions)
-			add_underlay(,D)
+			add_underlay(T,,D,icon_connect_type)
+
 
 /obj/machinery/atmospherics/pipe/manifold/update_underlays()
 	..()
@@ -495,9 +531,13 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					node1 = target
-					connect_directions &= ~direction
-					break
+					var/c = check_connect_types(target,src)
+					if (c)
+						target.connected_to = c
+						src.connected_to = c
+						node1 = target
+						connect_directions &= ~direction
+						break
 			if (node1)
 				break
 
@@ -506,9 +546,13 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					node2 = target
-					connect_directions &= ~direction
-					break
+					var/c = check_connect_types(target,src)
+					if (c)
+						target.connected_to = c
+						src.connected_to = c
+						node2 = target
+						connect_directions &= ~direction
+						break
 			if (node2)
 				break
 
@@ -517,9 +561,13 @@
 		if(direction&connect_directions)
 			for(var/obj/machinery/atmospherics/target in get_step(src,direction))
 				if(target.initialize_directions & get_dir(target,src))
-					node3 = target
-					connect_directions &= ~direction
-					break
+					var/c = check_connect_types(target,src)
+					if (c)
+						target.connected_to = c
+						src.connected_to = c
+						node3 = target
+						connect_directions &= ~direction
+						break
 			if (node3)
 				break
 
@@ -533,11 +581,21 @@
 	level = 2
 
 /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers
-	name = "Scrubbers pipe"
+	name="Scrubbers pipe manifold"
+	desc = "A manifold composed of scrubbers pipes"
+	icon_state = "map-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold/visible/supply
-	name = "Air supply pipe"
+	name="Air supply pipe manifold"
+	desc = "A manifold composed of supply pipes"
+	icon_state = "map-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow
@@ -558,11 +616,21 @@
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
-	name = "Scrubbers pipe"
+	name="Scrubbers pipe manifold"
+	desc = "A manifold composed of scrubbers pipes"
+	icon_state = "map-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply
-	name = "Air supply pipe"
+	name="Air supply pipe manifold"
+	desc = "A manifold composed of supply pipes"
+	icon_state = "map-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold/hidden/yellow
@@ -675,11 +743,13 @@
 		del(src)
 	else
 		overlays.Cut()
-		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "4way")
-		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps_4way")
+		overlays += icon_manager.get_atmos_icon("manifold", , pipe_color, "4way" + icon_connect_type)
+		overlays += icon_manager.get_atmos_icon("manifold", , , "clamps_4way" + icon_connect_type)
 		underlays.Cut()
 
+		/*
 		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
+
 
 		directions -= add_underlay(node1)
 		directions -= add_underlay(node2)
@@ -688,6 +758,25 @@
 
 		for(var/D in directions)
 			add_underlay(,D)
+		*/
+
+		var/turf/T = get_turf(src)
+		var/list/directions = list(NORTH, SOUTH, EAST, WEST)
+		var/node1_direction = get_dir(src, node1)
+		var/node2_direction = get_dir(src, node2)
+		var/node3_direction = get_dir(src, node3)
+		var/node4_direction = get_dir(src, node4)
+
+		directions -= dir
+
+		directions -= add_underlay(T,node1,node1_direction,icon_connect_type)
+		directions -= add_underlay(T,node2,node2_direction,icon_connect_type)
+		directions -= add_underlay(T,node3,node3_direction,icon_connect_type)
+		directions -= add_underlay(T,node4,node4_direction,icon_connect_type)
+
+		for(var/D in directions)
+			add_underlay(T,,D,icon_connect_type)
+
 
 /obj/machinery/atmospherics/pipe/manifold4w/update_underlays()
 	..()
@@ -702,23 +791,39 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,1))
 		if(target.initialize_directions & 2)
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,2))
 		if(target.initialize_directions & 1)
-			node2 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node2 = target
+				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,4))
 		if(target.initialize_directions & 8)
-			node3 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node3 = target
+				break
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,8))
 		if(target.initialize_directions & 4)
-			node4 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node4 = target
+				break
 
 	var/turf/T = get_turf(src)
 	if(istype(T))
@@ -730,11 +835,21 @@
 	level = 2
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers
-	name = "Scrubbers pipe"
+	name="4-way scrubbers pipe manifold"
+	desc = "A manifold composed of scrubbers pipes"
+	icon_state = "map_4way-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/supply
-	name = "Air supply pipe"
+	name="4-way air supply pipe manifold"
+	desc = "A manifold composed of supply pipes"
+	icon_state = "map_4way-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold4w/visible/yellow
@@ -755,11 +870,21 @@
 	alpha = 128		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers
-	name = "Scrubbers pipe"
+	name="4-way scrubbers pipe manifold"
+	desc = "A manifold composed of scrubbers pipes"
+	icon_state = "map_4way-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply
-	name = "Air supply pipe"
+	name="4-way air supply pipe manifold"
+	desc = "A manifold composed of supply pipes"
+	icon_state = "map_4way-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/yellow
@@ -839,8 +964,12 @@
 /obj/machinery/atmospherics/pipe/cap/initialize()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node = target
+				break
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	hide(T.intact)
@@ -850,9 +979,45 @@
 	level = 2
 	icon_state = "cap"
 
+/obj/machinery/atmospherics/pipe/cap/visible/scrubbers
+	name = "scrubbers pipe endcap"
+	desc = "An endcap for scrubbers pipes"
+	icon_state = "cap-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/visible/supply
+	name = "supply pipe endcap"
+	desc = "An endcap for supply pipes"
+	icon_state = "cap-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE
+
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
 	icon_state = "cap-f"
+
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+	name = "scrubbers pipe endcap"
+	desc = "An endcap for scrubbers pipes"
+	icon_state = "cap-f-scrubbers"
+	connect_types = list(3)
+	layer = 2.38
+	icon_connect_type = "-scrubbers"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/hidden/supply
+	name = "supply pipe endcap"
+	desc = "An endcap for supply pipes"
+	icon_state = "cap-f-supply"
+	connect_types = list(2)
+	layer = 2.39
+	icon_connect_type = "-supply"
+	color = PIPE_COLOR_BLUE
 
 
 /obj/machinery/atmospherics/pipe/tank
@@ -907,8 +1072,12 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 
 	update_underlays()
 
@@ -1088,8 +1257,12 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 
 	update_icon()
 
@@ -1109,3 +1282,104 @@
 		dir = get_dir(src, node1)
 	else
 		icon_state = "exposed"
+
+
+/obj/machinery/atmospherics/pipe/simple/visible/universal
+	name="Universal pipe adapter"
+	desc = "An adapter for regular, supply and scrubbers pipes"
+	connect_types = list(1,2,3)
+	icon_state = "map_universal"
+
+/obj/machinery/atmospherics/pipe/simple/visible/universal/update_icon(var/safety = 0)
+	if(!check_icon_cache())
+		return
+
+	alpha = 255
+
+	overlays.Cut()
+	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
+	underlays.Cut()
+
+	if (node1)
+		universal_underlays(node1)
+		if(node2)
+			universal_underlays(node2)
+		else
+			var/node1_dir = get_dir(node1,src)
+			universal_underlays(,node1_dir)
+	else if (node2)
+		universal_underlays(node2)
+	else
+		universal_underlays(,dir)
+		universal_underlays(dir, -180)
+
+/obj/machinery/atmospherics/pipe/simple/visible/universal/update_underlays()
+	..()
+	update_icon()
+
+
+
+/obj/machinery/atmospherics/pipe/simple/hidden/universal
+	name="Universal pipe adapter"
+	desc = "An adapter for regular, supply and scrubbers pipes"
+	connect_types = list(1,2,3)
+	icon_state = "map_universal"
+
+/obj/machinery/atmospherics/pipe/simple/hidden/universal/update_icon(var/safety = 0)
+	if(!check_icon_cache())
+		return
+
+	alpha = 255
+
+	overlays.Cut()
+	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
+	underlays.Cut()
+
+	if (node1)
+		universal_underlays(node1)
+		if(node2)
+			universal_underlays(node2)
+		else
+			var/node2_dir = turn(get_dir(src,node1),-180)
+			universal_underlays(,node2_dir)
+	else if (node2)
+		universal_underlays(node2)
+		var/node1_dir = turn(get_dir(src,node2),-180)
+		universal_underlays(,node1_dir)
+	else
+		universal_underlays(,dir)
+		universal_underlays(,turn(dir, -180))
+
+/obj/machinery/atmospherics/pipe/simple/hidden/universal/update_underlays()
+	..()
+	update_icon()
+
+/obj/machinery/atmospherics/proc/universal_underlays(var/obj/machinery/atmospherics/node, var/direction)
+	var/turf/T = loc
+	if(node)
+		var/node_dir = get_dir(src,node)
+		if(node.icon_connect_type == "-supply")
+			add_underlay_adapter(T, , node_dir, "")
+			add_underlay_adapter(T, node, node_dir, "-supply")
+			add_underlay_adapter(T, , node_dir, "-scrubbers")
+		else if (node.icon_connect_type == "-scrubbers")
+			add_underlay_adapter(T, , node_dir, "")
+			add_underlay_adapter(T, , node_dir, "-supply")
+			add_underlay_adapter(T, node, node_dir, "-scrubbers")
+		else
+			add_underlay_adapter(T, node, node_dir, "")
+			add_underlay_adapter(T, , node_dir, "-supply")
+			add_underlay_adapter(T, , node_dir, "-scrubbers")
+	else
+		add_underlay_adapter(T, , direction, "-supply")
+		add_underlay_adapter(T, , direction, "-scrubbers")
+		add_underlay_adapter(T, , direction, "")
+
+/obj/machinery/atmospherics/proc/add_underlay_adapter(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type) //modified from add_underlay, does not make exposed underlays
+	if(node)
+		if(T.intact && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
+			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
+		else
+			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
+	else
+		underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "retracted" + icon_connect_type)

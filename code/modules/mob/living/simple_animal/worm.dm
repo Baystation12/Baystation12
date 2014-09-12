@@ -178,7 +178,7 @@
 				if(istype(stomachContent,/obj/item/stack)) //converts to plasma, keeping the stack value
 					if(!istype(stomachContent,/obj/item/stack/sheet/mineral/phoron))
 						var/obj/item/stack/oldStack = stomachContent
-						new /obj/item/stack/sheet/mineral/phoron(src, oldStack.amount)
+						new /obj/item/stack/sheet/mineral/phoron(src, oldStack.get_amount())
 						del(oldStack)
 						continue
 				else if(istype(stomachContent,/obj/item)) //converts to plasma, keeping the w_class

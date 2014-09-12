@@ -141,13 +141,13 @@
 			return
 		else if(istype(W,/obj/item/stack/rods))
 			var/obj/item/stack/rods/R = W
-			R.use(1)
-			in_chamber = new /obj/item/weapon/arrow/rod(src)
-			in_chamber.fingerprintslast = src.fingerprintslast
-			in_chamber.loc = src
-			icon_state = "crossbow-nocked"
-			user.visible_message("[user] jams [in_chamber] into [src].","You jam [in_chamber] into [src].")
-			superheat_rod(user)
+			if (R.use(1))
+				in_chamber = new /obj/item/weapon/arrow/rod(src)
+				in_chamber.fingerprintslast = src.fingerprintslast
+				in_chamber.loc = src
+				icon_state = "crossbow-nocked"
+				user.visible_message("[user] jams [in_chamber] into [src].","You jam [in_chamber] into [src].")
+				superheat_rod(user)
 			return
 
 	if(istype(W, /obj/item/weapon/cell))
@@ -210,8 +210,7 @@
 	if(istype(W,/obj/item/stack/rods))
 		if(buildstate == 0)
 			var/obj/item/stack/rods/R = W
-			if(R.amount >= 3)
-				R.use(3)
+			if(R.use(3))
 				user << "\blue You assemble a backbone of rods around the wooden stock."
 				buildstate++
 				update_icon()
@@ -231,8 +230,7 @@
 	else if(istype(W,/obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		if(buildstate == 2)
-			if(C.amount >= 5)
-				C.use(5)
+			if(C.use(5))
 				user << "\blue You wire a crude cell mount into the top of the crossbow."
 				buildstate++
 				update_icon()
@@ -240,8 +238,7 @@
 				user << "\blue You need at least five segments of cable coil to complete this task."
 			return
 		else if(buildstate == 4)
-			if(C.amount >= 5)
-				C.use(5)
+			if(C.use(5))
 				user << "\blue You string a steel cable across the crossbow's lath."
 				buildstate++
 				update_icon()
@@ -251,8 +248,7 @@
 	else if(istype(W,/obj/item/stack/sheet/mineral/plastic))
 		if(buildstate == 3)
 			var/obj/item/stack/sheet/mineral/plastic/P = W
-			if(P.amount >= 3)
-				P.use(3)
+			if(P.use(3))
 				user << "\blue You assemble and install a heavy plastic lath onto the crossbow."
 				buildstate++
 				update_icon()

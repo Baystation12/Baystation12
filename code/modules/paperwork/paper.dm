@@ -200,7 +200,14 @@
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user.real_name]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-
+	
+	t = replacetext(t, "\[h1\]", "<H1>")
+	t = replacetext(t, "\[/h1\]", "</H1>")
+	t = replacetext(t, "\[h2\]", "<H2>")
+	t = replacetext(t, "\[/h2\]", "</H2>")
+	t = replacetext(t, "\[h3\]", "<H3>")
+	t = replacetext(t, "\[/h3\]", "</H3>")
+	
 	if(!iscrayon)
 		t = replacetext(t, "\[*\]", "<li>")
 		t = replacetext(t, "\[hr\]", "<HR>")
@@ -253,6 +260,9 @@
 		<br>
 		\[br\] : Creates a linebreak.<br>
 		\[center\] - \[/center\] : Centers the text.<br>
+		\[h1\] - \[/h1\] : Makes the text a first level heading<br>
+		\[h2\] - \[/h2\] : Makes the text a second level heading<br>
+		\[h3\] - \[/h3\] : Makes the text a third level heading<br>
 		\[b\] - \[/b\] : Makes the text <b>bold</b>.<br>
 		\[i\] - \[/i\] : Makes the text <i>italic</i>.<br>
 		\[u\] - \[/u\] : Makes the text <u>underlined</u>.<br>
@@ -267,11 +277,11 @@
 		\[hr\] : Adds a horizontal rule.
 	</BODY></HTML>"}, "window=paper_help")
 
-/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/lighter/P, mob/user)
+/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
 	var/class = "<span class='warning'>"
 
 	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/weapon/lighter/zippo))
+		if(istype(P, /obj/item/weapon/flame/lighter/zippo))
 			class = "<span class='rose'>"
 
 		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
@@ -435,7 +445,7 @@
 
 		user << "<span class='notice'>You stamp the paper with your rubber stamp.</span>"
 
-	else if(istype(P, /obj/item/weapon/lighter))
+	else if(istype(P, /obj/item/weapon/flame))
 		burnpaper(P, user)
 
 	add_fingerprint(user)

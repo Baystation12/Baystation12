@@ -8,6 +8,7 @@
 /*
  * Stacks
  */
+
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "materials=1"
@@ -19,11 +20,11 @@
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
 	if (amount)
-		src.amount=amount
+		src.amount = amount
 	return
 
 /obj/item/stack/Del()
-	if (src && usr && usr.machine==src)
+	if (src && usr && usr.machine == src)
 		usr << browse(null, "window=stack")
 	..()
 
@@ -69,12 +70,6 @@
 			var/title as text
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
-			/*
-			if (R.one_per_turf)
-				can_build = can_build && !(locate(R.result_type) in usr.loc)
-			if (R.on_floor)
-				can_build = can_build && istype(usr.loc, /turf/simulated/floor)
-			*/
 			if (R.res_amount>1)
 				title+= "[R.res_amount]x [R.title]\s"
 			else
@@ -180,6 +175,9 @@
 	else
 		amount += extra
 	return 1
+
+/obj/item/stack/proc/get_amount()
+	return amount
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
 	var/obj/item/stack/oldsrc = src

@@ -104,9 +104,10 @@
 		if (contents.len>=max_n_of_items)
 			user << "\red This [src] is full of ingredients, you cannot put more."
 			return 1
-		if (istype(O,/obj/item/stack) && O:amount>1)
+		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
+			var/obj/item/stack/S = O
 			new O.type (src)
-			O:use(1)
+			S.use(1)
 			user.visible_message( \
 				"\blue [user] has added one of [O] to \the [src].", \
 				"\blue You add one of [O] to \the [src].")
