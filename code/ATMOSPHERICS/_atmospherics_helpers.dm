@@ -63,7 +63,7 @@
 	
 	var/power_draw = specific_power*transfer_moles
 	if (power_draw > 0)
-		removed.add_thermal_energy(power_draw) //1st law - energy is conserved
+		removed.add_thermal_energy(power_draw * config.atmos_machine_heat) //1st law - energy is conserved
 	
 	sink.merge(removed)
 	
@@ -138,7 +138,7 @@
 	source.update_values()
 	
 	if (power_draw > 0)
-		sink.add_thermal_energy(power_draw)	//gotta conserve that energy
+		sink.add_thermal_energy(power_draw * config.atmos_machine_heat)	//gotta conserve that energy
 	
 	return power_draw
 
@@ -216,9 +216,9 @@
 	
 	//1LTD energy is conserved
 	if (filtered_power_used > 0)
-		sink_filtered.add_thermal_energy(filtered_power_used)
+		sink_filtered.add_thermal_energy(filtered_power_used * config.atmos_machine_heat)
 	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used)
+		sink_clean.add_thermal_energy(unfiltered_power_used * config.atmos_machine_heat)
 	
 	return filtered_power_used + unfiltered_power_used
 
@@ -297,9 +297,9 @@
 	var/power_draw = unfiltered_power_used
 	for (var/datum/gas_mixture/sink_filtered in filtered_power_used)
 		power_draw += filtered_power_used[sink_filtered]
-		sink_filtered.add_thermal_energy(filtered_power_used[sink_filtered])
+		sink_filtered.add_thermal_energy(filtered_power_used[sink_filtered] * config.atmos_machine_heat)
 	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used)
+		sink_clean.add_thermal_energy(unfiltered_power_used * config.atmos_machine_heat)
 	
 	return power_draw
 
@@ -366,7 +366,7 @@
 		var/datum/gas_mixture/removed = source.remove(transfer_moles)
 		
 		var/power_draw = transfer_moles * source_specific_power[source]
-		removed.add_thermal_energy(power_draw)	//conservation of energy
+		removed.add_thermal_energy(power_draw * config.atmos_machine_heat)	//conservation of energy
 		total_power_draw += power_draw
 		
 		sink.merge(removed)

@@ -98,6 +98,8 @@
 
 	//game_options.txt configs
 
+	var/atmos_machine_heat = 1.0
+
 	var/health_threshold_softcrit = 0
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
@@ -532,6 +534,8 @@
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
+				if("atmos_machine_heat")
+					config.atmos_machine_heat = value
 
 				if("run_speed")
 					config.run_speed = value

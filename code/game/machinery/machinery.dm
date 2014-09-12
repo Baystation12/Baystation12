@@ -165,6 +165,9 @@ Class Procs:
 	use_power = new_use_power
 
 	//force area power update
+	force_power_update()
+
+/obj/machinery/proc/force_power_update()
 	var/area/A = get_area(src)
 	if(A && A.master)
 		A.master.powerupdate = 1
