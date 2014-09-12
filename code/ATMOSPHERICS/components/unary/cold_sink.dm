@@ -15,7 +15,7 @@
 	var/on = 0
 	use_power = 0
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
-	active_power_usage = 50000		//50 kW. The power rating of the freezer
+	active_power_usage			//50 kW. The power rating of the freezer
 
 	var/max_power_usage = 50000	//power rating when the usage is turned up to 1
 	var/power_setting = 100
@@ -35,6 +35,8 @@
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	
+	active_power_usage = max_power_usage * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/freezer/initialize()
 	if(node) return
@@ -111,7 +113,6 @@
 		else
 			src.set_temperature = max(src.set_temperature+amount, 0)
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		world << "href_list\[\"setPower\"\] = [href_list["setPower"]]"
 		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
 		set_power_level(new_setting)
 

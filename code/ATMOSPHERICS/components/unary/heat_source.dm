@@ -16,10 +16,10 @@
 	var/on = 0
 	use_power = 0
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
-	active_power_usage = 50000		//50 kW. The power rating of the heater
+	active_power_usage 			//50 kW. The power rating of the heater
 	
 	var/max_power_usage = 50000	//power rating when the usage is turned up to 1
-	var/power_setting = 1.0		//between 0 and 1
+	var/power_setting = 100
 
 	var/heating = 0		//mainly for icon updates
 	var/opened = 0		//for deconstruction
@@ -34,6 +34,8 @@
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	
+	active_power_usage = max_power_usage * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/heater/initialize()
 	if(node) return
