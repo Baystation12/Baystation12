@@ -268,12 +268,8 @@
 	zburn(null)
 
 //Rechecks the gas_mixture and adjusts the graphic list if needed.
-/datum/gas_mixture/proc/check_tile_graphic()
-	//List of new overlays that weren't valid before.
-	var/list/graphic_add = null
-	//List of overlays that need to be removed now that they're not valid.
-	var/list/graphic_remove = null
-
+//Two lists can be passed by reference if you need know specifically which graphics were added and removed.
+/datum/gas_mixture/proc/check_tile_graphic(list/graphic_add = null, list/graphic_remove = null)
 	for(var/g in gas_data.overlay_limit)
 		if(graphic.Find(gas_data.tile_overlay[g]))
 			//Overlay is already applied for this gas, check if it's still valid.
