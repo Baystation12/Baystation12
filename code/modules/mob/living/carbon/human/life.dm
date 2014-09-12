@@ -1383,7 +1383,9 @@
 					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
 
+			var/tmp/has_ninja_mask = 0
 			if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
+				has_ninja_mask = 1
 				var/obj/item/clothing/mask/gas/voice/space_ninja/O = wear_mask
 				switch(O.mode)
 					if(0)
@@ -1429,7 +1431,7 @@
 					if(!druggy)
 						see_invisible = SEE_INVISIBLE_LIVING
 
-			else if(!seer)
+			else if(!seer && !has_ninja_mask)
 				see_invisible = SEE_INVISIBLE_LIVING
 
 
