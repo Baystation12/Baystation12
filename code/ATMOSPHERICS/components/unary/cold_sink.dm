@@ -9,7 +9,7 @@
 
 	anchored = 1.0
 
-	var/heatsink_temperature = T20C		//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
+	var/heatsink_temperature = 70 //T20C	//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600	//L
 
 	var/on = 0
@@ -137,6 +137,7 @@
 		//not /really/ proper thermodynamics but whatever
 		var/cop = air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * active_power_usage)	//limit heat transfer by available power
+		heat_transfer *= 10 //Temp fix for cryo being unusable.
 
 		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
 		if (debug)
