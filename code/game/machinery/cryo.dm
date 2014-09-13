@@ -12,7 +12,7 @@
 	use_power = 1
 	idle_power_usage = 20
 	active_power_usage = 200
-	
+
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
@@ -45,7 +45,7 @@
 
 	if(air_contents)
 		temperature_archived = air_contents.temperature
-		heat_gas_contents()
+		//heat_gas_contents()
 		expel_gas()
 
 	if(abs(temperature_archived-air_contents.temperature) > 1)
