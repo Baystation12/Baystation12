@@ -25,7 +25,7 @@ var/global/list/power_update_requests_by_area = list()
 	power_profiled_time += (world.time - power_last_profile_time)
 	power_last_profile_time = world.time
 
-/client/verb/toggle_power_update_profiling()
+/client/proc/toggle_power_update_profiling()
 	set name = "Toggle Area Power Update Profiling"
 	set desc = "Toggles the recording of area power update requests."
 	set category = "Debug"
@@ -47,7 +47,7 @@ var/global/list/power_update_requests_by_area = list()
 	
 	feedback_add_details("admin_verb","APUP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/verb/view_power_update_stats_machines()
+/client/proc/view_power_update_stats_machines()
 	set name = "View Area Power Update Statistics By Machines"
 	set desc = "See which types of machines are triggering area power updates."
 	set category = "Debug"
@@ -56,7 +56,7 @@ var/global/list/power_update_requests_by_area = list()
 	for (var/M in power_update_requests_by_machine)
 		usr << "[M] = [power_update_requests_by_machine[M]]"
 
-/client/verb/view_power_update_stats_area()
+/client/proc/view_power_update_stats_area()
 	set name = "View Area Power Update Statistics By Area"
 	set desc = "See which areas are having area power updates."
 	set category = "Debug"
