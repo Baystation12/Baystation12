@@ -1,4 +1,4 @@
-#define HEAT_CAPACITY_HUMAN 24984 //249840 J/K, for a 72 kg person. Making this one-tenth of that as a quick workaround for cryo not cooling people enough.
+#define HEAT_CAPACITY_HUMAN 100 //249840 J/K, for a 72 kg person.
 
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
@@ -45,7 +45,7 @@
 
 	if(air_contents)
 		temperature_archived = air_contents.temperature
-		//heat_gas_contents()
+		heat_gas_contents()
 		expel_gas()
 
 	if(abs(temperature_archived-air_contents.temperature) > 1)
