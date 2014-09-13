@@ -5,11 +5,22 @@
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
-//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
-#define POWER_FACTOR 0.35              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level.
+/*
+	How to tweak the SM
+	
+	POWER_FACTOR		directly controls how much power the SM puts out at a given level of excitation (power var). Making this lower means you have to work the SM harder to get the same amount of power.
+	CRITICAL_TEMPERATURE	The temperature at which the SM starts taking damage.
+	
+	CHARGING_FACTOR		Controls how much emitter shots excite the SM.
+	DAMAGE_RATE_LIMIT	Controls the maximum rate at which the SM will take damage due to high temperatures.
+*/
 
-#define CHARGING_FACTOR 0.55
-#define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 900, scales linearly with power
+//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
+#define POWER_FACTOR 1.0
+#define DECAY_FACTOR 700             //Affects how fast the supermatter power decays
+#define CRITICAL_TEMPERATURE 800     //K
+#define CHARGING_FACTOR 0.05
+#define DAMAGE_RATE_LIMIT 3                 //damage rate cap at power = 300, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -66,6 +77,8 @@
 	var/config_hallucination_power = 0.1
 
 	var/obj/item/device/radio/radio
+	
+	var/debug = 0
 
 	shard //Small subtype, less efficient and more sensitive, but less boom.
 		name = "Supermatter Shard"
@@ -160,79 +173,71 @@
 	var/datum/gas_mixture/env = null
 
 	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
-	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
-	var/damage_inc_limit = (power/900)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
+	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 300 (based on testing, equals roughly 5% per SM alert announcement).
+	var/damage_inc_limit = (power/300)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
 
 	if(!istype(L, /turf/space))
 		env = L.return_air()
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
 	if(!env || !removed || !removed.total_moles)
-		damage += max(((power-(1600*POWER_FACTOR)))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+		damage += max((power-(2*CRITICAL_TEMPERATURE*POWER_FACTOR))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
 	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
 		env.remove(env.total_moles)
 	else
 		damage_archived = damage
 
-		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
+		damage = max( damage + min( ( (removed.temperature - CRITICAL_TEMPERATURE) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
-		var/temp_factor = 100
-
-		if(oxygen > 0.8)
-			// with a perfect gas mix, make the power less based on heat
+		//calculate power gain for oxygen reaction
+		var/temp_factor
+		var/equilibrium_power
+		if (oxygen > 0.8)
+			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 400
+			equilibrium_power = 400
 			icon_state = "[base_icon_state]_glow"
 		else
-			// in normal mode, base the produced energy around the heat
-			temp_factor = 60
+			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
+			equilibrium_power = 250
 			icon_state = base_icon_state
-
-		power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
+		
+		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
+		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
 		//We've generated power, now let's transfer it to the collectors for storing/usage
 		transfer_energy()
 
 		var/device_energy = power * REACTION_POWER_MODIFIER
 
-		//To figure out how much temperature to add each tick, consider that at one atmosphere's worth
-		//of pure oxygen, with all four lasers firing at standard energy and no N2 present, at room temperature
-		//that the device energy is around 2140. At that stage, we don't want too much heat to be put out
-		//Since the core is effectively "cold"
-
-		//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
-		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
-
-		var/thermal_power = THERMAL_RELEASE_MODIFIER
-
-		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
-		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
-
-		removed.temperature += ((device_energy * thermal_power) / removed.heat_capacity())
-
-		removed.temperature = max(0, min(removed.temperature, 10000))
-
-		//Calculate how much gas to release
-		removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
-
-		removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
-
-		removed.update_values()
+		//Release reaction gasses
+		var/heat_capacity = removed.heat_capacity()
+		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
+		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
+		
+		var/thermal_power = THERMAL_RELEASE_MODIFIER * device_energy
+		if (debug)
+			var/heat_capacity_new = removed.heat_capacity()
+			visible_message("[src]: Releasing [round(thermal_power)] W.")
+			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
+		
+		removed.add_thermal_energy(thermal_power)
+		removed.temperature = between(0, removed.temperature, 10000)
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
+	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
-	//adjusted range so that a power of 600 (pretty high) results in 8 tiles, roughly the distance from the core to the engine monitoring room.
-	//at power of 1210 this becomes 9 tiles --> increases very very slowly.
-	for(var/mob/living/l in range(src, round((power / 0.146484375) ** 0.25)))
+	//adjusted range so that a power of 300 (pretty high) results in 8 tiles, roughly the distance from the core to the engine monitoring room.
+	for(var/mob/living/l in range(src, round(sqrt(power / 5))))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
 		l.apply_effect(rads, IRRADIATE)
 
-	power -= (power/500)**3		//energy losses due to radiation
+	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 
 	return 1
 
@@ -244,8 +249,8 @@
 				// Then bring it inside to explode instantly upon landing on a valid turf.
 
 
-	if(Proj.flag != "bullet")
-		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR
+	if(istype(Proj, /obj/item/projectile/beam))
+		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
 	else
 		damage += Proj.damage * config_bullet_energy
 	return 0
@@ -274,8 +279,10 @@
 
 /obj/machinery/power/supermatter/proc/transfer_energy()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
-		if(get_dist(R, src) <= 15) // Better than using orange() every process
-			R.receive_pulse(power * POWER_FACTOR)
+		var/distance = get_dist(R, src)
+		if(distance <= 15)
+			//for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
+			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2) 
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)

@@ -98,6 +98,8 @@
 
 	//game_options.txt configs
 
+	var/atmos_machine_heat = 1.0
+
 	var/health_threshold_softcrit = 0
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
@@ -111,6 +113,8 @@
 	var/revival_pod_plants = 1
 	var/revival_cloning = 1
 	var/revival_brain_life = -1
+
+	var/use_loyalty_implants = 0
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
@@ -521,10 +525,23 @@
 					config.revival_cloning = value
 				if("revival_brain_life")
 					config.revival_brain_life = value
+				if("organ_health_multiplier")
+					config.organ_health_multiplier = value / 100
+				if("organ_regeneration_multiplier")
+					config.organ_regeneration_multiplier = value / 100
+				if("bones_can_break")
+					config.bones_can_break = value
+				if("limbs_can_break")
+					config.limbs_can_break = value
+
+				if("atmos_machine_heat")
+					config.atmos_machine_heat = value
+
 				if("run_speed")
 					config.run_speed = value
 				if("walk_speed")
 					config.walk_speed = value
+
 				if("human_delay")
 					config.human_delay = value
 				if("robot_delay")
@@ -537,14 +554,11 @@
 					config.slime_delay = value
 				if("animal_delay")
 					config.animal_delay = value
-				if("organ_health_multiplier")
-					config.organ_health_multiplier = value / 100
-				if("organ_regeneration_multiplier")
-					config.organ_regeneration_multiplier = value / 100
-				if("bones_can_break")
-					config.bones_can_break = value
-				if("limbs_can_break")
-					config.limbs_can_break = value
+
+
+				if("use_loyalty_implants")
+					config.use_loyalty_implants = 1
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

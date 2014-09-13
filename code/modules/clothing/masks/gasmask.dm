@@ -4,12 +4,27 @@
 	icon_state = "gas_alt"
 	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = FACE|EYES
 	w_class = 3.0
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 	var/gas_filter_strength = 1			//For gas mask filters
+	var/list/filtered_gases = list("phoron", "sleeping_agent")
+
+/obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
+	var/datum/gas_mixture/filtered = new
+
+	for(var/g in filtered_gases)
+		if(air.gas[g])
+			filtered.gas[g] = air.gas[g] * gas_filter_strength
+			air.gas[g] -= filtered.gas[g]
+
+	air.update_values()
+	filtered.update_values()
+
+	return filtered
 
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
@@ -18,12 +33,14 @@
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 75, rad = 0)
+	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	siemens_coefficient = 0.7
+	body_parts_covered = FACE|EYES
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "syndicate mask"
@@ -70,6 +87,7 @@
 	desc = "A mask used when acting as a monkey."
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
+	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"

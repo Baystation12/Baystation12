@@ -87,12 +87,9 @@
 	if(health > maxHealth)
 		health = maxHealth
 
-	if(stunned)
-		AdjustStunned(-1)
-	if(weakened)
-		AdjustWeakened(-1)
-	if(paralysis)
-		AdjustParalysis(-1)
+	handle_stunned()
+	handle_weakened()
+	handle_paralysed()
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -141,41 +138,41 @@
 	//Atmos
 	var/atmos_suitable = 1
 
-	var/atom/A = src.loc		
+	var/atom/A = src.loc
 
 	if(istype(A,/turf))
-		var/turf/T = A	
-		
+		var/turf/T = A
+
 		var/datum/gas_mixture/Environment = T.return_air()
-	
+
 		if(Environment)
-			
+
 			if( abs(Environment.temperature - bodytemperature) > 40 )
 				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
-			
+
 			if(min_oxy)
-				if(Environment.oxygen < min_oxy)
+				if(Environment.gas["oxygen"] < min_oxy)
 					atmos_suitable = 0
 			if(max_oxy)
-				if(Environment.oxygen > max_oxy)
+				if(Environment.gas["oxygen"] > max_oxy)
 					atmos_suitable = 0
 			if(min_tox)
-				if(Environment.phoron < min_tox)
+				if(Environment.gas["phoron"] < min_tox)
 					atmos_suitable = 0
 			if(max_tox)
-				if(Environment.phoron > max_tox)
+				if(Environment.gas["phoron"] > max_tox)
 					atmos_suitable = 0
 			if(min_n2)
-				if(Environment.nitrogen < min_n2)
+				if(Environment.gas["nitrogen"] < min_n2)
 					atmos_suitable = 0
 			if(max_n2)
-				if(Environment.nitrogen > max_n2)
+				if(Environment.gas["nitrogen"] > max_n2)
 					atmos_suitable = 0
 			if(min_co2)
-				if(Environment.carbon_dioxide < min_co2)
+				if(Environment.gas["carbon_dioxide"] < min_co2)
 					atmos_suitable = 0
 			if(max_co2)
-				if(Environment.carbon_dioxide > max_co2)
+				if(Environment.gas["carbon_dioxide"] > max_co2)
 					atmos_suitable = 0
 
 	//Atmos effect
@@ -337,7 +334,7 @@
 
 	var/damage = rand(1, 3)
 
-	if(istype(src, /mob/living/carbon/slime/adult))
+	if(M.is_adult)
 		damage = rand(20, 40)
 	else
 		damage = rand(5, 35)

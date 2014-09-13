@@ -9,6 +9,7 @@
 	var/last_pic = 1.0
 	var/list/network = list("SS13")
 	var/mapping = 0//For the overview file, interesting bit of code.
+	circuit = /obj/item/weapon/circuitboard/security
 
 
 	attack_ai(var/mob/user as mob)
@@ -20,8 +21,10 @@
 
 
 	check_eye(var/mob/user as mob)
-		if ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded || !( current ) || !( current.status )) && (!istype(user, /mob/living/silicon)))
+		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return null
+		if ( !current || !current.can_use() ) //camera doesn't work
+			current = null
 		user.reset_view(current)
 		return 1
 
@@ -45,7 +48,7 @@
 		D["Cancel"] = "Cancel"
 		for(var/obj/machinery/camera/C in L)
 			if(can_access_camera(C))
-				D[text("[][]", C.c_tag, (C.status ? null : " (Deactivated)"))] = C
+				D[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
 		if(!t)
@@ -71,52 +74,18 @@
 		return 0
 
 	proc/switch_to_camera(var/mob/user, var/obj/machinery/camera/C)
-		if ((get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) || !( C.can_use() )) && (!istype(user, /mob/living/silicon/ai)))
-			if(!C.can_use() && !isAI(user))
-				src.current = null
-			return 0
-		else
-			if(isAI(user))
-				var/mob/living/silicon/ai/A = user
-				A.eyeobj.setLoc(get_turf(C))
-				A.client.eye = A.eyeobj
-			else
-				src.current = C
-				use_power(50)
+		//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
+		if(isAI(user))
+			var/mob/living/silicon/ai/A = user
+			A.eyeobj.setLoc(get_turf(C))
+			A.client.eye = A.eyeobj
 			return 1
-
-	attackby(I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/screwdriver))
-			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20))
-				if (stat & BROKEN)
-					user << "\blue The broken glass falls out."
-					var/obj/structure/computerframe/CF = new /obj/structure/computerframe(loc)
-					new /obj/item/weapon/shard(loc)
-					var/obj/item/weapon/circuitboard/security/CB = new /obj/item/weapon/circuitboard/security(CF)
-					CB.network = network
-					for (var/obj/C in src)
-						C.loc = loc
-					CF.circuit = CB
-					CF.state = 3
-					CF.icon_state = "3"
-					CF.anchored = 1
-					del(src)
-				else
-					user << "\blue You disconnect the monitor."
-					var/obj/structure/computerframe/CF = new /obj/structure/computerframe( loc )
-					var/obj/item/weapon/circuitboard/security/CB = new /obj/item/weapon/circuitboard/security(CF)
-					CB.network = network
-					for (var/obj/C in src)
-						C.loc = loc
-					CF.circuit = CB
-					CF.state = 4
-					CF.icon_state = "4"
-					CF.anchored = 1
-					del(src)
-		else
-			attack_hand(user)
-		return
+		
+		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
+			return 0
+		src.current = C
+		use_power(50)
+		return 1
 
 //Camera control: moving.
 	proc/jump_on_click(var/mob/user,var/A)
@@ -171,6 +140,7 @@
 	icon_state = "telescreen"
 	network = list("thunder")
 	density = 0
+	circuit = null
 
 /obj/machinery/computer/security/telescreen/update_icon()
 	icon_state = initial(icon_state)
@@ -183,11 +153,13 @@
 	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
+	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
 	name = "Security Cameras"
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
+	circuit = null
 
 
 /obj/machinery/computer/security/mining
@@ -195,15 +167,18 @@
 	desc = "Used to access the various cameras on the outpost."
 	icon_state = "miningcameras"
 	network = list("MINE")
+	circuit = /obj/item/weapon/circuitboard/security/mining
 
 /obj/machinery/computer/security/engineering
 	name = "Engineering Cameras"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
+	circuit = /obj/item/weapon/circuitboard/security/engineering
 
 /obj/machinery/computer/security/nuclear
 	name = "Mission Monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
 	network = list("NUKE")
+	circuit = null
