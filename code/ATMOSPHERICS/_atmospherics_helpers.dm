@@ -29,6 +29,8 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 	
+	var/source_moles_initial = source.total_moles
+	
 	if (!transfer_moles)
 		transfer_moles = source.total_moles
 	else
@@ -61,9 +63,11 @@
 	if (!removed) //Just in case
 		return -1
 	
+	//world << "[src]: [(transfer_moles/source.total_moles)]"
+	
 	var/power_draw = specific_power*transfer_moles
 	if (power_draw > 0)
-		removed.add_thermal_energy(power_draw * config.atmos_machine_heat) //1st law - energy is conserved
+		removed.add_thermal_energy(transfer_moles/source_moles_initial * power_draw * config.atmos_machine_heat)
 	
 	sink.merge(removed)
 	
@@ -78,6 +82,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
+	var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	//Determine the specific power of each filterable gas type, and the total amount of filterable gas (gasses selected to be scrubbed)
@@ -137,8 +142,10 @@
 	sink.update_values()
 	source.update_values()
 	
+	//world << "[src]: [(total_transfer_moles/source.total_moles)]"
+	
 	if (power_draw > 0)
-		sink.add_thermal_energy(power_draw * config.atmos_machine_heat)	//gotta conserve that energy
+		sink.add_thermal_energy(total_transfer_moles/source_moles_initial * power_draw * config.atmos_machine_heat)
 	
 	return power_draw
 
@@ -152,6 +159,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
+	var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
@@ -199,26 +207,32 @@
 	
 	var/filtered_power_used = 0		//power used to move filterable gas to sink_filtered
 	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
+	var/filtered_heat = 0
+	//var/a = 0
 	for (var/g in removed.gas)
 		var/power_used = specific_power_gas[g]*removed.gas[g]
 		
 		if (g in filtering)
 			//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
 			removed.adjust_gas(g, -removed.gas[g], update=0)
+			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
 			filtered_power_used += power_used
+			filtered_heat += power_used * (removed.gas[g] / source_moles_initial)
+			//a += (removed.gas[g] / source.total_moles)
 		else
 			unfiltered_power_used += power_used
 	
 	sink_filtered.update_values()
 	removed.update_values()
-	sink_clean.merge(removed)
 	
-	//1LTD energy is conserved
+	//world << "[src]: [(removed.total_moles / source.total_moles)] + [a] = [(removed.total_moles / source.total_moles) + a]"
+	
 	if (filtered_power_used > 0)
-		sink_filtered.add_thermal_energy(filtered_power_used * config.atmos_machine_heat)
+		sink_filtered.add_thermal_energy(filtered_heat * config.atmos_machine_heat)
 	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used * config.atmos_machine_heat)
+		sink_clean.add_thermal_energy(unfiltered_power_used * (removed.total_moles / source_moles_initial) * config.atmos_machine_heat)
+	
+	sink_clean.merge(removed)
 	
 	return filtered_power_used + unfiltered_power_used
 
@@ -229,6 +243,7 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
+	var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 	
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
@@ -277,6 +292,7 @@
 	
 	var/list/filtered_power_used = list()		//power used to move filterable gas to the filtered gas mixes
 	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
+	var/list/filtered_heat = list()
 	for (var/g in removed.gas)
 		var/power_used = specific_power_gas[g]*removed.gas[g]
 		
@@ -287,19 +303,20 @@
 			removed.adjust_gas(g, -removed.gas[g], update=0)
 			if (power_used)
 				filtered_power_used[sink_filtered] = power_used
+				filtered_heat[sink_filtered] = power_used * (removed.gas[g] / source_moles_initial)
 		else
 			unfiltered_power_used += power_used
 	
 	removed.update_values()
-	sink_clean.merge(removed)
 	
-	//1st LTD energy is conserved
 	var/power_draw = unfiltered_power_used
 	for (var/datum/gas_mixture/sink_filtered in filtered_power_used)
 		power_draw += filtered_power_used[sink_filtered]
-		sink_filtered.add_thermal_energy(filtered_power_used[sink_filtered] * config.atmos_machine_heat)
+		sink_filtered.add_thermal_energy(filtered_heat[sink_filtered] * config.atmos_machine_heat)
 	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used * config.atmos_machine_heat)
+		sink_clean.add_thermal_energy(unfiltered_power_used * (removed.total_moles / source_moles_initial) * config.atmos_machine_heat)
+	
+	sink_clean.merge(removed)
 	
 	return power_draw
 
@@ -366,7 +383,7 @@
 		var/datum/gas_mixture/removed = source.remove(transfer_moles)
 		
 		var/power_draw = transfer_moles * source_specific_power[source]
-		removed.add_thermal_energy(power_draw * config.atmos_machine_heat)	//conservation of energy
+		removed.add_thermal_energy(power_draw * (total_transfer_moles/total_input_moles) * config.atmos_machine_heat)
 		total_power_draw += power_draw
 		
 		sink.merge(removed)
