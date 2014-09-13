@@ -15,7 +15,7 @@
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
 	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 2.0e6		//Current amount of power it holds
+	var/charge = 1.0e6		//Current amount of power it holds
 	var/charging = 0		//1 if it's actually charging, 0 if not
 	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
 	//var/chargecount = 0

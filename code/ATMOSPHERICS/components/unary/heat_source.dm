@@ -18,7 +18,7 @@
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	active_power_usage 			//50 kW. The power rating of the heater
 	
-	var/max_power_usage = 50000	//power rating when the usage is turned up to 1
+	var/max_power_usage = 20000	//power rating when the usage is turned up to 100
 	var/power_setting = 100
 
 	var/heating = 0		//mainly for icon updates

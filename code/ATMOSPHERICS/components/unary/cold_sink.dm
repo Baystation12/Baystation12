@@ -1,4 +1,5 @@
 //TODO: Put this under a common parent type with heaters to cut down on the copypasta
+#define FREEZER_PERF_MULT 2.5
 
 /obj/machinery/atmospherics/unary/freezer
 	name = "gas cooling system"
@@ -9,7 +10,7 @@
 
 	anchored = 1.0
 
-	var/heatsink_temperature = 70 //T20C	//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
+	var/heatsink_temperature = T20C	//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600	//L
 
 	var/on = 0
@@ -17,7 +18,7 @@
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	active_power_usage			//50 kW. The power rating of the freezer
 
-	var/max_power_usage = 5000 //power rating when the usage is turned up to 1 //Reduced to 5kW for usability.
+	var/max_power_usage = 20000 //power rating when the usage is turned up to 100
 	var/power_setting = 100
 
 	var/set_temperature = T20C	//thermostat
@@ -135,9 +136,8 @@
 
 		//Assume the heat is being pumped into the hull which is fixed at heatsink_temperature
 		//not /really/ proper thermodynamics but whatever
-		var/cop = air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
+		var/cop = FREEZER_PERF_MULT * air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * active_power_usage)	//limit heat transfer by available power
-		heat_transfer *= 10 //Temp fix for cryo being unusable.
 
 		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
 		if (debug)
