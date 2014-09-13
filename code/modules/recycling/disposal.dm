@@ -5,9 +5,9 @@
 // Automatically recharges air (unless off), will flush when ready if pre-set
 // Can hold items and human size things, no other draggables
 // Toilets are a type of disposal bin for small objects only and work on magic. By magic, I mean torque rotation
-#define SEND_PRESSURE 500	//kPa.
+#define SEND_PRESSURE 50 //kPa
 #define PRESSURE_TANK_VOLUME 70	//L - a 0.3 m diameter * 1 m long cylindrical tank. Happens to be the same volume as the regular oxygen tanks, so seems appropriate.
-#define PUMP_MAX_FLOW_RATE 200	//L/s - 8 m/s using a 15 cm by 15 cm inlet
+#define PUMP_MAX_FLOW_RATE 50	//L/s - 8 m/s using a 15 cm by 15 cm inlet
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -382,12 +382,12 @@
 
 	var/atom/L = loc						// recharging from loc turf
 	var/datum/gas_mixture/env = L.return_air()
-	
+
 	var/power_draw = -1
 	if(env && env.temperature > 0)
 		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
-	
+
 	if (power_draw < 0)
 		//update_use_power(0)
 		use_power = 1	//don't force update - easier on CPU
