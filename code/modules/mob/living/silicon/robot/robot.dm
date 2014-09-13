@@ -10,6 +10,7 @@
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
+	var/crisis_override
 
 //Hud stuff
 
@@ -164,7 +165,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -1101,10 +1102,10 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	
+
 	if(usr != src)
 		return
-	
+
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
@@ -1118,7 +1119,7 @@
 		var/obj/item/O = locate(href_list["act"])
 		if (!istype(O) || !(O in src.module.modules))
 			return
-		
+
 		if(activated(O))
 			src << "Already activated"
 			return

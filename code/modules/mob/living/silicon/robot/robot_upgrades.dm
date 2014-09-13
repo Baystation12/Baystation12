@@ -33,6 +33,8 @@
 	R.hands.icon_state = "nomod"
 	R.base_icon = "robot"
 	R.icon_state = "robot"
+	if(R.custom_sprite == 1)
+		R.icon_state = "[src.ckey]-Standard"
 	R.updateicon()
 	R.languages = list()
 	R.speech_synthesizer_langs = list()
