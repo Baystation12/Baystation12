@@ -11,7 +11,7 @@
 					<span class="bad" style="float:left">DOCKED-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? 'redBackground' : null)}}
+					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? null : null)}}
 				</span>
 			</div>
 		{{else data.docking_status == "docking"}}
@@ -22,7 +22,7 @@
 					<span class="bad" style="float:left">DOCKING-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? 'redBackground' : null)}}
+					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? null : null)}}
 				</span>
 			</div>
 		{{else data.docking_status == "undocking"}}
@@ -33,7 +33,7 @@
 					<span class="bad" style="float:left">UNDOCKING-OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? 'redBackground' : null)}}
+					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? null : null)}}
 				</span>
 			</div>
 		{{else data.docking_status == "undocked"}}
@@ -44,12 +44,12 @@
 					<span class="bad" style="float:left">OVERRIDE ENABLED</span>
 				{{/if}}
 				<span style="float:right">
-					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? 'redBackground' : null)}}
+					{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? null : null)}}
 				</span>
 			</div>
 		{{else}}
 			<span class="bad">ERROR</span>
-			{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? 'redBackground' : null)}}
+			{{:helper.link('Override', 'alert', {'command' : 'toggle_override'}, null, data.override_enabled ? null : null)}}
 		{{/if}}
 	</div>
 </div>
