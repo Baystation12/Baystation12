@@ -398,7 +398,10 @@
 				if(S.powernet == src)
 					S.restore()				// and restore some of the power that was used
 				else
-					error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
+					// I don't see how this could be an error.Tends to break substations due to breaker box network updates.
+					// Having nodes.Remove(S) is sufficient, no need to spam the console too. Mostly temporary fix until powernets are
+					// rewritten (hopefully soon!).
+					// error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
 					nodes.Remove(S)
 
 

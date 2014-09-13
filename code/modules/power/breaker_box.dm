@@ -36,8 +36,6 @@
 		user << "\red System is busy. Please wait until current operation is finished before changing power settings."
 		return
 
-	..()
-
 	busy = 1
 	user << "\green Updating power settings.."
 	if(do_after(user, 50)) //5s for AI as AIs can manipulate electronics much faster.
@@ -51,8 +49,6 @@
 	if(busy)
 		user << "\red System is busy. Please wait until current operation is finished before changing power settings."
 		return
-
-	..()
 
 	busy = 1
 	for(var/mob/O in viewers(user))
