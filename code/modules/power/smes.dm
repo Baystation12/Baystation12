@@ -1,8 +1,8 @@
 // the SMES
 // stores power
 
-#define SMESMAXCHARGELEVEL 200000
-#define SMESMAXOUTPUT 200000
+#define SMESMAXCHARGELEVEL 250000
+#define SMESMAXOUTPUT 250000
 
 /obj/machinery/power/smes
 	name = "power storage unit"
@@ -15,7 +15,7 @@
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
 	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 1e6		//Current amount of power it holds
+	var/charge = 1.0e6		//Current amount of power it holds
 	var/charging = 0		//1 if it's actually charging, 0 if not
 	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
 	//var/chargecount = 0
@@ -88,32 +88,18 @@
 	var/last_onln = online
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		//If chargemod is set, try to charge
+		//Use charging to let the player know whether we were able to obtain our target load.
+		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
+		if(chargemode)
+			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
-
-			else					// if not enough capcity
-				charging = 0		// stop charging
-				//chargecount  = 0
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
 				charging = 1
-		/*	if(chargemode)
-				if(chargecount > rand(3,6))
-					charging = 1
-					chargecount = 0
-
-				if(excess > chargelevel)
-					chargecount++
-				else
-					chargecount = 0
 			else
-				chargecount = 0   */
+				charging = 0
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored
@@ -191,7 +177,8 @@
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.newload += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
@@ -255,7 +242,7 @@
 			building_terminal = 0
 
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(stat & BROKEN)
 		return
@@ -274,7 +261,7 @@
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -386,12 +373,12 @@
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
-	process()
-		capacity = INFINITY
-		charge = INFINITY
-		..()
+	output = SMESMAXOUTPUT
 
-
+/obj/machinery/power/smes/magical/process()
+	capacity = INFINITY
+	charge = INFINITY
+	..()
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"

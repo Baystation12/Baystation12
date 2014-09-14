@@ -153,12 +153,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	active_power_usage = 100
 	var/obj/effect/overlay/hologram//The projection itself. If there is one, the instrument is on, off otherwise.
 
-/obj/machinery/hologram/power_change()
-	if (powered())
-		stat &= ~NOPOWER
-	else
-		stat |= ~NOPOWER
-
 //Destruction procs.
 /obj/machinery/hologram/ex_act(severity)
 	switch(severity)

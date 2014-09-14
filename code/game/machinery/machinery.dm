@@ -157,6 +157,21 @@ Class Procs:
 	if(prob(50))
 		del(src)
 
+//sets the use_power var and then forces an area power update
+/obj/machinery/proc/update_use_power(var/new_use_power)
+	if (new_use_power == use_power)
+		return	//don't need to do anything
+
+	use_power = new_use_power
+
+	//force area power update
+	force_power_update()
+
+/obj/machinery/proc/force_power_update()
+	var/area/A = get_area(src)
+	if(A && A.master)
+		A.master.powerupdate = 1
+
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
@@ -166,9 +181,15 @@ Class Procs:
 		use_power(active_power_usage,power_channel, 1)
 	return 1
 
+/obj/machinery/proc/operable(var/additional_flags = 0)
+	return !inoperable(additional_flags)
+
+/obj/machinery/proc/inoperable(var/additional_flags = 0)
+	return (stat & (NOPOWER|BROKEN|additional_flags))
+
 /obj/machinery/Topic(href, href_list)
 	..()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		return 1
 	if(usr.restrained() || usr.lying || usr.stat)
 		return 1
@@ -210,7 +231,7 @@ Class Procs:
 	return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN|MAINT))
+	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
@@ -260,7 +281,7 @@ Class Procs:
   playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return 0
 	if(!prob(prb))
 		return 0

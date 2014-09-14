@@ -226,11 +226,11 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
-	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage
+	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
 	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
-		var/datum/wound/internal_bleeding/I = new (15)
+		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
 		owner.custom_pain("You feel something rip in your [display_name]!", 1)
 
@@ -275,6 +275,8 @@ This function completely restores a damaged organ to perfect condition.
 //Determines if we even need to process this organ.
 
 /datum/organ/external/proc/need_process()
+	if(destspawn)	//Missing limb is missing
+		return 0
 	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
 		return 1
 	if(brute_dam || burn_dam)
@@ -289,17 +291,6 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/process()
-	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
-	if(owner.life_tick % wound_update_accuracy == 0)
-		update_wounds()
-
-	//Chem traces slowly vanish
-	if(owner.life_tick % 10 == 0)
-		for(var/chemID in trace_chemicals)
-			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
-			if(trace_chemicals[chemID] <= 0)
-				trace_chemicals.Remove(chemID)
-
 	//Dismemberment
 	if(status & ORGAN_DESTROYED)
 		if(!destspawn && config.limbs_can_break)
@@ -310,6 +301,17 @@ This function completely restores a damaged organ to perfect condition.
 			status |= ORGAN_DESTROYED
 			owner.update_body(1)
 			return
+
+	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
+	if(owner.life_tick % wound_update_accuracy == 0)
+		update_wounds()
+
+	//Chem traces slowly vanish
+	if(owner.life_tick % 10 == 0)
+		for(var/chemID in trace_chemicals)
+			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
+			if(trace_chemicals[chemID] <= 0)
+				trace_chemicals.Remove(chemID)
 
 	//Bone fracurtes
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
@@ -444,16 +446,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 			// let the GC handle the deletion of the wound
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
-		if(W.internal && !W.can_autoheal() && owner.bodytemperature >= 170)
+		if(W.internal && owner.bodytemperature >= 170)
 			var/bicardose = owner.reagents.get_reagent_amount("bicaridine")
 			var/inaprovaline = owner.reagents.get_reagent_amount("inaprovaline")
-			if(!bicardose || !inaprovaline)	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, and also stop bleeding
+			if(!(W.can_autoheal() || (bicardose && inaprovaline)))	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, unless it is so small that it is already healing
 				W.open_wound(0.1 * wound_update_accuracy)
-				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
 			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
 				W.damage = max(0, W.damage - 0.2)
 
-			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)
+			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
@@ -568,13 +569,27 @@ Note that amputating the affected organ does in fact remove the infection from t
 		src.status &= ~ORGAN_BROKEN
 		src.status &= ~ORGAN_BLEEDING
 		src.status &= ~ORGAN_SPLINTED
+		src.status &= ~ORGAN_DEAD
 		for(var/implant in implants)
 			del(implant)
 
+		germ_level = 0
+
+		//Replace all wounds on that arm with one wound on parent organ.
+		wounds.Cut()
+		if (parent)
+			var/datum/wound/W
+			if(max_damage < 50)
+				W = new/datum/wound/lost_limb/small(max_damage)
+			else
+				W = new/datum/wound/lost_limb(max_damage)
+			parent.wounds += W
+			parent.update_damages()
+		update_damages()
+
 		// If any organs are attached to this, destroy them
-		for(var/datum/organ/external/O in owner.organs)
-			if(O.parent == src)
-				O.droplimb(1)
+		for(var/datum/organ/external/O in children)
+			O.droplimb(1)
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)

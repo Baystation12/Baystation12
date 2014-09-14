@@ -25,9 +25,11 @@
 	icon_state = "capcap"
 	flags = FPRINT|TABLEPASS
 	flags_inv = 0
+	body_parts_covered = 0
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
+	body_parts_covered = 0
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood
@@ -36,6 +38,7 @@
 	icon_state = "chaplain_hood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 	siemens_coefficient = 0.9
+	body_parts_covered = HEAD|EYES
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
@@ -52,12 +55,28 @@
 	icon_state = "beret"
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
+	body_parts_covered = 0
 
 //Security
 /obj/item/clothing/head/beret/sec
 	name = "security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "beret_badge"
+	flags = FPRINT | TABLEPASS
+/obj/item/clothing/head/beret/sec/alt
+	name = "officer beret"
+	desc = "A navy blue beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "officerberet"
+	flags = FPRINT | TABLEPASS
+/obj/item/clothing/head/beret/sec/hos
+	name = "officer beret"
+	desc = "A navy blue beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "hosberet"
+	flags = FPRINT | TABLEPASS
+/obj/item/clothing/head/beret/sec/warden
+	name = "warden beret"
+	desc = "A navy blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
+	icon_state = "wardenberet"
 	flags = FPRINT | TABLEPASS
 /obj/item/clothing/head/beret/eng
 	name = "engineering beret"

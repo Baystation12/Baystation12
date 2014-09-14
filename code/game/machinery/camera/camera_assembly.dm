@@ -9,7 +9,7 @@
 	matter = list("metal" = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/phoron, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
+	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/osmium, /obj/item/weapon/stock_parts/scanning_module)
 	var/list/upgrades = list()
 	var/state = 0
 	var/busy = 0
@@ -86,7 +86,8 @@
 					usr << "No network found please hang up and try your call again."
 					return
 
-				var/temptag = "[get_area(src)] ([rand(1, 999)])"
+				var/area/camera_area = get_area(src)
+				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
 				input = strip_html(input(usr, "How would you like to name the camera?", "Set Camera Name", temptag))
 
 				state = 4
@@ -123,7 +124,7 @@
 
 	// Upgrades!
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
-		user << "You attach the [W] into the assembly inner circuits."
+		user << "You attach \the [W] into the assembly inner circuits."
 		upgrades += W
 		user.drop_item(W)
 		W.loc = src

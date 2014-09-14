@@ -410,7 +410,7 @@
 	max_fuel = 40
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
-	origin_tech = "engineering=4;phoron=3"
+	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
 

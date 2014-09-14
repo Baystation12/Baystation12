@@ -1227,6 +1227,23 @@ datum/design/mechfab
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mechfab"
 
+datum/design/gas_heater
+	name = "Gas Heating System Board"
+	desc =  "The circuit board for a gas heating system"
+	id = "gasheater"
+	req_tech = list("powerstorage" = 2, "engineering" = 1)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/gas_heater"
+
+datum/design/gas_cooler
+	name = "Gas Cooling System Board"
+	desc =  "The circuit board for a gas cooling system"
+	id = "gascooler"
+	req_tech = list("magnets" = 2, "engineering" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/gas_cooler"
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
@@ -1358,6 +1375,7 @@ datum/design/nanopaste
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/stack/nanopaste"
 
+/* // Removal of loyalty implants. Can't think of a way to add this to the config option.
 datum/design/implant_loyal
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
@@ -1366,6 +1384,7 @@ datum/design/implant_loyal
 	build_type = PROTOLATHE
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/weapon/implant/loyalty"
+*/
 
 datum/design/implant_chem
 	name = "chemical implant"

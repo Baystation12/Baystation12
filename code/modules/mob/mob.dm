@@ -13,25 +13,6 @@
 		living_mob_list += src
 	..()
 
-/mob/proc/Cell()
-	set category = "Admin"
-	set hidden = 1
-
-	if(!loc) return 0
-
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/t = "\blue Coordinates: [x],[y] \n"
-	t+= "\red Temperature: [environment.temperature] \n"
-	t+= "\blue Nitrogen: [environment.nitrogen] \n"
-	t+= "\blue Oxygen: [environment.oxygen] \n"
-	t+= "\blue Phoron : [environment.phoron] \n"
-	t+= "\blue Carbon Dioxide: [environment.carbon_dioxide] \n"
-	for(var/datum/gas/trace_gas in environment.trace_gases)
-		usr << "\blue [trace_gas.type]: [trace_gas.moles] \n"
-
-	usr.show_message(t, 1)
-
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
 	if(!client)	return
@@ -721,7 +702,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"MasterController-ERROR")
 
 	if(listed_turf && client)
-		if(get_dist(listed_turf,src) > 1)
+		if(!TurfAdjacent(listed_turf))
 			listed_turf = null
 		else
 			statpanel(listed_turf.name, null, listed_turf)
@@ -768,19 +749,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 	else if(buckled && (!buckled.movable))
 		anchored = 1
 		canmove = 0
-		if( istype(buckled,/obj/structure/stool/bed/chair) )
+		if(istype(buckled,/obj/structure/stool/bed/chair) )
 			lying = 0
 		else
 			lying = 1
-	else if(buckled && (buckled.movable))
-		anchored = 0
-		canmove = 1
-		lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
 	else if( stunned )
-//		lying = 0
 		canmove = 0
 	else if(captured)
 		anchored = 1
@@ -996,10 +972,10 @@ mob/proc/yank_out_object()
 		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
 
 		if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
-			var/datum/wound/internal_bleeding/I = new (15)
+			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
 			affected.wounds += I
 			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
-		
+
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
@@ -1012,3 +988,46 @@ mob/proc/yank_out_object()
 		if(!pinned.len)
 			anchored = 0
 	return 1
+
+/mob/living/proc/handle_statuses()
+	handle_stunned()
+	handle_weakened()
+	handle_stuttering()
+	handle_silent()
+	handle_drugged()
+	handle_slurring()
+
+/mob/living/proc/handle_stunned()
+	if(stunned)
+		AdjustStunned(-1)
+	return stunned
+
+/mob/living/proc/handle_weakened()
+	if(weakened)
+		weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
+	return weakened
+
+/mob/living/proc/handle_stuttering()
+	if(stuttering)
+		stuttering = max(stuttering-1, 0)
+	return stuttering
+
+/mob/living/proc/handle_silent()
+	if(silent)
+		silent = max(silent-1, 0)
+	return silent
+
+/mob/living/proc/handle_drugged()
+	if(druggy)
+		druggy = max(druggy-1, 0)
+	return druggy
+
+/mob/living/proc/handle_slurring()
+	if(slurring)
+		slurring = max(slurring-1, 0)
+	return slurring
+
+/mob/living/proc/handle_paralysed() // Currently only used by simple_animal.dm, treated as a special case in other mobs
+	if(paralysis)
+		AdjustParalysis(-1)
+	return paralysis

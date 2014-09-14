@@ -23,11 +23,16 @@
 /datum/robot_component/proc/uninstall()
 
 /datum/robot_component/proc/destroy()
+	var/brokenstate = "broken" // Generic icon
+	if (istype(wrapped, /obj/item/robot_parts/robot_component))
+		var/obj/item/robot_parts/robot_component/comp = wrapped
+		brokenstate = comp.icon_state_broken
 	if(wrapped)
 		del wrapped
 
 
 	wrapped = new/obj/item/broken_device
+	wrapped.icon_state = brokenstate // Module-specific broken icons! Yay!
 
 	// The thing itself isn't there anymore, but some fried remains are.
 	installed = -1
@@ -137,25 +142,38 @@
 	construction_cost = list("metal"=5000)
 	var/brute = 0
 	var/burn = 0
+	var/icon_state_broken = "broken"
 
 // TODO: actual icons ;)
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"
+	icon_state = "binradio"
+	icon_state_broken = "binradio_broken"
 
 /obj/item/robot_parts/robot_component/actuator
 	name = "actuator"
+	icon_state = "motor"
+	icon_state_broken = "motor_broken"
 
 /obj/item/robot_parts/robot_component/armour
 	name = "armour plating"
+	icon_state = "armor"
+	icon_state_broken = "armor_broken"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"
+	icon_state = "camera"
+	icon_state_broken = "camera_broken"
 
 /obj/item/robot_parts/robot_component/diagnosis_unit
 	name = "diagnosis unit"
+	icon_state = "analyser"
+	icon_state_broken = "analyser_broken"
 
 /obj/item/robot_parts/robot_component/radio
 	name = "radio"
+	icon_state = "radio"
+	icon_state_broken = "radio_broken"
 
 //
 //Robotic Component Analyser, basically a health analyser for robots

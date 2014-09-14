@@ -125,11 +125,10 @@ var/intercom_range_display_status = 0
 	feedback_add_details("admin_verb","mIRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 var/list/debug_verbs = list (
-	/client/proc/do_not_use_these
+        /client/proc/do_not_use_these
         ,/client/proc/camera_view
         ,/client/proc/sec_camera_report
         ,/client/proc/intercom_view
-        ,/client/proc/air_status
         ,/client/proc/Cell
         ,/client/proc/atmosscan
         ,/client/proc/powerdebug
@@ -159,9 +158,12 @@ var/list/debug_verbs = list (
         ,/client/proc/ZoneTick
         ,/client/proc/rebootAirMaster
         ,/client/proc/hide_debug_verbs
-	,/client/proc/testZAScolors
-	,/client/proc/testZAScolors_remove
-	,/client/proc/setup_supermatter_engine
+        ,/client/proc/testZAScolors
+        ,/client/proc/testZAScolors_remove
+        ,/client/proc/setup_supermatter_engine
+        ,/client/proc/view_power_update_stats_area
+        ,/client/proc/view_power_update_stats_machines
+        ,/client/proc/toggle_power_update_profiling
 	)
 
 

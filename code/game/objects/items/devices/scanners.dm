@@ -48,11 +48,13 @@ REAGENT SCANNER
 
 			if(O.invisibility == 101)
 				O.invisibility = 0
+				O.alpha = 128
 				spawn(10)
 					if(O)
 						var/turf/U = O.loc
 						if(U.intact)
 							O.invisibility = 101
+							O.alpha = 255
 
 		var/mob/living/M = locate() in T
 		if(M && M.invisibility == 2)
@@ -255,7 +257,7 @@ REAGENT SCANNER
 	var/datum/gas_mixture/environment = location.return_air()
 
 	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles()
+	var/total_moles = environment.total_moles
 
 	user.show_message("\blue <B>Results:</B>", 1)
 	if(abs(pressure - ONE_ATMOSPHERE) < 10)
@@ -263,32 +265,8 @@ REAGENT SCANNER
 	else
 		user.show_message("\red Pressure: [round(pressure,0.1)] kPa", 1)
 	if(total_moles)
-		var/o2_concentration = environment.oxygen/total_moles
-		var/n2_concentration = environment.nitrogen/total_moles
-		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/phoron_concentration = environment.phoron/total_moles
-
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-		if(abs(n2_concentration - N2STANDARD) < 20)
-			user.show_message("\blue Nitrogen: [round(n2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Nitrogen: [round(n2_concentration*100)]%", 1)
-
-		if(abs(o2_concentration - O2STANDARD) < 2)
-			user.show_message("\blue Oxygen: [round(o2_concentration*100)]%", 1)
-		else
-			user.show_message("\red Oxygen: [round(o2_concentration*100)]%", 1)
-
-		if(co2_concentration > 0.01)
-			user.show_message("\red CO2: [round(co2_concentration*100)]%", 1)
-		else
-			user.show_message("\blue CO2: [round(co2_concentration*100)]%", 1)
-
-		if(phoron_concentration > 0.01)
-			user.show_message("\red Phoron: [round(phoron_concentration*100)]%", 1)
-
-		if(unknown_concentration > 0.01)
-			user.show_message("\red Unknown: [round(unknown_concentration*100)]%", 1)
+		for(var/g in environment.gas)
+			user.show_message("\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%", 1)
 
 		user.show_message("\blue Temperature: [round(environment.temperature-T0C)]&deg;C", 1)
 
@@ -428,3 +406,46 @@ REAGENT SCANNER
 	icon_state = "adv_spectrometer"
 	details = 1
 	origin_tech = "magnets=4;biotech=2"
+
+/obj/item/device/slime_scanner
+	name = "slime scanner"
+	icon_state = "adv_spectrometer"
+	item_state = "analyzer"
+	origin_tech = "biotech=1"
+	w_class = 2.0
+	flags = CONDUCT
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 7
+	matter = list("metal" = 30,"glass" = 20)
+
+/obj/item/device/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
+	if (!isslime(M))
+		user << "<B>This device can only scan slimes!</B>"
+		return
+	var/mob/living/carbon/slime/T = M
+	user.show_message("Slime scan results:")
+	user.show_message(text("[T.colour] [] slime", T.is_adult ? "adult" : "baby"))
+	user.show_message(text("Nutrition: [T.nutrition]/[]", T.get_max_nutrition()))
+	if (T.nutrition < T.get_starve_nutrition())
+		user.show_message("<span class='alert'>Warning: slime is starving!</span>")
+	else if (T.nutrition < T.get_hunger_nutrition())
+		user.show_message("<span class='warning'>Warning: slime is hungry</span>")
+	user.show_message("Electric change strength: [T.powerlevel]")
+	user.show_message("Health: [T.health]")
+	if (T.slime_mutation[4] == T.colour)
+		user.show_message("This slime does not evolve any further")
+	else
+		if (T.slime_mutation[3] == T.slime_mutation[4])
+			if (T.slime_mutation[2] == T.slime_mutation[1])
+				user.show_message(text("Possible mutation: []", T.slime_mutation[3]))
+				user.show_message("Genetic destability: [T.mutation_chance/2]% chance of mutation on splitting")
+			else
+				user.show_message(text("Possible mutations: [], [], [] (x2)", T.slime_mutation[1], T.slime_mutation[2], T.slime_mutation[3]))
+				user.show_message("Genetic destability: [T.mutation_chance]% chance of mutation on splitting")
+		else
+			user.show_message(text("Possible mutations: [], [], [], []", T.slime_mutation[1], T.slime_mutation[2], T.slime_mutation[3], T.slime_mutation[4]))
+			user.show_message("Genetic destability: [T.mutation_chance]% chance of mutation on splitting")
+	if (T.cores > 1)
+		user.show_message("Anomalious slime core amount detected")
+	user.show_message("Growth progress: [T.amount_grown]/10")

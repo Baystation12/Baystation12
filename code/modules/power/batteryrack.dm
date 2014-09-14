@@ -222,8 +222,9 @@
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
 				var/load = min((capacity * 1.5 - charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+				load = add_load(load)		// add the load to the terminal side network
 				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
+				
 
 			else					// if not enough capacity
 				charging = 0		// stop charging
