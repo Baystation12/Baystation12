@@ -53,6 +53,7 @@
 		AI_mind.current.verbs += /mob/living/silicon/ai/proc/choose_modules
 		AI_mind.current:laws = new /datum/ai_laws/malfunction
 		AI_mind.current:malf_picker = new /datum/AI_Module/module_picker
+		AI_mind.current.verbs += /datum/game_mode/malfunction/proc/ai_win // We run checks if AI overtaken the station in the proc itself. This guarantees you won't have to relog when it refuses to appear on takeover completion.
 		AI_mind.current:show_laws()
 
 		greet_malf(AI_mind)
@@ -113,11 +114,8 @@
 	for(var/datum/mind/AI_mind in malf_ai)
 		AI_mind.current << "Congratulations you have taken control of the station."
 		AI_mind.current << "You may decide to blow up the station. You have 60 seconds to choose."
-		AI_mind.current << "You should have a new verb in the Malfunction tab. If you dont - rejoin the game."
-		AI_mind.current.verbs += /datum/game_mode/malfunction/proc/ai_win
+		AI_mind.current << "You can use the \"Explode\" verb to activate the self-destruct"
 	spawn (600)
-		for(var/datum/mind/AI_mind in malf_ai)
-			AI_mind.current.verbs -= /datum/game_mode/malfunction/proc/ai_win
 		to_nuke_or_not_to_nuke = 0
 	return
 
@@ -182,19 +180,69 @@
 	set category = "Malfunction"
 	set name = "Explode"
 	set desc = "Station go boom"
-	if (!ticker.mode:to_nuke_or_not_to_nuke)
+
+	if(!ticker.mode:station_secured)
+		usr << "You are unable to access the self-destruct system as you don't control the station yet."
 		return
+
+	if(ticker.mode:explosion_in_progress || ticker.mode:station_was_nuked)
+		usr << "The self-destruct countdown is already triggered!"
+		return
+
+	if(!ticker.mode:to_nuke_or_not_to_nuke) //Takeover IS completed, but 60s timer passed.
+		usr << "You lost control over self-destruct system. It seems to be behind firewall. Unable to hack"
+		return
+
+	usr << "\red Self-Destruct sequence initialised!"
+
 	ticker.mode:to_nuke_or_not_to_nuke = 0
-	for(var/datum/mind/AI_mind in ticker.mode:malf_ai)
-		AI_mind.current.verbs -= /datum/game_mode/malfunction/proc/ai_win
 	ticker.mode:explosion_in_progress = 1
 	for(var/mob/M in player_list)
 		M << 'sound/machines/Alarm.ogg'
-	world << "Self-destructing in 10"
+
+	var/obj/item/device/radio/R	= new (src)
+	var/AN = "Self-Destruct System"
+
+	R.autosay("Caution. Self-Destruct sequence has been actived. Self-destructing in Ten..", AN)
 	for (var/i=9 to 1 step -1)
 		sleep(10)
-		world << i
+		var/msg = ""
+		switch(i)
+			if(9)
+				msg = "Nine.."
+			if(8)
+				msg = "Eight.."
+			if(7)
+				msg = "Seven.."
+			if(6)
+				msg = "Six.."
+			if(5)
+				msg = "Five.."
+			if(4)
+				msg = "Four.."
+			if(3)
+				msg = "Three.."
+			if(2)
+				msg = "Two.."
+			if(1)
+				msg = "One.."
+
+		R.autosay(msg, AN)
 	sleep(10)
+	var/msg = ""
+	var/abort = 0
+	if(ticker.mode:is_malf_ai_dead()) // That. Was. CLOSE.
+		msg = "Self-destruct sequence has been cancelled."
+		abort = 1
+	else
+		msg = "Zero. Have a nice day."
+	R.autosay(msg, AN)
+
+	if(abort)
+		ticker.mode:explosion_in_progress = 0
+		set_security_level("red") //Delta's over
+		return
+
 	enter_allowed = 0
 	if(ticker)
 		ticker.station_explosion_cinematic(0,null)
