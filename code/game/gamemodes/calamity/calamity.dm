@@ -23,8 +23,8 @@
 	var/list/already_assigned_candidates = list()
 
 	//At one antagonist group per 10 players we are just going to go with tiny groups.
-	var/max_antags = 3        // Antag groups spawn with this many members.
-	var/antag_type_ratio = 10 // 1 antag type per this many players.
+	var/max_antags = 5        // Antag groups spawn with this many members.
+	var/antag_type_ratio = 8  // 1 antag type per this many players.
 
 	var/const/waittime_l = 600
 	var/const/waittime_h = 1800
@@ -62,12 +62,19 @@
 		chosen_atypes += atype
 
 		for(var/j=0;j<max_antags;j++)
+
+			if(!candidates || !candidates.len)
+				break
+
 			var/datum/mind/chosen_candidate = pick(candidates)
+
 			//Traitors and lings spawn THEN have roles applied; hence we don't set assigned_role here.
 			if(atype != "tater" && atype != "ling" && atype != "cult")
 				chosen_candidate.assigned_role = "MODE"
+
 			chosen_candidate.special_role = atype
-			chosen_candidates += chosen_candidate
+			candidates -= chosen_candidate
+			chosen_candidates |= chosen_candidate
 
 		if(atypes.len - i <= 0) break //Not enough valid types left to populate the remaining antag slots.
 
@@ -81,7 +88,7 @@
 
 			for(var/datum/mind/player in chosen_candidates)
 				if(player.special_role == atype)
-					candidates += player
+					candidates |= player
 					chosen_candidates -= player
 
 			if(!candidates || !candidates.len)
@@ -231,7 +238,7 @@
 
 	for(var/datum/mind/player in candidates)
 
-		syndicates += player
+		syndicates |= player
 
 		if(spawnpos > synd_spawn.len)
 			spawnpos = 1
@@ -264,7 +271,7 @@
 
 	for(var/datum/mind/player in candidates)
 
-		changelings += player
+		changelings |= player
 		grant_changeling_powers(player.current)
 		player.special_role = "Changeling"
 
@@ -278,7 +285,7 @@
 /datum/game_mode/calamity/proc/spawn_traitors(var/list/candidates)
 
 	for(var/datum/mind/player in candidates)
-		traitors += player
+		traitors |= player
 
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
@@ -292,7 +299,7 @@
 /datum/game_mode/calamity/proc/spawn_cabal(var/list/candidates)
 
 	for(var/datum/mind/player in candidates)
-		wizards += player
+		wizards |= player
 
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
@@ -314,7 +321,7 @@
 			ninjastart.Add(L)
 
 	for(var/datum/mind/player in candidates)
-		ninjas += player
+		ninjas |= player
 
 		player.current << browse(null, "window=playersetup")
 		player.current = create_space_ninja(pick(ninjastart))
@@ -347,7 +354,7 @@
 
 	//Create raiders.
 	for(var/datum/mind/player in candidates)
-		raiders += player
+		raiders |= player
 
 		//Place them on the shuttle.
 		var/index = 1
@@ -375,14 +382,14 @@
 	var/list/possible_hosts = list()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(!(H.species.flags & IS_SYNTHETIC))
-			possible_hosts += H
+			possible_hosts |= H
 
 	for(var/datum/mind/player in candidates)
 
 		if(!possible_hosts || possible_hosts.len)
 			break
 
-		borers += player
+		borers |= player
 		var/mob/living/carbon/human/target_host = pick(possible_hosts)
 		possible_hosts -= target_host
 
@@ -430,7 +437,7 @@
 			if(player.assigned_role == job)
 				continue
 
-		cult += player
+		cult |= player
 		equip_cultist(player.current)
 		grant_runeword(player.current)
 		update_cult_icons_added(player)
