@@ -63,11 +63,7 @@
 	if (!removed) //Just in case
 		return -1
 	
-	//world << "[src]: [(transfer_moles/source.total_moles)]"
-	
 	var/power_draw = specific_power*transfer_moles
-	if (power_draw > 0)
-		removed.add_thermal_energy(transfer_moles/source_moles_initial * power_draw * config.atmos_machine_heat)
 	
 	sink.merge(removed)
 	
@@ -141,11 +137,6 @@
 	//Remix the resulting gases
 	sink.update_values()
 	source.update_values()
-	
-	//world << "[src]: [(total_transfer_moles/source.total_moles)]"
-	
-	if (power_draw > 0)
-		sink.add_thermal_energy(total_transfer_moles/source_moles_initial * power_draw * config.atmos_machine_heat)
 	
 	return power_draw
 
@@ -224,13 +215,6 @@
 	
 	sink_filtered.update_values()
 	removed.update_values()
-	
-	//world << "[src]: [(removed.total_moles / source.total_moles)] + [a] = [(removed.total_moles / source.total_moles) + a]"
-	
-	if (filtered_power_used > 0)
-		sink_filtered.add_thermal_energy(filtered_heat * config.atmos_machine_heat)
-	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used * (removed.total_moles / source_moles_initial) * config.atmos_machine_heat)
 	
 	sink_clean.merge(removed)
 	
@@ -312,9 +296,6 @@
 	var/power_draw = unfiltered_power_used
 	for (var/datum/gas_mixture/sink_filtered in filtered_power_used)
 		power_draw += filtered_power_used[sink_filtered]
-		sink_filtered.add_thermal_energy(filtered_heat[sink_filtered] * config.atmos_machine_heat)
-	if (unfiltered_power_used > 0)
-		sink_clean.add_thermal_energy(unfiltered_power_used * (removed.total_moles / source_moles_initial) * config.atmos_machine_heat)
 	
 	sink_clean.merge(removed)
 	
@@ -383,7 +364,6 @@
 		var/datum/gas_mixture/removed = source.remove(transfer_moles)
 		
 		var/power_draw = transfer_moles * source_specific_power[source]
-		removed.add_thermal_energy(power_draw * (total_transfer_moles/total_input_moles) * config.atmos_machine_heat)
 		total_power_draw += power_draw
 		
 		sink.merge(removed)
