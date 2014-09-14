@@ -142,7 +142,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 	//Here we pick a location and spawn the ninja.
 	if(ninjastart.len == 0)
 		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "carpspawn")
+			if(L.name == "carpspawn" && locate(/turf/simulated) in range(7, L))
 				ninjastart.Add(L)
 
 	var/ninja_key = null
