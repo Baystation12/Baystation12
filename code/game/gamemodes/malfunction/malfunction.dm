@@ -181,7 +181,7 @@
 	set name = "Explode"
 	set desc = "Station go boom"
 
-	if(!ticker.mode:station_secured)
+	if(!ticker.mode:station_captured)
 		usr << "You are unable to access the self-destruct system as you don't control the station yet."
 		return
 
