@@ -40,7 +40,7 @@
 
   obj/proc/receive_signal(datum/signal/signal, var/receive_method as num, var/receive_param)
     Handler from received signals. By default does nothing. Define your own for your object.
-    Avoid of sending signals directly from this proc, use spawn(-1). Do not use sleep() here please.
+    Avoid of sending signals directly from this proc, use spawn(-1). DO NOT use sleep() here or call procs that sleep please. If you must, use spawn()
       parameters:
         signal - see description below. Extract all needed data from the signal before doing sleep(), spawn() or return!
         receive_method - may be TRANSMISSION_WIRE or TRANSMISSION_RADIO.
@@ -229,13 +229,7 @@ var/global/datum/controller/radio/radio_controller
 			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
 				continue
 		
-		//allow sequential signals before round start, so that every air alarm sounding off at once doesn't cause trouble.
-		if(!ticker || ticker.current_state < 3)
-			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-		else
-			spawn(0)
-				if(device) //in case the device got destroyed somehow
-					device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+		device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)
