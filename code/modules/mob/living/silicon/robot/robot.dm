@@ -10,7 +10,7 @@
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
-	var/crisis_override
+	var/crisis_override = 0
 
 //Hud stuff
 
