@@ -55,6 +55,9 @@
 	heat_capacity = 325000
 	intact = 0
 
+/turf/simulated/floor/engine/nitrogen
+	oxygen = 0
+
 /turf/simulated/floor/engine/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	if(!C)
 		return
