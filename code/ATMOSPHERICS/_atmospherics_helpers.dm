@@ -14,7 +14,8 @@
 
 /obj/machinery/atmospherics/var/debug = 0
 
-/obj/machinery/atmospherics/verb/toggle_debug()
+//Can be called using the Advanced-Proc. Switch proc to verb to add it to atmospheric objects' verb-list.
+/obj/machinery/atmospherics/proc/toggle_debug()
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	set src in view()
