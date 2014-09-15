@@ -74,6 +74,7 @@ datum/light_source
 			changed = 1
 
 		if (owner.l_color != _l_color)
+			readrgb(owner.l_color)
 			changed = 1
 
 		if(changed)
