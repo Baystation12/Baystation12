@@ -198,7 +198,18 @@
 		if("syndi")
 			possible_antags = get_players_for_role(BE_OPERATIVE)
 		if("ling")
+
 			possible_antags = get_players_for_role(BE_CHANGELING)
+
+			var/list/unsuitable_players = list()
+
+			for(var/datum/mind/player in possible_antags)
+				if(player && (player.assigned_role == "Cyborg" || player.assigned_role == "AI"))
+					unsuitable_players |= player
+
+			if(unsuitable_players.len)
+				possible_antags -= unsuitable_players
+
 		if("tater")
 			possible_antags = get_players_for_role(BE_TRAITOR)
 		if("wiz")
