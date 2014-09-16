@@ -31,7 +31,7 @@
 
 	//var/source_moles_initial = source.total_moles
 
-	if (!transfer_moles)
+	if (isnull(transfer_moles))
 		transfer_moles = source.total_moles
 	else
 		transfer_moles = min(source.total_moles, transfer_moles)
@@ -102,7 +102,7 @@
 		total_specific_power = specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
-	if (!total_transfer_moles)
+	if (isnull(total_transfer_moles))
 		total_transfer_moles = total_filterable_moles
 	else
 		total_transfer_moles = min(total_transfer_moles, total_filterable_moles)
@@ -172,7 +172,7 @@
 		total_specific_power = specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
-	if (!total_transfer_moles)
+	if (isnull(total_transfer_moles))
 		total_transfer_moles = source.total_moles
 	else
 		total_transfer_moles = min(total_transfer_moles, source.total_moles)
@@ -250,7 +250,7 @@
 		total_specific_power = specific_power_gas[g]*ratio
 
 	//Figure out how much of each gas to filter
-	if (!total_transfer_moles)
+	if (isnull(total_transfer_moles))
 		total_transfer_moles = source.total_moles
 	else
 		total_transfer_moles = min(total_transfer_moles, source.total_moles)
@@ -333,7 +333,7 @@
 	if (total_mixing_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	if (!total_transfer_moles)
+	if (isnull(total_transfer_moles))
 		total_transfer_moles = total_mixing_moles
 	else
 		total_transfer_moles = min(total_mixing_moles, total_transfer_moles)
