@@ -6,7 +6,6 @@
 	use_power = 2
 	idle_power_usage = 5
 	active_power_usage = 10
-	power_channel = ENVIRON
 	layer = 5
 
 	var/list/network = list("SS13")
@@ -54,36 +53,20 @@
 		ASSERT(src.network.len > 0)
 	..()
 
-/obj/machinery/camera/power_change()
-	var/old = stat
-	..()
-	if (old != stat)
-		update_icon()
-	if (stat & NOPOWER)
-		kick_viewers()
-
-/obj/machinery/camera/update_icon()
-	if (!status || (stat & NOPOWER))
-		icon_state = "[initial(icon_state)]1"
-	else if (stat & EMPED)
-		icon_state = "[initial(icon_state)]emp"
-	else
-		icon_state = initial(icon_state)
-
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
+			icon_state = "[initial(icon_state)]emp"
 			var/list/previous_network = network
 			network = list()
 			cameranet.removeCamera(src)
 			stat |= EMPED
-			update_icon()
 			SetLuminosity(0)
 			triggerCameraAlarm()
 			spawn(900)
 				network = previous_network
+				icon_state = initial(icon_state)
 				stat &= ~EMPED
-				update_icon()
 				cancelCameraAlarm()
 				if(can_use())
 					cameranet.addCamera(src)
@@ -111,7 +94,7 @@
 	status = 0
 	visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
 	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	update_icon()
+	icon_state = "[initial(icon_state)]1"
 	add_hiddenprint(user)
 	deactivate(user,0)
 
@@ -194,12 +177,13 @@
 		if (!(src.status))
 			visible_message("\red [user] has deactivated [src]!")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			icon_state = "[initial(icon_state)]1"
 			add_hiddenprint(user)
 		else
 			visible_message("\red [user] has reactivated [src]!")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			icon_state = initial(icon_state)
 			add_hiddenprint(user)
-		update_icon()
 	// now disconnect anyone using the camera
 	//Apparently, this will disconnect anyone even if the camera was re-activated.
 	//I guess that doesn't matter since they can't use it anyway?
@@ -229,7 +213,7 @@
 /obj/machinery/camera/proc/can_use()
 	if(!status)
 		return 0
-	if(stat & (EMPED|NOPOWER))
+	if(stat & EMPED)
 		return 0
 	return 1
 
