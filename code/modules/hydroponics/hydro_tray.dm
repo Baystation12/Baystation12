@@ -197,7 +197,7 @@
 	// Other plants also mutate if enough mutagenic compounds have been added.
 	if(!seed.immutable)
 		if(prob(min(mutation_level,100)))
-			mutate(random(100) < 25) ? 2 : 1)
+			mutate((rand(100) < 25) ? 2 : 1)
 			mutation_level = 0
 
 	// Maintain tray nutrient and water levels.
