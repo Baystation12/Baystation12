@@ -85,6 +85,8 @@
 		if(W)
 			success = 1
 		wear_suit = null
+		if(W.flags_inv & HIDESHOES)
+			update_inv_shoes(0)
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
@@ -108,9 +110,10 @@
 		update_inv_glasses()
 	else if (W == head)
 		head = null
-		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
+		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR)|| (W.flags_inv & HIDEMASK))
 			update_hair(0)	//rebuild hair
 			update_inv_ears(0)
+			update_inv_wear_mask(0)
 		success = 1
 		update_inv_head()
 	else if (W == l_ear)
@@ -270,9 +273,10 @@
 			update_inv_gloves(redraw_mob)
 		if(slot_head)
 			src.head = W
-			if((head.flags & BLOCKHAIR) || (head.flags & BLOCKHEADHAIR))
+			if((head.flags & BLOCKHAIR) || (head.flags & BLOCKHEADHAIR) || (head.flags_inv & HIDEMASK))
 				update_hair(redraw_mob)	//rebuild hair
 				update_inv_ears(0)
+				update_inv_wear_mask(0)
 			if(istype(W,/obj/item/clothing/head/kitty))
 				W.update_icon(src)
 			W.equipped(src, slot)
@@ -283,6 +287,8 @@
 			update_inv_shoes(redraw_mob)
 		if(slot_wear_suit)
 			src.wear_suit = W
+			if(wear_suit.flags_inv & HIDESHOES)
+				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform)
@@ -671,7 +677,7 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_back
 			if (target.back)
 				strip_item = target.back
-		if("handcuff")		
+		if("handcuff")
 			slot_to_process = slot_handcuffed
 			if (target.handcuffed)
 				strip_item = target.handcuffed
