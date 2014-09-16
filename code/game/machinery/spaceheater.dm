@@ -98,7 +98,7 @@
 
 		dat += "<A href='?src=\ref[src];op=temp;val=-5'>-</A>"
 
-		dat += " [set_temperature]&deg;C "
+		dat += " [set_temperature]K ([set_temperature - T0C]&deg;C) "
 		dat += "<A href='?src=\ref[src];op=temp;val=5'>+</A><BR>"
 
 		user.set_machine(src)
@@ -123,7 +123,7 @@
 				var/value = text2num(href_list["val"])
 
 				// limit to 0-90 degC
-				set_temperature = dd_range(T0C, T0C + 90, set_temperature + value)
+				set_temperature = between(T0C, set_temperature + value, T0C + 90)
 
 			if("cellremove")
 				if(open && cell && !usr.get_active_hand())
