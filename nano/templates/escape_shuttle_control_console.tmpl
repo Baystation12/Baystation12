@@ -65,9 +65,9 @@
 <div class="item" style="padding-top: 10px">
 	{{for data.auth_list}}
 		{{if value.auth_hash}}
-			{{:~link(auth_name, 'eject', {'removeid' : value.auth_hash}, null, 'itemContentWide')}}
+			{{:helper.link(auth_name, 'eject', {'removeid' : value.auth_hash}, null, 'itemContentWide')}}
 		{{else}}
-			{{:~link("", 'eject', {'scanid' : 1}, null, 'itemContentWide')}}
+			{{:helper.link("", 'eject', {'scanid' : 1}, null, 'itemContentWide')}}
 		{{/if}}
 	{{/for}}
 </div>
