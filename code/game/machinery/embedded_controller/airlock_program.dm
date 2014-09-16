@@ -303,11 +303,17 @@
 			signalDoor(tag_exterior_door, command)
 			signalDoor(tag_interior_door, command)
 
+datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command)
+	var/datum/signal/signal = new
+	signal.data["tag"] = tag_mech_sensor
+	signal.data["command"] = command
+	post_signal(signal)
+
 /datum/computer/file/embedded_program/airlock/proc/enable_mech_regulation()
-	signalDoor(tag_mech_sensor, "enable")
+	signal_mech_sensor("enable")
 
 /datum/computer/file/embedded_program/airlock/proc/disable_mech_regulation()
-	signalDoor(tag_mech_sensor, "disable")
+	signal_mech_sensor("disable")
 
 /*----------------------------------------------------------
 toggleDoor()
