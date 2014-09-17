@@ -703,9 +703,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 //Giving borgs their own radio to have some more room to work with -Sieve
 
 /obj/item/device/radio/borg
+	var/mob/living/silicon/robot/myborg = null // Cyborg which owns this radio. Used for power checks
 	var/obj/item/device/encryptionkey/keyslot = null//Borg radios can handle a single encryption key
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
+	canhear_range = 0 // Should prevent everyone around the cyborg hearing potentionally secret stuff from department channels (espicially sec)
 
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()

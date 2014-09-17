@@ -2,6 +2,8 @@ var/list/robot_verbs_default = list(
 	/mob/living/silicon/robot/proc/sensor_mode
 )
 
+#define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
+
 /mob/living/silicon/robot
 	name = "Cyborg"
 	real_name = "Cyborg"
@@ -10,6 +12,7 @@ var/list/robot_verbs_default = list(
 	maxHealth = 200
 	health = 200
 
+	var/used_power_this_tick = 0
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -383,7 +386,7 @@ var/list/robot_verbs_default = list(
 	var/dat = "<HEAD><TITLE>[src.name] Self-Diagnosis Report</TITLE></HEAD><BODY>\n"
 	for (var/V in components)
 		var/datum/robot_component/C = components[V]
-		dat += "<b>[C.name]</b><br><table><tr><td>Power consumption</td><td>[C.energy_consumption]</td></tr><tr><td>Brute Damage:</td><td>[C.brute_damage]</td></tr><tr><td>Electronics Damage:</td><td>[C.electronics_damage]</td></tr><tr><td>Powered:</td><td>[(!C.energy_consumption || C.is_powered()) ? "Yes" : "No"]</td></tr><tr><td>Toggled:</td><td>[ C.toggled ? "Yes" : "No"]</td></table><br>"
+		dat += "<b>[C.name]</b><br><table><tr><td>Brute Damage:</td><td>[C.brute_damage]</td></tr><tr><td>Electronics Damage:</td><td>[C.electronics_damage]</td></tr><tr><td>Powered:</td><td>[(!C.idle_usage || C.is_powered()) ? "Yes" : "No"]</td></tr><tr><td>Toggled:</td><td>[ C.toggled ? "Yes" : "No"]</td></table><br>"
 
 	return dat
 
@@ -395,6 +398,9 @@ var/list/robot_verbs_default = list(
 	if(!is_component_functioning("diagnosis unit"))
 		src << "\red Your self-diagnosis component isn't functioning."
 
+	var/datum/robot_component/CO = get_component("diagnosis unit")
+	if (!cell_use_power(CO.active_usage))
+		src << "\red Low Power."
 	var/dat = self_diagnosis()
 	src << browse(dat, "window=robotdiagnosis")
 
@@ -464,7 +470,9 @@ var/list/robot_verbs_default = list(
 // this function displays the cyborgs current cell charge in the stat panel
 /mob/living/silicon/robot/proc/show_cell_power()
 	if(cell)
-		stat(null, text("Charge Left: [cell.charge]/[cell.maxcharge]"))
+		stat(null, text("Charge Left: [round(cell.percent())]%"))
+		stat(null, text("Cell Rating: [round(cell.maxcharge)]")) // Round just in case we somehow get crazy values
+		stat(null, text("Power Cell Load: [round(used_power_this_tick)]W"))
 	else
 		stat(null, text("No Cell Inserted!"))
 
@@ -1327,3 +1335,20 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
+
+
+// Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
+// Properly converts using CELLRATE now! Amount is in Joules.
+/mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
+	// No cell inserted
+	if(!cell)
+		return 0
+
+	// Power cell is empty.
+	if(cell.charge == 0)
+		return 0
+
+	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
+		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
+		return 1
+	return 0

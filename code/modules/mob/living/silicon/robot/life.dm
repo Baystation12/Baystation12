@@ -32,18 +32,20 @@
 	adjustFireLoss(0)
 
 /mob/living/silicon/robot/proc/use_power()
-
+	// Debug only
+	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
 		C.update_power_state()
 
 	if ( cell && is_component_functioning("power cell") && src.cell.charge > 0 )
 		if(src.module_state_1)
-			src.cell.use(3)
+			cell_use_power(50) // 50W load for every enabled tool TODO: tool-specific loads
 		if(src.module_state_2)
-			src.cell.use(3)
+			cell_use_power(50)
 		if(src.module_state_3)
-			src.cell.use(3)
+			cell_use_power(50)
 
 		src.has_power = 1
 	else
