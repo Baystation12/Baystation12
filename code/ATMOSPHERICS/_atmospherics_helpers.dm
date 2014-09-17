@@ -78,7 +78,6 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	//var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 
 	//Determine the specific power of each filterable gas type, and the total amount of filterable gas (gasses selected to be scrubbed)
@@ -150,7 +149,6 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
@@ -198,8 +196,6 @@
 
 	var/filtered_power_used = 0		//power used to move filterable gas to sink_filtered
 	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
-	var/filtered_heat = 0
-	//var/a = 0
 	for (var/g in removed.gas)
 		var/power_used = specific_power_gas[g]*removed.gas[g]
 
@@ -208,8 +204,6 @@
 			removed.adjust_gas(g, -removed.gas[g], update=0)
 			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
 			filtered_power_used += power_used
-			filtered_heat += power_used * (removed.gas[g] / source_moles_initial)
-			//a += (removed.gas[g] / source.total_moles)
 		else
 			unfiltered_power_used += power_used
 
@@ -227,7 +221,6 @@
 	if (source.total_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
 
-	var/source_moles_initial = source.total_moles
 	filtering = filtering & source.gas	//only filter gasses that are actually there. DO NOT USE &=
 
 	var/total_specific_power = 0		//the power required to remove one mole of input gas
@@ -276,7 +269,6 @@
 
 	var/list/filtered_power_used = list()		//power used to move filterable gas to the filtered gas mixes
 	var/unfiltered_power_used = 0	//power used to move unfilterable gas to sink_clean
-	var/list/filtered_heat = list()
 	for (var/g in removed.gas)
 		var/power_used = specific_power_gas[g]*removed.gas[g]
 
@@ -287,7 +279,6 @@
 			removed.adjust_gas(g, -removed.gas[g], update=0)
 			if (power_used)
 				filtered_power_used[sink_filtered] = power_used
-				filtered_heat[sink_filtered] = power_used * (removed.gas[g] / source_moles_initial)
 		else
 			unfiltered_power_used += power_used
 
