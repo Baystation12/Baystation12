@@ -12,15 +12,17 @@
 	var/current_internal_charge = 15000 	// Starts charged, to prevent power surges on round start
 	var/charging_cap_active = 25000			// Active Cap - When cyborg is inside
 	var/charging_cap_passive = 2500			// Passive Cap - Recharging internal capacitor when no cyborg is inside
+	var/icon_update_tick = 0				// Used to update icon only once every 10 ticks
 
 
 
 	New()
 		..()
 		build_icon()
+		update_icon()
 
 	process()
-		if(stat & (BROKEN|NOPOWER))
+		if(stat & (BROKEN|(NOPOWER && !current_internal_charge)))//Broken or missing external power and internal cell is empty
 			return
 
 		var/chargemode = 0
@@ -28,6 +30,13 @@
 			process_occupant()
 			chargemode = 1
 		// Power Stuff
+
+		if(stat & NOPOWER)
+			current_internal_charge = max(0, (current_internal_charge - (50 * CELLRATE))) // Internal Circuitry, 50W load. No power - Runs from internal cell
+			return // No external power = No charging
+
+
+
 		if(max_internal_charge < current_internal_charge)
 			current_internal_charge = max_internal_charge// Safety check if varedit adminbus or something screws up
 		// Calculating amount of power to draw
@@ -38,10 +47,19 @@
 		else															// We should have load for this tick in Watts
 			charge_diff = between(0, charge_diff, charging_cap_passive)
 
-		if(use_power(charge_diff)) // Use power
-			current_internal_charge = min((current_internal_charge + (charge_diff * CELLRATE)), max_internal_charge)
+		charge_diff += 50 // 50W for circuitry
 
+		if(idle_power_usage != charge_diff) // Force update, but only when our power usage changed this tick.
+			idle_power_usage = charge_diff
+			update_use_power(1,1)
 
+		current_internal_charge = min((current_internal_charge + ((charge_diff - 50) * CELLRATE)), max_internal_charge)
+
+		if(icon_update_tick >= 10)
+			update_icon()
+			icon_update_tick = 0
+		else
+			icon_update_tick++
 
 		return 1
 
@@ -69,6 +87,23 @@
 			occupant.emp_act(severity)
 			go_out()
 		..(severity)
+
+	update_icon()
+		..()
+		overlays.Cut()
+		switch(round(chargepercentage()))
+			if(1 to 20)
+				overlays += image('icons/obj/objects.dmi', "statn_c0")
+			if(21 to 40)
+				overlays += image('icons/obj/objects.dmi', "statn_c20")
+			if(41 to 60)
+				overlays += image('icons/obj/objects.dmi', "statn_c40")
+			if(61 to 80)
+				overlays += image('icons/obj/objects.dmi', "statn_c60")
+			if(81 to 98)
+				overlays += image('icons/obj/objects.dmi', "statn_c80")
+			if(99 to 110)
+				overlays += image('icons/obj/objects.dmi', "statn_c100")
 
 	proc
 		build_icon()
@@ -146,5 +181,5 @@
 				O.loc = src.loc*/
 			src.add_fingerprint(usr)
 			build_icon()
-			update_use_power(2)
+			update_use_power(1)
 			return
