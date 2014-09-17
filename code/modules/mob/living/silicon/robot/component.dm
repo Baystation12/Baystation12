@@ -80,11 +80,11 @@
 
 // ACTUATOR
 // Enables movement.
-// Uses no power when idle. Uses 50J for each tile the cyborg moves.
+// Uses no power when idle. Uses 200J for each tile the cyborg moves.
 /datum/robot_component/actuator
 	name = "actuator"
 	idle_usage = 0
-	active_usage = 50
+	active_usage = 200
 	external_type = /obj/item/robot_parts/robot_component/actuator
 	max_damage = 50
 

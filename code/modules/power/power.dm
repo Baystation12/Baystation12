@@ -67,6 +67,7 @@
 	if(!autocalled)
 		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
+	return 1
 
 //The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
 /obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change

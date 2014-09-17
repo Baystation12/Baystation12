@@ -5,9 +5,13 @@
 	density = 1
 	anchored = 1.0
 	use_power = 1
-	idle_power_usage = 5		//internal circuitry
-	active_power_usage = 75000	//75 kW charging station
+	idle_power_usage = 50
+	active_power_usage = 50
 	var/mob/occupant = null
+	var/max_internal_charge = 15000 		// Two charged borgs in a row with default cell
+	var/current_internal_charge = 15000 	// Starts charged, to prevent power surges on round start
+	var/charging_cap_active = 25000			// Active Cap - When cyborg is inside
+	var/charging_cap_passive = 2500			// Passive Cap - Recharging internal capacitor when no cyborg is inside
 
 
 
@@ -16,17 +20,40 @@
 		build_icon()
 
 	process()
-		if(!(NOPOWER|BROKEN))
+		if(stat & (BROKEN|NOPOWER))
 			return
 
+		var/chargemode = 0
 		if(src.occupant)
 			process_occupant()
+			chargemode = 1
+		// Power Stuff
+		if(max_internal_charge < current_internal_charge)
+			current_internal_charge = max_internal_charge// Safety check if varedit adminbus or something screws up
+		// Calculating amount of power to draw
+		var/charge_diff = max_internal_charge - current_internal_charge // OK we have charge differences
+		charge_diff = charge_diff / CELLRATE 							// Deconvert from Charge to Joules
+		if(chargemode)													// Decide if use passive or active power
+			charge_diff = between(0, charge_diff, charging_cap_active)	// Trim the values to limits
+		else															// We should have load for this tick in Watts
+			charge_diff = between(0, charge_diff, charging_cap_passive)
+
+		if(use_power(charge_diff)) // Use power
+			current_internal_charge = min((current_internal_charge + (charge_diff * CELLRATE)), max_internal_charge)
+
+
+
 		return 1
 
 
 	allow_drop()
 		return 0
 
+	examine()
+		usr << "The charge meter reads: [round(chargepercentage())]%"
+
+	proc/chargepercentage()
+		return ((current_internal_charge / max_internal_charge) * 100)
 
 	relaymove(mob/user as mob)
 		if(user.stat)
@@ -62,7 +89,10 @@
 					if(!R.cell)
 						return
 					if(!R.cell.fully_charged())
-						R.cell.give(active_power_usage*CELLRATE)
+						var/diff = min(R.cell.maxcharge - R.cell.charge, 250) 	// Capped at 250 charge / tick
+						diff = min(diff, current_internal_charge) 				// No over-discharging
+						R.cell.give(diff)
+						current_internal_charge -= diff
 					else
 						update_use_power(1)
 		go_out()
