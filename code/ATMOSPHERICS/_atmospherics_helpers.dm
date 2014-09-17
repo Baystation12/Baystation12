@@ -14,12 +14,11 @@
 
 /obj/machinery/atmospherics/var/debug = 0
 
-/obj/machinery/atmospherics/verb/toggle_debug()
+/client/proc/atmos_toggle_debug(var/obj/machinery/atmospherics/M in view())
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
-	set src in view()
-	debug = !debug
-	usr << "[src]: Debug messages toggled [debug? "on" : "off"]."
+	M.debug = !M.debug
+	usr << "[M]: Debug messages toggled [M.debug? "on" : "off"]."
 
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
