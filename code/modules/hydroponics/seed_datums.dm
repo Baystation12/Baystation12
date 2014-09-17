@@ -188,9 +188,9 @@ proc/populate_seed_list()
 
 			if(gene.values.len < 6) return
 
-			yield =     round(yield*0.8)
-			endurance = round(endurance*0.8)
-			lifespan =  round(lifespan*0.8)
+			if(yield > 0)     yield =     max(1,round(yield*0.85))
+			if(endurance > 0) endurance = max(1,round(endurance*0.85))
+			if(lifespan > 0)  lifespan =  max(1,round(lifespan*0.85))
 
 			if(!products) products = list()
 			products |= gene.values[1]
@@ -362,7 +362,7 @@ proc/populate_seed_list()
 	if(!isnull(products) && products.len && yield > 0)
 		got_product = 1
 
-	if(!got_product)
+	if(!got_product && !harvest_sample)
 		user << "\red You fail to harvest anything useful."
 	else
 		user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
@@ -379,12 +379,14 @@ proc/populate_seed_list()
 			seeds.update_seed()
 			return
 
-		var/total_yield
-		if(isnull(yield_mod) || yield_mod < 1)
-			yield_mod = 0
-			total_yield = yield
-		else
-			total_yield = yield + rand(yield_mod)
+		var/total_yield = 0
+		if(yield > -1)
+			if(isnull(yield_mod) || yield_mod < 1)
+				yield_mod = 0
+				total_yield = yield
+			else
+				total_yield = yield + rand(yield_mod)
+			total_yield = max(1,total_yield)
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
@@ -426,8 +428,8 @@ proc/populate_seed_list()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : " ")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : " ")][display_name]"
+	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
+	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
 	new_seed.seed_noun =            seed_noun
 
 	new_seed.requires_nutrients =   requires_nutrients

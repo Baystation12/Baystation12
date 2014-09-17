@@ -187,7 +187,7 @@
 		return
 
 	// Advance plant age.
-	if(prob(25)) age += 1 * HYDRO_SPEED_MULTIPLIER
+	if(prob(50)) age += 1 * HYDRO_SPEED_MULTIPLIER
 
 	//Highly mutable plants have a chance of mutating every tick.
 	if(seed.immutable == -1)
@@ -197,7 +197,7 @@
 	// Other plants also mutate if enough mutagenic compounds have been added.
 	if(!seed.immutable)
 		if(prob(min(mutation_level,100)))
-			mutate(mutation_level > 50 ? 2 : 1)
+			mutate((rand(100) < 25) ? 2 : 1)
 			mutation_level = 0
 
 	// Maintain tray nutrient and water levels.

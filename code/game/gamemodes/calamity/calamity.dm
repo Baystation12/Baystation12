@@ -48,15 +48,19 @@
 		var/atype
 		var/list/candidates = list()
 
-		while(atypes.len && candidates.len == 0) //While there are untested antag mode types and we don't have any candidates selected, loop.
+		// Go through antag types at random until we find one that has candidates.
+		while(atypes.len && !candidates.len)
 			atype = pick(atypes)
 			log_debug("Calamity: checking [atype].")
 			atypes -= atype
 			candidates = get_role_candidates(atype)
 
-		if(!candidates.len)
-			log_debug("Calamity mode setup failed, no antag types or candidates left.")
-			return 0
+			//Prune out candidates who are already antagonists.
+			var/list/remove_players = list()
+			for(var/datum/mind/player in candidates)
+				if(player.special_role || player.assigned_role == "MODE")
+					remove_players += player
+			candidates -= remove_players
 
 		log_debug("Calamity: selected [atype] (possible candidates: [candidates.len])")
 		chosen_atypes += atype
@@ -73,8 +77,8 @@
 				chosen_candidate.assigned_role = "MODE"
 
 			chosen_candidate.special_role = atype
-			candidates -= chosen_candidate
 			chosen_candidates |= chosen_candidate
+			candidates -= chosen_candidate
 
 		if(atypes.len - i <= 0) break //Not enough valid types left to populate the remaining antag slots.
 
