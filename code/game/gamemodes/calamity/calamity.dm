@@ -244,7 +244,7 @@
 //TO BE FIXED UP. NINJA, NUKE AND CULT IN PARTICULAR ARE FUCKING AWFUL. ~ Z
 /datum/game_mode/calamity/proc/spawn_syndicate(var/list/candidates)
 
-	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")
+	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
@@ -276,8 +276,9 @@
 
 	update_all_synd_icons()
 
-	if(uplinklocker)
-		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
+	if(uplinkdevice)
+		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
