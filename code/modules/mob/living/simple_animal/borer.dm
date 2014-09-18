@@ -135,7 +135,7 @@
 	if (copytext(message, 1, 2) == ";") //Brain borer hivemind.
 		return borer_speak(message)
 
-	if(host)
+	if(!host)
 		//TODO: have this pick a random mob within 3 tiles to speak for the borer.
 		src << "You have no host to speak to."
 		return //No host, no audible speech.
@@ -345,39 +345,37 @@
 			host << "Something slimy wiggles out of your ear and plops to the ground!"
 
 		detatch()
+		leave_host()
 
 /mob/living/simple_animal/borer/proc/detatch()
 
-	if(!host) return
+	if(!host || !controlling) return
 
 	if(istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
 		var/datum/organ/external/head = H.get_organ("head")
 		head.implants -= src
 
-	src.loc = get_turf(host)
 	controlling = 0
-
-	reset_view(null)
-	machine = null
-
-	host.reset_view(null)
-	host.machine = null
 
 	host.verbs -= /mob/living/carbon/proc/release_control
 	host.verbs -= /mob/living/carbon/proc/punish_host
 	host.verbs -= /mob/living/carbon/proc/spawn_larvae
 
-
 	if(host_brain)
+
+		src.ckey = host.ckey
+		host.ckey = host_brain.ckey
+
+		/* Frankly I'm not sure what walter0 intended with this,
+		but he fucked borer control up. Commenting it out until
+		I can talk to him and fix it.
 
 		// brain -> host
 		var/b2h_id = host_brain.computer_id
 		var/b2h_ip= host_brain.lastKnownIP
 		host_brain.computer_id = null
 		host_brain.lastKnownIP = null
-
-		host.ckey = host_brain.ckey
 
 		if(!host.computer_id)
 			host.computer_id = b2h_id
@@ -391,22 +389,29 @@
 		host.computer_id = null
 		host.lastKnownIP = null
 
-		src.ckey = host.ckey
-
 		if(!src.computer_id)
 			src.computer_id = h2s_id
 
 		if(!host_brain.lastKnownIP)
 			src.lastKnownIP = h2s_ip
-
+		*/
 	del(host_brain)
 
+/mob/living/simple_animal/borer/proc/leave_host()
+
+	if(!host) return
+
+	src.loc = get_turf(host)
+
+	reset_view(null)
+	machine = null
+
+	host.reset_view(null)
+	host.machine = null
 
 	var/mob/living/H = host
 	H.status_flags &= ~PASSEMOTES
-
 	host = null
-
 	return
 
 /mob/living/simple_animal/borer/verb/infest()
