@@ -10001,7 +10001,7 @@
 "dKq" = (/obj/machinery/light,/turf/simulated/floor/plating/airless/asteroid,/area/mine/explored)
 "dKr" = (/obj/structure/table,/obj/item/weapon/storage/backpack/satchel,/obj/item/clothing/glasses/meson,/obj/machinery/light/small{dir = 8},/turf/simulated/floor,/area/mine/west_outpost)
 "dKs" = (/obj/machinery/door/airlock/glass_mining{name = "Break Room"; req_access_txt = "54"},/turf/simulated/floor,/area/mine/west_outpost)
-"dKt" = (/obj/machinery/telecomms/allinone{intercept = 1},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/syndicate_mothership)
+"dKt" = (/obj/machinery/telecomms/allinone{intercept = 1;on = 0},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/syndicate_mothership)
 "dKu" = (/obj/machinery/teleport/station,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_mothership)
 "dKv" = (/obj/machinery/door/window{dir = 4; name = "Air Tank Access"; req_access_txt = "0"; req_one_access_txt = "47;10;24"},/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/machinery/portable_atmospherics/canister/air/airlock,/turf/simulated/floor,/area/research_outpost/gearstore)
 "dKw" = (/obj/structure/table,/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor{icon_state = "bar"},/area/mine/living_quarters)
