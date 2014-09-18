@@ -135,7 +135,8 @@
 	if (copytext(message, 1, 2) == ";") //Brain borer hivemind.
 		return borer_speak(message)
 
-	if(!host)
+	if(host)
+		//TODO: have this pick a random mob within 3 tiles to speak for the borer.
 		src << "You have no host to speak to."
 		return //No host, no audible speech.
 
@@ -147,7 +148,6 @@
 			continue
 		else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 			M << "[src.truename] whispers to [host], \"[message]\""
-
 
 /mob/living/simple_animal/borer/Stat()
 	..()
@@ -173,10 +173,10 @@
 
 /mob/living/simple_animal/borer/verb/dominate_victim()
 	set category = "Alien"
-	set name = "Dominate Victim"
+	set name = "Paralyze Victim"
 	set desc = "Freeze the limbs of a potential host with supernatural fear."
 
-	if(world.time - used_dominate < 300)
+	if(world.time - used_dominate < 150)
 		src << "You cannot use that ability again so soon."
 		return
 
@@ -193,7 +193,7 @@
 		if(C.stat != 2)
 			choices += C
 
-	if(world.time - used_dominate < 300)
+	if(world.time - used_dominate < 150)
 		src << "You cannot use that ability again so soon."
 		return
 
@@ -207,7 +207,7 @@
 
 	src << "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread."
 	M << "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing."
-	M.Weaken(3)
+	M.Weaken(10)
 
 	used_dominate = world.time
 
@@ -234,7 +234,7 @@
 
 	src << "You begin delicately adjusting your connection to the host brain..."
 
-	spawn(300+(host.brainloss*5))
+	spawn(100+(host.brainloss*5))
 
 		if(!host || !src || controlling)
 			return
@@ -306,7 +306,7 @@
 		return
 
 	src << "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>"
-	host.reagents.add_reagent(chem, 15)
+	host.reagents.add_reagent(chem, 10)
 	chemicals -= 50
 
 /mob/living/simple_animal/borer/verb/release_host()
@@ -332,12 +332,12 @@
 	if(!host.stat)
 		host << "An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."
 
-	spawn(200)
+	spawn(100)
 
 		if(!host || !src) return
 
 		if(src.stat)
-			src << "You cannot infest a target in your current state."
+			src << "You cannot release your host in your current state."
 			return
 
 		src << "You wiggle out of [host]'s ear and plop to the ground."
@@ -371,20 +371,6 @@
 
 	if(host_brain)
 
-		// host -> self
-		var/h2s_id = host.computer_id
-		var/h2s_ip= host.lastKnownIP
-		host.computer_id = null
-		host.lastKnownIP = null
-
-		src.ckey = host.ckey
-
-		if(!src.computer_id)
-			src.computer_id = h2s_id
-
-		if(!host_brain.lastKnownIP)
-			src.lastKnownIP = h2s_ip
-
 		// brain -> host
 		var/b2h_id = host_brain.computer_id
 		var/b2h_ip= host_brain.lastKnownIP
@@ -399,7 +385,22 @@
 		if(!host.lastKnownIP)
 			host.lastKnownIP = b2h_ip
 
+		// host -> self
+		var/h2s_id = host.computer_id
+		var/h2s_ip= host.lastKnownIP
+		host.computer_id = null
+		host.lastKnownIP = null
+
+		src.ckey = host.ckey
+
+		if(!src.computer_id)
+			src.computer_id = h2s_id
+
+		if(!host_brain.lastKnownIP)
+			src.lastKnownIP = h2s_ip
+
 	del(host_brain)
+
 
 	var/mob/living/H = host
 	H.status_flags &= ~PASSEMOTES
@@ -445,7 +446,7 @@
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
-	if(!do_after(src,50))
+	if(!do_after(src,30))
 		src << "As [M] moves away, you are dislodged and fall to the ground."
 		return
 
