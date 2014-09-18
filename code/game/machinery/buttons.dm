@@ -45,3 +45,23 @@
 	var/area/area = null
 	var/otherarea = null
 	var/id = 1
+
+/obj/machinery/fire_sprsn_button
+	name = "Fire Supression Control"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "launcherbtt"
+	desc = "Remote controller for fire supression system."
+	var/id = null
+	var/active = 0
+	var/sig_range = 25 // Signal range
+	anchored = 1.0
+	use_power = 1
+	idle_power_usage = 2
+	active_power_usage = 4
+
+/obj/machinery/fire_sprsn_button/attack_hand(mob/user as mob)
+	if(!..()) // ..() handled checks
+		usr << "\red You pushed the fire supression control button"
+		for(var/obj/machinery/sprinkler/S in orange(sig_range))
+			if(S.id == src.id)
+				S.trigger()
