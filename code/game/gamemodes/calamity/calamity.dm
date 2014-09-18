@@ -17,7 +17,7 @@
 	uplink_uses = 10
 
 	//Possible roundstart antag types.
-	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","slug","cult")
+	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","cult") //Readd slug when borer spawn is fixed.
 	var/list/chosen_atypes = list()
 	var/list/chosen_candidates = list()
 	var/list/already_assigned_candidates = list()
