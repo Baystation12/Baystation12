@@ -470,7 +470,7 @@
 		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
 		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
 
-		spawn(rand(350,450)+B.host.brainloss)
+		spawn(rand(400,500)+B.host.brainloss)
 
 			if(!B || !B.controlling)
 				return
