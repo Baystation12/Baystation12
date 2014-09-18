@@ -705,9 +705,10 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 /obj/item/device/radio/borg
 	var/mob/living/silicon/robot/myborg = null // Cyborg which owns this radio. Used for power checks
 	var/obj/item/device/encryptionkey/keyslot = null//Borg radios can handle a single encryption key
+	var/shut_up = 0
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
-	canhear_range = 0 // Should prevent everyone around the cyborg hearing potentionally secret stuff from department channels (espicially sec)
+	canhear_range = 3
 
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
@@ -797,6 +798,13 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 			channels = list()
 		else
 			recalculateChannels()
+	if (href_list["shutup"]) // Toggle loudspeaker mode, AKA everyone around you hearing your radio.
+		shut_up = !shut_up
+		if(shut_up)
+			canhear_range = 0
+		else
+			canhear_range = 3
+
 	..()
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
@@ -813,6 +821,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
+				<A href='byond://?src=\ref[src];shutup=1'>Toggle Loudspeaker</A><BR>
 				"}
 
 	if(!subspace_transmission)//Don't even bother if subspace isn't turned on
