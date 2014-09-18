@@ -22,7 +22,10 @@
 		update_icon()
 
 	process()
-		if(stat & (BROKEN|(NOPOWER && !current_internal_charge)))//Broken or missing external power and internal cell is empty
+		if(stat & (BROKEN))
+			return
+
+		if((stat & (NOPOWER)) && !current_internal_charge) // No Power.
 			return
 
 		var/chargemode = 0
