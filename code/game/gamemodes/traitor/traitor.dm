@@ -274,7 +274,7 @@
 			var/freq = 1441
 			var/list/freqlist = list()
 			while (freq <= 1489)
-				if (freq < 1451 || freq > 1459)
+				if (freq < 1451 || freq > PUB_FREQ)
 					freqlist += freq
 				freq += 2
 				if ((freq % 2) == 0)

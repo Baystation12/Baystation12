@@ -19,7 +19,7 @@
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
 	var/beacon_freq = 1400
-	var/control_freq = 1447
+	var/control_freq = AI_FREQ
 
 	suffix = ""
 
