@@ -15,6 +15,14 @@
 			return
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))
+
+		message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+		if (!message)
+			return
+		log_say("[key_name(src)] : [message]")
+		if (stat == 2)
+			return say_dead(message)
+
 		var/mob/living/simple_animal/borer/B = src.loc
 		src << "You whisper silently, \"[message]\""
 		B.host << "The captive mind of [src] whispers, \"[message]\""
@@ -105,7 +113,6 @@
 /mob/living/simple_animal/borer/New()
 	..()
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
-	host_brain = new/mob/living/captive_brain(src)
 	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -224,10 +231,6 @@
 		src << "You cannot do that in your current state."
 		return
 
-	if(!host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
-		src << "<span class='warning'>There is no brain here for us to command!</span>"
-		return
-
 	if(docile)
 		src << "\blue You are feeling far too docile to do that."
 		return
@@ -252,6 +255,8 @@
 			host_brain = new(src)
 
 			host_brain.ckey = host.ckey
+
+			host_brain.name = host.name
 
 			if(!host_brain.computer_id)
 				host_brain.computer_id = h2b_id
@@ -364,24 +369,8 @@
 
 	if(host_brain)
 
-		src.ckey = host.ckey
-		host.ckey = host_brain.ckey
-
-		/* Frankly I'm not sure what walter0 intended with this,
-		but he fucked borer control up. Commenting it out until
-		I can talk to him and fix it.
-
-		// brain -> host
-		var/b2h_id = host_brain.computer_id
-		var/b2h_ip= host_brain.lastKnownIP
-		host_brain.computer_id = null
-		host_brain.lastKnownIP = null
-
-		if(!host.computer_id)
-			host.computer_id = b2h_id
-
-		if(!host.lastKnownIP)
-			host.lastKnownIP = b2h_ip
+		// these are here so bans and multikey warnings are not triggered on the wrong people when ckey is changed.
+		// computer_id and IP are not updated magically on their own in offline mobs -walter0o
 
 		// host -> self
 		var/h2s_id = host.computer_id
@@ -389,12 +378,28 @@
 		host.computer_id = null
 		host.lastKnownIP = null
 
+		src.ckey = host.ckey
+
 		if(!src.computer_id)
 			src.computer_id = h2s_id
 
 		if(!host_brain.lastKnownIP)
 			src.lastKnownIP = h2s_ip
-		*/
+
+		// brain -> host
+		var/b2h_id = host_brain.computer_id
+		var/b2h_ip= host_brain.lastKnownIP
+		host_brain.computer_id = null
+		host_brain.lastKnownIP = null
+
+		host.ckey = host_brain.ckey
+
+		if(!host.computer_id)
+			host.computer_id = b2h_id
+
+		if(!host.lastKnownIP)
+			host.lastKnownIP = b2h_ip
+
 	del(host_brain)
 
 /mob/living/simple_animal/borer/proc/leave_host()
