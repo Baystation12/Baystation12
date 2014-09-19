@@ -97,6 +97,136 @@ proc/populate_seed_list()
 	var/flower_icon = "vine_fruit"  // Which overlay to use.
 	var/flower_colour               // Which colour to use.
 
+//Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
+/datum/seed/proc/randomize()
+
+	roundstart = 0
+	seed_name = "strange plant"     // TODO: name generator.
+	display_name = "strange plants" // TODO: name generator.
+
+	seed_noun = pick("spores","nodes","cuttings","seeds")
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/generic_fruit)
+	potency = rand(5,30)
+
+	//TODO: Finish generalizing the product icons so this can be randomized.
+	packet_icon = "seed-berry"
+	plant_icon = "berry"
+	if(prob(20))
+		harvest_repeat = 1
+
+	if(prob(5))
+		consume_gasses = list()
+		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		consume_gasses[gas] = rand(3,9)
+
+	if(prob(5))
+		exude_gasses = list()
+		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		exude_gasses[gas] = rand(3,9)
+
+	chems = list()
+	if(prob(80))
+		chems["nutriment"] = list(rand(1,10),rand(10,20))
+
+	var/additional_chems = rand(0,5)
+
+	var/list/possible_chems = list(
+		"bicaridine",
+		"hyperzine",
+		"cryoxadone",
+		"blood",
+		"water",
+		"potassium",
+		"plasticide",
+		"slimetoxin",
+		"aslimetoxin",
+		"inaprovaline",
+		"space_drugs",
+		"paroxetine",
+		"mercury",
+		"sugar",
+		"radium",
+		"ryetalyn",
+		"alkysine",
+		"thermite",
+		"tramadol",
+		"cryptobiolin",
+		"dermaline",
+		"dexalin",
+		"phoron",
+		"synaptizine",
+		"impedrezene",
+		"hyronalin",
+		"peridaxon",
+		"toxin",
+		"rezadone",
+		"ethylredoxrazine",
+		"slimejelly",
+		"cyanide",
+		"mindbreaker",
+		"stoxin"
+		)
+
+	for(var/x=1;x<=additional_chems;x++)
+		if(!possible_chems.len)
+			break
+		var/new_chem = pick(possible_chems)
+		possible_chems -= new_chem
+		chems[new_chem] = list(rand(1,10),rand(10,20))
+
+	if(prob(90))
+		requires_nutrients = 1
+		nutrient_consumption = rand(100)*0.1
+	else
+		requires_nutrients = 0
+
+	if(prob(90))
+		requires_water = 1
+		water_consumption = rand(10)
+	else
+		requires_water = 0
+
+	ideal_heat =       rand(100,400)
+	heat_tolerance =   rand(10,30)
+	ideal_light =      rand(2,10)
+	light_tolerance =  rand(2,7)
+	toxins_tolerance = rand(2,7)
+	pest_tolerance =   rand(2,7)
+	weed_tolerance =   rand(2,7)
+	lowkpa_tolerance = rand(10,50)
+	highkpa_tolerance = rand(100,300)
+
+	if(prob(5))
+		alter_temp = rand(-5,5)
+
+	if(prob(1))
+		immutable = -1
+
+	var/carnivore_prob = rand(100)
+	if(carnivore_prob < 5)
+		carnivorous = 2
+	else if(carnivore_prob < 10)
+		carnivorous = 1
+
+	if(prob(10))
+		parasite = 1
+
+	var/vine_prob = rand(100)
+	if(vine_prob < 5)
+		spread = 2
+	else if(vine_prob < 10)
+		spread = 1
+
+	if(prob(5))
+		biolum = 1
+		biolum_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+
+	endurance = rand(60,100)
+	yield = rand(3,15)
+	maturation = rand(5,15)
+	production = maturation + rand(2,5)
+	lifespan = production + rand(5,10)
+
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()
 	if(!mutants || !mutants.len || immutable > 0) return 0

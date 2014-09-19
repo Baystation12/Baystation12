@@ -17,7 +17,8 @@
 	var/tag_chamber_sensor
 	var/tag_exterior_sensor
 	var/tag_interior_sensor
-	var/tag_mech_sensor
+	var/tag_airlock_mech_sensor
+	var/tag_shuttle_mech_sensor
 
 	var/state = STATE_IDLE
 	var/target_state = TARGET_NONE
@@ -43,7 +44,8 @@
 		tag_chamber_sensor = controller.tag_chamber_sensor? controller.tag_chamber_sensor : "[id_tag]_sensor"
 		tag_exterior_sensor = controller.tag_exterior_sensor
 		tag_interior_sensor = controller.tag_interior_sensor
-		tag_mech_sensor = controller.tag_mech_sensor? controller.tag_mech_sensor : "[id_tag]_mech"
+		tag_airlock_mech_sensor = controller.tag_airlock_mech_sensor? controller.tag_airlock_mech_sensor : "[id_tag]_airlock_mech"
+		tag_shuttle_mech_sensor = controller.tag_shuttle_mech_sensor? controller.tag_shuttle_mech_sensor : "[id_tag]_shuttle_mech"
 		memory["secure"] = controller.tag_secure
 
 		spawn(10)
@@ -187,7 +189,7 @@
 
 				if(memory["purge"])
 					target_pressure = 0
-				
+
 				if(memory["purge"])
 					target_pressure = 0
 
@@ -202,7 +204,7 @@
 				//Check for vacuum - this is set after the pumps so the pumps are aiming for 0
 				if(!memory["target_pressure"])
 					memory["target_pressure"] = ONE_ATMOSPHERE * 0.05
-		
+
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] * 0.95)
 				cycleDoors(target_state)
@@ -303,17 +305,19 @@
 			signalDoor(tag_exterior_door, command)
 			signalDoor(tag_interior_door, command)
 
-datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command)
+datum/computer/file/embedded_program/airlock/proc/signal_mech_sensor(var/command, var/sensor)
 	var/datum/signal/signal = new
-	signal.data["tag"] = tag_mech_sensor
+	signal.data["tag"] = sensor
 	signal.data["command"] = command
 	post_signal(signal)
 
 /datum/computer/file/embedded_program/airlock/proc/enable_mech_regulation()
-	signal_mech_sensor("enable")
+	signal_mech_sensor("enable", tag_shuttle_mech_sensor)
+	signal_mech_sensor("enable", tag_airlock_mech_sensor)
 
 /datum/computer/file/embedded_program/airlock/proc/disable_mech_regulation()
-	signal_mech_sensor("disable")
+	signal_mech_sensor("disable", tag_shuttle_mech_sensor)
+	signal_mech_sensor("disable", tag_airlock_mech_sensor)
 
 /*----------------------------------------------------------
 toggleDoor()

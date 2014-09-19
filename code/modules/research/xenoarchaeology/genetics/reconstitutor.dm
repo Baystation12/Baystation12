@@ -33,8 +33,9 @@ datum/genesequence
 
 
 /obj/machinery/computer/reconstitutor/initialize()
-	if(!undiscovered_genesequences)
-		undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
+	spawn(50)
+		if(!undiscovered_genesequences)
+			undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/animal
@@ -44,7 +45,8 @@ datum/genesequence
 	circuit = "/obj/item/weapon/circuitboard/reconstitutor/animal"
 
 /obj/machinery/computer/reconstitutor/animal/initialize()
-	undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
+	spawn(50)
+		undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/attackby(obj/item/W, mob/user)

@@ -106,8 +106,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	if(!candidate)
 		candidate = new /datum/paiCandidate()
 		candidate.key = M.key
-		pai_candidates.Add(candidate)
-
+		if(allowSubmit)
+			pai_candidates.Add(candidate)
 
 	var/dat = ""
 	dat += {"
