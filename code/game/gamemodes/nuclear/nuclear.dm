@@ -170,6 +170,7 @@ var/global/list/turf/synd_spawn = list()
 	if (nuke_code)
 		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
+		synd_mind.current << "To speak on the strike team's private channel use :t"
 		var/obj/item/weapon/paper/P = new
 		P.info = "The nuclear authorization code is: <b>[nuke_code]</b>"
 		P.name = "nuclear bomb code"
@@ -205,10 +206,8 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/proc/equip_syndicate(mob/living/carbon/human/synd_mob)
-	var/radio_freq = SYND_FREQ
-
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(synd_mob)
-	R.set_frequency(radio_freq)
+	R.set_frequency(SYND_FREQ)
 	synd_mob.equip_to_slot_or_del(R, slot_l_ear)
 
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(synd_mob), slot_w_uniform)

@@ -72,7 +72,7 @@ Radio:
 1355 - Medical
 1357 - Engineering
 1359 - Security
-1441 - death squad
+1341 - death squad
 1443 - Confession Intercom
 1347 - Cargo techs
 
@@ -96,33 +96,41 @@ On the map:
 1455 for AI access
 */
 
-var/list/radiochannels = list(
-	"Common" = 1459,
-	"Science" = 1351,
-	"Command" = 1353,
-	"Medical" = 1355,
-	"Engineering" = 1357,
-	"Security" = 1359,
-	"Response Team" = 1345,
-	"Deathsquad" = 1341,
-	"Syndicate" = 1213,
-	"Supply" = 1347,
-)
-//depenging helpers
-var/list/DEPT_FREQS = list(1351, 1355, 1357, 1359, 1213, 1345, 1341, 1347)
-
-// central command channels, i.e deathsquid & response teams
-var/list/CENT_FREQS = list(1345, 1341)
-
-var/const/COMM_FREQ = 1353 //command, colored gold in chat window
+var/const/COMM_FREQ = 1353
 var/const/SYND_FREQ = 1213
+var/const/ERT_FREQ = 1345
+var/const/DTH_FREQ = 1341
+var/const/AI_FREQ = 1447
 
 // department channels
+var/const/PUB_FREQ = 1459
 var/const/SEC_FREQ = 1359
 var/const/ENG_FREQ = 1357
 var/const/SCI_FREQ = 1351
 var/const/MED_FREQ = 1355
 var/const/SUP_FREQ = 1347
+
+var/list/radiochannels = list(
+	"Common"		= PUB_FREQ,
+	"Science"		= SCI_FREQ,
+	"Command"		= COMM_FREQ,
+	"Medical"		= MED_FREQ,
+	"Engineering"	= ENG_FREQ,
+	"Security" 		= SEC_FREQ,
+	"Response Team" = ERT_FREQ,
+	"Special Ops" 	= DTH_FREQ,
+	"Syndicate" 	= SYND_FREQ,
+	"Supply" 		= SUP_FREQ
+)
+
+// central command channels, i.e deathsquid & response teams
+var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
+
+// Antag channels, i.e. Syndicate
+var/list/ANTAG_FREQS = list(SYND_FREQ)
+
+//depenging helpers
+var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, ERT_FREQ, SYND_FREQ, DTH_FREQ)
 
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
@@ -218,7 +226,7 @@ var/global/datum/controller/radio/radio_controller
 /datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = null)
 	if (range && !start_point)
 		return
-	
+
 	for(var/obj/device in devices[filter])
 		if(device == source)
 			continue
@@ -228,7 +236,7 @@ var/global/datum/controller/radio/radio_controller
 				continue
 			if(start_point.z!=end_point.z || get_dist(start_point, end_point) > range)
 				continue
-		
+
 		//allow sequential signals before round start, so that every air alarm sounding off at once doesn't cause trouble.
 		if(!ticker || ticker.current_state < 3)
 			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)

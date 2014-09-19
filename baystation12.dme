@@ -172,6 +172,7 @@
 #include "code\defines\procs\command_alert.dm"
 #include "code\defines\procs\dbcore.dm"
 #include "code\defines\procs\hud.dm"
+#include "code\defines\procs\radio.dm"
 #include "code\defines\procs\records.dm"
 #include "code\defines\procs\sd_Alert.dm"
 #include "code\defines\procs\statistics.dm"
