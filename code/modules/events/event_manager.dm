@@ -32,7 +32,7 @@ var/scheduledEvent = null
 				playercount_modifier = 0.8
 
 		if(ticker.mode && ticker.mode.name == "calamity") //Calamity mode lowers the time required between events drastically.
-			playercount_modifier = playercount_modifier * 0.3
+			playercount_modifier = playercount_modifier * 0.5
 
 		var/next_event_delay = rand(eventTimeLower, eventTimeUpper) * playercount_modifier
 		scheduledEvent = world.timeofday + next_event_delay

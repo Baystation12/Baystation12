@@ -172,7 +172,7 @@
 
 	// Weeds like water and nutrients, there's a chance the weed population will increase.
 	// Bonus chance if the tray is unoccupied.
-	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 6 : 3))
+	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 5 : 2))
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 
 	// There's a chance for a weed explosion to happen if the weeds take over.
@@ -187,7 +187,7 @@
 		return
 
 	// Advance plant age.
-	if(prob(50)) age += 1 * HYDRO_SPEED_MULTIPLIER
+	if(prob(30)) age += 1 * HYDRO_SPEED_MULTIPLIER
 
 	//Highly mutable plants have a chance of mutating every tick.
 	if(seed.immutable == -1)
