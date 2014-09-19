@@ -1234,7 +1234,7 @@ datum/design/gas_heater
 	req_tech = list("powerstorage" = 2, "engineering" = 1)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/gas_heater"
+	build_path = "/obj/item/weapon/circuitboard/unary_atmos/heater"
 
 datum/design/gas_cooler
 	name = "Gas Cooling System Board"
@@ -1243,7 +1243,7 @@ datum/design/gas_cooler
 	req_tech = list("magnets" = 2, "engineering" = 2)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/gas_cooler"
+	build_path = "/obj/item/weapon/circuitboard/unary_atmos/cooler"
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
