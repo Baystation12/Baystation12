@@ -23,7 +23,7 @@
 	 3: Carbon Dioxide: Carbon Dioxide ONLY
 	 4: Sleeping Agent (N2O)
 	*/
-	var/filter_type = 0
+	var/filter_type = -1
 	var/list/filtered_out = list()
 
 
@@ -38,6 +38,18 @@
 
 /obj/machinery/atmospherics/trinary/filter/New()
 	..()
+	switch(filter_type)
+		if(0) //removing hydrocarbons
+			filtered_out = list("phoron", "oxygen_agent_b")
+		if(1) //removing O2
+			filtered_out = list("oxygen")
+		if(2) //removing N2
+			filtered_out = list("nitrogen")
+		if(3) //removing CO2
+			filtered_out = list("carbon_dioxide")
+		if(4)//removing N2O
+			filtered_out = list("sleeping_agent")
+	
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER

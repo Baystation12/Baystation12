@@ -200,8 +200,8 @@
 
 		if (g in filtering)
 			//use update=0. All the filtered gasses are supposed to be added simultaneously, so we update after the for loop.
-			removed.adjust_gas(g, -removed.gas[g], update=0)
 			sink_filtered.adjust_gas_temp(g, removed.gas[g], removed.temperature, update=0)
+			removed.adjust_gas(g, -removed.gas[g], update=0)
 			filtered_power_used += power_used
 		else
 			unfiltered_power_used += power_used
