@@ -199,6 +199,24 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
+/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if (clipped)
+			user << "<span class='notice'>The [src] have already been clipped!</span>"
+			update_icon()
+			return
+		
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
+		
+		clipped = 1
+		name = "mangled [name]"
+		desc = "[desc]<br>They have had the fingertips cut off of them."
+		if("exclude" in species_restricted)
+			species_restricted -= "Unathi"
+			species_restricted -= "Tajaran"
+		return
+
 //Head
 /obj/item/clothing/head
 	name = "head"
