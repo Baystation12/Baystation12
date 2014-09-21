@@ -78,19 +78,19 @@
 			{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, 'disabled', null)}}
 		{{else}}
 			{{if data.interior_status.state == "open"}}
-				{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, 'redBackground')}}
+				{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, null)}}
 			{{else}}
-				{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, data.processing ? 'yellowBackground' : null)}}
+				{{:helper.link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, data.processing ? null : null)}}
 			{{/if}}
 			{{if data.exterior_status.state == "open"}}
-				{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, 'redBackground')}}
+				{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, null)}}
 			{{else}}
-				{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, data.processing ? 'yellowBackground' : null)}}
+				{{:helper.link('Force interior door', 'alert', {'command' : 'force_int'}, null, data.processing ? null : null)}}
 			{{/if}}
 		{{/if}}
 		</div>
 	</div>
 	<div class="item" style="padding-top: 10px; width: 100%">
-			{{:helper.link('Abort', 'cancel', {'command' : 'abort'}, (data.processing && !data.airlock_disabled) ? null : 'disabled', (data.processing && !data.airlock_disabled) ? 'redBackground' : null)}}
+			{{:helper.link('Abort', 'cancel', {'command' : 'abort'}, (data.processing && !data.airlock_disabled) ? null : 'disabled', (data.processing && !data.airlock_disabled) ? null : null)}}
 	</div>
 </div>
