@@ -30,9 +30,9 @@
 	R.uneq_all()
 	R.hands.icon_state = "nomod"
 	R.icon_state = "robot"
-	world << R.custom_sprite
+	//world << R.custom_sprite
 	if(R.custom_sprite == 1)
-		world << R.icon_state
+		//world << R.icon_state
 		icon = 'icons/mob/custom-synthetic.dmi'
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
