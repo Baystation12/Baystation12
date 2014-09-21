@@ -106,8 +106,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	if(!candidate)
 		candidate = new /datum/paiCandidate()
 		candidate.key = M.key
-		if(allowSubmit)
-			pai_candidates.Add(candidate)
+		pai_candidates.Add(candidate)
 
 	var/dat = ""
 	dat += {"
@@ -358,11 +357,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 			else
 				asked.Remove(O.key)
 		if(O.client)
-			var/hasSubmitted = 0
-			for(var/datum/paiCandidate/c in paiController.pai_candidates)
-				if(c.key == O.key)
-					hasSubmitted = 1
-			if(!hasSubmitted && (O.client.prefs.be_special & BE_PAI))
+			if(O.client.prefs.be_special & BE_PAI)
 				question(O.client)
 
 /datum/paiController/proc/question(var/client/C)
