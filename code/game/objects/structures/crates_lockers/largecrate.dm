@@ -62,13 +62,3 @@
 		for(var/i = 0, i < num, i++)
 			new /mob/living/simple_animal/chick(loc)
 	..()
-
-/obj/structure/largecrate/hoverpod
-	name = "Hoverpod assembly crate"
-	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
-	icon_state = "mulecrate"
-
-/obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
-		new /obj/mecha/working/hoverpod(loc)
-	..()
