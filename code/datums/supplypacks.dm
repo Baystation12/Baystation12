@@ -256,6 +256,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Corgi Crate"
 	group = "Hydroponics"
 
+/datum/supply_packs/hoverpod
+	name = "Hoverpod Shipment"
+	contains = list()
+	cost = 75
+	containertype = /obj/structure/largecrate/hoverpod
+	containername = "Hoverpod Crate"
+	group = "Operations"
+
 /datum/supply_packs/hydroponics // -- Skie
 	name = "Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone,

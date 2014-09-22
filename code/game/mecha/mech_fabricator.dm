@@ -61,7 +61,7 @@
 						/obj/item/mecha_parts/part/ripley_right_leg
 					),
 	"Hoverpod"=list(
-						/obj/structure/largecrate/hoverpod
+						/obj/structure/largecrate/hoverpod // Doesn't work, even with required vars. Why? - Gamerofthegame
 					),
 	"Odysseus"=list(
 						/obj/item/mecha_parts/chassis/odysseus,
