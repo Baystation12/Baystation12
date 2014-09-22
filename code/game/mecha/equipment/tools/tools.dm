@@ -6,7 +6,7 @@
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
 
-	can_attach(obj/mecha/working/ripley/M as obj)
+	can_attach(obj/mecha/working/M as obj)
 		if(..())
 			if(istype(M))
 				return 1
