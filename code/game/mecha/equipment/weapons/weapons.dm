@@ -11,10 +11,10 @@
 	var/fire_volume = 50 //How loud it is played.
 	var/auto_rearm = 0 //Does the weapon reload itself after each shot?
 
-/obj/item/mecha_parts/mecha_equipment/weapon/can_attach(var/obj/mecha/combat/M as obj)
-	if(!istype(M))
-		return 0
-	return ..()
+///obj/item/mecha_parts/mecha_equipment/weapon/can_attach(var/obj/mecha/combat/M as obj)
+//	if(!istype(M))
+//		return 0
+//	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/action_checks(atom/target)
 	if(projectiles <= 0)
@@ -73,6 +73,25 @@
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
+
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
+	equip_cooldown = 30
+	name = "Jury-rigged Welder-Laser"
+	desc = "While not regulation, this inefficient weapon can be attached to working exo-suits in desperate, or malicious, times."
+	icon_state = "mecha_laser"
+	energy_drain = 80
+	projectile = /obj/item/projectile/beam
+	fire_sound = 'sound/weapons/Laser.ogg'
+
+	can_attach(obj/mecha/working/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
+
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	equip_cooldown = 15
 	name = "CH-LC \"Solaris\" Laser Cannon"
@@ -80,6 +99,11 @@
 	energy_drain = 60
 	projectile = /obj/item/projectile/beam/heavylaser
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
+
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
 	equip_cooldown = 40
@@ -89,6 +113,10 @@
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
 
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	equip_cooldown = 30
@@ -99,6 +127,10 @@
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
 
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
 
 /obj/item/projectile/beam/pulse/heavy
 	name = "heavy pulse laser"
@@ -119,6 +151,11 @@
 	equip_cooldown = 8
 	projectile = /obj/item/projectile/beam/stun
 	fire_sound = 'sound/weapons/Taser.ogg'
+
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
 
 /* Commenting this out rather than removing it because it may be useful for reference.
 /obj/item/mecha_parts/mecha_equipment/weapon/honker
@@ -214,6 +251,11 @@
 	deviation = 0.7
 	projectile_energy_cost = 25
 
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
+
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 	name = "Ultra AC 2"
 	icon_state = "mecha_uac2"
@@ -225,6 +267,11 @@
 	deviation = 0.3
 	projectile_energy_cost = 20
 	fire_cooldown = 2
+
+	can_attach(obj/mecha/combat/M as obj)
+		if(!istype(M))
+			return 0
+		return ..()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
 	var/missile_speed = 2

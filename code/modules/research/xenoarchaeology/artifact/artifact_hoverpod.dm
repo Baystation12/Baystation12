@@ -1,4 +1,6 @@
 
+// Commented out, here for posteratity
+
 /obj/mecha/working/hoverpod
 	name = "hover pod"
 	icon_state = "engineering_pod"

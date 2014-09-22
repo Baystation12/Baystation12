@@ -668,3 +668,112 @@
 			S.reagents.add_reagent(reagent,amount)
 			S.chassis.use_power(energy_drain)
 		return 1
+
+
+/obj/item/mecha_parts/mecha_equipment/tool/passenger
+	name = "Passenger Compartment"
+	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
+	icon_state = "mecha_abooster_ccw"
+	origin_tech = "engineering=1;biotech=1"
+	energy_drain = 10
+	range = MELEE
+	construction_cost = list("metal"=5000,"glass"=5000)
+	reliability = 1000
+	equip_cooldown = 20
+	var/mob/living/carbon/occupant = null
+	salvageable = 0
+
+	can_attach(obj/mecha/M)
+		if(..())
+			if(istype(M))
+				return 1
+		return 0
+
+
+	allow_drop()
+		return 0
+
+	destroy()
+		for(var/atom/movable/AM in src)
+			AM.forceMove(get_turf(src))
+		return ..()
+
+	Exit(atom/movable/O)
+		return 0
+
+	action(var/mob/living/carbon/target)
+		if(!action_checks(target))
+			return
+		if(!istype(target))
+			return
+		if(target.buckled)
+			occupant_message("[target] can't be loaded because they're buckled to [target.buckled].")
+			return
+		if(occupant)
+			occupant_message("You already have a passenger!")
+			return
+		for(var/mob/living/carbon/slime/M in range(1,target))
+			if(M.Victim == target)
+				occupant_message("[target] is currently busy in a battle of wits with a slime.")
+				return
+		occupant_message("You start loading [target] into [src].")
+		chassis.visible_message("[chassis] starts loading [target] into the [src].")
+		var/C = chassis.loc
+		var/T = target.loc
+		if(do_after_cooldown(target))
+			if(chassis.loc!=C || target.loc!=T)
+				return
+			if(occupant)
+				occupant_message("<font color=\"red\"><B>The seat is already taken!</B></font>")
+				return
+			target.forceMove(src)
+			occupant = target
+			target.reset_view(src)
+			/*
+			if(target.client)
+				target.client.perspective = EYE_PERSPECTIVE
+				target.client.eye = chassis
+			*/
+			set_ready_state(0)
+			occupant_message("<font color='blue'>[target] successfully boarded into [src]. Life support functions engaged.</font>")
+			chassis.visible_message("[chassis] loads [target] into [src].")
+			log_message("[target] boarded. Life support functions engaged.")
+		return
+
+	proc/go_out()
+		if(!occupant)
+			return
+		occupant.forceMove(get_turf(src))
+		occupant_message("[occupant] disembarked. Life support functions disabled.")
+		log_message("[occupant] disembarked. Life support functions disabled.")
+		occupant.reset_view()
+		/*
+		if(occupant.client)
+			occupant.client.eye = occupant.client.mob
+			occupant.client.perspective = MOB_PERSPECTIVE
+		*/
+		occupant = null
+		set_ready_state(1)
+		return
+
+	detach()
+		if(occupant)
+			occupant_message("Unable to detach [src] - equipment occupied.")
+			return
+		return ..()
+
+	get_equip_info()
+		var/output = ..()
+		if(output)
+			var/temp = ""
+			if(occupant)
+				temp = "<br />\[Occupant: [occupant] (Health: [occupant.health]%)\]|<a href='?src=\ref[src];eject=1'>Eject</a>"
+			return "[output] [temp]"
+		return
+//				temp = "<br />\[Occupant: [occupant] (Health: [occupant.health]%)\]|<a href='?src=\ref[src];eject=1'>Eject</a>"
+//			return "[output] [temp]"
+	Topic(href,href_list)
+		..()
+		var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+		if(filter.get("eject"))
+			go_out()
