@@ -12,13 +12,8 @@
 	var/mob/living/carbon/occupant = null
 	var/datum/global_iterator/pr_mech_sleeper
 	var/inject_amount = 10
+	required_type = /obj/mecha/medical
 	salvageable = 0
-
-	can_attach(obj/mecha/medical/M)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
 
 	New()
 		..()
@@ -245,17 +240,12 @@
 	var/obj/structure/cable/last_piece
 	var/obj/item/stack/cable_coil/cable
 	var/max_cable = 1000
+	required_type = /obj/mecha/working
 
 	New()
 		cable = new(src)
 		cable.amount = 0
 		..()
-
-	can_attach(obj/mecha/working/M)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
 
 	attach()
 		..()
@@ -403,6 +393,7 @@
 	origin_tech = "materials=3;biotech=4;magnets=4;programming=3"
 	construction_time = 200
 	construction_cost = list("metal"=3000,"glass"=2000)
+	required_type = /obj/mecha/medical
 
 	New()
 		..()
@@ -421,12 +412,6 @@
 		..()
 		flags &= ~NOREACT
 		return
-
-	can_attach(obj/mecha/medical/M)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
 
 	get_equip_info()
 		var/output = ..()

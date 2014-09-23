@@ -5,12 +5,7 @@
 	energy_drain = 10
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
-
-	can_attach(obj/mecha/working/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
+	required_type = /obj/mecha/working
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -75,6 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
+	required_type = list(/obj/mecha/working, /obj/mecha/combat)
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -117,12 +113,6 @@
 					log_message("Drilled through [target]")
 					target.ex_act(2)
 		return 1
-
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			if(istype(M, /obj/mecha/working) || istype(M, /obj/mecha/combat))
-				return 1
-		return 0
 
 /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
 	name = "Diamond Drill"
@@ -175,12 +165,6 @@
 					target.ex_act(2)
 		return 1
 
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			if(istype(M, /obj/mecha/working) || istype(M, /obj/mecha/combat))
-				return 1
-		return 0
-
 /obj/item/mecha_parts/mecha_equipment/tool/extinguisher
 	name = "Extinguisher"
 	desc = "Exosuit-mounted extinguisher (Can be attached to: Engineering exosuits)"
@@ -188,6 +172,7 @@
 	equip_cooldown = 5
 	energy_drain = 0
 	range = MELEE|RANGED
+	required_type = /obj/mecha/working
 
 	New()
 		reagents = new/datum/reagents(200)
@@ -245,12 +230,6 @@
 
 	on_reagent_change()
 		return
-
-	can_attach(obj/mecha/working/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
 
 
 /obj/item/mecha_parts/mecha_equipment/tool/rcd
@@ -1009,12 +988,7 @@
 	energy_drain = 0
 	var/dam_force = 0
 	var/obj/mecha/working/ripley/cargo_holder
-
-	can_attach(obj/mecha/working/ripley/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
+	required_type = /obj/mecha/working/ripley
 
 	attach(obj/mecha/M as obj)
 		..()
