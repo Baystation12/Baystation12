@@ -1492,6 +1492,7 @@
 
 	else if(href_list["CentcommFaxReply"])
 		var/mob/living/carbon/human/H = locate(href_list["CentcommFaxReply"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
 		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
 		if(!input)	return
@@ -1499,32 +1500,76 @@
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
 		for(var/obj/machinery/faxmachine/F in machines)
-			if(! (F.stat & (BROKEN|NOPOWER) ) )
+			if(F == fax)
+				if(! (F.stat & (BROKEN|NOPOWER) ) )
 
-				// animate! it's alive!
-				flick("faxreceive", F)
+					// animate! it's alive!
+					flick("faxreceive", F)
 
-				// give the sprite some time to flick
-				spawn(20)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-					P.name = "[command_name()]- [customname]"
-					P.info = input
-					P.update_icon()
+					// give the sprite some time to flick
+					spawn(20)
+						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+						P.name = "[command_name()]- [customname]"
+						P.info = input
+						P.update_icon()
 
-					playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
+						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
 
-					// Stamps
-					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-cent"
-					if(!P.stamped)
-						P.stamped = new
-					P.stamped += /obj/item/weapon/stamp
-					P.overlays += stampoverlay
-					P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
+						// Stamps
+						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+						stampoverlay.icon_state = "paper_stamp-cent"
+						if(!P.stamped)
+							P.stamped = new
+						P.stamped += /obj/item/weapon/stamp
+						P.overlays += stampoverlay
+						P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
 
-		src.owner << "Message reply to transmitted successfully."
-		log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-		message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				src.owner << "Message reply to transmitted successfully."
+				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				return
+		src.owner << "/red Unable to locate fax!"
+
+	else if(href_list["SolGovFaxReply"])
+		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
+
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!input)	return
+
+		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+
+		for(var/obj/machinery/faxmachine/F in machines)
+			if(F == fax)
+				if(! (F.stat & (BROKEN|NOPOWER) ) )
+
+					// animate! it's alive!
+					flick("faxreceive", F)
+
+					// give the sprite some time to flick
+					spawn(20)
+						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+						P.name = "Sol Government- [customname]"
+						P.info = input
+						P.update_icon()
+
+						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
+
+						// Stamps
+						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+						stampoverlay.icon_state = "paper_stamp-cap"
+						if(!P.stamped)
+							P.stamped = new
+						P.stamped += /obj/item/weapon/stamp
+						P.overlays += stampoverlay
+						P.stamps += "<HR><i>This paper has been stamped and encrypted by the Sol Government Quantum Relay.</i>"
+
+				src.owner << "Message reply to transmitted successfully."
+				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				return
+		src.owner << "/red Unable to locate fax!"
+
 
 
 	else if(href_list["jumpto"])

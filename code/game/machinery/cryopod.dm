@@ -41,6 +41,7 @@ var/global/list/frozen_items = list()
 	dat += "<hr/><br/><b>Cryogenic Oversight Control</b><br/>"
 	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
 	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
+	dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
 	dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 	dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
 
@@ -65,16 +66,27 @@ var/global/list/frozen_items = list()
 
 		user << browse(dat, "window=cryolog")
 
+	if(href_list["view"])
+
+		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
+		for(var/obj/item/I in frozen_items)
+			dat += "[I.name]<br/>"
+		dat += "<hr/>"
+
+		user << browse(dat, "window=cryoitems")
+
 	else if(href_list["item"])
 
 		if(frozen_items.len == 0)
 			user << "\blue There is nothing to recover from storage."
 			return
 
-		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as obj in frozen_items
+		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
+		if(!I)
+			return
 
-		if(!I || frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+		if(!(I in frozen_items))
+			user << "\blue \The [I] is no longer in storage."
 			return
 
 		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
@@ -134,10 +146,10 @@ var/global/list/frozen_items = list()
 	density = 1
 	anchored = 1
 
-	var/mob/occupant = null      // Person waiting to be despawned.
-	var/orient_right = null      // Flips the sprite.
-	var/time_till_despawn = 9000 // 15 minutes-ish safe period before being despawned.
-	var/time_entered = 0         // Used to keep track of the safe period.
+	var/mob/occupant = null       // Person waiting to be despawned.
+	var/orient_right = null       // Flips the sprite.
+	var/time_till_despawn = 18000 // 30 minutes-ish safe period before being despawned.
+	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
 
 	// These items are preserved when the process() despawn proc occurs.
@@ -173,7 +185,6 @@ var/global/list/frozen_items = list()
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
 /obj/machinery/cryopod/process()
 	if(occupant)
-
 		//Allow a ten minute gap between entering the pod and actually despawning.
 		if(world.time - time_entered < time_till_despawn)
 			return
@@ -187,7 +198,7 @@ var/global/list/frozen_items = list()
 
 				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
 					for(var/obj/item/O in W.contents)
-						if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets you fuck!
+						if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
 							continue
 						O.loc = src
 
@@ -333,6 +344,7 @@ var/global/list/frozen_items = list()
 			src.add_fingerprint(M)
 
 /obj/machinery/cryopod/verb/eject()
+
 	set name = "Eject Pod"
 	set category = "Object"
 	set src in oview(1)
@@ -343,6 +355,14 @@ var/global/list/frozen_items = list()
 		icon_state = "body_scanner_0-r"
 	else
 		icon_state = "body_scanner_0"
+
+	//Eject any items that aren't meant to be in the pod.
+	var/list/items = src.contents
+	if(occupant) items -= occupant
+	if(announce) items -= announce
+
+	for(var/obj/item/W in items)
+		W.loc = get_turf(src)
 
 	src.go_out()
 	add_fingerprint(usr)

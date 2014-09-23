@@ -1,15 +1,14 @@
 /turf/simulated/var/zone/zone
 /turf/simulated/var/open_directions
-/turf/simulated/var/gas_graphic
 
 /turf/var/needs_air_update = 0
 /turf/var/datum/gas_mixture/air
 
-/turf/simulated/proc/set_graphic(new_graphic)
-	gas_graphic = new_graphic
-	overlays.Cut()
-	for(var/i in gas_graphic)
-		overlays += i
+/turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
+	if(graphic_add)
+		overlays += graphic_add
+	if(graphic_remove)
+		overlays -= graphic_remove
 
 /turf/proc/update_air_properties()
 	var/block = c_airblock(src)

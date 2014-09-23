@@ -8,14 +8,14 @@
 	var/list/filters = new()
 	var/datum/omni_port/input
 	var/datum/omni_port/output
-	
+
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
-	
+
 	var/max_flow_rate = 200
 	var/set_flow_rate = 200
-	
+
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 
 /obj/machinery/atmospherics/omni/filter/New()
@@ -58,32 +58,26 @@
 	return 0
 
 /obj/machinery/atmospherics/omni/filter/process()
-	..()
-	if(error_check())
-		on = 0
-	
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
-		return
-	
+	if(!..())
+		return 0
+
 	var/datum/gas_mixture/output_air = output.air	//BYOND doesn't like referencing "output.air.return_pressure()" so we need to make a direct reference
 	var/datum/gas_mixture/input_air = input.air		// it's completely happy with them if they're in a loop though i.e. "P.air.return_pressure()"... *shrug*
-	
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = (set_flow_rate/input_air.volume)*input_air.total_moles
-	
+
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = filter_gas_multi(src, filtering_outputs, input_air, output_air, transfer_moles, active_power_usage)
-	
+
 	if (power_draw < 0)
 		//update_use_power(0)
 		use_power = 0	//don't force update - easier on CPU
 		last_flow_rate = 0
 	else
 		handle_power_draw(power_draw)
-		
+
 		if(input.network)
 			input.network.update = 1
 		if(output.network)
@@ -91,7 +85,7 @@
 		for(var/datum/omni_port/P in filters)
 			if(P.network)
 				P.network.update = 1
-	
+
 	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -252,7 +246,7 @@
 			P.mode = previous_mode
 			if(P.mode != old_mode)
 				handle_port_change(P)
-	
+
 	update_ports()
 
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()

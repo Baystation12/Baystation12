@@ -14,6 +14,7 @@ var/list/robot_verbs_default = list(
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
+	var/crisis_override = 0
 
 //Hud stuff
 
@@ -167,7 +168,7 @@ var/list/robot_verbs_default = list(
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -1119,7 +1120,10 @@ var/list/robot_verbs_default = list(
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O) || !(O in src.module.modules))
+		if (!istype(O))
+			return
+
+		if(!((O in src.module.modules) || (O == src.module.emag)))
 			return
 
 		if(activated(O))

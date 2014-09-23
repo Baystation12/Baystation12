@@ -13,6 +13,7 @@ var/global/list/rad_collectors = list()
 //	use_power = 0
 	var/obj/item/weapon/tank/phoron/P = null
 	var/last_power = 0
+	var/last_power_new = 0
 	var/active = 0
 	var/locked = 0
 	var/drainratio = 1
@@ -26,6 +27,11 @@ var/global/list/rad_collectors = list()
 	..()
 
 /obj/machinery/power/rad_collector/process()
+	//so that we don't zero out the meter if the SM is processed first.
+	last_power = last_power_new
+	last_power_new = 0
+	
+
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
@@ -50,10 +56,7 @@ var/global/list/rad_collectors = list()
 
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/analyzer))
-		user << "\blue The [W.name] detects that [last_power]W were recently produced."
-		return 1
-	else if(istype(W, /obj/item/weapon/tank/phoron))
+	if(istype(W, /obj/item/weapon/tank/phoron))
 		if(!src.anchored)
 			user << "\red The [src] needs to be secured to the floor first."
 			return 1
@@ -96,6 +99,11 @@ var/global/list/rad_collectors = list()
 		..()
 		return 1
 
+/obj/machinery/power/rad_collector/examine()
+	..()
+	if (get_dist(usr, src) <= 3)
+		usr << "The meter indicates that \the [src] is collecting [last_power] W."
+		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)
 	switch(severity)
@@ -122,7 +130,7 @@ var/global/list/rad_collectors = list()
 		var/power_produced = 0
 		power_produced = P.air_contents.gas["phoron"]*pulse_strength*20
 		add_avail(power_produced)
-		last_power = power_produced
+		last_power_new = power_produced
 		return
 	return
 

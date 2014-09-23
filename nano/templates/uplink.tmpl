@@ -46,7 +46,8 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
     <div class="item">
         {{:helper.link('Buy Random (??)' , 'gear', {'buy_item' : 'random'}, null, 'fixedLeftWidest')}}
     </div>
-{{else data.menu == 1}}
+	{{for value.items :itemValue:itemIndex}}
+	{{else data.menu == 1}}
     <H2><span class="white">Information Record List:</span></H2>
     <br>
     <div class="item">

@@ -1,3 +1,6 @@
+//TODO: Put this under a common parent type with heaters to cut down on the copypasta
+#define FREEZER_PERF_MULT 2.5
+
 /obj/machinery/atmospherics/unary/freezer
 	name = "gas cooling system"
 	desc = "Cools gas when connected to pipe network"
@@ -7,14 +10,17 @@
 
 	anchored = 1.0
 
-	var/heatsink_temperature = T20C		//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
+	var/heatsink_temperature = T20C	//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600	//L
-	
+
 	var/on = 0
 	use_power = 0
-	idle_power_usage = 5	//5 Watts for thermostat related circuitry
-	active_power_usage = 50000		//50 kW. The power rating of the freezer
-	
+	idle_power_usage = 5			//5 Watts for thermostat related circuitry
+	active_power_usage			//50 kW. The power rating of the freezer
+
+	var/max_power_usage = 20000 //power rating when the usage is turned up to 100
+	var/power_setting = 100
+
 	var/set_temperature = T20C	//thermostat
 	var/cooling = 0
 	var/opened = 0	//for deconstruction
@@ -23,13 +29,15 @@
 	..()
 	air_contents.volume = internal_volume
 	initialize_directions = dir
-	
+
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/gas_cooler(src)
+	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/cooler(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+
+	active_power_usage = max_power_usage * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/freezer/initialize()
 	if(node) return
@@ -72,7 +80,8 @@
 	data["minGasTemperature"] = 0
 	data["maxGasTemperature"] = round(T20C+500)
 	data["targetGasTemperature"] = round(set_temperature)
-	
+	data["powerSetting"] = power_setting
+
 	var/temp_class = "good"
 	if (air_contents.temperature > (T0C - 20))
 		temp_class = "bad"
@@ -104,6 +113,9 @@
 			src.set_temperature = min(src.set_temperature+amount, 1000)
 		else
 			src.set_temperature = max(src.set_temperature+amount, 0)
+	if(href_list["setPower"]) //setting power to 0 is redundant anyways
+		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
+		set_power_level(new_setting)
 
 	src.add_fingerprint(usr)
 	return 1
@@ -113,30 +125,33 @@
 	if(stat & (NOPOWER|BROKEN) || !on)
 		cooling = 0
 		update_use_power(0)
+		update_icon()
 		return
-	
+
 	if (network && air_contents.temperature > set_temperature)
 		cooling = 1
 		update_use_power(2)
-		
-		var/heat_transfer = min(abs(air_contents.get_thermal_energy_change(set_temperature)), active_power_usage)
+
+		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
 
 		//Assume the heat is being pumped into the hull which is fixed at heatsink_temperature
 		//not /really/ proper thermodynamics but whatever
-		var/cop = air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
+		var/cop = FREEZER_PERF_MULT * air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * active_power_usage)	//limit heat transfer by available power
 
-		air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
-	
+		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
+		if (debug)
+			visible_message("[src]: Removing [removed] W.")
+
 		network.update = 1
 	else
 		cooling = 0
 		update_use_power(1)
-	
+
 	update_icon()
 
 //upgrading parts
-/obj/machinery/atmospherics/unary/freezer/RefreshParts() 
+/obj/machinery/atmospherics/unary/freezer/RefreshParts()
 	..()
 	var/cap_rating = 0
 	var/cap_count = 0
@@ -144,7 +159,7 @@
 	var/manip_count = 0
 	var/bin_rating = 0
 	var/bin_count = 0
-	
+
 	for(var/obj/item/weapon/stock_parts/P in component_parts)
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
 			cap_rating += P.rating
@@ -158,10 +173,20 @@
 	cap_rating /= cap_count
 	bin_rating /= bin_count
 	manip_rating /= manip_count
-	
+
 	active_power_usage = initial(active_power_usage)*cap_rating			//more powerful
 	heatsink_temperature = initial(heatsink_temperature)/((manip_rating+bin_rating)/2)	//more efficient
 	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200*bin_rating
+	set_power_level(power_setting)
+
+/obj/machinery/atmospherics/unary/freezer/proc/set_power_level(var/new_power_setting)
+	power_setting = new_power_setting
+
+	var/old_power_usage = active_power_usage
+	active_power_usage = max_power_usage * (power_setting/100)
+
+	if (use_power >= 2 && old_power_usage != active_power_usage)
+		force_power_update()
 
 //dismantling code. copied from autolathe
 /obj/machinery/atmospherics/unary/freezer/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -173,7 +198,7 @@
 	if (opened && istype(O, /obj/item/weapon/crowbar))
 		dismantle()
 		return
-	
+
 	..()
 
 /obj/machinery/atmospherics/unary/freezer/examine()

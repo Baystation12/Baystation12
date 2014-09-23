@@ -86,7 +86,7 @@
 	if(istype(W,/obj/item/seeds))
 		if(seed)
 			user << "There is already a seed loaded."
-
+			return
 		var/obj/item/seeds/S =W
 		if(S.seed && S.seed.immutable > 0)
 			user << "That seed is not compatible with our genetics technology."

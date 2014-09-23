@@ -51,6 +51,9 @@ Class Procs:
 
 /zone/var/datum/gas_mixture/air = new
 
+/zone/var/list/graphic_add = list()
+/zone/var/list/graphic_remove = list()
+
 /zone/New()
 	air_master.add_zone(src)
 	air.temperature = TCMB
@@ -71,7 +74,7 @@ Class Procs:
 	if(T.fire)
 		fire_tiles.Add(T)
 		air_master.active_fire_zones.Add(src)
-	T.set_graphic(air.graphic)
+	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
 #ifdef ZASDBG
@@ -83,7 +86,7 @@ Class Procs:
 	contents.Remove(T)
 	fire_tiles.Remove(T)
 	T.zone = null
-	T.set_graphic(0)
+	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
@@ -128,9 +131,11 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
-	if(air.check_tile_graphic())
+	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
-			T.set_graphic(air.graphic)
+			T.update_graphic(graphic_add, graphic_remove)
+		graphic_add.len = 0
+		graphic_remove.len = 0
 
 /zone/proc/dbg_data(mob/M)
 	M << name

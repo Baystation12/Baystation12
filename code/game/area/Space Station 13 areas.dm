@@ -380,7 +380,7 @@ var/list/ghostteleportlocs = list()
 //SYNDICATES
 
 /area/syndicate_mothership
-	name = "\improper Syndicate Mothership"
+	name = "\improper Syndicate Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
@@ -1103,7 +1103,8 @@ var/list/ghostteleportlocs = list()
 //Solars
 
 /area/solar
-	requires_power = 0
+	requires_power = 1
+	always_unpowered = 1
 	luminosity = 1
 	lighting_use_dynamic = 0
 
@@ -1133,7 +1134,7 @@ var/list/ghostteleportlocs = list()
 
 /area/maintenance/auxsolarport
 	name = "Fore Port Solar Maintenance"
-	icon_state = "SolarcontrolA"
+	icon_state = "SolarcontrolP"
 
 /area/maintenance/starboardsolar
 	name = "Aft Starboard Solar Maintenance"
@@ -1145,7 +1146,7 @@ var/list/ghostteleportlocs = list()
 
 /area/maintenance/auxsolarstarboard
 	name = "Fore Starboard Solar Maintenance"
-	icon_state = "SolarcontrolA"
+	icon_state = "SolarcontrolS"
 
 /area/maintenance/foresolar
 	name = "Fore Solar Maintenance"
@@ -1458,6 +1459,10 @@ var/list/ghostteleportlocs = list()
 //rnd (Research and Development
 /area/rnd/research
 	name = "\improper Research and Development"
+	icon_state = "research"
+
+/area/rnd/docking
+	name = "\improper Research Dock"
 	icon_state = "research"
 
 /area/rnd/lab

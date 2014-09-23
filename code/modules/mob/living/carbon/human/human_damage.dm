@@ -165,6 +165,10 @@
 		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
 
+
+/*
+In most cases it makes more sense to use apply_damage() instead! And make sure to check armour if applicable.
+*/
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status

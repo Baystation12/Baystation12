@@ -1,3 +1,5 @@
+#define HEAT_CAPACITY_HUMAN 100 //249840 J/K, for a 72 kg person.
+
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
@@ -10,7 +12,7 @@
 	use_power = 1
 	idle_power_usage = 20
 	active_power_usage = 200
-	
+
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
