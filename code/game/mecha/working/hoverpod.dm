@@ -7,6 +7,7 @@
 	step_energy_drain = 5
 	max_temperature = 20000
 	health = 100
+	infra_luminosity = 6
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
 	var/list/cargo = new
 	var/cargo_capacity = 3
@@ -63,13 +64,6 @@
 	..()
 	return
 */
-
-
-/obj/mecha/working/ripley/deathripley/New()
-	..()
-	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/safety_clamp
-	ME.attach(src)
-	return
 
 /obj/mecha/working/hoverpod/combatpod
 	desc = "An ancient, ghetto fighter." // Ideally would have a seperate icon.
