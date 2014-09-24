@@ -6,7 +6,7 @@
 	step_in = 4
 	step_energy_drain = 5
 	max_temperature = 20000
-	health = 100
+	health = 150
 	infra_luminosity = 6
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
 	var/list/cargo = new
@@ -131,7 +131,3 @@
 		step_rand(A)
 	..()
 	return
-
-	/obj/effect/decal/mecha_wreckage/hoverpod
-	name = "Hover pod wreckage"
-	icon_state = "engineering_pod-broken"
