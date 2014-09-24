@@ -28,6 +28,9 @@
 	var/radio_filter_out
 	var/radio_filter_in
 
+/obj/machinery/atmospherics/unary/vent_scrubber/on
+	on = 1
+
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
