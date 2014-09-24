@@ -47,12 +47,17 @@
 		if(src.module_state_3)
 			cell_use_power(50)
 
+		if(lights_on)
+			cell_use_power(30) 	// 30W light. Normal lights would use ~15W, but increased for balance reasons.
+
 		src.has_power = 1
 	else
 		if (src.has_power)
 			src << "\red You are now running on emergency backup power."
 		src.has_power = 0
-
+		if(lights_on) // Light is on but there is no power!
+			lights_on = 0
+			SetLuminosity(0)
 
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 

@@ -12,6 +12,7 @@ var/list/robot_verbs_default = list(
 	maxHealth = 200
 	health = 200
 
+	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
 	var/sight_mode = 0
 	var/custom_name = ""
@@ -390,6 +391,16 @@ var/list/robot_verbs_default = list(
 
 	return dat
 
+/mob/living/silicon/robot/verb/toggle_lights()
+	set category = "Robot Commands"
+	set name = "Toggle Lights"
+
+	lights_on = !lights_on
+	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
+	if(lights_on)
+		SetLuminosity(6) // 1.5x luminosity of flashlight
+	else
+		SetLuminosity(0)
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -484,6 +495,7 @@ var/list/robot_verbs_default = list(
 	if (client.statpanel == "Status")
 		show_cell_power()
 		show_jetpack_pressure()
+		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
 
 /mob/living/silicon/robot/restrained()
 	return 0
