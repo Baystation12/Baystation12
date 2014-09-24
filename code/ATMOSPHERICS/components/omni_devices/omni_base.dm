@@ -50,10 +50,8 @@
 /obj/machinery/atmospherics/omni/update_icon()
 	if(stat & NOPOWER)
 		overlays = overlays_off
-		on = 0
 	else if(error_check())
 		overlays = overlays_error
-		on = 0
 	else
 		overlays = on ? (overlays_on) : (overlays_off)
 
@@ -63,6 +61,16 @@
 
 /obj/machinery/atmospherics/omni/proc/error_check()
 	return
+
+/obj/machinery/atmospherics/omni/process()
+	if(error_check())
+		on = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		return 0
+	return 1
 
 /obj/machinery/atmospherics/omni/power_change()
 	var/old_stat = stat

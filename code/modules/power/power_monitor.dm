@@ -5,7 +5,7 @@
 	desc = "It monitors power levels across the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "power"
-	
+
 	//computer stuff
 	density = 1
 	anchored = 1.0
@@ -67,7 +67,7 @@
 		t += "<FONT SIZE=-1>"
 
 		if(L.len > 0)
-
+			var/total_demand = 0
 			t += "Area                           Eqp./Lgt./Env.  Load   Cell<HR>"
 
 			var/list/S = list(" Off","AOff","  On", " AOn")
@@ -77,8 +77,10 @@
 
 				t += copytext(add_tspace("\The [A.area]", 30), 1, 30)
 				t += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(A.lastused_total, 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
+				total_demand += A.lastused_total
 
-		t += "</FONT></PRE></TT>"
+			t += "<HR>Total demand: [total_demand] W</FONT>"
+		t += "</PRE></TT>"
 
 	user << browse(t, "window=powcomp;size=420x900")
 	onclose(user, "powcomp")
@@ -105,7 +107,7 @@
 				src.icon_state = "c_unpowered"
 		else
 			icon_state = initial(icon_state)
-			
+
 
 //copied from computer.dm
 /obj/machinery/power/monitor/attackby(I as obj, user as mob)
@@ -127,7 +129,7 @@
 				user << "\blue You disconnect the monitor."
 				A.state = 4
 				A.icon_state = "4"
-			M.deconstruct_computer(src)
+			M.deconstruct(src)
 			del(src)
 	else
 		src.attack_hand(user)

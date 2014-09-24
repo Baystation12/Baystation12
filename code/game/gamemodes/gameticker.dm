@@ -37,6 +37,8 @@ var/global/datum/controller/gameticker/ticker
 
 	var/triai = 0//Global holder for Triumvirate
 
+	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
+
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
@@ -360,7 +362,9 @@ var/global/datum/controller/gameticker/ticker
 
 			//call a transfer shuttle vote
 			spawn(50)
-				world << "\red The round has ended!"
+				if(!round_end_announced) // Spam Prevention. Now it should announce only once.
+					world << "\red The round has ended!"
+					round_end_announced = 1
 				vote.autotransfer()
 
 		return 1

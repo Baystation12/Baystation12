@@ -32,7 +32,7 @@
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows")
 		)
-	
+
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
@@ -84,7 +84,6 @@
 	add_language("Tradeband", 1)
 	add_language("Gutter", 1)
 
-	verbs += /mob/living/silicon/pai/proc/fold_out
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 
@@ -301,7 +300,7 @@
 // mobile pai mob. This also includes handling some of the general shit that can occur
 // to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
 
-/mob/living/silicon/pai/proc/fold_out()
+/mob/living/silicon/pai/verb/fold_out()
 	set category = "pAI Commands"
 	set name = "Unfold Chassis"
 
@@ -315,8 +314,6 @@
 		return
 
 	last_special = world.time + 100
-	verbs -= /mob/living/silicon/pai/proc/fold_out
-	verbs += /mob/living/silicon/pai/proc/fold_up
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
@@ -333,7 +330,7 @@
 	src.forceMove(get_turf(card))
 	card.forceMove(src)
 
-/mob/living/silicon/pai/proc/fold_up()
+/mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
 	set name = "Collapse Chassis"
 
@@ -412,8 +409,8 @@
 
 	last_special = world.time + 100
 
-	verbs -= /mob/living/silicon/pai/proc/fold_up
-	verbs += /mob/living/silicon/pai/proc/fold_out
+	if(src.loc == card)
+		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")

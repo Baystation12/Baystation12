@@ -63,7 +63,7 @@
 			pressure_delta = target_pressure - output_starting_pressure
 	
 	var/flowing_old = flowing
-	if((REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
+	if((regulate_mode == REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
 		flowing = 1
 		
 		//flow rate limit

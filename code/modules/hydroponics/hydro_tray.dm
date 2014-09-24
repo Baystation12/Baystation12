@@ -7,14 +7,15 @@
 	density = 1
 	anchored = 1
 	flags = OPENCONTAINER
+	volume = 100
 
 	var/draw_warnings = 1 //Set to 0 to stop it from drawing the alert lights.
 
 	// Plant maintenance vars.
-	var/waterlevel = 100       // Water level (max 100)
-	var/nutrilevel = 10        // Nutrient level (max 10)
+	var/waterlevel = 100       // Water (max 100)
+	var/nutrilevel = 100       // Nutrient (max 100)
 	var/pestlevel = 0          // Pests (max 10)
-	var/weedlevel = 0          // Weeds (max 10)s
+	var/weedlevel = 0          // Weeds (max 10)
 
 	// Tray state vars.
 	var/dead = 0               // Is it dead?
@@ -25,6 +26,7 @@
 	var/yield_mod = 0          // Modifier to yield
 	var/mutation_mod = 0       // Modifier to mutation chance
 	var/toxins = 0             // Toxicity in the tray?
+	var/mutation_level = 0     // When it hits 100, the plant mutates.
 
 	// Mechanical concerns.
 	var/health = 0             // Plant health.
@@ -33,6 +35,7 @@
 	var/cycledelay = 150       // Delay per cycle.
 	var/closed_system          // If set, the tray will attempt to take atmos from a pipe.
 	var/force_update           // Set this to bypass the cycle time check.
+	var/obj/temp_chem_holder   // Something to hold reagents during process_reagents()
 
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
@@ -104,7 +107,7 @@
 		"cryoxadone" =     list(  3,    0,   0   ),
 		"ammonia" =        list(  0.5,  0,   0   ),
 		"diethylamine" =   list(  1,    0,   0   ),
-		"nutriment" =      list(  0.5,  1,   0   ),
+		"nutriment" =      list(  0.5,  0.1,   0 ),
 		"radium" =         list( -1.5,  0,   0.2 ),
 		"adminordrazine" = list(  1,    1,   1   ),
 		"robustharvest" =  list(  0,    0.2, 0   ),
@@ -114,12 +117,14 @@
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
-		"radium" =  list(8,3),
-		"mutagen" = list(3,8)
+		"radium" =  3,
+		"mutagen" = 8
 		)
 
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
+	temp_chem_holder = new()
+	temp_chem_holder.create_reagents(10)
 	create_reagents(200)
 	connect()
 	update_icon()
@@ -162,9 +167,12 @@
 		return
 	lastcycle = world.time
 
+	// Mutation level drops each main tick.
+	mutation_level -= rand(2,4)
+
 	// Weeds like water and nutrients, there's a chance the weed population will increase.
 	// Bonus chance if the tray is unoccupied.
-	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 6 : 3))
+	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 5 : 2))
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 
 	// There's a chance for a weed explosion to happen if the weeds take over.
@@ -179,12 +187,18 @@
 		return
 
 	// Advance plant age.
-	if(prob(25)) age += 1 * HYDRO_SPEED_MULTIPLIER
+	if(prob(30)) age += 1 * HYDRO_SPEED_MULTIPLIER
 
 	//Highly mutable plants have a chance of mutating every tick.
 	if(seed.immutable == -1)
 		var/mut_prob = rand(1,100)
 		if(mut_prob <= 5) mutate(mut_prob == 1 ? 2 : 1)
+
+	// Other plants also mutate if enough mutagenic compounds have been added.
+	if(!seed.immutable)
+		if(prob(min(mutation_level,100)))
+			mutate((rand(100) < 25) ? 2 : 1)
+			mutation_level = 0
 
 	// Maintain tray nutrient and water levels.
 	if(seed.nutrient_consumption > 0 && nutrilevel > 0 && prob(25))
@@ -242,7 +256,7 @@
 	if(seed.exude_gasses && seed.exude_gasses.len)
 		for(var/gas in seed.exude_gasses)
 			environment.adjust_gas(gas, max(1,round((seed.exude_gasses[gas]*seed.potency)/seed.exude_gasses.len)))
-	
+
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && connected_port)
 		update_connected_network()
@@ -291,6 +305,7 @@
 	// When the plant dies, weeds thrive and pests die off.
 	if(health <= 0)
 		dead = 1
+		mutation_level = 0
 		harvest = 0
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 		pestlevel = 0
@@ -302,7 +317,7 @@
 		lastproduce = age
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
-		pestlevel += 1 * HYDRO_SPEED_MULTIPLIER
+		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
 
 	check_level_sanity()
 	update_icon()
@@ -316,19 +331,20 @@
 	if(reagents.total_volume <= 0)
 		return
 
-	for(var/datum/reagent/R in reagents.reagent_list)
+	reagents.trans_to(temp_chem_holder, min(reagents.total_volume,rand(1,3)))
 
+	for(var/datum/reagent/R in temp_chem_holder.reagents.reagent_list)
 
-		var/reagent_total = reagents.get_reagent_amount(R.id)
+		var/reagent_total = temp_chem_holder.reagents.get_reagent_amount(R.id)
 
 		if(seed && !dead)
 			//Handle some general level adjustments.
 			if(toxic_reagents[R.id])
 				toxins += toxic_reagents[R.id]         * reagent_total
 			if(weedkiller_reagents[R.id])
-				weedlevel += weedkiller_reagents[R.id] * reagent_total
+				weedlevel -= weedkiller_reagents[R.id] * reagent_total
 			if(pestkiller_reagents[R.id])
-				pestlevel += pestkiller_reagents[R.id] * reagent_total
+				pestlevel -= pestkiller_reagents[R.id] * reagent_total
 
 			// Beneficial reagents have a few impacts along with health buffs.
 			if(beneficial_reagents[R.id])
@@ -338,12 +354,7 @@
 
 			// Mutagen is distinct from the previous types and mostly has a chance of proccing a mutation.
 			if(mutagenic_reagents[R.id])
-				var/reagent_min_value = mutagenic_reagents[R.id][1]
-				var/reagent_value =     mutagenic_reagents[R.id][2]+mutation_mod
-
-				if(reagent_total >= reagent_min_value)
-					if(prob(min(reagent_total*reagent_value,100)))
-						mutate(reagent_total > 10 ? 2 : 1)
+				mutation_level += reagent_total*mutagenic_reagents[R.id]+mutation_mod
 
 		// Handle nutrient refilling.
 		if(nutrient_reagents[R.id])
@@ -356,10 +367,11 @@
 			water_added += water_input
 			waterlevel += water_input
 
+		// Water dilutes toxin level.
 		if(water_added > 0)
 			toxins -= round(water_added/4)
 
-	reagents.clear_reagents()
+	temp_chem_holder.reagents.clear_reagents()
 	check_level_sanity()
 	update_icon()
 
@@ -509,11 +521,12 @@
 		health = 0
 		dead = 0
 
-	nutrilevel = max(0,min(nutrilevel,10))
-	waterlevel = max(0,min(waterlevel,100))
-	pestlevel =  max(0,min(pestlevel,10))
-	weedlevel =  max(0,min(weedlevel,10))
-	toxins =     max(0,min(toxins,10))
+	mutation_level = max(0,min(mutation_level,100))
+	nutrilevel =     max(0,min(nutrilevel,10))
+	waterlevel =     max(0,min(waterlevel,100))
+	pestlevel =      max(0,min(pestlevel,10))
+	weedlevel =      max(0,min(weedlevel,10))
+	toxins =         max(0,min(toxins,10))
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/mutate_species()
 
@@ -548,10 +561,16 @@
 			user << "There is nothing to take a sample from in \the [src]."
 			return
 
-		seed.harvest(user,yield_mod,1)
-		health -= (rand(1,5)*10)
-		check_level_sanity()
+		if(dead)
+			user << "\The plant is dead."
+			return
 
+		// Create a sample.
+		seed.harvest(user,yield_mod,1)
+		health -= (rand(3,5)*10)
+
+		// Bookkeeping.
+		check_level_sanity()
 		force_update = 1
 		process()
 
@@ -565,14 +584,14 @@
 			if(seed)
 				return ..()
 			else
-				user << "There's no plant in the tray to inject."
+				user << "There's no plant to inject."
 				return 1
 		else
 			if(seed)
 				//Leaving this in in case we want to extract from plants later.
 				user << "You can't get any extract out of this plant."
 			else
-				user << "There's nothing in the tray to draw something from."
+				user << "There's nothing to draw something from."
 			return 1
 
 	else if (istype(O, /obj/item/seeds))
@@ -637,7 +656,7 @@
 			user << "There's nothing in [src] to spray!"
 
 	else if (istype(O, /obj/item/weapon/minihoe))  // The minihoe
-		//var/deweeding
+
 		if(weedlevel > 0)
 			user.visible_message("\red [user] starts uprooting the weeds.", "\red You remove the weeds from the [src].")
 			weedlevel = 0

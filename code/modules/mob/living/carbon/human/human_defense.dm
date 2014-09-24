@@ -84,7 +84,7 @@ emp_act
 
 /mob/living/carbon/human/getarmor(var/def_zone, var/type)
 	var/armorval = 0
-	var/organnum = 0
+	var/total = 0
 
 	if(def_zone)
 		if(isorgan(def_zone))
@@ -94,10 +94,13 @@ emp_act
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
-	for(var/datum/organ/external/organ in organs)
-		armorval += getarmor_organ(organ, type)
-		organnum++
-	return (armorval/max(organnum, 1))
+	for(var/organ_name in organs_by_name)
+		if (organ_name in organ_rel_size)
+			var/datum/organ/external/organ = organs_by_name[organ_name]
+			var/weight = organ_rel_size[organ_name]
+			armorval += getarmor_organ(organ, type) * weight
+			total += weight
+	return (armorval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
 /mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/datum/organ/external/def_zone)
@@ -117,11 +120,10 @@ emp_act
 /mob/living/carbon/human/proc/getarmor_organ(var/datum/organ/external/def_zone, var/type)
 	if(!type)	return 0
 	var/protection = 0
-	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
+	for(var/gear in protective_gear)
+		if(gear && istype(gear ,/obj/item/clothing))
+			var/obj/item/clothing/C = gear
 			if(C.body_parts_covered & def_zone.body_part)
 				protection += C.armor[type]
 	return protection

@@ -17,10 +17,10 @@
 	var/tag_south_con
 	var/tag_east_con
 	var/tag_west_con
-	
+
 	var/max_flow_rate = 200
 	var/set_flow_rate = 200
-	
+
 	var/list/mixing_inputs = list()
 
 /obj/machinery/atmospherics/omni/mixer/New()
@@ -45,7 +45,7 @@
 					if(tag_west_con && tag_west == 1)
 						P.concentration = tag_west_con
 						con += max(0, tag_west_con)
-	
+
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_MIXER
 
@@ -86,32 +86,26 @@
 		return 1
 	if(inputs.len < 2) //requires at least 2 inputs ~otherwise why are you using a mixer?
 		return 1
-	
+
 	//concentration must add to 1
 	var/total = 0
 	for (var/datum/omni_port/P in inputs)
 		total += P.concentration
-	
+
 	if (total != 1)
 		return 1
 
 	return 0
 
 /obj/machinery/atmospherics/omni/mixer/process()
-	..()
-	if(error_check())
-		on = 0
-	
-	if((stat & (NOPOWER|BROKEN)) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
-		return
-	
+	if(!..())
+		return 0
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = 0
 	for (var/datum/omni_port/P in inputs)
 		transfer_moles += (set_flow_rate*P.concentration/P.air.volume)*P.air.total_moles
-	
+
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(src, mixing_inputs, output, transfer_moles, active_power_usage)
@@ -122,14 +116,14 @@
 		last_flow_rate = 0
 	else
 		handle_power_draw(power_draw)
-		
+
 		for(var/datum/omni_port/P in inputs)
 			if(P.concentration && P.network)
 				P.network.update = 1
 
 		if(output.network)
 			output.network.update = 1
-	
+
 	return 1
 
 /obj/machinery/atmospherics/omni/mixer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -291,7 +285,7 @@
 			P.concentration = new_con
 		else if(!P.con_lock)
 			P.concentration = remain_con
-	
+
 	rebuild_mixing_inputs()
 
 /obj/machinery/atmospherics/omni/mixer/proc/rebuild_mixing_inputs()

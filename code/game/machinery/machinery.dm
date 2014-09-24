@@ -106,7 +106,7 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP
 		//EQUIP,ENVIRON or LIGHT
-	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
+	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/manual = 0
 	var/global/gl_uid = 1
@@ -166,13 +166,12 @@ Class Procs:
 	use_power = new_use_power
 
 	//force area power update
-	//use_power() forces an area power update on the next tick so have to pass the correct power amount for this tick
-	if (use_power >= 2)
-		use_power(active_power_usage)
-	else if (use_power == 1)
-		use_power(idle_power_usage)
-	else
-		use_power(0)
+	force_power_update()
+
+/obj/machinery/proc/force_power_update()
+	var/area/A = get_area(src)
+	if(A && A.master)
+		A.master.powerupdate = 1
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
@@ -183,9 +182,15 @@ Class Procs:
 		use_power(active_power_usage,power_channel, 1)
 	return 1
 
+/obj/machinery/proc/operable(var/additional_flags = 0)
+	return !inoperable(additional_flags)
+
+/obj/machinery/proc/inoperable(var/additional_flags = 0)
+	return (stat & (NOPOWER|BROKEN|additional_flags))
+
 /obj/machinery/Topic(href, href_list)
 	..()
-	if(stat & (NOPOWER|BROKEN))
+	if(inoperable())
 		return 1
 	if(usr.restrained() || usr.lying || usr.stat)
 		return 1
@@ -227,7 +232,7 @@ Class Procs:
 	return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN|MAINT))
+	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
@@ -277,7 +282,7 @@ Class Procs:
   playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))
+	if(inoperable())
 		return 0
 	if(!prob(prb))
 		return 0
