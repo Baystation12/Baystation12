@@ -1463,7 +1463,7 @@ var/list/ghostteleportlocs = list()
 
 /area/rnd/docking
 	name = "\improper Research Dock"
-	icon_state = "research"
+	icon_state = "research_dock"
 
 /area/rnd/lab
 	name = "\improper Research Lab"
