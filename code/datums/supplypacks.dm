@@ -22,9 +22,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/New()
 	manifest += "<ul>"
-	for(var/atom/movable/path in contains)
+	for(var/path in contains)
 		if(!path)	continue
-		manifest += "<li>[initial(path.name)]</li>"
+		var/atom/movable/AM = new path()
+		manifest += "<li>[AM.name]</li>"
+		AM.loc = null	//just to make sure they're deleted by the garbage collector
 	manifest += "</ul>"
 
 /datum/supply_packs/specialops
@@ -254,6 +256,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Corgi Crate"
 	group = "Hydroponics"
 
+/datum/supply_packs/hoverpod
+	name = "Hoverpod Shipment"
+	contains = list()
+	cost = 75
+	containertype = /obj/structure/largecrate/hoverpod
+	containername = "Hoverpod Crate"
+	group = "Operations"
+
 /datum/supply_packs/hydroponics // -- Skie
 	name = "Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone,
@@ -346,17 +356,20 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/exoticseeds
 	name = "Exotic seeds crate"
-	contains = list(/obj/item/seeds/replicapod,
+	contains = list(/obj/item/seeds/nettleseed,
 					/obj/item/seeds/replicapod,
+					/obj/item/seeds/replicapod,
+					/obj/item/seeds/replicapod,
+					/obj/item/seeds/plumpmycelium,
 					/obj/item/seeds/libertymycelium,
+					/obj/item/seeds/amanitamycelium,
 					/obj/item/seeds/reishimycelium,
-					/obj/item/seeds/random,
-					/obj/item/seeds/random,
-					/obj/item/seeds/random,
-					/obj/item/seeds/random,
-					/obj/item/seeds/random,
-					/obj/item/seeds/random,
-					/obj/item/seeds/kudzuseed)
+					/obj/item/seeds/bananaseed,
+					/obj/item/seeds/riceseed,
+					/obj/item/seeds/eggplantseed,
+					/obj/item/seeds/limeseed,
+					/obj/item/seeds/grapeseed,
+					/obj/item/seeds/eggyseed)
 	cost = 15
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Exotic Seeds crate"
