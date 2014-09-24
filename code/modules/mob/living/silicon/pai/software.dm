@@ -205,15 +205,11 @@
 
 		if("directive")
 			if(href_list["getdna"])
-				var/mob/living/M = src.loc
-				var/count = 0
-				while(!istype(M, /mob/living))
-					if(!M || !M.loc) return 0 //For a runtime where M ends up in nullspace (similar to bluespace but less colourful)
-					M = M.loc
-					count++
-					if(count >= 6)
-						src << "You are not being carried by anyone!"
-						return 0
+				var/mob/living/M  = findPaiCarrier()
+				if(M == null)
+					src << "You are not being carried by anyone!"
+					return 0
+				
 				spawn CheckDNA(M, src)
 
 		if("pdamessage")
@@ -283,6 +279,20 @@
 	src.paiInterface()		 // So we'll just call the update directly rather than doing some default checks
 	return
 
+/mob/living/silicon/pai/proc/findPaiCarrier()
+	var/mob/living/M = src.loc
+	var/count = 0
+	while(count < 6)
+		if(!M || !M.loc) return null //For a runtime where M ends up in nullspace (similar to bluespace but less colourful)
+		
+		if(istype(M, /mob/living))
+			return M
+			
+		M = M.loc
+		count++
+		
+	return null
+	
 // MENUS
 
 /mob/living/silicon/pai/proc/softwareMenu()			// Populate the right menu
