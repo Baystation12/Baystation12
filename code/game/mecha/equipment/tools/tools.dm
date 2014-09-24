@@ -5,12 +5,7 @@
 	energy_drain = 10
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
-
-	can_attach(obj/mecha/working/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
+	required_type = /obj/mecha/working
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -75,6 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
+	required_type = list(/obj/mecha/working, /obj/mecha/combat)
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -117,12 +113,6 @@
 					log_message("Drilled through [target]")
 					target.ex_act(2)
 		return 1
-
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			if(istype(M, /obj/mecha/working) || istype(M, /obj/mecha/combat))
-				return 1
-		return 0
 
 /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
 	name = "Diamond Drill"
@@ -175,12 +165,6 @@
 					target.ex_act(2)
 		return 1
 
-	can_attach(obj/mecha/M as obj)
-		if(..())
-			if(istype(M, /obj/mecha/working) || istype(M, /obj/mecha/combat))
-				return 1
-		return 0
-
 /obj/item/mecha_parts/mecha_equipment/tool/extinguisher
 	name = "Extinguisher"
 	desc = "Exosuit-mounted extinguisher (Can be attached to: Engineering exosuits)"
@@ -188,6 +172,7 @@
 	equip_cooldown = 5
 	energy_drain = 0
 	range = MELEE|RANGED
+	required_type = /obj/mecha/working
 
 	New()
 		reagents = new/datum/reagents(200)
@@ -245,12 +230,6 @@
 
 	on_reagent_change()
 		return
-
-	can_attach(obj/mecha/working/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
 
 
 /obj/item/mecha_parts/mecha_equipment/tool/rcd
@@ -1009,12 +988,7 @@
 	energy_drain = 0
 	var/dam_force = 0
 	var/obj/mecha/working/ripley/cargo_holder
-
-	can_attach(obj/mecha/working/ripley/M as obj)
-		if(..())
-			if(istype(M))
-				return 1
-		return 0
+	required_type = /obj/mecha/working/ripley
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -1078,3 +1052,154 @@
 	var/new_icon = "ripley"  //What base icon will the new mech use?
 	var/removable = null     //Can the kit be removed?
 	var/list/allowed_types = list() //Types of mech that the kit will work on.
+
+/obj/item/mecha_parts/mecha_equipment/tool/passenger
+	name = "Passenger Compartment"
+	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
+	icon_state = "mecha_abooster_ccw"
+	origin_tech = "engineering=1;biotech=1"
+	energy_drain = 10
+	range = MELEE
+	construction_cost = list("metal"=5000,"glass"=5000)
+	reliability = 1000
+	equip_cooldown = 20
+	var/mob/living/carbon/occupant = null
+	var/door_locked = 1
+	salvageable = 0
+
+	allow_drop()
+		return 0
+
+	destroy()
+		for(var/atom/movable/AM in src)
+			AM.forceMove(get_turf(src))
+		return ..()
+
+	Exit(atom/movable/O)
+		return 0
+
+	proc/move_inside(var/mob/user)
+		if (chassis)
+			chassis.visible_message("\blue [user] starts to climb into [chassis].")
+
+		if(do_after(user, 40, needhand=0))
+			if(!src.occupant)
+				user.forceMove(src)
+				occupant = user
+				log_message("[user] boarded.")
+				occupant_message("[user] boarded.")
+			else if(src.occupant != user)
+				user << "\red [src.occupant] was faster. Try better next time, loser."
+		else
+			user << "You stop entering the exosuit."
+
+	verb/eject()
+		set name = "Eject"
+		set category = "Exosuit Interface"
+		set src = usr.loc
+		set popup_menu = 0
+		
+		if(usr != occupant)
+			return
+		go_out()
+		add_fingerprint(usr)
+
+	proc/go_out()
+		if(!occupant)
+			return
+		occupant << "You climb out from \the [src]."
+		occupant.forceMove(get_turf(src))
+		occupant_message("[occupant] disembarked.")
+		log_message("[occupant] disembarked.")
+		occupant.reset_view()
+		/*
+		if(occupant.client)
+			occupant.client.eye = occupant.client.mob
+			occupant.client.perspective = MOB_PERSPECTIVE
+		*/
+		occupant = null
+		return
+
+	attach()
+		..()
+		if (chassis)
+			chassis.verbs |= /obj/mecha/proc/move_inside_passenger
+
+	detach()
+		if(occupant)
+			occupant_message("Unable to detach [src] - equipment occupied.")
+			return
+		
+		var/obj/mecha/M = chassis
+		..()
+		if (M && !(locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in M))
+			M.verbs -= /obj/mecha/proc/move_inside_passenger
+
+	get_equip_info()
+		var/output = ..()
+		if(output)
+			var/temp = "<br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>[door_locked? "Locked" : "Unlocked"]</a>"
+			return "[output] [temp]"
+		return
+
+	Topic(href,href_list)
+		..()
+		if (href_list["toggle_lock"])
+			door_locked = !door_locked
+			if (chassis)
+				chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
+			
+
+#define LOCKED 1
+#define OCCUPIED 2
+#undefine
+
+/obj/mecha/proc/move_inside_passenger()
+	set category = "Object"
+	set name = "Enter Passenger Compartment"
+	set src in oview(1)
+
+	//check that usr can climb in
+	if (usr.stat || !ishuman(usr))
+		return
+	
+	if (!usr.Adjacent(src))
+		return
+	
+	if(iscarbon(usr))
+		var/mob/living/carbon/C = usr
+		if(C.handcuffed)
+			usr << "\red Kinda hard to climb in while handcuffed don't you think?"
+			return
+	
+	for(var/mob/living/carbon/slime/M in range(1,usr))
+		if(M.Victim == usr)
+			usr << "\red You're too busy getting your life sucked out of you."
+			return
+
+	//search for a valid passenger compartment
+	var/feedback = 0 //for nicer user feedback
+	for(var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in src)
+		if (P.occupant)
+			feedback |= OCCUPIED
+			continue
+		if (P.door_locked)
+			feedback |= LOCKED
+			continue
+		
+		//found a boardable compartment
+		P.move_inside(usr)
+		return
+	
+	//didn't find anything
+	switch (feedback)
+		if (OCCUPIED)
+			usr << "\red The passenger compartment is already occupied!"
+		if (LOCKED)
+			usr << "\red The passenger compartment hatch is locked!"
+		if (OCCUPIED|LOCKED)
+			usr << "\red All of the passenger compartments are already occupied or locked!"
+		if (0)
+			usr << "\red \The [src] doesn't have a passenger compartment."
+
+/obj/mecha/proc/remove_passenger()
