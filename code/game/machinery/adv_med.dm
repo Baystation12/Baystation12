@@ -9,7 +9,7 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
-	
+
 	use_power = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
@@ -226,7 +226,7 @@
 	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
 		user << "\red This console is not connected to a functioning body scanner."
 		return
-	
+
 	if(!ishuman(connected.occupant))
 		user << "\red This device can only scan compatible lifeforms."
 		return
@@ -359,7 +359,7 @@
 							mech = "Assisted:"
 						if(i.robotic == 2)
 							mech = "Mechanical:"
-							
+
 						var/infection = "None"
 						switch (i.germ_level)
 							if (1 to INFECTION_LEVEL_ONE + 200)
@@ -374,7 +374,7 @@
 								infection = "Acute Infection+:"
 							if (INFECTION_LEVEL_TWO + 300 to INFINITY)
 								infection = "Acute Infection++:"
-							
+
 						dat += "<tr>"
 						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
 						dat += "</tr>"
@@ -383,10 +383,165 @@
 						dat += text("<font color='red'>Cataracts detected.</font><BR>")
 					if(occupant.sdisabilities & NEARSIGHTED)
 						dat += text("<font color='red'>Retinal misalignment detected.</font><BR>")
+					dat += "<HR><A href='?src=\ref[src];print=1'>Print</A><BR>"
 			else
 				dat += "\The [src] is empty."
 		else
 			dat = "<font color='red'> Error: No Body Scanner connected.</font>"
-	dat += text("<BR><BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", user)
+	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", user)
 	user << browse(dat, "window=scanconsole;size=430x600")
 	return
+
+/obj/machinery/body_scanconsole/Topic(href, href_list)
+	if (..())
+		return
+
+	if (href_list["print"])
+		if (!src.connected)
+			usr << "\icon[src]<span class='warning'>Error: No body scanner connected.</span>"
+			return
+		var/mob/living/carbon/human/occupant = src.connected.occupant
+		if (!src.connected.occupant)
+			usr << "\icon[src]<span class='warning'>The body scanner is empty.</span>"
+			return
+		if (!istype(occupant,/mob/living/carbon/human))
+			usr << "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>"
+			return
+		var/obj/item/weapon/paper/R = new(src.loc)
+		R.name = "Body scan report"
+		R.info = "<B>Occupant Statistics:</B><BR>"   //Big fat copypaste from above
+		var/t1
+		switch(occupant.stat)
+			if(0)
+				t1 = "Conscious"
+			if(1)
+				t1 = "Unconscious"
+			else
+				t1 = "*dead*"
+		R.info += text("\tHealth %: [] ([])<BR>", occupant.health, t1)
+		if(occupant.virus2.len)
+			R.info += text("Viral pathogen detected in blood stream.<BR>")
+		R.info += text("\t-Brute Damage %: []<BR>", occupant.getBruteLoss())
+		R.info += text("\t-Respiratory Damage %: []<BR>", occupant.getOxyLoss())
+		R.info += text("\t-Toxin Content %: []<BR>", occupant.getToxLoss())
+		R.info += text("\t-Burn Severity %: []<BR><BR>", occupant.getFireLoss())
+		R.info += text("\tRadiation Level %: []<BR>", occupant.radiation)
+		R.info += text("\tGenetic Tissue Damage %: []<BR>", occupant.getCloneLoss())
+		R.info += text("\tApprox. Brain Damage %: []<BR>", occupant.getBrainLoss())
+		R.info += text("Paralysis Summary %: [] ([] seconds left!)<BR>", occupant.paralysis, round(occupant.paralysis / 4))
+		R.info += text("Body Temperature: [occupant.bodytemperature-T0C]&deg;C ([occupant.bodytemperature*1.8-459.67]&deg;F)<BR><HR>")
+
+		if(occupant.has_brain_worms())
+			R.info += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<BR/>"
+
+		if(occupant.vessel)
+			var/blood_volume = round(occupant.vessel.get_reagent_amount("blood"))
+			var/blood_percent =  blood_volume / 560 * 100
+			R.info += text("\tBlood Level %: [] ([] units)<BR>", blood_percent, blood_volume)
+
+		if(occupant.reagents)
+			R.info += text("Inaprovaline units: [] units<BR>", occupant.reagents.get_reagent_amount("inaprovaline"))
+			R.info += text("Soporific: [] units<BR>", occupant.reagents.get_reagent_amount("stoxin"))
+			R.info += text("\tDermaline: [] units<BR>", occupant.reagents.get_reagent_amount("dermaline"))
+			R.info += text("\tBicaridine: [] units<BR>", occupant.reagents.get_reagent_amount("bicaridine"))
+			R.info += text("\tDexalin: [] units<BR>", occupant.reagents.get_reagent_amount("dexalin"))
+
+		for(var/datum/disease/D in occupant.viruses)
+			if(!D.hidden[SCANNER])
+				R.info += text("<B>Warning: [D.form] Detected</B>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]<BR>")
+
+		R.info += "<HR><table border='1'>"
+		R.info += "<tr>"
+		R.info += "<th>Organ</th>"
+		R.info += "<th>Burn Damage</th>"
+		R.info += "<th>Brute Damage</th>"
+		R.info += "<th>Other Wounds</th>"
+		R.info += "</tr>"
+
+		for(var/datum/organ/external/e in occupant.organs)
+			R.info += "<tr>"
+			var/AN = ""
+			var/open = ""
+			var/infected = ""
+			var/imp = ""
+			var/bled = ""
+			var/robot = ""
+			var/splint = ""
+			var/internal_bleeding = ""
+			var/lung_ruptured = ""
+			for(var/datum/wound/W in e.wounds) if(W.internal)
+				internal_bleeding = "<br>Internal bleeding"
+				break
+			if(istype(e, /datum/organ/external/chest) && occupant.is_lung_ruptured())
+				lung_ruptured = "Lung ruptured:"
+			if(e.status & ORGAN_SPLINTED)
+				splint = "Splinted:"
+			if(e.status & ORGAN_BLEEDING)
+				bled = "Bleeding:"
+			if(e.status & ORGAN_BROKEN)
+				AN = "[e.broken_description]:"
+			if(e.status & ORGAN_ROBOT)
+				robot = "Prosthetic:"
+			if(e.open)
+				open = "Open:"
+			switch (e.germ_level)
+				if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
+					infected = "Mild Infection:"
+				if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
+					infected = "Mild Infection+:"
+				if (INFECTION_LEVEL_ONE + 300 to INFECTION_LEVEL_ONE + 400)
+					infected = "Mild Infection++:"
+				if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + 200)
+					infected = "Acute Infection:"
+				if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
+					infected = "Acute Infection+:"
+				if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_TWO + 400)
+					infected = "Acute Infection++:"
+				if (INFECTION_LEVEL_THREE to INFINITY)
+					infected = "Septic:"
+			var/unknown_body = 0
+			for(var/I in e.implants)
+				if(is_type_in_list(I,known_implants))
+					imp += "[I] implanted:"
+				else
+					unknown_body++
+
+			if(unknown_body || e.hidden)
+				imp += "Unknown body present:"
+			if(!AN && !open && !infected & !imp)
+				AN = "None:"
+			if(!(e.status & ORGAN_DESTROYED))
+				R.info += "<td>[e.display_name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+			else
+				R.info += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
+			R.info += "</tr>"
+		for(var/datum/organ/internal/i in occupant.internal_organs)
+			var/mech = ""
+			if(i.robotic == 1)
+				mech = "Assisted:"
+			if(i.robotic == 2)
+				mech = "Mechanical:"
+
+			var/infection = "None"
+			switch (i.germ_level)
+				if (1 to INFECTION_LEVEL_ONE + 200)
+					infection = "Mild Infection:"
+				if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
+					infection = "Mild Infection+:"
+				if (INFECTION_LEVEL_ONE + 300 to INFECTION_LEVEL_ONE + 400)
+					infection = "Mild Infection++:"
+				if (INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + 200)
+					infection = "Acute Infection:"
+				if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
+					infection = "Acute Infection+:"
+				if (INFECTION_LEVEL_TWO + 300 to INFINITY)
+					infection = "Acute Infection++:"
+
+			R.info += "<tr>"
+			R.info += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
+			R.info += "</tr>"
+		R.info += "</table>"
+		if(occupant.sdisabilities & BLIND)
+			R.info += text("Cataracts detected.<BR>")
+		if(occupant.sdisabilities & NEARSIGHTED)
+			R.info += text("Retinal misalignment detected.<BR>")
