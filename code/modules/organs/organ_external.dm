@@ -321,7 +321,6 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Infections
 	update_germs()
-	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
 /*
@@ -725,8 +724,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return rval
 
 /datum/organ/external/proc/fracture()
+
 	if(status & ORGAN_BROKEN)
 		return
+
 	owner.visible_message(\
 		"\red You hear a loud cracking sound coming from \the [owner].",\
 		"\red <b>Something feels like it shattered in your [display_name]!</b>",\
@@ -742,6 +743,25 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// Fractures have a chance of getting you out of restraints
 	if (prob(25))
 		release_restraints()
+
+	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
+	// TODO: consider moving this to a suit proc or process() or something during
+	// hardsuit rewrite.
+	if(!(status & ORGAN_SPLINTED) && istype(owner,/mob/living/carbon/human))
+
+		var/mob/living/carbon/human/H = owner
+
+		if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+
+			var/obj/item/clothing/suit/space/suit = H.wear_suit
+
+			if(isnull(suit.supporting_limbs))
+				return
+
+			owner << "You feel \the [suit] constrict about your [display_name], supporting it."
+			status |= ORGAN_SPLINTED
+			suit.supporting_limbs |= src
+	return
 
 /datum/organ/external/proc/robotize()
 	src.status &= ~ORGAN_BROKEN
