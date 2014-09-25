@@ -279,15 +279,14 @@
 				src.patient = C
 				src.oldpatient = C
 				src.last_found = world.time
-				spawn(0)
-					if((src.last_newpatient_speak + 100) < world.time) //Don't spam these messages!
-						var/message = pick("Hey, you! Hold on, I'm coming.","Wait! I want to help!","You appear to be injured!")
-						src.speak(message)
-						src.last_newpatient_speak = world.time
-						if(declare_treatment)
-							var/area/location = get_area(src)
-							broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
+				if((src.last_newpatient_speak + 300) < world.time) //Don't spam these messages!
+					var/message = pick("Hey, [C.name]! Hold on, I'm coming.","Wait [C.name]! I want to help!","[C.name], you appear to be injured!")
+					src.speak(message)
 					src.visible_message("<b>[src]</b> points at [C.name]!")
+					src.last_newpatient_speak = world.time
+					if(declare_treatment)
+						var/area/location = get_area(src)
+						broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
 				break
 			else
 				continue
