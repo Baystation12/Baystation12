@@ -635,26 +635,6 @@
 		else
 			user << "\red \The [src] already has seeds in it!"
 
-	else if (istype(O, /obj/item/weapon/reagent_containers/spray/plantbgone))
-		if(seed)
-			health -= rand(5,20)
-
-			if(pestlevel > 0)
-				pestlevel -= 2
-
-			if(weedlevel > 0)
-				weedlevel -= 3
-
-			toxins += 4
-
-			check_level_sanity()
-
-			visible_message("\red <B>\The [src] has been sprayed with \the [O][(user ? " by [user]." : ".")]")
-			playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-			update_icon()
-		else
-			user << "There's nothing in [src] to spray!"
-
 	else if (istype(O, /obj/item/weapon/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
