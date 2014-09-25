@@ -671,7 +671,7 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_back
 			if (target.back)
 				strip_item = target.back
-		if("handcuff")		
+		if("handcuff")
 			slot_to_process = slot_handcuffed
 			if (target.handcuffed)
 				strip_item = target.handcuffed
@@ -690,15 +690,23 @@ It can still be worn/put on as normal.
 			if (target.legcuffed)
 				strip_item = target.legcuffed
 		if("splints")
-			for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-				var/datum/organ/external/o = target.get_organ(organ)
-				if (o && o.status & ORGAN_SPLINTED)
-					var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
-					o.status &= ~ORGAN_SPLINTED
-					if (W)
-						W.loc = target.loc
-						W.layer = initial(W.layer)
-						W.add_fingerprint(source)
+			var/can_reach_splints = 1
+			if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
+				var/obj/item/clothing/suit/space/suit = target.wear_suit
+				if(suit.supporting_limbs && suit.supporting_limbs.len)
+					source << "You cannot remove the splints - [target]'s [suit] is supporting some of the breaks."
+					can_reach_splints = 0
+
+			if(can_reach_splints)
+				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+					var/datum/organ/external/o = target.get_organ(organ)
+					if (o && o.status & ORGAN_SPLINTED)
+						var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
+						o.status &= ~ORGAN_SPLINTED
+						if (W)
+							W.loc = target.loc
+							W.layer = initial(W.layer)
+							W.add_fingerprint(source)
 		if("CPR")
 			if ((target.health > config.health_threshold_dead && target.health < config.health_threshold_crit))
 				var/suff = min(target.getOxyLoss(), 5) //Pre-merge level, less healing, more prevention of dieing.
