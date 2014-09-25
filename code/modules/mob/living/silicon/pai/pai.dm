@@ -317,21 +317,28 @@
 		return
 
 	last_special = world.time + 100
-
-	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 	canmove = 1
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/mob))
-		var/mob/M = card.loc
-		M.drop_item(card)
+		var/mob/holder = card.loc
+		holder.drop_from_inventory(card)
+	else if(istype(card.loc,/obj/item/clothing/suit/space/space_ninja))
+		var/obj/item/clothing/suit/space/space_ninja/holder = card.loc
+		holder.pai = null
+	else if(istype(card.loc,/obj/item/device/pda))
+		var/obj/item/device/pda/holder = card.loc
+		holder.pai = null
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
-
 	src.forceMove(get_turf(card))
+
 	card.forceMove(src)
+	card.screen_loc = null
+
+	var/turf/T = get_turf(src)
+	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 
 /mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
@@ -437,3 +444,30 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
+
+/mob/living/silicon/pai/examine()
+
+	set src in oview()
+
+	if(!usr || !src)	return
+	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
+		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+		return
+
+	var/msg = "<span class='info'>*---------*\nThis is \icon[src][name], a personal AI!"
+
+	switch(src.stat)
+		if(CONSCIOUS)
+			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
+		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
+		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
+	msg += "\n*---------*</span>"
+
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+
+	if (pose)
+		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+			pose = addtext(pose,".") //Makes sure all emotes end with a period.
+		msg += "\nIt is [pose]"
+
+	usr << msg
