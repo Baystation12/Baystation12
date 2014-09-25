@@ -710,7 +710,7 @@ proc/populate_seed_list()
 	name = "deathnettle"
 	seed_name = "death nettle"
 	display_name = "death nettles"
-	products = list(/obj/item/weapon/grown/deathnettle)
+	products = list(/obj/item/weapon/grown/nettle/death)
 	mutants = null
 	packet_icon = "seed-deathnettle"
 	plant_icon = "deathnettle"
