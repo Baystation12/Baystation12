@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: icons\mob\head.dmi
+DIR: code code\modules code\modules\clothing code\modules\clothing\head icons icons\mob icons\obj icons\obj\clothing 
+FILE: icons\mob\head.dmi
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
