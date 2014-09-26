@@ -73,6 +73,18 @@
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 
+/obj/item/clothing/head/helmet/augment
+	name = "Augment Array"
+	desc = "A helmet with optical and cranial augments coupled to it."
+	icon_state = "v62"
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
+	item_state = "v62"
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	flags_inv = HIDEEARS|HIDEEYES
+	cold_protection = HEAD
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.5
+
 //Non-hardsuit ERT helmets.
 /obj/item/clothing/head/helmet/ert
 	name = "emergency response team helmet"
