@@ -43,12 +43,16 @@ Class Procs:
 /zone/var/name
 /zone/var/invalid = 0
 /zone/var/list/contents = list()
+/zone/var/list/fire_tiles = list()
 
 /zone/var/needs_update = 0
 
 /zone/var/list/edges = list()
 
 /zone/var/datum/gas_mixture/air = new
+
+/zone/var/list/graphic_add = list()
+/zone/var/list/graphic_remove = list()
 
 /zone/New()
 	air_master.add_zone(src)
@@ -67,7 +71,10 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
-	T.set_graphic(air.graphic)
+	if(T.fire)
+		fire_tiles.Add(T)
+		air_master.active_fire_zones.Add(src)
+	T.update_graphic(air.graphic)
 
 /zone/proc/remove(turf/simulated/T)
 #ifdef ZASDBG
@@ -77,8 +84,9 @@ Class Procs:
 	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
+	fire_tiles.Remove(T)
 	T.zone = null
-	T.set_graphic(0)
+	T.update_graphic(graphic_remove = air.graphic)
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
@@ -123,16 +131,18 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
-	air.archive()
-	if(air.check_tile_graphic())
+	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
-			T.set_graphic(air.graphic)
+			T.update_graphic(graphic_add, graphic_remove)
+		graphic_add.len = 0
+		graphic_remove.len = 0
 
 /zone/proc/dbg_data(mob/M)
 	M << name
-	M << "O2: [air.oxygen] N2: [air.nitrogen] CO2: [air.carbon_dioxide] P: [air.phoron]"
+	for(var/g in air.gas)
+		M << "[gas_data.name[g]]: [air.gas[g]]"
 	M << "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)"
-	M << "O2 per N2: [(air.nitrogen ? air.oxygen/air.nitrogen : "N/A")] Moles: [air.total_moles]"
+	M << "O2 per N2: [(air.gas["nitrogen"] ? air.gas["oxygen"]/air.gas["nitrogen"] : "N/A")] Moles: [air.total_moles]"
 	M << "Simulated: [contents.len] ([air.group_multiplier])"
 	//M << "Unsimulated: [unsimulated_contents.len]"
 	//M << "Edges: [edges.len]"

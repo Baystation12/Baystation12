@@ -224,24 +224,25 @@
 	pending += location
 
 	while(pending.len)
-		for(var/turf/simulated/current in pending)
+		for(var/turf/current in pending)
 			for(var/D in cardinal)
-				var/turf/simulated/target = get_step(current, D)
-
+				var/turf/target = get_step(current, D)
 				if(wallList)
 					if(istype(target, /turf/simulated/wall))
 						if(!(target in wallList))
 							wallList += target
 						continue
-				if(!target.zone)
-					continue
+				
 				if(target in pending)
 					continue
 				if(target in complete)
 					continue
 				if(!(target in targetTurfs))
 					continue
-
+				if(current.c_airblock(target)) //this is needed to stop chemsmoke from passing through thin window walls
+					continue
+				if(target.c_airblock(current)) 
+					continue
 				pending += target
 
 			pending -= current

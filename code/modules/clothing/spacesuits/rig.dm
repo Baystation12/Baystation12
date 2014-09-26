@@ -15,13 +15,15 @@
 
 	//Species-specific stuff.
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
-	sprite_sheets = list(
+	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajaran" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Skrell" = 'icons/mob/species/skrell/helmet.dmi'
+		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
 		)
 	sprite_sheets_obj = list(
+		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
 		"Tajaran" = 'icons/obj/clothing/species/tajaran/hats.dmi',
+		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
 		)
 
 	attack_self(mob/user)
@@ -63,13 +65,15 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
-	sprite_sheets = list(
+	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajaran" = 'icons/mob/species/tajaran/suit.dmi',
-		"Skrell" = 'icons/mob/species/skrell/suit.dmi'
+		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
 		)
 	sprite_sheets_obj = list(
+		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
 		"Tajaran" = 'icons/obj/clothing/species/tajaran/suits.dmi',
+		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) hardsuits.
@@ -322,14 +326,16 @@
 	icon_state = "rig0-white"
 	item_state = "ce_helm"
 	item_color = "white"
-	sprite_sheets = null
+	sprite_sheets_refit = null
+	sprite_sheets_obj = null
 
 /obj/item/clothing/suit/space/rig/engineering/chief
 	icon_state = "rig-white"
 	name = "advanced hardsuit"
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
-	sprite_sheets = null
+	sprite_sheets_refit = null
+	sprite_sheets_obj = null
 
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
@@ -359,11 +365,6 @@
 	siemens_coefficient = 0.6
 	var/obj/machinery/camera/camera
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Vox")
-	sprite_sheets_obj = list(
-		"Tajaran" = 'icons/obj/clothing/species/tajaran/hats.dmi',
-		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
-		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
-		)
 
 
 /obj/item/clothing/head/helmet/space/rig/syndi/attack_self(mob/user)
@@ -392,11 +393,6 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Vox")
-	sprite_sheets_obj = list(
-		"Tajaran" = 'icons/obj/clothing/species/tajaran/suits.dmi',
-		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
-		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
-		)
 
 
 //Wizard Rig
@@ -409,7 +405,7 @@
 	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
-	sprite_sheets = null
+	sprite_sheets_refit = null
 	sprite_sheets_obj = null
 
 /obj/item/clothing/suit/space/rig/wizard
@@ -422,7 +418,7 @@
 	unacidable = 1
 	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
-	sprite_sheets = null
+	sprite_sheets_refit = null
 	sprite_sheets_obj = null
 
 //Medical Rig

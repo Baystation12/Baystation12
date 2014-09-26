@@ -37,7 +37,7 @@
 	if(locked)
 		locked = 0
 		emagged = 1
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
 	if(!locked && open)
 		emagged = 2
 

@@ -703,6 +703,8 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 /obj/item/device/radio/borg
 	var/obj/item/device/encryptionkey/keyslot = null//Borg radios can handle a single encryption key
+	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
+	icon_state = "radio"
 
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()

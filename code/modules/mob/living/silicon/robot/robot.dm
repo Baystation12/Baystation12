@@ -10,6 +10,7 @@
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
+	var/crisis_override = 0
 
 //Hud stuff
 
@@ -64,7 +65,6 @@
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
-	var/pose
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -88,18 +88,7 @@
 		hands.icon_state = "standard"
 		icon_state = "secborg"
 		modtype = "Security"
-	else if(istype(src,/mob/living/silicon/robot/drone))
-		laws = new /datum/ai_laws/drone()
-		connected_ai = null
-	else
-		laws = new /datum/ai_laws/nanotrasen()
-		connected_ai = select_active_ai_with_fewest_borgs()
-		if(connected_ai)
-			connected_ai.connected_robots += src
-			lawsync()
-			lawupdate = 1
-		else
-			lawupdate = 0
+	init()
 
 	radio = new /obj/item/device/radio/borg(src)
 	if(!scrambledcodes && !camera)
@@ -138,11 +127,19 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
-
-	if(istype(src,/mob/living/silicon/robot/drone))
-		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+/mob/living/silicon/robot/proc/init()
+	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+	laws = new /datum/ai_laws/nanotrasen()
+	connected_ai = select_active_ai_with_fewest_borgs()
+	if(connected_ai)
+		connected_ai.connected_robots += src
+		lawsync()
+		photosync()
+		lawupdate = 1
 	else
-		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+		lawupdate = 0
+
+	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
@@ -164,7 +161,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -348,7 +345,7 @@
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
 	set category = "Robot Commands"
-	set name = "Show Station Manifest"
+	set name = "Show Crew Manifest"
 	show_station_manifest()
 
 
@@ -904,7 +901,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(src, /mob/living/carbon/slime/adult))
+		if(M.is_adult)
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)
@@ -1101,10 +1098,10 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	
+
 	if(usr != src)
 		return
-	
+
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
@@ -1116,9 +1113,12 @@
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O) || !(O in src.module.modules))
+		if (!istype(O))
 			return
-		
+
+		if(!((O in src.module.modules) || (O == src.module.emag)))
+			return
+
 		if(activated(O))
 			src << "Already activated"
 			return
@@ -1263,20 +1263,6 @@
 		W.attack_self(src)
 
 	return
-
-/mob/living/silicon/robot/verb/pose()
-	set name = "Set Pose"
-	set desc = "Sets a description which will be shown when someone examines you."
-	set category = "IC"
-
-	pose =  copytext(sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
-
-/mob/living/silicon/robot/verb/set_flavor()
-	set name = "Set Flavour Text"
-	set desc = "Sets an extended description of your character's features."
-	set category = "IC"
-
-	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
 

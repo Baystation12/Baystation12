@@ -62,7 +62,7 @@
 	dat += "Currently displaying [show_all_ores ? "all ore types" : "only available ore types"]. <A href='?src=\ref[src];toggle_ores=1'>\[[show_all_ores ? "show less" : "show more"]\]</a></br>"
 	dat += "The ore processor is currently <A href='?src=\ref[src];toggle_power=1'>[(machine.active ? "<font color='green'>processing</font>" : "<font color='red'>disabled</font>")]</a>."
 	user << browse(dat, "window=processor_console;size=400x500")
-	onclose(user, "computer")
+	onclose(user, "processor_console")
 	return
 
 /obj/machinery/mineral/processing_unit_console/Topic(href, href_list)

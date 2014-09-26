@@ -9,13 +9,33 @@
 	//var/darkness_view = 0//Base human is 2
 	//var/invisa_view = 0
 	var/prescription = 0
+	var/toggleable = 0
+	var/active = 1
+	body_parts_covered = EYES
+
+/obj/item/clothing/glasses/attack_self(mob/user)
+	if(toggleable)
+		if(active)
+			active = 0
+			icon_state = "degoggles"
+			vision_flags = 0
+			user.update_inv_glasses()
+			usr << "You deactivate the optical matrix on the [src]."
+		else
+			active = 1
+			icon_state = initial(icon_state)
+			vision_flags = initial(vision_flags)
+			user.update_inv_glasses()
+			usr << "You activate the optical matrix on the [src]."
 
 /obj/item/clothing/glasses/meson
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
 	item_state = "glasses"
+	icon_action_button = "action_meson" //This doesn't actually matter, the action button is generated from the current icon_state. But, this is the only way to get it to show up.
 	origin_tech = "magnets=2;engineering=2"
+	toggleable = 1
 	vision_flags = SEE_TURFS
 
 /obj/item/clothing/glasses/meson/prescription
@@ -42,19 +62,23 @@
 	desc = "Yarr."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/monocle
 	name = "monocle"
 	desc = "Such a dapper eyepiece!"
 	icon_state = "monocle"
 	item_state = "headset" // lol
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/material
 	name = "Optical Material Scanner"
 	desc = "Very confusing glasses."
 	icon_state = "material"
 	item_state = "glasses"
+	icon_action_button = "action_material"
 	origin_tech = "magnets=3;engineering=3"
+	toggleable = 1
 	vision_flags = SEE_OBJS
 
 /obj/item/clothing/glasses/regular
@@ -63,6 +87,7 @@
 	icon_state = "glasses"
 	item_state = "glasses"
 	prescription = 1
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/regular/hipster
 	name = "Prescription Glasses"
@@ -75,12 +100,14 @@
 	name = "3D glasses"
 	icon_state = "3d"
 	item_state = "3d"
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/gglasses
 	name = "Green Glasses"
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
 	icon_state = "gglasses"
 	item_state = "gglasses"
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/sunglasses
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Enhanced shielding blocks many flashes."
@@ -111,12 +138,14 @@
 			src.up = !src.up
 			src.flags |= GLASSESCOVERSEYES
 			flags_inv |= HIDEEYES
+			body_parts_covered |= EYES
 			icon_state = initial(icon_state)
 			usr << "You flip \the [src] down to protect your eyes."
 		else
 			src.up = !src.up
 			src.flags &= ~HEADCOVERSEYES
 			flags_inv &= ~HIDEEYES
+			body_parts_covered &= ~EYES
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push \the [src] up out of your face."
 
@@ -167,6 +196,7 @@
 	icon_state = "thermal"
 	item_state = "glasses"
 	origin_tech = "magnets=3"
+	toggleable = 1
 	vision_flags = SEE_MOBS
 	invisa_view = 2
 
@@ -186,6 +216,7 @@
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
+	icon_action_button = "action_meson"
 	origin_tech = "magnets=3;syndicate=4"
 
 /obj/item/clothing/glasses/thermal/monocle
@@ -193,15 +224,20 @@
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	flags = null //doesn't protect eyes because it's a monocle, duh
+	toggleable = 0
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/eyepatch
 	name = "Optical Thermal Eyepatch"
 	desc = "An eyepatch with built-in thermal optics"
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
+	toggleable = 0
+	body_parts_covered = 0
 
 /obj/item/clothing/glasses/thermal/jensen
 	name = "Optical Thermal Implants"
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"
+	toggleable = 0

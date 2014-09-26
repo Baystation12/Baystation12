@@ -76,6 +76,7 @@ obj/machinery/atmospherics/binary
 				break
 
 		update_icon()
+		update_underlays()
 
 	build_network()
 		if(!network1 && node1)
@@ -126,5 +127,8 @@ obj/machinery/atmospherics/binary
 		else if(reference==node2)
 			del(network2)
 			node2 = null
+
+		update_icon()
+		update_underlays()
 
 		return null

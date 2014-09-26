@@ -226,11 +226,11 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
-	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage
+	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
 	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
-		var/datum/wound/internal_bleeding/I = new (15)
+		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
 		owner.custom_pain("You feel something rip in your [display_name]!", 1)
 
@@ -275,6 +275,8 @@ This function completely restores a damaged organ to perfect condition.
 //Determines if we even need to process this organ.
 
 /datum/organ/external/proc/need_process()
+	if(destspawn)	//Missing limb is missing
+		return 0
 	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
 		return 1
 	if(brute_dam || burn_dam)
@@ -289,17 +291,6 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/process()
-	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
-	if(owner.life_tick % wound_update_accuracy == 0)
-		update_wounds()
-
-	//Chem traces slowly vanish
-	if(owner.life_tick % 10 == 0)
-		for(var/chemID in trace_chemicals)
-			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
-			if(trace_chemicals[chemID] <= 0)
-				trace_chemicals.Remove(chemID)
-
 	//Dismemberment
 	if(status & ORGAN_DESTROYED)
 		if(!destspawn && config.limbs_can_break)
@@ -311,6 +302,17 @@ This function completely restores a damaged organ to perfect condition.
 			owner.update_body(1)
 			return
 
+	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
+	if(owner.life_tick % wound_update_accuracy == 0)
+		update_wounds()
+
+	//Chem traces slowly vanish
+	if(owner.life_tick % 10 == 0)
+		for(var/chemID in trace_chemicals)
+			trace_chemicals[chemID] = trace_chemicals[chemID] - 1
+			if(trace_chemicals[chemID] <= 0)
+				trace_chemicals.Remove(chemID)
+
 	//Bone fracurtes
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
 		src.fracture()
@@ -319,7 +321,6 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Infections
 	update_germs()
-	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
 /*
@@ -444,16 +445,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 			// let the GC handle the deletion of the wound
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
-		if(W.internal && !W.can_autoheal() && owner.bodytemperature >= 170)
+		if(W.internal && owner.bodytemperature >= 170)
 			var/bicardose = owner.reagents.get_reagent_amount("bicaridine")
 			var/inaprovaline = owner.reagents.get_reagent_amount("inaprovaline")
-			if(!bicardose || !inaprovaline)	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, and also stop bleeding
+			if(!(W.can_autoheal() || (bicardose && inaprovaline)))	//bicaridine and inaprovaline stop internal wounds from growing bigger with time, unless it is so small that it is already healing
 				W.open_wound(0.1 * wound_update_accuracy)
-				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
 			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
 				W.damage = max(0, W.damage - 0.2)
 
-			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)
+			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
@@ -568,13 +568,27 @@ Note that amputating the affected organ does in fact remove the infection from t
 		src.status &= ~ORGAN_BROKEN
 		src.status &= ~ORGAN_BLEEDING
 		src.status &= ~ORGAN_SPLINTED
+		src.status &= ~ORGAN_DEAD
 		for(var/implant in implants)
 			del(implant)
 
+		germ_level = 0
+
+		//Replace all wounds on that arm with one wound on parent organ.
+		wounds.Cut()
+		if (parent)
+			var/datum/wound/W
+			if(max_damage < 50)
+				W = new/datum/wound/lost_limb/small(max_damage)
+			else
+				W = new/datum/wound/lost_limb(max_damage)
+			parent.wounds += W
+			parent.update_damages()
+		update_damages()
+
 		// If any organs are attached to this, destroy them
-		for(var/datum/organ/external/O in owner.organs)
-			if(O.parent == src)
-				O.droplimb(1)
+		for(var/datum/organ/external/O in children)
+			O.droplimb(1)
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
@@ -624,36 +638,37 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
+
+		destspawn = 1
+		//Robotic limbs explode if sabotaged.
+		if(status & ORGAN_ROBOT && !no_explode && sabotaged)
+			owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
+			"\red <b>Your [display_name] explodes!</b>",\
+			"You hear an explosion followed by a scream!")
+			explosion(get_turf(owner),-1,-1,2,3)
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, owner)
+			spark_system.attach(owner)
+			spark_system.start()
+			spawn(10)
+				del(spark_system)
+
+		owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+		"You hear a terrible sound of ripping tendons and flesh.")
+
 		if(organ)
-			destspawn = 1
-			//Robotic limbs explode if sabotaged.
-			if(status & ORGAN_ROBOT && !no_explode && sabotaged)
-				owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
-				"\red <b>Your [display_name] explodes!</b>",\
-				"You hear an explosion followed by a scream!")
-				explosion(get_turf(owner),-1,-1,2,3)
-				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-				spark_system.set_up(5, 0, owner)
-				spark_system.attach(owner)
-				spark_system.start()
-				spawn(10)
-					del(spark_system)
-
-			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
-			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
-			"You hear a terrible sound of ripping tendons and flesh.")
-
 			//Throw organs around
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.update_body(1)
+		owner.update_body(1)
 
-			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
-			release_restraints()
+		// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
+		release_restraints()
 
-			if(vital)
-				owner.death()
+		if(vital)
+			owner.death()
 
 /****************************************************
 			   HELPERS
@@ -709,8 +724,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return rval
 
 /datum/organ/external/proc/fracture()
+
 	if(status & ORGAN_BROKEN)
 		return
+
 	owner.visible_message(\
 		"\red You hear a loud cracking sound coming from \the [owner].",\
 		"\red <b>Something feels like it shattered in your [display_name]!</b>",\
@@ -726,6 +743,25 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// Fractures have a chance of getting you out of restraints
 	if (prob(25))
 		release_restraints()
+
+	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
+	// TODO: consider moving this to a suit proc or process() or something during
+	// hardsuit rewrite.
+	if(!(status & ORGAN_SPLINTED) && istype(owner,/mob/living/carbon/human))
+
+		var/mob/living/carbon/human/H = owner
+
+		if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+
+			var/obj/item/clothing/suit/space/suit = H.wear_suit
+
+			if(isnull(suit.supporting_limbs))
+				return
+
+			owner << "You feel \the [suit] constrict about your [display_name], supporting it."
+			status |= ORGAN_SPLINTED
+			suit.supporting_limbs |= src
+	return
 
 /datum/organ/external/proc/robotize()
 	src.status &= ~ORGAN_BROKEN
@@ -757,14 +793,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 			return 1
 	return 0
 
-/datum/organ/external/get_icon(gender="")
+/datum/organ/external/get_icon(var/icon/race_icon, var/icon/deform_icon,gender="")
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 
 	if (status & ORGAN_MUTATED)
-		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
+		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
-	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
+	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()
@@ -923,15 +959,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/disfigured = 0
 	vital = 1
 
-/datum/organ/external/head/get_icon()
+/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon)
 	if (!owner)
 	 return ..()
 	var/g = "m"
 	if(owner.gender == FEMALE)	g = "f"
 	if (status & ORGAN_MUTATED)
-		. = new /icon(owner.deform_icon, "[icon_name]_[g]")
+		. = new /icon(deform_icon, "[icon_name]_[g]")
 	else
-		. = new /icon(owner.race_icon, "[icon_name]_[g]")
+		. = new /icon(race_icon, "[icon_name]_[g]")
 
 /datum/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)

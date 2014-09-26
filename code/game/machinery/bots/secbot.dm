@@ -111,7 +111,7 @@
 <TT><B>Automatic Security Unit v1.3</B></TT><BR><BR>
 Status: []<BR>
 Behaviour controls are [src.locked ? "locked" : "unlocked"]<BR>
-Maintenance panel panel is [src.open ? "opened" : "closed"]"},
+Maintenance panel is [src.open ? "opened" : "closed"]"},
 
 "<A href='?src=\ref[src];power=1'>[src.on ? "On" : "Off"]</A>" )
 

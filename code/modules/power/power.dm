@@ -20,11 +20,12 @@
 
 /obj/machinery/power/proc/add_load(var/amount)
 	if(powernet)
-		powernet.newload += amount
+		return powernet.draw_power(amount)
+	return 0
 
 /obj/machinery/power/proc/surplus()
 	if(powernet)
-		return powernet.avail-powernet.load
+		return powernet.surplus()
 	else
 		return 0
 
@@ -42,8 +43,10 @@
 	if(!src.loc)
 		return 0
 
-	if(!use_power)
-		return 1
+	//This is bad. This makes machines which are switched off not update their stat flag correctly when power_change() is called.
+	//If use_power is 0, then you probably shouldn't be checking power to begin with.
+	//if(!use_power)
+	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)
@@ -62,18 +65,23 @@
 		chan = power_channel
 	A.master.use_power(amount, chan)
 	if(!autocalled)
+		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
-/obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
+//The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
+/obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
 										// can override if needed
-	if(powered(power_channel))
+	var/has_power
+	if (master_area)
+		has_power = master_area.powered(power_channel)
+	else
+		has_power = powered(power_channel)
+	
+	if(has_power)
 		stat &= ~NOPOWER
 	else
-
 		stat |= NOPOWER
-	return
-
 
 // the powernet datum
 // each contiguous network of cables & nodes
@@ -222,234 +230,6 @@
 			. += C
 	return .
 
-
-/proc/powernet_nextlink(var/obj/O, var/datum/powernet/PN)
-	var/list/P
-
-	while(1)
-		if( istype(O,/obj/structure/cable) )
-			var/obj/structure/cable/C = O
-			C.powernet = PN
-			P = C.get_connections()
-
-		else if(O.anchored && istype(O,/obj/machinery/power))
-			var/obj/machinery/power/M = O
-			M.powernet = PN
-			P = M.get_connections()
-
-		else
-			return
-
-		if(P.len == 0)	return
-
-		O = P[1]
-
-		for(var/L = 2 to P.len)
-			powernet_nextlink(P[L], PN)
-
-
-// cut a powernet at this cable object
-/datum/powernet/proc/cut_cable(var/obj/structure/cable/C)
-	var/turf/T1 = C.loc
-	if(!T1)	return
-	var/node = 0
-	if(C.d1 == 0)
-		node = 1
-
-	var/turf/T2
-	if(C.d2)	T2 = get_step(T1, C.d2)
-	if(C.d1)	T1 = get_step(T1, C.d1)
-
-
-	var/list/P1 = power_list(T1, C, C.d1)	// what joins on to cut cable in dir1
-	var/list/P2 = power_list(T2, C, C.d2)	// what joins on to cut cable in dir2
-
-//	if(Debug)
-//		for(var/obj/O in P1)
-//			world.log << "P1: [O] at [O.x] [O.y] : [istype(O, /obj/structure/cable) ? "[O:d1]/[O:d2]" : null] "
-//		for(var/obj/O in P2)
-//			world.log << "P2: [O] at [O.x] [O.y] : [istype(O, /obj/structure/cable) ? "[O:d1]/[O:d2]" : null] "
-
-
-	if(P1.len == 0 || P2.len == 0)//if nothing in either list, then the cable was an endpoint no need to rebuild the powernet,
-		cables -= C				//just remove cut cable from the list
-//		if(Debug) world.log << "Was end of cable"
-		return
-
-	//null the powernet reference of all cables & nodes in this powernet
-	var/i=1
-	while(i<=cables.len)
-		var/obj/structure/cable/Cable = cables[i]
-		if(Cable)
-			Cable.powernet = null
-			if(Cable == C)
-				cables.Cut(i,i+1)
-				continue
-		i++
-	i=1
-	while(i<=nodes.len)
-		var/obj/machinery/power/Node = nodes[i]
-		if(Node)
-			Node.powernet = null
-		i++
-
-	// remove the cut cable from the network
-//	C.netnum = -1
-
-	C.loc = null
-
-	powernet_nextlink(P1[1], src)		// propagate network from 1st side of cable, using current netnum	//TODO?
-
-	// now test to see if propagation reached to the other side
-	// if so, then there's a loop in the network
-	var/notlooped = 0
-	for(var/O in P2)
-		if( istype(O, /obj/machinery/power) )
-			var/obj/machinery/power/Machine = O
-			if(Machine.powernet != src)
-				notlooped = 1
-				break
-		else if( istype(O, /obj/structure/cable) )
-			var/obj/structure/cable/Cable = O
-			if(Cable.powernet != src)
-				notlooped = 1
-				break
-
-	if(notlooped)
-		// not looped, so make a new powernet
-		var/datum/powernet/PN = new()
-		powernets += PN
-
-//		if(Debug) world.log << "Was not looped: spliting PN#[number] ([cables.len];[nodes.len])"
-
-		i=1
-		while(i<=cables.len)
-			var/obj/structure/cable/Cable = cables[i]
-			if(Cable && !Cable.powernet)	// non-connected cables will have powernet=null, since they weren't reached by propagation
-				Cable.powernet = PN
-				cables.Cut(i,i+1)	// remove from old network & add to new one
-				PN.cables += Cable
-				continue
-			i++
-
-		i=1
-		while(i<=nodes.len)
-			var/obj/machinery/power/Node = nodes[i]
-			if(Node && !Node.powernet)
-				Node.powernet = PN
-				nodes.Cut(i,i+1)
-				PN.nodes[Node] = Node
-				continue
-			i++
-
-	// Disconnect machines connected to nodes
-	if(node)
-		for(var/obj/machinery/power/P in T1)
-			if(P.powernet && !P.powernet.nodes[src])
-				P.disconnect_from_network()
-//		if(Debug)
-//			world.log << "Old PN#[number] : ([cables.len];[nodes.len])"
-//			world.log << "New PN#[PN.number] : ([PN.cables.len];[PN.nodes.len])"
-//
-//	else
-//		if(Debug)
-//			world.log << "Was looped."
-//		//there is a loop, so nothing to be done
-//		return
-
-
-
-/datum/powernet/proc/reset()
-	load = newload
-	newload = 0
-	avail = newavail
-	newavail = 0
-
-
-	viewload = 0.8*viewload + 0.2*load
-
-	viewload = round(viewload)
-
-	var/numapc = 0
-
-	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
-		for(var/obj/machinery/power/terminal/term in nodes)
-			if( istype( term.master, /obj/machinery/power/apc ) )
-				numapc++
-
-	if(numapc)
-		perapc = avail/numapc
-
-	netexcess = avail - load
-
-	if( netexcess > 100)		// if there was excess power last cycle
-		if(nodes && nodes.len)
-			for(var/obj/machinery/power/smes/S in nodes)	// find the SMESes in the network
-				if(S.powernet == src)
-					S.restore()				// and restore some of the power that was used
-				else
-					error("[S.name] (\ref[S]) had a [S.powernet ? "different (\ref[S.powernet])" : "null"] powernet to our powernet (\ref[src]).")
-					nodes.Remove(S)
-
-/datum/powernet/proc/get_electrocute_damage()
-	switch(avail)/*
-		if (1300000 to INFINITY)
-			return min(rand(70,150),rand(70,150))
-		if (750000 to 1300000)
-			return min(rand(50,115),rand(50,115))
-		if (100000 to 750000-1)
-			return min(rand(35,101),rand(35,101))
-		if (75000 to 100000-1)
-			return min(rand(30,95),rand(30,95))
-		if (50000 to 75000-1)
-			return min(rand(25,80),rand(25,80))
-		if (25000 to 50000-1)
-			return min(rand(20,70),rand(20,70))
-		if (10000 to 25000-1)
-			return min(rand(20,65),rand(20,65))
-		if (1000 to 10000-1)
-			return min(rand(10,20),rand(10,20))*/
-		if (1000000 to INFINITY)
-			return min(rand(50,160),rand(50,160))
-		if (200000 to 1000000)
-			return min(rand(25,80),rand(25,80))
-		if (100000 to 200000)//Ave powernet
-			return min(rand(20,60),rand(20,60))
-		if (50000 to 100000)
-			return min(rand(15,40),rand(15,40))
-		if (1000 to 50000)
-			return min(rand(10,20),rand(10,20))
-		else
-			return 0
-
-//The powernet that calls this proc will consume the other powernet - Rockdtben
-//TODO: rewrite so the larger net absorbs the smaller net
-/proc/merge_powernets(var/datum/powernet/net1, var/datum/powernet/net2)
-	if(!net1 || !net2)	return
-	if(net1 == net2)	return
-
-	//We assume net1 is larger. If net2 is in fact larger we are just going to make them switch places to reduce on code.
-	if(net1.cables.len < net2.cables.len)	//net2 is larger than net1. Let's switch them around
-		var/temp = net1
-		net1 = net2
-		net2 = temp
-
-	for(var/i=1,i<=net2.nodes.len,i++)		//merge net2 into net1
-		var/obj/machinery/power/Node = net2.nodes[i]
-		if(Node)
-			Node.powernet = net1
-			net1.nodes[Node] = Node
-
-	for(var/i=1,i<=net2.cables.len,i++)
-		var/obj/structure/cable/Cable = net2.cables[i]
-		if(Cable)
-			Cable.powernet = net1
-			net1.cables += Cable
-
-	del(net2)
-	return net1
-
-
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
 	var/obj/structure/cable/C = T.get_cable_node()
@@ -543,11 +323,11 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power(drained_energy/CELLRATE)
+		source_area.use_power(drained_energy)
 	else if (istype(power_source,/datum/powernet))
-		var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"
-		PN.newload+=drained_power
+		//var/drained_power = drained_energy/CELLRATE //convert from "joules" to "watts"  <<< NO. THIS IS WRONG. CELLRATE DOES NOT CONVERT TO OR FROM JOULES.
+		PN.draw_power(drained_energy)
 	else if (istype(power_source, /obj/item/weapon/cell))
-		cell.use(drained_energy)
+		cell.use(drained_energy*CELLRATE) //convert to units of charge.
 	return drained_energy
 

@@ -138,14 +138,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/power_change()
 	if(isbroken) //Broken shit can't be powered.
 		return
-	if( src.powered() )
+	..()
+	if( !(stat & NOPOWER) )
 		src.ispowered = 1
-		stat &= ~NOPOWER
 		src.update_icon()
 	else
 		spawn(rand(0, 15))
 			src.ispowered = 0
-			stat |= NOPOWER
 			src.update_icon()
 
 
@@ -748,16 +747,27 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
 	if(photo)
-		photo.loc = src.loc
-		user.put_in_inactive_hand(photo)
+		if(!issilicon(user))
+			photo.loc = src.loc
+			user.put_in_inactive_hand(photo)
 		photo = null
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
 		photo = user.get_active_hand()
 		user.drop_item()
 		photo.loc = src
+	else if(istype(user,/mob/living/silicon))
+		var/mob/living/silicon/tempAI = user
+		var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
 
+		if(!camera)
+			return
+		var/datum/picture/selection = camera.selectpicture()
+		if (!selection)
+			return
 
-
+		var/obj/item/weapon/photo/P = new/obj/item/weapon/photo()
+		P.construct(selection)
+		photo = P
 
 
 //########################################################################################################################
