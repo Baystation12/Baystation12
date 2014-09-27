@@ -237,6 +237,7 @@
 	return 0
 
 
+
 /*
  * Phoron Glass sheets
  */
@@ -246,7 +247,7 @@
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
 	matter = list("glass" = 7500)
-	origin_tech = "materials=3;phoron=2"
+	origin_tech = "materials=3;phorontech=2"
 	created_window = /obj/structure/window/phoronbasic
 
 /obj/item/stack/sheet/glass/phoronglass/attack_self(mob/user as mob)
@@ -279,7 +280,7 @@
 	icon_state = "sheet-phoronrglass"
 	matter = list("glass" = 7500,"metal" = 1875)
 
-	origin_tech = "materials=4;phoron=2"
+	origin_tech = "materials=4;phorontech=2"
 	created_window = /obj/structure/window/phoronreinforced
 
 /obj/item/stack/sheet/glass/phoronrglass/attack_self(mob/user as mob)

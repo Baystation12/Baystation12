@@ -19,7 +19,9 @@
 	keyslot1 = new /obj/item/device/encryptionkey/
 	recalculateChannels()
 
-/obj/item/device/radio/headset/receive_range(freq, level)
+/obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
+	if (aiOverride)
+		return ..(freq, level)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		if(H.l_ear == src || H.r_ear == src)
@@ -98,6 +100,21 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/heads/captain
+
+/obj/item/device/radio/headset/heads/ai_integrated //No need to care about icons, it should be hidden inside the AI anyway.
+	name = "AI Subspace Transceiver"
+	desc = "Integrated AI radio transceiver."
+	icon = 'icons/obj/robot_component.dmi'
+	icon_state = "radio"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/heads/ai_integrated
+	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
+	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via intellicard menu.
+
+/obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq, level)
+	if (disabledAi)
+		return -1 //Transciever Disabled.
+	return ..(freq, level, 1)
 
 /obj/item/device/radio/headset/heads/rd
 	name = "Research Director's headset"

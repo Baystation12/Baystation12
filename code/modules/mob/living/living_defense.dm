@@ -38,6 +38,9 @@
 
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	flash_weak_pain()
+
+	//Being hit while using a cloaking device
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
 	if(C && C.active)
 		C.attack_self(src)//Should shut it off
@@ -45,14 +48,21 @@
 		src << "\blue Your [C.name] was disrupted!"
 		Stun(2)
 
-	flash_weak_pain()
-
+	//Being hit while using a deadman switch
 	if(istype(equipped(),/obj/item/device/assembly/signaler))
 		var/obj/item/device/assembly/signaler/signaler = equipped()
 		if(signaler.deadman && prob(80))
 			src.visible_message("\red [src] triggers their deadman's switch!")
 			signaler.signal()
 
+	//Stun Beams
+	if(istype(P, /obj/item/projectile/beam/stun) || istype(P, /obj/item/projectile/bullet/stunshot))
+		stun_effect_act(0, P.agony, def_zone, P)
+		src <<"\red You have been hit by [P]!"
+		del P
+		return
+
+	//Armor
 	var/absorb = run_armor_check(def_zone, P.flag)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
@@ -65,6 +75,30 @@
 	P.on_hit(src, absorb, def_zone)
 	return absorb
 
+//Handles the effects of "stun" weapons
+/mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
+	flash_pain()
+
+	if (stun_amount)
+		Stun(stun_amount)
+		Weaken(stun_amount)
+		apply_effect(STUTTER, stun_amount)
+		apply_effect(EYE_BLUR, stun_amount)
+
+	if (agony_amount)
+		apply_damage(agony_amount, HALLOSS, def_zone, 0, used_weapon)
+		apply_effect(STUTTER, agony_amount/10)
+		apply_effect(EYE_BLUR, agony_amount/10)
+
+/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+	  return 0 //only carbon liveforms have this proc
+
+/mob/living/emp_act(severity)
+	var/list/L = src.get_contents()
+	for(var/obj/O in L)
+		O.emp_act(severity)
+	..()
+
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
@@ -74,16 +108,16 @@
 			var/obj/item/weapon/W = O
 			dtype = W.damtype
 		var/throw_damage = O.throwforce*(speed/5)
-		
+
 		var/miss_chance = 15
 		if (O.throw_source)
 			var/distance = get_dist(O.throw_source, loc)
 			miss_chance = min(15*(distance-2), 0)
-		
+
 		if (prob(miss_chance))
 			visible_message("\blue \The [O] misses [src] narrowly!")
 			return
-		
+
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
 
@@ -91,7 +125,7 @@
 			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
 
 		O.throwing = 0		//it hit, so stop moving
-		
+
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
 			var/client/assailant = M.client
@@ -111,7 +145,7 @@
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 			if(!W || !src) return
-			
+
 			if(W.sharp) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
 				O.loc = src
@@ -124,6 +158,7 @@
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 					src.anchored = 1
 					src.pinned += O
+					src.verbs += /mob/proc/yank_out_object
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)

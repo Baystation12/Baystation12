@@ -56,8 +56,8 @@
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
 		if(!config.objectives_disabled)
 			forge_ninja_objectives(ninja)
-		else
-			ninja.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+		show_objectives(ninja)
+
 		var/mob/living/carbon/human/N = ninja.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
@@ -139,11 +139,7 @@
 	ninja.current << "You are an elite mercenary assassin of the Spider Clan, [ninja.current.real_name]. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.\nYour current directive is: \red <B>[directive]</B>\n \blue Try your best to adhere to this."
 	ninja.store_memory("<B>Directive:</B> \red [directive]<br>")
 
-	var/obj_count = 1
-	ninja.current << "\blue Your current objectives:"
-	for(var/datum/objective/objective in ninja.objectives)
-		ninja.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
+	show_objectives(ninja)
 
 /datum/game_mode/proc/auto_declare_completion_ninja()
 	if(ninjas.len)

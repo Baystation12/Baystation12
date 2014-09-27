@@ -28,7 +28,7 @@
 	desc = "You can't top the plasma top." //TOTALLY TRADEMARK INFRINGEMENT
 	origin_tech = "powerstorage=0"
 	maxcharge = 500
-	matter = list("glass" = 40)
+	matter = list("metal" = 700, "glass" = 40)
 
 /obj/item/weapon/cell/crap/empty/New()
 	..()
@@ -38,18 +38,24 @@
 	name = "security borg rechargable D battery"
 	origin_tech = "powerstorage=0"
 	maxcharge = 600	//600 max charge / 100 charge per shot = six shots
-	matter = list("glass" = 40)
+	matter = list("metal" = 700, "glass" = 40)
 
 /obj/item/weapon/cell/secborg/empty/New()
 	..()
 	charge = 0
+
+/obj/item/weapon/cell/apc
+	name = "heavy-duty power cell"
+	origin_tech = "powerstorage=1"
+	maxcharge = 5000
+	matter = list("metal" = 700, "glass" = 50)
 
 /obj/item/weapon/cell/high
 	name = "high-capacity power cell"
 	origin_tech = "powerstorage=2"
 	icon_state = "hcell"
 	maxcharge = 10000
-	matter = list("glass" = 60)
+	matter = list("metal" = 700, "glass" = 60)
 
 /obj/item/weapon/cell/high/empty/New()
 	..()
@@ -60,7 +66,7 @@
 	origin_tech = "powerstorage=5"
 	icon_state = "scell"
 	maxcharge = 20000
-	matter = list("glass" = 70)
+	matter = list("metal" = 700, "glass" = 70)
 	construction_cost = list("metal"=750,"glass"=100)
 
 /obj/item/weapon/cell/super/empty/New()
@@ -72,7 +78,7 @@
 	origin_tech = "powerstorage=6"
 	icon_state = "hpcell"
 	maxcharge = 30000
-	matter = list("glass" = 80)
+	matter = list("metal" = 700, "glass" = 80)
 	construction_cost = list("metal"=500,"glass"=150,"gold"=200,"silver"=200)
 
 /obj/item/weapon/cell/hyper/empty/New()
@@ -84,7 +90,7 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 30000
-	matter = list("glass"= 80)
+	matter = list("metal" = 700, "glass" = 80)
 	use()
 		return 1
 

@@ -16,6 +16,7 @@ datum/controller/lighting
 	var/list/changed_turfs = list()
 	var/changed_turfs_workload_max = 0
 
+
 datum/controller/lighting/New()
 	lighting_states = max( 0, length(icon_states(LIGHTING_ICON))-1 )
 	if(lighting_controller != src)

@@ -231,6 +231,7 @@ That prevents a few funky behaviors.
 								new /obj/structure/AIcore/deactivated(T.loc)
 								T.aiRestorePowerRoutine = 0
 								T.control_disabled = 1
+								T.aiRadio.disabledAi = 1
 								T.loc = C
 								C.AI = T
 								T.cancel_camera()
@@ -245,6 +246,7 @@ That prevents a few funky behaviors.
 						var/mob/living/silicon/ai/A = locate() in C//I love locate(). Best proc ever.
 						if(A)//If AI exists on the card. Else nothing since both are empty.
 							A.control_disabled = 0
+							A.aiRadio.disabledAi = 0
 							A.loc = T.loc//To replace the terminal.
 							C.icon_state = "aicard"
 							C.name = "inteliCard"

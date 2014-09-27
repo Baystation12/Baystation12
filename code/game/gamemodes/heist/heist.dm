@@ -2,8 +2,12 @@
 VOX HEIST ROUNDTYPE
 */
 
+var/global/list/raider_spawn = list()
+var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective. Clumsy, rewrite sometime.
+
 /datum/game_mode/
 	var/list/datum/mind/raiders = list()  //Antags.
+	var/list/raid_objectives = list()     //Raid objectives
 
 /datum/game_mode/heist
 	name = "heist"
@@ -15,9 +19,6 @@ VOX HEIST ROUNDTYPE
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
-
-	var/list/raid_objectives = list()     //Raid objectives.
-	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
 
 /datum/game_mode/heist/announce()
 	world << "<B>The current game mode is - Heist!</B>"
@@ -59,15 +60,6 @@ VOX HEIST ROUNDTYPE
 
 /datum/game_mode/heist/post_setup()
 
-	//Build a list of spawn points.
-	var/list/turf/raider_spawn = list()
-
-	for(var/obj/effect/landmark/L in landmarks_list)
-		if(L.name == "voxstart")
-			raider_spawn += get_turf(L)
-			del(L)
-			continue
-
 	//Generate objectives for the group.
 	if(!config.objectives_disabled)
 		raid_objectives = forge_vox_objectives()
@@ -83,49 +75,57 @@ VOX HEIST ROUNDTYPE
 		raider.current.loc = raider_spawn[index]
 		index++
 
-		var/sounds = rand(2,8)
-		var/i = 0
-		var/newname = ""
-
-		while(i<=sounds)
-			i++
-			newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
-
-		var/mob/living/carbon/human/vox = raider.current
-
-		vox.real_name = capitalize(newname)
-		vox.name = vox.real_name
-		raider.name = vox.name
-		vox.age = rand(12,20)
-		vox.dna.mutantrace = "vox"
-		vox.set_species("Vox")
-		vox.languages = list() // Removing language from chargen.
-		vox.flavor_text = ""
-		vox.add_language("Vox-pidgin")
-		vox.h_style = "Short Vox Quills"
-		vox.f_style = "Shaved"
-		for(var/datum/organ/external/limb in vox.organs)
-			limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
-		
-		//Now apply cortical stack.
-		var/datum/organ/external/E = vox.get_organ("head")	
-		var/obj/item/weapon/implant/cortical/I = new(vox)
-		I.imp_in = vox
-		I.implanted = 1
-		I.part = E
-		E.implants += I
-		cortical_stacks += I
-		
-		vox.equip_vox_raider()
-		vox.regenerate_icons()
-		
-		raider.objectives = raid_objectives
+		create_vox(raider)
 		greet_vox(raider)
+
+		if(!config.objectives_disabled && raid_objectives)
+			raider.objectives = raid_objectives
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 
-/datum/game_mode/heist/proc/is_raider_crew_safe()
+/datum/game_mode/proc/create_vox(var/datum/mind/newraider)
+
+
+	var/sounds = rand(2,8)
+	var/i = 0
+	var/newname = ""
+
+	while(i<=sounds)
+		i++
+		newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
+
+	var/mob/living/carbon/human/vox = newraider.current
+
+	vox.real_name = capitalize(newname)
+	vox.name = vox.real_name
+	newraider.name = vox.name
+	vox.age = rand(12,20)
+	vox.dna.mutantrace = "vox"
+	vox.set_species("Vox")
+	vox.languages = list() // Removing language from chargen.
+	vox.flavor_text = ""
+	vox.add_language("Vox-pidgin")
+	vox.h_style = "Short Vox Quills"
+	vox.f_style = "Shaved"
+
+	for(var/datum/organ/external/limb in vox.organs)
+		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
+
+	//Generate cortical stack.
+	var/datum/organ/external/affected = vox.get_organ("head")
+
+	var/obj/item/weapon/implant/cortical/I = new(vox)
+	I.imp_in = vox
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
+	cortical_stacks += I
+
+	vox.equip_vox_raider()
+	vox.regenerate_icons()
+
+/datum/game_mode/proc/is_raider_crew_safe()
 
 	if(cortical_stacks.len == 0)
 		return 0
@@ -135,7 +135,7 @@ VOX HEIST ROUNDTYPE
 			return 0
 	return 1
 
-/datum/game_mode/heist/proc/is_raider_crew_alive()
+/datum/game_mode/proc/is_raider_crew_alive()
 
 	for(var/datum/mind/raider in raiders)
 		if(raider.current)
@@ -143,7 +143,7 @@ VOX HEIST ROUNDTYPE
 				return 1
 	return 0
 
-/datum/game_mode/heist/proc/forge_vox_objectives()
+/datum/game_mode/proc/forge_vox_objectives()
 
 	var/i = 1
 	var/max_objectives = pick(2,2,2,2,3,3,3,4)
@@ -171,20 +171,13 @@ VOX HEIST ROUNDTYPE
 
 	return objs
 
-/datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
+/datum/game_mode/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
 	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to the frontier and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder, trade or both."
 	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
 	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
 	raider.current << "\red IF YOU HAVE NOT PLAYED A VOX BEFORE, REVIEW THIS THREAD: http://baystation12.net/forums/viewtopic.php?f=6&t=8657."
-	var/obj_count = 1
-	if(!config.objectives_disabled)
-		for(var/datum/objective/objective in raider.objectives)
-			raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-			obj_count++
-	else
-		raider.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew or come up with other fun ideas. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
-
+	show_objectives(raider)
 
 /datum/game_mode/heist/declare_completion()
 
@@ -292,6 +285,6 @@ datum/game_mode/proc/auto_declare_completion_heist()
 	var/area/skipjack = locate(/area/shuttle/vox/station)
 	for (var/mob/living/M in skipjack.contents)
 		//maybe send the player a message that they've gone home/been kidnapped? Someone responsible for vox lore should write that.
-		Del(M)
+		del(M)
 	for (var/obj/O in skipjack.contents)
-		Del(O)	//no hiding in lockers or anything
+		del(O)	//no hiding in lockers or anything

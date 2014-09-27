@@ -228,7 +228,7 @@
 					emergency_shuttle.call_evac()
 					log_admin("[key_name(usr)] called the Emergency Shuttle")
 					message_admins("\blue [key_name_admin(usr)] called the Emergency Shuttle to the station", 1)
-				
+
 				else if (emergency_shuttle.can_recall())
 					emergency_shuttle.recall()
 					log_admin("[key_name(usr)] sent the Emergency Shuttle back")
@@ -247,7 +247,7 @@
 			log_admin("[key_name(usr)] edited the Emergency Shuttle's launch time to [new_time_left]")
 			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's launch time to [new_time_left*10]", 1)
 		else if (emergency_shuttle.shuttle.has_arrive_time())
-			
+
 			var/new_time_left = input("Enter new shuttle arrival time (seconds):","Edit Shuttle Arrival Time", emergency_shuttle.estimate_arrival_time() ) as num
 			emergency_shuttle.shuttle.arrive_time = world.time + new_time_left*10
 
@@ -255,7 +255,7 @@
 			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's arrival time to [new_time_left*10]", 1)
 		else
 			alert("The shuttle is neither counting down to launch nor is it in transit. Please try again when it is.")
-		
+
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])
@@ -291,7 +291,6 @@
 			if("larva")				M.change_mob_type( /mob/living/carbon/alien/larva , null, null, delmob )
 			if("human")				M.change_mob_type( /mob/living/carbon/human , null, null, delmob )
 			if("slime")			M.change_mob_type( /mob/living/carbon/slime , null, null, delmob )
-			if("adultslime")		M.change_mob_type( /mob/living/carbon/slime/adult , null, null, delmob )
 			if("monkey")			M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
 			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
@@ -1493,6 +1492,7 @@
 
 	else if(href_list["CentcommFaxReply"])
 		var/mob/living/carbon/human/H = locate(href_list["CentcommFaxReply"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
 		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
 		if(!input)	return
@@ -1500,32 +1500,76 @@
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
 		for(var/obj/machinery/faxmachine/F in machines)
-			if(! (F.stat & (BROKEN|NOPOWER) ) )
+			if(F == fax)
+				if(! (F.stat & (BROKEN|NOPOWER) ) )
 
-				// animate! it's alive!
-				flick("faxreceive", F)
+					// animate! it's alive!
+					flick("faxreceive", F)
 
-				// give the sprite some time to flick
-				spawn(20)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-					P.name = "[command_name()]- [customname]"
-					P.info = input
-					P.update_icon()
+					// give the sprite some time to flick
+					spawn(20)
+						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+						P.name = "[command_name()]- [customname]"
+						P.info = input
+						P.update_icon()
 
-					playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
+						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
 
-					// Stamps
-					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-					stampoverlay.icon_state = "paper_stamp-cent"
-					if(!P.stamped)
-						P.stamped = new
-					P.stamped += /obj/item/weapon/stamp
-					P.overlays += stampoverlay
-					P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
+						// Stamps
+						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+						stampoverlay.icon_state = "paper_stamp-cent"
+						if(!P.stamped)
+							P.stamped = new
+						P.stamped += /obj/item/weapon/stamp
+						P.overlays += stampoverlay
+						P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
 
-		src.owner << "Message reply to transmitted successfully."
-		log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
-		message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				src.owner << "Message reply to transmitted successfully."
+				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				return
+		src.owner << "/red Unable to locate fax!"
+
+	else if(href_list["SolGovFaxReply"])
+		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
+		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
+
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!input)	return
+
+		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+
+		for(var/obj/machinery/faxmachine/F in machines)
+			if(F == fax)
+				if(! (F.stat & (BROKEN|NOPOWER) ) )
+
+					// animate! it's alive!
+					flick("faxreceive", F)
+
+					// give the sprite some time to flick
+					spawn(20)
+						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+						P.name = "Sol Government- [customname]"
+						P.info = input
+						P.update_icon()
+
+						playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
+
+						// Stamps
+						var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+						stampoverlay.icon_state = "paper_stamp-cap"
+						if(!P.stamped)
+							P.stamped = new
+						P.stamped += /obj/item/weapon/stamp
+						P.overlays += stampoverlay
+						P.stamps += "<HR><i>This paper has been stamped and encrypted by the Sol Government Quantum Relay.</i>"
+
+				src.owner << "Message reply to transmitted successfully."
+				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
+				return
+		src.owner << "/red Unable to locate fax!"
+
 
 
 	else if(href_list["jumpto"])
@@ -1935,20 +1979,20 @@
 
 			if("launchshuttle")
 				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
-			
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShL")
-				
+
 				var/list/valid_shuttles = list()
 				for (var/shuttle_tag in shuttle_controller.shuttles)
 					if (istype(shuttle_controller.shuttles[shuttle_tag], /datum/shuttle/ferry))
 						valid_shuttles += shuttle_tag
-				
+
 				var/shuttle_tag = input("Which shuttle do you want to launch?") as null|anything in valid_shuttles
-				
+
 				if (!shuttle_tag)
 					return
-				
+
 				var/datum/shuttle/ferry/S = shuttle_controller.shuttles[shuttle_tag]
 				if (S.can_launch())
 					S.launch(usr)
@@ -1956,23 +2000,23 @@
 					log_admin("[key_name(usr)] launched the [shuttle_tag] shuttle")
 				else
 					alert("The [shuttle_tag] shuttle cannot be launched at this time. It's probably busy.")
-				
+
 			if("forcelaunchshuttle")
 				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
-			
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShFL")
-				
+
 				var/list/valid_shuttles = list()
 				for (var/shuttle_tag in shuttle_controller.shuttles)
 					if (istype(shuttle_controller.shuttles[shuttle_tag], /datum/shuttle/ferry))
 						valid_shuttles += shuttle_tag
-				
+
 				var/shuttle_tag = input("Which shuttle's launch do you want to force?") as null|anything in valid_shuttles
-				
+
 				if (!shuttle_tag)
 					return
-				
+
 				var/datum/shuttle/ferry/S = shuttle_controller.shuttles[shuttle_tag]
 				if (S.can_force())
 					S.force_launch(usr)
@@ -1980,31 +2024,31 @@
 					log_admin("[key_name(usr)] has forced the [shuttle_tag] shuttle launch")
 				else
 					alert("The [shuttle_tag] shuttle launch cannot be forced at this time. It's busy, or hasn't been launched yet.")
-				
+
 			if("jumpshuttle")
 				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
-			
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShJ")
-				
+
 				var/shuttle_tag = input("Which shuttle do you want to jump?") as null|anything in shuttle_controller.shuttles
 				if (!shuttle_tag) return
-				
+
 				var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
-				
+
 				var/origin_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
 				if (!origin_area) return
-				
+
 				var/destination_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
 				if (!destination_area) return
-				
+
 				var/long_jump = alert("Is there a transition area for this jump?","", "Yes", "No")
 				if (long_jump == "Yes")
 					var/transition_area = input("Which area is the transition area? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
 					if (!transition_area) return
-					
+
 					var/move_duration = input("How many seconds will this jump take?") as num
-					
+
 					S.long_jump(origin_area, destination_area, transition_area, move_duration)
 					message_admins("\blue [key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] lasting [move_duration] seconds for the [shuttle_tag] shuttle", 1)
 					log_admin("[key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] lasting [move_duration] seconds for the [shuttle_tag] shuttle")
@@ -2012,29 +2056,29 @@
 					S.short_jump(origin_area, destination_area)
 					message_admins("\blue [key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] for the [shuttle_tag] shuttle", 1)
 					log_admin("[key_name_admin(usr)] has initiated a jump from [origin_area] to [destination_area] for the [shuttle_tag] shuttle")
-			
+
 			if("moveshuttle")
 
 				if(!shuttle_controller) return // Something is very wrong, the shuttle controller has not been created.
 
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShM")
-				
+
 				var/confirm = alert("This command directly moves a shuttle from one area to another. DO NOT USE THIS UNLESS YOU ARE DEBUGGING A SHUTTLE AND YOU KNOW WHAT YOU ARE DOING.", "Are you sure?", "Ok", "Cancel")
 				if (confirm == "Cancel")
 					return
 
 				var/shuttle_tag = input("Which shuttle do you want to jump?") as null|anything in shuttle_controller.shuttles
 				if (!shuttle_tag) return
-				
+
 				var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
-				
+
 				var/origin_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
 				if (!origin_area) return
-				
+
 				var/destination_area = input("Which area is the shuttle at now? (MAKE SURE THIS IS CORRECT OR THINGS WILL BREAK)") as null|area in world
 				if (!destination_area) return
-				
+
 				S.move(origin_area, destination_area)
 				message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
 				log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")

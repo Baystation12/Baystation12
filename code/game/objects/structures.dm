@@ -35,12 +35,13 @@
 
 	do_climb(usr)
 
-/obj/structure/MouseDrop(atom/over_object)
+/obj/structure/MouseDrop_T(mob/target, mob/user)
 
-	var/mob/living/H = over_object
-	if(!istype(H)) return ..()
+	var/mob/living/H = user
+	if(!istype(H) || target != user) // No making other people climb onto tables.
+		return
 
-	do_climb(H)
+	do_climb(target)
 
 /obj/structure/proc/do_climb(var/mob/living/user)
 
@@ -50,8 +51,15 @@
 	var/turf/T = src.loc
 	if(!T || !istype(T)) return
 
-	var/obj/machinery/door/poddoor/shutters/S = locate() in T.contents
-	if(S && S.density) return
+	for(var/obj/O in T.contents)
+		if(istype(O,/obj/structure))
+			var/obj/structure/S = O
+			if(S.climbable)
+				continue
+
+		if(O && O.density)
+			usr << "\red There's \a [O] in the way."
+			return
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 
@@ -61,10 +69,18 @@
 	if (!can_touch(user) || !climbable)
 		return
 
-	S = locate() in T.contents
-	if(S && S.density) return
+	for(var/obj/O in T.contents)
+		if(istype(O,/obj/structure))
+			var/obj/structure/S = O
+			if(S.climbable)
+				continue
+
+		if(O && O.density)
+			usr << "\red There's \a [O] in the way."
+			return
 
 	usr.loc = get_turf(src)
+
 	if (get_turf(user) == get_turf(src))
 		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
 
@@ -81,7 +97,7 @@
 
 			var/damage = rand(15,30)
 			var/mob/living/carbon/human/H = M
-			if(!istype(M))
+			if(!istype(H))
 				H << "\red You land heavily!"
 				M.adjustBruteLoss(damage)
 				return

@@ -14,6 +14,10 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 	var/diamond_amount = 0
 	var/uranium_amount = 0
 	var/max_material_amount = 75000.0
+	
+	use_power = 1
+	idle_power_usage = 30
+	active_power_usage = 2500
 
 	New()
 		..()
