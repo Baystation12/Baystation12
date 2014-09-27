@@ -53,7 +53,7 @@
 	Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	*/
 	var/list/sprite_sheets_obj = null
-	
+
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
@@ -516,8 +516,8 @@
 		user << "\red You're going to need to remove the eye covering first."
 		return
 
-	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!
-		user << "\red You cannot locate any eyes on this creature!"
+	if(!M.has_eyes())
+		user << "\red You cannot locate any eyes on [M]!"
 		return
 
 	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
@@ -533,20 +533,22 @@
 		M.weakened += 4
 		M.adjustBruteLoss(10)
 		*/
-	if(M != user)
-		for(var/mob/O in (viewers(M) - user - M))
-			O.show_message("\red [M] has been stabbed in the eye with [src] by [user].", 1)
-		M << "\red [user] stabs you in the eye with [src]!"
-		user << "\red You stab [M] in the eye with [src]!"
-	else
-		user.visible_message( \
-			"\red [user] has stabbed themself with [src]!", \
-			"\red You stab yourself in the eyes with [src]!" \
-		)
+
 	if(istype(M, /mob/living/carbon/human))
+
 		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
-		if(!eyes)
-			return
+
+		if(M != user)
+			for(var/mob/O in (viewers(M) - user - M))
+				O.show_message("\red [M] has been stabbed in the eye with [src] by [user].", 1)
+			M << "\red [user] stabs you in the eye with [src]!"
+			user << "\red You stab [M] in the eye with [src]!"
+		else
+			user.visible_message( \
+				"\red [user] has stabbed themself with [src]!", \
+				"\red You stab yourself in the eyes with [src]!" \
+			)
+
 		eyes.damage += rand(3,4)
 		if(eyes.damage >= eyes.min_bruised_damage)
 			if(M.stat != 2)

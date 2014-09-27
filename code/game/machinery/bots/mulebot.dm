@@ -803,10 +803,7 @@
 	H.apply_damage(0.5*damage, BRUTE, "l_arm")
 	H.apply_damage(0.5*damage, BRUTE, "r_arm")
 
-	var/obj/effect/decal/cleanable/blood/B = new(src.loc)
-	B.blood_DNA = list()
-	B.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-
+	blood_splatter(src,H,1)
 	bloodiness += 4
 
 // player on mulebot attempted to move
