@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/var/max_locations = 5
+/mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
