@@ -10,7 +10,6 @@
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
-	mob/living/carbon/brain/brainmob = null
 	req_access = list(access_robotics)
 	locked = 0
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
@@ -135,7 +134,6 @@
 	src.brainmob.container = src
 	src.brainmob.stat = 0
 	src.brainmob.silent = 0
-	src.brainmob.brain_op_stage = 4.0
 	dead_mob_list -= src.brainmob
 
 	..()
