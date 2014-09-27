@@ -143,6 +143,7 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
 	inherent_verbs = list(
+		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/psychic_whisper,
@@ -163,12 +164,12 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	inherent_verbs = list(
+		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/alien/proc/transfer_plasma,
 		/mob/living/carbon/human/alien/proc/corrosive_acid,
 		/mob/living/carbon/human/alien/proc/neurotoxin
 		)
-
 
 /datum/species/xenos/queen
 

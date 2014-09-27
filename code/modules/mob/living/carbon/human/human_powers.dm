@@ -1,6 +1,54 @@
 // These should all be procs, you can add them to humans/subspecies by
 // species.dm's inherent_verbs ~ Z
 
+/mob/living/carbon/human/proc/tackle()
+	set category = "Abilities"
+	set name = "Tackle"
+	set desc = "Tackle someone down."
+
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot tackle someone in your current state."
+		return
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(6,src))
+		if(!istype(M,/mob/living/silicon))
+			choices += M
+	choices -= src
+
+	var/mob/living/T = input(src,"Who do you wish to tackle?") as null|anything in choices
+
+	if(!T || !src || src.stat) return
+
+	if(get_dist(get_turf(T), get_turf(src)) > 6) return
+
+	if(last_special > world.time)
+		return
+
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot leap in your current state."
+		return
+
+	last_special = world.time + 50
+
+	var/failed
+	if(prob(75))
+		T.Weaken(rand(0.5,3))
+	else
+		src.Weaken(rand(2,4))
+		failed = 1
+
+	playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+	if(failed)
+		src.Weaken(rand(2,4))
+
+	for(var/mob/O in viewers(src, null))
+		if ((O.client && !( O.blinded )))
+			O.show_message(text("\red <B>[] [failed ? "tried to tackle" : "has tackled"] down []!</B>", src, T), 1)
+
 /mob/living/carbon/human/proc/leap()
 	set category = "Abilities"
 	set name = "Leap"
