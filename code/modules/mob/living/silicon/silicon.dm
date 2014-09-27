@@ -1,6 +1,5 @@
 /mob/living/silicon
 	gender = NEUTER
-	robot_talk_understand = 1
 	voice_name = "synthesized voice"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
@@ -14,6 +13,7 @@
 	var/speak_query = "queries"
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/sensor_mode = 0 //Determines the current HUD.
 	#define SEC_HUD 1 //Security HUD mode
@@ -215,3 +215,6 @@
 	set category = "IC"
 
 	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
+
+/mob/living/silicon/binarycheck()
+	return 1

@@ -3,7 +3,6 @@
 	icon = 'icons/mob/pai.dmi'
 	icon_state = "repairbot"
 
-	robot_talk_understand = 0
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	small = 1
 	pass_flags = 1
@@ -437,3 +436,7 @@
 		msg += "\nIt is [pose]"
 
 	usr << msg
+
+// No binary for pAIs.
+/mob/living/silicon/pai/binarycheck()
+	return 0

@@ -24,9 +24,10 @@
 	if(!new_species || !adult_form )
 		return
 
-	var/mob/living/carbon/human/alien/adult = new adult_form ()
+	var/mob/living/carbon/human/alien/adult = new adult_form(get_turf(src))
 	adult.set_species(new_species)
 	show_evolution_blurb()
+
 	if(mind)
 		mind.transfer_to(adult)
 	else

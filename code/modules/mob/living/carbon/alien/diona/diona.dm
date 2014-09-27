@@ -3,7 +3,7 @@
 	voice_name = "diona nymph"
 	adult_form = /mob/living/carbon/human
 	speak_emote = list("chirrups")
-	icon_state = "nymph0"
+	icon_state = "nymph"
 	language = "Rootspeak"
 
 	amount_grown = 0

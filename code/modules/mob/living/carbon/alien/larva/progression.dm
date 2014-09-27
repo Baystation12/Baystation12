@@ -1,4 +1,6 @@
 /mob/living/carbon/alien/larva/update_progression()
+	if(amount_grown < max_grown)
+		amount_grown++
 	return
 
 /mob/living/carbon/alien/larva/confirm_evolution()

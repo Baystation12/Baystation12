@@ -208,8 +208,6 @@
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
-	var/robot_talk_understand = 0
-	var/alien_talk_understand = 0
 
 	var/has_limbs = 1 //Whether this mob have any limbs he can move with
 	var/can_stand = 1 //Whether this mob have ability to stand

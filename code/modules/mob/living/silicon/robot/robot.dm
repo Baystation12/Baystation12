@@ -80,6 +80,8 @@ var/list/robot_verbs_default = list(
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+	add_language("Robot Talk", 1)
+
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
@@ -1272,7 +1274,6 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
 
-
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.
 /mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
@@ -1286,5 +1287,12 @@ var/list/robot_verbs_default = list(
 
 	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
 		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
+		return 1
+	return 0
+
+/mob/living/silicon/robot/binarycheck()
+	if(is_component_functioning("comms"))
+		var/datum/robot_component/RC = get_component("comms")
+		use_power(RC.active_usage)
 		return 1
 	return 0

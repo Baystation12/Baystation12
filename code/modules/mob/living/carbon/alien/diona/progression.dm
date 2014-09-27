@@ -8,10 +8,6 @@
 		src << "You are not yet ready for your growth..."
 		return null
 
-	if(nutrition < 400)
-		src << "You have not yet consumed enough to grow..."
-		return null
-
 	src.split()
 
 	if(istype(loc,/obj/item/weapon/holder/diona))

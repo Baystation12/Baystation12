@@ -1,7 +1,7 @@
 //Verbs after this point.
 /mob/living/carbon/alien/diona/proc/merge()
 
-	set category = "Diona"
+	set category = "Abilities"
 	set name = "Merge with gestalt"
 	set desc = "Merge with another diona."
 
@@ -36,7 +36,7 @@
 
 /mob/living/carbon/alien/diona/proc/split()
 
-	set category = "Diona"
+	set category = "Abilities"
 	set name = "Split from gestalt"
 	set desc = "Split away from your gestalt as a lone nymph."
 
@@ -60,7 +60,7 @@
 	M.status_flags &= ~PASSEMOTES
 
 /mob/living/carbon/alien/diona/proc/steal_blood()
-	set category = "Diona"
+	set category = "Abilities"
 	set name = "Steal Blood"
 	set desc = "Take a blood sample from a suitable donor."
 

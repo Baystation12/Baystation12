@@ -9,11 +9,8 @@ var/list/department_radio_keys = list(
 	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
 	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
-	  ":b" = "binary",		"#b" = "binary",		".b" = "binary",
 	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
-	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
-	  ":d" = "dronechat",	"#d" = "dronechat",		".d" = "dronechat",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -25,11 +22,8 @@ var/list/department_radio_keys = list(
 	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
 	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
-	  ":B" = "binary",		"#B" = "binary",		".B" = "binary",
 	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
-	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
-	  ":D" = "dronechat",	"#D" = "dronechat",		".D" = "dronechat",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -43,19 +37,18 @@ var/list/department_radio_keys = list(
 	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
 	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
 	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
-	  ":è" = "binary",		"#è" = "binary",		".è" = "binary",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
-	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
 )
 
 /mob/living/proc/binarycheck()
+
 	if (istype(src, /mob/living/silicon/pai))
 		return
-	if (issilicon(src))
-		return 1
+
 	if (!ishuman(src))
 		return
+
 	var/mob/living/carbon/human/H = src
 	if (H.l_ear || H.r_ear)
 		var/obj/item/device/radio/headset/dongle
