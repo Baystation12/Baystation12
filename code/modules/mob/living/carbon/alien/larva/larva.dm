@@ -4,10 +4,14 @@
 	adult_form = /mob/living/carbon/human/alien
 	speak_emote = list("hisses")
 	icon_state = "larva"
-	pass_flags = PASSTABLE
+	language = "Hivemind"
 
 	amount_grown = 0
 	max_grown = 200
 
 	maxHealth = 25
 	health = 25
+
+/mob/living/carbon/alien/larva/New()
+	..()
+	add_language("Rootspeak")

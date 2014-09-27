@@ -2,7 +2,9 @@
 
 	name = "alien"
 	desc = "What IS that?"
+	icon = 'icons/mob/alien.dmi'
 	icon_state = "alien"
+	pass_flags = PASSTABLE
 
 	var/adult_form
 	var/dead_icon
@@ -11,6 +13,7 @@
 	var/time_of_birth
 	var/co2overloadtime = null
 	var/temperature_resistance = T0C+75
+	var/language
 
 /mob/living/carbon/alien/New()
 
@@ -21,6 +24,11 @@
 	name = "[initial(name)] ([rand(1, 1000)])"
 	real_name = name
 	regenerate_icons()
+
+	if(language)
+		add_language(language)
+
+	gender = NEUTER
 
 	..()
 

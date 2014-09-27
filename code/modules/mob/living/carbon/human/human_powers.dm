@@ -49,8 +49,8 @@
 
 	T.Weaken(5)
 
-	//Only official raider vox get the grab and no self-prone."
-	if(src.mind && src.mind.special_role != "Vox Raider")
+	//Only official cool kids get the grab and no self-prone.
+	if(src.mind && src.mind.special_role)
 		src.Weaken(5)
 		return
 
@@ -157,14 +157,13 @@
 			if(M in stomach_contents)
 				stomach_contents.Remove(M)
 				M.loc = loc
-				Paralyse(10)
 		src.visible_message("\red <B>[src] hurls out the contents of their stomach!</B>")
 	return
 
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
-	set category = "Alien"
+	set category = "Abilities"
 
 	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)

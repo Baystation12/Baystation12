@@ -1,6 +1,6 @@
 //TODO: Consider renaming carbon/monkey to carbon/small.
 
-/mob/living/carbon/monkey/proc/fertilize_plant()
+/mob/living/carbon/proc/fertilize_plant()
 
 	set category = "Abilities"
 	set name = "Fertilize plant"
@@ -19,7 +19,7 @@
 	target.nutrilevel = 10
 	src.visible_message("\red [src] secretes a trickle of green liquid, refilling [target]'s nutrient tray.","\red You secrete a trickle of green liquid from your tail, refilling [target]'s nutrient tray.")
 
-/mob/living/carbon/monkey/proc/eat_weeds()
+/mob/living/carbon/proc/eat_weeds()
 
 	set category = "Abilities"
 	set name = "Eat Weeds"

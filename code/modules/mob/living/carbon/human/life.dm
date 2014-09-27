@@ -635,8 +635,12 @@
 		return 1
 
 	proc/handle_environment(datum/gas_mixture/environment)
+
 		if(!environment)
 			return
+
+		//Stuff like the xenomorph's plasma regen happens here.
+		species.handle_environment_special()
 
 		//Moved pressure calculations here for use in skip-processing check.
 		var/pressure = environment.return_pressure()

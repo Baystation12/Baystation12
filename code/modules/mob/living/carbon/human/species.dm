@@ -113,12 +113,20 @@
 		for(var/datum/organ/internal/I in H.internal_organs)
 			I.mechanize()
 
-/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+/datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
+	if(inherent_verbs)
+		for(var/verb_path in inherent_verbs)
+			H.verbs -= verb_path
+	return
 
+/datum/species/proc/add_inherent_verbs(var/mob/living/carbon/human/H)
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs |= verb_path
 	return
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+	add_inherent_verbs(H)
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	if(flags & IS_SYNTHETIC)
@@ -165,6 +173,7 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 
@@ -226,7 +235,9 @@
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	language = "Vox-pidgin"
-	unarmed_type = /datum/unarmed_attack/claws	//I dont think it will hurt to give vox claws too.
+	unarmed_type = /datum/unarmed_attack/claws/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+
 	speech_sounds = list('sound/voice/shriek1.ogg')
 
 	warning_low_pressure = 50
@@ -258,7 +269,6 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
-	unarmed_type = /datum/unarmed_attack/claws/big
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -325,7 +335,6 @@
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
-
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
@@ -379,7 +388,8 @@
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi' //Redefine these per-caste when icons are done.
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/claws/big
+	unarmed_type = /datum/unarmed_attack/claws/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 
 	eyes = "blank_eyes"
 
@@ -421,8 +431,6 @@
 	if(H.has_brain_worms()) //TODO: HANDLE THIS.
 		return 0
 
-	alien_number++ //Keep track of how many aliens we've had so far.
-
 	var/mob/living/carbon/human/alien/A = H
 
 	// A lot of alien abilities rely on the alien's internal vars/procs.
@@ -443,11 +451,14 @@
 		A.mind.assigned_role = "Alien"
 		A.mind.special_role = "Alien"
 
+	alien_number++ //Keep track of how many aliens we've had so far.
 	A.real_name = "alien [caste_name] ([alien_number])"
 	A.name = A.real_name
 
 	if(spawn_plasma)
 		A.stored_plasma = spawn_plasma
+
+	..()
 
 /datum/species/xenos/handle_environment_special(var/mob/living/carbon/human/H)
 
@@ -479,6 +490,10 @@
 	slowdown = 2
 
 	inherent_verbs = list(
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/alien/proc/plant,
+		/mob/living/carbon/human/alien/proc/transfer_plasma,
+		/mob/living/carbon/human/alien/proc/evolve,
 		/mob/living/carbon/human/alien/proc/resin,
 		/mob/living/carbon/human/alien/proc/corrosive_acid
 		)
@@ -500,6 +515,13 @@
 	slowdown = -1
 	total_health = 150
 
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/gut,
+		/mob/living/carbon/human/proc/leap,
+		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/regurgitate
+		)
+
 /datum/species/xenos/sentinel
 	name = "Xenomorph Sentinel"
 	maximum_plasma = 250
@@ -510,6 +532,8 @@
 	total_health = 125
 
 	inherent_verbs = list(
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/alien/proc/transfer_plasma,
 		/mob/living/carbon/human/alien/proc/corrosive_acid,
 		/mob/living/carbon/human/alien/proc/neurotoxin
 		)
@@ -524,6 +548,11 @@
 	slowdown = 5
 
 	inherent_verbs = list(
+		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/alien/proc/lay_egg,
+		/mob/living/carbon/human/alien/proc/plant,
+		/mob/living/carbon/human/alien/proc/transfer_plasma,
 		/mob/living/carbon/human/alien/proc/corrosive_acid,
 		/mob/living/carbon/human/alien/proc/neurotoxin,
 		/mob/living/carbon/human/alien/proc/resin
@@ -603,13 +632,18 @@
 
 /datum/unarmed_attack/claws
 	attack_verb = list("scratch", "claw")
-	shredding = 1
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	damage = 5
 	sharp = 1
 	edge = 1
 
-/datum/unarmed_attack/claws/big
-	attack_verb = list("slash", "claw")
+/datum/unarmed_attack/claws/strong
+	attack_verb = list("slash")
+	damage = 10
+	shredding = 1
+
+/datum/unarmed_attack/bite/strong
+	attack_verb = list("maul")
 	damage = 15
+	shredding = 1

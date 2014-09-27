@@ -111,3 +111,7 @@ Des: Removes all infected images from the alien.
 		icon_state = "queen_s"
 		for(var/image/I in overlays_standing)
 			overlays += I*/
+
+/mob/living/carbon/human/alien/hug(var/mob/target)
+	src.visible_message("<span class='notice'>[src] caresses [target] with its scythe-like arm.</span>", \
+					"<span class='notice'>You caress [target] with your scythe-like arm.</span>")

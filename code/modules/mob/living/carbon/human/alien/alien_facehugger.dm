@@ -20,11 +20,8 @@ var/const/MAX_ACTIVE_TIME = 400
 	throw_range = 5
 
 	var/stat = CONSCIOUS //UNCONSCIOUS is the idle state in this case
-
 	var/sterile = 0
-
 	var/strength = 5
-
 	var/attached = 0
 
 /obj/item/clothing/mask/facehugger/attack_paw(user as mob) //can be picked up by aliens

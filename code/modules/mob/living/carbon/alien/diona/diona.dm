@@ -3,7 +3,8 @@
 	voice_name = "diona nymph"
 	adult_form = /mob/living/carbon/human
 	speak_emote = list("chirrups")
-	icon_state = "nymph1"
+	icon_state = "nymph0"
+	language = "Rootspeak"
 
 	amount_grown = 0
 	max_grown = 5 // Target number of donors.
@@ -18,6 +19,7 @@
 /mob/living/carbon/alien/diona/New()
 
 	..()
-	gender = NEUTER
-	add_language("Rootspeak")
-	src.verbs += /mob/living/carbon/alien/diona/proc/merge
+	verbs += /mob/living/carbon/proc/eat_weeds
+	verbs += /mob/living/carbon/proc/fertilize_plant
+	verbs += /mob/living/carbon/alien/diona/proc/steal_blood
+	verbs += /mob/living/carbon/alien/diona/proc/merge

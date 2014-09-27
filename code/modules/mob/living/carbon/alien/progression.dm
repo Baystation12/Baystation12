@@ -1,4 +1,4 @@
-/mob/living/carbon/alien/proc/evolve()
+/mob/living/carbon/alien/verb/evolve()
 
 	set name = "Evolve"
 	set desc = "Evolve into your adult form."
@@ -8,7 +8,7 @@
 		return
 
 	if(!adult_form)
-		verbs -= /mob/living/carbon/alien/proc/evolve
+		verbs -= /mob/living/carbon/alien/verb/evolve
 		return
 
 	if(handcuffed || legcuffed)

@@ -42,7 +42,7 @@
 /mob/living/carbon/human/alien/proc/transfer_plasma(mob/living/carbon/human/alien/M as mob in oview())
 	set name = "Transfer Plasma"
 	set desc = "Transfer Plasma to another alien"
-	set category = "Alien"
+	set category = "Abilities"
 
 	if(isalien(M))
 
@@ -65,6 +65,11 @@
 	set name = "Lay Egg (75)"
 	set desc = "Lay an egg to produce huggers to impregnate prey with."
 	set category = "Abilities"
+
+	if(!aliens_allowed)
+		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
+		verbs -= /mob/living/carbon/human/alien/proc/lay_egg
+		return
 
 	if(locate(/obj/effect/alien/egg) in get_turf(src))
 		src << "There's already an egg here."
@@ -107,9 +112,9 @@
 	return
 
 /mob/living/carbon/human/alien/proc/corrosive_acid(O as obj|turf in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
-	set name = "Corrossive Acid (200)"
+	set name = "Corrosive Acid (200)"
 	set desc = "Drench an object in acid, destroying it over time."
-	set category = "Alien"
+	set category = "Abilities"
 
 	if(!O in oview(1))
 		src << "\green [O] is too far away."
@@ -145,7 +150,7 @@
 /mob/living/carbon/human/alien/proc/neurotoxin(mob/target as mob in oview())
 	set name = "Spit Neurotoxin (50)"
 	set desc = "Spits neurotoxin at someone, paralyzing them for a short time if they are not wearing protective gear."
-	set category = "Alien"
+	set category = "Abilities"
 
 	if(isalien(target))
 		src << "\green Your allies are not a valid target."
@@ -186,7 +191,7 @@
 /mob/living/carbon/human/alien/proc/resin() // -- TLE
 	set name = "Secrete Resin (75)"
 	set desc = "Secrete tough malleable resin."
-	set category = "Alien"
+	set category = "Abilities"
 
 	var/choice = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
 	if(!choice)

@@ -224,8 +224,7 @@
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!", \
 									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
 			else
-				M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
-								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
+				M.hug(src)
 
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
@@ -427,7 +426,7 @@
 //Brain slug proc for voluntary removal of control.
 /mob/living/carbon/proc/release_control()
 
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Release Control"
 	set desc = "Release control of your host's body."
 
@@ -447,7 +446,7 @@
 
 //Brain slug proc for tormenting the host.
 /mob/living/carbon/proc/punish_host()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
 
@@ -470,7 +469,7 @@
 	return 0
 
 /mob/living/carbon/proc/spawn_larvae()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Reproduce"
 	set desc = "Spawn several young."
 
@@ -492,3 +491,15 @@
 	else
 		src << "You do not have enough chemicals stored to reproduce."
 		return
+
+/mob/living/carbon/proc/hug(var/mob/target)
+
+	var/t_him = "them"
+	switch(target.gender)
+		if(MALE)
+			t_him = "him"
+		if(FEMALE)
+			t_him = "her"
+
+	src.visible_message("<span class='notice'>[src] hugs [target] to make [t_him] feel better!</span>", \
+					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")

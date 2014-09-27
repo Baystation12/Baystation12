@@ -179,7 +179,7 @@
 			M << "<i>Cortical link, <b>[truename]:</b> [copytext(message, 2)]</i>"
 
 /mob/living/simple_animal/borer/verb/release_host()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Release Host"
 	set desc = "Slither out of your host."
 

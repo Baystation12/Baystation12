@@ -59,7 +59,7 @@
 				return
 	M.status_flags &= ~PASSEMOTES
 
-/mob/living/carbon/alien/diona/verb/steal_blood()
+/mob/living/carbon/alien/diona/proc/steal_blood()
 	set category = "Diona"
 	set name = "Steal Blood"
 	set desc = "Take a blood sample from a suitable donor."

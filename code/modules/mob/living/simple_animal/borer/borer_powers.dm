@@ -1,5 +1,5 @@
 /mob/living/simple_animal/borer/verb/infest()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Infest"
 	set desc = "Infest a suitable humanoid host."
 
@@ -70,7 +70,7 @@
 		return
 
 /mob/living/simple_animal/borer/verb/secrete_chemicals()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Secrete Chemicals"
 	set desc = "Push some chemicals into your host's bloodstream."
 
@@ -98,7 +98,7 @@
 	chemicals -= 50
 
 /mob/living/simple_animal/borer/verb/dominate_victim()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Paralyze Victim"
 	set desc = "Freeze the limbs of a potential host with supernatural fear."
 
@@ -138,7 +138,7 @@
 	used_dominate = world.time
 
 /mob/living/simple_animal/borer/verb/bond_brain()
-	set category = "Alien"
+	set category = "Abilities"
 	set name = "Assume Control"
 	set desc = "Fully connect to the brain of your host."
 
