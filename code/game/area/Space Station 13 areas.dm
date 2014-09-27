@@ -1251,10 +1251,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Patient Wing"
 	icon_state = "patients"
 
-/area/medical/cmo
-	name = "\improper Chief Medical Officer's office"
-	icon_state = "CMO"
-
 /area/medical/cmostore
 	name = "\improper Secure Storage"
 	icon_state = "CMO"
