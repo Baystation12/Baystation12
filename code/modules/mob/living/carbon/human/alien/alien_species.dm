@@ -32,6 +32,12 @@
 	breath_type = null
 	poison_type = null
 
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"lungs" =    /datum/organ/internal/lungs,
+		"brain" =    /datum/organ/internal/brain,
+		)
+
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
 	var/weeds_heal_rate = 1     // Health regen on weeds.

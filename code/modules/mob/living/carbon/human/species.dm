@@ -82,6 +82,7 @@
 		"appendix" = /datum/organ/internal/appendix,
 		"eyes" =     /datum/organ/internal/eyes
 		)
+
 /datum/species/New()
 	if(unarmed_type) unarmed = new unarmed_type()
 	if(secondary_unarmed_type) secondary_unarmed = new secondary_unarmed_type()
@@ -270,6 +271,15 @@
 		/mob/living/carbon/human/proc/leap
 		)
 
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"lungs" =    /datum/organ/internal/lungs,
+		"liver" =    /datum/organ/internal/liver,
+		"kidneys" =  /datum/organ/internal/kidney,
+		"brain" =    /datum/organ/internal/brain,
+		"eyes" =     /datum/organ/internal/eyes
+		)
+
 /datum/species/vox/armalis
 	name = "Vox Armalis"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
@@ -318,6 +328,11 @@
 	unarmed_type = /datum/unarmed_attack/diona
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
+
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"brain" =    /datum/organ/internal/brain,
+		)
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -386,6 +401,11 @@
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
+
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"brain" =    /datum/organ/internal/brain,
+		)
 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)

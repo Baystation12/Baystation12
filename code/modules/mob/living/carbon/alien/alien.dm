@@ -17,6 +17,9 @@
 
 /mob/living/carbon/alien/New()
 
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
 	var/datum/reagents/R = new/datum/reagents(100)
 	reagents = R
 	R.my_atom = src
@@ -67,7 +70,6 @@
 		return
 	return
 
-//This needs to be fixed
 /mob/living/carbon/alien/Stat()
 	..()
 	stat(null, "Progress: [amount_grown]/[max_grown]")

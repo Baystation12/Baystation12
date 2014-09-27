@@ -51,6 +51,10 @@
 
 /mob/living/simple_animal/mouse/New()
 	..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
 	name = "[name] ([rand(1, 1000)])"
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )

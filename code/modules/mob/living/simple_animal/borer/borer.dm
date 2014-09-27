@@ -72,6 +72,15 @@
 /mob/living/simple_animal/borer/roundstart
 	roundstart = 1
 
+/mob/living/simple_animal/borer/New()
+	..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
+	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
+	if(!roundstart) request_player()
+
 /mob/living/simple_animal/borer/Life()
 
 	..()
@@ -109,11 +118,6 @@
 
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
-
-/mob/living/simple_animal/borer/New()
-	..()
-	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
-	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/say(var/message)
 

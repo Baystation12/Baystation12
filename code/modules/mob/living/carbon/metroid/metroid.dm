@@ -54,6 +54,9 @@
 	var/core_removal_stage = 0 //For removing cores.
 
 /mob/living/carbon/slime/New()
+
+	verbs += /mob/living/proc/ventcrawl
+
 	create_reagents(100)
 	spawn (0)
 		number = rand(1, 1000)

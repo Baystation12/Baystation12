@@ -830,8 +830,7 @@
 /mob/living/carbon/human/eyecheck()
 	var/number = 0
 
-	// TODO: UNCOMMENT THIS AFTER MERGING SPECIES ORGAN CHANGES.
-	/*if(!species.has_organs["eyes"]) //No eyes, can't hurt them.
+	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
 		return 2
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
@@ -840,7 +839,6 @@
 			return 2
 	else
 		return 2
-	*/
 
 	if(istype(src.head, /obj/item/clothing/head/welding))
 		if(!src.head:up)
