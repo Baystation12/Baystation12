@@ -690,21 +690,6 @@ var/list/sacrificed = list()
 					if(prob(20))
 						ticker.mode.grant_runeword(usr)
 				M.gib()
-/*			for(var/mob/living/carbon/alien/A)
-				for(var/mob/K in cultsinrange)
-					K.say("Barhah hra zar'garis!")
-				A.dust()      /// A.gib() doesnt work for some reason, and dust() leaves that skull and bones thingy which we dont really need.
-				if (ticker.mode.name == "cult")
-					if(prob(75))
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						ticker.mode:grant_runeword(usr)
-					else
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						usr << "\red However, this alien is not enough to gain His favor."
-				else
-					usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-				return
-			return fizzle() */
 
 /////////////////////////////////////////SIXTEENTH RUNE
 

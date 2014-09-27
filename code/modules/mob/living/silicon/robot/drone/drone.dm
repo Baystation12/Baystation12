@@ -13,6 +13,7 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
+	integrated_light_power = 2
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.

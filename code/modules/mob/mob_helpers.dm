@@ -16,12 +16,12 @@
 	return 0
 
 /proc/isalien(A)
-	if(istype(A, /mob/living/carbon/alien))
+	if(istype(A, /mob/living/carbon/alien) || istype(A,/mob/living/carbon/human/alien))
 		return 1
 	return 0
 
 /proc/isalienadult(A)
-	if(istype(A, /mob/living/carbon/alien/humanoid))
+	if(istype(A, /mob/living/carbon/human/alien))
 		return 1
 	return 0
 
@@ -189,7 +189,7 @@ var/list/global/organ_rel_size = list(
 
 	var/ran_zone = zone
 	while (ran_zone == zone)
-		ran_zone = pick ( 
+		ran_zone = pick (
 			organ_rel_size["head"]; "head",
 			organ_rel_size["chest"]; "chest",
 			organ_rel_size["groin"]; "groin",
@@ -202,7 +202,7 @@ var/list/global/organ_rel_size = list(
 			organ_rel_size["l_foot"]; "l_foot",
 			organ_rel_size["r_foot"]; "r_foot",
 		)
-	
+
 	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances

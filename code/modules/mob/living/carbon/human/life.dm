@@ -1649,8 +1649,8 @@
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
-			holder.icon_state = "hud[RoundHealth(health)]"
-
+			var/percentage_health = RoundHealth(((0.0+health)/species.total_health)*100)
+			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
 
 	if(hud_updateflag & 1 << STATUS_HUD)

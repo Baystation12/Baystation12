@@ -121,21 +121,6 @@
 /obj/effect/alien/resin/attack_paw()
 	return attack_hand()
 
-/obj/effect/alien/resin/attack_alien()
-	if (islarva(usr))//Safety check for larva. /N
-		return
-	usr << "\green You claw at the [name]."
-	for(var/mob/O in oviewers(src))
-		O.show_message("\red [usr] claws at the resin!", 1)
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
-	health -= rand(40, 60)
-	if(health <= 0)
-		usr << "\green You slice the [name] to pieces."
-		for(var/mob/O in oviewers(src))
-			O.show_message("\red [usr] slices the [name] apart!", 1)
-	healthcheck()
-	return
-
 /obj/effect/alien/resin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	/*if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
@@ -234,7 +219,7 @@ Alien plants should do something if theres a lot of poison
 
 	if(!linked_node || (get_dist(linked_node, src) > linked_node.node_range) )
 		return
-	
+
 	direction_loop:
 		for(var/dirn in cardinal)
 			var/turf/T = get_step(src, dirn)

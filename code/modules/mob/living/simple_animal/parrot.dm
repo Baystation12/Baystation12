@@ -235,9 +235,6 @@
 /mob/living/simple_animal/parrot/attack_paw(mob/living/carbon/monkey/M as mob)
 	attack_hand(M)
 
-/mob/living/simple_animal/parrot/attack_alien(mob/living/carbon/monkey/M as mob)
-	attack_hand(M)
-
 //Simple animals
 /mob/living/simple_animal/parrot/attack_animal(mob/living/simple_animal/M as mob)
 	if(client) return

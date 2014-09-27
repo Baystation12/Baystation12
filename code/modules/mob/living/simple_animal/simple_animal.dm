@@ -228,7 +228,7 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
-	
+
 	adjustBruteLoss(Proj.damage)
 	return 0
 
@@ -269,59 +269,6 @@
 					O.show_message("\red [M] [response_harm] [src]")
 
 	return
-
-/mob/living/simple_animal/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-
-	switch(M.a_intent)
-
-		if ("help")
-
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src] with its scythe like arm."), 1)
-		if ("grab")
-			if(M == src)
-				return
-			if(!(status_flags & CANPUSH))
-				return
-
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )
-
-			M.put_in_active_hand(G)
-
-			grabbed_by += G
-			G.synch()
-			G.affecting = src
-			LAssailant = M
-
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
-
-		if("hurt", "disarm")
-			var/damage = rand(15, 30)
-			visible_message("\red <B>[M] has slashed at [src]!</B>")
-			adjustBruteLoss(damage)
-
-	return
-
-/mob/living/simple_animal/attack_larva(mob/living/carbon/alien/larva/L as mob)
-
-	switch(L.a_intent)
-		if("help")
-			visible_message("\blue [L] rubs it's head against [src]")
-
-
-		else
-
-			var/damage = rand(5, 10)
-			visible_message("\red <B>[L] bites [src]!</B>")
-
-			if(stat != DEAD)
-				adjustBruteLoss(damage)
-				L.amount_grown = min(L.amount_grown + damage, L.max_grown)
-
 
 /mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)

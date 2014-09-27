@@ -418,7 +418,26 @@
 /obj/mecha/attack_hand(mob/user as mob)
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
-	if ((HULK in user.mutations) && !prob(src.deflect_chance))
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(user))
+			if(!prob(src.deflect_chance))
+				src.take_damage(15)
+				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				user << "\red You slash at the armored suit!"
+				visible_message("\red The [user] slashes at [src.name]'s armor!")
+			else
+				src.log_append_to_last("Armor saved.")
+				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				user << "\green Your claws had no effect!"
+				src.occupant_message("\blue The [user]'s claws are stopped by the armor.")
+				visible_message("\blue The [user] rebounds off [src.name]'s armor!")
+		else
+			user.visible_message("<font color='red'><b>[user] hits [src.name]. Nothing happens</b></font>","<font color='red'><b>You hit [src.name] with no visible effect.</b></font>")
+			src.log_append_to_last("Armor saved.")
+		return
+	else if ((HULK in user.mutations) && !prob(src.deflect_chance))
 		src.take_damage(15)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		user.visible_message("<font color='red'><b>[user] hits [src.name], doing some damage.</b></font>", "<font color='red'><b>You hit [src.name] with all your might. The metal creaks and bends.</b></font>")
@@ -429,24 +448,6 @@
 
 /obj/mecha/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
-
-
-/obj/mecha/attack_alien(mob/user as mob)
-	src.log_message("Attack by alien. Attacker - [user].",1)
-	if(!prob(src.deflect_chance))
-		src.take_damage(15)
-		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		user << "\red You slash at the armored suit!"
-		visible_message("\red The [user] slashes at [src.name]'s armor!")
-	else
-		src.log_append_to_last("Armor saved.")
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		user << "\green Your claws had no effect!"
-		src.occupant_message("\blue The [user]'s claws are stopped by the armor.")
-		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
-	return
-
 
 /obj/mecha/attack_animal(mob/living/simple_animal/user as mob)
 	src.log_message("Attack by simple animal. Attacker - [user].",1)

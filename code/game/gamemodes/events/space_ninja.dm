@@ -219,9 +219,8 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		//Xenos and deathsquads take precedence over everything else.
 
 		//Unless the xenos are hiding in a locker somewhere, this'll find em.
-		for(var/mob/living/carbon/alien/humanoid/xeno in player_list)
-			if(istype(xeno))
-				xeno_list += xeno
+		for(var/mob/living/carbon/human/alien/xeno in player_list)
+			xeno_list += xeno
 
 		if(assign_mission)
 			new_ninja.mind.store_memory("<B>Mission:</B> \red [assign_mission].<br>")
@@ -230,11 +229,11 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 			if(xeno_list.len>3)//If there are more than three humanoid xenos on the station, time to get dangerous.
 				//Here we want the ninja to murder all the queens. The other aliens don't really matter.
 				var/xeno_queen_list[] = list()
-				for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_list)
-					if(xeno_queen.mind&&xeno_queen.stat!=2)
+				for(var/mob/living/carbon/human/alien/xeno_queen in xeno_list)
+					if(xeno_queen.species.name == "Xenomorph Queen" && xeno_queen.mind && xeno_queen.stat!=2)
 						xeno_queen_list += xeno_queen
 				if(xeno_queen_list.len&&side=="face")//If there are queen about and the probability is 50.
-					for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_queen_list)
+					for(var/mob/living/carbon/human/alien/xeno_queen in xeno_queen_list)
 						var/datum/objective/assassinate/ninja_objective = new
 						ninja_objective.owner = ninja_mind
 						//We'll do some manual overrides to properly set it up.

@@ -74,6 +74,14 @@
 	colour = "rough"
 	key = "3"
 
+/datum/language/xenos
+	name = "Hivemind"
+	desc = "Xenomorphs have the strange ability to commune over a psychic hivemind."
+	speech_verb = "hisses"
+	colour = "vox"
+	key = "a"
+	flags = RESTRICTED | HIVEMIND
+
 // Language handling.
 /mob/proc/add_language(var/language)
 

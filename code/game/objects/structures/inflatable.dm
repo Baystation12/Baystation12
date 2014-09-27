@@ -83,17 +83,13 @@
 		return
 
 
-	proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_alien, attack_animal, and attack_slime
+	proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_animal and attack_slime
 		health -= damage
 		if(health <= 0)
 			user.visible_message("<span class='danger'>[user] tears open [src]!</span>")
 			deflate(1)
 		else	//for nicer text~
 			user.visible_message("<span class='danger'>[user] tears at [src]!</span>")
-
-	attack_alien(mob/user as mob)
-		if(islarva(user)) return
-		attack_generic(user, 15)
 
 	attack_animal(mob/user as mob)
 		if(!isanimal(user)) return

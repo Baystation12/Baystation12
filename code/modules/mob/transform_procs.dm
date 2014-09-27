@@ -197,14 +197,7 @@
 		del(t)
 
 	var/alien_caste = pick("Hunter","Sentinel","Drone")
-	var/mob/living/carbon/alien/humanoid/new_xeno
-	switch(alien_caste)
-		if("Hunter")
-			new_xeno = new /mob/living/carbon/alien/humanoid/hunter(loc)
-		if("Sentinel")
-			new_xeno = new /mob/living/carbon/alien/humanoid/sentinel(loc)
-		if("Drone")
-			new_xeno = new /mob/living/carbon/alien/humanoid/drone(loc)
+	var/mob/living/carbon/human/alien/new_xeno = create_new_xenomorph(alien_caste,loc)
 
 	new_xeno.a_intent = "hurt"
 	new_xeno.key = key

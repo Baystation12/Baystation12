@@ -1,4 +1,7 @@
 /mob/living/carbon/human/say(var/message)
+
+	//TODO: Add checks for species who do not speak common.
+
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = world.view
@@ -37,6 +40,10 @@
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
+
+		if(speaking.flags & HIVEMIND)
+			world << "[src] attempted to speak a hivemind language."
+			return
 
 	message = capitalize(trim(message))
 
@@ -125,8 +132,8 @@
 
 	var/sound/speech_sound
 	var/sound_vol
-	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
-		speech_sound = sound('sound/voice/shriek1.ogg')
+	if(species.speech_sounds && prob(20))
+		speech_sound = sound(pick(species.speech_sounds))
 		sound_vol = 50
 
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
@@ -172,8 +179,8 @@
 
 	//These only pertain to common. Languages are handled by mob/say_understands()
 	if (!speaking)
-		if (istype(other, /mob/living/carbon/monkey/diona))
-			if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+		if (istype(other, /mob/living/carbon/alien/diona))
+			if(other.languages.len >= 2) //They've sucked down some blood and can speak common now.
 				return 1
 		if (istype(other, /mob/living/silicon))
 			return 1
