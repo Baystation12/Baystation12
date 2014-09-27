@@ -107,6 +107,17 @@
 			if(robot_talk_understand || binarycheck())
 				robot_talk(message)
 			return
+			
+		if("paichat")
+			// paichat is only available if you have a headset
+			if(l_ear && istype(l_ear, /obj/item/device/radio))
+				used_radios += l_ear
+				src.sayToPai(message, verb, speaking, l_ear)
+				
+			else if(r_ear && istype(r_ear, /obj/item/device/radio))
+				used_radios += r_ear
+				src.sayToPai(message, verb, speaking, r_ear)
+			
 		if("changeling")
 			if(mind && mind.changeling)
 				for(var/mob/Changeling in mob_list)
@@ -281,3 +292,20 @@
 	returns[3] = handled
 
 	return returns
+
+	
+/mob/living/carbon/human/proc/sayToPai(message, var/verb = "says", var/datum/language/speaking = null, var/headset = null)
+	var/list/recipients = list()
+	
+	// Always include sender, so they get feedback
+	recipients += src
+	
+	for(var/mob/M in player_list)
+		if(istype(M, /mob/living/silicon/pai))
+			var/mob/living/silicon/pai/P = M
+			var/mob/carrier = P.findPaiCarrier()
+			
+			if(carrier == src)
+				recipients += M
+	
+	paiChatSay(message, recipients, verb, speaking, headset)

@@ -15,6 +15,7 @@ var/list/department_radio_keys = list(
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
 	  ":d" = "dronechat",	"#d" = "dronechat",		".d" = "dronechat",
+	  ":p" = "paichat",		"#p" = "paichat",		".p" = "paichat",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -32,6 +33,7 @@ var/list/department_radio_keys = list(
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
 	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
 	  ":D" = "dronechat",	"#D" = "dronechat",		".D" = "dronechat",
+	  ":P" = "paichat",		"#P" = "paichat",		".P" = "paichat",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -50,6 +52,7 @@ var/list/department_radio_keys = list(
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
 	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
+	  // TODO: pseudolocalization of paichat keys
 )
 
 /mob/living/proc/binarycheck()
@@ -179,3 +182,13 @@ var/list/department_radio_keys = list(
 
 /mob/living/proc/GetVoice()
 	return name
+	
+/mob/living/proc/paiChatSay(message, var/list/recipients, var/verb = "says", var/datum/language/speaking = null, var/device = null)
+
+	// This imitates radio styling, but is actually not radio. If radio styling changes, this has to change, too
+	var/part_a = "<span class='paichat'><span class='name'>"
+	var/icon_part = device == null ? "" : "\icon[device]"
+	var/part_b = "</span><b> [icon_part]\[PAI\]</b> <span class='message'>"
+	
+	for(var/mob/R in recipients)
+		R.hear_radio(message, verb, speaking, part_a, part_b, src)

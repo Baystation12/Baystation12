@@ -38,6 +38,8 @@ em						{font-style: normal;	font-weight: bold;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
 
+.paichat				{color: #2f2f54;}
+
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
 
