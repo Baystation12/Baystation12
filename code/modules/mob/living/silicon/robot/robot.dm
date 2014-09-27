@@ -1,3 +1,9 @@
+var/list/robot_verbs_default = list(
+	/mob/living/silicon/robot/proc/sensor_mode
+)
+
+#define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
+
 /mob/living/silicon/robot
 	name = "Cyborg"
 	real_name = "Cyborg"
@@ -6,11 +12,14 @@
 	maxHealth = 200
 	health = 200
 
+	var/lights_on = 0 // Is our integrated light on?
+	var/used_power_this_tick = 0
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
+	var/integrated_light_power = 5
 
 //Hud stuff
 
@@ -71,6 +80,8 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
+	add_language("Robot Talk", 1)
+
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
@@ -117,6 +128,8 @@
 		var/datum/robot_component/cell_component = components["power cell"]
 		cell_component.wrapped = cell
 		cell_component.installed = 1
+
+	add_robot_verbs()
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
@@ -377,10 +390,20 @@
 	var/dat = "<HEAD><TITLE>[src.name] Self-Diagnosis Report</TITLE></HEAD><BODY>\n"
 	for (var/V in components)
 		var/datum/robot_component/C = components[V]
-		dat += "<b>[C.name]</b><br><table><tr><td>Power consumption</td><td>[C.energy_consumption]</td></tr><tr><td>Brute Damage:</td><td>[C.brute_damage]</td></tr><tr><td>Electronics Damage:</td><td>[C.electronics_damage]</td></tr><tr><td>Powered:</td><td>[(!C.energy_consumption || C.is_powered()) ? "Yes" : "No"]</td></tr><tr><td>Toggled:</td><td>[ C.toggled ? "Yes" : "No"]</td></table><br>"
+		dat += "<b>[C.name]</b><br><table><tr><td>Brute Damage:</td><td>[C.brute_damage]</td></tr><tr><td>Electronics Damage:</td><td>[C.electronics_damage]</td></tr><tr><td>Powered:</td><td>[(!C.idle_usage || C.is_powered()) ? "Yes" : "No"]</td></tr><tr><td>Toggled:</td><td>[ C.toggled ? "Yes" : "No"]</td></table><br>"
 
 	return dat
 
+/mob/living/silicon/robot/verb/toggle_lights()
+	set category = "Robot Commands"
+	set name = "Toggle Lights"
+
+	lights_on = !lights_on
+	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
+	if(lights_on)
+		SetLuminosity(6) // 1.5x luminosity of flashlight
+	else
+		SetLuminosity(0)
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -389,6 +412,9 @@
 	if(!is_component_functioning("diagnosis unit"))
 		src << "\red Your self-diagnosis component isn't functioning."
 
+	var/datum/robot_component/CO = get_component("diagnosis unit")
+	if (!cell_use_power(CO.active_usage))
+		src << "\red Low Power."
 	var/dat = self_diagnosis()
 	src << browse(dat, "window=robotdiagnosis")
 
@@ -458,7 +484,9 @@
 // this function displays the cyborgs current cell charge in the stat panel
 /mob/living/silicon/robot/proc/show_cell_power()
 	if(cell)
-		stat(null, text("Charge Left: [cell.charge]/[cell.maxcharge]"))
+		stat(null, text("Charge Left: [round(cell.percent())]%"))
+		stat(null, text("Cell Rating: [round(cell.maxcharge)]")) // Round just in case we somehow get crazy values
+		stat(null, text("Power Cell Load: [round(used_power_this_tick)]W"))
 	else
 		stat(null, text("No Cell Inserted!"))
 
@@ -470,6 +498,7 @@
 	if (client.statpanel == "Status")
 		show_cell_power()
 		show_jetpack_pressure()
+		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
 
 /mob/living/silicon/robot/restrained()
 	return 0
@@ -613,16 +642,16 @@
 			user << "Need more welding fuel!"
 			return
 
-	else if(istype(W, /obj/item/weapon/cable_coil) && (wiresexposed || istype(src,/mob/living/silicon/robot/drone)))
+	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || istype(src,/mob/living/silicon/robot/drone)))
 		if (!getFireLoss())
 			user << "Nothing to fix here!"
 			return
-		var/obj/item/weapon/cable_coil/coil = W
-		adjustFireLoss(-30)
-		updatehealth()
-		coil.use(1)
-		for(var/mob/O in viewers(user, null))
-			O.show_message(text("\red [user] has fixed some of the burnt wires on [src]!"), 1)
+		var/obj/item/stack/cable_coil/coil = W
+		if (coil.use(1))
+			adjustFireLoss(-30)
+			updatehealth()
+			for(var/mob/O in viewers(user, null))
+				O.show_message(text("\red [user] has fixed some of the burnt wires on [src]!"), 1)
 
 	else if (istype(W, /obj/item/weapon/crowbar))	// crowbar means open or close the cover
 		if(opened)
@@ -819,72 +848,6 @@
 		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
 			spark_system.start()
 		return ..()
-
-/mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
-	switch(M.a_intent)
-
-		if ("help")
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src]'s plating with its scythe-like arm."), 1)
-
-		if ("grab")
-			if (M == src)
-				return
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )
-
-			M.put_in_active_hand(G)
-
-			grabbed_by += G
-			G.synch()
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
-
-		if ("hurt")
-			var/damage = rand(10, 20)
-			if (prob(90))
-
-				playsound(loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
-				if(prob(8))
-					flick("noise", flash)
-				adjustBruteLoss(damage)
-				updatehealth()
-			else
-				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
-
-		if ("disarm")
-			if(!(lying))
-				if (rand(1,100) <= 85)
-					Stun(7)
-					step(src,get_dir(M,src))
-					spawn(5) step(src,get_dir(M,src))
-					playsound(loc, 'sound/weapons/pierce.ogg', 50, 1, -1)
-					for(var/mob/O in viewers(src, null))
-						if ((O.client && !( O.blinded )))
-							O.show_message(text("\red <B>[] has forced back []!</B>", M, src), 1)
-				else
-					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-					for(var/mob/O in viewers(src, null))
-						if ((O.client && !( O.blinded )))
-							O.show_message(text("\red <B>[] attempted to force back []!</B>", M, src), 1)
-	return
-
-
 
 /mob/living/silicon/robot/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
@@ -1298,3 +1261,38 @@
 			return
 	else
 		src << "Your icon has been set. You now require a module reset to change it."
+
+/mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
+	set name = "Set Sensor Augmentation"
+	set category = "Robot Commands"
+	set desc = "Augment visual feed with internal sensor overlays."
+	toggle_sensor_mode()
+
+/mob/living/silicon/robot/proc/add_robot_verbs()
+	src.verbs |= robot_verbs_default
+
+/mob/living/silicon/robot/proc/remove_robot_verbs()
+	src.verbs -= robot_verbs_default
+
+// Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
+// Properly converts using CELLRATE now! Amount is in Joules.
+/mob/living/silicon/robot/proc/cell_use_power(var/amount = 0)
+	// No cell inserted
+	if(!cell)
+		return 0
+
+	// Power cell is empty.
+	if(cell.charge == 0)
+		return 0
+
+	if(cell.use(amount * CELLRATE * CYBORG_POWER_USAGE_MULTIPLIER))
+		used_power_this_tick += amount * CYBORG_POWER_USAGE_MULTIPLIER
+		return 1
+	return 0
+
+/mob/living/silicon/robot/binarycheck()
+	if(is_component_functioning("comms"))
+		var/datum/robot_component/RC = get_component("comms")
+		use_power(RC.active_usage)
+		return 1
+	return 0

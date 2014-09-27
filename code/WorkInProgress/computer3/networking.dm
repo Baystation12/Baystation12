@@ -64,7 +64,7 @@
 	desc = "Radio module for computers"
 
 	var/datum/radio_frequency/radio_connection	= null
-	var/frequency = 1459
+	var/frequency = PUB_FREQ
 	var/filter = null
 	var/range = null
 	var/subspace = 0

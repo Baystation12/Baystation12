@@ -128,6 +128,11 @@
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease process()
+	var/is_washing = 0
+
+/obj/machinery/shower/New()
+	..()
+	create_reagents(2)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -285,9 +290,21 @@
 				del(E)
 
 /obj/machinery/shower/process()
-	if(!on || !mobpresent) return
+	if(!on) return
+	wash_floor()
+	if(!mobpresent)	return
 	for(var/mob/living/carbon/C in loc)
 		check_heat(C)
+
+/obj/machinery/shower/proc/wash_floor()
+	if(!ismist && is_washing)
+		return
+	is_washing = 1
+	var/turf/T = get_turf(src)
+	reagents.add_reagent("water", 2)
+	T.clean(src)
+	spawn(100)
+		is_washing = 0
 
 /obj/machinery/shower/proc/check_heat(mob/M as mob)
 	if(!on || watertemp == "normal") return

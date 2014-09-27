@@ -5,7 +5,8 @@
 var/global/list/map_sectors = list()
 
 /hook/startup/proc/build_map()
-	accessable_z_levels = list() //no space travel with this system, at least not like this
+	if(!config.use_overmap)
+		return 1
 	testing("Building overmap...")
 	var/obj/effect/mapinfo/data
 	for(var/level in 1 to world.maxz)
@@ -93,3 +94,31 @@ var/global/list/map_sectors = list()
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	anchored = 1
+
+//Space stragglers go here
+
+/obj/effect/map/sector/temporary
+	name = "Deep Space"
+	icon_state = ""
+	always_known = 0
+
+/obj/effect/map/sector/temporary/New(var/nx, var/ny, var/nz)
+	loc = locate(nx, ny, OVERMAP_ZLEVEL)
+	map_z = nz
+	map_sectors["[map_z]"] = src
+	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z].")
+
+/obj/effect/map/sector/temporary/Del()
+	map_sectors["[map_z]"] = null
+	testing("Temporary sector at [x],[y] was deleted.")
+	if (can_die())
+		testing("Associated zlevel disappeared.")
+		world.maxz--
+
+/obj/effect/map/sector/temporary/proc/can_die(var/mob/observer)
+	testing("Checking if sector at [map_z] can die.")
+	for(var/mob/M in player_list)
+		if(M != observer && M.z == map_z)
+			testing("There are people on it.")
+			return 0
+	return 1

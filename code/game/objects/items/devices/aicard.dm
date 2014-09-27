@@ -37,11 +37,9 @@
 		for(var/mob/living/silicon/ai/A in src)
 			dat += "Stored AI: [A.name]<br>System integrity: [(A.health+100)/2]%<br>"
 
-			for (var/index = 1, index <= A.laws.ion.len, index++)
-				var/law = A.laws.ion[index]
-				if (length(law) > 0)
-					var/num = ionnum()
-					laws += "[num]. [law]"
+			for (var/law in A.laws.ion)
+				if(law)
+					laws += "[ionnum()]: [law]<BR>"
 
 			if (A.laws.zeroth)
 				laws += "0: [A.laws.zeroth]<BR>"

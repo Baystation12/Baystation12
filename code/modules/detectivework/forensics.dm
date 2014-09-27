@@ -31,7 +31,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		if(prob(15*item_multiplier) && !(fibertext in suit_fibers))
 			suit_fibers += fibertext
 
-	if(M.gloves && (M.w_uniform.body_parts_covered & ~suit_coverage))
+	if(M.gloves && (M.gloves.body_parts_covered & ~suit_coverage))
 		fibertext = "Material from a pair of [M.gloves.name]."
 		if(prob(20*item_multiplier) && !(fibertext in suit_fibers))
 			suit_fibers += "Material from a pair of [M.gloves.name]."

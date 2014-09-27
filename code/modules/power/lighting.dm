@@ -128,24 +128,24 @@
 				src.icon_state = "tube-construct-stage1"
 			if("bulb")
 				src.icon_state = "bulb-construct-stage1"
-		new /obj/item/weapon/cable_coil(get_turf(src.loc), 1, "red")
+		new /obj/item/stack/cable_coil(get_turf(src.loc), 1, "red")
 		user.visible_message("[user.name] removes the wiring from [src].", \
 			"You remove the wiring from [src].", "You hear a noise.")
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		return
 
-	if(istype(W, /obj/item/weapon/cable_coil))
+	if(istype(W, /obj/item/stack/cable_coil))
 		if (src.stage != 1) return
-		var/obj/item/weapon/cable_coil/coil = W
-		coil.use(1)
-		switch(fixture_type)
-			if ("tube")
-				src.icon_state = "tube-construct-stage2"
-			if("bulb")
-				src.icon_state = "bulb-construct-stage2"
-		src.stage = 2
-		user.visible_message("[user.name] adds wires to [src].", \
-			"You add wires to [src].")
+		var/obj/item/stack/cable_coil/coil = W
+		if (coil.use(1))
+			switch(fixture_type)
+				if ("tube")
+					src.icon_state = "tube-construct-stage2"
+				if("bulb")
+					src.icon_state = "bulb-construct-stage2"
+			src.stage = 2
+			user.visible_message("[user.name] adds wires to [src].", \
+				"You add wires to [src].")
 		return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
@@ -454,17 +454,6 @@
 	src.flicker(1)
 	return
 
-// Aliens smash the bulb but do not get electrocuted./N
-/obj/machinery/light/attack_alien(mob/living/carbon/alien/humanoid/user)//So larva don't go breaking light bulbs.
-	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
-		user << "\green That object is useless to you."
-		return
-	else if (status == LIGHT_OK||status == LIGHT_BURNED)
-		for(var/mob/M in viewers(src))
-			M.show_message("\red [user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
-		broken()
-	return
-
 /obj/machinery/light/attack_animal(mob/living/simple_animal/M)
 	if(M.melee_damage_upper == 0)	return
 	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
@@ -485,6 +474,14 @@
 	if(status == LIGHT_EMPTY)
 		user << "There is no [fitting] in this light."
 		return
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			for(var/mob/M in viewers(src))
+				M.show_message("\red [user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
+			broken()
+			return
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)

@@ -72,12 +72,12 @@
 		return
 
 	var/mob/selected = null
-	for(var/mob/M in player_list)
+	for(var/mob/living/M in player_list)
 		//Dead people only thanks!
 		if ((M.stat != 2) || (!M.client))
 			continue
 		//They need a brain!
-		if ((istype(M, /mob/living/carbon/human)) && (M:brain_op_stage >= 4.0))
+		if ((istype(M, /mob/living/carbon/human)) && (!M.has_brain()))
 			continue
 
 		if (M.ckey == find_key)
@@ -209,9 +209,7 @@
 	H.dna.UpdateSE()
 	H.dna.UpdateUI()
 
-	H.f_style = "Shaved"
-	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
-		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
+	H.set_cloned_appearance()
 
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)

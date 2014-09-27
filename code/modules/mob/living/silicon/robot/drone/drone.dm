@@ -13,6 +13,8 @@
 	lawupdate = 0
 	density = 1
 	req_access = list(access_engine, access_robotics)
+	integrated_light_power = 2
+	local_transmit = 1
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.
@@ -29,6 +31,13 @@
 /mob/living/silicon/robot/drone/New()
 
 	..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
+	remove_language("Robot Talk")
+	add_language("Robot Talk", 0)
+	add_language("Drone Talk", 1)
 
 	if(camera && "Robots" in camera.network)
 		camera.network.Add("Engineering")
@@ -86,57 +95,6 @@
 
 /mob/living/silicon/robot/drone/pick_module()
 	return
-
-//Drones can only use binary and say emotes. NOTHING else.
-//TBD, fix up boilerplate. ~ Z
-/mob/living/silicon/robot/drone/say(var/message)
-
-	if (!message)
-		return
-
-	if (src.client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "You cannot send IC messages (muted)."
-			return
-		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
-
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-
-	if (stat == 2)
-		return say_dead(message)
-
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
-	else if(length(message) >= 2)
-
-		if(parse_message_mode(message, "NONE") == "dronechat")
-
-			if(!is_component_functioning("radio"))
-				src << "\red Your radio transmitter isn't functional."
-				return
-
-			for (var/mob/living/S in living_mob_list)
-				if(istype(S, /mob/living/silicon/robot/drone))
-					S << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[trim(copytext(message,3))]\"</span></span></i>"
-
-			for (var/mob/M in dead_mob_list)
-				if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain))
-					M << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[trim(copytext(message,3))]\"</span></span></i>"
-
-		else
-
-			var/list/listeners = hearers(5,src)
-			listeners |= src
-
-			for(var/mob/living/silicon/robot/drone/D in listeners)
-				if(D.client) D << "<b>[src]</b> transmits, \"[message]\""
-
-			for (var/mob/M in player_list)
-				if (istype(M, /mob/new_player))
-					continue
-				else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
-					if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
 /mob/living/silicon/robot/drone/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -348,3 +306,7 @@
 	else
 		src << "<span class='warning'>You are too small to pull that.</span>"
 		return
+
+/mob/living/silicon/robot/drone/add_robot_verbs()
+
+/mob/living/silicon/robot/drone/remove_robot_verbs()

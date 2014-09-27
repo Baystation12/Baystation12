@@ -33,7 +33,7 @@
 		return
 	switch(state)
 		if(1)
-			if(istype(P, /obj/item/weapon/cable_coil))
+			if(istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << "\blue You start to add cables to the frame."
@@ -80,7 +80,7 @@
 				user << "\blue You remove the cables."
 				state = 1
 				icon_state = "wm_0"
-				var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
+				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 				A.amount = 5
 
 		if(3)
@@ -136,11 +136,11 @@
 				for(var/I in req_components)
 					if(istype(P, text2path(I)) && (req_components[I] > 0))
 						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						if(istype(P, /obj/item/weapon/cable_coil))
-							var/obj/item/weapon/cable_coil/CP = P
+						if(istype(P, /obj/item/stack/cable_coil))
+							var/obj/item/stack/cable_coil/CP = P
 							if(CP.amount > 1)
 								var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
-								var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src)
+								var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src)
 								CC.amount = camt
 								CC.update_icon()
 								CP.use(camt)
@@ -155,7 +155,7 @@
 						update_desc()
 						break
 				user << desc
-				if(P.loc != src && !istype(P, /obj/item/weapon/cable_coil))
+				if(P.loc != src && !istype(P, /obj/item/stack/cable_coil))
 					user << "\red You cannot add that component to the machine!"
 
 /obj/item/weapon/circuitboard/firealarm
@@ -168,7 +168,7 @@
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/capacitor" = 1,
-							"/obj/item/weapon/cable_coil" = 2)
+							"/obj/item/stack/cable_coil" = 2)
 
 /obj/item/weapon/circuitboard/alarm
 	name = "Circuit board (Atmospheric Alarm)"
@@ -180,7 +180,7 @@
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
-							"/obj/item/weapon/cable_coil" = 2)
+							"/obj/item/stack/cable_coil" = 2)
 
 /* oh right, not a machine :(
 /obj/item/weapon/circuitboard/intercom
@@ -192,7 +192,7 @@
 	contain_parts = 0
 	req_components = list(
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
-							"/obj/item/weapon/cable_coil" = 2)
+							"/obj/item/stack/cable_coil" = 2)
 */
 
 /* too complex to set up the dept for an RC in a way intuitive for the user
@@ -206,7 +206,7 @@
 	req_components = list(
 							"/obj/item/device/radio" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1
-							"/obj/item/weapon/cable_coil" = 1)
+							"/obj/item/stack/cable_coil" = 1)
 */
 
 /obj/item/weapon/circuitboard/status_display
@@ -218,7 +218,7 @@
 	contain_parts = 0
 	req_components = list(
 							"/obj/item/weapon/stock_parts/console_screen" = 2,
-							"/obj/item/weapon/cable_coil" = 1)
+							"/obj/item/stack/cable_coil" = 1)
 
 /obj/item/weapon/circuitboard/light_switch
 	name = "Circuit board (Light Switch)"
@@ -228,4 +228,4 @@
 	frame_desc = "Requires 2 pieces of cable."
 	contain_parts = 0
 	req_components = list(
-							"/obj/item/weapon/cable_coil" = 2)
+							"/obj/item/stack/cable_coil" = 2)

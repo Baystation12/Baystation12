@@ -1080,6 +1080,17 @@
 	item_color = "lillian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
+////// Cybernetic Casings - Parker Eliza - MrSnapwalk
+/obj/item/clothing/under/fluff/parkereliza
+	name = "cybernetic casings"
+	desc = "A set of somewhat bulky white casings for robotic limbs, paired with a basic blue tank top and black cargo pants. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "parker_eliza"
+	item_state = "parker_eliza"
+	item_color = "parker_eliza"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+
+
 ////////////// Accessories /////
 
 //////////////////// Blood Red Pendant - Mewth - Mu'taz Radi ////////////////

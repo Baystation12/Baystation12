@@ -166,8 +166,7 @@
 	else if(istype(W,/obj/item/stack/sheet/metal))
 		if(buildstate == 2)
 			var/obj/item/stack/sheet/metal/M = W
-			if(M.amount >= 5)
-				M.use(5)
+			if(M.use(5))
 				user << "\blue You assemble a chassis around the cannon frame."
 				buildstate++
 				update_icon()

@@ -16,12 +16,12 @@
 	return 0
 
 /proc/isalien(A)
-	if(istype(A, /mob/living/carbon/alien))
+	if(istype(A, /mob/living/carbon/alien) || istype(A,/mob/living/carbon/human/alien))
 		return 1
 	return 0
 
 /proc/isalienadult(A)
-	if(istype(A, /mob/living/carbon/alien/humanoid))
+	if(istype(A, /mob/living/carbon/human/alien))
 		return 1
 	return 0
 
@@ -115,6 +115,17 @@ proc/isorgan(A)
 		return 1
 	return 0
 
+proc/isdeaf(A)
+	if(istype(A, /mob))
+		var/mob/M = A
+		return (M.sdisabilities & DEAF) || M.ear_deaf
+	return 0
+
+proc/isnewplayer(A)
+	if(istype(A, /mob/new_player))
+		return 1
+	return 0
+
 proc/hasorgans(A)
 	return ishuman(A)
 
@@ -178,7 +189,7 @@ var/list/global/organ_rel_size = list(
 
 	var/ran_zone = zone
 	while (ran_zone == zone)
-		ran_zone = pick ( 
+		ran_zone = pick (
 			organ_rel_size["head"]; "head",
 			organ_rel_size["chest"]; "chest",
 			organ_rel_size["groin"]; "groin",
@@ -191,7 +202,7 @@ var/list/global/organ_rel_size = list(
 			organ_rel_size["l_foot"]; "l_foot",
 			organ_rel_size["r_foot"]; "r_foot",
 		)
-	
+
 	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
@@ -330,11 +341,11 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)  
+	if(!M || !M.client || M.shakecamera)
 		return
 	M.shakecamera = 1
 	spawn(1)
-		
+
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
 		if(istype(oldeye, /mob/aiEye))
@@ -412,3 +423,16 @@ var/list/intents = list("help","disarm","grab","hurt")
 				hud_used.action_intent.icon_state = "harm"
 			else
 				hud_used.action_intent.icon_state = "help"
+
+/proc/broadcast_security_hud_message(var/message, var/broadcast_source)
+	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
+
+/proc/broadcast_medical_hud_message(var/message, var/broadcast_source)
+	broadcast_hud_message(message, broadcast_source, med_hud_users, /obj/item/clothing/glasses/hud/health)
+
+/proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
+	var/turf/sourceturf = get_turf(broadcast_source)
+	for(var/mob/M in targets)
+		var/turf/targetturf = get_turf(M)
+		if((targetturf.z == sourceturf.z))
+			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)

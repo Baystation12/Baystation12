@@ -495,7 +495,7 @@ client
 
 		src.give_disease(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
-		
+
 	else if(href_list["give_disease2"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
@@ -777,6 +777,9 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 
+		// Clear out their species abilities.
+		H.species.remove_inherent_verbs(H)
+
 		if(H.set_species(new_species))
 			usr << "Set species of [H] to [H.species]."
 			H.regenerate_icons()
@@ -827,9 +830,9 @@ client
 
 	else if(href_list["addverb"])
 		if(!check_rights(R_DEBUG))      return
-		
+
 		var/mob/living/H = locate(href_list["addverb"])
-		
+
 		if(!istype(H))
 			usr << "This can only be done to instances of type /mob/living"
 			return
@@ -845,7 +848,7 @@ client
 				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
-		
+
 		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -854,7 +857,7 @@ client
 			return
 		else
 			H.verbs += verb
-		
+
 	else if(href_list["remverb"])
 		if(!check_rights(R_DEBUG))      return
 
@@ -872,7 +875,7 @@ client
 		else
 			H.verbs -= verb
 
-	
+
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return
 
@@ -881,11 +884,11 @@ client
 		if(!istype(H) || !H.client)
 			usr << "This can only be done on mobs with clients"
 			return
-		
-				
+
+
 
 		nanomanager.send_resources(H.client)
-		
+
 		usr << "Resource files sent"
 		H << "Your NanoUI Resource files have been refreshed"
 
