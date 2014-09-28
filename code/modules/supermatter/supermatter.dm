@@ -1,5 +1,5 @@
 
-#define NITROGEN_RETARDATION_FACTOR 4        //Higher == N2 slows reaction more
+#define NITROGEN_RETARDATION_FACTOR 0.15        //Higher == N2 slows reaction more
 #define THERMAL_RELEASE_MODIFIER 750               //Higher == more heat released during reaction
 #define PHORON_RELEASE_MODIFIER 1500                //Higher == less phoron released by reaction
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
@@ -181,7 +181,7 @@
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
 	if(!env || !removed || !removed.total_moles)
-		damage += max((power-(2*CRITICAL_TEMPERATURE*POWER_FACTOR))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+		damage += max((power - 15*POWER_FACTOR)/10, 0)
 	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
 		env.remove(env.total_moles)
 	else
@@ -190,7 +190,7 @@
 		damage = max( damage + min( ( (removed.temperature - CRITICAL_TEMPERATURE) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+		oxygen = max(min((removed.gas["oxygen"] - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 1), 0)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
