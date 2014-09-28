@@ -20,7 +20,7 @@
 				message = copytext(message,3)
 			
 			message = trim(message)
-			paiChatSay(message, recipients, verb, speaking, src)
+			paiChatSay(message, recipients, verb, speaking, src.card)
 			
 			return
 	..(msg)
