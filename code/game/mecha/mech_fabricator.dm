@@ -60,9 +60,9 @@
 						/obj/item/mecha_parts/part/ripley_left_leg,
 						/obj/item/mecha_parts/part/ripley_right_leg
 					),
-	"Hoverpod"=list(
-						/obj/structure/largecrate/hoverpod // Doesn't work, even with required vars. Why? - Gamerofthegame
-					),
+//	"Hoverpod"=list(
+//						/obj/structure/largecrate/hoverpod // Doesn't work, even with required vars. Why? - Gamerofthegame
+//					),
 	"Odysseus"=list(
 						/obj/item/mecha_parts/chassis/odysseus,
 						/obj/item/mecha_parts/part/odysseus_torso,
