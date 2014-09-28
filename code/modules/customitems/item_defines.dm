@@ -1330,6 +1330,14 @@
 	item_state = "sakura_hokkaido_kimono"
 	item_color = "sakura_hokkaido_kimono"
 
+/obj/item/clothing/under/fluff/chloe_kimono
+	name = "Chloe's Kimono"
+	desc = "A masterfully crafted deep blue kimono with a rich red and pure gold obi. There is a embroidered design of summer cherry blossoms covering the bottom of the kimono."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "chloe_kimono"
+	item_state = "chloe_kimono"
+	item_color = "chloe_kimono"
+
 ///////////////////////////// Astronovus - Harold's Cane ////////////////////////////
 
 /obj/item/weapon/cane/fluff/harold

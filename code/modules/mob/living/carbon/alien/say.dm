@@ -25,8 +25,7 @@
 	if (!message)
 		return
 
-	var/message_a = say_quote(message)
-	var/rendered = "<i><span class='game say'>Hivemind, <span class='name'>[name]</span> <span class='message'>[message_a]</span></span></i>"
+	var/rendered = "<i><span class='game say'>Hivemind, <span class='name'>[name]</span> <span class='message'>says [message]</span></span></i>"
 	for (var/mob/living/S in player_list)
 		if(!S.stat)
 			if(S.alien_talk_understand)
@@ -49,17 +48,12 @@
 		var/message_b
 
 		message_b = "hsssss"
-		message_b = say_quote(message_b)
 		message_b = "<i>[message_b]</i>"
 
 		rendered = "<i><span class='game say'><span class='name'>[voice_name]</span> <span class='message'>[message_b]</span></span></i>"
 
 		for (var/mob/M in heard)
 			M.show_message(rendered, 2)
-
-	message = say_quote(message)
-
-	rendered = "<i><span class='game say'>Hivemind, <span class='name'>[name]</span> <span class='message'>[message_a]</span></span></i>"
 
 	for (var/mob/M in player_list)
 		if (istype(M, /mob/new_player))

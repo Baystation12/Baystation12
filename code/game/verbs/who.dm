@@ -7,9 +7,21 @@
 
 	var/list/Lines = list()
 
-	if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
-		for(var/client/C in clients)
-			var/entry = "\t[C.key]"
+	//if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
+	for(var/client/C in clients)
+		var/entry = ""
+		if(C.holder && !C.holder.fakekey)
+			entry = "<b><font color='#1b521f'>{Staff}</font> --</b> [C.key]"
+		else if(is_donator(C) && is_veteran(C))
+			entry = "<b><font color='#4B0082'>{Veteran donator}</font> --</b> [C.key]"
+		else if(is_donator(C))
+			entry = "<b><font color='#1606D1'>{Donator}</font> --</b> [C.key]"
+		else if(is_veteran(C))
+			entry = "<b><font color='#8904B1'>{Veteran}</font> --</b> [C.key]"
+		else
+			entry = "<b><font color='#585858'>{Player}</font> --</b> [C.key]"
+
+		if(holder)
 			if(C.holder && C.holder.fakekey)
 				entry += " <i>(as [C.holder.fakekey])</i>"
 			entry += " - Playing as [C.mob.real_name]"
@@ -28,13 +40,7 @@
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
-			Lines += entry
-	else
-		for(var/client/C in clients)
-			if(C.holder && C.holder.fakekey)
-				Lines += C.holder.fakekey
-			else
-				Lines += C.key
+		Lines += entry
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"

@@ -497,10 +497,16 @@
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) back item ([target.back])</font>")
 				message = "\red <B>[source] is trying to take off \a [target.back] from [target]'s back!</B>"
 			if("handcuff")
+				if (ispai(source))
+					message = "\red <B> You are not dexterous enough to do this.</B>"
+					return
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Was unhandcuffed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to unhandcuff [target.name]'s ([target.ckey])</font>")
 				message = "\red <B>[source] is trying to unhandcuff [target]!</B>"
 			if("legcuff")
+				if (ispai(source))
+					message = "\red <B> You are not dexterous enough to do this.</B>"
+					return
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Was unlegcuffed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to unlegcuff [target.name]'s ([target.ckey])</font>")
 				message = "\red <B>[source] is trying to unlegcuff [target]!</B>"

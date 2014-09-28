@@ -33,6 +33,8 @@
 	callHook("startup")
 	//Emergency Fix
 	load_mods()
+	load_donators()
+	load_veterans()
 	//end-emergency fix
 
 	src.update_status()

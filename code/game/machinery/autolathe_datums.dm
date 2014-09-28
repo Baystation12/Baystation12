@@ -28,37 +28,37 @@
 /datum/autolathe/recipe/crowbar
 	name = "crowbar"
 	path = /obj/item/weapon/crowbar
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/multitool
 	name = "multitool"
 	path = /obj/item/device/multitool
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/t_scanner
 	name = "T-ray scanner"
 	path = /obj/item/device/t_scanner
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/weldertool
 	name = "welding tool"
 	path = /obj/item/weapon/weldingtool
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/screwdriver
 	name = "screwdriver"
 	path = /obj/item/weapon/screwdriver
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/wirecutters
 	name = "wirecutters"
 	path = /obj/item/weapon/wirecutters
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/wrench
 	name = "wrench"
 	path = /obj/item/weapon/wrench
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/radio_headset
 	name = "radio headset"
@@ -73,7 +73,7 @@
 /datum/autolathe/recipe/weldermask
 	name = "welding mask"
 	path = /obj/item/clothing/head/welding
-	category = "General"
+	category = "Engineering"
 
 /datum/autolathe/recipe/metal
 	name = "steel sheets"
@@ -107,7 +107,7 @@
 /datum/autolathe/recipe/taperecorder
 	name = "tape recorder"
 	path = /obj/item/device/taperecorder
-	category = "General"
+	category = "Security"
 
 /datum/autolathe/recipe/airlockmodule
 	name = "airlock electronics"
@@ -187,17 +187,17 @@
 /datum/autolathe/recipe/shotgun_blanks
 	name = "ammunition (shotgun, blanks)"
 	path = /obj/item/ammo_casing/shotgun/blank
-	category = "Arms and Ammunition"
+	category = "Security"
 
 /datum/autolathe/recipe/shotgun_beanbag
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
-	category = "Arms and Ammunition"
+	category = "Security"
 
-/datum/autolathe/recipe/magazine_rubber
-	name = "ammunition (rubber)"
-	path = /obj/item/ammo_magazine/c45r
-	category = "Arms and Ammunition"
+/datum/autolathe/recipe/magazine_c38
+	name = "ammunition (c38)"
+	path = /obj/item/ammo_magazine/c38
+	category = "Security"
 
 /datum/autolathe/recipe/consolescreen
 	name = "console screen"
@@ -248,42 +248,42 @@
 	name = "camera assembly"
 	path = /obj/item/weapon/camera_assembly
 	category = "Engineering"
-
+/*
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full
 	hidden = 1
-	category = "Arms and Ammunition"
-
+	category = "Security"
+*/
 /datum/autolathe/recipe/magazine_revolver_1
 	name = "ammunition (.357)"
 	path = /obj/item/ammo_magazine/a357
 	hidden = 1
-	category = "Arms and Ammunition"
+	category = "Security"
 
 /datum/autolathe/recipe/magazine_revolver_2
 	name = "ammunition (.45)"
 	path = /obj/item/ammo_magazine/c45m
 	hidden = 1
-	category = "Arms and Ammunition"
+	category = "Security"
 
 /datum/autolathe/recipe/shotgun
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun
 	hidden = 1
-	category = "Arms and Ammunition"
+	category = "Security"
 
 /datum/autolathe/recipe/shotgun_dart
 	name = "ammunition (dart, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/dart
 	hidden = 1
-	category = "Arms and Ammunition"
+	category = "Security"
 
 /datum/autolathe/recipe/rcd
 	name = "rapid construction device"
 	path = /obj/item/weapon/rcd
 	hidden = 1
-	category = "Engineering"
+	category = "Devices and Components"
 
 /datum/autolathe/recipe/electropack
 	name = "electropack"
@@ -295,10 +295,10 @@
 	name = "industrial welding tool"
 	path = /obj/item/weapon/weldingtool/largetank
 	hidden = 1
-	category = "Tools"
+	category = "Engineering"
 
 /datum/autolathe/recipe/handcuffs
 	name = "handcuffs"
 	path = /obj/item/weapon/handcuffs
 	hidden = 1
-	category = "General"
+	category = "Security"

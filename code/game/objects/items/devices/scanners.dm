@@ -250,25 +250,19 @@ REAGENT SCANNER
 		usr << "\red You don't have the dexterity to do this!"
 		return
 
-	var/turf/location = user.loc
-	if (!( istype(location, /turf) ))
+	var/turf/T = user.loc
+
+	if (!( istype(T, /turf) ))
 		return
 
-	var/datum/gas_mixture/environment = location.return_air()
+	var/datum/gas_mixture/env = T.return_air()
+	var/p = env.return_pressure()
 
-	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles
-
-	user.show_message("\blue <B>Results:</B>", 1)
-	if(abs(pressure - ONE_ATMOSPHERE) < 10)
-		user.show_message("\blue Pressure: [round(pressure,0.1)] kPa", 1)
-	else
-		user.show_message("\red Pressure: [round(pressure,0.1)] kPa", 1)
-	if(total_moles)
-		for(var/g in environment.gas)
-			user.show_message("\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles)*100)]%", 1)
-
-		user.show_message("\blue Temperature: [round(environment.temperature-T0C)]&deg;C", 1)
+	var/t = "\blue Temperature: [env.temperature] Kelvin\n"
+	t += "\blue Pressure: [round(p,0.1)]kPa\n"
+	for(var/g in env.gas)
+		t += "\blue [g]: [round((((env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume) / p) * 100),0.3)]%\n"
+	usr.show_message(t, 1)
 
 	src.add_fingerprint(user)
 	return

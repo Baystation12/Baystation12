@@ -407,6 +407,7 @@
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	species_restricted = null
 
 /obj/item/clothing/suit/space/rig/wizard
 	icon_state = "rig-wiz"
@@ -420,6 +421,7 @@
 	siemens_coefficient = 0.7
 	sprite_sheets_refit = null
 	sprite_sheets_obj = null
+	species_restricted = null
 
 //Medical Rig
 /obj/item/clothing/head/helmet/space/rig/medical

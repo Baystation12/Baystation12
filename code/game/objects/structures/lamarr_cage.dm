@@ -51,6 +51,10 @@
 		if (!( src.destroyed ))
 			src.density = 0
 			src.destroyed = 1
+			var/turf/t = get_area(src)
+			var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset(null)
+			a.autosay("Display case in [t] has been shattered!", "Display Case Alarm")
+			del(a)
 			new /obj/item/weapon/shard( src.loc )
 			playsound(src, "shatter", 70, 1)
 			Break()

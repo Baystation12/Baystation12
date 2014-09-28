@@ -118,13 +118,15 @@
 	max_op = 4
 	operative_notes = "We'd like to remind our operatives to keep it professional. You are not here to have a good time, you are here to accomplish your objectives. These vile communists must be stopped at all costs. You may collaborate with any friends of the Syndicate coalition, but keep an eye on any of those Tiger punks if they do show up. You are completely free to accomplish your objectives any way you see fit."
 
-	uplink_contents = {"Highly Visible and Dangerous Weapons;
-/obj/item/weapon/gun/projectile:6:Revolver;
-/obj/item/ammo_magazine/a357:2:Ammo-357;
+	uplink_contents = {"Highly Visible and Dangerous;
+/obj/item/weapon/gun/projectile/silenced:6:Silenced Pistol;
+/obj/item/weapon/gun/projectile/automatic/mini_uzi:9:Uzi;
+/obj/item/ammo_magazine/c45m:2:Ammo-c45m;
 /obj/item/weapon/gun/energy/crossbow:5:Energy Crossbow;
 /obj/item/weapon/melee/energy/sword:4:Energy Sword;
 /obj/item/weapon/storage/box/syndicate:10:Syndicate Bundle;
 /obj/item/weapon/storage/box/emps:3:5 EMP Grenades;
+/obj/item/clothing/suit/armor/vest:4;:Armor Vest;
 Whitespace:Seperator;
 Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/pen/paralysis:3:Paralysis Pen;
@@ -132,7 +134,7 @@ Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
 Whitespace:Seperator;
 Stealth and Camouflage Items;
-/obj/item/clothing/under/chameleon:3:Chameleon Jumpsuit;
+/obj/item/weapon/storage/box/syndie_kit/chameleon:3:Chameleon Kit;
 /obj/item/clothing/shoes/syndigaloshes:2:No-Slip Syndicate Shoes;
 /obj/item/weapon/card/id/syndicate:2:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
@@ -141,19 +143,22 @@ Whitespace:Seperator;
 Devices and Tools;
 /obj/item/weapon/card/emag:3:Cryptographic Sequencer;
 /obj/item/weapon/storage/toolbox/syndicate:1:Fully Loaded Toolbox;
+/obj/item/weapon/storage/box/syndie_kit/tox_kit:2:Chloral Hydrate Kit;
 /obj/item/weapon/storage/box/syndie_kit/space:3:Space Suit;
+/obj/item/weapon/storage/box/syndie_kit/space/_hard:6:Armored Space Suit;
 /obj/item/clothing/glasses/thermal/syndi:3:Thermal Imaging Glasses;
 /obj/item/device/encryptionkey/binary:3:Binary Translator Key;
+/obj/item/device/radio/syndicate:3:Syndicate Radio;
 /obj/item/weapon/aiModule/syndicate:7:Hacked AI Upload Module;
 /obj/item/weapon/plastique:2:C-4 (Destroys walls);
 /obj/item/device/powersink:5:Powersink (DANGER!);
-/obj/item/device/radio/beacon/syndicate:7:Singularity Beacon (DANGER!);
 /obj/item/weapon/circuitboard/teleporter:20:Teleporter Circuit Board;
 Whitespace:Seperator;
 Implants;
-/obj/item/weapon/storage/box/syndie_kit/imp_freedom:3:Freedom Implant;
-/obj/item/weapon/storage/box/syndie_kit/imp_uplink:10:Uplink Implant (Contains 5 Telecrystals);
-Whitespace:Seperator;
+/obj/item/weapon/storage/box/syndie_kit/imp_freedom:2:Freedom Implant;
+/obj/item/weapon/storage/box/syndie_kit/imp_uplink:8:Uplink Implant (Contains 5 Telecrystals);
+/obj/item/weapon/storage/box/syndie_kit/imp_explosive:6:Explosive Implant (DANGER!);
+/obj/item/weapon/storage/box/syndie_kit/imp_compress:4:Compressed Matter Implant;Whitespace:Seperator;
 (Pointless) Badassery;
 /obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"}
 

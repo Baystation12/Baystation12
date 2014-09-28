@@ -109,6 +109,15 @@
 	O.update()
 	return
 
+/obj/item/weapon/storage/box/syndie_kit/tox_kit
+	name = "Box"
+
+/obj/item/weapon/storage/box/syndie_kit/tox_kit/New()
+	..()
+	new /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate(src)
+	new /obj/item/weapon/reagent_containers/syringe(src)
+	return
+
 /obj/item/weapon/storage/box/syndie_kit/space
 	name = "boxed space suit and helmet"
 
@@ -117,6 +126,16 @@
 	new /obj/item/clothing/suit/space/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
+
+/obj/item/weapon/storage/box/syndie_kit/space_hard
+	name = "Boxed hard suit and helmet"
+
+/obj/item/weapon/storage/box/syndie_kit/space_hard/New()
+	..()
+	new /obj/item/clothing/suit/space/rig/syndi(src)
+	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
+	return
+
 /obj/item/weapon/storage/box/syndie_kit/chameleon
 	name = "Chameleon Kit"
 	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."

@@ -103,7 +103,7 @@
 
 //Cargo
 /datum/job/qm
-	title = "Quartermaster"
+	title = "Head of Cargo"
 	flag = QUARTERMASTER
 	department_flag = CIVILIAN
 	faction = "Station"

@@ -30,7 +30,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	for(var/D in ItemList)
 		var/list/O = text2list(D, ":")
 		if(O.len>0)
-			valid_items += O[1]		
+			valid_items += O[1]
 
 
 
@@ -133,8 +133,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 	if(uses > 6)
 		randomItems.Add("/obj/item/weapon/aiModule/syndicate") //Hacked AI Upload Module
-		randomItems.Add("/obj/item/device/radio/beacon/syndicate") //Singularity Beacon
-
 	if(uses > 5)
 		randomItems.Add("/obj/item/weapon/gun/projectile") //Revolver
 

@@ -41,18 +41,23 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
-	var/display_colour = normal_ooc_colour
-	if(holder && !holder.fakekey)
-		display_colour = "#2e78d9"	//light blue
-		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
-			display_colour = "#184880"	//dark blue
-		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
-			display_colour = "#1b521f"	//dark green
-		else if(holder.rights & R_ADMIN)
-			if(config.allow_admin_ooccolor)
-				display_colour = src.prefs.ooccolor
-			else
-				display_colour = "#b82e00"	//orange
+	var/display_colour = "#2e78d9"
+
+	if(is_donator(src))
+		if(get_don_tier(usr.client) >= 3)
+			display_colour = src.prefs.ooccolor
+	else
+		if(holder && !holder.fakekey)
+			display_colour = "#2e78d9"	//light blue
+			if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
+				display_colour = "#184880"	//dark blue
+			if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
+				display_colour = "#1b521f"	//dark green
+			else if(holder.rights & R_ADMIN)
+				if(config.allow_admin_ooccolor)
+					display_colour = src.prefs.ooccolor
+				else
+					display_colour = "#b82e00"	//orange
 
 	for(var/client/C in clients)
 		if(C.prefs.toggles & CHAT_OOC)
@@ -80,13 +85,13 @@ var/global/normal_ooc_colour = "#002eb8"
 			else
 				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
 			*/
-
+/*
 /client/proc/set_ooc(newColor as color)
 	set name = "Set Player OOC Colour"
 	set desc = "Set to yellow for eye burning goodness."
 	set category = "Fun"
 	normal_ooc_colour = newColor
-
+*/
 
 /client/verb/looc(msg as text)
 	set name = "LOOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
@@ -131,11 +136,11 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/list/heard = get_mobs_in_view(7, src.mob)
 	var/mob/S = src.mob
-	
+
 	var/display_name = S.key
 	if(S.stat != DEAD)
 		display_name = S.name
-	
+
 	// Handle non-admins
 	for(var/mob/M in heard)
 		if(!M.client)
@@ -152,12 +157,12 @@ var/global/normal_ooc_colour = "#002eb8"
 					else
 						display_name = holder.fakekey
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-	
+
 	// Now handle admins
 	display_name = S.key
 	if(S.stat != DEAD)
 		display_name = "[S.name]/([S.key])"
-	
+
 	for(var/client/C in admins)
 		if(C.prefs.toggles & CHAT_LOOC)
 			var/prefix = "(R)LOOC"

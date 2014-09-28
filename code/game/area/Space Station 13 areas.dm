@@ -624,6 +624,22 @@ var/list/ghostteleportlocs = list()
 
 //Maintenance
 
+/area/maintenance/ghetto_surgery
+	name = "Very Legit Operating Theater"
+	icon_state = "fpmaint"
+
+/area/maintenance/emerg1
+	name = "Starboard Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/maintenance/emerg2
+	name = "Central Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/maintenance/clubroom
+	name = "Gentleman's Club Room"
+	icon_state = "cave"
+
 /area/maintenance/atmos_control
 	name = "Atmospherics Maintenance"
 	icon_state = "fpmaint"

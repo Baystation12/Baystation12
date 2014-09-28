@@ -40,6 +40,12 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	var/const/FREQ_LISTENING = 1
 		//FREQ_BROADCASTING = 2
 
+/obj/item/device/radio/syndicate
+	icon_state = "walkietalkie_s"
+	canhear_range = 2
+	freerange = 1
+	frequency = 1213
+
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new

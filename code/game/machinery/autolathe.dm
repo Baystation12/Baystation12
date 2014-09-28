@@ -23,6 +23,27 @@
 	var/disable_wire
 	var/shock_wire
 
+/obj/machinery/autolathe/dep
+	icon_state = "deplathe"
+	hacked = 1
+	density = 0
+
+/obj/machinery/autolathe/dep/sec
+	name = "\improper Security lathe"
+	show_category = "Security"
+
+/obj/machinery/autolathe/dep/med
+	name = "\improper Medical lathe"
+	show_category = "Medical"
+
+/obj/machinery/autolathe/dep/eng
+	name = "\improper Engineering lathe"
+	show_category = "Engineering"
+
+/obj/machinery/autolathe/dep/gen
+	name = "\improper General lathe"
+	show_category = "General"
+
 /obj/machinery/autolathe/interact(mob/user as mob)
 
 	if(..() || disabled)
@@ -31,7 +52,7 @@
 	if (shocked)
 		shock(user,50)
 
-	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
+	var/dat = "<center><h1>Control Panel</h1><hr/>"
 
 	dat += "<table width = '100%'>"
 	var/material_top = "<tr>"
@@ -42,8 +63,10 @@
 		material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
 
 	dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
-	dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
-
+	if(name == "\improper autolathe")
+		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
+	else
+		dat += "</center><table width = '100%'>"
 	var/index = 0
 	for(var/datum/autolathe/recipe/R in autolathe_recipes)
 		index++
@@ -82,8 +105,10 @@
 					for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
 						multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
 					multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
-
-		dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
+		if (name == "\improper autolathe")
+			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
+		else
+			dat += "<tr><td width = 180><b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[multiplier_string]</td><td align = right>[material_string]</tr>"
 
 	dat += "</table><hr>"
 
@@ -112,6 +137,9 @@
 		return
 
 	if(istype(O, /obj/item/weapon/screwdriver))
+		if(name != "\improper autolathe")
+			user << "You cannot find the maintenance pannel"
+			return
 		opened = !opened
 		icon_state = (opened ? "autolathe_t": "autolathe")
 		user << "You [opened ? "open" : "close"] the maintenance hatch of [src]."
@@ -172,7 +200,10 @@
 	else
 		user << "You fill \the [src] with \the [eating]."
 
-	flick("autolathe_o",src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
+	if (name == "\improper autolathe")
+		flick("autolathe_o",src) // Plays metal insertion animation. Work out a good way to work out a fitting animation. ~Z
+	else
+		flick("deplathe_o",src)
 
 	if(istype(eating,/obj/item/stack))
 		var/obj/item/stack/stack = eating
@@ -241,7 +272,10 @@
 				stored_material[material] = max(0,stored_material[material]-(making.resources[material]*multiplier))
 
 		//Fancy autolathe animation.
-		flick("autolathe_n",src)
+		if (name == "\improper autolathe")
+			flick("autolathe_n",src)
+		else
+			flick("deplathe_n",src)
 
 		sleep(50)
 

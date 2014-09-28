@@ -73,7 +73,7 @@ client/verb/JoinResponseTeam()
 			if(!leader_selected)
 				new_commando << "<b>As member of the Emergency Response Team, you answer only to your leader and CentComm officials.</b>"
 			else
-				new_commando << "<b>As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
+				new_commando << "<b>s leader of the Emergency Response Team, you answer only to CentComm, you don't have authority to override the Captain. It is recommended that you assist the captain where possible."
 			return
 
 	else

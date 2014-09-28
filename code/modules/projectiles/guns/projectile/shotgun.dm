@@ -57,6 +57,17 @@
 	origin_tech = "combat=5;materials=2"
 	ammo_type = "/obj/item/ammo_casing/shotgun"
 
+/obj/item/weapon/gun/projectile/shotgun/doublebarrel/taurus_judge
+	desc = "A bulky hunk of metal, the holes in the chamber are specially crafted to fit shotgun shells. "
+	name = "Taurus Judge"
+	icon_state = "mateba"
+	max_shells = 6
+	caliber = "shotgun"
+	ammo_type = "/obj/item/ammo_casing/shotgun"
+	slot_flags = SLOT_BACK | SLOT_BELT
+	flags =  FPRINT | TABLEPASS | CONDUCT
+	w_class = 3.0
+
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
@@ -119,6 +130,8 @@
 		A.update_icon()
 		update_icon()
 		if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/pickaxe/plasmacutter))
+			if(w_class < 4)
+				return
 			user << "<span class='notice'>You begin to shorten the barrel of \the [src].</span>"
 			if(loaded.len)
 				afterattack(user, user)	//will this work?

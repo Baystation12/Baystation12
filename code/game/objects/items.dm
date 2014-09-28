@@ -1,5 +1,6 @@
 /obj/item
 	name = "item"
+	var/defaultName = "item"
 	icon = 'icons/obj/items.dmi'
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
@@ -53,7 +54,10 @@
 	Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	*/
 	var/list/sprite_sheets_obj = null
-	
+
+/obj/item/New()
+	defaultName = name
+
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 

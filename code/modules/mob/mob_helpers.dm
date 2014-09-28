@@ -5,6 +5,11 @@
 		return 1
 	return 0
 
+/proc/ispai(A)
+	if(istype(A, /mob/living/silicon/pai))
+		return 1
+	return 0
+
 /proc/ismonkey(A)
 	if(A && istype(A, /mob/living/carbon/monkey))
 		return 1
@@ -178,7 +183,7 @@ var/list/global/organ_rel_size = list(
 
 	var/ran_zone = zone
 	while (ran_zone == zone)
-		ran_zone = pick ( 
+		ran_zone = pick (
 			organ_rel_size["head"]; "head",
 			organ_rel_size["chest"]; "chest",
 			organ_rel_size["groin"]; "groin",
@@ -191,7 +196,7 @@ var/list/global/organ_rel_size = list(
 			organ_rel_size["l_foot"]; "l_foot",
 			organ_rel_size["r_foot"]; "r_foot",
 		)
-	
+
 	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
@@ -330,11 +335,11 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)  
+	if(!M || !M.client || M.shakecamera)
 		return
 	M.shakecamera = 1
 	spawn(1)
-		
+
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
 		if(istype(oldeye, /mob/aiEye))
