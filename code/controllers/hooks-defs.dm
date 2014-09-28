@@ -33,7 +33,7 @@
 /**
  * Debrained hook.
  * Called in brain_item.dm when someone gets debrained.
- * Parameters: var/obj/item/brain
+ * Parameters: var/obj/item/organ/brain
  */
 /hook/debrain
 
