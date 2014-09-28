@@ -349,6 +349,9 @@
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Mental interface failure."
 		return
+	if (subject.species && subject.species.flags & NO_SCAN)
+		scantemp = "Error: Mental interface failure."
+		return
 	if (!isnull(find_record(subject.ckey)))
 		scantemp = "Subject already in database."
 		return
