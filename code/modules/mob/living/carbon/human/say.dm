@@ -293,7 +293,6 @@
 
 	return returns
 
-	
 /mob/living/carbon/human/proc/sayToPai(message, var/verb = "says", var/datum/language/speaking = null, var/headset = null)
 	var/list/recipients = list()
 	
@@ -309,3 +308,9 @@
 				recipients += M
 	
 	paiChatSay(message, recipients, verb, speaking, headset)
+
+/*
+	Return true if the mob has a headset on either of its ears
+*/
+/mob/living/carbon/human/proc/checkHasHeadset()
+	return (l_ear && istype(l_ear, /obj/item/device/radio)) || (r_ear && istype(r_ear, /obj/item/device/radio))

@@ -8,12 +8,12 @@
 	
 	if(message_mode == "paichat")
 		var/mob/living/carbon/human/carrier = src.findPaiCarrier() 
-		if(carrier != null)
 		
-			message = copytext(message,3)
+		if(carrier != null && carrier.checkHasHeadset())
 			var/list/recipients = list(src, carrier)
-			var/verb = say_quote(message)
 			
+			var/verb = say_quote(message)
+			message = copytext(message,3)
 			var/datum/language/speaking = parse_language(message)
 			if (speaking)
 				verb = speaking.speech_verb
