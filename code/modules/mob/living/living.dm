@@ -784,3 +784,9 @@
 		var/area/new_area = get_area(loc)
 		if(new_area)
 			new_area.Entered(src)
+
+/mob/living/proc/has_brain()
+	return 1
+
+/mob/living/proc/has_eyes()
+	return 1

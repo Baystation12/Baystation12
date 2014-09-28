@@ -17,13 +17,19 @@
 
 /mob/living/carbon/human/getBrainLoss()
 	var/res = brainloss
-	var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
-	if (sponge.is_bruised())
-		res += 20
-	if (sponge.is_broken())
-		res += 50
-	res = min(res,maxHealth*2)
-	return res
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		if(!sponge)
+			res += 200
+		else
+			if (sponge.is_bruised())
+				res += 20
+			if (sponge.is_broken())
+				res += 50
+
+		res = min(res,maxHealth*2)
+		return res
+	return 0
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
@@ -264,20 +270,20 @@ This function restores all organs.
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 
 	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
-	
+
 	//Handle other types of damage
 	if((damagetype != BRUTE) && (damagetype != BURN))
 		if(damagetype == HALLOSS)
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
-		
-		
+
+
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
 	//Handle BRUTE and BURN damage
 	handle_suit_punctures(damagetype, damage)
-	
+
 	if(blocked >= 2)	return 0
 
 	var/datum/organ/external/organ = null

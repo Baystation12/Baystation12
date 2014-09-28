@@ -95,7 +95,7 @@ datum
 
 
 		blood
-			data = new/list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null, "antibodies" = null)
+			data = new/list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"blood_colour"= "#A10808","resistances"=null,"trace_chem"=null, "antibodies" = null)
 			name = "Blood"
 			id = "blood"
 			reagent_state = LIQUID
@@ -128,49 +128,30 @@ datum
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
 
+			on_merge(var/data)
+				if(data["blood_colour"])
+					color = data["blood_colour"]
+				return ..()
 
-
+			on_update(var/atom/A)
+				if(data["blood_colour"])
+					color = data["blood_colour"]
+				return ..()
 
 			reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
 				if(!istype(T)) return
 				var/datum/reagent/blood/self = src
 				src = null
 				if(!(volume >= 3)) return
-				//var/datum/disease/D = self.data["virus"]
+
 				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
-					var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //find some blood here
-					if(!blood_prop) //first blood!
-						blood_prop = new(T)
-						blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
-
-					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = D.Copy(1)
-						blood_prop.viruses += newVirus
-						newVirus.holder = blood_prop
-
-					if(self.data["virus2"])
-						blood_prop.virus2 = virus_copylist(self.data["virus2"])
-
-
+					blood_splatter(T,self,1)
 				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T
-					if(!blood_prop)
-						blood_prop = new(T)
-						blood_prop.blood_DNA["Non-Human DNA"] = "A+"
-					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = D.Copy(1)
-						blood_prop.viruses += newVirus
-						newVirus.holder = blood_prop
-
+					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
+					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
-					var/obj/effect/decal/cleanable/blood/xeno/blood_prop = locate() in T
-					if(!blood_prop)
-						blood_prop = new(T)
-						blood_prop.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
-					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = D.Copy(1)
-						blood_prop.viruses += newVirus
-						newVirus.holder = blood_prop
+					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
+					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 				return
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
@@ -1276,7 +1257,7 @@ datum
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 					var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
-					if(istype(E))
+					if(E && istype(E))
 						if(E.damage > 0)
 							E.damage = max(E.damage - 1, 0)
 				..()
@@ -3024,7 +3005,9 @@ datum
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
 						var/datum/organ/internal/liver/L = H.internal_organs_by_name["liver"]
-						if (istype(L))
+						if (!L)
+							H.adjustToxLoss(5)
+						else if(istype(L))
 							L.take_damage(0.1, 1)
 						H.adjustToxLoss(0.1)
 				..()
@@ -3264,13 +3247,13 @@ datum
 						if(prob(5)) if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
-							if (istype(L))
+							if (L && istype(L))
 								L.take_damage(5, 0)
 					if (300 to INFINITY)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
-							if (istype(L))
+							if (L && istype(L))
 								L.take_damage(100, 0)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
