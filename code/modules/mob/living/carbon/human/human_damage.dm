@@ -1,7 +1,8 @@
 //Updates the mob's health from organs and mob damage variables
 /mob/living/carbon/human/updatehealth()
+
 	if(status_flags & GODMODE)
-		health = 100
+		health = species.total_health
 		stat = CONSCIOUS
 		return
 	var/total_burn	= 0
@@ -9,9 +10,15 @@
 	for(var/datum/organ/external/O in organs)	//hardcoded to streamline things a bit
 		total_brute	+= O.brute_dam
 		total_burn	+= O.burn_dam
-	health = 100 - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute
+
+	var/oxy_l = (species.flags & NO_BREATHE ? 0 : getOxyLoss())
+	var/tox_l = (species.flags & NO_POISON ? 0 : getToxLoss())
+	var/clone_l = getCloneLoss() //TODO: link this to RAD_ABSORB or NO_SCAN
+
+	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute
+
 	//TODO: fix husking
-	if( ((100 - total_burn) < config.health_threshold_dead) && stat == DEAD) //100 only being used as the magic human max health number, feel free to change it if you add a var for it -- Urist
+	if( ((species.total_health - total_burn) < config.health_threshold_dead) && stat == DEAD)
 		ChangeToHusk()
 	return
 

@@ -339,10 +339,7 @@ var/global/list/holodeck_programs = list(
 /obj/structure/table/holotable/attack_paw(mob/user as mob)
 	return attack_hand(user)
 
-/obj/structure/table/holotable/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
-
-/obj/structure/table/holotable/attack_animal(mob/living/simple_animal/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
+/obj/structure/table/holotable/attack_animal(mob/living/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
 	return attack_hand(user)
 
 /obj/structure/table/holotable/attack_hand(mob/user as mob)
@@ -593,9 +590,6 @@ var/global/list/holodeck_programs = list(
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"
-
-/obj/structure/rack/holorack/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
 
 /obj/structure/rack/holorack/attack_hand(mob/user as mob)
 	return

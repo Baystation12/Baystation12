@@ -638,8 +638,12 @@
 		return 1
 
 	proc/handle_environment(datum/gas_mixture/environment)
+
 		if(!environment)
 			return
+
+		//Stuff like the xenomorph's plasma regen happens here.
+		species.handle_environment_special(src)
 
 		//Moved pressure calculations here for use in skip-processing check.
 		var/pressure = environment.return_pressure()
@@ -1084,7 +1088,7 @@
 				handle_organs()	//Optimized.
 				handle_blood()
 
-			if(health <= config.health_threshold_dead || !has_brain())
+			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
 				death()
 				blinded = 1
 				silent = 0
@@ -1660,8 +1664,8 @@
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
-			holder.icon_state = "hud[RoundHealth(health)]"
-
+			var/percentage_health = RoundHealth(((0.0+health)/species.total_health)*100)
+			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
 
 	if(hud_updateflag & 1 << STATUS_HUD)

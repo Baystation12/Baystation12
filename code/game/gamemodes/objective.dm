@@ -649,17 +649,6 @@ datum/objective/capture
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
-		for(var/mob/living/carbon/alien/humanoid/M in A)//Aliens are worth twice as much as humans.
-			if(istype(M, /mob/living/carbon/alien/humanoid/queen))//Queens are worth three times as much as humans.
-				if(M.stat==2)
-					captured_amount+=1.5
-				else
-					captured_amount+=3
-				continue
-			if(M.stat==2)
-				captured_amount+=1
-				continue
-			captured_amount+=2
 		if(captured_amount<target_amount)
 			return 0
 		return 1

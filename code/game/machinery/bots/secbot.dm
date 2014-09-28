@@ -787,12 +787,6 @@ Auto Patrol: []"},
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
-/obj/machinery/bot/secbot/attack_alien(var/mob/living/carbon/alien/user as mob)
-	..()
-	if(!isalien(target))
-		src.target = user
-		src.mode = SECBOT_HUNT
-
 //Secbot Construction
 
 /obj/item/clothing/head/helmet/attackby(var/obj/item/device/assembly/signaler/S, mob/user as mob)

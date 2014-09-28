@@ -71,6 +71,27 @@
 	var/targeting_active = 0
 	var/area/turret_protected/protected_area
 
+/obj/machinery/turret/proc/take_damage(damage)
+	src.health -= damage
+	if(src.health<=0)
+		del src
+	return
+
+/obj/machinery/turret/attack_hand(var/mob/living/carbon/human/user)
+
+	if(!istype(user))
+		return ..()
+
+	if(user.species.can_shred(user) && !(stat & BROKEN))
+		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
+		visible_message("\red <B>[] has slashed at []!</B>", user, src)
+		src.take_damage(15)
+	return
+
+/obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
+	take_damage(Proj.damage)
+	..()
+	return
 
 /obj/machinery/turret/New()
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -78,6 +99,11 @@
 	spark_system.attach(src)
 //	targets = new
 	..()
+	return
+
+/obj/machinery/turret/proc/update_health()
+	if(src.health<=0)
+		del src
 	return
 
 /obj/machinery/turretcover
@@ -407,7 +433,7 @@
 	onclose(user, "turretid")
 
 
-/obj/machinery/turret/attack_animal(mob/living/simple_animal/M as mob)
+/obj/machinery/turret/attack_animal(mob/living/M as mob)
 	if(M.melee_damage_upper == 0)	return
 	if(!(stat & BROKEN))
 		visible_message("\red <B>[M] [M.attacktext] [src]!</B>")
@@ -419,22 +445,6 @@
 	else
 		M << "\red That object is useless to you."
 	return
-
-
-
-
-/obj/machinery/turret/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-	if(!(stat & BROKEN))
-		playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-		visible_message("\red <B>[] has slashed at []!</B>", M, src)
-		src.health -= 15
-		if (src.health <= 0)
-			src.die()
-	else
-		M << "\green That object is useless to you."
-	return
-
-
 
 /obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
 	if(..(href, href_list))
@@ -494,6 +504,18 @@
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "gun_turret"
 
+	proc/take_damage(damage)
+		src.health -= damage
+		if(src.health<=0)
+			del src
+		return
+
+
+	bullet_act(var/obj/item/projectile/Proj)
+		take_damage(Proj.damage)
+		..()
+		return
+
 
 	ex_act()
 		del src
@@ -506,24 +528,6 @@
 	meteorhit()
 		del src
 		return
-
-	proc/update_health()
-		if(src.health<=0)
-			del src
-		return
-
-	proc/take_damage(damage)
-		src.health -= damage
-		if(src.health<=0)
-			del src
-		return
-
-
-	bullet_act(var/obj/item/projectile/Proj)
-		src.take_damage(Proj.damage)
-		..()
-		return
-
 
 	attack_hand(mob/user as mob)
 		user.set_machine(src)
@@ -545,12 +549,6 @@
 
 	attack_ai(mob/user as mob)
 		return attack_hand(user)
-
-
-	attack_alien(mob/user as mob)
-		user.visible_message("[user] slashes at [src]", "You slash at [src]")
-		src.take_damage(15)
-		return
 
 	Topic(href, href_list)
 		if(href_list["power"])

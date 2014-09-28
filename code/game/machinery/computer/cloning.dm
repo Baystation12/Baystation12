@@ -338,7 +338,12 @@
 		scantemp = "Error: Unable to locate valid genetic data."
 		return
 	if (!subject.has_brain())
-		scantemp = "Error: No signs of intelligence detected."
+		if(istype(subject, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = subject
+			if(H.species.has_organ["brain"])
+				scantemp = "Error: No signs of intelligence detected."
+		else
+			scantemp = "Error: No signs of intelligence detected."
 		return
 	if (subject.suiciding == 1)
 		scantemp = "Error: Subject's brain is not responding to scanning stimuli."

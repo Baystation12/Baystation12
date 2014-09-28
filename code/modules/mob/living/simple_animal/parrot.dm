@@ -135,8 +135,8 @@
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 		return
 
-	//Is the usr's mob type able to do this? (lolaliens)
-	if(ishuman(usr) || ismonkey(usr) || isrobot(usr) ||  isalienadult(usr))
+	//Is the usr's mob type able to do this?
+	if(ishuman(usr) || ismonkey(usr) || isrobot(usr))
 
 		//Removing from inventory
 		if(href_list["remove_inv"])
@@ -235,11 +235,8 @@
 /mob/living/simple_animal/parrot/attack_paw(mob/living/carbon/monkey/M as mob)
 	attack_hand(M)
 
-/mob/living/simple_animal/parrot/attack_alien(mob/living/carbon/monkey/M as mob)
-	attack_hand(M)
-
 //Simple animals
-/mob/living/simple_animal/parrot/attack_animal(mob/living/simple_animal/M as mob)
+/mob/living/simple_animal/parrot/attack_animal(mob/living/M as mob)
 	if(client) return
 
 
