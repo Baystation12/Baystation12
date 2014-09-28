@@ -54,6 +54,15 @@
 	var/race_key = 0
 	var/icon/icon_template
 
+	var/list/has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"lungs" =    /datum/organ/internal/lungs,
+		"liver" =    /datum/organ/internal/liver,
+		"kidneys" =  /datum/organ/internal/kidney,
+		"brain" =    /datum/organ/internal/brain,
+		"appendix" = /datum/organ/internal/appendix,
+		"eyes" =     /datum/organ/internal/eyes
+		)
 /datum/species/New()
 	unarmed = new unarmed_type()
 
@@ -73,12 +82,9 @@
 	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
 
 	H.internal_organs = list()
-	H.internal_organs_by_name["heart"] = new/datum/organ/internal/heart(H)
-	H.internal_organs_by_name["lungs"] = new/datum/organ/internal/lungs(H)
-	H.internal_organs_by_name["liver"] = new/datum/organ/internal/liver(H)
-	H.internal_organs_by_name["kidney"] = new/datum/organ/internal/kidney(H)
-	H.internal_organs_by_name["brain"] = new/datum/organ/internal/brain(H)
-	H.internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(H)
+	for(var/organ in has_organ)
+		var/organ_type = has_organ[organ]
+		H.internal_organs_by_name[organ] = new organ_type(H)
 
 	for(var/name in H.organs_by_name)
 		H.organs += H.organs_by_name[name]
