@@ -429,10 +429,12 @@
 	<A href='byond://?src=\ref[src];software=signaller;send=1'>Send Signal</A><BR>"}
 	return dat
 
-//Station Bounced Radio
+//Radios
 /mob/living/silicon/pai/proc/softwareRadio()
+	
+	// Station radio (and wires, for some reason)
 	var/dat = ""
-	dat += "<h2>Station Bounced Radio</h2><hr>"
+	dat += "<h2>Station Bounced Radio</h2>"
 	if(!istype(src, /obj/item/device/radio/headset)) //Headsets don't get a mic button
 		dat += "Microphone: [radio.broadcasting ? "<A href='byond://?src=\ref[src];software=radio;talk=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];software=radio;talk=1'>Disengaged</A>"]<BR>"
 	dat += {"
@@ -447,8 +449,16 @@
 
 	for (var/ch_name in radio.channels)
 		dat+=radio.text_sec_channel(ch_name, radio.channels[ch_name])
-	dat+={"[radio.text_wires()]</TT></body></html>"}
-
+	dat+={"[radio.text_wires()]</TT>"}
+	
+	// PAIchat - tells PAI if carrier has headset
+	var/mob/living/carbon/human/carrier = src.findPaiCarrier() 
+	var/headset = (carrier != null) && carrier.checkHasHeadset()
+	
+	dat += {"<h2>Personal Area Radio</h2>
+		<B>Headset connection:</B> [headset ? "Online (use :p to send)" : "None found"]"}
+	
+	dat += "</body></html>"
 	return dat
 
 // Crew Manifest
