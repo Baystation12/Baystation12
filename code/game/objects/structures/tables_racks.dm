@@ -217,6 +217,22 @@
 					icon_state = "wood_tabledir2"
 				if(6)
 					icon_state = "wood_tabledir3"
+		else if(istype(src,/obj/structure/table/gamblingtable))
+			switch(table_type)
+				if(0)
+					icon_state = "gamble_table"
+				if(1)
+					icon_state = "gamble_1tileendtable"
+				if(2)
+					icon_state = "gamble_1tilethick"
+				if(3)
+					icon_state = "gamble_tabledir"
+				if(4)
+					icon_state = "gamble_middle"
+				if(5)
+					icon_state = "gamble_tabledir2"
+				if(6)
+					icon_state = "gamble_tabledir3"
 		else
 			switch(table_type)
 				if(0)
@@ -467,6 +483,15 @@
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
 	parts = /obj/item/weapon/table_parts/wood
+	health = 50
+/*
+ * Gambling tables
+ */
+/obj/structure/table/gamblingtable
+	name = "gambling table"
+	desc = "A curved wooden table with a thin carpet of green fabric."
+	icon_state = "gamble_table"
+	parts = /obj/item/weapon/table_parts/gambling
 	health = 50
 /*
  * Reinforced tables
