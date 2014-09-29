@@ -1067,88 +1067,88 @@
 	var/door_locked = 1
 	salvageable = 0
 
-	allow_drop()
-		return 0
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/allow_drop()
+	return 0
 
-	destroy()
-		for(var/atom/movable/AM in src)
-			AM.forceMove(get_turf(src))
-		return ..()
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
+	for(var/atom/movable/AM in src)
+		AM.forceMove(get_turf(src))
+	return ..()
 
-	Exit(atom/movable/O)
-		return 0
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)
+	return 0
 
-	proc/move_inside(var/mob/user)
-		if (chassis)
-			chassis.visible_message("\blue [user] starts to climb into [chassis].")
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/move_inside(var/mob/user)
+	if (chassis)
+		chassis.visible_message("\blue [user] starts to climb into [chassis].")
 
-		if(do_after(user, 40, needhand=0))
-			if(!src.occupant)
-				user.forceMove(src)
-				occupant = user
-				log_message("[user] boarded.")
-				occupant_message("[user] boarded.")
-			else if(src.occupant != user)
-				user << "\red [src.occupant] was faster. Try better next time, loser."
-		else
-			user << "You stop entering the exosuit."
+	if(do_after(user, 40, needhand=0))
+		if(!src.occupant)
+			user.forceMove(src)
+			occupant = user
+			log_message("[user] boarded.")
+			occupant_message("[user] boarded.")
+		else if(src.occupant != user)
+			user << "\red [src.occupant] was faster. Try better next time, loser."
+	else
+		user << "You stop entering the exosuit."
 
-	verb/eject()
-		set name = "Eject"
-		set category = "Exosuit Interface"
-		set src = usr.loc
-		set popup_menu = 0
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/verb/eject()
+	set name = "Eject"
+	set category = "Exosuit Interface"
+	set src = usr.loc
+	set popup_menu = 0
 		
-		if(usr != occupant)
-			return
-		go_out()
-		add_fingerprint(usr)
-
-	proc/go_out()
-		if(!occupant)
-			return
-		occupant << "You climb out from \the [src]."
-		occupant.forceMove(get_turf(src))
-		occupant_message("[occupant] disembarked.")
-		log_message("[occupant] disembarked.")
-		occupant.reset_view()
-		/*
-		if(occupant.client)
-			occupant.client.eye = occupant.client.mob
-			occupant.client.perspective = MOB_PERSPECTIVE
-		*/
-		occupant = null
+	if(usr != occupant)
 		return
+	go_out()
+	add_fingerprint(usr)
 
-	attach()
-		..()
-		if (chassis)
-			chassis.verbs |= /obj/mecha/proc/move_inside_passenger
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/go_out()
+	if(!occupant)
+		return
+	occupant << "You climb out from \the [src]."
+	occupant.forceMove(get_turf(src))
+	occupant_message("[occupant] disembarked.")
+	log_message("[occupant] disembarked.")
+	occupant.reset_view()
+	/*
+	if(occupant.client)
+		occupant.client.eye = occupant.client.mob
+		occupant.client.perspective = MOB_PERSPECTIVE
+	*/
+	occupant = null
+	return
 
-	detach()
-		if(occupant)
-			occupant_message("Unable to detach [src] - equipment occupied.")
-			return
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/attach()
+	..()
+	if (chassis)
+		chassis.verbs |= /obj/mecha/proc/move_inside_passenger
+
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/detach()
+	if(occupant)
+		occupant_message("Unable to detach [src] - equipment occupied.")
+		return
 		
-		var/obj/mecha/M = chassis
-		..()
-		if (M && !(locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in M))
-			M.verbs -= /obj/mecha/proc/move_inside_passenger
+	var/obj/mecha/M = chassis
+	..()
+	if (M && !(locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in M))
+		M.verbs -= /obj/mecha/proc/move_inside_passenger
 
-	get_equip_info()
-		var/output = ..()
-		if(output)
-			var/temp = "<br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>[door_locked? "Locked" : "Unlocked"]</a>"
-			return "[output] [temp]"
-		return
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/get_equip_info()
+	var/output = ..()
+	if(output)
+		var/temp = "<br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>[door_locked? "Locked" : "Unlocked"]</a>"
+		return "[output] [temp]"
+	return
 
-	Topic(href,href_list)
-		..()
-		if (href_list["toggle_lock"])
-			door_locked = !door_locked
-			if (chassis)
-				chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
-			
+/obj/item/mecha_parts/mecha_equipment/tool/passenger/Topic(href,href_list)
+	..()
+	if (href_list["toggle_lock"])
+		door_locked = !door_locked
+		if (chassis)
+			chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
+		
 
 #define LOCKED 1
 #define OCCUPIED 2
