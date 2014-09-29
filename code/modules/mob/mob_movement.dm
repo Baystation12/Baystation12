@@ -402,9 +402,6 @@
 ///For moving in space
 ///Return 1 for movement 0 for none
 /mob/proc/Process_Spacemove(var/check_drift = 0)
-	//First check to see if we can do things
-	if(restrained())
-		return 0
 
 	/*
 	if(istype(src,/mob/living/carbon))
@@ -451,9 +448,19 @@
 
 	//Nothing to push off of so end here
 	if(!dense_object)
+		make_floating(1)
 		return 0
 
+	if(istype(src,/mob/living/carbon/human/))
+		if(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
+			make_floating(0)
+		else
+			make_floating(1)
+	else
+		make_floating(1)
 
+	if(restrained()) //Check to see if we can do things
+		return 0
 
 	//Check to see if we slipped
 	if(prob(Process_Spaceslipping(5)))

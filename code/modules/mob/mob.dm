@@ -679,6 +679,27 @@ note dizziness decrements automatically in the mob's Life() proc.
 	pixel_x = old_x
 	pixel_y = old_y
 
+
+//handles up-down floaty effect in space
+/mob/proc/make_floating(var/n)
+
+	floatiness = n	// store what will be new value
+
+	if(floatiness && !is_floating)
+		spawn(0)
+			floating_process()
+
+/mob/proc/floating_process()
+	is_floating = 1
+	while(floatiness)
+		var/amplitude = 2
+		var/frequency = 10
+		pixel_y = amplitude * sin(frequency * world.time)
+		sleep(1)
+	//endwhile - reset the pixel offsets to zero
+	is_floating = 0
+	pixel_y = 0
+
 /mob/Stat()
 	..()
 
