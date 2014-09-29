@@ -189,6 +189,14 @@ var/list/department_radio_keys = list(
 	var/part_a = "<span class='paichat'><span class='name'>"
 	var/icon_part = device == null ? "" : "\icon[device]"
 	var/part_b = "</span><b> [icon_part]\[PAI\]</b> <span class='message'>"
+
+	// Ghosts are added here, since in all cases, we pick the same ones
+	var/list/hearers = hear(world.view, src.locs[1])
 	
+	for(var/mob/M in dead_mob_list)
+		// Dead, cliented mobs that either have GHOSTEARS on or are in hearing range
+		if((M.stat == DEAD && M.client) && ((M.client.prefs.toggles & CHAT_GHOSTEARS) || (M.locs[1] in hearers)))
+			recipients += M
+
 	for(var/mob/R in recipients)
 		R.hear_radio(message, verb, speaking, part_a, part_b, src)
