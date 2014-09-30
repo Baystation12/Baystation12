@@ -6,6 +6,9 @@
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	hud_type = /datum/hud_data/alien
+
+	has_fine_manipulation = 0
+	insulated = 1
 	gluttonous = 2
 
 	eyes = "blank_eyes"
