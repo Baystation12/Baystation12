@@ -28,7 +28,7 @@
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
 	var/has_fine_manipulation = 1 // Can use small items.
-	var/insulated                 // Immune to electrocution.
+	var/insulated                 // Immune to electrocution and glass shards to the feet.
 
 	// Some species-specific gibbing data.
 	var/gibbed_anim = "gibbed-h"

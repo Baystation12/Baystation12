@@ -4,8 +4,8 @@
 	set invisibility = 0
 	set background = 1
 
-	if (monkeyizing)
-		return
+	if (monkeyizing)	return
+	if(!loc)			return
 
 	..()
 
@@ -50,14 +50,131 @@
 	adjustToxLoss(-(rads))
 	return
 
-/mob/living/carbon/alien/proc/handle_environment(enviroment)
-	//TODO: Work out if larvae breathe/suffer from pressure/suffer from heat.
-	if(!enviroment)
-		return
-
 /mob/living/carbon/alien/proc/handle_regular_status_updates()
-	// TODO: sleep, blind, stunned, paralyzed?
-	return
+
+	if(status_flags & GODMODE)	return 0
+
+	if(stat == DEAD)
+		blinded = 1
+		silent = 0
+	else
+		updatehealth()
+
+		if(health <= 0)
+			death()
+			blinded = 1
+			silent = 0
+			return 1
+
+		if(paralysis)
+			AdjustParalysis(-1)
+			blinded = 1
+			stat = UNCONSCIOUS
+			if(halloss > 0)
+				adjustHalLoss(-3)
+		else if(sleeping)
+
+			adjustHalLoss(-3)
+			if (mind)
+				if((mind.active && client != null) || immune_to_ssd)
+					sleeping = max(sleeping-1, 0)
+			blinded = 1
+			stat = UNCONSCIOUS
+
+		else if(resting)
+			if(halloss > 0)
+				adjustHalLoss(-3)
+
+		//CONSCIOUS
+		else
+			stat = CONSCIOUS
+			if(halloss > 0)
+				adjustHalLoss(-1)
+
+		// Eyes and blindness.
+		if(!has_eyes())
+			eye_blind =  1
+			blinded =    1
+			eye_blurry = 1
+		else if(eye_blind)
+			eye_blind =  max(eye_blind-1,0)
+			blinded =    1
+		else if(eye_blurry)
+			eye_blurry = max(eye_blurry-1, 0)
+
+		//Ears
+		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
+			ear_deaf = max(ear_deaf, 1)
+		else if(ear_deaf)			//deafness, heals slowly over time
+			ear_deaf = max(ear_deaf-1, 0)
+			ear_damage = max(ear_damage-0.05, 0)
+
+	return 1
 
 /mob/living/carbon/alien/proc/handle_regular_hud_updates()
-	return //TODO: Not sure what to do with this yet.
+
+	if (stat == 2 || (XRAY in src.mutations))
+		sight |= SEE_TURFS
+		sight |= SEE_MOBS
+		sight |= SEE_OBJS
+		see_in_dark = 8
+		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+	else if (stat != 2)
+		sight &= ~SEE_TURFS
+		sight &= ~SEE_MOBS
+		sight &= ~SEE_OBJS
+		see_in_dark = 2
+		see_invisible = SEE_INVISIBLE_LIVING
+
+	if (healths)
+		if (stat != 2)
+			switch(health)
+				if(100 to INFINITY)
+					healths.icon_state = "health0"
+				if(80 to 100)
+					healths.icon_state = "health1"
+				if(60 to 80)
+					healths.icon_state = "health2"
+				if(40 to 60)
+					healths.icon_state = "health3"
+				if(20 to 40)
+					healths.icon_state = "health4"
+				if(0 to 20)
+					healths.icon_state = "health5"
+				else
+					healths.icon_state = "health6"
+		else
+			healths.icon_state = "health7"
+
+	if(pullin)
+		pullin.icon_state = "pull[pulling ? 1 : 0]"
+
+	if (client)
+		client.screen.Remove(global_hud.blurry,global_hud.druggy,global_hud.vimpaired)
+
+	if ((blind && stat != 2))
+		if ((blinded))
+			blind.layer = 18
+		else
+			blind.layer = 0
+			if (disabilities & NEARSIGHTED)
+				client.screen += global_hud.vimpaired
+			if (eye_blurry)
+				client.screen += global_hud.blurry
+			if (druggy)
+				client.screen += global_hud.druggy
+
+	if (stat != 2)
+		if (machine)
+			if (!( machine.check_eye(src) ))
+				reset_view(null)
+		else
+			if(client && !client.adminobs)
+				reset_view(null)
+
+	return 1
+
+/mob/living/carbon/alien/proc/handle_environment(datum/gas_mixture/environment)
+	// At the moment, neither of the alien species breathe or suffer from pressure.
+	// TODO: Implement heat and phoron exposure checks.
+	return

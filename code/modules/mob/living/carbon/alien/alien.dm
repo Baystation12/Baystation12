@@ -11,17 +11,19 @@
 	attack_sound = null
 	friendly = "nuzzles"
 	wall_smash = 0
+	health = 100
+	maxHealth = 100
 
 	var/adult_form
 	var/dead_icon
 	var/amount_grown = 0
 	var/max_grown = 10
 	var/time_of_birth
-	var/co2overloadtime = null
-	var/temperature_resistance = T0C+75
 	var/language
 
 /mob/living/carbon/alien/New()
+
+	time_of_birth = world.time
 
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
@@ -42,38 +44,6 @@
 	..()
 
 /mob/living/carbon/alien/u_equip(obj/item/W as obj)
-	return
-
-//This is fine, works the same as a human
-/mob/living/carbon/alien/Bump(atom/movable/AM as mob|obj, yes)
-
-	spawn( 0 )
-		if ((!( yes ) || now_pushing))
-			return
-		now_pushing = 1
-		if(ismob(AM))
-			var/mob/tmob = AM
-			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-				if(prob(70))
-					src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-					now_pushing = 0
-					return
-				if(!(tmob.status_flags & CANPUSH))
-					now_pushing = 0
-					return
-			tmob.LAssailant = src
-
-		now_pushing = 0
-		..()
-		if (!( istype(AM, /atom/movable) ))
-			return
-		if (!( now_pushing ))
-			now_pushing = 1
-			if (!( AM.anchored ))
-				var/t = get_dir(src, AM)
-				step(AM, t)
-			now_pushing = null
-		return
 	return
 
 /mob/living/carbon/alien/Stat()

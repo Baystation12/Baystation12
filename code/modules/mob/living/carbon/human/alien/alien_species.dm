@@ -69,10 +69,12 @@
 
 /datum/species/xenos/handle_environment_special(var/mob/living/carbon/human/H)
 
-	if(!H.loc)
-		return
+	var/turf/T = H.loc
+	if(!T) return
+	var/datum/gas_mixture/environment = T.return_air()
+	if(!environment) return
 
-	if(locate(/obj/effect/alien/weeds) in H.loc)
+	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
 		if(H.health >= H.maxHealth - H.getCloneLoss())
 			var/datum/organ/internal/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
 			P.stored_plasma += weeds_plasma_rate
@@ -82,7 +84,8 @@
 			H.adjustFireLoss(-weeds_heal_rate)
 			H.adjustOxyLoss(-weeds_heal_rate)
 			H.adjustToxLoss(-weeds_heal_rate)
-		..()
+	..()
+
 
 /datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
 	H.AddInfectionImages()
