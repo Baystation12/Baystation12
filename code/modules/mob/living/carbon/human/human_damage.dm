@@ -22,21 +22,45 @@
 		ChangeToHusk()
 	return
 
-/mob/living/carbon/human/getBrainLoss()
-	var/res = brainloss
+/mob/living/carbon/human/adjustBrainLoss(var/amount)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
 	if(species && species.has_organ["brain"])
 		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
-		if(!sponge)
-			res += 200
+		if(sponge)
+			sponge.take_damage(amount)
+			sponge.damage = min(max(brainloss, 0),(maxHealth*2))
+			brainloss = sponge.damage
 		else
-			if (sponge.is_bruised())
-				res += 20
-			if (sponge.is_broken())
-				res += 50
+			brainloss = 200
+	else
+		brainloss = 0
 
-		res = min(res,maxHealth*2)
-		return res
-	return 0
+/mob/living/carbon/human/setBrainLoss(var/amount)
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		if(sponge)
+			sponge.damage = min(max(amount, 0),(maxHealth*2))
+			brainloss = sponge.damage
+		else
+			brainloss = 200
+	else
+		brainloss = 0
+
+/mob/living/carbon/human/getBrainLoss()
+
+	if(status_flags & GODMODE)	return 0	//godmode
+
+	if(species && species.has_organ["brain"])
+		var/datum/organ/internal/brain/sponge = internal_organs_by_name["brain"]
+		brainloss = min(sponge.damage,maxHealth*2)
+	else
+		brainloss = 0
+	return brainloss
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
