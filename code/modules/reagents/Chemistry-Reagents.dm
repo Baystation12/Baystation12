@@ -1,7 +1,6 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
-#define FOOD_METABOLISM 0.4
 #define REAGENTS_OVERDOSE 30
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -653,13 +652,17 @@ datum
 						for (var/ID in C.virus2)
 							var/datum/disease2/disease/V = C.virus2[ID]
 							if(prob(5))
+								M:antibodies |= V.antigen
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
-									var/mob/living/carbon/human/H
-									if(istype(C,/mob/living/carbon/human))
-										H = C
-									if(!H || (H.species && !(H.species.flags & RAD_ABSORB))) M.adjustToxLoss(100)
-								M:antibodies |= V.antigen
+									var/absorbed
+									if(istype(C,/mob/living/carbon))
+										var/mob/living/carbon/H = C
+										var/datum/organ/internal/diona/nutrients/rad_organ = locate() in H.internal_organs
+										if(rad_organ && !rad_organ.is_broken())
+											absorbed = 1
+									if(!absorbed)
+										M.adjustToxLoss(100)
 				..()
 				return
 
@@ -1493,11 +1496,11 @@ datum
 			var/toxpwr = 0.7 // Toxins are really weak, but without being treated, last very long.
 			custom_metabolism = 0.1
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob,var/alien)
 				if(!M) M = holder.my_atom
 				if(toxpwr)
 					M.adjustToxLoss(toxpwr*REM)
-				..()
+					if(alien) ..() //Kind of a catch-all for aliens without kidneys.
 				return
 
 		toxin/amatoxin
@@ -2972,7 +2975,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				M:nutrition += nutriment_factor
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
+				holder.remove_reagent(src.id, (alien ? FOOD_METABOLISM : ALCOHOL_METABOLISM)) // Catch-all for creatures without livers.
 
 				if (adj_drowsy)	M.drowsyness = max(0,M.drowsyness + adj_drowsy)
 				if (adj_sleepy) M.sleeping = max(0,M.sleeping + adj_sleepy)

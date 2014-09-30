@@ -384,7 +384,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

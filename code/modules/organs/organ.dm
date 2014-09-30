@@ -75,19 +75,6 @@
 	for(var/datum/organ/internal/I in internal_organs)
 		I.process()
 
-	// Also handles some internal organ processing when the organs are missing completely.
-	// Only handles missing liver and kidneys for now.
-    // This is a bit harsh, but really if you're missing an entire bodily organ you're in deep shit.
-	if(species.has_organ["liver"])
-		var/datum/organ/internal/liver = internal_organs_by_name["liver"]
-		if(!liver || liver.status & ORGAN_CUT_AWAY)
-			reagents.add_reagent("toxin", rand(1,3))
-
-	if(species.has_organ["kidneys"])
-		var/datum/organ/internal/kidney = internal_organs_by_name["kidneys"]
-		if(!kidney || kidney.status & ORGAN_CUT_AWAY)
-			reagents.add_reagent("toxin", rand(1,3))
-
 	if(!force_process && !bad_external_organs.len)
 		return
 

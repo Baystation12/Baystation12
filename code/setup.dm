@@ -754,9 +754,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_WHITELISTED 4096
 #define IS_SYNTHETIC 8192
 
-#define RAD_ABSORB 16384
-#define REQUIRE_LIGHT 32768
-
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
@@ -854,3 +851,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define ATMOS_DEFAULT_VOLUME_PIPE	70	//L
 
 var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+
+// Reagent metabolism defines.
+#define FOOD_METABOLISM 0.4
+#define ALCOHOL_METABOLISM 0.1

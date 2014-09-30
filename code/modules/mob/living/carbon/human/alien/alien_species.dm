@@ -1,4 +1,3 @@
-//TODO: Generalize some kind of power pool so that other races can use it.
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = "Xenomorph"
@@ -23,7 +22,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_PAIN | RAD_ABSORB | NO_SLIP | NO_POISON
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 
@@ -38,11 +37,12 @@
 	poison_type = null
 
 	has_organ = list(
-		"heart" =         /datum/organ/internal/heart,
-		"lungs" =         /datum/organ/internal/lungs,
-		"brain" =         /datum/organ/internal/brain,
-		"plasma vessel" = /datum/organ/internal/xenos/plasmavessel,
-		"hive node" =     /datum/organ/internal/xenos/hivenode
+		"heart" =           /datum/organ/internal/heart,
+		"lungs" =           /datum/organ/internal/lungs,
+		"brain" =           /datum/organ/internal/brain,
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel,
+		"hive node" =       /datum/organ/internal/xenos/hivenode,
+		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
 	var/alien_number = 0
@@ -53,7 +53,6 @@
 /datum/species/xenos/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 	H.visible_message("<span class='notice'>[H] caresses [target] with its scythe-like arm.</span>", \
 					"<span class='notice'>You caress [target] with your scythe-like arm.</span>")
-
 
 /datum/species/xenos/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -103,13 +102,14 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 
 	has_organ = list(
-		"heart" =         /datum/organ/internal/heart,
-		"lungs" =         /datum/organ/internal/lungs,
-		"brain" =         /datum/organ/internal/brain,
-		"plasma vessel" = /datum/organ/internal/xenos/plasmavessel/queen,
-		"acid gland" =    /datum/organ/internal/xenos/acidgland,
-		"hive node" =     /datum/organ/internal/xenos/hivenode,
-		"resin spinner" = /datum/organ/internal/xenos/resinspinner
+		"heart" =           /datum/organ/internal/heart,
+		"lungs" =           /datum/organ/internal/lungs,
+		"brain" =           /datum/organ/internal/brain,
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
+		"acid gland" =      /datum/organ/internal/xenos/acidgland,
+		"hive node" =       /datum/organ/internal/xenos/hivenode,
+		"resin spinner" =   /datum/organ/internal/xenos/resinspinner,
+		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -141,11 +141,12 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_hunter.dmi'
 
 	has_organ = list(
-		"heart" =         /datum/organ/internal/heart,
-		"lungs" =         /datum/organ/internal/lungs,
-		"brain" =         /datum/organ/internal/brain,
-		"plasma vessel" = /datum/organ/internal/xenos/plasmavessel/hunter,
-		"hive node" =     /datum/organ/internal/xenos/hivenode
+		"heart" =           /datum/organ/internal/heart,
+		"lungs" =           /datum/organ/internal/lungs,
+		"brain" =           /datum/organ/internal/brain,
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/hunter,
+		"hive node" =       /datum/organ/internal/xenos/hivenode,
+		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -168,12 +169,13 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 
 	has_organ = list(
-		"heart" =         /datum/organ/internal/heart,
-		"lungs" =         /datum/organ/internal/lungs,
-		"brain" =         /datum/organ/internal/brain,
-		"plasma vessel" = /datum/organ/internal/xenos/plasmavessel/sentinel,
-		"acid gland" =    /datum/organ/internal/xenos/acidgland,
-		"hive node" =     /datum/organ/internal/xenos/hivenode
+		"heart" =           /datum/organ/internal/heart,
+		"lungs" =           /datum/organ/internal/lungs,
+		"brain" =           /datum/organ/internal/brain,
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/sentinel,
+		"acid gland" =      /datum/organ/internal/xenos/acidgland,
+		"hive node" =       /datum/organ/internal/xenos/hivenode,
+		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
 	inherent_verbs = list(
@@ -197,14 +199,15 @@
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 
 	has_organ = list(
-		"heart" =         /datum/organ/internal/heart,
-		"lungs" =         /datum/organ/internal/lungs,
-		"brain" =         /datum/organ/internal/brain,
-		"egg sac" =       /datum/organ/internal/xenos/eggsac,
-		"plasma vessel" = /datum/organ/internal/xenos/plasmavessel/queen,
-		"acid gland" =    /datum/organ/internal/xenos/acidgland,
-		"hive node" =     /datum/organ/internal/xenos/hivenode,
-		"resin spinner" = /datum/organ/internal/xenos/resinspinner
+		"heart" =           /datum/organ/internal/heart,
+		"lungs" =           /datum/organ/internal/lungs,
+		"brain" =           /datum/organ/internal/brain,
+		"egg sac" =         /datum/organ/internal/xenos/eggsac,
+		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
+		"acid gland" =      /datum/organ/internal/xenos/acidgland,
+		"hive node" =       /datum/organ/internal/xenos/hivenode,
+		"resin spinner" =   /datum/organ/internal/xenos/resinspinner,
+		"nutrient vessel" = /datum/organ/internal/diona/nutrients
 		)
 
 	inherent_verbs = list(

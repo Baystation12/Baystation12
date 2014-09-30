@@ -282,7 +282,8 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
-			if(species.flags & RAD_ABSORB)
+			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
+			if(!rad_organ || rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads
@@ -984,7 +985,8 @@
 
 		if(status_flags & GODMODE)	return 0	//godmode
 
-		if(species.flags & REQUIRE_LIGHT)
+		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
+		if(light_organ && !light_organ.is_broken())
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -1047,7 +1049,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-		if(species.flags & REQUIRE_LIGHT)
+		if(!light_organ || light_organ.is_broken())
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 				traumatic_shock++

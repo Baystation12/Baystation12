@@ -13,7 +13,7 @@
 
 	var/oxy_l = (species.flags & NO_BREATHE ? 0 : getOxyLoss())
 	var/tox_l = (species.flags & NO_POISON ? 0 : getToxLoss())
-	var/clone_l = getCloneLoss() //TODO: link this to RAD_ABSORB or NO_SCAN
+	var/clone_l = getCloneLoss() //TODO: link this to NO_SCAN
 
 	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute
 

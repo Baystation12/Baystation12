@@ -5,17 +5,9 @@
 /datum/organ/internal/diona/process()
 	return
 
-/datum/organ/internal/diona/nutrients
-	name = "nutrient vessel"
-	parent_organ = "chest"
-
 /datum/organ/internal/diona/strata
 	name = "neural strata"
 	parent_organ = "chest"
-
-/datum/organ/internal/diona/node
-	name = "receptor node"
-	parent_organ = "head"
 
 /datum/organ/internal/diona/bladder
 	name = "gas bladder"
@@ -29,10 +21,21 @@
 	name = "anchoring ligament"
 	parent_organ = "groin"
 
+/datum/organ/internal/diona/node
+	name = "receptor node"
+	parent_organ = "head"
+	removed_type = /obj/item/organ/diona/node
+
+/datum/organ/internal/diona/nutrients
+	name = "nutrient vessel"
+	parent_organ = "chest"
+	removed_type = /obj/item/organ/diona/nutrients
+
 /obj/item/organ/diona
 	name = "diona nymph"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "nymph"
+	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
 
 /obj/item/organ/diona/removed(var/mob/living/target,var/mob/living/user)
 
@@ -52,6 +55,22 @@
 	diona.request_player(D)
 
 	del(src)
+
+//These are different to the standard diona organs as they have a purpose in other
+// species (absorbing radiation and light respectively)
+/obj/item/organ/diona/nutrients
+	name = "nutrient vessel"
+	organ_tag = "nutrient vessel"
+
+/obj/item/organ/diona/nutrients/removed()
+	return
+
+/obj/item/organ/diona/node
+	name = "receptor node"
+	organ_tag = "receptor node"
+
+/obj/item/organ/diona/node/removed()
+	return
 
 //CORTICAL BORER ORGANS.
 /datum/organ/internal/borer
