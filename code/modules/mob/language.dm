@@ -160,8 +160,6 @@
 		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
 			M.show_message("[message_start] [message_body]", 2)
 
-	world << "Got through checks, transmitting."
-
 	for (var/mob/living/S in living_mob_list)
 
 		if(drone_only && !istype(S,/mob/living/silicon/robot/drone))
