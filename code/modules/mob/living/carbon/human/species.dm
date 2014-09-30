@@ -19,8 +19,8 @@
 	var/datum/hud_data/hud
 	var/hud_type
 	var/slowdown = 0
-	var/gluttonous // Can eat some mobs. 1 for monkeys, 2 for people.
-
+	var/gluttonous        // Can eat some mobs. 1 for monkeys, 2 for people.
+	var/rarity_value = 1  // Relative rarity/collector value for this species. Only used by ninja and cultists atm.
 	var/unarmed_type =           /datum/unarmed_attack
 	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
@@ -277,6 +277,7 @@
 	language = "Vox-pidgin"
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 
@@ -318,6 +319,7 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
+	rarity_value = 10
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -361,6 +363,7 @@
 	unarmed_type = /datum/unarmed_attack/diona
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
+	rarity_value = 3
 
 	has_organ = list(
 		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
@@ -416,6 +419,7 @@
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
 	unarmed_type = /datum/unarmed_attack/punch
+	rarity_value = 2
 
 	eyes = "blank_eyes"
 	brute_mod = 0.5

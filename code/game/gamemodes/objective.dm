@@ -637,18 +637,24 @@ datum/objective/capture
 	check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
 		var/captured_amount = 0
 		var/area/centcom/holding/A = locate()
-		for(var/mob/living/carbon/human/M in A)//Humans.
+
+		for(var/mob/living/carbon/human/M in A) // Humans (and subtypes).
+			var/worth = M.species.rarity_value
 			if(M.stat==2)//Dead folks are worth less.
-				captured_amount+=0.5
+				worth*=0.5
 				continue
-			captured_amount+=1
+			captured_amount += worth
+
 		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
 			captured_amount+=0.1
+
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
+
+
 		if(captured_amount<target_amount)
 			return 0
 		return 1

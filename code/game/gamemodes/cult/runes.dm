@@ -581,7 +581,15 @@ var/list/sacrificed = list()
 				if(iscultist(C) && !C.stat)
 					cultsinrange += C
 					C.say("Barhah hra zar[pick("'","`")]garis!")
+
 			for(var/mob/H in victims)
+
+				var/worth = 0
+				if(istype(H,/mob/living/carbon/human))
+					var/mob/living/carbon/human/lamb = H
+					if(lamb.species.rarity_value > 3)
+						worth = 1
+
 				if (ticker.mode.name == "cult")
 					if(H.mind == ticker.mode:sacrifice_target)
 						if(cultsinrange.len >= 3)
@@ -596,8 +604,8 @@ var/list/sacrificed = list()
 					else
 						if(cultsinrange.len >= 3)
 							if(H.stat !=2)
-								if(prob(80))
-									usr << "\red The Geometer of Blood accepts this sacrifice."
+								if(prob(80) || worth)
+									usr << "\red The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
@@ -607,8 +615,8 @@ var/list/sacrificed = list()
 								else
 									H.gib()
 							else
-								if(prob(40))
-									usr << "\red The Geometer of blood accepts this sacrifice."
+								if(prob(40) || worth)
+									usr << "\red The Geometer of blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
