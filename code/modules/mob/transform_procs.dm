@@ -164,20 +164,16 @@
 
 	O.loc = loc
 	O.job = "Cyborg"
-	var/transferred = 0
 	if(O.mind.assigned_role == "Cyborg")
 		if(O.mind.role_alt_title == "Android")
 			O.mmi = new /obj/item/device/mmi/posibrain(O)
-			O.mmi.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
-			O.mmi.name = "positronic brain ([O.mmi.brainmob.name])" // Give posibrain random posibrain-y name.
-			if(O.mmi) O.mmi.transfer_identity(src,0) // Disabling autoname as we don't want posibrain with human names.
-			transferred = 1
 		else if(O.mind.role_alt_title == "Robot")
 			O.mmi = null //Robots do not have removable brains.
 		else
 			O.mmi = new /obj/item/device/mmi(O)
 
-		if((O.mmi) && (!transferred)) O.mmi.transfer_identity(src)
+		if(O.mmi)
+			O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
 

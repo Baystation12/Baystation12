@@ -46,14 +46,17 @@
 			C.prefs.be_special ^= BE_PAI
 
 
-/obj/item/device/mmi/posibrain/transfer_identity(var/mob/living/carbon/H, var/autoname = 1)
-	if(autoname)
-		name = "positronic brain ([H])"
-		brainmob.name = H.real_name
-		brainmob.real_name = H.real_name
-		brainmob.dna = H.dna
-		brainmob.timeofhostdeath = H.timeofdeath
-		brainmob.stat = 0
+/obj/item/device/mmi/posibrain/transfer_identity(var/mob/living/carbon/H)
+	/*
+	Positronic brains should have posibrain-like name, instead of human-MMIlike names. -- ATL
+
+	name = "positronic brain ([H])"
+	brainmob.name = H.real_name
+	brainmob.real_name = H.real_name
+	*/
+	brainmob.dna = H.dna
+	brainmob.timeofhostdeath = H.timeofdeath
+	brainmob.stat = 0
 	if(brainmob.mind)
 		brainmob.mind.assigned_role = "Positronic Brain"
 	if(H.mind)
