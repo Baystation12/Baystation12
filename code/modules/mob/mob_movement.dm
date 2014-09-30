@@ -403,11 +403,33 @@
 ///Return 1 for movement 0 for none
 /mob/proc/Process_Spacemove(var/check_drift = 0)
 
-	/*
-	if(istype(src,/mob/living/carbon))
-		if(src.l_hand && src.r_hand)
-			return 0
-	*/
+	if(!Check_Dense_Object()) //Nothing to push off of so end here
+		make_floating(1)
+		return 0
+
+	if(istype(src,/mob/living/carbon/human/))
+		var/mob/living/carbon/human/H = src
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
+			make_floating(0)
+		else
+			make_floating(1)
+	else
+		make_floating(1)
+
+	if(restrained()) //Check to see if we can do things
+		return 0
+
+	//Check to see if we slipped
+	if(prob(Process_Spaceslipping(5)))
+		src << "\blue <B>You slipped!</B>"
+		src.inertia_dir = src.last_move
+		step(src, src.inertia_dir)
+		return 0
+	//If not then we can reset inertia and move
+	inertia_dir = 0
+	return 1
+
+/mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
 	var/dense_object = 0
 	for(var/turf/turf in oview(1,src))
@@ -447,32 +469,7 @@
 				dense_object++
 				break
 
-	//Nothing to push off of so end here
-	if(!dense_object)
-		make_floating(1)
-		return 0
-
-	if(istype(src,/mob/living/carbon/human/))
-		var/mob/living/carbon/human/H = src
-		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
-			make_floating(0)
-		else
-			make_floating(1)
-	else
-		make_floating(1)
-
-	if(restrained()) //Check to see if we can do things
-		return 0
-
-	//Check to see if we slipped
-	if(prob(Process_Spaceslipping(5)))
-		src << "\blue <B>You slipped!</B>"
-		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
-		return 0
-	//If not then we can reset inertia and move
-	inertia_dir = 0
-	return 1
+	return dense_object
 
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)
