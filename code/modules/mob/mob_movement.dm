@@ -415,7 +415,8 @@
 			continue
 
 		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes:flags & NOSLIP)))
+			var/mob/living/carbon/human/H = src
+			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP)))
 				continue
 
 
@@ -452,7 +453,8 @@
 		return 0
 
 	if(istype(src,/mob/living/carbon/human/))
-		if(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
+		var/mob/living/carbon/human/H = src
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
 			make_floating(0)
 		else
 			make_floating(1)
