@@ -112,15 +112,9 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	for(var/datum/organ/external/limb in vox.organs)
 		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 
-	//Generate cortical stack.
-	var/datum/organ/external/affected = vox.get_organ("head")
-
-	var/obj/item/weapon/implant/cortical/I = new(vox)
-	I.imp_in = vox
-	I.implanted = 1
-	affected.implants += I
-	I.part = affected
-	cortical_stacks += I
+	// Keep track of their stack.
+	if(vox.internal_organs_by_name["stack"])
+		cortical_stacks |= vox.internal_organs_by_name["stack"]
 
 	vox.equip_vox_raider()
 	vox.regenerate_icons()
@@ -130,8 +124,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	if(cortical_stacks.len == 0)
 		return 0
 
-	for(var/obj/stack in cortical_stacks)
-		if (get_area(stack) != locate(/area/shuttle/vox/station))
+	for(var/datum/organ/internal/stack/vox/stack in cortical_stacks)
+		if(stack.organ_holder && get_area(stack.organ_holder) != locate(/area/shuttle/vox/station))
 			return 0
 	return 1
 

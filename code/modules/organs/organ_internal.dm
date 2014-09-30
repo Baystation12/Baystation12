@@ -13,9 +13,9 @@
 	var/parent_organ = "chest"
 	var/robotic = 0 //For being a robot
 	var/removed_type //When removed, forms this object.
-	var/list/transplant_data // Blood DNA and colour of donor
 	var/rejecting            // Is this organ already being rejected?
-
+	var/obj/item/organ/organ_holder // If not in a body, held in this item.
+	var/list/transplant_data
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
 
@@ -275,5 +275,6 @@
 	if(istype(removed_organ))
 		removed_organ.organ_data = src
 		removed_organ.update()
+		organ_holder = removed_organ
 
 	return removed_organ

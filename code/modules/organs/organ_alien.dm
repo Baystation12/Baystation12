@@ -181,3 +181,32 @@
 /obj/item/organ/xenos/resinspinner
 	name = "hive node"
 	icon_state = "xgibmid2"
+
+//VOX ORGANS.
+/datum/organ/internal/stack
+	name = "cortical stack"
+	removed_type = /obj/item/organ/stack
+	parent_organ = "head"
+	robotic = 2
+	vital = 1
+	var/backup_time = 0
+	var/datum/mind/backup
+
+/datum/organ/internal/stack/process()
+	if(owner && owner.stat != 2 && !is_broken())
+		backup_time = world.time
+		if(owner.mind) backup = owner.mind
+
+/datum/organ/internal/stack/vox
+	removed_type = /obj/item/organ/stack/vox
+
+/datum/organ/internal/stack/vox/stack
+
+/obj/item/organ/stack
+	name = "cortical stack"
+	icon_state = "brain-prosthetic"
+	organ_tag = "stack"
+	robotic = 2
+
+/obj/item/organ/stack/vox
+	name = "vox cortical stack"
