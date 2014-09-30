@@ -25,15 +25,19 @@
 /datum/organ/internal/proc/is_broken()
 	return damage >= min_broken_damage || status & ORGAN_CUT_AWAY
 
-/datum/organ/internal/New(mob/living/carbon/human/H)
+/datum/organ/internal/New(mob/living/carbon/M)
 	..()
-	if(H)
-		var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
-		if(E.internal_organs == null)
-			E.internal_organs = list()
-		E.internal_organs |= src
-		H.internal_organs |= src
-		src.owner = H
+	if(M && istype(M))
+
+		M.internal_organs |= src
+		src.owner = M
+
+		var/mob/living/carbon/human/H = M
+		if(istype(H))
+			var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
+			if(E.internal_organs == null)
+				E.internal_organs = list()
+			E.internal_organs |= src
 
 /datum/organ/internal/process()
 
