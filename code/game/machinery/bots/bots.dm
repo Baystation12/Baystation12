@@ -51,15 +51,6 @@
 			usr << "<span class='danger'>[src]'s parts look very loose!</span>"
 	return
 
-/obj/machinery/bot/attack_alien(var/mob/living/carbon/alien/user as mob)
-	src.health -= rand(15,30)*brute_dam_coeff
-	src.visible_message("\red <B>[user] has slashed [src]!</B>")
-	playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
-
 /obj/machinery/bot/attack_animal(var/mob/living/simple_animal/M as mob)
 	if(M.melee_damage_upper == 0)	return
 	src.health -= M.melee_damage_upper
@@ -154,6 +145,19 @@
 
 /obj/machinery/bot/attack_ai(mob/user as mob)
 	src.attack_hand(user)
+
+/obj/machinery/bot/attack_hand(var/mob/living/carbon/human/user)
+
+	if(!istype(user))
+		return ..()
+
+	if(user.species.can_shred(user))
+		src.health -= rand(15,30)*brute_dam_coeff
+		src.visible_message("\red <B>[user] has slashed [src]!</B>")
+		playsound(src.loc, 'sound/weapons/slice.ogg', 25, 1, -1)
+		if(prob(10))
+			new /obj/effect/decal/cleanable/blood/oil(src.loc)
+		healthcheck()
 
 /******************************************************************/
 // Navigation procs

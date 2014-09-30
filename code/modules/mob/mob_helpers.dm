@@ -5,6 +5,11 @@
 		return 1
 	return 0
 
+/proc/isalien(A)
+	if(istype(A, /mob/living/carbon/alien))
+		return 1
+	return 0
+
 /proc/ismonkey(A)
 	if(A && istype(A, /mob/living/carbon/monkey))
 		return 1
@@ -12,21 +17,6 @@
 
 /proc/isbrain(A)
 	if(A && istype(A, /mob/living/carbon/brain))
-		return 1
-	return 0
-
-/proc/isalien(A)
-	if(istype(A, /mob/living/carbon/alien))
-		return 1
-	return 0
-
-/proc/isalienadult(A)
-	if(istype(A, /mob/living/carbon/alien/humanoid))
-		return 1
-	return 0
-
-/proc/islarva(A)
-	if(istype(A, /mob/living/carbon/alien/larva))
 		return 1
 	return 0
 
@@ -189,7 +179,7 @@ var/list/global/organ_rel_size = list(
 
 	var/ran_zone = zone
 	while (ran_zone == zone)
-		ran_zone = pick ( 
+		ran_zone = pick (
 			organ_rel_size["head"]; "head",
 			organ_rel_size["chest"]; "chest",
 			organ_rel_size["groin"]; "groin",
@@ -202,7 +192,7 @@ var/list/global/organ_rel_size = list(
 			organ_rel_size["l_foot"]; "l_foot",
 			organ_rel_size["r_foot"]; "r_foot",
 		)
-	
+
 	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
@@ -399,7 +389,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 	set name = "a-intent"
 	set hidden = 1
 
-	if(ishuman(src) || isalienadult(src) || isbrain(src))
+	if(ishuman(src) || isbrain(src))
 		switch(input)
 			if("help","disarm","grab","hurt")
 				a_intent = input
@@ -410,7 +400,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 		if(hud_used && hud_used.action_intent)
 			hud_used.action_intent.icon_state = "intent_[a_intent]"
 
-	else if(isrobot(src) || ismonkey(src) || islarva(src))
+	else if(isrobot(src) || ismonkey(src))
 		switch(input)
 			if("help")
 				a_intent = "help"
