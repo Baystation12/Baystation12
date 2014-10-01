@@ -17,11 +17,11 @@ obj/machinery/recharger
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
-	
+
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if (istype(G, allowed_type)) allowed = 1
-	
+
 	if(allowed)
 		if(charging)
 			user << "\red \A [charging] is already charging here."
@@ -54,6 +54,9 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 obj/machinery/recharger/attack_hand(mob/user as mob)
+	if(istype(user,/mob/living/silicon))
+		return
+
 	add_fingerprint(user)
 
 	if(charging)
@@ -85,7 +88,7 @@ obj/machinery/recharger/process()
 				icon_state = icon_state_charged
 				update_use_power(1)
 			return
-		
+
 		if(istype(charging, /obj/item/weapon/melee/baton))
 			var/obj/item/weapon/melee/baton/B = charging
 			if(B.bcell)
@@ -100,7 +103,7 @@ obj/machinery/recharger/process()
 				icon_state = icon_state_idle
 				update_use_power(1)
 			return
-		
+
 		if(istype(charging, /obj/item/device/laptop))
 			var/obj/item/device/laptop/L = charging
 			if(!L.stored_computer.battery.fully_charged())
@@ -111,7 +114,7 @@ obj/machinery/recharger/process()
 				icon_state = icon_state_charged
 				update_use_power(1)
 			return
-		
+
 		if(istype(charging, /obj/item/weapon/cell))
 			var/obj/item/weapon/cell/C = charging
 			if(!C.fully_charged())

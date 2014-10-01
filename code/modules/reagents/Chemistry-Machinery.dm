@@ -15,7 +15,7 @@
 	var/max_energy = 100
 	var/amount = 30
 	var/accept_glass = 0 //At 0 ONLY accepts glass containers. Kinda misleading varname.
-	var/beaker = null
+	var/atom/beaker = null
 	var/recharged = 0
 	var/hackedcheck = 0
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
@@ -132,7 +132,7 @@
 			amount = 100
 
 	if(href_list["dispense"])
-		if (dispensable_reagents.Find(href_list["dispense"]) && beaker != null)
+		if (dispensable_reagents.Find(href_list["dispense"]) && beaker != null && beaker.is_open_container())
 			var/obj/item/weapon/reagent_containers/B = src.beaker
 			var/datum/reagents/R = B.reagents
 			var/space = R.maximum_volume - R.total_volume
