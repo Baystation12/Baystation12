@@ -19,9 +19,6 @@
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	if (istype(wear_mask, /obj/item/clothing/mask/muzzle) && message_mode != "changeling")  //Todo:  Add this to speech_problem_flag checks.
-		return
-
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 
@@ -46,6 +43,9 @@
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
 			return
+
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
+		return
 
 	message = capitalize(trim(message))
 
