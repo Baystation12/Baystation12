@@ -22,7 +22,8 @@
 
 	blinded = null
 
-	handle_environment()
+	if(loc)
+		handle_environment(loc.return_air())
 
 	//Status updates, death etc.
 	handle_regular_status_updates()
@@ -36,6 +37,7 @@
 	return // Nothing yet. Maybe check it out at a later date.
 
 /mob/living/carbon/alien/proc/handle_mutations_and_radiation()
+
 	// Currently both Dionaea and larvae like to eat radiation, so I'm defining the
 	// rad absorbtion here. This will need to be changed if other baby aliens are added.
 
@@ -85,7 +87,6 @@
 			if(halloss > 0)
 				adjustHalLoss(-3)
 
-		//CONSCIOUS
 		else
 			stat = CONSCIOUS
 			if(halloss > 0)
@@ -108,6 +109,8 @@
 		else if(ear_deaf)			//deafness, heals slowly over time
 			ear_deaf = max(ear_deaf-1, 0)
 			ear_damage = max(ear_damage-0.05, 0)
+
+		update_icons()
 
 	return 1
 
@@ -174,7 +177,15 @@
 
 	return 1
 
-/mob/living/carbon/alien/proc/handle_environment(datum/gas_mixture/environment)
-	// At the moment, neither of the alien species breathe or suffer from pressure.
-	// TODO: Implement heat and phoron exposure checks.
-	return
+/mob/living/carbon/alien/proc/handle_environment(var/datum/gas_mixture/environment)
+	// Both alien subtypes survive in vaccum and suffer in high temperatures,
+	// so I'll just define this once, for both (see radiation comment above)
+	if(!environment) return
+
+	if(environment.temperature > (T0C+66))
+		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
+		if (fire) fire.icon_state = "fire2"
+		if(prob(20))
+			src << "\red You feel a searing heat!"
+	else
+		if (fire) fire.icon_state = "fire0"
