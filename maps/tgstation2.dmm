@@ -670,7 +670,7 @@
 "amT" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/maintenance/foresolar)
 "amU" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor{icon_state = "dark"},/area/security/warden)
 "amV" = (/obj/structure/table,/obj/item/bodybag/cryobag{pixel_x = 6},/obj/item/weapon/storage/firstaid/regular{pixel_x = 5; pixel_y = 5},/turf/simulated/floor{dir = 5; icon_state = "whitered"},/area/security/main)
-"amW" = (/obj/machinery/door/airlock/engineering{name = "Aft Port Solar Access"; req_access_txt = "10"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/foresolar)
+"amW" = (/obj/machinery/door/airlock/engineering{name = "Fore Solar Access"; req_access_txt = "10"},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/maintenance/foresolar)
 "amX" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/security_port)
 "amY" = (/obj/structure/cable/yellow{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable/yellow{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable/yellow{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating/airless,/area/solar/fore)
 "amZ" = (/obj/structure/closet/toolcloset,/obj/item/clothing/head/hardhat/dblue,/turf/simulated/floor/plating,/area/maintenance/security_starboard)
