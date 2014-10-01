@@ -27,6 +27,10 @@
 			user << "<span class='warning'>You need at least four rods to reinforce the [name].</span>"
 
 /obj/item/weapon/table_parts/attack_self(mob/user as mob)
+	if(locate(/obj/structure/table) in user.loc)
+		user << "<span class='warning'>There is already a table here.</span>"
+		return
+
 	new /obj/structure/table( user.loc )
 	user.drop_item()
 	del(src)
@@ -43,6 +47,10 @@
 		del(src)
 
 /obj/item/weapon/table_parts/reinforced/attack_self(mob/user as mob)
+	if(locate(/obj/structure/table/reinforced) in user.loc)
+		user << "<span class='warning'>There is already a table here.</span>"
+		return
+
 	new /obj/structure/table/reinforced( user.loc )
 	user.drop_item()
 	del(src)
@@ -65,6 +73,10 @@
 			del(src)
 
 /obj/item/weapon/table_parts/wood/attack_self(mob/user as mob)
+	if(locate(/obj/structure/table/woodentable) in user.loc)
+		user << "<span class='warning'>There is already a table here.</span>"
+		return
+
 	new /obj/structure/table/woodentable( user.loc )
 	user.drop_item()
 	del(src)
@@ -101,6 +113,10 @@
 	return
 
 /obj/item/weapon/rack_parts/attack_self(mob/user as mob)
+	if(locate(/obj/structure/rack) in user.loc)
+		user << "<span class='warning'>There is already a rack here.</span>"
+		return
+
 	var/obj/structure/rack/R = new /obj/structure/rack( user.loc )
 	R.add_fingerprint(user)
 	user.drop_item()
