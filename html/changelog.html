@@ -56,7 +56,49 @@ should be listed in the changelog upon commit though. Thanks. -->
 
 <!-- DO NOT REMOVE, MOVE, OR COPY THIS COMMENT! THIS MUST BE THE LAST NON-EMPTY LINE BEFORE THE LOGS #ADDTOCHANGELOGMARKER# -->
 
-+<div class='commit sansseri'>
+<div class='commit sansserif'>
+	<h2 class='date'>1 October 2014</h2>
+	<h3 class='author'>Zuhayr updated:</h3>
+	<ul class='changes bgimages16'>
+		<li class='rscadd'>Added species organ checks to several areas (phoron burn, welder burn, appendicitis, vox cortical stacks, flashes).</li>
+		<li class='rscadd'>Added VV option to add or remove organs.</li>
+		<li class='rscadd'>Added simple bioprinter (adminspawn).</li>
+		<li class='rscadd'>Added smashing/slashing behavior from xenos to some unarmed attacks.</li>
+		<li class='rscadd'>Added some new state icons for diona nymphs.</li>
+		<li class='rscadd'>Added borer husk functionality (cortical borers can turn dead humans into zombies).</li>
+		<li class='rscadd'>Added tackle verb.</li>
+		<li class='rscadd'>Added NO_SLIP.</li>
+		<li class='rscadd'>Added species-specific orans to Dionaea, new Xenomorphs and vox.</li>
+		<li class='rscadd'>Added colour and species to blood data.</li>
+		<li class='rscadd'>Added lethal consequences to missing your heart.</li>
+		<li class='rscdel'>Removed robot_talk_understand and alien_talk_understand.</li>
+		<li class='rscdel'>Removed attack_alien() and several flavours of is_alien() procs.</li>
+		<li class='rscdel'>Removed /mob/living/carbon/alien/humanoid.</li>
+		<li class='rscdel'>Removed alien_hud().</li>
+		<li class='rscdel'>Removed IS_SLOW, NEEDS_LIGHT and RAD_ABSORB.</li>
+		<li class='rscdel'>Renamed is_larva() to is_alien().</li>
+		<li class='tweak'>Refactored a ton of files, either condensing or expanding them, or moving them to new directories.</li>
+		<li class='tweak'>Refactored some attack vars from simple_animal to mob/living level.</li>
+		<li class='tweak'>Refactored internal organs to /mob/living/carbon level.</li>
+		<li class='tweak'>Refactored rad and light absorbtion to organ level.</li>
+		<li class='tweak'>Refactored brains to /obj/item/organ/brain.</li>
+		<li class='tweak'>Refactored a lot of blood splattering to use blood_splatter() proc.</li>
+		<li class='tweak'>Refactored broadcast languages (changeling and alien hiveminds, drone and binary chat) to actual languages.</li>
+		<li class='tweak'>Refactored xenomorph abilities to work for humans.</li>
+		<li class='tweak'>Refactored xenomorphs into human species.</li>
+		<li class='tweak'>Rewrote larva_hud() and human_hud(). The latter now takes data from the species datum.</li>
+		<li class='tweak'>Rewrote diona nymphs as descendents of /mob/living/carbon/alien.</li>
+		<li class='tweak'>Rewrote xenolarva as descendents of /mob/living/carbon/alien.</li>
+		<li class='tweak'>Rewrote /mob/living/carbon/alien.</li>
+		<li class='tweak'>Moved alcohol and toxin processing to the liver.</li>
+		<li class='tweak'>Moved drone light proc to robot level, added integrated_light_power and local_transmit vars to robots.</li>
+		<li class='tweak'>Moved human brainloss onto the brain organ.</li>
+		<li class='tweak'>Shuffled around and collapsed several redundant procs down to carbon level (hide, ventcrawl, Bump).</li>
+		<li class='tweak'>Fixed species swaps from NO_BLOOD to those with blood killing the subject instantly.</li>
+	</ul>
+</div>
+
+<div class='commit sansseri'>
 	<h2 class='date'>28 September 2014</h2>
 	<h3 class='author'>Gamerofthegame updated:</h3>
 	<ul class='changes bgimages16'>
