@@ -18,7 +18,7 @@
 
 	var/on = 0
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
-	var/list/scrubbing_gas = list()
+	var/list/scrubbing_gas = list("carbon_dioxide")
 
 	var/panic = 0 //is this scrubber panicked?
 

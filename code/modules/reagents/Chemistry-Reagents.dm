@@ -1779,7 +1779,18 @@ datum
 					del(O)
 				else if(istype(O,/obj/effect/plantsegment))
 					if(prob(50)) del(O) //Kills kudzu too.
-				// Damage that is done to growing plants is separately at code/game/machinery/hydroponics at obj/item/hydroponics
+				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
+					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
+
+					if(tray.seed)
+						tray.health -= rand(30,50)
+						if(tray.pestlevel > 0)
+							tray.pestlevel -= 2
+						if(tray.weedlevel > 0)
+							tray.weedlevel -= 3
+						tray.toxins += 4
+						tray.check_level_sanity()
+						tray.update_icon()
 
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				src = null
@@ -3413,7 +3424,7 @@ datum
 
 		ethanol/toxins_special
 			name = "Toxins Special"
-			id = "toxinsspecial"
+			id = "phoronspecial"
 			description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0

@@ -196,6 +196,12 @@
 	user.SetLuminosity(round(user.luminosity - (potency/5),1))
 	src.SetLuminosity(round(potency/5,1))
 
+/obj/item/weapon/reagent_containers/food/snacks/grown/generic_fruit
+	name = "fruit"
+	desc = "It smells weird."
+	icon_state = "orange"
+	potency = 10
+
 /obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod
 	name = "cocoa pod"
 	desc = "Can be ground into cocoa powder."

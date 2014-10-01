@@ -42,6 +42,14 @@
 
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
+/obj/machinery/power/apc/high
+	cell_type = /obj/item/weapon/cell/high
+
+/obj/machinery/power/apc/super
+	cell_type = /obj/item/weapon/cell/super
+
+/obj/machinery/power/apc/hyper
+	cell_type = /obj/item/weapon/cell/hyper
 
 /obj/machinery/power/apc
 	name = "area power controller"
@@ -1173,7 +1181,7 @@
 	lastused_light = area.usage(LIGHT)
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
-	
+
 	lastused_total = lastused_light + lastused_equip + lastused_environ
 
 	//store states to update icon if any change
@@ -1191,14 +1199,14 @@
 
 	if(debug)
 		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
-		
+
 		if(area.powerupdate)
 			log_debug("power update in [area.name] / [name]")
 
 	if(cell && !shorted)
 		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
-		
+
 		// Calculate how much power the APC will try to get from the grid.
 		var/target_draw = lastused_total
 		if (src.attempt_charging())
@@ -1209,14 +1217,14 @@
 		var/power_drawn = 0
 		if (src.avail())
 			power_drawn = add_load(target_draw) //get some power from the powernet
-		
+
 		//figure out how much power is left over after meeting demand
 		power_excess = power_drawn - lastused_total
-		
+
 		if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
-			
+
 			charging = 0
-		
+
 			var/required_power = -power_excess
 			if(cell.charge >= required_power*CELLRATE)	// can we draw enough from cell to cover what's left over?
 				cell.use(required_power*CELLRATE)
@@ -1228,7 +1236,7 @@
 				lighting = autoset(lighting, 0)
 				environ = autoset(environ, 0)
 				autoflag = 0
-		
+
 		//Set external power status
 		if (!power_drawn)
 			main_status = 0

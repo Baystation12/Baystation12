@@ -106,7 +106,7 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP
 		//EQUIP,ENVIRON or LIGHT
-	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
+	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/manual = 0
 	var/global/gl_uid = 1

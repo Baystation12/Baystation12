@@ -837,8 +837,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 //These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
 //Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
-#define ATMOS_PUMP_EFFICIENCY	1.0
-#define ATMOS_FILTER_EFFICIENCY	1.0
+#define ATMOS_PUMP_EFFICIENCY	2.5
+#define ATMOS_FILTER_EFFICIENCY	2.5
 
 //will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
 #define MINUMUM_MOLES_TO_PUMP	0.01

@@ -15,6 +15,14 @@
 			return
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))
+
+		message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+		if (!message)
+			return
+		log_say("[key_name(src)] : [message]")
+		if (stat == 2)
+			return say_dead(message)
+
 		var/mob/living/simple_animal/borer/B = src.loc
 		src << "You whisper silently, \"[message]\""
 		B.host << "The captive mind of [src] whispers, \"[message]\""
@@ -105,7 +113,6 @@
 /mob/living/simple_animal/borer/New()
 	..()
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
-	host_brain = new/mob/living/captive_brain(src)
 	if(!roundstart) request_player()
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -136,6 +143,7 @@
 		return borer_speak(message)
 
 	if(!host)
+		//TODO: have this pick a random mob within 3 tiles to speak for the borer.
 		src << "You have no host to speak to."
 		return //No host, no audible speech.
 
@@ -147,7 +155,6 @@
 			continue
 		else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 			M << "[src.truename] whispers to [host], \"[message]\""
-
 
 /mob/living/simple_animal/borer/Stat()
 	..()
@@ -173,10 +180,10 @@
 
 /mob/living/simple_animal/borer/verb/dominate_victim()
 	set category = "Alien"
-	set name = "Dominate Victim"
+	set name = "Paralyze Victim"
 	set desc = "Freeze the limbs of a potential host with supernatural fear."
 
-	if(world.time - used_dominate < 300)
+	if(world.time - used_dominate < 150)
 		src << "You cannot use that ability again so soon."
 		return
 
@@ -193,7 +200,7 @@
 		if(C.stat != 2)
 			choices += C
 
-	if(world.time - used_dominate < 300)
+	if(world.time - used_dominate < 150)
 		src << "You cannot use that ability again so soon."
 		return
 
@@ -207,7 +214,7 @@
 
 	src << "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread."
 	M << "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing."
-	M.Weaken(3)
+	M.Weaken(10)
 
 	used_dominate = world.time
 
@@ -224,17 +231,13 @@
 		src << "You cannot do that in your current state."
 		return
 
-	if(!host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
-		src << "<span class='warning'>There is no brain here for us to command!</span>"
-		return
-
 	if(docile)
 		src << "\blue You are feeling far too docile to do that."
 		return
 
 	src << "You begin delicately adjusting your connection to the host brain..."
 
-	spawn(300+(host.brainloss*5))
+	spawn(100+(host.brainloss*5))
 
 		if(!host || !src || controlling)
 			return
@@ -252,6 +255,8 @@
 			host_brain = new(src)
 
 			host_brain.ckey = host.ckey
+
+			host_brain.name = host.name
 
 			if(!host_brain.computer_id)
 				host_brain.computer_id = h2b_id
@@ -306,7 +311,7 @@
 		return
 
 	src << "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>"
-	host.reagents.add_reagent(chem, 15)
+	host.reagents.add_reagent(chem, 10)
 	chemicals -= 50
 
 /mob/living/simple_animal/borer/verb/release_host()
@@ -332,12 +337,12 @@
 	if(!host.stat)
 		host << "An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."
 
-	spawn(200)
+	spawn(100)
 
 		if(!host || !src) return
 
 		if(src.stat)
-			src << "You cannot infest a target in your current state."
+			src << "You cannot release your host in your current state."
 			return
 
 		src << "You wiggle out of [host]'s ear and plop to the ground."
@@ -345,31 +350,27 @@
 			host << "Something slimy wiggles out of your ear and plops to the ground!"
 
 		detatch()
+		leave_host()
 
 /mob/living/simple_animal/borer/proc/detatch()
 
-	if(!host) return
+	if(!host || !controlling) return
 
 	if(istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
 		var/datum/organ/external/head = H.get_organ("head")
 		head.implants -= src
 
-	src.loc = get_turf(host)
 	controlling = 0
-
-	reset_view(null)
-	machine = null
-
-	host.reset_view(null)
-	host.machine = null
 
 	host.verbs -= /mob/living/carbon/proc/release_control
 	host.verbs -= /mob/living/carbon/proc/punish_host
 	host.verbs -= /mob/living/carbon/proc/spawn_larvae
 
-
 	if(host_brain)
+
+		// these are here so bans and multikey warnings are not triggered on the wrong people when ckey is changed.
+		// computer_id and IP are not updated magically on their own in offline mobs -walter0o
 
 		// host -> self
 		var/h2s_id = host.computer_id
@@ -401,11 +402,21 @@
 
 	del(host_brain)
 
+/mob/living/simple_animal/borer/proc/leave_host()
+
+	if(!host) return
+
+	src.loc = get_turf(host)
+
+	reset_view(null)
+	machine = null
+
+	host.reset_view(null)
+	host.machine = null
+
 	var/mob/living/H = host
 	H.status_flags &= ~PASSEMOTES
-
 	host = null
-
 	return
 
 /mob/living/simple_animal/borer/verb/infest()
@@ -445,7 +456,7 @@
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
-	if(!do_after(src,50))
+	if(!do_after(src,30))
 		src << "As [M] moves away, you are dislodged and fall to the ground."
 		return
 

@@ -10,6 +10,7 @@
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
+	var/crisis_override = 0
 
 //Hud stuff
 
@@ -64,7 +65,6 @@
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
-	var/pose
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -161,7 +161,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -1098,10 +1098,10 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	
+
 	if(usr != src)
 		return
-	
+
 	if (href_list["showalerts"])
 		robot_alerts()
 		return
@@ -1113,9 +1113,12 @@
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O) || !(O in src.module.modules))
+		if (!istype(O))
 			return
-		
+
+		if(!((O in src.module.modules) || (O == src.module.emag)))
+			return
+
 		if(activated(O))
 			src << "Already activated"
 			return
@@ -1260,20 +1263,6 @@
 		W.attack_self(src)
 
 	return
-
-/mob/living/silicon/robot/verb/pose()
-	set name = "Set Pose"
-	set desc = "Sets a description which will be shown when someone examines you."
-	set category = "IC"
-
-	pose =  copytext(sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
-
-/mob/living/silicon/robot/verb/set_flavor()
-	set name = "Set Flavour Text"
-	set desc = "Sets an extended description of your character's features."
-	set category = "IC"
-
-	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
 

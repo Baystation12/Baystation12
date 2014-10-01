@@ -12,7 +12,7 @@
 	var/speak_statement = "states"
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
-
+	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 
 /mob/living/silicon/proc/show_laws()
@@ -38,12 +38,12 @@
 	return	//immune
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	
+
 	if (istype(source, /obj/machinery/containment_field))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, loc)
 		s.start()
-		
+
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
 		visible_message("\red [src] was shocked by \the [source]!", \
@@ -184,3 +184,17 @@
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+/mob/living/silicon/verb/pose()
+	set name = "Set Pose"
+	set desc = "Sets a description which will be shown when someone examines you."
+	set category = "IC"
+
+	pose =  copytext(sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
+
+/mob/living/silicon/verb/set_flavor()
+	set name = "Set Flavour Text"
+	set desc = "Sets an extended description of your character's features."
+	set category = "IC"
+
+	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
