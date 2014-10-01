@@ -661,8 +661,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 // Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
 /mob/proc/jittery_process()
-	var/old_x = pixel_x
-	var/old_y = pixel_y
+	//var/old_x = pixel_x
+	//var/old_y = pixel_y
 	is_jittery = 1
 	while(jitteriness > 100)
 //		var/amplitude = jitteriness*(sin(jitteriness * 0.044 * world.time) + 1) / 70
@@ -670,14 +670,48 @@ note dizziness decrements automatically in the mob's Life() proc.
 //		pixel_y = amplitude * cos(0.008 * jitteriness * world.time)
 
 		var/amplitude = min(4, jitteriness / 100)
-		pixel_x = rand(-amplitude, amplitude)
-		pixel_y = rand(-amplitude/3, amplitude/3)
+		pixel_x = old_x + rand(-amplitude, amplitude)
+		pixel_y = old_y + rand(-amplitude/3, amplitude/3)
 
 		sleep(1)
 	//endwhile - reset the pixel offsets to zero
 	is_jittery = 0
 	pixel_x = old_x
 	pixel_y = old_y
+
+
+//handles up-down floaty effect in space
+/mob/proc/make_floating(var/n)
+
+	floatiness = n
+
+	if(floatiness && !is_floating)
+		start_floating()
+	else if(!floatiness && is_floating)
+		stop_floating()
+
+/mob/proc/start_floating()
+
+	is_floating = 1
+
+	var/amplitude = 2 //maximum displacement from original position
+	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
+
+	var/top = old_y + amplitude
+	var/bottom = old_y - amplitude
+	var/half_period = period / 2
+	var/quarter_period = period / 4
+
+	animate(src, pixel_y = top, time = quarter_period, easing = SINE_EASING | EASE_OUT, loop = -1)		//up
+	animate(pixel_y = bottom, time = half_period, easing = SINE_EASING, loop = -1)						//down
+	animate(pixel_y = old_y, time = quarter_period, easing = SINE_EASING | EASE_IN, loop = -1)			//back
+
+/mob/proc/stop_floating()
+	animate(src, pixel_y = old_y, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
+	//reset the pixel offsets to zero
+	is_floating = 0
+
+
 
 /mob/Stat()
 	..()

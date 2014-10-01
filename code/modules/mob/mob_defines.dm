@@ -97,11 +97,15 @@
 	var/cpr_time = 1.0//Carbon
 
 	var/bodytemperature = 310.055	//98.7 F
+	var/old_x = 0
+	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
 	var/dizziness = 0//Carbon
 	var/is_dizzy = 0
 	var/is_jittery = 0
 	var/jitteriness = 0//Carbon
+	var/is_floating = 0
+	var/floatiness = 0
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
 

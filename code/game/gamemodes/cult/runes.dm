@@ -411,7 +411,9 @@ var/list/sacrificed = list()
 				ticker.mode:add_cultist(D.mind)
 			else
 				ticker.mode.cult+=D.mind
-
+			D.mind.assigned_role = pick("Anguished", "Blasphemous", "Corrupt", "Depraved", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Pained", "Profane", "Profligate", "Resentful", "Restless", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
+			D.mind.assigned_role += " "
+			D.mind.assigned_role += pick("Apparition", "Aptrgangr", "Draugr", "Dybbuk", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
 			D.mind.special_role = "Cultist"
 			D << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 			D << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"

@@ -510,3 +510,19 @@ proc/get_nt_opposed()
 	for(var/datum/objective/objective in player.objectives)
 		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
+
+/datum/game_mode/proc/printplayer(var/datum/mind/ply)
+	var/role = "\improper[ply.assigned_role]"
+	var/text = "<br><b>[ply.name]</b>(<b>[ply.key]</b>) as \a <b>[role]</b> ("
+	if(ply.current)
+		if(ply.current.stat == DEAD)
+			text += "died"
+		else
+			text += "survived"
+		if(ply.current.real_name != ply.name)
+			text += " as <b>[ply.current.real_name]</b>"
+	else
+		text += "body destroyed"
+	text += ")"
+
+	return text

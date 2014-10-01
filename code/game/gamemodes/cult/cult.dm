@@ -334,17 +334,7 @@
 	if( cult.len || (ticker && istype(ticker.mode,/datum/game_mode/cult)) )
 		var/text = "<FONT size = 2><B>The cultists were:</B></FONT>"
 		for(var/datum/mind/cultist in cult)
-
-			text += "<br>[cultist.key] was [cultist.name] ("
-			if(cultist.current)
-				if(cultist.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(cultist.current.real_name != cultist.name)
-					text += " as [cultist.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
+			text += printplayer(cultist)
+		text += "<br>"
 
 		world << text

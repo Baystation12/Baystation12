@@ -16,6 +16,7 @@
 					"<span class='notice'>[user.name] pulls you free from the gelatinous resin.</span>",\
 					"<span class='notice'>You hear squelching...</span>")
 				buckled_mob.pixel_y = 0
+				buckled_mob.old_y = 0
 				unbuckle()
 			else
 				buckled_mob.visible_message(\
@@ -25,6 +26,7 @@
 				spawn(1200)
 					if(user && buckled_mob && user.buckled == src)
 						buckled_mob.pixel_y = 0
+						buckled_mob.old_y = 0
 						unbuckle()
 			src.add_fingerprint(user)
 	return
@@ -57,6 +59,7 @@
 	M.dir = src.dir
 	M.update_canmove()
 	M.pixel_y = 6
+	M.old_y = 6
 	src.buckled_mob = M
 	src.add_fingerprint(user)
 	return
