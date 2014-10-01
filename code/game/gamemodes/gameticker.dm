@@ -383,7 +383,7 @@ var/global/datum/controller/gameticker/ticker
 				var/turf/playerTurf = get_turf(Player)
 				if(emergency_shuttle.departed && emergency_shuttle.evac)
 					if(playerTurf.z != 2)
-						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()]...</b></font>"
+						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
 					else
 						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
 				else if(playerTurf.z == 2)
@@ -391,7 +391,7 @@ var/global/datum/controller/gameticker/ticker
 				else if(issilicon(Player))
 					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"
 				else
-					Player << "<font color='blue'><b>You missed the crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
 			else
 				Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
 	world << "<br>"

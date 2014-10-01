@@ -180,18 +180,7 @@
 		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
-
-			text += "<br>[traitor.key] was [traitor.name] ("
-			if(traitor.current)
-				if(traitor.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(traitor.current.real_name != traitor.name)
-					text += " as [traitor.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
+			text += printplayer(traitor)
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1
@@ -217,6 +206,8 @@
 				else
 					text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
 					feedback_add_details("traitor_success","FAIL")
+
+		text += "<br>"
 
 		world << text
 	return 1
