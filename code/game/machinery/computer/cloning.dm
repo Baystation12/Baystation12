@@ -349,6 +349,9 @@
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Mental interface failure."
 		return
+	if (subject.species && subject.species.flags & NO_SCAN)
+		scantemp = "Error: Mental interface failure."
+		return
 	if (!isnull(find_record(subject.ckey)))
 		scantemp = "Subject already in database."
 		return
@@ -362,6 +365,7 @@
 	R.name=R.dna.real_name
 	R.types=DNA2_BUF_UI|DNA2_BUF_UE|DNA2_BUF_SE
 	R.languages=subject.languages
+	R.flavor=subject.flavor_texts.Copy()
 
 	//Add an implant if needed
 	var/obj/item/weapon/implant/health/imp = locate(/obj/item/weapon/implant/health, subject)
