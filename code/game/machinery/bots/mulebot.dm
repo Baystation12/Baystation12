@@ -19,7 +19,7 @@
 	brute_dam_coeff = 0.5
 	var/atom/movable/load = null		// the loaded crate (usually)
 	var/beacon_freq = 1400
-	var/control_freq = 1447
+	var/control_freq = AI_FREQ
 
 	suffix = ""
 
@@ -954,7 +954,7 @@
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/stack/rods(Tsec)
 	new /obj/item/stack/rods(Tsec)
-	new /obj/item/weapon/cable_coil/cut(Tsec)
+	new /obj/item/stack/cable_coil/cut(Tsec)
 	if (cell)
 		cell.loc = Tsec
 		cell.update_icon()

@@ -72,7 +72,11 @@
 	if(message_mode && bot_type == IS_ROBOT && message_mode != "binary" && !R.is_component_functioning("radio"))
 		src << "\red Your radio isn't functional at this time."
 		return
-
+	if(bot_type == IS_ROBOT && message_mode != "binary")
+		var/datum/robot_component/radio/RA = R.get_component("radio")
+		if (!R.cell_use_power(RA.active_usage))
+			usr << "\red Not enough power to transmit message."
+			return
 
 	//parse language key and consume it
 	var/datum/language/speaking = parse_language(message)
@@ -99,6 +103,10 @@
 				if(IS_ROBOT)
 					if(!R.is_component_functioning("comms"))
 						src << "\red Your binary communications component isn't functional."
+						return
+					var/datum/robot_component/binary_communication/B = R.get_component("comms")
+					if(!R.cell_use_power(B.active_usage))
+						src << "\red Not enough power to transmit message."
 						return
 				if(IS_PAI)
 					src << "You do not appear to have that function"
@@ -197,6 +205,11 @@
 				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
 				S.show_message(renderedAI, 2)
 			else
+				var/mob/living/silicon/robot/borg = S
+				if(istype(borg) && borg.is_component_functioning("comms"))
+					var/datum/robot_component/RC = borg.get_component("comms")
+					if(!borg.use_power(RC.active_usage))
+						continue // No power.
 				S.show_message(rendered, 2)
 
 

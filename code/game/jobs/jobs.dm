@@ -134,9 +134,7 @@ var/list/nonhuman_positions = list(
 	var/list/titles = list()
 
 	for(var/datum/job/J in jobs)
-		if(!J)	continue
 		if(J.title == job)
 			titles = J.alt_titles
 
 	return titles
-

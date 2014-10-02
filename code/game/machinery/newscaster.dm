@@ -5,6 +5,7 @@
 /datum/feed_message
 	var/author =""
 	var/body =""
+	var/message_type ="Story"
 	//var/parent_channel
 	var/backup_body =""
 	var/backup_author =""
@@ -218,7 +219,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 							dat+="<I>No feed messages found in channel...</I><BR><BR>"
 						else
 							for(var/datum/feed_message/MESSAGE in CHANNEL.messages)
-								dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"*/
+								dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"*/
 
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
@@ -304,7 +305,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 							if(MESSAGE.img)
 								usr << browse_rsc(MESSAGE.img, "tmp_photo[i].png")
 								dat+="<img src='tmp_photo[i].png' width = '180'><BR><BR>"
-							dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+							dat+="<FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[1]'>Back</A>"
 			if(10)
@@ -339,7 +340,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<I>No feed messages found in channel...</I><BR>"
 				else
 					for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
-						dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+						dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 						dat+="<FONT SIZE=2><A href='?src=\ref[src];censor_channel_story_body=\ref[MESSAGE]'>[(MESSAGE.body == "\[REDACTED\]") ? ("Undo story censorship") : ("Censor story")]</A>  -  <A href='?src=\ref[src];censor_channel_story_author=\ref[MESSAGE]'>[(MESSAGE.author == "\[REDACTED\]") ? ("Undo Author Censorship") : ("Censor message Author")]</A></FONT><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[10]'>Back</A>"
 			if(13)
@@ -353,7 +354,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						dat+="<I>No feed messages found in channel...</I><BR>"
 					else
 						for(var/datum/feed_message/MESSAGE in src.viewing_channel.messages)
-							dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
+							dat+="-[MESSAGE.body] <BR><FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[11]'>Back</A>"
 			if(14)
@@ -434,7 +435,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	if ((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		if(href_list["set_channel_name"])
-			src.channel_name = sanitizeSQL(strip_html_simple(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", "")))
+			src.channel_name = strip_html(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
 			while (findtext(src.channel_name," ") == 1)
 				src.channel_name = copytext(src.channel_name,2,lentext(src.channel_name)+1)
 			src.updateUsrDialog()
@@ -482,7 +483,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			for(var/datum/feed_channel/F in news_network.network_channels)
 				if( (!F.locked || F.author == scanned_user) && !F.censored)
 					available_channels += F.channel_name
-			src.channel_name = strip_html_simple(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
+			src.channel_name = strip_html(input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels )
 			src.updateUsrDialog()
 
 		else if(href_list["set_new_message"])
@@ -757,11 +758,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		photo.loc = src
 	else if(istype(user,/mob/living/silicon))
 		var/mob/living/silicon/tempAI = user
-		var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
-
-		if(!camera)
-			return
-		var/datum/picture/selection = camera.selectpicture()
+		var/datum/picture/selection = tempAI.GetPicture()
 		if (!selection)
 			return
 
@@ -840,7 +837,7 @@ obj/item/weapon/newspaper/attack_self(mob/user as mob)
 							if(MESSAGE.img)
 								user << browse_rsc(MESSAGE.img, "tmp_photo[i].png")
 								dat+="<img src='tmp_photo[i].png' width = '180'><BR>"
-							dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR><BR>"
+							dat+="<FONT SIZE=1>\[[MESSAGE.message_type] by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR><BR>"
 						dat+="</ul>"
 				if(scribble_page==curr_page)
 					dat+="<BR><I>There is a small scribble near the end of this page... It reads: \"[src.scribble]\"</I>"

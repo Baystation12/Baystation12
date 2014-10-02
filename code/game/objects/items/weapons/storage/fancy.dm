@@ -50,13 +50,20 @@
 	name = "donut box"
 	storage_slots = 6
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/donut")
-
+	foldable = /obj/item/stack/sheet/cardboard
 
 /obj/item/weapon/storage/fancy/donut_box/New()
 	..()
-	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
+	if(!istype(src,/obj/item/weapon/storage/fancy/donut_box/empty))
+		for(var/i=1; i <= storage_slots; i++)
+			new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
 	return
+
+/obj/item/weapon/storage/fancy/donut_box/empty
+	icon_state = "donutbox0"
+
+/obj/item/weapon/storage/fancy/donut_box/empty/New()
+	..()
 
 /*
  * Egg Box

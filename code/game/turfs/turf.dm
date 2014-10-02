@@ -130,6 +130,8 @@
 
 		else if(!istype(src, /turf/space))
 			M:inertia_dir = 0
+			var/mob/M1 = M
+			M1.make_floating(0)
 	..()
 	var/objects = 0
 	for(var/atom/A as mob|obj|turf|area in range(1))

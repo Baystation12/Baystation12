@@ -147,6 +147,7 @@
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
+	var/use_overmap = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -501,6 +502,9 @@
 
 				if("max_maint_drones")
 					config.max_maint_drones = text2num(value)
+
+				if("use_overmap")
+					config.use_overmap = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

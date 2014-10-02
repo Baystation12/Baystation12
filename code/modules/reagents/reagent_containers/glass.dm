@@ -10,8 +10,8 @@
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50)
-	volume = 50
+	possible_transfer_amounts = list(5,10,15,25,30,60)
+	volume = 60
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 	var/label_text = ""
@@ -206,17 +206,17 @@
 	desc = "A large beaker. Can hold up to 100 units."
 	icon_state = "beakerlarge"
 	matter = list("glass" = 5000)
-	volume = 100
+	volume = 120
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50,100)
+	possible_transfer_amounts = list(5,10,15,25,30,60,120)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	name = "cryostasis beaker"
-	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 60 units."
 	icon_state = "beakernoreact"
 	matter = list("glass" = 500)
-	volume = 50
+	volume = 60
 	amount_per_transfer_from_this = 10
 	flags = FPRINT | TABLEPASS | OPENCONTAINER | NOREACT
 
@@ -227,7 +227,7 @@
 	matter = list("glass" = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50,100,300)
+	possible_transfer_amounts = list(5,10,15,25,30,60,120,300)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 
@@ -236,7 +236,7 @@
 	desc = "A small glass vial. Can hold up to 25 units."
 	icon_state = "vial"
 	matter = list("glass" = 250)
-	volume = 25
+	volume = 30
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
@@ -250,13 +250,13 @@
 /obj/item/weapon/reagent_containers/glass/beaker/sulphuric
 	New()
 		..()
-		reagents.add_reagent("sacid", 50)
+		reagents.add_reagent("sacid", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/beaker/slime
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 50)
+		reagents.add_reagent("slimejelly", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket
@@ -268,8 +268,8 @@
 	matter = list("metal" = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = list(10,20,30,50,70)
-	volume = 70
+	possible_transfer_amounts = list(10,20,30,60,120)
+	volume = 120
 	flags = FPRINT | OPENCONTAINER
 
 	attackby(var/obj/D, mob/user as mob)

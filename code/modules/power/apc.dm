@@ -503,17 +503,17 @@
 					update_icon()
 				else
 					user << "You fail to [ locked ? "unlock" : "lock"] the APC interface."
-	else if (istype(W, /obj/item/weapon/cable_coil) && !terminal && opened && has_electronics!=2)
+	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics != 2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
 			return
-		var/obj/item/weapon/cable_coil/C = W
-		if(C.amount < 10)
-			user << "\red You need more wires."
+		var/obj/item/stack/cable_coil/C = W
+		if(C.get_amount() < 10)
+			user << "<span class='warning'>You need more wires.</span>"
 			return
 		user << "You start adding cables to the APC frame..."
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 20) && C.amount >= 10)
+		if(do_after(user, 20) && !terminal && opened && has_electronics != 2)
 			var/turf/T = get_turf(src)
 			var/obj/structure/cable/N = T.get_cable_node()
 			if (prob(50) && electrocute_mob(usr, N, N))
@@ -521,12 +521,12 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			C.use(10)
-			user.visible_message(\
-				"\red [user.name] has added cables to the APC frame!",\
-				"You add cables to the APC frame.")
-			make_terminal()
-			terminal.connect_to_network()
+			if (C.use(10))
+				user.visible_message(\
+					"\red [user.name] has added cables to the APC frame!",\
+					"You add cables to the APC frame.")
+				make_terminal()
+				terminal.connect_to_network()
 	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
@@ -539,7 +539,7 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			new /obj/item/weapon/cable_coil(loc,10)
+			new /obj/item/stack/cable_coil(loc,10)
 			user.visible_message(\
 				"\red [user.name] cut the cables and dismantled the power terminal.",\
 				"You cut the cables and dismantle the power terminal.")
@@ -1408,12 +1408,15 @@
 		if (ticker.mode.config_tag == "malfunction")
 			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--
-	stat |= BROKEN
-	operating = 0
-	/*if(occupant)
-		malfvacate(1)*/
-	update_icon()
-	update()
+
+	// Aesthetically much better!
+	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
+	spawn(rand(2,5))
+		src.visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
+		stat |= BROKEN
+		operating = 0
+		update_icon()
+		update()
 
 // overload all the lights in this APC area
 

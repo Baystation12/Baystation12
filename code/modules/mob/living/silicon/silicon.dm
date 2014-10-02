@@ -15,6 +15,10 @@
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 
+	var/sensor_mode = 0 //Determines the current HUD.
+	#define SEC_HUD 1 //Security HUD mode
+	#define MED_HUD 2 //Medical HUD mode
+
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -184,6 +188,19 @@
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+/mob/living/silicon/proc/toggle_sensor_mode()
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	switch(sensor_type)
+		if ("Security")
+			sensor_mode = SEC_HUD
+			src << "<span class='notice'>Security records overlay enabled.</span>"
+		if ("Medical")
+			sensor_mode = MED_HUD
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+		if ("Disable")
+			sensor_mode = 0
+			src << "Sensor augmentations disabled."
 
 /mob/living/silicon/verb/pose()
 	set name = "Set Pose"

@@ -167,7 +167,7 @@
 			// Accountability!
 			users_to_open |= user.name
 			log_admin("[user]([user.ckey]) has opened an alarming emergency shutter.")
-			message_admins("<span class='danger'>[user]([user.ckey]) has opened an alarming emergency shutter.</span>")
+			message_admins("[user]([user.ckey]) has opened an alarming emergency shutter.")
 			needs_to_close = 1
 		spawn()
 			open()
@@ -309,7 +309,7 @@
 			use_power(360)
 	else
 		log_admin("[usr]([usr.ckey]) has forced open an emergency shutter.")
-		message_admins("<span class='danger'>[usr]([usr.ckey]) has forced open an emergency shutter.</span>")
+		message_admins("[usr]([usr.ckey]) has forced open an emergency shutter.")
 	latetoggle()
 	return ..()
 

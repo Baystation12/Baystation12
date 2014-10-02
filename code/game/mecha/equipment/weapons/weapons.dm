@@ -10,11 +10,7 @@
 	var/fire_sound //Sound played while firing.
 	var/fire_volume = 50 //How loud it is played.
 	var/auto_rearm = 0 //Does the weapon reload itself after each shot?
-
-/obj/item/mecha_parts/mecha_equipment/weapon/can_attach(var/obj/mecha/combat/M as obj)
-	if(!istype(M))
-		return 0
-	return ..()
+	required_type = /obj/mecha/combat
 
 /obj/item/mecha_parts/mecha_equipment/weapon/action_checks(atom/target)
 	if(projectiles <= 0)
@@ -73,6 +69,16 @@
 	projectile = /obj/item/projectile/beam
 	fire_sound = 'sound/weapons/Laser.ogg'
 
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
+	equip_cooldown = 30
+	name = "Jury-rigged Welder-Laser"
+	desc = "While not regulation, this inefficient weapon can be attached to working exo-suits in desperate, or malicious, times."
+	icon_state = "mecha_laser"
+	energy_drain = 80
+	projectile = /obj/item/projectile/beam
+	fire_sound = 'sound/weapons/Laser.ogg'
+	required_type = list(/obj/mecha/combat, /obj/mecha/working)
+
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	equip_cooldown = 15
 	name = "CH-LC \"Solaris\" Laser Cannon"
@@ -89,7 +95,6 @@
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
 
-
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	equip_cooldown = 30
 	name = "eZ-13 mk2 Heavy pulse rifle"
@@ -98,7 +103,6 @@
 	origin_tech = "materials=3;combat=6;powerstorage=4"
 	projectile = /obj/item/projectile/beam/pulse/heavy
 	fire_sound = 'sound/weapons/marauder.ogg'
-
 
 /obj/item/projectile/beam/pulse/heavy
 	name = "heavy pulse laser"

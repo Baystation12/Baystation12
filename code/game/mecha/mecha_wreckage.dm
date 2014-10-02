@@ -11,7 +11,7 @@
 	anchored = 0
 	opacity = 0
 	var/list/welder_salvage = list(/obj/item/stack/sheet/plasteel,/obj/item/stack/sheet/metal,/obj/item/stack/rods)
-	var/list/wirecutters_salvage = list(/obj/item/weapon/cable_coil)
+	var/list/wirecutters_salvage = list(/obj/item/stack/cable_coil)
 	var/list/crowbar_salvage
 	var/salvage_num = 5
 
@@ -197,3 +197,7 @@
 				welder_salvage += part
 				parts -= part
 		return
+
+/obj/effect/decal/mecha_wreckage/hoverpod
+	name = "Hover pod wreckage"
+	icon_state = "engineering_pod-broken"

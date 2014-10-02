@@ -34,18 +34,18 @@
 			return
 		switch(state)
 			if(1)
-				if(istype(P, /obj/item/weapon/cable_coil))
-					var/obj/item/weapon/cable_coil/C = P
-					if(C.amount >= 5)
-						playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-						user << "\blue You start to add cables to the frame."
-						if(do_after(user, 20))
-							if(C)
-								C.amount -= 5
-								if(!C.amount) del(C)
-								user << "\blue You add cables to the frame."
-								state = 2
-								icon_state = "box_1"
+				if(istype(P, /obj/item/stack/cable_coil))
+					var/obj/item/stack/cable_coil/C = P
+					if (C.get_amount() < 5)
+						user << "<span class='warning'>You need five lengths of cable to add them to the frame.</span>"
+						return
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					user << "<span class='notice'>You start to add cables to the frame.</span>"
+					if(do_after(user, 20) && state == 1)
+						if(C.use(5))
+							user << "<span class='notice'>You add cables to the frame.</span>"
+							state = 2
+							icon_state = "box_1"
 				else
 					if(istype(P, /obj/item/weapon/wrench))
 						playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -85,7 +85,7 @@
 						user << "\blue You remove the cables."
 						state = 1
 						icon_state = "box_0"
-						var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
+						var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 						A.amount = 5
 
 			if(3)
@@ -129,15 +129,15 @@
 							new_machine.RefreshParts()
 							del(src)
 					else
-						if(istype(P, /obj/item/weapon))
+						if(istype(P, /obj/item))
 							for(var/I in req_components)
 								if(istype(P, text2path(I)) && (req_components[I] > 0))
 									playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-									if(istype(P, /obj/item/weapon/cable_coil))
-										var/obj/item/weapon/cable_coil/CP = P
-										if(CP.amount > 1)
+									if(istype(P, /obj/item/stack/cable_coil))
+										var/obj/item/stack/cable_coil/CP = P
+										if(CP.get_amount() > 1)
 											var/camt = min(CP.amount, req_components[I]) // amount of cable to take, idealy amount required, but limited by amount provided
-											var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src)
+											var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src)
 											CC.amount = camt
 											CC.update_icon()
 											CP.use(camt)
@@ -152,7 +152,7 @@
 									update_desc()
 									break
 							user << desc
-							if(P && P.loc != src && !istype(P, /obj/item/weapon/cable_coil))
+							if(P && P.loc != src && !istype(P, /obj/item/stack/cable_coil))
 								user << "\red You cannot add that component to the machine!"
 
 
@@ -216,7 +216,7 @@ to destroy them and players will be able to make replacements.
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1,
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/capacitor" = 1)
 
 /obj/item/weapon/circuitboard/pacman/super
@@ -236,7 +236,7 @@ obj/item/weapon/circuitboard/rdserver
 	origin_tech = "programming=3"
 	frame_desc = "Requires 2 pieces of cable, and 1 Scanning Module."
 	req_components = list(
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/scanning_module" = 1)
 
 /obj/item/weapon/circuitboard/mechfab
@@ -258,7 +258,7 @@ obj/item/weapon/circuitboard/rdserver
 	origin_tech = "programming=3;biotech=3"
 	frame_desc = "Requires 2 Manipulator, 2 Scanning Module, 2 pieces of cable and 1 Console Screen."
 	req_components = list(
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/scanning_module" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/stock_parts/console_screen" = 1)
@@ -274,7 +274,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser" = 1,
 							"/obj/item/weapon/stock_parts/console_screen" = 1,
-							"/obj/item/weapon/cable_coil" = 2,)
+							"/obj/item/stack/cable_coil" = 2,)
 
 /obj/item/weapon/circuitboard/unary_atmos
 	board_type = "machine"
@@ -308,7 +308,7 @@ obj/item/weapon/circuitboard/rdserver
 	origin_tech = "powerstorage=2;engineering=1"
 	frame_desc = "Requires 5 Pieces of Cable, 1 Matter Bin, and 2 Capacitors."
 	req_components = list(
-							"/obj/item/weapon/cable_coil" = 5,
+							"/obj/item/stack/cable_coil" = 5,
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/capacitor" = 2)
 
@@ -318,7 +318,7 @@ obj/item/weapon/circuitboard/rdserver
 	origin_tech = "magnets=2;engineering=2"
 	frame_desc = "Requires 2 Pieces of Cable, 1 Matter Bin, 1 Micro Manipulator, and 2 Capacitors."
 	req_components = list(
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/capacitor" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 1)
@@ -345,7 +345,7 @@ obj/item/weapon/circuitboard/rdserver
 	frame_desc = "Requires 2 Micro Manipulators, 2 Cable Coil and 2 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 2)
 
 /obj/item/weapon/circuitboard/telecomms/relay
@@ -356,7 +356,7 @@ obj/item/weapon/circuitboard/rdserver
 	frame_desc = "Requires 2 Micro Manipulators, 2 Cable Coil and 2 Hyperwave Filters."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 2)
 
 /obj/item/weapon/circuitboard/telecomms/bus
@@ -367,7 +367,7 @@ obj/item/weapon/circuitboard/rdserver
 	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 1,
+							"/obj/item/stack/cable_coil" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1)
 
 /obj/item/weapon/circuitboard/telecomms/processor
@@ -381,7 +381,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1,
 							"/obj/item/weapon/stock_parts/subspace/treatment" = 2,
 							"/obj/item/weapon/stock_parts/subspace/analyzer" = 1,
-							"/obj/item/weapon/cable_coil" = 2,
+							"/obj/item/stack/cable_coil" = 2,
 							"/obj/item/weapon/stock_parts/subspace/amplifier" = 1)
 
 /obj/item/weapon/circuitboard/telecomms/server
@@ -392,7 +392,7 @@ obj/item/weapon/circuitboard/rdserver
 	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 1,
+							"/obj/item/stack/cable_coil" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1)
 
 /obj/item/weapon/circuitboard/telecomms/broadcaster
@@ -403,7 +403,7 @@ obj/item/weapon/circuitboard/rdserver
 	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil, 1 Hyperwave Filter, 1 Ansible Crystal and 2 High-Powered Micro-Lasers. "
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 1,
+							"/obj/item/stack/cable_coil" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1,
 							"/obj/item/weapon/stock_parts/subspace/crystal" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser/high" = 2)
