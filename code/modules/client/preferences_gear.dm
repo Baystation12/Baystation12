@@ -395,7 +395,7 @@ proc/populate_gear_list()
 /datum/gear/bomber
 	display_name = "bomberjacker"
 	path = /obj/item/clothing/suit/bomber
-	cost = 3
+	cost = 4
 	slot = slot_wear_suit
 
 /datum/gear/unathi_mantle
@@ -420,19 +420,19 @@ proc/populate_gear_list()
 /datum/gear/gponcho
 	display_name = "poncho, green"
 	path = /obj/item/clothing/suit/poncho/green
-	cost = 3
+	cost = 4
 	slot = slot_wear_suit
 
 /datum/gear/rponcho
 	display_name = "poncho, red"
 	path = /obj/item/clothing/suit/poncho/red
-	cost = 3
+	cost = 4
 	slot = slot_wear_suit
 
 /datum/gear/poncho
 	display_name = "poncho, tan"
 	path = /obj/item/clothing/suit/poncho
-	cost = 3
+	cost = 4
 	slot = slot_wear_suit
 
 /datum/gear/unathi_robe
@@ -598,12 +598,22 @@ proc/populate_gear_list()
 	path = /obj/item/weapon/storage/briefcase
 	cost = 2
 
+/datum/gear/matchbook
+	display_name = "matchbook"
+	path = /obj/item/weapon/storage/box/matches
+	cost = 2
+
 // The rest of the trash.
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
 	cost = 1
+
+/datum/gear/cane
+	display_name = "cane"
+	path = /obj/item/weapon/cane
+	cost = 2
 
 /datum/gear/clipboard
 	display_name = "clipboard"
