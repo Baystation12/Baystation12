@@ -38,8 +38,10 @@
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You short out [src]'s maintenance hatch lock.</span>"
+		log_and_message_admins("emagged [src]'s maintenance hatch lock")
 	if(!locked && open)
 		emagged = 2
+		log_and_message_admins("emagged [src]'s inner circuits")
 
 /obj/machinery/bot/examine()
 	set src in view()
