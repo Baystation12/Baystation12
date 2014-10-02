@@ -721,7 +721,8 @@ var/list/ai_verbs_default = list(
 	else
 		var/icon_list[] = list(
 		"default",
-		"floating face"
+		"floating face",
+		"carp"
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
@@ -731,6 +732,8 @@ var/list/ai_verbs_default = list(
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 				if("floating face")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
+				if("carp")
+					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo4"))
 	return
 
 /*/mob/living/silicon/ai/proc/corereturn()
