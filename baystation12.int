@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\verbs\ooc.dm;code\game\jobs\jobs.dm;code\game\jobs\job\security.dm;maps\apstation.dmm;code\game\area\Space Station 13 areas.dm
+WINDOW: code\modules\mob\mob_helpers.dm;code\modules\mob\living\simple_animal\friendly\corgi.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\area code\game\jobs code\game\jobs\job code\game\verbs maps 
-FILE: code\game\verbs\ooc.dm
-LAST_COMPILE_TIME: 1412272779
+DIR: code code\game code\game\area code\game\jobs code\game\jobs\job code\game\verbs code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly icons icons\mob maps 
+FILE: code\modules\mob\living\simple_animal\friendly\corgi.dm
+LAST_COMPILE_TIME: 1412273022
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
