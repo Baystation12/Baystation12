@@ -25,8 +25,7 @@
 				if(do_after(user,40))
 					if(!src) return
 					user << "\blue You dissasembled the girder!"
-					new /obj/item/stack/sheet/metal(get_turf(src))
-					del(src)
+					dismantle()
 			else if(!anchored)
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user << "\blue Now securing the girder"
@@ -40,13 +39,11 @@
 			if(do_after(user,30))
 				if(!src) return
 				user << "\blue You slice apart the girder!"
-				new /obj/item/stack/sheet/metal(get_turf(src))
-				del(src)
+				dismantle()
 
 		else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 			user << "\blue You drill through the girder!"
-			new /obj/item/stack/sheet/metal(get_turf(src))
-			del(src)
+			dismantle()
 
 		else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 && istype(src,/obj/structure/girder/reinforced))
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
@@ -166,6 +163,23 @@
 		else
 			..()
 
+	proc/dismantle()
+		new /obj/item/stack/sheet/metal(get_turf(src))
+		del(src)
+
+	attack_hand(mob/user as mob)
+		if (HULK in user.mutations)
+			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
+			dismantle()
+			return
+		return ..()
+
+	attack_animal(mob/living/simple_animal/user)
+		if(user.wall_smash)
+			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
+			dismantle()
+			return
+		return ..()
 
 	blob_act()
 		if(prob(40))

@@ -172,7 +172,8 @@
 		else
 			O.mmi = new /obj/item/device/mmi(O)
 
-		if(O.mmi) O.mmi.transfer_identity(src) //Does not transfer key/client.
+		if(O.mmi)
+			O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
 

@@ -97,6 +97,136 @@ proc/populate_seed_list()
 	var/flower_icon = "vine_fruit"  // Which overlay to use.
 	var/flower_colour               // Which colour to use.
 
+//Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
+/datum/seed/proc/randomize()
+
+	roundstart = 0
+	seed_name = "strange plant"     // TODO: name generator.
+	display_name = "strange plants" // TODO: name generator.
+
+	seed_noun = pick("spores","nodes","cuttings","seeds")
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/generic_fruit)
+	potency = rand(5,30)
+
+	//TODO: Finish generalizing the product icons so this can be randomized.
+	packet_icon = "seed-berry"
+	plant_icon = "berry"
+	if(prob(20))
+		harvest_repeat = 1
+
+	if(prob(5))
+		consume_gasses = list()
+		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		consume_gasses[gas] = rand(3,9)
+
+	if(prob(5))
+		exude_gasses = list()
+		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		exude_gasses[gas] = rand(3,9)
+
+	chems = list()
+	if(prob(80))
+		chems["nutriment"] = list(rand(1,10),rand(10,20))
+
+	var/additional_chems = rand(0,5)
+
+	var/list/possible_chems = list(
+		"bicaridine",
+		"hyperzine",
+		"cryoxadone",
+		"blood",
+		"water",
+		"potassium",
+		"plasticide",
+		"slimetoxin",
+		"aslimetoxin",
+		"inaprovaline",
+		"space_drugs",
+		"paroxetine",
+		"mercury",
+		"sugar",
+		"radium",
+		"ryetalyn",
+		"alkysine",
+		"thermite",
+		"tramadol",
+		"cryptobiolin",
+		"dermaline",
+		"dexalin",
+		"phoron",
+		"synaptizine",
+		"impedrezene",
+		"hyronalin",
+		"peridaxon",
+		"toxin",
+		"rezadone",
+		"ethylredoxrazine",
+		"slimejelly",
+		"cyanide",
+		"mindbreaker",
+		"stoxin"
+		)
+
+	for(var/x=1;x<=additional_chems;x++)
+		if(!possible_chems.len)
+			break
+		var/new_chem = pick(possible_chems)
+		possible_chems -= new_chem
+		chems[new_chem] = list(rand(1,10),rand(10,20))
+
+	if(prob(90))
+		requires_nutrients = 1
+		nutrient_consumption = rand(100)*0.1
+	else
+		requires_nutrients = 0
+
+	if(prob(90))
+		requires_water = 1
+		water_consumption = rand(10)
+	else
+		requires_water = 0
+
+	ideal_heat =       rand(100,400)
+	heat_tolerance =   rand(10,30)
+	ideal_light =      rand(2,10)
+	light_tolerance =  rand(2,7)
+	toxins_tolerance = rand(2,7)
+	pest_tolerance =   rand(2,7)
+	weed_tolerance =   rand(2,7)
+	lowkpa_tolerance = rand(10,50)
+	highkpa_tolerance = rand(100,300)
+
+	if(prob(5))
+		alter_temp = rand(-5,5)
+
+	if(prob(1))
+		immutable = -1
+
+	var/carnivore_prob = rand(100)
+	if(carnivore_prob < 5)
+		carnivorous = 2
+	else if(carnivore_prob < 10)
+		carnivorous = 1
+
+	if(prob(10))
+		parasite = 1
+
+	var/vine_prob = rand(100)
+	if(vine_prob < 5)
+		spread = 2
+	else if(vine_prob < 10)
+		spread = 1
+
+	if(prob(5))
+		biolum = 1
+		biolum_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+
+	endurance = rand(60,100)
+	yield = rand(3,15)
+	maturation = rand(5,15)
+	production = maturation + rand(2,5)
+	lifespan = production + rand(5,10)
+
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()
 	if(!mutants || !mutants.len || immutable > 0) return 0
@@ -188,26 +318,35 @@ proc/populate_seed_list()
 
 			if(gene.values.len < 6) return
 
-			yield =     round(yield*0.5)
-			endurance = round(endurance*0.5)
-			lifespan =  round(lifespan*0.8)
+			if(yield > 0)     yield =     max(1,round(yield*0.85))
+			if(endurance > 0) endurance = max(1,round(endurance*0.85))
+			if(lifespan > 0)  lifespan =  max(1,round(lifespan*0.85))
 
 			if(!products) products = list()
 			products |= gene.values[1]
 
 			if(!chems) chems = list()
-			for(var/rid in gene.values[2])
-				var/existing_chem
-				for(var/chem in chems)
-					if(rid == chem)
-						existing_chem = 1
-						break
 
-				if(existing_chem)
-					chems[rid][1] = max(1,round((chems[rid][1]+gene.values[2][rid][1])/2))
-					chems[rid][2] = max(1,round((chems[rid][2]+gene.values[2][rid][2])/2))
+			var/list/gene_value = gene.values[2]
+			for(var/rid in gene_value)
+
+				var/list/gene_chem = gene_value[rid]
+
+				if(chems[rid])
+
+					var/list/chem_value = chems[rid]
+
+					chems[rid][1] = max(1,round((gene_chem[1] + chem_value[1])/2))
+
+					if(gene_chem.len > 1)
+						if(chem_value > 1)
+							chems[rid][2] = max(1,round((gene_chem[2] + chem_value[2])/2))
+						else
+							chems[rid][2] = gene_chem[2]
+
 				else
-					chems[rid] = gene.values[2][rid]
+					var/list/new_chem = gene_chem[rid]
+					chems[rid] = new_chem.Copy()
 
 			var/list/new_gasses = gene.values[3]
 			if(istype(new_gasses))
@@ -353,7 +492,7 @@ proc/populate_seed_list()
 	if(!isnull(products) && products.len && yield > 0)
 		got_product = 1
 
-	if(!got_product)
+	if(!got_product && !harvest_sample)
 		user << "\red You fail to harvest anything useful."
 	else
 		user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
@@ -370,12 +509,14 @@ proc/populate_seed_list()
 			seeds.update_seed()
 			return
 
-		var/total_yield
-		if(isnull(yield_mod) || yield_mod < 1)
-			yield_mod = 0
-			total_yield = yield
-		else
-			total_yield = max(1,rand(yield_mod,yield_mod+yield))
+		var/total_yield = 0
+		if(yield > -1)
+			if(isnull(yield_mod) || yield_mod < 1)
+				yield_mod = 0
+				total_yield = yield
+			else
+				total_yield = yield + rand(yield_mod)
+			total_yield = max(1,total_yield)
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
@@ -417,8 +558,8 @@ proc/populate_seed_list()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()
 	if(exude_gasses)   new_seed.exude_gasses = exude_gasses.Copy()
 
-	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : " ")][seed_name]"
-	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : " ")][display_name]"
+	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
+	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
 	new_seed.seed_noun =            seed_noun
 
 	new_seed.requires_nutrients =   requires_nutrients
@@ -569,7 +710,7 @@ proc/populate_seed_list()
 	name = "deathnettle"
 	seed_name = "death nettle"
 	display_name = "death nettles"
-	products = list(/obj/item/weapon/grown/deathnettle)
+	products = list(/obj/item/weapon/grown/nettle/death)
 	mutants = null
 	packet_icon = "seed-deathnettle"
 	plant_icon = "deathnettle"

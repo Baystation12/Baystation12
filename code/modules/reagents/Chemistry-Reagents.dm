@@ -1779,7 +1779,18 @@ datum
 					del(O)
 				else if(istype(O,/obj/effect/plantsegment))
 					if(prob(50)) del(O) //Kills kudzu too.
-				// Damage that is done to growing plants is separately at code/game/machinery/hydroponics at obj/item/hydroponics
+				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
+					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
+
+					if(tray.seed)
+						tray.health -= rand(30,50)
+						if(tray.pestlevel > 0)
+							tray.pestlevel -= 2
+						if(tray.weedlevel > 0)
+							tray.weedlevel -= 3
+						tray.toxins += 4
+						tray.check_level_sanity()
+						tray.update_icon()
 
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				src = null
@@ -2077,7 +2088,7 @@ datum
 			description = "This is what makes chilis hot."
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 179, 16, 8
-			
+
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
 					M = holder.my_atom
@@ -2091,7 +2102,7 @@ datum
 								H << "\red <b>Your insides feel uncomfortably hot !</b>"
 							if(2 to 20)
 								if(prob(5))
-									H << "\red <b>Your insides feel uncomfortably hot !</b>"									
+									H << "\red <b>Your insides feel uncomfortably hot !</b>"
 							if(20 to INFINITY)
 								H.apply_effect(2,AGONY,0)
 								if(prob(5))
@@ -2199,10 +2210,10 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
-					M = holder.my_atom				
-				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)				
+					M = holder.my_atom
+				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
 				if(prob(1))
-					M.emote("shiver")				
+					M.emote("shiver")
 				if(istype(M, /mob/living/carbon/slime))
 					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
 				holder.remove_reagent("capsaicin", 5)
@@ -3413,7 +3424,7 @@ datum
 
 		ethanol/toxins_special
 			name = "Toxins Special"
-			id = "toxinsspecial"
+			id = "phoronspecial"
 			description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0

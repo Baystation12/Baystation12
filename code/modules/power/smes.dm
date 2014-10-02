@@ -1,8 +1,8 @@
 // the SMES
 // stores power
 
-#define SMESMAXCHARGELEVEL 200000
-#define SMESMAXOUTPUT 200000
+#define SMESMAXCHARGELEVEL 250000
+#define SMESMAXOUTPUT 250000
 
 /obj/machinery/power/smes
 	name = "power storage unit"
@@ -15,7 +15,7 @@
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
 	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 1e6		//Current amount of power it holds
+	var/charge = 1.0e6		//Current amount of power it holds
 	var/charging = 0		//1 if it's actually charging, 0 if not
 	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
 	//var/chargecount = 0
@@ -88,32 +88,18 @@
 	var/last_onln = online
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		//If chargemod is set, try to charge
+		//Use charging to let the player know whether we were able to obtain our target load.
+		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
+		if(chargemode)
+			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				load = add_load(load)		// add the load to the terminal side network
-				charge += load * SMESRATE	// increase the charge
-
-			else					// if not enough capcity
-				charging = 0		// stop charging
-				//chargecount  = 0
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
 				charging = 1
-		/*	if(chargemode)
-				if(chargecount > rand(3,6))
-					charging = 1
-					chargecount = 0
-
-				if(excess > chargelevel)
-					chargecount++
-				else
-					chargecount = 0
 			else
-				chargecount = 0   */
+				charging = 0
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored
@@ -344,7 +330,6 @@
 /obj/machinery/power/smes/proc/ion_act()
 	if(src.z == 1)
 		if(prob(1)) //explosion
-			world << "\red SMES explosion in [src.loc.loc]"
 			for(var/mob/M in viewers(src))
 				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)
 			sleep(10*pick(4,5,6,7,10,14))
@@ -356,7 +341,6 @@
 			del(src)
 			return
 		if(prob(15)) //Power drain
-			world << "\red SMES power drain in [src.loc.loc]"
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -365,7 +349,6 @@
 			else
 				emp_act(2)
 		if(prob(5)) //smoke only
-			world << "\red SMES smoke in [src.loc.loc]"
 			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
 			smoke.set_up(3, 0, src.loc)
 			smoke.attach(src)

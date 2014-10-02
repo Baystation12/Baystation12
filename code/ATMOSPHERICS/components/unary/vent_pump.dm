@@ -86,6 +86,15 @@
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
+/obj/machinery/atmospherics/unary/vent_pump/engine
+	name = "Engine Core Vent"
+	power_channel = ENVIRON
+	active_power_usage = 15000	//15 kW ~ 20 HP
+
+/obj/machinery/atmospherics/unary/vent_pump/engine/New()
+	..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
+
 /obj/machinery/atmospherics/unary/vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
@@ -169,7 +178,7 @@
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			
 			//limit flow rate from turfs
-			transfer_moles = min(transfer_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
+			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
 			
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
 

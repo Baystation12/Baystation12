@@ -498,12 +498,12 @@
 		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
-			
+
 			var/ratio = inhale_pp/safe_pressure_min
 			// Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
 			adjustOxyLoss(max(HUMAN_MAX_OXYLOSS*(1-ratio), 0))
 			failed_inhale = 1
-			
+
 			oxygen_alert = max(oxygen_alert, 1)
 		else
 			// We're in safe limits
@@ -629,8 +629,8 @@
 			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
-		
-		
+
+
 		breath.update_values()
 		return 1
 
@@ -641,6 +641,12 @@
 		//Moved pressure calculations here for use in skip-processing check.
 		var/pressure = environment.return_pressure()
 		var/adjusted_pressure = calculate_affecting_pressure(pressure)
+
+		//Check for contaminants before anything else because we don't want to skip it.
+		for(var/g in environment.gas)
+			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
+				pl_effects()
+				break
 
 		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
 			var/loc_temp = T0C
@@ -728,10 +734,6 @@
 			else
 				pressure_alert = -1
 
-		for(var/g in environment.gas)
-			if(gas_data.flags[g] & XGM_GAS_CONTAMINANT && environment.gas[g] > gas_data.overlay_limit[g] + 1)
-				pl_effects()
-				break
 		return
 
 	/*
@@ -1314,7 +1316,9 @@
 					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
 
+			var/tmp/has_ninja_mask = 0
 			if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
+				has_ninja_mask = 1
 				var/obj/item/clothing/mask/gas/voice/space_ninja/O = wear_mask
 				switch(O.mode)
 					if(0)
@@ -1360,7 +1364,7 @@
 					if(!druggy)
 						see_invisible = SEE_INVISIBLE_LIVING
 
-			else if(!seer)
+			else if(!seer && !has_ninja_mask)
 				see_invisible = SEE_INVISIBLE_LIVING
 
 
@@ -1633,26 +1637,19 @@
 		if(status_flags & FAKEDEATH)
 			temp = PULSE_NONE		//pretend that we're dead. unlike actual death, can be inflienced by meds
 
+		//handles different chems' influence on pulse
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.id in bradycardics)
 				if(temp <= PULSE_THREADY && temp >= PULSE_NORM)
 					temp--
-					break		//one reagent is enough
-								//comment out the breaks to make med effects stack
-		for(var/datum/reagent/R in reagents.reagent_list)				//handles different chems' influence on pulse
 			if(R.id in tachycardics)
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
-					break
-		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
-			if(R.id in heartstopper)
+			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
-				break
-		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
-			if(R.id in cheartstopper)
+			if(R.id in cheartstopper) //Conditional heart-stoppage
 				if(R.volume >= R.overdose)
 					temp = PULSE_NONE
-					break
 
 		return temp
 

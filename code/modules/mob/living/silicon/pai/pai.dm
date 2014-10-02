@@ -32,7 +32,7 @@
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows")
 		)
-	
+
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
@@ -84,7 +84,6 @@
 	add_language("Tradeband", 1)
 	add_language("Gutter", 1)
 
-	verbs += /mob/living/silicon/pai/proc/fold_out
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 
@@ -136,6 +135,9 @@
 	if(istype(src.loc,/obj/item/device/paicard))
 		return 0
 	..()
+
+/mob/living/silicon/pai/MouseDrop(atom/over_object)
+	return
 
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
@@ -301,7 +303,7 @@
 // mobile pai mob. This also includes handling some of the general shit that can occur
 // to it. Really this deserves its own file, but for the moment it can sit here. ~ Z
 
-/mob/living/silicon/pai/proc/fold_out()
+/mob/living/silicon/pai/verb/fold_out()
 	set category = "pAI Commands"
 	set name = "Unfold Chassis"
 
@@ -315,25 +317,30 @@
 		return
 
 	last_special = world.time + 100
-	verbs -= /mob/living/silicon/pai/proc/fold_out
-	verbs += /mob/living/silicon/pai/proc/fold_up
-
-	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 	canmove = 1
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/mob))
-		var/mob/M = card.loc
-		M.drop_item(card)
+		var/mob/holder = card.loc
+		holder.drop_from_inventory(card)
+	else if(istype(card.loc,/obj/item/clothing/suit/space/space_ninja))
+		var/obj/item/clothing/suit/space/space_ninja/holder = card.loc
+		holder.pai = null
+	else if(istype(card.loc,/obj/item/device/pda))
+		var/obj/item/device/pda/holder = card.loc
+		holder.pai = null
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
-
 	src.forceMove(get_turf(card))
-	card.forceMove(src)
 
-/mob/living/silicon/pai/proc/fold_up()
+	card.forceMove(src)
+	card.screen_loc = null
+
+	var/turf/T = get_turf(src)
+	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+
+/mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
 	set name = "Collapse Chassis"
 
@@ -412,8 +419,8 @@
 
 	last_special = world.time + 100
 
-	verbs -= /mob/living/silicon/pai/proc/fold_up
-	verbs += /mob/living/silicon/pai/proc/fold_out
+	if(src.loc == card)
+		return
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
@@ -437,3 +444,30 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
+
+/mob/living/silicon/pai/examine()
+
+	set src in oview()
+
+	if(!usr || !src)	return
+	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
+		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+		return
+
+	var/msg = "<span class='info'>*---------*\nThis is \icon[src][name], a personal AI!"
+
+	switch(src.stat)
+		if(CONSCIOUS)
+			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
+		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
+		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
+	msg += "\n*---------*</span>"
+
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+
+	if (pose)
+		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+			pose = addtext(pose,".") //Makes sure all emotes end with a period.
+		msg += "\nIt is [pose]"
+
+	usr << msg

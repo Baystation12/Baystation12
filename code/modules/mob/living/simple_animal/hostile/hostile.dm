@@ -193,6 +193,10 @@
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
 		for(var/dir in cardinal) // North, South, East, West
+			for(var/obj/structure/window/obstacle in get_step(src, dir))
+				if(obstacle.dir == reverse_dir[dir]) // So that windows get smashed in the right order
+					obstacle.attack_animal(src)
+					return
 			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
 			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
 				obstacle.attack_animal(src)

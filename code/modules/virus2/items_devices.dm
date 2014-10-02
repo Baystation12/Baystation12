@@ -58,12 +58,11 @@
 		return
 	..()
 	if(prob(50))
-		user << "\The [src] shatters!"
+		user << "<span class='danger'>\The [src] shatters!</span>"
 		if(virus2.infectionchance > 0)
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))
-					if(get_infection_chance(target))
-						infect_virus2(target,src.virus2)
+					infect_virus2(target, src.virus2)
 		del src
 
 /obj/item/weapon/virusdish/examine()

@@ -1,7 +1,7 @@
 //--------------------------------------------
 // Pipe colors
 //
-// Add them here and to the pipe_colors list 
+// Add them here and to the pipe_colors list
 //  to automatically add them to all relevant
 //  atmospherics devices.
 //--------------------------------------------
@@ -90,7 +90,7 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 /datum/pipe_icon_manager/proc/gen_pipe_icons()
 	if(!pipe_icons)
 		pipe_icons = new()
-	
+
 	var/icon/pipe = new('icons/atmos/pipes.dmi')
 
 	for(var/state in pipe.IconStates())
@@ -106,10 +106,23 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 			I.color = pipe_colors[pipe_color]
 			pipe_icons[state + "[pipe_colors[pipe_color]]"] = I
 
+	pipe = new ('icons/atmos/heat.dmi')
+	for(var/state in pipe.IconStates())
+		if(!state || findtext(state, "map"))
+			continue
+		pipe_icons["hepipe" + state] = image('icons/atmos/heat.dmi', icon_state = state)
+
+	pipe = new ('icons/atmos/junction.dmi')
+	for(var/state in pipe.IconStates())
+		if(!state || findtext(state, "map"))
+			continue
+		pipe_icons["hejunction" + state] = image('icons/atmos/junction.dmi', icon_state = state)
+
+
 /datum/pipe_icon_manager/proc/gen_manifold_icons()
 	if(!manifold_icons)
 		manifold_icons = new()
-	
+
 	var/icon/pipe = new('icons/atmos/manifold.dmi')
 
 	for(var/state in pipe.IconStates())
@@ -129,7 +142,7 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 /datum/pipe_icon_manager/proc/gen_device_icons()
 	if(!device_icons)
 		device_icons = new()
-	
+
 	var/icon/device
 
 	device = new('icons/atmos/vent_pump.dmi')
@@ -147,9 +160,9 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 /datum/pipe_icon_manager/proc/gen_omni_icons()
 	if(!omni_icons)
 		omni_icons = new()
-		
+
 	var/icon/omni = new('icons/atmos/omni_devices.dmi')
-	
+
 	for(var/state in omni.IconStates())
 		if(!state || findtext(state, "map"))
 			continue
@@ -168,11 +181,11 @@ var/global/list/pipe_colors = list("grey" = PIPE_COLOR_GREY, "red" = PIPE_COLOR_
 		pipe_underlays_intact = new()
 
 	var/icon/pipe = new('icons/atmos/pipe_underlays.dmi')
-	
+
 	for(var/state in pipe.IconStates())
 		if(state == "")
 			continue
-		
+
 		for(var/D in cardinal)
 			var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
 			switch(state)

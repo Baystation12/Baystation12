@@ -532,7 +532,6 @@
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
-
 				if("run_speed")
 					config.run_speed = value
 				if("walk_speed")

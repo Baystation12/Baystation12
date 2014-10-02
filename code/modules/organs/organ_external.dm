@@ -321,7 +321,6 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Infections
 	update_germs()
-	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
 /*
@@ -639,36 +638,37 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
+
+		destspawn = 1
+		//Robotic limbs explode if sabotaged.
+		if(status & ORGAN_ROBOT && !no_explode && sabotaged)
+			owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
+			"\red <b>Your [display_name] explodes!</b>",\
+			"You hear an explosion followed by a scream!")
+			explosion(get_turf(owner),-1,-1,2,3)
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, owner)
+			spark_system.attach(owner)
+			spark_system.start()
+			spawn(10)
+				del(spark_system)
+
+		owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+		"You hear a terrible sound of ripping tendons and flesh.")
+
 		if(organ)
-			destspawn = 1
-			//Robotic limbs explode if sabotaged.
-			if(status & ORGAN_ROBOT && !no_explode && sabotaged)
-				owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
-				"\red <b>Your [display_name] explodes!</b>",\
-				"You hear an explosion followed by a scream!")
-				explosion(get_turf(owner),-1,-1,2,3)
-				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-				spark_system.set_up(5, 0, owner)
-				spark_system.attach(owner)
-				spark_system.start()
-				spawn(10)
-					del(spark_system)
-
-			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
-			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
-			"You hear a terrible sound of ripping tendons and flesh.")
-
 			//Throw organs around
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.update_body(1)
+		owner.update_body(1)
 
-			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
-			release_restraints()
+		// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
+		release_restraints()
 
-			if(vital)
-				owner.death()
+		if(vital)
+			owner.death()
 
 /****************************************************
 			   HELPERS
@@ -724,8 +724,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return rval
 
 /datum/organ/external/proc/fracture()
+
 	if(status & ORGAN_BROKEN)
 		return
+
 	owner.visible_message(\
 		"\red You hear a loud cracking sound coming from \the [owner].",\
 		"\red <b>Something feels like it shattered in your [display_name]!</b>",\
@@ -741,6 +743,25 @@ Note that amputating the affected organ does in fact remove the infection from t
 	// Fractures have a chance of getting you out of restraints
 	if (prob(25))
 		release_restraints()
+
+	// This is mostly for the ninja suit to stop ninja being so crippled by breaks.
+	// TODO: consider moving this to a suit proc or process() or something during
+	// hardsuit rewrite.
+	if(!(status & ORGAN_SPLINTED) && istype(owner,/mob/living/carbon/human))
+
+		var/mob/living/carbon/human/H = owner
+
+		if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+
+			var/obj/item/clothing/suit/space/suit = H.wear_suit
+
+			if(isnull(suit.supporting_limbs))
+				return
+
+			owner << "You feel \the [suit] constrict about your [display_name], supporting it."
+			status |= ORGAN_SPLINTED
+			suit.supporting_limbs |= src
+	return
 
 /datum/organ/external/proc/robotize()
 	src.status &= ~ORGAN_BROKEN
@@ -772,14 +793,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 			return 1
 	return 0
 
-/datum/organ/external/get_icon(gender="")
+/datum/organ/external/get_icon(var/icon/race_icon, var/icon/deform_icon,gender="")
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 
 	if (status & ORGAN_MUTATED)
-		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
+		return new /icon(deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
-	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
+	return new /icon(race_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()
@@ -938,15 +959,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/disfigured = 0
 	vital = 1
 
-/datum/organ/external/head/get_icon()
+/datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon)
 	if (!owner)
 	 return ..()
 	var/g = "m"
 	if(owner.gender == FEMALE)	g = "f"
 	if (status & ORGAN_MUTATED)
-		. = new /icon(owner.deform_icon, "[icon_name]_[g]")
+		. = new /icon(deform_icon, "[icon_name]_[g]")
 	else
-		. = new /icon(owner.race_icon, "[icon_name]_[g]")
+		. = new /icon(race_icon, "[icon_name]_[g]")
 
 /datum/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)

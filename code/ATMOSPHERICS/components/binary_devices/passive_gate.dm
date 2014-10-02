@@ -62,8 +62,9 @@
 		if (REGULATE_OUTPUT)
 			pressure_delta = target_pressure - output_starting_pressure
 	
-	var/flowing_old = flowing
-	if((REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
+	//-1 if pump_gas() did not move any gas, >= 0 otherwise
+	var/returnval = -1
+	if((regulate_mode == REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
 		flowing = 1
 		
 		//flow rate limit
@@ -82,20 +83,22 @@
 				transfer_moles = min(transfer_moles, pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION))	
 		
 		//pump_gas() will return a negative number if no flow occurred
-		var/flow = pump_gas(src, air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
-		
-		if (flow >= 0)
-			if(network1)
-				network1.update = 1
-
-			if(network2)
-				network2.update = 1
-	else
+		returnval = pump_gas(src, air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
+	
+	if (returnval < 0)
 		flowing = 0
 		last_flow_rate = 0
+	else
+		if(network1)
+			network1.update = 1
+
+		if(network2)
+			network2.update = 1
+		
+		if (!last_flow_rate)
+			flowing = 0
 	
-	if (flowing != flowing_old)
-		update_icon()
+	update_icon()
 
 
 //Radio remote control

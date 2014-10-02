@@ -40,6 +40,12 @@
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
 	stamps = ""
+
+	if(info != initial(info))
+		info = html_encode(info)
+		info = replacetext(info, "\n", "<BR>")
+		info = parsepencode(info)
+
 	spawn(2)
 		update_icon()
 		updateinfolinks()
@@ -96,8 +102,8 @@
 
 /obj/item/weapon/paper/attack_ai(var/mob/living/silicon/ai/user as mob)
 	var/dist
-	if(istype(user) && user.current) //is AI
-		dist = get_dist(src, user.current)
+	if(istype(user) && user.camera) //is AI
+		dist = get_dist(src, user.camera)
 	else //cyborg or AI not seeing through a camera
 		dist = get_dist(src, user)
 	if(dist < 2)
@@ -113,7 +119,7 @@
 		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
 		M << examine()
-	
+
 	else if(user.zone_sel.selecting == "mouth") // lipstick wiping
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -198,7 +204,7 @@
 	t = replacetext(t, "\[/u\]", "</U>")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
-	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user.real_name]</i></font>")
+	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
 
 	if(!iscrayon)
@@ -216,7 +222,7 @@
 		t = replacetext(t, "\[cell\]", "<td>")
 		t = replacetext(t, "\[logo\]", "<img src = http://baystation12.net/wiki/logo.png>")
 
-		t = "<font face=\"[deffont]\" color=[P.colour]>[t]</font>"
+		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else // If it is a crayon, and he still tries to use these, make them empty!
 		t = replacetext(t, "\[*\]", "")
 		t = replacetext(t, "\[hr\]", "")
@@ -230,7 +236,7 @@
 		t = replacetext(t, "\[cell\]", "")
 		t = replacetext(t, "\[logo\]", "")
 
-		t = "<font face=\"[crayonfont]\" color=[P.colour]><b>[t]</b></font>"
+		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
 
 //	t = replacetext(t, "#", "") // Junk converted to nothing!
 
@@ -267,11 +273,11 @@
 		\[hr\] : Adds a horizontal rule.
 	</BODY></HTML>"}, "window=paper_help")
 
-/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/lighter/P, mob/user)
+/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
 	var/class = "<span class='warning'>"
 
 	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/weapon/lighter/zippo))
+		if(istype(P, /obj/item/weapon/flame/lighter/zippo))
 			class = "<span class='rose'>"
 
 		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
@@ -435,7 +441,7 @@
 
 		user << "<span class='notice'>You stamp the paper with your rubber stamp.</span>"
 
-	else if(istype(P, /obj/item/weapon/lighter))
+	else if(istype(P, /obj/item/weapon/flame))
 		burnpaper(P, user)
 
 	add_fingerprint(user)

@@ -119,8 +119,44 @@ proc/hasorgans(A)
 	return ishuman(A)
 
 /proc/hsl2rgb(h, s, l)
-	return
+	return //TODO: Implement
 
+/*
+	Miss Chance
+*/
+
+//TODO: Integrate defence zones and targeting body parts with the actual organ system, move these into organ definitions.
+
+//The base miss chance for the different defence zones
+var/list/global/base_miss_chance = list(
+	"head" = 40,
+	"chest" = 10,
+	"groin" = 20,
+	"l_leg" = 20,
+	"r_leg" = 20,
+	"l_arm" = 20,
+	"r_arm" = 20,
+	"l_hand" = 50,
+	"r_hand" = 50,
+	"l_foot" = 50,
+	"r_foot" = 50,
+)
+
+//Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
+//Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
+var/list/global/organ_rel_size = list(
+	"head" = 25,
+	"chest" = 70,
+	"groin" = 30,
+	"l_leg" = 25,
+	"r_leg" = 25,
+	"l_arm" = 25,
+	"r_arm" = 25,
+	"l_hand" = 10,
+	"r_hand" = 10,
+	"l_foot" = 10,
+	"r_foot" = 10,
+)
 
 /proc/check_zone(zone)
 	if(!zone)	return "chest"
@@ -131,26 +167,32 @@ proc/hasorgans(A)
 			zone = "head"
 	return zone
 
-// Returns zone with a certain probability.
-// If the probability misses, returns "chest" instead.
-// If "chest" was passed in as zone, then on a "miss" will return "head", "l_arm", or "r_arm"
+// Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
 // Use get_zone_with_miss_chance() for that.
 /proc/ran_zone(zone, probability)
-	zone = check_zone(zone)
-	if(!probability)	probability = 90
-	if(probability == 100)	return zone
+	if (zone)
+		zone = check_zone(zone)
+		if (prob(probability))
+			return zone
 
-	if(zone == "chest")
-		if(prob(probability))	return "chest"
-		var/t = rand(1, 9)
-		switch(t)
-			if(1 to 3)	return "head"
-			if(4 to 6)	return "l_arm"
-			if(7 to 9)	return "r_arm"
-
-	if(prob(probability * 0.75))	return zone
-	return "chest"
+	var/ran_zone = zone
+	while (ran_zone == zone)
+		ran_zone = pick ( 
+			organ_rel_size["head"]; "head",
+			organ_rel_size["chest"]; "chest",
+			organ_rel_size["groin"]; "groin",
+			organ_rel_size["l_arm"]; "l_arm",
+			organ_rel_size["r_arm"]; "r_arm",
+			organ_rel_size["l_leg"]; "l_leg",
+			organ_rel_size["r_leg"]; "r_leg",
+			organ_rel_size["l_hand"]; "l_hand",
+			organ_rel_size["r_hand"]; "r_hand",
+			organ_rel_size["l_foot"]; "l_foot",
+			organ_rel_size["r_foot"]; "r_foot",
+		)
+	
+	return ran_zone
 
 // Emulates targetting a specific body part, and miss chances
 // May return null if missed
@@ -161,42 +203,13 @@ proc/hasorgans(A)
 	// you can only miss if your target is standing and not restrained
 	if(!target.buckled && !target.lying)
 		var/miss_chance = 10
-		switch(zone)
-			if("head")
-				miss_chance = 40
-			if("l_leg")
-				miss_chance = 20
-			if("r_leg")
-				miss_chance = 20
-			if("l_arm")
-				miss_chance = 20
-			if("r_arm")
-				miss_chance = 20
-			if("l_hand")
-				miss_chance = 50
-			if("r_hand")
-				miss_chance = 50
-			if("l_foot")
-				miss_chance = 50
-			if("r_foot")
-				miss_chance = 50
+		if (zone in base_miss_chance)
+			miss_chance = base_miss_chance[zone]
 		miss_chance = max(miss_chance + miss_chance_mod, 0)
 		if(prob(miss_chance))
 			if(prob(70))
 				return null
-			else
-				var/t = rand(1, 10)
-				switch(t)
-					if(1)	return "head"
-					if(2)	return "l_arm"
-					if(3)	return "r_arm"
-					if(4) 	return "chest"
-					if(5) 	return "l_foot"
-					if(6)	return "r_foot"
-					if(7)	return "l_hand"
-					if(8)	return "r_hand"
-					if(9)	return "l_leg"
-					if(10)	return "r_leg"
+			return pick(base_miss_chance)
 
 	return zone
 

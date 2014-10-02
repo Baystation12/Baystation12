@@ -20,11 +20,11 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
-	
+
 	use_power = 1
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
-	
+
 	var/active = 1 //No sales pitches if off!
 	var/delay_product_spawn // If set, uses sleep() in product spawn proc (mostly for seeds to retrieve correct names).
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
@@ -115,6 +115,10 @@
 	return
 
 /obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+
+	if(delay_product_spawn)
+		sleep(15) //Make ABSOLUTELY SURE the seed datum is properly populated.
+
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
 		var/price = prices[typepath]
@@ -139,10 +143,9 @@
 			product_records += R
 
 		if(delay_product_spawn)
-			sleep(1)
-			R.product_name = temp.name
-		else
-			R.product_name = temp.name
+			sleep(5) //sleep(1) did not seem to cut it, so here we are.
+
+		R.product_name = temp.name
 
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
@@ -788,10 +791,10 @@
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4)
-	contraband = list(/obj/item/weapon/lighter/zippo = 4)
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/flame/lighter/random = 4)
+	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5)
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/lighter/random = 2)
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
 
 
 /obj/machinery/vending/medical

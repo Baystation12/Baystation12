@@ -397,7 +397,7 @@ datum/preferences
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
 
-	dat += "<a href='byond://?src=\ref[user];preference=pAI><b>pAI Configuration</b></a><br>"
+	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
 
 	dat += "<br><b>Hair</b><br>"
@@ -1001,16 +1001,16 @@ datum/preferences
 					user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
 
 		else if(href_list["task"] == "remove")
-		
+
 			if(isnull(gear) || !islist(gear))
 				gear = list()
 			if(!gear.len)
 				return
-			
+
 			var/choice = input(user, "Select gear to remove: ") as null|anything in gear
 			if(!choice)
 				return
-			
+
 			for(var/gear_name in gear)
 				if(gear_name == choice)
 					gear -= gear_name
@@ -1329,7 +1329,8 @@ datum/preferences
 							organ_data[limb] = "cyborg"
 							if(second_limb)
 								organ_data[second_limb] = "cyborg"
-
+							if(third_limb && organ_data[third_limb] == "amputated")
+								organ_data[third_limb] = null
 				if("organs")
 					var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes")
 					if(!organ_name) return

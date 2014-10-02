@@ -60,7 +60,6 @@
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
 	R.add_language("Sinta'unathi", 0)
-	R.add_language("Siik'maas", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
@@ -294,12 +293,12 @@
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 
 		var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
-		M.matter = 30
+		M.stored_matter = 30
 		src.modules += M
 
 		src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
 
-		var/obj/item/weapon/lighter/zippo/L = new /obj/item/weapon/lighter/zippo(src)
+		var/obj/item/weapon/flame/lighter/zippo/L = new /obj/item/weapon/flame/lighter/zippo(src)
 		L.lit = 1
 		src.modules += L
 

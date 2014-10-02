@@ -18,7 +18,7 @@
 		new /obj/item/weapon/gun/energy/ionrifle(src)
 		new /obj/item/weapon/gun/energy/gun/nuclear(src)
 		new /obj/item/clothing/glasses/thermal(src)
-		new /obj/item/weapon/lighter/zippo(src)
+		new /obj/item/weapon/flame/lighter/zippo(src)
 		new /obj/item/weapon/pinpointer(src)
 		return
 

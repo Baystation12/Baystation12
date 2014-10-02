@@ -101,7 +101,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.SetLuminosity(2)	//hologram lighting
 	SetLuminosity(2)			//pad lighting
 	icon_state = "holopad1"
-	A.current = src
+	A.holo = src
 	master = A//AI is the master.
 	use_power = 2//Active power usage.
 	return 1
@@ -109,8 +109,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/proc/clear_holo()
 //	hologram.SetLuminosity(0)//Clear lighting.	//handled by the lighting controller when its ower is deleted
 	del(hologram)//Get rid of hologram.
-	if(master.current == src)
-		master.current = null
+	if(master.holo == src)
+		master.holo = null
 	master = null//Null the master, since no-one is using it now.
 	SetLuminosity(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 	icon_state = "holopad0"

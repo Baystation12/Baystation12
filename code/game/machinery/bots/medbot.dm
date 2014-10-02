@@ -105,7 +105,7 @@
 	var/dat
 	dat += "<TT><B>Automatic Medical Unit v1.0</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];power=1'>[src.on ? "On" : "Off"]</A><BR>"
-	dat += "Maintenance panel panel is [src.open ? "opened" : "closed"]<BR>"
+	dat += "Maintenance panel is [src.open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
 	if (src.reagent_glass)
 		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[src.reagent_glass.reagents.total_volume]/[src.reagent_glass.reagents.maximum_volume]\]</a>"

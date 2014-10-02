@@ -12,6 +12,7 @@
 #define STEFAN_BOLTZMANN_CONSTANT		0.0000000567	//W/(m^2*K^4)
 #define COSMIC_RADIATION_TEMPERATURE	3.15		//K
 #define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
+#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -41,7 +42,6 @@
 #define WARNING_LOW_PRESSURE 50 	//This is when the gray low pressure icon is displayed. (it is 2.5 * HAZARD_LOW_PRESSURE)
 #define HAZARD_LOW_PRESSURE 20		//This is when the black ultra-low pressure icon is displayed. (This one is set as a constant)
 
-#define HEAT_CAPACITY_HUMAN 249840	//J/K, for a 72 kg person. Only used by cryo at the moment, perhaps it will be used for environment effect on body temperature in the future.
 #define TEMPERATURE_DAMAGE_COEFFICIENT 1.5	//This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
 #define BODYTEMP_AUTORECOVERY_DIVISOR 12 //This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
 #define BODYTEMP_AUTORECOVERY_MINIMUM 1 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
@@ -837,8 +837,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 //These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
 //Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
-#define ATMOS_PUMP_EFFICIENCY	0.6
-#define ATMOS_FILTER_EFFICIENCY	0.45
+#define ATMOS_PUMP_EFFICIENCY	2.5
+#define ATMOS_FILTER_EFFICIENCY	2.5
 
 //will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
 #define MINUMUM_MOLES_TO_PUMP	0.01

@@ -9,6 +9,19 @@
 
 <div class="item">
 	<div class="itemLabel">
+		Power Level:
+	</div>
+	<div class="itemContent">		
+		{{:helper.link('1', null, {'setPower' :  20}, (data.powerSetting ==  20)? 'selected' : null)}}
+		{{:helper.link('2', null, {'setPower' :  40}, (data.powerSetting ==  40)? 'selected' : null)}}
+		{{:helper.link('3', null, {'setPower' :  60}, (data.powerSetting ==  60)? 'selected' : null)}}
+		{{:helper.link('4', null, {'setPower' :  80}, (data.powerSetting ==  80)? 'selected' : null)}}
+		{{:helper.link('5', null, {'setPower' : 100}, (data.powerSetting == 100)? 'selected' : null)}}
+	</div>
+</div>
+
+<div class="item">
+	<div class="itemLabel">
 		Gas Pressure:
 	</div>
 	<div class="itemContent">		

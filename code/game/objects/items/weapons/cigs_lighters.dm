@@ -12,22 +12,25 @@ ZIPPO
 CIGARETTE PACKETS ARE IN FANCY.DM
 */
 
+//For anything that can light stuff on fire
+/obj/item/weapon/flame
+	var/lit = 0
+
 ///////////
 //MATCHES//
 ///////////
-/obj/item/weapon/match
+/obj/item/weapon/flame/match
 	name = "match"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
-	var/lit = 0
 	var/burnt = 0
 	var/smoketime = 5
 	w_class = 1.0
 	origin_tech = "materials=1"
 	attack_verb = list("burnt", "singed")
 
-/obj/item/weapon/match/process()
+/obj/item/weapon/flame/match/process()
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
@@ -37,12 +40,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		location.hotspot_expose(700, 5)
 		return
 
-/obj/item/weapon/match/dropped(mob/user as mob)
+/obj/item/weapon/flame/match/dropped(mob/user as mob)
 	if(lit)
 		burn_out()
 	return ..()
 
-/obj/item/weapon/match/proc/burn_out()
+/obj/item/weapon/flame/match/proc/burn_out()
 	lit = 0
 	burnt = 1
 	damtype = "brute"
@@ -89,18 +92,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(WT.isOn())//Badasses dont get blinded while lighting their cig with a welding tool
 			light("<span class='notice'>[user] casually lights the [name] with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter/zippo))
-		var/obj/item/weapon/lighter/zippo/Z = W
+	else if(istype(W, /obj/item/weapon/flame/lighter/zippo))
+		var/obj/item/weapon/flame/lighter/zippo/Z = W
 		if(Z.lit)
 			light("<span class='rose'>With a flick of their wrist, [user] lights their [name] with their [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter))
-		var/obj/item/weapon/lighter/L = W
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
 		if(L.lit)
 			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/match))
-		var/obj/item/weapon/match/M = W
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
 		if(M.lit)
 			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
 
@@ -258,18 +261,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(WT.isOn())
 			light("<span class='notice'>[user] insults [name] by lighting it with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter/zippo))
-		var/obj/item/weapon/lighter/zippo/Z = W
+	else if(istype(W, /obj/item/weapon/flame/lighter/zippo))
+		var/obj/item/weapon/flame/lighter/zippo/Z = W
 		if(Z.lit)
 			light("<span class='rose'>With a flick of their wrist, [user] lights their [name] with their [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter))
-		var/obj/item/weapon/lighter/L = W
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
 		if(L.lit)
 			light("<span class='notice'>[user] manages to offend their [name] by lighting it with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/match))
-		var/obj/item/weapon/match/M = W
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
 		if(M.lit)
 			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
 
@@ -340,18 +343,18 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(WT.isOn())//
 			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter/zippo))
-		var/obj/item/weapon/lighter/zippo/Z = W
+	else if(istype(W, /obj/item/weapon/flame/lighter/zippo))
+		var/obj/item/weapon/flame/lighter/zippo/Z = W
 		if(Z.lit)
 			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/lighter))
-		var/obj/item/weapon/lighter/L = W
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
 		if(L.lit)
 			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
 
-	else if(istype(W, /obj/item/weapon/match))
-		var/obj/item/weapon/match/M = W
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
 		if(M.lit)
 			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
 
@@ -372,7 +375,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /////////
 //ZIPPO//
 /////////
-/obj/item/weapon/lighter
+/obj/item/weapon/flame/lighter
 	name = "cheap lighter"
 	desc = "A cheap-as-free lighter."
 	icon = 'icons/obj/items.dmi'
@@ -385,9 +388,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags = TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
-	var/lit = 0
 
-/obj/item/weapon/lighter/zippo
+/obj/item/weapon/flame/lighter/zippo
 	name = "\improper Zippo lighter"
 	desc = "The zippo."
 	icon_state = "zippo"
@@ -395,20 +397,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "zippoon"
 	icon_off = "zippo"
 
-/obj/item/weapon/lighter/random
+/obj/item/weapon/flame/lighter/random
 	New()
 		var/color = pick("r","c","y","g")
 		icon_on = "lighter-[color]-on"
 		icon_off = "lighter-[color]"
 		icon_state = icon_off
 
-/obj/item/weapon/lighter/attack_self(mob/living/user)
+/obj/item/weapon/flame/lighter/attack_self(mob/living/user)
 	if(user.r_hand == src || user.l_hand == src)
 		if(!lit)
 			lit = 1
 			icon_state = icon_on
 			item_state = icon_on
-			if(istype(src, /obj/item/weapon/lighter/zippo) )
+			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 			else
 				if(prob(95))
@@ -427,7 +429,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			lit = 0
 			icon_state = icon_off
 			item_state = icon_off
-			if(istype(src, /obj/item/weapon/lighter/zippo) )
+			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
 				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.")
 			else
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
@@ -439,7 +441,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	return
 
 
-/obj/item/weapon/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
 
@@ -448,28 +450,28 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(M == user)
 			cig.attackby(src, user)
 		else
-			if(istype(src, /obj/item/weapon/lighter/zippo))
+			if(istype(src, /obj/item/weapon/flame/lighter/zippo))
 				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
 			else
 				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
 	else
 		..()
 
-/obj/item/weapon/lighter/process()
+/obj/item/weapon/flame/lighter/process()
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
 	return
 
 
-/obj/item/weapon/lighter/pickup(mob/user)
+/obj/item/weapon/flame/lighter/pickup(mob/user)
 	if(lit)
 		SetLuminosity(0)
 		user.SetLuminosity(user.luminosity+2)
 	return
 
 
-/obj/item/weapon/lighter/dropped(mob/user)
+/obj/item/weapon/flame/lighter/dropped(mob/user)
 	if(lit)
 		user.SetLuminosity(user.luminosity-2)
 		SetLuminosity(2)

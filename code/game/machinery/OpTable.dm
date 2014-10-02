@@ -123,18 +123,26 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat || !ishuman(usr) || usr.buckled || usr.restrained())
-		return
-
-	if(src.victim)
-		usr << "\blue <B>The table is already occupied!</B>"
+	if(usr.stat || !ishuman(usr) || usr.restrained() || !check_table(usr))
 		return
 
 	take_victim(usr,usr)
 
 /obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
 	if (istype(W, /obj/item/weapon/grab))
-		if(iscarbon(W:affecting))
-			take_victim(W:affecting,usr)
+		var/obj/item/weapon/grab/G = W
+		if(iscarbon(G.affecting) && check_table(G.affecting))
+			take_victim(G.affecting,usr)
 			del(W)
 			return
+
+/obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
+	if(src.victim)
+		usr << "\blue <B>The table is already occupied!</B>"
+		return 0
+
+	if(patient.buckled)
+		usr << "\blue <B>Unbuckle first!</B>"
+		return 0
+
+	return 1

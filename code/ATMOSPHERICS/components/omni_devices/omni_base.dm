@@ -28,7 +28,7 @@
 /obj/machinery/atmospherics/omni/New()
 	..()
 	icon_state = "base"
-	
+
 	ports = new()
 	for(var/d in cardinal)
 		var/datum/omni_port/new_port = new(src, d)
@@ -44,16 +44,14 @@
 		if(new_port.mode > 0)
 			initialize_directions |= d
 		ports += new_port
-	
+
 	build_icons()
 
 /obj/machinery/atmospherics/omni/update_icon()
 	if(stat & NOPOWER)
 		overlays = overlays_off
-		on = 0
 	else if(error_check())
 		overlays = overlays_error
-		on = 0
 	else
 		overlays = on ? (overlays_on) : (overlays_off)
 
@@ -63,6 +61,16 @@
 
 /obj/machinery/atmospherics/omni/proc/error_check()
 	return
+
+/obj/machinery/atmospherics/omni/process()
+	if(error_check())
+		on = 0
+
+	if((stat & (NOPOWER|BROKEN)) || !on)
+		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
+		last_flow_rate = 0
+		return 0
+	return 1
 
 /obj/machinery/atmospherics/omni/power_change()
 	var/old_stat = stat
@@ -173,7 +181,7 @@
 			if(ATM_O2 to ATM_N2O)
 				ic_on += "_filter"
 				ic_off += "_out"
-		
+
 		ic_on = icon_manager.get_atmos_icon("omni", , , ic_on)
 		ic_off = icon_manager.get_atmos_icon("omni", , , ic_off)
 
@@ -285,7 +293,7 @@
 			P.node = null
 			P.update = 1
 			break
-	
+
 	update_ports()
 
 	return null

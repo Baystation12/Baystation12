@@ -115,7 +115,6 @@
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
 		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/shield/riot(src)
-		new /obj/item/weapon/storage/lockbox/loyalty(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/device/flash(src)
