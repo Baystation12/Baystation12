@@ -1394,7 +1394,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "quartstorage"
 
 /area/quartermaster/qm
-	name = "\improper Quartermaster's Office"
+	name = "\improper Head of Cargo's Office"
 	icon_state = "quart"
 
 /area/quartermaster/miningdock

@@ -41,11 +41,13 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
-	var/display_colour = "#2e78d9"
+	var/display_colour = "#002eb8"
 
 	if(is_donator(src))
 		if(get_don_tier(usr.client) >= 3)
 			display_colour = src.prefs.ooccolor
+	else if (is_veteran(src) && !holder)
+		display_colour = "#2e78d9"	//light blue
 	else
 		if(holder && !holder.fakekey)
 			display_colour = "#2e78d9"	//light blue

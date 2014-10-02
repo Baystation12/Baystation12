@@ -63,7 +63,7 @@ var/list/command_positions = list(
 var/list/engineering_positions = list(
 	"Chief Engineer",
 	"Station Engineer",
-	"Atmospheric Technician",
+	"Atmospheric Technician"
 )
 
 
@@ -92,7 +92,7 @@ var/list/civilian_positions = list(
 	"Chef",
 	"Janitor",
 	"Librarian",
-	"Quartermaster",
+	"Head of Cargo",
 	"Cargo Technician",
 	"Shaft Miner",
 	"Lawyer",
