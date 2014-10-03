@@ -19,8 +19,7 @@
 
 	if(istype(affected_mob,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = affected_mob
-		if(!H.internal_organs_by_name["appendix"])
-			src.cure()
+		if(H.species.name == "Diona" || H.species.name == "Machine" || H.species.name == "Vox") src.cure()
 
 	if(stage == 1)
 		if(affected_mob.op_stage.appendix == 2.0)

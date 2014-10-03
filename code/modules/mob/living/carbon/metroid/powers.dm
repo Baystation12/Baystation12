@@ -104,7 +104,7 @@
 				adjustBruteLoss(-10)
 				adjustFireLoss(-10)
 				adjustCloneLoss(-10)
-
+				
 				updatehealth()
 				if(Victim)
 					Victim.updatehealth()
@@ -226,3 +226,10 @@
 			src << "<i>I am not ready to reproduce yet...</i>"
 	else
 		src << "<i>I am not old enough to reproduce yet...</i>"
+
+/mob/living/carbon/slime/verb/ventcrawl()
+	set name = "Crawl through Vent"
+	set desc = "Enter an air vent and crawl through the pipe system."
+	set category = "Slime"
+	if(Victim)	return
+	handle_ventcrawl()

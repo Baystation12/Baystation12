@@ -1234,6 +1234,27 @@ datum/mind
 	..()
 	mind.assigned_role = "slime"
 
+//XENO
+/mob/living/carbon/alien/mind_initialize()
+	..()
+	mind.assigned_role = "Alien"
+	//XENO HUMANOID
+/mob/living/carbon/alien/humanoid/queen/mind_initialize()
+	..()
+	mind.special_role = "Queen"
+
+/mob/living/carbon/alien/humanoid/hunter/mind_initialize()
+	..()
+	mind.special_role = "Hunter"
+
+/mob/living/carbon/alien/humanoid/drone/mind_initialize()
+	..()
+	mind.special_role = "Drone"
+
+/mob/living/carbon/alien/humanoid/sentinel/mind_initialize()
+	..()
+	mind.special_role = "Sentinel"
+	//XENO LARVA
 /mob/living/carbon/alien/larva/mind_initialize()
 	..()
 	mind.special_role = "Larva"

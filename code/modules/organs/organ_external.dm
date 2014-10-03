@@ -32,11 +32,12 @@
 	var/damage_msg = "\red You feel an intense pain"
 	var/broken_description
 
+	var/vital //Lose a vital limb, die immediately.
+	var/status = 0
 	var/open = 0
 	var/stage = 0
 	var/cavity = 0
-	var/sabotaged = 0 // If a prosthetic limb is emagged, it will detonate when it fails.
-	var/encased       // Needs to be opened with a saw to access the organs.
+	var/sabotaged = 0 //If a prosthetic limb is emagged, it will detonate when it fails.
 
 	var/obj/item/hidden = null
 	var/list/implants = list()
@@ -854,7 +855,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	min_broken_damage = 40
 	body_part = UPPER_TORSO
 	vital = 1
-	encased = "ribcage"
 
 /datum/organ/external/groin
 	name = "groin"
@@ -958,7 +958,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	body_part = HEAD
 	var/disfigured = 0
 	vital = 1
-	encased = "skull"
 
 /datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon)
 	if (!owner)
@@ -1063,7 +1062,6 @@ obj/item/weapon/organ/r_hand
 obj/item/weapon/organ/r_leg
 	name = "right leg"
 	icon_state = "r_leg"
-
 obj/item/weapon/organ/head
 	name = "head"
 	icon_state = "head_m"
@@ -1160,12 +1158,11 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
 				msg_admin_attack("[user] ([user.ckey]) debrained [brainmob] ([brainmob.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-				//TODO: ORGAN REMOVAL UPDATE.
 				if(istype(src,/obj/item/weapon/organ/head/posi))
 					var/obj/item/device/mmi/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else
-					var/obj/item/organ/brain/B = new(loc)
+					var/obj/item/brain/B = new(loc)
 					B.transfer_identity(brainmob)
 
 				brain_op_stage = 4.0

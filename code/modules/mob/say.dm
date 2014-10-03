@@ -90,6 +90,8 @@
 			return 1
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
+		if(src.alien_talk_understand && other.alien_talk_understand)
+			return 1
 		return 0
 
 	//Language check.

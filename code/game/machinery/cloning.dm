@@ -72,15 +72,14 @@
 		return
 
 	var/mob/selected = null
-	for(var/mob/living/M in player_list)
+	for(var/mob/M in player_list)
 		//Dead people only thanks!
 		if ((M.stat != 2) || (!M.client))
 			continue
 		//They need a brain!
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.has_organ["brain"] && !H.has_brain())
-				continue
+		if ((istype(M, /mob/living/carbon/human)) && (M:brain_op_stage >= 4.0))
+			continue
+
 		if (M.ckey == find_key)
 			selected = M
 			break

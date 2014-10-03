@@ -20,7 +20,7 @@
 			var/damage = round(30/(get_dist(B,get_turf(src))+1))
 			B.health -= damage
 			B.update_icon()
-
+		
 		new/obj/effect/effect/smoke/flashbang(src.loc)
 		del(src)
 		return
@@ -84,7 +84,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
-			if (E && E.damage >= E.min_bruised_damage)
+			if (E.damage >= E.min_bruised_damage)
 				M << "\red Your eyes start to burn badly!"
 				if(!banglet && !(istype(src , /obj/item/weapon/grenade/flashbang/clusterbang)))
 					if (E.damage >= E.min_broken_damage)

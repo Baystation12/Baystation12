@@ -1,3 +1,4 @@
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > -95.0))
@@ -610,16 +611,7 @@
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-
-			var/can_break_cuffs
-			if(HULK in usr.mutations)
-				can_break_cuffs = 1
-			else if(istype(CM,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = CM
-				if(H.species.can_shred(H))
-					can_break_cuffs = 1
-
-			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
+			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
@@ -656,16 +648,7 @@
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-
-			var/can_break_cuffs
-			if(HULK in usr.mutations)
-				can_break_cuffs = 1
-			else if(istype(CM,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = CM
-				if(H.species.can_shred(H))
-					can_break_cuffs = 1
-
-			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
+			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the legcuffs!</B>", CM), 1)
@@ -714,11 +697,6 @@
 		return
 	if(lying)
 		src << "You can't vent crawl while you're stunned!"
-		return
-
-	var/special_fail_msg = can_use_vents()
-	if(special_fail_msg)
-		src << "\red [special_fail_msg]"
 		return
 
 	if(vent_found) // one was passed in, probably from vent/AltClick()
@@ -806,12 +784,3 @@
 		var/area/new_area = get_area(loc)
 		if(new_area)
 			new_area.Entered(src)
-/mob/living/proc/can_use_vents()
-	return "You can't fit into that vent."
-
-
-/mob/living/proc/has_brain()
-	return 1
-
-/mob/living/proc/has_eyes()
-	return 1

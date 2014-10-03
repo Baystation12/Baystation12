@@ -233,8 +233,11 @@
 						M_job = "slime"
 					else if(ismonkey(M))
 						M_job = "Monkey"
-					else if(isalien(M))
-						M_job = "Alien"
+					else if(isalien(M)) //aliens
+						if(islarva(M))
+							M_job = "Alien larva"
+						else
+							M_job = "Alien"
 					else
 						M_job = "Carbon-based"
 

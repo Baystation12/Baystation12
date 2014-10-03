@@ -256,9 +256,7 @@
 	var/close_delay = 100
 
 	TryToSwitchState(atom/user)
-
-		var/mob/living/carbon/M = user
-		if(istype(M) && locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		if(isalien(user))
 			return ..()
 
 	Open()
