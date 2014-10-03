@@ -34,7 +34,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/device/binoculars/verb/zoom()
 	set category = "Object"
 	set name = "Use"
-	set popup_menu = 1
+	set popup_menu = 0
 
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
 		usr << "You are unable to focus through the binoculars."
