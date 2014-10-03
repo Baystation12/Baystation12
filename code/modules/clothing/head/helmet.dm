@@ -20,6 +20,20 @@
 	flags_inv = 0
 	body_parts_covered = 0
 
+/obj/item/clothing/head/helmet/hop
+	name = "crew resource's hat"
+	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
+	icon_state = "hopcap"
+	flags_inv = 0
+	body_parts_covered = 0
+
+/obj/item/clothing/head/helmet/formalcaptain
+	name = "parade hat"
+	desc = "No one in a commanding position should be without a perfect, white hat of ultimate authority."
+	icon_state = "officercap"
+	flags_inv = 0
+	body_parts_covered = 0
+
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
