@@ -54,7 +54,6 @@
 	var/mob/living/silicon/robot/R = src
 	var/mob/living/silicon/pai/P = src
 
-
 	//Must be concious to speak
 	if (stat)
 		return
@@ -69,21 +68,35 @@
 		else
 			message = trim(copytext(message,3))
 
-	if(message_mode && bot_type == IS_ROBOT && message_mode != "binary" && !R.is_component_functioning("radio"))
-		src << "\red Your radio isn't functional at this time."
-		return
-	if(bot_type == IS_ROBOT && message_mode != "binary")
-		var/datum/robot_component/radio/RA = R.get_component("radio")
-		if (!R.cell_use_power(RA.active_usage))
-			usr << "\red Not enough power to transmit message."
-			return
-
 	//parse language key and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
 
+		if(speaking.flags & HIVEMIND)
+			speaking.broadcast(src,trim(message))
+			return
+
+	// Currently used by drones.
+	if(local_transmit)
+		var/list/listeners = hearers(5,src)
+		listeners |= src
+
+		for(var/mob/living/silicon/D in listeners)
+			if(D.client && istype(D,src.type))
+				D << "<b>[src]</b> transmits, \"[message]\""
+
+		for (var/mob/M in player_list)
+			if (istype(M, /mob/new_player))
+				continue
+			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
+				if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
+		return
+
+	if(message_mode && bot_type == IS_ROBOT && !R.is_component_functioning("radio"))
+		src << "\red Your radio isn't functional at this time."
+		return
 
 	switch(message_mode)
 		if("department")
@@ -98,21 +111,6 @@
 					P.radio.talk_into(src,message,message_mode,verb,speaking)
 			return 1
 
-		if("binary")
-			switch(bot_type)
-				if(IS_ROBOT)
-					if(!R.is_component_functioning("comms"))
-						src << "\red Your binary communications component isn't functional."
-						return
-					var/datum/robot_component/binary_communication/B = R.get_component("comms")
-					if(!R.cell_use_power(B.active_usage))
-						src << "\red Not enough power to transmit message."
-						return
-				if(IS_PAI)
-					src << "You do not appear to have that function"
-					return
-
-			robot_talk(message)
 			return 1
 		if("general")
 			switch(bot_type)
@@ -184,64 +182,6 @@
 		src << "No holopad connected."
 		return
 	return 1
-
-/mob/living/proc/robot_talk(var/message)
-
-	log_say("[key_name(src)] : [message]")
-
-	message = trim(message)
-
-	if (!message)
-		return
-
-	var/verb = say_quote(message)
-
-
-	var/rendered = "<i><span class='game say'>Robotic Talk, <span class='name'>[name]</span> <span class='message'>[verb], \"[message]\"</span></span></i>"
-
-	for (var/mob/living/S in living_mob_list)
-		if(S.robot_talk_understand && (S.robot_talk_understand == robot_talk_understand)) // This SHOULD catch everything caught by the one below, but I'm not going to change it.
-			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
-				S.show_message(renderedAI, 2)
-			else
-				var/mob/living/silicon/robot/borg = S
-				if(istype(borg) && borg.is_component_functioning("comms"))
-					var/datum/robot_component/RC = borg.get_component("comms")
-					if(!borg.use_power(RC.active_usage))
-						continue // No power.
-				S.show_message(rendered, 2)
-
-
-		else if (S.binarycheck())
-			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
-				S.show_message(renderedAI, 2)
-			else
-				S.show_message(rendered, 2)
-
-	var/list/listening = hearers(1, src)
-	listening -= src
-
-	var/list/heard = list()
-	for (var/mob/M in listening)
-		if(!istype(M, /mob/living/silicon) && !M.robot_talk_understand)
-			heard += M
-	if (length(heard))
-		var/message_beep
-		verb = "beeps"
-		message_beep = "beep beep beep"
-
-		rendered = "<i><span class='game say'><span class='name'>[voice_name]</span> <span class='message'>[verb], \"[message_beep]\"</span></span></i>"
-
-		for (var/mob/M in heard)
-			M.show_message(rendered, 2)
-
-	rendered = "<i><span class='game say'>Robotic Talk, <span class='name'>[name]</span> <span class='message'>[verb], \"[message]\"</span></span></i>"
-
-	for (var/mob/M in dead_mob_list)
-		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
-			M.show_message(rendered, 2)
 
 #undef IS_AI
 #undef IS_ROBOT
