@@ -373,6 +373,6 @@
 	item_state = "bomber"
 	flags = FPRINT | TABLEPASS
 	body_parts_covered = UPPER_TORSO|ARMS
-    cold_protection = UPPER_TORSO|ARMS
-    min_cold_protection_temperature = T0C
-    siemens_coefficient = 0.7
+	cold_protection = UPPER_TORSO|ARMS
+	min_cold_protection_temperature = T0C
+	siemens_coefficient = 0.7
