@@ -229,6 +229,8 @@ obj/item/weapon/gun/energy/staff/focus
 
 /obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
 	user.client.view = world.view
+	user.client.pixel_x = 0
+	user.client.pixel_y = 0
 
 
 
@@ -241,7 +243,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
 	set category = "Object"
 	set name = "Use Sniper Scope"
-	set popup_menu = 0
+	set popup_menu = 1
+
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
 		usr << "You are unable to focus down the scope of the rifle."
 		return
@@ -258,10 +261,33 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		usr.button_pressed_F12(1)
 		usr.client.view = 12
 		zoom = 1
+
+		var/tileoffset = 11 //client view offset in the direction the user is facing
+		var/tilesize = 32
+		var/viewoffset = tilesize * tileoffset
+
+		switch(usr.dir)
+			if (NORTH)
+				usr.client.pixel_x = 0
+				usr.client.pixel_y = viewoffset
+			if (SOUTH)
+				usr.client.pixel_x = 0
+				usr.client.pixel_y = -viewoffset
+			if (EAST)
+				usr.client.pixel_x = viewoffset
+				usr.client.pixel_y = 0
+			if (WEST)
+				usr.client.pixel_x = -viewoffset
+				usr.client.pixel_y = 0
+
 	else
 		usr.client.view = world.view
 		if(!usr.hud_used.hud_shown)
 			usr.button_pressed_F12(1)
 		zoom = 0
+
+		usr.client.pixel_x = 0
+		usr.client.pixel_y = 0
+
 	usr << "<font color='[zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>"
 	return

@@ -1306,6 +1306,10 @@
 						var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
 						if(s.zoom)
 							s.zoom()
+					if(locate(/obj/item/device/binoculars, contents))
+						var/obj/item/device/binoculars/b = locate() in src
+						if(b.zoom)
+							b.zoom()
 
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
