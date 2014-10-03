@@ -1499,7 +1499,7 @@ proc/populate_seed_list()
 	seed_noun = "nodes"
 	display_name = "replicant pods"
 	packet_icon = "seed-replicapod"
-	products = list(/mob/living/carbon/alien/diona)
+	products = list(/mob/living/carbon/monkey/diona)
 	plant_icon = "replicapod"
 	product_requires_player = 1
 	immutable = 1

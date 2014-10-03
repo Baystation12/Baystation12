@@ -153,16 +153,50 @@
 			B.virus2 = virus_copylist(M.virus2)
 		return 1 //we bloodied the floor
 
-	blood_splatter(src,M.get_blood(M.vessel),1)
+
+
+	//if there isn't a blood decal already, make one.
+	var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(src)
+
+	//Species-specific blood.
+	if(M.species)
+		newblood.basecolor = M.species.blood_color
+	else
+		newblood.basecolor = "#A10808"
+
+	newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	newblood.virus2 = virus_copylist(M.virus2)
+	newblood.update_icon()
+
 	return 1 //we bloodied the floor
 
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
 	if(istype(M, /mob/living/carbon/monkey))
-		blood_splatter(src,M,1)
+
+		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
+		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		this.basecolor = "#A10808"
+		this.update_icon()
+
+	else if(istype(M,/mob/living/carbon/human))
+
+		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
+		var/mob/living/carbon/human/H = M
+
+		//Species-specific blood.
+		if(H.species)
+			this.basecolor = H.species.blood_color
+		else
+			this.basecolor = "#A10808"
+		this.update_icon()
+
+		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+
 	else if( istype(M, /mob/living/carbon/alien ))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
+
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)

@@ -95,9 +95,6 @@
 		//Disabilities
 		handle_disabilities()
 
-		//Organ failure.
-		handle_organs()
-
 		//Random events (vomiting etc)
 		handle_random_events()
 
@@ -282,8 +279,7 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
-			if(!rad_organ || rad_organ.is_broken())
+			if(species.flags & RAD_ABSORB)
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads
@@ -639,12 +635,8 @@
 		return 1
 
 	proc/handle_environment(datum/gas_mixture/environment)
-
 		if(!environment)
 			return
-
-		//Stuff like the xenomorph's plasma regen happens here.
-		species.handle_environment_special(src)
 
 		//Moved pressure calculations here for use in skip-processing check.
 		var/pressure = environment.return_pressure()
@@ -985,8 +977,7 @@
 
 		if(status_flags & GODMODE)	return 0	//godmode
 
-		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
-		if(light_organ && !light_organ.is_broken())
+		if(species.flags & REQUIRE_LIGHT)
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -1049,7 +1040,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-		if(!light_organ || light_organ.is_broken())
+		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 				traumatic_shock++
@@ -1090,7 +1081,7 @@
 				handle_organs()	//Optimized.
 				handle_blood()
 
-			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
+			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
 				blinded = 1
 				silent = 0
@@ -1169,23 +1160,15 @@
 
 
 			//Eyes
-			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
-				eye_blind =  0
-				blinded =    0
-				eye_blurry = 0
-			else if(!has_eyes())           // Eyes cut out? Permablind.
-				eye_blind =  1
-				blinded =    1
-				eye_blurry = 1
-			else if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
-				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
-				eye_blind =  max(eye_blind-1,0)
-				blinded =    1
+			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
+				blinded = 1
+			else if(eye_blind)			//blindness, heals slowly over time
+				eye_blind = max(eye_blind-1,0)
+				blinded = 1
 			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
 				eye_blurry = max(eye_blurry-3, 0)
-				blinded =    1
-			else if(eye_blurry)	           // Blurry eyes heal slowly
+				blinded = 1
+			else if(eye_blurry)	//blurry eyes heal slowly
 				eye_blurry = max(eye_blurry-1, 0)
 
 			//Ears
@@ -1666,8 +1649,8 @@
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
-			var/percentage_health = RoundHealth(((0.0+health)/species.total_health)*100)
-			holder.icon_state = "hud[percentage_health]"
+			holder.icon_state = "hud[RoundHealth(health)]"
+
 		hud_list[HEALTH_HUD] = holder
 
 	if(hud_updateflag & 1 << STATUS_HUD)

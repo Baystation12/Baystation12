@@ -40,9 +40,9 @@
 	body_parts_covered = 0
 
 /obj/item/clothing/head/mailman
-	name = "mailman's hat"
+	name = "station cap"
 	icon_state = "mailman"
-	desc = "<i>'Right-on-time'</i> mail service head wear."
+	desc = "<i>Choo-choo</i>!"
 	flags = FPRINT | TABLEPASS
 	body_parts_covered = 0
 

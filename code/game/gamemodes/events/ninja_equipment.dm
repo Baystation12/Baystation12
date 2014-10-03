@@ -1451,33 +1451,31 @@ It is possible to destroy the net by the occupant or someone else.
 		return
 
 	attack_hand()
-
 		if (HULK in usr.mutations)
 			usr << text("\blue You easily destroy the energy net.")
 			for(var/mob/O in oviewers(src))
 				O.show_message(text("\red [] rips the energy net apart!", usr), 1)
 			health-=50
-		else if(istype(usr,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(H.species.can_shred(H))
-
-				H << text("\green You claw at the net.")
-				for(var/mob/O in oviewers(src))
-					O.show_message(text("\red [] claws at the energy net!", H), 1)
-
-				playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
-				health -= rand(10, 20)
-
-				if(health <= 0)
-					H << text("\green You slice the energy net to pieces.")
-					for(var/mob/O in oviewers(src))
-						O.show_message(text("\red [] slices the energy net apart!", H), 1)
-
 		healthcheck()
 		return
 
 	attack_paw()
 		return attack_hand()
+
+	attack_alien()
+		if (islarva(usr))
+			return
+		usr << text("\green You claw at the net.")
+		for(var/mob/O in oviewers(src))
+			O.show_message(text("\red [] claws at the energy net!", usr), 1)
+		playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
+		health -= rand(10, 20)
+		if(health <= 0)
+			usr << text("\green You slice the energy net to pieces.")
+			for(var/mob/O in oviewers(src))
+				O.show_message(text("\red [] slices the energy net apart!", usr), 1)
+		healthcheck()
+		return
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		var/aforce = W.force

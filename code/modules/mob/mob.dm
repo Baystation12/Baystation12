@@ -1070,12 +1070,3 @@ mob/proc/yank_out_object()
 	if(paralysis)
 		AdjustParalysis(-1)
 	return paralysis
-
-//Check for brain worms in head.
-/mob/proc/has_brain_worms()
-
-	for(var/I in contents)
-		if(istype(I,/mob/living/simple_animal/borer))
-			return I
-
-	return 0

@@ -9,7 +9,6 @@
 
 	bot_version = "2.5"
 	search_range = 12
-	has_laser = 1
 
 	preparing_arrest_sounds = new()
 	secbot_assembly = /obj/item/weapon/secbot_assembly/ed209_assembly

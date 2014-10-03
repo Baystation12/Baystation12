@@ -1,7 +1,4 @@
 /mob/living/carbon/human/say(var/message)
-
-	//TODO: Add checks for species who do not speak common.
-
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = world.view
@@ -18,6 +15,9 @@
 		return say_dead(message)
 
 	var/message_mode = parse_message_mode(message, "headset")
+
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle) && message_mode != "changeling")  //Todo:  Add this to speech_problem_flag checks.
+		return
 
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
@@ -37,15 +37,6 @@
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
-
-		// This is broadcast to all mobs with the language,
-		// irrespective of distance or anything else.
-		if(speaking.flags & HIVEMIND)
-			speaking.broadcast(src,trim(message))
-			return
-
-	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
-		return
 
 	message = capitalize(trim(message))
 
@@ -112,6 +103,16 @@
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
+		if("binary")
+			if(robot_talk_understand || binarycheck())
+				robot_talk(message)
+			return
+		if("changeling")
+			if(mind && mind.changeling)
+				for(var/mob/Changeling in mob_list)
+					if((Changeling.mind && Changeling.mind.changeling) || istype(Changeling, /mob/dead/observer))
+						Changeling << "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
+			return
 		else
 			if(message_mode)
 				if(message_mode in (radiochannels | "department"))
@@ -124,8 +125,8 @@
 
 	var/sound/speech_sound
 	var/sound_vol
-	if(species.speech_sounds && prob(20))
-		speech_sound = sound(pick(species.speech_sounds))
+	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
+		speech_sound = sound('sound/voice/shriek1.ogg')
 		sound_vol = 50
 
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
@@ -171,8 +172,8 @@
 
 	//These only pertain to common. Languages are handled by mob/say_understands()
 	if (!speaking)
-		if (istype(other, /mob/living/carbon/alien/diona))
-			if(other.languages.len >= 2) //They've sucked down some blood and can speak common now.
+		if (istype(other, /mob/living/carbon/monkey/diona))
+			if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
 				return 1
 		if (istype(other, /mob/living/silicon))
 			return 1

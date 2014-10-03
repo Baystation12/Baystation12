@@ -19,11 +19,10 @@
 			// Override the current limb status and don't cause an explosion
 			E.droplimb(1,1)
 
+	flick("gibbed-h", animation)
 	if(species)
-		flick(species.gibbed_anim, animation)
 		hgibs(loc, viruses, dna, species.flesh_color, species.blood_color)
 	else
-		flick("gibbed-h", animation)
 		hgibs(loc, viruses, dna)
 
 	spawn(15)
@@ -43,8 +42,8 @@
 	animation.icon = 'icons/mob/mob.dmi'
 	animation.master = src
 
-	flick(species.dusted_anim, animation)
-	new species.remains_type(loc)
+	flick("dust-h", animation)
+	new /obj/effect/decal/remains/human(loc)
 
 	spawn(15)
 		if(animation)	del(animation)
@@ -98,9 +97,7 @@
 		vox_kills++ //Bad vox. Shouldn't be killing humans.
 
 	if(!gibbed)
-
-		emote("deathgasp") //let the world KNOW WE ARE DEAD // Doing this with the deathgasp emote seems odd.
-		if(species && species.death_sound) playsound(loc, species.death_sound, 80, 1, 1)
+		emote("deathgasp") //let the world KNOW WE ARE DEAD
 
 		//For ninjas exploding when they die.
 		if( istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_initialized )

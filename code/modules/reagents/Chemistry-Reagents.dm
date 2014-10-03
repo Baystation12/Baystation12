@@ -1,6 +1,7 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
+#define FOOD_METABOLISM 0.4
 #define REAGENTS_OVERDOSE 30
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -94,7 +95,7 @@ datum
 
 
 		blood
-			data = new/list("donor"=null,"viruses"=null,"species"="Human","blood_DNA"=null,"blood_type"=null,"blood_colour"= "#A10808","resistances"=null,"trace_chem"=null, "antibodies" = null)
+			data = new/list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=null,"resistances"=null,"trace_chem"=null, "antibodies" = null)
 			name = "Blood"
 			id = "blood"
 			reagent_state = LIQUID
@@ -127,30 +128,49 @@ datum
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
 
-			on_merge(var/data)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
 
-			on_update(var/atom/A)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
+
 
 			reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
 				if(!istype(T)) return
 				var/datum/reagent/blood/self = src
 				src = null
 				if(!(volume >= 3)) return
-
+				//var/datum/disease/D = self.data["virus"]
 				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
-					blood_splatter(T,self,1)
+					var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //find some blood here
+					if(!blood_prop) //first blood!
+						blood_prop = new(T)
+						blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
+
+					for(var/datum/disease/D in self.data["viruses"])
+						var/datum/disease/newVirus = D.Copy(1)
+						blood_prop.viruses += newVirus
+						newVirus.holder = blood_prop
+
+					if(self.data["virus2"])
+						blood_prop.virus2 = virus_copylist(self.data["virus2"])
+
+
 				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
+					var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T
+					if(!blood_prop)
+						blood_prop = new(T)
+						blood_prop.blood_DNA["Non-Human DNA"] = "A+"
+					for(var/datum/disease/D in self.data["viruses"])
+						var/datum/disease/newVirus = D.Copy(1)
+						blood_prop.viruses += newVirus
+						newVirus.holder = blood_prop
+
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
+					var/obj/effect/decal/cleanable/blood/xeno/blood_prop = locate() in T
+					if(!blood_prop)
+						blood_prop = new(T)
+						blood_prop.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
+					for(var/datum/disease/D in self.data["viruses"])
+						var/datum/disease/newVirus = D.Copy(1)
+						blood_prop.viruses += newVirus
+						newVirus.holder = blood_prop
 				return
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
@@ -652,17 +672,13 @@ datum
 						for (var/ID in C.virus2)
 							var/datum/disease2/disease/V = C.virus2[ID]
 							if(prob(5))
-								M:antibodies |= V.antigen
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
-									var/absorbed
-									if(istype(C,/mob/living/carbon))
-										var/mob/living/carbon/H = C
-										var/datum/organ/internal/diona/nutrients/rad_organ = locate() in H.internal_organs
-										if(rad_organ && !rad_organ.is_broken())
-											absorbed = 1
-									if(!absorbed)
-										M.adjustToxLoss(100)
+									var/mob/living/carbon/human/H
+									if(istype(C,/mob/living/carbon/human))
+										H = C
+									if(!H || (H.species && !(H.species.flags & RAD_ABSORB))) M.adjustToxLoss(100)
+								M:antibodies |= V.antigen
 				..()
 				return
 
@@ -1260,7 +1276,7 @@ datum
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 					var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
-					if(E && istype(E))
+					if(istype(E))
 						if(E.damage > 0)
 							E.damage = max(E.damage - 1, 0)
 				..()
@@ -1496,11 +1512,11 @@ datum
 			var/toxpwr = 0.7 // Toxins are really weak, but without being treated, last very long.
 			custom_metabolism = 0.1
 
-			on_mob_life(var/mob/living/M as mob,var/alien)
+			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				if(toxpwr)
 					M.adjustToxLoss(toxpwr*REM)
-					if(alien) ..() //Kind of a catch-all for aliens without kidneys.
+				..()
 				return
 
 		toxin/amatoxin
@@ -2975,7 +2991,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				M:nutrition += nutriment_factor
-				holder.remove_reagent(src.id, (alien ? FOOD_METABOLISM : ALCOHOL_METABOLISM)) // Catch-all for creatures without livers.
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
 				if (adj_drowsy)	M.drowsyness = max(0,M.drowsyness + adj_drowsy)
 				if (adj_sleepy) M.sleeping = max(0,M.sleeping + adj_sleepy)
@@ -3008,9 +3024,7 @@ datum
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
 						var/datum/organ/internal/liver/L = H.internal_organs_by_name["liver"]
-						if (!L)
-							H.adjustToxLoss(5)
-						else if(istype(L))
+						if (istype(L))
 							L.take_damage(0.1, 1)
 						H.adjustToxLoss(0.1)
 				..()
@@ -3250,13 +3264,13 @@ datum
 						if(prob(5)) if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
-							if (L && istype(L))
+							if (istype(L))
 								L.take_damage(5, 0)
 					if (300 to INFINITY)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
-							if (L && istype(L))
+							if (istype(L))
 								L.take_damage(100, 0)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 

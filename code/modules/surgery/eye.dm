@@ -12,10 +12,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		if (!affected)
 			return 0
-
-		var/datum/organ/internal/eyes = target.internal_organs_by_name["eyes"]
-
-		return target_zone == "eyes" && eyes
+		return target_zone == "eyes"
 
 /datum/surgery_step/eye/cut_open
 	allowed_tools = list(
