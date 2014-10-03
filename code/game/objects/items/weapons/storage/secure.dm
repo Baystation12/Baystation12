@@ -32,9 +32,6 @@
 		..()
 		usr << text("The service panel is [src.open ? "open" : "closed"].")
 
-	attack_alien(mob/user as mob)
-		return attack_hand(user)
-
 	attack_paw(mob/user as mob)
 		return attack_hand(user)
 

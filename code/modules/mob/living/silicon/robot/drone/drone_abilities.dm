@@ -21,28 +21,6 @@
 
 	return
 
-/mob/living/silicon/robot/drone/verb/hide()
-	set name = "Hide"
-	set desc = "Allows you to hide beneath tables or certain items. Toggled on or off."
-	set category = "Drone"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
-
-/mob/living/silicon/robot/drone/verb/light()
-	set name = "Light On/Off"
-	set desc = "Activate a low power omnidirectional LED. Toggled on or off."
-	set category = "Drone"
-
-	if(luminosity)
-		SetLuminosity(0)
-		return
-	SetLuminosity(2)
-
 //Actual picking-up event.
 /mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
 

@@ -499,8 +499,3 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 	islegal()
 		return 0
-
-/obj/item/weapon/implant/cortical
-	name = "cortical stack"
-	desc = "A fist-sized mass of biocircuits and chips."
-	icon_state = "implant_evil"
