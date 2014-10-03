@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\mob_helpers.dm;code\modules\mob\living\simple_animal\friendly\corgi.dm
+WINDOW: code\modules\mob\mob_helpers.dm;code\modules\mob\living\simple_animal\friendly\corgi.dm;maps\apstation.dmm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\area code\game\jobs code\game\jobs\job code\game\verbs code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly icons icons\mob maps 
-FILE: code\modules\mob\living\simple_animal\friendly\corgi.dm
+DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly maps 
+FILE: maps\apstation.dmm
 LAST_COMPILE_TIME: 1412273022
 AUTO_FILE_DIR: OFF
 */
