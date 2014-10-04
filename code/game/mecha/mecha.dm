@@ -1406,6 +1406,11 @@
 
 /obj/mecha/proc/output_maintenance_dialog(obj/item/weapon/card/id/id_card,mob/user)
 	if(!id_card || !user) return
+	
+	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
+	if (locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in contents)
+		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>" 
+	
 	var/output = {"<html>
 						<head>
 						<style>
@@ -1416,7 +1421,7 @@
 						<body>
 						[add_req_access?"<a href='?src=\ref[src];req_access=1;id_card=\ref[id_card];user=\ref[user]'>Edit operation keycodes</a>":null]
 						[maint_access?"<a href='?src=\ref[src];maint_access=1;id_card=\ref[id_card];user=\ref[user]'>Initiate maintenance protocol</a>":null]
-						[(state>0) ?"<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>":null]
+						[(state>0) ? maint_options : ""]
 						</body>
 						</html>"}
 	user << browse(output, "window=exosuit_maint_console")
@@ -1557,6 +1562,28 @@
 			if(new_pressure)
 				internal_tank_valve = new_pressure
 				user << "The internal pressure valve has been set to [internal_tank_valve]kPa."
+	if(href_list["remove_passenger"] && state >= 1)
+		var/mob/user = filter.getMob("user")
+		var/list/passengers = list()
+		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
+			if (P.occupant)
+				passengers["[P.occupant]"] = P
+		
+		if (!passengers)
+			user << "\red There are no passengers to remove."
+			return
+			
+		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
+		
+		if (pname)
+			var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
+			var/mob/occupant = P.occupant
+			
+			visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!")
+			P.go_out()
+			P.log_message("[occupant] was removed.")
+			occupant_message("\red [occupant] was removed from \the [P] by [user]!")
+		return
 	if(href_list["add_req_access"] && add_req_access && filter.getObj("id_card"))
 		if(!in_range(src, usr))	return
 		operation_req_access += filter.getNum("add_req_access")

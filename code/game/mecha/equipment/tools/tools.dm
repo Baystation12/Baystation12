@@ -1054,7 +1054,7 @@
 	var/list/allowed_types = list() //Types of mech that the kit will work on.
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger
-	name = "Passenger Compartment"
+	name = "passenger compartment"
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = "engineering=1;biotech=1"
@@ -1101,16 +1101,16 @@
 		
 	if(usr != occupant)
 		return
+	occupant << "You climb out from \the [src]."
 	go_out()
+	occupant_message("[occupant] disembarked.")
+	log_message("[occupant] disembarked.")
 	add_fingerprint(usr)
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/go_out()
 	if(!occupant)
 		return
-	occupant << "You climb out from \the [src]."
 	occupant.forceMove(get_turf(src))
-	occupant_message("[occupant] disembarked.")
-	log_message("[occupant] disembarked.")
 	occupant.reset_view()
 	/*
 	if(occupant.client)
