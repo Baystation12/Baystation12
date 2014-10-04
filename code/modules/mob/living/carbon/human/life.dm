@@ -1301,11 +1301,22 @@
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 			if(client)
-				if(client.view != world.view)
+				if(client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
+					for(var/obj/item/item in contents)
+						if(item.zoom)
+							item.zoom()
+							break
+
+					/*
 					if(locate(/obj/item/weapon/gun/energy/sniperrifle, contents))
 						var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
 						if(s.zoom)
 							s.zoom()
+					if(locate(/obj/item/device/binoculars, contents))
+						var/obj/item/device/binoculars/b = locate() in src
+						if(b.zoom)
+							b.zoom()
+					*/
 
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
