@@ -122,6 +122,8 @@
 		return
 	var/soft = href_list["software"]
 	var/sub = href_list["sub"]
+	if(!soft && !sub)
+		return
 	if(soft)
 		src.screen = soft
 	if(sub)
