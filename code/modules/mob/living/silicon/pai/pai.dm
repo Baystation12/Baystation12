@@ -435,6 +435,7 @@
 	src.forceMove(card)
 	card.forceMove(card.loc)
 	canmove = 0
+	icon_state = "[chassis]"
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
 

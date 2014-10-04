@@ -670,7 +670,7 @@
 	dat += "<ul>"
 	if(!pda.toff)
 		for (var/obj/item/device/pda/P in sortAtom(PDAs))
-			if (!P.owner||P.toff||P == src.pda)	continue
+			if (!P.owner||P.toff||P == src.pda||P.hidden)	continue
 			dat += "<li><a href='byond://?src=\ref[src];software=pdamessage;target=\ref[P]'>[P]</a>"
 			dat += "</li>"
 	dat += "</ul>"
