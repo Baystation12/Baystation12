@@ -189,7 +189,12 @@
 			Process_Incorpmove(direct)
 			return
 		if(mob.client)
-			if(mob.client.view != world.view)
+			if(mob.client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
+				for(var/obj/item/item in mob.contents)
+					if(item.zoom)
+						item.zoom()
+						break
+				/*
 				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
 					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
 					if(s.zoom)
@@ -198,6 +203,7 @@
 					var/obj/item/device/binoculars/b = locate() in mob
 					if(b.zoom)
 						b.zoom()
+				*/
 
 	if(Process_Grab())	return
 
