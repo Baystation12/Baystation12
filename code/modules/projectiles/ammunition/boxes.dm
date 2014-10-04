@@ -143,6 +143,7 @@
 	ammo_type = "/obj/item/ammo_casing/chameleon"
 	max_ammo = 7
 	multiple_sprites = 1
+	matter = list()
 
 /obj/item/ammo_magazine/chameleon/empty
 	name = "magazine (.45)"
@@ -150,3 +151,4 @@
 	ammo_type = "/obj/item/ammo_casing/chameleon"
 	max_ammo = 0
 	multiple_sprites = 1
+	matter = list()
