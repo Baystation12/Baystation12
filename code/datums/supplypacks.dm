@@ -380,6 +380,26 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
+/datum/supply_packs/bodybag
+	name = "Body bag crate"
+	contains = list(/obj/item/weapon/storage/box/bodybags,
+                    /obj/item/weapon/storage/box/bodybags,
+                    /obj/item/weapon/storage/box/bodybags)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Body bag crate"
+	group = "Medical"
+
+/datum/supply_packs/cryobag
+	name = "Statis bag crate"
+	contains = list(/obj/item/bodybag/cryobag,
+				    /obj/item/bodybag/cryobag,
+	    			/obj/item/bodybag/cryobag)
+	cost = 50
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Stasis bag crate"
+	group = "Medical"
+
 /datum/supply_packs/virus
 	name = "Virus sample crate"
 /*	contains = list(/obj/item/weapon/reagent_containers/glass/bottle/flu_virion,
