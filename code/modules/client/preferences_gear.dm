@@ -257,7 +257,7 @@ proc/populate_gear_list()
 	cost = 2
 
 /datum/gear/skirt_red
-	display_name = " plaid skirt, red"
+	display_name = "plaid skirt, red"
 	path = /obj/item/clothing/under/dress/plaid_red
 	slot = slot_w_uniform
 	cost = 2
@@ -275,7 +275,7 @@ proc/populate_gear_list()
 	cost = 3
 
 /datum/gear/uniform_captain
-	display_name = "uniform, captain's dress"
+	display_name = "uniform, captains dress"
 	path = /obj/item/clothing/under/dress/dress_cap
 	slot = slot_w_uniform
 	cost = 1
@@ -289,7 +289,7 @@ proc/populate_gear_list()
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/uniform_hop
-	display_name = "uniform, HoP's dress"
+	display_name = "uniform, HoPs dress"
 	path = /obj/item/clothing/under/dress/dress_hop
 	slot = slot_w_uniform
 	cost = 1
