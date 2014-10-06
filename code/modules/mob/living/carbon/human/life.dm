@@ -435,6 +435,7 @@
 
 
 	proc/handle_breath(datum/gas_mixture/breath)
+
 		if(status_flags & GODMODE)
 			return
 
@@ -456,7 +457,17 @@
 			return 0
 
 		var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
-		//var/safe_pressure_max = 140 // Maximum safe partial pressure of breathable gas in kPa (Not used for now)
+
+		// Lung damage increases the minimum safe pressure.
+		if(species.has_organ["lungs"])
+			var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+			if(!L)
+				safe_pressure_min = INFINITY //No lungs, how are you breathing?
+			else if(L.is_broken())
+				safe_pressure_min *= 1.5
+			else if(L.is_bruised())
+				safe_pressure_min *= 1.25
+
 		var/safe_exhaled_max = 10
 		var/safe_toxins_max = 0.005
 		var/SA_para_min = 1

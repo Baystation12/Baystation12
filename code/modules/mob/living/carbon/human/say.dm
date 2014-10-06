@@ -1,7 +1,5 @@
 /mob/living/carbon/human/say(var/message)
 
-	//TODO: Add checks for species who do not speak common.
-
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = world.view
@@ -34,9 +32,13 @@
 
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
+	if(speaking)
+		message = copytext(message,3)
+	else if(species.default_language)
+		speaking = all_languages[species.default_language]
+
 	if (speaking)
 		verb = speaking.speech_verb
-		message = copytext(message,3)
 
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
@@ -167,6 +169,9 @@
 /mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
+		return 1
+
+	if(species.can_understand(other))
 		return 1
 
 	//These only pertain to common. Languages are handled by mob/say_understands()

@@ -97,6 +97,7 @@
 /obj/item/organ/lungs
 	name = "lungs"
 	icon_state = "lungs"
+	gender = PLURAL
 	prosthetic_name = "gas exchange system"
 	prosthetic_icon = "lungs-prosthetic"
 	organ_tag = "lungs"
@@ -104,6 +105,7 @@
 /obj/item/organ/kidneys
 	name = "kidneys"
 	icon_state = "kidneys"
+	gender = PLURAL
 	prosthetic_name = "prosthetic kidneys"
 	prosthetic_icon = "kidneys-prosthetic"
 	organ_tag = "kidneys"
@@ -111,6 +113,7 @@
 /obj/item/organ/eyes
 	name = "eyeballs"
 	icon_state = "eyes"
+	gender = PLURAL
 	prosthetic_name = "visual prosthesis"
 	prosthetic_icon = "eyes-prosthetic"
 	organ_tag = "eyes"

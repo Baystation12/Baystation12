@@ -22,12 +22,16 @@
 
 		if(istype(player,/mob/dead))
 			understood = 1
-		else if(src in player.languages)
+		else if((src in player.languages) && check_special_condition(player))
 			understood = 1
 
 		if(understood)
 			if(!speaker_mask) speaker_mask = speaker.name
-			player << "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			player << "[msg]"
+
+/datum/language/proc/check_special_condition(var/mob/other)
+	return 1
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -69,6 +73,13 @@
 	key = "q"
 	flags = RESTRICTED
 
+/datum/language/common
+	name = "Galactic Common"
+	desc = "The common galactic tongue."
+	speech_verb = "says"
+	key = "0"
+	flags = RESTRICTED
+
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
@@ -91,6 +102,14 @@
 	colour = "rough"
 	key = "3"
 
+/datum/language/xenocommon
+	name = "Xenomorph"
+	colour = "alien"
+	desc = "The common tongue of the xenomorphs."
+	speech_verb = "hisses"
+	key = "4"
+	flags = RESTRICTED
+
 /datum/language/xenos
 	name = "Hivemind"
 	desc = "Xenomorphs have the strange ability to commune over a psychic hivemind."
@@ -98,6 +117,16 @@
 	colour = "alien"
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
+
+/datum/language/xenos/check_special_condition(var/mob/other)
+
+	var/mob/living/carbon/M = other
+	if(!istype(M))
+		return 1
+	if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		return 1
+
+	return 0
 
 /datum/language/ling
 	name = "Changeling"
@@ -116,7 +145,7 @@
 
 /datum/language/corticalborer
 	name = "Cortical Link"
-	desc = "Cortical borers possess a strange between their tiny minds."
+	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
 	colour = "alien"
 	key = "x"
