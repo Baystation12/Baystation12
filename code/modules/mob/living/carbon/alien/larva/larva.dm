@@ -16,4 +16,4 @@
 
 /mob/living/carbon/alien/larva/New()
 	..()
-	add_language("Rootspeak")
+	add_language("Xenomorph") //Bonus language.

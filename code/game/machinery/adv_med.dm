@@ -296,7 +296,8 @@
 		"tg_diseases_list" = H.viruses.Copy(),
 		"lung_ruptured" = H.is_lung_ruptured(),
 		"external_organs" = H.organs.Copy(),
-		"internal_organs" = H.internal_organs.Copy()
+		"internal_organs" = H.internal_organs.Copy(),
+		"species_organs" = H.species.has_organ //Just pass a reference for this, it shouldn't ever be modified outside of the datum.
 		)
 	return occupant_data
 
@@ -413,6 +414,7 @@
 		dat += "</tr>"
 
 	for(var/datum/organ/internal/i in occ["internal_organs"])
+
 		var/mech = ""
 		if(i.robotic == 1)
 			mech = "Assisted:"
@@ -438,6 +440,11 @@
 		dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
 		dat += "</tr>"
 	dat += "</table>"
+
+	var/list/species_organs = occ["species_organs"]
+	for(var/organ_name in species_organs)
+		if(!locate(species_organs[organ_name]) in occ["internal_organs"])
+			dat += text("<font color='red'>No [organ_name] detected.</font><BR>")
 
 	if(occ["sdisabilities"] & BLIND)
 		dat += text("<font color='red'>Cataracts detected.</font><BR>")
