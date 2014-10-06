@@ -493,8 +493,9 @@ var/list/slot_equipment_priority = list( \
 	reset_view(null)
 	unset_machine()
 	if(istype(src, /mob/living))
-		if(src:cameraFollow)
-			src:cameraFollow = null
+		var/mob/living/M = src
+		if(M.cameraFollow)
+			M.cameraFollow = null
 
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
