@@ -23,9 +23,15 @@
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
 		if(istype(O,/obj/item/organ/brain) && !brainmob) //Time to stick a brain in it --NEO
-			if(!O:brainmob)
+
+			var/obj/item/organ/brain/B = O
+			if(B.health <= 0)
+				user << "\red That brain is well and truly dead."
+				return
+			else if(!B:brainmob)
 				user << "\red You aren't sure where this brain came from, but you're pretty sure it's a useless brain."
 				return
+
 			for(var/mob/V in viewers(src, null))
 				V.show_message(text("\blue [user] sticks \a [O] into \the [src]."))
 

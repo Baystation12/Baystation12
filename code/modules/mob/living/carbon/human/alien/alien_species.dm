@@ -6,6 +6,7 @@
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
+	speaks_common = 0
 
 	has_fine_manipulation = 0
 	insulated = 1
@@ -40,7 +41,7 @@
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"lungs" =           /datum/organ/internal/lungs,
-		"brain" =           /datum/organ/internal/brain,
+		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
 		"nutrient vessel" = /datum/organ/internal/diona/nutrients
@@ -50,6 +51,18 @@
 	var/caste_name = "creature" // Used to update alien name.
 	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
+
+/datum/species/xenos/can_understand(var/mob/other)
+
+	if(istype(other,/mob/living/carbon/alien/larva))
+		return 1
+
+	if(istype(other,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = other
+		if(istype(H.species,/datum/species/xenos))
+			return 1
+
+	return 0
 
 /datum/species/xenos/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 	H.visible_message("<span class='notice'>[H] caresses [target] with its scythe-like arm.</span>", \
@@ -109,7 +122,7 @@
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"lungs" =           /datum/organ/internal/lungs,
-		"brain" =           /datum/organ/internal/brain,
+		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -148,7 +161,7 @@
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"lungs" =           /datum/organ/internal/lungs,
-		"brain" =           /datum/organ/internal/brain,
+		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/hunter,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
 		"nutrient vessel" = /datum/organ/internal/diona/nutrients
@@ -176,7 +189,7 @@
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"lungs" =           /datum/organ/internal/lungs,
-		"brain" =           /datum/organ/internal/brain,
+		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/sentinel,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -207,7 +220,7 @@
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
 		"lungs" =           /datum/organ/internal/lungs,
-		"brain" =           /datum/organ/internal/brain,
+		"brain" =           /datum/organ/internal/brain/xeno,
 		"egg sac" =         /datum/organ/internal/xenos/eggsac,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,

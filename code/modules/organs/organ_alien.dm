@@ -56,11 +56,13 @@
 
 	del(src)
 
-//These are different to the standard diona organs as they have a purpose in other
+// These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
 /obj/item/organ/diona/nutrients
 	name = "nutrient vessel"
 	organ_tag = "nutrient vessel"
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "claw"
 
 /obj/item/organ/diona/nutrients/removed()
 	return
@@ -68,6 +70,8 @@
 /obj/item/organ/diona/node
 	name = "receptor node"
 	organ_tag = "receptor node"
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "claw"
 
 /obj/item/organ/diona/node/removed()
 	return
@@ -88,11 +92,14 @@
 
 	// They're also super gross and ooze ichor.
 	if(prob(5))
-		var/obj/effect/decal/cleanable/blood/splatter/goo = new(get_turf(owner))
-		goo.name = "husk ichor"
-		goo.desc = "It's thick and stinks of decay."
-		goo.basecolor = "#412464"
-		goo.update_icon()
+		var/datum/reagent/blood = owner.reagents.reagent_list["blood"]
+		blood_splatter(owner,blood,1)
+		var/obj/effect/decal/cleanable/blood/splatter/goo = locate() in get_turf(owner)
+		if(goo)
+			goo.name = "husk ichor"
+			goo.desc = "It's thick and stinks of decay."
+			goo.basecolor = "#412464"
+			goo.update_icon()
 
 /obj/item/organ/borer
 	name = "cortical borer"
@@ -102,7 +109,6 @@
 	desc = "A disgusting space slug."
 
 /obj/item/organ/borer/removed(var/mob/living/target,var/mob/living/user)
-
 
 	..()
 

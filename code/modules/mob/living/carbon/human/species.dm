@@ -24,6 +24,7 @@
 	var/unarmed_type =           /datum/unarmed_attack
 	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
+	var/speaks_common = 1         // Speaks the common galactic tongue.
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
@@ -192,6 +193,10 @@
 
 // Grabs the window recieved when you click-drag someone onto you.
 /datum/species/proc/get_inventory_dialogue(var/mob/living/carbon/human/H)
+	return
+
+//Used by xenos understanding larvae and dionaea understanding nymphs.
+/datum/species/proc/can_understand(var/mob/other)
 	return
 
 /datum/species/human
@@ -394,6 +399,12 @@
 	flesh_color = "#907E4A"
 
 	reagent_tag = IS_DIONA
+
+/datum/species/diona/can_understand(var/mob/other)
+	var/mob/living/carbon/alien/diona/D = other
+	if(istype(D))
+		return 1
+	return 0
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER

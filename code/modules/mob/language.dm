@@ -22,12 +22,16 @@
 
 		if(istype(player,/mob/dead))
 			understood = 1
-		else if(src in player.languages)
+		else if((src in player.languages) && check_special_condition(player))
 			understood = 1
 
 		if(understood)
 			if(!speaker_mask) speaker_mask = speaker.name
-			player << "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			player << "[msg]"
+
+/datum/language/proc/check_special_condition(var/mob/other)
+	return 1
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -99,6 +103,16 @@
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
 
+/datum/language/xenos/check_special_condition(var/mob/other)
+
+	var/mob/living/carbon/M = other
+	if(!istype(M))
+		return 1
+	if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		return 1
+
+	return 0
+
 /datum/language/ling
 	name = "Changeling"
 	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
@@ -116,7 +130,7 @@
 
 /datum/language/corticalborer
 	name = "Cortical Link"
-	desc = "Cortical borers possess a strange between their tiny minds."
+	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
 	colour = "alien"
 	key = "x"
