@@ -336,8 +336,7 @@
 				user << "\red God damnit!"
 
 	W.add_fingerprint(user)
-	handle_item_insertion(W)
-	return
+	return handle_item_insertion(W)
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
 	return
