@@ -28,7 +28,7 @@
 			if(B.health <= 0)
 				user << "\red That brain is well and truly dead."
 				return
-			else if(!B:brainmob)
+			else if(!B.brainmob)
 				user << "\red You aren't sure where this brain came from, but you're pretty sure it's a useless brain."
 				return
 

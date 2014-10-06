@@ -73,6 +73,13 @@
 	key = "q"
 	flags = RESTRICTED
 
+/datum/language/common
+	name = "Galactic Common"
+	desc = "The common galactic tongue."
+	speech_verb = "says"
+	key = "0"
+	flags = RESTRICTED
+
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
@@ -94,6 +101,14 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+
+/datum/language/xenocommon
+	name = "Xenomorph"
+	colour = "alien"
+	desc = "The common tongue of the xenomorphs."
+	speech_verb = "hisses"
+	key = "4"
+	flags = RESTRICTED
 
 /datum/language/xenos
 	name = "Hivemind"

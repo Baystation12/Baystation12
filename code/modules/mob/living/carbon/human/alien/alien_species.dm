@@ -1,12 +1,12 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = "Xenomorph"
+	default_language = "Xenomorph"
 	language = "Hivemind"
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
-	speaks_common = 0
 
 	has_fine_manipulation = 0
 	insulated = 1
@@ -56,11 +56,6 @@
 
 	if(istype(other,/mob/living/carbon/alien/larva))
 		return 1
-
-	if(istype(other,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = other
-		if(istype(H.species,/datum/species/xenos))
-			return 1
 
 	return 0
 

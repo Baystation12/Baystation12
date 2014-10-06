@@ -92,8 +92,12 @@
 
 	// They're also super gross and ooze ichor.
 	if(prob(5))
-		var/datum/reagent/blood = owner.reagents.reagent_list["blood"]
-		blood_splatter(owner,blood,1)
+		var/mob/living/carbon/human/H = owner
+		if(!istype(H))
+			return
+
+		var/datum/reagent/blood = H.vessel.reagent_list["blood"]
+		blood_splatter(H,blood,1)
 		var/obj/effect/decal/cleanable/blood/splatter/goo = locate() in get_turf(owner)
 		if(goo)
 			goo.name = "husk ichor"

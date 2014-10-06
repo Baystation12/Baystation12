@@ -13,7 +13,6 @@
 
 	var/primitive                              // Lesser form, if any (ie. monkey for humans)
 	var/tail                                   // Name of tail image in species effects icon file.
-	var/language                               // Default racial language, if any.
 	var/datum/unarmed_attack/unarmed           // For empty hand harm-intent attack
 	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.
 	var/datum/hud_data/hud
@@ -24,7 +23,9 @@
 	var/unarmed_type =           /datum/unarmed_attack
 	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
-	var/speaks_common = 1         // Speaks the common galactic tongue.
+	var/language                  // Default racial language, if any.
+	// Default language is used when 'say' is used without modifiers.
+	var/default_language = "Galactic Common"
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
@@ -279,7 +280,8 @@
 	name = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
-	language = "Vox-pidgin"
+	default_language = "Vox-pidgin"
+	language = "Galactic Common"
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	rarity_value = 2
@@ -324,7 +326,6 @@
 	name = "Vox Armalis"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
-	language = "Vox-pidgin"
 	rarity_value = 10
 
 	warning_low_pressure = 50

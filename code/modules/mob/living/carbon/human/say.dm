@@ -1,7 +1,5 @@
 /mob/living/carbon/human/say(var/message)
 
-	//TODO: Add checks for species who do not speak common.
-
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = world.view
@@ -34,9 +32,13 @@
 
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
+	if(speaking)
+		message = copytext(message,3)
+	else if(species.default_language)
+		speaking = all_languages[species.default_language]
+
 	if (speaking)
 		verb = speaking.speech_verb
-		message = copytext(message,3)
 
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
@@ -183,10 +185,6 @@
 			return 1
 		if (istype(other, /mob/living/carbon/slime))
 			return 1
-		if(istype(other,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = other
-			if(!species.speaks_common || !H.species.speaks_common)
-				return 0
 
 	//This is already covered by mob/say_understands()
 	//if (istype(other, /mob/living/simple_animal))
