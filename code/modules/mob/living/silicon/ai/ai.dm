@@ -540,9 +540,6 @@ var/list/ai_verbs_default = list(
 
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
-
-	src.cameraFollow = null
-
 	if (!C || stat == DEAD) //C.can_use())
 		return 0
 
@@ -593,7 +590,6 @@ var/list/ai_verbs_default = list(
 	set category = "AI Commands"
 	set name = "Jump To Network"
 	unset_machine()
-	src.cameraFollow = null
 	var/cameralist[0]
 
 	if(check_unable())
