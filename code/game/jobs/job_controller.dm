@@ -492,6 +492,17 @@ var/global/datum/controller/occupations/job_master
 					H.internal = H.l_hand
 				H.internals.icon_state = "internal1"
 
+		if(istype(H)) //give humans wheelchairs, if they need them.
+			var/datum/organ/external/l_foot = H.get_organ("l_foot")
+			var/datum/organ/external/r_foot = H.get_organ("r_foot")
+			if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+				var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair(H.loc)
+				H.buckled = W
+				H.update_canmove()
+				W.dir = H.dir
+				W.buckled_mob = H
+				W.add_fingerprint(H)
+
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
