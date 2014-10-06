@@ -3,6 +3,7 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
+	/mob/living/silicon/ai/proc/ai_alerts,
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
@@ -12,13 +13,14 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
 	/mob/living/silicon/ai/proc/ai_network_change,
-	/mob/living/silicon/ai/proc/pick_icon,
 	/mob/living/silicon/ai/proc/ai_roster,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/checklaws,
 	/mob/living/silicon/ai/proc/control_integrated_radio,
 	/mob/living/silicon/ai/proc/core,
+	/mob/living/silicon/ai/proc/pick_icon,
+	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light
@@ -76,15 +78,20 @@ var/list/ai_verbs_default = list(
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
+	var/datum/announcement/priority/announcement
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
-	src.verbs += ai_verbs_default
+	src.verbs |= ai_verbs_default
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
 
-
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
+	announcement = new()
+	announcement.title = "A.I. Announcement"
+	announcement.announcement_type = "A.I. Announcement"
+	announcement.newscast = 1
+
 	var/list/possibleNames = ai_names
 
 	var/pickedName = null
@@ -95,8 +102,8 @@ var/list/ai_verbs_default = list(
 				possibleNames -= pickedName
 				pickedName = null
 
-	real_name = pickedName
-	name = real_name
+	aiPDA = new/obj/item/device/pda/ai(src)
+	SetName(pickedName)
 	anchored = 1
 	canmove = 0
 	density = 1
@@ -112,11 +119,6 @@ var/list/ai_verbs_default = list(
 	else
 		laws = new base_law_type
 
-	aiPDA = new/obj/item/device/pda/ai(src)
-	aiPDA.owner = name
-	aiPDA.ownjob = "AI"
-	aiPDA.name = name + " (" + aiPDA.ownjob + ")"
-
 	aiMulti = new(src)
 	aiRadio = new(src)
 	aiRadio.myAi = src
@@ -128,7 +130,6 @@ var/list/ai_verbs_default = list(
 	//Languages
 	add_language("Sol Common", 0)
 	add_language("Sinta'unathi", 0)
-	add_language("Siik'maas", 0)
 	add_language("Siik'tajr", 0)
 	add_language("Skrellian", 0)
 	add_language("Tradeband", 1)
@@ -167,7 +168,6 @@ var/list/ai_verbs_default = list(
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
-
 	ai_list += src
 	..()
 	return
@@ -176,6 +176,18 @@ var/list/ai_verbs_default = list(
 	ai_list -= src
 	..()
 
+/mob/living/silicon/ai/proc/SetName(pickedName as text)
+	real_name = pickedName
+	name = pickedName
+	announcement.announcer = pickedName
+	if(eyeobj)
+		eyeobj.name = "[pickedName] (AI Eye)"
+
+	// Set ai pda name
+	if(aiPDA)
+		aiPDA.ownjob = "AI"
+		aiPDA.owner = pickedName
+		aiPDA.name = pickedName + " (" + aiPDA.ownjob + ")"
 
 /*
 	The AI Power supply is a dummy object used for powering the AI since only machinery should be using power.
@@ -233,10 +245,10 @@ var/list/ai_verbs_default = list(
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static")
+	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline")
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
-		if("Clown") icon_state = "ai-clown2"
+		if("Rainbow") icon_state = "ai-clown"
 		if("Monochrome") icon_state = "ai-mono"
 		if("Inverted") icon_state = "ai-u"
 		if("Firewall") icon_state = "ai-magma"
@@ -251,6 +263,9 @@ var/list/ai_verbs_default = list(
 		if("Bliss") icon_state = "ai-bliss"
 		if("Triumvirate") icon_state = "ai-triumvirate"
 		if("Triumvirate Static") icon_state = "ai-triumvirate-malf"
+		if("Soviet") icon_state = "ai-redoctober"
+		if("Trapped") icon_state = "ai-hades"
+		if("Heartline") icon_state = "ai-heartline"
 		else icon_state = "ai"
 	//else
 			//usr <<"You can only change your display once!"
@@ -321,9 +336,7 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
 		return
 
-	captain_announce(input, "A.I. Announcement", src.name)
-	log_say("[key_name(usr)] has made an AI announcement: [input]")
-	message_admins("[key_name_admin(usr)] has made an AI announcement.", 1)
+	announcement.Announce(input)
 	message_cooldown = 1
 	spawn(600)//One minute cooldown
 		message_cooldown = 0
@@ -501,41 +514,7 @@ var/list/ai_verbs_default = list(
 	updatehealth()
 	return 2
 
-/mob/living/silicon/ai/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
-	switch(M.a_intent)
-
-		if ("help")
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src]'s plating with its scythe like arm."), 1)
-
-		else //harm
-			var/damage = rand(10, 20)
-			if (prob(90))
-				playsound(loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
-				if(prob(8))
-					flick("noise", flash)
-				adjustBruteLoss(damage)
-				updatehealth()
-			else
-				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
-	return
-
-/mob/living/silicon/ai/attack_animal(mob/living/simple_animal/M as mob)
+/mob/living/silicon/ai/attack_animal(mob/living/M as mob)
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")
 	else
@@ -561,9 +540,6 @@ var/list/ai_verbs_default = list(
 
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
-
-	src.cameraFollow = null
-
 	if (!C || stat == DEAD) //C.can_use())
 		return 0
 
@@ -614,7 +590,6 @@ var/list/ai_verbs_default = list(
 	set category = "AI Commands"
 	set name = "Jump To Network"
 	unset_machine()
-	src.cameraFollow = null
 	var/cameralist[0]
 
 	if(check_unable())
@@ -708,7 +683,8 @@ var/list/ai_verbs_default = list(
 	else
 		var/icon_list[] = list(
 		"default",
-		"floating face"
+		"floating face",
+		"carp"
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
@@ -718,6 +694,8 @@ var/list/ai_verbs_default = list(
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 				if("floating face")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
+				if("carp")
+					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo4"))
 	return
 
 /*/mob/living/silicon/ai/proc/corereturn()
@@ -807,6 +785,12 @@ var/list/ai_verbs_default = list(
 	src << "Accessing Subspace Transceiver control..."
 	if (src.aiRadio)
 		src.aiRadio.interact(src)
+
+/mob/living/silicon/ai/proc/sensor_mode()
+	set name = "Set Sensor Augmentation"
+	set category = "AI Commands"
+	set desc = "Augment visual feed with internal sensor overlays"
+	toggle_sensor_mode()
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0)
 	if(stat == DEAD)

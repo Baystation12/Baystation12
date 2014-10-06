@@ -98,7 +98,7 @@
 
 		dat += "<A href='?src=\ref[src];op=temp;val=-5'>-</A>"
 
-		dat += " [set_temperature]&deg;C "
+		dat += " [set_temperature]K ([set_temperature-T0C]&deg;C)"
 		dat += "<A href='?src=\ref[src];op=temp;val=5'>+</A><BR>"
 
 		user.set_machine(src)
@@ -176,7 +176,7 @@
 						heat_transfer = min(heat_transfer, cop * heating_power)	//limit heat transfer by available power
 
 						heat_transfer = removed.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
-						
+
 						var/power_used = abs(heat_transfer)/cop
 						cell.use(power_used*CELLRATE)
 

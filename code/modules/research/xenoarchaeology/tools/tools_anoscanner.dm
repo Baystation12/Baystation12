@@ -20,16 +20,18 @@
 	return src.interact(user)
 
 /obj/item/device/ano_scanner/interact(var/mob/user as mob)
-	var/message = "Background radiation levels detected."
 	if(world.time - last_scan_time >= scan_delay)
 		spawn(0)
 			scan()
-		if(nearest_artifact_distance >= 0)
-			message = "Exotic energy detected on wavelength '[nearest_artifact_id]' in a radius of [nearest_artifact_distance]m"
-	else
-		message = "Scanning array is recharging."
 
-	user << "<span class='info'>[message]</span>"
+			if(!user) return
+
+			if(nearest_artifact_distance >= 0)
+				user << "Exotic energy detected on wavelength '[nearest_artifact_id]' in a radius of [nearest_artifact_distance]m"
+			else
+				user << "Background radiation levels detected."
+	else
+		user << "Scanning array is recharging."
 
 /obj/item/device/ano_scanner/proc/scan()
 	set background = 1

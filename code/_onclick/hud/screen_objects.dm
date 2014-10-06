@@ -91,7 +91,7 @@
 	if(master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
-			master.attackby(I, usr)
+			usr.ClickOn(master)
 			usr.next_move = world.time+2
 	return 1
 
@@ -235,8 +235,6 @@
 					if("walk")
 						usr.m_intent = "run"
 						usr.hud_used.move_intent.icon_state = "running"
-				if(istype(usr,/mob/living/carbon/alien/humanoid))
-					usr.update_icons()
 		if("m_intent")
 			if(!usr.m_int)
 				switch(usr.m_intent)

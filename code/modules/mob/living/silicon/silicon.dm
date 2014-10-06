@@ -1,6 +1,5 @@
 /mob/living/silicon
 	gender = NEUTER
-	robot_talk_understand = 1
 	voice_name = "synthesized voice"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
@@ -12,8 +11,13 @@
 	var/speak_statement = "states"
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
-
+	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+	var/local_transmit //If set, can only speak to others of the same type within a short range.
+
+	var/sensor_mode = 0 //Determines the current HUD.
+	#define SEC_HUD 1 //Security HUD mode
+	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/proc/show_laws()
 	return
@@ -38,12 +42,12 @@
 	return	//immune
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	
+
 	if (istype(source, /obj/machinery/containment_field))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, loc)
 		s.start()
-		
+
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
 		visible_message("\red [src] was shocked by \the [source]!", \
@@ -184,3 +188,33 @@
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+/mob/living/silicon/proc/toggle_sensor_mode()
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	switch(sensor_type)
+		if ("Security")
+			sensor_mode = SEC_HUD
+			src << "<span class='notice'>Security records overlay enabled.</span>"
+		if ("Medical")
+			sensor_mode = MED_HUD
+			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+		if ("Disable")
+			sensor_mode = 0
+			src << "Sensor augmentations disabled."
+
+/mob/living/silicon/verb/pose()
+	set name = "Set Pose"
+	set desc = "Sets a description which will be shown when someone examines you."
+	set category = "IC"
+
+	pose =  copytext(sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
+
+/mob/living/silicon/verb/set_flavor()
+	set name = "Set Flavour Text"
+	set desc = "Sets an extended description of your character's features."
+	set category = "IC"
+
+	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
+
+/mob/living/silicon/binarycheck()
+	return 1

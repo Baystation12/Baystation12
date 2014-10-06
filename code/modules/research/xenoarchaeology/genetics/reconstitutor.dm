@@ -33,8 +33,9 @@ datum/genesequence
 
 
 /obj/machinery/computer/reconstitutor/initialize()
-	if(!undiscovered_genesequences)
-		undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
+	spawn(50)
+		if(!undiscovered_genesequences)
+			undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/animal
@@ -44,7 +45,8 @@ datum/genesequence
 	circuit = "/obj/item/weapon/circuitboard/reconstitutor/animal"
 
 /obj/machinery/computer/reconstitutor/animal/initialize()
-	undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
+	spawn(50)
+		undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/attackby(obj/item/W, mob/user)
@@ -77,14 +79,17 @@ datum/genesequence
 					S.remove_from_storage(F, src) //This will move the item to this item's contents
 					del(F)
 					updateDialog()
-		var/outmsg = "\blue You empty all the fossils from [S] into [src]."
+
+		user.visible_message("[user] empties all the fossils from [S] into [src].", "\blue You empty all the fossils from [S] into [src].", "You hear the sound of rocks being poured into a container")
+
+		var/outmsg = ""
 		if(numaccepted)
 			outmsg += " \blue[numaccepted] fossils were accepted and consumed as [src] extracts genetic data from them."
 		if(numrejected)
 			outmsg += " \red[numrejected] fossils were rejected."
 		if(full)
 			outmsg += " \red[src] can not extract any more genetic data from new fossils."
-		visible_message(outmsg)
+		user << outmsg
 
 	else
 		..()

@@ -219,8 +219,8 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{if data.cartridge.charges}}
                     <div class="item">
                         <b>{{:data.cartridge.charges}}
-                        {{if data.cartridge.type == "/obj/item/weapon/cartridge/syndicate"}} detonation charges left. {{/if}}
-                        {{if data.cartridge.type == "/obj/item/weapon/cartridge/clown" || data.cartridge.type == "/obj/item/weapon/cartridge/mime"}} viral files left. {{/if}}
+                        {{if data.cartridge.access.access_detonate_pda}} detonation charges left. {{/if}}
+                        {{if data.cartridge.access.access_clown || data.cartridge.access.access_mime}} viral files left. {{/if}}
                         </b>
                         <br><br>
                     </div>
@@ -234,14 +234,14 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{for data.convopdas}}
                     <div class="item">
                         {{:helper.link(value.Name, 'circle-arrow-s', {'choice' : "Select Conversation", 'convo' : value.Reference } , null, value.fixedLeftWider)}}
-                        {{if value.cartridge}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/syndicate" && value.Detonate == 1}}
+                        {{if data.cartridge}}
+                            {{if data.cartridge.access.access_detonate_pda && value.Detonate}}
                                 {{:helper.link('*Detonate*', 'radiation', {'choice' : "Detonate", 'target' : value.Reference}, null, 'fixedLeft')}}
                             {{/if}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/clown"}}
+                            {{if data.cartridge.access.access_clown}}
                                 {{:helper.link('*Send Virus*', 'star', {'choice' : "Send Honk", 'target' : value.Reference}, null, 'fixedLeft')}}
                             {{/if}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/mime"}}
+                            {{if data.cartridge.access.access_mime}}
                                 {{:helper.link('*Send Virus*', 'circle-arrow-s', {'choice' : "Send Silence", 'target' : value.Reference}, null, 'fixedLeft')}}
                             {{/if}}
                         {{/if}}
@@ -251,10 +251,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 {{for data.pdas}}
                     <div class="item">
                         {{:helper.link(value.Name, 'circle-arrow-s', {'choice' : "Message", 'target' : value.Reference}, null, value.fixedLeftWider)}}
-                        {{if value.cartridge}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/syndicate" && value.Detonate == 1}} {{:helper.link('*Detonate*', 'radiation', {'choice' : "Detonate", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/clown"}} {{:helper.link('*Send Virus*', 'star', {'choice' : "Send Honk", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
-                            {{if value.cartridge.type == "/obj/item/weapon/cartridge/mime"}}  {{:helper.link('*Send Virus*', 'circle-arrow-s', {'choice' : "Send Silence", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
+                        {{if data.cartridge}}
+                            {{if data.cartridge.access.access_detonate_pda && value.Detonate}} {{:helper.link('*Detonate*', 'radiation', {'choice' : "Detonate", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
+                            {{if data.cartridge.access.access_clown}} {{:helper.link('*Send Virus*', 'star', {'choice' : "Send Honk", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
+                            {{if data.cartridge.access.access_mime}}  {{:helper.link('*Send Virus*', 'circle-arrow-s', {'choice' : "Send Silence", 'target' : value.Reference}, null, 'fixedLeft')}}  {{/if}}
                         {{/if}}
                     </div>
                 {{/for}}
@@ -509,9 +509,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
 
 	{{else data.mode == 43}}
-        <H2>Station Powermonitors</H2>
+        <H2>Station Power Monitors</H2>
         <div class="item">
-            Select A power monitor:
+            Select a power monitor:
         </div>
         {{for data.records.powermonitors}}
             <div class="item">
@@ -522,39 +522,42 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
     {{else data.mode == 433}}
         <H2>Powernet Status</H2>
-        <div class="item">
-            <div class="itemLabelNarrow">
-                <b>Current Load</b>:
-            </div>
-            <div class="itemContent">
-                <span class="average">{{:data.records.powerload}} W</span>
-            </div>
-        </div>
-        <div class="item">
-            <div class="itemLabelNarrow">
-                <b>Total Power</b>:
-            </div>
-            <div class="itemContent">
-                <span class="average">{{:data.records.poweravail}} W</span>
-            </div>
-        </div>
-        <br>
-        <div class="item">
-            <table class="curvedEdges"><tbody>
-                {{for data.records.apcs}}
-                    {{if index % 20 === 0}}
-                        <tr class=><th>&nbsp;Area&nbsp;</th><th>&nbsp;Eqp.&nbsp;</th><th>&nbsp;Lgt.&nbsp;</th><th>&nbsp;Env&nbsp;</th><th>&nbsp;Cell&nbsp;</th></tr>
-                    {{/if}}
-                    <tr class=><td><span class="average">{{:value.Name}}</span></td>
-                        {{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Equipment==1 ? '#4f7529' : '#8f1414')}}
-                        {{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Lights==1 ? '#4f7529' : '#8f1414')}}
-                        {{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Environment==1 ? '#4f7529' : '#8f1414')}}
-                        {{:helper.string('<td bgcolor="{0}">{1}</td>', value.CellStatus==1 ? '#4f7529' : '#8f1414', value.CellStatus==-1 ? 'No Cell' : CellPct + '%')}}
-                    </tr>
-                {{/for}}
-            </tbody></table>
-        </div>
-
+		{{if data.records.powerconnected == 1}}
+			<div class="item">
+				<div class="itemLabelNarrow">
+					<b>Current Load</b>:
+				</div>
+				<div class="itemContent">
+					<span class="average">{{:data.records.powerload}} W</span>
+				</div>
+			</div>
+			<div class="item">
+				<div class="itemLabelNarrow">
+					<b>Total Power</b>:
+				</div>
+				<div class="itemContent">
+					<span class="average">{{:data.records.poweravail}} W</span>
+				</div>
+			</div>
+			<br>
+			<div class="item">
+				<table class="curvedEdges"><tbody>
+					{{for data.records.apcs}}
+						{{if index % 20 === 0}}
+							<tr class=><th>&nbsp;Area&nbsp;</th><th>&nbsp;Eqp.&nbsp;</th><th>&nbsp;Lgt.&nbsp;</th><th>&nbsp;Env&nbsp;</th><th>&nbsp;Cell&nbsp;</th></tr>
+						{{/if}}
+						<tr class=><td><span class="average">{{:value.Name}}</span></td>
+							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Equipment==1 ? '#4f7529' : '#8f1414')}}
+							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Lights==1 ? '#4f7529' : '#8f1414')}}
+							{{:helper.string('<td bgcolor="{0}">&nbsp;</td>', value.Environment==1 ? '#4f7529' : '#8f1414')}}
+							{{:helper.string('<td bgcolor="{0}">{1}</td>', value.CellStatus==1 ? '#4f7529' : '#8f1414', value.CellStatus==-1 ? 'No Cell' : value.CellPct + '%')}}
+						</tr>
+					{{/for}}
+				</tbody></table>
+			</div>
+		{{else}}
+			<b>Power monitor not connected to net</b>
+		{{/if}}
 
 	{{else data.mode == 44}}
 	    <H2>Medical Record List</H2>

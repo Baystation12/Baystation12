@@ -208,6 +208,8 @@
 	icon_state = "rampbottom"
 	var/obj/multiz/stairs/connected
 	var/turf/target
+	var/turf/target2
+	var/suggest_dir // try this dir first when finding stairs; this is the direction to walk *down* the stairs
 
 	New()
 		..()
@@ -219,29 +221,57 @@
 					O.ChangeTurf(/turf/simulated/floor/open)
 
 		spawn(1)
-			for(var/dir in cardinal)
-				var/turf/T = get_step(src.loc,dir)
-				for(var/obj/multiz/stairs/S in T)
-					if(S && S.icon_state == "rampbottom" && !S.connected)
-						S.dir = dir
-						src.dir = dir
-						S.connected = src
-						src.connected = S
-						src.icon_state = "ramptop"
-						src.density = 1
-						var/turf/controllerlocation = locate(1, 1, src.z)
-						for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-							if(controller.up)
-								var/turf/above = locate(src.x, src.y, controller.up_target)
-								if(istype(above,/turf/space) || istype(above,/turf/simulated/floor/open))
-									src.target = above
+			var/turf/T
+			if(suggest_dir)
+				T = get_step(src.loc,suggest_dir)
+				find_stair_connection(T, suggest_dir, 1)
+			if(!target)
+				for(var/dir in cardinal)
+					T = get_step(src.loc,dir)
+					find_stair_connection(T, dir)
+					if(target)
 						break
-				if(target)
-					break
 
 	Bumped(var/atom/movable/M)
 		if(connected && target && istype(src, /obj/multiz/stairs) && locate(/obj/multiz/stairs) in M.loc)
 			var/obj/multiz/stairs/Con = locate(/obj/multiz/stairs) in M.loc
 			if(Con == src.connected) //make sure the atom enters from the approriate lower stairs tile
 				M.Move(target)
+		return
+
+	proc/find_stair_connection(var/turf/T, var/dir, var/suggested=0)
+		for(var/obj/multiz/stairs/S in T)
+			if(S && S.icon_state == "rampbottom" && !S.connected)
+				if(!S.suggest_dir || S.suggest_dir == dir) // it doesn't have a suggested direction, or it's the same direction as we're trying, so we connect to it
+					initialise_stair_connection(src, S, dir)
+				else if(!suggested) // we're trying directions, so it could be a reverse stair (i.e. we're the bottom stair rather than the top)
+					var/inv_dir = 0
+					switch(dir)
+						if(1)
+							inv_dir = 2
+						if(2)
+							inv_dir = 1
+						if(4)
+							inv_dir = 8
+						if(8)
+							inv_dir = 4
+					if(S.suggest_dir == inv_dir)
+						initialise_stair_connection(S, src, inv_dir)
+
+	proc/initialise_stair_connection(var/obj/multiz/stairs/top, var/obj/multiz/stairs/bottom, var/dir)
+		top.dir = dir
+		bottom.dir = dir
+		top.connected = bottom
+		bottom.connected = top
+		top.icon_state = "ramptop"
+		top.density = 1
+		var/turf/controllerlocation = locate(1, 1, top.z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if(controller.up)
+				var/turf/above = locate(top.x, top.y, controller.up_target)
+				if(istype(above,/turf/space) || istype(above,/turf/simulated/floor/open))
+					top.target = above
+				var/turf/above2 = locate(bottom.x, bottom.y, controller.up_target)
+				if(istype(above2, /turf/space) || istype(above,/turf/simulated/floor/open))
+					top.target2 = above2
 		return

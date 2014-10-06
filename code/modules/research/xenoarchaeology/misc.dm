@@ -109,5 +109,7 @@
 //---- Isolation room air alarms
 
 /obj/machinery/alarm/isolation
-	name = "Isolation room air control"
+	req_one_access = list(access_research, access_atmospherics, access_engine_equip)
+
+/obj/machinery/alarm/monitor/isolation
 	req_one_access = list(access_research, access_atmospherics, access_engine_equip)

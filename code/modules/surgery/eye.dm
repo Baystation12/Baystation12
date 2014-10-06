@@ -12,7 +12,10 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		if (!affected)
 			return 0
-		return target_zone == "eyes"
+
+		var/datum/organ/internal/eyes = target.internal_organs_by_name["eyes"]
+
+		return target_zone == "eyes" && eyes
 
 /datum/surgery_step/eye/cut_open
 	allowed_tools = list(
@@ -79,7 +82,7 @@
 /datum/surgery_step/eye/mend_eyes
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100, 	\
-	/obj/item/weapon/cable_coil = 75, 	\
+	/obj/item/stack/cable_coil = 75, 	\
 	/obj/item/device/assembly/mousetrap = 10	//I don't know. Don't ask me. But I'm leaving it because hilarity.
 	)
 

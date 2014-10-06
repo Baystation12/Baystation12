@@ -98,8 +98,6 @@
 
 	//game_options.txt configs
 
-	var/atmos_machine_heat = 1.0
-
 	var/health_threshold_softcrit = 0
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
@@ -149,6 +147,7 @@
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
+	var/use_overmap = 0
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -504,6 +503,9 @@
 				if("max_maint_drones")
 					config.max_maint_drones = text2num(value)
 
+				if("use_overmap")
+					config.use_overmap = 1
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -533,9 +535,6 @@
 					config.bones_can_break = value
 				if("limbs_can_break")
 					config.limbs_can_break = value
-
-				if("atmos_machine_heat")
-					config.atmos_machine_heat = value
 
 				if("run_speed")
 					config.run_speed = value

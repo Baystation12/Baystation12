@@ -56,8 +56,6 @@
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		spread_germs_to_organ(affected, user)
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -95,8 +93,6 @@
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		affected.open = 2
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -134,8 +130,6 @@
 		affected.open = 1
 		affected.status |= ORGAN_BLEEDING
 		affected.createwound(CUT, 1)
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -146,7 +140,7 @@
 /datum/surgery_step/generic/clamp_bleeders
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/cable_coil = 75, 	\
+	/obj/item/stack/cable_coil = 75, 	\
 	/obj/item/device/assembly/mousetrap = 20
 	)
 
@@ -191,7 +185,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
 			var/datum/organ/external/affected = target.get_organ(target_zone)
-			return affected.open == 1 && !(affected.status & ORGAN_BLEEDING)
+			return affected.open == 1 //&& !(affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

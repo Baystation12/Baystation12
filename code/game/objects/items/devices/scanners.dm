@@ -127,7 +127,7 @@ REAGENT SCANNER
 		if(length(damaged)>0)
 			for(var/datum/organ/external/org in damaged)
 				user.show_message(text("\blue \t []: [][]\blue - []",	\
-				capitalize(org.display_name),					\
+				"[capitalize(org.display_name)][org.status & ORGAN_ROBOT ? "(Cybernetic)" : ""]",	\
 				(org.brute_dam > 0)	?	"\red [org.brute_dam]"							:0,		\
 				(org.status & ORGAN_BLEEDING)?"\red <b>\[Bleeding\]</b>":"\t", 		\
 				(org.burn_dam > 0)	?	"<font color='#FFA500'>[org.burn_dam]</font>"	:0),1)
@@ -173,7 +173,7 @@ REAGENT SCANNER
 //		user.show_message("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.")
 	if (M.has_brain_worms())
 		user.show_message("\red Subject suffering from aberrant brain activity. Recommend further scanning.")
-	else if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
+	else if (M.getBrainLoss() >= 100 || !M.has_brain())
 		user.show_message("\red Subject is brain dead.")
 	else if (M.getBrainLoss() >= 60)
 		user.show_message("\red Severe brain damage detected. Subject likely to have mental retardation.")

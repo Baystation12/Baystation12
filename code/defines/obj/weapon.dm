@@ -53,7 +53,7 @@
 
 /obj/item/weapon/soap/deluxe
 	icon_state = "soapdeluxe"
-    
+
 /obj/item/weapon/soap/deluxe/New()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
 
@@ -314,6 +314,12 @@
 	name = "wooden table parts"
 	desc = "Keep away from fire."
 	icon_state = "wood_tableparts"
+	flags = null
+
+/obj/item/weapon/table_parts/gambling
+	name = "gamble table parts"
+	desc = "Keep away from security."
+	icon_state = "gamble_tableparts"
 	flags = null
 
 /obj/item/weapon/wire

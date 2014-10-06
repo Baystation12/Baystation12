@@ -37,12 +37,12 @@
 		if(!istype(T))
 			return
 		add_underlay(T, node1, turn(dir, -180))
-		
+
 		if(istype(src, /obj/machinery/atmospherics/tvalve/mirrored))
 			add_underlay(T, node2, turn(dir, 90))
 		else
 			add_underlay(T, node2, turn(dir, -90))
-		
+
 		add_underlay(T, node3, dir)
 
 /obj/machinery/atmospherics/tvalve/hide(var/i)
@@ -202,17 +202,29 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node1 = target
+				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node2 = target
+				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			node3 = target
-			break
-	
+			var/c = check_connect_types(target,src)
+			if (c)
+				target.connected_to = c
+				src.connected_to = c
+				node3 = target
+				break
+
 	update_icon()
 	update_underlays()
 
@@ -407,7 +419,7 @@
 		if(target.initialize_directions & get_dir(target,src))
 			node3 = target
 			break
-	
+
 	update_icon()
 	update_underlays()
 

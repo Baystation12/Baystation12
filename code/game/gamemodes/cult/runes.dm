@@ -104,7 +104,7 @@ var/list/sacrificed = list()
 				if(M.stat==2)
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				M.visible_message("\red [M] writhes in pain as the markings below him glow a bloody red.", \
+				M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
 				"\red AAAAAAHHHH!.", \
 				"\red You hear an anguished scream.")
 				if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
@@ -411,7 +411,9 @@ var/list/sacrificed = list()
 				ticker.mode:add_cultist(D.mind)
 			else
 				ticker.mode.cult+=D.mind
-
+			D.mind.assigned_role = pick("Anguished", "Blasphemous", "Corrupt", "Depraved", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Pained", "Profane", "Profligate", "Resentful", "Restless", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
+			D.mind.assigned_role += " "
+			D.mind.assigned_role += pick("Apparition", "Aptrgangr", "Draugr", "Dybbuk", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
 			D.mind.special_role = "Cultist"
 			D << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 			D << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
@@ -568,8 +570,8 @@ var/list/sacrificed = list()
 					if(!(iscultist(V)))
 						victims += V//Checks for cult status and mob type
 			for(var/obj/item/I in src.loc)//Checks for MMIs/brains/Intellicards
-				if(istype(I,/obj/item/brain))
-					var/obj/item/brain/B = I
+				if(istype(I,/obj/item/organ/brain))
+					var/obj/item/organ/brain/B = I
 					victims += B.brainmob
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I
@@ -581,7 +583,15 @@ var/list/sacrificed = list()
 				if(iscultist(C) && !C.stat)
 					cultsinrange += C
 					C.say("Barhah hra zar[pick("'","`")]garis!")
+
 			for(var/mob/H in victims)
+
+				var/worth = 0
+				if(istype(H,/mob/living/carbon/human))
+					var/mob/living/carbon/human/lamb = H
+					if(lamb.species.rarity_value > 3)
+						worth = 1
+
 				if (ticker.mode.name == "cult")
 					if(H.mind == ticker.mode:sacrifice_target)
 						if(cultsinrange.len >= 3)
@@ -596,8 +606,8 @@ var/list/sacrificed = list()
 					else
 						if(cultsinrange.len >= 3)
 							if(H.stat !=2)
-								if(prob(80))
-									usr << "\red The Geometer of Blood accepts this sacrifice."
+								if(prob(80) || worth)
+									usr << "\red The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
@@ -607,8 +617,8 @@ var/list/sacrificed = list()
 								else
 									H.gib()
 							else
-								if(prob(40))
-									usr << "\red The Geometer of blood accepts this sacrifice."
+								if(prob(40) || worth)
+									usr << "\red The Geometer of blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
@@ -690,21 +700,6 @@ var/list/sacrificed = list()
 					if(prob(20))
 						ticker.mode.grant_runeword(usr)
 				M.gib()
-/*			for(var/mob/living/carbon/alien/A)
-				for(var/mob/K in cultsinrange)
-					K.say("Barhah hra zar'garis!")
-				A.dust()      /// A.gib() doesnt work for some reason, and dust() leaves that skull and bones thingy which we dont really need.
-				if (ticker.mode.name == "cult")
-					if(prob(75))
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						ticker.mode:grant_runeword(usr)
-					else
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						usr << "\red However, this alien is not enough to gain His favor."
-				else
-					usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-				return
-			return fizzle() */
 
 /////////////////////////////////////////SIXTEENTH RUNE
 

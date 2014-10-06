@@ -55,6 +55,9 @@
 	heat_capacity = 325000
 	intact = 0
 
+/turf/simulated/floor/engine/nitrogen
+	oxygen = 0
+
 /turf/simulated/floor/engine/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	if(!C)
 		return
@@ -219,3 +222,9 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+/turf/simulated/floor/plating/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "Floor3"
+	name = "catwalk"
+	desc = "Cats really don't like these things."

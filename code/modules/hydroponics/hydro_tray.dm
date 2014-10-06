@@ -172,7 +172,7 @@
 
 	// Weeds like water and nutrients, there's a chance the weed population will increase.
 	// Bonus chance if the tray is unoccupied.
-	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 6 : 3))
+	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 5 : 2))
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 
 	// There's a chance for a weed explosion to happen if the weeds take over.
@@ -187,7 +187,7 @@
 		return
 
 	// Advance plant age.
-	if(prob(25)) age += 1 * HYDRO_SPEED_MULTIPLIER
+	if(prob(30)) age += 1 * HYDRO_SPEED_MULTIPLIER
 
 	//Highly mutable plants have a chance of mutating every tick.
 	if(seed.immutable == -1)
@@ -197,7 +197,7 @@
 	// Other plants also mutate if enough mutagenic compounds have been added.
 	if(!seed.immutable)
 		if(prob(min(mutation_level,100)))
-			mutate(mutation_level > 50 ? 2 : 1)
+			mutate((rand(100) < 15) ? 2 : 1)
 			mutation_level = 0
 
 	// Maintain tray nutrient and water levels.
@@ -500,7 +500,7 @@
 		return
 
 	// Check if we should even bother working on the current seed datum.
-	if(seed.mutants. && seed.mutants.len && severity > 1 && prob(10+mutation_mod))
+	if(seed.mutants. && seed.mutants.len && severity > 1)
 		mutate_species()
 		return
 
@@ -634,26 +634,6 @@
 
 		else
 			user << "\red \The [src] already has seeds in it!"
-
-	else if (istype(O, /obj/item/weapon/reagent_containers/spray/plantbgone))
-		if(seed)
-			health -= rand(5,20)
-
-			if(pestlevel > 0)
-				pestlevel -= 2
-
-			if(weedlevel > 0)
-				weedlevel -= 3
-
-			toxins += 4
-
-			check_level_sanity()
-
-			visible_message("\red <B>\The [src] has been sprayed with \the [O][(user ? " by [user]." : ".")]")
-			playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-			update_icon()
-		else
-			user << "There's nothing in [src] to spray!"
 
 	else if (istype(O, /obj/item/weapon/minihoe))  // The minihoe
 

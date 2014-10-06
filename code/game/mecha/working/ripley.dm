@@ -8,7 +8,7 @@
 	health = 200
 	wreckage = /obj/effect/decal/mecha_wreckage/ripley
 	var/list/cargo = new
-	var/cargo_capacity = 15
+	var/cargo_capacity = 10
 
 /*
 /obj/mecha/working/ripley/New()

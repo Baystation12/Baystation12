@@ -84,10 +84,9 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/weapon/cable_coil))
-		if(W:amount >= 5)
-			W:amount -= 5
-			if(!W:amount) del(W)
+	if(istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
+		if(C.use(5))
 			user << "<span class='notice'>You add some cable to the potato and slide it inside the battery encasing.</span>"
 			var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(user.loc)
 			pocell.maxcharge = src.potency * 10
@@ -195,6 +194,12 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/glowberries/dropped(mob/user)
 	user.SetLuminosity(round(user.luminosity - (potency/5),1))
 	src.SetLuminosity(round(potency/5,1))
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/generic_fruit
+	name = "fruit"
+	desc = "It smells weird."
+	icon_state = "orange"
+	potency = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod
 	name = "cocoa pod"

@@ -234,7 +234,7 @@
 							user << "There is already a [nicetype] at that location."
 							return
 
-						anchored = 1
+					anchored = 1
 				if(ispipe)
 					level = 1 // We don't want disposal bins to disappear under the floors
 					density = 0

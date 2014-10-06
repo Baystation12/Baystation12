@@ -52,7 +52,8 @@
 
 		var/id = add_zero(num2hex(rand(1, 1.6777215E7)), 6)	//this was the best they could come up with? A large random number? *sigh*
 
-
+		var/icon/front = new(get_id_photo(H), dir = SOUTH)
+		var/icon/side = new(get_id_photo(H), dir = WEST)
 		//General Record
 		var/datum/data/record/G = new()
 		G.fields["id"]			= id
@@ -65,7 +66,12 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= H.gender
 		G.fields["species"]		= H.get_species()
-		G.fields["photo"]		= get_id_photo(H)
+		G.fields["home_system"]	= H.home_system
+		G.fields["citizenship"]	= H.citizenship
+		G.fields["faction"]		= H.personal_faction
+		G.fields["religion"]	= H.religion
+		G.fields["photo_front"]	= front
+		G.fields["photo_side"]	= side
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 		else
@@ -114,12 +120,22 @@
 		L.fields["name"]		= H.real_name
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
+		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		L.fields["sex"]			= H.gender
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
+		L.fields["species"]		= H.get_species()
+		L.fields["home_system"]	= H.home_system
+		L.fields["citizenship"]	= H.citizenship
+		L.fields["faction"]		= H.personal_faction
+		L.fields["religion"]	= H.religion
 		L.fields["image"]		= getFlatIcon(H)	//This is god-awful
+		if(H.exploit_record && !jobban_isbanned(H, "Records"))
+			L.fields["exploit_record"] = H.exploit_record
+		else
+			L.fields["exploit_record"] = "No additional information acquired."
 		locked += L
 	return
 

@@ -17,14 +17,14 @@
 	uplink_uses = 10
 
 	//Possible roundstart antag types.
-	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","slug","cult")
+	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","cult") //Readd slug when borer spawn is fixed.
 	var/list/chosen_atypes = list()
 	var/list/chosen_candidates = list()
 	var/list/already_assigned_candidates = list()
 
 	//At one antagonist group per 10 players we are just going to go with tiny groups.
-	var/max_antags = 3        // Antag groups spawn with this many members.
-	var/antag_type_ratio = 10 // 1 antag type per this many players.
+	var/max_antags = 5        // Antag groups spawn with this many members.
+	var/antag_type_ratio = 8  // 1 antag type per this many players.
 
 	var/const/waittime_l = 600
 	var/const/waittime_h = 1800
@@ -48,26 +48,37 @@
 		var/atype
 		var/list/candidates = list()
 
-		while(atypes.len && candidates.len == 0) //While there are untested antag mode types and we don't have any candidates selected, loop.
+		// Go through antag types at random until we find one that has candidates.
+		while(atypes.len && !candidates.len)
 			atype = pick(atypes)
 			log_debug("Calamity: checking [atype].")
 			atypes -= atype
 			candidates = get_role_candidates(atype)
 
-		if(!candidates.len)
-			log_debug("Calamity mode setup failed, no antag types or candidates left.")
-			return 0
+			//Prune out candidates who are already antagonists.
+			var/list/remove_players = list()
+			for(var/datum/mind/player in candidates)
+				if(player.special_role || player.assigned_role == "MODE")
+					remove_players += player
+			candidates -= remove_players
 
 		log_debug("Calamity: selected [atype] (possible candidates: [candidates.len])")
 		chosen_atypes += atype
 
 		for(var/j=0;j<max_antags;j++)
+
+			if(!candidates || !candidates.len)
+				break
+
 			var/datum/mind/chosen_candidate = pick(candidates)
+
 			//Traitors and lings spawn THEN have roles applied; hence we don't set assigned_role here.
 			if(atype != "tater" && atype != "ling" && atype != "cult")
 				chosen_candidate.assigned_role = "MODE"
+
 			chosen_candidate.special_role = atype
-			chosen_candidates += chosen_candidate
+			chosen_candidates |= chosen_candidate
+			candidates -= chosen_candidate
 
 		if(atypes.len - i <= 0) break //Not enough valid types left to populate the remaining antag slots.
 
@@ -81,7 +92,7 @@
 
 			for(var/datum/mind/player in chosen_candidates)
 				if(player.special_role == atype)
-					candidates += player
+					candidates |= player
 					chosen_candidates -= player
 
 			if(!candidates || !candidates.len)
@@ -191,7 +202,18 @@
 		if("syndi")
 			possible_antags = get_players_for_role(BE_OPERATIVE)
 		if("ling")
+
 			possible_antags = get_players_for_role(BE_CHANGELING)
+
+			var/list/unsuitable_players = list()
+
+			for(var/datum/mind/player in possible_antags)
+				if(player && (player.assigned_role == "Cyborg" || player.assigned_role == "AI"))
+					unsuitable_players |= player
+
+			if(unsuitable_players.len)
+				possible_antags -= unsuitable_players
+
 		if("tater")
 			possible_antags = get_players_for_role(BE_TRAITOR)
 		if("wiz")
@@ -222,7 +244,7 @@
 //TO BE FIXED UP. NINJA, NUKE AND CULT IN PARTICULAR ARE FUCKING AWFUL. ~ Z
 /datum/game_mode/calamity/proc/spawn_syndicate(var/list/candidates)
 
-	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")
+	var/obj/effect/landmark/uplinkdevice = locate("landmark*Syndicate-Uplink")
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
@@ -231,7 +253,7 @@
 
 	for(var/datum/mind/player in candidates)
 
-		syndicates += player
+		syndicates |= player
 
 		if(spawnpos > synd_spawn.len)
 			spawnpos = 1
@@ -254,8 +276,9 @@
 
 	update_all_synd_icons()
 
-	if(uplinklocker)
-		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
+	if(uplinkdevice)
+		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 		the_bomb.r_code = nuke_code
@@ -264,7 +287,7 @@
 
 	for(var/datum/mind/player in candidates)
 
-		changelings += player
+		changelings |= player
 		grant_changeling_powers(player.current)
 		player.special_role = "Changeling"
 
@@ -278,7 +301,7 @@
 /datum/game_mode/calamity/proc/spawn_traitors(var/list/candidates)
 
 	for(var/datum/mind/player in candidates)
-		traitors += player
+		traitors |= player
 
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
@@ -292,7 +315,7 @@
 /datum/game_mode/calamity/proc/spawn_cabal(var/list/candidates)
 
 	for(var/datum/mind/player in candidates)
-		wizards += player
+		wizards |= player
 
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/escape()
@@ -314,7 +337,7 @@
 			ninjastart.Add(L)
 
 	for(var/datum/mind/player in candidates)
-		ninjas += player
+		ninjas |= player
 
 		player.current << browse(null, "window=playersetup")
 		player.current = create_space_ninja(pick(ninjastart))
@@ -347,7 +370,7 @@
 
 	//Create raiders.
 	for(var/datum/mind/player in candidates)
-		raiders += player
+		raiders |= player
 
 		//Place them on the shuttle.
 		var/index = 1
@@ -375,42 +398,43 @@
 	var/list/possible_hosts = list()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(!(H.species.flags & IS_SYNTHETIC))
-			possible_hosts += H
+			possible_hosts |= H
 
-	for(var/datum/mind/player in candidates)
+	spawn(10)
+		for(var/datum/mind/player in candidates)
 
-		if(!possible_hosts || possible_hosts.len)
-			break
+			if(!possible_hosts || possible_hosts.len)
+				break
 
-		borers += player
-		var/mob/living/carbon/human/target_host = pick(possible_hosts)
-		possible_hosts -= target_host
+			borers |= player
+			var/mob/living/carbon/human/target_host = pick(possible_hosts)
+			possible_hosts -= target_host
 
-		var/mob/living/simple_animal/borer/roundstart/B = new(target_host)
+			var/mob/living/simple_animal/borer/roundstart/B = new(target_host)
 
-		player.current = B
-		B.mind = player
-		B.key = player.key
-		player.assigned_role = "Cortical Borer"
-		player.special_role = "Cortical Borer"
+			player.current = B
+			B.mind = player
+			B.key = player.key
+			player.assigned_role = "Cortical Borer"
+			player.special_role = "Cortical Borer"
 
-		B.host = target_host
-		B.host_brain.name = target_host.name
-		B.host_brain.real_name = target_host.real_name
+			B.host = target_host
+			B.host_brain.name = target_host.name
+			B.host_brain.real_name = target_host.real_name
 
-		var/datum/organ/external/head = target_host.get_organ("head")
-		head.implants += B
+			var/datum/organ/external/head = target_host.get_organ("head")
+			head.implants += B
 
-		player.current << "\blue <b>You are a cortical borer!</b> You are a brain slug that worms its way \
-		into the head of its victim, lurking out of sight until it needs to take control."
-		player.current << "You can speak to your victim with <b>say</b>, to other borers with <b>say ;</b>, and use your Alien tab for abilities."
+			player.current << "\blue <b>You are a cortical borer!</b> You are a brain slug that worms its way \
+			into the head of its victim, lurking out of sight until it needs to take control."
+			player.current << "You can speak to your victim with <b>say</b>, to other borers with <b>say ;</b>, and use your Alien tab for abilities."
 
-		if(!config.objectives_disabled)
-			player.objectives += new /datum/objective/borer_survive()
-			player.objectives += new /datum/objective/borer_reproduce()
-			player.objectives += new /datum/objective/escape()
+			if(!config.objectives_disabled)
+				player.objectives += new /datum/objective/borer_survive()
+				player.objectives += new /datum/objective/borer_reproduce()
+				player.objectives += new /datum/objective/escape()
 
-		show_objectives(player)
+			show_objectives(player)
 
 /datum/game_mode/calamity/proc/spawn_cultists(var/list/candidates)
 
@@ -430,7 +454,7 @@
 			if(player.assigned_role == job)
 				continue
 
-		cult += player
+		cult |= player
 		equip_cultist(player.current)
 		grant_runeword(player.current)
 		update_cult_icons_added(player)

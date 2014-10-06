@@ -135,8 +135,8 @@ Note: Must be placed west/left of and R&D console to function.
 		amount = 0
 	if(amount == 0)
 		return
-	if(amount > stack.amount)
-		amount = stack.amount
+	if(amount > stack.get_amount())
+		amount = stack.get_amount()
 	if(max_material_storage - TotalMaterials() < (amount*stack.perunit))//Can't overfill
 		amount = min(stack.amount, round((max_material_storage-TotalMaterials())/stack.perunit))
 

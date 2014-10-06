@@ -67,6 +67,7 @@
 	if(!autocalled)
 		log_power_update_request(A.master, src)
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
+	return 1
 
 //The master_area optional argument can be used to save on a lot of processing if the master area is already known. This is mainly intended for when this proc is called by the master controller.
 /obj/machinery/proc/power_change(var/area/master_area = null)		// called whenever the power settings of the containing area change
@@ -77,7 +78,7 @@
 		has_power = master_area.powered(power_channel)
 	else
 		has_power = powered(power_channel)
-	
+
 	if(has_power)
 		stat &= ~NOPOWER
 	else
@@ -270,14 +271,17 @@
 //No animations will be performed by this proc.
 /proc/electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
 	if(istype(M.loc,/obj/mecha))	return 0	//feckin mechs are dumb
-	
-	//This is for performance optimization only. 
+
+	//This is for performance optimization only.
 	//DO NOT modify siemens_coeff here. That is checked in human/electrocute_act()
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.gloves)
+		if(H.species.insulated)
+			return 0
+		else if(H.gloves)
 			var/obj/item/clothing/gloves/G = H.gloves
-			if(G.siemens_coefficient == 0)	return 0		//to avoid spamming with insulated glvoes on
+			if(G.siemens_coefficient == 0)
+				return 0		//to avoid spamming with insulated glvoes on
 
 	var/area/source_area
 	if(istype(power_source,/area))

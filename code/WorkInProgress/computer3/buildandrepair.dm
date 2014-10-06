@@ -154,7 +154,7 @@
 					user << "\red There's already \an [battery] in [src]!"
 
 
-			if(istype(P, /obj/item/weapon/cable_coil))
+			if(istype(P, /obj/item/stack/cable_coil))
 				if(P:amount >= 5)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 20))
@@ -173,7 +173,7 @@
 				user << "\blue You remove the cables."
 				src.state = 2
 				src.icon_state = "2"
-				var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
+				var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 				A.amount = 5
 
 			if(istype(P, /obj/item/weapon/crowbar)) // complicated check

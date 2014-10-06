@@ -106,7 +106,7 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP
 		//EQUIP,ENVIRON or LIGHT
-	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
+	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/manual = 0
 	var/global/gl_uid = 1
@@ -114,6 +114,7 @@ Class Procs:
 /obj/machinery/New()
 	..()
 	machines += src
+	machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
@@ -158,8 +159,8 @@ Class Procs:
 		del(src)
 
 //sets the use_power var and then forces an area power update
-/obj/machinery/proc/update_use_power(var/new_use_power)
-	if (new_use_power == use_power)
+/obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
+	if ((new_use_power == use_power) && !force_update)
 		return	//don't need to do anything
 
 	use_power = new_use_power

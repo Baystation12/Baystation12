@@ -18,9 +18,9 @@
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
-	layer = DOOR_OPEN_LAYER - 0.1
-	open_layer = DOOR_OPEN_LAYER - 0.1 // Just below doors when open
-	closed_layer = DOOR_CLOSED_LAYER + 0.1 // Just above doors when closed
+	layer = DOOR_OPEN_LAYER - 0.01
+	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open
+	closed_layer = DOOR_CLOSED_LAYER + 0.01 // Just above doors when closed
 
 	var/blocked = 0
 	var/lockdown = 0 // When the door has detected a problem, it locks.
@@ -102,7 +102,7 @@
 			o += "<span class='warning'>"
 		else
 			o += "<span style='color:blue'>"
-		o += "[celsius]°C</span> "
+		o += "[celsius]&deg;C</span> "
 		o += "<span style='color:blue'>"
 		o += "[pressure]kPa</span></li>"
 		usr << o
@@ -167,7 +167,7 @@
 			// Accountability!
 			users_to_open |= user.name
 			log_admin("[user]([user.ckey]) has opened an alarming emergency shutter.")
-			message_admins("<span class='danger'>[user]([user.ckey]) has opened an alarming emergency shutter.</span>")
+			message_admins("[user]([user.ckey]) has opened an alarming emergency shutter.")
 			needs_to_close = 1
 		spawn()
 			open()
@@ -309,7 +309,7 @@
 			use_power(360)
 	else
 		log_admin("[usr]([usr.ckey]) has forced open an emergency shutter.")
-		message_admins("<span class='danger'>[usr]([usr.ckey]) has forced open an emergency shutter.</span>")
+		message_admins("[usr]([usr.ckey]) has forced open an emergency shutter.")
 	latetoggle()
 	return ..()
 

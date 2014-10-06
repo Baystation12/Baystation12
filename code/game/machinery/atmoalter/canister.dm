@@ -49,7 +49,8 @@
 	icon_state = "grey"
 	canister_color = "grey"
 	can_label = 0
-
+/obj/machinery/portable_atmospherics/canister/air/airlock
+	filled = 0.05
 /obj/machinery/portable_atmospherics/canister/empty/oxygen
 	name = "Canister: \[O2\]"
 	icon_state = "blue"

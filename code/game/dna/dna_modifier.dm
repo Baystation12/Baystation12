@@ -17,6 +17,7 @@
 	var/ckey=null
 	var/mind=null
 	var/languages=null
+	var/list/flavor=null
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
@@ -58,8 +59,8 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 
 /obj/machinery/dna_scannernew/allow_drop()
@@ -87,7 +88,7 @@
 /obj/machinery/dna_scannernew/proc/eject_occupant()
 	src.go_out()
 	for(var/obj/O in src)
-		if((!istype(O,/obj/item/weapon/reagent_containers)) && (!istype(O,/obj/item/weapon/circuitboard/clonescanner)) && (!istype(O,/obj/item/weapon/stock_parts)) && (!istype(O,/obj/item/weapon/cable_coil)))
+		if((!istype(O,/obj/item/weapon/reagent_containers)) && (!istype(O,/obj/item/weapon/circuitboard/clonescanner)) && (!istype(O,/obj/item/weapon/stock_parts)) && (!istype(O,/obj/item/stack/cable_coil)))
 			O.loc = get_turf(src)//Ejects items that manage to get in there (exluding the components)
 	if(!occupant)
 		for(var/mob/M in src)//Failsafe so you can get mobs out

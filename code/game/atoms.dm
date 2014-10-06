@@ -200,6 +200,8 @@ its easier to just keep the beam vertical.
 	//usr << "[name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
 	return
 
+// called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
+// see code/modules/mob/mob_movement.dm for more.
 /atom/proc/relaymove()
 	return
 
