@@ -44,10 +44,10 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
     {{/for}}
 
     <div class="item">
-        {{:helper.link('Buy Random (??)' , 'gear', {'buy_item' : 'random'}, null, 'fixedLeftWidest')}}
+        {{:helper.link('Buy Random (??)' , 'gear', {'buy_item' : 'random'}, data.crystals <= 0 ? 'disabled' : null, null)}}
     </div>
-	{{for value.items :itemValue:itemIndex}}
-	{{else data.menu == 1}}
+	
+{{else data.menu == 1}}
     <H2><span class="white">Information Record List:</span></H2>
     <br>
     <div class="item">
@@ -59,6 +59,7 @@ Used In File(s): \code\game\objects\items\devices\uplinks.dm
              {{:helper.link(value.Name, 'gear', {'menu' : 11, 'id' : value.id}, null, null)}}
         </div>
     {{/for}}
+	
 {{else data.menu == 11}}
     <H2><span class="white">Information Record:</span></H2>
     <br>

@@ -22,5 +22,11 @@
 
 	return tally+config.robot_delay
 
+// NEW: Use power while moving.
 /mob/living/silicon/robot/Move()
-	..()
+	if (!is_component_functioning("actuator"))
+		return
+
+	var/datum/robot_component/actuator/A = get_component("actuator")
+	if (cell_use_power(A.active_usage))
+		..()

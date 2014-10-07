@@ -20,11 +20,11 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
-	
+
 	use_power = 1
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
-	
+
 	var/active = 1 //No sales pitches if off!
 	var/delay_product_spawn // If set, uses sleep() in product spawn proc (mostly for seeds to retrieve correct names).
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
@@ -115,6 +115,10 @@
 	return
 
 /obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+
+	if(delay_product_spawn)
+		sleep(15) //Make ABSOLUTELY SURE the seed datum is properly populated.
+
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
 		var/price = prices[typepath]
@@ -139,10 +143,9 @@
 			product_records += R
 
 		if(delay_product_spawn)
-			sleep(1)
-			R.product_name = temp.name
-		else
-			R.product_name = temp.name
+			sleep(5) //sleep(1) did not seem to cut it, so here we are.
+
+		R.product_name = temp.name
 
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
@@ -849,7 +852,7 @@
 	req_access_txt = "1"
 	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
-	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/fancy/donut_box = 2)
+	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/donut_box = 2)
 
 /obj/machinery/vending/hydronutrients
 	name = "NutriMax"

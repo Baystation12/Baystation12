@@ -13,10 +13,11 @@
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(3, 0, get_turf(user))
 		sparks.start()
-		//
-		user.loc = pick(orange(get_turf(holder), 50))
+
+		user.Move(pick(trange(50, get_turf(holder))))
+
 		sparks = new /datum/effect/effect/system/spark_spread()
-		sparks.set_up(3, 0, get_turf(user))
+		sparks.set_up(3, 0, user.loc)
 		sparks.start()
 
 /datum/artifact_effect/teleport/DoEffectAura()

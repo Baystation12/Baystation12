@@ -20,6 +20,20 @@
 	flags_inv = 0
 	body_parts_covered = 0
 
+/obj/item/clothing/head/helmet/hop
+	name = "crew resource's hat"
+	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
+	icon_state = "hopcap"
+	flags_inv = 0
+	body_parts_covered = 0
+
+/obj/item/clothing/head/helmet/formalcaptain
+	name = "parade hat"
+	desc = "No one in a commanding position should be without a perfect, white hat of ultimate authority."
+	icon_state = "officercap"
+	flags_inv = 0
+	body_parts_covered = 0
+
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
@@ -72,6 +86,18 @@
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/head/helmet/augment
+	name = "Augment Array"
+	desc = "A helmet with optical and cranial augments coupled to it."
+	icon_state = "v62"
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
+	item_state = "v62"
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
+	flags_inv = HIDEEARS|HIDEEYES
+	cold_protection = HEAD
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.5
 
 //Non-hardsuit ERT helmets.
 /obj/item/clothing/head/helmet/ert

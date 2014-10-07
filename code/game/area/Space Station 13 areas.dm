@@ -793,9 +793,17 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Port Primary Hallway"
 	icon_state = "hallP"
 
-/area/hallway/primary/central
+/area/hallway/primary/central_one
 	name = "\improper Central Primary Hallway"
-	icon_state = "hallC"
+	icon_state = "hallC1"
+
+/area/hallway/primary/central_two
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC2"
+
+/area/hallway/primary/central_three
+	name = "\improper Central Primary Hallway"
+	icon_state = "hallC3"
 
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
@@ -826,23 +834,23 @@ var/list/ghostteleportlocs = list()
 	icon_state = "captain"
 
 /area/crew_quarters/heads/hop
-	name = "\improper Head of Personnel's Quarters"
+	name = "\improper Head of Personnel's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor
-	name = "\improper Research Director's Quarters"
+	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/chief
-	name = "\improper Chief Engineer's Quarters"
+	name = "\improper Chief Engineer's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hos
-	name = "\improper Head of Security's Quarters"
+	name = "\improper Head of Security's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cmo
-	name = "\improper Chief Medical Officer's Quarters"
+	name = "\improper Chief Medical Officer's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/courtroom
@@ -1251,10 +1259,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Patient Wing"
 	icon_state = "patients"
 
-/area/medical/cmo
-	name = "\improper Chief Medical Officer's office"
-	icon_state = "CMO"
-
 /area/medical/cmostore
 	name = "\improper Secure Storage"
 	icon_state = "CMO"
@@ -1463,7 +1467,7 @@ var/list/ghostteleportlocs = list()
 
 /area/rnd/docking
 	name = "\improper Research Dock"
-	icon_state = "research"
+	icon_state = "research_dock"
 
 /area/rnd/lab
 	name = "\improper Research Lab"

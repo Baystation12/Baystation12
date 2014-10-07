@@ -24,6 +24,7 @@
 	var/arrest_type = 0 //If true, don't handcuff
 	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
 
+	var/has_laser = 0
 	var/next_harm_time = 0
 	var/lastfired = 0
 	var/shot_delay = 3 //.3 seconds between shots
@@ -249,9 +250,6 @@ Auto Patrol: []"},
 				mode = SECBOT_START_PATROL	// switch to patrol mode
 
 		if(SECBOT_HUNT)		// hunting for perp
-			if(src.lasercolor)//Lasertag bots do not tase or arrest anyone, just patrol and shoot and whatnot
-				mode = SECBOT_IDLE
-				return
 			// if can't reach perp for long enough, go idle
 			if(src.frustration >= 8)
 		//		for(var/mob/O in hearers(src, null))
@@ -263,7 +261,7 @@ Auto Patrol: []"},
 				walk_to(src,0)
 
 			if(target)		// make sure target exists
-				if(Adjacent(target))		// if right next to perp
+				if(!lasercolor && Adjacent(target))	// If right next to perp. Lasertag bots do not arrest anyone, just patrol and shoot and whatnot
 					if(istype(src.target,/mob/living/carbon))
 						playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 						is_attacking = 1
@@ -301,19 +299,22 @@ Auto Patrol: []"},
 							next_harm_time = world.time + 15
 							playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 							visible_message("\red <B>[src] beats [src.target] with the stun baton!</B>")
-							src.icon_state = "secbot-c"
+							update_icon()
 							spawn(2)
-								src.icon_state = "secbot[src.on]"
+								is_attacking = 0
+								update_icon()
 
 							var/mob/living/simple_animal/S = src.target
 							S.AdjustStunned(10)
 							S.adjustBruteLoss(15)
 							if(S.stat)
 								src.frustration = 8
-								playsound(src.loc, pick('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/bcreep.ogg'), 50, 0)
+								if(preparing_arrest_sounds.len > 0)
+									playsound(src.loc, pick(preparing_arrest_sounds), 50, 0)
 				else								// not next to perp
 					var/turf/olddist = get_dist(src, src.target)
-					walk_to(src, src.target,1,4)
+					walk_to(src, target,1,4)
+					shootAt(target)
 					if((get_dist(src, src.target)) >= (olddist))
 						src.frustration++
 					else
@@ -632,13 +633,13 @@ Auto Patrol: []"},
 	for(var/mob/living/M in view(search_range,src)) //Let's find us a criminal
 		if(istype(M, /mob/living/carbon))
 			var/mob/living/carbon/C = M
-			if((C.stat) || (C.handcuffed))
+			if(C.stat || C.handcuffed)
 				continue
 
-			if((src.lasercolor) && (C.lying))
+			if(src.lasercolor && C.lying)
 				continue//Does not shoot at people lying down when in lasertag mode, because it's just annoying, and they can fire once they get up.
 
-			if((C.name == src.oldtarget_name) && (world.time < src.last_found + 100))
+			if(C.name == src.oldtarget_name && world.time < src.last_found + 100)
 				continue
 
 			if(istype(C, /mob/living/carbon/human))
@@ -653,13 +654,14 @@ Auto Patrol: []"},
 		if(!src.threatlevel)
 			continue
 
-		else if(src.threatlevel >= 4)
+		else if(M.stat != DEAD && src.threatlevel >= 4)
 			src.target = M
 			src.oldtarget_name = M.name
 			src.speak("Level [src.threatlevel] infraction alert!")
 			if(!src.lasercolor && threat_found_sounds.len > 0)
 				playsound(src.loc, pick(threat_found_sounds), 50, 0)
 			src.visible_message("<b>[src]</b> points at [M.name]!")
+
 			mode = SECBOT_HUNT
 			spawn(0)
 				process()	// ensure bot quickly responds to a perp
@@ -671,6 +673,9 @@ Auto Patrol: []"},
 //Or if they have weapons and aren't security, arrest them.
 /obj/machinery/bot/secbot/proc/assess_perp(mob/living/carbon/human/perp as mob)
 	var/threatcount = 0
+
+	if(perp.stat == DEAD)
+		return 0
 
 	if(src.emagged == 2) return 10 //Everyone is a criminal!
 
@@ -722,13 +727,13 @@ Auto Patrol: []"},
 			threatcount += 2
 
 	if(src.check_records)
-		for(var/datum/data/record/E in data_core.general)
-			var/perpname = perp.name
-			if(perp.wear_id)
-				var/obj/item/weapon/card/id/id = perp.wear_id.GetID()
-				if(id)
-					perpname = id.registered_name
+		var/perpname = perp.name
+		if(perp.wear_id)
+			var/obj/item/weapon/card/id/id = perp.wear_id.GetID()
+			if(id)
+				perpname = id.registered_name
 
+		for (var/datum/data/record/E in data_core.general)
 			if(E.fields["name"] == perpname)
 				for(var/datum/data/record/R in data_core.security)
 					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
@@ -786,12 +791,6 @@ Auto Patrol: []"},
 	new /obj/item/weapon/melee/baton(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
-
-/obj/machinery/bot/secbot/attack_alien(var/mob/living/carbon/alien/user as mob)
-	..()
-	if(!isalien(target))
-		src.target = user
-		src.mode = SECBOT_HUNT
 
 //Secbot Construction
 
@@ -858,7 +857,7 @@ Auto Patrol: []"},
 		src.created_name = t
 
 /obj/machinery/bot/secbot/proc/shootAt(var/mob/target)
-	if(lastfired && world.time - lastfired < shot_delay)
+	if(!has_laser || (lastfired && world.time - lastfired < shot_delay))
 		return
 	lastfired = world.time
 	var/turf/T = loc
@@ -869,9 +868,6 @@ Auto Patrol: []"},
 		U = U.loc
 	if(!( istype(T, /turf) ))
 		return
-
-	//if(lastfired && world.time - lastfired < 100)
-	//	playsound(src.loc, 'ed209_shoot.ogg', 50, 0)
 
 	if(!projectile)
 		if(!lasercolor)
@@ -892,6 +888,8 @@ Auto Patrol: []"},
 
 	if(!( istype(U, /turf) ))
 		return
+
+	playsound(src.loc, src.emagged == 2 ? 'sound/weapons/Laser.ogg' : 'sound/weapons/Taser.ogg', 50, 1)
 	var/obj/item/projectile/A = new projectile (loc)
 	A.current = U
 	A.yo = U.y - T.y

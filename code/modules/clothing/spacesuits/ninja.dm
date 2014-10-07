@@ -20,12 +20,17 @@
 	siemens_coefficient = 0.2
 	species_restricted = null //Workaround for spawning alien ninja without internals.
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	supporting_limbs = list()
 
-		//Important parts of the suit.
+	// Hardsuit breaching data
+	breach_threshold = 30 //A suit breach is a major issue for ninjas. This should maybe help.
+	can_breach = 1
+
+	//Important parts of the suit.
 	var/mob/living/carbon/affecting = null//The wearer.
 	var/obj/item/weapon/cell/cell//Starts out with a high-capacity cell using New().
 	var/datum/effect/effect/system/spark_spread/spark_system//To create sparks.
-	var/reagent_list[] = list("tricordrazine","dexalinp","spaceacillin","anti_toxin","nutriment","radium","hyronalin")//The reagents ids which are added to the suit at New().
+	var/reagent_list[] = list("tricordrazine","tramadol","dexalinp","spaceacillin","anti_toxin","nutriment","radium","hyronalin")//The reagents ids which are added to the suit at New().
 	var/stored_research[]//For stealing station research.
 	var/obj/item/weapon/disk/tech_disk/t_disk//To copy design onto disk.
 

@@ -22,7 +22,7 @@
 
 
 	New()
-		src.modules += new /obj/item/device/flashlight(src)
+//		src.modules += new /obj/item/device/flashlight(src) // Replaced by verb and integrated light which uses power.
 		src.modules += new /obj/item/device/flash(src)
 		src.emag = new /obj/item/toy/sword(src)
 		src.emag.name = "Placeholder Emag Item"
@@ -60,7 +60,6 @@
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
 	R.add_language("Sinta'unathi", 0)
-	R.add_language("Siik'maas", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)

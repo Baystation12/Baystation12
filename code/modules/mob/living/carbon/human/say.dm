@@ -1,4 +1,5 @@
 /mob/living/carbon/human/say(var/message)
+
 	var/verb = "says"
 	var/alt_name = ""
 	var/message_range = world.view
@@ -16,9 +17,6 @@
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	if (istype(wear_mask, /obj/item/clothing/mask/muzzle) && message_mode != "changeling")  //Todo:  Add this to speech_problem_flag checks.
-		return
-
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 
@@ -34,9 +32,22 @@
 
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
+	if(speaking)
+		message = copytext(message,3)
+	else if(species.default_language)
+		speaking = all_languages[species.default_language]
+
 	if (speaking)
 		verb = speaking.speech_verb
-		message = copytext(message,3)
+
+		// This is broadcast to all mobs with the language,
+		// irrespective of distance or anything else.
+		if(speaking.flags & HIVEMIND)
+			speaking.broadcast(src,trim(message))
+			return
+
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
+		return
 
 	message = capitalize(trim(message))
 
@@ -103,11 +114,7 @@
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
-		if("binary")
-			if(robot_talk_understand || binarycheck())
-				robot_talk(message)
 			return
-			
 		if("paichat")
 			// paichat is only available if you have a headset
 			if(l_ear && istype(l_ear, /obj/item/device/radio))
@@ -117,13 +124,6 @@
 			else if(r_ear && istype(r_ear, /obj/item/device/radio))
 				used_radios += r_ear
 				src.sayToPai(message, verb, speaking, r_ear)
-			
-		if("changeling")
-			if(mind && mind.changeling)
-				for(var/mob/Changeling in mob_list)
-					if((Changeling.mind && Changeling.mind.changeling) || istype(Changeling, /mob/dead/observer))
-						Changeling << "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
-			return
 		else
 			if(message_mode)
 				if(message_mode in (radiochannels | "department"))
@@ -136,8 +136,8 @@
 
 	var/sound/speech_sound
 	var/sound_vol
-	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
-		speech_sound = sound('sound/voice/shriek1.ogg')
+	if(species.speech_sounds && prob(20))
+		speech_sound = sound(pick(species.speech_sounds))
 		sound_vol = 50
 
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
@@ -181,10 +181,13 @@
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
 
+	if(species.can_understand(other))
+		return 1
+
 	//These only pertain to common. Languages are handled by mob/say_understands()
 	if (!speaking)
-		if (istype(other, /mob/living/carbon/monkey/diona))
-			if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+		if (istype(other, /mob/living/carbon/alien/diona))
+			if(other.languages.len >= 2) //They've sucked down some blood and can speak common now.
 				return 1
 		if (istype(other, /mob/living/silicon))
 			return 1

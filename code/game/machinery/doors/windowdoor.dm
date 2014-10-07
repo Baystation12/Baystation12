@@ -51,11 +51,12 @@
 					sleep(50)
 					close()
 		return
+	var/mob/M = AM // we've returned by here if M is not a mob
 	if (!( ticker ))
 		return
 	if (src.operating)
 		return
-	if (src.density && src.allowed(AM))
+	if (src.density && !M.small && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
@@ -172,18 +173,15 @@
 /obj/machinery/door/window/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/door/window/attack_paw(mob/user as mob)
-	if(istype(user, /mob/living/carbon/alien/humanoid))
-		if(src.operating)
-			return
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
-		take_damage(25)
-	else
-		return src.attack_hand(user)
-
-
 /obj/machinery/door/window/attack_hand(mob/user as mob)
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
+			take_damage(25)
+			return
 	return src.attackby(user, user)
 
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)

@@ -163,20 +163,8 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	if(changelings.len)
 		var/text = "<FONT size = 2><B>The changelings were:</B></FONT>"
 		for(var/datum/mind/changeling in changelings)
-			var/changelingwin = 1
-
-			text += "<br>[changeling.key] was [changeling.name] ("
-			if(changeling.current)
-				if(changeling.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(changeling.current.real_name != changeling.name)
-					text += " as [changeling.current.real_name]"
-			else
-				text += "body destroyed"
-				changelingwin = 0
-			text += ")"
+			var/changelingwin = changeling.current
+			text += printplayer(changeling)
 
 			//Removed sanity if(changeling) because we -want- a runtime to inform us that the changelings list is incorrect and needs to be fixed.
 			text += "<br><b>Changeling ID:</b> [changeling.changeling.changelingID]."
@@ -200,6 +188,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 					else
 						text += "<br><font color='red'><B>The changeling has failed.</B></font>"
 						feedback_add_details("changeling_success","FAIL")
+		text += "<br>"
 
 		world << text
 

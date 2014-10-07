@@ -3,7 +3,6 @@
 	icon = 'icons/mob/pai.dmi'
 	icon_state = "repairbot"
 
-	robot_talk_understand = 0
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	small = 1
 	pass_flags = 1
@@ -136,6 +135,9 @@
 		return 0
 	..()
 
+/mob/living/silicon/pai/MouseDrop(atom/over_object)
+	return
+
 /mob/living/silicon/pai/emp_act(severity)
 	// Silence for 2 minutes
 	// 20% chance to kill
@@ -201,44 +203,12 @@
 
 //mob/living/silicon/pai/bullet_act(var/obj/item/projectile/Proj)
 
-/mob/living/silicon/pai/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(src.loc, /turf) && istype(src.loc.loc, /area/start))
-		M << "You cannot attack someone in the spawn area."
-		return
-
-	switch(M.a_intent)
-
-		if ("help")
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src]'s casing with its scythe like arm."), 1)
-
-		else //harm
-			var/damage = rand(10, 20)
-			if (prob(90))
-				playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
-				if(prob(8))
-					flick("noise", src.flash)
-				src.adjustBruteLoss(damage)
-				src.updatehealth()
-			else
-				playsound(src.loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
-	return
-
 ///mob/living/silicon/pai/attack_hand(mob/living/carbon/M as mob)
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
-	usr:cameraFollow = null
+	if(istype(usr, /mob/living))
+		var/mob/living/U = usr
+		U.cameraFollow = null
 	if (!C)
 		src.unset_machine()
 		src.reset_view(null)
@@ -248,7 +218,7 @@
 	// ok, we're alive, camera is good and in our network...
 
 	src.set_machine(src)
-	src:current = C
+	src.current = C
 	src.reset_view(C)
 	return 1
 
@@ -257,7 +227,7 @@
 	set name = "Cancel Camera View"
 	src.reset_view(null)
 	src.unset_machine()
-	src:cameraFollow = null
+	src.cameraFollow = null
 
 //Addition by Mord_Sith to define AI's network change ability
 /*
@@ -266,7 +236,7 @@
 	set name = "Change Camera Network"
 	src.reset_view(null)
 	src.unset_machine()
-	src:cameraFollow = null
+	src.cameraFollow = null
 	var/cameralist[0]
 
 	if(usr.stat == 2)
@@ -314,21 +284,28 @@
 		return
 
 	last_special = world.time + 100
-
-	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 	canmove = 1
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/mob))
-		var/mob/M = card.loc
-		M.drop_item(card)
+		var/mob/holder = card.loc
+		holder.drop_from_inventory(card)
+	else if(istype(card.loc,/obj/item/clothing/suit/space/space_ninja))
+		var/obj/item/clothing/suit/space/space_ninja/holder = card.loc
+		holder.pai = null
+	else if(istype(card.loc,/obj/item/device/pda))
+		var/obj/item/device/pda/holder = card.loc
+		holder.pai = null
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
-
 	src.forceMove(get_turf(card))
+
 	card.forceMove(src)
+	card.screen_loc = null
+
+	var/turf/T = get_turf(src)
+	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
 
 /mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
@@ -425,6 +402,7 @@
 	src.forceMove(card)
 	card.forceMove(card.loc)
 	canmove = 0
+	icon_state = "[chassis]"
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)
 
@@ -434,3 +412,34 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
+
+/mob/living/silicon/pai/examine()
+
+	set src in oview()
+
+	if(!usr || !src)	return
+	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
+		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+		return
+
+	var/msg = "<span class='info'>*---------*\nThis is \icon[src][name], a personal AI!"
+
+	switch(src.stat)
+		if(CONSCIOUS)
+			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
+		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
+		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
+	msg += "\n*---------*</span>"
+
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+
+	if (pose)
+		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+			pose = addtext(pose,".") //Makes sure all emotes end with a period.
+		msg += "\nIt is [pose]"
+
+	usr << msg
+
+// No binary for pAIs.
+/mob/living/silicon/pai/binarycheck()
+	return 0

@@ -1,29 +1,31 @@
 /datum/organ
 	var/name = "organ"
 	var/mob/living/carbon/human/owner = null
+	var/status = 0
+	var/vital //Lose a vital limb, die immediately.
 
 	var/list/datum/autopsy_data/autopsy_data = list()
 	var/list/trace_chemicals = list() // traces of chemicals in the organ,
 									  // links chemical IDs to number of ticks for which they'll stay in the blood
-									  
+
 	var/germ_level = 0		// INTERNAL germs inside the organ, this is BAD if it's greater than INFECTION_LEVEL_ONE
-	
+
 	proc/process()
 		return 0
 
 	proc/receive_chem(chemical as obj)
 		return 0
 
-/datum/organ/proc/get_icon()
+/datum/organ/proc/get_icon(var/icon/race_icon, var/icon/deform_icon)
 	return icon('icons/mob/human.dmi',"blank")
 
 //Germs
 /datum/organ/proc/handle_antibiotics()
 	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
-	
+
 	if (!germ_level || antibiotics < 5)
 		return
-		
+
 	if (germ_level < INFECTION_LEVEL_ONE)
 		germ_level = 0	//cure instantly
 	else if (germ_level < INFECTION_LEVEL_TWO)
@@ -56,6 +58,7 @@
 
 // Takes care of organ related updates, such as broken and missing limbs
 /mob/living/carbon/human/proc/handle_organs()
+
 	number_wounds = 0
 	var/leg_tally = 2
 	var/force_process = 0
@@ -67,14 +70,14 @@
 		bad_external_organs.Cut()
 		for(var/datum/organ/external/Ex in organs)
 			bad_external_organs += Ex
-	
+
 	//processing internal organs is pretty cheap, do that first.
 	for(var/datum/organ/internal/I in internal_organs)
 		I.process()
-	
+
 	if(!force_process && !bad_external_organs.len)
 		return
-	
+
 	for(var/datum/organ/external/E in bad_external_organs)
 		if(!E)
 			continue
@@ -91,7 +94,7 @@
 					var/datum/organ/internal/I = pick(E.internal_organs)
 					custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
 					I.take_damage(rand(3,5))
-				
+
 				//Moving makes open wounds get infected much faster
 				if (E.wounds.len)
 					for(var/datum/wound/W in E.wounds)
@@ -101,14 +104,14 @@
 			if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
 				if (!E.is_usable() || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)))
 					leg_tally--			// let it fail even if just foot&leg
-	
+
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
 		if(species && species.flags & NO_PAIN)
 			emote("scream")
 		emote("collapse")
 		paralysis = 10
-	
+
 	//Check arms and legs for existence
 	can_stand = 2 //can stand on both legs
 	var/datum/organ/external/E = organs_by_name["l_foot"]

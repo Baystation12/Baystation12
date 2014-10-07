@@ -418,7 +418,26 @@
 /obj/mecha/attack_hand(mob/user as mob)
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
-	if ((HULK in user.mutations) && !prob(src.deflect_chance))
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(user))
+			if(!prob(src.deflect_chance))
+				src.take_damage(15)
+				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				user << "\red You slash at the armored suit!"
+				visible_message("\red The [user] slashes at [src.name]'s armor!")
+			else
+				src.log_append_to_last("Armor saved.")
+				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				user << "\green Your claws had no effect!"
+				src.occupant_message("\blue The [user]'s claws are stopped by the armor.")
+				visible_message("\blue The [user] rebounds off [src.name]'s armor!")
+		else
+			user.visible_message("<font color='red'><b>[user] hits [src.name]. Nothing happens</b></font>","<font color='red'><b>You hit [src.name] with no visible effect.</b></font>")
+			src.log_append_to_last("Armor saved.")
+		return
+	else if ((HULK in user.mutations) && !prob(src.deflect_chance))
 		src.take_damage(15)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		user.visible_message("<font color='red'><b>[user] hits [src.name], doing some damage.</b></font>", "<font color='red'><b>You hit [src.name] with all your might. The metal creaks and bends.</b></font>")
@@ -430,25 +449,7 @@
 /obj/mecha/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
-
-/obj/mecha/attack_alien(mob/user as mob)
-	src.log_message("Attack by alien. Attacker - [user].",1)
-	if(!prob(src.deflect_chance))
-		src.take_damage(15)
-		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		user << "\red You slash at the armored suit!"
-		visible_message("\red The [user] slashes at [src.name]'s armor!")
-	else
-		src.log_append_to_last("Armor saved.")
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		user << "\green Your claws had no effect!"
-		src.occupant_message("\blue The [user]'s claws are stopped by the armor.")
-		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
-	return
-
-
-/obj/mecha/attack_animal(mob/living/simple_animal/user as mob)
+/obj/mecha/attack_animal(mob/living/user as mob)
 	src.log_message("Attack by simple animal. Attacker - [user].",1)
 	if(user.melee_damage_upper == 0)
 		user.emote("[user.friendly] [src]")
@@ -1405,6 +1406,11 @@
 
 /obj/mecha/proc/output_maintenance_dialog(obj/item/weapon/card/id/id_card,mob/user)
 	if(!id_card || !user) return
+	
+	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
+	if (locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in contents)
+		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>" 
+	
 	var/output = {"<html>
 						<head>
 						<style>
@@ -1415,7 +1421,7 @@
 						<body>
 						[add_req_access?"<a href='?src=\ref[src];req_access=1;id_card=\ref[id_card];user=\ref[user]'>Edit operation keycodes</a>":null]
 						[maint_access?"<a href='?src=\ref[src];maint_access=1;id_card=\ref[id_card];user=\ref[user]'>Initiate maintenance protocol</a>":null]
-						[(state>0) ?"<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>":null]
+						[(state>0) ? maint_options : ""]
 						</body>
 						</html>"}
 	user << browse(output, "window=exosuit_maint_console")
@@ -1556,6 +1562,28 @@
 			if(new_pressure)
 				internal_tank_valve = new_pressure
 				user << "The internal pressure valve has been set to [internal_tank_valve]kPa."
+	if(href_list["remove_passenger"] && state >= 1)
+		var/mob/user = filter.getMob("user")
+		var/list/passengers = list()
+		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
+			if (P.occupant)
+				passengers["[P.occupant]"] = P
+		
+		if (!passengers)
+			user << "\red There are no passengers to remove."
+			return
+			
+		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
+		
+		if (pname)
+			var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
+			var/mob/occupant = P.occupant
+			
+			visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!")
+			P.go_out()
+			P.log_message("[occupant] was removed.")
+			occupant_message("\red [occupant] was removed from \the [P] by [user]!")
+		return
 	if(href_list["add_req_access"] && add_req_access && filter.getObj("id_card"))
 		if(!in_range(src, usr))	return
 		operation_req_access += filter.getNum("add_req_access")
