@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\mob_helpers.dm;code\modules\mob\living\simple_animal\friendly\corgi.dm;maps\apstation.dmm
+WINDOW: maps\apstation.dmm;code\game\gamemodes\revolution\rp_revolution.dm;code\modules\mob\living\living.dm;code\modules\mob\living\carbon\human\life.dm;icons\mob\hud.dmi;code\_onclick\hud\screen_objects.dm;code\game\verbs\ooc.dm;code\game\jobs\donators.dm;code\game\jobs\whitelist.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly maps 
-FILE: maps\apstation.dmm
-LAST_COMPILE_TIME: 1412273022
+DIR: code code\_onclick code\_onclick\hud code\game code\game\jobs code\game\verbs code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\metroid code\modules\mob\living\silicon code\modules\mob\living\silicon\pai code\unused code\unused\hivebot icons icons\mob 
+FILE: code\game\verbs\ooc.dm
+LAST_COMPILE_TIME: 1412698305
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
