@@ -276,15 +276,15 @@ datum/preferences
 	dat += "<br><b>Custom Loadout:</b> "
 	var/total_cost = 0
 
-	if(isnull(gear) || !islist(gear)) gear = list()
+	if(!islist(gear)) gear = list()
 
 	if(gear && gear.len)
 		dat += "<br>"
-		for(var/gear_name in gear)
-			if(gear_datums[gear_name])
-				var/datum/gear/G = gear_datums[gear_name]
+		for(var/i = 1; i <= gear.len; i++)
+			var/datum/gear/G = gear_datums[gear[i]]
+			if(G)
 				total_cost += G.cost
-				dat += "[gear_name] <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
+				dat += "[gear[i]] ([G.cost] points) <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
 
 		dat += "<b>Used:</b> [total_cost] points."
 	else
@@ -293,7 +293,7 @@ datum/preferences
 	if(total_cost < MAX_GEAR_COST)
 		dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
 		if(gear && gear.len)
-			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=remove'>\[remove\]</a>"
+			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=clear'>\[clear\]</a>"
 
 	dat += "<br><br><b>Occupation Choices</b><br>"
 	dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
@@ -874,17 +874,17 @@ datum/preferences
 				total_cost += C.cost
 				if(C && total_cost <= MAX_GEAR_COST)
 					gear += choice
-					user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+					user << "<span class='notice'>Added \the '[choice]' for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining).</span>"
 				else
-					user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
+					user << "<span class='warning'>Adding \the '[choice]' will exceed the maximum loadout cost of [MAX_GEAR_COST] points.</span>"
 
 		else if(href_list["task"] == "remove")
-			var/to_remove = href_list["gear"]
-			if(!to_remove) return
-			for(var/gear_name in gear)
-				if(gear_name == to_remove)
-					gear -= gear_name
-					break
+			var/i_remove = text2num(href_list["gear"])
+			if(i_remove < 1 || i_remove > gear.len) return
+			gear.Cut(i_remove, i_remove + 1)
+
+		else if(href_list["task"] == "clear")
+			gear.Cut()
 
 	else if(href_list["preference"] == "flavor_text")
 		switch(href_list["task"])

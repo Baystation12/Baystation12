@@ -982,8 +982,9 @@
 	desc = "A well maintained uniform from one of the many Private Security firms Nanotrasen hires from. The name Harper is printed on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "harper_uniform"
-	item_state = "harper_uniform"
+	item_state = "jensensuit"
 	item_color = "harper_uniform"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
