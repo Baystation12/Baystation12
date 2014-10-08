@@ -13,7 +13,6 @@
 
 	var/primitive                              // Lesser form, if any (ie. monkey for humans)
 	var/tail                                   // Name of tail image in species effects icon file.
-	var/language                               // Default racial language, if any.
 	var/datum/unarmed_attack/unarmed           // For empty hand harm-intent attack
 	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.
 	var/datum/hud_data/hud
@@ -24,6 +23,9 @@
 	var/unarmed_type =           /datum/unarmed_attack
 	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
+	var/language                  // Default racial language, if any.
+	// Default language is used when 'say' is used without modifiers.
+	var/default_language = "Galactic Common"
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
@@ -194,6 +196,10 @@
 /datum/species/proc/get_inventory_dialogue(var/mob/living/carbon/human/H)
 	return
 
+//Used by xenos understanding larvae and dionaea understanding nymphs.
+/datum/species/proc/can_understand(var/mob/other)
+	return
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
@@ -274,7 +280,8 @@
 	name = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
-	language = "Vox-pidgin"
+	default_language = "Vox-pidgin"
+	language = "Galactic Common"
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	rarity_value = 2
@@ -319,7 +326,6 @@
 	name = "Vox Armalis"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
-	language = "Vox-pidgin"
 	rarity_value = 10
 
 	warning_low_pressure = 50
@@ -394,6 +400,12 @@
 	flesh_color = "#907E4A"
 
 	reagent_tag = IS_DIONA
+
+/datum/species/diona/can_understand(var/mob/other)
+	var/mob/living/carbon/alien/diona/D = other
+	if(istype(D))
+		return 1
+	return 0
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER

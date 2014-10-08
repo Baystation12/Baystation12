@@ -23,10 +23,6 @@ proc/create_new_xenomorph(var/alien_caste,var/target)
 	h_style = "Bald"
 	..(new_loc, "Xenomorph Queen")
 
-/mob/living/carbon/human/Stat()
-
-	..()
-
 // I feel like we should generalize/condense down all the various icon-rendering antag procs.
 /*----------------------------------------
 Proc: AddInfectionImages()

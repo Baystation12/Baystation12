@@ -169,7 +169,6 @@
 #include "code\defines\procs\admin.dm"
 #include "code\defines\procs\announce.dm"
 #include "code\defines\procs\AStar.dm"
-#include "code\defines\procs\command_alert.dm"
 #include "code\defines\procs\dbcore.dm"
 #include "code\defines\procs\hud.dm"
 #include "code\defines\procs\radio.dm"
