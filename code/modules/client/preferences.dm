@@ -1080,6 +1080,10 @@ datum/preferences
 
 					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 						for(var/S in whitelisted_species)
+							if(S == "machine" || "Machine")
+								if(get_don_tier(user.client) == 4)
+									new_species += S
+									whitelisted = 1
 							if(is_alien_whitelisted(user,S))
 								new_species += S
 								whitelisted = 1
