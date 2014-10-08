@@ -94,7 +94,7 @@
 
 	..()
 	dna.mutantrace = "tajaran"
-	greaterform = "Tajaran"
+	greaterform = "Tajara"
 	add_language("Siik'tajr")
 
 /mob/living/carbon/monkey/movement_delay()
