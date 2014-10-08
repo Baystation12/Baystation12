@@ -34,8 +34,6 @@ var/list/whitelist = list()
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!config.usealienwhitelist)
 		return 1
-	if(species == "Tajara") //Quickfix, need to talk to Head to update the whitelist.
-		species = "Tajaran"
 	if(species == "human" || species == "Human")
 		return 1
 	if(check_rights(R_ADMIN, 0))
