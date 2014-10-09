@@ -5,6 +5,7 @@ var/list/alldepartments = list("Central Command")
 	name = "fax machine"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
+	insert_anim = "faxsend"
 	req_one_access = list(access_lawyer, access_heads, access_armory) //Warden needs to be able to Fax solgov too.
 	anchored = 1
 	density = 1
@@ -17,6 +18,8 @@ var/list/alldepartments = list("Central Command")
 	var/authenticated = 0
 
 	var/obj/item/weapon/paper/tofax = null // what we're sending
+	var/obj/item/weapon/paper_bundle/bundle = null // If we are sending a bundle, this will hold the bundle and tofax will reference the first page of the bundle
+	
 	var/sendcooldown = 0 // to avoid spamming fax messages
 
 	var/department = "Unknown" // our department
@@ -163,7 +166,7 @@ var/list/alldepartments = list("Central Command")
 			tofax = O
 			O.loc = src
 			user << "<span class='notice'>You insert the paper into \the [src].</span>"
-			flick("faxsend", src)
+			flick(insert_anim, src)
 			updateUsrDialog()
 		else
 			user << "<span class='notice'>There is already something in \the [src].</span>"
@@ -181,6 +184,9 @@ var/list/alldepartments = list("Central Command")
 		anchored = !anchored
 		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
 	return
+
+/obj/machinery/photocopier/faxmachine/insert(obj/item/O as obj, mob/user as mob)
+	..()
 
 /proc/Centcomm_fax(var/originfax, var/sent, var/sentname, var/mob/Sender)
 
