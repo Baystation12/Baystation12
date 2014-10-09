@@ -104,6 +104,74 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "matthewriebhardt"
 
+obj/item/weapon/fluff/slimegum
+	name = "Slime Gum"
+	desc = "A nearly empty package of gum."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "john_gum"
+	item_state = "john_gum"
+
+
+//Torn's Slime gum
+obj/item/weapon/fluff/slimegum/attack_self(mob/user as mob)
+	if(isliving(user))
+		user.visible_message("\blue [user] chews the stick of gum a few times, before spitting it out in disgust!","\blue You chew the stick of gum a few times, before spitting it out in disgust!")
+		user.visible_message("\blue The gum bubbles and expands!","\blue The gum bubbles and expands!")
+		var/mob/living/carbon/slime/S = new /mob/living/carbon/slime(user.loc)
+		S.is_adult = 1
+		var/result = rand(1,21)
+		var/colourtemp = "grey"
+		switch(result)
+			if (1)
+				colourtemp = "grey"
+			if (2)
+				colourtemp = "orange"
+			if (3)
+				colourtemp = "metal"
+			if (4)
+				colourtemp = "blue"
+			if (5)
+				colourtemp = "purple"
+			if (6)
+				colourtemp = "dark purple"
+			if (7)
+				colourtemp = "dark blue"
+			if (8)
+				colourtemp = "green"
+			if (9)
+				colourtemp = "silver"
+			if (10)
+				colourtemp = "yellow"
+			if (11)
+				colourtemp = "gold"
+			if (12)
+				colourtemp = "red"
+			if (13)
+				colourtemp = "pink"
+			if (14)
+				colourtemp = "light pink"
+			if (15)
+				colourtemp = "oil"
+			if (16)
+				colourtemp = "adamantine"
+			if (17)
+				colourtemp = "black"
+			else
+				colourtemp = "rainbow"
+
+		S.colour = colourtemp
+		var/mob/living/simple_animal/adultslime/pet = new /mob/living/simple_animal/adultslime(user.loc)
+		pet.icon_state = "[S.colour] adult slime"
+		pet.icon_living = "[S.colour] adult slime"
+		pet.icon_dead = "[S.colour] baby slime dead"
+		del(S)
+		var/newname = copytext(sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text),1,MAX_NAME_LEN)
+		if (!newname)
+			newname = "pet slime"
+		pet.name = newname
+		pet.real_name = newname
+		del(src)
+
 /////////////////////// Serveris: Officer's Notebook ////////////////////
 
 /obj/item/weapon/folder/blue/fluff/officer_notebook

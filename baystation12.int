@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\_onclick\click.dm;code\modules\mob\mob_movement.dm;interface\interface.dm;code\game\machinery\computer\camera.dm
+WINDOW: code\_onclick\click.dm;code\modules\mob\mob_movement.dm;interface\interface.dm;code\game\machinery\computer\camera.dm;code\hub.dm;icons\obj\custom_items.dmi;code\modules\customitems\item_defines.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\machinery code\game\machinery\camera code\game\machinery\computer interface 
-FILE: code\game\machinery\computer\camera.dm
-LAST_COMPILE_TIME: 1412885868
+DIR: code code\modules code\modules\customitems 
+FILE: code\modules\customitems\item_defines.dm
+LAST_COMPILE_TIME: 1412886186
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
