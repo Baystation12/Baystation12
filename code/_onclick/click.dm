@@ -324,6 +324,7 @@
 		if(dx > 0)	direction = EAST
 		else		direction = WEST
 	usr.dir = direction
+	update_move_overlay()
 	if(buckled && buckled.movable)
 		buckled.dir = direction
 		buckled.handle_rotation()

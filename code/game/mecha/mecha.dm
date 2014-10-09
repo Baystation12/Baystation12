@@ -298,6 +298,18 @@
 	if(move_result)
 		can_move = 0
 		use_power(step_energy_drain)
+
+		src.occupant.client.screen.Remove(global_hud.nview, global_hud.sview, global_hud.eview, global_hud.wview)
+
+		if (src.dir == 1)
+			src.occupant.client.screen += global_hud.nview
+		else if (src.dir == 2)
+			src.occupant.client.screen += global_hud.sview
+		else if (src.dir == 4)
+			src.occupant.client.screen += global_hud.eview
+		else
+			src.occupant.client.screen += global_hud.wview
+
 		if(istype(src.loc, /turf/space))
 			if(!src.check_for_support())
 				src.pr_inertial_movement.start(list(src,direction))

@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\apstation.dmm;code\controllers\verbs.dm;code\modules\admin\verbs\adminhelp.dm;code\WorkInProgress\kilakk\fax.dm;code\modules\hydroponics\hydro_tray.dm;code\modules\mob\living\carbon\monkey\diona.dm
+WINDOW: code\_onclick\click.dm;code\modules\mob\mob_movement.dm;interface\interface.dm;code\game\machinery\computer\camera.dm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\controllers code\datums code\game code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\game\objects\structures\crates_lockers\closets\secure code\game\verbs code\modules code\modules\admin code\modules\admin\verbs code\modules\assembly code\modules\hydroponics code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\monkey code\modules\power code\modules\power\antimatter code\modules\power\singularity code\modules\virus2 code\WorkInProgress code\WorkInProgress\kilakk icons icons\mob icons\obj maps 
-FILE: code\modules\mob\living\carbon\monkey\diona.dm
-LAST_COMPILE_TIME: 1412702370
+DIR: code code\game code\game\machinery code\game\machinery\camera code\game\machinery\computer interface 
+FILE: code\game\machinery\computer\camera.dm
+LAST_COMPILE_TIME: 1412885868
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

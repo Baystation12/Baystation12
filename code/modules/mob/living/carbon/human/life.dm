@@ -1193,7 +1193,6 @@
 		if(hud_updateflag)
 			handle_hud_list()
 
-
 		if(!client)	return 0
 
 		if(hud_updateflag)
@@ -1662,6 +1661,42 @@
 	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
 */
 
+/proc/update_move_overlay()
+
+	if(isrobot(usr))
+		update_robo_overlay()
+		return
+
+	if(usr.lying) return     //Gives full vision when char is lying down
+
+	//clears vision limiter
+	usr.client.screen.Remove(global_hud.nview, global_hud.sview, global_hud.eview, global_hud.wview)
+
+	//Stu's limited visability
+	if (usr.dir == 1)
+		usr.client.screen += global_hud.nview
+	else if (usr.dir == 2)
+		usr.client.screen += global_hud.sview
+	else if (usr.dir == 4)
+		usr.client.screen += global_hud.eview
+	else
+		usr.client.screen += global_hud.wview
+
+	return
+
+/proc/update_robo_overlay()
+	usr.client.screen.Remove(global_hud.rnview, global_hud.rsview, global_hud.review, global_hud.rwview)
+
+	if (usr.dir == 1)
+		usr.client.screen += global_hud.rnview
+	else if (usr.dir == 2)
+		usr.client.screen += global_hud.rsview
+	else if (usr.dir == 4)
+		usr.client.screen += global_hud.review
+	else
+		usr.client.screen += global_hud.rwview
+
+	return
 
 /mob/living/carbon/human/proc/handle_hud_list()
 

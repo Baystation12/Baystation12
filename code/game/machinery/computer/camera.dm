@@ -51,13 +51,18 @@
 				D[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
 
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
+
+		usr.client.screen.Remove(global_hud.nview, global_hud.sview, global_hud.eview, global_hud.wview)
+
 		if(!t)
+			update_move_overlay()
 			user.unset_machine()
 			return 0
 
 		var/obj/machinery/camera/C = D[t]
 
 		if(t == "Cancel")
+			update_move_overlay()
 			user.unset_machine()
 			return 0
 
@@ -80,9 +85,10 @@
 			A.eyeobj.setLoc(get_turf(C))
 			A.client.eye = A.eyeobj
 			return 1
-		
+
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
+
 		src.current = C
 		use_power(50)
 		return 1
