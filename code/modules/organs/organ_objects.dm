@@ -46,8 +46,8 @@
 
 	if(fresh && prob(40))
 		fresh--
-		var/datum/reagent/blood = reagents.reagent_list["blood"]
-		blood_splatter(src,blood,1)
+		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
+		blood_splatter(src,B,1)
 
 	health -= rand(1,3)
 	if(health <= 0)
@@ -215,8 +215,8 @@
 		return
 
 	user << "\blue You take an experimental bite out of \the [src]."
-	var/datum/reagent/blood = reagents.reagent_list["blood"]
-	blood_splatter(src,blood,1)
+	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in reagents.reagent_list
+	blood_splatter(src,B,1)
 
 
 	user.drop_from_inventory(src)

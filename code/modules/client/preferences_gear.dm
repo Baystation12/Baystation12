@@ -177,12 +177,14 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 
+// This was sprited and coded specifically for Zhan-Khazan characters. Before you
+// decide that it's 'not even Taj themed' maybe you should read the wiki, gamer. ~ Z
 /datum/gear/zhan_scarf
-	display_name = "headscarf, white"
+	display_name = "Zhan headscarf"
 	path = /obj/item/clothing/head/tajaran/scarf
 	cost = 2
 	slot = slot_head
-//	whitelisted = "Tajaran" // It's a headscarf. It isn't even a taj-themed headscarf!
+	whitelisted = "Tajara"
 
 // Eyes
 
@@ -460,7 +462,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/suit/tajaran/furs
 	cost = 3
 	slot = slot_wear_suit
-	whitelisted = "Tajaran" // You do have a monopoly on a fur suit tho
+	whitelisted = "Tajara" // You do have a monopoly on a fur suit tho
 
 // Gloves
 
