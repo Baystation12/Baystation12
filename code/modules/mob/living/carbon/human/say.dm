@@ -114,7 +114,6 @@
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
-			return
 		if("paichat")
 			// paichat is only available if you have a headset
 			if(l_ear && istype(l_ear, /obj/item/device/radio))
