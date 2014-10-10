@@ -80,9 +80,7 @@
 			C.breaker_box = src
 
 			var/datum/powernet/PN = new()
-			PN.number = powernets.len + 1
-			powernets += PN
-			PN.cables += C
+			PN.add_cable(C)
 
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()

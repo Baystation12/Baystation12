@@ -8,10 +8,60 @@
 	var/avail = 0
 	var/viewload = 0
 	var/number = 0
-	
+
 	var/perapc = 0			// per-apc avilability
 	var/perapc_excess = 0
 	var/netexcess = 0
+
+/datum/powernet/New()
+	powernets += src
+
+/datum/powernet/Del()
+	powernets -= src
+
+/datum/powernet/proc/is_empty()
+	return !cables.len && !nodes.len
+
+//remove a power machine from the current powernet
+//if the powernet is then empty, delete it
+//Warning : this proc DON'T check if the machine exists
+/datum/powernet/proc/remove_machine(var/obj/machinery/power/M)
+	nodes -=M
+	M.powernet = null
+	if(is_empty())//the powernet is now empty...
+		del(src)///... delete it - qdel
+
+
+//add a power machine to the current powernet
+//Warning : this proc DON'T check if the machine exists
+/datum/powernet/proc/add_machine(var/obj/machinery/power/M)
+	if(M.powernet)// if M already has a powernet...
+		if(M.powernet == src)
+			return
+		else
+			M.disconnect_from_network()//..remove it
+	M.powernet = src
+	nodes[M] = M
+
+//remove a cable from the current powernet
+//if the powernet is then empty, delete it
+//Warning : this proc DON'T check if the cable exists
+/datum/powernet/proc/remove_cable(var/obj/structure/cable/C)
+	cables -= C
+	C.powernet = null
+	if(is_empty())//the powernet is now empty...
+		del(src)///... delete it - qdel
+
+//add a cable to the current powernet
+//Warning : this proc DON'T check if the cable exists
+/datum/powernet/proc/add_cable(var/obj/structure/cable/C)
+	if(C.powernet)// if C already has a powernet...
+		if(C.powernet == src)
+			return
+		else
+			C.powernet.remove_cable(C) //..remove it
+	C.powernet = src
+	cables +=C
 
 /datum/powernet/proc/process()
 	load = newload
@@ -41,7 +91,7 @@
 			perapc_excess += min(netexcess/numapc, (avail - perapc) - perapc_excess)
 		else
 			perapc_excess = 0
-		
+
 		perapc = avail/numapc + perapc_excess
 
 	if( netexcess > 100)		// if there was excess power last cycle
@@ -70,7 +120,7 @@
 	var/surplus = max(avail - newload, 0)
 	var/actual_draw = min(requested_amount, surplus)
 	newload += actual_draw
-	
+
 	return actual_draw
 
 // cut a powernet at this cable object
@@ -151,9 +201,7 @@
 		while(i<=cables.len)
 			var/obj/structure/cable/Cable = cables[i]
 			if(Cable && !Cable.powernet)	// non-connected cables will have powernet=null, since they weren't reached by propagation
-				Cable.powernet = PN
-				cables.Cut(i,i+1)	// remove from old network & add to new one
-				PN.cables += Cable
+				PN.add_cable(Cable)
 				continue
 			i++
 
@@ -258,8 +306,39 @@
 	for(var/i=1,i<=net2.cables.len,i++)
 		var/obj/structure/cable/Cable = net2.cables[i]
 		if(Cable)
-			Cable.powernet = net1
-			net1.cables += Cable
+			net1.add_cable(Cable)
 
 	del(net2)
 	return net1
+
+//remove the old powernet and replace it with a new one throughout the network.
+/proc/propagate_network(var/obj/O, var/datum/powernet/PN)
+	//world.log << "propagating new network"
+	var/list/worklist = list()
+	var/list/found_machines = list()
+	var/index = 1
+	var/obj/P = null
+
+	worklist+=O //start propagating from the passed object
+
+	while(index<=worklist.len) //until we've exhausted all power objects
+		P = worklist[index] //get the next power object found
+		index++
+
+		if(istype(P,/obj/structure/cable))
+			var/obj/structure/cable/C = P
+			if(C.powernet != PN) //add it to the powernet, if it isn't already there
+				PN.add_cable(C)
+			worklist |= C.get_connections() //get adjacents power objects, with or without a powernet
+
+		else if(P.anchored && istype(P,/obj/machinery/power))
+			var/obj/machinery/power/M = P
+			found_machines |= M //we wait until the powernet is fully propagates to connect the machines
+
+		else
+			continue
+
+	//now that the powernet is set, connect found machines to it
+	for(var/obj/machinery/power/PM in found_machines)
+		if(!PM.connect_to_network()) //couldn't find a node on its turf...
+			PM.disconnect_from_network() //... so disconnect if already on a powernet

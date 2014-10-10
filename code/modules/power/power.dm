@@ -101,7 +101,6 @@
 	for(var/obj/structure/cable/PC in cable_list)
 		if(!PC.powernet)
 			PC.powernet = new()
-			powernets += PC.powernet
 //			if(Debug)	world.log << "Starting mpn at [PC.x],[PC.y] ([PC.d1]/[PC.d2])"
 			powernet_nextlink(PC,PC.powernet)
 
@@ -231,22 +230,24 @@
 			. += C
 	return .
 
+// connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
-	var/obj/structure/cable/C = T.get_cable_node()
-	if(!C || !C.powernet)	return 0
-//	makepowernets() //TODO: find fast way	//EWWWW what are you doing!?
-	powernet = C.powernet
-	powernet.nodes[src] = src
+	if(!T || !istype(T))
+		return 0
+
+	var/obj/structure/cable/C = T.get_cable_node() //check if we have a node cable on the machine turf, the first found is picked
+	if(!C || !C.powernet)
+		return 0
+
+	C.powernet.add_machine(src)
 	return 1
 
+// remove and disconnect the machine from its current powernet
 /obj/machinery/power/proc/disconnect_from_network()
 	if(!powernet)
-		//world << " no powernet"
 		return 0
-	powernet.nodes -= src
-	powernet = null
-	//world << "powernet null"
+	powernet.remove_machine(src)
 	return 1
 
 /turf/proc/get_cable_node()
