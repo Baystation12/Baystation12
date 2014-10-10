@@ -31,6 +31,10 @@
 		if(1 to 4)	overlays += "phoron-[phorontanks]"
 		if(5 to INFINITY) overlays += "phoron-5"
 
+/obj/structure/dispenser/attack_ai(mob/user as mob)
+	if(user.Adjacent(src))
+		return attack_hand(user)
+	..()
 
 /obj/structure/dispenser/attack_hand(mob/user as mob)
 	user.set_machine(src)
