@@ -207,7 +207,6 @@
 			M.r_hand = G
 		G.layer = 20
 		G.affecting = src
-		src.grabbed_by += G
 		G.synch()
 		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		for(var/mob/O in viewers(src, null))
