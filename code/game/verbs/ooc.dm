@@ -43,6 +43,7 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/display_colour = "#002eb8"
 
+<<<<<<< HEAD
 	if(holder && !holder.fakekey)
 		display_colour = "#2e78d9"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
@@ -61,6 +62,25 @@ var/global/normal_ooc_colour = "#002eb8"
 			display_colour = "#990099"    //purple
 	else if (is_veteran(src) && !holder)
 		display_colour = "#2e78d9"	//light blue
+=======
+	if(is_donator(src))
+		if(get_don_tier(usr.client) >= 3)
+			display_colour = src.prefs.ooccolor
+	else if (is_veteran(src) && !holder)
+		display_colour = "#2e78d9"	//light blue
+	else
+		if(holder && !holder.fakekey)
+			display_colour = "#2e78d9"	//light blue
+			if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
+				display_colour = "#184880"	//dark blue
+			if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
+				display_colour = "#1b521f"	//dark green
+			else if(holder.rights & R_ADMIN)
+				if(config.allow_admin_ooccolor)
+					display_colour = src.prefs.ooccolor
+				else
+					display_colour = "#b82e00"	//orange
+>>>>>>> origin/master
 
 	for(var/client/C in clients)
 		if(C.prefs.toggles & CHAT_OOC)
