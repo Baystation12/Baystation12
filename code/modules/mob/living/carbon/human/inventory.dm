@@ -687,6 +687,7 @@ It can still be worn/put on as normal.
 				for (var/obj/item/weapon/grab/G in target.grabbed_by)
 					if (G.loc == source && G.state >= GRAB_AGGRESSIVE)
 						grabbing = 1
+						break
 				if (!grabbing)
 					slot_to_process = null
 					source << "\red Your grasp was broken before you could restrain [target]!"
