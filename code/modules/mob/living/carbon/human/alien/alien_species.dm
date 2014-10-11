@@ -1,6 +1,8 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = "Xenomorph"
+	name_plural = "Xenomorphs"
+
 	default_language = "Xenomorph"
 	language = "Hivemind"
 	unarmed_type = /datum/unarmed_attack/claws/strong
@@ -40,7 +42,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -116,7 +117,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
@@ -155,7 +155,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/hunter,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -183,7 +182,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/sentinel,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
@@ -214,7 +212,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"egg sac" =         /datum/organ/internal/xenos/eggsac,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,

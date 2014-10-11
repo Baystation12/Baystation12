@@ -181,6 +181,9 @@
 	H.internal_organs_by_name["brain"] = B
 	H.internal_organs |= B
 
+	var/datum/organ/external/affecting = H.get_organ("head")
+	affecting.implants -= src
+
 	var/s2h_id = src.computer_id
 	var/s2h_ip= src.lastKnownIP
 	src.computer_id = null
