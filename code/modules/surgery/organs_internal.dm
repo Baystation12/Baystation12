@@ -327,7 +327,7 @@
 					O.organ_data.rejecting = null
 
 					// Transfer over some blood data, if the organ doesn't have data.
-					var/datum/reagent/blood/organ_blood = O.reagents.reagent_list["blood"]
+					var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in O.reagents.reagent_list
 					if(!organ_blood || !organ_blood.data["blood_DNA"])
 						target.vessel.trans_to(O, 5, 1, 1)
 
@@ -367,32 +367,32 @@
 
 		if(!target.species)
 			user << "\red You have no idea what species this person is. Report this on the bug tracker."
-			return 0
+			return 2
 
 		var/o_is = (O.gender == PLURAL) ? "are" : "is"
-		var/o_a =  (O.gender == PLURAL) ? "" : " a"
+		var/o_a =  (O.gender == PLURAL) ? "" : "a "
 		var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
 		if(target.species.has_organ[O.organ_tag])
 
 			if(!O.health)
 				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
-				return 0
+				return 2
 
 			if(!target.internal_organs_by_name[O.organ_tag])
 				organ_missing = 1
 			else
 				user << "\red \The [target] already has [o_a][O.organ_tag]."
-				return 0
+				return 2
 
 			if(O.organ_data && affected.name == O.organ_data.parent_organ)
 				organ_compatible = 1
 			else
 				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.display_name]."
-				return 0
+				return 2
 		else
-			user << "\red \A [target.species.name] doesn't normally have [o_a][O.organ_tag]."
-			return 0
+			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.organ_tag]."
+			return 2
 
 		return ..() && organ_missing && organ_compatible
 
@@ -412,7 +412,7 @@
 
 		if(istype(O))
 
-			var/datum/reagent/blood/transplant_blood = O.reagents.reagent_list["blood"]
+			var/datum/reagent/blood/transplant_blood = locate(/datum/reagent/blood) in O.reagents.reagent_list
 			if(!transplant_blood)
 				O.organ_data.transplant_data = list()
 				O.organ_data.transplant_data["species"] =    target.species.name
