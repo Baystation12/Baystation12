@@ -27,7 +27,6 @@
 
 /obj/vehicle/train/Move()
 	var/old_loc = get_turf(src)
-	update_move_overlay()
 	if(..())
 		if(tow)
 			tow.Move(old_loc)
@@ -117,7 +116,7 @@
 	set desc = "Unhitches this train from the one in front of it."
 	set category = "Object"
 	set src in view(1)
-
+	
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
@@ -140,11 +139,11 @@
 	if (lead)
 		user << "\red [src] is already hitched to something."
 		return
-
+	
 	if (T.tow)
 		user << "\red [T] is already towing something."
 		return
-
+	
 	//check for cycles.
 	var/obj/vehicle/train/next_car = T
 	while (next_car)
@@ -152,15 +151,15 @@
 			user << "\red That seems very silly."
 			return
 		next_car = next_car.lead
-
+	
 	//latch with src as the follower
 	lead = T
 	T.tow = src
 	dir = lead.dir
-
+	
 	if(user)
 		user << "\blue You hitch [src] to [T]."
-
+	
 	update_stats()
 
 
@@ -169,10 +168,10 @@
 	if (!lead)
 		user << "\red [src] is not hitched to anything."
 		return
-
+	
 	lead.tow = null
 	lead.update_stats()
-
+	
 	user << "\blue You unhitch [src] from [lead]."
 	lead = null
 
@@ -191,7 +190,7 @@
 
 //returns 1 if this is the lead car of the train
 /obj/vehicle/train/proc/is_train_head()
-	if (lead)
+	if (lead) 
 		return 0
 	return 1
 
@@ -210,7 +209,7 @@
 		if (T.tow == src)
 			lead.tow = null
 			lead.update_stats()
-
+			
 			lead = null
 			update_stats()
 			return

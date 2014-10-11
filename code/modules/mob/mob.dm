@@ -796,7 +796,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 		buckled.dir = ndir
 		buckled.handle_rotation()
 	client.move_delay += movement_delay()
-	update_move_overlay()
 	return 1
 
 

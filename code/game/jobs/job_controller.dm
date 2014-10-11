@@ -389,7 +389,6 @@ var/global/datum/controller/occupations/job_master
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
 		H.job = rank
-		H.client.screen += global_hud.sview
 
 		if(!joined_late)
 			var/obj/S = null
