@@ -253,3 +253,12 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/philosopher_wig
+	name = "natural philosopher's wig"
+	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
+	icon_state = "philosopher_wig"
+	item_state = "philosopher_wig"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	siemens_coefficient = 2.0
+	body_parts_covered = 0

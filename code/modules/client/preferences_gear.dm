@@ -284,6 +284,13 @@ var/global/list/gear_datums = list()
 	cost = 1
 	allowed_roles = list("Captain")
 
+// Wig by Earthcrusher, blame him.
+/datum/gear/philosopher_wig
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
+	cost = 3
+	slot = slot_head
+
 /datum/gear/corpsecsuit
 	display_name = "uniform, corporate (Security)"
 	path = /obj/item/clothing/under/rank/security/corp
