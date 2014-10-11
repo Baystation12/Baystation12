@@ -1,6 +1,5 @@
 /var/datum/announcement/priority/priority_announcement = new(do_log = 0)
 /var/datum/announcement/priority/command/command_announcement = new(do_log = 0, do_newscast = 1)
-/var/datum/announcement/priority/security/security_announcement = new(do_log = 0, do_newscast = 1)
 
 /datum/announcement
 	var/title = "Attention"
@@ -16,17 +15,17 @@
 	log = do_log
 	newscast = do_newscast
 
-/datum/announcement/priority/New(var/do_log = 1, var/new_sound = sound('sound/items/AirHorn.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Priority Announcement"
 	announcement_type = "Priority Announcement"
 
-/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = sound('sound/items/AirHorn.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "[command_name()] Update"
 	announcement_type = "[command_name()] Update"
 
-/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = sound('sound/items/AirHorn.ogg'), var/do_newscast = 0)
+/datum/announcement/priority/security/New(var/do_log = 1, var/new_sound = sound('sound/misc/notice2.ogg'), var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"

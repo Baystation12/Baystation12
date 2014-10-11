@@ -28,7 +28,7 @@ datum/directive/tau_ceti_needs_women
 		var/list/aliens[0]
 		for(var/mob/M in get_crew_of_target_gender())
 			var/species = M.get_species()
-			if(species == "Tajaran" || species == "Unathi" || species == "Skrell")
+			if(species == "Tajara" || species == "Unathi" || species == "Skrell")
 				aliens.Add(M)
 		return aliens
 
