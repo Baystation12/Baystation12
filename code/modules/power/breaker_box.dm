@@ -21,7 +21,7 @@
 	icon_state = "bbox_on"
 
 	// Enabled on server startup. Used in substations to keep them in bypass mode.
-/obj/machinery/power/breakerbox/activated/New()
+/obj/machinery/power/breakerbox/activated/initialize()
 	set_state(1)
 
 /obj/machinery/power/breakerbox/examine()
