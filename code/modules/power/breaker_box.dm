@@ -85,6 +85,9 @@
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()
 
+			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d2)
+
 	else
 		icon_state = icon_state_off
 		for(var/obj/structure/cable/C in src.loc)
