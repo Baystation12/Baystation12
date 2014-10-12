@@ -266,6 +266,7 @@
 
 	return
 
+
 /mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
