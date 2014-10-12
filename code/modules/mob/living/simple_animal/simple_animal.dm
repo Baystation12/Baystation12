@@ -250,7 +250,6 @@
 
 			M.put_in_active_hand(G)
 
-			grabbed_by += G
 			G.synch()
 			G.affecting = src
 			LAssailant = M
@@ -266,6 +265,7 @@
 					O.show_message("\red [M] [response_harm] [src]")
 
 	return
+
 
 /mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)

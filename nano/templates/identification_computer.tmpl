@@ -209,7 +209,7 @@
           <div class='item' style='width: 100%'>
             {{for data.all_centcom_access}}
               <div class='itemContentWide'>
-              {{:helper.link(value.desc, '', {'choice' : 'access', 'access_target' : value.ref, 'allowed' : allowed}, null, value.allowed ? 'selected' : null)}}
+              {{:helper.link(value.desc, '', {'choice' : 'access', 'access_target' : value.ref, 'allowed' : value.allowed}, null, value.allowed ? 'selected' : null)}}
               </div>
             {{/for}}
           </div>
