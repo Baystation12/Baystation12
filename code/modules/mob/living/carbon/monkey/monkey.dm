@@ -255,6 +255,7 @@
 	return
 
 /mob/living/carbon/monkey/attack_animal(mob/living/M as mob)
+
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")
 	else

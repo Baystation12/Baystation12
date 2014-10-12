@@ -30,17 +30,19 @@
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "")
+/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast)
 	if(!message)
 		return
 	var/tmp/message_title = new_title ? new_title : title
+	var/tmp/message_sound = new_sound ? sound(new_sound) : sound
 
 	message = html_encode(message)
 	message_title = html_encode(message_title)
 
 	Message(message, message_title)
-	NewsCast(message, message_title)
-	Sound()
+	if(do_newscast)
+		NewsCast(message, message_title)
+	Sound(message_sound)
 	Log(message, message_title)
 
 datum/announcement/proc/Message(message as text, message_title as text)
@@ -89,27 +91,27 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	news.can_be_redacted = 0
 	announce_newscaster_news(news)
 
-datum/announcement/proc/PlaySound()
-	if(!sound)
+datum/announcement/proc/PlaySound(var/message_sound)
+	if(!message_sound)
 		return
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << sound
+			M << message_sound
 
-datum/announcement/proc/Sound()
-	PlaySound()
+datum/announcement/proc/Sound(var/message_sound)
+	PlaySound(message_sound)
 
-datum/announcement/priority/Sound()
+datum/announcement/priority/Sound(var/message_sound)
 	if(sound)
 		world << sound
 
-datum/announcement/priority/command/Sound()
-	PlaySound()
+datum/announcement/priority/command/Sound(var/message_sound)
+	PlaySound(message_sound)
 
 datum/announcement/proc/Log(message as text, message_title as text)
 	if(log)
-		log_say("[key_name(usr)] has made a(n) [announcement_type]: [message_title] - [message] - [announcer]")
-		message_admins("[key_name_admin(usr)] has made a(n) [announcement_type].", 1)
+		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
+		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/weapon/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
