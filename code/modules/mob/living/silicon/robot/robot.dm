@@ -862,6 +862,7 @@ var/list/robot_verbs_default = list(
 		return ..()
 
 
+
 /mob/living/silicon/robot/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
