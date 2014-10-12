@@ -708,6 +708,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper EVA Maintenance"
 	icon_state = "maint_eva"
 
+/area/maintenance/dormitory
+	name = "Dormitory Maintenance"
+	icon_state = "maint_dormitory"
+
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
@@ -720,13 +724,17 @@ var/list/ghostteleportlocs = list()
 	name = "Medbay Maintenance"
 	icon_state = "maint_medbay"
 
-/area/maintenance/misc_research
-	name = "Misc. Research Maintenance"
-	icon_state = "maint_misc_research"
+/area/maintenance/research_port
+	name = "Port Research Maintenance"
+	icon_state = "maint_research_port"
+
+/area/maintenance/research_starboard
+	name = "Starboard Research Maintenance"
+	icon_state = "maint_research_starboard"
 
 /area/maintenance/research_shuttle
 	name = "Research Shuttle Dock Maintenance"
-	icon_state = "maint_r_shuttle"
+	icon_state = "maint_research_shuttle"
 
 /area/maintenance/security_port
 	name = "Port Security Maintenance"
@@ -739,14 +747,6 @@ var/list/ghostteleportlocs = list()
 /area/maintenance/storage
 	name = "Atmospherics"
 	icon_state = "green"
-
-/area/maintenance/virology
-	name = "Virology Maintenance"
-	icon_state = "maint_viro"
-
-/area/maintenance/xeno
-	name = "Xeno Maintenance"
-	icon_state = "maint_xeno"
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 

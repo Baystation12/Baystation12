@@ -477,10 +477,12 @@
 	if(H.a_intent != "hurt")
 		return 0
 
-	if(unarmed.shredding && unarmed.is_usable(H))
-		return 1
-	else if(secondary_unarmed.shredding && secondary_unarmed.is_usable(H))
-		return 1
+	if(unarmed.is_usable(H))
+		if(unarmed.shredding)
+			return 1
+	else if(secondary_unarmed.is_usable(H))
+		if(secondary_unarmed.shredding)
+			return 1
 
 	return 0
 
@@ -512,7 +514,7 @@
 /datum/unarmed_attack/bite
 	attack_verb = list("bite") // 'x has biteed y', needs work.
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 1
+	shredding = 0
 	damage = 5
 	sharp = 1
 	edge = 1
