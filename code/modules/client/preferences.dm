@@ -797,13 +797,23 @@ datum/preferences
 					return 0
 				SetChoices(user)
 			if ("alt_title")
-				var/datum/job/job = locate(href_list["job"])
-				if (job)
-					var/choices = list(job.title) + job.alt_titles
-					var/choice = input("Pick a title for [job.title].", "Character Generation", GetPlayerAltTitle(job)) as anything in choices | null
-					if(choice)
-						SetPlayerAltTitle(job, choice)
-						SetChoices(user)
+					var/datum/job/job = locate(href_list["job"])
+					if (job)
+						var/choices
+						if(is_donator(user.client))
+							if(get_don_tier(user.client) == 4)
+								choices = list(job.title) + job.alt_titles + "Custom Job Title"
+						else
+							choices = list(job.title) + job.alt_titles
+						var/choice = input("Pick a title for [job.title].", "Character Generation", GetPlayerAltTitle(job)) as anything in choices | null
+						if(choice)
+							if(is_donator(user.client) && choice == "Custom Job Title")
+								var/newtitle = input("Input your new job title.", "Character Generation")
+								SetPlayerAltTitle(job, newtitle)
+								SetChoices(user)
+							else
+								SetPlayerAltTitle(job, choice)
+								SetChoices(user)
 			if("input")
 				SetJob(user, href_list["text"])
 			else
@@ -1080,7 +1090,7 @@ datum/preferences
 
 					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 						for(var/S in whitelisted_species)
-							if(S == "machine" || "Machine")
+							if(S == "machine" || "Machine"|| "IPC")
 								if(get_don_tier(user.client) == 4)
 									new_species += S
 									whitelisted = 1
