@@ -19,6 +19,10 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
+/mob/living/silicon/New()
+	..()
+	add_language("Galactic Common")
+
 /mob/living/silicon/proc/show_laws()
 	return
 

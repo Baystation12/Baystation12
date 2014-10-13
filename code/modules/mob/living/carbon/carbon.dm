@@ -436,9 +436,68 @@
 		now_pushing = 1
 		if(ismob(AM))
 			var/mob/tmob = AM
-			if(istype(tmob, /mob/living/carbon/human) && (HULK in tmob.mutations))
-				if(prob(70))
-					usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
+
+			if( istype(tmob, /mob/living/carbon) && prob(10) )
+				src.spread_disease_to(AM, "Contact")
+
+			if(istype(tmob, /mob/living/carbon/human))
+
+				if(HULK in tmob.mutations)
+					if(prob(70))
+						usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
+						now_pushing = 0
+						return
+				if(!(tmob.status_flags & CANPUSH))
+					now_pushing = 0
+					return
+
+				for(var/mob/M in range(tmob, 1))
+					if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
+						if ( !(world.time % 5) )
+							src << "\red [tmob] is restrained, you cannot push past"
+						now_pushing = 0
+						return
+					if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
+						if ( !(world.time % 5) )
+							src << "\red [tmob] is restraining [M], you cannot push past"
+						now_pushing = 0
+						return
+
+			//Leaping mobs just land on the tile, no pushing, no anything.
+			if(status_flags & LEAPING)
+				loc = tmob.loc
+				status_flags &= ~LEAPING
+				now_pushing = 0
+				return
+
+			// Step over drones.
+			// I have no idea why the hell this isn't already happening. How do mice do it?
+			if(istype(tmob,/mob/living/silicon/robot/drone))
+				loc = tmob.loc
+				now_pushing = 0
+				return
+
+			if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
+				var/turf/oldloc = loc
+				loc = tmob.loc
+				tmob.loc = oldloc
+				now_pushing = 0
+				for(var/mob/living/carbon/slime/slime in view(1,tmob))
+					if(slime.Victim == tmob)
+						slime.UpdateFeed()
+				return
+
+			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
+				if(prob(40) && !(FAT in src.mutations))
+					src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
+					now_pushing = 0
+					return
+			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
+				if(prob(99))
+					now_pushing = 0
+					return
+			if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
+				if(prob(99))
 					now_pushing = 0
 					return
 			if(!(tmob.status_flags & CANPUSH))
@@ -446,6 +505,7 @@
 				return
 
 			tmob.LAssailant = src
+
 		now_pushing = 0
 		..()
 		if (!( istype(AM, /atom/movable) ))
@@ -460,6 +520,6 @@
 							now_pushing = 0
 							return
 				step(AM, t)
-			now_pushing = null
+			now_pushing = 0
 		return
 	return
