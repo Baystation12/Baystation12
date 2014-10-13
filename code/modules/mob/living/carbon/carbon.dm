@@ -523,3 +523,6 @@
 			now_pushing = 0
 		return
 	return
+
+/mob/living/carbon/can_use_vents()
+	return

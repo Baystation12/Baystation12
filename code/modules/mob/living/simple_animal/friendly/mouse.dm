@@ -114,5 +114,5 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "splats"
 
-/mob/living/carbon/alien/can_use_vents()
+/mob/living/simple_animal/mouse/can_use_vents()
 	return
