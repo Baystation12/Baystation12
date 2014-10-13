@@ -1171,6 +1171,7 @@
 			dna.species = new_species
 
 	if(species)
+
 		if(species.name && species.name == new_species)
 			return
 		if(species.language)
@@ -1178,6 +1179,9 @@
 
 		if(species.default_language)
 			remove_language(species.default_language)
+
+		// Clear out their species abilities.
+		species.remove_inherent_verbs(src)
 
 	species = all_species[new_species]
 
@@ -1202,7 +1206,7 @@
 	species.handle_post_spawn(src)
 
 	spawn(0)
-		update_icons()
+		regenerate_icons()
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
