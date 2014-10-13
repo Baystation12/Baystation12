@@ -786,8 +786,8 @@
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
 	desc = "An endcap for pipes"
-	icon = 'icons/obj/pipes.dmi'
-	icon_state = "cap"
+	icon = 'icons/atmos/pipes.dmi'
+	icon_state = ""
 	level = 2
 	layer = 2.4 //under wires with their 2.44
 
@@ -800,15 +800,7 @@
 
 /obj/machinery/atmospherics/pipe/cap/New()
 	..()
-	switch(dir)
-		if(SOUTH)
-		 initialize_directions = NORTH
-		if(NORTH)
-		 initialize_directions = SOUTH
-		if(WEST)
-		 initialize_directions = EAST
-		if(EAST)
-		 initialize_directions = WEST
+	initialize_directions = dir
 
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
@@ -839,11 +831,19 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/cap/update_icon()
-	overlays = new()
+/obj/machinery/atmospherics/pipe/cap/change_color(var/new_color)
+	..()
+	if(node)
+		node.update_underlays()
 
-	icon_state = "cap[invisibility ? "-f" : ""]"
-	return
+/obj/machinery/atmospherics/pipe/cap/update_icon(var/safety = 0)
+	if(!check_icon_cache())
+		return
+
+	alpha = 255
+
+	overlays.Cut()
+	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "cap")
 
 /obj/machinery/atmospherics/pipe/cap/initialize()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
@@ -856,13 +856,53 @@
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/cap/visible
-	level = 2
 	icon_state = "cap"
+	level = 2
+
+/obj/machinery/atmospherics/pipe/cap/visible/scrubbers
+	name = "Scrubbers pipe"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/visible/supply
+	name = "Air supply pipe"
+	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/cap/visible/yellow
+	color = PIPE_COLOR_YELLOW
+
+/obj/machinery/atmospherics/pipe/cap/visible/cyan
+	color = PIPE_COLOR_CYAN
+
+/obj/machinery/atmospherics/pipe/cap/visible/green
+	color = PIPE_COLOR_GREEN
+
+/obj/machinery/atmospherics/pipe/cap/visible/purple
+	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/cap/hidden
+	icon_state = "cap"
 	level = 1
-	icon_state = "cap-f"
+	alpha = 128
 
+/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+	name = "Scrubbers pipe"
+	color = PIPE_COLOR_RED
+
+/obj/machinery/atmospherics/pipe/cap/hidden/supply
+	name = "Air supply pipe"
+	color = PIPE_COLOR_BLUE
+
+/obj/machinery/atmospherics/pipe/cap/hidden/yellow
+	color = PIPE_COLOR_YELLOW
+
+/obj/machinery/atmospherics/pipe/cap/hidden/cyan
+	color = PIPE_COLOR_CYAN
+
+/obj/machinery/atmospherics/pipe/cap/hidden/green
+	color = PIPE_COLOR_GREEN
+
+/obj/machinery/atmospherics/pipe/cap/hidden/purple
+	color = PIPE_COLOR_PURPLE
 
 /obj/machinery/atmospherics/pipe/tank
 	icon = 'icons/atmos/tank.dmi'
