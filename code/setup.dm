@@ -79,8 +79,10 @@
 // Factor of how fast mob nutrition decreases
 #define HUNGER_FACTOR 0.05
 
-// How many units of reagent are consumed per tick, by default.
+// How many units of reagent are consumed per tick, by default. Used for IV drip and cigarette injection rates.
 #define REAGENTS_METABOLISM 0.2
+// Proportion of reagent consumed per tick, by default. Used for metabolism in body.
+#define HL_REAGENTS_METABOLISM 0.02
 
 // By defining the effect multiplier this way, it'll exactly adjust
 // all effects according to how they originally were with the 0.4 metabolism

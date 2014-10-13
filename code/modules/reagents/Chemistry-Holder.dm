@@ -532,6 +532,24 @@ datum
 
 				return 1
 
+			hl_remove_reagent(var/reagent, var/proportion, var/safety = 0)//For metabolism in the body. Reagent removed by proportion.
+				if(!isnum(proportion)) return 1
+
+				for(var/A in reagent_list)
+					var/datum/reagent/R = A
+					if (R.id == reagent)
+						if(R.volume < 0.1)
+							R.volume = 0
+						else
+							R.volume -= R.volume * proportion
+						update_total()
+						if(!safety)//So it does not handle reactions when it need not to
+							handle_reactions()
+						my_atom.on_reagent_change()
+						return 0
+
+				return 1
+
 			has_reagent(var/reagent, var/amount = -1)
 
 				for(var/A in reagent_list)

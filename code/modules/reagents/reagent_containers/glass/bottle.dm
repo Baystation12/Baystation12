@@ -1,6 +1,11 @@
 
 //Not to be confused with /obj/item/weapon/reagent_containers/food/drinks/bottle
 
+#define BOTTLE_CHEMICAL "bottle-4"
+#define BOTTLE_POISON "bottle-1"
+#define BOTTLE_MEDICINE "bottle-2"
+#define BOTTLE_VIRUS "bottle-3"
+
 /obj/item/weapon/reagent_containers/glass/bottle
 	name = "bottle"
 	desc = "A small bottle."
@@ -59,7 +64,7 @@
 	name = "inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle16"
+	icon_state = BOTTLE_MEDICINE
 
 	New()
 		..()
@@ -69,7 +74,7 @@
 	name = "toxin bottle"
 	desc = "A small bottle of toxins. Do not drink, it is poisonous."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle12"
+	icon_state = BOTTLE_POISON
 
 	New()
 		..()
@@ -79,7 +84,7 @@
 	name = "cyanide bottle"
 	desc = "A small bottle of cyanide. Bitter almonds?"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle12"
+	icon_state = BOTTLE_POISON
 
 	New()
 		..()
@@ -89,7 +94,7 @@
 	name = "soporific bottle"
 	desc = "A small bottle of soporific. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = BOTTLE_POISON
 
 	New()
 		..()
@@ -99,7 +104,7 @@
 	name = "Chloral Hydrate Bottle"
 	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = BOTTLE_POISON
 
 	New()
 		..()
@@ -109,7 +114,7 @@
 	name = "dylovene bottle"
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = BOTTLE_MEDICINE
 
 	New()
 		..()
@@ -119,7 +124,7 @@
 	name = "unstable mutagen bottle"
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = BOTTLE_CHEMICAL
 
 	New()
 		..()
@@ -129,7 +134,7 @@
 	name = "ammonia bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = BOTTLE_CHEMICAL
 
 	New()
 		..()
@@ -139,7 +144,7 @@
 	name = "diethylamine bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = BOTTLE_CHEMICAL
 
 	New()
 		..()
@@ -149,7 +154,7 @@
 	name = "Flu virion culture bottle"
 	desc = "A small bottle. Contains H13N1 flu virion culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/advance/flu(0)
@@ -160,7 +165,7 @@
 	name = "Epiglottis virion culture bottle"
 	desc = "A small bottle. Contains Epiglottis virion culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/advance/voice_change(0)
@@ -171,7 +176,7 @@
 	name = "Liver enhancement virion culture bottle"
 	desc = "A small bottle. Contains liver enhancement virion culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/advance/heal(0)
@@ -182,7 +187,7 @@
 	name = "Hullucigen virion culture bottle"
 	desc = "A small bottle. Contains hullucigen virion culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/advance/hullucigen(0)
@@ -193,7 +198,7 @@
 	name = "Pierrot's Throat culture bottle"
 	desc = "A small bottle. Contains H0NI<42 virion culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/pierrot_throat(0)
@@ -204,7 +209,7 @@
 	name = "Rhinovirus culture bottle"
 	desc = "A small bottle. Contains XY-rhinovirus culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/advance/F = new /datum/disease/advance/cold(0)
@@ -215,7 +220,7 @@
 	name = "Random culture bottle"
 	desc = "A small bottle. Contains a random disease."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/advance/F = new(0)
@@ -226,7 +231,7 @@
 	name = "Retrovirus culture bottle"
 	desc = "A small bottle. Contains a retrovirus culture in a synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/dna_retrovirus(0)
@@ -238,7 +243,7 @@
 	name = "GBS culture bottle"
 	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS+ culture in synthblood medium."//Or simply - General BullShit
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	amount_per_transfer_from_this = 5
 
 	New()
@@ -253,7 +258,7 @@
 	name = "GBS culture bottle"
 	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS- culture in synthblood medium."//Or simply - General BullShit
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/fake_gbs(0)
@@ -280,7 +285,7 @@
 	name = "Brainrot culture bottle"
 	desc = "A small bottle. Contains Cryptococcus Cosmosis culture in synthblood medium."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/brainrot(0)
@@ -291,7 +296,7 @@
 	name = "Magnitis culture bottle"
 	desc = "A small bottle. Contains a small dosage of Fukkos Miracos."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/magnitis(0)
@@ -303,7 +308,7 @@
 	name = "Wizarditis culture bottle"
 	desc = "A small bottle. Contains a sample of Rincewindus Vulgaris."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_VIRUS
 	New()
 		..()
 		var/datum/disease/F = new /datum/disease/wizarditis(0)
@@ -314,7 +319,7 @@
 	name = "Polytrinic Acid Bottle"
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = BOTTLE_CHEMICAL
 	New()
 		..()
 		reagents.add_reagent("pacid", 60)
@@ -332,7 +337,7 @@
 	name = "Capsaicin Bottle"
 	desc = "A small bottle. Contains hot sauce."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = BOTTLE_CHEMICAL
 	New()
 		..()
 		reagents.add_reagent("capsaicin", 60)
@@ -341,7 +346,7 @@
 	name = "Frost Oil Bottle"
 	desc = "A small bottle. Contains cold sauce."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = BOTTLE_CHEMICAL
 	New()
 		..()
 		reagents.add_reagent("frostoil", 60)
