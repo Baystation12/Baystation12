@@ -8,7 +8,6 @@ var/global/list/rad_collectors = list()
 	icon_state = "ca"
 	anchored = 0
 	density = 1
-	directwired = 1
 	req_access = list(access_engine_equip)
 //	use_power = 0
 	var/obj/item/weapon/tank/phoron/P = null
@@ -30,7 +29,7 @@ var/global/list/rad_collectors = list()
 	//so that we don't zero out the meter if the SM is processed first.
 	last_power = last_power_new
 	last_power_new = 0
-	
+
 
 	if(P)
 		if(P.air_contents.gas["phoron"] == 0)

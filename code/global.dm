@@ -262,3 +262,24 @@ var/DBConnection/dbcon_old = new()	//Tgstation database (Old database) - See the
 
 //added for Xenoarchaeology, might be useful for other stuff
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
+
+// TODO: Replace
+/proc/RandomAPCWires()
+	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
+	var/list/apcwires = list(0, 0, 0, 0)
+	APCIndexToFlag = list(0, 0, 0, 0)
+	APCIndexToWireColor = list(0, 0, 0, 0)
+	APCWireColorToIndex = list(0, 0, 0, 0)
+	var/flagIndex = 1
+	for (var/flag=1, flag<16, flag+=flag)
+		var/valid = 0
+		while (!valid)
+			var/colorIndex = rand(1, 4)
+			if (apcwires[colorIndex]==0)
+				valid = 1
+				apcwires[colorIndex] = flag
+				APCIndexToFlag[flagIndex] = flag
+				APCIndexToWireColor[flagIndex] = colorIndex
+				APCWireColorToIndex[colorIndex] = flagIndex
+		flagIndex+=1
+	return apcwires

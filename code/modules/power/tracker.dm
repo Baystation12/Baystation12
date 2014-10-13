@@ -10,7 +10,6 @@
 	icon_state = "tracker"
 	anchored = 1
 	density = 1
-	directwired = 1
 	use_power = 0 // doesn't use APC power
 	var/power_usage = 500	//W
 

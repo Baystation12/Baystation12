@@ -48,7 +48,6 @@ display round(lastgen) and phorontank amount
 	icon_state = "portgen0"
 	density = 1
 	anchored = 0
-	directwired = 0
 	use_power = 0
 
 	var/active = 0
