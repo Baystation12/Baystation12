@@ -111,13 +111,22 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
-	desc = "This sheet is an alloy of iron and phoron."
+	desc = "This sheet is an alloy of iron, coal and platinum."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	matter = list("metal" = 7500)
 	throwforce = 15.0
 	flags = FPRINT | TABLEPASS | CONDUCT
 	origin_tech = "materials=2"
+
+/obj/item/stack/sheet/plasteel/cyborg
+	name = "plasteel"
+	desc = "This sheet is an alloy of iron, coal and platinum."
+	icon_state = "sheet-plasteel"
+	item_state = "sheet-metal"
+	throwforce = 15.0
+	flags = FPRINT | TABLEPASS | CONDUCT
+
 
 /obj/item/stack/sheet/plasteel/New(var/loc, var/amount=null)
 		recipes = plasteel_recipes
