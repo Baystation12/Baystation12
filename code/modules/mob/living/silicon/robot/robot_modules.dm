@@ -1,3 +1,13 @@
+
+
+
+
+
+// ##### READ IF ADDING NEW RESOURCES #####
+// Adding new consumable resources (such as metal, etc.) REQUIRES initialisation in New(), as well as entry in stacktypes !
+// Otherwise the cyborg player has to enter recharger for this resource to actually appear.
+// ##### END READ #####
+
 /obj/item/weapon/robot_module
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
@@ -166,7 +176,7 @@
 
 	stacktypes = list(
 		/obj/item/stack/sheet/metal = 50,
-		/obj/item/stack/sheet/plasteel = 10,
+		/obj/item/stack/sheet/plasteel = 30,
 		/obj/item/stack/sheet/rglass = 50,
 		/obj/item/stack/rods = 50
 		)
@@ -182,6 +192,28 @@
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 
+		// Metal
+		var/obj/item/stack/sheet/metal/cyborg/ME = new /obj/item/stack/sheet/metal/cyborg(src)
+		ME.amount = 50
+		src.modules += ME
+
+		// Reinforced Glass
+		var/obj/item/stack/sheet/rglass/cyborg/RG = new /obj/item/stack/sheet/rglass/cyborg(src)
+		RG.amount = 50
+		src.modules += RG
+
+		// Metal Rods
+		var/obj/item/stack/rods/RO = new /obj/item/stack/rods(src)
+		RO.amount = 50
+		src.modules += RO
+
+		// Plasteel
+		var/obj/item/stack/sheet/plasteel/cyborg/PS = new /obj/item/stack/sheet/plasteel(src)
+		PS.amount = 30
+		src.modules += PS
+
+
+
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
 
@@ -189,9 +221,10 @@
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/glass = 50,
 		/obj/item/stack/sheet/rglass = 50,
-		/obj/item/weapon/cable_coil = 50,
+		/obj/item/weapon/cable_coil = 30,
 		/obj/item/stack/rods = 15,
-		/obj/item/stack/tile/plasteel = 15
+		/obj/item/stack/tile/plasteel = 15,
+		/obj/item/stack/sheet/plasteel = 10
 		)
 
 	New()
@@ -213,21 +246,40 @@
 
 		src.emag = new /obj/item/borg/stun(src)
 
-		var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
-		M.amount = 50
-		src.modules += M
+		// Metal
+		var/obj/item/stack/sheet/metal/cyborg/ME = new /obj/item/stack/sheet/metal/cyborg(src)
+		ME.amount = 50
+		src.modules += ME
 
-		var/obj/item/stack/sheet/rglass/cyborg/R = new /obj/item/stack/sheet/rglass/cyborg(src)
-		R.amount = 50
-		src.modules += R
+		// Reinforced Glass
+		var/obj/item/stack/sheet/rglass/cyborg/RG = new /obj/item/stack/sheet/rglass/cyborg(src)
+		RG.amount = 50
+		src.modules += RG
 
-		var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src)
-		G.amount = 50
-		src.modules += G
+		// Glass
+		var/obj/item/stack/sheet/glass/GL = new /obj/item/stack/sheet/glass(src)
+		GL.amount = 50
+		src.modules += GL
 
-		var/obj/item/weapon/cable_coil/W = new /obj/item/weapon/cable_coil(src)
-		W.amount = 50
-		src.modules += W
+		// Cable Coil
+		var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src)
+		CC.amount = 30
+		src.modules += CC
+
+		// Metal Rods
+		var/obj/item/stack/rods/RO = new /obj/item/stack/rods(src)
+		RO.amount = 15
+		src.modules += RO
+
+		// Floor Tiles
+		var/obj/item/stack/tile/plasteel/FT = new /obj/item/stack/tile/plasteel(src)
+		FT.amount = 15
+		src.modules += FT
+
+		// Plasteel
+		var/obj/item/stack/sheet/plasteel/cyborg/PS = new /obj/item/stack/sheet/plasteel(src)
+		PS.amount = 10
+		src.modules += PS
 
 		return
 
