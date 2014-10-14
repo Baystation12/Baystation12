@@ -16,6 +16,7 @@
 	var/unarmed_type = /datum/unarmed_attack
 	var/secondary_langs = list() // The names of secondary languages that are available to this species.
 	var/mutantrace               // Safeguard due to old code.
+	var/wingicon = 0
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"   // Poisonous air.
@@ -49,7 +50,8 @@
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
 	var/base_color      //Used when setting species.
-
+	var/hidetail = 0
+	var/dhts = 0
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
@@ -142,6 +144,18 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 
+/datum/species/Aviskree
+	name = "Aviskree"
+	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
+	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
+	language = "Aviachirp"
+	tail = "aviskreetail"
+	unarmed_type = /datum/unarmed_attack/claws
+	primitive = /mob/living/carbon/monkey/aviskree
+	wingicon = 1
+
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -165,6 +179,29 @@
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+/datum/species/avisaran
+	name = "Avisaran"
+	icobase = 'icons/mob/human_races/r_Avisaran.dmi'
+	deform = 'icons/mob/human_races/r_def_Avisaran.dmi'
+	language = "Siik'tajr"
+	tail = "Avisaran"
+	unarmed_type = /datum/unarmed_attack/claws_J
+	darksight = 10
+	dhts = 1
+	wingicon = 1
+
+	cold_level_1 = 200 //Default 260
+	cold_level_2 = 140 //Default 200
+	cold_level_3 = 80 //Default 120
+
+	heat_level_1 = 330 //Default 360
+	heat_level_2 = 380 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+
+	flesh_color = "#BCBCBC"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -304,7 +341,7 @@
 	name = "Machine"
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	language = "Tradeband"
+	language = "Encoded Audio Language"
 	unarmed_type = /datum/unarmed_attack/punch
 
 	eyes = "blank_eyes"
@@ -351,6 +388,14 @@
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	damage = 5
+	sharp = 1
+	edge = 1
+
+/datum/unarmed_attack/claws_J   //Jamie's a bit stronger than the average guy, according to the old code
+	attack_verb = list("scratch", "claw")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 6
 	sharp = 1
 	edge = 1
 

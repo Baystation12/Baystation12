@@ -53,7 +53,7 @@
 	Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	*/
 	var/list/sprite_sheets_obj = null
-	
+
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
@@ -358,6 +358,17 @@
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
 				if( !(slot_flags & SLOT_ID) )
+					return 0
+				return 1
+
+			if(slot_wear_pda)  //PDA Slot
+				if(H.wear_pda)
+					return 0
+				if(!H.w_uniform)
+					if(!disable_warning)
+						H << "\red You need a jumpsuit before you can attach this [name]."
+					return 0
+				if( !(slot_flags & SLOT_PDA) )
 					return 0
 				return 1
 			if(slot_l_store)

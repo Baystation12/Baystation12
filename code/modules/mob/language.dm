@@ -20,6 +20,14 @@
 	key = "o"
 	flags = WHITELISTED
 
+/datum/language/Aviskree
+	name = "Aviachirp"
+	desc = "An expressive language is very beautiful execpt when you want to sleep."
+	speech_verb = "chirps"
+	colour = "Aviskree"
+	key = "y"
+	flags = WHITELISTED
+
 /datum/language/tajaran
 	name = "Siik'tajr"
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
@@ -73,6 +81,14 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+
+/datum/language/Machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	colour = "machine"
+	key = "p"
+	flags = RESTRICTED
 
 // Language handling.
 /mob/proc/add_language(var/language)

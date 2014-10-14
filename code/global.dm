@@ -1,5 +1,5 @@
 //#define TESTING
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31 Github Crap
 
 var/global/obj/effect/datacore/data_core = null
 
@@ -92,6 +92,7 @@ var/aliens_allowed = 0
 var/ooc_allowed = 1
 var/dsay_allowed = 1
 var/dooc_allowed = 1
+var/looc_allowed = 1
 var/traitor_scaling = 1
 //var/goonsay_allowed = 0
 var/dna_ident = 1
@@ -172,6 +173,7 @@ var/gravity_is_on = 1
 var/shuttlecoming = 0
 
 var/join_motd = null
+var/announcement_msg
 var/forceblob = 0
 
 // nanomanager, the manager for Nano UIs
