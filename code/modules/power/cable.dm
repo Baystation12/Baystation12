@@ -729,33 +729,32 @@ obj/structure/cable/proc/avail()
 					user << "There's already a cable at that position."
 					return
 
-		var/obj/structure/cable/C = new(F)
+			var/obj/structure/cable/C = new(F)
 
-		C.cableColor(item_color)
+			C.cableColor(item_color)
 
-		//set up the new cable
-		C.d1 = 0 //it's a O-X node cable
-		C.d2 = dirn
-		C.add_fingerprint(user)
-		C.updateicon()
+			//set up the new cable
+			C.d1 = 0 //it's a O-X node cable
+			C.d2 = dirn
+			C.add_fingerprint(user)
+			C.updateicon()
 
-		//create a new powernet with the cable, if needed it will be merged later
-		var/datum/powernet/PN = new()
-		PN.add_cable(C)
+			//create a new powernet with the cable, if needed it will be merged later
+			var/datum/powernet/PN = new()
+			PN.add_cable(C)
 
-		C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
-		C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
+			C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
+			C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
 
-		if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
-			C.mergeDiagonalsNetworks(C.d2)
+			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d2)
 
 
-		use(1)
-
-		if (C.shock(user, 50))
-			if (prob(50)) //fail
-				new/obj/item/stack/cable_coil(C.loc, 1, C.color)
-				del(C) // qdel
+			use(1)
+			if (C.shock(user, 50))
+				if (prob(50)) //fail
+					new/obj/item/stack/cable_coil(C.loc, 1, C.color)
+					del(C) // qdel
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
