@@ -273,8 +273,11 @@ var/list/admin_verbs_mentor = list(
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
 	/client/proc/cmd_admin_subtle_message
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
 )
-h
+
 /client/proc/add_admin_verbs()
 	if(holder)
 		verbs += admin_verbs_default
