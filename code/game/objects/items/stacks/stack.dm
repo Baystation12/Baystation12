@@ -117,6 +117,8 @@
 			recipes_list = srl.recipes
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
+		if(!multiplier) //if multiplier is null
+			multiplier = 1
 		if (multiplier <= 0) //href exploit protection
 			return
 		if (src.amount < R.req_amount*multiplier)
