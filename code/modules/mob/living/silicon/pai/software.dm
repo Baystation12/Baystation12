@@ -207,15 +207,11 @@
 
 		if("directive")
 			if(href_list["getdna"])
-				var/mob/living/M = src.loc
-				var/count = 0
-				while(!istype(M, /mob/living))
-					if(!M || !M.loc) return 0 //For a runtime where M ends up in nullspace (similar to bluespace but less colourful)
-					M = M.loc
-					count++
-					if(count >= 6)
-						src << "You are not being carried by anyone!"
-						return 0
+				var/mob/living/M  = findPaiCarrier()
+				if(M == null)
+					src << "You are not being carried by anyone!"
+					return 0
+				
 				spawn CheckDNA(M, src)
 
 		if("pdamessage")
@@ -285,6 +281,20 @@
 	src.paiInterface()		 // So we'll just call the update directly rather than doing some default checks
 	return
 
+/mob/living/silicon/pai/proc/findPaiCarrier()
+	var/mob/living/M = src.loc
+	var/count = 0
+	while(count < 6)
+		if(!M || !M.loc) return null //For a runtime where M ends up in nullspace (similar to bluespace but less colourful)
+		
+		if(istype(M, /mob/living))
+			return M
+			
+		M = M.loc
+		count++
+		
+	return null
+	
 // MENUS
 
 /mob/living/silicon/pai/proc/softwareMenu()			// Populate the right menu
@@ -421,10 +431,12 @@
 	<A href='byond://?src=\ref[src];software=signaller;send=1'>Send Signal</A><BR>"}
 	return dat
 
-//Station Bounced Radio
+//Radios
 /mob/living/silicon/pai/proc/softwareRadio()
+	
+	// Station radio (and wires, for some reason)
 	var/dat = ""
-	dat += "<h2>Station Bounced Radio</h2><hr>"
+	dat += "<h2>Station Bounced Radio</h2>"
 	if(!istype(src, /obj/item/device/radio/headset)) //Headsets don't get a mic button
 		dat += "Microphone: [radio.broadcasting ? "<A href='byond://?src=\ref[src];software=radio;talk=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];software=radio;talk=1'>Disengaged</A>"]<BR>"
 	dat += {"
@@ -439,8 +451,16 @@
 
 	for (var/ch_name in radio.channels)
 		dat+=radio.text_sec_channel(ch_name, radio.channels[ch_name])
-	dat+={"[radio.text_wires()]</TT></body></html>"}
-
+	dat+={"[radio.text_wires()]</TT>"}
+	
+	// PAIchat - tells PAI if carrier has headset
+	var/mob/living/carbon/human/carrier = src.findPaiCarrier() 
+	var/headset = (carrier != null) && carrier.checkHasHeadset()
+	
+	dat += {"<h2>Personal Area Radio</h2>
+		<B>Headset connection:</B> [headset ? "Online (use :p to send)" : "None found"]"}
+	
+	dat += "</body></html>"
 	return dat
 
 // Crew Manifest

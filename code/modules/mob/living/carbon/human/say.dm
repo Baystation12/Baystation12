@@ -114,6 +114,15 @@
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
+		if("paichat")
+			// paichat is only available if you have a headset
+			if(l_ear && istype(l_ear, /obj/item/device/radio))
+				used_radios += l_ear
+				src.sayToPai(message, verb, speaking, l_ear)
+				
+			else if(r_ear && istype(r_ear, /obj/item/device/radio))
+				used_radios += r_ear
+				src.sayToPai(message, verb, speaking, r_ear)
 		else
 			if(message_mode)
 				if(message_mode in (radiochannels | "department"))
@@ -285,3 +294,25 @@
 	returns[3] = handled
 
 	return returns
+
+/mob/living/carbon/human/proc/sayToPai(message, var/verb = "says", var/datum/language/speaking = null, var/headset = null)
+	var/list/recipients = list()
+	
+	// Always include sender, so they get feedback
+	recipients += src
+	
+	for(var/mob/M in player_list)
+		if(istype(M, /mob/living/silicon/pai))
+			var/mob/living/silicon/pai/P = M
+			var/mob/carrier = P.findPaiCarrier()
+			
+			if(carrier == src)
+				recipients += M
+	
+	paiChatSay(message, recipients, verb, speaking, headset)
+
+/*
+	Return true if the mob has a headset on either of its ears
+*/
+/mob/living/carbon/human/proc/checkHasHeadset()
+	return (l_ear && istype(l_ear, /obj/item/device/radio)) || (r_ear && istype(r_ear, /obj/item/device/radio))
