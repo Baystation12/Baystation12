@@ -1,0 +1,37 @@
+######################################################################
+# Basically, ckey goes first. Rank goes after the "-"                #
+# Case is not important for ckey.                                    #
+# Case IS important for the rank. However punctuation/spaces are not #
+# Ranks can be anything defined in admin_ranks.txt           ~Carn   #
+######################################################################
+
+Aztectornado - DevMentor
+Silvertorch5 - DevMentor
+Tehflamintaco - DevMentor
+
+Yithani - Mentor
+Esmeerelda - Mentor
+Avisionofsound - Mentor
+
+mordrehel - Tertiary Admin
+Mewth - Tertiary Admin
+Scorch289 -Tertiary Admin
+Tysonix1 - Secondary Admin
+Tysonix - Secondary Admin
+Regtaf - Secondary Admin
+Hlaskey - Secondary Admin
+CreeperJoe - Secondary Admin
+Bobbob212 - Primary Admin
+Sydney95 - Primary Admin
+
+Jtdrow - Head Admin
+Pisest - Head Admin
+Jamiedigweed - Game Master
+Emmanuelbassil - Head Of Staff
+
+Sshado - Host
+
+
+
+
+
