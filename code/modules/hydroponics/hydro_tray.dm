@@ -176,7 +176,7 @@
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 
 	// There's a chance for a weed explosion to happen if the weeds take over.
-	// Plants that are themselves weeds (weed_tolernace > 10) are unaffected.
+	// Plants that are themselves weeds (weed_tolerance > 10) are unaffected.
 	if (weedlevel >= 10 && prob(10))
 		if(!seed || weedlevel >= seed.weed_tolerance)
 			weed_invasion()
@@ -184,6 +184,7 @@
 	// If there is no seed data (and hence nothing planted),
 	// or the plant is dead, process nothing further.
 	if(!seed || dead)
+		if(draw_warnings) update_icon() //Harvesting would fail to set alert icons properly.
 		return
 
 	// Advance plant age.
