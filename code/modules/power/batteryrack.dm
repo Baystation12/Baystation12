@@ -241,17 +241,13 @@
 	if(terminal)
 		if(chargemode)
 			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			var/actual_load = draw_power(target_load)		// add the load to the terminal side network
 			charge += actual_load * SMESRATE	// increase the charge
 
 			if (actual_load >= target_load) // did the powernet have enough power available for us?
 				charging = 1
 			else
 				charging = 0
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
-				charging = 1
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored

@@ -1040,9 +1040,10 @@
 	else
 		return 0
 
-/obj/machinery/power/apc/add_load(var/amount)
+/obj/machinery/power/apc/draw_power(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.load += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 /obj/machinery/power/apc/avail()
 	if(terminal)
@@ -1057,20 +1058,10 @@
 	if(!area.requires_power)
 		return
 
-
-	/*
-	if (equipment > 1) // off=0, off auto=1, on=2, on auto=3
-		use_power(src.equip_consumption, EQUIP)
-	if (lighting > 1) // off=0, off auto=1, on=2, on auto=3
-		use_power(src.light_consumption, LIGHT)
-	if (environ > 1) // off=0, off auto=1, on=2, on auto=3
-		use_power(src.environ_consumption, ENVIRON)
-
-	area.calc_lighting() */
 	lastused_light = area.usage(LIGHT)
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
-	area.clear_usage()
+	// area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ
 
@@ -1100,17 +1091,14 @@
 		cell.use(cellused)
 
 		if(excess > lastused_total)		// if power excess recharge the cell
-										// by the same amount just used
-			cell.give(cellused)
-			add_load(cellused/CELLRATE)		// add the load used to recharge the cell
-
-
+			var/actual_gain = draw_power(cellused/CELLRATE)		// add the load used to recharge the cell
+			cell.give(actual_gain)								// by the same amount just used
 		else		// no excess, and not enough per-apc
 
 			if( (cell.charge/CELLRATE + excess) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
 
 				cell.charge = min(cell.maxcharge, cell.charge + CELLRATE * excess)	//recharge with what we can
-				add_load(excess)		// so draw what we can from the grid
+				draw_power(excess)		// so draw what we can from the grid
 				charging = 0
 
 			else	// not enough power available to run the last tick!
@@ -1159,8 +1147,8 @@
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
 				var/ch = min(excess*CELLRATE, cell.maxcharge*CHARGELEVEL)
-				add_load(ch/CELLRATE) // Removes the power we're taking from the grid
-				cell.give(ch) // actually recharge the cell
+				var/actual_charge = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
+				cell.give(actual_charge) // actually recharge the cell
 
 			else
 				charging = 0		// stop charging

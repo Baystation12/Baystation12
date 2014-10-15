@@ -16,7 +16,7 @@
 	powernets -= src
 
 /datum/powernet/proc/draw_power(var/amount)
-	var/draw = min(amount, avail - load, 0)
+	var/draw = between(0, amount, avail - load)
 	load += draw
 	return draw
 

@@ -92,7 +92,7 @@
 		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
 		if(chargemode)
 			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			var/actual_load = draw_power(target_load)		// add the load to the terminal side network
 			charge += actual_load * SMESRATE	// increase the charge
 
 			if (actual_load >= target_load) // did the powernet have enough power available for us?
@@ -174,7 +174,7 @@
 	return 1
 
 
-/obj/machinery/power/smes/add_load(var/amount)
+/obj/machinery/power/smes/draw_power(var/amount)
 	if(terminal && terminal.powernet)
 		return terminal.powernet.draw_power(amount)
 	return 0

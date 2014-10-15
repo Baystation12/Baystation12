@@ -105,7 +105,8 @@
 		return
 	if(((src.last_shot + src.fire_delay) <= world.time) && (src.active == 1))
 
-		if(surplus() >= active_power_usage && add_load(active_power_usage) >= active_power_usage) //does the laser have enough power to shoot?
+		var/actual_load = draw_power(active_power_usage)
+		if(actual_load >= active_power_usage) //does the laser have enough power to shoot?
 			if(!powered)
 				powered = 1
 				update_icon()

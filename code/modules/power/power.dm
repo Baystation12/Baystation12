@@ -28,7 +28,7 @@
 	if(powernet)
 		powernet.newavail += amount
 
-/obj/machinery/power/proc/add_load(var/amount)
+/obj/machinery/power/proc/draw_power(var/amount)
 	if(powernet)
 		return powernet.draw_power(amount)
 	return 0
