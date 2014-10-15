@@ -206,7 +206,7 @@
 	return
 
 /area/proc/updateicon()
-	if ((fire || eject || party) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
+	if ((fire || eject || party) && (!requires_power||power_environ) && !lighting_space)//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
 			icon_state = "blue"
 		/*else if(atmosalm && !fire && !eject && !party)
@@ -234,6 +234,8 @@
 		return 1
 	if(master.always_unpowered)
 		return 0
+	if(src.lighting_space)
+		return 0 // Nope sorry
 	switch(chan)
 		if(EQUIP)
 			return master.power_equip
@@ -245,12 +247,10 @@
 	return 0
 
 // called when power status changes
-
 /area/proc/power_change()
-	master.powerupdate = 2
 	for(var/area/RA in related)
 		for(var/obj/machinery/M in RA)	// for each machine in the area
-			M.power_change()				// reverify power status (to update icons etc.)
+			M.power_change()			// reverify power status (to update icons etc.)
 		if (fire || eject || party)
 			RA.updateicon()
 
@@ -265,7 +265,6 @@
 			used += master.used_environ
 		if(TOTAL)
 			used += master.used_light + master.used_equip + master.used_environ
-
 	return used
 
 /area/proc/clear_usage()

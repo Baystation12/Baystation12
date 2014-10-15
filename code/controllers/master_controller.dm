@@ -357,16 +357,10 @@ datum/controller/game_controller/proc/process_pipenets()
 			continue
 		pipe_networks.Cut(i,i+1)
 
-datum/controller/game_controller/proc/process_powernets()
+/datum/controller/game_controller/proc/process_powernets()
 	last_thing_processed = /datum/powernet
-	var/i = 1
-	while(i<=powernets.len)
-		var/datum/powernet/Powernet = powernets[i]
-		if(Powernet)
-			Powernet.reset()
-			i++
-			continue
-		powernets.Cut(i,i+1)
+	for(var/datum/powernet/Powernet in powernets)
+		Powernet.reset()
 
 datum/controller/game_controller/proc/process_nano()
 	var/i = 1

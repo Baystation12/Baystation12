@@ -239,17 +239,15 @@
 	var/last_overcharge = overcharge_percent
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		if(chargemode)
+			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity * 1.5 - charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				load = add_load(load)		// add the load to the terminal side network
-				charge += load * SMESRATE	// increase the charge
-
-
-			else					// if not enough capacity
-				charging = 0		// stop charging
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
+				charging = 1
+			else
+				charging = 0
 
 		else
 			if (chargemode && excess > 0 && excess >= chargelevel)

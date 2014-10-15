@@ -16,9 +16,9 @@
 	powernets -= src
 
 /datum/powernet/proc/draw_power(var/amount)
-	var/drained = min(amount, avail)
-	load += drained
-	return drained
+	var/draw = min(amount, avail - load, 0)
+	load += draw
+	return draw
 
 /datum/powernet/proc/is_empty()
 	return !cables.len && !nodes.len
