@@ -94,6 +94,7 @@ var/list/ghostteleportlocs = list()
 /*-----------------------------------------------------------------------------*/
 /area/space
 	name = "\improper Space"
+	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 1
