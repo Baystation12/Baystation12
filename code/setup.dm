@@ -186,6 +186,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
 #define SLOT_TWOEARS 8192
 #define SLOT_LEGS = 16384
+#define SLOT_PDA 32768
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -267,6 +268,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_legcuffed 19
 #define slot_r_ear 20
 #define slot_legs 21
+#define slot_wear_pda 22
 
 //Cant seem to find a mob bitflags area other than the powers one
 
@@ -516,10 +518,11 @@ var/list/liftable_structures = list(\
 //Therefore there needs to be a gap between the flags for the automute flags
 #define MUTE_IC			1
 #define MUTE_OOC		2
-#define MUTE_PRAY		4
-#define MUTE_ADMINHELP	8
-#define MUTE_DEADCHAT	16
-#define MUTE_ALL		31
+#define MUTE_LOOC		4
+#define MUTE_PRAY		8
+#define MUTE_ADMINHELP	16
+#define MUTE_DEADCHAT	31
+#define MUTE_ALL		62
 
 //Number of identical messages required to get the spam-prevention automute thing to trigger warnings and automutes
 #define SPAM_TRIGGER_WARNING 5

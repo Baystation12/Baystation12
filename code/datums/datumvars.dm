@@ -278,6 +278,7 @@ client
 		if(isobj(D))
 			body += "<option value='?_src_=vars;delall=\ref[D]'>Delete all of type</option>"
 		if(isobj(D) || ismob(D) || isturf(D))
+			body += "<option value='?_src_=vars;addreagent=\ref[D]'>Add reagent</option>"
 			body += "<option value='?_src_=vars;explode=\ref[D]'>Trigger explosion</option>"
 			body += "<option value='?_src_=vars;emp=\ref[D]'>Trigger EM pulse</option>"
 
@@ -495,7 +496,7 @@ client
 
 		src.give_disease(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
-		
+
 	else if(href_list["give_disease2"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
@@ -636,6 +637,37 @@ client
 
 		src.cmd_admin_explosion(A)
 		href_list["datumrefresh"] = href_list["explode"]
+
+	else if(href_list["addreagent"]) /* Made on /TG/, credit to them. */
+		if(!check_rights(0))	return
+
+		var/atom/A = locate(href_list["addreagent"])
+
+		if(!A.reagents)
+			var/amount = input(usr, "Specify the reagent size of [A]", "Set Reagent Size", 50) as num
+			if(amount)
+				A.create_reagents(amount)
+
+		if(A.reagents)
+			var/list/reagent_options = list()
+			for(var/r_id in chemical_reagents_list)
+				var/datum/reagent/R = chemical_reagents_list[r_id]
+				reagent_options[R.name] = r_id
+
+			if(reagent_options.len)
+				reagent_options = sortAssoc(reagent_options)
+				reagent_options.Insert(1, "CANCEL")
+
+				var/chosen = input(usr, "Choose a reagent to add.", "Choose a reagent.") in reagent_options
+				var/chosen_id = reagent_options[chosen]
+
+				if(chosen_id)
+					var/amount = input(usr, "Choose the amount to add.", "Choose the amount.", A.reagents.maximum_volume) as num
+					if(amount)
+						A.reagents.add_reagent(chosen_id, amount)
+						log_admin("[key_name(usr)] has added [amount] units of [chosen] to \the [A]")
+						message_admins("\blue [key_name(usr)] has added [amount] units of [chosen] to \the [A]")
+
 
 	else if(href_list["emp"])
 		if(!check_rights(R_DEBUG|R_FUN))	return
@@ -827,9 +859,9 @@ client
 
 	else if(href_list["addverb"])
 		if(!check_rights(R_DEBUG))      return
-		
+
 		var/mob/living/H = locate(href_list["addverb"])
-		
+
 		if(!istype(H))
 			usr << "This can only be done to instances of type /mob/living"
 			return
@@ -845,7 +877,7 @@ client
 				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
-		
+
 		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -854,7 +886,7 @@ client
 			return
 		else
 			H.verbs += verb
-		
+
 	else if(href_list["remverb"])
 		if(!check_rights(R_DEBUG))      return
 
@@ -872,7 +904,7 @@ client
 		else
 			H.verbs -= verb
 
-	
+
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return
 
@@ -881,11 +913,11 @@ client
 		if(!istype(H) || !H.client)
 			usr << "This can only be done on mobs with clients"
 			return
-		
-				
+
+
 
 		nanomanager.send_resources(H.client)
-		
+
 		usr << "Resource files sent"
 		H << "Your NanoUI Resource files have been refreshed"
 

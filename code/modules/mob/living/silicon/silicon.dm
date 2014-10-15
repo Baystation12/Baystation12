@@ -15,6 +15,10 @@
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 
+/mob/living/silicon/New()
+	add_language("Encoded Audio Language", 1)
+	..()
+
 /mob/living/silicon/proc/show_laws()
 	return
 
