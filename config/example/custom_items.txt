@@ -1,1 +1,14 @@
-ckey: name: /path/to/obj
+# custom items for people and shit in here
+# basic:
+#	ckey: name: /path/to/obj
+# additional options
+#	ckey: name: /path/to/obj: required access OR job title: item name: description: icon state
+# required access is one of the numbers from 
+# if required access is 0 or blank then always gets it
+# job title means if the item wants chemist but they are pharmacist then it wont do it (can be comma separated to have multiple, eg Chemist, Pharmacist if it's for both jobs
+# yes they have to be in that order, and if you want a custom description you need to have a custom name too
+# you can leave any othe than the ckey and path blank if you want and it will use the default for whatever the item is
+# paths can be comma separated, but you wont be able to set custom name/desc/icon in this file, it will have to be done via an item definition (in code/modules/customitems/item_defines.dm) or by having multiple entries in this config
+# unless its an id, because fuck code duplication
+# if icon state is set then the icon had better be in icons/obj/custom_items.dmi otherwise it'll be invisible
+# also # at the start means the line is a comment
