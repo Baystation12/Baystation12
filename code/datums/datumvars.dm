@@ -779,12 +779,8 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 
-		// Clear out their species abilities.
-		H.species.remove_inherent_verbs(H)
-
 		if(H.set_species(new_species))
 			usr << "Set species of [H] to [H.species]."
-			H.regenerate_icons()
 		else
 			usr << "Failed! Something went wrong."
 

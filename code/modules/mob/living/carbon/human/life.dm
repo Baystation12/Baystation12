@@ -1060,7 +1060,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-		if(!light_organ || light_organ.is_broken())
+		if(species.flags & IS_PLANT && (!light_organ || light_organ.is_broken()))
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 				traumatic_shock++

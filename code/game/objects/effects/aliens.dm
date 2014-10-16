@@ -109,6 +109,17 @@
 			O.show_message("\red [usr] destroys the [name]!", 1)
 		health = 0
 	else
+
+		// Aliens can get straight through these.
+		if(istype(usr,/mob/living/carbon))
+			var/mob/living/carbon/M = usr
+			if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+				for(var/mob/O in oviewers(src))
+					O.show_message("\red [usr] strokes the [name] and it melts away!", 1)
+				health = 0
+				healthcheck()
+				return
+
 		usr << "\blue You claw at the [name]."
 		for(var/mob/O in oviewers(src))
 			O.show_message("\red [usr] claws at the [name]!", 1)
