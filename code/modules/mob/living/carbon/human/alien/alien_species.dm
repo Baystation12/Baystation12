@@ -203,6 +203,7 @@
 /datum/species/xenos/queen
 
 	name = "Xenomorph Queen"
+	total_health = 250
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
