@@ -5883,7 +5883,7 @@
 "cjg" = (/obj/item/weapon/wirecutters,/turf/space,/area/space)
 "cjh" = (/obj/effect/landmark{name = "blobstart"},/turf/simulated/floor/plating,/area/maintenance/engineering)
 "cji" = (/obj/machinery/atmospherics/pipe/tank/air{dir = 8},/turf/simulated/floor/plating,/area/maintenance/engineering)
-"cjj" = (/obj/machinery/computer/general_air_control/supermatter_core{frequency = 1438; input_tag = "cooling_in"; name = "Engine Cooling Control"; output_tag = "cooling_out"; pressure_setting = 100; sensors = list("engine_sensor" = "Engine Core")},/turf/simulated/floor{icon_state = "warning"},/area/engine/engine_monitoring)
+"cjj" = (/obj/machinery/computer/general_air_control/supermatter_core{frequency = 1438; input_tag = "cooling_in"; name = "Engine Cooling Control"; output_tag = "cooling_out"; pressure_setting = 100; sensors = list("engine_sensor" = "Engine Core")},/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "warning"},/area/engine/engine_monitoring)
 "cjk" = (/obj/machinery/door/airlock/maintenance_hatch{name = "SMES Access"; req_access_txt = "11"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/engine/engine_smes)
 "cjl" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor,/area/atmos)
 "cjm" = (/obj/structure/disposalpipe/segment,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/engine/drone_fabrication)
