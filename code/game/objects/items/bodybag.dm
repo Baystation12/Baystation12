@@ -35,6 +35,8 @@
 	icon_state = "bodybag_closed"
 	icon_closed = "bodybag_closed"
 	icon_opened = "bodybag_open"
+	open_sound = 'sound/items/zip.ogg'
+	close_sound = 'sound/items/zip.ogg'
 	var/item_path = /obj/item/bodybag
 	density = 0
 	storage_capacity = (mob_size * 2) - 1
@@ -106,8 +108,6 @@
 	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant at the cost of genetic damage."
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
-	open_sound = 'sound/items/zip.ogg'
-	close_sound = 'sound/items/zip.ogg'
 	store_misc = 0
 	store_items = 0
 	var/used = 0
