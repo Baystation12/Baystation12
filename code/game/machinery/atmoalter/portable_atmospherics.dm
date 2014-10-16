@@ -83,7 +83,7 @@
 /obj/machinery/portable_atmospherics/proc/update_connected_network()
 	if(!connected_port)
 		return
-	
+
 	var/datum/pipe_network/network = connected_port.return_network(src)
 	if (network)
 		network.update = 1
@@ -120,7 +120,7 @@
 				user << "\blue Nothing happens."
 				return
 
-	else if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
+	else if ((istype(W, /obj/item/device/analyzer)) && Adjacent(user))
 		visible_message("\red [user] has used [W] on \icon[icon]")
 		if(air_contents)
 			var/pressure = air_contents.return_pressure()
@@ -153,25 +153,25 @@
 		if(cell)
 			user << "There is already a power cell installed."
 			return
-		
+
 		var/obj/item/weapon/cell/C = I
-		
+
 		user.drop_item()
 		C.add_fingerprint(user)
 		cell = C
 		C.loc = src
 		user.visible_message("\blue [user] opens the panel on [src] and inserts [C].", "\blue You open the panel on [src] and insert [C].")
 		return
-	
+
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(!cell)
 			user << "\red There is no power cell installed."
 			return
-		
+
 		user.visible_message("\blue [user] opens the panel on [src] and removes [cell].", "\blue You open the panel on [src] and remove [cell].")
 		cell.add_fingerprint(user)
 		cell.loc = src.loc
 		cell = null
 		return
-	
+
 	..()

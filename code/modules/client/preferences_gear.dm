@@ -1,9 +1,10 @@
 var/global/list/gear_datums = list()
 
-proc/populate_gear_list()
+/hook/startup/proc/populate_gear_list()
 	for(var/type in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = new type()
 		gear_datums[G.display_name] = G
+	return 1
 
 /datum/gear
 	var/display_name       //Name/index.
@@ -176,12 +177,14 @@ proc/populate_gear_list()
 	cost = 2
 	slot = slot_head
 
+// This was sprited and coded specifically for Zhan-Khazan characters. Before you
+// decide that it's 'not even Taj themed' maybe you should read the wiki, gamer. ~ Z
 /datum/gear/zhan_scarf
-	display_name = "headscarf, white"
+	display_name = "Zhan headscarf"
 	path = /obj/item/clothing/head/tajaran/scarf
 	cost = 2
 	slot = slot_head
-//	whitelisted = "Tajaran" // It's a headscarf. It isn't even a taj-themed headscarf!
+	whitelisted = "Tajara"
 
 // Eyes
 
@@ -280,6 +283,13 @@ proc/populate_gear_list()
 	slot = slot_w_uniform
 	cost = 1
 	allowed_roles = list("Captain")
+
+// Wig by Earthcrusher, blame him.
+/datum/gear/philosopher_wig
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
+	cost = 3
+	slot = slot_head
 
 /datum/gear/corpsecsuit
 	display_name = "uniform, corporate (Security)"
@@ -459,7 +469,7 @@ proc/populate_gear_list()
 	path = /obj/item/clothing/suit/tajaran/furs
 	cost = 3
 	slot = slot_wear_suit
-	whitelisted = "Tajaran" // You do have a monopoly on a fur suit tho
+	whitelisted = "Tajara" // You do have a monopoly on a fur suit tho
 
 // Gloves
 

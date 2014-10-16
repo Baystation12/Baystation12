@@ -23,9 +23,6 @@
 			src.cure()
 
 	if(stage == 1)
-		if(affected_mob.op_stage.appendix == 2.0)
-			// appendix is removed, can't get infected again
-			src.cure()
 		if(prob(5))
 			affected_mob << "\red You feel a stinging pain in your abdomen!"
 			affected_mob.emote("me",1,"winces slightly.")
@@ -48,7 +45,6 @@
 			var/mob/living/carbon/human/H = affected_mob
 			H << "\red Your abdomen is a world of pain!"
 			H.Weaken(10)
-			H.op_stage.appendix = 2.0
 
 			var/datum/organ/external/groin = H.get_organ("groin")
 			var/datum/wound/W = new /datum/wound/internal_bleeding(20)

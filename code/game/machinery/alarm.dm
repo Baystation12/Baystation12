@@ -1310,6 +1310,11 @@ FIRE ALARM
 						user.visible_message("\red [user] has reconnected [src]'s detecting unit!", "You have reconnected [src]'s detecting unit.")
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
+				else if (istype(W, /obj/item/weapon/wirecutters))
+					user.visible_message("\red [user] has cut the wires inside \the [src]!", "You have cut the wires inside \the [src].")
+					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+					buildstage = 1
+					update_icon()
 			if(1)
 				if(istype(W, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = W
