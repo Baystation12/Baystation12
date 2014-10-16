@@ -4,56 +4,26 @@
 	voice_name = "unknown"
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
+
 	var/list/hud_list[9]
 	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
-/mob/living/carbon/human/dummy
-	real_name = "Test Dummy"
-	status_flags = GODMODE|CANPUSH
-
-/mob/living/carbon/human/skrell/New(var/new_loc)
-	h_style = "Skrell Male Tentacles"
-	..(new_loc, "Skrell")
-
-/mob/living/carbon/human/tajaran/New(var/new_loc)
-	h_style = "Tajaran Ears"
-	..(new_loc, "Tajaran")
-
-/mob/living/carbon/human/unathi/New(var/new_loc)
-	h_style = "Unathi Horns"
-	..(new_loc, "Unathi")
-
-/mob/living/carbon/human/vox/New(var/new_loc)
-	h_style = "Short Vox Quills"
-	..(new_loc, "Vox")
-
-/mob/living/carbon/human/voxarmalis/New(var/new_loc)
-	h_style = "Bald"
-	..(new_loc, "Vox Armalis")
-
-/mob/living/carbon/human/diona/New(var/new_loc)
-	..(new_loc, "Diona")
-
-/mob/living/carbon/human/machine/New(var/new_loc)
-	h_style = "blue IPC screen"
-	..(new_loc, "Machine")
-
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
+
+	if(!dna)
+		dna = new /datum/dna(null)
+		// Species name is handled by set_species()
 
 	if(!species)
 		if(new_species)
-			set_species(new_species,null,1)
+			set_species(new_species)
 		else
 			set_species()
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
-
-	if(!dna)
-		dna = new /datum/dna(null)
-		dna.species=species.name
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
@@ -65,7 +35,6 @@
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
-
 	..()
 
 	if(dna)
@@ -73,93 +42,6 @@
 
 	prev_gender = gender // Debug for plural genders
 	make_blood()
-
-/mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
-	if ((!( yes ) || now_pushing))
-		return
-	now_pushing = 1
-	if (ismob(AM))
-		var/mob/tmob = AM
-
-		if( istype(tmob, /mob/living/carbon) && prob(10) )
-			src.spread_disease_to(AM, "Contact")
-//BubbleWrap - Should stop you pushing a restrained person out of the way
-
-		if(istype(tmob, /mob/living/carbon/human))
-
-			for(var/mob/M in range(tmob, 1))
-				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
-					if ( !(world.time % 5) )
-						src << "\red [tmob] is restrained, you cannot push past"
-					now_pushing = 0
-					return
-				if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
-					if ( !(world.time % 5) )
-						src << "\red [tmob] is restraining [M], you cannot push past"
-					now_pushing = 0
-					return
-
-		//Leaping mobs just land on the tile, no pushing, no anything.
-		if(status_flags & LEAPING)
-			loc = tmob.loc
-			status_flags &= ~LEAPING
-			now_pushing = 0
-			return
-
-		if(istype(tmob,/mob/living/silicon/robot/drone)) //I have no idea why the hell this isn't already happening. How do mice do it?
-			loc = tmob.loc
-			now_pushing = 0
-			return
-
-		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
-		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && !tmob.buckled && canmove) // mutual brohugs all around!
-			var/turf/oldloc = loc
-			loc = tmob.loc
-			tmob.loc = oldloc
-			now_pushing = 0
-			for(var/mob/living/carbon/slime/slime in view(1,tmob))
-				if(slime.Victim == tmob)
-					slime.UpdateFeed()
-			return
-
-		if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-			if(prob(40) && !(FAT in src.mutations))
-				src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
-				now_pushing = 0
-				return
-		if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
-			if(prob(99))
-				now_pushing = 0
-				return
-		if(tmob.l_hand && istype(tmob.l_hand, /obj/item/weapon/shield/riot))
-			if(prob(99))
-				now_pushing = 0
-				return
-		if(!(tmob.status_flags & CANPUSH))
-			now_pushing = 0
-			return
-
-		tmob.LAssailant = src
-
-	now_pushing = 0
-	spawn(0)
-		..()
-		if (!istype(AM, /atom/movable))
-			return
-		if (!now_pushing)
-			now_pushing = 1
-
-			if (!AM.anchored)
-				var/t = get_dir(src, AM)
-				if (istype(AM, /obj/structure/window))
-					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
-				step(AM, t)
-			now_pushing = 0
-		return
-	return
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -176,6 +58,7 @@
 			stat(null, eta_status)
 
 	if (client.statpanel == "Status")
+
 		if (internal)
 			if (!internal.air_contents)
 				del(internal)
@@ -183,10 +66,15 @@
 				stat("Internal Atmosphere Info", internal.name)
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
+
+		var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+		if(P)
+			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 		if(mind)
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
+
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
 			stat("Energy Charge", round(wear_suit:cell:charge/100))
 
@@ -299,7 +187,7 @@
 	return
 
 
-/mob/living/carbon/human/attack_animal(mob/living/simple_animal/M as mob)
+/mob/living/carbon/human/attack_animal(mob/living/M as mob)
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")
 	else
@@ -856,11 +744,21 @@
 	..()
 	return
 
-
 ///eyecheck()
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
 	var/number = 0
+
+	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
+		return 2
+
+	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
+		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
+		if(I.status & ORGAN_CUT_AWAY)
+			return 2
+	else
+		return 2
+
 	if(istype(src.head, /obj/item/clothing/head/welding))
 		if(!src.head:up)
 			number += 2
@@ -878,7 +776,7 @@
 
 
 /mob/living/carbon/human/IsAdvancedToolUser()
-	return 1//Humans can use guns and such
+	return species.has_fine_manipulation
 
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
@@ -1135,12 +1033,12 @@
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
 	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
-	return L.is_bruised()
+	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
 	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 
-	if(!L.is_bruised())
+	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
 		L.damage = L.min_bruised_damage
 
@@ -1225,7 +1123,7 @@
 				src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
-				if(!(organ.status & ORGAN_ROBOT)) //There is no blood in protheses.
+				if(!(organ.status & ORGAN_ROBOT) && !(species.flags & NO_BLOOD)) //There is no blood in protheses.
 					organ.status |= ORGAN_BLEEDING
 					src.adjustToxLoss(rand(1,3))
 
@@ -1261,7 +1159,7 @@
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs, var/default_colour)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
 
 	if(!dna)
 		if(!new_species)
@@ -1272,19 +1170,28 @@
 		else
 			dna.species = new_species
 
-	if(species && (species.name && species.name == new_species))
-		return
+	if(species)
 
-	if(species && species.language)
-		remove_language(species.language)
+		if(species.name && species.name == new_species)
+			return
+		if(species.language)
+			remove_language(species.language)
+
+		if(species.default_language)
+			remove_language(species.default_language)
+
+		// Clear out their species abilities.
+		species.remove_inherent_verbs(src)
 
 	species = all_species[new_species]
 
-	if(force_organs || !organs || !organs.len)
-		species.create_organs(src)
+	species.create_organs(src)
 
 	if(species.language)
 		add_language(species.language)
+
+	if(species.default_language)
+		add_language(species.default_language)
 
 	if(species.base_color && default_colour)
 		//Apply colour.
@@ -1299,7 +1206,9 @@
 	species.handle_post_spawn(src)
 
 	spawn(0)
-		update_icons()
+		regenerate_icons()
+		vessel.add_reagent("blood",560-vessel.total_volume)
+		fixblood()
 
 	if(species)
 		return 1
@@ -1380,156 +1289,6 @@
  		// Might need re-wording.
 		user << "<span class='alert'>There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into.</span>"
 
-
-//Putting a couple of procs here that I don't know where else to dump.
-//Mostly going to be used for Vox and Vox Armalis, but other human mobs might like them (for adminbuse).
-
-/mob/living/carbon/human/proc/leap()
-	set category = "IC"
-	set name = "Leap"
-	set desc = "Leap at a target and grab them aggressively."
-
-	if(last_special > world.time)
-		return
-
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot leap in your current state."
-		return
-
-	var/list/choices = list()
-	for(var/mob/living/M in view(6,src))
-		if(!istype(M,/mob/living/silicon))
-			choices += M
-	choices -= src
-
-	var/mob/living/T = input(src,"Who do you wish to leap at?") as null|anything in choices
-
-	if(!T || !src || src.stat) return
-
-	if(get_dist(get_turf(T), get_turf(src)) > 6) return
-
-	if(last_special > world.time)
-		return
-
-	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot leap in your current state."
-		return
-
-	last_special = world.time + 75
-	status_flags |= LEAPING
-
-	src.visible_message("<span class='warning'><b>\The [src]</b> leaps at [T]!</span>")
-	src.throw_at(get_step(get_turf(T),get_turf(src)), 5, 1, src)
-	playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
-
-	sleep(5)
-
-	if(status_flags & LEAPING) status_flags &= ~LEAPING
-
-	if(!src.Adjacent(T))
-		src << "\red You miss!"
-		return
-
-	T.Weaken(5)
-
-	//Only official raider vox get the grab and no self-prone."
-	if(src.mind && src.mind.special_role != "Vox Raider")
-		src.Weaken(5)
-		return
-
-	var/use_hand = "left"
-	if(l_hand)
-		if(r_hand)
-			src << "\red You need to have one hand free to grab someone."
-			return
-		else
-			use_hand = "right"
-
-	src.visible_message("<span class='warning'><b>\The [src]</b> seizes [T] aggressively!</span>")
-
-	var/obj/item/weapon/grab/G = new(src,T)
-	if(use_hand == "left")
-		l_hand = G
-	else
-		r_hand = G
-
-	G.state = GRAB_AGGRESSIVE
-	G.icon_state = "grabbed1"
-	G.synch()
-
-/mob/living/carbon/human/proc/gut()
-	set category = "IC"
-	set name = "Gut"
-	set desc = "While grabbing someone aggressively, rip their guts out or tear them apart."
-
-	if(last_special > world.time)
-		return
-
-	if(stat || paralysis || stunned || weakened || lying)
-		src << "\red You cannot do that in your current state."
-		return
-
-	var/obj/item/weapon/grab/G = locate() in src
-	if(!G || !istype(G))
-		src << "\red You are not grabbing anyone."
-		return
-
-	if(G.state < GRAB_AGGRESSIVE)
-		src << "\red You must have an aggressive grab to gut your prey!"
-		return
-
-	last_special = world.time + 50
-
-	visible_message("<span class='warning'><b>\The [src]</b> rips viciously at \the [G.affecting]'s body with its claws!</span>")
-
-	if(istype(G.affecting,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = G.affecting
-		H.apply_damage(50,BRUTE)
-		if(H.stat == 2)
-			H.gib()
-	else
-		var/mob/living/M = G.affecting
-		if(!istype(M)) return //wut
-		M.apply_damage(50,BRUTE)
-		if(M.stat == 2)
-			M.gib()
-
-/mob/living/carbon/human/proc/commune()
-	set category = "IC"
-	set name = "Commune with creature"
-	set desc = "Send a telepathic message to an unlucky recipient."
-
-	var/list/targets = list()
-	var/target = null
-	var/text = null
-
-	targets += getmobs() //Fill list, prompt user with list
-	target = input("Select a creature!", "Speak to creature", null, null) as null|anything in targets
-
-	if(!target) return
-
-	text = input("What would you like to say?", "Speak to creature", null, null)
-
-	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
-
-	if(!text) return
-
-	var/mob/M = targets[target]
-
-	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
-		src << "Not even a [src.species.name] can speak to the dead."
-		return
-
-	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
-
-	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		if(H.species.name == src.species.name)
-			return
-		H << "\red Your nose begins to bleed..."
-		H.drip(1)
-
 /mob/living/carbon/human/print_flavor_text()
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
 	var/head_exposed = 1
@@ -1567,3 +1326,27 @@
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
 	return ..()
+
+/mob/living/carbon/human/getDNA()
+	if(species.flags & NO_SCAN)
+		return null
+	..()
+
+/mob/living/carbon/human/setDNA()
+	if(species.flags & NO_SCAN)
+		return
+	..()
+
+/mob/living/carbon/human/has_brain()
+	if(internal_organs_by_name["brain"])
+		var/datum/organ/internal/brain = internal_organs_by_name["brain"]
+		if(brain && istype(brain))
+			return 1
+	return 0
+
+/mob/living/carbon/human/has_eyes()
+	if(internal_organs_by_name["eyes"])
+		var/datum/organ/internal/eyes = internal_organs_by_name["eyes"]
+		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
+			return 1
+	return 0

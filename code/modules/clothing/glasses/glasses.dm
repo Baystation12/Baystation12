@@ -11,6 +11,7 @@
 	var/prescription = 0
 	var/toggleable = 0
 	var/active = 1
+	var/obj/screen/overlay = null
 	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/attack_self(mob/user)
@@ -18,13 +19,11 @@
 		if(active)
 			active = 0
 			icon_state = "degoggles"
-			vision_flags = 0
 			user.update_inv_glasses()
 			usr << "You deactivate the optical matrix on the [src]."
 		else
 			active = 1
 			icon_state = initial(icon_state)
-			vision_flags = initial(vision_flags)
 			user.update_inv_glasses()
 			usr << "You activate the optical matrix on the [src]."
 
@@ -37,6 +36,10 @@
 	origin_tech = "magnets=2;engineering=2"
 	toggleable = 1
 	vision_flags = SEE_TURFS
+
+/obj/item/clothing/glasses/meson/New()
+	..()
+	overlay = global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
 	name = "prescription mesons"
@@ -56,6 +59,10 @@
 	item_state = "glasses"
 	origin_tech = "magnets=2"
 	darkness_view = 7
+
+/obj/item/clothing/glasses/night/New()
+	..()
+	overlay = global_hud.nvg
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
@@ -211,6 +218,10 @@
 				spawn(100)
 					M.disabilities &= ~NEARSIGHTED
 		..()
+
+/obj/item/clothing/glasses/thermal/New()
+	..()
+	overlay = global_hud.thermal
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
 	name = "Optical Meson Scanner"

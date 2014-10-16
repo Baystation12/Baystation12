@@ -189,11 +189,21 @@
 			Process_Incorpmove(direct)
 			return
 		if(mob.client)
-			if(mob.client.view != world.view)
+			if(mob.client.view != world.view) // If mob moves while zoomed in with device, unzoom them.
+				for(var/obj/item/item in mob.contents)
+					if(item.zoom)
+						item.zoom()
+						break
+				/*
 				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
 					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
 					if(s.zoom)
 						s.zoom()
+				if(locate(/obj/item/device/binoculars, mob.contents))		// If mob moves while zoomed in with binoculars, unzoom them.
+					var/obj/item/device/binoculars/b = locate() in mob
+					if(b.zoom)
+						b.zoom()
+				*/
 
 	if(Process_Grab())	return
 
@@ -402,15 +412,34 @@
 ///For moving in space
 ///Return 1 for movement 0 for none
 /mob/proc/Process_Spacemove(var/check_drift = 0)
-	//First check to see if we can do things
-	if(restrained())
+
+	if(!Check_Dense_Object()) //Nothing to push off of so end here
+		make_floating(1)
 		return 0
 
-	/*
-	if(istype(src,/mob/living/carbon))
-		if(src.l_hand && src.r_hand)
-			return 0
-	*/
+	if(istype(src,/mob/living/carbon/human/))
+		var/mob/living/carbon/human/H = src
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
+			make_floating(0)
+		else
+			make_floating(1)
+	else
+		make_floating(1)
+
+	if(restrained()) //Check to see if we can do things
+		return 0
+
+	//Check to see if we slipped
+	if(prob(Process_Spaceslipping(5)))
+		src << "\blue <B>You slipped!</B>"
+		src.inertia_dir = src.last_move
+		step(src, src.inertia_dir)
+		return 0
+	//If not then we can reset inertia and move
+	inertia_dir = 0
+	return 1
+
+/mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
 	var/dense_object = 0
 	for(var/turf/turf in oview(1,src))
@@ -418,7 +447,8 @@
 			continue
 
 		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes:flags & NOSLIP)))
+			var/mob/living/carbon/human/H = src
+			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP)))
 				continue
 
 
@@ -449,21 +479,7 @@
 				dense_object++
 				break
 
-	//Nothing to push off of so end here
-	if(!dense_object)
-		return 0
-
-
-
-	//Check to see if we slipped
-	if(prob(Process_Spaceslipping(5)))
-		src << "\blue <B>You slipped!</B>"
-		src.inertia_dir = src.last_move
-		step(src, src.inertia_dir)
-		return 0
-	//If not then we can reset inertia and move
-	inertia_dir = 0
-	return 1
+	return dense_object
 
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)

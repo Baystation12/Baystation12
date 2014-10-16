@@ -103,7 +103,7 @@
 		//if they are holding or wearing a card that has access, that works
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/carbon/monkey) || istype(M, /mob/living/carbon/alien/humanoid))
+	else if(istype(M, /mob/living/carbon/monkey))
 		var/mob/living/carbon/george = M
 		//they can only hold things :(
 		if(src.check_access(george.get_active_hand()))
@@ -492,20 +492,27 @@ proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))
+	var/obj/item/weapon/card/id/I
+	if(istype(src, /obj/item/device/pda))
+		var/obj/item/device/pda/P = src
+		I = P.id
+	else if(istype(src, /obj/item/weapon/card/id))
+		I = src
+
+	if(I)
+		var/job_icons = get_all_job_icons()
+		var/centcom = get_all_centcom_jobs()
+
+		if(I.assignment	in job_icons) //Check if the job has a hud icon
+			return I.assignment
+		if(I.rank in job_icons)
+			return I.rank
+
+		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
+			return "Centcom"
+		if(I.rank in centcom)
+			return "Centcom"
+	else
 		return
 
-	var/jobName
-
-	if(istype(src, /obj/item/device/pda))
-		if(src:id)
-			jobName = src:id:assignment
-	if(istype(src, /obj/item/weapon/card/id))
-		jobName = src:assignment
-
-	if(jobName in get_all_job_icons()) //Check if the job has a hud icon
-		return jobName
-	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a Centcom job
-		return "Centcom"
 	return "Unknown" //Return unknown if none of the above apply
-

@@ -46,7 +46,6 @@ var/list/whitelist = list()
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
-
 	return 0
 
 #undef WHITELISTFILE

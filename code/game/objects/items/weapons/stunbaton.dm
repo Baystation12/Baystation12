@@ -123,14 +123,14 @@
 		if (ishuman(L))
 			user.lastattacked = L	//are these used at all, if we have logs?
 			L.lastattacker = user
-			
+
 			if (user != L) // Attacking yourself can't miss
 				target_zone = get_zone_with_miss_chance(user.zone_sel.selecting, L)
-			
+
 			if(!target_zone)
 				L.visible_message("\red <B>[user] misses [L] with \the [src]!")
 				return 0
-			
+
 			var/mob/living/carbon/human/H = L
 			var/datum/organ/external/affecting = H.get_organ(target_zone)
 			if (affecting)
@@ -148,12 +148,16 @@
 
 	//stun effects
 	L.stun_effect_act(stun, agony, target_zone, src)
-	
+
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 	msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
-	
+
 	deductcharge(hitcost)
-	
+
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		H.forcesay(hit_appends)
+
 	return 1
 
 /obj/item/weapon/melee/baton/emp_act(severity)

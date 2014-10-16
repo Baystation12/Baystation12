@@ -13,20 +13,18 @@
 
 /obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if (istype(O, /obj/item/stack/sheet/metal))
+		var/obj/item/stack/sheet/metal/M = O
 		if (src.metal_amount < 150000.0)
 			var/count = 0
 			src.overlays += "fab-load-metal"
 			spawn(15)
-				if(O)
-					if(!O:amount)
+				if(M)
+					if(!M.get_amount())
 						return
-					while(metal_amount < 150000 && O:amount)
+					while(metal_amount < 150000 && M.amount)
 						src.metal_amount += O.matter["metal"] /*O:height * O:width * O:length * 100000.0*/
-						O:amount--
+						M.use(1)
 						count++
-
-					if (O:amount < 1)
-						del(O)
 
 					user << "You insert [count] metal sheet\s into the fabricator."
 					src.overlays -= "fab-load-metal"

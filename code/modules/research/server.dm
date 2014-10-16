@@ -19,8 +19,8 @@
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/rdserver(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
-	component_parts += new /obj/item/weapon/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
+	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
 	src.initialize(); //Agouri
 

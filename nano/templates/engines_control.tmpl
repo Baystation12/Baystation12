@@ -1,6 +1,6 @@
 <div class="item">
-    {{:helper.link('Overall status', 'note', {'state' :'status'}, null, state == 'status' ? 'selected' : null)}}
-    {{:helper.link('Details', 'note', {'state' : 'engines'}, null, state == 'engines' ? 'selected' : null)}}
+    {{:helper.link('Overall status', 'note', {'state' :'status'}, null, data.state == 'status' ? 'selected' : null)}}
+    {{:helper.link('Details', 'note', {'state' : 'engines'}, null, data.state == 'engines' ? 'selected' : null)}}
 </div>
 
 {{if data.state == "engines"}}

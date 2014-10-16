@@ -132,13 +132,13 @@ var/last_chew = 0
 	..()
 	if(istype(I, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = I
-		var/obj/item/weapon/wirerod/W = new /obj/item/weapon/wirerod
-		R.use(1)
+		if (R.use(1))
+			var/obj/item/weapon/wirerod/W = new /obj/item/weapon/wirerod
 
-		user.put_in_hands(W)
-		user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
-		del(src)
-		update_icon(user)
+			user.put_in_hands(W)
+			user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
+			del(src)
+			update_icon(user)
 
 
 /obj/item/weapon/handcuffs/cyborg

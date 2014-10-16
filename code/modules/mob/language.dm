@@ -6,11 +6,42 @@
 	var/name = "an unknown language" // Fluff name of language if any.
 	var/desc = "A language."         // Short description for 'Check Languages'.
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
+	var/ask_verb = "asks"            // Used when sentence ends in a ?
+	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"         // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
+
+/datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+
+	log_say("[key_name(speaker)] : ([name]) [message]")
+
+	for(var/mob/player in player_list)
+
+		var/understood = 0
+
+		if(istype(player,/mob/dead))
+			understood = 1
+		else if((src in player.languages) && check_special_condition(player))
+			understood = 1
+
+		if(understood)
+			if(!speaker_mask) speaker_mask = speaker.name
+			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			player << "[msg]"
+
+/datum/language/proc/check_special_condition(var/mob/other)
+	return 1
+
+/datum/language/proc/get_spoken_verb(var/msg_end)
+	switch(msg_end)
+		if("!")
+			return exclaim_verb
+		if("?")
+			return ask_verb
+	return speech_verb
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -52,6 +83,13 @@
 	key = "q"
 	flags = RESTRICTED
 
+/datum/language/common
+	name = "Galactic Common"
+	desc = "The common galactic tongue."
+	speech_verb = "says"
+	key = "0"
+	flags = RESTRICTED
+
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
@@ -73,6 +111,121 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+
+/datum/language/xenocommon
+	name = "Xenomorph"
+	colour = "alien"
+	desc = "The common tongue of the xenomorphs."
+	speech_verb = "hisses"
+	key = "4"
+	flags = RESTRICTED
+
+/datum/language/xenos
+	name = "Hivemind"
+	desc = "Xenomorphs have the strange ability to commune over a psychic hivemind."
+	speech_verb = "hisses"
+	colour = "alien"
+	key = "a"
+	flags = RESTRICTED | HIVEMIND
+
+/datum/language/xenos/check_special_condition(var/mob/other)
+
+	var/mob/living/carbon/M = other
+	if(!istype(M))
+		return 1
+	if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		return 1
+
+	return 0
+
+/datum/language/ling
+	name = "Changeling"
+	desc = "Although they are normally wary and suspicious of each other, changelings can commune over a distance."
+	speech_verb = "says"
+	colour = "changeling"
+	key = "g"
+	flags = RESTRICTED | HIVEMIND
+
+/datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+
+	if(speaker.mind && speaker.mind.changeling)
+		..(speaker,message,speaker.mind.changeling.changelingID)
+	else
+		..(speaker,message)
+
+/datum/language/corticalborer
+	name = "Cortical Link"
+	desc = "Cortical borers possess a strange link between their tiny minds."
+	speech_verb = "sings"
+	colour = "alien"
+	key = "x"
+	flags = RESTRICTED | HIVEMIND
+
+/datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+
+	var/mob/living/simple_animal/borer/B
+
+	if(istype(speaker,/mob/living/carbon))
+		var/mob/living/carbon/M = speaker
+		B = M.has_brain_worms()
+	else if(istype(speaker,/mob/living/simple_animal/borer))
+		B = speaker
+
+	if(B)
+		speaker_mask = B.truename
+	..(speaker,message,speaker_mask)
+
+/datum/language/binary
+	name = "Robot Talk"
+	desc = "Most human stations support free-use communications protocols and routing hubs for synthetic use."
+	speech_verb = "transmits"
+	colour = "say_quote"
+	key = "b"
+	flags = RESTRICTED | HIVEMIND
+	var/drone_only
+
+/datum/language/binary/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+
+	if(!speaker.binarycheck())
+		return
+
+	if (!message)
+		return
+
+	var/message_start = "<i><span class='game say'>[name], <span class='name'>[speaker.name]</span>"
+	var/message_body = "<span class='message'>[speaker.say_quote(message)], \"[message]\"</span></span></i>"
+
+	for (var/mob/M in dead_mob_list)
+		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
+			M.show_message("[message_start] [message_body]", 2)
+
+	for (var/mob/living/S in living_mob_list)
+
+		if(drone_only && !istype(S,/mob/living/silicon/robot/drone))
+			continue
+		else if(istype(S , /mob/living/silicon/ai))
+			message_start = "<i><span class='game say'>[name], <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(speaker.name)]'><span class='name'>[speaker.name]</span></a>"
+		else if (!S.binarycheck())
+			continue
+
+		S.show_message("[message_start] [message_body]", 2)
+
+	var/list/listening = hearers(1, src)
+	listening -= src
+
+	for (var/mob/living/M in listening)
+		if(istype(M, /mob/living/silicon) || M.binarycheck())
+			continue
+		M.show_message("<i><span class='game say'><span class='name'>synthesised voice</span> <span class='message'>beeps, \"beep beep beep\"</span></span></i>",2)
+
+/datum/language/binary/drone
+	name = "Drone Talk"
+	desc = "A heavily encoded damage control coordination stream."
+	speech_verb = "transmits"
+	colour = "say_quote"
+	key = "d"
+	flags = RESTRICTED | HIVEMIND
+	drone_only = 1
 
 // Language handling.
 /mob/proc/add_language(var/language)
