@@ -31,11 +31,10 @@ var/const/MAX_ACTIVE_TIME = 400
 /obj/item/clothing/mask/facehugger/attack_hand(user as mob)
 
 	if((stat == CONSCIOUS && !sterile))
-		Attach(user)
-		return
-	else
-		..()
-		return
+		if(Attach(user))
+			return
+
+	..()
 
 /obj/item/clothing/mask/facehugger/attack(mob/living/M as mob, mob/user as mob)
 	..()
