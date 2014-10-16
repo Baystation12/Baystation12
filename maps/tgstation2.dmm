@@ -9555,7 +9555,7 @@
 "dBM" = (/turf/simulated/wall/r_wall,/area/research_outpost/maint)
 "dBN" = (/obj/structure/cable,/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/visible/supply,/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 8},/area/research_outpost/maint)
 "dBO" = (/turf/simulated/wall/r_wall,/area/research_outpost/iso1)
-"dBP" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/machinery/door/firedoor/border_only{dir = 4; name = "Firelock"},/obj/machinery/door/airlock/glass_mining{name = "Loading area"; req_access_txt = "65"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/research_outpost/tempstorage)
+"dBP" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/machinery/door/firedoor/border_only{dir = 4; name = "Firelock"},/obj/machinery/door/airlock/glass_mining{name = "Loading area"; req_access_txt = "0"; req_one_access_txt = "54;65"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor,/area/research_outpost/tempstorage)
 "dBQ" = (/obj/machinery/cell_charger,/obj/structure/table/reinforced{icon_state = "table"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/shuttle/administration/centcom)
 "dBR" = (/turf/simulated/wall/r_wall,/area/research_outpost/iso2)
 "dBS" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_y = 0},/obj/machinery/camera{c_tag = "Research Outpost Expedition Prep"; dir = 2; network = list("Research","SS13")},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/turf/simulated/floor,/area/research_outpost/gearstore)
