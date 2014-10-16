@@ -260,8 +260,11 @@
 	if(ishuman(M))
 		//START HUMAN
 		var/mob/living/carbon/human/H = M
+		var/list/mob_equip = list()
+		if(H.species.hud && H.species.hud.equip_slots)
+			mob_equip = H.species.hud.equip_slots
 
-		if(H.species && !(slot in H.species.hud.equip_slots))
+		if(H.species && !(slot in mob_equip))
 			return 0
 
 		switch(slot)
@@ -306,7 +309,7 @@
 			if(slot_belt)
 				if(H.belt)
 					return 0
-				if(!H.w_uniform)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
@@ -354,7 +357,7 @@
 			if(slot_wear_id)
 				if(H.wear_id)
 					return 0
-				if(!H.w_uniform)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
@@ -364,7 +367,7 @@
 			if(slot_l_store)
 				if(H.l_store)
 					return 0
-				if(!H.w_uniform)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
@@ -375,7 +378,7 @@
 			if(slot_r_store)
 				if(H.r_store)
 					return 0
-				if(!H.w_uniform)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
 					if(!disable_warning)
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
@@ -387,7 +390,7 @@
 			if(slot_s_store)
 				if(H.s_store)
 					return 0
-				if(!H.wear_suit)
+				if(!H.wear_suit && (slot_wear_suit in mob_equip))
 					if(!disable_warning)
 						H << "\red You need a suit before you can attach this [name]."
 					return 0
