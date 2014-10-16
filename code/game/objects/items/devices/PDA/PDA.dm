@@ -883,7 +883,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(tap)
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
-	var/t = input(U, "Please enter message", name, null) as text
+	var/t = input(U, "Please enter message", P.name, null) as text
 	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
 	if (!t || !istype(P))
 		return
