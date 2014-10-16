@@ -19,7 +19,7 @@ var/list/robot_verbs_default = list(
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 5
+	var/integrated_light_power = 6
 
 //Hud stuff
 
@@ -413,7 +413,7 @@ var/list/robot_verbs_default = list(
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(6) // 1.5x luminosity of flashlight
+		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
 	else
 		SetLuminosity(0)
 
