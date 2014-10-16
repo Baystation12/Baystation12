@@ -1051,7 +1051,6 @@
 #include "code\modules\mob\living\silicon\robot\robot_items.dm"
 #include "code\modules\mob\living\silicon\robot\robot_modules.dm"
 #include "code\modules\mob\living\silicon\robot\robot_movement.dm"
-#include "code\modules\mob\living\silicon\robot\robot_powers.dm"
 #include "code\modules\mob\living\silicon\robot\wires.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone_abilities.dm"
