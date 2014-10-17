@@ -15,7 +15,7 @@
 
 	var/list/choices = list()
 	for(var/mob/living/M in view(1,src))
-		if(!istype(M,/mob/living/silicon) || !Adjacent(M))
+		if(!istype(M,/mob/living/silicon) && Adjacent(M))
 			choices += M
 	choices -= src
 
