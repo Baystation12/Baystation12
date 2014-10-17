@@ -115,6 +115,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	if(istype(C) && locate(/datum/organ/internal/xenos/hivenode) in C.internal_organs)
 		return
 
+
 	attached++
 	spawn(MAX_IMPREGNATION_TIME)
 		attached = 0
@@ -146,6 +147,7 @@ var/const/MAX_ACTIVE_TIME = 400
 			target.visible_message("\red \b [src] tears [W] off of [target]'s face!")
 
 		target.equip_to_slot(src, slot_wear_mask)
+		target.contents += src // Monkey sanity check - Snapshot
 
 		if(!sterile) L.Paralyse(MAX_IMPREGNATION_TIME/6) //something like 25 ticks = 20 seconds with the default settings
 	else if (iscorgi(M))

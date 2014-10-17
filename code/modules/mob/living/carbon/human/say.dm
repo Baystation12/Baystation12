@@ -126,7 +126,7 @@
 
 	var/sound/speech_sound
 	var/sound_vol
-	if(species.speech_sounds && prob(20))
+	if(species.speech_sounds && prob(species.speech_chance))
 		speech_sound = sound(pick(species.speech_sounds))
 		sound_vol = 50
 
@@ -154,9 +154,7 @@
 
 				if(findtext(temp, "*", 1, 2))	//emotes
 					return
-				world << "Text after stuff is [temp]"
 				temp = copytext(trim_left(temp), 1, rand(5,8))
-				world << "Text after trimming is [temp]"
 
 				var/trimmed = trim_left(temp)
 				if(length(trimmed))
