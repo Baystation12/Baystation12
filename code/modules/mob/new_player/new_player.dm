@@ -147,10 +147,10 @@
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
-					return 0
+			//	var/datum/species/S = all_species[client.prefs.species]
+			//	if(!(S.flags & IS_WHITELISTED))
+			//		src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+			//		return 0
 
 			LateChoices()
 
