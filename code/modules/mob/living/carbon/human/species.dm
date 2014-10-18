@@ -229,7 +229,6 @@
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
-	gluttonous = 1
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -591,12 +590,12 @@
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")
-	damage = 10
+	damage = 7
 	shredding = 1
 
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("maul")
-	damage = 15
+	damage = 12
 	shredding = 1
 
 /datum/hud_data
