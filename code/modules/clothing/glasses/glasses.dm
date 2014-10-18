@@ -52,6 +52,10 @@
 	icon_state = "purple"
 	item_state = "glasses"
 
+/obj/item/clothing/glasses/science/New()
+	..()
+	overlay = global_hud.science
+
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
 	desc = "You can totally see in the dark now!"
