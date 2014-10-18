@@ -15,6 +15,7 @@
 	desc = "Smells nice."
 	item_state = "hairflower"
 	flags = FPRINT|TABLEPASS
+	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
 /obj/item/clothing/head/powdered_wig
