@@ -18,7 +18,7 @@
 	item_state = "armor"
 	blood_overlay_type = "armor"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 60, bullet = 20, laser = 60, energy = 15, bomb = 35, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
@@ -33,6 +33,13 @@
 	item_state = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
+/obj/item/clothing/suit/armor/vest/protective
+	name = "Protective vest"
+	desc = "Not as strong as Security Armor but enough to protecs against some damage."
+	icon_state = "armorvr"
+	item_state = "armorvr"
+	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+
 
 /obj/item/clothing/suit/armor/riot
 	name = "Riot Suit"
@@ -44,6 +51,13 @@
 	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
+
+/obj/item/clothing/suit/armor/vest/protective
+	name = "Protective vest"
+	desc = "Not as strong as Security Armor but enough to protecs against some damage."
+	icon_state = "armorvr"
+	item_state = "armorvr"
+	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 
 /obj/item/clothing/suit/armor/bulletproof
