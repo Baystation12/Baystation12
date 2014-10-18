@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Aviskree")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi","Avisaran")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -136,7 +136,7 @@
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	quiff
 		name = "Quiff"
@@ -159,7 +159,7 @@
 		name = "Beehive"
 		icon_state = "hair_beehive"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	beehive2
 		name = "Beehive 2"
@@ -170,13 +170,13 @@
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
 		gender = FEMALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	bowl
 		name = "Bowl"
@@ -187,7 +187,7 @@
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	crew
 		name = "Crewcut"
@@ -272,7 +272,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 	jensen
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
@@ -291,7 +291,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
@@ -496,7 +496,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human", "Unathi","Tajaran","Skrell","Vox","Machine","Avisaran")
 
 	watson
 		name = "Watson Mustache"
@@ -537,7 +537,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi")
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -636,62 +636,68 @@
 	taj_ears
 		name = "Tajaran Ears"
 		icon_state = "ears_plain"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_clean
 		name = "Tajara Clean"
 		icon_state = "hair_clean"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_bangs
 		name = "Tajara Bangs"
 		icon_state = "hair_bangs"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_braid
 		name = "Tajara Braid"
 		icon_state = "hair_tbraid"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_shaggy
 		name = "Tajara Shaggy"
 		icon_state = "hair_shaggy"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_mohawk
 		name = "Tajaran Mohawk"
 		icon_state = "hair_mohawk"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_plait
 		name = "Tajara Plait"
 		icon_state = "hair_plait"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_straight
 		name = "Tajara Straight"
 		icon_state = "hair_straight"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_long
 		name = "Tajara Long"
 		icon_state = "hair_long"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_rattail
 		name = "Tajara Rat Tail"
 		icon_state = "hair_rattail"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_spiky
 		name = "Tajara Spiky"
 		icon_state = "hair_tajspiky"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_ears_messy
 		name = "Tajara Messy"
 		icon_state = "hair_messy"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
+
+	avitaj_ears
+		name = "Avisaran Ears"
+		icon_state = "avisaran_hair_clean"
+		species_allowed = list("Avisaran")
+		do_colouration = 0
 
 	vox_quills_short
 		name = "Short Vox Quills"
@@ -703,32 +709,45 @@
 	taj_sideburns
 		name = "Tajara Sideburns"
 		icon_state = "facial_mutton"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_mutton
 		name = "Tajara Mutton"
 		icon_state = "facial_mutton"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_pencilstache
 		name = "Tajara Pencilstache"
 		icon_state = "facial_pencilstache"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_moustache
 		name = "Tajara Moustache"
 		icon_state = "facial_moustache"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_goatee
 		name = "Tajara Goatee"
 		icon_state = "facial_goatee"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	taj_smallstache
 		name = "Tajara Smallsatche"
 		icon_state = "facial_smallstache"
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
+
+	Aviskree_beak_f
+		name = "Aviskree Beak(f)"
+		icon_state = "facial_beak"
+		species_allowed = list("Aviskree")
+		gender = FEMALE
+
+	Aviskree_beak_m
+		name = "Aviskree Beak(m)"
+		icon_state = "facial_beak"
+		species_allowed = list("Aviskree")
+		gender = MALE
+
 
 //skin styles - WIP
 //going to have to re-integrate this with surgery
@@ -750,13 +769,19 @@
 		name = "Default tajaran skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_tajaran.dmi'
-		species_allowed = list("Tajara")
+		species_allowed = list("Tajaran")
 
 	unathi
 		name = "Default Unathi skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_lizard.dmi'
 		species_allowed = list("Unathi")
+
+	Aviskree
+		name = "Default Aviskree skin"
+		icon_state = "default"
+		icon = 'icons/mob/human_races/r_Aviskree.dmi'
+		species_allowed = list("Aviskree")
 
 	skrell
 		name = "Default skrell skin"

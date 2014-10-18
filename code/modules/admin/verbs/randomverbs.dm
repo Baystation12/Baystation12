@@ -178,6 +178,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	switch(mute_type)
 		if(MUTE_IC)			mute_string = "IC (say and emote)"
 		if(MUTE_OOC)		mute_string = "OOC"
+		if(MUTE_LOOC)		mute_string = "LOOC"
 		if(MUTE_PRAY)		mute_string = "pray"
 		if(MUTE_ADMINHELP)	mute_string = "adminhelp, admin PM and ASAY"
 		if(MUTE_DEADCHAT)	mute_string = "deadchat and DSAY"

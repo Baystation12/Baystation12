@@ -20,6 +20,7 @@
 	#define MED_HUD 2 //Medical HUD mode
 
 /mob/living/silicon/New()
+	add_language("Encoded Audio Language", 1)
 	..()
 	add_language("Galactic Common")
 

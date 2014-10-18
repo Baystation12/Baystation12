@@ -305,3 +305,13 @@ Class Procs:
 		I.loc = loc
 	del(src)
 	return 1
+
+/obj/machinery/proc/default_unfasten_wrench(mob/user, obj/item/weapon/wrench/W, time = 20)
+	if(istype(W))
+		user << "<span class='notice'>Now [anchored ? "un" : ""]securing [name]</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, time))
+			anchored = !anchored
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		return 1
+	return 0

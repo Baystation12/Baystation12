@@ -36,6 +36,14 @@
 	icon_state = "stokkey1"
 	uni_append = list(0x044,0xC5D) // 044C5D
 
+/mob/living/carbon/monkey/aviskree
+	name = "Atoc"
+	voice_name = "atoc"
+	speak_emote = list("chrips")
+	icon_state = "atoc1"
+	uni_append = list(0x040,0xC7D)
+
+
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
