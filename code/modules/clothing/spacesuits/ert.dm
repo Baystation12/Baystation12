@@ -24,7 +24,7 @@
 
 /obj/item/clothing/suit/space/rig/ert
 	name = "emergency response team suit"
-	desc = "A suit worn by members of the NanoTrasen Emaergency Response Team. Armoured, space ready, and fire resistant."
+	desc = "A suit worn by members of the NanoTrasen Emergency Response Team. Armoured, space ready, and fire resistant."
 	icon_state = "ert_commander"
 	item_state = "suit-command"
 	w_class = 3
@@ -68,13 +68,13 @@
 //Engineer
 /obj/item/clothing/head/helmet/space/rig/ert/engineer
 	name = "emergency response team engineer helmet"
-	desc = "A helmet worn by engineering members of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured and space ready."
+	desc = "A helmet worn by engineering members of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured and space ready."
 	icon_state = "rig0-ert_engineer"
 	item_color = "ert_engineer"
 
 /obj/item/clothing/suit/space/rig/ert/engineer
 	name = "emergency response team engineer suit"
-	desc = "A suit worn by the engineering of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured, space ready, and fire resistant."
+	desc = "A suit worn by the engineering of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured, space ready, and fire resistant."
 	icon_state = "ert_engineer"
 
 //Medical

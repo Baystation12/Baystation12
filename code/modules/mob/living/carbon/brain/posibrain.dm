@@ -10,7 +10,6 @@
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
-	mob/living/carbon/brain/brainmob = null
 	req_access = list(access_robotics)
 	locked = 0
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
@@ -133,14 +132,13 @@
 /obj/item/device/mmi/posibrain/New()
 
 	src.brainmob = new(src)
+	src.brainmob.add_language("Binary")
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	src.brainmob.real_name = src.brainmob.name
 	src.brainmob.loc = src
 	src.brainmob.container = src
-	src.brainmob.robot_talk_understand = 1
 	src.brainmob.stat = 0
 	src.brainmob.silent = 0
-	src.brainmob.brain_op_stage = 4.0
 	dead_mob_list -= src.brainmob
 
 	..()

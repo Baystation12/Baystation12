@@ -35,9 +35,11 @@
 	icon_state = "bodybag_closed"
 	icon_closed = "bodybag_closed"
 	icon_opened = "bodybag_open"
+	open_sound = 'sound/items/zip.ogg'
+	close_sound = 'sound/items/zip.ogg'
 	var/item_path = /obj/item/bodybag
 	density = 0
-
+	storage_capacity = (mob_size * 2) - 1
 
 	attackby(W as obj, mob/user as mob)
 		if (istype(W, /obj/item/weapon/pen))
@@ -106,20 +108,22 @@
 	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant at the cost of genetic damage."
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
+	store_misc = 0
+	store_items = 0
 	var/used = 0
 
-	open()
-		. = ..()
-		if(used)
-			var/obj/item/O = new/obj/item(src.loc)
-			O.name = "used stasis bag"
-			O.icon = src.icon
-			O.icon_state = "bodybag_used"
-			O.desc = "Pretty useless now.."
-			del(src)
+/obj/structure/closet/body_bag/cryobag/open()
+	. = ..()
+	if(used)
+		var/obj/item/O = new/obj/item(src.loc)
+		O.name = "used stasis bag"
+		O.icon = src.icon
+		O.icon_state = "bodybag_used"
+		O.desc = "Pretty useless now.."
+		del(src)
 
-	MouseDrop(over_object, src_location, over_location)
-		if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-			if(!ishuman(usr))	return
-			usr << "\red You can't fold that up anymore.."
-		..()
+/obj/structure/closet/body_bag/cryobag/MouseDrop(over_object, src_location, over_location)
+	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
+		if(!ishuman(usr))	return
+		usr << "\red You can't fold that up anymore.."
+	..()

@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/var/max_locations = 5
+/mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /mob/living/silicon/ai/proc/InvalidTurf(turf/T as turf)
@@ -45,7 +45,6 @@
 		return 0
 
 	var/obj/machinery/camera/C = track.cameras[camera]
-	track = null
 	src.eyeobj.setLoc(C)
 
 	return
@@ -175,6 +174,13 @@
 	src.track = null
 	ai_actual_track(target)
 
+/mob/living/silicon/ai/proc/ai_cancel_tracking(var/forced = 0)
+	if(!cameraFollow)
+		return
+
+	src << "Follow camera mode [forced ? "terminated" : "ended"]."
+	cameraFollow = null
+
 /mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
 	if(!istype(target))	return
 	var/mob/living/silicon/ai/U = usr
@@ -192,21 +198,17 @@
 			if (istype(target, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = target
 				if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-					U << "Follow camera mode terminated."
-					U.cameraFollow = null
+					U.ai_cancel_tracking(1)
 					return
 				if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-					U << "Follow camera mode terminated."
-					U.cameraFollow = null
+					U.ai_cancel_tracking(1)
 					return
 				if(H.digitalcamo)
-					U << "Follow camera mode terminated."
-					U.cameraFollow = null
+					U.ai_cancel_tracking(1)
 					return
 
 			if(istype(target.loc,/obj/effect/dummy))
-				U << "Follow camera mode ended."
-				U.cameraFollow = null
+				U.ai_cancel_tracking()
 				return
 
 			if (!near_camera(target))
@@ -215,7 +217,7 @@
 				continue
 
 			if(U.eyeobj)
-				U.eyeobj.setLoc(get_turf(target))
+				U.eyeobj.setLoc(get_turf(target), 0)
 			else
 				view_core()
 				return

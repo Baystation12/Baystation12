@@ -18,7 +18,9 @@
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-	
+
+	connect_types = list(1,2) //connects to regular and supply pipes
+
 	var/area/initial_loc
 	level = 1
 	var/area_uid
@@ -64,7 +66,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
-	
+
 	icon = null
 	initial_loc = get_area(loc)
 	if (initial_loc.master)
@@ -102,7 +104,7 @@
 		on = 0
 
 	overlays.Cut()
-	
+
 	var/vent_icon = "vent"
 
 	var/turf/T = get_turf(src)
@@ -111,7 +113,7 @@
 
 	if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 		vent_icon += "h"
-		
+
 	if(welded)
 		vent_icon += "weld"
 	else if(!powered())
@@ -130,7 +132,10 @@
 		if(T.intact && node && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			return
 		else
-			add_underlay(T, node, dir)
+			if(node)
+				add_underlay(T, node, dir, node.icon_connect_type)
+			else
+				add_underlay(T,, dir)
 
 /obj/machinery/atmospherics/unary/vent_pump/hide()
 	update_icon()
@@ -147,7 +152,7 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/process()
 	..()
-	
+
 	if (!node)
 		on = 0
 	if(!can_pump())
@@ -159,27 +164,27 @@
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	var/power_draw = -1
-	
+
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
 	//src.visible_message("DEBUG >>> [src]: pressure_delta = [pressure_delta]")
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
-		if(pump_direction) //internal -> external	
+		if(pump_direction) //internal -> external
 			var/output_volume = environment.volume * environment.group_multiplier
 			var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
 			//src.visible_message("DEBUG >>> [src]: output_volume = [output_volume]L; air_temperature = [air_temperature]K; transfer_moles = [transfer_moles] mol")
-			
+
 			power_draw = pump_gas(src, air_contents, environment, transfer_moles, active_power_usage)
 		else //external -> internal
 			var/output_volume = air_contents.volume + (network? network.volume : 0)
 			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
 			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-			
+
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
-			
+
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
 
 	if (power_draw < 0)
@@ -191,13 +196,13 @@
 		last_power_draw = handle_power_draw(power_draw)
 		if(network)
 			network.update = 1
-	
+
 	return 1
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/get_pressure_delta(datum/gas_mixture/environment)
 	var/pressure_delta = DEFAULT_PRESSURE_DELTA
 	var/environment_pressure = environment.return_pressure()
-	
+
 	if(pump_direction) //internal -> external
 		if(pressure_checks & PRESSURE_CHECK_EXTERNAL)
 			pressure_delta = min(pressure_delta, external_pressure_bound - environment_pressure) //increasing the pressure here
@@ -208,7 +213,7 @@
 			pressure_delta = min(pressure_delta, environment_pressure - external_pressure_bound) //decreasing the pressure here
 		if(pressure_checks & PRESSURE_CHECK_INTERNAL)
 			pressure_delta = min(pressure_delta, internal_pressure_bound - air_contents.return_pressure()) //increasing the pressure here
-	
+
 	return pressure_delta
 
 //Radio remote control
@@ -420,14 +425,16 @@
 	return
 
 /*
-	Alt-click to ventcrawl - Monkeys, aliens, slimes and mice.
+	Alt-click to vent crawl - Monkeys, aliens, slimes and mice.
 	This is a little buggy but somehow that just seems to plague ventcrawl.
 	I am sorry, I don't know why.
 */
-/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
+// Commenting this out for now, it's not critical, stated to be buggy, and seems like
+// a really clumsy way of doing this. ~Z
+/*/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
 	if(istype(ML))
 		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl,/mob/living/simple_animal/mouse/verb/ventcrawl)
 		if(length(ML.verbs & ventcrawl_verbs)) // alien queens have this removed, an istype would be complicated
 			ML.handle_ventcrawl(src)
 			return
-	..()
+	..()*/

@@ -111,7 +111,7 @@
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.verbs -= /mob/proc/changeling_change_species
-	H.set_species(S,null,1) //Until someone moves body colour into DNA, they're going to have to use the default.
+	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
 
 	spawn(10)
 		src.verbs += /mob/proc/changeling_change_species

@@ -380,6 +380,26 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
+/datum/supply_packs/bodybag
+	name = "Body bag crate"
+	contains = list(/obj/item/weapon/storage/box/bodybags,
+                    /obj/item/weapon/storage/box/bodybags,
+                    /obj/item/weapon/storage/box/bodybags)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Body bag crate"
+	group = "Medical"
+
+/datum/supply_packs/cryobag
+	name = "Statis bag crate"
+	contains = list(/obj/item/bodybag/cryobag,
+				    /obj/item/bodybag/cryobag,
+	    			/obj/item/bodybag/cryobag)
+	cost = 50
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Stasis bag crate"
+	group = "Medical"
+
 /datum/supply_packs/virus
 	name = "Virus sample crate"
 /*	contains = list(/obj/item/weapon/reagent_containers/glass/bottle/flu_virion,
@@ -429,6 +449,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 10
 	containertype = /obj/structure/closet/crate
 	containername = "Wooden planks crate"
+	group = "Engineering"
+
+/datum/supply_packs/smescoil
+	name = "Superconducting Magnetic Coil"
+	contains = list(/obj/item/weapon/smes_coil)
+	cost = 150
+	containertype = /obj/structure/closet/crate
+	containername = "Superconducting Magnetic Coil crate"
 	group = "Engineering"
 
 /datum/supply_packs/electrical
@@ -588,6 +616,13 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_robotics
 	group = "Science"
 
+/datum/supply_packs/hoverpod
+	name = "Hoverpod Shipment"
+	contains = list()
+	cost = 75
+	containertype = /obj/structure/largecrate/hoverpod
+	containername = "Hoverpod Crate"
+	group = "Operations"
 
 /datum/supply_packs/robotics
 	name = "Robotics assembly crate"

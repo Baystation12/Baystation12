@@ -161,8 +161,6 @@
 		spawn(5)
 			src.update()
 
-
-
 /obj/machinery/power/apc/proc/make_terminal()
 	// create a terminal object at the same position as original turf loc
 	// wires will attach to this
@@ -503,17 +501,17 @@
 					update_icon()
 				else
 					user << "You fail to [ locked ? "unlock" : "lock"] the APC interface."
-	else if (istype(W, /obj/item/weapon/cable_coil) && !terminal && opened && has_electronics!=2)
+	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics != 2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
 			return
-		var/obj/item/weapon/cable_coil/C = W
-		if(C.amount < 10)
-			user << "\red You need more wires."
+		var/obj/item/stack/cable_coil/C = W
+		if(C.get_amount() < 10)
+			user << "<span class='warning'>You need more wires.</span>"
 			return
 		user << "You start adding cables to the APC frame..."
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 20) && C.amount >= 10)
+		if(do_after(user, 20) && !terminal && opened && has_electronics != 2)
 			var/turf/T = get_turf(src)
 			var/obj/structure/cable/N = T.get_cable_node()
 			if (prob(50) && electrocute_mob(usr, N, N))
@@ -521,12 +519,12 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			C.use(10)
-			user.visible_message(\
-				"\red [user.name] has added cables to the APC frame!",\
-				"You add cables to the APC frame.")
-			make_terminal()
-			terminal.connect_to_network()
+			if (C.use(10))
+				user.visible_message(\
+					"\red [user.name] has added cables to the APC frame!",\
+					"You add cables to the APC frame.")
+				make_terminal()
+				terminal.connect_to_network()
 	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
@@ -539,7 +537,7 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			new /obj/item/weapon/cable_coil(loc,10)
+			new /obj/item/stack/cable_coil(loc,10)
 			user.visible_message(\
 				"\red [user.name] cut the cables and dismantled the power terminal.",\
 				"You cut the cables and dismantle the power terminal.")
@@ -627,15 +625,16 @@
 // attack with hand - remove cell (if cover open) or interact with the APC
 
 /obj/machinery/power/apc/attack_hand(mob/user)
-//	if (!can_use(user)) This already gets called in interact() and in topic()
-//		return
+
 	if(!user)
 		return
+
 	src.add_fingerprint(user)
 
-	//Synthetic human mob goes here.
+	//Human mob special interaction goes here.
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
+
 		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
 			if(emagged || stat & BROKEN)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -663,6 +662,28 @@
 			else
 				user << "There is no charge to draw from that APC."
 			return
+		else if(H.species.can_shred(H))
+			user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
+			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+			var/allcut = 1
+			for(var/wire in apcwirelist)
+				if(!isWireCut(apcwirelist[wire]))
+					allcut = 0
+					break
+			if(beenhit >= pick(3, 4) && wiresexposed != 1)
+				wiresexposed = 1
+				src.update_icon()
+				src.visible_message("\red The [src.name]'s cover flies open, exposing the wires!")
+
+			else if(wiresexposed == 1 && allcut == 0)
+				for(var/wire in apcwirelist)
+					cut(apcwirelist[wire])
+				src.update_icon()
+				src.visible_message("\red The [src.name]'s wires are shredded!")
+			else
+				beenhit += 1
+			return
+
 
 	if(usr == user && opened && (!issilicon(user)))
 		if(cell)
@@ -682,32 +703,6 @@
 	// do APC interaction
 	//user.set_machine(src)
 	src.interact(user)
-
-/obj/machinery/power/apc/attack_alien(mob/living/carbon/alien/humanoid/user)
-	if(!user)
-		return
-	user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
-	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	var/allcut = 1
-	for(var/wire in apcwirelist)
-		if(!isWireCut(apcwirelist[wire]))
-			allcut = 0
-			break
-	if(beenhit >= pick(3, 4) && wiresexposed != 1)
-		wiresexposed = 1
-		src.update_icon()
-		src.visible_message("\red The [src.name]'s cover flies open, exposing the wires!")
-
-	else if(wiresexposed == 1 && allcut == 0)
-		for(var/wire in apcwirelist)
-			cut(apcwirelist[wire])
-		src.update_icon()
-		src.visible_message("\red The [src.name]'s wires are shredded!")
-	else
-		beenhit += 1
-	return
-
-
 
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
@@ -1408,12 +1403,15 @@
 		if (ticker.mode.config_tag == "malfunction")
 			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--
-	stat |= BROKEN
-	operating = 0
-	/*if(occupant)
-		malfvacate(1)*/
-	update_icon()
-	update()
+
+	// Aesthetically much better!
+	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")
+	spawn(rand(2,5))
+		src.visible_message("<span class='notice'>[src]'s screen suddenly explodes in rain of sparks and small debris!</span>")
+		stat |= BROKEN
+		operating = 0
+		update_icon()
+		update()
 
 // overload all the lights in this APC area
 

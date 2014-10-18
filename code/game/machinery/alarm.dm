@@ -68,6 +68,7 @@
 	active_power_usage = 1000 //For heating/cooling rooms. 1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
 	power_channel = ENVIRON
 	req_one_access = list(access_atmospherics, access_engine_equip)
+	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
 	var/frequency = 1439
 	//var/skipprocess = 0 //Experimenting
@@ -101,6 +102,14 @@
 	var/phoron_dangerlevel = 0
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
+
+	var/apply_danger_level = 1
+	var/post_alert = 1
+
+/obj/machinery/alarm/monitor
+	apply_danger_level = 0
+	breach_detection = 0
+	post_alert = 0
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -216,7 +225,7 @@
 			regulating_temperature = 0
 			visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click as a faint electronic humming stops.")
-	
+
 	if (regulating_temperature)
 		if(target_temperature > T0C + MAX_TEMPERATURE)
 			target_temperature = T0C + MAX_TEMPERATURE
@@ -227,26 +236,26 @@
 		var/datum/gas_mixture/gas
 		gas = environment.remove(0.25*environment.total_moles)
 		if(gas)
-			
+
 			if (gas.temperature <= target_temperature)	//gas heating
 				var/energy_used = min( gas.get_thermal_energy_change(target_temperature) , active_power_usage)
-				
+
 				gas.add_thermal_energy(energy_used)
 				//use_power(energy_used, ENVIRON) //handle by update_use_power instead
 			else	//gas cooling
 				var/heat_transfer = min(abs(gas.get_thermal_energy_change(target_temperature)), active_power_usage)
-				
+
 				//Assume the heat is being pumped into the hull which is fixed at 20 C
 				//none of this is really proper thermodynamics but whatever
-				
+
 				var/cop = gas.temperature/T20C	//coefficient of performance -> power used = heat_transfer/cop
-				
+
 				heat_transfer = min(heat_transfer, cop * active_power_usage)	//this ensures that we don't use more than active_power_usage amount of power
-				
+
 				heat_transfer = -gas.add_thermal_energy(-heat_transfer)	//get the actual heat transfer
-				
+
 				//use_power(heat_transfer / cop, ENVIRON)	//handle by update_use_power instead
-			
+
 			environment.merge(gas)
 
 /obj/machinery/alarm/proc/overall_danger_level(var/datum/gas_mixture/environment)
@@ -412,7 +421,7 @@
 	for (var/area/RA in alarm_area.related)
 		for (var/obj/machinery/alarm/AA in RA)
 			AA.mode = mode
-	
+
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
@@ -445,12 +454,15 @@
 				send_signal(device_id, list("power"= 0) )
 
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
-	if (alarm_area.atmosalert(new_danger_level))
+	if (apply_danger_level && alarm_area.atmosalert(new_danger_level))
 		post_alert(new_danger_level)
 
 	update_icon()
 
 /obj/machinery/alarm/proc/post_alert(alert_level)
+	if(!post_alert)
+		return
+
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(alarm_frequency)
 	if(!frequency)
 		return
@@ -1112,21 +1124,17 @@ table tr:first-child th:first-child { border: none;}
 			return
 
 		if(1)
-			if(istype(W, /obj/item/weapon/cable_coil))
-				var/obj/item/weapon/cable_coil/coil = W
-				if(coil.amount < 5)
-					user << "You need more cable for this!"
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/C = W
+				if (C.use(5))
+					user << "<span class='notice'>You wire \the [src].</span>"
+					buildstage = 2
+					update_icon()
+					first_run()
 					return
-
-				user << "You wire \the [src]!"
-				coil.amount -= 5
-				if(!coil.amount)
-					del(coil)
-
-				buildstage = 2
-				update_icon()
-				first_run()
-				return
+				else
+					user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+					return
 
 			else if(istype(W, /obj/item/weapon/crowbar))
 				user << "You start prying out the circuit."
@@ -1302,21 +1310,21 @@ FIRE ALARM
 						user.visible_message("\red [user] has reconnected [src]'s detecting unit!", "You have reconnected [src]'s detecting unit.")
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
-			if(1)
-				if(istype(W, /obj/item/weapon/cable_coil))
-					var/obj/item/weapon/cable_coil/coil = W
-					if(coil.amount < 5)
-						user << "You need more cable for this!"
-						return
-
-					coil.amount -= 5
-					if(!coil.amount)
-						del(coil)
-
-					buildstage = 2
-					user << "You wire \the [src]!"
+				else if (istype(W, /obj/item/weapon/wirecutters))
+					user.visible_message("\red [user] has cut the wires inside \the [src]!", "You have cut the wires inside \the [src].")
+					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+					buildstage = 1
 					update_icon()
-
+			if(1)
+				if(istype(W, /obj/item/stack/cable_coil))
+					var/obj/item/stack/cable_coil/C = W
+					if (C.use(5))
+						user << "<span class='notice'>You wire \the [src].</span>"
+						buildstage = 2
+						return
+					else
+						user << "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>"
+						return
 				else if(istype(W, /obj/item/weapon/crowbar))
 					user << "You pry out the circuit!"
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)

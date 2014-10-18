@@ -9,7 +9,7 @@
 	if(!holder)	return
 
 	if(master_controller && master_controller.asteroid_ore_map)
-		master_controller.asteroid_ore_map.print_distribution_map()
+		master_controller.asteroid_ore_map.print_distribution_map(usr)
 
 /client/proc/remake_distribution_map()
 	set category = "Debug"

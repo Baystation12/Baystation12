@@ -231,6 +231,7 @@ emp_act
 
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
+	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
 	apply_damage(I.force, I.damtype, affecting, armor, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
@@ -277,6 +278,9 @@ emp_act
 				if(bloody)
 					bloody_body(src)
 
+	if(Iforce > 10 || Iforce >= 5 && prob(33))
+		forcesay(hit_appends)	//forcesay checks stat already
+
 	//Melee weapon embedded object code.
 	if (I.damtype == BRUTE && !I.is_robot_module())
 		var/damage = I.force
@@ -296,6 +300,15 @@ emp_act
 /mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = 5)
 	if(istype(AM,/obj/))
 		var/obj/O = AM
+
+		if(in_throw_mode && !get_active_hand() && speed <= 5)	//empty active hand and we're in throw mode
+			if(canmove && !restrained())
+				if(isturf(O.loc))
+					put_in_active_hand(O)
+					visible_message("<span class='warning'>[src] catches [O]!</span>")
+					throw_mode_off()
+					return
+
 		var/dtype = BRUTE
 		if(istype(O,/obj/item/weapon))
 			var/obj/item/weapon/W = O

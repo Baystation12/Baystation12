@@ -88,15 +88,18 @@
 	src.view_range = num
 	cameranet.updateVisibility(src, 0)
 
-/obj/machinery/camera/attack_paw(mob/living/carbon/alien/humanoid/user as mob)
+/obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
+
 	if(!istype(user))
 		return
-	status = 0
-	visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
-	playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
-	icon_state = "[initial(icon_state)]1"
-	add_hiddenprint(user)
-	deactivate(user,0)
+
+	if(user.species.can_shred(user))
+		status = 0
+		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
+		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+		icon_state = "[initial(icon_state)]1"
+		add_hiddenprint(user)
+		deactivate(user,0)
 
 /obj/machinery/camera/attackby(W as obj, mob/living/user as mob)
 
@@ -281,3 +284,11 @@
 		return 1
 	busy = 0
 	return 0
+
+/obj/machinery/camera/proc/is_functional()
+	if(istype(loc,/mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = loc
+		if(!R.stat && R.is_component_functioning("camera"))
+			return 1
+		return 0
+	return status

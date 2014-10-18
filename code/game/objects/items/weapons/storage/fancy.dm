@@ -37,27 +37,6 @@
 
 	return
 
-
-
-/*
- * Donut Box
- */
-
-/obj/item/weapon/storage/fancy/donut_box
-	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
-	icon_type = "donut"
-	name = "donut box"
-	storage_slots = 6
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/donut")
-
-
-/obj/item/weapon/storage/fancy/donut_box/New()
-	..()
-	for(var/i=1; i <= storage_slots; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
-	return
-
 /*
  * Egg Box
  */
