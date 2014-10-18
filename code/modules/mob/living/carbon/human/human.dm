@@ -9,7 +9,6 @@
 	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
-<<<<<<< .merge_file_a04852
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
@@ -45,8 +44,6 @@
 	h_style = "blue IPC screen"
 	..(new_loc, "Machine")
 
-=======
->>>>>>> .merge_file_a03864
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
 	if(!dna)

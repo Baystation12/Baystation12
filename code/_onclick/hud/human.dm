@@ -212,16 +212,6 @@
 		src.adding += using
 
 	if(hud_data.has_resist)
-	inv_box = new /obj/screen/inventory() //PDA Slot
-	inv_box.name = "pda"
-	inv_box.dir = NORTH
-	inv_box.icon = ui_style
-	inv_box.icon_state = "pda"
-	inv_box.screen_loc = ui_pda
-	inv_box.slot_id = slot_wear_pda
-	inv_box.layer = 19
-	src.adding += inv_box
-
 		using = new /obj/screen()
 		using.name = "resist"
 		using.icon = ui_style

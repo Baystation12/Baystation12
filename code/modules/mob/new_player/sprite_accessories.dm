@@ -496,11 +496,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-<<<<<<< .merge_file_a02180
 		species_allowed = list("Human", "Unathi","Tajaran","Skrell","Vox","Machine","Avisaran")
-=======
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
->>>>>>> .merge_file_a04572
 
 	watson
 		name = "Watson Mustache"
