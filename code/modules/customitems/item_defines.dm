@@ -232,6 +232,15 @@
 	icon_on = "guessipon"
 	icon_off = "guessip"
 
+///////////////////////////// Jarcolr - Uberto Dandolo - Painted secure briefcase /////////////
+
+/obj/item/weapon/storage/secure/briefcase/fluff/uberto_dandolo
+	name = "painted secure briefcase"
+	desc = "A bulky briefcase with a combination lock. It features the color green, white and red, and a golden eagle in the middle."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "painted_secure"
+	item_state = "painted_secure"
+
 ///////////////////////////// Ziepes - Janis Godmanis - Red Zippo //////////////////////
 
 /obj/item/weapon/flame/lighter/zippo/fluff/janis_godmanis
@@ -241,6 +250,14 @@
 	icon_state = "redzippo"
 	icon_on = "redzippoon"
 	icon_off = "redzippo"
+
+////////////////////////////// Tudoreleuu - Emilia Scotts - Customized pAI /////////////
+
+/obj/item/device/paicard/fluff/emilia_scotts
+	name = "Customized pAI unit"
+	desc = "It seems to be a pAI Unit, albeit in a different shell. It acts exactly like the normal one. "
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "customized_pai"
 
 ////////////////////////////// Vivallion - Isaac Jachym - Butterfly Lighter ////////////
 
@@ -789,6 +806,12 @@
 	icon_state = "adapted_h"
 	icon = 'icons/obj/custom_items.dmi'
 
+////////////////////////////// Jarcolr - Uberto Dandolo - Feathered trilby /////////////////////
+
+/obj/item/clothing/head/feather/fluff/uberto_dandolo
+	name = "Feathered trilby"
+	desc = "A sharp, stylish hat with a feather."
+
 //////////////////////////////////////////////////////////
 ///////////////////// Belts //////////////////////////////
 //////////////////////////////////////////////////////////
@@ -986,6 +1009,22 @@
 	item_color = "harper_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
+//////////////////// Layla's Dress - Layla Davies-Halabi - sabirm ///////////////
+
+/obj/item/clothing/under/fluff/layla_davieshalabi
+	name = "White floral sundress"
+	desc = "A loose, white sundress decorated with purple lilies. It looks well looked-after."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "layladress"
+	item_state = "layladress"
+	item_color = "layladress"
+
+//////////////////// Corporate Cap - Robert Mason - Masterrbc ////////////////////
+
+/obj/item/clothing/head/soft/sec/corp/fluff/robert_mason
+	name = "Corporate Cap"
+	desc = "It's baseball hat in corporate colors."
+
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
 	desc = "A nicely tailored purple dress made for the taller woman."
@@ -1080,6 +1119,17 @@
 	item_state = "lillian_dress"
 	item_color = "lillian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+////// Cybernetic Casings - Parker Eliza - MrSnapwalk
+/obj/item/clothing/under/fluff/parkereliza
+	name = "cybernetic casings"
+	desc = "A set of somewhat bulky white casings for robotic limbs, paired with a basic blue tank top and black cargo pants. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "parker_eliza"
+	item_state = "parker_eliza"
+	item_color = "parker_eliza"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+
 
 ////////////// Accessories /////
 

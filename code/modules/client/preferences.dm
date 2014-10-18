@@ -118,6 +118,7 @@ datum/preferences
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
+	var/exploit_record = ""
 	var/disabilities = 0
 
 	var/nanotrasen_relation = "Neutral"
@@ -596,6 +597,13 @@ datum/preferences
 	HTML += "<br>"
 	HTML +="Uplink Type : <b><a href='?src=\ref[user];preference=antagoptions;antagtask=uplinktype;active=1'>[uplinklocation]</a></b>"
 	HTML +="<br>"
+	HTML +="Exploitable information about you : "
+	HTML += "<br>"
+	if(jobban_isbanned(user, "Records"))
+		HTML += "<b>You are banned from using character records.</b><br>"
+	else
+		HTML +="<b><a href=\"byond://?src=\ref[user];preference=records;task=exploitable_record\">[TextPreview(exploit_record,40)]</a></b>"
+	HTML +="<br>"
 	HTML +="<hr />"
 	HTML +="<a href='?src=\ref[user];preference=antagoptions;antagtask=done;active=1'>\[Done\]</a>"
 
@@ -949,6 +957,16 @@ datum/preferences
 				gen_record = genmsg
 				SetRecords(user)
 
+		if(href_list["task"] == "exploitable_record")
+			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
+
+			if(exploitmsg != null)
+				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				exploitmsg = html_encode(exploitmsg)
+
+				exploit_record = exploitmsg
+				SetAntagoptions(user)
+
 	else if (href_list["preference"] == "antagoptions")
 		if(text2num(href_list["active"]) == 0)
 			SetAntagoptions(user)
@@ -1169,7 +1187,227 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajaran" || species == "Skrell" || species == "Aviskree")
+	else if (href_list["preference"] == "antagoptions")
+		if(text2num(href_list["active"]) == 0)
+			SetAntagoptions(user)
+			return
+		if (href_list["antagtask"] == "uplinktype")
+			if (uplinklocation == "PDA")
+				uplinklocation = "Headset"
+			else if(uplinklocation == "Headset")
+				uplinklocation = "None"
+			else
+				uplinklocation = "PDA"
+			SetAntagoptions(user)
+		if (href_list["antagtask"] == "done")
+			user << browse(null, "window=antagoptions")
+			ShowChoices(user)
+		return 1
+
+	else if (href_list["preference"] == "loadout")
+
+		if(href_list["task"] == "input")
+
+			var/list/valid_gear_choices = list()
+
+			for(var/gear_name in gear_datums)
+				var/datum/gear/G = gear_datums[gear_name]
+				if(G.whitelisted && !is_alien_whitelisted(user, G.whitelisted))
+					continue
+				valid_gear_choices += gear_name
+
+			var/choice = input(user, "Select gear to add: ") as null|anything in valid_gear_choices
+
+			if(choice && gear_datums[choice])
+
+				var/total_cost = 0
+
+				if(isnull(gear) || !islist(gear)) gear = list()
+
+				if(gear && gear.len)
+					for(var/gear_name in gear)
+						if(gear_datums[gear_name])
+							var/datum/gear/G = gear_datums[gear_name]
+							total_cost += G.cost
+
+				var/datum/gear/C = gear_datums[choice]
+				total_cost += C.cost
+				if(C && total_cost <= MAX_GEAR_COST)
+					gear += choice
+					user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+				else
+					user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
+
+		else if(href_list["task"] == "remove")
+
+			if(isnull(gear) || !islist(gear))
+				gear = list()
+			if(!gear.len)
+				return
+
+			var/choice = input(user, "Select gear to remove: ") as null|anything in gear
+			if(!choice)
+				return
+
+			for(var/gear_name in gear)
+				if(gear_name == choice)
+					gear -= gear_name
+					break
+
+	switch(href_list["task"])
+		if("random")
+			switch(href_list["preference"])
+				if("name")
+					real_name = random_name(gender)
+				if("age")
+					age = rand(AGE_MIN, AGE_MAX)
+				if("hair")
+					r_hair = rand(0,255)
+					g_hair = rand(0,255)
+					b_hair = rand(0,255)
+				if("h_style")
+					h_style = random_hair_style(gender, species)
+				if("facial")
+					r_facial = rand(0,255)
+					g_facial = rand(0,255)
+					b_facial = rand(0,255)
+				if("f_style")
+					f_style = random_facial_hair_style(gender, species)
+				if("underwear")
+					underwear = rand(1,underwear_m.len)
+					ShowChoices(user)
+				if("undershirt")
+					undershirt = rand(1,undershirt_t.len)
+					ShowChoices(user)
+				if("eyes")
+					r_eyes = rand(0,255)
+					g_eyes = rand(0,255)
+					b_eyes = rand(0,255)
+				if("s_tone")
+					s_tone = random_skin_tone()
+				if("s_color")
+					r_skin = rand(0,255)
+					g_skin = rand(0,255)
+					b_skin = rand(0,255)
+				if("bag")
+					backbag = rand(1,4)
+				/*if("skin_style")
+					h_style = random_skin_style(gender)*/
+				if("all")
+					randomize_appearance_for()	//no params needed
+		if("input")
+			switch(href_list["preference"])
+				if("name")
+					var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
+					if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
+						var/new_name = reject_bad_name(raw_name)
+						if(new_name)
+							real_name = new_name
+						else
+							user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
+
+				if("age")
+					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
+					if(new_age)
+						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+				if("species")
+
+					var/list/new_species = list("Human")
+					var/prev_species = species
+					var/whitelisted = 0
+
+					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
+						for(var/S in whitelisted_species)
+							if(is_alien_whitelisted(user,S))
+								new_species += S
+								whitelisted = 1
+						if(!whitelisted)
+							alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
+					else //Not using the whitelist? Aliens for everyone!
+						new_species = whitelisted_species
+
+					species = input("Please select a species", "Character Generation", null) in new_species
+
+					if(prev_species != species)
+						//grab one of the valid hair styles for the newly chosen species
+						var/list/valid_hairstyles = list()
+						for(var/hairstyle in hair_styles_list)
+							var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
+							if(gender == MALE && S.gender == FEMALE)
+								continue
+							if(gender == FEMALE && S.gender == MALE)
+								continue
+							if( !(species in S.species_allowed))
+								continue
+							valid_hairstyles[hairstyle] = hair_styles_list[hairstyle]
+
+						if(valid_hairstyles.len)
+							h_style = pick(valid_hairstyles)
+						else
+							//this shouldn't happen
+							h_style = hair_styles_list["Bald"]
+
+						//grab one of the valid facial hair styles for the newly chosen species
+						var/list/valid_facialhairstyles = list()
+						for(var/facialhairstyle in facial_hair_styles_list)
+							var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
+							if(gender == MALE && S.gender == FEMALE)
+								continue
+							if(gender == FEMALE && S.gender == MALE)
+								continue
+							if( !(species in S.species_allowed))
+								continue
+
+							valid_facialhairstyles[facialhairstyle] = facial_hair_styles_list[facialhairstyle]
+
+						if(valid_facialhairstyles.len)
+							f_style = pick(valid_facialhairstyles)
+						else
+							//this shouldn't happen
+							f_style = facial_hair_styles_list["Shaved"]
+
+						//reset hair colour and skin colour
+						r_hair = 0//hex2num(copytext(new_hair, 2, 4))
+						g_hair = 0//hex2num(copytext(new_hair, 4, 6))
+						b_hair = 0//hex2num(copytext(new_hair, 6, 8))
+
+						s_tone = 0
+
+				if("language")
+					var/languages_available
+					var/list/new_languages = list("None")
+					var/datum/species/S = all_species[species]
+
+					if(config.usealienwhitelist)
+						for(var/L in all_languages)
+							var/datum/language/lang = all_languages[L]
+							if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
+								new_languages += lang
+
+								languages_available = 1
+
+						if(!(languages_available))
+							alert(user, "There are not currently any available secondary languages.")
+					else
+						for(var/L in all_languages)
+							var/datum/language/lang = all_languages[L]
+							if(!(lang.flags & RESTRICTED))
+								new_languages += lang.name
+
+					language = input("Please select a secondary language", "Character Generation", null) in new_languages
+
+				if("metadata")
+					var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
+					if(new_metadata)
+						metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
+
+				if("b_type")
+					var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
+					if(new_b_type)
+						b_type = new_b_type
+
+				if("hair")
+					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1249,7 +1487,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajaran" || species == "Skrell" || species == "Aviskree")
+					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1520,6 +1758,7 @@ datum/preferences
 	character.med_record = med_record
 	character.sec_record = sec_record
 	character.gen_record = gen_record
+	character.exploit_record = exploit_record
 
 	character.gender = gender
 	character.age = age
@@ -1546,6 +1785,10 @@ datum/preferences
 	character.h_style = h_style
 	character.f_style = f_style
 
+	character.home_system = home_system
+	character.citizenship = citizenship
+	character.personal_faction = faction
+	character.religion = religion
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
@@ -1556,6 +1799,9 @@ datum/preferences
 		var/datum/organ/external/O = character.organs_by_name[name]
 		var/datum/organ/internal/I = character.internal_organs_by_name[name]
 		var/status = organ_data[name]
+
+		if(!I || !O)
+			continue
 
 		if(status == "amputated")
 			O.amputated = 1

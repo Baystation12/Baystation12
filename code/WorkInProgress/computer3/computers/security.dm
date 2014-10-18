@@ -127,8 +127,8 @@
 					if(3.0)
 						dat += "<CENTER><B>Security Record</B></CENTER><BR>"
 						if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
-							var/icon/front = new(active1.fields["photo"], dir = SOUTH)
-							var/icon/side = new(active1.fields["photo"], dir = WEST)
+							var/icon/front = active1.fields["photo_front"]
+							var/icon/side = active1.fields["photo_side"]
 							usr << browse_rsc(front, "front.png")
 							usr << browse_rsc(side, "side.png")
 							dat += text("<table><tr><td>	\
@@ -430,34 +430,11 @@ What a mess.*/
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
-					var/datum/data/record/R = new /datum/data/record()
-					R.fields["name"] = active1.fields["name"]
-					R.fields["id"] = active1.fields["id"]
-					R.name = text("Security Record #[]", R.fields["id"])
-					R.fields["criminal"] = "None"
-					R.fields["mi_crim"] = "None"
-					R.fields["mi_crim_d"] = "No minor crime convictions."
-					R.fields["ma_crim"] = "None"
-					R.fields["ma_crim_d"] = "No major crime convictions."
-					R.fields["notes"] = "No notes."
-					data_core.security += R
-					active2 = R
+					active2 = CreateSecurityRecord(active1.fields["name"], active1.fields["id"])
 					screen = 3
 
 			if ("New Record (General)")
-				var/datum/data/record/G = new /datum/data/record()
-				G.fields["name"] = "New Record"
-				G.fields["id"] = text("[]", add_zero(num2hex(rand(1, 1.6777215E7)), 6))
-				G.fields["rank"] = "Unassigned"
-				G.fields["real_rank"] = "Unassigned"
-				G.fields["sex"] = "Male"
-				G.fields["age"] = "Unknown"
-				G.fields["fingerprint"] = "Unknown"
-				G.fields["p_stat"] = "Active"
-				G.fields["m_stat"] = "Stable"
-				G.fields["species"] = "Human"
-				data_core.general += G
-				active1 = G
+				active1 = CreateGeneralRecord()
 				active2 = null
 
 //FIELD FUNCTIONS

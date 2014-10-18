@@ -637,29 +637,24 @@ datum/objective/capture
 	check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
 		var/captured_amount = 0
 		var/area/centcom/holding/A = locate()
-		for(var/mob/living/carbon/human/M in A)//Humans.
+
+		for(var/mob/living/carbon/human/M in A) // Humans (and subtypes).
+			var/worth = M.species.rarity_value
 			if(M.stat==2)//Dead folks are worth less.
-				captured_amount+=0.5
+				worth*=0.5
 				continue
-			captured_amount+=1
+			captured_amount += worth
+
 		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
 			captured_amount+=0.1
+
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
-		for(var/mob/living/carbon/alien/humanoid/M in A)//Aliens are worth twice as much as humans.
-			if(istype(M, /mob/living/carbon/alien/humanoid/queen))//Queens are worth three times as much as humans.
-				if(M.stat==2)
-					captured_amount+=1.5
-				else
-					captured_amount+=3
-				continue
-			if(M.stat==2)
-				captured_amount+=1
-				continue
-			captured_amount+=2
+
+
 		if(captured_amount<target_amount)
 			return 0
 		return 1
@@ -894,12 +889,12 @@ datum/objective/heist/salvage
 			if(istype(O,/obj/item/stack/sheet))
 				if(O.name == target)
 					S = O
-					total_amount += S.amount
+					total_amount += S.get_amount()
 			for(var/obj/I in O.contents)
 				if(istype(I,/obj/item/stack/sheet))
 					if(I.name == target)
 						S = I
-						total_amount += S.amount
+						total_amount += S.get_amount()
 
 		var/datum/game_mode/heist/H = ticker.mode
 		for(var/datum/mind/raider in H.raiders)
@@ -908,7 +903,7 @@ datum/objective/heist/salvage
 					if(istype(O,/obj/item/stack/sheet))
 						if(O.name == target)
 							var/obj/item/stack/sheet/S = O
-							total_amount += S.amount
+							total_amount += S.get_amount()
 
 		if(total_amount >= target_amount) return 1
 		return 0

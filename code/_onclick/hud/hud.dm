@@ -15,6 +15,8 @@ var/datum/global_hud/global_hud = new()
 	var/list/vimpaired
 	var/list/darkMask
 	var/obj/screen/nvg
+	var/obj/screen/thermal
+	var/obj/screen/meson
 
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
@@ -33,10 +35,24 @@ var/datum/global_hud/global_hud = new()
 
 	nvg = new /obj/screen()
 	nvg.screen_loc = "1,1"
-	nvg.icon = 'icons/obj/nvg_hud_full.dmi'
+	nvg.icon = 'icons/obj/hud_full.dmi'
 	nvg.icon_state = "nvg_hud"
 	nvg.layer = 17
 	nvg.mouse_opacity = 0
+
+	thermal = new /obj/screen()
+	thermal.screen_loc = "1,1"
+	thermal.icon = 'icons/obj/hud_full.dmi'
+	thermal.icon_state = "thermal_hud"
+	thermal.layer = 17
+	thermal.mouse_opacity = 0
+
+	meson = new /obj/screen()
+	meson.screen_loc = "1,1"
+	meson.icon = 'icons/obj/hud_full.dmi'
+	meson.icon_state = "meson_hud"
+	meson.layer = 17
+	meson.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i
@@ -178,15 +194,13 @@ datum/hud/New(mob/owner)
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	if(ishuman(mymob))
-		human_hud(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
+		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
 	else if(ismonkey(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
 		brain_hud(ui_style)
-	else if(islarva(mymob))
-		larva_hud()
 	else if(isalien(mymob))
-		alien_hud()
+		larva_hud()
 	else if(isAI(mymob))
 		ai_hud()
 	else if(isrobot(mymob))

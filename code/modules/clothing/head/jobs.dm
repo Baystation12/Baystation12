@@ -83,6 +83,12 @@
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
 	icon_state = "e_beret_badge"
 	flags = FPRINT | TABLEPASS
+/obj/item/clothing/head/beret/jan
+	name = "purple beret"
+	desc = "A stylish, if purple, beret."
+	icon_state = "purpleberet"
+	flags = FPRINT | TABLEPASS
+
 
 //Medical
 /obj/item/clothing/head/surgery

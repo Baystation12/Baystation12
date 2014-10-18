@@ -16,10 +16,11 @@
 	var/access_janitor = 0
 //	var/access_flora = 0
 	var/access_reagent_scanner = 0
-	var/access_remote_door = 0 //Control some blast doors remotely!!
+	var/access_remote_door = 0 // Control some blast doors remotely!!
 	var/remote_door_id = ""
 	var/access_status_display = 0
 	var/access_quartermaster = 0
+	var/access_detonate_pda = 0
 	var/access_hydroponics = 0
 	var/charges = 0
 	var/mode = null
@@ -200,6 +201,7 @@
 	name = "Detomatix Cartridge"
 	icon_state = "cart"
 	access_remote_door = 1
+	access_detonate_pda = 1
 	remote_door_id = "smindicate" //Make sure this matches the syndicate shuttle's shield/door id!!	//don't ask about the name, testing.
 	charges = 4
 
@@ -263,29 +265,35 @@
 	/*		Power Monitor (Mode: 43 / 433)			*/
 	if(mode==43 || mode==433)
 		var/pMonData[0]
+		var/apcData[0]
 		for(var/obj/machinery/power/monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
-				pMonData[++pMonData.len] = list ("Name" = pMon.name, "ref" = "\ref[pMon]")
+				var/turf/monitorturf = locate(pMon.x,pMon.y,pMon.z)
+				var/area/monitorarea = monitorturf.loc
+				pMonData[++pMonData.len] = list ("Name" = html_encode(monitorarea ? pMon.name + " in " + monitorarea.name : pMon.name), "ref" = "\ref[pMon]")
 				if(isnull(powmonitor)) powmonitor = pMon
 
 		values["powermonitors"] = pMonData
 
-		values["poweravail"] = powmonitor.powernet.avail
-		values["powerload"] = num2text(powmonitor.powernet.viewload,10)
+		if (!isnull(powmonitor.powernet))
+			values["powerconnected"] = 1
+			values["poweravail"] = powmonitor.powernet.avail
+			values["powerload"] = num2text(powmonitor.powernet.viewload,10)
+			var/list/L = list()
+			for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
+				if(istype(term.master, /obj/machinery/power/apc))
+					var/obj/machinery/power/apc/A = term.master
+					L += A
 
-		var/list/L = list()
-		for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
-			if(istype(term.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/A = term.master
-				L += A
+			var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
+			var/list/chg = list(0,1,1)	// Charging: nope, charging, full
+			for(var/obj/machinery/power/apc/A in L)
+				apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
 
-		var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
-		var/list/chg = list(0,1,1)	// Charging: nope, charging, full
-		var/apcData[0]
-		for(var/obj/machinery/power/apc/A in L)
-			apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
+			values["apcs"] = apcData
+		else
+			values["powerconnected"] = 0
 
-		values["apcs"] = apcData
 
 
 

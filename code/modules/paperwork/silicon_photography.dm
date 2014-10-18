@@ -165,3 +165,8 @@ obj/item/device/camera/siliconcam/proc/getsource()
 	else
 		Cinfo = src
 	return Cinfo
+
+/mob/living/silicon/proc/GetPicture()
+	if(!aiCamera)
+		return
+	return aiCamera.selectpicture()

@@ -8,6 +8,7 @@
 		author = "NanoTrasen Editor"
 		channel_name = "Nyx Daily"
 		can_be_redacted = 0
+		message_type = "Story"
 
 	revolution_inciting_event
 
@@ -128,13 +129,6 @@ proc/check_for_newscaster_updates(type)
 			announce_newscaster_news(news)
 
 proc/announce_newscaster_news(datum/news_announcement/news)
-
-	var/datum/feed_message/newMsg = new /datum/feed_message
-	newMsg.author = news.author
-	newMsg.is_admin_message = !news.can_be_redacted
-
-	newMsg.body = news.message
-
 	var/datum/feed_channel/sendto
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		if(FC.channel_name == news.channel_name)
@@ -148,6 +142,12 @@ proc/announce_newscaster_news(datum/news_announcement/news)
 		sendto.locked = 1
 		sendto.is_admin_channel = 1
 		news_network.network_channels += sendto
+
+	var/datum/feed_message/newMsg = new /datum/feed_message
+	newMsg.author = news.author ? news.author : sendto.author
+	newMsg.is_admin_message = !news.can_be_redacted
+	newMsg.body = news.message
+	newMsg.message_type = news.message_type
 
 	sendto.messages += newMsg
 

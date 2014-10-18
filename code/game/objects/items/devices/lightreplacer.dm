@@ -55,10 +55,6 @@
 	var/uses = 0
 	var/emagged = 0
 	var/failmsg = ""
-	// How much to increase per each glass?
-	var/increment = 5
-	// How much to take from the glass?
-	var/decrement = 1
 	var/charge = 1
 
 /obj/item/device/lightreplacer/New()
@@ -78,18 +74,15 @@
 
 	if(istype(W, /obj/item/stack/sheet/glass))
 		var/obj/item/stack/sheet/glass/G = W
-		if(G.amount - decrement >= 0 && uses < max_uses)
-			var/remaining = max(G.amount - decrement, 0)
-			if(!remaining && !(G.amount - decrement) == 0)
-				user << "There isn't enough glass."
-				return
-			G.amount = remaining
-			if(!G.amount)
-				user.drop_item()
-				del(G)
-			AddUses(increment)
-			user << "You insert a piece of glass into the [src.name]. You have [uses] lights remaining."
+		if(uses >= max_uses)
+			user << "<span class='warning'>[src.name] is full."
 			return
+		else if(G.use(1))
+			AddUses(5)
+			user << "<span class='notice'>You insert a piece of glass into the [src.name]. You have [uses] lights remaining.</span>"
+			return
+		else
+			user << "<span class='warning'>You need one sheet of glass to replace lights.</span>"
 
 	if(istype(W, /obj/item/weapon/light))
 		var/obj/item/weapon/light/L = W

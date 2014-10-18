@@ -77,6 +77,13 @@
 	item_state = "dg_suit"
 	item_color = "centcom"
 
+/obj/item/clothing/under/ert
+	name = "ERT tactical uniform"
+	desc = "A short-sleeved black uniform, paired with grey digital-camo cargo pants. It looks very tactical."
+	icon_state = "ert_uniform"
+	item_state = "bl_suit"
+	item_color = "ert_uniform"
+
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
@@ -384,3 +391,73 @@
 	item_state = "sundress"
 	item_color = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/captainformal
+	name = "captain's formal uniform"
+	desc = "A captain's formal-wear, for special occasions."
+	icon_state = "captain_formal"
+	item_state = "by_suit"
+	item_color = "captain_formal"
+
+/obj/item/clothing/under/hosformalmale
+	name = "head of security's formal uniform"
+	desc = "A male head of security's formal-wear, for special occasions."
+	icon_state = "hos_formal_male"
+	item_state = "r_suit"
+	item_color = "hos_formal_male"
+
+/obj/item/clothing/under/hosformalfem
+	name = "head of security's formal uniform"
+	desc = "A female head of security's formal-wear, for special occasions."
+	icon_state = "hos_formal_fem"
+	item_state = "r_suit"
+	item_color = "hos_formal_fem"
+
+/obj/item/clothing/under/assistantformal
+	name = "assistant's formal uniform"
+	desc = "An assistant's formal-wear. Why an assistant needs formal-wear is still unknown."
+	icon_state = "assistant_formal"
+	item_state = "gy_suit"
+	item_color = "assistant_formal"
+
+/obj/item/clothing/under/suit_jacket/charcoal
+	name = "charcoal suit"
+	desc = "A charcoal suit and red tie. Very professional."
+	icon_state = "charcoal_suit"
+	item_state = "charcoal_suit"
+	item_color = "charcoal_suit"
+
+/obj/item/clothing/under/suit_jacket/navy
+	name = "navy suit"
+	desc = "A navy suit and red tie, intended for the station's finest."
+	icon_state = "navy_suit"
+	item_state = "navy_suit"
+	item_color = "navy_suit"
+
+/obj/item/clothing/under/suit_jacket/burgundy
+	name = "burgundy suit"
+	desc = "A burgundy suit and black tie. Somewhat formal."
+	icon_state = "burgundy_suit"
+	item_state = "burgundy_suit"
+	item_color = "burgundy_suit"
+
+/obj/item/clothing/under/suit_jacket/checkered
+	name = "checkered suit"
+	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
+	icon_state = "checkered_suit"
+	item_state = "checkered_suit"
+	item_color = "checkered_suit"
+
+/obj/item/clothing/under/suit_jacket/tan
+	name = "tan suit"
+	desc = "A tan suit with a yellow tie. Smart, but casual."
+	icon_state = "tan_suit"
+	item_state = "tan_suit"
+	item_color = "tan_suit"
+
+/obj/item/clothing/under/serviceoveralls
+	name = "Workman outfit"
+	desc = "The very image of a working man. Not that you're probably doing work."
+	icon_state = "mechanic_s"
+	item_state = "mechanic_s"
+	item_color = "mechanic_s"

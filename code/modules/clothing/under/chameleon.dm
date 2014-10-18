@@ -425,6 +425,7 @@
 	caliber = ".45"
 	origin_tech = "combat=2;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/chameleon"
+	matter = list()
 	var/list/gun_choices = list()
 
 	New()

@@ -160,7 +160,7 @@
 	S["gen_record"]			>> gen_record
 	S["be_special"]			>> be_special
 	S["disabilities"]		>> disabilities
-	S["player_alt_titles"]		>> player_alt_titles
+	S["player_alt_titles"]	>> player_alt_titles
 	S["used_skillpoints"]	>> used_skillpoints
 	S["skills"]				>> skills
 	S["skill_specialization"] >> skill_specialization
@@ -175,6 +175,7 @@
 	//S["skin_style"]			>> skin_style
 
 	S["uplinklocation"] >> uplinklocation
+	S["exploit_record"]	>> exploit_record
 
 	S["UI_style_color"]		<< UI_style_color
 	S["UI_style_alpha"]		<< UI_style_alpha
@@ -182,7 +183,10 @@
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
-	if(isnull(species)) species = "Human"
+
+	if(isnull(species) || !(species in whitelisted_species))
+		species = "Human"
+
 	if(isnull(language)) language = "None"
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
@@ -315,6 +319,7 @@
 	//S["skin_style"]			<< skin_style
 
 	S["uplinklocation"] << uplinklocation
+	S["exploit_record"]	<< exploit_record
 
 	S["UI_style_color"]		<< UI_style_color
 	S["UI_style_alpha"]		<< UI_style_alpha

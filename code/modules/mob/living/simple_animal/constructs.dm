@@ -88,7 +88,7 @@
 		now_pushing = null
 
 
-/mob/living/simple_animal/construct/attack_animal(mob/living/simple_animal/M as mob)
+/mob/living/simple_animal/construct/attack_animal(mob/living/M as mob)
 	if(istype(M, /mob/living/simple_animal/construct/builder))
 		health += 5
 		M.emote("mends some of \the <EM>[src]'s</EM> wounds.")

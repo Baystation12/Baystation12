@@ -51,7 +51,7 @@
 			E.load << block_message
 
 	feedback_timer = 1
-	spawn(5) //Without this timer the feedback becomes horribly spamy
+	spawn(50) //Without this timer the feedback becomes horribly spamy
 		feedback_timer = 0
 
 /obj/machinery/mech_sensor/proc/enabled()
