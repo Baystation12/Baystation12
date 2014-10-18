@@ -47,6 +47,8 @@
 	name = "Sinta'unathi"
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
 	speech_verb = "hisses"
+	ask_verb = "hisses"
+	exclaim_verb = "roars"
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
@@ -55,6 +57,8 @@
 	name = "Siik'tajr"
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
+	ask_verb = "mrowls"
+	exclaim_verb = "yowls"
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
@@ -63,6 +67,8 @@
 	name = "Skrellian"
 	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
 	speech_verb = "warbles"
+	ask_verb = "warbles"
+	exclaim_verb = "warbles"
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
@@ -71,6 +77,8 @@
 	name = "Vox-pidgin"
 	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
 	speech_verb = "shrieks"
+	ask_verb = "creels"
+	exclaim_verb = "SHRIEKS"
 	colour = "vox"
 	key = "v"
 	flags = RESTRICTED
@@ -79,6 +87,8 @@
 	name = "Rootspeak"
 	desc = "A creaking, subvocal language spoken instinctively by the Dionaea. Due to the unique makeup of the average Diona, a phrase of Rootspeak can be a combination of anywhere from one to twelve individual voices and notes."
 	speech_verb = "creaks and rustles"
+	ask_verb = "creaks"
+	exclaim_verb = "rustles"
 	colour = "soghun"
 	key = "q"
 	flags = RESTRICTED
@@ -89,6 +99,14 @@
 	speech_verb = "says"
 	key = "0"
 	flags = RESTRICTED
+
+/datum/language/common/get_spoken_verb(var/msg_end)
+	switch(msg_end)
+		if("!")
+			return pick("exclaims","shouts","yells") //TODO: make the basic proc handle lists of verbs.
+		if("?")
+			return ask_verb
+	return speech_verb
 
 /datum/language/human
 	name = "Sol Common"
@@ -117,6 +135,8 @@
 	colour = "alien"
 	desc = "The common tongue of the xenomorphs."
 	speech_verb = "hisses"
+	ask_verb = "hisses"
+	exclaim_verb = "hisses"
 	key = "4"
 	flags = RESTRICTED
 
@@ -124,6 +144,8 @@
 	name = "Hivemind"
 	desc = "Xenomorphs have the strange ability to commune over a psychic hivemind."
 	speech_verb = "hisses"
+	ask_verb = "hisses"
+	exclaim_verb = "hisses"
 	colour = "alien"
 	key = "a"
 	flags = RESTRICTED | HIVEMIND
@@ -157,6 +179,8 @@
 	name = "Cortical Link"
 	desc = "Cortical borers possess a strange link between their tiny minds."
 	speech_verb = "sings"
+	ask_verb = "sings"
+	exclaim_verb = "sings"
 	colour = "alien"
 	key = "x"
 	flags = RESTRICTED | HIVEMIND
@@ -178,8 +202,10 @@
 /datum/language/binary
 	name = "Robot Talk"
 	desc = "Most human stations support free-use communications protocols and routing hubs for synthetic use."
-	speech_verb = "transmits"
 	colour = "say_quote"
+	speech_verb = "states"
+	ask_verb = "queries"
+	exclaim_verb = "declares"
 	key = "b"
 	flags = RESTRICTED | HIVEMIND
 	var/drone_only
@@ -222,6 +248,8 @@
 	name = "Drone Talk"
 	desc = "A heavily encoded damage control coordination stream."
 	speech_verb = "transmits"
+	ask_verb = "transmits"
+	exclaim_verb = "transmits"
 	colour = "say_quote"
 	key = "d"
 	flags = RESTRICTED | HIVEMIND

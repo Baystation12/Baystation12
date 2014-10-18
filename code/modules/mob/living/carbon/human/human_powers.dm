@@ -14,8 +14,8 @@
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/M in view(6,src))
-		if(!istype(M,/mob/living/silicon))
+	for(var/mob/living/M in view(1,src))
+		if(!istype(M,/mob/living/silicon) && Adjacent(M))
 			choices += M
 	choices -= src
 
@@ -23,13 +23,13 @@
 
 	if(!T || !src || src.stat) return
 
-	if(get_dist(get_turf(T), get_turf(src)) > 6) return
+	if(!Adjacent(T)) return
 
 	if(last_special > world.time)
 		return
 
 	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
-		src << "You cannot leap in your current state."
+		src << "You cannot tackle in your current state."
 		return
 
 	last_special = world.time + 50
