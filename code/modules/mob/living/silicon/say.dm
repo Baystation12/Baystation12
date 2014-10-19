@@ -130,7 +130,7 @@
 			return 1
 
 		else
-			if(message_mode && message_mode in radiochannels)
+			if(message_mode)
 				switch(bot_type)
 					if(IS_AI)
 						if (AI.aiRadio.disabledAi)
