@@ -1,5 +1,5 @@
 /*
-	NUCLEAR EMERGENCY ROUNDTYPE
+	MERCENARY ROUNDTYPE
 */
 
 var/global/list/turf/synd_spawn = list()
@@ -10,7 +10,7 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/nuclear
-	name = "nuclear emergency"
+	name = "mercenary"
 	config_tag = "nuclear"
 	required_players = 15
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
@@ -30,9 +30,8 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/nuclear/announce()
-	world << "<B>The current game mode is - Nuclear Emergency!</B>"
+	world << "<B>The current game mode is - Mercenary!</B>"
 	world << "<B>A [syndicate_name()] Strike Force is approaching [station_name()]!</B>"
-	world << "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
 
 /datum/game_mode/nuclear/can_start()//This could be better, will likely have to recode it later
 	if(!..())
@@ -69,7 +68,7 @@ var/global/list/turf/synd_spawn = list()
 
 	for(var/datum/mind/synd_mind in syndicates)
 		synd_mind.assigned_role = "MODE" //So they aren't chosen for other jobs.
-		synd_mind.special_role = "Syndicate"//So they actually have a special role/N
+		synd_mind.special_role = "Mercenary"//So they actually have a special role/N
 	return 1
 
 
@@ -168,7 +167,7 @@ var/global/list/turf/synd_spawn = list()
 /datum/game_mode/proc/prepare_syndicate_leader(var/datum/mind/synd_mind, var/nuke_code)
 	var/obj/effect/landmark/code_spawn = locate("landmark*Nuclear-Code")
 	if (nuke_code)
-		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
+		synd_mind.store_memory("<B>Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
 		synd_mind.current << "To speak on the strike team's private channel use :t"
 		var/obj/item/weapon/paper/P = new
@@ -198,7 +197,7 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1)
 	if (you_are)
-		syndicate.current << "\blue You are a [syndicate_name()] agent!"
+		syndicate.current << "\blue You are a [syndicate_name()] operative!"
 	show_objectives(syndicate)
 
 /datum/game_mode/proc/random_radio_frequency()
@@ -280,9 +279,9 @@ var/global/list/turf/synd_spawn = list()
 	//derp //Used for tracking if the syndies actually haul the nuke to the station	//no
 	//herp //Used for tracking if the syndies got the shuttle off of the z-level	//NO, DON'T FUCKING NAME VARS LIKE THIS
 
-	if      (!disk_rescued &&  station_was_nuked &&          !syndies_didnt_escape)
+	if(!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
 		feedback_set_details("round_end_result","win - syndicate nuke")
-		world << "<FONT size = 3><B>Syndicate Major Victory!</B></FONT>"
+		world << "<FONT size = 3><B>Mercenary Major Victory!</B></FONT>"
 		world << "<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>"
 
 	else if (!disk_rescued &&  station_was_nuked &&           syndies_didnt_escape)
@@ -312,12 +311,12 @@ var/global/list/turf/synd_spawn = list()
 
 	else if (!disk_rescued                                         && is_operatives_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk not secured")
-		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
+		world << "<FONT size = 3><B>Mercenary Minor Victory!</B></FONT>"
 		world << "<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name()] Operatives!</B>"
 
 	else if (!disk_rescued                                         &&  crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - detonation averted")
-		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
+		world << "<FONT size = 3><B>Mercenary Minor Victory!</B></FONT>"
 		world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued                                         && !crew_evacuated)
@@ -331,7 +330,7 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/proc/auto_declare_completion_nuclear()
 	if( syndicates.len || (ticker && istype(ticker.mode,/datum/game_mode/nuclear)) )
-		var/text = "<FONT size = 2><B>The syndicate operatives were:</B></FONT>"
+		var/text = "<FONT size = 2><B>The mercenaries were:</B></FONT>"
 
 		for(var/datum/mind/syndicate in syndicates)
 

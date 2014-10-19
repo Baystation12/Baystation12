@@ -13,9 +13,6 @@
 	required_players = 1
 	votable = 0 //Remove after testing.
 
-	uplink_welcome = "Syndicate Uplink Console:"
-	uplink_uses = 10
-
 	//Possible roundstart antag types.
 	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","cult") //Readd slug when borer spawn is fixed.
 	var/list/chosen_atypes = list()
@@ -176,7 +173,7 @@
 
 	switch(role)
 		if("syndi")
-			role_text = "Syndicate Operative"
+			role_text = "Mercenary"
 		if("ling")
 			role_text = "Changeling"
 		if("tater")

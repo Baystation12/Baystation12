@@ -209,7 +209,7 @@
 					return
 				Syndicate_announce(input, usr)
 				usr << "\blue Message transmitted."
-				log_say("[key_name(usr)] has made a Syndicate announcement: [input]")
+				log_say("[key_name(usr)] has made an illegal announcement: [input]")
 				centcomm_message_cooldown = 1
 				spawn(300)//10 minute cooldown
 					centcomm_message_cooldown = 0

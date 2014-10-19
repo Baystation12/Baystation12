@@ -9,7 +9,7 @@ var/list/department_radio_keys = list(
 	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
 	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
-	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
+	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
@@ -22,7 +22,7 @@ var/list/department_radio_keys = list(
 	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
 	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
-	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
+	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
 
 	  //kinda localization -- rastaf0
@@ -37,7 +37,7 @@ var/list/department_radio_keys = list(
 	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
 	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
 	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
+	  ":å" = "Mercenary",	"#å" = "Mercenary",		".å" = "Mercenary",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
 )
 
