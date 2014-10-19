@@ -357,6 +357,8 @@
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		if(!E)
+			return
 		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
@@ -410,7 +412,7 @@
 	max_fuel = 40
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
-	origin_tech = "engineering=4;phoron=3"
+	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
 

@@ -142,7 +142,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 	//Here we pick a location and spawn the ninja.
 	if(ninjastart.len == 0)
 		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "carpspawn")
+			if(L.name == "carpspawn" && locate(/turf/simulated) in range(7, L))
 				ninjastart.Add(L)
 
 	var/ninja_key = null
@@ -219,8 +219,8 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		//Xenos and deathsquads take precedence over everything else.
 
 		//Unless the xenos are hiding in a locker somewhere, this'll find em.
-		for(var/mob/living/carbon/alien/humanoid/xeno in player_list)
-			if(istype(xeno))
+		for(var/mob/living/carbon/human/xeno in player_list)
+			if(istype(xeno.species,/datum/species/xenos))
 				xeno_list += xeno
 
 		if(assign_mission)
@@ -230,11 +230,11 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 			if(xeno_list.len>3)//If there are more than three humanoid xenos on the station, time to get dangerous.
 				//Here we want the ninja to murder all the queens. The other aliens don't really matter.
 				var/xeno_queen_list[] = list()
-				for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_list)
-					if(xeno_queen.mind&&xeno_queen.stat!=2)
+				for(var/mob/living/carbon/human/xeno_queen in xeno_list)
+					if(xeno_queen.species.name == "Xenomorph Queen" && xeno_queen.mind && xeno_queen.stat!=2)
 						xeno_queen_list += xeno_queen
 				if(xeno_queen_list.len&&side=="face")//If there are queen about and the probability is 50.
-					for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_queen_list)
+					for(var/mob/living/carbon/human/xeno_queen in xeno_queen_list)
 						var/datum/objective/assassinate/ninja_objective = new
 						ninja_objective.owner = ninja_mind
 						//We'll do some manual overrides to properly set it up.
@@ -375,12 +375,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 			var/directive = generate_ninja_directive(side)
 			new_ninja << "\blue \nYou are an elite mercenary assassin of the Spider Clan, [new_ninja.real_name]. The dreaded \red <B>SPACE NINJA</B>!\blue You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor. Remember your training (initialize your suit by right clicking on it)! \nYour current directive is: \red <B>[directive]</B>"
 			new_ninja.mind.store_memory("<B>Directive:</B> \red [directive]<br>")
-
-			var/obj_count = 1
-			new_ninja << "\blue Your current objectives:"
-			for(var/datum/objective/objective in ninja_mind.objectives)
-				new_ninja << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-				obj_count++
+			show_objectives(new_ninja.mind)
 
 		sent_ninja_to_station = 1//And we're done.
 		return new_ninja//Return the ninja in case we need to reference them later.
@@ -420,7 +415,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(13)
 			directive += "Some disgruntled NanoTrasen employees have been supportive of our operations. Be wary of any mistreatment by command staff."
 		if(14)
-			var/xenorace = pick("Unathi","Tajaran", "Skrellian")
+			var/xenorace = pick("Unathi","Tajara", "Skrell")
 			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
 		if(15)
 			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."
@@ -644,54 +639,66 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	playsound(loc, 'sound/effects/stealthoff.ogg', 75, 1)
 
 //=======//GENERIC VERB MODIFIERS//=======//
+var/list/ninja_verbs_default = list(
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjashift,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjaboost,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjapulse,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjablade,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjastar,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjanet,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
+)
+
+var/list/ninja_verbs_kamikaze = list(
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjaboost,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjapulse,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjablade,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjastar,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjawalk,
+	/obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
+)
+
+var/list/ninja_verbs_equip = list(
+	/obj/item/clothing/suit/space/space_ninja/proc/deinit,
+	/obj/item/clothing/suit/space/space_ninja/proc/spideros,
+	/obj/item/clothing/suit/space/space_ninja/proc/stealth
+)
+
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_equip_verbs()
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/init
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/deinit
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/spideros
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/stealth
+	verbs |= ninja_verbs_equip
+
 	n_gloves.verbs += /obj/item/clothing/gloves/space_ninja/proc/toggled
 
 	s_initialized = 1
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_equip_verbs()
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/init
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/deinit
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/spideros
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/stealth
+	verbs -= ninja_verbs_equip
+
 	if(n_gloves)
 		n_gloves.verbs -= /obj/item/clothing/gloves/space_ninja/proc/toggled
 
 	s_initialized = 0
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_ninja_verbs()
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	verbs |= ninja_verbs_default
 
 	s_initialized=1
 	slowdown=0
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_ninja_verbs()
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-	//verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	verbs -= ninja_verbs_default
 
 //=======//KAMIKAZE VERBS//=======//
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_kamikaze(mob/living/carbon/U)
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
+	verbs -= ninja_verbs_default
+	verbs |= ninja_verbs_kamikaze
 
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/stealth
 
@@ -712,12 +719,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_kamikaze(mob/living/carbon/U)
 	if(kamikaze)
-		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
-		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
-		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
-		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
+		verbs -= ninja_verbs_kamikaze
+		verbs += ninja_verbs_default
 
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/stealth
 		if(n_gloves)

@@ -110,15 +110,16 @@ datum/controller/game_controller/proc/setup_objects()
 			T.broadcast_status()
 
 	//Create the mining ore distribution map.
-	//Create the mining ore distribution map.
 	asteroid_ore_map = new /datum/ore_distribution()
 	asteroid_ore_map.populate_distribution_map()
 
+	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
+	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+		T.updateMineralOverlays()
+		T.name = "asteroid"
+
 	//Set up spawn points.
 	populate_spawn_points()
-
-	//Set up gear list.
-	populate_gear_list()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)
@@ -271,9 +272,17 @@ datum/controller/game_controller/proc/process_diseases()
 		active_diseases.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_machines()
+	process_machines_sort()
 	process_machines_process()
 	process_machines_power()
 	process_machines_rebuild()
+
+/var/global/machinery_sort_required = 0
+datum/controller/game_controller/proc/process_machines_sort()
+	if(machinery_sort_required)
+		machinery_sort_required = 0
+		machines = dd_sortedObjectList(machines)
+
 datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)
@@ -292,10 +301,16 @@ datum/controller/game_controller/proc/process_machines_power()
 		var/area/A = active_areas[i]
 		if(A.powerupdate && A.master == A)
 			A.powerupdate -= 1
-			for(var/area/SubArea in A.related)
+			A.clear_usage()
+			for(var/j = 1; j <= A.related.len; j++)
+				var/area/SubArea = A.related[j]
 				for(var/obj/machinery/M in SubArea)
 					if(M)
-						if(M.use_power)
+						//check if the area has power for M's channel
+						//this will keep stat updated in case the machine is moved from one area to another.
+						M.power_change(A)	//we've already made sure A is a master area, above.
+
+						if(!(M.stat & NOPOWER) && M.use_power)
 							M.auto_use_power()
 
 		if(A.apc.len && A.master == A)
@@ -342,7 +357,7 @@ datum/controller/game_controller/proc/process_powernets()
 	while(i<=powernets.len)
 		var/datum/powernet/Powernet = powernets[i]
 		if(Powernet)
-			Powernet.reset()
+			Powernet.process()
 			i++
 			continue
 		powernets.Cut(i,i+1)

@@ -6,7 +6,7 @@
 /datum/event/borer_infestation
 	announceWhen = 400
 
-	var/spawncount = 1
+	var/spawncount = 5
 	var/successSpawn = 0        //So we don't make a command report if nothing gets spawned.
 
 /datum/event/borer_infestation/setup()
@@ -15,8 +15,7 @@
 
 /datum/event/borer_infestation/announce()
 	if(successSpawn)
-		command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
-		world << sound('sound/AI/aliens.ogg')
+		command_announcement.Announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", new_sound = 'sound/AI/aliens.ogg')
 
 /datum/event/borer_infestation/start()
 	var/list/vents = list()

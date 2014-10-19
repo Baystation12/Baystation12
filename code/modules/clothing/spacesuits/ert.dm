@@ -24,13 +24,13 @@
 
 /obj/item/clothing/suit/space/rig/ert
 	name = "emergency response team suit"
-	desc = "A suit worn by members of the NanoTrasen Emaergency Response Team. Armoured, space ready, and fire resistant."
+	desc = "A suit worn by members of the NanoTrasen Emergency Response Team. Armoured, space ready, and fire resistant."
 	icon_state = "ert_commander"
 	item_state = "suit-command"
 	w_class = 3
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 1
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 60)
+	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 100)
 	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank, /obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
 	/obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/device/multitool, \
 	/obj/item/device/radio, /obj/item/device/analyzer, /obj/item/weapon/gun/energy/laser, /obj/item/weapon/gun/energy/pulse_rifle, \
@@ -68,13 +68,13 @@
 //Engineer
 /obj/item/clothing/head/helmet/space/rig/ert/engineer
 	name = "emergency response team engineer helmet"
-	desc = "A helmet worn by engineering members of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured and space ready."
+	desc = "A helmet worn by engineering members of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured and space ready."
 	icon_state = "rig0-ert_engineer"
 	item_color = "ert_engineer"
 
 /obj/item/clothing/suit/space/rig/ert/engineer
 	name = "emergency response team engineer suit"
-	desc = "A suit worn by the engineering of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured, space ready, and fire resistant."
+	desc = "A suit worn by the engineering of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured, space ready, and fire resistant."
 	icon_state = "ert_engineer"
 
 //Medical

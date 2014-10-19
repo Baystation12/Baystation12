@@ -480,7 +480,7 @@ var/global/datum/controller/occupations/job_master
 
 		//TODO: Generalize this by-species
 		if(H.species)
-			if(H.species.name == "Tajaran" || H.species.name == "Unathi")
+			if(H.species.name == "Tajara" || H.species.name == "Unathi")
 				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
 			else if(H.species.name == "Vox")
 				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
@@ -492,8 +492,20 @@ var/global/datum/controller/occupations/job_master
 					H.internal = H.l_hand
 				H.internals.icon_state = "internal1"
 
+		if(istype(H)) //give humans wheelchairs, if they need them.
+			var/datum/organ/external/l_foot = H.get_organ("l_foot")
+			var/datum/organ/external/r_foot = H.get_organ("r_foot")
+			if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+				var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair(H.loc)
+				H.buckled = W
+				H.update_canmove()
+				W.dir = H.dir
+				W.buckled_mob = H
+				W.add_fingerprint(H)
+
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
 

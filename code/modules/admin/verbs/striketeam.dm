@@ -124,7 +124,7 @@ var/global/sent_strike_team = 0
 /mob/living/carbon/human/proc/equip_death_commando(leader_selected = 0)
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(src)
-	R.set_frequency(1341)
+	R.set_frequency(DTH_FREQ)
 	equip_to_slot_or_del(R, slot_l_ear)
 	if (leader_selected == 0)
 		equip_to_slot_or_del(new /obj/item/clothing/under/color/green(src), slot_w_uniform)
@@ -158,9 +158,7 @@ var/global/sent_strike_team = 0
 	equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(src), slot_r_hand)
 
 
-	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(src)//Here you go Deuryn
-	L.imp_in = src
-	L.implanted = 1
+	implant_loyalty(src)
 
 
 

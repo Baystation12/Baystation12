@@ -557,7 +557,7 @@ datum/objective/steal
 
 				for(var/obj/item/I in all_items) //Check for phoron tanks
 					if(istype(I, steal_target))
-						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:phoron) : (I:amount))
+						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:gas["phoron"]) : (I:amount))
 				return found_amount>=target_amount
 
 			if("50 coins (in bag)")
@@ -637,29 +637,24 @@ datum/objective/capture
 	check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
 		var/captured_amount = 0
 		var/area/centcom/holding/A = locate()
-		for(var/mob/living/carbon/human/M in A)//Humans.
+
+		for(var/mob/living/carbon/human/M in A) // Humans (and subtypes).
+			var/worth = M.species.rarity_value
 			if(M.stat==2)//Dead folks are worth less.
-				captured_amount+=0.5
+				worth*=0.5
 				continue
-			captured_amount+=1
+			captured_amount += worth
+
 		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
 			captured_amount+=0.1
+
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
-		for(var/mob/living/carbon/alien/humanoid/M in A)//Aliens are worth twice as much as humans.
-			if(istype(M, /mob/living/carbon/alien/humanoid/queen))//Queens are worth three times as much as humans.
-				if(M.stat==2)
-					captured_amount+=1.5
-				else
-					captured_amount+=3
-				continue
-			if(M.stat==2)
-				captured_amount+=1
-				continue
-			captured_amount+=2
+
+
 		if(captured_amount<target_amount)
 			return 0
 		return 1
@@ -894,12 +889,12 @@ datum/objective/heist/salvage
 			if(istype(O,/obj/item/stack/sheet))
 				if(O.name == target)
 					S = O
-					total_amount += S.amount
+					total_amount += S.get_amount()
 			for(var/obj/I in O.contents)
 				if(istype(I,/obj/item/stack/sheet))
 					if(I.name == target)
 						S = I
-						total_amount += S.amount
+						total_amount += S.get_amount()
 
 		var/datum/game_mode/heist/H = ticker.mode
 		for(var/datum/mind/raider in H.raiders)
@@ -908,7 +903,7 @@ datum/objective/heist/salvage
 					if(istype(O,/obj/item/stack/sheet))
 						if(O.name == target)
 							var/obj/item/stack/sheet/S = O
-							total_amount += S.amount
+							total_amount += S.get_amount()
 
 		if(total_amount >= target_amount) return 1
 		return 0
@@ -931,3 +926,41 @@ datum/objective/heist/inviolate_death
 	check_completion()
 		if(vox_kills > MAX_VOX_KILLS) return 0
 		return 1
+
+//Borer objective(s).
+
+/datum/objective/borer_survive
+	explanation_text = "Survive in a host until the end of the round."
+
+/datum/objective/borer_survive/check_completion()
+	if(owner)
+		var/mob/living/simple_animal/borer/B = owner
+		if(istype(B) && B.stat < 2 && B.host && B.host.stat < 2) return 1
+	return 0
+
+/datum/objective/borer_reproduce
+	explanation_text = "Reproduce at least once."
+
+/datum/objective/borer_reproduce/check_completion()
+	if(owner && owner.current)
+		var/mob/living/simple_animal/borer/B = owner.current
+		if(istype(B) && B.has_reproduced) return 1
+	return 0
+
+/datum/objective/ninja_highlander
+	explanation_text = "You aspire to be a Grand Master of the Spider Clan. Kill all of your fellow acolytes."
+
+/datum/objective/ninja_highlander/check_completion()
+	if(owner)
+		for(var/datum/mind/ninja in ticker.mode.ninjas)
+			if(ninja != owner)
+				if(ninja.current.stat < 2) return 0
+		return 1
+	return 0
+
+/datum/objective/cult_summon
+	explanation_text = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it."
+
+/datum/objective/cult_summon/check_completion()
+	if(locate(/obj/machinery/singularity/narsie/large) in machines) return 1
+	return 0

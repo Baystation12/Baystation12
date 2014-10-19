@@ -30,6 +30,7 @@
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
+	var/photo_size = 3
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	examine()
@@ -54,9 +55,9 @@
 	user << browse_rsc(img, "tmp_photo.png")
 	user << browse("<html><head><title>[name]</title></head>" \
 		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo.png' width='192' style='-ms-interpolation-mode:nearest-neighbor' />" \
+		+ "<img src='tmp_photo.png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
 		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
-		+ "</body></html>", "window=book;size=192x[scribble ? 400 : 192]")
+		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
 	return
 
@@ -125,7 +126,15 @@
 	var/on = 1
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
+	var/size = 3
 
+/obj/item/device/camera/verb/change_size()
+	set name = "Set Photo Focus"
+	set category = "Object"
+	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
+	if(nsize)
+		size = nsize
+		usr << "<span class='notice'>Camera will now take [size]x[size] photos.</span>"
 
 /obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
@@ -157,6 +166,7 @@
 	//Bigger icon base to capture those icons that were shifted to the next tile
 	//i.e. pretty much all wall-mounted machinery
 	var/icon/res = icon('icons/effects/96x96.dmi', "")
+	res.Scale(size*32, size*32)
 	// Initialize the photograph to black.
 	res.Blend("#000", ICON_OVERLAY)
 
@@ -171,7 +181,7 @@
 
 	// Sort the atoms into their layers
 	var/list/sorted = sort_atoms_by_layer(atoms)
-
+	var/center_offset = (size-1)/2 * 32 + 1
 	for(var/i; i <= sorted.len; i++)
 		var/atom/A = sorted[i]
 		if(A)
@@ -184,19 +194,19 @@
 					// If they are, apply that effect to their picture.
 					img.BecomeLying()
 				// Calculate where we are relative to the center of the photo
-				var/xoff = (A.x - center.x) * 32
-				var/yoff = (A.y - center.y) * 32
+				var/xoff = (A.x - center.x) * 32 + center_offset
+				var/yoff = (A.y - center.y) * 32 + center_offset
 				if (istype(A,/atom/movable))
 					xoff+=A:step_x
 					yoff+=A:step_y
-				res.Blend(img, blendMode2iconMode(A.blend_mode), 33 + A.pixel_x + xoff, 33 + A.pixel_y + yoff)
+				res.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
 
 	// Lastly, render any contained effects on top.
 	for(var/turf/the_turf in turfs)
 		// Calculate where we are relative to the center of the photo
-		var/xoff = (the_turf.x - center.x) * 32
-		var/yoff = (the_turf.y - center.y) * 32
-		res.Blend(getFlatIcon(the_turf.loc), blendMode2iconMode(the_turf.blend_mode),33 + xoff,33 + yoff)
+		var/xoff = (the_turf.x - center.x) * 32 + center_offset
+		var/yoff = (the_turf.y - center.y) * 32 + center_offset
+		res.Blend(getFlatIcon(the_turf.loc), blendMode2iconMode(the_turf.blend_mode),xoff,yoff)
 	return res
 
 
@@ -219,53 +229,10 @@
 			mob_detail += "You can also see [A] on the photo[A:health < 75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
 	return mob_detail
 
-
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
+	captureimage(target, user, flag)
 
-	var/x_c = target.x - 1
-	var/y_c = target.y + 1
-	var/z_c	= target.z
-
-
-	var/list/turfs = list()
-	var/mobs = ""
-	for(var/i = 1; i <= 3; i++)
-		for(var/j = 1; j <= 3; j++)
-			var/turf/T = locate(x_c, y_c, z_c)
-			var/mob/dummy = new(T)	//Go go visibility check dummy
-			var/viewer = user
-			if(user.client)		//To make shooting through security cameras possible
-				viewer = user.client.eye
-			if(dummy in viewers(world.view, viewer))
-				turfs.Add(T)
-			mobs += get_mobs(T)
-			dummy.loc = null
-			dummy = null	//Alas, nameless creature	//garbage collect it instead
-			x_c++
-		y_c--
-		x_c = x_c - 3
-
-	var/icon/photoimage = get_icon(turfs, target)
-
-	var/obj/item/weapon/photo/P = new/obj/item/weapon/photo()
-	P.loc = user.loc
-	if(!user.get_inactive_hand())
-		user.put_in_inactive_hand(P)
-	var/icon/small_img = icon(photoimage)
-	var/icon/tiny_img = icon(photoimage)
-	var/icon/ic = icon('icons/obj/items.dmi',"photo")
-	var/icon/pc = icon('icons/obj/bureaucracy.dmi', "photo")
-	small_img.Scale(8, 8)
-	tiny_img.Scale(4, 4)
-	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
-	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
-	P.icon = ic
-	P.tiny = pc
-	P.img = photoimage
-	P.desc = mobs
-	P.pixel_x = rand(-10, 10)
-	P.pixel_y = rand(-10, 10)
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
 
 	pictures_left--
@@ -276,3 +243,73 @@
 	spawn(64)
 		icon_state = icon_on
 		on = 1
+
+/obj/item/device/camera/proc/can_capture_turf(turf/T, mob/user)
+	var/mob/dummy = new(T)	//Go go visibility check dummy
+	var/viewer = user
+	if(user.client)		//To make shooting through security cameras possible
+		viewer = user.client.eye
+	var/can_see = (dummy in viewers(world.view, viewer)) != null
+
+	dummy.loc = null
+	dummy = null	//Alas, nameless creature	//garbage collect it instead
+	return can_see
+
+/obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
+	var/x_c = target.x - (size-1)/2
+	var/y_c = target.y + (size-1)/2
+	var/z_c	= target.z
+	var/list/turfs = list()
+	var/mobs = ""
+	for(var/i = 1; i <= size; i++)
+		for(var/j = 1; j <= size; j++)
+			var/turf/T = locate(x_c, y_c, z_c)
+			if(can_capture_turf(T, user))
+				turfs.Add(T)
+				mobs += get_mobs(T)
+			x_c++
+		y_c--
+		x_c = x_c - size
+
+	var/datum/picture/P = createpicture(target, user, turfs, mobs, flag)
+	printpicture(user, P)
+
+/obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
+	var/icon/photoimage = get_icon(turfs, target)
+
+	var/icon/small_img = icon(photoimage)
+	var/icon/tiny_img = icon(photoimage)
+	var/icon/ic = icon('icons/obj/items.dmi',"photo")
+	var/icon/pc = icon('icons/obj/bureaucracy.dmi', "photo")
+	small_img.Scale(8, 8)
+	tiny_img.Scale(4, 4)
+	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
+	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
+
+	var/datum/picture/P = new()
+	P.fields["author"] = user
+	P.fields["icon"] = ic
+	P.fields["tiny"] = pc
+	P.fields["img"] = photoimage
+	P.fields["desc"] = mobs
+	P.fields["pixel_x"] = rand(-10, 10)
+	P.fields["pixel_y"] = rand(-10, 10)
+	P.fields["size"] = size
+
+	return P
+
+/obj/item/device/camera/proc/printpicture(mob/user, var/datum/picture/P)
+	var/obj/item/weapon/photo/Photo = new/obj/item/weapon/photo()
+	Photo.loc = user.loc
+	if(!user.get_inactive_hand())
+		user.put_in_inactive_hand(Photo)
+	Photo.construct(P)
+
+/obj/item/weapon/photo/proc/construct(var/datum/picture/P)
+	icon = P.fields["icon"]
+	tiny = P.fields["tiny"]
+	img = P.fields["img"]
+	desc = P.fields["desc"]
+	pixel_x = P.fields["pixel_x"]
+	pixel_y = P.fields["pixel_y"]
+	photo_size = P.fields["size"]

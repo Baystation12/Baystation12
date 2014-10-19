@@ -375,6 +375,16 @@ datum/design/aifixer
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/aifixer"
 
+// VERY VERY EXPENSIVE (needs diamonds and stuff)
+datum/design/smes_cell
+	name = "Circuit Design (SMES Cell)"
+	desc = "Allows for the construction of circuit boards used to build an SMES Cell."
+	id = "smes_cell"
+	req_tech = list("powerstorage" = 7, "engineering" = 5) // Higher than obtained by deconstructing existing boards. Needs more RnD effor to make
+	build_type = IMPRINTER
+	materials = list("$glass" = 4000, "sacid" = 40, "$gold" = 1000, "$silver" = 1000, "$diamond" = 500)
+	build_path = "/obj/item/weapon/circuitboard/smes"
+
 ///////////////////////////////////
 //////////AI Module Disks//////////
 ///////////////////////////////////
@@ -739,6 +749,15 @@ datum/design/mech_laser
 	build_path = "/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser"
 	category = "Exosuit Equipment"
 
+datum/design/mech_laser_rigged
+	name = "Exosuit Weapon Design (Jury-rigged Laser)"
+	desc = "Allows for the construction a welder-laser assembly package for non-combat exosuits."
+	id = "mech_laser_rigged"
+	build_type = MECHFAB
+	req_tech = list("combat" = 2, "magnets" = 2)
+	build_path = "/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser"
+	category = "Exosuit Equipment"
+
 datum/design/mech_laser_heavy
 	name = "Exosuit Weapon Design (CH-LC \"Solaris\" Laser Cannon)"
 	desc = "Allows for the construction of CH-LC Laser Cannon."
@@ -746,6 +765,15 @@ datum/design/mech_laser_heavy
 	build_type = MECHFAB
 	req_tech = list("combat" = 4, "magnets" = 4)
 	build_path = "/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy"
+	category = "Exosuit Equipment"
+
+datum/design/mech_ion
+	name = "Exosuit Weapon Design (mkIV Ion Heavy Cannon)"
+	desc = "Allows for the construction of the Ion Cannon."
+	id = "mech_ion"
+	build_type = MECHFAB
+	req_tech = list("combat" = 4, "magnets" = 4)
+	build_path = "/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion"
 	category = "Exosuit Equipment"
 
 datum/design/mech_grenade_launcher
@@ -1227,6 +1255,23 @@ datum/design/mechfab
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mechfab"
 
+datum/design/gas_heater
+	name = "Gas Heating System Board"
+	desc =  "The circuit board for a gas heating system"
+	id = "gasheater"
+	req_tech = list("powerstorage" = 2, "engineering" = 1)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/unary_atmos/heater"
+
+datum/design/gas_cooler
+	name = "Gas Cooling System Board"
+	desc =  "The circuit board for a gas cooling system"
+	id = "gascooler"
+	req_tech = list("magnets" = 2, "engineering" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/unary_atmos/cooler"
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////
@@ -1358,6 +1403,7 @@ datum/design/nanopaste
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/stack/nanopaste"
 
+/* // Removal of loyalty implants. Can't think of a way to add this to the config option.
 datum/design/implant_loyal
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
@@ -1366,6 +1412,7 @@ datum/design/implant_loyal
 	build_type = PROTOLATHE
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/weapon/implant/loyalty"
+*/
 
 datum/design/implant_chem
 	name = "chemical implant"

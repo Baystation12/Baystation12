@@ -1,8 +1,8 @@
 // the SMES
 // stores power
 
-#define SMESMAXCHARGELEVEL 200000
-#define SMESMAXOUTPUT 200000
+#define SMESMAXCHARGELEVEL 250000
+#define SMESMAXOUTPUT 250000
 
 /obj/machinery/power/smes
 	name = "power storage unit"
@@ -15,11 +15,11 @@
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
 	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 1e6		//Current amount of power it holds
+	var/charge = 1.0e6		//Current amount of power it holds
 	var/charging = 0		//1 if it's actually charging, 0 if not
 	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
 	//var/chargecount = 0
-	var/chargelevel = 50000	//Amount of power it tries to charge from powernet
+	var/chargelevel = 0		//Amount of power it tries to charge from powernet
 	var/online = 1			//1 if it's outputting power, 0 if not.
 	var/name_tag = null
 	var/obj/machinery/power/terminal/terminal = null
@@ -29,15 +29,15 @@
 	var/last_online = 0
 	var/open_hatch = 0
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
-	var/input_level_max = SMESMAXCHARGELEVEL
-	var/output_level_max = SMESMAXOUTPUT
+	var/input_level_max = 200000
+	var/output_level_max = 200000
 
 /obj/machinery/power/smes/New()
 	..()
 	spawn(5)
 		if(!powernet)
 			connect_to_network()
-		
+
 		dir_loop:
 			for(var/d in cardinal)
 				var/turf/T = get_step(src, d)
@@ -53,7 +53,6 @@
 			terminal.connect_to_network()
 		updateicon()
 	return
-
 
 /obj/machinery/power/smes/proc/updateicon()
 	overlays.Cut()
@@ -88,32 +87,18 @@
 	var/last_onln = online
 
 	if(terminal)
-		var/excess = terminal.surplus()
+		//If chargemod is set, try to charge
+		//Use charging to let the player know whether we were able to obtain our target load.
+		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
+		if(chargemode)
+			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			charge += actual_load * SMESRATE	// increase the charge
 
-		if(charging)
-			if(excess >= 0)		// if there's power available, try to charge
-				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-				charge += load * SMESRATE	// increase the charge
-				add_load(load)		// add the load to the terminal side network
-
-			else					// if not enough capcity
-				charging = 0		// stop charging
-				//chargecount  = 0
-
-		else
-			if (chargemode && excess > 0 && excess >= chargelevel)
+			if (actual_load >= target_load) // did the powernet have enough power available for us?
 				charging = 1
-		/*	if(chargemode)
-				if(chargecount > rand(3,6))
-					charging = 1
-					chargecount = 0
-
-				if(excess > chargelevel)
-					chargecount++
-				else
-					chargecount = 0
 			else
-				chargecount = 0   */
+				charging = 0
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored
@@ -191,7 +176,8 @@
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
-		terminal.powernet.newload += amount
+		return terminal.powernet.draw_power(amount)
+	return 0
 
 
 /obj/machinery/power/smes/attack_ai(mob/user)
@@ -209,53 +195,59 @@
 		if(!open_hatch)
 			open_hatch = 1
 			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
+			return 0
 		else
 			open_hatch = 0
 			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
-	if (open_hatch)
-		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
-			building_terminal = 1
-			var/obj/item/weapon/cable_coil/CC = W
-			if (CC.amount < 10)
-				user << "<span class='warning'>You need more cables.</span>"
-				building_terminal = 0
-				return
-			if (make_terminal(user))
-				building_terminal = 0
-				return
+			return 0
+
+	if (!open_hatch)
+		user << "<span class='warning'>You need to open access hatch on [src] first!</spann>"
+		return 0
+
+	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
+		building_terminal = 1
+		var/obj/item/stack/cable_coil/CC = W
+		if (CC.get_amount() <= 10)
+			user << "<span class='warning'>You need more cables.</span>"
 			building_terminal = 0
-			CC.use(10)
-			user.visible_message(\
-					"<span class='notice'>[user.name] has added cables to the [src].</span>",\
-					"<span class='notice'>You added cables to the [src].</span>")
-			terminal.connect_to_network()
-			stat = 0
-
-		else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
-			building_terminal = 1
-			var/turf/tempTDir = terminal.loc
-			if (istype(tempTDir))
-				if(tempTDir.intact)
-					user << "<span class='warning'>You must remove the floor plating first.</span>"
-				else
-					user << "<span class='notice'>You begin to cut the cables...</span>"
-					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-					if(do_after(user, 50))
-						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
-							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-							s.set_up(5, 1, src)
-							s.start()
-							building_terminal = 0
-							return
-						new /obj/item/weapon/cable_coil(loc,10)
-						user.visible_message(\
-							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
-							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
-						del(terminal)
+			return 0
+		if (make_terminal(user))
 			building_terminal = 0
+			return 0
+		building_terminal = 0
+		CC.use(10)
+		user.visible_message(\
+				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
+				"<span class='notice'>You added cables to the [src].</span>")
+		terminal.connect_to_network()
+		stat = 0
 
+	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+		building_terminal = 1
+		var/turf/tempTDir = terminal.loc
+		if (istype(tempTDir))
+			if(tempTDir.intact)
+				user << "<span class='warning'>You must remove the floor plating first.</span>"
+			else
+				user << "<span class='notice'>You begin to cut the cables...</span>"
+				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+				if(do_after(user, 50))
+					if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+						s.set_up(5, 1, src)
+						s.start()
+						building_terminal = 0
+						return 0
+					new /obj/item/stack/cable_coil(loc,10)
+					user.visible_message(\
+						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
+						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+					del(terminal)
+		building_terminal = 0
+	return 1
 
-/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(stat & BROKEN)
 		return
@@ -274,7 +266,7 @@
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -386,12 +378,12 @@
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
-	process()
-		capacity = INFINITY
-		charge = INFINITY
-		..()
+	capacity = 9000000
+	output = 250000
 
-
+/obj/machinery/power/smes/magical/process()
+	charge = 5000000
+	..()
 
 /proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
 	var/href = "<A href='?src=\ref[S];rate control=1;[V]"

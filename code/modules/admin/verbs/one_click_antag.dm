@@ -517,24 +517,11 @@ client/proc/one_click_antag()
 	new_vox.mind.special_role = "Vox Raider"
 	new_vox.mutations |= NOCLONE //Stops the station crew from messing around with their DNA.
 
-	//Now apply cortical stack.
-	var/datum/organ/external/affected = new_vox.get_organ("head")
-
-	//To avoid duplicates.
-	for(var/obj/item/weapon/implant/cortical/imp in new_vox.contents)
-		affected.implants -= imp
-		del(imp)
-
-	var/obj/item/weapon/implant/cortical/I = new(new_vox)
-	I.imp_in = new_vox
-	I.implanted = 1
-	affected.implants += I
-	I.part = affected
-
 	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
 		var/datum/game_mode/heist/M = ticker.mode
-		M.cortical_stacks += I
-		M.raiders[new_vox.mind] = I
+		if(new_vox.internal_organs_by_name["stack"])
+			cortical_stacks |= new_vox.internal_organs_by_name["stack"]
+			M.raiders[new_vox.mind] = new_vox.internal_organs_by_name["stack"]
 
 	ticker.mode.traitors += new_vox.mind
 	new_vox.equip_vox_raider()

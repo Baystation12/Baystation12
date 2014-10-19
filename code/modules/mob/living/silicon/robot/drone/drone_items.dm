@@ -80,15 +80,15 @@
 			wrapped = thing
 			break
 
-	if(wrapped) //Already have an item.		
-		
+	if(wrapped) //Already have an item.
+
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
-		
+
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		target.attackby(wrapped,user)
-		
-		//If wrapped did neither get deleted nor put into target, put it back into the gripper.
+
+		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
 		else
@@ -301,7 +301,7 @@
 		else
 			module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
 
-		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/weapon/cable_coil)))
+		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
 			tools += module_string
 		else
 			resources += module_string

@@ -6,6 +6,13 @@
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
+#define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
+
+//radiation constants
+#define STEFAN_BOLTZMANN_CONSTANT		0.0000000567	//W/(m^2*K^4)
+#define COSMIC_RADIATION_TEMPERATURE	3.15		//K
+#define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
+#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -13,10 +20,10 @@
 #define O2STANDARD 0.21
 #define N2STANDARD 0.79
 
+#define MOLES_PHORON_VISIBLE 0.7 //Moles in a standard cell after which phoron is visible
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
 #define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN_DAMAGE are for when a mob breathes poisonous air
 #define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN_DAMAGE are for when a mob breathes poisonous air
 
@@ -131,6 +138,11 @@
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
+
+//XGM gas flags
+#define XGM_GAS_FUEL 1
+#define XGM_GAS_OXIDIZER 2
+#define XGM_GAS_CONTAMINANT 4
 
 //Used to be used by FEA
 //var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
@@ -260,21 +272,23 @@ var/MAX_EXPLOSION_RANGE = 14
 
 // bitflags for clothing parts
 #define HEAD			1
-#define UPPER_TORSO		2
-#define LOWER_TORSO		4
-#define LEG_LEFT		8
-#define LEG_RIGHT		16
-#define LEGS			24
-#define FOOT_LEFT		32
-#define FOOT_RIGHT		64
-#define FEET			96
-#define ARM_LEFT		128
-#define ARM_RIGHT		256
-#define ARMS			384
-#define HAND_LEFT		512
-#define HAND_RIGHT		1024
-#define HANDS			1536
-#define FULL_BODY		2047
+#define FACE			2
+#define EYES			4
+#define UPPER_TORSO		8
+#define LOWER_TORSO		16
+#define LEG_LEFT		32
+#define LEG_RIGHT		64
+#define LEGS			96
+#define FOOT_LEFT		128
+#define FOOT_RIGHT		256
+#define FEET			384
+#define ARM_LEFT		512
+#define ARM_RIGHT		1024
+#define ARMS			1536
+#define HAND_LEFT		2048
+#define HAND_RIGHT		4096
+#define HANDS			6144
+#define FULL_BODY		8191
 
 // bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection()
@@ -479,7 +493,7 @@ var/list/liftable_structures = list(\
 
 	/obj/machinery/autolathe, \
 	/obj/machinery/constructable_frame, \
-	/obj/machinery/hydroponics, \
+	/obj/machinery/portable_atmospherics/hydroponics, \
 	/obj/machinery/computer, \
 	/obj/machinery/optable, \
 	/obj/structure/dispenser, \
@@ -635,6 +649,7 @@ var/list/liftable_structures = list(\
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
+#define SHOW_TYPING 	16384
 
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
@@ -726,27 +741,23 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_BREATHE 2
 #define NO_SCAN 4
 #define NO_PAIN 8
+#define NO_SLIP 16
+#define NO_POISON 32
 
-#define HAS_SKIN_TONE 16
-#define HAS_SKIN_COLOR 32
-#define HAS_LIPS 64
-#define HAS_UNDERWEAR 128
-#define HAS_TAIL 256
-
-#define IS_SLOW 512
+#define HAS_SKIN_TONE 64
+#define HAS_SKIN_COLOR 128
+#define HAS_LIPS 256
+#define HAS_UNDERWEAR 512
 #define IS_PLANT 1024
 #define IS_WHITELISTED 2048
-
-#define RAD_ABSORB 4096
-#define REQUIRE_LIGHT 8192
-
-#define IS_SYNTHETIC 16384
+#define IS_SYNTHETIC 4096
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
 #define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
 #define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
+#define HIVEMIND 16         // Broadcast to all mobs with this language.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -811,5 +822,34 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_VOX 2
 #define IS_SKRELL 3
 #define IS_UNATHI 4
+#define IS_XENOS 5
 
 #define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
+
+
+/*
+	Atmos Machinery
+*/
+#define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
+#define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
+
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
+//Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
+#define ATMOS_PUMP_EFFICIENCY	2.5
+#define ATMOS_FILTER_EFFICIENCY	2.5
+
+//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
+#define MINUMUM_MOLES_TO_PUMP	0.01
+#define MINUMUM_MOLES_TO_FILTER	0.1
+
+//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so for many atmos devices these will control maximum flow rates in L/s
+#define ATMOS_DEFAULT_VOLUME_PUMP	200	//L
+#define ATMOS_DEFAULT_VOLUME_FILTER	200	//L
+#define ATMOS_DEFAULT_VOLUME_MIXER	200	//L
+#define ATMOS_DEFAULT_VOLUME_PIPE	70	//L
+
+var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+
+// Reagent metabolism defines.
+#define FOOD_METABOLISM 0.4
+#define ALCOHOL_METABOLISM 0.1

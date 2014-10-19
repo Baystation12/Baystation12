@@ -21,6 +21,10 @@
 
 /obj/item/projectile/bullet/weakbullet/beanbag		//because beanbags are not bullets
 	name = "beanbag"
+	damage = 20
+	agony = 60
+	embed = 0
+	sharp = 0
 
 /obj/item/projectile/bullet/weakbullet/rubber
 	name = "rubber bullet"

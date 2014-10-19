@@ -3,7 +3,6 @@
 
 var/global/list/obj/item/device/pda/PDAs = list()
 
-
 /obj/item/device/pda
 	name = "PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
@@ -53,6 +52,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/ownjob = null //related to above
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
+
+/obj/item/device/pda/examine()
+	..()
+	if(get_dist(usr, src) <= 1)
+		usr << "The time [worldtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
@@ -221,7 +225,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if (!c) // if the user hasn't selected a PDA file we can't send a message
 			return
 		var/selected = plist[c]
-		create_message(usr, selected)
+		create_message(usr, selected, 0)
 
 
 /obj/item/device/pda/ai/verb/cmd_toggle_pda_receiver()
@@ -328,7 +332,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return
 
 
-/obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	ui_tick++
 	var/datum/nanoui/old_ui = nanomanager.get_open_ui(user, src, "main")
 	var/auto_update = 1
@@ -363,13 +367,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["cart_loaded"] = cartridge ? 1:0
 	if(cartridge)
 		var/cartdata[0]
-
-		if(mode in cartmodes)
-			data["records"] = cartridge.create_NanoUI_values()
-
-		if(mode == 0)
-			cartdata["name"] = cartridge.name
-			cartdata["access"] = list(\
+		cartdata["access"] = list(\
 					"access_security" = cartridge.access_security,\
 					"access_engine" = cartridge.access_engine,\
 					"access_atmos" = cartridge.access_atmos,\
@@ -381,8 +379,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					"access_hydroponics" = cartridge.access_hydroponics,\
 					"access_reagent_scanner" = cartridge.access_reagent_scanner,\
 					"access_remote_door" = cartridge.access_remote_door,\
-					"access_status_display" = cartridge.access_status_display\
+					"access_status_display" = cartridge.access_status_display,\
+					"access_detonate_pda" = cartridge.access_detonate_pda\
 			)
+
+		if(mode in cartmodes)
+			data["records"] = cartridge.create_NanoUI_values()
+
+		if(mode == 0)
+			cartdata["name"] = cartridge.name
 			if(isnull(cartridge.radio))
 				cartdata["radio"] = 0
 			else
@@ -394,7 +399,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					cartdata["radio"] = 3
 
 		if(mode == 2)
-			cartdata["type"] = cartridge.type
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
 
@@ -440,13 +444,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/datum/gas_mixture/environment = T.return_air()
 
 			var/pressure = environment.return_pressure()
-			var/total_moles = environment.total_moles()
+			var/total_moles = environment.total_moles
 
 			if (total_moles)
-				var/o2_level = environment.oxygen/total_moles
-				var/n2_level = environment.nitrogen/total_moles
-				var/co2_level = environment.carbon_dioxide/total_moles
-				var/phoron_level = environment.phoron/total_moles
+				var/o2_level = environment.gas["oxygen"]/total_moles
+				var/n2_level = environment.gas["nitrogen"]/total_moles
+				var/co2_level = environment.gas["carbon_dioxide"]/total_moles
+				var/phoron_level = environment.gas["phoron"]/total_moles
 				var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 				data["aircontents"] = list(\
 					"pressure" = "[round(pressure,0.1)]",\
@@ -462,7 +466,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			data["aircontents"] = list("reading" = 0)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -771,14 +775,18 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 //pAI FUNCTIONS===================================
 		if("pai")
-			switch(href_list["option"])
-				if("1")		// Configure pAI device
-					pai.attack_self(U)
-				if("2")		// Eject pAI device
-					var/turf/T = get_turf_or_move(src.loc)
-					if(T)
-						pai.loc = T
-						pai = null
+			if(pai)
+				if(pai.loc != src)
+					pai = null
+				else
+					switch(href_list["option"])
+						if("1")		// Configure pAI device
+							pai.attack_self(U)
+						if("2")		// Eject pAI device
+							var/turf/T = get_turf_or_move(src.loc)
+							if(T)
+								pai.loc = T
+								pai = null
 
 		else
 			mode = text2num(href_list["choice"])
@@ -871,9 +879,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			id.loc = get_turf(src)
 		id = null
 
-/obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P)
-
-	var/t = input(U, "Please enter message", name, null) as text
+/obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P, var/tap = 1)
+	if(tap)
+		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
+	U.last_target_click = world.time
+	var/t = input(U, "Please enter message", P.name, null) as text
 	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
 	if (!t || !istype(P))
 		return
@@ -1162,24 +1172,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					O << "\red [user] has used [src] on \icon[icon] [A]"
 				var/pressure = A:air_contents.return_pressure()
 
-				var/total_moles = A:air_contents.total_moles()
+				var/total_moles = A:air_contents.total_moles
 
 				user << "\blue Results of analysis of \icon[icon]"
 				if (total_moles>0)
-					var/o2_concentration = A:air_contents.oxygen/total_moles
-					var/n2_concentration = A:air_contents.nitrogen/total_moles
-					var/co2_concentration = A:air_contents.carbon_dioxide/total_moles
-					var/phoron_concentration = A:air_contents.phoron/total_moles
-
-					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-
 					user << "\blue Pressure: [round(pressure,0.1)] kPa"
-					user << "\blue Nitrogen: [round(n2_concentration*100)]%"
-					user << "\blue Oxygen: [round(o2_concentration*100)]%"
-					user << "\blue CO2: [round(co2_concentration*100)]%"
-					user << "\blue Phoron: [round(phoron_concentration*100)]%"
-					if(unknown_concentration>0.01)
-						user << "\red Unknown: [round(unknown_concentration*100)]%"
+					for(var/g in A:air_contents.gas)
+						user << "\blue [gas_data.name[g]]: [round((A:air_contents.gas[g] / total_moles) * 100)]%"
 					user << "\blue Temperature: [round(A:air_contents.temperature-T0C)]&deg;C"
 				else
 					user << "\blue Tank is empty!"
@@ -1191,24 +1190,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 				var/obj/machinery/atmospherics/pipe/tank/T = A
 				var/pressure = T.parent.air.return_pressure()
-				var/total_moles = T.parent.air.total_moles()
+				var/total_moles = T.parent.air.total_moles
 
 				user << "\blue Results of analysis of \icon[icon]"
 				if (total_moles>0)
-					var/o2_concentration = T.parent.air.oxygen/total_moles
-					var/n2_concentration = T.parent.air.nitrogen/total_moles
-					var/co2_concentration = T.parent.air.carbon_dioxide/total_moles
-					var/phoron_concentration = T.parent.air.phoron/total_moles
-
-					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-
 					user << "\blue Pressure: [round(pressure,0.1)] kPa"
-					user << "\blue Nitrogen: [round(n2_concentration*100)]%"
-					user << "\blue Oxygen: [round(o2_concentration*100)]%"
-					user << "\blue CO2: [round(co2_concentration*100)]%"
-					user << "\blue Phoron: [round(phoron_concentration*100)]%"
-					if(unknown_concentration>0.01)
-						user << "\red Unknown: [round(unknown_concentration*100)]%"
+					for(var/g in T.parent.air.gas)
+						user << "\blue [gas_data.name[g]]: [round((T.parent.air.gas[g] / total_moles) * 100)]%"
 					user << "\blue Temperature: [round(T.parent.air.temperature-T0C)]&deg;C"
 				else
 					user << "\blue Tank is empty!"
@@ -1278,7 +1266,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		src.id.loc = get_turf(src.loc)
 	..()
 
-/obj/item/device/pda/clown/HasEntered(AM as mob|obj) //Clown PDA is slippery.
+/obj/item/device/pda/clown/Crossed(AM as mob|obj) //Clown PDA is slippery.
 	if (istype(AM, /mob/living/carbon))
 		var/mob/M =	AM
 		if ((istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP)) || M.m_intent == "walk")

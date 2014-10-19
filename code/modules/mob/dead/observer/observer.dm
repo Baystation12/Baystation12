@@ -179,11 +179,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 
 /mob/dead/observer/Move(NewLoc, direct)
+	following = null
 	dir = direct
 	if(NewLoc)
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
-			S.HasEntered(src)
+			S.Crossed(src)
 
 		return
 	loc = get_turf(src) //Get out of closets and such as a ghost
@@ -197,7 +198,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		x--
 
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
-		S.HasEntered(src)
+		S.Crossed(src)
 
 /mob/dead/observer/examine()
 	if(usr)
@@ -306,6 +307,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		usr << "No area available."
 
 	usr.loc = pick(L)
+	following = null
 
 /mob/dead/observer/verb/follow()
 	set category = "Ghost"
@@ -325,18 +327,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		following = target
 		src << "\blue Now following [target]"
 		spawn(0)
-			var/turf/pos = get_turf(src)
-			while(loc == pos && target && following == target && client)
+			while(target && following == target && client)
 				var/turf/T = get_turf(target)
 				if(!T)
 					break
 				// To stop the ghost flickering.
 				if(loc != T)
 					loc = T
-				pos = loc
 				sleep(15)
-			following = null
-
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
@@ -361,6 +359,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
 				A.loc = T
+				following = null
 			else
 				A << "This mob is not located in the game world."
 /*
@@ -400,7 +399,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/datum/gas_mixture/environment = usr.loc.return_air()
 
 	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles()
+	var/total_moles = environment.total_moles
 
 	src << "\blue <B>Results:</B>"
 	if(abs(pressure - ONE_ATMOSPHERE) < 10)
@@ -408,33 +407,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		src << "\red Pressure: [round(pressure,0.1)] kPa"
 	if(total_moles)
-		var/o2_concentration = environment.oxygen/total_moles
-		var/n2_concentration = environment.nitrogen/total_moles
-		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/phoron_concentration = environment.phoron/total_moles
-
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
-		if(abs(n2_concentration - N2STANDARD) < 20)
-			src << "\blue Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
-		else
-			src << "\red Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
-
-		if(abs(o2_concentration - O2STANDARD) < 2)
-			src << "\blue Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
-		else
-			src << "\red Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
-
-		if(co2_concentration > 0.01)
-			src << "\red CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
-		else
-			src << "\blue CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
-
-		if(phoron_concentration > 0.01)
-			src << "\red Phoron: [round(phoron_concentration*100)]% ([round(environment.phoron,0.01)] moles)"
-
-		if(unknown_concentration > 0.01)
-			src << "\red Unknown: [round(unknown_concentration*100)]% ([round(unknown_concentration*total_moles,0.01)] moles)"
-
+		for(var/g in environment.gas)
+			src << "\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]% ([round(environment.gas[g], 0.01)] moles)"
 		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C"
 		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
 

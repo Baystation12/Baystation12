@@ -3,6 +3,15 @@
 	Uses the same visual objects for all players.
 */
 var/datum/global_hud/global_hud = new()
+var/list/global_huds = list(
+		global_hud.druggy,
+		global_hud.blurry,
+		global_hud.vimpaired,
+		global_hud.darkMask,
+		global_hud.nvg,
+		global_hud.thermal,
+		global_hud.meson,
+		global_hud.science)
 
 /datum/hud/var/obj/screen/grab_intent
 /datum/hud/var/obj/screen/hurt_intent
@@ -15,6 +24,19 @@ var/datum/global_hud/global_hud = new()
 	var/list/vimpaired
 	var/list/darkMask
 	var/obj/screen/nvg
+	var/obj/screen/thermal
+	var/obj/screen/meson
+	var/obj/screen/science
+
+/datum/global_hud/proc/setup_overlay(var/icon_state)
+	var/obj/screen/screen = new /obj/screen()
+	screen.screen_loc = "1,1"
+	screen.icon = 'icons/obj/hud_full.dmi'
+	screen.icon_state = icon_state
+	screen.layer = 17
+	screen.mouse_opacity = 0
+
+	return screen
 
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
@@ -31,12 +53,10 @@ var/datum/global_hud/global_hud = new()
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
 
-	nvg = new /obj/screen()
-	nvg.screen_loc = "1,1"
-	nvg.icon = 'icons/obj/nvg_hud_full.dmi'
-	nvg.icon_state = "nvg_hud"
-	nvg.layer = 17
-	nvg.mouse_opacity = 0
+	nvg = setup_overlay("nvg_hud")
+	thermal = setup_overlay("thermal_hud")
+	meson = setup_overlay("meson_hud")
+	science = setup_overlay("science_hud")
 
 	var/obj/screen/O
 	var/i
@@ -178,15 +198,13 @@ datum/hud/New(mob/owner)
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	if(ishuman(mymob))
-		human_hud(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
+		human_hud(ui_style, ui_color, ui_alpha, mymob) // Pass the player the UI style chosen in preferences
 	else if(ismonkey(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
 		brain_hud(ui_style)
-	else if(islarva(mymob))
-		larva_hud()
 	else if(isalien(mymob))
-		alien_hud()
+		larva_hud()
 	else if(isAI(mymob))
 		ai_hud()
 	else if(isrobot(mymob))

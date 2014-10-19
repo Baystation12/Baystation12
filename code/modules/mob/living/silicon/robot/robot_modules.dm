@@ -22,7 +22,7 @@
 
 
 	New()
-		src.modules += new /obj/item/device/flashlight(src)
+//		src.modules += new /obj/item/device/flashlight(src) // Replaced by verb and integrated light which uses power.
 		src.modules += new /obj/item/device/flash(src)
 		src.emag = new /obj/item/toy/sword(src)
 		src.emag.name = "Placeholder Emag Item"
@@ -60,7 +60,6 @@
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
 	R.add_language("Sinta'unathi", 0)
-	R.add_language("Siik'maas", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
@@ -168,7 +167,8 @@
 	stacktypes = list(
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/plasteel = 10,
-		/obj/item/stack/sheet/rglass = 50
+		/obj/item/stack/sheet/rglass = 50,
+		/obj/item/stack/rods = 50
 		)
 
 	New()
@@ -189,7 +189,7 @@
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/glass = 50,
 		/obj/item/stack/sheet/rglass = 50,
-		/obj/item/weapon/cable_coil = 50,
+		/obj/item/stack/cable_coil = 50,
 		/obj/item/stack/rods = 15,
 		/obj/item/stack/tile/plasteel = 15
 		)
@@ -225,7 +225,7 @@
 		G.amount = 50
 		src.modules += G
 
-		var/obj/item/weapon/cable_coil/W = new /obj/item/weapon/cable_coil(src)
+		var/obj/item/stack/cable_coil/W = new /obj/item/stack/cable_coil(src)
 		W.amount = 50
 		src.modules += W
 
@@ -239,7 +239,7 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/hud/sec(src)
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
-		src.modules += new /obj/item/weapon/melee/baton/loaded(src)
+		src.modules += new /obj/item/weapon/melee/baton/robot(src)
 		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
 		src.modules += new /obj/item/taperoll/police(src)
 		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
@@ -293,7 +293,7 @@
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 
 		var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
-		M.matter = 30
+		M.stored_matter = 30
 		src.modules += M
 
 		src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
@@ -406,7 +406,7 @@
 		/obj/item/stack/tile/plasteel = 15,
 		/obj/item/stack/sheet/metal = 20,
 		/obj/item/stack/sheet/glass = 20,
-		/obj/item/weapon/cable_coil = 30
+		/obj/item/stack/cable_coil = 30
 		)
 
 	New()

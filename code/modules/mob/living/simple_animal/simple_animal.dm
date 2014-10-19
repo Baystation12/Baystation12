@@ -44,17 +44,14 @@
 	var/min_n2 = 0
 	var/max_n2 = 0
 	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
-
+	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
-	var/melee_damage_lower = 0
-	var/melee_damage_upper = 0
-	var/attacktext = "attacks"
-	var/attack_sound = null
-	var/friendly = "nuzzles" //If the mob does no damage with it's attack
-	var/wall_smash = 0 //if they can smash walls
-
-	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
+	melee_damage_lower = 0
+	melee_damage_upper = 0
+	attacktext = "attacks"
+	attack_sound = null
+	friendly = "nuzzles" //If the mob does no damage with it's attack
 
 /mob/living/simple_animal/New()
 	..()
@@ -87,12 +84,9 @@
 	if(health > maxHealth)
 		health = maxHealth
 
-	if(stunned)
-		AdjustStunned(-1)
-	if(weakened)
-		AdjustWeakened(-1)
-	if(paralysis)
-		AdjustParalysis(-1)
+	handle_stunned()
+	handle_weakened()
+	handle_paralysed()
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
@@ -141,41 +135,41 @@
 	//Atmos
 	var/atmos_suitable = 1
 
-	var/atom/A = src.loc		
+	var/atom/A = src.loc
 
 	if(istype(A,/turf))
-		var/turf/T = A	
-		
+		var/turf/T = A
+
 		var/datum/gas_mixture/Environment = T.return_air()
-	
+
 		if(Environment)
-			
+
 			if( abs(Environment.temperature - bodytemperature) > 40 )
 				bodytemperature += ((Environment.temperature - bodytemperature) / 5)
-			
+
 			if(min_oxy)
-				if(Environment.oxygen < min_oxy)
+				if(Environment.gas["oxygen"] < min_oxy)
 					atmos_suitable = 0
 			if(max_oxy)
-				if(Environment.oxygen > max_oxy)
+				if(Environment.gas["oxygen"] > max_oxy)
 					atmos_suitable = 0
 			if(min_tox)
-				if(Environment.phoron < min_tox)
+				if(Environment.gas["phoron"] < min_tox)
 					atmos_suitable = 0
 			if(max_tox)
-				if(Environment.phoron > max_tox)
+				if(Environment.gas["phoron"] > max_tox)
 					atmos_suitable = 0
 			if(min_n2)
-				if(Environment.nitrogen < min_n2)
+				if(Environment.gas["nitrogen"] < min_n2)
 					atmos_suitable = 0
 			if(max_n2)
-				if(Environment.nitrogen > max_n2)
+				if(Environment.gas["nitrogen"] > max_n2)
 					atmos_suitable = 0
 			if(min_co2)
-				if(Environment.carbon_dioxide < min_co2)
+				if(Environment.gas["carbon_dioxide"] < min_co2)
 					atmos_suitable = 0
 			if(max_co2)
-				if(Environment.carbon_dioxide > max_co2)
+				if(Environment.gas["carbon_dioxide"] > max_co2)
 					atmos_suitable = 0
 
 	//Atmos effect
@@ -215,7 +209,7 @@
 		if(act == "scream")	act = "whimper" //ugly hack to stop animals screaming when crushed :P
 		..(act, type, desc)
 
-/mob/living/simple_animal/attack_animal(mob/living/simple_animal/M as mob)
+/mob/living/simple_animal/attack_animal(mob/living/M as mob)
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")
 	else
@@ -231,7 +225,7 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
-	
+
 	adjustBruteLoss(Proj.damage)
 	return 0
 
@@ -256,7 +250,6 @@
 
 			M.put_in_active_hand(G)
 
-			grabbed_by += G
 			G.synch()
 			G.affecting = src
 			LAssailant = M
@@ -273,58 +266,6 @@
 
 	return
 
-/mob/living/simple_animal/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
-
-	switch(M.a_intent)
-
-		if ("help")
-
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src] with its scythe like arm."), 1)
-		if ("grab")
-			if(M == src)
-				return
-			if(!(status_flags & CANPUSH))
-				return
-
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )
-
-			M.put_in_active_hand(G)
-
-			grabbed_by += G
-			G.synch()
-			G.affecting = src
-			LAssailant = M
-
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
-
-		if("hurt", "disarm")
-			var/damage = rand(15, 30)
-			visible_message("\red <B>[M] has slashed at [src]!</B>")
-			adjustBruteLoss(damage)
-
-	return
-
-/mob/living/simple_animal/attack_larva(mob/living/carbon/alien/larva/L as mob)
-
-	switch(L.a_intent)
-		if("help")
-			visible_message("\blue [L] rubs it's head against [src]")
-
-
-		else
-
-			var/damage = rand(5, 10)
-			visible_message("\red <B>[L] bites [src]!</B>")
-
-			if(stat != DEAD)
-				adjustBruteLoss(damage)
-				L.amount_grown = min(L.amount_grown + damage, L.max_grown)
-
 
 /mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
@@ -337,7 +278,7 @@
 
 	var/damage = rand(1, 3)
 
-	if(istype(src, /mob/living/carbon/slime/adult))
+	if(M.is_adult)
 		damage = rand(20, 40)
 	else
 		damage = rand(5, 35)
@@ -354,11 +295,9 @@
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < maxHealth)
-				if(MED.amount >= 1)
+				if(MED.get_amount() >= 1)
 					adjustBruteLoss(-MED.heal_brute)
-					MED.amount -= 1
-					if(MED.amount <= 0)
-						del(MED)
+					MED.use(1)
 					for(var/mob/M in viewers(src, null))
 						if ((M.client && !( M.blinded )))
 							M.show_message("\blue [user] applies the [MED] on [src]")

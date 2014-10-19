@@ -8,6 +8,7 @@
 /*
  * Stacks
  */
+
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = "materials=1"
@@ -19,11 +20,11 @@
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
 	if (amount)
-		src.amount=amount
+		src.amount = amount
 	return
 
 /obj/item/stack/Del()
-	if (src && usr && usr.machine==src)
+	if (src && usr && usr.machine == src)
 		usr << browse(null, "window=stack")
 	..()
 
@@ -69,19 +70,13 @@
 			var/title as text
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
-			/*
-			if (R.one_per_turf)
-				can_build = can_build && !(locate(R.result_type) in usr.loc)
-			if (R.on_floor)
-				can_build = can_build && istype(usr.loc, /turf/simulated/floor)
-			*/
 			if (R.res_amount>1)
 				title+= "[R.res_amount]x [R.title]\s"
 			else
 				title+= "[R.title]"
 			title+= " ([R.req_amount] [src.singular_name]\s)"
 			if (can_build)
-				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i]'>[title]</A>  ")
+				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>  ")
 			else
 				t1 += text("[]", title)
 				continue
@@ -117,7 +112,8 @@
 			recipes_list = srl.recipes
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
-		if (!multiplier) multiplier = 1
+		if (!multiplier || (multiplier <= 0)) //href exploit protection
+			return
 		if (src.amount < R.req_amount*multiplier)
 			if (R.req_amount*multiplier>1)
 				usr << "\red You haven't got enough [src] to build \the [R.req_amount*multiplier] [R.title]\s!"
@@ -162,15 +158,27 @@
 			return
 	return
 
-/obj/item/stack/proc/use(var/amount)
-	src.amount-=amount
-	if (src.amount<=0)
+/obj/item/stack/proc/use(var/used)
+	if (amount < used)
+		return 0
+	amount -= used
+	if (amount <= 0)
 		var/oldsrc = src
 		src = null //dont kill proc after del()
 		if(usr)
 			usr.before_take_item(oldsrc)
 		del(oldsrc)
-	return
+	return 1
+
+/obj/item/stack/proc/add(var/extra)
+	if(amount + extra > max_amount)
+		return 0
+	else
+		amount += extra
+	return 1
+
+/obj/item/stack/proc/get_amount()
+	return amount
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
 	var/obj/item/stack/oldsrc = src
@@ -189,7 +197,7 @@
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = new src.type( user, 1)
+		var/obj/item/stack/F = new src.type(user, 1)
 		F.copy_evidences(src)
 		user.put_in_hands(F)
 		src.add_fingerprint(user)
@@ -212,7 +220,7 @@
 			to_transfer = 1
 		else
 			to_transfer = min(src.amount, S.max_amount-S.amount)
-		S.amount+=to_transfer
+		S.add(to_transfer)
 		if (S && usr.machine==S)
 			spawn(0) S.interact(usr)
 		src.use(to_transfer)

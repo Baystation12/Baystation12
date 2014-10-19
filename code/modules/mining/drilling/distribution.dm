@@ -103,12 +103,15 @@ Deep minerals:
 		for(var/y = 1, y <= real_size, y++)
 			map[MAP_CELL] = 0
 
-/datum/ore_distribution/proc/print_distribution_map()
+/datum/ore_distribution/proc/print_distribution_map(var/mob/usr)
 	var/line = ""
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
 			line += num2text(round(map[MAP_CELL]/25.5))
-		world << line
+		if(usr)
+			usr << line
+		else
+			world << line
 		line = ""
 
 /datum/ore_distribution/proc/generate_distribution_map(var/x,var/y,var/input_size)
@@ -163,7 +166,6 @@ Deep minerals:
 					target_turf = locate(tx+j, ty+i, asteroid_z)
 
 					if(target_turf && target_turf.has_resources)
-
 						target_turf.resources = list()
 						target_turf.resources["silicates"] = rand(3,5)
 						target_turf.resources["carbonaceous rock"] = rand(3,5)

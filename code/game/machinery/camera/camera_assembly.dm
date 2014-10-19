@@ -9,7 +9,7 @@
 	matter = list("metal" = 700,"glass" = 300)
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/phoron, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
+	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/osmium, /obj/item/weapon/stock_parts/scanning_module)
 	var/list/upgrades = list()
 	var/state = 0
 	var/busy = 0
@@ -56,10 +56,12 @@
 		if(2)
 			// State 2
 			if(iscoil(W))
-				var/obj/item/weapon/cable_coil/C = W
+				var/obj/item/stack/cable_coil/C = W
 				if(C.use(2))
-					user << "You add wires to the assembly."
+					user << "<span class='notice'>You add wires to the assembly.</span>"
 					state = 3
+				else
+					user << "<span class='warning'>You need 2 coils of wire to wire the assembly.</span>"
 				return
 
 			else if(iswelder(W))
@@ -86,7 +88,8 @@
 					usr << "No network found please hang up and try your call again."
 					return
 
-				var/temptag = "[get_area(src)] ([rand(1, 999)])"
+				var/area/camera_area = get_area(src)
+				var/temptag = "[sanitize(camera_area.name)] ([rand(1, 999)])"
 				input = strip_html(input(usr, "How would you like to name the camera?", "Set Camera Name", temptag))
 
 				state = 4
@@ -115,7 +118,7 @@
 
 			else if(iswirecutter(W))
 
-				new/obj/item/weapon/cable_coil(get_turf(src), 2)
+				new/obj/item/stack/cable_coil(get_turf(src), 2)
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				user << "You cut the wires from the circuits."
 				state = 2
@@ -123,7 +126,7 @@
 
 	// Upgrades!
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
-		user << "You attach the [W] into the assembly inner circuits."
+		user << "You attach \the [W] into the assembly inner circuits."
 		upgrades += W
 		user.drop_item(W)
 		W.loc = src

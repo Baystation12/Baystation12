@@ -2,6 +2,14 @@
 	name = "clothing"
 	var/list/species_restricted = null //Only these species can wear this kit.
 
+	/*
+		Sprites used when the clothing item is refit. This is done by setting icon_override.
+		For best results, if this is set then sprite_sheets should be null and vice versa, but that is by no means necessary.
+		Ideally, sprite_sheets_refit should be used for "hard" clothing items that can't change shape very well to fit the wearer (e.g. helmets, hardsuits),
+		while sprite_sheets should be used for "flexible" clothing items that do not need to be refitted (e.g. vox wearing jumpsuits).
+	*/
+	var/list/sprite_sheets_refit = null
+
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
@@ -36,11 +44,16 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
-		else 
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+		else
 			species_restricted = list(target_species)
-	
+
 	//Set icon
+	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
+		icon_override = sprite_sheets_refit[target_species]
+	else
+		icon_override = initial(icon_override)
+
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
 	else
@@ -50,18 +63,22 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
 		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajaran","Diona","Vox")
-		else 
+			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox")
+		else
 			species_restricted = list(target_species)
-	
+
 	//Set icon
+	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
+		icon_override = sprite_sheets_refit[target_species]
+	else
+		icon_override = initial(icon_override)
+
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
 	else
 		icon = initial(icon)
-
 
 //Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
@@ -160,7 +177,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude","Unathi","Tajaran")
+	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 
 /obj/item/clothing/gloves/examine()
@@ -182,6 +199,24 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
+/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if (clipped)
+			user << "<span class='notice'>The [src] have already been clipped!</span>"
+			update_icon()
+			return
+
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
+
+		clipped = 1
+		name = "mangled [name]"
+		desc = "[desc]<br>They have had the fingertips cut off of them."
+		if("exclude" in species_restricted)
+			species_restricted -= "Unathi"
+			species_restricted -= "Tajara"
+		return
+
 //Head
 /obj/item/clothing/head
 	name = "head"
@@ -196,7 +231,10 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/masks.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
+	body_parts_covered = FACE|EYES
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
+
+/obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 
 //Shoes
 /obj/item/clothing/shoes
@@ -210,7 +248,7 @@ BLIND     // can't see anything
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
-	species_restricted = list("exclude","Unathi","Tajaran")
+	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
 //Suit
@@ -219,6 +257,7 @@ BLIND     // can't see anything
 	name = "suit"
 	var/fire_resist = T0C+100
 	flags = FPRINT | TABLEPASS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	allowed = list(/obj/item/weapon/tank/emergency_oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
@@ -238,6 +277,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
@@ -261,6 +301,37 @@ BLIND     // can't see anything
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox")
+
+	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
+
+/obj/item/clothing/suit/space/equipped(mob/M)
+	check_limb_support()
+	..()
+
+/obj/item/clothing/suit/space/dropped()
+	check_limb_support()
+	..()
+
+// Some space suits are equipped with reactive membranes that support
+// broken limbs - at the time of writing, only the ninja suit, but
+// I can see it being useful for other suits as we expand them. ~ Z
+// The actual splinting occurs in /datum/organ/external/proc/fracture()
+/obj/item/clothing/suit/space/proc/check_limb_support()
+
+	// If this isn't set, then we don't need to care.
+	if(!supporting_limbs || !supporting_limbs.len)
+		return
+
+	var/mob/living/carbon/human/H = src.loc
+
+	// If the holder isn't human, or the holder IS and is wearing the suit, it keeps supporting the limbs.
+	if(!istype(H) || H.wear_suit == src)
+		return
+
+	// Otherwise, remove the splints.
+	for(var/datum/organ/external/E in supporting_limbs)
+		E.status &= ~ ORGAN_SPLINTED
+	supporting_limbs = list()
 
 //Under clothing
 /obj/item/clothing/under
@@ -407,6 +478,7 @@ BLIND     // can't see anything
 	if(copytext(item_color,-2) != "_d")
 		basecolor = item_color
 	if(basecolor + "_d_s" in icon_states('icons/mob/uniform.dmi'))
+		body_parts_covered = "[basecolor]" ? LEGS|LOWER_TORSO : UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 		item_color = item_color == "[basecolor]" ? "[basecolor]_d" : "[basecolor]"
 		usr.update_inv_w_uniform()
 	else

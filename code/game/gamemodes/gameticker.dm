@@ -37,6 +37,8 @@ var/global/datum/controller/gameticker/ticker
 
 	var/triai = 0//Global holder for Triumvirate
 
+	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
+
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
@@ -297,6 +299,7 @@ var/global/datum/controller/gameticker/ticker
 					captainless=0
 				if(player.mind.assigned_role != "MODE")
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
+					UpdateFactionList(player)
 					EquipCustomItems(player)
 		if(captainless)
 			for(var/mob/M in player_list)
@@ -359,7 +362,9 @@ var/global/datum/controller/gameticker/ticker
 
 			//call a transfer shuttle vote
 			spawn(50)
-				world << "\red The round has ended!"
+				if(!round_end_announced) // Spam Prevention. Now it should announce only once.
+					world << "\red The round has ended!"
+					round_end_announced = 1
 				vote.autotransfer()
 
 		return 1
@@ -371,10 +376,29 @@ var/global/datum/controller/gameticker/ticker
 
 
 /datum/controller/gameticker/proc/declare_completion()
+	world << "<br><br><br><font size=3><b>The round has ended.</b></font>"
+	for(var/mob/Player in player_list)
+		if(Player.mind && !isnewplayer(Player))
+			if(Player.stat != DEAD)
+				var/turf/playerTurf = get_turf(Player)
+				if(emergency_shuttle.departed && emergency_shuttle.evac)
+					if(playerTurf.z != 2)
+						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
+					else
+						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
+				else if(playerTurf.z == 2)
+					Player << "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
+				else if(issilicon(Player))
+					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"
+				else
+					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
+			else
+				Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+	world << "<br>"
 
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
 		if (aiPlayer.stat != 2)
-			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the game were:</b>"
+			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>"
 		else
 			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>"
 		aiPlayer.show_laws(1)

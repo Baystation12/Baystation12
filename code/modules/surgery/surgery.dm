@@ -77,21 +77,37 @@ proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
-proc/do_surgery(mob/living/M, mob/living/user, obj/item/tool)
-	if(!istype(M,/mob/living/carbon))
+proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
+	if(!istype(M))
 		return 0
 	if (user.a_intent == "harm")	//check for Hippocratic Oath
 		return 0
+	if(M.op_stage.in_progress) //Can't operate on someone repeatedly.
+		user << "\red You can't operate on the patient while surgery is already in progress."
+		return 1
+
 	for(var/datum/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
-		if( S.tool_quality(tool) && S.can_use(user, M, user.zone_sel.selecting, tool) && S.is_valid_target(M))
-			S.begin_step(user, M, user.zone_sel.selecting, tool)		//start on it
-			//We had proper tools! (or RNG smiled.) and User did not move or change hands.
-			if( prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
-				S.end_step(user, M, user.zone_sel.selecting, tool)		//finish successfully
-			else if (tool in user.contents && user.Adjacent(M))											//or
-				S.fail_step(user, M, user.zone_sel.selecting, tool)		//malpractice~
-			return	1	  												//don't want to do weapony things after surgery
+		if(S.tool_quality(tool))
+			var/step_is_valid = S.can_use(user, M, user.zone_sel.selecting, tool)
+			if(step_is_valid && S.is_valid_target(M))
+				if(step_is_valid == 2) // This is a failure that already has a message for failing.
+					return 1
+				M.op_stage.in_progress = 1
+				S.begin_step(user, M, user.zone_sel.selecting, tool)		//start on it
+				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
+				if(prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)))
+					S.end_step(user, M, user.zone_sel.selecting, tool)		//finish successfully
+				else if (tool in user.contents && user.Adjacent(M))			//or
+					S.fail_step(user, M, user.zone_sel.selecting, tool)		//malpractice~
+				else // This failing silently was a pain.
+					user << "\red You must remain close to your patient to conduct surgery."
+				M.op_stage.in_progress = 0 									// Clear the in-progress flag.
+				return	1	  												//don't want to do weapony things after surgery
+
+	if (user.a_intent == "help")
+		user << "\red You can't see any useful way to use [tool] on [M]."
+		return 1
 	return 0
 
 proc/sort_surgeries()
@@ -113,6 +129,6 @@ proc/sort_surgeries()
 /datum/surgery_status/
 	var/eyes	=	0
 	var/face	=	0
-	var/appendix =	0
-	var/ribcage =	0
 	var/head_reattach = 0
+	var/current_organ = "organ"
+	var/in_progress = 0

@@ -10,7 +10,7 @@ datum/event/wallrot/setup()
 	severity = rand(5, 10)
 
 datum/event/wallrot/announce()
-	command_alert("Harmful fungi detected on station. Station structures may be contaminated.", "Biohazard Alert")
+	command_announcement.Announce("Harmful fungi detected on station. Station structures may be contaminated.", "Biohazard Alert")
 
 datum/event/wallrot/start()
 	spawn()

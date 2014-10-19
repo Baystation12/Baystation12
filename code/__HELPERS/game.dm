@@ -56,7 +56,7 @@
 	var/dx = abs(Ax - Bx)	//sides of right-angled triangle
 	var/dy = abs(Ay - By)
 	if(dx>=dy)	return (k1*dx) + (k2*dy)	//No sqrt or powers :)
-	else		return (k1*dx) + (k2*dy)
+	else		return (k2*dx) + (k1*dy)
 #undef k1
 #undef k2
 
@@ -89,6 +89,14 @@
 
 	//turfs += centerturf
 	return atoms
+
+/proc/trange(rad = 0, turf/centre = null) //alternative to range (ONLY processes turfs and thus less intensive)
+	if(!centre)
+		return
+
+	var/turf/x1y1 = locate(((centre.x-rad)<1 ? 1 : centre.x-rad),((centre.y-rad)<1 ? 1 : centre.y-rad),centre.z)
+	var/turf/x2y2 = locate(((centre.x+rad)>world.maxx ? world.maxx : centre.x+rad),((centre.y+rad)>world.maxy ? world.maxy : centre.y+rad),centre.z)
+	return block(x1y1,x2y2)
 
 /proc/get_dist_euclidian(atom/Loc1 as turf|mob|obj,atom/Loc2 as turf|mob|obj)
 	var/dx = Loc1.x - Loc2.x
@@ -194,9 +202,18 @@
 	. = list()
 	// Returns a list of mobs who can hear any of the radios given in @radios
 	var/list/speaker_coverage = list()
-	for(var/i = 1; i <= radios.len; i++)
-		var/obj/item/device/radio/R = radios[i]
+	for(var/obj/item/device/radio/R in radios)
 		if(R)
+			//Cyborg checks. Receiving message uses a bit of cyborg's charge.
+			var/obj/item/device/radio/borg/BR = R
+			if(istype(BR) && BR.myborg)
+				var/mob/living/silicon/robot/borg = BR.myborg
+				var/datum/robot_component/CO = borg.get_component("radio")
+				if(!CO)
+					continue //No radio component (Shouldn't happen)
+				if(!borg.is_component_functioning("radio") || !borg.cell_use_power(CO.active_usage))
+					continue //No power.
+
 			var/turf/speaker = get_turf(R)
 			if(speaker)
 				for(var/turf/T in hear(R.canhear_range,speaker))
@@ -399,3 +416,64 @@ datum/projectile_data
 	var/g = mixOneColor(weights, greens)
 	var/b = mixOneColor(weights, blues)
 	return rgb(r,g,b)
+
+/**
+* Gets the highest and lowest pressures from the tiles in cardinal directions
+* around us, then checks the difference.
+*/
+/proc/getOPressureDifferential(var/turf/loc)
+	var/minp=16777216;
+	var/maxp=0;
+	for(var/dir in cardinal)
+		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/cp=0
+		if(T && istype(T) && T.zone)
+			var/datum/gas_mixture/environment = T.return_air()
+			cp = environment.return_pressure()
+		else
+			if(istype(T,/turf/simulated))
+				continue
+		if(cp<minp)minp=cp
+		if(cp>maxp)maxp=cp
+	return abs(minp-maxp)
+
+/proc/convert_k2c(var/temp)
+	return ((temp - T0C))
+
+/proc/convert_c2k(var/temp)
+	return ((temp + T0C))
+
+/proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
+	var/list/temps = new/list(4)
+	for(var/dir in cardinal)
+		var/direction
+		switch(dir)
+			if(NORTH)
+				direction = 1
+			if(SOUTH)
+				direction = 2
+			if(EAST)
+				direction = 3
+			if(WEST)
+				direction = 4
+		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		var/list/rstats = new /list(stats.len)
+		if(T && istype(T) && T.zone)
+			var/datum/gas_mixture/environment = T.return_air()
+			for(var/i=1;i<=stats.len;i++)
+				if(stats[i] == "pressure")
+					rstats[i] = environment.return_pressure()
+				else
+					rstats[i] = environment.vars[stats[i]]
+		else if(istype(T, /turf/simulated))
+			rstats = null // Exclude zone (wall, door, etc).
+		else if(istype(T, /turf))
+			// Should still work.  (/turf/return_air())
+			var/datum/gas_mixture/environment = T.return_air()
+			for(var/i=1;i<=stats.len;i++)
+				if(stats[i] == "pressure")
+					rstats[i] = environment.return_pressure()
+				else
+					rstats[i] = environment.vars[stats[i]]
+		temps[direction] = rstats
+	return temps

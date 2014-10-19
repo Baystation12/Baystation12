@@ -9,8 +9,7 @@
 	var/frequency = 0
 	var/id
 	use_power = 1
-	idle_power_usage = 2
-	active_power_usage = 5
+	idle_power_usage = 15
 
 /obj/machinery/meter/New()
 	..()
@@ -29,8 +28,6 @@
 	if(stat & (BROKEN|NOPOWER))
 		icon_state = "meter0"
 		return 0
-
-	//use_power(5)
 
 	var/datum/gas_mixture/environment = target.return_air()
 	if(!environment)
@@ -80,7 +77,7 @@
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			t += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]&deg;K ([round(environment.temperature-T0C,0.01)]&deg;C)"
+			t += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)"
 		else
 			t += "The sensor error light is blinking."
 	else

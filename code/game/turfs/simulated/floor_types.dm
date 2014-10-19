@@ -53,6 +53,10 @@
 	icon_state = "engine"
 	thermal_conductivity = 0.025
 	heat_capacity = 325000
+	intact = 0
+
+/turf/simulated/floor/engine/nitrogen
+	oxygen = 0
 
 /turf/simulated/floor/engine/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	if(!C)
@@ -77,14 +81,7 @@
 /turf/simulated/floor/engine/n20
 	New()
 		. = ..()
-		var/datum/gas_mixture/adding = new
-		var/datum/gas/sleeping_agent/trace_gas = new
-
-		trace_gas.moles = 2000
-		adding.trace_gases += trace_gas
-		adding.temperature = T20C
-
-		assume_air(adding)
+		assume_gas("sleeping_agent", 2000)
 
 /turf/simulated/floor/engine/vacuum
 	name = "vacuum floor"
@@ -154,7 +151,7 @@
 	name = "skipjack floor"
 	oxygen = 0
 	nitrogen = MOLES_N2STANDARD + MOLES_O2STANDARD
-	
+
 /turf/simulated/floor/beach
 	name = "Beach"
 	icon = 'icons/misc/beach.dmi'
@@ -225,3 +222,9 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+/turf/simulated/floor/plating/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "Floor3"
+	name = "catwalk"
+	desc = "Cats really don't like these things."

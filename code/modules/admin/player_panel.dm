@@ -233,11 +233,8 @@
 						M_job = "slime"
 					else if(ismonkey(M))
 						M_job = "Monkey"
-					else if(isalien(M)) //aliens
-						if(islarva(M))
-							M_job = "Alien larva"
-						else
-							M_job = "Alien"
+					else if(isalien(M))
+						M_job = "Alien"
 					else
 						M_job = "Carbon-based"
 
@@ -480,6 +477,9 @@
 
 		if(ticker.mode.traitors.len)
 			dat += check_role_table("Traitors", ticker.mode.traitors, src)
+
+		if(ticker.mode.borers.len)
+			dat += check_role_table("Cortical Borers", ticker.mode.borers, src)
 
 		var/datum/game_mode/mutiny/mutiny = get_mutiny_mode()
 		if(mutiny)

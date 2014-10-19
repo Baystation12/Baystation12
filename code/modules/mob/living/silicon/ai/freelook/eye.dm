@@ -35,12 +35,15 @@
 
 // Use this when setting the aiEye's location.
 // It will also stream the chunk that the new loc is in.
-
-/mob/aiEye/proc/setLoc(var/T)
+/mob/aiEye/proc/setLoc(var/T, var/cancel_tracking = 1)
 
 	if(ai)
 		if(!isturf(ai.loc))
 			return
+
+		if(cancel_tracking)
+			ai.ai_cancel_tracking()
+
 		T = get_turf(T)
 		loc = T
 		cameranet.visibility(src)
@@ -50,6 +53,12 @@
 		if(ai.holo)
 			ai.holo.move_hologram()
 
+/mob/aiEye/proc/getLoc()
+
+	if(ai)
+		if(!isturf(ai.loc) || !ai.client)
+			return
+		return ai.eyeobj.loc
 
 // AI MOVEMENT
 
@@ -79,7 +88,6 @@
 	if(istype(usr, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = usr
 		if(AI.eyeobj && AI.client.eye == AI.eyeobj)
-			AI.cameraFollow = null
 			AI.eyeobj.setLoc(src)
 
 // This will move the AIEye. It will also cause lights near the eye to light up, if toggled.
@@ -104,15 +112,13 @@
 	else
 		user.sprint = initial
 
-	user.cameraFollow = null
-
 	//user.unset_machine() //Uncomment this if it causes problems.
 	//user.lightNearbyCamera()
 
 
 // Return to the Core.
 
-/mob/living/silicon/ai/verb/core()
+/mob/living/silicon/ai/proc/core()
 	set category = "AI Commands"
 	set name = "AI Core"
 
@@ -121,23 +127,21 @@
 
 /mob/living/silicon/ai/proc/view_core()
 	camera = null
-	cameraFollow = null
 	unset_machine()
 
-	if(src.eyeobj && src.loc)
-		src.eyeobj.loc = src.loc
-	else
+	if(!src.eyeobj)
 		src << "ERROR: Eyeobj not found. Creating new eye..."
 		src.eyeobj = new(src.loc)
 		src.eyeobj.ai = src
-		src.eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+		src.SetName(src.name)
 
 	if(client && client.eye)
 		client.eye = src
 	for(var/datum/camerachunk/c in eyeobj.visibleCameraChunks)
 		c.remove(eyeobj)
+	src.eyeobj.setLoc(src)
 
-/mob/living/silicon/ai/verb/toggle_acceleration()
+/mob/living/silicon/ai/proc/toggle_acceleration()
 	set category = "AI Commands"
 	set name = "Toggle Camera Acceleration"
 

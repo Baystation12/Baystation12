@@ -3,7 +3,7 @@ var/global/vox_tick = 1
 /mob/living/carbon/human/proc/equip_vox_raider()
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(src)
-	R.set_frequency(SYND_FREQ) //Same frequency as the syndicate team in Nuke mode.
+	R.set_frequency(SYND_FREQ)
 	equip_to_slot_or_del(R, slot_l_ear)
 
 	equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_robes(src), slot_w_uniform)
@@ -14,7 +14,7 @@ var/global/vox_tick = 1
 		if(1) // Vox raider!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/carapace(src), slot_wear_suit)
 			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/carapace(src), slot_head)
-			equip_to_slot_or_del(new /obj/item/weapon/melee/telebaton(src), slot_belt)
+			equip_to_slot_or_del(new /obj/item/weapon/melee/baton/loaded(src), slot_belt)
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/device/chameleon(src), slot_l_store)
 

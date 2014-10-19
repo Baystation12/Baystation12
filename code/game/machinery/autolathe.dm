@@ -152,7 +152,7 @@
 		//If it's a stack, we eat multiple sheets.
 		if(istype(eating,/obj/item/stack))
 			var/obj/item/stack/stack = eating
-			total_material *= stack.amount
+			total_material *= stack.get_amount()
 
 		if(stored_material[material] + total_material > storage_capacity[material])
 			total_material = storage_capacity[material] - stored_material[material]
@@ -374,3 +374,14 @@
 
 	storage_capacity["metal"] = tot_rating  * 25000
 	storage_capacity["glass"] = tot_rating  * 12500
+
+/obj/machinery/autolathe/dismantle()
+	..()
+	var/list/sheets = list("metal" = /obj/item/stack/sheet/metal, "glass" = /obj/item/stack/sheet/glass)
+
+	for(var/mat in stored_material)
+		var/T = sheets[mat]
+		var/obj/item/stack/sheet/S = new T
+		if(stored_material[mat] > S.perunit)
+			S.amount = round(stored_material[mat] / S.perunit)
+			S.loc = loc
