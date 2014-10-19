@@ -34,7 +34,7 @@
 				flags |= MASKCOVERSMOUTH | MASKINTERNALS
 				icon_state = "breath"
 				usr << "You pull the mask up to cover your face."
-			usr.update_inv_wear_mask()
+			update_clothing_icon()
 
 /obj/item/clothing/mask/breath/medical
 	desc = "A close-fitting sterile mask that can be connected to an air supply."
