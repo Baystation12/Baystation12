@@ -112,7 +112,8 @@
 /datum/robot_component/radio
 	name = "radio"
 	external_type = /obj/item/robot_parts/robot_component/radio
-	active_usage = 10
+	idle_usage = 15		//it's not actually possible to tell when we receive a message over our radio, so just use 10W every tick for passive listening
+	active_usage = 75	//transmit power
 	max_damage = 40
 
 
@@ -122,7 +123,8 @@
 /datum/robot_component/binary_communication
 	name = "binary communication device"
 	external_type = /obj/item/robot_parts/robot_component/binary_communication_device
-	active_usage = 10
+	idle_usage = 5
+	active_usage = 25
 	max_damage = 30
 
 

@@ -537,6 +537,13 @@
 	icon_state = "radio"
 	canhear_range = 3
 
+/obj/item/device/radio/borg/talk_into()
+	..()
+	if (isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		var/datum/robot_component/C = R.components["radio"]
+		R.cell_use_power(C.active_usage)
+
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
