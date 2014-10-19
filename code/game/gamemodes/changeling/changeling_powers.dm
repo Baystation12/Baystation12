@@ -3,7 +3,9 @@
 
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
+
 	verbs += /datum/changeling/proc/EvolutionMenu
+	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
 
@@ -30,8 +32,7 @@
 		mind.changeling.absorbed_species += H.species.name
 
 	for(var/language in languages)
-		if(!(language in mind.changeling.absorbed_languages))
-			mind.changeling.absorbed_languages += language
+		mind.changeling.absorbed_languages |= language
 
 	return 1
 
@@ -79,6 +80,9 @@
 	languages = list()
 	for(var/language in updated_languages)
 		languages += language
+
+	//This isn't strictly necessary but just to be safe...
+	add_language("Changeling")
 
 	return
 
