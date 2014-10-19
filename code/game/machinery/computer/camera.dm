@@ -69,7 +69,7 @@
 
 	proc/can_access_camera(var/obj/machinery/camera/C)
 		var/list/shared_networks = src.network & C.network
-		if(shared_networks.len && C.is_functional())
+		if(shared_networks.len)
 			return 1
 		return 0
 

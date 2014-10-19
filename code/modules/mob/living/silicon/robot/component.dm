@@ -134,7 +134,33 @@
 	external_type = /obj/item/robot_parts/robot_component/camera
 	idle_usage = 10
 	max_damage = 40
+	var/obj/machinery/camera/camera
 
+/datum/robot_component/camera/New(mob/living/silicon/robot/R)
+	..()
+	camera = R.camera
+
+/datum/robot_component/camera/update_power_state()
+	..()
+	if (camera)
+		//check if camera component was deactivated
+		if (!powered && camera.status != powered)
+			camera.kick_viewers()
+		camera.status = powered
+
+/datum/robot_component/camera/install()
+	if (camera)
+		camera.status = 1
+
+/datum/robot_component/camera/uninstall()
+	if (camera)
+		camera.status = 0
+		camera.kick_viewers()
+
+/datum/robot_component/camera/destroy()
+	if (camera)
+		camera.status = 0
+		camera.kick_viewers()
 
 // SELF DIAGNOSIS MODULE
 // Analyses cyborg's modules, providing damage readouts and basic information
