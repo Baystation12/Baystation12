@@ -414,7 +414,7 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+/mob/living/carbon/human/proc/handle_suit_punctures_torso(var/damtype, var/damage)
 
 	if(!wear_suit) return
 	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
@@ -424,3 +424,16 @@ emp_act
 	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
 
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)
+
+
+
+/mob/living/carbon/human/proc/handle_suit_punctures_helmet(var/damtype, var/damage)
+
+	if(!head) return
+	if(!istype(head,/obj/item/clothing/head/helmet/space)) return
+	if(damtype != BURN && damtype != BRUTE) return
+
+	var/obj/item/clothing/head/helmet/space/SH = head
+	var/penetrated_dam = max(0,(damage - SH.breach_threshold)) // - SH.damage)) - Consider uncommenting this if suits seem too hardy on dev.
+
+	if(penetrated_dam) SH.create_breaches(damtype, penetrated_dam)
