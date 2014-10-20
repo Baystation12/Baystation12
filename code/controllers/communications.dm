@@ -119,7 +119,7 @@ var/list/radiochannels = list(
 	"Security" 		= SEC_FREQ,
 	"Response Team" = ERT_FREQ,
 	"Special Ops" 	= DTH_FREQ,
-	"Syndicate" 	= SYND_FREQ,
+	"Mercenary" 	= SYND_FREQ,
 	"Supply" 		= SUP_FREQ
 )
 

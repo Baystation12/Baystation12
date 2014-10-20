@@ -214,7 +214,7 @@ var/global/datum/controller/gameticker/ticker
 				if( mode && !override )
 					override = mode.name
 				switch( override )
-					if("nuclear emergency") //Nuke wasn't on station when it blew up
+					if("mercenary") //Nuke wasn't on station when it blew up
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						world << sound('sound/effects/explosionfar.ogg')
@@ -236,7 +236,7 @@ var/global/datum/controller/gameticker/ticker
 				if( mode && !override )
 					override = mode.name
 				switch( override )
-					if("nuclear emergency") //Nuke Ops successfully bombed the station
+					if("mercenary") //Nuke Ops successfully bombed the station
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
