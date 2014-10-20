@@ -9,6 +9,41 @@
 	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
+/mob/living/carbon/human/dummy
+	real_name = "Test Dummy"
+	status_flags = GODMODE|CANPUSH
+
+/mob/living/carbon/human/skrell/New(var/new_loc)
+	h_style = "Skrell Male Tentacles"
+	..(new_loc, "Skrell")
+
+/mob/living/carbon/human/Aviskree/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Aviskree")
+
+/mob/living/carbon/human/tajaran/New(var/new_loc)
+	h_style = "Tajaran Ears"
+	..(new_loc, "Tajaran")
+
+/mob/living/carbon/human/unathi/New(var/new_loc)
+	h_style = "Unathi Horns"
+	..(new_loc, "Unathi")
+
+/mob/living/carbon/human/vox/New(var/new_loc)
+	h_style = "Short Vox Quills"
+	..(new_loc, "Vox")
+
+/mob/living/carbon/human/voxarmalis/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Vox Armalis")
+
+/mob/living/carbon/human/diona/New(var/new_loc)
+	..(new_loc, "Diona")
+
+/mob/living/carbon/human/machine/New(var/new_loc)
+	h_style = "blue IPC screen"
+	..(new_loc, "Machine")
+
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
 	if(!dna)
@@ -93,6 +128,7 @@
 				gib()
 				return
 			else
+				handle_suit_punctures(BURN, severity*20)
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
@@ -100,6 +136,7 @@
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
+			handle_suit_punctures(BURN, severity*20)
 			if (!shielded)
 				b_loss += 60
 
@@ -117,6 +154,7 @@
 
 		if(3.0)
 			b_loss += 30
+			handle_suit_punctures(BURN, severity*20)
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
@@ -322,6 +360,7 @@
 	<BR><B>(Exo)Suit:</B> <A href='?src=\ref[src];item=suit'>[(wear_suit ? wear_suit : "Nothing")]</A>
 	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR><B>ID:</B> <A href='?src=\ref[src];item=id'>[(wear_id ? wear_id : "Nothing")]</A>
+	<BR><B>PDA:</B> <A href='?src=\ref[src];item=PDA'>[(wear_pda ? wear_pda : "Nothing")]</A>
 	<BR><B>Suit Storage:</B> <A href='?src=\ref[src];item=s_store'>[(s_store ? s_store : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(s_store, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(handcuffed ? text("<A href='?src=\ref[src];item=handcuff'>Handcuffed</A>") : text("<A href='?src=\ref[src];item=handcuff'>Not Handcuffed</A>"))]
 	<BR>[(legcuffed ? text("<A href='?src=\ref[src];item=legcuff'>Legcuffed</A>") : text(""))]

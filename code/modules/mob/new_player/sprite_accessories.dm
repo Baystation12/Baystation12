@@ -636,62 +636,62 @@
 	taj_ears
 		name = "Tajaran Ears"
 		icon_state = "ears_plain"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_clean
 		name = "Tajara Clean"
 		icon_state = "hair_clean"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_bangs
 		name = "Tajara Bangs"
 		icon_state = "hair_bangs"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_braid
 		name = "Tajara Braid"
 		icon_state = "hair_tbraid"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_shaggy
 		name = "Tajara Shaggy"
 		icon_state = "hair_shaggy"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_mohawk
 		name = "Tajaran Mohawk"
 		icon_state = "hair_mohawk"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_plait
 		name = "Tajara Plait"
 		icon_state = "hair_plait"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_straight
 		name = "Tajara Straight"
 		icon_state = "hair_straight"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_long
 		name = "Tajara Long"
 		icon_state = "hair_long"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_rattail
 		name = "Tajara Rat Tail"
 		icon_state = "hair_rattail"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_spiky
 		name = "Tajara Spiky"
 		icon_state = "hair_tajspiky"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_ears_messy
 		name = "Tajara Messy"
 		icon_state = "hair_messy"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	avitaj_ears
 		name = "Avisaran Ears"
@@ -709,32 +709,32 @@
 	taj_sideburns
 		name = "Tajara Sideburns"
 		icon_state = "facial_mutton"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_mutton
 		name = "Tajara Mutton"
 		icon_state = "facial_mutton"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_pencilstache
 		name = "Tajara Pencilstache"
 		icon_state = "facial_pencilstache"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_moustache
 		name = "Tajara Moustache"
 		icon_state = "facial_moustache"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_goatee
 		name = "Tajara Goatee"
 		icon_state = "facial_goatee"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	taj_smallstache
 		name = "Tajara Smallsatche"
 		icon_state = "facial_smallstache"
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	Aviskree_beak_f
 		name = "Aviskree Beak(f)"
@@ -769,7 +769,7 @@
 		name = "Default tajaran skin"
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_tajaran.dmi'
-		species_allowed = list("Tajaran")
+		species_allowed = list("Tajara")
 
 	unathi
 		name = "Default Unathi skin"

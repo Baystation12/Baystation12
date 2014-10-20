@@ -364,6 +364,17 @@
 				if( !(slot_flags & SLOT_ID) )
 					return 0
 				return 1
+
+			if(slot_wear_pda)  //PDA Slot
+				if(H.wear_pda)
+					return 0
+				if(!H.w_uniform)
+					if(!disable_warning)
+						H << "\red You need a jumpsuit before you can attach this [name]."
+					return 0
+				if( !(slot_flags & SLOT_PDA) )
+					return 0
+				return 1
 			if(slot_l_store)
 				if(H.l_store)
 					return 0

@@ -189,7 +189,6 @@
 		src.l_hand_hud_object = inv_box
 		src.adding += inv_box
 
-
 		using = new /obj/screen/inventory()
 		using.name = "hand"
 		using.dir = SOUTH

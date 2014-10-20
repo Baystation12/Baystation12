@@ -172,9 +172,14 @@
 	if(!check_alien_ability(50,0,"acid gland"))
 		return
 
+	if(stat || paralysis || stunned || weakened || lying || restrained() || buckled)
+		src << "You cannot spit neurotoxin in your current state."
+		return
+
 	src << "\green You spit neurotoxin at [target]."
+
 	for(var/mob/O in oviewers())
-		if ((O.client && !( O.blinded )))
+		if ((O.client && !(O.blinded )))
 			O << "\red [src] spits neurotoxin at [target]!"
 
 	//I'm not motivated enough to revise this. Prjectile code in general needs update.
