@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: icons\obj\clothing\masks.dmi;code\game\jobs\job\captain.dm;code\game\jobs\job_controller.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\_onclick code\_onclick\hud code\game code\game\jobs code\game\jobs\job code\modules\admin code\modules\admin\verbs code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\mob icons\mob\human_races icons\obj\clothing 
+FILE: code\game\jobs\job_controller.dm
+LAST_COMPILE_TIME: 1413646499
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

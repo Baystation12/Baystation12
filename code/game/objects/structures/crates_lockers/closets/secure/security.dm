@@ -168,9 +168,37 @@
 
 
 
+/obj/structure/closet/secure_closet/armor
+	name = "Armor Locker"
+	req_access = list(access_brig)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
+
+	New()
+		..()
+		sleep(2)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		return
+
+
 /obj/structure/closet/secure_closet/security
 	name = "Security Officer's Locker"
-	req_access = list(access_security)
+	req_access = list(access_brig)
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -185,8 +213,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
-		new /obj/item/clothing/suit/armor/vest/security(src)
-		new /obj/item/clothing/head/helmet(src)
+
+		new /obj/item/clothing/suit/armor/vest/protective(src)
 //		new /obj/item/weapon/cartridge/security(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/weapon/storage/belt/security(src)
@@ -199,8 +227,9 @@
 		new /obj/item/taperoll/police(src)
 		new /obj/item/device/hailer(src)
 		new /obj/item/clothing/tie/storage/black_vest(src)
-		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
+		new /obj/item/clothing/mask/sechailer(src)
+		new /obj/item/clothing/gloves/black(src)
 		return
 
 
