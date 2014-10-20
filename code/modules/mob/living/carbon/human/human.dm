@@ -128,7 +128,8 @@
 				gib()
 				return
 			else
-				handle_suit_punctures(BURN, severity*20)
+				handle_suit_punctures_torso(BURN, severity*20)
+				handle_suit_punctures_helmet(BURN, severity*20)
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
@@ -136,7 +137,8 @@
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
-			handle_suit_punctures(BURN, severity*20)
+			handle_suit_punctures_torso(BURN, severity*20)
+			handle_suit_punctures_helmet(BURN, severity*20)
 			if (!shielded)
 				b_loss += 60
 
@@ -154,7 +156,8 @@
 
 		if(3.0)
 			b_loss += 30
-			handle_suit_punctures(BURN, severity*20)
+			handle_suit_punctures_torso(BURN, severity*20)
+			handle_suit_punctures_helmet(BURN, severity*20)
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
