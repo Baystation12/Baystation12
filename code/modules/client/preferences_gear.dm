@@ -642,17 +642,17 @@ var/global/list/gear_datums = list()
 
 /datum/gear/blipstick
 	display_name = "lipstick, black"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/black
 	cost = 1
 
 /datum/gear/jlipstick
 	display_name = "lipstick, jade"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/jade
 	cost = 1
 
 /datum/gear/plipstick
 	display_name = "lipstick, purple"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/purple
 	cost = 1
 
 /datum/gear/rlipstick

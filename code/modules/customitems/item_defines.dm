@@ -936,7 +936,7 @@
 			if("lombardi_jacket_open")
 				src.icon_state = "lombardi_jacket"
 				usr << "You button up the jacket."
-		usr.update_inv_wear_suit()
+		update_clothing_icon()
 
 //////////// Uniforms ////////////
 
@@ -1098,7 +1098,7 @@
 
 	src.icon_state = "[item_color]"
 	src.item_state = "[item_color]"
-	usr.update_inv_w_uniform()
+	update_clothing_icon()
 
 ////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
 /obj/item/clothing/under/fluff/wyatt_1

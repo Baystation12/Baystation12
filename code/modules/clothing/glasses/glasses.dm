@@ -160,7 +160,7 @@
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push \the [src] up out of your face."
 
-		usr.update_inv_glasses()
+		update_clothing_icon()
 
 /obj/item/clothing/glasses/welding/superior
 	name = "superior welding goggles"

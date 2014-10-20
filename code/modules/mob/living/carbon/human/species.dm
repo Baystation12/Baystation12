@@ -30,6 +30,7 @@
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
+	var/list/speech_chance
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/insulated                 // Immune to electrocution and glass shards to the feet.
 
@@ -293,6 +294,7 @@
 	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
+	speech_chance = 20
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
