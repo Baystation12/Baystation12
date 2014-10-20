@@ -138,6 +138,13 @@
 	colour = "rough"
 	key = "3"
 
+/datum/language/Machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	colour = "machine"
+	key = "p"
+
 /datum/language/xenocommon
 	name = "Xenomorph"
 	colour = "alien"

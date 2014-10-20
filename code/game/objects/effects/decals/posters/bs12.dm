@@ -172,7 +172,7 @@
 /datum/poster/bay_35
 	icon_state="bsposter35"
 	name = "Lamarr"
-	desc = "This is a poster depicting the pet and mascot of the NSS Exodus science department."
+	desc = "This is a poster depicting the pet and mascot of the NSS Phoenix science department."
 
 /datum/poster/bay_36
 	icon_state="bsposter36"

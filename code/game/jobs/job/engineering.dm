@@ -28,7 +28,7 @@
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_eng(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_engineer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/ce(H), slot_l_store)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/ce(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat/white(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
@@ -67,7 +67,7 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/engineering(H), slot_l_store)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/engineering(H), slot_wear_pda)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
 		else

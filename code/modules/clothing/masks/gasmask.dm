@@ -64,18 +64,6 @@
 	vchange = 1
 	siemens_coefficient = 0.2
 
-/obj/item/clothing/mask/gas/clown_hat
-	name = "clown wig and mask"
-	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
-	icon_state = "clown"
-	item_state = "clown_hat"
-
-/obj/item/clothing/mask/gas/sexyclown
-	name = "sexy-clown wig and mask"
-	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
-	icon_state = "sexyclown"
-	item_state = "sexyclown"
-
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
 	desc = "The traditional mime's mask. It has an eerie facial posture."
@@ -111,6 +99,51 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 
+/obj/item/clothing/mask/gas/clown_hat
+	name = "clown wig and mask"
+	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	icon_state = "clown"
+	item_state = "clown_hat"
+	icon_action_button = "action_blank"
+	action_button_name = "Honk!"
+	var/spam_flag = 0
+
+/obj/item/clothing/mask/gas/clown_hat/sexyclown
+	name = "sexy-clown wig and mask"
+	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
+	icon_state = "sexyclown"
+	item_state = "sexyclown"
+/obj/item/clothing/mask/gas/clown_hat/attack_self()
+	honk()
+
+/obj/item/clothing/mask/gas/clown_hat/verb/honk()
+	set category = null
+	set name = "HONK"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+	if(usr:wear_mask != src)
+		usr << "\red The mask must be worn to use this feature!"
+		return
+	if (spam_flag == 0)
+		spam_flag = 1
+		playsound(src.loc, 'sound/items/bikehorn.ogg', 50, 1)
+		src.add_fingerprint(usr)
+		spawn(20)
+			spam_flag = 0
+	return
+
+/obj/item/clothing/mask/gas/clown_hat/madman
+	name = "clown wig and mask"
+	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	icon_state = "joker"
+	item_state = "joker"
+
+/obj/item/clothing/mask/gas/clown_hat/rainbow
+	name = "clown wig and mask"
+	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	icon_state = "rainbow_clown"
+	item_state = "rainbow_clown"
 // ********************************************************************
 
 // **** Security mask ****
