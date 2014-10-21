@@ -118,6 +118,12 @@ var/list/department_radio_keys = list(
 						S.speech_buffer = list()
 						S.speech_buffer.Add(src)
 						S.speech_buffer.Add(lowertext(html_decode(message)))
+				if(iscorgi(I))
+					var/mob/living/simple_animal/corgi/C = I
+					if (src in C.Friends)
+						C.speech_buffer = list()
+						C.speech_buffer.Add(src)
+						C.speech_buffer.Add(lowertext(html_decode(message)))
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]

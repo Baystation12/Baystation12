@@ -1,3 +1,12 @@
+/*
+
+TO-DO:
+-Make it so that feeding corgi's makes them friendly over time, variable on what's fed to them.
+-Make it so that if you make a corgi like you enough you'll become its new leader
+
+
+*/
+
 //Corgi
 /mob/living/simple_animal/corgi
 	name = "\improper corgi"
@@ -21,6 +30,11 @@
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger
+	var/will_follow = 0 //Do we follow?
+	var/holding_still = 0 // AI variable, cooloff-ish for how long it's going to stay in one place
+	var/list/Friends = list() // A list of friends!
+	var/list/speech_buffer = list() // Last phrase said near it and person who said it
+	var/mob/living/Leader = null // AI variable - tells the corgi to follow this person
 
 /*
 /mob/living/simple_animal/corgi/Life()
@@ -272,57 +286,76 @@
 /mob/living/simple_animal/corgi/Ian/Life()
 	..()
 
-	//Feeding, chasing food, FOOOOODDDD
-	if(!stat && !resting && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 5)
-			turns_since_scan = 0
-			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
-				movement_target = null
-				stop_automated_movement = 0
-			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
-				movement_target = null
-				stop_automated_movement = 0
-				for(var/obj/item/weapon/reagent_containers/food/snacks/S in oview(src,3))
-					if(isturf(S.loc) || ishuman(S.loc))
-						movement_target = S
-						break
-			if(movement_target)
-				stop_automated_movement = 1
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
-				sleep(3)
-				step_to(src,movement_target,1)
+	if(stat != DEAD)
+		if (!ckey)
+			handle_speech_and_mood()
+			detect_important_people()
+			handle_targets()
 
-				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
-					if (movement_target.loc.x < src.x)
-						dir = WEST
-					else if (movement_target.loc.x > src.x)
-						dir = EAST
-					else if (movement_target.loc.y < src.y)
-						dir = SOUTH
-					else if (movement_target.loc.y > src.y)
-						dir = NORTH
-					else
-						dir = SOUTH
+		//Feeding, chasing food, FOOOOODDDD
+		if(!stat && !resting && !buckled)
+			turns_since_scan++
+			if(turns_since_scan > 5)
+				turns_since_scan = 0
+				if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
+					movement_target = null
+					stop_automated_movement = 0
+				if( !movement_target || !(movement_target.loc in oview(src, 3)) )
+					movement_target = null
+					stop_automated_movement = 0
+					for(var/obj/item/weapon/reagent_containers/food/snacks/S in oview(src,3))
+						if(isturf(S.loc) || ishuman(S.loc))
+							movement_target = S
+							break
+				if(movement_target && !holding_still)
+					stop_automated_movement = 1
+					step_to(src,movement_target,1)
+					sleep(3)
+					step_to(src,movement_target,1)
+					sleep(3)
+					step_to(src,movement_target,1)
 
-					if(isturf(movement_target.loc) )
-						movement_target.attack_animal(src)
-					else if(ishuman(movement_target.loc) )
-						if(prob(20))
-							emote("stares at the [movement_target] that [movement_target.loc] has with a sad puppy-face")
+					if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
+						if (movement_target.loc.x < src.x)
+							dir = WEST
+						else if (movement_target.loc.x > src.x)
+							dir = EAST
+						else if (movement_target.loc.y < src.y)
+							dir = SOUTH
+						else if (movement_target.loc.y > src.y)
+							dir = NORTH
+						else
+							dir = SOUTH
 
-		if(prob(1))
-			emote(pick("dances around","chases its tail"))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
-					sleep(1)
+						if(isturf(movement_target.loc) )
+							movement_target.attack_animal(src)
+						else if(ishuman(movement_target.loc) )
+							if(prob(20))
+								emote("stares at the [movement_target] that [movement_target.loc] has with a sad puppy-face")
+
+			if(prob(1))
+				emote(pick("dances around","chases its tail"))
+				spawn(0)
+					for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+						dir = i
+						sleep(1)
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
+
+
+/mob/living/simple_animal/corgi/proc/detect_important_people()
+	if(src.name == "Ian")
+		for(var/mob/living/carbon/human/H in world)
+			if(H && H.client.ckey)
+				if(H.mind)
+					if(H.mind.assigned_role == "Head of Personnel")
+						src.Leader = H
+					if((H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain") && !(locate(src.Friends, H)))
+						src.Friends.Add(H)
+	else
+		return
 
 /mob/living/simple_animal/corgi/Ian/Bump(atom/movable/AM as mob|obj, yes)
 
@@ -442,34 +475,121 @@
 		return
 	..()
 
+/mob/living/simple_animal/corgi/proc/handle_targets()
+	if(!client)
+		if(holding_still > 0)
+			canmove = 0
+			holding_still--
+		else
+			canmove = 1
+
+		if (Leader)
+			if (holding_still)
+				return
+			else if(canmove && will_follow && isturf(loc))
+				step_to(src, Leader)
+
+/mob/living/simple_animal/corgi/proc/handle_speech_and_mood()
+	//Speech understanding starts here (copied and altered from slimes)
+	var/to_say
+	if (speech_buffer.len > 0)
+		var/who = speech_buffer[1] // Who said it?
+		var/phrase = speech_buffer[2] // What did they say?
+		if ((findtext(phrase, name) || findtext(phrase, "corgi"))) // Talking to us
+			if (findtext(phrase, "hello") || findtext(phrase, "hi"))
+				to_say = pick("Hello!", "Hi!")
+			else if (findtext(phrase, "follow"))
+				if (Leader)
+					if (Leader == who) // Already following him
+						to_say = pick("Okay!", "Lead!", "I'll follow you!")
+						will_follow = 1
+					else if (Friends[who] > Friends[Leader]) // VIVA
+						Leader = who
+						to_say = "I'll follow [who]!"
+						will_follow = 1
+					else
+						to_say = "No. I only follow [Leader]!"
+				else
+					if (Friends[who] > 2)
+						Leader = who
+						to_say = "Okay!"
+					else // Not friendly enough
+						to_say = pick("No!", "I won't follow you.")
+			else if (findtext(phrase, "stop"))
+			/*	else if (Target) // We are asked to stop chasing
+					if (Friends[who] > 3)
+						Target = null
+						if (Friends[who] < 6)
+							--Friends[who]
+							to_say = "Grrr..." // I'm angry but I do it
+						else
+							to_say = "Fine..."*/
+				if (Leader) // We are asked to stop following
+					if (Leader == who)
+						to_say = "Oh... okay... I guess."
+						will_follow = 0
+					else
+						if (Friends[who] > Friends[Leader])
+							Leader = null
+							to_say = "I'll stop."
+							will_follow = 0
+						else
+							to_say = "No, I want to keep following."
+			else if (findtext(phrase, "stay"))
+				if (Leader)
+					if (Leader == who)
+						holding_still = 5
+						to_say = "Okay!"
+					else if (Friends[who] > Friends[Leader])
+						holding_still = 30
+						to_say = "Okay!"
+					else
+						to_say = "No. I'll keep following"
+				else
+					if (Friends[who] > 2)
+						holding_still = 30
+						to_say = "I'll stay!"
+					else
+						to_say = "No. I won't stay."
+		speech_buffer = list()
+
+	if (to_say)
+		say (to_say)
+
 /mob/living/simple_animal/corgi/Lisa/Life()
 	..()
 
-	if(!stat && !resting && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 15)
-			turns_since_scan = 0
-			var/alone = 1
-			var/ian = 0
-			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/corgi/Ian))
-					if(M.client)
-						alone = 0
-						break
-					else
-						ian = M
-				else
-					alone = 0
-					break
-			if(alone && ian && puppies < 4)
-				if(near_camera(src) || near_camera(ian))
-					return
-				new /mob/living/simple_animal/corgi/puppy(loc)
+	if(stat != DEAD)
+		if (!ckey)
+			handle_speech_and_mood()
+			detect_important_people()
+			handle_targets()
+
+			if(!stat && !resting && !buckled)
+				turns_since_scan++
+				if(turns_since_scan > 15)
+					turns_since_scan = 0
+					var/alone = 1
+					var/ian = 0
+					for(var/mob/M in oviewers(7, src))
+						if(istype(M, /mob/living/simple_animal/corgi/Ian))
+							if(M.client)
+								alone = 0
+								break
+							else
+								ian = M
+						else
+							alone = 0
+							break
+					if(alone && ian && puppies < 4)
+						if(near_camera(src) || near_camera(ian))
+							return
+						new /mob/living/simple_animal/corgi/puppy(loc)
 
 
-		if(prob(1))
-			emote(pick("dances around","chases her tail"))
-			spawn(0)
-				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
-					sleep(1)
+				if(prob(1))
+					emote(pick("dances around","chases her tail"))
+					spawn(0)
+						for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+							dir = i
+							sleep(1)
