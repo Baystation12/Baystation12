@@ -44,5 +44,3 @@
 	else
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
-
-	nanomanager.send_resources(client)
