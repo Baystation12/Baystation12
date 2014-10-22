@@ -25,6 +25,7 @@
 
 	// Otherwise jump
 	else
+		following = null
 		loc = get_turf(A)
 
 /mob/dead/observer/ClickOn(var/atom/A, var/params)
