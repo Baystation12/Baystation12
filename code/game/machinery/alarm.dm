@@ -110,6 +110,7 @@
 	apply_danger_level = 0
 	breach_detection = 0
 	post_alert = 0
+	frequency = 1441
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -150,7 +151,8 @@
 	if (alarm_area.master)
 		alarm_area = alarm_area.master
 	area_uid = alarm_area.uid
-	if (name == "alarm")
+
+	if (name in list("alarm NORTH", "alarm EAST", "alarm SOUTH", "alarm WEST"))
 		name = "[alarm_area.name] Air Alarm"
 
 	// breathable air according to human/Life()
