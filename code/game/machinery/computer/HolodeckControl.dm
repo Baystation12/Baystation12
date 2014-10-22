@@ -472,7 +472,7 @@ var/global/list/holodeck_programs = list(
 
 /obj/structure/holohoop
 	name = "basketball hoop"
-	desc = "Boom, Shakalaka!."
+	desc = "Boom, Shakalaka!"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "hoop"
 	anchored = 1

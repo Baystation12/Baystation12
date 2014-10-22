@@ -3363,7 +3363,7 @@ datum
 		ethanol/brave_bull
 			name = "Brave Bull"
 			id = "bravebull"
-			description = "It's just as effective as Dutch-Courage!."
+			description = "It's just as effective as Dutch-Courage!"
 			color = "#664300" // rgb: 102, 67, 0
 			boozepwr = 3
 

@@ -105,7 +105,7 @@ var/list/sacrificed = list()
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 				M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
-				"\red AAAAAAHHHH!.", \
+				"\red AAAAAAHHHH!", \
 				"\red You hear an anguished scream.")
 				if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
 
