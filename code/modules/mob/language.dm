@@ -51,7 +51,7 @@
 	exclaim_verb = "roars"
 	colour = "soghun"
 	key = "o"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 /datum/language/Aviskree
 	name = "Aviachirp"
@@ -59,7 +59,7 @@
 	speech_verb = "chirps"
 	colour = "Aviskree"
 	key = "y"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 /datum/language/tajaran
 	name = "Siik'tajr"
@@ -69,7 +69,7 @@
 	exclaim_verb = "yowls"
 	colour = "tajaran"
 	key = "j"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -79,7 +79,18 @@
 	exclaim_verb = "warbles"
 	colour = "skrell"
 	key = "k"
-	flags = WHITELISTED
+	flags = RESTRICTED
+
+/datum/language/Chittin
+	name = "Chittin"
+	desc = "very silent almost telepath speech."
+	speech_verb = "chirps and hums"
+	ask_verb = "chirps and hums"
+	exclaim_verb = "chirps"
+	whisp = "hums softly"
+	colour = "Chittin"
+	key = "5"
+	flags = RESTRICTED
 
 /datum/language/vox
 	name = "Vox-pidgin"

@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human", "Aviskree")
+	var/list/species_allowed = list("Human", "Aviskree", "Kidan")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human", "Aviskree", "Unathi","Avisaran")
+		species_allowed = list("Human", "Aviskree", "Unathi","Kidan")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -136,7 +136,7 @@
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
 		gender = MALE
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi","Kidan")
 
 	quiff
 		name = "Quiff"
@@ -159,7 +159,7 @@
 		name = "Beehive"
 		icon_state = "hair_beehive"
 		gender = FEMALE
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 
 	beehive2
 		name = "Beehive 2"
@@ -170,13 +170,13 @@
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
 		gender = FEMALE
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
 		gender = FEMALE
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 
 	bowl
 		name = "Bowl"
@@ -187,7 +187,7 @@
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
 		gender = MALE
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 
 	crew
 		name = "Crewcut"
@@ -272,7 +272,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 	jensen
 		name = "Adam Jensen Hair"
 		icon_state = "hair_jensen"
@@ -291,7 +291,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi", "Kidan")
 	kusangi
 		name = "Kusanagi Hair"
 		icon_state = "hair_kusanagi"
@@ -496,7 +496,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human", "Unathi","Tajaran","Skrell","Vox","Machine","Avisaran")
+		species_allowed = list("Human", "Unathi","Tajaran","Skrell","Vox","Machine","Avisaran","Kidan")
 
 	watson
 		name = "Watson Mustache"
@@ -537,7 +537,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human", "Aviskree", "Unathi")
+		species_allowed = list("Human", "Aviskree", "Unathi","Kidan")
 
 	abe
 		name = "Abraham Lincoln Beard"
