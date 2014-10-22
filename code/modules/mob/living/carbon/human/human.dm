@@ -21,6 +21,10 @@
 	h_style = "Bald"
 	..(new_loc, "Aviskree")
 
+/mob/living/carbon/human/Kidan/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Kidan")
+
 /mob/living/carbon/human/tajaran/New(var/new_loc)
 	h_style = "Tajaran Ears"
 	..(new_loc, "Tajaran")

@@ -511,6 +511,21 @@
 		"brain" =    /datum/organ/internal/brain,
 		)
 
+/datum/species/kidan
+	name = "Kidan"
+	name_plural = "kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_type = /datum/unarmed_attack/claws
+
+	flags = IS_WHITELISTED | HAS_UNDERWEAR
+
+	blood_color = "#328332"
+	flesh_color = "#8C4600"
+
+
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)
 
