@@ -1461,6 +1461,7 @@ datum/objective/silence
 		var/area/pod2 =    locate(/area/shuttle/escape_pod2/centcom)
 		var/area/pod3 =    locate(/area/shuttle/escape_pod3/centcom)
 		var/area/pod4 =    locate(/area/shuttle/escape_pod5/centcom)
+		var/area/pod5 =    locate(/area/shuttle/escape_pod5_medical/centcom)
 
 		for(var/mob/living/player in world)
 			if (player == owner.current)
@@ -1476,6 +1477,8 @@ datum/objective/silence
 					if (get_turf(player) in pod3)
 						return 0
 					if (get_turf(player) in pod4)
+						return 0
+					if (get_turf(player) in pod5)
 						return 0
 		return 1
 

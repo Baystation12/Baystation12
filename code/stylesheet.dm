@@ -65,6 +65,7 @@ h1.alert, h2.alert		{color: #000000;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .Aviskree				{color: #999900;}
+.Chittin				{color: #8C4600;}
 .soghun					{color: #228B22;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
