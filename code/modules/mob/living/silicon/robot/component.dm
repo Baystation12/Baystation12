@@ -112,7 +112,8 @@
 /datum/robot_component/radio
 	name = "radio"
 	external_type = /obj/item/robot_parts/robot_component/radio
-	active_usage = 10
+	idle_usage = 15		//it's not actually possible to tell when we receive a message over our radio, so just use 10W every tick for passive listening
+	active_usage = 75	//transmit power
 	max_damage = 40
 
 
@@ -122,7 +123,8 @@
 /datum/robot_component/binary_communication
 	name = "binary communication device"
 	external_type = /obj/item/robot_parts/robot_component/binary_communication_device
-	active_usage = 10
+	idle_usage = 5
+	active_usage = 25
 	max_damage = 30
 
 
@@ -134,7 +136,33 @@
 	external_type = /obj/item/robot_parts/robot_component/camera
 	idle_usage = 10
 	max_damage = 40
+	var/obj/machinery/camera/camera
 
+/datum/robot_component/camera/New(mob/living/silicon/robot/R)
+	..()
+	camera = R.camera
+
+/datum/robot_component/camera/update_power_state()
+	..()
+	if (camera)
+		//check if camera component was deactivated
+		if (!powered && camera.status != powered)
+			camera.kick_viewers()
+		camera.status = powered
+
+/datum/robot_component/camera/install()
+	if (camera)
+		camera.status = 1
+
+/datum/robot_component/camera/uninstall()
+	if (camera)
+		camera.status = 0
+		camera.kick_viewers()
+
+/datum/robot_component/camera/destroy()
+	if (camera)
+		camera.status = 0
+		camera.kick_viewers()
 
 // SELF DIAGNOSIS MODULE
 // Analyses cyborg's modules, providing damage readouts and basic information

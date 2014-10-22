@@ -284,11 +284,3 @@
 		return 1
 	busy = 0
 	return 0
-
-/obj/machinery/camera/proc/is_functional()
-	if(istype(loc,/mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = loc
-		if(!R.stat && R.is_component_functioning("camera"))
-			return 1
-		return 0
-	return status

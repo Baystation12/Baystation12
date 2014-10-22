@@ -115,13 +115,12 @@
 			return
 		else
 			if(message_mode)
-				if(message_mode in (radiochannels | "department"))
-					if(l_ear && istype(l_ear,/obj/item/device/radio))
-						l_ear.talk_into(src,message, message_mode, verb, speaking)
-						used_radios += l_ear
-					else if(r_ear && istype(r_ear,/obj/item/device/radio))
-						r_ear.talk_into(src,message, message_mode, verb, speaking)
-						used_radios += r_ear
+				if(l_ear && istype(l_ear,/obj/item/device/radio))
+					l_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += l_ear
+				else if(r_ear && istype(r_ear,/obj/item/device/radio))
+					r_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += r_ear
 
 	var/sound/speech_sound
 	var/sound_vol
@@ -129,7 +128,18 @@
 		speech_sound = sound(pick(species.speech_sounds))
 		sound_vol = 50
 
-	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
+	//speaking into radios
+	if(used_radios.len)
+		italics = 1
+		message_range = 1
+
+		for(var/mob/living/M in hearers(5, src))
+			if(M != src)
+				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "the radio."]</span>")
+			if (speech_sound)
+				sound_vol *= 0.5
+
+	..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
