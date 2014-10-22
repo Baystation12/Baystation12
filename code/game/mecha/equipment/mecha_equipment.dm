@@ -95,6 +95,9 @@
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/can_attach(obj/mecha/M as obj)
+	if(M.equipment.len >= M.max_equip)
+		return 0
+
 	if (ispath(required_type))
 		return istype(M, required_type)
 	

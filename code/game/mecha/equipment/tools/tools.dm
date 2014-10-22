@@ -5,7 +5,7 @@
 	energy_drain = 10
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
-	required_type = /obj/mecha/working
+	required_type = list(/obj/mecha/working, /obj/mecha/hoverpod) //so that hoverpods are a bit more useful as space transportation
 
 	attach(obj/mecha/M as obj)
 		..()
