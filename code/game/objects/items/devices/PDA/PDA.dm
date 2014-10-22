@@ -347,7 +347,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	var/data[0]  // This is the data that will be sent to the PDA
 
-
 	data["owner"] = owner					// Who is your daddy...
 	data["ownjob"] = ownjob					// ...and what does he do?
 
@@ -669,7 +668,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					active_conversation=P
 					mode=21
 		if("Send Honk")//Honk virus
-			if(istype(cartridge, /obj/item/weapon/cartridge/clown))//Cartridge checks are kind of unnecessary since everything is done through switch.
+			if(cartridge && cartridge.access_clown)//Cartridge checks are kind of unnecessary since everything is done through switch.
 				var/obj/item/device/pda/P = locate(href_list["target"])//Leaving it alone in case it may do something useful, I guess.
 				if(!isnull(P))
 					if (!P.toff && cartridge.charges > 0)
@@ -682,7 +681,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				ui.close()
 				return 0
 		if("Send Silence")//Silent virus
-			if(istype(cartridge, /obj/item/weapon/cartridge/mime))
+			if(cartridge && cartridge.access_mime)
 				var/obj/item/device/pda/P = locate(href_list["target"])
 				if(!isnull(P))
 					if (!P.toff && cartridge.charges > 0)
@@ -709,34 +708,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							M.close()
 
 		if("Detonate")//Detonate PDA... maybe
-			// check if telecomms I/O route 1459 is stable
-			//var/telecomms_intact = telecomms_process(P.owner, owner, t)
-			var/obj/machinery/message_server/useMS = null
-			if(message_servers)
-				for (var/obj/machinery/message_server/MS in message_servers)
-				//PDAs are now dependant on the Message Server.
-					if(MS.active)
-						useMS = MS
-						break
-
-			var/datum/signal/signal = src.telecomms_process()
-
-			var/useTC = 0
-			if(signal)
-				if(signal.data["done"])
-					useTC = 1
-					var/turf/pos = get_turf(src)
-					if(pos.z in signal.data["level"])
-						useTC = 2
-
-			if(istype(cartridge, /obj/item/weapon/cartridge/syndicate))
-				if(!(useMS && useTC))
+			if(cartridge && cartridge.access_detonate_pda)
+				var/obj/item/device/pda/P = locate(href_list["target"])
+				var/datum/reception/reception = get_reception(src, P, "")
+				if(!(reception.message_server && reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER))
 					U.show_message("\red An error flashes on your [src]: Connection unavailable", 1)
 					return
-				if(useTC != 2) // Does our recepient have a broadcaster on their level?
+				if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recepient have a broadcaster on their level?
 					U.show_message("\red An error flashes on your [src]: Recipient unavailable", 1)
 					return
-				var/obj/item/device/pda/P = locate(href_list["target"])
 				if(!isnull(P))
 					if (!P.toff && cartridge.charges > 0)
 						cartridge.charges--
@@ -900,34 +880,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	last_text = world.time
-	// check if telecomms I/O route 1459 is stable
-	//var/telecomms_intact = telecomms_process(P.owner, owner, t)
-	var/obj/machinery/message_server/useMS = null
-	if(message_servers)
-		for (var/obj/machinery/message_server/MS in message_servers)
-		//PDAs are now dependent on the Message Server.
-			if(MS.active)
-				useMS = MS
-				break
+	var/datum/reception/reception = get_reception(src, P, t)
+	t = reception.message
 
-	var/datum/signal/signal = src.telecomms_process()
-
-	var/useTC = 0
-	if(signal)
-		if(signal.data["done"])
-			useTC = 1
-			var/turf/pos = get_turf(P)
-			if(pos.z in signal.data["level"])
-				useTC = 2
-				//Let's make this barely readable
-				if(signal.data["compression"] > 0)
-					t = Gibberish(t, signal.data["compression"] + 50)
-
-	if(useMS && useTC) // only send the message if it's stable
-		if(useTC != 2) // Does our recipient have a broadcaster on their level?
+	if(reception.message_server && reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER) // only send the message if it's stable
+		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?
 			U << "ERROR: Cannot reach recipient."
 			return
-		var/send_result = useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		var/send_result = reception.message_server.send_pda_message("[P.owner]","[owner]","[t]")
 		if (send_result)
 			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
 			return
