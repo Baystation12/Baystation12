@@ -256,6 +256,7 @@ var/list/mechtoys = list(
 			//supply manifest generation begin
 
 			var/obj/item/weapon/paper/manifest/slip = new /obj/item/weapon/paper/manifest(A)
+			slip.name = "[SP.containername] Shipping Manifest"
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"
 			slip.info +="Destination: [station_name]<br>"
