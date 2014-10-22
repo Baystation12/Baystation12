@@ -46,7 +46,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_pod_1_berth"
 	shuttle.dock_target_offsite = "escape_pod_1_recovery"
 	shuttle.transit_direction = NORTH
-	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-10, 10)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
 	shuttles["Escape Pod 1"] = shuttle
 
@@ -60,7 +60,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_pod_2_berth"
 	shuttle.dock_target_offsite = "escape_pod_2_recovery"
 	shuttle.transit_direction = NORTH
-	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-10, 10)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
 	shuttles["Escape Pod 2"] = shuttle
 
@@ -74,7 +74,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_pod_3_berth"
 	shuttle.dock_target_offsite = "escape_pod_3_recovery"
 	shuttle.transit_direction = EAST
-	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-10, 10)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
 	shuttles["Escape Pod 3"] = shuttle
 
@@ -90,7 +90,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_pod_5_berth"
 	shuttle.dock_target_offsite = "escape_pod_5_recovery"
 	shuttle.transit_direction = EAST //should this be WEST? I have no idea.
-	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-10, 10)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
 	shuttles["Escape Pod 5"] = shuttle
 
@@ -106,9 +106,27 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_station = "escape_pod_medical_berth"
 	shuttle.dock_target_offsite = "escape_pod_medical_recovery"
 	shuttle.transit_direction = EAST //should this be WEST? I have no idea.
-	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-30, 60)	//randomize this so it seems like the pods are being picked up one by one
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN + rand(-10, 10)	//randomize this so it seems like the pods are being picked up one by one
 	process_shuttles += shuttle
 	shuttles["Medical Escape Pod"] = shuttle
+
+	//Arrivals Shuttle
+
+	shuttle = new/datum/shuttle/ferry/escape_pod()
+	shuttle.location = 0
+	shuttle.warmup_time = 0
+	shuttle.area_station = locate(/area/shuttle/arrival/station)
+	shuttle.area_offsite = locate(/area/shuttle/escape_pod_arrivals/centcom)
+	shuttle.area_transition = locate(/area/shuttle/escape_pod_arrivals/transit)
+	shuttle.docking_controller_tag = "escape_pod_arrivals"
+	shuttle.dock_target_station = "escape_pod_arrivals_berth"
+	shuttle.dock_target_offsite = "escape_pod_arrivals_recovery"
+	shuttle.transit_direction = EAST //should this be WEST? I have no idea.
+	shuttle.move_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	process_shuttles += shuttle
+	shuttles["Arrivals Shuttle"] = shuttle
+
+
 
 
 	//give the emergency shuttle controller it's shuttles
@@ -119,6 +137,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 		shuttles["Escape Pod 3"],
 		shuttles["Escape Pod 5"],
 		shuttles["Medical Escape Pod"],
+		shuttles["Arrivals Shuttle"],
 	)
 
 	// Supply shuttle

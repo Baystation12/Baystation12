@@ -87,7 +87,6 @@
 	speech_verb = "chirps and hums"
 	ask_verb = "chirps and hums"
 	exclaim_verb = "chirps"
-	whisp = "hums softly"
 	colour = "Chittin"
 	key = "5"
 	flags = RESTRICTED

@@ -336,7 +336,7 @@ datum/objective/silence
 					var/turf/T = get_turf(player)
 					if(!T)	continue
 					switch(T.loc.type)
-						if(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom, /area/shuttle/escape_pod_medical/centcom)
+						if(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom, /area/shuttle/escape_pod_medical/centcom,  /area/shuttle/escape_pod_arrivals/centcom)
 							return 0
 		return 1
 
@@ -377,6 +377,8 @@ datum/objective/escape
 		if(istype(check_area, /area/shuttle/escape_pod5/centcom))
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod_medical/centcom))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_arrivals/centcom))
 			return 1
 		else
 			return 0
@@ -595,6 +597,8 @@ datum/objective/steal
 						if(istype(check_area, /area/shuttle/escape_pod5/centcom))
 							return 1
 						if(istype(check_area, /area/shuttle/escape_pod_medical/centcom))
+							return 1
+						if(istype(check_area, /area/shuttle/escape_pod_arrivals/centcom))
 							return 1
 			else
 
