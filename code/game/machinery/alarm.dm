@@ -151,7 +151,7 @@
 	if (alarm_area.master)
 		alarm_area = alarm_area.master
 	area_uid = alarm_area.uid
-	if (name in list("alarm NORTH", "alarm EAST", "alarm SOUTH", "alarm WEST")
+	if (name in list("alarm NORTH", "alarm EAST", "alarm SOUTH", "alarm WEST"))
 		name = "[alarm_area.name] Air Alarm"
 
 	// breathable air according to human/Life()
