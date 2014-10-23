@@ -5,32 +5,28 @@
 # Ranks can be anything defined in admin_ranks.txt           ~Carn   #
 ######################################################################
 
-Aztectornado - DevMentor
-Silvertorch5 - DevMentor
-Tehflamintaco - DevMentor
-
-Yithani - Mentor
-Esmeerelda - Mentor
-Avisionofsound - Mentor
-
-mordrehel - Tertiary Admin
-Mewth - Tertiary Admin
-Scorch289 -Tertiary Admin
-Tysonix1 - Secondary Admin
-Tysonix - Secondary Admin
-Regtaf - Secondary Admin
-Hlaskey - Secondary Admin
-CreeperJoe - Secondary Admin
-Bobbob212 - Primary Admin
-Sydney95 - Primary Admin
-
-Jtdrow - Head Admin
-Pisest - Head Admin
-Jamiedigweed - Game Master
-Emmanuelbassil - Head Of Staff
-
 Sshado - Host
 
+Emmanuelbassil - Head Of Staff
+Jamiedigweed - Game Master
+Pisest - Head Admin
+
+Sydney95 - Primary Admin
+Bobbob212 - Primary Admin
+CreeperJoe - Secondary Admin
+Hlaskey - Secondary Admin
+Regtaf - Secondary Admin
+Tysonix - Secondary Admin
+Tysonix1 - Secondary Admin
+Scorch289 -Tertiary Admin
+Mewth - Tertiary Admin
+mordrehel - Tertiary Admin
+
+Avisionofsound - Mentor
+Esmeerelda - Mentor
+Yithani - Mentor
+
+Aztectornado - Developer
 
 
 
