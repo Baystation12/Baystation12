@@ -487,6 +487,10 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
+//click cooldowns, in tenths of a second
+
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
 var/list/liftable_structures = list(\
