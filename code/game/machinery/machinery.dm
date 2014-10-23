@@ -318,9 +318,10 @@ Class Procs:
 	if(is_assess_emagged())
 		return 10	//if emagged, always return 10.
 
-	var/on_asses = on_assess_perp(perp)
-	if(on_asses)
-		return on_asses
+	var/assess_result = on_assess_perp(perp)
+	if(assess_result)
+		return assess_result
+
 	if(auth_weapons && !src.allowed(perp))
 		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
 			if(!istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/bluetag) \

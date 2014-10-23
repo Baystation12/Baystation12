@@ -1,18 +1,31 @@
+////////////////////////
+//Turret Control Panel//
+////////////////////////
+
 /obj/machinery/turretid
-	name = "Turret deactivation control"
-	icon = 'icons/obj/device.dmi'
-	icon_state = "motion3"
+	name = "turret control panel"
+	desc = "Used to control a room's automated defenses."
+	icon = 'icons/obj/machines/turret_control.dmi'
+	icon_state = "control_standby"
 	anchored = 1
 	density = 0
-	var/enabled = 1
+	var/enabled = 0
 	var/lethal = 0
 	var/locked = 1
 	var/control_area //can be area name, path or nothing.
 	var/ailock = 0 // AI cannot use this
 	req_access = list(access_ai_upload)
 
-/obj/machinery/turretid/New()
-	..()
+/obj/machinery/turretid/stun
+	enabled = 1
+	icon_state = "control_stun"
+
+/obj/machinery/turretid/lethal
+	enabled = 1
+	lethal = 1
+	icon_state = "control_kill"
+
+/obj/machinery/turretid/initialize()
 	if(!control_area)
 		var/area/CA = get_area(src)
 		if(CA.master && CA.master != CA)
@@ -24,6 +37,7 @@
 			if(A.name && A.name==control_area)
 				control_area = A
 				break
+	power_change() //Checks power and initial settings
 	//don't have to check if control_area is path, since get_area_all_atoms can take path.
 	return
 
@@ -33,7 +47,7 @@
 		return src.attack_hand(user)
 
 	if (istype(W, /obj/item/weapon/card/emag) && !emagged)
-		user << "\red You short out the turret controls' access analysis module."
+		user << "<span class='danger'>You short out the turret controls' access analysis module.</span>"
 		emagged = 1
 		locked = 0
 		if(user.machine==src)
@@ -66,12 +80,11 @@
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 
 /obj/machinery/turretid/attack_hand(mob/user as mob)
-	if ( get_dist(src, user) > 0 )
-		if ( !issilicon(user) )
-			user << "<span class='notice'>You are too far away.</span>"
-			user.unset_machine()
-			user << browse(null, "window=turretid")
-			return
+	if (get_dist(src, user) > 0 && !issilicon(user))
+		user << "<span class='notice'>You are too far away.</span>"
+		user.unset_machine()
+		user << browse(null, "window=turretid")
+		return
 
 	user.set_machine(src)
 	var/loc = src.loc
@@ -81,53 +94,57 @@
 		user << text("Turret badly positioned - loc.loc is [].", loc)
 		return
 	var/area/area = loc
-	var/t = "<TT><B>Turret Control Panel</B> ([area.name])<HR>"
+	var/t = ""
 
 	if(src.locked && (!istype(user, /mob/living/silicon)))
-		t += "<I>(Swipe ID card to unlock control panel.)</I><BR>"
+		t += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
 	else
+		if (!istype(user, /mob/living/silicon))
+			t += "<div class='notice icon'>Swipe ID card to lock interface</div>"
 		t += text("Turrets [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.enabled?"activated":"deactivated", src, src.enabled?"Disable":"Enable")
 		t += text("Currently set for [] - <A href='?src=\ref[];toggleLethal=1'>Change to []?</a><br>\n", src.lethal?"lethal":"stun repeatedly", src,  src.lethal?"Stun repeatedly":"Lethal")
 
-	user << browse(t, "window=turretid")
-	onclose(user, "turretid")
+	//user << browse(t, "window=turretid")
+	//onclose(user, "turretid")
+	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])")
+	popup.set_content(t)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
 
-/obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
-	if(..(href, href_list))
+/obj/machinery/turretid/Topic(href, href_list)
+	if(..())
 		return
 	if (src.locked)
 		if (!istype(usr, /mob/living/silicon))
 			usr << "Control panel is locked!"
 			return
-	if ( get_dist(src, usr) == 0 || issilicon(usr))
-		if (href_list["toggleOn"])
-			src.enabled = !src.enabled
-			src.updateTurrets()
-		else if (href_list["toggleLethal"])
-			src.lethal = !src.lethal
-			src.updateTurrets()
-	if(!nowindow)
-		src.attack_hand(usr)
+	if (href_list["toggleOn"])
+		src.enabled = !src.enabled
+		src.updateTurrets()
+	else if (href_list["toggleLethal"])
+		src.lethal = !src.lethal
+		src.updateTurrets()
+	src.attack_hand(usr)
 
 /obj/machinery/turretid/proc/updateTurrets()
 	if(control_area)
-		for (var/obj/machinery/turret/aTurret in get_area_all_atoms(control_area))
+		for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
 			aTurret.setState(enabled, lethal)
-	src.update_icons()
+	src.update_icon()
 
-/obj/machinery/turretid/proc/update_icons()
-	if (src.enabled)
-		if (src.lethal)
-			icon_state = "motion1"
+/obj/machinery/turretid/power_change()
+	..()
+	updateTurrets()
+	update_icon()
+
+/obj/machinery/turretid/update_icon()
+	..()
+	if(stat & NOPOWER)
+		icon_state = "control_off"
+	else if (enabled)
+		if (lethal)
+			icon_state = "control_kill"
 		else
-			icon_state = "motion3"
+			icon_state = "control_stun"
 	else
-		icon_state = "motion0"
-																				//CODE FIXED BUT REMOVED
-//	if(control_area)															//USE: updates other controls in the area
-//		for (var/obj/machinery/turretid/Turret_Control in world)				//I'm not sure if this is what it was
-//			if( Turret_Control.control_area != src.control_area )	continue	//supposed to do. Or whether the person
-//			Turret_Control.icon_state = icon_state								//who coded it originally was just tired
-//			Turret_Control.enabled = enabled									//or something. I don't see  any situation
-//			Turret_Control.lethal = lethal										//in which this would be used on the current map.
-																				//If he wants it back he can uncomment it
+		icon_state = "control_standby"
