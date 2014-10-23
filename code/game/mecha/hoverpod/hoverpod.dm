@@ -5,7 +5,7 @@
 	initial_icon = "engineering_pod"
 	internal_damage_threshold = 80
 	step_in = 4
-	step_energy_drain = 5
+	step_energy_drain = 10
 	max_temperature = 20000
 	health = 150
 	infra_luminosity = 6
@@ -13,44 +13,31 @@
 	var/list/cargo = new
 	var/cargo_capacity = 3
 	max_equip = 2
-	var/ion_trail = new /datum/effect/effect/system/ion_trail_follow()
+	var/datum/effect/effect/system/ion_trail_follow/ion_trail
 
 /obj/mecha/hoverpod/New()
 	..()
 	var/turf/T = get_turf(src)
 	if(T.z != 2)
 		new /obj/item/mecha_parts/mecha_tracking(src)
-	return
+	
+	ion_trail = new /datum/effect/effect/system/ion_trail_follow()
+	ion_trail.set_up(src)
+	ion_trail.start()
 
 /obj/mecha/hoverpod/range_action(atom/target as obj|mob|turf)
 	return
 	
 //No space drifting
-/obj/mecha/hoverpod/dyndomove(direction)
-	if(!can_move)
-		return 0
-	if(src.pr_inertial_movement.active())
-		return 0
-	if(!has_charge(step_energy_drain))
-		return 0
-	var/move_result = 0
-	if(hasInternalDamage(MECHA_INT_CONTROL_LOST))
-		move_result = mechsteprand()
-	else if(src.dir!=direction)
-		move_result = mechturn(direction)
-	else
-		move_result	= mechstep(direction)
-	if(move_result)
-		can_move = 0
-		use_power(step_energy_drain)
-		/*if(istype(src.loc, /turf/space))
-			if(!src.check_for_support())
-				src.pr_inertial_movement.start(list(src,direction))
-				src.log_message("Movement control lost. Inertial movement started.")*/
-		if(do_after(step_in))
-			can_move = 1
+/obj/mecha/hoverpod/check_for_support()
+	//does the hoverpod have enough charge left to stabilize itself?
+	if (has_charge(step_energy_drain))
+		if (!ion_trail.on)
+			ion_trail.start()
 		return 1
-	return 0
+	
+	ion_trail.stop()
+	return ..()
 
 //these three procs overriden to play different sounds
 /obj/mecha/hoverpod/mechturn(direction)
