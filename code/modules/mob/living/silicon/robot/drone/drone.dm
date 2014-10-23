@@ -28,13 +28,12 @@
 	var/mail_destination = ""
 
 	holder_type = /obj/item/weapon/holder/drone
+
 /mob/living/silicon/robot/drone/New()
 
 	..()
 
-	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
-
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
@@ -135,7 +134,7 @@
 		clear_supplied_laws()
 		clear_inherent_laws()
 		laws = new /datum/ai_laws/syndicate_override
-		set_zeroth_law("Only [user.real_name] and people he designates as being such are Syndicate Agents.")
+		set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 
 		src << "<b>Obey these laws:</b>"
 		laws.show_laws(src)

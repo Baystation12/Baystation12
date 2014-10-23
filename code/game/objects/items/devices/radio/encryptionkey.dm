@@ -5,6 +5,7 @@
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
 	item_state = ""
+	w_class = 1
 	var/translate_binary = 0
 	var/translate_hive = 0
 	var/syndie = 0
@@ -17,7 +18,7 @@
 
 /obj/item/device/encryptionkey/syndicate
 	icon_state = "cypherkey"
-	channels = list("Syndicate" = 1)
+	channels = list("Mercenary" = 1)
 	origin_tech = "syndicate=3"
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 

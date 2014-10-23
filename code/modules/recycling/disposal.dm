@@ -1055,6 +1055,9 @@
 		return P
 ///// Z-Level stuff
 
+/obj/structure/disposalpipe/junction/yjunction
+	icon_state = "pipe-y"
+
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
 	icon_state = "pipe-j1"

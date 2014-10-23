@@ -141,7 +141,7 @@
 /mob/living/carbon/human/getCloneLoss()
 	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
 		cloneloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
 	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
@@ -188,7 +188,7 @@
 /mob/living/carbon/human/getOxyLoss()
 	if(species.flags & NO_BREATHE)
 		oxyloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/adjustOxyLoss(var/amount)
 	if(species.flags & NO_BREATHE)
@@ -205,7 +205,7 @@
 /mob/living/carbon/human/getToxLoss()
 	if(species.flags & NO_POISON)
 		toxloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/adjustToxLoss(var/amount)
 	if(species.flags & NO_POISON)

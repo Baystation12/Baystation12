@@ -219,7 +219,7 @@
 	else
 		usr << "You button-up some imaginary buttons on your [src]."
 		return
-	usr.update_inv_wear_suit()
+	update_clothing_icon()
 
 //pyjamas
 //originally intended to be pinstripes >.>
