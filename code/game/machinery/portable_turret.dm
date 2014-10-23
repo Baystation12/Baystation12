@@ -3,6 +3,10 @@
 		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
+#define TURRET_PRIORITY_TARGET 2
+#define TURRET_SECONDARY_TARGET 1
+#define TURRET_NOT_TARGET 0
+
 /obj/machinery/porta_turret
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
@@ -14,9 +18,9 @@
 	use_power = 1				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
-	req_access = list(access_security)
+	req_access = null
+	req_one_access = list(access_security, access_heads)
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
-	req_access = list(63)
 
 	var/lasercolor = ""		//Something to do with lasertag turrets, blame Sieve for not adding a comment.
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
@@ -304,6 +308,7 @@
 		if(allowed(user))
 			locked = !locked
 			user << "<span class='notice'>Controls are now [locked ? "locked" : "unlocked"].</span>"
+			updateUsrDialog()
 		else
 			user << "<span class='notice'>Access denied.</span>"
 
@@ -421,72 +426,63 @@
 				targets += C
 
 	for(var/obj/mecha/ME in view(7,src))
-		if(ME.occupant)
-			switch(assess_carbon(ME.occupant))
-				if(1)
-					targets += ME.occupant
-				if(2)
-					secondarytargets += ME.occupant
+		assess_and_assign_carbon(ME.occupant, targets, secondarytargets)
 
 	for(var/obj/vehicle/train/T in view(7,src))
-		if(T && T.load && T.is_train_head())
-			switch(assess_carbon(T.load))
-				if(1)
-					targets += T.load
-				if(2)
-					secondarytargets += T.load
+		assess_and_assign_carbon(T.load, targets, secondarytargets)
 
 	for(var/mob/living/carbon/C in view(7,src))	//loops through all living carbon-based lifeforms in view
-		switch(assess_carbon(C))
-			if(1)
-				targets += C
-			if(2)
-				secondarytargets += C
+		assess_and_assign_carbon(C, targets, secondarytargets)
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			spawn()
 				popDown() // no valid targets, close the cover
 
+/obj/machinery/porta_turret/proc/assess_and_assign_carbon(var/mob/living/carbon/C, var/list/targets, var/list/secondarytargets)
+	switch(assess_carbon(C))
+		if(TURRET_PRIORITY_TARGET)
+			targets += C
+		if(TURRET_SECONDARY_TARGET)
+			secondarytargets += C
+
 /obj/machinery/porta_turret/proc/assess_carbon(var/mob/living/carbon/C)
 	if(!C)
-		return 0
+		return TURRET_NOT_TARGET
 
-	if(istype(C, /mob/living/carbon/alien) && check_anomalies) //git those fukken xenos
-		if(!C.stat)	//if it's dead/dying, there's no need to keep shooting at it.
-			return 2
+	if(emagged)	//if emagged, HOLY SHIT EVERYONE IS DANGEROUS beep boop beep
+			return TURRET_PRIORITY_TARGET
 
+	if(isxenomorph(C) && check_anomalies)
+		return C.stat ? TURRET_NOT_TARGET : TURRET_PRIORITY_TARGET	//if it's dead/dying, there's no need to keep shooting at it.
 	else
-		if(emagged)	//if emagged, HOLY SHIT EVERYONE IS DANGEROUS beep boop beep
-			return 2
-		else
-			if(C.stat || C.handcuffed)	//if the perp is handcuffed or dead/dying, no need to bother really
-				return 0				//move onto next potential victim!
+		if(C.stat || C.handcuffed)		//if the perp is handcuffed or dead/dying, no need to bother really
+			return TURRET_NOT_TARGET	//move onto next potential victim!
 
-			var/dst = get_dist(src, C)	//if it's too far away, why bother?
-			if(dst > 7)
-				return 0
+		var/dst = get_dist(src, C)	//if it's too far away, why bother?
+		if(dst > 7)
+			return 0
 
-			if(ai)	//If it's set to attack all nonsilicons, target them!
-				if(C.lying)
-					if(lasercolor)
-						return 0
-					else
-						return 1
+		if(ai)	//If it's set to attack all nonsilicons, target them!
+			if(C.lying)
+				if(lasercolor)
+					return TURRET_NOT_TARGET
 				else
-					return 2
+					return TURRET_SECONDARY_TARGET
+			else
+				return TURRET_PRIORITY_TARGET
 
-			if(istype(C, /mob/living/carbon/human))	//if the target is a human, analyze threat level
-				if(assess_perp(C, auth_weapons, check_records, lasercolor) < 4)
-					return 0	//if threat level < 4, keep going
+		if(ishuman(C))	//if the target is a human, analyze threat level
+			if(assess_perp(C, auth_weapons, check_records, lasercolor) < 4)
+				return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
-			else if(istype(C, /mob/living/carbon/monkey))
-				return 0	//Don't target monkeys or borgs/AIs you dumb shit
+		else if(ismonkey(C))
+			return TURRET_NOT_TARGET	//Don't target monkeys or borgs/AIs
 
-			if(C.lying)		//if the perp is lying down, it's still a target but a less-important target
-				return 1
+		if(C.lying)		//if the perp is lying down, it's still a target but a less-important target
+			return TURRET_SECONDARY_TARGET
 
-			return 2	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
+	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	while(targets.len > 0)
@@ -954,5 +950,5 @@
 	emagged = 1
 
 	New()
-		installation = new/obj/item/weapon/gun/energy/laser(loc)
+		installation = /obj/item/weapon/gun/energy/laser
 		..()

@@ -10,6 +10,15 @@
 		return 1
 	return 0
 
+/proc/isxenomorph(A)
+	if(isalien(A))
+		return 1
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		var/xeno = "Xenomorph"
+		return findtext(C.species.name, xeno, 0, lentext(xeno))
+	return 0
+
 /proc/ismonkey(A)
 	if(A && istype(A, /mob/living/carbon/monkey))
 		return 1

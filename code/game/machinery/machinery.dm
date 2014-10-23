@@ -318,9 +318,9 @@ Class Procs:
 	if(is_assess_emagged())
 		return 10	//if emagged, always return 10.
 
-	var/assess_result = on_assess_perp(perp)
-	if(assess_result)
-		return assess_result
+	threatcount += on_assess_perp(perp)
+	if(threatcount >= 10)
+		return threatcount
 
 	if(auth_weapons && !src.allowed(perp))
 		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
@@ -340,9 +340,6 @@ Class Procs:
 			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag) \
 			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/practice))
 				threatcount += 2
-
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/wizrobe))
-			threatcount += 2
 
 		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
 			threatcount += 2

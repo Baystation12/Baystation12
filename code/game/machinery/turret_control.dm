@@ -89,10 +89,8 @@
 	user.set_machine(src)
 	var/loc = src.loc
 	if (istype(loc, /turf))
-		loc = loc:loc
-	if (!istype(loc, /area))
-		user << text("Turret badly positioned - loc.loc is [].", loc)
-		return
+		var/turf/T = loc
+		loc = T.loc
 	var/area/area = loc
 	var/t = ""
 

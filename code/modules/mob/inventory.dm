@@ -181,7 +181,7 @@
 		update_inv_wear_mask(0)
 	return
 
-/mob/proc/unEquip(obj/item/I, force) //Force overrides NODROP for things like wizarditis and admin undress.
+/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
 	if(!I) //If there's nothing to drop, the drop is automatically successful. If(unEquip) should generally be used to check for NODROP.
 		return 1
 
