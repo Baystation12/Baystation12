@@ -70,5 +70,5 @@
 
 /obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/crowbar))
-		new /obj/mecha/working/hoverpod(loc)
+		new /obj/mecha/hoverpod(loc)
 	..()
