@@ -58,22 +58,25 @@
 	//var/telecomms_intact = telecomms_process(P.owner, owner, t)
 	reception.message_server = get_message_server()
 
-	var/datum/signal/signal = sender.telecomms_process()
+	var/datum/signal/signal = sender.telecomms_process()	// Be aware that this proc calls sleep, to simulate transmition delays
 	reception.telecomms_reception |= get_sender_reception(sender, signal)
 	reception.telecomms_reception |= get_receiver_reception(receiver, signal)
 	reception.message = signal && signal.data["compression"] > 0 ? Gibberish(message, signal.data["compression"] + 50) : message
 
 	return reception
 
-/proc/get_receptions(var/atom/sender, var/list/receivers)
+/proc/get_receptions(var/atom/sender, var/list/atom/receivers)
 	var/datum/receptions/receptions = new
 	receptions.message_server = get_message_server()
 
-	var/datum/signal/signal = sender.telecomms_process()
-	receptions.sender_reception = get_sender_reception(sender, signal)
+	var/datum/signal/signal
+	if(sender)
+		signal = sender.telecomms_process()
+		receptions.sender_reception = get_sender_reception(sender, signal)
 
-	if(receptions.sender_reception)
-		for(var/receiver in receivers)
-			receptions.receiver_reception[receiver] = get_receiver_reception(receiver, signal)
+	for(var/atom/receiver in receivers)
+		if(!signal)
+			signal = receiver.telecomms_process()
+		receptions.receiver_reception[receiver] = get_receiver_reception(receiver, signal)
 
 	return receptions
