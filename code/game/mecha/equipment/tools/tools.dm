@@ -1163,6 +1163,10 @@
 	if (!usr.Adjacent(src))
 		return
 	
+	if (!isturf(usr.loc))
+		usr << "\red You can't reach the passenger compartment from here."
+		return
+	
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
