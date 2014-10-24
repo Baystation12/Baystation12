@@ -298,6 +298,7 @@ update_flag
 				release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the [holding]<br>"
 			else
 				release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the <font color='red'><b>air</b></font><br>"
+				message_admins("<font color='#386aff'>[usr.name] ([usr.ckey]) opened a canister into [usr.lastarea]</font>(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)(<a href='?src=\ref[usr];priv_msg=\ref[usr]'>PM</a>)" )
 		else
 			if (holding)
 				release_log += "Valve was <b>opened</b> by [usr] ([usr.ckey]), starting the transfer into the [holding]<br>"
