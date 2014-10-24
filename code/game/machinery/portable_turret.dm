@@ -420,67 +420,69 @@
 	var/list/targets = list()			//list of primary targets
 	var/list/secondarytargets = list()	//targets that are least important
 
-	if(check_anomalies)	//if its set to check for xenos/carps, check for non-mob "crittersssss"(And simple_animals)
-		for(var/mob/living/simple_animal/C in view(7, src))
-			if(!C.stat)
-				targets += C
-
 	for(var/obj/mecha/ME in view(7,src))
-		assess_and_assign_carbon(ME.occupant, targets, secondarytargets)
+		assess_and_assign(ME.occupant, targets, secondarytargets)
 
 	for(var/obj/vehicle/train/T in view(7,src))
-		assess_and_assign_carbon(T.load, targets, secondarytargets)
+		assess_and_assign(T.load, targets, secondarytargets)
 
-	for(var/mob/living/carbon/C in view(7,src))	//loops through all living carbon-based lifeforms in view
-		assess_and_assign_carbon(C, targets, secondarytargets)
+	for(var/mob/living/C in view(7,src))	//loops through all living lifeforms in view
+		assess_and_assign(C, targets, secondarytargets)
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
 			spawn()
 				popDown() // no valid targets, close the cover
 
-/obj/machinery/porta_turret/proc/assess_and_assign_carbon(var/mob/living/carbon/C, var/list/targets, var/list/secondarytargets)
-	switch(assess_carbon(C))
+/obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
+	switch(assess_living(L))
 		if(TURRET_PRIORITY_TARGET)
-			targets += C
+			targets += L
 		if(TURRET_SECONDARY_TARGET)
-			secondarytargets += C
+			secondarytargets += L
 
-/obj/machinery/porta_turret/proc/assess_carbon(var/mob/living/carbon/C)
-	if(!C)
+/obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+	if(!L)
 		return TURRET_NOT_TARGET
 
-	if(emagged)	//if emagged, HOLY SHIT EVERYONE IS DANGEROUS beep boop beep
+	if(emagged && !isAI(L))	//if emagged, target everything (except the AI, otherwise lethal-set turrets attempt to fire at it in the core)
+		return TURRET_PRIORITY_TARGET
+
+	if(issilicon(L))	// Don't target silica
+		return TURRET_NOT_TARGET
+
+	if(L.stat)		//if the perp is dead/dying, no need to bother really
+		return TURRET_NOT_TARGET	//move onto next potential victim!
+
+	var/dst = get_dist(src, L)	//if it's too far away, why bother?
+	if(dst > 7)
+		return 0
+
+	if(ai)	//If it's set to attack all non-silicons, target them!
+		if(L.lying)
+			if(lasercolor)
+				return TURRET_NOT_TARGET
+			else
+				return TURRET_SECONDARY_TARGET
+		else
 			return TURRET_PRIORITY_TARGET
 
-	if(isxenomorph(C) && check_anomalies)
-		return C.stat ? TURRET_NOT_TARGET : TURRET_PRIORITY_TARGET	//if it's dead/dying, there's no need to keep shooting at it.
-	else
-		if(C.stat || C.handcuffed)		//if the perp is handcuffed or dead/dying, no need to bother really
-			return TURRET_NOT_TARGET	//move onto next potential victim!
+	if(iscuffed(L)) // If the target is handcuffed, leave it alone
+		return TURRET_NOT_TARGET
 
-		var/dst = get_dist(src, C)	//if it's too far away, why bother?
-		if(dst > 7)
-			return 0
+	if(isanimal(L)) // Animals are not so dangerous
+		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
+		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
-		if(ai)	//If it's set to attack all nonsilicons, target them!
-			if(C.lying)
-				if(lasercolor)
-					return TURRET_NOT_TARGET
-				else
-					return TURRET_SECONDARY_TARGET
-			else
-				return TURRET_PRIORITY_TARGET
+	if(ishuman(L))	//if the target is a human, analyze threat level
+		if(assess_perp(L, auth_weapons, check_records, lasercolor) < 4)
+			return TURRET_NOT_TARGET	//if threat level < 4, keep going
+	else if(ismonkey(L))
+		return TURRET_NOT_TARGET	//Don't target monkeys or borgs/AIs
 
-		if(ishuman(C))	//if the target is a human, analyze threat level
-			if(assess_perp(C, auth_weapons, check_records, lasercolor) < 4)
-				return TURRET_NOT_TARGET	//if threat level < 4, keep going
-
-		else if(ismonkey(C))
-			return TURRET_NOT_TARGET	//Don't target monkeys or borgs/AIs
-
-		if(C.lying)		//if the perp is lying down, it's still a target but a less-important target
-			return TURRET_SECONDARY_TARGET
+	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
+		return TURRET_SECONDARY_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
@@ -584,7 +586,7 @@
 	A.current = T
 	A.yo = U.y - T.y
 	A.xo = U.x - T.x
-	spawn( 1 )
+	spawn(1)
 		A.process()
 
 /obj/machinery/porta_turret/proc/setState(var/on, var/emagged)

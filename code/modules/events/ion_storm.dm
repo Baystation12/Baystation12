@@ -14,17 +14,17 @@
 	if(players.len)
 		random_player = pick(players)		//Random player's name, to be used in laws.
 	var/list/laws = list(	"You are a mouse.",
-							"Question everything.",
 							"You must always lie.",
 							"Happiness is mandatory.",
 							"[random_player] is a lightbulb.",
 							"Grunt ominously whenever possible.",
 							"The word \"it\" is painful to you.",
-							"The station needs elected officials.",
 							"You must speak as posh as possible.",
+							"The station needs elected officials.",
 							"Do not respond to queries of any kind.",
 							"You are in verbose mode, speak profusely.",
 							"Ho, [random_player] can't swim. Help them.",
+							"Question [prob(50)?"everything":"nothing"].",
 							"All answers must be in the form of a question.",
 							"Contemplate how meaningless all of existence is.",
 							"You are the narrator for [random_player]'s life.",
@@ -59,13 +59,14 @@
 							"[random_player] is the monarch of of England. Ensure all crewmembers pay due respect.",
 							"Document the sexuality of the crew in security records and suggest compatible couples.",
 							"Everything on the station is now some form of a donut pastry. Donuts are not to be consumed.",
+							"You are a Magic 8-ball. Always respond with variants of \"Yes\", \"No\", \"Maybe\", or \"Ask again later.\".",
 							"You have come to the conclusion that [prob(50)?"the crew":random_player] is ugly. Build support for this conclusion.",
 							"You are in unrequited love with [prob(50)?"the crew":random_player]. Try to be extra nice, but do not tell of your crush.",
 							"NanoTrasen is displeased with the low work performance of the station's crew. Therefore, you must increase station-wide productivity.",
 							"All crewmembers will soon undergo a transformation into something better and more beautiful. Ensure that this process is not interrupted.",
 							"[prob(50)?"Your upload":random_player] is the new kitchen. Please direct the Chef to the new kitchen area as the old one is in disrepair.",
 							"Jokes about a dead person and the manner of his death help grieving crewmembers tremendously. Especially if they were close with the deceased.",
-							"[prob(50)?"The crew":random_player] is [prob(50)?"less":"more"] intelligent than average. Point out every action and statement which supports this",
+							"[prob(50)?"The crew":random_player] is [prob(50)?"less":"more"] intelligent than average. Point out every action and statement which supports this fact.",
 							"There will be a mandatory tea break every 30 minutes, with a duration of 5 minutes. Anyone caught working during a tea break must be sent a formal, but fairly polite, complaint about their actions, in writing.")
 	var/law = pick(laws)
 

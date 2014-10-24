@@ -91,6 +91,8 @@
 	if (istype(loc, /turf))
 		var/turf/T = loc
 		loc = T.loc
+	if (!istype(loc, /area))
+		return
 	var/area/area = loc
 	var/t = ""
 
