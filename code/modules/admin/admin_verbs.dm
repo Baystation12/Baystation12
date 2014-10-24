@@ -82,7 +82,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
-	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */
+	/client/proc/allow_character_respawn,
+	/client/proc/FRules,
+	/client/proc/freeze,
+	/client/proc/freezemecha    /* Allows a ghost to respawn */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,

@@ -56,7 +56,7 @@
 				new_mob = create_new_xenomorph(alien_caste,M.loc)
 				new_mob.universal_speak = 1
 			if("human")
-				new_mob = new /mob/living/carbon/human(M.loc, pick(all_species))
+				new_mob = new /mob/living/carbon/human(M.loc, pick(whitelisted_species))
 				if(M.gender == MALE)
 					new_mob.gender = MALE
 					new_mob.name = pick(first_names_male)
