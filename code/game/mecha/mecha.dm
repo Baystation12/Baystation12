@@ -1575,14 +1575,19 @@
 			
 		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
 		
-		if (pname)
-			var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
-			var/mob/occupant = P.occupant
+		if (!pname)
+			return
 			
-			visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!")
-			P.go_out()
-			P.log_message("[occupant] was removed.")
-			occupant_message("\red [occupant] was removed from \the [P] by [user]!")
+		var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
+		var/mob/occupant = P.occupant
+		
+		user.visible_message("\red [user] begins opening the hatch on \the [P]...", "\red You begin opening the hatch on \the [P]...")
+		if (!do_after(user, 40, needhand=0))
+			return
+		
+		user.visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!", "\red You open the hatch on \the [P] and remove [occupant]!")
+		P.go_out()
+		P.log_message("[occupant] was removed.")
 		return
 	if(href_list["add_req_access"] && add_req_access && filter.getObj("id_card"))
 		if(!in_range(src, usr))	return

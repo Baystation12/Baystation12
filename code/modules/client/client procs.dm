@@ -159,6 +159,7 @@
 	log_client_to_db()
 
 	send_resources()
+	nanomanager.send_resources(src)
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")

@@ -214,7 +214,7 @@ var/global/datum/controller/gameticker/ticker
 				if( mode && !override )
 					override = mode.name
 				switch( override )
-					if("nuclear emergency") //Nuke wasn't on station when it blew up
+					if("mercenary") //Nuke wasn't on station when it blew up
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						world << sound('sound/effects/explosionfar.ogg')
@@ -236,7 +236,7 @@ var/global/datum/controller/gameticker/ticker
 				if( mode && !override )
 					override = mode.name
 				switch( override )
-					if("nuclear emergency") //Nuke Ops successfully bombed the station
+					if("mercenary") //Nuke Ops successfully bombed the station
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
@@ -393,7 +393,12 @@ var/global/datum/controller/gameticker/ticker
 				else
 					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
 			else
-				Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+				if(istype(Player,/mob/dead/observer))
+					var/mob/dead/observer/O = Player
+					if(!O.started_as_observer)
+						Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+				else
+					Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
 	world << "<br>"
 
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
@@ -427,7 +432,7 @@ var/global/datum/controller/gameticker/ticker
 				robo.laws.show_laws(world)
 
 	if(dronecount)
-		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] this round."
+		world << "<b>There [dronecount>1 ? "were" : "was"] [dronecount] industrious maintenance [dronecount>1 ? "drones" : "drone"] at the end of this round."
 
 	mode.declare_completion()//To declare normal completion.
 

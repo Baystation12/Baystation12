@@ -28,6 +28,8 @@
 		del(src)
 		return
 
+	affecting.grabbed_by += src
+
 	hud = new /obj/screen/grab(src)
 	hud.icon_state = "reinforce"
 	hud.name = "reinforce grab"

@@ -96,8 +96,8 @@
 		if(!istype(H))
 			return
 
-		var/datum/reagent/blood = H.vessel.reagent_list["blood"]
-		blood_splatter(H,blood,1)
+		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
+		blood_splatter(H,B,1)
 		var/obj/effect/decal/cleanable/blood/splatter/goo = locate() in get_turf(owner)
 		if(goo)
 			goo.name = "husk ichor"
@@ -170,27 +170,31 @@
 	name = "xeno organ"
 	icon = 'icons/effects/blood.dmi'
 	desc = "It smells like an accident in a chemical factory."
-	organ_tag = "special" //TODO functionality for transplants.
 
 /obj/item/organ/xenos/eggsac
 	name = "egg sac"
 	icon_state = "xgibmid1"
+	organ_tag = "egg sac"
 
 /obj/item/organ/xenos/plasmavessel
 	name = "plasma vessel"
-	icon_state = "xgibdown"
+	icon_state = "xgibdown1"
+	organ_tag = "plasma vessel"
 
 /obj/item/organ/xenos/acidgland
 	name = "acid gland"
 	icon_state = "xgibtorso"
+	organ_tag = "acid gland"
 
 /obj/item/organ/xenos/hivenode
 	name = "hive node"
 	icon_state = "xgibmid2"
+	organ_tag = "hive node"
 
 /obj/item/organ/xenos/resinspinner
 	name = "hive node"
 	icon_state = "xgibmid2"
+	organ_tag = "resin spinner"
 
 //VOX ORGANS.
 /datum/organ/internal/stack

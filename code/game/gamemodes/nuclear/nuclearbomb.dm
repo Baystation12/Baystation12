@@ -403,7 +403,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		off_station = 2
 
 	if(ticker)
-		if(ticker.mode && ticker.mode.name == "nuclear emergency")
+		if(ticker.mode && ticker.mode.name == "mercenary")
 			var/obj/machinery/computer/shuttle_control/multi/syndicate/syndie_location = locate(/obj/machinery/computer/shuttle_control/multi/syndicate)
 			if(syndie_location)
 				ticker.mode:syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
@@ -411,7 +411,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		ticker.station_explosion_cinematic(off_station,null)
 		if(ticker.mode)
 			ticker.mode.explosion_in_progress = 0
-			if(ticker.mode.name == "nuclear emergency")
+			if(ticker.mode.name == "mercenary")
 				ticker.mode:nukes_left --
 			else
 				world << "<B>The station was destoyed by the nuclear blast!</B>"

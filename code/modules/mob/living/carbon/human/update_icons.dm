@@ -177,6 +177,7 @@ var/global/list/damage_icon_parts = list()
 proc/get_damage_icon_part(damage_state, body_part)
 	if(damage_icon_parts["[damage_state]/[body_part]"] == null)
 		var/icon/DI = new /icon('icons/mob/dam_human.dmi', damage_state)			// the damage icon for whole human
+		// TODO: Convert dam_human.dmi to greyscale and blend in species.blood_colour here.
 		DI.Blend(new /icon('icons/mob/dam_mask.dmi', body_part), ICON_MULTIPLY)		// mask with this organ's pixels
 		damage_icon_parts["[damage_state]/[body_part]"] = DI
 		return DI
@@ -896,7 +897,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
 	overlays_standing[TAIL_LAYER] = null
 
-	if(species.tail && species.flags & HAS_TAIL)
+	if(species.tail)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDETAIL) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
 			tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)

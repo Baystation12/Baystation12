@@ -184,7 +184,7 @@
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how retarded you are."
 				return
-		usr.update_inv_wear_suit()	//so our overlays update
+		update_clothing_icon()	//so our overlays update
 
 //Medical
 /obj/item/clothing/suit/storage/fr_jacket
@@ -212,7 +212,7 @@
 			if("fr_jacket")
 				src.icon_state = "fr_jacket_open"
 				usr << "You unbutton the jacket."
-		usr.update_inv_wear_suit()	//so our overlays update
+		update_clothing_icon()	//so our overlays update
 
 //Mime
 /obj/item/clothing/suit/suspenders

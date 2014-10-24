@@ -94,6 +94,7 @@ var/list/ghostteleportlocs = list()
 /*-----------------------------------------------------------------------------*/
 /area/space
 	name = "\improper Space"
+	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
 	lighting_use_dynamic = 1
@@ -263,11 +264,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "shuttlered2"
 
 /area/shuttle/syndicate_elite/mothership
-	name = "\improper Syndicate Elite Shuttle"
+	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "\improper Syndicate Elite Shuttle"
+	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered2"
 
 /area/shuttle/administration/centcom
@@ -380,17 +381,17 @@ var/list/ghostteleportlocs = list()
 //SYNDICATES
 
 /area/syndicate_mothership
-	name = "\improper Syndicate Base"
+	name = "\improper Mercenary Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
 
 /area/syndicate_mothership/control
-	name = "\improper Syndicate Control Room"
+	name = "\improper Mercenary Control Room"
 	icon_state = "syndie-control"
 
 /area/syndicate_mothership/elite_squad
-	name = "\improper Syndicate Elite Squad"
+	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
 
 //EXTRA
@@ -453,13 +454,13 @@ var/list/ghostteleportlocs = list()
 
 //names are used
 /area/syndicate_station
-	name = "\improper Syndicate Station"
+	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
 	unlimited_power = 1
 
 /area/syndicate_station/start
-	name = "\improper Syndicate Forward Operating Base"
+	name = "\improper Mercenary Forward Operating Base"
 	icon_state = "yellow"
 
 /area/syndicate_station/southwest
@@ -708,6 +709,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper EVA Maintenance"
 	icon_state = "maint_eva"
 
+/area/maintenance/dormitory
+	name = "Dormitory Maintenance"
+	icon_state = "maint_dormitory"
+
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
@@ -720,13 +725,17 @@ var/list/ghostteleportlocs = list()
 	name = "Medbay Maintenance"
 	icon_state = "maint_medbay"
 
-/area/maintenance/misc_research
-	name = "Misc. Research Maintenance"
-	icon_state = "maint_misc_research"
+/area/maintenance/research_port
+	name = "Port Research Maintenance"
+	icon_state = "maint_research_port"
+
+/area/maintenance/research_starboard
+	name = "Starboard Research Maintenance"
+	icon_state = "maint_research_starboard"
 
 /area/maintenance/research_shuttle
 	name = "Research Shuttle Dock Maintenance"
-	icon_state = "maint_r_shuttle"
+	icon_state = "maint_research_shuttle"
 
 /area/maintenance/security_port
 	name = "Port Security Maintenance"
@@ -739,14 +748,6 @@ var/list/ghostteleportlocs = list()
 /area/maintenance/storage
 	name = "Atmospherics"
 	icon_state = "green"
-
-/area/maintenance/virology
-	name = "Virology Maintenance"
-	icon_state = "maint_viro"
-
-/area/maintenance/xeno
-	name = "Xeno Maintenance"
-	icon_state = "maint_xeno"
 
 // SUBSTATIONS (Subtype of maint, that should let them serve as shielded area during radstorm)
 

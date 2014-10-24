@@ -247,6 +247,7 @@
 		mymob.internals.icon_state = "internal0"
 		mymob.internals.name = "internal"
 		mymob.internals.screen_loc = ui_internal
+		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
 		mymob.oxygen = new /obj/screen()

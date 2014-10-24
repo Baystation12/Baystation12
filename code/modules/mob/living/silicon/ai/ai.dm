@@ -128,6 +128,8 @@ var/list/ai_verbs_default = list(
 		add_ai_verbs(src)
 
 	//Languages
+	add_language("Robot Talk", 1)
+	add_language("Galactic Common", 0)
 	add_language("Sol Common", 0)
 	add_language("Sinta'unathi", 0)
 	add_language("Siik'tajr", 0)
@@ -245,7 +247,7 @@ var/list/ai_verbs_default = list(
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline")
+	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox")
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
 		if("Rainbow") icon_state = "ai-clown"
@@ -266,6 +268,7 @@ var/list/ai_verbs_default = list(
 		if("Soviet") icon_state = "ai-redoctober"
 		if("Trapped") icon_state = "ai-hades"
 		if("Heartline") icon_state = "ai-heartline"
+		if("Chatterbox") icon_state = "ai-president"
 		else icon_state = "ai"
 	//else
 			//usr <<"You can only change your display once!"
@@ -638,20 +641,7 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 
-	var/list/ai_emotions = list("Very Happy", "Happy", "Neutral", "Unsure", "Confused", "Surprised", "Sad", "Upset", "Angry", "Awesome", "BSOD", "Blank", "Problems?", "Facepalm", "Friend Computer")
-	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
-	for (var/obj/machinery/M in machines) //change status
-		if(istype(M, /obj/machinery/ai_status_display))
-			var/obj/machinery/ai_status_display/AISD = M
-			AISD.emotion = emote
-		//if Friend Computer, change ALL displays
-		else if(istype(M, /obj/machinery/status_display))
-
-			var/obj/machinery/status_display/SD = M
-			if(emote=="Friend Computer")
-				SD.friendc = 1
-			else
-				SD.friendc = 0
+	set_ai_status_displays(src)
 	return
 
 //I am the icon meister. Bow fefore me.	//>fefore

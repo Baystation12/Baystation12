@@ -5,6 +5,7 @@
 /datum/species
 
 	var/name                                             // Species name.
+	var/name_plural
 
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
@@ -29,6 +30,7 @@
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
+	var/list/speech_chance
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/insulated                 // Immune to electrocution and glass shards to the feet.
 
@@ -202,6 +204,7 @@
 
 /datum/species/human
 	name = "Human"
+	name_plural = "Humans"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
@@ -213,6 +216,7 @@
 
 /datum/species/unathi
 	name = "Unathi"
+	name_plural = "Unathi"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	language = "Sinta'unathi"
@@ -231,7 +235,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -239,7 +243,8 @@
 	base_color = "#066000"
 
 /datum/species/tajaran
-	name = "Tajaran"
+	name = "Tajara"
+	name_plural = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'tajr"
@@ -257,13 +262,14 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
 
 /datum/species/skrell
 	name = "Skrell"
+	name_plural = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	language = "Skrellian"
@@ -278,6 +284,7 @@
 
 /datum/species/vox
 	name = "Vox"
+	name_plural = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	default_language = "Vox-pidgin"
@@ -287,6 +294,7 @@
 	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
+	speech_chance = 20
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -324,6 +332,7 @@
 
 /datum/species/vox/armalis
 	name = "Vox Armalis"
+	name_plural = "Vox"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	rarity_value = 10
@@ -346,7 +355,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -364,6 +373,7 @@
 
 /datum/species/diona
 	name = "Diona"
+	name_plural = "Dionaea"
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
@@ -428,6 +438,8 @@
 
 /datum/species/machine
 	name = "Machine"
+	name_plural = "machines"
+
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
@@ -467,10 +479,12 @@
 	if(H.a_intent != "hurt")
 		return 0
 
-	if(unarmed.shredding && unarmed.is_usable(H))
-		return 1
-	else if(secondary_unarmed.shredding && secondary_unarmed.is_usable(H))
-		return 1
+	if(unarmed.is_usable(H))
+		if(unarmed.shredding)
+			return 1
+	else if(secondary_unarmed.is_usable(H))
+		if(secondary_unarmed.shredding)
+			return 1
 
 	return 0
 
@@ -502,7 +516,7 @@
 /datum/unarmed_attack/bite
 	attack_verb = list("bite") // 'x has biteed y', needs work.
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 1
+	shredding = 0
 	damage = 5
 	sharp = 1
 	edge = 1
@@ -551,6 +565,7 @@
 	var/has_throw = 1     // Set to draw throw button.
 	var/has_resist = 1    // Set to draw resist button.
 	var/has_internals = 1 // Set to draw the internals toggle button.
+	var/list/equip_slots = list() // Checked by mob_can_equip().
 
 	// Contains information on the position and tag for all inventory slots
 	// to be drawn for the mob. This is fairly delicate, try to avoid messing with it
@@ -572,3 +587,18 @@
 		"storage2" =     list("loc" = ui_storage2,  "slot" = slot_r_store,   "state" = "pocket"),
 		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt")
 		)
+
+/datum/hud_data/New()
+	..()
+	for(var/slot in gear)
+		equip_slots |= gear[slot]["slot"]
+
+	if(has_hands)
+		equip_slots |= slot_l_hand
+		equip_slots |= slot_r_hand
+		equip_slots |= slot_handcuffed
+
+	if(slot_back in equip_slots)
+		equip_slots |= slot_in_backpack
+
+	equip_slots |= slot_legcuffed

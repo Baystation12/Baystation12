@@ -229,7 +229,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	M << browse(dat, "window=paiRecruit;size=580x580;")
 
 /datum/paiController/proc/findPAI(var/obj/item/device/paicard/p, var/mob/user)
-	requestRecruits()
+	requestRecruits(user)
 	var/list/available = list()
 	for(var/datum/paiCandidate/c in paiController.pai_candidates)
 		if(c.ready)
@@ -345,7 +345,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	user << browse(dat, "window=findPai")
 
 
-/datum/paiController/proc/requestRecruits()
+/datum/paiController/proc/requestRecruits(var/mob/user)
+	inquirer = user
 	for(var/mob/dead/observer/O in player_list)
 		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
 			continue

@@ -11,24 +11,24 @@
 	var/mode = 0.0
 	var/printing = null
 
-	proc/is_centcom()
-		return istype(src, /obj/machinery/computer/card/centcom)
+/obj/machinery/computer/card/proc/is_centcom()
+	return 0
 
-	proc/is_authenticated()
-		return scan ? check_access(scan) : 0
+/obj/machinery/computer/card/proc/is_authenticated()
+	return scan ? check_access(scan) : 0
 
-	proc/get_target_rank()
-		return modify && modify.assignment ? modify.assignment : "Unassigned"
+/obj/machinery/computer/card/proc/get_target_rank()
+	return modify && modify.assignment ? modify.assignment : "Unassigned"
 
-	proc/format_jobs(list/jobs)
-		var/list/formatted = list()
-		for(var/job in jobs)
-			formatted.Add(list(list(
-				"display_name" = replacetext(job, " ", "&nbsp"),
-				"target_rank" = get_target_rank(),
-				"job" = job)))
+/obj/machinery/computer/card/proc/format_jobs(list/jobs)
+	var/list/formatted = list()
+	for(var/job in jobs)
+		formatted.Add(list(list(
+			"display_name" = replacetext(job, " ", "&nbsp"),
+			"target_rank" = get_target_rank(),
+			"job" = job)))
 
-		return formatted
+	return formatted
 
 /obj/machinery/computer/card/verb/eject_id()
 	set category = "Object"
@@ -288,3 +288,7 @@
 	name = "CentCom Identification Computer"
 	circuit = "/obj/item/weapon/circuitboard/card/centcom"
 	req_access = list(access_cent_captain)
+
+
+/obj/machinery/computer/card/centcom/is_centcom()
+	return 1

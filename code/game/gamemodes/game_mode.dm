@@ -29,7 +29,7 @@
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
 	var/ert_disabled = 0
-	var/uplink_welcome = "Syndicate Uplink Console:"
+	var/uplink_welcome = "Illegal Uplink Console:"
 	var/uplink_uses = 10
 	var/list/datum/uplink_item/uplink_items = list(
 		"Highly Visible and Dangerous Weapons" = list(
@@ -38,17 +38,17 @@
 			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
 			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
-			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Syndicate Bundle", "BU"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM")
 			),
 		"Stealthy and Inconspicuous Weapons" = list(
 			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
-			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Syndicate Soap", "SP"),
+			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
 			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC")
 			),
 		"Stealth and Camouflage Items" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
-			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Syndicate Shoes", "SH"),
+			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
 			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
 			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
 			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP")
@@ -213,14 +213,14 @@
 
 /datum/game_mode/proc/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested status information:</FONT><HR>"
-	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with the Syndicate:</B><br>"
+	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with criminal organisations or hostile foreign entities:</B><br>"
 
 
 	var/list/suspects = list()
 	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.mind)
 		// NT relation option
 		var/special_role = man.mind.special_role
-		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Syndicate" || special_role == "Vox Raider")
+		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Mercenary" || special_role == "Vox Raider")
 			continue	//NT intelligence ruled out possiblity that those are too classy to pretend to be a crew.
 		if(man.client.prefs.nanotrasen_relation == "Opposed" && prob(50) || \
 		   man.client.prefs.nanotrasen_relation == "Skeptical" && prob(20))

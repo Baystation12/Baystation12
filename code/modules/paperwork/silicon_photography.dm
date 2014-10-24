@@ -66,13 +66,13 @@
 	// TG uses a special garbage collector.. qdel(P)
 	del(P) //so 10 thousand pictures items are not left in memory should an AI take them and then view them all.
 
-/obj/item/device/camera/siliconcam/proc/deletepicture(obj/item/device/camera/siliconcam/cam)
-	var/datum/picture/selection = selectpicture(cam)
+/obj/item/device/camera/siliconcam/proc/deletepicture()
+	var/datum/picture/selection = selectpicture()
 
 	if(!selection)
 		return
 
-	cam.aipictures -= selection
+	aipictures -= selection
 	usr << "<span class='unconscious'>Image deleted</span>"
 
 /obj/item/device/camera/siliconcam/ai_camera/can_capture_turf(turf/T, mob/user)
@@ -147,7 +147,12 @@
 	set src in usr
 
 	// Explicitly only allow deletion from the local camera
-	deletepicture(src)
+	var/mob/living/silicon/robot/C = src.loc
+	if(C.connected_ai)
+		C << "Not allowed to delete from the remote database."
+		return
+
+	deletepicture()
 
 obj/item/device/camera/siliconcam/proc/getsource()
 	if(istype(src.loc, /mob/living/silicon/ai))

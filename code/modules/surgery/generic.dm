@@ -52,7 +52,10 @@
 		"\blue You have made a bloodless incision on [target]'s [affected.display_name] with \the [tool].",)
 		//Could be cleaner ...
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		spread_germs_to_organ(affected, user)
@@ -89,7 +92,10 @@
 		user.visible_message("\blue [user] has constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		affected.open = 2
@@ -128,7 +134,10 @@
 		user.visible_message("\blue [user] has made an incision on [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have made an incision on [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

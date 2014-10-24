@@ -66,6 +66,7 @@ var/global/list/rad_collectors = list()
 		src.P = W
 		W.loc = src
 		update_icons()
+		return 1
 	else if(istype(W, /obj/item/weapon/crowbar))
 		if(P && !src.locked)
 			eject()
@@ -83,6 +84,7 @@ var/global/list/rad_collectors = list()
 			connect_to_network()
 		else
 			disconnect_from_network()
+		return 1
 	else if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 		if (src.allowed(user))
 			if(active)
@@ -93,10 +95,8 @@ var/global/list/rad_collectors = list()
 				user << "\red The controls can only be locked when the [src] is active"
 		else
 			user << "\red Access denied!"
-			return 1
-	else
-		..()
 		return 1
+	return ..()
 
 /obj/machinery/power/rad_collector/examine()
 	..()

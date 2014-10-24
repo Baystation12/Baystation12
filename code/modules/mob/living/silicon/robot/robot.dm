@@ -19,7 +19,7 @@ var/list/robot_verbs_default = list(
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 5
+	var/integrated_light_power = 6
 
 //Hud stuff
 
@@ -413,7 +413,7 @@ var/list/robot_verbs_default = list(
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(6) // 1.5x luminosity of flashlight
+		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
 	else
 		SetLuminosity(0)
 
@@ -811,7 +811,7 @@ var/list/robot_verbs_default = list(
 					laws = new /datum/ai_laws/syndicate_override
 					var/time = time2text(world.realtime,"hh:mm:ss")
 					lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-					set_zeroth_law("Only [user.real_name] and people he designates as being such are Syndicate Agents.")
+					set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 					src << "\red ALERT: Foreign software detected."
 					sleep(5)
 					src << "\red Initiating diagnostics..."
@@ -860,6 +860,8 @@ var/list/robot_verbs_default = list(
 		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
 			spark_system.start()
 		return ..()
+
+
 
 /mob/living/silicon/robot/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)

@@ -1136,16 +1136,13 @@
 		M.verbs -= /obj/mecha/proc/move_inside_passenger
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/get_equip_info()
-	var/output = ..()
-	if(output)
-		var/temp = "<br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>[door_locked? "Locked" : "Unlocked"]</a>"
-		return "[output] [temp]"
-	return
+	return "[..()] <br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>Toggle Lock</a>"
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Topic(href,href_list)
 	..()
 	if (href_list["toggle_lock"])
 		door_locked = !door_locked
+		occupant_message("Passenger compartment hatch [door_locked? "locked" : "unlocked"].")
 		if (chassis)
 			chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
 		
@@ -1201,5 +1198,3 @@
 			usr << "\red All of the passenger compartments are already occupied or locked!"
 		if (0)
 			usr << "\red \The [src] doesn't have a passenger compartment."
-
-/obj/mecha/proc/remove_passenger()

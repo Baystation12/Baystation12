@@ -5,6 +5,9 @@
 	desc = "It's a machine that grows replacement organs."
 	icon = 'icons/obj/surgery.dmi'
 
+	anchored = 1
+	density = 1
+
 	icon_state = "bioprinter"
 
 	var/prints_prosthetics

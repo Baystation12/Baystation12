@@ -19,6 +19,10 @@
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 
+/mob/living/silicon/New()
+	..()
+	add_language("Galactic Common")
+
 /mob/living/silicon/proc/show_laws()
 	return
 
@@ -168,6 +172,7 @@
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	if (..(language) && can_speak)
 		speech_synthesizer_langs.Add(all_languages[language])
+		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
 	..(rem_language)

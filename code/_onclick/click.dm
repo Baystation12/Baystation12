@@ -116,7 +116,7 @@
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
-			UnarmedAttack(A)
+			UnarmedAttack(A, 1)
 		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that

@@ -20,8 +20,6 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
-var/const/MAX_SAVE_SLOTS = 10
-
 //used for alternate_option
 #define GET_RANDOM_JOB 0
 #define BE_ASSISTANT 1
@@ -277,15 +275,15 @@ datum/preferences
 	dat += "<br><b>Custom Loadout:</b> "
 	var/total_cost = 0
 
-	if(isnull(gear) || !islist(gear)) gear = list()
+	if(!islist(gear)) gear = list()
 
 	if(gear && gear.len)
 		dat += "<br>"
-		for(var/gear_name in gear)
-			if(gear_datums[gear_name])
-				var/datum/gear/G = gear_datums[gear_name]
+		for(var/i = 1; i <= gear.len; i++)
+			var/datum/gear/G = gear_datums[gear[i]]
+			if(G)
 				total_cost += G.cost
-				dat += "[gear_name] <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[gear_name]'>\[remove\]</a><br>"
+				dat += "[gear[i]] ([G.cost] points) <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
 
 		dat += "<b>Used:</b> [total_cost] points."
 	else
@@ -294,7 +292,7 @@ datum/preferences
 	if(total_cost < MAX_GEAR_COST)
 		dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
 		if(gear && gear.len)
-			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=remove'>\[remove\]</a>"
+			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=clear'>\[clear\]</a>"
 
 	dat += "<br><br><b>Occupation Choices</b><br>"
 	dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
@@ -882,17 +880,17 @@ datum/preferences
 				total_cost += C.cost
 				if(C && total_cost <= MAX_GEAR_COST)
 					gear += choice
-					user << "\blue Added [choice] for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining)."
+					user << "<span class='notice'>Added \the '[choice]' for [C.cost] points ([MAX_GEAR_COST - total_cost] points remaining).</span>"
 				else
-					user << "\red That item will exceed the maximum loadout cost of [MAX_GEAR_COST] points."
+					user << "<span class='warning'>Adding \the '[choice]' will exceed the maximum loadout cost of [MAX_GEAR_COST] points.</span>"
 
 		else if(href_list["task"] == "remove")
-			var/to_remove = href_list["gear"]
-			if(!to_remove) return
-			for(var/gear_name in gear)
-				if(gear_name == to_remove)
-					gear -= gear_name
-					break
+			var/i_remove = text2num(href_list["gear"])
+			if(i_remove < 1 || i_remove > gear.len) return
+			gear.Cut(i_remove, i_remove + 1)
+
+		else if(href_list["task"] == "clear")
+			gear.Cut()
 
 	else if(href_list["preference"] == "flavor_text")
 		switch(href_list["task"])
@@ -1187,7 +1185,7 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajaran" || species == "Skrell")
+					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1267,7 +1265,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajaran" || species == "Skrell")
+					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1622,7 +1620,7 @@ datum/preferences
 	if(S)
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
-		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+		for(var/i=1, i<= config.character_slots, i++)
 			S.cd = "/character[i]"
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"

@@ -73,24 +73,22 @@
 		// Process unsuitable transplants. TODO: consider some kind of
 		// immunosuppressant that changes transplant data to make it match.
 		if(transplant_data)
-			if(!rejecting) //Should this transplant reject?
-				if(owner.species != transplant_data["species"]) //Nope.
-					rejecting = 1
-				else if(prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type))
-					rejecting = 1
+			if(!rejecting && prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type,owner.species,transplant_data["species"]))
+				rejecting = 1
 			else
 				rejecting++ //Rejection severity increases over time.
 				if(rejecting % 10 == 0) //Only fire every ten rejection ticks.
 					switch(rejecting)
 						if(1 to 50)
-							take_damage(rand(1,2))
+							take_damage(1)
 						if(51 to 200)
-							take_damage(rand(2,3))
-						if(201 to 500)
-							take_damage(rand(3,4))
 							owner.reagents.add_reagent("toxin", 1)
+							take_damage(1)
+						if(201 to 500)
+							take_damage(rand(2,3))
+							owner.reagents.add_reagent("toxin", 2)
 						if(501 to INFINITY)
-							take_damage(5)
+							take_damage(4)
 							owner.reagents.add_reagent("toxin", rand(3,5))
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)

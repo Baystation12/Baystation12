@@ -1,6 +1,8 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = "Xenomorph"
+	name_plural = "Xenomorphs"
+
 	default_language = "Xenomorph"
 	language = "Hivemind"
 	unarmed_type = /datum/unarmed_attack/claws/strong
@@ -35,12 +37,14 @@
 	death_message = "lets out a waning guttural screech, green blood bubbling from its maw."
 	death_sound = 'sound/voice/hiss6.ogg'
 
+	speech_sounds = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
+	speech_chance = 100
+
 	breath_type = null
 	poison_type = null
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -116,7 +120,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
@@ -126,6 +129,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/plant,
 		/mob/living/carbon/human/proc/transfer_plasma,
@@ -155,7 +159,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/hunter,
 		"hive node" =       /datum/organ/internal/xenos/hivenode,
@@ -163,6 +166,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
@@ -183,7 +187,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/sentinel,
 		"acid gland" =      /datum/organ/internal/xenos/acidgland,
@@ -192,6 +195,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/transfer_plasma,
@@ -202,6 +206,7 @@
 /datum/species/xenos/queen
 
 	name = "Xenomorph Queen"
+	total_health = 250
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
@@ -214,7 +219,6 @@
 
 	has_organ = list(
 		"heart" =           /datum/organ/internal/heart,
-		"lungs" =           /datum/organ/internal/lungs,
 		"brain" =           /datum/organ/internal/brain/xeno,
 		"egg sac" =         /datum/organ/internal/xenos/eggsac,
 		"plasma vessel" =   /datum/organ/internal/xenos/plasmavessel/queen,
@@ -225,6 +229,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/lay_egg,

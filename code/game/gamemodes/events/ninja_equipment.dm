@@ -1212,7 +1212,7 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,target,"hudwizard")
 				if("Hunter","Sentinel","Drone","Queen")
 					U.client.images += image(tempHud,target,"hudalien")
-				if("Syndicate")
+				if("Mercenary")
 					U.client.images += image(tempHud,target,"hudoperative")
 				if("Death Commando")
 					U.client.images += image(tempHud,target,"huddeathsquad")

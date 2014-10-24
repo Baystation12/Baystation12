@@ -311,6 +311,9 @@
 			M:reagents.add_reagent("inaprovaline", 5)
 		return
 	proc/toggle_filter()
+		if(!src.occupant)
+			filtering = 0
+			return
 		if(filtering)
 			filtering = 0
 		else

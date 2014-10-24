@@ -52,6 +52,10 @@
 	icon_state = "purple"
 	item_state = "glasses"
 
+/obj/item/clothing/glasses/science/New()
+	..()
+	overlay = global_hud.science
+
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
 	desc = "You can totally see in the dark now!"
@@ -156,7 +160,7 @@
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push \the [src] up out of your face."
 
-		usr.update_inv_glasses()
+		update_clothing_icon()
 
 /obj/item/clothing/glasses/welding/superior
 	name = "superior welding goggles"

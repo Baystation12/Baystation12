@@ -936,7 +936,7 @@
 			if("lombardi_jacket_open")
 				src.icon_state = "lombardi_jacket"
 				usr << "You button up the jacket."
-		usr.update_inv_wear_suit()
+		update_clothing_icon()
 
 //////////// Uniforms ////////////
 
@@ -1005,8 +1005,9 @@
 	desc = "A well maintained uniform from one of the many Private Security firms Nanotrasen hires from. The name Harper is printed on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "harper_uniform"
-	item_state = "harper_uniform"
+	item_state = "jensensuit"
 	item_color = "harper_uniform"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 //////////////////// Layla's Dress - Layla Davies-Halabi - sabirm ///////////////
 
@@ -1097,7 +1098,7 @@
 
 	src.icon_state = "[item_color]"
 	src.item_state = "[item_color]"
-	usr.update_inv_w_uniform()
+	update_clothing_icon()
 
 ////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
 /obj/item/clothing/under/fluff/wyatt_1

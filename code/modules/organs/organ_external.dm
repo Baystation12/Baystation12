@@ -490,13 +490,18 @@ Note that amputating the affected organ does in fact remove the infection from t
 	burn_dam = 0
 	status &= ~ORGAN_BLEEDING
 	var/clamped = 0
+
+	var/mob/living/carbon/human/H
+	if(istype(owner,/mob/living/carbon/human))
+		H = owner
+
 	for(var/datum/wound/W in wounds)
 		if(W.damage_type == CUT || W.damage_type == BRUISE)
 			brute_dam += W.damage
 		else if(W.damage_type == BURN)
 			burn_dam += W.damage
 
-		if(!(status & ORGAN_ROBOT) && W.bleeding())
+		if(!(status & ORGAN_ROBOT) && W.bleeding() && (H && !(H.species.flags & NO_BLOOD)))
 			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
@@ -504,7 +509,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		number_wounds += W.amount
 
-	if (open && !clamped)	//things tend to bleed if they are CUT OPEN
+	if (open && !clamped && (H && !(H.species.flags & NO_BLOOD)))	//things tend to bleed if they are CUT OPEN
 		status |= ORGAN_BLEEDING
 
 

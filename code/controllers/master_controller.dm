@@ -121,12 +121,6 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
-	//Set up gear list.
-	populate_gear_list()
-
-	//Set up roundstart seed list.
-	populate_seed_list()
-
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
