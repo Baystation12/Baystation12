@@ -154,6 +154,7 @@
 	speech_verb = "beeps"
 	colour = "machine"
 	key = "p"
+	flags = RESTRICTED
 
 /datum/language/xenocommon
 	name = "Xenomorph"

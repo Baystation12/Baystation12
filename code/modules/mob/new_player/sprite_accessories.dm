@@ -496,7 +496,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human", "Unathi","Tajaran","Skrell","Vox","Machine","Avisaran","Kidan")
+		species_allowed = list("Human", "Unathi","Tajara","Skrell","Vox","Machine","Avisaran","Kidan")
 
 	watson
 		name = "Watson Mustache"

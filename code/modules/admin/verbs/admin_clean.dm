@@ -12,7 +12,7 @@
 		usr << "No objects of this type exist"
 		return
 	if(alert("There are [i] cleanable objects in the world. Do you still want to delete?",,"Yes", "No") == "Yes")
-		world << "<br><br><font color = red size = 2><b>Admin [usr] is cleaning the station.<br>Expect some lag</b></font><br>"
+		world << "<br><br><font color = red size = 2><b>Admin [key_name(usr)] is cleaning the station.<br>Expect some lag</b></font><br>"
 		sleep 15
 		for(var/obj/Obj in world)
 			if(istype(Obj,/obj/effect/decal/cleanable))
