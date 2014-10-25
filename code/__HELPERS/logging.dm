@@ -25,6 +25,10 @@
 	if (config.log_admin)
 		diary << "\[[time_stamp()]]ADMIN: [text][log_end]"
 
+/proc/log_admin_single(text)
+	admin_log.Add(text)
+	if (config.log_admin)
+		admindiary << "\[[time_stamp()]]ADMIN: [text][log_end]"
 
 /proc/log_debug(text)
 	if (config.log_debug)

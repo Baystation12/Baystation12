@@ -695,6 +695,7 @@ var/global/floorIsLava = 0
 	if(confirm == "Yes")
 		world << "\red <b>Restarting world!</b> \blue Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
 		log_admin("[key_name(usr)] initiated a reboot.")
+		log_admin_single("[key_name(usr)] initiated a reboot.")
 
 		feedback_set_details("end_error","admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
 		feedback_add_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -718,6 +719,7 @@ var/global/floorIsLava = 0
 			message = adminscrub(message,500)
 		world << "\blue <b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b>\n \t [message]"
 		log_admin("Announce: [key_name(usr)] : [message]")
+		log_admin_single("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleooc()
@@ -730,6 +732,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>The OOC channel has been globally disabled!</B>"
 	log_admin("[key_name(usr)] toggled OOC.")
+	log_admin_single("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -744,6 +747,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>The LOOC channel has been globally disabled!</B>"
 	log_admin("[key_name(usr)] toggled LOOC.")
+	log_admin_single("[key_name(usr)] toggled LOOC.")
 	message_admins("[key_name_admin(usr)] toggled LOOC.", 1)
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -759,6 +763,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>Deadchat has been globally disabled!</B>"
 	log_admin("[key_name(usr)] toggled deadchat.")
+	log_admin_single("[key_name(usr)] toggled deadchat.")
 	message_admins("[key_name_admin(usr)] toggled deadchat.", 1)
 	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
@@ -769,6 +774,7 @@ var/global/floorIsLava = 0
 	dooc_allowed = !( dooc_allowed )
 
 	log_admin("[key_name(usr)] toggled OOC.")
+	log_admin_single("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
 	feedback_add_details("admin_verb","TDOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -778,6 +784,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Traitor Scaling"
 	traitor_scaling = !traitor_scaling
 	log_admin("[key_name(usr)] toggled Traitor Scaling to [traitor_scaling].")
+	log_admin_single("[key_name(usr)] toggled Traitor Scaling to [traitor_scaling].")
 	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [traitor_scaling ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TTS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -791,6 +798,7 @@ var/global/floorIsLava = 0
 	if(ticker.current_state == GAME_STATE_PREGAME)
 		ticker.current_state = GAME_STATE_SETTING_UP
 		log_admin("[usr.key] has started the game.")
+		log_admin_single("[usr.key] has started the game.")
 		message_admins("<font color='blue'>[usr.key] has started the game.</font>")
 		feedback_add_details("admin_verb","SN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		return 1
@@ -808,6 +816,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>New players may now enter the game.</B>"
 	log_admin("[key_name(usr)] toggled new player game entering.")
+	log_admin_single("[key_name(usr)] toggled new player game entering.")
 	message_admins("\blue [key_name_admin(usr)] toggled new player game entering.", 1)
 	world.update_status()
 	feedback_add_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -822,6 +831,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>The AI job is chooseable now.</B>"
 	log_admin("[key_name(usr)] toggled AI allowed.")
+	log_admin_single("[key_name(usr)] toggled AI allowed.")
 	world.update_status()
 	feedback_add_details("admin_verb","TAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -836,6 +846,7 @@ var/global/floorIsLava = 0
 		world << "<B>You may no longer respawn :(</B>"
 	message_admins("\blue [key_name_admin(usr)] toggled respawn to [abandon_allowed ? "On" : "Off"].", 1)
 	log_admin("[key_name(usr)] toggled respawn to [abandon_allowed ? "On" : "Off"].")
+	log_admin_single("[key_name(usr)] toggled respawn to [abandon_allowed ? "On" : "Off"].")
 	world.update_status()
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -845,6 +856,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Aliens"
 	aliens_allowed = !aliens_allowed
 	log_admin("[key_name(usr)] toggled Aliens to [aliens_allowed].")
+	log_admin_single("[key_name(usr)] toggled Aliens to [aliens_allowed].")
 	message_admins("[key_name_admin(usr)] toggled Aliens [aliens_allowed ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -854,6 +866,7 @@ var/global/floorIsLava = 0
 	set name="Toggle Space Ninjas"
 	toggle_space_ninja = !toggle_space_ninja
 	log_admin("[key_name(usr)] toggled Space Ninjas to [toggle_space_ninja].")
+	log_admin_single("[key_name(usr)] toggled Space Ninjas to [toggle_space_ninja].")
 	message_admins("[key_name_admin(usr)] toggled Space Ninjas [toggle_space_ninja ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -866,15 +879,18 @@ var/global/floorIsLava = 0
 	if (!ticker || ticker.current_state != GAME_STATE_PREGAME)
 		ticker.delay_end = !ticker.delay_end
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
+		log_admin_single("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
 		message_admins("\blue [key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].", 1)
 		return //alert("Round end delayed", null, null, null, null, null)
 	going = !( going )
 	if (!( going ))
 		world << "<b>The game start has been delayed.</b>"
 		log_admin("[key_name(usr)] delayed the game.")
+		log_admin_single("[key_name(usr)] delayed the game.")
 	else
 		world << "<b>The game will start soon.</b>"
 		log_admin("[key_name(usr)] removed the delay.")
+		log_admin_single("[key_name(usr)] removed the delay.")
 	feedback_add_details("admin_verb","DELAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adjump()
@@ -910,6 +926,7 @@ var/global/floorIsLava = 0
 		return
 	world << "\red <b>Rebooting world!</b> \blue Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
 	log_admin("[key_name(usr)] initiated an immediate reboot.")
+	log_admin_single("[key_name(usr)] initiated an immediate reboot.")
 
 	feedback_set_details("end_error","immediate admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
 	feedback_add_details("admin_verb","IR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -927,6 +944,7 @@ var/global/floorIsLava = 0
 			M.loc = pick(latejoin)
 			message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]", 1)
 			log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
+			log_admin_single("[key_name(usr)] has unprisoned [key_name(M)]")
 		else
 			alert("Admin jumping disabled")
 	else
@@ -1029,6 +1047,7 @@ var/global/floorIsLava = 0
 		new chosen(usr.loc)
 
 	log_admin("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
+	log_admin_single("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -1058,6 +1077,7 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>The tinted_weldhelh has been disabled!</B>"
 	log_admin("[key_name(usr)] toggled tinted_weldhelh.")
+	log_admin_single("[key_name(usr)] toggled tinted_weldhelh.")
 	message_admins("[key_name_admin(usr)] toggled tinted_weldhelh.", 1)
 	feedback_add_details("admin_verb","TTWH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -1071,11 +1091,14 @@ var/global/floorIsLava = 0
 	else
 		world << "<B>Guests may now enter the game.</B>"
 	log_admin("[key_name(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.")
+	log_admin_single("[key_name(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.")
 	message_admins("\blue [key_name_admin(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.", 1)
 	feedback_add_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0
+	log_admin("[key_name(usr)] has checked the laws of Silicon mobs!")
+	log_admin_single("[key_name(usr)] has checked the laws of Silicon mobs!")
 	for(var/mob/living/silicon/S in mob_list)
 		ai_number++
 		if(isAI(S))
@@ -1121,6 +1144,8 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
+	log_admin("[key_name(usr)] has updated [key_name(H)]'s mob sprite!")
+	log_admin_single("[key_name(usr)] has updated [key_name(H)]'s mob sprite!")
 
 /*
 	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.

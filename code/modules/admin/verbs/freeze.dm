@@ -18,7 +18,7 @@
 					M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 					message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
 					log_admin("[key_name(usr)] froze [key_name(M)]")
-
+					log_admin_single("[key_name(usr)] froze [key_name(M)]")
 
 				else if (M.paralysis)
 					M.AdjustParalysis(-2147483647)
@@ -29,6 +29,7 @@
 					M << "<b> <font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 					message_admins("\blue [key_name_admin(usr)] unfroze [key_name(M)]")
 					log_admin("[key_name(usr)] unfroze [key_name(M)]")
+					log_admin_single("[key_name(usr)] unfroze [key_name(M)]")
 
 
 /client/proc/freezemecha(obj/mecha/O as obj in world)
@@ -52,9 +53,11 @@
 							M.occupant << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 							message_admins("\blue [key_name_admin(usr)] froze [key_name(M.occupant)] in a [M.name]")
 							log_admin("[key_name(usr)] froze [key_name(M.occupant)] in a [M.name]")
+							log_admin_single("[key_name(usr)] froze [key_name(M.occupant)] in a [M.name]")
 						else
 							message_admins("\blue [key_name_admin(usr)] froze an empty [M.name]")
 							log_admin("[key_name(usr)] froze an empty [M.name]")
+							log_admin_single("[key_name(usr)] froze an empty [M.name]")
 					else if(M.can_move == 0)
 						M.can_move = 1
 						if(M.occupant)
@@ -62,7 +65,9 @@
 							M.occupant << "<b><font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 							message_admins("\blue [key_name_admin(usr)] unfroze [key_name(M.occupant)] in a [M.name]")
 							log_admin("[key_name(usr)] unfroze [M.occupant.name]/[M.occupant.ckey] in a [M.name]")
+							log_admin_single("[key_name(usr)] unfroze [M.occupant.name]/[M.occupant.ckey] in a [M.name]")
 						else
 							message_admins("\blue [key_name_admin(usr)] unfroze an empty [M.name]")
 							log_admin("[key_name(usr)] unfroze an empty [M.name]")
+							log_admin_single("[key_name(usr)] unfroze an empty [M.name]")
 

@@ -447,6 +447,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	if(ishuman(M))
 		log_admin("[key_name(src)] turned [M.key] into a Space Ninja.")
+		log_admin_single("[key_name(src)] turned [M.key] into a Space Ninja.")
 		spawn(10)
 			M:create_mind_space_ninja()
 			M:equip_space_ninja(1)
@@ -492,7 +493,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
 	log_admin("[key] used Spawn Space Ninja.")
-
+	log_admin_single("[key] used Spawn Space Ninja.")
 	return
 
 //=======//NINJA CREATION PROCS//=======//

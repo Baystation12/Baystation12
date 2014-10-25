@@ -78,7 +78,7 @@
 			else
 				recieve_color = "maroon"
 			send_pm_type = holder.rank + " "
-			if(!C.holder && holder && holder.fakekey) 
+			if(!C.holder && holder && holder.fakekey)
 				recieve_pm_type = "Admin"
 			else
 				recieve_pm_type = holder.rank
@@ -118,6 +118,7 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
+	log_admin_single("PM: [key_name(src)]->[key_name(C)]: [msg]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
@@ -149,6 +150,7 @@
 	src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
 
 	log_admin("PM: [key_name(src)]->IRC: [msg]")
+	log_admin_single("PM: [key_name(src)]->IRC: [msg]")
 	for(var/client/X in admins)
 		if(X == src)
 			continue

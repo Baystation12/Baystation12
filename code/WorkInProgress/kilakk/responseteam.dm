@@ -44,6 +44,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 	admin_emergency_team = 1
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
+	log_admin_single("[key_name(usr)] used Dispatch Response Team.")
 
 	var/member_number = members_possible
 	var/leader_selected = 0
