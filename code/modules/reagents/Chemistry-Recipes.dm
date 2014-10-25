@@ -1279,7 +1279,7 @@ datum
 				for(var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
 					slime.rabid = 1
 					for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-						O.show_message(text("\red The [slime] is driven into a frenzy!."), 1)
+						O.show_message(text("\red The [slime] is driven into a frenzy!"), 1)
 
 //Pink
 		slimeppotion

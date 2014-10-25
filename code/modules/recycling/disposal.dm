@@ -474,7 +474,7 @@
 				M.show_message("\the [I] lands in \the [src].", 3)
 		else
 			for(var/mob/M in viewers(src))
-				M.show_message("\the [I] bounces off of \the [src]'s rim!.", 3)
+				M.show_message("\the [I] bounces off of \the [src]'s rim!", 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)

@@ -641,20 +641,7 @@ var/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 
-	var/list/ai_emotions = list("Very Happy", "Happy", "Neutral", "Unsure", "Confused", "Surprised", "Sad", "Upset", "Angry", "Awesome", "BSOD", "Blank", "Problems?", "Facepalm", "Friend Computer")
-	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
-	for (var/obj/machinery/M in machines) //change status
-		if(istype(M, /obj/machinery/ai_status_display))
-			var/obj/machinery/ai_status_display/AISD = M
-			AISD.emotion = emote
-		//if Friend Computer, change ALL displays
-		else if(istype(M, /obj/machinery/status_display))
-
-			var/obj/machinery/status_display/SD = M
-			if(emote=="Friend Computer")
-				SD.friendc = 1
-			else
-				SD.friendc = 0
+	set_ai_status_displays(src)
 	return
 
 //I am the icon meister. Bow fefore me.	//>fefore
