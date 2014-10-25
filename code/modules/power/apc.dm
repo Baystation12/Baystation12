@@ -88,6 +88,8 @@
 	powernet = 0		// set so that APCs aren't found as powernet nodes //Hackish, Horrible, was like this before I changed it :(
 	var/malfhack = 0 //New var for my changes to AI malf. --NeoFite
 	var/mob/living/silicon/ai/malfai = null //See above --NeoFite
+	var/debug= 0
+	var/autoflag= 0		// 0 = off, 1= eqp and lights off, 2 = eqp off, 3 = all on.
 //	luminosity = 1
 	var/has_electronics = 0 // 0 - none, 1 - plugged in, 2 - secured by screwdriver
 	var/overload = 1 //used for the Blackout malf module
@@ -831,6 +833,7 @@
 	if(user.lying)
 		user << "<span class='warning'>You must stand to use [src]!</span>"
 		return 0
+	autoflag = 5
 	if (istype(user, /mob/living/silicon))
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
@@ -1040,6 +1043,17 @@
 	else
 		return 0
 
+/obj/machinery/power/apc/proc/last_surplus()
+	if(terminal && terminal.powernet)
+		return terminal.powernet.last_surplus()
+	else
+		return 0
+
+//Returns 1 if the APC should attempt to charge
+/obj/machinery/power/apc/proc/attempt_charging()
+	return (chargemode && charging == 1 && operating)
+
+
 /obj/machinery/power/apc/draw_power(var/amount)
 	if(terminal && terminal.powernet)
 		return terminal.powernet.draw_power(amount)
@@ -1058,10 +1072,10 @@
 	if(!area.requires_power)
 		return
 
+
 	lastused_light = area.usage(LIGHT)
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
-	// area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ
 
@@ -1072,45 +1086,61 @@
 	var/last_ch = charging
 
 	var/excess = surplus()
+	var/power_excess = 0
 
-	if(!src.avail())
-		main_status = 0
-	else if(excess < 0)
-		main_status = 1
-	else
-		main_status = 2
+	var/perapc = 0
+	if(terminal && terminal.powernet)
+		perapc = terminal.powernet.perapc
 
-	//if(debug)
-	//	world.log << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light] - Longterm: [longtermpower]"
+	if(debug)
+		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
+
+		if(area.powerupdate)
+			log_debug("power update in [area.name] / [name]")
 
 	if(cell && !shorted)
+		//var/cell_charge = cell.charge
+		var/cell_maxcharge = cell.maxcharge
 
+		// Calculate how much power the APC will try to get from the grid.
+		var/target_draw = lastused_total
+		if (src.attempt_charging())
+			target_draw += min((cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))/CELLRATE
+		target_draw = min(target_draw, perapc) //limit power draw by perapc
 
-		// draw power from cell as before to power the area
-		var/cellused = min(cell.charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
-		cell.use(cellused)
+		// try to draw power from the grid
+		var/power_drawn = 0
+		if (src.avail())
+			power_drawn = draw_power(target_draw) //get some power from the powernet
 
-		if(excess > lastused_total)		// if power excess recharge the cell
-			var/actual_gain = draw_power(cellused/CELLRATE)		// add the load used to recharge the cell
-			cell.give(actual_gain)								// by the same amount just used
-		else		// no excess, and not enough per-apc
+		//figure out how much power is left over after meeting demand
+		power_excess = power_drawn - lastused_total
 
-			if( (cell.charge/CELLRATE + excess) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
+		if (power_excess < 0) //couldn't get enough power from the grid, we will need to take from the power cell.
 
-				cell.charge = min(cell.maxcharge, cell.charge + CELLRATE * excess)	//recharge with what we can
-				draw_power(excess)		// so draw what we can from the grid
-				charging = 0
+			charging = 0
 
-			else	// not enough power available to run the last tick!
-				charging = 0
+			var/required_power = -power_excess
+			if(cell.charge >= required_power*CELLRATE)	// can we draw enough from cell to cover what's left over?
+				cell.use(required_power*CELLRATE)
+
+			else if (autoflag != 0)	// not enough power available to run the last tick!
 				chargecount = 0
 				// This turns everything off in the case that there is still a charge left on the battery, just not enough to run the room.
 				equipment = autoset(equipment, 0)
 				lighting = autoset(lighting, 0)
 				environ = autoset(environ, 0)
+				autoflag = 0
 
+		//Set external power status
+		if (!power_drawn)
+			main_status = 0
+		else if (power_excess < 0)
+			main_status = 1
+		else
+			main_status = 2
 
-		// set channels depending on how much charge we have left
+		// Set channels depending on how much charge we have left
 
 		// Allow the APC to operate as normal if the cell can charge
 		if(charging && longtermpower < 10)
@@ -1118,56 +1148,61 @@
 		else if(longtermpower > -10)
 			longtermpower -= 2
 
-		if(cell.charge <= 0)					// zero charge, turn all off
-			equipment = autoset(equipment, 0)
-			lighting = autoset(lighting, 0)
-			environ = autoset(environ, 0)
-			area.poweralert(0, src)
-		else if(cell.charge < (standard_max_charge * 0.15) && longtermpower < 0)	// <15%, turn off lighting & equipment
-			equipment = autoset(equipment, 2)
-			lighting = autoset(lighting, 2)
-			environ = autoset(environ, 1)
-			area.poweralert(0, src)
-		else if(cell.charge < (standard_max_charge * 0.30) && longtermpower < 0)	// <30%, turn off equipment
-			equipment = autoset(equipment, 2)
-			lighting = autoset(lighting, 1)
-			environ = autoset(environ, 1)
-			area.poweralert(0, src)
-		else									// otherwise all can be on
-			equipment = autoset(equipment, 1)
-			lighting = autoset(lighting, 1)
-			environ = autoset(environ, 1)
-			area.poweralert(1, src)
-			if(cell.percent() > 75)
+
+		if(cell.charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+			if(autoflag != 3)
+				equipment = autoset(equipment, 1)
+				lighting = autoset(lighting, 1)
+				environ = autoset(environ, 1)
+				autoflag = 3
 				area.poweralert(1, src)
+				if(cell.charge >= 4000)
+					area.poweralert(1, src)
+		else if(cell.charge < 1250 && cell.charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
+			if(autoflag != 2)
+				equipment = autoset(equipment, 2)
+				lighting = autoset(lighting, 1)
+				environ = autoset(environ, 1)
+				area.poweralert(0, src)
+				autoflag = 2
+		else if(cell.charge < 750 && cell.charge > 10)        // <15%, turn off lighting & equipment
+			if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
+				equipment = autoset(equipment, 2)
+				lighting = autoset(lighting, 2)
+				environ = autoset(environ, 1)
+				area.poweralert(0, src)
+				autoflag = 1
+		else if(cell.charge <= 0)                                   // zero charge, turn all off
+			if(autoflag != 0)
+				equipment = autoset(equipment, 0)
+				lighting = autoset(lighting, 0)
+				environ = autoset(environ, 0)
+				area.poweralert(0, src)
+				autoflag = 0
 
 		// now trickle-charge the cell
-
-		if(chargemode && charging == 1 && operating)
-			if(excess > 0)		// check to make sure we have enough to charge
-				// Max charge is capped to % per second constant
-				var/ch = min(excess*CELLRATE, cell.maxcharge*CHARGELEVEL)
-				var/actual_charge = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
-				cell.give(actual_charge) // actually recharge the cell
-
+		if(src.attempt_charging())
+			if (power_excess > 0) // check to make sure we have enough to charge
+				cell.give(power_excess*CELLRATE) // actually recharge the cell
 			else
 				charging = 0		// stop charging
 				chargecount = 0
 
 		// show cell as fully charged if so
-		if(cell.charge >= cell.maxcharge)
-			cell.charge = cell.maxcharge
+		if(cell.charge >= cell_maxcharge)
 			charging = 2
 
+		//if we have excess power for long enough, think about re-enable charging.
 		if(chargemode)
 			if(!charging)
-				if(excess > cell.maxcharge*CHARGELEVEL)
+				//last_surplus() overestimates the amount of power available for charging, but it's equivalent to what APCs were doing before.
+				if(src.last_surplus()*CELLRATE >= cell_maxcharge*CHARGELEVEL)
 					chargecount++
 				else
 					chargecount = 0
+					charging = 0
 
 				if(chargecount >= 10)
-
 					chargecount = 0
 					charging = 1
 
@@ -1183,6 +1218,8 @@
 		lighting = autoset(lighting, 0)
 		environ = autoset(environ, 0)
 		area.poweralert(0, src)
+		autoflag = 0
+
 
 	// update icon & area power if anything changed
 
@@ -1191,6 +1228,7 @@
 		update()
 	else if (last_ch != charging)
 		queue_icon_update()
+	src.updateDialog()
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
 // on 0=off, 1=on, 2=autooff

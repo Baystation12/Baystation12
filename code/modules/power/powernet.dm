@@ -7,6 +7,9 @@
 	var/avail = 0				//...the current available power in the powernet
 	var/viewload = 0			// the load as it appears on the power console (gradually updated)
 	var/number = 0				// Unused //TODEL
+
+	var/perapc = 0			// per-apc avilability
+	var/perapc_excess = 0
 	var/netexcess = 0			// excess power on the powernet (typically avail-load)
 
 /datum/powernet/New()
@@ -14,6 +17,11 @@
 
 /datum/powernet/Del()
 	powernets -= src
+
+//Returns the amount of excess power (before refunding to SMESs) from last tick.
+//This is for machines that might adjust their power consumption using this data.
+/datum/powernet/proc/last_surplus()
+	return max(avail - load, 0)
 
 /datum/powernet/proc/draw_power(var/amount)
 	var/draw = between(0, amount, avail - load)
@@ -67,9 +75,25 @@
 //handles the power changes in the powernet
 //called every ticks by the powernet controller
 /datum/powernet/proc/reset()
+	var/numapc = 0
 
-	//see if there's a surplus of power remaining in the powernet and stores unused power in the SMES
+	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
+		for(var/obj/machinery/power/terminal/term in nodes)
+			if( istype( term.master, /obj/machinery/power/apc ) )
+				numapc++
+
 	netexcess = avail - load
+
+	if(numapc)
+		//very simple load balancing. If there was a net excess this tick then it must have been that some APCs used less than perapc, since perapc*numapc = avail
+		//Therefore we can raise the amount of power rationed out to APCs on the assumption that those APCs that used less than perapc will continue to do so.
+		//If that assumption fails, then some APCs will miss out on power next tick, however it will be rebalanced for the tick after.
+		if (netexcess >= 0)
+			perapc_excess += min(netexcess/numapc, (avail - perapc) - perapc_excess)
+		else
+			perapc_excess = 0
+
+		perapc = avail/numapc + perapc_excess
 
 	if(netexcess > 100 && nodes && nodes.len)		// if there was excess power last cycle
 		for(var/obj/machinery/power/smes/S in nodes)	// find the SMESes in the network
