@@ -6943,7 +6943,7 @@
 "cDA" = (/obj/structure/stool/bed/chair{dir = 4},/obj/machinery/camera{c_tag = "Medbay Escape Shuttle"; dir = 2; network = list("SS13","Medical")},/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/shuttle/floor,/area/shuttle/escape_pod_medical/station)
 "cDB" = (/turf/simulated/shuttle/floor{icon_state = "floor2"},/turf/simulated/shuttle/wall{icon_state = "swall_f5"; dir = 2},/area/shuttle/escape_pod_medical/station)
 "cDC" = (/obj/structure/closet/emcloset,/turf/simulated/floor/plating,/area/maintenance/medbay)
-"cDD" = (/obj/machinery/camera{c_tag = "Medbay Escape Hallway"; dir = 2; network = list("SS13","Medical")},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/maintenance/medbay)
+"cDD" = (/obj/machinery/camera{c_tag = "Medbay Escape Hallway"; dir = 2; network = list("SS13","Medical")},/obj/machinery/atmospherics/unary/vent_pump/on,/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/plating,/area/maintenance/medbay)
 "cDE" = (/obj/machinery/light/small{dir = 1},/obj/structure/closet/emcloset,/turf/simulated/floor/plating,/area/maintenance/medbay)
 "cDF" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/medbay)
 "cDG" = (/obj/structure/closet/firecloset,/turf/simulated/floor/plating,/area/maintenance/medbay)
