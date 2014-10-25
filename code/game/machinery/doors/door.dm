@@ -23,6 +23,9 @@
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/air_properties_vary_with_direction = 0
+	var/maxhealth = 500
+	var/health
+	var/hitsound = 'sound/weapons/Genhit.ogg' //sound door makes when hit with a weapon
 
 	//Multi-tile doors
 	dir = EAST
@@ -46,6 +49,8 @@
 		else
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
+
+	health = maxhealth
 
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -120,6 +125,24 @@
 	src.open()
 	return
 
+/obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage)
+		take_damage(round(Proj.damage * 4))
+	..()
+
+/obj/machinery/door/hitby(AM as mob|obj)
+
+	..()
+	visible_message("\red <B>[src.name] was hit by [AM].</B>", 1)
+	var/tforce = 0
+	if(ismob(AM))
+		tforce = 40
+	else
+		tforce = AM:throwforce
+	playsound(src.loc, hitsound, 100, 1)
+	take_damage(tforce)
+	//..() //Does this really need to be here twice? The parent proc doesn't even do anything yet. - Nodrak
+	return
 
 /obj/machinery/door/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -146,20 +169,67 @@
 		user = null
 	if(!src.requiresID())
 		user = null
+	if(istype(I, /obj/item/stack/sheet/metal))
+		if(stat & BROKEN)
+			user << "\blue [src.name] is damaged beyond repair and must be reconstructed!"
+			return
+		if(health >= maxhealth)
+			user << "\blue Nothing to fix!"
+			return
+		var/obj/item/stack/sheet/metal/metalstack = I
+		var/health_per_sheet = 50
+		var/initialhealth = health
+		src.health = min(maxhealth, health + 100, health + (metalstack.amount * health_per_sheet))
+		user.visible_message("\The [user] patches some dents on \the [src] with \the [metalstack].")
+		metalstack.use(round((health - initialhealth)/health_per_sheet))
+		return
+
 	if(src.density && ((operable() && istype(I, /obj/item/weapon/card/emag)) || istype(I, /obj/item/weapon/melee/energy/blade)))
 		flick("door_spark", src)
 		sleep(6)
 		open()
 		operating = -1
 		return 1
-	if(src.allowed(user))
+	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
+		var/obj/item/weapon/W = I
+		if(W.damtype == BRUTE || W.damtype == BURN)
+			if(W.force <4)
+				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
+			else
+				user.visible_message("\red <B>\The [user] forcefully slams \the [src] with \the [W]!</B>" )
+				playsound(src.loc, hitsound, 100, 1)
+				take_damage(W.force)
+		return
+	if(src.allowed(user) && operable())
 		if(src.density)
 			open()
 		else
 			close()
 		return
-	if(src.density)
+	if(src.density && !(stat & (NOPOWER|BROKEN)))
 		flick("door_deny", src)
+	return
+
+/obj/machinery/door/proc/take_damage(var/damage)
+	var/initialhealth = src.health
+	src.health = max(0, src.health - damage)
+	if(src.health <= 0 && initialhealth > 0)
+		src.set_broken()
+	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
+		visible_message("\The [src] looks like it's about to break!" )
+	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
+		visible_message("\The [src] looks seriously damaged!" )
+	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
+		visible_message("\The [src] shows signs of damage!" )
+	update_icon()
+	return
+
+/obj/machinery/door/proc/set_broken()
+	stat |= BROKEN
+	for (var/mob/O in viewers(src, null))
+		if ((O.client && !( O.blinded )))
+			O.show_message("[src.name] breaks!" )
+	update_icon()
 	return
 
 
@@ -187,11 +257,15 @@
 		if(2.0)
 			if(prob(25))
 				del(src)
+			else
+				take_damage(300)
 		if(3.0)
 			if(prob(80))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
+			else
+				take_damage(150)
 	return
 
 
@@ -293,7 +367,7 @@
 
 /obj/machinery/door/proc/autoclose()
 	var/obj/machinery/door/airlock/A = src
-	if(!A.density && !A.operating && !A.locked && !A.welded && A.autoclose)
+	if(!A.density && !A.operating && !A.locked && !A.welded && !(A.stat & (BROKEN|NOPOWER)) && A.autoclose)
 		close()
 	return
 
@@ -309,6 +383,10 @@
 			bound_height = width * world.icon_size
 
 	update_nearby_tiles()
+
+/obj/machinery/door/power_change()
+	..()
+	update_icon()
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
