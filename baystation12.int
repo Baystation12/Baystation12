@@ -1,8 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: maps\Phoenix.dmm
 LAST_COMPILE_VERSION: 506.1247
-DIR: code code\_onclick code\_onclick\hud code\game code\game\jobs code\game\jobs\job code\modules\admin code\modules\admin\verbs code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human icons icons\mob 
+DIR: code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human 
+FILE: maps\Phoenix.dmm
 LAST_COMPILE_TIME: 1413646499
 AUTO_FILE_DIR: OFF
 */
