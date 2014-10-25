@@ -69,8 +69,8 @@
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
-	
-	var/character_slots = 10				// The number of available character slots
+
+	var/character_slots = 30				// The number of available character slots
 
 	var/max_maint_drones = 5				//This many drones can spawn,
 	var/allow_drone_spawn = 1				//assuming the admin allow them to.
@@ -495,7 +495,7 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
-					
+
 				if("character_slots")
 					config.character_slots = text2num(value)
 
