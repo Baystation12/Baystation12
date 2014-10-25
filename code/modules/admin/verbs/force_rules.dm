@@ -14,7 +14,8 @@
 				M << browse(file(RULES_FILE), "window=rules;size=480x320")
 				M << "<b><font color= red>You have been forced to read the rules by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 				message_admins("\blue [key_name_admin(usr)] forced [key_name(M)] to read the server rules!")
-				log_admin("[key_name_admin(usr)] forced [key_name(M)] to read the Rules")
+				log_admin("[key_name_admin(usr)] forced [key_name(M)] to read the rules")
+				log_admin_single("[key_name_admin(usr)] forced [key_name(M)] to read the rules")
 
 
 

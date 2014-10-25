@@ -174,6 +174,7 @@ var/savefile/Banlistjob
 		message_admins("Banjob Expired: [key]")
 	else
 		log_admin("[key_name_admin(usr)] unjobbanned [key] from [rank]")
+		log_admin_single("[key_name_admin(usr)] unjobbanned [key] from [rank]")
 		message_admins("[key_name_admin(usr)] unjobbanned:[key] from [rank]")
 		ban_unban_log_save("[key_name_admin(usr)] unjobbanned [key] from [rank]")
 		feedback_inc("ban_job_unban",1)

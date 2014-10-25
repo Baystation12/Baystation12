@@ -11,10 +11,12 @@
 	if(!input || input == "")
 		announcement_msg = null
 		log_admin("[usr.key] has cleared the announcement text.")
+		log_admin_single("[usr.key] has cleared the announcement text.")
 		message_admins("[key_name_admin(usr)] has cleared the announcement text.")
 		return
 
 	log_admin("[usr.key] has changed the announcement text.")
+	log_admin_single("[usr.key] has changed the announcement text.")
 	message_admins("[key_name_admin(usr)] has changed the announcement text.")
 
 	announcement_msg = input
