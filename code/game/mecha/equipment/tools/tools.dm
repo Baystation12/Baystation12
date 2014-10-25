@@ -173,11 +173,14 @@
 	energy_drain = 0
 	range = MELEE|RANGED
 	required_type = /obj/mecha/working
+	var/spray_particles = 5
+	var/spray_amount = 5	//units of liquid per particle. 5 is enough to wet the floor - it's a big fire extinguisher, so should be fine
+	var/max_water = 1000
 
 	New()
-		reagents = new/datum/reagents(200)
+		reagents = new/datum/reagents(max_water)
 		reagents.my_atom = src
-		reagents.add_reagent("water", 200)
+		reagents.add_reagent("water", max_water)
 		..()
 		return
 
@@ -188,8 +191,8 @@
 		if(do_after_cooldown(target))
 			if(istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				o.reagents.trans_to(src, 200)
-				occupant_message("\blue Extinguisher refilled")
+				var/amount = o.reagents.trans_to(src, 200)
+				occupant_message("\blue [amount] units transferred into internal tank.")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 			else
 				if(src.reagents.total_volume > 0)
@@ -200,22 +203,25 @@
 					var/turf/T2 = get_step(T,turn(direction, -90))
 
 					var/list/the_targets = list(T,T1,T2)
-					spawn(0)
-						for(var/a=0, a<5, a++)
+					for(var/a=0, a<spray_particles, a++)
+						spawn(0)
 							var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
 							if(!W)
 								return
 							var/turf/my_target = pick(the_targets)
-							var/datum/reagents/R = new/datum/reagents(5)
+							var/datum/reagents/R = new/datum/reagents(spray_amount)
 							W.reagents = R
 							R.my_atom = W
-							src.reagents.trans_to(W,1)
+							src.reagents.trans_to(W, spray_amount)
+						
 							for(var/b=0, b<4, b++)
 								if(!W)
 									return
 								step_towards(W,my_target)
 								if(!W)
 									return
+								if(!W.reagents)
+									break
 								var/turf/W_turf = get_turf(W)
 								W.reagents.reaction(W_turf)
 								for(var/atom/atm in W_turf)
@@ -223,6 +229,7 @@
 								if(W.loc == my_target)
 									break
 								sleep(2)
+							W.delete()
 		return 1
 
 	get_equip_info()

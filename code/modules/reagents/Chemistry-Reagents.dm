@@ -184,7 +184,7 @@ datum
 					M.resistances += self.data
 				return
 
-
+		#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"
 			id = "water"
@@ -195,37 +195,43 @@ datum
 
 			reaction_turf(var/turf/simulated/T, var/volume)
 				if (!istype(T)) return
-				src = null
-				if(volume >= 3)
-					if(T.wet >= 1) return
-					T.wet = 1
-					if(T.wet_overlay)
-						T.overlays -= T.wet_overlay
-						T.wet_overlay = null
-					T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
-					T.overlays += T.wet_overlay
-
-					spawn(800)
-						if (!istype(T)) return
-						if(T.wet >= 2) return
-						T.wet = 0
+				
+				//Put out fires. Temperature is handled after
+				var/hotspot = (locate(/obj/fire) in T)
+				if(hotspot)
+					//lowertemp.react()
+					del(hotspot)
+				
+				//If the turf is hot enough, remove some heat
+				var/datum/gas_mixture/environment = T.return_air()
+				var/min_temperature = T0C + 100	//100C, the boiling point of water
+				if (environment && environment.temperature > min_temperature) //abstracted as steam or something
+					var/removed_heat = between(0, volume*WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+					world << "water/reaction_turf: Initial temperature = [environment.temperature]"
+					environment.add_thermal_energy(-removed_heat)
+					world << "water/reaction_turf: Final temperature = [environment.temperature - T0C]"
+					if (prob(5))
+						T.visible_message("\red The water sizzles as it lands on \the [T]!")
+				else //otherwise, the turf gets wet
+					if(volume >= 3)
+						if(T.wet >= 1) return
+						T.wet = 1
 						if(T.wet_overlay)
 							T.overlays -= T.wet_overlay
 							T.wet_overlay = null
+						T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
+						T.overlays += T.wet_overlay
 
-				for(var/mob/living/carbon/slime/M in T)
-					M.apply_water()
+						src = null
+						spawn(800)
+							if (!istype(T)) return
+							if(T.wet >= 2) return
+							T.wet = 0
+							if(T.wet_overlay)
+								T.overlays -= T.wet_overlay
+								T.wet_overlay = null
 
-				var/hotspot = (locate(/obj/fire) in T)
-				if(hotspot && !istype(T, /turf/space))
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles )
-					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
-					lowertemp.react()
-					T.assume_air(lowertemp)
-					del(hotspot)
-				return
 			reaction_obj(var/obj/O, var/volume)
-				src = null
 				var/turf/T = get_turf(O)
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot && !istype(T, /turf/space))
@@ -238,7 +244,11 @@ datum
 					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 					if(!cube.wrapped)
 						cube.Expand()
-				return
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				if (istype(M, /mob/living/carbon/slime))
+					var/mob/living/carbon/slime/S = M
+					S.apply_water()
 
 		water/holywater
 			name = "Holy Water"
