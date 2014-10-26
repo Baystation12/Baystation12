@@ -684,7 +684,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 				usr.client.pixel_x = -viewoffset
 				usr.client.pixel_y = 0
 
-		usr.visible_message("[usr] peers through the [devicename].")
+		usr.visible_message("[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].")
 
 		/*
 		if(istype(usr,/mob/living/carbon/human/))
@@ -704,6 +704,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		usr.client.pixel_y = 0
 
 		if(!cannotzoom)
-			usr.visible_message("[usr] lowers the [devicename].")
+			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return

@@ -283,7 +283,7 @@
 
 		if (radiation)
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
-			if(!rad_organ || rad_organ.is_broken())
+			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads
