@@ -126,6 +126,7 @@
 	icon_state = "engiepack"
 	item_state = "engiepack"
 	storage_slots = 14
+	max_combined_w_class = 45
 
 /obj/item/weapon/storage/backpack/toxins
 	name = "laboratory backpack"
@@ -181,6 +182,8 @@
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
+	storage_slots = 14
+	max_combined_w_class = 45
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
@@ -249,6 +252,7 @@
 	desc = "A spacious backpack with lots of pockets, worn by engineering members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_engineering"
 	storage_slots = 14
+	max_combined_w_class = 45
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical
