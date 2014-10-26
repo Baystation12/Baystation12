@@ -10,7 +10,7 @@
 	var/fire_sound //Sound played while firing.
 	var/fire_volume = 50 //How loud it is played.
 	var/auto_rearm = 0 //Does the weapon reload itself after each shot?
-	required_type = /obj/mecha/combat
+	required_type = list(/obj/mecha/combat, /obj/mecha/working/hoverpod/combatpod)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/action_checks(atom/target)
 	if(projectiles <= 0)

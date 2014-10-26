@@ -1,4 +1,4 @@
-/obj/mecha/hoverpod
+/obj/mecha/working/hoverpod
 	desc = "Stubby and round, this space-capable craft is an ancient favorite."
 	name = "Hover Pod"
 	icon_state = "engineering_pod"
@@ -11,25 +11,18 @@
 	infra_luminosity = 6
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
 	var/list/cargo = new
-	var/cargo_capacity = 3
-	max_equip = 2
+	var/cargo_capacity = 5
+	max_equip = 3
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail
 
-/obj/mecha/hoverpod/New()
+/obj/mecha/working/hoverpod/New()
 	..()
-	var/turf/T = get_turf(src)
-	if(T.z != 2)
-		new /obj/item/mecha_parts/mecha_tracking(src)
-	
 	ion_trail = new /datum/effect/effect/system/ion_trail_follow()
 	ion_trail.set_up(src)
 	ion_trail.start()
 
-/obj/mecha/hoverpod/range_action(atom/target as obj|mob|turf)
-	return
-	
 //No space drifting
-/obj/mecha/hoverpod/check_for_support()
+/obj/mecha/working/hoverpod/check_for_support()
 	//does the hoverpod have enough charge left to stabilize itself?
 	if (has_charge(step_energy_drain))
 		if (!ion_trail.on)
@@ -40,30 +33,30 @@
 	return ..()
 
 //these three procs overriden to play different sounds
-/obj/mecha/hoverpod/mechturn(direction)
+/obj/mecha/working/hoverpod/mechturn(direction)
 	dir = direction
 	//playsound(src,'sound/machines/hiss.ogg',40,1)
 	return 1
 
-/obj/mecha/hoverpod/mechstep(direction)
+/obj/mecha/working/hoverpod/mechstep(direction)
 	var/result = step(src,direction)
 	if(result)
 		playsound(src,'sound/machines/hiss.ogg',40,1)
 	return result
 
 
-/obj/mecha/hoverpod/mechsteprand()
+/obj/mecha/working/hoverpod/mechsteprand()
 	var/result = step_rand(src)
 	if(result)
 		playsound(src,'sound/machines/hiss.ogg',40,1)
 	return result
 
-/obj/mecha/hoverpod/Exit(atom/movable/O)
+/obj/mecha/working/hoverpod/Exit(atom/movable/O)
 	if(O in cargo)
 		return 0
 	return ..()
 
-/obj/mecha/hoverpod/Topic(href, href_list)
+/obj/mecha/working/hoverpod/Topic(href, href_list)
 	..()
 	if(href_list["drop_from_cargo"])
 		var/obj/O = locate(href_list["drop_from_cargo"])
@@ -78,7 +71,7 @@
 	return
 
 
-/obj/mecha/hoverpod/get_stats_part()
+/obj/mecha/working/hoverpod/get_stats_part()
 	var/output = ..()
 	output += "<b>Cargo Compartment Contents:</b><div style=\"margin-left: 15px;\">"
 	if(src.cargo.len)
@@ -89,7 +82,7 @@
 	output += "</div>"
 	return output
 
-/obj/mecha/hoverpod/Del()
+/obj/mecha/working/hoverpod/Del()
 	for(var/mob/M in src)
 		if(M==src.occupant)
 			continue
@@ -106,27 +99,26 @@
 	return
 
 //Hoverpod variants
-
-/* Commented out the combatpod as they can't reattach their equipment if it ever gets dropped, 
- * and making a special exception for them seems lame.
-/obj/mecha/hoverpod/combatpod
+/obj/mecha/working/hoverpod/combatpod
 	desc = "An ancient, run-down combat spacecraft." // Ideally would have a seperate icon.
 	name = "Combat Hoverpod"
 	health = 200
 	internal_damage_threshold = 35
+	cargo_capacity = 2
+	max_equip = 2
 
-/obj/mecha/hoverpod/combatpod/New()
+/obj/mecha/working/hoverpod/combatpod/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
 	ME.attach(src)
 	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
 	ME.attach(src)
-*/
 
-/obj/mecha/hoverpod/shuttlepod
+
+/obj/mecha/working/hoverpod/shuttlepod
 	desc = "Who knew a tiny ball could fit three people?"
 
-/obj/mecha/hoverpod/shuttlepod/New()
+/obj/mecha/working/hoverpod/shuttlepod/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
 	ME.attach(src)
