@@ -159,7 +159,7 @@
 	//see: setup.dm for list of mutations
 
 	var/voice_name = "unidentifiable voice"
-
+	var/speech_allowed = 1
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true.
 
