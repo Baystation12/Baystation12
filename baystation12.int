@@ -1,6 +1,19 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: maps\Phoenix.dmm;C:\Users\Jamie\Desktop\new old\MY LOVELY MAPS\tgstation2old.dmm;code\global.dm;code\game\smoothwall.dm;code\game\turfs\simulated\walls.dm;code\game\turfs\simulated\walls_reinforced.dm;icons\turf\walls.dmi
+LAST_COMPILE_VERSION: 506.1247
+PACKAGE_RSC_NAME: P:\GitHub\Jamie Phoenix\NSS-Phoenix\baystation12_rsc.zip
+PACKAGE_DME_DEMO: 
+PACKAGE_TYPE: 0
+PACKAGE_DME_START: 
+DIR: code code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\controllers code\game code\game\gamemodes code\game\gamemodes\autotraitor code\game\gamemodes\changeling code\game\gamemodes\cult code\game\gamemodes\epidemic code\game\gamemodes\heist code\game\machinery code\game\machinery\computer code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\turfs code\game\turfs\simulated code\modules code\modules\admin code\modules\admin\verbs code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\under code\modules\economy code\modules\events icons icons\turf maps External 
+PACKAGE_DME_NAME: P:\GitHub\Jamie Phoenix\NSS-Phoenix\baystation12_src.zip
+FILE: maps\Phoenix.dmm
+PACKAGE_DME_INFO: 
+LAST_COMPILE_TIME: 1414356122
+PACKAGE_DMB_NAME: C:\Users\Jamie\Desktop\baystation12.zip
 AUTO_FILE_DIR: OFF
+PACKAGE_DMB_INFO: 
 */
 // END_INTERNALS
