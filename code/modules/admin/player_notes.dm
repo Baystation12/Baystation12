@@ -125,6 +125,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 
 	message_admins("\blue [key_name_admin(usr)] has edited [key]'s notes.")
 	log_admin("[key_name(usr)] has edited [key]'s notes.")
+	log_admin_single("[key_name(usr)] has edited [key]'s notes.")
 
 	del info
 
@@ -150,7 +151,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 
 	message_admins("\blue [key_name_admin(usr)] deleted one of [key]'s notes.")
 	log_admin("[key_name(usr)] deleted one of [key]'s notes.")
-
+	log_admin_single("[key_name(usr)] deleted one of [key]'s notes.")
 	del info
 
 /proc/show_player_info_irc(var/key as text)

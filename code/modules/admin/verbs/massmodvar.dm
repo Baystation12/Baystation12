@@ -372,4 +372,5 @@
 							A.vars[variable] = O.vars[variable]
 
 	log_admin("[key_name(src)] mass modified [original_name]'s [variable] to [O.vars[variable]]")
+	log_admin_single("[key_name(src)] mass modified [original_name]'s [variable] to [O.vars[variable]]")
 	message_admins("[key_name_admin(src)] mass modified [original_name]'s [variable] to [O.vars[variable]]", 1)

@@ -25,12 +25,13 @@
 
 	if (src.holder.rights & R_MENTOR)
 		stafftype = "MENTOR"
-		
+
 	if (src.holder.rights & R_ADMIN)
 		stafftype = "ADMIN"
 
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
-	log_admin("[key_name(src)] : [msg]")
+	log_admin("DSAY: [key_name(src)] : [msg]")
+	log_admin_single("DSAY: [key_name(src)] : [msg]")
 
 	if (!msg)
 		return
