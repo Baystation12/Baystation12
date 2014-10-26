@@ -80,12 +80,13 @@
 			C.breaker_box = src
 
 			var/datum/powernet/PN = new()
-			PN.number = powernets.len + 1
-			powernets += PN
-			PN.cables += C
+			PN.add_cable(C)
 
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()
+
+			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d2)
 
 	else
 		icon_state = icon_state_off

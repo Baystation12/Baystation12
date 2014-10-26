@@ -27,7 +27,6 @@
 	var/safetieson = 1
 	var/cycletime_left = 0
 
-
 //The units themselves/////////////////
 
 /obj/machinery/suit_storage_unit/standard_unit
@@ -591,13 +590,7 @@
 	var/locked = 1          // If locked, nothing can be taken from or added to the cycler.
 	var/panel_open = 0      // Hacking!
 	var/can_repair          // If set, the cycler can repair hardsuits.
-
-	// Wiring bollocks.
-	var/wires = 15
 	var/electrified = 0
-	var/const/WIRE_EXTEND = 1 // Safeties
-	var/const/WIRE_SCANID = 2 // Locked status
-	var/const/WIRE_SHOCK = 3  // What it says on the tin.
 
 	//Departments that the cycler can paint suits to look like.
 	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos")
@@ -611,11 +604,19 @@
 	var/obj/item/clothing/suit/space/rig/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
 
+	var/datum/wires/suit_storage_unit/wires = null
+
 /obj/machinery/suit_cycler/New()
 	..()
+
+	wires = new(src)
 	target_department = departments[1]
 	target_species = species[1]
 	if(!target_department || !target_species) del(src)
+
+/obj/machinery/suit_cycler/Del()
+	del(wires) // qdel
+	wires = null
 
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
@@ -820,30 +821,14 @@
 		dat += "<A href='?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
 
 	if(panel_open)
-		var/list/vendwires = list(
-			"Violet" = 1,
-			"Orange" = 2,
-			"Goldenrod" = 3,
-			)
-		dat += "<h2><B>Access Panel</B></h2>"
-		for(var/wiredesc in vendwires)
-			var/is_uncut = src.wires & APCWireColorToFlag[vendwires[wiredesc]]
-			dat += "[wiredesc] wire: "
-			if(!is_uncut)
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Mend</a>"
-			else
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Cut</a> "
-				dat += "<a href='?src=\ref[src];pulsewire=[vendwires[wiredesc]]'>Pulse</a> "
-			dat += "<br>"
-
-		dat += "<br>"
-		dat += "The orange light is [(electrified == 0) ? "off" : "on"].<BR>"
-		dat += "The red light is [safeties ? "blinking" : "off"].<BR>"
-		dat += "The yellow light is [locked ? "on" : "off"].<BR>"
+		dat += wires()
 
 	user << browse(dat, "window=suit_cycler")
 	onclose(user, "suit_cycler")
 	return
+
+/obj/machinery/suit_cycler/proc/wires()
+	return wires.GetInteractWindow()
 
 /obj/machinery/suit_cycler/Topic(href, href_list)
 	if(href_list["eject_suit"])
@@ -915,27 +900,6 @@
 				suit.decontaminate()
 			if(radiation_level > 1)
 				suit.clean_blood()
-
-	else if ((href_list["cutwire"]) && (src.panel_open))
-		var/twire = text2num(href_list["cutwire"])
-		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-			usr << "You need wirecutters!"
-			return
-		if (src.isWireColorCut(twire))
-			src.mend(twire)
-		else
-			src.cut(twire)
-
-	else if ((href_list["pulsewire"]) && (src.panel_open))
-		var/twire = text2num(href_list["pulsewire"])
-		if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-			usr << "You need a multitool!"
-			return
-		if (src.isWireColorCut(twire))
-			usr << "You can't pulse a cut wire."
-			return
-		else
-			src.pulse(twire)
 
 	src.updateUsrDialog()
 	return
@@ -1016,46 +980,6 @@
 	src.update_icon()
 
 	return
-
-//HACKING PROCS, MOSTLY COPIED FROM VENDING MACHINES
-/obj/machinery/suit_cycler/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/suit_cycler/proc/isWireCut(var/wireIndex)
-	var/wireFlag = APCIndexToFlag[wireIndex]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/suit_cycler/proc/cut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires &= ~wireFlag
-	switch(wireIndex)
-
-		if(WIRE_EXTEND)
-			safeties = 0
-		if(WIRE_SHOCK)
-			electrified = -1
-		if (WIRE_SCANID)
-			locked = 0
-
-/obj/machinery/suit_cycler/proc/mend(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor] //not used in this function
-	src.wires |= wireFlag
-	switch(wireIndex)
-		if(WIRE_SHOCK)
-			src.electrified = 0
-
-/obj/machinery/suit_cycler/proc/pulse(var/wireColor)
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			safeties = !locked
-		if(WIRE_SHOCK)
-			electrified = 30
-		if (WIRE_SCANID)
-			locked = !locked
 
 //There HAS to be a less bloated way to do this. TODO: some kind of table/icon name coding? ~Z
 /obj/machinery/suit_cycler/proc/apply_paintjob()
