@@ -10,8 +10,7 @@
 	health = 150
 	infra_luminosity = 6
 	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
-	var/list/cargo = new
-	var/cargo_capacity = 5
+	cargo_capacity = 5
 	max_equip = 3
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail
 
@@ -51,52 +50,6 @@
 		playsound(src,'sound/machines/hiss.ogg',40,1)
 	return result
 
-/obj/mecha/working/hoverpod/Exit(atom/movable/O)
-	if(O in cargo)
-		return 0
-	return ..()
-
-/obj/mecha/working/hoverpod/Topic(href, href_list)
-	..()
-	if(href_list["drop_from_cargo"])
-		var/obj/O = locate(href_list["drop_from_cargo"])
-		if(O && O in src.cargo)
-			src.occupant_message("\blue You unload [O].")
-			O.loc = get_turf(src)
-			src.cargo -= O
-			var/turf/T = get_turf(O)
-			if(T)
-				T.Entered(O)
-			src.log_message("Unloaded [O]. Cargo compartment capacity: [cargo_capacity - src.cargo.len]")
-	return
-
-
-/obj/mecha/working/hoverpod/get_stats_part()
-	var/output = ..()
-	output += "<b>Cargo Compartment Contents:</b><div style=\"margin-left: 15px;\">"
-	if(src.cargo.len)
-		for(var/obj/O in src.cargo)
-			output += "<a href='?src=\ref[src];drop_from_cargo=\ref[O]'>Unload</a> : [O]<br>"
-	else
-		output += "Nothing"
-	output += "</div>"
-	return output
-
-/obj/mecha/working/hoverpod/Del()
-	for(var/mob/M in src)
-		if(M==src.occupant)
-			continue
-		M.loc = get_turf(src)
-		M.loc.Entered(M)
-		step_rand(M)
-	for(var/atom/movable/A in src.cargo)
-		A.loc = get_turf(src)
-		var/turf/T = get_turf(A)
-		if(T)
-			T.Entered(A)
-		step_rand(A)
-	..()
-	return
 
 //Hoverpod variants
 /obj/mecha/working/hoverpod/combatpod
