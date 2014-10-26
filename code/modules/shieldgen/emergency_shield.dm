@@ -234,6 +234,8 @@
 	if(health <= 30)
 		src.malfunction = 1
 	if(health <= 0)
+		spawn(0)
+			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
 		del(src)
 	update_icon()
 	return
