@@ -63,6 +63,7 @@
 		if("Security") prefix = ":s "
 		if("Supply") prefix = ":u "
 		if("Binary") prefix = ":b "
+		if("Private") prefix = ":o "
 		if("Holopad") prefix = ":h "
 		else prefix = ""
 

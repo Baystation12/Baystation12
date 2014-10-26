@@ -12,6 +12,7 @@ var/list/department_radio_keys = list(
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
 	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":o" = "AI Private",	"#o" = "AI Private",	".o" = "AI Private",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -25,6 +26,7 @@ var/list/department_radio_keys = list(
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
 	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":O" = "AI Private",	"#O" = "AI Private",	".O" = "AI Private",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
