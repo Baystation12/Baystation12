@@ -1,5 +1,8 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/alldepartments = list("Central Command", "Sol Government")
+var/list/admin_departments = list("Central Command", "Sol Government")
+var/list/alldepartments = list()
+
+var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -24,7 +27,7 @@ var/list/alldepartments = list("Central Command", "Sol Government")
 	..()
 	allfaxes += src
 
-	if( !("[department]" in alldepartments) )
+	if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) )
 		alldepartments |= department
 
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
@@ -82,17 +85,11 @@ var/list/alldepartments = list("Central Command", "Sol Government")
 /obj/machinery/photocopier/faxmachine/Topic(href, href_list)
 	if(href_list["send"])
 		if(copyitem)
-
-			if(destination == "Central Command")
-				//Centcomm_fax(src, tofax.info, tofax.name, usr)
-				sendcooldown = 1800
-
-			else if(destination == "Sol Government")
-				//Solgov_fax(src, tofax.info, tofax.name, usr)
-				sendcooldown = 1800
+			if (destination in admin_departments)
+				send_admin_fax(usr, destination)
 			else
 				sendfax(destination)
-
+			
 			if (sendcooldown)
 				spawn(sendcooldown) // cooldown time
 					sendcooldown = 0
@@ -125,7 +122,7 @@ var/list/alldepartments = list("Central Command", "Sol Government")
 
 	if(href_list["dept"])
 		var/lastdestination = destination
-		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in alldepartments
+		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (alldepartments + admin_departments)
 		if(!destination) destination = lastdestination
 
 	if(href_list["auth"])
@@ -138,21 +135,18 @@ var/list/alldepartments = list("Central Command", "Sol Government")
 
 	updateUsrDialog()
 
-/obj/machinery/photocopier/faxmachine/proc/admin_fax()
-	//TODO
-
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	
-	var/sent = 0
-	
 	use_power(200)
+	
+	var/success = 0
 	for(var/obj/machinery/photocopier/faxmachine/F in allfaxes)
 		if( F.department == destination )
-			sent = F.recievefax(copyitem)
+			success = F.recievefax(copyitem)
 	
-	if (sent)
+	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
 		sendcooldown = 600
 	else
@@ -180,13 +174,40 @@ var/list/alldepartments = list("Central Command", "Sol Government")
 	use_power(active_power_usage)
 	return 1
 
-/proc/Centcomm_fax(var/originfax, var/sent, var/sentname, var/mob/Sender)
+/obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	
+	use_power(200)
 
-	var/msg = "\blue <b><font color='#006100'>CENTCOMM FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;CentcommFaxReply=\ref[Sender];originfax=\ref[originfax]'>REPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
+	var/obj/item/rcvdcopy
+	if (istype(copyitem, /obj/item/weapon/paper))
+		rcvdcopy = copy(copyitem)
+	else if (istype(copyitem, /obj/item/weapon/photo))
+		rcvdcopy = photocopy(copyitem)
+	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
+		rcvdcopy = bundlecopy(copyitem)
+	else
+		visible_message("[src] beeps, \"Error transmitting message.\"")
+		return
+	
+	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
+	adminfaxes += rcvdcopy
+	
+	//message badmins that a fax has arrived
+	switch(destination)
+		if ("Central Command")
+			message_admins(sender, "CENTCOMM FAX", rcvdcopy, "CentcommFaxReply", "#006100")
+		if ("Sol Government")
+			message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "CentcommFaxReply", "#1F66A0")
+			//message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "SolGovFaxReply", "#1F66A0")
+	
+	sendcooldown = 1800
+	sleep(50)
+	visible_message("[src] beeps, \"Message transmitted successfully.\"")
+	
 
-	admins << msg
-
-/proc/Solgov_fax(var/originfax, var/sent, var/sentname, var/mob/Sender)
-	var/msg = "\blue <b><font color='#1F66A0'>SOL GOVERNMENT FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;SolGovFaxReply=\ref[Sender];originfax=\ref[originfax]'>REPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
-
+/obj/machinery/photocopier/faxmachine/proc/message_admins(var/mob/sender, var/faxname, var/obj/item/sent, var/reply_type, font_colour="#006100")
+	var/msg = "\blue <b><font color='[font_colour]'>[faxname]: </font>[key_name(sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;[reply_type]=\ref[sender];originfax=\ref[src]'>REPLY</a>)</b>: Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
+	
 	admins << msg
