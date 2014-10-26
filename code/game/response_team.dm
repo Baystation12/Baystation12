@@ -308,12 +308,12 @@ proc/trigger_armed_response_team(var/force = 0)
 	//Removed
 //	equip_to_slot_or_del(new /obj/item/clothing/suit/armor/swat(src), slot_wear_suit)
 //	equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/deathsquad(src), slot_head)
-*/
+
 	//Backpack
 	equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(src), slot_back)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
-
+*/
 	var/obj/item/weapon/card/id/W = new(src)
 	W.assignment = "Emergency Response Team[leader_selected ? " Leader" : ""]"
 	W.registered_name = real_name
