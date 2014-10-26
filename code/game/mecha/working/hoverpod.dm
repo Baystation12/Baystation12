@@ -5,7 +5,7 @@
 	initial_icon = "engineering_pod"
 	internal_damage_threshold = 80
 	step_in = 4
-	step_energy_drain = 10
+	step_energy_drain = 15
 	max_temperature = 20000
 	health = 150
 	infra_luminosity = 6
@@ -13,6 +13,7 @@
 	cargo_capacity = 5
 	max_equip = 3
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail
+	var/stabilization_enabled = 1
 
 /obj/mecha/working/hoverpod/New()
 	..()
@@ -20,15 +21,37 @@
 	ion_trail.set_up(src)
 	ion_trail.start()
 
+//Modified phazon code
+/obj/mecha/working/hoverpod/Topic(href, href_list)
+	..()
+	if (href_list["toggle_stabilization"])
+		stabilization_enabled = !stabilization_enabled
+		send_byjax(src.occupant,"exosuit.browser","stabilization_command","[stabilization_enabled?"Dis":"En"]able thruster stabilization")
+		src.occupant_message("\blue Thruster stabilization [stabilization_enabled? "enabled" : "disabled"].")
+		return
+
+/obj/mecha/working/hoverpod/get_commands()
+	var/output = {"<div class='wr'>
+						<div class='header'>Special</div>
+						<div class='links'>
+						<a href='?src=\ref[src];toggle_stabilization=1'><span id="stabilization_command">[stabilization_enabled?"Dis":"En"]able thruster stabilization</span></a><br>
+						</div>
+						</div>
+						"}
+	output += ..()
+	return output
+
 //No space drifting
 /obj/mecha/working/hoverpod/check_for_support()
 	//does the hoverpod have enough charge left to stabilize itself?
-	if (has_charge(step_energy_drain))
+	if (!has_charge(step_energy_drain))
+		ion_trail.stop()
+	else
 		if (!ion_trail.on)
 			ion_trail.start()
-		return 1
+		if (stabilization_enabled)
+			return 1
 	
-	ion_trail.stop()
 	return ..()
 
 //these three procs overriden to play different sounds
