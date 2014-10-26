@@ -28,7 +28,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 			recall()
 		if (world.time >= launch_time)	//time to launch the shuttle
 			stop_launch_countdown()
-
+			shuttle.force_launch(src) //WE ARE LEAVING WHETHER YOU LIKE IT OR NOT
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
 				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)

@@ -111,7 +111,7 @@ TRAITOR_SCALING
 
 
 ## If security is prohibited from being most antagonists
-#PROTECT_ROLES_FROM_ANTAGONIST
+PROTECT_ROLES_FROM_ANTAGONIST
 
 ## Comment this out to stop admins being able to choose their personal ooccolor
 ALLOW_ADMIN_OOCCOLOR
