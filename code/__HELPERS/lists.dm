@@ -400,6 +400,37 @@ proc/listclearnulls(list/list)
 	//world.log << "	output: [out.len]"
 	return reverselist(out)
 
+/proc/dd_sortedObjectList(var/list/L, var/cache=list())
+	if(L.len < 2)
+		return L
+	var/middle = L.len / 2 + 1 // Copy is first,second-1
+	return dd_mergeObjectList(dd_sortedObjectList(L.Copy(0,middle), cache), dd_sortedObjectList(L.Copy(middle), cache), cache) //second parameter null = to end of list
+
+/proc/dd_mergeObjectList(var/list/L, var/list/R, var/list/cache)
+	var/Li=1
+	var/Ri=1
+	var/list/result = new()
+	while(Li <= L.len && Ri <= R.len)
+		var/LLi = L[Li]
+		var/RRi = R[Ri]
+		var/LLiV = cache[LLi]
+		var/RRiV = cache[RRi]
+		if(!LLiV)
+			LLiV = LLi:dd_SortValue()
+			cache[LLi] = LLiV
+		if(!RRiV)
+			RRiV = RRi:dd_SortValue()
+			cache[RRi] = RRiV
+		if(LLiV < RRiV)
+			result += L[Li++]
+		else
+			result += R[Ri++]
+
+	if(Li <= L.len)
+		return (result + L.Copy(Li, 0))
+	return (result + R.Copy(Ri, 0))
+
+/*
 proc/dd_sortedObjectList(list/incoming)
 	/*
 	   Use binary search to order by dd_SortValue().
@@ -456,7 +487,7 @@ proc/dd_sortedObjectList(list/incoming)
 		sorted_list += current_sort_object
 		sorted_list += list_bottom
 	return sorted_list
-
+*/
 
 proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
 	// Returns a new list with the text values sorted.
