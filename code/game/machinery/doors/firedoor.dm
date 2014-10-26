@@ -2,7 +2,7 @@
 /var/const/CLOSED = 2
 
 #define FIREDOOR_MAX_PRESSURE_DIFF 25 // kPa
-#define FIREDOOR_MAX_TEMP 50 // °C
+#define FIREDOOR_MAX_TEMP 50 // Â°C
 #define FIREDOOR_MIN_TEMP 0
 
 // Bitflags
@@ -166,8 +166,6 @@
 		if(alarmed)
 			// Accountability!
 			users_to_open |= user.name
-			log_admin("[user]([user.ckey]) has opened an alarming emergency shutter.")
-			message_admins("[user]([user.ckey]) has opened an alarming emergency shutter.")
 			needs_to_close = 1
 		spawn()
 			open()
