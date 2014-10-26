@@ -884,17 +884,9 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
 
-/area/crew_quarters/sleep/engi
-	name = "\improper Engineering Dormitories"
-	icon_state = "Sleep"
-
 /area/crew_quarters/sleep/engi_wash
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
-
-/area/crew_quarters/sleep/sec
-	name = "\improper Security Dormitories"
-	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/bedrooms
 	name = "\improper Dormitory Bedroom"
@@ -1079,6 +1071,10 @@ var/list/ghostteleportlocs = list()
 	engineering_foyer
 		name = "\improper Engineering Foyer"
 		icon_state = "engine"
+
+	engineering_supply
+		name = "Engineering Supply"
+		icon_state = "engine_supply"
 
 	break_room
 		name = "\improper Engineering Break Room"
