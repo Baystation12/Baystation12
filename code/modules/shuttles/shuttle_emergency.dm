@@ -27,6 +27,7 @@
 
 	if (origin == area_station)	//leaving the station
 		emergency_shuttle.departed = 1
+		enter_allowed = 0
 
 		if (emergency_shuttle.evac)
 			priority_announcement.Announce("The Emergency Shuttle has left the station. Estimate [round(emergency_shuttle.estimate_arrival_time()/60,1)] minutes until the shuttle docks at Central Command.")
