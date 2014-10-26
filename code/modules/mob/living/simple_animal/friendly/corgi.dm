@@ -348,12 +348,13 @@ TO-DO:
 /mob/living/simple_animal/corgi/proc/detect_important_people()
 	if(src.name == "Ian")
 		for(var/mob/living/carbon/human/H in world)
-			if(H && H.client.ckey)
-				if(H.mind)
-					if(H.mind.assigned_role == "Head of Personnel")
-						src.Leader = H
-					if((H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain") && !(locate(src.Friends, H)))
-						src.Friends.Add(H)
+			if(H)
+				if(H.client)
+					if(H.mind)
+						if(H.mind.assigned_role == "Head of Personnel")
+							src.Leader = H
+						if((H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain") && !(locate(src.Friends, H)))
+							src.Friends.Add(H)
 	else
 		return
 

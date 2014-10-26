@@ -13,6 +13,9 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
+	if(!speech_allowed)
+		return
+
 	set_typing_indicator(0)
 	usr.say(message)
 
