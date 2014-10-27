@@ -282,6 +282,12 @@
 				if( !(slot_flags & SLOT_MASK) )
 					return 0
 				return 1
+			if(slot_neck)
+				if(H.neck)
+					return 0
+				if( !(slot_flags & SLOT_NECK) )
+					return 0
+				return 1
 			if(slot_back)
 				if(H.back)
 					return 0

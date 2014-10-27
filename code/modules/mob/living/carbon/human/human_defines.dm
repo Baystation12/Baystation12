@@ -56,6 +56,7 @@
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
+	var/obj/item/neck = null
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null

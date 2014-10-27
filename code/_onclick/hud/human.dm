@@ -122,6 +122,8 @@
 		hurt_intent = using
 		//end intent small hud objects
 
+
+
 	if(hud_data.has_m_intent)
 		using = new /obj/screen()
 		using.name = "mov_intent"
@@ -157,6 +159,17 @@
 		using.color = ui_color
 		using.alpha = ui_alpha
 		src.adding += using
+
+		inv_box = new /obj/screen/inventory()
+		inv_box.name = "neck"
+		inv_box.icon = ui_style
+		inv_box.icon_state = "neck"
+		inv_box.screen_loc = ui_neck
+		inv_box.slot_id = slot_neck
+		inv_box.layer = 19
+		inv_box.color = ui_color
+		inv_box.alpha = ui_alpha
+		src.other += inv_box
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.name = "r_hand"
