@@ -76,7 +76,7 @@
 
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
-			return
+			return 1
 
 	// Currently used by drones.
 	if(local_transmit)
@@ -92,11 +92,11 @@
 				continue
 			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 				if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
-		return
+		return 1
 
 	if(message_mode && bot_type == IS_ROBOT && !R.is_component_functioning("radio"))
 		src << "\red Your radio isn't functional at this time."
-		return
+		return 0
 
 	switch(message_mode)
 		if("department")
@@ -117,7 +117,7 @@
 				if(IS_AI)
 					if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 						src << "\red System Error - Transceiver Disabled"
-						return
+						return 0
 					else
 						log_say("[key_name(src)] : [message]")
 						AI.aiRadio.talk_into(src,message,null,verb,speaking)
@@ -135,7 +135,7 @@
 					if(IS_AI)
 						if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 							src << "\red System Error - Transceiver Disabled"
-							return
+							return 0
 						else
 							log_say("[key_name(src)] : [message]")
 							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
