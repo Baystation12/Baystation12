@@ -51,32 +51,8 @@
 		return
 
 
+
 /obj/structure/closet/secure_closet/medical3
-	name = "Psychiatrist's Locker"
-	req_access = list(access_medical)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_broken = "securemedbroken"
-	icon_off = "securemedoff"
-
-
-	New()
-		..()
-		sleep(2)
-		new /obj/item/clothing/glasses/sunglasses(src)
-		new /obj/item/clothing/shoes/white(src)
-		new /obj/item/clothing/under/rank/psych(src)
-		new /obj/item/clothing/under/rank/psych/turtleneck(src)
-		new /obj/item/clothing/suit/storage/labcoat(src)
-		new /obj/item/clothing/tie/blue(src)
-		new /obj/item/device/radio/headset/headset_med(src)
-		return
-
-
-
-/obj/structure/closet/secure_closet/medical4
 	name = "Medical Doctor's Locker"
 	req_access = list(access_surgery)
 	icon_state = "securemed1"
