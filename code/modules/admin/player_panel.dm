@@ -485,6 +485,8 @@
 		if(mutiny)
 			dat += mutiny.check_antagonists_ui(src)
 
+		dat += "\blue<B><c><a href='?src=\ref[src];adminallantagpm=1'>PM All Antags</B></a></c><br>"
+
 		dat += "</body></html>"
 		usr << browse(dat, "window=roundstatus;size=400x500")
 	else
