@@ -129,6 +129,7 @@ var/list/slot_equipment_priority = list( \
 		slot_wear_suit,\
 		slot_wear_mask,\
 		slot_head,\
+		slot_neck,\
 		slot_shoes,\
 		slot_gloves,\
 		slot_l_ear,\

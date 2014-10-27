@@ -158,6 +158,11 @@
 		else
 			msg += "[t_He] [t_has] \icon[wear_mask] \a [wear_mask] on [t_his] face.\n"
 
+	//neck
+	if(neck)
+		msg += "[t_He] [t_has] \icon[neck] \a [neck] on [t_his] neck.\n"
+
+
 	//eyes
 	if(glasses && !skipeyes)
 		if(glasses.blood_DNA)
@@ -172,6 +177,7 @@
 	//right ear
 	if(r_ear && !skipears)
 		msg += "[t_He] [t_has] \icon[r_ear] \a [r_ear] on [t_his] right ear.\n"
+
 
 	//ID
 	if(wear_id)

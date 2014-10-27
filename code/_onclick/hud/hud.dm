@@ -151,6 +151,7 @@ datum/hud/New(mob/owner)
 			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
 			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
 			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
+			if(H.neck)		H.neck.screen_loc = ui_neck
 			if(H.head)		H.head.screen_loc = ui_head
 		else
 			if(H.shoes)		H.shoes.screen_loc = null
@@ -161,6 +162,7 @@ datum/hud/New(mob/owner)
 			if(H.w_uniform)	H.w_uniform.screen_loc = null
 			if(H.wear_suit)	H.wear_suit.screen_loc = null
 			if(H.wear_mask)	H.wear_mask.screen_loc = null
+			if(H.neck)		H.neck.screen_loc = null
 			if(H.head)		H.head.screen_loc = null
 
 

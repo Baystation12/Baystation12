@@ -197,6 +197,7 @@
 	var/list/items = new/list()
 
 	if(hasvar(src,"back")) if(src:back) items += src:back
+	if(hasvar(src,"neck")) if(src:neck) items += src:neck
 	if(hasvar(src,"belt")) if(src:belt) items += src:belt
 	if(hasvar(src,"l_ear")) if(src:l_ear) items += src:l_ear
 	if(hasvar(src,"r_ear")) if(src:r_ear) items += src:r_ear
@@ -239,6 +240,10 @@
 		if(slot_wear_mask)
 			if(!src.wear_mask)
 				src.wear_mask = W
+				equipped = 1
+		if(slot_neck)
+			if(!src.neck)
+				src.neck = W
 				equipped = 1
 		if(slot_handcuffed)
 			if(!src.handcuffed)
