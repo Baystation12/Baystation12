@@ -9,6 +9,7 @@ var/global/list/player_list = list()				//List of all mobs **with clients attach
 var/global/list/mob_list = list()					//List of all mobs, including clientless
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
+var/global/list/allantags = list()
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
@@ -100,7 +101,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
-	
+
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		language_keys[":[lowertext(L.key)]"] = L
@@ -119,6 +120,30 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 			whitelisted_species += S.name
 
 	return 1
+
+/client/proc/update_antag_list()
+	allantags = list()
+	for(var/mob/C in player_list)
+		if(has_antag(C))
+			allantags.Add(C)
+
+/client/proc/has_SR(var/mob/M)
+	if(!M.mind) return 0
+	if(!isnull(M.mind.special_role))
+		return 1
+	else
+		return 0
+
+/client/proc/has_antag(var/mob/M)
+	if(!M.mind) return 0
+	if(has_SR(M))
+		if(M.mind.special_role == "Response Team")
+			return 0
+		else
+			return 1
+	else
+		return 0
+
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

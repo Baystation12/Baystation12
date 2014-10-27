@@ -1190,7 +1190,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
@@ -1204,7 +1204,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
@@ -1234,7 +1234,7 @@
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 
 ////// Emerald necklace - Ty Foster - Nega
 
@@ -1254,7 +1254,7 @@
 	icon_state = "michael_guess_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 	body_parts_covered = 0
 
 //////////// Shoes ////////////

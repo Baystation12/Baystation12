@@ -121,14 +121,15 @@ Please contact me on #coderbus IRC. ~Carn x
 #define EARS_LAYER				14
 #define FACEMASK_LAYER			15
 #define HEAD_LAYER				16
-#define COLLAR_LAYER			17
-#define TAIL_LAYER				18
-#define HANDCUFF_LAYER			19
-#define LEGCUFF_LAYER			20
-#define L_HAND_LAYER			21
-#define R_HAND_LAYER			22
-#define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			23
+#define NECK_LAYER				17
+#define COLLAR_LAYER			18
+#define TAIL_LAYER				19
+#define HANDCUFF_LAYER			20
+#define LEGCUFF_LAYER			21
+#define L_HAND_LAYER			22
+#define R_HAND_LAYER			23
+#define TARGETED_LAYER			24		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			24
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -526,6 +527,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_belt(0)
 	update_inv_back(0)
 	update_inv_wear_suit(0)
+	update_inv_neck(0)
 	update_inv_r_hand(0)
 	update_inv_l_hand(0)
 	update_inv_handcuffed(0)
@@ -538,6 +540,19 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
+
+
+/mob/living/carbon/human/update_inv_neck(var/update_icons=1)
+	if(neck)
+		var/t_state = neck.item_state
+		if(!t_state)	t_state = neck.icon_state
+		var/image/standing	= image("icon" = ((neck.icon_override) ? neck.icon_override : 'icons/mob/neck.dmi'), "icon_state" = "[t_state]")
+		neck.screen_loc = ui_neck
+		overlays_standing[NECK_LAYER]	= standing
+	else
+		overlays_standing[NECK_LAYER]	= null
+	if(update_icons)   update_icons()
+
 
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
@@ -989,6 +1004,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef BACK_LAYER
 #undef HAIR_LAYER
 #undef HEAD_LAYER
+#undef NECK_LAYER
 #undef COLLAR_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER

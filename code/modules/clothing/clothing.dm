@@ -253,6 +253,18 @@ BLIND     // can't see anything
 		M.update_inv_head()
 
 ///////////////////////////////////////////////////////////////////////
+
+//Neck
+/obj/item/clothing/neck
+	name = "neck"
+	icon = 'icons/obj/clothing/neck.dmi'
+	body_parts_covered = UPPER_TORSO
+	flags_inv = HIDEJUMPSUIT
+	slot_flags = SLOT_NECK
+	w_class = 1.0
+
+////////////////////////////////////////////////////////////////
+
 //Mask
 /obj/item/clothing/mask
 	name = "mask"
@@ -332,6 +344,7 @@ BLIND     // can't see anything
 	var/obj/item/clothing/tie/hastie = null
 	var/displays_id = 1
 	var/rolled_down = 0
+	var/displays_neck = 1
 	var/basecolor
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
 

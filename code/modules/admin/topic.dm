@@ -1348,6 +1348,12 @@
 		var/mob/M = locate(href_list["adminplayeropts"])
 		show_player_panel(M)
 
+	else if(href_list["adminallantagpm"])
+		var/client/C = usr.client
+		var/input = input(C, "Please enter a message to send to all antags.","Outgoing message to all antags", "")
+		if(!input)	return
+		C.cmd_admin_pm_antag(input)
+
 	else if(href_list["adminplayerobservejump"])
 		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))	return
 

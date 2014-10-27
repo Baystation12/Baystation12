@@ -174,7 +174,8 @@ var/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
 var/list/admin_verbs_rejuv = list(
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/cmd_admin_rejuvenate
 	)
 
 //verbs which can be hidden - needs work
@@ -266,7 +267,8 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_panel,
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
-	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/cleartox
 )
 
 var/list/admin_verbs_mentor = list(

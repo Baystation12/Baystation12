@@ -399,7 +399,7 @@
 /obj/item/clothing/tie/holobadge/cord
 	icon_state = "holobadge-cord"
 	item_color = "holobadge-cord"
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK | SLOT_BELT
 
 /obj/item/clothing/tie/holobadge/attack_self(mob/user as mob)
 	if(!stored_name)

@@ -1,5 +1,5 @@
 
-var/global/normal_ooc_colour = "#002eb8"
+var/global/normal_ooc_colour = "#505050"
 
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
@@ -43,16 +43,16 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/display_colour = normal_ooc_colour
 	if(holder && !holder.fakekey)
-		display_colour = "#2e78d9"	//light blue
+		display_colour = "#505050"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
 			display_colour = "#184880"	//dark blue
 		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
-			display_colour = "#1b521f"	//dark green
+			display_colour = "#184880"	//dark green
 		else if(holder.rights & R_ADMIN)
 			if(config.allow_admin_ooccolor)
 				display_colour = src.prefs.ooccolor
 			else
-				display_colour = "#b82e00"	//orange
+				display_colour = "#184880"	//orange
 
 	for(var/client/C in clients)
 		if(C.prefs.toggles & CHAT_OOC)
