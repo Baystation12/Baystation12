@@ -186,10 +186,6 @@ var/list/globalAirlockWireColorToFlag = RandomAirlockWires()
 var/list/globalAirlockIndexToFlag
 var/list/globalAirlockIndexToWireColor
 var/list/globalAirlockWireColorToIndex
-var/list/APCWireColorToFlag = RandomAPCWires()
-var/list/APCIndexToFlag
-var/list/APCIndexToWireColor
-var/list/APCWireColorToIndex
 var/list/BorgWireColorToFlag = RandomBorgWires()
 var/list/BorgIndexToFlag
 var/list/BorgIndexToWireColor
