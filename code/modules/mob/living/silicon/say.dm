@@ -115,7 +115,7 @@
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
-					if (AI.aiRadio.disabledAi)
+					if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 						src << "\red System Error - Transceiver Disabled"
 						return
 					else
@@ -133,7 +133,7 @@
 			if(message_mode)
 				switch(bot_type)
 					if(IS_AI)
-						if (AI.aiRadio.disabledAi)
+						if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 							src << "\red System Error - Transceiver Disabled"
 							return
 						else
