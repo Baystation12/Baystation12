@@ -184,6 +184,14 @@
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
 	hud_updateflag |= 1 << HEALTH_HUD
 
+
+/mob/living/carbon/human/update_canmove()
+	var/old_lying = lying
+	. = ..()
+	if(lying && !old_lying && !resting && !buckled) // fell down
+		playsound(loc, "bodyfall", 50, 1, -1)
+
+
 // Defined here solely to take species flags into account without having to recast at mob/living level.
 /mob/living/carbon/human/getOxyLoss()
 	if(species.flags & NO_BREATHE)

@@ -1,5 +1,5 @@
 
-var/global/normal_ooc_colour = "#002eb8"
+var/global/normal_ooc_colour = "#505050"
 
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
