@@ -82,6 +82,9 @@
 	//The Syndicate
 /var/const/access_syndicate = 150//General Syndicate Access
 
+//blueshield
+var/const/access_blueshield = 153
+
 	//MONEY
 /var/const/access_crate_cash = 200
 
