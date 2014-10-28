@@ -827,6 +827,17 @@ var/list/admin_verbs_mentor = list(
 	else
 		usr << "You now won't get attack log messages"
 
+/client/proc/toggleshutterlogs()
+	set name = "Toggle Emergency Shutter Messages"
+	set category = "Preferences"
+
+	prefs.toggles ^= SHOW_SHUTTERLOGS
+	if (prefs.toggles & SHOW_SHUTTERLOGS)
+		usr << "You now will get emergency shutter log messages"
+	else
+		usr << "You now won't get emergency shutter log messages"
+
+
 
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
