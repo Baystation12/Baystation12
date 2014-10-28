@@ -53,6 +53,7 @@
 	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	alt_titles = list("Security Commander")
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
 	minimal_player_age = 5
@@ -139,6 +140,7 @@
 	spawn_positions = 2
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	alt_titles = list("Security Guard")
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
 	minimal_player_age = 3
