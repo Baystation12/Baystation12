@@ -339,3 +339,7 @@
 		if(blocked)
 			overlays += "welded_open"
 	return
+
+/obj/machinery/door/firedoor/multi_tile
+	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
+	width = 2
