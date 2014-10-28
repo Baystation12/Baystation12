@@ -31,6 +31,16 @@
 	src << browse(file(RULES_FILE), "window=rules;size=480x320")
 #undef RULES_FILE
 
+
+/client/verb/reportbug()
+	set name = "reportbug"
+	set desc = "Report a bug with the game."
+	set hidden = 1
+	if(alert("This will open the bug tracker in your browser. Are you sure?",,"Yes","No")=="No")
+		return
+		src << link("https://github.com/aztectornado/NSS-Phoenix/issues/new")
+	return
+
 /client/verb/hotkeys_help()
 	set name = "hotkeys-help"
 	set category = "OOC"
