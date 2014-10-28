@@ -16,7 +16,7 @@
 		command_announcement.Announce("Alert, proximity sensors have detected a rogue nuclear missile on collision course with the station. Brace for impact!", "Nuclear Device Detected", new_sound = 'sound/misc/notice1.ogg');
 		set_security_level("red")
 
-		sleep(15)
+		sleep(201)
 
 		ticker.mode:explosion_in_progress = 1
 		for(var/mob/M in world)
