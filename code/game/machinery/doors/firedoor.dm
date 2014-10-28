@@ -307,7 +307,7 @@
 			use_power(360)
 	else
 		log_admin("[usr]([usr.ckey]) has forced open an emergency shutter.")
-		message_admins("[usr]([usr.ckey]) has forced open an emergency shutter.")
+		message_admins_shutter("[usr]([usr.ckey]) has forced open an emergency shutter.")
 	latetoggle()
 	return ..()
 
@@ -339,6 +339,47 @@
 		if(blocked)
 			overlays += "welded_open"
 	return
+
+
+/obj/machinery/door/firedoor/border_only
+//These are playing merry hell on ZAS.  Sorry fellas :(
+/*
+	icon = 'icons/obj/doors/edge_Doorfire.dmi'
+	glass = 1 //There is a glass window so you can see through the door
+			  //This is needed due to BYOND limitations in controlling visibility
+	heat_proof = 1
+	air_properties_vary_with_direction = 1
+
+	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+		if(istype(mover) && mover.checkpass(PASSGLASS))
+			return 1
+		if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
+			if(air_group) return 0
+			return !density
+		else
+			return 1
+
+	CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+		if(istype(mover) && mover.checkpass(PASSGLASS))
+			return 1
+		if(get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+
+
+	update_nearby_tiles(need_rebuild)
+		if(!air_master) return 0
+
+		var/turf/simulated/source = loc
+		var/turf/simulated/destination = get_step(source,dir)
+
+		update_heat_protection(loc)
+
+		if(istype(source)) air_master.tiles_to_update += source
+		if(istype(destination)) air_master.tiles_to_update += destination
+		return 1
+*/
 
 /obj/machinery/door/firedoor/multi_tile
 	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
