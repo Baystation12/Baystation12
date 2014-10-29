@@ -216,6 +216,8 @@
 								step_towards(W,my_target)
 								if(!W)
 									return
+								if(!W.reagents)
+									break
 								var/turf/W_turf = get_turf(W)
 								W.reagents.reaction(W_turf)
 								for(var/atom/atm in W_turf)
