@@ -403,7 +403,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/bomber
-	display_name = "bomberjacker"
+	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/bomber
 	cost = 4
 	slot = slot_wear_suit
