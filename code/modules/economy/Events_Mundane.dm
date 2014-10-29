@@ -124,12 +124,7 @@
 				"a huge new ARG by a popular entertainment company","a secret tour by popular artiste [random_name(pick(MALE,FEMALE))]")]. \
 				Nyx Daily is offering discount tickets for two to see [random_name(pick(MALE,FEMALE))] live in return for eyewitness reports and up to the minute coverage."
 
-	for(var/datum/feed_channel/FC in news_network.network_channels)
-		if(FC.channel_name == "Nyx Daily")
-			FC.messages += newMsg
-			break
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert("Nyx Daily")
+	news_network.add_news("Nyx Daily", newMsg)
 
 /datum/event/trivial_news
 	endWhen = 10
@@ -225,9 +220,4 @@
 	"Broccoli discovered to be colonies of tiny aliens with murder on their minds"\
 	)
 
-	for(var/datum/feed_channel/FC in news_network.network_channels)
-		if(FC.channel_name == "The Gibson Gazette")
-			FC.messages += newMsg
-			break
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert("The Gibson Gazette")
+	news_network.add_news("The Gibson Gazette", newMsg)

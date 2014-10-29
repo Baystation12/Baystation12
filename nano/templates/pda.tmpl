@@ -67,8 +67,9 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
             <div class="itemContent">
                 {{:helper.link('Notekeeper', 'note', {'choice' : "1"}, null, 'fixedLeftWide')}}
-                {{:helper.link('Messenger', data.newMessage ? 'mail-closed' : 'mail-open', {'choice' : "2"}, null, 'fixedLeftWide')}}
+                {{:helper.link('Messenger', data.new_Message ? 'mail-closed' : 'mail-open', {'choice' : "2"}, null, 'fixedLeftWide')}}
                 {{:helper.link('Crew Manifest', 'contact', {'choice' : "41"}, null, 'fixedLeftWide')}}
+				{{:helper.link('News', data.new_News ? 'mail-closed' : 'mail-open', {'choice' : "6"}, null, 'fixedLeftWide')}}
             </div>
         </div>
         <br>
@@ -207,7 +208,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                 <b>Messenger Functions</b>:
             </div>
             <div class ="itemContent">
-                {{:helper.link(data.silent==1 ? 'Ringer: Off' : 'Ringer: On', data.silent==1 ? 'volume-off' : 'volume-on', {'choice' : "Toggle Ringer"}, null, 'fixedLeftWide')}}
+                {{:helper.link(data.message_silent==1 ? 'Ringer: Off' : 'Ringer: On', data.message_silent==1 ? 'volume-off' : 'volume-on', {'choice' : "Toggle Ringer"}, null, 'fixedLeftWide')}}
                 {{:helper.link(data.toff==1 ? 'Messenger: Off' : 'Messenger: On',data.toff==1 ? 'close':'check', {'choice' : "Toggle Messenger"}, null, 'fixedLeftWide')}}
                 {{:helper.link('Set Ringtone', 'comment', {'choice' : "Ringtone"}, null, 'fixedLeftWide')}}
                 {{:helper.link('Delete all Conversations', 'trash', {'choice' : "Clear", 'option' : "All"}, null, 'fixedLeftWider')}}
@@ -946,7 +947,61 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <span class="average">({{:value.x}} / {{:value.y}}) - {{:value.dir}} - Status: {{:value.status}}</span><br>
                     {{/if}}
                 {{/for}}
+                
+    {{else data.mode == 6}}
+        <H2><span class="white">InstaNews ED 2.0.9</span></H2>
+        
+        <div class="item">
+            <div class="itemLabelNarrow">
+                <b>Functions</b>:
             </div>
+            <div class ="itemContent">
+					{{:helper.link(data.news_silent==1 ? 'Ringer: Off' : 'Ringer: On', data.news_silent==1 ? 'volume-off' : 'volume-on', {'choice' : "Toggle News"}, null, 'fixedLeftWide')}}
+                {{:helper.link('Set news tone', 'comment', {'choice' : "Newstone"}, null, 'fixedLeftWide')}}
+            </div>
+        </div>
+        
+		<div class="item">
+            <div class="itemContent">
+                {{for data.feedChannels}}
+                    {{if value.censored}}
+						{{:helper.link(value.name, 'circle-arrow-s', {'choice' : "Select Feed", 'feed' : value.feed, 'name' : value.name } , null, 'fixedLeftWiderRed')}}
+                    {{else}}
+                        {{:helper.link(value.name, 'circle-arrow-s', {'choice' : "Select Feed", 'feed' : value.feed, 'name' : value.name } , null, 'fixedLeftWider')}}
+                    {{/if}}
+                {{empty}}
+                    <I>No active channels found...</I>
+                {{/for}}
+            </div>
+		</div>
+
+    {{else data.mode == 61}}      
+        <H2><span class="white">{{:data.feed.channel}}</span></H2>
+        <span class="white">Created by: </span><span class="average">{{:data.feed.author}}</span>
+        <div class="statusDisplay" style="overflow: auto;">
+            <div class="item">
+                <div class="itemContent" style="width: 100%;">
+					{{if data.feed.censored}}
+						<H3><span class="bad">Attention</span></H3>
+						This channel has been deemed as threatening to the welfare of the station, and marked with a Nanotrasen D-Notice.<br>
+						No further feed story additions are allowed while the D-Notice is in effect.<br>
+					{{else}}
+						{{for data.feed.messages}}
+							-{{:value.body}}<br>
+							{{if value.has_image}}
+								pda_news_tmp_photo_{{:data.feed.channel}}_{{:value.index}}.png<br>
+								<img src='pda_news_tmp_photo_{{:data.feed.channel}}_{{:value.index}}.png' width = '180'><br>
+							{{/if}}
+							<FONT SIZE=1>[{{:value.message_type}} by <span class="average">{{:value.author}}</span>]<br></FONT>
+							<br>
+						{{empty}}
+							<I>No feed messages found in channel...</I>
+						{{/for}}
+					{{/if}}
+				</div>
+            </div>
+        </div>
+        
     {{/if}}
 {{else}}
     <div class="wholeScreen">
