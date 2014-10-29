@@ -103,7 +103,7 @@ datum/game_mode/mutiny
 		if (!pda)
 			return 0
 
-		if (!pda.silent)
+		if (!pda.message_silent)
 			playsound(pda.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			for (var/mob/O in hearers(3, pda.loc))
 				O.show_message(text("\icon[pda] *[pda.ttone]*"))

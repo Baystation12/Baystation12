@@ -124,8 +124,9 @@
 	Topic("breaker=1", list("breaker"="1"), 1) // 0 meaning window (consistency! wait...)
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	src.enabled = !src.enabled
-	src.updateTurrets()
+	if(!ailock)
+		src.enabled = !src.enabled
+		src.updateTurrets()
 
 /atom/proc/AIAltClick(var/atom/A)
 	AltClick(A)
@@ -140,8 +141,9 @@
 	return
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	src.lethal = !src.lethal
-	src.updateTurrets()
+	if(!ailock)
+		src.lethal = !src.lethal
+		src.updateTurrets()
 
 /atom/proc/AIMiddleClick()
 	return
