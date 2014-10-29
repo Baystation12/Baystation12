@@ -1060,7 +1060,7 @@
 				</ol><br>
 
 				<h1><a name="Foreword"><U><B>HOW TO NOT SUCK QUITE SO HARD AT ATMOSPHERICS</B></U></a></h1><BR>
-				<I>Or: What the fuck does a "passive gate" do?</I><BR><BR>
+				<I>Or: What the fuck does a "pressure regulator" do?</I><BR><BR>
 
 				Alright. It has come to my attention that a variety of people are unsure of what a "pipe" is and what it does.
 				Apparently, there is an unnatural fear of these arcane devices and their "gases." Spooky, spooky. So,
@@ -1108,7 +1108,7 @@
 				<ul>
 				<li><b>Gas pump:</b> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 15000 kPa (kilopascals).
 				Ordinary atmospheric pressure, for comparison, is 101.3 kPa, and the minimum pressure of room-temperature pure oxygen needed to not suffocate in a matter of minutes is 16 kPa
-				(though 18 kPa is preferred using internals, for various reasons). A high-powered variant will move gas more quickly at the expense of consuming more power. Do not turn the distribution loop up to 15000 kPa.
+				(though 18 kPa is preferred when using internals with pure oxygen, for various reasons). A high-powered variant will move gas more quickly at the expense of consuming more power. Do not turn the distribution loop up to 15000 kPa.
 				You will make engiborgs cry and the Chief Engineer will beat you.</li>
 				<li><b>Pressure regulator:</b> These replaced the old passive gates. You can choose to regulate pressure by input or output, and regulate flow rate. Regulating by input means that when input pressure is above the limit, gas will flow.
 				Regulating by output means that when pressure is below the limit, gas will flow. Flow rate can be controlled.</li>
@@ -1174,7 +1174,7 @@
 				but apparently there are some on a space station who don't. This guide should give you a basic idea of how to use this gear, safely. It's split into two sections:
 				 Civilian suits and hardsuits.<BR><BR>
 
-				<h2><a name="Civilian">Civilian Suits</a></h2>z
+				<h2><a name="Civilian">Civilian Suits</a></h2>
 				<I>The bulkiest things this side of Alpha Centauri</I><BR>
 				These suits are the grey ones that are stored in EVA. They're the more simple to get on, but are also a lot bulkier, and provide less protection from environmental hazards such as radiation or physical impact.
 				As Medical, Engineering, Security, and Mining all have hardsuits of their own, these don't see much use, but knowing how to put them on is quite useful anyways.<BR><BR>
