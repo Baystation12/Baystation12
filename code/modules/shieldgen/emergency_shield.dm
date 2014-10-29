@@ -160,8 +160,7 @@
 	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Del()
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		del(shield_tile)
+	collapse_shields()
 	..()
 
 
@@ -184,8 +183,7 @@
 	src.active = 0
 	update_icon()
 
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		del(shield_tile)
+	collapse_shields()
 	
 	update_use_power(0)
 
@@ -197,8 +195,20 @@
 				deployed_shields += S
 				use_power(S.shield_generate_power)
 
+/obj/machinery/shieldgen/proc/collapse_shields()
+	for(var/obj/machinery/shield/shield_tile in deployed_shields)
+		del(shield_tile)
+
+/obj/machinery/shieldgen/power_change()
+	..()
+	if (stat & NOPOWER)
+		collapse_shields()
+	else
+		create_shields()
+	update_icon()
+
 /obj/machinery/shieldgen/process()
-	if (!active)
+	if (!active || (stat & NOPOWER))
 		return
 	
 	if(malfunction)
@@ -224,6 +234,8 @@
 	if(health <= 30)
 		src.malfunction = 1
 	if(health <= 0)
+		spawn(0)
+			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
 		del(src)
 	update_icon()
 	return
@@ -340,7 +352,7 @@
 
 
 /obj/machinery/shieldgen/update_icon()
-	if(active)
+	if(active && !(stat & NOPOWER))
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else
 		src.icon_state = malfunction ? "shieldoffbr":"shieldoff"
