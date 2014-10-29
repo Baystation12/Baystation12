@@ -245,9 +245,9 @@
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
-	var/leader_selected = 0
 	var/spawnpos = 1
 
+	var/datum/mind/leader = null
 	for(var/datum/mind/player in candidates)
 
 		syndicates |= player
@@ -264,9 +264,9 @@
 		greet_syndicate(player)
 		equip_syndicate(player.current)
 
-		if(!leader_selected)
+		if(!leader)
 			prepare_syndicate_leader(player, nuke_code)
-			leader_selected = 1
+			leader = player
 
 		spawnpos++
 		update_synd_icons_added(player)
@@ -275,6 +275,8 @@
 
 	if(uplinkdevice)
 		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		if(leader)
+			U.hidden_uplink.uplink_owner = leader
 		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
