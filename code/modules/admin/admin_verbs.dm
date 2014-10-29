@@ -16,6 +16,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cleartox,
 	/client/proc/clean,
 	/client/proc/fillspace,
+	/client/proc/toggleshutterlogs,
 	/client/proc/alertlevel,
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
@@ -145,7 +146,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
 	/client/proc/kill_air,
-	/client/proc/display_bug_reports_admin,
 	/client/proc/ZASSettings,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
