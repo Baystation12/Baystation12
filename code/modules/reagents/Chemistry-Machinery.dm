@@ -2,6 +2,8 @@
 #define LIQUID 2
 #define GAS 3
 
+#define CHEM_DISPENSER_ENERGY_COST	0.1	//How many energy points do we use per unit of chemical?
+
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
 	density = 1
@@ -28,7 +30,7 @@
 	var/oldenergy = energy
 	energy = min(energy + addenergy, max_energy)
 	if(energy != oldenergy)
-		use_power(1500) // This thing uses up alot of power (this is still low as shit for creating reagents from thin air)
+		use_power(CHEM_SYNTH_ENERGY / CHEM_DISPENSER_ENERGY_COST) // This thing uses up "alot" of power (this is still low as shit for creating reagents from thin air)
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
@@ -137,8 +139,10 @@
 			var/datum/reagents/R = B.reagents
 			var/space = R.maximum_volume - R.total_volume
 
-			R.add_reagent(href_list["dispense"], min(amount, energy * 10, space))
-			energy = max(energy - min(amount, energy * 10, space) / 10, 0)
+			//uses 1 energy per 10 units.
+			var/added_amount = min(amount, energy / CHEM_DISPENSER_ENERGY_COST, space)
+			R.add_reagent(href_list["dispense"], added_amount)
+			energy = max(energy - added_amount * CHEM_DISPENSER_ENERGY_COST, 0)
 
 	if(href_list["ejectBeaker"])
 		if(beaker)

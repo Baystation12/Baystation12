@@ -336,8 +336,12 @@
 
 
 	proc/inject_chemical(mob/living/user as mob, chemical, amount)
+		if (stat & (BROKEN|NOPOWER))
+			return
+	
 		if(src.occupant && src.occupant.reagents)
 			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 20)
+				use_power(amount * CHEM_SYNTH_ENERGY)
 				src.occupant.reagents.add_reagent(chemical, amount)
 				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in his/her bloodstream."
 				return
