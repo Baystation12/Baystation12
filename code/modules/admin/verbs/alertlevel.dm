@@ -2,7 +2,7 @@
 	set category = "Special Verbs"
 	set name = "Set Alert Level"
 	set desc = "Change Alert Level."
-	var/list/choices = list("Green", "Blue", "Red", "Delta")
+	var/list/choices = list("Green", "Blue", "Red", "Delta", "Black")
 	var/choice = input("Which alert level would you like to change to?") in choices
 	switch(choice)
 		if(null)
@@ -15,5 +15,7 @@
 			set_security_level(SEC_LEVEL_RED)
 		if("Delta")
 			set_security_level(SEC_LEVEL_DELTA)
+		if("Black")
+			set_security_level(SEC_LEVEL_BLACK)
 	message_admins("\blue [key_name_admin(usr)] changed alert level to Code [choice].")
 	feedback_add_details("admin_verb","Alertlevel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
