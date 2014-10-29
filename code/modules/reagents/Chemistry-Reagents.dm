@@ -196,22 +196,16 @@ datum
 			reaction_turf(var/turf/simulated/T, var/volume)
 				if (!istype(T)) return
 				
-				//Put out fires. Temperature is handled after
-				var/hotspot = (locate(/obj/fire) in T)
-				if(hotspot)
-					//lowertemp.react()
-					del(hotspot)
-				
 				//If the turf is hot enough, remove some heat
 				var/datum/gas_mixture/environment = T.return_air()
 				var/min_temperature = T0C + 100	//100C, the boiling point of water
+				
 				if (environment && environment.temperature > min_temperature) //abstracted as steam or something
 					var/removed_heat = between(0, volume*WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
-					world << "water/reaction_turf: Initial temperature = [environment.temperature]"
 					environment.add_thermal_energy(-removed_heat)
-					world << "water/reaction_turf: Final temperature = [environment.temperature - T0C]"
 					if (prob(5))
 						T.visible_message("\red The water sizzles as it lands on \the [T]!")
+				
 				else //otherwise, the turf gets wet
 					if(volume >= 3)
 						if(T.wet >= 1) return
@@ -230,6 +224,13 @@ datum
 							if(T.wet_overlay)
 								T.overlays -= T.wet_overlay
 								T.wet_overlay = null
+				
+				//Put out fires.
+				var/hotspot = (locate(/obj/fire) in T)
+				if(hotspot)
+					del(hotspot)
+					if(environment)
+						environment.react() //react at the new temperature
 
 			reaction_obj(var/obj/O, var/volume)
 				var/turf/T = get_turf(O)
