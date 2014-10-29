@@ -212,30 +212,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		color_n = colorC
 	color = color_n
 
-////////////////////////////////////////////
-// Power related
-///////////////////////////////////////////
-
-obj/structure/cable/proc/add_avail(var/amount)
-	if(powernet)
-		powernet.newavail += amount
-
-obj/structure/cable/proc/add_load(var/amount)
-	if(powernet)
-		powernet.load += amount
-
-obj/structure/cable/proc/surplus()
-	if(powernet)
-		return powernet.avail-powernet.load
-	else
-		return 0
-
-obj/structure/cable/proc/avail()
-	if(powernet)
-		return powernet.avail
-	else
-		return 0
-
 /////////////////////////////////////////////////
 // Cable laying helpers
 ////////////////////////////////////////////////

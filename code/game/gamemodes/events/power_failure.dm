@@ -9,13 +9,13 @@
 		var/area/current_area = get_area(S)
 		if(current_area.type in skipped_areas || S.z != 1)
 			continue
-		S.last_charge = S.charge
-		S.last_output = S.output
-		S.last_online = S.online
+		S.last_charge			= S.charge
+		S.last_output_attempt	= S.output_attempt
+		S.last_input_attempt 	= S.input_attempt
 		S.charge = 0
-		S.output = 0
-		S.online = 0
-		S.updateicon()
+		S.inputting(0)
+		S.outputting(0)
+		S.update_icon()
 		S.power_change()
 
 
@@ -36,9 +36,9 @@
 		if(current_area.type in skipped_areas || S.z != 1)
 			continue
 		S.charge = S.last_charge
-		S.output = S.last_output
-		S.online = S.last_online
-		S.updateicon()
+		S.output_attempt = S.last_output_attempt
+		S.input_attempt = S.last_input_attempt
+		S.update_icon()
 		S.power_change()
 
 /proc/power_restore_quick(var/announce = 1)
@@ -49,7 +49,8 @@
 		if(S.z != 1)
 			continue
 		S.charge = S.capacity
-		S.output = 200000
-		S.online = 1
-		S.updateicon()
+		S.output_level = 200000
+		S.output_attempt = 1
+		S.input_attempt = 1
+		S.update_icon()
 		S.power_change()
