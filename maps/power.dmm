@@ -1,0 +1,44 @@
+"a" = (/turf/simulated/wall,/area/engine/engineering)
+"b" = (/turf/simulated/floor/plating,/area/engine/engineering)
+"c" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/engine/engineering)
+"d" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/plating,/area/engine/engineering)
+"e" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/engine/engineering)
+"f" = (/obj/item/stack/sheet/mineral/phoron{amount = 25},/turf/simulated/floor/plating,/area/engine/engineering)
+"g" = (/obj/item/stack/sheet/mineral/phoron{amount = 25},/obj/item/stack/sheet/mineral/phoron{amount = 25},/turf/simulated/floor/plating,/area/engine/engineering)
+"h" = (/obj/machinery/power/monitor,/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/plating,/area/engine/engineering)
+"i" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/engine/engineering)
+"j" = (/obj/machinery/power/smes/buildable{charge = 1e+007; input_level = 500000; input_attempt = 1; cur_coils = 4; output_level = 500000},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/engine/engineering)
+"k" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/engine/engineering)
+"l" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/engine/engineering)
+"m" = (/obj/machinery/power/apc{debug = 1; dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/engine/engineering)
+"n" = (/obj/machinery/alarm{dir = 8; pixel_x = 32},/turf/simulated/floor/plating,/area/engine/engineering)
+"o" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/turf/simulated/floor/plating,/area/engine/engineering)
+"p" = (/obj/item/clothing/gloves/yellow,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/engine/engineering)
+"q" = (/obj/effect/landmark/start{name = "Chief Engineer"},/turf/simulated/floor/plating,/area/engine/engineering)
+"r" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/engine/engineering)
+"s" = (/obj/machinery/power/monitor,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/engine/engineering)
+"t" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/engine/engineering)
+"u" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/port_gen/pacman{anchored = 1},/turf/simulated/floor/plating,/area/engine/engineering)
+"v" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/plating,/area/engine/engineering)
+"w" = (/obj/machinery/power/terminal,/obj/structure/cable,/turf/simulated/floor/plating,/area/engine/engineering)
+"x" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/plating,/area/engine/engineering)
+"y" = (/obj/machinery/power/smes/buildable{charge = 1e+007; input_level = 500000; input_attempt = 1; cur_coils = 4; output_level = 500000},/turf/simulated/floor/plating,/area/engine/engineering)
+"z" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/engine/engineering)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaa
+abbcbbbbbbbcbba
+abbbbbbbbbbbbba
+adbbbbbbbbbbbea
+abbbfgfbbbbbbba
+abbbfffbhbbbbba
+abbbbbbbieabbba
+abbbbbbjklmbbna
+abbbbbbopqbbrba
+abbbbbstubbbvba
+abbbbbbwbbbbxba
+adbbbbbyffffbea
+abbbbbbbffffbba
+abbzbbbbbbbzbba
+aaaaaaaaaaaaaaa
+"}
