@@ -2,9 +2,6 @@
 /*
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 506.1247
-WINDOW: icons\obj\clothing\shoes.dmi;code\global.dm;code\game\objects\items\stacks\medical.dm;icons\obj\items.dmi;icons\mob\feet.dmi;code\modules\customitems\item_defines.dm;code\modules\clothing\shoes\miscellaneous.dm;icons\obj\custom_items.dmi;code\modules\clothing\gloves\miscellaneous.dm;code\modules\clothing\gloves\color.dm;code\modules\clothing\clothing.dm
-DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\stacks code\modules code\modules\clothing code\modules\clothing\gloves code\modules\clothing\shoes code\modules\customitems icons icons\mob icons\obj icons\obj\clothing icons\obj\clothing\species 
-FILE: code\modules\clothing\shoes\miscellaneous.dm
 LAST_COMPILE_TIME: 1414538412
 AUTO_FILE_DIR: OFF
 */
