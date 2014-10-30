@@ -81,3 +81,5 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+
+	var/attack_move = 0 //Used in combat to check if user is performing an attack over several ticks
