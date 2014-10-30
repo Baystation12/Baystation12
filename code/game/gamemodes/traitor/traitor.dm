@@ -273,6 +273,7 @@
 			freq = freqlist[rand(1, freqlist.len)]
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			target_radio.hidden_uplink = T
 			target_radio.traitor_frequency = freq
 			traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
@@ -282,6 +283,7 @@
 			var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Delta","Omega")]"
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			R.hidden_uplink = T
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass

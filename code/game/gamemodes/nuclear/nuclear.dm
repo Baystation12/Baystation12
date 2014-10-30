@@ -126,7 +126,7 @@ var/global/list/turf/synd_spawn = list()
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
-	var/leader_selected = 0
+	var/datum/mind/leader = null
 	var/spawnpos = 1
 
 	for(var/datum/mind/synd_mind in syndicates)
@@ -142,9 +142,9 @@ var/global/list/turf/synd_spawn = list()
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
 
-		if(!leader_selected)
+		if(!leader)
 			prepare_syndicate_leader(synd_mind, nuke_code)
-			leader_selected = 1
+			leader = synd_mind
 
 		spawnpos++
 		update_synd_icons_added(synd_mind)
@@ -153,6 +153,8 @@ var/global/list/turf/synd_spawn = list()
 
 	if(uplinkdevice)
 		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		if(leader)
+			U.hidden_uplink.uplink_owner = leader
 		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
@@ -333,18 +335,7 @@ var/global/list/turf/synd_spawn = list()
 		var/text = "<FONT size = 2><B>The mercenaries were:</B></FONT>"
 
 		for(var/datum/mind/syndicate in syndicates)
-
-			text += "<br>[syndicate.key] was [syndicate.name] ("
-			if(syndicate.current)
-				if(syndicate.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(syndicate.current.real_name != syndicate.name)
-					text += " as [syndicate.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
+			text += printplayer(syndicate)
 
 		world << text
 	return 1
