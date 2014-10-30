@@ -4,7 +4,6 @@
 var/global/obj/effect/datacore/data_core = null
 
 
-var/global/list/active_areas = list()
 var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
@@ -200,6 +199,9 @@ var/list/AAlarmWireColorToIndex
 #define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
 #define AIR_DAMAGE_MODIFIER 2.025 //More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
 #define INFINITY 1.#INF
+
+#define BACKGROUND_ENABLED 0    // The default value for all uses of set background. Set background can cause gradual lag and is recommended you only turn this on if necessary.
+								// 1 will enable set background. 0 will disable set background.
 
 	//Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
 #define MAX_MESSAGE_LEN 1024

@@ -21,7 +21,7 @@
 //Returns the amount of excess power (before refunding to SMESs) from last tick.
 //This is for machines that might adjust their power consumption using this data.
 /datum/powernet/proc/last_surplus()
-	return netexcess
+	return max(avail - load, 0)
 
 /datum/powernet/proc/draw_power(var/amount)
 	var/draw = between(0, amount, avail - load)
@@ -89,7 +89,7 @@
 		//Therefore we can raise the amount of power rationed out to APCs on the assumption that those APCs that used less than perapc will continue to do so.
 		//If that assumption fails, then some APCs will miss out on power next tick, however it will be rebalanced for the tick after.
 		if (netexcess >= 0)
-			perapc_excess = netexcess/numapc
+			perapc_excess += min(netexcess/numapc, (avail - perapc) - perapc_excess)
 		else
 			perapc_excess = 0
 

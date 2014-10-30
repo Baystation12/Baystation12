@@ -334,6 +334,7 @@
 #include "code\game\machinery\supply_display.dm"
 #include "code\game\machinery\syndicatebeacon.dm"
 #include "code\game\machinery\teleporter.dm"
+#include "code\game\machinery\turret_control.dm"
 #include "code\game\machinery\turrets.dm"
 #include "code\game\machinery\vending.dm"
 #include "code\game\machinery\washing_machine.dm"
@@ -1154,7 +1155,6 @@
 #include "code\modules\power\power.dm"
 #include "code\modules\power\power_monitor.dm"
 #include "code\modules\power\powernet.dm"
-#include "code\modules\power\profiling.dm"
 #include "code\modules\power\smes.dm"
 #include "code\modules\power\smes_construction.dm"
 #include "code\modules\power\solar.dm"
@@ -1490,5 +1490,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\power.dmm"
+#include "maps\tgstation2.dmm"
 // END_INCLUDE

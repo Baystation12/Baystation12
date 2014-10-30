@@ -31,7 +31,6 @@ datum/controller/game_controller
 
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
-	var/rebuild_active_areas = 0
 
 	var/list/shuttle_list	                    // For debugging and VV
 	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.

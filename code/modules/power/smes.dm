@@ -27,18 +27,6 @@
 	var/output_level_max = 200000	// cap on output_level
 	var/output_used = 0				// amount of power actually outputted. may be less than output_level if the powernet returns excess power
 
-	/*var/output = 50000		//Amount of power it tries to output
-	var/lastout = 0			//Amount of power it actually outputs to the powernet
-	var/loaddemand = 0		//For use in restore()
-	var/capacity = 5e6		//Maximum amount of power it can hold
-	var/charge = 1.0e6		//Current amount of power it holds
-	var/charging = 0		//1 if it's actually charging, 0 if not
-	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
-	//var/chargecount = 0
-	var/chargelevel = 0		//Amount of power it tries to charge from powernet
-	var/online = 1			//1 if it's outputting power, 0 if not.
-	*/
-
 	//Holders for powerout event.
 	var/last_output_attempt	= 0
 	var/last_input_attempt	= 0
