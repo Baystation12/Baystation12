@@ -63,6 +63,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/decryptkey = "password"
 
 
+
+	var/list/spamfilter = list()
+	//Messages having theese tokens will be rejected by server. Case sensitive
+	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT //Maximal amount of tokens
+
 /obj/machinery/message_server/New()
 	message_servers += src
 	decryptkey = GenerateKey()
