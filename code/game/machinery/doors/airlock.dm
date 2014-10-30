@@ -142,6 +142,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 300
 	opacity = 0
 	glass = 1
@@ -179,6 +180,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_command
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doorcomglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
 	glass = 1
@@ -186,6 +189,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_engineering
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doorengglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_eng
 	glass = 1
@@ -193,6 +198,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_security
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doorsecglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_sec
 	glass = 1
@@ -200,6 +207,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_medical
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doormedglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
 	glass = 1
@@ -222,6 +231,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_research
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doorresearchglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_research
 	glass = 1
@@ -230,6 +241,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_mining
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Doorminingglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_min
 	glass = 1
@@ -237,6 +250,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 /obj/machinery/door/airlock/glass_atmos
 	name = "Maintenance Hatch"
 	icon = 'icons/obj/doors/Dooratmoglass.dmi'
+	hitsound = 'sound/effects/Glasshit.ogg'
+	maxhealth = 300
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_atmo
 	glass = 1
@@ -1198,7 +1213,7 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
-	else if(istype(C, /obj/item/weapon/crowbar) || istype(C, /obj/item/stack/rods))
+	else if(istype(C, /obj/item/weapon/crowbar))
 		var/beingcrowbarred = null
 		if(istype(C, /obj/item/weapon/crowbar) )
 			beingcrowbarred = 1 //derp, Agouri
@@ -1400,6 +1415,11 @@ About the new airlock wires panel:
 	airlockIndexToFlag = wire_assignments[2]
 	airlockIndexToWireColor = wire_assignments[3]
 	airlockWireColorToIndex = wire_assignments[4]
+
+
+/obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
+	..()
+	update_icon()
 
 /obj/machinery/door/airlock/proc/prison_open()
 	src.unlock()

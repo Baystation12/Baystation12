@@ -25,7 +25,8 @@
 	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 500
 	var/health
-	var/hitsound = 'sound/weapons/Genhit.ogg' //sound door makes when hit with a weapon
+	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
+	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 
 	//Multi-tile doors
 	dir = EAST
@@ -136,7 +137,7 @@
 	visible_message("\red <B>[src.name] was hit by [AM].</B>", 1)
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 40
+		tforce = 15
 	else
 		tforce = AM:throwforce
 	playsound(src.loc, hitsound, 100, 1)
@@ -193,7 +194,7 @@
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
-			if(W.force <4)
+			if(W.force < min_force)
 				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
 			else
 				user.visible_message("\red <B>\The [user] forcefully slams \the [src] with \the [W]!</B>" )
@@ -383,10 +384,6 @@
 			bound_height = width * world.icon_size
 
 	update_nearby_tiles()
-
-/obj/machinery/door/power_change()
-	..()
-	update_icon()
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'

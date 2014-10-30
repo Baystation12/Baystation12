@@ -203,7 +203,7 @@
 		user << "<span class='danger'>\The [src] is welded solid!</span>"
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/melee/energy/blade) || istype(C,/obj/item/weapon/twohanded/fireaxe) || istype(C, /obj/item/stack/rods))
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/melee/energy/blade) || istype(C,/obj/item/weapon/twohanded/fireaxe))
 		if(operating)
 			return
 
