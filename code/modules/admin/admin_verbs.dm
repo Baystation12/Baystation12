@@ -16,6 +16,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cleartox,
 	/client/proc/clean,
 	/client/proc/fillspace,
+	/client/proc/toggleshutterlogs,
 	/client/proc/alertlevel,
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/

@@ -83,3 +83,7 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+
+	var/stored_account_number = null
+	var/stored_account_pin = null
+	var/stored_account_money = null
