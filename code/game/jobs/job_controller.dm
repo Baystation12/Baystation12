@@ -414,6 +414,10 @@ var/global/datum/controller/occupations/job_master
 			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
 
+			H.stored_account_number = M.account_number
+			H.stored_account_pin = M.remote_access_pin
+			H.stored_account_money = M.money
+
 			if(M.transaction_log.len)
 				var/datum/transaction/T = M.transaction_log[1]
 				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
