@@ -317,7 +317,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
-	desc = "Makes you loyal or such."
+	desc = "Makes you loyal to Nanotrasen."
 
 	get_data()
 		var/dat = {"
@@ -337,12 +337,72 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if(!istype(M, /mob/living/carbon/human))	return 0
 		var/mob/living/carbon/human/H = M
 		if(H.mind in ticker.mode.head_revolutionaries)
-			H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of Nanotrasen try to invade your mind!")
+			H.visible_message("[H] seems to resist the implant!", "You feel a suggestive voice try to invade your mind, but you manage to resist it!")
 			return 0
 		else if(H.mind in ticker.mode:revolutionaries)
 			ticker.mode:remove_revolutionary(H.mind)
-		H << "\blue You feel a surge of loyalty towards Nanotrasen."
+		else if(H.is_slave_implanted(H))
+			H.visible_message("[H] roars in agony as the implant fizzes and fails.", "You feel a suggestive voice try to invade your mind, but it disappears before you can understand it!")
+			return 0
+
+		var/implant_remembered_info = ""
+		implant_remembered_info += "<b>Your account number is:</b> #[H.stored_account_number]<br>"
+		implant_remembered_info += "<b>Your account pin is:</b> [H.stored_account_pin]<br>"
+		implant_remembered_info += "<b>Your account funds are:</b> $[H.stored_account_money]<br>"
+
+
+		H.mind.memory = null
+		H << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
+		H << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
+		H << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
+		H << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
+		H << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
+		H << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
+		H.mind.store_memory(implant_remembered_info)
+		H.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
 		return 1
+
+
+
+/obj/item/weapon/implant/enslavement
+	name = "strange implant"
+	desc = "Makes you loyal to your implanter."
+
+	get_data()
+		var/dat = {"
+<b>Implant Specifications:</b><BR>
+<b>Name:</b> ERROR. UNKNOWN.<BR>
+<b>Life:</b> UNKNOWN.<BR>
+<b>Important Notes:</b> Personnel injected with this device act very strangely.<BR>
+<HR>
+<b>Implant Details:</b><BR>
+<b>Function:</b> Contains a small pod of nanobots that serves some sort of functionality or purpose.<BR>
+<b>Special Features:</b> UNKNOWN. <BR>
+<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
+		return dat
+
+
+	implanted(mob/M)
+		if(!istype(M, /mob/living/carbon/human))	return 0
+		var/mob/living/carbon/human/H = M
+		if(H.is_loyalty_implanted(H))
+			H.visible_message("[H] seems to resist the implant!", "You feel something try to invade your mind, but your loyalty implant blocks it!")
+			return 0
+
+		var/implant_remembered_info = ""
+		implant_remembered_info += "<b>Your account number is:</b> #[H.stored_account_number]<br>"
+		implant_remembered_info += "<b>Your account pin is:</b> [H.stored_account_pin]<br>"
+		implant_remembered_info += "<b>Your account funds are:</b> $[H.stored_account_money]<br>"
+
+		H.mind.memory = null
+		H << "\red You feel your mind blank, and a dark, whispering voice echos through your mind, binding you to [M.slaver]."
+		H << "<b>1. You will follow any and all orders from [M.slaver] at all times.</b>"
+		H << "<b>2. You will not act against [M.slaver] in any way, shape, or form.</b>"
+		H << "<b>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>"
+		H.mind.store_memory(implant_remembered_info)
+		H.mind.store_memory("<b>1. You will follow any and all orders from [M.slaver] at all times.<br>2. You will not act against [M.slaver] in any way, shape, or form.<br>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>", 0, 0)
+		return 1
+
 
 
 /obj/item/weapon/implant/adrenalin

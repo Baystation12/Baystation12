@@ -83,6 +83,18 @@
 	O.update()
 	return
 
+
+/obj/item/weapon/storage/box/syndie_kit/imp_enslave
+	name = "boxed enslavement implant (with injector)"
+
+/obj/item/weapon/storage/box/syndie_kit/imp_enslave/New()
+	..()
+	var/obj/item/weapon/implanter/O = new(src)
+	O.imp = new /obj/item/weapon/implant/enslavement(O)
+	O.update()
+	return
+
+
 /obj/item/weapon/storage/box/syndie_kit/imp_compress
 	name = "box (C)"
 
