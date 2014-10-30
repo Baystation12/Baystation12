@@ -276,6 +276,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		ticker.minds += M.mind//Adds them to regular mind list.
 	M.loc = spawn_location
 	M.equip_strike_team(leader_selected)
+	M.implant_loyalty(M)
 	return M
 
 /mob/living/carbon/human/proc/equip_strike_team(leader_selected = 0)

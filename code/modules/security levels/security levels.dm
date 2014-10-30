@@ -58,7 +58,7 @@
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
 
 			if(SEC_LEVEL_BLACK)
-				security_announcement_up.Announce("A biological threat to the station has been confirmed. The station is now under quarentine. No personnel are allowed to leave the stations premesis at this time. Security personnel are to ensure quarentine protocols are upheld. Medical and research personnel are to remain on stand-by. All personnel must report to their supervisors immediately.", "Attention! Code black!")
+				security_announcement_up.Announce("A biological threat to the station has been confirmed. The station is now under quarantine. No personnel are allowed to leave the stations at this time. Security personnel are to ensure quarantine protocols are upheld. Medical and research personnel are to remain on stand-by. All personnel must report to their supervisors immediately.", "Attention! Code black!")
 				security_level = SEC_LEVEL_BLACK
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z == 1 || FA.z == 5)
