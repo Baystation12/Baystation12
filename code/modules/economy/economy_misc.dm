@@ -77,7 +77,7 @@ var/global/economy_init = 0
 	if(economy_init)
 		return 2
 
-	var/datum/feed_channel/newChannel = new /datum/feed_channel
+	var/datum/feed_channel/newChannel = new /datum/feed_channel/station
 	newChannel.channel_name = "Public Station Announcements"
 	newChannel.author = "Automated Announcement Listing"
 	newChannel.locked = 1

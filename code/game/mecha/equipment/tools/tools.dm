@@ -5,7 +5,7 @@
 	energy_drain = 10
 	var/dam_force = 20
 	var/obj/mecha/working/ripley/cargo_holder
-	required_type = list(/obj/mecha/working, /obj/mecha/hoverpod) //so that hoverpods are a bit more useful as space transportation
+	required_type = /obj/mecha/working
 
 	attach(obj/mecha/M as obj)
 		..()
@@ -70,7 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
-	required_type = list(/obj/mecha/working, /obj/mecha/combat)
+	required_type = list(/obj/mecha/working/ripley, /obj/mecha/combat)
 
 	action(atom/target)
 		if(!action_checks(target)) return

@@ -2566,14 +2566,8 @@
 			newMsg.body = src.admincaster_feed_message.body
 			newMsg.is_admin_message = 1
 			feedback_inc("newscaster_stories",1)
-			for(var/datum/feed_channel/FC in news_network.network_channels)
-				if(FC.channel_name == src.admincaster_feed_channel.channel_name)
-					FC.messages += newMsg                  //Adding message to the network's appropriate feed_channel
-					break
+			news_network.add_news(src.admincaster_feed_channel.channel_name, newMsg)
 			src.admincaster_screen=4
-
-		for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-			NEWSCASTER.newsAlert(src.admincaster_feed_channel.channel_name)
 
 		log_admin("[key_name_admin(usr)] submitted a feed story to channel: [src.admincaster_feed_channel.channel_name]!")
 		src.access_news_network()
