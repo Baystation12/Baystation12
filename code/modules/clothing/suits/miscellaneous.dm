@@ -367,7 +367,7 @@
 	item_state = "redponcho"
 
 /obj/item/clothing/suit/bomber
-	name = "bomber jacker"
+	name = "bomber jacket"
 	desc = "A well-worn WW2 leather bomber jacket."
 	icon_state = "bomber"
 	item_state = "bomber"
