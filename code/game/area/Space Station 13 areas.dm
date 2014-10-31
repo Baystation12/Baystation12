@@ -888,8 +888,16 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
-/area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom"
+/area/crew_quarters/sleep/bedrooms/one
+	name = "\improper Dormitory Bedroom One"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms/two
+	name = "\improper Dormitory Bedroom Two"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms/three
+	name = "\improper Dormitory Bedroom Three"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo
