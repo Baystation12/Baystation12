@@ -77,7 +77,7 @@
 	data["on"] = on ? 1 : 0
 	data["gasPressure"] = round(air_contents.return_pressure())
 	data["gasTemperature"] = round(air_contents.temperature)
-	data["minGasTemperature"] = 0
+	data["minGasTemperature"] = 70
 	data["maxGasTemperature"] = round(T20C+500)
 	data["targetGasTemperature"] = round(set_temperature)
 	data["powerSetting"] = power_setting

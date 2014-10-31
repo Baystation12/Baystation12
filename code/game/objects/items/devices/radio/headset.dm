@@ -28,7 +28,7 @@
 			var/datum/language/hivemind = all_languages["Hivemind"]
 			hivemind.broadcast(M, message)
 		return null
-	
+
 	return ..()
 
 /obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
@@ -162,6 +162,15 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/heads/hop
+
+
+/obj/item/device/radio/headset/blueshield
+	name = "blueshield guard's headset"
+	desc = "Headset of blueshield guards. Channels are as follows: :c - command, :s - security"
+	icon_state = "com_headset"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/heads/hos
+
 /*
 /obj/item/device/radio/headset/headset_mine
 	name = "mining radio headset"

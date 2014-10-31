@@ -414,6 +414,10 @@ var/global/datum/controller/occupations/job_master
 			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
 
+			H.stored_account_number = M.account_number
+			H.stored_account_pin = M.remote_access_pin
+			H.stored_account_money = M.money
+
 			if(M.transaction_log.len)
 				var/datum/transaction/T = M.transaction_log[1]
 				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
@@ -508,7 +512,8 @@ var/global/datum/controller/occupations/job_master
 		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
-
+		if(job.bs_jobban_warning)
+			H << "\red <b>AS A BLUESHIELD GUARD, YOU MUST FOLLOW A <a href='http://www.unbound-travels.com/showthread.php?2552-Blueshield-Standard-Operating-Procedure'>STRICT STANDARD OPERATING PROCEDURE</a>. IF YOU DO NOT, YOU WILL BE JOBBANNED. IF YOU ARE UNSURE ABOUT SOMETHING, ADMINHELP."
 		spawnId(H, rank, alt_title)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 

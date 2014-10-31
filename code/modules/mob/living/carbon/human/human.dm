@@ -250,8 +250,14 @@
 		if(armor >= 2)	return
 
 
+
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/implant_remembered_info = ""
+	implant_remembered_info += "<b>Your account number is:</b> #[M.stored_account_number]<br>"
+	implant_remembered_info += "<b>Your account pin is:</b> [M.stored_account_pin]<br>"
+	implant_remembered_info += "<b>Your account funds are:</b> $[M.stored_account_money]<br>"
 
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
@@ -259,10 +265,53 @@
 	var/datum/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
+	M.mind.memory = null
+	M << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
+	M << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
+	M << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
+	M << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
+	M << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
+	M << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
+	M.mind.store_memory(implant_remembered_info)
+	M.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
+
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
+			for(var/datum/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
+	return 0
+
+
+/mob/living/carbon/human/proc/implant_slave(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
+	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/implant_remembered_info = ""
+	implant_remembered_info += "<b>Your account number is:</b> #[M.stored_account_number]<br>"
+	implant_remembered_info += "<b>Your account pin is:</b> [M.stored_account_pin]<br>"
+	implant_remembered_info += "<b>Your account funds are:</b> $[M.stored_account_money]<br>"
+
+	var/obj/item/weapon/implant/enslavement/L = new/obj/item/weapon/implant/enslavement(M)
+	L.imp_in = M
+	L.implanted = 1
+	var/datum/organ/external/affected = M.organs_by_name["head"]
+	affected.implants += L
+	L.part = affected
+	M.mind.memory = null
+	M << "\red You feel your mind blank, and a dark, whispering voice echos through your mind, binding you to [M.slaver]."
+	M << "<b>1. You will follow any and all orders from [M.slaver] at all times.</b>"
+	M << "<b>2. You will not act against [M.slaver] in any way, shape, or form.</b>"
+	M << "<b>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>"
+	M.mind.store_memory(implant_remembered_info)
+	M.mind.store_memory("<b>1. You will follow any and all orders from [M.slaver] at all times.<br>2. You will not act against [M.slaver] in any way, shape, or form.<br>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>", 0, 0)
+
+
+
+/mob/living/carbon/human/proc/is_slave_implanted(mob/living/carbon/human/M)
+	for(var/L in M.contents)
+		if(istype(L, /obj/item/weapon/implant/enslavement))
 			for(var/datum/organ/external/O in M.organs)
 				if(L in O.implants)
 					return 1

@@ -37,6 +37,7 @@
 				msg_admin_attack("[user.name] ([user.ckey]) implanted [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				user.show_message("\red You implanted the implant into [M].")
+				M.slaver = user
 				if(src.imp.implanted(M))
 					src.imp.loc = M
 					src.imp.imp_in = M
@@ -55,6 +56,15 @@
 	return
 
 
+
+/obj/item/weapon/implanter/enslavement
+	name = "implanter-enslavement"
+
+/obj/item/weapon/implanter/enslavement/New()
+	src.imp = new /obj/item/weapon/implant/enslavement( src )
+	..()
+	update()
+	return
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"

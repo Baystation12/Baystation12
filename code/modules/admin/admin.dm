@@ -21,6 +21,14 @@ var/global/floorIsLava = 0
 				C << msg
 
 
+/proc/message_admins_shutter(var/msg) //Toggleable shutter messages
+	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	log_adminwarn(msg)
+	for(var/client/C in admins)
+		if(R_ADMIN & C.holder.rights)
+			if(C.prefs.toggles & SHOW_SHUTTERLOGS)
+				C << msg
+
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in mob_list)

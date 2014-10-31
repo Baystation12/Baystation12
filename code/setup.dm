@@ -492,6 +492,7 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_BLUE	1
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
+#define SEC_LEVEL_BLACK 4
 
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
@@ -656,8 +657,8 @@ var/list/liftable_structures = list(\
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
-#define SHOW_TYPING 	16384
-
+#define SHOW_TYPING		16384
+#define SHOW_SHUTTERLOGS	32768
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 

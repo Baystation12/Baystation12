@@ -12,11 +12,11 @@
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
-			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_blueshield)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
-			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_blueshield)
 	minimal_player_age = 14
 
 	equip(var/mob/living/carbon/human/H)
@@ -53,6 +53,7 @@
 	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	alt_titles = list("Security Commander")
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
 	minimal_player_age = 5
@@ -139,6 +140,7 @@
 	spawn_positions = 2
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	alt_titles = list("Security Guard")
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
 	minimal_player_age = 3
@@ -161,3 +163,42 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
 		return 1
+
+
+//-----Blueshield!
+
+/datum/job/blueshield
+	title = "Blueshield Guard"
+	flag = BLUESHIELD
+	department_flag = ENGSEC
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the captain"
+	selection_color = "#ffdddd"
+	bs_jobban_warning = 1
+	access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)
+	minimal_access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)
+	minimal_player_age = 14
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		switch(H.backbag)
+			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
+			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
+			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/blueshield(H), slot_l_ear)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/tactical(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/security(H), slot_wear_pda)
+		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
+		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud(H), slot_glasses)
+		if(H.backbag == 1)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_l_store)
+		else
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
+		H.implant_loyalty(H)
+		return 1
+

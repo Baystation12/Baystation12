@@ -16,6 +16,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cleartox,
 	/client/proc/clean,
 	/client/proc/fillspace,
+	/client/proc/toggleshutterlogs,
 	/client/proc/alertlevel,
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
@@ -277,8 +278,9 @@ var/list/admin_verbs_mentor = list(
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/admin_ghost,
 	/client/proc/cmd_mod_say,
+	/client/proc/dsay,
+	/client/proc/player_panel_new,
 	/datum/admins/proc/show_player_info,
-//	/client/proc/dsay,
 	/client/proc/cmd_admin_subtle_message,
 	/client/proc/FRules,
 	/client/proc/freeze,
@@ -825,6 +827,17 @@ var/list/admin_verbs_mentor = list(
 		usr << "You now will get attack log messages"
 	else
 		usr << "You now won't get attack log messages"
+
+/client/proc/toggleshutterlogs()
+	set name = "Toggle Emergency Shutter Messages"
+	set category = "Preferences"
+
+	prefs.toggles ^= SHOW_SHUTTERLOGS
+	if (prefs.toggles & SHOW_SHUTTERLOGS)
+		usr << "You now will get emergency shutter log messages"
+	else
+		usr << "You now won't get emergency shutter log messages"
+
 
 
 /client/proc/toggleghostwriters()
