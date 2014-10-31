@@ -21,7 +21,7 @@
 			var/nukecode = "ERROR"
 			for(var/obj/machinery/nuclearbomb/bomb in machines)
 				if(bomb && bomb.r_code)
-					if(bomb.z == 1)
+					if(bomb.z in station_levels)
 						nukecode = bomb.r_code
 			interceptname = "Directive 7-12"
 			intercepttext += "<FONT size = 3><B>NanoTrasen Update</B>: Biohazard Alert.</FONT><HR>"
