@@ -146,18 +146,7 @@ var/list/ai_verbs_default = list(
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 
-			src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
-			src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
-			src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
-			src << "To use something, simply click on it."
-			src << "Use say :b to speak to your cyborgs through binary."
-			src << "For department channels, use the following say commands:"
-			src << ":o - AI Private, :c - Command, :s - Security, :e - Engineering, :u - Supply, :m - Medical, :n - Science."
-			if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
-				show_laws()
-				src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
-
-			job = "AI"
+			on_mob_init()
 
 	spawn(5)
 		new /obj/machinery/ai_powersupply(src)
@@ -175,6 +164,30 @@ var/list/ai_verbs_default = list(
 	ai_list += src
 	..()
 	return
+
+/mob/living/silicon/ai/proc/on_mob_init()
+	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
+	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
+	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
+	src << "To use something, simply click on it."
+	src << "Use say :b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
+	src << "For department channels, use the following say commands:"
+
+	var/radio_text = ""
+	for(var/i = 1 to common_radio.channels.len)
+		var/channel = common_radio.channels[i]
+		var/key = get_radio_key_from_channel(channel)
+		radio_text += "[key] - [channel]"
+		if(i != common_radio.channels.len)
+			radio_text += ", "
+
+	src << radio_text
+
+	if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
+		show_laws()
+		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
+
+	job = "AI"
 
 /mob/living/silicon/ai/Del()
 	ai_list -= src
