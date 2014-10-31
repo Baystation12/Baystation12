@@ -20,12 +20,12 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
-	/**src.verbs -= /client/verb/adminhelp
+	src.verbs -= /client/verb/adminhelp
 
-	spawn(1200)
+	spawn(300) // 30 Seconds
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
-	**/
+	
 
 	//clean the input msg
 	if(!msg)	return
