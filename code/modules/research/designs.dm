@@ -654,6 +654,7 @@ datum/design/gygax_main
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mecha/gygax/main"
+	locked = 1
 
 datum/design/gygax_peri
 	name = "Circuit Design (\"Gygax\" Peripherals Control module)"
@@ -681,6 +682,7 @@ datum/design/durand_main
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mecha/durand/main"
+	locked = 1
 
 datum/design/durand_peri
 	name = "Circuit Design (\"Durand\" Peripherals Control module)"
