@@ -14,7 +14,10 @@
 /obj/item/weapon/table_parts/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( user.loc )
+		if(istype(src, /obj/item/weapon/table_parts/wood))
+			new /obj/item/stack/sheet/wood( user.loc )
+		else
+			new /obj/item/stack/sheet/metal( user.loc )
 		//SN src = null
 		del(src)
 	if (istype(W, /obj/item/stack/rods))
