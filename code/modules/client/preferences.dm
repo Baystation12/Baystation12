@@ -137,8 +137,7 @@ datum/preferences
 			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
-					if(updatespeciesbans())
-						return
+					return
 
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
