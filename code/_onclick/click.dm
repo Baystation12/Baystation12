@@ -147,6 +147,9 @@
 
 	return
 
+/mob/proc/changeNext_move(num)
+	next_move = world.time + num
+
 // Default behavior: ignore double clicks, consider them normal clicks instead
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)

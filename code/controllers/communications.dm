@@ -119,8 +119,9 @@ var/list/radiochannels = list(
 	"Security" 		= SEC_FREQ,
 	"Response Team" = ERT_FREQ,
 	"Special Ops" 	= DTH_FREQ,
-	"Syndicate" 	= SYND_FREQ,
-	"Supply" 		= SUP_FREQ
+	"Mercenary" 	= SYND_FREQ,
+	"Supply" 		= SUP_FREQ,
+	"AI Private"	= AI_FREQ
 )
 
 // central command channels, i.e deathsquid & response teams

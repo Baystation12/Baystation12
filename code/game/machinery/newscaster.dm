@@ -6,7 +6,7 @@
 	var/author =""
 	var/body =""
 	var/message_type ="Story"
-	//var/parent_channel
+	var/datum/feed_channel/parent_channel
 	var/backup_body =""
 	var/backup_author =""
 	var/is_admin_message = 0
@@ -22,7 +22,14 @@
 	var/backup_author=""
 	var/censored=0
 	var/is_admin_channel=0
+	var/updated = 0
 	//var/page = null //For newspapers
+
+/datum/feed_channel/proc/announce_news()
+	return "Breaking news from [channel_name]!"
+
+/datum/feed_channel/station/announce_news()
+	return "New Station Announcement Available"
 
 /datum/feed_message/proc/clear()
 	src.author = ""
@@ -31,6 +38,10 @@
 	src.backup_author = ""
 	src.img = null
 	src.backup_img = null
+	parent_channel.update()
+
+/datum/feed_channel/proc/update()
+	updated = world.time
 
 /datum/feed_channel/proc/clear()
 	src.channel_name = ""
@@ -40,10 +51,46 @@
 	src.backup_author = ""
 	src.censored = 0
 	src.is_admin_channel = 0
+	update()
 
 /datum/feed_network
 	var/list/datum/feed_channel/network_channels = list()
 	var/datum/feed_message/wanted_issue
+
+/datum/feed_network/proc/add_news(var/channel_name, var/datum/feed_message/newMsg)
+	for(var/datum/feed_channel/FC in news_network.network_channels)
+		if(FC.channel_name == channel_name)
+			insert_message_in_channel(FC, newMsg)
+			break
+
+/datum/feed_network/proc/insert_message_in_channel(var/datum/feed_channel/FC, var/datum/feed_message/newMsg)
+	FC.messages += newMsg	//Adding message to the network's appropriate feed_channel
+	newMsg.parent_channel = FC
+	FC.update()
+	var/announcement = FC.announce_news()
+	alert_readers(announcement)
+
+/datum/feed_network/proc/alert_readers(var/annoncement)
+	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
+		NEWSCASTER.newsAlert(annoncement)
+		NEWSCASTER.update_icon()
+
+	var/list/receiving_pdas = new
+	for (var/obj/item/device/pda/P in PDAs)
+		if (!P.owner)
+			continue
+		if (P.toff)
+			continue
+		receiving_pdas += P
+
+	spawn(0)	// get_receptions sleeps further down the line, spawn of elsewhere
+		var/datum/receptions/receptions = get_receptions(null, receiving_pdas) // datums are not atoms, thus we have to assume the newscast network always has reception
+
+		for(var/obj/item/device/pda/PDA in receiving_pdas)
+			if(!(receptions.receiver_reception[PDA] & TELECOMMS_RECEPTION_RECEIVER))
+				continue
+
+			PDA.new_news(annoncement)
 
 var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
 
@@ -506,13 +553,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				if(photo)
 					newMsg.img = photo.img
 				feedback_inc("newscaster_stories",1)
-				for(var/datum/feed_channel/FC in news_network.network_channels)
-					if(FC.channel_name == src.channel_name)
-						FC.messages += newMsg                  //Adding message to the network's appropriate feed_channel
-						break
+				news_network.add_news(src.channel_name, newMsg)
 				src.screen=4
-				for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-					NEWSCASTER.newsAlert(src.channel_name)
 
 			src.updateUsrDialog()
 
@@ -581,9 +623,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						if(photo)
 							WANTED.img = photo.img
 						news_network.wanted_issue = WANTED
-						for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-							NEWSCASTER.newsAlert()
-							NEWSCASTER.update_icon()
+						news_network.alert_readers()
 						src.screen = 15
 					else
 						if(news_network.wanted_issue.is_admin_message)
@@ -623,6 +663,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				FC.author = "<B>\[REDACTED\]</B>"
 			else
 				FC.author = FC.backup_author
+			FC.update()
 			src.updateUsrDialog()
 
 		else if(href_list["censor_channel_story_author"])
@@ -635,6 +676,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				MSG.author = "<B>\[REDACTED\]</B>"
 			else
 				MSG.author = MSG.backup_author
+			MSG.parent_channel.update()
 			src.updateUsrDialog()
 
 		else if(href_list["censor_channel_story_body"])
@@ -652,6 +694,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				MSG.body = "<B>\[REDACTED\]</B>"
 			else
 				MSG.body = MSG.backup_body
+			MSG.parent_channel.update()
 			src.updateUsrDialog()
 
 		else if(href_list["pick_d_notice"])
@@ -666,6 +709,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				alert("This channel was created by a Nanotrasen Officer. You cannot place a D-Notice upon it.","Ok")
 				return
 			FC.censored = !FC.censored
+			FC.update()
 			src.updateUsrDialog()
 
 		else if(href_list["view"])
@@ -696,6 +740,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		else if(href_list["refresh"])
 			src.updateUsrDialog()
+
 
 
 /obj/machinery/newscaster/attackby(obj/item/I as obj, mob/user as mob)
@@ -959,11 +1004,11 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 ///obj/machinery/newscaster/process()       //Was thinking of doing the icon update through process, but multiple iterations per second does not
 //	return                                  //bode well with a newscaster network of 10+ machines. Let's just return it, as it's added in the machines list.
 
-/obj/machinery/newscaster/proc/newsAlert(channel)   //This isn't Agouri's work, for it is ugly and vile.
+/obj/machinery/newscaster/proc/newsAlert(var/news_call)   //This isn't Agouri's work, for it is ugly and vile.
 	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
-	if(channel)
+	if(news_call)
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Breaking news from [channel]!\"</span>",2)
+			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
 		src.alert = 1
 		src.update_icon()
 		spawn(300)

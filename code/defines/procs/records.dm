@@ -38,3 +38,8 @@
 	R.fields["notes"] = "No notes."
 	data_core.security += R
 	return R
+
+/proc/find_record(field, value, list/L)
+	for(var/datum/data/record/R in L)
+		if(R.fields[field] == value)
+			return R

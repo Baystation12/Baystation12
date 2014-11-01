@@ -97,10 +97,7 @@
 				SetLuminosity(12)
 
 				// found a powernet, so drain up to max power from it
-
-				var/drained = min ( drain_rate, PN.avail )
-				PN.newload += drained
-				power_drained += drained
+				var/drained = PN.draw_power(drain_rate)
 
 				// if tried to drain more than available on powernet
 				// now look for APCs and drain their cells

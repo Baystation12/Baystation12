@@ -69,7 +69,7 @@
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
-	
+
 	var/character_slots = 10				// The number of available character slots
 
 	var/max_maint_drones = 5				//This many drones can spawn,
@@ -150,6 +150,10 @@
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
+
+	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
+	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
+	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -495,7 +499,7 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
-					
+
 				if("character_slots")
 					config.character_slots = text2num(value)
 
@@ -510,6 +514,15 @@
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("station_levels")
+					config.station_levels = text2numlist(value, ";")
+
+				if("contact_levels")
+					config.contact_levels = text2numlist(value, ";")
+
+				if("player_levels")
+					config.player_levels = text2numlist(value, ";")
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

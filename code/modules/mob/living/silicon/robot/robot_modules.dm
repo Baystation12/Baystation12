@@ -369,7 +369,7 @@
 		return
 
 /obj/item/weapon/robot_module/syndicate
-	name = "syndicate robot module"
+	name = "illegal robot module"
 
 	New()
 		src.modules += new /obj/item/device/flashlight(src)

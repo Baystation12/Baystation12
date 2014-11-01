@@ -111,17 +111,9 @@
 	for (var/obj/item/device/radio/intercom/comm in O.loc)
 		comm.ai += O
 
-	O << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
-	O << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
-	O << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
-	O << "To use something, simply click on it."
-	O << {"Use say ":b to speak to your cyborgs through binary."}
-	if (!(ticker && ticker.mode && (O.mind in ticker.mode.malf_ai)))
-		O.show_laws()
-		O << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
+	O.on_mob_init()
 
 	O.add_ai_verbs()
-	O.job = "AI"
 
 	O.rename_self("ai",1)
 	. = O

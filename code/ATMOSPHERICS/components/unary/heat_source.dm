@@ -1,4 +1,5 @@
 //TODO: Put this under a common parent type with freezers to cut down on the copypasta
+#define HEATER_PERF_MULT 2.5
 
 /obj/machinery/atmospherics/unary/heater
 	name = "gas heating system"
@@ -72,7 +73,7 @@
 
 	if (network && air_contents.total_moles && air_contents.temperature < set_temperature)
 		update_use_power(2)
-		air_contents.add_thermal_energy(active_power_usage)
+		air_contents.add_thermal_energy(active_power_usage * HEATER_PERF_MULT)
 
 		heating = 1
 		network.update = 1

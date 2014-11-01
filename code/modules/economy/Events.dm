@@ -70,9 +70,9 @@
 			if(BIOHAZARD_OUTBREAK)
 				newMsg.body = "[pick("A \'REDACTED\'","A biohazard","An outbreak","A virus")] on [affected_dest.name] has resulted in quarantine, stopping much shipping in the area. Although the quarantine is now lifted, authorities are calling for deliveries of medical supplies to treat the infected, and gas to replace contaminated stocks."
 			if(PIRATES)
-				newMsg.body = "[pick("Pirates","Criminal elements","A [pick("Syndicate","Donk Co.","Waffle Co.","\'REDACTED\'")] strike force")] have [pick("raided","blockaded","attempted to blackmail","attacked")] [affected_dest.name] today. Security has been tightened, but many valuable minerals were taken."
+				newMsg.body = "[pick("Pirates","Criminal elements","A [pick("mercenary","Donk Co.","Waffle Co.","\'REDACTED\'")] strike force")] have [pick("raided","blockaded","attempted to blackmail","attacked")] [affected_dest.name] today. Security has been tightened, but many valuable minerals were taken."
 			if(CORPORATE_ATTACK)
-				newMsg.body = "A small [pick("pirate","Cybersun Industries","Gorlex Marauders","Syndicate")] fleet has precise-jumped into proximity with [affected_dest.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
+				newMsg.body = "A small [pick("pirate","Cybersun Industries","Gorlex Marauders","mercenary")] fleet has precise-jumped into proximity with [affected_dest.name], [pick("for a smash-and-grab operation","in a hit and run attack","in an overt display of hostilities")]. Much damage was done, and security has been tightened since the incident."
 			if(ALIEN_RAIDERS)
 				if(prob(20))
 					newMsg.body = "The Tiger Co-operative have raided [affected_dest.name] today, no doubt on orders from their enigmatic masters. Stealing wildlife, farm animals, medical research materials and kidnapping civilians. NanoTrasen authorities are standing by to counter attempts at bio-terrorism."
@@ -91,12 +91,7 @@
 			if(FESTIVAL)
 				newMsg.body = "A [pick("festival","week long celebration","day of revelry","planet-wide holiday")] has been declared on [affected_dest.name] by [pick("Governor","Commissioner","General","Commandant","Administrator")] [random_name(pick(MALE,FEMALE))] to celebrate [pick("the birth of their [pick("son","daughter")]","coming of age of their [pick("son","daughter")]","the pacification of rogue military cell","the apprehension of a violent criminal who had been terrorising the planet")]. Massive stocks of food and meat have been bought driving up prices across the planet."
 
-	for(var/datum/feed_channel/FC in news_network.network_channels)
-		if(FC.channel_name == "Nyx Daily")
-			FC.messages += newMsg
-			break
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert("Nyx Daily")
+	news_network.add_news("Nyx Daily", newMsg)
 
 /datum/event/economic_event/end()
 	for(var/good_type in dearer_goods)

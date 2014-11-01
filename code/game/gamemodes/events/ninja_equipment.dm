@@ -530,12 +530,12 @@ ________________________________________________________________________________
 				display_spideros()
 				return
 			P.tnote += "<i><b>&larr; From [!s_control?(A):"an unknown source"]:</b></i><br>[t]<br>"
-			if (!P.silent)
+			if (!P.message_silent)
 				playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 				for (var/mob/O in hearers(3, P.loc))
 					O.show_message(text("\icon[P] *[P.ttone]*"))
-			P.overlays.Cut()
-			P.overlays += image('icons/obj/pda.dmi', "pda-r")
+			P.new_message = 1
+			P.update_icon()
 
 		if("Inject")
 			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
@@ -1212,7 +1212,7 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,target,"hudwizard")
 				if("Hunter","Sentinel","Drone","Queen")
 					U.client.images += image(tempHud,target,"hudalien")
-				if("Syndicate")
+				if("Mercenary")
 					U.client.images += image(tempHud,target,"hudoperative")
 				if("Death Commando")
 					U.client.images += image(tempHud,target,"huddeathsquad")

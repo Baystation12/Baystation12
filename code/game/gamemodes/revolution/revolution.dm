@@ -150,7 +150,7 @@
 	)
 	var/where = mob.equip_in_one_of_slots(T, slots)
 	if (!where)
-		mob << "The Syndicate were unfortunately unable to get you a flash."
+		mob << "Your employers were unfortunately unable to get you a flash."
 	else
 		mob << "The flash in your [where] will help you to persuade the crew to join your cause."
 		mob.update_icons()
@@ -337,7 +337,7 @@
 /datum/game_mode/revolution/proc/check_heads_victory()
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		var/turf/T = get_turf(rev_mind.current)
-		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z == 1))
+		if((rev_mind) && (rev_mind.current) && (rev_mind.current.stat != 2) && T && (T.z in config.station_levels))
 			if(ishuman(rev_mind.current))
 				return 0
 	return 1

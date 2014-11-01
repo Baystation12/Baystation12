@@ -3,15 +3,16 @@ var/list/department_radio_keys = list(
 	  ":l" = "left ear",	"#l" = "left ear",		".l" = "left ear",
 	  ":i" = "intercom",	"#i" = "intercom",		".i" = "intercom",
 	  ":h" = "department",	"#h" = "department",	".h" = "department",
-	  ":0" = "special",		"#0" = "special",		".0" = "special", //activate radio-specific special functions
+	  ":+" = "special",		"#+" = "special",		".+" = "special", //activate radio-specific special functions
 	  ":c" = "Command",		"#c" = "Command",		".c" = "Command",
 	  ":n" = "Science",		"#n" = "Science",		".n" = "Science",
 	  ":m" = "Medical",		"#m" = "Medical",		".m" = "Medical",
 	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
 	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
-	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
+	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":o" = "AI Private",	"#o" = "AI Private",	".o" = "AI Private",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -23,8 +24,9 @@ var/list/department_radio_keys = list(
 	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
 	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
-	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
+	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":O" = "AI Private",	"#O" = "AI Private",	".O" = "AI Private",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -38,9 +40,24 @@ var/list/department_radio_keys = list(
 	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
 	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
 	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
+	  ":å" = "Mercenary",	"#å" = "Mercenary",		".å" = "Mercenary",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
 )
+
+
+var/list/channel_to_radio_key = new
+proc/get_radio_key_from_channel(var/channel)
+	var/key = channel_to_radio_key[channel]
+	if(!key)
+		for(var/radio_key in department_radio_keys)
+			if(department_radio_keys[radio_key] == channel)
+				key = radio_key
+				break
+		if(!key)
+			key = ""
+		channel_to_radio_key[channel] = key
+
+	return key
 
 /mob/living/proc/binarycheck()
 

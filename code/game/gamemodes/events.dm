@@ -57,7 +57,7 @@
 			var/list/turfs = new
 			var/turf/picked
 			for(var/turf/simulated/floor/T in world)
-				if(T.z == 1)
+				if(T.z in station_levels)
 					turfs += T
 			for(var/turf/simulated/floor/T in turfs)
 				if(prob(20))
@@ -185,7 +185,7 @@
 	//world << sound('sound/AI/aliens.ogg')
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in machines)
-		if(temp_vent.loc.z == 1 && !temp_vent.welded && temp_vent.network)
+		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in config.station_levels)
 			if(temp_vent.network.normal_members.len > 50) // Stops Aliens getting stuck in small networks. See: Security, Virology
 				vents += temp_vent
 
@@ -444,21 +444,21 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 	spawn(0)
 		world << "Started processing APCs"
 		for (var/obj/machinery/power/apc/APC in world)
-			if(APC.z == 1)
+			if(APC.z in station_levels)
 				APC.ion_act()
 				apcnum++
 		world << "Finished processing APCs. Processed: [apcnum]"
 	spawn(0)
 		world << "Started processing SMES"
 		for (var/obj/machinery/power/smes/SMES in world)
-			if(SMES.z == 1)
+			if(SMES.z in station_levels)
 				SMES.ion_act()
 				smesnum++
 		world << "Finished processing SMES. Processed: [smesnum]"
 	spawn(0)
 		world << "Started processing AIRLOCKS"
 		for (var/obj/machinery/door/airlock/D in world)
-			if(D.z == 1)
+			if(D.z in station_levels)
 				//if(length(D.req_access) > 0 && !(12 in D.req_access)) //not counting general access and maintenance airlocks
 				airlocknum++
 				spawn(0)
@@ -467,7 +467,7 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 	spawn(0)
 		world << "Started processing FIREDOORS"
 		for (var/obj/machinery/door/firedoor/D in world)
-			if(D.z == 1)
+			if(D.z in station_levels)
 				firedoornum++;
 				spawn(0)
 					D.ion_act()

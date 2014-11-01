@@ -412,6 +412,12 @@ div.notice {
     float: left;
 }
 
+.fixedLeftWiderRed {
+    width: 220px;
+    float: left;
+	background: #ee0000;
+}
+
 .floatRight {
     float: right;
 }

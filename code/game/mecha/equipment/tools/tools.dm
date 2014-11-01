@@ -70,7 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
-	required_type = list(/obj/mecha/working, /obj/mecha/combat)
+	required_type = list(/obj/mecha/working/ripley, /obj/mecha/combat)
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -1166,6 +1166,10 @@
 		return
 	
 	if (!usr.Adjacent(src))
+		return
+	
+	if (!isturf(usr.loc))
+		usr << "\red You can't reach the passenger compartment from here."
 		return
 	
 	if(iscarbon(usr))

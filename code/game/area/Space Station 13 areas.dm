@@ -66,7 +66,7 @@ var/list/teleportlocs = list()
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1)
+		if (picked.z in config.station_levels)
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -83,7 +83,7 @@ var/list/ghostteleportlocs = list()
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1 || picked.z == 3 || picked.z == 4 || picked.z == 5)
+		if (picked.z in config.player_levels)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
@@ -264,11 +264,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "shuttlered2"
 
 /area/shuttle/syndicate_elite/mothership
-	name = "\improper Syndicate Elite Shuttle"
+	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered"
 
 /area/shuttle/syndicate_elite/station
-	name = "\improper Syndicate Elite Shuttle"
+	name = "\improper Merc Elite Shuttle"
 	icon_state = "shuttlered2"
 
 /area/shuttle/administration/centcom
@@ -381,17 +381,17 @@ var/list/ghostteleportlocs = list()
 //SYNDICATES
 
 /area/syndicate_mothership
-	name = "\improper Syndicate Base"
+	name = "\improper Mercenary Base"
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
 
 /area/syndicate_mothership/control
-	name = "\improper Syndicate Control Room"
+	name = "\improper Mercenary Control Room"
 	icon_state = "syndie-control"
 
 /area/syndicate_mothership/elite_squad
-	name = "\improper Syndicate Elite Squad"
+	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
 
 //EXTRA
@@ -454,13 +454,13 @@ var/list/ghostteleportlocs = list()
 
 //names are used
 /area/syndicate_station
-	name = "\improper Syndicate Station"
+	name = "\improper Independant Station"
 	icon_state = "yellow"
 	requires_power = 0
 	unlimited_power = 1
 
 /area/syndicate_station/start
-	name = "\improper Syndicate Forward Operating Base"
+	name = "\improper Mercenary Forward Operating Base"
 	icon_state = "yellow"
 
 /area/syndicate_station/southwest
@@ -884,20 +884,20 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
 
-/area/crew_quarters/sleep/engi
-	name = "\improper Engineering Dormitories"
-	icon_state = "Sleep"
-
 /area/crew_quarters/sleep/engi_wash
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
-/area/crew_quarters/sleep/sec
-	name = "\improper Security Dormitories"
+/area/crew_quarters/sleep/bedrooms/one
+	name = "\improper Dormitory Bedroom One"
 	icon_state = "Sleep"
 
-/area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom"
+/area/crew_quarters/sleep/bedrooms/two
+	name = "\improper Dormitory Bedroom Two"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms/three
+	name = "\improper Dormitory Bedroom Three"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo
@@ -1079,6 +1079,10 @@ var/list/ghostteleportlocs = list()
 	engineering_foyer
 		name = "\improper Engineering Foyer"
 		icon_state = "engine"
+
+	engineering_supply
+		name = "Engineering Supply"
+		icon_state = "engine_supply"
 
 	break_room
 		name = "\improper Engineering Break Room"
