@@ -117,6 +117,7 @@
 	icon_state = "digiboots"
 	item_state = "digiboots"
 	item_color = "hosred"
+	species_restricted = null
 	siemens_coefficient = 0.7
 	modified = 1
 

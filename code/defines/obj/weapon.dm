@@ -314,6 +314,7 @@
 	name = "wooden table parts"
 	desc = "Keep away from fire."
 	icon_state = "wood_tableparts"
+	matter = null
 	flags = null
 
 /obj/item/weapon/table_parts/gambling

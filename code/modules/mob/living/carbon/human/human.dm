@@ -847,14 +847,14 @@
 /mob/living/carbon/human/eyecheck()
 	var/number = 0
 
-	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
+	if(!species.has_organ["eyes"] && species.name != "Machine") //No eyes, can't hurt them.
 		return 2
 
-	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
+	if(internal_organs_by_name["eyes"] && species.name != "Machine") // Eyes are fucked, not a 'weak point'.
 		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
 			return 2
-	else
+	else if(species.name != "Machine") //IPCs have no eyes, but still have cameras and crap
 		return 2
 
 	if(istype(src.head, /obj/item/clothing/head/welding))
