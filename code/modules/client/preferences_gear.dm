@@ -1,18 +1,45 @@
 var/global/list/gear_datums = list()
 
 /hook/startup/proc/populate_gear_list()
+	var/list/sort_categories = list(
+		"[slot_head]"		= list(),
+		"[slot_glasses]" 	= list(),
+		"[slot_wear_mask]"	= list(),
+		"[slot_w_uniform]"	= list(),
+		"attachments"		= list(),
+		"[slot_wear_suit]"	= list(),
+		"[slot_gloves]"		= list(),
+		"[slot_shoes]"		= list(),
+		"utility"			= list(),
+		"misc"				= list(),
+		"unknown"			= list(),
+	)
+
+	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = new type()
-		gear_datums[G.display_name] = G
+		
+		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
+		sort_categories[category][G.display_name] = G
+	
+	for (var/category in sort_categories)
+		gear_datums.Add(sortAssoc(sort_categories[category]))
+	
 	return 1
 
 /datum/gear
-	var/display_name       //Name/index.
+	var/display_name       //Name/index. Must be unique.
 	var/path               //Path to item.
 	var/cost               //Number of points used.
 	var/slot               //Slot to equip to.
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
+	var/sort_category
+
+/datum/gear/New()
+	..()
+	if (!sort_category)
+		sort_category = "[slot]"
 
 // This is sorted both by slot and alphabetically! Don't fuck it up!
 // Headslot items
@@ -230,7 +257,7 @@ var/global/list/gear_datums = list()
 /datum/gear/sterilemask
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
-	slot = slot_w_uniform
+	slot = slot_wear_mask
 	cost = 2
 
 // Uniform slot
@@ -260,7 +287,7 @@ var/global/list/gear_datums = list()
 	cost = 2
 
 /datum/gear/skirt_red
-	display_name = " plaid skirt, red"
+	display_name = "plaid skirt, red"
 	path = /obj/item/clothing/under/dress/plaid_red
 	slot = slot_w_uniform
 	cost = 2
@@ -274,6 +301,12 @@ var/global/list/gear_datums = list()
 /datum/gear/sundress
 	display_name = "sundress"
 	path = /obj/item/clothing/under/sundress
+	slot = slot_w_uniform
+	cost = 3
+
+/datum/gear/cheongsam
+	display_name = "cheongsam, white"
+	path = /obj/item/clothing/under/cheongsam
 	slot = slot_w_uniform
 	cost = 3
 
@@ -324,74 +357,88 @@ var/global/list/gear_datums = list()
 /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/tie/armband/cargo
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armband_emt
 	display_name = "armband, EMT"
 	path = /obj/item/clothing/tie/armband/medgreen
+	sort_category = "attachments"
 	cost = 2
 
 /datum/gear/armband_engineering
 	display_name = "armband, engineering"
 	path = /obj/item/clothing/tie/armband/engine
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armband_hydroponics
 	display_name = "armband, hydroponics"
 	path = /obj/item/clothing/tie/armband/hydro
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armband_medical
 	display_name = "armband, medical"
 	path = /obj/item/clothing/tie/armband/med
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armband
 	display_name = "armband, red"
 	path = /obj/item/clothing/tie/armband
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armband_science
 	display_name = "armband, science"
 	path = /obj/item/clothing/tie/armband/science
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/armpit
 	display_name = "shoulder holster"
 	path = /obj/item/clothing/tie/holster/armpit
+	sort_category = "attachments"
 	cost = 2
 	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Head of Security")
 
 /datum/gear/tie_blue
 	display_name = "tie, blue"
 	path = /obj/item/clothing/tie/blue
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/tie_red
 	display_name = "tie, red"
 	path = /obj/item/clothing/tie/red
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/tie_horrible
 	display_name = "tie, socially disgraceful"
 	path = /obj/item/clothing/tie/horrible
+	sort_category = "attachments"
 	cost = 1
 
 /datum/gear/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/tie/storage/brown_vest
+	sort_category = "attachments"
 	cost = 2
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 
 /datum/gear/black_vest
 	display_name = "webbing, security"
 	path = /obj/item/clothing/tie/storage/black_vest
+	sort_category = "attachments"
 	cost = 2
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/tie/storage/webbing
+	sort_category = "attachments"
 	cost = 2
 
 // Suit slot
@@ -404,7 +451,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/bomber
 	display_name = "bomber jacket"
-	path = /obj/item/clothing/suit/bomber
+	path = /obj/item/clothing/suit/storage/bomber
 	cost = 4
 	slot = slot_wear_suit
 
@@ -430,31 +477,31 @@ var/global/list/gear_datums = list()
 /datum/gear/gponcho
 	display_name = "poncho, blue"
 	path = /obj/item/clothing/suit/poncho/blue
-	cost = 4
+	cost = 3
 	slot = slot_wear_suit
 
 /datum/gear/gponcho
 	display_name = "poncho, green"
 	path = /obj/item/clothing/suit/poncho/green
-	cost = 4
+	cost = 3
 	slot = slot_wear_suit
 
 /datum/gear/rponcho
 	display_name = "poncho, purple"
 	path = /obj/item/clothing/suit/poncho/purple
-	cost = 4
+	cost = 3
 	slot = slot_wear_suit
 
 /datum/gear/rponcho
 	display_name = "poncho, red"
 	path = /obj/item/clothing/suit/poncho/red
-	cost = 4
+	cost = 3
 	slot = slot_wear_suit
 
 /datum/gear/poncho
 	display_name = "poncho, tan"
 	path = /obj/item/clothing/suit/poncho
-	cost = 4
+	cost = 3
 	slot = slot_wear_suit
 
 /datum/gear/unathi_robe
@@ -613,16 +660,24 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_shoes
 
-// "Useful" items
+// "Useful" items - I'm guessing things that might be used at work?
 
 /datum/gear/briefcase
 	display_name = "briefcase"
 	path = /obj/item/weapon/storage/briefcase
+	sort_category = "utility"
 	cost = 2
+
+/datum/gear/clipboard
+	display_name = "clipboard"
+	path = /obj/item/weapon/clipboard
+	sort_category = "utility"
+	cost = 1
 
 /datum/gear/matchbook
 	display_name = "matchbook"
 	path = /obj/item/weapon/storage/box/matches
+	sort_category = "utility"
 	cost = 2
 
 // The rest of the trash.
@@ -630,49 +685,53 @@ var/global/list/gear_datums = list()
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
+	sort_category = "misc"
 	cost = 2
-
-/datum/gear/clipboard
-	display_name = "clipboard"
-	path = /obj/item/weapon/clipboard
-	cost = 1
 
 /datum/gear/dice
 	display_name = "d20"
 	path = /obj/item/weapon/dice/d20
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/cards
 	display_name = "deck of cards"
 	path = /obj/item/weapon/deck
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/blipstick
 	display_name = "lipstick, black"
 	path = /obj/item/weapon/lipstick/black
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/jlipstick
 	display_name = "lipstick, jade"
 	path = /obj/item/weapon/lipstick/jade
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/plipstick
 	display_name = "lipstick, purple"
 	path = /obj/item/weapon/lipstick/purple
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/rlipstick
 	display_name = "lipstick, red"
 	path = /obj/item/weapon/lipstick
+	sort_category = "misc"
 	cost = 1
 
 /datum/gear/comb
 	display_name = "purple comb"
-	path = /obj/item/weapon/fluff/cado_keppel_1
+	path = /obj/item/weapon/haircomb
+	sort_category = "misc"
 	cost = 2
