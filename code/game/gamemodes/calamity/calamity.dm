@@ -82,6 +82,14 @@
 	return 1
 
 /datum/game_mode/calamity/post_setup()
+	// Reduce the interval between moderate/major events
+	event_manager.delay_modifier[EVENT_LEVEL_MODERATE] = 0.5
+	event_manager.delay_modifier[EVENT_LEVEL_MAJOR] = 0.75
+
+	// Add the cortical borer event
+	var/list/moderate_event_list = event_manager.available_events[EVENT_LEVEL_MODERATE]
+	var/event = new /datum/event_meta(/datum/event/borer_infestation, 400)
+	moderate_event_list.Add(event)
 
 	if(chosen_atypes)
 		for(var/atype in chosen_atypes)

@@ -1,5 +1,6 @@
 
 /datum/event/mundane_news
+	name = "Mundande news"
 	endWhen = 10
 
 /datum/event/mundane_news/announce()
@@ -127,6 +128,7 @@
 	news_network.add_news("Nyx Daily", newMsg)
 
 /datum/event/trivial_news
+	name = "Trivial news"
 	endWhen = 10
 
 /datum/event/trivial_news/announce()
