@@ -42,8 +42,8 @@
 	if (ishuman(target))
 		var/mob/living/carbon/human/H = target
 		
-		if (!H.has_organ_for_slot("handcuff"))
-			user << "\red [H] needs at least two wrists before you can cuff them together!"
+		if (!H.has_organ_for_slot(slot_handcuffed))
+			user << "\red \The [H] needs at least two wrists before you can cuff them together!"
 			return
 		
 		H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
@@ -158,8 +158,8 @@ var/last_chew = 0
 		
 		if (ishuman(C))
 			var/mob/living/carbon/human/H = C
-			if (!H.has_organ_for_slot("handcuff"))
-				user << "\red [H] needs at least two wrists before you can cuff them together!"
+			if (!H.has_organ_for_slot(slot_handcuffed))
+				user << "\red \The [H] needs at least two wrists before you can cuff them together!"
 				return
 		
 		spawn(30)
