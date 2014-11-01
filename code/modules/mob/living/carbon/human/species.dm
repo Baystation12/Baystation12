@@ -30,6 +30,7 @@
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
 	var/mutantrace                // Safeguard due to old code.
 	var/list/speech_sounds        // A list of sounds to potentially play when speaking.
+	var/list/speech_chance
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/insulated                 // Immune to electrocution and glass shards to the feet.
 
@@ -234,7 +235,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -261,7 +262,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -293,6 +294,7 @@
 	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
+	speech_chance = 20
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -353,7 +355,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"

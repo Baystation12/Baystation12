@@ -5,6 +5,7 @@
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "cypherkey"
 	item_state = ""
+	w_class = 1
 	var/translate_binary = 0
 	var/translate_hive = 0
 	var/syndie = 0
@@ -17,7 +18,7 @@
 
 /obj/item/device/encryptionkey/syndicate
 	icon_state = "cypherkey"
-	channels = list("Syndicate" = 1)
+	channels = list("Mercenary" = 1)
 	origin_tech = "syndicate=3"
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 
@@ -78,7 +79,7 @@
 	name = "AI Integrated Encryption Key"
 	desc = "Integrated encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1)
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "AI Private" = 1)
 
 /obj/item/device/encryptionkey/heads/rd
 	name = "Research Director's Encryption Key"

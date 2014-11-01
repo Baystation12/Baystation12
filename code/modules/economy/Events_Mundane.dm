@@ -66,7 +66,7 @@
 
 				newMsg.body += "[random_name(pick(MALE,FEMALE))] on [affected_dest.name] [pick("last week","yesterday","this morning","two days ago","three days ago")]\
 				[pick(". Assassination is suspected, but the perpetrators have not yet been brought to justice",\
-				" due to Syndicate infiltrators (since captured)",\
+				" due to mercenary infiltrators (since captured)",\
 				" during an industrial accident",\
 				" due to [pick("heart failure","kidney failure","liver failure","brain hemorrhage")]")]"
 
@@ -94,7 +94,7 @@
 				if(prob(33))
 					newMsg.body += "were surprised when an unusual species experts have since identified as \
 					[pick("a subclass of mammal","a divergent abhuman species","an intelligent species of lemur","organic/cyborg hybrids")] turned up. Believed to have been brought in by \
-					[pick("alien smugglers","early colonists","syndicate raiders","unwitting tourists")], this is the first such specimen discovered in the wild."
+					[pick("alien smugglers","early colonists","mercenary raiders","unwitting tourists")], this is the first such specimen discovered in the wild."
 				else if(prob(50))
 					newMsg.body += "were attacked by a vicious [pick("nas'r","diyaab","samak","predator which has not yet been identified")]\
 					. Officials urge caution, and locals are advised to stock up on armaments."
@@ -124,12 +124,7 @@
 				"a huge new ARG by a popular entertainment company","a secret tour by popular artiste [random_name(pick(MALE,FEMALE))]")]. \
 				Nyx Daily is offering discount tickets for two to see [random_name(pick(MALE,FEMALE))] live in return for eyewitness reports and up to the minute coverage."
 
-	for(var/datum/feed_channel/FC in news_network.network_channels)
-		if(FC.channel_name == "Nyx Daily")
-			FC.messages += newMsg
-			break
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert("Nyx Daily")
+	news_network.add_news("Nyx Daily", newMsg)
 
 /datum/event/trivial_news
 	endWhen = 10
@@ -175,7 +170,7 @@
 	"Mysterious Loud Rumbling Noises In [affected_dest.name] Found To Be Mysterious Loud Rumblings",\
 	"Alien ambassador becomes lost on [affected_dest.name], refuses to ask for directions",\
 	"Swamp Gas Verified To Be Exhalations Of Stars--Movie Stars--Long Passed",\
-	"Tainted Broccoli Weapon Of Choice For Syndicate Assassins",\
+	"Tainted Broccoli Weapon Of Choice For Efficient Assassins",\
 	"Chefs Find Broccoli Effective Tool For Cutting Cheese",\
 	"Broccoli Found To Cause Grumpiness In Monkeys",\
 	"Survey: 80% Of People on [affected_dest.name] Love Clog-Dancing",\
@@ -225,9 +220,4 @@
 	"Broccoli discovered to be colonies of tiny aliens with murder on their minds"\
 	)
 
-	for(var/datum/feed_channel/FC in news_network.network_channels)
-		if(FC.channel_name == "The Gibson Gazette")
-			FC.messages += newMsg
-			break
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert("The Gibson Gazette")
+	news_network.add_news("The Gibson Gazette", newMsg)

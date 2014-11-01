@@ -283,7 +283,7 @@
 
 		if (radiation)
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
-			if(!rad_organ || rad_organ.is_broken())
+			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads
@@ -1060,7 +1060,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-		if(!light_organ || light_organ.is_broken())
+		if(species.flags & IS_PLANT && (!light_organ || light_organ.is_broken()))
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 				traumatic_shock++
@@ -1232,7 +1232,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson)
+		client.screen.Remove(global_huds)
 
 		update_action_buttons()
 
@@ -1797,7 +1797,7 @@
 		if(mind)
 
 			switch(mind.special_role)
-				if("traitor","Syndicate")
+				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"
 				if("Revolutionary")
 					holder.icon_state = "hudrevolutionary"

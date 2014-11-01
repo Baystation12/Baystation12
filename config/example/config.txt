@@ -263,3 +263,12 @@ CHARACTER_SLOTS 10
 
 ## Uncomment to use overmap system for zlevel travel
 #USE_OVERMAP
+
+## Defines which Z-levels the station exists on. 
+STATION_LEVELS 1
+
+## Defines which Z-levels which, for example, a Code Red announcement may affect
+CONTACT_LEVELS 1;5
+
+## Defines all Z-levels a character can typically reach
+PLAYER_LEVELS 1;3;4;5;6

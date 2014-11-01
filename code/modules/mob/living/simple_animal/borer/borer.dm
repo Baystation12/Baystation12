@@ -203,5 +203,5 @@
 		src.mind.special_role = "Cortical Borer"
 		ticker.mode.borers |= src.mind
 
-/mob/living/carbon/alien/can_use_vents()
+/mob/living/simple_animal/borer/can_use_vents()
 	return

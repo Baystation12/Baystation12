@@ -149,7 +149,4 @@ proc/announce_newscaster_news(datum/news_announcement/news)
 	newMsg.body = news.message
 	newMsg.message_type = news.message_type
 
-	sendto.messages += newMsg
-
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert(news.channel_name)
+	news_network.insert_message_in_channel(sendto, newMsg)

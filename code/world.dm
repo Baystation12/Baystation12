@@ -41,6 +41,11 @@
 
 	sleep_offline = 1
 
+	// Set up roundstart seed list. This is here because vendors were
+	// bugging out and not populating with the correct packet names
+	// due to this list not being instantiated.
+	populate_seed_list()
+
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
 		master_controller.setup()

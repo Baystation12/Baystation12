@@ -806,9 +806,9 @@
 		var/area/new_area = get_area(loc)
 		if(new_area)
 			new_area.Entered(src)
+
 /mob/living/proc/can_use_vents()
 	return "You can't fit into that vent."
-
 
 /mob/living/proc/has_brain()
 	return 1

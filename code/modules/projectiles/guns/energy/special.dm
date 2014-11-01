@@ -225,7 +225,7 @@ obj/item/weapon/gun/energy/staff/focus
 	charge_cost = 250
 	fire_delay = 35
 	w_class = 4.0
-	zoomdevicename = "sniper scope"
+	zoomdevicename = "scope"
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
 	set category = "Object"

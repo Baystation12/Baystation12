@@ -47,7 +47,9 @@
 		tank = null
 		icon_state = "pneumatic"
 		item_state = "pneumatic"
-		usr.update_icons()
+		if (ismob(src.loc))
+			var/mob/M = src.loc
+			M.update_icons()
 	else
 		usr << "There's no tank in [src]."
 

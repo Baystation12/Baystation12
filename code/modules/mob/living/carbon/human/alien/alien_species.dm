@@ -37,6 +37,9 @@
 	death_message = "lets out a waning guttural screech, green blood bubbling from its maw."
 	death_sound = 'sound/voice/hiss6.ogg'
 
+	speech_sounds = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
+	speech_chance = 100
+
 	breath_type = null
 	poison_type = null
 
@@ -126,6 +129,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/plant,
 		/mob/living/carbon/human/proc/transfer_plasma,
@@ -162,6 +166,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
@@ -190,6 +195,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/transfer_plasma,
@@ -200,6 +206,7 @@
 /datum/species/xenos/queen
 
 	name = "Xenomorph Queen"
+	total_health = 250
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
@@ -222,6 +229,7 @@
 		)
 
 	inherent_verbs = list(
+		/mob/living/proc/ventcrawl,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/lay_egg,

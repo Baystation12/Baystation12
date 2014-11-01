@@ -3,6 +3,14 @@
 	voice_name = "synthesized voice"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
+	var/list/additional_law_channels = list("State")
+	var/const/MAIN_CHANNEL = "Main Frequency"
+	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
+	var/lawcheck[1]
+	var/ioncheck[1]
+	var/stating_laws = 0
+	var/obj/item/device/radio/common_radio
+
 	immune_to_ssd = 1
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
@@ -18,6 +26,10 @@
 	var/sensor_mode = 0 //Determines the current HUD.
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
+
+/mob/living/silicon/New()
+	..()
+	add_language("Galactic Common")
 
 /mob/living/silicon/proc/show_laws()
 	return
@@ -168,6 +180,7 @@
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	if (..(language) && can_speak)
 		speech_synthesizer_langs.Add(all_languages[language])
+		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
 	..(rem_language)
@@ -218,3 +231,23 @@
 
 /mob/living/silicon/binarycheck()
 	return 1
+
+/mob/living/silicon/Topic(href, href_list)
+	..()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/list/channels = list(MAIN_CHANNEL)
+		if(common_radio)
+			for (var/ch_name in common_radio.channels)
+				channels += ch_name
+
+		channels += additional_law_channels
+		channels += "Cancel"
+
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in channels
+		if(setchannel != "Cancel")
+			lawchannel = setchannel
+			checklaws()
+		return 1
+
+	return 0

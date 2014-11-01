@@ -121,8 +121,8 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
-	//Set up roundstart seed list.
-	populate_seed_list()
+	// Sort the machinery list so it doesn't cause a lagspike at roundstart
+	process_machines_sort()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)
@@ -354,16 +354,10 @@ datum/controller/game_controller/proc/process_pipenets()
 			continue
 		pipe_networks.Cut(i,i+1)
 
-datum/controller/game_controller/proc/process_powernets()
+/datum/controller/game_controller/proc/process_powernets()
 	last_thing_processed = /datum/powernet
-	var/i = 1
-	while(i<=powernets.len)
-		var/datum/powernet/Powernet = powernets[i]
-		if(Powernet)
-			Powernet.process()
-			i++
-			continue
-		powernets.Cut(i,i+1)
+	for(var/datum/powernet/Powernet in powernets)
+		Powernet.reset()
 
 datum/controller/game_controller/proc/process_nano()
 	var/i = 1

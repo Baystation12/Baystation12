@@ -487,6 +487,10 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
+//click cooldowns, in tenths of a second
+
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
 var/list/liftable_structures = list(\
@@ -748,11 +752,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_SKIN_COLOR 128
 #define HAS_LIPS 256
 #define HAS_UNDERWEAR 512
-#define HAS_TAIL 1024
-
-#define IS_PLANT 2048
-#define IS_WHITELISTED 4096
-#define IS_SYNTHETIC 8192
+#define IS_PLANT 1024
+#define IS_WHITELISTED 2048
+#define IS_SYNTHETIC 4096
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
@@ -855,3 +857,7 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 // Reagent metabolism defines.
 #define FOOD_METABOLISM 0.4
 #define ALCOHOL_METABOLISM 0.1
+
+//Chemistry
+
+#define CHEM_SYNTH_ENERGY	500	//How much energy does it take to synthesize 1 unit of chemical, in J

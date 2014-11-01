@@ -12,6 +12,11 @@
 /turf/simulated/floor/airless/ceiling
 	icon_state = "rockvault"
 
+/turf/simulated/floor/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "catwalk0"
+	name = "catwalk"
+
 /turf/simulated/floor/light
 	name = "Light floor"
 	luminosity = 5

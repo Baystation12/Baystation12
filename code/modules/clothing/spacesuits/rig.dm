@@ -215,6 +215,7 @@
 			return
 		//TODO: Species check, skull damage for forcing an unfitting helmet on?
 		helmet.loc = H
+		helmet.pickup(H)
 		H.equip_to_slot(helmet, slot_head)
 		helmet.canremove = 0
 		H << "\blue You deploy your hardsuit helmet, sealing you off from the world."

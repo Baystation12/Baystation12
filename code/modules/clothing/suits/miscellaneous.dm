@@ -219,7 +219,7 @@
 	else
 		usr << "You button-up some imaginary buttons on your [src]."
 		return
-	usr.update_inv_wear_suit()
+	update_clothing_icon()
 
 //pyjamas
 //originally intended to be pinstripes >.>
@@ -356,15 +356,27 @@
 
 /obj/item/clothing/suit/poncho/green
 	name = "green poncho"
-	desc = "Your classic, non-racist poncho. This one is green."
+	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon_state = "greenponcho"
 	item_state = "greenponcho"
 
 /obj/item/clothing/suit/poncho/red
 	name = "red poncho"
-	desc = "Your classic, non-racist poncho. This one is red."
+	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon_state = "redponcho"
 	item_state = "redponcho"
+
+/obj/item/clothing/suit/poncho/purple
+	name = "purple poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is purple."
+	icon_state = "purpleponcho"
+	item_state = "purpleponcho"
+
+/obj/item/clothing/suit/poncho/blue
+	name = "blue poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is blue."
+	icon_state = "blueponcho"
+	item_state = "blueponcho"
 
 /obj/item/clothing/suit/bomber
 	name = "bomber jacker"
@@ -374,5 +386,5 @@
 	flags = FPRINT | TABLEPASS
 	body_parts_covered = UPPER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|ARMS
-	min_cold_protection_temperature = T0C
+	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7

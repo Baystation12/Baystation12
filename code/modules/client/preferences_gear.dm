@@ -403,7 +403,7 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/bomber
-	display_name = "bomberjacker"
+	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/bomber
 	cost = 4
 	slot = slot_wear_suit
@@ -428,8 +428,20 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/gponcho
+	display_name = "poncho, blue"
+	path = /obj/item/clothing/suit/poncho/blue
+	cost = 4
+	slot = slot_wear_suit
+
+/datum/gear/gponcho
 	display_name = "poncho, green"
 	path = /obj/item/clothing/suit/poncho/green
+	cost = 4
+	slot = slot_wear_suit
+
+/datum/gear/rponcho
+	display_name = "poncho, purple"
+	path = /obj/item/clothing/suit/poncho/purple
 	cost = 4
 	slot = slot_wear_suit
 
@@ -642,17 +654,17 @@ var/global/list/gear_datums = list()
 
 /datum/gear/blipstick
 	display_name = "lipstick, black"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/black
 	cost = 1
 
 /datum/gear/jlipstick
 	display_name = "lipstick, jade"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/jade
 	cost = 1
 
 /datum/gear/plipstick
 	display_name = "lipstick, purple"
-	path = /obj/item/weapon/lipstick
+	path = /obj/item/weapon/lipstick/purple
 	cost = 1
 
 /datum/gear/rlipstick

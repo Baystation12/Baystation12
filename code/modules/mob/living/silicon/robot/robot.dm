@@ -1,5 +1,6 @@
 var/list/robot_verbs_default = list(
-	/mob/living/silicon/robot/proc/sensor_mode
+	/mob/living/silicon/robot/proc/sensor_mode,
+	/mob/living/silicon/robot/proc/robot_checklaws
 )
 
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
@@ -19,7 +20,7 @@ var/list/robot_verbs_default = list(
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
-	var/integrated_light_power = 5
+	var/integrated_light_power = 6
 
 //Hud stuff
 
@@ -68,8 +69,6 @@ var/list/robot_verbs_default = list(
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
 	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
-	var/lawcheck[1] //For stating laws.
-	var/ioncheck[1] //Ditto.
 	var/lockcharge //Used when locking down a borg to preserve cell charge
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
@@ -102,6 +101,7 @@ var/list/robot_verbs_default = list(
 	init()
 
 	radio = new /obj/item/device/radio/borg(src)
+	common_radio = radio
 	if(!scrambledcodes && !camera)
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
@@ -143,6 +143,7 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
+	additional_law_channels += "Binary"
 	connected_ai = select_active_ai_with_fewest_borgs()
 	if(connected_ai)
 		connected_ai.connected_robots += src
@@ -413,7 +414,7 @@ var/list/robot_verbs_default = list(
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(6) // 1.5x luminosity of flashlight
+		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
 	else
 		SetLuminosity(0)
 
@@ -811,7 +812,7 @@ var/list/robot_verbs_default = list(
 					laws = new /datum/ai_laws/syndicate_override
 					var/time = time2text(world.realtime,"hh:mm:ss")
 					lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-					set_zeroth_law("Only [user.real_name] and people he designates as being such are Syndicate Agents.")
+					set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 					src << "\red ALERT: Foreign software detected."
 					sleep(5)
 					src << "\red Initiating diagnostics..."
@@ -1074,9 +1075,9 @@ var/list/robot_verbs_default = list(
 
 
 /mob/living/silicon/robot/Topic(href, href_list)
-	..()
-
 	if(usr != src)
+		return
+	if(..())
 		return
 
 	if (href_list["showalerts"])
