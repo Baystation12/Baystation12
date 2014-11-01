@@ -148,13 +148,16 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
-		sendcooldown = 600
+		//sendcooldown = 600
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 
 /obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
 	if(stat & (BROKEN|NOPOWER))
 		return 0
+	
+	if(department == "Unknown")
+		return 0	//You can't send faxes to "Unknown"
 
 	flick("faxreceive", src)
 	playsound(loc, "sound/items/polaroid1.ogg", 50, 1)
