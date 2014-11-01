@@ -501,7 +501,7 @@
 
 	synth_temp_gain = 5 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"

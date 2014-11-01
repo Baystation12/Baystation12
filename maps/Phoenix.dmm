@@ -188,7 +188,7 @@
 "adF" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating,/area/maintenance/security_starboard)
 "adG" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/maintenance/security_starboard)
 "adH" = (/obj/effect/landmark{name = "carpspawn"},/turf/space,/area)
-"adI" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/machinery/light/small{dir = 1},/obj/item/device/radio/intercom{pixel_x = -30},/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
+"adI" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/item/device/radio/intercom{pixel_x = -30},/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
 "adJ" = (/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
 "adK" = (/obj/item/weapon/soap/deluxe,/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
 "adL" = (/obj/structure/sign/poster,/turf/simulated/wall,/area/security/main)
@@ -199,10 +199,10 @@
 "adQ" = (/obj/machinery/recharger/wallcharger{pixel_x = 0; pixel_y = 20},/obj/machinery/recharger/wallcharger{pixel_x = 0; pixel_y = 40},/obj/machinery/recharger/wallcharger{pixel_x = 0; pixel_y = 30},/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/main)
 "adR" = (/obj/structure/reagent_dispensers/peppertank{pixel_y = 30},/turf/simulated/floor{icon_state = "red"; dir = 5},/area/security/main)
 "adS" = (/turf/simulated/wall/r_wall,/area/crew_quarters/heads/hos)
-"adT" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
+"adT" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/machinery/light/small,/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
 "adU" = (/obj/machinery/light/small,/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
-"adV" = (/obj/machinery/door/airlock{name = "Shower"},/turf/simulated/floor,/area/security/main)
-"adW" = (/obj/structure/flora/pottedplant,/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "red"; dir = 9},/area/security/main)
+"adV" = (/obj/machinery/door/airlock{name = "Shower"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/security/main)
+"adW" = (/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "red"; dir = 9},/area/security/main)
 "adX" = (/obj/machinery/alarm{name = "alarm NORTH"; pixel_y = 22},/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/main)
 "adY" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/main)
 "adZ" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 8},/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/main)
@@ -13474,4 +13474,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
