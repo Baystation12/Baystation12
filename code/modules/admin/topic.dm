@@ -660,15 +660,56 @@
 
 		//Other races  (BLUE, because I have no idea what other color to make this)
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccccff'><th colspan='1'>Other Races</th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccccff'><th colspan='10'>Other Races</th></tr><tr align='center'>"
 
 		if(jobban_isbanned(M, "Dionaea"))
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'><font color=red>Dionaea</font></a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'><font color=red>Grown Dionaea</font></a></td>"
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Grown Dionaea</a></td>"
+
+		if(jobban_isbanned(M, "Diona"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Diona;jobban4=\ref[M]'><font color=red>Diona</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Diona;jobban4=\ref[M]'>Diona</a></td>"
+
+		//unathi
+		if(jobban_isbanned(M, "Unathi"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Unathi;jobban4=\ref[M]'><font color=red>Unathi</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Unathi;jobban4=\ref[M]'>Unathi</a></td>"
+
+		//Aviskree
+		if(jobban_isbanned(M, "Aviskree"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Aviskree;jobban4=\ref[M]'><font color=red>Aviskree</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Aviskree;jobban4=\ref[M]'>Aviskree</a></td>"
+
+		//Tajaran
+		if(jobban_isbanned(M, "Tajaran"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Tajaran;jobban4=\ref[M]'><font color=red>Tajaran</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Tajaran;jobban4=\ref[M]'>Tajaran</a></td>"
+
+		//Skrell
+		if(jobban_isbanned(M, "Skrell"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Skrell;jobban4=\ref[M]'><font color=red>Skrell</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Skrell;jobban4=\ref[M]'>Skrell</a></td>"
+
+		//Kidan
+		if(jobban_isbanned(M, "Kidan"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Kidan;jobban4=\ref[M]'><font color=red>Kidan</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Kidan;jobban4=\ref[M]'>Kidan</a></td>"
+
+		//Machine
+
+		if(jobban_isbanned(M, "Machine"))
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Machine;jobban4=\ref[M]'><font color=red>Machine</font></a></td>"
+		else
+			jobs += "<td width='12%'><a href='?src=\ref[src];jobban3=Machine;jobban4=\ref[M]'>Machine</a></td>"
 
 		jobs += "</tr></table>"
-
 
 		body = "<body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"

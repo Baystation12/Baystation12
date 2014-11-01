@@ -137,7 +137,9 @@ datum/preferences
 			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
-					return
+					if(updatespeciesbans())
+						return
+
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
 
@@ -233,6 +235,16 @@ datum/preferences
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
+	if(jobban_isbanned(user, species))
+		species = "Human"
+		h_style = hair_styles_list["Bald"]
+		f_style = facial_hair_styles_list["Shaved"]
+	if(user)
+		for(var/L in all_languages)
+			var/datum/language/lang = all_languages[L]
+			if((lang.flags & RESTRICTED))
+				if(language == lang.name)
+					language = "None"
 	update_preview_icon()
 	user << browse_rsc(preview_icon_front, "previewicon.png")
 	user << browse_rsc(preview_icon_side, "previewicon2.png")
@@ -1108,7 +1120,13 @@ datum/preferences
 						new_species = whitelisted_species
 
 					species = input("Please select a species", "Character Generation", null) in new_species
-
+					if(jobban_isbanned(usr, species))
+						usr << "\red <B>You have been banned from using [species] if you wish to be unbanned contact an admin in-game or on the forums</B>"
+						species = "Human"
+						h_style = random_hair_style(gender, species)
+						f_style = random_facial_hair_style(gender, species)
+						savefile_update()
+						return
 					if(prev_species != species)
 						//grab one of the valid hair styles for the newly chosen species
 						var/list/valid_hairstyles = list()
