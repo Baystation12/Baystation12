@@ -99,6 +99,7 @@
 		default_slot = slot
 		S["default_slot"] << slot
 	S.cd = "/character[slot]"
+	updatespeciesbans()
 
 	//Character
 	S["OOC_Notes"]			>> metadata
@@ -325,6 +326,36 @@
 	S["UI_style_alpha"]		<< UI_style_alpha
 
 	return 1
+
+
+
+/datum/preferences/proc/updatespeciesbans()
+	var/savefile/S = new /savefile(path)
+	if(S)
+		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+			S.cd = "/character[i]"
+			if(i==default_slot)
+				if(S)
+					for(var/L in all_languages)
+						var/datum/language/lang = all_languages[L]
+						if((lang.flags & RESTRICTED))
+							if(S["language"] == lang.name)
+								S["language"] << "None"
+				if(jobban_isbanned(usr, S["species"]))
+					S["species"] << "Human"
+					S["hair_style_name"] << hair_styles_list["Bald"]
+					S["facial_style_name"] << facial_hair_styles_list["Shaved"]
+			else
+				if(S)
+					for(var/L in all_languages)
+						var/datum/language/lang = all_languages[L]
+						if((lang.flags & RESTRICTED))
+							if(S["language"] == lang.name)
+								S["language"] << "None"
+				if(jobban_isbanned(usr, S["species"]))
+					S["species"] << "Human"
+					S["hair_style_name"] << hair_styles_list["Bald"]
+					S["facial_style_name"] << facial_hair_styles_list["Shaved"]
 
 
 #undef SAVEFILE_VERSION_MAX

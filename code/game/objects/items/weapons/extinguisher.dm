@@ -126,7 +126,10 @@
 					if(!W) return
 					W.reagents.reaction(get_turf(W))
 					for(var/atom/atm in get_turf(W))
-						if(!W) return
+						if(!W)
+							return
+						if(!W.reagents)
+							break
 						W.reagents.reaction(atm)
 					if(W.loc == my_target) break
 					sleep(2)

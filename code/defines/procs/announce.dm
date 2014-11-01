@@ -57,11 +57,13 @@ datum/announcement/minor/Message(message as text, message_title as text)
 	world << "<b>[message]</b>"
 
 datum/announcement/priority/Message(message as text, message_title as text)
-	world << "<h1 class='alert'>[message_title]</h1>"
-	world << "<span class='alert'>[message]</span>"
-	if(announcer)
-		world << "<span class='alert'> -[html_encode(announcer)]</span>"
-	world << "<br>"
+	for(var/mob/M in player_list)
+		if(!istype(M,/mob/new_player) && !isdeaf(M))
+			M << "<h1 class='alert'>[message_title]</h1>"
+			M << "<span class='alert'>[message]</span>"
+			if(announcer)
+				M << "<span class='alert'> -[html_encode(announcer)]</span>"
+			M << "<br>"
 
 datum/announcement/priority/command/Message(message as text, message_title as text)
 	var/command
@@ -76,8 +78,10 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 			M << command
 
 datum/announcement/priority/security/Message(message as text, message_title as text)
-	world << "<font size=4 color='red'>[message_title]</font>"
-	world << "<font color='red'>[message]</font>"
+	for(var/mob/M in player_list)
+		if(!istype(M,/mob/new_player) && !isdeaf(M))
+			M << "<font size=4 color='red'>[message_title]</font>"
+			M << "<font color='red'>[message]</font>"
 
 datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(!newscast)
