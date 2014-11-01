@@ -115,6 +115,9 @@
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)
+	new /obj/item/clothing/shoes/clothboots(src)
+	new /obj/item/clothing/shoes/clothboots(src)
+	new /obj/item/clothing/shoes/clothboots(src)
 	return
 
 

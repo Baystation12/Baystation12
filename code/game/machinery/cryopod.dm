@@ -350,6 +350,17 @@ var/global/list/frozen_items = list()
 	set src in oview(1)
 	if(usr.stat != 0)
 		return
+	var/user_loc = usr.loc
+
+	message_admins("[key_name_admin(usr)] has started to eject [key_name_admin(src.occupant)], the [src.occupant.job] from cryostasis. ([src.x],[src.y],[src.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+	log_game("[key_name_admin(usr)] started to eject [key_name_admin(src.occupant)], the [src.occupant.job]  from cryostasis.")
+
+	visible_message("The cryopod hisses as it begins the thawing process")
+	sleep(150)
+	if (usr.stat != 0 || usr.loc != user_loc)
+		return
+	message_admins("[key_name_admin(usr)] ejected [key_name_admin(src.occupant)], the [src.occupant.job] from cryostasis. ([src.x],[src.y],[src.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+	log_game("[key_name_admin(usr)] ejected [key_name_admin(src.occupant)], the [src.occupant.job] from cryostasis.")
 
 	if(orient_right)
 		icon_state = "body_scanner_0-r"
