@@ -1121,7 +1121,7 @@ datum/preferences
 
 					species = input("Please select a species", "Character Generation", null) in new_species
 					if(jobban_isbanned(usr, species))
-						usr << "\red <B>You have been banned from using [species] if you wish to be unbanded contact an admin in-game or on the forums</B>"
+						usr << "\red <B>You have been banned from using [species] if you wish to be unbanned contact an admin in-game or on the forums</B>"
 						species = "Human"
 						h_style = random_hair_style(gender, species)
 						f_style = random_facial_hair_style(gender, species)
