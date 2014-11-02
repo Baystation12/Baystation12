@@ -250,6 +250,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/eye_tooth
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -378,6 +379,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	unarmed_type = /datum/unarmed_attack/diona
+	secondary_unarmed_type = null //Does a walking mass of dionaea even have jaws, as we understand them?
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
@@ -444,6 +446,7 @@
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
 	unarmed_type = /datum/unarmed_attack/punch
+	secondary_unarmed_type = null
 	rarity_value = 2
 
 	eyes = "blank_eyes"
@@ -514,6 +517,14 @@
 	return 0
 
 /datum/unarmed_attack/bite
+	attack_verb = list("bite") // 'x has biteed y', needs work.
+	attack_sound = 'sound/weapons/bite.ogg'
+	shredding = 0
+	damage = 3
+	sharp = 0
+	edge = 0
+
+/datum/unarmed_attack/bite/eye_tooth
 	attack_verb = list("bite") // 'x has biteed y', needs work.
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
