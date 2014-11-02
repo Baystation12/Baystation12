@@ -228,9 +228,12 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx
 		return 0
 
-	var/i, ch, len = length(key)
+	var/i = 7, ch, len = length(key)
 
-	for (i = 7, i <= len, ++i)
+	if(copytext(key, 7, 8) == "W") //webclient
+		i++
+
+	for (, i <= len, ++i)
 		ch = text2ascii(key, i)
 		if (ch < 48 || ch > 57)
 			return 0
