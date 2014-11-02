@@ -13,9 +13,11 @@
 	icon_state = "rockvault"
 
 /turf/simulated/floor/airless/catwalk
+	name = "catwalk"
 	icon = 'icons/turf/catwalks.dmi'
 	icon_state = "catwalk0"
-	name = "catwalk"
+	floor_tile = null
+	intact = 0
 
 /turf/simulated/floor/light
 	name = "Light floor"
