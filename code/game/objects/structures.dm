@@ -78,13 +78,16 @@
 
 	do_climb(target)
 
-/obj/structure/proc/do_climb(var/mob/living/user)
-
+/obj/structure/proc/can_climb(var/mob/living/user)
 	if (!can_touch(user) || !climbable)
-		return
+		return 0
 
 	var/turf/T = src.loc
-	if(!T || !istype(T)) return
+	if(!T || !istype(T)) return 0
+
+	if (!user.Adjacent(src))
+		user << "\red You can't climb there, the way is blocked."
+		return 0
 
 	for(var/obj/O in T.contents)
 		if(istype(O,/obj/structure))
@@ -92,29 +95,24 @@
 			if(S.climbable)
 				continue
 
-		if(O && O.density)
-			usr << "\red There's \a [O] in the way."
-			return
+		if(O && O.density && !(O.flags & ON_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
+			user << "\red There's \a [O] in the way."
+			return 0
+	return 1
+
+/obj/structure/proc/do_climb(var/mob/living/user)
+	if (!can_climb(user))
+		return
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 
 	if(!do_after(user,50))
 		return
 
-	if (!can_touch(user) || !climbable)
+	if (!can_climb(user))
 		return
 
-	for(var/obj/O in T.contents)
-		if(istype(O,/obj/structure))
-			var/obj/structure/S = O
-			if(S.climbable)
-				continue
-
-		if(O && O.density)
-			usr << "\red There's \a [O] in the way."
-			return
-
-	usr.loc = get_turf(src)
+	usr.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
 		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")
