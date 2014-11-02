@@ -717,6 +717,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Incinerator"
 	icon_state = "disposal"
 
+/area/maintenance/library
+	name = "Library Maintenance"
+	icon_state = "maint_library"
+
 /area/maintenance/locker
 	name = "Locker Room Maintenance"
 	icon_state = "maint_locker"
@@ -726,11 +730,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "maint_medbay"
 
 /area/maintenance/research_port
-	name = "Port Research Maintenance"
+	name = "Research Maintenance - Port"
 	icon_state = "maint_research_port"
 
 /area/maintenance/research_starboard
-	name = "Starboard Research Maintenance"
+	name = "Research Maintenance - Starboard"
 	icon_state = "maint_research_starboard"
 
 /area/maintenance/research_shuttle
@@ -738,11 +742,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "maint_research_shuttle"
 
 /area/maintenance/security_port
-	name = "Port Security Maintenance"
+	name = "Security Maintenance - Port"
 	icon_state = "maint_security_port"
 
 /area/maintenance/security_starboard
-	name = "Starboard Security Maintenance"
+	name = "Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
 
 /area/maintenance/storage
@@ -814,9 +818,21 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Construction Area"
 	icon_state = "construction"
 
-/area/hallway/secondary/entry
-	name = "\improper Arrival Shuttle Hallway"
-	icon_state = "entry"
+/area/hallway/secondary/entry/fore
+	name = "\improper Arrival Shuttle Hallway - Fore"
+	icon_state = "entry_1"
+
+/area/hallway/secondary/entry/port
+	name = "\improper Arrival Shuttle Hallway - Port"
+	icon_state = "entry_2"
+
+/area/hallway/secondary/entry/starboard
+	name = "\improper Arrival Shuttle Hallway - Starboard"
+	icon_state = "entry_3"
+
+/area/hallway/secondary/entry/aft
+	name = "\improper Arrival Shuttle Hallway - Aft"
+	icon_state = "entry_4"
 
 //Command
 
@@ -1175,7 +1191,7 @@ var/list/ghostteleportlocs = list()
 
 /area/assembly/robotics
 	name = "\improper Robotics Lab"
-	icon_state = "ass_line"
+	icon_state = "robotics"
 
 /area/assembly/assembly_line //Derelict Assembly Line
 	name = "\improper Assembly Line"
