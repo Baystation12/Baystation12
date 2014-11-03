@@ -39,6 +39,7 @@ var/list/robot_verbs_default = list(
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/weapon/cell/cell = null
+	var/old_cell = null //For Admin Rejuv ~yash
 	var/obj/machinery/camera/camera = null
 
 	// Components are basically robot organs.
