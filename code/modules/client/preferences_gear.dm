@@ -455,6 +455,18 @@ var/global/list/gear_datums = list()
 	cost = 4
 	slot = slot_wear_suit
 
+/datum/gear/leather_jacket
+	display_name = "leather jacket"
+	path = /obj/item/clothing/suit/storage/leather_jacket
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/leather_jacket
+	display_name = "leather jacket, NanoTrasen"
+	path = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
+	cost = 3
+	slot = slot_wear_suit
+
 /datum/gear/unathi_mantle
 	display_name = "hide mantle (Unathi)"
 	path = /obj/item/clothing/suit/unathi/mantle

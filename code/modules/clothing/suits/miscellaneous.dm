@@ -380,7 +380,7 @@
 
 /obj/item/clothing/suit/storage/bomber
 	name = "bomber jacker"
-	desc = "A well-worn WW2 leather bomber jacket."
+	desc = "A thick, well-worn WW2 leather bomber jacket."
 	icon_state = "bomber"
 	item_state = "bomber"
 	flags = FPRINT | TABLEPASS
@@ -388,3 +388,17 @@
 	cold_protection = UPPER_TORSO|ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/storage/leather_jacket
+	name = "leather jacket"
+	desc = "A black leather coat."
+	icon_state = "leather_jacket"
+	item_state = "leather_jacket"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/leather_jacket/nanotrasen
+	name = "leather jacket"
+	desc = "A black leather coat. The letters NT are proudly displayed on the back."
+	icon_state = "leather_jacket_nt"
+	item_state = "leather_jacket_nt"
+	body_parts_covered = UPPER_TORSO|ARMS
