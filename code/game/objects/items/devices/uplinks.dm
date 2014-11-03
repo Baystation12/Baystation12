@@ -32,9 +32,10 @@ datum/nano_item_lists
 	var/list/nanoui_data = new // Additional data for NanoUI use
 
 /obj/item/device/uplink/New()
-	welcome = ticker.mode.uplink_welcome
-	uses = ticker.mode.uplink_uses
-	ItemsCategory = ticker.mode.uplink_items
+	if(ticker)
+		welcome = ticker.mode.uplink_welcome
+		uses = ticker.mode.uplink_uses
+		ItemsCategory = ticker.mode.uplink_items
 
 	var/datum/nano_item_lists/IL = generate_item_lists()
 	nanoui_items = IL.items_nano
