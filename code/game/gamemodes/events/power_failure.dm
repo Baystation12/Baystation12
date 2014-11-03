@@ -3,7 +3,7 @@
 	if(announce)
 		command_announcement.Announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
 
-	var/list/skipped_areas = list(/area/turret_protected/ai)
+	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/generators, /area/turret_protected/ai)
 
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
@@ -24,7 +24,7 @@
 			C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
-	var/list/skipped_areas = list(/area/turret_protected/ai)
+	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/generators, /area/turret_protected/ai)
 
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
