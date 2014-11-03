@@ -36,7 +36,7 @@ TO-DO:
 	var/list/speech_buffer = list() // Last phrase said near it and person who said it
 	var/mob/living/Leader = null // AI variable - tells the corgi to follow this person
 
-/*
+
 /mob/living/simple_animal/corgi/Life()
 	..()
 	regenerate_icons()
@@ -81,7 +81,7 @@ TO-DO:
 
 	//Removing from inventory
 	if(href_list["remove_inv"])
-		if(!Adjacent(usr) || !(ishuman(usr) || ismonkey(usr) || isrobot(usr) ||  isalienadult(usr)))
+		if(!Adjacent(usr) || !(ishuman(usr) || ismonkey(usr) || isrobot(usr)))
 			return
 		var/remove_from = href_list["remove_inv"]
 		switch(remove_from)
@@ -112,7 +112,7 @@ TO-DO:
 
 	//Adding things to inventory
 	else if(href_list["add_inv"])
-		if(!Adjacent(usr) || !(ishuman(usr) || ismonkey(usr) || isrobot(usr) ||  isalienadult(usr)))
+		if(!Adjacent(usr) || !(ishuman(usr) || ismonkey(usr) || isrobot(usr)))
 			return
 		var/add_to = href_list["add_inv"]
 		if(!usr.get_active_hand())
@@ -268,7 +268,7 @@ TO-DO:
 		if(/obj/item/clothing/head/soft)
 			name = "Corgi Tech [real_name]"
 			desc = "The reason your yellow gloves have chew-marks."
-*/
+
 
 
 //IAN! SQUEEEEEEEEE~
@@ -353,8 +353,11 @@ TO-DO:
 					if(H.mind)
 						if(H.mind.assigned_role == "Head of Personnel")
 							src.Leader = H
-						if((H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain") && !(locate(src.Friends, H)))
-							src.Friends.Add(H)
+						if(H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain")
+							if(locate(H) in src.Friends)
+								continue
+							else
+								src.Friends.Add(H)
 	else
 		return
 
