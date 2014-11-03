@@ -168,7 +168,7 @@ datum/nano_item_lists
 	data["menu"] = nanoui_menu
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
-
+	
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -179,6 +179,7 @@ datum/nano_item_lists
 		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
+
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
 /obj/item/device/uplink/hidden/interact(mob/user)
@@ -230,8 +231,22 @@ datum/nano_item_lists
 
 		for(var/datum/data/record/L in data_core.locked)
 			if(L.fields["id"] == id)
-				nanoui_data["exploit"] = L.fields
-				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["exploit_record"], "\n", "<br>")
+				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
+								 // We trade off being able to automatically add shit for more control over what gets passed to json
+								 // and if it's sanitized for html.
+				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
+				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
+				nanoui_data["exploit"]["name"] =  html_encode(L.fields["name"])
+				nanoui_data["exploit"]["sex"] =  html_encode(L.fields["sex"])
+				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
+				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
+				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
+				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
+				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
+				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
+				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
+				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
+
 				nanoui_data["exploit_exists"] = 1
 				break
 
