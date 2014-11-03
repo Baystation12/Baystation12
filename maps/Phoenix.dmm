@@ -6724,7 +6724,7 @@
 "czp" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor{icon_state = "whitehall"; dir = 8},/area/rnd/xenobiology)
 "czq" = (/obj/machinery/power/solar{id = "starboardsolar"; name = "Starboard Solar Array"},/obj/structure/cable/yellow,/turf/simulated/floor/airless{icon_state = "solarpanel"},/area/solar/starboard)
 "czr" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor,/area/atmos)
-"czs" = (/obj/machinery/atmospherics/trinary/mixer{dir = 8; icon_state = "map"; name = "Gas mixer (N2/O2)"; node1_concentration = 0.8; node2_concentration = 0.2; on = 1; pixel_x = 0; pixel_y = 0; req_access = null},/turf/simulated/floor,/area/atmos)
+"czs" = (/obj/machinery/atmospherics/trinary/mixer{dir = 8; icon_state = "map"; name = "Gas mixer (N2/O2)"; node1_concentration = 0.2; node2_concentration = 0.8; on = 1; pixel_x = 0; pixel_y = 0; req_access = null},/turf/simulated/floor,/area/atmos)
 "czt" = (/obj/machinery/atmospherics/pipe/manifold/visible/cyan,/obj/machinery/meter,/turf/simulated/floor,/area/atmos)
 "czu" = (/obj/machinery/atmospherics/binary/pump{dir = 4; name = "O2 to Mix"},/turf/simulated/floor,/area/atmos)
 "czv" = (/obj/machinery/atmospherics/pipe/simple/visible/yellow{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/turf/simulated/floor,/area/atmos)
