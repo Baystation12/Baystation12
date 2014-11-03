@@ -47,8 +47,10 @@
 		if(usr)
 			if (usr.client)
 				if(usr.client.holder)
+						var/adminomaly = new/obj/effect/energy_field/adminomaly
 					if(M.can_move == 1)
 						M.can_move = 0
+						M.overlays += adminomaly
 						if(M.occupant)
 							M.removeVerb(/obj/mecha/verb/eject)
 							M.occupant << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
@@ -61,6 +63,7 @@
 							log_admin_single("[key_name(usr)] froze an empty [M.name]")
 					else if(M.can_move == 0)
 						M.can_move = 1
+						M.overlays -= adminomaly
 						if(M.occupant)
 							M.addVerb(/obj/mecha/verb/eject)
 							M.occupant << "<b><font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
