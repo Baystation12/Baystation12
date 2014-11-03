@@ -166,6 +166,8 @@ var/global/list/uneatable = list(
 				dissipate_delay = 10
 				dissipate_track = 0
 				dissipate_strength = 10
+				message_admins("Singularity has reached stage 4 <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+				log_game("Singularity has reached stage 4 ([x],[y],[z])")
 		if(9)//this one also lacks a check for gens because it eats everything
 			current_size = 9
 			icon = 'icons/effects/288x288.dmi'
