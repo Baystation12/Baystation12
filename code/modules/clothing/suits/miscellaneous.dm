@@ -397,8 +397,47 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
-	name = "leather jacket"
 	desc = "A black leather coat. The letters NT are proudly displayed on the back."
 	icon_state = "leather_jacket_nt"
-	item_state = "leather_jacket_nt"
+
+//This one has buttons for some reason
+/obj/item/clothing/suit/storage/brown_jacket
+	name = "leather jacket"
+	desc = "A brown leather coat."
+	icon_state = "brown_jacket"
+	item_state = "brown_jacket"
+	var/open_state = "brown_jacket_open"
 	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/brown_jacket/nanotrasen
+	desc = "A brown leather coat. The letters NT are proudly displayed on the back."
+	icon_state = "brown_jacket_nt"
+	open_state = "brown_jacket_nt_open"
+	
+/obj/item/clothing/suit/storage/brown_jacket/verb/toggle()
+	set name = "Toggle Jacket Buttons"
+	set category = "Object"
+	set src in usr
+
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return 0
+	
+	//The inhand sprite (the mob sprite that appears when holding the item in your hand) 
+	//is unchanged, so update only icon_state, not item_state.
+	if(icon_state == open_state)
+		usr << "You button up the jacket."
+		src.icon_state = initial(icon_state)
+	
+	else if(icon_state == initial(icon_state))
+		usr << "You unbutton the jacket."
+		src.icon_state = open_state
+	
+	update_clothing_icon()	//so our overlays update
+
+/obj/item/clothing/suit/hoodie
+	name = "grey hoodie"
+	desc = "A warm, grey sweatshirt."
+	icon_state = "grey_hoodie"
+	item_state = "grey_hoodie"
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS

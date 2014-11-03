@@ -50,6 +50,12 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 
+/datum/gear/obandana
+	display_name = "bandana, orange"
+	path = /obj/item/clothing/head/orangebandana
+	cost = 2
+	slot = slot_head
+
 /datum/gear/bandana
 	display_name = "bandana, pirate-red"
 	path = /obj/item/clothing/head/bandana
@@ -456,15 +462,33 @@ var/global/list/gear_datums = list()
 	slot = slot_wear_suit
 
 /datum/gear/leather_jacket
-	display_name = "leather jacket"
+	display_name = "leather jacket, black"
 	path = /obj/item/clothing/suit/storage/leather_jacket
 	cost = 3
 	slot = slot_wear_suit
 
-/datum/gear/leather_jacket
-	display_name = "leather jacket, NanoTrasen"
+/datum/gear/leather_jacket_nt
+	display_name = "leather jacket, NanoTrasen, black"
 	path = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
 	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/brown_jacket
+	display_name = "leather jacket, brown"
+	path = /obj/item/clothing/suit/storage/brown_jacket
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/brown_jacket_nt
+	display_name = "leather jacket, NanoTrasen, brown"
+	path = /obj/item/clothing/suit/storage/brown_jacket/nanotrasen
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/hoodie
+	display_name = "hoodie, grey"
+	path = /obj/item/clothing/suit/hoodie
+	cost = 2
 	slot = slot_wear_suit
 
 /datum/gear/unathi_mantle

@@ -746,12 +746,9 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "paintedwelding"
 
-/obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
+/obj/item/clothing/head/orangebandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "Hey, I think we're missing a hazard vest..."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "taryn_kifer_1"
-	body_parts_covered = 0
 
 /obj/item/clothing/head/fluff
 	body_parts_covered = 0
