@@ -14,12 +14,13 @@
 			if(usr.client.holder)
 				if(!M.paralysis)
 					M.AdjustParalysis(2147483647)
-
+					var/adminomaly = new/obj/effect/energy_field/adminomaly
+					spawn(50)
+						M.overlays += adminomaly
 					M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
 					message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
 					log_admin("[key_name(usr)] froze [key_name(M)]")
 					log_admin_single("[key_name(usr)] froze [key_name(M)]")
-
 				else if (M.paralysis)
 					M.AdjustParalysis(-2147483647)
 					M.blinded = 0
