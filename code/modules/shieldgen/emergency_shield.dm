@@ -166,12 +166,13 @@
 
 /obj/machinery/shieldgen/proc/shields_up()
 	if(active) return 0 //If it's already turned on, how did this get called?
+	if (stat & NOPOWER) return 0 //just a double check on power before creating shields
 
 	src.active = 1
 	update_icon()
 
 	create_shields()
-	
+
 	idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		idle_power_usage += shield_tile.shield_idle_power
@@ -184,7 +185,7 @@
 	update_icon()
 
 	collapse_shields()
-	
+
 	update_use_power(0)
 
 /obj/machinery/shieldgen/proc/create_shields()
@@ -198,37 +199,40 @@
 /obj/machinery/shieldgen/proc/collapse_shields()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
 		del(shield_tile)
+		deployed_shields = list() // resets the list variable
 
 /obj/machinery/shieldgen/power_change()
 	..()
 	if (stat & NOPOWER)
 		collapse_shields()
 	else
-		create_shields()
+		if(active) //check for if the generator was active when power was last on
+			create_shields()
 	update_icon()
 
 /obj/machinery/shieldgen/process()
 	if (!active || (stat & NOPOWER))
 		return
-	
+
 	if(malfunction)
 		if(deployed_shields.len && prob(5))
 			del(pick(deployed_shields))
 	else
-		if (check_delay <= 0)
-			create_shields()
-			
-			var/new_power_usage = 0
-			for(var/obj/machinery/shield/shield_tile in deployed_shields)
-				new_power_usage += shield_tile.shield_idle_power
-			
-			if (new_power_usage != idle_power_usage)
-				idle_power_usage = new_power_usage
-				use_power(0)
-			
-			check_delay = 60
-		else
-			check_delay--
+		if(active)
+			if (check_delay <= 0)
+				create_shields()
+
+				var/new_power_usage = 0
+				for(var/obj/machinery/shield/shield_tile in deployed_shields)
+					new_power_usage += shield_tile.shield_idle_power
+
+				if (new_power_usage != idle_power_usage)
+					idle_power_usage = new_power_usage
+					use_power(0)
+
+				check_delay = 60
+			else
+				check_delay--
 
 /obj/machinery/shieldgen/proc/checkhp()
 	if(health <= 30)
@@ -288,6 +292,9 @@
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
+		if (stat & NOPOWER) //checks power levels in area before trying to activate
+			user << "\red \icon[src] ERROR:NO POWER IN AREA FOR THIS EQUIPMENT!"
+			return
 		if(anchored)
 			user.visible_message("\blue \icon[src] [user] activated the shield generator.", \
 				"\blue \icon[src] You activate the shield generator.", \
