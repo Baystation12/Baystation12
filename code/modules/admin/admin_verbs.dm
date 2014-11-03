@@ -379,6 +379,7 @@ var/list/admin_verbs_mentor = list(
 /client/proc/admin_ghost()
 	set category = "Admin"
 	set name = "Aghost"
+	var/adminomaly = new/obj/effect/energy_field/adminomaly
 	if(!holder)	return
 	if(istype(mob,/mob/dead/observer))
 		//re-enter
@@ -387,6 +388,8 @@ var/list/admin_verbs_mentor = list(
 			ghost.can_reenter_corpse = 1
 		if(ghost.can_reenter_corpse)
 			ghost.reenter_corpse()
+			var/mob/body = mob
+			body.overlays -= adminomaly
 		else
 			ghost << "<font color='red'>Error:  Aghost:  Can't reenter corpse, mentors that use adminHUD while aghosting are not permitted to enter their corpse again</font>"
 			return
@@ -399,6 +402,7 @@ var/list/admin_verbs_mentor = list(
 		//ghostize
 		var/mob/body = mob
 		body.ghostize(1)
+		body.overlays += adminomaly
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
