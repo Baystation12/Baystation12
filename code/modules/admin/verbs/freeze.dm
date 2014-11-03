@@ -14,7 +14,7 @@
 			if(usr.client.holder)
 				if(!M.paralysis)
 					M.AdjustParalysis(2147483647)
-					var/adminomaly = new/obj/effect/energy_field/adminomaly
+					var/adminomaly = new/obj/effect/overlay/adminoverlay
 					spawn(50)
 						M.overlays += adminomaly
 					M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
@@ -47,7 +47,7 @@
 		if(usr)
 			if (usr.client)
 				if(usr.client.holder)
-						var/adminomaly = new/obj/effect/energy_field/adminomaly
+					var/adminomaly = new/obj/effect/overlay/adminoverlay
 					if(M.can_move == 1)
 						M.can_move = 0
 						M.overlays += adminomaly
