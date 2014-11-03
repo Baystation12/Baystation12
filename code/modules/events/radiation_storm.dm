@@ -22,7 +22,7 @@
 				var/turf/T = get_turf(H)
 				if(!T)
 					continue
-				if(T.z != 1)
+				if(isNotStationLevel(T.z))
 					continue
 				if(istype(T.loc, /area/maintenance) || istype(T.loc, /area/crew_quarters))
 					continue
@@ -43,7 +43,7 @@
 				var/turf/T = get_turf(M)
 				if(!T)
 					continue
-				if(T.z != 1)
+				if(isNotStationLevel(T.z))
 					continue
 				M.apply_effect((rand(5,25)),IRRADIATE,0)
 			sleep(100)
