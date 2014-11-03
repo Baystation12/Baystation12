@@ -99,7 +99,7 @@
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = strength
 			part.update_icon()
-		
+
 		if (strength != old_strength)
 			active_power_usage = initial(active_power_usage) * (strength + 1)
 			use_power(0) //update power usage
@@ -110,11 +110,13 @@
 		if(strength < 0)
 			strength = 0
 		else
+			message_admins("PA Control Computer decreased to [strength] by [key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+			log_game("PA Control Computer decreased to [strength] by [usr.ckey]([usr]) in ([x],[y],[z])")
 			investigate_log("decreased to <font color='green'>[strength]</font> by [usr.key]","singulo")
 		for(var/obj/structure/particle_accelerator/part in connected_parts)
 			part.strength = strength
 			part.update_icon()
-		
+
 		if (strength != old_strength)
 			active_power_usage = initial(active_power_usage) * (strength + 1)
 			use_power(0) //update power usage
