@@ -68,12 +68,18 @@
 /obj/structure/sign/double/map
 	name = "station map"
 	desc = "A framed picture of the station."
+	var/mapimage = 'nano/images/nanomap_z1.png'
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"
 
 /obj/structure/sign/double/map/right
 	icon_state = "map-right"
+
+/obj/structure/sign/double/map/attack_hand(mob/user as mob)
+	user << browse_rsc(mapimage, "mapimage.png")
+	var/html = "<img src='nanomap_z1.png' height='500' width='500'>"
+	user << browse(html,"window=map;size=550x550")
 
 /obj/structure/sign/securearea
 	name = "\improper SECURE AREA"
