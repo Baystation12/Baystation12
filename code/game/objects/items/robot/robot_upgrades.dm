@@ -37,6 +37,12 @@
 		R.icon_state = "[R.ckey]-Standard"
 	del(R.module)
 	R.module = null
+	for(var/obj/item/borg/sight/hud/sec/S in R)
+		del S
+	for(var/obj/item/borg/sight/hud/med/M in R)
+		del M
+	R.sight_mode = 0
+	R.hud = null
 	R.camera.network.Remove(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
