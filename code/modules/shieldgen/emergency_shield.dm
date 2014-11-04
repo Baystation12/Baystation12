@@ -203,6 +203,7 @@
 
 /obj/machinery/shieldgen/power_change()
 	..()
+	if(!active) return
 	if (stat & NOPOWER)
 		collapse_shields()
 	else

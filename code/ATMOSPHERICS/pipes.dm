@@ -6,7 +6,7 @@
 	var/volume = 0
 	force = 20
 
-	//layer = 2.4 //under wires with their 2.44
+	layer = 2.4 //under wires with their 2.44
 	use_power = 0
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
