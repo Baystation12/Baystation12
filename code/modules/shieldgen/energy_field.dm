@@ -59,7 +59,3 @@
 
 	//return (!density || !height || air_group)
 	return !density
-
-/obj/effect/energy_field/adminomaly
-	name = "adminomaly"
-	desc = "A strange temporal distortion associated with the administrators"
