@@ -1,5 +1,6 @@
 /obj/item/clothing
 	name = "clothing"
+	siemens_coefficient = 0.9
 	var/list/species_restricted = null //Only these species can wear this kit.
 
 	/*
