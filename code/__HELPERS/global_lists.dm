@@ -139,6 +139,8 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	if(has_SR(M))
 		if(M.mind.special_role == "Response Team")
 			return 0
+		else if(M.mind.special_role == "")
+			return 0
 		else
 			return 1
 	else
