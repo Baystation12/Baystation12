@@ -344,6 +344,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		else if(H.is_slave_implanted(H))
 			H.visible_message("[H] roars in agony as the implant fizzes and fails.", "You feel a suggestive voice try to invade your mind, but it disappears before you can understand it!")
 			return 0
+		else if(H.emagged)
+			H.visible_message("[H] buzzes for a second, the implant instantly frying.", "You see static for a moment, yet your integrity holds.")
+			return 0
 
 		var/implant_remembered_info = ""
 		implant_remembered_info += "<b>Your account number is:</b> #[H.stored_account_number]<br>"
