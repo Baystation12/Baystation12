@@ -14,6 +14,7 @@
 	var/reinf = 0
 	var/basestate
 	var/shardtype = /obj/item/weapon/shard
+	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 //	var/silicate = 0 // number of units of silicate
 //	var/icon/silicateIcon = null // the silicated icon
 
@@ -218,6 +219,20 @@
 		state = 1 - state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		user << (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>")
+	else if(istype(W, /obj/item/weapon/wrench) && !anchored && (!state || !reinf))
+		if(!glasstype)
+			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
+		else
+			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
+			if(dir == SOUTHWEST)
+				var/index = null
+				index = 0
+				while(index < 2)
+					new glasstype(loc)
+					index++
+			else
+				new glasstype(loc)
+			del(src)
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
@@ -373,6 +388,8 @@
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
+	glasstype = /obj/item/stack/sheet/glass
+
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
@@ -380,6 +397,7 @@
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	shardtype = /obj/item/weapon/shard/phoron
+	glasstype = /obj/item/stack/sheet/glass/phoronglass
 	maxhealth = 120
 
 /obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -393,6 +411,7 @@
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
 	shardtype = /obj/item/weapon/shard/phoron
+	glasstype = /obj/item/stack/sheet/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160
 
@@ -406,6 +425,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
+	glasstype = /obj/item/stack/sheet/rglass
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
