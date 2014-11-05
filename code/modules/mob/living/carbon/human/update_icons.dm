@@ -430,6 +430,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
+	if(species.name == "Machine") //For showing Glasses over their monitors ~yash
+		if(glasses)
+			var/icon/glasses_worn
+			if(glasses.icon_override)
+				glasses_worn = new/icon("icon" = glasses.icon_override, "icon_state" = "[glasses.icon_state]")
+			else if(glasses.sprite_sheets && glasses.sprite_sheets[species.name])
+				glasses_worn= new/icon("icon" = glasses.sprite_sheets[species.name], "icon_state" = "[glasses.icon_state]")
+			else
+				glasses_worn= new/icon("icon" = 'icons/mob/eyes.dmi', "icon_state" = "[glasses.icon_state]")
+			face_standing.Blend(glasses_worn, ICON_OVERLAY)
+
 	overlays_standing[HAIR_LAYER]	= image(face_standing)
 
 	if(update_icons)   update_icons()
@@ -652,6 +663,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_standing[GLASSES_LAYER]	= null
 	if(update_icons)   update_icons()
+	if(species.name == "Machine")
+		update_hair(1)
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
 	overlays_standing[EARS_LAYER] = null
