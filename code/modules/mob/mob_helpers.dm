@@ -438,3 +438,10 @@ var/list/intents = list("help","disarm","grab","hurt")
 		var/turf/targetturf = get_turf(M)
 		if((targetturf.z == sourceturf.z))
 			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
+
+/proc/mobs_in_area(var/area/A)
+	var/list/mobs = new
+	for(var/mob/living/M in mob_list)
+		if(get_area(M) == A)
+			mobs += M
+	return mobs
