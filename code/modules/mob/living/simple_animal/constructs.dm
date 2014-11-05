@@ -44,10 +44,9 @@
 	del src
 	return
 
-/mob/living/simple_animal/construct/examine()
-	set src in oview()
-
-	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
+/mob/living/simple_animal/construct/examine(mob/user)
+	..(user)
+	var/msg = ""
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
@@ -57,7 +56,7 @@
 		msg += "</span>"
 	msg += "*---------*</span>"
 
-	usr << msg
+	user << msg
 	return
 
 /mob/living/simple_animal/construct/Bump(atom/movable/AM as mob|obj, yes)

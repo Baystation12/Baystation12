@@ -9,8 +9,6 @@
 	return
 
 /obj/structure/stool/bed/chair/New()
-	if(anchored)
-		src.verbs -= /atom/movable/verb/pull
 	..()
 	spawn(3)	//sorry. i don't think there's a better way to do this.
 		handle_rotation()
@@ -153,7 +151,7 @@
 	if(propelled)
 		var/mob/living/occupant = buckled_mob
 		unbuckle()
-		
+
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
 		occupant.throw_at(A, 3, propelled)

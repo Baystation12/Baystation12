@@ -1,13 +1,7 @@
-/mob/living/carbon/monkey/examine()
-	set src in oview()
+/mob/living/carbon/monkey/examine(mob/user)
+	..(user)
 
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
-
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
-
+	var/msg = ""
 	if (src.handcuffed)
 		msg += "It is \icon[src.handcuffed] handcuffed!\n"
 	if (src.wear_mask)
@@ -41,5 +35,5 @@
 
 	msg += "*---------*</span>"
 
-	usr << msg
+	user << msg
 	return

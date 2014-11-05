@@ -193,6 +193,11 @@ var/list/ai_verbs_default = list(
 	ai_list -= src
 	..()
 
+/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+	set popup_menu = 0
+	set src = usr.contents
+	return 0
+
 /mob/living/silicon/ai/proc/SetName(pickedName as text)
 	real_name = pickedName
 	name = pickedName
