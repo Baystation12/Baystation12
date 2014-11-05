@@ -242,8 +242,6 @@
 /mob/living/proc/restore_all_organs()
 	return
 
-
-
 /mob/living/proc/revive()
 	rejuvenate()
 	buckled = initial(src.buckled)
@@ -259,6 +257,8 @@
 		C.legcuffed = initial(C.legcuffed)
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
+	for(var/datum/disease/D in viruses)
+		D.cure(0)
 
 /mob/living/proc/rejuvenate()
 
@@ -277,6 +277,8 @@
 	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
+	halloss = 0
+	hallucination = 0
 
 	// fix blindness and deafness
 	blinded = 0
@@ -286,13 +288,50 @@
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
-	// restore all of a human's blood
 	if(ishuman(src))
 		var/mob/living/carbon/human/human_mob = src
 		human_mob.restore_blood()
+		human_mob.reagents.clear_reagents()
+		if(HUSK in human_mob.mutations)
+			human_mob.mutations.Remove(HUSK)
+			human_mob.status_flags |= DISFIGURED
+			human_mob.mutations.Remove(NOCLONE)
+			human_mob.update_mutantrace()
+			human_mob.UpdateAppearance()
+			human_mob.update_body(0)
+			human_mob.dna.ready_dna(human_mob)
+
 
 	// fix all of our organs
 	restore_all_organs()
+
+	if(isrobot(src))
+		var/mob/living/silicon/robot/R = src
+		for(var/V in R.components)
+			var/datum/robot_component/C = R.components[V]
+			C.installed = 1
+			C.brute_damage = 0
+			C.electronics_damage = 0
+			if(R.cell == null)
+				if(R.old_cell == null)
+					R.cell = new /obj/item/weapon/cell(R)
+				else
+					R.cell = R.old_cell
+					R.old_cell = null
+			R.cell.charge = R.cell.maxcharge
+			R.health = 200
+	if(isAI(src))
+		var/mob/living/silicon/ai/A = src
+		A.icon_state = A.rejuv_i_state
+		A.rejuv_i_state = null
+
+	if(isanimal(src))
+		var/mob/living/simple_animal/S = src
+		S.health = S.maxHealth
+		S.icon_state = S.icon_living
+		S.stat = CONSCIOUS
+		S.density = 1
+		S.Life()
 
 	// remove the character from the list of the dead
 	if(stat == 2)
