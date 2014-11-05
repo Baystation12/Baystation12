@@ -10,7 +10,7 @@
 	maxhealth = 25
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
-	req_one_access = list(access_security, access_forensics_lockers)
+	req_one_access = list(access_security, access_forensics_lockers, access_blueshield)
 
 	var/mob/target
 	var/oldtarget_name
@@ -293,7 +293,7 @@ Auto Patrol: []"},
 						src.anchored = 1
 						src.target_lastloc = M.loc
 						return
-					else if(istype(src.target,/mob/living/simple_animal))
+					else if(istype(src.target,/mob/living/simple_animal/hostile))
 						//just harmbaton them until dead
 						if(world.time > next_harm_time)
 							next_harm_time = world.time + 15
@@ -304,7 +304,7 @@ Auto Patrol: []"},
 								is_attacking = 0
 								update_icon()
 
-							var/mob/living/simple_animal/S = src.target
+							var/mob/living/simple_animal/hostile/S = src.target
 							S.AdjustStunned(10)
 							S.adjustBruteLoss(15)
 							if(S.stat)
