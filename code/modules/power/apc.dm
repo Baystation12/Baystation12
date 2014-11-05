@@ -968,7 +968,7 @@
 	/*if(!malf.can_shunt)
 		malf << "<span class='warning'>You cannot shunt.</span>"
 		return*/
-	if(src.z != 1)
+	if(isNotStationLevel(src.z))
 		return
 	src.occupier = new /mob/living/silicon/ai(src,malf.laws,null,1)
 	src.occupier.adjustOxyLoss(malf.getOxyLoss())

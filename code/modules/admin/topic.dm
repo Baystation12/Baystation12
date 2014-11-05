@@ -1283,11 +1283,11 @@
 						foo += text("<B>Is an AI</B> | ")
 					else
 						foo += text("<A HREF='?src=\ref[];makeai=\ref[]'>Make AI</A> | ", src, M)
-					if(M.z != 2)
+					if(isNotAdminLevel(M.z))
 						foo += text("<A HREF='?src=\ref[];sendtoprison=\ref[]'>Prison</A> | ", src, M)
 						foo += text("<A HREF='?src=\ref[];sendtomaze=\ref[]'>Maze</A> | ", src, M)
 					else
-						foo += text("<B>On Z = 2</B> | ")
+						foo += text("<B>On Z = [M.z]</B> | ")
 				else
 					foo += text("<B>Hasn't Entered Game</B> | ")
 				foo += text("<A HREF='?src=\ref[];revive=\ref[]'>Heal/Revive</A> | ", src, M)
