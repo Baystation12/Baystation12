@@ -41,7 +41,6 @@
 /obj/vehicle/train/cargo/engine/New()
 	..()
 	cell = new /obj/item/weapon/cell/high
-	verbs -= /atom/movable/verb/pull
 	key = new()
 	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
 	overlays += I
@@ -53,7 +52,7 @@
 		update_stats()
 		if(load && is_train_head())
 			load << "The drive motor briefly whines, then drones to a stop."
-	
+
 	if(is_train_head() && !on)
 		return 0
 
@@ -118,7 +117,7 @@
 
 		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
 		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
-		
+
 		if(on)
 			verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 		else
@@ -129,7 +128,7 @@
 
 	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
 	verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
-	
+
 	if(!on)
 		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
 	else
@@ -175,15 +174,15 @@
 	else
 		return ..()
 
-/obj/vehicle/train/cargo/engine/examine()
-	..()
+/obj/vehicle/train/cargo/engine/examine(mob/user)
+	if(!..(user, 1))
+		return
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
-	if(get_dist(usr,src) <= 1)
-		usr << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
-		usr << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
+
+	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
+	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
@@ -192,7 +191,7 @@
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(on)
 		usr << "The engine is already running."
 		return
@@ -210,10 +209,10 @@
 	set name = "Stop engine"
 	set category = "Object"
 	set src in view(1)
-	
+
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(!on)
 		usr << "The engine is already stopped."
 		return
@@ -229,10 +228,10 @@
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(!key || (load && load != usr))
 		return
-	
+
 	if(on)
 		turn_off()
 
@@ -291,13 +290,8 @@
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)
 	src.train_length = train_length
 	src.active_engines = active_engines
-	
+
 	if(!lead && !tow)
 		anchored = 0
-		if(verbs.Find(/atom/movable/verb/pull))
-			return
-		else
-			verbs += /atom/movable/verb/pull
 	else
 		anchored = 1
-		verbs -= /atom/movable/verb/pull

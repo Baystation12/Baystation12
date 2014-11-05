@@ -303,7 +303,6 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-
 	// Snowflake for space vines.
 	var/is_buckled = 0
 	if(buckled)
@@ -312,8 +311,7 @@
 				is_buckled = 1
 		else
 			is_buckled = 0
-
-	if( stat || is_buckled || !A || !x || !y || !A.x || !A.y ) return
+	if( is_buckled || !A || !x || !y || !A.x || !A.y || (stat && !isobserver(src))) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return
@@ -325,7 +323,7 @@
 	else
 		if(dx > 0)	direction = EAST
 		else		direction = WEST
-	usr.dir = direction
+	dir = direction
 	if(buckled && buckled.movable)
 		buckled.dir = direction
 		buckled.handle_rotation()

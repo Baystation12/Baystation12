@@ -200,10 +200,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
 		S.Crossed(src)
 
-/mob/dead/observer/examine()
-	if(usr)
-		usr << desc
-
 /mob/dead/observer/can_use_hands()	return 0
 /mob/dead/observer/is_active()		return 0
 
@@ -550,3 +546,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		W.message = message
 		W.add_hiddenprint(src)
 		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")
+
+/mob/dead/observer/pointed(atom/A as mob|obj|turf in view())
+	if(!..())
+		return 0
+	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
+	return 1

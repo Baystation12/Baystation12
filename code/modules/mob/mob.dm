@@ -190,7 +190,7 @@ var/list/slot_equipment_priority = list( \
 	set name = "Examine"
 	set category = "IC"
 
-	if(is_blind(src) || usr.stat)
+	if((is_blind(src) || usr.stat) && !isobserver(src))
 		src << "<span class='notice'>Something is there but you can't see it.</span>"
 		return
 
@@ -216,6 +216,7 @@ var/list/slot_equipment_priority = list( \
 		if(P)
 			del(P)	// qdel
 
+	face_atom(A)
 	return 1
 
 

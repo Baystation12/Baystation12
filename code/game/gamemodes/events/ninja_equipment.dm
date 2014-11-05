@@ -911,9 +911,8 @@ ________________________________________________________________________________
 				U.drop_item()
 	return 0
 
-/obj/item/clothing/suit/space/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/suit/space/space_ninja/examine(mob/user)
+	..(user)
 	if(s_initialized)
 		var/mob/living/carbon/human/U = affecting
 		if(s_control)
@@ -1168,9 +1167,8 @@ ________________________________________________________________________________
 	U << "You <b>[candrain?"disable":"enable"]</b> special interaction."
 	candrain=!candrain
 
-/obj/item/clothing/gloves/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/gloves/space_ninja/examine(mob/user)
+	..(user)
 	if(!canremove)
 		var/mob/living/carbon/human/U = loc
 		U << "The energy drain mechanism is: <B>[candrain?"active":"inactive"]</B>."
@@ -1306,12 +1304,11 @@ ________________________________________________________________________________
 	var/mob/U = loc
 	U << "Switching mode to <B>[ninja_vision.mode]</B>."
 
-/obj/item/clothing/mask/gas/voice/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/mask/gas/voice/space_ninja/examine(mob/user)
+	..(user)
 
-	usr << "<B>[ninja_vision.mode]</B> is active."//Leaving usr here since it may be on the floor or on a person.
-	usr << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
+	user << "<B>[ninja_vision.mode]</B> is active."
+	user << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
 
 /*
 ===================================================================================
