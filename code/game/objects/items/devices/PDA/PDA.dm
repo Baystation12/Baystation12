@@ -512,7 +512,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						index++
 						if(FM.img)
 							usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
-						messages[++messages.len] = list("author" = FM.author, "body" = FM.body, "message_type" = FM.message_type, "has_image" = (FM.img != null), "index" = index)
+							// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+						var/body = replacetext(FM.body, "\n", "<br>")
+						messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "has_image" = (FM.img != null), "index" = index)
 				feed["messages"] = messages
 		data["feed"] = feed
 
