@@ -61,7 +61,9 @@
 
 	overlays += image('icons/obj/power.dmi', "smes-op[online]")
 
-	if(charging)
+	if(charging == 2)
+		overlays += image('icons/obj/power.dmi', "smes-oc2")
+	else if (charging == 1)
 		overlays += image('icons/obj/power.dmi', "smes-oc1")
 	else
 		if(chargemode)
@@ -96,9 +98,11 @@
 			var/actual_load = add_load(target_load)		// add the load to the terminal side network
 			charge += actual_load * SMESRATE	// increase the charge
 
-			if (actual_load >= target_load) // did the powernet have enough power available for us?
+			if (actual_load >= target_load) // Did we charge at full rate?
+				charging = 2
+			else if (actual_load) // If not, did we charge at least partially?
 				charging = 1
-			else
+			else // Or not at all?
 				charging = 0
 
 	if(online)		// if outputting
