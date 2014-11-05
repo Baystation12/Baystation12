@@ -189,3 +189,22 @@
 	hitcost = 2500
 	attack_verb = list("poked")
 	slot_flags = null
+
+
+/obj/item/weapon/melee/baton/loaded/ntcane
+	name = "fancy cane"
+	desc = "A cane with special engraving on it. It has a strange button on the handle..."
+	icon_state = "cane_nt"
+	item_state = "cane_nt"
+	hitcost = 750
+
+/obj/item/weapon/melee/baton/loaded/ntcane/update_icon()
+	if(status)
+		icon_state = "cane_nt_active"
+		item_state = "cane_nt_active"
+		usr.regenerate_icons()
+	else
+		icon_state = "cane_nt"
+		item_state = "cane_nt"
+		usr.regenerate_icons()
+
