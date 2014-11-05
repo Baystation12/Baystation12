@@ -292,6 +292,7 @@
 		var/mob/living/carbon/human/human_mob = src
 		human_mob.restore_blood()
 		human_mob.reagents.clear_reagents()
+		human_mob.species.create_organs(human_mob)
 		if(HUSK in human_mob.mutations)
 			human_mob.mutations.Remove(HUSK)
 			human_mob.status_flags |= DISFIGURED
