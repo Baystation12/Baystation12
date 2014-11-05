@@ -223,6 +223,7 @@
 				"<span class='notice'>You added cables to the [src].</span>")
 		terminal.connect_to_network()
 		stat = 0
+		return 0
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
@@ -246,6 +247,7 @@
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 					del(terminal)
 		building_terminal = 0
+		return 0
 	return 1
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
