@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
+	directwired = 0
 	var/output = 50000		//Amount of power it tries to output
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
