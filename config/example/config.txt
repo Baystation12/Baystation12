@@ -267,6 +267,9 @@ CHARACTER_SLOTS 10
 ## Defines which Z-levels the station exists on. 
 STATION_LEVELS 1
 
+## Defines which Z-levels are used for admin functionality, such as Central Command and the Syndicate Shuttle
+ADMIN_LEVELS 2
+
 ## Defines which Z-levels which, for example, a Code Red announcement may affect
 CONTACT_LEVELS 1;5
 

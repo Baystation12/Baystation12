@@ -163,8 +163,10 @@
 								R.ResetSecurityCodes()
 
 							else
-								message_admins("\blue [key_name_admin(usr)] detonated [R.name]!")
-								log_game("\blue [key_name_admin(usr)] detonated [R.name]!")
+								message_admins("<span class='notice'>[key_name_admin(usr)] detonated [key_name(R.name)]!</span>")
+								log_game("<span class='notice'>[key_name_admin(usr)] detonated [key_name(R.name)]!</span>")
+								if(R.connected_ai)
+									R.connected_ai << "<br><br><span class='alert'>ALERT - Cyborg kill-switch activated: [R.name]</span><br>"
 								R.self_destruct()
 			else
 				usr << "\red Access Denied."
@@ -176,16 +178,14 @@
 					var/choice = input("Are you certain you wish to [R.canmove ? "lock down" : "release"] [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-							message_admins("\blue [key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
-							log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
+							message_admins("<span class='notice'>[key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!</span>")
+							log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [key_name(R.name)]!")
 							R.canmove = !R.canmove
 							if (R.lockcharge)
-							//	R.cell.charge = R.lockcharge
 								R.lockcharge = !R.lockcharge
 								R << "Your lockdown has been lifted!"
 							else
 								R.lockcharge = !R.lockcharge
-						//		R.cell.charge = 0
 								R << "You have been locked down!"
 
 			else

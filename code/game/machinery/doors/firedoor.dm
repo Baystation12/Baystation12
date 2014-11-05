@@ -32,6 +32,8 @@
 	var/list/users_to_open = new
 	var/next_process_time = 0
 
+	var/hatch_open = 0
+
 	power_channel = ENVIRON
 	use_power = 1
 	idle_power_usage = 5
@@ -199,6 +201,33 @@
 			update_icon()
 			return
 
+	if(density && istype(C, /obj/item/weapon/screwdriver))
+		hatch_open = !hatch_open
+		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
+									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
+		update_icon()
+		return
+
+	if(blocked && istype(C, /obj/item/weapon/crowbar))
+		if(!hatch_open)
+			user << "<span class='danger'>You must open the maintenance hatch first!</span>"
+		else
+			user.visible_message("<span class='danger'>[user] is removing the electronics from \the [src].</span>",
+									"You start to remove the electronics from [src].")
+			if(do_after(user,30))
+				if(blocked && density && hatch_open)
+					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
+					user.visible_message("<span class='danger'>[user] has removed the electronics from \the [src].</span>",
+										"You have removed the electronics from [src].")
+
+					new/obj/item/weapon/airalarm_electronics(src.loc)
+					var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(src.loc)
+					FA.anchored = 1
+					FA.density = 1
+					FA.update_icon()
+					del(src)
+		return
+
 	if(blocked)
 		user << "<span class='danger'>\The [src] is welded solid!</span>"
 		return
@@ -302,6 +331,11 @@
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
+	if(hatch_open)
+		hatch_open = 0
+		visible_message("The maintenance hatch of \the [src] closes.")
+		update_icon()
+
 	if(!forced)
 		if(stat & (BROKEN|NOPOWER))
 			return //needs power to open unless it was forced
@@ -326,6 +360,8 @@
 	overlays.Cut()
 	if(density)
 		icon_state = "door_closed"
+		if(hatch_open)
+			overlays += "hatch"
 		if(blocked)
 			overlays += "welded"
 		if(pdiff_alert)

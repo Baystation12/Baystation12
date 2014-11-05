@@ -21,7 +21,7 @@
 				sleep(-1)
 				if(!blob_cores.len)	break
 				var/obj/effect/blob/B = pick(blob_cores)
-				if(B.z != 1)
+				if(isNotStationLevel(B.z))
 					continue
 				B.Life()
 		spawn(30)
