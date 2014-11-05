@@ -225,11 +225,8 @@
 		else
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
-				var/index = null
-				index = 0
-				while(index < 2)
-					new glasstype(loc)
-					index++
+				var/obj/item/stack/sheet/mats = new glasstype(loc)
+				mats.amount = 2
 			else
 				new glasstype(loc)
 			del(src)
