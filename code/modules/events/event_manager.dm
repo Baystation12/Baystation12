@@ -8,6 +8,8 @@
 #define ASSIGNMENT_SCIENTIST "Scientist"
 #define ASSIGNMENT_SECURITY "Security"
 
+var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major")
+
 /datum/event_manager
 	var/list/available_events = list(
 		EVENT_LEVEL_MUNDANE = list(
@@ -55,7 +57,7 @@
 	var/list/datum/event/allEvents
 
 	var/list/last_event_time = list()
-	var/list/next_event_time = list(EVENT_LEVEL_MUNDANE = 1, EVENT_LEVEL_MODERATE = 0, EVENT_LEVEL_MAJOR = 0)
+	var/list/next_event_time = list(EVENT_LEVEL_MUNDANE = 0, EVENT_LEVEL_MODERATE = 0, EVENT_LEVEL_MAJOR = 0)
 	var/list/delay_modifier = list(EVENT_LEVEL_MUNDANE = 1, EVENT_LEVEL_MODERATE = 1, EVENT_LEVEL_MAJOR = 1)
 
 /datum/event_manager/New()
@@ -81,11 +83,15 @@
 		next_event_time[severity] = next_event_time[severity] + (60 * 10)
 		return
 
-	log_debug("Starting event of severity [severity].")
-	new EM.event_type(EM)
+	// Set when the event of this type was last fired and when to fire the next event
+	last_event_time[EM] = world.timeofday
+	set_event_delay(severity)
 
 	// Remove the event meta data from the list of available events
 	available_events[severity] -= EM
+
+	log_debug("Starting event of severity [severity].")
+	new EM.event_type(EM)	// Events are added and removed from the processing queue in New/Del
 
 /datum/event_manager/proc/acquire_event(var/list/events)
 	if(events.len == 0)
@@ -99,7 +105,7 @@
 			possible_events[EM] = event_weight
 
 	for(var/event_meta in last_event_time) if(possible_events[event_meta])
-		var/time_passed = world.time - event_last_fired[event_meta]
+		var/time_passed = world.timeofday - event_last_fired[event_meta]
 		var/weight_modifier = max(0, (config.expected_round_length - time_passed) / 300)
 		var/new_weight = max(possible_events[event_meta] - weight_modifier, 0)
 
@@ -112,8 +118,6 @@
 		return null
 
 	var/picked_event = pickweight(possible_events)
-	last_event_time[picked_event] = world.time
-
 	return picked_event
 
 /datum/event_manager/proc/set_event_delay(var/severity)
@@ -157,6 +161,54 @@
 
 	log_debug("Event '[E.name]' has completed.")
 
+
+/datum/event_manager/proc/Interact(var/mob/living/user)
+	var/window_x = 370
+	var/window_y = 470
+
+	var/html = GetInteractWindow()
+
+	var/datum/browser/popup = new(user, "event_manager", "Event Manager", window_x, window_y)
+	popup.set_content(html)
+	popup.open()
+
+/datum/event_manager/proc/GetInteractWindow()
+	var/table_options = " align='center'"
+	var/row_options1 = " width='80px'"
+	var/row_options2 = " width='260px'"
+
+	var/html = "<div class='block'>"
+	html += "<h3>Event Manager</h3>"
+	html += "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A><br>"
+	html += "<table[table_options]>"
+
+	html += "<tr><td>Severity</td><td>Time</td><td>Until start</td></tr>"
+	for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
+		var/station_time = max(0, next_event_time[severity] - world.timeofday)
+		html += "<tr>"
+		html += "<td[row_options1]>[severity_to_string[severity]]</font></td>"
+		html += "<td[row_options1]>[worldtime2text(station_time)]</td>"
+		html += "<td[row_options1]>[station_time / 600]</td>"
+		html += "<td[row_options2]>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>---</A>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>--</A>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>-</A>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>+</A>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>++</A>"
+		html +=   "<A align='right' href='?src=\ref[src];refresh=1'>+++</A>"
+		html += "</td>"
+		html += "</tr>"
+	html += "</table>"
+	html += "</div>"
+
+	return html
+
+/datum/event_manager/Topic(href, href_list)
+	if(..())
+		return
+
+	Interact(usr)
+
 /proc/debugStartEvent(var/severity)
 	event_manager.start_event(severity)
 
@@ -170,6 +222,14 @@
 	if(ispath(type))
 		new type(new /datum/event_meta(EVENT_LEVEL_MAJOR))
 		message_admins("[key_name_admin(usr)] has triggered an event. ([type])", 1)
+
+/client/proc/event_manager_panel()
+	set name = "Event Manager Panel"
+	set category = "Admin"
+	if(event_manager)
+		event_manager.Interact(usr)
+	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	return
 
 #undef ASSIGNMENT_ANY
 #undef ASSIGNMENT_AI
