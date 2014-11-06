@@ -1032,8 +1032,8 @@ About the new airlock wires panel:
 					else if(src.locked)
 						usr << "The door bolts are already dropped."
 					else
-						src.lock()
-						usr << "The door bolts have been dropped."
+						if(src.lock())
+							usr << "The door bolts have been dropped."
 				if(5)
 					//un-electrify door
 					if(src.isWireCut(AIRLOCK_WIRE_ELECTRIFY))
@@ -1372,12 +1372,13 @@ About the new airlock wires panel:
 	return
 
 /obj/machinery/door/airlock/proc/lock(var/forced=0)
-	if (operating || src.locked) return
+	if (operating || src.locked) return 0
 
 	src.locked = 1
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
+	return 1
 
 /obj/machinery/door/airlock/proc/unlock(var/forced=0)
 	if (operating || !src.locked) return

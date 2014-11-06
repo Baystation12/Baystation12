@@ -111,9 +111,18 @@
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 
-/obj/machinery/turretid/Topic(href, href_list)
-	if(..())
-		return
+/obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
+	if(!nowindow && ..())
+		return 0
+
+	if(inoperable())
+		return 0
+
+	if(ailock)
+		usr << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+		return 0
+
+	add_fingerprint(usr)
 	if (src.locked)
 		if (!istype(usr, /mob/living/silicon))
 			usr << "Control panel is locked!"
@@ -124,7 +133,14 @@
 	else if (href_list["toggleLethal"])
 		src.lethal = !src.lethal
 		src.updateTurrets()
-	src.attack_hand(usr)
+
+	if(!nowindow)
+		updateDialog()
+
+/obj/machinery/turretid/updateDialog()
+	if (stat & (BROKEN|MAINT))
+		return
+	..()
 
 /obj/machinery/turretid/proc/updateTurrets()
 	if(control_area)

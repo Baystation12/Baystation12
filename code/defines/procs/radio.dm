@@ -55,7 +55,6 @@
 	var/datum/reception/reception = new
 
 	// check if telecomms I/O route 1459 is stable
-	//var/telecomms_intact = telecomms_process(P.owner, owner, t)
 	reception.message_server = get_message_server()
 
 	var/datum/signal/signal = sender.telecomms_process()	// Be aware that this proc calls sleep, to simulate transmition delays

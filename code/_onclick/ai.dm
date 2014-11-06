@@ -121,12 +121,10 @@
 		Topic("aiDisable=4", list("aiDisable"="4"), 1)
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
-	Topic("breaker=1", list("breaker"="1"), 1) // 0 meaning window (consistency! wait...)
+	Topic("breaker=1", list("breaker"="1"), 1) // 1 meaning no window (consistency!)
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	if(!ailock)
-		src.enabled = !src.enabled
-		src.updateTurrets()
+	Topic("toggleOn", list("toggleOn"="1", 1)) // 1 meaning no window (consistency!)
 
 /atom/proc/AIAltClick(var/atom/A)
 	AltClick(A)
@@ -141,9 +139,7 @@
 	return
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	if(!ailock)
-		src.lethal = !src.lethal
-		src.updateTurrets()
+	Topic("toggleLethal", list("toggleLethal"="1", 1)) // 1 meaning no window (consistency!)
 
 /atom/proc/AIMiddleClick()
 	return

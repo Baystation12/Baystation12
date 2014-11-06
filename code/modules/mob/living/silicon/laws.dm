@@ -39,47 +39,48 @@
 		else
 			prefix = get_radio_key_from_channel(lawchannel == "Holopad" ? "department" : lawchannel) + " "
 
-	if(src.say("[prefix]Current Active Laws:") != 1)
-		return
+	var/can_state = statelaw("[prefix]Current Active Laws:")
 
 	//src.laws_sanity_check()
 	//src.laws.show_laws(world)
-	var/number = 1
-	sleep(10)
-
-	if (src.laws.zeroth)
+	if (can_state && src.laws.zeroth)
 		if (src.lawcheck[1] == "Yes") //This line and the similar lines below make sure you don't state a law unless you want to. --NeoFite
-			src.say("[prefix]0. [src.laws.zeroth]")
-			sleep(10)
+			can_state = statelaw("[prefix]0. [src.laws.zeroth]")
 
-	for (var/index = 1, index <= src.laws.ion.len, index++)
+	for (var/index = 1, can_state && index <= src.laws.ion.len, index++)
 		var/law = src.laws.ion[index]
 		var/num = ionnum()
 		if (length(law) > 0)
 			if (src.ioncheck[index] == "Yes")
-				src.say("[prefix][num]. [law]")
-				sleep(10)
+				can_state = statelaw("[prefix][num]. [law]")
 
-	for (var/index = 1, index <= src.laws.inherent.len, index++)
+	var/number = 1
+	for (var/index = 1, can_state && index <= src.laws.inherent.len, index++)
 		var/law = src.laws.inherent[index]
-
 		if (length(law) > 0)
 			if (src.lawcheck[index+1] == "Yes")
-				src.say("[prefix][number]. [law]")
-				sleep(10)
+				can_state = statelaw("[prefix][number]. [law]")
 			number++
 
-	for (var/index = 1, index <= src.laws.supplied.len, index++)
+	for (var/index = 1, can_state && index <= src.laws.supplied.len, index++)
 		var/law = src.laws.supplied[index]
-
 		if (length(law) > 0)
 			if(src.lawcheck.len >= number+1)
 				if (src.lawcheck[number+1] == "Yes")
-					src.say("[prefix][number]. [law]")
-					sleep(10)
+					can_state = statelaw("[prefix][number]. [law]")
 				number++
 
+	if(!can_state)
+		src << "<span class='danger'>Unable to state laws. Communication method unavailable.</span>"
+
 	stating_laws = 0
+
+/mob/living/silicon/proc/statelaw(var/law)
+	if(src.say(law))
+		sleep(10)
+		return 1
+
+	return 0
 
 /mob/living/silicon/proc/checklaws() //Gives you a link-driven interface for deciding what laws the statelaws() proc will share with the crew. --NeoFite
 	var/list = "<b>Which laws do you want to include when stating them for the crew?</b><br><br>"

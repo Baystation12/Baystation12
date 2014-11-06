@@ -452,6 +452,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			for (var/mob/R in heard_gibberish)
 				R.hear_radio(message, verbage, speaking, part_a, part_b, M, 1)
 
+	return 1
 
 /proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
 
