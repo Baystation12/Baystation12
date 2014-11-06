@@ -307,12 +307,20 @@
 	if(on != on_gs)
 		on_gs = on
 
+	if(istype(src, /obj/machinery/light/emergency/small))
+		if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
+			SetLuminosity(0)
+		if(!has_power())
+			SetLuminosity(brightness)
+		else
+			SetLuminosity(0)
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/s)
 	on = (s && status == LIGHT_OK)
 	update()
+
 
 // examine verb
 /obj/machinery/light/examine()
@@ -433,6 +441,7 @@
 /obj/machinery/light/proc/has_power()
 	var/area/A = src.loc.loc
 	return A.master.lightswitch && A.master.power_light
+
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -753,3 +762,36 @@
 		sharp = 1
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
+
+
+/*
+Emergency lights under here, also in the update proc
+
+These need expanding and/or reworking, but they're basic and they'll  do for now.
+*/
+
+/obj/machinery/light/emergency/has_power()
+	var/area/A = src.loc.loc
+	return A.master.power_light
+
+
+/obj/machinery/light/emergency/small
+	icon_state = "bulb1"
+	base_state = "bulb"
+	fitting = "bulb"
+	brightness = 4
+	l_color = COLOR_RED
+	desc = "A small lighting fixture."
+	light_type = /obj/item/weapon/light/emergency/bulb
+
+/obj/item/weapon/light/emergency/bulb
+	name = "emergency light bulb"
+	desc = "A replacement light bulb."
+	icon_state = "lbulb"
+	base_state = "lbulb"
+	item_state = "contvapour"
+	matter = list("glass" = 100)
+	brightness = 3
+	l_color = COLOR_RED
+
+
