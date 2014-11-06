@@ -6,6 +6,7 @@
 	anchored = 1.0
 	flags = FPRINT
 	pressure_resistance = 15
+	pixel_y = 0
 
 /obj/structure/stool/ex_act(severity)
 	switch(severity)
