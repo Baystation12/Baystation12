@@ -276,6 +276,10 @@
 			on = 0
 	return
 
+
+obj/machinery/light/proc/check_emergency_state()
+	return 0
+
 // update the icon_state and luminosity of the light depending on its state
 /obj/machinery/light/proc/update(var/trigger = 1)
 
@@ -306,14 +310,6 @@
 	active_power_usage = (luminosity * 10)
 	if(on != on_gs)
 		on_gs = on
-
-	if(istype(src, /obj/machinery/light/emergency/small))
-		if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
-			SetLuminosity(0)
-		if(!has_power())
-			SetLuminosity(brightness)
-		else
-			SetLuminosity(0)
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
@@ -774,12 +770,34 @@ These need expanding and/or reworking, but they're basic and they'll  do for now
 	var/area/A = src.loc.loc
 	return A.master.power_light
 
+/obj/machinery/light/emergency/check_emergency_state()
+	if(security_level >= SEC_LEVEL_RED)
+		return 1
+	if(emergency_shuttle.online())
+		return 1
+	if(!has_power())
+		return 1
+	else return 0
+
+
+/obj/machinery/light/emergency/update()
+	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
+		SetLuminosity(0)
+		icon_state = "firelight-burned"
+		return
+	if(check_emergency_state())
+		SetLuminosity(brightness)
+		icon_state = "firelight1"
+	else
+		SetLuminosity(0)
+		icon_state = "firelight0"
 
 /obj/machinery/light/emergency/small
-	icon_state = "bulb1"
-	base_state = "bulb"
+	icon_state = "firelight0"
+	base_state = "firelight"
 	fitting = "bulb"
 	brightness = 4
+	color = COLOR_RED
 	l_color = COLOR_RED
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/emergency/bulb
