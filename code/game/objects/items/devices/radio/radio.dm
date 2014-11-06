@@ -489,15 +489,13 @@
 		return get_mobs_in_view(canhear_range, src)
 
 
-/obj/item/device/radio/examine()
-	set src in view()
-
-	..()
-	if ((in_range(src, usr) || loc == usr))
+/obj/item/device/radio/examine(mob/user)
+	..(user)
+	if ((in_range(src, user) || loc == user))
 		if (b_stat)
-			usr.show_message("\blue \the [src] can be attached and modified!")
+			user.show_message("\blue \the [src] can be attached and modified!")
 		else
-			usr.show_message("\blue \the [src] can not be modified or attached!")
+			user.show_message("\blue \the [src] can not be modified or attached!")
 	return
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)

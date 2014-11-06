@@ -692,10 +692,8 @@
 
 	ReplaceWithPlating(explode)
 
-/turf/simulated/wall/examine()
-	set src in oview(1)
-
-	usr << "It looks like a regular wall."
+/turf/simulated/wall/examine(mob/user)
+	user << "It looks like a regular wall."
 	return
 
 /turf/simulated/wall/ex_act(severity)

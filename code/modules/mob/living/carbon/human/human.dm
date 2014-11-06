@@ -715,11 +715,11 @@
 
 	if (href_list["lookitem"])
 		var/obj/item/I = locate(href_list["lookitem"])
-		I.examine()
+		src.examinate(I)
 
 	if (href_list["lookmob"])
 		var/mob/M = locate(href_list["lookmob"])
-		M.examine()
+		src.examinate(M)
 
 	if (href_list["flavor_change"])
 		switch(href_list["flavor_change"])

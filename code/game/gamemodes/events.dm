@@ -151,7 +151,7 @@
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
-		if(T.z != 1)
+		if(isNotStationLevel(T.z))
 			continue
 		for(var/datum/disease/D in H.viruses)
 			foundAlready = 1
@@ -211,7 +211,7 @@
 
 /* // Haha, this is way too laggy. I'll keep the prison break though.
 	for(var/obj/machinery/light/L in world)
-		if(L.z != 1) continue
+		if(isNotStationLevel(L.z)) continue
 		L.flicker(50)
 
 	sleep(100)
@@ -220,7 +220,7 @@
 		var/turf/T = get_turf(H)
 		if(!T)
 			continue
-		if(T.z != 1)
+		if(isNotStationLevel(T.z))
 			continue
 		if(istype(H,/mob/living/carbon/human))
 			H.apply_effect((rand(15,75)),IRRADIATE,0)
@@ -237,7 +237,7 @@
 		var/turf/T = get_turf(M)
 		if(!T)
 			continue
-		if(T.z != 1)
+		if(isNotStationLevel(T.z))
 			continue
 		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)

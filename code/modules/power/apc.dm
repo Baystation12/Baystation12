@@ -199,32 +199,29 @@
 	spawn(5)
 		src.update()
 
-/obj/machinery/power/apc/examine()
-	set src in oview(1)
-
-	if(usr /*&& !usr.stat*/)
-		usr << "A control terminal for the area electrical systems."
-		..()
+/obj/machinery/power/apc/examine(mob/user)
+	if(..(user, 1))
+		user << "A control terminal for the area electrical systems."
 		if(stat & BROKEN)
-			usr << "Looks broken."
+			user << "Looks broken."
 			return
 		if(opened)
 			if(has_electronics && terminal)
-				usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
+				user << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
 			else if (!has_electronics && terminal)
-				usr << "There are some wires but no any electronics."
+				user << "There are some wires but no any electronics."
 			else if (has_electronics && !terminal)
-				usr << "Electronics installed but not wired."
+				user << "Electronics installed but not wired."
 			else /* if (!has_electronics && !terminal) */
-				usr << "There is no electronics nor connected wires."
+				user << "There is no electronics nor connected wires."
 
 		else
 			if (stat & MAINT)
-				usr << "The cover is closed. Something wrong with it: it doesn't work."
+				user << "The cover is closed. Something wrong with it: it doesn't work."
 			else if (malfhack)
-				usr << "The cover is broken. It may be hard to force it open."
+				user << "The cover is broken. It may be hard to force it open."
 			else
-				usr << "The cover is closed."
+				user << "The cover is closed."
 
 
 // update the APC icon to show the three base states
@@ -968,7 +965,7 @@
 	/*if(!malf.can_shunt)
 		malf << "<span class='warning'>You cannot shunt.</span>"
 		return*/
-	if(src.z != 1)
+	if(isNotStationLevel(src.z))
 		return
 	src.occupier = new /mob/living/silicon/ai(src,malf.laws,null,1)
 	src.occupier.adjustOxyLoss(malf.getOxyLoss())

@@ -47,15 +47,15 @@ var/const/MAX_ACTIVE_TIME = 400
 	else
 		del(src)
 
-/obj/item/clothing/mask/facehugger/examine()
-	..()
+/obj/item/clothing/mask/facehugger/examine(mob/user)
+	..(user)
 	switch(stat)
 		if(DEAD,UNCONSCIOUS)
-			usr << "\red \b [src] is not moving."
+			user << "\red \b [src] is not moving."
 		if(CONSCIOUS)
-			usr << "\red \b [src] seems to be active."
+			user << "\red \b [src] seems to be active."
 	if (sterile)
-		usr << "\red \b It looks like the proboscis has been removed."
+		user << "\red \b It looks like the proboscis has been removed."
 	return
 
 /obj/item/clothing/mask/facehugger/attackby()

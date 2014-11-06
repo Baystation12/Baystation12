@@ -46,16 +46,15 @@
 		..()
 		base_name = name
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
+	examine(mob/user)
+		if(!..(user, 2))
+			return
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
+			user << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue It is empty."
+			user << "\blue It is empty."
 		if (!is_open_container())
-			usr << "\blue Airtight lid seals it completely."
+			user << "\blue Airtight lid seals it completely."
 
 	attack_self()
 		..()

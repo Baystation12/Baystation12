@@ -92,15 +92,10 @@
 	for (var/mob/M in viewers(T))
 		M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
 
-/obj/item/device/mmi/posibrain/examine()
-
-	set src in oview()
-
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+/obj/item/device/mmi/posibrain/examine(mob/user)
+	if(!..(user))
 		return
-
+		
 	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 	msg += "<span class='warning'>"
 
@@ -113,7 +108,7 @@
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	msg += "<span class='info'>*---------*</span>"
-	usr << msg
+	user << msg
 	return
 
 /obj/item/device/mmi/posibrain/emp_act(severity)

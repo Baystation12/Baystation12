@@ -62,10 +62,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
-/obj/item/device/pda/examine()
-	..()
-	if(get_dist(usr, src) <= 1)
-		usr << "The time [worldtime2text()] is displayed in the corner of the screen."
+/obj/item/device/pda/examine(mob/user)
+	if(..(user, 1))
+		user << "The time [worldtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
@@ -512,7 +511,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						index++
 						if(FM.img)
 							usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
-						messages[++messages.len] = list("author" = FM.author, "body" = FM.body, "message_type" = FM.message_type, "has_image" = (FM.img != null), "index" = index)
+							// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+						var/body = replacetext(FM.body, "\n", "<br>")
+						messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "has_image" = (FM.img != null), "index" = index)
 				feed["messages"] = messages
 		data["feed"] = feed
 
