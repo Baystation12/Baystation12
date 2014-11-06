@@ -507,6 +507,12 @@
 			tmob.LAssailant = src
 
 		now_pushing = 0
+		if (istype(src, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src
+			if(H.species.flags & IS_SYNTHETIC)
+				if (istype(AM, /obj/machinery/recharge_station))
+					var/obj/machinery/recharge_station/F = AM
+					F.move_inside()
 		..()
 		if (!( istype(AM, /atom/movable) ))
 			return

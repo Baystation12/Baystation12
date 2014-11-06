@@ -104,7 +104,8 @@ rcd light flash thingy on matter drain
 				if(ipchack.uses > 0)
 					ipchack.uses --
 					for(var/mob/V in hearers(H, null))
-						V.show_message("\red [H] shudders violently!", 2)
+						if (V!=H)
+							V.show_message("\red [H] shudders violently!", 2)
 					spawn(5)
 						H.emagged = 1
 						for(var/obj/item/weapon/implant/loyalty/L in H)

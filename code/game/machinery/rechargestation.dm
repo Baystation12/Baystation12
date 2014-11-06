@@ -13,7 +13,7 @@
 	var/charging_cap_active = 25000			// Active Cap - When cyborg is inside
 	var/charging_cap_passive = 2500			// Passive Cap - Recharging internal capacitor when no cyborg is inside
 	var/icon_update_tick = 0				// Used to update icon only once every 10 ticks
-
+	var/saidrecharge
 
 
 	New()
@@ -133,6 +133,24 @@
 						current_internal_charge -= diff
 					else
 						update_use_power(1)
+				if (istype(occupant, /mob/living/carbon/human))
+					if(occupant.nutrition >= 440)
+						if(saidrecharge <=0)
+							occupant << "\blue You are fully Recharged "
+							saidrecharge = 1
+					else
+						occupant.nutrition += 20
+
+					var/mob/living/carbon/human/D = occupant
+					if(hasorgans(D))
+						var/list/datum/organ/external/S = D.get_damaged_organs(1, 1)
+						if (!S) return
+						for(var/datum/organ/external/E in S)
+							if(E.brute_dam && (E.status & ORGAN_ROBOT))
+								E.heal_damage(2,0,0,1)
+							if(E.burn_dam && (E.status & ORGAN_ROBOT))
+								E.heal_damage(2,0,0,1)
+
 		go_out()
 			if(!( src.occupant ))
 				return
@@ -143,6 +161,7 @@
 				src.occupant.client.perspective = MOB_PERSPECTIVE
 			src.occupant.loc = src.loc
 			src.occupant = null
+			saidrecharge = 0
 			build_icon()
 			update_use_power(1)
 			return
@@ -164,15 +183,24 @@
 			if (usr.stat == 2)
 				//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
 				return
-			if (!(istype(usr, /mob/living/silicon/)))
+
+			var/CanEnter = 0
+			if (istype(usr, /mob/living/silicon/))
+				if (!usr:cell)
+					usr<<"\blue Without a powercell, you can't be recharged."
+					//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
+					return
+				else
+					CanEnter = 1
+			if (istype(usr, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = usr
+				if (H.species && H.species.flags & IS_SYNTHETIC)
+					CanEnter = 1
+			if (!CanEnter)
 				usr << "\blue <B>Only non-organics may enter the recharger!</B>"
 				return
 			if (src.occupant)
 				usr << "\blue <B>The cell is already occupied!</B>"
-				return
-			if (!usr:cell)
-				usr<<"\blue Without a powercell, you can't be recharged."
-				//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
 				return
 			usr.stop_pulling()
 			if(usr && usr.client)
