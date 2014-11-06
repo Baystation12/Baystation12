@@ -24,6 +24,8 @@
 		for(var/job in restricted_jobs)
 			if(player.assigned_role == job)
 				possible_traitors -= player
+			if(player.assigned_role == "pAI")
+				possible_traitors -= player
 
 
 	for(var/mob/new_player/P in world)
