@@ -764,6 +764,11 @@
 		update()
 
 
+/*
+Emergency lights under here, also in the update proc
+
+These need expanding and/or reworking, but they're basic and they'll  do for now.
+*/
 
 /obj/machinery/light/emergency/has_power()
 	var/area/A = src.loc.loc
