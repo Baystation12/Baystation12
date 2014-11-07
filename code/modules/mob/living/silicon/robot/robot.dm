@@ -198,6 +198,7 @@ var/list/robot_verbs_default = list(
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -207,6 +208,7 @@ var/list/robot_verbs_default = list(
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -280,6 +282,7 @@ var/list/robot_verbs_default = list(
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Basic"] = "JanBot2"
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"

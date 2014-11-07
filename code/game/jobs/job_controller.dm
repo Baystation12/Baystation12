@@ -386,6 +386,7 @@ var/global/datum/controller/occupations/job_master
 
 			//Equip job items.
 			job.equip(H)
+			job.apply_fingerprints(H)
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
