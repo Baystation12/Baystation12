@@ -113,7 +113,8 @@
 				h_user << "Medium electrical sparks as you touch the [src], severely burning your hand!"
 				h_user.adjustFireLoss(rand(10,25))
 				h_user.Paralyse(5)
-			empulse(src.loc, 2, 4)
+			spawn(0)
+				empulse(src.loc, 2, 4)
 			charge = 0
 
 		if (36 to 60)
@@ -129,7 +130,8 @@
 				h_user << "Strong electrical arc sparks between you and [src], knocking you out for a while!"
 				h_user.adjustFireLoss(rand(35,75))
 				h_user.Paralyse(12)
-			empulse(src.loc, 8, 16)
+			spawn(0)
+				empulse(src.loc, 8, 16)
 			charge = 0
 			apcs_overload(1, 10)
 			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Uncontrolled discharge detected.\"")
@@ -143,7 +145,8 @@
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
 			h_user.adjustFireLoss(rand(150,195))
 			h_user.Paralyse(25)
-			empulse(src.loc, 32, 64)
+			spawn(0)
+				empulse(src.loc, 32, 64)
 			charge = 0
 			apcs_overload(5, 25)
 			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Significant uncontrolled discharge detected.\"")
@@ -228,7 +231,7 @@
 				for(var/obj/I in component_parts)
 					if(I.reliability != 100 && crit_fail)
 						I.crit_fail = 1
-						I.loc = src.loc
+					I.loc = src.loc
 				del(src)
 				return
 
