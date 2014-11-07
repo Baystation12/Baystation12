@@ -1,0 +1,3 @@
+<h1>Welcome to RB Station 2!</h1>
+
+-<i>This server is running Rubbed's modification of the <a href="http://baystation12.net/">Baystation 12</a> SS13 code.</i>
