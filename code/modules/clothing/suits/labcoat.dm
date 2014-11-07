@@ -61,6 +61,12 @@
 			if("labcoat_cmo")
 				src.icon_state = "labcoat_cmo_open"
 				usr << "You unbutton the labcoat."
+			if("labcoat_cmoalt_open")
+				src.icon_state = "labcoat_cmoalt"
+				usr << "You button up the labcoat."
+			if("labcoat_cmoalt")
+				src.icon_state = "labcoat_cmoalt_open"
+				usr << "You unbutton the labcoat."
 			if("labcoat_gen_open")
 				src.icon_state = "labcoat_gen"
 				usr << "You button up the labcoat."
@@ -131,6 +137,11 @@
 	desc = "Bluer than the standard model."
 	icon_state = "labcoat_cmo_open"
 	item_state = "labcoat_cmo"
+
+/obj/item/clothing/suit/storage/labcoat/cmoalt
+	name = "chief medical officer labcoat"
+	desc = "A labcoat with command blue highlights."
+	icon_state = "labcoat_cmoalt_open"
 
 /obj/item/clothing/suit/storage/labcoat/mad
 	name = "The Mad's labcoat"

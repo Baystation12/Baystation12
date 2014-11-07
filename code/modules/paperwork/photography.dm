@@ -286,7 +286,7 @@
 	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 
 	var/datum/picture/P = new()
-	P.fields["author"] = user
+	P.fields["name"] = "photo"
 	P.fields["icon"] = ic
 	P.fields["tiny"] = pc
 	P.fields["img"] = photoimage
@@ -305,6 +305,7 @@
 	Photo.construct(P)
 
 /obj/item/weapon/photo/proc/construct(var/datum/picture/P)
+	name = P.fields["name"]
 	icon = P.fields["icon"]
 	tiny = P.fields["tiny"]
 	img = P.fields["img"]
@@ -312,3 +313,15 @@
 	pixel_x = P.fields["pixel_x"]
 	pixel_y = P.fields["pixel_y"]
 	photo_size = P.fields["size"]
+
+/obj/item/weapon/photo/proc/copy()
+	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
+
+	p.icon = icon(icon, icon_state)
+	p.img = icon(img)
+	p.tiny = icon(tiny)
+	p.name = name
+	p.desc = desc
+	p.scribble = scribble
+
+	return p

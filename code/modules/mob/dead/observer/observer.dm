@@ -552,3 +552,42 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return 0
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
 	return 1
+
+/mob/dead/proc/manifest()
+	verbs += /mob/dead/proc/toggle_visibility
+	toggle_visibility()
+
+/mob/dead/proc/toggle_icon(var/icon)
+	if(!client)
+		return
+
+	var/iconRemoved = 0
+	for(var/image/I in client.images)
+		if(I.icon_state == icon)
+			iconRemoved = 1
+			del(I)
+
+	if(!iconRemoved)
+		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
+		client.images += J
+
+/mob/dead/proc/toggle_visibility()
+	set category = "Ghost"
+	set name = "Toggle Visibility"
+	set desc = "Allows you to turn (in)visible (almost) at will."
+
+	var/toggled_invisible
+
+	if(invisibility && world.time < toggled_invisible + 600)
+		src << "You must gather strength before you can turn visible again..."
+		return
+
+	if(invisibility == 0)
+		toggled_invisible = world.time
+		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible</span>")
+	else
+		src << "<span class='info>You are now visible</span>"
+
+	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
+	// Give the ghost a cult icon which should be visible only to itself
+	toggle_icon("cult")

@@ -961,6 +961,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
             </div>
         </div>
         
+		{{if data.reception != 1}}
+			<span class="bad">No reception with newscaster network.</span>
+		{{/if}}
+		
 		<div class="item">
             <div class="itemContent">
                 {{for data.feedChannels}}
@@ -977,7 +981,12 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 
     {{else data.mode == 61}}      
         <H2><span class="white">{{:data.feed.channel}}</span></H2>
-        <span class="white">Created by: </span><span class="average">{{:data.feed.author}}</span>
+        <span class="white">Created by: </span><span class="average">{{:data.feed.author}}<br></span>
+		
+		{{if data.reception != 1}}
+			<span class="bad">No reception with newscaster network.</span>
+		{{/if}}
+		
         <div class="statusDisplay" style="overflow: auto;">
             <div class="item">
                 <div class="itemContent" style="width: 100%;">
@@ -989,10 +998,12 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 						{{for data.feed.messages}}
 							-{{:value.body}}<br>
 							{{if value.has_image}}
-								pda_news_tmp_photo_{{:data.feed.channel}}_{{:value.index}}.png<br>
 								<img src='pda_news_tmp_photo_{{:data.feed.channel}}_{{:value.index}}.png' width = '180'><br>
+								{{if value.caption}}
+									<span class="caption">{{:value.caption}}</span><br>
+								{{/if}}
 							{{/if}}
-							<FONT SIZE=1>[{{:value.message_type}} by <span class="average">{{:value.author}}</span>]<br></FONT>
+							<span class="footer">[{{:value.message_type}} by <span class="average">{{:value.author}}</span> - {{:value.time_stamp}}]</span><br>
 							<br>
 						{{empty}}
 							<I>No feed messages found in channel...</I>
