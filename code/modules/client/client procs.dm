@@ -298,5 +298,6 @@
 		'icons/spideros_icons/sos_11.png',
 		'icons/spideros_icons/sos_12.png',
 		'icons/spideros_icons/sos_13.png',
-		'icons/spideros_icons/sos_14.png'
+		'icons/spideros_icons/sos_14.png',
+		'html/images/ntlogo.png'
 		)
