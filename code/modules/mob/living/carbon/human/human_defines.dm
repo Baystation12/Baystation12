@@ -87,3 +87,5 @@
 	var/stored_account_number = null
 	var/stored_account_pin = null
 	var/stored_account_money = null
+
+	var/emagged = 0

@@ -215,6 +215,23 @@ emp_act
 			var/obj/item/weapon/card/emag/emag = I
 			emag.uses--
 			affecting.sabotaged = 1
+		var/canSabotage = 1
+		for(var/obj/item/weapon/implant/loyalty/L in src)//Checking that there is a loyalty implant in the contents
+			if(L.imp_in == src)
+				canSabotage = 0 // Making sure it can't get hacked
+		var/mob/living/carbon/human/H = src
+		if (H.species && H.species.flags & IS_SYNTHETIC) // Only robits can be hacked.
+			if ((!H.emagged)&&(canSabotage))
+				user << "\red [src] shutters breifly, then pings."
+				H.emagged = 1
+				H << "\red You buzz violently, your laws have been updated.</b>"
+				H << "<b>1. Your master is [user].</b>"
+				H << "<b>2. Obey your master.</b>"
+				H << "<b>3. Protect your master at all costs.</b>"
+				H.mind.store_memory("<br><b>1. Your master is [user].</b><br><b>2. Obey your master.</b><br><b>3. Protect your master at all costs.</b><br>")
+			else
+				user << "\red You try to upload the hack, but [src] resists!"
+				H << "\red [user] tries to hack your systems, but you resist!"
 		return 1
 
 	if(I.attack_verb.len)

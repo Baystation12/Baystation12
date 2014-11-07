@@ -11,7 +11,7 @@
 		health = 100
 		stat = CONSCIOUS
 	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
+		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss - powerloss
 
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
@@ -292,6 +292,7 @@
 		var/mob/living/carbon/human/human_mob = src
 		human_mob.restore_blood()
 		human_mob.reagents.clear_reagents()
+		human_mob.species.create_organs(human_mob)
 		if(HUSK in human_mob.mutations)
 			human_mob.mutations.Remove(HUSK)
 			human_mob.status_flags |= DISFIGURED

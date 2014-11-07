@@ -14,8 +14,9 @@
 	var/oxy_l = ((species.flags & NO_BREATHE) ? 0 : getOxyLoss())
 	var/tox_l = ((species.flags & NO_POISON) ? 0 : getToxLoss())
 	var/clone_l = getCloneLoss()
+	var/power_l = powerloss
 
-	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute
+	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute - power_l
 
 	//TODO: fix husking
 	if( ((species.total_health - total_burn) < config.health_threshold_dead) && stat == DEAD)

@@ -245,6 +245,9 @@
 	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 
+	if(powerloss>=10)
+		msg += "\red [t_He] appears to be losing power!\n"
+
 	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
 			msg += "<span class='deadsay'>[t_He] [t_is] fast asleep. It doesn't look like they are waking up anytime soon.</span>\n"
