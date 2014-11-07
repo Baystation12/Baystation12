@@ -641,7 +641,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	var/turf/position = get_turf(src)
 	return (position.z in signal.data["level"] && signal.data["done"])
 
-/atom/proc/telecomms_process()
+/atom/proc/telecomms_process(var/do_sleep = 1)
 
 	// First, we want to generate a new radio signal
 	var/datum/signal/signal = new
@@ -664,8 +664,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
   //#### Sending the signal to all subspace receivers ####//
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
-
-	sleep(rand(10,25))
+		
+	if(do_sleep)
+		sleep(rand(10,25))
 
 	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
 
