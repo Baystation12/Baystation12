@@ -1,3 +1,5 @@
-#ignore everything here, except subdirectories.
+#ignore everything here, except the config folders.
 *
-!*/
+!example
+!names
+!RBstation
