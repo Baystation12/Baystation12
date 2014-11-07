@@ -7,7 +7,7 @@
 	edge = 0
 	flags = FPRINT | TABLEPASS | NOBLOODY
 
-/obj/item/weapon/melee/energy/proc/activate()
+/obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
@@ -16,7 +16,7 @@
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
-/obj/item/weapon/melee/energy/proc/deactivate()
+/obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)
@@ -30,9 +30,9 @@
 		if ((CLUMSY in user.mutations) && prob(50))
 			user.visible_message("\red [user] accidentally cuts \himself with \the [src].", "\red You accidentally cut yourself with \the [src].")
 			user.take_organ_damage(5,5)
-		deactivate()
+		deactivate(user)
 	else
-		activate()
+		activate(user)
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
@@ -72,12 +72,12 @@
 	sharp = 1
 	edge = 1
 
-/obj/item/weapon/melee/energy/axe/activate()
+/obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
 	icon_state = "axe1"
 	user << "\blue \The [src] is now energised."
 
-/obj/item/weapon/melee/energy/axe/deactivate()
+/obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
 	..()
 	icon_state = initial(icon_state)
 	user << "\blue \The [src] is de-energised. It's just a regular axe now."
@@ -104,7 +104,6 @@
 	w_class = 2
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
-	var/attack_verb_active = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/weapon/melee/energy/sword/New()
 	item_color = pick("red","blue","green","purple")
@@ -121,15 +120,15 @@
 /obj/item/weapon/melee/energy/sword/purple/New()
 	item_color = "purple"
 
-/obj/item/weapon/melee/energy/sword/activate()
+/obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	..()
-	attack_verb = attack_verb_active
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	icon_state = "sword[item_color]"
 	user << "\blue \The [src] is now energised."
 
-/obj/item/weapon/melee/energy/sword/deactivate()
+/obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	..()
-	attack_verb = initial(attack_verb)
+	attack_verb = list()
 	icon_state = initial(icon_state)
 	user << "\blue It can now be concealed."
 
@@ -143,7 +142,7 @@
 	desc = "Arrrr matey."
 	icon_state = "cutlass0"
 
-/obj/item/weapon/melee/energy/sword/pirate/activate()
+/obj/item/weapon/melee/energy/sword/pirate/activate(mob/living/user)
 	..()
 	icon_state = "cutlass1"
 
@@ -151,8 +150,8 @@
  *Energy Blade
  */
 
-//Can't be activated or deactivated, so not actually a subtype of energy
-/obj/item/weapon/melee/energy_blade
+//Can't be activated or deactivated, so no reason to be a subtype of energy
+/obj/item/weapon/melee/energy/blade
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
@@ -167,13 +166,13 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/melee/energy_blade/New()
+/obj/item/weapon/melee/energy/blade/New()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/item/weapon/melee/energy_blade/dropped()
+/obj/item/weapon/melee/energy/blade/dropped()
 	del(src)
 
-/obj/item/weapon/melee/energy_blade/proc/throw()
+/obj/item/weapon/melee/energy/blade/proc/throw()
 	del(src)
