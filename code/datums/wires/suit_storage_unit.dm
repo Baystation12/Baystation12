@@ -16,11 +16,6 @@ var/const/SUIT_STORAGE_WIRE_LOCKED		= 4
 		return 1
 	return 0
 
-/datum/wires/suit_storage_unit/Interact(var/mob/living/user)
-	if(CanUse(user))
-		var/obj/machinery/suit_cycler/S = holder
-		S.attack_hand(user)
-
 /datum/wires/suit_storage_unit/GetInteractWindow()
 	var/obj/machinery/suit_cycler/S = holder
 	. += ..()
