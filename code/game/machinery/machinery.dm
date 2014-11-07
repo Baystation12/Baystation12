@@ -113,8 +113,11 @@ Class Procs:
 
 /obj/machinery/New()
 	..()
-	machines += src
-	machinery_sort_required = 1
+	if(!machinery_sort_required && ticker)
+		dd_insertObjectList(machines, src)
+	else
+		machines += src
+		machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
