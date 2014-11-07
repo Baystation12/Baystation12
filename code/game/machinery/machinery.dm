@@ -192,7 +192,8 @@ Class Procs:
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
 /obj/machinery/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 	if(inoperable())
 		return 1
 	if(usr.restrained() || usr.lying || usr.stat)

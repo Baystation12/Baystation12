@@ -656,23 +656,21 @@ About the new airlock wires panel:
 	return 1
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
-	if(!nowindow)
-		..()
-	if(usr.stat || usr.restrained()|| usr.small)
-		return
-	add_fingerprint(usr)
+	if(..())
+		return 1
+
 	if(href_list["close"])
 		usr << browse(null, "window=airlock")
 		if(usr.machine==src)
 			usr.unset_machine()
-			return
+			return 1
 
 	if((in_range(src, usr) && istype(src.loc, /turf)) && src.p_open)
 		usr.set_machine(src)
 
 	if(istype(usr, /mob/living/silicon))
 		if (!check_synth_access(usr))
-			return
+			return 1
 
 		//AI
 		//aiDisable - 1 idscan, 2 disrupt main power, 3 disrupt backup power, 4 drop door bolts, 5 un-electrify door, 7 close door, 8 door safties, 9 door speed
@@ -848,7 +846,7 @@ About the new airlock wires panel:
 	update_icon()
 	if(!nowindow)
 		updateUsrDialog()
-	return
+	return 0
 
 /obj/machinery/door/airlock/attackby(C as obj, mob/user as mob)
 	//world << text("airlock attackby src [] obj [] mob []", src, C, user)

@@ -112,21 +112,17 @@
 	popup.open()
 
 /obj/machinery/turretid/Topic(href, href_list, var/nowindow = 0)
-	if(!nowindow && ..())
-		return 0
-
-	if(inoperable())
-		return 0
+	if(..())
+		return 1
 
 	if(ailock)
 		usr << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
-		return 0
+		return 1
 
-	add_fingerprint(usr)
 	if (src.locked)
 		if (!istype(usr, /mob/living/silicon))
 			usr << "Control panel is locked!"
-			return
+			return 1
 	if (href_list["toggleOn"])
 		src.enabled = !src.enabled
 		src.updateTurrets()

@@ -857,13 +857,12 @@
 	return 1
 
 /obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
-	if(!nowindow && ..())
-		return 0
+	if(..())
+		return 1
 
 	if(!can_use(usr, 1))
-		return 0
+		return 1
 
-	add_fingerprint(usr)
 	if (href_list["lock"])
 		coverlocked = !coverlocked
 
@@ -939,7 +938,7 @@
 				locked = !locked
 				update_icon()
 
-	return 1
+	return 0
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
