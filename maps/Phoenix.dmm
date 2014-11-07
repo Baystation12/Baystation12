@@ -3592,7 +3592,7 @@
 "brd" = (/obj/machinery/conveyor{dir = 4; id = "Disposals1"},/obj/structure/flora/pottedplant{anchored = 1; icon = 'icons/obj/stationobjs.dmi'; icon_state = "plasticflaps"; name = "Plastic Flaps"; tag = "icon-plant-01"},/turf/simulated/floor/plating,/area/quartermaster/storage)
 "bre" = (/obj/machinery/conveyor{dir = 4; id = "Disposals1"},/turf/simulated/floor,/area/quartermaster/storage)
 "brf" = (/obj/machinery/camera{c_tag = "Research Shuttle Maintainance"; dir = 2},/obj/machinery/light{dir = 1},/obj/machinery/conveyor{dir = 4; id = "Disposals1"},/turf/simulated/floor,/area/quartermaster/storage)
-"brg" = (/obj/structure/plasticflaps{opacity = 0},/obj/machinery/conveyor{dir = 4; id = "Disposals1"},/turf/simulated/floor,/area/quartermaster/storage)
+"brg" = (/obj/machinery/conveyor{dir = 4; id = "Disposals1"},/obj/structure/plasticflaps/mining,/turf/simulated/floor,/area/quartermaster/storage)
 "brh" = (/obj/machinery/disposal/deliveryChute{dir = 8},/obj/structure/disposalpipe/trunk,/turf/simulated/floor/plating,/area/quartermaster/storage)
 "bri" = (/obj/machinery/photocopier,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/status_display/supply_display{pixel_x = -32; pixel_y = 0},/turf/simulated/floor{dir = 8; icon_state = "brown"},/area/quartermaster/office)
 "brj" = (/obj/structure/disposalpipe/sortjunction/wildcard{tag = "icon-pipe-j1s (NORTH)"; icon_state = "pipe-j1s"; dir = 1},/turf/simulated/floor,/area/quartermaster/office)
