@@ -165,8 +165,6 @@
 		if(alarmed)
 			// Accountability!
 			users_to_open |= user.name
-			log_admin("[user]([user.ckey]) has opened an alarming emergency shutter.")
-			message_admins("[user]([user.ckey]) has opened an alarming emergency shutter.")
 			needs_to_close = 1
 		spawn()
 			open()

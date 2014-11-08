@@ -379,7 +379,7 @@
 	item_state = "blueponcho"
 
 /obj/item/clothing/suit/storage/bomber
-	name = "bomber jacker"
+	name = "bomber jacket"
 	desc = "A thick, well-worn WW2 leather bomber jacket."
 	icon_state = "bomber"
 	item_state = "bomber"
@@ -413,7 +413,7 @@
 	desc = "A brown leather coat. The letters NT are proudly displayed on the back."
 	icon_state = "brown_jacket_nt"
 	open_state = "brown_jacket_nt_open"
-	
+
 /obj/item/clothing/suit/storage/brown_jacket/verb/toggle()
 	set name = "Toggle Jacket Buttons"
 	set category = "Object"
@@ -421,17 +421,17 @@
 
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0
-	
-	//The inhand sprite (the mob sprite that appears when holding the item in your hand) 
+
+	//The inhand sprite (the mob sprite that appears when holding the item in your hand)
 	//is unchanged, so update only icon_state, not item_state.
 	if(icon_state == open_state)
 		usr << "You button up the jacket."
 		src.icon_state = initial(icon_state)
-	
+
 	else if(icon_state == initial(icon_state))
 		usr << "You unbutton the jacket."
 		src.icon_state = open_state
-	
+
 	update_clothing_icon()	//so our overlays update
 
 /obj/item/clothing/suit/hoodie

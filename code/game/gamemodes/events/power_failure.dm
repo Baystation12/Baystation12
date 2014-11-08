@@ -49,7 +49,7 @@
 		if(isNotStationLevel(S.z))
 			continue
 		S.charge = S.capacity
-		S.output = 200000
+		S.output = S.output_level_max // Most new SMESs on map are of buildable type, and may actually have higher output limit than 200kW. Use max output of that SMES instead.
 		S.online = 1
 		S.updateicon()
 		S.power_change()

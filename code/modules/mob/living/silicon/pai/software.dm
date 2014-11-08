@@ -229,7 +229,7 @@
 						return alert("Communications circuits remain uninitialized.")
 
 					var/target = locate(href_list["target"])
-					pda.create_message(src, target)
+					pda.create_message(src, target, 1)
 
 		// Accessing medical records
 		if("medicalrecord")

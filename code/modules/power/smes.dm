@@ -60,7 +60,9 @@
 
 	overlays += image('icons/obj/power.dmi', "smes-op[online]")
 
-	if(charging)
+	if(charging == 2)
+		overlays += image('icons/obj/power.dmi', "smes-oc2")
+	else if (charging == 1)
 		overlays += image('icons/obj/power.dmi', "smes-oc1")
 	else
 		if(chargemode)
@@ -95,9 +97,11 @@
 			var/actual_load = draw_power(target_load)		// add the load to the terminal side network
 			charge += actual_load * SMESRATE	// increase the charge
 
-			if (actual_load >= target_load) // did the powernet have enough power available for us?
+			if (actual_load >= target_load) // Did we charge at full rate?
+				charging = 2
+			else if (actual_load) // If not, did we charge at least partially?
 				charging = 1
-			else
+			else // Or not at all?
 				charging = 0
 
 	if(online)		// if outputting
@@ -222,6 +226,7 @@
 				"<span class='notice'>You added cables to the [src].</span>")
 		terminal.connect_to_network()
 		stat = 0
+		return 0
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
@@ -245,6 +250,7 @@
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 					del(terminal)
 		building_terminal = 0
+		return 0
 	return 1
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
