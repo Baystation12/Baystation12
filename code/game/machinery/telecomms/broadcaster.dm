@@ -330,7 +330,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='radio'><span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
 		var/freq_text = get_frequency_name(display_freq)
 
 		// --- Some more pre-message formatting ---
@@ -340,41 +340,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			part_b_extra = " <i>(Intercepted)</i>"
 		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
-
-		// Antags!
-		if (display_freq in ANTAG_FREQS)
-			part_a = "<span class='syndradio'><span class='name'>"
-		// centcomm channels (deathsquid and ert)
-		else if (display_freq in CENT_FREQS)
-			part_a = "<span class='centradio'><span class='name'>"
-
-		// command channel
-		else if (display_freq == COMM_FREQ)
-			part_a = "<span class='comradio'><span class='name'>"
-
-		// AI private channel
-		else if (display_freq == AI_FREQ)
-			part_a = "<span class='airadio'><span class='name'>"
-
-		// department radio formatting (poorly optimized, ugh)
-		else if (display_freq == SEC_FREQ)
-			part_a = "<span class='secradio'><span class='name'>"
-
-		else if (display_freq == ENG_FREQ)
-			part_a = "<span class='engradio'><span class='name'>"
-
-		else if (display_freq == SCI_FREQ)
-			part_a = "<span class='sciradio'><span class='name'>"
-
-		else if (display_freq == MED_FREQ)
-			part_a = "<span class='medradio'><span class='name'>"
-
-		else if (display_freq == SUP_FREQ) // cargo
-			part_a = "<span class='supradio'><span class='name'>"
-
-		// If all else fails and it's a dept_freq, color me purple!
-		else if (display_freq in DEPT_FREQS)
-			part_a = "<span class='deptradio'><span class='name'>"
 
 
 		// --- Filter the message; place it in quotes apply a verb ---
@@ -412,6 +377,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_syndicate += blackbox_msg
 				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
+				if(SRV_FREQ)
+					blackbox.msg_service += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
@@ -600,6 +567,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_syndicate += blackbox_msg
 				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
+				if(SRV_FREQ)
+					blackbox.msg_service += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
@@ -665,7 +634,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
   //#### Sending the signal to all subspace receivers ####//
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
-		
+
 	if(do_sleep)
 		sleep(rand(10,25))
 

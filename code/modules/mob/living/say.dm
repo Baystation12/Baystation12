@@ -12,6 +12,7 @@ var/list/department_radio_keys = list(
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
 	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":v" = "Service",		"#v" = "Service",		".v" = "Service",
 	  ":o" = "AI Private",	"#o" = "AI Private",	".o" = "AI Private",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
@@ -26,6 +27,7 @@ var/list/department_radio_keys = list(
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
 	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":V" = "Service",		"#V" = "Service",		".V" = "Service",
 	  ":O" = "AI Private",	"#O" = "AI Private",	".O" = "AI Private",
 
 	  //kinda localization -- rastaf0
