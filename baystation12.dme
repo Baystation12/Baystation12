@@ -707,6 +707,7 @@
 #include "code\modules\admin\permissionverbs\permissionedit.dm"
 #include "code\modules\admin\verbs\admin_announcement.dm"
 #include "code\modules\admin\verbs\admin_clean.dm"
+#include "code\modules\admin\verbs\admincryo.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
 #include "code\modules\admin\verbs\adminpm.dm"

@@ -18,7 +18,7 @@
 	item_state = "armor"
 	blood_overlay_type = "armor"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 60, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
@@ -38,7 +38,7 @@
 	desc = "Not as strong as Security Armor but enough to protecs against some damage."
 	icon_state = "armorvr"
 	item_state = "armorvr"
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 5, laser = 15, energy = 5, bomb = 15, bio = 0, rad = 0)
 
 
 /obj/item/clothing/suit/armor/riot
