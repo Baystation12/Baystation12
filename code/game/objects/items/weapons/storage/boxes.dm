@@ -497,6 +497,15 @@
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/tube(src)
 
+/obj/item/weapon/storage/box/lights/emergency
+	name = "box of replacement emergency light bulbs"
+	icon_state = "lightr"
+
+/obj/item/weapon/storage/box/lights/emergency/New()
+	..()
+	for(var/i = 0; i < 21; i++)
+		new /obj/item/weapon/light/emergency/bulb(src)
+
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"
 	icon_state = "lightmixed"

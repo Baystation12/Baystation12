@@ -121,6 +121,9 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
+	// Sort the machinery list so it doesn't cause a lagspike at roundstart
+	process_machines_sort()
+
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
