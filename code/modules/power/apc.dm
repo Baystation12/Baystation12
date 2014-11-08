@@ -1,8 +1,3 @@
-#define APC_WIRE_IDSCAN 1
-#define APC_WIRE_MAIN_POWER1 2
-#define APC_WIRE_MAIN_POWER2 3
-#define APC_WIRE_AI_CONTROL 4
-
 //update_state
 #define UPSTATE_CELL_IN 1
 #define UPSTATE_OPENED1 2
@@ -821,6 +816,8 @@
 		return 0
 	if(!user.client)
 		return 0
+	if(inoperable())
+		return 0
 	if(!user.IsAdvancedToolUser())
 		user << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
 		return 0
@@ -859,12 +856,12 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list)
+/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
 	if(..())
-		return 0
+		return 1
 
 	if(!can_use(usr, 1))
-		return 0
+		return 1
 
 	if (href_list["lock"])
 		coverlocked = !coverlocked
@@ -941,7 +938,7 @@
 				locked = !locked
 				update_icon()
 
-	return 1
+	return 0
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
