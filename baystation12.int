@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\Phoenix.dmm;code\game\gamemodes\revolution\rp_revolution.dm;code\modules\admin\verbs\randomverbs.dm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\game\gamemodes code\game\gamemodes\revolution code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\modules code\modules\admin code\modules\admin\verbs code\modules\power icons icons\obj maps External 
-FILE: maps\Phoenix.dmm
-LAST_COMPILE_TIME: 1414538412
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
