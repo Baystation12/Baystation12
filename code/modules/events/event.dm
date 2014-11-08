@@ -1,4 +1,5 @@
 /datum/event_meta
+	var/name = ""
 	var/weight = 1
 	var/min_weight = 1
 	var/max_weight = 1
@@ -7,7 +8,8 @@
 	var/list/role_weights = list()
 	var/datum/event/event_type
 
-/datum/event_meta/New(var/event_severity, var/datum/event/type, var/event_weight, var/list/job_weights, var/min_event_weight, var/max_event_weight)
+/datum/event_meta/New(var/event_severity, var/event_name, var/datum/event/type, var/event_weight, var/list/job_weights, var/min_event_weight, var/max_event_weight)
+	name = event_name
 	severity = event_severity
 	event_type = type
 	weight = event_weight

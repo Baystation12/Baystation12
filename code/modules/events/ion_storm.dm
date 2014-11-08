@@ -1,6 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
 
 /datum/event/ionstorm
+	name = "Ion Storm"
 	var/botEmagChance = 0.5
 	var/list/players = list()
 

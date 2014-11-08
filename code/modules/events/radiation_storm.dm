@@ -1,4 +1,5 @@
 /datum/event/radiation_storm
+	name = "Radiation Storm"
 	var/const/enterBelt 	= 60
 	var/const/leaveBelt 	= 170
 	var/const/revokeAccess	= 230
@@ -18,7 +19,7 @@
 	if(activeFor == enterBelt)
 		command_announcement.Announce("The station has entered the radiation belt. Please remain in a sheltered area until we have passed the radiation belt.", "Anomaly Alert")
 		radiate()
-		
+
 	if(activeFor > enterBelt && activeFor < leaveBelt)
 		postStartTicks++
 

@@ -1,6 +1,7 @@
 //Cortical borer spawn event - care of RobRichards1997 with minor editing by Zuhayr.
 
 /datum/event/borer_infestation
+	name 			= "Borer Infestation"
 	oneShot = 1
 
 /datum/event/borer_infestation

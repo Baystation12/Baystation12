@@ -1,4 +1,5 @@
 /datum/event/grid_check	//NOTE: Times are measured in master controller ticks!
+	name = "Grid Check"
 	announceWhen		= 5
 
 /datum/event/grid_check/setup()

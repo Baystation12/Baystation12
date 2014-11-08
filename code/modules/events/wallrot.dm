@@ -1,4 +1,5 @@
 datum/event/wallrot/setup()
+	name = "Wallroot"
 	announceWhen = rand(0, 300)
 	endWhen = announceWhen + 1
 

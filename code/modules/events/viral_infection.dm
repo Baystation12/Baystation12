@@ -1,4 +1,5 @@
 datum/event/viral_infection/setup()
+	name = "Viral Outbreak"
 	announceWhen = rand(0, 3000)
 	endWhen = announceWhen + 1
 
