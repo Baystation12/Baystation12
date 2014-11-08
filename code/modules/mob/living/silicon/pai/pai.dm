@@ -413,17 +413,10 @@
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
 
-/mob/living/silicon/pai/examine()
+/mob/living/silicon/pai/examine(mob/user)
+	..(user)
 
-	set src in oview()
-
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
-
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src][name], a personal AI!"
-
+	var/msg = ""
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
@@ -438,7 +431,7 @@
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt is [pose]"
 
-	usr << msg
+	user << msg
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

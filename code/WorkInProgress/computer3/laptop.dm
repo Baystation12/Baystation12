@@ -138,6 +138,9 @@
 			usr << "You can't reach it."
 			return
 
+		close_laptop(usr)
+
+	proc/close_laptop(mob/user = null)
 		if(istype(loc,/obj/item/device/laptop))
 			testing("Close closed computer")
 			return
@@ -146,7 +149,8 @@
 			return
 
 		if(stat&BROKEN)
-			usr << "\The [src] is broken!  You can't quite get it closed."
+			if(user)
+				user << "\The [src] is broken!  You can't quite get it closed."
 			return
 
 		if(!portable)
@@ -157,7 +161,8 @@
 			portable.loc = loc
 			loc = portable
 			stat |= MAINT
-			usr << "You close \the [src]."
+			if(user)
+				user << "You close \the [src]."
 
 	auto_use_power()
 		if(stat&MAINT)

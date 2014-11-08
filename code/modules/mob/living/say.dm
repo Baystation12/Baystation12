@@ -88,8 +88,7 @@ proc/get_radio_key_from_channel(var/channel)
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			say_signlang(message, pick(speaking.signlang_verb), speaking)
-			return 1
+			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
 	//make sure the air can transmit speech
 	var/datum/gas_mixture/environment = T.return_air()
@@ -154,6 +153,7 @@ proc/get_radio_key_from_channel(var/channel)
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
+	return 1
 
 /obj/effect/speech_bubble
 	var/mob/parent

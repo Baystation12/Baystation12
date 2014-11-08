@@ -25,14 +25,14 @@
 
 /mob/living/silicon/say(var/message)
 	if (!message)
-		return
+		return 0
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
 			src << "You cannot send IC messages (muted)."
-			return
+			return 0
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
+			return 0
 
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
@@ -56,7 +56,7 @@
 
 	//Must be concious to speak
 	if (stat)
-		return
+		return 0
 
 	var/verb = say_quote(message)
 
@@ -105,13 +105,12 @@
 					return AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,message_mode,verb,speaking)
+					return R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,message_mode,verb,speaking)
-			return 1
-
-			return 1
+					return P.radio.talk_into(src,message,message_mode,verb,speaking)
+			return 0
+			
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
@@ -120,14 +119,14 @@
 						return 0
 					else
 						log_say("[key_name(src)] : [message]")
-						AI.aiRadio.talk_into(src,message,null,verb,speaking)
+						return AI.aiRadio.talk_into(src,message,null,verb,speaking)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,null,verb,speaking)
+					return R.radio.talk_into(src,message,null,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,null,verb,speaking)
-			return 1
+					return P.radio.talk_into(src,message,null,verb,speaking)
+			return 0
 
 		else
 			if(message_mode)
@@ -138,14 +137,14 @@
 							return 0
 						else
 							log_say("[key_name(src)] : [message]")
-							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
+							return AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
-						R.radio.talk_into(src,message,message_mode,verb,speaking)
+						return R.radio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
-						P.radio.talk_into(src,message,message_mode,verb,speaking)
-				return 1
+						return P.radio.talk_into(src,message,message_mode,verb,speaking)
+				return 0
 
 	return ..(message,speaking,verb)
 

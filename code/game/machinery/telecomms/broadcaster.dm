@@ -452,6 +452,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			for (var/mob/R in heard_gibberish)
 				R.hear_radio(message, verbage, speaking, part_a, part_b, M, 1)
 
+	return 1
 
 /proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
 
@@ -641,7 +642,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	var/turf/position = get_turf(src)
 	return (position.z in signal.data["level"] && signal.data["done"])
 
-/atom/proc/telecomms_process()
+/atom/proc/telecomms_process(var/do_sleep = 1)
 
 	// First, we want to generate a new radio signal
 	var/datum/signal/signal = new
@@ -664,8 +665,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
   //#### Sending the signal to all subspace receivers ####//
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
-
-	sleep(rand(10,25))
+		
+	if(do_sleep)
+		sleep(rand(10,25))
 
 	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
 

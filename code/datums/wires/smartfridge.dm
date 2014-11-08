@@ -2,6 +2,10 @@
 	holder_type = /obj/machinery/smartfridge
 	wire_count = 3
 
+/datum/wires/smartfridge/secure
+	random = 1
+	wire_count = 4
+
 var/const/SMARTFRIDGE_WIRE_ELECTRIFY	= 1
 var/const/SMARTFRIDGE_WIRE_THROW		= 2
 var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
@@ -15,11 +19,6 @@ var/const/SMARTFRIDGE_WIRE_IDSCAN		= 4
 	if(S.panel_open)
 		return 1
 	return 0
-
-/datum/wires/smartfridge/Interact(var/mob/living/user)
-	if(CanUse(user))
-		var/obj/machinery/smartfridge/S = holder
-		S.attack_hand(user)
 
 /datum/wires/smartfridge/GetInteractWindow()
 	var/obj/machinery/smartfridge/S = holder

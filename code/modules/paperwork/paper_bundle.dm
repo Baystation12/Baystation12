@@ -94,14 +94,11 @@
 				user << "\red You must hold \the [P] steady to burn \the [src]."
 
 
-/obj/item/weapon/paper_bundle/examine()
-	set src in oview(1)
-
-	usr << desc
-	if(in_range(usr, src))
-		src.attack_self(usr)
+/obj/item/weapon/paper_bundle/examine(mob/user)
+	if(..(user, 1))
+		src.attack_self(user)
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>It is too far away.</span>"
 	return
 
 

@@ -1,8 +1,3 @@
-#define APC_WIRE_IDSCAN 1
-#define APC_WIRE_MAIN_POWER1 2
-#define APC_WIRE_MAIN_POWER2 3
-#define APC_WIRE_AI_CONTROL 4
-
 //update_state
 #define UPSTATE_CELL_IN 1
 #define UPSTATE_OPENED1 2
@@ -199,32 +194,29 @@
 	spawn(5)
 		src.update()
 
-/obj/machinery/power/apc/examine()
-	set src in oview(1)
-
-	if(usr /*&& !usr.stat*/)
-		usr << "A control terminal for the area electrical systems."
-		..()
+/obj/machinery/power/apc/examine(mob/user)
+	if(..(user, 1))
+		user << "A control terminal for the area electrical systems."
 		if(stat & BROKEN)
-			usr << "Looks broken."
+			user << "Looks broken."
 			return
 		if(opened)
 			if(has_electronics && terminal)
-				usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
+				user << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
 			else if (!has_electronics && terminal)
-				usr << "There are some wires but no any electronics."
+				user << "There are some wires but no any electronics."
 			else if (has_electronics && !terminal)
-				usr << "Electronics installed but not wired."
+				user << "Electronics installed but not wired."
 			else /* if (!has_electronics && !terminal) */
-				usr << "There is no electronics nor connected wires."
+				user << "There is no electronics nor connected wires."
 
 		else
 			if (stat & MAINT)
-				usr << "The cover is closed. Something wrong with it: it doesn't work."
+				user << "The cover is closed. Something wrong with it: it doesn't work."
 			else if (malfhack)
-				usr << "The cover is broken. It may be hard to force it open."
+				user << "The cover is broken. It may be hard to force it open."
 			else
-				usr << "The cover is closed."
+				user << "The cover is closed."
 
 
 // update the APC icon to show the three base states
@@ -824,6 +816,8 @@
 		return 0
 	if(!user.client)
 		return 0
+	if(inoperable())
+		return 0
 	if(!user.IsAdvancedToolUser())
 		user << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
 		return 0
@@ -862,12 +856,12 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list)
+/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
 	if(..())
-		return 0
+		return 1
 
 	if(!can_use(usr, 1))
-		return 0
+		return 1
 
 	if (href_list["lock"])
 		coverlocked = !coverlocked
@@ -944,7 +938,7 @@
 				locked = !locked
 				update_icon()
 
-	return 1
+	return 0
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
@@ -1228,7 +1222,6 @@
 		update()
 	else if (last_ch != charging)
 		queue_icon_update()
-	src.updateDialog()
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)
 // on 0=off, 1=on, 2=autooff

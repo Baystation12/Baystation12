@@ -21,6 +21,7 @@ var/list/robot_verbs_default = list(
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 6
+	var/datum/wires/robot/wires
 
 //Hud stuff
 
@@ -81,6 +82,8 @@ var/list/robot_verbs_default = list(
 
 	add_language("Robot Talk", 1)
 
+	wires = new(src)
+
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
@@ -106,7 +109,7 @@ var/list/robot_verbs_default = list(
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
 		camera.network = list("SS13","Robots")
-		if(isWireCut(5)) // 5 = BORG CAMERA
+		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
 
 	initialize_components()
@@ -303,6 +306,7 @@ var/list/robot_verbs_default = list(
 
 	choose_icon(6,module_sprites)
 	radio.config(module.channels)
+	notify_ai(2)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
@@ -320,6 +324,8 @@ var/list/robot_verbs_default = list(
 		changed_name = custom_name
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
+
+	notify_ai(3, real_name, changed_name)
 	real_name = changed_name
 	name = real_name
 
@@ -672,7 +678,7 @@ var/list/robot_verbs_default = list(
 				user << "You close the cover."
 				opened = 0
 				updateicon()
-			else if(wiresexposed && isWireCut(1) && isWireCut(2) && isWireCut(3) && isWireCut(4) && isWireCut(5))
+			else if(wiresexposed && wires.IsAllCut())
 				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
 				if(!mmi)
 					user << "\The [src] has no brain to remove."
@@ -743,7 +749,7 @@ var/list/robot_verbs_default = list(
 
 	else if (istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool))
 		if (wiresexposed)
-			interact(user)
+			wires.Interact(user)
 		else
 			user << "You can't reach the wiring."
 
@@ -1231,6 +1237,13 @@ var/list/robot_verbs_default = list(
 		R << "Buffers flushed and reset. Camera system shutdown.  All systems operational."
 		src.verbs -= /mob/living/silicon/robot/proc/ResetSecurityCodes
 
+/mob/living/silicon/robot/proc/SetLockdown(var/state = 1)
+	// They stay locked down if their wire is cut.
+	if(wires.LockedCut())
+		state = 1
+	lockcharge = state
+	update_canmove()
+
 /mob/living/silicon/robot/mode()
 	set name = "Activate Held Object"
 	set category = "IC"
@@ -1311,3 +1324,14 @@ var/list/robot_verbs_default = list(
 		use_power(RC.active_usage)
 		return 1
 	return 0
+
+/mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
+	if(!connected_ai)
+		return
+	switch(notifytype)
+		if(1) //New Cyborg
+			connected_ai << "<br><br><span class='notice'>NOTICE - New cyborg connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>"
+		if(2) //New Module
+			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg module change detected: [name] has loaded the [module.name] module.</span><br>"
+		if(3) //New Name
+			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg reclassification detected: [oldname] is now designated as [newname].</span><br>"

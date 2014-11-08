@@ -62,10 +62,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
-/obj/item/device/pda/examine()
-	..()
-	if(get_dist(usr, src) <= 1)
-		usr << "The time [worldtime2text()] is displayed in the corner of the screen."
+/obj/item/device/pda/examine(mob/user)
+	if(..(user, 1))
+		user << "The time [worldtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
@@ -419,6 +418,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["new_Message"] = new_message
 	data["new_News"] = new_news
 
+	var/datum/reception/reception = get_reception(src, do_sleep = 0)
+	var/has_reception = reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER
+	data["reception"] = has_reception
+
 	if(mode==2)
 		var/convopdas[0]
 		var/pdas[0]
@@ -479,43 +482,43 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(isnull(data["aircontents"]))
 			data["aircontents"] = list("reading" = 0)
 	if(mode==6)
-		if(news_network.network_channels.len != feeds.len)
-			var/datum/reception/reception = get_reception(src)
-			if(reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)
-				feeds.Cut()
-				for(var/datum/feed_channel/channel in news_network.network_channels)
-					feeds[++feeds.len] = list("name" = channel.channel_name, "censored" = channel.censored)
-
+		if(has_reception)
+			feeds.Cut()
+			for(var/datum/feed_channel/channel in news_network.network_channels)
+				feeds[++feeds.len] = list("name" = channel.channel_name, "censored" = channel.censored)
 		data["feedChannels"] = feeds
 	if(mode==61)
-		var/list/feed = feed_info[active_feed]
-		if(!feed)
-			feed = list()
-			feed["updated"] = -1
-			feed_info[active_feed] = feed
 		var/datum/feed_channel/FC
 		for(FC in news_network.network_channels)
 			if(FC.channel_name == active_feed["name"])
 				break
-		if(FC.updated > feed["updated"])
-			var/datum/reception/reception = get_reception(src)
-			if(reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)
-				feed["channel"] 	= FC.channel_name
-				feed["author"]		= FC.author
-				feed["updated"]		= FC.updated
-				feed["censored"]	= FC.censored
 
-				var/list/messages = list()
-				if(!FC.censored)
-					var/index = 0
-					for(var/datum/feed_message/FM in FC.messages)
-						index++
-						if(FM.img)
-							usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
-							// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
-						var/body = replacetext(FM.body, "\n", "<br>")
-						messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "has_image" = (FM.img != null), "index" = index)
-				feed["messages"] = messages
+		var/list/feed = feed_info[active_feed]
+		if(!feed)
+			feed = list()
+			feed["channel"] = FC.channel_name
+			feed["author"]	= "Unknown"
+			feed["censored"]= 0
+			feed["updated"] = -1
+			feed_info[active_feed] = feed
+
+		if(FC.updated > feed["updated"] && has_reception)
+			feed["author"]	= FC.author
+			feed["updated"]	= FC.updated
+			feed["censored"] = FC.censored
+
+			var/list/messages = list()
+			if(!FC.censored)
+				var/index = 0
+				for(var/datum/feed_message/FM in FC.messages)
+					index++
+					if(FM.img)
+						usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
+					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+					var/body = replacetext(FM.body, "\n", "<br>")
+					messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "time_stamp" = FM.time_stamp, "has_image" = (FM.img != null), "caption" = FM.caption, "index" = index)
+			feed["messages"] = messages
+
 		data["feed"] = feed
 
 	nanoUI = data
@@ -784,7 +787,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if("Detonate")//Detonate PDA... maybe
 			if(cartridge && cartridge.access_detonate_pda)
 				var/obj/item/device/pda/P = locate(href_list["target"])
-				var/datum/reception/reception = get_reception(src, P, "")	// get_reception calls sleep further down the line
+				var/datum/reception/reception = get_reception(src, P, "", do_sleep = 0)
 				if(!(reception.message_server && reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER))
 					U.show_message("\red An error flashes on your [src]: Connection unavailable", 1)
 					return
