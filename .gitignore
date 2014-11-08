@@ -12,3 +12,5 @@
 *.dmb
 *.lk
 data/
+maploader_debug.txt
+Thumbs.db
