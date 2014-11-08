@@ -10,6 +10,7 @@
 	var/slice_path
 	var/slices_num
 	center_of_mass = list("x"=15, "y"=15)
+	w_class = 2
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -125,11 +126,10 @@
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
-	if(istype(W,/obj/item/weapon/storage))
-		..() // -> item/attackby()
-
+		return
+	
+	// Eating with forks
 	if(istype(W,/obj/item/weapon/kitchen/utensil))
-
 		var/obj/item/weapon/kitchen/utensil/U = W
 
 		if(!U.reagents)
@@ -157,64 +157,45 @@
 			del(src)
 		return
 
-	if((slices_num <= 0 || !slices_num) || !slice_path)
-		return 0
+	if (is_sliceable())
+		//these are used to allow hiding edge items in food that is not on a table/tray
+		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
+		var/hide_item = !has_edge(W) || !can_slice_here
+		
+		if (hide_item)
+			if (W.w_class >= src.w_class || W.is_robot_module())
+				return
+				
+			user << "\red You slip [W] inside [src]."
+			user.u_equip(W)
+			if ((user.client && user.s_active != src))
+				user.client.screen -= W
+			W.dropped(user)
+			add_fingerprint(user)
+			contents += W
+			return
+		
+		if (has_edge(W))
+			if (!can_slice_here)
+				user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
+				return
+			
+			var/slices_lost = 0
+			if (W.w_class > 3)
+				user.visible_message("\blue [user] crudely slices \the [src] with [W]!", "\blue You crudely slice \the [src] with your [W]!")
+				slices_lost = rand(1,min(1,round(slices_num/2)))
+			else
+				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
+			
+			var/reagents_per_slice = reagents.total_volume/slices_num
+			for(var/i=1 to (slices_num-slices_lost))
+				var/obj/slice = new slice_path (src.loc)
+				reagents.trans_to(slice,reagents_per_slice)
+			del(src)
+			return
 
-	var/inaccurate = 0
-	if( \
-			istype(W, /obj/item/weapon/kitchenknife) || \
-			istype(W, /obj/item/weapon/butch) || \
-			istype(W, /obj/item/weapon/scalpel) || \
-			istype(W, /obj/item/weapon/kitchen/utensil/knife) \
-		)
-	else if( \
-			istype(W, /obj/item/weapon/circular_saw) || \
-			istype(W, /obj/item/weapon/melee/energy/sword) && W:active || \
-			istype(W, /obj/item/weapon/melee/energy/blade) || \
-			istype(W, /obj/item/weapon/shovel) || \
-			istype(W, /obj/item/weapon/hatchet) \
-		)
-		inaccurate = 1
-	else if(W.w_class <= 2 && istype(src,/obj/item/weapon/reagent_containers/food/snacks/sliceable))
-		if(!iscarbon(user))
-			return 1
-		user << "\red You slip [W] inside [src]."
-		user.u_equip(W)
-		if ((user.client && user.s_active != src))
-			user.client.screen -= W
-		W.dropped(user)
-		add_fingerprint(user)
-		contents += W
-		return
-	else
-		return 1
-	if ( \
-			!isturf(src.loc) || \
-			!(locate(/obj/structure/table) in src.loc) && \
-			!(locate(/obj/machinery/optable) in src.loc) && \
-			!(locate(/obj/item/weapon/tray) in src.loc) \
-		)
-		user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
-		return 1
-	var/slices_lost = 0
-	if (!inaccurate)
-		user.visible_message( \
-			"\blue [user] slices \the [src]!", \
-			"\blue You slice \the [src]!" \
-		)
-	else
-		user.visible_message( \
-			"\blue [user] crudely slices \the [src] with [W]!", \
-			"\blue You crudely slice \the [src] with your [W]!" \
-		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))
-	var/reagents_per_slice = reagents.total_volume/slices_num
-	for(var/i=1 to (slices_num-slices_lost))
-		var/obj/slice = new slice_path (src.loc)
-		reagents.trans_to(slice,reagents_per_slice)
-	del(src)
-
-	return
+/obj/item/weapon/reagent_containers/food/snacks/proc/is_sliceable()
+	return (slices_num <= 0 || !slices_num || !slice_path)
 
 /obj/item/weapon/reagent_containers/food/snacks/Del()
 	if(contents)
@@ -240,7 +221,6 @@
 				N.visible_message("[N] nibbles away at [src].", "")
 			//N.emote("nibbles away at the [src]")
 			N.health = min(N.health + 1, N.maxHealth)
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
@@ -2152,6 +2132,9 @@
 // All the food items that can be sliced into smaller bits like Meatbread and Cheesewheels
 
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
+
+/obj/item/weapon/reagent_containers/food/snacks/sliceable
+	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
 	name = "meatbread loaf"
