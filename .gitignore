@@ -1,4 +1,11 @@
-#ignore misc BYOND files
+#Ignore misc BYOND files.
+
+#git rm -r --cached <filename> <filename>
+
+#git rm . -r --cached
+#git add .
+#git commit -m "Fixed untracked files."
+
 *.log
 *.int
 *.rsc
