@@ -2850,6 +2850,23 @@
 			if(href_list["vsc"] == "default")
 				vsc.SetDefault(usr)
 
+	// Maxis
+	else if(href_list["icwl"])
+		if(check_rights(R_MOD|R_ADMIN))
+
+			var/mob/M = locate(href_list["icwl"])
+
+			if(icwl_isWhitelisted(M.ckey))
+				icwl_remList(M.ckey)
+				message_admins("\blue [key_name_admin(usr)] has dewhitelisted [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has dewhitelisted [M.ckey]")
+			else
+				icwl_addList(M.ckey)
+				message_admins("\blue [key_name_admin(usr)] has whitelisted [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has whitelisted [M.ckey]")
+
+			show_player_panel(M)
+
 	// player info stuff
 
 	if(href_list["add_player_info"])
