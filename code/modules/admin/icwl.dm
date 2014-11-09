@@ -1,19 +1,23 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-var/icwl_keylist[0]		//to store the keys & ranks
+var/icwl_keylist[]		//to store the keys & ranks
 
 
 /hook/startup/proc/loadICWL()
 	icwl_loadWhitelist()
 	return 1
 
+/proc/icwl_saveWhitelist()
+	for(var/p in icwl_keylist)
+		if(!p)
+			icwl_remove(p)
+	fdel("data/icwl.list")
+	text2file(list2text(icwl_keylist, "\n"), "data/icwl.list")
+
 /proc/icwl_loadWhitelist()
-	var/savefile/S = new("data/icwl.list")
-	S >> icwl_keylist
-	log_admin("Loading IC Whitelist")
+	icwl_keylist = file2list("data/icwl.list")
 	if (!length(icwl_keylist))
 		icwl_keylist=list()
-		log_admin("icwl_keylist was empty")
 
 /proc/icwl_addList(ckey)
 	if (!ckey) return
@@ -39,10 +43,6 @@ var/icwl_keylist[0]		//to store the keys & ranks
 			if(findtext(s, ckey) == 1)
 				return 1
 	return 0
-
-/proc/icwl_saveWhitelist()
-	var/savefile/S=new("data/icwl.list")
-	S << jobban_keylist
 
 /proc/icwl_ageCheck(job, age)
 	var/minage = 99
