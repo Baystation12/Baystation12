@@ -195,7 +195,7 @@
 					desc = "Oh great, now you feel nostalgic about sunrises back on Terra..."
 					center_of_mass = list("x"=16, "y"=10)
 				if("phoronspecial")
-					icon_state = "phoronspecialglass"
+					icon_state = "toxinsspecialglass"
 					name = "Toxins Special"
 					desc = "Whoah, this thing is on FIRE"
 				if("beepskysmash")
