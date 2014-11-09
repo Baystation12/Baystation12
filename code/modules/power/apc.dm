@@ -109,6 +109,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
+	luminosity = 2
 
 
 /proc/RandomAPCWires()

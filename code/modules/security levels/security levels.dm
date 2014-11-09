@@ -1,8 +1,9 @@
-/var/security_level = 0
+/var/global/security_level = 0
 //0 = code green
 //1 = code blue
 //2 = code red
 //3 = code delta
+//4 = code black
 
 //config.alert_desc_blue_downto
 /var/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
@@ -73,6 +74,9 @@
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
+
+		for(var/obj/machinery/light/emergency/EL in world)
+			EL.update()
 	else
 		return
 

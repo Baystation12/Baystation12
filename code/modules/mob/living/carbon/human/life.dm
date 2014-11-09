@@ -36,7 +36,6 @@
 
 /mob/living/carbon/human/Life()
 
-
 	set invisibility = 0
 	set background = 1
 
@@ -1120,6 +1119,24 @@
 						emote("gasp")
 				if(!reagents.has_reagent("inaprovaline"))
 					adjustOxyLoss(1)*/
+
+			if (species && species.flags & IS_SYNTHETIC) // IPCs NEED power to not die. Atleast, Not Crit.
+				if (nutrition <= 150)
+					if (powerloss<160)
+						powerloss = min(powerloss+((150-nutrition)/(150/2)), 160)
+						updatehealth()
+						if (prob(0.5)) // Fairly low chance
+							Paralyse(1)
+							for(var/mob/V in hearers(src, null))
+								if (V!=src)
+									show_message("\red [src] shudders violently!", 2)
+							src << "\red You lock up breifly to conserve power."
+					if (prob(1)) // Yell at the IPC. Help them know WHY they're dying.
+						src << "\red [pick(list("WARNING","ERROR","PRIORITY"))]: [pick(list("POWER LEVELS", "CELL INTEGRITY"))] LOW. PLEASE [pick(list("FIND", "SEEK"))] [pick(list("POWER", "POWER SOURCE", "A CHARGER"))]!"
+				else if (powerloss>0)
+					powerloss = max(powerloss-10, 0)
+					updatehealth()
+
 
 			if(hallucination)
 				if(hallucination >= 20)

@@ -269,6 +269,13 @@
 /obj/structure/closet/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
+/obj/structure/closet/attack_robot(mob/user as mob)
+	if(Adjacent(user))
+		return src.attack_hand(user)
+	else
+		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	return
+
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	src.toggle(user)

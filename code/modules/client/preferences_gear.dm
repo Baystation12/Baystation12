@@ -80,6 +80,12 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 
+/datum/gear/cargocap
+	display_name = "cap. cargo"
+	path = /obj/item/clothing/head/soft
+	cost = 2
+	slot = slot_head
+
 /datum/gear/corpcap
 	display_name = "cap, corporate (Security)"
 	path = /obj/item/clothing/head/soft/sec/corp

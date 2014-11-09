@@ -276,6 +276,10 @@
 			on = 0
 	return
 
+
+obj/machinery/light/proc/check_emergency_state()
+	return 0
+
 // update the icon_state and luminosity of the light depending on its state
 /obj/machinery/light/proc/update(var/trigger = 1)
 
@@ -307,12 +311,12 @@
 	if(on != on_gs)
 		on_gs = on
 
-
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/s)
 	on = (s && status == LIGHT_OK)
 	update()
+
 
 // examine verb
 /obj/machinery/light/examine()
@@ -433,6 +437,7 @@
 /obj/machinery/light/proc/has_power()
 	var/area/A = src.loc.loc
 	return A.master.lightswitch && A.master.power_light
+
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return
@@ -753,3 +758,57 @@
 		sharp = 1
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
+
+
+/*
+Emergency lights under here, also in the update proc
+
+These need expanding and/or reworking, but they're basic and they'll  do for now.
+*/
+
+/obj/machinery/light/emergency/has_power()
+	var/area/A = src.loc.loc
+	return A.master.power_light
+
+/obj/machinery/light/emergency/check_emergency_state()
+	if(security_level >= SEC_LEVEL_RED)
+		return 1
+	if(emergency_shuttle.online())
+		return 1
+	if(!has_power())
+		return 1
+	else return 0
+
+
+/obj/machinery/light/emergency/update()
+	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
+		SetLuminosity(0)
+		icon_state = "firelight-burned"
+		return
+	if(check_emergency_state())
+		SetLuminosity(brightness)
+		icon_state = "firelight1"
+	else
+		SetLuminosity(0)
+		icon_state = "firelight0"
+
+/obj/machinery/light/emergency/small
+	icon_state = "firelight0"
+	base_state = "firelight"
+	fitting = "bulb"
+	brightness = 2
+	color = COLOR_RED
+	l_color = COLOR_RED
+	desc = "A small emergency lighting fixture."
+	name = "Emergency Lighting"
+	light_type = /obj/item/weapon/light/emergency/bulb
+
+/obj/item/weapon/light/emergency/bulb
+	name = "emergency light bulb"
+	desc = "A replacement emergency light bulb."
+	icon_state = "flight"
+	base_state = "flight"
+	item_state = "egg4"
+	matter = list("glass" = 100)
+	brightness = 1
+	l_color = COLOR_RED
