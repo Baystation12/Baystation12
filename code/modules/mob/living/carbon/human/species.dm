@@ -602,16 +602,17 @@
 	damage = 6
 	sharp = 1
 	edge = 1
+	shredding = 1
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")
 	damage = 7
-	shredding = 1
+	shredding = 0
 
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("maul")
 	damage = 12
-	shredding = 1
+	shredding = 0
 
 /datum/hud_data
 	var/icon              // If set, overrides ui_style.
