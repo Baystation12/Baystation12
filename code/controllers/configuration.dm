@@ -8,6 +8,7 @@
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
+	var/log_devsay = 0
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
@@ -247,6 +248,9 @@
 
 				if ("log_adminchat")
 					config.log_adminchat = 1
+
+				if ("log_devsay")
+					config.log_devsay = 1
 
 				if ("log_adminwarn")
 					config.log_adminwarn = 1

@@ -759,7 +759,15 @@ var/global/floorIsLava = 0
 	message_admins("[key_name_admin(usr)] toggled LOOC.", 1)
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/toggledevsay()
+	set category = "Server"
+	set desc="Globally Toggles DEVSAY"
+	set name="Toggle DEVSAY"
+	devsay_allowed = !( devsay_allowed )
 
+	log_admin("[key_name(usr)] toggled DEV chat.")
+	message_admins("[key_name_admin(usr)] toggled DEV chat.", 1)
+	feedback_add_details("admin_verb","DEVZSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggledsay()
 	set category = "Server"

@@ -91,3 +91,7 @@
 
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
+
+/proc/log_devsay(text)
+	if (config.log_devsay)
+		diary << "\[[time_stamp()]]DEVSAY: [text][log_end]"

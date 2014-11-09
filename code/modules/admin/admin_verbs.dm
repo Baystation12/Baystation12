@@ -87,7 +87,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/FRules,
 	/client/proc/freeze,
 	/client/proc/freezemecha,
-	/client/proc/admincryo    /* Allows a ghost to respawn */
+	/client/proc/admincryo,
+	/client/proc/hidedevsay,
+    /datum/admins/proc/toggledevsay,
+    /client/proc/cmd_dev_say    /* Allows a ghost to respawn */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -272,7 +275,9 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
 	/client/proc/cleartox,
 	/client/proc/cmd_admin_delete,
-	/client/proc/admincryo
+	/client/proc/admincryo,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say
 )
 
 var/list/admin_verbs_mentor = list(
@@ -287,8 +292,22 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_admin_subtle_message,
 	/client/proc/FRules,
 	/client/proc/freeze,
-	/client/proc/freezemecha
+	/client/proc/freezemecha,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say
 )
+
+var/list/admin_verbs_dev = list(
+	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
+	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
+	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
+	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
+	/client/proc/deadmin_self,
+	/client/proc/hidedevsay,
+	/client/proc/cmd_dev_say
+)
+
+
 
 /client/proc/add_admin_verbs()
 	if(holder)
@@ -307,6 +326,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
+		if(holder.rights & R_DEV)			verbs += admin_verbs_dev
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -906,3 +926,15 @@ var/list/admin_verbs_mentor = list(
 	log_admin("[key_name(usr)] told everyone to man up and deal with it.")
 	log_admin_single("[key_name(usr)] told everyone to man up and deal with it.")
 	message_admins("\blue [key_name_admin(usr)] told everyone to man up and deal with it.", 1)
+
+/client/proc/hidedevsay()
+	set name = "Hide/Show Dev Chat"
+	set category = "Preferences"
+
+	prefs.toggles ^= CHAT_DEVSAY
+	prefs.save_preferences()
+	if (prefs.toggles & CHAT_DEVSAY)
+		usr << "You now will See DEV Chat"
+	else
+		usr << "You now won't See DEV Chat"
+
