@@ -1133,6 +1133,7 @@
 #include "code\modules\organs\pain.dm"
 #include "code\modules\organs\wound.dm"
 #include "code\modules\paperwork\carbonpaper.dm"
+#include "code\modules\paperwork\Cards.dm"
 #include "code\modules\paperwork\clipboard.dm"
 #include "code\modules\paperwork\filingcabinet.dm"
 #include "code\modules\paperwork\folders.dm"
