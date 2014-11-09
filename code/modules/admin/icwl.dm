@@ -78,7 +78,7 @@ var/icwl_keylist[]		//to store the keys & ranks
 
 /proc/icwl_raceCheck(job, species)
 	if(job in command_positions)
-		if(species != "Human")
+		if(species != "Human" && species != "Machine")
 			return 0
 	return 1
 
