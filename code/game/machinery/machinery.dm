@@ -113,11 +113,11 @@ Class Procs:
 
 /obj/machinery/New()
 	..()
-	if(!machinery_sort_required && ticker)
+	/*if(!machinery_sort_required && ticker)   //Breaks all machines for some reason, someone fix please ;-;
 		dd_insertObjectList(machines, src)
-	else
-		machines += src
-		machinery_sort_required = 1
+	else*/
+	machines += src
+	machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src

@@ -110,9 +110,9 @@
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
-			src.set_temperature = min(src.set_temperature+amount, 1000)
+			src.set_temperature = min(src.set_temperature+amount, 280)
 		else
-			src.set_temperature = max(src.set_temperature+amount, 0)
+			src.set_temperature = max(src.set_temperature+amount, 73)
 	src.add_fingerprint(usr)
 	return 1
 
