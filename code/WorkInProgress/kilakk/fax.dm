@@ -98,13 +98,16 @@ var/list/alldepartments = list("Central Command")
 
 			if(dpt == "Central Command")
 				Centcomm_fax(src, tofax.info, tofax.name, usr)
+				investigate_log("\blue <b><font color='#006100'>CENTCOMM FAX: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 1800
 
 			else if(dpt == "Sol Government")
 				Solgov_fax(src, tofax.info, tofax.name, usr)
+				investigate_log("\blue <b><font color='#1F66A0'>SOL GOVERNMENT FAX: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 1800
 			else
 				SendFax(tofax.info, tofax.name, usr, dpt)
+				investigate_log("\blue <b><font color='#1F66A0'>FAX to [dpt]: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 600
 
 			usr << "Message transmitted successfully."
