@@ -65,4 +65,4 @@
 	for(var/client/C in clients)
 		if(C.holder && ((R_ADMIN|R_MOD|R_DEV) & C.holder.rights))
 			if(C.prefs.toggles & CHAT_DEVSAY)
-				C << "<span class='[color]'><span class='prefix'>DEV:</span> [key]: <span class='message'>[msg]</span></span>"
+				C << "<span class='[color]'><span class='prefix'>DEV:</span> [key] (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
