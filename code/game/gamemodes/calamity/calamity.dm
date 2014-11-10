@@ -82,6 +82,7 @@
 	return 1
 
 /datum/game_mode/calamity/post_setup()
+	event_manager.report_at_round_end = 1
 	// Reduce the interval between moderate/major events
 	var/datum/event_container/EModerate = event_manager.event_containers[EVENT_LEVEL_MODERATE]
 	var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]

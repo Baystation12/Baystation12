@@ -56,6 +56,8 @@
 	var/severity		= 0 //Severity. Lower means less severe, higher means more severe. Does not have to be supported. Is set on New().
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
 	var/isRunning		= 1 //If this event is currently running. You should not change this.
+	var/started			= 0 //When this event started.
+	var/ended			= 0 //When this event ended.
 	var/datum/event_meta/event_meta = null
 
 /datum/event/nothing
@@ -127,6 +129,7 @@
 		isRunning = 0
 		end()
 
+	ended = world.timeofday
 	event_manager.active_events -= src
 	event_manager.event_complete(src)
 
@@ -138,6 +141,8 @@
 	severity = event_meta.severity
 	if(severity < EVENT_LEVEL_MUNDANE) severity = EVENT_LEVEL_MUNDANE
 	if(severity > EVENT_LEVEL_MAJOR) severity = EVENT_LEVEL_MAJOR
+
+	started = world.timeofday
 
 	setup()
 	..()

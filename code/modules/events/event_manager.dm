@@ -1,6 +1,7 @@
 /datum/event_manager
 	var/window_x = 700
 	var/window_y = 600
+	var/report_at_round_end = 0
 	var/table_options = " align='center'"
 	var/row_options1 = " width='85px'"
 	var/row_options2 = " width='260px'"
@@ -8,7 +9,7 @@
 	var/datum/event_container/selected_event_container = null
 
 	var/list/datum/event/active_events = list()
-	var/list/datum/event/finished_events = list()
+	var/list/events_finished = list()
 
 	var/list/datum/event/allEvents
 	var/list/datum/event_container/event_containers = list(
@@ -35,7 +36,7 @@
 		log_debug("Event of '[E.type]' with missing meta-data has completed.")
 		return
 
-	finished_events += E
+	events_finished += E
 
 	// Add the event back to the list of available events
 	var/datum/event_container/EC = event_containers[E.severity]
@@ -60,7 +61,7 @@
 		html += "<A align='right' href='?src=\ref[src];back=1'>Back</A><br>"
 		html += "Time till start: [round(event_time / 600, 0.1)]<br>"
 		html += "<div class='block'>"
-		html += "<h2>Available [severity_to_string[selected_event_container.severity]] Events (queued events will not be displayed)</h2>"
+		html += "<h2>Available [severity_to_string[selected_event_container.severity]] Events (queued & running events will not be displayed)</h2>"
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options2]>Name </td><td>Weight </td><td>MinWeight </td><td>MaxWeight </td><td>OneShot </td><td>Enabled </td><td><span class='alert'>CurrWeight </span></td><td>Remove</td></tr>"
 		for(var/datum/event_meta/EM in selected_event_container.available_events)
@@ -91,7 +92,7 @@
 		html += "<A align='right' href='?src=\ref[src];add=\ref[selected_event_container]'>Add</A><br>"
 		html += "</div>"
 	else
-		html += "<br>"
+		html += "<A align='right' href='?src=\ref[src];report=1'>Round End Report: [report_at_round_end ? "On": "Off"]</A><br>"
 		html += "<div class='block'>"
 		html += "<h2>Event Start</h2>"
 
@@ -138,14 +139,16 @@
 		html += "<div class='block'>"
 		html += "<h2>Running Events</h2>"
 		html += "<table[table_options]>"
-		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options3]>Stop</td></tr>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options1]>Ends In</td><td[row_options3]>Stop</td></tr>"
 		for(var/datum/event/E in active_events)
 			if(!E.event_meta)
 				continue
 			var/datum/event_meta/EM = E.event_meta
+			var/ends_in = max(0, round((E.started + (E.endWhen * 10) - world.timeofday) / 600, 0.1))
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"
 			html += "<td>[EM.name]</td>"
+			html += "<td>[ends_in]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];stop=\ref[E]'>Stop</A></td>"
 			html += "</tr>"
 		html += "</table>"
@@ -159,25 +162,35 @@
 
 	if(href_list["dec_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		EC.next_event_time -= (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
+		var/decrease = (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
+		EC.next_event_time -= decrease
+		admin_log_and_message_admins("decreased timer for [severity_to_string[EC.severity]] events by [decrease/600] minute(s).")
 	else if(href_list["inc_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		EC.next_event_time += (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
+		var/increase = (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
+		EC.next_event_time += increase
+		admin_log_and_message_admins("increased timer for [severity_to_string[EC.severity]] events by [increase/600] minute(s).")
 	else if(href_list["select_event"])
 		var/datum/event_container/EC = locate(href_list["select_event"])
-		EC.SelectEvent()
+		var/datum/event_meta/EM = EC.SelectEvent()
+		if(EM)
+			admin_log_and_message_admins("has queued the [severity_to_string[EC.severity]] event '[EM.name]'.")
 	else if(href_list["pause"])
 		var/datum/event_container/EC = locate(href_list["pause"])
 		EC.delayed = !EC.delayed
+		admin_log_and_message_admins("has [EC.delayed ? "paused" : "resumed"] countdown for [severity_to_string[EC.severity]] events.")
 	else if(href_list["interval"])
 		var/delay = input("Enter delay modifier. A value less than one means events fire more often, higher than one less often.", "Set Interval Modifier") as num|null
 		if(delay && delay > 0)
 			var/datum/event_container/EC = locate(href_list["interval"])
 			EC.delay_modifier = delay
+			admin_log_and_message_admins("has set the interval modifier for [severity_to_string[EC.severity]] events to [EC.delay_modifier].")
 	else if(href_list["stop"])
 		if(alert("Stopping an event may have unintended side-effects. Continue?","Stopping Event!","Yes","No") != "Yes")
 			return
 		var/datum/event/E = locate(href_list["stop"])
+		var/datum/event_meta/EM = E.event_meta
+		admin_log_and_message_admins("has stopped the [severity_to_string[EM.severity]] event '[EM.name]'.")
 		E.kill()
 	else if(href_list["view_events"])
 		selected_event_container = locate(href_list["view_events"])
@@ -198,34 +211,42 @@
 		if(weight && weight > 0)
 			var/datum/event_meta/EM = locate(href_list["set_weight"])
 			EM.weight = weight
+			if(EM != new_event)
+				admin_log_and_message_admins("has changed the weight of the [severity_to_string[EM.severity]] event '[EM.name]' to [EM.weight].")
 	else if(href_list["set_oneshot"])
 		var/datum/event_meta/EM = locate(href_list["set_oneshot"])
 		EM.one_shot = !EM.one_shot
+		if(EM != new_event)
+			admin_log_and_message_admins("has [EM.one_shot ? "set" : "unset"] the oneshot flag for the [severity_to_string[EM.severity]] event '[EM.name]'.")
 	else if(href_list["set_enabled"])
 		var/datum/event_meta/EM = locate(href_list["set_enabled"])
 		EM.enabled = !EM.enabled
+		admin_log_and_message_admins("has [EM.enabled ? "enabled" : "disabled"] the [severity_to_string[EM.severity]] event '[EM.name]'.")
 	else if(href_list["remove"])
 		if(alert("This will remove the event from rotation. Continue?","Removing Event!","Yes","No") != "Yes")
 			return
 		var/datum/event_meta/EM = locate(href_list["remove"])
 		var/datum/event_container/EC = locate(href_list["EC"])
 		EC.available_events -= EM
+		admin_log_and_message_admins("has removed the [severity_to_string[EM.severity]] event '[EM.name]'.")
 	else if(href_list["add"])
 		if(!new_event.name || !new_event.event_type)
 			return
 		if(alert("This will add a new event to the rotation. Continue?","Add Event!","Yes","No") != "Yes")
 			return
 		selected_event_container.available_events += new_event
+		admin_log_and_message_admins("has added \a [severity_to_string[new_event.severity]] event '[new_event.name]' of type [new_event.event_type] with weight [new_event.weight].")
 		new_event = new
 	else if(href_list["clear"])
 		var/datum/event_container/EC = locate(href_list["clear"])
-		EC.next_event = null
+		if(EC.next_event)
+			admin_log_and_message_admins("has unqueued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
+			EC.next_event = null
+	else if(href_list["report"])
+		report_at_round_end = !report_at_round_end
+		admin_log_and_message_admins("has [report_at_round_end ? "enabled" : "disabled"] the round end event report.")
 
 	Interact(usr)
-
-/proc/debugStartEvent(var/severity)
-	var/datum/event_container/EC = event_manager.event_containers[severity]
-	EC.start_event()
 
 /client/proc/forceEvent(var/type in event_manager.allEvents)
 	set name = "Trigger Event (Debug Only)"
