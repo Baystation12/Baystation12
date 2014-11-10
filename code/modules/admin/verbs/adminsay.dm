@@ -44,3 +44,25 @@
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 		else			// Mentors get same message without fancy coloring of name if special_role.
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1,1,0)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+
+
+/client/proc/cmd_dev_say(msg as text)
+	set category = "OOC"
+	set name = "DEVsay"
+	set hidden = 0
+
+	if(!(prefs.toggles & CHAT_DEVSAY))
+		src << "\red You have DEVSAY muted."
+		return
+
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	log_devsay("DEV: [key_name(src)] : [msg]")
+
+	if(!msg)	return
+	var/color = "DEV"
+	if (check_rights(R_ADMIN|R_MOD,0))
+		color = "DEVADMINMOD"
+	for(var/client/C in clients)
+		if(C.holder && ((R_ADMIN|R_MOD|R_DEV) & C.holder.rights))
+			if(C.prefs.toggles & CHAT_DEVSAY)
+				C << "<span class='[color]'><span class='prefix'>DEV:</span> [key]: <span class='message'>[msg]</span></span>"

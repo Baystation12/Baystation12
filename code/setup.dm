@@ -637,8 +637,9 @@ var/list/liftable_structures = list(\
 #define R_SPAWN			4096
 #define R_MOD			8192
 #define R_MENTOR		16384
+#define R_DEV			32768
 
-#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_MAXPERMISSION 65534 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 #define R_HOST			65535
 
@@ -658,9 +659,10 @@ var/list/liftable_structures = list(\
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
 #define SHOW_TYPING		16384
-#define SHOW_SHUTTERLOGS	32768
+#define CHAT_DEVSAY		32768
+#define SHOW_SHUTTERLOGS	65536
 
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
+#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC|CHAT_DEVSAY)
 
 #define BE_TRAITOR    1
 #define BE_OPERATIVE  2
