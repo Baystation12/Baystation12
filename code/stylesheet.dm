@@ -20,8 +20,8 @@ em						{font-style: normal;	font-weight: bold;}
 .adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
-.DEV					{color: #FF00FF;}
-.DEVADMINMOD			{color: #BA00BA;	font-weight: bold;}
+.DEV					{color: #FF7F00;	font-weight: bold;}
+.DEVADMINMOD			{color: #FF6100;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
