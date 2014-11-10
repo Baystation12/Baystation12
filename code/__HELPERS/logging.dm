@@ -25,6 +25,12 @@
 	if (config.log_admin)
 		diary << "\[[time_stamp()]]ADMIN: [text][log_end]"
 
+/proc/send_investigate_log(message,subject) //For sending messsages to the investigate logs (copypasta frm Admin_investigate.dm just without /atom requirements)~yash
+	if(!message)	return
+	var/F = investigate_subject2file(subject)
+	if(!F)	return
+	F << "<small>[time2text(world.timeofday,"hh:mm")]</small> ||[message]<br>"
+
 /proc/log_admin_single(text)
 	admin_log.Add(text)
 	if (config.log_admin)
@@ -85,3 +91,7 @@
 
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
+
+/proc/log_devsay(text)
+	if (config.log_devsay)
+		diary << "\[[time_stamp()]]DEVSAY: [text][log_end]"

@@ -1621,6 +1621,7 @@
 				src.owner << "Message reply to transmitted successfully."
 				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
 				log_admin_single("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				send_investigate_log("[key_name(src.owner)] replied to a fax message from [key_name(H)]: <a href='?_src_=holder;CentcommFaxView=\ref[input]'>view message</a>","fax")
 				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
 				return
 		src.owner << "/red Unable to locate fax!"
@@ -1662,6 +1663,7 @@
 				src.owner << "Message reply to transmitted successfully."
 				log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
 				log_admin_single("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")
+				send_investigate_log("[key_name(src.owner)] replied to a fax message from [key_name(H)]: <a href='?_src_=holder;CentcommFaxView=\ref[input]'>view message</a>","fax")
 				message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(H)]", 1)
 				return
 		src.owner << "/red Unable to locate fax!"

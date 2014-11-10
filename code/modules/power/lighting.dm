@@ -796,20 +796,19 @@ These need expanding and/or reworking, but they're basic and they'll  do for now
 	icon_state = "firelight0"
 	base_state = "firelight"
 	fitting = "bulb"
-	brightness = 4
+	brightness = 2
 	color = COLOR_RED
 	l_color = COLOR_RED
-	desc = "A small lighting fixture."
+	desc = "A small emergency lighting fixture."
+	name = "Emergency Lighting"
 	light_type = /obj/item/weapon/light/emergency/bulb
 
 /obj/item/weapon/light/emergency/bulb
 	name = "emergency light bulb"
-	desc = "A replacement light bulb."
-	icon_state = "lbulb"
-	base_state = "lbulb"
-	item_state = "contvapour"
+	desc = "A replacement emergency light bulb."
+	icon_state = "flight"
+	base_state = "flight"
+	item_state = "egg4"
 	matter = list("glass" = 100)
-	brightness = 3
+	brightness = 1
 	l_color = COLOR_RED
-
-
