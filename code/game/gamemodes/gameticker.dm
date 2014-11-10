@@ -441,6 +441,9 @@ var/global/datum/controller/gameticker/ticker
 		if (findtext("[handler]","auto_declare_completion_"))
 			call(mode, handler)()
 
+	//Ask the event manager to print round end information
+	event_manager.RoundEnd()
+
 	//Print a list of antagonists to the server log
 	var/list/total_antagonists = list()
 	//Look into all mobs in world, dead or alive

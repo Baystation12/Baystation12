@@ -26,11 +26,11 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		set_event_delay()
 
 	if(delayed)
-		next_event_time += (world.timeofday - last_world_time)
-	else if(world.timeofday > next_event_time)
+		next_event_time += (world.time - last_world_time)
+	else if(world.time > next_event_time)
 		start_event()
 
-	last_world_time = world.timeofday
+	last_world_time = world.time
 
 /datum/event_container/proc/start_event()
 	if(!next_event)	// If non-one has explicitly set an event, randomly pick one
@@ -39,7 +39,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	// Has an event been acquired?
 	if(next_event)
 		// Set when the event of this type was last fired, and prepare the next event start
-		last_event_time[next_event] = world.timeofday
+		last_event_time[next_event] = world.time
 		set_event_delay()
 		next_event.enabled = !next_event.one_shot	// This event will no longer be available in the random rotation if one shot
 
@@ -64,7 +64,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 			possible_events[EM] = event_weight
 
 	for(var/event_meta in last_event_time) if(possible_events[event_meta])
-		var/time_passed = world.timeofday - event_last_fired[event_meta]
+		var/time_passed = world.time - event_last_fired[event_meta]
 		var/weight_modifier = max(0, (config.expected_round_length - time_passed) / 300)
 		var/new_weight = max(possible_events[event_meta] - weight_modifier, 0)
 
@@ -87,7 +87,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		var/lower = config.event_first_run[severity]["lower"]
 		var/upper = config.event_first_run[severity]["upper"]
 		var/event_delay = rand(lower, upper)
-		next_event_time = world.timeofday + event_delay
+		next_event_time = world.time + event_delay
 	// Otherwise, follow the standard setup process
 	else
 		var/playercount_modifier = 1
@@ -105,9 +105,9 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		playercount_modifier = playercount_modifier * delay_modifier
 
 		var/event_delay = rand(config.event_delay_lower[severity], config.event_delay_upper[severity]) * playercount_modifier
-		next_event_time = world.timeofday + event_delay
+		next_event_time = world.time + event_delay
 
-	log_debug("Next event of severity [severity_to_string[severity]] in [(next_event_time - world.timeofday)/600] minutes.")
+	log_debug("Next event of severity [severity_to_string[severity]] in [(next_event_time - world.time)/600] minutes.")
 
 /datum/event_container/proc/SelectEvent()
 	var/datum/event_meta/EM = input("Select an event to queue up.", "Event Selection", null) as null|anything in available_events
@@ -133,7 +133,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Lost Carp",			/datum/event/carp_migration, 	20, 	list(ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Brand Intelligence",/datum/event/brand_intelligence,20, 	list(ASSIGNMENT_JANITOR = 25),	1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation",/datum/event/infestation, 		100,	list(ASSIGNMENT_JANITOR = 100)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wall rot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
 	)
 
 /datum/event_container/moderate

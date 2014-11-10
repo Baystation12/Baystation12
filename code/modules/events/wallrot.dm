@@ -1,5 +1,5 @@
 datum/event/wallrot/setup()
-	name = "Wall rot"
+	name = "Wallrot"
 	announceWhen = rand(0, 300)
 	endWhen = announceWhen + 1
 
