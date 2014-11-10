@@ -19,18 +19,21 @@
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Security Guard")
 			M.access += access_medical
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Warden")
 			M.access += access_medical
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Head of Security")
 			M.access += access_research
@@ -50,18 +53,21 @@
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Security Guard")
 			M.access -= access_medical
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Warden")
 			M.access -= access_medical
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Head of Security")
 			M.access -= access_research
