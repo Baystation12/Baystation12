@@ -38,7 +38,6 @@
 		return 0
 	AC.loc = get_turf(src) //Eject casing onto ground.
 	if(AC.BB)
-		AC.desc += " This one is spent."	//descriptions are magic - only when there's a projectile in the casing
 		in_chamber = AC.BB //Load projectile into chamber.
 		AC.BB.loc = src //Set projectile loc to gun.
 		return 1

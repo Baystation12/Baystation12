@@ -41,6 +41,10 @@
 		else
 			user << "\blue There is no bullet in the casing to inscribe anything into."
 
+/obj/item/ammo_casing/examine(mob/user)
+	..()
+	if (!BB)
+		user << "This one is spent."
 
 //Boxes of ammo
 /obj/item/ammo_magazine
