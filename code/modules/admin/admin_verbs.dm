@@ -856,6 +856,7 @@ var/list/admin_verbs_dev = list(
 	set category = "Preferences"
 
 	prefs.toggles ^= SHOW_SHUTTERLOGS
+	prefs.save_preferences()
 	if (prefs.toggles & SHOW_SHUTTERLOGS)
 		usr << "You now will get emergency shutter log messages"
 	else
@@ -934,7 +935,7 @@ var/list/admin_verbs_dev = list(
 	prefs.toggles ^= CHAT_DEVSAY
 	prefs.save_preferences()
 	if (prefs.toggles & CHAT_DEVSAY)
-		usr << "You now will See DEV Chat"
+		usr << "You now will see DEV Chat"
 	else
-		usr << "You now won't See DEV Chat"
+		usr << "You now won't see DEV Chat"
 
