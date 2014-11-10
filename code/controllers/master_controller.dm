@@ -26,6 +26,7 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/gc_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
@@ -231,6 +232,12 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
+
+				// GARBAGE COLLECTOR
+				timer = world.timeofday
+				last_thing_processed = garbage.type
+				garbage.process()
+				gc_cost = (world.timeofday - timer) / 10
 
 				//TICKER
 				timer = world.timeofday
