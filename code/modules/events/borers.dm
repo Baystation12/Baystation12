@@ -2,7 +2,6 @@
 
 /datum/event/borer_infestation
 	name 			= "Borer Infestation"
-	oneShot = 1
 
 /datum/event/borer_infestation
 	announceWhen = 400

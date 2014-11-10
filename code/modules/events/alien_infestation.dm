@@ -3,7 +3,6 @@
 /datum/event/alien_infestation
 	name 			= "Alien Infestation"
 	announceWhen	= 400
-	oneShot			= 1
 
 	var/spawncount = 1
 	var/successSpawn = 0	//So we don't make a command report if nothing gets spawned.

@@ -1,7 +1,6 @@
 /datum/event/carp_migration
 	name 			= "Carp Migration"
 	announceWhen	= 50
-	oneShot			= 1
 	endWhen 		= 900
 
 	var/list/spawned_carp = list()

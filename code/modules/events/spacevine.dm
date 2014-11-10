@@ -2,7 +2,6 @@
 
 /datum/event/spacevine
 	name = "Space Vines"
-	oneShot			= 1
 
 /datum/event/spacevine/start()
 	//biomass is basically just a resprited version of space vines

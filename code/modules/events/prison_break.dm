@@ -1,7 +1,6 @@
 /datum/event/prison_break
 	name 			= "Prison Break"
 	announceWhen	= 50
-	oneShot			= 1
 
 	var/releaseWhen = 25
 	var/list/area/prisonAreas = list()

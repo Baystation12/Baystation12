@@ -5,7 +5,6 @@
 	var/const/revokeAccess	= 230
 
 	endWhen				= revokeAccess
-	oneShot				= 1
 
 	var/postStartTicks
 

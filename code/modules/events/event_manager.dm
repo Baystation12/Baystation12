@@ -1,72 +1,23 @@
-#define ASSIGNMENT_ANY "Any"
-#define ASSIGNMENT_AI "AI"
-#define ASSIGNMENT_CYBORG "Cyborg"
-#define ASSIGNMENT_ENGINEER "Engineer"
-#define ASSIGNMENT_GARDENER "Gardener"
-#define ASSIGNMENT_JANITOR "Janitor"
-#define ASSIGNMENT_MEDICAL "Medical"
-#define ASSIGNMENT_SCIENTIST "Scientist"
-#define ASSIGNMENT_SECURITY "Security"
-
-var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major")
-
 /datum/event_manager
-	var/list/available_events = list(
-		EVENT_LEVEL_MUNDANE = list(
-			// Severity level, event name, even type, base weight, role weights, min weight, max weight. Last two only used if set and non-zero
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Nothing",		/datum/event/nothing,			100),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "PDA Spam",		/datum/event/pda_spam, 			0, 		list(ASSIGNMENT_ANY = 4), 25, 200),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Money Lotto",	/datum/event/money_lotto, 		0, 		list(ASSIGNMENT_ANY = 1), 5, 50),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Money Hacker",	/datum/event/money_hacker, 		0, 		list(ASSIGNMENT_ANY = 4), 25, 200),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Economic News",	/datum/event/economic_event,		300),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Trivial News",	/datum/event/trivial_news, 		400),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Mundane News", 	/datum/event/mundane_news, 		300),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Carp",			/datum/event/carp_migration, 	20, 	list(ASSIGNMENT_SECURITY = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wall root",		/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Brand Intelligence", /datum/event/brand_intelligence, 20, 	list(ASSIGNMENT_JANITOR = 25)),
-			new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation", /datum/event/infestation, 		100,	list(ASSIGNMENT_JANITOR = 100)),
-		),
-		EVENT_LEVEL_MODERATE = list(
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Nothing",			/datum/event/nothing,					10),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Carp Infestation",	/datum/event/carp_migration,			20, list(ASSIGNMENT_SECURITY = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Rogue Drones",		/datum/event/rogue_drone, 				5,	list(ASSIGNMENT_ENGINEER = 25, ASSIGNMENT_SECURITY = 25)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Space vines",		/datum/event/spacevine, 				10,	list(ASSIGNMENT_ENGINEER = 5)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Meteor Shower",	/datum/event/meteor_shower,				0,	list(ASSIGNMENT_ENGINEER = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Communication Blackout",	/datum/event/communications_blackout, 	50,	list(ASSIGNMENT_AI = 25, ASSIGNMENT_SECURITY = 25)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Grid Check",		/datum/event/grid_check, 				25,	list(ASSIGNMENT_ENGINEER = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Electrical Storm",	/datum/event/electrical_storm, 			15,	list(ASSIGNMENT_ENGINEER = 5, ASSIGNMENT_JANITOR = 15)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Radiation Storm",	/datum/event/radiation_storm, 			0,	list(ASSIGNMENT_MEDICAL = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Appendicitis", 	/datum/event/spontaneous_appendicitis, 	0,	list(ASSIGNMENT_MEDICAL = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Viral Infection",	/datum/event/viral_infection, 			0,	list(ASSIGNMENT_MEDICAL = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Spider Infestation",/datum/event/spider_infestation, 		5,	list(ASSIGNMENT_SECURITY = 5)),
-			new /datum/event_meta/alien(EVENT_LEVEL_MODERATE, "Alien Infestation",	/datum/event/alien_infestation, 	2.5,list(ASSIGNMENT_SECURITY = 1), max_event_weight = 5),
-			new /datum/event_meta/ninja(EVENT_LEVEL_MODERATE, "Space Ninja",		/datum/event/space_ninja, 		0,	list(ASSIGNMENT_SECURITY = 1), max_event_weight = 5),
-			new /datum/event_meta(EVENT_LEVEL_MODERATE, "Ion Storm",		/datum/event/ionstorm, 	0,	list(ASSIGNMENT_AI = 25, ASSIGNMENT_CYBORG = 25, ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_SCIENTIST = 5)),
-		),
-		EVENT_LEVEL_MAJOR = list(
-			new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",			/datum/event/nothing,			100),
-			new /datum/event_meta(EVENT_LEVEL_MAJOR, "Carp Migration",	/datum/event/carp_migration,	0,	list(ASSIGNMENT_SECURITY = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MAJOR, "Viral Infection",	/datum/event/viral_infection,	0,	list(ASSIGNMENT_MEDICAL = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",			/datum/event/blob, 			0,	list(ASSIGNMENT_ENGINEER = 10)),
-			new /datum/event_meta(EVENT_LEVEL_MAJOR, "Meteor Wave",		/datum/event/meteor_wave,		0,	list(ASSIGNMENT_ENGINEER = 10)),
-		)
-	)
-
-	var/window_x = 370
-	var/window_y = 530
+	var/window_x = 700
+	var/window_y = 600
 	var/table_options = " align='center'"
 	var/row_options1 = " width='85px'"
 	var/row_options2 = " width='260px'"
+	var/row_options3 = " width='150px'"
+	var/datum/event_container/selected_event_container = null
 
 	var/list/datum/event/active_events = list()
 	var/list/datum/event/finished_events = list()
 
 	var/list/datum/event/allEvents
+	var/list/datum/event_container/event_containers = list(
+			EVENT_LEVEL_MUNDANE 	= new/datum/event_container/mundane,
+			EVENT_LEVEL_MODERATE	= new/datum/event_container/moderate,
+			EVENT_LEVEL_MAJOR 		= new/datum/event_container/major
+		)
 
-	var/list/last_event_time = list()
-	var/list/next_event = list(EVENT_LEVEL_MUNDANE = null, EVENT_LEVEL_MODERATE = null, EVENT_LEVEL_MAJOR = null)
-	var/list/next_event_time = list(EVENT_LEVEL_MUNDANE = 0, EVENT_LEVEL_MODERATE = 0, EVENT_LEVEL_MAJOR = 0)
-	var/list/delay_modifier = list(EVENT_LEVEL_MUNDANE = 1, EVENT_LEVEL_MODERATE = 1, EVENT_LEVEL_MAJOR = 1)
+	var/datum/event_meta/new_event = new
 
 /datum/event_manager/New()
 	allEvents = typesof(/datum/event) - /datum/event
@@ -76,85 +27,8 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		E.process()
 
 	for(var/i = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
-		// Is it time to fire a new event of this severity level?
-		if(world.timeofday > next_event_time[i])
-			process_event_start(i)
-
-/datum/event_manager/proc/process_event_start(var/severity)
-	var/event = next_event[severity]
-	if(event)
-		start_event(event)
-
-	// Attempt to select a new event
-	next_event[severity] = acquire_event(available_events[severity])
-	if(next_event[severity])	// If we got an event, set the next delay proper
-		set_event_delay(severity)
-	else 						// Otherwise, wait for one minute (rather than next process tick) before checking again
-		next_event_time[severity] += (60 * 10)
-
-/datum/event_manager/proc/start_event(var/datum/event_meta/EM)
-	// Set when the event of this type was last fired
-	last_event_time[EM] = world.timeofday
-
-	log_debug("Starting event of severity [EM.severity].")
-	new EM.event_type(EM)	// Events are added and removed from the processing queue in New/Del
-
-/datum/event_manager/proc/acquire_event(var/list/events)
-	if(events.len == 0)
-		return
-	var/active_with_role = number_active_with_role()
-
-	var/list/possible_events = list()
-	for(var/datum/event_meta/EM in events)
-		var/event_weight = EM.get_weight(active_with_role)
-		if(event_weight)
-			possible_events[EM] = event_weight
-
-	for(var/event_meta in last_event_time) if(possible_events[event_meta])
-		var/time_passed = world.timeofday - event_last_fired[event_meta]
-		var/weight_modifier = max(0, (config.expected_round_length - time_passed) / 300)
-		var/new_weight = max(possible_events[event_meta] - weight_modifier, 0)
-
-		if(new_weight)
-			possible_events[event_meta] = new_weight
-		else
-			possible_events -= event_meta
-
-	if(possible_events.len == 0)
-		return null
-
-	// Select an event and remove it from the pool of available events
-	var/picked_event = pickweight(possible_events)
-	events -= picked_event
-	return picked_event
-
-/datum/event_manager/proc/set_event_delay(var/severity)
-	// If the next event time has not yet been set and we have a custom first time start
-	if(next_event_time[severity] == 0 && config.event_first_run[severity])
-		var/lower = config.event_first_run[severity]["lower"]
-		var/upper = config.event_first_run[severity]["upper"]
-		var/event_delay = rand(lower, upper)
-		next_event_time[severity] = world.timeofday + event_delay
-	// Otherwise, follow the standard setup process
-	else
-		var/playercount_modifier = 1
-		switch(player_list.len)
-			if(0 to 10)
-				playercount_modifier = 1.2
-			if(11 to 15)
-				playercount_modifier = 1.1
-			if(16 to 25)
-				playercount_modifier = 1
-			if(26 to 35)
-				playercount_modifier = 0.9
-			if(36 to 100000)
-				playercount_modifier = 0.8
-		playercount_modifier = playercount_modifier * delay_modifier[severity]
-
-		var/event_delay = rand(config.event_delay_lower[severity], config.event_delay_upper[severity]) * playercount_modifier
-		next_event_time[severity] = world.timeofday + event_delay
-
-	log_debug("Next event of severity [severity] in [(next_event_time[severity] - world.timeofday)/600] minutes.")
+		var/list/datum/event_container/EC = event_containers[i]
+		EC.process()
 
 /datum/event_manager/proc/event_complete(var/datum/event/E)
 	if(!E.event_meta)	// datum/event is used here and there for random reasons
@@ -162,10 +36,10 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		return
 
 	finished_events += E
-	// Add the event back to the list of available events, unless it's a oneShot
-	if(!E.oneShot)
-		var/list/datum/event_meta/AE = available_events[E.event_meta.severity]
-		AE.Add(E.event_meta)
+
+	// Add the event back to the list of available events
+	var/datum/event_container/EC = event_containers[E.severity]
+	EC.available_events += E.event_meta
 
 	log_debug("Event '[E.name]' has completed.")
 
@@ -179,39 +53,103 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	popup.open()
 
 /datum/event_manager/proc/GetInteractWindow()
-	var html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A><br>"
+	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
 
-	html += "<div class='block'>"
-	html += "<h2>Event Start</h2>"
-	html += "<table[table_options]>"
-	html += "<tr><td>Severity</td><td>Until start</td><td>Adjust start</td></tr>"
-	for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
-		var/event_time = max(0, next_event_time[severity] - world.timeofday)
-		html += "<tr>"
-		html += "<td[row_options1]>[severity_to_string[severity]]</font></td>"
-		html += "<td[row_options1]>[event_time / 600]</td>"
-		html += "<td[row_options2]>"
-		html +=   "<A align='right' href='?src=\ref[src];dec_timer=2;severity=[severity]'>--</A>"
-		html +=   "<A align='right' href='?src=\ref[src];dec_timer=1;severity=[severity]'>-</A>"
-		html +=   "<A align='right' href='?src=\ref[src];inc_timer=1;severity=[severity]'>+</A>"
-		html +=   "<A align='right' href='?src=\ref[src];inc_timer=2;severity=[severity]'>++</A>"
-		html += "</td>"
-		html += "</tr>"
-	html += "</table>"
-	html += "</div>"
+	if(selected_event_container)
+		var/event_time = max(0, selected_event_container.next_event_time - world.timeofday)
+		html += "<A align='right' href='?src=\ref[src];back=1'>Back</A><br>"
+		html += "Time till start: [round(event_time / 600, 0.1)]<br>"
+		html += "<div class='block'>"
+		html += "<h2>Available [severity_to_string[selected_event_container.severity]] Events (queued events will not be displayed)</h2>"
+		html += "<table[table_options]>"
+		html += "<tr><td[row_options2]>Name </td><td>Weight </td><td>MinWeight </td><td>MaxWeight </td><td>OneShot </td><td>Enabled </td><td><span class='alert'>CurrWeight </span></td><td>Remove</td></tr>"
+		for(var/datum/event_meta/EM in selected_event_container.available_events)
+			html += "<tr>"
+			html += "<td>[EM.name]</td>"
+			html += "<td><A align='right' href='?src=\ref[src];set_weight=\ref[EM]'>[EM.weight]</A></td>"
+			html += "<td>[EM.min_weight]</td>"
+			html += "<td>[EM.max_weight]</td>"
+			html += "<td><A align='right' href='?src=\ref[src];set_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
+			html += "<td><A align='right' href='?src=\ref[src];set_enabled=\ref[EM]'>[EM.enabled]</A></td>"
+			html += "<td><span class='alert'>[EM.get_weight()]</span></td>"
+			html += "<td><A align='right' href='?src=\ref[src];remove=\ref[EM];EC=\ref[selected_event_container]'>Remove</A></td>"
+			html += "</tr>"
+		html += "</table>"
+		html += "</div>"
 
-	html += "<div class='block'>"
-	html += "<h2>Next Event</h2>"
-	html += "<table[table_options]>"
-	html += "<tr><td>Severity</td><td>Name</td></tr>"
-	for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
-		var/datum/event_meta/EM = next_event[severity]
+		html += "<div class='block'>"
+		html += "<h2>Add Event</h2>"
+		html += "<table[table_options]>"
+		html += "<tr><td[row_options2]>Name</td><td[row_options2]>Type</td><td[row_options1]>Weight</td><td[row_options1]>OneShot</td></tr>"
 		html += "<tr>"
-		html += "<td[row_options1]>[severity_to_string[severity]]</font></td>"
-		html += "<td[row_options2]><A align='right' href='?src=\ref[src];select_event=1;severity=[severity]'>[EM ? EM.name : "Nothing"]</A></td>"
+		html += "<td><A align='right' href='?src=\ref[src];set_name=\ref[new_event]'>[new_event.name ? new_event.name : "Enter Event"]</A></td>"
+		html += "<td><A align='right' href='?src=\ref[src];set_type=\ref[new_event]'>[new_event.event_type ? new_event.event_type : "Select Type"]</A></td>"
+		html += "<td><A align='right' href='?src=\ref[src];set_weight=\ref[new_event]'>[new_event.weight ? new_event.weight : 0]</A></td>"
+		html += "<td><A align='right' href='?src=\ref[src];set_oneshot=\ref[new_event]'>[new_event.one_shot]</A></td>"
 		html += "</tr>"
-	html += "</table>"
-	html += "</div>"
+		html += "</table>"
+		html += "<A align='right' href='?src=\ref[src];add=\ref[selected_event_container]'>Add</A><br>"
+		html += "</div>"
+	else
+		html += "<br>"
+		html += "<div class='block'>"
+		html += "<h2>Event Start</h2>"
+
+		html += "<table[table_options]>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Until start</td><td[row_options3]>Adjust start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
+		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
+			var/datum/event_container/EC = event_containers[severity]
+			var/event_time = max(0, EC.next_event_time - world.timeofday)
+			html += "<tr>"
+			html += "<td>[severity_to_string[severity]]</td>"
+			html += "<td>[round(event_time / 600, 0.1)]</td>"
+			html += "<td>"
+			html +=   "<A align='right' href='?src=\ref[src];dec_timer=2;event=\ref[EC]'>--</A>"
+			html +=   "<A align='right' href='?src=\ref[src];dec_timer=1;event=\ref[EC]'>-</A>"
+			html +=   "<A align='right' href='?src=\ref[src];inc_timer=1;event=\ref[EC]'>+</A>"
+			html +=   "<A align='right' href='?src=\ref[src];inc_timer=2;event=\ref[EC]'>++</A>"
+			html += "</td>"
+			html += "<td>"
+			html +=   "<A align='right' href='?src=\ref[src];pause=\ref[EC]'>[EC.delayed ? "Resume" : "Pause"]</A>"
+			html += "</td>"
+			html += "<td>"
+			html +=   "<A align='right' href='?src=\ref[src];interval=\ref[EC]'>[EC.delay_modifier]</A>"
+			html += "</td>"
+			html += "</tr>"
+		html += "</table>"
+		html += "</div>"
+
+		html += "<div class='block'>"
+		html += "<h2>Next Event</h2>"
+		html += "<table[table_options]>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options3]>Event Rotation</td><td>Clear</td></tr>"
+		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
+			var/datum/event_container/EC = event_containers[severity]
+			var/datum/event_meta/EM = EC.next_event
+			html += "<tr>"
+			html += "<td>[severity_to_string[severity]]</td>"
+			html += "<td><A align='right' href='?src=\ref[src];select_event=\ref[EC]'>[EM ? EM.name : "Random"]</A></td>"
+			html += "<td><A align='right' href='?src=\ref[src];view_events=\ref[EC]'>View</A></td>"
+			html += "<td><A align='right' href='?src=\ref[src];clear=\ref[EC]'>Clear</A></td>"
+			html += "</tr>"
+		html += "</table>"
+		html += "</div>"
+
+		html += "<div class='block'>"
+		html += "<h2>Running Events</h2>"
+		html += "<table[table_options]>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options3]>Stop</td></tr>"
+		for(var/datum/event/E in active_events)
+			if(!E.event_meta)
+				continue
+			var/datum/event_meta/EM = E.event_meta
+			html += "<tr>"
+			html += "<td>[severity_to_string[EM.severity]]</td>"
+			html += "<td>[EM.name]</td>"
+			html += "<td><A align='right' href='?src=\ref[src];stop=\ref[E]'>Stop</A></td>"
+			html += "</tr>"
+		html += "</table>"
+		html += "</div>"
 
 	return html
 
@@ -219,27 +157,75 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	if(..())
 		return
 
-	var/severity = text2num(href_list["severity"])
 	if(href_list["dec_timer"])
-		next_event_time[severity] -= (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
+		var/datum/event_container/EC = locate(href_list["event"])
+		EC.next_event_time -= (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
 	else if(href_list["inc_timer"])
-		next_event_time[severity] += (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
+		var/datum/event_container/EC = locate(href_list["event"])
+		EC.next_event_time += (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
 	else if(href_list["select_event"])
-		SelectEvent(severity)
+		var/datum/event_container/EC = locate(href_list["select_event"])
+		EC.SelectEvent()
+	else if(href_list["pause"])
+		var/datum/event_container/EC = locate(href_list["pause"])
+		EC.delayed = !EC.delayed
+	else if(href_list["interval"])
+		var/delay = input("Enter delay modifier. A value less than one means events fire more often, higher than one less often.", "Set Interval Modifier") as num|null
+		if(delay && delay > 0)
+			var/datum/event_container/EC = locate(href_list["interval"])
+			EC.delay_modifier = delay
+	else if(href_list["stop"])
+		if(alert("Stopping an event may have unintended side-effects. Continue?","Stopping Event!","Yes","No") != "Yes")
+			return
+		var/datum/event/E = locate(href_list["stop"])
+		E.kill()
+	else if(href_list["view_events"])
+		selected_event_container = locate(href_list["view_events"])
+	else if(href_list["back"])
+		selected_event_container = null
+	else if(href_list["set_name"])
+		var/name = input("Enter event name.", "Set Name") as text|null
+		if(name)
+			var/datum/event_meta/EM = locate(href_list["set_name"])
+			EM.name = name
+	else if(href_list["set_type"])
+		var/type = input("Select event type.", "Select") as null|anything in allEvents
+		if(type)
+			var/datum/event_meta/EM = locate(href_list["set_type"])
+			EM.event_type = type
+	else if(href_list["set_weight"])
+		var/weight = input("Enter weight. A higher value means higher chance for the event of being selected.", "Set Weight") as num|null
+		if(weight && weight > 0)
+			var/datum/event_meta/EM = locate(href_list["set_weight"])
+			EM.weight = weight
+	else if(href_list["set_oneshot"])
+		var/datum/event_meta/EM = locate(href_list["set_oneshot"])
+		EM.one_shot = !EM.one_shot
+	else if(href_list["set_enabled"])
+		var/datum/event_meta/EM = locate(href_list["set_enabled"])
+		EM.enabled = !EM.enabled
+	else if(href_list["remove"])
+		if(alert("This will remove the event from rotation. Continue?","Removing Event!","Yes","No") != "Yes")
+			return
+		var/datum/event_meta/EM = locate(href_list["remove"])
+		var/datum/event_container/EC = locate(href_list["EC"])
+		EC.available_events -= EM
+	else if(href_list["add"])
+		if(!new_event.name || !new_event.event_type)
+			return
+		if(alert("This will add a new event to the rotation. Continue?","Add Event!","Yes","No") != "Yes")
+			return
+		selected_event_container.available_events += new_event
+		new_event = new
+	else if(href_list["clear"])
+		var/datum/event_container/EC = locate(href_list["clear"])
+		EC.next_event = null
 
 	Interact(usr)
 
-/datum/event_manager/proc/SelectEvent(var/severity)
-	var/datum/event_meta/EM = input("Select an event to queue up.", "Event Selection", null) as null|anything in available_events[severity]
-	if(!EM)
-		return
-	if(next_event[severity])
-		available_events[severity] += next_event[severity]
-	available_events[severity] -= EM
-	next_event[severity] = EM
-
 /proc/debugStartEvent(var/severity)
-	event_manager.start_event(severity)
+	var/datum/event_container/EC = event_manager.event_containers[severity]
+	EC.start_event()
 
 /client/proc/forceEvent(var/type in event_manager.allEvents)
 	set name = "Trigger Event (Debug Only)"
@@ -259,13 +245,3 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		event_manager.Interact(usr)
 	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
-
-#undef ASSIGNMENT_ANY
-#undef ASSIGNMENT_AI
-#undef ASSIGNMENT_CYBORG
-#undef ASSIGNMENT_ENGINEER
-#undef ASSIGNMENT_GARDENER
-#undef ASSIGNMENT_JANITOR
-#undef ASSIGNMENT_MEDICAL
-#undef ASSIGNMENT_SCIENTIST
-#undef ASSIGNMENT_SECURITY
