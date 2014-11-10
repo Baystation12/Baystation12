@@ -39,7 +39,8 @@
 		channel = "MENTOR:"*/
 	var/channel = "STAFF:"
 	for(var/client/C in admins)
-		if((check_rights(R_DEV,0)) && !(check_rights(R_MENTOR,0))) return
+		if((R_DEV & C.holder.rights) && (!R_MENTOR & C.holder.rights))
+			continue
 
 		if((R_ADMIN|R_MOD) & C.holder.rights)
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
