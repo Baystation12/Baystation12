@@ -2737,7 +2737,7 @@ datum
 			adj_temp = 25
 
 			glass_icon_state = "hot_coffee"
-			glass_name = "glass of coffee"
+			glass_name = "cup of coffee"
 			glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 			on_mob_life(var/mob/living/M as mob)
@@ -2808,7 +2808,7 @@ datum
 			adj_temp = 20
 
 			glass_icon_state = "bigteacup"
-			glass_name = "glass of tea"
+			glass_name = "cup of tea"
 			glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
 
 			on_mob_life(var/mob/living/M as mob)
