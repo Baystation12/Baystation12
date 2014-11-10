@@ -2,6 +2,7 @@
 	name = "traitor+changeling"
 	config_tag = "traitorchan"
 	traitors_possible = 3 //hard limit on traitors if scaling is turned off
+	restricted_species = list("Machine")
 	restricted_jobs = list("AI", "Cyborg")
 	required_players = 3
 	required_players_secret = 10
@@ -22,6 +23,9 @@
 	for(var/datum/mind/player in possible_changelings)
 		for(var/job in restricted_jobs)//Removing robots from the list
 			if(player.assigned_role == job)
+				possible_changelings -= player
+		for(var/species in restricted_species)//Removing IPCs from the list
+			if(player.current.client.prefs.species == species)
 				possible_changelings -= player
 
 	if(possible_changelings.len>0)
