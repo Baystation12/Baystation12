@@ -39,11 +39,9 @@
 		channel = "MENTOR:"*/
 	var/channel = "STAFF:"
 	for(var/client/C in admins)
-		if(!R_MENTOR &C.holder.rights)
-			continue
 		if((R_ADMIN|R_MOD) & C.holder.rights)
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
-		else			// Mentors get same message without fancy coloring of name if special_role.
+		if(R_MENTOR & C.holder.rights && !(R_MOD & C.holder.rights))		// Mentors get same message without fancy coloring of name if special_role.
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1,1,0)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 
 /client/proc/cmd_dev_say(msg as text)
