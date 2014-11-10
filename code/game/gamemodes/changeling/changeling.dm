@@ -7,6 +7,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 /datum/game_mode/changeling
 	name = "changeling"
 	config_tag = "changeling"
+	restricted_species = list("Machine")
 	restricted_jobs = list("AI", "Cyborg")
 	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	required_players = 2
@@ -53,6 +54,9 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	for(var/datum/mind/player in possible_changelings)
 		for(var/job in restricted_jobs)//Removing robots from the list
 			if(player.assigned_role == job)
+				possible_changelings -= player
+		for(var/species in restricted_species)//Removing IPCs from the list
+			if(player.current.client.prefs.species == species)
 				possible_changelings -= player
 
 	changeling_amount = 1 + round(num_players() / 10)
