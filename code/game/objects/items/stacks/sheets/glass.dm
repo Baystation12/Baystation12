@@ -25,7 +25,6 @@
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
 	matter = null
-	created_window = /obj/structure/window/basic
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -129,6 +128,7 @@
 	icon_state = "sheet-rglass"
 
 	matter = list("metal" = 1875,"glass" = 3750)
+	created_window = /obj/structure/window/reinforced
 
 	origin_tech = "materials=2"
 
