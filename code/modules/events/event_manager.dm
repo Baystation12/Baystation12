@@ -53,11 +53,31 @@
 	popup.set_content(html)
 	popup.open()
 
+/datum/event_manager/proc/RoundEnd()
+	if(!report_at_round_end)
+		return
+
+	world << "<br><br><br><font size=3><b>Random Events This Round:</b></font>"
+	for(var/datum/event/E in events_finished)
+		var/datum/event_meta/EM = E.event_meta
+		if(EM.name == "Nothing")
+			continue
+		var/message = "'[EM.name]' began at [worldtime2text(E.startedAt)] "
+		if(E.isRunning)
+			message += "and is still running."
+		else
+			if(E.endedAt - E.startedAt > 5 * 60 * 10) // Only mention end time if the entire duration was more than 5 minutes
+				message += "and ended at [worldtime2text(E.endedAt)]."
+			else
+				message += "and ran to completion."
+
+		world << message
+
 /datum/event_manager/proc/GetInteractWindow()
 	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
 
 	if(selected_event_container)
-		var/event_time = max(0, selected_event_container.next_event_time - world.timeofday)
+		var/event_time = max(0, selected_event_container.next_event_time - world.time)
 		html += "<A align='right' href='?src=\ref[src];back=1'>Back</A><br>"
 		html += "Time till start: [round(event_time / 600, 0.1)]<br>"
 		html += "<div class='block'>"
@@ -70,8 +90,8 @@
 			html += "<td><A align='right' href='?src=\ref[src];set_weight=\ref[EM]'>[EM.weight]</A></td>"
 			html += "<td>[EM.min_weight]</td>"
 			html += "<td>[EM.max_weight]</td>"
-			html += "<td><A align='right' href='?src=\ref[src];set_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
-			html += "<td><A align='right' href='?src=\ref[src];set_enabled=\ref[EM]'>[EM.enabled]</A></td>"
+			html += "<td><A align='right' href='?src=\ref[src];toggle_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
+			html += "<td><A align='right' href='?src=\ref[src];toggle_enabled=\ref[EM]'>[EM.enabled]</A></td>"
 			html += "<td><span class='alert'>[EM.get_weight()]</span></td>"
 			html += "<td><A align='right' href='?src=\ref[src];remove=\ref[EM];EC=\ref[selected_event_container]'>Remove</A></td>"
 			html += "</tr>"
@@ -92,18 +112,19 @@
 		html += "<A align='right' href='?src=\ref[src];add=\ref[selected_event_container]'>Add</A><br>"
 		html += "</div>"
 	else
-		html += "<A align='right' href='?src=\ref[src];report=1'>Round End Report: [report_at_round_end ? "On": "Off"]</A><br>"
+		html += "<A align='right' href='?src=\ref[src];toggle_report=1'>Round End Report: [report_at_round_end ? "On": "Off"]</A><br>"
 		html += "<div class='block'>"
 		html += "<h2>Event Start</h2>"
 
 		html += "<table[table_options]>"
-		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Until start</td><td[row_options3]>Adjust start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Starts At</td><td[row_options1]>Until Start</td><td[row_options3]>Adjust Start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
 		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
 			var/datum/event_container/EC = event_containers[severity]
-			var/event_time = max(0, EC.next_event_time - world.timeofday)
+			var/next_event_at = max(0, EC.next_event_time - world.time)
 			html += "<tr>"
 			html += "<td>[severity_to_string[severity]]</td>"
-			html += "<td>[round(event_time / 600, 0.1)]</td>"
+			html += "<td>[worldtime2text(max(EC.next_event_time, world.time))]</td>"
+			html += "<td>[round(next_event_at / 600, 0.1)]</td>"
 			html += "<td>"
 			html +=   "<A align='right' href='?src=\ref[src];dec_timer=2;event=\ref[EC]'>--</A>"
 			html +=   "<A align='right' href='?src=\ref[src];dec_timer=1;event=\ref[EC]'>-</A>"
@@ -139,15 +160,17 @@
 		html += "<div class='block'>"
 		html += "<h2>Running Events</h2>"
 		html += "<table[table_options]>"
-		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options1]>Ends In</td><td[row_options3]>Stop</td></tr>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options1]>Ends At</td><td[row_options1]>Ends In</td><td[row_options3]>Stop</td></tr>"
 		for(var/datum/event/E in active_events)
 			if(!E.event_meta)
 				continue
 			var/datum/event_meta/EM = E.event_meta
-			var/ends_in = max(0, round((E.started + (E.endWhen * 10) - world.timeofday) / 600, 0.1))
+			var/ends_at = E.startedAt + (E.lastProcessAt() * 10)
+			var/ends_in = max(0, round((ends_at - world.time) / 600, 0.1))
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"
 			html += "<td>[EM.name]</td>"
+			html += "<td>[worldtime2text(ends_at)]</td>"
 			html += "<td>[ends_in]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];stop=\ref[E]'>Stop</A></td>"
 			html += "</tr>"
@@ -160,7 +183,11 @@
 	if(..())
 		return
 
-	if(href_list["dec_timer"])
+
+	if(href_list["toggle_report"])
+		report_at_round_end = !report_at_round_end
+		admin_log_and_message_admins("has [report_at_round_end ? "enabled" : "disabled"] the round end event report.")
+	else if(href_list["dec_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
 		var/decrease = (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
 		EC.next_event_time -= decrease
@@ -213,13 +240,13 @@
 			EM.weight = weight
 			if(EM != new_event)
 				admin_log_and_message_admins("has changed the weight of the [severity_to_string[EM.severity]] event '[EM.name]' to [EM.weight].")
-	else if(href_list["set_oneshot"])
-		var/datum/event_meta/EM = locate(href_list["set_oneshot"])
+	else if(href_list["toggle_oneshot"])
+		var/datum/event_meta/EM = locate(href_list["toggle_oneshot"])
 		EM.one_shot = !EM.one_shot
 		if(EM != new_event)
 			admin_log_and_message_admins("has [EM.one_shot ? "set" : "unset"] the oneshot flag for the [severity_to_string[EM.severity]] event '[EM.name]'.")
-	else if(href_list["set_enabled"])
-		var/datum/event_meta/EM = locate(href_list["set_enabled"])
+	else if(href_list["toggle_enabled"])
+		var/datum/event_meta/EM = locate(href_list["toggle_enabled"])
 		EM.enabled = !EM.enabled
 		admin_log_and_message_admins("has [EM.enabled ? "enabled" : "disabled"] the [severity_to_string[EM.severity]] event '[EM.name]'.")
 	else if(href_list["remove"])
@@ -242,9 +269,6 @@
 		if(EC.next_event)
 			admin_log_and_message_admins("has unqueued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
 			EC.next_event = null
-	else if(href_list["report"])
-		report_at_round_end = !report_at_round_end
-		admin_log_and_message_admins("has [report_at_round_end ? "enabled" : "disabled"] the round end event report.")
 
 	Interact(usr)
 

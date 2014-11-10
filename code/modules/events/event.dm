@@ -56,8 +56,8 @@
 	var/severity		= 0 //Severity. Lower means less severe, higher means more severe. Does not have to be supported. Is set on New().
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
 	var/isRunning		= 1 //If this event is currently running. You should not change this.
-	var/started			= 0 //When this event started.
-	var/ended			= 0 //When this event ended.
+	var/startedAt		= 0 //When this event started.
+	var/endedAt			= 0 //When this event ended.
 	var/datum/event_meta/event_meta = null
 
 /datum/event/nothing
@@ -98,6 +98,9 @@
 /datum/event/proc/end()
 	return
 
+//Returns the latest point of event processing.
+/datum/event/proc/lastProcessAt()
+	return max(startWhen, max(announceWhen, endWhen))
 
 //Do not override this proc, instead use the appropiate procs.
 //This proc will handle the calls to the appropiate procs.
@@ -129,7 +132,7 @@
 		isRunning = 0
 		end()
 
-	ended = world.timeofday
+	endedAt = world.time
 	event_manager.active_events -= src
 	event_manager.event_complete(src)
 
@@ -142,7 +145,7 @@
 	if(severity < EVENT_LEVEL_MUNDANE) severity = EVENT_LEVEL_MUNDANE
 	if(severity > EVENT_LEVEL_MAJOR) severity = EVENT_LEVEL_MAJOR
 
-	started = world.timeofday
+	startedAt = world.time
 
 	setup()
 	..()
