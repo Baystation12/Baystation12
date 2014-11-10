@@ -1483,6 +1483,7 @@
 #include "code\WorkInProgress\SkyMarshal\Ultralight_procs.dm"
 #include "code\WorkInProgress\Susan\susan_desert_turfs.dm"
 #include "code\WorkInProgress\Wrongnumber\weldbackpack.dm"
+#include "code\WorkInProgress\yashaldie\virtualgameboard.dm"
 #include "code\ZAS\_docs.dm"
 #include "code\ZAS\_gas_mixture_xgm.dm"
 #include "code\ZAS\_xgm_gas_data.dm"
