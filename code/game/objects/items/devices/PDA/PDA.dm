@@ -1026,12 +1026,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			L << reception_message
 		nanomanager.update_user_uis(L, src) // Update the receiving user's PDA UI so that they can see the new message
 
-		if(L)
-			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;notap=[istype(L, /mob/living/silicon)];skiprefresh=1;target=\ref[src]'>Reply</a>)"
-			nanomanager.update_user_uis(L, P) // Update the receiving user's PDA UI so that they can see the new message
-
 /obj/item/device/pda/proc/new_news(var/message)
 	new_info(news_silent, newstone, news_silent ? "" : "\icon[src] <b>[message]</b>")
+
 	new_news = 1
 	update_icon()
 
@@ -1042,7 +1039,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	new_message(sending_device.name, sending_device.owner, sending_device.ownjob, message)
 
 /obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message)
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=[istype(loc, /mob/living/silicon)];skiprefresh=1;target=\ref[src]'>Reply</a>)"
 	new_info(news_silent, newstone, reception_message)
 
 	log_pda("[usr] (PDA: [sending_unit]) sent \"[message]\" to [name]")
