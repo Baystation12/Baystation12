@@ -11,6 +11,68 @@
 /var/datum/announcement/priority/security/security_announcement_red = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/bloblarm.ogg'))
 /var/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 
+/proc/givesecaccess()
+
+	for(var/obj/item/weapon/card/id/M in world)
+		if (M.assignment == "Security Officer")
+			M.access += access_medical
+			M.access += access_research
+			M.access += access_engine_equip
+			M.access += access_mining
+
+		if (M.assignment == "Security Guard")
+			M.access += access_medical
+			M.access += access_research
+			M.access += access_engine_equip
+			M.access += access_mining
+
+		if (M.assignment == "Warden")
+			M.access += access_medical
+			M.access += access_research
+			M.access += access_engine_equip
+			M.access += access_mining
+
+		if (M.assignment == "Head of Security")
+			M.access += access_research
+			M.access += access_engine_equip
+			M.access += access_mining
+
+		if (M.assignment == "Security Commander")
+			M.access += access_research
+			M.access += access_engine_equip
+			M.access += access_mining
+
+/proc/removesecaccess()
+
+	for(var/obj/item/weapon/card/id/M in world)
+		if (M.assignment == "Security Officer")
+			M.access -= access_medical
+			M.access -= access_research
+			M.access -= access_engine_equip
+			M.access -= access_mining
+
+		if (M.assignment == "Security Guard")
+			M.access -= access_medical
+			M.access -= access_research
+			M.access -= access_engine_equip
+			M.access -= access_mining
+
+		if (M.assignment == "Warden")
+			M.access -= access_medical
+			M.access -= access_research
+			M.access -= access_engine_equip
+			M.access -= access_mining
+
+		if (M.assignment == "Head of Security")
+			M.access -= access_research
+			M.access -= access_engine_equip
+			M.access -= access_mining
+
+		if (M.assignment == "Security Commander")
+			M.access -= access_research
+			M.access -= access_engine_equip
+			M.access -= access_mining
+
 /proc/set_security_level(var/level)
 	switch(level)
 		if("green")
@@ -34,6 +96,8 @@
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
+				removesecaccess()
+
 			if(SEC_LEVEL_BLUE)
 				if(security_level < SEC_LEVEL_BLUE)
 					security_announcement_up.Announce("[config.alert_desc_blue_upto]", "Attention! Security level elevated to blue")
@@ -44,6 +108,8 @@
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
+				removesecaccess()
+
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
 					security_announcement_red.Announce("[config.alert_desc_red_upto]", "Attention! Code red!")
@@ -54,11 +120,11 @@
 				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
 				if(CC)
 					CC.post_status("alert", "redalert")*/
-
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
+				givesecaccess()
 
 			if(SEC_LEVEL_BLACK)
 				security_announcement_up.Announce("A biological threat to the station has been confirmed. The station is now under quarantine. No personnel are allowed to leave the stations at this time. Security personnel are to ensure quarantine protocols are upheld. Medical and research personnel are to remain on stand-by. All personnel must report to their supervisors immediately.", "Attention! Code black!")
