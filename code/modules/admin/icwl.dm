@@ -84,7 +84,7 @@ var/icwl_keylist[]		//to store the keys & ranks
 
 
 /proc/icwl_canHaveJob(var/mob/M, job)
-	if(icwl_isWhitelisted(M.client.ckey) || !check_rights(R_MOD|R_ADMIN, 0))
+	if(icwl_isWhitelisted(M.client.ckey) || check_rights(R_MOD|R_ADMIN, 0))
 		return 1
 	if(icwl_raceCheck(job, M.client.prefs.species) && icwl_ageCheck(job, M.client.prefs.age))
 		return 1
