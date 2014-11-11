@@ -96,7 +96,7 @@ var/global/datum/controller/occupations/job_master
 			if(!job)
 				continue
 
-			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
+			if(istype(job, GetJob("Assistant")) && player.client.prefs.age > 17) // We don't want to give him assistant, that's boring, not unless he is really young!
 				continue
 
 			if(job in command_positions) //If you want a command position, select it!
@@ -108,6 +108,10 @@ var/global/datum/controller/occupations/job_master
 
 			if(!job.player_old_enough(player.client))
 				Debug("GRJ player not old enough, Player: [player]")
+				continue
+
+			if(!icwl_canHaveJob(player, job.title))
+				Debug("GRJ character failed whitelist, Player: [player], Job: [job.title]")
 				continue
 
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -616,6 +620,7 @@ var/global/datum/controller/occupations/job_master
 			var/level4 = 0 //never
 			var/level5 = 0 //banned
 			var/level6 = 0 //account too young
+			var/level7 = 0 //ICWL
 			for(var/mob/new_player/player in player_list)
 				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
@@ -625,6 +630,9 @@ var/global/datum/controller/occupations/job_master
 				if(!job.player_old_enough(player.client))
 					level6++
 					continue
+				if(icwl_canHaveJob(player, job.title))
+					level7++
+					continue
 				if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
 					level1++
 				else if(player.client.prefs.GetJobDepartment(job, 2) & job.flag)
@@ -633,5 +641,5 @@ var/global/datum/controller/occupations/job_master
 					level3++
 				else level4++ //not selected
 
-			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
+			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|ICWL=[level7]|-"
 			feedback_add_details("job_preferences",tmp_str)
