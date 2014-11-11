@@ -1003,7 +1003,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/lawyer/bluejacket,
+					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
 					/obj/item/clothing/suit/storage/lawyer/purpjacket,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
