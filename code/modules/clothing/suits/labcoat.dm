@@ -8,8 +8,8 @@
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
-	var/icon_open = "labcoat_open"
-	var/icon_closed = "labcoat_closed"
+	/obj/item/clothing/suit/storage/labcoat/var/icon_open = "labcoat_open"
+	/obj/item/clothing/suit/storage/labcoat/var/icon_closed = "labcoat_closed"
 
 	verb/toggle()
 		set name = "Toggle Labcoat Buttons"
@@ -19,13 +19,13 @@
 		if(!usr.canmove || usr.stat || usr.restrained())
 			return 0
 
-		if(icon_state == icon_open)
+		if(icon_state == icon_open) //Changes whatever the current icon state is for the other, tells user about it.
 			icon_state = icon_closed
 			usr << "You button up the labcoat."
 		else if(icon_state == icon_closed)
 			icon_state = icon_open
 			usr << "You unbutton the labcoat."
-		else
+		else //Left in in case an admin does something silly and changes the icon state without changing labcoat_open or labcoat_closed
 			usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 			return
 		update_clothing_icon()	//so our overlays update
