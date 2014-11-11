@@ -376,7 +376,7 @@ Buildable meters
 		if(PIPE_GAS_MIXER_T)
 			return dir|cw|acw
 		if(PIPE_CAP, PIPE_SUPPLY_CAP, PIPE_SCRUBBERS_CAP)
-			return flip
+			return dir
 ///// Z-Level stuff
 		if(PIPE_UP,PIPE_DOWN,PIPE_SUPPLY_UP,PIPE_SUPPLY_DOWN,PIPE_SCRUBBERS_UP,PIPE_SCRUBBERS_DOWN)
 			return dir
