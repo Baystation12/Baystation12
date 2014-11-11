@@ -95,26 +95,17 @@
 	var/last_onln = outputting
 
 	//inputting
-	if(terminal && input_attempt)
-		input_available = terminal.surplus()
+	if(input_attempt)
+		var/target_load = min((capacity-charge)/SMESRATE, input_level)	// charge at set rate, limited to spare capacity
+		var/actual_load = draw_power(target_load)						// add the load to the terminal side network
+		charge += actual_load * SMESRATE								// increase the charge
 
-			if (actual_load >= target_load) // Did we charge at full rate?
-				inputting = 2
-			else if (actual_load) // If not, did we charge at least partially?
-				inputting = 1
-			else // Or not at all?
-				inputting = 0
-
-				var/load = min((capacity-charge)/SMESRATE, input_level)		// charge at set rate, limited to spare capacity
-				var/actual_load = terminal.draw_power(load)					// draw power from the terminal side network
-				charge += actual_load * SMESRATE							// increase the charge
-
-			else					// if not enough capcity
-				inputting = 0		// stop inputting
-
-		else
-			if(input_attempt && input_available > 0 && input_available >= input_level)
-				inputting = 1
+		if (actual_load >= target_load) // Did we charge at full rate?
+			inputting = 2
+		else if (actual_load) // If not, did we charge at least partially?
+			inputting = 1
+		else // Or not at all?
+			inputting = 0
 
 	//outputting
 	if(outputting)
