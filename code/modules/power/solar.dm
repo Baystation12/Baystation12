@@ -195,10 +195,10 @@ var/list/solars_list = list()
 
 		T = locate( round(ax,0.5),round(ay,0.5),z)
 
-		if(T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
+		if(!T || T.x == 1 || T.x==world.maxx || T.y==1 || T.y==world.maxy)		// not obscured if we reach the edge
 			break
 
-		if(T.density)			// if we hit a solid turf, panel is obscured
+		if(T.opacity)			// if we hit a solid turf, panel is obscured
 			obscured = 1
 			return
 
@@ -386,7 +386,8 @@ var/list/solars_list = list()
 /obj/machinery/power/solar_control/interact(mob/user)
 
 	var/t = "<B><span class='highlight'>Generated power</span></B> : [round(lastgen)] W<BR>"
-	t += "<B><span class='highlight'>Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
+	t += "<B><span class='highlight'>Star Orientation</span></B>: [sun.angle]&deg ([angle2text(sun.angle)])<BR>"
+	t += "<B><span class='highlight'>Array Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
 	t += "<B><span class='highlight'>Tracking:</B><div class='statusDisplay'>"
 	switch(track)
 		if(0)
