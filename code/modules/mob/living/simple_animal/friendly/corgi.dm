@@ -597,3 +597,30 @@ TO-DO:
 						for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 							dir = i
 							sleep(1)
+
+/mob/living/simple_animal/corgi/Ian/borgi
+	name = "E-N"
+	real_name = "E-N"	//Intended to hold the name without altering it.
+	desc = "It's a borgi."
+	icon_state = "borgi"
+	icon_living = "borgi"
+
+
+/mob/living/simple_animal/corgi/Ian/borgi/Life()
+	..()
+
+	//spark for no reason
+	if(prob(5))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+
+/mob/living/simple_animal/corgi/Ian/borgi/Die()
+	..()
+	visible_message("<b>[src]</b> blows apart!")
+	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(3, 1, src)
+	s.start()
+	del src
+	return
