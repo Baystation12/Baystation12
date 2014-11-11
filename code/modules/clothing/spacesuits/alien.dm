@@ -236,3 +236,30 @@
 	..()
 	if (magpulse)
 		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
+
+// Machine Hardsuits. Yee.
+/obj/item/clothing/head/helmet/space/machine
+	name = "Liquid cooled helmet"
+	desc = "Looks almost like a useless metal box. Does a head even fit in this thing?"
+	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	species_restricted = list("Machine")
+
+/*/obj/item/clothing/head/helmet/space/machine/varient
+	icon_state = "machine_helmet_varient"
+	item_state = "machine_helmet_varient"
+	item_color = "machine_helmet_varient"*/
+
+/obj/item/clothing/suit/space/machine
+	name = "Liquid cooled hardsuit"
+	desc = "A heavy chassis with ports lining the inside. Would not recommend being inside if you don't have anywhere to plug in."
+	armor = list(melee = 20, bullet = 20, laser = 50,energy = 50, bomb = 50, bio = 100, rad = 100)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	species_restricted = list("Machine")
+
+/*/obj/item/clothing/suit/space/machine/varient
+	icon_state = "machine_suit_varient"
+	item_state = "machine_suit_varient"
+	item_color = "machine_suit_varient"*/

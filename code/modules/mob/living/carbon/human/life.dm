@@ -776,9 +776,9 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		/*if (species.flags & IS_SYNTHETIC)
+		if (species.flags & IS_SYNTHETIC && !istype(wear_suit, /obj/item/clothing/suit/space/machine)) // Assuming they're not wearing my new sexy hardsuit.
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
-			return Can IPCs please wear hardsuits again?*/
+			return
 
 		var/body_temperature_difference = species.body_temperature - bodytemperature
 
