@@ -1266,6 +1266,14 @@
 	icon_state = "digiboots"
 	species_restricted = null
 
+/obj/item/clothing/shoes/jackboots/fluff/harmony_singh_1 //Bromuzl: Harmony Singh
+	name = "Springjacks"
+	desc = "A pair of highly modified jackboots in medical white, with some type of spring assembly on the ankle and heels, painted orange."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "springjacks"
+	item_state = "springjacks"
+	slowdown = SHOES_SLOWDOWN+1 //Slowing down because of her injured foot, these are for ease of pain so she can get off painkillers.
+	siemens_coefficient = 0.7 //copied from Jackboots under code/modules/clothing/shoes/miscellaneous.dm
 
 //////////// Sets ////////////
 
