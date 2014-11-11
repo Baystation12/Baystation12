@@ -55,6 +55,13 @@
 			update_icon()
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			return
+	else if(istype(W, /obj/item/weapon/card/id))
+		if(paperamount < max_paper-3)
+			del(W)
+			paperamount += 3
+			update_icon()
+			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
+			return
 	else if(istype(W, /obj/item/weapon/paper_bundle))
 		if(paperamount < max_paper-3)
 			del(W)
