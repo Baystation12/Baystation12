@@ -87,11 +87,11 @@
 	var/stored_units = 0
 
 	if(store_misc)
-		stored_units = store_misc(stored_units)
+		stored_units += store_misc(stored_units)
 	if(store_items)
-		stored_units = store_items(stored_units)
+		stored_units += store_items(stored_units)
 	if(store_mobs)
-		stored_units = store_mobs(stored_units)
+		stored_units += store_mobs(stored_units)
 
 	src.icon_state = src.icon_closed
 	src.opened = 0
@@ -102,26 +102,29 @@
 
 //Cham Projector Exception
 /obj/structure/closet/proc/store_misc(var/stored_units)
+	var/added_units = 0
 	for(var/obj/effect/dummy/chameleon/AD in src.loc)
-		if(stored_units > storage_capacity)
+		if((stored_units + added_units) > storage_capacity)
 			break
 		AD.loc = src
-		stored_units++
-	return stored_units
+		added_units++
+	return added_units
 
 /obj/structure/closet/proc/store_items(var/stored_units)
+	var/added_units = 0
 	for(var/obj/item/I in src.loc)
 		var/item_size = Ceiling(I.w_class / 2)
-		if(stored_units + item_size > storage_capacity)
+		if(stored_units + added_units + item_size > storage_capacity)
 			continue
 		if(!I.anchored)
 			I.loc = src
-			stored_units += item_size
-	return stored_units
+			added_units += item_size
+	return added_units
 
 /obj/structure/closet/proc/store_mobs(var/stored_units)
+	var/added_units = 0
 	for(var/mob/M in src.loc)
-		if(stored_units + mob_size > storage_capacity)
+		if(stored_units + added_units + mob_size > storage_capacity)
 			break
 		if(istype (M, /mob/dead/observer))
 			continue
@@ -133,13 +136,14 @@
 			M.client.eye = src
 
 		M.loc = src
-		stored_units += mob_size
-	return stored_units
+		added_units += mob_size
+	return added_units
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
 	if(!(src.opened ? src.close() : src.open()))
 		user << "<span class='notice'>It won't budge!</span>"
-	return
+		return
+	update_icon()
 
 // this should probably use dump_contents()
 /obj/structure/closet/ex_act(severity)
