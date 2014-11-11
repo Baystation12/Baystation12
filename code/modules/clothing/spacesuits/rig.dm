@@ -496,3 +496,31 @@
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
+
+// Machine Hardsuits. Yee.
+/obj/item/clothing/head/helmet/space/rig/machine
+	name = "Liquid cooled helmet"
+	desc = "Looks almost like a useless metal box. Does a head even fit in this thing?"
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	species_restricted = list("Machine")
+	slowdown = 1
+
+/obj/item/clothing/head/helmet/space/rig/machine/blue
+	icon_state = "rig0-ipcblue"
+	item_state = "rig0-ipcblue"
+	item_color = "rig0-ipcblue"
+
+/obj/item/clothing/suit/space/rig/machine
+	name = "Liquid cooled hardsuit"
+	desc = "A heavy chassis with ports lining the inside. Would not recommend being inside if you don't have anywhere to plug in."
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	species_restricted = list("Machine")
+	slowdown = 1
+
+/obj/item/clothing/suit/space/rig/machine/blue
+	icon_state = "rig-ipcblue"
+	item_state = "rig-ipcblue"
