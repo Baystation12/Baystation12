@@ -615,7 +615,7 @@ TO-DO:
 		s.set_up(3, 1, src)
 		s.start()
 
-/mob/living/simple_animal/corgi/Ian/borgi/Die()
+/mob/living/simple_animal/corgi/Ian/borgi/death()
 	..()
 	visible_message("<b>[src]</b> blows apart!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)

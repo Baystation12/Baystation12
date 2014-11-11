@@ -153,7 +153,6 @@
 
 	var/recieve_color = "purple"
 
-
 	if(holder)
 		//mod PMs are maroon
 		//PMs sent from admins and mods display their rank
@@ -164,10 +163,6 @@
 				recieve_color = "maroon"
 
 	var/recieve_message = ""
-
-
-
-
 	recieve_message = "<font color='[recieve_color]'>All Antags PM from-<b>[src.key]</b>: [msg]</font>"
 	src << "<font color='blue'> PM to All Antags</b>: [msg]</font>"
 	log_admin("PM: [key_name(src)]-> All Antags: [msg]")
