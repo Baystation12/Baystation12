@@ -509,7 +509,7 @@
 /obj/item/clothing/head/helmet/space/rig/machine/blue
 	icon_state = "rig0-ipcblue"  //Sprites by Miss Teddybears
 	item_state = "rig0-ipcblue"
-	item_color = "rig0-ipcblue"
+	item_color = "ipcblue"
 
 /obj/item/clothing/suit/space/rig/machine
 	name = "Liquid cooled hardsuit"
