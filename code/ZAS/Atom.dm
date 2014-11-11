@@ -47,7 +47,7 @@ turf/c_airblock(turf/other)
 	#ifdef ZASDBG
 	ASSERT(isturf(other))
 	#endif
-	if(blocks_air)
+	if(blocks_air || other.blocks_air)
 		return BLOCKED
 
 	//Z-level handling code. Always block if there isn't an open space.

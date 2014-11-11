@@ -62,11 +62,11 @@ datum/directive/ipc_virus/get_remaining_orders()
 
 	return text
 
-/hook/debrain/proc/debrain_directive(obj/item/brain/B)
+/hook/debrain/proc/debrain_directive(var/obj/item/organ/brain/B)
 	var/datum/directive/ipc_virus/D = get_directive("ipc_virus")
 	if (!D) return 1
 
-	if(D.brains_to_enslave.Find(B.brainmob.mind))
+	if(B && B.brainmob && B.brainmob.mind && D.brains_to_enslave.Find(B.brainmob.mind))
 		D.brains_to_enslave.Remove(B.brainmob.mind)
 
 	return 1

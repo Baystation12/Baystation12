@@ -164,7 +164,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		preview_icon.Blend(temp, ICON_OVERLAY)
 
 	//Tail
-	if(H.species.tail && H.species.flags & HAS_TAIL)
+	if(H.species.tail)
 		temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[H.species.tail]_s")
 		preview_icon.Blend(temp, ICON_OVERLAY)
 

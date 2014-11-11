@@ -37,6 +37,7 @@ em						{font-style: normal;	font-weight: bold;}
 .medradio				{color: #008160;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
+.srvradio				{color: #6eaa2c;}
 
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
@@ -65,9 +66,13 @@ h1.alert, h2.alert		{color: #000000;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
+.changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}
+
+BIG IMG.icon 			{width: 32px; height: 32px;}
+
 </style>"}

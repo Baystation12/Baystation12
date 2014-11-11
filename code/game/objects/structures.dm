@@ -1,10 +1,45 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
 	var/climbable
+	var/breakable
+	var/parts
+
+/obj/structure/proc/destroy()
+	if(parts)
+		new parts(loc)
+	density = 0
+	del(src)
+
+/obj/structure/attack_hand(mob/user)
+	if(breakable)
+		if(HULK in user.mutations)
+			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
+			visible_message("<span class='danger'>[user] smashes the [src] apart!</span>")
+			destroy()
+		else if(istype(user,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = user
+			if(H.species.can_shred(user))
+				visible_message("<span class='danger'>[H] slices [src] apart!</span>")
+				destroy()
+
+/obj/structure/attack_animal(mob/living/user)
+	if(breakable)
+		if(user.wall_smash)
+			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
+			destroy()
+
+/obj/structure/attack_paw(mob/user)
+	if(breakable) attack_hand(user)
 
 /obj/structure/blob_act()
 	if(prob(50))
 		del(src)
+
+/obj/structure/meteorhit(obj/O as obj)
+	destroy(src)
+
+/obj/structure/attack_tk()
+	return
 
 /obj/structure/ex_act(severity)
 	switch(severity)
@@ -43,13 +78,16 @@
 
 	do_climb(target)
 
-/obj/structure/proc/do_climb(var/mob/living/user)
-
+/obj/structure/proc/can_climb(var/mob/living/user)
 	if (!can_touch(user) || !climbable)
-		return
+		return 0
 
 	var/turf/T = src.loc
-	if(!T || !istype(T)) return
+	if(!T || !istype(T)) return 0
+
+	if (!user.Adjacent(src))
+		user << "\red You can't climb there, the way is blocked."
+		return 0
 
 	for(var/obj/O in T.contents)
 		if(istype(O,/obj/structure))
@@ -57,29 +95,24 @@
 			if(S.climbable)
 				continue
 
-		if(O && O.density)
-			usr << "\red There's \a [O] in the way."
-			return
+		if(O && O.density && !(O.flags & ON_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
+			user << "\red There's \a [O] in the way."
+			return 0
+	return 1
+
+/obj/structure/proc/do_climb(var/mob/living/user)
+	if (!can_climb(user))
+		return
 
 	usr.visible_message("<span class='warning'>[user] starts climbing onto \the [src]!</span>")
 
 	if(!do_after(user,50))
 		return
 
-	if (!can_touch(user) || !climbable)
+	if (!can_climb(user))
 		return
 
-	for(var/obj/O in T.contents)
-		if(istype(O,/obj/structure))
-			var/obj/structure/S = O
-			if(S.climbable)
-				continue
-
-		if(O && O.density)
-			usr << "\red There's \a [O] in the way."
-			return
-
-	usr.loc = get_turf(src)
+	usr.forceMove(get_turf(src))
 
 	if (get_turf(user) == get_turf(src))
 		usr.visible_message("<span class='warning'>[user] climbs onto \the [src]!</span>")

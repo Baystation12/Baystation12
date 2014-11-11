@@ -27,7 +27,7 @@ datum/game_mode/mutiny
 
 	proc/reveal_directives()
 		spawn(rand(1 MINUTE, 3 MINUTES))
-			command_alert("Incoming emergency directive: Captain's office fax machine, [station_name()].","Emergency Transmission")
+			command_announcement.Announce("Incoming emergency directive: Captain's office fax machine, [station_name()].","Emergency Transmission")
 			spawn(rand(3 MINUTES, 5 MINUTES))
 				send_pda_message()
 			spawn(rand(3 MINUTES, 5 MINUTES))
@@ -51,7 +51,7 @@ datum/game_mode/mutiny
 						"leaks into a negative reality",
 						"antiparticle clouds",
 						"residual bluespace energy",
-						"suspected syndicate operatives",
+						"suspected criminal operatives",
 						"malfunctioning von Neumann probe swarms",
 						"shadowy interlopers",
 						"a stranded Vox arkship",
@@ -67,7 +67,7 @@ datum/game_mode/mutiny
 						"classified security operations",
 						"science-defying raw elemental chaos"
 						)
-					command_alert("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time.","Emergency Transmission")
+					command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time.","Emergency Transmission")
 
 	// Returns an array in case we want to expand on this later.
 	proc/get_head_loyalist_candidates()
@@ -103,7 +103,7 @@ datum/game_mode/mutiny
 		if (!pda)
 			return 0
 
-		if (!pda.silent)
+		if (!pda.message_silent)
 			playsound(pda.loc, 'sound/machines/twobeep.ogg', 50, 1)
 			for (var/mob/O in hearers(3, pda.loc))
 				O.show_message(text("\icon[pda] *[pda.ttone]*"))

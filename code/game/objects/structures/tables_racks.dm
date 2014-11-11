@@ -20,8 +20,9 @@
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	climbable = 1
+	breakable = 1
+	parts = /obj/item/weapon/table_parts
 
-	var/parts = /obj/item/weapon/table_parts
 	var/flipped = 0
 	var/health = 100
 
@@ -42,16 +43,6 @@
 /obj/structure/table/Del()
 	update_adjacent()
 	..()
-
-/obj/structure/table/proc/destroy()
-	new parts(loc)
-	density = 0
-	del(src)
-
-/obj/structure/rack/proc/destroy()
-	new parts(loc)
-	density = 0
-	del(src)
 
 /obj/structure/table/update_icon()
 	spawn(2) //So it properly updates when deleting
@@ -263,49 +254,6 @@
 		else
 			dir = 2
 
-/obj/structure/table/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			del(src)
-			return
-		if(2.0)
-			if (prob(50))
-				del(src)
-				return
-		if(3.0)
-			if (prob(25))
-				destroy()
-		else
-	return
-
-
-/obj/structure/table/blob_act()
-	if(prob(75))
-		destroy()
-
-/obj/structure/table/attack_paw(mob/user)
-	if(HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		visible_message("<span class='danger'>[user] smashes the [src] apart!</span>")
-		destroy()
-
-
-/obj/structure/table/attack_alien(mob/user)
-	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-
-/obj/structure/table/attack_animal(mob/living/simple_animal/user)
-	if(user.wall_smash)
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		destroy()
-
-
-
-/obj/structure/table/attack_hand(mob/user)
-	if(HULK in user.mutations)
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		destroy()
-
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
 
@@ -500,6 +448,7 @@
 	dir = direction
 	if(dir != NORTH)
 		layer = 5
+	climbable = 0 //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
@@ -517,6 +466,7 @@
 
 	layer = initial(layer)
 	flipped = 0
+	climbable = initial(climbable)
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)
@@ -601,29 +551,9 @@
 	flags = FPRINT
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
-	var/parts = /obj/item/weapon/rack_parts
-
-/obj/structure/rack/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			del(src)
-		if(2.0)
-			del(src)
-			if(prob(50))
-				new /obj/item/weapon/rack_parts(src.loc)
-		if(3.0)
-			if(prob(25))
-				del(src)
-				new /obj/item/weapon/rack_parts(src.loc)
-
-/obj/structure/rack/blob_act()
-	if(prob(75))
-		del(src)
-		return
-	else if(prob(50))
-		new /obj/item/weapon/rack_parts(src.loc)
-		del(src)
-		return
+	breakable = 1
+	climbable = 1
+	parts = /obj/item/weapon/rack_parts
 
 /obj/structure/rack/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -654,32 +584,4 @@
 		return
 	user.drop_item()
 	if(W && W.loc)	W.loc = src.loc
-	return
-
-/obj/structure/rack/meteorhit(obj/O as obj)
-	del(src)
-
-
-/obj/structure/table/attack_hand(mob/user)
-	if(HULK in user.mutations)
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		destroy()
-
-/obj/structure/rack/attack_paw(mob/user)
-	if(HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		destroy()
-
-/obj/structure/rack/attack_alien(mob/user)
-	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-	destroy()
-
-/obj/structure/rack/attack_animal(mob/living/simple_animal/user)
-	if(user.wall_smash)
-		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		destroy()
-
-/obj/structure/rack/attack_tk() // no telehulk sorry
 	return

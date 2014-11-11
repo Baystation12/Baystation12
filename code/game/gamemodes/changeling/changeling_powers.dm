@@ -3,7 +3,9 @@
 
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
+
 	verbs += /datum/changeling/proc/EvolutionMenu
+	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
 
@@ -30,8 +32,7 @@
 		mind.changeling.absorbed_species += H.species.name
 
 	for(var/language in languages)
-		if(!(language in mind.changeling.absorbed_languages))
-			mind.changeling.absorbed_languages += language
+		mind.changeling.absorbed_languages |= language
 
 	return 1
 
@@ -80,6 +81,9 @@
 	for(var/language in updated_languages)
 		languages += language
 
+	//This isn't strictly necessary but just to be safe...
+	add_language("Changeling")
+
 	return
 
 //Used to switch species based on the changeling datum.
@@ -111,7 +115,7 @@
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.verbs -= /mob/proc/changeling_change_species
-	H.set_species(S,null,1) //Until someone moves body colour into DNA, they're going to have to use the default.
+	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
 
 	spawn(10)
 		src.verbs += /mob/proc/changeling_change_species

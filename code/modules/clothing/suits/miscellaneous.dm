@@ -62,7 +62,7 @@
 
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
-	desc = "A Nazi great coat"
+	desc = "A heavy great coat"
 	icon_state = "nazi"
 	item_state = "nazi"
 	flags = FPRINT | TABLEPASS
@@ -219,7 +219,7 @@
 	else
 		usr << "You button-up some imaginary buttons on your [src]."
 		return
-	usr.update_inv_wear_suit()
+	update_clothing_icon()
 
 //pyjamas
 //originally intended to be pinstripes >.>
@@ -347,3 +347,97 @@
 	icon_state = "swim_red"
 	item_color = "swim_red"
 	siemens_coefficient = 1
+
+/obj/item/clothing/suit/poncho
+	name = "poncho"
+	desc = "A simple, comfortable poncho."
+	icon_state = "classicponcho"
+	item_state = "classicponcho"
+
+/obj/item/clothing/suit/poncho/green
+	name = "green poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is green."
+	icon_state = "greenponcho"
+	item_state = "greenponcho"
+
+/obj/item/clothing/suit/poncho/red
+	name = "red poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is red."
+	icon_state = "redponcho"
+	item_state = "redponcho"
+
+/obj/item/clothing/suit/poncho/purple
+	name = "purple poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is purple."
+	icon_state = "purpleponcho"
+	item_state = "purpleponcho"
+
+/obj/item/clothing/suit/poncho/blue
+	name = "blue poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is blue."
+	icon_state = "blueponcho"
+	item_state = "blueponcho"
+
+/obj/item/clothing/suit/storage/bomber
+	name = "bomber jacket"
+	desc = "A thick, well-worn WW2 leather bomber jacket."
+	icon_state = "bomber"
+	item_state = "bomber"
+	flags = FPRINT | TABLEPASS
+	body_parts_covered = UPPER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|ARMS
+	min_cold_protection_temperature = T0C - 20
+	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/storage/leather_jacket
+	name = "leather jacket"
+	desc = "A black leather coat."
+	icon_state = "leather_jacket"
+	item_state = "leather_jacket"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/leather_jacket/nanotrasen
+	desc = "A black leather coat. The letters NT are proudly displayed on the back."
+	icon_state = "leather_jacket_nt"
+
+//This one has buttons for some reason
+/obj/item/clothing/suit/storage/brown_jacket
+	name = "leather jacket"
+	desc = "A brown leather coat."
+	icon_state = "brown_jacket"
+	item_state = "brown_jacket"
+	var/open_state = "brown_jacket_open"
+	body_parts_covered = UPPER_TORSO|ARMS
+
+/obj/item/clothing/suit/storage/brown_jacket/nanotrasen
+	desc = "A brown leather coat. The letters NT are proudly displayed on the back."
+	icon_state = "brown_jacket_nt"
+	open_state = "brown_jacket_nt_open"
+	
+/obj/item/clothing/suit/storage/brown_jacket/verb/toggle()
+	set name = "Toggle Jacket Buttons"
+	set category = "Object"
+	set src in usr
+
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return 0
+	
+	//The inhand sprite (the mob sprite that appears when holding the item in your hand) 
+	//is unchanged, so update only icon_state, not item_state.
+	if(icon_state == open_state)
+		usr << "You button up the jacket."
+		src.icon_state = initial(icon_state)
+	
+	else if(icon_state == initial(icon_state))
+		usr << "You unbutton the jacket."
+		src.icon_state = open_state
+	
+	update_clothing_icon()	//so our overlays update
+
+/obj/item/clothing/suit/hoodie
+	name = "grey hoodie"
+	desc = "A warm, grey sweatshirt."
+	icon_state = "grey_hoodie"
+	item_state = "grey_hoodie"
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS

@@ -29,6 +29,8 @@
 		new /obj/item/clothing/suit/armor/captain(src)
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/under/dress/dress_cap(src)
+		new /obj/item/clothing/head/helmet/formalcaptain(src)
+		new /obj/item/clothing/under/captainformal(src)
 		return
 
 
@@ -82,6 +84,7 @@
 		new /obj/item/clothing/shoes/leather(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/under/rank/head_of_personnel_whimsy(src)
+		new /obj/item/clothing/head/helmet/hop(src)
 		return
 
 

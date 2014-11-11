@@ -33,14 +33,14 @@
 	if(cloaked || isnull(departure_message))
 		return
 
-	command_alert(departure_message,(announcer ? announcer : "Central Command"))
+	command_announcement.Announce(departure_message,(announcer ? announcer : "Central Command"))
 
 /datum/shuttle/multi_shuttle/proc/announce_arrival()
 
 	if(cloaked || isnull(arrival_message))
 		return
 
-	command_alert(arrival_message,(announcer ? announcer : "Central Command"))
+	command_announcement.Announce(arrival_message,(announcer ? announcer : "Central Command"))
 
 
 /obj/machinery/computer/shuttle_control/multi
@@ -85,7 +85,7 @@
 
 	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
-	
+
 	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
 
 	if (MS.moving_status != SHUTTLE_IDLE)
@@ -103,7 +103,7 @@
 			//TODO: Actually end the mission.
 			MS.return_warning = 1
 			return
-		
+
 		MS.long_jump(MS.last_departed,MS.origin,MS.interim,MS.move_time)
 		MS.last_departed = MS.origin
 		MS.at_origin = 1
@@ -128,7 +128,7 @@
 			MS.last_departed = MS.origin
 			MS.at_origin = 0
 
-			
+
 			MS.long_jump(MS.last_departed, MS.destinations[choice], MS.interim, MS.move_time)
 			MS.last_departed = MS.destinations[choice]
 			return

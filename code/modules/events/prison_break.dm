@@ -1,4 +1,5 @@
 /datum/event/prison_break
+	name 			= "Prison Break"
 	announceWhen	= 50
 	oneShot			= 1
 
@@ -16,7 +17,7 @@
 
 /datum/event/prison_break/announce()
 	if(prisonAreas && prisonAreas.len > 0)
-		command_alert("[pick("Gr3y.T1d3 virus","Malignant trojan")] detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
+		command_announcement.Announce("[pick("Gr3y.T1d3 virus","Malignant trojan")] detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 		kill()

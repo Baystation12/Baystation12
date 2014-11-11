@@ -179,6 +179,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 
 /mob/dead/observer/Move(NewLoc, direct)
+	following = null
 	dir = direct
 	if(NewLoc)
 		loc = NewLoc
@@ -198,10 +199,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
 		S.Crossed(src)
-
-/mob/dead/observer/examine()
-	if(usr)
-		usr << desc
 
 /mob/dead/observer/can_use_hands()	return 0
 /mob/dead/observer/is_active()		return 0
@@ -306,6 +303,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		usr << "No area available."
 
 	usr.loc = pick(L)
+	following = null
 
 /mob/dead/observer/verb/follow()
 	set category = "Ghost"
@@ -325,18 +323,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		following = target
 		src << "\blue Now following [target]"
 		spawn(0)
-			var/turf/pos = get_turf(src)
-			while(loc == pos && target && following == target && client)
+			while(target && following == target && client)
 				var/turf/T = get_turf(target)
 				if(!T)
 					break
 				// To stop the ghost flickering.
 				if(loc != T)
 					loc = T
-				pos = loc
 				sleep(15)
-			following = null
-
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
@@ -361,6 +355,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
 				A.loc = T
+				following = null
 			else
 				A << "This mob is not located in the game world."
 /*
@@ -551,3 +546,48 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		W.message = message
 		W.add_hiddenprint(src)
 		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")
+
+/mob/dead/observer/pointed(atom/A as mob|obj|turf in view())
+	if(!..())
+		return 0
+	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
+	return 1
+
+/mob/dead/proc/manifest()
+	verbs += /mob/dead/proc/toggle_visibility
+	toggle_visibility()
+
+/mob/dead/proc/toggle_icon(var/icon)
+	if(!client)
+		return
+
+	var/iconRemoved = 0
+	for(var/image/I in client.images)
+		if(I.icon_state == icon)
+			iconRemoved = 1
+			del(I)
+
+	if(!iconRemoved)
+		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
+		client.images += J
+
+/mob/dead/proc/toggle_visibility()
+	set category = "Ghost"
+	set name = "Toggle Visibility"
+	set desc = "Allows you to turn (in)visible (almost) at will."
+
+	var/toggled_invisible
+
+	if(invisibility && world.time < toggled_invisible + 600)
+		src << "You must gather strength before you can turn visible again..."
+		return
+
+	if(invisibility == 0)
+		toggled_invisible = world.time
+		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible</span>")
+	else
+		src << "<span class='info>You are now visible</span>"
+
+	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
+	// Give the ghost a cult icon which should be visible only to itself
+	toggle_icon("cult")

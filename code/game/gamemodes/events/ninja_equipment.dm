@@ -530,12 +530,12 @@ ________________________________________________________________________________
 				display_spideros()
 				return
 			P.tnote += "<i><b>&larr; From [!s_control?(A):"an unknown source"]:</b></i><br>[t]<br>"
-			if (!P.silent)
+			if (!P.message_silent)
 				playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 				for (var/mob/O in hearers(3, P.loc))
 					O.show_message(text("\icon[P] *[P.ttone]*"))
-			P.overlays.Cut()
-			P.overlays += image('icons/obj/pda.dmi', "pda-r")
+			P.new_message = 1
+			P.update_icon()
 
 		if("Inject")
 			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
@@ -911,9 +911,8 @@ ________________________________________________________________________________
 				U.drop_item()
 	return 0
 
-/obj/item/clothing/suit/space/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/suit/space/space_ninja/examine(mob/user)
+	..(user)
 	if(s_initialized)
 		var/mob/living/carbon/human/U = affecting
 		if(s_control)
@@ -1168,9 +1167,8 @@ ________________________________________________________________________________
 	U << "You <b>[candrain?"disable":"enable"]</b> special interaction."
 	candrain=!candrain
 
-/obj/item/clothing/gloves/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/gloves/space_ninja/examine(mob/user)
+	..(user)
 	if(!canremove)
 		var/mob/living/carbon/human/U = loc
 		U << "The energy drain mechanism is: <B>[candrain?"active":"inactive"]</B>."
@@ -1212,7 +1210,7 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,target,"hudwizard")
 				if("Hunter","Sentinel","Drone","Queen")
 					U.client.images += image(tempHud,target,"hudalien")
-				if("Syndicate")
+				if("Mercenary")
 					U.client.images += image(tempHud,target,"hudoperative")
 				if("Death Commando")
 					U.client.images += image(tempHud,target,"huddeathsquad")
@@ -1306,12 +1304,11 @@ ________________________________________________________________________________
 	var/mob/U = loc
 	U << "Switching mode to <B>[ninja_vision.mode]</B>."
 
-/obj/item/clothing/mask/gas/voice/space_ninja/examine()
-	set src in view()
-	..()
+/obj/item/clothing/mask/gas/voice/space_ninja/examine(mob/user)
+	..(user)
 
-	usr << "<B>[ninja_vision.mode]</B> is active."//Leaving usr here since it may be on the floor or on a person.
-	usr << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
+	user << "<B>[ninja_vision.mode]</B> is active."
+	user << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
 
 /*
 ===================================================================================
@@ -1451,31 +1448,33 @@ It is possible to destroy the net by the occupant or someone else.
 		return
 
 	attack_hand()
+
 		if (HULK in usr.mutations)
 			usr << text("\blue You easily destroy the energy net.")
 			for(var/mob/O in oviewers(src))
 				O.show_message(text("\red [] rips the energy net apart!", usr), 1)
 			health-=50
+		else if(istype(usr,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = usr
+			if(H.species.can_shred(H))
+
+				H << text("\green You claw at the net.")
+				for(var/mob/O in oviewers(src))
+					O.show_message(text("\red [] claws at the energy net!", H), 1)
+
+				playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
+				health -= rand(10, 20)
+
+				if(health <= 0)
+					H << text("\green You slice the energy net to pieces.")
+					for(var/mob/O in oviewers(src))
+						O.show_message(text("\red [] slices the energy net apart!", H), 1)
+
 		healthcheck()
 		return
 
 	attack_paw()
 		return attack_hand()
-
-	attack_alien()
-		if (islarva(usr))
-			return
-		usr << text("\green You claw at the net.")
-		for(var/mob/O in oviewers(src))
-			O.show_message(text("\red [] claws at the energy net!", usr), 1)
-		playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
-		health -= rand(10, 20)
-		if(health <= 0)
-			usr << text("\green You slice the energy net to pieces.")
-			for(var/mob/O in oviewers(src))
-				O.show_message(text("\red [] slices the energy net apart!", usr), 1)
-		healthcheck()
-		return
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		var/aforce = W.force

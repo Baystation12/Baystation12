@@ -124,11 +124,10 @@
 			return 1
 	return 0
 
-/obj/machinery/status_display/examine()
-	set src in view()
-	. = ..()
+/obj/machinery/status_display/examine(mob/user)
+	. = ..(user)
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
-		usr << "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]"
+		user << "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]"
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)
@@ -204,86 +203,6 @@
 		if("time")
 			mode = STATUS_DISPLAY_TIME
 
-/obj/machinery/ai_status_display
-	icon = 'icons/obj/status_display.dmi'
-	icon_state = "frame"
-	name = "AI display"
-	anchored = 1
-	density = 0
-
-	var/mode = 0	// 0 = Blank
-					// 1 = AI emoticon
-					// 2 = Blue screen of death
-
-	var/picture_state	// icon_state of ai picture
-
-	var/emotion = "Neutral"
-
-/obj/machinery/ai_status_display/process()
-	if(stat & NOPOWER)
-		overlays.Cut()
-		return
-
-	update()
-
-/obj/machinery/ai_status_display/emp_act(severity)
-	if(stat & (BROKEN|NOPOWER))
-		..(severity)
-		return
-	set_picture("ai_bsod")
-	..(severity)
-
-/obj/machinery/ai_status_display/proc/update()
-	if(mode==0) //Blank
-		overlays.Cut()
-		return
-
-	if(mode==1)	// AI emoticon
-		switch(emotion)
-			if("Very Happy")
-				set_picture("ai_veryhappy")
-			if("Happy")
-				set_picture("ai_happy")
-			if("Neutral")
-				set_picture("ai_neutral")
-			if("Unsure")
-				set_picture("ai_unsure")
-			if("Confused")
-				set_picture("ai_confused")
-			if("Sad")
-				set_picture("ai_sad")
-			if("Surprised")
-				set_picture("ai_surprised")
-			if("Upset")
-				set_picture("ai_upset")
-			if("Angry")
-				set_picture("ai_angry")
-			if("BSOD")
-				set_picture("ai_bsod")
-			if("Blank")
-				set_picture("ai_off")
-			if("Problems?")
-				set_picture("ai_trollface")
-			if("Awesome")
-				set_picture("ai_awesome")
-			if("Dorfy")
-				set_picture("ai_urist")
-			if("Facepalm")
-				set_picture("ai_facepalm")
-			if("Friend Computer")
-				set_picture("ai_friend")
-		return
-
-	if(mode==2)	// BSOD
-		set_picture("ai_bsod")
-		return
-
-
-/obj/machinery/ai_status_display/proc/set_picture(var/state)
-	picture_state = state
-	if(overlays.len)
-		overlays.Cut()
-	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
 
 #undef CHARS_PER_LINE
 #undef FOND_SIZE

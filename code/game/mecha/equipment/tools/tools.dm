@@ -70,7 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
-	required_type = list(/obj/mecha/working, /obj/mecha/combat)
+	required_type = list(/obj/mecha/working/ripley, /obj/mecha/combat)
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -173,11 +173,14 @@
 	energy_drain = 0
 	range = MELEE|RANGED
 	required_type = /obj/mecha/working
+	var/spray_particles = 5
+	var/spray_amount = 5	//units of liquid per particle. 5 is enough to wet the floor - it's a big fire extinguisher, so should be fine
+	var/max_water = 1000
 
 	New()
-		reagents = new/datum/reagents(200)
+		reagents = new/datum/reagents(max_water)
 		reagents.my_atom = src
-		reagents.add_reagent("water", 200)
+		reagents.add_reagent("water", max_water)
 		..()
 		return
 
@@ -188,8 +191,8 @@
 		if(do_after_cooldown(target))
 			if(istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
-				o.reagents.trans_to(src, 200)
-				occupant_message("\blue Extinguisher refilled")
+				var/amount = o.reagents.trans_to(src, 200)
+				occupant_message("\blue [amount] units transferred into internal tank.")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
 			else
 				if(src.reagents.total_volume > 0)
@@ -200,22 +203,25 @@
 					var/turf/T2 = get_step(T,turn(direction, -90))
 
 					var/list/the_targets = list(T,T1,T2)
-					spawn(0)
-						for(var/a=0, a<5, a++)
+					for(var/a=0, a<spray_particles, a++)
+						spawn(0)
 							var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
 							if(!W)
 								return
 							var/turf/my_target = pick(the_targets)
-							var/datum/reagents/R = new/datum/reagents(5)
+							var/datum/reagents/R = new/datum/reagents(spray_amount)
 							W.reagents = R
 							R.my_atom = W
-							src.reagents.trans_to(W,1)
+							src.reagents.trans_to(W, spray_amount)
+						
 							for(var/b=0, b<4, b++)
 								if(!W)
 									return
 								step_towards(W,my_target)
 								if(!W)
 									return
+								if(!W.reagents)
+									break
 								var/turf/W_turf = get_turf(W)
 								W.reagents.reaction(W_turf)
 								for(var/atom/atm in W_turf)
@@ -223,6 +229,7 @@
 								if(W.loc == my_target)
 									break
 								sleep(2)
+							W.delete()
 		return 1
 
 	get_equip_info()
@@ -1054,7 +1061,7 @@
 	var/list/allowed_types = list() //Types of mech that the kit will work on.
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger
-	name = "Passenger Compartment"
+	name = "passenger compartment"
 	desc = "A mountable passenger compartment for exo-suits. Rather cramped."
 	icon_state = "mecha_abooster_ccw"
 	origin_tech = "engineering=1;biotech=1"
@@ -1101,16 +1108,16 @@
 		
 	if(usr != occupant)
 		return
+	occupant << "You climb out from \the [src]."
 	go_out()
+	occupant_message("[occupant] disembarked.")
+	log_message("[occupant] disembarked.")
 	add_fingerprint(usr)
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/proc/go_out()
 	if(!occupant)
 		return
-	occupant << "You climb out from \the [src]."
 	occupant.forceMove(get_turf(src))
-	occupant_message("[occupant] disembarked.")
-	log_message("[occupant] disembarked.")
 	occupant.reset_view()
 	/*
 	if(occupant.client)
@@ -1136,16 +1143,13 @@
 		M.verbs -= /obj/mecha/proc/move_inside_passenger
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/get_equip_info()
-	var/output = ..()
-	if(output)
-		var/temp = "<br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>[door_locked? "Locked" : "Unlocked"]</a>"
-		return "[output] [temp]"
-	return
+	return "[..()] <br />[occupant? "\[Occupant: [occupant]\]|" : ""]Exterior Hatch: <a href='?src=\ref[src];toggle_lock=1'>Toggle Lock</a>"
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Topic(href,href_list)
 	..()
 	if (href_list["toggle_lock"])
 		door_locked = !door_locked
+		occupant_message("Passenger compartment hatch [door_locked? "locked" : "unlocked"].")
 		if (chassis)
 			chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
 		
@@ -1164,6 +1168,10 @@
 		return
 	
 	if (!usr.Adjacent(src))
+		return
+	
+	if (!isturf(usr.loc))
+		usr << "\red You can't reach the passenger compartment from here."
 		return
 	
 	if(iscarbon(usr))
@@ -1201,5 +1209,3 @@
 			usr << "\red All of the passenger compartments are already occupied or locked!"
 		if (0)
 			usr << "\red \The [src] doesn't have a passenger compartment."
-
-/obj/mecha/proc/remove_passenger()

@@ -528,7 +528,7 @@ Doing this because FindTurfs() isn't even used
 		src << "Only administrators may use this command."
 		return
 	for(var/turf/T in world)
-		if(prob(4) && T.z == 1 && istype(T,/turf/station/floor))
+		if(prob(4) && T.z in station_levels && istype(T,/turf/station/floor))
 			spawn(50+rand(0,3000))
 				var/obj/item/weapon/tank/plasmatank/pt = new /obj/item/weapon/tank/plasmatank( T )
 				pt.gas.temperature = 400+T0C

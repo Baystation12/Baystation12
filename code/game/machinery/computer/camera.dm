@@ -80,7 +80,7 @@
 			A.eyeobj.setLoc(get_turf(C))
 			A.client.eye = A.eyeobj
 			return 1
-		
+
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
 		src.current = C

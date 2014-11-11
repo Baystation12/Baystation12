@@ -104,11 +104,10 @@
 				else
 					user << "\red \the [W] is empty."
 
-	examine()
-		set src in usr
-		usr << desc
+	examine(mob/user)
+		..(user)
 		if(detonator)
-			usr << "With attached [detonator.name]"
+			user << "With attached [detonator.name]"
 
 	activate(mob/user as mob)
 		if(active) return

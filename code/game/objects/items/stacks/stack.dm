@@ -28,11 +28,9 @@
 		usr << browse(null, "window=stack")
 	..()
 
-/obj/item/stack/examine()
-	set src in view(1)
-	..()
-	usr << "There are [src.amount] [src.singular_name]\s in the stack."
-	return
+/obj/item/stack/examine(mob/user)
+	if(..(user, 1))
+		user << "There are [src.amount] [src.singular_name]\s in the stack."
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -76,7 +74,7 @@
 				title+= "[R.title]"
 			title+= " ([R.req_amount] [src.singular_name]\s)"
 			if (can_build)
-				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i]'>[title]</A>  ")
+				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>  ")
 			else
 				t1 += text("[]", title)
 				continue
@@ -112,7 +110,8 @@
 			recipes_list = srl.recipes
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
-		if (!multiplier) multiplier = 1
+		if (!multiplier || (multiplier <= 0)) //href exploit protection
+			return
 		if (src.amount < R.req_amount*multiplier)
 			if (R.req_amount*multiplier>1)
 				usr << "\red You haven't got enough [src] to build \the [R.req_amount*multiplier] [R.title]\s!"

@@ -33,7 +33,7 @@
 	var/photo_size = 3
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
-	examine()
+	user.examinate(src)
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
@@ -43,13 +43,12 @@
 			scribble = txt
 	..()
 
-/obj/item/weapon/photo/examine()
-	set src in oview(1)
-	if(in_range(usr, src))
-		show(usr)
-		usr << desc
+/obj/item/weapon/photo/examine(mob/user)
+	if(in_range(user, src))
+		show(user)
+		user << desc
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>It is too far away.</span>"
 
 /obj/item/weapon/photo/proc/show(mob/user as mob)
 	user << browse_rsc(img, "tmp_photo.png")
@@ -287,7 +286,7 @@
 	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 
 	var/datum/picture/P = new()
-	P.fields["author"] = user
+	P.fields["name"] = "photo"
 	P.fields["icon"] = ic
 	P.fields["tiny"] = pc
 	P.fields["img"] = photoimage
@@ -306,6 +305,7 @@
 	Photo.construct(P)
 
 /obj/item/weapon/photo/proc/construct(var/datum/picture/P)
+	name = P.fields["name"]
 	icon = P.fields["icon"]
 	tiny = P.fields["tiny"]
 	img = P.fields["img"]
@@ -313,3 +313,15 @@
 	pixel_x = P.fields["pixel_x"]
 	pixel_y = P.fields["pixel_y"]
 	photo_size = P.fields["size"]
+
+/obj/item/weapon/photo/proc/copy()
+	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
+
+	p.icon = icon(icon, icon_state)
+	p.img = icon(img)
+	p.tiny = icon(tiny)
+	p.name = name
+	p.desc = desc
+	p.scribble = scribble
+
+	return p

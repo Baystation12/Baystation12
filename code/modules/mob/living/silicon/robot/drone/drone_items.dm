@@ -22,7 +22,8 @@
 		/obj/item/weapon/rack_parts,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
-		/obj/item/weapon/circuitboard
+		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/smes_coil
 		)
 
 	//Item currently being held.
@@ -80,15 +81,15 @@
 			wrapped = thing
 			break
 
-	if(wrapped) //Already have an item.		
-		
+	if(wrapped) //Already have an item.
+
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
-		
+
 		//Pass the attack on to the target. This might delete/relocate wrapped.
 		target.attackby(wrapped,user)
-		
-		//If wrapped did neither get deleted nor put into target, put it back into the gripper.
+
+		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
 		else

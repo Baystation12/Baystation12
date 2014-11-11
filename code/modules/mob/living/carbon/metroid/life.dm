@@ -362,11 +362,11 @@
 					else
 						for(var/mob/living/carbon/C in targets)
 							if(!Discipline && prob(5))
-								if(ishuman(C) || isalienadult(C))
+								if(ishuman(C))
 									Target = C
 									break
 
-							if(islarva(C) || ismonkey(C))
+							if(isalien(C) || ismonkey(C))
 								Target = C
 								break
 

@@ -10,6 +10,7 @@
 	var/slice_path
 	var/slices_num
 	center_of_mass = list("x"=15, "y"=15)
+	w_class = 2
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -110,27 +111,25 @@
 /obj/item/weapon/reagent_containers/food/snacks/afterattack(obj/target, mob/user, proximity)
 	return ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/examine()
-	set src in view()
-	..()
-	if (!(usr in range(0)) && usr!=src.loc) return
+/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
+	if(!..(user, 1))
+		return
 	if (bitecount==0)
 		return
 	else if (bitecount==1)
-		usr << "\blue \The [src] was bitten by someone!"
+		user << "\blue \The [src] was bitten by someone!"
 	else if (bitecount<=3)
-		usr << "\blue \The [src] was bitten [bitecount] times!"
+		user << "\blue \The [src] was bitten [bitecount] times!"
 	else
-		usr << "\blue \The [src] was bitten multiple times!"
+		user << "\blue \The [src] was bitten multiple times!"
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
-	if(istype(W,/obj/item/weapon/storage))
-		..() // -> item/attackby()
-
+		return
+	
+	// Eating with forks
 	if(istype(W,/obj/item/weapon/kitchen/utensil))
-
 		var/obj/item/weapon/kitchen/utensil/U = W
 
 		if(!U.reagents)
@@ -158,64 +157,45 @@
 			del(src)
 		return
 
-	if((slices_num <= 0 || !slices_num) || !slice_path)
-		return 0
+	if (is_sliceable())
+		//these are used to allow hiding edge items in food that is not on a table/tray
+		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
+		var/hide_item = !has_edge(W) || !can_slice_here
+		
+		if (hide_item)
+			if (W.w_class >= src.w_class || W.is_robot_module())
+				return
+				
+			user << "\red You slip [W] inside [src]."
+			user.u_equip(W)
+			if ((user.client && user.s_active != src))
+				user.client.screen -= W
+			W.dropped(user)
+			add_fingerprint(user)
+			contents += W
+			return
+		
+		if (has_edge(W))
+			if (!can_slice_here)
+				user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
+				return
+			
+			var/slices_lost = 0
+			if (W.w_class > 3)
+				user.visible_message("\blue [user] crudely slices \the [src] with [W]!", "\blue You crudely slice \the [src] with your [W]!")
+				slices_lost = rand(1,min(1,round(slices_num/2)))
+			else
+				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
+			
+			var/reagents_per_slice = reagents.total_volume/slices_num
+			for(var/i=1 to (slices_num-slices_lost))
+				var/obj/slice = new slice_path (src.loc)
+				reagents.trans_to(slice,reagents_per_slice)
+			del(src)
+			return
 
-	var/inaccurate = 0
-	if( \
-			istype(W, /obj/item/weapon/kitchenknife) || \
-			istype(W, /obj/item/weapon/butch) || \
-			istype(W, /obj/item/weapon/scalpel) || \
-			istype(W, /obj/item/weapon/kitchen/utensil/knife) \
-		)
-	else if( \
-			istype(W, /obj/item/weapon/circular_saw) || \
-			istype(W, /obj/item/weapon/melee/energy/sword) && W:active || \
-			istype(W, /obj/item/weapon/melee/energy/blade) || \
-			istype(W, /obj/item/weapon/shovel) || \
-			istype(W, /obj/item/weapon/hatchet) \
-		)
-		inaccurate = 1
-	else if(W.w_class <= 2 && istype(src,/obj/item/weapon/reagent_containers/food/snacks/sliceable))
-		if(!iscarbon(user))
-			return 1
-		user << "\red You slip [W] inside [src]."
-		user.u_equip(W)
-		if ((user.client && user.s_active != src))
-			user.client.screen -= W
-		W.dropped(user)
-		add_fingerprint(user)
-		contents += W
-		return
-	else
-		return 1
-	if ( \
-			!isturf(src.loc) || \
-			!(locate(/obj/structure/table) in src.loc) && \
-			!(locate(/obj/machinery/optable) in src.loc) && \
-			!(locate(/obj/item/weapon/tray) in src.loc) \
-		)
-		user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
-		return 1
-	var/slices_lost = 0
-	if (!inaccurate)
-		user.visible_message( \
-			"\blue [user] slices \the [src]!", \
-			"\blue You slice \the [src]!" \
-		)
-	else
-		user.visible_message( \
-			"\blue [user] crudely slices \the [src] with [W]!", \
-			"\blue You crudely slice \the [src] with your [W]!" \
-		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))
-	var/reagents_per_slice = reagents.total_volume/slices_num
-	for(var/i=1 to (slices_num-slices_lost))
-		var/obj/slice = new slice_path (src.loc)
-		reagents.trans_to(slice,reagents_per_slice)
-	del(src)
-
-	return
+/obj/item/weapon/reagent_containers/food/snacks/proc/is_sliceable()
+	return (slices_num <= 0 || !slices_num || !slice_path)
 
 /obj/item/weapon/reagent_containers/food/snacks/Del()
 	if(contents)
@@ -241,7 +221,6 @@
 				N.visible_message("[N] nibbles away at [src].", "")
 			//N.emote("nibbles away at the [src]")
 			N.health = min(N.health + 1, N.maxHealth)
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
@@ -390,6 +369,7 @@
 	desc = "Goes great with Robust Coffee."
 	icon_state = "donut1"
 	filling_color = "#D9C386"
+	var/overlay_state = "box-donut1"
 
 /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 	name = "donut"
@@ -402,6 +382,7 @@
 		src.bitesize = 3
 		if(prob(30))
 			src.icon_state = "donut2"
+			src.overlay_state = "box-donut2"
 			src.name = "frosted donut"
 			reagents.add_reagent("sprinkles", 2)
 
@@ -440,6 +421,7 @@
 				reagents.add_reagent("tricordrazine", 3)
 		if(prob(30))
 			src.icon_state = "donut2"
+			src.overlay_state = "box-donut2"
 			src.name = "Frosted Chaos Donut"
 			reagents.add_reagent("sprinkles", 2)
 
@@ -458,6 +440,7 @@
 		bitesize = 5
 		if(prob(30))
 			src.icon_state = "jdonut2"
+			src.overlay_state = "box-donut2"
 			src.name = "Frosted Jelly Donut"
 			reagents.add_reagent("sprinkles", 2)
 
@@ -475,6 +458,7 @@
 		bitesize = 5
 		if(prob(30))
 			src.icon_state = "jdonut2"
+			src.overlay_state = "box-donut2"
 			src.name = "Frosted Jelly Donut"
 			reagents.add_reagent("sprinkles", 2)
 
@@ -492,6 +476,7 @@
 		bitesize = 5
 		if(prob(30))
 			src.icon_state = "jdonut2"
+			src.overlay_state = "box-donut2"
 			src.name = "Frosted Jelly Donut"
 			reagents.add_reagent("sprinkles", 2)
 
@@ -590,24 +575,19 @@
 		..()
 		reagents.add_reagent("nutriment", 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/appendix
-//yes, this is the same as meat. I might do something different in future
-	name = "appendix"
-	desc = "An appendix which looks perfectly healthy."
+/obj/item/weapon/reagent_containers/food/snacks/organ
+
+	name = "organ"
+	desc = "It's good for you."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 	filling_color = "#E00D34"
 
 	New()
 		..()
-		reagents.add_reagent("nutriment", 3)
+		reagents.add_reagent("nutriment", rand(3,5))
+		reagents.add_reagent("toxin", rand(1,3))
 		src.bitesize = 3
-
-/obj/item/weapon/reagent_containers/food/snacks/appendix/inflamed
-	name = "inflamed appendix"
-	desc = "An appendix which appears to be inflamed."
-	icon_state = "appendixinflamed"
-	filling_color = "#E00D7A"
 
 /obj/item/weapon/reagent_containers/food/snacks/tofu
 	name = "Tofu"
@@ -1559,7 +1539,6 @@
 	On_Consume(var/mob/M)
 		M << "<span class = 'warning'>Something inside of you suddently expands!</span>"
 
-
 		if (istype(M, /mob/living/carbon/human))
 			//Do not try to understand.
 			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
@@ -2153,6 +2132,9 @@
 // All the food items that can be sliced into smaller bits like Meatbread and Cheesewheels
 
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
+
+/obj/item/weapon/reagent_containers/food/snacks/sliceable
+	w_class = 3 //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
 	name = "meatbread loaf"

@@ -11,7 +11,7 @@
 				var/matches
 				if( (M.lastKnownIP == client.address) )
 					matches += "IP ([client.address])"
-				if( (M.computer_id == client.computer_id) )
+				if( (client.connection != "web") && (M.computer_id == client.computer_id) )
 					if(matches)	matches += " and "
 					matches += "ID ([client.computer_id])"
 					spawn() alert("You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
@@ -44,16 +44,3 @@
 	else
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
-
-	//Clear ability list and update from mob.
-	client.verbs -= ability_verbs
-
-	if(abilities)
-		client.verbs |= abilities
-
-	if(istype(src,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
-		if(H.species && H.species.abilities)
-			client.verbs |= H.species.abilities
-
-	nanomanager.send_resources(client)

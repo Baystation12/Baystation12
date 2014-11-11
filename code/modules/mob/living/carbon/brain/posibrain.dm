@@ -10,7 +10,6 @@
 	construction_time = 75
 	var/searching = 0
 	var/askDelay = 10 * 60 * 1
-	mob/living/carbon/brain/brainmob = null
 	req_access = list(access_robotics)
 	locked = 0
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
@@ -93,15 +92,10 @@
 	for (var/mob/M in viewers(T))
 		M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
 
-/obj/item/device/mmi/posibrain/examine()
-
-	set src in oview()
-
-	if(!usr || !src)	return
-	if( (usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer) )
-		usr << "<span class='notice'>Something is there but you can't see it.</span>"
+/obj/item/device/mmi/posibrain/examine(mob/user)
+	if(!..(user))
 		return
-
+		
 	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 	msg += "<span class='warning'>"
 
@@ -114,7 +108,7 @@
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	msg += "<span class='info'>*---------*</span>"
-	usr << msg
+	user << msg
 	return
 
 /obj/item/device/mmi/posibrain/emp_act(severity)
@@ -133,14 +127,13 @@
 /obj/item/device/mmi/posibrain/New()
 
 	src.brainmob = new(src)
+	src.brainmob.add_language("Binary")
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	src.brainmob.real_name = src.brainmob.name
 	src.brainmob.loc = src
 	src.brainmob.container = src
-	src.brainmob.robot_talk_understand = 1
 	src.brainmob.stat = 0
 	src.brainmob.silent = 0
-	src.brainmob.brain_op_stage = 4.0
 	dead_mob_list -= src.brainmob
 
 	..()

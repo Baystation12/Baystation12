@@ -33,7 +33,7 @@
 /**
  * Debrained hook.
  * Called in brain_item.dm when someone gets debrained.
- * Parameters: var/obj/item/brain
+ * Parameters: var/obj/item/organ/brain
  */
 /hook/debrain
 
@@ -47,7 +47,7 @@
 /**
  * Podman hook.
  * Called in podmen.dm when someone is brought back as a Diona.
- * Parameters: var/mob/living/carbon/monkey/diona
+ * Parameters: var/mob/living/carbon/alien/diona
  */
 /hook/harvest_podman
 

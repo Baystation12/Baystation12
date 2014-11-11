@@ -61,6 +61,7 @@ Class Procs:
 /connection_edge/var/zone/A
 
 /connection_edge/var/list/connecting_turfs = list()
+/connection_edge/var/direct = 0
 
 /connection_edge/var/coefficient = 0
 
@@ -69,6 +70,7 @@ Class Procs:
 
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
+	if(c.direct()) direct++
 	//world << "Connection added: [type] Coefficient: [coefficient]"
 
 /connection_edge/proc/remove_connection(connection/c)
@@ -76,6 +78,7 @@ Class Procs:
 	coefficient--
 	if(coefficient <= 0)
 		erase()
+	if(c.direct()) direct--
 
 /connection_edge/proc/contains_zone(zone/Z)
 
@@ -114,7 +117,6 @@ Class Procs:
 
 
 /connection_edge/zone/var/zone/B
-/connection_edge/zone/var/direct = 0
 
 /connection_edge/zone/New(zone/A, zone/B)
 
@@ -128,11 +130,9 @@ Class Procs:
 /connection_edge/zone/add_connection(connection/c)
 	. = ..()
 	connecting_turfs.Add(c.A)
-	if(c.direct()) direct++
 
 /connection_edge/zone/remove_connection(connection/c)
 	connecting_turfs.Remove(c.A)
-	if(c.direct()) direct--
 	. = ..()
 
 /connection_edge/zone/contains_zone(zone/Z)

@@ -88,7 +88,7 @@ datum/objective/mutiny
 			if(target.current.stat == DEAD || !ishuman(target.current) || !target.current.ckey)
 				return 1
 			var/turf/T = get_turf(target.current)
-			if(T && (T.z != 1))			//If they leave the station they count as dead for this
+			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
 				return 2
 			return 0
 		return 1
@@ -123,7 +123,7 @@ datum/objective/mutiny/rp
 				if(target in ticker.mode:head_revolutionaries)
 					return 1
 			var/turf/T = get_turf(target.current)
-			if(T && (T.z != 1))			//If they leave the station they count as dead for this
+			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
 				rval = 2
 			return 0
 		return rval
@@ -637,29 +637,24 @@ datum/objective/capture
 	check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
 		var/captured_amount = 0
 		var/area/centcom/holding/A = locate()
-		for(var/mob/living/carbon/human/M in A)//Humans.
+
+		for(var/mob/living/carbon/human/M in A) // Humans (and subtypes).
+			var/worth = M.species.rarity_value
 			if(M.stat==2)//Dead folks are worth less.
-				captured_amount+=0.5
+				worth*=0.5
 				continue
-			captured_amount+=1
+			captured_amount += worth
+
 		for(var/mob/living/carbon/monkey/M in A)//Monkeys are almost worthless, you failure.
 			captured_amount+=0.1
+
 		for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
 			if(M.stat==2)
 				captured_amount+=0.5
 				continue
 			captured_amount+=1
-		for(var/mob/living/carbon/alien/humanoid/M in A)//Aliens are worth twice as much as humans.
-			if(istype(M, /mob/living/carbon/alien/humanoid/queen))//Queens are worth three times as much as humans.
-				if(M.stat==2)
-					captured_amount+=1.5
-				else
-					captured_amount+=3
-				continue
-			if(M.stat==2)
-				captured_amount+=1
-				continue
-			captured_amount+=2
+
+
 		if(captured_amount<target_amount)
 			return 0
 		return 1

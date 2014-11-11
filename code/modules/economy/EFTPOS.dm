@@ -134,7 +134,7 @@
 						//create entry in the EFTPOS linked account transaction log
 						var/datum/transaction/T = new()
 						T.target_name = E.owner_name //D.owner_name
-						T.purpose = transaction_purpose
+						T.purpose = (transaction_purpose ? transaction_purpose : "None supplied.")
 						T.amount = transaction_amount
 						T.source_terminal = machine_id
 						T.date = current_date_string
@@ -182,7 +182,8 @@
 				else
 					usr << "\icon[src]<span class='warning'>Account not found.</span>"
 			if("trans_purpose")
-				transaction_purpose = input("Enter reason for EFTPOS transaction", "Transaction purpose")
+				var/choice = input("Enter reason for EFTPOS transaction", "Transaction purpose")
+				if(choice) transaction_purpose = choice
 			if("trans_value")
 				var/try_num = input("Enter amount for EFTPOS transaction", "Transaction amount") as num
 				if(try_num < 0)

@@ -24,46 +24,18 @@
 	src.icon_state = "[src.icon_type]box[total_contents]"
 	return
 
-/obj/item/weapon/storage/fancy/examine()
-	set src in oview(1)
-
-	..()
+/obj/item/weapon/storage/fancy/examine(mob/user)
+	if(!..(user, 1))
+		return
+	
 	if(contents.len <= 0)
-		usr << "There are no [src.icon_type]s left in the box."
+		user << "There are no [src.icon_type]s left in the box."
 	else if(contents.len == 1)
-		usr << "There is one [src.icon_type] left in the box."
+		user << "There is one [src.icon_type] left in the box."
 	else
-		usr << "There are [src.contents.len] [src.icon_type]s in the box."
+		user << "There are [src.contents.len] [src.icon_type]s in the box."
 
 	return
-
-
-
-/*
- * Donut Box
- */
-
-/obj/item/weapon/storage/fancy/donut_box
-	icon = 'icons/obj/food.dmi'
-	icon_state = "donutbox6"
-	icon_type = "donut"
-	name = "donut box"
-	storage_slots = 6
-	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/donut")
-	foldable = /obj/item/stack/sheet/cardboard
-
-/obj/item/weapon/storage/fancy/donut_box/New()
-	..()
-	if(!istype(src,/obj/item/weapon/storage/fancy/donut_box/empty))
-		for(var/i=1; i <= storage_slots; i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
-	return
-
-/obj/item/weapon/storage/fancy/donut_box/empty
-	icon_state = "donutbox0"
-
-/obj/item/weapon/storage/fancy/donut_box/empty/New()
-	..()
 
 /*
  * Egg Box

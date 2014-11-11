@@ -12,7 +12,7 @@ var/list/sacrificed = list()
 			for(var/obj/effect/rune/R in world)
 				if(R == src)
 					continue
-				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && R.z != 2)
+				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isPlayerLevel(R.z))
 					index++
 					allrunesloc.len = index
 					allrunesloc[index] = R.loc
@@ -105,7 +105,7 @@ var/list/sacrificed = list()
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
 				M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
-				"\red AAAAAAHHHH!.", \
+				"\red AAAAAAHHHH!", \
 				"\red You hear an anguished scream.")
 				if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
 
@@ -395,8 +395,6 @@ var/list/sacrificed = list()
 					D.real_name = copytext(P.info, findtext(P.info,">")+1, findtext(P.info,"<",2) )
 					chose_name = 1
 					break
-			if(!chose_name)
-				D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 			D.universal_speak = 1
 			D.status_flags &= ~GODMODE
 			D.s_tone = 35
@@ -411,10 +409,14 @@ var/list/sacrificed = list()
 				ticker.mode:add_cultist(D.mind)
 			else
 				ticker.mode.cult+=D.mind
-			D.mind.assigned_role = pick("Anguished", "Blasphemous", "Corrupt", "Depraved", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Pained", "Profane", "Profligate", "Resentful", "Restless", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
+
+			D.mind.assigned_role = pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")
 			D.mind.assigned_role += " "
-			D.mind.assigned_role += pick("Apparition", "Aptrgangr", "Draugr", "Dybbuk", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
+			D.mind.assigned_role += pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")
 			D.mind.special_role = "Cultist"
+			if(!chose_name)
+				D.real_name = D.mind.assigned_role
+
 			D << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 			D << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
 
@@ -570,8 +572,8 @@ var/list/sacrificed = list()
 					if(!(iscultist(V)))
 						victims += V//Checks for cult status and mob type
 			for(var/obj/item/I in src.loc)//Checks for MMIs/brains/Intellicards
-				if(istype(I,/obj/item/brain))
-					var/obj/item/brain/B = I
+				if(istype(I,/obj/item/organ/brain))
+					var/obj/item/organ/brain/B = I
 					victims += B.brainmob
 				else if(istype(I,/obj/item/device/mmi))
 					var/obj/item/device/mmi/B = I
@@ -583,7 +585,15 @@ var/list/sacrificed = list()
 				if(iscultist(C) && !C.stat)
 					cultsinrange += C
 					C.say("Barhah hra zar[pick("'","`")]garis!")
+
 			for(var/mob/H in victims)
+
+				var/worth = 0
+				if(istype(H,/mob/living/carbon/human))
+					var/mob/living/carbon/human/lamb = H
+					if(lamb.species.rarity_value > 3)
+						worth = 1
+
 				if (ticker.mode.name == "cult")
 					if(H.mind == ticker.mode:sacrifice_target)
 						if(cultsinrange.len >= 3)
@@ -598,8 +608,8 @@ var/list/sacrificed = list()
 					else
 						if(cultsinrange.len >= 3)
 							if(H.stat !=2)
-								if(prob(80))
-									usr << "\red The Geometer of Blood accepts this sacrifice."
+								if(prob(80) || worth)
+									usr << "\red The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
@@ -609,8 +619,8 @@ var/list/sacrificed = list()
 								else
 									H.gib()
 							else
-								if(prob(40))
-									usr << "\red The Geometer of blood accepts this sacrifice."
+								if(prob(40) || worth)
+									usr << "\red The Geometer of blood accepts this [worth ? "exotic " : ""]sacrifice."
 									ticker.mode:grant_runeword(usr)
 								else
 									usr << "\red The Geometer of blood accepts this sacrifice."
@@ -692,21 +702,6 @@ var/list/sacrificed = list()
 					if(prob(20))
 						ticker.mode.grant_runeword(usr)
 				M.gib()
-/*			for(var/mob/living/carbon/alien/A)
-				for(var/mob/K in cultsinrange)
-					K.say("Barhah hra zar'garis!")
-				A.dust()      /// A.gib() doesnt work for some reason, and dust() leaves that skull and bones thingy which we dont really need.
-				if (ticker.mode.name == "cult")
-					if(prob(75))
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						ticker.mode:grant_runeword(usr)
-					else
-						usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-						usr << "\red However, this alien is not enough to gain His favor."
-				else
-					usr << "\red The Geometer of Blood accepts your exotic sacrifice."
-				return
-			return fizzle() */
 
 /////////////////////////////////////////SIXTEENTH RUNE
 

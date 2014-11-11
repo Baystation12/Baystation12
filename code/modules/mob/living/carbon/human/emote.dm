@@ -207,7 +207,7 @@
 					m_type = 2
 
 		if ("deathgasp")
-			message = "<B>[src]</B> seizes up and falls limp, \his eyes dead and lifeless..."
+			message = "<B>[src]</B> [species.death_message]"
 			m_type = 1
 
 		if ("giggle")
@@ -372,7 +372,7 @@
 				if (!M)
 					message = "<B>[src]</B> points."
 				else
-					M.point()
+					pointed(M)
 
 				if (M)
 					message = "<B>[src]</B> points to [M]."

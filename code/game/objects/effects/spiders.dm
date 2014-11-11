@@ -174,7 +174,7 @@
 			if(prob(25))
 				src.visible_message("\blue \the [src] skitters[pick(" away"," around","")].")
 	else if(prob(5))
-		//ventcrawl!
+		//vent crawl!
 		for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
 			if(!v.welded)
 				entry_vent = v

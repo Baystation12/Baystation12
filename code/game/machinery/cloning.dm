@@ -72,14 +72,15 @@
 		return
 
 	var/mob/selected = null
-	for(var/mob/M in player_list)
+	for(var/mob/living/M in player_list)
 		//Dead people only thanks!
 		if ((M.stat != 2) || (!M.client))
 			continue
 		//They need a brain!
-		if ((istype(M, /mob/living/carbon/human)) && (M:brain_op_stage >= 4.0))
-			continue
-
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.has_organ["brain"] && !H.has_brain())
+				continue
 		if (M.ckey == find_key)
 			selected = M
 			break
@@ -95,10 +96,9 @@
 	src.read_only = !src.read_only
 	user << "You flip the write-protect tab to [src.read_only ? "protected" : "unprotected"]."
 
-/obj/item/weapon/disk/data/examine()
-	set src in oview(5)
-	..()
-	usr << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
+/obj/item/weapon/disk/data/examine(mob/user)
+	..(user)
+	user << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
 	return
 
 //Health Tracker Implant
@@ -189,7 +189,7 @@
 		if("revolution")
 			if((H.mind in ticker.mode:revolutionaries) || (H.mind in ticker.mode:head_revolutionaries))
 				ticker.mode.update_all_rev_icons() //So the icon actually appears
-		if("nuclear emergency")
+		if("mercenary")
 			if(H.mind in ticker.mode.syndicates)
 				ticker.mode.update_all_synd_icons()
 		if("cult")

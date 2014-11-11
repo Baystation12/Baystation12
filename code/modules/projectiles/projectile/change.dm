@@ -24,6 +24,7 @@
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/Robot = M
 			if(Robot.mmi)	del(Robot.mmi)
+			Robot.notify_ai(1)
 		else
 			for(var/obj/item/W in M)
 				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
@@ -53,11 +54,7 @@
 				new_mob.universal_speak = 1
 			if("xeno")
 				var/alien_caste = pick("Hunter","Sentinel","Drone","Larva")
-				switch(alien_caste)
-					if("Hunter")	new_mob = new /mob/living/carbon/alien/humanoid/hunter(M.loc)
-					if("Sentinel")	new_mob = new /mob/living/carbon/alien/humanoid/sentinel(M.loc)
-					if("Drone")		new_mob = new /mob/living/carbon/alien/humanoid/drone(M.loc)
-					else			new_mob = new /mob/living/carbon/alien/larva(M.loc)
+				new_mob = create_new_xenomorph(alien_caste,M.loc)
 				new_mob.universal_speak = 1
 			if("human")
 				new_mob = new /mob/living/carbon/human(M.loc, pick(all_species))

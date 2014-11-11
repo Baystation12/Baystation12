@@ -84,19 +84,19 @@
 	if (fixture_type == "bulb")
 		icon_state = "bulb-construct-stage1"
 
-/obj/machinery/light_construct/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2))) return
+/obj/machinery/light_construct/examine(mob/user)
+	if(!..(user, 2))
+		return
+	
 	switch(src.stage)
 		if(1)
-			usr << "It's an empty frame."
+			user << "It's an empty frame."
 			return
 		if(2)
-			usr << "It's wired."
+			user << "It's wired."
 			return
 		if(3)
-			usr << "The casing is closed."
+			user << "The casing is closed."
 			return
 
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -315,18 +315,16 @@
 	update()
 
 // examine verb
-/obj/machinery/light/examine()
-	set src in oview(1)
-	if(usr && !usr.stat)
-		switch(status)
-			if(LIGHT_OK)
-				usr << "[desc] It is turned [on? "on" : "off"]."
-			if(LIGHT_EMPTY)
-				usr << "[desc] The [fitting] has been removed."
-			if(LIGHT_BURNED)
-				usr << "[desc] The [fitting] is burnt out."
-			if(LIGHT_BROKEN)
-				usr << "[desc] The [fitting] has been smashed."
+/obj/machinery/light/examine(mob/user)
+	switch(status)
+		if(LIGHT_OK)
+			user << "[desc] It is turned [on? "on" : "off"]."
+		if(LIGHT_EMPTY)
+			user << "[desc] The [fitting] has been removed."
+		if(LIGHT_BURNED)
+			user << "[desc] The [fitting] is burnt out."
+		if(LIGHT_BROKEN)
+			user << "[desc] The [fitting] has been smashed."
 
 
 
@@ -454,18 +452,7 @@
 	src.flicker(1)
 	return
 
-// Aliens smash the bulb but do not get electrocuted./N
-/obj/machinery/light/attack_alien(mob/living/carbon/alien/humanoid/user)//So larva don't go breaking light bulbs.
-	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
-		user << "\green That object is useless to you."
-		return
-	else if (status == LIGHT_OK||status == LIGHT_BURNED)
-		for(var/mob/M in viewers(src))
-			M.show_message("\red [user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
-		broken()
-	return
-
-/obj/machinery/light/attack_animal(mob/living/simple_animal/M)
+/obj/machinery/light/attack_animal(mob/living/M)
 	if(M.melee_damage_upper == 0)	return
 	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
 		M << "\red That object is useless to you."
@@ -485,6 +472,14 @@
 	if(status == LIGHT_EMPTY)
 		user << "There is no [fitting] in this light."
 		return
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			for(var/mob/M in viewers(src))
+				M.show_message("\red [user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
+			broken()
+			return
 
 	// make it burn hands if not wearing fire-insulated gloves
 	if(on)

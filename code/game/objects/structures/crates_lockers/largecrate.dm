@@ -70,5 +70,11 @@
 
 /obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/crowbar))
-		new /obj/mecha/working/hoverpod(loc)
+		var/obj/item/mecha_parts/mecha_equipment/ME
+		var/obj/mecha/working/hoverpod/H = new (loc)
+		
+		ME = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
+		ME.attach(H)
+		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
+		ME.attach(H)
 	..()

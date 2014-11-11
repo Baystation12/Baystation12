@@ -375,15 +375,13 @@
 	else
 		..()
 
-/obj/machinery/atmospherics/unary/vent_pump/examine()
-	set src in oview(1)
-	..()
-	if (get_dist(usr, src) <= 1)
-		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user)
+	if(..(user, 1))
+		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
-		usr << "You are too far away to read the gauge."
+		user << "You are too far away to read the gauge."
 	if(welded)
-		usr << "It seems welded shut."
+		user << "It seems welded shut."
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat
@@ -425,14 +423,16 @@
 	return
 
 /*
-	Alt-click to ventcrawl - Monkeys, aliens, slimes and mice.
+	Alt-click to vent crawl - Monkeys, aliens, slimes and mice.
 	This is a little buggy but somehow that just seems to plague ventcrawl.
 	I am sorry, I don't know why.
 */
-/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
+// Commenting this out for now, it's not critical, stated to be buggy, and seems like
+// a really clumsy way of doing this. ~Z
+/*/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
 	if(istype(ML))
 		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl,/mob/living/simple_animal/mouse/verb/ventcrawl)
 		if(length(ML.verbs & ventcrawl_verbs)) // alien queens have this removed, an istype would be complicated
 			ML.handle_ventcrawl(src)
 			return
-	..()
+	..()*/

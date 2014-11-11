@@ -22,10 +22,16 @@
 	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 	attackby(var/obj/item/O as obj, var/mob/user as mob)
-		if(istype(O,/obj/item/brain) && !brainmob) //Time to stick a brain in it --NEO
-			if(!O:brainmob)
+		if(istype(O,/obj/item/organ/brain) && !brainmob) //Time to stick a brain in it --NEO
+
+			var/obj/item/organ/brain/B = O
+			if(B.health <= 0)
+				user << "\red That brain is well and truly dead."
+				return
+			else if(!B.brainmob)
 				user << "\red You aren't sure where this brain came from, but you're pretty sure it's a useless brain."
 				return
+
 			for(var/mob/V in viewers(src, null))
 				V.show_message(text("\blue [user] sticks \a [O] into \the [src]."))
 
@@ -61,6 +67,7 @@
 			return
 		..()
 
+	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 	attack_self(mob/user as mob)
 		if(!brainmob)
 			user << "\red You upend the MMI, but there's nothing in it."
@@ -68,7 +75,7 @@
 			user << "\red You upend the MMI, but the brain is clamped into place."
 		else
 			user << "\blue You upend the MMI, spilling the brain onto the floor."
-			var/obj/item/brain/brain = new(user.loc)
+			var/obj/item/organ/brain/brain = new(user.loc)
 			brainmob.container = null//Reset brainmob mmi var.
 			brainmob.loc = brain//Throw mob into brain.
 			living_mob_list -= brainmob//Get outta here

@@ -2,9 +2,9 @@
 /mob/living/simple_animal/cat
 	name = "cat"
 	desc = "A domesticated, feline pet. Has a tendency to adopt crewmembers."
-	icon_state = "cat"
-	icon_living = "cat"
-	icon_dead = "cat_dead"
+	icon_state = "cat2"
+	icon_living = "cat2"
+	icon_dead = "cat2_dead"
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
 	speak_emote = list("purrs", "meows")
 	emote_hear = list("meows","mews")
@@ -76,6 +76,15 @@
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/Runtime
 	name = "Runtime"
-	desc = "Its fur has the look and feel of velvet, and its tail quivers occasionally."
+	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
+	icon_state = "cat"
+	icon_living = "cat"
+	icon_dead = "cat_dead"
 
-
+/mob/living/simple_animal/cat/kitten
+	name = "kitten"
+	desc = "D'aaawwww"
+	icon_state = "kitten"
+	icon_living = "kitten"
+	icon_dead = "kitten_dead"
+	gender = NEUTER

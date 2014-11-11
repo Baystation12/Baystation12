@@ -31,31 +31,33 @@
 	attack_hand(user)
 
 /obj/structure/grille/attack_hand(mob/user as mob)
+
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
+
+	var/damage_dealt
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			damage_dealt = 5
+			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
+					 "<span class='warning'>You mangle [src].</span>", \
+					 "You hear twisting metal.")
+
+	if(!damage_dealt)
+		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
 						 "<span class='warning'>You kick [src].</span>", \
 						 "You hear twisting metal.")
 
 	if(shock(user, 70))
 		return
+
 	if(HULK in user.mutations)
-		health -= 5
+		damage_dealt += 5
 	else
-		health -= 1
+		damage_dealt += 1
+
+	health -= damage_dealt
 	healthcheck()
-
-/obj/structure/grille/attack_alien(mob/user as mob)
-	if(istype(user, /mob/living/carbon/alien/larva))	return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
-						 "<span class='warning'>You mangle [src].</span>", \
-						 "You hear twisting metal.")
-
-	if(!shock(user, 70))
-		health -= 5
-		healthcheck()
-		return
 
 /obj/structure/grille/attack_slime(mob/user as mob)
 	var/mob/living/carbon/slime/S = user
@@ -199,6 +201,7 @@
 // returns 1 if shocked, 0 otherwise
 
 /obj/structure/grille/proc/shock(mob/user as mob, prb)
+
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
 		return 0
 	if(!prob(prb))

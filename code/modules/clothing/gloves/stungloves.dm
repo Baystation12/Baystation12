@@ -3,29 +3,29 @@
 		user << "<span class='notice'>That won't work.</span>"	//i'm not putting my lips on that!
 		..()
 		return
-	
+
 	//add wires
 	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		if (clipped)
 			user << "<span class='notice'>The [src] are too badly mangled for wiring.</span>"
 			return
-		
+
 		if(wired)
 			user << "<span class='notice'>The [src] are already wired.</span>"
 			return
-			
+
 		if(C.get_amount() < 2)
 			user << "<span class='notice'>There is not enough wire to cover the [src].</span>"
 			return
-			
+
 		C.use(2)
 		wired = 1
 		siemens_coefficient = 3.0
 		user << "<span class='notice'>You wrap some wires around the [src].</span>"
 		update_icon()
 		return
-	
+
 	//add cell
 	else if(istype(W, /obj/item/weapon/cell))
 		if(!wired)
@@ -56,26 +56,26 @@
 			user << "<span class='notice'>You cut the wires away from the [src].</span>"
 			update_icon()
 			return
-		
+
 		//clipping fingertips
 		if(!clipped)
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
-			
+
 			clipped = 1
 			name = "mangled [name]"
 			desc = "[desc]<br>They have had the fingertips cut off of them."
 			if("exclude" in species_restricted)
 				species_restricted -= "Unathi"
-				species_restricted -= "Tajaran"
+				species_restricted -= "Tajara"
 			return
 		else
 			user << "<span class='notice'>The [src] have already been clipped!</span>"
 			update_icon()
 			return
-		
+
 		return
-		
+
 	..()
 
 /obj/item/clothing/gloves/update_icon()

@@ -219,8 +219,8 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		//Xenos and deathsquads take precedence over everything else.
 
 		//Unless the xenos are hiding in a locker somewhere, this'll find em.
-		for(var/mob/living/carbon/alien/humanoid/xeno in player_list)
-			if(istype(xeno))
+		for(var/mob/living/carbon/human/xeno in player_list)
+			if(istype(xeno.species,/datum/species/xenos))
 				xeno_list += xeno
 
 		if(assign_mission)
@@ -230,11 +230,11 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 			if(xeno_list.len>3)//If there are more than three humanoid xenos on the station, time to get dangerous.
 				//Here we want the ninja to murder all the queens. The other aliens don't really matter.
 				var/xeno_queen_list[] = list()
-				for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_list)
-					if(xeno_queen.mind&&xeno_queen.stat!=2)
+				for(var/mob/living/carbon/human/xeno_queen in xeno_list)
+					if(xeno_queen.species.name == "Xenomorph Queen" && xeno_queen.mind && xeno_queen.stat!=2)
 						xeno_queen_list += xeno_queen
 				if(xeno_queen_list.len&&side=="face")//If there are queen about and the probability is 50.
-					for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_queen_list)
+					for(var/mob/living/carbon/human/xeno_queen in xeno_queen_list)
 						var/datum/objective/assassinate/ninja_objective = new
 						ninja_objective.owner = ninja_mind
 						//We'll do some manual overrides to properly set it up.
@@ -386,7 +386,7 @@ Making this random or semi-random will probably not work without it also being i
 As such, it's hard-coded for now. No reason for it not to be, really.
 */
 /proc/generate_ninja_directive(side)
-	var/directive = "[side=="face"?"Nanotrasen":"The Syndicate"] is your employer. "//Let them know which side they're on.
+	var/directive = "[side=="face"?"Nanotrasen":"A criminal syndicate"] is your employer. "//Let them know which side they're on.
 	switch(rand(1,19))
 		if(1)
 			directive += "The Spider Clan must not be linked to this operation. Remain hidden and covert when possible."
@@ -401,7 +401,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(6)
 			directive += "We are engaged in a legal dispute over [station_name]. If a laywer is present on board, force their cooperation in the matter."
 		if(7)
-			directive += "A financial backer has made an offer we cannot refuse. Implicate Syndicate involvement in the operation."
+			directive += "A financial backer has made an offer we cannot refuse. Implicate criminal involvement in the operation."
 		if(8)
 			directive += "Let no one question the mercy of the Spider Clan. Ensure the safety of all non-essential personnel you encounter."
 		if(9)
@@ -411,11 +411,11 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(11)
 			directive += "Our honor is on the line. Utilize only honorable tactics when dealing with opponents."
 		if(12)
-			directive += "We are currently negotiating with a Syndicate leader. Disguise assassinations as suicide or other natural causes."
+			directive += "We are currently negotiating with a mercenary leader. Disguise assassinations as suicide or other natural causes."
 		if(13)
 			directive += "Some disgruntled NanoTrasen employees have been supportive of our operations. Be wary of any mistreatment by command staff."
 		if(14)
-			var/xenorace = pick("Unathi","Tajaran", "Skrellian")
+			var/xenorace = pick("Unathi","Tajara", "Skrell")
 			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
 		if(15)
 			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."

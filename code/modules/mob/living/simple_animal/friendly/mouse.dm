@@ -51,6 +51,10 @@
 
 /mob/living/simple_animal/mouse/New()
 	..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
 	name = "[name] ([rand(1, 1000)])"
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
@@ -58,7 +62,6 @@
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
-
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0
@@ -68,59 +71,6 @@
 	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
-
-/mob/living/simple_animal/mouse/verb/ventcrawl()
-	set name = "Crawl through Vent"
-	set desc = "Enter an air vent and crawl through the pipe system."
-	set category = "Mouse"
-	handle_ventcrawl()
-	return
-
-//copy paste from alien/larva, if that func is updated please update this one alsoghost
-/mob/living/simple_animal/mouse/verb/hide()
-	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Mouse"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-		/*
-		for(var/mob/O in oviewers(src, null))
-			if ((O.client && !( O.blinded )))
-				O << text("<B>[] scurries to the ground!</B>", src)
-		*/
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
-		/*
-		for(var/mob/O in oviewers(src, null))
-			if ((O.client && !( O.blinded )))
-				O << text("[] slowly peaks up from the ground...", src)
-		*/
-
-//make mice fit under tables etc? this was hacky, and not working
-/*
-/mob/living/simple_animal/mouse/Move(var/dir)
-
-	var/turf/target_turf = get_step(src,dir)
-	//CanReachThrough(src.loc, target_turf, src)
-	var/can_fit_under = 0
-	if(target_turf.ZCanPass(get_turf(src),1))
-		can_fit_under = 1
-
-	..(dir)
-	if(can_fit_under)
-		src.loc = target_turf
-	for(var/d in cardinal)
-		var/turf/O = get_step(T,d)
-		//Simple pass check.
-		if(O.ZCanPass(T, 1) && !(O in open) && !(O in closed) && O in possibles)
-			open += O
-			*/
-
-///mob/living/simple_animal/mouse/restrained() //Hotfix to stop mice from doing things with MouseDrop
-//	return 1
 
 /mob/living/simple_animal/mouse/start_pulling(var/atom/movable/AM)//Prevents mouse from pulling things
 	src << "<span class='warning'>You are too small to pull anything.</span>"
@@ -163,3 +113,6 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "splats"
+
+/mob/living/simple_animal/mouse/can_use_vents()
+	return
