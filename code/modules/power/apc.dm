@@ -1,8 +1,3 @@
-#define APC_WIRE_IDSCAN 1
-#define APC_WIRE_MAIN_POWER1 2
-#define APC_WIRE_MAIN_POWER2 3
-#define APC_WIRE_AI_CONTROL 4
-
 //update_state
 #define UPSTATE_CELL_IN 1
 #define UPSTATE_OPENED1 2
@@ -153,7 +148,7 @@
 /obj/machinery/power/apc/Del()
 	if(malfai && operating)
 		if (ticker.mode.config_tag == "malfunction")
-			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--
 	area.power_light = 0
 	area.power_equip = 0
@@ -199,32 +194,29 @@
 	spawn(5)
 		src.update()
 
-/obj/machinery/power/apc/examine()
-	set src in oview(1)
-
-	if(usr /*&& !usr.stat*/)
-		usr << "A control terminal for the area electrical systems."
-		..()
+/obj/machinery/power/apc/examine(mob/user)
+	if(..(user, 1))
+		user << "A control terminal for the area electrical systems."
 		if(stat & BROKEN)
-			usr << "Looks broken."
+			user << "Looks broken."
 			return
 		if(opened)
 			if(has_electronics && terminal)
-				usr << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
+				user << "The cover is [opened==2?"removed":"open"] and the power cell is [ cell ? "installed" : "missing"]."
 			else if (!has_electronics && terminal)
-				usr << "There are some wires but no any electronics."
+				user << "There are some wires but no any electronics."
 			else if (has_electronics && !terminal)
-				usr << "Electronics installed but not wired."
+				user << "Electronics installed but not wired."
 			else /* if (!has_electronics && !terminal) */
-				usr << "There is no electronics nor connected wires."
+				user << "There is no electronics nor connected wires."
 
 		else
 			if (stat & MAINT)
-				usr << "The cover is closed. Something wrong with it: it doesn't work."
+				user << "The cover is closed. Something wrong with it: it doesn't work."
 			else if (malfhack)
-				usr << "The cover is broken. It may be hard to force it open."
+				user << "The cover is broken. It may be hard to force it open."
 			else
-				usr << "The cover is closed."
+				user << "The cover is closed."
 
 
 // update the APC icon to show the three base states
@@ -824,6 +816,8 @@
 		return 0
 	if(!user.client)
 		return 0
+	if(inoperable())
+		return 0
 	if(!user.IsAdvancedToolUser())
 		user << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
 		return 0
@@ -862,12 +856,12 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list)
+/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
 	if(..())
-		return 0
+		return 1
 
 	if(!can_use(usr, 1))
-		return 0
+		return 1
 
 	if (href_list["lock"])
 		coverlocked = !coverlocked
@@ -919,7 +913,7 @@
 					malfai.malfhacking = 0
 					locked = 1
 					if (ticker.mode.config_tag == "malfunction")
-						if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+						if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 							ticker.mode:apcs++
 					if(usr:parent)
 						src.malfai = usr:parent
@@ -944,14 +938,14 @@
 				locked = !locked
 				update_icon()
 
-	return 1
+	return 0
 
 /obj/machinery/power/apc/proc/toggle_breaker()
 	operating = !operating
 
 	if(malfai)
 		if (ticker.mode.config_tag == "malfunction")
-			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 				operating ? ticker.mode:apcs++ : ticker.mode:apcs--
 
 	src.update()
@@ -968,7 +962,7 @@
 	/*if(!malf.can_shunt)
 		malf << "<span class='warning'>You cannot shunt.</span>"
 		return*/
-	if(src.z != 1)
+	if(isNotStationLevel(src.z))
 		return
 	src.occupier = new /mob/living/silicon/ai(src,malf.laws,null,1)
 	src.occupier.adjustOxyLoss(malf.getOxyLoss())
@@ -1017,7 +1011,7 @@
 
 /obj/machinery/power/apc/proc/ion_act()
 	//intended to be exactly the same as an AI malf attack
-	if(!src.malfhack && src.z == 1)
+	if(!src.malfhack && src.z in config.station_levels)
 		if(prob(3))
 			src.locked = 1
 			if (src.cell.charge > 0)
@@ -1283,7 +1277,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 /obj/machinery/power/apc/proc/set_broken()
 	if(malfai && operating)
 		if (ticker.mode.config_tag == "malfunction")
-			if (src.z == 1) //if (is_type_in_list(get_area(src), the_station_areas))
+			if (src.z in config.station_levels) //if (is_type_in_list(get_area(src), the_station_areas))
 				ticker.mode:apcs--
 	// Aesthetically much better!
 	src.visible_message("<span class='notice'>[src]'s screen flickers with warnings briefly!</span>")

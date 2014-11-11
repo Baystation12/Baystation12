@@ -1,3 +1,6 @@
+/datum/event/spontaneous_appendicitis
+	name = "Communicatinos Blackout"
+
 /datum/event/spontaneous_appendicitis/start()
 	for(var/mob/living/carbon/human/H in shuffle(living_mob_list)) if(H.client && H.stat != DEAD)
 		var/foundAlready = 0	//don't infect someone that already has the virus

@@ -23,13 +23,22 @@
 	var/locked = 0
 	var/panel_open = 0 //Hacking a smartfridge
 	var/scan_id = 1
+	var/is_secure = 0
 	var/datum/wires/smartfridge/wires = null
 
+/obj/machinery/smartfridge/secure/
+	is_secure = 1
+
 /obj/machinery/smartfridge/New()
-	wires = new(src)
+	..()
+	if(is_secure)
+		wires = new/datum/wires/smartfridge/secure(src)
+	else
+		wires = new/datum/wires/smartfridge(src)
 
 /obj/machinery/smartfridge/Del()
 	del(wires) // qdel
+	..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
@@ -217,12 +226,7 @@
 
 /obj/machinery/smartfridge/attack_hand(mob/user as mob)
 	if(!ispowered) return
-	if(seconds_electrified != 0)
-		if(shock(user, 100))
-			return
-	if(panel_open)
-		wires.Interact(user)
-
+	wires.Interact(user)
 	ui_interact(user)
 
 /*******************
@@ -232,12 +236,8 @@
 /obj/machinery/smartfridge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
-	var/is_secure = istype(src,/obj/machinery/smartfridge/secure)
-
 	var/data[0]
 	data["contents"] = null
-	data["wires"] = null
-	data["panel_open"] = panel_open
 	data["electrified"] = seconds_electrified > 0
 	data["shoot_inventory"] = shoot_inventory
 	data["locked"] = locked

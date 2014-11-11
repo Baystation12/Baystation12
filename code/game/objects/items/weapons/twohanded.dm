@@ -18,14 +18,13 @@
  */
 /obj/item/weapon/twohanded
 	var/wielded = 0
-	var/force_unwielded = 0
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
 
 /obj/item/weapon/twohanded/proc/unwield()
 	wielded = 0
-	force = force_unwielded
+	force = initial(force)
 	name = "[initial(name)]"
 	update_icon()
 
@@ -108,12 +107,11 @@
 	icon_state = "fireaxe0"
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
-	force = 5
+	force = 10
 	sharp = 1
 	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_unwielded = 10
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 
@@ -149,7 +147,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	force_unwielded = 3
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
@@ -189,11 +186,10 @@
 	force = 14
 	w_class = 4.0
 	slot_flags = SLOT_BACK
-	force_unwielded = 14
 	force_wielded = 22 // Was 13, Buffed - RR
 	throwforce = 20
 	throw_speed = 3
-	edge = 1
+	edge = 0
 	sharp = 1
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'

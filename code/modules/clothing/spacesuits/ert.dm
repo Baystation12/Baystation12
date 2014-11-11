@@ -17,10 +17,9 @@
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
 
-/obj/item/clothing/head/helmet/space/rig/ert/examine()
-	..()
-	if(get_dist(usr,src) <= 1)
-		usr << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
+/obj/item/clothing/head/helmet/space/rig/ert/examine(mob/user)
+	if(..(user, 1))
+		user << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
 
 /obj/item/clothing/suit/space/rig/ert
 	name = "emergency response team suit"

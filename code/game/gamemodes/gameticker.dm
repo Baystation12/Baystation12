@@ -201,7 +201,7 @@ var/global/datum/controller/gameticker/ticker
 				switch(M.z)
 					if(0)	//inside a crate or something
 						var/turf/T = get_turf(M)
-						if(T && T.z==1)				//we don't use M.death(0) because it calls a for(/mob) loop and
+						if(T && T.z in config.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
 							M.health = 0
 							M.stat = DEAD
 					if(1)	//on a z-level 1 turf.
@@ -261,7 +261,7 @@ var/global/datum/controller/gameticker/ticker
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
 				for(var/mob/living/M in living_mob_list)
-					if(M.loc.z == 1)
+					if(M.loc.z in config.station_levels)
 						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
@@ -274,7 +274,7 @@ var/global/datum/controller/gameticker/ticker
 
 	proc/create_characters()
 		for(var/mob/new_player/player in player_list)
-			if(player.ready && player.mind)
+			if(player && player.ready && player.mind)
 				if(player.mind.assigned_role=="AI")
 					player.close_spawn_windows()
 					player.AIize()
@@ -382,11 +382,11 @@ var/global/datum/controller/gameticker/ticker
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
 				if(emergency_shuttle.departed && emergency_shuttle.evac)
-					if(playerTurf.z != 2)
+					if(isNotAdminLevel(playerTurf.z))
 						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>"
 					else
 						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
-				else if(playerTurf.z == 2)
+				else if(isAdminLevel(playerTurf.z))
 					Player << "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
 				else if(issilicon(Player))
 					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"

@@ -146,18 +146,7 @@ var/list/ai_verbs_default = list(
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 
-			src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
-			src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
-			src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
-			src << "To use something, simply click on it."
-			src << "Use say :b to speak to your cyborgs through binary."
-			src << "For department channels, use the following say commands:"
-			src << ":o - AI Private, :c - Command, :s - Security, :e - Engineering, :u - Supply, :m - Medical, :n - Science."
-			if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
-				show_laws()
-				src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
-
-			job = "AI"
+			on_mob_init()
 
 	spawn(5)
 		new /obj/machinery/ai_powersupply(src)
@@ -176,9 +165,49 @@ var/list/ai_verbs_default = list(
 	..()
 	return
 
+/mob/living/silicon/ai/proc/on_mob_init()
+	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
+	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
+	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
+	src << "To use something, simply click on it."
+	src << "Use say :b to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
+	src << "For department channels, use the following say commands:"
+
+	var/radio_text = ""
+	for(var/i = 1 to common_radio.channels.len)
+		var/channel = common_radio.channels[i]
+		var/key = get_radio_key_from_channel(channel)
+		radio_text += "[key] - [channel]"
+		if(i != common_radio.channels.len)
+			radio_text += ", "
+
+	src << radio_text
+
+	if (!(ticker && ticker.mode && (mind in ticker.mode.malf_ai)))
+		show_laws()
+		src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
+
+	job = "AI"
+
 /mob/living/silicon/ai/Del()
 	ai_list -= src
 	..()
+
+/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+	set popup_menu = 0
+	set src = usr.contents
+	return 0
+
+/mob/living/silicon/ai/proc/system_integrity()
+	return (health-config.health_threshold_dead)/2
+
+// this function shows the health of the pAI in the Status panel
+/mob/living/silicon/ai/show_system_integrity()
+	// An AI doesn't become inoperable until -100% (or whatever config.health_threshold_dead is set to)
+	if(!src.stat)
+		stat(null, text("System integrity: [system_integrity()]%"))
+	else
+		stat(null, text("Systems nonfunctional"))
 
 /mob/living/silicon/ai/proc/SetName(pickedName as text)
 	real_name = pickedName

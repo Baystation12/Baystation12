@@ -462,7 +462,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	icon_state = "coil"
 	amount = MAXCOIL
 	max_amount = MAXCOIL
-	item_color = COLOR_RED
+	color = COLOR_RED
+	//item_color = COLOR_RED Use regular "color" var instead. No need to have it duplicate in two vars. Causes confusion.
 	desc = "A coil of power cable."
 	throwforce = 10
 	w_class = 2.0
@@ -484,10 +485,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
 	..()
 	src.amount = length
-	if (param_color)
+	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
-	else
-		color = item_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	update_icon()
@@ -524,7 +523,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/update_icon()
 	if (!color)
 		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
-		item_color = color
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -541,15 +539,16 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		w_class = 2.0
 
-/obj/item/stack/cable_coil/examine()
-	set src in view(1)
+/obj/item/stack/cable_coil/examine(mob/user)
+	if(get_dist(src, user) > 1)
+		return
 
 	if(get_amount() == 1)
-		usr << "A short piece of power cable."
+		user << "A short piece of power cable."
 	else if(get_amount() == 2)
-		usr << "A piece of power cable."
+		user << "A piece of power cable."
 	else
-		usr << "A coil of power cable. There are [get_amount()] lengths of cable in the coil."
+		user << "A coil of power cable. There are [get_amount()] lengths of cable in the coil."
 
 
 /obj/item/stack/cable_coil/verb/make_restraint()
@@ -563,8 +562,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			usr << "\red You need at least 15 lengths to make restraints!"
 			return
 		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
-		B.icon_state = "cuff_[item_color]"
-		usr << "\blue You wind some cable together to make some restraints."
+		B.color = color
+		usr << "<span class='notice'>You wind some cable together to make some restraints.</span>"
 		src.use(15)
 	else
 		usr << "\blue You cannot do that."
@@ -577,7 +576,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	..()
 	if( istype(W, /obj/item/weapon/wirecutters) && src.amount > 1)
 		src.amount--
-		new/obj/item/stack/cable_coil(user.loc, 1,item_color)
+		new/obj/item/stack/cable_coil(user.loc, 1,color)
 		user << "You cut a piece off the cable coil."
 		src.update_icon()
 		return
@@ -674,7 +673,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			var/obj/structure/cable/C = new(F)
 			var/obj/structure/cable/D = new(temp.floorbelow)
 
-			C.cableColor(item_color)
+			C.cableColor(color)
 
 			C.d1 = 11
 			C.d2 = dirn
@@ -687,7 +686,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()
 
-			D.cableColor(item_color)
+			D.cableColor(color)
 
 			D.d1 = 12
 			D.d2 = 0
@@ -707,7 +706,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 			var/obj/structure/cable/C = new(F)
 
-			C.cableColor(item_color)
+			C.cableColor(color)
 
 			//set up the new cable
 			C.d1 = 0 //it's a O-X node cable
@@ -772,7 +771,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 					return
 
 			var/obj/structure/cable/NC = new(U)
-			NC.cableColor(item_color)
+			NC.cableColor(color)
 
 			NC.d1 = 0
 			NC.d2 = fdirn
@@ -818,7 +817,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				return
 
 
-		C.cableColor(item_color)
+		C.cableColor(color)
 
 		C.d1 = nd1
 		C.d2 = nd2
@@ -864,26 +863,26 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	update_wclass()
 
 /obj/item/stack/cable_coil/yellow
-	item_color = COLOR_YELLOW
+	color = COLOR_YELLOW
 
 /obj/item/stack/cable_coil/blue
-	item_color = COLOR_BLUE
+	color = COLOR_BLUE
 
 /obj/item/stack/cable_coil/green
-	item_color = COLOR_GREEN
+	color = COLOR_GREEN
 
 /obj/item/stack/cable_coil/pink
-	item_color = COLOR_PINK
+	color = COLOR_PINK
 
 /obj/item/stack/cable_coil/orange
-	item_color = COLOR_ORANGE
+	color = COLOR_ORANGE
 
 /obj/item/stack/cable_coil/cyan
-	item_color = COLOR_CYAN
+	color = COLOR_CYAN
 
 /obj/item/stack/cable_coil/white
-	item_color = COLOR_WHITE
+	color = COLOR_WHITE
 
 /obj/item/stack/cable_coil/random/New()
-	item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+	color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()

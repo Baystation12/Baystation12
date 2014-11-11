@@ -36,7 +36,7 @@
 
 	if (src.occupant)
 		var/laws
-		dat += "Stored AI: [src.occupant.name]<br>System integrity: [(src.occupant.health+100)/2]%<br>"
+		dat += "Stored AI: [src.occupant.name]<br>System integrity: [src.occupant.system_integrity()]%<br>"
 
 		for (var/law in occupant.laws.ion)
 			if(law)

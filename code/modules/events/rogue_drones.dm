@@ -1,4 +1,5 @@
 /datum/event/rogue_drone
+	name = "Rogue Drones"
 	startWhen = 10
 	endWhen = 1000
 	var/list/drones_list = list()
@@ -41,7 +42,7 @@
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(3, 0, D.loc)
 		sparks.start()
-		D.z = 2
+		D.z = config.admin_levels[1]
 		D.has_loot = 0
 
 		del(D)

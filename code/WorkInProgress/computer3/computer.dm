@@ -131,8 +131,6 @@
 				for(var/typekey in spawn_files)
 					hdd.addfile(new typekey,1)
 
-		if(program)
-			program.execute(os)
 		update_icon()
 
 

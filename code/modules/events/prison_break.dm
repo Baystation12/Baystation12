@@ -1,4 +1,5 @@
 /datum/event/prison_break
+	name 			= "Prison Break"
 	announceWhen	= 50
 	oneShot			= 1
 

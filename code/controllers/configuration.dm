@@ -69,7 +69,7 @@
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
-	
+
 	var/character_slots = 10				// The number of available character slots
 
 	var/max_maint_drones = 5				//This many drones can spawn,
@@ -150,6 +150,25 @@
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
+
+	var/list/station_levels = list(1)				// Defines which Z-levels the station exists on.
+	var/list/admin_levels= list(2)					// Defines which Z-levels which are for admin functionality, for example including such areas as Central Command and the Syndicate Shuttle
+	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
+	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
+
+	var/const/minutes_to_ticks = 60 * 10
+	// Event settings
+	var/expected_round_length = 60 * 3 * minutes_to_ticks // 3 hours
+	// If the first delay has a custom start time
+	// No custom time, no custom time, between 80 to 100 minutes respectively.
+	var/list/event_first_run   = list(EVENT_LEVEL_MUNDANE = null, 	EVENT_LEVEL_MODERATE = null,	EVENT_LEVEL_MAJOR = list("lower" = 48000, "upper" = 60000))
+	// The lowest delay until next event
+	// 10, 30, 50 minutes respectively
+	var/list/event_delay_lower = list(EVENT_LEVEL_MUNDANE = 6000,	EVENT_LEVEL_MODERATE = 18000,	EVENT_LEVEL_MAJOR = 30000)
+	// The upper delay until next event
+	// 15, 45, 70 minutes respectively
+	var/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 9000,	EVENT_LEVEL_MODERATE = 27000,	EVENT_LEVEL_MAJOR = 42000)
+
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -495,7 +514,7 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
-					
+
 				if("character_slots")
 					config.character_slots = text2num(value)
 
@@ -510,6 +529,45 @@
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("station_levels")
+					config.station_levels = text2numlist(value, ";")
+
+				if("admin_levels")
+					config.admin_levels = text2numlist(value, ";")
+
+				if("contact_levels")
+					config.contact_levels = text2numlist(value, ";")
+
+				if("player_levels")
+					config.player_levels = text2numlist(value, ";")
+
+				if("expected_round_length")
+					config.expected_round_length = text2num(value) * minutes_to_ticks
+
+				if("event_custom_start_mundane")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+
+				if("event_custom_start_moderate")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+
+				if("event_custom_start_major")
+					var/values = text2numlist(value, ";")
+					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+
+				if("event_delay_lower")
+					var/values = text2numlist(value, ";")
+					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = values[1] * minutes_to_ticks
+					config.event_delay_lower[EVENT_LEVEL_MODERATE] = values[2] * minutes_to_ticks
+					config.event_delay_lower[EVENT_LEVEL_MAJOR] = values[3] * minutes_to_ticks
+
+				if("event_delay_upper")
+					var/values = text2numlist(value, ";")
+					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = values[1] * minutes_to_ticks
+					config.event_delay_upper[EVENT_LEVEL_MODERATE] = values[2] * minutes_to_ticks
+					config.event_delay_upper[EVENT_LEVEL_MAJOR] = values[3] * minutes_to_ticks
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

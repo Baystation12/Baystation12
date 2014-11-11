@@ -84,14 +84,13 @@
 					src.overlays += O
 */
 
-	examine()
-		set src in view()
-		..()
-		if ((in_range(src, usr) || src.loc == usr))
+	examine(mob/user)
+		..(user)
+		if ((in_range(src, user) || src.loc == user))
 			if (src.secured)
-				usr << "\The [src] is ready!"
+				user << "\The [src] is ready!"
 			else
-				usr << "\The [src] can be attached!"
+				user << "\The [src] can be attached!"
 		return
 
 

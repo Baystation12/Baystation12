@@ -65,7 +65,9 @@
 
 	overlays += image('icons/obj/power.dmi', "smes-op[outputting]")
 
-	if(inputting)
+	if(inputting == 2)
+		overlays += image('icons/obj/power.dmi', "smes-oc2")
+	else if (inputting == 1)
 		overlays += image('icons/obj/power.dmi', "smes-oc1")
 	else
 		if(input_attempt)
@@ -96,8 +98,12 @@
 	if(terminal && input_attempt)
 		input_available = terminal.surplus()
 
-		if(inputting)
-			if(input_available > 0 && input_available >= input_level)		// if there's power available, try to charge
+			if (actual_load >= target_load) // Did we charge at full rate?
+				inputting = 2
+			else if (actual_load) // If not, did we charge at least partially?
+				inputting = 1
+			else // Or not at all?
+				inputting = 0
 
 				var/load = min((capacity-charge)/SMESRATE, input_level)		// charge at set rate, limited to spare capacity
 				var/actual_load = terminal.draw_power(load)					// draw power from the terminal side network
@@ -239,6 +245,7 @@
 				"<span class='notice'>You added cables to the [src].</span>")
 		terminal.connect_to_network()
 		stat = 0
+		return 0
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
@@ -262,6 +269,7 @@
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 					del(terminal)
 		building_terminal = 0
+		return 0
 	return 1
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -344,7 +352,7 @@
 
 
 /obj/machinery/power/smes/proc/ion_act()
-	if(src.z == 1)
+	if(src.z in config.station_levels)
 		if(prob(1)) //explosion
 			for(var/mob/M in viewers(src))
 				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)

@@ -7,7 +7,7 @@
 
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || S.z != 1)
+		if(current_area.type in skipped_areas || !(S.z in config.station_levels))
 			continue
 		S.last_charge			= S.charge
 		S.last_output_attempt	= S.output_attempt
@@ -20,7 +20,7 @@
 
 
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
+		if(C.cell && C.z in config.station_levels)
 			C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
@@ -29,11 +29,11 @@
 	if(announce)
 		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
+		if(C.cell && C.z in config.station_levels)
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || S.z != 1)
+		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
 			continue
 		S.charge = S.last_charge
 		S.output_attempt = S.last_output_attempt
@@ -46,10 +46,10 @@
 	if(announce)
 		command_announcement.Announce("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
+		if(isNotStationLevel(S.z))
 			continue
 		S.charge = S.capacity
-		S.output_level = 200000
+		S.output_level = S.output_level_max
 		S.output_attempt = 1
 		S.input_attempt = 1
 		S.update_icon()

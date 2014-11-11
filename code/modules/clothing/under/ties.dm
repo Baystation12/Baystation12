@@ -257,13 +257,12 @@
 		holstered.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/holster/examine()
-	set src in view()
-	..()
+/obj/item/clothing/tie/holster/examine(mob/user)
+	..(user)
 	if (holstered)
-		usr << "A [holstered] is holstered here."
+		user << "A [holstered] is holstered here."
 	else
-		usr << "It is empty."
+		user << "It is empty."
 
 /obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()

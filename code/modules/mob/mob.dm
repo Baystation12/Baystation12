@@ -47,6 +47,8 @@
 
 /mob/visible_message(var/message, var/self_message, var/blind_message)
 	for(var/mob/M in viewers(src))
+		if(M.see_invisible < invisibility)
+			continue // Cannot view the invisible
 		var/msg = message
 		if(self_message && M==src)
 			msg = self_message
@@ -59,6 +61,34 @@
 /atom/proc/visible_message(var/message, var/blind_message)
 	for(var/mob/M in viewers(src))
 		M.show_message( message, 1, blind_message, 2)
+
+// Show a message to all mobs in earshot of this one
+// This would be for audible actions by the src mob
+// message is the message output to anyone who can hear.
+// self_message (optional) is what the src mob hears.
+// deaf_message (optional) is what deaf people will see.
+// hearing_distance (optional) is the range, how many tiles away the message can be heard.
+/mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
+	var/range = 7
+	if(hearing_distance)
+		range = hearing_distance
+	var/msg = message
+	for(var/mob/M in get_mobs_in_view(range, src))
+		if(self_message && M==src)
+			msg = self_message
+		M.show_message( msg, 2, deaf_message, 1)
+
+// Show a message to all mobs in earshot of this atom
+// Use for objects performing audible actions
+// message is the message output to anyone who can hear.
+// deaf_message (optional) is what deaf people will see.
+// hearing_distance (optional) is the range, how many tiles away the message can be heard.
+/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance)
+	var/range = 7
+	if(hearing_distance)
+		range = hearing_distance
+	for(var/mob/M in get_mobs_in_view(range, src))
+		M.show_message( message, 2, deaf_message, 1)
 
 
 /mob/proc/findname(msg)
@@ -182,6 +212,41 @@ var/list/slot_equipment_priority = list( \
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[name]")
 	return
+
+//mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
+/mob/verb/examinate(atom/A as mob|obj|turf in view())
+	set name = "Examine"
+	set category = "IC"
+
+	if((is_blind(src) || usr.stat) && !isobserver(src))
+		src << "<span class='notice'>Something is there but you can't see it.</span>"
+		return
+
+	face_atom(A)
+	A.examine(src)
+
+/mob/verb/pointed(atom/A as mob|obj|turf in view())
+	set name = "Point To"
+	set category = "Object"
+
+	if(!src || !isturf(src.loc) || !(A in view(src.loc)))
+		return 0
+	if(istype(A, /obj/effect/decal/point))
+		return 0
+
+	var/tile = get_turf(A)
+	if (!tile)
+		return 0
+
+	var/obj/P = new /obj/effect/decal/point(tile)
+	P.invisibility = invisibility
+	spawn (20)
+		if(P)
+			del(P)	// qdel
+
+	face_atom(A)
+	return 1
+
 
 /mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
 	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
@@ -543,11 +608,11 @@ var/list/slot_equipment_priority = list( \
 		pulling = null
 
 /mob/proc/start_pulling(var/atom/movable/AM)
-
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
+		usr << "<span class='notice'>It won't budge!</span>"
 		return
 
 	var/mob/M = AM

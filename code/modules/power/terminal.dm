@@ -33,3 +33,7 @@
 		invisibility = 0
 		icon_state = "term"
 
+// Needed so terminals are not removed from machines list.
+// Powernet rebuilds need this to work properly.
+/obj/machinery/power/terminal/process()
+	return 1

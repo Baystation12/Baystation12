@@ -113,8 +113,11 @@ Class Procs:
 
 /obj/machinery/New()
 	..()
-	machines += src
-	machinery_sort_required = 1
+	if(!machinery_sort_required && ticker)
+		dd_insertObjectList(machines, src)
+	else
+		machines += src
+		machinery_sort_required = 1
 
 /obj/machinery/Del()
 	machines -= src
@@ -178,7 +181,8 @@ Class Procs:
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
 /obj/machinery/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 	if(inoperable())
 		return 1
 	if(usr.restrained() || usr.lying || usr.stat)

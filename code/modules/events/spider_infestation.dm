@@ -1,6 +1,7 @@
 /var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation
+	name = "Large Spider Infestation"
 	announceWhen	= 400
 	oneShot			= 1
 
@@ -19,7 +20,7 @@
 /datum/event/spider_infestation/start()
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
-		if(temp_vent.loc.z == 1 && !temp_vent.welded && temp_vent.network)
+		if(!temp_vent.welded && temp_vent.network && temp_vent.loc.z in config.station_levels)
 			if(temp_vent.network.normal_members.len > 50)
 				vents += temp_vent
 

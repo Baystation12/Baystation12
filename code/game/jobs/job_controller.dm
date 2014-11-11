@@ -341,6 +341,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 				player.ready = 0
+				player.new_player_panel_proc()
 				unassigned -= player
 		return 1
 
@@ -385,6 +386,7 @@ var/global/datum/controller/occupations/job_master
 
 			//Equip job items.
 			job.equip(H)
+			job.apply_fingerprints(H)
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 

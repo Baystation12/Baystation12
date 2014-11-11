@@ -120,6 +120,9 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
+	// Sort the machinery list so it doesn't cause a lagspike at roundstart
+	process_machines_sort()
+
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
@@ -319,6 +322,7 @@ datum/controller/game_controller/proc/process_pipenets()
 		Powernet.reset()
 
 datum/controller/game_controller/proc/process_nano()
+	last_thing_processed = /datum/nanoui
 	var/i = 1
 	while(i<=nanomanager.processing_uis.len)
 		var/datum/nanoui/ui = nanomanager.processing_uis[i]
@@ -330,15 +334,7 @@ datum/controller/game_controller/proc/process_nano()
 
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event
-	var/i = 1
-	while(i<=events.len)
-		var/datum/event/Event = events[i]
-		if(Event)
-			Event.process()
-			i++
-			continue
-		events.Cut(i,i+1)
-	checkEvent()
+	event_manager.process()
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

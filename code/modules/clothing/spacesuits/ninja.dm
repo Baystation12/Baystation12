@@ -8,6 +8,7 @@
 	siemens_coefficient = 0.2
 	species_restricted = null
 	body_parts_covered = HEAD|FACE
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 
 /obj/item/clothing/suit/space/space_ninja
 	name = "ninja suit"
@@ -20,6 +21,7 @@
 	siemens_coefficient = 0.2
 	species_restricted = null //Workaround for spawning alien ninja without internals.
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	flags_inv = HIDEJUMPSUIT|HIDETAIL
 	supporting_limbs = list()
 
 	// Hardsuit breaching data

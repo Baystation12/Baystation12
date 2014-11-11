@@ -55,6 +55,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
+	var/sound/forced_ambience = null
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
@@ -65,7 +66,7 @@ var/list/teleportlocs = list()
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1)
+		if (picked.z in config.station_levels)
 			teleportlocs += AR.name
 			teleportlocs[AR.name] = AR
 
@@ -82,7 +83,7 @@ var/list/ghostteleportlocs = list()
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = pick(get_area_turfs(AR.type))
-		if (picked.z == 1 || picked.z == 3 || picked.z == 4 || picked.z == 5)
+		if (picked.z in config.player_levels)
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 
@@ -716,6 +717,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Incinerator"
 	icon_state = "disposal"
 
+/area/maintenance/library
+	name = "Library Maintenance"
+	icon_state = "maint_library"
+
 /area/maintenance/locker
 	name = "Locker Room Maintenance"
 	icon_state = "maint_locker"
@@ -725,11 +730,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "maint_medbay"
 
 /area/maintenance/research_port
-	name = "Port Research Maintenance"
+	name = "Research Maintenance - Port"
 	icon_state = "maint_research_port"
 
 /area/maintenance/research_starboard
-	name = "Starboard Research Maintenance"
+	name = "Research Maintenance - Starboard"
 	icon_state = "maint_research_starboard"
 
 /area/maintenance/research_shuttle
@@ -737,11 +742,11 @@ var/list/ghostteleportlocs = list()
 	icon_state = "maint_research_shuttle"
 
 /area/maintenance/security_port
-	name = "Port Security Maintenance"
+	name = "Security Maintenance - Port"
 	icon_state = "maint_security_port"
 
 /area/maintenance/security_starboard
-	name = "Starboard Security Maintenance"
+	name = "Security Maintenance - Starboard"
 	icon_state = "maint_security_starboard"
 
 /area/maintenance/storage
@@ -813,9 +818,21 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Construction Area"
 	icon_state = "construction"
 
-/area/hallway/secondary/entry
-	name = "\improper Arrival Shuttle Hallway"
-	icon_state = "entry"
+/area/hallway/secondary/entry/fore
+	name = "\improper Arrival Shuttle Hallway - Fore"
+	icon_state = "entry_1"
+
+/area/hallway/secondary/entry/port
+	name = "\improper Arrival Shuttle Hallway - Port"
+	icon_state = "entry_2"
+
+/area/hallway/secondary/entry/starboard
+	name = "\improper Arrival Shuttle Hallway - Starboard"
+	icon_state = "entry_3"
+
+/area/hallway/secondary/entry/aft
+	name = "\improper Arrival Shuttle Hallway - Aft"
+	icon_state = "entry_4"
 
 //Command
 
@@ -887,8 +904,16 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
-/area/crew_quarters/sleep/bedrooms
-	name = "\improper Dormitory Bedroom"
+/area/crew_quarters/sleep/bedrooms/one
+	name = "\improper Dormitory Bedroom One"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms/two
+	name = "\improper Dormitory Bedroom Two"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms/three
+	name = "\improper Dormitory Bedroom Three"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo
@@ -1166,7 +1191,7 @@ var/list/ghostteleportlocs = list()
 
 /area/assembly/robotics
 	name = "\improper Robotics Lab"
-	icon_state = "ass_line"
+	icon_state = "robotics"
 
 /area/assembly/assembly_line //Derelict Assembly Line
 	name = "\improper Assembly Line"
@@ -1196,19 +1221,24 @@ var/list/ghostteleportlocs = list()
 //MedBay
 
 /area/medical/medbay
-	name = "\improper Medbay"
+	name = "\improper Medbay Hallway - Port"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
-	name = "\improper Medbay"
+	name = "\improper Medbay Hallway - Starboard"
 	icon_state = "medbay2"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay3
-	name = "\improper Medbay"
+	name = "\improper Medbay Hallway - Fore"
 	icon_state = "medbay3"
+	music = 'sound/ambience/signal.ogg'
+
+/area/medical/medbay4
+	name = "\improper Medbay Hallway - Aft"
+	icon_state = "medbay4"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/biostorage
