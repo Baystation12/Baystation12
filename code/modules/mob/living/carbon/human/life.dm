@@ -776,9 +776,9 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC)
+		/*if (species.flags & IS_SYNTHETIC)
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
-			return
+			return Can IPCs please wear hardsuits again?*/
 
 		var/body_temperature_difference = species.body_temperature - bodytemperature
 
