@@ -3,10 +3,13 @@
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUNDS))	return
 
+	if(alert("Announce sound?",,"Yes","No")=="Yes")
+		world << "<FONT color='blue'>Now Currently Playing.. [S]</FONT>"
+
 	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = 777)
 	uploaded_sound.priority = 250
 
-	world << "<FONT color='blue'>Now Currently Playing.. [S]</FONT>"
+
 	log_admin("[key_name(src)] played sound [S]")
 	log_admin_single("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
