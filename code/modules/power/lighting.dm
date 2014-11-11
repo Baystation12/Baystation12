@@ -775,6 +775,8 @@ These need expanding and/or reworking, but they're basic and they'll  do for now
 		return 1
 	if(emergency_shuttle.online())
 		return 1
+	if(rad_storm == 1)
+		return 1
 	if(!has_power())
 		return 1
 	else return 0
