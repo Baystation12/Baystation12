@@ -1,6 +1,6 @@
 /obj/machinery/virtualgameboard
 	name = "Virtual Game Board"
-	desc = "Used to play chess by jobless assistants.. so basically all assistants."
+	desc = "Used to play virtualized games."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "virtual"
 	density = 1
