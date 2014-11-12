@@ -1,5 +1,4 @@
 /datum/event/prison_break
-	name 			= "Prison Break"
 	announceWhen	= 50
 
 	var/releaseWhen = 25

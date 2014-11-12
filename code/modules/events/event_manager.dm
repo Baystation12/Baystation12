@@ -9,7 +9,7 @@
 	var/datum/event_container/selected_event_container = null
 
 	var/list/datum/event/active_events = list()
-	var/list/events_finished = list()
+	var/list/datum/event/finished_events = list()
 
 	var/list/datum/event/allEvents
 	var/list/datum/event_container/event_containers = list(
@@ -32,18 +32,18 @@
 		EC.process()
 
 /datum/event_manager/proc/event_complete(var/datum/event/E)
-	if(!E.event_meta)	// datum/event is used here and there for random reasons
+	if(!E.event_meta)	// datum/event is used here and there for random reasons, maintaining "backwards compatibility"
 		log_debug("Event of '[E.type]' with missing meta-data has completed.")
 		return
 
-	events_finished += E
+	finished_events += E
 
 	// Add the event back to the list of available events
 	var/datum/event_container/EC = event_containers[E.severity]
-	EC.available_events += E.event_meta
+	var/datum/event_meta/EM = E.event_meta
+	EC.available_events += EM
 
-	log_debug("Event '[E.name]' has completed.")
-
+	log_debug("Event '[EM.name]' has completed at [worldtime2text()].")
 
 /datum/event_manager/proc/Interact(var/mob/living/user)
 
@@ -58,7 +58,7 @@
 		return
 
 	world << "<br><br><br><font size=3><b>Random Events This Round:</b></font>"
-	for(var/datum/event/E in events_finished)
+	for(var/datum/event/E in active_events|finished_events)
 		var/datum/event_meta/EM = E.event_meta
 		if(EM.name == "Nothing")
 			continue
@@ -66,7 +66,7 @@
 		if(E.isRunning)
 			message += "and is still running."
 		else
-			if(E.endedAt - E.startedAt > 5 * 60 * 10) // Only mention end time if the entire duration was more than 5 minutes
+			if(E.endedAt - E.startedAt > MinutesToTicks(5)) // Only mention end time if the entire duration was more than 5 minutes
 				message += "and ended at [worldtime2text(E.endedAt)]."
 			else
 				message += "and ran to completion."
@@ -117,7 +117,7 @@
 		html += "<h2>Event Start</h2>"
 
 		html += "<table[table_options]>"
-		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Starts At</td><td[row_options1]>Until Start</td><td[row_options3]>Adjust Start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
+		html += "<tr><td[row_options1]>Severity</td><td[row_options1]>Starts At</td><td[row_options1]>Starts In</td><td[row_options3]>Adjust Start</td><td[row_options1]>Pause</td><td[row_options1]>Interval Mod</td></tr>"
 		for(var/severity = EVENT_LEVEL_MUNDANE to EVENT_LEVEL_MAJOR)
 			var/datum/event_container/EC = event_containers[severity]
 			var/next_event_at = max(0, EC.next_event_time - world.time)
@@ -159,13 +159,14 @@
 
 		html += "<div class='block'>"
 		html += "<h2>Running Events</h2>"
+		html += "Estimated times, affected by master controller delays."
 		html += "<table[table_options]>"
 		html += "<tr><td[row_options1]>Severity</td><td[row_options2]>Name</td><td[row_options1]>Ends At</td><td[row_options1]>Ends In</td><td[row_options3]>Stop</td></tr>"
 		for(var/datum/event/E in active_events)
 			if(!E.event_meta)
 				continue
 			var/datum/event_meta/EM = E.event_meta
-			var/ends_at = E.startedAt + (E.lastProcessAt() * 10)
+			var/ends_at = E.startedAt + (E.lastProcessAt() * master_controller.minimum_ticks)	// A best estimate
 			var/ends_in = max(0, round((ends_at - world.time) / 600, 0.1))
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"

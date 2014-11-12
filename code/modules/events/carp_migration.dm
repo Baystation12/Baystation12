@@ -1,5 +1,4 @@
 /datum/event/carp_migration
-	name 			= "Carp Migration"
 	announceWhen	= 50
 	endWhen 		= 900
 

@@ -489,3 +489,6 @@ datum/projectile_data
 					rstats[i] = environment.vars[stats[i]]
 		temps[direction] = rstats
 	return temps
+
+/proc/MinutesToTicks(var/minutes as num)
+	return minutes * 60 * 10

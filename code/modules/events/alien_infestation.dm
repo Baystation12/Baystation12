@@ -1,7 +1,6 @@
 /var/global/sent_aliens_to_station = 0
 
 /datum/event/alien_infestation
-	name 			= "Alien Infestation"
 	announceWhen	= 400
 
 	var/spawncount = 1

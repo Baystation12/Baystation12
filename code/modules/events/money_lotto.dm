@@ -1,5 +1,4 @@
 /datum/event/money_lotto
-	name = "Money Lotto"
 	var/winner_name = "John Smith"
 	var/winner_sum = 0
 	var/deposit_success = 0

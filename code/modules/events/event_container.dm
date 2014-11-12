@@ -43,9 +43,9 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		set_event_delay()
 		next_event.enabled = !next_event.one_shot	// This event will no longer be available in the random rotation if one shot
 
-		var/datum/event/E = new next_event.event_type(next_event)	// Events are added and removed from the processing queue in their New/kill procs
+		new next_event.event_type(next_event)	// Events are added and removed from the processing queue in their New/kill procs
 
-		log_debug("Starting event '[E.name]' of severity [severity_to_string[severity]].")
+		log_debug("Starting event '[next_event.name]' of severity [severity_to_string[severity]].")
 		next_event = null						// When set to null, a random event will be selected next time
 	else
 		// If not, wait for one minute, instead of one tick, before checking again.
@@ -133,7 +133,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Lost Carp",			/datum/event/carp_migration, 	20, 	list(ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Brand Intelligence",/datum/event/brand_intelligence,20, 	list(ASSIGNMENT_JANITOR = 25),	1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation",/datum/event/infestation, 		100,	list(ASSIGNMENT_JANITOR = 100)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wall rot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",			/datum/event/wallrot, 			0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
 	)
 
 /datum/event_container/moderate

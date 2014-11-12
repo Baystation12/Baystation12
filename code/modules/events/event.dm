@@ -48,7 +48,6 @@
 	return 0
 
 /datum/event	//NOTE: Times are measured in master controller ticks!
-	var/name			= ""//Name of the event
 	var/startWhen		= 0	//When in the lifetime to call start().
 	var/announceWhen	= 0	//When in the lifetime to call announce().
 	var/endWhen			= 0	//When in the lifetime the event should end.
@@ -61,7 +60,6 @@
 	var/datum/event_meta/event_meta = null
 
 /datum/event/nothing
-	name = "Nothing"
 
 //Called first before processing.
 //Allows you to setup your event, such as randomly
@@ -120,7 +118,7 @@
 		end()
 
 	// Everything is done, let's clean up.
-	if(activeFor >= endWhen && activeFor >= announceWhen && activeFor >= startWhen)
+	if(activeFor >= lastProcessAt())
 		kill()
 
 	activeFor++

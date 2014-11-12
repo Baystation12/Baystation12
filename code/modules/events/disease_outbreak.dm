@@ -1,5 +1,4 @@
 /datum/event/disease_outbreak
-	name = "Disease Outbreak"
 	announceWhen	= 15
 
 

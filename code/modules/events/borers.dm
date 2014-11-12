@@ -1,8 +1,4 @@
 //Cortical borer spawn event - care of RobRichards1997 with minor editing by Zuhayr.
-
-/datum/event/borer_infestation
-	name 			= "Borer Infestation"
-
 /datum/event/borer_infestation
 	announceWhen = 400
 
