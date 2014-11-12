@@ -569,11 +569,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(body_part == UPPER_TORSO)
 			return
 
-		if (1)
-			src.status &= ~ORGAN_BROKEN
-			src.status &= ~ORGAN_BLEEDING
-			src.status &= ~ORGAN_SPLINTED
-			src.status &= ~ORGAN_DEAD
+		src.status &= ~ORGAN_BROKEN
+		src.status &= ~ORGAN_BLEEDING
+		src.status &= ~ORGAN_SPLINTED
+		src.status &= ~ORGAN_DEAD
 		for(var/implant in implants)
 			del(implant)
 
