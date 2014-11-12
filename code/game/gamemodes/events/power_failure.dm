@@ -23,6 +23,9 @@
 		if(C.cell && C.z == 1)
 			C.cell.charge = 0
 			C.operating = 0
+			C.chargemode = 0
+			C.update()
+			C.update_icon()
 
 /proc/power_restore(var/announce = 1)
 	var/list/skipped_areas = list(/area/engine/engine_room, /area/engine/generators, /area/turret_protected/ai)
@@ -33,6 +36,10 @@
 		if(C.cell && C.z == 1)
 			C.cell.charge = C.cell.maxcharge
 			C.operating = 1
+			C.chargemode = 1
+			C.update()
+			C.update_icon()
+
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
 		if(current_area.type in skipped_areas || S.z != 1)
