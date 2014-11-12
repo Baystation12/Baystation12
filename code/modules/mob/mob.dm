@@ -847,17 +847,18 @@ note dizziness decrements automatically in the mob's Life() proc.
 			lying = 0
 			canmove = 1
 			pixel_y = V.mob_offset_y
-	else if(buckled && (!buckled.movable))
-		anchored = 1
-		canmove = 0
-		if(istype(buckled,/obj/structure/stool/bed/chair) )
-			lying = 0
+	else if(buckled)
+		if (!buckled.movable)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled,/obj/structure/stool/bed/chair) )
+				lying = 0
+			else
+				lying = 1
 		else
-			lying = 1
-	else if (buckled && (buckled.movable))
-		anchored = 0
-		canmove = 1
-		lying = 0
+			anchored = 0
+			canmove = 1
+			lying = 0
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
@@ -867,9 +868,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 		anchored = 1
 		canmove = 0
 		lying = 0
-	else if (!buckled)
-		lying = !can_stand
-		canmove = has_limbs
+	else
+		lying = 0
+		canmove = 1
 
 	if(lying)
 		density = 0
