@@ -127,6 +127,10 @@
 	return
 
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
+	//Tasers and the like should not damage doors.
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	if(Proj.damage)
 		take_damage(round(Proj.damage * 4))
 	..()
