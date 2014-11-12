@@ -642,14 +642,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	..()
 
 /obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
-	if (istype(M, /obj/item/robot_parts))
-		var/obj/item/robot_parts/part = M
-		if (part.burn_dam>0 && use(1))
-			part.burn_dam = max(part.burn_dam-15, 0)
-			user.visible_message("\red \The [user] repairs some burn damage on \the [M] with \the [src].")
-		else
-			user << "Nothing to fix!"
-	else if(hasorgans(M))
+	if(hasorgans(M))
 
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")

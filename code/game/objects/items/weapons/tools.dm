@@ -452,14 +452,7 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
-	if (istype(M, /obj/item/robot_parts))
-		var/obj/item/robot_parts/part = M
-		if (part.brute_dam>0)
-			part.brute_dam = max(part.brute_dam-15, 0)
-			user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src].")
-		else
-			user << "Nothing to fix!"
-	else if(hasorgans(M))
+	if(hasorgans(M))
 
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
