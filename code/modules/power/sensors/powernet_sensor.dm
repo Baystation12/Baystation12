@@ -78,7 +78,7 @@
 		else
 			textavail += " W"
 
-		if(powernet.problem || powernet.newproblem)
+		if(powernet.problem)
 			out += "<br><b>WARNING: Abnormal grid activity detected!</b>"
 		out += "<br><b>TOTAL GRID LOAD: [total_load]</b>"
 		out += "<br><b>TOTAL AVAILABLE: [textavail]</b>"

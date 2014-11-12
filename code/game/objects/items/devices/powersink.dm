@@ -95,7 +95,7 @@
 			var/datum/powernet/PN = attached.get_powernet()
 			if(PN)
 				SetLuminosity(12)
-				PN.newproblem = 1
+				PN.trigger_warning()
 				// found a powernet, so drain up to max power from it
 				var/drained = PN.draw_power(drain_rate)
 

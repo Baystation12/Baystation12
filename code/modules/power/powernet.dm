@@ -13,8 +13,6 @@
 	var/netexcess = 0			// excess power on the powernet (typically avail-load)
 
 	var/problem = 0				// If either of these is set to 1 there is some sort of issue at the powernet.
-	var/newproblem = 0			// At time of implementation this may be: Powersink, Spess Ninja recharging
-
 
 /datum/powernet/New()
 	powernets += src
@@ -76,13 +74,18 @@
 	M.powernet = src
 	nodes[M] = M
 
+// Triggers warning for certain amount of ticks
+/datum/powernet/proc/trigger_warning(var/duration_ticks = 20)
+	problem = max(duration_ticks, problem)
+
+
 //handles the power changes in the powernet
 //called every ticks by the powernet controller
 /datum/powernet/proc/reset()
 	var/numapc = 0
 
-	problem = newproblem
-	newproblem = 0
+	if(problem > 0)
+		problem = max(problem - 1, 0)
 
 	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
 		for(var/obj/machinery/power/terminal/term in nodes)
