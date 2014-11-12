@@ -15,9 +15,16 @@
 	anchored = 1.0
 	var/circuit = /obj/item/weapon/circuitboard/powermonitor
 	var/list/grid_sensors = null
+	var/update_counter = 0 // Next icon update when this reaches 5 (ie every 5 ticks)
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
+
+	// Update icon every 5 ticks.
+/obj/machinery/power/monitor/process()
+	update_counter++
+	if(update_counter > 4)
+		update_icon()
 
 /obj/machinery/power/monitor/New()
 	..()
@@ -81,7 +88,7 @@
 			if(S.powernet)
 				reported_nets += S.powernet
 		if(duplicities)
-			t += "<br><b>Ignored [duplicities] duplicite readings"
+			t += "<br><b><i>Ignored [duplicities] duplicite readings</i></b>"
 	user << browse(t, "window=powcomp;size=600x900")
 	onclose(user, "powcomp")
 
@@ -99,17 +106,38 @@
 		refresh_sensors()
 		return
 
+/obj/machinery/power/monitor/update_icon()
+	update_counter = 0 // Reset the icon update counter.
+	if(stat & BROKEN)
+		icon_state = "powerb"
+		return
+	if(stat & NOPOWER)
+		icon_state = "power0"
+		return
+	if(check_warnings())
+		icon_state = "power_alert"
+		return
+
+	icon_state = "power"
+
+/obj/machinery/power/monitor/proc/check_warnings()
+	var/warn = 0
+	if(grid_sensors)
+		for(var/obj/machinery/power/sensor/S in grid_sensors)
+			if(S.check_grid_warning())
+				warn = 1
+	return warn
+
 
 /obj/machinery/power/monitor/power_change()
 	..()
-	if(stat & BROKEN)
-		icon_state = "broken"
+
+	// Leaving this here to preserve that delayed shutdown effect when power goes out.
+	if (stat & NOPOWER)
+		spawn(rand(0, 15))
+			update_icon()
 	else
-		if (stat & NOPOWER)
-			spawn(rand(0, 15))
-				src.icon_state = "c_unpowered"
-		else
-			icon_state = initial(icon_state)
+		update_icon()
 
 
 //copied from computer.dm

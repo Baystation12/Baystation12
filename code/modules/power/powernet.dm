@@ -12,7 +12,7 @@
 	var/perapc_excess = 0
 	var/netexcess = 0			// excess power on the powernet (typically avail-load)
 
-	var/problem = 0				// If either of these is set to 1 there is some sort of issue at the powernet.
+	var/problem = 0				// If this is not 0 there is some sort of issue in the powernet. Monitors will display warnings.
 
 /datum/powernet/New()
 	powernets += src

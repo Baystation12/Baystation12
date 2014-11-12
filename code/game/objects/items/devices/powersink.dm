@@ -14,7 +14,8 @@
 	matter = list("metal" = 750,"waste" = 750)
 
 	origin_tech = "powerstorage=3;syndicate=5"
-	var/drain_rate = 600000		// amount of power to drain per tick
+	var/drain_rate = 1000000		// amount of power to drain per tick
+	var/dissipation_rate = 20000
 	var/power_drained = 0 		// has drained this much power
 	var/max_power = 5e9		// maximum power that can be drained before exploding
 	var/mode = 0		// 0 = off, 1=clamped (off), 2=operating
@@ -91,6 +92,7 @@
 				processing_objects.Remove(src)
 
 	process()
+		power_drained -= min(dissipation_rate, power_drained)
 		if(attached)
 			var/datum/powernet/PN = attached.get_powernet()
 			if(PN)

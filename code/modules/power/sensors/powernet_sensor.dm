@@ -69,20 +69,25 @@
 		else
 			total_load = "[round(total_load)] W"
 
-		out += "</table>"
+		out += "</table><br><b>TOTAL GRID LOAD: [total_load]</b>"
 
-		var/textavail = powernet.avail
-		if(textavail > 1000)
-			textavail = "[textavail / 1000]"
-			textavail += " kW"
-		else
-			textavail += " W"
+	var/textavail = powernet.avail
+	if(textavail > 1000)
+		textavail = "[textavail / 1000] kW"
+	else
+		textavail = "[textavail] W"
+	out += "<br><b>TOTAL AVAILABLE: [textavail]</b>"
 
-		if(powernet.problem)
-			out += "<br><b>WARNING: Abnormal grid activity detected!</b>"
-		out += "<br><b>TOTAL GRID LOAD: [total_load]</b>"
-		out += "<br><b>TOTAL AVAILABLE: [textavail]</b>"
+	if(powernet.problem)
+		out += "<br><b>WARNING: Abnormal grid activity detected!</b>"
 	return out
+
+/obj/machinery/power/sensor/proc/check_grid_warning()
+	RefreshGrid()
+	if(powernet)
+		if(powernet.problem)
+			return 1
+	return 0
 
 // Has to be here as we need it to be in Machines list.
 /obj/machinery/power/sensor/process()
