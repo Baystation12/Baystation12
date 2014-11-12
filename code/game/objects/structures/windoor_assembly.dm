@@ -18,7 +18,6 @@ obj/structure/windoor_assembly
 	density = 0
 	dir = NORTH
 
-	var/ini_dir
 	var/obj/item/weapon/airlock_electronics/electronics = null
 
 	//Vars to help with the icon's name
@@ -26,9 +25,17 @@ obj/structure/windoor_assembly
 	var/secure = ""		//Whether or not this creates a secure windoor
 	var/state = "01"	//How far the door assembly has progressed in terms of sprites
 
-obj/structure/windoor_assembly/New(dir=NORTH)
+obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 	..()
-	src.ini_dir = src.dir
+	if(constructed)
+		state = "01"
+		anchored = 0
+	switch(start_dir)
+		if(NORTH, SOUTH, EAST, WEST)
+			dir = start_dir
+		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north
+			dir = NORTH
+	
 	update_nearby_tiles(need_rebuild=1)
 
 obj/structure/windoor_assembly/Del()
@@ -70,7 +77,7 @@ obj/structure/windoor_assembly/Del()
 					if(do_after(user, 40))
 						if(!src || !WT.isOn()) return
 						user << "\blue You dissasembled the windoor assembly!"
-						new /obj/item/stack/sheet/rglass(get_turf(src), 5)
+						new /obj/item/stack/sheet/glass/reinforced(get_turf(src), 5)
 						if(secure)
 							new /obj/item/stack/rods(get_turf(src), 4)
 						del(src)
@@ -270,7 +277,6 @@ obj/structure/windoor_assembly/Del()
 	if(src.state != "01")
 		update_nearby_tiles(need_rebuild=1)
 
-	src.ini_dir = src.dir
 	update_icon()
 	return
 

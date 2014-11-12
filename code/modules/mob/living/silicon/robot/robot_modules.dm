@@ -167,7 +167,7 @@
 	stacktypes = list(
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/plasteel = 10,
-		/obj/item/stack/sheet/rglass = 50,
+		/obj/item/stack/sheet/glass/reinforced = 50,
 		/obj/item/stack/rods = 50
 		)
 
@@ -188,7 +188,7 @@
 	stacktypes = list(
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/glass = 50,
-		/obj/item/stack/sheet/rglass = 50,
+		/obj/item/stack/sheet/glass/reinforced = 50,
 		/obj/item/stack/cable_coil = 50,
 		/obj/item/stack/rods = 15,
 		/obj/item/stack/tile/plasteel = 15
@@ -217,7 +217,7 @@
 		M.amount = 50
 		src.modules += M
 
-		var/obj/item/stack/sheet/rglass/cyborg/R = new /obj/item/stack/sheet/rglass/cyborg(src)
+		var/obj/item/stack/sheet/glass/reinforced/cyborg/R = new (src)
 		R.amount = 50
 		src.modules += R
 
@@ -400,7 +400,7 @@
 	stacktypes = list(
 		/obj/item/stack/sheet/wood = 1,
 		/obj/item/stack/sheet/mineral/plastic = 1,
-		/obj/item/stack/sheet/rglass = 5,
+		/obj/item/stack/sheet/glass/reinforced = 5,
 		/obj/item/stack/tile/wood = 5,
 		/obj/item/stack/rods = 15,
 		/obj/item/stack/tile/plasteel = 15,
