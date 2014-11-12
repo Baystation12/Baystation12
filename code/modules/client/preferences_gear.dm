@@ -230,7 +230,7 @@ var/global/list/gear_datums = list()
 /datum/gear/sterilemask
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
-	slot = slot_w_uniform
+	slot = slot_wear_mask
 	cost = 2
 
 // Uniform slot
