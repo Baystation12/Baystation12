@@ -1,5 +1,6 @@
 /obj/item/robot_parts
 	name = "robot parts"
+	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon = 'icons/obj/robot_parts.dmi'
 	item_state = "buildpipe"
 	icon_state = "blank"
@@ -8,11 +9,12 @@
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
 	var/list/part = null
+	var/brute_dam = 0
+	var/burn_dam = 0
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 	construction_time = 200
 	construction_cost = list("metal"=18000)
@@ -20,7 +22,6 @@
 
 /obj/item/robot_parts/r_arm
 	name = "robot right arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
 	construction_time = 200
 	construction_cost = list("metal"=18000)
@@ -28,7 +29,6 @@
 
 /obj/item/robot_parts/l_leg
 	name = "robot left leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
 	construction_time = 200
 	construction_cost = list("metal"=15000)
@@ -36,7 +36,6 @@
 
 /obj/item/robot_parts/r_leg
 	name = "robot right leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
 	construction_time = 200
 	construction_cost = list("metal"=15000)
