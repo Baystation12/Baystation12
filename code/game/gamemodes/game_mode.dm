@@ -71,8 +71,8 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI")
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_enslave, 4, "Enslavement Implant", "SI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_enslave, 4, "Enslavement Implant", "SI")
 			),
 		"(Pointless) Badassery" = list(
 			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS")
@@ -291,6 +291,7 @@
 		if(BE_CULTIST)		roletext="cultist"
 		if(BE_NINJA)		roletext="ninja"
 		if(BE_RAIDER)		roletext="raider"
+		if(BE_MEME) 		roletext="meme"
 
 	// Assemble a list of active players without jobbans.
 	for(var/mob/new_player/player in player_list)
