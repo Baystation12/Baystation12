@@ -21,6 +21,7 @@
 	var/station_was_nuked = 0 //see nuclearbomb.dm and malfunction.dm
 	var/explosion_in_progress = 0 //sit back and relax
 	var/list/datum/mind/modePlayer = new
+	var/list/restricted_species = list()
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
 	var/list/protected_jobs = list()	// Jobs that can't be traitors because
 	var/required_players = 0
@@ -71,6 +72,7 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_enslave, 4, "Enslavement Implant", "SI"),
 			),
 		"(Pointless) Badassery" = list(
 			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS")
@@ -166,7 +168,10 @@
 
 				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape/centcom)
 					escaped_on_shuttle++
-
+				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod_medical/centcom)
+					escaped_on_shuttle++
+				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod_arrivals/centcom)
+					escaped_on_shuttle++
 				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod1/centcom)
 					escaped_on_pod_1++
 				if(M.loc && M.loc.loc && M.loc.loc.type == /area/shuttle/escape_pod2/centcom)
