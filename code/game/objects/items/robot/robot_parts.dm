@@ -47,6 +47,7 @@
 	icon_state = "chest"
 	construction_time = 350
 	construction_cost = list("metal"=40000)
+	part = list("chest", "groin")
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
 

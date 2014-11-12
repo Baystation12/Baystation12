@@ -200,25 +200,25 @@ emp_act
 		if (istype(I, /obj/item/robot_parts) && species.flags & IS_SYNTHETIC) // Robutts can just kinda click robot parts back into place.
 			var/obj/item/robot_parts/L = I
 			var/datum/organ/external/affected = get_organ(target_zone)
-			user.visible_message("\blue [user] has attached \the [I] where [src]'s [affected.display_name] used to be.",	\
-			"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
-			affected.germ_level = 0
-			affected.robotize()
-			if(L.sabotaged)
-				affected.sabotaged = 1
+			if (affected.name in L.part)
+				user.visible_message("\blue [user] has attached \the [I] where [src]'s [affected.display_name] used to be.",	\
+				"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
+				affected.germ_level = 0
+				affected.robotize()
+				if(L.sabotaged)
+					affected.sabotaged = 1
+				else
+					affected.sabotaged = 0
+				affected.brute_dam = L.brute_dam
+				affected.burn_dam = L.burn_dam
+				update_body()
+				updatehealth()
+				UpdateDamageIcon()
+				del(I)
+				UpdateAppearance()
+				return 0
 			else
-				affected.sabotaged = 0
-			affected.brute_dam = L.brute_dam
-			affected.burn_dam = L.burn_dam
-			update_body()
-			updatehealth()
-			UpdateDamageIcon()
-			del(I)
-			if(hand)
-				update_inv_l_hand(0)
-			else
-				update_inv_r_hand(0)
-			return 0
+				src << "That won't fit there!"
 		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
 			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
@@ -235,6 +235,7 @@ emp_act
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
 			del(B)
+			UpdateAppearance()
 			return
 		else
 			user << "What [affecting.display_name]?"

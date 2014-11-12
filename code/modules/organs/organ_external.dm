@@ -588,7 +588,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 				W = new/datum/wound/lost_limb(max_damage)
 			parent.wounds += W
 			parent.update_damages()
-		update_damages()
 
 		// If any organs are attached to this, destroy them
 		for(var/datum/organ/external/O in children)
@@ -646,7 +645,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			var/obj/item/robot_parts/robolimb = organ
 			robolimb.brute_dam = brute_dam
 			robolimb.burn_dam = burn_dam
-
+		update_damages()
 		destspawn = 1
 		//Robotic limbs explode if sabotaged.
 		if(damage && status & ORGAN_ROBOT && !no_explode && sabotaged)
