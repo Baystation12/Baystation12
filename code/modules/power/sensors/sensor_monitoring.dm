@@ -1,8 +1,12 @@
-// the power monitoring computer
-// for the moment, just report the status of all APCs in the same powernet
+/*
+********** SENSOR MONITOR **********
+- Remotely monitors sensors around the station and displays their readings.
+- Should filter out most duplicities.
+*/
+
 /obj/machinery/power/monitor
-	name = "power monitoring computer"
-	desc = "It monitors power levels across the station."
+	name = "Power Monitor"
+	desc = "Computer designed to remotely monitor power levels around the station"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "power"
 
@@ -10,18 +14,21 @@
 	density = 1
 	anchored = 1.0
 	var/circuit = /obj/item/weapon/circuitboard/powermonitor
+	var/list/grid_sensors = null
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
 
 /obj/machinery/power/monitor/New()
 	..()
-	var/obj/structure/cable/attached = null
-	var/turf/T = loc
-	if(isturf(T))
-		attached = locate() in T
-	if(attached)
-		powernet = attached.get_powernet()
+	refresh_sensors()
+
+
+/obj/machinery/power/monitor/proc/refresh_sensors()
+	grid_sensors = list()
+	for(var/obj/machinery/power/sensor/S in machines)
+		if((S.loc.z == src.loc.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
+			grid_sensors += S
 
 /obj/machinery/power/monitor/attack_ai(mob/user)
 	add_fingerprint(user)
@@ -45,44 +52,37 @@
 			user << browse(null, "window=powcomp")
 			return
 
+	if((!grid_sensors) || (!grid_sensors.len)) 						// No sensors in list. Refresh just in case.
+		refresh_sensors()
+
+
 
 	user.set_machine(src)
-	var/t = "<TT><B>Power Monitoring</B><HR>"
+	var/t = "<TT><B>Station Power Monitoring</B><HR>"
 
 	t += "<BR><HR><A href='?src=\ref[src];update=1'>Refresh</A>"
-	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A>"
+	t += "<BR><HR><A href='?src=\ref[src];reset=1'>Reset Sensor List</A>"
+	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A><br>"
 
-	if(!powernet)
-		t += "\red No connection"
+	if((!grid_sensors) || (!grid_sensors.len))
+		t += "<b> ERROR - No Sensors Connected. </b>"
 	else
+		var/list/reported_nets = list()
+		var/duplicities = 0 // Duplicity prevention (substations in Bypass mode)
 
-		var/list/L = list()
-		for(var/obj/machinery/power/terminal/term in powernet.nodes)
-			if(istype(term.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/A = term.master
-				L += A
 
-		t += "<PRE>Total power: [powernet.avail] W<BR>Total load:  [num2text(powernet.viewload,10)] W<BR>"
+		for(var/obj/machinery/power/sensor/S in grid_sensors)			// Show all data from current Z level.
+			if(S.powernet && (S.powernet in reported_nets)) // We already reported this powernet. Ignore it.
+				duplicities++
+				continue
 
-		t += "<FONT SIZE=-1>"
-
-		if(L.len > 0)
-			var/total_demand = 0
-			t += "Area                           Eqp./Lgt./Env.  Load   Cell<HR>"
-
-			var/list/S = list(" Off","AOff","  On", " AOn")
-			var/list/chg = list("N","C","F")
-
-			for(var/obj/machinery/power/apc/A in L)
-
-				t += copytext(add_tspace("\The [A.area]", 30), 1, 30)
-				t += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(A.lastused_total, 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
-				total_demand += A.lastused_total
-
-			t += "<HR>Total demand: [total_demand] W</FONT>"
-		t += "</PRE></TT>"
-
-	user << browse(t, "window=powcomp;size=420x900")
+			t += "<br><br><hr>  <b>[S.name_tag]  - Sensor Reading</b>  <br>"
+			t += S.ReturnReading() 										// Sensors already make quite decent HTML table by themselves.
+			if(S.powernet)
+				reported_nets += S.powernet
+		if(duplicities)
+			t += "<br><b>Ignored [duplicities] duplicite readings"
+	user << browse(t, "window=powcomp;size=600x900")
 	onclose(user, "powcomp")
 
 
@@ -94,6 +94,9 @@
 		return
 	if( href_list["update"] )
 		src.updateDialog()
+		return
+	if( href_list["reset"] )
+		refresh_sensors()
 		return
 
 
