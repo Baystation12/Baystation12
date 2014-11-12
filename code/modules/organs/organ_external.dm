@@ -561,7 +561,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		O.setAmputatedTree()
 
 //Handles dismemberment
-/datum/organ/external/proc/droplimb(var/override = 0,var/no_explode = 0)
+/datum/organ/external/proc/droplimb(var/override = 0,var/no_explode = 0,var/showmessage = 1,var/damage = 1)
 	if(destspawn) return
 	if(override)
 		status |= ORGAN_DESTROYED
@@ -580,7 +580,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		//Replace all wounds on that arm with one wound on parent organ.
 		wounds.Cut()
-		if (parent)
+		if (parent&&damage)
 			var/datum/wound/W
 			if(max_damage < 50)
 				W = new/datum/wound/lost_limb/small(max_damage)
@@ -588,11 +588,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 				W = new/datum/wound/lost_limb(max_damage)
 			parent.wounds += W
 			parent.update_damages()
-		update_damages()
 
 		// If any organs are attached to this, destroy them
 		for(var/datum/organ/external/O in children)
-			O.droplimb(1)
+			O.droplimb(1, no_explode, showmessage, damage)
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
@@ -642,10 +641,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(!(status & ORGAN_ROBOT))
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
-
+		if (organ && istype(organ, /obj/item/robot_parts))
+			var/obj/item/robot_parts/robolimb = organ
+			robolimb.brute_dam = brute_dam
+			robolimb.burn_dam = burn_dam
+		update_damages()
 		destspawn = 1
 		//Robotic limbs explode if sabotaged.
-		if(status & ORGAN_ROBOT && !no_explode && sabotaged)
+		if(damage && status & ORGAN_ROBOT && !no_explode && sabotaged)
 			owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
 			"\red <b>Your [display_name] explodes!</b>",\
 			"You hear an explosion followed by a scream!")
@@ -657,9 +660,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 			spawn(10)
 				del(spark_system)
 
-		owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
-		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
-		"You hear a terrible sound of ripping tendons and flesh.")
+		if (showmessage)
+			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+			"You hear a terrible sound of ripping tendons and flesh.")
 
 		if(organ)
 			//Throw organs around
@@ -673,6 +677,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		if(vital)
 			owner.death()
+
+		if (organ)
+			return organ // If I want to, you know, use that.
+		else
+			return 0 // YOU FAIL.
 
 /****************************************************
 			   HELPERS

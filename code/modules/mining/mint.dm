@@ -15,6 +15,7 @@
 	var/amt_iron = 0
 	var/amt_phoron = 0
 	var/amt_uranium = 0
+	var/amt_clown = 0
 	var/newCoins = 0   //how many coins the machine made in it's last load
 	var/processing = 0
 	var/chosen = "metal" //which material will be used to make coins
@@ -57,6 +58,9 @@
 				del(O)
 			if (istype(O,/obj/item/stack/sheet/metal))
 				amt_iron += 100 * O.get_amount()
+				del(O)
+			if (istype(O,/obj/item/stack/sheet/mineral/clown))
+				amt_clown += 100 * O.amount
 				del(O)
 
 /obj/machinery/mineral/mint/attack_hand(user as mob)

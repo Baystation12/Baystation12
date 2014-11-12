@@ -280,6 +280,7 @@
 		if(!job)	return 0
 		if((job.current_positions >= job.total_positions) && job.total_positions != -1)	return 0
 		if(jobban_isbanned(src,rank))	return 0
+		if(!icwl_canHaveJob(src, rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
 

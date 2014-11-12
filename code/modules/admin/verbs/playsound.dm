@@ -3,8 +3,12 @@
 	set name = "Play Global Sound"
 	if(!check_rights(R_SOUNDS))	return
 
+	if(alert("Announce sound?",,"Yes","No")=="Yes")
+		world << "<FONT color='blue'>Now Currently Playing.. [S]</FONT>"
+
 	var/sound/uploaded_sound = sound(S, repeat = 0, wait = 1, channel = 777)
 	uploaded_sound.priority = 250
+
 
 	log_admin("[key_name(src)] played sound [S]")
 	log_admin_single("[key_name(src)] played sound [S]")
@@ -12,7 +16,6 @@
 	for(var/mob/M in player_list)
 		if(M.client.prefs.toggles & SOUND_MIDI)
 			M << uploaded_sound
-
 	feedback_add_details("admin_verb","PGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 

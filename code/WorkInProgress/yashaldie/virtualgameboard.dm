@@ -1,5 +1,6 @@
 /obj/machinery/virtualgameboard
-	name = "virtualgameboard"
+	name = "Virtual Game Board"
+	desc = "Used to play virtualized games."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "virtual"
 	density = 1
@@ -21,7 +22,12 @@
 		return
 	usr.set_machine(src)
 	ui_interact(usr)
-	usr.visible_message("[usr] begins to play a game")
+
+	if(!iscarbon(usr))
+		usr.visible_message("The virtualboard lights up")
+	else
+		usr.visible_message("[usr] begins to play a game")
+
 
 /obj/machinery/virtualgameboard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -51,7 +57,14 @@
 	src.add_fingerprint(user)
 	user.set_machine(src)
 	src.ui_interact(user)
-	user.visible_message("[user] begins to play a game")
+
+	if(!iscarbon(usr))
+		user.visible_message("The virtualboard lights up")
+	else
+		user.visible_message("[user] begins to play a game")
 
 /obj/machinery/virtualgameboard/attack_paw(mob/user as mob)
+	return src.attack_hand(user)
+
+/obj/machinery/virtualgameboard/attack_ghost(mob/dead/observer/user as mob)
 	return src.attack_hand(user)

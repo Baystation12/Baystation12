@@ -15,7 +15,7 @@ var/global/floorIsLava = 0
 	log_attack(text)
 	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if(R_ADMIN|R_MOD & C.holder.rights)
 			if(C.prefs.toggles & CHAT_ATTACKLOGS)
 				var/msg = rendered
 				C << msg
@@ -56,6 +56,7 @@ var/global/floorIsLava = 0
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
 
+	var/icwl = icwl_isWhitelisted(M.ckey)
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -68,7 +69,8 @@ var/global/floorIsLava = 0
 		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
-		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
+		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
+		<A href='?src=\ref[src];icwl=\ref[M]'><font color='[icwl?"blue":"red"]'>ICWL</font></A>
 	"}
 
 	if(M.client)
