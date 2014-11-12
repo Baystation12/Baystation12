@@ -239,7 +239,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | IS_STRONG
 
 	flesh_color = "#34AF10"
 
@@ -443,7 +443,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | IS_STRONG
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -502,7 +502,7 @@
 
 	synth_temp_gain = 5 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR | IS_STRONG
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -521,7 +521,7 @@
 	language = "Chittin"
 	unarmed_type = /datum/unarmed_attack/claws
 
-	flags = IS_WHITELISTED | HAS_UNDERWEAR
+	flags = IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
 
 	blood_color = "#328332"
 	flesh_color = "#8C4600"
