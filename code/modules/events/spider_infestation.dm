@@ -1,9 +1,7 @@
 /var/global/sent_spiders_to_station = 0
 
 /datum/event/spider_infestation
-	name = "Large Spider Infestation"
 	announceWhen	= 400
-	oneShot			= 1
 
 	var/spawncount = 1
 

@@ -1,5 +1,4 @@
 /datum/event/electrical_storm
-	name = "Electrical Storm"
 	var/lightsoutAmount	= 1
 	var/lightsoutRange	= 25
 

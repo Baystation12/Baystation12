@@ -1,6 +1,4 @@
 /datum/event/rogue_drone
-	name = "Rogue Drones"
-	startWhen = 10
 	endWhen = 1000
 	var/list/drones_list = list()
 

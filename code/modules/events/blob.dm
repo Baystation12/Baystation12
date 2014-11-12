@@ -1,5 +1,4 @@
 /datum/event/blob
-	name 			= "Blob"
 	announceWhen	= 12
 	endWhen			= 120
 
