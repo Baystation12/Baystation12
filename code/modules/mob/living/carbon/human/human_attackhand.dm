@@ -91,7 +91,7 @@
 			return 1
 
 		if("grab")
-			if (M == src && !get_active_hand() && species.flags & IS_SYNTHETIC) // Arm ripping fun!
+			if (M == src && !get_active_hand() && (species.flags & IS_SYNTHETIC)) // Arm ripping fun!
 				var/datum/organ/external/affected = get_organ(M.zone_sel.selecting)
 				if (!affected.destspawn)
 					if (affected.body_part == UPPER_TORSO)
@@ -103,13 +103,15 @@
 								visible_message("\red [src] rips his own [affected.display_name] off.", "\red You rip your own [affected.display_name] off. Why the hell did you think that was a good idea?")
 								affected.droplimb(1, 0, 1, 0)
 							else
-								M << "\blue You stop ripping off your [affected.display_name]. Thank god."
+								visible_message("\blue [src] decides ripping his [affected.display_name] off may not be the best idea.", "\blue You stop ripping off your [affected.display_name]. Thank god.")
 					else
 						visible_message("\blue [src] detaches his own [affected.display_name].", "\blue You detach your [affected.display_name].")
 						var/organ = affected.droplimb(1, 0, 0, 0) // If this isn't a robo limb, what the fuck.
 						if (istype(organ, /obj/item/robot_parts))
 							var/obj/item/robot_parts/robolimb = organ
-							put_in_active_hand(robolimb) // Took me too long to find that proc. Also, Defining robolimb instead of just using organ is DEFINANTLY required. For raisons
+							var/datum/organ/external/handy = hand ? organs_by_name["l_hand"] : organs["r_hand"]
+							if (handy && !handy.destspawn) // Incase they are ripping off that arm.
+								put_in_active_hand(robolimb) // Took me too long to find that proc. Also, Defining robolimb instead of just using organ is DEFINANTLY required. For raisons
 				else if (affected.body_part != UPPER_TORSO)
 					M << "\red You try to detach your [affected.display_name] but really, there's nothing there."
 				return

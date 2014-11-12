@@ -179,7 +179,8 @@
 	if(flags & IS_SYNTHETIC)
 		H.h_style = ""
 		spawn(100)
-			H.update_hair()
+			if (H) // That was crashing, for raisons.
+				H.update_hair()
 	return
 
 // Only used for alien plasma weeds atm, but could be used for Dionaea later.

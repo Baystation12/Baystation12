@@ -214,6 +214,10 @@ emp_act
 			updatehealth()
 			UpdateDamageIcon()
 			del(I)
+			if(hand)
+				update_inv_l_hand(0)
+			else
+				update_inv_r_hand(0)
 			return 0
 		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
