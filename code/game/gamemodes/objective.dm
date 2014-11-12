@@ -378,6 +378,10 @@ datum/objective/escape
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod_medical/centcom))
 			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_medical/transit))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_arrivals/transit))
+			return 1
 		if(istype(check_area, /area/shuttle/escape_pod_arrivals/centcom))
 			return 1
 		else
