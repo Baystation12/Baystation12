@@ -19,18 +19,21 @@
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Security Guard")
 			M.access += access_medical
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Warden")
 			M.access += access_medical
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+			M.access += access_cargo
 
 		if (M.assignment == "Head of Security")
 			M.access += access_research
@@ -41,6 +44,14 @@
 			M.access += access_research
 			M.access += access_engine_equip
 			M.access += access_mining
+
+/proc/opencodeblueaccess()
+	for(var/obj/machinery/door/poddoor/shutters/bluealert/D in world)
+		D.open()
+
+/proc/opencoderedaccess()
+	for(var/obj/machinery/door/poddoor/reddoors/D in world)
+		D.open()
 
 /proc/removesecaccess()
 
@@ -50,18 +61,21 @@
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Security Guard")
 			M.access -= access_medical
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Warden")
 			M.access -= access_medical
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+			M.access -= access_cargo
 
 		if (M.assignment == "Head of Security")
 			M.access -= access_research
@@ -72,6 +86,14 @@
 			M.access -= access_research
 			M.access -= access_engine_equip
 			M.access -= access_mining
+
+/proc/closecodeblueaccess()
+	for(var/obj/machinery/door/poddoor/shutters/bluealert/D in world)
+		D.close()
+
+/proc/closecoderedaccess()
+	for(var/obj/machinery/door/poddoor/reddoors/D in world)
+		D.close()
 
 /proc/set_security_level(var/level)
 	switch(level)
@@ -97,6 +119,9 @@
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
 				removesecaccess()
+				closecoderedaccess()
+				closecodeblueaccess()
+
 
 			if(SEC_LEVEL_BLUE)
 				if(security_level < SEC_LEVEL_BLUE)
@@ -109,6 +134,8 @@
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
 				removesecaccess()
+				closecoderedaccess()
+				opencodeblueaccess()
 
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
@@ -125,6 +152,8 @@
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
 				givesecaccess()
+				opencoderedaccess()
+				opencodeblueaccess()
 
 			if(SEC_LEVEL_BLACK)
 				security_announcement_up.Announce("A biological threat to the station has been confirmed. The station is now under quarantine. No personnel are allowed to leave the stations at this time. Security personnel are to ensure quarantine protocols are upheld. Medical and research personnel are to remain on stand-by. All personnel must report to their supervisors immediately.", "Attention! Code black!")
@@ -133,6 +162,8 @@
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_black")
+				opencoderedaccess()
+
 			if(SEC_LEVEL_DELTA)
 				security_announcement_delta.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!")
 				security_level = SEC_LEVEL_DELTA
@@ -140,6 +171,7 @@
 					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
+				opencoderedaccess()
 
 		for(var/obj/machinery/light/emergency/EL in world)
 			EL.update()

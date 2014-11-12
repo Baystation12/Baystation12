@@ -47,12 +47,27 @@
 			if(C.id == src.id)
 				targets += C
 
+		for(var/obj/machinery/door/poddoor/D in world)
+			if (D.id == src.id)
+				targets += D
+
 		if(targets.len==0)
 			stat |= BROKEN
 		update_icon()
 		return
 	return
 
+/obj/machinery/door_timer/proc/openblastdoor()
+	for(var/obj/machinery/door/poddoor/D in targets)
+		if (D.brigdoors == 0)
+			D.open()
+			D.brigdoors = 1
+
+/obj/machinery/door_timer/proc/closeblastdoor()
+	for(var/obj/machinery/door/poddoor/D in targets)
+		if (D.brigdoors == 1)
+			D.close()
+			D.brigdoors = 0
 
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer
@@ -142,6 +157,11 @@
 // Set timetoset
 /obj/machinery/door_timer/proc/timeset(var/seconds)
 	timetoset = seconds * 10
+
+	if (timetoset < 6000)
+		closeblastdoor()
+	else
+		openblastdoor()
 
 	if(timetoset <= 0)
 		timetoset = 0

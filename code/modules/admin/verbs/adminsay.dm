@@ -60,7 +60,7 @@
 	var/color = "DEV"
 	if (check_rights(R_ADMIN|R_MENTOR,0))
 		color = "DEVADMINMOD"
-	for(var/client/C in clients)
+	for(var/client/C in admins)
 		if(C.holder && ((R_ADMIN|R_MOD|R_DEV) & C.holder.rights))
 			if(C.prefs.toggles & CHAT_DEVSAY)
 				C << "<span class='[color]'><span class='prefix'>DEV:</span> [key] (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"

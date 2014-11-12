@@ -162,8 +162,8 @@
 	nanomanager.send_resources(src)
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
-
+		winset(src, "rpane.changelog", "background-color=#5DFC0A;font-style=bold")
+		src << "\green<b> New Changelog avaliable!<br></b>"
 
 	//////////////
 	//DISCONNECT//

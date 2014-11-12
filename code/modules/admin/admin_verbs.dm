@@ -862,8 +862,6 @@ var/list/admin_verbs_dev = list(
 	else
 		usr << "You now won't get emergency shutter log messages"
 
-
-
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
 	set category = "Server"

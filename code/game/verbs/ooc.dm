@@ -159,8 +159,9 @@ var/global/normal_ooc_colour = "#505050"
 		display_name = "[S.name]/([S.key])"
 
 	for(var/client/C in admins)
-		if(C.prefs.toggles & CHAT_LOOC)
-			var/prefix = "(R)LOOC"
-			if (C.mob in heard)
-				prefix = "LOOC"
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+		if((R_ADMIN|R_MOD|R_MENTOR) & C.holder.rights)
+			if(C.prefs.toggles & CHAT_LOOC)
+				var/prefix = "(R)LOOC"
+				if (C.mob in heard)
+					prefix = "LOOC"
+				C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
