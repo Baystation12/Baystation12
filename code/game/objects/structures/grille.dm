@@ -30,19 +30,13 @@
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 
-	var/damage_dealt
+	var/damage_dealt = 1
+	var/attack_message = "kicks"
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
+			attack_message = "mangles"
 			damage_dealt = 5
-			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
-					 "<span class='warning'>You mangle [src].</span>", \
-					 "You hear twisting metal.")
-
-	if(!damage_dealt)
-		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
 
 	if(shock(user, 70))
 		return
@@ -52,8 +46,7 @@
 	else
 		damage_dealt += 1
 
-	health -= damage_dealt
-	healthcheck()
+	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -195,3 +188,8 @@
 			health -= 1
 			healthcheck()
 	..()
+
+/obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
+	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	health -= damage
+	healthcheck()

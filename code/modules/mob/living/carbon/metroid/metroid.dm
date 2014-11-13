@@ -840,10 +840,6 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 /mob/living/carbon/slime/has_eyes()
 	return 0
 
-
-/mob/living/carbon/slime/UnarmedAttack(var/atom/A)
-	return
-
 //////////////////////////////Old shit from metroids/RoRos, and the old cores, would not take much work to re-add them////////////////////////
 
 /*

@@ -1703,6 +1703,27 @@
 		icon_state = initial(icon_state)
 	return icon_state
 
+/obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
+
+	if(!damage)
+		return
+
+	src.log_message("Attack by an animal. Attacker - [user].",1)
+
+	if(!prob(src.deflect_chance))
+		src.take_damage(damage)
+		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+		visible_message("\red <B>[user]</B> [attack_message] [src]!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	else
+		src.log_append_to_last("Armor saved.")
+		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+		src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
+		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	return
+
+
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////
 //////////////////////////////////////////

@@ -150,7 +150,9 @@
 							"You hear a knocking sound.")
 	return
 
-/obj/structure/window/proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_animal and attack_slime
+/obj/structure/window/attack_generic(var/mob/user, var/damage)
+	if(!damage)
+		return
 	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 	take_damage(damage)
 

@@ -248,6 +248,23 @@
 	src.add_fingerprint(user)
 	return
 
+/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/wallbreaker)
+
+	if(!damage || !wallbreaker)
+		user << "You push the wall but nothing happens."
+		return
+
+	if(istype(src,/turf/simulated/wall/r_wall) && !rotting)
+		user << "This wall is far too strong for you to destroy."
+
+	if(rotting || prob(40))
+		user << "You smash through the wall!"
+		dismantle_wall(1)
+	else
+		user << "You smash against the wall."
+		take_damage(rand(25,75))
+	return
+
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")

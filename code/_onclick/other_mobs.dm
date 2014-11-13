@@ -1,3 +1,6 @@
+// Generic damage proc (slimes and monkeys).
+/atom/proc/attack_generic(mob/user as mob)
+	return
 /*
 	Humans:
 	Adds an exception for gloves, to allow special glove types like the ninja ones.
@@ -5,12 +8,15 @@
 	Otherwise pretty standard.
 */
 /mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+
+	if(!..())
+		return
 
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	if(proximity && istype(G) && G.Touch(A,1))
+	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+	if(istype(G) && G.Touch(A,1))
 		return
 
 	A.attack_hand(src)
@@ -42,12 +48,6 @@
 				return
 		A.attack_tk(src)
 
-/*
-	Animals & All Unspecified
-*/
-/mob/living/UnarmedAttack(var/atom/A)
-	return
-
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
 
@@ -58,7 +58,13 @@
 
 //TODO: Disease spreading and unarmed damage against mobs.
 /mob/living/carbon/monkey/UnarmedAttack(var/atom/A, var/proximity)
-	if(!proximity)
+
+	if(!..())
+		return
+
+	if(a_intent == "harm")
+		A.attack_generic(src,rand(1,3),"bites")
+	else
 		A.attack_hand(src)
 
 /*
@@ -104,6 +110,52 @@
 /mob/living/carbon/slime/RestrainedClickOn(var/atom/A)
 	return
 
+/mob/living/carbon/slime/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return
+
+	// Eating
+	if(Victim)
+		return
+
+	// Basic attack.
+	A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomps")
+
+	// Handle mob shocks.
+	var/mob/living/M = A
+	if(istype(M) && powerlevel > 0 && !istype(A,/mob/living/carbon/slime))
+
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC || H.species.insulated)
+				return
+
+		var/power = max(0,min(10,(powerlevel+rand(0,3))))
+
+		var/stunprob = 10
+		switch(power*10)
+			if(1 to 2) stunprob = 20
+			if(3 to 4) stunprob = 30
+			if(5 to 6) stunprob = 40
+			if(7 to 8) stunprob = 60
+			if(9) 	   stunprob = 70
+			if(10) 	   stunprob = 95
+
+		if(prob(stunprob))
+			powerlevel = max(0,powerlevel-3)
+			src.visible_message("\red <B>The [name] has shocked [M]!</B>")
+			M.Weaken(power)
+			M.Stun(power)
+			if (M.stuttering < power) M.stuttering = power
+
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(5, 1, M)
+			s.start()
+
+			if(prob(stunprob) && powerlevel >= 8)
+				M.adjustFireLoss(powerlevel * rand(6,10))
+			M.updatehealth()
 /*
 	New Players:
 	Have no reason to click on anything at all.

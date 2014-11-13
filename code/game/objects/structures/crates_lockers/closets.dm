@@ -298,3 +298,10 @@
 		if(istype(A,/obj/))
 			var/obj/O = A
 			O.hear_talk(M, text)
+
+/obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
+	if(!damage || !wallbreaker)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	dump_contents()
+	del(src)

@@ -892,6 +892,10 @@ var/list/robot_verbs_default = list(
 			user << "You remove \the [broken_device]."
 			user.put_in_active_hand(broken_device)
 
+//Robots take half damage from basic attacks.
+/mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
+	return ..(user,Floor(damage/2),attack_message)
+
 /mob/living/silicon/robot/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
 	if(check_access(null))

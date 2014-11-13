@@ -307,6 +307,16 @@
 	if(on != on_gs)
 		on_gs = on
 
+/obj/machinery/light/attack_generic(var/mob/user, var/damage)
+	if(!damage)
+		return
+	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
+		user << "That object is useless to you."
+		return
+	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
+		return
+	visible_message("<span class='danger'>[user] smashes the light!</span>")
+	broken()
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty

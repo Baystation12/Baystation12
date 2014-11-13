@@ -154,7 +154,6 @@
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)
 
-
 /*
 	Translates into attack_hand, etc.
 
@@ -167,6 +166,22 @@
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
+
+/mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
+
+	if(!ticker)
+		src << "You cannot attack people before the game has started."
+		return 0
+
+	if (istype(get_area(src), /area/start))
+		src << "No attacking people at spawn, you jackass."
+		return 0
+
+	if(stat)
+		return
+
+	if(!proximity_flag)
+		return 0
 
 /*
 	Ranged unarmed attack:

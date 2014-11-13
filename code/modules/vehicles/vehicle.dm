@@ -347,3 +347,13 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
+
+/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	if(prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	healthcheck()
