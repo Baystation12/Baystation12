@@ -351,13 +351,13 @@ TO-DO:
 			if(H)
 				if(H.client)
 					if(H.mind)
-						if(H.mind.assigned_role == "Head of Personnel")
-							src.Leader = H
+						if(H.mind.assigned_role == "Captain")
 							if(locate(H) in src.Friends)
 								continue
 							else
 								src.Friends.Add(H)
-						if(H.mind.assigned_role == "Head of Personnel" || H.mind.assigned_role == "Captain")
+						if(H.mind.assigned_role == "Head of Personnel")
+							src.Leader = H
 							if(locate(H) in src.Friends)
 								continue
 							else
