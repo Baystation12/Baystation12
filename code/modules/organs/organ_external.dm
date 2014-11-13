@@ -60,6 +60,10 @@
 /datum/organ/external/proc/emp_act(severity)
 	if(!(status & ORGAN_ROBOT))	//meatbags do not care about EMP
 		return
+	if(istype(owner.wear_suit, /obj/item/clothing/suit/space/rig/machine) && body_part!=HEAD)
+		return
+	else if (istype(owner.head, /obj/item/clothing/head/helmet/space/rig/machine) && body_part==HEAD)
+		return
 	var/probability = 30
 	var/damage = 15
 	if(severity == 2)
@@ -626,21 +630,32 @@ Note that amputating the affected organ does in fact remove the infection from t
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
-				if(!(status & ORGAN_ROBOT))
+				if(status & ORGAN_ROBOT)
+					organ = new /obj/item/robot_parts/r_hand(owner.loc)
+				else
 					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
-				if(!(status & ORGAN_ROBOT))
+				if(status & ORGAN_ROBOT)
+					organ = new /obj/item/robot_parts/l_hand(owner.loc)
+				else
 					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
-				if(!(status & ORGAN_ROBOT))
+				if(status & ORGAN_ROBOT)
+					organ = new /obj/item/robot_parts/r_foot(owner.loc)
+				else
 					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
-				if(!(status & ORGAN_ROBOT))
+				if(status & ORGAN_ROBOT)
+					organ = new /obj/item/robot_parts/l_foot(owner.loc)
+				else
 					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
+			if(LOWER_TORSO)
+				if(status & ORGAN_ROBOT)
+					organ = new /obj/item/robot_parts/groin(owner.loc)
 		if (organ && istype(organ, /obj/item/robot_parts))
 			var/obj/item/robot_parts/robolimb = organ
 			robolimb.brute_dam = brute_dam
@@ -787,7 +802,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	src.destspawn = 0
 	for (var/datum/organ/external/T in children)
 		if(T)
-			T.robotize()
+			if (!T.destspawn)
+				T.robotize()
 
 /datum/organ/external/proc/mutate()
 	src.status |= ORGAN_MUTATED

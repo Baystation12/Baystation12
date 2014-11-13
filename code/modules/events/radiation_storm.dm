@@ -10,18 +10,16 @@
 
 /datum/event/radiation_storm/start()
 	spawn()
+		world << sound('sound/misc/bloblarm.ogg')
+		sleep(80)
 		command_announcement.Announce("High levels of radiation detected near the station. Please evacuate into one of the shielded maintenance tunnels.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 		make_maint_all_access()
 		rad_storm = 1
-		world << sound('sound/misc/bloblarm.ogg')
 
 		for(var/obj/machinery/light/emergency/EL in world)
 			EL.update()
 
-
 		sleep(600)
-
-
 		command_announcement.Announce("The station has entered the radiation belt. Please remain in a sheltered area until we have passed the radiation belt.", "Anomaly Alert")
 
 		world << sound('sound/misc/notice2.ogg')
