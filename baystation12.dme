@@ -1384,6 +1384,7 @@
 #include "code\TriDimension\Structures.dm"
 #include "code\TriDimension\Structures_presets.dm"
 #include "code\TriDimension\Turfs.dm"
+#include "code\unused\musicplayer.dm"
 #include "code\WorkInProgress\autopsy.dm"
 #include "code\WorkInProgress\buildmode.dm"
 #include "code\WorkInProgress\explosion_particles.dm"
@@ -1485,4 +1486,6 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\tgstation2.dmm"
+#include "maps\RandomZLevels\Academy.dm"
+#include "maps\RandomZLevels\challenge.dm"
 // END_INCLUDE

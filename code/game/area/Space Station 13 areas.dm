@@ -138,12 +138,14 @@ var/list/ghostteleportlocs = list()
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
+	music = "sound/music/PapersPlease.ogg"
 
 /area/shuttle/arrival/pre_game
 	icon_state = "shuttle2"
 
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
+	music = "sound/music/PapersPlease.ogg"
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
@@ -816,6 +818,7 @@ var/list/ghostteleportlocs = list()
 /area/hallway/secondary/entry
 	name = "\improper Arrival Shuttle Hallway"
 	icon_state = "entry"
+	music = "sound/music/PapersPlease.ogg"
 
 //Command
 
@@ -902,6 +905,7 @@ var/list/ghostteleportlocs = list()
 /area/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"
 	icon_state = "Sleep"
+	music = "disabled/sound/music/PapersDeath.ogg"
 
 /area/crew_quarters/sleep_male
 	name = "\improper Male Dorm"
@@ -1189,7 +1193,7 @@ var/list/ghostteleportlocs = list()
 /area/gateway
 	name = "\improper Gateway"
 	icon_state = "teleporter"
-	music = "signal"
+	music = "disabled/sound/music/PapersDeath.ogg"
 
 /area/AIsattele
 	name = "\improper AI Satellite Teleporter Room"
