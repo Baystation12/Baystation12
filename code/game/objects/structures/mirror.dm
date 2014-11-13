@@ -93,10 +93,11 @@
 
 	if(shattered)
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
+		return 0
 
 	if(damage)
 		user.visible_message("<span class='danger'>[user] smashes [src]!")
 		shatter()
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
+	return 1

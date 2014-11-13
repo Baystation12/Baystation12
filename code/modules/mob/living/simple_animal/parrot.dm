@@ -739,12 +739,19 @@
 	speech_buffer.Add(message)
 
 /mob/living/simple_animal/parrot/attack_generic(var/mob/user, var/damage, var/attack_message)
-	..()
-	if(client) return
+
+	var/success = ..()
+
+	if(client)
+		return success
+
 	if(parrot_state == PARROT_PERCH)
 		parrot_sleep_dur = parrot_sleep_max //Reset it's sleep timer if it was perched
-	if(!damage)
-		return
+
+	if(!success)
+		return 0
+
 	parrot_interest = user
 	parrot_state = PARROT_SWOOP | PARROT_ATTACK //Attack other animals regardless
 	icon_state = "parrot_fly"
+	return success

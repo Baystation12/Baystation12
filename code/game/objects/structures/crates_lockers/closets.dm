@@ -304,4 +304,5 @@
 		return
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	dump_contents()
-	del(src)
+	spawn(1) del(src)
+	return 1

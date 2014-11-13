@@ -119,7 +119,7 @@
 				if(istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
 					if(nutrition <= get_hunger_nutrition() && !Atkcool)
 						if (is_adult || prob(5))
-							//AM.attack_slime(src)
+							UnarmedAttack(AM)
 							spawn()
 								Atkcool = 1
 								sleep(45)

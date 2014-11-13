@@ -259,11 +259,11 @@
 
 	if(rotting || prob(40))
 		user << "You smash through the wall!"
-		dismantle_wall(1)
+		spawn(1) dismantle_wall(1)
 	else
 		user << "You smash against the wall."
 		take_damage(rand(25,75))
-	return
+	return 1
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 

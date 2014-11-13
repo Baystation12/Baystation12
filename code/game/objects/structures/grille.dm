@@ -192,4 +192,5 @@
 /obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
 	health -= damage
-	healthcheck()
+	spawn(1) healthcheck()
+	return 1

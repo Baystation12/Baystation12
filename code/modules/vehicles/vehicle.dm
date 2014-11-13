@@ -356,4 +356,5 @@
 	src.health -= damage
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
+	spawn(1) healthcheck()
+	return 1

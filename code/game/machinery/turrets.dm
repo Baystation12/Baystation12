@@ -340,15 +340,16 @@
 
 /obj/machinery/turret/attack_generic(var/mob/user, var/damage, var/attack_message)
 	if(!damage)
-		return
+		return 0
 	if(stat & BROKEN)
 		user << "That object is useless to you."
-		return
+		return 0
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	src.health -= damage
 	if (src.health <= 0)
 		src.die()
+	return 1
 
 /obj/structure/turret/gun_turret
 	name = "Gun Turret"

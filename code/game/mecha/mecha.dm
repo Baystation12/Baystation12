@@ -1706,7 +1706,7 @@
 /obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
 
 	if(!damage)
-		return
+		return 0
 
 	src.log_message("Attack by an animal. Attacker - [user].",1)
 
@@ -1721,7 +1721,7 @@
 		src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
 		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	return
+	return 1
 
 
 //////////////////////////////////////////

@@ -317,6 +317,7 @@
 		return
 	visible_message("<span class='danger'>[user] smashes the light!</span>")
 	broken()
+	return 1
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty

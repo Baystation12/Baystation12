@@ -8,9 +8,10 @@
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
 	if(!damage || !wallbreaker)
-		return
+		return 0
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	dismantle()
+	spawn(1) dismantle()
+	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))

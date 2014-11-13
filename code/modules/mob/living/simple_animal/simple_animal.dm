@@ -49,7 +49,7 @@
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/melee_damage_lower = 0
 	var/melee_damage_upper = 0
-	var/attacktext = "attacks"
+	var/attacktext = "attacked"
 	var/attack_sound = null
 	var/friendly = "nuzzles"
 	var/wall_smash = 0

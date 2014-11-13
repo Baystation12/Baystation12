@@ -155,6 +155,7 @@
 		return
 	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 	take_damage(damage)
+	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this

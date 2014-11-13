@@ -170,6 +170,7 @@
 
 /obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	if(!breakable || !damage || !wallbreaker)
-		return
+		return 0
 	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
-	destroy()
+	spawn(1) destroy()
+	return 1

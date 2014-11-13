@@ -1,6 +1,6 @@
 // Generic damage proc (slimes and monkeys).
 /atom/proc/attack_generic(mob/user as mob)
-	return
+	return 0
 
 /*
 	Humans:
@@ -175,11 +175,9 @@
 		return
 
 	if(melee_damage_upper == 0 && istype(A,/mob/living))
-		emote("[friendly] [src]")
+		custom_emote(1,"[friendly] [src]!")
 		return
 
-	if(loc && attack_sound)
-		playsound(loc, attack_sound, 50, 1, 1)
-
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	A.attack_generic(src,damage,attacktext,wall_smash)
+	if(A.attack_generic(src,damage,attacktext,wall_smash) && loc && attack_sound)
+		playsound(loc, attack_sound, 50, 1, 1)

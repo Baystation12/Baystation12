@@ -207,15 +207,23 @@
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
 
+/obj/item/weapon/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
 
+	if(isanimal(user) || isalien(user))
 
+		if(bitecount == 0 || prob(50))
+			user.custom_emote(1,"nibbles away at the [src]")
+			bitecount++
 
+			if(reagents && user.reagents)
+				reagents.trans_to_ingest(user, bitesize)
 
+			spawn(5)
+				if(!src && !user.client)
+					user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
+					del(src)
 
-
-
-
-
+			On_Consume(user)
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks

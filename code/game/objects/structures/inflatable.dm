@@ -120,9 +120,10 @@
 	health -= damage
 	if(health <= 0)
 		user.visible_message("<span class='danger'>[user] [attack_verb] open the [src]!</span>")
-		deflate(1)
+		spawn(1) deflate(1)
 	else
 		user.visible_message("<span class='danger'>[user] [attack_verb] at [src]!</span>")
+	return 1
 
 /obj/item/inflatable/door/
 	name = "inflatable door"

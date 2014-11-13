@@ -120,7 +120,7 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 30
 	melee_damage_upper = 30
-	attacktext = "smashes their armoured gauntlet into"
+	attacktext = "smashed their armoured gauntlet into"
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -195,7 +195,7 @@
 	health = 75
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	attacktext = "slashes"
+	attacktext = "slashed"
 	speed = -1
 	see_in_dark = 7
 	attack_sound = 'sound/weapons/bladeslice.ogg'
@@ -220,7 +220,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
-	attacktext = "rams"
+	attacktext = "rammed"
 	speed = 0
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch2.ogg'
@@ -247,7 +247,7 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 50
 	melee_damage_upper = 50
-	attacktext = "brutally crushes"
+	attacktext = "brutally crushed"
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'

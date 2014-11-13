@@ -189,4 +189,5 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
 	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
-	updatehealth()
+	spawn(1) updatehealth()
+	return 1
