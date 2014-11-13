@@ -109,6 +109,9 @@
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
 
+	//ERT stuff :(
+	var/ert_role = 0 // 1 = Security, 2 = Medical, 3 = Engineering, 4 = Commander
+
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
 	var/stunned = 0.0
