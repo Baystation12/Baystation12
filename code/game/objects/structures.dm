@@ -22,15 +22,6 @@
 				visible_message("<span class='danger'>[H] slices [src] apart!</span>")
 				destroy()
 
-/obj/structure/attack_animal(mob/living/user)
-	if(breakable)
-		if(user.wall_smash)
-			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-			destroy()
-
-/obj/structure/attack_paw(mob/user)
-	if(breakable) attack_hand(user)
-
 /obj/structure/blob_act()
 	if(prob(50))
 		del(src)

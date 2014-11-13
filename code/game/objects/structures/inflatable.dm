@@ -75,8 +75,6 @@
 	//world << "glass at [x],[y],[z] Mhit"
 		deflate(1)
 
-	attack_paw(mob/user as mob)
-		return attack_generic(user, 15)
 
 	attack_hand(mob/user as mob)
 		add_fingerprint(user)
@@ -90,20 +88,6 @@
 			deflate(1)
 		else	//for nicer text~
 			user.visible_message("<span class='danger'>[user] tears at [src]!</span>")
-
-	attack_animal(mob/user as mob)
-		if(!isanimal(user)) return
-		var/mob/living/simple_animal/M = user
-		if(M.melee_damage_upper <= 0) return
-		attack_generic(M, M.melee_damage_upper)
-
-
-	attack_slime(mob/user as mob)
-		var/mob/living/carbon/slime/S = user
-		if (!S.is_adult)
-			return
-		attack_generic(user, rand(10, 15))
-
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(!istype(W)) return
@@ -187,9 +171,6 @@
 		else if(isrobot(user)) //but cyborgs can
 			if(get_dist(user,src) <= 1) //not remotely though
 				return TryToSwitchState(user)
-
-	attack_paw(mob/user as mob)
-		return TryToSwitchState(user)
 
 	attack_hand(mob/user as mob)
 		return TryToSwitchState(user)

@@ -274,10 +274,6 @@
 	else
 		usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
 
-
-/obj/machinery/vending/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 

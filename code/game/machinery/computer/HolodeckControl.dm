@@ -43,9 +43,6 @@ var/global/list/holodeck_programs = list(
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
-	attack_paw(var/mob/user as mob)
-		return
-
 	attack_hand(var/mob/user as mob)
 
 		if(..())
@@ -316,15 +313,6 @@ var/global/list/holodeck_programs = list(
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-
-
-
-
-
-
-
-
-
 /obj/structure/table/holotable
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
@@ -334,13 +322,6 @@ var/global/list/holodeck_programs = list(
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.
-
-
-/obj/structure/table/holotable/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-/obj/structure/table/holotable/attack_animal(mob/living/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
 
 /obj/structure/table/holotable/attack_hand(mob/user as mob)
 	return // HOLOTABLE DOES NOT GIVE A FUCK
@@ -527,10 +508,6 @@ var/global/list/holodeck_programs = list(
 
 /obj/machinery/readybutton/attack_ai(mob/user as mob)
 	user << "The station AI is not to interact with these devices!"
-	return
-
-/obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device."
 	return
 
 /obj/machinery/readybutton/New()

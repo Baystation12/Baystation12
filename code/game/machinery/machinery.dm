@@ -232,9 +232,6 @@ Class Procs:
 	else
 		return src.attack_hand(user)
 
-/obj/machinery/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/attack_hand(mob/user as mob)
 	if(inoperable(MAINT))
 		return 1

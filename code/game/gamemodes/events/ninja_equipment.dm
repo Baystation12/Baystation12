@@ -1473,9 +1473,6 @@ It is possible to destroy the net by the occupant or someone else.
 		healthcheck()
 		return
 
-	attack_paw()
-		return attack_hand()
-
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		var/aforce = W.force
 		health = max(0, health - aforce)

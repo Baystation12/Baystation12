@@ -150,28 +150,9 @@
 							"You hear a knocking sound.")
 	return
 
-
-/obj/structure/window/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/structure/window/proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_animal and attack_slime
 	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 	take_damage(damage)
-
-/obj/structure/window/attack_animal(mob/user as mob)
-	if(!isanimal(user)) return
-	var/mob/living/simple_animal/M = user
-	if(M.melee_damage_upper <= 0) return
-	attack_generic(M, M.melee_damage_upper)
-
-
-/obj/structure/window/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-	attack_generic(user, rand(10, 15))
-
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this

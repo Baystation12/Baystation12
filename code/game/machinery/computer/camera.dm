@@ -15,11 +15,6 @@
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
 
-
-	attack_paw(var/mob/user as mob)
-		return attack_hand(user)
-
-
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return null

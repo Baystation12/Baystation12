@@ -226,40 +226,6 @@
 	return 0
 
 //Interactions
-
-/turf/simulated/wall/attack_paw(mob/user as mob)
-	if ((HULK in user.mutations))
-		if (prob(40))
-			usr << text("\blue You smash through the wall.")
-			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			dismantle_wall(1)
-			return
-		else
-			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
-
-	return src.attack_hand(user)
-
-
-/turf/simulated/wall/attack_animal(mob/living/M as mob)
-	if(M.wall_smash)
-		if (istype(src, /turf/simulated/wall/r_wall) && !rotting)
-			M << text("\blue This wall is far too strong for you to destroy.")
-			return
-		else
-			if (prob(40) || rotting)
-				M << text("\blue You smash through the wall.")
-				dismantle_wall(1)
-				return
-			else
-				M << text("\blue You smash against the wall.")
-				take_damage(rand(25, 75))
-				return
-
-	M << "\blue You push the wall but nothing happens!"
-	return
-
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
 		if (prob(40) || rotting)

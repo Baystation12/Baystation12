@@ -82,8 +82,8 @@
 						spawn(45)
 							Atkcool = 0
 
-						if(Target.Adjacent(src))
-							Target.attack_slime(src)
+						//if(Target.Adjacent(src))
+							//Target.attack_slime(src)
 					return
 				if(!Target.lying && prob(80))
 
@@ -93,8 +93,8 @@
 							spawn(45)
 								Atkcool = 0
 
-							if(Target.Adjacent(src))
-								Target.attack_slime(src)
+							//if(Target.Adjacent(src))
+								//Target.attack_slime(src)
 
 					else
 						if(!Atkcool && Target.Adjacent(src))

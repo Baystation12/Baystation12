@@ -26,10 +26,6 @@
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
 
-
-/obj/structure/grille/attack_paw(mob/user as mob)
-	attack_hand(user)
-
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
@@ -58,33 +54,6 @@
 
 	health -= damage_dealt
 	healthcheck()
-
-/obj/structure/grille/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] smashes against [src].</span>", \
-						 "<span class='warning'>You smash against [src].</span>", \
-						 "You hear twisting metal.")
-
-	health -= rand(2,3)
-	healthcheck()
-	return
-
-/obj/structure/grille/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	M.visible_message("<span class='warning'>[M] smashes against [src].</span>", \
-					  "<span class='warning'>You smash against [src].</span>", \
-					  "You hear twisting metal.")
-
-	health -= M.melee_damage_upper
-	healthcheck()
-	return
-
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

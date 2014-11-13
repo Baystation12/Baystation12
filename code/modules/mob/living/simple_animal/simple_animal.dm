@@ -209,19 +209,6 @@
 		if(act == "scream")	act = "whimper" //ugly hack to stop animals screaming when crushed :P
 		..(act, type, desc)
 
-/mob/living/simple_animal/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		for(var/mob/O in viewers(src, null))
-			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		adjustBruteLoss(damage)
-
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return
@@ -265,29 +252,6 @@
 					O.show_message("\red [M] [response_harm] [src]")
 
 	return
-
-
-/mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if(M.Victim) return // can't attack while eating!
-
-	visible_message("\red <B>The [M.name] glomps [src]!</B>")
-
-	var/damage = rand(1, 3)
-
-	if(M.is_adult)
-		damage = rand(20, 40)
-	else
-		damage = rand(5, 35)
-
-	adjustBruteLoss(damage)
-
-
-	return
-
 
 /mob/living/simple_animal/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 	if(istype(O, /obj/item/stack/medical))

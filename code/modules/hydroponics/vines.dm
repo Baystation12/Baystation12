@@ -73,10 +73,6 @@
 
 	manual_unbuckle(user)
 
-
-/obj/effect/plantsegment/attack_paw(mob/user as mob)
-	manual_unbuckle(user)
-
 /obj/effect/plantsegment/proc/unbuckle()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)	//this is probably unneccesary, but it doesn't hurt

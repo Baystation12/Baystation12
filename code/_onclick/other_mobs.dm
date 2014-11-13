@@ -45,19 +45,14 @@
 	Animals & All Unspecified
 */
 /mob/living/UnarmedAttack(var/atom/A)
-	A.attack_animal(src)
-/atom/proc/attack_animal(mob/user as mob)
 	return
+
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
 
 /*
 	Monkeys
 */
-/mob/living/carbon/monkey/UnarmedAttack(var/atom/A)
-	A.attack_paw(src)
-/atom/proc/attack_paw(mob/user as mob)
-	return
 
 /*
 	Monkey RestrainedClickOn() was apparently the
@@ -98,10 +93,7 @@
 	Slimes
 	Nothing happening here
 */
-/mob/living/carbon/slime/UnarmedAttack(var/atom/A)
-	A.attack_slime(src)
-/atom/proc/attack_slime(mob/user as mob)
-	return
+
 /mob/living/carbon/slime/RestrainedClickOn(var/atom/A)
 	return
 

@@ -126,9 +126,6 @@
 	attack_ai(var/mob/user)
 		interact(user, 1)
 
-	attack_paw()
-		return
-
 	attack_hand(var/mob/user)
 		interact(user, 0)
 

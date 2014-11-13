@@ -94,24 +94,3 @@
 	else
 		visible_message("<span class='warning'>[user] hits [src] with [I]!</span>")
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 70, 1)
-
-/obj/structure/mirror/attack_animal(mob/user as mob)
-	if(!isanimal(user)) return
-	var/mob/living/simple_animal/M = user
-	if(M.melee_damage_upper <= 0) return
-	if(shattered)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
-	user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-	shatter()
-
-
-/obj/structure/mirror/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-	if(shattered)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return
-	user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-	shatter()

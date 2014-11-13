@@ -18,9 +18,6 @@
 	attack_ai(mob/user as mob)
 		return attack_hand(user)
 
-	attack_paw(mob/user as mob)
-		return attack_hand(user)
-
 	attack_hand(mob/user as mob)
 		user.set_machine(src)
 
