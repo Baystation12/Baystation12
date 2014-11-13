@@ -292,8 +292,10 @@
 		del(src)
 		return
 
-
-/mob/living/carbon/monkey/IsAdvancedToolUser()//Unless its monkey mode monkeys cant use advanced tools
+//Unless its monkey mode monkeys cant use advanced tools
+/mob/living/carbon/monkey/IsAdvancedToolUser(var/silent)
+	if(!silent)
+		src << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
 	return 0
 
 /mob/living/carbon/monkey/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list())
@@ -312,6 +314,3 @@
         message = capitalize(trim_left(message))
 
         ..(message, speaking, verb, alt_name, italics, message_range, used_radios)
-
-/mob/living/carbon/monkey/UnarmedAttack(var/atom/A)
-	return

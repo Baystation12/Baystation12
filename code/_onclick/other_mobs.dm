@@ -14,6 +14,7 @@
 		return
 
 	A.attack_hand(src)
+
 /atom/proc/attack_hand(mob/user as mob)
 	return
 
@@ -53,6 +54,12 @@
 /*
 	Monkeys
 */
+
+
+//TODO: Disease spreading and unarmed damage against mobs.
+/mob/living/carbon/monkey/UnarmedAttack(var/atom/A, var/proximity)
+	if(!proximity)
+		A.attack_hand(src)
 
 /*
 	Monkey RestrainedClickOn() was apparently the

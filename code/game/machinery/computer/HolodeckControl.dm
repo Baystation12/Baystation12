@@ -518,9 +518,13 @@ var/global/list/holodeck_programs = list(
 	user << "The device is a solid button, there's nothing you can do with it!"
 
 /obj/machinery/readybutton/attack_hand(mob/user as mob)
+
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		user << "This device is not powered."
 		return
+
+	if(!user.IsAdvancedToolUser())
+		return 0
 
 	currentarea = get_area(src.loc)
 	if(!currentarea)

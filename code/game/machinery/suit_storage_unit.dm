@@ -94,6 +94,8 @@
 		return
 	if(stat & NOPOWER)
 		return
+	if(!user.IsAdvancedToolUser())
+		return 0
 	if(src.panelopen) //The maintenance panel is open. Time for some shady stuff
 		dat+= "<HEAD><TITLE>Suit storage unit: Maintenance panel</TITLE></HEAD>"
 		dat+= "<Font color ='black'><B>Maintenance panel controls</B></font><HR>"
@@ -775,6 +777,9 @@
 
 	if(..() || stat & (BROKEN|NOPOWER))
 		return
+
+	if(!user.IsAdvancedToolUser())
+		return 0
 
 	if(electrified != 0)
 		if(src.shock(user, 100))

@@ -691,9 +691,12 @@
 	return number
 
 
-/mob/living/carbon/human/IsAdvancedToolUser()
-	return species.has_fine_manipulation
-
+/mob/living/carbon/human/IsAdvancedToolUser(var/silent)
+	if(species.has_fine_manipulation)
+		return 1
+	if(!silent)
+		src << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
+	return 0
 
 /mob/living/carbon/human/abiotic(var/full_body = 0)
 	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask || src.head || src.shoes || src.w_uniform || src.wear_suit || src.glasses || src.l_ear || src.r_ear || src.gloves)))
