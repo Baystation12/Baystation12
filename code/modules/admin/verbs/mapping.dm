@@ -194,7 +194,7 @@ var/list/debug_verbs = list (
 
 	if(!check_rights(R_DEBUG)) return
 
-	if(!check_rights(R_DEV))
+	if(!check_rights(R_DEV,0))
 		if(alert("These verbs have the potentional to BREAK EVERYTHING, are you sure you know what you are doing?",,"Yes","No")=="No")
 			return
 
