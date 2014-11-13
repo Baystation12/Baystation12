@@ -10,7 +10,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/captain(src)
 		else
@@ -47,7 +46,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/glasses/sunglasses(src)
 		new /obj/item/clothing/suit/armor/vest(src)
 		new /obj/item/clothing/head/helmet(src)
@@ -71,7 +69,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/under/rank/head_of_personnel(src)
 		new /obj/item/clothing/under/dress/dress_hop(src)
 		new /obj/item/clothing/under/dress/dress_hr(src)
@@ -101,7 +98,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
@@ -143,7 +139,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
@@ -180,7 +175,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
@@ -249,7 +243,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/under/det(src)
 		new /obj/item/clothing/under/det/black(src)
 		new /obj/item/clothing/under/det/slob(src)
@@ -291,7 +284,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
 		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
 		return
@@ -318,7 +310,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/shoes/brown(src)
 		new /obj/item/weapon/paper/Court (src)
 		new /obj/item/weapon/paper/Court (src)

@@ -93,7 +93,6 @@
 			suffix = "#[count]"
 		name = "Mulebot ([suffix])"
 
-	verbs -= /atom/movable/verb/pull
 
 
 // set up the wire colours in random order

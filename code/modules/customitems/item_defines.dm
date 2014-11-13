@@ -301,19 +301,9 @@
 	icon_on = "engravedzippoon"
 	icon_off = "engravedzippo"
 
-/obj/item/weapon/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
+/obj/item/weapon/haircomb/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic. It has a small K etched into its side."
-	w_class = 1.0
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "purplecomb"
-	item_state = "purplecomb"
-
-	attack_self(mob/user)
-		if(user.r_hand == src || user.l_hand == src)
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"), 1)
-		return
 
 /obj/item/weapon/fluff/hugo_cinderbacth_1 //thatoneguy: Hugo Cinderbatch
 	name = "Old Cane"
@@ -756,12 +746,9 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "paintedwelding"
 
-/obj/item/clothing/head/helmet/greenbandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
+/obj/item/clothing/head/orangebandana/fluff/taryn_kifer_1 //themij: Taryn Kifer
 	name = "orange bandana"
 	desc = "Hey, I think we're missing a hazard vest..."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "taryn_kifer_1"
-	body_parts_covered = 0
 
 /obj/item/clothing/head/fluff
 	body_parts_covered = 0
@@ -1279,6 +1266,14 @@
 	icon_state = "digiboots"
 	species_restricted = null
 
+/obj/item/clothing/shoes/jackboots/fluff/harmony_singh_1 //Bromuzl: Harmony Singh
+	name = "Springjacks"
+	desc = "A pair of highly modified jackboots in medical white, with some type of spring assembly on the ankle and heels, painted orange."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "springjacks"
+	item_state = "springjacks"
+	slowdown = SHOES_SLOWDOWN+1 //Slowing down because of her injured foot, these are for ease of pain so she can get off painkillers.
+	siemens_coefficient = 0.7 //copied from Jackboots under code/modules/clothing/shoes/miscellaneous.dm
 
 //////////// Sets ////////////
 
@@ -1364,14 +1359,9 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "yuri_kornienkovich_flask"
 
-/obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
+/obj/item/clothing/under/cheongsam/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
 	name = "White Cheongsam"
 	desc = "It is a white cheongsam dress."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "mai_yang"
-	item_state = "mai_yang"
-	item_color = "mai_yang"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/fluff/sakura_hokkaido_kimono
 	name = "Sakura Kimono"

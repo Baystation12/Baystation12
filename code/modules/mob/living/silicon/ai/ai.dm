@@ -193,6 +193,22 @@ var/list/ai_verbs_default = list(
 	ai_list -= src
 	..()
 
+/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+	set popup_menu = 0
+	set src = usr.contents
+	return 0
+
+/mob/living/silicon/ai/proc/system_integrity()
+	return (health-config.health_threshold_dead)/2
+
+// this function shows the health of the pAI in the Status panel
+/mob/living/silicon/ai/show_system_integrity()
+	// An AI doesn't become inoperable until -100% (or whatever config.health_threshold_dead is set to)
+	if(!src.stat)
+		stat(null, text("System integrity: [system_integrity()]%"))
+	else
+		stat(null, text("Systems nonfunctional"))
+
 /mob/living/silicon/ai/proc/SetName(pickedName as text)
 	real_name = pickedName
 	name = pickedName

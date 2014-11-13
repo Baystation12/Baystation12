@@ -12,7 +12,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/storage/box/autoinjectors(src)
 		new /obj/item/weapon/storage/box/syringes(src)
 		new /obj/item/weapon/reagent_containers/dropper(src)
@@ -41,7 +40,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
@@ -64,7 +62,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/medic(src)
 		else
@@ -115,7 +112,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/medic(src)
 		else
@@ -135,6 +131,7 @@
 				new /obj/item/clothing/head/surgery/purple(src)
 		new /obj/item/clothing/under/rank/chief_medical_officer(src)
 		new /obj/item/clothing/suit/storage/labcoat/cmo(src)
+		new /obj/item/clothing/suit/storage/labcoat/cmoalt(src)
 		new /obj/item/weapon/cartridge/cmo(src)
 		new /obj/item/clothing/gloves/latex(src)
 		new /obj/item/clothing/shoes/brown	(src)
@@ -152,7 +149,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/device/assembly/signaler(src)
 		new /obj/item/device/radio/electropack(src)
 		new /obj/item/device/radio/electropack(src)
@@ -175,7 +171,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/storage/box/pillbottles(src)
 		new /obj/item/weapon/storage/box/pillbottles(src)
 		return
