@@ -182,6 +182,22 @@
 			src.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
+		if("ERTCentcomm")
+			if(src.authenticated==2)
+				if(centcomm_message_cooldown)
+					usr << "\red Arrays recycling.  Please stand by."
+					return
+				var/input = stripped_input(usr, "Please describe the full nature of your emergency for your distress signal.  Please be aware that launching a distress signal is very expensive, and abuse will lead to termination.  Transmission does not guarantee a response. There is a 30 minute delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+				if(!input || !(usr in view(1,src)))
+					return
+				Centcomm_ERT_announce(input, usr)
+				usr << "\blue Message transmitted."
+				log_say("[key_name(usr)] has made an Centcomm ERT request. Reason: [input]")
+				priority_announcement.Announce("Distress signal activated.")
+				centcomm_message_cooldown = 1
+				spawn(300)//10 minute cooldown
+					centcomm_message_cooldown = 0
+
 		if("MessageCentcomm")
 			if(src.authenticated==2)
 				if(centcomm_message_cooldown)
@@ -308,6 +324,7 @@
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=logout'>Log Out</A> \]"
 				if (src.authenticated==2)
 					dat += "<BR>\[ <A HREF='?src=\ref[src];operation=announce'>Make An Announcement</A> \]"
+					dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ERTCentcomm'>Request an Emergency Response Team from Centcomm</A> \]"
 					if(src.emagged == 0)
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=MessageCentcomm'>Send an emergency message to Centcomm</A> \]"
 					else
