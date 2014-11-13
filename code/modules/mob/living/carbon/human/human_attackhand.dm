@@ -136,9 +136,11 @@
 				var/datum/organ/external/affected = get_organ(M.zone_sel.selecting)
 				if (affected.body_part != UPPER_TORSO && !affected.destspawn) // Can't grab the chest. Pervert.
 					visible_message("<span class='danger'>[M] starts pulling on [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts ripping your [affected.display_name] off!</span>") // Begin tugging.
-					var/tugTime = rand(100, 200)
+					var/tugTime = 300
 					if(affected.name == "head" || affected.name == "groin")
-						tugTime = tugTime + rand(200, 300) // Important limbs'll take a WHILE.
+						tugTime = 1200 // Important limbs'll take a WHILE.
+					if(affected.name == "l_arm" || affected.name == "r_arm" || affected.name == "l_leg" || affected.name == "r_leg")
+						tugTime = 600
 					if(affected.status & ORGAN_ROBOT)
 						tugTime = tugTime/2 // Easier to rip off. Still likely messy.
 
