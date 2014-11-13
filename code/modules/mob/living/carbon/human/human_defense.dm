@@ -214,6 +214,7 @@ emp_act
 				update_body()
 				updatehealth()
 				UpdateDamageIcon()
+				drop_from_inventory(I, loc)
 				del(I)
 				UpdateAppearance()
 				return 0
@@ -234,6 +235,7 @@ emp_act
 			var/obj/item/weapon/organ/head/B = I
 			if (B.brainmob.mind)
 				B.brainmob.mind.transfer_to(src)
+			drop_from_inventory(I, loc)
 			del(B)
 			UpdateAppearance()
 			return

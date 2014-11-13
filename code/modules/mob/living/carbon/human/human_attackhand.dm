@@ -106,9 +106,10 @@
 						if(permitted || check_rights(R_MOD|R_ADMIN, 0)) // Admins can also rip off their limbs. They know best.
 							visible_message("\red [src] is trying to rip off his [affected.display_name]!", "\red You start ripping off your [affected.display_name]")
 							spawn(rand(100, 200)) // After 10 - 20 seconds, PLOP.
-								if (get_organ(M.zone_sel.selecting)==affected && M.a_intent == "grab" && !M.lying) // If they haven't stopped.
+								if (get_organ(M.zone_sel.selecting)==affected && M.a_intent == "grab" && !M.lying && !affected.destspawn) // If they haven't stopped.
 									visible_message("\red [src] rips his own [affected.display_name] off.", "\red You rip your own [affected.display_name] off. Why the hell did you think that was a good idea?")
 									affected.droplimb(1, 0, 1, 0)
+									handle_organs(1)
 								else
 									visible_message("\blue [src] decides ripping his [affected.display_name] off may not be the best idea.", "\blue You stop ripping off your [affected.display_name]. Thank god.")
 						else
@@ -120,6 +121,7 @@
 						if (istype(organ, /obj/item/robot_parts))
 							var/obj/item/robot_parts/robolimb = organ
 							var/datum/organ/external/handy = hand ? organs_by_name["l_hand"] : organs_by_name["r_hand"]
+							handle_organs(1)
 							if (handy && !handy.destspawn) // Incase they are ripping off that arm.
 								put_in_active_hand(robolimb) // Took me too long to find that proc. Also, Defining robolimb instead of just using organ is DEFINANTLY required. For raisons
 				else if (affected.body_part != UPPER_TORSO)
@@ -129,6 +131,35 @@
 				return 0
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
+
+			if(istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.species) // Do they have a grab in their other hand?
+				var/datum/organ/external/affected = get_organ(M.zone_sel.selecting)
+				if (affected.body_part != UPPER_TORSO && !affected.destspawn) // Can't grab the chest. Pervert.
+					visible_message("<span class='danger'>[M] starts pulling on [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts ripping your [affected.display_name] off!</span>") // Begin tugging.
+					var/tugTime = rand(100, 200)
+					if(affected.name == "head" || affected.name == "groin")
+						tugTime = tugTime + rand(200, 300) // Important limbs'll take a WHILE.
+					if(affected.status & ORGAN_ROBOT)
+						tugTime = tugTime/2 // Easier to rip off. Still likely messy.
+
+					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began ripping off [src.name] ([src.ckey])'s [affected.name]</font>")
+					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had his [affected.name] tugged at by [M.name] ([M.ckey])</font>")
+					msg_admin_attack("[key_name(M)] began ripping off [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
+
+					spawn(tugTime)
+						if (((!(M.species.flags & IS_STRONG)&&(affected.status & ORGAN_ROBOT)) || M.species.flags & IS_STRONG) && istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.a_intent == "grab" && M.Adjacent(src) && !M.lying && !affected.destspawn && get_organ(M.zone_sel.selecting)==affected) // Are we still ripping?
+							affected.droplimb(1) // RIP.
+							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Ripped off [src.name] ([src.ckey])'s [affected.name]</font>")
+							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had his [affected.name] ripped off by [M.name] ([M.ckey])</font>")
+							msg_admin_attack("[key_name(M)] ripped off [key_name(src)]'s [affected.name]")
+							visible_message("<span class='danger'>[M] ripped off [src]'s [affected.display_name]!</span>", "<span class='danger'>[M] ripped off your [affected.display_name]!</span>")
+						else
+							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stopped ripping off [src.name] ([src.ckey])'s [affected.name]</font>")
+							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Stopped having his [affected.name] ripped off by [M.name] ([M.ckey])</font>")
+							msg_admin_attack("[key_name(M)] stopped ripping off [key_name(src)]'s [affected.name]")
+							visible_message("\blue [M] stopped ripping off [src]'s [affected.display_name].", "\blue [M] stopped ripping off your [affected.display_name].")
+					return
+
 
 			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
 			if(buckled)

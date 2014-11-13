@@ -18,28 +18,60 @@
 	icon_state = "l_arm"
 	construction_time = 200
 	construction_cost = list("metal"=18000)
-	part = list("l_arm","l_hand")
+	part = list("l_arm")
 
 /obj/item/robot_parts/r_arm
 	name = "robot right arm"
 	icon_state = "r_arm"
 	construction_time = 200
 	construction_cost = list("metal"=18000)
-	part = list("r_arm","r_hand")
+	part = list("r_arm")
 
 /obj/item/robot_parts/l_leg
 	name = "robot left leg"
 	icon_state = "l_leg"
 	construction_time = 200
 	construction_cost = list("metal"=15000)
-	part = list("l_leg","l_foot")
+	part = list("l_leg")
 
 /obj/item/robot_parts/r_leg
 	name = "robot right leg"
 	icon_state = "r_leg"
 	construction_time = 200
 	construction_cost = list("metal"=15000)
-	part = list("r_leg","r_foot")
+	part = list("r_leg")
+
+/obj/item/robot_parts/l_hand
+	name = "robot left hand"
+	icon_state = "l_hand"
+	construction_time = 100
+	construction_cost = list("metal"=6000)
+	part = list("l_hand")
+	w_class = 1.0
+
+/obj/item/robot_parts/r_hand
+	name = "robot right hand"
+	icon_state = "r_hand"
+	construction_time = 100
+	construction_cost = list("metal"=6000)
+	part = list("r_hand")
+	w_class = 1.0
+
+/obj/item/robot_parts/l_foot
+	name = "robot left foot"
+	icon_state = "l_foot"
+	construction_time = 100
+	construction_cost = list("metal"=7500)
+	part = list("l_foot")
+	w_class = 1.0
+
+/obj/item/robot_parts/r_foot
+	name = "robot right foot"
+	icon_state = "r_foot"
+	construction_time = 100
+	construction_cost = list("metal"=7500)
+	part = list("r_foot")
+	w_class = 1.0
 
 /obj/item/robot_parts/chest
 	name = "robot torso"
@@ -47,9 +79,17 @@
 	icon_state = "chest"
 	construction_time = 350
 	construction_cost = list("metal"=40000)
-	part = list("chest", "groin")
+	part = list("chest")
 	var/wires = 0.0
 	var/obj/item/weapon/cell/cell = null
+
+/obj/item/robot_parts/groin
+	name = "robot pelvis"
+	desc = "A thick and wide robotic case, seemingly for the lower half of the torso."
+	icon_state = "groin"
+	construction_time = 175
+	construction_cost = list("metal"=20000)
+	part = list("groin")
 
 /obj/item/robot_parts/head
 	name = "robot head"
