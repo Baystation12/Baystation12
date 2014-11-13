@@ -278,7 +278,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/admincryo,
 	/client/proc/hidedevsay,
 	/client/proc/cmd_dev_say,
-	/client/proc/toggleattacklogs
+	/client/proc/toggleattacklogs,
+	/client/proc/jumptocoord
 )
 
 var/list/admin_verbs_mentor = list(
