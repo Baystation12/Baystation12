@@ -35,9 +35,9 @@
 		for(var/datum/organ/external/organ in M.organs)
 			if (!organ)
 				continue
-			if((organ.status & ORGAN_DESTROYED) && !organ.amputated)
+			if((organ.status & ORGAN_DESTROYED) && !organ.amputated && !(M.species.flags & IS_SYNTHETIC))
 				src.traumatic_shock += 60
-			else if(organ.status & ORGAN_BROKEN || organ.open)
+			else if(organ.status & ORGAN_BROKEN || organ.open && !(M.species.flags & IS_SYNTHETIC))
 				src.traumatic_shock += 30
 				if(organ.status & ORGAN_SPLINTED)
 					src.traumatic_shock -= 25
