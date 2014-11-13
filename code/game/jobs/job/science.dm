@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffddff"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/head
 	req_admin_notify = 1
 	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
@@ -125,8 +125,8 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/roboticist(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/roboticist(H), slot_wear_pda)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(H), slot_wear_suit)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
+		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/robotics(H), slot_wear_suit)
+		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/toolbox/mechanical(H), slot_l_hand)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)

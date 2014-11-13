@@ -278,8 +278,24 @@
 			return
 		src.assignment = u
 		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
+
+		var/department = sd_Alert(user, "Which department would you like the ID to display?", buttons = list("Command","Security","Medical","Engineering","Research","Civilian"))
+		switch(department)
+			if("Command")
+				src.icon_state = "id_head"
+			if("Security")
+				src.icon_state = "id_sec"
+			if("Medical")
+				src.icon_state = "id_med"
+			if("Engineering")
+				src.icon_state = "id_eng"
+			if("Research")
+				src.icon_state = "id_sci"
+			if("Civilian")
+				src.icon_state = "id"
 		user << "\blue You successfully forge the ID card."
 		registered_user = user
+
 	else if(!registered_user || registered_user == user)
 
 		if(!registered_user) registered_user = user  //
@@ -298,8 +314,24 @@
 					return
 				src.assignment = u
 				src.name = "[src.registered_name]'s ID Card ([src.assignment])"
+				var/department = sd_Alert(user, "Which department would you like the ID to display?", buttons = list("Command","Security","Medical","Engineering","Research","Civilian"))
+				switch(department)
+					if("Command")
+						src.icon_state = "id_head"
+					if("Security")
+						src.icon_state = "id_sec"
+					if("Medical")
+						src.icon_state = "id_med"
+					if("Engineering")
+						src.icon_state = "id_eng"
+					if("Research")
+						src.icon_state = "id_sci"
+					if("Civilian")
+						src.icon_state = "id"
+
 				user << "\blue You successfully forge the ID card."
 				return
+
 			if("Show")
 				..()
 	else

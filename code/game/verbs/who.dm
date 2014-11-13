@@ -101,7 +101,7 @@
 					devmsg += " - Playing"
 
 				if(C.is_afk())
-					modmsg += " (AFK)"
+					devmsg += " (AFK)"
 				devmsg += "\n"
 				num_devs_online++
 	else

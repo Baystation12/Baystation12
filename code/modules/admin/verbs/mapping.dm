@@ -142,7 +142,6 @@ var/list/debug_verbs = list (
         ,/client/proc/kaboom
         ,/client/proc/splash
         ,/client/proc/cmd_admin_areatest
-        ,/client/proc/cmd_admin_rejuvenate
         ,/datum/admins/proc/show_traitor_panel
         ,/client/proc/print_jobban_old
         ,/client/proc/print_jobban_old_filter
@@ -165,6 +164,27 @@ var/list/debug_verbs = list (
         ,/client/proc/view_power_update_stats_machines
         ,/client/proc/toggle_power_update_profiling
 		,/client/proc/atmos_toggle_debug
+		,/client/proc/getruntimelog                    /*allows us to access runtime logs to somebody*/
+		,/client/proc/Debug2
+		,/client/proc/kill_air
+		,/client/proc/ZASSettings
+		,/client/proc/cmd_debug_make_powernets
+		,/client/proc/kill_airgroup
+		,/client/proc/debug_controller
+		,/client/proc/cmd_debug_mob_lists
+		,/client/proc/cmd_debug_del_all
+		,/client/proc/cmd_debug_tog_aliens
+		,/client/proc/air_report
+		,/client/proc/reload_admins
+		,/client/proc/reload_mentors
+		,/client/proc/restart_controller
+		,/client/proc/remake_distribution_map
+		,/client/proc/show_distribution_map
+		,/client/proc/show_plant_genes
+		,/client/proc/callproc
+		,/client/proc/toggledebuglogs
+		,/client/proc/SDQL_query
+		,/client/proc/SDQL2_query
 	)
 
 
@@ -173,6 +193,10 @@ var/list/debug_verbs = list (
 	set name = "Debug verbs"
 
 	if(!check_rights(R_DEBUG)) return
+
+	if(!check_rights(R_DEV))
+		if(alert("These verbs have the potentional to BREAK EVERYTHING, are you sure you know what you are doing?",,"Yes","No")=="No")
+			return
 
 	verbs += debug_verbs
 
