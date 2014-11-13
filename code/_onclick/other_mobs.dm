@@ -1,6 +1,7 @@
 // Generic damage proc (slimes and monkeys).
 /atom/proc/attack_generic(mob/user as mob)
 	return
+
 /*
 	Humans:
 	Adds an exception for gloves, to allow special glove types like the ninja ones.
@@ -56,16 +57,12 @@
 */
 
 
-//TODO: Disease spreading and unarmed damage against mobs.
 /mob/living/carbon/monkey/UnarmedAttack(var/atom/A, var/proximity)
 
 	if(!..())
 		return
 
-	if(a_intent == "harm")
-		A.attack_generic(src,rand(1,3),"bites")
-	else
-		A.attack_hand(src)
+	A.attack_hand(src)
 
 /*
 	Monkey RestrainedClickOn() was apparently the
@@ -96,11 +93,17 @@
 
 /*
 	Aliens
-	Defaults to same as monkey in most places
 */
 
 /mob/living/carbon/alien/RestrainedClickOn(var/atom/A)
 	return
+
+/mob/living/carbon/alien/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return 0
+
+	A.attack_generic(src,rand(5,6),"bitten")
 
 /*
 	Slimes
@@ -120,7 +123,7 @@
 		return
 
 	// Basic attack.
-	A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomps")
+	A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
 
 	// Handle mob shocks.
 	var/mob/living/M = A
@@ -162,3 +165,21 @@
 */
 /mob/new_player/ClickOn()
 	return
+
+/*
+	Animals
+*/
+/mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return
+
+	if(melee_damage_upper == 0 && istype(A,/mob/living))
+		emote("[friendly] [src]")
+		return
+
+	if(loc && attack_sound)
+		playsound(loc, attack_sound, 50, 1, 1)
+
+	var/damage = rand(melee_damage_lower, melee_damage_upper)
+	A.attack_generic(src,damage,attacktext,wall_smash)

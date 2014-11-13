@@ -144,32 +144,6 @@
 	return
 
 /mob/living/carbon/monkey/attack_hand(mob/living/carbon/human/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.use(2500)
-					Weaken(5)
-					if (stuttering < 5)
-						stuttering = 5
-					Stun(5)
-
-					for(var/mob/O in viewers(src, null))
-						if (O.client)
-							O.show_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>", 1, "\red You hear someone fall", 2)
-					return
-				else
-					M << "\red Not enough charge! "
-					return
 
 	if (M.a_intent == "help")
 		help_shake_act(M)

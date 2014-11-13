@@ -178,10 +178,9 @@
 		return 0
 
 	if(stat)
-		return
-
-	if(!proximity_flag)
 		return 0
+
+	return 1
 
 /*
 	Ranged unarmed attack:

@@ -254,13 +254,6 @@
 	return
 
 /mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
 
 	..()
 
@@ -316,18 +309,6 @@
 				step_away(src,M)
 
 			return
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.use(2500)
-					visible_message("<span class='warning'>[src] has been touched with the stun gloves by [M]!</span>")
-					return
-				else
-					M << "\red Not enough charge! "
-					return
 
 	switch(M.a_intent)
 

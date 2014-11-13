@@ -248,7 +248,7 @@
 	src.add_fingerprint(user)
 	return
 
-/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/wallbreaker)
+/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	if(!damage || !wallbreaker)
 		user << "You push the wall but nothing happens."

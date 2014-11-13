@@ -1,93 +1,72 @@
-/mob/living/carbon/human/attack_hand(mob/living/carbon/human/M as mob)
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
+/mob/living/carbon/human/attack_hand(mob/living/carbon/M as mob)
 
-	var/datum/organ/external/temp = M:organs_by_name["r_hand"]
-	if (M.hand)
-		temp = M:organs_by_name["l_hand"]
-	if(temp && !temp.is_usable())
-		M << "\red You can't use your [temp.display_name]."
-		return
+	var/mob/living/carbon/human/H = M
+	if(istype(H))
+		var/datum/organ/external/temp = H.organs_by_name["r_hand"]
+		if(H.hand)
+			temp = H.organs_by_name["l_hand"]
+		if(temp && !temp.is_usable())
+			H << "\red You can't use your [temp.display_name]."
+			return
 
 	..()
 
-	if((M != src) && check_shields(0, M.name))
-		visible_message("\red <B>[M] attempted to touch [src]!</B>")
-		return 0
+	// Should this all be in Touch()?
+	if(istype(H))
+		if((H != src) && check_shields(0, H.name))
+			visible_message("\red <B>[H] attempted to touch [src]!</B>")
+			return 0
 
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.use(2500)
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
-					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
-
-					msg_admin_attack("[M.name] ([M.ckey]) stungloved [src.name] ([src.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>)")
-
-					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
-					apply_effects(5,5,0,0,5,0,0,armorblock)
-					return 1
-				else
-					M << "\red Not enough charge! "
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-				return
-
-		if(istype(M.gloves , /obj/item/clothing/gloves/boxing/hologlove))
+		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
 
 			var/damage = rand(0, 9)
 			if(!damage)
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("\red <B>[M] has attempted to punch [src]!</B>")
+				visible_message("\red <B>[H] has attempted to punch [src]!</B>")
 				return 0
-			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
+			var/datum/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
 
-			if(HULK in M.mutations)			damage += 5
+			if(HULK in H.mutations)
+				damage += 5
 
 			playsound(loc, "punch", 25, 1, -1)
 
-			visible_message("\red <B>[M] has punched [src]!</B>")
+			visible_message("\red <B>[H] has punched [src]!</B>")
 
 			apply_damage(damage, HALLOSS, affecting, armor_block)
 			if(damage >= 9)
-				visible_message("\red <B>[M] has weakened [src]!</B>")
+				visible_message("\red <B>[H] has weakened [src]!</B>")
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
-	else
-		if(istype(M,/mob/living/carbon))
-//			log_debug("No gloves, [M] is truing to infect [src]")
-			M.spread_disease_to(src, "Contact")
 
+	if(istype(M,/mob/living/carbon))
+		M.spread_disease_to(src, "Contact")
 
 	switch(M.a_intent)
 		if("help")
-			if(health >= config.health_threshold_crit)
+
+			if(istype(H) && health < config.health_threshold_crit)
+
+				if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))
+					H << "\blue <B>Remove your mask!</B>"
+					return 0
+				if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
+					H << "\blue <B>Remove [src]'s mask!</B>"
+					return 0
+
+				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
+				O.source = M
+				O.target = src
+				O.s_loc = M.loc
+				O.t_loc = loc
+				O.place = "CPR"
+				requests += O
+				spawn(0)
+					O.process()
+			else
 				help_shake_act(M)
-				return 1
-//			if(M.health < -75)	return 0
-
-			if((M.head && (M.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
-				M << "\blue <B>Remove your mask!</B>"
-				return 0
-			if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-				M << "\blue <B>Remove his mask!</B>"
-				return 0
-
-			var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
-			O.source = M
-			O.target = src
-			O.s_loc = M.loc
-			O.t_loc = loc
-			O.place = "CPR"
-			requests += O
-			spawn(0)
-				O.process()
 			return 1
 
 		if("grab")
@@ -111,41 +90,42 @@
 
 		if("hurt")
 
+			if(!istype(H))
+				attack_generic(H,rand(1,3),"punched")
+				return
+
 			// See if they can attack, and which attacks to use.
-			var/datum/unarmed_attack/attack = M.species.unarmed
-			if(!attack.is_usable(M))
-				attack = M.species.secondary_unarmed
-			if(!attack.is_usable(M))
+			var/datum/unarmed_attack/attack = H.species.unarmed
+			if(!attack.is_usable(H))
+				attack = H.species.secondary_unarmed
+			if(!attack.is_usable(H))
 				return 0
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [M.name] ([M.ckey])</font>")
-			msg_admin_attack("[key_name(M)] [pick(attack.attack_verb)]ed [key_name(src)]")
+			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [H.name] ([M.ckey])</font>")
+			msg_admin_attack("[key_name(H)] [pick(attack.attack_verb)]ed [key_name(src)]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
 			if(!damage)
 				playsound(loc, attack.miss_sound, 25, 1, -1)
-				visible_message("\red <B>[M] tried to [pick(attack.attack_verb)] [src]!</B>")
+				visible_message("\red <B>[H] tried to [pick(attack.attack_verb)] [src]!</B>")
 				return 0
 
-
-			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
+			var/datum/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
 
-			if(HULK in M.mutations)			damage += 5
-
+			if(HULK in H.mutations)			damage += 5
 
 			playsound(loc, attack.attack_sound, 25, 1, -1)
 
-			visible_message("\red <B>[M] [pick(attack.attack_verb)]ed [src]!</B>")
+			visible_message("\red <B>[H] [pick(attack.attack_verb)]ed [src]!</B>")
 			//Rearranged, so claws don't increase weaken chance.
 			if(damage >= 5 && prob(50))
-				visible_message("\red <B>[M] has weakened [src]!</B>")
+				visible_message("\red <B>[H] has weakened [src]!</B>")
 				apply_effect(3, WEAKEN, armor_block)
 
 			damage += attack.damage
 			apply_damage(damage, BRUTE, affecting, armor_block, sharp=attack.sharp, edge=attack.edge)
-
 
 		if("disarm")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
