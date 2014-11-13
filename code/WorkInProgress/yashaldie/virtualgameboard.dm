@@ -5,7 +5,7 @@
 	icon_state = "virtual"
 	density = 1
 	anchored = 1.0
-
+	throwpass = 1	//You can throw objects over this, despite it's density.")
 	idle_power_usage	= 20
 	active_power_usage	= 50
 

@@ -91,6 +91,12 @@
 			if("labgreen")
 				src.icon_state = "labgreen_open"
 				usr << "You unbutton the labcoat."
+			if("aeneasrinil")
+				src.icon_state = "aeneasrinil_open"
+				usr << "You unbutton the labcoat."
+			if("aeneasrinil_open")
+				src.icon_state = "aeneasrinil"
+				usr << "You button up the labcoat."
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 				return
@@ -158,3 +164,10 @@
 	name = "Scientist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
 	icon_state = "labcoat_tox_open"
+
+/obj/item/clothing/suit/storage/labcoat/robotics //Robotics Labcoat - Aeneas Rinil [APPR]
+	name = "Robotics labcoat"
+	desc = "A labcoat with a few markings denoting it as the labcoat of roboticist."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "aeneasrinil_open"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS

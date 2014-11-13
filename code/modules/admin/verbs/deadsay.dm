@@ -23,7 +23,7 @@
 	if (src.holder.rights & R_MOD)
 		stafftype = "MOD"
 
-	if (src.holder.rights & R_MENTOR)
+	if (src.holder.rights & R_MENTOR && !(R_MOD & src.holder.rights))
 		stafftype = "MENTOR"
 
 	if (src.holder.rights & R_ADMIN)

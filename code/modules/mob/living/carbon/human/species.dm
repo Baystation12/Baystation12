@@ -253,6 +253,7 @@
 	language = "Aviachirp"
 	tail = "aviskreetail"
 	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	primitive = /mob/living/carbon/monkey/aviskree
 	wingicon = 1
 
@@ -302,7 +303,7 @@
 	heat_level_2 = 380 //Default 400
 	heat_level_3 = 800 //Default 1000
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | IS_STRONG
 
 	flesh_color = "#BCBCBC"
 

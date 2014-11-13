@@ -54,7 +54,10 @@
 		new /obj/item/weapon/cartridge/hop(src)
 		new /obj/item/device/radio/headset/heads/hop(src)
 		new /obj/item/weapon/storage/box/ids(src)
-		new /obj/item/weapon/storage/box/ids( src )
+		new /obj/item/weapon/storage/box/newids(src)
+		new /obj/item/weapon/storage/box/newids2(src)
+		new /obj/item/weapon/storage/box/newids3(src)
+		new /obj/item/weapon/storage/box/ids(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/device/flash(src)
 		return

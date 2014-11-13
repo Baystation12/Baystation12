@@ -362,7 +362,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				following = null
 			else
 				A << "This mob is not located in the game world."
-/*
+
 /mob/dead/observer/verb/boo()
 	set category = "Ghost"
 	set name = "Boo!"
@@ -376,7 +376,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	//Maybe in the future we can add more <i>spooky</i> code here!
 	return
-*/
+
 
 /mob/dead/observer/memory()
 	set hidden = 1

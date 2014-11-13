@@ -155,6 +155,9 @@
 	if(holder)
 		add_admin_verbs()
 		admin_memo_show()
+		if(!check_rights(R_DEV,0))
+			if(check_rights(R_DEBUG))
+				hide_debug_verbs()
 
 	log_client_to_db()
 
