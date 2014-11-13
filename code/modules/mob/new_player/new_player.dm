@@ -302,8 +302,8 @@
 
 		job_master.AssignRole(src, rank, 1)
 
-		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
-		job_master.EquipRank(character, rank, 1)					//equips the human
+		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+		character = job_master.EquipRank(character, rank, 1)					//equips the human
 		UpdateFactionList(character)
 		EquipCustomItems(character)
 
@@ -339,8 +339,6 @@
 
 			AnnounceArrival(character, rank, join_message)
 
-		else
-			character.Robotize()
 		del(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
