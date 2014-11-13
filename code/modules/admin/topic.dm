@@ -1516,7 +1516,10 @@
 		
 		if (istype(bundle.contents[page], /obj/item/weapon/paper))
 			var/obj/item/weapon/paper/P = bundle.contents[page]
-			P.show_content(src.owner, 1)
+			//P.show_content(src.owner, 1)
+			//TODO#paperwork
+			//vat/dat = P.render_content()
+			//src.owner << browse(dat, "window=???")
 		else if (istype(bundle.contents[page], /obj/item/weapon/photo))
 			var/obj/item/weapon/photo/H = bundle.contents[page]
 			H.show(src.owner)

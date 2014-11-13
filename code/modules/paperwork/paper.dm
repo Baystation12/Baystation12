@@ -1,9 +1,10 @@
+
 /*
  * Paper
  * also scraps of paper
  */
 
-/obj/item/weapon/paper
+/obj/item/weapon/paperwork/paper
 	name = "paper"
 	gender = PLURAL
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -35,7 +36,7 @@
 
 //lipstick wiping is in code/game/objects/items/weapons/cosmetics.dm!
 
-/obj/item/weapon/paper/New()
+/obj/item/weapon/paperwork/paper/New()
 	..()
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
@@ -51,7 +52,7 @@
 		updateinfolinks()
 		return
 
-/obj/item/weapon/paper/update_icon()
+/obj/item/weapon/paperwork/paper/update_icon()
 	if(icon_state == "paper_talisman")
 		return
 	if(info)
@@ -66,27 +67,27 @@
 		user << "<span class='notice'>It is too far away.</span>"
 	return
 
-/obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)) && !forceshow)
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
-		onclose(user, "[name]")
-	else
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
-		onclose(user, "[name]")
+/obj/item/weapon/paperwork/paper/render_content(mob/user=null)
+	if(user && !(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon))) //there's got to be a better way to handle literacy
+		return "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>"
+	return "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>"
+
+/obj/item/weapon/paperwork/paper/show_content(var/mob/user)
+	user << browse(render_content(user), "window=[name]")
+	onclose(user, "[name]")
+
+/obj/item/weapon/paperwork/paper/create_bundle(obj/item/weapon/paperwork/other)
+	//TODO#paperwork
 
 /obj/item/weapon/paper/verb/rename()
 	set name = "Rename paper"
-	set category = "Object"
-	set src in usr
 
 	if((CLUMSY in usr.mutations) && prob(50))
 		usr << "<span class='warning'>You cut yourself on the paper.</span>"
+		//TODO#paperwork drip
 		return
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
-	if((loc == usr && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : "paper")]"
-	add_fingerprint(usr)
-	return
+	
+	..()
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
 	user.examinate(src)
@@ -186,7 +187,6 @@
 	overlays.Cut()
 	updateinfolinks()
 	update_icon()
-
 
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
@@ -355,10 +355,6 @@
 
 /obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	..()
-	var/clown = 0
-	if(user.mind && (user.mind.assigned_role == "Clown"))
-		clown = 1
-
 	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
 		if (istype(P, /obj/item/weapon/paper/carbon))
 			var/obj/item/weapon/paper/carbon/C = P
@@ -431,11 +427,6 @@
 		offset_y += y
 		stampoverlay.pixel_x = x
 		stampoverlay.pixel_y = y
-
-		if(istype(P, /obj/item/weapon/stamp/clown))
-			if(!clown)
-				user << "<span class='notice'>You are totally unable to use the stamp. HONK!</span>"
-				return
 
 		if(!ico)
 			ico = new
