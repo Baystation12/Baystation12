@@ -24,7 +24,8 @@
 		"/obj/item/stack/cable_coil",
 		"/obj/item/device/t_scanner",
 		"/obj/item/device/analyzer",
-		"/obj/item/taperoll/engineering")
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/robotanalyzer")
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
