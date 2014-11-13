@@ -109,7 +109,7 @@
 								if (get_organ(M.zone_sel.selecting)==affected && M.a_intent == "grab" && !M.lying && !affected.destspawn) // If they haven't stopped.
 									visible_message("\red [src] rips his own [affected.display_name] off.", "\red You rip your own [affected.display_name] off. Why the hell did you think that was a good idea?")
 									affected.droplimb(1, 0, 1, 0)
-									handle_organs()
+									handle_organs(1)
 								else
 									visible_message("\blue [src] decides ripping his [affected.display_name] off may not be the best idea.", "\blue You stop ripping off your [affected.display_name]. Thank god.")
 						else
@@ -121,7 +121,7 @@
 						if (istype(organ, /obj/item/robot_parts))
 							var/obj/item/robot_parts/robolimb = organ
 							var/datum/organ/external/handy = hand ? organs_by_name["l_hand"] : organs_by_name["r_hand"]
-							handle_organs()
+							handle_organs(1)
 							if (handy && !handy.destspawn) // Incase they are ripping off that arm.
 								put_in_active_hand(robolimb) // Took me too long to find that proc. Also, Defining robolimb instead of just using organ is DEFINANTLY required. For raisons
 				else if (affected.body_part != UPPER_TORSO)
