@@ -135,7 +135,12 @@
 			if(istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.species) // Do they have a grab in their other hand?
 				var/datum/organ/external/affected = get_organ(M.zone_sel.selecting)
 				if (affected.body_part != UPPER_TORSO && !affected.destspawn) // Can't grab the chest. Pervert.
-					visible_message("<span class='danger'>[M] starts pulling on [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts ripping your [affected.display_name] off!</span>") // Begin tugging.
+					var/TugText = "tugging at"
+					var/TuggedText = "tugged at"
+					if(M.species.flags & IS_STRONG)
+						TugText = "ripping off"
+						TuggedText = "ripped off"
+					visible_message("<span class='danger'>[M] starts [TugText] [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts [TugText] your [affected.display_name]!</span>") // Begin tugging.
 					var/tugTime = 300
 					if(affected.name == "head" || affected.name == "groin")
 						tugTime = 1200 // Important limbs'll take a WHILE.
@@ -144,9 +149,10 @@
 					if(affected.status & ORGAN_ROBOT)
 						tugTime = tugTime/2 // Easier to rip off. Still likely messy.
 
-					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began ripping off [src.name] ([src.ckey])'s [affected.name]</font>")
+					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
 					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had his [affected.name] tugged at by [M.name] ([M.ckey])</font>")
-					msg_admin_attack("[key_name(M)] began ripping off [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
+					if (M.species.flags & IS_STRONG || affected.status & ORGAN_ROBOT)
+						msg_admin_attack("[key_name(M)] began [TugText] [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
 
 					spawn(tugTime)
 						if (((!(M.species.flags & IS_STRONG)&&(affected.status & ORGAN_ROBOT)) || M.species.flags & IS_STRONG) && istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.a_intent == "grab" && M.Adjacent(src) && !M.lying && !affected.destspawn && get_organ(M.zone_sel.selecting)==affected) // Are we still ripping?
@@ -156,10 +162,11 @@
 							msg_admin_attack("[key_name(M)] ripped off [key_name(src)]'s [affected.name]")
 							visible_message("<span class='danger'>[M] ripped off [src]'s [affected.display_name]!</span>", "<span class='danger'>[M] ripped off your [affected.display_name]!</span>")
 						else
-							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stopped ripping off [src.name] ([src.ckey])'s [affected.name]</font>")
-							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Stopped having his [affected.name] ripped off by [M.name] ([M.ckey])</font>")
-							msg_admin_attack("[key_name(M)] stopped ripping off [key_name(src)]'s [affected.name]")
-							visible_message("\blue [M] stopped ripping off [src]'s [affected.display_name].", "\blue [M] stopped ripping off your [affected.display_name].")
+							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stopped [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
+							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Stopped having his [affected.name] [TuggedText] by [M.name] ([M.ckey])</font>")
+							if (M.species.flags & IS_STRONG)
+								msg_admin_attack("[key_name(M)] stopped [TugText] [key_name(src)]'s [affected.name]")
+							visible_message("\blue [M] stopped [TugText] [src]'s [affected.display_name].", "\blue [M] stopped [TugText] your [affected.display_name].")
 					return
 
 
