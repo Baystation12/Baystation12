@@ -47,6 +47,7 @@
 	construction_time = 100
 	construction_cost = list("metal"=6000)
 	part = list("l_hand")
+	w_class = 1.0
 
 /obj/item/robot_parts/r_hand
 	name = "robot right hand"
@@ -54,6 +55,7 @@
 	construction_time = 100
 	construction_cost = list("metal"=6000)
 	part = list("r_hand")
+	w_class = 1.0
 
 /obj/item/robot_parts/l_foot
 	name = "robot left foot"
@@ -61,6 +63,7 @@
 	construction_time = 100
 	construction_cost = list("metal"=7500)
 	part = list("l_foot")
+	w_class = 1.0
 
 /obj/item/robot_parts/r_foot
 	name = "robot right foot"
@@ -68,6 +71,7 @@
 	construction_time = 100
 	construction_cost = list("metal"=7500)
 	part = list("r_foot")
+	w_class = 1.0
 
 /obj/item/robot_parts/chest
 	name = "robot torso"

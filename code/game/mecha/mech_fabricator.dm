@@ -40,6 +40,7 @@
 	"Robot"=list(
 						/obj/item/robot_parts/robot_suit,
 						/obj/item/robot_parts/chest,
+						/obj/item/robot_parts/groin,
 						/obj/item/robot_parts/head,
 						/obj/item/robot_parts/l_arm,
 						/obj/item/robot_parts/l_hand,
