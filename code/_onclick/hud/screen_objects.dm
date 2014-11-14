@@ -267,8 +267,15 @@
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
-						if(!istype(C.wear_mask, /obj/item/clothing/mask))
-							C << "<span class='notice'>You are not wearing a mask.</span>"
+
+						var/no_mask
+						if(!(C.wear_mask && C.wear_mask.flags & AIRTIGHT))
+							var/mob/living/carbon/human/H = C
+							if(!(H.head && H.head.flags & AIRTIGHT))
+								C << "<span class='notice'>You are not wearing a mask.</span>"
+								no_mask = 1
+
+						if(no_mask)
 							return 1
 						else
 							var/list/nicename = null

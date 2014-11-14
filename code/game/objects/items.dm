@@ -277,6 +277,9 @@
 			if(slot_wear_mask)
 				if(H.wear_mask)
 					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSMOUTH))
+					H << "\red \The [H.head] is in the way."
+					return 0
 				if( !(slot_flags & SLOT_MASK) )
 					return 0
 				return 1
@@ -316,6 +319,9 @@
 				return 1
 			if(slot_glasses)
 				if(H.glasses)
+					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSEYES))
+					H << "\red \The [H.head] is in the way."
 					return 0
 				if( !(slot_flags & SLOT_EYES) )
 					return 0

@@ -69,6 +69,16 @@
 	var/max_equip = 3
 	var/datum/events/events
 
+/obj/mecha/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!cell)
+		return 0
+
+	return cell.drain_power(drain_check)
+
 /obj/mecha/New()
 	..()
 	events = new

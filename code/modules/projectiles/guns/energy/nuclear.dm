@@ -35,8 +35,18 @@
 		else
 			user.update_inv_r_hand()
 
-
-
+/obj/item/weapon/gun/energy/gun/mounted/load_into_chamber()
+	if(in_chamber)
+		return 1
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.back)
+		var/obj/item/weapon/storage/rig/suit = H.back
+		if(istype(suit) && suit.cell && suit.cell.charge >= 250)
+			suit.cell.use(250)
+			var/prog_path = text2path(projectile_type)
+			in_chamber = new prog_path(src)
+			return 1
+	return 0
 
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "Advanced Energy Gun"

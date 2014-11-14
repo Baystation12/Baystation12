@@ -305,16 +305,19 @@ var/list/ai_verbs_default = list(
 			//usr <<"You can only change your display once!"
 			//return
 
-
-// displays the malf_ai information if the AI is the malf
-/mob/living/silicon/ai/show_malf_ai()
+/mob/living/silicon/ai/proc/is_malf()
 	if(ticker.mode.name == "AI malfunction")
 		var/datum/game_mode/malfunction/malf = ticker.mode
 		for (var/datum/mind/malfai in malf.malf_ai)
-			if (mind == malfai) // are we the evil one?
-				if (malf.apcs >= 3)
-					stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
+			if (mind == malfai)
+				return malf
+	return 0
 
+// displays the malf_ai information if the AI is the malf
+/mob/living/silicon/ai/show_malf_ai()
+	var/datum/game_mode/malfunction/malf = is_malf()
+	if(malf && malf.apcs >= 3)
+		stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
 
 /mob/living/silicon/ai/proc/ai_alerts()
 	set category = "AI Commands"
@@ -769,7 +772,12 @@ var/list/ai_verbs_default = list(
 
 
 /mob/living/silicon/ai/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(istype(W, /obj/item/device/aicard))
+
+		var/obj/item/device/aicard/card = W
+		card.grab_ai(src, user)
+
+	else if(istype(W, /obj/item/weapon/wrench))
 		if(anchored)
 			user.visible_message("\blue \The [user] starts to unbolt \the [src] from the plating...")
 			if(!do_after(user,40))

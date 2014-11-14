@@ -33,7 +33,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 
-
 /mob/living/carbon/human/Life()
 
 
@@ -423,9 +422,7 @@
 
 	proc/get_breath_from_internal(volume_needed)
 		if(internal)
-			if (!contents.Find(internal))
-				internal = null
-			if (!wear_mask || !(wear_mask.flags & MASKINTERNALS) )
+			if (!contents.Find(internal) || !((wear_mask && (wear_mask.flags & AIRTIGHT)) || (head && (head.flags & AIRTIGHT))))
 				internal = null
 			if(internal)
 				return internal.remove_air_volume(volume_needed)
@@ -1180,6 +1177,13 @@
 
 
 			//Eyes
+			//Check rig first because it's two-check and other checks will override it.
+			if(istype(back,/obj/item/weapon/storage/rig))
+				var/obj/item/weapon/storage/rig/O = back
+				if(O.offline && O.offline_vision_restriction == 2 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+					blinded = 1
+
+			// Check everything else.
 			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
 				eye_blind =  0
 				blinded =    0
@@ -1356,10 +1360,13 @@
 					seer = 0
 
 			var/tmp/glasses_processed = 0
-			if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
-				var/obj/item/clothing/mask/gas/voice/space_ninja/O = wear_mask
-				glasses_processed = 1
-				process_glasses(O.ninja_vision.glasses)
+
+			var/obj/item/weapon/storage/rig/rig = back
+			if(istype(rig) && rig.visor)
+				if(rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
+					glasses_processed = 1
+					process_glasses(rig.visor.vision.glasses)
+
 			if(glasses)
 				glasses_processed = 1
 				process_glasses(glasses)
@@ -1470,19 +1477,27 @@
 
 			var/masked = 0
 
-			if( istype(head, /obj/item/clothing/head/welding) || istype(head, /obj/item/clothing/head/helmet/space/unathi))
+			if(istype(head, /obj/item/clothing/head/welding) || istype(head, /obj/item/clothing/head/helmet/space/unathi))
 				var/obj/item/clothing/head/welding/O = head
 				if(!O.up && tinted_weldhelh)
-					client.screen += global_hud.darkMask
+					client.screen |= global_hud.darkMask
 					masked = 1
 
-			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding) )
+			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding))
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
-					client.screen += global_hud.darkMask
+					client.screen |= global_hud.darkMask
+					masked = 1
+
+			if(!masked && istype(back, /obj/item/weapon/storage/rig))
+				var/obj/item/weapon/storage/rig/O = back
+				// Ugh, why is this done on a case by case basis? Why is there no flag for causing weldervision?
+				if(O.offline && O.offline_vision_restriction == 1 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+					client.screen |= global_hud.darkMask
 
 			if(machine)
-				if(!machine.check_eye(src))		reset_view(null)
+				if(!machine.check_eye(src))
+					reset_view(null)
 			else
 				var/isRemoteObserve = 0
 				if((mRemote in mutations) && remoteview_target)

@@ -62,6 +62,13 @@
 	for(var/mob/M in viewers(src))
 		M.show_message( message, 1, blind_message, 2)
 
+// Returns an amount of power drawn from the object (-1 if it's not viable).
+// If drain_check is set it will not actually drain power, just return a value.
+// If surge is set, it will destroy/damage the recipient and not return any power.
+// Not sure where to define this, so it can sit here for the rest of time.
+/atom/proc/drain_power(var/drain_check,var/surge)
+	return -1
+
 // Show a message to all mobs in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
@@ -1069,7 +1076,7 @@ mob/proc/yank_out_object()
 		var/datum/organ/external/affected
 
 		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
-			for(var/obj/item/weapon/O in organ.implants)
+			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
 

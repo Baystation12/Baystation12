@@ -77,6 +77,18 @@ obj/item/weapon/gun/energy/laser/retro
 	isHandgun()
 		return 0
 
+/obj/item/weapon/gun/energy/lasercannon/mounted/load_into_chamber()
+	if(in_chamber)
+		return 1
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.back)
+		var/obj/item/weapon/storage/rig/suit = H.back
+		if(istype(suit) && suit.cell && suit.cell.charge >= 250)
+			suit.cell.use(250)
+			in_chamber = new /obj/item/projectile/beam/heavylaser(src)
+			return 1
+	return 0
+
 /obj/item/weapon/gun/energy/lasercannon/cyborg/load_into_chamber()
 	if(in_chamber)
 		return 1
@@ -84,7 +96,7 @@ obj/item/weapon/gun/energy/laser/retro
 		var/mob/living/silicon/robot/R = src.loc
 		if(R && R.cell)
 			R.cell.use(250)
-			in_chamber = new/obj/item/projectile/beam(src)
+			in_chamber = new/obj/item/projectile/beam/heavylaser(src)
 			return 1
 	return 0
 

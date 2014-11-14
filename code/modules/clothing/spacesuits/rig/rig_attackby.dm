@@ -1,0 +1,100 @@
+/obj/item/weapon/storage/rig/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(!istype(user,/mob/living)) return 0
+
+	// Pass repair items on to the chestpiece.
+	if(chest && (istype(W,/obj/item/stack/sheet/mineral/plastic) || istype(W,/obj/item/stack/sheet/metal) || istype(W, /obj/item/weapon/weldingtool)))
+		return chest.attackby(W,user)
+
+	// Check if this is a hardsuit upgrade or a modification.
+	if(istype(W,/obj/item/rig_module))
+
+		if(istype(src.loc,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src.loc
+			if(H.back == src)
+				user << "You can't install a hardsuit module while the suit is being worn."
+				return 1
+
+		if(!installed_modules) installed_modules = list()
+		if(installed_modules.len)
+			for(var/obj/item/rig_module/installed_mod in installed_modules)
+				if(!installed_mod.redundant && istype(installed_mod,W))
+					user << "The hardsuit already has a module of that class installed."
+					return 1
+
+		var/obj/item/rig_module/mod = W
+		user << "You carefully install \the [mod] into \the [src]."
+		user.drop_from_inventory(mod)
+		installed_modules |= mod
+		mod.loc = null
+		mod.installed(src)
+		update_icon()
+		return 1
+
+	else if(!cell && istype(W,/obj/item/weapon/cell))
+
+		user << "You jack \the [W] into \the [src]'s battery mount."
+		user.drop_from_inventory(W)
+		W.loc = null
+		src.cell = W
+		return
+
+	else if(istype(W,/obj/item/weapon/screwdriver))
+
+		var/list/current_mounts = list()
+		if(cell) current_mounts   += "cell"
+		if(installed_modules && installed_modules.len) current_mounts += "system module"
+
+		var/to_remove = input("Which would you like to modify?") as null|anything in current_mounts
+		if(!to_remove)
+			return
+
+		if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell")
+			var/mob/living/carbon/human/H = src.loc
+			if(H.back == src)
+				user << "You can't remove an installed device while the hardsuit is being worn."
+				return
+
+		switch(to_remove)
+
+			if("cell")
+
+				if(cell)
+					user << "You detatch \the [cell] from \the [src]'s battery mount."
+					for(var/obj/item/rig_module/module in installed_modules)
+						module.deactivate()
+					cell.loc = user.put_in_hands(cell)
+					cell = null
+				else
+					user << "There is nothing loaded in that mount."
+
+			if("system module")
+
+				var/list/possible_removals = list()
+				for(var/obj/item/rig_module/module in installed_modules)
+					if(module.permanent)
+						continue
+					possible_removals[module.name] = module
+
+				if(!possible_removals.len)
+					user << "There are no installed modules to remove."
+					return
+
+				var/removal_choice = input("Which module would you like to remove?") as null|anything in possible_removals
+				if(!removal_choice)
+					return
+
+				var/obj/item/rig_module/removed = possible_removals[removal_choice]
+				user << "You detatch \the [removed] from \the [src]."
+				removed.loc = get_turf(src)
+				removed.removed()
+				installed_modules -= removed
+				update_icon()
+
+		return
+
+	else
+		for(var/obj/item/rig_module/module in installed_modules)
+			if(module.accepts_item(W,user)) //Item is handled in this proc
+				return
+	..()

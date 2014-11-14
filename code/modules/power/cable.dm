@@ -36,6 +36,27 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
+/obj/structure/cable/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	var/datum/powernet/PN = get_powernet()
+	if(!PN) return 0
+
+	var/drained_power = round(rand(200,400)/2)
+	var/drained_this_tick = PN.draw_power(drained_power)
+
+	if(drained_this_tick < drained_power)
+		for(var/obj/machinery/power/terminal/T in PN.nodes)
+			if(istype(T.master, /obj/machinery/power/apc))
+				var/obj/machinery/power/apc/AP = T.master
+				if(AP.emagged)
+					continue
+				drained_power += AP.drain_power() //Indirect draw won't emag the APC, should this be amended?
+
+	return drained_power
+
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
 

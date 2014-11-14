@@ -554,13 +554,13 @@
 			user.drop_item()
 			del(O)
 
-/obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/suit/space/void/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/suit/fluff))
 
 		var/obj/item/device/kit/suit/fluff/kit = O
-		name = "[kit.new_name] hardsuit"
+		name = "[kit.new_name] voidsuit"
 		desc = kit.new_suit_desc
 		icon_state = kit.suit_icon
 		item_state = kit.suit_icon
