@@ -172,9 +172,6 @@
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/chem_dispenser/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/chem_dispenser/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
@@ -460,9 +457,6 @@
 /obj/machinery/chem_master/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/chem_master/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/chem_master/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
@@ -684,9 +678,6 @@
 	return
 
 /obj/machinery/computer/pandemic/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/pandemic/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/computer/pandemic/attack_hand(mob/user as mob)
@@ -921,9 +912,6 @@
 	holdingitems += O
 	src.updateUsrDialog()
 	return 0
-
-/obj/machinery/reagentgrinder/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/reagentgrinder/attack_ai(mob/user as mob)
 	return 0

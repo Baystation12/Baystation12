@@ -1,5 +1,6 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
+
 	var/climbable
 	var/breakable
 	var/parts
@@ -14,22 +15,12 @@
 	if(breakable)
 		if(HULK in user.mutations)
 			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			visible_message("<span class='danger'>[user] smashes the [src] apart!</span>")
-			destroy()
+			attack_generic(user,1,"smashes")
 		else if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
 			if(H.species.can_shred(user))
-				visible_message("<span class='danger'>[H] slices [src] apart!</span>")
-				destroy()
-
-/obj/structure/attack_animal(mob/living/user)
-	if(breakable)
-		if(user.wall_smash)
-			visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-			destroy()
-
-/obj/structure/attack_paw(mob/user)
-	if(breakable) attack_hand(user)
+				attack_generic(user,1,"slices")
+	return
 
 /obj/structure/blob_act()
 	if(prob(50))
@@ -175,4 +166,11 @@
 	if (issilicon(user))
 		user << "<span class='notice'>You need hands for this.</span>"
 		return 0
+	return 1
+
+/obj/structure/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
+	if(!breakable || !damage || !wallbreaker)
+		return 0
+	visible_message("<span class='danger'>[user] [attack_verb] the [src] apart!</span>")
+	spawn(1) destroy()
 	return 1

@@ -192,10 +192,6 @@ turf/simulated/floor/proc/update_icon()
 		else
 			return 0
 
-
-/turf/simulated/floor/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /turf/simulated/floor/attack_hand(mob/user as mob)
 	if (is_light_floor())
 		var/obj/item/stack/tile/light/T = floor_tile

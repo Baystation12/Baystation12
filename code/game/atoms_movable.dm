@@ -193,11 +193,6 @@
 		return src.master.attackby(a, b)
 	return
 
-/atom/movable/overlay/attack_paw(a, b, c)
-	if (src.master)
-		return src.master.attack_paw(a, b, c)
-	return
-
 /atom/movable/overlay/attack_hand(a, b, c)
 	if (src.master)
 		return src.master.attack_hand(a, b, c)

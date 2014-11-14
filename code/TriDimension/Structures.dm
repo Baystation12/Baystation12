@@ -55,9 +55,6 @@
 				del target
 		return ..()
 
-	attack_paw(var/mob/M)
-		return attack_hand(M)
-
 	attackby(obj/item/C as obj, mob/user as mob)
 		(..)
 

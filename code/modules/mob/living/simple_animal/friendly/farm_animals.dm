@@ -18,7 +18,7 @@
 	response_disarm = "gently pushes aside the"
 	response_harm   = "kicks the"
 	faction = "goat"
-	attacktext = "kicks"
+	attacktext = "kicked"
 	health = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
@@ -102,7 +102,7 @@
 	response_help  = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm   = "kicks the"
-	attacktext = "kicks"
+	attacktext = "kicked"
 	health = 50
 	var/datum/reagents/udder = null
 
@@ -163,7 +163,7 @@
 	response_help  = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm   = "kicks the"
-	attacktext = "kicks"
+	attacktext = "kicked"
 	health = 1
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE
@@ -204,7 +204,7 @@ var/global/chicken_count = 0
 	response_help  = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm   = "kicks the"
-	attacktext = "kicks"
+	attacktext = "kicked"
 	health = 10
 	var/eggsleft = 0
 	var/body_color

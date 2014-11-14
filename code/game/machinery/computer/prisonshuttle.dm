@@ -21,18 +21,8 @@ var/prison_shuttle_timeleft = 0
 	var/allowedtocall = 0
 	var/prison_break = 0
 
-
-	attackby(I as obj, user as mob)
-		return src.attack_hand(user)
-
-
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
-
-
-	attack_paw(var/mob/user as mob)
-		return src.attack_hand(user)
-
 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/screwdriver))

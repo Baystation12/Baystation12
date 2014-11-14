@@ -86,25 +86,6 @@
 			step(AM, t)
 		now_pushing = null
 
-
-/mob/living/simple_animal/construct/attack_animal(mob/living/M as mob)
-	if(istype(M, /mob/living/simple_animal/construct/builder))
-		health += 5
-		M.emote("mends some of \the <EM>[src]'s</EM> wounds.")
-	else
-		if(M.melee_damage_upper <= 0)
-			M.emote("[M.friendly] \the <EM>[src]</EM>")
-		else
-			if(M.attack_sound)
-				playsound(loc, M.attack_sound, 50, 1, 1)
-			for(var/mob/O in viewers(src, null))
-				O.show_message("<span class='attack'>\The <EM>[M]</EM> [M.attacktext] \the <EM>[src]</EM>!</span>", 1)
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-
-			var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-			adjustBruteLoss(damage)
-
 /mob/living/simple_animal/construct/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(O.force)
 		var/damage = O.force
@@ -139,7 +120,7 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 30
 	melee_damage_upper = 30
-	attacktext = "smashes their armoured gauntlet into"
+	attacktext = "smashed their armoured gauntlet into"
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -214,7 +195,7 @@
 	health = 75
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	attacktext = "slashes"
+	attacktext = "slashed"
 	speed = -1
 	see_in_dark = 7
 	attack_sound = 'sound/weapons/bladeslice.ogg'
@@ -239,7 +220,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
-	attacktext = "rams"
+	attacktext = "rammed"
 	speed = 0
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch2.ogg'
@@ -266,7 +247,7 @@
 	harm_intent_damage = 0
 	melee_damage_lower = 50
 	melee_damage_upper = 50
-	attacktext = "brutally crushes"
+	attacktext = "brutally crushed"
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'

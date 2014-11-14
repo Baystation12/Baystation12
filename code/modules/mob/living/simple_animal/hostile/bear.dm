@@ -141,10 +141,10 @@
 		var/mob/living/L = target_mob
 		L.adjustBruteLoss(damage)
 		return L
-	else if(istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
-		M.attack_animal(src)
-		return M
+	//else if(istype(target_mob,/obj/mecha))
+		//var/obj/mecha/M = target_mob
+		//M.attack_animal(src)
+		//return M
 
 
 
