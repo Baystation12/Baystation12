@@ -109,7 +109,7 @@
 	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
 	return internal_tank
 
-/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/C=null)
+/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/infinite/C=null)
 	if(C)
 		C.forceMove(src)
 		cell = C

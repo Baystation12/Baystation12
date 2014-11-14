@@ -1720,6 +1720,7 @@ datum/design/bag_holding
 	reliability_base = 80
 	build_path = "/obj/item/weapon/storage/backpack/holding"
 
+/*
 datum/design/bluespace_crystal
 	name = "Artificial Bluespace Crystal"
 	desc = "A small blue crystal with mystical properties."
@@ -1729,6 +1730,7 @@ datum/design/bluespace_crystal
 	materials = list("$gold" = 1500, "$diamond" = 3000, "$phoron" = 1500)
 	reliability_base = 100
 	build_path = "/obj/item/bluespace_crystal/artificial"
+*/
 
 /////////////////////////////////////////
 /////////////////HUDs////////////////////
