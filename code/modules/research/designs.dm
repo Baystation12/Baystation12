@@ -1321,6 +1321,15 @@ datum/design/batteryrack
 ////////////Medical Tools////////////////
 /////////////////////////////////////////
 
+datum/design/robot_scanner
+	name = "Cyborg Analyzer"
+	desc = "A hand-held scanner able to diagnose robotic injuries. "
+	id = "robot_scanner"
+	req_tech = list("magnets" = 3, "biotech" = 2, "engineering" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 500, "$glass" = 200)
+	build_path = "/obj/item/device/robotanalyzer"
+
 datum/design/mass_spectrometer
 	name = "Mass-Spectrometer"
 	desc = "A device for analyzing chemicals in the blood."
