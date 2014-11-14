@@ -479,9 +479,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	healthcheck()
 	return
 
-/obj/effect/energy_net/attack_paw(var/mob/user)
-	return attack_hand(user)
-
 /obj/effect/energy_net/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	health -= W.force
 	healthcheck()
