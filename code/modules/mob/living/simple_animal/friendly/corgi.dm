@@ -308,10 +308,9 @@
 						dir = SOUTH
 
 					if(isturf(movement_target.loc) )
-						movement_target.attack_animal(src)
-					else if(ishuman(movement_target.loc) )
-						if(prob(20))
-							emote("stares at the [movement_target] that [movement_target.loc] has with a sad puppy-face")
+						UnarmedAttack(movement_target)
+					else if(ishuman(movement_target.loc) && prob(20))
+						custom_emote(1,"stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
 			emote(pick("dances around","chases its tail"))

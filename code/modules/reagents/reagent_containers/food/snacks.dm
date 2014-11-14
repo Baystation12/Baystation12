@@ -127,7 +127,7 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
 		return
-	
+
 	// Eating with forks
 	if(istype(W,/obj/item/weapon/kitchen/utensil))
 		var/obj/item/weapon/kitchen/utensil/U = W
@@ -161,11 +161,11 @@
 		//these are used to allow hiding edge items in food that is not on a table/tray
 		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
 		var/hide_item = !has_edge(W) || !can_slice_here
-		
+
 		if (hide_item)
 			if (W.w_class >= src.w_class || W.is_robot_module())
 				return
-				
+
 			user << "\red You slip [W] inside [src]."
 			user.u_equip(W)
 			if ((user.client && user.s_active != src))
@@ -174,19 +174,19 @@
 			add_fingerprint(user)
 			contents += W
 			return
-		
+
 		if (has_edge(W))
 			if (!can_slice_here)
 				user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
 				return
-			
+
 			var/slices_lost = 0
 			if (W.w_class > 3)
 				user.visible_message("\blue [user] crudely slices \the [src] with [W]!", "\blue You crudely slice \the [src] with your [W]!")
 				slices_lost = rand(1,min(1,round(slices_num/2)))
 			else
 				user.visible_message("\blue [user] slices \the [src]!", "\blue You slice \the [src]!")
-			
+
 			var/reagents_per_slice = reagents.total_volume/slices_num
 			for(var/i=1 to (slices_num-slices_lost))
 				var/obj/slice = new slice_path (src.loc)
@@ -203,38 +203,27 @@
 			something.loc = get_turf(src)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/attack_animal(var/mob/M)
-	if(isanimal(M))
-		if(iscorgi(M))
-			if(bitecount == 0 || prob(50))
-				M.emote("nibbles away at the [src]")
-			bitecount++
-			if(bitecount >= 5)
-				var/sattisfaction_text = pick("burps from enjoyment", "yaps for more", "woofs twice", "looks at the area where the [src] was")
-				if(sattisfaction_text)
-					M.emote("[sattisfaction_text]")
-				del(src)
-		if(ismouse(M))
-			var/mob/living/simple_animal/mouse/N = M
-			N << text("\blue You nibble away at [src].")
-			if(prob(50))
-				N.visible_message("[N] nibbles away at [src].", "")
-			//N.emote("nibbles away at the [src]")
-			N.health = min(N.health + 1, N.maxHealth)
-
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
 
+/obj/item/weapon/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
 
+	if(isanimal(user) || isalien(user))
 
+		if(bitecount == 0 || prob(50))
+			user.custom_emote(1,"nibbles away at the [src]")
+			bitecount++
 
+			if(reagents && user.reagents)
+				reagents.trans_to_ingest(user, bitesize)
 
+			spawn(5)
+				if(!src && !user.client)
+					user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
+					del(src)
 
-
-
-
-
+			On_Consume(user)
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks

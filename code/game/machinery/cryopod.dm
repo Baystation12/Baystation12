@@ -20,9 +20,6 @@ var/global/list/frozen_items = list()
 	circuit = "/obj/item/weapon/circuitboard/cryopodcontrol"
 	var/mode = null
 
-/obj/machinery/computer/cryopod/attack_paw()
-	src.attack_hand()
-
 /obj/machinery/computer/cryopod/attack_ai()
 	src.attack_hand()
 

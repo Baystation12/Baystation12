@@ -117,12 +117,6 @@ proc/get_radio_key_from_channel(var/channel)
 				hearturfs += M.locs[1]
 				for(var/obj/O in M.contents)
 					listening_obj |= O
-				if (isslime(I))
-					var/mob/living/carbon/slime/S = I
-					if (src in S.Friends)
-						S.speech_buffer = list()
-						S.speech_buffer.Add(src)
-						S.speech_buffer.Add(lowertext(html_decode(message)))
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]

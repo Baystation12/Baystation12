@@ -64,7 +64,6 @@
 	if(!user || !src)	return 0
 	if(!istype(user.loc,/turf)) return 0
 	if(!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return 0
 	var/title = "Sheet-Glass"
 	title += " ([src.amount] sheet\s left)"
@@ -145,7 +144,6 @@
 	if(!user || !src)	return 0
 	if(!istype(user.loc,/turf)) return 0
 	if(!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return 0
 	var/title = "Sheet Reinf. Glass"
 	title += " ([src.amount] sheet\s left)"

@@ -218,9 +218,6 @@
 
 	..()
 
-/obj/machinery/smartfridge/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	return 0
 

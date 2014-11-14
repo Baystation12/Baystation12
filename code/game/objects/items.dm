@@ -152,30 +152,6 @@
 	user.put_in_active_hand(src)
 	return
 
-
-/obj/item/attack_paw(mob/user as mob)
-
-	if (istype(src.loc, /obj/item/weapon/storage))
-		for(var/mob/M in range(1, src.loc))
-			if (M.s_active == src.loc)
-				if (M.client)
-					M.client.screen -= src
-	src.throwing = 0
-	if (src.loc == user)
-		//canremove==0 means that object may not be removed. You can still wear it. This only applies to clothing. /N
-		if(istype(src, /obj/item/clothing) && !src:canremove)
-			return
-		else
-			user.u_equip(src)
-	else
-		if(istype(src.loc, /mob/living))
-			return
-		src.pickup(user)
-		user.next_move = max(user.next_move+2,world.time + 2)
-
-	user.put_in_active_hand(src)
-	return
-
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu
 /obj/item/attackby(obj/item/weapon/W as obj, mob/user as mob)

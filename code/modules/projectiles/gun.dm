@@ -74,7 +74,6 @@
 				return
 
 	if (!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return
 	if(istype(user, /mob/living))
 		var/mob/living/M = user

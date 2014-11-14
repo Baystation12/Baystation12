@@ -165,9 +165,6 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
 	if (src.extended)
 		if (!ishuman(user))

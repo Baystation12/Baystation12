@@ -454,28 +454,6 @@
 		src.log_append_to_last("Armor saved.")
 	return
 
-/obj/mecha/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/mecha/attack_animal(mob/living/user as mob)
-	src.log_message("Attack by simple animal. Attacker - [user].",1)
-	if(user.melee_damage_upper == 0)
-		user.emote("[user.friendly] [src]")
-	else
-		if(!prob(src.deflect_chance))
-			var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
-			src.take_damage(damage)
-			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-			visible_message("\red <B>[user]</B> [user.attacktext] [src]!")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-		else
-			src.log_append_to_last("Armor saved.")
-			playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-			src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
-			visible_message("\blue The [user] rebounds off [src.name]'s armor!")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	return
-
 /obj/mecha/hitby(atom/movable/A as mob|obj) //wrapper
 	..()
 	src.log_message("Hit by [A].",1)
@@ -1734,6 +1712,27 @@
 	else
 		icon_state = initial(icon_state)
 	return icon_state
+
+/obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
+
+	if(!damage)
+		return 0
+
+	src.log_message("Attack by an animal. Attacker - [user].",1)
+
+	if(!prob(src.deflect_chance))
+		src.take_damage(damage)
+		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+		visible_message("\red <B>[user]</B> [attack_message] [src]!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	else
+		src.log_append_to_last("Armor saved.")
+		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+		src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
+		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	return 1
+
 
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////
