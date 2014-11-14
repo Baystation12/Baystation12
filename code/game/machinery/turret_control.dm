@@ -41,6 +41,18 @@
 	//don't have to check if control_area is path, since get_area_all_atoms can take path.
 	return
 
+/obj/machinery/turretid/proc/can_use(mob/user)
+	if (get_dist(src, user) > 0 && !issilicon(user))
+		user << "<span class='notice'>You are too far away.</span>"
+		user.unset_machine()
+		user << browse(null, "window=turretid")
+		return 0
+
+	if(ailock && issilicon(user))
+		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+		return 0
+	return 1
+
 /obj/machinery/turretid/attackby(obj/item/weapon/W, mob/user)
 	if(stat & BROKEN) return
 	if (istype(user, /mob/living/silicon))
@@ -73,17 +85,8 @@
 		else
 			user << "<span class='warning'>Access denied.</span>"
 
-/obj/machinery/turretid/attack_ai(mob/user as mob)
-	if(!ailock)
-		return attack_hand(user)
-	else
-		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
-
 /obj/machinery/turretid/attack_hand(mob/user as mob)
-	if (get_dist(src, user) > 0 && !issilicon(user))
-		user << "<span class='notice'>You are too far away.</span>"
-		user.unset_machine()
-		user << browse(null, "window=turretid")
+	if(!can_use(user))
 		return
 
 	user.set_machine(src)
@@ -106,7 +109,7 @@
 
 	//user << browse(t, "window=turretid")
 	//onclose(user, "turretid")
-	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])")
+	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])", 500, 200)
 	popup.set_content(t)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -115,14 +118,9 @@
 	if(..())
 		return 1
 
-	if(ailock)
-		usr << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+	if(!can_use(usr))
 		return 1
 
-	if (src.locked)
-		if (!istype(usr, /mob/living/silicon))
-			usr << "Control panel is locked!"
-			return 1
 	if (href_list["toggleOn"])
 		src.enabled = !src.enabled
 		src.updateTurrets()
@@ -131,7 +129,7 @@
 		src.updateTurrets()
 
 	if(!nowindow)
-		updateDialog()
+		attack_hand(usr)
 
 /obj/machinery/turretid/updateDialog()
 	if (stat & (BROKEN|MAINT))
