@@ -109,6 +109,3 @@
 	walk(src, null, null)
 	..()
 	return
-
-/obj/item/weapon/grenade/attack_paw(mob/user as mob)
-	return attack_hand(user)

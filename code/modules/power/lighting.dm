@@ -87,7 +87,7 @@
 /obj/machinery/light_construct/examine(mob/user)
 	if(!..(user, 2))
 		return
-	
+
 	switch(src.stage)
 		if(1)
 			user << "It's an empty frame."
@@ -307,6 +307,17 @@
 	if(on != on_gs)
 		on_gs = on
 
+/obj/machinery/light/attack_generic(var/mob/user, var/damage)
+	if(!damage)
+		return
+	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
+		user << "That object is useless to you."
+		return
+	if(!(status == LIGHT_OK||status == LIGHT_BURNED))
+		return
+	visible_message("<span class='danger'>[user] smashes the light!</span>")
+	broken()
+	return 1
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
@@ -452,19 +463,8 @@
 	src.flicker(1)
 	return
 
-/obj/machinery/light/attack_animal(mob/living/M)
-	if(M.melee_damage_upper == 0)	return
-	if(status == LIGHT_EMPTY||status == LIGHT_BROKEN)
-		M << "\red That object is useless to you."
-		return
-	else if (status == LIGHT_OK||status == LIGHT_BURNED)
-		for(var/mob/O in viewers(src))
-			O.show_message("\red [M.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
-		broken()
-	return
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
-
 /obj/machinery/light/attack_hand(mob/user)
 
 	add_fingerprint(user)

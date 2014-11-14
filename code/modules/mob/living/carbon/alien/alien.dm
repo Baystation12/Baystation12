@@ -5,12 +5,6 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alien"
 	pass_flags = PASSTABLE
-	melee_damage_lower = 1
-	melee_damage_upper = 3
-	attacktext = "bites"
-	attack_sound = null
-	friendly = "nuzzles"
-	wall_smash = 0
 	health = 100
 	maxHealth = 100
 

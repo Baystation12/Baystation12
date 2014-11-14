@@ -109,9 +109,6 @@
 /obj/machinery/portable_atmospherics/powered/pump/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/portable_atmospherics/powered/pump/attack_paw(var/mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/portable_atmospherics/powered/pump/attack_hand(var/mob/user as mob)
 
 	user.set_machine(src)

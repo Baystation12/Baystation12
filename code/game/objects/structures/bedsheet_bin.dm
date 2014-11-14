@@ -108,7 +108,7 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/examine(mob/user)
 	..(user)
-	
+
 	if(amount < 1)
 		user << "There are no bed sheets in the bin."
 		return
@@ -137,12 +137,6 @@ LINEN BINS
 		I.loc = src
 		hidden = I
 		user << "<span class='notice'>You hide [I] among the sheets.</span>"
-
-
-
-/obj/structure/bedsheetbin/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 
 /obj/structure/bedsheetbin/attack_hand(mob/user as mob)
 	if(amount >= 1)

@@ -11,7 +11,7 @@
 
 	var/canister_color = "yellow"
 	var/can_label = 1
-	start_pressure = 4.5 * ONE_ATMOSPHERE
+	start_pressure = 45 * ONE_ATMOSPHERE
 	pressure_resistance = 7 * ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
 	volume = 1000
@@ -19,41 +19,44 @@
 	var/release_log = ""
 	var/update_flag = 0
 
-/obj/machinery/portable_atmospherics/canister/
-	can_label = 0
-
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
 	name = "Canister: \[N2O\]"
 	icon_state = "redws"
 	canister_color = "redws"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/nitrogen
 	name = "Canister: \[N2\]"
 	icon_state = "red"
 	canister_color = "red"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/oxygen
 	name = "Canister: \[O2\]"
 	icon_state = "blue"
 	canister_color = "blue"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name = "Canister \[CO2\]"
 	icon_state = "black"
 	canister_color = "black"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/air
 	name = "Canister \[Air\]"
 	icon_state = "grey"
 	canister_color = "grey"
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/air/airlock
-	start_pressure = 0
+	start_pressure = 3 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/canister/empty/
 	start_pressure = 0
@@ -251,9 +254,6 @@ update_flag
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/portable_atmospherics/canister/attack_paw(var/mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/portable_atmospherics/canister/attack_hand(var/mob/user as mob)
 	return src.ui_interact(user)
 
@@ -356,12 +356,10 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("phoron", MolesForPressure())
-
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/oxygen/New()
-
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
@@ -369,11 +367,9 @@ update_flag
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/New()
-
 	..()
 
 	air_contents.adjust_gas("sleeping_agent", MolesForPressure())
-
 	src.update_icon()
 	return 1
 
@@ -395,13 +391,13 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("nitrogen", MolesForPressure())
-
 	src.update_icon()
 	return 1
 
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
 	..()
-	src.air_contents.adjust_gas("carbon_dioxide", )
+	src.air_contents.adjust_gas("carbon_dioxide", MolesForPressure())
+	src.update_icon()
 	return 1
 
 

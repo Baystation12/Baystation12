@@ -63,10 +63,6 @@
 			break
 	return foundgenerator
 
-
-/obj/machinery/computer/gravity_control_computer/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/computer/gravity_control_computer/attack_ai(mob/user as mob)
 	return attack_hand(user)
 

@@ -127,9 +127,6 @@
 	healthcheck()
 	return
 
-/obj/effect/alien/resin/attack_paw()
-	return attack_hand()
-
 /obj/effect/alien/resin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	var/aforce = W.force

@@ -41,9 +41,6 @@
 	else
 		user << "Error, no route to host."
 
-/obj/machinery/door_control/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/door_control/attackby(obj/item/weapon/W, mob/user as mob)
 	/* For later implementation
 	if (istype(W, /obj/item/weapon/screwdriver))
@@ -153,9 +150,6 @@
 		icon_state = "doorctrl0"
 
 /obj/machinery/driver_button/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/driver_button/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/driver_button/attackby(obj/item/weapon/W, mob/user as mob)

@@ -174,13 +174,6 @@
 
 	return
 
-/obj/structure/closet/attack_animal(mob/living/user as mob)
-	if(user.wall_smash)
-		visible_message("\red [user] destroys the [src]. ")
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
-
 // this should probably use dump_contents()
 /obj/structure/closet/blob_act()
 	if(prob(75))
@@ -267,10 +260,6 @@
 			spawn(30)
 				lastbang = 0
 
-
-/obj/structure/closet/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	src.toggle(user)
@@ -309,3 +298,11 @@
 		if(istype(A,/obj/))
 			var/obj/O = A
 			O.hear_talk(M, text)
+
+/obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
+	if(!damage || !wallbreaker)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	dump_contents()
+	spawn(1) del(src)
+	return 1

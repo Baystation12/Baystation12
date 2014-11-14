@@ -46,7 +46,7 @@
 		"nitrogen" = N2STANDARD *  MolesForPressure())
 
 /obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
-	return max(0, (air_contents.return_pressure() - target_pressure)) * air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
 
 /obj/machinery/portable_atmospherics/update_icon()
 	return null

@@ -23,7 +23,7 @@
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/air_properties_vary_with_direction = 0
-	var/maxhealth = 500
+	var/maxhealth = 300
 	var/health
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
@@ -127,13 +127,14 @@
 	return
 
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
+	..()
+	
 	//Tasers and the like should not damage doors.
 	if(Proj.damage_type == HALLOSS)
 		return
 
 	if(Proj.damage)
-		take_damage(round(Proj.damage * 4))
-	..()
+		take_damage(Proj.damage)
 
 /obj/machinery/door/hitby(AM as mob|obj)
 
@@ -151,11 +152,6 @@
 
 /obj/machinery/door/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
-
-
-/obj/machinery/door/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 
 /obj/machinery/door/attack_hand(mob/user as mob)
 	return src.attackby(user, user)
