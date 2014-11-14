@@ -2,6 +2,10 @@
 //Turret Control Panel//
 ////////////////////////
 
+/area
+	// Turrets use this list to see if individual power/lethal settings are allowed
+	var/list/turret_controls = list()
+
 /obj/machinery/turretid
 	name = "turret control panel"
 	desc = "Used to control a room's automated defenses."
@@ -25,6 +29,13 @@
 	lethal = 1
 	icon_state = "control_kill"
 
+/obj/machinery/turretid/Del()
+	if(control_area)
+		var/area/A = control_area
+		if(A && istype(A))
+			A.turret_controls -= src
+	..()
+
 /obj/machinery/turretid/initialize()
 	if(!control_area)
 		var/area/CA = get_area(src)
@@ -39,6 +50,11 @@
 				break
 	power_change() //Checks power and initial settings
 	//don't have to check if control_area is path, since get_area_all_atoms can take path.
+
+	if(control_area)
+		var/area/A = control_area
+		if(A && istype(A))
+			A.turret_controls += src
 	return
 
 /obj/machinery/turretid/proc/can_use(mob/user)
@@ -84,6 +100,9 @@
 					src.attack_hand(user)
 		else
 			user << "<span class='warning'>Access denied.</span>"
+
+/obj/machinery/turretid/attack_ai(mob/user as mob)
+	return attack_hand(user)
 
 /obj/machinery/turretid/attack_hand(mob/user as mob)
 	if(!can_use(user))
