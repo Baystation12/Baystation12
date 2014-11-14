@@ -799,8 +799,8 @@ These need expanding and/or reworking, but they're basic and they'll  do for now
 	base_state = "firelight"
 	fitting = "bulb"
 	brightness = 2
-	color = COLOR_RED
-	l_color = COLOR_RED
+	//color = COLOR_EMLIGHT
+	//l_color = COLOR_EMLIGHT
 	desc = "A small emergency lighting fixture."
 	name = "Emergency Lighting"
 	light_type = /obj/item/weapon/light/emergency/bulb
@@ -813,4 +813,4 @@ These need expanding and/or reworking, but they're basic and they'll  do for now
 	item_state = "egg4"
 	matter = list("glass" = 100)
 	brightness = 1
-	l_color = COLOR_RED
+	//l_color = COLOR_RED

@@ -159,7 +159,7 @@ var/global/normal_ooc_colour = "#505050"
 		display_name = "[S.name]/([S.key])"
 
 	for(var/client/C in admins)
-		if((R_ADMIN|R_MOD|R_MENTOR) & C.holder.rights)
+		if((R_ADMIN|R_MOD|R_MENTOR|R_DEV) & C.holder.rights)
 			if(C.prefs.toggles & CHAT_LOOC)
 				var/prefix = "(R)LOOC"
 				if (C.mob in heard)

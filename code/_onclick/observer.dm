@@ -32,6 +32,7 @@
 	if(client.buildmode)
 		build_click(src, client.buildmode, params, A)
 		return
+
 	if(world.time <= next_move) return
 	next_move = world.time + 8
 	// You are responsible for checking config.ghost_interaction when you override this function

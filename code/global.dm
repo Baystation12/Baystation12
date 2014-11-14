@@ -19,6 +19,8 @@ var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called man
 
 var/global/list/global_map = null
 
+var/global/ERT_TYPE = 0 // 1 = Security, 2 = Medical, 3 = Engineering, 4 = Custom
+
 	//list/global_map = list(list(1,5),list(4,3))//an array of map Z levels.
 	//Resulting sector map looks like
 	//|_1_|_4_|

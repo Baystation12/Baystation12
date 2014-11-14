@@ -200,3 +200,23 @@ obj/item/stack/sheet/mineral/iron/New()
 	origin_tech = "materials=5"
 	color = "#9999FF"
 	perunit = 2000
+
+/*
+ * Clown
+ */
+/obj/item/stack/sheet/mineral/clown
+	name = "bananium"
+	icon_state = "sheet-clown"
+	force = 5.0
+	throwforce = 5
+	w_class = 3.0
+	throw_speed = 3
+	throw_range = 3
+	origin_tech = "materials=4"
+	perunit = 2000
+	sheettype = "clown"
+
+/obj/item/stack/sheet/mineral/clown/New(var/loc, var/amount=null)
+	pixel_x = rand(0,4)-4
+	pixel_y = rand(0,4)-4
+	..()

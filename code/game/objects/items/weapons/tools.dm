@@ -452,7 +452,6 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
-
 	if(hasorgans(M))
 
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
@@ -461,12 +460,12 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
+		/*if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
 				if(M == user)
 					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
+					return*/ // Fuck OH&S, IPCs aren't forced by laws to do that.
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)

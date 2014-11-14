@@ -78,6 +78,10 @@
 /var/const/access_cent_teleporter = 107//Teleporter.
 /var/const/access_cent_creed = 108//Creed's office.
 /var/const/access_cent_captain = 109//Captain's office/ID comp/AI.
+/var/const/access_cent_ert_sec = 110
+/var/const/access_cent_ert_med = 111
+/var/const/access_cent_ert_command = 112
+/var/const/access_cent_ert_eng = 113
 
 	//The Syndicate
 /var/const/access_syndicate = 150//General Syndicate Access
@@ -176,6 +180,14 @@ var/const/access_blueshield = 153
 
 /proc/get_centcom_access(job)
 	switch(job)
+		if("Commander")
+			return list(access_cent_ert_sec, access_cent_ert_med, access_cent_ert_eng, access_cent_ert_command, access_cent_specops)
+		if("Security")
+			return list(access_cent_ert_sec, access_cent_specops)
+		if("Medic")
+			return list(access_cent_ert_med, access_cent_specops)
+		if("Engineer")
+			return list(access_cent_ert_eng, access_cent_specops)
 		if("VIP Guest")
 			return list(access_cent_general)
 		if("Custodian")

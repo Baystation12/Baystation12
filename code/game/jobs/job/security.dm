@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffdddd"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/head
 	req_admin_notify = 1
 	alt_titles = list("Security Commander")
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
@@ -54,6 +54,7 @@
 	spawn_positions = 1
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	idtype = /obj/item/weapon/card/id/sec
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
 	minimal_player_age = 5
@@ -92,7 +93,7 @@
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
 	alt_titles = list("Forensic Technician")
-
+	idtype = /obj/item/weapon/card/id/detective
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	alt_titles = list("Forensic Technician")
@@ -140,6 +141,7 @@
 	spawn_positions = 2
 	supervisors = "the head of security"
 	selection_color = "#ffeeee"
+	idtype = /obj/item/weapon/card/id/sec
 	alt_titles = list("Security Guard")
 	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
@@ -176,6 +178,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#ffdddd"
+	idtype = /obj/item/weapon/card/id/blueshield
 	bs_jobban_warning = 1
 	access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)
 	minimal_access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)

@@ -269,11 +269,13 @@
 
 		switch(slot)
 			if(slot_l_hand)
-				if(H.l_hand)
+				var/datum/organ/external/hand = H.organs_by_name["l_hand"]
+				if(H.l_hand || hand.status & ORGAN_DESTROYED || hand.destspawn)
 					return 0
 				return 1
 			if(slot_r_hand)
-				if(H.r_hand)
+				var/datum/organ/external/hand = H.organs_by_name["r_hand"]
+				if(H.r_hand || hand.status & ORGAN_DESTROYED || hand.destspawn)
 					return 0
 				return 1
 			if(slot_wear_mask)
