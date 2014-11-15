@@ -47,9 +47,9 @@
 	if(istype(W, /obj/item/weapon/paperwork))
 		attach_item(W)
 		return
-	else
-		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
-			usr << browse("", "window=[name]") //Closes the dialog
+	
+	else if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
+		usr << browse("", "window=[name]") //Closes the dialog
 		var/obj/item/weapon/paperwork/P = src[page]
 		P.attackby(W, user)
 

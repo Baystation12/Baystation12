@@ -1,13 +1,24 @@
+#define DEFAULT_FONT	"Verdana"
+#define SIGNATURE_FONT	"Times New Roman"
+#define CRAYON_FONT		"Comic Sans MS"
 
 /obj/item/weapon/paperwork
     name = "paperwork"
 
+//Generates the HTML content and returns it as a string.
+//A mob may be optionally supplied in case the content varies with the viewer.
+//If user is null then the paperwork should display the contents as plainly as possible (i.e. for admins)
 /obj/item/weapon/paperwork/proc/render_content(mob/user=null)
+	return ""
 
+//Displays the content to a mob
 /obj/item/weapon/paperwork/proc/show_content(mob/user)
+	return
 
 /obj/item/weapon/paperwork/proc/copy(newloc)
+	return
 
+//Called when the paperwork is being bundled with another paperwork item
 /obj/item/weapon/paperwork/proc/create_bundle(obj/item/weapon/paperwork/other, mob/user)
 	if (istype(P, /obj/item/weapon/paper/carbon))
 		var/obj/item/weapon/paper/carbon/C = P
@@ -98,3 +109,94 @@
 		name = "[(n_name ? "[n_name]" : initial(name))]"
 	add_fingerprint(usr)
 	return
+
+//there's got to be a better way to handle literacy
+/obj/item/weapon/paperwork/proc/can_read(mob/user)
+	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon))
+		return 1
+	return 0
+
+//prompts the user for pencode input and produces a sequence of strings split on [field] tags
+/proc/paperwork_input(mob/user, obj/item/implement, var/prompt="Enter what you want to write:")
+	if(!implement) return
+
+	var/t = input(user, "Enter what you want to write:", "Write", null, null) as message //what the hell is the message type?
+	if (!t) return
+
+	var/iscrayon = 0
+	var/font = DEFAULT_FONT
+	var/colour
+	if (istype(implement, /obj/item/weapon/pen))
+		var/obj/item/weapon/pen/P = implement
+		colour = P.colour? P.colour : "black"
+	
+	else if (istype(implement, /obj/item/toy/crayon))
+		var/obj/item/toy/crayon/P = implement
+		iscrayon = 1
+		font = CRAYON_FONT
+		colour = P.colour? P.colour : "black"
+	
+	else return
+	
+	//parse pen code then split on field tags
+	t = html_encode(t)
+	t = replacetext(t, "\[field\]", "<>") //all angle brackets should have been removed by html_encode()
+	t = parsepencode(t, user, iscrayon)   // Encode everything from pencode to html //TODO#paperwork
+	var/list/textlist = text2listEx(t, "<>")
+	
+	//could make textlist a list of datums if we ever need to track more metadata besides font and colour
+	//maybe if we ever implement written languages, but for now YAGNI.
+	. = list()
+	for (var/S in textlist)
+		. += "<font face='[font]' color=[colour]>[S]</font>"
+
+/proc/parsepencode(var/t, mob/user as mob, var/iscrayon = 0)
+	t = replacetext(t, "\n", "<BR>")
+	
+	t = replacetext(t, "\[center\]", "<center>")
+	t = replacetext(t, "\[/center\]", "</center>")
+	t = replacetext(t, "\[br\]", "<BR>")
+	t = replacetext(t, "\[b\]", "<B>")
+	t = replacetext(t, "\[/b\]", "</B>")
+	t = replacetext(t, "\[i\]", "<I>")
+	t = replacetext(t, "\[/i\]", "</I>")
+	t = replacetext(t, "\[u\]", "<U>")
+	t = replacetext(t, "\[/u\]", "</U>")
+	t = replacetext(t, "\[large\]", "<font size=\"4\">")
+	t = replacetext(t, "\[/large\]", "</font>")
+	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
+	//t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
+	
+	t = replacetext(t, "\[h1\]", "<H1>")
+	t = replacetext(t, "\[/h1\]", "</H1>")
+	t = replacetext(t, "\[h2\]", "<H2>")
+	t = replacetext(t, "\[/h2\]", "</H2>")
+	t = replacetext(t, "\[h3\]", "<H3>")
+	t = replacetext(t, "\[/h3\]", "</H3>")
+	
+	if(!iscrayon)
+		t = replacetext(t, "\[*\]", "<li>")
+		t = replacetext(t, "\[hr\]", "<HR>")
+		t = replacetext(t, "\[small\]", "<font size = \"1\">")
+		t = replacetext(t, "\[/small\]", "</font>")
+		t = replacetext(t, "\[list\]", "<ul>")
+		t = replacetext(t, "\[/list\]", "</ul>")
+		t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+		t = replacetext(t, "\[/table\]", "</td></tr></table>")
+		t = replacetext(t, "\[grid\]", "<table>")
+		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
+		t = replacetext(t, "\[row\]", "</td><tr>")
+		t = replacetext(t, "\[cell\]", "<td>")
+		t = replacetext(t, "\[logo\]", "<img src = html/images/ntlogo.png>")
+	else // If it is a crayon, and he still tries to use these, make them empty!
+		t = replacetext(t, "\[*\]", "")
+		t = replacetext(t, "\[hr\]", "")
+		t = replacetext(t, "\[small\]", "")
+		t = replacetext(t, "\[/small\]", "")
+		t = replacetext(t, "\[list\]", "")
+		t = replacetext(t, "\[/list\]", "")
+		t = replacetext(t, "\[table\]", "")
+		t = replacetext(t, "\[/table\]", "")
+		t = replacetext(t, "\[row\]", "")
+		t = replacetext(t, "\[cell\]", "")
+		t = replacetext(t, "\[logo\]", "")
