@@ -10,11 +10,11 @@
 ////////// Fluff Items ///////////
 //////////////////////////////////
 
-/obj/item/weapon/paper/fluff/sue_donem // aikasan: Sue Donem
+/obj/item/weapon/paperwork/paper/fluff/sue_donem // aikasan: Sue Donem
 	name = "cyborgification waiver"
 	desc = "It's some kind of official-looking contract."
 
-/obj/item/weapon/paper/fluff/sue_donem/New()
+/obj/item/weapon/paperwork/paper/fluff/sue_donem/New()
 	..()
 
 	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Exodus or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
@@ -1201,7 +1201,7 @@
 		src.held = null
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
-	if(istype(O,/obj/item/weapon/paper))
+	if(istype(O,/obj/item/weapon/paperwork))
 		if(held)
 			usr << "[src] already has something inside it."
 		else

@@ -240,7 +240,7 @@
 /datum/game_mode/revolution/rp_revolution/proc/command_report(message)
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
-			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
+			var/obj/item/weapon/paperwork/paper/intercept = new /obj/item/weapon/paperwork/paper( comm.loc )
 			intercept.name = "Cent. Com. Announcement"
 			intercept.info = message
 

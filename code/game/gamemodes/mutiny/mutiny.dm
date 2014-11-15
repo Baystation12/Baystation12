@@ -198,9 +198,9 @@ datum/game_mode/mutiny
 		var/obj/machinery/computer/telecomms/server/S = locate(/obj/machinery/computer/telecomms/server)
 		if(!S) return
 
-		var/obj/item/weapon/paper/crumpled/bloody/transcript = new(S.loc)
+		var/obj/item/weapon/paperwork/paper/crumpled/bloody/transcript = new(S.loc)
 		transcript.name = "secret transcript"
-		transcript.info = fluff.secret_transcript()
+		transcript.set_content(fluff.secret_transcript())
 
 	proc/can_be_recruited(datum/mind/M, role)
 		if(!M) return 0

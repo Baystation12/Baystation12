@@ -390,7 +390,7 @@ var/list/sacrificed = list()
 			"\red You hear liquid flowing.")
 			D.real_name = "Unknown"
 			var/chose_name = 0
-			for(var/obj/item/weapon/paper/P in this_rune.loc)
+			for(var/obj/item/weapon/paperwork/paper/P in this_rune.loc)
 				if(P.info)
 					D.real_name = copytext(P.info, findtext(P.info,">")+1, findtext(P.info,"<",2) )
 					chose_name = 1
@@ -438,9 +438,9 @@ var/list/sacrificed = list()
 /////////////////////////////////////////TWELFTH RUNE
 
 		talisman()//only hide, emp, teleport, deafen, blind and tome runes can be imbued atm
-			var/obj/item/weapon/paper/newtalisman
+			var/obj/item/weapon/paperwork/paper/newtalisman
 			var/unsuitable_newtalisman = 0
-			for(var/obj/item/weapon/paper/P in src.loc)
+			for(var/obj/item/weapon/paperwork/paper/P in src.loc)
 				if(!P.info)
 					newtalisman = P
 					break
@@ -452,7 +452,7 @@ var/list/sacrificed = list()
 				return fizzle()
 
 			var/obj/effect/rune/imbued_from
-			var/obj/item/weapon/paper/talisman/T
+			var/obj/item/weapon/paperwork/paper/talisman/T
 			for(var/obj/effect/rune/R in orange(1,src))
 				if(R==src)
 					continue
@@ -712,7 +712,7 @@ var/list/sacrificed = list()
 			if(istype(W,/obj/effect/rune))
 				rad = 6
 				go = 1
-			if (istype(W,/obj/item/weapon/paper/talisman))
+			if (istype(W,/obj/item/weapon/paperwork/paper/talisman))
 				rad = 4
 				go = 1
 			if (istype(W,/obj/item/weapon/nullrod))
@@ -733,7 +733,7 @@ var/list/sacrificed = list()
 						V.show_message("\red The rune turns into red dust, reveaing the surrounding runes.", 3)
 					del(src)
 					return
-				if(istype(W,/obj/item/weapon/paper/talisman))
+				if(istype(W,/obj/item/weapon/paperwork/paper/talisman))
 					usr.whisper("Nikt[pick("'","`")]o barada kla'atu!")
 					usr << "\red Your talisman turns into red dust, revealing the surrounding runes."
 					for (var/mob/V in orange(1,usr.loc))
@@ -743,7 +743,7 @@ var/list/sacrificed = list()
 				return
 			if(istype(W,/obj/effect/rune))
 				return	fizzle()
-			if(istype(W,/obj/item/weapon/paper/talisman))
+			if(istype(W,/obj/item/weapon/paperwork/paper/talisman))
 				call(/obj/effect/rune/proc/fizzle)()
 				return
 

@@ -16,7 +16,7 @@
 	if(template)
 		return
 
-	if (istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo))
+	if (istype(O, /obj/item/weapon/paperwork/paper) || istype(O, /obj/item/weapon/photo))
 		// put it inside
 		template = O
 		usr.drop_item()
@@ -118,9 +118,9 @@
 			playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 
 			// dup the file
-			if(istype(template, /obj/item/weapon/paper))
+			if(istype(template, /obj/item/weapon/paperwork/paper))
 				// make duplicate paper
-				var/obj/item/weapon/paper/P = new(src.loc)
+				var/obj/item/weapon/paperwork/paper/P = new(src.loc)
 				P.name = template.name
 				P.info = template:info
 				P.stamped = template:stamped

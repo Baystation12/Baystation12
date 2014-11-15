@@ -18,6 +18,6 @@
 	if(src.contents.len <= 0)
 		user << "The [src] is empty."
 		return
-	var/obj/item/weapon/paper/P = input(user,"Choose a sheet to take out.","[src]", "Cancel") as null|obj in src.contents
+	var/obj/item/weapon/paperwork/paper/P = input(user,"Choose a sheet to take out.","[src]", "Cancel") as null|obj in src.contents
 	if(!isnull(P) && in_range(src,user))
 		P.loc = user.loc

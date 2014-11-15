@@ -164,7 +164,7 @@
 					dat += "[entry]<br><hr>"
 				//usr << "Printing the log, standby..."
 				//sleep(50)
-				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
+				var/obj/item/weapon/paperwork/paper/P = new/obj/item/weapon/paperwork/paper( loc )
 				P.name = "activity log"
 				P.info = dat
 

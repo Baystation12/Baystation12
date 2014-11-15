@@ -165,11 +165,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	// give the sprite some time to flick
 	sleep(20)
 	
-	if (istype(incoming, /obj/item/weapon/paper))
+	if (istype(incoming, /obj/item/weapon/paperwork/paper))
 		copy(incoming)
 	else if (istype(incoming, /obj/item/weapon/photo))
 		photocopy(incoming)
-	else if (istype(incoming, /obj/item/weapon/paper_bundle))
+	else if (istype(incoming, /obj/item/weapon/paperwork/bundle))
 		bundlecopy(incoming)
 	else
 		return 0
@@ -184,11 +184,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	use_power(200)
 
 	var/obj/item/rcvdcopy
-	if (istype(copyitem, /obj/item/weapon/paper))
+	if (istype(copyitem, /obj/item/weapon/paperwork/paper))
 		rcvdcopy = copy(copyitem)
 	else if (istype(copyitem, /obj/item/weapon/photo))
 		rcvdcopy = photocopy(copyitem)
-	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
+	else if (istype(copyitem, /obj/item/weapon/paperwork/bundle))
 		rcvdcopy = bundlecopy(copyitem)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")

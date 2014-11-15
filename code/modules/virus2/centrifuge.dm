@@ -171,7 +171,7 @@
 	ping("\The [src] pings, \"Pathogen isolated.\"")
 
 /obj/machinery/computer/centrifuge/proc/print(var/mob/user)
-	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+	var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper(loc)
 	P.name = "paper - Pathology Report"
 	P.info = {"
 		[virology_letterhead("Pathology Report")]

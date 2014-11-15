@@ -20,22 +20,22 @@
 	var/screen = SHOW_LINK_NEXT
 
 /obj/item/weapon/paperwork/bundle/proc/attach_item(obj/item/weapon/paperwork/P, mob/user)
-	if (istype(P, /obj/item/weapon/paper/carbon))
-		var/obj/item/weapon/paper/carbon/C = P
+	if (istype(P, /obj/item/weapon/paperwork/paper/carbon))
+		var/obj/item/weapon/paperwork/paper/carbon/C = P
 		if (!C.iscopy && !C.copied)
 			user << "<span class='notice'>Take off the carbon copy first.</span>"
 			add_fingerprint(user)
 			return
-	
+
 	if (istype(P, /obj/item/weapon/paperwork/bundle))
-		user.drop_from_inventory(W)
-		for(var/obj/O in W)
+		user.drop_from_inventory(P)
+		for(var/obj/O in P)
 			O.loc = src
 			O.add_fingerprint(usr)
 			screen |= SHOW_LINK_NEXT
-		user << "<span class='notice'>You add \the [W] to \the [src].</span>"
-		del(W)
-	
+		user << "<span class='notice'>You add \the [P] to \the [src].</span>"
+		del(P)
+
 	screen |= SHOW_LINK_NEXT //regardless of what page we were on, it's not the last one anymore.
 	user << "<span class='notice'>You add \the [P] to \the [src].</span>"
 	user.drop_from_inventory(P) //handles the icon update
@@ -43,11 +43,11 @@
 
 /obj/item/weapon/paperwork/bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	
+
 	if(istype(W, /obj/item/weapon/paperwork))
 		attach_item(W)
 		return
-	
+
 	else if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 		usr << browse("", "window=[name]") //Closes the dialog
 		var/obj/item/weapon/paperwork/P = src[page]
@@ -58,41 +58,44 @@
 	add_fingerprint(usr)
 	return
 
-/obj/item/weapon/paper_bundle/examine(mob/user)
+/obj/item/weapon/paperwork/bundle/examine(mob/user)
 	if(..(user, 1))
 		src.show_content(user)
 	else
 		user << "<span class='notice'>It is too far away.</span>"
 	return
 
-//TODO#paperwork
-/obj/item/weapon/paper_bundle/proc/show_content(mob/user as mob)
-	//generate header
-	var/dat = ""
-	
-	if (screen & SHOW_LINK_PREV)
-		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
-	
-	dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove Page</A></DIV>"
-	
-	if (screen & SHOW_LINK_NEXT)
-		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV>"
-	
-	dat+= "<BR><HR>" 
+/obj/item/weapon/paperwork/bundle/render_content(mob/user=null, var/show_page=null)
+	if (isnull(show_page))
+		show_page = page
 	
 	//generate page contents
-	if (istype(src[page], /obj/item/weapon/paperwork))
-		var/obj/item/weapon/paperwork/P = src[page]
-		dat += P.render_content(mob/user=null)
-	
+	if (istype(src[show_page], /obj/item/weapon/paperwork))
+		var/obj/item/weapon/paperwork/P = src[show_page]
+		return P.render_content(user)
+	return ""
+
+/obj/item/weapon/paperwork/bundle/show_content(mob/user)
+	//generate header
+	var/dat = ""
+
+	if (screen & SHOW_LINK_PREV)
+		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+
+	dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove Page</A></DIV>"
+
+	if (screen & SHOW_LINK_NEXT)
+		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV>"
+
+	dat += "<BR><HR>[render_content(user, page)]"
+
 	user << browse(dat, "window=[name]")
 
 //TODO#paperwork
-/obj/item/weapon/paper_bundle/attack_self(mob/user as mob)
-	src.show_content(user)
+/obj/item/weapon/paperwork/bundle/attack_self(mob/user as mob)
+	show_content(user)
 	add_fingerprint(usr)
 	update_icon()
-	return
 
 /obj/item/weapon/paperwork/bundle/proc/set_page(var/pagenum)
 	var/oldpage = page
@@ -100,7 +103,7 @@
 	if (page != oldpage)
 		playsound(src.loc, "pageturn", 50, 1)
 		screen = 0
-		if (page > 1) 
+		if (page > 1)
 			screen |= SHOW_LINK_PREV
 		if (page < contents.len)
 			screen |= SHOW_LINK_NEXT
@@ -111,36 +114,30 @@
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			set_page(page+1)
-			
+
 		if(href_list["prev_page"])
 			set_page(page-1)
-			
+
 		if(href_list["remove"])
 			var/obj/item/weapon/W = src[page]
 			usr.put_in_hands(W)
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
-			
+
 			if(contents.len == 0)
-				var/obj/item/weapon/paper/P = src[1]
+				var/obj/item/weapon/paperwork/paper/P = src[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
 				del(src)
-			
+
 			set_page(page) //ensure page remains within bounds
 			update_icon()
 	else
 		usr << "<span class='notice'>You need to hold \the [src] in your hands!</span>"
-	
+
 	//refresh the browser window
 	if (istype(src.loc, /mob) ||istype(src.loc.loc, /mob))
 		src.attack_self(src.loc)
 		updateUsrDialog()
-
-
-/obj/item/weapon/paperwork/bundle/rename()
-	set name = "Rename bundle"
-	..()
-
 
 /obj/item/weapon/paperwork/bundle/verb/remove_all()
 	set name = "Take apart bundle"
@@ -158,7 +155,7 @@
 
 
 /obj/item/weapon/paperwork/bundle/update_icon()
-	var/obj/item/weapon/paper/P = src[1]
+	var/obj/item/weapon/paperwork/paper/P = src[1]
 	icon_state = P.icon_state
 	overlays = P.overlays
 	underlays = 0
@@ -166,7 +163,7 @@
 	var/photo
 	for(var/obj/O in src)
 		var/image/img = image('icons/obj/bureaucracy.dmi')
-		if(istype(O, /obj/item/weapon/paper))
+		if(istype(O, /obj/item/weapon/paperwork/paper))
 			img.icon_state = O.icon_state
 			img.pixel_x -= min(1*i, 2)
 			img.pixel_y -= min(1*i, 2)

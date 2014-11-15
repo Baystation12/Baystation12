@@ -369,7 +369,7 @@ What a mess.*/
 					if ((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
 						record2 = active2
 					sleep(50)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( computer.loc )
+					var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper( computer.loc )
 					P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
 					if (record1)
 						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])

@@ -1,4 +1,4 @@
-/obj/item/weapon/paper/talisman
+/obj/item/weapon/paperwork/paper/talisman
 	icon_state = "paper_talisman"
 	var/imbue = null
 	var/uses = 0
@@ -81,26 +81,26 @@
 		if (href_list["rune"])
 			switch(href_list["rune"])
 				if("newtome")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "newtome"
 				if("teleport")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "[pick("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "balaq", "mgar", "karazet", "geeri", "orkan", "allaq")]"
 					T.info = "[T.imbue]"
 				if("emp")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "emp"
 				if("conceal")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "conceal"
 				if("communicate")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "communicate"
 				if("runestun")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "runestun"
 				if("armor")
-					var/obj/item/weapon/paper/talisman/T = new /obj/item/weapon/paper/talisman(get_turf(usr))
+					var/obj/item/weapon/paperwork/paper/talisman/T = new /obj/item/weapon/paperwork/paper/talisman(get_turf(usr))
 					T.imbue = "armor"
 				if("soulstone")
 					new /obj/item/device/soulstone(get_turf(usr))
@@ -111,6 +111,6 @@
 		return
 
 
-/obj/item/weapon/paper/talisman/supply
+/obj/item/weapon/paperwork/paper/talisman/supply
 	imbue = "supply"
 	uses = 5

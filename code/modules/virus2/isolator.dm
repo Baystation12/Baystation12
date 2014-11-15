@@ -168,7 +168,7 @@
 		return 1
 
 /obj/machinery/disease2/isolator/proc/print(var/mob/user)
-	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+	var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper(loc)
 
 	switch (state)
 		if (HOME)

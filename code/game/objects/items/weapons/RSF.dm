@@ -91,7 +91,7 @@ RSF
 			product = new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass()
 			used_energy = 50
 		if(3)
-			product = new /obj/item/weapon/paper()
+			product = new /obj/item/weapon/paperwork/paper()
 			used_energy = 10
 		if(4)
 			product = new /obj/item/weapon/pen()

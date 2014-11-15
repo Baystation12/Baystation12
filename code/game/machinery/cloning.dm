@@ -447,7 +447,7 @@
  *	Manual -- A big ol' manual.
  */
 
-/obj/item/weapon/paper/Cloning
+/obj/item/weapon/paperwork/paper/Cloning
 	name = "H-87 Cloning Apparatus Manual"
 	info = {"<h4>Getting Started</h4>
 	Congratulations, your station has purchased the H-87 industrial cloning device!<br>

@@ -158,7 +158,7 @@
 
 /obj/item/weapon/form_printer/proc/deploy_paper(var/turf/T)
 	T.visible_message("\blue \The [src.loc] dispenses a sheet of crisp white paper.")
-	new /obj/item/weapon/paper(T)
+	new /obj/item/weapon/paperwork/paper(T)
 
 
 //Personal shielding for the combat module.

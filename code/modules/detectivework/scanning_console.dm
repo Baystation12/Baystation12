@@ -275,13 +275,13 @@
 				usr << "<spawn class='warning'>Invalid fingerprint card, rejected.</span>"
 		if("print")
 			if(current)
-				var/obj/item/weapon/paper/P = new(loc)
+				var/obj/item/weapon/paperwork/paper/P = new(loc)
 				P.name = "\improper Forensics Data ([current.fields["name"]])"
 				P.icon_state = "paper_words"
 				P.info = "<b>Forensics Database</b> - [worldtime2text(world.time)]<br><br>"
 				P.info += get_printable_data(current)
 		if("printall")
-			var/obj/item/weapon/paper/P = new(loc)
+			var/obj/item/weapon/paperwork/paper/P = new(loc)
 			P.name = "\improper Forensics Data"
 			P.icon_state = "paper_words"
 			P.info = "<b>Forensics Database</b> - [worldtime2text(world.time)]<br><br>"

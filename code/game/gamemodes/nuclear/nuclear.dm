@@ -172,7 +172,7 @@ var/global/list/turf/synd_spawn = list()
 		synd_mind.store_memory("<B>Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
 		synd_mind.current << "To speak on the strike team's private channel use :t"
-		var/obj/item/weapon/paper/P = new
+		var/obj/item/weapon/paperwork/paper/P = new
 		P.info = "The nuclear authorization code is: <b>[nuke_code]</b>"
 		P.name = "nuclear bomb code"
 		if (ticker.mode.config_tag=="nuclear")

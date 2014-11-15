@@ -50,7 +50,7 @@
 				screen = 2
 				spark_system.set_up(5, 0, src)
 				src.spark_system.start()
-				var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
+				var/obj/item/weapon/paperwork/paper/monitorkey/MK = new/obj/item/weapon/paperwork/paper/monitorkey
 				MK.loc = src.loc
 				// Will help make emagging the console not so easy to get away with.
 				MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
@@ -508,19 +508,17 @@
 	return src.attack_hand(usr)
 
 
-/obj/item/weapon/paper/monitorkey
+/obj/item/weapon/paperwork/paper/monitorkey
 	//..()
 	name = "Monitor Decryption Key"
 	var/obj/machinery/message_server/server = null
 
-/obj/item/weapon/paper/monitorkey/New()
+/obj/item/weapon/paperwork/paper/monitorkey/New()
 	..()
 	spawn(10)
 		if(message_servers)
 			for(var/obj/machinery/message_server/server in message_servers)
 				if(!isnull(server))
 					if(!isnull(server.decryptkey))
-						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret and away from the clown.<br>If necessary, change the password to a more secure one."
-						info_links = info
-						icon_state = "paper_words"
+						set_content("<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret.<br>If necessary, change the password to a more secure one.")
 						break

@@ -250,7 +250,7 @@
 					printing = null
 					nanomanager.update_uis(src)
 
-					var/obj/item/weapon/paper/P = new(loc)
+					var/obj/item/weapon/paperwork/paper/P = new(loc)
 					if (mode)
 						P.name = text("crew manifest ([])", worldtime2text())
 						P.info = {"<h4>Crew Manifest</h4>

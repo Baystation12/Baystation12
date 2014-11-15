@@ -20,8 +20,8 @@
 
 //Called when the paperwork is being bundled with another paperwork item
 /obj/item/weapon/paperwork/proc/create_bundle(obj/item/weapon/paperwork/other, mob/user)
-	if (istype(P, /obj/item/weapon/paperwork/paper/carbon))
-		var/obj/item/weapon/paperwork/paper/carbon/C = P
+	if (istype(other, /obj/item/weapon/paperwork/paper/carbon))
+		var/obj/item/weapon/paperwork/paper/carbon/C = other
 		if (!C.iscopy && !C.copied)
 			user << "<span class='notice'>Take off the carbon copy first.</span>"
 			add_fingerprint(user)
@@ -31,7 +31,7 @@
 	if (name != initial(name))
 		B.name = name
 
-	user.drop_from_inventory(P)
+	user.drop_from_inventory(other)
 	if (istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/h_user = user
 		if (h_user.r_hand == src)
@@ -59,12 +59,12 @@
 			src.loc = get_turf(h_user)
 			if(h_user.client)	h_user.client.screen -= src
 			h_user.put_in_hands(B)
-	user << "<span class='notice'>You clip \the [P] to \the [src].</span>"
+	user << "<span class='notice'>You clip \the [other] to \the [src].</span>"
 	src.loc = B
-	P.loc = B
+	other.loc = B
 	B.update_icon()
 
-/obj/item/weapon/paperwork/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/weapon/paperwork/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/flame))
 		burnpaper(W, user)
 		return
@@ -98,13 +98,12 @@
 		else
 			user << "\red You must hold \the [P] steady to burn \the [src]."
 
-
-/obj/item/weapon/paperwork/verb/rename(mob/user)
-	set name = "Rename paperwork"
+/obj/item/weapon/paperwork/verb/rename()
+	set name = "Rename"
 	set category = "Object"
 	set src in usr
-
-	var/n_name = copytext(sanitize(input(user, "What would you like to label \the [src]?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
+	
+	var/n_name = copytext(sanitize(input(usr, "What would you like to label \the [src]?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
 	if((loc == usr && !usr.stat))
 		name = "[(n_name ? "[n_name]" : initial(name))]"
 	add_fingerprint(usr)

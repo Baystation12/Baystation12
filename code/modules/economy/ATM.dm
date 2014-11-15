@@ -351,7 +351,7 @@ log transactions
 						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
 			if("balance_statement")
 				if(authenticated_account)
-					var/obj/item/weapon/paper/R = new(src.loc)
+					var/obj/item/weapon/paperwork/paper/R = new(src.loc)
 					R.name = "Account balance: [authenticated_account.owner_name]"
 					R.info = "<b>NT Automated Teller Account Statement</b><br><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
@@ -375,7 +375,7 @@ log transactions
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 			if ("print_transaction")
 				if(authenticated_account)
-					var/obj/item/weapon/paper/R = new(src.loc)
+					var/obj/item/weapon/paperwork/paper/R = new(src.loc)
 					R.name = "Transaction logs: [authenticated_account.owner_name]"
 					R.info = "<b>Transaction logs</b><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"

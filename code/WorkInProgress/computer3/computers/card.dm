@@ -274,7 +274,7 @@
 
 			printing = 1
 			sleep(50)
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( computer.loc )
+			var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper( computer.loc )
 			P.info = "<B>Crew Manifest:</B><BR>"
 			var/list/L = list()
 			for (var/datum/data/record/t in data_core.general)

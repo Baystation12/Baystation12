@@ -308,7 +308,7 @@
 	new /obj/item/solar_assembly(src)
 	new /obj/item/weapon/circuitboard/solar_control(src)
 	new /obj/item/weapon/tracker_electronics(src)
-	new /obj/item/weapon/paper/solar(src)
+	new /obj/item/weapon/paperwork/paper/solar(src)
 
 /obj/structure/closet/crate/freezer
 	desc = "A freezer."

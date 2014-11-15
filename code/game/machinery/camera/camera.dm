@@ -120,14 +120,14 @@
 
 
 	// OTHER
-	else if ((istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
+	else if ((istype(W, /obj/item/weapon/paperwork/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
 		var/mob/living/U = user
-		var/obj/item/weapon/paper/X = null
+		var/obj/item/weapon/paperwork/paper/X = null
 		var/obj/item/device/pda/P = null
 
 		var/itemname = ""
 		var/info = ""
-		if(istype(W, /obj/item/weapon/paper))
+		if(istype(W, /obj/item/weapon/paperwork/paper))
 			X = W
 			itemname = X.name
 			info = X.info

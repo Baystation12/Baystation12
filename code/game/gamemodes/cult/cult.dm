@@ -137,7 +137,7 @@
 			mob.mutations.Remove(CLUMSY)
 
 
-	var/obj/item/weapon/paper/talisman/supply/T = new(mob)
+	var/obj/item/weapon/paperwork/paper/talisman/supply/T = new(mob)
 	var/list/slots = list (
 		"backpack" = slot_in_backpack,
 		"left pocket" = slot_l_store,

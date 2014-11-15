@@ -505,11 +505,11 @@ I said no!
 	reagents = list("sugar" = 5)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/doughslice,
-		/obj/item/weapon/paper,
+		/obj/item/weapon/paperwork/paper,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/fortunecookie
 	make_food(var/obj/container as obj)
-		var/obj/item/weapon/paper/paper = locate() in container
+		var/obj/item/weapon/paperwork/paper/paper = locate() in container
 		paper.loc = null //prevent deletion
 		var/obj/item/weapon/reagent_containers/food/snacks/fortunecookie/being_cooked = ..(container)
 		paper.loc = being_cooked
@@ -518,7 +518,7 @@ I said no!
 	check_items(var/obj/container as obj)
 		. = ..()
 		if (.)
-			var/obj/item/weapon/paper/paper = locate() in container
+			var/obj/item/weapon/paperwork/paper/paper = locate() in container
 			if (!paper.info)
 				return 0
 		return .

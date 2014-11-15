@@ -548,7 +548,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/solar_assembly, // 21 Solar Assemblies. 1 Extra for the controller
 					/obj/item/weapon/circuitboard/solar_control,
 					/obj/item/weapon/tracker_electronics,
-					/obj/item/weapon/paper/solar)
+					/obj/item/weapon/paperwork/paper/solar)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Solar pack crate"

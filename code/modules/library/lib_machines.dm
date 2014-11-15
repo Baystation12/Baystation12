@@ -452,7 +452,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	density = 1
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/paper))
+	if(istype(O, /obj/item/weapon/paperwork/paper))
 		user.drop_item()
 		O.loc = src
 		user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")

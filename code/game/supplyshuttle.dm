@@ -203,8 +203,8 @@ var/list/mechtoys = list(
 				for(var/atom in MA)
 					// Sell manifests
 					var/atom/A = atom
-					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/slip = A
+					if(find_slip && istype(A,/obj/item/weapon/paperwork/paper/manifest))
+						var/obj/item/weapon/paperwork/paper/slip = A
 						if(slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
 							points += points_per_slip
 							find_slip = 0
@@ -255,7 +255,7 @@ var/list/mechtoys = list(
 
 			//supply manifest generation begin
 
-			var/obj/item/weapon/paper/manifest/slip = new /obj/item/weapon/paper/manifest(A)
+			var/obj/item/weapon/paperwork/paper/manifest/slip = new /obj/item/weapon/paperwork/paper/manifest(A)
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"
 			slip.info +="Destination: [station_name]<br>"
@@ -291,7 +291,7 @@ var/list/mechtoys = list(
 		shoppinglist.Cut()
 		return
 
-/obj/item/weapon/paper/manifest
+/obj/item/weapon/paperwork/paper/manifest
 	name = "Supply Manifest"
 
 
@@ -381,7 +381,7 @@ var/list/mechtoys = list(
 			idname = usr.real_name
 
 		supply_controller.ordernum++
-		var/obj/item/weapon/paper/reqform = new /obj/item/weapon/paper(loc)
+		var/obj/item/weapon/paperwork/paper/reqform = new /obj/item/weapon/paperwork/paper(loc)
 		reqform.name = "Requisition Form - [P.name]"
 		reqform.info += "<h3>[station_name] Supply Requisition Form</h3><hr>"
 		reqform.info += "INDEX: #[supply_controller.ordernum]<br>"
@@ -585,7 +585,7 @@ var/list/mechtoys = list(
 			idname = usr.real_name
 
 		supply_controller.ordernum++
-		var/obj/item/weapon/paper/reqform = new /obj/item/weapon/paper(loc)
+		var/obj/item/weapon/paperwork/paper/reqform = new /obj/item/weapon/paperwork/paper(loc)
 		reqform.name = "Requisition Form - [P.name]"
 		reqform.info += "<h3>[station_name] Supply Requisition Form</h3><hr>"
 		reqform.info += "INDEX: #[supply_controller.ordernum]<br>"

@@ -3254,9 +3254,9 @@ datum
 				return
 
 			reaction_obj(var/obj/O, var/volume)
-				if(istype(O,/obj/item/weapon/paper))
-					var/obj/item/weapon/paper/paperaffected = O
-					paperaffected.clearpaper()
+				if(istype(O,/obj/item/weapon/paperwork/paper))
+					var/obj/item/weapon/paperwork/paper/paperaffected = O
+					paperaffected.clear_content()
 					usr << "The solution dissolves the ink on the paper."
 				if(istype(O,/obj/item/weapon/book))
 					if(istype(O,/obj/item/weapon/book/tome))

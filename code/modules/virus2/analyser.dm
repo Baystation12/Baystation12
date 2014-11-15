@@ -33,7 +33,7 @@
 			if (dish.virus2.addToDB())
 				ping("\The [src] pings, \"New pathogen added to data bank.\"")
 
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(src.loc)
+			var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper(src.loc)
 			P.name = "paper - [dish.virus2.name()]"
 
 			var/r = dish.virus2.get_info()

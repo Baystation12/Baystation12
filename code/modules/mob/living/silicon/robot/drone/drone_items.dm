@@ -37,8 +37,7 @@
 
 	can_hold = list(
 		/obj/item/weapon/clipboard,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/paper_bundle,
+		/obj/item/weapon/paperwork,
 		/obj/item/weapon/card/id
 		)
 

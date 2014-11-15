@@ -20,7 +20,7 @@
 		print_reference()
 
 		//create a short manual as well
-		var/obj/item/weapon/paper/R = new(src.loc)
+		var/obj/item/weapon/paperwork/paper/R = new(src.loc)
 		R.name = "Steps to success: Correct EFTPOS Usage"
 		/*
 		R.info += "<b>When first setting up your EFTPOS device:</b>"
@@ -63,7 +63,7 @@
 	linked_account = station_account
 
 /obj/item/device/eftpos/proc/print_reference()
-	var/obj/item/weapon/paper/R = new(src.loc)
+	var/obj/item/weapon/paperwork/paper/R = new(src.loc)
 	R.name = "Reference: [eftpos_name]"
 	R.info = "<b>[eftpos_name] reference</b><br><br>"
 	R.info += "Access code: [access_code]<br><br>"

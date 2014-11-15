@@ -193,7 +193,7 @@
 
 			if("print")
 				var/text
-				var/obj/item/weapon/paper/P = new(loc)
+				var/obj/item/weapon/paperwork/paper/P = new(loc)
 				if (detailed_account_view)
 					P.name = "account #[detailed_account_view.account_number] details"
 					var/title = "Account #[detailed_account_view.account_number] Details"

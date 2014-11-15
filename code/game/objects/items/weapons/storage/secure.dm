@@ -156,7 +156,7 @@
 
 	New()
 		..()
-		new /obj/item/weapon/paper(src)
+		new /obj/item/weapon/paperwork/paper(src)
 		new /obj/item/weapon/pen(src)
 
 	attack_hand(mob/user as mob)
@@ -229,7 +229,7 @@
 
 	New()
 		..()
-		new /obj/item/weapon/paper(src)
+		new /obj/item/weapon/paperwork/paper(src)
 		new /obj/item/weapon/pen(src)
 
 	attack_hand(mob/user as mob)

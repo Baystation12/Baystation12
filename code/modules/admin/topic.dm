@@ -1485,37 +1485,37 @@
 
 	else if(href_list["AdminFaxView"])
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
-		if (istype(fax, /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = fax
+		if (istype(fax, /obj/item/weapon/paperwork/paper))
+			var/obj/item/weapon/paperwork/paper/P = fax
 			P.show_content(usr)
 		else if (istype(fax, /obj/item/weapon/photo))
 			var/obj/item/weapon/photo/H = fax
 			H.show(usr)
-		else if (istype(fax, /obj/item/weapon/paper_bundle))
+		else if (istype(fax, /obj/item/weapon/paperwork/bundle))
 			//having multiple people turning pages on a paper_bundle can cause issues
 			//open a browse window listing the contents instead
 			var/data = ""
-			var/obj/item/weapon/paper_bundle/B = fax
-			
-			for (var/page = 1, page <= B.amount, page++)
+			var/obj/item/weapon/paperwork/bundle/B = fax
+
+			for (var/page = 1, page <= B.contents.len, page++)
 				var/obj/pageobj = B.contents[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
-			
+
 			world << data
 			world << "usr = [usr]"
-			
+
 			usr << browse(data, "window=[B.name]")
 		else
 			usr << "\red The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]"
 
 	else if (href_list["AdminFaxViewPage"])
 		var/page = text2num(href_list["AdminFaxViewPage"])
-		var/obj/item/weapon/paper_bundle/bundle = locate(href_list["paper_bundle"])
-		
+		var/obj/item/weapon/paperwork/bundle/bundle = locate(href_list["paper_bundle"])
+
 		if (!bundle) return
-		
-		if (istype(bundle.contents[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = bundle.contents[page]
+
+		if (istype(bundle.contents[page], /obj/item/weapon/paperwork/paper))
+			var/obj/item/weapon/paperwork/paper/P = bundle.contents[page]
 			//P.show_content(src.owner, 1)
 			//TODO#paperwork
 			//vat/dat = P.render_content()
@@ -1533,13 +1533,13 @@
 		if(!input)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-		
+
 		// Create the reply message
-		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( null ) //hopefully the null loc won't cause trouble for us
+		var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper( null ) //hopefully the null loc won't cause trouble for us
 		P.name = "[command_name()]- [customname]"
 		P.info = input
 		P.update_icon()
-		
+
 		// Stamps
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 		stampoverlay.icon_state = "paper_stamp-cent"
@@ -1555,7 +1555,7 @@
 			message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(sender)]", 1)
 		else
 			src.owner << "\red Message reply failed."
-		
+
 		spawn(100)
 			del(P)
 		return
@@ -1580,7 +1580,7 @@
 
 					// give the sprite some time to flick
 					spawn(20)
-						var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+						var/obj/item/weapon/paperwork/paper/P = new /obj/item/weapon/paperwork/paper( F.loc )
 						P.name = "Sol Government- [customname]"
 						P.info = input
 						P.update_icon()

@@ -29,7 +29,7 @@
 	return
 
 /obj/item/weapon/folder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo) || istype(W, /obj/item/weapon/paper_bundle))
+	if(istype(W, /obj/item/weapon/paperwork/paper) || istype(W, /obj/item/weapon/photo) || istype(W, /obj/item/weapon/paperwork/bundle))
 		user.drop_item()
 		W.loc = src
 		user << "<span class='notice'>You put the [W] into \the [src].</span>"
@@ -43,11 +43,11 @@
 /obj/item/weapon/folder/attack_self(mob/user as mob)
 	var/dat = "<title>[name]</title>"
 
-	for(var/obj/item/weapon/paper/P in src)
+	for(var/obj/item/weapon/paperwork/paper/P in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/weapon/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
-	for(var/obj/item/weapon/paper_bundle/Pb in src)
+	for(var/obj/item/weapon/paperwork/bundle/Pb in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
 	user << browse(dat, "window=folder")
 	onclose(user, "folder")
@@ -68,7 +68,7 @@
 				usr.put_in_hands(P)
 
 		else if(href_list["read"])
-			var/obj/item/weapon/paper/P = locate(href_list["read"])
+			var/obj/item/weapon/paperwork/paper/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
 				if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
 					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
@@ -81,7 +81,7 @@
 			if(P && (P.loc == src) && istype(P))
 				P.show(usr)
 		else if(href_list["browse"])
-			var/obj/item/weapon/paper_bundle/P = locate(href_list["browse"])
+			var/obj/item/weapon/paperwork/bundle/P = locate(href_list["browse"])
 			if(P && (P.loc == src) && istype(P))
 				P.attack_self(usr)
 				onclose(usr, "[P.name]")
