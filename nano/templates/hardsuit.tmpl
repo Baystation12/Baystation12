@@ -3,12 +3,12 @@ Title: Integrated Hardsuit Controller
 Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
  -->
 
-<table width = '460px'>
+<table align = 'center'>
 	<tr>
 		<td width = '150px'>
 			<b>Suit status:</b>
 		</td>
-		<td width = '150px'>
+		<td width>
 			{{if data.sealing == 1}}
 				<font color = 'orange'><b>SEALING</b></font>
 			{{else}}
@@ -19,7 +19,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				{{/if}}
 			{{/if}}
 		</td>
-		<td width = '150px'>
+		<td width>
 			{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_seals' : 1}, null)}}<br/>
 		</td>
 	</tr>
@@ -36,7 +36,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 <h2>Hardware</h2>
 <h3>Suit pieces</h3>
 
-<table width = '460px'>
+<table align = 'center'>
 	<tr>
 		<td width = '150px'>
 			<b>Helmet:</b> 
@@ -103,32 +103,23 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		{{/if}}
 	</h3></font>
 	{{if data.modules}}
-		<table align = 'center' width = '460px'>
+		<table align = 'center'>
 			{{for data.modules}}
 				<tr>
-					<td>
+					<td width = '60%'>
 						<div class='average'>
-							<strong>{{:value.name}}</strong>
+							<strong>{{:value.name}}</strong> [E: {{:value.engagecost}} | A: {{:value.activecost}} | P: {{:value.passivecost}}]
 						</div>
-					</td>
-					<td align = 'center' width = '80px'>
-						E: {{:value.engagecost}}
-					</td>
-					<td align = 'center' width = '80px'>
-						A: {{:value.activecost}}
-					</td>
-					<td align = 'center' width = '80px'>
-						P: {{:value.passivecost}}
 					</td>
 				</tr>
 				<tr>
 					<td align = 'left'>
-						<div class = 'caption'>{{:value.desc}}</font></div>
+						<div class = 'caption'>{{:value.desc}}</div>
 					</td>
 					<td colspan = 3 align = 'center'>
 							{{if value.can_use == 1}}
 								<div class='itemContent'>
-									{{:helper.link('Engage', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'engage'}, null)}}
+									{{:helper.link(value.engagestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'engage'}, null)}}
 								</div>
 							{{/if}}
 							{{if value.can_select == 1}}
@@ -143,9 +134,9 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 							{{if value.can_toggle == 1}}
 								<div class='itemContent'>
 									{{if value.is_active == 1}}
-										{{:helper.link('Deactivate', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null)}}
+										{{:helper.link(value.deactivatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null)}}
 									{{else}}
-										{{:helper.link('Activate', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'activate'}, null)}}
+										{{:helper.link(value.activatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'activate'}, null)}}
 									{{/if}}
 								</div>
 							{{/if}}

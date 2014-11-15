@@ -4,6 +4,8 @@
 	desc = "An advanced powered armour suit with many cyberwarfare enhancements."
 	icon_state = "hacker_rig"
 
+	req_access = list(access_syndicate)
+
 	helm_type = /obj/item/clothing/head/helmet/space/rig/mask
 
 	initial_modules = list(

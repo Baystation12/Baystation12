@@ -808,6 +808,7 @@
 #include "code\modules\clothing\spacesuits\rig\modules\vision.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\ert.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\hacker.dm"
+#include "code\modules\clothing\spacesuits\rig\suits\industrial.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\light.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\ninja.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\stealth.dm"

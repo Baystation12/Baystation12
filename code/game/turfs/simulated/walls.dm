@@ -334,13 +334,14 @@
 			else if(response == "Dismantle")
 				user << "<span class='notice'>You begin slicing through the outer plating.</span>"
 				playsound(src, 'sound/items/Welder.ogg', 100, 1)
-
-				sleep(100)
-				if( !istype(src, /turf/simulated/wall) || !user || !WT || !WT.isOn() || !T )	return
-
-				if( user.loc == T && user.get_active_hand() == WT )
+				if(!do_after(user,100))
+					return
+				if(WT.isOn())
 					user << "<span class='notice'>You remove the outer plating.</span>"
 					dismantle_wall()
+					for(var/mob/O in viewers(user, 5))
+						O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
+					return
 			return
 		else
 			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
@@ -351,16 +352,17 @@
 		user << "<span class='notice'>You begin slicing through the outer plating.</span>"
 		playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-		sleep(60)
-		if(mineral == "diamond")//Oh look, it's tougher
-			sleep(60)
-		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+		var/delay = 60
+		if(mineral == "diamond")
+			delay += 60
 
-		if( user.loc == T && user.get_active_hand() == W )
-			user << "<span class='notice'>You remove the outer plating.</span>"
-			dismantle_wall()
-			for(var/mob/O in viewers(user, 5))
-				O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
+		if(!do_after(user,delay))
+			return
+
+		user << "<span class='notice'>You remove the outer plating.</span>"
+		dismantle_wall()
+		for(var/mob/O in viewers(user, 5))
+			O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
 		return
 
 	//DRILLING
@@ -368,16 +370,17 @@
 
 		user << "<span class='notice'>You begin to drill though the wall.</span>"
 
-		sleep(60)
+		var/delay = 60
 		if(mineral == "diamond")
-			sleep(60)
-		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+			delay += 60
 
-		if( user.loc == T && user.get_active_hand() == W )
-			user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
-			dismantle_wall()
-			for(var/mob/O in viewers(user, 5))
-				O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)
+		if(!do_after(user,delay))
+			return
+
+		user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
+		dismantle_wall()
+		for(var/mob/O in viewers(user, 5))
+			O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)
 		return
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )

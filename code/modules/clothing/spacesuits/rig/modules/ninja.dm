@@ -20,6 +20,9 @@
 	active_power_cost = 1
 	passive_power_cost = 0
 
+	activate_string = "Enable Cloak"
+	deactivate_string = "Disable Cloak"
+
 	interface_name = "integrated stealth system"
 	interface_desc = "An integrated active camouflage system."
 
@@ -66,6 +69,8 @@
 	redundant = 1
 	usable = 1
 	selectable = 1
+
+	engage_string = "Emergency Leap"
 
 	interface_name = "VOID-shift phase projector"
 	interface_desc = "An advanced teleportation system. It is capable of pinpoint precision or random leaps forward."
@@ -124,6 +129,8 @@
 	interface_name = "energy net launcher"
 	interface_desc = "An advanced energy-patterning projector used to capture targets."
 
+	engage_string = "Fabricate Net"
+
 	fabrication_type = /obj/item/weapon/energy_net
 	use_power_cost = 70
 
@@ -142,6 +149,8 @@
 	usable = 1
 	active = 1
 	permanent = 1
+
+	engage_string = "Detonate"
 
 	interface_name = "dead man's switch"
 	interface_desc = "An integrated self-destruct module. When the wearer dies, so does the surrounding area. Do not press this button."
@@ -164,3 +173,6 @@
 
 /obj/item/rig_module/self_destruct/engage()
 	explosion(get_turf(src), 0, 0, 3, 4)
+
+/obj/item/rig_module/self_destruct/small/engage()
+	explosion(get_turf(src), 0, 0, 1, 2)

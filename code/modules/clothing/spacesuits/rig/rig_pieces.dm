@@ -19,12 +19,14 @@
 	heat_protection =    HANDS
 	cold_protection =    HANDS
 	species_restricted = null
+	gender = PLURAL
 
 /obj/item/clothing/shoes/rig
 	name = "boots"
 	cold_protection = FEET
 	heat_protection = FEET
 	species_restricted = null
+	gender = PLURAL
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"

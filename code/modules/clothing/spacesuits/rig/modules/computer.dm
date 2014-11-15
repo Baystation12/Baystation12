@@ -15,6 +15,10 @@
 	disruptive = 0
 	activates_on_touch = 1
 
+	engage_string = "Eject AI"
+	activate_string = "Enable Contact Dataspike"
+	deactivate_string = "Disable Contact Dataspike"
+
 	interface_name = "integrated intelligence system"
 	interface_desc = "A socket that supports a range of artificial intelligence systems."
 
@@ -170,6 +174,9 @@
 	activates_on_touch = 1
 	usable = 0
 
+	activate_string = "Enable Datajack"
+	deactivate_string = "Disable Datajack"
+
 	interface_name = "contact datajack"
 	interface_desc = "An induction-powered high-throughput datalink suitable for hacking encrypted networks."
 	var/list/stored_research
@@ -256,6 +263,9 @@
 	toggleable = 1
 	usable = 0
 
+	engage_string = "Enable Countermeasures"
+	deactivate_string = "Disable Countermeasures"
+
 	interface_name = "electrowarfare system"
 	interface_desc = "An active counter-electronic warfare suite that disrupts AI tracking."
 
@@ -283,6 +293,9 @@
 	toggleable = 1
 	activates_on_touch = 1
 	disruptive = 0
+
+	engage_string = "Enable Power Sink"
+	deactivate_string = "Disable Power Sink"
 
 	interface_name = "niling d-sink"
 	interface_desc = "Colloquially known as a power siphon, this module drains power through the suit hands into the suit battery."

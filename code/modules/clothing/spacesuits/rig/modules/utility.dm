@@ -1,16 +1,97 @@
 /* Contains:
  * /obj/item/rig_module/device
- * /obj/item/rig_module/device/plasma_cutter
- * /obj/item/rig_module/device/injector
+ * /obj/item/rig_module/device/plasmacutter
  * /obj/item/rig_module/device/healthscanner
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
+ * /obj/item/rig_module/device/rcd
  * /obj/item/rig_module/maneuvering_jets
  * /obj/item/rig_module/foam_sprayer
  * /obj/item/rig_module/device/broadcaster
  * /obj/item/rig_module/chem_dispenser
+ * /obj/item/rig_module/chem_dispenser/injector
  * /obj/item/rig_module/voice
  */
+
+/obj/item/rig_module/device
+	name = "mounted device"
+	desc = "Some kind of hardsuit mount."
+	usable = 0
+	selectable = 1
+	toggleable = 0
+	disruptive = 0
+
+	var/device_type
+	var/obj/item/device
+
+/obj/item/rig_module/device/plasmacutter
+	name = "hardsuit plasma cutter"
+	desc = "A lethal-looking industrial cutter."
+	interface_name = "plasma cutter"
+	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
+	suit_overlay_active = "plasmacutter"
+	suit_overlay_inactive = "plasmacutter"
+
+	device_type = /obj/item/weapon/pickaxe/plasmacutter
+
+/obj/item/rig_module/device/healthscanner
+	name = "health scanner module"
+	desc = "A hardsuit-mounted health scanner."
+	interface_name = "health scanner"
+	interface_desc = "Shows an informative health readout when used on a subject."
+
+	device_type = /obj/item/device/healthanalyzer
+
+/obj/item/rig_module/device/drill
+	name = "hardsuit drill mount"
+	desc = "A very heavy diamond-tipped drill."
+	interface_name = "mounted drill"
+	interface_desc = "A diamond-tipped industrial drill."
+	suit_overlay_active = "mounted-drill"
+	suit_overlay_inactive = "mounted-drill"
+
+	device_type = /obj/item/weapon/pickaxe/diamonddrill
+
+/obj/item/rig_module/device/orescanner
+	name = "ore scanner module"
+	desc = "A clunky old ore scanner."
+	interface_name = "ore detector"
+	interface_desc = "A sonar system for detecting large masses of ore."
+
+	engage_string = "Begin Scan"
+
+	usable = 1
+	selectable = 0
+
+	device_type = /obj/item/weapon/mining_scanner
+
+/obj/item/rig_module/device/rcd
+	name = "RCD mount"
+	desc = "A cell-powered rapid construction device for a hardsuit."
+	interface_name = "mounted RCD"
+	interface_desc = "A device for building or removing walls. Cell-powered."
+
+	engage_string = "Configure RCD"
+
+	device_type = /obj/item/weapon/rcd/mounted
+
+/obj/item/rig_module/device/New()
+	..()
+	if(device_type) device = new device_type(src)
+
+/obj/item/rig_module/device/engage(atom/target)
+
+	if(!..() || !device)
+		return 0
+
+	if(!target)
+		device.attack_self(holder.wearer)
+		return 1
+
+	var/resolved = target.attackby(device,holder.wearer)
+	if(!resolved && device && target)
+		device.afterattack(target,holder.wearer,1)
+	return 1
 
 /obj/item/rig_module/chem_dispenser
 	name = "mounted chemical dispenser"
@@ -19,6 +100,8 @@
 	selectable = 0
 	toggleable = 0
 	disruptive = 0
+
+	engage_string = "Inject"
 
 	interface_name = "integrated chemical dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
@@ -131,6 +214,8 @@
 	toggleable = 0
 	disruptive = 0
 
+	engage_string = "Configure Synthesiser"
+
 	interface_name = "voice synthesiser"
 	interface_desc = "A flexible and powerful voice modulator system."
 
@@ -171,3 +256,68 @@
 			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
 			usr << "You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
+
+/obj/item/rig_module/maneuvering_jets
+
+	name = "hardsuit maneuvering jets"
+	desc = "A compact gas thruster system for a hardsuit."
+	usable = 1
+	toggleable = 1
+	selectable = 0
+	disruptive = 0
+
+	engage_string = "Toggle Stabilizers"
+	activate_string = "Activate Thrusters"
+	deactivate_string = "Deactivate Thrusters"
+
+	interface_name = "maneuvering jets"
+	interface_desc = "An inbuilt EVA maneuvering system that runs off the rig air supply."
+
+	var/obj/item/weapon/tank/jetpack/rig/jets
+
+/obj/item/rig_module/maneuvering_jets/engage()
+	if(!..())
+		return 0
+	jets.toggle_rockets()
+	return 1
+
+/obj/item/rig_module/maneuvering_jets/activate()
+
+	if(active)
+		return 0
+
+	active = 1
+
+	spawn(1)
+		if(suit_overlay_active)
+			suit_overlay = suit_overlay_active
+		else
+			suit_overlay = null
+		holder.update_icon()
+
+	if(!jets.on)
+		jets.toggle()
+	return 1
+
+/obj/item/rig_module/maneuvering_jets/deactivate()
+	if(!..())
+		return 0
+	if(jets.on)
+		jets.toggle()
+	return 1
+
+/obj/item/rig_module/maneuvering_jets/New()
+	..()
+	jets = new(src)
+
+/obj/item/rig_module/maneuvering_jets/installed()
+	..()
+	jets.holder = holder
+	jets.ion_trail.set_up(holder)
+
+/obj/item/rig_module/maneuvering_jets/removed()
+	..()
+	jets.holder = null
+	jets.ion_trail.set_up(jets)
+
+/obj/item/rig_module/foam_sprayer

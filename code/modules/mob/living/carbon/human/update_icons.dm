@@ -824,7 +824,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(back.icon_override)
 			overlays_standing[BACK_LAYER] = image("icon" = back.icon_override, "icon_state" = "[back.icon_state]")
 		//If this is a rig and a mob_icon is set, it will take species into account in the rig update_icon() proc.
-		else if(istype(rig) && rig.mob_icon)
+		else if(istype(rig) && !rig.offline && rig.mob_icon)
 			overlays_standing[BACK_LAYER]  = rig.mob_icon
 		else if(back.sprite_sheets && back.sprite_sheets[species.name])
 			overlays_standing[BACK_LAYER] = image("icon" = back.sprite_sheets[species.name], "icon_state" = "[back.icon_state]")

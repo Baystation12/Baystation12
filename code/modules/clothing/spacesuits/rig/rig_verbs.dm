@@ -32,7 +32,7 @@
 	else
 		visor.deactivate()
 
-/obj/item/weapon/storage/rig/verb/toggle_helmet()
+/obj/item/weapon/storage/rig/proc/toggle_helmet()
 
 	set name = "Toggle Helmet"
 	set desc = "Deploys or retracts your helmet."
@@ -41,7 +41,7 @@
 
 	toggle_piece("helmet",wearer)
 
-/obj/item/weapon/storage/rig/verb/toggle_chest()
+/obj/item/weapon/storage/rig/proc/toggle_chest()
 
 	set name = "Toggle Chestpiece"
 	set desc = "Deploys or retracts your chestpiece."
@@ -50,7 +50,7 @@
 
 	toggle_piece("chest",wearer)
 
-/obj/item/weapon/storage/rig/verb/toggle_gauntlets()
+/obj/item/weapon/storage/rig/proc/toggle_gauntlets()
 
 	set name = "Toggle Gauntlets"
 	set desc = "Deploys or retracts your gauntlets."
@@ -59,7 +59,7 @@
 
 	toggle_piece("gauntlets",wearer)
 
-/obj/item/weapon/storage/rig/verb/toggle_boots()
+/obj/item/weapon/storage/rig/proc/toggle_boots()
 
 	set name = "Toggle Boots"
 	set desc = "Deploys or retracts your boots."

@@ -42,11 +42,14 @@
 	var/suit_overlay
 	var/suit_overlay_active             // If set, drawn over icon and mob when effect is active.
 	var/suit_overlay_inactive           // As above, inactive.
-	var/suit_overlay_used               // As above, when engaged. TODO
+	var/suit_overlay_used               // As above, when engaged.
 
 	//Display fluff
 	var/interface_name = "hardsuit upgrade"
 	var/interface_desc = "A generic hardsuit upgrade."
+	var/engage_string = "Engage"
+	var/activate_string = "Activate"
+	var/deactivate_string = "Deactivate"
 
 /obj/item/rig_module/New()
 	..()

@@ -422,8 +422,16 @@
 
 	proc/get_breath_from_internal(volume_needed)
 		if(internal)
-			if (!contents.Find(internal) || !((wear_mask && (wear_mask.flags & AIRTIGHT)) || (head && (head.flags & AIRTIGHT))))
+
+			var/obj/item/weapon/tank/rig_supply
+			if(istype(back,/obj/item/weapon/storage/rig))
+				var/obj/item/weapon/storage/rig/rig = back
+				if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
+					rig_supply = rig.air_supply
+
+			if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.flags & AIRTIGHT)) || (head && (head.flags & AIRTIGHT)))))
 				internal = null
+
 			if(internal)
 				return internal.remove_air_volume(volume_needed)
 			else if(internals)

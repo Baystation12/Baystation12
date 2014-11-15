@@ -4,6 +4,8 @@
 	desc = "A highly advanced and expensive suit designed for covert operations."
 	icon_state = "ninja_rig"
 
+	req_access = list(access_syndicate)
+
 	initial_modules = list(
 		/obj/item/rig_module/teleporter,
 		/obj/item/rig_module/stealth_field,

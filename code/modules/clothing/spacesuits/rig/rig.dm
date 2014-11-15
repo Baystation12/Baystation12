@@ -12,6 +12,8 @@
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
+	req_one_access = null
+	req_access = null
 	w_class = 4
 
 	// These values are passed on to all component pieces.
@@ -30,14 +32,17 @@
 	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
 	var/boot_type =  /obj/item/clothing/shoes/rig
 	var/glove_type = /obj/item/clothing/gloves/rig
+	var/cell_type =  /obj/item/weapon/cell/high
+	var/air_type =   /obj/item/weapon/tank/oxygen
 
 	//Component/device holders.
-	var/obj/item/weapon/cell/cell
+	var/obj/item/weapon/tank/air_supply                       // Air tank, if any.
 	var/obj/item/clothing/shoes/rig/boots = null              // Deployable boots, if any.
 	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
 	var/obj/item/clothing/gloves/rig/gloves = null            // Deployable gauntlets, if any.
-	var/obj/item/rig_module/selected_module = null            // Primary system (used with right-click)
+	var/obj/item/weapon/cell/cell                             // Power supply, if any.
+	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
 	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
 	var/obj/item/rig_module/voice/speech                      // As above.
 	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
@@ -45,6 +50,9 @@
 	var/list/installed_modules = list()                       // Power consumption/use bookkeeping.
 
 	// Rig status vars.
+	var/open = 0                                              // Access panel status.
+	var/locked = 1                                            // Lock status.
+	var/emagged
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
 	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
@@ -53,35 +61,60 @@
 	// Spark system, since we seem to need this a bunch.
 	var/datum/effect/effect/system/spark_spread/spark_system
 
+/obj/item/weapon/storage/rig/examine()
+	..()
+	if(wearer)
+		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
+			if(!piece || piece.loc != wearer)
+				continue
+			usr << "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
+
+	if(src.loc == usr)
+		usr << "The maintenance panel is [open ? "open" : "closed"]."
+		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</green>"]."
+
 /obj/item/weapon/storage/rig/New()
 	..()
+
+	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
+		locked = 0
 
 	spark_system = new()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	if(!cell)
-		cell = new /obj/item/weapon/cell/high(src)
-
 	processing_objects |= src
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
-			var/obj/item/rig_module/module = new path(src)
+			var/obj/item/rig_module/module = new path()
 			installed_modules += module
 			module.installed(src)
 
 	// Create and initialize our various segments.
-	if(glove_type) gloves = new glove_type(src)
-	if(helm_type)  helmet = new helm_type(src)
-	if(boot_type)  boots =  new boot_type(src)
-	if(chest_type) chest =  new chest_type(src)
+	if(cell_type)
+		cell = new cell_type()
+	if(air_type)
+		air_supply = new air_type()
+	if(glove_type)
+		gloves = new glove_type()
+		verbs |= /obj/item/weapon/storage/rig/proc/toggle_gauntlets
+	if(helm_type)
+		helmet = new helm_type()
+		verbs |= /obj/item/weapon/storage/rig/proc/toggle_helmet
+	if(boot_type)
+		boots = new boot_type()
+		verbs |= /obj/item/weapon/storage/rig/proc/toggle_boots
+	if(chest_type)
+		chest = new chest_type()
+		verbs |= /obj/item/weapon/storage/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!piece)
 			continue
+		piece.canremove = 0
 		piece.name = "[suit_type] [initial(piece.name)]"
-		piece.desc = "Seems to be part of \a [src]."
+		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
 		piece.armor = armor
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
@@ -105,7 +138,7 @@
 	..()
 
 /obj/item/weapon/storage/rig/proc/suit_is_deployed()
-	if(!istype(wearer))
+	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
 	if(helm_type && (!helmet || wearer.head != helmet))
 		return 0
@@ -140,7 +173,7 @@
 		failed_to_seal = 1
 
 	if(!failed_to_seal && instant)
-		for(var/obj/item/piece in list(helmet,boots,gloves,chest,src))
+		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 			if(!piece) continue
 			piece.icon_state = "[initial(icon_state)]_sealed"
 		update_icon()
@@ -207,13 +240,16 @@
 		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 			if(!piece) continue
 			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
-			piece.canremove = !seal_target
 		canremove = !seal_target
 		if(helmet)
 			if(canremove)
+				if(flags & AIRTIGHT)
+					helmet.flags |= AIRTIGHT
 				helmet.flags_inv          |= (HIDEEYES|HIDEFACE)
 				helmet.body_parts_covered |= (FACE|EYES)
 			else
+				if(flags & AIRTIGHT)
+					helmet.flags &= ~AIRTIGHT
 				helmet.flags_inv          &= ~(HIDEEYES|HIDEFACE)
 				helmet.body_parts_covered &= ~(FACE|EYES)
 		update_icon(1)
@@ -226,7 +262,7 @@
 	if(canremove)
 		for(var/obj/item/rig_module/module in installed_modules)
 			module.deactivate()
-	for(var/obj/item/piece in list(helmet,boots,gloves,chest,src))
+	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
 		if(canremove && (flags & AIRTIGHT))
 			piece.flags &= ~STOPSPRESSUREDMAGE
@@ -329,16 +365,19 @@
 	var/i = 1
 	for(var/obj/item/rig_module/module in installed_modules)
 		var/list/module_data = list(
-			"index" =       i,
-			"name" =       "[module.interface_name]",
-			"desc" =       "[module.interface_desc]",
-			"can_use" =    "[module.usable]",
-			"can_select" = "[module.selectable]",
-			"can_toggle" = "[module.toggleable]",
-			"is_active" =  "[module.active]",
-			"engagecost" =  module.use_power_cost*10,
-			"activecost" =  module.active_power_cost*10,
-			"passivecost" = module.passive_power_cost*10
+			"index" =             i,
+			"name" =              "[module.interface_name]",
+			"desc" =              "[module.interface_desc]",
+			"can_use" =           "[module.usable]",
+			"can_select" =        "[module.selectable]",
+			"can_toggle" =        "[module.toggleable]",
+			"is_active" =         "[module.active]",
+			"engagecost" =        module.use_power_cost*10,
+			"activecost" =        module.active_power_cost*10,
+			"passivecost" =       module.passive_power_cost*10,
+			"engagestring" =      module.engage_string,
+			"activatestring" =    module.activate_string,
+			"deactivatestring" =  module.deactivate_string
 			)
 
 		if(module.charges && module.charges.len)
@@ -359,7 +398,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "hardsuit.tmpl", "Hardsuit Controller", 500, 600)
+		ui = new(user, src, ui_key, "hardsuit.tmpl", "Hardsuit Controller", 800, 600)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -384,8 +423,7 @@
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
 				mob_icon.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]")
-				if(chest)
-					chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
+				chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
 
 	if(wearer)
 		wearer.update_inv_shoes()
@@ -464,33 +502,23 @@
 	var/check_slot
 	var/equip_to
 	var/obj/item/use_obj
-	var/plural
-
-	if(!canremove)
-		return
 
 	if(!H)
 		return
 
 	switch(piece)
-
 		if("helmet")
 			equip_to = slot_head
 			use_obj = helmet
 			check_slot = H.head
-
 		if("gauntlets")
 			equip_to = slot_gloves
 			use_obj = gloves
 			check_slot = H.gloves
-			plural = 1
-
 		if("boots")
 			equip_to = slot_shoes
 			use_obj = boots
 			check_slot = H.shoes
-			plural = 1
-
 		if("chest")
 			equip_to = slot_wear_suit
 			use_obj = chest
@@ -505,9 +533,10 @@
 				holder = use_obj.loc
 				if(istype(holder))
 					if(use_obj && check_slot == use_obj)
-						H << "<font color='blue'><b>Your [use_obj.name] [plural ? "retract" : "retracts"] swiftly.</b></font>"
+						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
+						use_obj.canremove = 0
 						use_obj.loc = null
 
 		else if (deploy_mode != ONLY_RETRACT)
@@ -516,10 +545,9 @@
 					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] is in the way.</span>"
 					return
 			else
-				H << "<font color='blue'><b>Your [use_obj.name] [plural ? "deploy" : "deploys"] swiftly.</b></span>"
+				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"
 				use_obj.loc = H
 				H.equip_to_slot(use_obj, equip_to)
-				use_obj.canremove = 0
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)

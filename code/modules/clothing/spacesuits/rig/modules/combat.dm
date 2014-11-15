@@ -87,6 +87,8 @@
 	usable = 1
 	use_power_cost = 10
 
+	engage_string = "Configure"
+
 	interface_name = "mounted laser cannon"
 	interface_desc = "A shoulder-mounted cell-powered laser cannon."
 
@@ -114,6 +116,8 @@
 	name = "mounted taser"
 	desc = "A shoulder-mounted energy projector."
 
+	usable = 0
+
 	suit_overlay_active = "mounted-taser"
 	suit_overlay_inactive = "mounted-taser"
 
@@ -126,6 +130,9 @@
 
 	name = "energy blade projector"
 	desc = "A powerful cutting beam projector."
+
+	activate_string = "Project Blade"
+	deactivate_string = "Cancel Blade"
 
 	interface_name = "spider fang blade"
 	interface_desc = "A lethal energy projector that can shape a blade projected from the hand of the wearer or launch radioactive darts."
@@ -182,6 +189,8 @@
 	selectable = 1
 	usable = 1
 	use_power_cost = 15
+
+	engage_string = "Fabricate Star"
 
 	interface_name = "death blossom launcher"
 	interface_desc = "An integrated microfactory that produces poisoned throwing stars from thin air and electricity."
