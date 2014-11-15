@@ -75,7 +75,12 @@
 						return 1
 
 			var/obj/item/rig_module/mod = W
-			user << "You carefully install \the [mod] into \the [src]."
+			user << "You begin installing \the [mod] into \the [src]."
+			if(!do_after(user,40))
+				return
+			if(!user || !W)
+				return
+			user << "You install \the [mod] into \the [src]."
 			user.drop_from_inventory(mod)
 			installed_modules |= mod
 			mod.loc = null

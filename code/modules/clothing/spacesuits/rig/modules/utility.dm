@@ -5,6 +5,7 @@
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
  * /obj/item/rig_module/device/rcd
+ * /obj/item/rig_module/device/anomaly_scanner
  * /obj/item/rig_module/maneuvering_jets
  * /obj/item/rig_module/foam_sprayer
  * /obj/item/rig_module/device/broadcaster
@@ -52,6 +53,14 @@
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
+/obj/item/rig_module/device/anomaly_scanner
+	name = "hardsuit anomaly scanner"
+	desc = "You think it's called an Elder Sarsparilla or something."
+	interface_name = "Alden-Saraspova counter"
+	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
+	selectable = 1
+	device_type = /obj/item/device/ano_scanner
+
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
 	desc = "A clunky old ore scanner."
@@ -70,7 +79,7 @@
 	desc = "A cell-powered rapid construction device for a hardsuit."
 	interface_name = "mounted RCD"
 	interface_desc = "A device for building or removing walls. Cell-powered."
-
+	usable = 1
 	engage_string = "Configure RCD"
 
 	device_type = /obj/item/weapon/rcd/mounted
@@ -193,6 +202,8 @@
 	if(charge.charges < 0) charge.charges = 0
 
 	return 1
+
+/obj/item/rig_module/chem_dispenser/combat
 
 /obj/item/rig_module/chem_dispenser/injector
 

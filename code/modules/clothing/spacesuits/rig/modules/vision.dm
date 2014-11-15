@@ -54,6 +54,18 @@
 
 	vision_modes = list(/datum/rig_vision/meson)
 
+/obj/item/rig_module/vision/thermal
+
+	name = "hardsuit thermal scanner"
+	desc = "A layered, translucent visor system for a hardsuit."
+
+	usable = 0
+
+	interface_name = "thermal scanner"
+	interface_desc = "An integrated thermal scanner."
+
+	vision_modes = list(/datum/rig_vision/thermal)
+
 // There should only ever be one vision module installed in a suit.
 /obj/item/rig_module/vision/installed()
 	..()

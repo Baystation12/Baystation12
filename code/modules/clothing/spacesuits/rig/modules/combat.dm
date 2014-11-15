@@ -82,7 +82,7 @@
 /obj/item/rig_module/mounted
 
 	name = "mounted laser cannon"
-	desc = "A shoulder-mounted battery-powered M1911A pulse rifle mount."
+	desc = "A shoulder-mounted battery-powered laser cannon mount."
 	selectable = 1
 	usable = 1
 	use_power_cost = 10

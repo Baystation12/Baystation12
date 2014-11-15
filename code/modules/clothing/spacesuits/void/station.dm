@@ -16,24 +16,6 @@
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 
-//Chief Engineer's rig
-/obj/item/clothing/head/helmet/space/void/engineering/chief
-	name = "advanced voidsuit helmet"
-	desc = "An advanced helmet designed for work in a hazardous, low pressure environment. Shines with a high polish."
-	icon_state = "rig0-white"
-	item_state = "ce_helm"
-	item_color = "white"
-	sprite_sheets_refit = null
-	sprite_sheets_obj = null
-
-/obj/item/clothing/suit/space/void/engineering/chief
-	icon_state = "rig-white"
-	name = "advanced voidsuit"
-	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
-	item_state = "ce_voidsuit"
-	sprite_sheets_refit = null
-	sprite_sheets_obj = null
-
 //Mining rig
 /obj/item/clothing/head/helmet/space/void/mining
 	name = "mining voidsuit helmet"
