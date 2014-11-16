@@ -35,6 +35,7 @@ TO-DO:
 	var/list/Friends = list() // A list of friends!
 	var/list/speech_buffer = list() // Last phrase said near it and person who said it
 	var/mob/living/Leader = null // AI variable - tells the corgi to follow this person
+	var/move_to_delay = 3 //delay for the automated movement.
 
 
 /mob/living/simple_animal/corgi/Life()
@@ -309,11 +310,12 @@ TO-DO:
 							break
 				if(movement_target && !holding_still)
 					stop_automated_movement = 1
-					step_to(src,movement_target,1)
-					sleep(3)
-					step_to(src,movement_target,1)
-					sleep(3)
-					step_to(src,movement_target,1)
+					walk_to(src,movement_target, 1, move_to_delay)
+					///step_to(src,movement_target,1)
+					//sleep(1)
+					//step_to(src,movement_target,1)
+					//sleep(1)
+					//step_to(src,movement_target,1)
 
 					if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 						if (movement_target.loc.x < src.x)
@@ -495,7 +497,7 @@ TO-DO:
 			if (holding_still)
 				return
 			else if(canmove && will_follow && isturf(loc))
-				step_to(src, Leader)
+				walk_to(src, Leader, 1, move_to_delay)
 
 /mob/living/simple_animal/corgi/proc/handle_speech_and_mood()
 	//Speech understanding starts here (copied and altered from slimes)
