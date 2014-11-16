@@ -1,4 +1,7 @@
-/obj/item/weapon/storage/rig/combat
+/obj/item/clothing/head/helmet/space/rig/combat
+	light_overlay = "helmet_light_green_dual"
+
+/obj/item/weapon/rig/combat
 	name = "combat hardsuit control module"
 	desc = "A sleek and dangerous hardsuit for active combat."
 	icon_state = "security_rig"
@@ -7,6 +10,8 @@
 	slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = 1
+
+	helm_type = /obj/item/clothing/head/helmet/space/rig/combat
 
 	initial_modules = list(
 		/obj/item/rig_module/mounted,
@@ -18,7 +23,7 @@
 		/obj/item/rig_module/chem_dispenser/combat
 		)
 
-/obj/item/weapon/storage/rig/combat/merc
+/obj/item/weapon/rig/combat/merc
 	name = "crimson hardsuit control module"
 	desc = "A blood-red hardsuit featuring some fairly illegal technology."
 	icon_state = "merc_rig"

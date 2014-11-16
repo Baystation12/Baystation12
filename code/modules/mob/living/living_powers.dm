@@ -16,19 +16,3 @@
 	else
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
-
-// Hardsuit interface proc for AI. Defined here so MMIs can also use it.
-/mob/living/proc/hardsuit_interface_ai()
-
-	set name = "Open Hardsuit Interface"
-	set desc = "Open the hardsuit system interface."
-	set category = "Hardsuit"
-
-	var/obj/item/rig_module/module = src.loc
-
-	if(!istype(module) || !module.holder)
-		verbs -= /mob/living/proc/hardsuit_interface_ai
-		return 0
-
-	if(module.holder.check_power_cost(src, 0, 0, 0, 1))
-		ui_interact(src)

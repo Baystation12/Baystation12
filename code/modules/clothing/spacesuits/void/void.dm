@@ -22,6 +22,8 @@
 		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
 		)
 
+	light_overlay = "helmet_light"
+
 /obj/item/clothing/suit/space/void
 	name = "voidsuit"
 	icon_state = "void"

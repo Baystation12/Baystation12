@@ -614,7 +614,7 @@ datum/objective/download
 			return 0
 
 		var/current_amount
-		var/obj/item/weapon/storage/rig/S
+		var/obj/item/weapon/rig/S
 		if(istype(owner.current,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = owner.current
 			S = H.back

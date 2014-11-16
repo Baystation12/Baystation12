@@ -15,7 +15,7 @@
 	icon_state = "module"
 	matter = list("metal" = 20000, "plastic" = 30000, "glass" = 5000)
 
-	var/obj/item/weapon/storage/rig/holder
+	var/obj/item/weapon/rig/holder
 
 	var/module_cooldown = 10
 	var/next_use = 0
@@ -74,7 +74,7 @@
 	..()
 
 // Called when the module is installed into a suit.
-/obj/item/rig_module/proc/installed(var/obj/item/weapon/storage/rig/new_holder)
+/obj/item/rig_module/proc/installed(var/obj/item/weapon/rig/new_holder)
 	holder = new_holder
 	return
 

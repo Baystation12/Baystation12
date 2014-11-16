@@ -531,7 +531,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	else
 		equip_to_slot_or_del(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
 
-	equip_to_slot_or_del(new /obj/item/weapon/storage/rig/light/ninja(src), slot_back)
+	equip_to_slot_or_del(new /obj/item/weapon/rig/light/ninja(src), slot_back)
 	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
 	equip_to_slot_or_del(new /obj/item/weapon/tank/oxygen(src), slot_s_store)

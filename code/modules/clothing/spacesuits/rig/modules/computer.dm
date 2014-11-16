@@ -24,6 +24,11 @@
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
+	var/list/ai_interface_verbs = list(
+		//mob/living/proc/hardsuit_interface_ai,
+		//mob/living/proc/hardsuit_host_bioscan,
+		//mob/living/proc/hardsuit_hack
+		)
 
 /obj/item/rig_module/ai_container/accepts_item(var/obj/item/input_device, var/mob/living/user)
 
@@ -53,6 +58,8 @@
 		// If the transfer failed we can delete the card.
 		if(locate(/mob/living/silicon/ai) in card)
 			ai_card = card
+			integrated_ai = locate(/mob/living/silicon/ai) in card
+			integrated_ai.verbs |= ai_interface_verbs
 		else
 			eject_ai()
 		return 1
@@ -119,7 +126,7 @@
 	ai_card = null
 
 	if(integrated_ai)
-		integrated_ai.verbs -= /mob/living/proc/hardsuit_interface_ai
+		integrated_ai.verbs -= ai_interface_verbs
 	integrated_ai = null
 
 /obj/item/rig_module/ai_container/proc/integrate_ai(var/obj/item/ai,var/mob/user)
@@ -159,7 +166,7 @@
 				integrated_ai = null
 				eject_ai()
 			else
-				integrated_ai.verbs |= /mob/living/proc/hardsuit_interface_ai
+				integrated_ai.verbs |= ai_interface_verbs
 		else
 			user << "<span class='warning'>There is no active AI within \the [ai].</span>"
 	else

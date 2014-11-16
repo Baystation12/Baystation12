@@ -75,7 +75,7 @@
 		/obj/item/weapon/storage/lockbox,
 		/obj/item/weapon/storage/secure,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/storage/rig,
+		/obj/item/weapon/rig,
 		/obj/item/device/eftpos,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/taperecorder,

@@ -5,6 +5,7 @@
 	icon_key is [species.race_key][g][husk][fat][hulk][skeleton][s_tone]
 */
 var/global/list/human_icon_cache = list()
+var/global/list/light_overlay_cache = list()
 
 	///////////////////////
 	//UPDATE_ICONS SYSTEM//
@@ -728,6 +729,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 			bloodsies.color = head.blood_color
 			standing.overlays	+= bloodsies
 
+		if(istype(head,/obj/item/clothing/head))
+			var/obj/item/clothing/head/hat = head
+			if(hat.on && light_overlay_cache["[hat.light_overlay]"])
+				standing.overlays |= light_overlay_cache["[hat.light_overlay]"]
+
 		overlays_standing[HEAD_LAYER] = standing
 
 	else
@@ -820,7 +826,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
 	if(back)
 		back.screen_loc = ui_back	//TODO
-		var/obj/item/weapon/storage/rig/rig = back
+		var/obj/item/weapon/rig/rig = back
 		if(back.icon_override)
 			overlays_standing[BACK_LAYER] = image("icon" = back.icon_override, "icon_state" = "[back.icon_state]")
 		//If this is a rig and a mob_icon is set, it will take species into account in the rig update_icon() proc.

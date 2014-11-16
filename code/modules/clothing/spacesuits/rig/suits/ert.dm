@@ -1,10 +1,15 @@
-/obj/item/weapon/storage/rig/ert
+/obj/item/clothing/head/helmet/space/rig/ert
+	light_overlay = "helmet_light_dual"
+
+/obj/item/weapon/rig/ert
 	name = "ERT-C hardsuit control module"
 	desc = "A suit worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured and space ready."
 	suit_type = "ERT commander"
 	icon_state = "ert_commander_rig"
 	siemens_coefficient = 0.6
 	offline_slowdown = 3
+
+	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
 
 	req_access = list(access_cent_specops)
 
@@ -21,7 +26,7 @@
 		/obj/item/rig_module/mounted
 		)
 
-/obj/item/weapon/storage/rig/ert/engineer
+/obj/item/weapon/rig/ert/engineer
 	name = "ERT-E suit control module"
 	desc = "A suit worn by the engineering division of a NanoTrasen Emergency Response Team. Has orange highlights. Armoured and space ready."
 	suit_type = "ERT engineer"
@@ -35,7 +40,7 @@
 		/obj/item/rig_module/foam_sprayer
 		)
 
-/obj/item/weapon/storage/rig/ert/medical
+/obj/item/weapon/rig/ert/medical
 	name = "ERT-M suit control module"
 	desc = "A suit worn by the medical division of a NanoTrasen Emergency Response Team. Has white highlights. Armoured and space ready."
 	suit_type = "ERT medic"
@@ -48,7 +53,7 @@
 		/obj/item/rig_module/chem_dispenser/injector
 		)
 
-/obj/item/weapon/storage/rig/ert/security
+/obj/item/weapon/rig/ert/security
 	name = "ERT-S suit control module"
 	desc = "A suit worn by the security division of a NanoTrasen Emergency Response Team. Has red highlights. Armoured and space ready."
 	suit_type = "ERT security"

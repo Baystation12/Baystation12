@@ -19,12 +19,18 @@
 
 	var/obj/machinery/camera/camera
 	var/list/camera_networks
-	var/brightness_on
-	var/on = 0
+
+	light_overlay = "helmet_light"
+	brightness_on = 4
+	on = 0
 
 /obj/item/clothing/head/helmet/space/attack_self(mob/user)
 
 	if(!camera && camera_networks)
+
+		if(!icon_action_button)
+			icon_action_button = "[icon_state]"
+
 		camera = new /obj/machinery/camera(src)
 		camera.network = camera_networks
 		cameranet.removeCamera(camera)
@@ -32,47 +38,7 @@
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
 		return 1
 
-	else if(brightness_on)
-
-		if(!isturf(user.loc))
-			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
-			return
-
-		on = !on
-		icon_state = "rig[on]-[item_color]"
-
-		if(on)
-			user.SetLuminosity(user.luminosity + brightness_on)
-		else
-			user.SetLuminosity(user.luminosity - brightness_on)
-
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			H.update_inv_head()
-
-	else
-		return ..(user)
-
-/obj/item/clothing/head/helmet/space/proc/update_light(mob/user)
-
-	if(!brightness_on)
-		return
-
-	if(on)
-		user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(brightness_on)
-
-/obj/item/clothing/head/helmet/space/equipped(mob/user)
 	..()
-	update_light(user)
-
-/obj/item/clothing/head/helmet/space/pickup(mob/user)
-	..()
-	update_light(user)
-
-/obj/item/clothing/head/helmet/space/dropped(mob/user)
-	..()
-	update_light(user)
 
 /obj/item/clothing/head/helmet/space/examine()
 	..()

@@ -71,8 +71,8 @@
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
-		if(back && istype(back,/obj/item/weapon/storage/rig))
-			var/obj/item/weapon/storage/rig/suit = back
+		if(back && istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/suit = back
 			var/cell_status = "ERROR"
 			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
 			stat(null, "Suit charge: [cell_status]")
@@ -681,8 +681,8 @@
 	if(istype(src.head, /obj/item/clothing/head/welding))
 		if(!src.head:up)
 			number += 2
-	if(istype(back, /obj/item/weapon/storage/rig))
-		var/obj/item/weapon/storage/rig/O = back
+	if(istype(back, /obj/item/weapon/rig))
+		var/obj/item/weapon/rig/O = back
 		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 			number += 2
 	if(istype(src.head, /obj/item/clothing/head/helmet/space))

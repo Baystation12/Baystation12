@@ -229,7 +229,7 @@
 /mob/living/carbon/human/MiddleClickOn(var/atom/A)
 
 	if(back)
-		var/obj/item/weapon/storage/rig/rig = back
+		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.selected_module)
 			if(world.time <= next_move) return
 			next_move = world.time + 8

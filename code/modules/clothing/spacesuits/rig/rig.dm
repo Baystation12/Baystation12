@@ -6,7 +6,7 @@
  * Defines the behavior of hardsuits/rigs/power armour.
  */
 
-/obj/item/weapon/storage/rig
+/obj/item/weapon/rig
 
 	name = "hardsuit control module"
 	icon = 'icons/obj/rig_modules.dmi'
@@ -22,8 +22,6 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 	permeability_coefficient = 0
-	max_w_class = 3
-	max_combined_w_class = 35
 
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
@@ -52,16 +50,25 @@
 	// Rig status vars.
 	var/open = 0                                              // Access panel status.
 	var/locked = 1                                            // Lock status.
-	var/emagged
+	var/subverted
+	var/interface_locked
+	var/control_overridden
+	var/ai_override_enabled
+	var/security_check_enabled
+	var/malfunctioning
+	var/malfunction_delay
+	var/electrified = 0
+
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
 	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
 
-	// Spark system, since we seem to need this a bunch.
+	// Wiring! How exciting.
+	var/datum/wires/rig/wires
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/storage/rig/examine()
+/obj/item/weapon/rig/examine()
 	..()
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
@@ -73,8 +80,10 @@
 		usr << "The maintenance panel is [open ? "open" : "closed"]."
 		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</green>"]."
 
-/obj/item/weapon/storage/rig/New()
+/obj/item/weapon/rig/New()
 	..()
+
+	wires = new(src)
 
 	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
 		locked = 0
@@ -87,27 +96,27 @@
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
-			var/obj/item/rig_module/module = new path()
+			var/obj/item/rig_module/module = new path(src)
 			installed_modules += module
 			module.installed(src)
 
 	// Create and initialize our various segments.
 	if(cell_type)
-		cell = new cell_type()
+		cell = new cell_type(src)
 	if(air_type)
-		air_supply = new air_type()
+		air_supply = new air_type(src)
 	if(glove_type)
-		gloves = new glove_type()
-		verbs |= /obj/item/weapon/storage/rig/proc/toggle_gauntlets
+		gloves = new glove_type(src)
+		verbs |= /obj/item/weapon/rig/proc/toggle_gauntlets
 	if(helm_type)
-		helmet = new helm_type()
-		verbs |= /obj/item/weapon/storage/rig/proc/toggle_helmet
+		helmet = new helm_type(src)
+		verbs |= /obj/item/weapon/rig/proc/toggle_helmet
 	if(boot_type)
-		boots = new boot_type()
-		verbs |= /obj/item/weapon/storage/rig/proc/toggle_boots
+		boots = new boot_type(src)
+		verbs |= /obj/item/weapon/rig/proc/toggle_boots
 	if(chest_type)
-		chest = new chest_type()
-		verbs |= /obj/item/weapon/storage/rig/proc/toggle_chest
+		chest = new chest_type(src)
+		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!piece)
@@ -128,7 +137,7 @@
 			toggle_seals(M,1)
 			update_icon()
 
-/obj/item/weapon/storage/rig/Del()
+/obj/item/weapon/rig/Del()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		var/mob/living/M = piece.loc
 		if(istype(M))
@@ -137,7 +146,7 @@
 	processing_objects -= src
 	..()
 
-/obj/item/weapon/storage/rig/proc/suit_is_deployed()
+/obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
 	if(helm_type && (!helmet || wearer.head != helmet))
@@ -150,7 +159,7 @@
 		return 0
 	return 1
 
-/obj/item/weapon/storage/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
+/obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
 
 	if(sealing) return
 
@@ -272,10 +281,12 @@
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
 
-/obj/item/weapon/storage/rig/process()
+/obj/item/weapon/rig/process()
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)
+			if(electrified >0)
+				electrified = 0
 			if(!offline)
 				if(istype(wearer))
 					if(!canremove)
@@ -302,10 +313,19 @@
 			slowdown = offline_slowdown
 		return
 
+	if(cell && cell.charge > 0 && electrified > 0)
+		electrified--
+
+	if(malfunction_delay > 0)
+		malfunction_delay--
+	else if(malfunctioning)
+		malfunctioning--
+		malfunction()
+
 	for(var/obj/item/rig_module/module in installed_modules)
 		cell.use(module.process()*10)
 
-/obj/item/weapon/storage/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
+/obj/item/weapon/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
 
 	if(!istype(user))
 		return 0
@@ -340,7 +360,7 @@
 	cell.use(cost*10)
 	return 1
 
-/obj/item/weapon/storage/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/weapon/rig/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
 	if(!user)
 		return
@@ -403,7 +423,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/weapon/storage/rig/update_icon(var/update_mob_icon)
+/obj/item/weapon/rig/update_icon(var/update_mob_icon)
 
 	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
 	overlays.Cut()
@@ -433,7 +453,7 @@
 		wearer.update_inv_back()
 	return
 
-/obj/item/weapon/storage/rig/Topic(href,href_list)
+/obj/item/weapon/rig/Topic(href,href_list)
 
 	if(..())
 		return 1
@@ -468,7 +488,7 @@
 	src.add_fingerprint(usr)
 	return
 
-/obj/item/weapon/storage/rig/equipped(mob/living/carbon/human/M)
+/obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
 	..()
 
 	if(istype(M) && M.back == src)
@@ -486,7 +506,7 @@
 		wearer = M
 		update_icon()
 
-/obj/item/weapon/storage/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
+/obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
 
 	if(sealing)
 		return
@@ -537,7 +557,7 @@
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
 						use_obj.canremove = 0
-						use_obj.loc = null
+						use_obj.loc = src
 
 		else if (deploy_mode != ONLY_RETRACT)
 			if(check_slot)
@@ -552,7 +572,7 @@
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
 
-/obj/item/weapon/storage/rig/proc/deploy(mob/M,var/sealed)
+/obj/item/weapon/rig/proc/deploy(mob/M,var/sealed)
 
 	var/mob/living/carbon/human/H = M
 
@@ -589,11 +609,26 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
 
-/obj/item/weapon/storage/rig/dropped()
+/obj/item/weapon/rig/dropped()
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, wearer, ONLY_RETRACT)
 	wearer = null
+
+//Todo
+/obj/item/weapon/rig/proc/malfunction()
+	return 0
+
+/obj/item/weapon/rig/emp_act(severity)
+	malfunctioning += severity*10
+	if(malfunction_delay <= 0)
+		malfunction_delay = 20
+
+/obj/item/weapon/rig/proc/shock(mob/user)
+	if (electrocute_mob(user, cell, src))
+		spark_system.start()
+		return 1
+	return 0
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

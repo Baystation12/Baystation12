@@ -54,7 +54,7 @@
 	if(!istype(H) || !H.back)
 		return 0
 
-	var/obj/item/weapon/storage/rig/suit = H.back
+	var/obj/item/weapon/rig/suit = H.back
 	if(!suit || !istype(suit) || !suit.installed_modules.len)
 		return 0
 

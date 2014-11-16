@@ -118,7 +118,7 @@
 
 /obj/item/weapon/tank/jetpack/rig
 	name = "jetpack"
-	var/obj/item/weapon/storage/rig/holder
+	var/obj/item/weapon/rig/holder
 
 /obj/item/weapon/tank/jetpack/rig/examine()
 	usr << "It's a jetpack. If you can see this, report it on the bug tracker."

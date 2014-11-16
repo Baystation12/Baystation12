@@ -9,10 +9,7 @@
 	siemens_coefficient = 0.6
 	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox")
 	camera_networks = list("NUKE")
-
-/obj/item/clothing/head/helmet/space/void/merc/examine(mob/user)
-	if(..(user, 1))
-		user << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
+	light_overlay = "helmet_light_green" //todo: species-specific light overlays
 
 /obj/item/clothing/suit/space/void/merc
 	icon_state = "rig-syndie"

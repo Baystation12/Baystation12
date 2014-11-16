@@ -1,5 +1,5 @@
 // Light rigs are not space-capable, but don't suffer excessive slowdown or sight issues when depowered.
-/obj/item/weapon/storage/rig/light
+/obj/item/weapon/rig/light
 	name = "light suit control module"
 	desc = "A lighter, less armoured rig suit."
 	icon_state = "ninja_rig"
@@ -28,7 +28,7 @@
 /obj/item/clothing/head/helmet/space/rig/light
 	name = "hood"
 
-/obj/item/weapon/storage/rig/light/hacker
+/obj/item/weapon/rig/light/hacker
 	name = "cybersuit control module"
 	suit_type = "cyber"
 	desc = "An advanced powered armour suit with many cyberwarfare enhancements."
@@ -48,7 +48,7 @@
 	name = "mask"
 	flags = FPRINT | TABLEPASS | THICKMATERIAL
 
-/obj/item/weapon/storage/rig/light/ninja
+/obj/item/weapon/rig/light/ninja
 	name = "ominous suit control module"
 	suit_type = "ominous"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for Spider Clan assassins."
@@ -76,7 +76,7 @@
 
 	..()
 
-/obj/item/weapon/storage/rig/light/stealth
+/obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"
 	suit_type = "stealth"
 	desc = "A highly advanced and expensive suit designed for covert operations."

@@ -24,6 +24,7 @@
 	item_state = "mining_helm"
 	item_color = "mining"
 	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 20)
+	light_overlay = "helmet_light_dual"
 
 /obj/item/clothing/suit/space/void/mining
 	icon_state = "rig-mining"
@@ -58,6 +59,7 @@
 	item_color = "sec"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	siemens_coefficient = 0.7
+	light_overlay = "helmet_light_dual"
 
 /obj/item/clothing/suit/space/void/security
 	icon_state = "rig-sec"
@@ -77,6 +79,7 @@
 	item_color = "atmos"
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	light_overlay = "helmet_light_dual"
 
 /obj/item/clothing/suit/space/void/atmos
 	desc = "A special suit that protects against hazardous, low pressure environments. Has improved thermal protection and minor radiation shielding."

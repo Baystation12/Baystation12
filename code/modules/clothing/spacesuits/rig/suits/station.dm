@@ -1,4 +1,4 @@
-/obj/item/weapon/storage/rig/industrial
+/obj/item/weapon/rig/industrial
 	name = "industrial suit control module"
 	suit_type = "industrial hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
@@ -20,7 +20,7 @@
 		)
 
 //Chief Engineer's rig. This is sort of a halfway point between the old hardsuits (voidsuits) and the rig class.
-/obj/item/weapon/storage/rig/ce
+/obj/item/weapon/rig/ce
 
 	name = "advanced voidsuit control module"
 	suit_type = "advanced voidsuit"
@@ -44,7 +44,7 @@
 	boot_type =  null
 	glove_type = null
 
-/obj/item/weapon/storage/rig/hazmat
+/obj/item/weapon/rig/hazmat
 
 	name = "AMI control module"
 	suit_type = "hazmat"

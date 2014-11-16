@@ -424,8 +424,8 @@
 		if(internal)
 
 			var/obj/item/weapon/tank/rig_supply
-			if(istype(back,/obj/item/weapon/storage/rig))
-				var/obj/item/weapon/storage/rig/rig = back
+			if(istype(back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/rig = back
 				if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 					rig_supply = rig.air_supply
 
@@ -1186,8 +1186,8 @@
 
 			//Eyes
 			//Check rig first because it's two-check and other checks will override it.
-			if(istype(back,/obj/item/weapon/storage/rig))
-				var/obj/item/weapon/storage/rig/O = back
+			if(istype(back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/O = back
 				if(O.offline && O.offline_vision_restriction == 2 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 					blinded = 1
 
@@ -1369,7 +1369,7 @@
 
 			var/tmp/glasses_processed = 0
 
-			var/obj/item/weapon/storage/rig/rig = back
+			var/obj/item/weapon/rig/rig = back
 			if(istype(rig) && rig.visor)
 				if(rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
 					glasses_processed = 1
@@ -1497,8 +1497,8 @@
 					client.screen |= global_hud.darkMask
 					masked = 1
 
-			if(!masked && istype(back, /obj/item/weapon/storage/rig))
-				var/obj/item/weapon/storage/rig/O = back
+			if(!masked && istype(back, /obj/item/weapon/rig))
+				var/obj/item/weapon/rig/O = back
 				// Ugh, why is this done on a case by case basis? Why is there no flag for causing weldervision?
 				if(O.offline && O.offline_vision_restriction == 1 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 					client.screen |= global_hud.darkMask

@@ -294,8 +294,8 @@
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							if(istype(C.back,/obj/item/weapon/storage/rig))
-								var/obj/item/weapon/storage/rig/rig = C.back
+							if(istype(C.back,/obj/item/weapon/rig))
+								var/obj/item/weapon/rig/rig = C.back
 								if(rig.air_supply)
 									from = "in"
 									nicename |= "hardsuit"

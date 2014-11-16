@@ -40,7 +40,7 @@
 		return 1
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.back)
-		var/obj/item/weapon/storage/rig/suit = H.back
+		var/obj/item/weapon/rig/suit = H.back
 		if(istype(suit) && suit.cell && suit.cell.charge >= 250)
 			suit.cell.use(250)
 			var/prog_path = text2path(projectile_type)

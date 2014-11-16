@@ -1,6 +1,12 @@
-/obj/item/weapon/storage/rig/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/rig/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(!istype(user,/mob/living)) return 0
+
+	if(electrified != 0)
+		if(cell && cell.charge >= 100)
+			cell.use(100)
+		if(shock(user, 100))
+			return
 
 	// Pass repair items on to the chestpiece.
 	if(chest && (istype(W,/obj/item/stack/sheet/mineral/plastic) || istype(W,/obj/item/stack/sheet/metal) || istype(W, /obj/item/weapon/weldingtool)))
@@ -9,7 +15,7 @@
 	// Lock or unlock the access panel.
 	if(istype(W, /obj/item/weapon/card) || istype(W, /obj/item/device/pda))
 
-		if(emagged)
+		if(subverted)
 			locked = 0
 			user << "<span class='danger'>It looks like the locking system has been shorted out.</span>"
 			return
@@ -17,7 +23,7 @@
 			req_access = null
 			req_one_access = null
 			locked = 0
-			emagged = 1
+			subverted = 1
 			user << "<span class='danger'>You short out the access protocol for the suit.</span>"
 			return
 
@@ -45,6 +51,14 @@
 		return
 
 	if(open)
+
+		// Hacking.
+		if(istype(W,/obj/item/weapon/wirecutters) || istype(W,/obj/item/device/multitool))
+			if(open)
+				wires.Interact(user)
+			else
+				user << "You can't reach the wiring."
+			return
 		// Air tank.
 		if(istype(W,/obj/item/weapon/tank)) //Todo, some kind of check for suits without integrated air supplies.
 
@@ -54,7 +68,7 @@
 
 			user.drop_from_inventory(W)
 			air_supply = W
-			W.loc = null
+			W.loc = src
 			user << "You slot [W] into [src] and tighten the connecting valve."
 			return
 
@@ -83,7 +97,7 @@
 			user << "You install \the [mod] into \the [src]."
 			user.drop_from_inventory(mod)
 			installed_modules |= mod
-			mod.loc = null
+			mod.loc = src
 			mod.installed(src)
 			update_icon()
 			return 1
@@ -92,7 +106,7 @@
 
 			user << "You jack \the [W] into \the [src]'s battery mount."
 			user.drop_from_inventory(W)
-			W.loc = null
+			W.loc = src
 			src.cell = W
 			return
 
@@ -165,5 +179,15 @@
 	// is check if any of the loaded modules want to use the item we've been given.
 	for(var/obj/item/rig_module/module in installed_modules)
 		if(module.accepts_item(W,user)) //Item is handled in this proc
+			return
+	..()
+
+
+/obj/item/weapon/rig/attackby(var/mob/user)
+
+	if(electrified != 0)
+		if(cell && cell.charge >= 100)
+			cell.use(100)
+		if(shock(user, 100))
 			return
 	..()
