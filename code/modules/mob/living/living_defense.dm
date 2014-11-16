@@ -179,3 +179,15 @@
 	return 0
 
 // End BS12 momentum-transfer code.
+
+/mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
+
+	if(!damage)
+		return
+
+	adjustBruteLoss(damage)
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
+	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
+	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
+	spawn(1) updatehealth()
+	return 1

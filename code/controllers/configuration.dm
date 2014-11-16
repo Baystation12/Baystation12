@@ -156,9 +156,8 @@
 	var/list/contact_levels = list(1, 5)			// Defines which Z-levels which, for example, a Code Red announcement may affect
 	var/list/player_levels = list(1, 3, 4, 5, 6)	// Defines all Z-levels a character can typically reach
 
-	var/const/minutes_to_ticks = 60 * 10
 	// Event settings
-	var/expected_round_length = 60 * 3 * minutes_to_ticks // 3 hours
+	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
 	// No custom time, no custom time, between 80 to 100 minutes respectively.
 	var/list/event_first_run   = list(EVENT_LEVEL_MUNDANE = null, 	EVENT_LEVEL_MODERATE = null,	EVENT_LEVEL_MAJOR = list("lower" = 48000, "upper" = 60000))
@@ -543,31 +542,31 @@
 					config.player_levels = text2numlist(value, ";")
 
 				if("expected_round_length")
-					config.expected_round_length = text2num(value) * minutes_to_ticks
+					config.expected_round_length = MinutesToTicks(text2num(value))
 
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+					config.event_first_run[EVENT_LEVEL_MUNDANE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
 
 				if("event_custom_start_moderate")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+					config.event_first_run[EVENT_LEVEL_MODERATE] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
 
 				if("event_custom_start_major")
 					var/values = text2numlist(value, ";")
-					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = values[1] * minutes_to_ticks, "upper" = values[2] * minutes_to_ticks)
+					config.event_first_run[EVENT_LEVEL_MAJOR] = list("lower" = MinutesToTicks(values[1]), "upper" = MinutesToTicks(values[2]))
 
 				if("event_delay_lower")
 					var/values = text2numlist(value, ";")
-					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = values[1] * minutes_to_ticks
-					config.event_delay_lower[EVENT_LEVEL_MODERATE] = values[2] * minutes_to_ticks
-					config.event_delay_lower[EVENT_LEVEL_MAJOR] = values[3] * minutes_to_ticks
+					config.event_delay_lower[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
+					config.event_delay_lower[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
+					config.event_delay_lower[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
 				if("event_delay_upper")
 					var/values = text2numlist(value, ";")
-					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = values[1] * minutes_to_ticks
-					config.event_delay_upper[EVENT_LEVEL_MODERATE] = values[2] * minutes_to_ticks
-					config.event_delay_upper[EVENT_LEVEL_MAJOR] = values[3] * minutes_to_ticks
+					config.event_delay_upper[EVENT_LEVEL_MUNDANE] = MinutesToTicks(values[1])
+					config.event_delay_upper[EVENT_LEVEL_MODERATE] = MinutesToTicks(values[2])
+					config.event_delay_upper[EVENT_LEVEL_MAJOR] = MinutesToTicks(values[3])
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

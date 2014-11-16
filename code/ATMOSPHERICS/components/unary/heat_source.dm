@@ -86,9 +86,6 @@
 /obj/machinery/atmospherics/unary/heater/attack_ai(mob/user as mob)
 	src.ui_interact(user)
 
-/obj/machinery/atmospherics/unary/heater/attack_paw(mob/user as mob)
-	src.ui_interact(user)
-
 /obj/machinery/atmospherics/unary/heater/attack_hand(mob/user as mob)
 	src.ui_interact(user)
 

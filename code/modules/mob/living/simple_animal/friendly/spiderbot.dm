@@ -26,8 +26,7 @@
 	health = 10
 	maxHealth = 10
 
-	attacktext = "shocks"
-	attacktext = "shocks"
+	attacktext = "shocked"
 	melee_damage_lower = 1
 	melee_damage_upper = 3
 

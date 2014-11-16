@@ -64,12 +64,6 @@
 	else
 		..()
 
-/obj/machinery/shield_capacitor/attack_paw(user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/shield_capacitor/attack_ai(user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/shield_capacitor/attack_hand(mob/user)
 	if(stat & (BROKEN))
 		return

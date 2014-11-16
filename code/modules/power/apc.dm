@@ -819,7 +819,6 @@
 	if(inoperable())
 		return 0
 	if(!user.IsAdvancedToolUser())
-		user << "<span class='warning'>You don't have the dexterity to use [src]!</span>"
 		return 0
 	if(user.restrained())
 		user << "<span class='warning'>You must have free hands to use [src].</span>"

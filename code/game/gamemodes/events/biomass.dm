@@ -29,6 +29,7 @@
 		if(/obj/item/weapon/twohanded/fireaxe) del src
 		if(/obj/item/weapon/hatchet) del src
 		if(/obj/item/weapon/melee/energy) del src
+		if(/obj/item/weapon/pickaxe/plasmacutter) del src
 
 		//less effective weapons
 		if(/obj/item/weapon/wirecutters)

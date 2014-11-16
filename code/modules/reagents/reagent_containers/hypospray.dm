@@ -14,10 +14,6 @@
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 	slot_flags = SLOT_BELT
 
-/obj/item/weapon/reagent_containers/hypospray/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-
 /obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 	..()
 	reagents.add_reagent("tricordrazine", 30)
