@@ -84,6 +84,7 @@ rcd light flash thingy on matter drain
 				overload.uses --
 				for(var/mob/V in hearers(M, null))
 					V.show_message("\blue You hear a loud electrical buzzing sound!", 2)
+				message_admins("[usr] ([usr.ckey]) overloading a [M] as a malf ai. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>)")
 				spawn(50)
 					explosion(get_turf(M), 0,1,2,3)
 					del(M)
