@@ -76,7 +76,7 @@
 				M << "\blue <B>Remove your mask!</B>"
 				return 0
 			if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-				M << "\blue <B>Remove his mask!</B>"
+				M << "\blue <B>Remove their mask!</B>"
 				return 0
 
 			var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
@@ -104,19 +104,19 @@
 								permitted = 1
 								break
 						if(permitted || check_rights(R_MOD|R_ADMIN, 0)) // Admins can also rip off their limbs. They know best.
-							visible_message("\red [src] is trying to rip off his [affected.display_name]!", "\red You start ripping off your [affected.display_name]")
+							visible_message("\red [src] is trying to rip off their [affected.display_name]!", "\red You start ripping off your [affected.display_name]")
 							spawn(rand(100, 200)) // After 10 - 20 seconds, PLOP.
 								if (get_organ(M.zone_sel.selecting)==affected && M.a_intent == "grab" && !M.lying && !affected.destspawn) // If they haven't stopped.
-									visible_message("\red [src] rips his own [affected.display_name] off.", "\red You rip your own [affected.display_name] off. Why the hell did you think that was a good idea?")
+									visible_message("\red [src] rips their own [affected.display_name] off.", "\red You rip your own [affected.display_name] off. Why the hell did you think that was a good idea?")
 									affected.droplimb(1, 0, 1, 0)
 									handle_organs(1)
 								else
-									visible_message("\blue [src] decides ripping his [affected.display_name] off may not be the best idea.", "\blue You stop ripping off your [affected.display_name]. Thank god.")
+									visible_message("\blue [src] decides ripping their [affected.display_name] off may not be the best idea.", "\blue You stop ripping off your [affected.display_name]. Thank god.")
 						else
 							src << "You cannot do that, as it will kill you. A-Help if you need to die, or dismember that."
 							message_admins("[ckey] ([src]) has tried to rip off their [affected.display_name], but they were not permitted due to not being antagonist as human.", 1)
 					else
-						visible_message("\blue [src] detaches his own [affected.display_name].", "\blue You detach your [affected.display_name].")
+						visible_message("\blue [src] detaches their own [affected.display_name].", "\blue You detach your [affected.display_name].")
 						var/organ = affected.droplimb(1, 0, 0, 0) // If this isn't a robo limb, what the fuck.
 						if (istype(organ, /obj/item/robot_parts))
 							var/obj/item/robot_parts/robolimb = organ
@@ -150,7 +150,7 @@
 						tugTime = tugTime/2 // Easier to rip off. Still likely messy.
 
 					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
-					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had his [affected.name] tugged at by [M.name] ([M.ckey])</font>")
+					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] tugged at by [M.name] ([M.ckey])</font>")
 					if (M.species.flags & IS_STRONG || affected.status & ORGAN_ROBOT)
 						msg_admin_attack("[key_name(M)] began [TugText] [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
 
@@ -158,12 +158,12 @@
 						if (((!(M.species.flags & IS_STRONG)&&(affected.status & ORGAN_ROBOT)) || M.species.flags & IS_STRONG) && istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.a_intent == "grab" && M.Adjacent(src) && !M.lying && !affected.destspawn && get_organ(M.zone_sel.selecting)==affected) // Are we still ripping?
 							affected.droplimb(1) // RIP.
 							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Ripped off [src.name] ([src.ckey])'s [affected.name]</font>")
-							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had his [affected.name] ripped off by [M.name] ([M.ckey])</font>")
+							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] ripped off by [M.name] ([M.ckey])</font>")
 							msg_admin_attack("[key_name(M)] ripped off [key_name(src)]'s [affected.name]")
 							visible_message("<span class='danger'>[M] ripped off [src]'s [affected.display_name]!</span>", "<span class='danger'>[M] ripped off your [affected.display_name]!</span>")
 						else
 							M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stopped [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
-							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Stopped having his [affected.name] [TuggedText] by [M.name] ([M.ckey])</font>")
+							src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Stopped having their [affected.name] [TuggedText] by [M.name] ([M.ckey])</font>")
 							if (M.species.flags & IS_STRONG)
 								msg_admin_attack("[key_name(M)] stopped [TugText] [key_name(src)]'s [affected.name]")
 							visible_message("\blue [M] stopped [TugText] [src]'s [affected.display_name].", "\blue [M] stopped [TugText] your [affected.display_name].")

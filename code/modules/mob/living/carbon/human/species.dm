@@ -503,7 +503,7 @@
 
 	synth_temp_gain = 5 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR | IS_STRONG
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -512,6 +512,10 @@
 		"heart" =    /datum/organ/internal/heart,
 		"brain" =    /datum/organ/internal/brain,
 		)
+
+/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.gender = NEUTER
+	return ..()
 
 /datum/species/kidan
 	name = "Kidan"
