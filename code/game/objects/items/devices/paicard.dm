@@ -11,6 +11,13 @@
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
 
+/obj/item/device/paicard/relaymove(var/mob/user, var/direction)
+	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))
+		var/obj/item/rig_module/module = src.loc.loc
+		if(!module.holder || !direction)
+			return
+		module.holder.forced_move(direction)
+
 /obj/item/device/paicard/New()
 	..()
 	overlays += "pai-off"

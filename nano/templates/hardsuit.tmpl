@@ -148,7 +148,15 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 						<tr>
 							<td width = '60%'>
 								<div class='average'>
-									<strong>{{:value.name}}</strong> [E: {{:value.engagecost}} | A: {{:value.activecost}} | P: {{:value.passivecost}}]
+									<strong>{{:value.name}}</strong> 
+									{{if value.damage > 0}}
+										{{if value.damage == 1}}
+											(<font color='orange'>damaged</font>) 
+										{{else}}
+											(<font color='red'>destroyed</font>) 
+										{{/if}}
+									{{/if}}
+									[E: {{:value.engagecost}} | A: {{:value.activecost}} | P: {{:value.passivecost}}]
 								</div>
 							</td>
 						</tr>

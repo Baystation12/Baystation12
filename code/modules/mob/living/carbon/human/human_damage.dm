@@ -355,12 +355,11 @@ This function restores all organs.
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
 
-
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
 	//Handle BRUTE and BURN damage
-	handle_suit_punctures(damagetype, damage)
+	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 2)	return 0
 

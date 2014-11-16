@@ -1369,14 +1369,14 @@
 					seer = 0
 
 			var/tmp/glasses_processed = 0
-
 			var/obj/item/weapon/rig/rig = back
 			if(istype(rig) && rig.visor)
-				if(rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
-					glasses_processed = 1
-					process_glasses(rig.visor.vision.glasses)
+				if(!rig.helmet || (head && rig.helmet == head))
+					if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
+						glasses_processed = 1
+						process_glasses(rig.visor.vision.glasses)
 
-			if(glasses)
+			if(glasses && !glasses_processed)
 				glasses_processed = 1
 				process_glasses(glasses)
 

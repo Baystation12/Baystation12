@@ -58,6 +58,7 @@
 	var/malfunctioning = 0
 	var/malfunction_delay = 0
 	var/electrified = 0
+	var/locked_down = 0
 
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
@@ -410,7 +411,8 @@
 			"passivecost" =       module.passive_power_cost*10,
 			"engagestring" =      module.engage_string,
 			"activatestring" =    module.activate_string,
-			"deactivatestring" =  module.deactivate_string
+			"deactivatestring" =  module.deactivate_string,
+			"damage" =            module.damage
 			)
 
 		if(module.charges && module.charges.len)
@@ -648,12 +650,48 @@
 	malfunctioning += severity*10
 	if(malfunction_delay <= 0)
 		malfunction_delay = 20
+	take_hit(severity*10,"electrical pulse")
 
 /obj/item/weapon/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src))
 		spark_system.start()
 		return 1
 	return 0
+
+/obj/item/weapon/rig/proc/take_hit(damage,source)
+
+	if(!installed_modules.len)
+		return
+
+	if(!prob(max(0,(damage-(chest ? chest.breach_threshold : 0)))))
+		return
+
+	var/list/valid_modules = list()
+	for(var/obj/item/rig_module/module in installed_modules)
+		if(module.damage < 2)
+			valid_modules |= module
+
+	if(!valid_modules.len)
+		return
+
+	var/obj/item/rig_module/dam_module = pick(valid_modules)
+	dam_module.damage++
+
+	if(!source)
+		source = "hit"
+
+	if(wearer)
+		wearer << "<span class='danger'>The [source] has [dam_module.damage >= 2 ? "destroyed" : "damaged"] your [dam_module.interface_name]!"
+	dam_module.deactivate()
+
+/obj/item/weapon/rig/proc/forced_move(dir)
+	if(locked_down)
+		return 0
+	if(!control_overridden)
+		return
+	if(!wearer || wearer.back != src)
+		return 0
+	wearer.Move(null,dir)
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

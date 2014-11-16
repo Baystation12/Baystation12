@@ -167,3 +167,10 @@
 /obj/item/device/aicard/proc/clear()
 	name = "inteliCard"
 	update_icon()
+
+/obj/item/device/aicard/relaymove(var/mob/user, var/direction)
+	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))
+		var/obj/item/rig_module/module = src.loc.loc
+		if(!module.holder || !direction)
+			return
+		module.holder.forced_move(direction)

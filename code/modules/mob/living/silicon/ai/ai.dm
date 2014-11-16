@@ -599,6 +599,21 @@ var/list/ai_verbs_default = list(
 	//src.cameraFollow = null
 	src.view_core()
 
+/mob/living/silicon/ai/verb/hardsuit_interface()
+	set category = "AI Commands"
+	set name = "Open Hardsuit Interface"
+
+	if(!src.loc || !src.loc.loc || !istype(src.loc.loc, /obj/item/rig_module))
+		usr << "You are not loaded into a hardsuit."
+		return
+
+	var/obj/item/rig_module/module = src.loc.loc
+	if(!module.holder)
+		usr << "Your module is not installed in a hardsuit."
+		return
+
+	module.holder.ui_interact(usr)
+
 
 //Replaces /mob/living/silicon/ai/verb/change_network() in ai.dm & camera.dm
 //Adds in /mob/living/silicon/ai/proc/ai_network_change() instead

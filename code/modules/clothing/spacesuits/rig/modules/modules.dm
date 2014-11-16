@@ -15,6 +15,7 @@
 	icon_state = "module"
 	matter = list("metal" = 20000, "plastic" = 30000, "glass" = 5000)
 
+	var/damage = 0
 	var/obj/item/weapon/rig/holder
 
 	var/module_cooldown = 10
@@ -51,6 +52,60 @@
 	var/activate_string = "Activate"
 	var/deactivate_string = "Deactivate"
 
+/obj/item/rig_module/examine()
+	..()
+	switch(damage)
+		if(0)
+			usr << "It is undamaged."
+		if(1)
+			usr << "It is badly damaged."
+		if(2)
+			usr << "It is almost completely destroyed."
+
+/obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(istype(W,/obj/item/stack/nanopaste))
+
+		if(damage == 0)
+			user << "There is no damage to mend."
+			return
+
+		user << "You start mending the damaged portions of \the [src]..."
+
+		if(!do_after(user,30) || !W || !src)
+			return
+
+		var/obj/item/stack/nanopaste/paste = W
+		damage = 0
+		user << "You mend the damage to [src] with [W]."
+		paste.use(1)
+		return
+
+	else if(istype(W,/obj/item/stack/cable_coil))
+
+		switch(damage)
+			if(0)
+				user << "There is no damage to mend."
+				return
+			if(2)
+				user << "There is no damage that you are capable of mending with such crude tools."
+				return
+
+		var/obj/item/stack/cable_coil/cable = W
+		if(!cable.amount >= 5)
+			user << "You need five units of cable to repair \the [src]."
+			return
+
+		user << "You start mending the damaged portions of \the [src]..."
+		if(!do_after(user,30) || !W || !src)
+			return
+
+		damage = 1
+		user << "You mend some of damage to [src] with [W], but you will need more advanced tools to fix it completely."
+		cable.use(5)
+		return
+	..()
+
 /obj/item/rig_module/New()
 	..()
 	if(suit_overlay_inactive)
@@ -80,6 +135,9 @@
 
 //Proc for one-use abilities like teleport.
 /obj/item/rig_module/proc/engage()
+
+	if(damage >= 2)
+		usr << "<span class='warning'>The [interface_name] is damaged beyond use!</span>"
 
 	if(world.time < next_use)
 		usr << "<span class='warning'>You cannot use the [interface_name] again so soon.</span>"
