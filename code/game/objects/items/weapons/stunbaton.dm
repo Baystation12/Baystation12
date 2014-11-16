@@ -33,6 +33,14 @@
 	update_icon()
 	return
 
+/obj/item/weapon/melee/baton/loaded/armoury/New() //this one starts with a cell pre-installed.
+	..()
+	name = "high capacity stunbaton"
+	bcell = new/obj/item/weapon/cell/super(src)
+	update_icon()
+	return
+
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.use(chrgdeductamt))
