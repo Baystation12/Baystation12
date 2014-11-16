@@ -97,6 +97,12 @@
 			if("labgreen")
 				src.icon_state = "labgreen_open"
 				usr << "You unbutton the labcoat."
+			if ("labcoat_black_open")
+				src.icon_state = "labcoat_black"
+				usr << "You button up the labcoat."
+			if ("labcoat_black")
+				src.icon_state = "labcoat_black_open"
+				usr << "You unbutton the labcoat."
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 				return

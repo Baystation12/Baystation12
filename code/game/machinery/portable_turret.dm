@@ -54,6 +54,10 @@
 
 	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
 
+/obj/machinery/porta_turret/stationary
+	lethal = 1
+	installation = /obj/item/weapon/gun/energy/laser
+
 /obj/machinery/porta_turret/New()
 	..()
 	icon_state = "grey_target_prism"
@@ -141,18 +145,25 @@
 	del(cover) // qdel
 	..()
 
+/obj/machinery/porta_turret/proc/can_use(mob/user)
+	if(ailock && issilicon(user))
+		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+		return 0
+
+	if(locked && !issilicon(user))
+		user << "<span class='notice'>Access denied.</span>"
+		return 0
+
+	return 1
 
 /obj/machinery/porta_turret/attack_ai(mob/user)
-	if(!ailock)
-		return attack_hand(user)
-	else
-		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
-
+	return attack_hand(user)
 
 /obj/machinery/porta_turret/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
+	if(..())
+		return 1
+	if(!can_use(user))
+		return 1
 	interact(user)
 
 /obj/machinery/porta_turret/interact(mob/user)
@@ -165,13 +176,17 @@
 
 	if(!locked || issilicon(user))
 		dat += text({"<BR><BR>
-					Neutralize All Non-Synthetics: []<BR>
-					Check for Weapon Authorization: []<BR>
+					Lethal Mode: []<BR>
+					Neutralize All Non-Synthetics: []<BR>"},
+
+					"<A href='?src=\ref[src];operation=togglelethal'>[lethal ? "Enabled" : "Disabled"]</A>",
+					"<A href='?src=\ref[src];operation=toggleai'>[ai ? "Yes" : "No"]</A>")
+		if(!ai)
+			dat += text({"Check for Weapon Authorization: []<BR>
 					Check Security Records: []<BR>
 					Neutralize All Non-Authorized Personnel: []<BR>
 					Neutralize All Unidentified Life Signs: []<BR>"},
 
-					"<A href='?src=\ref[src];operation=toggleai'>[ai ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=authweapon'>[auth_weapons ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=shootall'>[stun_all ? "Yes" : "No"]</A>",
@@ -181,14 +196,23 @@
 	onclose(user, "autosec")
 	return
 
+/obj/machinery/porta_turret/proc/HasController()
+	var/area/A = get_area(src)
+	return A && A.turret_controls.len > 0
+
 /obj/machinery/porta_turret/Topic(href, href_list)
 	if(..())
-		return
+		return 1
+	if(!can_use(usr))
+		return 1
+
 	usr.set_machine(src)
-	add_fingerprint(usr)
-	if(href_list["power"] && (!locked || issilicon(usr)))
+	if(href_list["power"])
 		if(anchored)	//you can't turn a turret on/off if it's not anchored/secured
-			on = !on	//toggle on/off
+			if(HasController())
+				usr << "<span class='notice'>Turrets can only be [on ? "disabled" : "enabled"] using the assigned turret controller.</span>"
+			else
+				on = !on	//toggle on/off
 		else
 			usr << "<span class='notice'>It has to be secured first!</span>"
 
@@ -196,6 +220,12 @@
 		return
 
 	switch(href_list["operation"])	//toggles customizable behavioural protocols
+		if("togglelethal")
+			if(!controllock)
+				if(HasController())
+					usr << "<span class='notice'>Weapon mode can only be altered using the assigned turret controller.</span>"
+				else
+					lethal = !lethal
 		if("toggleai")
 			ai = !ai
 		if("authweapon")
@@ -204,6 +234,8 @@
 			check_records = !check_records
 		if("shootall")
 			stun_all = !stun_all
+		if("checkxenos")
+			check_anomalies = !check_anomalies
 	updateUsrDialog()
 
 
@@ -252,20 +284,24 @@
 
 	else if((istype(I, /obj/item/weapon/wrench)) && (!on))
 		if(raised) return
-		//This code handles moving the turret around. After all, it's a portable turret!
-		if(!anchored && !isinspace())
-			anchored = 1
-			invisibility = INVISIBILITY_LEVEL_TWO
-			update_icon()
-			user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
-			cover = new /obj/machinery/porta_turret_cover(loc) //create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
-			cover.Parent_Turret = src //make the cover's parent src
-		else if(anchored)
-			anchored = 0
-			user << "<span class='notice'>You unsecure the exterior bolts on the turret.</span>"
-			invisibility = 0
-			update_icon()
-			del(cover) //deletes the cover, and the turret instance itself becomes its own cover. - qdel
+
+		if(do_after(user, 50))
+			//This code handles moving the turret around. After all, it's a portable turret!
+			if(!anchored && !isinspace())
+				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+				anchored = 1
+				invisibility = INVISIBILITY_LEVEL_TWO
+				update_icon()
+				user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
+				cover = new /obj/machinery/porta_turret_cover(loc) //create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
+				cover.Parent_Turret = src //make the cover's parent src
+			else if(anchored)
+				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
+				anchored = 0
+				user << "<span class='notice'>You unsecure the exterior bolts on the turret.</span>"
+				invisibility = 0
+				update_icon()
+				del(cover) //deletes the cover, and the turret instance itself becomes its own cover. - qdel
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
 		//Behavior lock/unlock mangement
@@ -703,6 +739,7 @@
 					Turret.name = finish_name
 					Turret.installation = installation
 					Turret.gun_charge = gun_charge
+					Turret.on = 0
 					Turret.setup()
 
 //					Turret.cover=new/obj/machinery/porta_turret_cover(loc)
@@ -772,137 +809,14 @@
 //I'm not fixing it because i'm fucking bored of this code already, but someone should just reroute these to the parent turret's procs.
 
 /obj/machinery/porta_turret_cover/attack_ai(mob/user)
-	if(!Parent_Turret.ailock)
-		return attack_hand(user)
-	else
-		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+	return attack_hand(user)
 
 /obj/machinery/porta_turret_cover/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
-	var/dat
-	if(!istype(Parent_Turret, /obj/machinery/porta_turret/tag))
-		dat += text({"
-					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-					Status: []<BR>
-					Behaviour controls are [Parent_Turret.locked ? "locked" : "unlocked"]"},
-
-					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
-
-		if(!src.Parent_Turret.locked || issilicon(user))
-			dat += text({"<BR><BR>
-						Neutralize All Non-Synthetics: []<BR>
-						Check for Weapon Authorization: []<BR>
-						Check Security Records: []<BR>
-						Neutralize All Non-Authorized Personnel: []<BR>
-						Neutralize All Unidentified Life Signs: []<BR>"},
-
-						"<A href='?src=\ref[src];operation=toggleai'>[Parent_Turret.ai ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=authweapon'>[Parent_Turret.auth_weapons ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=checkrecords'>[Parent_Turret.check_records ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
-						"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>" )
-	else
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			var/obj/machinery/porta_turret/tag/laser_turret = Parent_Turret
-			if(laser_turret.lasercolor == "b" && istype(H.wear_suit, /obj/item/clothing/suit/redtag))
-				return
-			if(laser_turret.lasercolor == "r" && istype(H.wear_suit, /obj/item/clothing/suit/bluetag))
-				return
-		dat += text({"
-					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-					Status: []<BR>"},
-
-					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
-
-	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
-
+	return Parent_Turret.attack_hand(user)
 
 /obj/machinery/porta_turret_cover/Topic(href, href_list)
-	if(..())
-		return
-	usr.set_machine(src)
-	Parent_Turret.add_fingerprint(usr)
-	add_fingerprint(usr)
-	if(href_list["power"] && (!src.Parent_Turret.locked || issilicon(usr)))
-		if(Parent_Turret.anchored)
-			if(Parent_Turret.on)
-				Parent_Turret.on = 0
-			else
-				Parent_Turret.on = 1
-		else
-			usr << "<span class='notice'>It has to be secured first!</span>"
-
-		updateUsrDialog()
-		return
-
-	switch(href_list["operation"])
-		if("toggleai")
-			Parent_Turret.ai = !Parent_Turret.ai
-		if("authweapon")
-			Parent_Turret.auth_weapons = !Parent_Turret.auth_weapons
-		if("checkrecords")
-			Parent_Turret.check_records = !Parent_Turret.check_records
-		if("shootall")
-			Parent_Turret.stun_all = !Parent_Turret.stun_all
-		if("checkxenos")
-			Parent_Turret.check_anomalies = !Parent_Turret.check_anomalies
-
+	Parent_Turret.Topic(href, href_list, 1)	// Calling another object's Topic requires that we claim to not have a window, otherwise BYOND's base proc will runtime.
 	updateUsrDialog()
 
-
 /obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/emag) && !Parent_Turret.emagged)
-		user << "<span class='notice'>You short out [Parent_Turret]'s threat assessment circuits.</span>"
-		visible_message("[Parent_Turret] hums oddly...")
-		Parent_Turret.emagged = 1
-		Parent_Turret.on = 0
-		sleep(40)
-		Parent_Turret.on = 1
-
-	else if(istype(I, /obj/item/weapon/wrench) && !Parent_Turret.on)
-		if(Parent_Turret.raised) return
-
-		if(!Parent_Turret.anchored)
-			Parent_Turret.anchored = 1
-			Parent_Turret.invisibility = INVISIBILITY_LEVEL_TWO
-			Parent_Turret.icon_state = "grey_target_prism"
-			user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
-		else
-			Parent_Turret.anchored = 0
-			user << "<span class='notice'>You unsecure the exterior bolts on the turret.</span>"
-			Parent_Turret.icon_state = "turretCover"
-			Parent_Turret.invisibility = 0
-			del(src) // qdel
-
-	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
-		if(Parent_Turret.allowed(user))
-			Parent_Turret.locked = !Parent_Turret.locked
-			user << "<span class='notice'>Controls are now [Parent_Turret.locked ? "locked" : "unlocked"].</span>"
-			updateUsrDialog()
-		else
-			user << "<span class='notice'>Access denied.</span>"
-
-	else
-		user.changeNext_move(CLICK_CD_MELEE)
-		Parent_Turret.health -= I.force * 0.5
-		if(Parent_Turret.health <= 0)
-			Parent_Turret.die()
-		if(I.force * 0.5 > 2)
-			if(!Parent_Turret.attacked && !Parent_Turret.emagged)
-				Parent_Turret.attacked = 1
-				spawn()
-					sleep(30)
-					Parent_Turret.attacked = 0
-		..()
-
-
-/obj/machinery/porta_turret/stationary
-	lethal = 1
-
-	New()
-		installation = /obj/item/weapon/gun/energy/laser
-		..()
+	Parent_Turret.attackby(I, user)
