@@ -3,6 +3,10 @@
 	shuttle_tag = "Special Operations"
 	req_access = list(access_cent_specops)
 
+/obj/machinery/computer/shuttle_control/specops/attack_ai(user as mob)
+	user << "\red Access Denied."
+	return 1
+
 //for shuttles that may use a different docking port at each location
 /datum/shuttle/ferry/multidock
 	var/docking_controller_tag_station
@@ -34,6 +38,7 @@
 /datum/shuttle/ferry/multidock/specops/proc/radio_announce(var/message)
 	if(announcer)
 		announcer.autosay(message, "A.L.I.C.E.", "Response Team")
+
 
 /datum/shuttle/ferry/multidock/specops/launch(var/user)
 	if (!can_launch())
