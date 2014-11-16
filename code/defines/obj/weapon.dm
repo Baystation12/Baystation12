@@ -54,6 +54,10 @@
 /obj/item/weapon/soap/deluxe
 	icon_state = "soapdeluxe"
 
+/obj/item/weapon/soap/cap
+	desc = "The Captain's soap, looks like its made of gold!"
+	icon_state = "soapcap"
+
 /obj/item/weapon/soap/deluxe/New()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
 
