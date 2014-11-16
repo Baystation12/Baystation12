@@ -30,8 +30,8 @@
 
 //Jackets with buttons, used for labcoats, IA jackets, First Responder jackets, and brown jackets.
 /obj/item/clothing/suit/storage/toggle
-	/obj/item/clothing/suit/storage/toggle/var/icon_open
-	/obj/item/clothing/suit/storage/toggle/var/icon_closed
+	var/icon_open
+	var/icon_closed
 	verb/toggle()
 		set name = "Toggle Coat Buttons"
 		set category = "Object"
