@@ -11,7 +11,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
-/obj/item/clothing/suit/storage/toggle/labcoat/red	name = "red labcoat"
+/obj/item/clothing/suit/storage/toggle/labcoat/red
+	name = "red labcoat"
 	desc = "A suit that protects against minor chemical spills. This one is red."
 	icon_state = "red_labcoat_open"
 	item_state = "red_labcoat"
