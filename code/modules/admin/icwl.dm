@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-var/icwl_keylist[]		//to store the keys & ranks
+var/icwl_keylist = null		//to store the keys & ranks
 
 
 /hook/startup/proc/loadICWL()
@@ -10,7 +10,7 @@ var/icwl_keylist[]		//to store the keys & ranks
 /proc/icwl_saveWhitelist()
 	for(var/p in icwl_keylist)
 		if(!p)
-			icwl_remove(p)
+			icwl_remList(p)
 	fdel("data/icwl.list")
 	text2file(list2text(icwl_keylist, "\n"), "data/icwl.list")
 
@@ -20,22 +20,12 @@ var/icwl_keylist[]		//to store the keys & ranks
 		icwl_keylist=list()
 
 /proc/icwl_addList(ckey)
-	if (!ckey) return
-	icwl_keylist.Add(ckey)
+	icwl_keylist += ckey
 	icwl_saveWhitelist()
 
 /proc/icwl_remList(ckey)
-	if (!ckey) return
-	icwl_remove(ckey)
+	icwl_keylist -= ckey
 	icwl_saveWhitelist()
-
-/proc/icwl_remove(X)
-	for (var/i = 1; i <= length(icwl_keylist); i++)
-		if( findtext(icwl_keylist[i], "[X]") )
-			icwl_keylist.Remove(icwl_keylist[i])
-			icwl_saveWhitelist()
-			return 1
-	return 0
 
 /proc/icwl_isWhitelisted(ckey)
 	if(ckey)
