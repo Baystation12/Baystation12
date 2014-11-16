@@ -18,7 +18,6 @@
 
 	New()
 		..()
-		sleep(2)
 		for(var/i = 0, i < 6, i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/flour(src)
 		new /obj/item/weapon/reagent_containers/food/condiment/sugar(src)
@@ -44,7 +43,6 @@
 
 	New()
 		..()
-		sleep(2)
 		for(var/i = 0, i < 4, i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)
 		return
@@ -63,7 +61,6 @@
 
 	New()
 		..()
-		sleep(2)
 		for(var/i = 0, i < 5, i++)
 			new /obj/item/weapon/reagent_containers/food/drinks/milk(src)
 		for(var/i = 0, i < 3, i++)
@@ -87,7 +84,6 @@
 
 	New()
 		..()
-		sleep(2)
 		for(var/i = 0, i < 3, i++)
 			new /obj/item/weapon/spacecash/c1000(src)
 		for(var/i = 0, i < 5, i++)

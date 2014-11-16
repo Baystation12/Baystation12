@@ -57,9 +57,6 @@
 /obj/structure/morgue/alter_health()
 	return src.loc
 
-/obj/structure/morgue/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/structure/morgue/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
@@ -136,9 +133,6 @@
 	var/obj/structure/morgue/connected = null
 	anchored = 1
 	throwpass = 1
-
-/obj/structure/m_tray/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/structure/m_tray/attack_hand(mob/user as mob)
 	if (src.connected)
@@ -221,9 +215,6 @@
 
 /obj/structure/crematorium/alter_health()
 	return src.loc
-
-/obj/structure/crematorium/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/structure/crematorium/attack_hand(mob/user as mob)
 //	if (cremating) AWW MAN! THIS WOULD BE SO MUCH MORE FUN ... TO WATCH
@@ -352,9 +343,6 @@
 	var/obj/structure/crematorium/connected = null
 	anchored = 1
 	throwpass = 1
-
-/obj/structure/c_tray/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/structure/c_tray/attack_hand(mob/user as mob)
 	if (src.connected)

@@ -24,7 +24,8 @@
 		"/obj/item/stack/cable_coil",
 		"/obj/item/device/t_scanner",
 		"/obj/item/device/analyzer",
-		"/obj/item/taperoll/engineering")
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/robotanalyzer")
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -82,7 +83,7 @@
 	max_w_class = 3
 	max_combined_w_class = 21
 	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/grenade",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
 		"/obj/item/weapon/handcuffs",
 		"/obj/item/device/flash",

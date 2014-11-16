@@ -2,7 +2,6 @@
 
 //meteor storms are much heavier
 /datum/event/meteor_wave
-	name 			= "Meteor Wave"
 	startWhen		= 6
 	endWhen			= 33
 
@@ -21,7 +20,6 @@
 
 //
 /datum/event/meteor_shower
-	name 			= "Meteor Shower"
 	startWhen		= 5
 	endWhen 		= 7
 	var/next_meteor = 6

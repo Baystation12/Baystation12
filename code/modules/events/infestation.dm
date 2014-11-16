@@ -14,7 +14,6 @@
 #define VERM_SPIDERS 2
 
 /datum/event/infestation
-	name = "Vermin Infestation"
 	announceWhen = 10
 	endWhen = 11
 	var/location

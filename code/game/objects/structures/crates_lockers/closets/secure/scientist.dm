@@ -10,7 +10,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/under/rank/scientist(src)
 		//new /obj/item/clothing/suit/labcoat/science(src)
 		new /obj/item/clothing/suit/storage/toggle/labcoat(src)
@@ -35,7 +34,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/suit/bio_suit/scientist(src)
 		new /obj/item/clothing/head/bio_hood/scientist(src)
 		new /obj/item/clothing/under/rank/research_director(src)

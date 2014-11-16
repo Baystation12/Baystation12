@@ -1,6 +1,5 @@
 
 /datum/event/mundane_news
-	name = "Mundande news"
 	endWhen = 10
 
 /datum/event/mundane_news/announce()
@@ -126,7 +125,6 @@
 	news_network.SubmitArticle(body, author, channel, null, 1)
 
 /datum/event/trivial_news
-	name = "Trivial news"
 	endWhen = 10
 
 /datum/event/trivial_news/announce()

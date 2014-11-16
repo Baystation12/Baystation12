@@ -865,6 +865,15 @@
 	icon_state = "mitlabcoat"
 	item_state = "mitlabcoat"
 
+/obj/item/clothing/suit/storage/toggle/labcoat/fluff/epsilon //Devildabeast: Looping Song
+	name = "e UMi labcoat"
+	desc = "A suit that protects against minor chemical spills. Has a black stripe on the shoulder. The abbreviation \"e UMi\" is written on the back in bold text."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "labcoat_black_open"
+	icon_open = "labcoat_black_open"
+	icon_closed = "labcoat_black"
+	item_state = "labcoat_black"
+
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
 	name = "leather jacket"
 	desc = "A black leather coat, popular amongst punks, greasers, and other galactic scum."
@@ -1266,6 +1275,14 @@
 	icon_state = "digiboots"
 	species_restricted = null
 
+/obj/item/clothing/shoes/jackboots/fluff/harmony_singh_1 //Bromuzl: Harmony Singh
+	name = "Springjacks"
+	desc = "A pair of highly modified jackboots in medical white, with some type of spring assembly on the ankle and heels, painted orange."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "springjacks"
+	item_state = "springjacks"
+	slowdown = SHOES_SLOWDOWN+1 //Slowing down because of her injured foot, these are for ease of pain so she can get off painkillers.
+	siemens_coefficient = 0.7 //copied from Jackboots under code/modules/clothing/shoes/miscellaneous.dm
 
 //////////// Sets ////////////
 

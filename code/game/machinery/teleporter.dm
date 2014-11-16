@@ -77,9 +77,6 @@
 
 	return
 
-/obj/machinery/computer/teleporter/attack_paw()
-	src.attack_hand()
-
 /obj/machinery/teleport/station/attack_ai()
 	src.attack_hand()
 
@@ -309,9 +306,6 @@
 	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
-	src.attack_hand()
-
-/obj/machinery/teleport/station/attack_paw()
 	src.attack_hand()
 
 /obj/machinery/teleport/station/attack_ai()

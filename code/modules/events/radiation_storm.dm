@@ -1,11 +1,9 @@
 /datum/event/radiation_storm
-	name = "Radiation Storm"
 	var/const/enterBelt 	= 60
 	var/const/leaveBelt 	= 170
 	var/const/revokeAccess	= 230
 
 	endWhen				= revokeAccess
-	oneShot				= 1
 
 	var/postStartTicks
 

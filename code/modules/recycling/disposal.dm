@@ -204,31 +204,27 @@
 	update()
 	return
 
-
-// monkeys can only pull the flush lever
-/obj/machinery/disposal/attack_paw(mob/user as mob)
-	if(stat & BROKEN)
-		return
-
-	flush = !flush
-	update()
-	return
-
 // ai as human but can't flush
 /obj/machinery/disposal/attack_ai(mob/user as mob)
 	interact(user, 1)
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
+
+	if(stat & BROKEN)
+		return
+
 	if(user && user.loc == src)
 		usr << "\red You cannot reach the controls from inside."
 		return
-	/*
-	if(mode==-1)
-		usr << "\red The disposal units power is disabled."
-		return
-	*/
-	interact(user, 0)
+
+	// Clumsy folks can only flush it.
+	if(user.IsAdvancedToolUser(1))
+		interact(user, 0)
+	else
+		flush = !flush
+		update()
+	return
 
 // user interaction
 /obj/machinery/disposal/interact(mob/user, var/ai=0)
