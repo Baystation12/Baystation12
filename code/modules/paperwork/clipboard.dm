@@ -8,7 +8,7 @@
 	throw_speed = 3
 	throw_range = 10
 	var/obj/item/weapon/pen/haspen		//The stored pen.
-	var/obj/item/weapon/toppaper	//The topmost piece of paper.
+	var/obj/item/weapon/paperwork/toppaper //The topmost piece of paper. Used when attacking the clipboard with a pen or stamp
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 
@@ -45,16 +45,16 @@
 
 /obj/item/weapon/clipboard/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-	if(istype(W, /obj/item/weapon/paperwork/paper) || istype(W, /obj/item/weapon/photo))
+	if(istype(W, /obj/item/weapon/paperwork))
 		user.drop_item()
 		W.loc = src
-		if(istype(W, /obj/item/weapon/paperwork/paper))
-			toppaper = W
+		//if(istype(W, /obj/item/weapon/paperwork/paper))
+		toppaper = W
 		user << "<span class='notice'>You clip the [W] onto \the [src].</span>"
 		update_icon()
 
-	else if(istype(toppaper) && istype(W, /obj/item/weapon/pen))
-		toppaper.attackby(W, usr)
+	else if(istype(toppaper) && (istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon) || istype(W, /obj/item/weapon/stamp)) )
+		toppaper.attackby(W, user)
 		update_icon()
 
 	return
@@ -66,17 +66,8 @@
 	else
 		dat += "<A href='?src=\ref[src];addpen=1'>Add Pen</A><BR><HR>"
 
-	//The topmost paper. I don't think there's any way to organise contents in byond, so this is what we're stuck with.	-Pete
-	if(toppaper)
-		var/obj/item/weapon/paperwork/paper/P = toppaper
-		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR><HR>"
-
-	for(var/obj/item/weapon/paperwork/paper/P in src)
-		if(P==toppaper)
-			continue
-		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
-	for(var/obj/item/weapon/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
+	for(var/obj/item/weapon/paperwork/P in src)
+		dat += "<A href='?src=\ref[src];write=\ref[P]'>Write</A> <A href='?src=\ref[src];remove=\ref[P]'>Remove</A> [(P == toppaper)? "* Top Item " : "<A href='?src=\ref[src];top=\ref[P]'>Move to Top</A>"] - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 
 	user << browse(dat, "window=clipboard")
 	onclose(user, "clipboard")
@@ -106,52 +97,42 @@
 					usr << "<span class='notice'>You slot the pen into \the [src].</span>"
 
 		else if(href_list["write"])
-			var/obj/item/weapon/P = locate(href_list["write"])
+			var/obj/item/weapon/paperwork/P = locate(href_list["write"])
 
-			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paperwork/paper) && (P == toppaper) )
-
+			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paperwork) )
 				var/obj/item/I = usr.get_active_hand()
-
-				if(istype(I, /obj/item/weapon/pen))
-
+				if(istype(I, /obj/item/weapon/pen) || istype(I, /obj/item/toy/crayon))
+					if (P != toppaper)
+						playsound(src.loc, "pageturn", 50, 1)
 					P.attackby(I, usr)
 
 		else if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
 
-			if(P && (P.loc == src) && (istype(P, /obj/item/weapon/paperwork/paper) || istype(P, /obj/item/weapon/photo)) )
-
+			if(P && (P.loc == src) )
+				playsound(src.loc, "pageturn", 50, 1)
 				P.loc = usr.loc
 				usr.put_in_hands(P)
 				if(P == toppaper)
 					toppaper = null
-					var/obj/item/weapon/paperwork/paper/newtop = locate(/obj/item/weapon/paperwork/paper) in src
+					var/obj/item/weapon/paperwork/newtop = locate(/obj/item/weapon/paperwork) in src
 					if(newtop && (newtop != P))
 						toppaper = newtop
 					else
 						toppaper = null
 
 		else if(href_list["read"])
-			var/obj/item/weapon/paperwork/paper/P = locate(href_list["read"])
+			var/obj/item/weapon/paperwork/P = locate(href_list["read"])
+			if(P && (P.loc == src) && istype(P) )
+				if (P != toppaper)
+					playsound(src.loc, "pageturn", 50, 1)
+				P.show_content(usr)
 
-			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paperwork/paper) )
-
-				if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-
-		else if(href_list["look"])
-			var/obj/item/weapon/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P, /obj/item/weapon/photo) )
-				P.show(usr)
-
-		else if(href_list["top"]) // currently unused
-			var/obj/item/P = locate(href_list["top"])
-			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paperwork/paper) )
+		else if(href_list["top"])
+			var/obj/item/weapon/paperwork/P = locate(href_list["top"])
+			if(P && (P.loc == src) && istype(P) && P != toppaper)
 				toppaper = P
+				playsound(src.loc, "pageturn", 50, 1)
 				usr << "<span class='notice'>You move [P.name] to the top.</span>"
 
 		//Update everything

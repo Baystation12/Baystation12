@@ -29,10 +29,11 @@
 	return
 
 /obj/item/weapon/folder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/paperwork/paper) || istype(W, /obj/item/weapon/photo) || istype(W, /obj/item/weapon/paperwork/bundle))
+	if(istype(W, /obj/item/weapon/paperwork))
 		user.drop_item()
 		W.loc = src
-		user << "<span class='notice'>You put the [W] into \the [src].</span>"
+		user << "<span class='notice'>You put the [initial(W.name)] into \the [src].</span>"
+		add_fingerprint(user)
 		update_icon()
 	else if(istype(W, /obj/item/weapon/pen))
 		var/n_name = copytext(sanitize(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text), 1, MAX_NAME_LEN)
@@ -43,15 +44,11 @@
 /obj/item/weapon/folder/attack_self(mob/user as mob)
 	var/dat = "<title>[name]</title>"
 
-	for(var/obj/item/weapon/paperwork/paper/P in src)
+	for(var/obj/item/weapon/paperwork/P in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
-	for(var/obj/item/weapon/photo/Ph in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
-	for(var/obj/item/weapon/paperwork/bundle/Pb in src)
-		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
 	user << browse(dat, "window=folder")
 	onclose(user, "folder")
-	add_fingerprint(usr)
+	add_fingerprint(user)
 	return
 
 /obj/item/weapon/folder/Topic(href, href_list)
@@ -68,23 +65,9 @@
 				usr.put_in_hands(P)
 
 		else if(href_list["read"])
-			var/obj/item/weapon/paperwork/paper/P = locate(href_list["read"])
+			var/obj/item/weapon/paperwork/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
-				if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
-					onclose(usr, "[P.name]")
-		else if(href_list["look"])
-			var/obj/item/weapon/photo/P = locate(href_list["look"])
-			if(P && (P.loc == src) && istype(P))
-				P.show(usr)
-		else if(href_list["browse"])
-			var/obj/item/weapon/paperwork/bundle/P = locate(href_list["browse"])
-			if(P && (P.loc == src) && istype(P))
-				P.attack_self(usr)
-				onclose(usr, "[P.name]")
+				P.show_content(usr)
 
 		//Update everything
 		attack_self(usr)

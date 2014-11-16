@@ -29,13 +29,13 @@
 
 /obj/structure/filingcabinet/initialize()
 	for(var/obj/item/I in loc)
-		if(istype(I, /obj/item/weapon/paperwork/paper) || istype(I, /obj/item/weapon/folder) || istype(I, /obj/item/weapon/photo) || istype(I, /obj/item/weapon/paperwork/bundle))
+		if(istype(I, /obj/item/weapon/paperwork) || istype(I, /obj/item/weapon/folder))
 			I.loc = src
 
 
 /obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
-	if(istype(P, /obj/item/weapon/paperwork/paper) || istype(P, /obj/item/weapon/folder) || istype(P, /obj/item/weapon/photo) || istype(P, /obj/item/weapon/paperwork/bundle))
-		user << "<span class='notice'>You put [P] in [src].</span>"
+	if(istype(P, /obj/item/weapon/paperwork) || istype(P, /obj/item/weapon/folder))
+		user << "<span class='notice'>You put \the [P] in [src].</span>"
 		user.drop_item()
 		P.loc = src
 		icon_state = "[initial(icon_state)]-open"
@@ -90,6 +90,7 @@
 		if(istype(P) && (P.loc == src) && src.Adjacent(usr))
 			usr.put_in_hands(P)
 			updateUsrDialog()
+			add_fingerprint(usr)
 			icon_state = "[initial(icon_state)]-open"
 			spawn(0)
 				sleep(5)

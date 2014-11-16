@@ -2,19 +2,23 @@
 #define SIGNATURE_FONT	"Times New Roman"
 #define CRAYON_FONT		"Comic Sans MS"
 
+
+//Paperwork parent type
 /obj/item/weapon/paperwork
-    name = "paperwork"
+	name = "paperwork"
+	var/list/stamped = list()
 
 //Generates the HTML content and returns it as a string.
 //A mob may be optionally supplied in case the content varies with the viewer.
-//If user is null then the paperwork should display the contents as plainly as possible (i.e. for admins)
+//If user is null then the paperwork should display the contents as plainly as possible (i.e. for admins/ghosts)
 /obj/item/weapon/paperwork/proc/render_content(mob/user=null, editing=0)
 	return ""
 
-//Displays the content to a mob
+//Displays the content to a mob who is trying to view it. This is responsible for doing the UI stuff, e.g. browse (or even the nanoui procs if you want to do that)
 /obj/item/weapon/paperwork/proc/show_content(mob/user, editing=0)
 	return
 
+//TODO#paperwork
 /obj/item/weapon/paperwork/proc/copy(newloc)
 	return
 
@@ -50,18 +54,27 @@
 			h_user.put_in_hands(B)
 	
 	var/other_name = "\the [other]" //in case other gets deleted in the process of attaching it.
+	
 	B.attach_item(src, user)
 	B.attach_item(other, user)
+	B.update_bundle() //calling this should delete B if it's not a valid bundle (either attachment failed)
 	
-	B.update_bundle()
-	if (!B) return //in case attaching failed
-
-	if(name != initial(name))
-		B.name = name
-	user << "<span class='notice'>You clip [other_name] to \the [src].</span>"
+	if (B)
+		if(name != initial(name))
+			B.name = name
+		user << "<span class='notice'>You clip [other_name] to \the [src].</span>"
 
 /obj/item/weapon/paperwork/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/flame))
+	if(istype(W, /obj/item/weapon/stamp))
+		var/obj/item/weapon/stamp/S = W
+		var/datum/stamp/DS = S.create_stamp()
+		stamped += DS
+		overlays += DS.overlay
+		user.visible_message("<span class='notice'>[user] stamps the [initial(name)] with \his rubber stamp.</span>", \
+							 "<span class='notice'>You stamp the [initial(name)] with your rubber stamp.</span>", \
+							 "<span class='notice'>You hear the sound of rubber hitting paper.</span>")
+
+	else if(istype(W, /obj/item/weapon/flame))
 		burnpaper(W, user)
 	
 	else if(istype(W, /obj/item/weapon/pen/robopen))
@@ -71,6 +84,9 @@
 	
 	else
 		..()
+
+/obj/item/weapon/paperwork/attack_self(mob/user)
+	show_content(user)
 
 /obj/item/weapon/paperwork/examine(mob/user)
 	if(in_range(user, src))
@@ -97,6 +113,7 @@
 				user.drop_from_inventory(src)
 
 			new /obj/effect/decal/cleanable/ash(src.loc)
+			user << browse(null, "window=[name]") //close the browser window
 			del(src)
 		else
 			user << "\red You must hold \the [P] steady to burn \the [src]."
@@ -153,6 +170,17 @@
 	. = list()
 	for (var/S in textlist)
 		. += "<font face='[font]' color=[colour]>[S]</font>"
+
+//Helper proc to join two lists of strings, such as those returned by paperwork_input()
+//Merges the first element of tail with the last element of head
+/proc/append_content(var/list/head, var/list/tail)
+	if (!tail)
+		return
+	
+	if (head.len)
+		head[head.len] = "[head[head.len]][tail[1]]"
+		tail.Cut(1,2)
+	head += tail
 
 /proc/parsepencode(var/t, mob/user as mob, var/iscrayon = 0)
 	t = replacetext(t, "\n", "<BR>")

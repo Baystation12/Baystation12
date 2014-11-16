@@ -19,6 +19,7 @@
 	var/page = 1
 	var/screen = SHOW_LINK_NEXT
 
+//Attaches a paperwork item to the end of the bundle
 /obj/item/weapon/paperwork/bundle/proc/attach_item(obj/item/weapon/paperwork/P, mob/user)
 	if (istype(P, /obj/item/weapon/paperwork/paper/carbon))
 		var/obj/item/weapon/paperwork/paper/carbon/C = P
@@ -28,15 +29,15 @@
 			return 0
 
 	user.drop_from_inventory(P)
-	if (istype(P, /obj/item/weapon/paperwork/bundle))
+	if (!istype(P, /obj/item/weapon/paperwork/bundle))
+		P.loc = src
+	else
 		for(var/obj/O in P)
 			O.loc = src
-			O.add_fingerprint(usr)
+			O.add_fingerprint(user)
 		del(P)
-	else
-		P.loc = src
 	
-	screen |= SHOW_LINK_NEXT //regardless of what page we were on, it's not the last one anymore.
+	update_bundle(1)
 	update_icon()
 	return 1
 
@@ -46,22 +47,29 @@
 	attach_item(other, user)
 
 /obj/item/weapon/paperwork/bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
 
 	if(istype(W, /obj/item/weapon/paperwork))
 		if (attach_item(W, user))
 			user << "<span class='notice'>You add \the [W] to \the [src].</span>"
 
 	else if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
-		usr << browse("", "window=[name]") //Closes the dialog
+		usr << browse(null, "window=[name]") //Closes the dialog
 		var/obj/item/weapon/paperwork/P = src[page]
 		P.attackby(W, user)
 	
+	//Stamp the first page, since that's the only one for which stamps are visible
+	else if(istype(W, /obj/item/weapon/stamp))
+		var/obj/item/weapon/paperwork/P = src[1]
+		P.attackby(W, user)
+		update_icon()
+	
 	else
 		//update_icon()
-		attack_self(usr) //Update the browsed page.
-		add_fingerprint(usr)
+		//attack_self(usr) //Update the browsed page.
+		//add_fingerprint(usr)
+		..()
 
+//Render the page's content
 /obj/item/weapon/paperwork/bundle/render_content(mob/user=null, var/show_page=null)
 	if (isnull(show_page))
 		show_page = page
@@ -83,35 +91,14 @@
 	dat += "<BR><HR>[render_content(user, page)]"
 
 	user << browse(dat, "window=[name]")
+	onclose(user, "[name]")
 
-//TODO#paperwork
-/obj/item/weapon/paperwork/bundle/attack_self(mob/user as mob)
-	show_content(user)
-	add_fingerprint(usr)
-	update_icon()
-
+//sets the current page
 /obj/item/weapon/paperwork/bundle/proc/set_page(var/newpage)
 	if (newpage != page)
 		page = newpage
 		playsound(src.loc, "pageturn", 50, 1)
 		update_bundle()
-
-/obj/item/weapon/paperwork/bundle/proc/update_bundle()
-	//can't have a bundle of 1
-	if(contents.len == 1)
-		var/obj/item/weapon/paperwork/paper/P = src[1]
-		usr.drop_from_inventory(src)
-		usr.put_in_hands(P)
-		del(src)
-	
-	//ensure page is within bounds
-	page = between(1, page, contents.len)
-	
-	screen = 0
-	if (page > 1)
-		screen |= SHOW_LINK_PREV
-	if (page < contents.len)
-		screen |= SHOW_LINK_NEXT
 
 /obj/item/weapon/paperwork/bundle/Topic(href, href_list)
 	..()
@@ -119,30 +106,26 @@
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			set_page(page+1)
+			add_fingerprint(usr)
 
 		if(href_list["prev_page"])
 			set_page(page-1)
+			add_fingerprint(usr)
 
 		if(href_list["remove"])
 			var/obj/item/weapon/W = src[page]
 			usr.put_in_hands(W)
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
+			add_fingerprint(usr)
 
-			//can't have a bundle of 1
-			if(contents.len == 1)
-				var/obj/item/weapon/paperwork/paper/P = src[1]
-				usr.drop_from_inventory(src)
-				usr.put_in_hands(P)
-				del(src)
-			
 			update_bundle()
 			update_icon()
 	else
 		usr << "<span class='notice'>You need to hold \the [src] in your hands!</span>"
 
 	//refresh the browser window
-	if (istype(src.loc, /mob) ||istype(src.loc.loc, /mob))
-		src.attack_self(src.loc)
+	if (istype(usr, /mob))
+		src.attack_self(usr)
 		updateUsrDialog()
 
 /obj/item/weapon/paperwork/bundle/verb/remove_all()
@@ -156,9 +139,58 @@
 		O.layer = initial(O.layer)
 		O.add_fingerprint(usr)
 	usr.drop_from_inventory(src)
+	usr << browse(null, "window=[name]") //close the browser window
 	del(src)
 	return
 
+//Should be called when the bundle is modified
+//added var overrides the contents.len check so that bundles are not immediately destroyed when adding the very first item.
+/obj/item/weapon/paperwork/bundle/proc/update_bundle(var/added=0)
+	//can't have a bundle of 1
+	if(!added && contents.len == 1)
+		var/obj/item/weapon/paperwork/paper/P = src[1]
+		usr.drop_from_inventory(src)
+		usr.put_in_hands(P)
+		usr << browse(null, "window=[name]") //close the browser window
+		del(src)
+	
+	//ensure page is within bounds
+	page = between(1, page, contents.len)
+	
+	screen = 0
+	if (page > 1)
+		screen |= SHOW_LINK_PREV
+	if (page < contents.len)
+		screen |= SHOW_LINK_NEXT
+	
+	switch (contents.len)
+		if (1 to 2)
+			throwforce = 0
+			w_class = 1
+			throw_range = 1
+			throw_speed = 1
+		if (3 to 4)
+			throwforce = 0
+			w_class = 1
+			throw_range = 2
+			throw_speed = 1
+		if (5 to 8)
+			throwforce = 0
+			w_class = 2
+			throw_range = 3
+			throw_speed = 1
+		if (9 to 16)
+			desc = "A huge stack of papers."
+			throwforce = 3
+			w_class = 3
+			throw_range = 5
+			throw_speed = 2
+		if (17 to INFINITY)
+			desc = "An enormous stack of papers!"
+			throwforce = 5
+			w_class = 4
+			throw_range = 7
+			throw_speed = 3
 
 /obj/item/weapon/paperwork/bundle/update_icon()
 	var/obj/item/weapon/paperwork/paper/P = src[1]

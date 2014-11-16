@@ -1,3 +1,19 @@
+/datum/stamp
+	var/stamp_name = "rubber stamp"
+	var/stamp_type
+	var/image/overlay
+	var/overlay_state
+	var/offset_x
+	var/offset_y
+
+/datum/stamp/proc/update_overlay()
+	if (isnull(overlay))
+		overlay = image('icons/obj/bureaucracy.dmi')
+	overlay.pixel_x = offset_x
+	overlay.pixel_y = offset_y
+	overlay.icon_state = overlay_state
+
+
 /obj/item/weapon/stamp
 	name = "rubber stamp"
 	desc = "A rubber stamp for stamping important documents."
@@ -14,10 +30,30 @@
 	pressure_resistance = 2
 	attack_verb = list("stamped")
 
+/obj/item/weapon/stamp/proc/create_stamp()
+	var/datum/stamp/S = new()
+	S.stamp_name = name
+	S.stamp_type = type
+	S.overlay_state = "paper_[icon_state]"
+	S.offset_x = rand(-2, 2)
+	S.offset_y = rand(-3, 2)
+	S.update_overlay()
+	return S
+
 /obj/item/weapon/stamp/captain
 	name = "captain's rubber stamp"
 	icon_state = "stamp-cap"
 	item_color = "captain"
+
+/obj/item/weapon/stamp/captain/create_stamp()
+	var/datum/stamp/S = new()
+	S.stamp_name = name
+	S.stamp_type = type
+	S.overlay_state = "paper_[icon_state]"
+	S.offset_x = rand(-2, 0)
+	S.offset_y = rand(-1, 2)
+	S.update_overlay()
+	return S
 
 /obj/item/weapon/stamp/hop
 	name = "head of personnel's rubber stamp"
@@ -64,6 +100,15 @@
 	icon_state = "stamp-cent"
 	item_color = "centcomm"
 
+/obj/item/weapon/stamp/centcomm/create_stamp()
+	var/datum/stamp/S = new()
+	S.stamp_name = name
+	S.stamp_type = type
+	S.overlay_state = "paper_[icon_state]"
+	S.offset_x = rand(-2, 0)
+	S.offset_y = rand(-1, 2)
+	S.update_overlay()
+	return S
 
 /obj/item/weapon/stamp/attack_paw(mob/user as mob)
 	return attack_hand(user)
@@ -92,3 +137,4 @@
 			name = chosen_stamp.name
 			icon_state = chosen_stamp.icon_state
 			item_color = chosen_stamp.item_color
+			//create_stamp = chosen_stamp.create_stamp //TODO#paperwork Stamps
