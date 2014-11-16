@@ -16,8 +16,8 @@
 	activates_on_touch = 1
 
 	engage_string = "Eject AI"
-	activate_string = "Enable Contact Dataspike"
-	deactivate_string = "Disable Contact Dataspike"
+	activate_string = "Enable Dataspike"
+	deactivate_string = "Disable Dataspike"
 
 	interface_name = "integrated intelligence system"
 	interface_desc = "A socket that supports a range of artificial intelligence systems."

@@ -18,13 +18,13 @@ var/global/list/gear_datums = list()
 	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = new type()
-		
+
 		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
 		sort_categories[category][G.display_name] = G
-	
+
 	for (var/category in sort_categories)
 		gear_datums.Add(sortAssoc(sort_categories[category]))
-	
+
 	return 1
 
 /datum/gear

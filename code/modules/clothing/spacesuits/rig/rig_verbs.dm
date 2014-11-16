@@ -16,11 +16,19 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
 	if(!check_power_cost(usr))
 		return
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
 		return
 
 	if(!visor)
@@ -39,6 +47,14 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
+		return
+
 	toggle_piece("helmet",wearer)
 
 /obj/item/weapon/rig/proc/toggle_chest()
@@ -47,6 +63,10 @@
 	set desc = "Deploys or retracts your chestpiece."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
+		return
 
 	toggle_piece("chest",wearer)
 
@@ -57,6 +77,14 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
+		return
+
 	toggle_piece("gauntlets",wearer)
 
 /obj/item/weapon/rig/proc/toggle_boots()
@@ -65,6 +93,14 @@
 	set desc = "Deploys or retracts your boots."
 	set category = "Hardsuit"
 	set src = usr.contents
+
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
+		return
 
 	toggle_piece("boots",wearer)
 
@@ -77,6 +113,10 @@
 
 	if(!istype(wearer) || !wearer.back == src)
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
 		return
 
 	if(!check_power_cost(usr))
@@ -93,6 +133,10 @@
 
 	if(!istype(wearer) || !wearer.back == src)
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
+	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
+		wearer << "<span class='danger'>Access denied.</span>"
 		return
 
 	toggle_seals(wearer)
@@ -135,6 +179,10 @@
 		usr << "<span class='warning'>The suit is not active.</span>"
 		return
 
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
 	if(!speech)
 		usr << "<span class='warning'>The hardsuit does not have a speech synthesiser.</span>"
 		return
@@ -153,6 +201,10 @@
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"
+		return
+
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
 	var/list/selectable = list()
@@ -182,6 +234,10 @@
 		usr << "<span class='warning'>The suit is not active.</span>"
 		return
 
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
+		return
+
 	var/list/selectable = list()
 	for(var/obj/item/rig_module/module in installed_modules)
 		if(module.toggleable)
@@ -208,6 +264,10 @@
 
 	if(canremove)
 		usr << "<span class='warning'>The suit is not active.</span>"
+		return
+
+	if(!istype(wearer) || !wearer.back == src)
+		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
 	if(!check_power_cost(usr, 0, 0, 0, 0))

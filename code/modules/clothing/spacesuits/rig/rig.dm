@@ -50,13 +50,13 @@
 	// Rig status vars.
 	var/open = 0                                              // Access panel status.
 	var/locked = 1                                            // Lock status.
-	var/subverted
-	var/interface_locked
-	var/control_overridden
-	var/ai_override_enabled
-	var/security_check_enabled
-	var/malfunctioning
-	var/malfunction_delay
+	var/subverted = 0
+	var/interface_locked = 0
+	var/control_overridden = 0
+	var/ai_override_enabled = 0
+	var/security_check_enabled = 1
+	var/malfunctioning = 0
+	var/malfunction_delay = 0
 	var/electrified = 0
 
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
@@ -371,6 +371,9 @@
 	if(selected_module)
 		data["primarysystem"] = "[selected_module.interface_name]"
 
+	if(src.loc != user)
+		data["ai"] = 1
+
 	data["seals"] =     "[src.canremove]"
 	data["sealing"] =   "[src.sealing]"
 	data["helmet"] =    (helmet ? "[helmet.name]" : "None.")
@@ -381,6 +384,15 @@
 	data["charge"] =       cell ? cell.charge : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
 	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
+
+	data["emagged"] =       subverted
+	data["coverlock"] =     locked
+	data["interfacelock"] = interface_locked
+	data["aicontrol"] =     control_overridden
+	data["aioverride"] =    ai_override_enabled
+	data["securitycheck"] = security_check_enabled
+	data["malf"] =          malfunctioning
+
 
 	var/list/module_list = list()
 	var/i = 1
@@ -463,6 +475,14 @@
 
 	if((istype(H) && H.back == src) || (istype(H,/mob/living/silicon)))
 
+
+		if(istype(H,/mob/living/silicon))
+			if(!control_overridden)
+				return
+		else if(security_check_enabled && !src.allowed(usr))
+			usr << "<span class='danger'>Access denied.</span>"
+			return
+
 		if(href_list["toggle_piece"])
 			toggle_piece(href_list["toggle_piece"], H)
 		else if(href_list["toggle_seals"])
@@ -484,6 +504,10 @@
 						selected_module = module
 					if("select_charge_type")
 						module.charge_selected = href_list["charge_type"]
+		else if(href_list["toggle_ai_control"])
+			ai_override_enabled = !ai_override_enabled
+		else if(href_list["toggle_suit_lock"])
+			security_check_enabled = !security_check_enabled
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)

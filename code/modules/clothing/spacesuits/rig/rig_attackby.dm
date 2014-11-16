@@ -32,7 +32,7 @@
 			user << "<span class='danger'>\The [src] doesn't seem to have a locking mechanism.</span>"
 			return
 
-		if(!src.allowed(user))
+		if(security_check_enabled && !src.allowed(user))
 			user << "<span class='danger'>Access denied.</span>"
 			return
 
