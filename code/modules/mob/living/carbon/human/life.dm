@@ -1188,8 +1188,9 @@
 			//Check rig first because it's two-check and other checks will override it.
 			if(istype(back,/obj/item/weapon/rig))
 				var/obj/item/weapon/rig/O = back
-				if(O.offline && O.offline_vision_restriction == 2 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-					blinded = 1
+				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+					if((O.offline && O.offline_vision_restriction == 2) || (!O.offline && O.vision_restriction == 2))
+						blinded = 1
 
 			// Check everything else.
 			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
@@ -1485,12 +1486,6 @@
 
 			var/masked = 0
 
-			if(istype(head, /obj/item/clothing/head/welding) || istype(head, /obj/item/clothing/head/helmet/space/unathi))
-				var/obj/item/clothing/head/welding/O = head
-				if(!O.up && tinted_weldhelh)
-					client.screen |= global_hud.darkMask
-					masked = 1
-
 			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding))
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
@@ -1500,8 +1495,9 @@
 			if(!masked && istype(back, /obj/item/weapon/rig))
 				var/obj/item/weapon/rig/O = back
 				// Ugh, why is this done on a case by case basis? Why is there no flag for causing weldervision?
-				if(O.offline && O.offline_vision_restriction == 1 && O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-					client.screen |= global_hud.darkMask
+				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+					if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+						client.screen |= global_hud.darkMask
 
 			if(machine)
 				if(!machine.check_eye(src))

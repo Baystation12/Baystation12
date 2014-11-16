@@ -807,6 +807,7 @@
 #include "code\modules\clothing\spacesuits\rig\modules\ninja.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\utility.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\vision.dm"
+#include "code\modules\clothing\spacesuits\rig\suits\alien.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\combat.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\ert.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\light.dm"

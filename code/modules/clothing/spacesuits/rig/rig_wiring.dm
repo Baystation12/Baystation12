@@ -20,11 +20,12 @@
 	var/obj/item/weapon/rig/rig = holder
 	switch(index)
 		if(RIG_SECURITY)
-			if(!mended)
+			if(mended)
 				rig.req_access = initial(rig.req_access)
 				rig.req_one_access = initial(rig.req_one_access)
 		if(RIG_INTERFACE_SHOCK)
-			rig.electrified = -1
+			rig.electrified = mended ? 0 : -1
+			rig.shock(usr,100)
 
 /datum/wires/rig/UpdatePulsed(var/index)
 
@@ -32,17 +33,22 @@
 	switch(index)
 		if(RIG_SECURITY)
 			rig.security_check_enabled = !rig.security_check_enabled
+			rig.visible_message("\The [src] twitches as several suit locks [rig.security_check_enabled?"close":"open"].")
 		if(RIG_AI_OVERRIDE)
 			rig.ai_override_enabled = !rig.ai_override_enabled
+			rig.visible_message("A small red light on [src] [rig.ai_override_enabled?"goes dead":"flickers on"].")
 		if(RIG_SYSTEM_CONTROL)
 			rig.malfunctioning += 10
 			if(rig.malfunction_delay <= 0)
 				rig.malfunction_delay = 20
+			rig.shock(usr,100)
 		if(RIG_INTERFACE_LOCK)
 			rig.interface_locked = !rig.interface_locked
+			rig.visible_message("\The [src] clicks audibly as the software interface [rig.interface_locked?"darkens":"brightens"].")
 		if(RIG_INTERFACE_SHOCK)
 			if(rig.electrified != -1)
 				rig.electrified = 30
+			rig.shock(usr,100)
 
 /datum/wires/rig/CanUse(var/mob/living/L)
 	var/obj/item/weapon/rig/rig = holder

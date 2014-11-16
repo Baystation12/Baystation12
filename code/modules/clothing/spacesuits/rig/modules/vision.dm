@@ -1,3 +1,10 @@
+/*
+ * Contains
+ * /obj/item/rig_module/vision
+ * /obj/item/rig_module/vision/meson
+ * /obj/item/rig_module/vision/thermal
+ */
+
 /datum/rig_vision
 	var/mode
 	var/obj/item/clothing/glasses/glasses

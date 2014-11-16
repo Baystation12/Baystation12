@@ -183,7 +183,7 @@
 	..()
 
 
-/obj/item/weapon/rig/attackby(var/mob/user)
+/obj/item/weapon/rig/attack_hand(var/mob/user)
 
 	if(electrified != 0)
 		if(cell && cell.charge >= 100)
