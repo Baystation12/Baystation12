@@ -35,6 +35,7 @@ datum/mind
 	var/mob/living/current
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = 0
+	var/list/uplinkitems = list()
 
 	var/memory
 
