@@ -1301,6 +1301,7 @@
 		g_skin = 0
 		b_skin = 0
 
+	size_multiplier = species.sizechange
 	species.handle_post_spawn(src)
 
 	spawn(0)

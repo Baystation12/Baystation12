@@ -224,3 +224,11 @@
 				flags_inv = HIDEMASK|HIDEFACE
 				usr << "You pull the mask up to cover your face."
 				usr.update_inv_neck()
+
+/obj/item/clothing/neck/Avischain
+	name = "Aviskree Medallion"
+	desc = "A Silver Medallion on a chain, a name is written on it in Aviachirp"
+	icon_state = "Aneck"
+	flags = FPRINT | TABLEPASS
+	item_state = "Aneck"
+	siemens_coefficient = 0.5

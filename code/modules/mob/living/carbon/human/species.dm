@@ -80,6 +80,8 @@
 	var/dhts = 0
 	var/wingicon = 0
 
+	//Size Differences
+	var/sizechange = 0.95
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
@@ -256,6 +258,7 @@
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	primitive = /mob/living/carbon/monkey/aviskree
 	wingicon = 1
+	sizechange = 1
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
@@ -294,6 +297,7 @@
 	darksight = 10
 	dhts = 1
 	wingicon = 1
+	sizechange = 1
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -332,6 +336,7 @@
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	rarity_value = 2
+	sizechange = 0.8
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
