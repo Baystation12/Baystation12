@@ -70,7 +70,7 @@
 		return 0
 	var/title = "Sheet-[name]"
 	title += " ([src.amount] sheet\s left)"
-	switch(input(title, "What would you like to construct?") in (construction_options + "Cancel"))
+	switch(input(title, "What would you like to construct?") as null|anything in construction_options)
 		if("One Direction")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
