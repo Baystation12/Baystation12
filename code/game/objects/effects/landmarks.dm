@@ -48,6 +48,10 @@
 			latejoin_cryo += loc
 			del(src)
 
+		if("JoinLateCyborg")
+			latejoin_cyborg += loc
+			del(src)
+
 		//prisoners
 		if("prisonwarp")
 			prisonwarp += loc
