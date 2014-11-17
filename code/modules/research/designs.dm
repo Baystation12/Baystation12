@@ -1639,6 +1639,7 @@ datum/design/phoronpistol
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$phoron" = 3000)
 	build_path = "/obj/item/weapon/gun/energy/toxgun"
+	locked = 1
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
