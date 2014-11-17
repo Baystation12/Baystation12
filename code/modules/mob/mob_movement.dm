@@ -316,13 +316,16 @@
 		else if(mob.confused)
 			step(mob, pick(cardinal))
 		else
-			. = ..()
+			. = mob.SelfMove(n, direct)
 
 		moving = 0
 
 		return .
 
 	return
+
+/mob/proc/SelfMove(turf/n, direct)
+	return Move(n, direct)
 
 
 ///Process_Grab()
