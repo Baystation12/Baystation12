@@ -128,6 +128,7 @@ var/list/newplayer_start = list()
 var/list/latejoin = list()
 var/list/latejoin_gateway = list()
 var/list/latejoin_cryo = list()
+var/list/latejoin_cyborg = list()
 
 var/list/prisonwarp = list()	//prisoners go to these
 var/list/holdingfacility = list()	//captured people go here
