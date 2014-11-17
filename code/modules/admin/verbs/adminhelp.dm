@@ -113,17 +113,16 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/debugholders = list()
 	var/list/adminholders = list()
 	for(var/client/X in admins)
-		if((R_MENTOR|R_ADMIN) & X.holder.rights)
+		if(R_MENTOR & X.holder.rights && !(R_ADMIN & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
 			mentorholders += X
-			if(R_MENTOR & X.holder.rights)
-				if(X.is_afk())
-					admin_number_afk++
-		if(R_DEBUG & X.holder.rights)
+			if(X.is_afk())
+				admin_number_afk++
+		if(R_DEBUG & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
 			debugholders += X
 			if(!(R_ADMIN & X.holder.rights))
 				if(X.is_afk())
 					admin_number_afk++
-		if(R_ADMIN & X.holder.rights)
+		if(R_ADMIN & X.holder.rights) // just admins here please
 			adminholders += X
 			if(X.is_afk())
 				admin_number_afk++
@@ -131,31 +130,30 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	switch(selected_type)
 		if("Gameplay/Roleplay question")
 			if(mentorholders.len)
-				for(var/client/X in mentorholders)
-					if(R_ADMIN & X.holder.rights)
-						if(X.prefs.toggles & SOUND_ADMINHELP)
-							X << 'sound/effects/adminhelp.ogg'
-						X << msg
-					else
-						if(R_MENTOR & X.holder.rights)
-							if(X.prefs.toggles & SOUND_ADMINHELP)
-								X << 'sound/effects/adminhelp.ogg'
-							X << mentor_msg
+				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << mentor_msg
+			if(adminholders.len)
+				for(var/client/X in adminholders) // Admins get the full monty
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << msg
 		if("Rule/Gameplay issue")
 			if(adminholders.len)
-				for(var/client/X in adminholders)
+				for(var/client/X in adminholders) // Admins of course get everything in their helps
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
 		if("Bug report")
 			if(debugholders.len)
 				for(var/client/X in debugholders)
-					if(R_ADMIN & X.holder.rights)
+					if(R_ADMIN & X.holder.rights) // Admins get every button & special highlights in theirs
 						if(X.prefs.toggles & SOUND_ADMINHELP)
 							X << 'sound/effects/adminhelp.ogg'
 						X << msg
 					else
-						if (R_DEBUG & X.holder.rights)
+						if (R_DEBUG & X.holder.rights) // Just devs or devmentors get non-highlighted names, but they do get JMP and VV for their bug reports.
 							if(X.prefs.toggles & SOUND_ADMINHELP)
 								X << 'sound/effects/adminhelp.ogg'
 						X << dev_msg
@@ -176,7 +174,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				X << msg*/
 
 	//show it to the person adminhelping too
-	src << "<font color='blue'>PM to-<b>Staff</b>: [original_msg]</font>"
+	src << "<font color='blue'>PM to-<b>Staff ([selected_type])</b>: [original_msg]</font>"
 
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
