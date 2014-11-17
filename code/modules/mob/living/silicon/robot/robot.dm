@@ -21,6 +21,7 @@ var/list/robot_verbs_default = list(
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 6
+	var/datum/wires/robot/wires
 
 //Hud stuff
 
@@ -81,6 +82,8 @@ var/list/robot_verbs_default = list(
 
 	add_language("Robot Talk", 1)
 
+	wires = new(src)
+
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
@@ -106,7 +109,7 @@ var/list/robot_verbs_default = list(
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
 		camera.network = list("SS13","Robots")
-		if(isWireCut(5)) // 5 = BORG CAMERA
+		if(wires.IsIndexCut(BORG_WIRE_CAMERA))
 			camera.status = 0
 
 	initialize_components()
@@ -195,6 +198,7 @@ var/list/robot_verbs_default = list(
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -204,6 +208,7 @@ var/list/robot_verbs_default = list(
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -277,6 +282,7 @@ var/list/robot_verbs_default = list(
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
+			module.channels = list("Service" = 1)
 			module_sprites["Basic"] = "JanBot2"
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"
@@ -303,6 +309,7 @@ var/list/robot_verbs_default = list(
 
 	choose_icon(6,module_sprites)
 	radio.config(module.channels)
+	notify_ai(2)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
@@ -320,6 +327,8 @@ var/list/robot_verbs_default = list(
 		changed_name = custom_name
 	else
 		changed_name = "[modtype] [braintype]-[num2text(ident)]"
+
+	notify_ai(3, real_name, changed_name)
 	real_name = changed_name
 	name = real_name
 
@@ -672,7 +681,7 @@ var/list/robot_verbs_default = list(
 				user << "You close the cover."
 				opened = 0
 				updateicon()
-			else if(wiresexposed && isWireCut(1) && isWireCut(2) && isWireCut(3) && isWireCut(4) && isWireCut(5))
+			else if(wiresexposed && wires.IsAllCut())
 				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
 				if(!mmi)
 					user << "\The [src] has no brain to remove."
@@ -743,7 +752,7 @@ var/list/robot_verbs_default = list(
 
 	else if (istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool))
 		if (wiresexposed)
-			interact(user)
+			wires.Interact(user)
 		else
 			user << "You can't reach the wiring."
 
@@ -862,81 +871,6 @@ var/list/robot_verbs_default = list(
 			spark_system.start()
 		return ..()
 
-
-
-/mob/living/silicon/robot/attack_slime(mob/living/carbon/slime/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if(M.Victim) return // can't attack while eating!
-
-	if (health > -100)
-
-		for(var/mob/O in viewers(src, null))
-			if ((O.client && !( O.blinded )))
-				O.show_message(text("\red <B>The [M.name] glomps []!</B>", src), 1)
-
-		var/damage = rand(1, 3)
-
-		if(M.is_adult)
-			damage = rand(20, 40)
-		else
-			damage = rand(5, 35)
-
-		damage = round(damage / 2) // borgs recieve half damage
-		adjustBruteLoss(damage)
-
-
-		if(M.powerlevel > 0)
-			var/stunprob = 10
-
-			switch(M.powerlevel)
-				if(1 to 2) stunprob = 20
-				if(3 to 4) stunprob = 30
-				if(5 to 6) stunprob = 40
-				if(7 to 8) stunprob = 60
-				if(9) 	   stunprob = 70
-				if(10) 	   stunprob = 95
-
-			if(prob(stunprob))
-				M.powerlevel -= 3
-				if(M.powerlevel < 0)
-					M.powerlevel = 0
-
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message(text("\red <B>The [M.name] has electrified []!</B>", src), 1)
-
-				flick("noise", flash)
-
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(5, 1, src)
-				s.start()
-
-				if (prob(stunprob) && M.powerlevel >= 8)
-					adjustBruteLoss(M.powerlevel * rand(6,10))
-
-
-		updatehealth()
-
-	return
-
-/mob/living/silicon/robot/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		for(var/mob/O in viewers(src, null))
-			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		adjustBruteLoss(damage)
-		updatehealth()
-
-
 /mob/living/silicon/robot/attack_hand(mob/user)
 
 	add_fingerprint(user)
@@ -957,6 +891,10 @@ var/list/robot_verbs_default = list(
 			var/obj/item/broken_device = cell_component.wrapped
 			user << "You remove \the [broken_device]."
 			user.put_in_active_hand(broken_device)
+
+//Robots take half damage from basic attacks.
+/mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
+	return ..(user,Floor(damage/2),attack_message)
 
 /mob/living/silicon/robot/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
@@ -1231,6 +1169,13 @@ var/list/robot_verbs_default = list(
 		R << "Buffers flushed and reset. Camera system shutdown.  All systems operational."
 		src.verbs -= /mob/living/silicon/robot/proc/ResetSecurityCodes
 
+/mob/living/silicon/robot/proc/SetLockdown(var/state = 1)
+	// They stay locked down if their wire is cut.
+	if(wires.LockedCut())
+		state = 1
+	lockcharge = state
+	update_canmove()
+
 /mob/living/silicon/robot/mode()
 	set name = "Activate Held Object"
 	set category = "IC"
@@ -1311,3 +1256,14 @@ var/list/robot_verbs_default = list(
 		use_power(RC.active_usage)
 		return 1
 	return 0
+
+/mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
+	if(!connected_ai)
+		return
+	switch(notifytype)
+		if(1) //New Cyborg
+			connected_ai << "<br><br><span class='notice'>NOTICE - New cyborg connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>"
+		if(2) //New Module
+			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg module change detected: [name] has loaded the [module.name] module.</span><br>"
+		if(3) //New Name
+			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg reclassification detected: [oldname] is now designated as [newname].</span><br>"

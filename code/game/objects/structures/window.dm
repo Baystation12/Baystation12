@@ -14,6 +14,7 @@
 	var/reinf = 0
 	var/basestate
 	var/shardtype = /obj/item/weapon/shard
+	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 //	var/silicate = 0 // number of units of silicate
 //	var/icon/silicateIcon = null // the silicated icon
 
@@ -149,28 +150,12 @@
 							"You hear a knocking sound.")
 	return
 
-
-/obj/structure/window/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
-/obj/structure/window/proc/attack_generic(mob/user as mob, damage = 0)	//used by attack_animal and attack_slime
+/obj/structure/window/attack_generic(var/mob/user, var/damage)
+	if(!damage)
+		return
 	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 	take_damage(damage)
-
-/obj/structure/window/attack_animal(mob/user as mob)
-	if(!isanimal(user)) return
-	var/mob/living/simple_animal/M = user
-	if(M.melee_damage_upper <= 0) return
-	attack_generic(M, M.melee_damage_upper)
-
-
-/obj/structure/window/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-	attack_generic(user, rand(10, 15))
-
+	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
@@ -218,6 +203,17 @@
 		state = 1 - state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		user << (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>")
+	else if(istype(W, /obj/item/weapon/wrench) && !anchored && (!state || !reinf))
+		if(!glasstype)
+			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
+		else
+			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
+			if(dir == SOUTHWEST)
+				var/obj/item/stack/sheet/mats = new glasstype(loc)
+				mats.amount = 2
+			else
+				new glasstype(loc)
+			del(src)
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
@@ -373,6 +369,8 @@
 	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
+	glasstype = /obj/item/stack/sheet/glass
+
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
@@ -380,6 +378,7 @@
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
 	shardtype = /obj/item/weapon/shard/phoron
+	glasstype = /obj/item/stack/sheet/glass/phoronglass
 	maxhealth = 120
 
 /obj/structure/window/phoronbasic/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -393,6 +392,7 @@
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
 	shardtype = /obj/item/weapon/shard/phoron
+	glasstype = /obj/item/stack/sheet/glass/phoronrglass
 	reinf = 1
 	maxhealth = 160
 
@@ -406,6 +406,7 @@
 	basestate = "rwindow"
 	maxhealth = 40
 	reinf = 1
+	glasstype = /obj/item/stack/sheet/rglass
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"

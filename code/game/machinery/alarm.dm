@@ -2,32 +2,6 @@
 //CONTAINS: Air Alarms and Fire Alarms//
 ////////////////////////////////////////
 
-/proc/RandomAAlarmWires()
-	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
-	var/list/AAlarmwires = list(0, 0, 0, 0, 0)
-	AAlarmIndexToFlag = list(0, 0, 0, 0, 0)
-	AAlarmIndexToWireColor = list(0, 0, 0, 0, 0)
-	AAlarmWireColorToIndex = list(0, 0, 0, 0, 0)
-	var/flagIndex = 1
-	for (var/flag=1, flag<32, flag+=flag)
-		var/valid = 0
-		while (!valid)
-			var/colorIndex = rand(1, 5)
-			if (AAlarmwires[colorIndex]==0)
-				valid = 1
-				AAlarmwires[colorIndex] = flag
-				AAlarmIndexToFlag[flagIndex] = flag
-				AAlarmIndexToWireColor[flagIndex] = colorIndex
-				AAlarmWireColorToIndex[colorIndex] = flagIndex
-		flagIndex+=1
-	return AAlarmwires
-
-#define AALARM_WIRE_IDSCAN		1	//Added wires
-#define AALARM_WIRE_POWER		2
-#define AALARM_WIRE_SYPHON		3
-#define AALARM_WIRE_AI_CONTROL	4
-#define AALARM_WIRE_AALARM		5
-
 #define AALARM_MODE_SCRUBBING	1
 #define AALARM_MODE_REPLACEMENT	2 //like scrubbing, but faster.
 #define AALARM_MODE_PANIC		3 //constantly sucks all air
@@ -79,8 +53,9 @@
 	var/locked = 1
 	var/wiresexposed = 0 // If it's been screwdrivered open.
 	var/aidisabled = 0
-	var/AAlarmwires = 31
 	var/shorted = 0
+
+	var/datum/wires/alarm/wires
 
 	var/mode = AALARM_MODE_SCRUBBING
 	var/screen = AALARM_SCREEN_MAIN
@@ -103,13 +78,11 @@
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
 
-	var/apply_danger_level = 1
-	var/post_alert = 1
+	var/report_danger_level = 1
 
 /obj/machinery/alarm/monitor
-	apply_danger_level = 0
+	report_danger_level = 0
 	breach_detection = 0
-	post_alert = 0
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -152,6 +125,9 @@
 	area_uid = alarm_area.uid
 	if (name == "alarm")
 		name = "[alarm_area.name] Air Alarm"
+
+	if(!wires)
+		wires = new(src)
 
 	// breathable air according to human/Life()
 	TLV["oxygen"] =			list(16, 19, 135, 140) // Partial pressure, kpa
@@ -454,15 +430,12 @@
 				send_signal(device_id, list("power"= 0) )
 
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
-	if (apply_danger_level && alarm_area.atmosalert(new_danger_level))
+	if (report_danger_level && alarm_area.atmosalert(new_danger_level))
 		post_alert(new_danger_level)
 
 	update_icon()
 
 /obj/machinery/alarm/proc/post_alert(alert_level)
-	if(!post_alert)
-		return
-
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(alarm_frequency)
 	if(!frequency)
 		return
@@ -482,125 +455,6 @@
 
 	frequency.post_signal(src, alert_signal)
 
-
-///////////
-//HACKING//
-///////////
-/obj/machinery/alarm/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	return ((AAlarmwires & wireFlag) == 0)
-
-/obj/machinery/alarm/proc/isWireCut(var/wireIndex)
-	var/wireFlag = AAlarmIndexToFlag[wireIndex]
-	return ((AAlarmwires & wireFlag) == 0)
-
-/obj/machinery/alarm/proc/allWiresCut()
-	var/i = 1
-	while(i<=5)
-		if(AAlarmwires & AAlarmIndexToFlag[i])
-			return 0
-		i++
-	return 1
-
-/obj/machinery/alarm/proc/cut(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	var/wireIndex = AAlarmWireColorToIndex[wireColor]
-	AAlarmwires &= ~wireFlag
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)
-			locked = 1
-
-		if(AALARM_WIRE_POWER)
-			shock(usr, 50)
-			shorted = 1
-			update_icon()
-
-		if (AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 0)
-				aidisabled = 1
-
-		if(AALARM_WIRE_SYPHON)
-			mode = AALARM_MODE_PANIC
-			apply_mode()
-
-		if(AALARM_WIRE_AALARM)
-
-			if (alarm_area.atmosalert(2))
-				apply_danger_level(2)
-			spawn(1)
-				updateUsrDialog()
-			update_icon()
-
-	updateDialog()
-
-	return
-
-/obj/machinery/alarm/proc/mend(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	var/wireIndex = AAlarmWireColorToIndex[wireColor] //not used in this function
-	AAlarmwires |= wireFlag
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)
-
-		if(AALARM_WIRE_POWER)
-			shorted = 0
-			shock(usr, 50)
-			update_icon()
-
-		if(AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 1)
-				aidisabled = 0
-
-	updateDialog()
-	return
-
-/obj/machinery/alarm/proc/pulse(var/wireColor)
-	//var/wireFlag = AAlarmWireColorToFlag[wireColor] //not used in this function
-	var/wireIndex = AAlarmWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)			//unlocks for 30 seconds, if you have a better way to hack I'm all ears
-			locked = 0
-			spawn(300)
-				locked = 1
-
-		if (AALARM_WIRE_POWER)
-			if(shorted == 0)
-				shorted = 1
-				update_icon()
-
-			spawn(1200)
-				if(shorted == 1)
-					shorted = 0
-					update_icon()
-
-
-		if (AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 0)
-				aidisabled = 1
-			updateDialog()
-			spawn(10)
-				if (aidisabled == 1)
-					aidisabled = 0
-				updateDialog()
-
-		if(AALARM_WIRE_SYPHON)
-			mode = AALARM_MODE_REPLACEMENT
-			apply_mode()
-
-		if(AALARM_WIRE_AALARM)
-			if (alarm_area.atmosalert(0))
-				apply_danger_level(0)
-			spawn(1)
-				updateUsrDialog()
-			update_icon()
-
-	updateDialog()
-	return
-
-///////////////
-//END HACKING//
-///////////////
-
 /obj/machinery/alarm/attack_ai(mob/user)
 	return interact(user)
 
@@ -616,7 +470,7 @@
 	if(buildstage!=2)
 		return
 
-	if ( (get_dist(src, user) > 1 ))
+	if((get_dist(src, user) > 1 ))
 		if (!istype(user, /mob/living/silicon))
 			user.machine = null
 			user << browse(null, "window=air_alarm")
@@ -629,30 +483,8 @@
 			user << browse(null, "window=air_alarm")
 			return
 
-	if(wiresexposed && (!istype(user, /mob/living/silicon)))
-		var/t1 = text("<html><head><title>[alarm_area.name] Air Alarm Wires</title></head><body><B>Access Panel</B><br>\n")
-		var/list/wirecolors = list(
-			"Orange" = 1,
-			"Dark red" = 2,
-			"White" = 3,
-			"Yellow" = 4,
-			"Black" = 5,
-		)
-		for(var/wiredesc in wirecolors)
-			var/is_uncut = AAlarmwires & AAlarmWireColorToFlag[wirecolors[wiredesc]]
-			t1 += "[wiredesc] wire: "
-			if(!is_uncut)
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Mend</a>"
-
-			else
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Cut</a> "
-				t1 += "<a href='?src=\ref[src];pulse=[wirecolors[wiredesc]]'>Pulse</a> "
-
-			t1 += "<br>"
-		t1 += text("<br>\n[(locked ? "The Air Alarm is locked." : "The Air Alarm is unlocked.")]<br>\n[((shorted || (stat & (NOPOWER|BROKEN))) ? "The Air Alarm is offline." : "The Air Alarm is working properly!")]<br>\n[(aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
-		t1 += text("<p><a href='?src=\ref[src];close2=1'>Close</a></p></body></html>")
-		user << browse(t1, "window=AAlarmwires")
-		onclose(user, "AAlarmwires")
+	if(wiresexposed && (!istype(user, /mob/living/silicon/ai)))
+		wires.Interact(user)
 
 	if(!shorted)
 		user << browse(return_text(user),"window=air_alarm")
@@ -1055,35 +887,6 @@ table tr:first-child th:first-child { border: none;}
 			mode = text2num(href_list["mode"])
 			apply_mode()
 
-	// hrefs that need the AA wires exposed, note that borgs should be in range here too -walter0o
-	if(wiresexposed && Adjacent(usr))
-
-		if (href_list["AAlarmwires"])
-			var/t1 = text2num(href_list["AAlarmwires"])
-			if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
-				usr << "You need wirecutters!"
-				return
-			if (isWireColorCut(t1))
-				mend(t1)
-			else
-				cut(t1)
-				if (AAlarmwires == 0)
-					usr << "<span class='notice'>You cut last of wires inside [src]</span>"
-					update_icon()
-					buildstage = 1
-				return
-
-		else if (href_list["pulse"])
-			var/t1 = text2num(href_list["pulse"])
-			if (!istype(usr.equipped(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return
-			if (isWireColorCut(t1))
-				usr << "You can't pulse a cut wire."
-				return
-			else
-				pulse(t1)
-
 	updateUsrDialog()
 
 
@@ -1115,7 +918,7 @@ table tr:first-child th:first-child { border: none;}
 					user << "It does nothing"
 					return
 				else
-					if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
+					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
 						user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
 						updateUsrDialog()
@@ -1168,12 +971,12 @@ table tr:first-child th:first-child { border: none;}
 	spawn(rand(0,15))
 		update_icon()
 
-/obj/machinery/alarm/examine()
-	..()
+/obj/machinery/alarm/examine(mob/user)
+	..(user)
 	if (buildstage < 2)
-		usr << "It is not wired."
+		user << "It is not wired."
 	if (buildstage < 1)
-		usr << "The circuit is missing."
+		user << "The circuit is missing."
 /*
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
@@ -1285,9 +1088,6 @@ FIRE ALARM
 
 /obj/machinery/firealarm/bullet_act(BLAH)
 	return src.alarm()
-
-/obj/machinery/firealarm/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/firealarm/emp_act(severity)
 	if(prob(50/severity)) alarm()
@@ -1488,7 +1288,7 @@ FIRE ALARM
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
-	
+
 /obj/machinery/firealarm/initialize()
 	if(z in config.contact_levels)
 		if(security_level)
@@ -1570,9 +1370,6 @@ Code shamelessly copied from apc_frame
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 6
-
-/obj/machinery/partyalarm/attack_paw(mob/user as mob)
-	return attack_hand(user)
 
 /obj/machinery/partyalarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))

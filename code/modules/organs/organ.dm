@@ -60,7 +60,6 @@
 /mob/living/carbon/human/proc/handle_organs()
 
 	number_wounds = 0
-	var/leg_tally = 2
 	var/force_process = 0
 	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
 	if(damage_this_tick > last_dam)
@@ -74,6 +73,9 @@
 	//processing internal organs is pretty cheap, do that first.
 	for(var/datum/organ/internal/I in internal_organs)
 		I.process()
+
+	//losing a limb stops it from processing, so this has to be done separately
+	handle_stance()
 
 	if(!force_process && !bad_external_organs.len)
 		return
@@ -101,23 +103,17 @@
 						if (W.infection_check())
 							W.germ_level += 1
 
-			if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
-				if (!E.is_usable() || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)))
-					leg_tally--			// let it fail even if just foot&leg
+/mob/living/carbon/human/proc/handle_stance()
+	can_stand = 2
+	for (var/organ in list("l_leg","l_foot","r_leg","r_foot"))
+		var/datum/organ/external/E = organs_by_name[organ]
+		if ((E.status & ORGAN_DESTROYED) || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
+			can_stand--			// let it fail even if just foot&leg
 
 	// standing is poor
-	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
-		if(species && species.flags & NO_PAIN)
-			emote("scream")
-		emote("collapse")
-		paralysis = 10
-
-	//Check arms and legs for existence
-	can_stand = 2 //can stand on both legs
-	var/datum/organ/external/E = organs_by_name["l_foot"]
-	if(E.status & ORGAN_DESTROYED)
-		can_stand--
-
-	E = organs_by_name["r_foot"]
-	if(E.status & ORGAN_DESTROYED)
-		can_stand--
+	if(can_stand <= 0)
+		Weaken(10)
+		if (!(lying || resting))
+			if(species && !(species.flags & NO_PAIN))
+				emote("scream")
+			emote("collapse")

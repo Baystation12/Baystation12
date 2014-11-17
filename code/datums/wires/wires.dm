@@ -6,8 +6,8 @@
 #define MAX_FLAG 65535
 
 var/list/same_wires = list()
-// 12 colours, if you're adding more than 12 wires then add more colours here
-var/list/wireColours = list("red", "blue", "green", "black", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink")
+// 14 colours, if you're adding more than 14 wires then add more colours here
+var/list/wireColours = list("red", "blue", "green", "white", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires
 

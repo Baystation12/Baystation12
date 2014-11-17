@@ -18,13 +18,13 @@ var/global/list/gear_datums = list()
 	//create a list of gear datums to sort
 	for(var/type in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = new type()
-		
+
 		var/category = (G.sort_category in sort_categories)? G.sort_category : "unknown"
 		sort_categories[category][G.display_name] = G
-	
+
 	for (var/category in sort_categories)
 		gear_datums.Add(sortAssoc(sort_categories[category]))
-	
+
 	return 1
 
 /datum/gear
@@ -47,6 +47,12 @@ var/global/list/gear_datums = list()
 /datum/gear/gbandana
 	display_name = "bandana, green"
 	path = /obj/item/clothing/head/greenbandana
+	cost = 2
+	slot = slot_head
+
+/datum/gear/obandana
+	display_name = "bandana, orange"
+	path = /obj/item/clothing/head/orangebandana
 	cost = 2
 	slot = slot_head
 
@@ -453,6 +459,36 @@ var/global/list/gear_datums = list()
 	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/storage/bomber
 	cost = 4
+	slot = slot_wear_suit
+
+/datum/gear/leather_jacket
+	display_name = "leather jacket, black"
+	path = /obj/item/clothing/suit/storage/leather_jacket
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/leather_jacket_nt
+	display_name = "leather jacket, NanoTrasen, black"
+	path = /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/brown_jacket
+	display_name = "leather jacket, brown"
+	path = /obj/item/clothing/suit/storage/toggle/brown_jacket
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/brown_jacket_nt
+	display_name = "leather jacket, NanoTrasen, brown"
+	path = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+	cost = 3
+	slot = slot_wear_suit
+
+/datum/gear/hoodie
+	display_name = "hoodie, grey"
+	path = /obj/item/clothing/suit/hoodie
+	cost = 2
 	slot = slot_wear_suit
 
 /datum/gear/unathi_mantle

@@ -263,7 +263,7 @@
 		choose_progs(C)
 		vend()
 		popup.close()
-		newlap.close_computer()
+		newlap.close_laptop()
 		newlap = null
 		cardreader = 0
 		floppy = 0

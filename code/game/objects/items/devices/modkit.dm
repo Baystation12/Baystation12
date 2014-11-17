@@ -62,9 +62,9 @@
 		user.drop_from_inventory(src)
 		del(src)
 
-/obj/item/device/modkit/examine()
-	..()
-	usr << "It looks as though it modifies hardsuits to fit [target_species] users."
+/obj/item/device/modkit/examine(mob/user)
+	..(user)
+	user << "It looks as though it modifies hardsuits to fit [target_species] users."
 
 /obj/item/device/modkit/tajaran
 	name = "tajaran hardsuit modification kit"

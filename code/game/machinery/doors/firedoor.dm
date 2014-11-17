@@ -2,7 +2,7 @@
 /var/const/CLOSED = 2
 
 #define FIREDOOR_MAX_PRESSURE_DIFF 25 // kPa
-#define FIREDOOR_MAX_TEMP 50 // °C
+#define FIREDOOR_MAX_TEMP 50 // Â°C
 #define FIREDOOR_MIN_TEMP 0
 
 // Bitflags
@@ -72,17 +72,14 @@
 	. = ..()
 
 
-/obj/machinery/door/firedoor/examine()
-	set src in view()
-	. = ..()
-
-	if(get_dist(src, usr) > 1 && !isAI(usr))
+/obj/machinery/door/firedoor/examine(mob/user)
+	if(!..(user, 1) && !isAI(user))
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
-		usr << "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
+		user << "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
 
-	usr << "<b>Sensor readings:</b>"
+	user << "<b>Sensor readings:</b>"
 	for(var/index = 1; index <= tile_info.len; index++)
 		var/o = "&nbsp;&nbsp;"
 		switch(index)
@@ -96,7 +93,7 @@
 				o += "WEST: "
 		if(tile_info[index] == null)
 			o += "<span class='warning'>DATA UNAVAILABLE</span>"
-			usr << o
+			user << o
 			continue
 		var/celsius = convert_k2c(tile_info[index][1])
 		var/pressure = tile_info[index][2]
@@ -107,14 +104,14 @@
 		o += "[celsius]&deg;C</span> "
 		o += "<span style='color:blue'>"
 		o += "[pressure]kPa</span></li>"
-		usr << o
+		user << o
 
 	if(islist(users_to_open) && users_to_open.len)
 		var/users_to_open_string = users_to_open[1]
 		if(users_to_open.len >= 2)
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
-		usr << "These people have opened \the [src] during an alert: [users_to_open_string]."
+		user << "These people have opened \the [src] during an alert: [users_to_open_string]."
 
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(p_open || operating)
@@ -168,8 +165,6 @@
 		if(alarmed)
 			// Accountability!
 			users_to_open |= user.name
-			log_admin("[user]([user.ckey]) has opened an alarming emergency shutter.")
-			message_admins("[user]([user.ckey]) has opened an alarming emergency shutter.")
 			needs_to_close = 1
 		spawn()
 			open()

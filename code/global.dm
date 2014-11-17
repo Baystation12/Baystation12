@@ -9,7 +9,6 @@ var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
-var/global/list/events = list()
 var/global/list/med_hud_users = list() //list of all entities using a medical HUD.
 var/global/list/sec_hud_users = list() //list of all entities using a security HUD.
 		//items that ask to be called every cycle
@@ -130,6 +129,7 @@ var/list/newplayer_start = list()
 var/list/latejoin = list()
 var/list/latejoin_gateway = list()
 var/list/latejoin_cryo = list()
+var/list/latejoin_cyborg = list()
 
 var/list/prisonwarp = list()	//prisoners go to these
 var/list/holdingfacility = list()	//captured people go here
@@ -179,22 +179,8 @@ var/forceblob = 0
 // nanomanager, the manager for Nano UIs
 var/datum/nanomanager/nanomanager = new()
 
-	//airlockWireColorToIndex takes a number representing the wire color, e.g. the orange wire is always 1, the dark red wire is always 2, etc. It returns the index for whatever that wire does.
-	//airlockIndexToWireColor does the opposite thing - it takes the index for what the wire does, for example AIRLOCK_WIRE_IDSCAN is 1, AIRLOCK_WIRE_POWER1 is 2, etc. It returns the wire color number.
-	//airlockWireColorToFlag takes the wire color number and returns the flag for it (1, 2, 4, 8, 16, etc)
-var/list/globalAirlockWireColorToFlag = RandomAirlockWires()
-var/list/globalAirlockIndexToFlag
-var/list/globalAirlockIndexToWireColor
-var/list/globalAirlockWireColorToIndex
-var/list/BorgWireColorToFlag = RandomBorgWires()
-var/list/BorgIndexToFlag
-var/list/BorgIndexToWireColor
-var/list/BorgWireColorToIndex
-var/list/AAlarmWireColorToFlag = RandomAAlarmWires()
-var/list/AAlarmIndexToFlag
-var/list/AAlarmIndexToWireColor
-var/list/AAlarmWireColorToIndex
-
+// event manager, the manager for events
+var/datum/event_manager/event_manager = new()
 #define SPEED_OF_LIGHT 3e8 //not exact but hey!
 #define SPEED_OF_LIGHT_SQ 9e+16
 #define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
@@ -212,6 +198,10 @@ var/list/AAlarmWireColorToIndex
 
 #define shuttle_time_in_station 1800 // 3 minutes in the station
 #define shuttle_time_to_arrive 6000 // 10 minutes to arrive
+
+#define EVENT_LEVEL_MUNDANE 1
+#define EVENT_LEVEL_MODERATE 2
+#define EVENT_LEVEL_MAJOR 3
 
 	//away missions
 var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to

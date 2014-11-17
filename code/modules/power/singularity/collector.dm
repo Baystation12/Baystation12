@@ -98,10 +98,9 @@ var/global/list/rad_collectors = list()
 		return 1
 	return ..()
 
-/obj/machinery/power/rad_collector/examine()
-	..()
-	if (get_dist(usr, src) <= 3)
-		usr << "The meter indicates that \the [src] is collecting [last_power] W."
+/obj/machinery/power/rad_collector/examine(mob/user)
+	if (..(user, 3))
+		user << "The meter indicates that \the [src] is collecting [last_power] W."
 		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)

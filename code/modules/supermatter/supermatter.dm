@@ -7,10 +7,10 @@
 
 /*
 	How to tweak the SM
-	
+
 	POWER_FACTOR		directly controls how much power the SM puts out at a given level of excitation (power var). Making this lower means you have to work the SM harder to get the same amount of power.
 	CRITICAL_TEMPERATURE	The temperature at which the SM starts taking damage.
-	
+
 	CHARGING_FACTOR		Controls how much emitter shots excite the SM.
 	DAMAGE_RATE_LIMIT	Controls the maximum rate at which the SM will take damage due to high temperatures.
 */
@@ -77,7 +77,7 @@
 	var/config_hallucination_power = 0.1
 
 	var/obj/item/device/radio/radio
-	
+
 	var/debug = 0
 
 	shard //Small subtype, less efficient and more sensitive, but less boom.
@@ -203,7 +203,7 @@
 			//If chain reacting at oxygen == 1, we want the power at 800 K to stabilize at a power level of 250
 			equilibrium_power = 250
 			icon_state = base_icon_state
-		
+
 		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
@@ -216,13 +216,13 @@
 		var/heat_capacity = removed.heat_capacity()
 		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
 		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
-		
+
 		var/thermal_power = THERMAL_RELEASE_MODIFIER * device_energy
 		if (debug)
 			var/heat_capacity_new = removed.heat_capacity()
 			visible_message("[src]: Releasing [round(thermal_power)] W.")
 			visible_message("[src]: Releasing additional [round((heat_capacity_new - heat_capacity)*removed.temperature)] W with exhaust gasses.")
-		
+
 		removed.add_thermal_energy(thermal_power)
 		removed.temperature = between(0, removed.temperature, 10000)
 
@@ -255,11 +255,6 @@
 		damage += Proj.damage * config_bullet_energy
 	return 0
 
-
-/obj/machinery/power/supermatter/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))
 		return attack_hand(user)
@@ -282,7 +277,7 @@
 		var/distance = get_dist(R, src)
 		if(distance <= 15)
 			//for collectors using standard phoron tanks at 1013 kPa, the actual power generated will be this power*POWER_FACTOR*20*29 = power*POWER_FACTOR*580
-			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2) 
+			R.receive_pulse(power * POWER_FACTOR * (min(3/distance, 1))**2)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)

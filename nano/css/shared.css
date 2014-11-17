@@ -189,6 +189,16 @@ h4 {
     color: #272727;
 }
 
+.caption {
+    font-size: 10px;
+    font-weight: bold;
+	padding: 5px;
+}
+
+.footer {
+	font-size: 10px;
+}
+
 .noticePlaceholder {
     position: relative;
     font-size: 12px;
