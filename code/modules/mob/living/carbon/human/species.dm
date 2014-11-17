@@ -81,7 +81,7 @@
 	var/wingicon = 0
 
 	//Size Differences
-	var/sizechange = 0.95
+	var/sizechange = 1
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
