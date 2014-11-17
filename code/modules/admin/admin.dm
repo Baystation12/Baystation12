@@ -281,7 +281,7 @@ var/global/floorIsLava = 0
 				I.rank = "N/A"
 				update_file = 1
 			dat += "<font color=#008800>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color=blue>[I.timestamp]</i></font> "
-			if(I.author == usr.key || I.author == "Adminbot")
+			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<br><br>"
 		if(update_file) info << infos
@@ -1146,7 +1146,20 @@ var/global/floorIsLava = 0
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
 
 
-
+/proc/ishost(whom)
+	if(!whom)
+		return 0
+	var/client/C
+	var/mob/M
+	if(istype(whom, /client))
+		C = whom
+	if(istype(whom, /mob))
+		M = whom
+		C = M.client
+	if(R_HOST & C.holder.rights)
+		return 1
+	else
+		return 0
 //
 //
 //ALL DONE
