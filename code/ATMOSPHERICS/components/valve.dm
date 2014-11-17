@@ -17,6 +17,7 @@
 
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
+	var/badpipe = 0
 
 /obj/machinery/atmospherics/valve/open
 	open = 1
@@ -93,6 +94,10 @@
 
 	open = 1
 	update_icon()
+
+	if(badpipe == 1)
+		message_admins("[usr] ([usr.ckey]) is opening a potential bad pipe that could ruin the stations atmos! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
+
 
 	if(network_node1&&network_node2)
 		network_node1.merge(network_node2)

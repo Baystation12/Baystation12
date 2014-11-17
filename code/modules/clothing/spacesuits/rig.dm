@@ -511,6 +511,16 @@
 	item_state = "rig0-ipcblue"
 	item_color = "ipcblue"
 
+/obj/item/clothing/head/helmet/space/rig/machine/syndie
+	icon_state = "rig0-ipcsyndie"  //Sprites by Miss Teddybears, Modified by 5crownix
+	item_state = "rig0-ipcsyndie"
+	item_color = "ipcsyndie"
+
+/obj/item/clothing/head/helmet/space/rig/machine/miner
+	icon_state = "rig0-ipcminer"  //Sprites by Miss Teddybears, Modified by 5crownix
+	item_state = "rig0-ipcminer"
+	item_color = "ipcminer"
+
 /obj/item/clothing/suit/space/rig/machine
 	name = "Liquid cooled hardsuit"
 	desc = "A heavy chassis with ports lining the inside. Would not recommend being inside if you don't have anywhere to plug in."
@@ -524,3 +534,11 @@
 /obj/item/clothing/suit/space/rig/machine/blue
 	icon_state = "rig-ipcblue"  //Sprites by Miss Teddybears
 	item_state = "rig-ipcblue"
+
+/obj/item/clothing/suit/space/rig/machine/syndie
+	icon_state = "rig-ipcsyndie"  //Sprites by Miss Teddybears, Modified by 5crownix
+	item_state = "rig-ipcsyndie"
+
+/obj/item/clothing/suit/space/rig/machine/miner
+	icon_state = "rig-ipcminer"  //Sprites by Miss Teddybears, Modified by 5crownix
+	item_state = "rig-ipcminer"
