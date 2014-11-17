@@ -302,8 +302,8 @@
 
 		job_master.AssignRole(src, rank, 1)
 
-		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
-		job_master.EquipRank(character, rank, 1)					//equips the human
+		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+		character = job_master.EquipRank(character, rank, 1)					//equips the human
 		UpdateFactionList(character)
 		EquipCustomItems(character)
 
@@ -315,8 +315,13 @@
 			S = spawntypes[spawning_at]
 
 		if(S && istype(S))
-			character.loc = pick(S.turfs)
-			join_message = S.msg
+			if(S.check_job_spawning(rank))
+				character.loc = pick(S.turfs)
+				join_message = S.msg
+			else
+				character << "Your chosen spawnpoint ([S.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
+				character.loc = pick(latejoin)
+				join_message = "has arrived on the station"
 		else
 			character.loc = pick(latejoin)
 			join_message = "has arrived on the station"
@@ -338,9 +343,9 @@
 			//Grab some data from the character prefs for use in random news procs.
 
 			AnnounceArrival(character, rank, join_message)
-
 		else
-			character.Robotize()
+			AnnounceCyborg(character, rank, join_message)
+
 		del(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
@@ -349,6 +354,15 @@
 			if(character.mind.role_alt_title)
 				rank = character.mind.role_alt_title
 			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+			del(a)
+
+	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
+		if (ticker.current_state == GAME_STATE_PLAYING)
+			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
+			if(character.mind.role_alt_title)
+				rank = character.mind.role_alt_title
+			// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
+			a.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 			del(a)
 
 	proc/LateChoices()
