@@ -169,7 +169,7 @@ datum/nano_item_lists
 	data["menu"] = nanoui_menu
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -216,6 +216,8 @@ datum/nano_item_lists
 			if(ishuman(usr))
 				var/mob/living/carbon/human/A = usr
 				A.put_in_any_hand_if_possible(I)
+				var/obj/refitem = new UI.path
+				A.mind.uplinkitems += refitem
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)
 	return 1
