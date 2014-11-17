@@ -10,9 +10,9 @@
 	rapid = 1
 	speak_chance = 5
 	turns_per_move = 3
-	response_help = "pokes the"
-	response_disarm = "gently pushes aside the"
-	response_harm = "hits the"
+	response_help = "pokes"
+	response_disarm = "gently pushes aside"
+	response_harm = "hits"
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = "harm"
