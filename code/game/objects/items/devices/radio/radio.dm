@@ -491,7 +491,7 @@
 
 
 /obj/item/device/radio/examine(mob/user)
-	..(user)
+	. = ..()
 	if ((in_range(src, user) || loc == user))
 		if (b_stat)
 			user.show_message("\blue \the [src] can be attached and modified!")
