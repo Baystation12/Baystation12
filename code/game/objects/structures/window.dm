@@ -8,14 +8,12 @@
 	anchored = 1.0
 	flags = ON_BORDER
 	var/health = 14.0
-	var/ini_dir = null
 	var/state = 2
 	var/reinf = 0
 	var/basestate
 	var/shardtype = /obj/item/weapon/shard
 //	var/silicate = 0 // number of units of silicate
 //	var/icon/silicateIcon = null // the silicated icon
-
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
 
@@ -62,11 +60,16 @@
 	if(reinf) new /obj/item/stack/rods( loc)
 	del(src)
 
+//TODO: Make full windows a separate type of window.
+//Once a full window, it will always be a full window, so there's no point
+//having the same type for both.
+/obj/structure/window/proc/is_full_window()
+	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return 1
-	if(dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
+	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) == dir)
 		return !density
@@ -255,7 +258,6 @@
 	dir = turn(dir, 90)
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
-	ini_dir = dir
 	return
 
 
@@ -272,7 +274,6 @@
 	dir = turn(dir, 270)
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
-	ini_dir = dir
 	return
 
 
@@ -292,17 +293,18 @@
 */
 
 
-/obj/structure/window/New(Loc,re=0)
+/obj/structure/window/New(Loc, start_dir=null, constructed=0)
 	..()
 
-//	if(re)	reinf = re
-
-	ini_dir = dir
+	//player-constructed windows
+	if (constructed)
+		anchored = 0
+	
+	if (start_dir)
+		dir = start_dir
 
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
-
-	return
 
 
 /obj/structure/window/Del()
@@ -314,6 +316,7 @@
 
 
 /obj/structure/window/Move()
+	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
 	..()
 	dir = ini_dir
@@ -411,6 +414,13 @@
 	basestate = "rwindow"
 	health = 40
 	reinf = 1
+
+/obj/structure/window/New(Loc, constructed=0)
+	..()
+
+	//player-constructed windows
+	if (constructed)
+		state = 0
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"

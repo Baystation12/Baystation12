@@ -235,7 +235,7 @@
 			possible_spawns += /obj/item/stack/sheet/metal
 			possible_spawns += /obj/item/stack/sheet/plasteel
 			possible_spawns += /obj/item/stack/sheet/glass
-			possible_spawns += /obj/item/stack/sheet/rglass
+			possible_spawns += /obj/item/stack/sheet/glass/reinforced
 			possible_spawns += /obj/item/stack/sheet/mineral/phoron
 			possible_spawns += /obj/item/stack/sheet/mineral/gold
 			possible_spawns += /obj/item/stack/sheet/mineral/silver
