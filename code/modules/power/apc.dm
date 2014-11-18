@@ -100,6 +100,7 @@
 		"Yellow" = 4,
 	)
 	var/longtermpower = 10
+	var/empproof = 0
 	var/update_state = -1
 	var/update_overlay = -1
 	var/global/status_overlays = 0
@@ -1360,6 +1361,7 @@
 	return
 
 /obj/machinery/power/apc/emp_act(severity)
+	if(empproof == 1) return
 	if(cell)
 		cell.emp_act(severity)
 	if(occupant)

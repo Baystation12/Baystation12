@@ -725,6 +725,7 @@
 #include "code\modules\admin\verbs\debug.dm"
 #include "code\modules\admin\verbs\diagnostics.dm"
 #include "code\modules\admin\verbs\force_rules.dm"
+#include "code\modules\admin\verbs\forceshuttle.dm"
 #include "code\modules\admin\verbs\freeze.dm"
 #include "code\modules\admin\verbs\getlogs.dm"
 #include "code\modules\admin\verbs\mapping.dm"

@@ -24,6 +24,7 @@ var/list/wood_icons = list("wood","wood-broken")
 	//Use the is_plating(), is_plasteel_floor() and is_light_floor() procs instead. --Errorage
 	name = "floor"
 	icon = 'icons/turf/floors.dmi'
+	desc = "flooring.. generally used to be walked on."
 	icon_state = "floor"
 
 	var/icon_regular_floor = "floor" //used to remember what icon the tile should have by default

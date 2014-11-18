@@ -181,6 +181,13 @@
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 			text += printplayer(traitor)
+			text += "<br><b>Uplink Items: </b>"
+			if(traitor.uplinkitems != 0)
+				for(var/A in traitor.uplinkitems)
+					var/obj/icon = A
+					text += "\icon[icon]-[icon.name], "
+			else
+				text += "None"
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1

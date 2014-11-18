@@ -934,10 +934,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(species.wingicon)
 		var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
+		if(gender == "female")
+			tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_f_s")
 		tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 		if(wear_suit) //runtime fix ~yash
 			if((wear_suit.flags_inv & HIDETAIL) && istype(wear_suit, /obj/item/clothing/suit/space))
 				var/icon/wings = new /icon ('icons/effects/species.dmi',"[species.tail]_s")
+				if(gender == "female")
+					wings = new /icon ('icons/effects/species.dmi',"[species.tail]_f_s")
 				tail_s.Blend(wings, ICON_OVERLAY)
 
 		overlays_standing[TAIL_LAYER]	= image(tail_s)
