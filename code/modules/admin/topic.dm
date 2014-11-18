@@ -2493,6 +2493,43 @@
 					W.item_color = "schoolgirl"
 				message_admins("[key_name_admin(usr)] activated Japanese Animes mode")
 				world << sound('sound/AI/animes.ogg')
+			if("dbzmode")
+				if(!ticker)
+					alert("The game hasn't started yet!")
+					return
+				var/objective = copytext(sanitize(input("Enter an objective")),1,MAX_MESSAGE_LEN)
+				if(!objective)
+					return
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","DBZ([objective])")
+				for(var/mob/living/carbon/human/H in player_list)
+					if(H.stat == 2 || !H.client || !H.mind) continue
+					if(is_special_character(H)) continue
+					//traitorize(H, objective, 0)
+					ticker.mode.wizards += H.mind
+					H.mind.special_role = "Wizard"
+					var/datum/objective/new_objective = new
+					new_objective.owner = H
+					new_objective.explanation_text = objective
+					H.mind.objectives += new_objective
+					ticker.mode.greet_wizard(H.mind)
+					ticker.mode.equip_wizard(H)
+					ticker.mode.name_wizard(H)
+					//ticker.mode.forge_traitor_objectives(H.mind)
+				for(var/mob/living/silicon/A in player_list)
+					ticker.mode.traitors += A.mind
+					A.mind.special_role = "Wizard Silicon"
+					var/datum/objective/new_objective = new
+					new_objective.owner = A
+					new_objective.explanation_text = objective
+					A.mind.objectives += new_objective
+					ticker.mode.greet_wizard(A.mind)
+					ticker.mode.equip_wizard(A)
+					ticker.mode.name_wizard(A)
+				message_admins("\blue [key_name_admin(usr)] used everyone is a wizard secret. Objective is [objective]", 1)
+				log_admin("[key_name(usr)] used everyone is a wizard secret. Objective is [objective]")
+				log_admin_single("[key_name(usr)] used everyone is a wizard secret. Objective is [objective]")
+				world << sound('sound/music/sorrow.ogg')
 			if("eagles")//SCRAW
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","EgL")
