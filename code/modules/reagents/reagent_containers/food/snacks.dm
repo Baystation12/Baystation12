@@ -195,7 +195,7 @@
 			return
 
 /obj/item/weapon/reagent_containers/food/snacks/proc/is_sliceable()
-	return (slices_num <= 0 || !slices_num || !slice_path)
+	return (slices_num && slice_path && slices_num > 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/Del()
 	if(contents)

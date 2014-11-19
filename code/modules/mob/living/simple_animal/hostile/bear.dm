@@ -14,9 +14,9 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "pokes the"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "pokes"
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 60
 	health = 60
@@ -90,7 +90,7 @@
 
 		if(HOSTILE_STANCE_ATTACKING)
 			if(stance_step >= 20)	//attacks for 20 ticks, then it gets tired and needs to rest
-				custom_emote(1, "is worn out and needs to rest" )
+				custom_emote(1, "is worn out and needs to rest." )
 				stance = HOSTILE_STANCE_TIRED
 				stance_step = 0
 				walk(src, 0) //This stops the bear's walking
