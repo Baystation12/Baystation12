@@ -282,7 +282,7 @@
 		if(istype(D, /obj/item/weapon/wirecutters))
 			if(!src.reagents.total_volume && src.reagents)
 				user << "You cut eye holes in the [src]."
-				user.put_in_hands(new /obj/item/weapon/reagent_containers/glass/bucket/hat)
+				user.put_in_hands(new /obj/item/clothing/head/buckethat)
 				user.drop_from_inventory(src)
 				del(src)
 			else
@@ -295,16 +295,16 @@
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
 
-/obj/item/weapon/reagent_containers/glass/bucket/hat
+/obj/item/clothing/head/buckethat
 	desc = "It's a bucket with eyeholes cut into."
 	name = "bucket hat"
+	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket-hat"
 	item_state = "bucket-hat"
 	slot_flags = SLOT_HEAD
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	flags = BLOCKHAIR | HEADCOVERSMOUTH
 	body_parts_covered = HEAD|FACE|EYES
-	volume = 60
 
 
 // vials are defined twice, what?
