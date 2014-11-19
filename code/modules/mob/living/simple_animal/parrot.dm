@@ -44,9 +44,9 @@
 	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
 
-	response_help  = "pets the"
-	response_disarm = "gently moves aside the"
-	response_harm   = "swats the"
+	response_help  = "pets"
+	response_disarm = "gently moves aside"
+	response_harm   = "swats"
 	stop_automated_movement = 1
 	universal_speak = 1
 
@@ -342,7 +342,7 @@
 			//Search for item to steal
 			parrot_interest = search_for_item()
 			if(parrot_interest)
-				emote("looks in [parrot_interest]'s direction and takes flight")
+				visible_emote("looks in [parrot_interest]'s direction and takes flight")
 				parrot_state = PARROT_SWOOP | PARROT_STEAL
 				icon_state = "parrot_fly"
 			return
@@ -364,7 +364,7 @@
 			if(AM)
 				if(istype(AM, /obj/item) || isliving(AM))	//If stealable item
 					parrot_interest = AM
-					emote("turns and flies towards [parrot_interest]")
+					visible_emote("turns and flies towards [parrot_interest]")
 					parrot_state = PARROT_SWOOP | PARROT_STEAL
 					return
 				else	//Else it's a perch
@@ -478,11 +478,11 @@
 				var/datum/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
 
 				H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), sharp=1)
-				emote(pick("pecks [H]'s [affecting]", "cuts [H]'s [affecting] with its talons"))
+				visible_emote(pick("pecks [H]'s [affecting].", "cuts [H]'s [affecting] with its talons."))
 
 			else
 				L.adjustBruteLoss(damage)
-				emote(pick("pecks at [L]", "claws [L]"))
+				visible_emote(pick("pecks at [L].", "claws [L]."))
 			return
 
 		//Otherwise, fly towards the mob!
