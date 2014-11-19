@@ -111,7 +111,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
-        /client/proc/everyone_random,
+    /client/proc/everyone_random,
 	/client/proc/cinematic,
 	/client/proc/one_click_antag,
 	/datum/admins/proc/toggle_aliens,
@@ -123,7 +123,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
 	/client/proc/editappear,
-	/client/proc/trigger_random_event
+	/client/proc/trigger_random_event,
+	/client/proc/artillery
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
@@ -184,8 +185,7 @@ var/list/admin_verbs_possess = list(
 	/proc/release
 	)
 var/list/admin_verbs_permissions = list(
-	/client/proc/edit_admin_permissions,
-	/client/proc/artillery
+	/client/proc/edit_admin_permissions
 	)
 var/list/admin_verbs_rejuv = list(
 	/client/proc/respawn_character,
