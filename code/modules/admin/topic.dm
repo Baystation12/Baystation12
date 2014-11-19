@@ -3026,8 +3026,8 @@
 			var/client/C = directory[vip_ckey]						//find the client with the specified ckey (if they are logged in)
 			D.associate(C)											//link up with the client and add verbs
 
-			message_admins("[key_name_admin(usr)] edited the vip rank of [vip_ckey] to [new_rank]")
-			log_admin("[key_name(usr)] edited the vip rank of [vip_ckey] to [new_rank]")
+			message_admins("[key_name_admin(usr)] edited the event rank of [vip_ckey] to [new_rank]")
+			log_admin("[key_name(usr)] edited the event rank of [vip_ckey] to [new_rank]")
 			log_vip_rank_modification(vip_ckey, new_rank)
 
 		else if(task == "permissions")

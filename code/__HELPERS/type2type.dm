@@ -328,6 +328,7 @@ proc/tg_list2text(list/list, glue=",")
 
 /proc/vip_rights2text(rights,seperator="")
 	if(rights & V_EVENT)		. += "[seperator]+EVENT"
+	if(rights & V_EVENTDONATE)		. += "[seperator]+EVENTDONATE"
 	return .
 
 /proc/ui_style2icon(ui_style)

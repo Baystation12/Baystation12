@@ -8,6 +8,7 @@ var/list/vip_verbs_vip = list(
 /client/proc/add_vip_verbs()
 	if(vipholder)
 		if(vipholder.rights & V_EVENT)		verbs += vip_verbs_vip
+		if(vipholder.rights & V_EVENTDONATE)		verbs += vip_verbs_vip
 
 /client/proc/remove_vip_verbs()
 	verbs.Remove(

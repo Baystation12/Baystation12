@@ -118,12 +118,12 @@
 	world.load_mods()
 
 /client/proc/reload_vips()
-	set name = "Reload VIPS"
+	set name = "Reload Event Personnel"
 	set category = "Debug"
 
 	if(!check_rights(R_SERVER))	return
 
-	message_admins("[usr] manually reloaded vips")
+	message_admins("[usr] manually reloaded event personnel")
 	load_vips()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
