@@ -89,3 +89,4 @@
 	var/stored_account_money = null
 
 	var/emagged = 0
+	var/ripping = 0
