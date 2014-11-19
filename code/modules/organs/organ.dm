@@ -104,16 +104,20 @@
 							W.germ_level += 1
 
 /mob/living/carbon/human/proc/handle_stance()
-	can_stand = 2
+	if (lying || resting)
+		return // don't need to process any of this if they aren't standing anyways
+	
+	stance_damage = 0
 	for (var/organ in list("l_leg","l_foot","r_leg","r_foot"))
 		var/datum/organ/external/E = organs_by_name[organ]
-		if ((E.status & ORGAN_DESTROYED) || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
-			can_stand--			// let it fail even if just foot&leg
+		if (E.status & ORGAN_DESTROYED)
+			stance_damage += 2 // let it fail even if just foot&leg
+		else if (E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)) || !E.is_usable())
+			stance_damage += 1
 
 	// standing is poor
-	if(can_stand <= 0)
-		Weaken(10)
-		if (!(lying || resting))
-			if(species && !(species.flags & NO_PAIN))
-				emote("scream")
-			emote("collapse")
+	if(stance_damage >= 4 || (stance_damage >= 2 && prob(5)))
+		Weaken(5)
+		if(species && !(species.flags & NO_PAIN))
+			emote("scream")
+		emote("collapse")

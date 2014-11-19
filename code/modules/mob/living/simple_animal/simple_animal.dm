@@ -114,23 +114,23 @@
 					else
 						randomValue -= speak.len
 						if(emote_see && randomValue <= emote_see.len)
-							emote(pick(emote_see),1)
+							visible_emote("[pick(emote_see)].")
 						else
-							emote(pick(emote_hear),2)
+							audible_emote("[pick(emote_hear)].")
 				else
 					say(pick(speak))
 			else
 				if(!(emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					emote(pick(emote_see),1)
+					visible_emote("[pick(emote_see)].")
 				if((emote_hear && emote_hear.len) && !(emote_see && emote_see.len))
-					emote(pick(emote_hear),2)
+					audible_emote("[pick(emote_hear)].")
 				if((emote_hear && emote_hear.len) && (emote_see && emote_see.len))
 					var/length = emote_hear.len + emote_see.len
 					var/pick = rand(1,length)
 					if(pick <= emote_see.len)
-						emote(pick(emote_see),1)
+						visible_emote("[pick(emote_see)].")
 					else
-						emote(pick(emote_hear),2)
+						audible_emote("[pick(emote_hear)].")
 
 
 	//Atmos
@@ -207,8 +207,13 @@
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)
-		if(act == "scream")	act = "whimper" //ugly hack to stop animals screaming when crushed :P
 		..(act, type, desc)
+
+/mob/living/simple_animal/proc/visible_emote(var/act_desc)
+	custom_emote(1, act_desc)
+
+/mob/living/simple_animal/proc/audible_emote(var/act_desc)
+	custom_emote(2, act_desc)
 
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
@@ -224,9 +229,11 @@
 
 		if("help")
 			if (health > 0)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message("\blue [M] [response_help] [src]")
+				M.visible_message("\blue [M] [response_help] \the [src]")
+		
+		if("disarm")
+			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			//TODO: Push the mob away or something
 
 		if("grab")
 			if (M == src)
@@ -242,15 +249,11 @@
 			G.affecting = src
 			LAssailant = M
 
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
+			M.visible_message("\red [M] has grabbed [src] passively!")
 
-		if("hurt", "disarm")
+		if("hurt")
 			adjustBruteLoss(harm_intent_damage)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message("\red [M] [response_harm] [src]")
+			M.visible_message("\red [M] [response_harm] \the [src]")
 
 	return
 

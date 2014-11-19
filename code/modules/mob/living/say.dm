@@ -91,22 +91,21 @@ proc/get_radio_key_from_channel(var/channel)
 
 		if (speaking.flags & SIGNLANG)
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
-
-	//make sure the air can transmit speech
-	var/datum/gas_mixture/environment = T.return_air()
-	if(environment)
-		var/pressure = environment.return_pressure()
-		if(pressure < SOUND_MINIMUM_PRESSURE)
-			italics = 1
-			message_range = 1
-
-			if (speech_sound)
-				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
-
+	
 	var/list/listening = list()
 	var/list/listening_obj = list()
 
 	if(T)
+		//make sure the air can transmit speech - speaker's side
+		var/datum/gas_mixture/environment = T.return_air()
+		var/pressure = (environment)? environment.return_pressure() : 0
+		if(pressure < SOUND_MINIMUM_PRESSURE)
+			message_range = 1
+		
+		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
+			italics = 1
+			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
+	
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 

@@ -358,7 +358,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/large/fluff/nashida_bishara_1 //rukral:Nashida Bisha'ra
 	name = "Nashida's Etched Beaker"
-	desc = "The message: 'Please do not be removing this beaker from the chemistry lab. If lost, return to Nashida Bisha'ra' can be seen etched into the side of this 100 unit beaker."
+	desc = "The message: 'Please do not be removing this beaker from the chemistry lab. If lost, return to Nashida Bisha'ra' can be seen etched into the side of this large beaker."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beakerlarge"
 	matter = list("glass" = 5000)
@@ -865,11 +865,13 @@
 	icon_state = "mitlabcoat"
 	item_state = "mitlabcoat"
 
-/obj/item/clothing/suit/storage/labcoat/fluff/epsilon //Devildabeast: Looping Song
+/obj/item/clothing/suit/storage/toggle/labcoat/fluff/epsilon //Devildabeast: Looping Song
 	name = "e UMi labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a black stripe on the shoulder. The abbreviation \"e UMi\" is written on the back in bold text."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "labcoat_black_open"
+	icon_open = "labcoat_black_open"
+	icon_closed = "labcoat_black"
 	item_state = "labcoat_black"
 
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
@@ -1410,3 +1412,86 @@
 	 desc = "This cane seems to have 'Ryals' engraved on its handle."
 	 icon_state = "cane"
 	 item_state = "stick"
+
+////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////
+
+/obj/item/weapon/holder/cat/fluff/bones
+	name = "Bones"
+	desc = "It's Bones! Meow."
+	gender = MALE
+	icon_state = "cat3"
+
+//Use this subtype for spawning in the custom item.
+/obj/item/weapon/holder/cat/fluff/bones/custom_item
+
+/obj/item/weapon/holder/cat/fluff/bones/custom_item/New()
+	if (!contents.len)
+		new/mob/living/simple_animal/cat/fluff/bones (src)
+	..()
+
+/mob/living/simple_animal/cat/fluff/bones
+	name = "Bones"
+	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
+	gender = MALE
+	icon_state = "cat3"
+	icon_living = "cat3"
+	icon_dead = "cat3_dead"
+	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+	bff_name = "Erstatz Vryroxes"
+
+/mob/living/simple_animal/cat/fluff
+	var/bff_name
+	var/mob/living/carbon/human/bff
+
+/mob/living/simple_animal/cat/fluff/handle_movement_target()
+	if (!bff)
+		for (var/mob/living/carbon/human/M in player_list)
+			if (M.real_name == bff_name)
+				bff = M
+				break
+
+	if (bff)
+		var/follow_dist = 5
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
+			follow_dist = 1
+		else if (bff.stat || bff.health <= 50) //danger or just sleeping
+			follow_dist = 2
+		var/near_dist = max(follow_dist - 3, 1)
+		var/current_dist = get_dist(src, bff)
+		
+		if (movement_target != bff)
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
+				//stop existing movement
+				walk_to(src,0)
+				turns_since_scan = 0
+
+				//walk to bff
+				stop_automated_movement = 1
+				movement_target = bff
+				walk_to(src, movement_target, near_dist, 4)
+		
+		//already following and close enough, stop
+		else if (current_dist <= near_dist)
+			walk_to(src,0)
+			movement_target = null
+			stop_automated_movement = 0
+
+	if (!(bff && movement_target == bff))
+		..()
+
+/mob/living/simple_animal/cat/fluff/Life()
+	..()
+	if (stat || !bff) 
+		return
+	if (get_dist(src, bff) <= 1)
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
+			if (prob((bff.stat < DEAD)? 50 : 15)) 
+				audible_emote(pick("meows in distress.", "meows anxiously."))
+		else
+			if (prob(5)) 
+				visible_emote(pick("nuzzles [bff].", 
+								   "brushes against [bff].",
+								   "rubs against [bff].",
+								   "purrs."))
+	else if (bff.health <= 50)
+		if (prob(10)) audible_emote("meows anxiously.")

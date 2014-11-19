@@ -199,28 +199,6 @@
 	item_state = "ianshirt"
 	body_parts_covered = UPPER_TORSO|ARMS
 
-//Blue suit jacket toggle
-/obj/item/clothing/suit/suit/verb/toggle()
-	set name = "Toggle Jacket Buttons"
-	set category = "Object"
-	set src in usr
-
-	if(!usr.canmove || usr.stat || usr.restrained())
-		return 0
-
-	if(src.icon_state == "suitjacket_blue_open")
-		src.icon_state = "suitjacket_blue"
-		src.item_state = "suitjacket_blue"
-		usr << "You button up the suit jacket."
-	else if(src.icon_state == "suitjacket_blue")
-		src.icon_state = "suitjacket_blue_open"
-		src.item_state = "suitjacket_blue_open"
-		usr << "You unbutton the suit jacket."
-	else
-		usr << "You button-up some imaginary buttons on your [src]."
-		return
-	update_clothing_icon()
-
 //pyjamas
 //originally intended to be pinstripes >.>
 
@@ -401,38 +379,20 @@
 	icon_state = "leather_jacket_nt"
 
 //This one has buttons for some reason
-/obj/item/clothing/suit/storage/brown_jacket
+/obj/item/clothing/suit/storage/toggle/brown_jacket
 	name = "leather jacket"
 	desc = "A brown leather coat."
 	icon_state = "brown_jacket"
 	item_state = "brown_jacket"
-	var/open_state = "brown_jacket_open"
+	icon_open = "brown_jacket_open"
+	icon_closed = "brown_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
 
-/obj/item/clothing/suit/storage/brown_jacket/nanotrasen
+/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	desc = "A brown leather coat. The letters NT are proudly displayed on the back."
 	icon_state = "brown_jacket_nt"
-	open_state = "brown_jacket_nt_open"
-	
-/obj/item/clothing/suit/storage/brown_jacket/verb/toggle()
-	set name = "Toggle Jacket Buttons"
-	set category = "Object"
-	set src in usr
-
-	if(!usr.canmove || usr.stat || usr.restrained())
-		return 0
-	
-	//The inhand sprite (the mob sprite that appears when holding the item in your hand) 
-	//is unchanged, so update only icon_state, not item_state.
-	if(icon_state == open_state)
-		usr << "You button up the jacket."
-		src.icon_state = initial(icon_state)
-	
-	else if(icon_state == initial(icon_state))
-		usr << "You unbutton the jacket."
-		src.icon_state = open_state
-	
-	update_clothing_icon()	//so our overlays update
+	icon_open = "brown_jacket_nt_open"
+	icon_closed = "brown_jacket_nt"
 
 /obj/item/clothing/suit/hoodie
 	name = "grey hoodie"

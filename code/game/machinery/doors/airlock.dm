@@ -1026,7 +1026,10 @@ About the new airlock wires panel:
 				S.loc = M.loc
 				spawn(20)
 					del(S)
-				M.emote("scream")
+				if (iscarbon(M))
+					var/mob/living/carbon/C = M
+					if (!(C.species && (C.species.flags & NO_PAIN)))
+						M.emote("scream")
 			var/turf/location = src.loc
 			if(istype(location, /turf/simulated))
 				location.add_blood(M)

@@ -14,9 +14,9 @@
 	turns_per_move = 10
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	meat_amount = 3
-	response_help  = "pets the"
-	response_disarm = "bops the"
-	response_harm   = "kicks the"
+	response_help  = "pets"
+	response_disarm = "bops"
+	response_harm   = "kicks"
 	see_in_dark = 5
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
@@ -58,7 +58,7 @@
 				for (var/mob/M in viewers(src, null))
 					M.show_message("\red [user] gently taps [src] with the [O]. ")
 			if(prob(15))
-				emote("looks at [user] with [pick("an amused","an annoyed","a confused","a resentful", "a happy", "an excited")] expression on \his face")
+				visible_emote("looks at [user] with [pick("an amused","an annoyed","a confused","a resentful", "a happy", "an excited")] expression on \his face")
 			return
 	..()
 
@@ -310,10 +310,10 @@
 					if(isturf(movement_target.loc) )
 						UnarmedAttack(movement_target)
 					else if(ishuman(movement_target.loc) && prob(20))
-						custom_emote(1,"stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
+						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
-			emote(pick("dances around","chases its tail"))
+			visible_emote(pick("dances around","chases their tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					dir = i
@@ -350,7 +350,8 @@
 			if (!( AM.anchored ))
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
+					var/obj/structure/window/W = AM
+					if(W.is_full_window())
 						for(var/obj/structure/window/win in get_step(AM,t))
 							now_pushing = 0
 							return
@@ -467,7 +468,7 @@
 
 
 		if(prob(1))
-			emote(pick("dances around","chases her tail"))
+			visible_emote(pick("dances around","chases her tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					dir = i

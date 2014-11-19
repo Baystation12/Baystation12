@@ -450,7 +450,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate
 	containername = "Wooden planks crate"
 	group = "Engineering"
-    
+
 /datum/supply_packs/plastic50
 	name = "50 plastic sheets"
 	contains = list(/obj/item/stack/sheet/mineral/plastic)
@@ -980,7 +980,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/rank/mailman,
 					/obj/item/clothing/under/dress/dress_saloon,
 					/obj/item/clothing/suit/suspenders,
-					/obj/item/clothing/suit/storage/labcoat/mad,
+					/obj/item/clothing/suit/storage/toggle/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
 					/obj/item/clothing/under/schoolgirl,
 					/obj/item/clothing/under/owl,
@@ -1003,7 +1003,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
-					/obj/item/clothing/suit/storage/lawyer/bluejacket,
+					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
 					/obj/item/clothing/suit/storage/lawyer/purpjacket,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
