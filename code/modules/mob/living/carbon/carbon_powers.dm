@@ -72,7 +72,12 @@
 
 	if(B.host_brain.ckey)
 		src << "\red <B>You send a punishing spike of psychic agony lancing into your host's brain.</B>"
-		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+
+		if (species && (species.flags & NO_PAIN))
+			B.host_brain << "\red You feel a strange sensation as a foreign influence prods your mind."
+			src << "\red <B>It doesn't seem to be as effective as you hoped.</B>"
+		else
+			B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
 
 /mob/living/carbon/proc/spawn_larvae()
 	set category = "Abilities"
