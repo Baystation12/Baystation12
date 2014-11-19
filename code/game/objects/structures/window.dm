@@ -9,7 +9,6 @@
 	flags = ON_BORDER
 	var/maxhealth = 14.0
 	var/health
-	var/ini_dir = null
 	var/state = 2
 	var/reinf = 0
 	var/basestate
@@ -17,7 +16,6 @@
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 //	var/silicate = 0 // number of units of silicate
 //	var/icon/silicateIcon = null // the silicated icon
-
 
 /obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
 	var/initialhealth = src.health
@@ -85,11 +83,16 @@
 /obj/structure/window/meteorhit()
 	shatter()
 
+//TODO: Make full windows a separate type of window.
+//Once a full window, it will always be a full window, so there's no point
+//having the same type for both.
+/obj/structure/window/proc/is_full_window()
+	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return 1
-	if(dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
+	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) == dir)
 		return !density
@@ -245,7 +248,6 @@
 	dir = turn(dir, 90)
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
-	ini_dir = dir
 	return
 
 
@@ -262,7 +264,6 @@
 	dir = turn(dir, 270)
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
-	ini_dir = dir
 	return
 
 
@@ -282,10 +283,15 @@
 */
 
 
-/obj/structure/window/New(Loc,re=0)
+/obj/structure/window/New(Loc, start_dir=null, constructed=0)
 	..()
 
-//	if(re)	reinf = re
+	//player-constructed windows
+	if (constructed)
+		anchored = 0
+	
+	if (start_dir)
+		dir = start_dir
 
 	health = maxhealth
 
@@ -293,8 +299,6 @@
 
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
-
-	return
 
 
 /obj/structure/window/Del()
@@ -305,6 +309,7 @@
 
 
 /obj/structure/window/Move()
+	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
 	..()
 	dir = ini_dir
@@ -407,6 +412,13 @@
 	maxhealth = 40
 	reinf = 1
 	glasstype = /obj/item/stack/sheet/rglass
+
+/obj/structure/window/New(Loc, constructed=0)
+	..()
+
+	//player-constructed windows
+	if (constructed)
+		state = 0
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
