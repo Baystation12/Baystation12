@@ -60,10 +60,8 @@
 			for(var/mob/living/simple_animal/mouse/snack in oview(src))
 				if(isturf(snack.loc) && !snack.stat)
 					movement_target = snack
-					world << "[src]: mouse located."
 					break
 		if(movement_target)
-			world << "[src]: locking on [movement_target]"
 			stop_automated_movement = 1
 			walk_to(src,movement_target,0,3)
 
