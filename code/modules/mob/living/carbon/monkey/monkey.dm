@@ -41,6 +41,9 @@
 	reagents = R
 	R.my_atom = src
 
+	species = all_species[greaterform]
+	add_language(species.language)
+
 	if(name == initial(name)) //To stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
@@ -78,24 +81,22 @@
 
 /mob/living/carbon/monkey/unathi/New()
 
-	..()
 	dna.mutantrace = "lizard"
 	greaterform = "Unathi"
-	add_language("Sinta'unathi")
+	..()
 
 /mob/living/carbon/monkey/skrell/New()
 
-	..()
+	
 	dna.mutantrace = "skrell"
 	greaterform = "Skrell"
-	add_language("Skrellian")
+	..()
 
 /mob/living/carbon/monkey/tajara/New()
 
-	..()
 	dna.mutantrace = "tajaran"
 	greaterform = "Tajara"
-	add_language("Siik'tajr")
+	..()
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0

@@ -50,7 +50,7 @@ var/list/solars_list = list()
 		S.glass_type = /obj/item/stack/sheet/glass
 		S.anchored = 1
 	S.loc = src
-	if(S.glass_type == /obj/item/stack/sheet/rglass) //if the panel is in reinforced glass
+	if(S.glass_type == /obj/item/stack/sheet/glass/reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
 
@@ -248,7 +248,7 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/sheet/glass) || istype(W, /obj/item/stack/sheet/rglass))
+		if(istype(W, /obj/item/stack/sheet/glass))
 			var/obj/item/stack/sheet/S = W
 			if(S.use(2))
 				glass_type = W.type
