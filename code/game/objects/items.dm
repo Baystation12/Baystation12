@@ -393,6 +393,19 @@
 					if(B.contents.len < B.storage_slots && w_class <= B.max_w_class)
 						return 1
 				return 0
+			if(slot_tie)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
+					if(!disable_warning)
+						H << "\red You need a jumpsuit before you can attach this [name]."
+					return 0
+				var/obj/item/clothing/under/uniform = H.w_uniform
+				if(uniform.hastie)
+					if (!disable_warning)
+						H << "\red You already have [uniform.hastie] attached to your [uniform]."
+					return 0
+				if( !(slot_flags & SLOT_TIE) )
+					return 0
+				return 1
 		return 0 //Unsupported slot
 		//END HUMAN
 
