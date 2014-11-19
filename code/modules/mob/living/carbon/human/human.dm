@@ -6,7 +6,6 @@
 	icon_state = "body_m_s"
 
 	var/list/hud_list[9]
-	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
