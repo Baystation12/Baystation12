@@ -250,6 +250,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/eye_tooth
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -378,6 +379,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	unarmed_type = /datum/unarmed_attack/diona
+	secondary_unarmed_type = null //Does a walking mass of dionaea even have jaws, as we understand them?
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
@@ -444,6 +446,7 @@
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
 	unarmed_type = /datum/unarmed_attack/punch
+	secondary_unarmed_type = null
 	rarity_value = 2
 
 	eyes = "blank_eyes"
@@ -523,6 +526,14 @@
 	attack_verb = list("bite") // 'x has biteed y', needs work.
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
+	damage = 3
+	sharp = 0
+	edge = 0
+
+/datum/unarmed_attack/bite/eye_tooth
+	attack_verb = list("bite") // 'x has biteed y', needs work.
+	attack_sound = 'sound/weapons/bite.ogg'
+	shredding = 0
 	damage = 5
 	sharp = 1
 	edge = 1
@@ -550,7 +561,7 @@
 	if(T == M)
 		M.visible_message("\red <B>[M] [pick(attack_verb)]ed \himself in the [organ]!</B>")
 		return 0
-	if(!M.lying)
+	if(!T.lying)
 		switch(skill)
 			if(0)
 				switch(zone)
@@ -607,7 +618,7 @@
 						switch(damage)
 							if(1 to 4)	M.visible_message("\red <B>[M] kicked [T] in \his [organ]!</B>")
 							if(5)		M.visible_message("\red <B>[M] stomped down hard on [T]'s [organ]!")
-	else if (M.loc != M.loc)
+	else if (M.loc != T.loc)
 		M.visible_message("\red <B>[M] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "rams their foot into")] [T]'s [organ]!</B>")
 	else
 		M.visible_message("\red <B>[M] [pick("punches", "throws a punch", "strikes", "slaps", "rams their [pick(attack_noun)] into")] [T]'s [organ]!</B>")
@@ -619,7 +630,7 @@
 	damage = 5
 
 /datum/unarmed_attack/claws
-	attack_verb = list("scratch", "claw", "gouge", "tear", "rip")
+	attack_verb = list("scratch", "claw", "gouge")
 	attack_noun = list("claws")
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -640,67 +651,23 @@
 	if(T == M)
 		M.visible_message("\red <B>[M] [pick(attack_verb)]ed \himself in the [organ]!</B>")
 		return 0
-	if(!M.lying)
-		switch(skill)
-			if(0)
-				switch(zone)
-					if("head", "chest", "l_arm", "r_arm", "l_hand", "r_hand")
-						M.visible_message("\red <B>[M] [pick("flailed", "thrashed")] at [T]'s [organ]!</B>")
-					if("groin", "l_leg", "r_leg", "l_foot", "r_foot")
-						M.visible_message("\red <B>[M] [pick("kicked", "thrashed")] at [T]'s [organ]!</B>")
-			if(1 to 2) // Amateur, Trained
-				switch(zone)
-					if("head")
-						// ----- HEAD ----- //
-						switch(damage)
-							if(1 to 2)	M.visible_message("\red <B>[M] slapped [T] across \his cheek!</B>")
-							if(3 to 4)	M.visible_message("\red <B>[M] struck [T] in the head[pick("", " with a closed fist")]!</B>")
-							if(5)		M.visible_message("\red <B>[M] gave [T] a resounding slap to the face!</B>")
-					if("chest", "l_arm", "r_arm", "l_hand", "r_hand")
-						// -- UPPER BODY -- //
-						switch(damage)
-							if(1 to 2)	M.visible_message("\red <B>[M] slapped [T]'s [organ]!</B>")
-							if(3 to 4)	M.visible_message("\red <B>[M] [findtext(zone, "hand")?"[pick(attack_verb)]ed":pick("[pick(attack_verb)]ed", "shoulders")] [T] in \his [organ]!</B>")
-							if(5)		M.visible_message("\red <B>[M] rammed \his [pick(attack_noun)] into [T]'s [organ]!</B>")
-					if("groin", "l_leg", "r_leg")
-						// -- LOWER BODY -- //
-						switch(damage)
-							if(1 to 2)	M.visible_message("\red <B>[M] gave [T] a light kick to the [organ]!</B>")
-							if(3 to 4)	M.visible_message("\red <B>[M] [pick("kicked", "kneed")] [T] in \his [organ]!</B>")
-							if(5)		M.visible_message("\red <B>[M] landed a strong kick against [T]'s [organ]!</B>")
-					if("l_foot", "r_foot")
-						// ----- FEET ----- //
-						switch(damage)
-							if(1 to 4)	M.visible_message("\red <B>[M] kicked [T] in \his [organ]!</B>")
-							if(5)		M.visible_message("\red <B>[M] stomped down hard on [T]'s [organ]!")
-			if(3) // Professional
-				switch(zone)
-					if("head")
-						// ----- HEAD ----- //
-						switch(damage)
-							if(1 to 2)	M.visible_message("\red <B>[M] threw a [pick("jab", "cross", "hook")] punch against [T]'s head!</B>")
-							if(3 to 4)	M.visible_message("\red <B>[M] threw an uppercut on [T]!</B>")
-							if(5 to 6)	M.visible_message("\red <B>[M] grabbed [T]'s head and gave \him a strong headbutt!</B>")
-					if("chest", "l_arm", "r_arm", "l_hand", "r_hand")
-						// -- UPPER BODY -- //
-						switch(damage)
-							if(1 to 4)	M.visible_message("\red <B>[M] [findtext(zone, "hand")?"[pick(attack_verb)]ed":pick("[pick(attack_verb)]ed", "shoulders")] [T] in \his [organ]!</B>")
-							if(5 to 6)	M.visible_message("\red <B>[M] rammed \his [pick(attack_noun)] into [T]'s [organ]!</B>")
-					if("groin", "l_leg", "r_leg")
-						// -- LOWER BODY -- //
-						switch(damage)
-							if(1 to 2)	M.visible_message("\red <B>[M] threw a light [pick("front", "side")] kick against [T]'s [organ]!</B>")
-							if(3 to 4)	M.visible_message("\red <B>[M] gave [T] a [pick("knee strike", "kick")] in \his [organ]!</B>")
-							if(5 to 6)	M.visible_message("\red <B>[M] threw a strong [pick("front", "side", "roundhouse")] kick against [T]'s [organ]!</B>")
-					if("l_foot", "r_foot")
-						// ----- FEET ----- //
-						switch(damage)
-							if(1 to 4)	M.visible_message("\red <B>[M] kicked [T] in \his [organ]!</B>")
-							if(5)		M.visible_message("\red <B>[M] stomped down hard on [T]'s [organ]!")
-	else if (M.loc != M.loc)
-		M.visible_message("\red <B>[M] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "rams their foot into")] [T]'s [organ]!</B>")
-	else
-		M.visible_message("\red <B>[M] [pick("punches", "throws a punch", "strikes", "slaps", "rams their [pick(attack_noun)] into")] [T]'s [organ]!</B>")
+	switch(skill)
+		if(0)
+			M.visible_message("\red <B>[M] [pick("flailed", "clawed")] at [T]'s [organ]!</B>")
+		if(1 to 3)
+			switch(zone)
+				if("head")
+					// ----- HEAD ----- //
+					switch(damage)
+						if(1 to 2)	M.visible_message("\red <B>[M] scratched [T] across \his cheek!</B>")
+						if(3 to 4)	M.visible_message("\red <B>[M] [pick(attack_verb)]ed [pick("", "the side of")][T] [pick("head", "neck")][pick("", " with spread [pick(attack_noun)]")]!</B>")
+						if(5)		M.visible_message("\red <B>[M] [pick(attack_verb)]ed [T] across \his face!</B>")
+				if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
+					// ----- BODY ----- //
+					switch(damage)
+						if(1 to 2)	M.visible_message("\red <B>[M] scratched [T]'s [organ]!</B>")
+						if(3 to 4)	M.visible_message("\red <B>[M] [pick(attack_verb)]ed [pick("", "the side of")][T]'s [organ]!</B>")
+						if(5)		M.visible_message("\red <B>[M] digs \his [pick(attack_noun)] deep into [T]'s [organ]!</B>")
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")

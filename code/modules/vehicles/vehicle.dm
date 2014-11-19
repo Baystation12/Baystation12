@@ -100,15 +100,6 @@
 	else
 		..()
 
-/obj/vehicle/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	health -= M.melee_damage_upper
-	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
-	M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.damage
 	..()
@@ -356,3 +347,14 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
+
+/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	if(prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	spawn(1) healthcheck()
+	return 1

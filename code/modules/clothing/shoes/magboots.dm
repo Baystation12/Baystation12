@@ -23,10 +23,9 @@
 			user << "You enable the mag-pulse traction system."
 		user.update_inv_shoes()	//so our mob-overlays update
 	
-	examine()
-		set src in view()
-		..()
+	examine(mob/user)
+		..(user)
 		var/state = "disabled"
 		if(src.flags&NOSLIP)
 			state = "enabled"
-		usr << "Its mag-pulse traction system appears to be [state]."
+		user << "Its mag-pulse traction system appears to be [state]."

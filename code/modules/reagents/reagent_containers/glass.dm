@@ -46,16 +46,15 @@
 		..()
 		base_name = name
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
+	examine(mob/user)
+		if(!..(user, 2))
+			return
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
+			user << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue It is empty."
+			user << "\blue It is empty."
 		if (!is_open_container())
-			usr << "\blue Airtight lid seals it completely."
+			user << "\blue Airtight lid seals it completely."
 
 	attack_self()
 		..()
@@ -157,11 +156,15 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
-	desc = "A beaker. Can hold up to 50 units."
+	desc = "A beaker."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker"
 	item_state = "beaker"
 	matter = list("glass" = 500)
+
+	New()
+		..()
+		desc += " Can hold up to [volume] units."
 
 	on_reagent_change()
 		update_icon()
@@ -203,7 +206,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/large
 	name = "large beaker"
-	desc = "A large beaker. Can hold up to 100 units."
+	desc = "A large beaker."
 	icon_state = "beakerlarge"
 	matter = list("glass" = 5000)
 	volume = 120
@@ -213,7 +216,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	name = "cryostasis beaker"
-	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 60 units."
+	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
 	matter = list("glass" = 500)
 	volume = 60
@@ -222,7 +225,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology. Can hold up to 300 units."
+	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
 	matter = list("glass" = 5000)
 	volume = 300
@@ -233,7 +236,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
 	name = "vial"
-	desc = "A small glass vial. Can hold up to 25 units."
+	desc = "A small glass vial."
 	icon_state = "vial"
 	matter = list("glass" = 250)
 	volume = 30

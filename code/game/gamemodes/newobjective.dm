@@ -1404,7 +1404,7 @@ datum
 					var/turf/T = get_turf(target.current)
 					if(target.current.stat == 2)
 						return 1
-					else if((T) && (T.z != 1))//If they leave the station they count as dead for this
+					else if((T) && (isNotStationLevel(T.z)))//If they leave the station they count as dead for this
 						return 2
 					else
 						return 0

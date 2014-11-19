@@ -213,7 +213,7 @@
 
 /datum/game_mode/proc/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested status information:</FONT><HR>"
-	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with criminal organisations or hostile foreign entities:</B><br>"
+	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with subversive elements:</B><br>"
 
 
 	var/list/suspects = list()
@@ -514,7 +514,7 @@ proc/get_nt_opposed()
 		obj_count++
 
 /datum/game_mode/proc/printplayer(var/datum/mind/ply)
-	var/role = "\improper[ply.assigned_role]"
+	var/role = ply.assigned_role == "MODE" ? "\improper[ply.special_role]" : "\improper[ply.assigned_role]"
 	var/text = "<br><b>[ply.name]</b>(<b>[ply.key]</b>) as \a <b>[role]</b> ("
 	if(ply.current)
 		if(ply.current.stat == DEAD)
@@ -526,5 +526,17 @@ proc/get_nt_opposed()
 	else
 		text += "body destroyed"
 	text += ")"
+
+	var/TC_uses = 0
+	var/uplink_true = 0
+	var/purchases = ""
+	for(var/obj/item/device/uplink/H in world_uplinks)
+		if(H && H.uplink_owner && H.uplink_owner == ply)
+			TC_uses += H.used_TC
+			uplink_true = 1
+			for(var/log in H.purchase_log)
+				purchases += "<BIG>[log]</BIG>"
+	if(uplink_true)
+		text += " (used [TC_uses] TC) [purchases]"
 
 	return text

@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
+	//directwired = 0
 	var/output = 50000		//Amount of power it tries to output
 	var/lastout = 0			//Amount of power it actually outputs to the powernet
 	var/loaddemand = 0		//For use in restore()
@@ -60,7 +61,9 @@
 
 	overlays += image('icons/obj/power.dmi', "smes-op[online]")
 
-	if(charging)
+	if(charging == 2)
+		overlays += image('icons/obj/power.dmi', "smes-oc2")
+	else if (charging == 1)
 		overlays += image('icons/obj/power.dmi', "smes-oc1")
 	else
 		if(chargemode)
@@ -92,12 +95,14 @@
 		//TODO: Add a meter to tell players how much charge we are actually getting, and only set charging to 0 when we are unable to get any charge at all.
 		if(chargemode)
 			var/target_load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-			var/actual_load = add_load(target_load)		// add the load to the terminal side network
+			var/actual_load = draw_power(target_load)		// add the load to the terminal side network
 			charge += actual_load * SMESRATE	// increase the charge
 
-			if (actual_load >= target_load) // did the powernet have enough power available for us?
+			if (actual_load >= target_load) // Did we charge at full rate?
+				charging = 2
+			else if (actual_load) // If not, did we charge at least partially?
 				charging = 1
-			else
+			else // Or not at all?
 				charging = 0
 
 	if(online)		// if outputting
@@ -174,7 +179,7 @@
 	return 1
 
 
-/obj/machinery/power/smes/add_load(var/amount)
+/obj/machinery/power/smes/draw_power(var/amount)
 	if(terminal && terminal.powernet)
 		return terminal.powernet.draw_power(amount)
 	return 0
@@ -222,6 +227,7 @@
 				"<span class='notice'>You added cables to the [src].</span>")
 		terminal.connect_to_network()
 		stat = 0
+		return 0
 
 	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
 		building_terminal = 1
@@ -245,6 +251,7 @@
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 					del(terminal)
 		building_terminal = 0
+		return 0
 	return 1
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -333,7 +340,7 @@
 
 
 /obj/machinery/power/smes/proc/ion_act()
-	if(src.z == 1)
+	if(src.z in config.station_levels)
 		if(prob(1)) //explosion
 			for(var/mob/M in viewers(src))
 				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)
@@ -384,12 +391,5 @@
 /obj/machinery/power/smes/magical/process()
 	charge = 5000000
 	..()
-
-/proc/rate_control(var/S, var/V, var/C, var/Min=1, var/Max=5, var/Limit=null)
-	var/href = "<A href='?src=\ref[S];rate control=1;[V]"
-	var/rate = "[href]=-[Max]'>-</A>[href]=-[Min]'>-</A> [(C?C : 0)] [href]=[Min]'>+</A>[href]=[Max]'>+</A>"
-	if(Limit) return "[href]=-[Limit]'>-</A>"+rate+"[href]=[Limit]'>+</A>"
-	return rate
-
 
 #undef SMESRATE

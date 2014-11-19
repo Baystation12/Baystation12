@@ -1283,11 +1283,11 @@
 						foo += text("<B>Is an AI</B> | ")
 					else
 						foo += text("<A HREF='?src=\ref[];makeai=\ref[]'>Make AI</A> | ", src, M)
-					if(M.z != 2)
+					if(isNotAdminLevel(M.z))
 						foo += text("<A HREF='?src=\ref[];sendtoprison=\ref[]'>Prison</A> | ", src, M)
 						foo += text("<A HREF='?src=\ref[];sendtomaze=\ref[]'>Maze</A> | ", src, M)
 					else
-						foo += text("<B>On Z = 2</B> | ")
+						foo += text("<B>On Z = [M.z]</B> | ")
 				else
 					foo += text("<B>Hasn't Entered Game</B> | ")
 				foo += text("<A HREF='?src=\ref[];revive=\ref[]'>Heal/Revive</A> | ", src, M)
@@ -2295,7 +2295,7 @@
 				message_admins("[key_name_admin(usr)] made the floor LAVA! It'll last [length] seconds and it will deal [damage] damage to everyone.", 1)
 
 				for(var/turf/simulated/floor/F in world)
-					if(F.z == 1)
+					if(F.z in config.station_levels)
 						F.name = "lava"
 						F.desc = "The floor is LAVA!"
 						F.overlays += "lava"
@@ -2320,7 +2320,7 @@
 						sleep(10)
 
 					for(var/turf/simulated/floor/F in world) // Reset everything.
-						if(F.z == 1)
+						if(F.z in config.station_levels)
 							F.name = initial(F.name)
 							F.desc = initial(F.desc)
 							F.overlays.Cut()
@@ -2368,7 +2368,7 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","EgL")
 				for(var/obj/machinery/door/airlock/W in world)
-					if(W.z == 1 && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
+					if(W.z in config.station_levels && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
 						W.req_access = list()
 				message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
 				command_announcement.Announce("Centcomm airlock control override activated. Please take this time to get acquainted with your coworkers.", new_sound = 'sound/AI/commandreport.ogg')
@@ -2561,19 +2561,9 @@
 		if(src.admincaster_feed_message.body =="" || src.admincaster_feed_message.body =="\[REDACTED\]" || src.admincaster_feed_channel.channel_name == "" )
 			src.admincaster_screen = 6
 		else
-			var/datum/feed_message/newMsg = new /datum/feed_message
-			newMsg.author = src.admincaster_signature
-			newMsg.body = src.admincaster_feed_message.body
-			newMsg.is_admin_message = 1
 			feedback_inc("newscaster_stories",1)
-			for(var/datum/feed_channel/FC in news_network.network_channels)
-				if(FC.channel_name == src.admincaster_feed_channel.channel_name)
-					FC.messages += newMsg                  //Adding message to the network's appropriate feed_channel
-					break
+			news_network.SubmitArticle(src.admincaster_feed_message.body, src.admincaster_signature, src.admincaster_feed_channel.channel_name, null, 1)
 			src.admincaster_screen=4
-
-		for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-			NEWSCASTER.newsAlert(src.admincaster_feed_channel.channel_name)
 
 		log_admin("[key_name_admin(usr)] submitted a feed story to channel: [src.admincaster_feed_channel.channel_name]!")
 		src.access_news_network()

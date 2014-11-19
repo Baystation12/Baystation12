@@ -65,7 +65,7 @@
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/area/RA in related)
 		for (var/obj/machinery/alarm/AA in RA)
-			if ( !(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted)
+			if (!(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted && AA.report_danger_level)
 				danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)
@@ -206,7 +206,7 @@
 	return
 
 /area/proc/updateicon()
-	if ((fire || eject || party) && ((!requires_power)?(!requires_power):power_environ))//If it doesn't require power, can still activate this proc.
+	if ((fire || eject || party) && (!requires_power||power_environ) && !lighting_space)//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
 			icon_state = "blue"
 		/*else if(atmosalm && !fire && !eject && !party)
@@ -234,6 +234,8 @@
 		return 1
 	if(master.always_unpowered)
 		return 0
+	if(src.lighting_space)
+		return 0 // Nope sorry
 	switch(chan)
 		if(EQUIP)
 			return master.power_equip
@@ -245,12 +247,10 @@
 	return 0
 
 // called when power status changes
-
 /area/proc/power_change()
-	master.powerupdate = 2
 	for(var/area/RA in related)
 		for(var/obj/machinery/M in RA)	// for each machine in the area
-			M.power_change()				// reverify power status (to update icons etc.)
+			M.power_change()			// reverify power status (to update icons etc.)
 		if (fire || eject || party)
 			RA.updateicon()
 
@@ -265,7 +265,6 @@
 			used += master.used_environ
 		if(TOTAL)
 			used += master.used_light + master.used_equip + master.used_environ
-
 	return used
 
 /area/proc/clear_usage()
@@ -274,7 +273,6 @@
 	master.used_environ = 0
 
 /area/proc/use_power(var/amount, var/chan)
-
 	switch(chan)
 		if(EQUIP)
 			master.used_equip += amount
@@ -284,10 +282,9 @@
 			master.used_environ += amount
 
 
-/area/Entered(A)
-	var/musVolume = 25
-	var/sound = 'sound/ambience/ambigen1.ogg'
+var/list/mob/living/forced_ambiance_list = new
 
+/area/Entered(A)
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
@@ -302,18 +299,28 @@
 		L.make_floating(0)
 
 	L.lastarea = newarea
+	play_ambience(L)
 
+/area/proc/play_ambience(var/mob/living/L)
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
 	if(!(L && L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))	return
+
+	// If we previously were in an area with force-played ambiance, stop it.
+	if(L in forced_ambiance_list)
+		L << sound(null, channel = 1)
+		forced_ambiance_list -= L
 
 	if(!L.client.ambience_playing)
 		L.client.ambience_playing = 1
 		L << sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 35, channel = 2)
 
-	if(src.ambience.len && prob(35))
-		sound = pick(ambience)
-
-		if(world.time > L.client.played + 600)
+	if(forced_ambience)
+		forced_ambiance_list += L
+		L << forced_ambience
+	else if(src.ambience.len && prob(35))
+		if((world.time >= L.client.played + 600))
+			var/musVolume = 25
+			var/sound = pick(ambience)
 			L << sound(sound, repeat = 0, wait = 0, volume = musVolume, channel = 1)
 			L.client.played = world.time
 

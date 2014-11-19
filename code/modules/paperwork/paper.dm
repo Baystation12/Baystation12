@@ -59,21 +59,19 @@
 		return
 	icon_state = "paper"
 
-/obj/item/weapon/paper/examine()
-	set src in oview(1)
-
+/obj/item/weapon/paper/examine(mob/user)
 //	..()	//We don't want them to see the dumb "this is a paper" thing every time.
 // I didn't like the idea that people can read tiny pieces of paper from across the room.
 // Now you need to be next to the paper in order to read it.
-	if(in_range(usr, src))
-		if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
-			onclose(usr, "[name]")
+	if(in_range(user, src))
+		if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)))
+			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
+			onclose(user, "[name]")
 		else
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
-			onclose(usr, "[name]")
+			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
+			onclose(user, "[name]")
 	else
-		usr << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>It is too far away.</span>"
 	return
 
 /obj/item/weapon/paper/verb/rename()
@@ -91,7 +89,7 @@
 	return
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
-	examine()
+	user.examinate(src)
 	if(rigged && (Holiday == "April Fool's Day"))
 		if(spam_flag == 0)
 			spam_flag = 1
@@ -118,7 +116,7 @@
 	if(user.zone_sel.selecting == "eyes")
 		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
-		M << examine()
+		M.examinate(src)
 
 	else if(user.zone_sel.selecting == "mouth") // lipstick wiping
 		if(ishuman(M))
@@ -227,7 +225,7 @@
 		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
 		t = replacetext(t, "\[row\]", "</td><tr>")
 		t = replacetext(t, "\[cell\]", "<td>")
-		t = replacetext(t, "\[logo\]", "<img src = http://baystation12.net/wiki/logo.png>")
+		t = replacetext(t, "\[logo\]", "<img src = html/images/ntlogo.png>")
 
 		t = "<font face=\"[deffont]\" color=[P ? P.colour : "black"]>[t]</font>"
 	else // If it is a crayon, and he still tries to use these, make them empty!

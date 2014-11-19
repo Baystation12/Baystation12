@@ -41,6 +41,7 @@
 		if(/obj/item/weapon/twohanded/fireaxe) del src
 		if(/obj/item/weapon/hatchet) del src
 		if(/obj/item/weapon/melee/energy) del src
+		if(/obj/item/weapon/pickaxe/plasmacutter) del src
 
 		// Less effective weapons
 		if(/obj/item/weapon/wirecutters)
@@ -70,10 +71,6 @@
 		update()
 		return
 
-	manual_unbuckle(user)
-
-
-/obj/effect/plantsegment/attack_paw(mob/user as mob)
 	manual_unbuckle(user)
 
 /obj/effect/plantsegment/proc/unbuckle()

@@ -973,7 +973,7 @@ var/global/floorIsLava = 0
 		if(3)
 			var/count = 0
 			for(var/mob/living/carbon/monkey/Monkey in world)
-				if(Monkey.z == 1)
+				if(Monkey.z in station_levels)
 					count++
 			return "Kill all [count] of the monkeys on the station"
 		if(4)

@@ -1,3 +1,25 @@
+//mob verbs are faster than object verbs. See mob/verb/examine.
+/mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+	set name = "Pull"
+	set category = "Object"
+
+	if(AM.Adjacent(src))
+		src.start_pulling(AM)
+
+	return
+
+//mob verbs are faster than object verbs. See above.
+/mob/living/pointed(atom/A as mob|obj|turf in view())
+	if(src.stat || !src.canmove || src.restrained())
+		return 0
+	if(src.status_flags & FAKEDEATH)
+		return 0
+	if(!..())
+		return 0
+
+	usr.visible_message("<b>[src]</b> points to [A]")
+	return 1
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > -95.0))

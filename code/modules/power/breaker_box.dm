@@ -8,6 +8,7 @@
 	name = "Breaker Box"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "bbox_off"
+	//directwired = 0
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
 	flags = FPRINT
@@ -24,12 +25,12 @@
 /obj/machinery/power/breakerbox/activated/initialize()
 	set_state(1)
 
-/obj/machinery/power/breakerbox/examine()
-	usr << "Large machine with heavy duty switching circuits used for advanced grid control"
+/obj/machinery/power/breakerbox/examine(mob/user)
+	user << "Large machine with heavy duty switching circuits used for advanced grid control"
 	if(on)
-		usr << "\green It seems to be online."
+		user << "\green It seems to be online."
 	else
-		usr << "\red It seems to be offline"
+		user << "\red It seems to be offline"
 
 /obj/machinery/power/breakerbox/attack_ai(mob/user)
 	if(busy)
@@ -80,12 +81,13 @@
 			C.breaker_box = src
 
 			var/datum/powernet/PN = new()
-			PN.number = powernets.len + 1
-			powernets += PN
-			PN.cables += C
+			PN.add_cable(C)
 
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()
+
+			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d2)
 
 	else
 		icon_state = icon_state_off

@@ -147,10 +147,12 @@
 
 	return
 
+/mob/proc/changeNext_move(num)
+	next_move = world.time + num
+
 // Default behavior: ignore double clicks, consider them normal clicks instead
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)
-
 
 /*
 	Translates into attack_hand, etc.
@@ -164,6 +166,21 @@
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
+
+/mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
+
+	if(!ticker)
+		src << "You cannot attack people before the game has started."
+		return 0
+
+	if (istype(get_area(src), /area/start))
+		src << "No attacking people at spawn, you jackass."
+		return 0
+
+	if(stat)
+		return 0
+
+	return 1
 
 /*
 	Ranged unarmed attack:
@@ -224,8 +241,7 @@
 	return
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
-		examine()
-		user.face_atom(src)
+		user.examinate(src)
 	return
 
 /*
@@ -301,7 +317,6 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-
 	// Snowflake for space vines.
 	var/is_buckled = 0
 	if(buckled)
@@ -310,8 +325,7 @@
 				is_buckled = 1
 		else
 			is_buckled = 0
-
-	if( stat || is_buckled || !A || !x || !y || !A.x || !A.y ) return
+	if( is_buckled || !A || !x || !y || !A.x || !A.y || (stat && !isobserver(src))) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return
@@ -323,7 +337,7 @@
 	else
 		if(dx > 0)	direction = EAST
 		else		direction = WEST
-	usr.dir = direction
+	dir = direction
 	if(buckled && buckled.movable)
 		buckled.dir = direction
 		buckled.handle_rotation()

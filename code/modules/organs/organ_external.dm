@@ -247,8 +247,8 @@ This function completely restores a damaged organ to perfect condition.
 				W.open_wound(damage)
 				if(prob(25))
 					//maybe have a separate message for BRUISE type damage?
-					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping noise.",\
+					"\red The wound on your [display_name] widens with a nasty ripping noise.",\
 					"You hear a nasty ripping noise, as if flesh is being torn apart.")
 				return
 

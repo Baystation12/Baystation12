@@ -1,4 +1,5 @@
 //TODO: Put this under a common parent type with freezers to cut down on the copypasta
+#define HEATER_PERF_MULT 2.5
 
 /obj/machinery/atmospherics/unary/heater
 	name = "gas heating system"
@@ -17,7 +18,7 @@
 	use_power = 0
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	active_power_usage 			//50 kW. The power rating of the heater
-	
+
 	var/max_power_usage = 20000	//power rating when the usage is turned up to 100
 	var/power_setting = 100
 
@@ -34,7 +35,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	
+
 	active_power_usage = max_power_usage * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/heater/initialize()
@@ -72,7 +73,7 @@
 
 	if (network && air_contents.total_moles && air_contents.temperature < set_temperature)
 		update_use_power(2)
-		air_contents.add_thermal_energy(active_power_usage)
+		air_contents.add_thermal_energy(active_power_usage * HEATER_PERF_MULT)
 
 		heating = 1
 		network.update = 1
@@ -83,9 +84,6 @@
 	update_icon()
 
 /obj/machinery/atmospherics/unary/heater/attack_ai(mob/user as mob)
-	src.ui_interact(user)
-
-/obj/machinery/atmospherics/unary/heater/attack_paw(mob/user as mob)
 	src.ui_interact(user)
 
 /obj/machinery/atmospherics/unary/heater/attack_hand(mob/user as mob)
@@ -163,10 +161,10 @@
 
 /obj/machinery/atmospherics/unary/heater/proc/set_power_level(var/new_power_setting)
 	power_setting = new_power_setting
-	
+
 	var/old_power_usage = active_power_usage
 	active_power_usage = max_power_usage * (power_setting/100)
-	
+
 	if (use_power >= 2 && old_power_usage != active_power_usage)
 		force_power_update()
 
@@ -183,7 +181,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/unary/heater/examine()
-	..()
+/obj/machinery/atmospherics/unary/heater/examine(mob/user)
+	..(user)
 	if (opened)
-		usr << "The maintenance hatch is open."
+		user << "The maintenance hatch is open."

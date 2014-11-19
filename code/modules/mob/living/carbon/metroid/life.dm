@@ -83,7 +83,7 @@
 							Atkcool = 0
 
 						if(Target.Adjacent(src))
-							Target.attack_slime(src)
+							UnarmedAttack(Target)
 					return
 				if(!Target.lying && prob(80))
 
@@ -94,7 +94,7 @@
 								Atkcool = 0
 
 							if(Target.Adjacent(src))
-								Target.attack_slime(src)
+								UnarmedAttack(Target)
 
 					else
 						if(!Atkcool && Target.Adjacent(src))

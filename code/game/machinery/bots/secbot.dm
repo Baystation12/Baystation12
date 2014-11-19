@@ -260,6 +260,12 @@ Auto Patrol: []"},
 				src.mode = 0
 				walk_to(src,0)
 
+			// We re-assess human targets, before bashing their head in, in case their credentials change
+			if(target && istype(target, /mob/living/carbon/human))
+				var/threat = src.assess_perp(target, idcheck, check_records)
+				if(threat < 4)
+					target = null
+
 			if(target)		// make sure target exists
 				if(!lasercolor && Adjacent(target))	// If right next to perp. Lasertag bots do not arrest anyone, just patrol and shoot and whatnot
 					if(istype(src.target,/mob/living/carbon))
@@ -643,7 +649,7 @@ Auto Patrol: []"},
 				continue
 
 			if(istype(C, /mob/living/carbon/human))
-				src.threatlevel = src.assess_perp(C)
+				src.threatlevel = src.assess_perp(C, idcheck, check_records)
 
 		else if(istype(M, /mob/living/simple_animal/hostile))
 			if(M.stat == DEAD)
@@ -669,78 +675,42 @@ Auto Patrol: []"},
 		else
 			continue
 
-//If the security records say to arrest them, arrest them
-//Or if they have weapons and aren't security, arrest them.
-/obj/machinery/bot/secbot/proc/assess_perp(mob/living/carbon/human/perp as mob)
-	var/threatcount = 0
+/obj/machinery/bot/secbot/on_assess_perp(mob/living/carbon/human/perp)
+	if(lasercolor)
+		return laser_check(perp, lasercolor)
 
-	if(perp.stat == DEAD)
-		return 0
+	var/threat = 0
+	threat -= laser_check(perp, "b")
+	threat -= laser_check(perp, "r")
 
-	if(src.emagged == 2) return 10 //Everyone is a criminal!
+	return threat
 
-	if(src.idcheck && !src.allowed(perp))
-		if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/melee))
-			if(!istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.l_hand, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 4
+/obj/machinery/bot/secbot/proc/laser_check(mob/living/carbon/human/perp, var/lasercolor)
+	var/target_suit
+	var/target_weapon
+	var/threat = 0
+	//Lasertag turrets target the opposing team, how great is that? -Sieve
+	switch(lasercolor)
+		if("b")
+			target_suit = /obj/item/clothing/suit/redtag
+			target_weapon = /obj/item/weapon/gun/energy/laser/redtag
+		if("r")
+			target_suit = /obj/item/clothing/suit/bluetag
+			target_weapon = /obj/item/weapon/gun/energy/laser/bluetag
 
-		if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/melee))
-			if(!istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.r_hand, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 4
+	if((istype(perp.r_hand, target_weapon)) || (istype(perp.l_hand, target_weapon)))
+		threat += 4
 
-		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
-			if(!istype(perp.belt, /obj/item/weapon/gun/energy/laser/bluetag) \
-			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag) \
-			&& !istype(perp.belt, /obj/item/weapon/gun/energy/laser/practice))
-				threatcount += 2
+	if(istype(perp, /mob/living/carbon/human))
+		if(istype(perp.wear_suit, target_suit))
+			threat += 4
+		if(istype(perp.belt, target_weapon))
+			threat += 2
 
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/wizrobe))
-			threatcount += 2
+	return threat
 
-		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
-			threatcount += 2
-
-		//Agent cards lower threatlevel.
-		if(perp.wear_id && istype(perp.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
-			threatcount -= 2
-
-	if(src.lasercolor == "b")//Lasertag turrets target the opposing team, how great is that? -Sieve
-		threatcount = 0//They will not, however shoot at people who have guns, because it gets really fucking annoying
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/redtag))
-			threatcount += 4
-		if((istype(perp.r_hand,/obj/item/weapon/gun/energy/laser/redtag)) || (istype(perp.l_hand,/obj/item/weapon/gun/energy/laser/redtag)))
-			threatcount += 4
-		if(istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag))
-			threatcount += 2
-
-	if(src.lasercolor == "r")
-		threatcount = 0
-		if(istype(perp.wear_suit, /obj/item/clothing/suit/bluetag))
-			threatcount += 4
-		if((istype(perp.r_hand,/obj/item/weapon/gun/energy/laser/bluetag)) || (istype(perp.l_hand,/obj/item/weapon/gun/energy/laser/bluetag)))
-			threatcount += 4
-		if(istype(perp.belt, /obj/item/weapon/gun/energy/laser/bluetag))
-			threatcount += 2
-
-	if(src.check_records)
-		var/perpname = perp.name
-		if(perp.wear_id)
-			var/obj/item/weapon/card/id/id = perp.wear_id.GetID()
-			if(id)
-				perpname = id.registered_name
-
-		for (var/datum/data/record/E in data_core.general)
-			if(E.fields["name"] == perpname)
-				for(var/datum/data/record/R in data_core.security)
-					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
-						threatcount = 4
-						break
-
-	return threatcount
+/obj/machinery/bot/secbot/is_assess_emagged()
+	return emagged == 2
 
 /obj/machinery/bot/secbot/Bump(M as mob|obj) //Leave no door unopened!
 	if((istype(M, /obj/machinery/door)) && !isnull(src.botcard))

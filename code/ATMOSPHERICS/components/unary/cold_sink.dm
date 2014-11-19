@@ -65,9 +65,6 @@
 /obj/machinery/atmospherics/unary/freezer/attack_ai(mob/user as mob)
 	src.ui_interact(user)
 
-/obj/machinery/atmospherics/unary/freezer/attack_paw(mob/user as mob)
-	src.ui_interact(user)
-
 /obj/machinery/atmospherics/unary/freezer/attack_hand(mob/user as mob)
 	src.ui_interact(user)
 
@@ -201,7 +198,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/unary/freezer/examine()
-	..()
+/obj/machinery/atmospherics/unary/freezer/examine(mob/user)
+	..(user)
 	if (opened)
-		usr << "The maintenance hatch is open."
+		user << "The maintenance hatch is open."

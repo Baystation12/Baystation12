@@ -37,6 +37,7 @@ em						{font-style: normal;	font-weight: bold;}
 .medradio				{color: #008160;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
+.srvradio				{color: #6eaa2c;}
 
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
@@ -71,4 +72,7 @@ h1.alert, h2.alert		{color: #000000;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}
+
+BIG IMG.icon 			{width: 32px; height: 32px;}
+
 </style>"}

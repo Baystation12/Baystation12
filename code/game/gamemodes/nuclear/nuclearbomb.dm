@@ -165,9 +165,6 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
 	if (src.extended)
 		if (!ishuman(user))
@@ -396,7 +393,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 
 	var/off_station = 0
 	var/turf/bomb_location = get_turf(src)
-	if( bomb_location && (bomb_location.z == 1) )
+	if(bomb_location && (bomb_location.z in config.station_levels))
 		if( (bomb_location.x < (128-NUKERANGE)) || (bomb_location.x > (128+NUKERANGE)) || (bomb_location.y < (128-NUKERANGE)) || (bomb_location.y > (128+NUKERANGE)) )
 			off_station = 1
 	else

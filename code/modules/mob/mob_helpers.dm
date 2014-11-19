@@ -1,4 +1,3 @@
-
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/ishuman(A)
 	if(istype(A, /mob/living/carbon/human))
@@ -8,6 +7,12 @@
 /proc/isalien(A)
 	if(istype(A, /mob/living/carbon/alien))
 		return 1
+	return 0
+
+/proc/isxenomorph(A)
+	if(istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		return istype(H.species, /datum/species/xenos)
 	return 0
 
 /proc/ismonkey(A)
@@ -118,6 +123,13 @@ proc/isnewplayer(A)
 
 proc/hasorgans(A)
 	return ishuman(A)
+
+proc/iscuffed(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.handcuffed)
+			return 1
+	return 0
 
 /proc/hsl2rgb(h, s, l)
 	return //TODO: Implement
@@ -414,6 +426,13 @@ var/list/intents = list("help","disarm","grab","hurt")
 			else
 				hud_used.action_intent.icon_state = "help"
 
+proc/is_blind(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.sdisabilities & BLIND || C.blinded)
+			return 1
+	return 0
+
 /proc/broadcast_security_hud_message(var/message, var/broadcast_source)
 	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
 
@@ -426,3 +445,10 @@ var/list/intents = list("help","disarm","grab","hurt")
 		var/turf/targetturf = get_turf(M)
 		if((targetturf.z == sourceturf.z))
 			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
+
+/proc/mobs_in_area(var/area/A)
+	var/list/mobs = new
+	for(var/mob/living/M in mob_list)
+		if(get_area(M) == A)
+			mobs += M
+	return mobs

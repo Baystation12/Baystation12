@@ -24,10 +24,6 @@
 	user << "The station AI is not to interact with these devices."
 	return
 
-/obj/machinery/keycard_auth/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device."
-	return
-
 /obj/machinery/keycard_auth/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))
 		user << "This device is not powered."
@@ -53,6 +49,8 @@
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		user << "This device is not powered."
 		return
+	if(!user.IsAdvancedToolUser())
+		return 0
 	if(busy)
 		user << "This device is busy."
 		return

@@ -82,6 +82,17 @@
 	return 1
 
 /datum/game_mode/calamity/post_setup()
+	event_manager.report_at_round_end = 1
+	// Reduce the interval between moderate/major events
+	var/datum/event_container/EModerate = event_manager.event_containers[EVENT_LEVEL_MODERATE]
+	var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
+	EModerate.delay_modifier = 0.5
+	EMajor.delay_modifier = 0.75
+
+	// Add the cortical borer event
+	var/list/moderate_event_list = EModerate.available_events
+	var/event = new /datum/event_meta(EVENT_LEVEL_MODERATE, "Borer Infestation", /datum/event/borer_infestation, 400, one_shot = 1)
+	moderate_event_list.Add(event)
 
 	if(chosen_atypes)
 		for(var/atype in chosen_atypes)
@@ -245,9 +256,9 @@
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
 	var/nuke_code = "[rand(10000, 99999)]"
-	var/leader_selected = 0
 	var/spawnpos = 1
 
+	var/datum/mind/leader = null
 	for(var/datum/mind/player in candidates)
 
 		syndicates |= player
@@ -264,9 +275,9 @@
 		greet_syndicate(player)
 		equip_syndicate(player.current)
 
-		if(!leader_selected)
+		if(!leader)
 			prepare_syndicate_leader(player, nuke_code)
-			leader_selected = 1
+			leader = player
 
 		spawnpos++
 		update_synd_icons_added(player)
@@ -275,6 +286,8 @@
 
 	if(uplinkdevice)
 		var/obj/item/device/radio/uplink/U = new(uplinkdevice.loc)
+		if(leader)
+			U.hidden_uplink.uplink_owner = leader
 		U.hidden_uplink.uses = 40
 	if(nuke_spawn && synd_spawn.len > 0)
 		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)

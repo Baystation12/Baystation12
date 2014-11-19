@@ -11,7 +11,6 @@
 
 	New()
 		..()
-		sleep(2)
 		switch(rand(1,2))
 			if(1)
 				new /obj/item/clothing/suit/apron(src)
@@ -20,6 +19,7 @@
 		new /obj/item/weapon/storage/bag/plants(src)
 		new /obj/item/clothing/under/rank/hydroponics(src)
 		new /obj/item/device/analyzer/plant_analyzer(src)
+		new /obj/item/device/radio/headset/headset_service(src)
 		new /obj/item/clothing/head/greenbandana(src)
 		new /obj/item/weapon/minihoe(src)
 		new /obj/item/weapon/hatchet(src)

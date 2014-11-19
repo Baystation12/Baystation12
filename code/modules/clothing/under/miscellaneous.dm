@@ -461,3 +461,11 @@
 	icon_state = "mechanic_s"
 	item_state = "mechanic_s"
 	item_color = "mechanic_s"
+
+/obj/item/clothing/under/cheongsam
+	name = "White Cheongsam"
+	desc = "It is a white cheongsam dress."
+	icon_state = "mai_yang"
+	item_state = "mai_yang"
+	item_color = "mai_yang"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS

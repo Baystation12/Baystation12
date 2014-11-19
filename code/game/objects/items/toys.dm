@@ -136,11 +136,9 @@
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
 
-	examine()
-		set src in usr
-
-		src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
-		..()
+	examine(mob/user)
+		if(..(user, 0))
+			src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
 		return
 
 	attackby(obj/item/toy/ammo/gun/A as obj, mob/user as mob)
@@ -212,11 +210,9 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-	examine()
-		set src in view(2)
-		..()
-		if (bullets)
-			usr << "\blue It is loaded with [bullets] foam darts!"
+	examine(mob/user)
+		if(..(user, 2) && bullets)
+			user << "\blue It is loaded with [bullets] foam darts!"
 
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -484,11 +480,9 @@
 
 		return
 
-/obj/item/toy/waterflower/examine()
-        set src in usr
-        usr << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
-        ..()
-        return
+/obj/item/toy/waterflower/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
 
 
 /*

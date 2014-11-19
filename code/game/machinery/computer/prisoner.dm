@@ -17,11 +17,6 @@
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
-
-	attack_paw(var/mob/user as mob)
-		return
-
-
 	attack_hand(var/mob/user as mob)
 		if(..())
 			return
@@ -49,7 +44,7 @@
 				if(!T.implanted) continue
 				var/loc_display = "Unknown"
 				var/mob/living/carbon/M = T.imp_in
-				if(M.z == 1 && !istype(M.loc, /turf/space))
+				if(M.z in config.station_levels && !istype(M.loc, /turf/space))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
