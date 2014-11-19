@@ -219,6 +219,13 @@ var/global/list/gear_datums = list()
 	slot = slot_head
 	whitelisted = "Tajara"
 
+// Wig by Earthcrusher, blame him.
+/datum/gear/philosopher_wig
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
+	cost = 3
+	slot = slot_head
+
 // Eyes
 
 /datum/gear/eyepatch
@@ -323,13 +330,6 @@ var/global/list/gear_datums = list()
 	cost = 1
 	allowed_roles = list("Captain")
 
-// Wig by Earthcrusher, blame him.
-/datum/gear/philosopher_wig
-	display_name = "natural philosopher's wig"
-	path = /obj/item/clothing/head/philosopher_wig
-	cost = 3
-	slot = slot_head
-
 /datum/gear/corpsecsuit
 	display_name = "uniform, corporate (Security)"
 	path = /obj/item/clothing/under/rank/security/corp
@@ -407,7 +407,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/tie/holster/armpit
 	slot = slot_tie
 	cost = 2
-	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Head of Security")
+	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security")
 
 /datum/gear/tie_blue
 	display_name = "tie, blue"
@@ -710,13 +710,43 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 1
 
+/datum/gear/folder_blue
+	display_name = "folder, blue"
+	path = /obj/item/weapon/folder/blue
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_grey
+	display_name = "folder, grey"
+	path = /obj/item/weapon/folder
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_red
+	display_name = "folder, red"
+	path = /obj/item/weapon/folder/red
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_white
+	display_name = "folder, white"
+	path = /obj/item/weapon/folder/white
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_yellow
+	display_name = "folder, yellow"
+	path = /obj/item/weapon/folder/yellow
+	sort_category = "utility"
+	cost = 1
+
+// The rest of the trash.
+
 /datum/gear/matchbook
 	display_name = "matchbook"
 	path = /obj/item/weapon/storage/box/matches
-	sort_category = "utility"
+	sort_category = "misc"
 	cost = 2
-
-// The rest of the trash.
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
