@@ -987,7 +987,7 @@ table tr:first-child th:first-child { border: none;}
 					var/list/selected = TLV[env]
 					var/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
 					var/newval = input("Enter [thresholds[threshold]] for [env]", "Alarm triggers", selected[threshold]) as null|num
-					if (isnull(newval) || ..() || (locked && issilicon(usr)))
+					if (isnull(newval) || ..() || (locked && !issilicon(usr)))
 						return
 					if (newval<0)
 						selected[threshold] = -1.0
