@@ -23,6 +23,10 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0
 
+	var/interface_path = "hardsuit.tmpl"
+	var/ai_interface_path = "hardsuit.tmpl"
+	var/interface_title = "Hardsuit Controller"
+
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
 	var/list/initial_modules
@@ -433,7 +437,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "hardsuit.tmpl", "Hardsuit Controller", 800, 600)
+		ui = new(user, src, ui_key, [data["ai"] ? ai_interface_path : interface_path], interface_title, 800, 600)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
