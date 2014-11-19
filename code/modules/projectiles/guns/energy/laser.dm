@@ -7,12 +7,12 @@
 	w_class = 3.0
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
-	projectile_type = "/obj/item/projectile/beam"
+	projectile_type = /obj/item/projectile/beam
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
-	projectile_type = "/obj/item/projectile/beam/practice"
+	projectile_type = /obj/item/projectile/beam/practice
 	clumsy_check = 0
 
 obj/item/weapon/gun/energy/laser/retro

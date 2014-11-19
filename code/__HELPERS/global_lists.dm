@@ -28,6 +28,9 @@ var/global/list/whitelisted_species = list("Human")
 // Posters
 var/global/list/datum/poster/poster_designs = typesof(/datum/poster) - /datum/poster
 
+// Uplinks
+var/list/obj/item/device/uplink/world_uplinks = list()
+
 //Preferences stuff
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
@@ -100,7 +103,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
-	
+
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		language_keys[":[lowertext(L.key)]"] = L

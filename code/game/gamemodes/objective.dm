@@ -88,7 +88,7 @@ datum/objective/mutiny
 			if(target.current.stat == DEAD || !ishuman(target.current) || !target.current.ckey)
 				return 1
 			var/turf/T = get_turf(target.current)
-			if(T && (T.z != 1))			//If they leave the station they count as dead for this
+			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
 				return 2
 			return 0
 		return 1
@@ -123,7 +123,7 @@ datum/objective/mutiny/rp
 				if(target in ticker.mode:head_revolutionaries)
 					return 1
 			var/turf/T = get_turf(target.current)
-			if(T && (T.z != 1))			//If they leave the station they count as dead for this
+			if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
 				rval = 2
 			return 0
 		return rval

@@ -310,7 +310,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] Syndicate [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the station safely, while minimizing intervention."
+				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] mercenary [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the station safely, while minimizing intervention."
 
 			check_completion()
 				if(!emergency_shuttle.returned())
@@ -1404,7 +1404,7 @@ datum
 					var/turf/T = get_turf(target.current)
 					if(target.current.stat == 2)
 						return 1
-					else if((T) && (T.z != 1))//If they leave the station they count as dead for this
+					else if((T) && (isNotStationLevel(T.z)))//If they leave the station they count as dead for this
 						return 2
 					else
 						return 0

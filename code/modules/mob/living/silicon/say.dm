@@ -25,14 +25,14 @@
 
 /mob/living/silicon/say(var/message)
 	if (!message)
-		return
+		return 0
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
 			src << "You cannot send IC messages (muted)."
-			return
+			return 0
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
-			return
+			return 0
 
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
@@ -56,7 +56,7 @@
 
 	//Must be concious to speak
 	if (stat)
-		return
+		return 0
 
 	var/verb = say_quote(message)
 
@@ -76,7 +76,7 @@
 
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
-			return
+			return 1
 
 	// Currently used by drones.
 	if(local_transmit)
@@ -92,11 +92,11 @@
 				continue
 			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
 				if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
-		return
+		return 1
 
 	if(message_mode && bot_type == IS_ROBOT && !R.is_component_functioning("radio"))
 		src << "\red Your radio isn't functional at this time."
-		return
+		return 0
 
 	switch(message_mode)
 		if("department")
@@ -105,47 +105,46 @@
 					return AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,message_mode,verb,speaking)
+					return R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,message_mode,verb,speaking)
-			return 1
-
-			return 1
+					return P.radio.talk_into(src,message,message_mode,verb,speaking)
+			return 0
+			
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
-					if (AI.aiRadio.disabledAi)
+					if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 						src << "\red System Error - Transceiver Disabled"
-						return
+						return 0
 					else
 						log_say("[key_name(src)] : [message]")
-						AI.aiRadio.talk_into(src,message,null,verb,speaking)
+						return AI.aiRadio.talk_into(src,message,null,verb,speaking)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,null,verb,speaking)
+					return R.radio.talk_into(src,message,null,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,null,verb,speaking)
-			return 1
+					return P.radio.talk_into(src,message,null,verb,speaking)
+			return 0
 
 		else
 			if(message_mode)
 				switch(bot_type)
 					if(IS_AI)
-						if (AI.aiRadio.disabledAi)
+						if (AI.aiRadio.disabledAi || AI.aiRestorePowerRoutine || AI.stat)
 							src << "\red System Error - Transceiver Disabled"
-							return
+							return 0
 						else
 							log_say("[key_name(src)] : [message]")
-							AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
+							return AI.aiRadio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
-						R.radio.talk_into(src,message,message_mode,verb,speaking)
+						return R.radio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
-						P.radio.talk_into(src,message,message_mode,verb,speaking)
-				return 1
+						return P.radio.talk_into(src,message,message_mode,verb,speaking)
+				return 0
 
 	return ..(message,speaking,verb)
 

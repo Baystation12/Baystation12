@@ -159,6 +159,8 @@
 	matter = list("metal" = 50)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
+	sharp = 0
+	edge = 1
 
 /obj/item/weapon/shovel/spade
 	name = "spade"

@@ -341,13 +341,14 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
 				player.ready = 0
+				player.new_player_panel_proc()
 				unassigned -= player
 		return 1
 
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
 
-		if(!H)	return 0
+		if(!H)	return null
 
 		var/datum/job/job = GetJob(rank)
 		var/list/spawn_in_storage = list()
@@ -385,6 +386,7 @@ var/global/datum/controller/occupations/job_master
 
 			//Equip job items.
 			job.equip(H)
+			job.apply_fingerprints(H)
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
@@ -443,8 +445,7 @@ var/global/datum/controller/occupations/job_master
 
 			switch(rank)
 				if("Cyborg")
-					H.Robotize()
-					return 1
+					return H.Robotize()
 				if("AI","Clown")	//don't need bag preference stuff!
 				else
 					switch(H.backbag) //BS12 EDIT
@@ -523,7 +524,7 @@ var/global/datum/controller/occupations/job_master
 		H.hud_updateflag |= (1 << ID_HUD)
 		H.hud_updateflag |= (1 << IMPLOYAL_HUD)
 		H.hud_updateflag |= (1 << SPECIALROLE_HUD)
-		return 1
+		return H
 
 
 	proc/spawnId(var/mob/living/carbon/human/H, rank, title)

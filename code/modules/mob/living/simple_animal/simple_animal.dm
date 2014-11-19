@@ -47,11 +47,12 @@
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
-	melee_damage_lower = 0
-	melee_damage_upper = 0
-	attacktext = "attacks"
-	attack_sound = null
-	friendly = "nuzzles" //If the mob does no damage with it's attack
+	var/melee_damage_lower = 0
+	var/melee_damage_upper = 0
+	var/attacktext = "attacked"
+	var/attack_sound = null
+	var/friendly = "nuzzles"
+	var/wall_smash = 0
 
 /mob/living/simple_animal/New()
 	..()
@@ -113,23 +114,23 @@
 					else
 						randomValue -= speak.len
 						if(emote_see && randomValue <= emote_see.len)
-							emote(pick(emote_see),1)
+							visible_emote("[pick(emote_see)].")
 						else
-							emote(pick(emote_hear),2)
+							audible_emote("[pick(emote_hear)].")
 				else
 					say(pick(speak))
 			else
 				if(!(emote_hear && emote_hear.len) && (emote_see && emote_see.len))
-					emote(pick(emote_see),1)
+					visible_emote("[pick(emote_see)].")
 				if((emote_hear && emote_hear.len) && !(emote_see && emote_see.len))
-					emote(pick(emote_hear),2)
+					audible_emote("[pick(emote_hear)].")
 				if((emote_hear && emote_hear.len) && (emote_see && emote_see.len))
 					var/length = emote_hear.len + emote_see.len
 					var/pick = rand(1,length)
 					if(pick <= emote_see.len)
-						emote(pick(emote_see),1)
+						visible_emote("[pick(emote_see)].")
 					else
-						emote(pick(emote_hear),2)
+						audible_emote("[pick(emote_hear)].")
 
 
 	//Atmos
@@ -206,21 +207,13 @@
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)
-		if(act == "scream")	act = "whimper" //ugly hack to stop animals screaming when crushed :P
 		..(act, type, desc)
 
-/mob/living/simple_animal/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		for(var/mob/O in viewers(src, null))
-			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		adjustBruteLoss(damage)
+/mob/living/simple_animal/proc/visible_emote(var/act_desc)
+	custom_emote(1, act_desc)
+
+/mob/living/simple_animal/proc/audible_emote(var/act_desc)
+	custom_emote(2, act_desc)
 
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
@@ -236,9 +229,11 @@
 
 		if("help")
 			if (health > 0)
-				for(var/mob/O in viewers(src, null))
-					if ((O.client && !( O.blinded )))
-						O.show_message("\blue [M] [response_help] [src]")
+				M.visible_message("\blue [M] [response_help] \the [src]")
+		
+		if("disarm")
+			M.visible_message("\blue [M] [response_disarm] \the [src]")
+			//TODO: Push the mob away or something
 
 		if("grab")
 			if (M == src)
@@ -254,40 +249,13 @@
 			G.affecting = src
 			LAssailant = M
 
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
+			M.visible_message("\red [M] has grabbed [src] passively!")
 
-		if("hurt", "disarm")
+		if("hurt")
 			adjustBruteLoss(harm_intent_damage)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message("\red [M] [response_harm] [src]")
+			M.visible_message("\red [M] [response_harm] \the [src]")
 
 	return
-
-
-/mob/living/simple_animal/attack_slime(mob/living/carbon/slime/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if(M.Victim) return // can't attack while eating!
-
-	visible_message("\red <B>The [M.name] glomps [src]!</B>")
-
-	var/damage = rand(1, 3)
-
-	if(M.is_adult)
-		damage = rand(20, 40)
-	else
-		damage = rand(5, 35)
-
-	adjustBruteLoss(damage)
-
-
-	return
-
 
 /mob/living/simple_animal/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 	if(istype(O, /obj/item/stack/medical))

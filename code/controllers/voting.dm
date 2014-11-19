@@ -48,11 +48,11 @@ datum/controller/vote
 				voting.Cut()
 
 	proc/autotransfer()
-		initiate_vote("crew_transfer","the server")
+		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
 
 	proc/autogamemode()
-		initiate_vote("gamemode","the server")
+		initiate_vote("gamemode","the server", 1)
 		log_debug("The server has called a gamemode vote")
 
 	proc/reset()
@@ -197,9 +197,9 @@ datum/controller/vote
 				return vote
 		return 0
 
-	proc/initiate_vote(var/vote_type, var/initiator_key)
+	proc/initiate_vote(var/vote_type, var/initiator_key, var/automatic = 0)
 		if(!mode)
-			if(started_time != null && !check_rights(R_ADMIN))
+			if(started_time != null && !(check_rights(R_ADMIN) || automatic))
 				var/next_allowed_time = (started_time + config.vote_delay)
 				if(next_allowed_time > world.time)
 					return 0
@@ -290,9 +290,9 @@ datum/controller/vote
 		var/admin = 0
 		var/trialmin = 0
 		if(C.holder)
-			admin = 1
 			if(C.holder.rights & R_ADMIN)
-				trialmin = 1
+				admin = 1
+				trialmin = 1 // don't know why we use both of these it's really weird, but I'm 2 lasy to refactor this all to use just admin.
 		voting |= C
 
 		. = "<html><head><title>Voting Panel</title></head><body>"

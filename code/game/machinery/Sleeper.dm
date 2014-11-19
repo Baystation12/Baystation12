@@ -10,7 +10,7 @@
 	anchored = 1 //About time someone fixed this.
 	density = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
-	
+
 	use_power = 1
 	idle_power_usage = 40
 
@@ -48,9 +48,6 @@
 	return
 
 /obj/machinery/sleep_console/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/sleep_console/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/sleep_console/attack_hand(mob/user as mob)
@@ -166,7 +163,7 @@
 	var/amounts = list(5, 10)
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
-	
+
 	use_power = 1
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
@@ -188,7 +185,7 @@
 	process()
 		if (stat & (NOPOWER|BROKEN))
 			return
-	
+
 		if(filtering > 0)
 			if(beaker)
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
@@ -336,8 +333,12 @@
 
 
 	proc/inject_chemical(mob/living/user as mob, chemical, amount)
+		if (stat & (BROKEN|NOPOWER))
+			return
+
 		if(src.occupant && src.occupant.reagents)
 			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 20)
+				use_power(amount * CHEM_SYNTH_ENERGY)
 				src.occupant.reagents.add_reagent(chemical, amount)
 				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in his/her bloodstream."
 				return

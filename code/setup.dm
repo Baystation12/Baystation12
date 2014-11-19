@@ -487,6 +487,10 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
+//click cooldowns, in tenths of a second
+
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
 var/list/liftable_structures = list(\
@@ -629,10 +633,9 @@ var/list/liftable_structures = list(\
 #define R_SPAWN			4096
 #define R_MOD			8192
 #define R_MENTOR		16384
+#define R_HOST			32768
 
-#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
-
-#define R_HOST			65535
+#define R_MAXPERMISSION 32768 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 //Preference toggles
 #define SOUND_ADMINHELP	1
@@ -853,3 +856,7 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 // Reagent metabolism defines.
 #define FOOD_METABOLISM 0.4
 #define ALCOHOL_METABOLISM 0.1
+
+//Chemistry
+
+#define CHEM_SYNTH_ENERGY	500	//How much energy does it take to synthesize 1 unit of chemical, in J

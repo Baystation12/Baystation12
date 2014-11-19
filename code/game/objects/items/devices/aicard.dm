@@ -35,7 +35,7 @@
 		var/dat = "<TT><B>Intelicard</B><BR>"
 		var/laws
 		for(var/mob/living/silicon/ai/A in src)
-			dat += "Stored AI: [A.name]<br>System integrity: [(A.health+100)/2]%<br>"
+			dat += "Stored AI: [A.name]<br>System integrity: [A.system_integrity()]%<br>"
 
 			for (var/law in A.laws.ion)
 				if(law)
@@ -68,8 +68,6 @@
 					dat += "<b>Wipe in progress</b>"
 				dat += "<br>"
 				dat += {"<a href='byond://?src=\ref[src];choice=Wireless'>[A.control_disabled ? "Enable" : "Disable"] Wireless Activity</a>"}
-				dat += "<br>"
-				dat += "Subspace Transceiver is: [A.aiRadio.disabledAi ? "Disabled" : "Enabled"]"
 				dat += "<br>"
 				dat += {"<a href='byond://?src=\ref[src];choice=Radio'>[A.aiRadio.disabledAi ? "Enable" : "Disable"] Subspace Transceiver</a>"}
 				dat += "<br>"

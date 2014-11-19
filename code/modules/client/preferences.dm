@@ -20,8 +20,6 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
-var/const/MAX_SAVE_SLOTS = 10
-
 //used for alternate_option
 #define GET_RANDOM_JOB 0
 #define BE_ASSISTANT 1
@@ -1576,25 +1574,23 @@ datum/preferences
 	// Destroy/cyborgize organs
 
 	for(var/name in organ_data)
-		var/datum/organ/external/O = character.organs_by_name[name]
-		var/datum/organ/internal/I = character.internal_organs_by_name[name]
-		var/status = organ_data[name]
 
-		if(!I || !O)
-			continue
-
-		if(status == "amputated")
-			O.amputated = 1
-			O.status |= ORGAN_DESTROYED
-			O.destspawn = 1
-		if(status == "cyborg")
-			O.status |= ORGAN_ROBOT
-		if(status == "assisted")
-			I.mechassist()
-		else if(status == "mechanical")
-			I.mechanize()
-
-		else continue
+		var/status = organ_data[name]		
+		var/datum/organ/external/O = character.organs_by_name[name]		
+		if(O)
+			if(status == "amputated")
+				O.amputated = 1
+				O.status |= ORGAN_DESTROYED
+				O.destspawn = 1
+			else if(status == "cyborg")
+				O.status |= ORGAN_ROBOT
+		else			
+			var/datum/organ/internal/I = character.internal_organs_by_name[name]
+			if(I)
+				if(status == "assisted")
+					I.mechassist()
+				else if(status == "mechanical")
+					I.mechanize()
 
 	if(underwear > underwear_m.len || underwear < 1)
 		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
@@ -1622,7 +1618,7 @@ datum/preferences
 	if(S)
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
-		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+		for(var/i=1, i<= config.character_slots, i++)
 			S.cd = "/character[i]"
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"

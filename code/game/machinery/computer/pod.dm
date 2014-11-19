@@ -110,11 +110,6 @@
 /obj/machinery/computer/pod/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-
-/obj/machinery/computer/pod/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/machinery/computer/pod/attack_hand(var/mob/user as mob)
 	if(..())
 		return
@@ -206,7 +201,7 @@
 
 /obj/machinery/computer/pod/old/syndicate
 	name = "ProComp Executive IIc"
-	desc = "The Syndicate operate on a tight budget. Operates external airlocks."
+	desc = "Criminals often operate on a tight budget. Operates external airlocks."
 	title = "External Airlock Controls"
 	req_access = list(access_syndicate)
 

@@ -10,7 +10,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/helmet/space/ert/commander(src)
 		new /obj/item/clothing/suit/space/ert/commander(src)
 		new /obj/item/weapon/plastique(src)
@@ -34,7 +33,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/helmet/space/ert/security(src)
 		new /obj/item/clothing/suit/space/ert/security(src)
 		new /obj/item/weapon/plastique(src)
@@ -57,7 +55,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/helmet/space/ert/engineer(src)
 		new /obj/item/clothing/suit/space/ert/engineer(src)
 		new /obj/item/weapon/gun/energy/taser(src)
@@ -79,7 +76,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/helmet/space/ert/medical(src)
 		new /obj/item/clothing/suit/space/ert/medical(src)
 		new /obj/item/weapon/gun/energy/taser(src)

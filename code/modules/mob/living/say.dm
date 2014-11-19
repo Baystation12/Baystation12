@@ -10,8 +10,10 @@ var/list/department_radio_keys = list(
 	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
 	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
-	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
+	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":v" = "Service",		"#v" = "Service",		".v" = "Service",
+	  ":o" = "AI Private",	"#o" = "AI Private",	".o" = "AI Private",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -23,8 +25,10 @@ var/list/department_radio_keys = list(
 	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
 	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
-	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
+	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":V" = "Service",		"#V" = "Service",		".V" = "Service",
+	  ":O" = "AI Private",	"#O" = "AI Private",	".O" = "AI Private",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -38,9 +42,24 @@ var/list/department_radio_keys = list(
 	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
 	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
 	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
+	  ":å" = "Mercenary",	"#å" = "Mercenary",		".å" = "Mercenary",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
 )
+
+
+var/list/channel_to_radio_key = new
+proc/get_radio_key_from_channel(var/channel)
+	var/key = channel_to_radio_key[channel]
+	if(!key)
+		for(var/radio_key in department_radio_keys)
+			if(department_radio_keys[radio_key] == channel)
+				key = radio_key
+				break
+		if(!key)
+			key = ""
+		channel_to_radio_key[channel] = key
+
+	return key
 
 /mob/living/proc/binarycheck()
 
@@ -71,24 +90,22 @@ var/list/department_radio_keys = list(
 				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 		if (speaking.flags & SIGNLANG)
-			say_signlang(message, pick(speaking.signlang_verb), speaking)
-			return 1
-
-	//make sure the air can transmit speech
-	var/datum/gas_mixture/environment = T.return_air()
-	if(environment)
-		var/pressure = environment.return_pressure()
-		if(pressure < SOUND_MINIMUM_PRESSURE)
-			italics = 1
-			message_range = 1
-
-			if (speech_sound)
-				sound_vol *= 0.5	//muffle the sound a bit, so it's like we're actually talking through contact
-
+			return say_signlang(message, pick(speaking.signlang_verb), speaking)
+	
 	var/list/listening = list()
 	var/list/listening_obj = list()
 
 	if(T)
+		//make sure the air can transmit speech - speaker's side
+		var/datum/gas_mixture/environment = T.return_air()
+		var/pressure = (environment)? environment.return_pressure() : 0
+		if(pressure < SOUND_MINIMUM_PRESSURE)
+			message_range = 1
+		
+		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
+			italics = 1
+			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
+	
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 
@@ -99,12 +116,6 @@ var/list/department_radio_keys = list(
 				hearturfs += M.locs[1]
 				for(var/obj/O in M.contents)
 					listening_obj |= O
-				if (isslime(I))
-					var/mob/living/carbon/slime/S = I
-					if (src in S.Friends)
-						S.speech_buffer = list()
-						S.speech_buffer.Add(src)
-						S.speech_buffer.Add(lowertext(html_decode(message)))
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]
@@ -137,6 +148,7 @@ var/list/department_radio_keys = list(
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
 	for (var/mob/O in viewers(src, null))
 		O.hear_signlang(message, verb, language, src)
+	return 1
 
 /obj/effect/speech_bubble
 	var/mob/parent
