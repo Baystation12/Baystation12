@@ -187,7 +187,7 @@ its easier to just keep the beam vertical.
 
 
 //All atoms
-/atom/proc/examine(mob/user, var/distance = -1)
+/atom/proc/examine(mob/user, var/distance = -1, var/sufix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src]."
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))
@@ -197,7 +197,7 @@ its easier to just keep the beam vertical.
 			f_name = "a "
 		f_name += "<span class='danger'>blood-stained</span> [name]!"
 
-	user << "\icon[src] That's [f_name]"
+	user << "\icon[src] That's [f_name] [sufix]"
 
 	if(desc)
 		user << desc
