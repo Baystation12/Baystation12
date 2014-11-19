@@ -338,18 +338,18 @@
 	spawn(13)
 		del(src)
 
-/obj/machinery/turret/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	if(!(stat & BROKEN))
-		visible_message("\red <B>[M] [M.attacktext] [src]!</B>")
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-		//src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		src.health -= M.melee_damage_upper
-		if (src.health <= 0)
-			src.die()
-	else
-		M << "\red That object is useless to you."
-	return
+/obj/machinery/turret/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return 0
+	if(stat & BROKEN)
+		user << "That object is useless to you."
+		return 0
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	if (src.health <= 0)
+		src.die()
+	return 1
 
 /obj/structure/turret/gun_turret
 	name = "Gun Turret"

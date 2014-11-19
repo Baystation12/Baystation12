@@ -59,11 +59,6 @@
 		else
 			..()
 
-
-
-	attack_paw()
-		return
-
 	attack_ai()
 		return
 

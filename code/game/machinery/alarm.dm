@@ -78,13 +78,11 @@
 	var/temperature_dangerlevel = 0
 	var/other_dangerlevel = 0
 
-	var/apply_danger_level = 1
-	var/post_alert = 1
+	var/report_danger_level = 1
 
 /obj/machinery/alarm/monitor
-	apply_danger_level = 0
+	report_danger_level = 0
 	breach_detection = 0
-	post_alert = 0
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -432,15 +430,12 @@
 				send_signal(device_id, list("power"= 0) )
 
 /obj/machinery/alarm/proc/apply_danger_level(var/new_danger_level)
-	if (apply_danger_level && alarm_area.atmosalert(new_danger_level))
+	if (report_danger_level && alarm_area.atmosalert(new_danger_level))
 		post_alert(new_danger_level)
 
 	update_icon()
 
 /obj/machinery/alarm/proc/post_alert(alert_level)
-	if(!post_alert)
-		return
-
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(alarm_frequency)
 	if(!frequency)
 		return
@@ -1094,9 +1089,6 @@ FIRE ALARM
 /obj/machinery/firealarm/bullet_act(BLAH)
 	return src.alarm()
 
-/obj/machinery/firealarm/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/firealarm/emp_act(severity)
 	if(prob(50/severity)) alarm()
 	..()
@@ -1378,9 +1370,6 @@ Code shamelessly copied from apc_frame
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 6
-
-/obj/machinery/partyalarm/attack_paw(mob/user as mob)
-	return attack_hand(user)
 
 /obj/machinery/partyalarm/attack_hand(mob/user as mob)
 	if(user.stat || stat & (NOPOWER|BROKEN))

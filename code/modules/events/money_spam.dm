@@ -1,5 +1,4 @@
 /datum/event/pda_spam
-	name = "PDA Spam"
 	endWhen = 36000
 	var/last_spam_time = 0
 	var/obj/machinery/message_server/useMS

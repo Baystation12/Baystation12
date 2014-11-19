@@ -12,8 +12,8 @@
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	matter = list("metal" = 200)
-	origin_tech = "magnets=1;biotech=1"
+	matter = list("metal" = 500, "glass" = 200)
+	origin_tech = "magnets=2;biotech=1;engineering=2"
 	var/mode = 1;
 
 /obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)

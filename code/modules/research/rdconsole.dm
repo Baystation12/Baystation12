@@ -46,8 +46,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
+	var/errored = 0		//Errored during item construction.
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
+
+
 
 
 /obj/machinery/computer/rdconsole/proc/CallTechName(var/ID) //A simple helper proc to find the name of a tech with a given ID.
@@ -178,6 +181,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			screen = temp_screen
 		else
 			usr << "Unauthorized Access."
+
+	else if(href_list["reset"])
+		warning("RnD console has errored during protolathe operation. Resetting.")
+		errored = 0
+		screen = 1.0
+		updateUsrDialog()
 
 	else if(href_list["updt_tech"]) //Update the research holder with information from the technology disk.
 		screen = 0.0
@@ -343,6 +352,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				spawn(16)
 					use_power(power)
 					spawn(16)
+						errored = 1
 						for(var/M in being_built.materials)
 							switch(M)
 								if("$metal")
@@ -376,7 +386,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								new_item.loc = linked_lathe.loc
 							linked_lathe.busy = 0
 							screen = 3.1
-							updateUsrDialog()
+							errored = 0
+						updateUsrDialog()
 
 	else if(href_list["imprint"]) //Causes the Circuit Imprinter to build something.
 		if(linked_imprinter)
@@ -394,6 +405,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_imprinter.busy = 1
 				flick("circuit_imprinter_ani",linked_imprinter)
 				spawn(16)
+					errored = 1
 					use_power(power)
 					for(var/M in being_built.materials)
 						switch(M)
@@ -413,6 +425,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					new_item.loc = linked_imprinter.loc
 					linked_imprinter.busy = 0
 					screen = 4.1
+					errored = 0
 					updateUsrDialog()
 
 	else if(href_list["disposeI"] && linked_imprinter)  //Causes the circuit imprinter to dispose of a single reagent (all of it)
@@ -539,6 +552,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(4 to 4.9)
 			if(linked_imprinter == null)
 				screen = 4.0
+
+	if(errored)
+		dat += "An error has occured when constructing prototype. Try refreshing the console."
+		dat += "<br>If problem persists submit bug report stating which item you tried to build."
+		dat += "<br><A href='?src=\ref[src];reset=1'>RESET CONSOLE</A><br><br>"
 
 	switch(screen)
 

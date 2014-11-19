@@ -240,9 +240,9 @@
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
@@ -261,8 +261,8 @@
 	..()
 	new /obj/item/clothing/under/rank/roboticist(src)
 	new /obj/item/clothing/under/rank/roboticist(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/gloves/black(src)
@@ -281,8 +281,8 @@
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/suit/storage/labcoat/chemist(src)
-	new /obj/item/clothing/suit/storage/labcoat/chemist(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/chemist(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/chemist(src)
 	return
 
 
@@ -297,8 +297,8 @@
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/suit/storage/labcoat/genetics(src)
-	new /obj/item/clothing/suit/storage/labcoat/genetics(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(src)
 	return
 
 
@@ -313,8 +313,8 @@
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/suit/storage/labcoat/virologist(src)
-	new /obj/item/clothing/suit/storage/labcoat/virologist(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(src)
 	new /obj/item/clothing/mask/surgical(src)
 	new /obj/item/clothing/mask/surgical(src)
 	return
@@ -334,8 +334,8 @@
 	new /obj/item/clothing/under/rank/medical/purple(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
-	new /obj/item/clothing/suit/storage/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
 	new /obj/item/clothing/mask/surgical(src)
 	new /obj/item/clothing/mask/surgical(src)
 	return

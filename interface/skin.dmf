@@ -367,7 +367,7 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "Y"
-		command = "Activate-Held-Object"
+		command = "me"
 		is-disabled = false
 	elem 
 		name = "CTRL+Y"

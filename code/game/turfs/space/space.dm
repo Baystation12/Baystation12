@@ -11,9 +11,6 @@
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
-/turf/space/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /turf/space/attack_hand(mob/user as mob)
 	if ((user.restrained() || !( user.pulling )))
 		return

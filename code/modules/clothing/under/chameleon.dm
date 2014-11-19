@@ -120,7 +120,7 @@
 	New()
 		..()
 		var/blocked = list(/obj/item/clothing/suit/chameleon, /obj/item/clothing/suit/space/space_ninja,
-			/obj/item/clothing/suit/golem, /obj/item/clothing/suit/suit, /obj/item/clothing/suit/cyborg_suit, /obj/item/clothing/suit/justice,
+			/obj/item/clothing/suit/golem, /obj/item/clothing/suit/cyborg_suit, /obj/item/clothing/suit/justice,
 			/obj/item/clothing/suit/greatcoat)//Prevent infinite loops and bad suits.
 		for(var/U in typesof(/obj/item/clothing/suit)-blocked)
 			var/obj/item/clothing/suit/V = new U
@@ -257,7 +257,7 @@
 		icon_state = A.icon_state
 		item_state = A.item_state
 		item_color = A.item_color
-		
+
 		//so our overlays update.
 		if (ismob(src.loc))
 			var/mob/M = src.loc
@@ -464,7 +464,7 @@
 		icon_state = A.icon_state
 		item_state = A.item_state
 		flags_inv = A.flags_inv
-		
+
 		//so our overlays update.
 		if (ismob(src.loc))
 			var/mob/M = src.loc

@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber
 	icon = 'icons/atmos/vent_scrubber.dmi'
-	icon_state = "map_scrubber"
+	icon_state = "map_scrubber_off"
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it"
@@ -30,6 +30,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
 	on = 1
+	icon_state = "map_scrubber_on"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
 	..()

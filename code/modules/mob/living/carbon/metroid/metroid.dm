@@ -119,7 +119,7 @@
 				if(istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
 					if(nutrition <= get_hunger_nutrition() && !Atkcool)
 						if (is_adult || prob(5))
-							AM.attack_slime(src)
+							UnarmedAttack(AM)
 							spawn()
 								Atkcool = 1
 								sleep(45)
@@ -253,84 +253,7 @@
 		updatehealth()
 	return
 
-/mob/living/carbon/slime/attack_slime(mob/living/carbon/slime/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (Victim) return // can't attack while eating!
-
-	if (health > -100)
-
-		visible_message("<span class='danger'> The [M.name] has glomped [src]!</span>", \
-				"<span class='userdanger'> The [M.name] has glomped [src]!</span>")
-		var/damage = rand(1, 3)
-		attacked += 5
-
-		if(M.is_adult)
-			damage = rand(1, 6)
-		else
-			damage = rand(1, 3)
-
-		adjustBruteLoss(damage)
-
-		updatehealth()
-	return
-
-/mob/living/carbon/slime/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		visible_message("<span class='danger'>[M] [M.attacktext] [src]!</span>", \
-				"<span class='userdanger'>[M] [M.attacktext] [src]!</span>")
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		attacked += 10
-		adjustBruteLoss(damage)
-		updatehealth()
-
-/mob/living/carbon/slime/attack_paw(mob/living/carbon/monkey/M as mob)
-	if(!(istype(M, /mob/living/carbon/monkey)))
-		return // Fix for aliens receiving double messages when attacking other aliens.
-
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
-	..()
-
-	switch(M.a_intent)
-
-		if ("help")
-			help_shake_act(M)
-		else
-			if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
-				return
-			if (health > 0)
-				attacked += 10
-				//playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
-				visible_message("<span class='danger'>[M.name] has attacked [src]!</span>", \
-						"<span class='userdanger'>[M.name] has attacked [src]!</span>")
-				adjustBruteLoss(rand(1, 3))
-				updatehealth()
-	return
-
-
 /mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
 
 	..()
 
@@ -386,18 +309,6 @@
 				step_away(src,M)
 
 			return
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.use(2500)
-					visible_message("<span class='warning'>[src] has been touched with the stun gloves by [M]!</span>")
-					return
-				else
-					M << "\red Not enough charge! "
-					return
 
 	switch(M.a_intent)
 

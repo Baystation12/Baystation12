@@ -21,11 +21,6 @@
 
 	return
 
-
-/obj/item/weapon/paper_bin/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if (hasorgans(user))
 		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
