@@ -967,3 +967,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		usr << "Random events disabled"
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
 	feedback_add_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/trigger_random_event()
+	set category = "Special Verbs"
+	set name = "Trigger a random event"
+	if(!check_rights(R_FUN))	return
+	spawn_dynamic_event()
+	message_admins("Admin [key_name_admin(usr)] has triggered a random event.", 1)
+	feedback_add_details("admin_verb","TRIGE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
