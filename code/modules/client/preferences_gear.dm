@@ -204,6 +204,13 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 
+// Wig by Earthcrusher, blame him.
+/datum/gear/philosopher_wig
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
+	cost = 3
+	slot = slot_head
+
 /datum/gear/ushanka
 	display_name = "ushanka"
 	path = /obj/item/clothing/head/ushanka
@@ -218,13 +225,6 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 	whitelisted = "Tajara"
-
-// Wig by Earthcrusher, blame him.
-/datum/gear/philosopher_wig
-	display_name = "natural philosopher's wig"
-	path = /obj/item/clothing/head/philosopher_wig
-	cost = 3
-	slot = slot_head
 
 // Eyes
 
@@ -742,12 +742,6 @@ var/global/list/gear_datums = list()
 
 // The rest of the trash.
 
-/datum/gear/matchbook
-	display_name = "matchbook"
-	path = /obj/item/weapon/storage/box/matches
-	sort_category = "misc"
-	cost = 2
-
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/ashtray/plastic
@@ -795,6 +789,12 @@ var/global/list/gear_datums = list()
 	path = /obj/item/weapon/lipstick
 	sort_category = "misc"
 	cost = 1
+
+/datum/gear/matchbook
+	display_name = "matchbook"
+	path = /obj/item/weapon/storage/box/matches
+	sort_category = "misc"
+	cost = 2
 
 /datum/gear/comb
 	display_name = "purple comb"
