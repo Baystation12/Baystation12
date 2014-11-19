@@ -3,7 +3,7 @@
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
-/client/verb/adminhelp(msg as text)
+/client/verb/adminhelp()
 	set category = "Admin"
 	set name = "Adminhelp"
 
@@ -15,8 +15,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>"
 		return
-	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
+
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
@@ -26,6 +25,17 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
 	**/
+	var/msg
+	var/list/type = list ("Gameplay/Roleplay question", "Rule/Gameplay issue", "Bug report")
+	var/selected_type = input("Pick a category.", "Admin Help", null, null) as null|anything in type
+	if(selected_type)
+		msg = input("Please enter your message:", "Admin Help", null, null) as text
+
+	var/selected_upper = uppertext(selected_type)
+
+	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
+		return
+
 
 	//clean the input msg
 	if(!msg)	return
@@ -33,7 +43,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(!msg)	return
 	var/original_msg = msg
 
-	
+
 
 	//explode the input msg into a list
 	var/list/msglist = text2list(msg, " ")
@@ -91,11 +101,68 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(!mob)	return						//this doesn't happen
 
 	var/ref_mob = "\ref[mob]"
-	var/mentor_msg = "\blue <b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
-	msg = "\blue <b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
-	//send this msg to all admins
+	var/mentor_msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 0, 0, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
+	var/dev_msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 3, 0, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
+	msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 2, 1, 1)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
+
+
+
 	var/admin_number_afk = 0
+
+	var/list/mentorholders = list()
+	var/list/debugholders = list()
+	var/list/adminholders = list()
 	for(var/client/X in admins)
+		if(R_MENTOR & X.holder.rights && !(R_ADMIN & X.holder.rights)) // we don't want to count admins twice. This list should be JUST mentors
+			mentorholders += X
+			if(X.is_afk())
+				admin_number_afk++
+		if(R_DEBUG & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
+			debugholders += X
+			if(!(R_ADMIN & X.holder.rights))
+				if(X.is_afk())
+					admin_number_afk++
+		if(R_ADMIN & X.holder.rights) // just admins here please
+			adminholders += X
+			if(X.is_afk())
+				admin_number_afk++
+
+	switch(selected_type)
+		if("Gameplay/Roleplay question")
+			if(mentorholders.len)
+				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << mentor_msg
+			if(adminholders.len)
+				for(var/client/X in adminholders) // Admins get the full monty
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << msg
+		if("Rule/Gameplay issue")
+			if(adminholders.len)
+				for(var/client/X in adminholders) // Admins of course get everything in their helps
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << msg
+		if("Bug report")
+			if(debugholders.len)
+				for(var/client/X in debugholders)
+					if(R_ADMIN & X.holder.rights) // Admins get every button & special highlights in theirs
+						if(X.prefs.toggles & SOUND_ADMINHELP)
+							X << 'sound/effects/adminhelp.ogg'
+						X << msg
+					else
+						if (R_DEBUG & X.holder.rights) // Just devs or devmentors get non-highlighted names, but they do get JMP and VV for their bug reports.
+							if(X.prefs.toggles & SOUND_ADMINHELP)
+								X << 'sound/effects/adminhelp.ogg'
+						X << dev_msg
+
+
+
+
+
+	/*for(var/client/X in admins)
 		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
@@ -104,19 +171,19 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			if(X.holder.rights == R_MENTOR)
 				X << mentor_msg		// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
 			else
-				X << msg
+				X << msg*/
 
 	//show it to the person adminhelping too
-	src << "<font color='blue'>PM to-<b>Admins</b>: [original_msg]</font>"
+	src << "<font color='blue'>PM to-<b>Staff ([selected_type])</b>: [original_msg]</font>"
 
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
 		if(!admin_number_afk)
-			send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)] - !!No admins online!!")
+			send2adminirc("[selected_upper] from [key_name(src)]: [html_decode(original_msg)] - !!No admins online!!")
 		else
-			send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)] - !!All admins AFK ([admin_number_afk])!!")
+			send2adminirc("[selected_upper] from [key_name(src)]: [html_decode(original_msg)] - !!All admins AFK ([admin_number_afk])!!")
 	else
-		send2adminirc("ADMINHELP from [key_name(src)]: [html_decode(original_msg)]")
+		send2adminirc("[selected_upper] from [key_name(src)]: [html_decode(original_msg)]")
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
