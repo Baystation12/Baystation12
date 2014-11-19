@@ -21,13 +21,13 @@ var/global/floorIsLava = 0
 				C << msg
 
 
-/proc/message_admins_shutter(var/msg) //Toggleable shutter messages
+/*proc/message_admins_shutter(var/msg) //Toggleable shutter messages
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			if(C.prefs.toggles & SHOW_SHUTTERLOGS)
-				C << msg
+				C << msg*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
@@ -662,6 +662,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
 			<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
+			<A href='?src=\ref[src];secretsfun=dbzmode'>DBZ Mode (Everyones a Wizard)</A><BR>
 			"}
 
 	if(check_rights(R_SERVER,0))
@@ -761,6 +762,24 @@ var/global/floorIsLava = 0
 	log_admin_single("[key_name(usr)] toggled LOOC.")
 	message_admins("[key_name_admin(usr)] toggled LOOC.", 1)
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/togglevsay()
+	set category = "Server"
+	set desc="Globally Toggles EventSAY"
+	set name="Toggle EventSAY"
+	vsay_allowed = !( vsay_allowed )
+	if (vsay_allowed)
+		for(var/client/C in clients)
+			if(C.vipholder)
+				C << "<B>Event Chat has been globally enabled!</B>"
+
+	else
+		for(var/client/C in clients)
+			if(C.vipholder)
+				C << "<B>Event Chat has been globally disabled!</B>"
+	log_admin("[key_name(usr)] toggled Event chat.")
+	message_admins("[key_name_admin(usr)] toggled Event chat.", 1)
+	feedback_add_details("admin_verb","TVSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggledevsay()
 	set category = "Server"

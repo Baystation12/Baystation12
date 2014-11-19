@@ -31,6 +31,8 @@
 		src << "Only administrators may use this command."
 		return
 	var/area/location = usr.loc.loc
+	if(istype(location,/area/space))
+		return
 	if(location.name != "Space")
 		for(var/turf/space/S in location)
 			S.ChangeTurf(/turf/simulated/floor/plating)

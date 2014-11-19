@@ -38,3 +38,35 @@
 				ticker.mode:station_was_nuked = 1
 				ticker.mode:explosion_in_progress = 0
 		return
+
+/client/proc/artillery()
+	set category = "Special Verbs"
+	set name = "Fire Bluespace Artillery"
+
+	if(!holder)
+		src << "Only administrators may use this command."
+		return
+
+	if(alert("You are firing on the phoenix.. Continue?",,"Yes","No")=="No")
+		return
+
+	if(!ticker)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+	if(!ticker.mode)
+		alert("huh...what are you doing...the game hasn't even started yet...")
+		return
+
+
+	else
+		var/A
+		A = input("Area to jump bombard", "Open Fire", A) in teleportlocs
+		var/area/thearea = teleportlocs[A]
+		command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
+		message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
+		sleep(30)
+		var/list/L = list()
+		for(var/turf/T in get_area_turfs(thearea.type))
+			L+=T
+		var/loc = pick(L)
+		explosion(loc,2,5,11)

@@ -11,7 +11,7 @@
 	var/id = null
 
 	use_power = 0	//uses powernet power, not APC power
-	active_power_usage = 20000	//30 kW laser. I guess that means 30 kJ per shot.
+	active_power_usage = 10000	//30 kW laser. I guess that means 30 kJ per shot.
 
 	var/active = 0
 	var/powered = 0

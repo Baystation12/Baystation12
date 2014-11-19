@@ -21,7 +21,7 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
-	var/const/mob_size = 15
+	var/const/mob_size = 3
 
 /obj/structure/closet/New()
 	..()

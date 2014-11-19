@@ -76,6 +76,7 @@ datum/controller/game_controller/proc/setup()
 	setupfactions()
 	setup_economy()
 	SetupXenoarch()
+	setup_cameras()
 
 	transfer_controller = new
 
@@ -407,4 +408,17 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
+
+
+datum/controller/game_controller/proc/setup_cameras()
+	world << "\red \b Initializing Cameras."
+	for(var/area/A in world)
+		var/index = 0
+		for(var/obj/machinery/camera/C in A)
+			index++
+			C.c_tag = "[get_area(C)]_[index]"
+			C.network_check(A)
+			C.window_auto_turn()
+			C.auto_turn()
+	world << "\red \b Cameras Initialized."
 

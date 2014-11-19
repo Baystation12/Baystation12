@@ -658,7 +658,8 @@
 				var/mob/living/carbon/human/H = CM
 				if(H.species.can_shred(H))
 					can_break_cuffs = 1
-
+				if(H.species.dhts == 1)
+					can_break_cuffs = 1
 			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
@@ -670,7 +671,11 @@
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the handcuffs!</B>", CM), 1)
 						CM << "\red You successfully break your handcuffs."
-						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
+						var/mob/living/carbon/human/J = CM
+						if(J.species.dhts == 1)
+							CM.say(pick("RAAAAAAAARGH!", "HNNNNNNNNNGGGGGGH!", "GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", "AAAAAAARRRGH!" ))
+						else
+							CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.handcuffed)
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()

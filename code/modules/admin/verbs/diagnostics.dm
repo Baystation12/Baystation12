@@ -117,6 +117,16 @@
 	message_admins("[usr] manually reloaded Mentors")
 	world.load_mods()
 
+/client/proc/reload_vips()
+	set name = "Reload VIPS"
+	set category = "Debug"
+
+	if(!check_rights(R_SERVER))	return
+
+	message_admins("[usr] manually reloaded vips")
+	load_vips()
+	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 
 //todo:
 /client/proc/jump_to_dead_group()

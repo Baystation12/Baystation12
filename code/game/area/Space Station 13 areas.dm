@@ -822,16 +822,20 @@ var/list/ghostteleportlocs = list()
 	icon_state = "hallP"
 
 /area/hallway/primary/central_one
-	name = "\improper Central Primary Hallway"
+	name = "\improper Central Primary Hallway North"
 	icon_state = "hallC1"
 
 /area/hallway/primary/central_two
-	name = "\improper Central Primary Hallway"
+	name = "\improper Central Primary Hallway West"
 	icon_state = "hallC2"
 
 /area/hallway/primary/central_three
-	name = "\improper Central Primary Hallway"
+	name = "\improper Central Primary Hallway East"
 	icon_state = "hallC3"
+
+/area/hallway/primary/central_four
+	name = "\improper Central Primary Hallway South"
+	icon_state = "hallC4"
 
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
@@ -869,7 +873,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/heads/chief
+/area/engine/heads/chief
 	name = "\improper Chief Engineer's Office"
 	icon_state = "head_quarters"
 
@@ -877,15 +881,15 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Head of Security's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/heads/cmo
+/area/medical/heads/cmo
 	name = "\improper Chief Medical Officer's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/heads/rd
+/area/rnd/heads/rd
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/courtroom
+/area/rnd/breakroom
 	name = "\improper Courtroom"
 	icon_state = "courtroom"
 
@@ -897,7 +901,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Communications Relay"
 	icon_state = "tcomsatcham"
 
-/area/server
+/area/rnd/server
 	name = "\improper Messaging Server Room"
 	icon_state = "server"
 
@@ -915,11 +919,11 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
 
-/area/crew_quarters/sleep/engi
+/area/engine/sleep/engi
 	name = "\improper Engineering Dormitories"
 	icon_state = "Sleep"
 
-/area/crew_quarters/sleep/engi_wash
+/area/engine/sleep/engi_wash
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
@@ -1080,7 +1084,7 @@ var/list/ghostteleportlocs = list()
 //		requires_power = 0//This area only covers the batteries and they deal with their own power
 
 	engine_room
-		name = "\improper Engine Room"
+		name = "\improper Singualrity Engine"
 		icon_state = "engine"
 
 	engine_airlock
@@ -1088,7 +1092,7 @@ var/list/ghostteleportlocs = list()
 		icon_state = "engine"
 
 	engine_monitoring
-		name = "\improper Engine Monitoring Room"
+		name = "\improper Singualrity Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engine_waste
@@ -1192,15 +1196,15 @@ var/list/ghostteleportlocs = list()
 	name = "Fore Solar Maintenance"
 	icon_state = "SolarcontrolA"
 
-/area/assembly/chargebay
+/area/rnd/chargebay
 	name = "\improper Mech Bay"
 	icon_state = "mechbay"
 
-/area/assembly/showroom
+/area/rnd/showroom
 	name = "\improper Robotics Showroom"
 	icon_state = "showroom"
 
-/area/assembly/robotics
+/area/rnd/robotics
 	name = "\improper Robotics Lab"
 	icon_state = "ass_line"
 
@@ -1238,13 +1242,18 @@ var/list/ghostteleportlocs = list()
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
-	name = "\improper Medbay"
+	name = "\improper Medbay CMO Hallway"
 	icon_state = "medbay2"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay3
-	name = "\improper Medbay"
+	name = "\improper Medbay South Hallway"
 	icon_state = "medbay3"
+	music = 'sound/ambience/signal.ogg'
+
+/area/medical/guard
+	name = "\improper Medbay Guard Post"
+	icon_state = "security"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/biostorage
@@ -1262,7 +1271,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
-/area/crew_quarters/medbreak
+/area/medical/medbreak
 	name = "\improper Break Room"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
@@ -1504,6 +1513,10 @@ var/list/ghostteleportlocs = list()
 /area/rnd/lab
 	name = "\improper Research Lab"
 	icon_state = "toxlab"
+
+/area/rnd/guard
+	name = "\improper Research Guard Post"
+	icon_state = "security"
 
 /area/rnd/rdoffice
 	name = "\improper Research Director's Office"

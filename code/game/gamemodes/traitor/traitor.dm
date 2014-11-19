@@ -49,6 +49,9 @@
 		for(var/job in restricted_jobs)
 			if(player.assigned_role == job)
 				possible_traitors -= player
+			for(var/obj/item/weapon/implant/loyalty/L in player)
+				if(L && (L.imp_in == player))//Checks to see if the person contains an implant, then checks that the implant is actually inside of them
+					possible_traitors -= player
 
 	for(var/j = 0, j < num_traitors, j++)
 		if (!possible_traitors.len)

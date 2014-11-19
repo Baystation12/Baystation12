@@ -118,3 +118,42 @@
 				num_devs_online++
 	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg + "\n<b> Current Moderators & Mentors([num_mods_online]):</b>\n" + modmsg + "\n<b> Current Developers([num_devs_online]):</b>\n" + devmsg
 	src << msg
+
+
+/client/verb/VIPwho()
+	set category = "OOC"
+	set name = "Event Who"
+
+	var/msg = ""
+	var/num_VIP_online = 0
+	if(holder)
+		for(var/client/C in vips)
+			if(C.vipholder)
+				msg += "\t[C] is a [C.vipholder.rank]"
+				if(isobserver(C.mob))
+					msg += " - Observing"
+				else if(istype(C.mob,/mob/new_player))
+					msg += " - Lobby"
+				else
+					msg += " - Playing"
+
+				if(C.is_afk())
+					msg += " (AFK)"
+				msg += "\n"
+
+				num_VIP_online++
+	else
+		for(var/client/C in vips)
+			if(C.vipholder)
+				msg += "\t[C] is a [C.vipholder.rank]\n"
+			else
+				msg += "\t[C] is a [C.vipholder.rank]\n"
+
+			num_VIP_online++
+
+	msg = "<b>Current Event Personnel ([num_VIP_online]):</b>\n" + msg
+	if(num_VIP_online == 0)
+		msg += "No Event Personnel Online"
+	else
+		msg += ""
+	src << msg

@@ -9,6 +9,7 @@
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
 	var/log_devsay = 0
+	var/log_vsay = 0					// log Vsay
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
@@ -129,6 +130,7 @@
 	var/animal_delay = 0
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
+	var/vip_legacy_system = 1	//Defines whether the server uses the legacy vip system with vip.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 
@@ -201,6 +203,9 @@
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
 
+				if ("vip_legacy_system")
+					config.vip_legacy_system = 1
+
 				if ("ban_legacy_system")
 					config.ban_legacy_system = 1
 
@@ -251,6 +256,9 @@
 
 				if ("log_devsay")
 					config.log_devsay = 1
+
+				if ("log_vsay")
+					config.log_vsay = 1
 
 				if ("log_adminwarn")
 					config.log_adminwarn = 1
