@@ -50,7 +50,7 @@
 		//icon_state = "engine_port"
 
 	generators
-		name = "\improper Generator Room"
+		name = "\improper Supermatter Engine"
 		//icon_state = "engine_generators"
 
 	port_gyro_bay
@@ -68,3 +68,7 @@
 	storage_hard
 		name = "\improper Engineering Hard Storage"
 		icon_state = "engine_storage"
+
+	guard
+		name = "\improper Engineering Guard Post"
+		icon_state = "security"
