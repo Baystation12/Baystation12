@@ -32,6 +32,7 @@
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/input_level_max = 200000
 	var/output_level_max = 200000
+	var/empproof = 0
 
 /obj/machinery/power/smes/New()
 	..()
@@ -368,6 +369,7 @@
 
 
 /obj/machinery/power/smes/emp_act(severity)
+	if(empproof == 1) return
 	online = 0
 	charging = 0
 	output = 0

@@ -142,6 +142,9 @@
 	density = 0
 	circuit = null
 
+/obj/machinery/computer/security/telescreen/emp_act(severity)
+	icon_state = "cameras"
+
 /obj/machinery/computer/security/telescreen/update_icon()
 	icon_state = initial(icon_state)
 	if(stat & BROKEN)

@@ -279,6 +279,14 @@
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
 			del(src)
+		if(istype(D, /obj/item/weapon/wirecutters))
+			if(!src.reagents.total_volume && src.reagents)
+				user << "You cut eye holes in the [src]."
+				user.put_in_hands(new /obj/item/weapon/reagent_containers/glass/bucket/hat)
+				user.drop_from_inventory(src)
+				del(src)
+			else
+				user << "You must empty the [src] first."
 
 	update_icon()
 		overlays.Cut()
@@ -286,6 +294,18 @@
 		if (!is_open_container())
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
+
+/obj/item/weapon/reagent_containers/glass/bucket/hat
+	desc = "It's a bucket with eyeholes cut into."
+	name = "bucket hat"
+	icon_state = "bucket-hat"
+	item_state = "bucket-hat"
+	slot_flags = SLOT_HEAD
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	flags = BLOCKHAIR | HEADCOVERSMOUTH
+	body_parts_covered = HEAD|FACE|EYES
+	volume = 60
+
 
 // vials are defined twice, what?
 /*

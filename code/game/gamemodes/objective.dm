@@ -508,6 +508,7 @@ datum/objective/steal
 		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
 		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"the captain's bar of soap" = /obj/item/weapon/soap/cap,
 	)
 
 	var/global/possible_items_special[] = list(
@@ -805,7 +806,7 @@ datum/objective/heist/loot
 
 	choose_target()
 		var/loot = "an object"
-		switch(rand(1,8))
+		switch(rand(1,9))
 			if(1)
 				target = /obj/structure/particle_accelerator
 				target_amount = 6
@@ -838,6 +839,10 @@ datum/objective/heist/loot
 				target = /obj/item/weapon/gun/energy/ionrifle
 				target_amount = 1
 				loot = "an ion gun"
+			if(9)
+				target = /obj/item/weapon/soap/cap
+				target_amount = 1
+				loot = "the captain's bar of soap"
 
 		explanation_text = "We are lacking in hardware. Steal [loot]."
 

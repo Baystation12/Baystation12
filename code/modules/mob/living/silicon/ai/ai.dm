@@ -137,6 +137,12 @@ var/list/ai_verbs_default = list(
 	add_language("Skrellian", 0)
 	add_language("Tradeband", 1)
 	add_language("Gutter", 0)
+	add_language("Aviachirp", 0)
+	add_language("Chittin", 0)
+	add_language("Vox-pidgin", 0)
+	add_language("Rootspeak", 0)
+	add_language("Encoded Audio Language", 0)
+	add_language("Xenomorph", 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.

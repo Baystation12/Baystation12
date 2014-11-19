@@ -31,6 +31,21 @@
 		if(istype(O, /obj/item/weapon/aiModule))
 			var/obj/item/weapon/aiModule/M = O
 			M.install(src)
+			if(current)
+				var/log
+				if(istype(M,/obj/item/weapon/aiModule/freeform))
+					var/obj/item/weapon/aiModule/freeform/F = M
+					log = "\blue [M.name] installed into [current] by [user.key] law was [F.newFreeFormLaw]."
+				else if(istype(M,/obj/item/weapon/aiModule/freeformcore))
+					var/obj/item/weapon/aiModule/freeformcore/F = M
+					log = "\blue [M.name] installed into [current] by [user.key] law was [F.newFreeFormLaw]."
+				else if(istype(M,/obj/item/weapon/aiModule/syndicate))
+					var/obj/item/weapon/aiModule/syndicate/F = M
+					log = "\blue [M.name] installed into [current] by [user.key] law was [F.newFreeFormLaw]."
+				else
+					log ="\blue [M.name] installed into [current] by [user.key]."
+				log_game(log)
+				message_admins(log)
 		else
 			..()
 

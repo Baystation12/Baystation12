@@ -662,10 +662,12 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
 			<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
+			<A href='?src=\ref[src];secretsfun=dbzmode'>DBZ Mode (Everyones a Wizard)</A><BR>
 			"}
 
 	if(check_rights(R_SERVER,0))
 		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
+		dat += "<A href='?src=\ref[src];secretsfun=togglebomboff'>Toggle bombs off</A><BR>"
 
 	dat += "<BR>"
 

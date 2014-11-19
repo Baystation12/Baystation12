@@ -63,6 +63,12 @@
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
+	R.add_language("Aviachirp", 0)
+	R.add_language("Chittin", 0)
+	R.add_language("Vox-pidgin", 0)
+	R.add_language("Rootspeak", 0)
+	R.add_language("Encoded Audio Language", 0)
+	R.add_language("Xenomorph", 0)
 
 
 /obj/item/weapon/robot_module/standard
@@ -268,7 +274,7 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 		src.modules += new /obj/item/weapon/storage/bag/trash(src)
-		src.modules += new /obj/item/weapon/mop(src)
+		src.modules += new /obj/item/weapon/mop/borg(src)
 		src.modules += new /obj/item/device/lightreplacer(src)
 		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 
@@ -323,6 +329,12 @@
 		R.add_language("Rootspeak", 1)
 		R.add_language("Tradeband", 1)
 		R.add_language("Gutter", 1)
+		R.add_language("Aviachirp", 1)
+		R.add_language("Chittin", 1)
+		R.add_language("Vox-pidgin", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Encoded Audio Language", 1)
+		R.add_language("Xenomorph", 0)
 
 /obj/item/weapon/robot_module/clerical
 	name = "clerical robot module"
@@ -345,6 +357,13 @@
 		R.add_language("Rootspeak", 1)
 		R.add_language("Tradeband", 1)
 		R.add_language("Gutter", 1)
+		R.add_language("Aviachirp", 1)
+		R.add_language("Chittin", 1)
+		R.add_language("Vox-pidgin", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Encoded Audio Language", 1)
+		R.add_language("Xenomorph", 0)
+
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules

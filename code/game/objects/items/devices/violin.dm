@@ -12,6 +12,7 @@
 	var/help = 0
 	var/edit = 1
 	var/repeat = 0
+	var/broken = 0
 
 /obj/item/device/violin/proc/playnote(var/note as text)
 	//world << "Note: [note]"
@@ -210,6 +211,9 @@
 					if(!playing || !isliving(loc))//If the violin is playing, or isn't held by a person
 						playing = 0
 						return
+					if(broken == 1)
+						playing = 0
+						return
 					if(lentext(note) == 0)
 						continue
 					//world << "Parse: [copytext(note,1,2)]"
@@ -242,7 +246,9 @@
 	var/dat = "<HEAD><TITLE>Violin</TITLE></HEAD><BODY>"
 
 	if(song)
-		if(song.lines.len > 0 && !(playing))
+		if(broken == 1 && !(playing))
+			dat += "The violin is broken.. wire might fix it..<BR><BR>"
+		if(song.lines.len > 0 && !(playing) && !(broken))
 			dat += "<A href='?src=\ref[src];play=1'>Play Song</A><BR><BR>"
 			dat += "<A href='?src=\ref[src];repeat=1'>Repeat Song: [repeat] times.</A><BR><BR>"
 		if(playing)
@@ -391,3 +397,21 @@
 		if((M.client && M.machine == src))
 			attack_self(M)
 	return
+
+/obj/item/device/violin/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/weapon/wirecutters))
+		if(broken == 1)
+			user << "The [src] is broken already."
+		else
+			broken = 1
+			user << "You cut the strings of the [src]."
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+	if(istype(I, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = I
+		if(broken == 0)
+			user << "The [src] is in no need of repair."
+		else
+			if(C.use(5))
+				broken = 0
+				user << "You repair the strings of the [src]."
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

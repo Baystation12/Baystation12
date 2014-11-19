@@ -1,11 +1,9 @@
 /*
 Contains most of the procs that are called when a mob is attacked by something
-
 bullet_act
 ex_act
 meteor_act
 emp_act
-
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -214,13 +212,14 @@ emp_act
 				update_body()
 				updatehealth()
 				UpdateDamageIcon()
-				drop_from_inventory(I, loc)
+				user.drop_from_inventory(I, loc)
 				del(I)
-				UpdateAppearance()
+				user.UpdateAppearance()
+				handle_organs(1)
 				return 0
 			else
-				src << "That won't fit there!"
-		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
+				user << "That won't fit there!"
+		/*else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
 			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
 			"\blue You have attached [src]'s head to the body.")
@@ -238,7 +237,8 @@ emp_act
 			drop_from_inventory(I, loc)
 			del(B)
 			UpdateAppearance()
-			return
+			handle_organs(1)
+			return*/ // Removed this for a bit untill I fix it up.
 		else
 			user << "What [affecting.display_name]?"
 			return 0

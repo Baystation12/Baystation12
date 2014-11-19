@@ -90,7 +90,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/admincryo,
 	/client/proc/hidedevsay,
     /datum/admins/proc/toggledevsay,
-    /client/proc/cmd_dev_say    /* Allows a ghost to respawn */
+    /client/proc/cmd_dev_say,
+    /client/proc/forceshuttles    /* Allows a ghost to respawn */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -279,7 +280,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/hidedevsay,
 	/client/proc/cmd_dev_say,
 	/client/proc/toggleattacklogs,
-	/client/proc/jumptocoord
+	/client/proc/jumptocoord,
+	/client/proc/forceshuttles
 )
 
 var/list/admin_verbs_mentor = list(
