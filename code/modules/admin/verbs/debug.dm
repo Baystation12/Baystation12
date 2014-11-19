@@ -1062,11 +1062,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Debug Mob Lists"
 	set desc = "For when you just gotta know"
 
-	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
+	switch(input("Which list?") in list("Players","Admins","Vips","Mobs","Living Mobs","Dead Mobs", "Clients"))
 		if("Players")
 			usr << list2text(player_list,",")
 		if("Admins")
 			usr << list2text(admins,",")
+		if("Vips")
+			usr << list2text(vips,",")
 		if("Mobs")
 			usr << list2text(mob_list,",")
 		if("Living Mobs")

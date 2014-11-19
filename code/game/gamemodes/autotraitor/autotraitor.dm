@@ -26,7 +26,9 @@
 				possible_traitors -= player
 			if(player.assigned_role == "pAI")
 				possible_traitors -= player
-
+		for(var/obj/item/weapon/implant/loyalty/L in player)
+			if(L && (L.imp_in == player))//Checks to see if the person contains an implant, then checks that the implant is actually inside of them
+				possible_traitors -= player
 
 	for(var/mob/new_player/P in world)
 		if(P.client && P.ready)
@@ -94,6 +96,9 @@
 		for(var/datum/mind/player in possible_traitors)
 			for(var/job in restricted_jobs)
 				if(player.assigned_role == job)
+					possible_traitors -= player
+			for(var/obj/item/weapon/implant/loyalty/L in player)
+				if(L && (L.imp_in == player))//Checks to see if the person contains an implant, then checks that the implant is actually inside of them
 					possible_traitors -= player
 
 		//message_admins("Live Players: [playercount]")
