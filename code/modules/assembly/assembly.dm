@@ -16,6 +16,7 @@
 	var/obj/item/device/assembly_holder/holder = null
 	var/cooldown = 0//To prevent spam
 	var/wires = WIRE_RECEIVE | WIRE_PULSE
+	var/airlock_wire = null
 
 	var/const/WIRE_RECEIVE = 1			//Allows Pulsed(0) to call Activate()
 	var/const/WIRE_PULSE = 2				//Allows Pulse(0) to act on the holder
@@ -65,12 +66,16 @@
 
 
 	pulse(var/radio = 0)
-		if(holder && (wires & WIRE_PULSE))
-			holder.process_activation(src, 1, 0)
-		if(holder && (wires & WIRE_PULSE_SPECIAL))
-			holder.process_activation(src, 0, 1)
-//		if(radio && (wires & WIRE_RADIO_PULSE))
-			//Not sure what goes here quite yet send signal?
+		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
+			var/obj/machinery/door/airlock/A = src.loc
+			A.pulse(src.airlock_wire)
+		else
+			if(holder && (wires & WIRE_PULSE))
+				holder.process_activation(src, 1, 0)
+			if(holder && (wires & WIRE_PULSE_SPECIAL))
+				holder.process_activation(src, 0, 1)
+	//		if(radio && (wires & WIRE_RADIO_PULSE))
+				//Not sure what goes here quite yet send signal?
 		return 1
 
 
