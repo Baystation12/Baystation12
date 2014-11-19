@@ -191,7 +191,7 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
-/obj/machinery/Topic(href, href_list)
+/obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	if(..())
 		return 1
 	if(inoperable())
@@ -212,7 +212,7 @@ Class Procs:
 		else if(istype(H.r_hand, /obj/item/tk_grab))
 			norange = 1
 
-	if(!norange)
+	if(checkrange && !norange)
 		if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
 			return 1
 
