@@ -95,3 +95,7 @@
 /proc/log_devsay(text)
 	if (config.log_devsay)
 		diary << "\[[time_stamp()]]DEVSAY: [text][log_end]"
+
+/proc/log_vsay(text)
+	if (config.log_vsay)
+		diary << "\[[time_stamp()]]EventSAY: [text][log_end]"

@@ -326,6 +326,10 @@ proc/tg_list2text(list/list, glue=",")
 	if(rights & R_DEV)			. += "[seperator]+DEV"
 	return .
 
+/proc/vip_rights2text(rights,seperator="")
+	if(rights & V_EVENT)		. += "[seperator]+EVENT"
+	return .
+
 /proc/ui_style2icon(ui_style)
 	switch(ui_style)
 		if("old")		return 'icons/mob/screen1_old.dmi'

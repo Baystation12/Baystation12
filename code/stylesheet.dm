@@ -22,6 +22,8 @@ em						{font-style: normal;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
 .DEV					{color: #FF7F00;	font-weight: bold;}
 .DEVADMINMOD			{color: #FF6100;	font-weight: bold;}
+.VIP					{color: #ab4679;	font-weight: bold;}
+.VIPADMINMOD			{color: #B22424;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 

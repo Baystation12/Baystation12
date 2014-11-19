@@ -13,10 +13,12 @@ var/list/admin_verbs_default = list(
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_change_announcement,
+	/client/proc/cmd_vip_say,
+	/client/proc/vip_memo,				/*vip memo system. show/delete/write. +SERVER needed to delete vip memos of others*/
 	/client/proc/cleartox,
 	/client/proc/clean,
 	/client/proc/fillspace,
-	/client/proc/toggleshutterlogs,
+//	/client/proc/toggleshutterlogs,
 	/client/proc/alertlevel,
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
@@ -64,6 +66,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/togglelooc,
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
 	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
+	/datum/admins/proc/togglevsay,    /*toggles vsay on/off for VIPs*/
 	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/datum/admins/proc/PlayerNotes,
@@ -91,7 +94,9 @@ var/list/admin_verbs_admin = list(
 	/client/proc/hidedevsay,
     /datum/admins/proc/toggledevsay,
     /client/proc/cmd_dev_say,
-    /client/proc/forceshuttles    /* Allows a ghost to respawn */
+    /client/proc/forceshuttles,
+    /client/proc/edit_vip_permissions
+    ///client/proc/hidevsay
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -117,7 +122,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
-	/client/proc/editappear
+	/client/proc/editappear,
+	/client/proc/trigger_random_event
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
@@ -162,6 +168,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/air_report,
 	/client/proc/reload_admins,
 	/client/proc/reload_mentors,
+	/client/proc/reload_vips,
 	/client/proc/restart_controller,
 	/client/proc/remake_distribution_map,
 	/client/proc/show_distribution_map,
@@ -177,7 +184,8 @@ var/list/admin_verbs_possess = list(
 	/proc/release
 	)
 var/list/admin_verbs_permissions = list(
-	/client/proc/edit_admin_permissions
+	/client/proc/edit_admin_permissions,
+	/client/proc/artillery
 	)
 var/list/admin_verbs_rejuv = list(
 	/client/proc/respawn_character,
@@ -281,7 +289,10 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_dev_say,
 	/client/proc/toggleattacklogs,
 	/client/proc/jumptocoord,
-	/client/proc/forceshuttles
+	/client/proc/forceshuttles,
+	/client/proc/cmd_vip_say,
+	/client/proc/vip_memo
+	///client/proc/hidevsay
 )
 
 var/list/admin_verbs_mentor = list(
@@ -298,7 +309,10 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/freeze,
 	/client/proc/freezemecha,
 	/client/proc/hidedevsay,
-	/client/proc/cmd_dev_say
+	/client/proc/cmd_dev_say,
+	/client/proc/cmd_vip_say,
+	/client/proc/vip_memo
+	///client/proc/hidevsay
 )
 
 var/list/admin_verbs_dev = list(
@@ -855,7 +869,7 @@ var/list/admin_verbs_dev = list(
 	else
 		usr << "You now won't get attack log messages"
 
-/client/proc/toggleshutterlogs()
+/*client/proc/toggleshutterlogs()
 	set name = "Toggle Emergency Shutter Messages"
 	set category = "Preferences"
 
@@ -864,7 +878,7 @@ var/list/admin_verbs_dev = list(
 	if (prefs.toggles & SHOW_SHUTTERLOGS)
 		usr << "You now will get emergency shutter log messages"
 	else
-		usr << "You now won't get emergency shutter log messages"
+		usr << "You now won't get emergency shutter log messages"*/
 
 /client/proc/toggleghostwriters()
 	set name = "Toggle ghost writers"
@@ -941,3 +955,13 @@ var/list/admin_verbs_dev = list(
 	else
 		usr << "You now won't see DEV Chat"
 
+/*client/proc/hidevsay()
+	set name = "Hide/Show Event Chat"
+	set category = "Event"
+
+	prefs.toggles ^= CHAT_VSAY
+	prefs.save_preferences()
+	if (prefs.toggles & CHAT_VSAY)
+		usr << "You now will see Event Chat"
+	else
+		usr << "You now won't see Event Chat"*/

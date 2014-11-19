@@ -63,6 +63,7 @@
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder
+		if("vipholder") hsrc = vipholder
 		if("usr")		hsrc = mob
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
@@ -132,6 +133,12 @@
 		admins += src
 		holder.owner = src
 
+	//VIP Authorisation
+	vipholder = vip_datums[ckey]
+	if(vipholder)
+		vips += src
+		vipholder.owner = src
+
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]
 	if(!prefs)
@@ -159,6 +166,10 @@
 			if(check_rights(R_DEBUG))
 				hide_debug_verbs()
 
+	if(vipholder)
+		add_vip_verbs()
+		vip_memo_show()
+
 	log_client_to_db()
 
 	send_resources()
@@ -175,6 +186,9 @@
 	if(holder)
 		holder.owner = null
 		admins -= src
+	if(vipholder)
+		vipholder.owner = null
+		vips -= src
 	directory -= ckey
 	clients -= src
 	return ..()
@@ -226,10 +240,14 @@
 	if(src.holder)
 		admin_rank = src.holder.rank
 
+	//var/vip_rank = "Player"
+	//if(src.vipholder)
+	//	vip_rank = src.vipholder.rank
+
 	var/sql_ip = sql_sanitize_text(src.address)
 	var/sql_computerid = sql_sanitize_text(src.computer_id)
 	var/sql_admin_rank = sql_sanitize_text(admin_rank)
-
+	//var/sql_vip_rank = sql_sanitize_text(vip_rank)
 
 	if(sql_id)
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables

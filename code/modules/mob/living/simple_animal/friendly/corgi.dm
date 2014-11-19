@@ -496,6 +496,8 @@ TO-DO:
 		if (Leader)
 			if (holding_still)
 				return
+			if(will_follow == 0)
+				walk(src, 0)
 			else if(canmove && will_follow && isturf(loc))
 				walk_to(src, Leader, 1, move_to_delay)
 
@@ -538,11 +540,13 @@ TO-DO:
 					if (Leader == who)
 						to_say = "Oh... okay... I guess."
 						will_follow = 0
+
 					else
 						if (Friends[who] > Friends[Leader])
 							Leader = null
 							to_say = "I'll stop."
 							will_follow = 0
+							walk(src, 0)
 						else
 							to_say = "No, I want to keep following."
 			else if (findtext(phrase, "stay"))
