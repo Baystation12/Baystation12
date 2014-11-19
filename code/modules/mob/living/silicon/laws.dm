@@ -27,17 +27,21 @@
 	laws.clear_supplied_laws()
 
 /mob/living/silicon/proc/statelaws() // -- TLE
-	if(stating_laws)
-		src << "<span class='notice'>You are currently stating laws.</span>"
-		return
-	stating_laws = 1
-
 	var/prefix = ""
 	switch(lawchannel)
-		if(MAIN_CHANNEL) prefix = ";"	// Apparently defines are not constant expressions?
+		if(MAIN_CHANNEL) prefix = ";"
 		if("Binary") prefix = ":b "
 		else
 			prefix = get_radio_key_from_channel(lawchannel == "Holopad" ? "department" : lawchannel) + " "
+
+	dostatelaws(lawchannel, prefix)
+
+/mob/living/silicon/proc/dostatelaws(var/method, var/prefix)
+	if(stating_laws[prefix])
+		src << "<span class='notice'>[method]: Already stating laws using this communication method.</span>"
+		return
+
+	stating_laws[prefix] = 1
 
 	var/can_state = statelaw("[prefix]Current Active Laws:")
 
@@ -71,9 +75,8 @@
 				number++
 
 	if(!can_state)
-		src << "<span class='danger'>Unable to state laws. Communication method unavailable.</span>"
-
-	stating_laws = 0
+		src << "<span class='danger'>[method]: Unable to state laws. Communication method unavailable.</span>"
+	stating_laws[prefix] = 0
 
 /mob/living/silicon/proc/statelaw(var/law)
 	if(src.say(law))
@@ -93,10 +96,7 @@
 
 	for (var/index = 1, index <= src.laws.ion.len, index++)
 		var/law = src.laws.ion[index]
-
 		if (length(law) > 0)
-
-
 			if (!src.ioncheck[index])
 				src.ioncheck[index] = "Yes"
 			list += {"<A href='byond://?src=\ref[src];lawi=[index]'>[src.ioncheck[index]] [ionnum()]:</A> [law]<BR>"}
@@ -105,10 +105,8 @@
 	var/number = 1
 	for (var/index = 1, index <= src.laws.inherent.len, index++)
 		var/law = src.laws.inherent[index]
-
 		if (length(law) > 0)
 			src.lawcheck.len += 1
-
 			if (!src.lawcheck[number+1])
 				src.lawcheck[number+1] = "Yes"
 			list += {"<A href='byond://?src=\ref[src];lawc=[number]'>[src.lawcheck[number+1]] [number]:</A> [law]<BR>"}

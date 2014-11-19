@@ -330,14 +330,18 @@
 	for(i=0,i<4,i++)
 		sleep(50)
 		if(src.OCCUPANT)
-			if(src.issuperUV)
-				var/burndamage = rand(28,35)
-				OCCUPANT.take_organ_damage(0,burndamage)
-				OCCUPANT.emote("scream")
-			else
-				var/burndamage = rand(6,10)
-				OCCUPANT.take_organ_damage(0,burndamage)
-				OCCUPANT.emote("scream")
+			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
+			if (!rad_organ)
+				if(src.issuperUV)
+					var/burndamage = rand(28,35)
+					OCCUPANT.take_organ_damage(0,burndamage)
+					if (!(OCCUPANT.species && (OCCUPANT.species.flags & NO_PAIN)))
+						OCCUPANT.emote("scream")
+				else
+					var/burndamage = rand(6,10)
+					OCCUPANT.take_organ_damage(0,burndamage)
+					if (!(OCCUPANT.species && (OCCUPANT.species.flags & NO_PAIN)))
+						OCCUPANT.emote("scream")
 		if(i==3) //End of the cycle
 			if(!src.issuperUV)
 				if(src.HELMET)
