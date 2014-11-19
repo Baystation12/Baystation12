@@ -6,6 +6,25 @@
  * /obj/item/rig_module/electrowarfare_suite
  */
 
+/obj/item/ai_verbs
+	name = "AI verb holder"
+
+/obj/item/ai_verbs/verb/hardsuit_interface()
+	set category = "Hardsuit"
+	set name = "Open Hardsuit Interface"
+	set src in usr
+
+	if(!usr.loc || !usr.loc.loc || !istype(usr.loc.loc, /obj/item/rig_module))
+		usr << "You are not loaded into a hardsuit."
+		return
+
+	var/obj/item/rig_module/module = usr.loc.loc
+	if(!module.holder)
+		usr << "Your module is not installed in a hardsuit."
+		return
+
+	module.holder.ui_interact(usr)
+
 /obj/item/rig_module/ai_container
 
 	name = "IIS module"
@@ -24,11 +43,15 @@
 
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
-	var/list/ai_interface_verbs = list(
-		//mob/living/proc/hardsuit_interface_ai,
-		//mob/living/proc/hardsuit_host_bioscan,
-		//mob/living/proc/hardsuit_hack
-		)
+	var/obj/item/ai_verbs/verb_holder
+
+/obj/item/rig_module/ai_container/proc/update_verb_holder()
+	if(!verb_holder)
+		verb_holder = new(src)
+	if(integrated_ai)
+		verb_holder.loc = integrated_ai
+	else
+		verb_holder.loc = src
 
 /obj/item/rig_module/ai_container/accepts_item(var/obj/item/input_device, var/mob/living/user)
 
@@ -59,9 +82,9 @@
 		if(locate(/mob/living/silicon/ai) in card)
 			ai_card = card
 			integrated_ai = locate(/mob/living/silicon/ai) in card
-			integrated_ai.verbs |= ai_interface_verbs
 		else
 			eject_ai()
+		update_verb_holder()
 		return 1
 
 	if(istype(input_device,/obj/item/device/aicard))
@@ -99,6 +122,7 @@
 				ai_card.attack_self(H)
 			else
 				eject_ai(H)
+		update_verb_holder()
 		return 1
 
 	if(accepts_item(target,H))
@@ -124,10 +148,8 @@
 		else
 			ai_card.loc = get_turf(src)
 	ai_card = null
-
-	if(integrated_ai)
-		integrated_ai.verbs -= ai_interface_verbs
 	integrated_ai = null
+	update_verb_holder()
 
 /obj/item/rig_module/ai_container/proc/integrate_ai(var/obj/item/ai,var/mob/user)
 
@@ -165,12 +187,11 @@
 			if(!(locate(integrated_ai) in ai_card))
 				integrated_ai = null
 				eject_ai()
-			else
-				integrated_ai.verbs |= ai_interface_verbs
 		else
 			user << "<span class='warning'>There is no active AI within \the [ai].</span>"
 	else
 		user << "<span class='warning'>There is no active AI within \the [ai].</span>"
+	update_verb_holder()
 	return
 
 /obj/item/rig_module/datajack

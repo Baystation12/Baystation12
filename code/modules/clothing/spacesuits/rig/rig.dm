@@ -470,16 +470,13 @@
 
 /obj/item/weapon/rig/Topic(href,href_list)
 
-	if(..())
-		return 1
-
 	var/mob/living/carbon/human/H = usr
 
 	if((istype(H) && H.back == src) || (istype(H,/mob/living/silicon)))
 
-
 		if(istype(H,/mob/living/silicon))
 			if(!control_overridden)
+				usr << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
 				return
 		else if(security_check_enabled && !src.allowed(usr))
 			usr << "<span class='danger'>Access denied.</span>"
@@ -546,7 +543,7 @@
 		H << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	var/check_slot
+	var/obj/item/check_slot
 	var/equip_to
 	var/obj/item/use_obj
 
@@ -589,7 +586,7 @@
 		else if (deploy_mode != ONLY_RETRACT)
 			if(check_slot)
 				if(check_slot != use_obj)
-					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] is in the way.</span>"
+					H << "<span class='danger'>You are unable to deploy \the [piece] as \the [check_slot] [check_slot.gender == PLURAL ? "are" : "is"] in the way.</span>"
 					return
 			else
 				H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</b></span>"

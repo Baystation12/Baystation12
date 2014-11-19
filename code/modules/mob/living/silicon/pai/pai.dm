@@ -222,21 +222,6 @@
 	src.reset_view(C)
 	return 1
 
-/mob/living/silicon/pai/verb/hardsuit_interface()
-	set category = "pAI Commands"
-	set name = "Open Hardsuit Interface"
-
-	if(!src.loc || !src.loc.loc || !istype(src.loc.loc, /obj/item/rig_module))
-		usr << "You are not loaded into a hardsuit."
-		return
-
-	var/obj/item/rig_module/module = src.loc.loc
-	if(!module.holder)
-		usr << "Your module is not installed in a hardsuit."
-		return
-
-	module.holder.ui_interact(usr)
-
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
 	set name = "Cancel Camera View"
