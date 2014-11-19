@@ -992,3 +992,13 @@
 					/obj/item/clothing/head/beret =1 ,/obj/item/clothing/suit/suspenders = 1,) //Pretty much everything that had a chance to spawn.
 	contraband = list(/obj/item/clothing/suit/cardborg = 1,/obj/item/clothing/head/cardborg = 1,/obj/item/clothing/suit/judgerobe = 1,/obj/item/clothing/head/powdered_wig = 1, /obj/item/clothing/mask/gas/clown_hat/madman =1)
 	premium = list(/obj/item/clothing/suit/hgpirate = 1, /obj/item/clothing/head/hgpiratecap = 1, /obj/item/clothing/head/corgi = 1, /obj/item/clothing/suit/corgisuit = 1, /obj/item/clothing/mask/gas/clown_hat/rainbow = 1)
+
+/obj/machinery/vending/science
+	name = "ScienTech"
+	desc = "Stocked to the brim with do-dads and thingamajigs"
+	icon_state = "science"
+	icon_deny = "science-deny"
+	products = list(/obj/item/device/assembly/igniter = 30, /obj/item/device/assembly/infra = 5, /obj/item/device/assembly/prox_sensor = 20,
+					/obj/item/device/assembly/signaler = 20, /obj/item/device/assembly/timer = 20, /obj/item/device/assembly/voice = 10,
+					/obj/item/device/transfer_valve = 10, /obj/item/weapon/reagent_containers/glass/beaker/large = 5, /obj/item/weapon/reagent_containers/glass/beaker = 20,
+					/obj/item/weapon/reagent_containers/syringe = 10)
