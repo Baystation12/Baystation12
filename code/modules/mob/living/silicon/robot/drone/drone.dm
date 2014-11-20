@@ -34,7 +34,7 @@
 	..()
 
 	verbs += /mob/living/proc/hide
-	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/silicon/robot/drone/ventcrawl
 
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
@@ -293,8 +293,6 @@
 /mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
 	return
 
-/mob/living/silicon/robot/drone/can_use_vents()
-	return
 
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
