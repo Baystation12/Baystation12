@@ -311,7 +311,7 @@ var/global/list/gear_datums = list()
 	cost = 3
 
 /datum/gear/sundress_white
-	display_name = sundress, white"
+	display_name = "sundress, white"
 	path = /obj/item/clothing/under/sundress_white
 	slot = slot_w_uniform
 	cost = 3

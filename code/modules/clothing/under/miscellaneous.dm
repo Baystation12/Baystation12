@@ -398,6 +398,7 @@
 	icon_state = "whitesundress"
 	item_state = "whitesundress"
 	item_color = "whitesundress"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
