@@ -32,22 +32,22 @@
 
 //Appearance
 
-/turf/simulated/wall/examine()
-	. = ..()
+/turf/simulated/wall/examine(mob/user)
+	. = ..(user)
 
 	if(!damage)
-		usr << "<span class='notice'>It looks fully intact.</span>"
+		user << "<span class='notice'>It looks fully intact.</span>"
 	else
 		var/dam = damage / damage_cap
 		if(dam <= 0.3)
-			usr << "<span class='warning'>It looks slightly damaged.</span>"
+			user << "<span class='warning'>It looks slightly damaged.</span>"
 		else if(dam <= 0.6)
-			usr << "<span class='warning'>It looks moderately damaged.</span>"
+			user << "<span class='warning'>It looks moderately damaged.</span>"
 		else
-			usr << "<span class='danger'>It looks heavily damaged.</span>"
+			user << "<span class='danger'>It looks heavily damaged.</span>"
 
 	if(rotting)
-		usr << "<span class='warning'>There is fungus growing on [src].</span>"
+		user << "<span class='warning'>There is fungus growing on [src].</span>"
 
 /turf/simulated/wall/proc/update_icon()
 	if(!damage_overlays[1]) //list hasn't been populated
@@ -226,40 +226,6 @@
 	return 0
 
 //Interactions
-
-/turf/simulated/wall/attack_paw(mob/user as mob)
-	if ((HULK in user.mutations))
-		if (prob(40))
-			usr << text("\blue You smash through the wall.")
-			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			dismantle_wall(1)
-			return
-		else
-			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
-
-	return src.attack_hand(user)
-
-
-/turf/simulated/wall/attack_animal(mob/living/M as mob)
-	if(M.wall_smash)
-		if (istype(src, /turf/simulated/wall/r_wall) && !rotting)
-			M << text("\blue This wall is far too strong for you to destroy.")
-			return
-		else
-			if (prob(40) || rotting)
-				M << text("\blue You smash through the wall.")
-				dismantle_wall(1)
-				return
-			else
-				M << text("\blue You smash against the wall.")
-				take_damage(rand(25, 75))
-				return
-
-	M << "\blue You push the wall but nothing happens!"
-	return
-
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
 		if (prob(40) || rotting)
@@ -281,6 +247,23 @@
 	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
 	return
+
+/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+
+	if(!damage || !wallbreaker)
+		user << "You push the wall but nothing happens."
+		return
+
+	if(istype(src,/turf/simulated/wall/r_wall) && !rotting)
+		user << "This wall is far too strong for you to destroy."
+
+	if(rotting || prob(40))
+		user << "You smash through the wall!"
+		spawn(1) dismantle_wall(1)
+	else
+		user << "You smash against the wall."
+		take_damage(rand(25,75))
+	return 1
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
 

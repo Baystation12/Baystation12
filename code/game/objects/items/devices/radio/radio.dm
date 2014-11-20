@@ -135,23 +135,6 @@
 			A.ai_actual_track(target)
 		return
 
-	else if (href_list["faketrack"])
-		var/mob/target = locate(href_list["track"])
-		var/mob/living/silicon/ai/A = locate(href_list["track2"])
-		if(A && target)
-
-			A:cameraFollow = target
-			A << text("Now tracking [] on camera.", target.name)
-			if (usr.machine == null)
-				usr.machine = usr
-
-			while (usr:cameraFollow == target)
-				usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
-				sleep(40)
-				continue
-
-		return
-
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
 		if (!freerange || (frequency < 1200 || frequency > 1600))
@@ -221,27 +204,27 @@
 	// If a channel isn't specified, send to common.
 	if(!message_mode || message_mode == "headset")
 		return radio_connection
-	
+
 	// Otherwise, if a channel is specified, look for it.
 	if(channels)
 		if (message_mode == "department") // Department radio shortcut
 			message_mode = channels[1]
-		
+
 		if (channels[message_mode]) // only broadcast if the channel is set on
 			return secure_radio_connections[message_mode]
-	
+
 	// If we were to send to a channel we don't have, drop it.
 	return null
 
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
-	if(!on) return // the device has to be on
+	if(!on) return 0 // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
-	if(!M || !message) return
+	if(!M || !message) return 0
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
 	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
-		return
+		return 0
 
 	M.last_target_click = world.time
 
@@ -259,9 +242,9 @@
 	//#### Grab the connection datum ####//
 	var/datum/radio_frequency/connection = handle_message_mode(M, message, channel)
 	if (!istype(connection))
-		return
+		return 0
 	if (!connection)
-		return
+		return 0
 
 	var/turf/position = get_turf(src)
 
@@ -280,7 +263,8 @@
 
 	// --- Human: use their actual job ---
 	if (ishuman(M))
-		jobname = M:get_assignment()
+		var/mob/living/carbon/human/H = M
+		jobname = H.get_assignment()
 
 	// --- Carbon Nonhuman ---
 	else if (iscarbon(M)) // Nonhuman carbon mob
@@ -363,7 +347,7 @@
 			R.receive_signal(signal)
 
 		// Receiving code can be located in Telecommunications.dm
-		return
+		return signal.data["done"] && position.z in signal.data["level"]
 
 
   /* ###### Intercoms and station-bounced radios ###### */
@@ -416,15 +400,15 @@
 
 	if(signal.data["done"] && position.z in signal.data["level"])
 		// we're done here.
-		return
+		return 1
 
 	// Oh my god; the comms are down or something because the signal hasn't been broadcasted yet in our level.
 	// Send a mundane broadcast with limited targets:
 
 	//THIS IS TEMPORARY. YEAH RIGHT
-	if(!connection)	return	//~Carn
+	if(!connection)	return 0	//~Carn
 
-	Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
+	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
 					  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
 
@@ -489,15 +473,13 @@
 		return get_mobs_in_view(canhear_range, src)
 
 
-/obj/item/device/radio/examine()
-	set src in view()
-
-	..()
-	if ((in_range(src, usr) || loc == usr))
+/obj/item/device/radio/examine(mob/user)
+	. = ..()
+	if ((in_range(src, user) || loc == user))
 		if (b_stat)
-			usr.show_message("\blue \the [src] can be attached and modified!")
+			user.show_message("\blue \the [src] can be attached and modified!")
 		else
-			usr.show_message("\blue \the [src] can not be modified or attached!")
+			user.show_message("\blue \the [src] can not be modified or attached!")
 	return
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -538,7 +520,7 @@
 	canhear_range = 3
 
 /obj/item/device/radio/borg/talk_into()
-	..()
+	. = ..()
 	if (isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		var/datum/robot_component/C = R.components["radio"]

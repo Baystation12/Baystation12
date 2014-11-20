@@ -12,7 +12,7 @@ var/list/sacrificed = list()
 			for(var/obj/effect/rune/R in world)
 				if(R == src)
 					continue
-				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && R.z != 2)
+				if(R.word1 == cultwords["travel"] && R.word2 == cultwords["self"] && R.word3 == key && isPlayerLevel(R.z))
 					index++
 					allrunesloc.len = index
 					allrunesloc[index] = R.loc
@@ -104,9 +104,13 @@ var/list/sacrificed = list()
 				if(M.stat==2)
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-				M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
-				"\red AAAAAAHHHH!", \
-				"\red You hear an anguished scream.")
+				
+				if (M.species && (M.species.flags & NO_PAIN))
+					M.visible_message("\red The markings below [M] glow a bloody red.")
+				else
+					M.visible_message("\red [M] writhes in pain as the markings below \him glow a bloody red.", \
+					"\red AAAAAAHHHH!", \
+					"\red You hear an anguished scream.")
 				if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
 
 					// Mostly for the benefit of those who resist, but it makes sense for even those who join to have some.. effect.

@@ -367,7 +367,7 @@
 			if(headrev.current)
 				if(headrev.current.stat == DEAD)
 					text += "died"
-				else if(headrev.current.z != 1)
+				else if(isNotStationLevel(headrev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -390,7 +390,7 @@
 			if(rev.current)
 				if(rev.current.stat == DEAD)
 					text += "died"
-				else if(rev.current.z != 1)
+				else if(isNotStationLevel(rev.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"
@@ -415,7 +415,7 @@
 			if(head.current)
 				if(head.current.stat == DEAD)
 					text += "died"
-				else if(head.current.z != 1)
+				else if(isNotStationLevel(head.current.z))
 					text += "fled the station"
 				else
 					text += "survived the revolution"

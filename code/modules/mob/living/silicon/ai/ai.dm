@@ -193,6 +193,22 @@ var/list/ai_verbs_default = list(
 	ai_list -= src
 	..()
 
+/mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
+	set popup_menu = 0
+	set src = usr.contents
+	return 0
+
+/mob/living/silicon/ai/proc/system_integrity()
+	return (health-config.health_threshold_dead)/2
+
+// this function shows the health of the pAI in the Status panel
+/mob/living/silicon/ai/show_system_integrity()
+	// An AI doesn't become inoperable until -100% (or whatever config.health_threshold_dead is set to)
+	if(!src.stat)
+		stat(null, text("System integrity: [system_integrity()]%"))
+	else
+		stat(null, text("Systems nonfunctional"))
+
 /mob/living/silicon/ai/proc/SetName(pickedName as text)
 	real_name = pickedName
 	name = pickedName
@@ -490,24 +506,7 @@ var/list/ai_verbs_default = list(
 		else
 			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
-
-	else if (href_list["faketrack"])
-		var/mob/target = locate(href_list["track"]) in mob_list
-		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
-		if(A && target)
-
-			A.cameraFollow = target
-			A << text("Now tracking [] on camera.", target.name)
-			if (usr.machine == null)
-				usr.machine = usr
-
-			while (src.cameraFollow == target)
-				usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
-				sleep(40)
-				continue
-
-		return
-
+		
 	return
 
 /mob/living/silicon/ai/meteorhit(obj/O as obj)
@@ -525,20 +524,6 @@ var/list/ai_verbs_default = list(
 	..(Proj)
 	updatehealth()
 	return 2
-
-/mob/living/silicon/ai/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		for(var/mob/O in viewers(src, null))
-			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		adjustBruteLoss(damage)
-		updatehealth()
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)

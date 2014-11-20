@@ -17,21 +17,17 @@
 /mob/aiEye/Move()
 	return 0
 
-// Hide popout menu verbs
-/mob/aiEye/examine()
+/mob/aiEye/examinate(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/aiEye/pull()
+/mob/aiEye/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/aiEye/point()
-	set popup_menu = 0
-	set src = usr.contents
-	return 0
+/mob/aiEye/examine(mob/user)
 
 // Use this when setting the aiEye's location.
 // It will also stream the chunk that the new loc is in.

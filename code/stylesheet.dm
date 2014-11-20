@@ -20,6 +20,7 @@ em						{font-style: normal;	font-weight: bold;}
 .adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
+.headminsay				{color: #5A0A7F;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
@@ -37,6 +38,7 @@ em						{font-style: normal;	font-weight: bold;}
 .medradio				{color: #008160;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
+.srvradio				{color: #6eaa2c;}
 
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}

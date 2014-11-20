@@ -26,27 +26,17 @@
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
 
-
-/obj/structure/grille/attack_paw(mob/user as mob)
-	attack_hand(user)
-
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 
-	var/damage_dealt
+	var/damage_dealt = 1
+	var/attack_message = "kicks"
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
+			attack_message = "mangles"
 			damage_dealt = 5
-			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
-					 "<span class='warning'>You mangle [src].</span>", \
-					 "You hear twisting metal.")
-
-	if(!damage_dealt)
-		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
 
 	if(shock(user, 70))
 		return
@@ -56,35 +46,7 @@
 	else
 		damage_dealt += 1
 
-	health -= damage_dealt
-	healthcheck()
-
-/obj/structure/grille/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] smashes against [src].</span>", \
-						 "<span class='warning'>You smash against [src].</span>", \
-						 "You hear twisting metal.")
-
-	health -= rand(2,3)
-	healthcheck()
-	return
-
-/obj/structure/grille/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	M.visible_message("<span class='warning'>[M] smashes against [src].</span>", \
-					  "<span class='warning'>You smash against [src].</span>", \
-					  "You hear twisting metal.")
-
-	health -= M.melee_damage_upper
-	healthcheck()
-	return
-
+	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -123,8 +85,8 @@
 			return
 
 //window placing begin
-	else if(istype(W,/obj/item/stack/sheet/rglass) || istype(W,/obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/ST = W
+	else if(istype(W,/obj/item/stack/sheet/glass))
+		var/obj/item/stack/sheet/glass/ST = W
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -153,16 +115,10 @@
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
+			
+			var/wtype = ST.created_window
 			if (ST.use(1))
-				var/obj/structure/window/WD
-				if(istype(W, /obj/item/stack/sheet/rglass))
-					WD = new/obj/structure/window/reinforced(loc) //reinforced window
-				else
-					WD = new/obj/structure/window/basic(loc) //normal window
-				WD.dir = dir_to_set
-				WD.ini_dir = dir_to_set
-				WD.anchored = 0
-				WD.state = 0
+				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
 				user << "<span class='notice'>You place the [WD] on [src].</span>"
 				WD.update_icon()
 		return
@@ -226,3 +182,9 @@
 			health -= 1
 			healthcheck()
 	..()
+
+/obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
+	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	health -= damage
+	spawn(1) healthcheck()
+	return 1

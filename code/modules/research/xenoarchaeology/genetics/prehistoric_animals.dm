@@ -12,7 +12,7 @@
 	speed = 2
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	attacktext = "mauls"
+	attacktext = "mauled"
 	cold_damage_per_tick = 0
 	speak_chance = 5
 	speak = list("Hruuugh!","Hrunnph")
@@ -33,7 +33,7 @@
 	speed = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 8
-	attacktext = "gouges"
+	attacktext = "gouged"
 	cold_damage_per_tick = 0
 	speak_chance = 5
 	speak = list("Awrr?","Aowrl!","Worrl")
@@ -54,7 +54,7 @@
 	speed = 1
 	melee_damage_lower = 3
 	melee_damage_upper = 12
-	attacktext = "gouges"
+	attacktext = "gouged"
 	cold_damage_per_tick = 0
 	speak_chance = 5
 	speak = list("Shuhn","Shrunnph?","Shunpf")

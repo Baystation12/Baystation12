@@ -33,7 +33,7 @@
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
-		if(current_area.type in skipped_areas || S.z != 1)
+		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
 			continue
 		S.charge = S.last_charge
 		S.output = S.last_output
@@ -46,10 +46,10 @@
 	if(announce)
 		command_announcement.Announce("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
+		if(isNotStationLevel(S.z))
 			continue
 		S.charge = S.capacity
-		S.output = 200000
+		S.output = S.output_level_max // Most new SMESs on map are of buildable type, and may actually have higher output limit than 200kW. Use max output of that SMES instead.
 		S.online = 1
 		S.updateicon()
 		S.power_change()

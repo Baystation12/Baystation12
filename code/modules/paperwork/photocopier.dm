@@ -17,9 +17,6 @@
 /obj/machinery/photocopier/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/photocopier/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/photocopier/attack_hand(mob/user as mob)
 	user.set_machine(src)
 
@@ -197,24 +194,18 @@
 
 
 /obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy)
-	var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
+	var/obj/item/weapon/photo/p = photocopy.copy()
+
 	var/icon/I = icon(photocopy.icon, photocopy.icon_state)
-	var/icon/img = icon(photocopy.img)
-	var/icon/tiny = icon(photocopy.tiny)
 	if(toner > 10)	//plenty of toner, go straight greyscale
 		I.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))		//I'm not sure how expensive this is, but given the many limitations of photocopying, it shouldn't be an issue.
-		img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-		tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
+		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
+		p.tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 	else			//not much toner left, lighten the photo
 		I.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
-		img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
-		tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
+		p.img.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
+		p.tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 	p.icon = I
-	p.img = img
-	p.tiny = tiny
-	p.name = photocopy.name
-	p.desc = photocopy.desc
-	p.scribble = photocopy.scribble
 	toner -= 5	//photos use a lot of ink!
 	if(toner < 0)
 		toner = 0

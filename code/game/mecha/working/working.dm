@@ -3,10 +3,10 @@
 	var/list/cargo = new
 	var/cargo_capacity = 5
 
-/obj/mecha/working/New()
+/obj/mecha/working/initialize()
 	..()
 	var/turf/T = get_turf(src)
-	if(T.z != 2)
+	if(isPlayerLevel(T.z))
 		new /obj/item/mecha_parts/mecha_tracking(src)
 	return
 

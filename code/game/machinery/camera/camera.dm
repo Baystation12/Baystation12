@@ -19,11 +19,7 @@
 	var/obj/item/weapon/camera_assembly/assembly = null
 
 	// WIRES
-	var/wires = 63 // 0b111111
-	var/list/IndexToFlag = list()
-	var/list/IndexToWireColor = list()
-	var/list/WireColorToIndex = list()
-	var/list/WireColorToFlag = list()
+	var/datum/wires/camera/wires = null // Wires datum
 
 	//OTHER
 
@@ -35,7 +31,7 @@
 	var/busy = 0
 
 /obj/machinery/camera/New()
-	WireColorToFlag = randomCameraWires()
+	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
 	/* // Use this to look for cameras that have the same c_tag.
@@ -115,7 +111,7 @@
 	else if((iswirecutter(W) || ismultitool(W)) && panel_open)
 		interact(user)
 
-	else if(iswelder(W) && canDeconstruct())
+	else if(iswelder(W) && wires.CanDeconstruct())
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
@@ -284,3 +280,10 @@
 		return 1
 	busy = 0
 	return 0
+
+/obj/machinery/camera/interact(mob/living/user as mob)
+	if(!panel_open || istype(user, /mob/living/silicon/ai))
+		return
+
+	user.set_machine(src)
+	wires.Interact(user)

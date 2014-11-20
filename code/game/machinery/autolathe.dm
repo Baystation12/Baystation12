@@ -184,9 +184,6 @@
 	updateUsrDialog()
 	return
 
-/obj/machinery/autolathe/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/autolathe/attack_hand(mob/user as mob)
 	user.set_machine(src)
 	interact(user)
