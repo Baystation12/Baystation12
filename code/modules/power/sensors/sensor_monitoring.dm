@@ -16,6 +16,7 @@
 	var/circuit = /obj/item/weapon/circuitboard/powermonitor
 	var/list/grid_sensors = null
 	var/update_counter = 0 // Next icon update when this reaches 5 (ie every 5 ticks)
+	var/active_sensor = null
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
@@ -35,7 +36,11 @@
 	grid_sensors = list()
 	for(var/obj/machinery/power/sensor/S in machines)
 		if((S.loc.z == src.loc.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
-			grid_sensors += S
+			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
+				error("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
+			else
+				grid_sensors += S
+
 
 /obj/machinery/power/monitor/attack_ai(mob/user)
 	add_fingerprint(user)
@@ -59,36 +64,39 @@
 			user << browse(null, "window=powcomp")
 			return
 
-	if((!grid_sensors) || (!grid_sensors.len)) 						// No sensors in list. Refresh just in case.
-		refresh_sensors()
-
-
+	refresh_sensors()
 
 	user.set_machine(src)
 	var/t = "<TT><B>Station Power Monitoring</B><HR>"
+	if(active_sensor)
 
-	t += "<BR><HR><A href='?src=\ref[src];update=1'>Refresh</A>"
-	t += "<BR><HR><A href='?src=\ref[src];reset=1'>Reset Sensor List</A>"
-	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A><br>"
+		t += "<BR><A href='?src=\ref[src];update=1'>Refresh</A>"
+		t += "<BR><A href='?src=\ref[src];clear=1'>Sensor List</A>"
+		t += "<BR><A href='?src=\ref[src];close=1'>Close</A><BR><HR>"
 
-	if((!grid_sensors) || (!grid_sensors.len))
-		t += "<b> ERROR - No Sensors Connected. </b>"
+		if(!grid_sensors)
+			t += "Unable to connect to sensor!"
+		else
+			var/obj/machinery/power/sensor/OKS
+			for(var/obj/machinery/power/sensor/S in grid_sensors)
+				if(S.name_tag == active_sensor)
+					OKS = S
+
+			t += "<B>[OKS.name_tag] - Sensor Reading</B><BR>"
+			t += OKS.ReturnReading()
+
+
 	else
-		var/list/reported_nets = list()
-		var/duplicities = 0 // Duplicity prevention (substations in Bypass mode)
+		t += "<BR><A href='?src=\ref[src];update=1'>Refresh</A>"
+		t += "<BR><A href='?src=\ref[src];close=1'>Close</A><BR><HR>"
+		if((!grid_sensors) || (!grid_sensors.len))
+			t += "<B>ERROR - No Active Sensors Detected!</B>"
+		else
+			for(var/obj/machinery/power/sensor/S in grid_sensors)			// Show all data from current Z level.
+				t += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
 
 
-		for(var/obj/machinery/power/sensor/S in grid_sensors)			// Show all data from current Z level.
-			if(S.powernet && (S.powernet in reported_nets)) // We already reported this powernet. Ignore it.
-				duplicities++
-				continue
 
-			t += "<br><br><hr>  <b>[S.name_tag]  - Sensor Reading</b>  <br>"
-			t += S.ReturnReading() 										// Sensors already make quite decent HTML table by themselves.
-			if(S.powernet)
-				reported_nets += S.powernet
-		if(duplicities)
-			t += "<br><b><i>Ignored [duplicities] duplicite readings</i></b>"
 	user << browse(t, "window=powcomp;size=600x900")
 	onclose(user, "powcomp")
 
@@ -102,9 +110,13 @@
 	if( href_list["update"] )
 		src.updateDialog()
 		return
-	if( href_list["reset"] )
-		refresh_sensors()
+	if( href_list["clear"] )
+		active_sensor = null
+		src.updateDialog()
 		return
+	if( href_list["setsensor"] )
+		active_sensor = href_list["setsensor"]
+		src.updateDialog()
 
 /obj/machinery/power/monitor/update_icon()
 	update_counter = 0 // Reset the icon update counter.
