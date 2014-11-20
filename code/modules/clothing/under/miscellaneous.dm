@@ -392,8 +392,6 @@
 	item_color = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-
-
 /obj/item/clothing/under/sundress_white
 	name = "white sundress"
 	desc = "A white sundress decorated with purple lilies."
