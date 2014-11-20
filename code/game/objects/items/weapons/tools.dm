@@ -452,8 +452,24 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
-	if(hasorgans(M))
+	if(!src.welding)
+		return ..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/D = M
+		if(D.fire_stacks > 0)
+			remove_fuel(1)
+			D.IgniteMob()
+			if(user != M)
+				user.visible_message("\red \The [user] ignites the flammable liquid on [M] with \the [src]",\
+				"\red You ignite the flammable liquid on [M] with \the [src]",\
+				"You hear a burning sound.")
+				return
+			else
+				user.visible_message("\red \The [user] ignites the flammable liquid on themself with \the [src]",\
+				"\red You ignite the flammable liquid on yourself with \the [src]",\
+				"You hear a burning sound.")
 
+	if(hasorgans(M))
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return

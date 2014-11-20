@@ -25,7 +25,7 @@ var/list/vip_ranks = list()								//list of all ranks with associated rights
 		for(var/i=2, i<=List.len, i++)
 			switch(ckey(List[i]))
 				if("event")						rights |= V_EVENT
-				if("eventdonate")				rights |= V_EVENTDONATE
+				if("donate")				rights |= V_DONATE
 
 
 		vip_ranks[rank] = rights

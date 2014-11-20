@@ -855,3 +855,27 @@ proc/sort_atoms_by_layer(var/list/atoms)
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result
+
+
+proc/text2icon(var/tn, var/px = 0, var/py = 0)
+	var/image/I = image('icons/mob/screen1_Midnight.dmi', "blank")
+
+
+	var/len = lentext(tn)
+
+	for(var/d = 1 to len)
+
+
+		var/char = capitalize(copytext(tn, len-d+1, len-d+2))
+
+		if(char == " ")
+			continue
+
+		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)
+
+		ID.pixel_x = -(d-1)*5 + px
+		ID.pixel_y = py
+
+		I.overlays += ID
+
+	return I

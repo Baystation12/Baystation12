@@ -112,6 +112,9 @@
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
+			if(mind.vampire)
+				stat("Useable Blood", mind.vampire.bloodusable)
+				stat("Total Accumulated Blood", mind.vampire.bloodtotal)
 
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
 			stat("Energy Charge", round(wear_suit:cell:charge/100))
