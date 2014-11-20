@@ -102,7 +102,7 @@ var/const/SAFETY_COOLDOWN = 100
 		if(prob(2))
 			new /obj/item/stack/sheet/plasteel(get_step(src, EAST))
 		if(prob(1))
-			new /obj/item/stack/sheet/rglass(get_step(src, EAST))
+			new /obj/item/stack/sheet/glass/reinforced(get_step(src, EAST))
 		if(sound)
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 
