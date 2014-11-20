@@ -331,7 +331,7 @@
 	if(istype(A,/area/engine/generators))
 		src.network += "Supermatter"
 	if(istype(A,/area/tdome))
-		src.network += "Thunderdome"
+		src.network += "thunder"
 	if(istype(A,/area/tcommsat))
 		src.network += "Telecomms"
 	if(istype(A,/area/turret_protected/tcomsat))
@@ -342,3 +342,18 @@
 		src.network += "Telecomms"
 	if(istype(A,/area/turret_protected/tcomeast))
 		src.network += "Telecomms"
+	if(istype(A,/area/rnd/test_area))
+		src.network += "Toxins Test Area"
+	if(istype(A,/area/security))
+		src.network += "Security"
+	if(istype(A,/area/medical/guard))
+		src.network += "Security"
+	if(istype(A,/area/engine/guard))
+		src.network += "Security"
+	if(istype(A,/area/rnd/guard))
+		src.network += "Security"
+	if(istype(A,/area/security/interigation))
+		src.network += "Interrogation"
+	if(istype(A,/area/mine))
+		src.network += "MINE"
+
