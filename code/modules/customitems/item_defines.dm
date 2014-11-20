@@ -1005,16 +1005,6 @@
 	item_color = "harper_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
-//////////////////// Layla's Dress - Layla Davies-Halabi - sabirm ///////////////
-
-/obj/item/clothing/under/fluff/layla_davieshalabi
-	name = "White floral sundress"
-	desc = "A loose, white sundress decorated with purple lilies. It looks well looked-after."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "layladress"
-	item_state = "layladress"
-	item_color = "layladress"
-
 //////////////////// Corporate Cap - Robert Mason - Masterrbc ////////////////////
 
 /obj/item/clothing/head/soft/sec/corp/fluff/robert_mason
@@ -1458,7 +1448,7 @@
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 3, 1)
 		var/current_dist = get_dist(src, bff)
-		
+
 		if (movement_target != bff)
 			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
 				//stop existing movement
@@ -1469,7 +1459,7 @@
 				stop_automated_movement = 1
 				movement_target = bff
 				walk_to(src, movement_target, near_dist, 4)
-		
+
 		//already following and close enough, stop
 		else if (current_dist <= near_dist)
 			walk_to(src,0)
@@ -1481,15 +1471,15 @@
 
 /mob/living/simple_animal/cat/fluff/Life()
 	..()
-	if (stat || !bff) 
+	if (stat || !bff)
 		return
 	if (get_dist(src, bff) <= 1)
 		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
-			if (prob((bff.stat < DEAD)? 50 : 15)) 
+			if (prob((bff.stat < DEAD)? 50 : 15))
 				audible_emote(pick("meows in distress.", "meows anxiously."))
 		else
-			if (prob(5)) 
-				visible_emote(pick("nuzzles [bff].", 
+			if (prob(5))
+				visible_emote(pick("nuzzles [bff].",
 								   "brushes against [bff].",
 								   "rubs against [bff].",
 								   "purrs."))
