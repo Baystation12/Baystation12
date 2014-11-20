@@ -877,7 +877,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Chief Engineer's Office"
 	icon_state = "head_quarters"
 
-/area/crew_quarters/heads/hos
+/area/security/heads/hos
 	name = "\improper Head of Security's Office"
 	icon_state = "head_quarters"
 
@@ -1365,6 +1365,10 @@ var/list/ghostteleportlocs = list()
 
 /area/security/main
 	name = "\improper Security Office"
+	icon_state = "security"
+
+/area/security/interigation
+	name = "\improper Interigation Room"
 	icon_state = "security"
 
 /area/security/lobby
