@@ -43,7 +43,7 @@
 
 	if(!istype(C,/client))
 		if(holder)	src << "<font color='red'>Error: Private-Message: Client not found.</font>"
-		else		adminhelp(msg)	//admin we are replying to left. adminhelp instead
+		else		src << "<font color='red'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</font>"
 		return
 
 	//get message text, limit it's length.and clean/escape html
@@ -53,7 +53,7 @@
 		if(!msg)	return
 		if(!C)
 			if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
-			else		adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
+			else		src << "<font color='red'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</font>"
 			return
 
 	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
@@ -78,7 +78,7 @@
 			else
 				recieve_color = "maroon"
 			send_pm_type = holder.rank + " "
-			if(!C.holder && holder && holder.fakekey) 
+			if(!C.holder && holder && holder.fakekey)
 				recieve_pm_type = "Admin"
 			else
 				recieve_pm_type = holder.rank

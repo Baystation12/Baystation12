@@ -135,23 +135,6 @@
 			A.ai_actual_track(target)
 		return
 
-	else if (href_list["faketrack"])
-		var/mob/target = locate(href_list["track"])
-		var/mob/living/silicon/ai/A = locate(href_list["track2"])
-		if(A && target)
-
-			A:cameraFollow = target
-			A << text("Now tracking [] on camera.", target.name)
-			if (usr.machine == null)
-				usr.machine = usr
-
-			while (usr:cameraFollow == target)
-				usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
-				sleep(40)
-				continue
-
-		return
-
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
 		if (!freerange || (frequency < 1200 || frequency > 1600))
@@ -491,7 +474,7 @@
 
 
 /obj/item/device/radio/examine(mob/user)
-	..(user)
+	. = ..()
 	if ((in_range(src, user) || loc == user))
 		if (b_stat)
 			user.show_message("\blue \the [src] can be attached and modified!")

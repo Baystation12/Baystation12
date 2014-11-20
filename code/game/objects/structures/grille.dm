@@ -85,8 +85,8 @@
 			return
 
 //window placing begin
-	else if(istype(W,/obj/item/stack/sheet/rglass) || istype(W,/obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/ST = W
+	else if(istype(W,/obj/item/stack/sheet/glass))
+		var/obj/item/stack/sheet/glass/ST = W
 		var/dir_to_set = 1
 		if(loc == user.loc)
 			dir_to_set = user.dir
@@ -115,16 +115,10 @@
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
+			
+			var/wtype = ST.created_window
 			if (ST.use(1))
-				var/obj/structure/window/WD
-				if(istype(W, /obj/item/stack/sheet/rglass))
-					WD = new/obj/structure/window/reinforced(loc) //reinforced window
-				else
-					WD = new/obj/structure/window/basic(loc) //normal window
-				WD.dir = dir_to_set
-				WD.ini_dir = dir_to_set
-				WD.anchored = 0
-				WD.state = 0
+				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
 				user << "<span class='notice'>You place the [WD] on [src].</span>"
 				WD.update_icon()
 		return

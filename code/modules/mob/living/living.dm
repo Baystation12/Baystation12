@@ -436,7 +436,8 @@
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
-							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
+							var/obj/structure/window/W = pulling
+							if(W.is_full_window())
 								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
 									stop_pulling()
 					if (pulling)

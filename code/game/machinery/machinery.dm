@@ -351,8 +351,8 @@ Class Procs:
 		if(id)
 			perpname = id.registered_name
 
-		var/datum/data/record/R = find_record("name", perpname, data_core.security)
-		if(!R || (R.fields["criminal"] == "*Arrest*"))
+		var/datum/data/record/R = find_security_record("name", perpname)
+		if(R && (R.fields["criminal"] == "*Arrest*"))
 			threatcount += 4
 
 	return threatcount

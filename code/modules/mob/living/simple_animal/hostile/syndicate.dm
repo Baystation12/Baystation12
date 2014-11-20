@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/syndicate
-	name = "Syndicate Operative"
+	name = "\improper Syndicate operative"
 	desc = "Death to Nanotrasen."
 	icon_state = "syndicate"
 	icon_living = "syndicate"
@@ -7,9 +7,9 @@
 	icon_gib = "syndicate_gib"
 	speak_chance = 0
 	turns_per_move = 5
-	response_help = "pokes the"
-	response_disarm = "shoves the"
-	response_harm = "hits the"
+	response_help = "pokes"
+	response_disarm = "shoves"
+	response_harm = "hits"
 	speed = 4
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 100

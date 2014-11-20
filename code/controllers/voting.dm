@@ -290,9 +290,9 @@ datum/controller/vote
 		var/admin = 0
 		var/trialmin = 0
 		if(C.holder)
-			admin = 1
 			if(C.holder.rights & R_ADMIN)
-				trialmin = 1
+				admin = 1
+				trialmin = 1 // don't know why we use both of these it's really weird, but I'm 2 lasy to refactor this all to use just admin.
 		voting |= C
 
 		. = "<html><head><title>Voting Panel</title></head><body>"

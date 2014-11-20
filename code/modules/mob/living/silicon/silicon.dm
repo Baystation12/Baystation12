@@ -6,9 +6,9 @@
 	var/list/additional_law_channels = list("State")
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
+	var/list/stating_laws = list()// Channels laws are currently being stated on
 	var/lawcheck[1]
 	var/ioncheck[1]
-	var/stating_laws = 0
 	var/obj/item/device/radio/common_radio
 
 	immune_to_ssd = 1
