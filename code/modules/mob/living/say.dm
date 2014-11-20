@@ -12,6 +12,7 @@ var/list/department_radio_keys = list(
 	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
 	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":f" = "vampire",		"#f" = "vampire",		".f" = "vampire",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -25,6 +26,7 @@ var/list/department_radio_keys = list(
 	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
 	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":F" = "vampire",		"#F" = "vampire",		".F" = "vampire",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -73,7 +75,7 @@ var/list/department_radio_keys = list(
 		if (speaking.flags & SIGNLANG)
 			say_signlang(message, pick(speaking.signlang_verb), speaking)
 			return 1
-	
+
 	var/list/listening = list()
 	var/list/listening_obj = list()
 
@@ -83,11 +85,11 @@ var/list/department_radio_keys = list(
 		var/pressure = (environment)? environment.return_pressure() : 0
 		if(pressure < SOUND_MINIMUM_PRESSURE)
 			message_range = 1
-		
+
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
-	
+
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 

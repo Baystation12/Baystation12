@@ -102,6 +102,9 @@
 
 		handle_virus_updates()
 
+		//Check if we're on fire
+		handle_fire()
+
 		//stuff in the stomach
 		handle_stomach()
 
@@ -129,6 +132,9 @@
 	handle_regular_hud_updates()
 
 	pulse = handle_pulse()
+
+	if(mind && mind.vampire)
+		handle_vampire()
 
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
@@ -756,6 +762,16 @@
 
 		return
 
+	///FIRE CODE
+	handle_fire()
+		if(..())
+			return
+		var/thermal_protection = get_heat_protection(5000) //If you don't have spacesuit suit level protection, you get a temperature increase
+		if((1 - thermal_protection) > 0.0001)
+			bodytemperature += 90
+		return
+
+	//END FIRE CODE
 	/*
 	proc/adjust_body_temperature(current, loc_temp, boost)
 		var/temperature = current
@@ -1180,6 +1196,12 @@
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
+				if(mind)
+					if(mind.vampire)
+						if(istype(loc, /obj/structure/closet/coffin))
+							adjustBruteLoss(-1)
+							adjustFireLoss(-1)
+							adjustToxLoss(-1)
 			else if(resting)
 				if(halloss > 0)
 					adjustHalLoss(-3)
@@ -1358,6 +1380,14 @@
 					if("shadow")
 						see_in_dark = 8
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
+
+			if(mind && mind.vampire)
+				if((VAMP_VISION in mind.vampire.powers) && !(VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_MOBS
+				if((VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+					see_in_dark = 8
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 			if(XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
@@ -1607,6 +1637,20 @@
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
 
+		/*if(hud_used)
+			if(!hud_used.changeling_chem_display)
+				hud_used.changeling_hud()
+				//hud_used.human_hud(hud_used.ui_style)
+			if(hud_used.ninja_cell_display && !hud_used.vampire_blood_display)
+				hud_used.changeling_chem_display.screen_loc = "13:28,9:15"
+			if(hud_used.ninja_cell_display && hud_used.vampire_blood_display)
+				hud_used.changeling_chem_display.screen_loc = "13:28,10:15"
+			hud_used.changeling_chem_display.overlays.Cut()
+			var/image/A = text2icon("CS:[num2text(round(mind.changeling.chem_charges))]",23,-9)
+			var/image/B = text2icon("GDT:[num2text(mind.changeling.geneticdamage)]",23,-17)
+			hud_used.changeling_chem_display.overlays += A
+			hud_used.changeling_chem_display.overlays += B
+		*/
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode

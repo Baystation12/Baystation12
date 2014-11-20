@@ -454,6 +454,19 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
 			else
 				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+	if(!isliving(M))
+		return
+	if(M.fire_stacks > 0)
+		M.IgniteMob()
+		if(user != M)
+			user.visible_message("\red \The [user] ignites the flammable liquid on [M] with \the [src]",\
+			"\red You ignite the flammable liquid on [M] with \the [src]]",\
+			"You hear a burning sound.")
+			return
+		else
+			user.visible_message("\red \The [user] ignites the flammable liquid on themself with \the [src]",\
+			"\red You ignite the flammable liquid on yourself with \the [src]",\
+			"You hear a burning sound.")
 	else
 		..()
 
