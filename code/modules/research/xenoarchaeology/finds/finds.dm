@@ -342,10 +342,10 @@
 		if(26)
 			//energy gun
 			var/spawn_type = pick(\
-			/obj/item/weapon/gun/energy/laser/practice,\
-			/obj/item/weapon/gun/energy/laser,\
-			/obj/item/weapon/gun/energy/xray,\
-			/obj/item/weapon/gun/energy/laser/captain)
+			/obj/item/weapon/gun/energy/laser/practice/xenoarch,\
+			/obj/item/weapon/gun/energy/laser/xenoarch,\
+			/obj/item/weapon/gun/energy/xray/xenoarch,\
+			/obj/item/weapon/gun/energy/laser/captain/xenoarch)
 			if(spawn_type)
 				var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
 				new_item = new_gun
