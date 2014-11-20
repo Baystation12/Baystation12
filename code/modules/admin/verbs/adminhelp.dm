@@ -24,7 +24,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	spawn(300) // 30 Seconds
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
-	**/
 
 	var/msg
 	var/list/type = list ("Gameplay/Roleplay question", "Rule/Gameplay issue", "Bug report")
