@@ -147,3 +147,157 @@
 		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_admin_log` (`id` ,`datetime` ,`adminckey` ,`adminip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Added permission [rights2text(new_permission)] (flag = [new_permission]) to admin [adm_ckey]')")
 		log_query.Execute()
 		usr << "\blue Permission added."
+
+
+
+
+
+/client/proc/edit_vip_permissions()
+	set category = "Admin"
+	set name = "Event Permissions Panel"
+	set desc = "Edit event permissions"
+	if(!check_rights(R_ADMIN))	return
+	usr.client.holder.edit_vip_permissions()
+
+/datum/admins/proc/edit_vip_permissions()
+	if(!check_rights(R_ADMIN))	return
+
+	var/output = {"<!DOCTYPE html>
+<html>
+<head>
+<title>Permissions Panel</title>
+<script type='text/javascript' src='search.js'></script>
+<link rel='stylesheet' type='text/css' href='panels.css'>
+</head>
+<body onload='selectTextField();updateSearch();'>
+<div id='main'><table id='searchable' cellspacing='0'>
+<tr class='title'>
+<th style='width:125px;text-align:right;'>CKEY <a class='small' href='?src=\ref[src];vipeditrights=add'>\[+\]</a></th>
+<th style='width:125px;'>RANK</th><th style='width:100%;'>PERMISSIONS</th>
+</tr>
+"}
+
+	for(var/vip_ckey in vip_datums)
+		var/datum/vips/D = vip_datums[vip_ckey]
+		if(!D)	continue
+		var/rank = D.rank ? D.rank : "*none*"
+		var/rights = vip_rights2text(D.rights," ")
+		if(!rights)	rights = "*none*"
+
+		output += "<tr>"
+		output += "<td style='text-align:right;'>[vip_ckey] <a class='small' href='?src=\ref[src];vipeditrights=remove;ckey=[vip_ckey]'>\[-\]</a></td>"
+		output += "<td><a href='?src=\ref[src];vipeditrights=rank;ckey=[vip_ckey]'>[rank]</a></td>"
+		output += "<td><a class='small' href='?src=\ref[src];vipeditrights=permissions;ckey=[vip_ckey]'>[rights]</a></font></td>"
+		output += "</tr>"
+
+	output += {"
+</table></div>
+<div id='top'><b>Search:</b> <input type='text' id='filter' value='' style='width:70%;' onkeyup='updateSearch();'></div>
+</body>
+</html>"}
+
+	usr << browse(output,"window=vipeditrights;size=600x500")
+
+/datum/admins/proc/log_vip_rank_modification(var/vip_ckey, var/new_rank)
+	if(config.vip_legacy_system)	return
+
+	if(!usr.client)
+		return
+
+	if(!usr.client.holder || !(usr.client.holder.rights & R_ADMIN))
+		usr << "\red You do not have permission to do this!"
+		return
+
+	//establish_db_connection()
+
+	//if(!dbcon.IsConnected())
+	usr << "\red Failed to establish database connection"
+	return
+
+	if(!vip_ckey || !new_rank)
+		return
+
+	vip_ckey = ckey(vip_ckey)
+
+	if(!vip_ckey)
+		return
+
+	if(!istext(vip_ckey) || !istext(new_rank))
+		return
+
+//	var/DBQuery/select_query = dbcon.NewQuery("SELECT id FROM erro_vip WHERE ckey = '[vip_ckey]'")
+	//select_query.Execute()
+
+//	var/new_vip = 1
+//	var/vip_id
+//	while(select_query.NextRow())
+//		new_vip = 0
+	//	vip_id = text2num(select_query.item[1])
+
+//	if(new_vip)
+//		var/DBQuery/insert_query = dbcon.NewQuery("INSERT INTO `erro_vip` (`id`, `ckey`, `rank`, `level`, `flags`) VALUES (null, '[vip_ckey]', '[new_rank]', -1, 0)")
+//		insert_query.Execute()
+//		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_vip_log` (`id` ,`datetime` ,`vipckey` ,`vipip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Added new vip [vip_ckey] to rank [new_rank]');")
+//		log_query.Execute()
+//		usr << "\blue New Vip added."
+//	else
+//		if(!isnull(vip_id) && isnum(vip_id))
+//			var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_vip` SET rank = '[new_rank]' WHERE id = [vip_id]")
+//			insert_query.Execute()
+//			var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_vip_log` (`id` ,`datetime` ,`vipckey` ,`vipip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Edited the rank of [vip_ckey] to [new_rank]');")
+//			log_query.Execute()
+//			usr << "\blue Vip rank changed."
+
+/datum/admins/proc/log_vip_permission_modification(var/vip_ckey, var/new_permission)
+	if(config.vip_legacy_system)	return
+
+	if(!usr.client)
+		return
+
+	if(!usr.client.holder || !(usr.client.holder.rights & R_ADMIN))
+		usr << "\red You do not have permission to do this!"
+		return
+
+/*	establish_db_connection()
+	if(!dbcon.IsConnected())
+	usr << "\red Failed to establish database connection"
+		return
+
+	if(!vip_ckey || !new_permission)
+		return
+
+	vip_ckey = ckey(vip_ckey)
+
+	if(!vip_ckey)
+		return
+
+	if(istext(new_permission))
+		new_permission = text2num(new_permission)
+
+	if(!istext(vip_ckey) || !isnum(new_permission))
+		return
+
+	var/DBQuery/select_query = dbcon.NewQuery("SELECT id, flags FROM erro_vip WHERE ckey = '[vip_ckey]'")
+	select_query.Execute()
+
+	var/vip_id
+	var/vip_rights
+	while(select_query.NextRow())
+		vip_id = text2num(select_query.item[1])
+		vip_rights = text2num(select_query.item[2])
+
+	if(!vip_id)
+		return
+
+	if(vip_rights & new_permission) //This vip already has this permission, so we are removing it.
+		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_vip` SET flags = [vip_rights & ~new_permission] WHERE id = [vip_id]")
+		insert_query.Execute()
+		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_vip_log` (`id` ,`datetime` ,`vipckey` ,`vipip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Removed permission [vip_rights2text(new_permission)] (flag = [new_permission]) to vip [vip_ckey]');")
+		log_query.Execute()
+		usr << "\blue Permission removed."
+	else //This vip doesn't have this permission, so we are adding it.
+		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_vip` SET flags = '[vip_rights | new_permission]' WHERE id = [vip_id]")
+		insert_query.Execute()
+		var/DBQuery/log_query = dbcon.NewQuery("INSERT INTO `test`.`erro_vip_log` (`id` ,`datetime` ,`vipckey` ,`vipip` ,`log` ) VALUES (NULL , NOW( ) , '[usr.ckey]', '[usr.client.address]', 'Added permission [vip_rights2text(new_permission)] (flag = [new_permission]) to vip [vip_ckey]')")
+		log_query.Execute()
+		usr << "\blue Permission added."*/

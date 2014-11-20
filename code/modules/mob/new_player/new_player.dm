@@ -371,6 +371,9 @@
 					dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 		dat += "Choose from the following open positions:<br>"
+		if(!icwl_isWhitelisted(src.ckey))
+			dat += "Your account has not been added to the IC Whitelist so some jobs may not be avalible due to your age or species...<br><br>"
+
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))
 				var/active = 0

@@ -116,6 +116,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		s["admins"] = admins
 
+		s["vips"] = vips
+
 		return list2params(s)
 
 	else if(copytext(T,1,9) == "adminmsg")

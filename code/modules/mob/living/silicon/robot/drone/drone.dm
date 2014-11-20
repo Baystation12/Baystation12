@@ -34,6 +34,8 @@
 	..()
 
 	verbs += /mob/living/proc/hide
+	verbs += /mob/living/proc/ventcrawl
+
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
@@ -291,6 +293,9 @@
 /mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
 	return
 
+/mob/living/silicon/robot/drone/can_use_vents()
+	return
+
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
 	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
@@ -309,3 +314,4 @@
 /mob/living/silicon/robot/drone/add_robot_verbs()
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
+

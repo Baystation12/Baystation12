@@ -98,6 +98,7 @@ var/host = null
 var/aliens_allowed = 0
 var/ooc_allowed = 1
 var/dsay_allowed = 1
+var/vsay_allowed = 1
 var/dooc_allowed = 1
 var/looc_allowed = 1
 var/devsay_allowed = 1

@@ -3,6 +3,7 @@
 		//ADMIN THINGS//
 		////////////////
 	var/datum/admins/holder = null
+	var/datum/vips/vipholder = null
 	var/buildmode		= 0
 
 	var/last_message	= "" //Contains the last message sent by this client - used to protect against copy-paste spamming.

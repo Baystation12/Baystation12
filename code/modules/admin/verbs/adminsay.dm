@@ -64,3 +64,29 @@
 		if(C.holder && ((R_ADMIN|R_MOD|R_DEV) & C.holder.rights))
 			if(C.prefs.toggles & CHAT_DEVSAY)
 				C << "<span class='[color]'><span class='prefix'>DEV:</span> [key] (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+
+/client/proc/cmd_vip_say(msg as text)
+	set category = "OOC"
+	set name = "ESAY"
+	set hidden = 0
+
+	/*if(!(prefs.toggles & CHAT_VSAY))
+		src << "\red You have Event SAY muted."
+		return
+`	*/
+	if(vipholder)
+		if(!vsay_allowed)
+			src << "\red Event SAY is globally muted"
+			return
+
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	log_vsay("EVENT: [key_name(src)] : [msg]")
+
+	if(!msg)	return
+	var/color = "VIP"
+	if (check_rights(R_ADMIN|R_MOD,0))
+		color = "VIPADMINMOD"
+	for(var/client/C in clients)
+		if((C.holder && ((R_ADMIN|R_MOD|R_DEV) & C.holder.rights)) | (C.vipholder && (V_EVENT & C.vipholder.rights)) | (C.vipholder && (V_EVENTDONATE & C.vipholder.rights)))
+			//if(C.prefs.toggles & CHAT_VSAY)
+			C << "<span class='[color]'><span class='prefix'>EVENT:</span> [key]: <span class='message'>[msg]</span></span>"

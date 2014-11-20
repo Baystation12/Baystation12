@@ -618,7 +618,12 @@ var/list/liftable_structures = list(\
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
-
+//VIP Permissions
+//Please don't edit these values without speaking to Yashaldie first
+//VIP Permissions
+#define V_EVENT				1
+#define V_EVENTDONATE		2
+#define V_VIPMAXPERMISSION 	65534
 
 //Please don't edit these values without speaking to Errorage first	~Carn
 //Admin Permissions
@@ -660,7 +665,7 @@ var/list/liftable_structures = list(\
 #define CHAT_GHOSTRADIO 8192
 #define SHOW_TYPING		16384
 #define CHAT_DEVSAY		32768
-#define SHOW_SHUTTERLOGS	65536
+#define SHOW_SHUTTERLOGS 65536
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC|CHAT_DEVSAY)
 
