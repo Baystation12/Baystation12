@@ -622,7 +622,7 @@ var/list/liftable_structures = list(\
 //Please don't edit these values without speaking to Yashaldie first
 //VIP Permissions
 #define V_EVENT				1
-#define V_EVENTDONATE		2
+#define V_DONATE		2
 #define V_VIPMAXPERMISSION 	65534
 
 //Please don't edit these values without speaking to Errorage first	~Carn
