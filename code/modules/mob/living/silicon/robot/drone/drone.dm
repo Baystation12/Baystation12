@@ -293,6 +293,9 @@
 /mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
 	return
 
+/mob/living/silicon/robot/drone/can_use_vents()
+	return
+
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
 	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
@@ -312,5 +315,3 @@
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
 
-/mob/living/carbon/drone/can_use_vents()
-	return
