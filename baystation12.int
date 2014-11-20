@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
-/*
 MAP_ICON_TYPE: 0
-WINDOW: maps\Phoenix.dmm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\__HELPERS code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\omni_devices code\ATMOSPHERICS\components\trinary_devices code\ATMOSPHERICS\components\unary code\defines\procs maps 
-FILE: maps\Phoenix.dmm
-LAST_COMPILE_TIME: 1416443212
-AUTO_FILE_DIR: OFF
+/*
 */
+AUTO_FILE_DIR: OFF
 // END_INTERNALS
