@@ -292,8 +292,12 @@ mob/living/parasite/meme/verb/Agony()
 
 	spawn
 		// backup the host incase we switch hosts after using the verb
-		var/mob/host = src.host
+		var/mob/living/carbon/host = src.host
 
+		if (host.species && (host.species.flags & NO_PAIN))
+			usr << "Nothing seems to happen."
+			return
+		
 		host.paralysis = max(host.paralysis, 2)
 
 		host.flash_weak_pain()
