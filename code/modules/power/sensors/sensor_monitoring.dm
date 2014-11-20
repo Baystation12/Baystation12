@@ -77,13 +77,15 @@
 		if(!grid_sensors)
 			t += "Unable to connect to sensor!"
 		else
-			var/obj/machinery/power/sensor/OKS
+			var/obj/machinery/power/sensor/OKS = null
 			for(var/obj/machinery/power/sensor/S in grid_sensors)
 				if(S.name_tag == active_sensor)
 					OKS = S
-
-			t += "<B>[OKS.name_tag] - Sensor Reading</B><BR>"
-			t += OKS.ReturnReading()
+			if(OKS)
+				t += "<B>[OKS.name_tag] - Sensor Reading</B><BR>"
+				t += OKS.ReturnReading()
+			else
+				t += "Unable to connect to sensor!"
 
 
 	else
