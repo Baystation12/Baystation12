@@ -59,13 +59,13 @@
 			var/load = A.lastused_total // Load.
 			total_load += load
 			if(load > 1000)
-				load = "~[round(load/1000)]kW"														// If above 1000W convert to Kilowatts.
+				load = "~[round(load/100)/10]kW"														// If above 1000W convert to Kilowatts.
 			else
 				load = "[round(load)]W"																// Below 1000W, leave it in Watts
 			out += "<td>[load]"																		// Add load info
 
 		if (total_load > 1000)
-			total_load = "~[round(total_load/1000)] kW"
+			total_load = "~[round(total_load/100)/10] kW"
 		else
 			total_load = "[round(total_load)] W"
 
@@ -73,7 +73,7 @@
 
 	var/textavail = powernet.avail
 	if(textavail > 1000)
-		textavail = "[textavail / 1000] kW"
+		textavail = "[round(textavail/100)/10] kW"
 	else
 		textavail = "[textavail] W"
 	out += "<br><b>TOTAL AVAILABLE: [textavail]</b>"

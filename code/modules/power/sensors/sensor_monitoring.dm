@@ -4,7 +4,7 @@
 - Should filter out most duplicities.
 */
 
-/obj/machinery/power/monitor
+/obj/machinery/computer/power_monitor
 	name = "Power Monitor"
 	desc = "Computer designed to remotely monitor power levels around the station"
 	icon = 'icons/obj/computer.dmi'
@@ -13,7 +13,7 @@
 	//computer stuff
 	density = 1
 	anchored = 1.0
-	var/circuit = /obj/item/weapon/circuitboard/powermonitor
+	circuit = /obj/item/weapon/circuitboard/powermonitor
 	var/list/grid_sensors = null
 	var/update_counter = 0 // Next icon update when this reaches 5 (ie every 5 ticks)
 	var/active_sensor = null
@@ -22,17 +22,17 @@
 	active_power_usage = 300
 
 	// Update icon every 5 ticks.
-/obj/machinery/power/monitor/process()
+/obj/machinery/computer/power_monitor/process()
 	update_counter++
 	if(update_counter > 4)
 		update_icon()
 
-/obj/machinery/power/monitor/New()
+/obj/machinery/computer/power_monitor/New()
 	..()
 	refresh_sensors()
 
 
-/obj/machinery/power/monitor/proc/refresh_sensors()
+/obj/machinery/computer/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	for(var/obj/machinery/power/sensor/S in machines)
 		if((S.loc.z == src.loc.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
@@ -42,21 +42,21 @@
 				grid_sensors += S
 
 
-/obj/machinery/power/monitor/attack_ai(mob/user)
+/obj/machinery/computer/power_monitor/attack_ai(mob/user)
 	add_fingerprint(user)
 
 	if(stat & (BROKEN|NOPOWER))
 		return
 	interact(user)
 
-/obj/machinery/power/monitor/attack_hand(mob/user)
+/obj/machinery/computer/power_monitor/attack_hand(mob/user)
 	add_fingerprint(user)
 
 	if(stat & (BROKEN|NOPOWER))
 		return
 	interact(user)
 
-/obj/machinery/power/monitor/interact(mob/user)
+/obj/machinery/computer/power_monitor/interact(mob/user)
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
@@ -95,7 +95,10 @@
 			t += "<B>ERROR - No Active Sensors Detected!</B>"
 		else
 			for(var/obj/machinery/power/sensor/S in grid_sensors)			// Show all data from current Z level.
-				t += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
+				if(S.check_grid_warning()) // Display grids with active alarms in bold text
+					t += "<B><A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A></B><BR>"
+				else
+					t += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
 
 
 
@@ -103,7 +106,7 @@
 	onclose(user, "powcomp")
 
 
-/obj/machinery/power/monitor/Topic(href, href_list)
+/obj/machinery/computer/power_monitor/Topic(href, href_list)
 	..()
 	if( href_list["close"] )
 		usr << browse(null, "window=powcomp")
@@ -120,7 +123,7 @@
 		active_sensor = href_list["setsensor"]
 		src.updateDialog()
 
-/obj/machinery/power/monitor/update_icon()
+/obj/machinery/computer/power_monitor/update_icon()
 	update_counter = 0 // Reset the icon update counter.
 	if(stat & BROKEN)
 		icon_state = "powerb"
@@ -134,7 +137,7 @@
 
 	icon_state = "power"
 
-/obj/machinery/power/monitor/proc/check_warnings()
+/obj/machinery/computer/power_monitor/proc/check_warnings()
 	var/warn = 0
 	if(grid_sensors)
 		for(var/obj/machinery/power/sensor/S in grid_sensors)
@@ -143,7 +146,7 @@
 	return warn
 
 
-/obj/machinery/power/monitor/power_change()
+/obj/machinery/computer/power_monitor/power_change()
 	..()
 
 	// Leaving this here to preserve that delayed shutdown effect when power goes out.
@@ -153,7 +156,7 @@
 	else
 		update_icon()
 
-
+/*
 //copied from computer.dm
 /obj/machinery/power/monitor/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
@@ -179,3 +182,4 @@
 	else
 		src.attack_hand(user)
 	return
+	*/
