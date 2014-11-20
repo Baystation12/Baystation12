@@ -163,18 +163,7 @@ Class Procs:
 
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
-	if ((new_use_power == use_power) && !force_update)
-		return	//don't need to do anything
-
 	use_power = new_use_power
-
-	//force area power update
-	force_power_update()
-
-/obj/machinery/proc/force_power_update()
-	var/area/A = get_area(src)
-	if(A && A.master)
-		A.master.powerupdate = 1
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
@@ -218,9 +207,6 @@ Class Procs:
 
 	src.add_fingerprint(usr)
 
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
 	return 0
 
 /obj/machinery/attack_ai(mob/user as mob)
@@ -258,14 +244,10 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	var/area/A = get_area(src)
-	A.master.powerupdate = 1
-
 	return 0
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return
-	return 0
 
 /obj/machinery/proc/assign_uid()
 	uid = gl_uid

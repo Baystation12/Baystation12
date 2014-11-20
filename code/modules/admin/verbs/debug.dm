@@ -957,7 +957,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	for(var/obj/machinery/power/smes/SMES in world)
 		if(SMES.anchored)
-			SMES.chargemode = 1
+			SMES.input_attempt = 1
 
 /client/proc/setup_supermatter_engine()
 	set category = "Debug"
@@ -1017,16 +1017,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			else if(istype(M,/obj/machinery/power/smes))	//This is the SMES inside the engine room.  We don't need much power.
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 	if(!found_the_pump && response == "Setup Completely")
 		src << "\red Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter"
