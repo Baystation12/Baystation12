@@ -369,7 +369,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Eyes
 		if(!skeleton)
 			var/icon/eyes = new/icon('icons/mob/human_face.dmi', species.eyes)
-			eyes.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+			if (species.flags & HAS_EYE_COLOR)
+				eyes.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
 			stand_icon.Blend(eyes, ICON_OVERLAY)
 
 		//Mouth	(lipstick!)
