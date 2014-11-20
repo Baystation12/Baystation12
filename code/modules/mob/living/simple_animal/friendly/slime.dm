@@ -41,7 +41,8 @@
 			if (!( AM.anchored ))
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
+					var/obj/structure/window/W = AM
+					if(W.is_full_window())
 						for(var/obj/structure/window/win in get_step(AM,t))
 							now_pushing = 0
 							return
