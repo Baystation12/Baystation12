@@ -178,12 +178,7 @@
 
 /obj/machinery/atmospherics/unary/freezer/proc/set_power_level(var/new_power_setting)
 	power_setting = new_power_setting
-
-	var/old_power_usage = active_power_usage
 	active_power_usage = max_power_usage * (power_setting/100)
-
-	if (use_power >= 2 && old_power_usage != active_power_usage)
-		force_power_update()
 
 //dismantling code. copied from autolathe
 /obj/machinery/atmospherics/unary/freezer/attackby(var/obj/item/O as obj, var/mob/user as mob)
