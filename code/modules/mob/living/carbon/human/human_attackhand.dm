@@ -142,11 +142,11 @@
 							TugText = "ripping off"
 							TuggedText = "ripped off"
 						visible_message("<span class='danger'>[M] starts [TugText] [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts [TugText] your [affected.display_name]!</span>") // Begin tugging.
-						var/tugTime = 300
+						var/tugTime = 150
 						if(affected.name == "head" || affected.name == "groin")
-							tugTime = 1200 // Important limbs'll take a WHILE.
+							tugTime = 600 // Important limbs'll take a WHILE.
 						if(affected.name == "l_arm" || affected.name == "r_arm" || affected.name == "l_leg" || affected.name == "r_leg")
-							tugTime = 600
+							tugTime = 300
 						if(affected.status & ORGAN_ROBOT)
 							tugTime = tugTime/2 // Easier to rip off. Still likely messy.
 
