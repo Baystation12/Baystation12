@@ -1287,6 +1287,7 @@
 #include "code\modules\research\xenoarchaeology\artifact\effects\unknown_effect_teleport.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_defines.dm"
+#include "code\modules\research\xenoarchaeology\finds\finds_eguns.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_fossils.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_misc.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_special.dm"
