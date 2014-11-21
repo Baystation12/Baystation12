@@ -191,6 +191,8 @@
 		on_fire = 0
 		fire_stacks = 0
 		update_fire()
+		//var/mob/living/L = O
+		clean_blood()
 
 /mob/living/proc/update_fire()
 	return
