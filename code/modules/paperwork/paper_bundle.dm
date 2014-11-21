@@ -44,7 +44,7 @@
 		user << "<span class='notice'>You add [(W.name == "photo") ? "the photo" : W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		user.drop_from_inventory(W)
 		W.loc = src
-	else if(istype(W, /obj/item/weapon/flame/lighter))
+	else if(istype(W, /obj/item/weapon/flame))
 		burnpaper(W, user)
 	else if(istype(W, /obj/item/weapon/paper_bundle))
 		user.drop_from_inventory(W)
@@ -69,7 +69,7 @@
 	return
 
 
-/obj/item/weapon/paper_bundle/proc/burnpaper(obj/item/weapon/flame/lighter/P, mob/user)
+/obj/item/weapon/paper_bundle/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
 	var/class = "<span class='warning'>"
 
 	if(P.lit && !user.restrained())
