@@ -73,7 +73,8 @@
 			//update the sample bag
 			filled_bag.icon_state = "evidence"
 			var/image/I = image("icon"=R, "layer"=FLOAT_LAYER)
-			filled_bag.underlays += I
+			filled_bag.overlays += I
+			filled_bag.overlays += "evidence"
 			filled_bag.w_class = 1
 
 			user << "\blue You take a core sample of the [item_to_sample]."
