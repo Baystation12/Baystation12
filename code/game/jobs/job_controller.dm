@@ -723,9 +723,9 @@ var/global/datum/controller/occupations/job_master
 	proc/getdeptaccess(var/dept)
 		var/list/deptaccess = list()
 		if(dept == "Medical")
-			deptaccess = list(access_security,access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+			deptaccess = list(access_security,access_medical,access_deptguard, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 		if(dept == "Engineering")
-			deptaccess = list(access_security,access_eva, access_engine, access_engine_equip, access_tech_storage, access_external_airlocks, access_construction, access_atmospherics)
+			deptaccess = list(access_security,access_eva,access_deptguard, access_engine, access_engine_equip, access_tech_storage, access_external_airlocks, access_construction, access_atmospherics)
 		if(dept == "Research")
-			deptaccess = list(access_security,access_tox, access_morgue,access_tox_storage, access_teleporter, access_research, access_robotics, access_xenobiology,access_xenoarch)
+			deptaccess = list(access_security,access_deptguard,access_tox, access_morgue,access_tox_storage, access_teleporter, access_research, access_robotics, access_xenobiology,access_xenoarch)
 		return deptaccess

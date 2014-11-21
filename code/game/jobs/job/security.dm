@@ -215,8 +215,8 @@
 	supervisors = "the head of security and the head of your guarded department"
 	selection_color = "#ffeeee"
 	idtype = /obj/item/weapon/card/id/sec
-	access = list(access_security)
-	minimal_access = list(access_security)
+	access = list(access_deptguard,access_security)
+	minimal_access = list(access_deptguard,access_security)
 	minimal_player_age = 3
 	var/medical = 0
 	var/engine = 0
