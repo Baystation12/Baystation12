@@ -85,17 +85,9 @@
 				crewmemberData["fire"] = round(H.getFireLoss(), 1)
 				crewmemberData["brute"] = round(H.getBruteLoss(), 1)
 
-				crewmemberData["name"] = "Unknown"
-				crewmemberData["rank"] = "Unknown"
-				if(H.wear_id)
-					if(istype(H.wear_id, /obj/item/weapon/card/id) )
-						var/obj/item/weapon/card/id/I = H.wear_id
-						crewmemberData["name"] = I.registered_name
-						crewmemberData["rank"] = I.rank
-					else if(istype(H.wear_id, /obj/item/device/pda) )
-						var/obj/item/device/pda/P = H.wear_id
-						crewmemberData["name"] = (P.id ? P.id.registered_name : P.owner)
-						crewmemberData["rank"] = (P.id ? P.id.rank : P.ownjob)
+				crewmemberData["name"] = H.get_authentification_name(if_no_id="Unknown")
+				crewmemberData["rank"] = H.get_authentification_rank(if_no_id="Unknown", if_no_job="No Job")
+				crewmemberData["assignment"] = H.get_assignment(if_no_id="Unknown", if_no_job="No Job")
 
 				var/area/A = get_area(H)
 				crewmemberData["area"] = sanitize(A.name)
