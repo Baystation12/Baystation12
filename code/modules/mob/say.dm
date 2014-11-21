@@ -24,7 +24,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = strip_html_properly(message)
 
 	set_typing_indicator(0)
 	if(use_me)
