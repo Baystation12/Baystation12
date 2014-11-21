@@ -71,6 +71,13 @@
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/headset_eng
 
+/obj/item/device/radio/headset/headset_engsec
+	name = "engineering security radio headset"
+	desc = "A headset that is a result of the mating between engineering and security. To access the engineering channel, use :e. For security, use :s."
+	icon_state = "engsec_headset"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/headset_engsec
+
 /obj/item/device/radio/headset/headset_rob
 	name = "robotics radio headset"
 	desc = "Made specifically for the roboticists who cannot decide between departments. To access the engineering channel, use :e. For research, use :n."
@@ -88,9 +95,16 @@
 /obj/item/device/radio/headset/headset_sci
 	name = "science radio headset"
 	desc = "A sciency headset. Like usual. To access the science channel, use :n."
-	icon_state = "com_headset"
+	icon_state = "sci_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/headset_sci
+
+/obj/item/device/radio/headset/headset_scisec
+	name = "research security radio headset"
+	desc = "A headset that is a result of the mating between science and security. To access the science channel, use :n. For security, use :s."
+	icon_state = "scisec_headset"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/headset_scisec
 
 /obj/item/device/radio/headset/headset_medsci
 	name = "medical research radio headset"
@@ -98,6 +112,13 @@
 	icon_state = "med_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/headset_medsci
+
+/obj/item/device/radio/headset/headset_medsec
+	name = "medical security radio headset"
+	desc = "A headset that is a result of the mating between medical and security. To access the medical channel, use :m. For security, use :s."
+	icon_state = "medsec_headset"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/headset_medsec
 
 /obj/item/device/radio/headset/headset_com
 	name = "command radio headset"

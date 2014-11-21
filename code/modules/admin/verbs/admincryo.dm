@@ -135,8 +135,10 @@
 									del(O)
 
 				//Handle job slot/tater cleanup.
-
-				job_master.FreeRole(job)
+				if(job == "Department Guard")
+					job_master.FreeDGRole(job,M.mind.assigned_DG_dept)
+				else
+					job_master.FreeRole(job)
 
 				if(M.mind.objectives.len)
 					del(M.mind.objectives)

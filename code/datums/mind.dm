@@ -41,6 +41,7 @@ datum/mind
 
 	var/assigned_role
 	var/special_role
+	var/assigned_DG_dept
 
 	var/role_alt_title
 

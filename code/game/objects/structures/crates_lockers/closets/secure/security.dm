@@ -238,6 +238,7 @@
 		return
 
 
+
 /obj/structure/closet/secure_closet/security/cargo
 
 	New()
@@ -388,3 +389,31 @@
 				icon_state = icon_closed
 		else
 			icon_state = icon_opened
+
+/obj/structure/closet/secure_closet/deptguard
+	name = "Department Guards's Locker"
+	req_access = list(access_security)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
+
+	New()
+		..()
+		sleep(2)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/security(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+
+		new /obj/item/clothing/suit/armor/vest/protective(src)
+		new /obj/item/weapon/storage/belt/security(src)
+		new /obj/item/device/flash(src)
+		new /obj/item/weapon/reagent_containers/spray/pepper(src)
+		new /obj/item/weapon/melee/baton/loaded(src)
+		new /obj/item/clothing/glasses/sunglasses/sechud(src)
+		new /obj/item/taperoll/police(src)
+		new /obj/item/clothing/gloves/black(src)
+		return
