@@ -77,7 +77,7 @@
 
 /obj/item/weapon/evidencebag/attack_self(mob/user as mob)
 	if(contents.len)
-		var/obj/item/I = stored_item
+		var/obj/item/I = contents[1]
 		user.visible_message("[user] takes [I] out of [src]", "You take [I] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
 		overlays.Cut()	//remove the overlays

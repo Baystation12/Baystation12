@@ -102,7 +102,7 @@
 
 	src.loc = T
 
-/obj/item/examine(mob/user)
+/obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
 		if(1.0)
@@ -117,10 +117,8 @@
 			size = "huge"
 		else
 	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	user << "This is a [src.blood_DNA ? "bloody " : ""]\icon[src][src.name]. It is a [size] item."
-	if(src.desc)
-		user << src.desc
-	return
+	var/custom_sufix = "It is a [size] item."
+	return ..(user, distance, custom_sufix)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -393,6 +391,19 @@
 					if(B.contents.len < B.storage_slots && w_class <= B.max_w_class)
 						return 1
 				return 0
+			if(slot_tie)
+				if(!H.w_uniform && (slot_w_uniform in mob_equip))
+					if(!disable_warning)
+						H << "\red You need a jumpsuit before you can attach this [name]."
+					return 0
+				var/obj/item/clothing/under/uniform = H.w_uniform
+				if(uniform.hastie)
+					if (!disable_warning)
+						H << "\red You already have [uniform.hastie] attached to your [uniform]."
+					return 0
+				if( !(slot_flags & SLOT_TIE) )
+					return 0
+				return 1
 		return 0 //Unsupported slot
 		//END HUMAN
 

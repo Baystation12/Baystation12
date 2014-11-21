@@ -957,6 +957,7 @@ ________________________________________________________________________________
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 				spark_system.set_up(5, 0, A.loc)
 				while(G.candrain&&A.cell.charge>0&&!maxcapacity)
+					A.terminal.powernet.trigger_warning()
 					drain = rand(G.mindrain,G.maxdrain)
 					if(A.cell.charge<drain)
 						drain = A.cell.charge
@@ -1082,6 +1083,7 @@ ________________________________________________________________________________
 			var/obj/structure/cable/A = target
 			var/datum/powernet/PN = A.get_powernet()
 			while(G.candrain&&!maxcapacity&&!isnull(A))
+				PN.trigger_warning()
 				drain = (round((rand(G.mindrain,G.maxdrain))/2))
 				var/drained = 0
 				if(PN&&do_after(U,10))
