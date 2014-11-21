@@ -270,6 +270,9 @@
 	SetParalysis(0)
 	SetStunned(0)
 	SetWeakened(0)
+	fire_stacks = 0
+	on_fire = 0
+
 
 	// shut down ongoing problems
 	radiation = 0
@@ -454,7 +457,8 @@
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
-							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
+							var/obj/structure/window/W = pulling
+							if(W.is_full_window())
 								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
 									stop_pulling()
 					if (pulling)
@@ -647,6 +651,16 @@
 	//breaking out of handcuffs
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
+		if(CM.on_fire && CM.canmove)
+			CM.fire_stacks -= 5
+			CM.weakened = 5
+			CM.visible_message("<span class='danger'>[CM] rolls on the floor, trying to put themselves out!</span>", \
+				"<span class='notice'>You stop, drop, and roll!</span>")
+			if(fire_stacks <= 0)
+				CM.visible_message("<span class='danger'>[CM] has successfully extinguished themselves!</span>", \
+				"<span class='notice'>You extinguish yourself.</span>")
+				ExtinguishMob()
+			return
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100

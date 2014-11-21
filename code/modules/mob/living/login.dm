@@ -21,4 +21,8 @@
 				var/datum/game_mode/mutiny/mode = get_mutiny_mode()
 				if(mode)
 					mode.update_all_icons()
+			if("vampire")
+				var/ref = "\ref[mind]"
+				if((ref in ticker.mode.thralls) || (mind in ticker.mode.enthralled))
+					ticker.mode.update_vampire_icons_added(mind)
 	return .

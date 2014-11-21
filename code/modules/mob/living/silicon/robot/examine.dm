@@ -20,6 +20,12 @@
 			msg += "<B>It looks severely burnt and heat-warped!</B>\n"
 	msg += "</span>"
 
+	if (src.fire_stacks < 0)
+		msg += "It's covered in water.\n"
+	if (src.fire_stacks > 0)
+		msg += "It's coated in something flammable.\n"
+	msg += "</span>"
+
 	if(opened)
 		msg += "<span class='warning'>Its cover is open and the power cell is [cell ? "installed" : "missing"].</span>\n"
 	else

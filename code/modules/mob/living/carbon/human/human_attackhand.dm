@@ -142,11 +142,11 @@
 							TugText = "ripping off"
 							TuggedText = "ripped off"
 						visible_message("<span class='danger'>[M] starts [TugText] [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts [TugText] your [affected.display_name]!</span>") // Begin tugging.
-						var/tugTime = 300
+						var/tugTime = 150
 						if(affected.name == "head" || affected.name == "groin")
-							tugTime = 1200 // Important limbs'll take a WHILE.
+							tugTime = 600 // Important limbs'll take a WHILE.
 						if(affected.name == "l_arm" || affected.name == "r_arm" || affected.name == "l_leg" || affected.name == "r_leg")
-							tugTime = 600
+							tugTime = 300
 						if(affected.status & ORGAN_ROBOT)
 							tugTime = tugTime/2 // Easier to rip off. Still likely messy.
 
@@ -188,7 +188,22 @@
 			return 1
 
 		if("hurt")
-
+			//Vampire code
+			if(M.zone_sel && M.zone_sel.selecting == "head" && src != M)
+				if(M.mind && M.mind.vampire && (M.mind in ticker.mode.vampires) && !M.mind.vampire.draining)
+					if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
+						M << "\red Remove their mask!"
+						return 0
+					if((M.head && (M.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
+						M << "\red Remove your mask!"
+						return 0
+					if(mind && mind.vampire && (mind in ticker.mode.vampires))
+						M << "\red Your fangs fail to pierce [src.name]'s cold flesh"
+						return 0
+					//we're good to suck the blood, blaah
+					M.handle_bloodsucking(src)
+					return
+			//end vampire codes
 			// See if they can attack, and which attacks to use.
 			var/datum/unarmed_attack/attack = M.species.unarmed
 			if(!attack.is_usable(M))

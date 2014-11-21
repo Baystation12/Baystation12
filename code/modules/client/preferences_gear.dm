@@ -88,6 +88,13 @@ var/global/list/gear_datums = list()
 	cost = 1
 	slot = slot_neck
 
+/datum/gear/goldchain
+	display_name = "Silver Medallion (Aviskree)"
+	path = /obj/item/clothing/neck/Avischain
+	cost = 1
+	slot = slot_neck
+	whitelisted = "Aviskree"
+
 /datum/gear/gbandana
 	display_name = "bandana, green"
 	path = /obj/item/clothing/head/greenbandana

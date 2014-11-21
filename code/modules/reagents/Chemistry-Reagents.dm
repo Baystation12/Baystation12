@@ -240,6 +240,17 @@ datum
 						cube.Expand()
 				return
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+				if(!istype(M, /mob/living))
+					return
+
+			// Put out fire
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
+
 		water/holywater
 			name = "Holy Water"
 			id = "holywater"
@@ -253,7 +264,39 @@ datum
 						ticker.mode.remove_cultist(M.mind)
 						for(var/mob/O in viewers(M, null))
 							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
+                     // Vamps react to this like acid
+					if(((M.mind in ticker.mode.vampires) || M.mind.vampire) && (!(VAMP_FULL in M.mind.vampire.powers)) && prob(10))
+						if(!M) M = holder.my_atom
+						M.adjustToxLoss(1*REM)
+						M.take_organ_damage(0, 1*REM)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
+
+
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
+				// Vamps react to this like acid
+				if(ishuman(M))
+					if((M.mind in ticker.mode.vampires))
+						var/mob/living/carbon/human/H=M
+						if(method == TOUCH)
+							if(H.wear_mask)
+								H << "\red Your mask protects you from the holy water!"
+								return
+							if(H.head)
+								H << "\red Your helmet protects you from the holy water!"
+								return
+							if(!M.unacidable)
+								if(prob(15) && volume >= 30)
+									var/datum/organ/external/affecting = H.get_organ("head")
+									if(affecting)
+										if(affecting.take_damage(25, 0))
+											H.UpdateDamageIcon()
+										H.status_flags |= DISFIGURED
+										H.emote("scream")
+								else
+									M.take_organ_damage(min(15, volume * 2)) // uses min() and volume to make sure they aren't being sprayed in trace amounts (1 unit != insta rape) -- Doohl
+						else
+							if(!M.unacidable)
+								M.take_organ_damage(min(15, volume * 2))
 				return
 
 		lube
@@ -886,6 +929,12 @@ datum
 			color = "#660000" // rgb: 102, 0, 0
 			overdose = REAGENTS_OVERDOSE
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+				return
 
 			reaction_obj(var/obj/O, var/volume)
 				var/turf/the_turf = get_turf(O)
@@ -1563,6 +1612,11 @@ datum
 				src = null
 				T.assume_gas("volatile_fuel", volume, T20C)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with phoron is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
 
 		toxin/lexorin
 			name = "Lexorin"
@@ -1941,7 +1995,8 @@ datum
 								if(affecting.take_damage(4*toxpwr, 2*toxpwr))
 									H.UpdateDamageIcon()
 								if(prob(meltprob)) //Applies disfigurement
-									H.emote("scream")
+									if (!(H.species && (H.species.flags & NO_PAIN)))
+										H.emote("scream")
 									H.status_flags |= DISFIGURED
 						else
 							M.take_organ_damage(min(6*toxpwr, volume * toxpwr)) // uses min() and volume to make sure they aren't being sprayed in trace amounts (1 unit != insta rape) -- Doohl
@@ -2103,7 +2158,7 @@ datum
 						if ( eyes_covered && mouth_covered )
 							victim << "\red Your [safe_thing] protects you from the pepperspray!"
 							return
-						else if ( mouth_covered )	// Reduced effects if partially protected
+						else if ( eyes_covered )	// Reduced effects if partially protected
 							victim << "\red Your [safe_thing] protect you from most of the pepperspray!"
 							victim.eye_blurry = max(M.eye_blurry, 15)
 							victim.eye_blind = max(M.eye_blind, 5)
@@ -2112,18 +2167,21 @@ datum
 							//victim.Paralyse(10)
 							//victim.drop_item()
 							return
-						else if ( eyes_covered ) // Eye cover is better than mouth cover
-							victim << "\red Your [safe_thing] protects your eyes from the pepperspray!"
-							victim.emote("scream")
+						else if ( mouth_covered ) // Mouth cover is better than eye cover
+							victim << "\red Your [safe_thing] protects your face from the pepperspray!"
+							if (!(victim.species && (victim.species.flags & NO_PAIN)))
+								victim.emote("scream")
 							victim.eye_blurry = max(M.eye_blurry, 5)
 							return
 						else // Oh dear :D
-							victim.emote("scream")
+							if (!(victim.species && (victim.species.flags & NO_PAIN)))
+								victim.emote("scream")
 							victim << "\red You're sprayed directly in the eyes with pepperspray!"
 							victim.eye_blurry = max(M.eye_blurry, 25)
 							victim.eye_blind = max(M.eye_blind, 10)
 							victim.Stun(5)
 							victim.Weaken(5)
+							victim.attack_log += text("\[[time_stamp()]\] <font color='red'>[victim.name] has been peppersprayed ([victim.ckey])</font>")
 							//victim.Paralyse(10)
 							//victim.drop_item()
 
@@ -3031,6 +3089,13 @@ datum
 						usr << "The solution dissolves the ink on the book."
 					else
 						usr << "It wasn't enough..."
+				return
+
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
 				return
 
 		ethanol/beer

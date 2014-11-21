@@ -6,7 +6,6 @@
 	icon_state = "body_m_s"
 
 	var/list/hud_list[9]
-	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/dummy
@@ -113,6 +112,9 @@
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
+			if(mind.vampire)
+				stat("Useable Blood", mind.vampire.bloodusable)
+				stat("Total Accumulated Blood", mind.vampire.bloodtotal)
 
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
 			stat("Energy Charge", round(wear_suit:cell:charge/100))

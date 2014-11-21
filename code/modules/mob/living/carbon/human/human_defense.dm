@@ -219,15 +219,15 @@ emp_act
 				return 0
 			else
 				user << "That won't fit there!"
-		/*else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
+		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
 			var/datum/organ/external/affected = get_organ(target_zone)
 			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
 			"\blue You have attached [src]'s head to the body.")
 			affected.status = 0
 			affected.amputated = 0
 			affected.destspawn = 0
-			if (stat & DEAD)
-				stat -= DEAD // BRING OUT YER DEAD. Also, Triple checked this, if they're supposed to be dead, it just seizes up again. If they've recently been turned off and on again, or headswapped, all is well.
+			//if (stat & DEAD)
+				//stat -= DEAD // This can fuck off for now.
 			update_body()
 			updatehealth()
 			UpdateDamageIcon()
@@ -238,7 +238,7 @@ emp_act
 			del(B)
 			UpdateAppearance()
 			handle_organs(1)
-			return*/ // Removed this for a bit untill I fix it up.
+			return
 		else
 			user << "What [affecting.display_name]?"
 			return 0

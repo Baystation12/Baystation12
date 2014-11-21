@@ -113,6 +113,30 @@
 		if("whisper")
 			whisper_say(message, speaking, alt_name)
 			return
+
+		if("vampire")
+			if(mind && mind.vampire)
+				log_say("[key_name(src)] ([src.real_name]): [message]")
+				for(var/mob/Vampire in mob_list)
+					if(istype(Vampire, /mob/living/silicon)) continue //WHY IS THIS NEEDED?
+					if(Vampire.mind && Vampire.mind.vampire && Vampire.client)
+						Vampire << "<i><font color=#660000>\[Psychic link\] <b>[src.real_name]:</b> [message]</font></i>"
+				for(var/mob/O in player_list)
+					if(istype(O, /mob/dead/observer))
+						var/mob/dead/observer/obs = O
+						if(obs.client.holder)
+							if(obs.mind)
+								if(!obs.mind.vampire)
+									obs << "<i><font color=#660000>\[Psychic link\] <b>[src.real_name]:</b> [message]</font></i>"
+							if(obs.started_as_observer)
+								obs << "<i><font color=#660000>\[Psychic link\] <b>[src.real_name]:</b> [message]</font></i>"
+						if(!obs.client.holder && obs.has_enabled_antagHUD && (obs.client.prefs.toggles & CHAT_GHOSTEARS))
+							if(obs.mind)
+								if(!obs.mind.vampire)
+									obs << "<i><font color=#660000>\[Psychic link\] <b>[src.real_name]:</b> [message]</font></i>"
+							if(obs.started_as_observer)
+								obs << "<i><font color=#660000>\[Psychic link\] <b>[src.real_name]:</b> [message]</font></i>"
+				return
 		else
 			if(message_mode)
 				if(l_ear && istype(l_ear,/obj/item/device/radio))
