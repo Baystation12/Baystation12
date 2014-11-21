@@ -1688,7 +1688,7 @@
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
-			var/percentage_health = RoundHealth(((0.0+health)/species.total_health)*100)
+			var/percentage_health = RoundHealth((health-config.health_threshold_crit)/(species.total_health-config.health_threshold_crit)*100)
 			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
 
