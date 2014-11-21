@@ -685,14 +685,14 @@
 		wearer << "<span class='danger'>The [source] has [dam_module.damage >= 2 ? "destroyed" : "damaged"] your [dam_module.interface_name]!"
 	dam_module.deactivate()
 
-/obj/item/weapon/rig/proc/forced_move(dir)
+/*/obj/item/weapon/rig/proc/forced_move(dir)
 	if(locked_down)
 		return 0
 	if(!control_overridden)
 		return
 	if(!wearer || wearer.back != src)
 		return 0
-	wearer.Move(null,dir)
+	wearer.Move(null,dir)*/
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT
