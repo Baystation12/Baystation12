@@ -398,7 +398,7 @@ var/global/list/gear_datums = list()
 
 // Attachments
 
-/datum/gear/armband_cargo
+/* /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/tie/armband/cargo
 	cost = 1
@@ -432,6 +432,7 @@ var/global/list/gear_datums = list()
 	display_name = "armband, science"
 	path = /obj/item/clothing/tie/armband/science
 	cost = 1
+*/
 
 /datum/gear/armpit
 	display_name = "shoulder holster"
