@@ -18,6 +18,7 @@
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
 	density = 0
+	glass = 1
 	layer = DOOR_OPEN_LAYER - 0.01
 	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open
 	closed_layer = DOOR_CLOSED_LAYER + 0.01 // Just above doors when closed
@@ -324,6 +325,7 @@
 	overlays.Cut()
 	if(density)
 		icon_state = "door_closed"
+		opacity = 0
 		if(blocked)
 			overlays += "welded"
 		if(pdiff_alert)

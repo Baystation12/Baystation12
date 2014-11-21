@@ -163,7 +163,7 @@
 		add_admin_verbs()
 		admin_memo_show()
 		if(!check_rights(R_DEV,0))
-			if(check_rights(R_DEBUG))
+			if(check_rights(R_DEBUG,0))
 				hide_debug_verbs()
 
 	if(vipholder)

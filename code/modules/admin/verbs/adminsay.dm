@@ -11,7 +11,7 @@
 	log_admin_single("[key_name(src)] : [msg]")
 
 	var/color = "adminsay"
-	if(ishost(usr))
+	if(check_rights(R_HOST,0))
 		color = "headminsay"
 
 	if(check_rights(R_ADMIN,0))

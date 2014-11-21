@@ -208,7 +208,7 @@ var/list/debug_verbs = list (
 	set category = "Debug"
 	set name = "Hide Debug verbs"
 
-	if(!check_rights(R_DEBUG)) return
+	if(!check_rights(R_DEBUG,0)) return
 
 	verbs -= debug_verbs
 
