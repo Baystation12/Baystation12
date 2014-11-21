@@ -50,7 +50,8 @@
 	R.my_atom = src
 
 	species = all_species[greaterform]
-	add_language(species.language)
+	if(species != null)
+		add_language(species.language)
 
 	if(name == initial(name)) //To stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"
@@ -95,7 +96,7 @@
 
 /mob/living/carbon/monkey/skrell/New()
 
-	
+
 	dna.mutantrace = "skrell"
 	greaterform = "Skrell"
 	..()
