@@ -183,9 +183,12 @@
 			if(isobserver(M))
 				ghosts++
 
-	var/text = "A round of <b>[src.name]</b> has ended.<br>"
-	text += "There [surviving_total==1 ? "was" : "were"] <b>[surviving_total] [surviving_total==1 ? "survivor" : "survivors"]</b>"
-	text += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b>) and <b>[ghosts] ghosts</b>.</b><br>"
+	var/text = "A round of <b>[src.name]</b> has ended."
+	if(surviving_total > 0)
+		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]</b>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.</b><br>"
+	else
+		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>).</b>"
 	text += "<br>" + pltext //print player list after the general info
 	world << text
 
