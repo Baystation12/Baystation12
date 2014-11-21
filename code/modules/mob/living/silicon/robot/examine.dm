@@ -1,5 +1,6 @@
 /mob/living/silicon/robot/examine(mob/user)
-	..(user)
+	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
+	..(user, infix = custom_infix)
 
 	var/msg = ""
 	msg += "<span class='warning'>"
