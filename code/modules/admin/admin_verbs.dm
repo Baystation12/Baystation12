@@ -855,8 +855,15 @@ var/list/admin_verbs_dev = list(
 			usr << "There are no fully staffed jobs."
 			return
 		var/job = input("Please select job slot to free", "Free job slot")  as null|anything in jobs
-		if (job)
-			job_master.FreeRole(job)
+		if(job)
+			if(job == "Department Guard")
+				var/list/departments = list("Medical","Engineering","Research")
+				var/dept = input("Please select a department to free up", "Free Department Guard slot") as null|anything in departments
+
+				if(dept)
+					job_master.FreeDGRole(job,dept)
+			else
+				job_master.FreeRole(job)
 	return
 
 /client/proc/toggleattacklogs()

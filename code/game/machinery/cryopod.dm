@@ -243,7 +243,10 @@ var/global/list/frozen_items = list()
 			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
 
-			job_master.FreeRole(job)
+			if(job == "Department Guard")
+				job_master.FreeDGRole(job,occupant.mind.assigned_DG_dept)
+			else
+				job_master.FreeRole(job)
 
 			if(occupant.mind.objectives.len)
 				del(occupant.mind.objectives)
