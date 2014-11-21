@@ -32,6 +32,13 @@
 /obj/structure/stool/bed/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
+/obj/structure/stool/bed/attack_robot(mob/user as mob)
+	if(Adjacent(user))
+		return src.attack_hand(user)
+	else
+		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	return
+
 /obj/structure/stool/bed/attack_hand(mob/user as mob)
 	manual_unbuckle(user)
 	return

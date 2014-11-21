@@ -42,16 +42,18 @@ var/global/normal_ooc_colour = "#505050"
 	log_ooc("[mob.name]/[key] : [msg]")
 
 	var/display_colour = normal_ooc_colour
-	if(holder && !holder.fakekey || vipholder)
+	if(vipholder)
+		if(vipholder.rights & V_EVENT)
+			display_colour = "#006e97"	//dark green
+		if(vipholder.rights & V_DONATE)
+			display_colour = "#005a31"	//dark green
+
+	if(holder && !holder.fakekey)
 		display_colour = "#505050"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
 			display_colour = "#184880"	//dark blue
 		//if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
 		//	display_colour = "#184880"	//dark green
-		if(!(holder) && vipholder && vipholder.rights & V_EVENT)
-			display_colour = "#006e97"	//dark green
-		if(!(holder) && vipholder && vipholder.rights & V_DONATE)
-			display_colour = "#005a31"	//dark green
 		else if(holder.rights & R_ADMIN)
 			if(config.allow_admin_ooccolor)
 				display_colour = src.prefs.ooccolor

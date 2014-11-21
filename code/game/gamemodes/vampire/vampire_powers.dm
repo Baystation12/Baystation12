@@ -47,7 +47,7 @@
 		return 0
 	return 1
 
-/mob/proc/vampire_can_reach(mob/M as mob, active_range = 1)
+/mob/proc/vampire_can_reach(mob/M as mob, active_range = 2)
 	if(M.loc == src.loc) return 1 //target and source are in the same thing
 	if(!isturf(src.loc) || !isturf(M.loc)) return 0 //One is inside, the other is outside something.
 	if(AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, active_range)) //If a path exists, good!

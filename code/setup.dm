@@ -643,9 +643,10 @@ var/list/liftable_structures = list(\
 #define R_MOD			8192
 #define R_MENTOR		16384
 #define R_DEV			32768
-#define R_MAXPERMISSION 65534 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_HOST			65536
+#define R_MAXPERMISSION 65536 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
-#define R_HOST			65535
+
 
 //Preference toggles
 #define SOUND_ADMINHELP	1
