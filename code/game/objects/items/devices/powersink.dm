@@ -14,9 +14,10 @@
 	matter = list("metal" = 750,"waste" = 750)
 
 	origin_tech = "powerstorage=3;syndicate=5"
-	var/drain_rate = 600000		// amount of power to drain per tick
+	var/drain_rate = 1000000		// amount of power to drain per tick
+	var/dissipation_rate = 20000
 	var/power_drained = 0 		// has drained this much power
-	var/max_power = 1e8		// maximum power that can be drained before exploding
+	var/max_power = 5e9		// maximum power that can be drained before exploding
 	var/mode = 0		// 0 = off, 1=clamped (off), 2=operating
 
 
@@ -86,11 +87,12 @@
 				processing_objects.Remove(src)
 
 	process()
+		power_drained -= min(dissipation_rate, power_drained)
 		if(attached)
 			var/datum/powernet/PN = attached.get_powernet()
 			if(PN)
 				SetLuminosity(12)
-
+				PN.trigger_warning()
 				// found a powernet, so drain up to max power from it
 				var/drained = PN.draw_power(drain_rate)
 
@@ -101,8 +103,8 @@
 						if(istype(T.master, /obj/machinery/power/apc))
 							var/obj/machinery/power/apc/A = T.master
 							if(A.operating && A.cell)
-								A.cell.charge = max(0, A.cell.charge - 50)
-								power_drained += 50
+								A.cell.charge = max(0, A.cell.charge - (2000 * CELLRATE))
+								power_drained += 2000
 
 
 			if(power_drained > max_power * 0.95)
