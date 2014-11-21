@@ -567,6 +567,8 @@ var/list/liftable_structures = list(\
 #define BORGTHERM 2
 #define BORGXRAY  4
 
+var/list/robot_module_types = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security"/*, "Combat"*/)
+
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
 
