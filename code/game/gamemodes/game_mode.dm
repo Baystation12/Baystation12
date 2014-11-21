@@ -151,7 +151,11 @@
 
 	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
+	var/pltext = "<font size=2><b>Player list:</b></font>"
+
 	for(var/mob/M in player_list)
+		if(M.mind)
+			pltext += printplayer(M.mind)
 		if(M.client)
 			clients++
 			if(ishuman(M))
@@ -178,6 +182,12 @@
 
 			if(isobserver(M))
 				ghosts++
+
+	var/text = "A round of <b>[src.name]</b> has ended.<br>"
+	text += "There [surviving_total==1 ? "was" : "were"] <b>[surviving_total] [surviving_total==1 ? "survivor" : "survivors"]</b>"
+	text += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b>) and <b>[ghosts] ghosts</b>.</b><br>"
+	text += "<br>" + pltext //print player list after the general info
+	world << text
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
