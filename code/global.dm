@@ -4,7 +4,6 @@
 var/global/obj/effect/datacore/data_core = null
 
 
-var/global/list/active_areas = list()
 var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()

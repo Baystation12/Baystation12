@@ -12,6 +12,8 @@
 	var/perapc_excess = 0
 	var/netexcess = 0			// excess power on the powernet (typically avail-load)
 
+	var/problem = 0				// If this is not 0 there is some sort of issue in the powernet. Monitors will display warnings.
+
 /datum/powernet/New()
 	powernets += src
 
@@ -72,10 +74,18 @@
 	M.powernet = src
 	nodes[M] = M
 
+// Triggers warning for certain amount of ticks
+/datum/powernet/proc/trigger_warning(var/duration_ticks = 20)
+	problem = max(duration_ticks, problem)
+
+
 //handles the power changes in the powernet
 //called every ticks by the powernet controller
 /datum/powernet/proc/reset()
 	var/numapc = 0
+
+	if(problem > 0)
+		problem = max(problem - 1, 0)
 
 	if(nodes && nodes.len) // Added to fix a bad list bug -- TLE
 		for(var/obj/machinery/power/terminal/term in nodes)

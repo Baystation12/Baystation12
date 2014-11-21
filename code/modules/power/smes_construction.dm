@@ -177,7 +177,7 @@
 				A.set_broken()
 
 	// Failing SMES has special icon overlay.
-/obj/machinery/power/smes/buildable/updateicon()
+/obj/machinery/power/smes/buildable/update_icon()
 	if (failing)
 		overlays.Cut()
 		overlays += image('icons/obj/power.dmi', "smes-crit")
@@ -199,7 +199,7 @@
 			user << "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>"
 			return
 
-		if (online || chargemode)
+		if (output_attempt || input_attempt)
 			user << "<span class='warning'>Turn off the [src] first!</span>"
 			return
 

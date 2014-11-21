@@ -6,7 +6,7 @@
 	item_state = ""	//no inhands
 	item_color = "bluetie"
 	flags = FPRINT | TABLEPASS
-	slot_flags = 0
+	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
@@ -390,7 +390,7 @@
 	desc = "This glowing blue badge marks the holder as THE LAW."
 	icon_state = "holobadge"
 	item_color = "holobadge"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/emagged = 0 //Emagging removes Sec check.
 	var/stored_name = null
@@ -398,7 +398,7 @@
 /obj/item/clothing/tie/holobadge/cord
 	icon_state = "holobadge-cord"
 	item_color = "holobadge-cord"
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 /obj/item/clothing/tie/holobadge/attack_self(mob/user as mob)
 	if(!stored_name)

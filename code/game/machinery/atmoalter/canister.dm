@@ -311,6 +311,7 @@ update_flag
 				release_log += "Valve was <b>opened</b> by [usr] ([usr.ckey]), starting the transfer into the [holding]<br>"
 			else
 				release_log += "Valve was <b>opened</b> by [usr] ([usr.ckey]), starting the transfer into the <font color='red'><b>air</b></font><br>"
+				log_open()
 		valve_open = !valve_open
 
 	if (href_list["remove_tank"])

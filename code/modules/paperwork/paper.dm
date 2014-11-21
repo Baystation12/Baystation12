@@ -60,19 +60,19 @@
 	icon_state = "paper"
 
 /obj/item/weapon/paper/examine(mob/user)
-//	..()	//We don't want them to see the dumb "this is a paper" thing every time.
-// I didn't like the idea that people can read tiny pieces of paper from across the room.
-// Now you need to be next to the paper in order to read it.
 	if(in_range(user, src))
-		if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)))
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
-			onclose(user, "[name]")
-		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
-			onclose(user, "[name]")
+		show_content(usr)
 	else
 		user << "<span class='notice'>It is too far away.</span>"
 	return
+
+/obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
+	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)) && !forceshow)
+		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
+		onclose(user, "[name]")
+	else
+		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
+		onclose(user, "[name]")
 
 /obj/item/weapon/paper/verb/rename()
 	set name = "Rename paper"
