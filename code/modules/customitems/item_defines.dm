@@ -1140,7 +1140,6 @@
 	item_color = "radi_pendant"
 	flags = FPRINT|TABLEPASS
 	w_class = 2.0
-	slot_flags = 0
 
 //////////// Masks ////////////
 
@@ -1186,7 +1185,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
@@ -1200,7 +1199,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
@@ -1230,7 +1229,7 @@
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Emerald necklace - Ty Foster - Nega
 
@@ -1458,7 +1457,7 @@
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 3, 1)
 		var/current_dist = get_dist(src, bff)
-		
+
 		if (movement_target != bff)
 			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
 				//stop existing movement
@@ -1469,7 +1468,7 @@
 				stop_automated_movement = 1
 				movement_target = bff
 				walk_to(src, movement_target, near_dist, 4)
-		
+
 		//already following and close enough, stop
 		else if (current_dist <= near_dist)
 			walk_to(src,0)
@@ -1481,15 +1480,15 @@
 
 /mob/living/simple_animal/cat/fluff/Life()
 	..()
-	if (stat || !bff) 
+	if (stat || !bff)
 		return
 	if (get_dist(src, bff) <= 1)
 		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
-			if (prob((bff.stat < DEAD)? 50 : 15)) 
+			if (prob((bff.stat < DEAD)? 50 : 15))
 				audible_emote(pick("meows in distress.", "meows anxiously."))
 		else
-			if (prob(5)) 
-				visible_emote(pick("nuzzles [bff].", 
+			if (prob(5))
+				visible_emote(pick("nuzzles [bff].",
 								   "brushes against [bff].",
 								   "rubs against [bff].",
 								   "purrs."))
