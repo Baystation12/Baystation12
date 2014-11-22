@@ -39,6 +39,14 @@
 	ce
 		item_color = "chief"			//Exists for washing machines. Is not different from black gloves in any way.
 
+/obj/item/clothing/gloves/blackcut
+	name = "mangled black gloves"
+	desc = "A pair of black gloves.<br>They have had the fingertips cut off of them."
+	icon_state = "black"
+	item_state = "bgloves"
+	item_color="brown"
+	species_restricted = list("Tajara","Unathi")
+
 /obj/item/clothing/gloves/orange
 	name = "orange gloves"
 	desc = "A pair of gloves, they don't look special in any way."
@@ -76,6 +84,11 @@
 	icon_state = "purple"
 	item_state = "purplegloves"
 	item_color="purple"
+
+/obj/item/clothing/gloves/purple/cut
+	name = "mangled purple gloves"
+	desc = "A pair of gloves, they don't look special in any way.<br>They have had the fingertips cut off of them."
+	species_restricted = list("Tajara","Unathi")
 
 /obj/item/clothing/gloves/green
 	name = "green gloves"

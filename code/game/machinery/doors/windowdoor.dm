@@ -331,6 +331,14 @@
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
 
+/obj/machinery/door/window/brigdoor/northright/reinforced
+	icon = 'icons/obj/doors/edge_Doorfire.dmi'
+	icon_state = "door"
+	base_state = "door"
+
+/obj/machinery/door/window/brigdoor/northright/reinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	return
+
 /obj/machinery/door/window/brigdoor/eastright
 	dir = EAST
 	icon_state = "rightsecure"
@@ -345,3 +353,5 @@
 	dir = SOUTH
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
+
+
