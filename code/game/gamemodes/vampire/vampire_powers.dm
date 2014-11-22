@@ -54,7 +54,7 @@
 		return 1
 	return 0
 
-/mob/proc/vampire_active(required_blood=0, max_stat=0, active_range=1)
+/mob/proc/vampire_active(required_blood=0, max_stat=0, active_range=2)
 	var/pass = vampire_power(required_blood, max_stat)
 	if(!pass)								return
 	var/datum/vampire/vampire = mind.vampire

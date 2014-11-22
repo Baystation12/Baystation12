@@ -18,7 +18,7 @@
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	active_power_usage			//50 kW. The power rating of the freezer
 
-	var/max_power_usage = 5000 //power rating when the usage is turned up to 100
+	var/max_power_usage = 2000 //power rating when the usage is turned up to 100
 	var/power_setting = 100
 
 	var/set_temperature = T20C	//thermostat
