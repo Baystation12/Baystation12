@@ -63,6 +63,7 @@ proc/populate_seed_list()
 	var/seed_noun = "seeds"        // Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
+	var/mysterious                 // Only used for the random seed packets.
 
 	// Output.
 	var/list/products              // Possible fruit/other product paths.
@@ -118,12 +119,13 @@ proc/populate_seed_list()
 	roundstart = 0
 	seed_name = "strange plant"     // TODO: name generator.
 	display_name = "strange plants" // TODO: name generator.
+	mysterious = 1
 
 	seed_noun = pick("spores","nodes","cuttings","seeds")
 	products = list(pick(typesof(/obj/item/weapon/reagent_containers/food/snacks/grown)-/obj/item/weapon/reagent_containers/food/snacks/grown))
 	potency = rand(5,30)
 
-	var/list/plant_icons = list(
+	var/list/plant_icons = pick(list(
 		list("seed-chili",              "chili"),
 		list("seed-icepepper",          "chiliice"),
 		list("seed-berry",              "berry"),
@@ -182,7 +184,7 @@ proc/populate_seed_list()
 		list("seed-cherry",             "cherry"),
 		list("seed-kudzu",              "kudzu"),
 		list("seed-replicapod",         "replicapod")
-		)
+		))
 
 	packet_icon = plant_icons[1]
 	plant_icon = plant_icons[2]
@@ -597,6 +599,10 @@ proc/populate_seed_list()
 		for(var/i = 0;i<total_yield;i++)
 			var/product_type = pick(products)
 			var/obj/item/product = new product_type(get_turf(user))
+			if(mysterious)
+				product.name += "?"
+				product.desc += " On second thought, something about this one looks strange."
+
 			if(biolum)
 				if(biolum_colour)
 					product.l_color = biolum_colour
