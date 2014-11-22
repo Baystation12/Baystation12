@@ -211,7 +211,7 @@
 				U.ai_cancel_tracking()
 				return
 
-			if (!near_camera(target))
+			if (!trackable(target))
 				U << "Target is not near any active cameras."
 				sleep(100)
 				continue
@@ -233,6 +233,9 @@
 	else if(!cameranet.checkCameraVis(M))
 		return 0
 	return 1
+
+/proc/trackable(var/mob/living/M)
+	return near_camera(M) || (M.loc.z in config.station_levels && hassensorlevel(M, SUIT_SENSOR_TRACKING))
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
