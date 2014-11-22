@@ -52,7 +52,8 @@
 		spawn( 0 )
 		O.mode = 2
 		if (istype(loc, /obj/item/device/aicard))
-			loc.icon_state = "aicard-404"
+			var/obj/item/device/aicard/card = loc
+			card.update_icon()
 
 	tod = worldtime2text() //weasellos time of death patch
 	if(mind)	mind.store_memory("Time of death: [tod]", 0)

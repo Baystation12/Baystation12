@@ -111,6 +111,23 @@ Class Procs:
 	var/manual = 0
 	var/global/gl_uid = 1
 
+/obj/machinery/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!powered())
+		return 0
+
+	var/area/area = get_area(src)
+	if(!area)
+		return 0
+
+	var/obj/machinery/power/apc/apc = area.get_apc()
+	if(!apc)
+		return 0
+	return apc.drain_power()
+
 /obj/machinery/New()
 	..()
 	if(!machinery_sort_required && ticker)

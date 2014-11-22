@@ -116,6 +116,23 @@
 	if(terminal)
 		terminal.connect_to_network()
 
+/obj/machinery/power/apc/drain_power(var/drain_check, var/surge)
+
+	if(drain_check)
+		return 1
+
+	if(!cell)
+		return 0
+
+	if(surge && !emagged)
+		flick("apc-spark", src)
+		emagged = 1
+		locked = 0
+		update_icon()
+		return 0
+
+	return cell.drain_power(drain_check)
+
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
 	wires = new(src)

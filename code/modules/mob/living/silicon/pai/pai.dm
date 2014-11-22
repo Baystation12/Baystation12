@@ -284,18 +284,19 @@
 		return
 
 	last_special = world.time + 100
-	canmove = 1
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
-	if(istype(card.loc,/mob))
+	if(istype(card.loc,/obj/item/rig_module))
+		src << "There is no room to unfold inside this rig module. You're good and stuck."
+		return 0
+	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
 		holder.drop_from_inventory(card)
-	else if(istype(card.loc,/obj/item/clothing/suit/space/space_ninja))
-		var/obj/item/clothing/suit/space/space_ninja/holder = card.loc
-		holder.pai = null
 	else if(istype(card.loc,/obj/item/device/pda))
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
+
+	canmove = 1
 
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
