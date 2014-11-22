@@ -95,6 +95,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	icon_state = "1"
 	l_color = "#ED9200"
 	layer = TURF_LAYER
+	var/isBlue = 0
 
 	var/firelevel = 10000 //Calculated by gas_mixture.calculate_firelevel()
 
@@ -109,15 +110,29 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		return 1
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
-
+	var/datum/light_source/firelight = light
+	var/prefixIcon = ""
+	if(air_contents.temperature>=1670 && !isBlue) // Temprature
+		l_color = "#0092ED"
+		prefixIcon = "b"
+		isBlue = 1
+		// firelight.check() is bork, no idea why...
+		firelight.remove_effect()
+		firelight.add_effect()
+	else if(isBlue)
+		l_color = "#ED9200"
+		prefixIcon = ""
+		isBlue = 0
+		firelight.remove_effect()
+		firelight.add_effect()
 	if(firelevel > 6)
-		icon_state = "3"
+		icon_state = "[prefixIcon]3"
 		SetLuminosity(7)
 	else if(firelevel > 2.5)
-		icon_state = "2"
+		icon_state = "[prefixIcon]2"
 		SetLuminosity(5)
 	else
-		icon_state = "1"
+		icon_state = "[prefixIcon]1"
 		SetLuminosity(3)
 
 	//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
