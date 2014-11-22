@@ -70,10 +70,14 @@
 			else			non_whitespace = 1
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
-// Used to get a sanitized input.
+// Used to get a properly sanitized input, of max_length
 /proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
 	var/name = input(user, message, title, default)
-	return strip_html_simple(name, max_length)
+	return strip_html_properly(name, max_length)
+    
+// Used to get a trimmed, properly sanitized input, of max_length
+/proc/trim_strip_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
+	return trim(stripped_input(user, message, title, default, max_length))
 
 //Filters out undesirable characters from names
 /proc/reject_bad_name(var/t_in, var/allow_numbers=0, var/max_length=MAX_NAME_LEN)
@@ -314,3 +318,22 @@ proc/TextPreview(var/string,var/len=40)
 			return string
 	else
 		return "[copytext(string, 1, 37)]..."
+
+//This proc strips html properly, but it's not lazy like the other procs.
+//This means that it doesn't just remove < and > and call it a day.
+//Also limit the size of the input, if specified.
+/proc/strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
+	var/opentag = 1 //These store the position of < and > respectively.
+	var/closetag = 1
+	while(1)
+		opentag = findtext(input, "<")
+		closetag = findtext(input, ">")
+		if(!closetag || !opentag)
+			break
+		input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
+	if(max_length)
+		input = copytext(input,1,max_length)
+	return input
+
+/proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
+    return trim(strip_html_properly(input, max_length))
