@@ -643,7 +643,7 @@ client
 		href_list["datumrefresh"] = href_list["explode"]
 
 	else if(href_list["addreagent"]) /* Made on /TG/, credit to them. */
-		if(!check_rights(0))	return
+		if(!check_rights(R_ADMIN,0))	return
 
 		var/atom/A = locate(href_list["addreagent"])
 
