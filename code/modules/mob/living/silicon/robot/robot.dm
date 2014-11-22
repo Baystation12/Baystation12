@@ -30,6 +30,9 @@ var/list/robot_verbs_default = list(
 	var/obj/screen/inv2 = null
 	var/obj/screen/inv3 = null
 
+	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
+	var/obj/screen/robot_modules_background
+
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
 	var/module_active = null
@@ -84,6 +87,9 @@ var/list/robot_verbs_default = list(
 
 	wires = new(src)
 
+	robot_modules_background = new()
+	robot_modules_background.icon_state = "block"
+	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
