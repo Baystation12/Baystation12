@@ -3,6 +3,10 @@
 	name = "Research Outpost"
 	icon_state = "anomaly"
 
+/area/research_outpost/filtering
+	name = "Research Outpost Filtering"
+	icon_state = "anofilter"
+
 /area/research_outpost/hallway
 	name = "Research Outpost Hallway"
 	icon_state = "anohallway"
