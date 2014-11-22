@@ -37,6 +37,23 @@
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
 
+/obj/machinery/power/smes/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!charge)
+		return 0
+
+	if(charge)
+		var/drained_power = rand(200,400)
+		if(charge < drained_power)
+			drained_power = charge
+			charge -= drained_power
+			return drained_power
+
+	return 0
+
 /obj/machinery/power/smes/New()
 	..()
 	spawn(5)

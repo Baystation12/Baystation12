@@ -598,27 +598,27 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 
 	return dat
 
-/obj/machinery/alarm/proc/return_controls()
+/obj/machinery/alarm/proc/return_controls(var/source = src)
 	var/output = ""//"<B>[alarm_zone] Air [name]</B><HR>"
 
 	switch(screen)
 		if (AALARM_SCREEN_MAIN)
 			if(alarm_area.atmosalm)
-				output += "<a href='?src=\ref[src];atmos_reset=1'>Reset - Area Atmospheric Alarm</a><hr>"
+				output += "<a href='?src=\ref[source];atmos_reset=1'>Reset - Area Atmospheric Alarm</a><hr>"
 			else
-				output += "<a href='?src=\ref[src];atmos_alarm=1'>Activate - Area Atmospheric Alarm</a><hr>"
+				output += "<a href='?src=\ref[source];atmos_alarm=1'>Activate - Area Atmospheric Alarm</a><hr>"
 
 			output += {"
-<a href='?src=\ref[src];screen=[AALARM_SCREEN_SCRUB]'>Scrubbers Control</a><br>
-<a href='?src=\ref[src];screen=[AALARM_SCREEN_VENT]'>Vents Control</a><br>
-<a href='?src=\ref[src];screen=[AALARM_SCREEN_MODE]'>Set environmentals mode</a><br>
-<a href='?src=\ref[src];screen=[AALARM_SCREEN_SENSORS]'>Sensor Settings</a><br>
+<a href='?src=\ref[source];screen=[AALARM_SCREEN_SCRUB]'>Scrubbers Control</a><br>
+<a href='?src=\ref[source];screen=[AALARM_SCREEN_VENT]'>Vents Control</a><br>
+<a href='?src=\ref[source];screen=[AALARM_SCREEN_MODE]'>Set environmentals mode</a><br>
+<a href='?src=\ref[source];screen=[AALARM_SCREEN_SENSORS]'>Sensor Settings</a><br>
 <HR>
 "}
 			if (mode==AALARM_MODE_PANIC)
-				output += "<font color='red'><B>PANIC SYPHON ACTIVE</B></font><br><A href='?src=\ref[src];mode=[AALARM_MODE_SCRUBBING]'>Turn syphoning off</A>"
+				output += "<font color='red'><B>PANIC SYPHON ACTIVE</B></font><br><A href='?src=\ref[source];mode=[AALARM_MODE_SCRUBBING]'>Turn syphoning off</A>"
 			else
-				output += "<A href='?src=\ref[src];mode=[AALARM_MODE_PANIC]'><font color='red'>ACTIVATE PANIC SYPHON IN AREA</font></A>"
+				output += "<A href='?src=\ref[source];mode=[AALARM_MODE_PANIC]'><font color='red'>ACTIVATE PANIC SYPHON IN AREA</font></A>"
 
 
 		if (AALARM_SCREEN_VENT)
@@ -634,23 +634,23 @@ Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
 					sensor_data += {"
 <B>[long_name]</B>[state]<BR>
 <B>Operating:</B>
-<A href='?src=\ref[src];id_tag=[id_tag];command=power;val=[!data["power"]]'>[data["power"]?"on":"off"]</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=power;val=[!data["power"]]'>[data["power"]?"on":"off"]</A>
 <BR>
 <B>Pressure checks:</B>
-<A href='?src=\ref[src];id_tag=[id_tag];command=checks;val=[data["checks"]^1]' [(data["checks"]&1)?"style='font-weight:bold;'":""]>external</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=checks;val=[data["checks"]^2]' [(data["checks"]&2)?"style='font-weight:bold;'":""]>internal</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=checks;val=[data["checks"]^1]' [(data["checks"]&1)?"style='font-weight:bold;'":""]>external</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=checks;val=[data["checks"]^2]' [(data["checks"]&2)?"style='font-weight:bold;'":""]>internal</A>
 <BR>
 <B>External pressure bound:</B>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=-1000'>-</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=-100'>-</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=-10'>-</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=-1'>-</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=-1000'>-</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=-100'>-</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=-10'>-</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=-1'>-</A>
 [data["external"]]
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=+1'>+</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=+10'>+</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=+100'>+</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=adjust_external_pressure;val=+1000'>+</A>
-<A href='?src=\ref[src];id_tag=[id_tag];command=set_external_pressure;val=[ONE_ATMOSPHERE]'> (reset) </A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=+1'>+</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=+10'>+</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=+100'>+</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=adjust_external_pressure;val=+1000'>+</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=set_external_pressure;val=[ONE_ATMOSPHERE]'> (reset) </A>
 <BR>
 "}
 					if (data["direction"] == "siphon")
@@ -662,7 +662,7 @@ siphoning
 					sensor_data += {"<HR>"}
 			else
 				sensor_data = "No vents connected.<BR>"
-			output = {"<a href='?src=\ref[src];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>[sensor_data]"}
+			output = {"<a href='?src=\ref[source];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>[sensor_data]"}
 		if (AALARM_SCREEN_SCRUB)
 			var/sensor_data = ""
 			if(alarm_area.air_scrub_names.len)
@@ -676,33 +676,33 @@ siphoning
 					sensor_data += {"
 <B>[long_name]</B>[state]<BR>
 <B>Operating:</B>
-<A href='?src=\ref[src];id_tag=[id_tag];command=power;val=[!data["power"]]'>[data["power"]?"on":"off"]</A><BR>
+<A href='?src=\ref[source];id_tag=[id_tag];command=power;val=[!data["power"]]'>[data["power"]?"on":"off"]</A><BR>
 <B>Type:</B>
-<A href='?src=\ref[src];id_tag=[id_tag];command=scrubbing;val=[!data["scrubbing"]]'>[data["scrubbing"]?"scrubbing":"syphoning"]</A><BR>
+<A href='?src=\ref[source];id_tag=[id_tag];command=scrubbing;val=[!data["scrubbing"]]'>[data["scrubbing"]?"scrubbing":"syphoning"]</A><BR>
 "}
 
 					if(data["scrubbing"])
 						sensor_data += {"
 <B>Filtering:</B>
 Carbon Dioxide
-<A href='?src=\ref[src];id_tag=[id_tag];command=co2_scrub;val=[!data["filter_co2"]]'>[data["filter_co2"]?"on":"off"]</A>;
+<A href='?src=\ref[source];id_tag=[id_tag];command=co2_scrub;val=[!data["filter_co2"]]'>[data["filter_co2"]?"on":"off"]</A>;
 Toxins
-<A href='?src=\ref[src];id_tag=[id_tag];command=tox_scrub;val=[!data["filter_phoron"]]'>[data["filter_phoron"]?"on":"off"]</A>;
+<A href='?src=\ref[source];id_tag=[id_tag];command=tox_scrub;val=[!data["filter_phoron"]]'>[data["filter_phoron"]?"on":"off"]</A>;
 Nitrous Oxide
-<A href='?src=\ref[src];id_tag=[id_tag];command=n2o_scrub;val=[!data["filter_n2o"]]'>[data["filter_n2o"]?"on":"off"]</A>
+<A href='?src=\ref[source];id_tag=[id_tag];command=n2o_scrub;val=[!data["filter_n2o"]]'>[data["filter_n2o"]?"on":"off"]</A>
 <BR>
 "}
 					sensor_data += {"
 <B>Panic syphon:</B> [data["panic"]?"<font color='red'><B>PANIC SYPHON ACTIVATED</B></font>":""]
-<A href='?src=\ref[src];id_tag=[id_tag];command=panic_siphon;val=[!data["panic"]]'><font color='[(data["panic"]?"blue'>Dea":"red'>A")]ctivate</font></A><BR>
+<A href='?src=\ref[source];id_tag=[id_tag];command=panic_siphon;val=[!data["panic"]]'><font color='[(data["panic"]?"blue'>Dea":"red'>A")]ctivate</font></A><BR>
 <HR>
 "}
 			else
 				sensor_data = "No scrubbers connected.<BR>"
-			output = {"<a href='?src=\ref[src];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>[sensor_data]"}
+			output = {"<a href='?src=\ref[source];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>[sensor_data]"}
 
 		if (AALARM_SCREEN_MODE)
-			output += "<a href='?src=\ref[src];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br><b>Air machinery mode for the area:</b><ul>"
+			output += "<a href='?src=\ref[source];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br><b>Air machinery mode for the area:</b><ul>"
 			var/list/modes = list(AALARM_MODE_SCRUBBING   = "Filtering - Scrubs out contaminants",\
 				AALARM_MODE_REPLACEMENT = "<font color='blue'>Replace Air - Siphons out air while replacing</font>",\
 				AALARM_MODE_PANIC       = "<font color='red'>Panic - Siphons air out of the room</font>",\
@@ -711,14 +711,14 @@ Nitrous Oxide
 				AALARM_MODE_OFF         = "<font color='blue'>Off - Shuts off vents and scrubbers</font>",)
 			for (var/m=1,m<=modes.len,m++)
 				if (mode==m)
-					output += "<li><A href='?src=\ref[src];mode=[m]'><b>[modes[m]]</b></A> (selected)</li>"
+					output += "<li><A href='?src=\ref[source];mode=[m]'><b>[modes[m]]</b></A> (selected)</li>"
 				else
-					output += "<li><A href='?src=\ref[src];mode=[m]'>[modes[m]]</A></li>"
+					output += "<li><A href='?src=\ref[source];mode=[m]'>[modes[m]]</A></li>"
 			output += "</ul>"
 
 		if (AALARM_SCREEN_SENSORS)
 			output += {"
-<a href='?src=\ref[src];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>
+<a href='?src=\ref[source];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>
 <b>Alarm thresholds:</b><br>
 Partial pressure for gases
 <style>/* some CSS woodoo here. Does not work perfect in ie6 but who cares? */
@@ -744,25 +744,25 @@ table tr:first-child th:first-child { border: none;}
 				output += "<TR><th>[gases[g]]</th>"
 				selected = TLV[g]
 				for(var/i = 1, i <= 4, i++)
-					output += "<td><A href='?src=\ref[src];command=set_threshold;env=[g];var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
+					output += "<td><A href='?src=\ref[source];command=set_threshold;env=[g];var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
 				output += "</TR>"
 
 			selected = TLV["pressure"]
 			output += "	<TR><th>Pressure</th>"
 			for(var/i = 1, i <= 4, i++)
-				output += "<td><A href='?src=\ref[src];command=set_threshold;env=pressure;var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
+				output += "<td><A href='?src=\ref[source];command=set_threshold;env=pressure;var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
 			output += "</TR>"
 
 			selected = TLV["temperature"]
 			output += "<TR><th>Temperature</th>"
 			for(var/i = 1, i <= 4, i++)
-				output += "<td><A href='?src=\ref[src];command=set_threshold;env=temperature;var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
+				output += "<td><A href='?src=\ref[source];command=set_threshold;env=temperature;var=[i]'>[selected[i] >= 0 ? selected[i] :"OFF"]</A></td>"
 			output += "</TR></table>"
 
 	return output
 
-/obj/machinery/alarm/Topic(href, href_list)
-	if(..() || !( Adjacent(usr) || istype(usr, /mob/living/silicon)) ) // dont forget calling super in machine Topics -walter0o
+/obj/machinery/alarm/Topic(href, href_list, var/nowindow = 0, var/remote = 0)
+	if(..(href, href_list, nowindow, !remote) || !( Adjacent(usr) || nowindow || istype(usr, /mob/living/silicon)) ) // dont forget calling super in machine Topics -walter0o
 		usr.machine = null
 		usr << browse(null, "window=air_alarm")
 		usr << browse(null, "window=AAlarmwires")
@@ -796,7 +796,7 @@ table tr:first-child th:first-child { border: none;}
 			target_temperature = input_temperature + T0C
 
 	// hrefs that need the AA unlocked -walter0o
-	if(!locked || istype(usr, /mob/living/silicon))
+	if(!locked || remote || istype(usr, /mob/living/silicon))
 
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
@@ -819,7 +819,7 @@ table tr:first-child th:first-child { border: none;}
 					var/list/selected = TLV[env]
 					var/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
 					var/newval = input("Enter [thresholds[threshold]] for [env]", "Alarm triggers", selected[threshold]) as null|num
-					if (isnull(newval) || ..() || (locked && issilicon(usr)))
+					if (isnull(newval))
 						return
 					if (newval<0)
 						selected[threshold] = -1.0
@@ -887,18 +887,11 @@ table tr:first-child th:first-child { border: none;}
 			mode = text2num(href_list["mode"])
 			apply_mode()
 
-	updateUsrDialog()
+	if(!nowindow)
+		updateUsrDialog()
 
 
 /obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
-/*	if (istype(W, /obj/item/weapon/wirecutters))
-		stat ^= BROKEN
-		add_fingerprint(user)
-		for(var/mob/O in viewers(user, null))
-			O.show_message(text("\red [] has []activated []!", user, (stat&BROKEN) ? "de" : "re", src), 1)
-		update_icon()
-		return
-*/
 	src.add_fingerprint(user)
 
 	switch(buildstage)

@@ -185,24 +185,21 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
 #define SLOT_TWOEARS 8192
-#define SLOT_LEGS = 16384
+#define SLOT_TIE 16384
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
                                 //To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
 #define TABLEPASS 2			// can pass by a table or rack
-
-#define MASKINTERNALS	8	// mask allows internals
-//#define SUITSPACE		8	// suit protects against space
-
+#define NOBLUDGEON  4       // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
+#define AIRTIGHT	8	    // functions with internals
 #define USEDELAY 	16		// 1 second extra delay on use (Can be used once every 2s)
-#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
 #define NOSHIELD	32		// weapon not affected by shield
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
-#define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
 #define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
+#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
 
 #define GLASSESCOVERSEYES	1024
 #define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
@@ -267,6 +264,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_legcuffed 19
 #define slot_r_ear 20
 #define slot_legs 21
+#define slot_tie 22
 
 //Cant seem to find a mob bitflags area other than the powers one
 
@@ -754,6 +752,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_PLANT 1024
 #define IS_WHITELISTED 2048
 #define IS_SYNTHETIC 4096
+#define HAS_EYE_COLOR 8192
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.

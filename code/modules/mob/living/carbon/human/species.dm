@@ -209,7 +209,7 @@
 	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
 
-	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	//If you wanted to add a species-level ability:
 	/*abilities = list(/client/proc/test_ability)*/
@@ -235,7 +235,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -263,7 +263,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -273,6 +273,7 @@
 	name_plural = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
+	eyes = "skrell_eyes_s"
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 	unarmed_type = /datum/unarmed_attack/punch
@@ -280,6 +281,7 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
+	blood_color = "#1D2CBF"
 
 	reagent_tag = IS_SKRELL
 
@@ -310,7 +312,7 @@
 	poison_type = "oxygen"
 	insulated = 1
 
-	flags = NO_SCAN
+	flags = NO_SCAN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -356,7 +358,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -406,7 +408,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -611,5 +613,8 @@
 
 	if(slot_back in equip_slots)
 		equip_slots |= slot_in_backpack
+
+	if(slot_w_uniform in equip_slots)
+		equip_slots |= slot_tie
 
 	equip_slots |= slot_legcuffed

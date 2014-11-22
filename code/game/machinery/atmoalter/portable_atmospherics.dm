@@ -184,3 +184,16 @@
 		return
 
 	..()
+
+/obj/machinery/portable_atmospherics/proc/log_open()
+	if(air_contents.gas.len == 0)
+		return
+
+	var/gases = ""
+	for(var/gas in air_contents.gas)
+		if(gases)
+			gases += ", [gas]"
+		else
+			gases = gas
+	log_admin("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")
+	message_admins("[usr] ([usr.ckey]) opened '[src.name]' containing [gases].")

@@ -73,6 +73,8 @@
 			return has_organ("chest")
 		if(slot_in_backpack)
 			return 1
+		if(slot_tie)
+			return 1
 
 /mob/living/carbon/human/u_equip(obj/item/W as obj)
 	if(!W)	return 0
@@ -202,13 +204,6 @@
 	if(!istype(W)) return
 	if(!has_organ_for_slot(slot)) return
 
-	if(W == src.l_hand)
-		src.l_hand = null
-		update_inv_l_hand() //So items actually disappear from hands.
-	else if(W == src.r_hand)
-		src.r_hand = null
-		update_inv_r_hand()
-
 	W.loc = src
 	switch(slot)
 		if(slot_back)
@@ -311,9 +306,19 @@
 			if(src.get_active_hand() == W)
 				src.u_equip(W)
 			W.loc = src.back
+		if(slot_tie)
+			var/obj/item/clothing/under/uniform = src.w_uniform
+			uniform.attackby(W,src)
 		else
 			src << "\red You are trying to eqip this item to an unsupported inventory slot. How the heck did you manage that? Stop it..."
 			return
+
+	if(W == src.l_hand)
+		src.l_hand = null
+		update_inv_l_hand() //So items actually disappear from hands.
+	else if(W == src.r_hand)
+		src.r_hand = null
+		update_inv_r_hand()
 
 	W.layer = 20
 

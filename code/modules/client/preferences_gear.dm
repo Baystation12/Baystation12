@@ -3,10 +3,11 @@ var/global/list/gear_datums = list()
 /hook/startup/proc/populate_gear_list()
 	var/list/sort_categories = list(
 		"[slot_head]"		= list(),
+		"ears"				= list(),
 		"[slot_glasses]" 	= list(),
 		"[slot_wear_mask]"	= list(),
 		"[slot_w_uniform]"	= list(),
-		"attachments"		= list(),
+		"[slot_tie]"		= list(),
 		"[slot_wear_suit]"	= list(),
 		"[slot_gloves]"		= list(),
 		"[slot_shoes]"		= list(),
@@ -204,6 +205,13 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_head
 
+// Wig by Earthcrusher, blame him.
+/datum/gear/philosopher_wig
+	display_name = "natural philosopher's wig"
+	path = /obj/item/clothing/head/philosopher_wig
+	cost = 3
+	slot = slot_head
+
 /datum/gear/ushanka
 	display_name = "ushanka"
 	path = /obj/item/clothing/head/ushanka
@@ -323,13 +331,6 @@ var/global/list/gear_datums = list()
 	cost = 1
 	allowed_roles = list("Captain")
 
-// Wig by Earthcrusher, blame him.
-/datum/gear/philosopher_wig
-	display_name = "natural philosopher's wig"
-	path = /obj/item/clothing/head/philosopher_wig
-	cost = 3
-	slot = slot_head
-
 /datum/gear/corpsecsuit
 	display_name = "uniform, corporate (Security)"
 	path = /obj/item/clothing/under/rank/security/corp
@@ -363,88 +364,88 @@ var/global/list/gear_datums = list()
 /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/tie/armband/cargo
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armband_emt
 	display_name = "armband, EMT"
 	path = /obj/item/clothing/tie/armband/medgreen
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 2
 
 /datum/gear/armband_engineering
 	display_name = "armband, engineering"
 	path = /obj/item/clothing/tie/armband/engine
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armband_hydroponics
 	display_name = "armband, hydroponics"
 	path = /obj/item/clothing/tie/armband/hydro
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armband_medical
 	display_name = "armband, medical"
 	path = /obj/item/clothing/tie/armband/med
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armband
 	display_name = "armband, red"
 	path = /obj/item/clothing/tie/armband
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armband_science
 	display_name = "armband, science"
 	path = /obj/item/clothing/tie/armband/science
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/armpit
 	display_name = "shoulder holster"
 	path = /obj/item/clothing/tie/holster/armpit
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 2
-	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Head of Security")
+	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security")
 
 /datum/gear/tie_blue
 	display_name = "tie, blue"
 	path = /obj/item/clothing/tie/blue
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/tie_red
 	display_name = "tie, red"
 	path = /obj/item/clothing/tie/red
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/tie_horrible
 	display_name = "tie, socially disgraceful"
 	path = /obj/item/clothing/tie/horrible
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 1
 
 /datum/gear/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/tie/storage/brown_vest
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 2
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 
 /datum/gear/black_vest
 	display_name = "webbing, security"
 	path = /obj/item/clothing/tie/storage/black_vest
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 2
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/webbing
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/tie/storage/webbing
-	sort_category = "attachments"
+	slot = slot_tie
 	cost = 2
 
 // Suit slot
@@ -710,11 +711,35 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 1
 
-/datum/gear/matchbook
-	display_name = "matchbook"
-	path = /obj/item/weapon/storage/box/matches
+/datum/gear/folder_blue
+	display_name = "folder, blue"
+	path = /obj/item/weapon/folder/blue
 	sort_category = "utility"
-	cost = 2
+	cost = 1
+
+/datum/gear/folder_grey
+	display_name = "folder, grey"
+	path = /obj/item/weapon/folder
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_red
+	display_name = "folder, red"
+	path = /obj/item/weapon/folder/red
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_white
+	display_name = "folder, white"
+	path = /obj/item/weapon/folder/white
+	sort_category = "utility"
+	cost = 1
+
+/datum/gear/folder_yellow
+	display_name = "folder, yellow"
+	path = /obj/item/weapon/folder/yellow
+	sort_category = "utility"
+	cost = 1
 
 // The rest of the trash.
 
@@ -766,8 +791,44 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 1
 
+/datum/gear/matchbook
+	display_name = "matchbook"
+	path = /obj/item/weapon/storage/box/matches
+	sort_category = "misc"
+	cost = 2
+
 /datum/gear/comb
 	display_name = "purple comb"
 	path = /obj/item/weapon/haircomb
 	sort_category = "misc"
 	cost = 2
+
+// Stuff worn on the ears. Items here go in the "ears" sort_category but they must not use
+// the slot_r_ear or slot_l_ear as the slot, or else players will spawn with no headset.
+/datum/gear/skrell_chain
+	display_name = "skrell headtail-wear, female, chain"
+	path = /obj/item/clothing/ears/skrell/chain
+	cost = 2
+	sort_category = "ears"
+	whitelisted = "Skrell"
+
+/datum/gear/skrell_plate
+	display_name = "skrell headtail-wear, male, bands"
+	path = /obj/item/clothing/ears/skrell/band
+	cost = 2
+	sort_category = "ears"
+	whitelisted = "Skrell"
+
+/datum/gear/skrell_cloth_male
+	display_name = "skrell headtail-wear, male, cloth"
+	path = /obj/item/clothing/ears/skrell/cloth_male
+	cost = 2
+	sort_category = "ears"
+	whitelisted = "Skrell"
+
+/datum/gear/skrell_cloth_female
+	display_name = "skrell headtail-wear, female, cloth"
+	path = /obj/item/clothing/ears/skrell/cloth_female
+	cost = 2
+	sort_category = "ears"
+	whitelisted = "Skrell"

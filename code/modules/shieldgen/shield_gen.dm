@@ -20,7 +20,7 @@
 	var/strengthen_rate = 0.2
 	var/max_strengthen_rate = 0.5	//the maximum rate that the generator can increase the average field strength
 	var/dissipation_rate = 0.030	//the percentage of the shield strength that needs to be replaced each second
-	var/min_dissipation = 0.1		//will dissipate by at least this rate in renwicks per field tile (otherwise field would never dissipate completely as dissipation is a percentage)
+	var/min_dissipation = 0.01		//will dissipate by at least this rate in renwicks per field tile (otherwise field would never dissipate completely as dissipation is a percentage)
 	var/powered = 0
 	var/check_powered = 1
 	var/obj/machinery/shield_capacitor/owned_capacitor

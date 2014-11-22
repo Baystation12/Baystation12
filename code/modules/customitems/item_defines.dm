@@ -533,18 +533,22 @@
 	var/suit_icon       // Sets suit icon_state and item_state.
 	var/helmet_color    // Sets item_color.
 	var/uses = 2        // Uses before the kit deletes itself.
+	var/new_light_overlay
 
-/obj/item/clothing/head/helmet/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/suit/fluff))
 
 		var/obj/item/device/kit/suit/fluff/kit = O
-		name = "[kit.new_name] hardsuit helmet"
+		name = "[kit.new_name] suit helmet"
 		desc = kit.new_helmet_desc
 		icon_state = kit.helmet_icon
 		item_state = kit.helmet_icon
 		item_color = kit.helmet_color
+
+		if(kit.new_light_overlay)
+			light_overlay = kit.new_light_overlay
 
 		user << "You set about modifying the helmet into [src]."
 		playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -554,13 +558,13 @@
 			user.drop_item()
 			del(O)
 
-/obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/suit/space/void/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/suit/fluff))
 
 		var/obj/item/device/kit/suit/fluff/kit = O
-		name = "[kit.new_name] hardsuit"
+		name = "[kit.new_name] voidsuit"
 		desc = kit.new_suit_desc
 		icon_state = kit.suit_icon
 		item_state = kit.suit_icon
@@ -608,6 +612,7 @@
 	helmet_icon = "rig0-hazardhardsuit"
 	suit_icon = "rig-hazardhardsuit"
 	helmet_color = "hazardhardsuit"
+	new_light_overlay = "helmet_light_dual"
 
 //////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
 
@@ -1140,7 +1145,6 @@
 	item_color = "radi_pendant"
 	flags = FPRINT|TABLEPASS
 	w_class = 2.0
-	slot_flags = 0
 
 //////////// Masks ////////////
 
@@ -1186,7 +1190,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
@@ -1200,7 +1204,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
@@ -1230,7 +1234,7 @@
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Emerald necklace - Ty Foster - Nega
 
@@ -1458,7 +1462,7 @@
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 3, 1)
 		var/current_dist = get_dist(src, bff)
-		
+
 		if (movement_target != bff)
 			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
 				//stop existing movement
@@ -1469,7 +1473,7 @@
 				stop_automated_movement = 1
 				movement_target = bff
 				walk_to(src, movement_target, near_dist, 4)
-		
+
 		//already following and close enough, stop
 		else if (current_dist <= near_dist)
 			walk_to(src,0)
@@ -1481,15 +1485,15 @@
 
 /mob/living/simple_animal/cat/fluff/Life()
 	..()
-	if (stat || !bff) 
+	if (stat || !bff)
 		return
 	if (get_dist(src, bff) <= 1)
 		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
-			if (prob((bff.stat < DEAD)? 50 : 15)) 
+			if (prob((bff.stat < DEAD)? 50 : 15))
 				audible_emote(pick("meows in distress.", "meows anxiously."))
 		else
-			if (prob(5)) 
-				visible_emote(pick("nuzzles [bff].", 
+			if (prob(5))
+				visible_emote(pick("nuzzles [bff].",
 								   "brushes against [bff].",
 								   "rubs against [bff].",
 								   "purrs."))

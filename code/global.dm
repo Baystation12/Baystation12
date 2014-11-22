@@ -202,6 +202,12 @@ var/datum/event_manager/event_manager = new()
 #define EVENT_LEVEL_MODERATE 2
 #define EVENT_LEVEL_MAJOR 3
 
+// Suit sensor levels
+#define SUIT_SENSOR_OFF 0
+#define SUIT_SENSOR_BINARY 1
+#define SUIT_SENSOR_VITAL 2
+#define SUIT_SENSOR_TRACKING 3
+
 	//away missions
 var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to
 

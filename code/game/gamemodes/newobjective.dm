@@ -1331,11 +1331,13 @@ datum
 					return 0
 				if(!owner.current || owner.current.stat == 2)
 					return 0
-				if(!(istype(owner.current:wear_suit, /obj/item/clothing/suit/space/space_ninja)&&owner.current:wear_suit:s_initialized))
-					return 0
+
 				var/current_amount
-				var/obj/item/clothing/suit/space/space_ninja/S = owner.current:wear_suit
-				if(!S.stored_research.len)
+				var/obj/item/weapon/rig/S
+				if(istype(owner.current,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = owner.current
+					S = H.back
+				if(!S || !istype(S) || !S.stored_research.len)
 					return 0
 				else
 					for(var/datum/tech/current_data in S.stored_research)

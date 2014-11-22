@@ -151,7 +151,11 @@
 
 	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
+	var/pltext = "<font size=2><b>Player list:</b></font>"
+
 	for(var/mob/M in player_list)
+		if(M.mind)
+			pltext += printplayer(M.mind)
 		if(M.client)
 			clients++
 			if(ishuman(M))
@@ -178,6 +182,15 @@
 
 			if(isobserver(M))
 				ghosts++
+
+	var/text = "A round of <b>[src.name]</b> has ended."
+	if(surviving_total > 0)
+		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]</b>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.</b><br>"
+	else
+		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>).</b>"
+	text += "<br>" + pltext //print player list after the general info
+	world << text
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
@@ -515,7 +528,7 @@ proc/get_nt_opposed()
 
 /datum/game_mode/proc/printplayer(var/datum/mind/ply)
 	var/role = ply.assigned_role == "MODE" ? "\improper[ply.special_role]" : "\improper[ply.assigned_role]"
-	var/text = "<br><b>[ply.name]</b>(<b>[ply.key]</b>) as \a <b>[role]</b> ("
+	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
 	if(ply.current)
 		if(ply.current.stat == DEAD)
 			text += "died"

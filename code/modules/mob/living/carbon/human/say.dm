@@ -202,12 +202,22 @@
 	return ..()
 
 /mob/living/carbon/human/GetVoice()
-	if(istype(src.wear_mask, /obj/item/clothing/mask/gas/voice))
-		var/obj/item/clothing/mask/gas/voice/V = src.wear_mask
-		if(V.vchange)
-			return V.voice
-		else
-			return name
+
+	var/voice_sub
+	if(istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		// todo: fix this shit
+		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
+			voice_sub = rig.speech.voice_holder.voice
+	else
+		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
+			if(!gear)
+				continue
+			var/obj/item/voice_changer/changer = locate() in gear
+			if(changer && changer.active && changer.voice)
+				voice_sub = changer.voice
+	if(voice_sub)
+		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
 		return mind.changeling.mimicing
 	if(GetSpecialVoice())

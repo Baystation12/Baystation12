@@ -138,7 +138,6 @@
 	icon_state = "syndicate-black-red"
 	item_state = "syndicate-black-red"
 
-
 //Black with yellow/red engineering syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/black/engie
 	name = "Black Space Helmet"
