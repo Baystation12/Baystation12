@@ -53,10 +53,24 @@
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //It's adjacent, is the user, or is on the user's person
 	if(istype(target, /obj/machinery/recharger) && istype(src, /obj/item/weapon/gun/energy))	return//Shouldnt flag take care of this?
-	if(user && user.client && user.client.gun_mode && !(A in target))
-		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
-	else
-		Fire(A,user,params) //Otherwise, fire normally.
+	
+	
+	//decide whether to aim or shoot normally
+	var/aiming = 0
+	if(user && user.client && !(A in target))
+		var/client/C = user.client
+		//If help intent is on and we have clicked on an eligible target, switch to aim mode automatically
+		if(user.a_intent == "help" && isliving(A) && !C.gun_mode)
+			C.ToggleGunMode()
+		
+		if(C.gun_mode)
+			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+	
+	if (!aiming)
+		if(user && user.a_intent == "help") //regardless of what happens, refuse to shoot if help intent is on
+			user << "\red You refrain from firing your [src] as your intent is set to help."
+		else
+			Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/proc/isHandgun()
 	return 1
