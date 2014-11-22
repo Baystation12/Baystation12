@@ -488,7 +488,7 @@ datum/objective/steal
 		"a functional AI" = /obj/item/device/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the station blueprints" = /obj/item/blueprints,
-		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
+		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
 		"28 moles of phoron (full tank)" = /obj/item/weapon/tank,
 		"a sample of slime extract" = /obj/item/slime_extract,
 		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
@@ -571,16 +571,15 @@ datum/objective/steal
 					return found_amount>=target
 
 			if("a functional AI")
+
 				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
 					for(var/mob/living/silicon/ai/M in C)
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1
 
-				for(var/obj/item/clothing/suit/space/space_ninja/S in all_items) //Let an AI downloaded into a space ninja suit count
-					if(S.AI && S.AI.stat != 2)
-						return 1
 				for(var/mob/living/silicon/ai/ai in world)
-					if(istype(ai.loc, /turf))
+					var/turf/T = get_turf(ai)
+					if(istype(T))
 						var/area/check_area = get_area(ai)
 						if(istype(check_area, /area/shuttle/escape/centcom))
 							return 1
@@ -613,19 +612,25 @@ datum/objective/download
 			return 0
 		if(!owner.current || owner.current.stat == 2)
 			return 0
-		if(!(istype(owner.current:wear_suit, /obj/item/clothing/suit/space/space_ninja)&&owner.current:wear_suit:s_initialized))
-			return 0
+
 		var/current_amount
-		var/obj/item/clothing/suit/space/space_ninja/S = owner.current:wear_suit
-		if(!S.stored_research.len)
+		var/obj/item/weapon/rig/S
+		if(istype(owner.current,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = owner.current
+			S = H.back
+
+		if(!istype(S) || !S.installed_modules || !S.installed_modules.len)
 			return 0
-		else
-			for(var/datum/tech/current_data in S.stored_research)
-				if(current_data.level>1)	current_amount+=(current_data.level-1)
-		if(current_amount<target_amount)	return 0
-		return 1
 
+		var/obj/item/rig_module/datajack/stolen_data = locate() in S.installed_modules
+		if(!istype(stolen_data))
+			return 0
 
+		for(var/datum/tech/current_data in stolen_data.stored_research)
+			if(current_data.level > 1)
+				current_amount += (current_data.level-1)
+
+		return (current_amount<target_amount) ? 0 : 1
 
 datum/objective/capture
 	proc/gen_amount_goal()

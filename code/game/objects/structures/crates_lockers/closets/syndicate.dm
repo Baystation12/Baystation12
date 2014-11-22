@@ -14,8 +14,8 @@
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/under/syndicate(src)
-	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
-	new /obj/item/clothing/suit/space/rig/syndi(src)
+	new /obj/item/clothing/head/helmet/space/void/merc(src)
+	new /obj/item/clothing/suit/space/void/merc(src)
 	new /obj/item/weapon/crowbar/red(src)
 	new /obj/item/weapon/cell/high(src)
 	new /obj/item/weapon/card/id/syndicate(src)
@@ -25,15 +25,15 @@
 
 
 /obj/structure/closet/syndicate/suit
-	desc = "It's a storage unit for rig suits."
+	desc = "It's a storage unit for voidsuits."
 
 /obj/structure/closet/syndicate/suit/New()
 	..()
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/shoes/magboots(src)
-	new /obj/item/clothing/suit/space/rig/syndi(src)
+	new /obj/item/clothing/suit/space/void/merc(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
-	new /obj/item/clothing/head/helmet/space/rig/syndi(src)
+	new /obj/item/clothing/head/helmet/space/void/merc(src)
 
 
 /obj/structure/closet/syndicate/nuclear

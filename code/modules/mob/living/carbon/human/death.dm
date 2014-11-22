@@ -102,12 +102,6 @@
 		emote("deathgasp") //let the world KNOW WE ARE DEAD // Doing this with the deathgasp emote seems odd.
 		if(species && species.death_sound) playsound(loc, species.death_sound, 80, 1, 1)
 
-		//For ninjas exploding when they die.
-		if( istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_initialized )
-			src << browse(null, "window=spideros")//Just in case.
-			var/location = loc
-			explosion(location, 0, 0, 3, 4)
-
 		update_canmove()
 		if(client)	blind.layer = 0
 

@@ -150,6 +150,16 @@
 	user.put_in_active_hand(src)
 	return
 
+
+/obj/item/attack_ai(mob/user as mob)
+	if (istype(src.loc, /obj/item/weapon/robot_module))
+		//If the item is part of a cyborg module, equip it
+		if(!isrobot(user))
+			return
+		var/mob/living/silicon/robot/R = user
+		R.activate_module(src)
+		R.hud_used.update_robot_modules_display()
+
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu
 /obj/item/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -251,6 +261,9 @@
 			if(slot_wear_mask)
 				if(H.wear_mask)
 					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSMOUTH))
+					H << "\red \The [H.head] is in the way."
+					return 0
 				if( !(slot_flags & SLOT_MASK) )
 					return 0
 				return 1
@@ -290,6 +303,9 @@
 				return 1
 			if(slot_glasses)
 				if(H.glasses)
+					return 0
+				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSEYES))
+					H << "\red \The [H.head] is in the way."
 					return 0
 				if( !(slot_flags & SLOT_EYES) )
 					return 0

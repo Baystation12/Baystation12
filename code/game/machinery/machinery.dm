@@ -111,6 +111,23 @@ Class Procs:
 	var/manual = 0
 	var/global/gl_uid = 1
 
+/obj/machinery/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!powered())
+		return 0
+
+	var/area/area = get_area(src)
+	if(!area)
+		return 0
+
+	var/obj/machinery/power/apc/apc = area.get_apc()
+	if(!apc)
+		return 0
+	return apc.drain_power()
+
 /obj/machinery/New()
 	..()
 	if(!machinery_sort_required && ticker)
@@ -180,7 +197,7 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
-/obj/machinery/Topic(href, href_list)
+/obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	if(..())
 		return 1
 	if(inoperable())
@@ -201,7 +218,7 @@ Class Procs:
 		else if(istype(H.r_hand, /obj/item/tk_grab))
 			norange = 1
 
-	if(!norange)
+	if(checkrange && !norange)
 		if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
 			return 1
 
