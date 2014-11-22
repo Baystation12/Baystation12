@@ -112,17 +112,15 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 	var/datum/light_source/firelight = light
 	var/prefixIcon = ""
-	if(air_contents.temperature>=1670 && !isBlue) // Temprature
+	if(air_contents.temperature >= 3000) // Temprature
 		l_color = "#0092ED"
 		prefixIcon = "b"
-		isBlue = 1
 		// firelight.check() is bork, no idea why...
 		firelight.remove_effect()
 		firelight.add_effect()
-	else if(isBlue)
+	else
 		l_color = "#ED9200"
 		prefixIcon = ""
-		isBlue = 0
 		firelight.remove_effect()
 		firelight.add_effect()
 	if(firelevel > 6)
