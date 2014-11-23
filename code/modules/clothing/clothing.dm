@@ -547,3 +547,8 @@ BLIND     // can't see anything
 		hastie.emp_act(severity)
 	..()
 
+/obj/item/clothing/shoes/proc/can_stomp()
+	return 0
+
+/obj/item/clothing/shoes/proc/handle_stomp()
+	return 0
