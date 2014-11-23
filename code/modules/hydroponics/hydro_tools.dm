@@ -136,7 +136,7 @@
 
 	switch(grown_seed.spread)
 		if(1)
-			dat += "<br>It is capable of growing beyond the confines of a tray."
+			dat += "<br>It is able to be planted outside of a tray."
 		if(2)
 			dat += "<br>It is a robust and vigorous vine that will spread rapidly."
 
@@ -155,6 +155,21 @@
 		dat += "<br>It is [grown_seed.biolum_colour ? "<font color='[grown_seed.biolum_colour]'>bio-luminescent</font>" : "bio-luminescent"]."
 	if(grown_seed.flowers)
 		dat += "<br>It has [grown_seed.flower_colour ? "<font color='[grown_seed.flower_colour]'>flowers</font>" : "flowers"]."
+
+	if(grown_seed.produces_power)
+		user << "<br>The fruit will function as a battery if prepared appropriately."
+
+	if(grown_seed.thorny)
+		user << "<br>The fruit is covered in sharp, hollow thorns."
+
+	if(grown_seed.juicy)
+		user << "<br>The fruit is excessively juicy."
+
+	if(grown_seed.explosive)
+		user << "<br>The fruit is internally unstable."
+
+	if(grown_seed.teleporting)
+		user << "<br>The fruit is temporal/spatially unstable."
 
 	if(dat)
 		user << browse(dat,"window=plant_analyzer")
