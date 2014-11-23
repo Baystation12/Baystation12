@@ -113,6 +113,70 @@ proc/populate_seed_list()
 	var/flower_icon = "vine_fruit"  // Which overlay to use.
 	var/flower_colour               // Which colour to use.
 
+	// Special traits.
+	var/produces_power              // Can be used to make a battery.
+	var/thorny                      // Harvested thorns can act as syringes for injecting plant reagents.
+	var/juicy                       // When thrown, causes a splatter decal.
+	var/explosive                   // When thrown, acts as a grenade.
+	var/teleporting                 // Uses the bluespace tomato effect.
+	var/splat_type = /obj/effect/decal/cleanable/tomato_smudge
+
+//Applies an effect to a target atom.
+/datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target)
+
+	var/splatted
+
+	if(istype(target,/mob/living))
+		splatted = apply_special_effect(target,thrown)
+	else if(istype(target,/turf))
+		splatted = 1
+		for(var/mob/living/M in target,thrown)
+			apply_special_effect(M)
+
+	if(juicy && splatted)
+
+		if(thrown.reagents)
+			thrown.reagents.reaction(get_turf(target))
+			for(var/atom/hit_atom in get_turf(target))
+				thrown.reagents.reaction(hit_atom)
+
+		new splat_type (get_turf(thrown))
+		thrown.visible_message("The [thrown.name] splatters against [target]!")
+		del(thrown)
+
+/datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
+
+	var/impact = 1
+
+	// Thorns have a chance of injecting reagents.
+	if(thorny && prob(50))
+		target << "<span class='danger'>Several thorns are embedded in your flesh!</span>"
+		//Todo: cause brute, transfer some reagents over.
+
+	// Bluespace tomato code copied over from grown.dm.
+	if(teleporting)
+
+		//Plant potency determines radius of teleport.
+		var/outer_teleport_radius = potency/10
+		var/inner_teleport_radius = potency/15
+
+		var/list/turfs
+		if(inner_teleport_radius > 0)
+			turfs = orange(target,outer_teleport_radius) - orange(target,inner_teleport_radius)
+
+		if(!turfs.len)
+			target.visible_message("<span class='notice'>The [thrown.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
+			del(thrown)
+			return
+
+		// Moves the mob, causes sparks.
+		var/turf/picked = pick(turfs)
+		new/obj/effect/decal/cleanable/molten_item(picked) //Leave a pile of goo behind for dramatic effect...
+		target.loc = picked//And teleport them to the chosen location.
+		impact = 1
+
+	return impact
+
 //Creates a random seed. MAKE SURE THE LINE HAS DIVERGED BEFORE THIS IS CALLED.
 /datum/seed/proc/randomize()
 
@@ -598,7 +662,14 @@ proc/populate_seed_list()
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
 			var/product_type = pick(products)
-			var/obj/item/product = new product_type(get_turf(user))
+			var/obj/item/product = new product_type(get_turf(user),name)
+
+			if(product_colour)
+				product.color = product_colour
+				if(istype(product,/obj/item/weapon/reagent_containers/food))
+					var/obj/item/weapon/reagent_containers/food/food = product
+					food.filling_color = product_colour
+
 			if(mysterious)
 				product.name += "?"
 				product.desc += " On second thought, something about this one looks strange."
@@ -613,15 +684,6 @@ proc/populate_seed_list()
 
 				product.visible_message("\blue The pod disgorges [product]!")
 				handle_living_product(product)
-
-			// Make sure the product is inheriting the correct seed type reference.
-			else if(istype(product,/obj/item/weapon/reagent_containers/food/snacks/grown))
-				var/obj/item/weapon/reagent_containers/food/snacks/grown/current_product = product
-				current_product.plantname = name
-			else if(istype(product,/obj/item/weapon/grown))
-				var/obj/item/weapon/grown/current_product = product
-				current_product.plantname = name
-
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually
@@ -727,6 +789,7 @@ proc/populate_seed_list()
 	plant_icon = "berry"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
+	juicy = 1
 
 	lifespan = 20
 	maturation = 5
@@ -743,6 +806,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-glowberry"
 	plant_icon = "glowberry"
 	chems = list("nutriment" = list(1,10), "uranium" = list(3,5))
+	spread = 1
 
 	lifespan = 30
 	maturation = 5
@@ -815,6 +879,7 @@ proc/populate_seed_list()
 	plant_icon = "tomato"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
+	juicy = 1
 
 	lifespan = 25
 	maturation = 8
@@ -831,6 +896,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-bloodtomato"
 	plant_icon = "bloodtomato"
 	chems = list("nutriment" = list(1,10), "blood" = list(1,5))
+	splat_type = /obj/effect/decal/cleanable/blood/splatter
 
 	yield = 3
 
@@ -838,7 +904,7 @@ proc/populate_seed_list()
 	name = "killertomato"
 	seed_name = "killer tomato"
 	display_name = "killer tomato plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/killertomato)
+	products = list(/mob/living/simple_animal/tomato)
 	mutants = null
 	packet_icon = "seed-killertomato"
 	plant_icon = "killertomato"
@@ -855,6 +921,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-bluetomato"
 	plant_icon = "bluetomato"
 	chems = list("nutriment" = list(1,20), "lube" = list(1,5))
+	splat_type = /obj/effect/decal/cleanable/blood/oil
 
 /datum/seed/tomato/blue/teleport
 	name = "bluespacetomato"
@@ -865,6 +932,7 @@ proc/populate_seed_list()
 	packet_icon = "seed-bluespacetomato"
 	plant_icon = "bluespacetomato"
 	chems = list("nutriment" = list(1,20), "singulo" = list(1,5))
+	teleporting = 1
 
 //Eggplants/varieties.
 /datum/seed/eggplant
@@ -990,6 +1058,7 @@ proc/populate_seed_list()
 	mutants = null
 	//mutants = list("wallrot") //TBD.
 	plant_icon = "mold"
+	spread = 1
 
 	lifespan = 50
 	maturation = 10
@@ -1092,6 +1161,7 @@ proc/populate_seed_list()
 	packet_icon = "mycelium-glowshroom"
 	plant_icon = "glowshroom"
 	chems = list("radium" = list(1,20))
+	spread = 1
 
 	lifespan = 120
 	maturation = 15
@@ -1105,7 +1175,7 @@ proc/populate_seed_list()
 	name = "walkingmushroom"
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/walkingmushroom)
+	products = list(/mob/living/simple_animal/mushroom)
 	mutants = null
 	packet_icon = "mycelium-walkingmushroom"
 	plant_icon = "walkingmushroom"
@@ -1310,6 +1380,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/potato)
 	plant_icon = "potato"
 	chems = list("nutriment" = list(1,10))
+	produces_power = 1
 
 	lifespan = 30
 	maturation = 10
@@ -1437,6 +1508,7 @@ proc/populate_seed_list()
 	plant_icon = "watermelon"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,6))
+	juicy = 1
 
 	lifespan = 50
 	maturation = 6
@@ -1470,6 +1542,7 @@ proc/populate_seed_list()
 	plant_icon = "lime"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,20))
+	juicy = 1
 
 	lifespan = 55
 	maturation = 6
@@ -1486,6 +1559,8 @@ proc/populate_seed_list()
 	plant_icon = "lemon"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,20))
+	produces_power = 1
+	juicy = 1
 
 	lifespan = 55
 	maturation = 6
@@ -1502,6 +1577,7 @@ proc/populate_seed_list()
 	plant_icon = "orange"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,20))
+	juicy = 1
 
 	lifespan = 60
 	maturation = 6
@@ -1551,6 +1627,7 @@ proc/populate_seed_list()
 	plant_icon = "cherry"
 	harvest_repeat = 1
 	chems = list("nutriment" = list(1,15), "sugar" = list(1,15))
+	juicy = 1
 
 	lifespan = 35
 	maturation = 5
@@ -1594,42 +1671,3 @@ proc/populate_seed_list()
 	production = 10
 	yield = 1
 	potency = 30
-
-/datum/seed/clown
-	name = "clown"
-	seed_name = "clown"
-	seed_noun = "pods"
-	display_name = "laughing clowns"
-	packet_icon = "seed-replicapod"
-	products = list(/mob/living/simple_animal/hostile/retaliate/clown)
-	plant_icon = "replicapod"
-	product_requires_player = 1
-
-	lifespan = 100
-	endurance = 8
-	maturation = 1
-	production = 1
-	yield = 10
-	potency = 30
-
-/datum/seed/test
-	name = "test"
-	seed_name = "testing"
-	seed_noun = "data"
-	display_name = "runtimes"
-	packet_icon = "seed-replicapod"
-	products = list(/mob/living/simple_animal/cat/Runtime)
-	plant_icon = "replicapod"
-
-	requires_nutrients = 0
-	nutrient_consumption = 0
-	requires_water = 0
-	water_consumption = 0
-	pest_tolerance = 11
-	weed_tolerance = 11
-	lifespan = 1000
-	endurance = 100
-	maturation = 1
-	production = 1
-	yield = 1
-	potency = 1

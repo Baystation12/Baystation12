@@ -8,7 +8,7 @@
 	var/plantname
 	var/potency = 1
 
-/obj/item/weapon/grown/New()
+/obj/item/weapon/grown/New(newloc,planttype)
 
 	..()
 
@@ -17,21 +17,20 @@
 	R.my_atom = src
 
 	//Handle some post-spawn var stuff.
-	spawn(1)
-		// Fill the object up with the appropriate reagents.
-		if(!isnull(plantname))
-			var/datum/seed/S = seed_types[plantname]
-			if(!S || !S.chems)
-				return
+	if(planttype)
+		plantname = planttype
+		var/datum/seed/S = seed_types[plantname]
+		if(!S || !S.chems)
+			return
 
-			potency = S.potency
+		potency = S.potency
 
-			for(var/rid in S.chems)
-				var/list/reagent_data = S.chems[rid]
-				var/rtotal = reagent_data[1]
-				if(reagent_data.len > 1 && potency > 0)
-					rtotal += round(potency/reagent_data[2])
-				reagents.add_reagent(rid,max(1,rtotal))
+		for(var/rid in S.chems)
+			var/list/reagent_data = S.chems[rid]
+			var/rtotal = reagent_data[1]
+			if(reagent_data.len > 1 && potency > 0)
+				rtotal += round(potency/reagent_data[2])
+			reagents.add_reagent(rid,max(1,rtotal))
 
 /obj/item/weapon/grown/log
 	name = "towercap"
