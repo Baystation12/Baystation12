@@ -2930,6 +2930,25 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 7)
+	attackby(obj/item/weapon/reagent_containers/food/snacks/grown/chili/W as obj, mob/user as mob)
+		if(istype(W))
+			new /obj/item/weapon/reagent_containers/food/snacks/flamintaco(src)
+			user << "You add chili to the Taco. It catches fire!"
+			del(W)
+			del(src)
+			return
+		else
+			..()
+
+/obj/item/weapon/reagent_containers/food/snacks/flamintaco
+	name = "Flamin' Taco"
+	desc = "Extra Spicy!"
+	icon_state = "flamintaco"
+	bitesize = 3
+	New()
+		..()
+		reagents.add_reagent("nutriment", 7)
+		reagents.add_reagent("condensedcapsaicin", 30)
 
 /obj/item/weapon/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"
