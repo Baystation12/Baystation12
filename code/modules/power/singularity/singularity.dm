@@ -32,6 +32,7 @@ var/global/list/uneatable = list(
 	var/last_failed_movement = 0//Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing
 	var/teleport_del = 0
 	var/last_warning
+	var/alert = 0
 
 /obj/machinery/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
 	//CARN: admin-alert for chuckle-fuckery.
@@ -86,6 +87,14 @@ var/global/list/uneatable = list(
 	eat()
 	dissipate()
 	check_energy()
+	if(energy >= 1800  && energy <= 2000)
+		if(alert == 0)
+			for(var/client/C in admins)
+				C << 'sound/ambience/alarm4.ogg'
+				message_admins("Singularity is about to escape! <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;halfsing=\ref[usr]'>Half Energy</A>) (<A HREF='?_src_=holder;deletesing=\ref[usr]'>Delete!</A>)",0,1)
+				alert = 1
+				spawn(100)
+				alert = 0
 
 	if(current_size >= 3)
 		move()
@@ -166,7 +175,7 @@ var/global/list/uneatable = list(
 				dissipate_delay = 10
 				dissipate_track = 0
 				dissipate_strength = 10
-				message_admins("Singularity has reached stage 4 <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+				message_admins("Singularity has reached stage 4 <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;halfsing=\ref[usr]'>Half Energy</A>) (<A HREF='?_src_=holder;deletesing=\ref[usr]'>Delete</A>)",0,1)
 				log_game("Singularity has reached stage 4 ([x],[y],[z])")
 		if(9)//this one also lacks a check for gens because it eats everything
 			current_size = 9
@@ -177,6 +186,13 @@ var/global/list/uneatable = list(
 			grav_pull = 8
 			consume_range = 4
 			dissipate = 0 //It cant go smaller due to e loss
+			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// Singu!
+			a.autosay("ALERT!! The Gravitational Singularity has escaped its containment field!", "Friendly Singularity Monitor")
+			a.autosay("Recommend immediate evacuation of the station!", "Friendly Singularity Monitor")
+			message_admins("Singularity has reached stage 5!! <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;halfsing=\ref[usr]'>Half Energy</A>) (<A HREF='?_src_=holder;deletesing=\ref[usr]'>Delete!</A>)",0,1)
+			del(a)
+
+
 	if(current_size == allowed_size)
 		investigate_log("<font color='red'>grew to size [current_size]</font>","singulo")
 		return 1
