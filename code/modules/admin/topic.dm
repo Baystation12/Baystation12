@@ -1435,6 +1435,15 @@
 			if(!check_rights(R_ADMIN|R_MOD|R_MENTOR,0))	return
 			X << take_msg
 
+	else if(href_list["deleteweldertank"])
+		var/mob/M = locate(href_list["deleteweldertank"])
+		for(var/obj/structure/reagent_dispensers/fueltank/F in range(3, M.loc))
+			log_admin("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]")
+			log_admin_single("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]")
+			message_admins("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[F.x];Y=[F.y];Z=[F.z]'>JMP</a>")
+			del(F)
+
+
 	else if(href_list["adminmoreinfo"])
 		var/mob/M = locate(href_list["adminmoreinfo"])
 		if(!ismob(M))
