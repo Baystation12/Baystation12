@@ -1010,16 +1010,6 @@
 	item_color = "harper_uniform"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
-//////////////////// Layla's Dress - Layla Davies-Halabi - sabirm ///////////////
-
-/obj/item/clothing/under/fluff/layla_davieshalabi
-	name = "White floral sundress"
-	desc = "A loose, white sundress decorated with purple lilies. It looks well looked-after."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "layladress"
-	item_state = "layladress"
-	item_color = "layladress"
-
 //////////////////// Corporate Cap - Robert Mason - Masterrbc ////////////////////
 
 /obj/item/clothing/head/soft/sec/corp/fluff/robert_mason
