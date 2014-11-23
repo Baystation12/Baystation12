@@ -188,6 +188,8 @@
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 
+		src.emag = new /obj/item/borg/stun(src)
+
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
 
@@ -248,6 +250,7 @@
 		src.modules += new /obj/item/weapon/melee/baton/robot(src)
 		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
 		src.modules += new /obj/item/taperoll/police(src)
+		src.modules += new /obj/item/weapon/book/manual/security_space_law(src)
 		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 		return
 
