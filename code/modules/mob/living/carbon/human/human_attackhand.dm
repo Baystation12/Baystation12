@@ -100,31 +100,114 @@
 				attack = H.species.secondary_unarmed
 			if(!attack.is_usable(H))
 				return 0
+			if(attack_move)	return 0
 
-			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [H.name] ([M.ckey])</font>")
-			msg_admin_attack("[key_name(H)] [pick(attack.attack_verb)]ed [key_name(src)]")
+			var/damage = rand(1, 5)
+			var/block = 0
+			var/accurate = 0
+			var/target_zone = check_zone(H.zone_sel.selecting) // The zone that was targeted
+			var/hit_zone = target_zone // The zone that is actually hit
+			var/datum/organ/external/affecting = get_organ(hit_zone)
 
-			var/damage = rand(0, 5)//BS12 EDIT
-			if(!damage)
-				playsound(loc, attack.miss_sound, 25, 1, -1)
-				visible_message("\red <B>[H] tried to [pick(attack.attack_verb)] [src]!</B>")
+			// Check for magboot attack
+			if(src.lying && H.canmove && !H.lying && H.shoes && istype(H.shoes, /obj/item/clothing/shoes/magboots))
+				var/obj/item/clothing/shoes/magboots/mboots = H.shoes
+				if(mboots.magpulse)
+					return H.magboot_stomp(src, affecting)
+
+			switch(src.a_intent)
+				if("help")
+					// We didn't see this coming, so we get the full blow
+					damage = 5
+					accurate = 1
+				if("hurt", "grab")
+					// We're in a fighting stance, there's a chance we block
+					if(prob(20) && src.canmove && !(src==H))
+						block = 1
+
+			if (M.grabbed_by.len)
+				// Someone got a good grip on them, they won't be able to do much damage
+				damage = max(0, damage - 2)
+
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
+				accurate = 1 // certain circumstances make it impossible for us to evade punches
+
+			// Process evasion and blocking
+			if(!accurate)
+				if(prob(80))
+					hit_zone = ran_zone(target_zone)
+				if(prob(15) && hit_zone != "chest") // Missed!
+					playsound(loc, attack.miss_sound, 25, 1, -1)
+					var/atk_verb = pick(attack.attack_verb)
+					visible_message("\red <B>[H] attempted to [atk_verb] [src]!</B>")
+					visible_message("\red [pick("The [pick(attack.attack_noun)] barely missed their [affecting.display_name]!", "[src] managed to dodge the [pick(attack.attack_noun)] narrowly!")]")
+
+					H.attack_log += text("\[[time_stamp()]\] <font color='red'>attempted to [atk_verb] [src.name] ([src.ckey]) (dodged)</font>")
+					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Dodged attack by [H.name] ([H.ckey])</font>")
+					msg_admin_attack("[key_name(H)] attempted to [pick(attack.attack_verb)] [key_name(src)] (dodged)")
+					return 0
+			if(block)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				visible_message("\red <B>[H] went for [src]'s [affecting.display_name] but was blocked!</B>")
+
+				H.attack_log += text("\[[time_stamp()]\] <font color='red'>attempted to [pick(attack.attack_verb)] [src.name] ([src.ckey]) (blocked)</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Blocked attack by [H.name] ([H.ckey])</font>")
+				msg_admin_attack("[key_name(H)] attempted to [pick(attack.attack_verb)] [key_name(src)] (blocked)")
 				return 0
 
-			var/datum/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
+			// Handle the attack logs
+			attack.combat_log(H, src, hit_zone, damage)
 
-			if(HULK in H.mutations)			damage += 5
+			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [H.name] ([H.ckey])</font>")
+			msg_admin_attack("[key_name(H)] [pick(attack.attack_verb)]ed [key_name(src)]")
 
-			playsound(loc, attack.attack_sound, 25, 1, -1)
+			// Apply possible buffs
+			damage = H.get_combat_buff(damage)
 
-			visible_message("\red <B>[H] [pick(attack.attack_verb)]ed [src]!</B>")
-			//Rearranged, so claws don't increase weaken chance.
-			if(damage >= 5 && prob(50))
-				visible_message("\red <B>[H] has weakened [src]!</B>")
+			var/armor_block = run_armor_check(affecting, "melee") // IMPORTANT: To run armor check after attack log as it produces a log itself
+			var/numb = rand(0, 100)
+			if(damage >= 5 && armor_block < 2 && !(src == H) && numb <= damage*5) // 25% standard chance
+				switch(hit_zone) // strong punches can have effects depending on where they hit
+					if("head")
+						// Induce blurriness
+						visible_message("\red [src] stares blankly for a few moments.", "\red You see stars.")
+						apply_effect(damage*2, EYE_BLUR, armor_block)
+					if("l_arm", "l_hand")
+						if (l_hand)
+							// Disarm left hand
+							visible_message("\red [src] [pick("dropped", "let go off")] \the [l_hand][pick("", " with a scream")]!")
+							drop_l_hand()
+					if("r_arm", "r_hand")
+						if (r_hand)
+							// Disarm right hand
+							visible_message("\red [src] [pick("dropped", "let go off")] \the [r_hand][pick("", " with a scream")]!")
+							drop_r_hand()
+					if("chest")
+						if(!src.lying)
+							visible_message("\red [pick("[src] was sent flying backward a few metres!", "[src] staggers back from the impact!")]")
+							step(src, get_dir(get_turf(M), get_turf(src)))
+							apply_effect(0.4*damage, WEAKEN, armor_block)
+					if("groin")
+						visible_message("\red [src] looks like \he is in pain!", (gender=="female")?"\red <i>Oh god that hurt!</i>":"\red <i>Oh no, not your[pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!</i>")
+						apply_effects(stutter=damage*2, agony=damage*3, blocked=armor_block)
+					if("l_leg", "l_foot", "r_leg", "r_foot")
+						if(!src.lying)
+							visible_message("\red [src] gives way slightly.")
+							apply_effect(damage*3, AGONY, armor_block)
+			else if(damage >= 5 && !(src == H) && numb+damage*5 >= 100 && armor_block < 2) // Chance to get the usual throwdown as well (25% standard chance)
+				if(!src.lying)
+					visible_message("\red [src] [pick("slumps", "falls", "drops")] down to the ground!")
+				else
+					visible_message("\red [src] has been weakened!")
 				apply_effect(3, WEAKEN, armor_block)
 
-			damage += attack.damage
+			// Sum up species damage bonus at the very end so xenos don't get buffed stun chances
+			damage += attack.damage // 3 for human/skrell, 5 for tajaran/unathi
+
+			playsound(H.loc, attack.attack_sound, 25, 1, -1)
+
+			// Finally, apply damage to target
 			apply_damage(damage, BRUTE, affecting, armor_block, sharp=attack.sharp, edge=attack.edge)
 
 		if("disarm")

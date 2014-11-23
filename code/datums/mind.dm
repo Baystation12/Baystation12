@@ -1204,7 +1204,15 @@ datum/mind
 		return (duration <= world.time - brigged_since)
 
 
-
+//Antagonist role check
+/mob/living/proc/check_special_role(role)
+	if(mind)
+		if(!role)
+			return mind.special_role
+		else
+			return (mind.special_role == role) ? 1 : 0
+	else
+		return 0
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()
