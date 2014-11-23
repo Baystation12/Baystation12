@@ -26,7 +26,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
 
 	var/msg
-	var/list/type = list ("Gameplay/Roleplay question", "Rule/Gameplay issue", "Bug report")
+	var/list/type = list ("Gameplay/Roleplay", "Rule Issue", "Bug Report")
 	var/selected_type = input("Pick a category.", "Admin Help", null, null) as null|anything in type
 	if(selected_type)
 		msg = input("Please enter your message:", "Admin Help", null, null) as text
@@ -128,7 +128,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				admin_number_afk++
 
 	switch(selected_type)
-		if("Gameplay/Roleplay question")
+		if("Gameplay/Roleplay")
 			if(mentorholders.len)
 				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
 					if(X.prefs.toggles & SOUND_ADMINHELP)
@@ -139,13 +139,18 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Rule/Gameplay issue")
+		if("Rule Issue")
+			if(mentorholders.len)
+				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << mentor_msg
 			if(adminholders.len)
 				for(var/client/X in adminholders) // Admins of course get everything in their helps
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Bug report")
+		if("Bug Report")
 			if(debugholders.len)
 				for(var/client/X in debugholders)
 					if(R_ADMIN & X.holder.rights) // Admins get every button & special highlights in theirs
