@@ -1214,7 +1214,7 @@ var/global/floorIsLava = 0
 		return "<b>(*not an mob*)</b>"
 	switch(detail)
 		if(0)
-			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)]</b>"
 		if(1)
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 		if(2)
