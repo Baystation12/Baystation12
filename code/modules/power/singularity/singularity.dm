@@ -93,7 +93,7 @@ var/global/list/uneatable = list(
 				C << 'sound/ambience/alarm4.ogg'
 				message_admins("Singularity is about to escape! <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>) (<A HREF='?_src_=holder;halfsing=\ref[usr]'>Half Energy</A>) (<A HREF='?_src_=holder;deletesing=\ref[usr]'>Delete!</A>)",0,1)
 				alert = 1
-				spawn(100)
+				spawn(300)
 				alert = 0
 
 	if(current_size >= 3)
