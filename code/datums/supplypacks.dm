@@ -743,7 +743,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_armory
 	group = "Security"
 
-/datum/supply_packs/erifle  // Nerfing this due to abuse.
+/*datum/supply_packs/erifle  // Nerfing this due to abuse.
 	name = "Energy marksman crate"
 	contains = list(/obj/item/clothing/suit/armor/laserproof,
 					/obj/item/clothing/suit/armor/laserproof,
@@ -753,7 +753,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Energy marksman crate"
 	access = access_armory
-	group = "Security"
+	group = "Security"*/
 
 /datum/supply_packs/shotgunammo
 	name = "Shotgun shells"
