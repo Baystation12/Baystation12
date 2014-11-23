@@ -1214,15 +1214,15 @@ var/global/floorIsLava = 0
 		return "<b>(*not an mob*)</b>"
 	switch(detail)
 		if(0)
-			return "<b>[key_name(C, link, name, highlight_special)]</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 		if(1)
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 		if(2)
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 		if(3)
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 
 
 /proc/ishost(whom)

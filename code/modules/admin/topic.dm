@@ -1411,7 +1411,7 @@
 		check_antagonists()
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN|R_MOD))	return
+		if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -1424,6 +1424,16 @@
 
 	else if(href_list["adminchecklaws"])
 		output_ai_laws()
+
+	else if(href_list["takeadminhelp"])
+		var/mob/M = locate(href_list["takeadminhelp"])
+		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name(M)]</a> is now being handled by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
+		if(!ismob(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+		for(var/client/X in admins)
+			if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
+			X << take_msg
 
 	else if(href_list["adminmoreinfo"])
 		var/mob/M = locate(href_list["adminmoreinfo"])
