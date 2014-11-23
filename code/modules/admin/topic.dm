@@ -1432,8 +1432,8 @@
 			usr << "This can only be used on instances of type /mob"
 			return
 		for(var/client/X in admins)
-			if(!check_rights(R_ADMIN|R_MOD|R_MENTOR,0))	return
-			X << take_msg
+			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
+				X << take_msg
 
 	else if(href_list["deleteweldertank"])
 		var/mob/M = locate(href_list["deleteweldertank"])
