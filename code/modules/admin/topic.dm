@@ -1411,7 +1411,7 @@
 		check_antagonists()
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN|R_MOD))	return
+		if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -1424,6 +1424,50 @@
 
 	else if(href_list["adminchecklaws"])
 		output_ai_laws()
+
+	else if(href_list["takeadminhelp"])
+		var/mob/M = locate(href_list["takeadminhelp"])
+		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name(M)]</a> is now being handled by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
+		if(!ismob(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+		for(var/client/X in admins)
+			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
+				X << take_msg
+
+	else if(href_list["deleteweldertank"])
+		var/mob/M = locate(href_list["deleteweldertank"])
+		for(var/obj/structure/reagent_dispensers/fueltank/F in range(3, M.loc))
+			log_admin("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]")
+			log_admin_single("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]")
+			message_admins("fueltank deleted by [key_name(src.owner)] at [F.x],[F.y],[F.z]<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[F.x];Y=[F.y];Z=[F.z]'>JMP</a>")
+			del(F)
+
+	else if(href_list["halfsing"])
+		for(var/obj/machinery/singularity/S in world)
+			if(S.current_size >= 7)
+				log_admin("The singularities energy was halved by [key_name(src.owner)] at [S.x],[S.y],[S.z]")
+				log_admin_single("The singularities energy was halved by [key_name(src.owner)] at [S.x],[S.y],[S.z]")
+				message_admins("The singularities energy was halved by [key_name(src.owner)] at [S.x],[S.y],[S.z] <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[S.x];Y=[S.y];Z=[S.z]'>JMP</a>")
+				var/newenergy = S.energy
+				S.energy = (newenergy / 2)
+
+	else if(href_list["deletesing"])
+		for(var/obj/machinery/singularity/S in world)
+			if(S.current_size >= 7)
+				log_admin("The singularity was deleted by [key_name(src.owner)] at [S.x],[S.y],[S.z]")
+				log_admin_single("The singularity was deleted by [key_name(src.owner)] at [S.x],[S.y],[S.z]")
+				message_admins("The singularity was deleted by [key_name(src.owner)] at [S.x],[S.y],[S.z] <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[S.x];Y=[S.y];Z=[S.z]'>JMP</a>")
+				del(S)
+
+	else if(href_list["deletesm"])
+		for(var/obj/machinery/power/supermatter/SM in world)
+			if(SM.damage > SM.emergency_point)
+				log_admin("The supermatter was deleted by [key_name(src.owner)] at [SM.x],[SM.y],[SM.z]")
+				log_admin_single("The supetmatter was deleted by [key_name(src.owner)] at [SM.x],[SM.y],[SM.z]")
+				message_admins("The supermatter was deleted by [key_name(src.owner)] at [SM.x],[SM.y],[SM.z] <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[SM.x];Y=[SM.y];Z=[SM.z]'>JMP</a>")
+				del(SM)
+
 
 	else if(href_list["adminmoreinfo"])
 		var/mob/M = locate(href_list["adminmoreinfo"])

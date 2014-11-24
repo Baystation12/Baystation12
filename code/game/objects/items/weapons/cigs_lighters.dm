@@ -397,6 +397,30 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "zippoon"
 	icon_off = "zippo"
 
+/obj/item/weapon/flame/lighter/zippo/personal
+	name = "\improper R'Jirr's Lighter"
+	desc = "A strange blue zippo lighter with gold engravings has R'Jirr inscribed on the bottom."
+	icon_state = "personalzippo"
+	item_state = "personalzippo"
+	icon_on = "personalzippoon"
+	icon_off = "personalzippo"
+
+/obj/item/weapon/flame/lighter/zippo/captain
+	name = "\improper Captains Zippo lighter"
+	desc = "A blue zippo lighter with gold engravings."
+	icon_state = "personalzippo"
+	item_state = "personalzippo"
+	icon_on = "personalzippoon"
+	icon_off = "personalzippo"
+
+/obj/item/weapon/flame/lighter/zippo/security
+	name = "\improper Security Zippo lighter"
+	desc = "A zippo lighter with the colours of security."
+	icon_state = "securityzippo"
+	item_state = "securityzippo"
+	icon_on = "securityzippoon"
+	icon_off = "securityzippo"
+
 /obj/item/weapon/flame/lighter/random
 	New()
 		var/color = pick("r","c","y","g")

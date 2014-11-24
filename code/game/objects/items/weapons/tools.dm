@@ -251,14 +251,29 @@
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
+		var/user_loc = usr.loc
 		log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
-		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not be the smartest thing you've ever done."
-		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank!")
-		sleep(100)
-		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank!")
-		sleep(100)
-		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has made a fueltank explode.")
 		var/obj/structure/reagent_dispensers/fueltank/tank = O
+		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not be the smartest thing you've ever done."
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has made a fueltank explode.")
 		tank.explode()
 		return
 	if (src.welding)
