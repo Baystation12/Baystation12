@@ -170,7 +170,7 @@
 
 	New()
 		..()
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"
