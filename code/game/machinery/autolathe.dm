@@ -12,16 +12,13 @@
 	var/list/storage_capacity = list("metal" = 0, "glass" = 0)
 	var/show_category = "All"
 
-	var/opened = 0
+	var/panel_open = 0
 	var/hacked = 0
 	var/disabled = 0
 	var/shocked = 0
 	var/busy = 0
 
-	var/list/wires = list()
-	var/hack_wire
-	var/disable_wire
-	var/shock_wire
+	var/datum/wires/autolathe/wires = null
 
 /obj/machinery/autolathe/interact(mob/user as mob)
 
@@ -33,69 +30,64 @@
 
 	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
 
-	dat += "<table width = '100%'>"
-	var/material_top = "<tr>"
-	var/material_bottom = "<tr>"
+	if(!panel_open)
+		dat += "<table width = '100%'>"
+		var/material_top = "<tr>"
+		var/material_bottom = "<tr>"
 
-	for(var/material in stored_material)
-		material_top += "<td width = '25%' align = center><b>[material]</b></td>"
-		material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
+		for(var/material in stored_material)
+			material_top += "<td width = '25%' align = center><b>[material]</b></td>"
+			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
 
-	dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
-	dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
+		dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
+		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 
-	var/index = 0
-	for(var/datum/autolathe/recipe/R in autolathe_recipes)
-		index++
-		if(R.hidden && !hacked || (show_category != "All" && show_category != R.category))
-			continue
+		var/index = 0
+		for(var/datum/autolathe/recipe/R in autolathe_recipes)
+			index++
+			if(R.hidden && !hacked || (show_category != "All" && show_category != R.category))
+				continue
 
-		var/can_make = 1
-		var/material_string = ""
-		var/multiplier_string = ""
-		var/max_sheets
+			var/can_make = 1
+			var/material_string = ""
+			var/multiplier_string = ""
+			var/max_sheets
 
-		var/comma
-		if(!R.resources || !R.resources.len)
-			material_string = "No resources required.</td>"
-		else
+			var/comma
+			if(!R.resources || !R.resources.len)
+				material_string = "No resources required.</td>"
+			else
 
-			//Make sure it's buildable and list requires resources.
-			for(var/material in R.resources)
-				var/sheets = round(stored_material[material]/R.resources[material])
-				if(isnull(max_sheets) || max_sheets > sheets)
-					max_sheets = sheets
+				//Make sure it's buildable and list requires resources.
+				for(var/material in R.resources)
+					var/sheets = round(stored_material[material]/R.resources[material])
+					if(isnull(max_sheets) || max_sheets > sheets)
+						max_sheets = sheets
 
-				if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
-					can_make = 0
-				if(!comma)
-					comma = 1
-				else
-					material_string += ", "
-				material_string += "[R.resources[material]] [material]"
-			material_string += ".<br></td>"
+					if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
+						can_make = 0
+					if(!comma)
+						comma = 1
+					else
+						material_string += ", "
+					material_string += "[R.resources[material]] [material]"
+				material_string += ".<br></td>"
 
-			//Build list of multipliers for sheets.
-			if(R.is_stack)
-				if(max_sheets && max_sheets > 0)
-					multiplier_string  += "<br>"
-					for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
-						multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
-					multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
+				//Build list of multipliers for sheets.
+				if(R.is_stack)
+					if(max_sheets && max_sheets > 0)
+						multiplier_string  += "<br>"
+						for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
+							multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
+						multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
 
-		dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
+			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
 
-	dat += "</table><hr>"
-
+		dat += "</table><hr>"
 	//Hacking.
-	if(opened)
+	else
 		dat += "<h2>Maintenance Panel</h2>"
-		for(var/wire in wires)
-			dat += "[wire] Wire: <A href='?src=\ref[src];wire=[wire];act=wire'>[wires[wire] ? "Mend" : "Cut"]</A> <A href='?src=\ref[src];wire=[wire];act=pulse'>Pulse</A><BR>"
-		dat += "<br>"
-		dat += "The red light is [disabled ? "off" : "on"].<br>"
-		dat += "The green light is [shocked ? "off" : "on"].<br>"
-		dat += "The blue light is [hacked ? "off" : "on"].<br>"
+		dat += wires.GetInteractWindow()
 
 		dat += "<hr>"
 
@@ -112,13 +104,13 @@
 		return
 
 	if(istype(O, /obj/item/weapon/screwdriver))
-		opened = !opened
-		icon_state = (opened ? "autolathe_t": "autolathe")
-		user << "You [opened ? "open" : "close"] the maintenance hatch of [src]."
+		panel_open = !panel_open
+		icon_state = (panel_open ? "autolathe_t": "autolathe")
+		user << "You [panel_open ? "open" : "close"] the maintenance hatch of [src]."
 		updateUsrDialog()
 		return
 
-	if (opened)
+	if (panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
 		if(istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters))
 			attack_hand(user)
@@ -253,65 +245,13 @@
 			var/obj/item/stack/S = I
 			S.amount = multiplier
 
-	if(href_list["act"])
-
-		var/temp_wire = href_list["wire"]
-		if(href_list["act"] == "pulse")
-
-			if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return
-
-			if(wires[temp_wire])
-				usr << "You can't pulse a cut wire."
-				return
-
-			if(hack_wire == temp_wire)
-				hacked = !hacked
-
-				spawn(100)
-					hacked = !hacked
-
-			if(disable_wire == temp_wire)
-				disabled = !disabled
-				shock(usr,50)
-
-				spawn(100)
-					disabled = !disabled
-
-			if(shock_wire == temp_wire)
-				shocked = !shocked
-				shock(usr,50)
-
-				spawn(100)
-					shocked = !shocked
-
-		else if(href_list["act"] == "wire")
-
-			if (!istype(usr.get_active_hand(), /obj/item/weapon/wirecutters))
-				usr << "You need wirecutters!"
-				return
-
-			wires[temp_wire] = !wires[temp_wire]
-
-			if(hack_wire == temp_wire)
-				hacked = !hacked
-
-			if(disable_wire == temp_wire)
-				disabled = !disabled
-				shock(usr,50)
-
-			if(shock_wire == temp_wire)
-				shocked = !shocked
-				shock(usr,50)
-
 	updateUsrDialog()
 
 
 /obj/machinery/autolathe/New()
 
 	..()
-
+	wires = new(src)
 	//Create global autolathe recipe list if it hasn't been made already.
 	if(isnull(autolathe_recipes))
 		autolathe_recipes = list()
@@ -339,28 +279,6 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
 
-	//Init wires.
-	wires = list(
-		"Light Red" = 0,
-		"Dark Red" = 0,
-		"Blue" = 0,
-		"Green" = 0,
-		"Yellow" = 0,
-		"Black" = 0,
-		"White" = 0,
-		"Gray" = 0,
-		"Orange" = 0,
-		"Pink" = 0
-		)
-
-	//Randomize wires.
-	var/list/w = list("Light Red","Dark Red","Blue","Green","Yellow","Black","White","Gray","Orange","Pink")
-	hack_wire = pick(w)
-	w -= hack_wire
-	shock_wire = pick(w)
-	w -= shock_wire
-	disable_wire = pick(w)
-	w -= disable_wire
 
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
