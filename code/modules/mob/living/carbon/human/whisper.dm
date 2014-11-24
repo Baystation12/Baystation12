@@ -41,8 +41,17 @@
 	var/watching_range = 5
 	var/italics = 1
 
+	var/not_heard //the message displayed to people who could not hear the whispering
 	if (speaking)
-		verb = speaking.speech_verb + pick(" quietly", " softly")
+		if (speaking.whisper_verb)
+			verb = speaking.whisper_verb
+			not_heard = "[verb] something"
+		else
+			var/adverb = pick("quietly", "softly")
+			verb = "[speaking.speech_verb] [adverb]"
+			not_heard = "[verb] something [adverb]"
+	else
+		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
 
 	message = capitalize(trim(message))
 
@@ -144,6 +153,6 @@
 			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 
 	if (watching.len)
-		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> whispers something.</span>"
+		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> [not_heard].</span>"
 		for (var/mob/M in watching)
 			M.show_message(rendered, 2)
