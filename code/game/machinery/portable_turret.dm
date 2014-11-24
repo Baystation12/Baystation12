@@ -74,9 +74,9 @@
 	var/obj/item/weapon/gun/energy/E = installation	//All energy-based weapons are applicable
 	//var/obj/item/ammo_casing/shottype = E.projectile_type
 
-	projectile = intial(E.projectile_type)
+	projectile = initial(E.projectile_type)
 	eprojectile = projectile
-	shot_sound = intial(E.fire_sound)
+	shot_sound = initial(E.fire_sound)
 	eshot_sound = shot_sound
 
 	weapon_setup(installation)
