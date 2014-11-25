@@ -313,10 +313,10 @@
 			src << "\red You are trying to eqip this item to an unsupported inventory slot. How the heck did you manage that? Stop it..."
 			return
 
-	if(W == src.l_hand)
+	if((W == src.l_hand) && (slot != slot_l_hand))
 		src.l_hand = null
 		update_inv_l_hand() //So items actually disappear from hands.
-	else if(W == src.r_hand)
+	else if((W == src.r_hand) && (slot != slot_r_hand))
 		src.r_hand = null
 		update_inv_r_hand()
 
