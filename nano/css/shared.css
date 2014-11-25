@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled {
+.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
     float: left;
     min-width: 15px;
     height: 16px;
@@ -174,33 +174,11 @@ h4 {
 }
 
 .redButton {
-    float: left;
-    min-width: 15px;
-    height: 16px;
-    text-align: center;
-    color: #ffffff;
-    text-decoration: none;
     background: #ea0000;
-    border: 1px solid #161616;
-    padding: 0px 4px 4px 4px;
-    margin: 0 2px 2px 0;
-    cursor: default;
-    white-space: nowrap;
 }
 
 .yellowButton {
-    float: left;
-    min-width: 15px;
-    height: 16px;
-    text-align: center;
-    color: #ffffff;
-    text-decoration: none;
     background: #cacc00;
-    border: 1px solid #161616;
-    padding: 0px 4px 4px 4px;
-    margin: 0 2px 2px 0;
-    cursor: default;
-    white-space: nowrap;
 }
 
 .highlight {
