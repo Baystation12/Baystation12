@@ -1531,12 +1531,11 @@
 		if (istype(M, /mob/living/carbon/human))
 			//Do not try to understand.
 			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
-			var/mob/living/carbon/monkey/ook = new monkey_type(null) //no other way to get access to the vars, alas
-			surprise.icon = ook.icon
-			surprise.icon_state = ook.icon_state
-			surprise.name = "malformed [ook.name]"
-			surprise.desc = "Looks like \a very deformed [ook.name], a little small for its kind. It shows no signs of life."
-			del(ook)	//rip nullspace monkey
+			var/mob/ook = monkey_type
+			surprise.icon = initial(ook.icon)
+			surprise.icon_state = initial(ook.icon_state)
+			surprise.name = "malformed [initial(ook.name)]"
+			surprise.desc = "Looks like \a very deformed [initial(ook.name)], a little small for its kind. It shows no signs of life."
 			surprise.transform *= 0.6
 			surprise.add_blood(M)
 			var/mob/living/carbon/human/H = M
@@ -1597,7 +1596,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type ="skrell"
+	monkey_type = /mob/living/carbon/monkey/skrell
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
 	monkey_type =/mob/living/carbon/monkey/skrell
