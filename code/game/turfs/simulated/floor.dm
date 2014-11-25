@@ -1,3 +1,11 @@
+#define LIGHTFLOOR_ON_BIT 4
+
+#define LIGHTFLOOR_STATE_OK 0
+#define LIGHTFLOOR_STATE_FLICKER 1
+#define LIGHTFLOOR_STATE_BREAKING 2
+#define LIGHTFLOOR_STATE_BROKEN 3
+#define LIGHTFLOOR_STATE_BITS 3
+
 //This is so damaged or burnt tiles or platings don't get remembered as the default tile
 var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","damaged4",
 				"damaged5","panelscorched","floorscorched1","floorscorched2","platingdmg1","platingdmg2",
@@ -35,13 +43,13 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/burnt = 0
 	var/mineral = "metal"
 	var/floor_type = /obj/item/stack/tile/plasteel
-	var/lightfloor_state // for light floors, this is the state of the tile. 0-7, 0x4 is on-bit
+	var/lightfloor_state // for light floors, this is the state of the tile. 0-7, 0x4 is on-bit - use the helper procs below
 
 	proc/get_lightfloor_state()
-		return lightfloor_state & 3
+		return lightfloor_state & LIGHTFLOOR_STATE_BITS
 
 	proc/get_lightfloor_on()
-		return lightfloor_state & 4
+		return lightfloor_state & LIGHTFLOOR_ON_BIT
 
 	proc/set_lightfloor_state(n)
 		lightfloor_state = get_lightfloor_on() | n
@@ -50,7 +58,7 @@ var/list/wood_icons = list("wood","wood-broken")
 		lightfloor_state = get_lightfloor_state() | n
 
 	proc/toggle_lightfloor_on()
-		lightfloor_state ^= 4
+		lightfloor_state ^= LIGHTFLOOR_ON_BIT
 
 /turf/simulated/floor/New()
 	..()
@@ -120,17 +128,17 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_light_floor())
 		if(get_lightfloor_on())
 			switch(get_lightfloor_state())
-				if(0)
+				if(LIGHTFLOOR_STATE_OK)
 					icon_state = "light_on"
 					SetLuminosity(5)
-				if(1)
+				if(LIGHTFLOOR_STATE_FLICKER)
 					var/num = pick("1","2","3","4")
 					icon_state = "light_on_flicker[num]"
 					SetLuminosity(5)
-				if(2)
+				if(LIGHTFLOOR_STATE_BREAKING)
 					icon_state = "light_on_broken"
 					SetLuminosity(5)
-				if(3)
+				if(LIGHTFLOOR_STATE_BROKEN)
 					icon_state = "light_off"
 					SetLuminosity(0)
 		else
@@ -321,7 +329,7 @@ turf/simulated/floor/proc/update_icon()
 		src.icon_state = "sand[pick("1","2","3")]"
 		burnt = 1
 
-//This proc will delete the floor_ tile and the update_iocn() proc will then change the icon_state of the turf
+//This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
 /turf/simulated/floor/proc/make_plating()
 	if(istype(src,/turf/simulated/floor/engine)) return
@@ -569,3 +577,11 @@ turf/simulated/floor/proc/update_icon()
 					broken = 0
 				else
 					user << "\blue You need more welding fuel to complete this task."
+
+#undef LIGHTFLOOR_ON_BIT
+
+#undef LIGHTFLOOR_STATE_OK
+#undef LIGHTFLOOR_STATE_FLICKER
+#undef LIGHTFLOOR_STATE_BREAKING
+#undef LIGHTFLOOR_STATE_BROKEN
+#undef LIGHTFLOOR_STATE_BITS
