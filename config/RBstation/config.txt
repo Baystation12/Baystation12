@@ -212,7 +212,7 @@ SOCKET_TALK 0
 #AUTOMUTE_ON
 
 ## How long the delay is before the Away Mission gate opens. Default is half an hour.
-GATEWAY_DELAY 0
+GATEWAY_DELAY 300
 
 ## Remove the # to give assistants maint access.
 #ASSISTANT_MAINT
