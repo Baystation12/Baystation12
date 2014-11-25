@@ -98,10 +98,7 @@
 			message = stars(message)
 
 	if(language)
-		verb = language.speech_verb
 		style = language.colour
-
-
 
 	if(hard_to_hear)
 		message = stars(message)
