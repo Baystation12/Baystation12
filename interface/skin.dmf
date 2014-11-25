@@ -1424,7 +1424,7 @@ window "outputwindow"
 		visited-color = #ff00ff
 		style = ".system {color:#ff0000;}"
 		enable-http-images = false
-		max-lines = 1000
+		max-lines = 0
 		image = ""
 
 window "rpane"

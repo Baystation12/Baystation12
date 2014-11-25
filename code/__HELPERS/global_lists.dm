@@ -52,7 +52,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 /////Initial Building/////
 //////////////////////////
 
-/hook/startup/proc/makeDatumRefLists()
+/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name

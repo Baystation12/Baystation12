@@ -8,6 +8,7 @@
 	idle_power_usage = 10
 	active_power_usage = 100
 
+	var/list/machine_recipes
 	var/list/stored_material =  list("metal" = 0, "glass" = 0)
 	var/list/storage_capacity = list("metal" = 0, "glass" = 0)
 	var/show_category = "All"
@@ -43,45 +44,45 @@
 		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 
 		var/index = 0
-		for(var/datum/autolathe/recipe/R in autolathe_recipes)
+		for(var/datum/autolathe/recipe/R in machine_recipes)
 			index++
 			if(R.hidden && !hacked || (show_category != "All" && show_category != R.category))
 				continue
 
-			var/can_make = 1
-			var/material_string = ""
-			var/multiplier_string = ""
-			var/max_sheets
+				var/can_make = 1
+				var/material_string = ""
+				var/multiplier_string = ""
+				var/max_sheets
 
-			var/comma
-			if(!R.resources || !R.resources.len)
-				material_string = "No resources required.</td>"
-			else
+				var/comma
+				if(!R.resources || !R.resources.len)
+					material_string = "No resources required.</td>"
+				else
 
-				//Make sure it's buildable and list requires resources.
-				for(var/material in R.resources)
-					var/sheets = round(stored_material[material]/R.resources[material])
-					if(isnull(max_sheets) || max_sheets > sheets)
-						max_sheets = sheets
+					//Make sure it's buildable and list requires resources.
+					for(var/material in R.resources)
+						var/sheets = round(stored_material[material]/R.resources[material])
+						if(isnull(max_sheets) || max_sheets > sheets)
+							max_sheets = sheets
 
-					if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
-						can_make = 0
-					if(!comma)
-						comma = 1
-					else
-						material_string += ", "
-					material_string += "[R.resources[material]] [material]"
-				material_string += ".<br></td>"
+						if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
+							can_make = 0
+						if(!comma)
+							comma = 1
+						else
+							material_string += ", "
+						material_string += "[R.resources[material]] [material]"
+					material_string += ".<br></td>"
 
-				//Build list of multipliers for sheets.
-				if(R.is_stack)
-					if(max_sheets && max_sheets > 0)
-						multiplier_string  += "<br>"
-						for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
-							multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
-						multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
+					//Build list of multipliers for sheets.
+					if(R.is_stack)
+						if(max_sheets && max_sheets > 0)
+							multiplier_string  += "<br>"
+							for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
+								multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
+							multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
 
-			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
+				dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
 
 		dat += "</table><hr>"
 	//Hacking.
@@ -198,14 +199,14 @@
 		if(!choice) return
 		show_category = choice
 
-	if(href_list["make"] && autolathe_recipes)
+	if(href_list["make"] && machine_recipes)
 
 		var/index = text2num(href_list["make"])
 		var/multiplier = text2num(href_list["multiplier"])
 		var/datum/autolathe/recipe/making
 
-		if(index > 0 && index <= autolathe_recipes.len)
-			making = autolathe_recipes[index]
+		if(index > 0 && index <= machine_recipes.len)
+			making = machine_recipes[index]
 
 		//Exploit detection, not sure if necessary after rewrite.
 		if(!making || multiplier < 0 || multiplier > 100)
@@ -252,23 +253,6 @@
 
 	..()
 	wires = new(src)
-	//Create global autolathe recipe list if it hasn't been made already.
-	if(isnull(autolathe_recipes))
-		autolathe_recipes = list()
-		autolathe_categories = list()
-		for(var/R in typesof(/datum/autolathe/recipe)-/datum/autolathe/recipe)
-			var/datum/autolathe/recipe/recipe = new R
-			autolathe_recipes += recipe
-			autolathe_categories |= recipe.category
-
-			var/obj/item/I = new recipe.path
-			if(I.matter && !recipe.resources) //This can be overidden in the datums.
-				recipe.resources = list()
-				for(var/material in I.matter)
-					if(!isnull(storage_capacity[material]))
-						recipe.resources[material] = round(I.matter[material]*1.25) // More expensive to produce than they are to recycle.
-				del(I)
-
 	//Create parts for lathe.
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/autolathe(src)
@@ -279,6 +263,10 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
 
+
+/obj/machinery/autolathe/initialize()
+	..()
+	machine_recipes = autolathe_recipes
 
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
