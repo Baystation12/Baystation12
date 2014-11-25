@@ -52,10 +52,13 @@ var/list/wood_icons = list("wood","wood-broken")
 		return lightfloor_state & LIGHTFLOOR_ON_BIT
 
 	proc/set_lightfloor_state(n)
-		lightfloor_state = get_lightfloor_on() | n
+		lightfloor_state = get_lightfloor_on() | (n & LIGHTFLOOR_STATE_BITS)
 
 	proc/set_lightfloor_on(n)
-		lightfloor_state = get_lightfloor_state() | n
+		if(n)
+			lightfloor_state |= LIGHTFLOOR_ON_BIT
+		else
+			lightfloor_state &= ~LIGHTFLOOR_ON_BIT
 
 	proc/toggle_lightfloor_on()
 		lightfloor_state ^= LIGHTFLOOR_ON_BIT
@@ -482,6 +485,10 @@ turf/simulated/floor/proc/update_icon()
 				user << "\red You forcefully pry off the planks, destroying them in the process."
 			else
 				var/obj/item/I = new floor_type(src)
+				if(is_light_floor())
+					var/obj/item/stack/tile/light/L = I
+					L.on = get_lightfloor_on()
+					L.state = get_lightfloor_state()
 				user << "\red You remove the [I.name]."
 
 		make_plating()
