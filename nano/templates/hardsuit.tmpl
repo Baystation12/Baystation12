@@ -9,127 +9,129 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 	{{if data.aicontrol && data.ai != 1}}
 		<font color='red' align='center'><strong>-- HARDSUIT CONTROL OVERRIDDEN BY AI --</strong></font>
 	{{else}}
-		<table align = 'center'>
-			<tr>
-				<td>
-					<strong>Power supply</strong> 
-				</td>
-				<td colspan = 2>
+		<div>
+			<div style='padding: 2x; padding-top: 5px'>
+				<div class='fixedLeft'>
+					<strong>Power supply</strong>
+				</div>
+				<div>
 					{{:helper.displayBar(data.chargestatus, 0, 50, (data.chargestatus >= 35) ? 'good' : (data.chargestatus >= 15) ? 'average' : 'bad')}} {{:data.charge}}/{{:data.maxcharge}}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>AI control:</strong>
-				</td>
-				<td>
-					{{if data.aioverride}}
-						<font color = 'green'><strong>ENABLED</strong></font>
-					{{else}}
-						<font color = 'red'><strong>DISABLED</strong></font>
-					{{/if}}
-				</td>
-				<td>
-					{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_ai_control' : 1}, null)}}
-				</td>
-			</tr>
-			<tr>
-				<td width = '150px'>
-					<b>Suit status:</b>
-				</td>
-				<td width>
-					{{if data.sealing == 1}}
-						<font color = 'orange'><strong>SEALING</strong></font>
-					{{else}}
-						{{if data.seals == 1}}
-							<font color = 'red'><strong>OPEN</strong></font>
+				</div>
+			</div>
+			<div>
+				<div style='padding: 2px; padding-top: 10px; display: inline-block'>
+					<div class='fixedLeft'>
+						<strong>AI control:</strong>
+					</div>
+					<div class='fixedLeft'>
+						{{if data.aioverride}}
+							<font color = 'green'><strong>ENABLED</strong></font>
 						{{else}}
-							<font color = 'green'><strong>SEALED</strong></font>
+							<font color = 'red'><strong>DISABLED</strong></font>
 						{{/if}}
-					{{/if}}
-				</td>
-				<td width>
-					{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_seals' : 1}, null)}}
-				</td>
-			</tr>
-			<tr> 
-				<td>
-					<strong>Cover status:</strong>
-				</td>
-				<td>
-					{{if data.emagged || !data.securitycheck}}
-						<font color = 'orange'><strong>ERROR - MAINTENANCE LOCK CONTROL OFFLINE</strong></font>
-					{{else}}
-						{{if data.coverlock}}
-							<font color = 'red'><strong>LOCKED</strong></font>
+					</div>
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_ai_control' : 1}, null)}}
+					</div>
+				</div>
+				<div style='padding: 2px; display: inline-block'>
+					<div class='fixedLeft'>
+						<strong>Suit status:</strong>
+					</div>
+					<div class='fixedLeft'>
+						{{if data.sealing == 1}}
+							<font color = 'orange'><strong>SEALING</strong></font>
 						{{else}}
-							<font color = 'green'><strong>UNLOCKED</strong></font>
+							{{if data.seals == 1}}
+								<font color = 'red'><strong>OPEN</strong></font>
+							{{else}}
+								<font color = 'green'><strong>SEALED</strong></font>
+							{{/if}}
 						{{/if}}
-					{{/if}}
-				</td>
-				<td>
-					{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_suit_lock' : 1}, null)}}
-				</td>
-			</tr>
-		</table>
+					</div>
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_seals' : 1}, null)}}
+					</div>
+				</div>
+				<div style='padding: 2px; display:inline-block '>
+					<div class='fixedLeft'>
+						<strong>Cover status:</strong>
+					</div>
+					<div class='fixedLeft'>
+						{{if data.emagged || !data.securitycheck}}
+							<font color = 'orange'><strong>ERROR - MAINTENANCE LOCK CONTROL OFFLINE</strong></font>
+						{{else}}
+							{{if data.coverlock}}
+								<font color = 'red'><strong>LOCKED</strong></font>
+							{{else}}
+								<font color = 'green'><strong>UNLOCKED</strong></font>
+							{{/if}}
+						{{/if}}
+					</div>
+					<div class='fixedLeft'>
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_suit_lock' : 1}, null)}}
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<h2>Hardware</h2>
 		<h3>Suit pieces</h3>
 
-		<table align = 'center'>
-			<tr>
-				<td width = '150px'>
-					<b>Helmet:</b> 
-				</td>
-				<td width = '150px'>
-					{{:data.helmet}}</br>
-				</td>
-				<td width = '150px'>
+		<div>
+			<div style='padding: 2px; display: inline-block'>
+				<div class='fixedLeft'>
+					<b>Helmet:</b>
+				</div>
+				<div class='fixedLeftWider'>
+					{{:data.helmet}}
+				</div>
+				<div class='fixedLeft'>
 					{{if data.sealing != 1}}
 						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'helmet'}, null)}}</br>
 					{{/if}}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b>Gauntlets:</b> 
-				</td>
-				<td>
-					{{:data.gauntlets}}</br>
-				</td>
-				<td>
+				</div>
+			</div>
+			<div style='padding: 2px; display: inline-block'>
+				<div class='fixedLeft'>
+					<b>Gauntlets:</b>
+				</div>
+				<div class='fixedLeftWider'>
+					{{:data.gauntlets}}
+				</div>
+				<div class='fixedLeft'>
 					{{if data.sealing != 1}}
 						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'gauntlets'}, null)}}</br>
 					{{/if}}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b>Boots:</b> 
-				</td>
-				<td>
-					{{:data.boots}}</br>
-				</td>
-				<td>
+				</div>
+			</div>
+			<div style='padding: 2px; display: inline-block'>
+				<div class='fixedLeft'>
+					<b>Boots:</b>
+				</div>
+				<div class='fixedLeftWider'>
+					{{:data.boots}}
+				</div>
+				<div class='fixedLeft'>
 					{{if data.sealing != 1}}
 						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'boots'}, null)}}</br>
 					{{/if}}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<b>Chestpiece:</b> 
-				</td>
-				<td>
-					{{:data.chest}}</br>
-				</td>
-				<td>
+				</div>
+			</div>
+			<div style='padding: 2px; display: inline-block'>
+				<div class='fixedLeft'>
+					<b>Chestpiece:</b>
+				</div>
+				<div class='fixedLeftWider'>
+					{{:data.chest}}
+				</div>
+				<div class='fixedLeft'>
 					{{if data.sealing != 1}}
 						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'chest'}, null)}}</br>
 					{{/if}}
-				</td>
-			</tr>
-		</table>
+				</div>
+			</div>
+		</div>
 
 		<h2>System modules</h2>
 		{{if data.seals == 1 || data.sealing == 1}}
