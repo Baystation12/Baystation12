@@ -14,6 +14,12 @@ em						{font-style: normal;	font-weight: bold;}
 .prefix					{					font-weight: bold;}
 
 .ooc					{					font-weight: bold;}
+.ooc .everyone			{color: #002eb8;}
+.ooc .elevated			{color: #2e78d9;}
+.ooc .moderator			{color: #184880;}
+.ooc .developer			{color: #1b521f;}
+.ooc .admin				{color: #b82e00;}
+
 .mod					{color: #735638;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 

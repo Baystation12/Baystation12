@@ -1,8 +1,6 @@
 
-var/global/normal_ooc_colour = "#002eb8"
-
 /client/verb/ooc(msg as text)
-	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
+	set name = "OOC"
 	set category = "OOC"
 
 	if(say_disabled)	//This is here to try to identify lag problems
@@ -41,52 +39,29 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
-	var/display_colour = normal_ooc_colour
+	var/ooc_style = "everyone"
 	if(holder && !holder.fakekey)
-		display_colour = "#2e78d9"	//light blue
-		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
-			display_colour = "#184880"	//dark blue
-		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
-			display_colour = "#1b521f"	//dark green
-		else if(holder.rights & R_ADMIN)
-			if(config.allow_admin_ooccolor)
-				display_colour = src.prefs.ooccolor
-			else
-				display_colour = "#b82e00"	//orange
+		ooc_style = "elevated"
+		if(holder.rights & R_MOD)
+			ooc_style = "moderator"
+		if(holder.rights & R_DEBUG)
+			ooc_style = "developer"
+		if(holder.rights & R_ADMIN)
+			ooc_style = "admin"
 
-	for(var/client/C in clients)
-		if(C.prefs.toggles & CHAT_OOC)
+	for(var/client/target in clients)
+		if(target.prefs.toggles & CHAT_OOC)
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
-					if(C.holder)
+					if(target.holder)
 						display_name = "[holder.fakekey]/([src.key])"
 					else
 						display_name = holder.fakekey
-			C << "<font color='[display_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-
-			/*
-			if(holder)
-				if(!holder.fakekey || C.holder)
-					if(holder.rights & R_ADMIN)
-						C << "<font color=[config.allow_admin_ooccolor ? src.prefs.ooccolor :"#b82e00" ]><b><span class='prefix'>OOC:</span> <EM>[key][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
-					else if(holder.rights & R_MOD)
-						C << "<font color=#184880><b><span class='prefix'>OOC:</span> <EM>[src.key][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
-					else
-						C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
-
-				else
-					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[holder.fakekey ? holder.fakekey : src.key]:</EM> <span class='message'>[msg]</span></span></font>"
+			if(holder && !holder.fakekey && (holder.rights & R_ADMIN) && config.allow_admin_ooccolor && (src.prefs.ooccolor != initial(src.prefs.ooccolor))) // keeping this for the badmins
+				target << "<font color='[src.prefs.ooccolor]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 			else
-				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
-			*/
-
-/client/proc/set_ooc(newColor as color)
-	set name = "Set Player OOC Colour"
-	set desc = "Set to yellow for eye burning goodness."
-	set category = "Fun"
-	normal_ooc_colour = newColor
-
+				target << "<span class='ooc'><span class='[ooc_style]'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></span>"
 
 /client/verb/looc(msg as text)
 	set name = "LOOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
