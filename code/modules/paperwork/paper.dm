@@ -88,7 +88,7 @@
 		return
 	var/n_name = copytext(sanitize(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
 	if((loc == usr && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : "paper")]"
+		name = "[(n_name ? text("[n_name]") : initial(name))]"
 	if(name != "paper")
 		desc = "This is a paper titled '" + name + "'."
 	add_fingerprint(usr)
