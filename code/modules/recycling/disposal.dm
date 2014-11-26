@@ -270,14 +270,15 @@
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
 		usr << "\red The disposal units power is disabled."
 		return
-	..()
-	src.add_fingerprint(usr)
+	if(..())
+		return
+
 	if(stat & BROKEN)
 		return
 	if(usr.stat || usr.restrained() || src.flushing)
 		return
 
-	if (in_range(src, usr) && istype(src.loc, /turf))
+	if(istype(src.loc, /turf))
 		usr.set_machine(src)
 
 		if(href_list["close"])
@@ -292,12 +293,13 @@
 				mode = 0
 			update()
 
-		if(href_list["handle"])
-			flush = text2num(href_list["handle"])
-			update()
+		if(!isAI(usr))
+			if(href_list["handle"])
+				flush = text2num(href_list["handle"])
+				update()
 
-		if(href_list["eject"])
-			eject()
+			if(href_list["eject"])
+				eject()
 	else
 		usr << browse(null, "window=disposal")
 		usr.unset_machine()
