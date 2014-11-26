@@ -71,54 +71,55 @@
 	setup()
 
 /obj/machinery/porta_turret/proc/setup()
-	var/obj/item/weapon/gun/energy/E = new installation	//All energy-based weapons are applicable
+	var/obj/item/weapon/gun/energy/E = installation	//All energy-based weapons are applicable
 	//var/obj/item/ammo_casing/shottype = E.projectile_type
 
-	projectile = E.projectile_type
+	projectile = initial(E.projectile_type)
 	eprojectile = projectile
-	shot_sound = E.fire_sound
+	shot_sound = initial(E.fire_sound)
 	eshot_sound = shot_sound
 
-	weapon_setup(E)
+	weapon_setup(installation)
 
-/obj/machinery/porta_turret/proc/weapon_setup(var/obj/item/weapon/gun/energy/E)
-	if(/obj/item/weapon/gun/energy/laser/practice)
-		iconholder = 1
-		eprojectile = /obj/item/projectile/beam
+/obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
+	switch(guntype)
+		if(/obj/item/weapon/gun/energy/laser/practice)
+			iconholder = 1
+			eprojectile = /obj/item/projectile/beam
 
 //			if(/obj/item/weapon/gun/energy/laser/practice/sc_laser)
 //				iconholder = 1
 //				eprojectile = /obj/item/projectile/beam
 
-	if(/obj/item/weapon/gun/energy/laser/retro)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/laser/retro)
+			iconholder = 1
 
 //			if(/obj/item/weapon/gun/energy/laser/retro/sc_retro)
 //				iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/laser/captain)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/laser/captain)
+			iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/lasercannon)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/lasercannon)
+			iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/taser)
-		eprojectile = /obj/item/projectile/beam
-		eshot_sound = 'sound/weapons/Laser.ogg'
+		if(/obj/item/weapon/gun/energy/taser)
+			eprojectile = /obj/item/projectile/beam
+			eshot_sound = 'sound/weapons/Laser.ogg'
 
-	if(/obj/item/weapon/gun/energy/stunrevolver)
-		eprojectile = /obj/item/projectile/beam
-		eshot_sound = 'sound/weapons/Laser.ogg'
+		if(/obj/item/weapon/gun/energy/stunrevolver)
+			eprojectile = /obj/item/projectile/beam
+			eshot_sound = 'sound/weapons/Laser.ogg'
 
-	if(/obj/item/weapon/gun/energy/gun)
-		eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
-		eshot_sound = 'sound/weapons/Laser.ogg'
-		egun = 1
+		if(/obj/item/weapon/gun/energy/gun)
+			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
+			eshot_sound = 'sound/weapons/Laser.ogg'
+			egun = 1
 
-	if(/obj/item/weapon/gun/energy/gun/nuclear)
-		eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
-		eshot_sound = 'sound/weapons/Laser.ogg'
-		egun = 1
+		if(/obj/item/weapon/gun/energy/gun/nuclear)
+			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
+			eshot_sound = 'sound/weapons/Laser.ogg'
+			egun = 1
 
 /obj/machinery/porta_turret/update_icon()
 	if(!anchored)

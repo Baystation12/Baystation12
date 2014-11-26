@@ -296,10 +296,9 @@ var/global/list/holodeck_programs = list(
 /turf/simulated/floor/holofloor/grass
 	name = "Lush Grass"
 	icon_state = "grass1"
-	floor_tile = new/obj/item/stack/tile/grass
+	floor_type = /obj/item/stack/tile/grass
 
 	New()
-		floor_tile.New() //I guess New() isn't run on objects spawned without the definition of a turf to house them, ah well.
 		icon_state = "grass[pick("1","2","3","4")]"
 		..()
 		spawn(4)
