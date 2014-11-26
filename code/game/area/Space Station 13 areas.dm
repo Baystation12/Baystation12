@@ -2224,4 +2224,3 @@ var/list/the_station_areas = list (
 						H << S
 
 		spawn(60) .()
-
