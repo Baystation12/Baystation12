@@ -41,6 +41,9 @@
 	pixel_x = rand(-9, 9)
 	stamps = ""
 
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
+
 	if(info != initial(info))
 		info = html_encode(info)
 		info = replacetext(info, "\n", "<BR>")
@@ -85,6 +88,8 @@
 	var/n_name = copytext(sanitize(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
 	if((loc == usr && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "paper")]"
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
 	add_fingerprint(usr)
 	return
 
