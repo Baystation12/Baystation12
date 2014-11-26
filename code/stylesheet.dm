@@ -15,6 +15,7 @@ em						{font-style: normal;	font-weight: bold;}
 
 .ooc					{					font-weight: bold;}
 .ooc .everyone			{color: #002eb8;}
+.ooc .looc				{color: #6699cc;}
 .ooc .elevated			{color: #2e78d9;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}

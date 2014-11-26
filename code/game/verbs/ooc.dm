@@ -64,7 +64,7 @@
 				target << "<span class='ooc'><span class='[ooc_style]'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></span>"
 
 /client/verb/looc(msg as text)
-	set name = "LOOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
+	set name = "LOOC"
 	set desc = "Local OOC, seen only by those in view."
 	set category = "OOC"
 
@@ -104,38 +104,26 @@
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
-	var/list/heard = get_mobs_in_view(7, src.mob)
-	var/mob/S = src.mob
+	var/mob/source = src.mob
+	var/list/heard = get_mobs_in_view(7, source)
 	
-	var/display_name = S.key
-	if(S.stat != DEAD)
-		display_name = S.name
-	
-	// Handle non-admins
-	for(var/mob/M in heard)
-		if(!M.client)
-			continue
-		var/client/C = M.client
-		if (C in admins)
-			continue //they are handled after that
+	var/display_name = source.key
+	if(holder && holder.fakekey)
+		display_name = holder.fakekey
+	if(source.stat != DEAD)
+		display_name = source.name
 
-		if(C.prefs.toggles & CHAT_LOOC)
-			if(holder)
-				if(holder.fakekey)
-					if(C.holder)
-						display_name = "[holder.fakekey]/([src.key])"
-					else
-						display_name = holder.fakekey
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-	
-	// Now handle admins
-	display_name = S.key
-	if(S.stat != DEAD)
-		display_name = "[S.name]/([S.key])"
-	
-	for(var/client/C in admins)
-		if(C.prefs.toggles & CHAT_LOOC)
-			var/prefix = "(R)LOOC"
-			if (C.mob in heard)
+	var/prefix
+	var/admin_stuff
+	for(var/client/target in clients)
+		if(target.prefs.toggles & CHAT_LOOC)
+			admin_stuff = ""
+			if(target in admins)
+				prefix = "(R)LOOC"
+				admin_stuff += "/([source.key])"
+				if(target != source.client)
+					admin_stuff += "(<A HREF='?src=\ref[target.holder];adminplayerobservejump=\ref[mob]'>JMP</A>)"
+			if(target.mob in heard)
 				prefix = "LOOC"
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+			if((target.mob in heard) || (target in admins))
+				target << "<span class='ooc'><span class='looc'><span class='prefix'>[prefix]:</span> <EM>[display_name][admin_stuff]:</EM> <span class='message'>[msg]</span></span></span>"
