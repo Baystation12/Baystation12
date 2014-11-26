@@ -7,6 +7,7 @@
 /datum/game_mode/vampire
 	name = "vampire"
 	config_tag = "vampire"
+	restricted_species = list("Machine")
 	restricted_jobs = list("AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Chaplain") //Consistent screening has filtered all infiltration attempts on high value jobs
 	protected_jobs = list()
 	restricted_species = list("Machine","Vox")
@@ -55,6 +56,9 @@
 	for(var/datum/mind/player in possible_vampires)
 		for(var/job in restricted_jobs)//Removing robots from the list
 			if(player.assigned_role == job)
+				possible_vampires -= player
+		for(var/species in restricted_species)//Removing IPCs from the list
+			if(player.current.client.prefs.species == species)
 				possible_vampires -= player
 
 	vampire_amount = max(1,round(num_players() / 10)) //1 + round(num_players() / 10)
