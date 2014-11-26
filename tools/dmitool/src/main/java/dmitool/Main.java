@@ -73,14 +73,14 @@ public class Main {
                 
                 if(VERBOSITY >= 0) System.out.println("Loading " + a);
                 DMI dmi = doDMILoad(a);
-                dmi.printInfo();
+                if(VERBOSITY >= 0) dmi.printInfo();
 
                 if(VERBOSITY >= 0) System.out.println("Loading " + b);
                 DMI dmi2 = doDMILoad(b);
-                dmi2.printInfo();
+                if(VERBOSITY >= 0) dmi2.printInfo();
 
                 DMIDiff dmid = new DMIDiff(dmi, dmi2);
-                if(VERBOSITY >= 0) System.out.println(dmid);
+                System.out.println(dmid);
                 break;
             case "sort":
                 if(argq.size() < 1) {
