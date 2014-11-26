@@ -210,14 +210,14 @@
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-	
+
 	t = replacetext(t, "\[h1\]", "<H1>")
 	t = replacetext(t, "\[/h1\]", "</H1>")
 	t = replacetext(t, "\[h2\]", "<H2>")
 	t = replacetext(t, "\[/h2\]", "</H2>")
 	t = replacetext(t, "\[h3\]", "<H3>")
 	t = replacetext(t, "\[/h3\]", "</H3>")
-	
+
 	if(!iscrayon)
 		t = replacetext(t, "\[*\]", "<li>")
 		t = replacetext(t, "\[hr\]", "<HR>")
