@@ -63,10 +63,11 @@
 	icon_state = "paper"
 
 /obj/item/weapon/paper/examine(mob/user)
-	if(in_range(user, src))
+	..()
+	if(in_range(user, src) || istype(user, /mob/dead/observer))
 		show_content(usr)
 	else
-		user << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>You have to go closer if you want to read it.</span>"
 	return
 
 /obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
