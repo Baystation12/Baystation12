@@ -34,7 +34,6 @@
 
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
-	var/alt_name = ""
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
@@ -54,22 +53,18 @@
 	else
 		name = real_name
 	if(name != real_name)
-		alt_name = " (died as [real_name])"
-
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
+		name += " (died as [real_name])"
 
 	for(var/mob/M in player_list)
 		if(istype(M, /mob/new_player))
 			continue
-		if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD))
-			M << rendered
-			continue
-
-		if(M.client && M.client.holder && !is_mentor(M.client) && (M.client.prefs.toggles & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
-			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-
-
-	return
+		if(M.client && (M.stat == DEAD || (M.client.holder && !is_mentor(M.client)) && (M.client.prefs.toggles & CHAT_DEAD)))
+			var/follow = ""
+			if(src != M)
+				follow = " (<a href='byond://?src=\ref[M];track=\ref[src]'>follow</a>)"
+			if(M.stat != DEAD && M.client.holder)
+				follow = " (<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[src]'>JMP</a>)"
+			M << "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[follow] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
