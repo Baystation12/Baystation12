@@ -502,7 +502,7 @@ Doing this because FindTurfs() isn't even used
 	set category = "Debug"
 	if(Debug)
 		var/obj/effect/smoke/O = new /obj/effect/smoke( src.loc )
-		O.dir = pick(NORTH, SOUTH, EAST, WEST)
+		O.set_dir(pick(NORTH, SOUTH, EAST, WEST))
 		spawn( 0 )
 			O.Life()
 	else

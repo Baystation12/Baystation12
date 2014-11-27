@@ -234,13 +234,13 @@
 			//If someone knows a better way to do this, let me know. -Giacom
 			switch(i)
 				if(NORTH)
-					src.dir = SOUTH
+					src.set_dir(SOUTH)
 				if(SOUTH)
-					src.dir = NORTH
+					src.set_dir(NORTH)
 				if(WEST)
-					src.dir = EAST
+					src.set_dir(EAST)
 				if(EAST)
-					src.dir = WEST
+					src.set_dir(WEST)
 			break
 
 //Return a working camera that can see a given mob

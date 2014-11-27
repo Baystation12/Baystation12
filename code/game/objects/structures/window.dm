@@ -246,7 +246,7 @@
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	dir = turn(dir, 90)
+	set_dir(turn(dir, 90))
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -262,7 +262,7 @@
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	dir = turn(dir, 270)
+	set_dir(turn(dir, 270))
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -292,7 +292,7 @@
 		anchored = 0
 
 	if (start_dir)
-		dir = start_dir
+		set_dir(start_dir)
 
 	health = maxhealth
 
@@ -313,7 +313,7 @@
 	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
 	..()
-	dir = ini_dir
+	set_dir(ini_dir)
 	update_nearby_tiles(need_rebuild=1)
 
 //checks if this window is full-tile one

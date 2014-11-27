@@ -294,7 +294,7 @@ obj/item/weapon/circuitboard/rdserver
 
 /obj/item/weapon/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
 	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
-	U.dir = src.machine_dir
+	U.set_dir(src.machine_dir)
 	U.initialize_directions = src.init_dirs
 	U.initialize()
 	U.build_network()

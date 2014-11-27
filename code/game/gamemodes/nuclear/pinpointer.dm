@@ -30,7 +30,7 @@
 			if(!the_disk)
 				icon_state = "pinonnull"
 				return
-		dir = get_dir(src,the_disk)
+		set_dir(get_dir(src,the_disk))
 		switch(get_dist(src,the_disk))
 			if(0)
 				icon_state = "pinondirect"
@@ -79,7 +79,7 @@
 		if(!location)
 			icon_state = "pinonnull"
 			return
-		dir = get_dir(src,location)
+		set_dir(get_dir(src,location))
 		switch(get_dist(src,location))
 			if(0)
 				icon_state = "pinondirect"
@@ -98,7 +98,7 @@
 		if(!target)
 			icon_state = "pinonnull"
 			return
-		dir = get_dir(src,target)
+		set_dir(get_dir(src,target))
 		switch(get_dist(src,target))
 			if(0)
 				icon_state = "pinondirect"
@@ -215,7 +215,7 @@
 //	if(loc.z != the_disk.z)	//If you are on a different z-level from the disk
 //		icon_state = "pinonnull"
 //	else
-	dir = get_dir(src, the_disk)
+	set_dir(get_dir(src, the_disk))
 	switch(get_dist(src, the_disk))
 		if(0)
 			icon_state = "pinondirect"
@@ -248,7 +248,7 @@
 	if(loc.z != home.z)	//If you are on a different z-level from the shuttle
 		icon_state = "pinonnull"
 	else
-		dir = get_dir(src, home)
+		set_dir(get_dir(src, home))
 		switch(get_dist(src, home))
 			if(0)
 				icon_state = "pinondirect"
