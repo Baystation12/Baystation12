@@ -339,13 +339,14 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
 		modtype = prefix
-	if(mmi)
-		if(istype(mmi, /obj/item/device/mmi/posibrain))
-			braintype = "Android"
-		else
-			braintype = "Cyborg"
-	else
+
+	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
+		braintype = "Android"
+	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
 		braintype = "Robot"
+	else
+		braintype = "Cyborg"
+
 
 	var/changed_name = ""
 	if(custom_name)

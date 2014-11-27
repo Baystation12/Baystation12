@@ -43,7 +43,7 @@
 
 /mob/living/simple_animal/spiderbot/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
-	if(istype(O, /obj/item/device/mmi) || istype(O, /obj/item/device/mmi/posibrain))
+	if(istype(O, /obj/item/device/mmi))
 		var/obj/item/device/mmi/B = O
 		if(src.mmi) //There's already a brain in it.
 			user << "\red There's already a brain in [src]!"
@@ -164,14 +164,12 @@
 	death()
 
 /mob/living/simple_animal/spiderbot/proc/update_icon()
-	if(mmi)
-		if(istype(mmi,/obj/item/device/mmi))
-			icon_state = "spiderbot-chassis-mmi"
-			icon_living = "spiderbot-chassis-mmi"
-		if(istype(mmi, /obj/item/device/mmi/posibrain))
-			icon_state = "spiderbot-chassis-posi"
-			icon_living = "spiderbot-chassis-posi"
-
+	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
+		icon_state = "spiderbot-chassis-posi"
+		icon_living = "spiderbot-chassis-posi"
+	else if(istype(mmi,/obj/item/device/mmi))
+		icon_state = "spiderbot-chassis-mmi"
+		icon_living = "spiderbot-chassis-mmi"
 	else
 		icon_state = "spiderbot-chassis"
 		icon_living = "spiderbot-chassis"
