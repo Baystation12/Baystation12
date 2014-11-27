@@ -247,11 +247,17 @@ var/list/global/organ_rel_size = list(
 	n = length(n)
 	var/p = null
 	p = 1
+	var/intag = 0
 	while(p <= n)
-		if ((copytext(te, p, p + 1) == " " || prob(pr)))
-			t = text("[][]", t, copytext(te, p, p + 1))
+		var/char = copytext(te, p, p + 1)
+		if (char == "<") //let's try to not break tags
+			intag = !intag
+		if (intag || char == " " || prob(pr))
+			t = text("[][]", t, char)
 		else
 			t = text("[]*", t)
+		if (char == ">")
+			intag = !intag
 		p++
 	return t
 

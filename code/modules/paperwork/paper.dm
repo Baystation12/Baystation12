@@ -41,6 +41,9 @@
 	pixel_x = rand(-9, 9)
 	stamps = ""
 
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
+
 	if(info != initial(info))
 		info = html_encode(info)
 		info = replacetext(info, "\n", "<BR>")
@@ -60,10 +63,11 @@
 	icon_state = "paper"
 
 /obj/item/weapon/paper/examine(mob/user)
-	if(in_range(user, src))
+	..()
+	if(in_range(user, src) || istype(user, /mob/dead/observer))
 		show_content(usr)
 	else
-		user << "<span class='notice'>It is too far away.</span>"
+		user << "<span class='notice'>You have to go closer if you want to read it.</span>"
 	return
 
 /obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
@@ -84,7 +88,9 @@
 		return
 	var/n_name = copytext(sanitize(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
 	if((loc == usr && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : "paper")]"
+		name = "[(n_name ? text("[n_name]") : initial(name))]"
+	if(name != "paper")
+		desc = "This is a paper titled '" + name + "'."
 	add_fingerprint(usr)
 	return
 
@@ -204,14 +210,14 @@
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-	
+
 	t = replacetext(t, "\[h1\]", "<H1>")
 	t = replacetext(t, "\[/h1\]", "</H1>")
 	t = replacetext(t, "\[h2\]", "<H2>")
 	t = replacetext(t, "\[/h2\]", "</H2>")
 	t = replacetext(t, "\[h3\]", "<H3>")
 	t = replacetext(t, "\[/h3\]", "</H3>")
-	
+
 	if(!iscrayon)
 		t = replacetext(t, "\[*\]", "<li>")
 		t = replacetext(t, "\[hr\]", "<HR>")

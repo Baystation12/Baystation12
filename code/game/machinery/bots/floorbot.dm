@@ -228,7 +228,7 @@
 	if((!src.target || src.target == null) && emagged == 2)
 		if(!src.target || src.target == null)
 			for (var/turf/simulated/floor/D in view(7,src))
-				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_tile)
+				if(!(D in floorbottargets) && D != src.oldtarget && D.floor_type)
 					src.oldtarget = D
 					src.target = D
 					break
