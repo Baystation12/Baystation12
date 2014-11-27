@@ -8,7 +8,6 @@
 	src.brainmob.stat = 0
 	src.brainmob.silent = 0
 	dead_mob_list -= src.brainmob
-	..()
 
 /obj/item/device/mmi/digital/transfer_identity(var/mob/living/carbon/H)
 	brainmob.dna = H.dna
