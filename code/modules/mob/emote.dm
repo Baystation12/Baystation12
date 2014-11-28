@@ -90,20 +90,5 @@
 		input = message
 
 	if(input)
-		message = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <b>[src]</b> [message]</span>"
-	else
-		return
-
-
-	if(message)
-		log_emote("Ghost/[src.key] : [message]")
-
-		for(var/mob/M in player_list)
-			if(istype(M, /mob/new_player))
-				continue
-
-			if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) // Show the emote to admins/mods
-				M << message
-
-			else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the emote to regular ghosts with deadchat toggled on
-				M.show_message(message, 2)
+		log_emote("Ghost/[src.key] : [input]")
+		say_dead_direct(input, src)

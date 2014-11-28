@@ -465,3 +465,34 @@ proc/is_blind(A)
 		if(get_area(M) == A)
 			mobs += M
 	return mobs
+
+//Direct dead say used both by emote and say
+//It is somewhat messy. I don't know what to do.
+//I know you can't see the change, but I rewrote the name code. It is significantly less messy now
+/proc/say_dead_direct(var/message, var/mob/subject = null)
+	var/name
+	if(subject && subject.client)
+		var/client/C = subject.client
+		var/keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
+			var/mindname
+			var/realname = C.mob.real_name
+			if(C.mob.mind)
+				mindname = C.mob.mind.name
+				if(C.mob.mind.original && C.mob.mind.original.real_name)
+					realname = C.mob.mind.original.real_name
+			if(mindname && mindname != realname)
+				name = "[realname] died as [mindname]"
+			else
+				name = realname
+		name = "<span class='name'>[keyname] ([name])</span> "
+
+	for(var/mob/M in player_list)
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
+			var/follow = ""
+			if(subject)
+				if(subject != M)
+					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
+				if(M.stat != DEAD && M.client.holder)
+					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
+			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [name][follow][message]</span>"
