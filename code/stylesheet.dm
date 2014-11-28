@@ -25,6 +25,12 @@ em						{font-style: normal;	font-weight: bold;}
 .ooc .developer			{color: #719300;}
 .ooc .admin				{color: #e40045;}
 
+/* Admin: Private Messages */
+.pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
+.pm  .in				{color: #ff0000;}
+.pm  .out				{color: #B54A4A;}
+.pm  .other				{color: #498db6;}
+
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}
 .mod_channel .admin		{color: #e40045;	font-weight: bold;}
