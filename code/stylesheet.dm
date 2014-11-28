@@ -12,42 +12,56 @@ em						{font-style: normal;	font-weight: bold;}
 						{color: #638500;}
 
 .prefix					{					font-weight: bold;}
-.log_message			{color: #5BADFF;}
+.log_message			{color: #789FC7;}
 
+/* OOC */
 .ooc					{					font-weight: bold;}
-.ooc .everyone			{color: #002eb8;}
-.ooc .looc				{color: #6699cc;}
-.ooc .elevated			{color: #2e78d9;}
-.ooc .moderator			{color: #184880;}
-.ooc .developer			{color: #1b521f;}
-.ooc .admin				{color: #b82e00;}
+.ooc img.text_tag		{width: 32px; height: 10px;}
 
-.mod					{color: #735638;	font-weight: bold;}
-.adminmod				{color: #402A14;	font-weight: bold;}
+.ooc .everyone			{color: #1339ac;}	
+.ooc .looc				{color: #46b2b2;}
+.ooc .elevated			{color: #386aff;}
+.ooc .moderator			{color: #386aff;}
+.ooc .developer			{color: #719300;}
+.ooc .admin				{color: #e40045;}
 
-.adminsay				{color: #9611D4;	font-weight: bold;}
-.headminsay				{color: #5A0A7F;	font-weight: bold;}
 
+/* Radio: Misc */
+.deadsay				{color: #530FAD;}
+.deptradio				{color: #ff00ff;}	/* when all other department colors fail */
+.newscaster				{color: #750000;}
+
+/* Radio Channels */
+/*.radio				{color: #42cc3d;}	We will use the other color for everything, as this is unnecessarily bright */
+.comradio				{color: #5692C7;}
+.airadio				{color: #CA3584;}
+.syndradio				{color: #C7A556;}
+.centradio				{color: #3434EF;}
+
+.secradio				{color: #EA1E1E;}
+.engradio				{color: #FA7136;}
+.supradio				{color: #B6703D;}
+.medradio				{color: #46C17A;}
+.sciradio				{color: #ad66cc;}
+/*.srvradio				{color: #b4cc66;}	just like .radio */
+
+/* Radio Channels: Message Only */
+.radio					{color: #247D22;}
+.comradio	.message	{color: #2D5B86;}
+.airadio	.message	{color: #9F2B68;}
+.syndradio	.message	{color: #967832;}
+.centradio	.message	{color: #1313E6;}
+
+.secradio	.message	{color: #CB1212;}
+.engradio	.message	{color: #F9540D;}
+.supradio	.message	{color: #965C32;}
+.medradio	.message	{color: #32965C;}
+.sciradio	.message	{color: #923DB6;}
+.srvradio				{color: #8DA637;}
+
+/* Miscellaneous */
 .name					{					font-weight: bold;}
-
 .say					{}
-.deadsay				{color: #5c00e6;}
-.radio					{color: #008000;}
-.deptradio				{color: #993399;}
-.newscaster				{color: #800000;}
-
-.comradio				{color: #193A7A;}
-.syndradio				{color: #6D3F40;}
-.centradio				{color: #5C5C8A;}
-.airadio				{color: #FF00FF;}
-
-.secradio				{color: #A30000;}
-.engradio				{color: #A66300;}
-.medradio				{color: #008160;}
-.sciradio				{color: #993399;}
-.supradio				{color: #5F4519;}
-.srvradio				{color: #6eaa2c;}
-
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
 
