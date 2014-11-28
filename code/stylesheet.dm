@@ -12,6 +12,7 @@ em						{font-style: normal;	font-weight: bold;}
 						{color: #638500;}
 
 .prefix					{					font-weight: bold;}
+.log_message			{color: #5BADFF;}
 
 .ooc					{					font-weight: bold;}
 .ooc .everyone			{color: #002eb8;}
@@ -24,7 +25,6 @@ em						{font-style: normal;	font-weight: bold;}
 .mod					{color: #735638;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 
-.admin					{color: #386aff;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
 .headminsay				{color: #5A0A7F;	font-weight: bold;}
 
