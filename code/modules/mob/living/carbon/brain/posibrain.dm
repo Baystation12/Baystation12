@@ -67,7 +67,7 @@
 	return
 
 /obj/item/device/mmi/posibrain/proc/transfer_personality(var/mob/candidate)
-
+	announce_ghost_joinleave(candidate, 0, "They are occupying a positronic brain now.")
 	src.searching = 0
 	src.brainmob.mind = candidate.mind
 	src.brainmob.ckey = candidate.ckey

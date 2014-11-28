@@ -377,7 +377,8 @@ var/list/admin_verbs_mentor = list(
 	else
 		//ghostize
 		var/mob/body = mob
-		body.ghostize(1)
+		var/mob/dead/observer/ghost = body.ghostize(1)
+		ghost.admin_ghosted = 1
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

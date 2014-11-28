@@ -437,6 +437,8 @@ var/list/slot_equipment_priority = list( \
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
+	announce_ghost_joinleave(client, 0)
+
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
