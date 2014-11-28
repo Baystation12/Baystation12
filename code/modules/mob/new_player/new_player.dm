@@ -62,7 +62,7 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		src << browse(output,"window=playersetup;size=210x280;can_close=0")
 		return
 
 	Stat()
