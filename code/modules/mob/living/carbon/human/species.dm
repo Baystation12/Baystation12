@@ -381,6 +381,7 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	rarity_value = 10
+	sizechange = 1
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
