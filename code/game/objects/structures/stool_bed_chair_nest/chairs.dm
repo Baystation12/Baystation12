@@ -51,6 +51,8 @@
 	set name = "Rotate Chair"
 	set category = "Object"
 	set src in oview(1)
+	if(istype(src, /obj/structure/stool/bed/chair/bench))
+		return
 
 	if(config.ghost_interaction)
 		src.dir = turn(src.dir, 90)
@@ -153,7 +155,7 @@
 	if(propelled)
 		var/mob/living/occupant = buckled_mob
 		unbuckle()
-		
+
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
 		occupant.throw_at(A, 3, propelled)
