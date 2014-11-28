@@ -85,6 +85,7 @@ var/list/mechtoys = list(
 		else
 			flapcut = 1
 			user << "You cut a hole in the [src]."
+			icon_state = plasticflaps_cut
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 	if(istype(I, /obj/item/stack/sheet/mineral/plastic))
 		var/obj/item/stack/sheet/mineral/plastic/P = I
@@ -94,6 +95,7 @@ var/list/mechtoys = list(
 			if(P.use(5))
 				flapcut = 0
 				user << "You repair the hole in the [src] with the [I.name]."
+				icon_state = plasticflaps
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 /obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
