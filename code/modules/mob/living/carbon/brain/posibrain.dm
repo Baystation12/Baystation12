@@ -39,7 +39,7 @@
 		if(!C)	return
 		var/response = alert(C, "Someone is requesting a personality for a positronic brain. Would you like to play as one?", "Positronic brain request", "Yes", "No", "Never for this round")
 		if(response == "Yes")
-			response = alert(C, "Are you sure you want to play as a positronic brain?", "Positronic brain request", "Yes", "No")
+			response = alert(C, "Are you sure you want to play as a positronic brain?", "Yes", "No")
 		if(!C || brainmob.key || 0 == searching)	return		//handle logouts that happen whilst the alert is waiting for a response, and responses issued after a brain has been located.
 		if(response == "Yes")
 			transfer_personality(C.mob)
@@ -67,7 +67,7 @@
 	return
 
 /obj/item/device/mmi/posibrain/proc/transfer_personality(var/mob/candidate)
-	announce_ghost_joinleave(candidate, 0, "They are occupying a positronic brain now.")
+
 	src.searching = 0
 	src.brainmob.mind = candidate.mind
 	src.brainmob.ckey = candidate.ckey
