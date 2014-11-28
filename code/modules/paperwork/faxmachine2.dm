@@ -167,7 +167,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	
 	if (istype(incoming, /obj/item/weapon/paperwork/paper))
 		copy(incoming)
-	else if (istype(incoming, /obj/item/weapon/photo))
+	else if (istype(incoming, /obj/item/weapon/paperwork/photo))
 		photocopy(incoming)
 	else if (istype(incoming, /obj/item/weapon/paperwork/bundle))
 		bundlecopy(incoming)
@@ -186,7 +186,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	var/obj/item/rcvdcopy
 	if (istype(copyitem, /obj/item/weapon/paperwork/paper))
 		rcvdcopy = copy(copyitem)
-	else if (istype(copyitem, /obj/item/weapon/photo))
+	else if (istype(copyitem, /obj/item/weapon/paperwork/photo))
 		rcvdcopy = photocopy(copyitem)
 	else if (istype(copyitem, /obj/item/weapon/paperwork/bundle))
 		rcvdcopy = bundlecopy(copyitem)

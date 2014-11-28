@@ -93,23 +93,35 @@
 	user << browse(dat, "window=[name]")
 	onclose(user, "[name]")
 
-//sets the current page
-/obj/item/weapon/paperwork/bundle/proc/set_page(var/newpage)
-	if (newpage != page)
-		page = newpage
-		playsound(src.loc, "pageturn", 50, 1)
-		update_bundle()
+/obj/item/weapon/paperwork/bundle/show_content_admin(datum/admins/admin)
+	//so that admins can view faxed bundles without interfering with each other
+	var/data = "<center><B><U></B>[name]</U></center><BR><BR>"
+
+	for (var/page in 1 to contents.len)
+		var/obj/pageobj = contents[page]
+		data += "Page [page] - <A href='?src=\ref[src];admin_view_page=[page];admin_holder=\ref[admin]'>[pageobj.name]</A><BR>"
+
+	admin.owner << browse(data, "window=[name]")
 
 /obj/item/weapon/paperwork/bundle/Topic(href, href_list)
 	..()
+	if(href_list["admin_view_page"])
+		//TODO#paperwork Check rights or something
+		var/datum/admins/A = locate(href_list["admin_holder"])
+		if (A)
+			var/obj/item/weapon/paperwork/P = src[href_list["admin_view"]]
+			P.show_content_admin(A)
+	
 	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			set_page(page+1)
+			playsound(src.loc, "pageturn", 50, 1)
 			add_fingerprint(usr)
 
 		if(href_list["prev_page"])
 			set_page(page-1)
+			playsound(src.loc, "pageturn", 50, 1)
 			add_fingerprint(usr)
 
 		if(href_list["remove"])
@@ -127,6 +139,19 @@
 	if (istype(usr, /mob))
 		src.attack_self(usr)
 		updateUsrDialog()
+
+//sets the current page
+/obj/item/weapon/paperwork/bundle/proc/set_page(var/newpage)
+	if (newpage != page)
+		page = newpage
+		
+		//ensure page is within bounds
+		page = between(1, page, contents.len)
+		screen = 0
+		if (page > 1)
+			screen |= SHOW_LINK_PREV
+		if (page < contents.len)
+			screen |= SHOW_LINK_NEXT
 
 /obj/item/weapon/paperwork/bundle/verb/remove_all()
 	set name = "Loosen Bundle"
@@ -154,9 +179,8 @@
 		usr << browse(null, "window=[name]") //close the browser window
 		del(src)
 	
-	//ensure page is within bounds
+	//ensure page is still within bounds
 	page = between(1, page, contents.len)
-	
 	screen = 0
 	if (page > 1)
 		screen |= SHOW_LINK_PREV
@@ -180,13 +204,11 @@
 			throw_range = 3
 			throw_speed = 1
 		if (9 to 16)
-			desc = "A huge stack of papers."
 			throwforce = 3
 			w_class = 3
 			throw_range = 5
 			throw_speed = 2
 		if (17 to INFINITY)
-			desc = "An enormous stack of papers!"
 			throwforce = 5
 			w_class = 4
 			throw_range = 7
@@ -197,28 +219,37 @@
 	icon_state = P.icon_state
 	overlays = P.overlays
 	underlays = 0
-	var/i = 0
+	var/papercount = 0
 	var/photo
-	for(var/obj/O in src)
+	
+	for(var/obj/O in src.contents)
+		//TODO#paperwork Include the photo icon in here instead of this snowflake stuff
 		var/image/img = image('icons/obj/bureaucracy.dmi')
 		if(istype(O, /obj/item/weapon/paperwork/paper))
 			img.icon_state = O.icon_state
-			img.pixel_x -= min(1*i, 2)
-			img.pixel_y -= min(1*i, 2)
-			pixel_x = min(0.5*i, 1)
-			pixel_y = min(  1*i, 2)
+			img.pixel_x -= min(1*papercount, 2)
+			img.pixel_y -= min(1*papercount, 2)
+			pixel_x = min(0.5*papercount, 1)
+			pixel_y = min(  1*papercount, 2)
 			underlays += img
-			i++
-		else if(istype(O, /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/Ph = O
+			papercount++
+		else if(!photo && istype(O, /obj/item/weapon/paperwork/photo))
+			var/obj/item/weapon/paperwork/photo/Ph = O
 			img = Ph.tiny
 			photo = 1
 			overlays += img
-	if(i>1)
-		desc =  "[i] papers clipped to each other."
-	else
-		desc = "A single sheet of paper."
-	if(photo)
+	
+	switch (papercount)
+		if (1)
+			desc = "A single sheet of paper."
+		if (2 to 8)
+			desc = "[papercount] papers clipped to each other."
+		if (9 to 16)
+			desc = "A huge stack of papers."
+		if (17 to INFINITY)
+			desc = "An enormous stack of papers!"
+	if (photo)
 		desc += "\nThere is a photo attached to it."
+	
 	overlays += image('icons/obj/bureaucracy.dmi', "clip")
 	return

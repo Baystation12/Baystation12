@@ -359,7 +359,7 @@
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
 
-	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
+	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/paperwork/photo))
 		if (istype(P, /obj/item/weapon/paper/carbon))
 			var/obj/item/weapon/paper/carbon/C = P
 			if (!C.iscopy && !C.copied)

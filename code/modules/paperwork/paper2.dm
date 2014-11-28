@@ -109,6 +109,11 @@
 	user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[render_content(user, editing)]</BODY></HTML>", "window=[name]")
 	onclose(user, "[name]")
 
+//TODO#paperwork Stamps
+/obj/item/weapon/paperwork/paper/show_content_admin(datum/admins/admin)
+	admin.owner << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[render_content(null, 0)]</BODY></HTML>", "window=[name]")
+	onclose(admin.owner, "[name]")
+
 /obj/item/weapon/paperwork/paper/proc/set_content(var/new_text)
 	text_content = list(new_text)
 	regenerate_cached_content()
@@ -119,7 +124,6 @@
 	cached_content = ""
 	info = null
 	update_icon()
-
 
 //This should be called whenever the content of the paper is changed
 /obj/item/weapon/paperwork/paper/proc/regenerate_cached_content()

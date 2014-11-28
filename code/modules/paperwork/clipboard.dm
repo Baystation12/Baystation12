@@ -36,7 +36,10 @@
 /obj/item/weapon/clipboard/update_icon()
 	overlays.Cut()
 	if(toppaper)
-		overlays += toppaper.icon_state
+		var/image/img = image(toppaper.icon)
+		img.icon_state = toppaper.icon_state
+		
+		overlays += img
 		overlays += toppaper.overlays
 	if(haspen)
 		overlays += "clipboard_pen"

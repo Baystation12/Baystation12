@@ -20,7 +20,7 @@
 		"/obj/item/weapon/flame/match",
 		"/obj/item/weapon/paper",
 		"/obj/item/weapon/pen",
-		"/obj/item/weapon/photo",
+		"/obj/item/weapon/paperwork/photo",
 		"/obj/item/weapon/reagent_containers/dropper",
 		"/obj/item/weapon/screwdriver",
 		"/obj/item/weapon/stamp")

@@ -1484,50 +1484,18 @@
 		H << "You hear something crackle in your headset for a moment before a voice speaks.  \"Please stand by for a message from your benefactor.  Message as follows, agent. <b>\"[input]\"</b>  Message ends.\""
 
 	else if(href_list["AdminFaxView"])
-		var/obj/item/fax = locate(href_list["AdminFaxView"])
-		if (istype(fax, /obj/item/weapon/paperwork/paper))
-			var/obj/item/weapon/paperwork/paper/P = fax
-			P.show_content(usr)
-		else if (istype(fax, /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = fax
-			H.show(usr)
-		else if (istype(fax, /obj/item/weapon/paperwork/bundle))
-			//having multiple people turning pages on a paper_bundle can cause issues
-			//open a browse window listing the contents instead
-			var/data = ""
-			var/obj/item/weapon/paperwork/bundle/B = fax
+		var/obj/item/weapon/paperwork/fax = locate(href_list["AdminFaxView"])
 
-			for (var/page = 1, page <= B.contents.len, page++)
-				var/obj/pageobj = B.contents[page]
-				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
-
-			world << data
-			world << "usr = [usr]"
-
-			usr << browse(data, "window=[B.name]")
+		if (fax)
+			fax.show_content_admin(src)
 		else
-			usr << "\red The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]"
-
-	else if (href_list["AdminFaxViewPage"])
-		var/page = text2num(href_list["AdminFaxViewPage"])
-		var/obj/item/weapon/paperwork/bundle/bundle = locate(href_list["paper_bundle"])
-
-		if (!bundle) return
-
-		if (istype(bundle.contents[page], /obj/item/weapon/paperwork/paper))
-			var/obj/item/weapon/paperwork/paper/P = bundle.contents[page]
-			//P.show_content(src.owner, 1)
-			//TODO#paperwork
-			//vat/dat = P.render_content()
-			//src.owner << browse(dat, "window=???")
-		else if (istype(bundle.contents[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = bundle.contents[page]
-			H.show(src.owner)
-		return
-
+			usr << "\red The faxed item is not viewable. This is probably a bug, and should be reported on the tracker."
+	
+	//TODO#paperwork
 	else if(href_list["CentcommFaxReply"])
 		var/mob/sender = locate(href_list["CentcommFaxReply"])
 		var/obj/machinery/photocopier/faxmachine/fax = locate(href_list["originfax"])
+		if (!fax) return
 
 		var/input = input(src.owner, "Please enter a message to reply to [key_name(sender)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
 		if(!input)	return
@@ -1560,6 +1528,7 @@
 			del(P)
 		return
 
+	//TODO#paperwork
 	else if(href_list["SolGovFaxReply"])
 		//TODO
 		/*
@@ -1602,8 +1571,6 @@
 				return
 		src.owner << "/red Unable to locate fax!"
 		*/
-
-
 
 	else if(href_list["jumpto"])
 		if(!check_rights(R_ADMIN))	return

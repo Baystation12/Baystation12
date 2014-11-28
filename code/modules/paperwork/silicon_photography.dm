@@ -8,7 +8,7 @@
 /obj/item/device/camera/siliconcam
 	var/in_camera_mode = 0
 	var/photos_taken = 0
-	var/list/obj/item/weapon/photo/aipictures = list()
+	var/list/obj/item/weapon/paperwork/photo/aipictures = list()
 
 /obj/item/device/camera/siliconcam/ai_camera //camera AI can take pictures with
 	name = "AI photo camera"
@@ -22,8 +22,10 @@
 /obj/item/device/camera/siliconcam/proc/injectaialbum(var/datum/picture/P, var/sufix = "") //stores image information to a list similar to that of the datacore
 	photos_taken++
 	P.fields["name"] = "Image [photos_taken][sufix]"
-	var/obj/item/weapon/photo/photo = new
-	photo.construct(P)
+	
+	//src.loc is the silicon who owns this camera, apparently
+	//TODO: store the owner explicity (in a var) so we don't have to make dumb assumptions like this
+	var/obj/item/weapon/paperwork/photo/photo = new (src.loc, P)
 	aipictures += photo
 
 /obj/item/device/camera/siliconcam/proc/injectmasteralbum(var/datum/picture/P) //stores image information to a list similar to that of the datacore
@@ -46,23 +48,23 @@
 	if(cam.aipictures.len == 0)
 		usr << "<span class='userdanger'>No images saved</span>"
 		return
-	for(var/obj/item/weapon/photo/t in cam.aipictures)
+	for(var/obj/item/weapon/paperwork/photo/t in cam.aipictures)
 		nametemp += t.name
 	find = input("Select image (numbered in order taken)") as null|anything in nametemp
 	if(!find)
 		return
 
-	for(var/obj/item/weapon/photo/q in cam.aipictures)
+	for(var/obj/item/weapon/paperwork/photo/q in cam.aipictures)
 		if(q.name == find)
 			return q
 
 /obj/item/device/camera/siliconcam/proc/viewpictures()
-	var/obj/item/weapon/photo/selection = selectpicture()
+	var/obj/item/weapon/paperwork/photo/selection = selectpicture()
 
 	if(!selection)
 		return
 
-	selection.show(usr)
+	selection.show_content(usr)
 	usr << selection.desc
 
 /obj/item/device/camera/siliconcam/proc/deletepicture()

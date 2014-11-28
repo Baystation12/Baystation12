@@ -16,7 +16,7 @@
 	if(template)
 		return
 
-	if (istype(O, /obj/item/weapon/paperwork/paper) || istype(O, /obj/item/weapon/photo))
+	if (istype(O, /obj/item/weapon/paperwork/paper) || istype(O, /obj/item/weapon/paperwork/photo))
 		// put it inside
 		template = O
 		usr.drop_item()
@@ -128,9 +128,9 @@
 				P.overlays = null
 				for(var/overlay in template.overlays)
 					P.overlays += overlay
-			else if(istype(template, /obj/item/weapon/photo))
+			else if(istype(template, /obj/item/weapon/paperwork/photo))
 				// make duplicate photo
-				var/obj/item/weapon/photo/P = new(src.loc)
+				var/obj/item/weapon/paperwork/photo/P = new(src.loc)
 				P.name = template.name
 				P.desc = template.desc
 				P.icon = template.icon

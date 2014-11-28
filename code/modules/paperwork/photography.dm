@@ -21,57 +21,76 @@
 /********
 * photo *
 ********/
-/obj/item/weapon/photo
+/obj/item/weapon/paperwork/photo
 	name = "photo"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
-	w_class = 2.0
-	var/icon/img	//Big photo image
-	var/scribble	//Scribble on the back.
+	w_class = 1.0
+	var/img_filename	//The filename to be used when uploading the image to clients
+	var/icon/img		//Big photo image
+	var/scribble = ""	//Scribble on the back.
 	var/icon/tiny
 	var/photo_size = 3
 
-/obj/item/weapon/photo/attack_self(mob/user as mob)
-	user.examinate(src)
+/obj/item/weapon/paperwork/photo/New(loc, datum/picture/P=null)
+	..()
+	img_filename = "\ref[src].png" //get a unique filename
+	
+	//maybe we should just carry around a reference to a /datum/picture?
+	if (P)
+		name = P.fields["name"]
+		icon = P.fields["icon"]
+		tiny = P.fields["tiny"]
+		img = P.fields["img"]
+		desc = P.fields["desc"]
+		pixel_x = P.fields["pixel_x"]
+		pixel_y = P.fields["pixel_y"]
+		photo_size = P.fields["size"]
 
-/obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/weapon/paperwork/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text)
 		txt = copytext(txt, 1, 128)
 		if(loc == user && user.stat == 0)
-			scribble = txt
+			scribble += txt
 	..()
 
-/obj/item/weapon/photo/examine(mob/user)
-	if(in_range(user, src))
-		show(user)
-		user << desc
-	else
-		user << "<span class='notice'>It is too far away.</span>"
+//sends the image file to a client, make sure to do this before showing them HTML with the image in it.
+/obj/item/weapon/paperwork/photo/proc/browse_image(var/client)
+	client << browse_rsc(img, img_filename)
 
-/obj/item/weapon/photo/proc/show(mob/user as mob)
-	user << browse_rsc(img, "tmp_photo.png")
+//TODO a better system for writing on photos
+/obj/item/weapon/paperwork/photo/render_content(mob/user=null)
+	return "<img src='[img_filename]' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"
+
+/obj/item/weapon/paperwork/photo/show_content(mob/user)
+	browse_image(user.client)
 	user << browse("<html><head><title>[name]</title></head>" \
 		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo.png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
-		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
-		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
+		+ "[render_content(user)]" \
+		+ "</body></html>", "window=[name];size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
-	return
 
-/obj/item/weapon/photo/verb/rename()
-	set name = "Rename photo"
-	set category = "Object"
-	set src in usr
+/obj/item/weapon/paperwork/photo/show_content_admin(datum/admins/admin)
+	browse_image(admin.owner)
+	admin.owner << browse("<html><head><title>[name]</title></head>" \
+		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
+		+ "[render_content(null)]" \
+		+ "</body></html>", "window=[name];size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
+	onclose(admin.owner, "[name]")
 
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text), 1, MAX_NAME_LEN)
-	//loc.loc check is for making possible renaming photos in clipboards
-	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
-		name = "[(n_name ? text("[n_name]") : "photo")]"
-	add_fingerprint(usr)
-	return
+/obj/item/weapon/paperwork/photo/copy(newloc)
+	var/obj/item/weapon/paperwork/photo/p = new/obj/item/weapon/paperwork/photo(newloc, null)
 
+	p.icon = icon(icon, icon_state)
+	p.img = icon(img)
+	p.tiny = icon(tiny)
+	p.name = name
+	p.desc = desc
+	p.scribble = scribble
+
+	return p
 
 /**************
 * photo album *
@@ -81,7 +100,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
-	can_hold = list("/obj/item/weapon/photo",)
+	can_hold = list("/obj/item/weapon/paperwork/photo",)
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
@@ -298,30 +317,6 @@
 	return P
 
 /obj/item/device/camera/proc/printpicture(mob/user, var/datum/picture/P)
-	var/obj/item/weapon/photo/Photo = new/obj/item/weapon/photo()
-	Photo.loc = user.loc
+	var/obj/item/weapon/paperwork/photo/Photo = new(user.loc, P)
 	if(!user.get_inactive_hand())
 		user.put_in_inactive_hand(Photo)
-	Photo.construct(P)
-
-/obj/item/weapon/photo/proc/construct(var/datum/picture/P)
-	name = P.fields["name"]
-	icon = P.fields["icon"]
-	tiny = P.fields["tiny"]
-	img = P.fields["img"]
-	desc = P.fields["desc"]
-	pixel_x = P.fields["pixel_x"]
-	pixel_y = P.fields["pixel_y"]
-	photo_size = P.fields["size"]
-
-/obj/item/weapon/photo/proc/copy()
-	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
-
-	p.icon = icon(icon, icon_state)
-	p.img = icon(img)
-	p.tiny = icon(tiny)
-	p.name = name
-	p.desc = desc
-	p.scribble = scribble
-
-	return p

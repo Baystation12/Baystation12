@@ -10,12 +10,15 @@
 
 //Generates the HTML content and returns it as a string.
 //A mob may be optionally supplied in case the content varies with the viewer.
-//If user is null then the paperwork should display the contents as plainly as possible (i.e. for admins/ghosts)
 /obj/item/weapon/paperwork/proc/render_content(mob/user=null, editing=0)
 	return ""
 
 //Displays the content to a mob who is trying to view it. This is responsible for doing the UI stuff, e.g. browse (or even the nanoui procs if you want to do that)
 /obj/item/weapon/paperwork/proc/show_content(mob/user, editing=0)
+	return
+
+//TODO#paperwork
+/obj/item/weapon/paperwork/proc/show_content_admin(datum/admins/admin)
 	return
 
 //TODO#paperwork
@@ -92,6 +95,7 @@
 	if(in_range(user, src))
 		show_content(user)
 	else
+		..()
 		user << "<span class='notice'>It is too far away.</span>"
 	return
 
@@ -123,7 +127,7 @@
 	set category = "Object"
 	set src in usr
 	
-	var/n_name = copytext(sanitize(input(usr, "What would you like to label \the [src]?", "Paper Labelling", null)  as text), 1, MAX_NAME_LEN)
+	var/n_name = copytext(sanitize(input(usr, "What would you like to label the [initial(name)]?", "Paperwork Labelling", null)  as text), 1, MAX_NAME_LEN)
 	if((loc == usr && !usr.stat))
 		name = "[(n_name ? "[n_name]" : initial(name))]"
 	add_fingerprint(usr)

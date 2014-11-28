@@ -54,7 +54,7 @@
 			if (istype(copyitem, /obj/item/weapon/paperwork/paper))
 				copy(copyitem)
 				sleep(15)
-			else if (istype(copyitem, /obj/item/weapon/photo))
+			else if (istype(copyitem, /obj/item/weapon/paperwork/photo))
 				photocopy(copyitem)
 				sleep(15)
 			else if (istype(copyitem, /obj/item/weapon/paperwork/bundle))
@@ -95,8 +95,7 @@
 			if (!selection)
 				return
 
-			var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
-			p.construct(selection)
+			var/obj/item/weapon/paperwork/photo/p = new /obj/item/weapon/paperwork/photo (src.loc, selection)
 			if (p.desc == "")
 				p.desc += "Copied by [tempAI.name]"
 			else
@@ -106,7 +105,7 @@
 		updateUsrDialog()
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/paperwork/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paperwork/bundle))
+	if(istype(O, /obj/item/weapon/paperwork/paper) || istype(O, /obj/item/weapon/paperwork/photo) || istype(O, /obj/item/weapon/paperwork/bundle))
 		if(!copyitem)
 			user.drop_item()
 			copyitem = O
@@ -196,8 +195,8 @@
 	return c
 
 
-/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy)
-	var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
+/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/paperwork/photo/photocopy)
+	var/obj/item/weapon/paperwork/photo/p = new /obj/item/weapon/paperwork/photo (src.loc)
 	var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 	var/icon/img = icon(photocopy.img)
 	var/icon/tiny = icon(photocopy.tiny)
@@ -232,7 +231,7 @@
 
 		if(istype(W, /obj/item/weapon/paperwork/paper))
 			W = copy(W)
-		else if(istype(W, /obj/item/weapon/photo))
+		else if(istype(W, /obj/item/weapon/paperwork/photo))
 			W = photocopy(W)
 		W.loc = p
 		p.amount++
