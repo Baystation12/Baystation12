@@ -29,8 +29,11 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
+			var/readylink = "<a href='byond://?src=\ref[src];ready=[ready ? "2" : "1"]'>[ready ? "Not Ready" : "Ready"]</a>"
+			if(ready)
+				output += "<p>\[ <b>Ready</b> | [readylink] \]</p>"
+			else
+				output += "<p>\[ [readylink] | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
