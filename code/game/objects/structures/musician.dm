@@ -206,8 +206,38 @@
 
 	//hearers(15, src) << sound(soundfile)
 	var/turf/source = get_turf(src)
+	var/turf/below = null
+	var/turf/above = null
+	below = getbelow()
+	above = getabove()
+	if(below)
+		for(var/mob/M in hearers(15,below))
+			M.playsound_local(source, file(soundfile), 100, falloff = 5)
+	if(above)
+		for(var/mob/M in hearers(15,above))
+			M.playsound_local(source, file(soundfile), 100, falloff = 5)
 	for(var/mob/M in hearers(15, source))
 		M.playsound_local(source, file(soundfile), 100, falloff = 5)
+
+/obj/structure/device/piano/proc/getbelow()
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		// check if there is something below
+		if(controller.down)
+			var/turf/floorbelow = locate(src.x, src.y, controller.down_target)
+			return floorbelow
+		else
+			return null
+
+/obj/structure/device/piano/proc/getabove()
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		// check if there is something above
+		if(controller.up)
+			var/turf/floorabove = locate(src.x, src.y, controller.up_target)
+			return floorabove
+		else
+			return null
 
 
 /obj/structure/device/piano/proc/playsong()

@@ -23,7 +23,9 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
-	/mob/living/silicon/ai/proc/toggle_camera_light
+	/mob/living/silicon/ai/proc/toggle_camera_light,
+	/mob/living/silicon/ai/proc/moveup,
+	/mob/living/silicon/ai/proc/movedown
 )
 
 //Not sure why this is necessary...
@@ -488,7 +490,7 @@ var/list/ai_verbs_default = list(
 		else
 			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
-		
+
 	return
 
 /mob/living/silicon/ai/meteorhit(obj/O as obj)

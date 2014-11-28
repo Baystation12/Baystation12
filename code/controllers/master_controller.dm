@@ -415,8 +415,9 @@ datum/controller/game_controller/proc/setup_cameras()
 	for(var/area/A in world)
 		var/index = 0
 		for(var/obj/machinery/camera/C in A)
-			index++
-			C.c_tag = "[get_area(C)]_[index]"
+			if(C.overridec_tag == 0)
+				index++
+				C.c_tag = "[get_area(C)]_[index]"
 			C.network_check(A)
 			C.window_auto_turn()
 			C.auto_turn()
