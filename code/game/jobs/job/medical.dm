@@ -131,7 +131,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/chemist(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/chemist(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/science(H.back), slot_eyes)
+		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/science(H.back), slot_glasses)
 		switch(H.backbag)
 			if(1) H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/chemistry(H), slot_back)
