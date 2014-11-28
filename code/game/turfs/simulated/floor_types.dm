@@ -10,7 +10,12 @@
 		name = "floor"
 
 /turf/simulated/floor/airless/ceiling
-	icon_state = "rockvault"
+	name = "ceiling"
+	icon_state = "ceiling"
+
+/turf/simulated/floor/airless/ceiling/glass
+	name = "glass ceiling"
+	icon_state = "glass_ceiling"
 
 /turf/simulated/floor/light
 	name = "Light floor"
