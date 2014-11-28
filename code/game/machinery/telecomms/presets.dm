@@ -20,15 +20,13 @@
 
 /obj/machinery/telecomms/relay/preset/sublevel
 	id = "Sub-level Relay"
-	listening_level = 8
 	autolinkers = list("sub_relay")
 
-/obj/machinery/telecomms/relay/preset/upperlevel
+/obj/machinery/telecomms/relay/preset/sublevel
 	id = "Upper-level Relay"
-	listening_level = 7
 	autolinkers = list("up_relay")
 
-/obj/machinery/telecomms/relay/preset/ruskie
+/obj/machinery/telecomms/relay/preset/upperlevel
 	id = "Ruskie Relay"
 	hide = 1
 	toggled = 0
