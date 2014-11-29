@@ -149,7 +149,7 @@
 				alert_msg = safe_alert
 				lastwarning = world.timeofday
 
-			if(!istype(L, /turf/space) && alert_msg)
+			if(!istype(/obj/machinery/power/supermatter/shard) && !istype(L, /turf/space) && alert_msg)
 				radio.autosay(alert_msg, "Supermatter Monitor")
 
 		if(damage > explosion_point)
