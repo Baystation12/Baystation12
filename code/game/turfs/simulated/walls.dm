@@ -7,6 +7,7 @@
 
 	var/damage = 0
 	var/damage_cap = 100 //Wall will break down to girders if damage reaches this point
+	var/armor = 0.5 // Damage is multiplied by this
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
@@ -21,6 +22,21 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "metal"
+
+/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+
+	// Tasers and stuff? No thanks.
+	if(Proj.damage_type == HALLOSS)
+		return
+
+	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
+	if(istype(Proj, /obj/item/projectile/beam/emitter))
+		Proj.damage /= 4
+
+	take_damage(Proj.damage * armor)
+	return
+
+
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
