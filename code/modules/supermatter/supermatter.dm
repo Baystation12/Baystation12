@@ -1,9 +1,9 @@
 
-#define NITROGEN_RETARDATION_FACTOR 0.15        //Higher == N2 slows reaction more
-#define THERMAL_RELEASE_MODIFIER 750               //Higher == more heat released during reaction
-#define PHORON_RELEASE_MODIFIER 1500                //Higher == less phoron released by reaction
-#define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
-#define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
+#define NITROGEN_RETARDATION_FACTOR 0.15	//Higher == N2 slows reaction more
+#define THERMAL_RELEASE_MODIFIER 750		//Higher == more heat released during reaction
+#define PHORON_RELEASE_MODIFIER 1500		//Higher == less phoron released by reaction
+#define OXYGEN_RELEASE_MODIFIER 1500		//Higher == less oxygen released at high temperature/power
+#define REACTION_POWER_MODIFIER 1.1			//Higher == more overall power
 
 /*
 	How to tweak the SM
@@ -17,10 +17,10 @@
 
 //Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
 #define POWER_FACTOR 1.0
-#define DECAY_FACTOR 700             //Affects how fast the supermatter power decays
-#define CRITICAL_TEMPERATURE 800     //K
+#define DECAY_FACTOR 700			//Affects how fast the supermatter power decays
+#define CRITICAL_TEMPERATURE 800	//K
 #define CHARGING_FACTOR 0.05
-#define DAMAGE_RATE_LIMIT 3                 //damage rate cap at power = 300, scales linearly with power
+#define DAMAGE_RATE_LIMIT 3			//damage rate cap at power = 300, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -58,15 +58,16 @@
 
 	var/grav_pulling = 0
 	var/pull_radius = 14
+	var/explosion_power = 8
 
 	var/emergency_issued = 0
 
-	var/explosion_power = 8
+	// Time in 1/10th of seconds since the last sent warning
+	var/lastwarning = 0
 
-	var/lastwarning = 0                        // Time in 1/10th of seconds since the last sent warning
+
 	var/power = 0
-
-	var/oxygen = 0				  // Moving this up here for easier debugging.
+	var/oxygen = 0
 
 	//Temporary values so that we can optimize this
 	//How much the bullets damage should be multiplied by when it is added to the internal variables
@@ -324,7 +325,6 @@
 
 
 /obj/machinery/power/supermatter/proc/supermatter_pull()
-
 	//following is adapted from singulo code
 	if(defer_powernet_rebuild != 2)
 		defer_powernet_rebuild = 1
