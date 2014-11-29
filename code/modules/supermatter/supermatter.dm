@@ -28,7 +28,7 @@
 #define DETONATION_HALLUCINATION 600
 
 
-#define WARNING_DELAY 30 		//seconds between warnings.
+#define WARNING_DELAY 20			//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
@@ -46,6 +46,7 @@
 	var/damage = 0
 	var/damage_archived = 0
 	var/safe_alert = "Crystaline hyperstructure returning to safe operating levels."
+	var/safe_warned = 0
 	var/warning_point = 100
 	var/warning_alert = "Danger! Crystal hyperstructure instability!"
 	var/emergency_point = 700
@@ -67,6 +68,8 @@
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
+	// This stops spawning redundand explosions. Also incidentally makes supermatter unexplodable if set to 1.
+	var/exploded = 0
 
 	var/power = 0
 	var/oxygen = 0
@@ -93,8 +96,19 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
+	message_admins("Supermatter exploded at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+	log_game("Supermatter exploded at ([x],[y],[z])")
 	anchored = 1
 	grav_pulling = 1
+	exploded = 1
+	for(var/mob/living/mob in living_mob_list)
+		if(loc.z == mob.loc.z)
+			if(istype(mob, /mob/living/carbon/human))
+				//Hilariously enough, running into a closet should make you get hit the hardest.
+				var/mob/living/carbon/human/H = mob
+				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
+			var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+			mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
 		del src
@@ -107,6 +121,28 @@
 	if(luminosity != lum)
 		SetLuminosity(lum)
 
+/obj/machinery/power/supermatter/proc/announce_warning()
+	var/integrity = damage / explosion_point
+	integrity = round(100 - integrity * 100)
+	integrity = integrity < 0 ? 0 : integrity
+	var/alert_msg = " Integrity at [integrity]%"
+
+	if(damage > emergency_point)
+		alert_msg = emergency_alert + alert_msg
+		lastwarning = world.timeofday - WARNING_DELAY * 4
+	else if(damage >= damage_archived) // The damage is still going up
+		safe_warned = 0
+		alert_msg = warning_alert + alert_msg
+		lastwarning = world.timeofday
+	else if(!safe_warned)
+		safe_warned = 1 // We are safe, warn only once
+		alert_msg = safe_alert
+		lastwarning = world.timeofday
+	else
+		alert_msg = null
+	if(alert_msg)
+		radio.autosay(alert_msg, "Supermatter Monitor")
+
 /obj/machinery/power/supermatter/process()
 
 	var/turf/L = loc
@@ -117,39 +153,17 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-
-	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
-
-		shift_light(5, warning_color)
-		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
-			var/stability = num2text(round((damage / explosion_point) * 100))
-			var/alert_msg
-
-			if(damage > emergency_point)
-				shift_light(7, emergency_color)
-				alert_msg = addtext(emergency_alert, " Instability: ",stability,"%")
-				lastwarning = world.timeofday
-			else if(damage >= damage_archived) // The damage is still going up
-				alert_msg = addtext(warning_alert," Instability: ",stability,"%")
-				lastwarning = world.timeofday - 150
-			else // Phew, we're safe
-				alert_msg = safe_alert
-				lastwarning = world.timeofday
-
-			if(!istype(src, /obj/machinery/power/supermatter/shard) && !istype(L, /turf/space) && alert_msg)
-				radio.autosay(alert_msg, "Supermatter Monitor")
-
-		if(damage > explosion_point)
-			for(var/mob/living/mob in living_mob_list)
-				if(loc.z == mob.loc.z)
-					if(istype(mob, /mob/living/carbon/human))
-						//Hilariously enough, running into a closet should make you get hit the hardest.
-						var/mob/living/carbon/human/H = mob
-						H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-					var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
-					mob.apply_effect(rads, IRRADIATE)
-
+	if(damage > explosion_point)
+		if(!exploded)
+			if(!istype(L, /turf/space))
+				announce_warning()
 			explode()
+	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
+		shift_light(5, warning_color)
+		if(damage > emergency_point)
+			shift_light(7, emergency_color)
+		if(!istype(L, /turf/space) && (world.timeofday - lastwarning) >= WARNING_DELAY * 10)
+			announce_warning()
 	else
 		shift_light(4,initial(l_color))
 	if(grav_pulling)
@@ -366,3 +380,6 @@
 	pull_radius = 5
 	pull_time = 45
 	explosion_power = 3
+
+/obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
+	return
