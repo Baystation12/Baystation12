@@ -495,6 +495,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper north east of the mining asteroid"
 	icon_state = "north"
 
+/area/syndicate_station/arrivals_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
+/area/syndicate_station/maint_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
 /area/syndicate_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
