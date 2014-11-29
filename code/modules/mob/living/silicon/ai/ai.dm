@@ -45,6 +45,7 @@ var/list/ai_verbs_default = list(
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE
+	shouldnt_see = list(/obj/effect/rune)
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
