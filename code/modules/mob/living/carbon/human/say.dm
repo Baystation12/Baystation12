@@ -33,7 +33,7 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if(speaking)
-		message = copytext(message,3)
+		message = copytext(message,2+length(speaking.key))
 	else if(species.default_language)
 		speaking = all_languages[species.default_language]
 
@@ -55,7 +55,7 @@
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
 		return
 
-	message = capitalize(trim(message))
+	message = trim(message)
 
 	if(speech_problem_flag)
 		var/list/handle_r = handle_speech_problems(message)

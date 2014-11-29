@@ -15,23 +15,21 @@
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
 
-/datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
+/datum/language/proc/format_message(message, verb)
+	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
 
+/datum/language/proc/format_message_radio(message, verb)
+	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
+
+/datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
+	if(!speaker_mask) speaker_mask = speaker.name
+	var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> [format_message(message, get_spoken_verb(message))]</span></i>"
+
 	for(var/mob/player in player_list)
-
-		var/understood = 0
-
-		if(istype(player,/mob/dead))
-			understood = 1
-		else if((src in player.languages) && check_special_condition(player))
-			understood = 1
-
-		if(understood)
-			if(!speaker_mask) speaker_mask = speaker.name
-			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
-			player << "[msg]"
+		if(istype(player,/mob/dead) || ((src in player.languages) && check_special_condition(player)))
+			player << msg
 
 /datum/language/proc/check_special_condition(var/mob/other)
 	return 1
@@ -43,6 +41,19 @@
 		if("?")
 			return ask_verb
 	return speech_verb
+
+// Noise "language", for audible emotes.
+/datum/language/noise
+	name = "Noise"
+	desc = "Noises"
+	key = ""
+	flags = RESTRICTED|NONGLOBAL|INNATE
+
+/datum/language/noise/format_message(message, verb)
+	return "<span class='message'><span class='[colour]'>[message]</span></span>"
+
+/datum/language/noise/format_message_radio(message, verb)
+	return "<span class='[colour]'>[message]</span>"
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -305,7 +316,8 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/datum/language/L in languages)
-		dat += "<b>[L.name] (:[L.key])</b><br/>[L.desc]<br/><br/>"
+		if(!(L.flags & NONGLOBAL))
+			dat += "<b>[L.name] (:[L.key])</b><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return

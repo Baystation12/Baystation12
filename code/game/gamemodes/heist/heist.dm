@@ -109,6 +109,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	vox.add_language("Vox-pidgin")
 	vox.add_language("Galactic Common")
 	vox.add_language("Tradeband")
+	vox.add_language("Noise")
 	vox.h_style = "Short Vox Quills"
 	vox.f_style = "Shaved"
 
