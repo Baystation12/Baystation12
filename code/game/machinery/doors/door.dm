@@ -25,6 +25,8 @@
 	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	var/health
+	var/emitter_hits = 0 // For use when tracking amount of emitter hits taken.
+	var/emitter_resistance = 10 // Amount of emitter hits doors whistand
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 
@@ -133,8 +135,21 @@
 	if(Proj.damage_type == HALLOSS)
 		return
 
+	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
+	if (istype(Proj, /obj/item/projectile/beam/emitter))
+		if(health > 0)
+			Proj.damage /= 4
+		else
+			emitter_hits ++
+			if(emitter_hits >= emitter_resistance)
+				visible_message("\red <B>[src.name] breaks apart!</B>", 1)
+				new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
+				del(src)
+
 	if(Proj.damage)
 		take_damage(Proj.damage)
+
+
 
 /obj/machinery/door/hitby(AM as mob|obj)
 

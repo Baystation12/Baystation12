@@ -6,6 +6,7 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
+	emitter_resistance = 50 // Lots of emitter blasts, it's blast door after all.
 
 /obj/machinery/door/poddoor/New()
 	. = ..()

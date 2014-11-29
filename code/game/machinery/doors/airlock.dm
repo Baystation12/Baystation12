@@ -1069,6 +1069,10 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/New()
 	..()
 
+	//High-sec airlocks are much harder to completely break by emitters.
+	if(security_bolts)
+		emitter_resistance *= 3
+
 	//wires
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
