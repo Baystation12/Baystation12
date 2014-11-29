@@ -58,6 +58,8 @@
 
 	var/grav_pulling = 0
 	var/pull_radius = 14
+	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
+	var/pull_time = 100
 	var/explosion_power = 8
 
 	var/emergency_issued = 0
@@ -81,22 +83,6 @@
 
 	var/debug = 0
 
-	shard //Small subtype, less efficient and more sensitive, but less boom.
-		name = "Supermatter Shard"
-		desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
-		icon_state = "darkmatter_shard"
-		base_icon_state = "darkmatter_shard"
-
-		warning_point = 50
-		emergency_point = 500
-		explosion_point = 900
-
-		gasefficency = 0.125
-
-		pull_radius = 5
-		explosion_power = 3 //3,6,9,12? Or is that too small?
-
-
 /obj/machinery/power/supermatter/New()
 	. = ..()
 	radio = new (src)
@@ -109,7 +95,7 @@
 /obj/machinery/power/supermatter/proc/explode()
 	anchored = 1
 	grav_pulling = 1
-	spawn(100)
+	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
 		del src
 		return
@@ -364,3 +350,19 @@
 
 /obj/machinery/power/supermatter/RepelAirflowDest(n)
 	return
+
+/obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
+	name = "Supermatter Shard"
+	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
+	icon_state = "darkmatter_shard"
+	base_icon_state = "darkmatter_shard"
+
+	warning_point = 50
+	emergency_point = 400
+	explosion_point = 600
+
+	gasefficency = 0.125
+
+	pull_radius = 5
+	pull_time = 45
+	explosion_power = 3
