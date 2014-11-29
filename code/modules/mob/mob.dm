@@ -437,6 +437,8 @@ var/list/slot_equipment_priority = list( \
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
+	announce_ghost_joinleave(client, 0)
+
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -820,6 +822,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 			statpanel(listed_turf.name, null, listed_turf)
 			for(var/atom/A in listed_turf)
 				if(A.invisibility > see_invisible)
+					continue
+				if(is_type_in_list(A, shouldnt_see))
 					continue
 				statpanel(listed_turf.name, null, A)
 

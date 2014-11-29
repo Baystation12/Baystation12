@@ -11,13 +11,14 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"malf AI" = IS_MODE_COMPILED("malfunction"),         // 4
 	"revolutionary" = IS_MODE_COMPILED("revolution"),    // 5
 	"alien candidate" = 1, //always show                 // 6
-	"pAI candidate" = 1, // -- TLE                       // 7
+	"positronic brain" = 1,                              // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",                                    // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"pAI candidate" = 1, // -- TLE                       // 14
 )
 
 //used for alternate_option
@@ -430,11 +431,8 @@ datum/preferences
 		var/n = 0
 		for (var/i in special_roles)
 			if(special_roles[i]) //if mode is available on the server
-				if(jobban_isbanned(user, i))
-					dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
-				else if(i == "pai candidate")
-					if(jobban_isbanned(user, "pAI"))
-						dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
+				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
+					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
 				else
 					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 			n++

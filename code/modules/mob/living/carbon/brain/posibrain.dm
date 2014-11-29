@@ -28,21 +28,23 @@
 	for(var/mob/dead/observer/O in player_list)
 		if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
 			continue
-		if(jobban_isbanned(O, "pAI"))
+		if(jobban_isbanned(O, "AI") && jobban_isbanned(O, "Cyborg"))
 			continue
 		if(O.client)
-			if(O.client.prefs.be_special & BE_PAI)
+			if(O.client.prefs.be_special & BE_AI)
 				question(O.client)
 
 /obj/item/device/mmi/posibrain/proc/question(var/client/C)
 	spawn(0)
 		if(!C)	return
 		var/response = alert(C, "Someone is requesting a personality for a positronic brain. Would you like to play as one?", "Positronic brain request", "Yes", "No", "Never for this round")
+		if(response == "Yes")
+			response = alert(C, "Are you sure you want to play as a positronic brain?", "Positronic brain request", "Yes", "No")
 		if(!C || brainmob.key || 0 == searching)	return		//handle logouts that happen whilst the alert is waiting for a response, and responses issued after a brain has been located.
 		if(response == "Yes")
 			transfer_personality(C.mob)
 		else if (response == "Never for this round")
-			C.prefs.be_special ^= BE_PAI
+			C.prefs.be_special ^= BE_AI
 
 
 /obj/item/device/mmi/posibrain/transfer_identity(var/mob/living/carbon/H)
@@ -65,7 +67,7 @@
 	return
 
 /obj/item/device/mmi/posibrain/proc/transfer_personality(var/mob/candidate)
-
+	announce_ghost_joinleave(candidate, 0, "They are occupying a positronic brain now.")
 	src.searching = 0
 	src.brainmob.mind = candidate.mind
 	src.brainmob.ckey = candidate.ckey
