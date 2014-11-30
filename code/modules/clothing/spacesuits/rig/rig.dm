@@ -204,13 +204,14 @@
 		if(!M)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(M.shoes,boots,"boots"),list(M.gloves,gloves,"gloves"),list(M.head,helmet,"helmet"),list(M.wear_suit,chest,"chest")))
+			for(var/list/piece_data in list(list(M.shoes,boots,"boots",boot_type),list(M.gloves,gloves,"gloves",glove_type),list(M.head,helmet,"helmet",helm_type),list(M.wear_suit,chest,"chest",chest_type)))
 
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
 				var/msg_type = piece_data[3]
+				var/piece_type = piece_data[4]
 
-				if(!piece)
+				if(!piece || !piece_type)
 					continue
 
 				if(!istype(M) || !istype(piece) || !istype(compare_piece) || !msg_type)

@@ -254,30 +254,30 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
-
 		if(!isturf(user.loc))
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
 			return
-
 		on = !on
-
-		overlays.Cut()
+		update_icon()
 		if(on)
-			if(!light_overlay_cache["[light_overlay]_icon"])
-				light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-			if(!light_overlay_cache["[light_overlay]"])
-				light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
-			overlays |= light_overlay_cache["[light_overlay]_icon"]
 			user.SetLuminosity(user.luminosity + brightness_on)
 		else
 			user.SetLuminosity(user.luminosity - brightness_on)
-
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			H.update_inv_head()
-
 	else
 		return ..(user)
+
+/obj/item/clothing/head/update_icon(var/mob/user)
+
+	overlays.Cut()
+	if(on)
+		if(!light_overlay_cache["[light_overlay]_icon"])
+			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		if(!light_overlay_cache["[light_overlay]"])
+			light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		overlays |= light_overlay_cache["[light_overlay]_icon"]
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_head()
 
 /obj/item/clothing/head/proc/update_light(mob/user)
 

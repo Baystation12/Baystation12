@@ -661,7 +661,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		usr << "You are unable to focus through the [devicename]"
 		cannotzoom = 1
 	else if(!zoom && global_hud.darkMask[1] in usr.client.screen)
-		usr << "Your welding equipment gets in the way of you looking through the [devicename]"
+		usr << "Your visor gets in the way of looking through the [devicename]"
 		cannotzoom = 1
 	else if(!zoom && usr.get_active_hand() != src)
 		usr << "You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better"
