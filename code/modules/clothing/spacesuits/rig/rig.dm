@@ -155,13 +155,13 @@
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
-	if(helm_type && (!helmet || wearer.head != helmet))
+	if(helm_type && !(helmet && wearer.head == helmet))
 		return 0
-	if(glove_type && (!gloves || wearer.gloves != gloves))
+	if(glove_type && !(gloves && wearer.gloves == gloves))
 		return 0
-	if(boot_type && (!boots || wearer.shoes != boots))
+	if(boot_type && !(boots && wearer.shoes == boots))
 		return 0
-	if(chest_type && (!chest || wearer.wear_suit != chest))
+	if(chest_type && !(chest && wearer.wear_suit == chest))
 		return 0
 	return 1
 
