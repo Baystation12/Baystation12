@@ -1168,7 +1168,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 				//TODO: ORGAN REMOVAL UPDATE.
 				if(istype(src,/obj/item/weapon/organ/head/posi))
-					var/obj/item/device/mmi/posibrain/B = new(loc)
+					var/obj/item/device/mmi/digital/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else
 					var/obj/item/organ/brain/B = new(loc)
