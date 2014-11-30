@@ -2973,6 +2973,22 @@
 
 			show_player_panel(M)
 
+	else if(href_list["iaa"])
+		if(check_rights(R_ADMIN))
+
+			var/mob/M = locate(href_list["iaa"])
+
+			if(M.iaa == 1)
+				M.iaa = 0
+				message_admins("\blue [key_name_admin(usr)] has disabled internal affairs on [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has disabled internal affairs on [M.ckey]")
+			else
+				M.iaa = 1
+				message_admins("\blue [key_name_admin(usr)] has enabled internal affairs on [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has enabled internal affairs on [M.ckey]")
+
+			show_player_panel(M)
+
 	// player info stuff
 
 	if(href_list["add_player_info"])

@@ -1483,6 +1483,7 @@
 #include "code\WorkInProgress\computer3\computers\crew.dm"
 #include "code\WorkInProgress\computer3\computers\customs.dm"
 #include "code\WorkInProgress\computer3\computers\HolodeckControl.dm"
+#include "code\WorkInProgress\computer3\computers\iaa.dm"
 #include "code\WorkInProgress\computer3\computers\law.dm"
 #include "code\WorkInProgress\computer3\computers\medical.dm"
 #include "code\WorkInProgress\computer3\computers\Operating.dm"

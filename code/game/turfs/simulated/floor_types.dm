@@ -81,7 +81,7 @@
 /turf/simulated/floor/engine/cult
 	name = "engraved floor"
 	icon_state = "cult"
-
+	intact = 1
 
 /turf/simulated/floor/engine/n20
 	New()
