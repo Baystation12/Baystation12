@@ -143,13 +143,14 @@ public class Main {
                 }
                 break;
             case "extract":
-                if(argq.size() < 4) {
+                if(argq.size() < 3) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
                     return;
                 }
                 String file = argq.pollFirst(),
-                       state = argq.pollFirst();
+                       state = argq.pollFirst(),
+                       outFile = argq.pollFirst();
                 
                 dmi = doDMILoad(file);
                 if(VERBOSITY >= 0) dmi.printInfo();
@@ -159,47 +160,64 @@ public class Main {
                     System.out.println("icon_state '"+state+"' does not exist!");
                     return;
                 }
-                int dir=0;
-                int frame=0;
+                // minDir, Maxdir, minFrame, Maxframe
+                int mDir=0, Mdir=is.dirs-1;
+                int mFrame=0, Mframe=is.frames-1;
                 
-                if(argq.size() < 1 + (is.dirs>1?1:0) + (is.frames>1?1:0)) {
-                    int what = (is.dirs > 1 ? 1:0) | (is.frames > 1 ? 2:0);
-                    switch(what) {
-                        case 1: System.out.println("Direction specifier required!"); break;
-                        case 2: System.out.println("Frame specifier required!"); break;
-                        case 3: System.out.println("Direction and frame specifiers required!"); break;
-                        
-                        default: System.out.println("Direction and/or frame specifier required!"); break;
-                    }
-                    return;
-                }
-                
-                if(is.dirs > 1) {
-                    String dString = argq.pollFirst();
-                    t: try {
-                        dir = Integer.parseInt(dString);
-                    } catch(NumberFormatException nfe) {
-                        for(int q=0; q<dirs.length && q < is.dirs; q++) {
-                            if(dirs[q].equalsIgnoreCase(dString)) {
-                                dir = q;
-                                break t;
+                while(argq.size() > 1) {
+                    String arg = argq.pollFirst();
+                    
+                    switch(arg) {
+                        case "d":
+                        case "dir":
+                        case "dirs":
+                        case "direction":
+                        case "directions":
+                            String dString = argq.pollFirst();
+                            if(dString.contains("-")) {
+                                String[] splitD = dString.split("-");
+                                if(splitD.length == 2) {
+                                    mDir = parseDir(splitD[0], is);
+                                    Mdir = parseDir(splitD[1], is);
+                                } else {
+                                    System.out.println("Illegal dir string: '" + dString + "'!");
+                                    return;
+                                }
+                            } else {
+                                mDir = parseDir(dString, is);
+                                Mdir = mDir;
                             }
-                        }
-                        System.out.println("Unknown or non-existent direction '" + dString + "'!");
-                        return;
+                            // Invalid value check, warnings are printed in parseDir()
+                            if(mDir == -1 || Mdir == -1) return;
+                            break;
+                        case "f":
+                        case "frame":
+                        case "frames":
+                            String fString = argq.pollFirst();
+                            if(fString.contains("-")) {
+                                String[] splitF = fString.split("-");
+                                if(splitF.length == 2) {
+                                    mFrame = parseFrame(splitF[0], is);
+                                    Mframe = parseFrame(splitF[1], is);
+                                } else {
+                                    System.out.println("Illegal frame string: '" + fString + "'!");
+                                    return;
+                                }
+                            } else {
+                                mFrame = parseFrame(fString, is);
+                                Mframe = mFrame;
+                            }
+                            // Invalid value check, warnings are printed in parseFrame()
+                            if(mFrame == -1 || Mframe == -1) return;
+                            break;
+                        default:
+                            System.out.println("Unknown argument '" + arg + "' detected, ignoring.");
                     }
                 }
-                if(is.frames > 1) {
-                    String fString = argq.pollFirst();
-                    try {
-                        frame = Integer.parseInt(fString);
-                    } catch(NumberFormatException nfe) {
-                        System.out.println("Failed to parse frame number: '" + fString + "'!");
-                        return;
-                    }
+                if(!argq.isEmpty()) {
+                    System.out.println("Extra argument '" + argq.pollFirst() + "' detected, ignoring.");
                 }
-                Image img = is.images[is.dirs*frame + dir];
-                img.dumpToBMP(new FileOutputStream(argq.pollFirst()));
+                is.dumpToPNG(new FileOutputStream(outFile), mDir, Mdir, mFrame, Mframe);
                 break;
             case "verify":
                 if(argq.size() < 1) {
@@ -217,6 +235,47 @@ public class Main {
             case "help":
                 System.out.println(helpStr);
                 break;
+        }
+    }
+    
+    static int parseDir(String s, IconState is) {
+        try {
+            int i = Integer.parseInt(s);
+            if(0 <= i && i < is.dirs) {
+                return i;
+            } else {
+                System.out.println("Direction not in valid range [0, "+(is.dirs-1)+"]!");
+                return -1;
+            }
+        } catch(NumberFormatException nfe) {
+            for(int q=0; q<dirs.length && q < is.dirs; q++) {
+                if(dirs[q].equalsIgnoreCase(s)) {
+                    return q;
+                }
+            }
+            String dSummary = "";
+            for(int i=0; i<is.dirs; i++) {
+                dSummary += ", " + dirs[i];
+            }
+            dSummary = dSummary.substring(2);
+            System.out.println("Unknown or non-existent direction '" + s + "'!");
+            System.out.println("Valid range: [0, "+(is.dirs-1)+"], or " + dSummary);
+            return -1;
+        }
+    }
+    
+    static int parseFrame(String s, IconState is) {
+        try {
+            int i = Integer.parseInt(s);
+            if(0 <= i && i < is.frames) {
+                return i;
+            } else {
+                System.out.println("Frame not in valid range [0, "+(is.frames-1)+"]!");
+                return -1;
+            }
+        } catch(NumberFormatException nfe) {
+            System.out.println("Failed to parse frame number: '" + s + "'!");
+            return -1;
         }
     }
     
