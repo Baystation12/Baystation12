@@ -49,7 +49,7 @@
 	name = "AMI control module"
 	suit_type = "hazmat"
 	desc = "An Anomalous Material Interaction hardsuit that protects against the strangest energies the universe can throw at it."
-	icon_state = "science_rig"
+	icon_state = "medical_rig" //placeholder
 	armor = list(melee = 15, bullet = 15, laser = 80, energy = 80, bomb = 60, bio = 100, rad = 100)
 	slowdown = 1
 	offline_slowdown = 3
