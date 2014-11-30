@@ -1519,5 +1519,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\WIP\Mutizphoenix2.dmm"
+#include "maps\Mutizphoenix2.dmm"
 // END_INCLUDE

@@ -1413,6 +1413,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Brig"
 	icon_state = "brig"
 
+/area/security/perma
+	name = "\improper PermaBrig"
+	icon_state = "brig"
+
 /area/security/prison
 	name = "\improper Prison Wing"
 	icon_state = "sec_prison"
@@ -1437,6 +1441,9 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Tactical Equipment"
 	icon_state = "Tactical"
 
+/area/security/execution
+	name = "\improper Execution Room"
+	icon_state = "Tactical"
 
 /*
 	New()
