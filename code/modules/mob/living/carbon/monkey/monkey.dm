@@ -39,6 +39,11 @@
 	greaterform = "Unathi"
 	uni_append = list(0x044,0xC5D) // 044C5D
 
+/mob/living/carbon/monkey/initialize()
+	if (!species)
+		species = all_species[greaterform]
+		add_language(species.language)
+
 /mob/living/carbon/monkey/aviskree
 	name = "Atoc"
 	voice_name = "atoc"
