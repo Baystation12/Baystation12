@@ -224,3 +224,5 @@
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
 
 	var/list/active_genes=list()
+	var/iaa = 0
+	var/iaarevoked = 0

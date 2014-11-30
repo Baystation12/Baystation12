@@ -121,7 +121,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			if(!(R_ADMIN & X.holder.rights))
 				if(X.is_afk())
 					admin_number_afk++
-		if(R_ADMIN & X.holder.rights) // just admins here please
+		if(R_ADMIN | R_MOD & X.holder.rights) // just admins here please
 			adminholders += X
 			if(X.is_afk())
 				admin_number_afk++
@@ -152,7 +152,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		if("Bug Report")
 			if(debugholders.len)
 				for(var/client/X in debugholders)
-					if(R_ADMIN & X.holder.rights) // Admins get every button & special highlights in theirs
+					if(R_ADMIN | R_MOD & X.holder.rights) // Admins get every button & special highlights in theirs
 						if(X.prefs.toggles & SOUND_ADMINHELP)
 							X << 'sound/effects/adminhelp.ogg'
 						X << msg
