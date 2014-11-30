@@ -32,14 +32,14 @@
 	var/list/initial_modules
 	var/chest_type = /obj/item/clothing/suit/space/rig
 	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
-	var/boot_type =  /obj/item/clothing/shoes/rig
+	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
 	var/glove_type = /obj/item/clothing/gloves/rig
 	var/cell_type =  /obj/item/weapon/cell/high
 	var/air_type =   /obj/item/weapon/tank/oxygen
 
 	//Component/device holders.
 	var/obj/item/weapon/tank/air_supply                       // Air tank, if any.
-	var/obj/item/clothing/shoes/rig/boots = null              // Deployable boots, if any.
+	var/obj/item/clothing/shoes/boots = null                  // Deployable boots, if any.
 	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
 	var/obj/item/clothing/gloves/rig/gloves = null            // Deployable gauntlets, if any.

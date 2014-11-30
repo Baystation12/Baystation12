@@ -21,7 +21,7 @@
 	species_restricted = null
 	gender = PLURAL
 
-/obj/item/clothing/shoes/rig
+/obj/item/clothing/shoes/magboots/rig
 	name = "boots"
 	cold_protection = FEET
 	heat_protection = FEET
