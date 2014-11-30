@@ -33,9 +33,12 @@ public class Main {
             "\tmerge [file1] and [file2]'s changes from a common ancestor [base], saving the result in [out]\n" +
             "\tconflicts will be placed in [out].conflict.dmi\n" +
             
-            "extract [file] [state] {direction} {frame} [out]\n"+
-            "\textract [state] from [file] in bitmap format to [out]; {direction} and {frame} are separately mandatory if [state] has more than one of them\n" +
-            "\t{direction} can be 0-7 or S, N, E, W, SE, SW, NE, NW (non-case-sensitive)\n" +
+            "extract [file] [state] [out] {args}\n"+
+            "\textract [state] from [file] in PNG format to [out]\n" +
+            "\targs specify direction and frame; input 'f' followed by a frame specifier, and/or 'd' followed by a direction specifier\n" +
+            "\tframe specifier can be a single number or number-number for a range\n" +
+            "\tdirection specifier can be a single direction, or direction-direction\n" +
+            "\tdirection can be 0-7 or S, N, E, W, SE, SW, NE, NW (non-case-sensitive)\n" +
             
             "";
     
@@ -189,6 +192,11 @@ public class Main {
                             }
                             // Invalid value check, warnings are printed in parseDir()
                             if(mDir == -1 || Mdir == -1) return;
+                            if(Mdir < mDir) {
+                                System.out.println("Maximum dir greater than minimum dir!");
+                                System.out.println("Textual direction order is S, N, E, W, SE, SW, NE, NW increasing 0 (S) to 7 (NW)");
+                                return;
+                            }
                             break;
                         case "f":
                         case "frame":
@@ -209,6 +217,10 @@ public class Main {
                             }
                             // Invalid value check, warnings are printed in parseFrame()
                             if(mFrame == -1 || Mframe == -1) return;
+                            if(Mframe < mFrame) {
+                                System.out.println("Maximum frame greater than minimum frame!");
+                                return;
+                            }
                             break;
                         default:
                             System.out.println("Unknown argument '" + arg + "' detected, ignoring.");
