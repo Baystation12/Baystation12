@@ -282,6 +282,7 @@
 	New()
 		var/datum/job/captain/J = new/datum/job/captain
 		access = J.get_access()
+		access = get_all_centcom_access()
 		..()
 
 /obj/item/weapon/card/id/centcom

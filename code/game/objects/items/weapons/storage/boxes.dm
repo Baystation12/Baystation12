@@ -35,6 +35,18 @@
 		new /obj/item/weapon/tank/emergency_oxygen( src )
 		return
 
+/obj/item/weapon/storage/box/survival/emergency
+	New()
+		..()
+		contents = list()
+		sleep(1)
+		new /obj/item/clothing/mask/breath(src)
+		new /obj/item/weapon/tank/emergency_oxygen/double(src)
+		new /obj/item/device/radio(src)
+		new /obj/item/weapon/crowbar/red(src)
+		new /obj/item/device/flashlight(src)
+		return
+
 /obj/item/weapon/storage/box/engineer/
 	New()
 		..()

@@ -7,6 +7,7 @@
 	icon_opened = "capsecureopen"
 	icon_broken = "capsecurebroken"
 	icon_off = "capsecureoff"
+	storage_capacity = 100
 
 	New()
 		..()
@@ -29,6 +30,7 @@
 		new /obj/item/clothing/under/dress/dress_cap(src)
 		new /obj/item/clothing/head/helmet/formalcaptain(src)
 		new /obj/item/clothing/under/captainformal(src)
+		new /obj/item/clothing/head/caphat(src)
 		return
 
 

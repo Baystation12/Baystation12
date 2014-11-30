@@ -433,6 +433,36 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Metal sheets crate"
 	group = "Engineering"
 
+/datum/supply_packs/carepackage
+	name = "Centcom supply crate"
+	contains = list(/obj/item/stack/sheet/metal,
+					/obj/item/stack/sheet/plasteel,
+					/obj/item/stack/sheet/glass,
+					/obj/item/stack/sheet/glass/reinforced,
+					/obj/item/stack/sheet/mineral/plastic,
+					/obj/item/stack/cable_coil,
+					/obj/item/stack/nanopaste,
+					/obj/item/stack/sheet/leather,
+					/obj/item/stack/sheet/cardboard,
+					/obj/item/stack/rods,
+					/obj/item/stack/sheet/wood,
+					/obj/item/stack/sheet/mineral/diamond,
+					/obj/item/stack/sheet/mineral/gold,
+					/obj/item/stack/sheet/mineral/iron,
+					/obj/item/stack/sheet/mineral/mhydrogen,
+					/obj/item/stack/sheet/mineral/osmium,
+					/obj/item/stack/sheet/mineral/phoron,
+					/obj/item/stack/sheet/mineral/platinum,
+					/obj/item/stack/sheet/mineral/sandstone,
+					/obj/item/stack/sheet/mineral/silver,
+					/obj/item/stack/sheet/mineral/tritium,
+					/obj/item/stack/sheet/mineral/uranium)
+	amount = 50
+	cost = 40
+	containertype = /obj/structure/closet/crate
+	containername = "Centcom supply crate"
+	group = "Engineering"
+
 /datum/supply_packs/glass50
 	name = "50 glass sheets"
 	contains = list(/obj/item/stack/sheet/glass)
