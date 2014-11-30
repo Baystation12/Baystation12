@@ -54,3 +54,27 @@
 	if(istype(I, /obj/item/weapon/mop) || istype(I, /obj/item/weapon/soap))
 		return
 	..()
+
+/obj/item/weapon/mop/borg
+	name = "Cyborg Mop"
+	var/charge_cost = 50
+	var/charge_tick = 0
+	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
+	var/list/datum/reagents/reagent_list = list()
+	var/list/reagent_ids = list("water")
+	var/mode = 1
+
+/obj/item/weapon/mop/borg/process() //Every [recharge_time] seconds, recharge some reagents for the cyborg
+	charge_tick++
+	if(charge_tick < recharge_time) return 0
+	charge_tick = 0
+
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		if(R && R.cell)
+			var/datum/reagents/RG = reagent_list
+			if(RG.total_volume < RG.maximum_volume) 	//Don't recharge reagents and drain power if the storage is full.
+				R.cell.use(charge_cost) 					//Take power from borg...
+				RG.add_reagent("water", 5)		//And fill hypo with reagent.
+	//update_icon()
+	return 1
