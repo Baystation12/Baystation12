@@ -36,6 +36,8 @@
 		return
 
 /obj/item/weapon/storage/box/survival/emergency
+	name = "emergency box"
+	desc = "An improved version of the standard box."
 	New()
 		..()
 		contents = list()
