@@ -656,6 +656,14 @@ var/list/ghostteleportlocs = list()
 	name = "Aft Maintenance"
 	icon_state = "amaint"
 
+/area/maintenance/sub
+	name = "Sub-Level Maintenance"
+	icon_state = "amaint"
+
+/area/maintenance/up
+	name = "Upper-Level Maintenance"
+	icon_state = "fmaint"
+
 /area/maintenance/fore
 	name = "Fore Maintenance"
 	icon_state = "fmaint"
@@ -837,6 +845,22 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Central Primary Hallway South"
 	icon_state = "hallC4"
 
+/area/hallway/primary/command_one
+	name = "\improper Command Hallway North"
+	icon_state = "hallC1"
+
+/area/hallway/primary/command_two
+	name = "\improper Command Hallway West"
+	icon_state = "hallC2"
+
+/area/hallway/primary/command_three
+	name = "\improper Command Hallway East"
+	icon_state = "hallC3"
+
+/area/hallway/primary/command_four
+	name = "\improper Command Hallway South"
+	icon_state = "hallC4"
+
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
 	icon_state = "escape"
@@ -979,6 +1003,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Bar"
 	icon_state = "bar"
 
+/area/crew_quarters/bar_upper
+	name = "\improper Bar 2nd Level"
+	icon_state = "bar"
+
+/area/crew_quarters/bar_lower
+	name = "\improper Bar basement"
+	icon_state = "bar"
+
 /area/crew_quarters/theatre
 	name = "\improper Theatre"
 	icon_state = "Theatre"
@@ -1063,7 +1095,9 @@ var/list/ghostteleportlocs = list()
 
 
 
-
+/area/centralpark
+		name = "\improper Central Park"
+		icon_state = "blue2"
 
 
 
@@ -1084,7 +1118,7 @@ var/list/ghostteleportlocs = list()
 //		requires_power = 0//This area only covers the batteries and they deal with their own power
 
 	engine_room
-		name = "\improper Singualrity Engine"
+		name = "\improper Singularity Engine"
 		icon_state = "engine"
 
 	engine_airlock
@@ -1092,7 +1126,7 @@ var/list/ghostteleportlocs = list()
 		icon_state = "engine"
 
 	engine_monitoring
-		name = "\improper Singualrity Engine Monitoring Room"
+		name = "\improper Singularity Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engine_waste
@@ -2224,4 +2258,3 @@ var/list/the_station_areas = list (
 						H << S
 
 		spawn(60) .()
-

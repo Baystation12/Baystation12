@@ -7,7 +7,7 @@
 	else		return dy + (0.5*dx)
 
 ///// Z-Level Stuff
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = 1)
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = 0)
 ///// Z-Level Stuff
 	src = null	//so we don't abort once src is deleted
 	spawn(0)

@@ -49,12 +49,22 @@
 						if (!soft && istype(AM, /mob/living/carbon/human))
 							var/mob/living/carbon/human/H = AM
 							var/damage = 5
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "head")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "chest")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_leg")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_arm")
-							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_arm")
+							if(H.species.falldmg == 1)
+								damage = 3
+								H.apply_damage((6), BRUTE, "l_leg")
+								H.apply_damage((6), BRUTE, "r_leg")
+							if(H.species.name == "Machine")
+								for(var/datum/organ/external/O in H.organs)
+									if(istype(O ,/datum/organ/external/r_leg)||istype(O,/datum/organ/external/l_leg))
+										O.droplimb()
+							else
+								H.apply_damage((10), BRUTE, "l_leg")
+								H.apply_damage((10), BRUTE, "r_leg")
+
+							H.apply_damage((damage), BRUTE, "head")
+							H.apply_damage((damage), BRUTE, "chest")
+							H.apply_damage((damage), BRUTE, "l_arm")
+							H.apply_damage((damage), BRUTE, "r_arm")
 							H:weakened = max(H:weakened,2)
 							H:updatehealth()
 		return ..()

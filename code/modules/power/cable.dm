@@ -73,7 +73,9 @@
 
 	var/turf/T = src.loc			// hide if turf is not intact
 
-	if(level==1) hide(T.intact)
+	if(level==1)
+		if(T)
+			hide(T.intact)
 	cable_list += src
 	update_icon()
 

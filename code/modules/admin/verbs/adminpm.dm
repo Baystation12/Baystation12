@@ -164,7 +164,7 @@
 
 	var/recieve_message = ""
 	recieve_message = "<font color='[recieve_color]'>All Antags PM from-<b>[src.key]</b>: [msg]</font>"
-	src << "<font color='blue'> PM to All Antags</b>: [msg]</font>"
+	src << "<font color='blue'> PM: [key_name(src)] to All Antags</b>: [msg]</font>"
 	log_admin("PM: [key_name(src)]-> All Antags: [msg]")
 	for(var/mob/AA in allantags)
 		AA << recieve_message
@@ -174,7 +174,7 @@
 			if(X == AA.client || X == src)
 				continue
 			if(X.key!=key && X.key!=AA.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD) )
-				X << "<B><font color='blue'>PM: All Antags PM:</B> \blue [msg]</font>" //inform X
+				X << "<B><font color='blue'>PM: [key_name(src)]</B> \blue [msg]</font>" //inform X
 
 
 

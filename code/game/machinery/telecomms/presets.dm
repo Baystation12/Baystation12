@@ -18,6 +18,16 @@
 	id = "Mining Relay"
 	autolinkers = list("m_relay")
 
+/obj/machinery/telecomms/relay/preset/sublevel
+	id = "Sub-level Relay"
+	listening_level = 8
+	autolinkers = list("sub_relay")
+
+/obj/machinery/telecomms/relay/preset/upperlevel
+	id = "Upper-level Relay"
+	listening_level = 7
+	autolinkers = list("up_relay")
+
 /obj/machinery/telecomms/relay/preset/ruskie
 	id = "Ruskie Relay"
 	hide = 1
@@ -39,7 +49,7 @@
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"
 	network = "tcommsat"
-	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "science", "medical",
+	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "sub_relay", "up_relay", "science", "medical",
 	"supply", "common", "command", "engineering", "security",
 	"receiverA", "receiverB", "broadcasterA", "broadcasterB")
 

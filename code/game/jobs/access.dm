@@ -109,6 +109,9 @@ var/const/access_blueshield = 153
 	else if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
+		if(H.iaarevoked == 1)
+			H << "You are not currently employed by the NSS Phoenix, contact your Internal Affairs agent for help with this issue."
+			return 0
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
 	else if(istype(M, /mob/living/carbon/monkey))

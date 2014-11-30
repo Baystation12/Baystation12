@@ -47,6 +47,10 @@
 				del(src)
 				return
 
+/obj/structure/window/bumped/Bumped(AM as mob|obj)
+	..()
+	if (istype(AM, /obj/machinery/singularity/narsie))
+		del(src)
 
 /obj/structure/window/blob_act()
 	new /obj/item/weapon/shard(loc)
@@ -299,7 +303,7 @@
 	//player-constructed windows
 	if (constructed)
 		anchored = 0
-	
+
 	if (start_dir)
 		dir = start_dir
 

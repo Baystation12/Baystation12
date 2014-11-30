@@ -610,6 +610,7 @@
 #include "code\game\objects\structures\barsign.dm"
 #include "code\game\objects\structures\bedsheet_bin.dm"
 #include "code\game\objects\structures\coathanger.dm"
+#include "code\game\objects\structures\coffindispenser.dm"
 #include "code\game\objects\structures\curtains.dm"
 #include "code\game\objects\structures\displaycase.dm"
 #include "code\game\objects\structures\door_assembly.dm"
@@ -1482,6 +1483,7 @@
 #include "code\WorkInProgress\computer3\computers\crew.dm"
 #include "code\WorkInProgress\computer3\computers\customs.dm"
 #include "code\WorkInProgress\computer3\computers\HolodeckControl.dm"
+#include "code\WorkInProgress\computer3\computers\iaa.dm"
 #include "code\WorkInProgress\computer3\computers\law.dm"
 #include "code\WorkInProgress\computer3\computers\medical.dm"
 #include "code\WorkInProgress\computer3\computers\Operating.dm"
@@ -1517,5 +1519,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\Phoenix.dmm"
+#include "maps\WIP\Mutizphoenix2.dmm"
 // END_INCLUDE
