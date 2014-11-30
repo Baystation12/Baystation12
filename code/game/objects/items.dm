@@ -262,7 +262,8 @@
 				if(H.wear_mask)
 					return 0
 				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSMOUTH))
-					H << "\red \The [H.head] is in the way."
+					if(!disable_warning)
+						H << "\red \The [H.head] is in the way."
 					return 0
 				if( !(slot_flags & SLOT_MASK) )
 					return 0
@@ -305,7 +306,8 @@
 				if(H.glasses)
 					return 0
 				if(H.head && !(H.head.canremove) && (H.head.flags & HEADCOVERSEYES))
-					H << "\red \The [H.head] is in the way."
+					if(!disable_warning)
+						H << "\red \The [H.head] is in the way."
 					return 0
 				if( !(slot_flags & SLOT_EYES) )
 					return 0
@@ -338,6 +340,10 @@
 				return 1
 			if(slot_w_uniform)
 				if(H.w_uniform)
+					return 0
+				if(H.wear_suit)
+					if(!disable_warning)
+						H << "\red \The [H.wear_suit] is in the way."
 					return 0
 				if( !(slot_flags & SLOT_ICLOTHING) )
 					return 0

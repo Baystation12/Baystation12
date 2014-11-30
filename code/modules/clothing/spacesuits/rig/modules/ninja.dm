@@ -173,6 +173,14 @@
 
 /obj/item/rig_module/self_destruct/engage()
 	explosion(get_turf(src), 0, 0, 3, 4)
+	if(holder && holder.wearer)
+		holder.wearer.drop_from_inventory(src)
+		del(holder)
+	del(src)
 
 /obj/item/rig_module/self_destruct/small/engage()
 	explosion(get_turf(src), 0, 0, 1, 2)
+	if(holder && holder.wearer)
+		holder.wearer.drop_from_inventory(src)
+		del(holder)
+	del(src)
