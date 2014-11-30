@@ -701,7 +701,17 @@ var/global/floorIsLava = 0
 		if(blackbox)
 			blackbox.save_all_data_to_sql()
 
-		sleep(50)
+		world << "\red <b>5</b>"
+		sleep(10)
+		world << "\red <b>4</b>"
+		sleep(10)
+		world << "\red <b>3</b>"
+		sleep(10)
+		world << "\red <b>2</b>"
+		sleep(10)
+		world << "\red <b>1</b>"
+		sleep(10)
+		world << "\blue <b>Bye!</b>"
 		world.Reboot()
 
 
