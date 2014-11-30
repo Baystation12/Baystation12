@@ -35,7 +35,7 @@
 
 /obj/item/clothing/suit/armor/vest/protective
 	name = "Protective vest"
-	desc = "Not as strong as Security Armor but enough to protecs against some damage."
+	desc = "Not as strong as Security Armor but enough to protect against some damage."
 	icon_state = "armorvr"
 	item_state = "armorvr"
 	armor = list(melee = 50, bullet = 5, laser = 15, energy = 5, bomb = 15, bio = 0, rad = 0)

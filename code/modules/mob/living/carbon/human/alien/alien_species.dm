@@ -5,8 +5,8 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/claws/strong
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	unarmed_type = /datum/unarmed_attack/claws_J
+	secondary_unarmed_type = /datum/unarmed_attack/claws_J
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 

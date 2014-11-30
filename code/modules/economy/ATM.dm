@@ -217,6 +217,7 @@ log transactions
 			if("transfer")
 				if(authenticated_account)
 					var/transfer_amount = text2num(href_list["funds_amount"])
+					transfer_amount = round(transfer_amount, 0.01)
 					if(transfer_amount <= 0)
 						alert("That is not a valid amount.")
 					else if(transfer_amount <= authenticated_account.money)
@@ -302,6 +303,7 @@ log transactions
 					previous_account_number = tried_account_num
 			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
+				amount = round(amount, 0.01)
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
@@ -327,6 +329,7 @@ log transactions
 						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
+				amount = round(amount, 0.01)
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)

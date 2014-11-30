@@ -19,8 +19,9 @@ Thus, the two variables affect pump operation are set in New():
 
 	name = "gas pump"
 	desc = "A pump"
-
+	var/badpump = 0
 	var/on = 0
+	var/alerted = 0
 	var/target_pressure = ONE_ATMOSPHERE
 
 	//var/max_volume_transfer = 10000
@@ -31,7 +32,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	var/last_power_draw = 0			//for UI
 	var/max_pressure_setting = 15000	//kPa
-	
+
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
@@ -70,20 +71,22 @@ Thus, the two variables affect pump operation are set in New():
 		last_power_draw = 0
 		last_flow_rate = 0
 		return
-
 	var/power_draw = -1
 	var/pressure_delta = target_pressure - air2.return_pressure()
+	if(badpump == 1 & alerted == 0)
+		message_admins("[usr] ([usr.ckey]) is opening a potential bad pipe that could ruin the stations atmos! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
+		alerted = 1
 
 	if(pressure_delta > 0.01 && air1.temperature > 0)
 		//Figure out how much gas to transfer to meet the target pressure.
 		var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
 		var/output_volume = air2.volume + (network2? network2.volume : 0)
-		
+
 		//get the number of moles that would have to be transfered to bring sink to the target pressure
 		var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-		
+
 		power_draw = pump_gas(src, air1, air2, transfer_moles, active_power_usage)
-	
+
 	if (power_draw < 0)
 		//update_use_power(0)
 		use_power = 0	//don't force update - easier on CPU
@@ -91,7 +94,7 @@ Thus, the two variables affect pump operation are set in New():
 		last_flow_rate = 0
 	else
 		last_power_draw = handle_power_draw(power_draw)
-		
+
 		if(network1)
 			network1.update = 1
 
@@ -134,7 +137,7 @@ Thus, the two variables affect pump operation are set in New():
 
 	// this is the data which will be sent to the ui
 	var/data[0]
-	
+
 	data = list(
 		"on" = on,
 		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
@@ -202,10 +205,10 @@ Thus, the two variables affect pump operation are set in New():
 
 /obj/machinery/atmospherics/binary/pump/Topic(href,href_list)
 	if(..()) return
-	
+
 	if(href_list["power"])
 		on = !on
-	
+
 	switch(href_list["set_press"])
 		if ("min")
 			target_pressure = 0
@@ -214,10 +217,10 @@ Thus, the two variables affect pump operation are set in New():
 		if ("set")
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure control",src.target_pressure) as num
 			src.target_pressure = between(0, new_pressure, max_pressure_setting)
-	
+
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	
+
 	src.update_icon()
 
 /obj/machinery/atmospherics/binary/pump/power_change()

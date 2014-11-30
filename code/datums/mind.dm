@@ -1260,7 +1260,7 @@ datum/mind
 
 		var/is_currently_brigged = 0
 
-		if(istype(T.loc,/area/security/brig))
+		if(istype(T.loc,/area/security/brig)|| istype(T.loc,/area/security/perma))
 			is_currently_brigged = 1
 			for(var/obj/item/weapon/card/id/card in current)
 				is_currently_brigged = 0
