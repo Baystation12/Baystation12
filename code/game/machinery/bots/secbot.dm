@@ -22,7 +22,7 @@
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
-	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
+	var/declare_arrests = 1 //When making an arrest, should it notify everyone wearing sechuds?
 
 	var/has_laser = 0
 	var/next_harm_time = 0
@@ -41,7 +41,7 @@
 #define SECBOT_PATROL		5		// patrolling
 #define SECBOT_SUMMON		6		// summoned by PDA
 
-	var/auto_patrol = 0		// set to make bot automatically patrol
+	var/auto_patrol = 1		// set to make bot automatically patrol
 
 	var/beacon_freq = 1445		// navigation beacon frequency
 	var/control_freq = AI_FREQ		// bot control frequency
