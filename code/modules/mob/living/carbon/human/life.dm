@@ -794,6 +794,8 @@
 	proc/stabilize_body_temperature()
 		if (species.flags & IS_SYNTHETIC && !istype(wear_suit, /obj/item/clothing/suit/space/rig/machine)) // Assuming they're not wearing my new sexy hardsuit.
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
+			if(nutrition>=0.5)
+				nutrition -= 0.5 // Mmm, Muh power.
 			return
 
 		var/body_temperature_difference = species.body_temperature - bodytemperature
