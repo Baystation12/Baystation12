@@ -339,6 +339,7 @@
 
 	chassis = possible_chassis[choice]
 	verbs -= /mob/living/silicon/pai/proc/choose_chassis
+	verbs += /mob/living/proc/hide
 
 /mob/living/silicon/pai/proc/choose_verbs()
 	set category = "pAI Commands"
