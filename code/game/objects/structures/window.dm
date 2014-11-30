@@ -47,6 +47,10 @@
 				del(src)
 				return
 
+/obj/structure/window/bumped/Bumped(AM as mob|obj)
+	..()
+	if (istype(AM, /obj/machinery/singularity/narsie))
+		del(src)
 
 /obj/structure/window/blob_act()
 	new /obj/item/weapon/shard(loc)
@@ -299,7 +303,7 @@
 	//player-constructed windows
 	if (constructed)
 		anchored = 0
-	
+
 	if (start_dir)
 		dir = start_dir
 
@@ -321,15 +325,6 @@
 	..()
 	dir = ini_dir
 	update_nearby_tiles(need_rebuild=1)
-
-
-//This proc has to do with airgroups and atmos, it has nothing to do with smoothwindows, that's update_nearby_tiles().
-/obj/structure/window/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()

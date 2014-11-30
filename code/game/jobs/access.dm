@@ -109,6 +109,9 @@ var/const/access_blueshield = 153
 	else if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
+		if(H.iaarevoked == 1)
+			H << "You are not currently employed by the NSS Phoenix, contact your Internal Affairs agent for help with this issue."
+			return 0
 		if(src.check_access(H.get_active_hand()) || src.check_access(H.wear_id))
 			return 1
 	else if(istype(M, /mob/living/carbon/monkey))
@@ -219,7 +222,7 @@ var/const/access_blueshield = 153
 	            access_hydroponics, access_library, access_lawyer, access_virology, access_psychiatrist, access_cmo, access_qm, access_clown, access_mime, access_surgery,
 	            access_theatre, access_research, access_mining, access_mailsorting,
 	            access_heads_vault, access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce,
-	            access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_blueshield)
+	            access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_blueshield,access_deptguard)
 
 /proc/get_all_centcom_access()
 	return list(access_cent_general, access_cent_thunder, access_cent_specops, access_cent_medical, access_cent_living, access_cent_storage, access_cent_teleporter, access_cent_creed, access_cent_captain)

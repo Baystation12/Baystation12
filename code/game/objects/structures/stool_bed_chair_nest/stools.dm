@@ -23,6 +23,7 @@
 				return
 	return
 
+
 /obj/structure/stool/blob_act()
 	if(prob(75))
 		new /obj/item/stack/sheet/metal(src.loc)
@@ -89,3 +90,35 @@
 		T.apply_damage(20)
 		return
 	..()
+
+
+/obj/structure/stool/bed/chair/bench
+	name = "bench"
+	desc = "It has a massive mark!"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "bench"
+
+
+/obj/structure/stool/bed/chair/bench/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return
+
+
+/obj/structure/stool/bed/chair/bench/MouseDrop(atom/over_object)
+	return
+
+
+
+/obj/structure/stool/bed/chair/bench/handle_rotation()
+	if(src.dir == (NORTH))
+		src.layer = FLY_LAYER
+	else if(src.dir == (NORTHEAST))
+		src.layer = FLY_LAYER
+	else if(src.dir == (NORTHWEST))
+		src.layer = FLY_LAYER
+	else
+		src.layer = OBJ_LAYER
+	if(buckled_mob)
+		if(src.layer == FLY_LAYER)
+			buckled_mob.dir = NORTH
+		else
+			buckled_mob.dir = SOUTH

@@ -496,8 +496,26 @@ var/global/list/uneatable = list(
 	if(emergency_shuttle && emergency_shuttle.can_call())
 		emergency_shuttle.call_evac()
 		emergency_shuttle.launch_time = 0	// Cannot recall
+	for(var/turf/simulated/K in range(50))
+		if (istype(K, /turf/simulated/floor))
+			if (!istype(K, /turf/simulated/floor/engine/cult))
+				if(prob(10))
+					K:ChangeTurf(/turf/simulated/floor/engine/cult)
+		if (istype(K, /turf/simulated/wall))
+			if (!istype(K, /turf/simulated/wall/cult))
+				if(prob(10))
+					K:ChangeTurf(/turf/simulated/wall/cult)
 
 /obj/machinery/singularity/narsie/process()
+	for(var/turf/simulated/K in range(50))
+		if (istype(K, /turf/simulated/floor))
+			if (!istype(K, /turf/simulated/floor/engine/cult))
+				if(prob(10))
+					K:ChangeTurf(/turf/simulated/floor/engine/cult)
+		if (istype(K, /turf/simulated/wall))
+			if (!istype(K, /turf/simulated/wall/cult))
+				if(prob(10))
+					K:ChangeTurf(/turf/simulated/wall/cult)
 	eat()
 	if(!target || prob(5))
 		pickcultist()
@@ -505,25 +523,76 @@ var/global/list/uneatable = list(
 	if(prob(25))
 		mezzer()
 
+
 /obj/machinery/singularity/narsie/consume(var/atom/A) //Has its own consume proc because it doesn't need energy and I don't want BoHs to explode it. --NEO
 	if(is_type_in_list(A, uneatable))
 		return 0
-	if (istype(A,/mob/living))//Mobs get gibbed
-		A:gib()
-	else if(istype(A,/obj))
-		var/obj/O = A
-		machines -= O
-		processing_objects -= O
-		O.loc = null
+	if (istype(A,/mob/living))//Mobs get gibbed // Cultists get contrusted.
+		if(iscultist(A))
+			if(!istype(A, /mob/living/simple_animal/construct))
+				var/mob/living/M = A
+				var/construct_class = pick(prob(20);"Juggernaut",prob(40);"Wraith",prob(40);"Artificer")
+				switch(construct_class)
+					if("Juggernaut")
+						var/mob/living/simple_animal/construct/armoured/Z = new /mob/living/simple_animal/construct/armoured (get_turf(M.loc))
+						Z.key = M.key
+						if(ticker.mode.name == "cult")
+							ticker.mode:add_cultist(Z.mind)
+						else
+							ticker.mode.cult+=Z.mind
+						Z << "<B>You are playing a Juggernaut. Though slow, you can withstand extreme punishment, and rip apart enemies and walls alike.</B>"
+						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
+						Z.cancel_camera()
+						M:gib()
+
+					if("Wraith")
+						var/mob/living/simple_animal/construct/wraith/Z = new /mob/living/simple_animal/construct/wraith (get_turf(M.loc))
+						Z.key = M.key
+						if(ticker.mode.name == "cult")
+							ticker.mode:add_cultist(Z.mind)
+						else
+							ticker.mode.cult+=Z.mind
+						Z << "<B>You are playing a Wraith. Though relatively fragile, you are fast, deadly, and even able to phase through walls.</B>"
+						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
+						Z.cancel_camera()
+						M:gib()
+
+					if("Artificer")
+						var/mob/living/simple_animal/construct/builder/Z = new /mob/living/simple_animal/construct/builder (get_turf(M.loc))
+						Z.key = M.key
+						if(ticker.mode.name == "cult")
+							ticker.mode:add_cultist(Z.mind)
+						else
+							ticker.mode.cult+=Z.mind
+						Z << "<B>You are playing an Artificer. You are incredibly weak and fragile, but you are able to construct fortifications, repair allied constructs (by clicking on them), and even create new constructs</B>"
+						Z << "<B>You are still bound to serve your creator, follow their orders and help them complete their goals at all costs.</B>"
+						Z.cancel_camera()
+						M:gib()
+		else if(istype(A, /mob/living/simple_animal/construct))
+			return
+		else
+			A:gib()
 	else if(isturf(A))
 		var/turf/T = A
-		if(T.intact)
-			for(var/obj/O in T.contents)
-				if(O.level != 1)
-					continue
-				if(O.invisibility == 101)
-					src.consume(O)
-		A:ChangeTurf(/turf/space)
+		if (istype(T, /turf/space))
+			return
+		if (istype(T, /turf/simulated/floor))
+			A:ChangeTurf(/turf/simulated/floor/engine/cult)
+			A.luminosity = 1
+		if (istype(T, /turf/simulated/wall))
+			if(get_dist(src,T) < 2)
+				A:ChangeTurf(/turf/simulated/floor/engine/cult)
+				A.luminosity = 1
+			else
+				A:ChangeTurf(/turf/simulated/wall/cult)
+				A.opacity = 0
+	else if(istype(A,/obj/))
+		if(istype(A, /obj/structure/flora/pottedplant))
+			if(A.icon_state == "tree_7")
+				A.icon_state = "tree_6"
+		if(get_dist(src,A) < 2)
+			del(A)
+
 	if(last_boom + 100 < world.time && prob(5))
 		explosion(loc, -1, -1, -1, 1, 0) //Since we're not exploding everything in consume() toss out an explosion effect every now and again
 		last_boom = world.time

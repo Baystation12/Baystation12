@@ -274,7 +274,7 @@
 /obj/machinery/door/proc/requiresID()
 	return 1
 
-/obj/machinery/door/proc/update_nearby_tiles(need_rebuild)
+/obj/machinery/door/update_nearby_tiles(need_rebuild)
 	if(!air_master)
 		return 0
 
@@ -298,7 +298,7 @@
 	return
 
 /obj/machinery/door/Move(new_loc, new_dir)
-	update_nearby_tiles()
+	//update_nearby_tiles()
 	. = ..()
 	if(width > 1)
 		if(dir in list(EAST, WEST))
