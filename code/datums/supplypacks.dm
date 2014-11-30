@@ -380,6 +380,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
+/datum/supply_packs/medical
+	name = "BloodPack crate"
+	contains = list(/obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "BloodPack crate"
+	group = "Medical"
+
 /datum/supply_packs/bodybag
 	name = "Body bag crate"
 	contains = list(/obj/item/weapon/storage/box/bodybags,
