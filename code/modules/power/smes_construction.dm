@@ -31,6 +31,7 @@
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	should_be_mapped = 1
 
 /obj/machinery/power/smes/buildable/New()
 	component_parts = list()
@@ -86,6 +87,8 @@
 		var/obj/item/clothing/gloves/G = h_user.gloves
 		if(G.siemens_coefficient == 0)
 			user_protected = 1
+	log_game("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100")
+	message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
 
 	switch (intensity)
@@ -134,7 +137,7 @@
 				empulse(src.loc, 8, 16)
 			charge = 0
 			apcs_overload(1, 10)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Uncontrolled discharge detected.\"")
+			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
 
 		if (61 to INFINITY)
 			// Massive overcharge
@@ -149,14 +152,21 @@
 				empulse(src.loc, 32, 64)
 			charge = 0
 			apcs_overload(5, 25)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Significant uncontrolled discharge detected.\"")
+			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
 
 			if (prob(50))
-				src.visible_message("\icon[src] <b>[src]</b> beeps: \"DANGER! Magnetic containment field unstable! Containment field failure imminent!\"")
+				// Added admin-notifications so they can stop it when griffed.
+				log_game("SMES explosion imminent.")
+				message_admins("SMES explosion imminent.")
+				src.ping("DANGER! Magnetic containment field unstable! Containment field failure imminent!")
 				failing = 1
 				// 30 - 60 seconds and then BAM!
 				spawn(rand(300,600))
-					src.visible_message("\icon[src] <b>[src]</b> beeps: \"DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...\"")
+					if(!failing) // Admin can manually set this var back to 0 to stop overload, for use when griffed.
+						update_icon()
+						src.ping("Magnetic containment stabilised.")
+						return
+					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					del(src)
@@ -173,7 +183,7 @@
 			var/obj/machinery/power/apc/A = T.master
 			if (prob(overload_chance))
 				A.overload_lighting()
-			else if (prob(failure_chance))
+			if (prob(failure_chance))
 				A.set_broken()
 
 	// Failing SMES has special icon overlay.
