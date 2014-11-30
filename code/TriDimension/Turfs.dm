@@ -56,7 +56,7 @@
 							if(H.species.name == "Machine")
 								for(var/datum/organ/external/O in H.organs)
 									if(istype(O ,/datum/organ/external/r_leg)||istype(O,/datum/organ/external/l_leg))
-										O.droplimb()
+										O.droplimb(1)
 							else
 								H.apply_damage((10), BRUTE, "l_leg")
 								H.apply_damage((10), BRUTE, "r_leg")
