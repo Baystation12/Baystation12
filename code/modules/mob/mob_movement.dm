@@ -409,7 +409,6 @@
 			L.dir = direct
 	return 1
 
-
 ///Process_Spacemove
 ///Called by /client/Move()
 ///For moving in space

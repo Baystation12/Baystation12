@@ -79,6 +79,7 @@
 	var/hidetail = 0
 	var/dhts = 0
 	var/wingicon = 0
+	var/falldmg = 0
 
 	//Size Differences
 	var/sizechange = 1
@@ -259,6 +260,7 @@
 	primitive = /mob/living/carbon/monkey/aviskree
 	wingicon = 1
 	sizechange = 1
+	falldmg = 1
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
@@ -271,6 +273,7 @@
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
 	darksight = 8
+	falldmg = 1
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -298,6 +301,7 @@
 	dhts = 1
 	wingicon = 1
 	sizechange = 1
+	falldmg = 1
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -491,6 +495,7 @@
 	language = "Encoded Audio Language"
 	unarmed_type = /datum/unarmed_attack/punch
 	rarity_value = 2
+	falldmg = 2
 
 	eyes = "blank_eyes"
 	brute_mod = 0.5

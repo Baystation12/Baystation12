@@ -1118,7 +1118,7 @@ var/list/ghostteleportlocs = list()
 //		requires_power = 0//This area only covers the batteries and they deal with their own power
 
 	engine_room
-		name = "\improper Singualrity Engine"
+		name = "\improper Singularity Engine"
 		icon_state = "engine"
 
 	engine_airlock
@@ -1126,7 +1126,7 @@ var/list/ghostteleportlocs = list()
 		icon_state = "engine"
 
 	engine_monitoring
-		name = "\improper Singualrity Engine Monitoring Room"
+		name = "\improper Singularity Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engine_waste

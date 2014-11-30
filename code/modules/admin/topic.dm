@@ -1428,11 +1428,18 @@
 	else if(href_list["takeadminhelp"])
 		var/mob/M = locate(href_list["takeadminhelp"])
 		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name(M)]</a> is now being handled by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
-		var/recieve_msg = "\blue <b>You are now being handled by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)].</a></font> Click their name to send them more information about your issue.</b>"
-		if(!ismob(M))
+		var/recieve_msg = "\blue <b>Your issue is being dealt with by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)].</a></font> Click their name to send them more information about your issue.</b>"
+		M << recieve_msg
+		for(var/client/X in admins)
+			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
+				X << take_msg
+
+	else if(href_list["takefax"])
+		var/mob/Sender = locate(href_list["takefax"])
+		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[Sender]'>[key_name(Sender)]</a> 's fax is being replied to by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
+		if(!ismob(Sender))
 			usr << "This can only be used on instances of type /mob"
 			return
-		M << recieve_msg
 		for(var/client/X in admins)
 			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
 				X << take_msg
@@ -2963,6 +2970,22 @@
 				icwl_addList(M.ckey)
 				message_admins("\blue [key_name_admin(usr)] has whitelisted [M.ckey]", 1)
 				log_admin("[key_name_admin(usr)] has whitelisted [M.ckey]")
+
+			show_player_panel(M)
+
+	else if(href_list["iaa"])
+		if(check_rights(R_ADMIN))
+
+			var/mob/M = locate(href_list["iaa"])
+
+			if(M.iaa == 1)
+				M.iaa = 0
+				message_admins("\blue [key_name_admin(usr)] has disabled internal affairs on [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has disabled internal affairs on [M.ckey]")
+			else
+				M.iaa = 1
+				message_admins("\blue [key_name_admin(usr)] has enabled internal affairs on [M.ckey]", 1)
+				log_admin("[key_name_admin(usr)] has enabled internal affairs on [M.ckey]")
 
 			show_player_panel(M)
 

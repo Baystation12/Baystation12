@@ -74,7 +74,8 @@ var/global/floorIsLava = 0
 	"}
 
 	if(M.client)
-		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
+		var/iaa = M.iaa
+		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | <A href='?src=\ref[src];iaa=\ref[M]'><font color='[iaa?"red":"blue"]'>IAA</font></A>"
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
