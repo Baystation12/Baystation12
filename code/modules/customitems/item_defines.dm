@@ -1260,8 +1260,8 @@
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
-	name = "Susan's Magboots"
-	desc = "A colorful pair of magboots with the name Susan Harris clearly written on the back."
+	name = "Jordan's Magboots"
+	desc = "A colorful pair of magboots with the name Jordan clearly written on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "atmosmagboots0"
 

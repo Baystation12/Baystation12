@@ -39,16 +39,17 @@ var/global/datum/controller/gameticker/ticker
 
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
-/datum/controller/gameticker/proc/pregame() //Don't forget to re-add the \ at the end of the line when uncommenting a file.
+/datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	//'sound/music/halloween/skeletons.ogg',
 	//'sound/music/halloween/halloween.ogg',
-	//'sound/music/PapersPlease.ogg',
+	//'sound/music/PapersPlease.ogg', //Don't forget to re-add the \ at the end of the line when uncommenting a file!
 	'sound/music/PapersVictory.ogg',\
-	//'sound/music/PapersDeath.ogg',\
-	//'sound/music/The Moon.ogg',
+	'sound/music/PapersDeath.ogg',\
+	'sound/music/The Moon.ogg',\
 	'sound/music/The Moon Remix.ogg',\
-	'sound/music/Victory.ogg')
+	//'sound/music/Victory.ogg'
+	)
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
