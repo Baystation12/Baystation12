@@ -653,7 +653,7 @@ var/list/robot_module_types = list("Standard", "Engineering", "Construction", "S
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
 #define SHOW_TYPING 	16384
-
+#define CHAT_NOICONS	32768
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
@@ -664,13 +664,14 @@ var/list/robot_module_types = list("Standard", "Engineering", "Construction", "S
 #define BE_MALF       16
 #define BE_REV        32
 #define BE_ALIEN      64
-#define BE_PAI        128
+#define BE_AI         128
 #define BE_CULTIST    256
 #define BE_MONKEY     512
 #define BE_NINJA      1024
 #define BE_RAIDER     2048
 #define BE_PLANT      4096
 #define BE_MUTINEER   8192
+#define BE_PAI        16384
 
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
@@ -680,13 +681,14 @@ var/list/be_special_flags = list(
 	"Malf AI" = BE_MALF,
 	"Revolutionary" = BE_REV,
 	"Xenomorph" = BE_ALIEN,
-	"pAI" = BE_PAI,
+	"Positronic Brain" = BE_AI,
 	"Cultist" = BE_CULTIST,
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
 	"Raider" = BE_RAIDER,
 	"Diona" = BE_PLANT,
-	"Mutineer" = BE_MUTINEER
+	"Mutineer" = BE_MUTINEER,
+	"pAI" = BE_PAI
 	)
 
 #define AGE_MIN 17			//youngest a character can be

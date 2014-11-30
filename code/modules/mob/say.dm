@@ -12,6 +12,16 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
+	//Let's try to make users fix their errors - we try to detect single, out-of-place letters and 'unintended' words
+	var/first_letter = copytext(message,1,2)
+	if((copytext(message,2,3) == " " && first_letter != "I" && first_letter != "A" && first_letter != ";") || cmptext(copytext(message,1,5), "say ") || cmptext(copytext(message,1,4), "me ") || cmptext(copytext(message,1,6), "looc ") || cmptext(copytext(message,1,5), "ooc ") || cmptext(copytext(message,2,6), "say "))
+		var/response = alert(usr, "Do you really want to say this using the *say* verb?\n\n[message]\n", "Confirm your message", "Yes", "Edit message", "No")
+		if(response == "Edit message")
+			message = input(usr, "Please edit your message carefully:", "Edit message", message)
+			if(!message)
+				return
+		else if(response == "No")
+			return
 
 	set_typing_indicator(0)
 	usr.say(message)
@@ -33,8 +43,6 @@
 		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	var/name = src.real_name
-
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
@@ -48,23 +56,7 @@
 		usr << "\red You have deadchat muted."
 		return
 
-	if(mind && mind.name)
-		name = "[mind.name]"
-	else
-		name = real_name
-	if(name != real_name)
-		name += " (died as [real_name])"
-
-	for(var/mob/M in player_list)
-		if(istype(M, /mob/new_player))
-			continue
-		if(M.client && (M.stat == DEAD || (M.client.holder && !is_mentor(M.client)) && (M.client.prefs.toggles & CHAT_DEAD)))
-			var/follow = ""
-			if(src != M)
-				follow = " (<a href='byond://?src=\ref[M];track=\ref[src]'>follow</a>)"
-			if(M.stat != DEAD && M.client.holder)
-				follow = " (<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[src]'>JMP</a>)"
-			M << "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[follow] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
+	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 

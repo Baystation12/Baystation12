@@ -135,11 +135,11 @@
 				return
 
 	else if (href_list["talk"])
-		broadcasting = text2num(href_list["talk"])
+		broadcasting = !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL)) && text2num(href_list["talk"])
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
-			listening = text2num(href_list["listen"])
+			listening = !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL)) && text2num(href_list["listen"])
 		else
 			if (channels[chan_name] & FREQ_LISTENING)
 				channels[chan_name] &= ~FREQ_LISTENING

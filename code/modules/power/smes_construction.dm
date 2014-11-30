@@ -31,6 +31,7 @@
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	charge = 0
 
 /obj/machinery/power/smes/buildable/New()
 	component_parts = list()
