@@ -26,8 +26,7 @@
 		/obj/item/weapon/smes_coil
 		)
 
-	//Item currently being held.
-	var/obj/item/wrapped = null
+	var/obj/item/wrapped = null // Item currently being held.
 
 /obj/item/weapon/gripper/paperwork
 	name = "paperwork gripper"
@@ -44,7 +43,8 @@
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
-		wrapped.attack_self(user)
+		return wrapped.attack_self(user)
+	return ..()
 
 /obj/item/weapon/gripper/verb/drop_item()
 
@@ -68,12 +68,9 @@
 	//update_icon()
 
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	return
+	return (wrapped ? wrapped.attack(M,user) : 0)
 
-/obj/item/weapon/gripper/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
-
-	if(!target || !proximity) //Target is invalid or we are not adjacent.
-		return
+/obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
 
 	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 	if(!wrapped)
@@ -82,13 +79,10 @@
 			break
 
 	if(wrapped) //Already have an item.
-
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
-
 		//Pass the attack on to the target. This might delete/relocate wrapped.
-		target.attackby(wrapped,user)
-
+		wrapped.afterattack(target,user)
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
