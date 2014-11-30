@@ -510,7 +510,7 @@
 		else if(href_list["toggle_ai_control"])
 			ai_override_enabled = !ai_override_enabled
 		else if(href_list["toggle_suit_lock"])
-			security_check_enabled = !security_check_enabled
+			locked = !locked
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
