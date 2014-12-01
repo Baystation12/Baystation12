@@ -1245,7 +1245,8 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen -= global_huds
+		for(var/hud in global_huds)
+			client.screen.Remove(hud)
 
 		update_action_buttons()
 

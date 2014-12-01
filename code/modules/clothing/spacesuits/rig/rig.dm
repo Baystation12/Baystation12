@@ -69,6 +69,7 @@
 	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
+	var/list/suit_can_hold
 
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
@@ -122,6 +123,10 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
+		if(suit_can_hold)
+			chest.allowed = suit_can_hold
+		else
+			chest.allowed = list()
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -235,15 +240,17 @@
 						if("helmet")
 							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
 							M.update_inv_head()
-							if(!seal_target)
-								if(flags & AIRTIGHT)
-									helmet.flags |= AIRTIGHT
-								helmet.flags_inv |= (HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered |= (FACE|EYES)
-							else
-								helmet.flags &= ~AIRTIGHT
-								helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered &= ~(FACE|EYES)
+							if(helmet)
+								if(!seal_target)
+									if(flags & AIRTIGHT)
+										helmet.flags |= AIRTIGHT
+									helmet.flags_inv |= (HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered |= (FACE|EYES)
+								else
+									helmet.flags &= ~AIRTIGHT
+									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered &= ~(FACE|EYES)
+								helmet.update_light(wearer)
 				else
 					failed_to_seal = 1
 
@@ -480,7 +487,7 @@
 	if((istype(H) && H.back == src) || (istype(H,/mob/living/silicon)))
 
 		if(istype(H,/mob/living/silicon))
-			if(!control_overridden)
+			if(!ai_override_enabled)
 				usr << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
 				return
 		else if(security_check_enabled && !src.allowed(usr))

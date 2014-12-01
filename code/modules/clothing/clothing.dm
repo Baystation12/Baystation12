@@ -255,16 +255,35 @@ BLIND     // can't see anything
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
-			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
+			user << "You cannot turn the light on while in this [user.loc]"
 			return
 		on = !on
-		update_icon()
-		if(on)
-			user.SetLuminosity(user.luminosity + brightness_on)
-		else
-			user.SetLuminosity(user.luminosity - brightness_on)
+		update_light(user)
 	else
 		return ..(user)
+
+/obj/item/clothing/head/proc/update_light(var/mob/user = null)
+	if(on)
+		if(loc == user)
+			user.SetLuminosity(user.luminosity + brightness_on)
+		else if(isturf(loc))
+			SetLuminosity(brightness_on)
+	else
+		if(loc == user)
+			user.SetLuminosity(user.luminosity - brightness_on)
+		else if(isturf(loc))
+			SetLuminosity(0)
+	update_icon()
+
+/obj/item/clothing/head/pickup(mob/user)
+	if(on)
+		user.SetLuminosity(user.luminosity + brightness_on)
+		SetLuminosity(0)
+
+/obj/item/clothing/head/dropped(mob/user)
+	if(on)
+		user.SetLuminosity(user.luminosity - brightness_on)
+		SetLuminosity(brightness_on)
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 
@@ -278,16 +297,6 @@ BLIND     // can't see anything
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		H.update_inv_head()
-
-/obj/item/clothing/head/proc/update_light(mob/user)
-
-	if(!brightness_on)
-		return
-
-	if(on)
-		if(light_overlay) overlays |= light_overlay
-		user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(brightness_on)
 
 /obj/item/clothing/head/equipped(mob/user)
 	..()
