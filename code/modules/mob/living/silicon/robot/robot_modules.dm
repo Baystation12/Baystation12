@@ -189,7 +189,7 @@
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/glass = 50,
 		/obj/item/stack/sheet/glass/reinforced = 50,
-		/obj/item/stack/cable_coil = 50,
+		/obj/item/stack/cable_coil/robot = 50,
 		/obj/item/stack/rods = 15,
 		/obj/item/stack/tile/plasteel = 15
 		)
@@ -225,7 +225,7 @@
 		G.amount = 50
 		src.modules += G
 
-		var/obj/item/stack/cable_coil/W = new /obj/item/stack/cable_coil(src)
+		var/obj/item/stack/cable_coil/robot/W = new /obj/item/stack/cable_coil/robot(src)
 		W.amount = 50
 		src.modules += W
 
@@ -406,7 +406,7 @@
 		/obj/item/stack/tile/plasteel = 15,
 		/obj/item/stack/sheet/metal = 20,
 		/obj/item/stack/sheet/glass = 20,
-		/obj/item/stack/cable_coil = 30
+		/obj/item/stack/cable_coil/robot = 30
 		)
 
 	New()
