@@ -15,7 +15,6 @@
 			flags &= ~NOSLIP
 			slowdown = SHOES_SLOWDOWN
 			magpulse = 0
-			if(type == /obj/item/clothing/shoes/magboots/fluff/susan_harris_1)
 			icon_state = icon_state_inactive
 			user << "You disable the mag-pulse traction system."
 		else
