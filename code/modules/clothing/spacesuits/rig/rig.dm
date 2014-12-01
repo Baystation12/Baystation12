@@ -122,6 +122,8 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
+		if(allowed)
+			chest.allowed = allowed
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -169,7 +171,7 @@
 
 	if(sealing) return
 
-	if(M && !(istype(M) && M.back == src ) && !istype(M,/mob/living/silicon) )
+	if(M && !(istype(M) && M.back == src ) && !istype(M,/mob/living/silicon))
 		return 0
 
 	if(!check_power_cost(M))
@@ -235,15 +237,17 @@
 						if("helmet")
 							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
 							M.update_inv_head()
-							if(!seal_target)
-								if(flags & AIRTIGHT)
-									helmet.flags |= AIRTIGHT
-								helmet.flags_inv |= (HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered |= (FACE|EYES)
-							else
-								helmet.flags &= ~AIRTIGHT
-								helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered &= ~(FACE|EYES)
+							if(helmet)
+								if(!seal_target)
+									if(flags & AIRTIGHT)
+										helmet.flags |= AIRTIGHT
+									helmet.flags_inv |= (HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered |= (FACE|EYES)
+								else
+									helmet.flags &= ~AIRTIGHT
+									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered &= ~(FACE|EYES)
+								helmet.update_light(wearer)
 				else
 					failed_to_seal = 1
 
@@ -480,7 +484,7 @@
 	if((istype(H) && H.back == src) || (istype(H,/mob/living/silicon)))
 
 		if(istype(H,/mob/living/silicon))
-			if(!control_overridden)
+			if(!ai_override_enabled)
 				usr << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
 				return
 		else if(security_check_enabled && !src.allowed(usr))
