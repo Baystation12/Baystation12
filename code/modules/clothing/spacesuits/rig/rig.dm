@@ -32,14 +32,14 @@
 	var/list/initial_modules
 	var/chest_type = /obj/item/clothing/suit/space/rig
 	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
-	var/boot_type =  /obj/item/clothing/shoes/rig
+	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
 	var/glove_type = /obj/item/clothing/gloves/rig
 	var/cell_type =  /obj/item/weapon/cell/high
 	var/air_type =   /obj/item/weapon/tank/oxygen
 
 	//Component/device holders.
 	var/obj/item/weapon/tank/air_supply                       // Air tank, if any.
-	var/obj/item/clothing/shoes/rig/boots = null              // Deployable boots, if any.
+	var/obj/item/clothing/shoes/boots = null                  // Deployable boots, if any.
 	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
 	var/obj/item/clothing/gloves/rig/gloves = null            // Deployable gauntlets, if any.
@@ -155,13 +155,13 @@
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
-	if(helm_type && (!helmet || wearer.head != helmet))
+	if(helm_type && !(helmet && wearer.head == helmet))
 		return 0
-	if(glove_type && (!gloves || wearer.gloves != gloves))
+	if(glove_type && !(gloves && wearer.gloves == gloves))
 		return 0
-	if(boot_type && (!boots || wearer.shoes != boots))
+	if(boot_type && !(boots && wearer.shoes == boots))
 		return 0
-	if(chest_type && (!chest || wearer.wear_suit != chest))
+	if(chest_type && !(chest && wearer.wear_suit == chest))
 		return 0
 	return 1
 
@@ -204,13 +204,14 @@
 		if(!M)
 			failed_to_seal = 1
 		else
-			for(var/list/piece_data in list(list(M.shoes,boots,"boots"),list(M.gloves,gloves,"gloves"),list(M.head,helmet,"helmet"),list(M.wear_suit,chest,"chest")))
+			for(var/list/piece_data in list(list(M.shoes,boots,"boots",boot_type),list(M.gloves,gloves,"gloves",glove_type),list(M.head,helmet,"helmet",helm_type),list(M.wear_suit,chest,"chest",chest_type)))
 
 				var/obj/item/piece = piece_data[1]
 				var/obj/item/compare_piece = piece_data[2]
 				var/msg_type = piece_data[3]
+				var/piece_type = piece_data[4]
 
-				if(!piece)
+				if(!piece || !piece_type)
 					continue
 
 				if(!istype(M) || !istype(piece) || !istype(compare_piece) || !msg_type)
@@ -437,7 +438,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 800, 600)
+		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 750, 550)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -510,7 +511,7 @@
 		else if(href_list["toggle_ai_control"])
 			ai_override_enabled = !ai_override_enabled
 		else if(href_list["toggle_suit_lock"])
-			security_check_enabled = !security_check_enabled
+			locked = !locked
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
