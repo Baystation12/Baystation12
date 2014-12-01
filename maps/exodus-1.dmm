@@ -3301,7 +3301,7 @@
 "bly" = (/obj/machinery/vending/coffee,/turf/simulated/floor/wood,/area/bridge/meeting_room)
 "blz" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "blA" = (/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
-"blB" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/machinery/light/small{dir = 1},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/obj/structure/cable/cyan{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
+"blB" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/machinery/light/small{dir = 1},/obj/structure/cable/cyan{d2 = 4; icon_state = "0-4"},/obj/machinery/power/apc/super{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "blC" = (/obj/machinery/door/window{dir = 2; name = "AI Core Door"; req_access_txt = "109"},/obj/structure/cable/cyan{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/cable/cyan{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/machinery/flasher{id = "AI"; pixel_x = 22; pixel_y = 24},/obj/machinery/turretid/stun{name = "AI Chamber turret control"; pixel_x = 36; pixel_y = 24},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "blD" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "blE" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
