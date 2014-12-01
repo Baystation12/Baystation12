@@ -1087,7 +1087,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/smbig
 	name = "Supermatter Core"
 	contains = list(/obj/machinery/power/supermatter)
-	cost = 50
+	cost = 150
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "Supermatter crate (CAUTION)"
 	group = "Engineering"
