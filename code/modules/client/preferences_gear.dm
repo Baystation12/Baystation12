@@ -751,7 +751,7 @@ var/global/list/gear_datums = list()
 	display_name = "personal AI device"
 	path = /obj/item/device/paicard
 	sort_category = "utility"
-	cost = 3
+	cost = 2
 
 // The rest of the trash.
 
