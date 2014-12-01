@@ -5,6 +5,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
+	flags = FPRINT | OPENCONTAINER
 	gender = PLURAL
 	density = 0
 	anchored = 1
@@ -80,9 +81,14 @@ var/global/list/image/splatter_cache=list()
 	perp.update_inv_shoes(1)
 	amount--
 
+/obj/effect/decal/cleanable/blood/on_reagent_change()
+	if(!reagents.total_volume)
+		dry()
+
 /obj/effect/decal/cleanable/blood/proc/dry()
 		name = "dried [src.name]"
 		desc = "It's dry and crusty. Someone is not doing their job."
+		flags = FPRINT
 		color = adjust_brightness(color, -50)
 		amount = 0
 

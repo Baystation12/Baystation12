@@ -166,3 +166,46 @@
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
+
+/turf/simulated/on_reagent_change()
+	if(!reagents || !reagents.total_volume)
+		return
+	if(is_asteroid_floor())
+		return
+
+	var/obj/effect/decal/cleanable/solid_reagents/dirtoverlay = locate(/obj/effect/decal/cleanable/solid_reagents, src)
+	var/obj/effect/decal/cleanable/liquid_reagents/liquidoverlay = locate(/obj/effect/decal/cleanable/liquid_reagents, src)
+	if (reagents.meta_state == SOLID)
+		if(liquidoverlay)
+			del(liquidoverlay)
+		if(!dirtoverlay)
+			dirtoverlay = new/obj/effect/decal/cleanable/solid_reagents(src)
+		else
+			dirtoverlay.icon = initial(dirtoverlay.icon)
+		dirtoverlay.alpha = min(reagents.total_volume*12, 120)
+		dirtoverlay.icon += mix_color_from_reagents(reagents.reagent_list)
+	else if (reagents.meta_state & LIQUID)
+		if(dirtoverlay)
+			del(dirtoverlay)
+		if (reagents.total_volume >= 3)
+			if(wet >= 1) return
+			wet = 1
+			if(wet_overlay)
+				overlays -= wet_overlay
+				wet_overlay = null
+			wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
+			overlays += wet_overlay
+			spawn(800)
+				if(wet >= 2) return
+				wet = 0
+				if(wet_overlay)
+					overlays -= wet_overlay
+					wet_overlay = null
+		if (!liquidoverlay)
+			liquidoverlay = new/obj/effect/decal/cleanable/liquid_reagents(src)
+		else
+			liquidoverlay.icon = initial(liquidoverlay.icon)
+		liquidoverlay.alpha = min(reagents.total_volume*8, 80)
+		liquidoverlay.icon += mix_color_from_reagents(reagents.reagent_list)
+		spawn(800)
+			animate(liquidoverlay, alpha = 40, color = adjust_brightness(color, -50), time = 20)

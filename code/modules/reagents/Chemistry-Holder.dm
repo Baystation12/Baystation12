@@ -10,6 +10,7 @@ datum
 		var/list/datum/reagent/reagent_list = new/list()
 		var/total_volume = 0
 		var/maximum_volume = 100
+		var/meta_state = 0 //aggregate state of total reagents
 		var/atom/my_atom = null
 
 		New(maximum=100)
@@ -79,9 +80,9 @@ datum
 					if(A.volume > the_volume)
 						the_volume = A.volume
 						the_reagent = A
-				
+
 				return the_reagent
-			
+
 			get_master_reagent_name()
 				var/the_name = null
 				var/the_volume = 0
@@ -412,11 +413,21 @@ datum
 
 			update_total()
 				total_volume = 0
+				var/last_state = meta_state
+				meta_state = 0
 				for(var/datum/reagent/R in reagent_list)
 					if(R.volume < 0.1)
 						del_reagent(R.id)
 					else
 						total_volume += R.volume
+						meta_state |= R.reagent_state
+				if(meta_state & LIQUID)
+					if(last_state == SOLID)
+						for(var/mob/M in viewers(2, get_turf(my_atom)))
+							M << "\blue \icon[my_atom] The pulver dissolves with a hiss."
+					if(last_state == GAS)
+						for(var/mob/M in viewers(2, get_turf(my_atom)))
+							M << "\blue \icon[my_atom] The gasses mix with the liquid."
 
 				return 0
 

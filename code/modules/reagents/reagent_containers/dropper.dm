@@ -87,12 +87,16 @@
 
 		else
 
-			if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
+			if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/turf/simulated))
 				user << "\red You cannot directly remove reagents from [target]."
 				return
 
 			if(!target.reagents.total_volume)
 				user << "\red [target] is empty."
+				return
+
+			if(!(target.reagents.meta_state & LIQUID))
+				user << "\red The reagents in \the [target] need to be liquid."
 				return
 
 			var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this)
