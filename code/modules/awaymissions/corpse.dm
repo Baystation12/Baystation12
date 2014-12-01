@@ -167,7 +167,7 @@
 
 /obj/effect/landmark/corpse/clown
 	name = "Clown"
-	corpseuniform = /obj/item/clothing/under/rank/clown
+	corpseuniform = /obj/item/clothing/under/rank/clown/dead
 	corpseshoes = /obj/item/clothing/shoes/clown_shoes
 	corpseradio = /obj/item/device/radio/headset
 	corpsemask = /obj/item/clothing/mask/gas/clown_hat

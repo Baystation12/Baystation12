@@ -64,6 +64,7 @@
 						var/iaarevoked = M.iaarevoked
 						Tr = get_turf(M)
 						if((Tr) && (Tr.z != computer.z))	continue//Out of range
+						if(M.mind == null) continue
 						if(!M.mind.special_role == null)	continue
 						if(iaarevoked == 1)
 							dat += "[M.name] | <A href='?src=\ref[src];employ=\ref[M]'>(<font color=green><B>Assign Employment</B></font>)</A>"

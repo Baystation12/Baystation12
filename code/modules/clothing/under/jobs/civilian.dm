@@ -61,6 +61,9 @@
 	item_color = "clown"
 	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/under/rank/clown/dead
+	has_sensor = 2
+	sensor_mode = 0
 
 /obj/item/clothing/under/rank/head_of_personnel
 	desc = "It's a jumpsuit worn by someone who works in the position of \"Head of Personnel\"."
