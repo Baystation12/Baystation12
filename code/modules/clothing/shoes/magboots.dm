@@ -22,7 +22,7 @@
 			icon_state = "magboots1"
 			user << "You enable the mag-pulse traction system."
 		user.update_inv_shoes()	//so our mob-overlays update
-	
+
 	examine(mob/user)
 		..(user)
 		var/state = "disabled"

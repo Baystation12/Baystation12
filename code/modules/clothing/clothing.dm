@@ -546,4 +546,3 @@ BLIND     // can't see anything
 	if (hastie)
 		hastie.emp_act(severity)
 	..()
-
