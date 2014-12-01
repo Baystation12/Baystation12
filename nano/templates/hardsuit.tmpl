@@ -16,7 +16,18 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		margin: 0 auto;
 	}
 	.info {
-		display: none;
+		width: 100px;
+	}
+	.floatLeft {
+		float: left;
+		margin-left: 5px;
+	}
+	.paddedBorderBlue {
+		border: 1px solid #517087; 
+		padding: 2px;
+	}
+	.displayBar {
+		width: 200px;
 	}
 </style>
 
@@ -34,6 +45,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				<div>
 					{{:helper.displayBar(data.chargestatus, 0, 50, (data.chargestatus >= 35) ? 'good' : (data.chargestatus >= 15) ? 'average' : 'bad')}} {{:data.charge}}/{{:data.maxcharge}}
 				</div>
+				
 			</div>
 			<div>
 				<div class='inlineBlock extraPadding'>
@@ -154,10 +166,6 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		{{if data.seals == 1 || data.sealing == 1}}
 			<h3><div class = 'bad'>HARDSUIT SYSTEMS OFFLINE</div></h3>
 		{{else}}
-			
-			<!-- Example hack for showing module details until I work out a system that will persist through page refreshes -->
-			<button onclick="$('.info').css('display', 'inline')">Info</button>
-			
 			<font align = 'center'><h3>Selected primary system: 
 				{{if data.primarysystem}}
 					{{:helper.capitalizeFirstLetter(data.primarysystem)}}
@@ -168,57 +176,61 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 			{{if data.modules}}
 				<div>
 					{{for data.modules}}
-						<div class='fixedLeftWider inlineBlock' style='text-align: center'>
-							<div style='border: 1px solid #517087; padding: 2px'>
-								<div class='average'>{{:helper.capitalizeFirstLetter(value.name)}}</div>
-								{{if value.damage > 0}}
-									{{if value.damage == 1}}
-										(<font color='orange'>damaged</font>) 
-									{{else}}
-										(<font color='red'>destroyed</font>) 
-									{{/if}}
-								{{/if}}
-								<div class='caption info'>
-									<div class='average'>
-										Engage: {{:value.engagecost}} <br>
-										Activate: {{:value.activecost}} <br>
-										Passive: {{:value.passivecost}} <br>
-									</div>
-									<div style='padding: 2'>
-										{{:value.desc}}
-									</div>
-								</div>
-								<div class='inlineBlock'>
-									{{if value.can_use == 1}}
-										<div class='inlineBlock offsetCenter'>
-											{{:helper.link(value.engagestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'engage'}, null)}}
-										</div>
-									{{/if}}
-									{{if value.can_select == 1}}
-										<div class='inlineBlock offsetCenter'>
-											{{if value.name == data.primarysystem}}
-												<div class ='good'><strong>SELECTED</strong></div>
+						<div class='inlineBlock'>
+							<div class='paddedBorderBlue floatLeft' style='width: 400px'>
+								<div class='floatLeft' style='width: 100%'>
+									<div class='average floatLeft'>{{:helper.capitalizeFirstLetter(value.name)}}</div>
+									{{if value.damage > 0}}
+										<div class='floatLeft'>
+											{{if value.damage == 1}}
+												(<font color='orange'>damaged</font>) 
 											{{else}}
-												{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null)}}
+												(<font color='red'>destroyed</font>) 
 											{{/if}}
 										</div>
 									{{/if}}
-									{{if value.can_toggle == 1}}
-										<div class='inlineBlock offsetCenter'>
-											{{if value.is_active == 1}}
-												{{:helper.link(value.deactivatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null)}}
-											{{else}}
-												{{:helper.link(value.activatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'activate'}, null)}}
+									<div class='floatLeft' style='width: 100%; clear: left'>
+										<div class='caption floatLeft average' style='width: 23%; margin: 0'>
+												Engage: {{:value.engagecost}} <br>
+												Activate: {{:value.activecost}} <br>
+												Passive: {{:value.passivecost}} 
+										</div>
+										<div class='caption floatLeft' style='width: 27%; margin: 0'>
+												{{:value.desc}}
+										</div>
+										<div class='floatLeft' style='width: 40%'>
+											{{if value.can_use == 1}}
+												<div class='inlineBlock'>
+													{{:helper.link(value.engagestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'engage'}, null)}}
+												</div>
+											{{/if}}
+											{{if value.can_select == 1}}
+												<div class='inlineBlock'>
+													{{if value.name == data.primarysystem}}
+														<div class ='good'><strong>SELECTED</strong></div>
+													{{else}}
+														{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null)}}
+													{{/if}}
+												</div>
+											{{/if}}
+											{{if value.can_toggle == 1}}
+												<div class='inlineBlock'>
+													{{if value.is_active == 1}}
+														{{:helper.link(value.deactivatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'deactivate'}, null)}}
+													{{else}}
+														{{:helper.link(value.activatestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'activate'}, null)}}
+													{{/if}}
+												</div>
 											{{/if}}
 										</div>
-									{{/if}}
+									</div>
 								</div>
-								<div>
+								<div class='floatLeft' style='clear: left; margin-left: 10px; width: 100%'>
 									{{if value.charges}}
 										<div class='average'><strong>Stored charges</strong></div>
 										<strong>Selected:</strong> {{:helper.capitalizeFirstLetter(value.chargetype)}}
 										{{for value.charges :itemValue:itemIndex}}
-											<div class='inlineBlock offsetCenter'>
+											<div class='floatLeft' style='padding: 2px 0px'>
 												{{:helper.link(helper.capitalizeFirstLetter(itemValue.caption), null, {'interact_module' : value.index, 'module_mode' : 'select_charge_type', 'charge_type' : itemValue.index}, null)}}
 											</div>
 										{{/for}}
