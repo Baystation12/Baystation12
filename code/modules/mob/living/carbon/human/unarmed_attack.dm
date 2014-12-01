@@ -33,7 +33,7 @@
 
 	if(attack_damage >= 5 && armour < 2 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
-			if("head")
+			if("head", "mouth", "eyes")
 				// Induce blurriness
 				target.visible_message("<span class='danger'>[target] stares blankly for a few moments.</span>", "<span class='danger'>You see stars.</span>")
 				target.apply_effect(attack_damage*2, EYE_BLUR, armour)
@@ -114,7 +114,7 @@
 
 	if(!target.lying)
 		switch(zone)
-			if("head")
+			if("head", "mouth", "eyes")
 				// ----- HEAD ----- //
 				switch(attack_damage)
 					if(1 to 2)  user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
@@ -169,7 +169,7 @@
 		return 0
 
 	switch(zone)
-		if("head")
+		if("head", "mouth", "eyes")
 			// ----- HEAD ----- //
 			switch(damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")

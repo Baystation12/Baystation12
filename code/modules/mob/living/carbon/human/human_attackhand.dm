@@ -94,8 +94,6 @@
 				attack_generic(H,rand(1,3),"punched")
 				return
 
-			if(attack_move)	return 0
-
 			// See if they can attack, and which attacks to use.
 			var/datum/unarmed_attack/attack = H.species.unarmed
 			if(!attack.is_usable(H))
