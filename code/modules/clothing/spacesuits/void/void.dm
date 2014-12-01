@@ -130,14 +130,14 @@
 		helmet.loc = src
 	else
 		if(H.head)
-			H << "\red You cannot deploy your helmet while wearing another helmet."
+			H << "<span class='danger'>You cannot deploy your helmet while wearing another helmet.</span>"
 			return
 		//TODO: Species check, skull damage for forcing an unfitting helmet on?
 		helmet.loc = H
 		helmet.pickup(H)
 		H.equip_to_slot(helmet, slot_head)
 		helmet.canremove = 0
-		H << "\blue You deploy your suit helmet, sealing you off from the world."
+		H << "<font color='blue'><b>You deploy your suit helmet, sealing you off from the world.</b></font>"
 	helmet.update_light(H)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
@@ -145,7 +145,7 @@
 	if(!istype(user,/mob/living)) return
 
 	if(istype(src.loc,/mob/living))
-		user << "How do you propose to modify a hardsuit while it is being worn?"
+		user << "<span class='danger'>How do you propose to modify a hardsuit while it is being worn?</span>"
 		return
 
 	if(istype(W,/obj/item/weapon/screwdriver))
