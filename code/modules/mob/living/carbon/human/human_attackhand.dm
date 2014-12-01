@@ -153,8 +153,8 @@
 			if(miss_type)
 				return 0
 
-			// Apply possible buffs
-			damage = H.get_combat_buff(damage)
+			if(HULK in H.mutations)
+				damage *= 2 // Hulks do twice the damage)
 
 			var/armour = run_armor_check(affecting, "melee")
 			// Apply additional unarmed effects.

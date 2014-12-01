@@ -708,13 +708,6 @@
 			number += 2
 	return number
 
-/mob/living/carbon/human/get_combat_buff(var/damage)
-	if(check_special_role("Ninja") || check_special_role("Changeling"))
-		damage += 3 // We assume Ninjas and Changelings are slightly better in combat than the usual human
-	if(HULK in mutations)
-		damage *= 2 // Hulks do twice the damage
-	return damage * damage_multiplier
-
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
 		return 1

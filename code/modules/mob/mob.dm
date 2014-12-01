@@ -652,9 +652,6 @@ var/list/slot_equipment_priority = list( \
 		var/mob/pulled = AM
 		pulled.inertia_dir = 0
 
-/mob/proc/get_combat_buff(var/damage)
-	return damage
-
 /mob/proc/can_use_hands()
 	return
 
