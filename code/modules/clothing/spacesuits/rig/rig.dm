@@ -69,7 +69,6 @@
 	var/offline_slowdown = 10                                 // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
-	var/list/suit_can_hold
 
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
@@ -123,10 +122,8 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
-		if(suit_can_hold)
-			chest.allowed = suit_can_hold
-		else
-			chest.allowed = list()
+		if(allowed)
+			chest.allowed = allowed
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -174,7 +171,7 @@
 
 	if(sealing) return
 
-	if(M && !(istype(M) && M.back == src ) && !istype(M,/mob/living/silicon) )
+	if(M && !(istype(M) && M.back == src ) && !istype(M,/mob/living/silicon))
 		return 0
 
 	if(!check_power_cost(M))

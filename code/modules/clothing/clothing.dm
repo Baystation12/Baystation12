@@ -244,6 +244,7 @@ BLIND     // can't see anything
 	w_class = 2.0
 
 	var/light_overlay = "helmet_light"
+	var/light_applied
 	var/brightness_on
 	var/on = 0
 
@@ -258,32 +259,37 @@ BLIND     // can't see anything
 			user << "You cannot turn the light on while in this [user.loc]"
 			return
 		on = !on
+		user << "You [on ? "enable" : "disable"] the helmet light."
 		update_light(user)
 	else
 		return ..(user)
 
 /obj/item/clothing/head/proc/update_light(var/mob/user = null)
-	if(on)
+	if(on && !light_applied)
 		if(loc == user)
 			user.SetLuminosity(user.luminosity + brightness_on)
-		else if(isturf(loc))
-			SetLuminosity(brightness_on)
-	else
+		SetLuminosity(brightness_on)
+		light_applied = 1
+	else if(!on && light_applied)
 		if(loc == user)
 			user.SetLuminosity(user.luminosity - brightness_on)
-		else if(isturf(loc))
-			SetLuminosity(0)
-	update_icon()
-
-/obj/item/clothing/head/pickup(mob/user)
-	if(on)
-		user.SetLuminosity(user.luminosity + brightness_on)
 		SetLuminosity(0)
+		light_applied = 0
+	update_icon(user)
+
+/obj/item/clothing/head/equipped(mob/user)
+	..()
+	spawn(1)
+		if(on && loc == user && !light_applied)
+			user.SetLuminosity(user.luminosity + brightness_on)
+			light_applied = 1
 
 /obj/item/clothing/head/dropped(mob/user)
-	if(on)
-		user.SetLuminosity(user.luminosity - brightness_on)
-		SetLuminosity(brightness_on)
+	..()
+	spawn(1)
+		if(on && loc != user && light_applied)
+			user.SetLuminosity(user.luminosity - brightness_on)
+			light_applied = 0
 
 /obj/item/clothing/head/update_icon(var/mob/user)
 

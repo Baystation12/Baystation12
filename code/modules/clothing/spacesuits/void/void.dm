@@ -50,3 +50,133 @@
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
 	breach_threshold = 18
 	can_breach = 1
+
+	//Inbuilt devices.
+	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
+	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
+
+/obj/item/clothing/suit/space/void/equipped(mob/M)
+	..()
+
+	var/mob/living/carbon/human/H = M
+
+	if(!istype(H)) return
+
+	if(H.wear_suit != src)
+		return
+
+	if(helmet)
+		if(H.head)
+			M << "You are unable to deploy your suit's helmet as \the [H.head] is in the way."
+		else
+			M << "Your suit's helmet deploys with a hiss."
+			//TODO: Species check, skull damage for forcing an unfitting helmet on?
+			helmet.loc = H
+			H.equip_to_slot(helmet, slot_head)
+			helmet.canremove = 0
+
+	if(boots)
+		if(H.shoes)
+			M << "You are unable to deploy your suit's magboots as \the [H.shoes] are in the way."
+		else
+			M << "Your suit's boots deploy with a hiss."
+			boots.loc = H
+			H.equip_to_slot(boots, slot_shoes)
+			boots.canremove = 0
+
+/obj/item/clothing/suit/space/void/dropped()
+	..()
+
+	var/mob/living/carbon/human/H
+
+	if(helmet)
+		H = helmet.loc
+		if(istype(H))
+			if(helmet && H.head == helmet)
+				helmet.canremove = 1
+				H.drop_from_inventory(helmet)
+				helmet.loc = src
+
+	if(boots)
+		H = boots.loc
+		if(istype(H))
+			if(boots && H.shoes == boots)
+				boots.canremove = 1
+				H.drop_from_inventory(boots)
+				boots.loc = src
+
+/obj/item/clothing/suit/space/void/verb/toggle_helmet()
+
+	set name = "Toggle Helmet"
+	set category = "Object"
+	set src in usr
+
+	if(!istype(src.loc,/mob/living)) return
+
+	if(!helmet)
+		usr << "There is no helmet installed."
+		return
+
+	var/mob/living/carbon/human/H = usr
+
+	if(!istype(H)) return
+	if(H.stat) return
+	if(H.wear_suit != src) return
+
+	if(H.head == helmet)
+		H << "\blue You retract your suit helmet."
+		helmet.canremove = 1
+		H.drop_from_inventory(helmet)
+		helmet.loc = src
+	else
+		if(H.head)
+			H << "\red You cannot deploy your helmet while wearing another helmet."
+			return
+		//TODO: Species check, skull damage for forcing an unfitting helmet on?
+		helmet.loc = H
+		helmet.pickup(H)
+		H.equip_to_slot(helmet, slot_head)
+		helmet.canremove = 0
+		H << "\blue You deploy your suit helmet, sealing you off from the world."
+	helmet.update_light(H)
+
+/obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
+
+	if(!istype(user,/mob/living)) return
+
+	if(istype(src.loc,/mob/living))
+		user << "How do you propose to modify a hardsuit while it is being worn?"
+		return
+
+	if(istype(W,/obj/item/weapon/screwdriver))
+		if(helmet)
+			user << "You detatch \the [helmet] from \the [src]'s helmet mount."
+			helmet.loc = get_turf(src)
+			src.helmet = null
+		else if (boots)
+			user << "You detatch \the [helmet] from \the [src]'s helmet mount."
+			helmet.loc = get_turf(src)
+			src.helmet = null
+		else
+			user << "\The [src] does not have anything installed."
+		return
+	else if(istype(W,/obj/item/clothing/head/helmet/space))
+		if(helmet)
+			user << "\The [src] already has a helmet installed."
+		else
+			user << "You attach \the [W] to \the [src]'s helmet mount."
+			user.drop_item()
+			W.loc = src
+			src.helmet = W
+		return
+	else if(istype(W,/obj/item/clothing/shoes/magboots))
+		if(boots)
+			user << "\The [src] already has magboots installed."
+		else
+			user << "You attach \the [W] to \the [src]'s boot mounts."
+			user.drop_item()
+			W.loc = src
+			boots = W
+		return
+
+	..()
