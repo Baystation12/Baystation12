@@ -181,6 +181,7 @@
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
+		src.modules += new /obj/item/device/pipe_painter(src)
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
@@ -210,6 +211,7 @@
 		src.modules += new /obj/item/taperoll/engineering(src)
 		src.modules += new /obj/item/weapon/gripper(src)
 		src.modules += new /obj/item/weapon/matter_decompiler(src)
+		src.modules += new /obj/item/device/pipe_painter(src)
 
 		src.emag = new /obj/item/borg/stun(src)
 

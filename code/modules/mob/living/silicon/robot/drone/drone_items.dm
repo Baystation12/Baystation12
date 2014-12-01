@@ -255,6 +255,8 @@
 			stored_comms["wood"]++
 			stored_comms["wood"]++
 			stored_comms["wood"]++
+		else if(istype(W,/obj/item/pipe))
+			// This allows drones and engiborgs to clear pipe assemblies from floors.
 		else
 			continue
 
