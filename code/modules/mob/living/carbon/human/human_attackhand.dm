@@ -109,10 +109,6 @@
 			var/hit_zone = H.zone_sel.selecting
 			var/datum/organ/external/affecting = get_organ(hit_zone)
 
-			// Check for stomp attack.
-			if(H.shoes && H.shoes.can_stomp())
-				return shoes.handle_stomp(src, H, affecting)
-
 			switch(src.a_intent)
 				if("help")
 					// We didn't see this coming, so we get the full blow
