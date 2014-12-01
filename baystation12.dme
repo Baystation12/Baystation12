@@ -1016,6 +1016,7 @@
 #include "code\modules\mob\living\carbon\human\logout.dm"
 #include "code\modules\mob\living\carbon\human\say.dm"
 #include "code\modules\mob\living\carbon\human\species.dm"
+#include "code\modules\mob\living\carbon\human\unarmed_attack.dm"
 #include "code\modules\mob\living\carbon\human\update_icons.dm"
 #include "code\modules\mob\living\carbon\human\whisper.dm"
 #include "code\modules\mob\living\carbon\human\alien\alien.dm"

@@ -45,7 +45,7 @@
 	//Equipment slots
 	var/obj/item/wear_suit = null
 	var/obj/item/w_uniform = null
-	var/obj/item/shoes = null
+	var/obj/item/clothing/shoes/shoes = null //Why aren't we defining all of these as their most commonly used object type?
 	var/obj/item/belt = null
 	var/obj/item/gloves = null
 	var/obj/item/glasses = null
@@ -82,5 +82,3 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
-
-	var/attack_move = 0 //Used in combat to check if user is performing an attack over several ticks
