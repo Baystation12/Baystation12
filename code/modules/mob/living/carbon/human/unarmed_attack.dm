@@ -109,7 +109,7 @@
 	if(!skill)	skill = 1
 
 	if(target == user)
-		user.visible_message("\red <B>[user] [pick(attack_verb)]ed \himself in the [organ]!</B>")
+		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed \himself in the [organ]!</span>")
 		return 0
 
 	if(!target.lying)
@@ -117,30 +117,30 @@
 			if("head")
 				// ----- HEAD ----- //
 				switch(attack_damage)
-					if(1 to 2)  user.visible_message("\red <B>[user] slapped [target] across \his cheek!</B>")
-					if(3 to 4)	user.visible_message("\red <B>[user] struck [target] in the head[pick("", " with a closed fist")]!</B>")
-					if(5)		user.visible_message("\red <B>[user] gave [target] a resounding slap to the face!</B>")
+					if(1 to 2)  user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
+					if(3 to 4)	user.visible_message("<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] gave [target] a resounding slap to the face!</span>")
 			if("chest", "l_arm", "r_arm", "l_hand", "r_hand")
 				// -- UPPER BODY -- //
 				switch(attack_damage)
-					if(1 to 2)	user.visible_message("\red <B>[user] slapped [target]'s [organ]!</B>")
-					if(3 to 4)	user.visible_message("\red <B>[user] [findtext(zone, "hand")?"[pick(attack_verb)]ed":pick("[pick(attack_verb)]ed", "shoulders")] [target] in \his [organ]!</B>")
-					if(5)		user.visible_message("\red <B>[user] rammed \his [pick(attack_noun)] into [target]'s [organ]!</B>")
+					if(1 to 2)	user.visible_message("<span class='danger'>[user] slapped [target]'s [organ]!</span>")
+					if(3 to 4)	user.visible_message("<span class='danger'>[user] [findtext(zone, "hand")?"[pick(attack_verb)]ed":pick("[pick(attack_verb)]ed", "shoulders")] [target] in \his [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] rammed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
 			if("groin", "l_leg", "r_leg")
 				// -- LOWER BODY -- //
 				switch(attack_damage)
-					if(1 to 2)	user.visible_message("\red <B>[user] gave [target] a light kick to the [organ]!</B>")
-					if(3 to 4)	user.visible_message("\red <B>[user] [pick("kicked", "kneed")] [target] in \his [organ]!</B>")
-					if(5)		user.visible_message("\red <B>[user] landed a strong kick against [target]'s [organ]!</B>")
+					if(1 to 2)	user.visible_message("<span class='danger'>[user] gave [target] a light kick to the [organ]!</span>")
+					if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick("kicked", "kneed")] [target] in \his [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] landed a strong kick against [target]'s [organ]!</span>")
 			if("l_foot", "r_foot")
 				// ----- FEET ----- //
 				switch(attack_damage)
-					if(1 to 4)	user.visible_message("\red <B>[user] kicked [target] in \his [organ]!</B>")
-					if(5)		user.visible_message("\red <B>[user] stomped down hard on [target]'s [organ]!")
+					if(1 to 4)	user.visible_message("<span class='danger'>[user] kicked [target] in \his [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] stomped down hard on [target]'s [organ]!</span>")
 	else if (user.loc != target.loc)
-		user.visible_message("\red <B>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "rams their foot into")] [target]'s [organ]!</B>")
+		user.visible_message("<span class='danger'>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "rams their foot into")] [target]'s [organ]!</span>")
 	else
-		user.visible_message("\red <B>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</B>")
+		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>")
 
 
 /datum/unarmed_attack/diona
@@ -165,22 +165,22 @@
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	if(target == user)
-		user.visible_message("\red <B>[user] [pick(attack_verb)]ed \himself in the [affecting.display_name]!</B>")
+		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed \himself in the [affecting.display_name]!</span>")
 		return 0
 
 	switch(zone)
 		if("head")
 			// ----- HEAD ----- //
 			switch(damage)
-				if(1 to 2)	user.visible_message("\red <B>[user] scratched [target] across \his cheek!</B>")
-				if(3 to 4) 	user.visible_message("\red <B>[user] [pick(attack_verb)]ed [pick("", "the side of")][target] [pick("head", "neck")][pick("", " with spread [pick(attack_noun)]")]!</B>")
-				if(5)		user.visible_message("\red <B>[user] [pick(attack_verb)]ed [target] across \his face!</B>")
+				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
+				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [pick("", "the side of")][target] [pick("head", "neck")][pick("", " with spread [pick(attack_noun)]")]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [target] across \his face!</span>")
 		if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
 			// ----- BODY ----- //
 			switch(damage)
-				if(1 to 2)	user.visible_message("\red <B>[user] scratched [target]'s [affecting.display_name]!</B>")
-				if(3 to 4)	user.visible_message("\red <B>[user] [pick(attack_verb)]ed [pick("", "the side of")][target]'s [affecting.display_name]!</B>")
-				if(5)		user.visible_message("\red <B>[user] digs \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</B>")
+				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target]'s [affecting.display_name]!</span>")
+				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [pick("", "the side of")][target]'s [affecting.display_name]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[user] digs \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")
