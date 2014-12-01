@@ -747,6 +747,12 @@ var/global/list/gear_datums = list()
 	sort_category = "utility"
 	cost = 1
 
+/datum/gear/paicard
+	display_name = "personal AI device"
+	path = /obj/item/device/paicard
+	sort_category = "utility"
+	cost = 3
+
 // The rest of the trash.
 
 /datum/gear/ashtray
