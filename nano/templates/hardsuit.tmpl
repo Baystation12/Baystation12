@@ -5,18 +5,11 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 
 <style type="text/css">
 	.inlineBlock {
-	  padding: 2px; 
-	  display: inline-block;
+		padding: 2px; 
+		display: inline-block;
 	}
-	.extraPadding {
-	  padding-top: 10px;
-	}
-	.offsetCenter {
-		width: 90%;
-		margin: 0 auto;
-	}
-	.info {
-		width: 100px;
+	.extraTopPadding {
+		padding-top: 10px;
 	}
 	.floatLeft {
 		float: left;
@@ -26,37 +19,53 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		border: 1px solid #517087; 
 		padding: 2px;
 	}
+	.redText {
+		color: red;
+	}
+	.orangeText {
+		color: orange;
+	}
+	.greenText {
+		color: green;
+	}
+	.boldText {
+		font-weight: bold;
+	}
+	.textSpanCenter {
+		width: 100%;
+		text-align: center;
+	}
+	<!-- display bar override -->
 	.displayBar {
 		width: 200px;
 	}
 </style>
 
 {{if data.interfacelock || data.malf > 0}}
-	<font color='red' align='center'><strong>-- HARDSUIT INTERFACE OFFLINE --</strong></font>
+	<div class='redText boldText textSpanCenter'>-- HARDSUIT INTERFACE OFFLINE --</div>
 {{else}}
 	{{if data.aicontrol && data.ai != 1}}
-		<font color='red' align='center'><strong>-- HARDSUIT CONTROL OVERRIDDEN BY AI --</strong></font>
+		<div class='redText boldText textSpanCenter'>-- HARDSUIT CONTROL OVERRIDDEN BY AI --</div>
 	{{else}}
 		<div>
-			<div class='inlineBlock extraPadding'>
-				<div class='fixedLeft'>
-					<strong>Power supply</strong>
+			<div class='inlineBlock extraTopPadding'>
+				<div class='fixedLeft boldText'>
+					Power supply
 				</div>
 				<div>
 					{{:helper.displayBar(data.chargestatus, 0, 50, (data.chargestatus >= 35) ? 'good' : (data.chargestatus >= 15) ? 'average' : 'bad')}} {{:data.charge}}/{{:data.maxcharge}}
 				</div>
-				
 			</div>
 			<div>
-				<div class='inlineBlock extraPadding'>
-					<div class='fixedLeft'>
-						<strong>AI control:</strong>
+				<div class='inlineBlock extraTopPadding'>
+					<div class='fixedLeft boldText'>
+						AI control:
 					</div>
 					<div class='fixedLeft'>
 						{{if data.aioverride}}
-							<font color = 'green'><strong>ENABLED</strong></font>
+							<div class='greenText boldText'>ENABLED</div>
 						{{else}}
-							<font color = 'red'><strong>DISABLED</strong></font>
+							<div class='redText boldText'>DISABLED</div>
 						{{/if}}
 					</div>
 					<div class='fixedLeft'>
@@ -64,17 +73,17 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					</div>
 				</div>
 				<div class='inlineBlock'>
-					<div class='fixedLeft'>
-						<strong>Suit status:</strong>
+					<div class='fixedLeft boldText'>
+						Suit status:
 					</div>
 					<div class='fixedLeft'>
 						{{if data.sealing == 1}}
-							<font color = 'orange'><strong>SEALING</strong></font>
+							<div class='orangeText boldText'>SEALING</div>
 						{{else}}
 							{{if data.seals == 1}}
-								<font color = 'red'><strong>OPEN</strong></font>
+								<div class='redText boldText'>OPEN</div>
 							{{else}}
-								<font color = 'green'><strong>SEALED</strong></font>
+								<div class='greenText boldText'>SEALED</div>
 							{{/if}}
 						{{/if}}
 					</div>
@@ -83,17 +92,17 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 					</div>
 				</div>
 				<div class='inlineBlock'>
-					<div class='fixedLeft'>
-						<strong>Cover status:</strong>
+					<div class='fixedLeft boldText'>
+						Cover status:
 					</div>
 					<div class='fixedLeft'>
 						{{if data.emagged || !data.securitycheck}}
-							<font color = 'orange'><strong>ERROR - MAINTENANCE LOCK CONTROL OFFLINE</strong></font>
+							<div class='orangeText boldText'>ERROR - MAINTENANCE LOCK CONTROL OFFLINE</div>
 						{{else}}
 							{{if data.coverlock}}
-								<font color = 'red'><strong>LOCKED</strong></font>
+								<div class='redText boldText'>LOCKED</div>
 							{{else}}
-								<font color = 'green'><strong>UNLOCKED</strong></font>
+								<div class='greenText boldText'>UNLOCKED</div>
 							{{/if}}
 						{{/if}}
 					</div>
@@ -109,21 +118,21 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 
 		<div>
 			<div class='inlineBlock'>
-				<div class='fixedLeft'>
-					<b>Helmet:</b>
+				<div class='fixedLeft boldText'>
+					Helmet:
 				</div>
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.helmet)}}
 				</div>
 				{{if data.sealing != 1}}
 					<div class='fixedLeft'>
-							{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'helmet'}, null)}}
+						{{:helper.link('Toggle', 'circle-arrow-s', {'toggle_piece' : 'helmet'}, null)}}
 					</div>
 				{{/if}}
 			</div>
 			<div class='inlineBlock'>
-				<div class='fixedLeft'>
-					<b>Gauntlets:</b>
+				<div class='fixedLeft boldText'>
+					Gauntlets:
 				</div>
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.gauntlets)}}
@@ -135,8 +144,8 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				{{/if}}
 			</div>
 			<div class='inlineBlock'>
-				<div class='fixedLeft'>
-					<b>Boots:</b>
+				<div class='fixedLeft boldText'>
+					Boots:
 				</div>
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.boots)}}
@@ -148,8 +157,8 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 				{{/if}}
 			</div>
 			<div class='inlineBlock'>
-				<div class='fixedLeft'>
-					<b>Chestpiece:</b>
+				<div class='fixedLeft boldText'>
+					Chestpiece:
 				</div>
 				<div class='fixedLeftWider'>
 					{{:helper.capitalizeFirstLetter(data.chest)}}
@@ -166,39 +175,39 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 		{{if data.seals == 1 || data.sealing == 1}}
 			<h3><div class = 'bad'>HARDSUIT SYSTEMS OFFLINE</div></h3>
 		{{else}}
-			<font align = 'center'><h3>Selected primary system: 
+			<h3>Selected primary system: 
 				{{if data.primarysystem}}
 					{{:helper.capitalizeFirstLetter(data.primarysystem)}}
 				{{else}}
 					None
 				{{/if}}
-			</h3></font>
+			</h3>
 			{{if data.modules}}
 				<div>
 					{{for data.modules}}
 						<div class='inlineBlock'>
-							<div class='paddedBorderBlue floatLeft' style='width: 400px'>
+							<div class='paddedBorderBlue floatLeft' style='width: 420px'>
 								<div class='floatLeft' style='width: 100%'>
 									<div class='average floatLeft'>{{:helper.capitalizeFirstLetter(value.name)}}</div>
 									{{if value.damage > 0}}
 										<div class='floatLeft'>
 											{{if value.damage == 1}}
-												(<font color='orange'>damaged</font>) 
+												(<div class='orangeText'>damaged</div>)
 											{{else}}
-												(<font color='red'>destroyed</font>) 
+												(<div class='redText'>destroyed</div>)
 											{{/if}}
 										</div>
 									{{/if}}
 									<div class='floatLeft' style='width: 100%; clear: left'>
-										<div class='caption floatLeft average' style='width: 23%; margin: 0'>
-												Engage: {{:value.engagecost}} <br>
-												Activate: {{:value.activecost}} <br>
+										<div class='caption floatLeft average' style='width: 20%; margin: 0'>
+												Engage: {{:value.engagecost}} 
+												Activate: {{:value.activecost}} 
 												Passive: {{:value.passivecost}} 
 										</div>
-										<div class='caption floatLeft' style='width: 27%; margin: 0'>
+										<div class='caption floatLeft' style='width: 25%; margin: 0'>
 												{{:value.desc}}
 										</div>
-										<div class='floatLeft' style='width: 40%'>
+										<div class='floatLeft' style='width: 48%'>
 											{{if value.can_use == 1}}
 												<div class='inlineBlock'>
 													{{:helper.link(value.engagestring, 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'engage'}, null)}}
@@ -207,7 +216,7 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 											{{if value.can_select == 1}}
 												<div class='inlineBlock'>
 													{{if value.name == data.primarysystem}}
-														<div class ='good'><strong>SELECTED</strong></div>
+														<div class ='good boldText'>SELECTED</div>
 													{{else}}
 														{{:helper.link('Select', 'circle-arrow-s', {'interact_module' : value.index, 'module_mode' : 'select'}, null)}}
 													{{/if}}
@@ -227,8 +236,8 @@ Used In File(s): /code/modules/clothing/spacesuits/rig/rig.dm
 								</div>
 								<div class='floatLeft' style='clear: left; margin-left: 10px; width: 100%'>
 									{{if value.charges}}
-										<div class='average'><strong>Stored charges</strong></div>
-										<strong>Selected:</strong> {{:helper.capitalizeFirstLetter(value.chargetype)}}
+										<div class='average boldText'>Stored charges</div>
+										<div class='boldText'>Selected:</div> {{:helper.capitalizeFirstLetter(value.chargetype)}}
 										{{for value.charges :itemValue:itemIndex}}
 											<div class='floatLeft' style='padding: 2px 0px'>
 												{{:helper.link(helper.capitalizeFirstLetter(itemValue.caption), null, {'interact_module' : value.index, 'module_mode' : 'select_charge_type', 'charge_type' : itemValue.index}, null)}}
