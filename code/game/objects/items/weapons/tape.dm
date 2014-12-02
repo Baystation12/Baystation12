@@ -5,11 +5,13 @@
 	icon_state = "taperoll"
 	w_class = 1
 
+/* -- Disabled for now until it has a use --
 /obj/item/weapon/tape_roll/attack_self(mob/user as mob)
 	user << "You remove a length of tape from [src]."
 	
 	var/obj/item/weapon/ducttape/tape = new()
 	user.put_in_hands(tape)
+*/
 
 /obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user as mob)
 	if(!istype(W, /obj/item/weapon/paper))
@@ -45,6 +47,9 @@
 	name = W.name + " (taped)"
 
 /obj/item/weapon/ducttape/attack_self(mob/user as mob)
+	if(!stuck)
+		return
+
 	user << "You remove \the [initial(name)] from [stuck]."
 	
 	user.drop_from_inventory(src)
