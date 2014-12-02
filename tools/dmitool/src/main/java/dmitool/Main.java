@@ -40,6 +40,9 @@ public class Main {
             "\tdirection specifier can be a single direction, or direction-direction\n" +
             "\tdirection can be 0-7 or S, N, E, W, SE, SW, NE, NW (non-case-sensitive)\n" +
             
+            "import [file] [state] [in]\n" +
+            "\timport a PNG image from [in] into [file], with the name [state]\n" +
+            "\tinput should be in the same format given by the 'extract' command with no direction or frame arguments\n" +
             "";
     
     public static void main(String[] args) throws FileNotFoundException, IOException, DMIException {
@@ -65,7 +68,7 @@ public class Main {
         String op = argq.pollFirst();
         
         switch(op) {
-            case "diff":
+            case "diff": {
                 if(argq.size() < 2) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -85,7 +88,8 @@ public class Main {
                 DMIDiff dmid = new DMIDiff(dmi, dmi2);
                 System.out.println(dmid);
                 break;
-            case "sort":
+                }
+            case "sort": {
                 if(argq.size() < 1) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -94,13 +98,14 @@ public class Main {
                 String f = argq.pollFirst();
                 
                 if(VERBOSITY >= 0) System.out.println("Loading " + f);
-                dmi = doDMILoad(f);
+                DMI dmi = doDMILoad(f);
                 if(VERBOSITY >= 0) dmi.printInfo();
                 
                 if(VERBOSITY >= 0) System.out.println("Saving " + f);
                 dmi.writeDMI(new FileOutputStream(f), true);
                 break;
-            case "merge":
+                }
+            case "merge": {
                 if(argq.size() < 4) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -145,7 +150,8 @@ public class Main {
                     System.exit(0);
                 }
                 break;
-            case "extract":
+                }
+            case "extract": {
                 if(argq.size() < 3) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -155,7 +161,7 @@ public class Main {
                        state = argq.pollFirst(),
                        outFile = argq.pollFirst();
                 
-                dmi = doDMILoad(file);
+                DMI dmi = doDMILoad(file);
                 if(VERBOSITY >= 0) dmi.printInfo();
                 
                 IconState is = dmi.getIconState(state);
@@ -231,7 +237,44 @@ public class Main {
                 }
                 is.dumpToPNG(new FileOutputStream(outFile), mDir, Mdir, mFrame, Mframe);
                 break;
-            case "verify":
+                }
+            case "import": {
+                if(argq.size() < 3) {
+                    System.out.println("Insufficient arguments for command!");
+                    System.out.println(helpStr);
+                    return;
+                }
+                String dmiFile = argq.pollFirst(),
+                       stateName = argq.pollFirst(),
+                       pngFile = argq.pollFirst();
+                
+                boolean noDup = false;
+                if(!argq.isEmpty()) {
+                    switch(argq.pollFirst().toLowerCase()) {
+                        case "nodup":
+                            noDup = true;
+                            break;
+                    }
+                }
+                
+                if(VERBOSITY >= 0) System.out.println("Loading " + dmiFile);
+                DMI toImportTo = doDMILoad(dmiFile);
+                if(VERBOSITY >= 0) toImportTo.printInfo();
+                //public static IconState importFromPNG(DMI dmi, InputStream inS, String name) throws DMIException {
+                IconState is = IconState.importFromPNG(toImportTo, new FileInputStream(pngFile), stateName);
+                
+                
+                if(!(noDup && toImportTo.setIconState(is))) {
+                    toImportTo.addIconState(null, is);
+                }
+                
+                if(VERBOSITY >= 0) toImportTo.printInfo();
+                
+                if(VERBOSITY >= 0) System.out.println("Saving " + dmiFile);
+                toImportTo.writeDMI(new FileOutputStream(dmiFile));
+                break;
+                }
+            case "verify": {
                 if(argq.size() < 1) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -242,6 +285,7 @@ public class Main {
                 DMI v = doDMILoad(vF);
                 if(VERBOSITY >= 0) v.printInfo();
                 break;
+                }
             default:
                 System.out.println("Command '" + op + "' not found!");
             case "help":

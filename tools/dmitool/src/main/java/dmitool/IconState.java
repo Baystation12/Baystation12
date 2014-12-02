@@ -4,6 +4,9 @@ import java.util.Arrays;
 import ar.com.hjg.pngj.ImageInfo;
 import ar.com.hjg.pngj.ImageLineInt;
 import ar.com.hjg.pngj.PngWriter;
+import ar.com.hjg.pngj.PngReader;
+import ar.com.hjg.pngj.PngjInputException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public class IconState {
@@ -144,4 +147,95 @@ public class IconState {
         }
         out.end();
     }
+    
+    public static IconState importFromPNG(DMI dmi, InputStream inS, String name) throws DMIException {
+        int w = dmi.w;
+        int h = dmi.h;
+        
+        PngReader in;
+        try {
+            in = new PngReader(inS);
+        } catch(PngjInputException pie) {
+            throw new DMIException("Bad file format!", pie);
+        }
+        int pxW = in.imgInfo.cols;
+        int pxH = in.imgInfo.rows;
+        int frames = pxW / w;
+        int dirs = pxH / h;
+        
+        // make sure the size is an integer multiple
+        if(frames * w != pxW || frames==0) throw new DMIException("Illegal image size!");
+        if(dirs * h != pxH || dirs==0) throw new DMIException("Illegal image size!");
+        
+        int[][] px = new int[pxH][];
+        for(int i=0; i<pxH; i++) {
+            ImageLineInt ili = (ImageLineInt)in.readRow();
+            int[] sl = ili.getScanline();
+            px[i] = sl.clone();
+        }
+        
+        Image[] images = new Image[frames*dirs];
+        for(int imageY=0; imageY<dirs; imageY++) {
+            for(int imageX=0; imageX<frames; imageX++) {
+                RGBA[][] pixels = new RGBA[h][w];
+                for(int pixelY=0; pixelY<h; pixelY++) {
+                    for(int pixelX=0; pixelX<w; pixelX++) {
+                        int bY = imageY*h + pixelY;
+                        int bX = imageX*4*w + 4*pixelX;
+                        pixels[pixelY][pixelX] = new RGBA(px[bY][bX    ],
+                                                          px[bY][bX + 1],
+                                                          px[bY][bX + 2],
+                                                          px[bY][bX + 3]);
+                    }
+                }
+                images[imageY + imageX*dirs] = new NonPalettedImage(w, h, pixels);
+            }
+        }
+        
+        float[] delays = null;
+        if(frames != 1) {
+            delays = new float[frames];
+            for(int i=0; i<delays.length; i++) {
+                delays[i] = 1;
+            }
+        }
+        //public IconState(String name, int dirs, int frames, Image[] images, float[] delays, boolean rewind, int loop, String hotspot, boolean movement) {
+        return new IconState(name, dirs, frames, images, delays, false, -1, null, false);
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

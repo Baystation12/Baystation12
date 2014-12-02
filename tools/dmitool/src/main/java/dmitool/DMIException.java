@@ -8,6 +8,9 @@ public class DMIException extends Exception {
         desc = descriptor;
         this.line = line;
     }
+    public DMIException(String what) {
+        super(what);
+    }
     public DMIException(String what, Exception cause) {
         super(what, cause);
     }
