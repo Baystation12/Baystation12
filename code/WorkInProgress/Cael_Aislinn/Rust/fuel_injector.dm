@@ -294,7 +294,7 @@
 	if (usr.stat || usr.restrained()  || anchored)
 		return
 
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/power/rust_fuel_injector/verb/rotate_anticlock()
 	set category = "Object"
@@ -304,4 +304,4 @@
 	if (usr.stat || usr.restrained()  || anchored)
 		return
 
-	src.dir = turn(src.dir, -90)
+	src.set_dir(turn(src.dir, -90))

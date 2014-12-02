@@ -155,7 +155,7 @@
 	//latch with src as the follower
 	lead = T
 	T.tow = src
-	dir = lead.dir
+	set_dir(lead.dir)
 	
 	if(user)
 		user << "\blue You hitch [src] to [T]."

@@ -138,7 +138,7 @@ its easier to just keep the beam vertical.
 	//of range or to another z-level, then the beam will stop.  Otherwise it will
 	//continue to draw.
 
-		dir=get_dir(src,BeamTarget)	//Causes the source of the beam to rotate to continuosly face the BeamTarget.
+		set_dir(get_dir(src,BeamTarget))	//Causes the source of the beam to rotate to continuosly face the BeamTarget.
 
 		for(var/obj/effect/overlay/beam/O in orange(10,src))	//This section erases the previously drawn beam because I found it was easier to
 			if(O.BeamSource==src)				//just draw another instance of the beam instead of trying to manipulate all the
@@ -208,6 +208,11 @@ its easier to just keep the beam vertical.
 // see code/modules/mob/mob_movement.dm for more.
 /atom/proc/relaymove()
 	return
+
+//called to set the atom's dir and used to add behaviour to dir-changes
+/atom/proc/set_dir(new_dir)
+	. = new_dir != dir
+	dir = new_dir
 
 /atom/proc/ex_act()
 	return

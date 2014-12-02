@@ -55,7 +55,7 @@
 
 		if(load)
 			load.forceMove(loc)// = loc
-			load.dir = dir
+			load.set_dir(dir)
 
 		return 1
 	else
@@ -140,7 +140,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
 	pulse2.anchored = 1
-	pulse2.dir = pick(cardinal)
+	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
 		pulse2.delete()
@@ -152,9 +152,6 @@
 			turn_on()
 
 /obj/vehicle/attack_ai(mob/user as mob)
-	return
-
-/obj/vehicle/proc/handle_rotation()
 	return
 
 //-------------------------------------------
@@ -273,7 +270,7 @@
 		crate.close()
 
 	C.forceMove(loc)
-	C.dir = dir
+	C.set_dir(dir)
 	C.anchored = 1
 
 	load = C
@@ -325,7 +322,7 @@
 		return 0
 
 	load.forceMove(dest)
-	load.dir = get_dir(loc, dest)
+	load.set_dir(get_dir(loc, dest))
 	load.anchored = initial(load.anchored)
 	load.pixel_x = initial(load.pixel_x)
 	load.pixel_y = initial(load.pixel_y)

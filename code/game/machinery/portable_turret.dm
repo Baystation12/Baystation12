@@ -525,7 +525,7 @@
 	if(target && (target.stat != DEAD) && (!(target.lying) || emagged))
 		spawn()
 			popUp()				//pop the turret up if it's not already up.
-		dir = get_dir(src, target)	//even if you can't shoot, follow the target
+		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
 		spawn()
 			shootAt(target)
 		return 1
