@@ -486,7 +486,13 @@ BLIND     // can't see anything
 	src.remove_accessory(usr)
 
 /obj/item/clothing/under/rank/New()
-	sensor_mode = pick(0,1,2,3)
+	if(prob(75))
+		if(prob(75))
+			sensor_mode = pick(2,3)
+		else
+			sensor_mode = 1
+	else
+		sensor_mode = 0
 	..()
 
 /obj/item/clothing/under/emp_act(severity)

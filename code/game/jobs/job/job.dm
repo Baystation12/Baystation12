@@ -41,6 +41,9 @@
 	//If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/minimal_player_age = 0
 
+	//Are ya Rubbed, or naahhhh...?
+	var/required_key = "None"
+
 /datum/job/proc/equip(var/mob/living/carbon/human/H)
 	return 1
 
@@ -59,6 +62,16 @@
 		return 1	//Available in 0 days = available right now = player is old enough to play.
 	return 0
 
+/datum/job/proc/forbidden(client/C, var/datum/job/job)
+	if(!C)
+		return 0
+	if(!C.key)
+		return 0
+	if(job.required_key == "None")
+		return 0
+	if( (job.required_key != "None") && (C.key == job.required_key) )
+		return 0
+	return 1
 
 /datum/job/proc/available_in_days(client/C)
 	if(!C)

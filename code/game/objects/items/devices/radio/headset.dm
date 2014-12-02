@@ -194,7 +194,7 @@
 
 /obj/item/device/radio/headset/rb
 	name = "RB Station headset"
-	desc = "The headset of the captain of RB Station 2. Channels are as follows: :h - Response Team :c - command, :s - security, :e - engineering, :d - mining, :q - cargo, :m - medical, :n - science."
+	desc = "The headset that belongs to the captain of RB Station 2. Channels are as follows: :h - Response Team :c - command, :s - security, :e - engineering, :d - mining, :q - cargo, :m - medical, :n - science."
 	icon_state = "com_headset"
 	item_state = "headset"
 	freerange = 1

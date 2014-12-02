@@ -65,8 +65,8 @@
 
 	var/obj/item/weapon/secbot_assembly = /obj/item/weapon/secbot_assembly
 
-	var/list/threat_found_sounds = new('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
-	var/list/preparing_arrest_sounds = new('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
+	var/list/threat_found_sounds = list('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
+	var/list/preparing_arrest_sounds = list('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
 
 /obj/machinery/bot/secbot/beepsky
 	name = "Officer Beep O'sky"
@@ -96,9 +96,9 @@
 			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 		if(lasercolor)
-			shot_delay = 6		//Longer shot delay because JESUS CHRIST
+			shot_delay = 6	//Longer shot delay because JESUS CHRIST
 			check_records = 0	//Don't actively target people set to arrest
-			arrest_type = 1		//Don't even try to cuff
+			arrest_type = 1	//Don't even try to cuff
 			req_access = list(access_maint_tunnels)
 			arrest_type = 1
 			if((lasercolor == "b") && (name == created_name))//Picks a name if there isn't already a custome one

@@ -14,6 +14,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
+	required_key = "Rubbed"
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/rb(H), slot_l_ear)
@@ -41,7 +42,10 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		return 1
 
 	get_access()
-		return get_all_accesses()
+		var/cap = get_all_accesses()
+		var/cent = get_all_centcom_access()
+		var/totalaccess = cap + cent
+		return totalaccess
 
 
 

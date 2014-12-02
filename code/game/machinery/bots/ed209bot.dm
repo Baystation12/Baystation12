@@ -3,6 +3,7 @@
 	desc = "A security robot.  He looks less than thrilled."
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "ed2090"
+	idcheck = 1
 	density = 1
 	health = 100
 	maxhealth = 100
@@ -10,9 +11,13 @@
 	bot_version = "2.5"
 	search_range = 12
 	has_laser = 1
-
-	preparing_arrest_sounds = new()
+	threat_found_sounds = list('sound/voice/ed209_20sec.ogg')
+	preparing_arrest_sounds = list('sound/voice/ed209_growl.ogg')
 	secbot_assembly = /obj/item/weapon/secbot_assembly/ed209_assembly
+
+/obj/machinery/bot/secbot/ed209/Rob
+	name = "Rob"
+	desc = "That's Rob, your friendly neighborhood \red ROBOTIC DEATH-BRINGER."
 
 /obj/item/weapon/secbot_assembly/ed209_assembly
 	name = "ED-209 assembly"

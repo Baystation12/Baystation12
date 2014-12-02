@@ -5946,7 +5946,7 @@
 "ckr" = (/obj/machinery/atmospherics/pipe/simple/hidden/cyan{dir = 9; icon_state = "intact"; tag = "icon-intact-f (NORTHWEST)"},/turf/simulated/floor,/area/hallway/primary/aft)
 "cks" = (/obj/machinery/door/window/eastright{name = "Engineering Reception Desk"; req_one_access_txt = "10;24"},/obj/machinery/light,/turf/simulated/floor,/area/hallway/primary/aft)
 "ckt" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor{dir = 8; icon_state = "yellowcorner"},/area/hallway/primary/aft)
-"cku" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/bot/secbot/ed209{auto_patrol = 1; declare_arrests = 1; desc = "That's Robo-Bro the DEATH BRINGER. He looks rather thrilled."; idcheck = 1; name = "Robo-Bro"},/turf/simulated/floor,/area/hallway/primary/aft)
+"cku" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/machinery/bot/secbot/ed209/Rob,/turf/simulated/floor,/area/hallway/primary/aft)
 "ckv" = (/obj/structure/disposalpipe/junction{icon_state = "pipe-j2"; dir = 2},/turf/simulated/floor{dir = 2; icon_state = "yellowcorner"},/area/hallway/primary/aft)
 "ckw" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 8},/turf/simulated/floor{dir = 2; icon_state = "yellowcorner"},/area/hallway/primary/aft)
 "ckx" = (/obj/structure/closet/secure_closet/atmos_personal,/obj/item/weapon/tank/emergency_oxygen/engi,/turf/simulated/floor,/area/engine/locker_room)

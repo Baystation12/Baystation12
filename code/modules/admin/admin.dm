@@ -692,7 +692,7 @@ var/global/floorIsLava = 0
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
-		world << "\red <b>Restarting world!</b> \blue Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!"
+		world << "\red <b>Restarting world!</b> \blue Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!\n\red T- \blue 25 \red Seconds...."
 		log_admin("[key_name(usr)] initiated a reboot.")
 
 		feedback_set_details("end_error","admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
@@ -701,6 +701,14 @@ var/global/floorIsLava = 0
 		if(blackbox)
 			blackbox.save_all_data_to_sql()
 
+
+		sleep(50)
+		world << "\red <b>20</b>..."
+		sleep(50)
+		world << "\red <b>15</b>.."
+		sleep(50)
+		world << "\red <b>10</b>."
+		sleep(50)
 		world << "\red <b>5</b>"
 		sleep(10)
 		world << "\red <b>4</b>"
@@ -711,7 +719,7 @@ var/global/floorIsLava = 0
 		sleep(10)
 		world << "\red <b>1</b>"
 		sleep(10)
-		world << "\blue <b>Bye!</b>"
+		world << "\blue <b>Restarting world!</b>"
 		world.Reboot()
 
 
