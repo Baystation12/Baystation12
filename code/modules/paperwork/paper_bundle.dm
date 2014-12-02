@@ -64,9 +64,6 @@
 		update_icon()
 	
 	else
-		//update_icon()
-		//attack_self(usr) //Update the browsed page.
-		//add_fingerprint(usr)
 		..()
 
 //Render the page's content
@@ -152,6 +149,8 @@
 			screen |= SHOW_LINK_PREV
 		if (page < contents.len)
 			screen |= SHOW_LINK_NEXT
+		
+		update_page_icon()
 
 /obj/item/weapon/paperwork/bundle/verb/remove_all()
 	set name = "Loosen Bundle"
@@ -187,6 +186,9 @@
 	if (page < contents.len)
 		screen |= SHOW_LINK_NEXT
 	
+	updateUsrDialog()
+	
+	desc = "[contents.len] pages clipped to each other."
 	switch (contents.len)
 		if (1 to 2)
 			throwforce = 0
@@ -204,52 +206,37 @@
 			throw_range = 3
 			throw_speed = 1
 		if (9 to 16)
+			desc = "A huge stack of papers."
 			throwforce = 3
 			w_class = 3
 			throw_range = 5
 			throw_speed = 2
 		if (17 to INFINITY)
+			desc = "An enormous stack of papers!"
 			throwforce = 5
 			w_class = 4
 			throw_range = 7
 			throw_speed = 3
 
 /obj/item/weapon/paperwork/bundle/update_icon()
-	var/obj/item/weapon/paperwork/paper/P = src[1]
+	update_page_icon()
+	
+	var/papercount = 1
+	for(var/obj/item/weapon/paperwork/O in contents)
+		if (O == src[page]) continue
+		
+		var/image/img = image(O.icon)
+		img.icon_state = O.icon_state
+		img.pixel_x -= min(1*papercount, 2)
+		img.pixel_y -= min(1*papercount, 2)
+		pixel_x = min(0.5*papercount, 1)
+		pixel_y = min(  1*papercount, 2)
+		underlays += img
+		papercount++
+
+/obj/item/weapon/paperwork/bundle/proc/update_page_icon()
+	var/obj/item/weapon/paperwork/P = src[page]
+	icon = P.icon
 	icon_state = P.icon_state
 	overlays = P.overlays
-	underlays = 0
-	var/papercount = 0
-	var/photo
-	
-	for(var/obj/O in src.contents)
-		//TODO#paperwork Include the photo icon in here instead of this snowflake stuff
-		var/image/img = image('icons/obj/bureaucracy.dmi')
-		if(istype(O, /obj/item/weapon/paperwork/paper))
-			img.icon_state = O.icon_state
-			img.pixel_x -= min(1*papercount, 2)
-			img.pixel_y -= min(1*papercount, 2)
-			pixel_x = min(0.5*papercount, 1)
-			pixel_y = min(  1*papercount, 2)
-			underlays += img
-			papercount++
-		else if(!photo && istype(O, /obj/item/weapon/paperwork/photo))
-			var/obj/item/weapon/paperwork/photo/Ph = O
-			img = Ph.tiny
-			photo = 1
-			overlays += img
-	
-	switch (papercount)
-		if (1)
-			desc = "A single sheet of paper."
-		if (2 to 8)
-			desc = "[papercount] papers clipped to each other."
-		if (9 to 16)
-			desc = "A huge stack of papers."
-		if (17 to INFINITY)
-			desc = "An enormous stack of papers!"
-	if (photo)
-		desc += "\nThere is a photo attached to it."
-	
 	overlays += image('icons/obj/bureaucracy.dmi', "clip")
-	return

@@ -3,6 +3,9 @@
 	var/imbue = null
 	var/uses = 0
 
+	update_icon()
+		icon_state = "paper_talisman"
+
 	attack_self(mob/living/user as mob)
 		if(iscultist(user))
 			var/delete = 1

@@ -60,32 +60,14 @@
 	pixel_x = rand(-9, 9)
 	update_icon()
 
+/obj/item/weapon/paperwork/paper/initialize()
+	update_icon()
+
 /obj/item/weapon/paperwork/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
-	if((CLUMSY in usr.mutations) && prob(50))
-		usr << "<span class='warning'>You cut yourself on the paper.</span>"
-		if (ishuman(usr))
-			var/mob/living/carbon/human/H = usr
-			H.drip(1)
-		return
-	
-	..()
-	
-	if(istype(P, /obj/item/weapon/paperwork))
-		create_bundle(P, user)
-
-	else if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
+	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
 		show_content(user, editing=1)
-
-
-/obj/item/weapon/paperwork/paper/attack_self(mob/user as mob)
-	if((CLUMSY in usr.mutations) && prob(50))
-		usr << "<span class='warning'>You cut yourself on the paper.</span>"
-		if (ishuman(usr))
-			var/mob/living/carbon/human/H = usr
-			H.drip(1)
-		return
-	
-	..()
+	else
+		..()
 
 //TODO#paperwork Stamps
 /obj/item/weapon/paperwork/paper/render_content(mob/user=null, var/editing=0)
@@ -143,12 +125,10 @@
 		cached_content_edit += stamp_content
 
 /obj/item/weapon/paperwork/paper/update_icon()
-	if(icon_state == "paper_talisman")
-		return
 	if((text_content && text_content.len) || info)
 		icon_state = "paper_words"
-		return
-	icon_state = "paper"
+	else
+		icon_state = "paper"
 
 /obj/item/weapon/paperwork/paper/Topic(href, href_list)
 	world << "write_content: [href_list["write_content"]]"

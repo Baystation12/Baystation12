@@ -68,7 +68,17 @@
 		user << "<span class='notice'>You clip [other_name] to \the [src].</span>"
 
 /obj/item/weapon/paperwork/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/stamp))
+	if((CLUMSY in user.mutations) && prob(50))
+		user << "<span class='warning'>You cut yourself on the [initial(name)].</span>"
+		if (ishuman(user))
+			var/mob/living/carbon/human/H = user
+			H.drip(1)
+		return
+
+	if(istype(W, /obj/item/weapon/paperwork))
+		create_bundle(W, user)
+
+	else if(istype(W, /obj/item/weapon/stamp))
 		var/obj/item/weapon/stamp/S = W
 		var/datum/stamp/DS = S.create_stamp()
 		stamped += DS
@@ -79,16 +89,23 @@
 
 	else if(istype(W, /obj/item/weapon/flame))
 		burnpaper(W, user)
-	
+
 	else if(istype(W, /obj/item/weapon/pen/robopen))
 		var/obj/item/weapon/pen/robopen/R = W
 		if(R.mode == 2)
 			R.RenamePaper(user,src)
-	
+
 	else
 		..()
 
 /obj/item/weapon/paperwork/attack_self(mob/user)
+	if((CLUMSY in user.mutations) && prob(50))
+		user << "<span class='warning'>You cut yourself on the [initial(name)].</span>"
+		if (ishuman(user))
+			var/mob/living/carbon/human/H = user
+			H.drip(1)
+		return
+
 	show_content(user)
 
 /obj/item/weapon/paperwork/examine(mob/user)
