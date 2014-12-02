@@ -28,6 +28,13 @@
 
 	var/obj/item/wrapped = null // Item currently being held.
 
+// VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
+/obj/item/weapon/gripper/miner
+	can_hold = list(
+	/obj/item/weapon/cell,
+	/obj/item/weapon/stock_parts
+	)
+
 /obj/item/weapon/gripper/paperwork
 	name = "paperwork gripper"
 	desc = "A simple grasping tool for clerical work."
@@ -249,6 +256,8 @@
 			stored_comms["wood"]++
 			stored_comms["wood"]++
 			stored_comms["wood"]++
+		else if(istype(W,/obj/item/pipe))
+			// This allows drones and engiborgs to clear pipe assemblies from floors.
 		else
 			continue
 
