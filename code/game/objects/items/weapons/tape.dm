@@ -37,8 +37,8 @@
 	..()
 	flags |= NOBLUDGEON
 
-/obj/item/weapon/ducttape/examine()
-	return stuck.examine()
+/obj/item/weapon/ducttape/examine(mob/user as mob)
+	return stuck.examine(user)
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W
