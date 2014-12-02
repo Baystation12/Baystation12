@@ -1263,6 +1263,8 @@
 	name = "Jordan's Magboots"
 	desc = "A colorful pair of magboots with the name Jordan clearly written on the back."
 	icon = 'icons/obj/custom_items.dmi'
+	icon_state_active = "atmosmagboots1"
+	icon_state_inactive = "atmosmagboots0"
 	icon_state = "atmosmagboots0"
 
 /obj/item/clothing/shoes/jackboots/fluff/hal_ishimaru_1	//YankeeSamurai: Hal Ishimaru
