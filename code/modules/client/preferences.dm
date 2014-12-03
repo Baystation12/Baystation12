@@ -948,7 +948,7 @@ datum/preferences
 			var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
 
 			if(medmsg != null)
-				medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				medmsg = copytext(medmsg, 1, MAX_RECORDS)
 				medmsg = html_encode(medmsg)
 
 				med_record = medmsg
@@ -958,7 +958,7 @@ datum/preferences
 			var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
 
 			if(secmsg != null)
-				secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				secmsg = copytext(secmsg, 1, MAX_RECORDS)
 				secmsg = html_encode(secmsg)
 
 				sec_record = secmsg
@@ -967,7 +967,7 @@ datum/preferences
 			var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
 
 			if(genmsg != null)
-				genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				genmsg = copytext(genmsg, 1, MAX_RECORDS)
 				genmsg = html_encode(genmsg)
 
 				gen_record = genmsg
@@ -977,7 +977,7 @@ datum/preferences
 			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
 
 			if(exploitmsg != null)
-				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				exploitmsg = copytext(exploitmsg, 1, MAX_RECORDS)
 				exploitmsg = html_encode(exploitmsg)
 
 				exploit_record = exploitmsg
