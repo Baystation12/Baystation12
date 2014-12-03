@@ -171,6 +171,28 @@ var/list/alldepartments = list("Central Command")
 		else
 			user << "<span class='notice'>There is already something in \the [src].</span>"
 
+	if(istype(O, /obj/item/weapon/paper_bundle))
+		if(!tofax)
+			user.drop_item()
+			tofax = O
+			O.loc = src
+			user << "<span class='notice'>You insert the paper bundle into \the [src].</span>"
+			flick("faxsend", src)
+			updateUsrDialog()
+		else
+			user << "<span class='notice'>There is already something in \the [src].</span>"
+
+	if(istype(O, /obj/item/weapon/photo))
+		if(!tofax)
+			user.drop_item()
+			tofax = O
+			O.loc = src
+			user << "<span class='notice'>You insert the photo into \the [src].</span>"
+			flick("faxsend", src)
+			updateUsrDialog()
+		else
+			user << "<span class='notice'>There is already something in \the [src].</span>"
+
 	else if(istype(O, /obj/item/weapon/card/id))
 
 		var/obj/item/weapon/card/id/idcard = O

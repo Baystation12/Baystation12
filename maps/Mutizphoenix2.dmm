@@ -11546,7 +11546,7 @@
 "eob" = (/turf/simulated/floor/carpet,/area/bridge)
 "eoc" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/bridge)
 "eod" = (/obj/machinery/computer/security{pixel_y = 32},/obj/structure/table/woodentable,/obj/item/weapon/book/manual/security_space_law,/obj/item/weapon/book/manual/security_space_law,/turf/simulated/floor/carpet,/area/bridge)
-"eoe" = (/obj/structure/stool/bed/chair{dir = 1},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/carpet,/area/bridge)
+"eoe" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/stool/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/carpet,/area/bridge)
 "eof" = (/obj/machinery/computer/station_alert{pixel_y = 32},/obj/structure/table/woodentable,/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/obj/item/weapon/pen,/turf/simulated/floor/carpet,/area/bridge)
 "eog" = (/obj/structure/table/woodentable,/obj/item/device/megaphone,/turf/simulated/floor/carpet,/area/bridge)
 "eoh" = (/obj/structure/disposalpipe/segment,/obj/machinery/light/emergency/small{dir = 4},/turf/simulated/floor/carpet,/area/bridge)
