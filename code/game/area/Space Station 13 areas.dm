@@ -1048,6 +1048,7 @@ var/list/ghostteleportlocs = list()
 
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
+	has_gravity = 0
 
 
 
