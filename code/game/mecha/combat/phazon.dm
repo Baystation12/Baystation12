@@ -5,28 +5,24 @@
 	initial_icon = "phazon"
 	step_in = 1
 	dir_in = 1 //Facing North.
-	step_energy_drain = 3
-	health = 200
-	deflect_chance = 30
+	step_energy_drain = 0
+	health = 500
+	deflect_chance = 75
 	damage_absorption = list("brute"=0.7,"fire"=0.7,"bullet"=0.7,"laser"=0.7,"energy"=0.7,"bomb"=0.7)
-	max_temperature = 25000
+	max_temperature = 100000
 	infra_luminosity = 3
 	wreckage = /obj/effect/decal/mecha_wreckage/phazon
 	add_req_access = 1
 	//operation_req_access = list()
-	internal_damage_threshold = 25
-	force = 15
+	internal_damage_threshold = 50
+	force = 25
 	var/phasing = 0
-	var/phasing_energy_drain = 200
-	max_equip = 4
+	var/phasing_energy_drain = 0
+	max_equip = 15
 
 
 /obj/mecha/combat/phazon/New()
 	..()
-	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/rcd
-	ME.attach(src)
-	ME = new /obj/item/mecha_parts/mecha_equipment/gravcatapult
-	ME.attach(src)
 	return
 
 /obj/mecha/combat/phazon/Bump(var/atom/obstacle)
