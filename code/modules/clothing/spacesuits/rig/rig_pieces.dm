@@ -27,6 +27,7 @@
 	heat_protection = FEET
 	species_restricted = null
 	gender = PLURAL
+	icon_base = null
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"

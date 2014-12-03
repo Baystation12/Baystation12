@@ -25,7 +25,7 @@
 			del(src)
 			return
 
-		dir = get_dir(T, loc)
+		set_dir(get_dir(T, loc))
 
 /obj/machinery/constructable_frame/wallmount_frame/attackby(obj/item/P as obj, mob/user as mob)
 	if(P.crit_fail)
@@ -109,7 +109,7 @@
 				if(component_check)
 					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
-					new_machine.dir = dir
+					new_machine.set_dir(dir)
 					if(istype(circuit, /obj/item/weapon/circuitboard/status_display))
 						new_machine.pixel_x = pixel_x * 1.33
 						new_machine.pixel_y = pixel_y * 1.33

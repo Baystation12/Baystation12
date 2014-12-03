@@ -248,7 +248,7 @@
 /obj/machinery/atmospherics/trinary/filter/m_filter
 	icon_state = "mmap"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH|NORTH|EAST
 
 obj/machinery/atmospherics/trinary/filter/m_filter/New()

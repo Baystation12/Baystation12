@@ -402,7 +402,7 @@ steam.start() -- spawns the effect
 					if(istype(T, /turf/space))
 						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
 						src.oldposition = T
-						I.dir = src.holder.dir
+						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
@@ -449,7 +449,7 @@ steam.start() -- spawns the effect
 					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
-					I.dir = src.holder.dir
+					I.set_dir(src.holder.dir)
 					spawn(10)
 						I.delete()
 						src.number--

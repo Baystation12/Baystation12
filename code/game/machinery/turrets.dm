@@ -232,7 +232,7 @@
 
 /obj/machinery/turret/proc/target()
 	while(src && enabled && !stat && check_target(cur_target))
-		src.dir = get_dir(src, cur_target)
+		src.set_dir(get_dir(src, cur_target))
 		shootAt(cur_target)
 		sleep(shot_delay)
 	return
@@ -487,7 +487,7 @@
 		if(!target)
 			cur_target = null
 			return
-		src.dir = get_dir(src,target)
+		src.set_dir(get_dir(src,target))
 		var/turf/targloc = get_turf(target)
 		var/target_x = targloc.x
 		var/target_y = targloc.y

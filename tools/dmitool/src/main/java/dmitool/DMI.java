@@ -346,7 +346,7 @@ public class DMI implements Comparator<IconState> {
         int iy = sy * h;
         ImageInfo ii = new ImageInfo(ix, iy, 8, true);
         PngWriter out = new PngWriter(baos, ii);
-        out.setCompLevel(9);
+        out.setCompLevel(9); // Maximum compression
         String description = getDescriptor();
         if(Main.VERBOSITY > 0) System.out.println("Descriptor has " + (description.split("\n").length) + " lines.");
         out.getMetadata().setText("Description", description, true, true);
@@ -366,8 +366,6 @@ public class DMI implements Comparator<IconState> {
                 }
             }
         }
-        
-        //int[] buf = new int[ix];
         
         for(int irow=0; irow<iy; irow++) {
             ImageLineInt ili = new ImageLineInt(ii);

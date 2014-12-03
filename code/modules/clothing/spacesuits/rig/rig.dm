@@ -63,6 +63,7 @@
 	var/malfunction_delay = 0
 	var/electrified = 0
 	var/locked_down = 0
+	var/locked_dna = null
 
 	var/sealing                                               // Keeps track of seal status independantly of canremove.
 	var/offline = 1                                           // Should we be applying suit maluses?
@@ -122,6 +123,8 @@
 		verbs |= /obj/item/weapon/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
+		if(allowed)
+			chest.allowed = allowed
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -136,12 +139,6 @@
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
-
-	spawn(1)
-		var/mob/M = loc
-		if(istype(M))
-			toggle_seals(M,1)
-			update_icon()
 
 /obj/item/weapon/rig/Del()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
@@ -169,9 +166,6 @@
 
 	if(sealing) return
 
-	if(M && !(istype(M) && M.back == src ) && !istype(M,/mob/living/silicon) )
-		return 0
-
 	if(!check_power_cost(M))
 		return 0
 
@@ -187,19 +181,13 @@
 		M << "<span class='danger'>The suit flashes an error light. It can't function properly without being fully deployed.</span>"
 		failed_to_seal = 1
 
-	if(!failed_to_seal && instant)
-		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
-			if(!piece) continue
-			piece.icon_state = "[initial(icon_state)]_sealed"
-		update_icon()
+	if(!failed_to_seal)
 
-	else if(!failed_to_seal)
-
-		M << "<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>"
-
-		if(!do_after(M,SEAL_DELAY))
-			if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
-			failed_to_seal = 1
+		if(!instant)
+			M << "<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>"
+			if(!do_after(M,SEAL_DELAY))
+				if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
+				failed_to_seal = 1
 
 		if(!M)
 			failed_to_seal = 1
@@ -220,7 +208,12 @@
 					failed_to_seal = 1
 					break
 
-				if(M.back == src && piece == compare_piece && do_after(M,SEAL_DELAY))
+				if(M.back == src && piece == compare_piece)
+
+					if(!instant)
+						if(!do_after(M,SEAL_DELAY))
+							failed_to_seal = 1
+
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
 					switch(msg_type)
 						if("boots")
@@ -235,15 +228,17 @@
 						if("helmet")
 							M << "<font color='blue'>\The [piece] hisses [!seal_target ? "closed" : "open"].</font>"
 							M.update_inv_head()
-							if(!seal_target)
-								if(flags & AIRTIGHT)
-									helmet.flags |= AIRTIGHT
-								helmet.flags_inv |= (HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered |= (FACE|EYES)
-							else
-								helmet.flags &= ~AIRTIGHT
-								helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
-								helmet.body_parts_covered &= ~(FACE|EYES)
+							if(helmet)
+								if(!seal_target)
+									if(flags & AIRTIGHT)
+										helmet.flags |= AIRTIGHT
+									helmet.flags_inv |= (HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered |= (FACE|EYES)
+								else
+									helmet.flags &= ~AIRTIGHT
+									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
+									helmet.body_parts_covered &= ~(FACE|EYES)
+								helmet.update_light(wearer)
 				else
 					failed_to_seal = 1
 
@@ -287,6 +282,10 @@
 			piece.flags |=  STOPSPRESSUREDMAGE
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
+
+	if(instant && air_supply)
+		wearer.internals = air_supply
+		wearer.internals.icon_state = "internal1"
 
 /obj/item/weapon/rig/process()
 
@@ -438,7 +437,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 750, 550)
+		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -473,45 +472,59 @@
 		wearer.update_inv_back()
 	return
 
+/obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
+
+	if(!security_check_enabled)
+		return 1
+
+	if(istype(user))
+		if(user.back != src)
+			return 0
+		if(locked_dna)
+			if(!user.dna || user.dna.unique_enzymes != locked_dna)
+				user << "<span class='danger'>DNA scan mismatch. Access denied.</span>"
+				return 0
+		else if(!src.allowed(user))
+			user << "<span class='danger'>Unauthorized user. Access denied.</span>"
+			return 0
+
+	else if(user.loc && user.loc.loc && istype(user.loc.loc,/obj/item/rig_module/ai_container))
+		if(!ai_override_enabled)
+			user << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
+			return 0
+
+	return 1
+
 /obj/item/weapon/rig/Topic(href,href_list)
 
-	var/mob/living/carbon/human/H = usr
+	if(!check_suit_access(usr))
+		return
 
-	if((istype(H) && H.back == src) || (istype(H,/mob/living/silicon)))
+	if(href_list["toggle_piece"])
+		toggle_piece(href_list["toggle_piece"], usr)
+	else if(href_list["toggle_seals"])
+		toggle_seals(usr)
+	else if(href_list["interact_module"])
 
-		if(istype(H,/mob/living/silicon))
-			if(!control_overridden)
-				usr << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
-				return
-		else if(security_check_enabled && !src.allowed(usr))
-			usr << "<span class='danger'>Access denied.</span>"
-			return
+		var/module_index = text2num(href_list["interact_module"])
 
-		if(href_list["toggle_piece"])
-			toggle_piece(href_list["toggle_piece"], H)
-		else if(href_list["toggle_seals"])
-			toggle_seals(H)
-		else if(href_list["interact_module"])
-
-			var/module_index = text2num(href_list["interact_module"])
-
-			if(module_index > 0 && module_index <= installed_modules.len)
-				var/obj/item/rig_module/module = installed_modules[module_index]
-				switch(href_list["module_mode"])
-					if("activate")
-						module.activate()
-					if("deactivate")
-						module.deactivate()
-					if("engage")
-						module.engage()
-					if("select")
-						selected_module = module
-					if("select_charge_type")
-						module.charge_selected = href_list["charge_type"]
-		else if(href_list["toggle_ai_control"])
-			ai_override_enabled = !ai_override_enabled
-		else if(href_list["toggle_suit_lock"])
-			locked = !locked
+		if(module_index > 0 && module_index <= installed_modules.len)
+			var/obj/item/rig_module/module = installed_modules[module_index]
+			switch(href_list["module_mode"])
+				if("activate")
+					module.activate()
+				if("deactivate")
+					module.deactivate()
+				if("engage")
+					module.engage()
+				if("select")
+					selected_module = module
+				if("select_charge_type")
+					module.charge_selected = href_list["charge_type"]
+	else if(href_list["toggle_ai_control"])
+		ai_override_enabled = !ai_override_enabled
+	else if(href_list["toggle_suit_lock"])
+		locked = !locked
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)

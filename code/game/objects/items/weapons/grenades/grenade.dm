@@ -35,7 +35,7 @@
 		spawn(det_time)
 			prime()
 			return
-		user.dir = get_dir(user, target)
+		user.set_dir(get_dir(user, target))
 		user.drop_item()
 		var/t = (isturf(target) ? target : target.loc)
 		walk_towards(src, t, 3)

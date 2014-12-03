@@ -1,6 +1,10 @@
 package dmitool;
 
 import java.util.Arrays;
+import ar.com.hjg.pngj.ImageInfo;
+import ar.com.hjg.pngj.ImageLineInt;
+import ar.com.hjg.pngj.PngWriter;
+import java.io.OutputStream;
 
 public class IconState {
     String name;
@@ -95,5 +99,49 @@ public class IconState {
             s += ","+f;
         }
         return s.substring(1);
+    }
+    
+    /**
+    * Dump the state to the given OutputStream in PNG format. Frames will be dumped along the X axis of the image, and directions will be dumped along the Y.
+    */
+    public void dumpToPNG(OutputStream outS, int minDir, int maxDir, int minFrame, int maxFrame) {
+        int totalDirs = maxDir - minDir + 1;
+        int totalFrames = maxFrame - minFrame + 1;
+        
+        int w = images[minDir + minFrame * this.dirs].w;
+        int h = images[minDir + minFrame * this.dirs].h;
+        
+        if(Main.VERBOSITY > 0) System.out.println("Writing " + totalDirs + " dir(s), " + totalFrames + " frame(s), " + totalDirs*totalFrames + " image(s) total.");
+        ImageInfo ii = new ImageInfo(totalFrames * w, totalDirs * h, 8, true);
+        PngWriter out = new PngWriter(outS, ii);
+        out.setCompLevel(9);
+        
+        Image[][] img = new Image[totalFrames][totalDirs];
+        {
+            for(int i=0; i<totalFrames; i++) {
+                for(int j=0; j<totalDirs; j++) {
+                    img[i][j] = images[(minDir+j) + (minFrame+i) * this.dirs];
+                }
+            }
+        }
+        
+        for(int imY=0; imY<totalDirs; imY++) {
+            for(int pxY=0; pxY<h; pxY++) {
+                ImageLineInt ili = new ImageLineInt(ii);
+                int[] buf = ili.getScanline();
+                for(int imX=0; imX<totalFrames; imX++) {
+                    Image i = img[imX][imY];
+                    for(int pxX=0; pxX<w; pxX++) {
+                        RGBA c = i.getPixel(pxX, pxY);
+                        buf[(imX*w + pxX)*4    ] = c.r;
+                        buf[(imX*w + pxX)*4 + 1] = c.g;
+                        buf[(imX*w + pxX)*4 + 2] = c.b;
+                        buf[(imX*w + pxX)*4 + 3] = c.a;
+                    }
+                }
+                out.writeRow(ili);
+            }
+        }
+        out.end();
     }
 }

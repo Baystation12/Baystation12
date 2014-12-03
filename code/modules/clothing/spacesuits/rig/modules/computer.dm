@@ -291,7 +291,7 @@
 	toggleable = 1
 	usable = 0
 
-	engage_string = "Enable Countermeasures"
+	activate_string = "Enable Countermeasures"
 	deactivate_string = "Disable Countermeasures"
 
 	interface_name = "electrowarfare system"
@@ -322,7 +322,7 @@
 	activates_on_touch = 1
 	disruptive = 0
 
-	engage_string = "Enable Power Sink"
+	activate_string = "Enable Power Sink"
 	deactivate_string = "Disable Power Sink"
 
 	interface_name = "niling d-sink"
