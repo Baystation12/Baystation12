@@ -1,5 +1,5 @@
 obj/machinery/atmospherics/trinary
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH|NORTH|WEST
 	use_power = 1
 

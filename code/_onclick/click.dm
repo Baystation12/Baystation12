@@ -350,7 +350,5 @@
 	else
 		if(dx > 0)	direction = EAST
 		else		direction = WEST
-	dir = direction
-	if(buckled && buckled.movable)
-		buckled.dir = direction
-		buckled.handle_rotation()
+	if(direction != dir)
+		facedir(direction)

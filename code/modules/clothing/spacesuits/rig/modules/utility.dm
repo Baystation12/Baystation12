@@ -279,7 +279,7 @@
 	disruptive = 0
 
 	suit_overlay_active = "maneuvering_active"
-	suit_overlay_inactive = "maneuvering_inactive"
+	suit_overlay_inactive = null //"maneuvering_inactive"
 
 	engage_string = "Toggle Stabilizers"
 	activate_string = "Activate Thrusters"

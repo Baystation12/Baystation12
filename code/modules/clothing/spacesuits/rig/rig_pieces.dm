@@ -21,12 +21,13 @@
 	species_restricted = null
 	gender = PLURAL
 
-/obj/item/clothing/shoes/rig
+/obj/item/clothing/shoes/magboots/rig
 	name = "boots"
 	cold_protection = FEET
 	heat_protection = FEET
 	species_restricted = null
 	gender = PLURAL
+	icon_base = null
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"

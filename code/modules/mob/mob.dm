@@ -652,9 +652,6 @@ var/list/slot_equipment_priority = list( \
 		var/mob/pulled = AM
 		pulled.inertia_dir = 0
 
-/mob/proc/get_combat_buff(var/damage)
-	return damage
-
 /mob/proc/can_use_hands()
 	return
 
@@ -908,10 +905,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = ndir
+	set_dir(ndir)
 	if(buckled && buckled.movable)
-		buckled.dir = ndir
-		buckled.handle_rotation()
+		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
 

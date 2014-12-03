@@ -1037,7 +1037,7 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
 
 	icon = base
-	dir = SOUTH
+	set_dir(SOUTH)
 	src.transform = turn(src.transform, rand(70,130))
 
 

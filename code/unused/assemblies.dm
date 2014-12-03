@@ -480,8 +480,8 @@
 	set category = "Object"
 	set src in usr
 
-	src.dir = turn(src.dir, 90)
-	src.part2.dir = src.dir
+	src.set_dir(turn(src.dir, 90))
+	src.part2.set_dir(src.dir)
 	src.add_fingerprint(usr)
 	return
 
@@ -489,7 +489,7 @@
 
 	var/t = src.dir
 	..()
-	src.dir = t
+	src.set_dir(t)
 	//src.part2.first = null
 	del(src.part2.first)
 	return

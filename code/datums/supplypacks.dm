@@ -380,6 +380,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
+/datum/supply_packs/medical
+	name = "BloodPack crate"
+	contains = list(/obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks,
+                    /obj/item/weapon/storage/box/bloodpacks)
+	cost = 10
+	containertype = /obj/structure/closet/crate/medical
+	containername = "BloodPack crate"
+	group = "Medical"
+
 /datum/supply_packs/bodybag
 	name = "Body bag crate"
 	contains = list(/obj/item/weapon/storage/box/bodybags,
@@ -463,7 +473,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/smescoil
 	name = "Superconducting Magnetic Coil"
 	contains = list(/obj/item/weapon/smes_coil)
-	cost = 150
+	cost = 75
 	containertype = /obj/structure/closet/crate
 	containername = "Superconducting Magnetic Coil crate"
 	group = "Engineering"
@@ -1087,7 +1097,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/smbig
 	name = "Supermatter Core"
 	contains = list(/obj/machinery/power/supermatter)
-	cost = 50
+	cost = 150
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "Supermatter crate (CAUTION)"
 	group = "Engineering"

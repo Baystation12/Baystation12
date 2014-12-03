@@ -456,9 +456,7 @@
 
 	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
-			if(lethal)
-				return TURRET_SECONDARY_TARGET
-			return TURRET_NOT_TARGET
+			return TURRET_SECONDARY_TARGET
 		return TURRET_PRIORITY_TARGET
 
 	if(iscuffed(L)) // If the target is handcuffed, leave it alone
@@ -470,7 +468,7 @@
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L, check_weapons, check_records) < 4)
+		if(assess_perp(L, check_weapons, check_records, check_arrest) < 4)
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
@@ -535,7 +533,7 @@
 	if(target && (target.stat != DEAD) && (!(target.lying) || emagged))
 		spawn()
 			popUp()				//pop the turret up if it's not already up.
-		dir = get_dir(src, target)	//even if you can't shoot, follow the target
+		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
 		spawn()
 			shootAt(target)
 		return 1
