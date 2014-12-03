@@ -19,10 +19,16 @@ var/global/list/holodeck_programs = list(
 	name = "Holodeck Control Computer"
 	desc = "A computer used to control a nearby holodeck."
 	icon_state = "holocontrol"
+	
+	use_power = 1
+	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
+	var/item_power_usage = 500
+	
 	var/area/linkedholodeck = null
 	var/area/target = null
 	var/active = 0
 	var/list/holographic_items = list()
+	var/list/holographic_mobs = list()
 	var/damaged = 0
 	var/last_change = 0
 	var/list/supported_programs = list( \
@@ -38,83 +44,98 @@ var/global/list/holodeck_programs = list(
 	"Theatre" = "theatre",	\
 	"Meeting Hall" = "meetinghall"	\
 	)
-	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "ildlife Simulation" = "wildlifecarp")
+	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "Wildlife Simulation" = "wildlifecarp")
 
-	attack_ai(var/mob/user as mob)
-		return src.attack_hand(user)
+/obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
+	return src.attack_hand(user)
 
-	attack_hand(var/mob/user as mob)
+/obj/machinery/computer/HolodeckControl/attack_hand(var/mob/user as mob)
 
-		if(..())
-			return
-		user.set_machine(src)
-		var/dat
+	if(..())
+		return
+	user.set_machine(src)
+	var/dat
 
-		dat += "<B>Holodeck Control System</B><BR>"
-		dat += "<HR>Current Loaded Programs:<BR>"
-		for(var/prog in supported_programs)
-			dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>(([prog]))</A><BR>"
+	dat += "<B>Holodeck Control System</B><BR>"
+	dat += "<HR>Current Loaded Programs:<BR>"
+	for(var/prog in supported_programs)
+		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>(([prog]))</A><BR>"
 
-		dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
+	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
-		if(issilicon(user))
-			if(emagged)
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
-			else
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
-
+	if(issilicon(user))
 		if(emagged)
-			for(var/prog in restricted_programs)
-				dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
-				dat += "Ensure the holodeck is empty before testing.<BR>"
-				dat += "<BR>"
-			dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
+			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
 		else
-			dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
+			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
 
-		user << browse(dat, "window=computer;size=400x500")
-		onclose(user, "computer")
+	if(emagged)
+		for(var/prog in restricted_programs)
+			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
+			dat += "Ensure the holodeck is empty before testing.<BR>"
+			dat += "<BR>"
+		dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
+	else
+		dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
 
+	user << browse(dat, "window=computer;size=400x500")
+	onclose(user, "computer")
+
+	return
+
+
+/obj/machinery/computer/HolodeckControl/Topic(href, href_list)
+	if(..())
 		return
+	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+		usr.set_machine(src)
 
+		if(href_list["program"])
+			var/prog = href_list["program"]
+			if(prog in holodeck_programs)
+				target = locate(holodeck_programs[prog])
+				if(target)
+					loadProgram(target)
 
-	Topic(href, href_list)
-		if(..())
-			return
-		if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-			usr.set_machine(src)
+		else if(href_list["AIoverride"])
+			if(!issilicon(usr))	return
+			emagged = !emagged
+			update_emagged()
+			if(emagged)
+				message_admins("[key_name_admin(usr)] overrode the holodeck's safeties")
+				log_game("[key_name(usr)] overrided the holodeck's safeties")
+			else
+				message_admins("[key_name_admin(usr)] restored the holodeck's safeties")
+				log_game("[key_name(usr)] restored the holodeck's safeties")
 
-			if(href_list["program"])
-				var/prog = href_list["program"]
-				if(prog in holodeck_programs)
-					target = locate(holodeck_programs[prog])
-					if(target)
-						loadProgram(target)
-
-			else if(href_list["AIoverride"])
-				if(!issilicon(usr))	return
-				emagged = !emagged
-				if(emagged)
-					message_admins("[key_name_admin(usr)] overrode the holodeck's safeties")
-					log_game("[key_name(usr)] overrided the holodeck's safeties")
-				else
-					message_admins("[key_name_admin(usr)] restored the holodeck's safeties")
-					log_game("[key_name(usr)] restored the holodeck's safeties")
-
-			src.add_fingerprint(usr)
-		src.updateUsrDialog()
-		return
-
+		src.add_fingerprint(usr)
+	src.updateUsrDialog()
+	return
 
 /obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
 	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
+		update_emagged()
 		user << "\blue You vastly increase projector power and override the safety and security protocols."
 		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
 		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 	src.updateUsrDialog()
 	return
+
+/obj/machinery/computer/HolodeckControl/proc/update_emagged()
+	if (emagged)
+		item_power_usage = 2500
+		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+			C.faction = initial(C.faction)
+		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+			H.damtype = BRUTE
+	else
+		item_power_usage = initial(item_power_usage)
+		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+			C.faction = "neutral"
+		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+			H.damtype = initial(H.damtype)
 
 /obj/machinery/computer/HolodeckControl/New()
 	..()
@@ -148,14 +169,27 @@ var/global/list/holodeck_programs = list(
 	emergencyShutdown()
 	..()
 
+/obj/machinery/computer/HolodeckControl/power_change()
+	var/oldstat
+	..()
+	if (stat != oldstat && active && (stat & NOPOWER))
+		emergencyShutdown()
+
 /obj/machinery/computer/HolodeckControl/process()
 	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
-
+	
+	if (!emagged)
+		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+			if (get_area(C.loc) != linkedholodeck)
+				holographic_mobs -= C
+				C.derez()
+	
 	if(!..())
 		return
 	if(active)
+		use_power(item_power_usage * holographic_items.len)
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1
@@ -163,6 +197,7 @@ var/global/list/holodeck_programs = list(
 			if(target)
 				loadProgram(target)
 			active = 0
+			use_power = 1
 			for(var/mob/M in range(10,src))
 				M.show_message("The holodeck overloads!")
 
@@ -199,6 +234,7 @@ var/global/list/holodeck_programs = list(
 
 	return 1
 
+//Why is it called toggle if it doesn't toggle?
 /obj/machinery/computer/HolodeckControl/proc/togglePower(var/toggleOn = 0)
 
 	if(toggleOn)
@@ -218,12 +254,14 @@ var/global/list/holodeck_programs = list(
 							T.hotspot_expose(50000,50000,1)
 
 		active = 1
+		use_power = 2
 	else
 		for(var/item in holographic_items)
 			derez(item)
 		var/area/targetsource = locate(/area/holodeck/source_plating)
 		targetsource.copy_contents_to(linkedholodeck , 1)
 		active = 0
+		use_power = 1
 
 
 /obj/machinery/computer/HolodeckControl/proc/loadProgram(var/area/A)
@@ -238,21 +276,19 @@ var/global/list/holodeck_programs = list(
 
 	last_change = world.time
 	active = 1
+	use_power = 2
 
 	for(var/item in holographic_items)
 		derez(item)
 
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		holographic_mobs -= C
+		C.derez()
+
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		del(B)
 
-	for(var/mob/living/simple_animal/hostile/carp/C in linkedholodeck)
-		del(C)
-
 	holographic_items = A.copy_contents_to(linkedholodeck , 1)
-
-	if(emagged)
-		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
-			H.damtype = BRUTE
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
@@ -266,13 +302,18 @@ var/global/list/holodeck_programs = list(
 						T.temperature = 5000
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
-				new /mob/living/simple_animal/hostile/carp(L.loc)
+				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+		
+		update_emagged()
 
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Get rid of any items
 	for(var/item in holographic_items)
 		derez(item)
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		holographic_mobs -= C
+		C.derez()
 	//Turn it back to the regular non-holographic room
 	target = locate(/area/holodeck/source_plating)
 	if(target)
@@ -281,6 +322,7 @@ var/global/list/holodeck_programs = list(
 	var/area/targetsource = locate(/area/holodeck/source_plating)
 	targetsource.copy_contents_to(linkedholodeck , 1)
 	active = 0
+	use_power = 1
 
 
 
@@ -578,3 +620,25 @@ var/global/list/holodeck_programs = list(
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "It's a holorack!  You can't unwrench it!"
 		return
+
+//Holocarp
+
+/mob/living/simple_animal/hostile/carp/holodeck
+	icon = 'icons/mob/AI.dmi'
+	icon_state = "holo4"
+	icon_living = "holo4"
+	icon_dead = "holo4"
+	icon_gib = null
+	meat_amount = 0
+	meat_type = null
+
+/mob/living/simple_animal/hostile/carp/holodeck/gib()
+	derez() //holograms can't gib
+
+/mob/living/simple_animal/hostile/carp/holodeck/death()
+	..()
+	derez()
+
+/mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
+	visible_message("<span class='notice'>\The [src] fades away!</span>")
+	del(src)
