@@ -148,6 +148,11 @@
 		icon_state += "b"
 	return
 
+/obj/machinery/computer/security/telescreen/captain
+	name = "Security Camera Monitor"
+	desc = "A wall mounted monitor. It shows 4 security camera feeds at once."
+	network = list("SS13","MINE","ERT")
+
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
 	desc = "Damn, why do they never have anything interesting on these things?"
