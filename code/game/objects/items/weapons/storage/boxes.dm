@@ -58,6 +58,20 @@
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
 		return
 
+/obj/item/weapon/storage/box/donor
+	name = "box of donor candies"
+	desc = "Contains little candies for blood donors."
+	icon_state = "box"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"

@@ -244,7 +244,19 @@
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
 	New()
 		..()
-		reagents.add_reagent("cryoxadone", 30)
+		reagents.add_reagent("cryoxadone", 50)
+		update_icon()
+
+/obj/item/weapon/reagent_containers/glass/beaker/clonexadone
+	New()
+		..()
+		reagents.add_reagent("clonexadone", 50)
+		update_icon()
+
+/obj/item/weapon/reagent_containers/glass/beaker/zombiepowder
+	New()
+		..()
+		reagents.add_reagent("zombiepowder", 50)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/beaker/sulphuric

@@ -192,9 +192,17 @@
 	New()
 		item_color = "green"
 
+/obj/item/weapon/melee/energy/sword/blue
+	New()
+		item_color = "blue"
+
 /obj/item/weapon/melee/energy/sword/red
 	New()
 		item_color = "red"
+
+/obj/item/weapon/melee/energy/sword/purple
+	New()
+		item_color = "purple"
 
 /obj/item/weapon/melee/energy/blade/New()
 	spark_system = new /datum/effect/effect/system/spark_spread()
