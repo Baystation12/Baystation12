@@ -321,9 +321,7 @@
 	else
 		//if the turret was attacked with the intention of harming it:
 		user.changeNext_move(CLICK_CD_MELEE)
-		health -= I.force * 0.5
-		if(health <= 0)
-			die()
+		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1
@@ -332,6 +330,12 @@
 					attacked = 0
 		..()
 
+/obj/machinery/porta_turret/proc/take_damage(var/force)
+	health -= force
+	if (force > 5 && prob(45))
+		spark_system.start()
+	if(health <= 0)
+		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
 	if(on)
@@ -340,27 +344,21 @@
 			spawn()
 				sleep(60)
 				attacked = 0
-
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		health -= Proj.damage
-
+	
 	..()
 
-	if(prob(45) && Proj.damage > 0)
-		spark_system.start()
-	if(health <= 0)
-		die()	//the death process :(
+	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		take_damage(Proj.damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(on)
 		//if the turret is on, the EMP no matter how severe disables the turret for a while
 		//and scrambles its settings, with a slight chance of having an emag effect
-
-		check_arrest = pick(0, 1)
-		check_records = pick(0, 1)
-		check_weapons = pick(0, 1)
-		check_access = pick(0, 0, 0, 0, 1)	// check_access is a pretty big deal, so it's least likely to get turned on
-		check_anomalies = pick(0, 1)
+		check_arrest = prob(50)
+		check_records = prob(50)
+		check_weapons = prob(50)
+		check_access = prob(20)	// check_access is a pretty big deal, so it's least likely to get turned on
+		check_anomalies = prob(50)
 		if(prob(5))
 			emagged = 1
 
@@ -372,10 +370,16 @@
 	..()
 
 /obj/machinery/porta_turret/ex_act(severity)
-	if(severity >= 3)	//turret dies if an explosion touches it!
-		del(src) // qdel
-	else
-		die()
+	switch (severity)
+		if (1)
+			del(src)
+		if (2)
+			if (prob(25))
+				del(src)
+			else
+				take_damage(150) //should instakill most turrets
+		if (3)
+			take_damage(50)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
