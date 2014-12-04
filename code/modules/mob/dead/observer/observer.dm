@@ -171,7 +171,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		var/response
 		if(src.client && src.client.holder)
-			response = alert(src, "You have the ability to Admin-Ghost. Ghosting regularly will announce you to the dead chat. Anyway you will be allowed to return to body using 'aghost'. What do you want to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
+			response = alert(src, "You have the ability to Admin-Ghost. The regular Ghost verb will announce your presence to dead chat. Both variants will allow you to return to your body using 'aghost'.\n\nWhat do you wish to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
 			if(response == "Admin Ghost")
 				if(!src.client)
 					return
