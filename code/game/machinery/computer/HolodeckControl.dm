@@ -30,6 +30,7 @@ var/global/list/holodeck_programs = list(
 	var/list/holographic_items = list()
 	var/list/holographic_mobs = list()
 	var/damaged = 0
+	var/safety_disabled = 0
 	var/mob/last_to_emag = null
 	var/last_change = 0
 	var/list/supported_programs = list( \
@@ -65,12 +66,15 @@ var/global/list/holodeck_programs = list(
 	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
 	if(issilicon(user))
-		if(emagged)
-			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
+		if(safety_disabled)
+			if (emagged)
+				dat += "<font color=red><b>ERROR</b>: Cannot re-enable Safety Protocols.</font><BR>"
+			else
+				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
 		else
 			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
 
-	if(emagged)
+	if(safety_disabled)
 		for(var/prog in restricted_programs)
 			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
@@ -99,10 +103,15 @@ var/global/list/holodeck_programs = list(
 					loadProgram(target)
 
 		else if(href_list["AIoverride"])
-			if(!issilicon(usr))	return
-			emagged = !emagged
-			update_emagged()
-			if(emagged)
+			if(!issilicon(usr))
+				return
+			
+			if(safety_disabled && emagged)
+				return //if a traitor has gone through the trouble to emag the thing, let them keep it.
+			
+			safety_disabled = !safety_disabled
+			update_projections()
+			if(safety_disabled)
 				message_admins("[key_name_admin(usr)] overrode the holodeck's safeties")
 				log_game("[key_name(usr)] overrided the holodeck's safeties")
 			else
@@ -114,19 +123,21 @@ var/global/list/holodeck_programs = list(
 	return
 
 /obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
+	if(istype(D, /obj/item/weapon/card/emag))
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
-		last_to_emag = user
-		update_emagged()
-		user << "\blue You vastly increase projector power and override the safety and security protocols."
-		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
-		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
+		last_to_emag = user //emag again to change the owner
+		if (!emagged)
+			emagged = 1
+			safety_disabled = 1
+			update_projections()
+			user << "\blue You vastly increase projector power and override the safety and security protocols."
+			user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
+			log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/HolodeckControl/proc/update_emagged()
-	if (emagged)
+/obj/machinery/computer/HolodeckControl/proc/update_projections()
+	if (safety_disabled)
 		item_power_usage = 2500
 		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
 			H.damtype = BRUTE
@@ -136,7 +147,7 @@ var/global/list/holodeck_programs = list(
 			H.damtype = initial(H.damtype)
 	
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
-		C.set_safety(!emagged)
+		C.set_safety(!safety_disabled)
 		if (last_to_emag)
 			C.friends = list(last_to_emag)
 
@@ -183,7 +194,7 @@ var/global/list/holodeck_programs = list(
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
 	
-	if (!emagged)
+	if (!safety_disabled)
 		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
@@ -311,7 +322,7 @@ var/global/list/holodeck_programs = list(
 				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
 					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
 		
-		update_emagged()
+		update_projections()
 
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
