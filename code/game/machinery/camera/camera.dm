@@ -136,7 +136,7 @@
 	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if (stat & BROKEN)
-				new /obj/item/broken_device(src.loc) //TODO make a broken electronics item instead of reusing cyborg stuff
+				new /obj/item/weapon/circuitboard/broken(src.loc)
 				new /obj/item/stack/cable_coil(src.loc, length=2)
 			else if(assembly)
 				assembly.loc = src.loc
