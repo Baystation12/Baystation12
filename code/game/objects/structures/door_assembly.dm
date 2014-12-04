@@ -205,7 +205,7 @@ obj/structure/door_assembly
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
-	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1 && W:icon_state != "door_electronics_smoked")
+	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
 
@@ -219,6 +219,12 @@ obj/structure/door_assembly
 			src.electronics = W
 
 	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
+		//This should never happen, but just in case I guess
+		if (!electronics)
+			user << "<span class='notice'>There was nothing to remove.</span>"
+			src.state = 1
+			return
+	
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove the electronics from the airlock assembly.")
 
@@ -227,13 +233,8 @@ obj/structure/door_assembly
 			user << "\blue You removed the airlock electronics!"
 			src.state = 1
 			src.name = "Wired Airlock Assembly"
-			var/obj/item/weapon/airlock_electronics/ae
-			if (!electronics)
-				ae = new/obj/item/weapon/airlock_electronics( src.loc )
-			else
-				ae = electronics
-				electronics = null
-				ae.loc = src.loc
+			electronics.loc = src.loc
+			electronics = null
 
 	else if(istype(W, /obj/item/stack/sheet) && !glass)
 		var/obj/item/stack/sheet/S = W
@@ -271,22 +272,7 @@ obj/structure/door_assembly
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
 
-			var/obj/machinery/door/airlock/door = new path(src.loc)
-
-			door.assembly_type = type
-			door.electronics = src.electronics
-			if (istype(electronics, /obj/item/weapon/airlock_electronics/secure))
-				door.wires = new/datum/wires/airlock/secure(src)
-			if(src.electronics.one_access)
-				door.req_access = null
-				door.req_one_access = src.electronics.conf_access
-			else
-				door.req_access = src.electronics.conf_access
-			if(created_name)
-				door.name = created_name
-			else
-				door.name = "[istext(glass) ? "[glass] airlock" : base_name]"
-			src.electronics.loc = door
+			new path(src.loc, src)
 			del(src)
 	else
 		..()
