@@ -31,7 +31,7 @@
 
 
 	interact()
-		if(!interactable() || computer.z > 6)
+		if(!interactable() || computer.z > 8)
 			return
 		var/dat
 		if (src.temp)
