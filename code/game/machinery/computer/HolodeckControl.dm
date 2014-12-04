@@ -30,6 +30,7 @@ var/global/list/holodeck_programs = list(
 	var/list/holographic_items = list()
 	var/list/holographic_mobs = list()
 	var/damaged = 0
+	var/mob/last_to_emag = null
 	var/last_change = 0
 	var/list/supported_programs = list( \
 	"Empty Court" = "emptycourt", \
@@ -116,6 +117,7 @@ var/global/list/holodeck_programs = list(
 	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
+		last_to_emag = user
 		update_emagged()
 		user << "\blue You vastly increase projector power and override the safety and security protocols."
 		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
@@ -126,16 +128,17 @@ var/global/list/holodeck_programs = list(
 /obj/machinery/computer/HolodeckControl/proc/update_emagged()
 	if (emagged)
 		item_power_usage = 2500
-		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
-			C.faction = initial(C.faction)
 		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
 			H.damtype = BRUTE
 	else
 		item_power_usage = initial(item_power_usage)
-		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
-			C.faction = "neutral"
 		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
 			H.damtype = initial(H.damtype)
+	
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		C.set_safety(!emagged)
+		if (last_to_emag)
+			C.friends = list(last_to_emag)
 
 /obj/machinery/computer/HolodeckControl/New()
 	..()
@@ -189,7 +192,7 @@ var/global/list/holodeck_programs = list(
 	if(!..())
 		return
 	if(active)
-		use_power(item_power_usage * holographic_items.len)
+		use_power(item_power_usage * (holographic_items.len + holographic_mobs.len))
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1
@@ -303,6 +306,10 @@ var/global/list/holodeck_programs = list(
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
 				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+			
+			if(L.name=="Holocarp Spawn Random")
+				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
+					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
 		
 		update_emagged()
 
@@ -631,6 +638,20 @@ var/global/list/holodeck_programs = list(
 	icon_gib = null
 	meat_amount = 0
 	meat_type = null
+
+/mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
+	if (safe)
+		faction = "neutral"
+		melee_damage_lower = 0
+		melee_damage_upper = 0
+		wall_smash = 0
+		destroy_surroundings = 0
+	else
+		faction = "carp"
+		melee_damage_lower = initial(melee_damage_lower)
+		melee_damage_upper = initial(melee_damage_upper)
+		wall_smash = initial(wall_smash)
+		destroy_surroundings = initial(destroy_surroundings)
 
 /mob/living/simple_animal/hostile/carp/holodeck/gib()
 	derez() //holograms can't gib
