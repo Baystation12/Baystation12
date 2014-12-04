@@ -36,11 +36,12 @@
 	var/last_fired = 0		//1: if the turret is cooling down from a shot, 0: turret is ready to fire
 	var/shot_delay = 15		//1.5 seconds between each shot
 
-	var/check_records = 1	//checks if it can use the security records
-	var/auth_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
-	var/stun_all = 1		//if this is active, the turret shoots everything that does not meet the access requirements
+	var/check_arrest = 1	//checks if the perp is set to arrest
+	var/check_records = 1	//checks if a security record exists at all
+	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
+	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
-	var/ai		 = 0 		//if active, will shoot at anything not an AI or cyborg
+	var/check_synth	 = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 			// AI cannot use this
 
 	var/attacked = 0		//if set to 1, the turret gets pissed off and shoots at people nearby (unless they have sec access!)
@@ -181,17 +182,21 @@
 					Neutralize All Non-Synthetics: []<BR>"},
 
 					"<A href='?src=\ref[src];operation=togglelethal'>[lethal ? "Enabled" : "Disabled"]</A>",
-					"<A href='?src=\ref[src];operation=toggleai'>[ai ? "Yes" : "No"]</A>")
-		if(!ai)
+					"<A href='?src=\ref[src];operation=toggleai'>[check_synth ? "Yes" : "No"]</A>")
+		if(!check_synth)
 			dat += text({"Check for Weapon Authorization: []<BR>
 					Check Security Records: []<BR>
+					Check Arrest Status: []<BR>
 					Neutralize All Non-Authorized Personnel: []<BR>
 					Neutralize All Unidentified Life Signs: []<BR>"},
 
-					"<A href='?src=\ref[src];operation=authweapon'>[auth_weapons ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=authweapon'>[check_weapons ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=shootall'>[stun_all ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkarrest'>[check_arrest ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkaccess'>[check_access ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>" )
+	else
+		dat += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
 
 	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
 	onclose(user, "autosec")
@@ -207,13 +212,14 @@
 	if(!can_use(usr))
 		return 1
 
+	if(HasController())
+		usr << "<span class='notice'>Turrets can only be controlled using the assigned turret controller.</span>"
+		return
+
 	usr.set_machine(src)
 	if(href_list["power"])
 		if(anchored)	//you can't turn a turret on/off if it's not anchored/secured
-			if(HasController())
-				usr << "<span class='notice'>Turrets can only be [on ? "disabled" : "enabled"] using the assigned turret controller.</span>"
-			else
-				on = !on	//toggle on/off
+			on = !on	//toggle on/off
 		else
 			usr << "<span class='notice'>It has to be secured first!</span>"
 
@@ -223,18 +229,17 @@
 	switch(href_list["operation"])	//toggles customizable behavioural protocols
 		if("togglelethal")
 			if(!controllock)
-				if(HasController())
-					usr << "<span class='notice'>Weapon mode can only be altered using the assigned turret controller.</span>"
-				else
-					lethal = !lethal
+				lethal = !lethal
 		if("toggleai")
-			ai = !ai
+			check_synth = !check_synth
 		if("authweapon")
-			auth_weapons = !auth_weapons
+			check_weapons = !check_weapons
 		if("checkrecords")
 			check_records = !check_records
-		if("shootall")
-			stun_all = !stun_all
+		if("checkarrests")
+			check_arrest = !check_arrest
+		if("checkaccess")
+			check_access = !check_access
 		if("checkxenos")
 			check_anomalies = !check_anomalies
 	updateUsrDialog()
@@ -316,9 +321,7 @@
 	else
 		//if the turret was attacked with the intention of harming it:
 		user.changeNext_move(CLICK_CD_MELEE)
-		health -= I.force * 0.5
-		if(health <= 0)
-			die()
+		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1
@@ -327,6 +330,12 @@
 					attacked = 0
 		..()
 
+/obj/machinery/porta_turret/proc/take_damage(var/force)
+	health -= force
+	if (force > 5 && prob(45))
+		spark_system.start()
+	if(health <= 0)
+		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
 	if(on)
@@ -335,24 +344,21 @@
 			spawn()
 				sleep(60)
 				attacked = 0
-
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		health -= Proj.damage
-
+	
 	..()
 
-	if(prob(45) && Proj.damage > 0)
-		spark_system.start()
-	if(health <= 0)
-		die()	//the death process :(
+	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		take_damage(Proj.damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(on)
 		//if the turret is on, the EMP no matter how severe disables the turret for a while
 		//and scrambles its settings, with a slight chance of having an emag effect
-		check_records = pick(0, 1)
-		auth_weapons = pick(0, 1)
-		stun_all = pick(0, 0, 0, 0, 1)	//stun_all is a pretty big deal, so it's least likely to get turned on
+		check_arrest = prob(50)
+		check_records = prob(50)
+		check_weapons = prob(50)
+		check_access = prob(20)	// check_access is a pretty big deal, so it's least likely to get turned on
+		check_anomalies = prob(50)
 		if(prob(5))
 			emagged = 1
 
@@ -364,10 +370,16 @@
 	..()
 
 /obj/machinery/porta_turret/ex_act(severity)
-	if(severity >= 3)	//turret dies if an explosion touches it!
-		del(src) // qdel
-	else
-		die()
+	switch (severity)
+		if (1)
+			del(src)
+		if (2)
+			if (prob(25))
+				del(src)
+			else
+				take_damage(150) //should instakill most turrets
+		if (3)
+			take_damage(50)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
@@ -446,7 +458,7 @@
 	if(dst > 7)
 		return 0
 
-	if(ai)	//If it's set to attack all non-silicons, target them!
+	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
 			return TURRET_SECONDARY_TARGET
 		return TURRET_PRIORITY_TARGET
@@ -460,7 +472,7 @@
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L, auth_weapons, check_records) < 4)
+		if(assess_perp(L, check_weapons, check_records, check_arrest) < 4)
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
@@ -512,7 +524,7 @@
 
 
 /obj/machinery/porta_turret/on_assess_perp(mob/living/carbon/human/perp)
-	if((stun_all || attacked) && !allowed(perp))
+	if((check_access || attacked) && !allowed(perp))
 		//if the turret has been attacked or is angry, target all non-authorized personnel, see req_access
 		return 10
 
@@ -570,12 +582,32 @@
 	spawn(1)
 		A.process()
 
-/obj/machinery/porta_turret/proc/setState(var/on, var/lethal)
+/datum/turret_checks
+	var/on
+	var/lethal
+	var/check_synth
+	var/check_access
+	var/check_records
+	var/check_arrest
+	var/check_weapons
+	var/check_anomalies
+	var/ailock
+
+/obj/machinery/porta_turret/proc/setState(var/datum/turret_checks/TC)
 	if(controllock)
 		return
-	src.on = on
-	src.lethal = lethal
-	src.iconholder = lethal
+	src.on = TC.on
+	src.lethal = TC.lethal
+	src.iconholder = TC.lethal
+
+	check_synth = TC.check_synth
+	check_access = TC.check_access
+	check_records = TC.check_records
+	check_arrest = TC.check_arrest
+	check_weapons = TC.check_weapons
+	check_anomalies = TC.check_anomalies
+	ailock = TC.ailock
+
 	src.power_change()
 
 /*

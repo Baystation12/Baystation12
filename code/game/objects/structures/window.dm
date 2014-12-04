@@ -214,7 +214,7 @@
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
 				var/obj/item/stack/sheet/mats = new glasstype(loc)
-				mats.amount = 2
+				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
 			del(src)
