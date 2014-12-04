@@ -66,7 +66,7 @@
 
 
 /obj/item/weapon/implantcase/tracking
-	name = "Glass Case- 'Tracking'"
+	name = "Glass Case - 'Tracking'"
 	desc = "A case containing a tracking implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
@@ -80,7 +80,7 @@
 
 
 /obj/item/weapon/implantcase/explosive
-	name = "Glass Case- 'Explosive'"
+	name = "Glass Case - 'Explosive'"
 	desc = "A case containing an explosive implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
@@ -94,7 +94,7 @@
 
 
 /obj/item/weapon/implantcase/chem
-	name = "Glass Case- 'Chem'"
+	name = "Glass Case - 'Chem'"
 	desc = "A case containing a chemical implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
@@ -106,7 +106,7 @@
 
 
 /obj/item/weapon/implantcase/loyalty
-	name = "Glass Case- 'Loyalty'"
+	name = "Glass Case - 'Loyalty'"
 	desc = "A case containing a loyalty implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
@@ -119,12 +119,23 @@
 
 
 /obj/item/weapon/implantcase/death_alarm
-	name = "Glass Case- 'Death Alarm'"
+	name = "Glass Case - 'Death Alarm'"
 	desc = "A case containing a death alarm implant."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 
 	New()
 		src.imp = new /obj/item/weapon/implant/death_alarm( src )
+		..()
+		return
+
+/obj/item/weapon/implantcase/freedom
+	name = "Glass Case - 'Freedom'"
+	desc = "A case containing a freedom implant."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "implantcase-b"
+
+	New()
+		src.imp = new /obj/item/weapon/implant/freedom( src )
 		..()
 		return
