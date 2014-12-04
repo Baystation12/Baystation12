@@ -18,6 +18,7 @@ var/global/list/image/splatter_cache=list()
 	var/basecolor="#A10808" // Color when wet.
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
+	var/stackable = 0
 
 /obj/effect/decal/cleanable/blood/Del()
 	for(var/datum/disease/D in viruses)
@@ -107,6 +108,7 @@ var/global/list/image/splatter_cache=list()
         random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
         amount = 2
 
+
 /obj/effect/decal/cleanable/blood/drip
         name = "drips of blood"
         desc = "It's red."
@@ -115,6 +117,7 @@ var/global/list/image/splatter_cache=list()
         icon_state = "1"
         random_icon_states = list("1","2","3","4","5")
         amount = 0
+        stackable = 1
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"
