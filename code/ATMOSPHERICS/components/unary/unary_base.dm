@@ -1,5 +1,5 @@
 /obj/machinery/atmospherics/unary
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH
 	//layer = TURF_LAYER+0.1
 

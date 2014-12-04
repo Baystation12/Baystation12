@@ -47,7 +47,7 @@
 			var/atom/cur_loc = src.loc
 
 			if(cur_loc.z == beacon.z)
-				src.dir = get_dir(cur_loc,beacon)
+				src.set_dir(get_dir(cur_loc,beacon))
 			else
 				var/list/beacon_global_loc = beacon.get_global_map_pos()
 				var/list/src_global_loc = cur_loc.get_global_map_pos()
@@ -64,7 +64,7 @@
 					else if(beacon_global_loc["y"]<src_global_loc["y"])
 						ver_dir = SOUTH
 
-					src.dir = hor_dir|ver_dir
+					src.set_dir(hor_dir|ver_dir)
 			sleep(5)
 
 

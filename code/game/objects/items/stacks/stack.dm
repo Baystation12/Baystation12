@@ -131,7 +131,7 @@
 		if (src.amount < R.req_amount*multiplier)
 			return
 		var/atom/O = new R.result_type( usr.loc )
-		O.dir = usr.dir
+		O.set_dir(usr.dir)
 		if (R.max_res_amount>1)
 			var/obj/item/stack/new_item = O
 			new_item.amount = R.res_amount*multiplier

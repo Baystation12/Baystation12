@@ -13,7 +13,7 @@
 
 	use_power = 1
 	idle_power_usage = 40
-
+	interact_offline = 1
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))

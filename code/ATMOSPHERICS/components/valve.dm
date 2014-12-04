@@ -6,7 +6,7 @@
 	desc = "A pipe valve"
 
 	level = 1
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH|NORTH
 
 	var/open = 0
@@ -123,9 +123,9 @@
 
 /obj/machinery/atmospherics/valve/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 /obj/machinery/atmospherics/valve/attack_ai(mob/user as mob)
 	return
