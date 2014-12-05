@@ -1803,7 +1803,7 @@ datum/design/borg_syndicate_module
 /////////////PDA and Radio stuff/////////
 /////////////////////////////////////////
 datum/design/binaryencrypt
-	name = "Binary Encrpytion Key"
+	name = "binary encryption key"
 	desc = "An encyption key for a radio headset.  Contains cypherkeys."
 	id = "binaryencrypt"
 	req_tech = list("syndicate" = 2)
