@@ -310,7 +310,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 
 	// Find a blood decal or create a new one.
 	B = locate(decal_type) in T
-	if(!B)
+	if(!B || B.stackable)
 		B = new decal_type(T)
 
 	// If there's no data to copy, call it quits here.
