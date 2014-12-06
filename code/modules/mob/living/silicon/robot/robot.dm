@@ -78,25 +78,22 @@ var/list/robot_verbs_default = list(
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
 
-/mob/living/silicon/robot/drain_power(var/drain_check)
+/mob/living/silicon/robot/syndicate
+	lawupdate = 0
+	scrambledcodes = 1
+	icon_state = "securityrobot"
+	modtype = "Security"
+	lawchannel = "State"
 
-	if(drain_check)
-		return 1
+/mob/living/silicon/robot/syndicate/New()
+	if(!cell)
+		cell = new /obj/item/weapon/cell(src)
+		cell.maxcharge = 25000
+		cell.charge = 25000
 
-	if(!cell || !cell.charge)
-		return 0
+	..()
 
-	if(cell.charge)
-		src << "<span class='danger'>Warning: Unauthorized access through power channel 12 detected.</span>"
-		var/drained_power = rand(200,400)
-		if(cell.charge < drained_power)
-			drained_power = cell.charge
-			cell.use(drained_power)
-			return drained_power
-
-	return 0
-
-/mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
+/mob/living/silicon/robot/New(loc,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -112,23 +109,11 @@ var/list/robot_verbs_default = list(
 	updatename("Default")
 	updateicon()
 
-	if(syndie)
-		if(!cell)
-			cell = new /obj/item/weapon/cell(src)
-
-		laws = new /datum/ai_laws/antimov()
-		lawupdate = 0
-		scrambledcodes = 1
-		cell.maxcharge = 25000
-		cell.charge = 25000
-		module = new /obj/item/weapon/robot_module/syndicate(src)
-		hands.icon_state = "standard"
-		icon_state = "secborg"
-		modtype = "Security"
-	init()
-
 	radio = new /obj/item/device/radio/borg(src)
 	common_radio = radio
+
+	init()
+
 	if(!scrambledcodes && !camera)
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
@@ -181,6 +166,36 @@ var/list/robot_verbs_default = list(
 		lawupdate = 0
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+
+/mob/living/silicon/robot/syndicate/init()
+	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+
+	laws = new /datum/ai_laws/syndicate_override
+	module = new /obj/item/weapon/robot_module/syndicate(src)
+
+	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
+	radio.recalculateChannels()
+
+	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
+
+
+/mob/living/silicon/robot/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!cell || !cell.charge)
+		return 0
+
+	if(cell.charge)
+		src << "<span class='danger'>Warning: Unauthorized access through power channel 12 detected.</span>"
+		var/drained_power = rand(200,400)
+		if(cell.charge < drained_power)
+			drained_power = cell.charge
+			cell.use(drained_power)
+			return drained_power
+
+	return 0
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
@@ -1292,6 +1307,16 @@ var/list/robot_verbs_default = list(
 		use_power(RC.active_usage)
 		return 1
 	return 0
+
+/mob/living/silicon/robot/syndicate/canUseTopic(atom/movable/M)
+	if(stat || lockcharge || stunned || weakened)
+		return
+	if(z in config.admin_levels)
+		return 1
+	if(istype(M, /obj/machinery))
+		var/obj/machinery/Machine = M
+		return Machine.emagged
+	return 1
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
 	if(!connected_ai)

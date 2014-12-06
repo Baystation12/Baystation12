@@ -350,7 +350,7 @@ Class Procs:
 /obj/machinery/proc/is_assess_emagged()
 	return emagged
 
-/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records)
+/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = 0	//the integer returned
 
 	if(is_assess_emagged())
@@ -377,13 +377,17 @@ Class Procs:
 
 		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
 			threatcount += 2
-	if(check_records)
+
+	if(check_records || check_arrest)
 		var/perpname = perp.name
 		if(id)
 			perpname = id.registered_name
 
 		var/datum/data/record/R = find_security_record("name", perpname)
-		if(R && (R.fields["criminal"] == "*Arrest*"))
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
 			threatcount += 4
 
 	return threatcount

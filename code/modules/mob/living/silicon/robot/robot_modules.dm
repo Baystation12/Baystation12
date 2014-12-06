@@ -376,13 +376,29 @@
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
 
-	New()
+	New(var/mob/living/silicon/robot/R)
+		loc = R
+
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/melee/energy/sword(src)
 		src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 		src.modules += new /obj/item/weapon/card/emag(src)
+
+		var/jetpack = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
+		src.modules += jetpack
+		R.internals = jetpack
+
 		return
+
+/obj/item/weapon/robot_module/syndicate/add_languages(var/mob/living/silicon/robot/R)
+	//full set of languages
+	R.add_language("Sol Common", 1)
+	R.add_language("Tradeband", 1)
+	R.add_language("Sinta'unathi", 0)
+	R.add_language("Siik'tajr", 0)
+	R.add_language("Skrellian", 0)
+	R.add_language("Gutter", 1)
 
 /obj/item/weapon/robot_module/combat
 	name = "combat robot module"
