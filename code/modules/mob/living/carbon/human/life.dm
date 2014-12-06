@@ -114,6 +114,8 @@
 
 		handle_medical_side_effects()
 
+		handle_gender_updates()
+
 	handle_stasis_bag()
 
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
@@ -1892,6 +1894,10 @@
 	if(..())
 		speech_problem_flag = 1
 	return silent
+
+/mob/living/carbon/human/proc/handle_gender_updates()
+	if(istype(species)&&species.flags & GENDERLESS)
+		gender = NEUTER
 
 /mob/living/carbon/human/handle_slurring()
 	if(..())
