@@ -3,6 +3,7 @@
 /obj/item/weapon/implantcase
 	name = "Glass Case"
 	desc = "A case containing an implant."
+	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-0"
 	item_state = "implantcase"
 	throw_speed = 1
@@ -27,7 +28,7 @@
 			return
 		t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
 		if(t)
-			src.name = text("Glass Case- '[]'", t)
+			src.name = text("Glass Case - '[]'", t)
 		else
 			src.name = "Glass Case"
 	else if(istype(I, /obj/item/weapon/reagent_containers/syringe))
@@ -40,30 +41,30 @@
 				I.reagents.trans_to(src.imp, 5)
 				user << "\blue You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units."
 	else if (istype(I, /obj/item/weapon/implanter))
-		if (I:imp)
-			if ((src.imp || I:imp.implanted))
+		var/obj/item/weapon/implanter/M = I
+		if (M.imp)
+			if ((src.imp || M.imp.implanted))
 				return
-			I:imp.loc = src
-			src.imp = I:imp
-			I:imp = null
+			M.imp.loc = src
+			src.imp = M.imp
+			M.imp = null
 			src.update()
-			I:update()
+			M.update()
 		else
 			if (src.imp)
-				if (I:imp)
+				if (M.imp)
 					return
-				src.imp.loc = I
-				I:imp = src.imp
+				src.imp.loc = M
+				M.imp = src.imp
 				src.imp = null
 				update()
-			I:update()
+			M.update()
 	return
 
 
 /obj/item/weapon/implantcase/tracking
 	name = "Glass Case - 'Tracking'"
 	desc = "A case containing a tracking implant."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 
 /obj/item/weapon/implantcase/tracking/New()
@@ -75,7 +76,6 @@
 /obj/item/weapon/implantcase/explosive
 	name = "Glass Case - 'Explosive'"
 	desc = "A case containing an explosive implant."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
 
 /obj/item/weapon/implantcase/explosive/New()
@@ -87,7 +87,6 @@
 /obj/item/weapon/implantcase/chem
 	name = "Glass Case - 'Chem'"
 	desc = "A case containing a chemical implant."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 
 /obj/item/weapon/implantcase/chem/New()
@@ -99,7 +98,6 @@
 /obj/item/weapon/implantcase/loyalty
 	name = "Glass Case - 'Loyalty'"
 	desc = "A case containing a loyalty implant."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-r"
 
 /obj/item/weapon/implantcase/loyalty/New()
@@ -111,7 +109,6 @@
 /obj/item/weapon/implantcase/death_alarm
 	name = "Glass Case - 'Death Alarm'"
 	desc = "A case containing a death alarm implant."
-	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 
 /obj/item/weapon/implantcase/death_alarm/New()
@@ -123,10 +120,42 @@
 /obj/item/weapon/implantcase/freedom
 	name = "Glass Case - 'Freedom'"
 	desc = "A case containing a freedom implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-b"
+	icon_state = "implantcase-r"
 
 /obj/item/weapon/implantcase/freedom/New()
 	src.imp = new /obj/item/weapon/implant/freedom( src )
+	..()
+	return
+
+
+/obj/item/weapon/implantcase/adrenalin
+	name = "Glass Case - 'Adrenalin'"
+	desc = "A case containing an adrenalin implant."
+	icon_state = "implantcase-b"
+
+/obj/item/weapon/implantcase/adrenalin/New()
+	src.imp = new /obj/item/weapon/implant/adrenalin( src )
+	..()
+	return
+
+
+/obj/item/weapon/implantcase/dexplosive
+	name = "Glass Case - 'Explosive'"
+	desc = "A case containing an explosive."
+	icon_state = "implantcase-r"
+
+/obj/item/weapon/implantcase/dexplosive/New()
+	src.imp = new /obj/item/weapon/implant/dexplosive( src )
+	..()
+	return
+
+
+/obj/item/weapon/implantcase/health
+	name = "Glass Case - 'Health'"
+	desc = "A case containing a health tracking implant."
+	icon_state = "implantcase-b"
+
+/obj/item/weapon/implantcase/health/New()
+	src.imp = new /obj/item/weapon/implant/health( src )
 	..()
 	return
