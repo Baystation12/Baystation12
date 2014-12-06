@@ -62,6 +62,13 @@
 	for(var/mob/M in viewers(src))
 		M.show_message( message, 1, blind_message, 2)
 
+// Returns an amount of power drawn from the object (-1 if it's not viable).
+// If drain_check is set it will not actually drain power, just return a value.
+// If surge is set, it will destroy/damage the recipient and not return any power.
+// Not sure where to define this, so it can sit here for the rest of time.
+/atom/proc/drain_power(var/drain_check,var/surge)
+	return -1
+
 // Show a message to all mobs in earshot of this one
 // This would be for audible actions by the src mob
 // message is the message output to anyone who can hear.
@@ -165,6 +172,7 @@ var/list/slot_equipment_priority = list( \
 		slot_glasses,\
 		slot_belt,\
 		slot_s_store,\
+		slot_tie,\
 		slot_l_store,\
 		slot_r_store\
 	)
@@ -428,6 +436,8 @@ var/list/slot_equipment_priority = list( \
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
+
+	announce_ghost_joinleave(client, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
@@ -810,6 +820,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 			for(var/atom/A in listed_turf)
 				if(A.invisibility > see_invisible)
 					continue
+				if(is_type_in_list(A, shouldnt_see))
+					continue
 				statpanel(listed_turf.name, null, A)
 
 	if(spell_list && spell_list.len)
@@ -893,10 +905,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = ndir
+	set_dir(ndir)
 	if(buckled && buckled.movable)
-		buckled.dir = ndir
-		buckled.handle_rotation()
+		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
 
@@ -1069,7 +1080,7 @@ mob/proc/yank_out_object()
 		var/datum/organ/external/affected
 
 		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
-			for(var/obj/item/weapon/O in organ.implants)
+			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
 

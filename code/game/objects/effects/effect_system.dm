@@ -223,7 +223,13 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (istype(M))
 		return 0
-	if (M.internal != null && M.wear_mask && (M.wear_mask.flags & MASKINTERNALS))
+	if (M.internal != null)
+		if(M.wear_mask && (M.wear_mask.flags & AIRTIGHT))
+			return 0
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.head && (H.head.flags & AIRTIGHT))
+				return 0
 		return 0
 	return 1
 
@@ -396,7 +402,7 @@ steam.start() -- spawns the effect
 					if(istype(T, /turf/space))
 						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
 						src.oldposition = T
-						I.dir = src.holder.dir
+						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
@@ -443,7 +449,7 @@ steam.start() -- spawns the effect
 					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
-					I.dir = src.holder.dir
+					I.set_dir(src.holder.dir)
 					spawn(10)
 						I.delete()
 						src.number--
@@ -690,15 +696,6 @@ steam.start() -- spawns the effect
 	CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 		if(air_group) return 0
 		return !density
-
-
-	proc/update_nearby_tiles(need_rebuild)
-		if(!air_master)
-			return 0
-
-		air_master.mark_for_update(get_turf(src))
-
-		return 1
 
 /datum/effect/effect/system/reagents_explosion
 	var/amount 						// TNT equivalent

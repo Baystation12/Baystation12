@@ -13,7 +13,7 @@
 
 	use_power = 1
 	idle_power_usage = 40
-
+	interact_offline = 1
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -170,7 +170,7 @@
 
 	New()
 		..()
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"

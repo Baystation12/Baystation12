@@ -158,14 +158,13 @@
 	O.job = "Cyborg"
 	if(O.mind.assigned_role == "Cyborg")
 		if(O.mind.role_alt_title == "Android")
-			O.mmi = new /obj/item/device/mmi/posibrain(O)
+			O.mmi = new /obj/item/device/mmi/digital/posibrain(O)
 		else if(O.mind.role_alt_title == "Robot")
-			O.mmi = null //Robots do not have removable brains.
+			O.mmi = new /obj/item/device/mmi/digital/robot(O)
 		else
 			O.mmi = new /obj/item/device/mmi(O)
 
-		if(O.mmi)
-			O.mmi.transfer_identity(src)
+		O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
 	O.notify_ai(1)

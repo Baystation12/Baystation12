@@ -263,10 +263,11 @@
 
 
 	/*		Power Monitor (Mode: 43 / 433)			*/
+	/*
 	if(mode==43 || mode==433)
 		var/pMonData[0]
 		var/apcData[0]
-		for(var/obj/machinery/power/monitor/pMon in world)
+		for(var/obj/machinery/computer/power_monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
 				var/turf/monitorturf = locate(pMon.x,pMon.y,pMon.z)
 				var/area/monitorarea = monitorturf.loc
@@ -293,7 +294,7 @@
 			values["apcs"] = apcData
 		else
 			values["powerconnected"] = 0
-
+	*/
 
 
 
@@ -592,10 +593,12 @@
 					updateSelfDialog()
 				else
 					post_status(href_list["statdisp"])
+		/*
 		if("Power Select")
 			var/pref = href_list["target"]
 			powmonitor = locate(pref)
 			loc:mode = 433
 			mode = 433
+		´*/
 
 	return 1

@@ -110,8 +110,8 @@
 	*/
 	return
 
-
-/atom/movable/Move(NewLoc, direct)
+//This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
+/atom/movable/Move(newloc, direct)
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -143,9 +143,20 @@
 							if (step(src, WEST))
 								step(src, SOUTH)
 	else
-		. = ..()
-	return
+		var/atom/A = src.loc
 
+		var/olddir = dir //we can't override this without sacrificing the rest of movable/New()
+		. = ..()
+		if(direct != olddir)
+			dir = olddir
+			set_dir(direct)
+
+		src.move_speed = world.time - src.l_move_time
+		src.l_move_time = world.time
+		src.m_flag = 1
+		if ((A != src.loc && A && A.z == src.z))
+			src.last_move = get_dir(A, src.loc)
+	return
 
 /client/proc/Move_object(direct)
 	if(mob && mob.control_object)

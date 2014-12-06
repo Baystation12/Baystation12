@@ -1,3 +1,17 @@
+/obj/item/weapon/storage/box/bloodpacks
+	name = "blood packs bags"
+	desc = "This box contains blood packs."
+	icon_state = "sterile"
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+		new /obj/item/weapon/reagent_containers/blood/empty(src)
+
 /obj/item/weapon/reagent_containers/blood
 	name = "BloodPack"
 	desc = "Contains blood used for transfusion."

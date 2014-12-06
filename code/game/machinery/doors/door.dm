@@ -29,7 +29,7 @@
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 
 	//Multi-tile doors
-	dir = EAST
+	set_dir(EAST)
 	var/width = 1
 
 /obj/machinery/door/New()
@@ -128,9 +128,9 @@
 
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	
-	//Tasers and the like should not damage doors.
-	if(Proj.damage_type == HALLOSS)
+
+	//Tasers and the like should not damage doors. Nor should TOX, OXY, CLONE, etc damage types
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
 	if(Proj.damage)
@@ -139,7 +139,7 @@
 /obj/machinery/door/hitby(AM as mob|obj)
 
 	..()
-	visible_message("\red <B>[src.name] was hit by [AM].</B>", 1)
+	visible_message("\red <B>[src.name] was hit by [AM].</B>")
 	var/tforce = 0
 	if(ismob(AM))
 		tforce = 15
@@ -191,7 +191,8 @@
 		open()
 		operating = -1
 		return 1
-	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
+	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
+	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			if(W.force < min_force)
@@ -349,7 +350,7 @@
 /obj/machinery/door/proc/requiresID()
 	return 1
 
-/obj/machinery/door/proc/update_nearby_tiles(need_rebuild)
+/obj/machinery/door/update_nearby_tiles(need_rebuild)
 	if(!air_master)
 		return 0
 
@@ -373,7 +374,7 @@
 	return
 
 /obj/machinery/door/Move(new_loc, new_dir)
-	update_nearby_tiles()
+	//update_nearby_tiles()
 	. = ..()
 	if(width > 1)
 		if(dir in list(EAST, WEST))

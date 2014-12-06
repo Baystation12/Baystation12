@@ -604,7 +604,7 @@ datum/design/posibrain
 
 	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$glass" = 1000, "$silver" = 1000, "$gold" = 500, "$phoron" = 500, "$diamond" = 100)
-	build_path = /obj/item/device/mmi/posibrain
+	build_path = /obj/item/device/mmi/digital/posibrain
 
 ///////////////////////////////////
 //////////Mecha Module Disks///////
@@ -1272,6 +1272,15 @@ datum/design/gas_cooler
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/unary_atmos/cooler
+
+datum/design/secure_airlock
+	name = "Secure Airlock Electronics"
+	desc =  "Tamper-resistant airlock electronics"
+	id = "securedoor"
+	req_tech = list("programming" = 3)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/airlock_electronics/secure
 
 /////////////////////////////////////////
 ////////////Power Stuff//////////////////

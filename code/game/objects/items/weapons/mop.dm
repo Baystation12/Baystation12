@@ -40,7 +40,7 @@
 		user.visible_message("<span class='warning'>[user] begins to clean \the [get_turf(A)].</span>")
 
 		if(do_after(user, 40))
-			var/turf/T = A
+			var/turf/T = get_turf(A)
 			if(T)
 				T.clean(src)
 			user << "<span class='notice'>You have finished mopping!</span>"

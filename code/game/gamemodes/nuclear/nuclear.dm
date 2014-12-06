@@ -222,28 +222,6 @@ var/global/list/turf/synd_spawn = list()
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(synd_mob), slot_in_backpack)
 
-/*	Commented; nukes now have a suit cycler for changing rig-suits, they don't need to spawn with them
-	var/obj/item/clothing/suit/space/rig/syndi/new_suit = new(synd_mob)
-	var/obj/item/clothing/head/helmet/space/rig/syndi/new_helmet = new(synd_mob)
-
-	if(synd_mob.species)
-
-		var/race = synd_mob.species.name
-
-		switch(race)
-			if("Unathi")
-				new_suit.species_restricted = list("Unathi")
-			if("Tajara")
-				new_suit.species_restricted = list("Tajara")
-			if("Skrell")
-				new_suit.species_restricted = list("Skrell")
-
-	synd_mob.equip_to_slot_or_del(new_suit, slot_in_backpack)
-	synd_mob.equip_to_slot_or_del(new_helmet, slot_in_backpack)*/
-
-//	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
-//	E.imp_in = synd_mob
-//	E.implanted = 1
 	synd_mob.update_icons()
 	return 1
 

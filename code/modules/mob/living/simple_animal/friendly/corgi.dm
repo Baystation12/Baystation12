@@ -297,15 +297,15 @@
 
 				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 					if (movement_target.loc.x < src.x)
-						dir = WEST
+						set_dir(WEST)
 					else if (movement_target.loc.x > src.x)
-						dir = EAST
+						set_dir(EAST)
 					else if (movement_target.loc.y < src.y)
-						dir = SOUTH
+						set_dir(SOUTH)
 					else if (movement_target.loc.y > src.y)
-						dir = NORTH
+						set_dir(NORTH)
 					else
-						dir = SOUTH
+						set_dir(SOUTH)
 
 					if(isturf(movement_target.loc) )
 						UnarmedAttack(movement_target)
@@ -316,7 +316,7 @@
 			visible_emote(pick("dances around","chases their tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
+					set_dir(i)
 					sleep(1)
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
@@ -369,7 +369,7 @@
 					M.show_message("\blue [user] baps [name] on the nose with the rolled up [O]")
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2))
-					dir = i
+					set_dir(i)
 					sleep(1)
 	else
 		..()
@@ -471,5 +471,5 @@
 			visible_emote(pick("dances around","chases her tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
+					set_dir(i)
 					sleep(1)

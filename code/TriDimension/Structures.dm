@@ -256,8 +256,8 @@
 						initialise_stair_connection(S, src, inv_dir)
 
 	proc/initialise_stair_connection(var/obj/multiz/stairs/top, var/obj/multiz/stairs/bottom, var/dir)
-		top.dir = dir
-		bottom.dir = dir
+		top.set_dir(dir)
+		bottom.set_dir(dir)
 		top.connected = bottom
 		bottom.connected = top
 		top.icon_state = "ramptop"

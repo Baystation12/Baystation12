@@ -63,6 +63,7 @@ proc/populate_seed_list()
 	var/seed_noun = "seeds"        // Descriptor for packet.
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
+	var/mysterious                 // Only used for the random seed packets.
 
 	// Output.
 	var/list/products              // Possible fruit/other product paths.
@@ -118,14 +119,76 @@ proc/populate_seed_list()
 	roundstart = 0
 	seed_name = "strange plant"     // TODO: name generator.
 	display_name = "strange plants" // TODO: name generator.
+	mysterious = 1
 
 	seed_noun = pick("spores","nodes","cuttings","seeds")
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/generic_fruit)
+	products = list(pick(typesof(/obj/item/weapon/reagent_containers/food/snacks/grown)-/obj/item/weapon/reagent_containers/food/snacks/grown))
 	potency = rand(5,30)
 
-	//TODO: Finish generalizing the product icons so this can be randomized.
-	packet_icon = "seed-berry"
-	plant_icon = "berry"
+	var/list/plant_icons = pick(list(
+		list("seed-chili",              "chili"),
+		list("seed-icepepper",          "chiliice"),
+		list("seed-berry",              "berry"),
+		list("seed-glowberry",          "glowberry"),
+		list("seed-poisonberry",        "poisonberry"),
+		list("seed-deathberry",         "deathberry"),
+		list("seed-nettle",             "nettle"),
+		list("seed-deathnettle",        "deathnettle"),
+		list("seed-tomato",             "tomato"),
+		list("seed-bloodtomato",        "bloodtomato"),
+		list("seed-killertomato",       "killertomato"),
+		list("seed-bluetomato",         "bluetomato"),
+		list("seed-bluespacetomato",    "bluespacetomato"),
+		list("seed-eggplant",           "eggplant"),
+		list("seed-eggy",               "eggy"),
+		list("seed-apple",              "apple"),
+		list("seed-goldapple",          "goldapple"),
+		list("seed-ambrosiavulgaris",   "ambrosiavulgaris"),
+		list("seed-ambrosiadeus",       "ambrosiadeus"),
+		list("mycelium-chanter",        "chanter"),
+		list("mycelium-plump",          "plump"),
+		list("mycelium-reishi",         "reishi"),
+		list("mycelium-liberty",        "liberty"),
+		list("mycelium-amanita",        "amanita"),
+		list("mycelium-angel",          "angel"),
+		list("mycelium-tower",          "towercap"),
+		list("mycelium-glowshroom",     "glowshroom"),
+		list("mycelium-walkingmushroom","walkingmushroom"),
+		list("mycelium-plast",          "plastellium"),
+		list("seed-harebell",           "harebell"),
+		list("seed-poppy",              "poppy"),
+		list("seed-sunflower",          "sunflower"),
+		list("seed-grapes",             "grape"),
+		list("seed-greengrapes",        "greengrape"),
+		list("seed-peanut",             "peanut"),
+		list("seed-cabbage",            "cabbage"),
+		list("seed-shand",              "shand"),
+		list("seed-mtear",              "mtear"),
+		list("seed-banana",             "banana"),
+		list("seed-corn",               "corn"),
+		list("seed-potato",             "potato"),
+		list("seed-soybean",            "soybean"),
+		list("seed-wheat",              "wheat"),
+		list("seed-rice",               "rice"),
+		list("seed-carrot",             "carrot"),
+		list("seed-ambrosiavulgaris",   "weeds"),
+		list("seed-whitebeet",          "whitebeet"),
+		list("seed-sugarcane",          "sugarcane"),
+		list("seed-watermelon",         "watermelon"),
+		list("seed-pumpkin",            "pumpkin"),
+		list("seed-lime",               "lime"),
+		list("seed-lemon",              "lemon"),
+		list("seed-orange",             "orange"),
+		list("seed-grass",              "grass"),
+		list("seed-cocoapod",           "cocoapod"),
+		list("seed-cherry",             "cherry"),
+		list("seed-kudzu",              "kudzu"),
+		list("seed-replicapod",         "replicapod")
+		))
+
+	packet_icon = plant_icons[1]
+	plant_icon = plant_icons[2]
+
 	if(prob(20))
 		harvest_repeat = 1
 
@@ -536,6 +599,10 @@ proc/populate_seed_list()
 		for(var/i = 0;i<total_yield;i++)
 			var/product_type = pick(products)
 			var/obj/item/product = new product_type(get_turf(user))
+			if(mysterious)
+				product.name += "?"
+				product.desc += " On second thought, something about this one looks strange."
+
 			if(biolum)
 				if(biolum_colour)
 					product.l_color = biolum_colour
@@ -1097,7 +1164,6 @@ proc/populate_seed_list()
 	production = 6
 	yield = 6
 	growth_stages = 3
-	plant_icon = ""
 
 /datum/seed/flower/sunflower
 	name = "sunflowers"

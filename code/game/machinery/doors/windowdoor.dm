@@ -16,18 +16,9 @@
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 
-
-/obj/machinery/door/window/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
-
 /obj/machinery/door/window/New()
 	..()
-
+	update_nearby_tiles()
 	if (src.req_access && src.req_access.len)
 		src.icon_state = "[src.icon_state]"
 		src.base_state = src.icon_state
@@ -36,6 +27,7 @@
 /obj/machinery/door/window/Del()
 	density = 0
 	playsound(src, "shatter", 70, 1)
+	update_nearby_tiles()
 	..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
@@ -202,7 +194,7 @@
 				wa.name = "Wired Windoor Assembly"
 			if (src.base_state == "right" || src.base_state == "rightsecure")
 				wa.facing = "r"
-			wa.dir = src.dir
+			wa.set_dir(src.dir)
 			wa.state = "02"
 			wa.update_icon()
 

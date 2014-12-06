@@ -136,8 +136,10 @@
 			//Cameras can't track people wearing an agent card or a ninja hood.
 			if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
 				continue
-			if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-				continue
+			if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
+				var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
+				if(helmet.prevent_track())
+					continue
 
 		 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 		if(!near_camera(M))
@@ -186,9 +188,6 @@
 	var/mob/living/silicon/ai/U = usr
 
 	U.cameraFollow = target
-	//U << text("Now tracking [] on camera.", target.name)
-	//if (U.machine == null)
-	//	U.machine = U
 	U << "Now tracking [target.name] on camera."
 
 	spawn (0)
@@ -200,9 +199,11 @@
 				if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
 					U.ai_cancel_tracking(1)
 					return
-				if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-					U.ai_cancel_tracking(1)
-					return
+				if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
+					var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
+					if(helmet.prevent_track())
+						U.ai_cancel_tracking(1)
+						return
 				if(H.digitalcamo)
 					U.ai_cancel_tracking(1)
 					return
@@ -211,7 +212,7 @@
 				U.ai_cancel_tracking()
 				return
 
-			if (!near_camera(target))
+			if (!trackable(target))
 				U << "Target is not near any active cameras."
 				sleep(100)
 				continue
@@ -233,6 +234,9 @@
 	else if(!cameranet.checkCameraVis(M))
 		return 0
 	return 1
+
+/proc/trackable(var/mob/living/M)
+	return near_camera(M) || (M.loc.z in config.station_levels && hassensorlevel(M, SUIT_SENSOR_TRACKING))
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))

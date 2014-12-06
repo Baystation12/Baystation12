@@ -69,14 +69,17 @@
 		var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
+
+		if(back && istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/suit = back
+			var/cell_status = "ERROR"
+			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
+			stat(null, "Suit charge: [cell_status]")
+
 		if(mind)
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
-
-		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
-			stat("Energy Charge", round(wear_suit:cell:charge/100))
-
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
@@ -262,40 +265,52 @@
 		var/obj/vehicle/V = AM
 		V.RunOver(src)
 
+// Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
+/mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
+	var/obj/item/device/pda/pda = wear_id
+	if (istype(pda))
+		if (pda.id)
+			return pda.id.rank
+		else
+			return pda.ownrank
+	else
+		var/obj/item/weapon/card/id/id = get_idcard()
+		if(id)
+			return id.rank ? id.rank : if_no_job
+		else
+			return if_no_id
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_assignment(var/if_no_id = "No id", var/if_no_job = "No job")
 	var/obj/item/device/pda/pda = wear_id
-	var/obj/item/weapon/card/id/id = wear_id
 	if (istype(pda))
-		if (pda.id && istype(pda.id, /obj/item/weapon/card/id))
-			. = pda.id.assignment
+		if (pda.id)
+			return pda.id.assignment
 		else
-			. = pda.ownjob
-	else if (istype(id))
-		. = id.assignment
+			return pda.ownjob
 	else
-		return if_no_id
-	if (!.)
-		. = if_no_job
-	return
+		var/obj/item/weapon/card/id/id = get_idcard()
+		if(id)
+			return id.assignment ? id.assignment : if_no_job
+		else
+			return if_no_id
 
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
 	var/obj/item/device/pda/pda = wear_id
-	var/obj/item/weapon/card/id/id = wear_id
 	if (istype(pda))
 		if (pda.id)
-			. = pda.id.registered_name
+			return pda.id.registered_name
 		else
-			. = pda.owner
-	else if (istype(id))
-		. = id.registered_name
+			return pda.owner
 	else
-		return if_no_id
-	return
+		var/obj/item/weapon/card/id/id = get_idcard()
+		if(id)
+			return id.registered_name
+		else
+			return if_no_id
 
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
@@ -677,6 +692,10 @@
 	if(istype(src.head, /obj/item/clothing/head/welding))
 		if(!src.head:up)
 			number += 2
+	if(istype(back, /obj/item/weapon/rig))
+		var/obj/item/weapon/rig/O = back
+		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+			number += 2
 	if(istype(src.head, /obj/item/clothing/head/helmet/space))
 		number += 2
 	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
@@ -688,7 +707,6 @@
 		if(!W.up)
 			number += 2
 	return number
-
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)

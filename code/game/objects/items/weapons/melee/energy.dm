@@ -164,15 +164,39 @@
 	w_class = 4.0//So you can't hide it in your pocket or some such.
 	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/melee/energy/blade/New()
+
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/item/weapon/melee/energy/blade/dropped()
-	del(src)
+	processing_objects |= src
 
-/obj/item/weapon/melee/energy/blade/proc/throw()
-	del(src)
+/obj/item/weapon/melee/energy/blade/Del()
+	processing_objects -= src
+	..()
+
+/obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
+	user.drop_from_inventory(src)
+	spawn(1) if(src) del(src)
+
+/obj/item/weapon/melee/energy/blade/dropped()
+	spawn(1) if(src) del(src)
+
+/obj/item/weapon/melee/energy/blade/process()
+	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
+		// Tidy up a bit.
+		if(istype(loc,/mob/living))
+			var/mob/living/carbon/human/host = loc
+			if(istype(host))
+				for(var/datum/organ/external/organ in host.organs)
+					for(var/obj/item/O in organ.implants)
+						if(O == src)
+							organ.implants -= src
+			host.pinned -= src
+			host.embedded -= src
+			host.drop_from_inventory(src)
+		spawn(1) if(src) del(src)

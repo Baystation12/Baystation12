@@ -52,6 +52,9 @@
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
 
+/obj/structure/Del()
+	..()
+
 /obj/structure/proc/climb_on()
 
 	set name = "Climb structure"

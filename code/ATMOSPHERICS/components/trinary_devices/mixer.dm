@@ -181,7 +181,7 @@
 obj/machinery/atmospherics/trinary/mixer/t_mixer
 	icon_state = "tmap"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH|EAST|WEST
 
 	//node 3 is the outlet, nodes 1 & 2 are intakes
@@ -227,7 +227,7 @@ obj/machinery/atmospherics/trinary/mixer/t_mixer/initialize()
 obj/machinery/atmospherics/trinary/mixer/m_mixer
 	icon_state = "mmap"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH|NORTH|EAST
 
 	//node 3 is the outlet, nodes 1 & 2 are intakes

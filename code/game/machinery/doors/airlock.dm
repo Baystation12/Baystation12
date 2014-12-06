@@ -27,8 +27,7 @@
 	normalspeed = 1
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
-	var/secured_wires = 0	//for mapping use
-	var/security_bolts = 0 //if 1, door bolts when broken
+	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
 /obj/machinery/door/airlock/command
@@ -78,7 +77,7 @@
 	name = "Vault"
 	icon = 'icons/obj/doors/vault.dmi'
 	opacity = 1
-	security_bolts = 1
+	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 
 /obj/machinery/door/airlock/freezer
@@ -259,9 +258,9 @@
 	glass = 1
 
 /obj/machinery/door/airlock/highsecurity
-	name = "High Tech Security Airlock"
+	name = "Secure Airlock"
 	icon = 'icons/obj/doors/hightechsecurity.dmi'
-	security_bolts = 1
+	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
 
 /*
@@ -899,7 +898,7 @@ About the new airlock wires panel:
 
 				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
 				if (istype(da, /obj/structure/door_assembly/multi_tile))
-					da.dir = src.dir
+					da.set_dir(src.dir)
 
  				da.anchored = 1
 				if(mineral)
@@ -911,23 +910,14 @@ About the new airlock wires panel:
 				da.created_name = src.name
 				da.update_state()
 
-				var/obj/item/weapon/airlock_electronics/ae
-				if(!electronics)
-					ae = new/obj/item/weapon/airlock_electronics( src.loc )
-					if(!src.req_access)
-						src.check_access()
-					if(src.req_access.len)
-						ae.conf_access = src.req_access
-					else if (src.req_one_access.len)
-						ae.conf_access = src.req_one_access
-						ae.one_access = 1
-				else
-					ae = electronics
-					electronics = null
-					ae.loc = src.loc
 				if(operating == -1)
-					ae.icon_state = "door_electronics_smoked"
+					new /obj/item/weapon/circuitboard/broken(src.loc)
 					operating = 0
+				else 
+					if (!electronics) create_electronics()
+					
+					electronics.loc = src.loc
+					electronics = null
 
 				del(src)
 				return
@@ -970,7 +960,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/set_broken()
 	src.p_open = 1
 	stat |= BROKEN
-	if (src.security_bolts)
+	if (secured_wires)
 		lock()
 	for (var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
@@ -1066,8 +1056,29 @@ About the new airlock wires panel:
 		return 1
 	return 0
 
-/obj/machinery/door/airlock/New()
+/obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()
+
+	//if assembly is given, create the new door from the assembly
+	if (assembly)
+		assembly_type = assembly.type
+		
+		electronics = assembly.electronics
+		electronics.loc = src
+		
+		//update the door's access to match the electronics'
+		secured_wires = electronics.secure
+		if(electronics.one_access)
+			req_access = null
+			req_one_access = src.electronics.conf_access
+		else
+			req_access = src.electronics.conf_access
+		
+		//get the name from the assembly
+		if(assembly.created_name)
+			name = assembly.created_name
+		else
+			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
 
 	//wires
 	if (secured_wires)
@@ -1081,6 +1092,25 @@ About the new airlock wires panel:
 				if(A.closeOtherId == src.closeOtherId && A != src)
 					src.closeOther = A
 					break
+
+// Most doors will never be deconstructed over the course of a round, 
+// so as an optimization defer the creation of electronics until 
+// the airlock is deconstructed
+/obj/machinery/door/airlock/proc/create_electronics()
+	//create new electronics
+	if (secured_wires)
+		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
+	else
+		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
+	
+	//update the electronics to match the door's access
+	if(!src.req_access)
+		src.check_access()
+	if(src.req_access.len)
+		electronics.conf_access = src.req_access
+	else if (src.req_one_access.len)
+		electronics.conf_access = src.req_one_access
+		electronics.one_access = 1
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	..()
