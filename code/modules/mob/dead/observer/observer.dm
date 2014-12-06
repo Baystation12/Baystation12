@@ -21,6 +21,8 @@
 	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
+	var/admin_ghosted = 0
+	var/anonsay = 0
 
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
@@ -165,22 +167,31 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Relinquish your life and enter the land of the dead."
 
 	if(stat == DEAD)
-		ghostize(1)
+		announce_ghost_joinleave(ghostize(1))
 	else
-		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to play this round for another 30 minutes! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
-		if(response != "Ghost")	return	//didn't want to ghost after-all
+		var/response
+		if(src.client && src.client.holder)
+			response = alert(src, "You have the ability to Admin-Ghost. The regular Ghost verb will announce your presence to dead chat. Both variants will allow you to return to your body using 'aghost'.\n\nWhat do you wish to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
+			if(response == "Admin Ghost")
+				if(!src.client)
+					return
+				src.client.admin_ghost()
+		else
+			response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to play this round for another 30 minutes! You can't change your mind so choose wisely!)", "Are you sure you want to ghost?", "Ghost", "Stay in body")
+		if(response != "Ghost")
+			return
 		resting = 1
 		var/turf/location = get_turf(src)
 		message_admins("[key_name_admin(usr)] has ghosted. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 		log_game("[key_name_admin(usr)] has ghosted.")
-		var/mob/dead/observer/ghost = ghostize(0)						//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
+		var/mob/dead/observer/ghost = ghostize(0)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
-	return
+		announce_ghost_joinleave(ghost)
 
 
 /mob/dead/observer/Move(NewLoc, direct)
 	following = null
-	dir = direct
+	set_dir(direct)
 	if(NewLoc)
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
@@ -237,6 +248,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
+	if(!admin_ghosted)
+		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
 
 /mob/dead/observer/verb/toggle_medHUD()
@@ -280,7 +293,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		M.antagHUD = 1
 		src << "\blue <B>AntagHUD Enabled</B>"
 
-/mob/dead/observer/proc/dead_tele()
+/mob/dead/observer/proc/dead_tele(A in ghostteleportlocs)
 	set category = "Ghost"
 	set name = "Teleport"
 	set desc= "Teleport to a location"
@@ -290,8 +303,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	usr.verbs -= /mob/dead/observer/proc/dead_tele
 	spawn(30)
 		usr.verbs += /mob/dead/observer/proc/dead_tele
-	var/A
-	A = input("Area to jump to", "BOOYEA", A) as null|anything in ghostteleportlocs
 	var/area/thearea = ghostteleportlocs[A]
 	if(!thearea)	return
 
@@ -305,14 +316,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	usr.loc = pick(L)
 	following = null
 
-/mob/dead/observer/verb/follow()
+/mob/dead/observer/verb/follow(input in getmobs())
 	set category = "Ghost"
 	set name = "Follow" // "Haunt"
 	set desc = "Follow and haunt a mob."
 
-	var/list/mobs = getmobs()
-	var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
-	var/mob/target = mobs[input]
+	var/target = getmobs()[input]
+	if(!target) return
 	ManualFollow(target)
 
 // This is the ghost's follow verb with an argument
@@ -332,32 +342,24 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 					loc = T
 				sleep(15)
 
-/mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
+/mob/dead/observer/verb/jumptomob(target in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
 	set name = "Jump to Mob"
 	set desc = "Teleport to a mob"
 
 	if(istype(usr, /mob/dead/observer)) //Make sure they're an observer!
 
-
-		var/list/dest = list() //List of possible destinations (mobs)
-		var/target = null	   //Chosen target.
-
-		dest += getmobs() //Fill list, prompt user with list
-		target = input("Please, select a player!", "Jump to Mob", null, null) as null|anything in dest
-
 		if (!target)//Make sure we actually have a target
 			return
 		else
-			var/mob/M = dest[target] //Destination mob
-			var/mob/A = src			 //Source mob
+			var/mob/M = getmobs()[target] //Destination mob
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
-				A.loc = T
+				src.loc = T
 				following = null
 			else
-				A << "This mob is not located in the game world."
+				src << "This mob is not located in the game world."
 /*
 /mob/dead/observer/verb/boo()
 	set category = "Ghost"
@@ -405,7 +407,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(total_moles)
 		for(var/g in environment.gas)
 			src << "\blue [gas_data.name[g]]: [round((environment.gas[g] / total_moles) * 100)]% ([round(environment.gas[g], 0.01)] moles)"
-		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C"
+		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C ([round(environment.temperature,0.1)]K)"
 		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
 
 
@@ -460,6 +462,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			host.universal_understand = 0
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
+		announce_ghost_joinleave(host, 0, "They are now a mouse.")
 
 /mob/dead/observer/verb/view_manfiest()
 	set name = "View Crew Manifest"
@@ -586,8 +589,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		toggled_invisible = world.time
 		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible</span>")
 	else
-		src << "<span class='info>You are now visible</span>"
+		src << "<span class='info'>You are now visible</span>"
 
 	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
 	// Give the ghost a cult icon which should be visible only to itself
 	toggle_icon("cult")
+
+/mob/dead/observer/verb/toggle_anonsay()
+	set category = "Ghost"
+	set name = "Toggle Anonymous Chat"
+	set desc = "Toggles showing your key in dead chat."
+
+	src.anonsay = !src.anonsay
+	if(anonsay)
+		src << "<span class='info'>Your key won't be shown when you speak in dead chat.</span>"
+	else
+		src << "<span class='info'>Your key will be publicly visible again.</span>"

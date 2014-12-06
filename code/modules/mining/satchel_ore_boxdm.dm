@@ -40,7 +40,8 @@
 	user << "That's an [src]."
 	user << desc
 
-	if(!istype(user, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can check the contents of ore boxes.
+	// Borgs can now check contents too.
+	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
 		return
 
 	if(!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.

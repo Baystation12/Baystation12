@@ -17,7 +17,15 @@
 	var/lethal = 0
 	var/locked = 1
 	var/control_area //can be area name, path or nothing.
-	var/ailock = 0 // AI cannot use this
+
+	var/check_arrest = 1	//checks if the perp is set to arrest
+	var/check_records = 1	//checks if a security record exists at all
+	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
+	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
+	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
+	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
+	var/ailock = 0 			// AI cannot use this
+
 	req_access = list(access_ai_upload)
 
 /obj/machinery/turretid/stun
@@ -116,20 +124,34 @@
 	if (!istype(loc, /area))
 		return
 	var/area/area = loc
-	var/t = ""
+	var/dat = ""
 
-	if(src.locked && (!istype(user, /mob/living/silicon)))
-		t += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
+	if(!locked || issilicon(user))
+		dat += text({"<BR><BR>
+					Lethal Mode: []<BR>
+					Neutralize All Non-Synthetics: []<BR>"},
+
+					"<A href='?src=\ref[src];operation=togglelethal'>[lethal ? "Enabled" : "Disabled"]</A>",
+					"<A href='?src=\ref[src];operation=toggleai'>[check_synth ? "Yes" : "No"]</A>")
+		if(!check_synth)
+			dat += text({"Check for Weapon Authorization: []<BR>
+					Check Security Records: []<BR>
+					Check Arrest Status: []<BR>
+					Neutralize All Non-Authorized Personnel: []<BR>
+					Neutralize All Unidentified Life Signs: []<BR>"},
+
+					"<A href='?src=\ref[src];operation=authweapon'>[check_weapons ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkarrest'>[check_arrest ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkaccess'>[check_access ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>" )
 	else
-		if (!istype(user, /mob/living/silicon))
-			t += "<div class='notice icon'>Swipe ID card to lock interface</div>"
-		t += text("Turrets [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.enabled?"activated":"deactivated", src, src.enabled?"Disable":"Enable")
-		t += text("Currently set for [] - <A href='?src=\ref[];toggleLethal=1'>Change to []?</a><br>\n", src.lethal?"lethal":"stun repeatedly", src,  src.lethal?"Stun repeatedly":"Lethal")
+		dat += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
 
 	//user << browse(t, "window=turretid")
 	//onclose(user, "turretid")
-	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])", 500, 200)
-	popup.set_content(t)
+	var/datum/browser/popup = new(user, "turretid", "Turret Control Panel ([area.name])", 500, 500)
+	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 
@@ -140,12 +162,25 @@
 	if(!can_use(usr))
 		return 1
 
-	if (href_list["toggleOn"])
-		src.enabled = !src.enabled
-		src.updateTurrets()
-	else if (href_list["toggleLethal"])
-		src.lethal = !src.lethal
-		src.updateTurrets()
+	switch(href_list["operation"])	//toggles customizable behavioural protocols
+		if("toggleon")
+			enabled = !enabled
+		if("togglelethal")
+			lethal = !lethal
+		if("toggleai")
+			check_synth = !check_synth
+		if("authweapon")
+			check_weapons = !check_weapons
+		if("checkrecords")
+			check_records = !check_records
+		if("checkarrest")
+			check_arrest = !check_arrest
+		if("checkaccess")
+			check_access = !check_access
+		if("checkxenos")
+			check_anomalies = !check_anomalies
+
+	src.updateTurrets()
 
 	if(!nowindow)
 		attack_hand(usr)
@@ -156,9 +191,20 @@
 	..()
 
 /obj/machinery/turretid/proc/updateTurrets()
+	var/datum/turret_checks/TC = new
+	TC.on = enabled
+	TC.lethal = lethal
+	TC.check_synth = check_synth
+	TC.check_access = check_access
+	TC.check_records = check_records
+	TC.check_arrest = check_arrest
+	TC.check_weapons = check_weapons
+	TC.check_anomalies = check_anomalies
+	TC.ailock = ailock
+
 	if(control_area)
 		for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
-			aTurret.setState(enabled, lethal)
+			aTurret.setState(TC)
 	src.update_icon()
 
 /obj/machinery/turretid/power_change()
@@ -177,3 +223,24 @@
 			icon_state = "control_stun"
 	else
 		icon_state = "control_standby"
+
+/obj/machinery/turretid/emp_act(severity)
+	if(enabled)
+		//if the turret is on, the EMP no matter how severe disables the turret for a while
+		//and scrambles its settings, with a slight chance of having an emag effect
+
+		check_arrest = pick(0, 1)
+		check_records = pick(0, 1)
+		check_weapons = pick(0, 1)
+		check_access = pick(0, 0, 0, 0, 1)	// check_access is a pretty big deal, so it's least likely to get turned on
+		check_anomalies = pick(0, 1)
+
+		enabled=0
+		updateTurrets()
+
+		sleep(rand(60,600))
+		if(!enabled)
+			enabled=1
+			updateTurrets()
+
+	..()

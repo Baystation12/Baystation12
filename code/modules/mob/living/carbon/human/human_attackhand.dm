@@ -101,31 +101,65 @@
 			if(!attack.is_usable(H))
 				return 0
 
-			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[pick(attack.attack_verb)]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [pick(attack.attack_verb)]ed by [H.name] ([M.ckey])</font>")
-			msg_admin_attack("[key_name(H)] [pick(attack.attack_verb)]ed [key_name(src)]")
+			var/damage = rand(1, attack.damage)
+			var/block = 0
+			var/accurate = 0
+			var/hit_zone = H.zone_sel.selecting
+			var/datum/organ/external/affecting = get_organ(hit_zone)
 
-			var/damage = rand(0, 5)//BS12 EDIT
-			if(!damage)
-				playsound(loc, attack.miss_sound, 25, 1, -1)
-				visible_message("\red <B>[H] tried to [pick(attack.attack_verb)] [src]!</B>")
+			switch(src.a_intent)
+				if("help")
+					// We didn't see this coming, so we get the full blow
+					damage = attack.damage
+					accurate = 1
+				if("hurt", "grab")
+					// We're in a fighting stance, there's a chance we block
+					if(src.canmove && src!=H && prob(20))
+						block = 1
+
+			if (M.grabbed_by.len)
+				// Someone got a good grip on them, they won't be able to do much damage
+				damage = max(1, damage - 2)
+
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
+				accurate = 1 // certain circumstances make it impossible for us to evade punches
+
+			// Process evasion and blocking
+			var/miss_type = 0
+			var/attack_message
+			if(!accurate)
+				if(prob(80))
+					hit_zone = ran_zone(hit_zone)
+				if(prob(15) && hit_zone != "chest") // Missed!
+					attack_message = "[H] attempted to [pick(attack.attack_verb)] [src], but the [attack.attack_noun] missed!"
+					miss_type = 1
+
+			if(!miss_type && block)
+				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
+				miss_type = 2
+
+			if(!attack_message)
+				attack.show_attack(H, src, hit_zone, damage)
+			else
+				H.visible_message("<span class='danger'>[attack_message]</span>")
+
+			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
+			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]ed"] [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]ed"] by [H.name] ([H.ckey])</font>")
+			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]ed"] [key_name(src)]")
+
+			if(miss_type)
 				return 0
 
-			var/datum/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
+			if(HULK in H.mutations)
+				damage *= 2 // Hulks do twice the damage)
 
-			if(HULK in H.mutations)			damage += 5
+			var/armour = run_armor_check(affecting, "melee")
+			// Apply additional unarmed effects.
+			attack.apply_effects(H,src,armour,damage,hit_zone)
 
-			playsound(loc, attack.attack_sound, 25, 1, -1)
-
-			visible_message("\red <B>[H] [pick(attack.attack_verb)]ed [src]!</B>")
-			//Rearranged, so claws don't increase weaken chance.
-			if(damage >= 5 && prob(50))
-				visible_message("\red <B>[H] has weakened [src]!</B>")
-				apply_effect(3, WEAKEN, armor_block)
-
-			damage += attack.damage
-			apply_damage(damage, BRUTE, affecting, armor_block, sharp=attack.sharp, edge=attack.edge)
+			// Finally, apply damage to target
+			apply_damage(damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if("disarm")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")

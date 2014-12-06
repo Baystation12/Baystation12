@@ -61,7 +61,7 @@
 		if(chassis.hasInternalDamage(MECHA_INT_CONTROL_LOST))
 			move_result = step_rand(chassis)
 		else if(chassis.dir!=direction)
-			chassis.dir = direction
+			chassis.set_dir(direction)
 			move_result = 1
 		else
 			move_result	= step(chassis,direction)

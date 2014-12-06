@@ -355,7 +355,7 @@ var/list/sacrificed = list()
 				usr.visible_message("\red [usr]'s eyes glow blue as \he freezes in place, absolutely motionless.", \
 				"\red The shadow that is your spirit separates itself from your body. You are now in the realm beyond. While this is a great sight, being here strains your mind and body. Hurry...", \
 				"\red You hear only complete silence for a moment.")
-				usr.ghostize(1)
+				announce_ghost_joinleave(usr.ghostize(1), 1, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place!")
 				L.ajourn = 1
 				while(L)
 					if(L.key)

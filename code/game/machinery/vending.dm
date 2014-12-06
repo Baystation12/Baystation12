@@ -130,7 +130,6 @@
 		var/price = prices[typepath]
 		if(isnull(amount)) amount = 1
 
-		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
 
 		R.product_path = typepath
@@ -151,7 +150,8 @@
 		if(delay_product_spawn)
 			sleep(5) //sleep(1) did not seem to cut it, so here we are.
 
-		R.product_name = temp.name
+		var/atom/temp = typepath
+		R.product_name = initial(temp.name)
 
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return

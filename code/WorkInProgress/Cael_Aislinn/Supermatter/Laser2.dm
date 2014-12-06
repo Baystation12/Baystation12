@@ -22,7 +22,7 @@
 		if(!first)
 			src.first = new /obj/beam/e_beam(src.loc)
 			src.first.master = src
-			src.first.dir = src.dir
+			src.first.set_dir(src.dir)
 			src.first.power = src.power
 			src.first.freq = src.freq
 			src.first.phase = src.phase
@@ -61,7 +61,7 @@
 	if(!next)
 		if(get_step(src.loc,src.dir))
 			var/obj/beam/e_beam/e = new /obj/beam/e_beam(src.loc)
-			e.dir = src.dir
+			e.set_dir(src.dir)
 			src.next = e
 			e.master = src.master
 			e.power = src.power

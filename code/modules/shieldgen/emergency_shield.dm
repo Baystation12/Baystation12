@@ -13,7 +13,7 @@
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
 /obj/machinery/shield/New()
-	src.dir = pick(1,2,3,4)
+	src.set_dir(pick(1,2,3,4))
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
@@ -26,16 +26,6 @@
 /obj/machinery/shield/CanPass(atom/movable/mover, turf/target, height, air_group)
 	if(!height || air_group) return 0
 	else return ..()
-
-//Looks like copy/pasted code... I doubt 'need_rebuild' is even used here - Nodrak
-/obj/machinery/shield/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
-
 
 /obj/machinery/shield/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!istype(W)) return

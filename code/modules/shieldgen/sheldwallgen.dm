@@ -154,7 +154,7 @@
 		T2 = T
 		var/obj/machinery/shieldwall/CF = new/obj/machinery/shieldwall/(src, G) //(ref to this gen, ref to connected gen)
 		CF.loc = T
-		CF.dir = field_dir
+		CF.set_dir(field_dir)
 
 
 /obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
@@ -242,6 +242,7 @@
 
 /obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
 	..()
+	update_nearby_tiles()
 	src.gen_primary = A
 	src.gen_secondary = B
 	if(A && B && A.active && B.active)
@@ -252,6 +253,10 @@
 			B.storedpower -= generate_power_usage
 	else
 		del(src) //need at least two generator posts
+
+/obj/machinery/shieldwall/Del()
+	update_nearby_tiles()
+	..()
 
 /obj/machinery/shieldwall/attack_hand(mob/user as mob)
 	return

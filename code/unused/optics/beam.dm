@@ -24,7 +24,7 @@
 		//world << "creating beam at ([newloc.x],[newloc.y]) with [dirn] [lambda] [omega] [half]"
 
 		icon_state = "[omega]-[half ? "half" : "full"]"
-		dir = dirn
+		set_dir(dirn)
 		set_wavelength(lambda)
 		..(newloc)
 		spawn(0)

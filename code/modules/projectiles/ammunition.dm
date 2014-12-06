@@ -18,7 +18,7 @@
 			BB = new projectile_type(src)
 		pixel_x = rand(-10.0, 10)
 		pixel_y = rand(-10.0, 10)
-		dir = pick(cardinal)
+		set_dir(pick(cardinal))
 
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)

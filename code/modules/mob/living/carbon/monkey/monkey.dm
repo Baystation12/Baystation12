@@ -20,6 +20,7 @@
 	voice_name = "farwa"
 	speak_emote = list("mews")
 	icon_state = "tajkey1"
+	greaterform = "Tajara"
 	uni_append = list(0x0A0,0xE00) // 0A0E00
 
 /mob/living/carbon/monkey/skrell
@@ -27,6 +28,7 @@
 	voice_name = "neaera"
 	speak_emote = list("squicks")
 	icon_state = "skrellkey1"
+	greaterform = "Skrell"
 	uni_append = list(0x01C,0xC92) // 01CC92
 
 /mob/living/carbon/monkey/unathi
@@ -34,6 +36,7 @@
 	voice_name = "stok"
 	speak_emote = list("hisses")
 	icon_state = "stokkey1"
+	greaterform = "Unathi"
 	uni_append = list(0x044,0xC5D) // 044C5D
 
 /mob/living/carbon/monkey/New()
@@ -80,23 +83,16 @@
 	return
 
 /mob/living/carbon/monkey/unathi/New()
-
-	dna.mutantrace = "lizard"
-	greaterform = "Unathi"
 	..()
+	dna.mutantrace = "lizard"
 
 /mob/living/carbon/monkey/skrell/New()
-
-	
-	dna.mutantrace = "skrell"
-	greaterform = "Skrell"
 	..()
+	dna.mutantrace = "skrell"
 
 /mob/living/carbon/monkey/tajara/New()
-
-	dna.mutantrace = "tajaran"
-	greaterform = "Tajara"
 	..()
+	dna.mutantrace = "tajaran"
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0

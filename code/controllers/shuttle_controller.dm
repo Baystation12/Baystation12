@@ -223,7 +223,8 @@ var/global/datum/shuttle_controller/shuttle_controller
 		"South of the station" = locate(/area/syndicate_station/south),
 		"Southeast of the station" = locate(/area/syndicate_station/southeast),
 		"Telecomms Satellite" = locate(/area/syndicate_station/commssat),
-		"Mining Asteroid" = locate(/area/syndicate_station/mining)
+		"Mining Asteroid" = locate(/area/syndicate_station/mining),
+		"Arrivals dock" = locate(/area/syndicate_station/arrivals_dock),
 		)
 
 	MS.announcer = "NSV Icarus"

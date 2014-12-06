@@ -4,7 +4,6 @@
 var/global/obj/effect/datacore/data_core = null
 
 
-var/global/list/active_areas = list()
 var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
@@ -202,6 +201,12 @@ var/datum/event_manager/event_manager = new()
 #define EVENT_LEVEL_MUNDANE 1
 #define EVENT_LEVEL_MODERATE 2
 #define EVENT_LEVEL_MAJOR 3
+
+// Suit sensor levels
+#define SUIT_SENSOR_OFF 0
+#define SUIT_SENSOR_BINARY 1
+#define SUIT_SENSOR_VITAL 2
+#define SUIT_SENSOR_TRACKING 3
 
 	//away missions
 var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to

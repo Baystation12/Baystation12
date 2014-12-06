@@ -97,6 +97,9 @@ var/list/wireColours = list("red", "blue", "green", "white", "orange", "brown", 
 		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A></td></tr>"
 	html += "</table>"
 	html += "</div>"
+	
+	if (random)
+		html += "<i>\The [holder] appears to have tamper-resistant electronics installed.</i><br><br>" //maybe this could be more generic?
 
 	return html
 

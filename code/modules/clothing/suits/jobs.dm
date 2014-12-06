@@ -17,7 +17,7 @@
 	name = "captain's parade tunic"
 	desc = "Worn by a Captain to show their class."
 	icon_state = "captunic"
-	item_state = "bio_suit"
+	item_state = "captunic"
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEJUMPSUIT
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
@@ -26,7 +26,7 @@
 	name = "captain's uniform jacket"
 	desc = "A less formal jacket for everyday captain use."
 	icon_state = "capjacket"
-	item_state = "bio_suit"
+	item_state = "capjacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDEJUMPSUIT
 

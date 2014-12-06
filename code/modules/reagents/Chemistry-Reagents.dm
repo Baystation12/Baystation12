@@ -1358,6 +1358,21 @@ datum
 				..()
 				return
 
+		adrenaline
+			name = "Adrenaline"
+			id = "adrenaline"
+			description = "Adrenaline is a hormone used as a drug to treat cardiac arrest and other cardiac dysrhythmias resulting in diminished or absent cardiac output."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.SetParalysis(0)
+				M.SetWeakened(0)
+				M.adjustToxLoss(rand(3))
+				..()
+				return
+
 		cryoxadone
 			name = "Cryoxadone"
 			id = "cryoxadone"

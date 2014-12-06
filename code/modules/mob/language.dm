@@ -8,6 +8,7 @@
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"            // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
+	var/whisper_verb                 // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"         // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
@@ -97,9 +98,11 @@
 	name = "Galactic Common"
 	desc = "The common galactic tongue."
 	speech_verb = "says"
+	whisper_verb = "whispers"
 	key = "0"
 	flags = RESTRICTED
 
+//TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
 	switch(msg_end)
 		if("!")
@@ -111,9 +114,19 @@
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
+	speech_verb = "says"
+	whisper_verb = "whispers"
 	colour = "rough"
 	key = "1"
 	flags = RESTRICTED
+
+/datum/language/human/get_spoken_verb(var/msg_end)
+	switch(msg_end)
+		if("!")
+			return pick("exclaims","shouts","yells") //TODO: make the basic proc handle lists of verbs.
+		if("?")
+			return ask_verb
+	return speech_verb
 
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader

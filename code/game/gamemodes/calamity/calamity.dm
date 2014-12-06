@@ -356,7 +356,6 @@
 		if(player.current && !(istype(player.current,/mob/living/carbon/human))) return 0
 
 		//Ninja intro crawl goes here.
-
 		if(!config.objectives_disabled)
 			player.objectives += new /datum/objective/ninja_highlander()
 			player.objectives += new /datum/objective/survive()
@@ -369,9 +368,6 @@
 		var/mob/living/carbon/human/N = player.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
-		if(N.wear_suit && istype(N.wear_suit,/obj/item/clothing/suit/space/space_ninja))
-			var/obj/item/clothing/suit/space/space_ninja/S = N.wear_suit
-			S:randomize_param()
 
 /datum/game_mode/calamity/proc/spawn_vox_raiders(var/list/candidates)
 

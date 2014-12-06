@@ -58,7 +58,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/list/update_every_five = list(3, 41, 433, 46, 47, 48, 49)			     // These we update every 5 ticks
 
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
-	var/ownjob = null //related to above
+	var/ownjob = null //related to above - this is assignment (potentially alt title)
+	var/ownrank = null // this one is rank, never alt title
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
@@ -223,9 +224,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	detonate = 0
 
 
-/obj/item/device/pda/ai/proc/set_name_and_job(newname as text, newjob as text)
+/obj/item/device/pda/ai/proc/set_name_and_job(newname as text, newjob as text, newrank as null|text)
 	owner = newname
 	ownjob = newjob
+	if(newrank)
+		ownrank = newrank
+	else
+		ownrank = ownjob
 	name = newname + " (" + ownjob + ")"
 
 
@@ -602,6 +607,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			id_check(U, 1)
 		if("UpdateInfo")
 			ownjob = id.assignment
+			ownrank = id.rank
 			name = "PDA-[owner] ([ownjob])"
 		if("Eject")//Ejects the cart, only done from hub.
 			if (!isnull(cartridge))
@@ -1133,6 +1139,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(!owner)
 			owner = idcard.registered_name
 			ownjob = idcard.assignment
+			ownrank = idcard.rank
 			name = "PDA-[owner] ([ownjob])"
 			user << "<span class='notice'>Card scanned.</span>"
 		else

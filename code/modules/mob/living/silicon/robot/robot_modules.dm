@@ -181,6 +181,7 @@
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
+		src.modules += new /obj/item/device/pipe_painter(src)
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
@@ -189,7 +190,7 @@
 		/obj/item/stack/sheet/metal = 50,
 		/obj/item/stack/sheet/glass = 50,
 		/obj/item/stack/sheet/glass/reinforced = 50,
-		/obj/item/stack/cable_coil = 50,
+		/obj/item/stack/cable_coil/robot = 50,
 		/obj/item/stack/rods = 15,
 		/obj/item/stack/tile/plasteel = 15
 		)
@@ -210,6 +211,7 @@
 		src.modules += new /obj/item/taperoll/engineering(src)
 		src.modules += new /obj/item/weapon/gripper(src)
 		src.modules += new /obj/item/weapon/matter_decompiler(src)
+		src.modules += new /obj/item/device/pipe_painter(src)
 
 		src.emag = new /obj/item/borg/stun(src)
 
@@ -225,7 +227,7 @@
 		G.amount = 50
 		src.modules += G
 
-		var/obj/item/stack/cable_coil/W = new /obj/item/stack/cable_coil(src)
+		var/obj/item/stack/cable_coil/robot/W = new /obj/item/stack/cable_coil/robot(src)
 		W.amount = 50
 		src.modules += W
 
@@ -365,19 +367,38 @@
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)
 		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 		src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
+		src.modules += new /obj/item/weapon/gripper/miner(src)
+		src.modules += new /obj/item/weapon/mining_scanner(src)
+		src.modules += new /obj/item/weapon/crowbar(src)
 		src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 		return
 
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
 
-	New()
+	New(var/mob/living/silicon/robot/R)
+		loc = R
+
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/melee/energy/sword(src)
 		src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 		src.modules += new /obj/item/weapon/card/emag(src)
+
+		var/jetpack = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
+		src.modules += jetpack
+		R.internals = jetpack
+
 		return
+
+/obj/item/weapon/robot_module/syndicate/add_languages(var/mob/living/silicon/robot/R)
+	//full set of languages
+	R.add_language("Sol Common", 1)
+	R.add_language("Tradeband", 1)
+	R.add_language("Sinta'unathi", 0)
+	R.add_language("Siik'tajr", 0)
+	R.add_language("Skrellian", 0)
+	R.add_language("Gutter", 1)
 
 /obj/item/weapon/robot_module/combat
 	name = "combat robot module"
@@ -406,7 +427,7 @@
 		/obj/item/stack/tile/plasteel = 15,
 		/obj/item/stack/sheet/metal = 20,
 		/obj/item/stack/sheet/glass = 20,
-		/obj/item/stack/cable_coil = 30
+		/obj/item/stack/cable_coil/robot = 30
 		)
 
 	New()

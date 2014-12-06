@@ -33,7 +33,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/eject = null
 
 	var/debug = 0
-	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
 	var/unlimited_power = 0
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
@@ -496,6 +495,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper north east of the mining asteroid"
 	icon_state = "north"
 
+/area/syndicate_station/arrivals_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
+/area/syndicate_station/maint_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
 /area/syndicate_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
@@ -905,16 +912,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
-/area/crew_quarters/sleep/bedrooms/one
+/area/crew_quarters/sleep/bedrooms
 	name = "\improper Dormitory Bedroom One"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/bedrooms/two
-	name = "\improper Dormitory Bedroom Two"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/bedrooms/three
-	name = "\improper Dormitory Bedroom Three"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo

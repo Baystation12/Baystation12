@@ -29,8 +29,11 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
+			var/readylink = "<a href='byond://?src=\ref[src];ready=[ready ? "2" : "1"]'>[ready ? "Not Ready" : "Ready"]</a>"
+			if(ready)
+				output += "<p>\[ <b>Ready</b> | [readylink] \]</p>"
+			else
+				output += "<p>\[ [readylink] | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -59,7 +62,7 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		src << browse(output,"window=playersetup;size=210x280;can_close=0")
 		return
 
 	Stat()
@@ -121,6 +124,7 @@
 				observer.loc = O.loc
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
+				announce_ghost_joinleave(src)
 				client.prefs.update_preview_icon()
 				observer.icon = client.prefs.preview_icon
 				observer.alpha = 127
@@ -330,7 +334,7 @@
 		// Moving wheelchair if they have one
 		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
 			character.buckled.loc = character.loc
-			character.buckled.dir = character.dir
+			character.buckled.set_dir(character.dir)
 
 		ticker.mode.latespawn(character)
 
@@ -371,7 +375,10 @@
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
+		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
 		var/dat = "<html><body><center>"
+		dat += "<b>Welcome, [name].<br></b>"
 		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
