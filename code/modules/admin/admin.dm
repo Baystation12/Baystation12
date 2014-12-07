@@ -169,17 +169,31 @@ var/global/floorIsLava = 0
 				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
 				<br>
 			"}
-
-	if (M.client)
-		body += {"<br><br>
+	body += {"<br><br>
 			<b>Other actions:</b>
 			<br>
-			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A> |
+			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A>
+			"}
+	if (M.client)
+		body += {" |
 			<A href='?src=\ref[src];tdome1=\ref[M]'>Thunderdome 1</A> |
 			<A href='?src=\ref[src];tdome2=\ref[M]'>Thunderdome 2</A> |
 			<A href='?src=\ref[src];tdomeadmin=\ref[M]'>Thunderdome Admin</A> |
 			<A href='?src=\ref[src];tdomeobserve=\ref[M]'>Thunderdome Observer</A> |
 		"}
+	// language toggles
+	body += "<br><br><b>Languages:</b><br>"
+	var/f = 1
+	for(var/k in all_languages)
+		var/datum/language/L = all_languages[k]
+		if(L.flags & INNATE)
+			continue
+		if(!f) body += " | "
+		else f = 0
+		if(L in M.languages)
+			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#006600'>[k]</a>"
+		else
+			body += "<a href='?src=\ref[src];toglang=\ref[M];lang=[html_encode(k)]' style='color:#ff0000'>[k]</a>"
 
 	body += {"<br>
 		</body></html>
