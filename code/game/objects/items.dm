@@ -341,7 +341,7 @@
 			if(slot_w_uniform)
 				if(H.w_uniform)
 					return 0
-				if(H.wear_suit)
+				if(H.wear_suit && (H.wear_suit.body_parts_covered & src.body_parts_covered))
 					if(!disable_warning)
 						H << "<span class='warning'>\The [H.wear_suit] is in the way.</span>"
 					return 0
