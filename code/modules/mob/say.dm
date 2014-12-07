@@ -79,6 +79,9 @@
 			return 1
 		return 0
 
+	if(speaking.flags & INNATE)
+		return 1
+
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)

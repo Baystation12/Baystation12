@@ -132,10 +132,14 @@
 	if(used_radios.len)
 		italics = 1
 		message_range = 1
-
+		if(speaking)
+			message_range = speaking.get_talkinto_msg_range(message)
+		var/msg
+		if(!speaking || !(speaking.flags & NO_TALK_MSG))
+			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]]</span>"
 		for(var/mob/living/M in hearers(5, src))
-			if(M != src)
-				M.show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "the radio."]</span>")
+			if((M != src) && msg)
+				M.show_message(msg)
 			if (speech_sound)
 				sound_vol *= 0.5
 

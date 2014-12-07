@@ -21,6 +21,10 @@
 /datum/language/proc/format_message_radio(message, verb)
 	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
 
+/datum/language/proc/get_talkinto_msg_range(message)
+	// if you yell, you'll be heard from two tiles over instead of one
+	return (copytext(message, length(message)) == "!") ? 2 : 1
+
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")
 
@@ -47,13 +51,17 @@
 	name = "Noise"
 	desc = "Noises"
 	key = ""
-	flags = RESTRICTED|NONGLOBAL|INNATE
+	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG
 
 /datum/language/noise/format_message(message, verb)
 	return "<span class='message'><span class='[colour]'>[message]</span></span>"
 
 /datum/language/noise/format_message_radio(message, verb)
 	return "<span class='[colour]'>[message]</span>"
+
+/datum/language/noise/get_talkinto_msg_range(message)
+	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
+	return (copytext(message, length(message)) == "!") ? 4 : 2
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -297,15 +305,14 @@
 	return 1
 
 /mob/proc/remove_language(var/rem_language)
-
-	languages.Remove(all_languages[rem_language])
-
-	return 0
+	var/datum/language/L = all_languages[rem_language]
+	. = (L in languages)
+	languages.Remove(L)
 
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
 
-	return (universal_speak || (speaking.flags & INNATE) || speaking in src.languages)
+	return (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()
