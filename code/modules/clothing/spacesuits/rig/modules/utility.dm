@@ -58,8 +58,18 @@
 	desc = "You think it's called an Elder Sarsparilla or something."
 	interface_name = "Alden-Saraspova counter"
 	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
-	selectable = 1
+	usable = 1
+	selectable = 0
+
+	engage_string = "Begin Scan"
+
 	device_type = /obj/item/device/ano_scanner
+
+/obj/item/rig_module/device/anomaly_scanner/engage()
+	if(!..() || !device)
+		return 0
+	device.attack_self(holder.wearer)
+	return 1
 
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"
