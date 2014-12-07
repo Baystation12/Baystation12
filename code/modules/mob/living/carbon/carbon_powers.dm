@@ -6,6 +6,9 @@
 	set name = "Fertilize plant"
 	set desc = "Turn your food into nutrients for plants."
 
+	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+		return
+
 	var/list/trays = list()
 	for(var/obj/machinery/portable_atmospherics/hydroponics/tray in range(1))
 		if(tray.nutrilevel < 10 && src.Adjacent(tray))
@@ -24,6 +27,9 @@
 	set category = "Abilities"
 	set name = "Eat Weeds"
 	set desc = "Clean the weeds out of soil or a hydroponics tray."
+
+	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+		return
 
 	var/list/trays = list()
 	for(var/obj/machinery/portable_atmospherics/hydroponics/tray in range(1))
