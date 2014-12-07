@@ -138,11 +138,15 @@
 
 	if(ai_card)
 		if(istype(ai_card, /obj/item/device/aicard))
-			if(integrated_ai && integrated_ai.client)
+			if(integrated_ai && !integrated_ai.stat)
 				if(user)
 					user << "<span class='danger'>You cannot eject your currently stored AI. Purge it manually.</span>"
 				return 0
-			del(ai_card)
+			user << "<span class='danger'>You purge the remaining scraps of data from your previous AI, freeing it for use.</span>"
+			if(integrated_ai)
+				integrated_ai.ghostize()
+				del(integrated_ai)
+			if(ai_card) del(ai_card)
 		else if(user)
 			user.put_in_hands(ai_card)
 		else
