@@ -186,8 +186,6 @@ var/global/floorIsLava = 0
 	var/f = 1
 	for(var/k in all_languages)
 		var/datum/language/L = all_languages[k]
-		if(L.flags & INNATE)
-			continue
 		if(!f) body += " | "
 		else f = 0
 		if(L in M.languages)
