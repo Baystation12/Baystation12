@@ -23,9 +23,10 @@
 			eprojectile = /obj/item/weapon/gun/energy/laser/bluetag
 			lasercolor = "b"
 			req_access = list(access_maint_tunnels, access_theatre)
+			check_arrest = 0
 			check_records = 0
-			auth_weapons = 1
-			stun_all = 0
+			check_weapons = 1
+			check_access = 0
 			check_anomalies = 0
 			shot_delay = 30
 
@@ -33,9 +34,10 @@
 			eprojectile = /obj/item/weapon/gun/energy/laser/redtag
 			lasercolor = "r"
 			req_access = list(access_maint_tunnels, access_theatre)
+			check_arrest = 0
 			check_records = 0
-			auth_weapons = 1
-			stun_all = 0
+			check_weapons = 1
+			check_access = 0
 			check_anomalies = 0
 			shot_delay = 30
 			iconholder = 1

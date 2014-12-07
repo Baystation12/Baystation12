@@ -115,7 +115,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 	name = "mains pipe"
 	desc = "A one meter section of 3-line mains pipe"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_mains_directions = SOUTH|NORTH
 
 	New()
@@ -137,9 +137,9 @@ obj/machinery/atmospherics/mains_pipe/simple
 
 	proc/normalize_dir()
 		if(dir==3)
-			dir = 1
+			set_dir(1)
 		else if(dir==12)
-			dir = 4
+			set_dir(4)
 
 	update_icon()
 		if(nodes[1] && nodes[2])
@@ -148,7 +148,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 			//var/node1_direction = get_dir(src, node1)
 			//var/node2_direction = get_dir(src, node2)
 
-			//dir = node1_direction|node2_direction
+			//set_dir(node1_direction|node2_direction)
 
 		else
 			if(!nodes[1]&&!nodes[2])
@@ -196,7 +196,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 	name = "manifold pipe"
 	desc = "A manifold composed of mains pipes"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_mains_directions = EAST|NORTH|WEST
 	volume = 105
 
@@ -261,7 +261,7 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 	name = "manifold pipe"
 	desc = "A manifold composed of mains pipes"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_mains_directions = EAST|NORTH|WEST|SOUTH
 	volume = 105
 
@@ -504,7 +504,7 @@ obj/machinery/atmospherics/mains_pipe/cap
 	name = "pipe cap"
 	desc = "A cap for the end of a mains pipe"
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_directions = SOUTH
 	volume = 35
 
@@ -546,7 +546,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 	var/open = 1
 
-	dir = SOUTH
+	set_dir(SOUTH)
 	initialize_mains_directions = SOUTH|NORTH
 
 	New()
@@ -597,9 +597,9 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 	proc/normalize_dir()
 		if(dir==3)
-			dir = 1
+			set_dir(1)
 		else if(dir==12)
-			dir = 4
+			set_dir(4)
 
 	proc/open()
 		if(open) return 0

@@ -36,6 +36,7 @@
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
+	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
 
 /obj/machinery/power/smes/drain_power(var/drain_check)
 
@@ -74,6 +75,13 @@
 		if(!terminal.powernet)
 			terminal.connect_to_network()
 		update_icon()
+
+
+
+
+		if(!should_be_mapped)
+			warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
+
 	return
 
 /obj/machinery/power/smes/update_icon()
@@ -199,7 +207,7 @@
 	user << "<span class='notice'>You start adding cable to the [src].</span>"
 	if(do_after(user, 50))
 		terminal = new /obj/machinery/power/terminal(tempLoc)
-		terminal.dir = tempDir
+		terminal.set_dir(tempDir)
 		terminal.master = src
 		return 0
 	return 1
@@ -413,6 +421,7 @@
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit. Magically produces power."
 	capacity = 9000000
 	output_level = 250000
+	should_be_mapped = 1
 
 /obj/machinery/power/smes/magical/process()
 	charge = 5000000

@@ -10,12 +10,13 @@
 	var/bloodiness
 
 
-/obj/structure/stool/bed/chair/wheelchair/handle_rotation()
+/obj/structure/stool/bed/chair/wheelchair/set_dir()
+	..()
 	overlays = null
 	var/image/O = image(icon = 'icons/obj/objects.dmi', icon_state = "w_overlay", layer = FLY_LAYER, dir = src.dir)
 	overlays += O
 	if(buckled_mob)
-		buckled_mob.dir = dir
+		buckled_mob.set_dir(dir)
 
 /obj/structure/stool/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?
@@ -64,8 +65,7 @@
 	step(src, direction)
 	if(buckled_mob) // Make sure it stays beneath the occupant
 		Move(buckled_mob.loc)
-	dir = direction
-	handle_rotation()
+	set_dir(direction)
 	if(pulling) // Driver
 		if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!
 			pulling.loc = T
@@ -74,7 +74,7 @@
 			if(get_dist(src, pulling) > 1) // We are too far away? Losing control.
 				pulling = null
 				user.pulledby = null
-			pulling.dir = get_dir(pulling, src) // When everything is right, face the wheelchair
+			pulling.set_dir(get_dir(pulling, src)) // When everything is right, face the wheelchair
 	if(bloodiness)
 		create_track()
 	driving = 0
@@ -101,7 +101,6 @@
 		else
 			if (occupant && (src.loc != occupant.loc))
 				src.loc = occupant.loc // Failsafe to make sure the wheelchair stays beneath the occupant after driving
-	handle_rotation()
 
 /obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/user as mob)
 	if (pulling)
@@ -122,7 +121,7 @@
 			usr.pulledby = src
 			if(usr.pulling)
 				usr.stop_pulling()
-			usr.dir = get_dir(usr, src)
+			usr.set_dir(get_dir(usr, src))
 			usr << "You grip \the [name]'s handles."
 		else
 			if(usr != pulling)
@@ -176,14 +175,14 @@
 	var/obj/effect/decal/cleanable/blood/tracks/B = new(loc)
 	var/newdir = get_dir(get_step(loc, dir), loc)
 	if(newdir == dir)
-		B.dir = newdir
+		B.set_dir(newdir)
 	else
 		newdir = newdir | dir
 		if(newdir == 3)
 			newdir = 1
 		else if(newdir == 12)
 			newdir = 4
-		B.dir = newdir
+		B.set_dir(newdir)
 	bloodiness--
 
 /obj/structure/stool/bed/chair/wheelchair/buckle_mob(mob/M as mob, mob/user as mob)

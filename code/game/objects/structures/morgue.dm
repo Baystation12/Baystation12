@@ -77,7 +77,7 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.connected.loc
 			src.connected.icon_state = "morguet"
-			src.connected.dir = src.dir
+			src.connected.set_dir(src.dir)
 		else
 			//src.connected = null
 			del(src.connected)

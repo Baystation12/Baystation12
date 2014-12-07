@@ -20,6 +20,7 @@
 			user << "<span class='danger'>It looks like the locking system has been shorted out.</span>"
 			return
 		else if(istype(W, /obj/item/weapon/card/emag))
+			locked_dna = null
 			req_access = null
 			req_one_access = null
 			locked = 0

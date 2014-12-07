@@ -144,7 +144,7 @@
 		desc = O.desc
 		icon = O.icon
 		icon_state = O.icon_state
-		dir = O.dir
+		set_dir(O.dir)
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
@@ -244,6 +244,7 @@ BLIND     // can't see anything
 	w_class = 2.0
 
 	var/light_overlay = "helmet_light"
+	var/light_applied
 	var/brightness_on
 	var/on = 0
 
@@ -254,40 +255,54 @@ BLIND     // can't see anything
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
-
 		if(!isturf(user.loc))
-			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
+			user << "You cannot turn the light on while in this [user.loc]"
 			return
-
 		on = !on
-
-		overlays.Cut()
-		if(on)
-			if(!light_overlay_cache["[light_overlay]_icon"])
-				light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
-			if(!light_overlay_cache["[light_overlay]"])
-				light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
-			overlays |= light_overlay_cache["[light_overlay]_icon"]
-			user.SetLuminosity(user.luminosity + brightness_on)
-		else
-			user.SetLuminosity(user.luminosity - brightness_on)
-
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			H.update_inv_head()
-
+		user << "You [on ? "enable" : "disable"] the helmet light."
+		update_light(user)
 	else
 		return ..(user)
 
-/obj/item/clothing/head/proc/update_light(mob/user)
-
-	if(!brightness_on)
-		return
-
-	if(on)
-		if(light_overlay) overlays |= light_overlay
-		user.SetLuminosity(user.luminosity - brightness_on)
+/obj/item/clothing/head/proc/update_light(var/mob/user = null)
+	if(on && !light_applied)
+		if(loc == user)
+			user.SetLuminosity(user.luminosity + brightness_on)
 		SetLuminosity(brightness_on)
+		light_applied = 1
+	else if(!on && light_applied)
+		if(loc == user)
+			user.SetLuminosity(user.luminosity - brightness_on)
+		SetLuminosity(0)
+		light_applied = 0
+	update_icon(user)
+
+/obj/item/clothing/head/equipped(mob/user)
+	..()
+	spawn(1)
+		if(on && loc == user && !light_applied)
+			user.SetLuminosity(user.luminosity + brightness_on)
+			light_applied = 1
+
+/obj/item/clothing/head/dropped(mob/user)
+	..()
+	spawn(1)
+		if(on && loc != user && light_applied)
+			user.SetLuminosity(user.luminosity - brightness_on)
+			light_applied = 0
+
+/obj/item/clothing/head/update_icon(var/mob/user)
+
+	overlays.Cut()
+	if(on)
+		if(!light_overlay_cache["[light_overlay]_icon"])
+			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		if(!light_overlay_cache["[light_overlay]"])
+			light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		overlays |= light_overlay_cache["[light_overlay]_icon"]
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_head()
 
 /obj/item/clothing/head/equipped(mob/user)
 	..()
@@ -546,4 +561,3 @@ BLIND     // can't see anything
 	if (hastie)
 		hastie.emp_act(severity)
 	..()
-

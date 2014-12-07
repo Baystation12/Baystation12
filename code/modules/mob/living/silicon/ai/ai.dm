@@ -45,6 +45,7 @@ var/list/ai_verbs_default = list(
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE
+	shouldnt_see = list(/obj/effect/rune)
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
@@ -71,6 +72,7 @@ var/list/ai_verbs_default = list(
 
 	var/mob/living/silicon/ai/parent = null
 
+	var/apc_override = 0 //hack for letting the AI use its APC even when visionless
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -129,7 +131,7 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language("Robot Talk", 1)
-	add_language("Galactic Common", 0)
+	add_language("Galactic Common", 1)
 	add_language("Sol Common", 0)
 	add_language("Sinta'unathi", 0)
 	add_language("Siik'tajr", 0)
@@ -228,7 +230,7 @@ var/list/ai_verbs_default = list(
 */
 /obj/machinery/ai_powersupply
 	name="Power Supply"
-	active_power_usage=1000
+	active_power_usage=50000 // Station AIs use significant amounts of power. This, when combined with charged SMES should mean AI lasts for 1hr without external power.
 	use_power = 2
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null

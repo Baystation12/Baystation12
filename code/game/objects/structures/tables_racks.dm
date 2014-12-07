@@ -250,9 +250,9 @@
 				if(6)
 					icon_state = "tabledir3"
 		if (dir_sum in list(1,2,4,8,5,6,9,10))
-			dir = dir_sum
+			set_dir(dir_sum)
 		else
-			dir = 2
+			set_dir(2)
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
@@ -445,7 +445,7 @@
 			spawn(0)
 				A.throw_at(pick(targets),1,1)
 
-	dir = direction
+	set_dir(direction)
 	if(dir != NORTH)
 		layer = 5
 	climbable = 0 //flipping tables allows them to be used as makeshift barriers

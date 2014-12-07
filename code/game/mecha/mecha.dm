@@ -316,7 +316,7 @@
 	return 0
 
 /obj/mecha/proc/mechturn(direction)
-	dir = direction
+	set_dir(direction)
 	playsound(src,'sound/mecha/mechturn.ogg',40,1)
 	return 1
 
@@ -636,7 +636,7 @@
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 
-	if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/device/mmi/posibrain))
+	if(istype(W, /obj/item/device/mmi))
 		if(mmi_move_inside(W,user))
 			user << "[src]-MMI interface initialized successfuly"
 		else
@@ -1014,7 +1014,7 @@
 		src.forceMove(src.loc)
 		src.log_append_to_last("[H] moved in as pilot.")
 		src.icon_state = src.reset_icon()
-		dir = dir_in
+		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
@@ -1073,7 +1073,7 @@
 		src.Entered(mmi_as_oc)
 		src.Move(src.loc)
 		src.icon_state = src.reset_icon()
-		dir = dir_in
+		set_dir(dir_in)
 		src.log_message("[mmi_as_oc] moved in as pilot.")
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
@@ -1153,7 +1153,7 @@
 			src.occupant.client.perspective = MOB_PERSPECTIVE
 		*/
 		src.occupant << browse(null, "window=exosuit")
-		if(istype(mob_container, /obj/item/device/mmi) || istype(mob_container, /obj/item/device/mmi/posibrain))
+		if(istype(mob_container, /obj/item/device/mmi))
 			var/obj/item/device/mmi/mmi = mob_container
 			if(mmi.brainmob)
 				occupant.loc = mmi
@@ -1162,7 +1162,7 @@
 			src.verbs += /obj/mecha/verb/eject
 		src.occupant = null
 		src.icon_state = src.reset_icon()+"-open"
-		src.dir = dir_in
+		src.set_dir(dir_in)
 	return
 
 /////////////////////////

@@ -20,7 +20,8 @@
 	var/frustration = 0
 
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
-	var/check_records = 1 //Does it check security records?
+	var/check_records = 0	//Does it check security records?
+	var/check_arrest = 1	//Does it check arrest status?
 	var/arrest_type = 0 //If true, don't handcuff
 	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
 
@@ -97,6 +98,7 @@
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 		if(lasercolor)
 			shot_delay = 6		//Longer shot delay because JESUS CHRIST
+			check_arrest = 0
 			check_records = 0	//Don't actively target people set to arrest
 			arrest_type = 1		//Don't even try to cuff
 			req_access = list(access_maint_tunnels)
@@ -150,12 +152,14 @@ Maintenance panel is [src.open ? "opened" : "closed"]"},
 		dat += text({"<BR>
 Check for Weapon Authorization: []<BR>
 Check Security Records: []<BR>
+Check Arrest Status: []<BR>
 Operating Mode: []<BR>
 Report Arrests: []<BR>
 Auto Patrol: []"},
 
 "<A href='?src=\ref[src];operation=idcheck'>[src.idcheck ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=ignorerec'>[src.check_records ? "Yes" : "No"]</A>",
+"<A href='?src=\ref[src];operation=ignorearr'>[src.check_arrest ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=switchmode'>[src.arrest_type ? "Detain" : "Arrest"]</A>",
 "<A href='?src=\ref[src];operation=declarearrests'>[src.declare_arrests ? "Yes" : "No"]</A>",
 "<A href='?src=\ref[src];operation=patrol'>[auto_patrol ? "On" : "Off"]</A>" )
@@ -189,6 +193,8 @@ Auto Patrol: []"},
 			src.idcheck = !src.idcheck
 		if("ignorerec")
 			src.check_records = !src.check_records
+		if("ignorearr")
+			src.check_arrest = !src.check_arrest
 		if("switchmode")
 			src.arrest_type = !src.arrest_type
 		if("patrol")
@@ -262,7 +268,7 @@ Auto Patrol: []"},
 
 			// We re-assess human targets, before bashing their head in, in case their credentials change
 			if(target && istype(target, /mob/living/carbon/human))
-				var/threat = src.assess_perp(target, idcheck, check_records)
+				var/threat = src.assess_perp(target, idcheck, check_records, check_arrest)
 				if(threat < 4)
 					target = null
 
@@ -649,7 +655,7 @@ Auto Patrol: []"},
 				continue
 
 			if(istype(C, /mob/living/carbon/human))
-				src.threatlevel = src.assess_perp(C, idcheck, check_records)
+				src.threatlevel = src.assess_perp(C, idcheck, check_records, check_arrest)
 
 		else if(istype(M, /mob/living/simple_animal/hostile))
 			if(M.stat == DEAD)
@@ -878,7 +884,7 @@ Auto Patrol: []"},
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.dir = pick(cardinal)
+		pulse2.set_dir(pick(cardinal))
 		spawn(10)
 			pulse2.delete()
 		var/list/mob/living/carbon/targets = new

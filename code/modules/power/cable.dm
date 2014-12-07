@@ -590,6 +590,31 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		usr << "\blue You cannot do that."
 	..()
 
+/obj/item/stack/cable_coil/robot/verb/set_colour()
+	set name = "Change Colour"
+	set category = "Object"
+
+	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red")
+	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_colours
+
+	if(selected_type)
+		switch(selected_type)
+			if("Yellow")
+				color = COLOR_YELLOW
+			if("Green")
+				color = COLOR_GREEN
+			if("Pink")
+				color = COLOR_PINK
+			if("Blue")
+				color = COLOR_BLUE
+			if("Orange")
+				color = COLOR_ORANGE
+			if("Cyan")
+				color = COLOR_CYAN
+			else
+				color = COLOR_RED
+		usr << "You change your cable coil's colour to [selected_type]"
+
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables

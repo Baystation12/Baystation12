@@ -244,3 +244,7 @@
 	name = "Engineering recruitment"
 	desc = "This is a poster showing an engineer relaxing by a computer, the text states \"Living the life! Join Engineering today!\""
 
+/datum/poster/bay_50
+	icon_state="bsposter50"
+	name = "Pinup Girl Cindy Kate"
+	desc = "This particular one is of Cindy Kate, a seductive performer well known among less savoury circles." //idk

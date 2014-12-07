@@ -31,7 +31,7 @@
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 
 	//Multi-tile doors
-	dir = EAST
+	set_dir(EAST)
 	var/width = 1
 
 /obj/machinery/door/New()
@@ -131,8 +131,8 @@
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
-	//Tasers and the like should not damage doors.
-	if(Proj.damage_type == HALLOSS)
+	//Tasers and the like should not damage doors. Nor should TOX, OXY, CLONE, etc damage types
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
@@ -154,7 +154,7 @@
 /obj/machinery/door/hitby(AM as mob|obj)
 
 	..()
-	visible_message("\red <B>[src.name] was hit by [AM].</B>", 1)
+	visible_message("\red <B>[src.name] was hit by [AM].</B>")
 	var/tforce = 0
 	if(ismob(AM))
 		tforce = 15

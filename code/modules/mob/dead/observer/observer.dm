@@ -22,6 +22,7 @@
 	universal_speak = 1
 	var/atom/movable/following = null
 	var/admin_ghosted = 0
+	var/anonsay = 0
 
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
@@ -168,7 +169,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(stat == DEAD)
 		announce_ghost_joinleave(ghostize(1))
 	else
-		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to play this round for another 30 minutes! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
+		var/response
+		if(src.client && src.client.holder)
+			response = alert(src, "You have the ability to Admin-Ghost. The regular Ghost verb will announce your presence to dead chat. Both variants will allow you to return to your body using 'aghost'.\n\nWhat do you wish to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
+			if(response == "Admin Ghost")
+				if(!src.client)
+					return
+				src.client.admin_ghost()
+		else
+			response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to play this round for another 30 minutes! You can't change your mind so choose wisely!)", "Are you sure you want to ghost?", "Ghost", "Stay in body")
 		if(response != "Ghost")
 			return
 		resting = 1
@@ -182,7 +191,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/Move(NewLoc, direct)
 	following = null
-	dir = direct
+	set_dir(direct)
 	if(NewLoc)
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
@@ -580,8 +589,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		toggled_invisible = world.time
 		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible</span>")
 	else
-		src << "<span class='info>You are now visible</span>"
+		src << "<span class='info'>You are now visible</span>"
 
 	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
 	// Give the ghost a cult icon which should be visible only to itself
 	toggle_icon("cult")
+
+/mob/dead/observer/verb/toggle_anonsay()
+	set category = "Ghost"
+	set name = "Toggle Anonymous Chat"
+	set desc = "Toggles showing your key in dead chat."
+
+	src.anonsay = !src.anonsay
+	if(anonsay)
+		src << "<span class='info'>Your key won't be shown when you speak in dead chat.</span>"
+	else
+		src << "<span class='info'>Your key will be publicly visible again.</span>"

@@ -1245,7 +1245,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_huds)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson)
 
 		update_action_buttons()
 
@@ -1484,20 +1484,23 @@
 			if(eye_blurry)			client.screen += global_hud.blurry
 			if(druggy)				client.screen += global_hud.druggy
 
-			var/masked = 0
-
-			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding))
-				var/obj/item/clothing/glasses/welding/O = glasses
-				if(!O.up && tinted_weldhelh)
+			if(tinted_weldhelh)
+				var/found_welder
+				if(istype(glasses, /obj/item/clothing/glasses/welding))
+					var/obj/item/clothing/glasses/welding/O = glasses
+					if(!O.up)
+						found_welder = 1
+				else if(istype(head, /obj/item/clothing/head/welding))
+					var/obj/item/clothing/head/welding/O = head
+					if(!O.up)
+						found_welder = 1
+				else if(istype(back, /obj/item/weapon/rig))
+					var/obj/item/weapon/rig/O = back
+					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+							found_welder = 1
+				if(found_welder)
 					client.screen |= global_hud.darkMask
-					masked = 1
-
-			if(!masked && istype(back, /obj/item/weapon/rig))
-				var/obj/item/weapon/rig/O = back
-				// Ugh, why is this done on a case by case basis? Why is there no flag for causing weldervision?
-				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-					if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
-						client.screen |= global_hud.darkMask
 
 			if(machine)
 				if(!machine.check_eye(src))

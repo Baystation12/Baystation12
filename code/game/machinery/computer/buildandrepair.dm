@@ -25,6 +25,14 @@
 	var/frame_desc = null
 	var/contain_parts = 1
 
+//Not sure where else to put this
+/obj/item/weapon/circuitboard/broken
+	name = "broken electronics"
+	icon = 'icons/obj/doors/door_assembly.dmi'
+	icon_state = "door_electronics_smoked"
+	origin_tech = null
+	board_type = "other"
+
 //Called when the circuitboard is used to contruct a new machine.
 /obj/item/weapon/circuitboard/proc/construct(var/obj/machinery/M)
 	if (istype(M, build_path))

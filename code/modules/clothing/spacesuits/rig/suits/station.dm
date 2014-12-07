@@ -8,6 +8,8 @@
 	offline_slowdown = 10
 	offline_vision_restriction = 2
 
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+
 	req_access = null
 	req_one_access = null
 
@@ -31,6 +33,8 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+
 	req_access = list(access_ce)
 
 	initial_modules = list(
@@ -49,11 +53,14 @@
 	name = "AMI control module"
 	suit_type = "hazmat"
 	desc = "An Anomalous Material Interaction hardsuit that protects against the strangest energies the universe can throw at it."
-	icon_state = "science_rig"
+	icon_state = "medical_rig" //placeholder
 	armor = list(melee = 15, bullet = 15, laser = 80, energy = 80, bomb = 60, bio = 100, rad = 100)
 	slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = 1
+
+	//Todo: add xenoarch gear.
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
 
 	req_access = list(access_rd)
 

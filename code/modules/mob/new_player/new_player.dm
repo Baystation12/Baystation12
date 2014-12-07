@@ -334,7 +334,7 @@
 		// Moving wheelchair if they have one
 		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
 			character.buckled.loc = character.loc
-			character.buckled.dir = character.dir
+			character.buckled.set_dir(character.dir)
 
 		ticker.mode.latespawn(character)
 
@@ -375,7 +375,10 @@
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
+		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
 		var/dat = "<html><body><center>"
+		dat += "<b>Welcome, [name].<br></b>"
 		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.

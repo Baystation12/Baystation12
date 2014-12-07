@@ -471,9 +471,10 @@ proc/is_blind(A)
 //I know you can't see the change, but I rewrote the name code. It is significantly less messy now
 /proc/say_dead_direct(var/message, var/mob/subject = null)
 	var/name
+	var/keyname
 	if(subject && subject.client)
 		var/client/C = subject.client
-		var/keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
+		keyname = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
 		if(C.mob) //Most of the time this is the dead/observer mob; we can totally use him if there is no better name
 			var/mindname
 			var/realname = C.mob.real_name
@@ -485,17 +486,30 @@ proc/is_blind(A)
 				name = "[realname] died as [mindname]"
 			else
 				name = realname
-		name = "<span class='name'>[keyname] ([name])</span> "
 
 	for(var/mob/M in player_list)
 		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
-			var/follow = ""
+			var/follow
+			var/lname
 			if(subject)
 				if(subject != M)
 					follow = "(<a href='byond://?src=\ref[M];track=\ref[subject]'>follow</a>) "
 				if(M.stat != DEAD && M.client.holder)
 					follow = "(<a href='?src=\ref[M.client.holder];adminplayerobservejump=\ref[subject]'>JMP</a>) "
-			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [name][follow][message]</span>"
+				var/mob/dead/observer/DM
+				if(istype(subject, /mob/dead/observer))
+					DM = subject
+				if(M.client.holder) 							// What admins see
+					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
+				else
+					if(DM && DM.anonsay)						// If the person is actually observer they have the option to be anonymous
+						lname = "Ghost of [name]"
+					else if(DM)									// Non-anons
+						lname = "[keyname] ([name])"
+					else										// Everyone else (dead people who didn't ghost yet, etc.)
+						lname = name
+				lname = "<span class='name'>[lname]</span> "
+			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
 
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")

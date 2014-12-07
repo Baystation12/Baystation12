@@ -33,9 +33,9 @@
 
 /obj/machinery/conveyor/proc/setdir()
 	if(operating == -1)
-		dir = turn(basedir,180)
+		set_dir(turn(basedir,180))
 	else
-		dir = basedir
+		set_dir(basedir)
 	update()
 
 

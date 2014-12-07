@@ -103,7 +103,7 @@
 		return 1
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
-	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/posibrain))
+	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
 		integrate_ai(input_device,user)
 		return 1
 
@@ -291,7 +291,7 @@
 	toggleable = 1
 	usable = 0
 
-	engage_string = "Enable Countermeasures"
+	activate_string = "Enable Countermeasures"
 	deactivate_string = "Disable Countermeasures"
 
 	interface_name = "electrowarfare system"
@@ -322,7 +322,7 @@
 	activates_on_touch = 1
 	disruptive = 0
 
-	engage_string = "Enable Power Sink"
+	activate_string = "Enable Power Sink"
 	deactivate_string = "Disable Power Sink"
 
 	interface_name = "niling d-sink"

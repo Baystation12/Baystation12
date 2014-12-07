@@ -708,29 +708,6 @@
 			number += 2
 	return number
 
-/mob/living/carbon/human/proc/magboot_stomp(mob/living/carbon/human/H as mob, datum/organ/external/affecting)
-	visible_message("\red [src] raises one of \his magboots over [H]'s [affecting.display_name]...")
-	attack_move = 1
-	if(do_after(usr, 20))
-		if(src.canmove && !src.lying && src.Adjacent(H) && H.lying)
-			visible_message("\red <B>[src] stomps \his magboot down on [H]'s [affecting.display_name] with full force!</B>")
-			apply_damage(rand(20,30), BRUTE, affecting, run_armor_check(affecting, "melee"))
-			playsound(loc, 'sound/weapons/genhit3.ogg', 25, 1, -1)
-			attack_move = 0
-
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>Magboot-stomped [H.name] ([H.ckey])</font>")
-			H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been magboot-stomped by [src.name] ([src.ckey])</font>")
-			msg_admin_attack("[key_name(src)] magboot-stomped [key_name(H)]")
-			return 1
-	return 0
-
-/mob/living/carbon/human/get_combat_buff(var/damage)
-	if(check_special_role("Ninja") || check_special_role("Changeling"))
-		damage += 3 // We assume Ninjas and Changelings are slightly better in combat than the usual human
-	if(HULK in mutations)
-		damage *= 2 // Hulks do twice the damage
-	return damage * damage_multiplier
-
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
 		return 1
