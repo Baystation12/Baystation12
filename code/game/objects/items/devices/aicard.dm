@@ -67,7 +67,7 @@
 /obj/item/device/aicard/Topic(href, href_list)
 
 	var/mob/U = usr
-	if (!(get_turf(U) == get_turf(src)) || U.machine != src)//If they are not in range of 1 or less or their machine is not the card (ie, clicked on something else).
+	if (get_dist(get_turf(U),get_turf(src)) > 1 || U.machine != src)//If they are not in range of 1 or less or their machine is not the card (ie, clicked on something else).
 		U << browse(null, "window=aicard")
 		U.unset_machine()
 		return

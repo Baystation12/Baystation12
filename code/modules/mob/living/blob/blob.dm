@@ -52,14 +52,8 @@
 
 
 	death(gibbed)
-		if(key)
-			var/mob/dead/observer/ghost = new(src)
-			ghost.name = ghost_name
-			ghost.real_name = ghost_name
-			ghost.key = key
-			if (ghost.client)
-				ghost.client.eye = ghost
-			return ..(gibbed)
+		ghostize()
+		..(gibbed)
 
 
 	blob_act()

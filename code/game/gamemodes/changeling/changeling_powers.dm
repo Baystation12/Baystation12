@@ -457,7 +457,7 @@
 			changeling.chem_charges -= 20
 
 			// restore us to health
-			C.rejuvenate()
+			C.revive()
 
 			// remove our fake death flag
 			C.status_flags &= ~(FAKEDEATH)

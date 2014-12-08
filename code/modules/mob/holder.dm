@@ -58,6 +58,7 @@
 	desc = "It's a tiny plant critter."
 	icon_state = "nymph"
 	origin_tech = "magnets=3;biotech=5"
+	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 
 /obj/item/weapon/holder/drone
 	name = "maintenance drone"

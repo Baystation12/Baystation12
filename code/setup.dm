@@ -815,8 +815,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Ferry shuttle processing status
 #define IDLE_STATE		0
 #define WAIT_LAUNCH		1
-#define WAIT_ARRIVE		2
-#define WAIT_FINISH		3
+#define FORCE_LAUNCH	2
+#define WAIT_ARRIVE		3
+#define WAIT_FINISH		4
 
 //computer3 error codes, move lower in the file when it passes dev -Sayu
  #define PROG_CRASH      1  // Generic crash

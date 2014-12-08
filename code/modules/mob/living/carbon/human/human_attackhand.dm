@@ -101,7 +101,7 @@
 			if(!attack.is_usable(H))
 				return 0
 
-			var/damage = rand(1, attack.damage)
+			var/damage = rand(1, 5) + attack.damage
 			var/block = 0
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
@@ -128,6 +128,22 @@
 			var/miss_type = 0
 			var/attack_message
 			if(!accurate)
+				/*
+					This is kind of convoluted, but it seems to break down like this:
+					(note that the chance to miss is exaggerated here since ran_zone() might roll "chest"
+					
+					If aiming for chest:
+						80% chance you hit your target
+						17% chance you hit a random zone
+						3% chance you miss
+					
+					If aiming for something else:
+						68% chance you hit your target
+						17% chance you hit a random zone
+						15% chance you miss
+					
+					Why don't we just use get_zone_with_miss_chance() ???
+				*/
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!

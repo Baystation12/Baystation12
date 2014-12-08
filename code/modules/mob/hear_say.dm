@@ -8,7 +8,7 @@
 			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
 			//Or someone snoring.  So we make it where they won't hear it.
 		return
-	
+
 	//make sure the air can transmit speech - hearer's side
 	var/turf/T = get_turf(src)
 	if (T)
@@ -16,19 +16,26 @@
 		var/pressure = (environment)? environment.return_pressure() : 0
 		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
 			return
-			
+
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
-	
+
 	if(sleeping || stat == 1)
 		hear_sleep(message)
 		return
+<<<<<<< HEAD
 	
+=======
+
+	var/style = "body"
+
+>>>>>>> upstream/dev
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
 	if (language && (language.flags & NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
+<<<<<<< HEAD
 	
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
@@ -37,6 +44,18 @@
 				message = pick(S.speak)
 			else
 				message = stars(message)
+=======
+
+	if(!say_understands(speaker,language))
+		if(istype(speaker,/mob/living/simple_animal))
+			var/mob/living/simple_animal/S = speaker
+			message = pick(S.speak)
+		else
+			message = stars(message)
+
+	if(language)
+		style = language.colour
+>>>>>>> upstream/dev
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
@@ -87,12 +106,15 @@
 	if (language && (language.flags & NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
-	
+
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
 			if(istype(speaker,/mob/living/simple_animal))
 				var/mob/living/simple_animal/S = speaker
-				message = pick(S.speak)
+				if(S.speak && S.speak.len)
+					message = pick(S.speak)
+				else
+					return
 			else
 				message = stars(message)
 
@@ -174,7 +196,7 @@
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
 		return
-	
+
 	if(say_understands(speaker, language))
 		message = "<B>[src]</B> [verb], \"[message]\""
 	else

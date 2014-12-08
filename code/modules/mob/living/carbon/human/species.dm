@@ -222,7 +222,7 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
@@ -250,7 +250,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	secondary_unarmed_type = /datum/unarmed_attack/bite/eye_tooth
+	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
