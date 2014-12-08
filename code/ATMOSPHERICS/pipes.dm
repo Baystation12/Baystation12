@@ -143,7 +143,7 @@
 
 	volume = ATMOS_DEFAULT_VOLUME_PIPE
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 
 	var/obj/machinery/atmospherics/node1
@@ -406,7 +406,7 @@
 
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST
 
 	var/obj/machinery/atmospherics/node1
@@ -658,7 +658,7 @@
 
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = NORTH|SOUTH|EAST|WEST
 
 	var/obj/machinery/atmospherics/node1
@@ -918,7 +918,7 @@
 
 	volume = 35
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH
 
 	var/obj/machinery/atmospherics/node
@@ -1042,7 +1042,7 @@
 	var/start_pressure = 25*ONE_ATMOSPHERE
 
 	level = 1
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH
 	density = 1
 
@@ -1220,7 +1220,7 @@
 
 	volume = 250
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH
 
 	var/build_killswitch = 1
