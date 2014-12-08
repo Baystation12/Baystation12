@@ -198,12 +198,10 @@
 			..()
 
 /mob/living/simple_animal/gib()
-	if(icon_gib)
-		flick(icon_gib, src)
 	if(meat_amount && meat_type)
 		for(var/i = 0; i < meat_amount; i++)
 			new meat_type(src.loc)
-	..()
+	..(icon_gib,1)
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)

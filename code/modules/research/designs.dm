@@ -1429,7 +1429,7 @@ datum/design/implant_loyal
 	req_tech = list("materials" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 7000, "$glass" = 7000)
-	build_path = /obj/item/weapon/implant/loyalty"
+	build_path = /obj/item/weapon/implantcase/loyalty"
 */
 
 datum/design/implant_chem
@@ -1439,7 +1439,7 @@ datum/design/implant_chem
 	req_tech = list("materials" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/implant/chem
+	build_path = /obj/item/weapon/implantcase/chem
 
 datum/design/implant_free
 	name = "freedom implant"
@@ -1448,7 +1448,7 @@ datum/design/implant_free
 	req_tech = list("syndicate" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/implant/freedom
+	build_path = /obj/item/weapon/implantcase/freedom
 
 datum/design/chameleon
 	name = "Chameleon Kit"
