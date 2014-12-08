@@ -39,7 +39,7 @@ var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
 			S.safeties_enabled = mended
 
 
-/datum/wires/airlock/UpdatePulsed(var/index)
+/datum/wires/smes/UpdatePulsed(var/index)
 	var/obj/machinery/power/smes/buildable/S = holder
 	switch(index)
 		if(SMES_WIRE_RCON)
