@@ -531,20 +531,31 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	else
 		equip_to_slot_or_del(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
 
+	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
+	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
+
 	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(src)
 
 	// Make sure the ninja can actually equip the suit.
 	if(src.dna && src.dna.unique_enzymes)
-		src << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
 		ninjasuit.locked_dna = src.dna.unique_enzymes
+		spawn(10)
+			src << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
 	else
 		ninjasuit.req_access = list()
 
 	equip_to_slot_or_del(ninjasuit,slot_back)
+
+	if(istype(wear_suit,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = wear_suit
+		if(rig.air_supply)
+			internal = rig.air_supply
+	if(!internal && s_store)
+		internal = s_store
+	if(internal)
+		internals.icon_state = "internal1"
+
 	spawn(10)
 		ninjasuit.toggle_seals(src,1)
 
-	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
-	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
-	equip_to_slot_or_del(new /obj/item/weapon/tank/oxygen(src), slot_s_store)
 	return 1
