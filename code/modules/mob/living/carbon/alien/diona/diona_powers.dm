@@ -5,6 +5,9 @@
 	set name = "Merge with gestalt"
 	set desc = "Merge with another diona."
 
+	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+		return
+
 	if(istype(src.loc,/mob/living/carbon))
 		src.verbs -= /mob/living/carbon/alien/diona/proc/merge
 		return
@@ -40,6 +43,9 @@
 	set name = "Split from gestalt"
 	set desc = "Split away from your gestalt as a lone nymph."
 
+	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+		return
+
 	if(!(istype(src.loc,/mob/living/carbon)))
 		src.verbs -= /mob/living/carbon/alien/diona/proc/split
 		return
@@ -63,6 +69,9 @@
 	set category = "Abilities"
 	set name = "Steal Blood"
 	set desc = "Take a blood sample from a suitable donor."
+
+	if(stat == DEAD || paralysis || weakened || stunned || restrained())
+		return
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/human/H in oview(1,src))

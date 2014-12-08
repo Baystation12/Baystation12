@@ -457,8 +457,9 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(usr.stat || !isliving(usr) || usr.next_move > world.time)
 		return
+
 	usr.next_move = world.time + 20
 
 	var/mob/living/L = usr

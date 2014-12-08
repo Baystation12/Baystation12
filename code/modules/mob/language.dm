@@ -81,7 +81,7 @@
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
-	key = "v"
+	key = "5"
 	flags = RESTRICTED
 
 /datum/language/diona
