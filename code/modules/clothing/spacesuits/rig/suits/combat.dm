@@ -1,5 +1,5 @@
 /obj/item/clothing/head/helmet/space/rig/combat
-	light_overlay = "helmet_light_green_dual"
+	light_overlay = "helmet_light_dual_green"
 
 /obj/item/weapon/rig/combat
 	name = "combat hardsuit control module"
