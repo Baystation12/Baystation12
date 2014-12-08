@@ -744,7 +744,7 @@
 "op" = (/obj/structure/rack,/obj/item/weapon/gun/energy/ionrifle,/obj/machinery/recharger/wallcharger{pixel_x = 5; pixel_y = 32},/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "oq" = (/obj/structure/rack,/obj/item/ammo_magazine/a12mm,/obj/item/ammo_magazine/a12mm,/obj/item/ammo_magazine/a12mm,/obj/item/ammo_magazine/a12mm,/obj/item/ammo_magazine/a12mm,/obj/item/ammo_magazine/a12mm,/obj/item/weapon/gun/projectile/automatic/c20r,/obj/item/weapon/gun/projectile/automatic/c20r,/obj/item/weapon/gun/projectile/automatic/c20r,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "or" = (/obj/structure/closet,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
-"os" = (/obj/structure/rack,/obj/item/weapon/rig/combat/merc,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
+"os" = (/obj/structure/rack,/obj/item/weapon/rig/merc,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "ot" = (/obj/structure/window/reinforced,/obj/structure/lattice,/turf/space,/area/space)
 "ou" = (/obj/structure/closet/hydrant{pixel_y = 32},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "ov" = (/obj/structure/rack,/obj/item/clothing/tie/storage/brown_vest,/obj/item/clothing/tie/storage/brown_vest,/obj/item/clothing/tie/storage/brown_vest,/obj/item/clothing/tie/storage/brown_vest,/obj/item/clothing/tie/storage/brown_vest,/obj/item/clothing/tie/storage/brown_vest,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
