@@ -158,8 +158,7 @@
 	walk(src,0)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
-	src.visible_message("\blue \icon[src] [src] suddenly breaks apart.")
-	..()
+	..(null,"suddenly breaks apart.")
 	del(src)
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Del()

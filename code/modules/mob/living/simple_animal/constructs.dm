@@ -35,14 +35,10 @@
 		spell_list += new spell(src)
 
 /mob/living/simple_animal/construct/death()
-	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
-	for(var/mob/M in viewers(src, null))
-		if((M.client && !( M.blinded )))
-			M.show_message("\red [src] collapses in a shattered heap. ")
+	..(null,"collapses in a shattered heap.")
 	ghostize()
 	del src
-	return
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)
