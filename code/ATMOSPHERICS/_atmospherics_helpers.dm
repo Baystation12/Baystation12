@@ -293,6 +293,11 @@
 
 //Similar deal as the other atmos process procs.
 //mix_sources maps input gas mixtures to mix ratios. The mix ratios MUST add up to 1.
+//mix_sources should be a list of the following datums:
+/datum/gas_mixer
+	var/datum/gas_mixture/gas = null	//input gas mixture
+	var/ratio = null					//ratio to mix at
+
 /proc/mix_gas(var/obj/machinery/M, var/list/mix_sources, var/datum/gas_mixture/sink, var/total_transfer_moles = null, var/available_power = null)
 	if (!mix_sources.len)
 		return -1
@@ -302,23 +307,30 @@
 	var/total_input_volume = 0		//for flow rate calculation
 	var/total_input_moles = 0		//for flow rate calculation
 	var/list/source_specific_power = list()
-	for (var/datum/gas_mixture/source in mix_sources)
-		if (source.total_moles < MINUMUM_MOLES_TO_FILTER)
+
+	for (var/datum/gas_mixer/source in mix_sources)
+		var/datum/gas_mixture/gas = source.gas
+		if(!istype(gas))
+			continue
+
+		if (gas.total_moles < MINUMUM_MOLES_TO_FILTER)
 			return -1	//either mix at the set ratios or mix no gas at all
 
-		var/mix_ratio = mix_sources[source]
+		var/mix_ratio = source.ratio
 		if (!mix_ratio)
 			continue	//this gas is not being mixed in
 
 		//mixing rate is limited by the source with the least amount of available gas
-		var/this_mixing_moles = source.total_moles/mix_ratio
+		var/this_mixing_moles = gas.total_moles/mix_ratio
+
 		if (isnull(total_mixing_moles) || total_mixing_moles > this_mixing_moles)
 			total_mixing_moles = this_mixing_moles
 
-		source_specific_power[source] = calculate_specific_power(source, sink)*mix_ratio/ATMOS_FILTER_EFFICIENCY
+		source_specific_power[source] = calculate_specific_power(gas, sink)*mix_ratio/ATMOS_FILTER_EFFICIENCY
 		total_specific_power += source_specific_power[source]
-		total_input_volume += source.volume
-		total_input_moles += source.total_moles
+		total_input_volume += gas.volume
+		total_input_moles += gas.total_moles
+
 
 	if (total_mixing_moles < MINUMUM_MOLES_TO_FILTER) //if we cant transfer enough gas just stop to avoid further processing
 		return -1
@@ -344,14 +356,19 @@
 		P.last_flow_rate = (total_transfer_moles/total_input_moles)*total_input_volume //group_multiplier gets divided out here
 
 	var/total_power_draw = 0
-	for (var/datum/gas_mixture/source in mix_sources)
-		var/mix_ratio = mix_sources[source]
+
+	for (var/datum/gas_mixer/source in mix_sources)
+		var/mix_ratio = source.ratio
 		if (!mix_ratio)
 			continue
 
 		var/transfer_moles = total_transfer_moles * mix_ratio
 
-		var/datum/gas_mixture/removed = source.remove(transfer_moles)
+		var/datum/gas_mixture/gas = source.gas
+		if(!istype(gas))
+			continue
+		
+		var/datum/gas_mixture/removed = gas.remove(transfer_moles)
 
 		var/power_draw = transfer_moles * source_specific_power[source]
 		total_power_draw += power_draw
