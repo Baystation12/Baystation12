@@ -264,7 +264,7 @@ Status: []<BR>"},
 	if(!anchored)
 		icon_state = "turretCover"
 		return
-	
+
 	..()
 	if(stat & BROKEN)
 		icon_state = "[lasercolor]destroyed_target_prism"
@@ -362,6 +362,10 @@ Status: []<BR>"},
 
 
 /obj/machinery/porta_turret/bullet_act(var/obj/item/projectile/Proj)
+
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	if(on)
 		if(!attacked && !emagged)
 			attacked = 1
