@@ -161,7 +161,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		var/text = "<FONT size = 2><B>The changelings were:</B></FONT>"
 		for(var/datum/mind/changeling in changelings)
 			var/changelingwin = changeling.current
-			text += printplayer(changeling)
+			text += print_player_full(changeling)
 
 			//Removed sanity if(changeling) because we -want- a runtime to inform us that the changelings list is incorrect and needs to be fixed.
 			text += "<br><b>Changeling ID:</b> [changeling.changeling.changelingID]."
