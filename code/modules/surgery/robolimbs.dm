@@ -166,7 +166,12 @@
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
-		del(tool)
+		user.drop_from_inventory(tool, user.loc)
+		tool.loc = src
+		affected.RobotLimb = tool
+		var/obj/item/robot_parts/robolimb = tool
+		robolimb.OnInstall()
+		user.UpdateAppearance()
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
