@@ -1,9 +1,18 @@
-
+#define AHELP_ADMIN 1
+#define AHELP_MENTOR 2
+#define AHELP_DEV 3
 
 //This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
-/client/verb/adminhelp(msg as null|text)
+var/list/adminhelp_categories = list("Mentor - Gameplay/Roleplay question" = AHELP_MENTOR,\
+									 "Admin - Rule/Gameplay issue" = AHELP_ADMIN,\
+									 "Dev - Bug report" = AHELP_DEV)
+
+/client/proc/adminhelp_admin(message)
+	adminhelp("Admin - Rule/Gameplay issue", message)
+
+/client/verb/adminhelp(selected_type in adminhelp_categories, msg as text)
 	set category = "Admin"
 	set name = "Adminhelp"
 
@@ -24,12 +33,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
 	**/
-	var/list/type = list ("Gameplay/Roleplay question", "Rule/Gameplay issue", "Bug report")
-	var/selected_type = input("Pick a category.", "Admin Help", null, null) as null|anything in type
-	if(!selected_type)
-		return
-	if(!msg)
-		msg = input("Please enter your message:", "Admin Help", null, null) as text
 
 	if(!msg || alert("The following message will be sent to staff that administers\n the '[selected_type]' category:\n\n[msg]\n", "Admin Help", "Ok", "Cancel") == "Cancel")
 		return
@@ -130,8 +133,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			if(X.is_afk())
 				admin_number_afk++
 
-	switch(selected_type)
-		if("Gameplay/Roleplay question")
+	switch(adminhelp_categories[selected_type])
+		if(AHELP_MENTOR)
 			if(mentorholders.len)
 				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
 					if(X.prefs.toggles & SOUND_ADMINHELP)
@@ -142,13 +145,13 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Rule/Gameplay issue")
+		if(AHELP_ADMIN)
 			if(adminholders.len)
 				for(var/client/X in adminholders) // Admins of course get everything in their helps
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Bug report")
+		if(AHELP_DEV)
 			if(debugholders.len)
 				for(var/client/X in debugholders)
 					if(R_ADMIN | R_MOD & X.holder.rights) // Admins get every button & special highlights in theirs
@@ -183,3 +186,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		send2adminirc("[selected_upper] from [key_name(src)]: [html_decode(original_msg)]")
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
+
+#undef AHELP_ADMIN
+#undef AHELP_MENTOR
+#undef AHELP_DEV
