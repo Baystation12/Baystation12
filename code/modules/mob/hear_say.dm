@@ -24,19 +24,12 @@
 	if(sleeping || stat == 1)
 		hear_sleep(message)
 		return
-<<<<<<< HEAD
-	
-=======
 
-	var/style = "body"
-
->>>>>>> upstream/dev
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
 	if (language && (language.flags & NONVERBAL))
 		if (!speaker || (src.sdisabilities & BLIND || src.blinded) || !(speaker in view(src)))
 			message = stars(message)
-<<<<<<< HEAD
-	
+
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
 			if(istype(speaker,/mob/living/simple_animal))
@@ -44,18 +37,6 @@
 				message = pick(S.speak)
 			else
 				message = stars(message)
-=======
-
-	if(!say_understands(speaker,language))
-		if(istype(speaker,/mob/living/simple_animal))
-			var/mob/living/simple_animal/S = speaker
-			message = pick(S.speak)
-		else
-			message = stars(message)
-
-	if(language)
-		style = language.colour
->>>>>>> upstream/dev
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
