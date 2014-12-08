@@ -233,8 +233,15 @@
 	// - No action was taken in parent function (terminal de/construction atm).
 	if (..())
 
+		// Multitool - change RCON tag
+		if(istype(W, /obj/item/device/multitool))
+			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
+			if(newtag)
+				RCon_tag = newtag
+				user << "<span class='notice'>You changed the RCON tag to: [newtag]</span>"
+			return
 		// Charged above 1% and safeties are enabled.
-		if((charge > (capacity/100)) && safeties_enabled && (!istype(W, /obj/item/device/multitool)))
+		if((charge > (capacity/100)) && safeties_enabled)
 			user << "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>"
 			return
 
