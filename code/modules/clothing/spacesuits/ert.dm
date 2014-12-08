@@ -45,9 +45,22 @@
 	item_state = "helm-command"
 	item_color = "ert_commander"
 
+/obj/item/clothing/head/helmet/space/rig/ert/captain
+	name = "RB Station captain helmet"
+	desc = "A helmet worn by the captain of RB Station 2. Has blue highlights. Armoured and space ready."
+	icon_state = "rig0-ert_commander"
+	item_state = "helm-command"
+	item_color = "ert_commander"
+
 /obj/item/clothing/suit/space/rig/ert/commander
 	name = "emergency response team commander suit"
 	desc = "A suit worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured, space ready, and fire resistant."
+	icon_state = "ert_commander"
+	item_state = "suit-command"
+
+/obj/item/clothing/suit/space/rig/ert/captain
+	name = "RB Station captain suit"
+	desc = "A suit worn by the captain of RB Station 2. Has blue highlights. Armoured, space ready, and fire resistant."
 	icon_state = "ert_commander"
 	item_state = "suit-command"
 

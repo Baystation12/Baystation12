@@ -47,6 +47,7 @@
 	treatment_brute = "bicaridine"
 	treatment_fire = "kelotane"
 	treatment_tox = "anti_toxin"
+	declare_treatment = 1
 
 /obj/item/weapon/firstaid_arm_assembly
 	name = "first aid/robot arm assembly"

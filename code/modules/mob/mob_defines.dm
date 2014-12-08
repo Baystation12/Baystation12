@@ -10,6 +10,7 @@
 	//Not in use yet
 	var/obj/effect/organstructure/organStructure = null
 
+	var/be_music = 1
 	var/obj/screen/flash = null
 	var/obj/screen/blind = null
 	var/obj/screen/hands = null

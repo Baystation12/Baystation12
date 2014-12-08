@@ -1,11 +1,13 @@
 /obj/item/clothing/shoes/magboots
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle."
 	name = "magboots"
+	var/icon_state_active = "magboots1"
+	var/icon_state_inactive = "magboots0"
 	icon_state = "magboots0"
 	species_restricted = null
 	var/magpulse = 0
 	icon_action_button = "action_blank"
-	action_button_name = "Toggle the magboots"
+	action_button_name = "Toggle Magpulse"
 //	flags = NOSLIP //disabled by default
 
 	attack_self(mob/user)
@@ -13,16 +15,16 @@
 			flags &= ~NOSLIP
 			slowdown = SHOES_SLOWDOWN
 			magpulse = 0
-			icon_state = "magboots0"
+			icon_state = icon_state_inactive
 			user << "You disable the mag-pulse traction system."
 		else
 			flags |= NOSLIP
 			slowdown = 2
 			magpulse = 1
-			icon_state = "magboots1"
+			icon_state = icon_state_active
 			user << "You enable the mag-pulse traction system."
 		user.update_inv_shoes()	//so our mob-overlays update
-	
+
 	examine()
 		set src in view()
 		..()

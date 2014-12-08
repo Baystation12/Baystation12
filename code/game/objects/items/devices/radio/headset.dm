@@ -28,7 +28,7 @@
 			var/datum/language/hivemind = all_languages["Hivemind"]
 			hivemind.broadcast(M, message)
 		return null
-	
+
 	return ..()
 
 /obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
@@ -191,6 +191,19 @@
 	item_state = "headset"
 	freerange = 1
 	keyslot2 = new /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/headset/rb
+	name = "RB Station headset"
+	desc = "The headset that belongs to the captain of RB Station 2. Channels are as follows: :h - Response Team :c - command, :s - security, :e - engineering, :d - mining, :q - cargo, :m - medical, :n - science."
+	icon_state = "com_headset"
+	item_state = "headset"
+	freerange = 1
+	keyslot2 = new /obj/item/device/encryptionkey/ert
+/obj/item/device/radio/headset/rb/New()
+	..()
+	del(keyslot1)
+	keyslot1 = new /obj/item/device/encryptionkey/binary
+	recalculateChannels()
 
 /obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()

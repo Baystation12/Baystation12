@@ -28,7 +28,7 @@
 	var/deflect_chance = 10 //chance to deflect the incoming projectiles, hits, or lesser the effect of ex_act.
 	//the values in this list show how much damage will pass through, not how much will be absorbed.
 	var/list/damage_absorption = list("brute"=0.8,"fire"=1.2,"bullet"=0.9,"laser"=1,"energy"=1,"bomb"=1)
-	var/obj/item/weapon/cell/cell
+	var/obj/item/weapon/cell/infinite/cell
 	var/state = 0
 	var/list/log = new
 	var/last_message = 0
@@ -109,15 +109,15 @@
 	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
 	return internal_tank
 
-/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/C=null)
+/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/infinite/C=null)
 	if(C)
 		C.forceMove(src)
 		cell = C
 		return
 	cell = new(src)
-	cell.name = "high-capacity power cell"
-	cell.charge = 15000
-	cell.maxcharge = 15000
+	cell.name = "infinite-capacity power cell"
+	cell.charge = 30000
+	cell.maxcharge = 30000
 
 /obj/mecha/proc/add_cabin()
 	cabin_air = new
@@ -1406,11 +1406,11 @@
 
 /obj/mecha/proc/output_maintenance_dialog(obj/item/weapon/card/id/id_card,mob/user)
 	if(!id_card || !user) return
-	
+
 	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
 	if (locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in contents)
-		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>" 
-	
+		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>"
+
 	var/output = {"<html>
 						<head>
 						<style>
@@ -1568,23 +1568,23 @@
 		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
 			if (P.occupant)
 				passengers["[P.occupant]"] = P
-		
+
 		if (!passengers)
 			user << "\red There are no passengers to remove."
 			return
-			
+
 		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
-		
+
 		if (!pname)
 			return
-			
+
 		var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
 		var/mob/occupant = P.occupant
-		
+
 		user.visible_message("\red [user] begins opening the hatch on \the [P]...", "\red You begin opening the hatch on \the [P]...")
 		if (!do_after(user, 40, needhand=0))
 			return
-		
+
 		user.visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!", "\red You open the hatch on \the [P] and remove [occupant]!")
 		P.go_out()
 		P.log_message("[occupant] was removed.")

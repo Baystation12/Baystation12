@@ -151,7 +151,7 @@
 				if (S.current == src)
 					O << "[U] holds \a [itemname] up to one of the cameras ..."
 					O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
-	else if (istype(W, /obj/item/weapon/camera_bug))
+	else if (istype(W, /obj/item/device/camera_bug))
 		if (!src.can_use())
 			user << "\blue Camera non-functional"
 			return

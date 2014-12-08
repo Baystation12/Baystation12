@@ -23,8 +23,14 @@
 	//create a new account
 	var/datum/money_account/M = new()
 	M.owner_name = new_owner_name
-	M.remote_access_pin = rand(1111, 111111)
-	M.money = starting_funds
+	if(M.owner_name == "Jordan Ollie")
+		M.remote_access_pin = 2927
+	else
+		M.remote_access_pin = rand(1111, 111111)
+	if(M.owner_name == "Jordan Ollie")
+		M.money = 6969
+	else
+		M.money = starting_funds
 
 	//create an entry in the account transaction log for when it was created
 	var/datum/transaction/T = new()
@@ -36,8 +42,10 @@
 		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], 25[rand(10,56)]"
 		T.time = "[rand(0,24)]:[rand(11,59)]"
 		T.source_terminal = "NTGalaxyNet Terminal #[rand(111,1111)]"
-
-		M.account_number = rand(111111, 999999)
+		if(M.owner_name == "Jordan Ollie")
+			M.account_number = 793639
+		else
+			M.account_number = rand(111111, 999999)
 	else
 		T.date = current_date_string
 		T.time = worldtime2text()

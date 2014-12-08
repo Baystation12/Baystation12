@@ -88,3 +88,11 @@
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
 	gender = NEUTER
+
+/mob/living/simple_animal/cat/kitten/lily
+	name = "Lily"
+	desc = "Oh my GOSH! It's Lily, Captain's kitten!"
+	icon_state = "kitten"
+	icon_living = "kitten"
+	icon_dead = "kitten_dead"
+	gender = NEUTER

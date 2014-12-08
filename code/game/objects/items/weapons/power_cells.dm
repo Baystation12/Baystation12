@@ -86,7 +86,7 @@
 	charge = 0
 
 /obj/item/weapon/cell/infinite
-	name = "infinite-capacity power cell!"
+	name = "infinite-capacity power cell"
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 30000

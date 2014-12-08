@@ -157,8 +157,8 @@
 
 	New()
 		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
+		//new /obj/item/weapon/paper(src)
+		//new /obj/item/weapon/pen(src)
 
 	attack_hand(mob/user as mob)
 		if ((src.loc == user) && (src.locked == 1))
@@ -230,8 +230,8 @@
 
 	New()
 		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
+		//new /obj/item/weapon/paper(src)
+		//new /obj/item/weapon/pen(src)
 
 	attack_hand(mob/user as mob)
 		return attack_self(user)

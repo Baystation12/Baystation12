@@ -32,9 +32,58 @@ datum/nano_item_lists
 	var/list/nanoui_data = new // Additional data for NanoUI use
 
 /obj/item/device/uplink/New()
-	welcome = ticker.mode.uplink_welcome
-	uses = ticker.mode.uplink_uses
-	ItemsCategory = ticker.mode.uplink_items
+	if(!ticker)
+		welcome = "AntagCorp Portable Teleportation Relay:"
+		uses = 10
+		ItemsCategory = list(
+		"Highly Visible and Dangerous Weapons" = list(
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile, 6, "Revolver", "RE"),
+			 new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, "Ammo-357", "RA"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
+			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
+			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Syndicate Bundle", "BU"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM")
+			),
+		"Stealthy and Inconspicuous Weapons" = list(
+			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
+			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Syndicate Soap", "SP"),
+			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC")
+			),
+		"Stealth and Camouflage Items" = list(
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
+			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Syndicate Shoes", "SH"),
+			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
+			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
+			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP")
+			),
+		"Devices and Tools" = list(
+			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
+			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
+			new/datum/uplink_item(/obj/item/weapon/stamp/chameleon, 3, "Morphic Chameleon Stmap", "CS"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
+			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
+			new/datum/uplink_item(/obj/item/device/encryptionkey/binary, 3, "Binary Translator Key", "BT"),
+			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
+			new/datum/uplink_item(/obj/item/weapon/plastique, 2, "C-4 (Destroys walls)", "C4"),
+			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
+			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
+			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP")
+			),
+		"Implants" = list(
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI")
+			),
+		"(Pointless) Badassery" = list(
+			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS")
+			)
+		)
+	else
+		welcome = ticker.mode.uplink_welcome
+		uses = ticker.mode.uplink_uses
+		ItemsCategory = ticker.mode.uplink_items
 
 	var/datum/nano_item_lists/IL = generate_item_lists()
 	nanoui_items = IL.items_nano
@@ -168,7 +217,7 @@ datum/nano_item_lists
 	data["menu"] = nanoui_menu
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -278,6 +327,7 @@ datum/nano_item_lists
 
 /obj/item/device/multitool/uplink/New()
 	hidden_uplink = new(src)
+	hidden_uplink.uses = 10
 
 /obj/item/device/multitool/uplink/attack_self(mob/user as mob)
 	if(hidden_uplink)

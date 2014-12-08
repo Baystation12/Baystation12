@@ -488,6 +488,9 @@ datum/preferences
 		if(jobban_isbanned(user, rank))
 			HTML += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
 			continue
+		if(job.forbidden(user.client, job))
+			HTML += "<del>[rank]</del></td><td><b> \[FORBIDDEN]</b></td></tr>"
+			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
@@ -1577,8 +1580,8 @@ datum/preferences
 
 	for(var/name in organ_data)
 
-		var/status = organ_data[name]		
-		var/datum/organ/external/O = character.organs_by_name[name]		
+		var/status = organ_data[name]
+		var/datum/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
@@ -1586,7 +1589,7 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
-		else			
+		else
 			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")

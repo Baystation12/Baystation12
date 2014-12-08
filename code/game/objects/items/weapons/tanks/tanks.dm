@@ -16,7 +16,7 @@
 	throw_range = 4
 
 	var/datum/gas_mixture/air_contents = null
-	var/distribute_pressure = ONE_ATMOSPHERE
+	var/distribute_pressure = ONE_ATMOSPHERE //Yeah, don't manually set this to 16...
 	var/integrity = 3
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.

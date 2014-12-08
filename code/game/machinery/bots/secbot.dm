@@ -22,7 +22,7 @@
 	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
-	var/declare_arrests = 0 //When making an arrest, should it notify everyone wearing sechuds?
+	var/declare_arrests = 1 //When making an arrest, should it notify everyone wearing sechuds?
 
 	var/has_laser = 0
 	var/next_harm_time = 0
@@ -41,7 +41,7 @@
 #define SECBOT_PATROL		5		// patrolling
 #define SECBOT_SUMMON		6		// summoned by PDA
 
-	var/auto_patrol = 0		// set to make bot automatically patrol
+	var/auto_patrol = 1		// set to make bot automatically patrol
 
 	var/beacon_freq = 1445		// navigation beacon frequency
 	var/control_freq = AI_FREQ		// bot control frequency
@@ -65,8 +65,8 @@
 
 	var/obj/item/weapon/secbot_assembly = /obj/item/weapon/secbot_assembly
 
-	var/list/threat_found_sounds = new('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
-	var/list/preparing_arrest_sounds = new('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
+	var/list/threat_found_sounds = list('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
+	var/list/preparing_arrest_sounds = list('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
 
 /obj/machinery/bot/secbot/beepsky
 	name = "Officer Beep O'sky"
@@ -96,9 +96,9 @@
 			radio_controller.add_object(src, control_freq, filter = RADIO_SECBOT)
 			radio_controller.add_object(src, beacon_freq, filter = RADIO_NAVBEACONS)
 		if(lasercolor)
-			shot_delay = 6		//Longer shot delay because JESUS CHRIST
+			shot_delay = 6	//Longer shot delay because JESUS CHRIST
 			check_records = 0	//Don't actively target people set to arrest
-			arrest_type = 1		//Don't even try to cuff
+			arrest_type = 1	//Don't even try to cuff
 			req_access = list(access_maint_tunnels)
 			arrest_type = 1
 			if((lasercolor == "b") && (name == created_name))//Picks a name if there isn't already a custome one

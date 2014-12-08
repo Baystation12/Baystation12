@@ -35,6 +35,20 @@
 		new /obj/item/weapon/tank/emergency_oxygen( src )
 		return
 
+/obj/item/weapon/storage/box/survival/emergency
+	name = "emergency box"
+	desc = "An improved version of the standard box."
+	New()
+		..()
+		contents = list()
+		sleep(1)
+		new /obj/item/clothing/mask/breath(src)
+		new /obj/item/weapon/tank/emergency_oxygen/double(src)
+		new /obj/item/device/radio(src)
+		new /obj/item/device/flashlight(src)
+		new /obj/item/weapon/crowbar/red(src)
+		return
+
 /obj/item/weapon/storage/box/engineer/
 	New()
 		..()
@@ -44,6 +58,20 @@
 		new /obj/item/weapon/tank/emergency_oxygen/engi( src )
 		return
 
+/obj/item/weapon/storage/box/donor
+	name = "box of donor candies"
+	desc = "Contains little candies for blood donors."
+	icon_state = "box"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/candy/donor(src)
 
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"

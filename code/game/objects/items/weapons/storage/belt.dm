@@ -34,7 +34,19 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
+	new /obj/item/device/multitool(src)
+	new /obj/item/stack/cable_coil(src,30)
+
+/obj/item/weapon/storage/belt/utility/max/New()
+	..()
+	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/wrench(src)
+	new /obj/item/weapon/weldingtool/experimental(src)
+	new /obj/item/weapon/crowbar(src)
+	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/device/multitool(src)
+	new /obj/item/stack/cable_coil(src,30)
+
 
 
 /obj/item/weapon/storage/belt/utility/atmostech/New()
