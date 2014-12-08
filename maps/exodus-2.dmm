@@ -758,7 +758,7 @@
 "oD" = (/obj/effect/landmark{name = "Syndicate-Uplink"},/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "oE" = (/obj/structure/rack,/obj/item/weapon/tank/emergency_oxygen/double,/obj/item/weapon/tank/emergency_oxygen/double,/obj/item/weapon/tank/emergency_oxygen/double,/obj/item/weapon/tank/emergency_oxygen/double,/obj/item/weapon/tank/emergency_oxygen/double,/obj/item/weapon/tank/emergency_oxygen/double,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "oF" = (/obj/structure/lattice,/obj/structure/grille,/obj/structure/lattice,/turf/space,/area/space)
-"oG" = (/obj/structure/sign{desc = "This is a pinup poster."; icon = 'icons/obj/contraband.dmi'; icon_state = "bsposter50"; name = "pinup poster"; pixel_x = -32},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
+"oG" = (/obj/structure/sign/poster{poster_type = "/datum/poster/bay_50"; pixel_x = -32},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "oH" = (/obj/item/device/radio/intercom{desc = "Talk through this. Evilly"; freerange = 1; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 0; pixel_y = -32; subspace_transmission = 1; syndie = 1},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "oI" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/lattice,/turf/space,/area/space)
 "oJ" = (/obj/structure/closet/walllocker/emerglocker{pixel_x = 28},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
