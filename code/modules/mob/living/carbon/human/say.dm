@@ -4,6 +4,9 @@
 	var/alt_name = ""
 	var/message_range = world.view
 	var/italics = 0
+	if(miming == 1)
+		src << "You'll have to wait if you want to atone for your sins."
+		return
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)

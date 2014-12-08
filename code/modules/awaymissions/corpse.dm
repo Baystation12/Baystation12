@@ -173,7 +173,7 @@
 	corpsemask = /obj/item/clothing/mask/gas/clown_hat
 	corpsepocket1 = /obj/item/weapon/bikehorn
 	corpseback = /obj/item/weapon/storage/backpack/clown
-	corpseid = 1
+	//corpseid = 1
 	corpseidjob = "Clown"
 	corpseidaccess = "Clown"
 

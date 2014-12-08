@@ -1316,6 +1316,16 @@
 
 		usr.client.cmd_admin_slimeize(H)
 
+	else if(href_list["makepai"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/M = locate(href_list["makepai"])
+		if(!istype(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+
+		M.pAItransform()
+
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
 

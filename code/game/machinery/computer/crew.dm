@@ -97,9 +97,19 @@
 					crewmemberData["rank"] = (P.id ? P.id.rank : "Unknown")
 
 				var/area/A = get_area(H)
+				var/newz = pos.z
+				if (pos.z == 1)
+					newz = 1
+				else if (pos.z == 7)
+					newz = 0
+				else if (pos.z == 8)
+					newz = 2
+				else
+					newz = pos.z
 				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
 				crewmemberData["y"] = pos.y
+				crewmemberData["Floor"] = newz
 
 				// Works around list += list2 merging lists; it's not pretty but it works
 				crewmembers += "temporary item"

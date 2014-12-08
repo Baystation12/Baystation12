@@ -245,6 +245,8 @@ datum/preferences
 			if((lang.flags & RESTRICTED))
 				if(language == lang.name)
 					language = "None"
+		if (species == "Tajaran")
+			species = "Tajara"
 	update_preview_icon()
 	user << browse_rsc(preview_icon_front, "previewicon.png")
 	user << browse_rsc(preview_icon_side, "previewicon2.png")

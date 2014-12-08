@@ -65,6 +65,17 @@
 	desc = "An untrustworthy bar of soap. Smells of fear."
 	icon_state = "soapsyndie"
 
+/obj/item/weapon/feather
+	name = "White feather"
+	desc = "A silk wilk feather, it feels soft to touch."
+	gender = PLURAL
+	icon = 'icons/obj/items.dmi'
+	icon_state = "feather"
+	w_class = 1.0
+	throwforce = 0
+	throw_speed = 4
+	throw_range = 2
+
 /obj/item/weapon/bikehorn
 	name = "bike horn"
 	desc = "A horn off of a bicycle."

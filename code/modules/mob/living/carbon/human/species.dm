@@ -272,7 +272,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	darksight = 8
+	darksight = 12
 	falldmg = 1
 
 	cold_level_1 = 200 //Default 260
@@ -297,7 +297,7 @@
 	language = "Siik'tajr"
 	tail = "Avisaran"
 	unarmed_type = /datum/unarmed_attack/claws_J
-	darksight = 10
+	darksight = 20
 	dhts = 1
 	wingicon = 1
 	sizechange = 1
@@ -604,7 +604,7 @@
 	sharp = 1
 	edge = 1
 
-/datum/unarmed_attack/claws_J   //Jamie's a bit stronger than the average guy, according to the old code
+/datum/unarmed_attack/claws_J
 	attack_verb = list("scratch", "claw")
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -612,6 +612,27 @@
 	sharp = 1
 	edge = 1
 	shredding = 1
+
+/datum/unarmed_attack/alien
+	attack_verb = list("slash", "maul")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 8
+	sharp = 1
+	edge = 1
+	shredding = 1
+
+/datum/unarmed_attack/alien/drone
+	damage = 8
+
+/datum/unarmed_attack/alien/sentinel
+	damage = 10
+
+/datum/unarmed_attack/alien/hunter
+	damage = 13
+
+/datum/unarmed_attack/alien/queen
+	damage = 23
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")

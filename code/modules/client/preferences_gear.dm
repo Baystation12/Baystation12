@@ -72,7 +72,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/dollarchain
 	display_name = "Dollar Chain (Neck)"
-	path = /obj/item/clothing/neck/emeraldneck
+	path = /obj/item/clothing/neck/dollarchain
 	cost = 1
 	slot = slot_neck
 

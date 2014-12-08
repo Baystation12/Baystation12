@@ -5,8 +5,8 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/claws_J
-	secondary_unarmed_type = /datum/unarmed_attack/claws_J
+	unarmed_type = /datum/unarmed_attack/alien
+	secondary_unarmed_type = /datum/unarmed_attack/alien
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 
@@ -114,6 +114,8 @@
 	slowdown = 2
 	tail = "xenos_drone_tail"
 	rarity_value = 5
+	unarmed_type = /datum/unarmed_attack/alien/drone
+	secondary_unarmed_type = /datum/unarmed_attack/alien/drone
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
@@ -150,6 +152,8 @@
 	name = "Xenomorph Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
+	unarmed_type = /datum/unarmed_attack/alien/hunter
+	secondary_unarmed_type = /datum/unarmed_attack/alien/hunter
 	slowdown = -1
 	total_health = 150
 	tail = "xenos_hunter_tail"
@@ -181,6 +185,8 @@
 	slowdown = 1
 	total_health = 125
 	tail = "xenos_sentinel_tail"
+	unarmed_type = /datum/unarmed_attack/alien/sentinel
+	secondary_unarmed_type = /datum/unarmed_attack/alien/sentinel
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
@@ -212,7 +218,10 @@
 	caste_name = "queen"
 	slowdown = 5
 	tail = "xenos_queen_tail"
+	unarmed_type = /datum/unarmed_attack/alien/queen
+	secondary_unarmed_type = /datum/unarmed_attack/alien/queen
 	rarity_value = 10
+	/datum/unarmed_attack/alien
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
