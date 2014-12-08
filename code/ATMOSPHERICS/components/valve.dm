@@ -6,7 +6,7 @@
 	desc = "A pipe valve"
 
 	level = 1
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 
 	var/open = 0
