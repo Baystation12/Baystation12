@@ -1,9 +1,14 @@
+/obj/item/weapon/circuitboard/rcon_console
+	name = "\improper RCON Remote Control Console circuit board"
+	build_path = /obj/machinery/computer/rcon
+	origin_tech = "programming=4;engineering=3;powerstorage=5"
+
 /obj/machinery/computer/rcon
 	name = "RCON Console"
 	desc = "Console used to remotely control machinery on the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"
-	circuit = /obj/item/weapon/circuitboard/aifixer
+	circuit = /obj/item/weapon/circuitboard/rcon_console
 	req_one_access = list(access_engine)
 	var/current_tag = null
 	var/list/known_SMESs = null
@@ -15,21 +20,6 @@
 /obj/machinery/computer/rcon/attack_hand(var/mob/user as mob)
 	..()
 	ui_interact(user)
-
-	/*
-	FindDevices() // Search for devices first.
-	user.set_machine(src)
-	var/dat = "<h3>RCON Control Console</h3><hr>Detected SMES units with RCON support:<br>"
-	for(var/obj/machinery/power/smes/buildable/SMES in known_SMESs)
-		dat += "<A HREF='byond://?src=\ref[src];opensmes=[SMES.RCon_tag]'>[SMES.RCon_tag]</A> ([SMES.Percentage()]%)<br>"
-
-	dat += "<hr>Detected Breaker Boxes with RCON support:<br>"
-	for(var/obj/machinery/power/breakerbox/breaker in known_breakers)
-		dat += "<A HREF='byond://?src=\ref[src];toggle_breaker=[breaker.RCon_tag]'>[breaker.RCon_tag]</A> ([breaker.on ? "\green ENABLED" : "\red DISABLED"])<br>"
-	user << browse(dat, "window=computer;size=400x500")
-	onclose(user, "computer")
-	return
-	*/
 
 /obj/machinery/computer/rcon/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	FindDevices() // Update our devices list
