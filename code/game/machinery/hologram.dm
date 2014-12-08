@@ -91,6 +91,14 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		master.show_message(rendered, 2)
 	return
 
+/obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
+	if(M && hologram && master)
+		//var/name_used = M.GetVoice()
+		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
+		//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
+		master.show_message(rendered, 2)
+	return
+
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
 	hologram = new(T)//Spawn a blank effect at the location.
 	hologram.icon = A.holo_icon

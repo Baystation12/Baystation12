@@ -110,7 +110,7 @@
 					log_say("[key_name(src)] : [message]")
 					return P.radio.talk_into(src,message,message_mode,verb,speaking)
 			return 0
-			
+
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
@@ -169,7 +169,7 @@
 		var/message_stars = stars(message)
 		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
 
-		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>[message]</span></span></i>"//The AI can "hear" its own message.
+		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>\"[message]\"</span></span></i>"//The AI can "hear" its own message.
 		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
 			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
 				M.show_message(rendered_a, 2)
@@ -181,6 +181,34 @@
 		src << "No holopad connected."
 		return
 	return 1
+
+/mob/living/silicon/ai/proc/holopad_emote(var/message) //This is called when the AI uses the 'me' verb while using a holopad.
+
+	log_emote("[key_name(src)] : [message]")
+
+	message = trim(message)
+
+	if (!message)
+		return
+
+	var/obj/machinery/hologram/holopad/T = src.holo
+	if(T && T.hologram && T.master == src)
+		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
+		src << "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>"
+
+		for(var/mob/M in viewers(T.loc))
+			M.show_message(rendered, 2)
+	else //This shouldn't occur, but better safe then sorry.
+		src << "No holopad connected."
+		return
+	return 1
+
+/mob/living/silicon/ai/emote(var/act, var/type, var/message)
+	var/obj/machinery/hologram/holopad/T = src.holo
+	if(T && T.hologram && T.master == src) //Is the AI using a holopad?
+		src.holopad_emote(message)
+	else //Emote normally, then.
+		..()
 
 #undef IS_AI
 #undef IS_ROBOT
