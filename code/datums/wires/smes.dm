@@ -48,19 +48,11 @@ var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
 				spawn(10)
 					S.RCon = 1
 		if(SMES_WIRE_INPUT)
-			if(!S.input_pulsed)
-				S.input_pulsed = 1
-				spawn(600)
-					S.input_pulsed = 0
+			S.toggle_input()
 		if(SMES_WIRE_OUTPUT)
-			if(!S.output_pulsed)
-				S.output_pulsed = 1
-				spawn(600)
-					S.output_pulsed = 0
+			S.toggle_output()
 		if(SMES_WIRE_GROUNDING)
-			var/datum/effect/effect/system/spark_spread/spark = new /datum/effect/effect/system/spark_spread
-			spark.set_up(10,1,src)
-			spark.start()
+			S.grounding = 0
 		if(SMES_WIRE_FAILSAFES)
 			if(S.safeties_enabled)
 				S.safeties_enabled = 0
