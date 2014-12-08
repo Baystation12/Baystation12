@@ -5,7 +5,7 @@
 	name = "Connector Port"
 	desc = "For connecting portables devices related to atmospherics control."
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH
 
 	var/obj/machinery/portable_atmospherics/connected_device

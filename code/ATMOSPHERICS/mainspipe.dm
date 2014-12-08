@@ -37,7 +37,7 @@ obj/machinery/atmospherics/mains_pipe
 	layer = 2.4 //under wires with their 2.5
 
 	force = 20
-	
+
 	var/volume = 0
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
@@ -115,7 +115,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 	name = "mains pipe"
 	desc = "A one meter section of 3-line mains pipe"
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_mains_directions = SOUTH|NORTH
 
 	New()
@@ -196,7 +196,7 @@ obj/machinery/atmospherics/mains_pipe/manifold
 	name = "manifold pipe"
 	desc = "A manifold composed of mains pipes"
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_mains_directions = EAST|NORTH|WEST
 	volume = 105
 
@@ -261,7 +261,7 @@ obj/machinery/atmospherics/mains_pipe/manifold4w
 	name = "manifold pipe"
 	desc = "A manifold composed of mains pipes"
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_mains_directions = EAST|NORTH|WEST|SOUTH
 	volume = 105
 
@@ -504,7 +504,7 @@ obj/machinery/atmospherics/mains_pipe/cap
 	name = "pipe cap"
 	desc = "A cap for the end of a mains pipe"
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH
 	volume = 35
 
@@ -546,7 +546,7 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 	var/open = 1
 
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_mains_directions = SOUTH|NORTH
 
 	New()
