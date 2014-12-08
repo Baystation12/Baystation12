@@ -35,7 +35,7 @@
 		switch(zone) // strong punches can have effects depending on where they hit
 			if("head", "mouth", "eyes")
 				// Induce blurriness
-				target.visible_message("<span class='danger'>[target] stares blankly for a few moments.</span>", "<span class='danger'>You see stars.</span>")
+				target.visible_message("<span class='danger'>[target] looks dazed.</span>", "<span class='danger'>You see stars.</span>")
 				target.apply_effect(attack_damage*2, EYE_BLUR, armour)
 			if("l_arm", "l_hand")
 				if (target.l_hand)
@@ -49,7 +49,7 @@
 					target.drop_r_hand()
 			if("chest")
 				if(!target.lying)
-					target.visible_message("<span class='danger'>[pick("[target] was sent flying backward a few metres!", "[target] staggers back from the impact!")]</span>")
+					target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
 					var/turf/T = step(src, get_dir(get_turf(user), get_turf(target)))
 					if(T.density) // This will need to be expanded to check for structures etc.
 						target.visible_message("<span class='danger'>[target] slams into [T]!</span>")
@@ -76,15 +76,15 @@
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
 /datum/unarmed_attack/bite
-	attack_verb = list("bite") // 'x has biteed y', needs work.
+	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
-	damage = 3
+	damage = 0
 	sharp = 0
 	edge = 0
 
-/datum/unarmed_attack/bite/eye_tooth
-	attack_verb = list("bite") // 'x has biteed y', needs work.
+/datum/unarmed_attack/bite/sharp //eye teeth
+	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
 	damage = 5
@@ -97,9 +97,9 @@
 	return 1
 
 /datum/unarmed_attack/punch
-	attack_verb = list("punch")
+	attack_verb = list("punched")
 	attack_noun = list("fist")
-	damage = 3
+	damage = 0
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/skill = user.skills["combat"]
@@ -109,7 +109,7 @@
 	if(!skill)	skill = 1
 
 	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed \himself in the [organ]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
 		return 0
 
 	if(!target.lying)
@@ -124,8 +124,8 @@
 				// -- UPPER BODY -- //
 				switch(attack_damage)
 					if(1 to 2)	user.visible_message("<span class='danger'>[user] slapped [target]'s [organ]!</span>")
-					if(3 to 4)	user.visible_message("<span class='danger'>[user] [findtext(zone, "hand")?"[pick(attack_verb)]ed":pick("[pick(attack_verb)]ed", "shoulders")] [target] in \his [organ]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] rammed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
+					if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] slams \his [pick(attack_noun)] into [target]'s [organ]!</span>")
 			if("groin", "l_leg", "r_leg")
 				// -- LOWER BODY -- //
 				switch(attack_damage)
@@ -138,18 +138,18 @@
 					if(1 to 4)	user.visible_message("<span class='danger'>[user] kicked [target] in \his [organ]!</span>")
 					if(5)		user.visible_message("<span class='danger'>[user] stomped down hard on [target]'s [organ]!</span>")
 	else if (user.loc != target.loc)
-		user.visible_message("<span class='danger'>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "rams their foot into")] [target]'s [organ]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "slams their foot into")] [target]'s [organ]!</span>")
 	else
 		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>")
 
 
 /datum/unarmed_attack/diona
-	attack_verb = list("lash", "bludgeon")
+	attack_verb = list("lashed", "bludgeoned")
 	attack_noun = list("tendril")
 	damage = 5
 
 /datum/unarmed_attack/claws
-	attack_verb = list("scratch", "claw", "goug")
+	attack_verb = list("scratched", "clawed", "slashed")
 	attack_noun = list("claws")
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -165,7 +165,7 @@
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed \himself in the [affecting.display_name]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [affecting.display_name]!</span>")
 		return 0
 
 	switch(zone)
@@ -173,14 +173,14 @@
 			// ----- HEAD ----- //
 			switch(damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
-				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [pick("", "the side of")][target] [pick("head", "neck")][pick("", " with spread [pick(attack_noun)]")]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [target] across \his face!</span>")
+				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")] [pick("", "", "", "with spread [pick(attack_noun)]")]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[pick("[user] [pick(attack_verb)] [target] across \his face!", "[user] rakes \his [pick(attack_noun)] across [target]'s face!")]</span>")
 		if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
 			// ----- BODY ----- //
 			switch(damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target]'s [affecting.display_name]!</span>")
-				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)]ed [pick("", "the side of")][target]'s [affecting.display_name]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] digs \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")
+				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("", "", "the side of")] [target]'s [affecting.display_name]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")
