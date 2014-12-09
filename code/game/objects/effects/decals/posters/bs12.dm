@@ -234,12 +234,12 @@
 	name = "Security pinup"
 	desc = "This is a pin-up poster. A dark skinned white haired girl poses in the sunlight wearing a tank top with her stomach exposed. The text on the poster states \"M, Succubus of Security.\" and a lipstick mark stains the top right corner, as if kissed by the model herself."
 
- /datum/poster/bay_48
+/datum/poster/bay_48
 	icon_state="bsposter48"
 	name = "Borg pinup?"
 	desc = "This is a.. pin-up poster? It is a diagram on an old model of cyborg with a note scribbled in marker on the bottom, on the top there is a large XO written in red marker."
 
- /datum/poster/bay_49
+/datum/poster/bay_49
 	icon_state="bsposter49"
 	name = "Engineering recruitment"
 	desc = "This is a poster showing an engineer relaxing by a computer, the text states \"Living the life! Join Engineering today!\""

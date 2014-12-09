@@ -102,4 +102,5 @@
 					prob(3);/obj/item/stack/cable_coil,\
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
-					prob(5);/obj/random/tool)
+					prob(5);/obj/random/tool,\
+					prob(2);/obj/item/weapon/tape_roll)
