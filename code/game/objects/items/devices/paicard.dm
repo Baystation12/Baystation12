@@ -313,7 +313,7 @@
 
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
-	if(pai.client)
-		var/rendered = "<span class='message'>[text]</span></span>"
+	if(pai && pai.client)
+		var/rendered = "<span class='message'>[text]</span>"
 		pai.show_message(rendered, 2)
 	..()

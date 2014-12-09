@@ -174,8 +174,8 @@
 	update_icon()
 
 /obj/item/device/aicard/see_emote(mob/living/M, text)
-	if(carded_ai.client)
-		var/rendered = "<span class='message'>[text]</span></span>"
+	if(carded_ai && carded_ai.client)
+		var/rendered = "<span class='message'>[text]</span>"
 		carded_ai.show_message(rendered, 2)
 	..()
 /*
