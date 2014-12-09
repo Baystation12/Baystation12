@@ -76,7 +76,8 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/rig/examine()
-	..()
+	usr << "This is a \icon[mob_icon][src.name]."
+	usr << "[src.desc]"
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
@@ -90,6 +91,7 @@
 /obj/item/weapon/rig/New()
 	..()
 
+	item_state = icon_state
 	wires = new(src)
 
 	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
@@ -139,6 +141,8 @@
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
+
+	update_icon(1)
 
 /obj/item/weapon/rig/Del()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
@@ -450,7 +454,7 @@
 		mob_icon.overlays.Cut()
 
 	if(!mob_icon || update_mob_icon)
-		var/species_icon = 'icons/mob/back.dmi'
+		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
 		if(wearer && sprite_sheets && sprite_sheets[wearer.species.name])
