@@ -452,11 +452,11 @@
 	del(src)
 //BubbleWrap END
 
-/obj/item/weapon/storage/hear_talk(mob/M as mob, text)
+/obj/item/weapon/storage/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	for (var/atom/A in src)
 		if(istype(A,/obj/))
 			var/obj/O = A
-			O.hear_talk(M, text)
+			O.hear_talk(M, text, verb, speaking)
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
 //Returns -1 if the atom was not found on container.

@@ -764,6 +764,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
 #define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
 #define HIVEMIND 16         // Broadcast to all mobs with this language.
+#define NONGLOBAL 32		// Do not add to general languages list
+#define INNATE 64			// All mobs can be assumed to speak and understand this language (audible emotes)
+#define NO_TALK_MSG 128		// Do not show the "\The [speaker] talks into \the [radio]" message
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1

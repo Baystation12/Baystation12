@@ -29,7 +29,7 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
-		message = copytext(message,3)
+		message = copytext(message,2+length(speaking.key))
 
 	whisper_say(message, speaking, alt_name)
 
@@ -49,7 +49,7 @@
 		else
 			var/adverb = pick("quietly", "softly")
 			verb = "[speaking.speech_verb] [adverb]"
-			not_heard = "[verb] something [adverb]"
+			not_heard = "[speaking.speech_verb] something [adverb]"
 	else
 		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
 
@@ -126,7 +126,7 @@
 	for (var/obj/O in view(message_range, src))
 		spawn (0)
 			if (O)
-				O.hear_talk(src, message)	//O.hear_talk(src, message, verb, speaking)
+				O.hear_talk(src, message, verb, speaking)
 
 	var/list/eavesdropping = hearers(eavesdropping_range, src)
 	eavesdropping -= src

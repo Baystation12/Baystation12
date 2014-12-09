@@ -10,7 +10,7 @@ obj/machinery/atmospherics/pipe/zpipe
 
 		volume = 70
 
-		set_dir(SOUTH)
+		dir = SOUTH
 		initialize_directions = SOUTH
 
 		var/obj/machinery/atmospherics/node1	//connection on the same Z

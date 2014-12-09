@@ -6,7 +6,7 @@
 	desc = "A pipe valve"
 
 	level = 1
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|WEST
 
 	var/state = 0 // 0 = go straight, 1 = go to side

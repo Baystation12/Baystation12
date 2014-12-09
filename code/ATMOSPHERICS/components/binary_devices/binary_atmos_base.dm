@@ -1,5 +1,5 @@
 obj/machinery/atmospherics/binary
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 	use_power = 1
 
