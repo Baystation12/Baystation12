@@ -742,6 +742,7 @@
 			icon_state = "[base_icon_state]f"
 		else
 			icon_state = base_icon_state*/
+		icon_state = base_icon_state
 		return
 
 
