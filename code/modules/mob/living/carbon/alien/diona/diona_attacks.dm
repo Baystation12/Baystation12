@@ -11,5 +11,6 @@
 				src.loc = M
 			else
 				get_scooped(M)
+			return
 
 	..()

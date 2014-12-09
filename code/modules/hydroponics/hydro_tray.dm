@@ -122,6 +122,25 @@
 		"mutagen" = 15
 		)
 
+/obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
+	if(istype(user,/mob/living/carbon/alien/diona))
+		var/mob/living/carbon/alien/diona/nymph = user
+
+		if(nymph.stat == DEAD || nymph.paralysis || nymph.weakened || nymph.stunned || nymph.restrained())
+			return
+
+		if(weedlevel > 0)
+			nymph.reagents.add_reagent("nutriment", weedlevel)
+			weedlevel = 0
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> begins rooting through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You begin rooting through [src], ripping out weeds and eating them noisily.</font>")
+		else if(nymph.nutrition > 100 && nutrilevel < 10)
+			nymph.nutrition -= ((10-nutrilevel)*5)
+			nutrilevel = 10
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> secretes a trickle of green liquid, refilling [src].</font>","<font color='blue'>You secrete a trickle of green liquid, refilling [src].</font>")
+		else
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
+		return
+
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
 	temp_chem_holder = new()
@@ -129,8 +148,6 @@
 	create_reagents(200)
 	connect()
 	update_icon()
-	if(closed_system)
-		flags &= ~OPENCONTAINER
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
@@ -777,11 +794,6 @@
 
 	closed_system = !closed_system
 	usr << "You [closed_system ? "close" : "open"] the tray's lid."
-	if(closed_system)
-		flags &= ~OPENCONTAINER
-	else
-		flags |= OPENCONTAINER
-
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil

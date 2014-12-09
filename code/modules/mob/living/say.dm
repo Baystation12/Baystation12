@@ -13,7 +13,7 @@ var/list/department_radio_keys = list(
 	  ":t" = "Mercenary",	"#t" = "Mercenary",		".t" = "Mercenary",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 	  ":v" = "Service",		"#v" = "Service",		".v" = "Service",
-	  ":o" = "AI Private",	"#o" = "AI Private",	".o" = "AI Private",
+	  ":p" = "AI Private",	"#p" = "AI Private",	".p" = "AI Private",
 
 	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
 	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
@@ -28,7 +28,7 @@ var/list/department_radio_keys = list(
 	  ":T" = "Mercenary",	"#T" = "Mercenary",		".T" = "Mercenary",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
 	  ":V" = "Service",		"#V" = "Service",		".V" = "Service",
-	  ":O" = "AI Private",	"#O" = "AI Private",	".O" = "AI Private",
+	  ":P" = "AI Private",	"#P" = "AI Private",	".P" = "AI Private",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -91,7 +91,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 		if (speaking.flags & SIGNLANG)
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
-	
+
 	var/list/listening = list()
 	var/list/listening_obj = list()
 
@@ -101,11 +101,11 @@ proc/get_radio_key_from_channel(var/channel)
 		var/pressure = (environment)? environment.return_pressure() : 0
 		if(pressure < SOUND_MINIMUM_PRESSURE)
 			message_range = 1
-		
+
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
-	
+
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 

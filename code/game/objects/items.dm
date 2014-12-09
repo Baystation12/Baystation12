@@ -321,9 +321,7 @@
 			if(slot_l_ear)
 				if(H.l_ear)
 					return 0
-				if( w_class < 2	)
-					return 1
-				if( !(slot_flags & SLOT_EARS) )
+				if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.r_ear )
 					return 0
@@ -331,9 +329,7 @@
 			if(slot_r_ear)
 				if(H.r_ear)
 					return 0
-				if( w_class < 2 )
-					return 1
-				if( !(slot_flags & SLOT_EARS) )
+				if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.l_ear )
 					return 0
@@ -341,7 +337,7 @@
 			if(slot_w_uniform)
 				if(H.w_uniform)
 					return 0
-				if(H.wear_suit)
+				if(H.wear_suit && (H.wear_suit.body_parts_covered & src.body_parts_covered))
 					if(!disable_warning)
 						H << "<span class='warning'>\The [H.wear_suit] is in the way.</span>"
 					return 0

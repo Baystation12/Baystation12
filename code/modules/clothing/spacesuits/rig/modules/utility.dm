@@ -58,7 +58,9 @@
 	desc = "You think it's called an Elder Sarsparilla or something."
 	interface_name = "Alden-Saraspova counter"
 	interface_desc = "An exotic particle detector commonly used by xenoarchaeologists."
-	selectable = 1
+	engage_string = "Begin Scan"
+	usable = 1
+	selectable = 0
 	device_type = /obj/item/device/ano_scanner
 
 /obj/item/rig_module/device/orescanner
@@ -66,12 +68,9 @@
 	desc = "A clunky old ore scanner."
 	interface_name = "ore detector"
 	interface_desc = "A sonar system for detecting large masses of ore."
-
 	engage_string = "Begin Scan"
-
 	usable = 1
 	selectable = 0
-
 	device_type = /obj/item/weapon/mining_scanner
 
 /obj/item/rig_module/device/rcd
@@ -96,6 +95,10 @@
 	if(!target)
 		device.attack_self(holder.wearer)
 		return 1
+
+	var/turf/T = get_turf(target)
+	if(istype(T) && !T.Adjacent(get_turf(src)))
+		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)
 	if(!resolved && device && target)

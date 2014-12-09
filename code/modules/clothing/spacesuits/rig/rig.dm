@@ -76,7 +76,8 @@
 	var/datum/effect/effect/system/spark_spread/spark_system
 
 /obj/item/weapon/rig/examine()
-	..()
+	usr << "This is \icon[src][src.name]."
+	usr << "[src.desc]"
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
@@ -90,6 +91,7 @@
 /obj/item/weapon/rig/New()
 	..()
 
+	item_state = icon_state
 	wires = new(src)
 
 	if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
@@ -140,6 +142,8 @@
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
 
+	update_icon(1)
+
 /obj/item/weapon/rig/Del()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		var/mob/living/M = piece.loc
@@ -178,13 +182,13 @@
 	sealing = 1
 
 	if(!seal_target && !suit_is_deployed())
-		M << "<span class='danger'>The suit flashes an error light. It can't function properly without being fully deployed.</span>"
+		M.visible_message("<span class='danger'>[M]'s suit flashes an error light.</span>","<span class='danger'>Your suit flashes an error light. It can't function properly without being fully deployed.</span>")
 		failed_to_seal = 1
 
 	if(!failed_to_seal)
 
 		if(!instant)
-			M << "<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>"
+			M.visible_message("<font color='blue'>[M]'s suit emits a quiet hum as it begins to adjust its seals.</font>","<font color='blue'>With a quiet hum, the suit begins running checks and adjusting components.</font>")
 			if(!do_after(M,SEAL_DELAY))
 				if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 				failed_to_seal = 1
@@ -203,12 +207,11 @@
 					continue
 
 				if(!istype(M) || !istype(piece) || !istype(compare_piece) || !msg_type)
-					if(!failed_to_seal)
-						if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
+					if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 					failed_to_seal = 1
 					break
 
-				if(M.back == src && piece == compare_piece)
+				if(!failed_to_seal && M.back == src && piece == compare_piece)
 
 					if(!instant)
 						if(!do_after(M,SEAL_DELAY))
@@ -232,11 +235,11 @@
 								if(!seal_target)
 									if(flags & AIRTIGHT)
 										helmet.flags |= AIRTIGHT
-									helmet.flags_inv |= (HIDEEYES|HIDEFACE)
+									helmet.flags_inv |= (HIDEEYES|HIDEFACE|HIDEMASK)
 									helmet.body_parts_covered |= (FACE|EYES)
 								else
 									helmet.flags &= ~AIRTIGHT
-									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE)
+									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE|HIDEMASK)
 									helmet.body_parts_covered &= ~(FACE|EYES)
 								helmet.update_light(wearer)
 				else
@@ -446,11 +449,8 @@
 
 	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
 	overlays.Cut()
-	if(mob_icon)
-		mob_icon.overlays.Cut()
-
 	if(!mob_icon || update_mob_icon)
-		var/species_icon = 'icons/mob/back.dmi'
+		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
 		if(wearer && sprite_sheets && sprite_sheets[wearer.species.name])
@@ -458,10 +458,8 @@
 		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
 
 	if(installed_modules.len)
-
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				mob_icon.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]")
 				chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
 
 	if(wearer)
@@ -488,10 +486,9 @@
 			user << "<span class='danger'>Unauthorized user. Access denied.</span>"
 			return 0
 
-	else if(user.loc && user.loc.loc && istype(user.loc.loc,/obj/item/rig_module/ai_container))
-		if(!ai_override_enabled)
-			user << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
-			return 0
+	else if(!ai_override_enabled)
+		user << "<span class='danger'>Synthetic access disabled. Please consult hardware provider.</span>"
+		return 0
 
 	return 1
 
