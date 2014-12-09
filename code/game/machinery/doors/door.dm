@@ -29,7 +29,7 @@
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 
 	//Multi-tile doors
-	set_dir(EAST)
+	dir = EAST
 	var/width = 1
 
 /obj/machinery/door/New()

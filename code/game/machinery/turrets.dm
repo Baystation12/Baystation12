@@ -89,6 +89,8 @@
 	return
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == HALLOSS)
+		return
 	take_damage(Proj.damage)
 	..()
 	return
@@ -297,6 +299,8 @@
 				popping = 0
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == HALLOSS)
+		return
 	src.health -= Proj.damage
 	..()
 	if(prob(45) && Proj.damage > 0) src.spark_system.start()
@@ -376,6 +380,8 @@
 
 
 	bullet_act(var/obj/item/projectile/Proj)
+		if(Proj.damage_type == HALLOSS)
+			return
 		take_damage(Proj.damage)
 		..()
 		return
