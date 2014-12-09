@@ -760,8 +760,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_wear_suit(var/update_icons=1)
 
-	if( wear_suit && istype(wear_suit, /obj/item/clothing/suit) )	//TODO check this
-		wear_suit.screen_loc = ui_oclothing	//TODO
+	if( wear_suit && istype(wear_suit, /obj/item/) )
+		wear_suit.screen_loc = ui_oclothing
 
 		var/image/standing
 
@@ -831,7 +831,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(back.icon_override)
 			overlays_standing[BACK_LAYER] = image("icon" = back.icon_override, "icon_state" = "[back.icon_state]")
 		//If this is a rig and a mob_icon is set, it will take species into account in the rig update_icon() proc.
-		else if(istype(rig) && !rig.offline && rig.mob_icon)
+		else if(istype(rig) && rig.mob_icon)
 			overlays_standing[BACK_LAYER]  = rig.mob_icon
 		else if(back.sprite_sheets && back.sprite_sheets[species.name])
 			overlays_standing[BACK_LAYER] = image("icon" = back.sprite_sheets[species.name], "icon_state" = "[back.icon_state]")

@@ -7,6 +7,7 @@
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/weapon/holder/New()
+	item_state = icon_state
 	..()
 	processing_objects.Add(src)
 

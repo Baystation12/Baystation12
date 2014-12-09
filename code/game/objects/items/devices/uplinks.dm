@@ -128,11 +128,7 @@ datum/nano_item_lists
 			var/mob/living/carbon/human/A = usr
 			A.put_in_any_hand_if_possible(I)
 
-		if(istype(I ,/obj/item/weapon/storage/box/) && I.contents.len>0)
-			for(var/atom/o in I)
-				purchase_log += "\icon[o]"
-		else
-			purchase_log += "\icon[I]"
+		purchase_log[UI] = purchase_log[UI] + 1
 
 		return 1
 	return 0
@@ -192,7 +188,7 @@ datum/nano_item_lists
 	data["menu"] = nanoui_menu
 	data["nano_items"] = nanoui_items
 	data += nanoui_data
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
