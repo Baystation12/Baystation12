@@ -515,13 +515,6 @@ var/list/robot_verbs_default = list(
 		C.toggled = 1
 		src << "\red You enable [C.name]."
 
-/mob/living/silicon/robot/blob_act()
-	if (stat != 2)
-		adjustBruteLoss(60)
-		updatehealth()
-		return 1
-	return 0
-
 // this function shows information about the malf_ai gameplay type in the status screen
 /mob/living/silicon/robot/show_malf_ai()
 	..()
@@ -575,29 +568,6 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/restrained()
 	return 0
 
-
-/mob/living/silicon/robot/ex_act(severity)
-	if(!blinded)
-		flick("flash", flash)
-
-	switch(severity)
-		if(1.0)
-			if (stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-				gib()
-				return
-		if(2.0)
-			if (stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
-		if(3.0)
-			if (stat != 2)
-				adjustBruteLoss(30)
-
-	updatehealth()
-
-
 /mob/living/silicon/robot/meteorhit(obj/O as obj)
 	for(var/mob/M in viewers(src, null))
 		M.show_message(text("\red [src] has been hit by [O]"), 1)
@@ -609,13 +579,10 @@ var/list/robot_verbs_default = list(
 		updatehealth()
 	return
 
-
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
-	updatehealth()
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
-
 
 /mob/living/silicon/robot/Bump(atom/movable/AM as mob|obj, yes)
 	spawn( 0 )
@@ -977,7 +944,7 @@ var/list/robot_verbs_default = list(
 			return 1
 	return 0
 
-/mob/living/silicon/robot/proc/updateicon()
+/mob/living/silicon/robot/updateicon()
 
 	overlays.Cut()
 	if(stat == 0)
