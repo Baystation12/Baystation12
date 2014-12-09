@@ -699,34 +699,32 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 		while(TRUE)
 			if(curIndex<=process.len)
 				current = process[curIndex]
-				if(!current)	continue
-				currentLayer = current:layer
-				if(currentLayer<0) // Special case for FLY_LAYER
-					if(currentLayer <= -1000) return flat
-					if(pSet == 0) // Underlay
-						currentLayer = A.layer+currentLayer/1000
-					else // Overlay
-						currentLayer = A.layer+(1000+currentLayer)/1000
+				if(current)
+					currentLayer = current:layer
+					if(currentLayer<0) // Special case for FLY_LAYER
+						if(currentLayer <= -1000) return flat
+						if(pSet == 0) // Underlay
+							currentLayer = A.layer+currentLayer/1000
+						else // Overlay
+							currentLayer = A.layer+(1000+currentLayer)/1000
 
-				// Sort add into layers list
-				for(cmpIndex=1,cmpIndex<=layers.len,cmpIndex++)
-					compare = layers[cmpIndex]
-					if(currentLayer < layers[compare]) // Associated value is the calculated layer
-						layers.Insert(cmpIndex,current)
-						layers[current] = currentLayer
-						break
-				if(cmpIndex>layers.len) // Reached end of list without inserting
-					layers[current]=currentLayer // Place at end
+					// Sort add into layers list
+					for(cmpIndex=1,cmpIndex<=layers.len,cmpIndex++)
+						compare = layers[cmpIndex]
+						if(currentLayer < layers[compare]) // Associated value is the calculated layer
+							layers.Insert(cmpIndex,current)
+							layers[current] = currentLayer
+							break
+					if(cmpIndex>layers.len) // Reached end of list without inserting
+						layers[current]=currentLayer // Place at end
 
 				curIndex++
-
-			if(curIndex>process.len)
-				if(pSet == 0) // Switch to overlays
-					curIndex = 1
-					pSet = 1
-					process = A.overlays
-				else // All done
-					break
+			else if(pSet == 0) // Switch to overlays
+				curIndex = 1
+				pSet = 1
+				process = A.overlays
+			else // All done
+				break
 
 		var/icon/add // Icon of overlay being added
 
