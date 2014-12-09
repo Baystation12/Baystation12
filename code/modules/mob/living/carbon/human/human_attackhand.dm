@@ -131,24 +131,26 @@
 				/*
 					This is kind of convoluted, but it seems to break down like this:
 					(note that the chance to miss is exaggerated here since ran_zone() might roll "chest"
-					
+
 					If aiming for chest:
 						80% chance you hit your target
 						17% chance you hit a random zone
 						3% chance you miss
-					
+
 					If aiming for something else:
 						68% chance you hit your target
 						17% chance you hit a random zone
 						15% chance you miss
-					
+
 					Why don't we just use get_zone_with_miss_chance() ???
 				*/
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!
-					attack_message = "[H] attempted to [pick(attack.attack_verb)] [src], but the [attack.attack_noun] missed!"
+					attack_message = "[H] attempted to strike [src], but missed!"
 					miss_type = 1
+			else
+				hit_zone = ran_zone(hit_zone)
 
 			if(!miss_type && block)
 				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
@@ -160,9 +162,9 @@
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]ed"] [src.name] ([src.ckey])</font>")
+			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]ed"] by [H.name] ([H.ckey])</font>")
-			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]ed"] [key_name(src)]")
+			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"] [key_name(src)]")
 
 			if(miss_type)
 				return 0
