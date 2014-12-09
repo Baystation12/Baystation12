@@ -205,10 +205,8 @@
 
 /obj/mecha/see_emote(mob/living/M, text)
 	if(occupant && occupant.client)
-		world << "MECHA NAMED [src.name] HEARD [M.name] DO [text]!"
 		var/rendered = "<span class='message'>[text]</span>"
 		occupant.show_message(rendered, 2)
-	world << "SEE_EMOTE() WAS RAN ON [src.name]!"
 	..()
 
 ////////////////////////////
