@@ -11,7 +11,7 @@
 	var/adult_form
 	var/dead_icon
 	var/amount_grown = 0
-	var/max_grown = 10
+	var/max_grown = 200
 	var/time_of_birth
 	var/language
 
