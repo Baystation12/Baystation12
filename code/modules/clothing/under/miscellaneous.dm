@@ -395,9 +395,9 @@
 /obj/item/clothing/under/sundress_white
 	name = "white sundress"
 	desc = "A white sundress decorated with purple lilies."
-	icon_state = "whitesundress"
-	item_state = "whitesundress"
-	item_color = "whitesundress"
+	icon_state = "sundress_white"
+	item_state = "sundress_white"
+	item_color = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/under/captainformal
