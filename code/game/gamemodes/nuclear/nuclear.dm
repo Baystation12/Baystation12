@@ -313,7 +313,7 @@ var/global/list/turf/synd_spawn = list()
 		var/text = "<FONT size = 2><B>The mercenaries were:</B></FONT>"
 
 		for(var/datum/mind/syndicate in syndicates)
-			text += printplayer(syndicate)
+			text += print_player_full(syndicate)
 
 		world << text
 	return 1
