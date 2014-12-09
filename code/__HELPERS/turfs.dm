@@ -5,3 +5,6 @@
 	while(mloc && mloc.loc && !istype(mloc.loc, /turf/))
 		mloc = mloc.loc
 	return mloc
+
+/proc/iswall(turf/T)
+	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
