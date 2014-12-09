@@ -59,7 +59,7 @@
 	if(!proximity) return
 	if(disabled && !isrobot(user))
 		return 0
-	if(istype(A,/area/shuttle)||istype(A,/turf/space/transit))
+	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
 		return 0
 	return alter_turf(A,user,(mode == 3))
 

@@ -180,7 +180,7 @@
 		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
-			text += printplayer(traitor)
+			text += print_player_full(traitor)
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1
