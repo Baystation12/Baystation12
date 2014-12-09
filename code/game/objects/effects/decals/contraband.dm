@@ -35,14 +35,15 @@ obj/structure/sign/poster
 	var/ruined = 0
 
 obj/structure/sign/poster/New(var/serial)
+	serial_number = serial
 	var/designtype
 	if (poster_type)
 		designtype = text2path(poster_type)
 	else
 		if(serial_number == loc)
-			serial_number = rand(1, poster_designs.len)	//This is for the mappers that want individual posters without having to use rolled posters.	
+			serial_number = rand(1, poster_designs.len)	//This is for the mappers that want individual posters without having to use rolled posters.
 		designtype = poster_designs[serial_number]
-	
+
 	var/datum/poster/design=new designtype()
 	name += " - [design.name]"
 	desc += " [design.desc]"
