@@ -107,6 +107,7 @@
 	var/organ = affecting.display_name
 
 	if(!skill)	skill = 1
+	attack_damage = Clamp(attack_damage, 1, 5)
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
@@ -125,7 +126,7 @@
 				switch(attack_damage)
 					if(1 to 2)	user.visible_message("<span class='danger'>[user] slapped [target]'s [organ]!</span>")
 					if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] slams \his [pick(attack_noun)] into [target]'s [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] slammed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
 			if("groin", "l_leg", "r_leg")
 				// -- LOWER BODY -- //
 				switch(attack_damage)
@@ -138,7 +139,7 @@
 					if(1 to 4)	user.visible_message("<span class='danger'>[user] kicked [target] in \his [organ]!</span>")
 					if(5)		user.visible_message("<span class='danger'>[user] stomped down hard on [target]'s [organ]!</span>")
 	else if (user.loc != target.loc)
-		user.visible_message("<span class='danger'>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "slams their foot into")] [target]'s [organ]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick("stomped down hard on", "kicked against", "gave a strong kick against", "slammed their foot into")] [target]'s [organ]!</span>")
 	else
 		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>")
 
@@ -171,13 +172,13 @@
 	switch(zone)
 		if("head", "mouth", "eyes")
 			// ----- HEAD ----- //
-			switch(damage)
+			switch(attack_damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
 				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")] [pick("", "", "", "with spread [pick(attack_noun)]")]!</span>")
 				if(5)		user.visible_message("<span class='danger'>[pick("[user] [pick(attack_verb)] [target] across \his face!", "[user] rakes \his [pick(attack_noun)] across [target]'s face!")]</span>")
 		if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
 			// ----- BODY ----- //
-			switch(damage)
+			switch(attack_damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target]'s [affecting.display_name]!</span>")
 				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("", "", "the side of")] [target]'s [affecting.display_name]!</span>")
 				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")

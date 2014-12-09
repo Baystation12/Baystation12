@@ -5,10 +5,6 @@
 	speak_emote = list("hisses")
 	icon_state = "larva"
 	language = "Hivemind"
-
-	amount_grown = 0
-	max_grown = 200
-
 	maxHealth = 25
 	health = 25
 

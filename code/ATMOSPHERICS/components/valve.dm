@@ -6,7 +6,7 @@
 	desc = "A pipe valve"
 
 	level = 1
-	set_dir(SOUTH)
+	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
 
 	var/open = 0
@@ -317,3 +317,7 @@
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
+
+/obj/machinery/atmospherics/valve/examine(mob/user)
+	..()
+	user << "It is [open ? "open" : "closed"]."
