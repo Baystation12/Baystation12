@@ -84,9 +84,9 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 obj/machinery/atmospherics/pipe/zpipe/Del()
 	if(node1)

@@ -181,6 +181,31 @@
 		update_inv_wear_mask(0)
 	return
 
+/mob/proc/unEquip(obj/item/I, force = 0) //Force overrides NODROP for things like wizarditis and admin undress.
+	if(!I) //If there's nothing to drop, the drop is automatically successful. If(unEquip) should generally be used to check for NODROP.
+		return 1
+
+	/*if((I.flags & NODROP) && !force)
+		return 0*/
+
+	if(!I.canremove && !force)
+		return 0
+
+	if(I == r_hand)
+		r_hand = null
+		update_inv_r_hand()
+	else if(I == l_hand)
+		l_hand = null
+		update_inv_l_hand()
+
+	if(I)
+		if(client)
+			client.screen -= I
+		I.loc = loc
+		I.dropped(src)
+		if(I)
+			I.layer = initial(I.layer)
+	return 1
 
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
 /mob/proc/remove_from_mob(var/obj/O)

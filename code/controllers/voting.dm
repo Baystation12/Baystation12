@@ -48,11 +48,11 @@ datum/controller/vote
 				voting.Cut()
 
 	proc/autotransfer()
-		initiate_vote("crew_transfer","the server")
+		initiate_vote("crew_transfer","the server", 1)
 		log_debug("The server has called a crew transfer vote")
 
 	proc/autogamemode()
-		initiate_vote("gamemode","the server")
+		initiate_vote("gamemode","the server", 1)
 		log_debug("The server has called a gamemode vote")
 
 	proc/reset()
@@ -197,9 +197,9 @@ datum/controller/vote
 				return vote
 		return 0
 
-	proc/initiate_vote(var/vote_type, var/initiator_key)
+	proc/initiate_vote(var/vote_type, var/initiator_key, var/automatic = 0)
 		if(!mode)
-			if(started_time != null && !check_rights(R_ADMIN))
+			if(started_time != null && !(check_rights(R_ADMIN) || automatic))
 				var/next_allowed_time = (started_time + config.vote_delay)
 				if(next_allowed_time > world.time)
 					return 0
@@ -251,11 +251,11 @@ datum/controller/vote
 			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("gamemode")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 				if("custom")
-					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 1)
+					world << sound('sound/ambience/alarm4.ogg', repeat = 0, wait = 0, volume = 50, channel = 3)
 			if(mode == "gamemode" && going)
 				going = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"

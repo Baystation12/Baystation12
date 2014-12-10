@@ -15,7 +15,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	icon_state = "facehugger"
 	item_state = "facehugger"
 	w_class = 1 //note: can be picked up by aliens unlike most other items of w_class below 4
-	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | MASKINTERNALS
+	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | AIRTIGHT
 	body_parts_covered = FACE|EYES
 	throw_range = 5
 
@@ -23,10 +23,6 @@ var/const/MAX_ACTIVE_TIME = 400
 	var/sterile = 0
 	var/strength = 5
 	var/attached = 0
-
-/obj/item/clothing/mask/facehugger/attack_paw(user as mob) //can be picked up by aliens
-	attack_hand(user)
-	return
 
 /obj/item/clothing/mask/facehugger/attack_hand(user as mob)
 
@@ -47,15 +43,15 @@ var/const/MAX_ACTIVE_TIME = 400
 	else
 		del(src)
 
-/obj/item/clothing/mask/facehugger/examine()
-	..()
+/obj/item/clothing/mask/facehugger/examine(mob/user)
+	..(user)
 	switch(stat)
 		if(DEAD,UNCONSCIOUS)
-			usr << "\red \b [src] is not moving."
+			user << "\red \b [src] is not moving."
 		if(CONSCIOUS)
-			usr << "\red \b [src] seems to be active."
+			user << "\red \b [src] seems to be active."
 	if (sterile)
-		usr << "\red \b It looks like the proboscis has been removed."
+		user << "\red \b It looks like the proboscis has been removed."
 	return
 
 /obj/item/clothing/mask/facehugger/attackby()

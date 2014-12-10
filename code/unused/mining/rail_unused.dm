@@ -4,7 +4,7 @@
 	name = "Rail track"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "rail"
-	dir = 2
+	set_dir(2)
 	var/id = null    //this is needed for switches to work Set to the same on the whole length of the track
 	anchored = 1
 
@@ -16,66 +16,66 @@
 
 /obj/machinery/rail_track/intersections/attack_hand(user as mob)
 	switch (dir)
-		if (1) dir = 5
-		if (5) dir = 4
-		if (4) dir = 9
-		if (9) dir = 2
-		if (2) dir = 10
-		if (10) dir = 8
-		if (8) dir = 6
-		if (6) dir = 1
+		if (1) set_dir(5)
+		if (5) set_dir(4)
+		if (4) set_dir(9)
+		if (9) set_dir(2)
+		if (2) set_dir(10)
+		if (10) set_dir(8)
+		if (8) set_dir(6)
+		if (6) set_dir(1)
 	return
 
 /obj/machinery/rail_track/intersections/NSE
 	name = "Rail track T intersection"
 	icon_state = "rail_intersection_NSE"
-	dir = 2
+	set_dir(2)
 
 /obj/machinery/rail_track/intersections/NSE/attack_hand(user as mob)
 	switch (dir)
-		if (1) dir = 5
-		if (2) dir = 5
-		if (5) dir = 9
-		if (9) dir = 2
+		if (1) set_dir(5)
+		if (2) set_dir(5)
+		if (5) set_dir(9)
+		if (9) set_dir(2)
 	return
 
 /obj/machinery/rail_track/intersections/SEW
 	name = "Rail track T intersection"
 	icon_state = "rail_intersection_SEW"
-	dir = 8
+	set_dir(8)
 
 /obj/machinery/rail_track/intersections/SEW/attack_hand(user as mob)
 	switch (dir)
-		if (8) dir = 6
-		if (4) dir = 6
-		if (6) dir = 5
-		if (5) dir = 8
+		if (8) set_dir(6)
+		if (4) set_dir(6)
+		if (6) set_dir(5)
+		if (5) set_dir(8)
 	return
 
 /obj/machinery/rail_track/intersections/NSW
 	name = "Rail track T intersection"
 	icon_state = "rail_intersection_NSW"
-	dir = 2
+	set_dir(2)
 
 /obj/machinery/rail_track/intersections/NSW/attack_hand(user as mob)
 	switch (dir)
-		if (1) dir = 10
-		if (2) dir = 10
-		if (10) dir = 6
-		if (6) dir = 2
+		if (1) set_dir(10)
+		if (2) set_dir(10)
+		if (10) set_dir(6)
+		if (6) set_dir(2)
 	return
 
 /obj/machinery/rail_track/intersections/NEW
 	name = "Rail track T intersection"
 	icon_state = "rail_intersection_NEW"
-	dir = 8
+	set_dir(8)
 
 /obj/machinery/rail_track/intersections/NEW/attack_hand(user as mob)
 	switch (dir)
-		if (4) dir = 9
-		if (8) dir = 9
-		if (9) dir = 10
-		if (10) dir = 8
+		if (4) set_dir(9)
+		if (8) set_dir(9)
+		if (9) set_dir(10)
+		if (10) set_dir(8)
 	return
 
 /**********************Rail switch**************************/
@@ -84,7 +84,7 @@
 	name = "Rail switch"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "rail"
-	dir = 2
+	set_dir(2)
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "switch-off"
 	var/obj/machinery/rail_track/track = null

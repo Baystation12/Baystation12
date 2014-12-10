@@ -58,6 +58,9 @@ var/global/datum/global_init/init = new ()
 	// due to this list not being instantiated.
 	populate_seed_list()
 
+	// Create autolathe recipes, as above.
+	populate_lathe_recipes()
+
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
 		master_controller.setup()

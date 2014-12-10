@@ -208,12 +208,10 @@
 	if(frequency)
 		set_frequency(frequency)
 
-/obj/machinery/atmospherics/binary/dp_vent_pump/examine()
-	set src in oview(1)
-	..()
+/obj/machinery/atmospherics/binary/dp_vent_pump/examine(mob/user)
+	if(..(user, 1))
+		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 
-	if (get_dist(usr, src) <= 1)
-		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat

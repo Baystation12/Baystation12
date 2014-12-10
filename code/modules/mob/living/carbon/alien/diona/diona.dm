@@ -6,21 +6,12 @@
 	icon_state = "nymph"
 	language = "Rootspeak"
 
-	amount_grown = 0
-	max_grown = 5 // Target number of donors.
-
-	var/list/donors = list()
-	var/last_checked_stage = 0
-
-	universal_understand = 0 // Dionaea do not need to speak to people
-	universal_speak = 0      // before becoming an adult. Use *chirp.
+	universal_understand = 1
+	universal_speak = 0      // Dionaea do not need to speak to people other than other dionaea.
 	holder_type = /obj/item/weapon/holder/diona
 
 /mob/living/carbon/alien/diona/New()
 
 	..()
 	species = all_species["Diona"]
-	verbs += /mob/living/carbon/proc/eat_weeds
-	verbs += /mob/living/carbon/proc/fertilize_plant
-	verbs += /mob/living/carbon/alien/diona/proc/steal_blood
 	verbs += /mob/living/carbon/alien/diona/proc/merge

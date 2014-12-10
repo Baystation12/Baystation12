@@ -103,13 +103,13 @@
 
 
 
-/obj/item/weapon/gun/projectile/examine()
-	..()
-	usr << "Has [getAmmo()] round\s remaining."
+/obj/item/weapon/gun/projectile/examine(mob/user)
+	..(user)
+	user << "Has [getAmmo()] round\s remaining."
 //		if(in_chamber && !loaded.len)
-//			usr << "However, it has a chambered round."
+//			user << "However, it has a chambered round."
 //		if(in_chamber && loaded.len)
-//			usr << "It also has a chambered round." {R}
+//			user << "It also has a chambered round." {R}
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()

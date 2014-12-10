@@ -1037,7 +1037,7 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
 
 	icon = base
-	dir = SOUTH
+	set_dir(SOUTH)
 	src.transform = turn(src.transform, rand(70,130))
 
 
@@ -1168,7 +1168,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 				//TODO: ORGAN REMOVAL UPDATE.
 				if(istype(src,/obj/item/weapon/organ/head/posi))
-					var/obj/item/device/mmi/posibrain/B = new(loc)
+					var/obj/item/device/mmi/digital/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else
 					var/obj/item/organ/brain/B = new(loc)

@@ -43,9 +43,6 @@ var/global/list/holodeck_programs = list(
 	attack_ai(var/mob/user as mob)
 		return src.attack_hand(user)
 
-	attack_paw(var/mob/user as mob)
-		return
-
 	attack_hand(var/mob/user as mob)
 
 		if(..())
@@ -299,10 +296,9 @@ var/global/list/holodeck_programs = list(
 /turf/simulated/floor/holofloor/grass
 	name = "Lush Grass"
 	icon_state = "grass1"
-	floor_tile = new/obj/item/stack/tile/grass
+	floor_type = /obj/item/stack/tile/grass
 
 	New()
-		floor_tile.New() //I guess New() isn't run on objects spawned without the definition of a turf to house them, ah well.
 		icon_state = "grass[pick("1","2","3","4")]"
 		..()
 		spawn(4)
@@ -316,15 +312,6 @@ var/global/list/holodeck_programs = list(
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
-
-
-
-
-
-
-
-
-
 /obj/structure/table/holotable
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
@@ -334,13 +321,6 @@ var/global/list/holodeck_programs = list(
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.
-
-
-/obj/structure/table/holotable/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-/obj/structure/table/holotable/attack_animal(mob/living/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
 
 /obj/structure/table/holotable/attack_hand(mob/user as mob)
 	return // HOLOTABLE DOES NOT GIVE A FUCK
@@ -529,10 +509,6 @@ var/global/list/holodeck_programs = list(
 	user << "The station AI is not to interact with these devices!"
 	return
 
-/obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device."
-	return
-
 /obj/machinery/readybutton/New()
 	..()
 
@@ -541,9 +517,13 @@ var/global/list/holodeck_programs = list(
 	user << "The device is a solid button, there's nothing you can do with it!"
 
 /obj/machinery/readybutton/attack_hand(mob/user as mob)
+
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		user << "This device is not powered."
 		return
+
+	if(!user.IsAdvancedToolUser())
+		return 0
 
 	currentarea = get_area(src.loc)
 	if(!currentarea)

@@ -209,7 +209,7 @@
 	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
 
-	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 	//If you wanted to add a species-level ability:
 	/*abilities = list(/client/proc/test_ability)*/
@@ -222,7 +222,7 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
@@ -235,7 +235,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
 
@@ -250,6 +250,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -262,7 +263,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
@@ -272,6 +273,7 @@
 	name_plural = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
+	eyes = "skrell_eyes_s"
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 	unarmed_type = /datum/unarmed_attack/punch
@@ -279,6 +281,7 @@
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
+	blood_color = "#1D2CBF"
 
 	reagent_tag = IS_SKRELL
 
@@ -309,7 +312,7 @@
 	poison_type = "oxygen"
 	insulated = 1
 
-	flags = NO_SCAN
+	flags = NO_SCAN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -355,7 +358,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | NO_PAIN | HAS_EYE_COLOR
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -378,6 +381,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	unarmed_type = /datum/unarmed_attack/diona
+	secondary_unarmed_type = null //Does a walking mass of dionaea even have jaws, as we understand them?
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
@@ -404,7 +408,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -444,6 +448,7 @@
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
 	unarmed_type = /datum/unarmed_attack/punch
+	secondary_unarmed_type = null
 	rarity_value = 2
 
 	eyes = "blank_eyes"
@@ -488,69 +493,6 @@
 
 	return 0
 
-//Species unarmed attacks
-/datum/unarmed_attack
-	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
-	var/damage = 0						// Extra empty hand attack damage.
-	var/attack_sound = "punch"
-	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
-	var/sharp = 0
-	var/edge = 0
-
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user)
-	if(user.restrained())
-		return 0
-
-	// Check if they have a functioning hand.
-	var/datum/organ/external/E = user.organs_by_name["l_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	E = user.organs_by_name["r_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	return 0
-
-/datum/unarmed_attack/bite
-	attack_verb = list("bite") // 'x has biteed y', needs work.
-	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
-	damage = 5
-	sharp = 1
-	edge = 1
-
-/datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user)
-	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-		return 0
-	return 1
-
-/datum/unarmed_attack/punch
-	attack_verb = list("punch")
-	damage = 3
-
-/datum/unarmed_attack/diona
-	attack_verb = list("lash", "bludgeon")
-	damage = 5
-
-/datum/unarmed_attack/claws
-	attack_verb = list("scratch", "claw")
-	attack_sound = 'sound/weapons/slice.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
-	damage = 5
-	sharp = 1
-	edge = 1
-
-/datum/unarmed_attack/claws/strong
-	attack_verb = list("slash")
-	damage = 10
-	shredding = 1
-
-/datum/unarmed_attack/bite/strong
-	attack_verb = list("maul")
-	damage = 15
-	shredding = 1
 
 /datum/hud_data
 	var/icon              // If set, overrides ui_style.
@@ -600,5 +542,8 @@
 
 	if(slot_back in equip_slots)
 		equip_slots |= slot_in_backpack
+
+	if(slot_w_uniform in equip_slots)
+		equip_slots |= slot_tie
 
 	equip_slots |= slot_legcuffed

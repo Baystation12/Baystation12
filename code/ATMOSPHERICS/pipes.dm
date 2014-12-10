@@ -216,9 +216,9 @@
 
 /obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 /obj/machinery/atmospherics/pipe/simple/Del()
 	if(node1)
@@ -1259,7 +1259,7 @@
 	if(node1)
 		icon_state = "intact"
 
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 
 	else
 		icon_state = "exposed"
@@ -1291,7 +1291,7 @@
 /obj/machinery/atmospherics/pipe/vent/hide(var/i) //to make the little pipe section invisible, the icon changes.
 	if(node1)
 		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 	else
 		icon_state = "exposed"
 

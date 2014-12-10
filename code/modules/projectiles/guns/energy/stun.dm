@@ -61,7 +61,7 @@
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"
-	desc = "A weapon favored by many of the syndicates stealth specialists."
+	desc = "A weapon favored by many mercenary stealth specialists."
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"
@@ -96,11 +96,13 @@
 	update_icon()
 		return
 
-
+/obj/item/weapon/gun/energy/crossbow/ninja
+	name = "energy dart thrower"
+	projectile_type = "/obj/item/projectile/energy/dart"
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "Energy Crossbow"
-	desc = "A weapon favored by syndicate infiltration teams."
+	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = 4.0
 	force = 10
 	matter = list("metal" = 200000)

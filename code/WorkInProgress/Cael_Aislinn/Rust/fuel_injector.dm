@@ -19,7 +19,6 @@
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 500
-	directwired = 0
 	var/remote_access_enabled = 1
 	var/cached_power_avail = 0
 	var/emergency_insert_ready = 0
@@ -295,7 +294,7 @@
 	if (usr.stat || usr.restrained()  || anchored)
 		return
 
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 
 /obj/machinery/power/rust_fuel_injector/verb/rotate_anticlock()
 	set category = "Object"
@@ -305,4 +304,4 @@
 	if (usr.stat || usr.restrained()  || anchored)
 		return
 
-	src.dir = turn(src.dir, -90)
+	src.set_dir(turn(src.dir, -90))

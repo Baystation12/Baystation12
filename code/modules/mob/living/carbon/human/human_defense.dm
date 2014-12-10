@@ -414,13 +414,19 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
-	if(!wear_suit) return
-	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	// Tox and oxy don't matter to suits.
 	if(damtype != BURN && damtype != BRUTE) return
 
-	var/obj/item/clothing/suit/space/SS = wear_suit
-	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
+	// The rig might soak this hit, if we're wearing one.
+	if(back && istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		rig.take_hit(damage)
 
+	// We may also be taking a suit breach.
+	if(!wear_suit) return
+	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	var/obj/item/clothing/suit/space/SS = wear_suit
+	var/penetrated_dam = max(0,(damage - SS.breach_threshold))
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)

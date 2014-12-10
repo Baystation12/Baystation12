@@ -11,9 +11,6 @@
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
-/turf/space/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /turf/space/attack_hand(mob/user as mob)
 	if ((user.restrained() || !( user.pulling )))
 		return
@@ -75,7 +72,7 @@
 
 
 		// Okay, so let's make it so that people can travel z levels but not nuke disks!
-		// if(ticker.mode.name == "nuclear emergency")	return
+		// if(ticker.mode.name == "mercenary")	return
 		if(A.z > 6 && !config.use_overmap) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
 			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))

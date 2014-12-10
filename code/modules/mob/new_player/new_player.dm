@@ -29,8 +29,11 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
+			var/readylink = "<a href='byond://?src=\ref[src];ready=[ready ? "2" : "1"]'>[ready ? "Not Ready" : "Ready"]</a>"
+			if(ready)
+				output += "<p>\[ <b>Ready</b> | [readylink] \]</p>"
+			else
+				output += "<p>\[ [readylink] | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -59,7 +62,7 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		src << browse(output,"window=playersetup;size=210x280;can_close=0")
 		return
 
 	Stat()
@@ -121,6 +124,7 @@
 				observer.loc = O.loc
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
+				announce_ghost_joinleave(src)
 				client.prefs.update_preview_icon()
 				observer.icon = client.prefs.preview_icon
 				observer.alpha = 127
@@ -302,8 +306,8 @@
 
 		job_master.AssignRole(src, rank, 1)
 
-		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
-		job_master.EquipRank(character, rank, 1)					//equips the human
+		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+		character = job_master.EquipRank(character, rank, 1)					//equips the human
 		UpdateFactionList(character)
 		EquipCustomItems(character)
 
@@ -315,8 +319,13 @@
 			S = spawntypes[spawning_at]
 
 		if(S && istype(S))
-			character.loc = pick(S.turfs)
-			join_message = S.msg
+			if(S.check_job_spawning(rank))
+				character.loc = pick(S.turfs)
+				join_message = S.msg
+			else
+				character << "Your chosen spawnpoint ([S.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead."
+				character.loc = pick(latejoin)
+				join_message = "has arrived on the station"
 		else
 			character.loc = pick(latejoin)
 			join_message = "has arrived on the station"
@@ -325,7 +334,7 @@
 		// Moving wheelchair if they have one
 		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
 			character.buckled.loc = character.loc
-			character.buckled.dir = character.dir
+			character.buckled.set_dir(character.dir)
 
 		ticker.mode.latespawn(character)
 
@@ -338,9 +347,9 @@
 			//Grab some data from the character prefs for use in random news procs.
 
 			AnnounceArrival(character, rank, join_message)
-
 		else
-			character.Robotize()
+			AnnounceCyborg(character, rank, join_message)
+
 		del(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
@@ -351,13 +360,25 @@
 			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 			del(a)
 
+	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
+		if (ticker.current_state == GAME_STATE_PLAYING)
+			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
+			if(character.mind.role_alt_title)
+				rank = character.mind.role_alt_title
+			// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
+			a.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+			del(a)
+
 	proc/LateChoices()
 		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
 		//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
+		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
 		var/dat = "<html><body><center>"
+		dat += "<b>Welcome, [name].<br></b>"
 		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.

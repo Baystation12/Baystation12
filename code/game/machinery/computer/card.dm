@@ -72,9 +72,6 @@
 /obj/machinery/computer/card/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/computer/card/attack_paw(var/mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/computer/card/attack_hand(mob/user as mob)
 	if(..()) return
 	if(stat & (NOPOWER|BROKEN)) return

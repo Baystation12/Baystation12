@@ -5,7 +5,7 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(var/msg)
-	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
@@ -13,7 +13,7 @@ var/global/floorIsLava = 0
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
 	log_attack(text)
-	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
+	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			if(C.prefs.toggles & CHAT_ATTACKLOGS)
@@ -973,7 +973,7 @@ var/global/floorIsLava = 0
 		if(3)
 			var/count = 0
 			for(var/mob/living/carbon/monkey/Monkey in world)
-				if(Monkey.z == 1)
+				if(Monkey.z in station_levels)
 					count++
 			return "Kill all [count] of the monkeys on the station"
 		if(4)

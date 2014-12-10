@@ -337,7 +337,7 @@
 			var/turf/simulated/floor/T = new_turf
 			if(!T.is_plating())
 				if(!T.broken && !T.burnt)
-					new T.floor_tile.type(T)
+					new T.floor_type(T)
 				T.make_plating()
 		return !new_turf.intact
 
@@ -365,9 +365,7 @@
 
 		if(!PN)
 			PN = new()
-			powernets += PN
-		NC.powernet = PN
-		PN.cables += NC
+		PN.add_cable(NC)
 		NC.mergeConnectedNetworks(NC.d2)
 
 		//NC.mergeConnectedNetworksOnTurf()

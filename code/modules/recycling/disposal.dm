@@ -205,31 +205,27 @@
 	update()
 	return
 
-
-// monkeys can only pull the flush lever
-/obj/machinery/disposal/attack_paw(mob/user as mob)
-	if(stat & BROKEN)
-		return
-
-	flush = !flush
-	update()
-	return
-
 // ai as human but can't flush
 /obj/machinery/disposal/attack_ai(mob/user as mob)
 	interact(user, 1)
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
+
+	if(stat & BROKEN)
+		return
+
 	if(user && user.loc == src)
 		usr << "\red You cannot reach the controls from inside."
 		return
-	/*
-	if(mode==-1)
-		usr << "\red The disposal units power is disabled."
-		return
-	*/
-	interact(user, 0)
+
+	// Clumsy folks can only flush it.
+	if(user.IsAdvancedToolUser(1))
+		interact(user, 0)
+	else
+		flush = !flush
+		update()
+	return
 
 // user interaction
 /obj/machinery/disposal/interact(mob/user, var/ai=0)
@@ -275,14 +271,15 @@
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
 		usr << "\red The disposal units power is disabled."
 		return
-	..()
-	src.add_fingerprint(usr)
+	if(..())
+		return
+
 	if(stat & BROKEN)
 		return
 	if(usr.stat || usr.restrained() || src.flushing)
 		return
 
-	if (in_range(src, usr) && istype(src.loc, /turf))
+	if(istype(src.loc, /turf))
 		usr.set_machine(src)
 
 		if(href_list["close"])
@@ -297,12 +294,13 @@
 				mode = 0
 			update()
 
-		if(href_list["handle"])
-			flush = text2num(href_list["handle"])
-			update()
+		if(!isAI(usr))
+			if(href_list["handle"])
+				flush = text2num(href_list["handle"])
+				update()
 
-		if(href_list["eject"])
-			eject()
+			if(href_list["eject"])
+				eject()
 	else
 		usr << browse(null, "window=disposal")
 		usr.unset_machine()
@@ -546,7 +544,7 @@
 
 		loc = D.trunk
 		active = 1
-		dir = DOWN
+		set_dir(DOWN)
 		spawn(1)
 			move()		// spawn off the movement process
 
@@ -705,7 +703,7 @@
 	//
 	proc/transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 
@@ -812,7 +810,7 @@
 			for(var/D in cardinal)
 				if(D & dpdir)
 					var/obj/structure/disposalpipe/broken/P = new(src.loc)
-					P.dir = D
+					P.set_dir(D)
 
 		src.invisibility = 101	// make invisible (since we won't delete the pipe immediately)
 		var/obj/structure/disposalholder/H = locate() in src
@@ -923,7 +921,7 @@
 			if("pipe-tagger-partial")
 				C.ptype = 14
 		src.transfer_fingerprints_to(C)
-		C.dir = dir
+		C.set_dir(dir)
 		C.density = 0
 		C.anchored = 1
 		C.update()
@@ -969,7 +967,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 
 		var/turf/T
 		var/obj/structure/disposalpipe/P
@@ -1056,6 +1054,9 @@
 
 		return P
 ///// Z-Level stuff
+
+/obj/structure/disposalpipe/junction/yjunction
+	icon_state = "pipe-y"
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
@@ -1230,7 +1231,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir, H.destinationTag)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 

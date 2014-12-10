@@ -13,10 +13,10 @@
 	emote_hear = list("wails","screeches")
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"
-	response_harm   = "punches the"
+	response_harm   = "punches"
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	attacktext = "drains the life from"
+	attacktext = "drained the life from"
 	minbodytemp = 0
 	maxbodytemp = 4000
 	min_oxy = 0
