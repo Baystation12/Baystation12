@@ -113,7 +113,7 @@
 								break
 						if(component_check)
 							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc)
+							var/obj/machinery/new_machine = new src.circuit.build_path(src.loc, src.dir)
 							new_machine.component_parts.Cut()
 							src.circuit.construct(new_machine)
 							for(var/obj/O in src)
@@ -278,24 +278,9 @@ obj/item/weapon/circuitboard/rdserver
 
 /obj/item/weapon/circuitboard/unary_atmos
 	board_type = "machine"
-	var/machine_dir = SOUTH
-	var/init_dirs = SOUTH
-
-/obj/item/weapon/circuitboard/unary_atmos/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I,/obj/item/weapon/screwdriver))
-		machine_dir = turn(machine_dir, 90)
-		init_dirs = machine_dir
-		user.visible_message("\blue \The [user] adjusts the jumper on the [src]'s port configuration pins.", "\blue You adjust the jumper on the port configuration pins. Now set to [dir2text(machine_dir)].")
-	return
-
-/obj/item/weapon/circuitboard/unary_atmos/examine(mob/user)
-	..(user)
-	user << "The jumper is connecting the [dir2text(machine_dir)] pins."
 
 /obj/item/weapon/circuitboard/unary_atmos/construct(var/obj/machinery/atmospherics/unary/U)
 	//TODO: Move this stuff into the relevant constructor when pipe/construction.dm is cleaned up.
-	U.set_dir(src.machine_dir)
-	U.initialize_directions = src.init_dirs
 	U.initialize()
 	U.build_network()
 	if (U.node)
