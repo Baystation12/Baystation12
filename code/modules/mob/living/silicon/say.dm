@@ -72,7 +72,7 @@
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
-		message = copytext(message,3)
+		message = trim(copytext(message,2+length(speaking.key)))
 
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
@@ -102,7 +102,7 @@
 		if("department")
 			switch(bot_type)
 				if(IS_AI)
-					return AI.holopad_talk(message)
+					return AI.holopad_talk(message, verb, speaking)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
 					return R.radio.talk_into(src,message,message_mode,verb,speaking)
@@ -149,7 +149,7 @@
 	return ..(message,speaking,verb)
 
 //For holopads only. Usable by AI.
-/mob/living/silicon/ai/proc/holopad_talk(var/message)
+/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking)
 
 	log_say("[key_name(src)] : [message]")
 
@@ -160,17 +160,23 @@
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.hologram && T.master == src)//If there is a hologram and its master is the user.
-		var/verb = say_quote(message)
 
 		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
-
+		var/rendered_a
 		//Speach distorted, heard by those who do not understand AIs.
 		var/message_stars = stars(message)
-		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
+		var/rendered_b
+		
+		if(speaking)
+			rendered_a = "<span class='game say'><span class='name'>[name]</span> [speaking.format_message(message, verb)]</span>"
+			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [speaking.format_message(message_stars, verb)]</span>"
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>"//The AI can "hear" its own message.
+		else
+			rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
+			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
+			src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>"//The AI can "hear" its own message.
 
-		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>\"[message]\"</span></span></i>"//The AI can "hear" its own message.
-		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
+		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>\"[message]\"</span></span></i>"//The AI can "hear" its own message.		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
 			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
 				M.show_message(rendered_a, 2)
 			else//If they do not.

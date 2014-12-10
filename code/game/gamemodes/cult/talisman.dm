@@ -2,7 +2,7 @@
 	icon_state = "paper_talisman"
 	var/imbue = null
 	var/uses = 0
-	info = "<img src='talisman.png'><br/><br/>"
+	info = "<center><img src='talisman.png'></center><br/><br/>"
 
 	attack_self(mob/living/user as mob)
 		if(iscultist(user))

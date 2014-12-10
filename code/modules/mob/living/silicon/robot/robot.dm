@@ -1289,9 +1289,9 @@ var/list/robot_verbs_default = list(
 	if(!connected_ai)
 		return
 	switch(notifytype)
-		if(1) //New Cyborg
-			connected_ai << "<br><br><span class='notice'>NOTICE - New cyborg connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>"
+		if(1) //New Robot
+			connected_ai << "<br><br><span class='notice'>NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>"
 		if(2) //New Module
-			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg module change detected: [name] has loaded the [module.name] module.</span><br>"
+			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [module.name].</span><br>"
 		if(3) //New Name
-			connected_ai << "<br><br><span class='notice'>NOTICE - Cyborg reclassification detected: [oldname] is now designated as [newname].</span><br>"
+			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [oldname] is now designated as [newname].</span><br>"
