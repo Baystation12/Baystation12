@@ -59,16 +59,34 @@ PriorityQueue
 
 	proc/Dequeue()
 		if(!queue.len)
-			return
+			return 0
 		return Remove(1)
 
-	proc/Remove(index)
+	proc/Remove(var/index)
 		if(index > queue.len)
-			return
+			return 0
 
 		var/thing = queue[index]
-		queue.Cut(index, index + 1)
+		queue.Swap(index, queue.len)
+		queue.Cut(queue.len)
+		if(index < queue.len)
+			FixQueue(index)
 		return thing
+
+	proc/FixQueue(var/index)
+		var/child = 2 * index
+		var/item = queue[index]
+
+		while(child <= queue.len)
+			if(child < queue.len && call(comparison_function)(queue[child], queue[child + 1]) > 0)
+				child++
+			if(call(comparison_function)(item, queue[child]) > 0)
+				queue[index] = queue[child]
+				index = child
+			else
+				break
+			child = 2 * index
+		queue[index] = item
 
 	proc/List()
 		return queue.Copy()
