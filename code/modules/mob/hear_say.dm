@@ -36,7 +36,10 @@
 				var/mob/living/simple_animal/S = speaker
 				message = pick(S.speak)
 			else
-				message = stars(message)
+				if(language)
+					message = language.scramble(message)
+				else
+					message = stars(message)
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
@@ -97,7 +100,10 @@
 				else
 					return
 			else
-				message = stars(message)
+				if(language)
+					message = language.scramble(language)
+				else
+					message = stars(message)
 
 		if(hard_to_hear)
 			message = stars(message)

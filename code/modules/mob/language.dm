@@ -10,10 +10,41 @@
 	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
 	var/whisper_verb                 // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
-	var/colour = "body"         // CSS style to use for strings in this language.
+	var/colour = "body"              // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
+	var/list/syllables               // Used when scrambling text for a non-speaker.
+	var/list/space_chance = 55       // Likelihood of getting a space in the random scramble string.
+
+/datum/language/proc/scramble(var/input)
+
+	if(!syllables || !syllables.len)
+		return stars(input)
+
+	var/input_size = length(input)
+	var/scrambled_text = ""
+	var/capitalize = 1
+
+	while(length(scrambled_text) < input_size)
+		var/next = pick(syllables)
+		if(capitalize)
+			next = capitalize(next)
+			capitalize = 0
+		scrambled_text += next
+		var/chance = rand(100)
+		if(chance <= 5)
+			scrambled_text += ". "
+			capitalize = 1
+		else if(chance > 5 && chance <= space_chance)
+			scrambled_text += " "
+
+	scrambled_text = trim(scrambled_text)
+	var/ending = copytext(scrambled_text, length(scrambled_text))
+	if(ending == ".")
+		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+	scrambled_text += copytext(input, length(input))
+	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
 	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
@@ -72,6 +103,7 @@
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
+	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
 /datum/language/tajaran
 	name = "Siik'tajr"
@@ -82,6 +114,10 @@
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
+	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
+	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
+	"hal","ket","jurl","mah","tul","cresh","azu","ragh")
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -92,6 +128,7 @@
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
+	syllables = list("wub","wub","wub","wub","wub","wub","wub","WUB","vwwwworp","SO-LET-THE-BEAT-DROP")
 
 /datum/language/vox
 	name = "Vox-pidgin"
@@ -102,6 +139,8 @@
 	colour = "vox"
 	key = "5"
 	flags = RESTRICTED
+	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
+	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 
 /datum/language/diona
 	name = "Rootspeak"
@@ -112,6 +151,7 @@
 	colour = "soghun"
 	key = "q"
 	flags = RESTRICTED
+	syllables = list("hs","zt","kr","st","sh")
 
 /datum/language/common
 	name = "Galactic Common"
@@ -120,6 +160,7 @@
 	whisper_verb = "whispers"
 	key = "0"
 	flags = RESTRICTED
+	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
 //TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
@@ -154,6 +195,8 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
+	space_chance = 70
+	syllables = list("bu","chu","fu","dru","po","cha","lu","du","du","lo","shu","nu","he","gu")
 
 /datum/language/gutter
 	name = "Gutter"
@@ -161,6 +204,7 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
