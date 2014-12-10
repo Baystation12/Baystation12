@@ -576,9 +576,9 @@ What a mess.*/
 		return photo.img
 	if(istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
-		var/datum/picture/selection = tempAI.GetPicture()
+		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if (selection)
-			return selection.fields["img"]
+			return selection.img
 
 /obj/machinery/computer/secure_data/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

@@ -21,16 +21,22 @@
 /********
 * photo *
 ********/
+var/global/photo_count = 0
+
 /obj/item/weapon/photo
 	name = "photo"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
 	w_class = 2.0
+	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
 	var/photo_size = 3
+
+/obj/item/weapon/photo/New()
+	id = photo_count++
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
@@ -270,8 +276,8 @@
 		y_c--
 		x_c = x_c - size
 
-	var/datum/picture/P = createpicture(target, user, turfs, mobs, flag)
-	printpicture(user, P)
+	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+	printpicture(user, p)
 
 /obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
 	var/icon/photoimage = get_icon(turfs, target)
@@ -285,43 +291,37 @@
 	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
 	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 
-	var/datum/picture/P = new()
-	P.fields["name"] = "photo"
-	P.fields["icon"] = ic
-	P.fields["tiny"] = pc
-	P.fields["img"] = photoimage
-	P.fields["desc"] = mobs
-	P.fields["pixel_x"] = rand(-10, 10)
-	P.fields["pixel_y"] = rand(-10, 10)
-	P.fields["size"] = size
+	var/obj/item/weapon/photo/p = new()
+	p.name = "photo"
+	p.icon = ic
+	p.tiny = pc
+	p.img = photoimage
+	p.desc = mobs
+	p.pixel_x = rand(-10, 10)
+	p.pixel_y = rand(-10, 10)
+	p.photo_size = size
 
-	return P
+	return p
 
-/obj/item/device/camera/proc/printpicture(mob/user, var/datum/picture/P)
-	var/obj/item/weapon/photo/Photo = new/obj/item/weapon/photo()
-	Photo.loc = user.loc
+/obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)
+	p.loc = user.loc
 	if(!user.get_inactive_hand())
-		user.put_in_inactive_hand(Photo)
-	Photo.construct(P)
+		user.put_in_inactive_hand(p)
 
-/obj/item/weapon/photo/proc/construct(var/datum/picture/P)
-	name = P.fields["name"]
-	icon = P.fields["icon"]
-	tiny = P.fields["tiny"]
-	img = P.fields["img"]
-	desc = P.fields["desc"]
-	pixel_x = P.fields["pixel_x"]
-	pixel_y = P.fields["pixel_y"]
-	photo_size = P.fields["size"]
-
-/obj/item/weapon/photo/proc/copy()
+/obj/item/weapon/photo/proc/copy(var/copy_id = 0)
 	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
 
-	p.icon = icon(icon, icon_state)
-	p.img = icon(img)
-	p.tiny = icon(tiny)
 	p.name = name
+	p.icon = icon
+	p.tiny = tiny
+	p.img = img
 	p.desc = desc
+	p.pixel_x = pixel_x
+	p.pixel_y = pixel_y
+	p.photo_size = photo_size
 	p.scribble = scribble
+
+	if(copy_id)
+		p.id = id
 
 	return p

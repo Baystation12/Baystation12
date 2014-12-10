@@ -1,10 +1,6 @@
 /**************
 * AI-specific *
 **************/
-/datum/picture
-	var/name = "image"
-	var/list/fields = list()
-
 /obj/item/device/camera/siliconcam
 	var/in_camera_mode = 0
 	var/photos_taken = 0
@@ -19,23 +15,22 @@
 /obj/item/device/camera/siliconcam/drone_camera //currently doesn't offer the verbs, thus cannot be used
 	name = "Drone photo camera"
 
-/obj/item/device/camera/siliconcam/proc/injectaialbum(var/datum/picture/P, var/sufix = "") //stores image information to a list similar to that of the datacore
+/obj/item/device/camera/siliconcam/proc/injectaialbum(obj/item/weapon/photo/p, var/sufix = "") //stores image information to a list similar to that of the datacore
+	p.loc = src
 	photos_taken++
-	P.fields["name"] = "Image [photos_taken][sufix]"
-	var/obj/item/weapon/photo/photo = new
-	photo.construct(P)
-	aipictures += photo
+	p.name = "Image [photos_taken][sufix]"
+	aipictures += p
 
-/obj/item/device/camera/siliconcam/proc/injectmasteralbum(var/datum/picture/P) //stores image information to a list similar to that of the datacore
-	var/mob/living/silicon/robot/C = src.loc
+/obj/item/device/camera/siliconcam/proc/injectmasteralbum(obj/item/weapon/photo/p) //stores image information to a list similar to that of the datacore
+	var/mob/living/silicon/robot/C = usr
 	if(C.connected_ai)
-		var/mob/A = P.fields["author"]
-		C.connected_ai.aiCamera.injectaialbum(P, " (taken by [A.name])")
-		C.connected_ai << "<span class='unconscious'>Image recorded and saved by [name]</span>"
-		usr << "<span class='unconscious'>Image recorded and saved to remote database</span>"	//feedback to the Cyborg player that the picture was taken
+		C.connected_ai.aiCamera.injectaialbum(p.copy(1), " (synced from [C.name])")
+		C.connected_ai << "<span class='unconscious'>Image uploaded by [C.name]</span>"
+		usr << "<span class='unconscious'>Image synced to remote database</span>"	//feedback to the Cyborg player that the picture was taken
 	else
-		injectaialbum(P)
 		usr << "<span class='unconscious'>Image recorded</span>"
+	// Always save locally
+	injectaialbum(p)
 
 /obj/item/device/camera/siliconcam/proc/selectpicture(obj/item/device/camera/siliconcam/cam)
 	if(!cam)
@@ -65,14 +60,14 @@
 	selection.show(usr)
 	usr << selection.desc
 
-/obj/item/device/camera/siliconcam/proc/deletepicture()
-	var/selection = selectpicture()
+/obj/item/device/camera/siliconcam/proc/deletepicture(obj/item/device/camera/siliconcam/cam)
+	var/selection = selectpicture(cam)
 
 	if(!selection)
 		return
 
 	aipictures -= selection
-	usr << "<span class='unconscious'>Image deleted</span>"
+	usr << "<span class='unconscious'>Local image deleted</span>"
 
 /obj/item/device/camera/siliconcam/ai_camera/can_capture_turf(turf/T, mob/user)
 	var/mob/living/silicon/ai = user
@@ -92,12 +87,12 @@
 	src.in_camera_mode = 1
 	usr << "<B>Camera Mode activated</B>"
 
-/obj/item/device/camera/siliconcam/ai_camera/printpicture(mob/user, datum/picture/P)
-	injectaialbum(P)
+/obj/item/device/camera/siliconcam/ai_camera/printpicture(mob/user, obj/item/weapon/photo/p)
+	injectaialbum(p)
 	usr << "<span class='unconscious'>Image recorded</span>"
 
-/obj/item/device/camera/siliconcam/robot_camera/printpicture(mob/user, datum/picture/P)
-	injectmasteralbum(P)
+/obj/item/device/camera/siliconcam/robot_camera/printpicture(mob/user, obj/item/weapon/photo/p)
+	injectmasteralbum(p)
 
 /obj/item/device/camera/siliconcam/ai_camera/verb/take_image()
 	set category = "AI Commands"
@@ -145,19 +140,13 @@
 	set desc = "Delete a local image"
 	set src in usr
 
-	// Explicitly only allow deletion from the local camera
-	var/mob/living/silicon/robot/C = src.loc
-	if(C.connected_ai)
-		C << "Not allowed to delete from the remote database."
-		return
-
-	deletepicture()
+	deletepicture(src)
 
 obj/item/device/camera/siliconcam/proc/getsource()
 	if(istype(src.loc, /mob/living/silicon/ai))
 		return src
 
-	var/mob/living/silicon/robot/C = src.loc
+	var/mob/living/silicon/robot/C = usr
 	var/obj/item/device/camera/siliconcam/Cinfo
 	if(C.connected_ai)
 		Cinfo = C.connected_ai.aiCamera
