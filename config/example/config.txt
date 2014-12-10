@@ -292,3 +292,8 @@ EVENT_DELAY_UPPER 15;45;70
 # EVENT_CUSTOM_START_MINOR 10;15
 # EVENT_CUSTOM_START_MODERATE 30;45
 EVENT_CUSTOM_START_MAJOR 80;100
+
+## Uncomment to make proccall require R_ADMIN instead of R_DEBUG
+## designed for environments where you have testers but don't want them
+## able to use the more powerful debug options.
+#DEBUG_PARANOID
