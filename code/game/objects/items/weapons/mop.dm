@@ -23,6 +23,8 @@
 		if(istype(src, /turf/simulated))
 			var/turf/simulated/T = src
 			T.dirt = 0
+			if(T.reagents)
+				T.reagents.clear_reagents()
 		for(var/obj/effect/O in src)
 			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				del(O)

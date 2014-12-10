@@ -51,7 +51,14 @@
 		if(!..(user, 2))
 			return
 		if(reagents && reagents.reagent_list.len)
-			user << "\blue It contains [src.reagents.total_volume] units of liquid."
+			if(reagents.meta_state & LIQUID)
+				user << "\blue It contains [src.reagents.total_volume] units of liquid."
+			else if(reagents.meta_state == SOLID)
+				user << "\blue It contains [src.reagents.total_volume] units of pulverized materials."
+			else if(reagents.meta_state == GASEOUS)
+				user << "\blue It contains [src.reagents.total_volume] units of pure gas."
+			if((reagents.meta_state & LIQUID) && (reagents.meta_state & GASEOUS))
+				user << "\blue The solution is fizzy."
 		else
 			user << "\blue It is empty."
 		if (!is_open_container())
@@ -60,10 +67,10 @@
 	attack_self()
 		..()
 		if (is_open_container())
-			usr << "<span class = 'notice'>You put the lid on \the [src]."
+			usr << "<span class = 'notice'>You put the lid on \the [src].</span>"
 			flags ^= OPENCONTAINER
 		else
-			usr << "<span class = 'notice'>You take the lid off \the [src]."
+			usr << "<span class = 'notice'>You take the lid off \the [src].</span>"
 			flags |= OPENCONTAINER
 		update_icon()
 
@@ -77,7 +84,7 @@
 				return
 
 		if(ismob(target) && target.reagents && reagents.total_volume)
-			user << "\blue You splash the solution onto [target]."
+			user << "<span class = 'notice'>You [reagents.meta_state == LIQUID ? "splash the solution" : "pour the pulver"] onto [target].</span>"
 
 			var/mob/living/M = target
 			var/list/injected = list()
@@ -105,7 +112,7 @@
 				return
 
 			var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
-			user << "\blue You fill [src] with [trans] units of the contents of [target]."
+			user << "<span class = 'notice'>You fill [src] with [trans] units of the contents of [target].</span>"
 
 		else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
 
@@ -118,7 +125,7 @@
 				return
 
 			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
-			user << "\blue You transfer [trans] units of the solution to [target]."
+			user << "<span class = 'notice'>You transfer [trans] units of the solution to [target].</span>"
 
 		else if(istype(target, /obj/machinery/bunsen_burner))
 			return
@@ -130,7 +137,12 @@
 			return
 
 		else if(reagents.total_volume)
-			user << "\blue You splash the solution onto [target]."
+			if(reagents.meta_state == SOLID)
+				user << "<span class = 'notice'>You pour the pulver onto [target].</span>"
+			else if (reagents.meta_state == GASEOUS)
+				user << "<span class = 'notice'>You let the gases escape into the surrondings.</span>"
+			else
+				user << "<span class = 'notice'>You splash the solution onto [target].</span>"
 			src.reagents.reaction(target, TOUCH)
 			spawn(5) src.reagents.clear_reagents()
 			return
@@ -138,8 +150,8 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
 			var/tmp_label = sanitize(input(user, "Enter a label for [src.name]","Label",src.label_text))
-			if(length(tmp_label) > 10)
-				user << "\red The label can be at most 10 characters long."
+			if(length(tmp_label) > 15)
+				user << "\red The label can be at most 15 characters long."
 			else
 				user << "\blue You set the label to \"[tmp_label]\"."
 				src.label_text = tmp_label
@@ -195,6 +207,10 @@
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
 			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			if (reagents.meta_state == SOLID)
+				filling.icon -= icon('icons/obj/reagentfillings.dmi', "solid")
+			if (reagents.meta_state & LIQUID && reagents.meta_state & GASEOUS)
+				filling.icon += icon('icons/obj/reagentfillings.dmi', "gaseous")
 			overlays += filling
 
 		if (!is_open_container())

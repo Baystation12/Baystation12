@@ -41,6 +41,28 @@
 	icon_state = "dirt"
 	mouse_opacity = 0
 
+/obj/effect/decal/cleanable/solid_reagents
+	name = "dirt"
+	desc = "Someone should clean that up."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "reagents-solid"
+	mouse_opacity = 0
+
+/obj/effect/decal/cleanable/liquid_reagents
+	name = "liquid"
+	desc = "Someone should clean that up."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "reagents-liquid"
+	mouse_opacity = 0
+
 /obj/effect/decal/cleanable/flour
 	name = "flour"
 	desc = "It's still good. Four second rule!"

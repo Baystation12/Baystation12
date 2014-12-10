@@ -56,94 +56,112 @@
 			overlays += lid
 
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
-	name = "inaprovaline bottle"
+	name = "Inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle16"
+	icon_state = "bottle-4"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("inaprovaline", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/toxin
-	name = "toxin bottle"
+	name = "Toxin bottle"
 	desc = "A small bottle of toxins. Do not drink, it is poisonous."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle12"
+	icon_state = "bottle-1"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("toxin", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/cyanide
-	name = "cyanide bottle"
+	name = "Cyanide bottle"
 	desc = "A small bottle of cyanide. Bitter almonds?"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle12"
+	icon_state = "bottle-1"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("cyanide", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin
-	name = "soporific bottle"
+	name = "Soporific bottle"
 	desc = "A small bottle of soporific. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = "bottle-3"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("stoxin", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate
-	name = "Chloral Hydrate Bottle"
+	name = "Chloral Hydrate bottle"
 	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = "bottle-4"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("chloralhydrate", 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
-	name = "dylovene bottle"
+	name = "Dylovene bottle"
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = "bottle-4"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("anti_toxin", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/mutagen
-	name = "unstable mutagen bottle"
+	name = "Unstable mutagen bottle"
 	desc = "A small bottle of unstable mutagen. Randomly changes the DNA structure of whoever comes in contact."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = "bottle-2"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("mutagen", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/ammonia
-	name = "ammonia bottle"
+	name = "Ammonia bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle20"
+	icon_state = "bottle-4"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("ammonia", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/diethylamine
-	name = "diethylamine bottle"
+	name = "Diethylamine bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = "bottle-4"
+	flags = FPRINT | TABLEPASS
 
 	New()
 		..()
 		reagents.add_reagent("diethylamine", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/flu_virion
 	name = "Flu virion culture bottle"
@@ -311,16 +329,18 @@
 		reagents.add_reagent("blood", 20, data)
 
 /obj/item/weapon/reagent_containers/glass/bottle/pacid
-	name = "Polytrinic Acid Bottle"
+	name = "Polytrinic Acid bottle"
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid"
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = "bottle-1"
+	flags = FPRINT | TABLEPASS
 	New()
 		..()
 		reagents.add_reagent("pacid", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/adminordrazine
-	name = "Adminordrazine Bottle"
+	name = "Adminordrazine bottle"
 	desc = "A small bottle. Contains the liquid essence of the gods."
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "holyflask"
@@ -329,19 +349,23 @@
 		reagents.add_reagent("adminordrazine", 60)
 
 /obj/item/weapon/reagent_containers/glass/bottle/capsaicin
-	name = "Capsaicin Bottle"
+	name = "Capsaicin bottle"
 	desc = "A small bottle. Contains hot sauce."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle3"
+	icon_state = "bottle-3"
+	flags = FPRINT | TABLEPASS
 	New()
 		..()
 		reagents.add_reagent("capsaicin", 60)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/frostoil
-	name = "Frost Oil Bottle"
+	name = "Frost Oil bottle"
 	desc = "A small bottle. Contains cold sauce."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle17"
+	icon_state = "bottle-3"
+	flags = FPRINT | TABLEPASS
 	New()
 		..()
 		reagents.add_reagent("frostoil", 60)
+		update_icon()

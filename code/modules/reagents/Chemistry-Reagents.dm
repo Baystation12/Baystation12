@@ -1,6 +1,3 @@
-#define SOLID 1
-#define LIQUID 2
-#define GAS 3
 #define REAGENTS_OVERDOSE 30
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
@@ -69,7 +66,20 @@ datum
 				//	O.reagents.add_reagent(id,volume/3)
 				return
 
-			reaction_turf(var/turf/T, var/volume)
+			reaction_turf(var/turf/simulated/T, var/volume)
+				if(!istype(T))
+					src = null
+					return
+
+				if(reagent_state == GASEOUS)
+					src = null
+					return
+
+				if(!T.reagents)
+					T.create_reagents(1000)
+				T.reagents.add_reagent(id, min(volume, 10))
+				T.reagents.remove_any(T.reagents.total_volume-10) // Never hold more than 10 units of reagents
+
 				src = null
 				return
 
@@ -152,12 +162,12 @@ datum
 				if(!(volume >= 3)) return
 
 				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
-					blood_splatter(T,self,1)
+					blood_splatter(T,self,1,volume)
 				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
+					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1,volume)
 					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
+					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1,volume)
 					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 				return
 
@@ -219,16 +229,19 @@ datum
 						T.visible_message("\red The water sizzles as it lands on \the [T]!")
 
 				else //otherwise, the turf gets wet
+					if(T.reagents && T.reagents.total_volume)
+						T.reagents.meta_state |= LIQUID
+						T.on_reagent_change()
 					if(volume >= 3)
 						if(T.wet >= 1) return
 						T.wet = 1
 						if(T.wet_overlay)
 							T.overlays -= T.wet_overlay
 							T.wet_overlay = null
-						T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
+							T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
 						T.overlays += T.wet_overlay
-
 						src = null
+
 						spawn(800)
 							if (!istype(T)) return
 							if(T.wet >= 2) return
@@ -380,7 +393,7 @@ datum
 			id = "inaprovaline"
 			description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#00BFFF" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE*2
 			scannable = 1
 
@@ -468,7 +481,7 @@ datum
 			name = "Oxygen"
 			id = "oxygen"
 			description = "A colorless, odorless gas."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#808080" // rgb: 128, 128, 128
 
 			custom_metabolism = 0.01
@@ -493,7 +506,7 @@ datum
 			name = "Nitrogen"
 			id = "nitrogen"
 			description = "A colorless, odorless, tasteless gas."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#808080" // rgb: 128, 128, 128
 
 			custom_metabolism = 0.01
@@ -510,7 +523,7 @@ datum
 			name = "Hydrogen"
 			id = "hydrogen"
 			description = "A colorless, odorless, nonmetallic, tasteless, highly combustible diatomic gas."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#808080" // rgb: 128, 128, 128
 
 			custom_metabolism = 0.01
@@ -559,21 +572,11 @@ datum
 
 			custom_metabolism = 0.01
 
-			reaction_turf(var/turf/T, var/volume)
-				src = null
-				if(!istype(T, /turf/space))
-					var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
-					if (!dirtoverlay)
-						dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
-						dirtoverlay.alpha = volume*30
-					else
-						dirtoverlay.alpha = min(dirtoverlay.alpha+volume*30, 255)
-
 		chlorine
 			name = "Chlorine"
 			id = "chlorine"
 			description = "A chemical element with a characteristic odour."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#808080" // rgb: 128, 128, 128
 			overdose = REAGENTS_OVERDOSE
 
@@ -587,7 +590,7 @@ datum
 			name = "Fluorine"
 			id = "fluorine"
 			description = "A highly-reactive chemical element."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#808080" // rgb: 128, 128, 128
 			overdose = REAGENTS_OVERDOSE
 
@@ -712,7 +715,7 @@ datum
 			id = "ryetalyn"
 			description = "Ryetalyn can cure all genetic abnomalities via a catalytic process."
 			reagent_state = SOLID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#004000" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
@@ -759,7 +762,7 @@ datum
 			id = "paracetamol"
 			description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 			reagent_state = LIQUID
-			color = "#C855DC"
+			color = "#BF40FF"
 			overdose = 60
 			scannable = 1
 			custom_metabolism = 0.025 // Lasts 10 minutes for 15 units
@@ -775,7 +778,7 @@ datum
 			id = "tramadol"
 			description = "A simple, yet effective painkiller."
 			reagent_state = LIQUID
-			color = "#C8A5DC"
+			color = "#BF00FF"
 			overdose = 30
 			scannable = 1
 			custom_metabolism = 0.025 // Lasts 10 minutes for 15 units
@@ -791,7 +794,7 @@ datum
 			id = "oxycodone"
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
-			color = "#C805DC"
+			color = "#800080"
 			overdose = 20
 			custom_metabolism = 0.25 // Lasts 10 minutes for 15 units
 
@@ -856,7 +859,7 @@ datum
 			id = "iron"
 			description = "Pure iron is a metal."
 			reagent_state = SOLID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#353535" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
 
 		gold
@@ -935,7 +938,7 @@ datum
 				..()
 				return
 
-		space_cleaner
+		space_
 			name = "Space cleaner"
 			id = "cleaner"
 			description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
@@ -956,6 +959,8 @@ datum
 						var/turf/simulated/S = T
 						S.dirt = 0
 					T.clean_blood()
+					if(T.reagents)
+						T.reagents.clear_reagents()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
 						del(C)
@@ -1033,7 +1038,7 @@ datum
 			id = "kelotane"
 			description = "Kelotane is a drug used to treat burns."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#FF8000" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
 			scannable = 1
 
@@ -1051,7 +1056,7 @@ datum
 			id = "dermaline"
 			description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#FF4000" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE/2
 			scannable = 1
 
@@ -1069,7 +1074,7 @@ datum
 			id = "dexalin"
 			description = "Dexalin is used in the treatment of oxygen deprivation."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#0080FF" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
 			scannable = 1
 
@@ -1092,7 +1097,7 @@ datum
 			id = "dexalinp"
 			description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#0040FF" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE/2
 			scannable = 1
 
@@ -1115,7 +1120,7 @@ datum
 			id = "tricordrazine"
 			description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#8040FF" // rgb: 200, 165, 220
 			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
@@ -1135,7 +1140,7 @@ datum
 			id = "anti_toxin"
 			description = "Dylovene is a broad-spectrum antitoxin."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#00A000" // rgb: 200, 165, 220
 			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
@@ -1235,7 +1240,7 @@ datum
 			id = "hyronalin"
 			description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#408000" // rgb: 200, 165, 220
 			custom_metabolism = 0.05
 			overdose = REAGENTS_OVERDOSE
 			scannable = 1
@@ -1251,7 +1256,7 @@ datum
 			id = "arithrazine"
 			description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#008000" // rgb: 200, 165, 220
 			custom_metabolism = 0.05
 			overdose = REAGENTS_OVERDOSE
 
@@ -1330,7 +1335,7 @@ datum
 			id = "bicaridine"
 			description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#BF0000" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
 			scannable = 1
 
@@ -1378,7 +1383,7 @@ datum
 			id = "cryoxadone"
 			description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#8080FF" // rgb: 200, 165, 220
 			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
@@ -1396,7 +1401,7 @@ datum
 			id = "clonexadone"
 			description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#80BFFF" // rgb: 200, 165, 220
 			scannable = 1
 
 			on_mob_life(var/mob/living/M as mob)
@@ -1504,7 +1509,7 @@ datum
 			name = "Ammonia"
 			id = "ammonia"
 			description = "A caustic substance commonly used in fertilizer or household cleaners."
-			reagent_state = GAS
+			reagent_state = GASEOUS
 			color = "#404030" // rgb: 64, 64, 48
 
 		ultraglue
@@ -1541,12 +1546,12 @@ datum
 //////////////////////////Poison stuff///////////////////////
 
 		toxin
-			name = "Toxin"
+			name = "Arsenic"
 			id = "toxin"
 			description = "A toxic chemical."
 			reagent_state = LIQUID
 			color = "#CF3600" // rgb: 207, 54, 0
-			var/toxpwr = 0.7 // Toxins are really weak, but without being treated, last very long.
+			var/toxpwr = 1 // Toxins are really weak, but without being treated, last very long.
 			custom_metabolism = 0.1
 
 			on_mob_life(var/mob/living/M as mob,var/alien)
@@ -1812,7 +1817,7 @@ datum
 			id = "stoxin"
 			description = "An effective hypnotic used to treat insomnia."
 			reagent_state = LIQUID
-			color = "#E895CC" // rgb: 232, 149, 204
+			color = "#009CA8" // rgb: 232, 149, 204
 			toxpwr = 0
 			custom_metabolism = 0.1
 			overdose = REAGENTS_OVERDOSE

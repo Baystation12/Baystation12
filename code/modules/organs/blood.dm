@@ -146,7 +146,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		return
 
 	vessel.remove_reagent("blood",amt)
-	blood_splatter(src,src)
+	blood_splatter(src,src, amount = amt)
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -273,7 +273,7 @@ proc/blood_incompatible(donor,receiver,donor_species,receiver_species)
 		//AB is a universal receiver.
 	return 0
 
-proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
+proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large,var/amount as num)
 
 	var/obj/effect/decal/cleanable/blood/B
 	var/decal_type = /obj/effect/decal/cleanable/blood/splatter
@@ -316,6 +316,15 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	// If there's no data to copy, call it quits here.
 	if(!source)
 		return B
+
+	// Move reagents to blood splatter
+	if(!B.reagents)
+		B.create_reagents(10)
+	if(amount)
+		B.reagents.add_reagent("blood", amount, source.data)
+	else
+		B.reagents.add_reagent("blood", 10, source.data)
+
 
 	// Update appearance.
 	if(source.data["blood_colour"])

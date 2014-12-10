@@ -79,6 +79,11 @@
 // Factor of how fast mob nutrition decreases
 #define HUNGER_FACTOR 0.05
 
+// Reagent states
+#define SOLID 1
+#define LIQUID 2
+#define GASEOUS 4
+
 // How many units of reagent are consumed per tick, by default.
 #define REAGENTS_METABOLISM 0.2
 

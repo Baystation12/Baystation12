@@ -1,6 +1,3 @@
-#define SOLID 1
-#define LIQUID 2
-#define GAS 3
 
 #define CHEM_DISPENSER_ENERGY_COST	0.1	//How many energy points do we use per unit of chemical?
 

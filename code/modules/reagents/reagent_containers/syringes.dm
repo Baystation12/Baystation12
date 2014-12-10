@@ -112,8 +112,12 @@
 						user << "\red [target] is empty."
 						return
 
-					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/slime_extract))
+					if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/slime_extract) && !istype(target,/turf/simulated))
 						user << "\red You cannot directly remove reagents from this object."
+						return
+
+					if(!(target.reagents.meta_state & LIQUID))
+						user << "\red The reagents in \the [target] need to be liquid."
 						return
 
 					var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this) // transfer from, transfer to - who cares?
