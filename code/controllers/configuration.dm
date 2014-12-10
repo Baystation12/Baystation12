@@ -81,6 +81,8 @@
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 
+	var/debugparanoid = 0
+
 	var/server
 	var/banappeals
 	var/wikiurl
@@ -223,6 +225,9 @@
 
 				if ("log_say")
 					config.log_say = 1
+
+				if ("debug_paranoid")
+					config.debugparanoid = 1
 
 				if ("log_admin")
 					config.log_admin = 1
