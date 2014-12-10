@@ -190,16 +190,17 @@
 		var/turf/simulated/floor/mech_bay_recharge_floor/F = locate() in range(1,src)
 		if(F)
 			F.init_devices()
+	ui_interact(user)
 
+/obj/machinery/computer/mech_bay_power_console/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
-
 	data["has_floor"] = recharge_floor
 	data["has_port"] = recharge_port
 	data["has_mech"] = !isnull(recharge_floor.recharging_mecha)
-	if(recharge_floor)
+	if(recharge_floor && recharge_floor.recharging_mecha)
 		data["mecha_name"] = recharge_floor.recharging_mecha || "None"
-		data["mecha_charge"] = isnull(cell_charge) ? 0 : recharge_floor.recharging_mecha.cell.charge
-		data["mecha_maxcharge"] = isnull(cell_charge) ? 0 : recharge_floor.recharging_mecha.cell.maxcharge
+		data["mecha_charge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.charge
+		data["mecha_maxcharge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.maxcharge
 		data["mecha_charge_percentage"] = round(recharge_floor.recharging_mecha.cell.percent())
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
