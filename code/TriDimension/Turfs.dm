@@ -47,7 +47,9 @@
 					if (soft || (!blocked && !(areacheck.name == "Space")))
 						var/mob/living/carbon/human/H = AM
 						if (H.back && istype(H.back, /obj/item/weapon/tank/jetpack))
-							return
+							var/obj/item/weapon/tank/jetpack/J = H.back
+							if (J.on == 1)
+								return
 						AM.Move(floorbelow)
 						if (!soft && istype(AM, /mob/living/carbon/human))
 							var/damage = 5
