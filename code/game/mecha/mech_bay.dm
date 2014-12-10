@@ -196,13 +196,14 @@
 	var/list/data = list()
 	data["has_floor"] = recharge_floor
 	data["has_port"] = recharge_port
-	data["has_mech"] = !isnull(recharge_floor.recharging_mecha)
-	if(recharge_floor && recharge_floor.recharging_mecha)
+	if(recharge_floor && recharge_floor.recharging_mecha && recharge_floor.recharging_mecha.cell)
+		data["has_mech"] = 1
 		data["mecha_name"] = recharge_floor.recharging_mecha || "None"
 		data["mecha_charge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.charge
 		data["mecha_maxcharge"] = isnull(recharge_floor.recharging_mecha) ? 0 : recharge_floor.recharging_mecha.cell.maxcharge
-		data["mecha_charge_percentage"] = round(recharge_floor.recharging_mecha.cell.percent())
-
+		data["mecha_charge_percentage"] = isnull(recharge_floor.recharging_mecha) ? 0 : round(recharge_floor.recharging_mecha.cell.percent())
+	else
+		data["has_mech"] = 0
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
