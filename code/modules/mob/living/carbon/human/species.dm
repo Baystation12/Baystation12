@@ -11,6 +11,7 @@
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
+	var/blurb = "A completely nondescript species."      // A brief lore summary for use in the chargen screen.
 
 	var/primitive                              // Lesser form, if any (ie. monkey for humans)
 	var/tail                                   // Name of tail image in species effects icon file.
@@ -208,11 +209,13 @@
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 	unarmed_type = /datum/unarmed_attack/punch
+	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
+	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
+	While the central Sol government maintains control of its far-flung people, powerful corporate \
+	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
+	worlds tumultous at best."
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
-
-	//If you wanted to add a species-level ability:
-	/*abilities = list(/client/proc/test_ability)*/
 
 /datum/species/unathi
 	name = "Unathi"
@@ -226,6 +229,12 @@
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
+
+	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
+	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
+	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
+	else, frequently even their own lives. They prefer warmer temperatures than most species and \
+	their native tongue is a heavy hissing laungage called Sinta'Unathi."
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -252,6 +261,11 @@
 	unarmed_type = /datum/unarmed_attack/claws
 	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
 	darksight = 8
+	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
+	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
+	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
+	of family and politics. They prefer colder environments, and speak a variety of languages, mostly Siik'Maas, \
+	using unique inflections their mouths form."
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -295,6 +309,12 @@
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	rarity_value = 2
+	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
+	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
+	alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human crews often \
+	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
+	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
+	dealing with their traders and merchants; those that do rarely enjoy the experience."
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
@@ -385,6 +405,13 @@
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
+	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
+	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
+	there is no effective upper limit to the number that can fuse in gestalt, and reports exist	of the Epsilon Ursae \
+	Minoris primary being ringed with a cloud of singing space-station-sized entities.<br/><br/>The Dionaea coexist peacefully with \
+	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
+	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
+	water and other radiation."
 
 	has_organ = list(
 		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
