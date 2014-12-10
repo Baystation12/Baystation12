@@ -68,8 +68,8 @@ datum/design/proc/CalcReliability(var/list/temp_techs)
 ///////////////////Computer Boards///////////////////////////////////
 
 datum/design/seccamera
-	name = "Circuit Design (Security)"
-	desc = "Allows for the construction of circuit boards used to build security camera computers."
+	name = "Circuit Design (Security Camera Monitor)"
+	desc = "Allows for the construction of circuit boards used to build a Security Camera Monitor."
 	id = "seccamera"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -78,7 +78,7 @@ datum/design/seccamera
 
 datum/design/aicore
 	name = "Circuit Design (AI Core)"
-	desc = "Allows for the construction of circuit boards used to build new AI cores."
+	desc = "Allows for the construction of circuit boards used to build AI cores."
 	id = "aicore"
 	req_tech = list("programming" = 4, "biotech" = 3)
 	build_type = IMPRINTER
@@ -87,7 +87,7 @@ datum/design/aicore
 
 datum/design/aiupload
 	name = "Circuit Design (AI Upload)"
-	desc = "Allows for the construction of circuit boards used to build an AI Upload Console."
+	desc = "Allows for the construction of circuit boards used to build an AI Upload console."
 	id = "aiupload"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
@@ -96,7 +96,7 @@ datum/design/aiupload
 
 datum/design/borgupload
 	name = "Circuit Design (Cyborg Upload)"
-	desc = "Allows for the construction of circuit boards used to build a Cyborg Upload Console."
+	desc = "Allows for the construction of circuit boards used to build a Cyborg Upload console."
 	id = "borgupload"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
@@ -105,7 +105,7 @@ datum/design/borgupload
 
 datum/design/med_data
 	name = "Circuit Design (Medical Records)"
-	desc = "Allows for the construction of circuit boards used to build a medical records console."
+	desc = "Allows for the construction of circuit boards used to build a Medical Records console."
 	id = "med_data"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -113,8 +113,8 @@ datum/design/med_data
 	build_path = /obj/item/weapon/circuitboard/med_data
 
 datum/design/operating
-	name = "Circuit Design (Operating Computer)"
-	desc = "Allows for the construction of circuit boards used to build an operating computer console."
+	name = "Circuit Design (Patient Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build a Patient Monitoring console."
 	id = "operating"
 	req_tech = list("programming" = 2, "biotech" = 2)
 	build_type = IMPRINTER
@@ -132,7 +132,7 @@ datum/design/pandemic
 
 datum/design/scan_console
 	name = "Circuit Design (DNA Machine)"
-	desc = "Allows for the construction of circuit boards used to build a new DNA scanning console."
+	desc = "Allows for the construction of circuit boards used to build a DNA scanning console."
 	id = "scan_console"
 	req_tech = list("programming" = 2, "biotech" = 3)
 	build_type = IMPRINTER
@@ -149,8 +149,8 @@ datum/design/comconsole
 	build_path = /obj/item/weapon/circuitboard/communications
 
 datum/design/idcardconsole
-	name = "Circuit Design (ID Computer)"
-	desc = "Allows for the construction of circuit boards used to build an ID computer."
+	name = "Circuit Design (ID Card Modification)"
+	desc = "Allows for the construction of circuit boards used to build an ID Card Modification console."
 	id = "idcardconsole"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -158,8 +158,8 @@ datum/design/idcardconsole
 	build_path = /obj/item/weapon/circuitboard/card
 
 datum/design/crewconsole
-	name = "Circuit Design (Crew monitoring computer)"
-	desc = "Allows for the construction of circuit boards used to build a Crew monitoring computer."
+	name = "Circuit Design (Crew Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build a Crew Monitoring console."
 	id = "crewconsole"
 	req_tech = list("programming" = 3, "magnets" = 2, "biotech" = 2)
 	build_type = IMPRINTER
@@ -167,8 +167,8 @@ datum/design/crewconsole
 	build_path = /obj/item/weapon/circuitboard/crew
 
 datum/design/teleconsole
-	name = "Circuit Design (Teleporter Console)"
-	desc = "Allows for the construction of circuit boards used to build a teleporter control console."
+	name = "Circuit Design (Teleporter Control)"
+	desc = "Allows for the construction of circuit boards used to build a Teleporter Control console."
 	id = "teleconsole"
 	req_tech = list("programming" = 3, "bluespace" = 2)
 	build_type = IMPRINTER
@@ -176,8 +176,8 @@ datum/design/teleconsole
 	build_path = /obj/item/weapon/circuitboard/teleporter
 
 datum/design/secdata
-	name = "Circuit Design (Security Records Console)"
-	desc = "Allows for the construction of circuit boards used to build a security records console."
+	name = "Circuit Design (Security Records)"
+	desc = "Allows for the construction of circuit boards used to build a Security Records console."
 	id = "secdata"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -186,7 +186,7 @@ datum/design/secdata
 
 datum/design/atmosalerts
 	name = "Circuit Design (Atmosphere Alert)"
-	desc = "Allows for the construction of circuit boards used to build an atmosphere alert console.."
+	desc = "Allows for the construction of circuit boards used to build an Atmosphere Alert console."
 	id = "atmosalerts"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -194,8 +194,8 @@ datum/design/atmosalerts
 	build_path = /obj/item/weapon/circuitboard/atmos_alert
 
 datum/design/air_management
-	name = "Circuit Design (Atmospheric Monitor)"
-	desc = "Allows for the construction of circuit boards used to build an Atmospheric Monitor."
+	name = "Circuit Design (Atmosphere Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build an Atmosphere Monitoring console."
 	id = "air_management"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -203,17 +203,17 @@ datum/design/air_management
 	build_path = /obj/item/weapon/circuitboard/air_management
 
 datum/design/rcon_console
-	name = "Circuit Design (RCON Console)"
-	desc = "Allows for the construction of circuit boards used to build an RCON Remote Control Console."
+	name = "Circuit Design (RCON Remote Control)"
+	desc = "Allows for the construction of circuit boards used to build a RCON Remote Control console."
 	id = "rcon_console"
-	req_tech = list("programming" = 4, "engineering" = 3, "powerstorage" = 5)
+	req_tech = list("programming" = 3, "engineering" = 3, "powerstorage" = 2, "bluespace" = 1)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rcon_console
 
 /* Uncomment if someone makes these buildable
 datum/design/general_alert
-	name = "Circuit Design (General Alert Console)"
+	name = "Circuit Design (General Alert)"
 	desc = "Allows for the construction of circuit boards used to build a General Alert console."
 	id = "general_alert"
 	req_tech = list("programming" = 2)
@@ -223,7 +223,7 @@ datum/design/general_alert
 */
 
 datum/design/robocontrol
-	name = "Circuit Design (Robotics Control Console)"
+	name = "Circuit Design (Robotics Control)"
 	desc = "Allows for the construction of circuit boards used to build a Robotics Control console."
 	id = "robocontrol"
 	req_tech = list("programming" = 4)
@@ -232,7 +232,7 @@ datum/design/robocontrol
 	build_path = /obj/item/weapon/circuitboard/robotics
 
 datum/design/dronecontrol
-	name = "Circuit Design (Drone Control Console)"
+	name = "Circuit Design (Drone Control)"
 	desc = "Allows for the construction of circuit boards used to build a Drone Control console."
 	id = "dronecontrol"
 	req_tech = list("programming" = 4)
@@ -241,8 +241,8 @@ datum/design/dronecontrol
 	build_path = /obj/item/weapon/circuitboard/drone_control
 
 datum/design/clonecontrol
-	name = "Circuit Design (Cloning Machine Console)"
-	desc = "Allows for the construction of circuit boards used to build a new Cloning Machine console."
+	name = "Circuit Design (Cloning Control)"
+	desc = "Allows for the construction of circuit boards used to build a Cloning Control console."
 	id = "clonecontrol"
 	req_tech = list("programming" = 3, "biotech" = 3)
 	build_type = IMPRINTER
@@ -251,7 +251,7 @@ datum/design/clonecontrol
 
 datum/design/clonepod
 	name = "Circuit Design (Clone Pod)"
-	desc = "Allows for the construction of circuit boards used to build a Cloning Pod."
+	desc = "Allows for the construction of circuit boards used to build a Clone Pod."
 	id = "clonepod"
 	req_tech = list("programming" = 3, "biotech" = 3)
 	build_type = IMPRINTER
@@ -269,7 +269,7 @@ datum/design/clonescanner
 
 datum/design/arcademachine
 	name = "Circuit Design (Arcade Machine)"
-	desc = "Allows for the construction of circuit boards used to build a new arcade machine."
+	desc = "Allows for the construction of circuit boards used to build an Arcade Machine."
 	id = "arcademachine"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
@@ -277,8 +277,8 @@ datum/design/arcademachine
 	build_path = /obj/item/weapon/circuitboard/arcade
 
 datum/design/powermonitor
-	name = "Circuit Design (Power Monitor)"
-	desc = "Allows for the construction of circuit boards used to build a new power monitor"
+	name = "Circuit Design (Power Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build a Power Monitoring console"
 	id = "powermonitor"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -287,7 +287,7 @@ datum/design/powermonitor
 
 datum/design/solarcontrol
 	name = "Circuit Design (Solar Control)"
-	desc = "Allows for the construction of circuit boards used to build a solar control console"
+	desc = "Allows for the construction of circuit boards used to build a Solar Control console"
 	id = "solarcontrol"
 	req_tech = list("programming" = 2, "powerstorage" = 2)
 	build_type = IMPRINTER
@@ -295,8 +295,8 @@ datum/design/solarcontrol
 	build_path = /obj/item/weapon/circuitboard/solar_control
 
 datum/design/prisonmanage
-	name = "Circuit Design (Prisoner Management Console)"
-	desc = "Allows for the construction of circuit boards used to build a prisoner management console."
+	name = "Circuit Design (Prisoner Management)"
+	desc = "Allows for the construction of circuit boards used to build a Prisoner Management console."
 	id = "prisonmanage"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -304,8 +304,8 @@ datum/design/prisonmanage
 	build_path = /obj/item/weapon/circuitboard/prisoner
 
 datum/design/mechacontrol
-	name = "Circuit Design (Exosuit Control Console)"
-	desc = "Allows for the construction of circuit boards used to build an exosuit control console."
+	name = "Circuit Design (Exosuit Control)"
+	desc = "Allows for the construction of circuit boards used to build an Exosuit Control console."
 	id = "mechacontrol"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
@@ -313,8 +313,8 @@ datum/design/mechacontrol
 	build_path = /obj/item/weapon/circuitboard/mecha_control
 
 datum/design/mechapower
-	name = "Circuit Design (Mech Bay Power Control Console)"
-	desc = "Allows for the construction of circuit boards used to build a mech bay power control console."
+	name = "Circuit Design (Mech Bay Power Control)"
+	desc = "Allows for the construction of circuit boards used to build a Mech Bay Power Control console."
 	id = "mechapower"
 	req_tech = list("programming" = 2, "powerstorage" = 3)
 	build_type = IMPRINTER
@@ -322,8 +322,8 @@ datum/design/mechapower
 	build_path = /obj/item/weapon/circuitboard/mech_bay_power_console
 
 datum/design/rdconsole
-	name = "Circuit Design (R&D Console)"
-	desc = "Allows for the construction of circuit boards used to build a new R&D console."
+	name = "Circuit Design (R&D Control)"
+	desc = "Allows for the construction of circuit boards used to build a R&D Control console."
 	id = "rdconsole"
 	req_tech = list("programming" = 4)
 	build_type = IMPRINTER
@@ -331,8 +331,8 @@ datum/design/rdconsole
 	build_path = /obj/item/weapon/circuitboard/rdconsole
 
 datum/design/ordercomp
-	name = "Circuit Design (Supply ordering console)"
-	desc = "Allows for the construction of circuit boards used to build a Supply ordering console."
+	name = "Circuit Design (Supply Ordering)"
+	desc = "Allows for the construction of circuit boards used to build a Supply Ordering console."
 	id = "ordercomp"
 	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
@@ -340,8 +340,8 @@ datum/design/ordercomp
 	build_path = /obj/item/weapon/circuitboard/ordercomp
 
 datum/design/supplycomp
-	name = "Circuit Design (Supply shuttle console)"
-	desc = "Allows for the construction of circuit boards used to build a Supply shuttle console."
+	name = "Circuit Design (Supply Shuttle)"
+	desc = "Allows for the construction of circuit boards used to build a Supply Shuttle console."
 	id = "supplycomp"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
@@ -349,8 +349,8 @@ datum/design/supplycomp
 	build_path = /obj/item/weapon/circuitboard/supplycomp
 
 datum/design/comm_monitor
-	name = "Circuit Design (Telecommunications Monitoring Console)"
-	desc = "Allows for the construction of circuit boards used to build a telecommunications monitor."
+	name = "Circuit Design (Telecommunications Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build a Telecommunications Monitor console."
 	id = "comm_monitor"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
@@ -358,8 +358,8 @@ datum/design/comm_monitor
 	build_path = /obj/item/weapon/circuitboard/comm_monitor
 
 datum/design/comm_server
-	name = "Circuit Design (Telecommunications Server Monitoring Console)"
-	desc = "Allows for the construction of circuit boards used to build a telecommunication server browser and monitor."
+	name = "Circuit Design (Telecommunications Server Monitoring)"
+	desc = "Allows for the construction of circuit boards used to build a Telecommunication Server Monitoring console."
 	id = "comm_server"
 	req_tech = list("programming" = 3)
 	build_type = IMPRINTER
@@ -383,16 +383,6 @@ datum/design/aifixer
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/aifixer
-
-// VERY VERY EXPENSIVE (needs diamonds and stuff)
-datum/design/smes_cell
-	name = "Circuit Design (SMES Cell)"
-	desc = "Allows for the construction of circuit boards used to build an SMES Cell."
-	id = "smes_cell"
-	req_tech = list("powerstorage" = 7, "engineering" = 5) // Higher than obtained by deconstructing existing boards. Needs more RnD effor to make
-	build_type = IMPRINTER
-	materials = list("$glass" = 4000, "sacid" = 40, "$gold" = 1000, "$silver" = 1000, "$diamond" = 500)
-	build_path = /obj/item/weapon/circuitboard/smes
 
 ///////////////////////////////////
 //////////AI Module Disks//////////
@@ -1077,7 +1067,9 @@ datum/design/super_matter_bin
 	reliability_base = 75
 	build_path = /obj/item/weapon/stock_parts/matter_bin/super
 
-
+/////////////////////////////////////////
+//////////Tcommsat Stock Parts///////////
+/////////////////////////////////////////
 
 datum/design/subspace_ansible
 	name = "Subspace Ansible"
@@ -1334,6 +1326,14 @@ datum/design/batteryrack
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/batteryrack
 
+datum/design/smes_cell
+	name = "Circuit Design (Superconductive Magnetic Energy Storage)"
+	desc = "Allows for the construction of circuit boards used to build a SMES."
+	id = "smes_cell"
+	req_tech = list("powerstorage" = 7, "engineering" = 5)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 1000, "$silver" = 1000, "$diamond" = 500)
+	build_path = /obj/item/weapon/circuitboard/smes
 
 /////////////////////////////////////////
 ////////////Medical Tools////////////////

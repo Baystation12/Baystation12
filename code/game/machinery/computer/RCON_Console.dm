@@ -1,8 +1,3 @@
-/obj/item/weapon/circuitboard/rcon_console
-	name = "\improper RCON Remote Control Console circuit board"
-	build_path = /obj/machinery/computer/rcon
-	origin_tech = "programming=4;engineering=3;powerstorage=5"
-
 /obj/machinery/computer/rcon
 	name = "RCON Console"
 	desc = "Console used to remotely control machinery on the station."
@@ -47,10 +42,6 @@
 		"enabled" = BR.on
 		)))
 	data["breaker_info"] = breakerlist
-
-
-
-
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)

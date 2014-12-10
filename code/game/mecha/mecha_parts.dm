@@ -364,73 +364,54 @@
 	throw_speed = 3
 	throw_range = 15
 
-	ripley
+/obj/item/weapon/circuitboard/mecha/ripley
 		origin_tech = "programming=3"
-
-	ripley/peripherals
+/obj/item/weapon/circuitboard/mecha/ripley/peripherals
 		name = "Circuit board (Ripley Peripherals Control module)"
 		icon_state = "mcontroller"
-
-	ripley/main
+/obj/item/weapon/circuitboard/mecha/ripley/main
 		name = "Circuit board (Ripley Central Control module)"
 		icon_state = "mainboard"
-
-	gygax
+/obj/item/weapon/circuitboard/mecha/gygax
 		origin_tech = "programming=4"
-
-	gygax/peripherals
+/obj/item/weapon/circuitboard/mecha/gygax/peripherals
 		name = "Circuit board (Gygax Peripherals Control module)"
 		icon_state = "mcontroller"
-
-	gygax/targeting
+/obj/item/weapon/circuitboard/mecha/gygax/targeting
 		name = "Circuit board (Gygax Weapon Control and Targeting module)"
 		icon_state = "mcontroller"
 		origin_tech = "programming=4;combat=4"
-
-	gygax/main
+/obj/item/weapon/circuitboard/mecha/gygax/main
 		name = "Circuit board (Gygax Central Control module)"
 		icon_state = "mainboard"
-
-	durand
+/obj/item/weapon/circuitboard/mecha/durand
 		origin_tech = "programming=4"
-
-	durand/peripherals
+/obj/item/weapon/circuitboard/mecha/durand/peripherals
 		name = "Circuit board (Durand Peripherals Control module)"
 		icon_state = "mcontroller"
-
-	durand/targeting
+/obj/item/weapon/circuitboard/mecha/durand/targeting
 		name = "Circuit board (Durand Weapon Control and Targeting module)"
 		icon_state = "mcontroller"
 		origin_tech = "programming=4;combat=4"
-
-	durand/main
+/obj/item/weapon/circuitboard/mecha/durand/main
 		name = "Circuit board (Durand Central Control module)"
 		icon_state = "mainboard"
-
-	honker
+/obj/item/weapon/circuitboard/mecha/honker
 		origin_tech = "programming=4"
-
-	honker/peripherals
+/obj/item/weapon/circuitboard/mecha/honker/peripherals
 		name = "Circuit board (H.O.N.K Peripherals Control module)"
 		icon_state = "mcontroller"
-
-	honker/targeting
+/obj/item/weapon/circuitboard/mecha/honker/targeting
 		name = "Circuit board (H.O.N.K Weapon Control and Targeting module)"
 		icon_state = "mcontroller"
-
-	honker/main
+/obj/item/weapon/circuitboard/mecha/honker/main
 		name = "Circuit board (H.O.N.K Central Control module)"
 		icon_state = "mainboard"
-
-	odysseus
+/obj/item/weapon/circuitboard/mecha/odysseus
 		origin_tech = "programming=3"
-
-	odysseus/peripherals
+/obj/item/weapon/circuitboard/mecha/odysseus/peripherals
 		name = "Circuit board (Odysseus Peripherals Control module)"
 		icon_state = "mcontroller"
-
-	odysseus/main
+/obj/item/weapon/circuitboard/mecha/odysseus/main
 		name = "Circuit board (Odysseus Central Control module)"
 		icon_state = "mainboard"
-
-

@@ -308,8 +308,15 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/capacitor" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 1)
 
-// Telecomms circuit boards:
+/obj/item/weapon/circuitboard/smes
+	name = "Circuit Board (Superconductive Magnetic Energy Storage)"
+	build_path = "/obj/machinery/power/smes/buildable"
+	board_type = "machine"
+	origin_tech = "powerstorage=6;engineering=4"
+	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
+	req_components = list("/obj/item/weapon/smes_component/coil" = 1, "/obj/item/stack/cable_coil" = 30)
 
+// Telecomms circuit boards:
 /obj/item/weapon/circuitboard/telecomms/receiver
 	name = "Circuit Board (Subspace Receiver)"
 	build_path = "/obj/machinery/telecomms/receiver"
@@ -392,7 +399,3 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1,
 							"/obj/item/weapon/stock_parts/subspace/crystal" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser/high" = 2)
-
-
-
-
