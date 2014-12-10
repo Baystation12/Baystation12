@@ -30,6 +30,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Advanced ProcCall"
 
 	if(!check_rights(R_DEBUG)) return
+	if(config.debugparanoid && !check_rights(R_ADMIN)) return
 
 	spawn(0)
 		var/target = null
