@@ -202,6 +202,15 @@ datum/design/air_management
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/air_management
 
+datum/design/rcon_console
+	name = "Circuit Design (RCON Console)"
+	desc = "Allows for the construction of circuit boards used to build an RCON Remote Control Console."
+	id = "rcon_console"
+	req_tech = list("programming" = 4, "engineering" = 3, "powerstorage" = 5)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/rcon_console
+
 /* Uncomment if someone makes these buildable
 datum/design/general_alert
 	name = "Circuit Design (General Alert Console)"
