@@ -191,7 +191,7 @@
 		if(F)
 			F.init_devices()
 
-		var/list/data = list()
+	var/list/data = list()
 
 	data["has_floor"] = recharge_floor
 	data["has_port"] = recharge_port
