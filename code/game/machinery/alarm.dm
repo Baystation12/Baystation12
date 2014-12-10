@@ -117,6 +117,18 @@
 
 	first_run()
 
+/obj/machinery/alarm/Del()
+	//If there's an active alarm, clear it after minute so that alarms don't keep going forver
+	delayed_reset()
+	..()
+
+//needed to cancel the alarm after it is deleted
+/obj/machinery/alarm/proc/delayed_reset()
+	var/area/A = alarm_area
+	src = null
+	spawn(600)
+		//It makes sense not to touch firelocks here. The alarm itself is gone, we have no idea what the atmos is like.
+		A.atmosalert(0, set_firelocks=0)
 
 /obj/machinery/alarm/proc/first_run()
 	alarm_area = get_area(src)
@@ -1281,6 +1293,20 @@ FIRE ALARM
 		wiresexposed = 1
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+
+/obj/machinery/firealarm/Del()
+	//so fire alarms don't keep going forever
+	delayed_reset()
+	..()
+
+//needed to cancel the alarm after it is deleted
+/obj/machinery/firealarm/proc/delayed_reset()
+	var/area/A = get_area(src)
+	if (!A) return
+	
+	src = null
+	spawn(600)
+		A.firereset()
 
 /obj/machinery/firealarm/initialize()
 	if(z in config.contact_levels)
