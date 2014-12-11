@@ -159,11 +159,11 @@
 		if(M.client)
 			clients++
 			if(ishuman(M))
-				if(!M.stat)
+				if(M.stat != DEAD)
 					surviving_humans++
 					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 						escaped_humans++
-			if(!M.stat)
+			if(M.stat != DEAD)
 				surviving_total++
 				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 					escaped_total++
