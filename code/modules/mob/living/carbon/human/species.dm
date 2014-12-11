@@ -25,7 +25,7 @@
 	var/unarmed_type =           /datum/unarmed_attack
 	var/secondary_unarmed_type = /datum/unarmed_attack/bite
 
-	var/language                  // Default racial language, if any.
+	var/language = "Galactic Common" // Default racial language, if any.
 	// Default language is used when 'say' is used without modifiers.
 	var/default_language = "Galactic Common"
 	var/secondary_langs = list()  // The names of secondary languages that are available to this species.
@@ -101,6 +101,10 @@
 
 	if(unarmed_type) unarmed = new unarmed_type()
 	if(secondary_unarmed_type) secondary_unarmed = new secondary_unarmed_type()
+
+/datum/species/proc/get_random_name(var/gender)
+	var/datum/language/species_language = all_languages[language]
+	return species_language.get_random_name(gender)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
@@ -291,6 +295,11 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 	unarmed_type = /datum/unarmed_attack/punch
+	blurb = "An amphibious species, Skrell come from the star system known as Qerr'Vallis, which translates to 'Star of \
+	the royals' or 'Light of the Crown'.<br/><br/>Skrell are a highly advanced and logical race who live under the rule \
+	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
+	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
+	the secrets of their empire to their allies."
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
@@ -352,6 +361,10 @@
 		"eyes" =     /datum/organ/internal/eyes,
 		"stack" =    /datum/organ/internal/stack/vox
 		)
+
+/datum/species/vox/get_random_name(var/gender)
+	var/datum/language/species_language = all_languages[default_language]
+	return species_language.get_random_name(gender)
 
 /datum/species/vox/armalis
 	name = "Vox Armalis"

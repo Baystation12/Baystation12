@@ -17,6 +17,24 @@
 	var/list/syllables               // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55       // Likelihood of getting a space in the random scramble string.
 
+/datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4)
+	if(!syllables || !syllables.len)
+		if(gender==FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/full_name = ""
+	var/new_name = ""
+
+	for(var/i = 0;i<name_count;i++)
+		new_name = ""
+		for(var/x = rand(Floor(syllable_count/2),syllable_count);x>0;x--)
+			new_name += pick(syllables)
+		full_name += " [capitalize(lowertext(new_name))]"
+
+	return "[trim(full_name)]"
+
 /datum/language/proc/scramble(var/input)
 
 	if(!syllables || !syllables.len)
@@ -105,6 +123,13 @@
 	flags = WHITELISTED
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
+/datum/language/unathi/get_random_name()
+
+	var/new_name = ..()
+	while(findtextEx(new_name,"sss",1,null))
+		new_name = replacetext(new_name, "sss", "ss")
+	return capitalize(new_name)
+
 /datum/language/tajaran
 	name = "Siik'tajr"
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
@@ -119,6 +144,15 @@
 	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh")
 
+/datum/language/tajaran/get_random_name(var/gender)
+
+	var/new_name = ..(gender,1)
+	if(prob(80))
+		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
+	else
+		new_name += ..(gender,1)
+	return new_name
+
 /datum/language/skrell
 	name = "Skrellian"
 	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
@@ -128,7 +162,7 @@
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
-	syllables = list("wub","wub","wub","wub","wub","wub","wub","WUB","vwwwworp","SO-LET-THE-BEAT-DROP")
+	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/vox
 	name = "Vox-pidgin"
@@ -138,9 +172,12 @@
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
 	key = "5"
-	flags = RESTRICTED
+	flags = WHITELISTED
 	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
+
+/datum/language/vox/get_random_name()
+	return ..(FEMALE,1,6)
 
 /datum/language/diona
 	name = "Rootspeak"
@@ -152,6 +189,11 @@
 	key = "q"
 	flags = RESTRICTED
 	syllables = list("hs","zt","kr","st","sh")
+
+/datum/language/diona/get_random_name()
+	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
+	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
+	return new_name
 
 /datum/language/common
 	name = "Galactic Common"
