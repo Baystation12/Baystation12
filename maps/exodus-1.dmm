@@ -2986,7 +2986,7 @@
 "bfv" = (/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "bfw" = (/obj/machinery/alarm{pixel_y = 23},/obj/machinery/porta_turret,/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "bfx" = (/obj/machinery/flasher{pixel_x = 0; pixel_y = 24; id = "AI"},/obj/structure/cable/cyan{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
-"bfy" = (/obj/machinery/light/small{dir = 1},/obj/machinery/power/smes/buildable{charge = 5e+006},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
+"bfy" = (/obj/machinery/light/small{dir = 1},/obj/machinery/power/smes/buildable{charge = 5e+006; input_attempt = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "bfz" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/green,/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "bfA" = (/obj/machinery/porta_turret,/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
 "bfB" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/bluegrid,/area/turret_protected/ai)
