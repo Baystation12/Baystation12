@@ -66,7 +66,7 @@
 		sql_report_death(src)
 		ticker.mode.check_win()
 		if(istype(ticker.mode,/datum/game_mode/heist))
-			vox_kills++ //Bad vox. Shouldn't be killing humans.
+			raider_kills++ //Bad raider. Shouldn't be killing people.
 
 	return ..(gibbed,species.death_message)
 

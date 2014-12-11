@@ -20,6 +20,7 @@
 			break
 		additional_antag_types |= antag_id
 		i++
+
 	..()
 
 /datum/game_mode/calamity/check_victory()

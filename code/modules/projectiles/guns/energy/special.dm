@@ -95,7 +95,7 @@
 
 /obj/item/weapon/gun/energy/mindflayer
 	name = "mind flayer"
-	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
+	desc = "A custom-built weapon of some kind."
 	icon_state = "xray"
 	projectile_type = /obj/item/projectile/beam/mindflayer
 	fire_sound = 'sound/weapons/Laser.ogg'
