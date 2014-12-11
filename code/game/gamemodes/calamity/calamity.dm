@@ -14,7 +14,7 @@
 	votable = 0 //Remove after testing.
 
 	//Possible roundstart antag types.
-	var/list/atypes = list("syndi","ling","tater","wiz","ninja","vox","cult") //Readd slug when borer spawn is fixed.
+	var/list/atypes = list("syndi","ling","tater","wiz","ninja","raider","cult") //Readd slug when borer spawn is fixed.
 	var/list/chosen_atypes = list()
 	var/list/chosen_candidates = list()
 	var/list/already_assigned_candidates = list()
@@ -123,8 +123,8 @@
 					spawn_cabal(candidates)
 				if("ninja")
 					spawn_ninja(candidates)
-				if("vox")
-					spawn_vox_raiders(candidates)
+				if("raider")
+					spawn_raiders(candidates)
 				if("slug")
 					spawn_borers(candidates)
 				if("cult")
@@ -193,8 +193,8 @@
 			role_text = "Cabalist"
 		if("ninja")
 			role_text = "Ninja"
-		if("vox")
-			role_text = "Vox Raider"
+		if("raider")
+			role_text = "Raider"
 		if("slug")
 			role_text = "Cortical Borer"
 		if("cult")
@@ -228,7 +228,7 @@
 			possible_antags = get_players_for_role(BE_WIZARD)
 		if("ninja")
 			possible_antags = get_players_for_role(BE_NINJA)
-		if("vox")
+		if("raider")
 			possible_antags = get_players_for_role(BE_RAIDER)
 		if("slug")
 			possible_antags = get_players_for_role(BE_ALIEN)
@@ -369,10 +369,10 @@
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
 
-/datum/game_mode/calamity/proc/spawn_vox_raiders(var/list/candidates)
+/datum/game_mode/calamity/proc/spawn_raiders(var/list/candidates)
 
 	//Create objectives.
-	var/list/raid_objectives = forge_vox_objectives()
+	var/list/raid_objectives = forge_raid_objectives()
 
 	//Create raiders.
 	for(var/datum/mind/player in candidates)
@@ -389,8 +389,8 @@
 			player.objectives = raid_objectives
 
 		//Equip them.
-		create_vox(player)
-		greet_vox(player)
+		create_raider(player)
+		greet_raider(player)
 
 		player.current << "<b><font color='red'>Your crew is transporting cortical stacks and critical resources back to the Shoal.\
 		 No delay or concession can be tolerated. Even putting holes in the station pales in comparison to failure.</b></font>"

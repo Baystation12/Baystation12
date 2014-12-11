@@ -49,8 +49,8 @@
 			if("10")
 				log_admin("[key_name(usr)] has spawned a death squad.")
 			if("11")
-				log_admin("[key_name(usr)] has spawned vox raiders.")
-				if(!src.makeVoxRaiders())
+				log_admin("[key_name(usr)] has spawned raiders.")
+				if(!src.makeRaiders())
 					usr << "\red Unfortunately there weren't enough candidates available."
 	else if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
 		var/adminckey = href_list["dbsearchadmin"]

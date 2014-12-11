@@ -17,7 +17,7 @@ client/proc/one_click_antag()
 		<a href='?src=\ref[src];makeAntag=4'>Make Cult</a><br>
 		<a href='?src=\ref[src];makeAntag=5'>Make Malf AI</a><br>
 		<a href='?src=\ref[src];makeAntag=6'>Make Wizard (Requires Ghosts)</a><br>
-		<a href='?src=\ref[src];makeAntag=11'>Make Vox Raiders (Requires Ghosts)</a><br>
+		<a href='?src=\ref[src];makeAntag=11'>Make Raiders (Requires Ghosts)</a><br>
 		"}
 /* These dont work just yet
 	Ninja, aliens and deathsquad I have not looked into yet
@@ -432,7 +432,7 @@ client/proc/one_click_antag()
 
 	return new_syndicate_commando
 
-/datum/admins/proc/makeVoxRaiders()
+/datum/admins/proc/makeRaiders()
 
 	var/list/mob/dead/observer/candidates = list()
 	var/mob/dead/observer/theghost = null
@@ -444,7 +444,7 @@ client/proc/one_click_antag()
 	//Generates a list of candidates from active ghosts.
 	for(var/mob/dead/observer/G in player_list)
 		spawn(0)
-			switch(alert(G,"Do you wish to be considered for a vox raiding party arriving on the station?","Please answer in 30 seconds!","Yes","No"))
+			switch(alert(G,"Do you wish to be considered for a raiding party arriving on the station?","Please answer in 30 seconds!","Yes","No"))
 				if("Yes")
 					if((world.time-time_passed)>300)//If more than 30 game seconds passed.
 						return
@@ -463,26 +463,24 @@ client/proc/one_click_antag()
 	if(candidates.len)
 		var/max_raiders = 1
 		var/raiders = max_raiders
-		//Spawns vox raiders and equips them.
+		//Spawns raiders and equips them.
 		for (var/obj/effect/landmark/L in world)
 			if(L.name == "voxstart")
 				if(raiders<=0)
 					break
 
-				var/mob/living/carbon/human/new_vox = create_vox_raider(L, leader_chosen)
+				var/mob/living/carbon/human/new_raider = create_raider(L, leader_chosen)
 
 				while((!theghost || !theghost.client) && candidates.len)
 					theghost = pick(candidates)
 					candidates.Remove(theghost)
 
 				if(!theghost)
-					del(new_vox)
+					del(new_raider)
 					break
 
-				new_vox.key = theghost.key
-				new_vox << "\blue You are a Vox Primalis, fresh out of the Shoal. Your ship has arrived at a human-meat system hosting the NSV Exodus... or was it the Luna? NSS? Utopia? Nobody is really sure, who cares about stupid meat-names anyway? Everyone is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
-				new_vox << "\red Don't forget to turn on your nitrogen internals!"
-
+				new_raider.key = theghost.key
+				new_raider << "\blue You are a dastardly Raider, fresh out of lawless space. Your ship has arrived at a system hosting [station_name]. Everyone is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
 				raiders--
 			if(raiders > max_raiders)
 				return 0
@@ -490,40 +488,11 @@ client/proc/one_click_antag()
 		return 0
 	return 1
 
-/datum/admins/proc/create_vox_raider(obj/spawn_location, leader_chosen = 0)
-
-	var/mob/living/carbon/human/new_vox = new(spawn_location.loc, "Vox")
-
-	new_vox.gender = pick(MALE, FEMALE)
-	new_vox.h_style = "Short Vox Quills"
-	new_vox.regenerate_icons()
-
-	var/sounds = rand(2,10)
-	var/i = 0
-	var/newname = ""
-
-	while(i<=sounds)
-		i++
-		newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
-
-	new_vox.real_name = capitalize(newname)
-	new_vox.name = new_vox.real_name
-	new_vox.age = rand(12,20)
-
-	new_vox.dna.ready_dna(new_vox) // Creates DNA.
-	new_vox.dna.mutantrace = "vox"
-	new_vox.mind_initialize()
-	new_vox.mind.assigned_role = "MODE"
-	new_vox.mind.special_role = "Vox Raider"
-	new_vox.mutations |= NOCLONE //Stops the station crew from messing around with their DNA.
-
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-		var/datum/game_mode/heist/M = ticker.mode
-		if(new_vox.internal_organs_by_name["stack"])
-			cortical_stacks |= new_vox.internal_organs_by_name["stack"]
-			M.raiders[new_vox.mind] = new_vox.internal_organs_by_name["stack"]
-
-	ticker.mode.traitors += new_vox.mind
-	new_vox.equip_vox_raider()
-
-	return new_vox
+/datum/admins/proc/create_raider(obj/spawn_location, leader_chosen = 0)
+	var/mob/living/carbon/human/new_raider = new(spawn_location.loc)
+	new_raider.mind_initialize()
+	new_raider.mind.assigned_role = "MODE"
+	new_raider.mind.special_role = "Raider"
+	ticker.mode.traitors += new_raider.mind
+	new_raider.equip_raider()
+	return new_raider
