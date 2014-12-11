@@ -60,6 +60,9 @@
 	heat_capacity = 325000
 	intact = 0
 
+/turf/simulated/floor/engine/built
+	intact = 1
+
 /turf/simulated/floor/engine/nitrogen
 	oxygen = 0
 
