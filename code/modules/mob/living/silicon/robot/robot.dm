@@ -1031,9 +1031,9 @@ var/list/robot_verbs_default = list(
 
 
 /mob/living/silicon/robot/Topic(href, href_list)
-	if(usr != src)
-		return
 	if(..())
+		return
+	if(usr != src)
 		return
 
 	if (href_list["showalerts"])
