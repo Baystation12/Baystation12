@@ -44,6 +44,7 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
+	var/obj/item/robot_parts/RobotLimb
 
 /datum/organ/external/New(var/datum/organ/external/P)
 	if(P)
@@ -599,68 +600,82 @@ Note that amputating the affected organ does in fact remove the infection from t
 			O.droplimb(1, no_explode, showmessage, damage)
 
 		var/obj/organ	//Dropped limb object
+		if(istype(RobotLimb))
+			organ = RobotLimb
 		switch(body_part)
 			if(HEAD)
-				if(owner.species.flags & IS_SYNTHETIC)
-					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
-				else
-					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				if(!istype(organ))
+					if(owner.species.flags & IS_SYNTHETIC)
+						organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+					else
+						organ= new /obj/item/weapon/organ/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
 				owner.u_equip(owner.r_ear)
 				owner.u_equip(owner.wear_mask)
 			if(ARM_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_arm(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/r_arm(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
 			if(ARM_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ= new /obj/item/robot_parts/l_arm(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ= new /obj/item/robot_parts/l_arm(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_leg(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/r_leg(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_leg(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/l_leg(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_hand(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/r_hand(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_hand(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/l_hand(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_foot(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/r_foot(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_foot(owner.loc)
-				else
-					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/l_foot(owner.loc)
+					else
+						organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(LOWER_TORSO)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/groin(owner.loc)
+				if(!istype(organ))
+					if(status & ORGAN_ROBOT)
+						organ = new /obj/item/robot_parts/groin(owner.loc)
 		if (organ && istype(organ, /obj/item/robot_parts))
 			var/obj/item/robot_parts/robolimb = organ
 			robolimb.brute_dam = brute_dam
 			robolimb.burn_dam = burn_dam
+			robolimb.OnUninstall()
+		organ.loc = owner.loc
 		update_damages()
 		destspawn = 1
 		//Robotic limbs explode if sabotaged.
