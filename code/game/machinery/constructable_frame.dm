@@ -314,7 +314,7 @@ obj/item/weapon/circuitboard/rdserver
 	board_type = "machine"
 	origin_tech = "powerstorage=6;engineering=4"
 	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
-	req_components = list("/obj/item/weapon/smes_component/coil" = 1, "/obj/item/stack/cable_coil" = 30)
+	req_components = list("/obj/item/weapon/smees_coil" = 1, "/obj/item/stack/cable_coil" = 30)
 
 // Telecomms circuit boards:
 /obj/item/weapon/circuitboard/telecomms/receiver

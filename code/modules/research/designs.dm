@@ -206,7 +206,7 @@ datum/design/rcon_console
 	name = "Circuit Design (RCON Remote Control)"
 	desc = "Allows for the construction of circuit boards used to build a RCON Remote Control console."
 	id = "rcon_console"
-	req_tech = list("programming" = 3, "engineering" = 3, "powerstorage" = 2, "bluespace" = 1)
+	req_tech = list("programming" = 4, "engineering" = 3, "powerstorage" = 5)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/rcon_console
