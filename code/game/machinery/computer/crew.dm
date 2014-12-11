@@ -75,6 +75,8 @@
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc
+				if(H.w_uniform != C)
+					continue
 
 				var/list/crewmemberData = list()
 
@@ -84,18 +86,18 @@
 				crewmemberData["tox"] = round(H.getToxLoss(), 1)
 				crewmemberData["fire"] = round(H.getFireLoss(), 1)
 				crewmemberData["brute"] = round(H.getBruteLoss(), 1)
-				
+
 				crewmemberData["name"] = "Unknown"
-				crewmemberData["rank"] = "Unknown"				
+				crewmemberData["rank"] = "Unknown"
 				if(H.wear_id && istype(H.wear_id, /obj/item/weapon/card/id) )
 					var/obj/item/weapon/card/id/I = H.wear_id
-					crewmemberData["name"] = I.name	
+					crewmemberData["name"] = I.name
 					crewmemberData["rank"] = I.rank
 				else if(H.wear_id && istype(H.wear_id, /obj/item/device/pda) )
-					var/obj/item/device/pda/P = H.wear_id						
-					crewmemberData["name"] = (P.id ? P.id.name : "Unknown")				
+					var/obj/item/device/pda/P = H.wear_id
+					crewmemberData["name"] = (P.id ? P.id.name : "Unknown")
 					crewmemberData["rank"] = (P.id ? P.id.rank : "Unknown")
-					
+
 				var/area/A = get_area(H)
 				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
@@ -112,12 +114,12 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "crew_monitor.tmpl", "Crew Monitoring Computer", 900, 800)
-		
+
 		// adding a template with the key "mapContent" enables the map ui functionality
 		ui.add_template("mapContent", "crew_monitor_map_content.tmpl")
 		// adding a template with the key "mapHeader" replaces the map header content
 		ui.add_template("mapHeader", "crew_monitor_map_header.tmpl")
-				
+
 		ui.set_initial_data(data)
 		ui.open()
 
