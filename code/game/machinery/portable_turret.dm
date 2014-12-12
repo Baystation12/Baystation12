@@ -55,6 +55,8 @@
 
 	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
 
+	var/wrenching = 0
+
 /obj/machinery/porta_turret/stationary
 	lethal = 1
 	installation = /obj/item/weapon/gun/energy/laser
@@ -223,7 +225,7 @@
 		else
 			usr << "<span class='notice'>It has to be secured first!</span>"
 
-		updateUsrDialog()
+		attack_hand(usr)
 		return
 
 	switch(href_list["operation"])	//toggles customizable behavioural protocols
@@ -242,7 +244,7 @@
 			check_access = !check_access
 		if("checkxenos")
 			check_anomalies = !check_anomalies
-	updateUsrDialog()
+	attack_hand(usr)
 
 
 /obj/machinery/porta_turret/power_change()
@@ -288,19 +290,32 @@
 		sleep(60) //6 seconds for the traitor to gtfo of the area before the turret decides to ruin his shit
 		on = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 
-	else if((istype(I, /obj/item/weapon/wrench)) && (!on))
-		if(raised) return
+	else if((istype(I, /obj/item/weapon/wrench)))
+		if(on || raised)
+			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			return
+		if(wrenching)
+			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"
+			return
+		if(!anchored && isinspace())
+			user << "<span class='warning'>Cannot secure turrets in space!</span>"
+			return
 
+		user.visible_message( \
+				"<span class='warning'>[user] begins [anchored ? "un" : ""]securing the turret.</span>", \
+				"<span class='notice'>You begin [anchored ? "un" : ""]securing the turret.</span>" \
+			)
+
+		wrenching = 1
 		if(do_after(user, 50))
 			//This code handles moving the turret around. After all, it's a portable turret!
-			if(!anchored && !isinspace())
+			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 1
 				invisibility = INVISIBILITY_LEVEL_TWO
 				update_icon()
 				user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
-				cover = new /obj/machinery/porta_turret_cover(loc) //create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
-				cover.Parent_Turret = src //make the cover's parent src
+				create_cover()
 			else if(anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 0
@@ -308,6 +323,7 @@
 				invisibility = 0
 				update_icon()
 				del(cover) //deletes the cover, and the turret instance itself becomes its own cover. - qdel
+		wrenching = 0
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
 		//Behavior lock/unlock mangement
@@ -348,7 +364,7 @@
 			spawn()
 				sleep(60)
 				attacked = 0
-	
+
 	..()
 
 	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -395,7 +411,10 @@
 	update_icon()
 	del(cover)	//deletes the cover - no need on keeping it there! - del
 
-
+/obj/machinery/porta_turret/proc/create_cover()
+	if(cover == null && anchored)
+		cover = new /obj/machinery/porta_turret_cover(loc)	//if the turret has no cover and is anchored, give it a cover
+		cover.Parent_Turret = src	//assign the cover its Parent_Turret, which would be this (src)
 
 /obj/machinery/porta_turret/process()
 	//the main machinery process
@@ -406,9 +425,7 @@
 		if(stat & BROKEN)	//if the turret is borked
 			del(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug - qdel
 		else
-
-			cover = new /obj/machinery/porta_turret_cover(loc)	//if the turret has no cover and is anchored, give it a cover
-			cover.Parent_Turret = src	//assign the cover its Parent_Turret, which would be this (src)
+			create_cover()
 
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
@@ -840,11 +857,6 @@
 	density = 0
 	var/obj/machinery/porta_turret/Parent_Turret = null
 
-
-//The below code is pretty much just recoded from the initial turret object. It's necessary but uncommented because it's exactly the same!
-//>necessary
-//I'm not fixing it because i'm fucking bored of this code already, but someone should just reroute these to the parent turret's procs.
-
 /obj/machinery/porta_turret_cover/attack_ai(mob/user)
 	return attack_hand(user)
 
@@ -853,7 +865,6 @@
 
 /obj/machinery/porta_turret_cover/Topic(href, href_list)
 	Parent_Turret.Topic(href, href_list, 1)	// Calling another object's Topic requires that we claim to not have a window, otherwise BYOND's base proc will runtime.
-	updateUsrDialog()
 
 /obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user)
 	Parent_Turret.attackby(I, user)
