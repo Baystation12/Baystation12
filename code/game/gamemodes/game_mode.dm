@@ -154,16 +154,16 @@
 	var/pltext = "<font size=2><b>Player list:</b></font>"
 
 	for(var/mob/M in player_list)
-		if(M.mind)
+		if(M.mind && M.mind.name && (M.mind.assigned_role || M.mind.special_role))
 			pltext += print_player_lite(M.mind)
 		if(M.client)
 			clients++
 			if(ishuman(M))
-				if(!M.stat)
+				if(M.stat != DEAD)
 					surviving_humans++
 					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 						escaped_humans++
-			if(!M.stat)
+			if(M.stat != DEAD)
 				surviving_total++
 				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 					escaped_total++
