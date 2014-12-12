@@ -154,9 +154,9 @@
 			helmet.loc = get_turf(src)
 			src.helmet = null
 		else if (boots)
-			user << "You detatch \the [helmet] from \the [src]'s helmet mount."
-			helmet.loc = get_turf(src)
-			src.helmet = null
+			user << "You detatch \the [boots] from \the [src]'s boot mounts."
+			boots.loc = get_turf(src)
+			src.boots = null
 		else
 			user << "\The [src] does not have anything installed."
 		return
