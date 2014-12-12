@@ -225,28 +225,38 @@
 		ReplaceWithLattice()
 	return 0
 
+/turf/simulated/wall
+	var/hulk_destroy_prob = 40
+	var/hulk_take_damage = 1
+	var/rotting_destroy_touch = 1
+	var/rotting_touch_message = "\blue The wall crumbles under your touch."
+
 //Interactions
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
-		if (prob(40) || rotting)
+		if (prob(hulk_destroy_prob) || rotting)
 			usr << text("\blue You smash through the wall.")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 			dismantle_wall(1)
-			return
+			return 1
 		else
 			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
+			if(hulk_take_damage)
+				take_damage(rand(25, 75))
+			return 1
 
 	if(rotting)
-		user << "\blue The wall crumbles under your touch."
-		dismantle_wall()
-		return
+		user << rotting_touch_message
+		if(rotting_destroy_touch)
+			dismantle_wall()
+		return 1
+
+	if(..()) return 1
 
 	user << "\blue You push the wall but nothing happens!"
 	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
-	return
+	return 0
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
