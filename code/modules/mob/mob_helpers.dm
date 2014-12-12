@@ -535,7 +535,10 @@ proc/is_blind(A)
 			if(M.mind && M.mind.name)
 				name = M.mind.name
 			if(M.real_name && M.real_name != name)
-				name += " ([M.real_name])"
+				if(name)
+					name += " ([M.real_name])"
+				else
+					name = M.real_name
 		if(!name)
 			name = (C.holder && C.holder.fakekey) ? C.holder.fakekey : C.key
 		if(joined_ghosts)
