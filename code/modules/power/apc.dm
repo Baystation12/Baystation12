@@ -178,6 +178,10 @@
 		del(cell) // qdel
 	if(terminal)
 		disconnect_terminal()
+	
+	//If there's no more APC then there shouldn't be a cause for alarm I guess
+	area.poweralert(1, src) //so that alarms don't go on forever
+	
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()

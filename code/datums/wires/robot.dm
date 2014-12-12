@@ -51,36 +51,17 @@ var/const/BORG_WIRE_CAMERA = 16
 
 
 /datum/wires/robot/UpdatePulsed(var/index)
-
 	var/mob/living/silicon/robot/R = holder
 	switch(index)
 		if (BORG_WIRE_AI_CONTROL) //pulse the AI wire to make the borg reselect an AI
 			if(!R.emagged)
-				var/new_ai = select_active_ai(R)
+				var/mob/living/silicon/ai/new_ai = select_active_ai(R)
 				if(new_ai && (new_ai != R.connected_ai))
+					R.connected_ai.connected_robots -= src
 					R.connected_ai = new_ai
+					new_ai.connected_robots += src
 					R.notify_ai(1)
-				var/numberer = 1  // Send images the Cyborg has taken to the AI's album upon sync.
-				for(var/datum/picture/z in R.aiCamera.aipictures)
-					if(R.connected_ai.aiCamera.aipictures.len == 0)
-						var/datum/picture/p = new/datum/picture()
-						p = z
-						p.fields["name"] = "Uploaded Image [numberer] (synced from [R.name])"
-						R.connected_ai.aiCamera.aipictures += p
-						numberer++
-						continue
-					for(var/datum/picture/t in R.connected_ai.aiCamera.aipictures) //Hopefully to prevent someone spamming images to silicons, by spamming this wire
-						if((z.fields["pixel_y"] != t.fields["pixel_y"]) && (z.fields["pixel_x"] != t.fields["pixel_x"])) //~2.26 out of 1000 chance this will stop something it shouldn't
-							var/datum/picture/p = new/datum/picture()
-							p = z
-							p.fields["name"] = "Uploaded Image [numberer] (synced from [R.name])"
-							R.connected_ai.aiCamera.aipictures += p
-						else
-							continue
-					numberer++
-				if(R.aiCamera.aipictures.len > 0)
-					R << "<span class='notice'>Locally saved images synced with AI. Images were retained in local database in case of loss of connection with the AI.</span>"
-
+					R.sync()
 		if (BORG_WIRE_CAMERA)
 			if(!isnull(R.camera) && R.camera.can_use() && !R.scrambledcodes)
 				R.camera.kick_viewers() // Kick anyone watching the Cyborg's camera

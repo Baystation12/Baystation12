@@ -1,11 +1,11 @@
 /datum/event/radiation_storm
-	var/const/enterBelt 	= 60
-	var/const/leaveBelt 	= 170
-	var/const/revokeAccess	= 230
-
-	endWhen				= revokeAccess
-
-	var/postStartTicks
+	var/const/enterBelt		= 30
+	var/const/radIntervall 	= 5	// Enough time between enter/leave belt for 10 hits, as per original implementation
+	var/const/leaveBelt		= 80
+	var/const/revokeAccess	= 135
+	announceWhen			= 1
+	endWhen					= revokeAccess
+	var/postStartTicks 		= 0
 
 /datum/event/radiation_storm/announce()
 	command_announcement.Announce("High levels of radiation detected near the station. Please evacuate into one of the shielded maintenance tunnels.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
@@ -18,10 +18,10 @@
 		command_announcement.Announce("The station has entered the radiation belt. Please remain in a sheltered area until we have passed the radiation belt.", "Anomaly Alert")
 		radiate()
 
-	if(activeFor > enterBelt && activeFor < leaveBelt)
+	if(activeFor >= enterBelt && activeFor <= leaveBelt)
 		postStartTicks++
 
-	if(postStartTicks == 10)
+	if(postStartTicks == radIntervall)
 		postStartTicks = 0
 		radiate()
 
