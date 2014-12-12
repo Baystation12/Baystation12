@@ -380,7 +380,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Medical crate"
 	group = "Medical"
 
-/datum/supply_packs/medical
+/datum/supply_packs/bloodpack
 	name = "BloodPack crate"
 	contains = list(/obj/item/weapon/storage/box/bloodpacks,
                     /obj/item/weapon/storage/box/bloodpacks,

@@ -43,11 +43,11 @@
 	if(href_list["copy"])
 		if(stat & (BROKEN|NOPOWER))
 			return
-		
+
 		for(var/i = 0, i < copies, i++)
 			if(toner <= 0)
 				break
-			
+
 			if (istype(copyitem, /obj/item/weapon/paper))
 				copy(copyitem)
 				sleep(15)
@@ -60,7 +60,7 @@
 			else
 				usr << "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>"
 				break
-			
+
 			use_power(active_power_usage)
 		updateUsrDialog()
 	else if(href_list["remove"])
@@ -81,19 +81,18 @@
 	else if(href_list["aipic"])
 		if(!istype(usr,/mob/living/silicon)) return
 		if(stat & (BROKEN|NOPOWER)) return
-		
+
 		if(toner >= 5)
 			var/mob/living/silicon/tempAI = usr
 			var/obj/item/device/camera/siliconcam/camera = tempAI.aiCamera
 
 			if(!camera)
 				return
-			var/datum/picture/selection = camera.selectpicture()
+			var/obj/item/weapon/photo/selection = camera.selectpicture()
 			if (!selection)
 				return
 
-			var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
-			p.construct(selection)
+			var/obj/item/weapon/photo/p = photocopy(selection)
 			if (p.desc == "")
 				p.desc += "Copied by [tempAI.name]"
 			else
@@ -195,6 +194,7 @@
 
 /obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy)
 	var/obj/item/weapon/photo/p = photocopy.copy()
+	p.loc = src.loc
 
 	var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 	if(toner > 10)	//plenty of toner, go straight greyscale
@@ -210,6 +210,7 @@
 	if(toner < 0)
 		toner = 0
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
+
 	return p
 
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
@@ -220,7 +221,7 @@
 			toner = 0
 			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 			break
-		
+
 		if(istype(W, /obj/item/weapon/paper))
 			W = copy(W)
 		else if(istype(W, /obj/item/weapon/photo))

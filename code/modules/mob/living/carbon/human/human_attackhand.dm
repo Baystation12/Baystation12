@@ -101,7 +101,7 @@
 			if(!attack.is_usable(H))
 				return 0
 
-			var/damage = rand(1, 5) + attack.damage
+			var/damage = rand(1, 5)
 			var/block = 0
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
@@ -110,7 +110,7 @@
 			switch(src.a_intent)
 				if("help")
 					// We didn't see this coming, so we get the full blow
-					damage = attack.damage
+					damage = 5
 					accurate = 1
 				if("hurt", "grab")
 					// We're in a fighting stance, there's a chance we block
@@ -128,21 +128,29 @@
 			var/miss_type = 0
 			var/attack_message
 			if(!accurate)
-				/*
-					This is kind of convoluted, but it seems to break down like this:
-					(note that the chance to miss is exaggerated here since ran_zone() might roll "chest"
+				/* ~Hubblenaut
+					This place is kind of convoluted and will need some explaining.
+					ran_zone() will pick out of 11 zones, thus the chance for hitting
+					our target where we want to hit them is circa 9.1%.
+
+					Now since we want to statistically hit our target organ a bit more
+					often than other organs, we add a base chance of 20% for hitting it.
+
+					This leaves us with the following chances:
 
 					If aiming for chest:
-						80% chance you hit your target
-						17% chance you hit a random zone
-						3% chance you miss
+						27.3% chance you hit your target organ
+						70.5% chance you hit a random other organ
+						 2.2% chance you miss
 
 					If aiming for something else:
-						68% chance you hit your target
-						17% chance you hit a random zone
-						15% chance you miss
+						23.2% chance you hit your target organ
+						56.8% chance you hit a random other organ
+						15.0% chance you miss
 
-					Why don't we just use get_zone_with_miss_chance() ???
+					Note: We don't use get_zone_with_miss_chance() here since the chances
+						  were made for projectiles.
+					TODO: proc for melee combat miss chances depending on organ?
 				*/
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
@@ -163,14 +171,17 @@
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
 			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]ed"] by [H.name] ([H.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]"] by [H.name] ([H.ckey])</font>")
 			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"] [key_name(src)]")
 
 			if(miss_type)
 				return 0
 
+			damage += attack.damage // Adding species attack base damage
+			damage *= damage_multiplier
 			if(HULK in H.mutations)
-				damage *= 2 // Hulks do twice the damage)
+				damage *= 2 // Hulks do twice the damage
+			damage = max(1, damage)
 
 			var/armour = run_armor_check(affecting, "melee")
 			// Apply additional unarmed effects.

@@ -55,9 +55,7 @@
 	if(!alarm_on)
 		triggerCameraAlarm()
 	
-	spawn(50)
-		src = null
-		cancelCameraAlarm() //so camera alarms don't just go on forever
+	cancelCameraAlarm()
 	..()
 
 /obj/machinery/camera/emp_act(severity)
