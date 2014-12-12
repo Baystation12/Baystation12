@@ -221,6 +221,7 @@ datum/controller/vote
 								gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 								break
+					gamemode_names["secret"] = "Secret"
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
