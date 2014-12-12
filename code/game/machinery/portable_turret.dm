@@ -348,7 +348,7 @@
 			spawn()
 				sleep(60)
 				attacked = 0
-	
+
 	..()
 
 	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
@@ -445,6 +445,9 @@
 			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
+		return TURRET_NOT_TARGET
+
 	if(!L)
 		return TURRET_NOT_TARGET
 
@@ -464,7 +467,7 @@
 
 	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
-			return TURRET_SECONDARY_TARGET
+			return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 		return TURRET_PRIORITY_TARGET
 
 	if(iscuffed(L)) // If the target is handcuffed, leave it alone
@@ -480,7 +483,7 @@
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
-		return TURRET_SECONDARY_TARGET
+		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
