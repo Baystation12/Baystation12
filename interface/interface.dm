@@ -47,8 +47,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \tr = throw
 \tt = say
 \t5 = emote
-\tx = swap-hand (or y)
-\tz = activate held object
+\tx = swap-hand
+\tz = activate held object (or y)
 \tf = cycle-intents-left
 \tg = cycle-intents-right
 \t1 = help-intent
