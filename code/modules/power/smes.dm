@@ -111,7 +111,6 @@
 
 
 /obj/machinery/power/smes/process()
-
 	if(stat & BROKEN)	return
 
 	//store machine state to see if we need to update the icon overlays
@@ -141,7 +140,7 @@
 		add_avail(output_used)				// add output to powernet (smes side)
 
 		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting = 0
+			outputting(0)
 			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 	else if(output_attempt && charge > output_level && output_level > 0)
 		outputting = 1
@@ -321,19 +320,8 @@
 
 
 /obj/machinery/power/smes/Topic(href, href_list)
-	..()
-
-	if (usr.stat || usr.restrained() )
-		return
-	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		if(!istype(usr, /mob/living/silicon/ai))
-			usr << "\red You don't have the dexterity to do this!"
-			return
-
-//world << "[href] ; [href_list[href]]"
-
-	if (!istype(src.loc, /turf) && !istype(usr, /mob/living/silicon/))
-		return 0 // Do not update ui
+	if(..())
+		return 1
 
 	if( href_list["cmode"] )
 		inputting(!inputting)
