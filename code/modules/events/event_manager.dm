@@ -262,13 +262,14 @@
 			return
 		if(alert("This will add a new event to the rotation. Continue?","Add Event!","Yes","No") != "Yes")
 			return
+		new_event.severity = selected_event_container.severity
 		selected_event_container.available_events += new_event
 		admin_log_and_message_admins("has added \a [severity_to_string[new_event.severity]] event '[new_event.name]' of type [new_event.event_type] with weight [new_event.weight].")
 		new_event = new
 	else if(href_list["clear"])
 		var/datum/event_container/EC = locate(href_list["clear"])
 		if(EC.next_event)
-			admin_log_and_message_admins("has unqueued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
+			admin_log_and_message_admins("has dequeued the [severity_to_string[EC.severity]] event '[EC.next_event.name]'.")
 			EC.next_event = null
 
 	Interact(usr)
