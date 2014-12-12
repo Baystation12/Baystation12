@@ -1603,6 +1603,24 @@ var/list/ghostteleportlocs = list()
 	name = "Server Room"
 	icon_state = "server"
 
+//Lift
+
+/area/lift
+	name = "Lift Shaft"
+	icon_state = "lift"
+	requires_power = 0
+	luminosity = 1
+
+/area/lift/ground
+	name = "Civlian Level"
+
+/area/lift/upper
+	name = "Command Level"
+
+/area/lift/lower
+	name = "Basement Level"
+
+
 //Storage
 
 /area/storage/tools
