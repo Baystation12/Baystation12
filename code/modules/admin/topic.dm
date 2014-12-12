@@ -1651,10 +1651,17 @@
 		var/mob/living/carbon/human/H = locate(href_list["CentcommFaxReply"])
 		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
+		var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
+		if(!inputsubject)	return
+
+		var/inputmessage = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!inputmessage)	return
+
+		var/inputsigned = input(src.owner, "Please enter Centcom Offical name.", "Outgoing message from Centcomm", "") as text|null
+		if(!inputsigned)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+		var/input = "<center><b>NanoTrasen Fax Network</b></center><hr><center>RE: [inputsubject]</center><hr>[inputmessage]<hr><b>Signed:</b> <i>[inputsigned]</i>"
 
 		for(var/obj/machinery/faxmachine/F in machines)
 			if(F == fax)
@@ -1693,10 +1700,17 @@
 		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
 		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!input)	return
+		var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
+		if(!inputsubject)	return
+
+		var/inputmessage = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!inputmessage)	return
+
+		var/inputsigned = input(src.owner, "Please enter Centcom Offical name.", "Outgoing message from Centcomm", "") as text|null
+		if(!inputsigned)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+		var/input = "<center><b>Sol Government Fax Network</b></center><hr><center>RE: [inputsubject]</center><hr>[inputmessage]<hr><b>Signed:</b> <i>[inputsigned]</i>"
 
 		for(var/obj/machinery/faxmachine/F in machines)
 			if(F == fax)

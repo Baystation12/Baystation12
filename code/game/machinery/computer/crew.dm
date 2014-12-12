@@ -138,6 +138,7 @@
 /obj/machinery/computer/crew/proc/scan()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
+			if (H.iscorpse == 1) continue
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C
