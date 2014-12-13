@@ -11,14 +11,19 @@
 //	weight = 1.0E8
 
 /obj/item/weapon/circuitboard
-	density = 0
-	anchored = 0
-	w_class = 2.0
-	name = "Circuit board"
+	name = "circuit board"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "id_mod"
 	item_state = "electronic"
 	origin_tech = "programming=2"
+	density = 0
+	anchored = 0
+	w_class = 2.0
+	flags = FPRINT | TABLEPASS | CONDUCT
+	force = 5.0
+	throwforce = 5.0
+	throw_speed = 3
+	throw_range = 15
 	var/build_path = null
 	var/board_type = "computer"
 	var/list/req_components = null
