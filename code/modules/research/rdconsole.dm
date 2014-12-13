@@ -576,6 +576,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += (t_disk || d_disk) ? (t_disk ? "technology storage disk" : "design storage disk") : "none"
 			dat += "<HR><UL>"
 			dat += "<LI><A href='?src=\ref[src];menu=1.1'>Current Research Levels</A>"
+			dat += "<LI><A href='?src=\ref[src];menu=5.0'>View Researched Technologies</A>"
 			if(t_disk)
 				dat += "<LI><A href='?src=\ref[src];menu=1.2'>Disk Operations</A>"
 			else if(d_disk)
@@ -892,6 +893,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				dat += "</LI>"
 			dat += "</UL>"
 
+		///////////////////Research Information Browser////////////////////
+		if(5.0)
+			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
+			dat += "List of Researched Technologies and Designs:"
+			dat += "<UL>"
+			for(var/datum/design/D in files.known_designs)
+				if(D.build_path)
+					dat += "<LI><B>[D.name]</B>: [D.desc]</LI>"
+			dat += "</UL>"
+			
 
 	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
