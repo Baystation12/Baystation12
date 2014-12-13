@@ -221,6 +221,7 @@
 	colour = "rough"
 	key = "1"
 	flags = RESTRICTED
+ 	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
@@ -257,6 +258,7 @@
 	exclaim_verb = "hisses"
 	key = "4"
 	flags = RESTRICTED
+	syllables = list("sss","sSs","SSS")
 
 /datum/language/xenos
 	name = "Hivemind"
