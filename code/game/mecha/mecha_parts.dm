@@ -352,17 +352,11 @@
 ///////// Circuitboards
 
 /obj/item/weapon/circuitboard/mecha
-	name = "Exosuit Circuit board"
+	name = "exosuit circuit board"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_mod"
 	item_state = "electronic"
 	board_type = "other"
-	flags = FPRINT | TABLEPASS | CONDUCT
-	force = 5.0
-	w_class = 2.0
-	throwforce = 5.0
-	throw_speed = 3
-	throw_range = 15
 
 /obj/item/weapon/circuitboard/mecha/ripley
 		origin_tech = "programming=3"
