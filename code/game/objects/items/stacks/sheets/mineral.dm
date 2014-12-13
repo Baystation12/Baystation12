@@ -140,6 +140,7 @@ obj/item/stack/sheet/mineral/iron/New()
 	name = "plastic sheets"
 	icon_state = "sheet-plastic"
 	perunit = 2000
+	stacktype = /obj/item/stack/sheet/mineral/plastic
 
 /obj/item/stack/sheet/mineral/gold
 	name = "gold"

@@ -16,9 +16,12 @@
 	var/singular_name
 	var/amount = 1
 	var/max_amount //also see stack recipes initialisation, param "max_res_amount" must be equal to this max_amount
+	var/stacktype //determines whether different stack types can merge
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
+	if (!stacktype)
+		stacktype = type
 	if (amount)
 		src.amount = amount
 	return
@@ -184,7 +187,7 @@
 	for (var/obj/item/stack/item in usr.loc)
 		if (item==oldsrc)
 			continue
-		if (!istype(item, oldsrc.type))
+		if (item.stacktype != oldsrc.stacktype)
 			continue
 		if (item.amount>=item.max_amount)
 			continue
@@ -192,6 +195,23 @@
 		usr << "You add new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."
 		if(!oldsrc)
 			break
+
+//attempts to transfer amount to S, and returns the amount actually transferred
+/obj/item/stack/proc/transfer_to(obj/item/stack/S, var/tamount=null)
+	if (stacktype != S.stacktype)
+		return 0
+	if (isnull(tamount))
+		tamount = src.amount
+	
+	var/transfer = min(tamount, src.amount, (S.max_amount - S.amount))
+
+	if (transfer)
+		if (prob(transfer/src.amount *100))
+			S.copy_evidences(src) //have to do this before use() is called, unfortunately
+		if (oldsrc.use(transfer))
+			S.add(transfer)
+	
+	return transfer
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
@@ -209,28 +229,27 @@
 
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if (istype(W, src.type))
+	if (istype(W, /var/obj/item/stack))
 		var/obj/item/stack/S = W
-		if (S.amount >= max_amount)
-			return 1
-		var/to_transfer as num
-		if (user.get_inactive_hand()==src)
-			to_transfer = 1
+		
+		var/obj/item/stack/oldsrc = src
+		src = null
+		if (user.get_inactive_hand()==oldsrc)
+			oldsrc.transfer_to(S, 1)
 		else
-			to_transfer = min(src.amount, S.max_amount-S.amount)
-		S.add(to_transfer)
+			oldsrc.transfer_to(S)
+		
 		if (S && usr.machine==S)
 			spawn(0) S.interact(usr)
-		src.use(to_transfer)
-		if (src && usr.machine==src)
-			spawn(0) src.interact(usr)
+		if (oldsrc && usr.machine==oldsrc)
+			spawn(0) oldsrc.interact(usr)
 	else return ..()
 
 /obj/item/stack/proc/copy_evidences(obj/item/stack/from as obj)
-	src.blood_DNA = from.blood_DNA
-	src.fingerprints  = from.fingerprints
-	src.fingerprintshidden  = from.fingerprintshidden
-	src.fingerprintslast  = from.fingerprintslast
+	src.blood_DNA |= from.blood_DNA
+	src.fingerprints  |= from.fingerprints
+	src.fingerprintshidden |= from.fingerprintshidden
+	src.fingerprintslast = from.fingerprintslast
 	//TODO bloody overlay
 
 /*
