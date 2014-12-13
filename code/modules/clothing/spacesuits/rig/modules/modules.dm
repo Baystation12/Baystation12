@@ -147,7 +147,7 @@
 		usr << "<span class='warning'>The suit is not initialized.</span>"
 		return 0
 
-	if(holder.security_check_enabled && !(istype(usr,/mob/living/silicon) || holder.allowed(usr)))
+	if(holder.security_check_enabled && !holder.check_suit_access(usr))
 		usr << "<span class='danger'>Access denied.</span>"
 		return
 

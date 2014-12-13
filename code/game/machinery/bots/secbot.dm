@@ -643,6 +643,9 @@ Auto Patrol: []"},
 		return
 	src.anchored = 0
 	for(var/mob/living/M in view(search_range,src)) //Let's find us a criminal
+		if(M.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
+			continue
+
 		if(istype(M, /mob/living/carbon))
 			var/mob/living/carbon/C = M
 			if(C.stat || C.handcuffed)
