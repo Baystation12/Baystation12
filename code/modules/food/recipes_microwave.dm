@@ -878,7 +878,7 @@ I said no!
 
 /datum/recipe/poppypretzel
 	items = list(
-		/obj/item/seeds/poppyseed,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/poppy,
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/poppypretzel

@@ -7,7 +7,6 @@
 	desc = "A suit worn by the commander of a NanoTrasen Emergency Response Team. Has blue highlights. Armoured and space ready."
 	suit_type = "ERT commander"
 	icon_state = "ert_commander_rig"
-	siemens_coefficient = 0.6
 	offline_slowdown = 3
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
