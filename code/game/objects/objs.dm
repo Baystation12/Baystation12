@@ -16,6 +16,12 @@
 	var/damtype = "brute"
 	var/force = 0
 
+/obj/New()
+	..()
+	// If the game is already underway initialize will no longer be called for us
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
+
 /obj/Topic(href, href_list, var/nowindow = 0)
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(nowindow)

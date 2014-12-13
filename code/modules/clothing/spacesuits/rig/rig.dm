@@ -595,6 +595,8 @@
 						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
+						use_obj.loc = get_turf(src)
+						use_obj.dropped()
 						use_obj.canremove = 0
 						use_obj.loc = src
 
@@ -648,10 +650,10 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
 
-/obj/item/weapon/rig/dropped()
+/obj/item/weapon/rig/dropped(var/mob/user)
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
-		toggle_piece(piece, wearer, ONLY_RETRACT)
+		toggle_piece(piece, user, ONLY_RETRACT)
 	wearer = null
 
 //Todo
