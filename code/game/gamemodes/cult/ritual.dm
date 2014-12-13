@@ -331,11 +331,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 
 		if(istype(M,/mob/dead))
 			var/mob/dead/D = M
-			D.manifest()
-			user.visible_message( \
-				"\red [user] drags the ghost to our plan of reality!", \
-				"\red You drag the ghost to our plan of reality!" \
-			)
+			D.manifest(user)
 			return
 		if(!istype(M))
 			return

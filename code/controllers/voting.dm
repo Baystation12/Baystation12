@@ -221,6 +221,7 @@ datum/controller/vote
 								gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 								additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 								break
+					gamemode_names["secret"] = "Secret"
 				if("crew_transfer")
 					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
@@ -309,11 +310,16 @@ datum/controller/vote
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
 				. += "<tr>"
-				if(current_votes[C.ckey] == i)
-					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+				if(mode == "gamemode")
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
 				else
-					. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
-
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 				if (additional_text.len >= i)
 					. += additional_text[i]
 				. += "</tr>"
