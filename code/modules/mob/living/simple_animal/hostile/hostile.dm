@@ -89,17 +89,17 @@
 /mob/living/simple_animal/hostile/proc/AttackingTarget()
 	if(!Adjacent(target_mob))
 		return
-	//if(isliving(target_mob))
-		//var/mob/living/L = target_mob
-		//L.attack_animal(src)
-		//return L
-	//if(istype(target_mob,/obj/mecha))
-		//var/obj/mecha/M = target_mob
-		//M.attack_animal(src)
-		//return M
-	//if(istype(target_mob,/obj/machinery/bot))
-		//var/obj/machinery/bot/B = target_mob
-		//B.attack_animal(src)
+	if(isliving(target_mob))
+		var/mob/living/L = target_mob
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		return L
+	if(istype(target_mob,/obj/mecha))
+		var/obj/mecha/M = target_mob
+		M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		return M
+	if(istype(target_mob,/obj/machinery/bot))
+		var/obj/machinery/bot/B = target_mob
+		B.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -193,10 +193,10 @@
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
 	if(prob(break_stuff_probability))
 		for(var/dir in cardinal) // North, South, East, West
-			//for(var/obj/structure/window/obstacle in get_step(src, dir))
-				//if(obstacle.dir == reverse_dir[dir]) // So that windows get smashed in the right order
-					//obstacle.attack_animal(src)
-					//return
-			//var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
-			//if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
-				//obstacle.attack_animal(src)
+			for(var/obj/structure/window/obstacle in get_step(src, dir))
+				if(obstacle.dir == reverse_dir[dir]) // So that windows get smashed in the right order
+					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+					return
+			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, dir))
+			if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
+				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)

@@ -965,7 +965,7 @@
 "sC" = (/turf/simulated/floor/airless{icon_state = "asteroidwarning"; dir = 1},/area/mine/explored)
 "sD" = (/turf/simulated/mineral/random/high_chance,/area/mine/explored)
 "sE" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating/airless/asteroid,/area/mine/explored)
-"sF" = (/turf/simulated/floor/airless/catwalk{icon_state = "catwalk12"},/area/space)
+"sF" = (/turf/simulated/floor/airless,/area/space)
 "sG" = (/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/turf/simulated/floor/plating/airless{icon_state = "asteroidplating"},/area/mine/explored)
 "sH" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor/plating/airless{icon_state = "asteroidplating"},/area/mine/explored)
 "sI" = (/turf/simulated/mineral/random,/area/space)
