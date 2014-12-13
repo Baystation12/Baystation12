@@ -338,7 +338,7 @@
 				is_buckled = 1
 		else
 			is_buckled = 0
-	if( is_buckled || !A || !x || !y || !A.x || !A.y || (stat && !isobserver(src))) return
+	if(!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return

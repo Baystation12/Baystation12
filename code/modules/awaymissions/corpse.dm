@@ -139,7 +139,7 @@
 	name = "Doctor"
 	corpseradio = /obj/item/device/radio/headset/headset_med
 	corpseuniform = /obj/item/clothing/under/rank/medical
-	corpsesuit = /obj/item/clothing/suit/storage/labcoat
+	corpsesuit = /obj/item/clothing/suit/storage/toggle/labcoat
 	corpseback = /obj/item/weapon/storage/backpack/medic
 	corpsepocket1 = /obj/item/device/flashlight/pen
 	corpseshoes = /obj/item/clothing/shoes/black
