@@ -218,10 +218,10 @@
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
-	colour = "rough"
+	colour = "solcom"
 	key = "1"
 	flags = RESTRICTED
- 	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
+	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
