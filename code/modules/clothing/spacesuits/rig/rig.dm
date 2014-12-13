@@ -278,7 +278,7 @@
 			module.deactivate()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
-		if(canremove && (flags & AIRTIGHT))
+		if(canremove)
 			piece.flags &= ~STOPSPRESSUREDMAGE
 			piece.flags &= ~AIRTIGHT
 		else
