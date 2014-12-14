@@ -1,5 +1,5 @@
 /obj/machinery/computer/rcon
-	name = "RCON Console"
+	name = "\improper RCON remote control console"
 	desc = "Console used to remotely control machinery on the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"

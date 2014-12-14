@@ -2,8 +2,8 @@
 
 //Construction Items
 /obj/item/weapon/smes_coil
-	name = "Superconductive Magnetic Coil"
-	desc = "Heavy duty superconducting magnetic coil, mainly used in construction of SMES units."
+	name = "superconductive magnetic coil"
+	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = 4.0 						// It's LARGE (backpack size)

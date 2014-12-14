@@ -116,7 +116,7 @@
 	build_path = /obj/machinery/computer/scan_consolenew
 	origin_tech = "programming=2;biotech=2"
 /obj/item/weapon/circuitboard/communications
-	name = T_BOARD("communications console")
+	name = T_BOARD("command and communications console")
 	build_path = /obj/machinery/computer/communications
 	origin_tech = "programming=2;magnets=2"
 /obj/item/weapon/circuitboard/card
@@ -126,7 +126,7 @@
 	name = T_BOARD("CentCom ID card modification console")
 	build_path = /obj/machinery/computer/card/centcom
 //obj/item/weapon/circuitboard/shield
-//	name = T_BOARD("Shield Control")
+//	name = T_BOARD("shield control console")
 //	build_path = "/obj/machinery/computer/stationshield"
 /obj/item/weapon/circuitboard/teleporter
 	name = T_BOARD("teleporter control console")
@@ -142,7 +142,7 @@
 	name = T_BOARD("station alert console")
 	build_path = /obj/machinery/computer/station_alert
 ///obj/item/weapon/circuitboard/atmospheresiphonswitch
-//	name = T_BOARD("Atmosphere Siphon Control")
+//	name = T_BOARD("atmosphere siphon control console")
 //	build_path = /obj/machinery/computer/atmosphere/siphonswitch
 /obj/item/weapon/circuitboard/air_management
 	name = T_BOARD("atmosphere monitoring console")
@@ -295,7 +295,7 @@
 	build_path = /obj/machinery/computer/area_atmos
 	origin_tech = "programming=2"
 /obj/item/weapon/circuitboard/prison_shuttle
-	name = T_BOARD("prison shuttle console")
+	name = T_BOARD("prison shuttle control console")
 	build_path = /obj/machinery/computer/prison_shuttle
 	origin_tech = "programming=2"
 /obj/item/weapon/circuitboard/rcon_console

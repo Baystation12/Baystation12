@@ -2,7 +2,7 @@
 
 
 /obj/machinery/computer/security
-	name = "Security Cameras"
+	name = "security camera monitor"
 	desc = "Used to access the various cameras on the station."
 	icon_state = "cameras"
 	var/obj/machinery/camera/current = null
@@ -151,28 +151,28 @@
 	circuit = null
 
 /obj/machinery/computer/security/wooden_tv
-	name = "Security Cameras"
+	name = "security camera monitor"
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
 	circuit = null
 
 
 /obj/machinery/computer/security/mining
-	name = "Outpost Cameras"
+	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."
 	icon_state = "miningcameras"
 	network = list("MINE")
 	circuit = /obj/item/weapon/circuitboard/security/mining
 
 /obj/machinery/computer/security/engineering
-	name = "Engineering Cameras"
+	name = "engineering camera monitor"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
 	circuit = /obj/item/weapon/circuitboard/security/engineering
 
 /obj/machinery/computer/security/nuclear
-	name = "Mission Monitor"
+	name = "head mounted camera monitor"
 	desc = "Used to access the built-in cameras in helmets."
 	icon_state = "syndicam"
 	network = list("NUKE")

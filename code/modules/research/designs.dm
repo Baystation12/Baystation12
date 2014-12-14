@@ -77,8 +77,8 @@ datum/design/New()
 
 ///////////////////Computer Boards///////////////////////////////////
 datum/design/circuit
-	req_tech = list("programming" = 2)
 	build_type = IMPRINTER
+	req_tech = list("programming" = 2)
 	materials = list("$glass" = 2000, "sacid" = 20)
 
 datum/design/circuit/AssembleDesignInfo()
@@ -108,11 +108,6 @@ datum/design/circuit/borgupload
 	id = "borgupload"
 	req_tech = list("programming" = 4)
 	build_path = /obj/item/weapon/circuitboard/borgupload
-
-datum/design/circuit/med_data
-	name = "medical records console"
-	id = "med_data"
-	build_path = /obj/item/weapon/circuitboard/med_data
 
 datum/design/circuit/operating
 	name = "patient monitoring console"
@@ -150,9 +145,19 @@ datum/design/circuit/teleconsole
 	id = "teleconsole"
 	req_tech = list("programming" = 3, "bluespace" = 2)
 
+datum/design/circuit/emp_data
+	name = "employment records console"
+	id = "emp_data"
+	build_path = /obj/item/weapon/circuitboard/skills
+
+datum/design/circuit/med_data
+	name = "medical records console"
+	id = "med_data"
+	build_path = /obj/item/weapon/circuitboard/med_data
+
 datum/design/circuit/secdata
 	name = "security records console"
-	id = "secdata"
+	id = "sec_data"
 	build_path = /obj/item/weapon/circuitboard/secure_data
 
 datum/design/circuit/atmosalerts
@@ -280,6 +285,29 @@ datum/design/circuit/aifixer
 	id = "aifixer"
 	req_tech = list("programming" = 3, "biotech" = 2)
 	build_path = /obj/item/weapon/circuitboard/aifixer
+
+///////////////////////////////////
+/////////Shield Generators/////////
+///////////////////////////////////
+datum/design/shield
+	req_tech = list("bluespace" = 4, "phorontech" = 3)
+	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+
+datum/design/shield/bubble
+	name = "bubble shield generator"
+	id = "shield_gen"
+	build_path = "/obj/machinery/shield_gen/external"
+
+datum/design/shield/hull
+	name = "hull shield generator"
+	id = "shield_gen_ex"
+	build_path = "/obj/machinery/shield_gen/external"
+
+datum/design/shield/capacitor
+	name = "shield capacitor"
+	id = "shield_cap"
+	req_tech = list("magnets" = 3, "powerstorage" = 4)
+	build_path = "/obj/machinery/shield_gen/external"
 
 ///////////////////////////////////
 //////////AI Module Disks//////////
