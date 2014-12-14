@@ -17,5 +17,4 @@ install:
   - cd ..
 
 script:
-  - (! grep -q 'step_[xy]' maps/Phoenix.dmm)
   - DreamMaker baystation12.dme
