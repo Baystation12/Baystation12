@@ -50,8 +50,10 @@
 		placeholder = 2
 	if (!( isnum(num) ))
 		return
-	if (!( num ))
-		return "0"
+	if (num == 0)
+		var/final = ""
+		for(var/i=1 to placeholder) final = "[final]0"
+		return final
 	var/hex = ""
 	var/i = 0
 	while(16 ** i < num)

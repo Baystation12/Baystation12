@@ -4,7 +4,7 @@
 	name = "Employment Records"
 	desc = "Used to view personnel's employment records"
 	icon_state = "medlaptop"
-	req_one_access = list(access_heads)
+	req_one_access = list(access_heads, access_lawyer)
 	circuit = "/obj/item/weapon/circuitboard/skills"
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
@@ -404,6 +404,8 @@ What a mess.*/
 					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
 				if(5)
 					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
+					if(PDA_Manifest.len)
+						PDA_Manifest.Cut()
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

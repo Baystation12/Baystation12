@@ -55,6 +55,12 @@
 		return
 	..()
 
+/obj/item/weapon/feather/attack(mob/target as mob, mob/user as mob)
+	if(target && user && ishuman(target) && ishuman(user))
+		user.visible_message("\red \the [user] tickles \the [target] with a feather!")
+		return
+	..()
+
 /*
  * Bike Horns
  */

@@ -1083,3 +1083,6 @@ mob/proc/yank_out_object()
 			return I
 
 	return 0
+
+/mob/proc/updateicon()
+	return

@@ -90,3 +90,4 @@
 
 	var/emagged = 0
 	var/ripping = 0
+	var/iscorpse = 0

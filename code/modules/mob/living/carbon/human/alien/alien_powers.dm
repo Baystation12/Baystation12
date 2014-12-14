@@ -207,7 +207,7 @@
 	return
 
 /mob/living/carbon/human/proc/resin() // -- TLE
-	set name = "Secrete Resin (75)"
+	set name = "Secrete Resin (50)"
 	set desc = "Secrete tough malleable resin."
 	set category = "Abilities"
 
@@ -215,7 +215,7 @@
 	if(!choice)
 		return
 
-	if(!check_alien_ability(75,1,"resin spinner"))
+	if(!check_alien_ability(50,1,"resin spinner"))
 		return
 
 	src << "\green You shape a [choice]."
@@ -231,3 +231,16 @@
 		if("resin nest")
 			new /obj/structure/stool/bed/nest(loc)
 	return
+
+//Toggle Night Vision
+/mob/living/carbon/human/proc/nightvision()
+
+	set name = "Toggle Nightvision"
+	set desc = "Toggle your nightvision mode."
+	set category = "Abilities"
+	src << "<span class='notice'>You toggle your night vision!</span>"
+
+	if(src.glasses == null)
+		src.glasses = new/obj/item/clothing/glasses/night/alien
+	else
+		src.glasses = null

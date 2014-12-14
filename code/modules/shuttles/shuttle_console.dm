@@ -39,7 +39,7 @@
 				shuttle_status = "Standing-by at station."
 			else
 				shuttle_status = "Standing-by at offsite location."
-		if(WAIT_LAUNCH)
+		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."

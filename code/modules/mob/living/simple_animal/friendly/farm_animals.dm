@@ -331,7 +331,7 @@ var/global/chicken_count = 0
 	faction = "goose"
 	health = 50
 	melee_damage_lower = 1
-	melee_damage_upper = 5
+	melee_damage_upper = 3
 
 /mob/living/simple_animal/hostile/retaliate/goose/Life()
 	. = ..()

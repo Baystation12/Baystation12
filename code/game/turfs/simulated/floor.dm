@@ -532,7 +532,7 @@ turf/simulated/floor/proc/update_icon()
 			user << "\blue Reinforcing the floor..."
 			if(do_after(user, 30) && is_plating())
 				if (R.use(2))
-					ChangeTurf(/turf/simulated/floor/engine)
+					ChangeTurf(/turf/simulated/floor/engine/built)
 					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 			else
