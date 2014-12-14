@@ -15,7 +15,6 @@
 	active_state = "power"
 	var/currentfloor = null
 	var/floor = null
-	var/ismoving = 0
 	/var/global/liftposition = 1
 	/var/global/ismoving = 1
 
@@ -177,8 +176,6 @@
 					start_location = locate(/area/lift/lower)
 					end_location = locate(/area/lift/upper)
 					liftposition = 2
-				else
-					return
 
 			if(liftposition == 1)
 				if (computer.z == 8)

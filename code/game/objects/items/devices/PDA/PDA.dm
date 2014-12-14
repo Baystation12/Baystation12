@@ -521,6 +521,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Close")//Self explanatory
 			U.unset_machine()
+			mode = 0
 			ui.close()
 			return 0
 		if("Refresh")//Refresh, goes to the end of the proc.
