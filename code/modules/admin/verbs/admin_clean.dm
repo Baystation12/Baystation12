@@ -21,12 +21,3 @@
 		log_admin_single("[key_name_admin(usr)] cleaned the world ([i] objects deleted) ")
 		message_admins("\blue [key_name_admin(usr)] cleaned the world ([i] objects deleted) ")
 
-/client/proc/fixlift()
-	set category = "Special Verbs"
-	set name = "Fix Lift"
-	var/setting = input(src,"ismoving =","Enter Parameter",0) as num
-	switch(setting)
-		if(1)
-			ismoving = 1
-		if(0)
-			ismoving = 0

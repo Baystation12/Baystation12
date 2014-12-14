@@ -11,7 +11,6 @@ var/list/admin_verbs_default = list(
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_change_announcement,
-	/client/proc/fixlift,
 	/client/proc/cmd_vip_say,
 	/client/proc/vip_memo,				/*vip memo system. show/delete/write. +SERVER needed to delete vip memos of others*/
 	/client/proc/cleartox,
@@ -296,8 +295,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/jumptocoord,
 	/client/proc/forceshuttles,
 	/client/proc/cmd_vip_say,
-	/client/proc/vip_memo,
-	/client/proc/fixlift
+	/client/proc/vip_memo
 	///client/proc/hidevsay
 )
 
@@ -346,7 +344,7 @@ var/list/admin_verbs_dev = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !check_rights(R_ADMIN))
+			if(config.debugparanoid && !check_rights(R_ADMIN)) 
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions

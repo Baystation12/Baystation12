@@ -16,7 +16,7 @@
 	var/currentfloor = null
 	var/floor = null
 	/var/global/liftposition = 1
-	/var/global/ismoving = 0
+	/var/global/ismoving = 1
 
 /datum/file/program/lift/interact()
 	currentfloor = computer.z
