@@ -1,6 +1,5 @@
 /*********************MANUALS (BOOKS)***********************/
 
-//Oh god what the fuck I am not good at computer
 /obj/item/weapon/book/manual
 	icon = 'icons/obj/library.dmi'
 	due_date = 0 // Game time in 1/10th seconds
@@ -13,7 +12,7 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Station Repairs and Construction"
 
-/obj/item/weapon/book/manual/engineering_construction/initialize()
+/obj/item/weapon/book/manual/engineering_construction/New()
 	..()
 	dat = {"
 
@@ -34,7 +33,7 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Particle Accelerator User's Guide"
 
-/obj/item/weapon/book/manual/engineering_particle_accelerator/initialize()
+/obj/item/weapon/book/manual/engineering_particle_accelerator/New()
 	..()
 	dat = {"<html>
 				<head>
@@ -81,7 +80,7 @@
 	author = "Waleed Asad"
 	title = "Supermatter Engine User's Guide"
 
-/obj/item/weapon/book/manual/supermatter_engine/initialize()
+/obj/item/weapon/book/manual/supermatter_engine/New()
 	..()
 	dat = {"<html>
 				<head>
@@ -193,7 +192,7 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
 
-/obj/item/weapon/book/manual/engineering_hacking/initialize()
+/obj/item/weapon/book/manual/engineering_hacking/New()
 	..()
 	dat = {"
 
@@ -750,7 +749,7 @@
 	author = "NanoTrasen"
 	title = "Corporate Regulations"
 
-/obj/item/weapon/book/manual/security_space_law/initialize()
+/obj/item/weapon/book/manual/security_space_law/New()
 	..()
 	dat = {"
 
@@ -774,7 +773,7 @@
 	author = "NanoTrasen Medicine Department"
 	title = "NT Medical Diagnostics Manual"
 
-/obj/item/weapon/book/manual/medical_diagnostics_manual/initialize()
+/obj/item/weapon/book/manual/medical_diagnostics_manual/New()
 	..()
 	dat = {"<html>
 				<head>
@@ -821,7 +820,7 @@
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
 
-/obj/item/weapon/book/manual/engineering_guide/initialize()
+/obj/item/weapon/book/manual/engineering_guide/New()
 	..()
 	dat = {"
 
