@@ -169,28 +169,7 @@
 		if(3)
 			src << "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>"
 
-/mob/living/silicon/pai/ex_act(severity)
-	if(!blinded)
-		flick("flash", src.flash)
-
-	switch(severity)
-		if(1.0)
-			if (src.stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-		if(2.0)
-			if (src.stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
-		if(3.0)
-			if (src.stat != 2)
-				adjustBruteLoss(30)
-
-	src.updatehealth()
-
-
 // See software.dm for Topic()
-
 /mob/living/silicon/pai/meteorhit(obj/O as obj)
 	for(var/mob/M in viewers(src, null))
 		M.show_message(text("\red [] has been hit by []", src, O), 1)
@@ -200,10 +179,6 @@
 			src.adjustFireLoss(40)
 		src.updatehealth()
 	return
-
-//mob/living/silicon/pai/bullet_act(var/obj/item/projectile/Proj)
-
-///mob/living/silicon/pai/attack_hand(mob/living/carbon/M as mob)
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
 	if(istype(usr, /mob/living))
@@ -374,7 +349,8 @@
 		src.updatehealth()
 	else
 		visible_message("<span class='warning'>[user.name] bonks [src] harmlessly with [W].</span>")
-	if(stat != 2) close_up()
+	spawn(1)
+		if(stat != 2) close_up()
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
