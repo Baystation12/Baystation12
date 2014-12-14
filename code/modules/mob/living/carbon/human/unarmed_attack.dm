@@ -9,7 +9,7 @@
 	var/sharp = 0
 	var/edge = 0
 
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user)
+/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/victim)
 	if(user.restrained())
 		return 0
 
@@ -91,7 +91,7 @@
 	sharp = 1
 	edge = 1
 
-/datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user)
+/datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/victim)
 	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 		return 0
 	return 1

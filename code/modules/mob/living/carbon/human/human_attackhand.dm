@@ -95,10 +95,14 @@
 				return
 
 			// See if they can attack, and which attacks to use.
-			var/datum/unarmed_attack/attack = H.species.unarmed
-			if(!attack.is_usable(H))
-				attack = H.species.secondary_unarmed
-			if(!attack.is_usable(H))
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in H.species.unarmed)
+				if(!u_attack.is_usable(H, src))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
 				return 0
 
 			var/damage = rand(1, 5)

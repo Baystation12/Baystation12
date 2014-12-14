@@ -146,7 +146,15 @@
 		help_shake_act(M)
 	else
 		if (M.a_intent == "hurt")
-			var/datum/unarmed_attack/attack = M.species.unarmed
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in M.species.unarmed)
+				if(!u_attack.is_usable(M, src))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
+				return 0
 			if ((prob(75) && health > 0))
 				visible_message("\red <B>[M] [pick(attack.attack_verb)]ed [src]!</B>")
 
