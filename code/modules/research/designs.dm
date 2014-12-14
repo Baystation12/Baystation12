@@ -1423,7 +1423,7 @@ datum/design/implant_chem
 	req_tech = list("materials" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implant/chem"
+	build_path = "/obj/item/weapon/implantcase/chem"
 
 datum/design/implant_free
 	name = "freedom implant"
@@ -1432,7 +1432,7 @@ datum/design/implant_free
 	req_tech = list("syndicate" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implant/freedom"
+	build_path = "/obj/item/weapon/implantcase/freedom"
 
 datum/design/chameleon
 	name = "Chameleon Kit"
@@ -1806,7 +1806,7 @@ datum/design/borg_syndicate_module
 /////////////PDA and Radio stuff/////////
 /////////////////////////////////////////
 datum/design/binaryencrypt
-	name = "Binary Encrpytion Key"
+	name = "binary encryption key"
 	desc = "An encyption key for a radio headset.  Contains cypherkeys."
 	id = "binaryencrypt"
 	req_tech = list("syndicate" = 2)
