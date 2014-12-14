@@ -289,21 +289,21 @@ datum/design/circuit/aifixer
 ///////////////////////////////////
 /////////Shield Generators/////////
 ///////////////////////////////////
-datum/design/shield
+datum/design/circuit/shield
 	req_tech = list("bluespace" = 4, "phorontech" = 3)
 	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
-datum/design/shield/bubble
+datum/design/circuit/shield/bubble
 	name = "bubble shield generator"
 	id = "shield_gen"
 	build_path = "/obj/machinery/shield_gen/external"
 
-datum/design/shield/hull
+datum/design/circuit/shield/hull
 	name = "hull shield generator"
 	id = "shield_gen_ex"
 	build_path = "/obj/machinery/shield_gen/external"
 
-datum/design/shield/capacitor
+datum/design/circuit/shield/capacitor
 	name = "shield capacitor"
 	id = "shield_cap"
 	req_tech = list("magnets" = 3, "powerstorage" = 4)
