@@ -1371,7 +1371,6 @@
 						if(b.zoom)
 							b.zoom()
 					*/
-
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 			see_in_dark = species.darksight

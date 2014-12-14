@@ -13,11 +13,12 @@
 	has_fine_manipulation = 0
 	insulated = 1
 	gluttonous = 2
+	darksight = 80
 
 	eyes = "blank_eyes"
 
-	brute_mod = 0.5 // Hardened carapace.
-	burn_mod = 2    // Weak to fire.
+	brute_mod = 0.3 // Hardened carapace.
+	burn_mod = 0.3    // Weak to fire.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -53,7 +54,7 @@
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
-	var/weeds_heal_rate = 1     // Health regen on weeds.
+	var/weeds_heal_rate = 10    // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
 
 /datum/species/xenos/can_understand(var/mob/other)
@@ -110,7 +111,7 @@
 /datum/species/xenos/drone
 	name = "Xenomorph Drone"
 	caste_name = "drone"
-	weeds_plasma_rate = 15
+	weeds_plasma_rate = 30
 	slowdown = 2
 	tail = "xenos_drone_tail"
 	rarity_value = 5
@@ -132,11 +133,14 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/plant,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/evolve,
 		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/corrosive_acid
 		)
 
@@ -174,7 +178,9 @@
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/psychic_whisper,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/regurgitate
 		)
 
@@ -202,7 +208,9 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/tackle,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/corrosive_acid,
@@ -213,8 +221,10 @@
 
 	name = "Xenomorph Queen"
 	total_health = 250
-	weeds_heal_rate = 5
-	weeds_plasma_rate = 20
+	weeds_heal_rate = 20
+	weeds_plasma_rate = 30
+	brute_mod = 0.2 // OP QUEEN
+	burn_mod = 0.2   // OP QUEEN
 	caste_name = "queen"
 	slowdown = 5
 	tail = "xenos_queen_tail"
@@ -239,6 +249,8 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
+		/mob/living/carbon/human/proc/tackle,
+		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/lay_egg,

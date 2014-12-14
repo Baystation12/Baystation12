@@ -4,7 +4,7 @@
 	name = "Employment Records"
 	desc = "Used to view personnel's employment records"
 	icon_state = "medlaptop"
-	req_one_access = list(access_heads)
+	req_one_access = list(access_heads, access_lawyer)
 	circuit = "/obj/item/weapon/circuitboard/skills"
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null

@@ -297,7 +297,7 @@
 	language = "Siik'tajr"
 	tail = "Avisaran"
 	unarmed_type = /datum/unarmed_attack/claws_J
-	darksight = 20
+	darksight = 25
 	dhts = 1
 	wingicon = 1
 	sizechange = 1
