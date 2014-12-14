@@ -29,7 +29,7 @@ em						{font-style: normal;font-weight: bold;}
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
 .pm  .out				{color: #B54A4A;}
-.pm  .other				{color: #498db6;}
+.pm  .other				{color: #164664;}
 
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}
