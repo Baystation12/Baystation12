@@ -600,9 +600,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				dat += "<LI>"
 				dat += "[T.name]"
 				dat += "<UL>"
-				dat +=  "<LI>Level: [T.level]</LI>"
-				dat +=  "<LI>Summary: [T.desc]</LI>"
-				dat += "</UL></LI>"
+				dat +=  "<LI>Level: [T.level]"
+				dat +=  "<LI>Summary: [T.desc]"
+				dat += "</UL>"
 			dat += "</UL>"
 
 		if(1.2) //Technology Disk Menu
@@ -668,14 +668,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(1.6) //R&D console settings
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
 			dat += "R&D Console Setting:<HR>"
+			dat += "<UL>"
 			if(sync)
-				dat += "<A href='?src=\ref[src];sync=1'>Sync Database with Network</A><BR>"
-				dat += "<A href='?src=\ref[src];togglesync=1'>Disconnect from Research Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];sync=1'>Sync Database with Network</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Disconnect from Research Network</A><BR>"
 			else
-				dat += "<A href='?src=\ref[src];togglesync=1'>Connect to Research Network</A><BR>"
-			dat += "<A href='?src=\ref[src];menu=1.7'>Device Linkage Menu</A><BR>"
-			dat += "<A href='?src=\ref[src];lock=0.2'>Lock Console</A><BR>"
-			dat += "<A href='?src=\ref[src];reset=1'>Reset R&D Database.</A><BR>"
+				dat += "<LI><A href='?src=\ref[src];togglesync=1'>Connect to Research Network</A><BR>"
+			dat += "<LI><A href='?src=\ref[src];menu=1.7'>Device Linkage Menu</A><BR>"
+			dat += "<LI><A href='?src=\ref[src];lock=0.2'>Lock Console</A><BR>"
+			dat += "<LI><A href='?src=\ref[src];reset=1'>Reset R&D Database</A><BR>"
+			dat += "<UL>"
 
 		if(1.7) //R&D device linkage
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
@@ -685,17 +687,17 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Linked Devices:"
 			dat += "<UL>"
 			if(linked_destroy)
-				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A></LI>"
+				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				dat += "<LI>(No Destructive Analyzer Linked)</LI>"
+				dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
-				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A></LI>"
+				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
 			else
-				dat += "<LI>(No Protolathe Linked)</LI>"
+				dat += "<LI>(No Protolathe Linked)"
 			if(linked_imprinter)
-				dat += "<LI>Circuit Imprinter <A href='?src=\ref[src];disconnect=imprinter'>(Disconnect)</A></LI>"
+				dat += "<LI>Circuit Imprinter <A href='?src=\ref[src];disconnect=imprinter'>(Disconnect)</A>"
 			else
-				dat += "<LI>(No Circuit Imprinter Linked)</LI>"
+				dat += "<LI>(No Circuit Imprinter Linked)"
 			dat += "</UL>"
 
 		////////////////////DESTRUCTIVE ANALYZER SCREENS////////////////////////////
@@ -715,7 +717,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			var/list/temp_tech = linked_destroy.ConvertReqString2List(linked_destroy.loaded_item.origin_tech)
 			for(var/T in temp_tech)
-				dat += "<LI>[CallTechName(T)] [temp_tech[T]]</LI>"
+				dat += "<LI>[CallTechName(T)] [temp_tech[T]]"
 			dat += "</UL>"
 			dat += "<HR><A href='?src=\ref[src];deconstruct=1'>Deconstruct Item</A> || "
 			dat += "<A href='?src=\ref[src];eject_item=1'>Eject Item</A> || "
@@ -761,9 +763,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				if(temp_dat)
 					temp_dat = " \[[copytext(temp_dat,3)]\]"
 				if (check_materials)
-					dat += "<LI><B><A href='?src=\ref[src];build=[D.id]'>[D.name]</A></B>[temp_dat]</LI>"
+					dat += "<LI><B><A href='?src=\ref[src];build=[D.id]'>[D.name]</A></B>[temp_dat]"
 				else
-					dat += "<LI><B>[D.name]</B>[temp_dat]</LI>"
+					dat += "<LI><B>[D.name]</B>[temp_dat]"
 			dat += "</UL>"
 
 		if(3.2) //Protolathe Material Storage Sub-menu
@@ -802,7 +804,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						dat += "[C > 1 ? ", " : ""]<A href='?src=\ref[src];lathe_ejectsheet=[M];amount=[C]'>[C]</A> "
 
 					dat += " or <A href='?src=\ref[src];lathe_ejectsheet=[M];amount=50'>max</A> sheets"
-				dat += "</LI>"
+				dat += ""
 			dat += "</UL>"
 
 		if(3.3) //Protolathe Chemical Storage Submenu
@@ -849,9 +851,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				if(temp_dat)
 					temp_dat = " \[[copytext(temp_dat,3)]\]"
 				if (check_materials)
-					dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]</LI>"
+					dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]"
 				else
-					dat += "<LI><B>[D.name]</B>[temp_dat]</LI>"
+					dat += "<LI><B>[D.name]</B>[temp_dat]"
 			dat += "</UL>"
 
 		if(4.2)
@@ -890,7 +892,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						dat += "[C > 1 ? ", " : ""]<A href='?src=\ref[src];imprinter_ejectsheet=[M];amount=[C]'>[C]</A> "
 
 					dat += " or <A href='?src=\ref[src];imprinter_ejectsheet=[M];amount=50'>max</A> sheets"
-				dat += "</LI>"
+				dat += ""
 			dat += "</UL>"
 
 		///////////////////Research Information Browser////////////////////
@@ -900,7 +902,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			for(var/datum/design/D in files.known_designs)
 				if(D.build_path)
-					dat += "<LI><B>[D.name]</B>: [D.desc]</LI>"
+					dat += "<LI><B>[D.name]</B>: [D.desc]"
 			dat += "</UL>"
 			
 
