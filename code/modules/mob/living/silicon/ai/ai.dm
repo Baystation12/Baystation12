@@ -394,13 +394,6 @@ var/list/ai_verbs_default = list(
 	user.reset_view(camera)
 	return 1
 
-/mob/living/silicon/ai/blob_act()
-	if (stat != 2)
-		adjustBruteLoss(60)
-		updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/ai/restrained()
 	return 0
 
@@ -412,26 +405,6 @@ var/list/ai_verbs_default = list(
 			if(2)
 				ai_call_shuttle()
 	..()
-
-/mob/living/silicon/ai/ex_act(severity)
-	if(!blinded)
-		flick("flash", flash)
-
-	switch(severity)
-		if(1.0)
-			if (stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-		if(2.0)
-			if (stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
-		if(3.0)
-			if (stat != 2)
-				adjustBruteLoss(30)
-
-	updatehealth()
-
 
 /mob/living/silicon/ai/Topic(href, href_list)
 	if(usr != src)
@@ -503,11 +476,6 @@ var/list/ai_verbs_default = list(
 			adjustFireLoss(40)
 		updatehealth()
 	return
-
-/mob/living/silicon/ai/bullet_act(var/obj/item/projectile/Proj)
-	..(Proj)
-	updatehealth()
-	return 2
 
 /mob/living/silicon/ai/attack_animal(mob/living/M as mob)
 	if(M.melee_damage_upper == 0)

@@ -75,6 +75,8 @@
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc
+				if(H.w_uniform != C)
+					continue
 
 				var/list/crewmemberData = list()
 
@@ -97,9 +99,19 @@
 					crewmemberData["rank"] = (P.id ? P.id.rank : "Unknown")
 
 				var/area/A = get_area(H)
+				var/newz = pos.z
+				if (pos.z == 1)
+					newz = 1
+				else if (pos.z == 7)
+					newz = 0
+				else if (pos.z == 8)
+					newz = 2
+				else
+					newz = pos.z
 				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
 				crewmemberData["y"] = pos.y
+				crewmemberData["Floor"] = newz
 
 				// Works around list += list2 merging lists; it's not pretty but it works
 				crewmembers += "temporary item"
@@ -128,6 +140,7 @@
 /obj/machinery/computer/crew/proc/scan()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
+			if (H.iscorpse == 1) continue
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C

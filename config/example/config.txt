@@ -260,3 +260,8 @@ REQ_CULT_GHOSTWRITER 6
 
 ## Uncomment to use overmap system for zlevel travel
 #USE_OVERMAP
+
+## Uncomment to make proccall require R_ADMIN instead of R_DEBUG
+## designed for environments where you have testers but don't want them
+## able to use the more powerful debug options.
+#DEBUG_PARANOID

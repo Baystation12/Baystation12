@@ -64,6 +64,19 @@
 	..()
 	overlay = global_hud.nvg
 
+/obj/item/clothing/glasses/night/alien
+	name = "Alien thermal lenses"
+	desc = "Weird alien lenses"
+	icon_state = ""
+	vision_flags = SEE_MOBS
+	invisa_view = 2
+	species_restricted = list("Xenomorph Drone","Xenomorph Hunter","Xenomorph Sentinel","Xenomorph Queen")
+
+/obj/item/clothing/glasses/night/alien/New()
+	..()
+	overlay = global_hud.thermal
+
+
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
 	desc = "Yarr."

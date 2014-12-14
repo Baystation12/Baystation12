@@ -57,7 +57,7 @@
 	id = "CentComm Hub"
 	network = "tcommsat"
 	produces_heat = 0
-	autolinkers = list("hub_cent", "c_relay", "s_relay", "m_relay", "r_relay",
+	autolinkers = list("hub_cent", "c_relay","sub_relay", "up_relay", "s_relay", "m_relay", "r_relay",
 	 "centcomm", "receiverCent", "broadcasterCent")
 
 //Receivers

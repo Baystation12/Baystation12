@@ -372,6 +372,7 @@
 #include "code\game\machinery\computer\HolodeckControl.dm"
 #include "code\game\machinery\computer\hologram.dm"
 #include "code\game\machinery\computer\law.dm"
+#include "code\game\machinery\computer\lift.dm"
 #include "code\game\machinery\computer\medical.dm"
 #include "code\game\machinery\computer\message.dm"
 #include "code\game\machinery\computer\Operating.dm"
