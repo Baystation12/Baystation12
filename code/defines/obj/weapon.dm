@@ -67,7 +67,7 @@
 
 /obj/item/weapon/feather
 	name = "White feather"
-	desc = "A silk wilk feather, it feels soft to touch."
+	desc = "A silk white feather, it feels soft to touch."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "feather"

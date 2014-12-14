@@ -15,8 +15,8 @@
 	active_state = "power"
 	var/currentfloor = null
 	var/floor = null
-	var/ismoving = 0
-	/var/global/liftposition = 1
+	var/global/liftposition = 1
+	var/global/ismoving = 1
 
 /datum/file/program/lift/interact()
 	currentfloor = computer.z
@@ -50,6 +50,9 @@
 		return
 	if (ismoving == 0)
 		if ("upwards" in href_list)
+			if(ismoving == 1)
+				usr << "Lift is currently moving please wait and try again."
+				return
 			ismoving = 1
 			var/area/start_location = null
 			var/area/end_location = null
@@ -106,6 +109,9 @@
 			ismoving = 0
 
 		else if ("downwards" in href_list)
+			if(ismoving == 1)
+				usr << "Lift is currently moving please wait and try again."
+				return
 			ismoving = 1
 			var/area/start_location = null
 			var/area/end_location = null
@@ -162,6 +168,8 @@
 			ismoving = 0
 
 		else if ("call" in href_list)
+			if(ismoving == 1)
+				usr << "Lift is currently moving, please wait and try again."
 			var/area/start_location = null
 			var/area/end_location = null
 			if(liftposition == 0)
