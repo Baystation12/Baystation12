@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/med_data//TODO:SANITY
 	name = "medical records console"
-	desc = "This can be used to view, edit and maintain medical records."
+	desc = "Used to view, edit and maintain medical records."
 	icon_state = "medcomp"
 	req_one_access = list(access_medical, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/med_data"
