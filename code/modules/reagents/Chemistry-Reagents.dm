@@ -380,7 +380,7 @@ datum
 			id = "inaprovaline"
 			description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#00BFFF" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE*2
 			scannable = 1
 
@@ -1595,7 +1595,7 @@ datum
 			id = "phoron"
 			description = "Phoron in its liquid form."
 			reagent_state = LIQUID
-			color = "#00BFFF" // rgb: 231, 27, 0
+			color = "#E71B00" // rgb: 231, 27, 0
 			toxpwr = 3
 
 			on_mob_life(var/mob/living/M as mob)

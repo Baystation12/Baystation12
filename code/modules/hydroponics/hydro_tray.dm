@@ -88,7 +88,7 @@
 		"adminordrazine" =  1,
 		"milk" =            0.9,
 		"beer" =            0.7,
-		"flourine" =       -0.5,
+		"fluorine" =       -0.5,
 		"chlorine" =       -0.5,
 		"phosphorus" =     -0.5,
 		"water" =           1,
