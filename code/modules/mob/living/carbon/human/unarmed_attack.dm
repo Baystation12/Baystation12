@@ -9,7 +9,7 @@
 	var/sharp = 0
 	var/edge = 0
 
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user)
 	if(user.restrained())
 		return 0
 
@@ -27,9 +27,6 @@
 /datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 
 	var/stun_chance = rand(0, 100)
-
-	// Reduce effective damage to normalize stun chance across species.
-	attack_damage = min(1,attack_damage - damage)
 
 	if(attack_damage >= 5 && armour < 2 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
@@ -49,12 +46,14 @@
 					target.drop_r_hand()
 			if("chest")
 				if(!target.lying)
-					target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
-					var/turf/T = step(src, get_dir(get_turf(user), get_turf(target)))
-					if(T.density) // This will need to be expanded to check for structures etc.
-						target.visible_message("<span class='danger'>[target] slams into [T]!</span>")
+					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
+					if(!T.density)
+						step(target, get_dir(get_turf(user), get_turf(target)))
+						target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
 					else
-						target.loc = T
+						target.visible_message("<span class='danger'>[target] slams into [T]!</span>")
+					if(prob(50))
+						target.set_dir(reverse_dir[target.dir])
 					target.apply_effect(attack_damage * 0.4, WEAKEN, armour)
 			if("groin")
 				target.visible_message("<span class='warning'>[target] looks like \he is in pain!</span>", "<span class='warning'>[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your[pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]</span>")
@@ -63,9 +62,9 @@
 				if(!target.lying)
 					target.visible_message("<span class='warning'>[src] gives way slightly.</span>")
 					target.apply_effect(attack_damage*3, AGONY, armour)
-	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage) * 5 >= 100 && armour < 2) // Chance to get the usual throwdown as well (25% standard chance)
+	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 2) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
-			target.visible_message("<span class='danger'>[pick("slumps", "falls", "drops")] down to the ground!</span>")
+			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
 		target.apply_effect(3, WEAKEN, armour)
@@ -94,7 +93,7 @@
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 		return 0
-	if (zone == "head" || zone == "eyes" || zone == "mouth")
+	if (user == target && (zone == "head" || zone == "eyes" || zone == "mouth"))
 		return 0
 	return 1
 
@@ -140,7 +139,7 @@
 	if (target.legcuffed)
 		return 0
 
-	if(!(zone == "l_leg" || zone == "r_leg" || zone == "l_foot" || zone == "r_foot" || zone == "groin"))
+	if(!(zone in list("l_leg", "r_leg", "l_foot", "r_foot", "groin")))
 		return 0
 
 	var/datum/organ/external/E = user.organs_by_name["l_foot"]
