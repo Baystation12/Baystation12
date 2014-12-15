@@ -504,11 +504,6 @@
 				if("python_path")
 					if(value)
 						config.python_path = value
-					else
-						if(world.system_type == UNIX)
-							config.python_path = "/usr/bin/env python2"
-						else //probably windows, if not this should work anyway
-							config.python_path = "python"
 
 				if("use_lib_nudge")
 					config.use_lib_nudge = 1
@@ -741,3 +736,11 @@
 			runnable_modes[M] = probabilities[M.config_tag]
 			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
 	return runnable_modes
+
+/datum/configuration/proc/post_load()
+	//apply a default value to config.python_path, if needed
+	if (!config.python_path)
+		if(world.system_type == UNIX)
+			config.python_path = "/usr/bin/env python2"
+		else //probably windows, if not this should work anyway
+			config.python_path = "python"
