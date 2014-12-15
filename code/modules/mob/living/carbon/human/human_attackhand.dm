@@ -94,17 +94,6 @@
 				attack_generic(H,rand(1,3),"punched")
 				return
 
-			// See if they can attack, and which attacks to use.
-			var/datum/unarmed_attack/attack = null
-			for(var/datum/unarmed_attack/u_attack in H.species.unarmed)
-				if(!u_attack.is_usable(H, src))
-					continue
-				else
-					attack = u_attack
-					break
-			if(!attack)
-				return 0
-
 			var/damage = rand(1, 5)
 			var/block = 0
 			var/accurate = 0
@@ -159,7 +148,11 @@
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!
-					attack_message = "[H] attempted to strike [src], but missed!"
+					if(!src.lying)
+						attack_message = "[H] attempted to strike [src], but missed!"
+					else
+						attack_message = "[H] attempted to strike [src], but \he rolled out of the way!"
+						src.dir = pick(1, 2, 4, 8)
 					miss_type = 1
 			else
 				hit_zone = ran_zone(hit_zone)
@@ -167,6 +160,17 @@
 			if(!miss_type && block)
 				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
 				miss_type = 2
+
+			// See what attack they use
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in H.species.unarmed)
+				if(!u_attack.is_usable(H, src, hit_zone))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
+				return 0
 
 			if(!attack_message)
 				attack.show_attack(H, src, hit_zone, damage)

@@ -207,7 +207,7 @@
 	name_plural = "Humans"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
-	unarmed_type = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	unarmed_type = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
@@ -221,7 +221,7 @@
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	language = "Sinta'unathi"
 	tail = "sogtail"
-	unarmed_type = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	unarmed_type = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
@@ -248,7 +248,7 @@
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'tajr"
 	tail = "tajtail"
-	unarmed_type = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	unarmed_type = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -290,7 +290,7 @@
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	default_language = "Vox-pidgin"
 	language = "Galactic Common"
-	unarmed_type = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
+	unarmed_type = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
@@ -377,7 +377,7 @@
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
-	unarmed_type = list(/datum/unarmed_attack/diona)
+	unarmed_type = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
