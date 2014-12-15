@@ -12,7 +12,7 @@ em						{font-style: normal;font-weight: bold;}
 						{color: #638500;}
 
 .prefix					{font-weight: bold;}
-.log_message			{color: #789FC7;}
+.log_message			{color: #386AFF;	font-weight: bold;}
 
 /* OOC */
 .ooc					{font-weight: bold;}
@@ -29,12 +29,12 @@ em						{font-style: normal;font-weight: bold;}
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
 .pm  .out				{color: #B54A4A;}
-.pm  .other				{color: #498db6;}
+.pm  .other				{color: #164664;}
 
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}
 .mod_channel .admin		{color: #e40045;	font-weight: bold;}
-.admin_channel			{color: #402A14;	font-weight: bold;}
+.admin_channel			{color: #9611D4;	font-weight: bold;}
 
 /* Radio: Misc */
 .deadsay				{color: #530FAD;}

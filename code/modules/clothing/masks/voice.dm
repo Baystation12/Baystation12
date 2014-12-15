@@ -10,13 +10,22 @@
 	var/obj/item/voice_changer/changer
 	origin_tech = "syndicate=4"
 
+/obj/item/clothing/mask/gas/voice/verb/Toggle_Voice_Changer()
+	set category = "Object"
+	set src in usr
+
+	changer.active = !changer.active
+	usr << "<span class='notice'>You [changer.active ? "enable" : "disable"] the voice-changing module in \the [src].</span>"
+
+/obj/item/clothing/mask/gas/voice/verb/Set_Voice(name as text)
+	set category = "Object"
+	set src in usr
+
+	var/voice = sanitize(copytext(name,1,MAX_MESSAGE_LEN))
+	if(!voice || !length(voice)) return
+	changer.voice = voice
+	usr << "<span class='notice'>You are now mimicking <B>[changer.voice]</B>.</span>"
+
 /obj/item/clothing/mask/gas/voice/New()
 	..()
 	changer = new(src)
-
-/obj/item/clothing/mask/gas/voice/space_ninja
-	name = "ninja mask"
-	desc = "A close-fitting mask that acts both as an air filter and a post-modern fashion statement."
-	icon_state = "s-ninja"
-	item_state = "s-ninja_mask"
-	siemens_coefficient = 0.2
