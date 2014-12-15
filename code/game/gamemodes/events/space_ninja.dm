@@ -531,7 +531,6 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	else
 		equip_to_slot_or_del(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
 
-	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
 
 	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(src)
@@ -546,16 +545,16 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	equip_to_slot_or_del(ninjasuit,slot_back)
 
-	if(istype(wear_suit,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = wear_suit
-		if(rig.air_supply)
-			internal = rig.air_supply
-	if(!internal && s_store)
-		internal = s_store
-	if(internal)
-		internals.icon_state = "internal1"
-
 	spawn(10)
 		ninjasuit.toggle_seals(src,1)
+
+		if(istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = back
+			if(rig.air_supply)
+				internal = rig.air_supply
+		if(!internal && s_store)
+			internal = s_store
+		if(internal)
+			internals.icon_state = "internal1"
 
 	return 1

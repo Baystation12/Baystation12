@@ -269,7 +269,7 @@
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
-			usr << "You are now mimicking <B>[voice_holder.voice]</B>.</font>"
+			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
