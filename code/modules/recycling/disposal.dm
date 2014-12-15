@@ -49,8 +49,6 @@
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(isrobot(user) && !istype(I, /obj/item/weapon/storage/bag/trash))
-		return
 	src.add_fingerprint(user)
 	if(mode<=0) // It's off
 		if(istype(I, /obj/item/weapon/screwdriver))
@@ -123,7 +121,10 @@
 				msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 		return
 
-	if(!I)	return
+	if(isrobot(user))
+		return
+	if(!I)
+		return
 
 	user.drop_item()
 	if(I)
@@ -204,31 +205,27 @@
 	update()
 	return
 
-
-// monkeys can only pull the flush lever
-/obj/machinery/disposal/attack_paw(mob/user as mob)
-	if(stat & BROKEN)
-		return
-
-	flush = !flush
-	update()
-	return
-
 // ai as human but can't flush
 /obj/machinery/disposal/attack_ai(mob/user as mob)
 	interact(user, 1)
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
+
+	if(stat & BROKEN)
+		return
+
 	if(user && user.loc == src)
 		usr << "\red You cannot reach the controls from inside."
 		return
-	/*
-	if(mode==-1)
-		usr << "\red The disposal units power is disabled."
-		return
-	*/
-	interact(user, 0)
+
+	// Clumsy folks can only flush it.
+	if(user.IsAdvancedToolUser(1))
+		interact(user, 0)
+	else
+		flush = !flush
+		update()
+	return
 
 // user interaction
 /obj/machinery/disposal/interact(mob/user, var/ai=0)
@@ -274,14 +271,15 @@
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
 		usr << "\red The disposal units power is disabled."
 		return
-	..()
-	src.add_fingerprint(usr)
+	if(..())
+		return
+
 	if(stat & BROKEN)
 		return
 	if(usr.stat || usr.restrained() || src.flushing)
 		return
 
-	if (in_range(src, usr) && istype(src.loc, /turf))
+	if(istype(src.loc, /turf))
 		usr.set_machine(src)
 
 		if(href_list["close"])
@@ -296,12 +294,13 @@
 				mode = 0
 			update()
 
-		if(href_list["handle"])
-			flush = text2num(href_list["handle"])
-			update()
+		if(!isAI(usr))
+			if(href_list["handle"])
+				flush = text2num(href_list["handle"])
+				update()
 
-		if(href_list["eject"])
-			eject()
+			if(href_list["eject"])
+				eject()
 	else
 		usr << browse(null, "window=disposal")
 		usr.unset_machine()
@@ -474,7 +473,7 @@
 				M.show_message("\the [I] lands in \the [src].", 3)
 		else
 			for(var/mob/M in viewers(src))
-				M.show_message("\the [I] bounces off of \the [src]'s rim!.", 3)
+				M.show_message("\the [I] bounces off of \the [src]'s rim!", 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -545,7 +544,7 @@
 
 		loc = D.trunk
 		active = 1
-		dir = DOWN
+		set_dir(DOWN)
 		spawn(1)
 			move()		// spawn off the movement process
 
@@ -704,7 +703,7 @@
 	//
 	proc/transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 
@@ -742,6 +741,7 @@
 			icon_state = "[base_icon_state]f"
 		else
 			icon_state = base_icon_state*/
+		icon_state = base_icon_state
 		return
 
 
@@ -810,7 +810,7 @@
 			for(var/D in cardinal)
 				if(D & dpdir)
 					var/obj/structure/disposalpipe/broken/P = new(src.loc)
-					P.dir = D
+					P.set_dir(D)
 
 		src.invisibility = 101	// make invisible (since we won't delete the pipe immediately)
 		var/obj/structure/disposalholder/H = locate() in src
@@ -921,7 +921,7 @@
 			if("pipe-tagger-partial")
 				C.ptype = 14
 		src.transfer_fingerprints_to(C)
-		C.dir = dir
+		C.set_dir(dir)
 		C.density = 0
 		C.anchored = 1
 		C.update()
@@ -967,7 +967,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 
 		var/turf/T
 		var/obj/structure/disposalpipe/P
@@ -1231,7 +1231,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir, H.destinationTag)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 

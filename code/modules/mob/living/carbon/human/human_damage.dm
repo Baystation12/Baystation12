@@ -141,7 +141,7 @@
 /mob/living/carbon/human/getCloneLoss()
 	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
 		cloneloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
 	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
@@ -188,7 +188,7 @@
 /mob/living/carbon/human/getOxyLoss()
 	if(species.flags & NO_BREATHE)
 		oxyloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/adjustOxyLoss(var/amount)
 	if(species.flags & NO_BREATHE)
@@ -205,7 +205,7 @@
 /mob/living/carbon/human/getToxLoss()
 	if(species.flags & NO_POISON)
 		toxloss = 0
-	..()
+	return ..()
 
 /mob/living/carbon/human/adjustToxLoss(var/amount)
 	if(species.flags & NO_POISON)
@@ -351,16 +351,15 @@ This function restores all organs.
 
 	//Handle other types of damage
 	if((damagetype != BRUTE) && (damagetype != BURN))
-		if(damagetype == HALLOSS)
+		if(damagetype == HALLOSS && !(species && (species.flags & NO_PAIN)))
 			if ((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				emote("scream")
-
 
 		..(damage, damagetype, def_zone, blocked)
 		return 1
 
 	//Handle BRUTE and BURN damage
-	handle_suit_punctures(damagetype, damage)
+	handle_suit_punctures(damagetype, damage, def_zone)
 
 	if(blocked >= 2)	return 0
 

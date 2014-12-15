@@ -1,6 +1,23 @@
 /var/global/list/autolathe_recipes
 /var/global/list/autolathe_categories
 
+/proc/populate_lathe_recipes()
+
+	//Create global autolathe recipe list if it hasn't been made already.
+	autolathe_recipes = list()
+	autolathe_categories = list()
+	for(var/R in typesof(/datum/autolathe/recipe)-/datum/autolathe/recipe)
+		var/datum/autolathe/recipe/recipe = new R
+		autolathe_recipes += recipe
+		autolathe_categories |= recipe.category
+
+		var/obj/item/I = new recipe.path
+		if(I.matter && !recipe.resources) //This can be overidden in the datums.
+			recipe.resources = list()
+			for(var/material in I.matter)
+				recipe.resources[material] = round(I.matter[material]*1.25) // More expensive to produce than they are to recycle.
+			del(I)
+
 /datum/autolathe/recipe
 	var/name = "object"
 	var/path
@@ -89,7 +106,7 @@
 
 /datum/autolathe/recipe/rglass
 	name = "reinforced glass sheets"
-	path = /obj/item/stack/sheet/rglass
+	path = /obj/item/stack/sheet/glass/reinforced
 	category = "General"
 	is_stack = 1
 

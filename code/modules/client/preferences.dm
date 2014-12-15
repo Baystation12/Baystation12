@@ -11,13 +11,14 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"malf AI" = IS_MODE_COMPILED("malfunction"),         // 4
 	"revolutionary" = IS_MODE_COMPILED("revolution"),    // 5
 	"alien candidate" = 1, //always show                 // 6
-	"pAI candidate" = 1, // -- TLE                       // 7
+	"positronic brain" = 1,                              // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",                                    // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"pAI candidate" = 1, // -- TLE                       // 14
 )
 
 //used for alternate_option
@@ -39,7 +40,7 @@ datum/preferences
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
-	var/ooccolor = "#b82e00"
+	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
@@ -112,6 +113,7 @@ datum/preferences
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/list/flavor_texts = list()
+	var/list/flavour_texts_robot = list()
 
 	var/med_record = ""
 	var/sec_record = ""
@@ -395,6 +397,7 @@ datum/preferences
 	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
+	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
@@ -428,11 +431,8 @@ datum/preferences
 		var/n = 0
 		for (var/i in special_roles)
 			if(special_roles[i]) //if mode is available on the server
-				if(jobban_isbanned(user, i))
-					dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
-				else if(i == "pai candidate")
-					if(jobban_isbanned(user, "pAI"))
-						dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
+				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
+					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
 				else
 					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 			n++
@@ -507,6 +507,8 @@ datum/preferences
 				HTML += " <font color=green>\[Yes]</font>"
 			else
 				HTML += " <font color=red>\[No]</font>"
+			if(job.alt_titles) //Blatantly cloned from a few lines down.
+				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 			continue
 
@@ -648,6 +650,25 @@ datum/preferences
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=flavor_text;size=430x300")
+	return
+
+/datum/preferences/proc/SetFlavourTextRobot(mob/user)
+	var/HTML = "<body>"
+	HTML += "<tt><center>"
+	HTML += "<b>Set Robot Flavour Text</b> <hr />"
+	HTML += "<br></center>"
+	HTML += "<a href ='byond://?src=\ref[user];preference=flavour_text_robot;task=Default'>Default:</a> "
+	HTML += TextPreview(flavour_texts_robot["Default"])
+	HTML += "<hr />"
+	for(var/module in robot_module_types)
+		HTML += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=[module]'>[module]:</a> "
+		HTML += TextPreview(flavour_texts_robot[module])
+		HTML += "<br>"
+	HTML += "<hr />"
+	HTML +="<a href='?src=\ref[user];preference=flavour_text_robot;task=done'>\[Done\]</a>"
+	HTML += "<tt>"
+	user << browse(null, "window=preferences")
+	user << browse(HTML, "window=flavour_text_robot;size=430x300")
 	return
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
@@ -914,6 +935,30 @@ datum/preferences
 					msg = html_encode(msg)
 				flavor_texts[href_list["task"]] = msg
 		SetFlavorText(user)
+		return
+
+	else if(href_list["preference"] == "flavour_text_robot")
+		switch(href_list["task"])
+			if("open")
+				SetFlavourTextRobot(user)
+				return
+			if("done")
+				user << browse(null, "window=flavour_text_robot")
+				ShowChoices(user)
+				return
+			if("Default")
+				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				flavour_texts_robot[href_list["task"]] = msg
+			else
+				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				flavour_texts_robot[href_list["task"]] = msg
+		SetFlavourTextRobot(user)
 		return
 
 	else if(href_list["preference"] == "pAI")
@@ -1574,25 +1619,23 @@ datum/preferences
 	// Destroy/cyborgize organs
 
 	for(var/name in organ_data)
-		var/datum/organ/external/O = character.organs_by_name[name]
-		var/datum/organ/internal/I = character.internal_organs_by_name[name]
+
 		var/status = organ_data[name]
-
-		if(!I || !O)
-			continue
-
-		if(status == "amputated")
-			O.amputated = 1
-			O.status |= ORGAN_DESTROYED
-			O.destspawn = 1
-		if(status == "cyborg")
-			O.status |= ORGAN_ROBOT
-		if(status == "assisted")
-			I.mechassist()
-		else if(status == "mechanical")
-			I.mechanize()
-
-		else continue
+		var/datum/organ/external/O = character.organs_by_name[name]
+		if(O)
+			if(status == "amputated")
+				O.amputated = 1
+				O.status |= ORGAN_DESTROYED
+				O.destspawn = 1
+			else if(status == "cyborg")
+				O.status |= ORGAN_ROBOT
+		else
+			var/datum/organ/internal/I = character.internal_organs_by_name[name]
+			if(I)
+				if(status == "assisted")
+					I.mechassist()
+				else if(status == "mechanical")
+					I.mechanize()
 
 	if(underwear > underwear_m.len || underwear < 1)
 		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES

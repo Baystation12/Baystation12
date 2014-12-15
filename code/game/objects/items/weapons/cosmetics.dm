@@ -66,3 +66,16 @@
 		user << "<span class='notice'>Where are the lips on that?</span>"
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
+
+
+/obj/item/weapon/haircomb //sparklysheep's comb
+	name = "purple comb"
+	desc = "A pristine purple comb made from flexible plastic."
+	w_class = 1.0
+	icon_state = "purplecomb"
+	item_state = "purplecomb"
+
+/obj/item/weapon/haircomb/attack_self(mob/user)
+	if(user.r_hand == src || user.l_hand == src)
+		user.visible_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"))
+	return

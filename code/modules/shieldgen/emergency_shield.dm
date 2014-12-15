@@ -13,7 +13,7 @@
 	var/shield_idle_power = 1500		//how much power we use when just being sustained.
 
 /obj/machinery/shield/New()
-	src.dir = pick(1,2,3,4)
+	src.set_dir(pick(1,2,3,4))
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
@@ -26,16 +26,6 @@
 /obj/machinery/shield/CanPass(atom/movable/mover, turf/target, height, air_group)
 	if(!height || air_group) return 0
 	else return ..()
-
-//Looks like copy/pasted code... I doubt 'need_rebuild' is even used here - Nodrak
-/obj/machinery/shield/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
-
 
 /obj/machinery/shield/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!istype(W)) return
@@ -160,8 +150,7 @@
 	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Del()
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		del(shield_tile)
+	collapse_shields()
 	..()
 
 
@@ -184,8 +173,7 @@
 	src.active = 0
 	update_icon()
 
-	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		del(shield_tile)
+	collapse_shields()
 	
 	update_use_power(0)
 
@@ -197,8 +185,21 @@
 				deployed_shields += S
 				use_power(S.shield_generate_power)
 
+/obj/machinery/shieldgen/proc/collapse_shields()
+	for(var/obj/machinery/shield/shield_tile in deployed_shields)
+		del(shield_tile)
+
+/obj/machinery/shieldgen/power_change()
+	..()
+	if(!active) return
+	if (stat & NOPOWER)
+		collapse_shields()
+	else
+		create_shields()
+	update_icon()
+
 /obj/machinery/shieldgen/process()
-	if (!active)
+	if (!active || (stat & NOPOWER))
 		return
 	
 	if(malfunction)
@@ -224,6 +225,8 @@
 	if(health <= 30)
 		src.malfunction = 1
 	if(health <= 0)
+		spawn(0)
+			explosion(get_turf(src.loc), 0, 0, 1, 0, 0, 0)
 		del(src)
 	update_icon()
 	return
@@ -340,7 +343,7 @@
 
 
 /obj/machinery/shieldgen/update_icon()
-	if(active)
+	if(active && !(stat & NOPOWER))
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else
 		src.icon_state = malfunction ? "shieldoffbr":"shieldoff"

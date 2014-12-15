@@ -670,8 +670,8 @@ client
 			return
 
 		switch(href_list["rotatedir"])
-			if("right")	A.dir = turn(A.dir, -45)
-			if("left")	A.dir = turn(A.dir, 45)
+			if("right")	A.set_dir(turn(A.dir, -45))
+			if("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
 
 	else if(href_list["makemonkey"])
@@ -794,6 +794,9 @@ client
 
 		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in all_languages
 
+		if(!new_language)
+			return
+
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
@@ -816,6 +819,9 @@ client
 			return
 
 		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
+
+		if(!rem_language)
+			return
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"

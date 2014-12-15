@@ -11,7 +11,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
@@ -51,7 +50,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/gloves/yellow(src)
 		new /obj/item/clothing/gloves/yellow(src)
 		new /obj/item/weapon/storage/toolbox/electrical(src)
@@ -80,7 +78,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/clothing/head/welding(src)
 		new /obj/item/clothing/head/welding(src)
 		new /obj/item/clothing/head/welding(src)
@@ -107,7 +104,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
@@ -137,7 +133,6 @@
 
 	New()
 		..()
-		sleep(2)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else

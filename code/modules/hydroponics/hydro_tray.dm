@@ -21,6 +21,7 @@
 	var/dead = 0               // Is it dead?
 	var/harvest = 0            // Is it ready to harvest?
 	var/age = 0                // Current plant age
+	var/sampled = 0            // Have wa taken a sample?
 
 	// Harvest/mutation mods.
 	var/yield_mod = 0          // Modifier to yield
@@ -87,7 +88,7 @@
 		"adminordrazine" =  1,
 		"milk" =            0.9,
 		"beer" =            0.7,
-		"flourine" =       -0.5,
+		"fluorine" =       -0.5,
 		"chlorine" =       -0.5,
 		"phosphorus" =     -0.5,
 		"water" =           1,
@@ -117,9 +118,28 @@
 	// Mutagen list specifies minimum value for the mutation to take place, rather
 	// than a bound as the lists above specify.
 	var/global/list/mutagenic_reagents = list(
-		"radium" =  3,
-		"mutagen" = 8
+		"radium" =  8,
+		"mutagen" = 15
 		)
+
+/obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
+	if(istype(user,/mob/living/carbon/alien/diona))
+		var/mob/living/carbon/alien/diona/nymph = user
+
+		if(nymph.stat == DEAD || nymph.paralysis || nymph.weakened || nymph.stunned || nymph.restrained())
+			return
+
+		if(weedlevel > 0)
+			nymph.reagents.add_reagent("nutriment", weedlevel)
+			weedlevel = 0
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> begins rooting through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You begin rooting through [src], ripping out weeds and eating them noisily.</font>")
+		else if(nymph.nutrition > 100 && nutrilevel < 10)
+			nymph.nutrition -= ((10-nutrilevel)*5)
+			nutrilevel = 10
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> secretes a trickle of green liquid, refilling [src].</font>","<font color='blue'>You secrete a trickle of green liquid, refilling [src].</font>")
+		else
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
+		return
 
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
@@ -128,8 +148,6 @@
 	create_reagents(200)
 	connect()
 	update_icon()
-	if(closed_system)
-		flags &= ~OPENCONTAINER
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
@@ -172,7 +190,7 @@
 
 	// Weeds like water and nutrients, there's a chance the weed population will increase.
 	// Bonus chance if the tray is unoccupied.
-	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 5 : 2))
+	if(waterlevel > 10 && nutrilevel > 2 && prob(isnull(seed) ? 5 : 1))
 		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
 
 	// There's a chance for a weed explosion to happen if the weeds take over.
@@ -345,7 +363,7 @@
 			if(weedkiller_reagents[R.id])
 				weedlevel -= weedkiller_reagents[R.id] * reagent_total
 			if(pestkiller_reagents[R.id])
-				pestlevel -= pestkiller_reagents[R.id] * reagent_total
+				pestlevel += pestkiller_reagents[R.id] * reagent_total
 
 			// Beneficial reagents have a few impacts along with health buffs.
 			if(beneficial_reagents[R.id])
@@ -398,6 +416,8 @@
 		seed = null
 		dead = 0
 		age = 0
+		sampled = 0
+		mutation_mod = 0
 
 	check_level_sanity()
 	update_icon()
@@ -413,6 +433,11 @@
 
 	seed = null
 	dead = 0
+	sampled = 0
+	age = 0
+	yield_mod = 0
+	mutation_mod = 0
+
 	user << "You remove the dead plant from the [src]."
 	check_level_sanity()
 	update_icon()
@@ -489,6 +514,7 @@
 	harvest = 0
 	weedlevel = 0
 	pestlevel = 0
+	sampled = 0
 	update_icon()
 	visible_message("\blue [src] has been overtaken by [seed.display_name].")
 
@@ -562,13 +588,20 @@
 			user << "There is nothing to take a sample from in \the [src]."
 			return
 
+		if(sampled)
+			user << "You have already sampled from this plant."
+			return
+
 		if(dead)
-			user << "\The plant is dead."
+			user << "The plant is dead."
 			return
 
 		// Create a sample.
 		seed.harvest(user,yield_mod,1)
 		health -= (rand(3,5)*10)
+
+		if(prob(30))
+			sampled = 1
 
 		// Bookkeeping.
 		check_level_sanity()
@@ -761,11 +794,6 @@
 
 	closed_system = !closed_system
 	usr << "You [closed_system ? "close" : "open"] the tray's lid."
-	if(closed_system)
-		flags &= ~OPENCONTAINER
-	else
-		flags |= OPENCONTAINER
-
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil

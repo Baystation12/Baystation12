@@ -232,7 +232,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 	if (!injected || !our)
 		return
-	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"]) )
+	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"],injected.data["species"],our.data["species"]) )
 		reagents.add_reagent("toxin",amount * 0.5)
 		reagents.update_total()
 	else
@@ -250,13 +250,18 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					return D
 	return res
 
-proc/blood_incompatible(donor,receiver)
+proc/blood_incompatible(donor,receiver,donor_species,receiver_species)
 	if(!donor || !receiver) return 0
-	var
-		donor_antigen = copytext(donor,1,lentext(donor))
-		receiver_antigen = copytext(receiver,1,lentext(receiver))
-		donor_rh = (findtext(donor,"+")>0)
-		receiver_rh = (findtext(receiver,"+")>0)
+
+	if(donor_species && receiver_species)
+		if(donor_species != receiver_species)
+			return 1
+
+	var/donor_antigen = copytext(donor,1,lentext(donor))
+	var/receiver_antigen = copytext(receiver,1,lentext(receiver))
+	var/donor_rh = (findtext(donor,"+")>0)
+	var/receiver_rh = (findtext(receiver,"+")>0)
+
 	if(donor_rh && !receiver_rh) return 1
 	switch(receiver_antigen)
 		if("A")

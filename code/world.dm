@@ -1,3 +1,16 @@
+var/global/datum/global_init/init = new ()
+
+/*
+	Pre-map initialization stuff should go here.
+*/
+/datum/global_init/New()
+
+	makeDatumRefLists()
+	load_configuration()
+
+	del(src)
+
+
 /world
 	mob = /mob/new_player
 	turf = /turf/space
@@ -21,8 +34,8 @@
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
 
-	load_configuration()
-
+	config.post_load()
+	
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
@@ -45,6 +58,9 @@
 	// bugging out and not populating with the correct packet names
 	// due to this list not being instantiated.
 	populate_seed_list()
+
+	// Create autolathe recipes, as above.
+	populate_lathe_recipes()
 
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
@@ -244,7 +260,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	join_motd = file2text("config/motd.txt")
 
 
-/world/proc/load_configuration()
+/proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")

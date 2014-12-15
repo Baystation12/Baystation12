@@ -25,6 +25,14 @@
 	var/frame_desc = null
 	var/contain_parts = 1
 
+//Not sure where else to put this
+/obj/item/weapon/circuitboard/broken
+	name = "broken electronics"
+	icon = 'icons/obj/doors/door_assembly.dmi'
+	icon_state = "door_electronics_smoked"
+	origin_tech = null
+	board_type = "other"
+
 //Called when the circuitboard is used to contruct a new machine.
 /obj/item/weapon/circuitboard/proc/construct(var/obj/machinery/M)
 	if (istype(M, build_path))
@@ -181,7 +189,7 @@
 	origin_tech = "programming=2;powerstorage=2"
 /obj/item/weapon/circuitboard/powermonitor
 	name = "Circuit board (Power Monitor)"
-	build_path = /obj/machinery/power/monitor
+	build_path = /obj/machinery/computer/power_monitor
 /obj/item/weapon/circuitboard/olddoor
 	name = "Circuit board (DoorMex)"
 	build_path = /obj/machinery/computer/pod/old

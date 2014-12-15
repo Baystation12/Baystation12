@@ -1,6 +1,6 @@
 /obj/item/weapon/camera_assembly
 	name = "camera assembly"
-	desc = "The basic construction for Nanotrasen-Always-Watching-You cameras."
+	desc = "A pre-fabricated security camera kit, ready to be assembled and mounted to a surface."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "cameracase"
 	w_class = 2

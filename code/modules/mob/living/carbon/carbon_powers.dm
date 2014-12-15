@@ -1,43 +1,3 @@
-//TODO: Consider renaming carbon/monkey to carbon/small.
-
-/mob/living/carbon/proc/fertilize_plant()
-
-	set category = "Abilities"
-	set name = "Fertilize plant"
-	set desc = "Turn your food into nutrients for plants."
-
-	var/list/trays = list()
-	for(var/obj/machinery/portable_atmospherics/hydroponics/tray in range(1))
-		if(tray.nutrilevel < 10 && src.Adjacent(tray))
-			trays += tray
-
-	var/obj/machinery/portable_atmospherics/hydroponics/target = input("Select a tray:") as null|anything in trays
-
-	if(!src || !target || target.nutrilevel == 10) return //Sanity check.
-
-	src.nutrition -= ((10-target.nutrilevel)*5)
-	target.nutrilevel = 10
-	src.visible_message("\red [src] secretes a trickle of green liquid, refilling [target]'s nutrient tray.","\red You secrete a trickle of green liquid from your tail, refilling [target]'s nutrient tray.")
-
-/mob/living/carbon/proc/eat_weeds()
-
-	set category = "Abilities"
-	set name = "Eat Weeds"
-	set desc = "Clean the weeds out of soil or a hydroponics tray."
-
-	var/list/trays = list()
-	for(var/obj/machinery/portable_atmospherics/hydroponics/tray in range(1))
-		if(tray.weedlevel > 0 && src.Adjacent(tray))
-			trays += tray
-
-	var/obj/machinery/portable_atmospherics/hydroponics/target = input("Select a tray:") as null|anything in trays
-
-	if(!src || !target || target.weedlevel == 0) return //Sanity check.
-
-	src.reagents.add_reagent("nutriment", target.weedlevel)
-	target.weedlevel = 0
-	src.visible_message("\red [src] begins rooting through [target], ripping out weeds and eating them noisily.","\red You begin rooting through [target], ripping out weeds and eating them noisily.")
-
 //Brain slug proc for voluntary removal of control.
 /mob/living/carbon/proc/release_control()
 
@@ -72,7 +32,12 @@
 
 	if(B.host_brain.ckey)
 		src << "\red <B>You send a punishing spike of psychic agony lancing into your host's brain.</B>"
-		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+
+		if (species && (species.flags & NO_PAIN))
+			B.host_brain << "\red You feel a strange sensation as a foreign influence prods your mind."
+			src << "\red <B>It doesn't seem to be as effective as you hoped.</B>"
+		else
+			B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
 
 /mob/living/carbon/proc/spawn_larvae()
 	set category = "Abilities"

@@ -33,7 +33,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 
-
 /mob/living/carbon/human/Life()
 
 
@@ -95,8 +94,10 @@
 		//Disabilities
 		handle_disabilities()
 
-		//Organ failure.
+		//Organs and blood
 		handle_organs()
+		handle_blood()
+		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
 		handle_random_events()
@@ -283,7 +284,7 @@
 
 		if (radiation)
 			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
-			if(!rad_organ || rad_organ.is_broken())
+			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
 				nutrition += rads
@@ -423,10 +424,16 @@
 
 	proc/get_breath_from_internal(volume_needed)
 		if(internal)
-			if (!contents.Find(internal))
+
+			var/obj/item/weapon/tank/rig_supply
+			if(istype(back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/rig = back
+				if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
+					rig_supply = rig.air_supply
+
+			if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.flags & AIRTIGHT)) || (head && (head.flags & AIRTIGHT)))))
 				internal = null
-			if (!wear_mask || !(wear_mask.flags & MASKINTERNALS) )
-				internal = null
+
 			if(internal)
 				return internal.remove_air_volume(volume_needed)
 			else if(internals)
@@ -1065,22 +1072,6 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
-		if (drowsyness)
-			drowsyness--
-			eye_blurry = max(2, eye_blurry)
-			if (prob(5))
-				sleeping += 1
-				Paralyse(5)
-
-		confused = max(0, confused - 1)
-		// decrement dizziness counter, clamped to 0
-		if(resting)
-			dizziness = max(0, dizziness - 15)
-			jitteriness = max(0, jitteriness - 15)
-		else
-			dizziness = max(0, dizziness - 3)
-			jitteriness = max(0, jitteriness - 3)
-
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		updatehealth()
@@ -1096,10 +1087,6 @@
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
-			if(!in_stasis)
-				stabilize_body_temperature()	//Body temperature adjusts itself
-				handle_organs()	//Optimized.
-				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
 				death()
@@ -1113,13 +1100,6 @@
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
-
-				/* Done by handle_breath()
-				if( health <= 20 && prob(1) )
-					spawn(0)
-						emote("gasp")
-				if(!reagents.has_reagent("inaprovaline"))
-					adjustOxyLoss(1)*/
 
 			if(hallucination)
 				if(hallucination >= 20)
@@ -1163,23 +1143,26 @@
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
-			else if(resting)
-				if(halloss > 0)
-					adjustHalLoss(-3)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
-				if(halloss > 0)
-					adjustHalLoss(-1)
 
+			//Periodically double-check embedded_flag
 			if(embedded_flag && !(life_tick % 10))
 				var/list/E
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
 
-
 			//Eyes
+			//Check rig first because it's two-check and other checks will override it.
+			if(istype(back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/O = back
+				if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+					if((O.offline && O.offline_vision_restriction == 2) || (!O.offline && O.vision_restriction == 2))
+						blinded = 1
+
+			// Check everything else.
 			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
 				eye_blind =  0
 				blinded =    0
@@ -1210,8 +1193,27 @@
 			else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
 				ear_damage = max(ear_damage-0.05, 0)
 
+			//Resting
+			if(resting)
+				dizziness = max(0, dizziness - 15)
+				jitteriness = max(0, jitteriness - 15)
+				adjustHalLoss(-3)
+			else
+				dizziness = max(0, dizziness - 3)
+				jitteriness = max(0, jitteriness - 3)
+				adjustHalLoss(-1)
+
 			//Other
 			handle_statuses()
+
+			if (drowsyness)
+				drowsyness--
+				eye_blurry = max(2, eye_blurry)
+				if (prob(5))
+					sleeping += 1
+					Paralyse(5)
+
+			confused = max(0, confused - 1)
 
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
@@ -1232,7 +1234,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_huds)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science)
 
 		update_action_buttons()
 
@@ -1356,11 +1358,14 @@
 					seer = 0
 
 			var/tmp/glasses_processed = 0
-			if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
-				var/obj/item/clothing/mask/gas/voice/space_ninja/O = wear_mask
-				glasses_processed = 1
-				process_glasses(O.ninja_vision.glasses)
-			if(glasses)
+			var/obj/item/weapon/rig/rig = back
+			if(istype(rig) && rig.visor)
+				if(!rig.helmet || (head && rig.helmet == head))
+					if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
+						glasses_processed = 1
+						process_glasses(rig.visor.vision.glasses)
+
+			if(glasses && !glasses_processed)
 				glasses_processed = 1
 				process_glasses(glasses)
 
@@ -1468,21 +1473,27 @@
 			if(eye_blurry)			client.screen += global_hud.blurry
 			if(druggy)				client.screen += global_hud.druggy
 
-			var/masked = 0
-
-			if( istype(head, /obj/item/clothing/head/welding) || istype(head, /obj/item/clothing/head/helmet/space/unathi))
-				var/obj/item/clothing/head/welding/O = head
-				if(!O.up && tinted_weldhelh)
-					client.screen += global_hud.darkMask
-					masked = 1
-
-			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding) )
-				var/obj/item/clothing/glasses/welding/O = glasses
-				if(!O.up && tinted_weldhelh)
-					client.screen += global_hud.darkMask
+			if(tinted_weldhelh)
+				var/found_welder
+				if(istype(glasses, /obj/item/clothing/glasses/welding))
+					var/obj/item/clothing/glasses/welding/O = glasses
+					if(!O.up)
+						found_welder = 1
+				else if(istype(head, /obj/item/clothing/head/welding))
+					var/obj/item/clothing/head/welding/O = head
+					if(!O.up)
+						found_welder = 1
+				else if(istype(back, /obj/item/weapon/rig))
+					var/obj/item/weapon/rig/O = back
+					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
+						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
+							found_welder = 1
+				if(found_welder)
+					client.screen |= global_hud.darkMask
 
 			if(machine)
-				if(!machine.check_eye(src))		reset_view(null)
+				if(!machine.check_eye(src))
+					reset_view(null)
 			else
 				var/isRemoteObserve = 0
 				if((mRemote in mutations) && remoteview_target)
@@ -1688,7 +1699,7 @@
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
 		else
-			var/percentage_health = RoundHealth(((0.0+health)/species.total_health)*100)
+			var/percentage_health = RoundHealth((health-config.health_threshold_crit)/(species.total_health-config.health_threshold_crit)*100)
 			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
 
@@ -1797,7 +1808,7 @@
 		if(mind)
 
 			switch(mind.special_role)
-				if("traitor","Syndicate")
+				if("traitor","Mercenary")
 					holder.icon_state = "hudsyndicate"
 				if("Revolutionary")
 					holder.icon_state = "hudrevolutionary"

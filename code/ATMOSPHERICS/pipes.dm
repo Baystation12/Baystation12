@@ -6,7 +6,7 @@
 	var/volume = 0
 	force = 20
 
-	//layer = 2.4 //under wires with their 2.44
+	layer = 2.4 //under wires with their 2.44
 	use_power = 0
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
@@ -216,9 +216,9 @@
 
 /obj/machinery/atmospherics/pipe/simple/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 /obj/machinery/atmospherics/pipe/simple/Del()
 	if(node1)
@@ -256,9 +256,9 @@
 				del(meter)
 		del(src)
 	else if(node1 && node2)
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "intact" + icon_connect_type)
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
 	else
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "exposed[node1?1:0][node2?1:0]" + icon_connect_type)
+		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return
@@ -911,29 +911,21 @@
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
 	desc = "An endcap for pipes"
-	icon = 'icons/obj/pipes.dmi'
-	icon_state = "cap"
+	icon = 'icons/atmos/pipes.dmi'
+	icon_state = ""
 	level = 2
 	layer = 2.4 //under wires with their 2.44
 
 	volume = 35
 
 	dir = SOUTH
-	initialize_directions = NORTH
+	initialize_directions = SOUTH
 
 	var/obj/machinery/atmospherics/node
 
 /obj/machinery/atmospherics/pipe/cap/New()
 	..()
-	switch(dir)
-		if(SOUTH)
-		 initialize_directions = NORTH
-		if(NORTH)
-		 initialize_directions = SOUTH
-		if(WEST)
-		 initialize_directions = EAST
-		if(EAST)
-		 initialize_directions = WEST
+	initialize_directions = dir
 
 /obj/machinery/atmospherics/pipe/cap/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
@@ -964,11 +956,20 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/cap/update_icon()
-	overlays = new()
+/obj/machinery/atmospherics/pipe/cap/change_color(var/new_color)
+	..()
+	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
+	if(node)
+		node.update_underlays()
 
-	icon_state = "cap[invisibility ? "-f" : ""]"
-	return
+/obj/machinery/atmospherics/pipe/cap/update_icon(var/safety = 0)
+	if(!check_icon_cache())
+		return
+
+	alpha = 255
+
+	overlays.Cut()
+	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "cap")
 
 /obj/machinery/atmospherics/pipe/cap/initialize()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
@@ -1008,7 +1009,8 @@
 
 /obj/machinery/atmospherics/pipe/cap/hidden
 	level = 1
-	icon_state = "cap-f"
+	icon_state = "cap"
+	alpha = 128
 
 /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
 	name = "scrubbers pipe endcap"
@@ -1257,7 +1259,7 @@
 	if(node1)
 		icon_state = "intact"
 
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 
 	else
 		icon_state = "exposed"
@@ -1289,7 +1291,7 @@
 /obj/machinery/atmospherics/pipe/vent/hide(var/i) //to make the little pipe section invisible, the icon changes.
 	if(node1)
 		icon_state = "[i == 1 && istype(loc, /turf/simulated) ? "h" : "" ]intact"
-		dir = get_dir(src, node1)
+		set_dir(get_dir(src, node1))
 	else
 		icon_state = "exposed"
 

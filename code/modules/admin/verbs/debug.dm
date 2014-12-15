@@ -30,6 +30,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Advanced ProcCall"
 
 	if(!check_rights(R_DEBUG)) return
+	if(config.debugparanoid && !check_rights(R_ADMIN)) return
 
 	spawn(0)
 		var/target = null
@@ -426,15 +427,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 
 
-/client/proc/cmd_switch_radio()
-	set category = "Debug"
-	set name = "Switch Radio Mode"
-	set desc = "Toggle between normal radios and experimental radios. Have a coder present if you do this."
-
-	GLOBAL_RADIO_TYPE = !GLOBAL_RADIO_TYPE // toggle
-	log_admin("[key_name(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].", 0)
-	feedback_add_details("admin_verb","SRM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_areatest()
 	set category = "Mapping"
@@ -966,7 +958,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	for(var/obj/machinery/power/smes/SMES in world)
 		if(SMES.anchored)
-			SMES.chargemode = 1
+			SMES.input_attempt = 1
 
 /client/proc/setup_supermatter_engine()
 	set category = "Debug"
@@ -1026,16 +1018,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			else if(istype(M,/obj/machinery/power/smes))	//This is the SMES inside the engine room.  We don't need much power.
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 	if(!found_the_pump && response == "Setup Completely")
 		src << "\red Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter"

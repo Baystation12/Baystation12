@@ -480,8 +480,8 @@
 	set category = "Object"
 	set src in usr
 
-	src.dir = turn(src.dir, 90)
-	src.part2.dir = src.dir
+	src.set_dir(turn(src.dir, 90))
+	src.part2.set_dir(src.dir)
 	src.add_fingerprint(usr)
 	return
 
@@ -489,7 +489,7 @@
 
 	var/t = src.dir
 	..()
-	src.dir = t
+	src.set_dir(t)
 	//src.part2.first = null
 	del(src.part2.first)
 	return
@@ -660,9 +660,9 @@
 		return
 	return
 
-/obj/item/assembly/m_i_ptank/examine()
-	..()
-	part3.examine()
+/obj/item/assembly/m_i_ptank/examine(mob/user)
+	..(user)
+	part3.examine(user)
 
 /obj/item/assembly/m_i_ptank/Del()
 
@@ -748,9 +748,9 @@
 	src.icon_state = text("timer-igniter-tank[]", n)
 	return
 
-/obj/item/assembly/t_i_ptank/examine()
-	..()
-	src.part3.examine()
+/obj/item/assembly/t_i_ptank/examine(mob/user)
+	..(user)
+	src.part3.examine(user)
 
 /obj/item/assembly/t_i_ptank/Del()
 
@@ -827,9 +827,9 @@
 		part3.ignite()
 	..()
 
-/obj/item/assembly/r_i_ptank/examine()
-	..()
-	src.part3.examine()
+/obj/item/assembly/r_i_ptank/examine(mob/user)
+	..(user)
+	src.part3.examine(user)
 
 /obj/item/assembly/r_i_ptank/Del()
 

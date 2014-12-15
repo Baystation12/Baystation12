@@ -37,6 +37,22 @@
 /turf/ex_act(severity)
 	return 0
 
+/turf/attack_hand(mob/user)
+	if(!(user.canmove) || user.restrained() || !(user.pulling))
+		return 0
+	if(user.pulling.anchored || !isturf(user.pulling.loc))
+		return 0
+	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+		return 0
+	if(ismob(user.pulling))
+		var/mob/M = user.pulling
+		var/atom/movable/t = M.pulling
+		M.stop_pulling()
+		step(user.pulling, get_dir(user.pulling.loc, src))
+		M.start_pulling(t)
+	else
+		step(user.pulling, get_dir(user.pulling.loc, src))
+	return 1
 
 /turf/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj ,/obj/item/projectile/beam/pulse))
@@ -86,7 +102,7 @@
 
 	//Finally, check objects/mobs to block entry that are not on the border
 	for(var/atom/movable/obstacle in src)
-		if(obstacle.flags & ~ON_BORDER)
+		if(!(obstacle.flags & ON_BORDER))
 			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0

@@ -3,9 +3,22 @@
 	if (silent)
 		return
 
-	if(!(container && (istype(container, /obj/item/device/mmi) || istype(container, /obj/item/device/mmi/posibrain))))
+	if(!(container && istype(container, /obj/item/device/mmi)))
 		return //No MMI, can't speak, bucko./N
 	else
+		var/datum/language/speaking = parse_language(message)
+		if(speaking)
+			message = copytext(message, 2+length(speaking.key))
+		var/verb = "says"
+		var/ending = copytext(message, length(message))
+		if (speaking)
+			verb = speaking.get_spoken_verb(ending)
+		else
+			if(ending=="!")
+				verb=pick("exclaims","shouts","yells")
+			if(ending=="?")
+				verb="asks"
+
 		if(prob(emp_damage*4))
 			if(prob(10))//10% chane to drop the message entirely
 				return
@@ -14,5 +27,5 @@
 		if(istype(container, /obj/item/device/mmi/radio_enabled))
 			var/obj/item/device/mmi/radio_enabled/R = container
 			if(R.radio)
-				spawn(0) R.radio.hear_talk(src, sanitize(message))
+				spawn(0) R.radio.hear_talk(src, trim(sanitize(message)), verb, speaking)
 		..()

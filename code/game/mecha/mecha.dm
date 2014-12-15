@@ -69,6 +69,16 @@
 	var/max_equip = 3
 	var/datum/events/events
 
+/obj/mecha/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!cell)
+		return 0
+
+	return cell.drain_power(drain_check)
+
 /obj/mecha/New()
 	..()
 	events = new
@@ -83,7 +93,6 @@
 	add_cell()
 	add_iterators()
 	removeVerb(/obj/mecha/verb/disconnect_from_port)
-	removeVerb(/atom/movable/verb/pull)
 	log_message("[src.name] created.")
 	loc.Entered(src)
 	mechas_list += src //global mech list
@@ -165,25 +174,24 @@
 	else
 		return 0
 
-/obj/mecha/examine()
-	set src in view()
-	..()
+/obj/mecha/examine(mob/user)
+	..(user)
 	var/integrity = health/initial(health)*100
 	switch(integrity)
 		if(85 to 100)
-			usr << "It's fully intact."
+			user << "It's fully intact."
 		if(65 to 85)
-			usr << "It's slightly damaged."
+			user << "It's slightly damaged."
 		if(45 to 65)
-			usr << "It's badly damaged."
+			user << "It's badly damaged."
 		if(25 to 45)
-			usr << "It's heavily damaged."
+			user << "It's heavily damaged."
 		else
-			usr << "It's falling apart."
+			user << "It's falling apart."
 	if(equipment && equipment.len)
-		usr << "It's equipped with:"
+		user << "It's equipped with:"
 		for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
-			usr << "\icon[ME] [ME]"
+			user << "\icon[ME] [ME]"
 	return
 
 
@@ -308,7 +316,7 @@
 	return 0
 
 /obj/mecha/proc/mechturn(direction)
-	dir = direction
+	set_dir(direction)
 	playsound(src,'sound/mecha/mechturn.ogg',40,1)
 	return 1
 
@@ -446,28 +454,6 @@
 		src.log_append_to_last("Armor saved.")
 	return
 
-/obj/mecha/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/mecha/attack_animal(mob/living/user as mob)
-	src.log_message("Attack by simple animal. Attacker - [user].",1)
-	if(user.melee_damage_upper == 0)
-		user.emote("[user.friendly] [src]")
-	else
-		if(!prob(src.deflect_chance))
-			var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
-			src.take_damage(damage)
-			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-			visible_message("\red <B>[user]</B> [user.attacktext] [src]!")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-		else
-			src.log_append_to_last("Armor saved.")
-			playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-			src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
-			visible_message("\blue The [user] rebounds off [src.name]'s armor!")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	return
-
 /obj/mecha/hitby(atom/movable/A as mob|obj) //wrapper
 	..()
 	src.log_message("Hit by [A].",1)
@@ -506,14 +492,17 @@
 		src.visible_message("The [src.name] armor deflects the projectile")
 		src.log_append_to_last("Armor saved.")
 		return
-	var/ignore_threshold
-	if(Proj.flag == "taser")
-		use_power(200)
-		return
-	if(istype(Proj, /obj/item/projectile/beam/pulse))
-		ignore_threshold = 1
-	src.take_damage(Proj.damage,Proj.flag)
-	src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
+
+	if(Proj.damage_type == HALLOSS)
+		use_power(Proj.agony * 5)
+
+	if(!(Proj.nodamage))
+		var/ignore_threshold
+		if(istype(Proj, /obj/item/projectile/beam/pulse))
+			ignore_threshold = 1
+		src.take_damage(Proj.damage,Proj.flag)
+		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
+
 	Proj.on_hit(src)
 	return
 
@@ -650,7 +639,7 @@
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 
-	if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/device/mmi/posibrain))
+	if(istype(W, /obj/item/device/mmi))
 		if(mmi_move_inside(W,user))
 			user << "[src]-MMI interface initialized successfuly"
 		else
@@ -1028,7 +1017,7 @@
 		src.forceMove(src.loc)
 		src.log_append_to_last("[H] moved in as pilot.")
 		src.icon_state = src.reset_icon()
-		dir = dir_in
+		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
@@ -1087,7 +1076,7 @@
 		src.Entered(mmi_as_oc)
 		src.Move(src.loc)
 		src.icon_state = src.reset_icon()
-		dir = dir_in
+		set_dir(dir_in)
 		src.log_message("[mmi_as_oc] moved in as pilot.")
 		if(!hasInternalDamage())
 			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
@@ -1167,7 +1156,7 @@
 			src.occupant.client.perspective = MOB_PERSPECTIVE
 		*/
 		src.occupant << browse(null, "window=exosuit")
-		if(istype(mob_container, /obj/item/device/mmi) || istype(mob_container, /obj/item/device/mmi/posibrain))
+		if(istype(mob_container, /obj/item/device/mmi))
 			var/obj/item/device/mmi/mmi = mob_container
 			if(mmi.brainmob)
 				occupant.loc = mmi
@@ -1176,7 +1165,7 @@
 			src.verbs += /obj/mecha/verb/eject
 		src.occupant = null
 		src.icon_state = src.reset_icon()+"-open"
-		src.dir = dir_in
+		src.set_dir(dir_in)
 	return
 
 /////////////////////////
@@ -1406,11 +1395,11 @@
 
 /obj/mecha/proc/output_maintenance_dialog(obj/item/weapon/card/id/id_card,mob/user)
 	if(!id_card || !user) return
-	
+
 	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"
 	if (locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in contents)
-		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>" 
-	
+		maint_options += "<a href='?src=\ref[src];remove_passenger=1;user=\ref[user]'>Remove Passenger</a>"
+
 	var/output = {"<html>
 						<head>
 						<style>
@@ -1568,23 +1557,23 @@
 		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
 			if (P.occupant)
 				passengers["[P.occupant]"] = P
-		
+
 		if (!passengers)
 			user << "\red There are no passengers to remove."
 			return
-			
+
 		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
-		
+
 		if (!pname)
 			return
-			
+
 		var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
 		var/mob/occupant = P.occupant
-		
+
 		user.visible_message("\red [user] begins opening the hatch on \the [P]...", "\red You begin opening the hatch on \the [P]...")
 		if (!do_after(user, 40, needhand=0))
 			return
-		
+
 		user.visible_message("\red [user] opens the hatch on \the [P] and removes [occupant]!", "\red You open the hatch on \the [P] and remove [occupant]!")
 		P.go_out()
 		P.log_message("[occupant] was removed.")
@@ -1726,6 +1715,27 @@
 	else
 		icon_state = initial(icon_state)
 	return icon_state
+
+/obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
+
+	if(!damage)
+		return 0
+
+	src.log_message("Attack by an animal. Attacker - [user].",1)
+
+	if(!prob(src.deflect_chance))
+		src.take_damage(damage)
+		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
+		visible_message("\red <B>[user]</B> [attack_message] [src]!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	else
+		src.log_append_to_last("Armor saved.")
+		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+		src.occupant_message("\blue The [user]'s attack is stopped by the armor.")
+		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	return 1
+
 
 //////////////////////////////////////////
 ////////  Mecha global iterators  ////////

@@ -98,7 +98,8 @@
 		brute -= brute / 2
 
 	if(status & ORGAN_BROKEN && prob(40) && brute)
-		owner.emote("scream")	//getting hit on broken hand hurts
+		if (!(owner.species && (owner.species.flags & NO_PAIN)))
+			owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
 
@@ -247,8 +248,8 @@ This function completely restores a damaged organ to perfect condition.
 				W.open_wound(damage)
 				if(prob(25))
 					//maybe have a separate message for BRUISE type damage?
-					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping noise.",\
+					"\red The wound on your [display_name] widens with a nasty ripping noise.",\
 					"You hear a nasty ripping noise, as if flesh is being torn apart.")
 				return
 
@@ -648,7 +649,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(status & ORGAN_ROBOT && !no_explode && sabotaged)
 			owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
 			"\red <b>Your [display_name] explodes!</b>",\
-			"You hear an explosion followed by a scream!")
+			"You hear an explosion!")
 			explosion(get_turf(owner),-1,-1,2,3)
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, owner)
@@ -1036,7 +1037,7 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
 
 	icon = base
-	dir = SOUTH
+	set_dir(SOUTH)
 	src.transform = turn(src.transform, rand(70,130))
 
 
@@ -1167,7 +1168,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 				//TODO: ORGAN REMOVAL UPDATE.
 				if(istype(src,/obj/item/weapon/organ/head/posi))
-					var/obj/item/device/mmi/posibrain/B = new(loc)
+					var/obj/item/device/mmi/digital/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else
 					var/obj/item/organ/brain/B = new(loc)

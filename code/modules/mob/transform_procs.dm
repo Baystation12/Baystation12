@@ -111,17 +111,9 @@
 	for (var/obj/item/device/radio/intercom/comm in O.loc)
 		comm.ai += O
 
-	O << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
-	O << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
-	O << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
-	O << "To use something, simply click on it."
-	O << {"Use say ":b to speak to your cyborgs through binary."}
-	if (!(ticker && ticker.mode && (O.mind in ticker.mode.malf_ai)))
-		O.show_laws()
-		O << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
+	O.on_mob_init()
 
 	O.add_ai_verbs()
-	O.job = "AI"
 
 	O.rename_self("ai",1)
 	. = O
@@ -166,17 +158,16 @@
 	O.job = "Cyborg"
 	if(O.mind.assigned_role == "Cyborg")
 		if(O.mind.role_alt_title == "Android")
-			O.mmi = new /obj/item/device/mmi/posibrain(O)
+			O.mmi = new /obj/item/device/mmi/digital/posibrain(O)
 		else if(O.mind.role_alt_title == "Robot")
-			O.mmi = null //Robots do not have removable brains.
+			O.mmi = new /obj/item/device/mmi/digital/robot(O)
 		else
 			O.mmi = new /obj/item/device/mmi(O)
 
-		if(O.mmi)
-			O.mmi.transfer_identity(src)
+		O.mmi.transfer_identity(src)
 
 	callHook("borgify", list(O))
-
+	O.notify_ai(1)
 	O.Namepick()
 
 	spawn(0)//To prevent the proc from returning null.

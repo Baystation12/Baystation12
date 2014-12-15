@@ -154,6 +154,11 @@
 	S["flavor_texts_legs"]		>> flavor_texts["legs"]
 	S["flavor_texts_feet"]		>> flavor_texts["feet"]
 
+	//Flavour text for robots.
+	S["flavour_texts_robot_Default"] >> flavour_texts_robot["Default"]
+	for(var/module in robot_module_types)
+		S["flavour_texts_robot_[module]"] >> flavour_texts_robot[module]
+
 	//Miscellaneous
 	S["med_record"]			>> med_record
 	S["sec_record"]			>> sec_record
@@ -297,6 +302,11 @@
 	S["flavor_texts_hands"]		<< flavor_texts["hands"]
 	S["flavor_texts_legs"]		<< flavor_texts["legs"]
 	S["flavor_texts_feet"]		<< flavor_texts["feet"]
+
+	//Flavour text for robots.
+	S["flavour_texts_robot_Default"] << flavour_texts_robot["Default"]
+	for(var/module in robot_module_types)
+		S["flavour_texts_robot_[module]"] << flavour_texts_robot[module]
 
 	//Miscellaneous
 	S["med_record"]			<< med_record

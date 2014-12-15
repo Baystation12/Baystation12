@@ -6,7 +6,7 @@
 	item_state = ""	//no inhands
 	item_color = "bluetie"
 	flags = FPRINT | TABLEPASS
-	slot_flags = 0
+	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
@@ -257,13 +257,12 @@
 		holstered.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/holster/examine()
-	set src in view()
-	..()
+/obj/item/clothing/tie/holster/examine(mob/user)
+	..(user)
 	if (holstered)
-		usr << "A [holstered] is holstered here."
+		user << "A [holstered] is holstered here."
 	else
-		usr << "It is empty."
+		user << "It is empty."
 
 /obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
@@ -348,8 +347,8 @@
 	hold.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg)
-	hold.hear_talk(M, msg)
+/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
+	hold.hear_talk(M, msg, verb, speaking)
 	..()
 
 /obj/item/clothing/tie/storage/attack_self(mob/user as mob)
@@ -391,7 +390,7 @@
 	desc = "This glowing blue badge marks the holder as THE LAW."
 	icon_state = "holobadge"
 	item_color = "holobadge"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/emagged = 0 //Emagging removes Sec check.
 	var/stored_name = null
@@ -399,7 +398,7 @@
 /obj/item/clothing/tie/holobadge/cord
 	icon_state = "holobadge-cord"
 	item_color = "holobadge-cord"
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 /obj/item/clothing/tie/holobadge/attack_self(mob/user as mob)
 	if(!stored_name)

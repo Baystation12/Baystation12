@@ -1,4 +1,5 @@
 //Alium nests. Essentially beds with an unbuckle delay that only aliums can buckle mobs to.
+#define NEST_RESIST_TIME 1200
 
 /obj/structure/stool/bed/nest
 	name = "alien nest"
@@ -19,12 +20,16 @@
 				buckled_mob.old_y = 0
 				unbuckle()
 			else
+				if(world.time <= buckled_mob.last_special+NEST_RESIST_TIME)
+					return
+				buckled_mob.last_special = world.time
 				buckled_mob.visible_message(\
 					"<span class='warning'>[buckled_mob.name] struggles to break free of the gelatinous resin...</span>",\
 					"<span class='warning'>You struggle to break free from the gelatinous resin...</span>",\
 					"<span class='notice'>You hear squelching...</span>")
-				spawn(1200)
+				spawn(NEST_RESIST_TIME)
 					if(user && buckled_mob && user.buckled == src)
+						buckled_mob.last_special = world.time
 						buckled_mob.pixel_y = 0
 						buckled_mob.old_y = 0
 						unbuckle()
@@ -56,7 +61,7 @@
 			"<span class='notice'>You hear squelching...</span>")
 	M.buckled = src
 	M.loc = src.loc
-	M.dir = src.dir
+	M.set_dir(src.dir)
 	M.update_canmove()
 	M.pixel_y = 6
 	M.old_y = 6

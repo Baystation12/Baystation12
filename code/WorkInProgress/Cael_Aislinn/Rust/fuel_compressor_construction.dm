@@ -39,7 +39,7 @@
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
-		dir = ndir
+		set_dir(ndir)
 	else
 		has_electronics = 3
 		opened = 0

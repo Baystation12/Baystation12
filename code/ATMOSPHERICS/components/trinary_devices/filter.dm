@@ -5,7 +5,7 @@
 	level = 1
 
 	name = "Gas filter"
-	
+
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
@@ -49,11 +49,11 @@
 			filtered_out = list("carbon_dioxide")
 		if(4)//removing N2O
 			filtered_out = list("sleeping_agent")
-	
+
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
-	
+
 	if(radio_controller)
 		initialize()
 
@@ -102,14 +102,14 @@
 		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
 		last_flow_rate = 0
 		return
-	
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
-	
+
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, active_power_usage)
-		
+
 		if(network2)
 			network2.update = 1
 
@@ -125,7 +125,7 @@
 		last_flow_rate = 0
 	else
 		handle_power_draw(power_draw)
-	
+
 	return 1
 
 /obj/machinery/atmospherics/trinary/filter/initialize()
@@ -214,7 +214,7 @@
 	src.add_fingerprint(usr)
 	if(href_list["filterset"])
 		filter_type = text2num(href_list["filterset"])
-		
+
 		filtered_out.Cut()	//no need to create new lists unnecessarily
 		switch(filter_type)
 			if(0) //removing hydrocarbons
@@ -228,7 +228,7 @@
 				filtered_out += "carbon_dioxide"
 			if(4)//removing N2O
 				filtered_out += "sleeping_agent"
-		
+
 	if (href_list["temp"])
 		src.temp = null
 	if(href_list["set_flow_rate"])

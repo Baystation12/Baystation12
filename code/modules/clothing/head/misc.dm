@@ -75,7 +75,7 @@
 	name = "red space-helmet replica"
 	icon_state = "syndicate"
 	item_state = "syndicate"
-	desc = "A plastic replica of a syndicate agent's space helmet, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
+	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
@@ -234,7 +234,7 @@
 	icon_state = "chickenhead"
 	item_state = "chickensuit"
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
-	siemens_coefficient = 2.0
+	siemens_coefficient = 0.7
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/bearpelt
@@ -243,7 +243,7 @@
 	icon_state = "bearpelt"
 	item_state = "bearpelt"
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
-	siemens_coefficient = 2.0
+	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/xenos
 	name = "xenos helmet"
@@ -261,5 +261,12 @@
 	icon_state = "philosopher_wig"
 	item_state = "philosopher_wig"
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
-	siemens_coefficient = 2.0
+	siemens_coefficient = 2.0 //why is it so conductive?!
+	body_parts_covered = 0
+
+/obj/item/clothing/head/orangebandana //themij: Taryn Kifer
+	name = "orange bandana"
+	desc = "An orange piece of cloth, worn on the head."
+	icon_state = "orange_bandana"
+	item_state = "orange_bandana"
 	body_parts_covered = 0

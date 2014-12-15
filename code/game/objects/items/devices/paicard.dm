@@ -11,6 +11,13 @@
 	var/looking_for_personality = 0
 	var/mob/living/silicon/pai/pai
 
+/*/obj/item/device/paicard/relaymove(var/mob/user, var/direction)
+	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))
+		var/obj/item/rig_module/module = src.loc.loc
+		if(!module.holder || !direction)
+			return
+		module.holder.forced_move(direction)*/
+
 /obj/item/device/paicard/New()
 	..()
 	overlays += "pai-off"
@@ -162,19 +169,13 @@
 				<table class="request">
 					<tr>
 						<td class="radio">Transmit:</td>
-						<td><a href='byond://?src=\ref[src];wires=4'>[(radio.wires & 4) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>
 					<tr>
 						<td class="radio">Receive:</td>
-						<td><a href='byond://?src=\ref[src];wires=2'>[(radio.wires & 2) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
-
-						</td>
-					</tr>
-					<tr>
-						<td class="radio">Signal Pulser:</td>
-						<td><a href='byond://?src=\ref[src];wires=1'>[(radio.wires & 1) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>
@@ -254,10 +255,11 @@
 			removePersonality()
 	if(href_list["wires"])
 		var/t1 = text2num(href_list["wires"])
-		if (radio.wires & t1)
-			radio.wires &= ~t1
-		else
-			radio.wires |= t1
+		switch(t1)
+			if(4)
+				radio.ToggleBroadcast()
+			if(2)
+				radio.ToggleReception()
 	if(href_list["setlaws"])
 		var/newlaws = copytext(sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message),1,MAX_MESSAGE_LEN)
 		if(newlaws)
@@ -303,3 +305,9 @@
 	for(var/mob/M in src)
 		M.emp_act(severity)
 	..()
+
+/obj/item/device/paicard/ex_act(severity)
+	if(pai)
+		pai.ex_act(severity)
+	else
+		del(src)

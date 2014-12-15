@@ -39,9 +39,6 @@
 			if(get_dist(user,src) <= 1) //not remotely though
 				return TryToSwitchState(user)
 
-	attack_paw(mob/user as mob)
-		return TryToSwitchState(user)
-
 	attack_hand(mob/user as mob)
 		return TryToSwitchState(user)
 
@@ -156,12 +153,6 @@
 				hardness -= 0.1
 				CheckHardness()
 		return
-
-	proc/update_nearby_tiles(need_rebuild) //Copypasta from airlock code
-		if(!air_master)
-			return 0
-		air_master.mark_for_update(get_turf(src))
-		return 1
 
 /obj/structure/mineral_door/iron
 	mineralType = "metal"

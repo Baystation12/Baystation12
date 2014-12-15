@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled {
+.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
     float: left;
     min-width: 15px;
     height: 16px;
@@ -173,11 +173,11 @@ h4 {
     font-weight: bold;
 }
 
-.redBackground {
+.redButton {
     background: #ea0000;
 }
 
-.yellowBackground {
+.yellowButton {
     background: #cacc00;
 }
 
@@ -187,6 +187,16 @@ h4 {
 
 .dark {
     color: #272727;
+}
+
+.caption {
+    font-size: 10px;
+    font-weight: bold;
+	padding: 5px;
+}
+
+.footer {
+	font-size: 10px;
 }
 
 .noticePlaceholder {
@@ -410,6 +420,12 @@ div.notice {
 .fixedLeftWidest {
     width: 250px;
     float: left;
+}
+
+.fixedLeftWiderRed {
+    width: 220px;
+    float: left;
+	background: #ee0000;
 }
 
 .floatRight {

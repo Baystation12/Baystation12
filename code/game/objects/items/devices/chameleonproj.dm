@@ -95,7 +95,7 @@
 	icon = new_icon
 	icon_state = new_iconstate
 	overlays = new_overlays
-	dir = O.dir
+	set_dir(O.dir)
 	M.loc = src
 	master = C
 	master.active_dummy = src

@@ -26,7 +26,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
+	flags = NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 
@@ -36,6 +36,9 @@
 	dusted_anim = "dust-a"
 	death_message = "lets out a waning guttural screech, green blood bubbling from its maw."
 	death_sound = 'sound/voice/hiss6.ogg'
+
+	speech_sounds = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
+	speech_chance = 100
 
 	breath_type = null
 	poison_type = null

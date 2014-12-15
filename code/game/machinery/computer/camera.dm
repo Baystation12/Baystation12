@@ -15,11 +15,6 @@
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
 
-
-	attack_paw(var/mob/user as mob)
-		return attack_hand(user)
-
-
 	check_eye(var/mob/user as mob)
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return null
@@ -69,7 +64,7 @@
 
 	proc/can_access_camera(var/obj/machinery/camera/C)
 		var/list/shared_networks = src.network & C.network
-		if(shared_networks.len && C.is_functional())
+		if(shared_networks.len)
 			return 1
 		return 0
 
