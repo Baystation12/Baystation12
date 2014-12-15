@@ -71,17 +71,17 @@
 
 	name = lowertext("[fullname] sandwich")
 	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich"
-	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
+	w_class = n_ceil(Clamp((ingredients.len/2),2,4))
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/Del()
 	for(var/obj/item/O in ingredients)
 		del(O)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/csandwich/examine()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/csandwich/examine(mob/user)
+	..(user)
 	var/obj/item/O = pick(contents)
-	usr << "\blue You think you can see [O.name] in there."
+	user << "\blue You think you can see [O.name] in there."
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
 

@@ -9,6 +9,17 @@
 	spawn(5)
 		updateicon()
 
+/obj/item/weapon/cell/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	var/drained_power = rand(200,400)
+	if(charge < drained_power)
+		drained_power = charge
+	use(drained_power)
+	return drained_power
+
 /obj/item/weapon/cell/proc/updateicon()
 	overlays.Cut()
 
@@ -53,25 +64,16 @@
 	return amount_used
 
 
-/obj/item/weapon/cell/examine()
-	set src in view(1)
-	if(usr /*&& !usr.stat*/)
-		if(maxcharge <= 2500)
-			usr << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
-		else
-			usr << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
+/obj/item/weapon/cell/examine(mob/user)
+	if(get_dist(src, user) > 1)
+		return
+
+	if(maxcharge <= 2500)
+		user << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
+	else
+		user << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
 	if(crit_fail)
-		usr << "\red This power cell seems to be faulty."
-
-/obj/item/weapon/cell/attack_self(mob/user as mob)
-	src.add_fingerprint(user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		var/obj/item/clothing/gloves/space_ninja/SNG = H.gloves
-		if(!istype(SNG) || !SNG.candrain || !SNG.draining) return
-
-		SNG.drain("CELL",src,H.wear_suit)
-	return
+		user << "\red This power cell seems to be faulty."
 
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()

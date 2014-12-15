@@ -147,7 +147,7 @@
 			if(temp.len)
 				L.Add(C)
 
-		//camera_sort(L)
+		camera_sort(L)
 
 		return L
 	verify_machine(var/obj/machinery/camera/C,var/datum/file/camnet_key/key = null)

@@ -12,7 +12,7 @@
 
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 	var/list/mixing_inputs
-	
+
 	//for mapping
 	var/node1_concentration = 0.5
 	var/node2_concentration = 0.5
@@ -71,23 +71,23 @@
 
 /obj/machinery/atmospherics/trinary/mixer/process()
 	..()
-	
+
 	//For some reason this doesn't work even in initialize(), so it goes here.
 	if (!mixing_inputs)
 		mixing_inputs = list(src.air1 = node1_concentration, src.air2 = node2_concentration)
-	
+
 	if((stat & (NOPOWER|BROKEN)) || !on)
 		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
 		last_flow_rate = 0
 		return
-	
+
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = (set_flow_rate*mixing_inputs[air1]/air1.volume)*air1.total_moles + (set_flow_rate*mixing_inputs[air1]/air2.volume)*air2.total_moles
-	
+
 	var/power_draw = -1
 	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
 		power_draw = mix_gas(src, mixing_inputs, air3, transfer_moles, active_power_usage)
-		
+
 		if(network1 && mixing_inputs[air1])
 			network1.update = 1
 
@@ -103,7 +103,7 @@
 		last_flow_rate = 0
 	else
 		handle_power_draw(power_draw)
-	
+
 	return 1
 
 /obj/machinery/atmospherics/trinary/mixer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)

@@ -50,26 +50,49 @@
 	var/mob/living/silicon/ai/occupant	= null
 	var/busy = 0
 
-	// Ninja gloves check
-	attack_hand(mob/user as mob)
-		if(ishuman(user) && istype(user:gloves, /obj/item/clothing/gloves/space_ninja) && user:gloves:candrain && !user:gloves:draining)
-			if(user:wear_suit:s_control)
-				user:wear_suit.transfer_ai("AIFIXER","NINJASUIT",src,user)
-			else
-				user << "\red <b>ERROR</b>: \black Remote access channel disabled."
-			return
-		..()
-
 	attackby(obj/I as obj,mob/user as mob)
 		if(computer && !computer.stat)
+
 			if(istype(I, /obj/item/device/aicard))
-				I:transfer_ai("AIFIXER","AICARD",src,user)
+
+				var/obj/item/device/aicard/card = I
+				var/mob/living/silicon/ai/comp_ai = locate() in src
+				var/mob/living/silicon/ai/card_ai = locate() in card
+
+				if(istype(comp_ai))
+					if(busy)
+						user << "\red <b>ERROR</b>: \black Reconstruction in progress."
+						return
+					card.grab_ai(comp_ai, user)
+					if(!(locate(/mob/living/silicon/ai) in src)) occupant = null
+				else if(istype(card_ai))
+					load_ai(card_ai,card,user)
+					occupant = locate(/mob/living/silicon/ai) in src
+
 				if(computer.program)
 					computer.program.update_icon()
 				computer.update_icon()
 				computer.occupant = occupant
 		..()
 		return
+
+/obj/item/part/computer/ai_holder/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
+
+	if(!transfer)
+		return
+
+	// Transfer over the AI.
+	transfer << "You have been uploaded to a stationary terminal. Sadly, there is no remote access from here."
+	user << "\blue <b>Transfer successful</b>: \black [transfer.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed."
+
+	transfer.loc = src
+	transfer.cancel_camera()
+	transfer.control_disabled = 1
+	occupant = transfer
+
+	if(card)
+		card.clear()
+
 
 /*
 	ID computer cardslot - reading and writing slots
@@ -192,9 +215,12 @@
 		if(reader)
 			reader.loc = loc
 			if(istype(L) && !L.get_active_hand())
-				L.put_in_hands(reader)
+				if(istype(L,/mob/living/carbon/human))
+					L.put_in_hands(reader)
+				else
+					reader.loc = get_turf(computer)
 			else
-				reader.loc = computer.loc
+				reader.loc = get_turf(computer)
 			reader = null
 			return 1
 		return 0
@@ -203,15 +229,15 @@
 		if(writer && dualslot)
 			writer.loc = loc
 			if(istype(L) && !L.get_active_hand())
-				L.put_in_hands(writer)
+				if(istype(L,/mob/living/carbon/human))
+					L.put_in_hands(writer)
+				else
+					writer.loc = get_turf(computer)
 			else
-				writer.loc = computer.loc
+				writer.loc = get_turf(computer)
 			writer = null
 			return 1
 		return 0
-
-
-
 
 	// Authorizes the user based on the computer's requirements
 	proc/authenticate()

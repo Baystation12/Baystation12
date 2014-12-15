@@ -25,11 +25,11 @@
 
 	if(istype(station))
 		station.com = hub
-		station.dir = dir
+		station.set_dir(dir)
 
 	if(istype(hub))
 		hub.com = src
-		hub.dir = dir
+		hub.set_dir(dir)
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -76,9 +76,6 @@
 		..()
 
 	return
-
-/obj/machinery/computer/teleporter/attack_paw()
-	src.attack_hand()
 
 /obj/machinery/teleport/station/attack_ai()
 	src.attack_hand()
@@ -309,9 +306,6 @@
 	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
-	src.attack_hand()
-
-/obj/machinery/teleport/station/attack_paw()
 	src.attack_hand()
 
 /obj/machinery/teleport/station/attack_ai()

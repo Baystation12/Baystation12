@@ -64,12 +64,7 @@
 	icon_state = "stamp-cent"
 	item_color = "centcomm"
 
-
-/obj/item/weapon/stamp/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 // Syndicate stamp to forge documents.
-
 /obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
 
 	var/list/stamp_types = typesof(/obj/item/weapon/stamp) - src.type // Get all stamp types except our own

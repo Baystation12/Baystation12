@@ -117,14 +117,13 @@
 		return
 
 
-	examine()
-		set src in view()
-		..()
-		if((in_range(src, usr) || loc == usr))
+	examine(mob/user)
+		..(user)
+		if((in_range(src, user) || loc == user))
 			if(secured)
-				usr << "\The [src] is ready!"
+				user << "\The [src] is ready!"
 			else
-				usr << "\The [src] can be attached!"
+				user << "\The [src] can be attached!"
 		return
 
 

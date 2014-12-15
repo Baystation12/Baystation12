@@ -3,6 +3,14 @@
 	voice_name = "synthesized voice"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
+	var/list/additional_law_channels = list("State")
+	var/const/MAIN_CHANNEL = "Main Frequency"
+	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
+	var/list/stating_laws = list()// Channels laws are currently being stated on
+	var/lawcheck[1]
+	var/ioncheck[1]
+	var/obj/item/device/radio/common_radio
+
 	immune_to_ssd = 1
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
@@ -67,8 +75,14 @@
 /mob/living/silicon/IsAdvancedToolUser()
 	return 1
 
-/mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
+/mob/living/silicon/blob_act()
+	if (src.stat != 2)
+		src.adjustBruteLoss(60)
+		src.updatehealth()
+		return 1
+	return 0
 
+/mob/living/silicon/bullet_act(var/obj/item/projectile/Proj)
 
 	if(!Proj.nodamage)
 		switch(Proj.damage_type)
@@ -78,7 +92,7 @@
 				adjustFireLoss(Proj.damage)
 
 	Proj.on_hit(src,2)
-
+	updatehealth()
 	return 2
 
 /mob/living/silicon/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
@@ -111,7 +125,7 @@
 	return 0
 
 
-// this function shows the health of the pAI in the Status panel
+// this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
 	if(!src.stat)
 		stat(null, text("System integrity: [round((health/maxHealth)*100)]%"))
@@ -172,6 +186,7 @@
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	if (..(language) && can_speak)
 		speech_synthesizer_langs.Add(all_languages[language])
+		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
 	..(rem_language)
@@ -188,7 +203,8 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/datum/language/L in languages)
-		dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+		if(!(L.flags & NONGLOBAL))
+			dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
@@ -222,3 +238,44 @@
 
 /mob/living/silicon/binarycheck()
 	return 1
+
+/mob/living/silicon/Topic(href, href_list)
+	..()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/list/channels = list(MAIN_CHANNEL)
+		if(common_radio)
+			for (var/ch_name in common_radio.channels)
+				channels += ch_name
+
+		channels += additional_law_channels
+		channels += "Cancel"
+
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in channels
+		if(setchannel != "Cancel")
+			lawchannel = setchannel
+			checklaws()
+		return 1
+
+	return 0
+
+/mob/living/silicon/ex_act(severity)
+	if(!blinded)
+		flick("flash", flash)
+
+	switch(severity)
+		if(1.0)
+			if (stat != 2)
+				adjustBruteLoss(100)
+				adjustFireLoss(100)
+				if(!anchored)
+					gib()
+		if(2.0)
+			if (stat != 2)
+				adjustBruteLoss(60)
+				adjustFireLoss(60)
+		if(3.0)
+			if (stat != 2)
+				adjustBruteLoss(30)
+
+	updatehealth()

@@ -17,7 +17,8 @@
 	var/health_deficiency = (100 - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
-	if(halloss >= 10) tally += (halloss / 10)
+	if (!(species && (species.flags & NO_PAIN)))
+		if(halloss >= 10) tally += (halloss / 10) //halloss shouldn't slow you down if you can't even feel it
 
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
@@ -55,26 +56,36 @@
 	if (bodytemperature < 283.222)
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
+	tally += 2*stance_damage //damaged/missing feet or legs is slow
+
 	if(mRun in mutations)
 		tally = 0
 
 	return (tally+config.human_delay)
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
-	//Can we act
+	//Can we act?
 	if(restrained())	return 0
 
-	//Do we have a working jetpack
-	if(istype(back, /obj/item/weapon/tank/jetpack))
-		var/obj/item/weapon/tank/jetpack/J = back
-		if(((!check_drift) || (check_drift && J.stabilization_on)) && (!lying) && (J.allow_thrust(0.01, src)))
+	//Do we have a working jetpack?
+	var/obj/item/weapon/tank/jetpack/thrust
+	if(back)
+		if(istype(back,/obj/item/weapon/tank/jetpack))
+			thrust = back
+		else if(istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = back
+			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
+				thrust = module.jets
+				break
+
+	if(thrust)
+		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.allow_thrust(0.01, src)))
 			inertia_dir = 0
 			return 1
-//		if(!check_drift && J.allow_thrust(0.01, src))
-//			return 1
 
 	//If no working jetpack then use the other checks
-	if(..())	return 1
+	if(..())
+		return 1
 	return 0
 
 

@@ -16,6 +16,18 @@
 	var/damtype = "brute"
 	var/force = 0
 
+/obj/New()
+	..()
+	// If the game is already underway initialize will no longer be called for us
+	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+		initialize()
+
+/obj/Topic(href, href_list, var/nowindow = 0)
+	// Calling Topic without a corresponding window open causes runtime errors
+	if(nowindow)
+		return 0
+	return ..()
+
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/proc/process()
@@ -120,7 +132,7 @@
 	return
 
 
-/obj/proc/hear_talk(mob/M as mob, text)
+/obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)
 		talking_atom.catchMessage(text, M)
 /*

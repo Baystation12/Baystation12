@@ -48,7 +48,7 @@
 // temporary fix for broken icon until somebody gets around to make these player-buildable
 /turf/simulated/floor/mech_bay_recharge_floor/attackby(obj/item/C as obj, mob/user as mob)	
 	..()	
-	if(floor_tile)
+	if(floor_type)
 		icon_state = "recharge_floor"
 	else
 		icon_state = "support_lattice"

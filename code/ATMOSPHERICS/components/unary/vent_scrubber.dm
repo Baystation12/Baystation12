@@ -1,6 +1,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber
 	icon = 'icons/atmos/vent_scrubber.dmi'
-	icon_state = "map_scrubber"
+	icon_state = "map_scrubber_off"
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it"
@@ -30,6 +30,7 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
 	on = 1
+	icon_state = "map_scrubber_on"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
 	..()
@@ -260,13 +261,11 @@
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
 
-/obj/machinery/atmospherics/unary/vent_scrubber/examine()
-	set src in oview(1)
-	..()
-	if (get_dist(usr, src) <= 1)
-		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+/obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
+	if(..(user, 1))
+		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
-		usr << "You are too far away to read the gauge."
+		user << "You are too far away to read the gauge."
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

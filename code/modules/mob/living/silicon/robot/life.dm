@@ -62,7 +62,7 @@
 /mob/living/silicon/robot/proc/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
-		if(src.stat == 2 || isWireCut(5))
+		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
 			src.camera.status = 0
 		else
 			src.camera.status = 1
@@ -167,7 +167,7 @@
 		src.sight &= ~SEE_TURFS
 		src.sight &= ~SEE_OBJS
 		src.see_in_dark = 8
-		src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		src.see_invisible = SEE_INVISIBLE_MINIMUM
 
 	regular_hud_updates()
 

@@ -48,7 +48,7 @@
 	M.amount = 50
 	src.modules += M
 
-	var/obj/item/stack/sheet/rglass/G = new /obj/item/stack/sheet/rglass(src)
+	var/obj/item/stack/sheet/glass/reinforced/G = new (src)
 	G.amount = 50
 	src.modules += G
 

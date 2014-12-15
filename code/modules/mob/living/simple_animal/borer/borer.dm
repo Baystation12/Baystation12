@@ -7,8 +7,8 @@
 	speak_emote = list("chirrups")
 	emote_hear = list("chirrups")
 	response_help  = "pokes"
-	response_disarm = "prods the"
-	response_harm   = "stomps on the"
+	response_disarm = "prods"
+	response_harm   = "stomps on"
 	icon_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
@@ -16,7 +16,7 @@
 	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attacktext = "nips"
+	attacktext = "nipped"
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE

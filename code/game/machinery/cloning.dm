@@ -96,10 +96,9 @@
 	src.read_only = !src.read_only
 	user << "You flip the write-protect tab to [src.read_only ? "protected" : "unprotected"]."
 
-/obj/item/weapon/disk/data/examine()
-	set src in oview(5)
-	..()
-	usr << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
+/obj/item/weapon/disk/data/examine(mob/user)
+	..(user)
+	user << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
 	return
 
 //Health Tracker Implant
@@ -122,8 +121,7 @@
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 	src.add_hiddenprint(user)
 	return attack_hand(user)
-/obj/machinery/clonepod/attack_paw(mob/user as mob)
-	return attack_hand(user)
+
 /obj/machinery/clonepod/attack_hand(mob/user as mob)
 	if ((isnull(src.occupant)) || (stat & NOPOWER))
 		return
@@ -190,7 +188,7 @@
 		if("revolution")
 			if((H.mind in ticker.mode:revolutionaries) || (H.mind in ticker.mode:head_revolutionaries))
 				ticker.mode.update_all_rev_icons() //So the icon actually appears
-		if("nuclear emergency")
+		if("mercenary")
 			if(H.mind in ticker.mode.syndicates)
 				ticker.mode.update_all_synd_icons()
 		if("cult")

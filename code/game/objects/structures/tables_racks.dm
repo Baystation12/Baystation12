@@ -250,9 +250,9 @@
 				if(6)
 					icon_state = "tabledir3"
 		if (dir_sum in list(1,2,4,8,5,6,9,10))
-			dir = dir_sum
+			set_dir(dir_sum)
 		else
-			dir = 2
+			set_dir(2)
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
@@ -353,6 +353,9 @@
 	if(isrobot(user))
 		return
 
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
+		return
+
 	if(istype(W, /obj/item/weapon/melee/energy/blade))
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
@@ -445,9 +448,10 @@
 			spawn(0)
 				A.throw_at(pick(targets),1,1)
 
-	dir = direction
+	set_dir(direction)
 	if(dir != NORTH)
 		layer = 5
+	climbable = 0 //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
@@ -465,6 +469,7 @@
 
 	layer = initial(layer)
 	flipped = 0
+	climbable = initial(climbable)
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)
@@ -579,6 +584,8 @@
 		del(src)
 		return
 	if(isrobot(user))
+		return
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
 		return
 	user.drop_item()
 	if(W && W.loc)	W.loc = src.loc

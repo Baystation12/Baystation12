@@ -27,10 +27,10 @@
 	src.name = "packet of [seed.seed_name] [seed.seed_noun]"
 	src.desc = "It has a picture of [seed.display_name] on the front."
 
-/obj/item/seeds/examine()
-	..()
+/obj/item/seeds/examine(mob/user)
+	..(user)
 	if(seed && !seed.roundstart)
-		usr << "It's tagged as variety #[seed.uid]."
+		user << "It's tagged as variety #[seed.uid]."
 
 /obj/item/seeds/cutting
 	name = "cuttings"
@@ -55,9 +55,6 @@
 
 /obj/item/seeds/replicapod
 	seed_type = "diona"
-
-/obj/item/seeds/poppyseed
-	seed_type = "poppies"
 
 /obj/item/seeds/chiliseed
 	seed_type = "chili"

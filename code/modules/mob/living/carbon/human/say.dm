@@ -10,7 +10,7 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 
-	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim_strip_html_properly(message)
 
 	if(stat == 2)
 		return say_dead(message)
@@ -33,23 +33,29 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if(speaking)
-		message = copytext(message,3)
+		message = copytext(message,2+length(speaking.key))
 	else if(species.default_language)
 		speaking = all_languages[species.default_language]
 
+	var/ending = copytext(message, length(message))
 	if (speaking)
-		verb = speaking.speech_verb
-
 		// This is broadcast to all mobs with the language,
 		// irrespective of distance or anything else.
 		if(speaking.flags & HIVEMIND)
 			speaking.broadcast(src,trim(message))
 			return
+		//If we've gotten this far, keep going!
+		verb = speaking.get_spoken_verb(ending)
+	else
+		if(ending=="!")
+			verb=pick("exclaims","shouts","yells")
+		if(ending=="?")
+			verb="asks"
 
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
 		return
 
-	message = capitalize(trim(message))
+	message = trim(message)
 
 	if(speech_problem_flag)
 		var/list/handle_r = handle_speech_problems(message)
@@ -59,13 +65,6 @@
 
 	if(!message || stat)
 		return
-
-	if (!speaking)
-		var/ending = copytext(message, length(message))
-		if(ending=="!")
-			verb=pick("exclaims","shouts","yells")
-		if(ending=="?")
-			verb="asks"
 
 	var/list/obj/item/used_radios = new
 
@@ -116,21 +115,35 @@
 			return
 		else
 			if(message_mode)
-				if(message_mode in (radiochannels | "department"))
-					if(l_ear && istype(l_ear,/obj/item/device/radio))
-						l_ear.talk_into(src,message, message_mode, verb, speaking)
-						used_radios += l_ear
-					else if(r_ear && istype(r_ear,/obj/item/device/radio))
-						r_ear.talk_into(src,message, message_mode, verb, speaking)
-						used_radios += r_ear
+				if(l_ear && istype(l_ear,/obj/item/device/radio))
+					l_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += l_ear
+				else if(r_ear && istype(r_ear,/obj/item/device/radio))
+					r_ear.talk_into(src,message, message_mode, verb, speaking)
+					used_radios += r_ear
 
 	var/sound/speech_sound
 	var/sound_vol
-	if(species.speech_sounds && prob(20))
+	if(species.speech_sounds && prob(species.speech_chance))
 		speech_sound = sound(pick(species.speech_sounds))
 		sound_vol = 50
 
-	..(message, speaking, verb, alt_name, italics, message_range, used_radios, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
+	//speaking into radios
+	if(used_radios.len)
+		italics = 1
+		message_range = 1
+		if(speaking)
+			message_range = speaking.get_talkinto_msg_range(message)
+		var/msg
+		if(!speaking || !(speaking.flags & NO_TALK_MSG))
+			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]]</span>"
+		for(var/mob/living/M in hearers(5, src))
+			if((M != src) && msg)
+				M.show_message(msg)
+			if (speech_sound)
+				sound_vol *= 0.5
+
+	..(message, speaking, verb, alt_name, italics, message_range, speech_sound, sound_vol)	//ohgod we should really be passing a datum here.
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -154,9 +167,7 @@
 
 				if(findtext(temp, "*", 1, 2))	//emotes
 					return
-				world << "Text after stuff is [temp]"
 				temp = copytext(trim_left(temp), 1, rand(5,8))
-				world << "Text after trimming is [temp]"
 
 				var/trimmed = trim_left(temp)
 				if(length(trimmed))
@@ -195,12 +206,22 @@
 	return ..()
 
 /mob/living/carbon/human/GetVoice()
-	if(istype(src.wear_mask, /obj/item/clothing/mask/gas/voice))
-		var/obj/item/clothing/mask/gas/voice/V = src.wear_mask
-		if(V.vchange)
-			return V.voice
-		else
-			return name
+
+	var/voice_sub
+	if(istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		// todo: fix this shit
+		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
+			voice_sub = rig.speech.voice_holder.voice
+	else
+		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
+			if(!gear)
+				continue
+			var/obj/item/voice_changer/changer = locate() in gear
+			if(changer && changer.active && changer.voice)
+				voice_sub = changer.voice
+	if(voice_sub)
+		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
 		return mind.changeling.mimicing
 	if(GetSpecialVoice())

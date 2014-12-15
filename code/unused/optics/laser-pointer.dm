@@ -44,7 +44,7 @@
 		set name = "Rotate"
 		set src in view(1)
 		turn_off()
-		dir = turn(dir, -90)
+		set_dir(turn(dir, -90))
 		if(on) turn_on()
 
 	Move(var/atom/newloc,var/newdir)

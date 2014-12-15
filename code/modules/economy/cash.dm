@@ -67,15 +67,24 @@
 /obj/item/weapon/spacecash/bundle/update_icon()
 	overlays.Cut()
 	var/sum = src.worth
+	var/num = 0
 	for(var/i in list(1000,500,200,100,50,20,10,1))
-		while(sum >= i)
+		while(sum >= i && num < 50)
 			sum -= i
+			num++
 			var/image/banknote = image('icons/obj/items.dmi', "spacecash[i]")
 			var/matrix/M = matrix()
 			M.Translate(rand(-6, 6), rand(-4, 8))
 			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
 			src.overlays += banknote
+	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
+		var/image/banknote = image('icons/obj/items.dmi', "spacecash1")
+		var/matrix/M = matrix()
+		M.Translate(rand(-6, 6), rand(-4, 8))
+		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
+		banknote.transform = M
+		src.overlays += banknote
 	src.desc = "They are worth [worth] Thalers."
 
 /obj/item/weapon/spacecash/bundle/attack_self()
@@ -167,8 +176,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	desc = "A card that holds an amount of money."
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
 
-/obj/item/weapon/spacecash/ewallet/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
-	usr << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."
+/obj/item/weapon/spacecash/ewallet/examine(mob/user)
+	..(user)
+	if (!(user in view(2)) && user!=src.loc) return
+	user << "\blue Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth]."
