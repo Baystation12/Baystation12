@@ -847,6 +847,15 @@ var/list/be_special_flags = list(
 //Area flags, possibly more to come
 #define RAD_SHIELDED 1 //shielded from radiation, clearly
 
+// Terminals
+#define IS_FILE 0
+#define IS_DIRECTORY 1
+#define IS_PROGRAM 2
+
+#define IS_IDLE 0
+#define IS_RUNNING 1
+#define IS_TERMINATING 2
+
 //intent flags, why wasn't this done the first time?
 #define I_HELP		"help"
 #define I_DISARM	"disarm"
