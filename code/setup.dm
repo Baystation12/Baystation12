@@ -867,3 +867,12 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 //Chemistry
 
 #define CHEM_SYNTH_ENERGY	500	//How much energy does it take to synthesize 1 unit of chemical, in J
+
+// Terminals
+#define IS_FILE 0
+#define IS_DIRECTORY 1
+#define IS_PROGRAM 2
+
+#define IS_IDLE 0
+#define IS_RUNNING 1
+#define IS_TERMINATING 2
