@@ -1,5 +1,9 @@
+#ifndef T_BOARD
+#error T_BOARD macro is not defined but we need it! 
+#endif
+
 /obj/item/weapon/circuitboard/shield_gen_ex
-	name = "Circuit board (Hull shield generator)"
+	name = T_BOARD("hull shield generator")
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
 	origin_tech = "bluespace=4;phorontech=3"
@@ -13,7 +17,7 @@
 							"/obj/item/stack/cable_coil" = 5)
 
 /obj/item/weapon/circuitboard/shield_gen
-	name = "Circuit board (Bubble shield generator)"
+	name = T_BOARD("bubble shield generator")
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen"
 	origin_tech = "bluespace=4;phorontech=3"
@@ -27,7 +31,7 @@
 							"/obj/item/stack/cable_coil" = 5)
 
 /obj/item/weapon/circuitboard/shield_cap
-	name = "Circuit board (Shield capacitor)"
+	name = T_BOARD("shield capacitor")
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_capacitor"
 	origin_tech = "magnets=3;powerstorage=4"
