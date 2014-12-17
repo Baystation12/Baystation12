@@ -12,17 +12,15 @@
 	var/prone_icon                                       // If set, draws this from icobase when mob is prone.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 
-	var/primitive                              // Lesser form, if any (ie. monkey for humans)
-	var/tail                                   // Name of tail image in species effects icon file.
-	var/datum/unarmed_attack/unarmed           // For empty hand harm-intent attack
-	var/datum/unarmed_attack/secondary_unarmed // For empty hand harm-intent attack if the first fails.
+	var/primitive                                 // Lesser form, if any (ie. monkey for humans)
+	var/tail                                      // Name of tail image in species effects icon file.
+	var/list/unarmed_attacks = null  // For empty hand harm-intent attack
 	var/datum/hud_data/hud
 	var/hud_type
 	var/slowdown = 0
 	var/gluttonous        // Can eat some mobs. 1 for monkeys, 2 for people.
 	var/rarity_value = 1  // Relative rarity/collector value for this species. Only used by ninja and cultists atm.
-	var/unarmed_type =           /datum/unarmed_attack
-	var/secondary_unarmed_type = /datum/unarmed_attack/bite
+	var/list/unarmed_types = list(/datum/unarmed_attack, /datum/unarmed_attack/bite)
 
 	var/language                  // Default racial language, if any.
 	// Default language is used when 'say' is used without modifiers.
@@ -98,8 +96,9 @@
 	else
 		hud = new()
 
-	if(unarmed_type) unarmed = new unarmed_type()
-	if(secondary_unarmed_type) secondary_unarmed = new secondary_unarmed_type()
+	unarmed_attacks = list()
+	for(var/u_type in unarmed_types)
+		unarmed_attacks += new u_type()
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
@@ -207,7 +206,7 @@
 	name_plural = "Humans"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
-	unarmed_type = /datum/unarmed_attack/punch
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
@@ -221,8 +220,7 @@
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	language = "Sinta'unathi"
 	tail = "sogtail"
-	unarmed_type = /datum/unarmed_attack/claws
-	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 	gluttonous = 1
@@ -249,8 +247,7 @@
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'tajr"
 	tail = "tajtail"
-	unarmed_type = /datum/unarmed_attack/claws
-	secondary_unarmed_type = /datum/unarmed_attack/bite/sharp
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -276,7 +273,7 @@
 	eyes = "skrell_eyes_s"
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
-	unarmed_type = /datum/unarmed_attack/punch
+	unarmed_types = list(/datum/unarmed_attack/punch)
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
@@ -292,8 +289,7 @@
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	default_language = "Vox-pidgin"
 	language = "Galactic Common"
-	unarmed_type = /datum/unarmed_attack/claws/strong
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	rarity_value = 2
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
@@ -380,8 +376,7 @@
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
-	unarmed_type = /datum/unarmed_attack/diona
-	secondary_unarmed_type = null //Does a walking mass of dionaea even have jaws, as we understand them?
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/diona)
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
@@ -447,8 +442,7 @@
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
-	unarmed_type = /datum/unarmed_attack/punch
-	secondary_unarmed_type = null
+	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 
 	eyes = "blank_eyes"
@@ -484,11 +478,10 @@
 	if(H.a_intent != "hurt")
 		return 0
 
-	if(unarmed.is_usable(H))
-		if(unarmed.shredding)
-			return 1
-	else if(secondary_unarmed.is_usable(H))
-		if(secondary_unarmed.shredding)
+	for(var/datum/unarmed_attack/attack in unarmed_attacks)
+		if(!attack.is_usable(H))
+			continue
+		if(attack.shredding)
 			return 1
 
 	return 0
