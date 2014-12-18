@@ -124,7 +124,7 @@
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/chameleon
-	name = "Chameleon Kit"
+	name = "chameleon kit"
 	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
 	storage_slots = 10
 

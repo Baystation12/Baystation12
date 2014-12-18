@@ -16,7 +16,7 @@
 
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "Uzi"
+	name = "\improper Uzi"
 	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 rounds."
 	icon_state = "mini-uzi"
 	w_class = 3.0
