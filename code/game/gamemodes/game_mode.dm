@@ -56,7 +56,7 @@
 		"Devices and Tools" = list(
 			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
 			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
-			new/datum/uplink_item(/obj/item/weapon/stamp/chameleon, 3, "Morphic Chameleon Stmap", "CS"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/clerical, 3, "Morphic Clerical Kit", "CK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
 			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
 			new/datum/uplink_item(/obj/item/device/encryptionkey/binary, 3, "Binary Translator Key", "BT"),
@@ -154,16 +154,14 @@
 	var/pltext = "<font size=2><b>Player list:</b></font>"
 
 	for(var/mob/M in player_list)
-		if(M.mind)
-			pltext += print_player_lite(M.mind)
 		if(M.client)
 			clients++
 			if(ishuman(M))
-				if(!M.stat)
+				if(M.stat != DEAD)
 					surviving_humans++
 					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 						escaped_humans++
-			if(!M.stat)
+			if(M.stat != DEAD)
 				surviving_total++
 				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 					escaped_total++

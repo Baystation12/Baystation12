@@ -353,6 +353,9 @@
 	if(isrobot(user))
 		return
 
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
+		return
+
 	if(istype(W, /obj/item/weapon/melee/energy/blade))
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
@@ -581,6 +584,8 @@
 		del(src)
 		return
 	if(isrobot(user))
+		return
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
 		return
 	user.drop_item()
 	if(W && W.loc)	W.loc = src.loc

@@ -20,8 +20,8 @@
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0
-	permeability_coefficient = 0
+	siemens_coefficient = 0.1
+	permeability_coefficient = 0.1
 
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
@@ -278,7 +278,7 @@
 			module.deactivate()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
-		if(canremove && (flags & AIRTIGHT))
+		if(canremove)
 			piece.flags &= ~STOPSPRESSUREDMAGE
 			piece.flags &= ~AIRTIGHT
 		else
@@ -595,6 +595,8 @@
 						H << "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>"
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
+						use_obj.loc = get_turf(src)
+						use_obj.dropped()
 						use_obj.canremove = 0
 						use_obj.loc = src
 
@@ -648,10 +650,10 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
 
-/obj/item/weapon/rig/dropped()
+/obj/item/weapon/rig/dropped(var/mob/user)
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
-		toggle_piece(piece, wearer, ONLY_RETRACT)
+		toggle_piece(piece, user, ONLY_RETRACT)
 	wearer = null
 
 //Todo

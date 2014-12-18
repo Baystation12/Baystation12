@@ -140,3 +140,12 @@
 	new /obj/item/clothing/glasses/chameleon(src)
 	new /obj/item/weapon/gun/projectile/chameleon(src)
 	new /obj/item/ammo_magazine/chameleon(src)
+
+/obj/item/weapon/storage/box/syndie_kit/clerical
+	name = "clerical kit"
+	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
+
+/obj/item/weapon/storage/box/syndie_kit/clerical/New()
+	..()
+	new /obj/item/weapon/stamp/chameleon(src)
+	new /obj/item/weapon/pen/chameleon(src)

@@ -91,7 +91,7 @@
 
 	// Add the cortical borer event
 	var/list/moderate_event_list = EModerate.available_events
-	var/event = new /datum/event_meta(EVENT_LEVEL_MODERATE, "Borer Infestation", /datum/event/borer_infestation, 400, one_shot = 1)
+	var/event = new /datum/event_meta(EVENT_LEVEL_MODERATE, "Borer Infestation", /datum/event/borer_infestation, 400, is_one_shot = 1)
 	moderate_event_list.Add(event)
 
 	if(chosen_atypes)

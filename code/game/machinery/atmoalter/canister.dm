@@ -108,6 +108,7 @@ update_flag
 	if (src.destroyed)
 		src.overlays = 0
 		src.icon_state = text("[]-1", src.canister_color)
+		return
 
 	if(icon_state != "[canister_color]")
 		icon_state = "[canister_color]"

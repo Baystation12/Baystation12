@@ -75,6 +75,8 @@
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc
+				if(H.w_uniform != C)
+					continue
 
 				var/list/crewmemberData = list()
 

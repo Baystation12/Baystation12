@@ -102,12 +102,10 @@
 	damage = 0
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/skill = user.skills["combat"]
 	var/datum/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
 
-	if(!skill)	skill = 1
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")

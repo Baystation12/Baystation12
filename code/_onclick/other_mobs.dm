@@ -175,7 +175,7 @@
 		return
 
 	if(melee_damage_upper == 0 && istype(A,/mob/living))
-		custom_emote(1,"[friendly] [src]!")
+		custom_emote(1,"[friendly] [A]!")
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)

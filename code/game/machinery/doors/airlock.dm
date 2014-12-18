@@ -913,9 +913,9 @@ About the new airlock wires panel:
 				if(operating == -1)
 					new /obj/item/weapon/circuitboard/broken(src.loc)
 					operating = 0
-				else 
+				else
 					if (!electronics) create_electronics()
-					
+
 					electronics.loc = src.loc
 					electronics = null
 
@@ -1059,13 +1059,17 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()
 
+	//High-sec airlocks are much harder to completely break by emitters.
+	if(secured_wires)
+		emitter_resistance *= 3
+
 	//if assembly is given, create the new door from the assembly
 	if (assembly)
 		assembly_type = assembly.type
-		
+
 		electronics = assembly.electronics
 		electronics.loc = src
-		
+
 		//update the door's access to match the electronics'
 		secured_wires = electronics.secure
 		if(electronics.one_access)
@@ -1073,7 +1077,7 @@ About the new airlock wires panel:
 			req_one_access = src.electronics.conf_access
 		else
 			req_access = src.electronics.conf_access
-		
+
 		//get the name from the assembly
 		if(assembly.created_name)
 			name = assembly.created_name
@@ -1093,8 +1097,8 @@ About the new airlock wires panel:
 					src.closeOther = A
 					break
 
-// Most doors will never be deconstructed over the course of a round, 
-// so as an optimization defer the creation of electronics until 
+// Most doors will never be deconstructed over the course of a round,
+// so as an optimization defer the creation of electronics until
 // the airlock is deconstructed
 /obj/machinery/door/airlock/proc/create_electronics()
 	//create new electronics
@@ -1102,7 +1106,7 @@ About the new airlock wires panel:
 		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
 	else
 		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
-	
+
 	//update the electronics to match the door's access
 	if(!src.req_access)
 		src.check_access()

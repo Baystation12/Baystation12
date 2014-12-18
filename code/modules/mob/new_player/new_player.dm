@@ -29,11 +29,10 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			var/readylink = "<a href='byond://?src=\ref[src];ready=[ready ? "2" : "1"]'>[ready ? "Not Ready" : "Ready"]</a>"
 			if(ready)
-				output += "<p>\[ <b>Ready</b> | [readylink] \]</p>"
+				output += "<p>\[ <b>Ready</b> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
 			else
-				output += "<p>\[ [readylink] | <b>Not Ready</b> \]</p>"
+				output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -99,7 +98,7 @@
 
 		if(href_list["ready"])
 			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
-				ready = !ready
+				ready = text2num(href_list["ready"])
 			else
 				ready = 0
 

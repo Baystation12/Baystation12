@@ -114,11 +114,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	updateicon()
 
 /obj/structure/cable/proc/updateicon()
-	if(invisibility)
-		icon_state = "[d1]-[d2]-f"
-	else
-		icon_state = "[d1]-[d2]"
-
+	icon_state = "[d1]-[d2]"
+	alpha = invisibility ? 127 : 255
 
 // returns the powernet this cable belongs to
 /obj/structure/cable/proc/get_powernet()			//TODO: remove this as it is obsolete

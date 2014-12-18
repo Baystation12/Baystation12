@@ -478,6 +478,7 @@
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
+	w_class = 2
 
 	var/list/spawn_tools = list(
 		/obj/item/weapon/screwdriver,
@@ -511,11 +512,17 @@
 		user << "You switch \the [src] to the [tool.name] fitting."
 	return 1
 
-/obj/item/weapon/combitool/attack(var/atom/target, var/mob/living/user)
+/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	var/obj/item/tool = tools[current_tool]
-	if(!tool)
-		return ..()
+	if(!tool) return 0
+	return (tool ? tool.attack(M,user) : 0)
+
+/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	tool.loc = user
 	var/resolved = target.attackby(tool,user)
 	if(!resolved && tool && target)
 		tool.afterattack(target,user,1)
-	return 1
+	if(tool)
+		tool.loc = src

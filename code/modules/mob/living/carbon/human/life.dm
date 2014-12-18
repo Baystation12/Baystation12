@@ -94,8 +94,10 @@
 		//Disabilities
 		handle_disabilities()
 
-		//Organ failure.
+		//Organs and blood
 		handle_organs()
+		handle_blood()
+		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
 		handle_random_events()
@@ -1070,22 +1072,6 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
-		if (drowsyness)
-			drowsyness--
-			eye_blurry = max(2, eye_blurry)
-			if (prob(5))
-				sleeping += 1
-				Paralyse(5)
-
-		confused = max(0, confused - 1)
-		// decrement dizziness counter, clamped to 0
-		if(resting)
-			dizziness = max(0, dizziness - 15)
-			jitteriness = max(0, jitteriness - 15)
-		else
-			dizziness = max(0, dizziness - 3)
-			jitteriness = max(0, jitteriness - 3)
-
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		updatehealth()
@@ -1101,10 +1087,6 @@
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
-			if(!in_stasis)
-				stabilize_body_temperature()	//Body temperature adjusts itself
-				handle_organs()	//Optimized.
-				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
 				death()
@@ -1118,13 +1100,6 @@
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
-
-				/* Done by handle_breath()
-				if( health <= 20 && prob(1) )
-					spawn(0)
-						emote("gasp")
-				if(!reagents.has_reagent("inaprovaline"))
-					adjustOxyLoss(1)*/
 
 			if(hallucination)
 				if(hallucination >= 20)
@@ -1168,21 +1143,16 @@
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
-			else if(resting)
-				if(halloss > 0)
-					adjustHalLoss(-3)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
-				if(halloss > 0)
-					adjustHalLoss(-1)
 
+			//Periodically double-check embedded_flag
 			if(embedded_flag && !(life_tick % 10))
 				var/list/E
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
-
 
 			//Eyes
 			//Check rig first because it's two-check and other checks will override it.
@@ -1223,8 +1193,27 @@
 			else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
 				ear_damage = max(ear_damage-0.05, 0)
 
+			//Resting
+			if(resting)
+				dizziness = max(0, dizziness - 15)
+				jitteriness = max(0, jitteriness - 15)
+				adjustHalLoss(-3)
+			else
+				dizziness = max(0, dizziness - 3)
+				jitteriness = max(0, jitteriness - 3)
+				adjustHalLoss(-1)
+
 			//Other
 			handle_statuses()
+
+			if (drowsyness)
+				drowsyness--
+				eye_blurry = max(2, eye_blurry)
+				if (prob(5))
+					sleeping += 1
+					Paralyse(5)
+
+			confused = max(0, confused - 1)
 
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
