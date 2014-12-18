@@ -56,7 +56,7 @@ datum/game_mode/mutiny
 						"shadowy interlopers",
 						"a stranded Vox arkship",
 						"haywire IPC constructs",
-						"rogue Unathi exiles",
+						"rogue Soghun exiles",
 						"artifacts of eldritch horror",
 						"a brain slug infestation",
 						"killer bugs that lay eggs in the husks of the living",

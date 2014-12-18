@@ -1,30 +1,41 @@
 
-var/global/list/space_surprises = list(		/obj/item/clothing/mask/facehugger				=4,
-											/obj/item/weapon/pickaxe/silver					=4,
-											/obj/item/weapon/pickaxe/drill					=4,
-											/obj/item/weapon/pickaxe/jackhammer				=4,
-											//mob/living/simple_animal/hostile/carp			=3,
-											/obj/item/weapon/pickaxe/diamond				=3,
-											/obj/item/weapon/pickaxe/diamonddrill			=3,
-											/obj/item/weapon/pickaxe/gold					=3,
-											/obj/item/weapon/pickaxe/plasmacutter			=2,
-											/obj/structure/closet/syndicate/resources		=2,
-											/obj/item/weapon/melee/energy/sword/pirate		=1,
-											/obj/mecha/working/ripley/mining				=1
+var/global/list/space_surprises = list(		/obj/item/clothing/mask/facehugger						=6,
+											/obj/item/weapon/pickaxe/silver							=6,
+											/obj/item/weapon/pickaxe/drill							=6,
+											/obj/item/weapon/pickaxe/jackhammer						=5,
+											/mob/living/simple_animal/hostile/carp					=5,
+											/obj/item/weapon/pickaxe/gold							=4,
+											/mob/living/simple_animal/hostile/mimic					=4,
+											/mob/living/simple_animal/hostile/hivebot				=4,
+											/obj/item/weapon/pickaxe/plasmacutter					=3,
+											/obj/item/weapon/pickaxe/diamond						=3,
+											/obj/item/weapon/pickaxe/diamonddrill					=3,
+											/obj/structure/closet/syndicate/resources				=3,
+											/mob/living/simple_animal/hostile/viscerator			=3,
+											/mob/living/simple_animal/hostile/bear					=2,
+											/mob/living/simple_animal/hostile/giant_spider			=2,
+											/obj/effect/decal/mecha_wreckage/ripley					=2,
+											/obj/effect/decal/remains/human							=2,
+											/mob/living/simple_animal/hostile/hivebot/range 		=2,
+											/obj/item/weapon/melee/energy/sword/pirate				=2,
+											/obj/structure/closet/crate								=2,
+											/mob/living/simple_animal/hostile/giant_spider/nurse	=1,
+											/obj/effect/decal/mecha_wreckage/phazon					=1,
+											/obj/mecha/working/ripley/mining						=1
 											)
 
 var/global/list/spawned_surprises = list()
 
-var/global/max_secret_rooms = 3
+var/global/max_secret_rooms = rand(3,14)
 
 proc/spawn_room(var/atom/start_loc,var/x_size,var/y_size,var/wall,var/floor , var/clean = 0 , var/name)
 	var/list/room_turfs = list("walls"=list(),"floors"=list())
 
 	//world << "Room spawned at [start_loc.x],[start_loc.y],[start_loc.z]"
 	if(!wall)
-		wall = pick(/turf/simulated/wall/r_wall,/turf/simulated/wall,/obj/effect/alien/resin)
+		wall = pick(/turf/simulated/wall/r_wall,/turf/simulated/wall,/obj/effect/alien/resin, /turf/simulated/mineral, /turf/simulated/mineral/random)
 	if(!floor)
-		floor = pick(/turf/simulated/floor,/turf/simulated/floor/engine)
+		floor = pick(/turf/simulated/floor,/turf/simulated/floor/engine, /turf/simulated/floor/plating/airless/asteroid, /turf/simulated/floor/plating/airless/asteroid)
 
 	for(var/x = 0,x<x_size,x++)
 		for(var/y = 0,y<y_size,y++)
@@ -88,7 +99,7 @@ proc/admin_spawn_room_at_pos()
 
 
 
-proc/make_mining_asteroid_secret(var/size = 5)
+proc/make_mining_asteroid_secret(var/size = rand(3,5))
 	var/valid = 0
 	var/turf/T = null
 	var/sanity = 0

@@ -20,7 +20,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
-var/const/MAX_SAVE_SLOTS = 10
+var/const/MAX_SAVE_SLOTS = 30
 
 //used for alternate_option
 #define GET_RANDOM_JOB 0
@@ -509,6 +509,8 @@ datum/preferences
 				HTML += " <font color=green>\[Yes]</font>"
 			else
 				HTML += " <font color=red>\[No]</font>"
+			if(job.alt_titles)
+				HTML += " </a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 			continue
 
@@ -1187,7 +1189,7 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Human" || species == "Soghun" || species == "Tajara" || species == "Skrell")
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1267,7 +1269,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Soghun" || species == "Tajara" || species == "Skrell")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1577,8 +1579,8 @@ datum/preferences
 
 	for(var/name in organ_data)
 
-		var/status = organ_data[name]		
-		var/datum/organ/external/O = character.organs_by_name[name]		
+		var/status = organ_data[name]
+		var/datum/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
@@ -1586,7 +1588,7 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
-		else			
+		else
 			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")

@@ -10,7 +10,7 @@
 	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"         // CSS style to use for strings in this language.
-	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
+	var/key = "x"                    // Character used to speak in language eg. :o for Soghun.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
 
@@ -43,9 +43,9 @@
 			return ask_verb
 	return speech_verb
 
-/datum/language/unathi
-	name = "Sinta'unathi"
-	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
+/datum/language/Soghun
+	name = "Sinta'Soghun"
+	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Soghun."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "roars"
@@ -54,14 +54,27 @@
 	flags = WHITELISTED
 
 /datum/language/tajaran
-	name = "Siik'tajr"
+	name = "Siik'maas"
 	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
 	colour = "tajaran"
-	key = "j"
+	key = "y"
+	native = 1
 	flags = WHITELISTED
+
+/datum/language/tajaran_sign
+	name = "Siik'tajr"
+	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Spoken by many Tajaran."
+	speech_verb = "mrowls"
+	colour = "tajaran_signlang"
+	key = "j"		//only "dfpqxyz" left.
+
+	//need to find a way to resolve possesive macros
+	signlang_verb = list("flicks their left ear", "flicks their right ear", "swivels their ears", "twitches their tail", "curls the end of their tail", "arches their tail", "wiggles the end of their tail", "waves their tail about", "holds up a claw", "gestures with their left hand", "gestures with their right hand", "gestures with their tail", "gestures with their ears")
+
+	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -82,6 +95,14 @@
 	colour = "vox"
 	key = "v"
 	flags = RESTRICTED
+
+/datum/language/obsedai
+	name = "Tummese"
+	desc = "The common tongue of the Obsedai. It sounds like deep rumbling and resonant notes to everyone else."
+	speech_verb = "rumbles"
+	colour = "rough"
+	key = "r"
+	flags = WHITELISTED
 
 /datum/language/diona
 	name = "Rootspeak"

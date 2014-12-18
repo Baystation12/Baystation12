@@ -24,7 +24,7 @@
 	attack_hand(mob/user as mob)
 		user.set_machine(src)
 
-		var/dat = "Photocopier<BR><BR>"
+		var/dat = "<B>Photocopier</B><BR><BR>"
 		if(copy || photocopy || bundle)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Paper</a><BR>"
 			if(toner)
@@ -36,6 +36,14 @@
 			dat += "Please insert paper to copy.<BR><BR>"
 		if(istype(user,/mob/living/silicon))
 			dat += "<a href='byond://?src=\ref[src];aipic=1'>Print photo from database</a><BR><BR>"
+		dat += "<B>FormPrinting</B><BR><BR>"
+		if(!toner)
+			dat +="<BR>No Toner!<BR><BR>"
+		else
+			for(var/i = 1, i <= prefilledpapers.len ,i++)
+				var/datum/prefilledpaper/paperitem = prefilledpapers[i]
+				dat+= "<a href='byond://?src=\ref[src];print=[i]'>[paperitem.name]</a><BR>"
+			dat +="<BR>"
 		dat += "Current toner level: [toner]"
 		if(!toner)
 			dat +="<BR>Please insert a new toner cartridge!"
@@ -114,6 +122,10 @@
 			if(copies < maxcopies)
 				copies++
 				updateUsrDialog()
+		else if(href_list["print"])
+			var/id = text2num(href_list["print"])
+			print(prefilledpapers[id])
+			updateUsrDialog()
 		else if(href_list["aipic"])
 			if(!istype(usr,/mob/living/silicon)) return
 			if(toner >= 5)
@@ -207,6 +219,31 @@
 				toner = 0
 		return
 
+/obj/machinery/photocopier/proc/print(var/datum/prefilledpaper/prepaper)
+	var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)
+	c.info = html_encode(prepaper.text)
+	c.info = replacetext(c.info, "\n", "<BR>")
+	c.info = c.parsepencode(c.info, null, usr, 0)
+	c.name = prepaper.name
+	//allthough not necessery for prints leave it in, it might come in handy, one day...
+	/*
+	var/list/temp_overlays = copy.overlays       //Iterates through stamps
+	var/image/img                                //and puts a matching
+	for (var/j = 1, j <= temp_overlays.len, j++) //gray overlay onto the copy
+		if (findtext(copy.ico[j], "cap") || findtext(copy.ico[j], "cent"))
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
+		else if (findtext(copy.ico[j], "deny"))
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-x")
+		else
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")
+		img.pixel_x = copy.offset_x[j]
+		img.pixel_y = copy.offset_y[j]
+		c.overlays += img
+	*/
+	c.updateinfolinks()
+	c.update_icon()
+	toner--
+	return c
 
 /obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy)
 	var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)

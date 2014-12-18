@@ -21,7 +21,7 @@ var/global/normal_ooc_colour = "#002eb8"
 		src << "\red You have OOC muted."
 		return
 
-	if(!holder)
+	if(!holder || holder.rank == "Donor") // This is ugly, but I Can't figure out any easy way without duplicating code to confirm the user is not a donor while being a holder using rights.
 		if(!ooc_allowed)
 			src << "\red OOC is globally muted"
 			return

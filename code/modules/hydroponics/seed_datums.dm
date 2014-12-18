@@ -1618,7 +1618,7 @@ proc/populate_seed_list()
 	seed_noun = "data"
 	display_name = "runtimes"
 	packet_icon = "seed-replicapod"
-	products = list(/mob/living/simple_animal/cat/Runtime)
+	products = list(/mob/living/simple_animal/cat/happykitten)
 	plant_icon = "replicapod"
 
 	requires_nutrients = 0

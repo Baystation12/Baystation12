@@ -230,8 +230,8 @@ var/global/list/turf/synd_spawn = list()
 		var/race = synd_mob.species.name
 
 		switch(race)
-			if("Unathi")
-				new_suit.species_restricted = list("Unathi")
+			if("Soghun")
+				new_suit.species_restricted = list("Soghun")
 			if("Tajara")
 				new_suit.species_restricted = list("Tajara")
 			if("Skrell")

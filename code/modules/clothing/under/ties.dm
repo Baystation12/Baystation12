@@ -459,18 +459,18 @@
 /obj/item/clothing/tie/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
-	icon_state = "unathiharness2"
-	item_color = "unathiharness2"
+	icon_state = "soghunharness2"
+	item_color = "soghunharness2"
 	slots = 2
 
 /obj/item/clothing/tie/storage/knifeharness/New()
 	..()
 	hold.max_combined_w_class = 4
-	hold.can_hold = list("/obj/item/weapon/hatchet/unathiknife",\
+	hold.can_hold = list("/obj/item/weapon/hatchet/soghunknife",\
 	"/obj/item/weapon/kitchen/utensil/knife",\
 	"/obj/item/weapon/kitchen/utensil/pknife",\
 	"/obj/item/weapon/kitchenknife",\
 	"/obj/item/weapon/kitchenknife/ritual")
 
-	new /obj/item/weapon/hatchet/unathiknife(hold)
-	new /obj/item/weapon/hatchet/unathiknife(hold)
+	new /obj/item/weapon/hatchet/soghunknife(hold)
+	new /obj/item/weapon/hatchet/soghunknife(hold)

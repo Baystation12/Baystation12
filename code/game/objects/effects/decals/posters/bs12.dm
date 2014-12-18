@@ -91,8 +91,8 @@
 
 /datum/poster/bay_19
 	icon_state="bsposter19"
-	name = "Respect a Unathi"
-	desc = "This poster depicts a well dressed looking Unathi receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races."
+	name = "Respect a Soghun"
+	desc = "This poster depicts a well dressed looking Soghun receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races."
 
 /datum/poster/bay_20
 	icon_state="bsposter20"
@@ -172,7 +172,7 @@
 /datum/poster/bay_35
 	icon_state="bsposter35"
 	name = "Lamarr"
-	desc = "This is a poster depicting the pet and mascot of the NSS Exodus science department."
+	desc = "This is a poster depicting the pet and mascot of the NSS Hypatia science department."
 
 /datum/poster/bay_36
 	icon_state="bsposter36"

@@ -6,7 +6,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda
 	name = "PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/pda2.dmi'
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 2.0
@@ -977,7 +977,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()
-		P.overlays += image('icons/obj/pda.dmi', "pda-r")
+		P.overlays += image('icons/obj/pda2.dmi', "pda-r")
 		P.newmessage = 1
 	else
 		U << "<span class='notice'>ERROR: Messaging server is not responding.</span>"
@@ -1317,7 +1317,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/weapon/storage/box/PDAs
 	name = "spare PDAs"
 	desc = "A box of spare PDA microcomputers."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/pda2.dmi'
 	icon_state = "pdabox"
 
 	New()

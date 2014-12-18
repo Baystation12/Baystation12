@@ -142,6 +142,14 @@
                 </td>
               </tr>
               <tr>
+                <th style="color: '#FFA500';">Cargo</th>
+                <td>
+                  {{for data.cargo_jobs}}
+                    {{:helper.link(value.display_name, '', {'choice' : 'assign', 'assign_target' : value.job}, data.target_rank == value.job ? 'disabled' : null)}}
+                  {{/for}}
+                </td>
+              </tr>
+              <tr>			  
                 <th style="color: '#FFA500';">Engineering</th>
                 <td>
                   {{for data.engineering_jobs}}

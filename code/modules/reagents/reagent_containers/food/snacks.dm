@@ -1620,10 +1620,10 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
 	name = "stok cube"
-	monkey_type = /mob/living/carbon/monkey/unathi
+	monkey_type = /mob/living/carbon/monkey/soghun
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
 	name = "stok cube"
-	monkey_type =/mob/living/carbon/monkey/unathi
+	monkey_type =/mob/living/carbon/monkey/soghun
 
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube

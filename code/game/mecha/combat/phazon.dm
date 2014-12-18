@@ -20,6 +20,12 @@
 	var/phasing_energy_drain = 200
 	max_equip = 4
 
+/obj/mecha/combat/phazon/obphazon
+	desc = "Where did they find this?"
+	name = "Dark Phazon"
+	icon_state = "obphazon"
+	initial_icon = "obphazon"
+	wreckage = /obj/effect/decal/mecha_wreckage/obphazon
 
 /obj/mecha/combat/phazon/New()
 	..()
@@ -34,7 +40,10 @@
 		spawn()
 			if(can_move)
 				can_move = 0
-				flick("phazon-phase", src)
+				if (/obj/mecha/combat/phazon/obphazon)
+					flick("obphazon-phase", src)
+				else
+					flick("phazon-phase", src)
 				src.loc = get_step(src,src.dir)
 				src.use_power(phasing_energy_drain)
 				sleep(step_in*3)

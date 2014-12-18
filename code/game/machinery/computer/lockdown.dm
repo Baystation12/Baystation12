@@ -33,7 +33,7 @@
 				connected_doors.Add("Observation Shutters")
 				//exodus engineering
 			if("Medbay")
-				//Exodus Medbay
+				//Hypatia Medbay
 				connected_doors.Add("Genetics Outer Shutters")
 				connected_doors.Add("Genetics Inner Shutters")
 				connected_doors.Add("Chemistry Outer Shutters")

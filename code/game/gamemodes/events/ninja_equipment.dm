@@ -535,7 +535,7 @@ ________________________________________________________________________________
 				for (var/mob/O in hearers(3, P.loc))
 					O.show_message(text("\icon[P] *[P.ttone]*"))
 			P.overlays.Cut()
-			P.overlays += image('icons/obj/pda.dmi', "pda-r")
+			P.overlays += image('icons/obj/pda2.dmi', "pda-r")
 
 		if("Inject")
 			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.

@@ -59,7 +59,7 @@
 	//full set of languages
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
-	R.add_language("Sinta'unathi", 0)
+	R.add_language("Sinta'soghun", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
@@ -316,7 +316,7 @@
 	add_languages(var/mob/living/silicon/robot/R)
 		//full set of languages
 		R.add_language("Sol Common", 1)
-		R.add_language("Sinta'unathi", 1)
+		R.add_language("Sinta'soghun", 1)
 		R.add_language("Siik'maas", 1)
 		R.add_language("Siik'tajr", 0)
 		R.add_language("Skrellian", 1)
@@ -338,7 +338,7 @@
 
 	add_languages(var/mob/living/silicon/robot/R)
 		R.add_language("Sol Common", 1)
-		R.add_language("Sinta'unathi", 1)
+		R.add_language("Sinta'soghun", 1)
 		R.add_language("Siik'maas", 1)
 		R.add_language("Siik'tajr", 0)
 		R.add_language("Skrellian", 1)

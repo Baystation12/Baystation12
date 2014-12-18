@@ -401,12 +401,12 @@ var/global/list/gear_datums = list()
 	cost = 4
 	slot = slot_wear_suit
 
-/datum/gear/unathi_mantle
-	display_name = "hide mantle (Unathi)"
-	path = /obj/item/clothing/suit/unathi/mantle
+/datum/gear/soghun_mantle
+	display_name = "hide mantle (Soghun)"
+	path = /obj/item/clothing/suit/Soghun/mantle
 	cost = 2
 	slot = slot_wear_suit
-	whitelisted = "Unathi"
+	whitelisted = "Soghun"
 
 /datum/gear/labcoat
 	display_name = "labcoat"
@@ -438,12 +438,12 @@ var/global/list/gear_datums = list()
 	cost = 4
 	slot = slot_wear_suit
 
-/datum/gear/unathi_robe
-	display_name = "roughspun robe (Unathi)"
-	path = /obj/item/clothing/suit/unathi/robe
+/datum/gear/soghun_robe
+	display_name = "roughspun robe (Soghun)"
+	path = /obj/item/clothing/suit/Soghun/robe
 	cost = 3
 	slot = slot_wear_suit
-//	whitelisted = "Unathi" // You don't have a monopoly on a robe!
+//	whitelisted = "Soghun" // You don't have a monopoly on a robe!
 
 /datum/gear/suspenders
 	display_name = "suspenders"
