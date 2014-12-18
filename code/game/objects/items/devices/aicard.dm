@@ -9,6 +9,8 @@
 	var/flush = null
 	origin_tech = "programming=4;materials=4"
 
+	var/mob/living/silicon/ai/carded_ai
+
 /obj/item/device/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
 	if (!istype (M, /mob/living/silicon/decoy))
 		return ..()
@@ -151,6 +153,8 @@
 	ai.control_disabled = 1
 	ai.aiRestorePowerRoutine = 0
 	ai.aiRadio.disabledAi = 1
+	carded_ai = ai
+
 
 	ai.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been carded with [src.name] by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to card [ai.name] ([ai.ckey])</font>")
@@ -166,7 +170,14 @@
 
 /obj/item/device/aicard/proc/clear()
 	name = "inteliCard"
+	carded_ai = null
 	update_icon()
+
+/obj/item/device/aicard/see_emote(mob/living/M, text)
+	if(carded_ai && carded_ai.client)
+		var/rendered = "<span class='message'>[text]</span>"
+		carded_ai.show_message(rendered, 2)
+	..()
 /*
 /obj/item/device/aicard/relaymove(var/mob/user, var/direction)
 	if(src.loc && istype(src.loc.loc, /obj/item/rig_module))

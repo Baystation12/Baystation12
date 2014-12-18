@@ -110,7 +110,7 @@
 					log_say("[key_name(src)] : [message]")
 					return P.radio.talk_into(src,message,message_mode,verb,speaking)
 			return 0
-			
+
 		if("general")
 			switch(bot_type)
 				if(IS_AI)
@@ -166,7 +166,7 @@
 		//Speach distorted, heard by those who do not understand AIs.
 		var/message_stars = stars(message)
 		var/rendered_b
-		
+
 		if(speaking)
 			rendered_a = "<span class='game say'><span class='name'>[name]</span> [speaking.format_message(message, verb)]</span>"
 			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [speaking.format_message(message_stars, verb)]</span>"
@@ -187,6 +187,34 @@
 		src << "No holopad connected."
 		return
 	return 1
+
+/mob/living/silicon/ai/proc/holopad_emote(var/message) //This is called when the AI uses the 'me' verb while using a holopad.
+
+	log_emote("[key_name(src)] : [message]")
+
+	message = trim(message)
+
+	if (!message)
+		return
+
+	var/obj/machinery/hologram/holopad/T = src.holo
+	if(T && T.hologram && T.master == src)
+		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
+		src << "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>"
+
+		for(var/mob/M in viewers(T.loc))
+			M.show_message(rendered, 2)
+	else //This shouldn't occur, but better safe then sorry.
+		src << "No holopad connected."
+		return
+	return 1
+
+/mob/living/silicon/ai/emote(var/act, var/type, var/message)
+	var/obj/machinery/hologram/holopad/T = src.holo
+	if(T && T.hologram && T.master == src) //Is the AI using a holopad?
+		src.holopad_emote(message)
+	else //Emote normally, then.
+		..()
 
 #undef IS_AI
 #undef IS_ROBOT
