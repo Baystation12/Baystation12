@@ -134,4 +134,3 @@
 	new /obj/item/clothing/head/helmet/thunderdome(src)
 	new /obj/item/clothing/head/helmet/thunderdome(src)
 	new /obj/item/clothing/head/helmet/thunderdome(src)
-

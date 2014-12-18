@@ -64,5 +64,4 @@
 	icon_state = "m1911-p"
 	cell_type = "/obj/item/weapon/cell/infinite"
 
-	isHandgun()
-		return 1
+	isHandgun()		return 1

@@ -172,5 +172,3 @@ Frequency:
 	P.creator = src
 	src.add_fingerprint(user)
 	return
-
-

@@ -144,3 +144,4 @@
    around simulating a removable magazine by adding the casings into the loaded list and spawning an empty magazine
    when the gun is out of rounds. Which means you can't eject magazines with rounds in them. The below is a very
    rough and poor attempt at making that happen. -Ausops */
+  

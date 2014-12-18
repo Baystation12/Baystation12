@@ -91,11 +91,3 @@
 		for(var/i = 0, i < 6, i++)
 			new /obj/item/weapon/spacecash/c200(src)
 		return
-
-
-
-
-
-
-
-
