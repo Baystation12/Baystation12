@@ -394,20 +394,20 @@
 
 
 /obj/item/weapon/weldingtool/largetank
-	name = "Industrial Welding Tool"
+	name = "industrial welding tool"
 	max_fuel = 40
 	matter = list("metal" = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "Upgraded Welding Tool"
+	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
-	name = "Experimental Welding Tool"
+	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)

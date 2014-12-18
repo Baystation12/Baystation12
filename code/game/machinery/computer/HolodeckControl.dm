@@ -16,7 +16,7 @@ var/global/list/holodeck_programs = list(
 	)
 
 /obj/machinery/computer/HolodeckControl
-	name = "Holodeck Control Computer"
+	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
 	icon_state = "holocontrol"
 	

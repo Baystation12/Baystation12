@@ -1,7 +1,6 @@
 //AMMUNITION
 
 /obj/item/weapon/arrow
-
 	name = "bolt"
 	desc = "It's got a tip for you - get the point?"
 	icon = 'icons/obj/weapons.dmi'
@@ -28,7 +27,6 @@
 	item_state = "bolt"
 
 /obj/item/weapon/arrow/quill
-
 	name = "vox quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
 	icon = 'icons/obj/weapons.dmi'
@@ -37,7 +35,6 @@
 	throwforce = 5
 
 /obj/item/weapon/arrow/rod
-
 	name = "metal rod"
 	desc = "Don't cry for me, Orithena."
 	icon_state = "metal-rod"
@@ -50,7 +47,6 @@
 		src.Del()
 
 /obj/item/weapon/gun/launcher/crossbow
-
 	name = "powered crossbow"
 	desc = "A 2557AD twist on an old classic. Pick up that can."
 	icon_state = "crossbow"
@@ -173,7 +169,6 @@
 		..()
 
 /obj/item/weapon/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
-
 	if(!user || !cell || !in_chamber) return
 	if(cell.charge < 500) return
 	if(in_chamber.throwforce >= 15) return

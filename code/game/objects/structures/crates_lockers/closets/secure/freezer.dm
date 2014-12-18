@@ -13,7 +13,7 @@
 			icon_state = icon_opened
 
 /obj/structure/closet/secure_closet/freezer/kitchen
-	name = "Kitchen Cabinet"
+	name = "kitchen cabinet"
 	req_access = list(access_kitchen)
 
 	New()
@@ -32,7 +32,7 @@
 
 
 /obj/structure/closet/secure_closet/freezer/meat
-	name = "Meat Fridge"
+	name = "meat fridge"
 	icon_state = "fridge1"
 	icon_closed = "fridge"
 	icon_locked = "fridge1"
@@ -50,7 +50,7 @@
 
 
 /obj/structure/closet/secure_closet/freezer/fridge
-	name = "Refrigerator"
+	name = "refrigerator"
 	icon_state = "fridge1"
 	icon_closed = "fridge"
 	icon_locked = "fridge1"
@@ -72,7 +72,7 @@
 
 
 /obj/structure/closet/secure_closet/freezer/money
-	name = "Freezer"
+	name = "freezer"
 	icon_state = "fridge1"
 	icon_closed = "fridge"
 	icon_locked = "fridge1"
@@ -91,11 +91,3 @@
 		for(var/i = 0, i < 6, i++)
 			new /obj/item/weapon/spacecash/c200(src)
 		return
-
-
-
-
-
-
-
-

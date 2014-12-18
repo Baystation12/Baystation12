@@ -1,29 +1,14 @@
-// Constructable SMES version. Based on Coils. Each SMES can hold 6 Coils by default.
-// Each coil adds 250kW I/O and 5M capacity.
-// This is second version, now subtype of regular SMES.
+// Constructable SMES version (based on SMES Coils)
 
-
-//Board
-/obj/item/weapon/circuitboard/smes
-	name = "Circuit board (SMES Cell)"
-	build_path = "/obj/machinery/power/smes/buildable"
-	board_type = "machine"
-	origin_tech = "powerstorage=6;engineering=4" // Board itself is high tech. Coils have to be ordered from cargo or salvaged from existing SMESs.
-	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
-	req_components = list("/obj/item/weapon/smes_coil" = 1, "/obj/item/stack/cable_coil" = 30)
-
-//Construction Item
+//Construction Items
 /obj/item/weapon/smes_coil
-	name = "Superconducting Magnetic Coil"
-	desc = "Heavy duty superconducting magnetic coil, mainly used in construction of SMES units."
+	name = "superconductive magnetic coil"
+	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = 4.0 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
-
-
-
 
 // SMES itself
 /obj/machinery/power/smes/buildable

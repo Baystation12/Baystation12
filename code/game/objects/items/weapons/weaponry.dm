@@ -1,5 +1,5 @@
 /obj/item/weapon/banhammer
-	desc = "A banhammer"
+	desc = "banhammer"
 	name = "banhammer"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "toyhammer"
