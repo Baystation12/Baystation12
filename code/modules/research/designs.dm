@@ -753,6 +753,7 @@ datum/design/item/stock_part
 	build_type = PROTOLATHE
 
 datum/design/item/stock_part/AssembleDesignName()
+	..()
 	name = "Component design ([item_name])"
 
 datum/design/item/stock_part/AssembleDesignDesc()
@@ -1017,7 +1018,7 @@ datum/design/circuit/smes_cell
 ///////////////Power Items//////////////
 ////////////////////////////////////////
 datum/design/item/light_replacer
-	name = "Light Replacer"
+	name = "Light replacer"
 	desc = "A device to automatically replace lights. Refill with working lightbulbs."
 	id = "light_replacer"
 	req_tech = list("magnets" = 3, "materials" = 4)
@@ -1246,7 +1247,7 @@ datum/design/item/weapon/AssembleDesignDesc()
 	if(!desc)
 		if(build_path)
 			var/obj/item/I = build_path
-			desc = I.desc
+			desc = initial(I.desc)
 		..()
 
 datum/design/item/weapon/nuclear_gun

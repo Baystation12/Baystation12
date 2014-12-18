@@ -71,7 +71,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
 	equip_cooldown = 30
-	name = "jury-rigged welder-Laser"
+	name = "jury-rigged welder-laser"
 	desc = "While not regulation, this inefficient weapon can be attached to working exo-suits in desperate, or malicious, times."
 	icon_state = "mecha_laser"
 	energy_drain = 80
