@@ -1489,38 +1489,6 @@ datum/design/security_hud
 	locked = 1
 
 /////////////////////////////////////////
-//////////////////Test///////////////////
-/////////////////////////////////////////
-
-	/*	test
-			name = "Test Design"
-			desc = "A design to test the new protolathe."
-			id = "protolathe_test"
-			build_type = PROTOLATHE
-			req_tech = list("materials" = 1)
-			materials = list("$gold" = 3000, "iron" = 15, "copper" = 10, "$silver" = 2500)
-			build_path = /obj/item/weapon/banhammer" */
-
-////////////////////////////////////////
-//Disks for transporting design datums//
-////////////////////////////////////////
-
-/obj/item/weapon/disk/design_disk
-	name = "Component Design Disk"
-	desc = "A disk for storing device design data for construction in lathes."
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk2"
-	item_state = "card-id"
-	w_class = 2.0
-	matter = list("metal" = 30,"glass" = 10)
-	var/datum/design/blueprint
-
-/obj/item/weapon/disk/design_disk/New()
-	src.pixel_x = rand(-5.0, 5)
-	src.pixel_y = rand(-5.0, 5)
-
-
-/////////////////////////////////////////
 //////////////Borg Upgrades//////////////
 /////////////////////////////////////////
 datum/design/borg_syndicate_module
