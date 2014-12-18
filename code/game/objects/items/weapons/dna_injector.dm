@@ -1,5 +1,5 @@
 /obj/item/weapon/dnainjector
-	name = "\improperDNA injector"
+	name = "\improper DNA injector"
 	desc = "This injects the person with DNA."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "dnainjector"
