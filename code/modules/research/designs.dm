@@ -906,65 +906,6 @@ datum/design/item/stock_part/subspace_transmitter
 	build_path = /obj/item/weapon/stock_parts/subspace/transmitter
 
 ////////////////////////////////////////
-//////////////////Power/////////////////
-////////////////////////////////////////
-datum/design/item/light_replacer
-	name = "Light Replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs."
-	id = "light_replacer"
-	req_tech = list("magnets" = 3, "materials" = 4)
-	materials = list("$metal" = 1500, "$silver" = 150, "$glass" = 3000)
-	build_path = /obj/item/device/lightreplacer
-
-// *** Power cells
-datum/design/item/powercell
-	build_type = PROTOLATHE | MECHFAB
-
-datum/design/item/powercell/AssembleDesignName()
-	name = "Power cell model ([item_name])"
-
-datum/design/item/powercell/AssembleDesignDesc()
-	if(build_path)
-		var/obj/item/weapon/cell/C = build_path
-		desc = "Allows the construction of power cells that can hold [initial(C.maxcharge)] units of energy."
-
-datum/design/item/powercell/basic
-	name = "basic"
-	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
-	id = "basic_cell"
-	req_tech = list("powerstorage" = 1)
-	materials = list("$metal" = 700, "$glass" = 50)
-	build_path = /obj/item/weapon/cell
-	category = "Misc"
-
-datum/design/item/powercell/high
-	name = "high-capacity"
-	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
-	id = "high_cell"
-	req_tech = list("powerstorage" = 2)
-	materials = list("$metal" = 700, "$glass" = 60)
-	build_path = /obj/item/weapon/cell/high
-	category = "Misc"
-
-datum/design/item/powercell/super
-	name = "super-capacity"
-	id = "super_cell"
-	req_tech = list("powerstorage" = 3, "materials" = 2)
-	reliability_base = 75
-	materials = list("$metal" = 700, "$glass" = 70)
-	build_path = /obj/item/weapon/cell/super
-	category = "Misc"
-
-datum/design/item/powercell/hyper
-	name = "hyper-capacity"
-	id = "hyper_cell"
-	req_tech = list("powerstorage" = 5, "materials" = 4)
-	reliability_base = 70
-	materials = list("$metal" = 400, "$gold" = 150, "$silver" = 150, "$glass" = 70)
-	build_path = /obj/item/weapon/cell/hyper
-	category = "Misc"
-
-////////////////////////////////////////
 //////////Misc Circuit Boards///////////
 ////////////////////////////////////////
 
@@ -1030,9 +971,8 @@ datum/design/circuit/secure_airlock
 	build_path = /obj/item/weapon/airlock_electronics/secure
 
 /////////////////////////////////////////
-////////////Power Stuff//////////////////
+////////Power Stuff Circuitboards////////
 /////////////////////////////////////////
-
 datum/design/circuit/pacman
 	name = "PACMAN-type generator"
 	id = "pacman"
@@ -1072,6 +1012,65 @@ datum/design/circuit/smes_cell
 	//A uniquely-priced board; probably not the best idea
 	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 1000, "$silver" = 1000, "$diamond" = 500)
 	build_path = /obj/item/weapon/circuitboard/smes
+
+////////////////////////////////////////
+///////////////Power Items//////////////
+////////////////////////////////////////
+datum/design/item/light_replacer
+	name = "Light Replacer"
+	desc = "A device to automatically replace lights. Refill with working lightbulbs."
+	id = "light_replacer"
+	req_tech = list("magnets" = 3, "materials" = 4)
+	materials = list("$metal" = 1500, "$silver" = 150, "$glass" = 3000)
+	build_path = /obj/item/device/lightreplacer
+
+// *** Power cells
+datum/design/item/powercell
+	build_type = PROTOLATHE | MECHFAB
+
+datum/design/item/powercell/AssembleDesignName()
+	name = "Power cell model ([item_name])"
+
+datum/design/item/powercell/AssembleDesignDesc()
+	if(build_path)
+		var/obj/item/weapon/cell/C = build_path
+		desc = "Allows the construction of power cells that can hold [initial(C.maxcharge)] units of energy."
+
+datum/design/item/powercell/basic
+	name = "basic"
+	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
+	id = "basic_cell"
+	req_tech = list("powerstorage" = 1)
+	materials = list("$metal" = 700, "$glass" = 50)
+	build_path = /obj/item/weapon/cell
+	category = "Misc"
+
+datum/design/item/powercell/high
+	name = "high-capacity"
+	build_type = PROTOLATHE | AUTOLATHE | MECHFAB
+	id = "high_cell"
+	req_tech = list("powerstorage" = 2)
+	materials = list("$metal" = 700, "$glass" = 60)
+	build_path = /obj/item/weapon/cell/high
+	category = "Misc"
+
+datum/design/item/powercell/super
+	name = "super-capacity"
+	id = "super_cell"
+	req_tech = list("powerstorage" = 3, "materials" = 2)
+	reliability_base = 75
+	materials = list("$metal" = 700, "$glass" = 70)
+	build_path = /obj/item/weapon/cell/super
+	category = "Misc"
+
+datum/design/item/powercell/hyper
+	name = "hyper-capacity"
+	id = "hyper_cell"
+	req_tech = list("powerstorage" = 5, "materials" = 4)
+	reliability_base = 70
+	materials = list("$metal" = 400, "$gold" = 150, "$silver" = 150, "$glass" = 70)
+	build_path = /obj/item/weapon/cell/hyper
+	category = "Misc"
 
 /////////////////////////////////////////
 ////////////Medical Tools////////////////
@@ -1152,39 +1151,31 @@ datum/design/item/medical/nanopaste
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = /obj/item/stack/nanopaste
 
-datum/design/item/chameleon
-	name = "Holographic equipment kit"
-	desc = "A kit of dangerous, high-tech equipment with changeable looks."
-	id = "chameleon"
-	req_tech = list("syndicate" = 2)
-	materials = list("$metal" = 500)
-	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
-
-datum/design/scalpel_laser1
+datum/design/item/scalpel_laser1
 	name = "Basic Laser Scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
+	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks basic and could be improved."
 	id = "scalpel_laser1"
 	req_tech = list("biotech" = 2, "materials" = 2, "magnets" = 2)
 	materials = list("$metal" = 12500, "$glass" = 7500)
 	build_path = /obj/item/weapon/scalpel/laser1
 
-datum/design/scalpel_laser2
+datum/design/item/scalpel_laser2
 	name = "Improved Laser Scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks somewhat advanced."
+	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks somewhat advanced."
 	id = "scalpel_laser2"
 	req_tech = list("biotech" = 3, "materials" = 4, "magnets" = 4)
 	materials = list("$metal" = 12500, "$glass" = 7500, "$silver" = 2500)
 	build_path = /obj/item/weapon/scalpel/laser2
 
-datum/design/scalpel_laser3
+datum/design/item/scalpel_laser3
 	name = "Advanced Laser Scalpel"
-	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks to be the pinnacle of precision energy cutlery!"
+	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field. This one looks to be the pinnacle of precision energy cutlery!"
 	id = "scalpel_laser3"
 	req_tech = list("biotech" = 4, "materials" = 6, "magnets" = 5)
 	materials = list("$metal" = 12500, "$glass" = 7500, "$silver" = 2000, "$gold" = 1500)
 	build_path = /obj/item/weapon/scalpel/laser3
 
-datum/design/scalpel_manager
+datum/design/item/scalpel_manager
 	name = "Incision Management System"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	id = "scalpel_manager"
@@ -1261,7 +1252,6 @@ datum/design/item/weapon/AssembleDesignDesc()
 datum/design/item/weapon/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list("combat" = 3, "materials" = 5, "powerstorage" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 500)
 	reliability_base = 76
 	build_path = /obj/item/weapon/gun/energy/gun/nuclear
@@ -1270,7 +1260,6 @@ datum/design/item/weapon/nuclear_gun
 datum/design/item/weapon/stunrevolver
 	id = "stunrevolver"
 	req_tech = list("combat" = 3, "materials" = 3, "powerstorage" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 4000)
 	build_path = /obj/item/weapon/gun/energy/stunrevolver
 	locked = 1
@@ -1279,7 +1268,6 @@ datum/design/item/weapon/lasercannon
 	desc = "The lasing medium of this prototype is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core."
 	id = "lasercannon"
 	req_tech = list("combat" = 4, "materials" = 3, "powerstorage" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 10000, "$glass" = 1000, "$diamond" = 2000)
 	build_path = /obj/item/weapon/gun/energy/lasercannon
 	locked = 1
@@ -1287,7 +1275,6 @@ datum/design/item/weapon/lasercannon
 datum/design/item/weapon/decloner
 	id = "decloner"
 	req_tech = list("combat" = 8, "materials" = 7, "biotech" = 5, "powerstorage" = 6)
-	build_type = PROTOLATHE
 	materials = list("$gold" = 5000,"$uranium" = 10000, "mutagen" = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
 	locked = 1
@@ -1296,7 +1283,6 @@ datum/design/item/weapon/chemsprayer
 	desc = "An advanced chem spraying device."
 	id = "chemsprayer"
 	req_tech = list("materials" = 3, "engineering" = 3, "biotech" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000)
 	reliability_base = 100
 	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
@@ -1304,7 +1290,6 @@ datum/design/item/weapon/chemsprayer
 datum/design/item/weapon/rapidsyringe
 	id = "rapidsyringe"
 	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000)
 	build_path = /obj/item/weapon/gun/syringe/rapidsyringe
 /*
@@ -1313,7 +1298,6 @@ datum/design/item/weapon/largecrossbow
 	desc = "A weapon favoured by syndicate infiltration teams."
 	id = "largecrossbow"
 	req_tech = list("combat" = 4, "materials" = 5, "engineering" = 3, "biotech" = 4, "syndicate" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 1000, "$silver" = 1000)
 	build_path = /obj/item/weapon/gun/energy/crossbow/largecrossbow"
 */
@@ -1321,7 +1305,6 @@ datum/design/item/weapon/temp_gun
 	desc = "A gun that shoots high-powered glass-encased energy temperature bullets."
 	id = "temp_gun"
 	req_tech = list("combat" = 3, "materials" = 4, "powerstorage" = 3, "magnets" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 500, "$silver" = 3000)
 	build_path = /obj/item/weapon/gun/energy/temperature
 	locked = 1
@@ -1329,14 +1312,12 @@ datum/design/item/weapon/temp_gun
 datum/design/item/weapon/flora_gun
 	id = "flora_gun"
 	req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
 	build_path = /obj/item/weapon/gun/energy/floragun
 
 datum/design/item/weapon/large_grenade
 	id = "large_Grenade"
 	req_tech = list("combat" = 3, "materials" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 3000)
 	reliability_base = 79
 	build_path = /obj/item/weapon/grenade/chem_grenade/large
@@ -1344,7 +1325,6 @@ datum/design/item/weapon/large_grenade
 datum/design/item/weapon/smg
 	id = "smg"
 	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 8000, "$silver" = 2000, "$diamond" = 1000)
 	build_path = /obj/item/weapon/gun/projectile/automatic
 	locked = 1
@@ -1352,7 +1332,6 @@ datum/design/item/weapon/smg
 datum/design/item/weapon/ammo_9mm
 	id = "ammo_9mm"
 	req_tech = list("combat" = 4, "materials" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 3750, "$silver" = 100)
 	build_path = /obj/item/ammo_magazine/c9mm
 
@@ -1360,102 +1339,77 @@ datum/design/item/weapon/stunshell
 	desc = "A stunning shell for a shotgun."
 	id = "stunshell"
 	req_tech = list("combat" = 3, "materials" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 
 datum/design/item/weapon/phoronpistol
 	id = "ppistol"
 	req_tech = list("combat" = 5, "phorontech" = 4)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$phoron" = 3000)
 	build_path = /obj/item/weapon/gun/energy/toxgun
 
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
-datum/design/jackhammer
-	name = "Sonic Jackhammer"
-	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
+//Subtype of item/weapon/, because we get the nice desc update
+datum/design/item/weapon/mining/AssembleDesignName()
+	..()
+	name = "Mining equipment design ([item_name])"
+
+datum/design/item/weapon/mining/jackhammer
 	id = "jackhammer"
 	req_tech = list("materials" = 3, "powerstorage" = 2, "engineering" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$glass" = 500, "$silver" = 500)
 	build_path = /obj/item/weapon/pickaxe/jackhammer
 
-datum/design/drill
-	name = "Mining Drill"
-	desc = "Yours is the drill that will pierce through the rock walls."
+datum/design/item/weapon/mining/drill
 	id = "drill"
 	req_tech = list("materials" = 2, "powerstorage" = 3, "engineering" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 6000, "$glass" = 1000) //expensive, but no need for miners.
 	build_path = /obj/item/weapon/pickaxe/drill
 
-datum/design/plasmacutter
-	name = "Plasma Cutter"
-	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+datum/design/item/weapon/mining/plasmacutter
 	id = "plasmacutter"
 	req_tech = list("materials" = 4, "phorontech" = 3, "engineering" = 3)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$phoron" = 500)
 	reliability_base = 79
 	build_path = /obj/item/weapon/pickaxe/plasmacutter
 
-datum/design/pick_diamond
-	name = "Diamond Pickaxe"
-	desc = "A pickaxe with a diamond pick head, this is just like minecraft."
+datum/design/item/weapon/mining/pick_diamond
 	id = "pick_diamond"
 	req_tech = list("materials" = 6)
-	build_type = PROTOLATHE
 	materials = list("$diamond" = 3000)
 	build_path = /obj/item/weapon/pickaxe/diamond
 
-datum/design/drill_diamond
-	name = "Diamond Mining Drill"
-	desc = "Yours is the drill that will pierce the heavens!"
+datum/design/item/weapon/mining/drill_diamond
 	id = "drill_diamond"
 	req_tech = list("materials" = 6, "powerstorage" = 4, "engineering" = 4)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 3000, "$glass" = 1000, "$diamond" = 3750) //Yes, a whole diamond is needed.
 	reliability_base = 79
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 
-datum/design/mesons
-	name = "Optical Meson Scanners"
-	desc = "Used for seeing walls, floors, and stuff through anything."
-	id = "mesons"
-	req_tech = list("magnets" = 2, "engineering" = 2)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/clothing/glasses/meson
-
 /////////////////////////////////////////
 //////////////Blue Space/////////////////
 /////////////////////////////////////////
-
-datum/design/beacon
-	name = "Tracking Beacon"
-	desc = "A blue space tracking beacon."
+datum/design/item/beacon
+	name = "Bluespace tracking beacon design"
 	id = "beacon"
 	req_tech = list("bluespace" = 1)
-	build_type = PROTOLATHE
 	materials = list ("$metal" = 20, "$glass" = 10)
 	build_path = /obj/item/device/radio/beacon
 
-datum/design/bag_holding
-	name = "Bag of Holding"
-	desc = "A backpack that opens into a localized pocket of Blue Space."
+datum/design/item/bag_holding
+	name = "'Bag of Holding', an infinite capacity bag prototype"
+	desc = "Using localized pockets of bluespace this bag prototype offers incredible storage capacity with the contents weighting nothing. It's a shame the bag itself is pretty heavy."
 	id = "bag_holding"
 	req_tech = list("bluespace" = 4, "materials" = 6)
-	build_type = PROTOLATHE
 	materials = list("$gold" = 3000, "$diamond" = 1500, "$uranium" = 250)
 	reliability_base = 80
 	build_path = /obj/item/weapon/storage/backpack/holding
 
 /*
 datum/design/bluespace_crystal
-	name = "Artificial Bluespace Crystal"
+	name = "Artificial bluespace crystal"
 	desc = "A small blue crystal with mystical properties."
 	id = "bluespace_crystal"
 	req_tech = list("bluespace" = 5, "materials" = 7)
@@ -1468,202 +1422,143 @@ datum/design/bluespace_crystal
 /////////////////////////////////////////
 /////////////////HUDs////////////////////
 /////////////////////////////////////////
+datum/design/item/hud
+	materials = list("$metal" = 50, "$glass" = 50)
 
-datum/design/health_hud
-	name = "Health Scanner HUD"
-	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
+datum/design/item/hud/AssembleDesignName()
+	..()
+	name = "HUD glasses prototype ([item_name])"
+
+datum/design/item/hud/AssembleDesignDesc()
+	desc = "Allows for the construction of \a [item_name] HUD glasses."
+
+datum/design/item/hud/health
+	name = "health scanner"
 	id = "health_hud"
 	req_tech = list("biotech" = 2, "magnets" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/health
 
-datum/design/security_hud
-	name = "Security HUD"
-	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status."
+datum/design/item/hud/security
+	name = "security records"
 	id = "security_hud"
 	req_tech = list("magnets" = 3, "combat" = 2)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/hud/security
 	locked = 1
 
 /////////////////////////////////////////
-//////////////Borg Upgrades//////////////
+////////////////PDA Stuff////////////////
 /////////////////////////////////////////
-datum/design/borg_syndicate_module
-	name = "Borg Illegal Weapons Upgrade"
-	desc = "Allows for the construction of illegal upgrades for cyborgs"
+datum/design/item/pda
+	name = "PDA design"
+	desc = "Cheaper than whiny non-digital assistants."
+	id = "pda"
+	req_tech = list("engineering" = 2, "powerstorage" = 3)
+	materials = list("$metal" = 50, "$glass" = 50)
+	build_path = /obj/item/device/pda
+
+// *** Cartridges
+datum/design/item/pda_cartridge
+	req_tech = list("engineering" = 2, "powerstorage" = 3)
+	materials = list("$metal" = 50, "$glass" = 50)
+
+datum/design/item/pda_cartridge/AssembleDesignName()
+	..()
+	name = "PDA accessory ([item_name])"
+
+datum/design/item/pda_cartridge/cart_basic
+	id = "cart_basic"
+	build_path = /obj/item/weapon/cartridge
+datum/design/item/pda_cartridge/engineering
+	id = "cart_engineering"
+	build_path = /obj/item/weapon/cartridge/engineering
+datum/design/item/pda_cartridge/atmos
+	id = "cart_atmos"
+	build_path = /obj/item/weapon/cartridge/atmos
+datum/design/item/pda_cartridge/medical
+	id = "cart_medical"
+	build_path = /obj/item/weapon/cartridge/medical
+datum/design/item/pda_cartridge/chemistry
+	id = "cart_chemistry"
+	build_path = /obj/item/weapon/cartridge/chemistry
+datum/design/item/pda_cartridge/security
+	id = "cart_security"
+	build_path = /obj/item/weapon/cartridge/security
+	locked = 1
+datum/design/item/pda_cartridge/janitor
+	id = "cart_janitor"
+	build_path = /obj/item/weapon/cartridge/janitor
+/*
+datum/design/item/pda_cartridge/clown
+	id = "cart_clown"
+	build_path = /obj/item/weapon/cartridge/clown"
+datum/design/item/pda_cartridge/mime
+	id = "cart_mime"
+	build_path = /obj/item/weapon/cartridge/mime"
+*/
+datum/design/item/pda_cartridge/science
+	id = "cart_science"
+	build_path = /obj/item/weapon/cartridge/signal/science
+datum/design/item/pda_cartridge/quartermaster
+	id = "cart_quartermaster"
+	build_path = /obj/item/weapon/cartridge/quartermaster
+	locked = 1
+datum/design/item/pda_cartridge/hop
+	id = "cart_hop"
+	build_path = /obj/item/weapon/cartridge/hop
+	locked = 1
+datum/design/item/pda_cartridge/hos
+	id = "cart_hos"
+	build_path = /obj/item/weapon/cartridge/hos
+	locked = 1
+datum/design/item/pda_cartridge/ce
+	id = "cart_ce"
+	build_path = /obj/item/weapon/cartridge/ce
+	locked = 1
+datum/design/item/pda_cartridge/cmo
+	id = "cart_cmo"
+	build_path = /obj/item/weapon/cartridge/cmo
+	locked = 1
+datum/design/item/pda_cartridge/rd
+	id = "cart_rd"
+	build_path = /obj/item/weapon/cartridge/rd
+	locked = 1
+datum/design/item/pda_cartridge/captain
+	id = "cart_captain"
+	build_path = /obj/item/weapon/cartridge/captain
+	locked = 1
+
+/////////////////////////////////////////
+///////////////Misc Stuff////////////////
+/////////////////////////////////////////
+datum/design/item/borg_syndicate_module
+	name = "Cyborg lethal weapons upgrade"
+	desc = "Allows for the construction of lethal upgrades for cyborgs."
 	id = "borg_syndicate_module"
 	build_type = MECHFAB
 	req_tech = list("combat" = 4, "syndicate" = 3)
 	build_path = /obj/item/borg/upgrade/syndicate
 	category = "Cyborg Upgrade Modules"
 
-/////////////////////////////////////////
-/////////////PDA and Radio stuff/////////
-/////////////////////////////////////////
-datum/design/binaryencrypt
-	name = "binary encryption key"
-	desc = "An encyption key for a radio headset.  Contains cypherkeys."
+datum/design/item/mesons
+	name = "Optical meson scanners design"
+	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
+	id = "mesons"
+	req_tech = list("magnets" = 2, "engineering" = 2)
+	materials = list("$metal" = 50, "$glass" = 50)
+	build_path = /obj/item/clothing/glasses/meson
+	
+datum/design/item/binaryencrypt
+	name = "Binary encryption key"
+	desc = "Allows for deciphering the binary channel on-the-fly."
 	id = "binaryencrypt"
 	req_tech = list("syndicate" = 2)
-	build_type = PROTOLATHE
 	materials = list("$metal" = 300, "$glass" = 300)
 	build_path = /obj/item/device/encryptionkey/binary
-datum/design/pda
-	name = "PDA"
-	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	id = "pda"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/device/pda
-datum/design/cart_basic
-	name = "Generic Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_basic"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge
-datum/design/cart_engineering
-	name = "Power-ON Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_engineering"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/engineering
-datum/design/cart_atmos
-	name = "BreatheDeep Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_atmos"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/atmos
-datum/design/cart_medical
-	name = "Med-U Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_medical"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/medical
-datum/design/cart_chemistry
-	name = "ChemWhiz Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_chemistry"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/chemistry
-datum/design/cart_security
-	name = "R.O.B.U.S.T. Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_security"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/security
-	locked = 1
-datum/design/cart_janitor
-	name = "CustodiPRO Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_janitor"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/janitor
 
-/*
-datum/design/cart_clown
-	name = "Honkworks 5.0 Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_clown"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/clown"
-datum/design/cart_mime
-	name = "Gestur-O 1000 Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_mime"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/mime"
-*/
-
-datum/design/cart_science
-	name = "Signal Ace 2 Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_science"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/signal/science
-datum/design/cart_quartermaster
-	name = "Space Parts & Space Vendors Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_quartermaster"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/quartermaster
-	locked = 1
-datum/design/cart_hop
-	name = "Human Resources 9001 Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_hop"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/hop
-	locked = 1
-datum/design/cart_hos
-	name = "R.O.B.U.S.T. DELUXE Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_hos"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/hos
-	locked = 1
-datum/design/cart_ce
-	name = "Power-On DELUXE Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_ce"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/ce
-	locked = 1
-datum/design/cart_cmo
-	name = "Med-U DELUXE Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_cmo"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/cmo
-	locked = 1
-datum/design/cart_rd
-	name = "Signal Ace DELUXE Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_rd"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/rd
-	locked = 1
-datum/design/cart_captain
-	name = "Value-PAK Cartridge"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_captain"
-	req_tech = list("engineering" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = /obj/item/weapon/cartridge/captain
-	locked = 1
+datum/design/item/chameleon
+	name = "Holographic equipment kit"
+	desc = "A kit of dangerous, high-tech equipment with changeable looks."
+	id = "chameleon"
+	req_tech = list("syndicate" = 2)
+	materials = list("$metal" = 500)
+	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
