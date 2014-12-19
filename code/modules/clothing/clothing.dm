@@ -1,6 +1,7 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
+	var/unarmed_damage = 0 //Damage modificator for unarmed_attacks (stomps, headbutts, boxing gloves ect)
 	var/list/species_restricted = null //Only these species can wear this kit.
 
 	/*
@@ -352,6 +353,7 @@ BLIND     // can't see anything
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
+	unarmed_damage = 2
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
