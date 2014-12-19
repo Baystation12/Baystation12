@@ -3,6 +3,7 @@
 	name = "magboots"
 	icon_state = "magboots0"
 	species_restricted = null
+	unarmed_damage = 3
 	var/magpulse = 0
 	var/icon_base = "magboots"
 	icon_action_button = "action_blank"

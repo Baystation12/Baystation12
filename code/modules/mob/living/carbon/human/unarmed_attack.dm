@@ -24,6 +24,9 @@
 
 	return 0
 
+/datum/unarmed_attack/proc/get_unarmed_damage()
+	return damage
+
 /datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 
 	var/stun_chance = rand(0, 100)
@@ -131,12 +134,12 @@
 
 /datum/unarmed_attack/kick
 	attack_verb = list("kicked", "kneed")
-	attack_noun = list("kick")
+	attack_noun = list("kick", "knee strike")
 	attack_sound = "swing_hit"
-	damage = 1
+	damage = 0
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (target.legcuffed)
+	if (user.legcuffed)
 		return 0
 
 	if(!(zone in list("l_leg", "r_leg", "l_foot", "r_foot", "groin")))
@@ -152,36 +155,34 @@
 
 	return 0
 
+/datum/unarmed_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
+	var/obj/item/clothing/shoes = user.shoes
+	if(!istype(shoes))
+		return damage
+	return damage + (shoes ? shoes.unarmed_damage : 0)
+
 /datum/unarmed_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/datum/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
 
 	attack_damage = Clamp(attack_damage, 1, 5)
 
-	switch(zone)
-		if("groin", "l_leg", "r_leg")
-			// -- LOWER BODY -- //
-			switch(attack_damage)
-				if(1 to 2)	user.visible_message("<span class='danger'>[user] gave [target] a light [pick(attack_noun)] to the [organ]!</span>")
-				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
-		if("l_foot", "r_foot")
-			// ----- FEET ----- //
-			switch(attack_damage)
-				if(1 to 4)	user.visible_message("<span class='danger'>[user] kicked [target] in \his [organ]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] stomped down hard on [target]'s [organ]!</span>")
+	switch(attack_damage)
+		if(1 to 2)	user.visible_message("<span class='danger'>[user] gave [target] a light [pick(attack_noun)] to the [organ]!</span>")
+		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
+		if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
 
 /datum/unarmed_attack/stomp
 	attack_verb = null
 	attack_noun = list("kick")
 	attack_sound = "swing_hit"
-	damage = 3
+	damage = 0
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (target.legcuffed)
+	if (user.legcuffed)
 		return 0
 
-	if (target.lying && !user.lying)
+	if (!user.lying && (target.lying || zone in list("l_foot", "r_foot")))
 		var/datum/organ/external/E = user.organs_by_name["l_foot"]
 		if(E && !(E.status & ORGAN_DESTROYED))
 			return 1
@@ -192,17 +193,21 @@
 
 		return 0
 
+/datum/unarmed_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
+	var/obj/item/clothing/shoes = user.shoes
+	return damage + (shoes ? shoes.unarmed_damage : 0)
+
 /datum/unarmed_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/datum/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
+	var/obj/item/clothing/shoes = user.shoes
 
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	switch(attack_damage)
-		if(1 to 3)
-			user.visible_message("<span class='danger'>[user] [pick("gave a kick against", "kicked against", "stomped down on", "slammed their foot into")] [target]'s [organ]!</span>")
-		if(4 to 5)
-			user.visible_message("<span class='danger'>[user] [pick("landed a strong kick against", "kicked against", "stomped down hard on", "rammed their foot into")] [target]'s [organ]!</span>")
+		if(1 to 2)	user.visible_message("<span class='danger'>[user] [pick("clomped on", "treaded on")] [target]'s [organ]!</span>")
+		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick("stomped down on", "slammed their [shoes ? copytext(shoes.name, 1, -1) : "foot"] down onto")] [target]'s [organ]!</span>")
+		if(5)		user.visible_message("<span class='danger'>[user] [pick("landed a devastating stomp on", "stomped down hard on", "slammed their [shoes ? copytext(shoes.name, 1, -1) : "foot"] down hard onto")] [target]'s [organ]!</span>")
 
 /datum/unarmed_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
