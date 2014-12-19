@@ -1341,7 +1341,6 @@
 #include "code\modules\research\xenoarchaeology\artifact\artifact_autocloner.dm"
 #include "code\modules\research\xenoarchaeology\artifact\artifact_crystal.dm"
 #include "code\modules\research\xenoarchaeology\artifact\artifact_gigadrill.dm"
-#include "code\modules\research\xenoarchaeology\artifact\artifact_hoverpod.dm"
 #include "code\modules\research\xenoarchaeology\artifact\artifact_replicator.dm"
 #include "code\modules\research\xenoarchaeology\artifact\artifact_unknown.dm"
 #include "code\modules\research\xenoarchaeology\artifact\effect.dm"
