@@ -183,6 +183,8 @@
 		return 0
 
 	if (!user.lying && (target.lying || zone in list("l_foot", "r_foot")))
+		if(target.grabbed_by == user && target.lying)
+			return 0
 		var/datum/organ/external/E = user.organs_by_name["l_foot"]
 		if(E && !(E.status & ORGAN_DESTROYED))
 			return 1
