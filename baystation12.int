@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 506.1247
+WINDOW: code\game\objects\items\devices\violin.dm;code\game\objects\items\devices\whistle.dm;code\game\sound.dm;code\game\objects\structures\musician.dm
+DIR: code code\game code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\structures sound tools tools\AddToChangelog tools\AddToChangelog\AddToChangelog 
+FILE: code\game\objects\items\devices\violin.dm
+LAST_COMPILE_TIME: 1419165507
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
