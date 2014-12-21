@@ -167,7 +167,7 @@
 		target.updatehealth()
 		target.UpdateDamageIcon()
 		user.drop_from_inventory(tool, user.loc)
-		tool.loc = src
+		tool.loc = target
 		affected.RobotLimb = tool
 		var/obj/item/robot_parts/robolimb = tool
 		robolimb.OnInstall()

@@ -904,6 +904,23 @@ datum/design/mech_generator_nuclear
 	build_path = "/obj/item/mecha_parts/mecha_equipment/generator/nuclear"
 	category = "Exosuit Equipment"
 
+datum/design/grapple_l_hand
+	name = "Grappling Device (Left Hand)"
+	desc = "Grappling Device"
+	id = "grapple_l_hand"
+	build_type = MECHFAB
+	req_tech = list("programming"= 3, "engineering" = 3, "materials" = 3)
+	build_path = "/obj/item/robot_parts/grapple/l_hand"
+	category = "Robot Parts"
+
+datum/design/grapple_r_hand
+	name = "Grappling Device (Right Hand)"
+	desc = "Grappling Device"
+	id = "grapple_r_hand"
+	build_type = MECHFAB
+	req_tech = list("programming"= 3, "engineering" = 3, "materials" = 3)
+	build_path = "/obj/item/robot_parts/grapple/r_hand"
+	category = "Robot Parts"
 
 ////////////////////////////////////////
 //////////Disk Construction Disks///////
