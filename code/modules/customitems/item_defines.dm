@@ -1484,7 +1484,7 @@
 /obj/item/weapon/coin/diamond/fluff/lechoslaw_basinger
 	name = "scratched diamond coin"
 	desc = "A regular looking diamond coin that seems to have some scratches on each of the side of it."
-	icon = 'icons/obj/custom_items.dmi'
+	icon = "icons/obj/custom_items.dmi"
 	icon_state = "coin_diamondscratch"
 	item_state = "coin_diamondscratch"
 
@@ -1497,6 +1497,9 @@
 obj/item/clothing/head/ushanka/fluff/rufaro_nia
 	name = "Nia's ushanka"
 	desc = "This pink Russian ushanka has been modified to have sewn-in holes in the back for her spines to poke out of the hat without causing a rip. It covers everything to an inch above her eye. The spines point straight out her head, but point at an acute angle backwards to the top of her head, to the base of her neck in one neat row. The Ushanka itself has a Tendaji flag and symbol on the front, where the normal soviet star would go. The earflaps are unbuttoned and left down."
+	icon = "icons/obj/custom_items.dmi"
+	icon_state = "niaushanka"
+	item_state = "niaushanka"
 
 //////////////////////////// DerpMaestro ///////////////////////////////////////////////////
 
