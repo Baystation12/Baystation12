@@ -221,7 +221,7 @@
 
 			filling.icon_state = "syringe[rounded_vol]"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = mix_color_from_reagents(reagents.reagent_list)
 			overlays += filling
 
 
