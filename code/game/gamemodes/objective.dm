@@ -749,7 +749,7 @@ datum/objective/absorb
 /*-------ENDOF CULTIST------*/
 */
 
-//Vox heist objectives.
+// Heist objectives.
 
 datum/objective/heist
 	proc/choose_target()
@@ -787,7 +787,7 @@ datum/objective/heist/kidnap
 			//if (!target.current.restrained())
 			//	return 0 // They're loose. Close but no cigar.
 
-			var/area/shuttle/vox/station/A = locate()
+			var/area/shuttle/skipjack/station/A = locate()
 			for(var/mob/living/carbon/human/M in A)
 				if(target.current == M)
 					return 1 //They're restrained on the shuttle. Success.
@@ -838,7 +838,7 @@ datum/objective/heist/loot
 
 		var/total_amount = 0
 
-		for(var/obj/O in locate(/area/shuttle/vox/station))
+		for(var/obj/O in locate(/area/shuttle/skipjack/station))
 			if(istype(O,target)) total_amount++
 			for(var/obj/I in O.contents)
 				if(istype(I,target)) total_amount++
@@ -888,7 +888,7 @@ datum/objective/heist/salvage
 
 		var/total_amount = 0
 
-		for(var/obj/item/O in locate(/area/shuttle/vox/station))
+		for(var/obj/item/O in locate(/area/shuttle/skipjack/station))
 
 			var/obj/item/stack/sheet/S
 			if(istype(O,/obj/item/stack/sheet))
@@ -915,21 +915,21 @@ datum/objective/heist/salvage
 
 
 datum/objective/heist/inviolate_crew
-	explanation_text = "Do not leave any Vox behind, alive or dead."
+	explanation_text = "Do not leave anyone behind, alive or dead."
 
 	check_completion()
 		var/datum/game_mode/heist/H = ticker.mode
 		if(H.is_raider_crew_safe()) return 1
 		return 0
 
-#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
-						 //Would be nice to use vox-specific kills but is currently not feasible.
-var/global/vox_kills = 0 //Used to check the Inviolate.
+#define MAX_RAIDER_KILLS 10 //Number of kills during the round before the Inviolate is broken.
+						 //Would be nice to use raider-specific kills but is currently not feasible.
+var/global/raider_kills = 0 //Used to check the Inviolate.
 
 datum/objective/heist/inviolate_death
-	explanation_text = "Follow the Inviolate. Minimise death and loss of resources."
+	explanation_text = "Minimise deaths and loss of resources."
 	check_completion()
-		if(vox_kills > MAX_VOX_KILLS) return 0
+		if(raider_kills > MAX_RAIDER_KILLS) return 0
 		return 1
 
 //Borer objective(s).
