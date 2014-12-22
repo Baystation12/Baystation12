@@ -921,6 +921,7 @@ client
 				del(I)
 				return
 
+			H.internal_organs |= I
 			H.internal_organs_by_name[organ_slot] = I
 			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
 		else
