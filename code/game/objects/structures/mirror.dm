@@ -1,6 +1,6 @@
 //wip wip wup
 /obj/structure/mirror
-	name = "SalonPro Nano-Mirror(TM)"
+	name = "\improper SalonPro Nano-Mirror(TM)"
 	desc = "The leading technology in hair salon products, utilizing nano-machinery to style your hair just right."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror"

@@ -1,6 +1,6 @@
 //Contains the rapid construction device.
 /obj/item/weapon/rcd
-	name = "rapid-construction-device (RCD)"
+	name = "rapid construction device (RCD)"
 	desc = "A device used to rapidly build walls and floors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"

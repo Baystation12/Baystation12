@@ -1,29 +1,14 @@
-// Constructable SMES version. Based on Coils. Each SMES can hold 6 Coils by default.
-// Each coil adds 250kW I/O and 5M capacity.
-// This is second version, now subtype of regular SMES.
+// Constructable SMES version (based on SMES Coils)
 
-
-//Board
-/obj/item/weapon/circuitboard/smes
-	name = "Circuit board (SMES Cell)"
-	build_path = "/obj/machinery/power/smes/buildable"
-	board_type = "machine"
-	origin_tech = "powerstorage=6;engineering=4" // Board itself is high tech. Coils have to be ordered from cargo or salvaged from existing SMESs.
-	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
-	req_components = list("/obj/item/weapon/smes_coil" = 1, "/obj/item/stack/cable_coil" = 30)
-
-//Construction Item
+//Construction Items
 /obj/item/weapon/smes_coil
-	name = "Superconducting Magnetic Coil"
-	desc = "Heavy duty superconducting magnetic coil, mainly used in construction of SMES units."
+	name = "superconductive magnetic coil"
+	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = 4.0 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
-
-
-
 
 // SMES itself
 /obj/machinery/power/smes/buildable
@@ -31,13 +16,36 @@
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	var/datum/wires/smes/wires
+	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
+	var/RCon = 1				// Cut to disable AI and remote control.
+	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
 	charge = 0
 	should_be_mapped = 1
+
+/obj/machinery/power/smes/buildable/process()
+	if(!grounding && (Percentage() > 5))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+		charge -= (output_level_max * SMESRATE)
+		if(prob(1)) // Small chance of overload occuring since grounding is disabled.
+			apcs_overload(5,10)
+
+	..()
+
+
+/obj/machinery/power/smes/buildable/attack_ai()
+	if(RCon)
+		..()
+	else // RCON wire cut
+		usr << "<span class='warning'>Connection error: Destination Unreachable.</span>"
 
 /obj/machinery/power/smes/buildable/New()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
 	component_parts += new /obj/item/weapon/circuitboard/smes(src)
+	src.wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
 	for(var/i = 1, i <= cur_coils, i++)
@@ -45,6 +53,11 @@
 
 	recalc_coils()
 	..()
+
+/obj/machinery/power/smes/buildable/attack_hand()
+	..()
+	if(open_hatch)
+		wires.Interact(usr)
 
 /obj/machinery/power/smes/buildable/proc/recalc_coils()
 	if ((cur_coils <= max_coils) && (cur_coils >= 1))
@@ -205,8 +218,15 @@
 	// - No action was taken in parent function (terminal de/construction atm).
 	if (..())
 
+		// Multitool - change RCON tag
+		if(istype(W, /obj/item/device/multitool))
+			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
+			if(newtag)
+				RCon_tag = newtag
+				user << "<span class='notice'>You changed the RCON tag to: [newtag]</span>"
+			return
 		// Charged above 1% and safeties are enabled.
-		if((charge > (capacity/100)) && safeties_enabled && (!istype(W, /obj/item/device/multitool)))
+		if((charge > (capacity/100)) && safeties_enabled)
 			user << "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>"
 			return
 
@@ -263,8 +283,18 @@
 			else
 				usr << "\red You can't insert more coils to this SMES unit!"
 
-		// Multitool - Toggle the safeties.
-		else if(istype(W, /obj/item/device/multitool))
-			safeties_enabled = !safeties_enabled
-			user << "<span class='warning'>You [safeties_enabled ? "connected" : "disconnected"] the safety circuit.</span>"
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Safety circuit has been: [safeties_enabled ? "re-enabled" : "disabled. Please excercise caution."]\"")
+/obj/machinery/power/smes/buildable/proc/toggle_input()
+	input_attempt = !input_attempt
+	update_icon()
+
+/obj/machinery/power/smes/buildable/proc/toggle_output()
+	output_attempt = !output_attempt
+	update_icon()
+
+/obj/machinery/power/smes/buildable/proc/set_input(var/new_input = 0)
+	input_level = new_input
+	update_icon()
+
+/obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
+	output_level = new_output
+	update_icon()

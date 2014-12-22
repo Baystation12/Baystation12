@@ -211,11 +211,11 @@
 		return 1
 
 
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg)
+/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
 	if(a_right)
-		a_right.hear_talk(M,msg)
+		a_right.hear_talk(M,msg,verb,speaking)
 	if(a_left)
-		a_left.hear_talk(M,msg)
+		a_left.hear_talk(M,msg,verb,speaking)
 
 
 

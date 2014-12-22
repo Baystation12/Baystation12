@@ -1,5 +1,4 @@
 /obj/item/weapon/gun/rocketlauncher
-	var/projectile
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon_state = "rocket"
@@ -11,7 +10,7 @@
 	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
 	slot_flags = 0
 	origin_tech = "combat=8;materials=5"
-	projectile = /obj/item/missile
+	var/projectile = /obj/item/missile
 	var/missile_speed = 2
 	var/missile_range = 30
 	var/max_rockets = 1

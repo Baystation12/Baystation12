@@ -2,8 +2,8 @@
 
 // The communications computer
 /obj/machinery/computer/communications
-	name = "Communications Console"
-	desc = "This can be used for various important functions. Still under developement."
+	name = "command and communications console"
+	desc = "Used to command and control the station. Can relay long-range communications."
 	icon_state = "comm"
 	req_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/communications"
