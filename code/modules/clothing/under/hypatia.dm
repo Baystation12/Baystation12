@@ -122,14 +122,14 @@
 	armor = list(melee = 70, bullet = 70, laser = 70, energy = 50, bomb = 40, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/marinemed
-	name = "Marine heavy armor"
+	name = "Marine medium armor"
 	desc = "NT Marine medium armor ."
 	icon_state = "marine-armor-med"
 	item_state = "marine-armor-med"
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/marinelight
-	name = "Marine heavy armor"
+	name = "Marine light armor"
 	desc = "NT Marine light armor, generally worn in non-combat zones."
 	icon_state = "marine-armor-light"
 	item_state = "marine-armor-light"
