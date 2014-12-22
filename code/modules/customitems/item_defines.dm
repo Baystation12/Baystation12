@@ -723,9 +723,10 @@
 
 //////////// Hats ////////////
 
-/obj/item/clothing/glasses/monocle/electronic    //bean-dip's custom item. -- Dalekfodder // Naughty Dalek, it goes here -- Marajin
+/obj/item/clothing/glasses/monocle/fluff/ebele    //bean-dip's custom item. -- Dalekfodder // Naughty Dalek, it goes here -- Marajin
 	name = "Electronic Eye"
 	desc = "This is an electronic eye made to fit, and appear similar to a Soghun's eye. From time to time, it blinks red and blue."
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "electronic-eye_Ebele"
 	item_state = "electronic-eye_Ebele"
 	species_restricted = list("Soghun")  // Don't forget to change the description if you want this removed.
@@ -910,8 +911,8 @@
 	name = "old scarf"
 	desc = "An old looking scarf, it seems to be fairly worn."
 	icon = 'icons/obj/clothing/suits.dmi'
-	icon_state = "mantle-Soghun"
-	item_state = "mantle-Soghun"
+	icon_state = "mantle-unathi"
+	item_state = "mantle-unathi"
 	body_parts_covered = 0
 
 /////////////////////////////// 50_n00b - R.A.N.G.E.'s blue dress //////////////////////////

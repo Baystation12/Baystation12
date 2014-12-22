@@ -403,7 +403,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/soghun_mantle
 	display_name = "hide mantle (Soghun)"
-	path = /obj/item/clothing/suit/Soghun/mantle
+	path = /obj/item/clothing/suit/soghun/mantle
 	cost = 2
 	slot = slot_wear_suit
 	whitelisted = "Soghun"
@@ -440,7 +440,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/soghun_robe
 	display_name = "roughspun robe (Soghun)"
-	path = /obj/item/clothing/suit/Soghun/robe
+	path = /obj/item/clothing/suit/soghun/robe
 	cost = 3
 	slot = slot_wear_suit
 //	whitelisted = "Soghun" // You don't have a monopoly on a robe!

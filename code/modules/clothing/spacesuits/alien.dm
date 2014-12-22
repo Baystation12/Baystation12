@@ -46,9 +46,9 @@
 /obj/item/clothing/head/helmet/space/soghun/helmet_cheap
 	name = "NT breacher helmet"
 	desc = "Hey! Watch it with that thing! It's a knock-off of a Soghun battle-helm, and that spike could put someone's eye out."
-	icon_state = "soghun_helm_cheap"
-	item_state = "soghun_helm_cheap"
-	item_color = "soghun_helm_cheap"
+	icon_state = "unathi_helm_cheap"
+	item_state = "unathi_helm_cheap"
+	item_color = "unathi_helm_cheap"
 
 /obj/item/clothing/suit/space/soghun
 	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
@@ -60,23 +60,23 @@
 /obj/item/clothing/suit/space/soghun/rig_cheap
 	name = "NT breacher chassis"
 	desc = "A cheap NT knock-off of a Soghun battle-rig. Looks like a fish, moves like a fish, steers like a cow."
-	icon_state = "rig-Soghun-cheap"
-	item_state = "rig-Soghun-cheap"
+	icon_state = "rig-unathi-cheap"
+	item_state = "rig-unathi-cheap"
 	slowdown = 3
 
 /obj/item/clothing/head/helmet/space/soghun/breacher
 	name = "breacher helm"
 	desc = "Weathered, ancient and battle-scarred. The helmet is too."
-	icon_state = "soghun_breacher"
-	item_state = "soghun_breacher"
-	item_color = "soghun_breacher"
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	item_color = "unathi_breacher"
 
 /obj/item/clothing/suit/space/soghun/breacher
 	name = "breacher chassis"
 	desc = "Huge, bulky and absurdly heavy. It must be like wearing a tank."
-	icon_state = "soghun_breacher"
-	item_state = "soghun_breacher"
-	item_color = "soghun_breacher"
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	item_color = "unathi_breacher"
 	slowdown = 1
 
 // Vox space gear (vaccuum suit, low pressure armour)

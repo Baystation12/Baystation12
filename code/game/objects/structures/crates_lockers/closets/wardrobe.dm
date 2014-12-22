@@ -110,8 +110,8 @@
 
 /obj/structure/closet/wardrobe/xenos/New()
 	..()
-	new /obj/item/clothing/suit/Soghun/mantle(src)
-	new /obj/item/clothing/suit/Soghun/robe(src)
+	new /obj/item/clothing/suit/soghun/mantle(src)
+	new /obj/item/clothing/suit/soghun/robe(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)
