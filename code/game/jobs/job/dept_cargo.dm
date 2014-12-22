@@ -8,8 +8,15 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#8c7846"
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_heads, access_RC_announce, access_keycard_auth, access_sec_doors)
-	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station, access_heads, access_RC_announce, access_keycard_auth, access_sec_doors)
+	idtype = /obj/item/weapon/card/id/silver
+	req_admin_notify = 1
+	minimal_player_age = 7
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot,
+						access_qm, access_mint, access_mining, access_mining_station, access_heads,
+						access_RC_announce, access_keycard_auth, access_sec_doors)
+	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot,
+						access_qm, access_mint, access_mining, access_mining_station, access_heads,
+						access_RC_announce, access_keycard_auth, access_sec_doors)
 
 
 	equip(var/mob/living/carbon/human/H)
