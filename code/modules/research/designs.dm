@@ -325,19 +325,19 @@ datum/design/circuit/shield/AssembleDesignDesc()
 datum/design/circuit/shield/bubble
 	name = "bubble"
 	id = "shield_gen"
-	build_path = "/obj/machinery/shield_gen/external"
+	build_path = /obj/item/weapon/circuitboard/shield_gen
 
 datum/design/circuit/shield/hull
 	name = "hull"
 	id = "shield_gen_ex"
-	build_path = "/obj/machinery/shield_gen/external"
+	build_path = /obj/item/weapon/circuitboard/shield_gen_ex
 
 datum/design/circuit/shield/capacitor
 	name = "capacitor"
 	desc = "Allows for the construction of a shield capacitor circuit board."
 	id = "shield_cap"
 	req_tech = list("magnets" = 3, "powerstorage" = 4)
-	build_path = "/obj/machinery/shield_gen/external"
+	build_path = /obj/item/weapon/circuitboard/shield_cap
 
 ///////////////////////////////////
 //////////AI Module Disks//////////
