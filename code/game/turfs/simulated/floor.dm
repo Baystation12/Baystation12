@@ -218,29 +218,16 @@ turf/simulated/floor/proc/update_icon()
 			return 0
 
 /turf/simulated/floor/attack_hand(mob/user as mob)
-	if (is_light_floor())
-		toggle_lightfloor_on()
-		update_icon()
-	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
+	. = ..()
+	if(.)
 		return
-	if (user.pulling.anchored || !isturf(user.pulling.loc))
-		return
-	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
-		return
-	if (ismob(user.pulling))
-		var/mob/M = user.pulling
 
-//		if(M==user)					//temporary hack to stop runtimes. ~Carn
-//			user.stop_pulling()		//but...fixed the root of the problem
-//			return					//shoudn't be needed now, unless somebody fucks with pulling again.
-
-		var/mob/t = M.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		M.start_pulling(t)
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-	return
+	if(is_light_floor())
+		if(user.canmove && !user.restrained())
+			toggle_lightfloor_on()
+			update_icon()
+			return 1
+	return 0
 
 /turf/simulated/floor/proc/gets_drilled()
 	return

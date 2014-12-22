@@ -1,5 +1,5 @@
 /obj/item/device/chameleon
-	name = "chameleon-projector"
+	name = "chameleon projector"
 	icon_state = "shield0"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT

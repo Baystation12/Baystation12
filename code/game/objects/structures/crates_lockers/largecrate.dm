@@ -64,7 +64,7 @@
 	..()
 
 /obj/structure/largecrate/hoverpod
-	name = "Hoverpod assembly crate"
+	name = "\improper Hoverpod assembly crate"
 	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
 	icon_state = "mulecrate"
 

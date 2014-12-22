@@ -1,5 +1,4 @@
 /obj/item/weapon/gun/launcher
-
 	name = "launcher"
 	desc = "A device that launches things."
 	icon = 'icons/obj/weapons.dmi'

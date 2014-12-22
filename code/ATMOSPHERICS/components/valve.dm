@@ -317,3 +317,7 @@
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
+
+/obj/machinery/atmospherics/valve/examine(mob/user)
+	..()
+	user << "It is [open ? "open" : "closed"]."

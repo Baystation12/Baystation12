@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/skills//TODO:SANITY
-	name = "Employment Records"
-	desc = "Used to view personnel's employment records"
+	name = "employment records console"
+	desc = "Used to view, edit and maintain employment records."
 	icon_state = "medlaptop"
 	req_one_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/skills"

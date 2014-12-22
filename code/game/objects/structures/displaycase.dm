@@ -92,5 +92,3 @@
 		src.health -= 2
 		healthcheck()
 		return
-
-

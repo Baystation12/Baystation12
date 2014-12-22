@@ -73,6 +73,7 @@ datum/preferences
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"               //Species datum to use.
+	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
 
@@ -138,7 +139,7 @@ datum/preferences
 				if(load_character())
 					return
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender)
+	real_name = random_name(gender,species)
 
 	gear = list()
 
@@ -302,7 +303,7 @@ datum/preferences
 	dat += "<br><table><tr><td><b>Body</b> "
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
-	dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
+	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
 	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 	dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
@@ -507,6 +508,8 @@ datum/preferences
 				HTML += " <font color=green>\[Yes]</font>"
 			else
 				HTML += " <font color=red>\[No]</font>"
+			if(job.alt_titles) //Blatantly cloned from a few lines down.
+				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 			continue
 
@@ -585,6 +588,62 @@ datum/preferences
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=records;size=350x300")
 	return
+
+/datum/preferences/proc/SetSpecies(mob/user)
+	if(!species_preview || !(species_preview in all_species))
+		species_preview = "Human"
+	var/datum/species/current_species = all_species[species_preview]
+	var/dat = "<body>"
+	dat += "<center><h2>[current_species.name] \[<a href='?src=\ref[user];preference=species;task=change'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[current_species.blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if("preview" in icon_states(current_species.icobase))
+		usr << browse_rsc(icon(current_species.icobase,"preview"), "species_preview_[current_species.name].png")
+		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [current_species.language]<br/>"
+	dat += "<small>"
+	if(current_species.flags & IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(current_species.flags & NO_BLOOD)
+		dat += "</br><b>Does not have blood.</b>"
+	if(current_species.flags & NO_BREATHE)
+		dat += "</br><b>Does not breathe.</b>"
+	if(current_species.flags & NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(current_species.flags & NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(current_species.flags & NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(current_species.flags & NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(current_species.flags & HAS_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(current_species.flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(current_species.flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(current_species.flags & IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(current_species.flags & IS_SYNTHETIC)
+		dat += "</br><b>Is machine-based.</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><center><hr/>"
+
+	var/restricted
+	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
+		if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
+			restricted = 1
+	if(restricted)
+		dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font>"
+	else
+		dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
+	dat += "</center></body>"
+
+	user << browse(null, "window=preferences")
+	user << browse(dat, "window=species;size=700x400")
 
 /datum/preferences/proc/SetAntagoptions(mob/user)
 	if(uplinklocation == "" || !uplinklocation)
@@ -1076,10 +1135,18 @@ datum/preferences
 					break
 
 	switch(href_list["task"])
+		if("change")
+			if(href_list["preference"] == "species")
+				// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
+				var/choice = input("Which species would you like to look at?") as null|anything in whitelisted_species
+				if(!choice) return
+				species_preview = choice
+				SetSpecies(user)
+
 		if("random")
 			switch(href_list["preference"])
 				if("name")
-					real_name = random_name(gender)
+					real_name = random_name(gender,species)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
 				if("hair")
@@ -1131,24 +1198,11 @@ datum/preferences
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
 				if("species")
-
-					var/list/new_species = list("Human")
+					user << browse(null, "window=species")
 					var/prev_species = species
-					var/whitelisted = 0
-
-					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-						for(var/S in whitelisted_species)
-							if(is_alien_whitelisted(user,S))
-								new_species += S
-								whitelisted = 1
-						if(!whitelisted)
-							alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-					else //Not using the whitelist? Aliens for everyone!
-						new_species = whitelisted_species
-
-					species = input("Please select a species", "Character Generation", null) in new_species
-
+					species = href_list["newspecies"]
 					if(prev_species != species)
 						//grab one of the valid hair styles for the newly chosen species
 						var/list/valid_hairstyles = list()
@@ -1551,7 +1605,7 @@ datum/preferences
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
 	if(be_random_name)
-		real_name = random_name(gender)
+		real_name = random_name(gender,species)
 
 	if(config.humans_need_surnames)
 		var/firstspace = findtext(real_name, " ")
