@@ -10,10 +10,59 @@
 	var/exclaim_verb = "exclaims"    // Used when sentence ends in a !
 	var/whisper_verb                 // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list()       // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
-	var/colour = "body"         // CSS style to use for strings in this language.
+	var/colour = "body"              // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.
+	var/list/syllables               // Used when scrambling text for a non-speaker.
+	var/list/space_chance = 55       // Likelihood of getting a space in the random scramble string.
+
+/datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4)
+	if(!syllables || !syllables.len)
+		if(gender==FEMALE)
+			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+		else
+			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+
+	var/full_name = ""
+	var/new_name = ""
+
+	for(var/i = 0;i<name_count;i++)
+		new_name = ""
+		for(var/x = rand(Floor(syllable_count/2),syllable_count);x>0;x--)
+			new_name += pick(syllables)
+		full_name += " [capitalize(lowertext(new_name))]"
+
+	return "[trim(full_name)]"
+
+/datum/language/proc/scramble(var/input)
+
+	if(!syllables || !syllables.len)
+		return stars(input)
+
+	var/input_size = length(input)
+	var/scrambled_text = ""
+	var/capitalize = 1
+
+	while(length(scrambled_text) < input_size)
+		var/next = pick(syllables)
+		if(capitalize)
+			next = capitalize(next)
+			capitalize = 0
+		scrambled_text += next
+		var/chance = rand(100)
+		if(chance <= 5)
+			scrambled_text += ". "
+			capitalize = 1
+		else if(chance > 5 && chance <= space_chance)
+			scrambled_text += " "
+
+	scrambled_text = trim(scrambled_text)
+	var/ending = copytext(scrambled_text, length(scrambled_text))
+	if(ending == ".")
+		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
+	scrambled_text += copytext(input, length(input))
+	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
 	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
@@ -72,6 +121,14 @@
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
+	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
+
+/datum/language/unathi/get_random_name()
+
+	var/new_name = ..()
+	while(findtextEx(new_name,"sss",1,null))
+		new_name = replacetext(new_name, "sss", "ss")
+	return capitalize(new_name)
 
 /datum/language/tajaran
 	name = "Siik'tajr"
@@ -82,6 +139,19 @@
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
+	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
+	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah", \
+	"hal","ket","jurl","mah","tul","cresh","azu","ragh")
+
+/datum/language/tajaran/get_random_name(var/gender)
+
+	var/new_name = ..(gender,1)
+	if(prob(80))
+		new_name += " [pick(list("Hadii","Kaytam","Zhan-Khazan","Hharar","Njarir'Akhan"))]"
+	else
+		new_name += ..(gender,1)
+	return new_name
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -92,6 +162,7 @@
 	colour = "skrell"
 	key = "k"
 	flags = WHITELISTED
+	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/vox
 	name = "Vox-pidgin"
@@ -101,7 +172,12 @@
 	exclaim_verb = "SHRIEKS"
 	colour = "vox"
 	key = "5"
-	flags = RESTRICTED
+	flags = WHITELISTED
+	syllables = list("ti","ti","ti","hi","hi","ki","ki","ki","ki","ya","ta","ha","ka","ya","chi","cha","kah", \
+	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
+
+/datum/language/vox/get_random_name()
+	return ..(FEMALE,1,6)
 
 /datum/language/diona
 	name = "Rootspeak"
@@ -112,6 +188,12 @@
 	colour = "soghun"
 	key = "q"
 	flags = RESTRICTED
+	syllables = list("hs","zt","kr","st","sh")
+
+/datum/language/diona/get_random_name()
+	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
+	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
+	return new_name
 
 /datum/language/common
 	name = "Galactic Common"
@@ -120,6 +202,7 @@
 	whisper_verb = "whispers"
 	key = "0"
 	flags = RESTRICTED
+	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
 //TODO flag certain languages to use the mob-type specific say_quote and then get rid of these.
 /datum/language/common/get_spoken_verb(var/msg_end)
@@ -135,9 +218,10 @@
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
-	colour = "rough"
+	colour = "solcom"
 	key = "1"
 	flags = RESTRICTED
+	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
@@ -154,6 +238,15 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
+	space_chance = 100
+	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
+					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
+					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud", 
+					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", 
+					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in", 
+					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla", 
+					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", 
+					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
 
 /datum/language/gutter
 	name = "Gutter"
@@ -161,6 +254,7 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 /datum/language/xenocommon
 	name = "Xenomorph"
@@ -171,6 +265,7 @@
 	exclaim_verb = "hisses"
 	key = "4"
 	flags = RESTRICTED
+	syllables = list("sss","sSs","SSS")
 
 /datum/language/xenos
 	name = "Hivemind"
