@@ -9,7 +9,7 @@
 #define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
 
 //radiation constants
-#define STEFAN_BOLTZMANN_CONSTANT		0.0000000567	//W/(m^2*K^4)
+#define STEFAN_BOLTZMANN_CONSTANT		5.6704e-8	//W/(m^2*K^4)
 #define COSMIC_RADIATION_TEMPERATURE	3.15		//K
 #define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
 #define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
