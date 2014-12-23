@@ -490,7 +490,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/regenerate_icons()
 	..()
 	if(monkeyizing)		return
+
 	update_mutations(0)
+	update_body(0)
+	update_hair(0)
 	update_inv_w_uniform(0)
 	update_inv_wear_id(0)
 	update_inv_gloves(0)

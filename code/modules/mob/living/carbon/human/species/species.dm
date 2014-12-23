@@ -175,10 +175,6 @@
 	add_inherent_verbs(H)
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
-	if(flags & IS_SYNTHETIC)
-		H.h_style = ""
-		spawn(100)
-			H.update_hair()
 	return
 
 // Only used for alien plasma weeds atm, but could be used for Dionaea later.

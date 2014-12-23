@@ -92,7 +92,7 @@
 	if(istype(user, /mob/living))
 		var/mob/living/M = user
 		if (HULK in M.mutations)
-			M << "\red Your fingers are much too large for the trigger guard!"
+			M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 			return
 
 	add_fingerprint(user)

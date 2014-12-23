@@ -1,17 +1,18 @@
 
 /obj/machinery/gibber
-	name = "Gibber"
+	name = "gibber"
 	desc = "The name isn't descriptive enough?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
 	density = 1
 	anchored = 1
+	req_access = list(access_kitchen,access_morgue)
+
 	var/operating = 0 //Is it on?
 	var/dirty = 0 // Does it need cleaning?
 	var/mob/living/occupant // Mob who has been put inside
-
-	var/gib_time = 40 // Time from starting until meat appears
-	var/gib_throw_dir // Direction to spit meat and gibs in.
+	var/gib_time = 40        // Time from starting until meat appears
+	var/gib_throw_dir = WEST // Direction to spit meat and gibs in.
 
 	use_power = 1
 	idle_power_usage = 2
@@ -29,6 +30,7 @@
 			if(input_obj)
 				if(isturf(input_obj.loc))
 					input_plate = input_obj.loc
+					gib_throw_dir = i
 					del(input_obj)
 					break
 
@@ -78,14 +80,18 @@
 	else
 		src.startgibbing(user)
 
+/obj/machinery/gibber/examine()
+	..()
+	usr << "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"]."
+
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 
-	if(istype(W,/obj/item/weapon/card/emag))
-		if(emagged)
-			user << "The gibber safety guard is already disabled."
+	if(istype(W,/obj/item/weapon/card))
+		if(!allowed(user) && !istype(W,/obj/item/weapon/card/emag))
+			user << "<span class='danger'>Access denied.</span>"
 			return
-		user << "<span class='danger'>You disable the gibber safety guard.</span>"
-		emagged = 1
+		emagged = !emagged
+		user << "<span class='danger'>You [emagged ? "disable" : "enable"] the gibber safety guard.</span>"
 		return
 
 	var/obj/item/weapon/grab/G = W
@@ -199,7 +205,7 @@
 	slab_nutrition /= slab_count
 
 	for(var/i=1 to slab_count)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(get_turf(src))
+		var/obj/item/weapon/reagent_containers/food/snacks/meat/new_meat = new slab_type(src)
 		new_meat.name = "[slab_name] [new_meat.name]"
 		new_meat.reagents.add_reagent("nutriment",slab_nutrition)
 
@@ -220,9 +226,14 @@
 
 		playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
 		operating = 0
-		for (var/obj/item/thing in contents)
+		for (var/obj/thing in contents)
+			// Todo: unify limbs and internal organs
+			// There's a chance that the gibber will fail to destroy some evidence.
+			if((istype(thing,/obj/item/weapon/organ) || istype(thing,/obj/item/organ)) && prob(80))
+				del(thing)
+				continue
 			thing.loc = get_turf(thing) // Drop it onto the turf for throwing.
-			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(1,5),15) // Being pelted with bits of meat and bone would hurt.
+			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(1,5),emagged ? 15 : 30) // Being pelted with bits of meat and bone would hurt.
 
 		update_icon()
 

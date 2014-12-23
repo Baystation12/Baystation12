@@ -201,7 +201,11 @@
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
 
-	has_organ = list(
-		"heart" =    /datum/organ/internal/heart,
-		"brain" =    /datum/organ/internal/brain,
-		)
+	has_organ = list() //TODO: Positronic brain.
+
+/datum/species/machine/handle_death(var/mob/living/carbon/human/H)
+	..()
+	if(flags & IS_SYNTHETIC)
+		H.h_style = ""
+		spawn(100)
+			if(H) H.update_hair()

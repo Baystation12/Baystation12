@@ -641,13 +641,13 @@ datum/preferences
 		else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
 			restricted = 1
 
-	if(restricted && !check_rights(R_ADMIN, 0))
+	if(restricted)
 		if(restricted == 1)
-			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font>"
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font></br>"
 		else if(restricted == 2)
-			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font>"
-		else
-			dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font></br>"
+	if(!restricted || check_rights(R_ADMIN, 0))
+		dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
 	dat += "</center></body>"
 
 	user << browse(null, "window=preferences")

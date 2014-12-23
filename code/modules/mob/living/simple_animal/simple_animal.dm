@@ -197,6 +197,9 @@
 		else
 			..()
 
+/mob/living/simple_animal/gib()
+	..(icon_gib,1)
+
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)
 		..(act, type, desc)
@@ -263,14 +266,14 @@
 		return
 
 	else if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
-
-		if(meat_type && (stat == DEAD))
-			if(meat_amount && (meat_amount/2) >= 1)
-				for(var/i = 0; i < meat_amount/2; i++)
-					var/obj/item/meat = new meat_type(get_turf(src))
-					meat.name = "[src.name] [meat.name]"
+		var/actual_meat_amount = max(1,(meat_amount/2))
+		if(meat_type && actual_meat_amount>0 && (stat == DEAD))
+			for(var/i=0;i<actual_meat_amount;i++)
+				var/obj/item/meat = new meat_type(get_turf(src))
+				meat.name = "[src.name] [meat.name]"
 			if(small)
 				user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
+				new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 				del(src)
 			else
 				user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
