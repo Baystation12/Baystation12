@@ -4,7 +4,7 @@
 	icon_state = "0"
 	intact = 0
 
-	temperature = T0C
+	temperature = TCMB
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 //	heat_capacity = 700000 No.
 

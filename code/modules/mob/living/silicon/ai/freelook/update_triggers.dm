@@ -7,6 +7,9 @@
 /turf
 	var/image/obscured
 
+/turf/drain_power()
+	return -1
+
 /turf/proc/visibilityChanged()
 	if(ticker)
 		cameranet.updateVisibility(src)
