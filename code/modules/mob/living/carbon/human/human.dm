@@ -730,13 +730,8 @@
 	return
 
 /mob/living/carbon/human/get_species()
-
 	if(!species)
 		set_species()
-
-	if(dna && dna.mutantrace == "golem")
-		return "Animated Construct"
-
 	return species.name
 
 /mob/living/carbon/human/proc/play_xylophone()
@@ -1286,3 +1281,8 @@
 		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
 			return 1
 	return 0
+
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+		return 0
+	..(slipped_on,stun_duration)

@@ -1,14 +1,7 @@
-/proc/gibs(atom/location, var/list/viruses, var/datum/dna/MobDNA)		//CARN MARKER
-	new /obj/effect/gibspawner/generic(get_turf(location),viruses,MobDNA)
-
-/proc/hgibs(atom/location, var/list/viruses, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
-	new /obj/effect/gibspawner/human(get_turf(location),viruses,MobDNA,fleshcolor,bloodcolor)
-
-/proc/xgibs(atom/location, var/list/viruses)
-	new /obj/effect/gibspawner/xeno(get_turf(location),viruses)
-
-/proc/robogibs(atom/location, var/list/viruses)
-	new /obj/effect/gibspawner/robot(get_turf(location),viruses)
+/proc/gibs(atom/location, var/list/viruses, var/datum/dna/MobDNA, var/spawn_inside, gibber_type = /obj/effect/gibspawner/generic, var/fleshcolor, var/bloodcolor)
+	if(!spawn_inside)
+		location = get_turf(location)
+	new gibber_type(location,viruses,MobDNA,fleshcolor,bloodcolor)
 
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
@@ -67,8 +60,6 @@
 					gib.blood_DNA = list()
 					if(MobDNA)
 						gib.blood_DNA[MobDNA.unique_enzymes] = MobDNA.b_type
-					else if(istype(src, /obj/effect/gibspawner/xeno))
-						gib.blood_DNA["UNKNOWN DNA"] = "X*"
 					else if(istype(src, /obj/effect/gibspawner/human)) // Probably a monkey
 						gib.blood_DNA["Non-human DNA"] = "A+"
 					var/list/directions = gibdirections[i]

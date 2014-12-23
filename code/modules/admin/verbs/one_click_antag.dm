@@ -511,7 +511,6 @@ client/proc/one_click_antag()
 	new_vox.age = rand(12,20)
 
 	new_vox.dna.ready_dna(new_vox) // Creates DNA.
-	new_vox.dna.mutantrace = "vox"
 	new_vox.mind_initialize()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"

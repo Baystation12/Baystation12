@@ -189,7 +189,7 @@
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 
-	if(isnull(species) || !(species in whitelisted_species))
+	if(isnull(species) || !(species in playable_species))
 		species = "Human"
 
 	if(isnull(language)) language = "None"

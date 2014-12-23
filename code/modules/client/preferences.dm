@@ -604,6 +604,8 @@ datum/preferences
 		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
 	dat += "<b>Language:</b> [current_species.language]<br/>"
 	dat += "<small>"
+	if(current_species.flags & CAN_JOIN)
+		dat += "</br><b>Often present on human stations.</b>"
 	if(current_species.flags & IS_WHITELISTED)
 		dat += "</br><b>Whitelist restricted.</b>"
 	if(current_species.flags & NO_BLOOD)
@@ -632,14 +634,20 @@ datum/preferences
 	dat += "</tr>"
 	dat += "</table><center><hr/>"
 
-	var/restricted
+	var/restricted = 0
 	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-		if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
+		if(!(current_species.flags & CAN_JOIN))
+			restricted = 2
+		else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
 			restricted = 1
-	if(restricted)
-		dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font>"
-	else
-		dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
+
+	if(restricted && !check_rights(R_ADMIN, 0))
+		if(restricted == 1)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font>"
+		else if(restricted == 2)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font>"
+		else
+			dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
 	dat += "</center></body>"
 
 	user << browse(null, "window=preferences")
@@ -1138,7 +1146,7 @@ datum/preferences
 		if("change")
 			if(href_list["preference"] == "species")
 				// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
-				var/choice = input("Which species would you like to look at?") as null|anything in whitelisted_species
+				var/choice = input("Which species would you like to look at?") as null|anything in playable_species
 				if(!choice) return
 				species_preview = choice
 				SetSpecies(user)
