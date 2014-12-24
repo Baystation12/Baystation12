@@ -550,7 +550,3 @@
 	return
 /obj/structure/table/rack/update_adjacent()
 	return
-
-// Dummied out to stop compile errors.
-/obj/structure/rack
-/obj/item/weapon/rack_parts
