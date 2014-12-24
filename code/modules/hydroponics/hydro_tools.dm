@@ -18,7 +18,7 @@
 
 	var/datum/seed/grown_seed
 	var/datum/reagents/grown_reagents
-	if(istype(target,/obj/structure/rack) || istype(target,/obj/structure/table))
+	if(istype(target,/obj/structure/table))
 		return ..()
 	else if(istype(target,/obj/item/weapon/reagent_containers/food/snacks/grown))
 
