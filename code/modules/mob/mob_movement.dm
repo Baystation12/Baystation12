@@ -275,7 +275,7 @@
 				return
 
 		if(mob.pulledby || mob.buckled) // Wheelchair driving!
-			if(istype(mob.loc, /turf/space))
+			if(!has_surface(get_turf(mob.loc)))
 				return // No wheelchair driving in space
 			if(istype(mob.pulledby, /obj/structure/stool/bed/chair/wheelchair))
 				return mob.pulledby.relaymove(mob, direct)
@@ -431,7 +431,9 @@
 		make_floating(1)
 		return 0
 
-	if(istype(src,/mob/living/carbon/human/))
+	if(has_surface(get_turf(src)) && lastarea.has_gravity)
+		make_floating(0)
+	else if(istype(src,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = src
 		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))  //magboots + dense_object = no floaty effect
 			make_floating(0)
@@ -444,7 +446,7 @@
 		return 0
 
 	//Check to see if we slipped
-	if(prob(Process_Spaceslipping(5)))
+	if(prob(Process_Spaceslipping(5)) && (!has_surface(get_turf(src)) || !lastarea.has_gravity)) //can't slip on catwalks
 		src << "\blue <B>You slipped!</B>"
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
@@ -457,17 +459,17 @@
 
 	var/dense_object = 0
 	for(var/turf/turf in oview(1,src))
-		if(istype(turf,/turf/space))
+		if(has_surface(turf))
 			continue
 
 		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
 			var/mob/living/carbon/human/H = src
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP)))
+			if(has_surface(turf) && (src.lastarea.has_gravity == 0) && !(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP)))
 				continue
 
 
 		else
-			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0)) // No one else gets a chance.
+			if(has_surface(turf) && (src.lastarea.has_gravity == 0)) // No one else gets a chance.
 				continue
 
 

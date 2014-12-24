@@ -2,6 +2,7 @@
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
 	icon_state = "0"
+	intact = 0
 
 	temperature = TCMB
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
@@ -13,10 +14,25 @@
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 
+	if (istype(C, /obj/item/stack/cable_coil) && (locate(/obj/structure/lattice, src) || locate(/obj/structure/catwalk, src)))
+		var/obj/item/stack/cable_coil/cable = C
+		cable.turf_place(src, user)
+
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return
+			var/obj/structure/catwalk/CAT = locate(/obj/structure/catwalk, src)
+			if (CAT)
+				return
+			else
+				var/obj/item/stack/rods/R = C
+				if (R.use(2))
+					user << "\blue Constructing catwalk ..."
+					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
+					new /obj/structure/catwalk(src)
+				else
+					user << "<span class='warning'>You need at least two rods to construct a catwalk.</span>"
+				return
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			user << "\blue Constructing support lattice ..."

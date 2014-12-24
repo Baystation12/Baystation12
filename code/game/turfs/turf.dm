@@ -24,6 +24,7 @@
 
 	//Mining resource generation stuff.
 	var/has_resources
+	var/has_catwalk = 0
 	var/list/resources
 
 /turf/New()
@@ -144,7 +145,7 @@
 
 
 
-		else if(!istype(src, /turf/space))
+		else if(has_surface(src))
 			M:inertia_dir = 0
 			var/mob/M1 = M
 			M1.make_floating(0)
@@ -293,7 +294,6 @@
 
 		W.levelupdate()
 		return W
-
 
 //Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
 //  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.

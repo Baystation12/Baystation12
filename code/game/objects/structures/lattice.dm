@@ -53,13 +53,13 @@
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/tile/plasteel))
+	if (istype(C, /obj/item/stack/rods) || istype(C, /obj/item/stack/tile/plasteel) || istype(C, /obj/item/stack/cable_coil))
 		var/turf/T = get_turf(src)
-		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
-		return
+		T.attackby(C, user) //hand this off to the underlying turf instead
 	if (istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
+			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			user << "\blue Slicing lattice joints ..."
 		new /obj/item/stack/rods(src.loc)
 		del(src)
