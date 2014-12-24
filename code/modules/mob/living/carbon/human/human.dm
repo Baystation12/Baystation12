@@ -960,6 +960,9 @@
 		var/datum/disease2/disease/V = virus2[ID]
 		V.cure(src)
 
+	losebreath = 0
+	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
+
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
