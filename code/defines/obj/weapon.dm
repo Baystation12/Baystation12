@@ -490,6 +490,42 @@
 	origin_tech = "materials=1"
 	matter = list("metal" = 80)
 
+// Computer parts.
+/obj/item/weapon/stock_parts/hdd
+	name = "hard drive"
+	desc = "A clunky solid state hard drive. What is this, 2198?"
+	icon_state = "matter_bin"
+	origin_tech = "materials=1"
+	matter = list("metal" = 80)
+
+/obj/item/weapon/stock_parts/cpu
+	name = "central processor unit"
+	desc = "The 'brain' of a computer system."
+	icon_state = "matter_bin"
+	origin_tech = "materials=1"
+	matter = list("metal" = 80)
+
+/obj/item/weapon/stock_parts/ram
+	name = "RAM stick"
+	desc = "Volatile memory for a computer system."
+	icon_state = "matter_bin"
+	origin_tech = "materials=1"
+	matter = list("metal" = 80)
+
+/obj/item/weapon/stock_parts/nic
+	name = "network interface card"
+	desc = "A device used to connect a terminal to the station network."
+	icon_state = "matter_bin"
+	origin_tech = "materials=1"
+	matter = list("metal" = 80)
+
+/obj/item/weapon/stock_parts/mobo
+	name = "motherboard"
+	desc = "A computer motherboard. Determines number of external memory slots and compatibility with advanced components."
+	icon_state = "matter_bin"
+	origin_tech = "materials=1"
+	matter = list("metal" = 80)
+
 //Rank 2
 
 /obj/item/weapon/stock_parts/capacitor/adv
