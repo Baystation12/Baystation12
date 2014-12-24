@@ -68,7 +68,6 @@
 		T.attackby(C, user) //hand this off to the underlying turf instead
 		return
 	if (istype(C, /obj/item/weapon/wrench))
-		var/obj/item/weapon/wrench = C
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user << "\blue Disassembling catwalk ..."
 		new /obj/item/stack/rods(src.loc, 2)
