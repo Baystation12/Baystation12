@@ -16,6 +16,7 @@
 	var/rejecting            // Is this organ already being rejected?
 	var/obj/item/organ/organ_holder // If not in a body, held in this item.
 	var/list/transplant_data
+
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
 
