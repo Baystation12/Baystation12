@@ -624,16 +624,16 @@ var/global/list/holodeck_programs = list(
 
 //Holorack
 
-/obj/structure/rack/holorack
+/obj/structure/table/rack/holorack
 	name = "rack"
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"
 
-/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
 	return
 
-/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "It's a holorack!  You can't unwrench it!"
 		return
