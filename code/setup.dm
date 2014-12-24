@@ -742,21 +742,22 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	)
 
 //Species flags.
-#define NO_BLOOD 1
-#define NO_BREATHE 2
-#define NO_SCAN 4
-#define NO_PAIN 8
-#define NO_SLIP 16
-#define NO_POISON 32
-
-#define HAS_SKIN_TONE 64
-#define HAS_SKIN_COLOR 128
-#define HAS_LIPS 256
-#define HAS_UNDERWEAR 512
-#define IS_PLANT 1024
-#define IS_WHITELISTED 2048
-#define IS_SYNTHETIC 4096
-#define HAS_EYE_COLOR 8192
+#define NO_BLOOD 1          // Vessel var is not filled with blood, cannot bleed out.
+#define NO_BREATHE 2        // Cannot suffocate or take oxygen loss.
+#define NO_SCAN 4           // Cannot be scanned in a DNA machine/genome-stolen.
+#define NO_PAIN 8           // Cannot suffer halloss/recieves deceptive health indicator
+#define NO_SLIP 16          // Cannot fall over
+#define NO_POISON 32        // Cannot not suffer toxloss
+#define HAS_SKIN_TONE 64    // Skin tone selectable in chargen (0-255)
+#define HAS_SKIN_COLOR 128  // Skin colour selectable in chargen (RGB)
+#define HAS_LIPS 256        // Lips are drawn onto the mob icon (lipstick)
+#define HAS_UNDERWEAR 512   // Underwear is drawn onto the mob icon
+#define IS_PLANT 1024       // Is a treeperson
+#define IS_WHITELISTED 2048 // Must be whitelisted to play
+#define IS_SYNTHETIC 4096   // Is a machine race
+#define HAS_EYE_COLOR 8192  // Eye colour selectable in chargen (RGB)
+#define CAN_JOIN 16384      // Species is selectable in chargen
+#define IS_RESTRICTED 32768 // Is not a core/normally playable species (castes, mutantraces)
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.

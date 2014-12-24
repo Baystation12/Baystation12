@@ -52,7 +52,10 @@
 				t_his = "her"
 				t_him = "her"
 
-	msg += "<EM>[src.name]</EM>!\n"
+	msg += "<EM>[src.name]</EM>"
+	if(species.name != "Human")
+		msg += ", a <b><font color='[species.flesh_color]'>[species.name]</font></b>"
+	msg += "!\n"
 
 	//uniform
 	if(w_uniform && !skipjumpsuit)

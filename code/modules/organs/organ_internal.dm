@@ -250,6 +250,14 @@
 /datum/organ/internal/brain/xeno
 	removed_type = /obj/item/organ/brain/xeno
 
+/datum/organ/internal/brain/golem
+	name = "golem chem"
+	removed_type = /obj/item/organ/brain/golem
+
+/datum/organ/internal/brain/slime
+	name = "slime core"
+	removed_type = /obj/item/organ/brain/slime
+
 /datum/organ/internal/eyes
 	name = "eyes"
 	parent_organ = "head"
@@ -271,7 +279,13 @@
 
 	if(!removed_type) return 0
 
-	var/obj/item/organ/removed_organ = new removed_type(get_turf(user))
+	var/turf/target_loc
+	if(user)
+		target_loc = get_turf(user)
+	else
+		target_loc = get_turf(owner)
+
+	var/obj/item/organ/removed_organ = new removed_type(target_loc)
 
 	if(istype(removed_organ))
 		removed_organ.organ_data = src

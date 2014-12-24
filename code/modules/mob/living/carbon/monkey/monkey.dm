@@ -82,18 +82,6 @@
 	update_icons()
 	return
 
-/mob/living/carbon/monkey/unathi/New()
-	..()
-	dna.mutantrace = "lizard"
-
-/mob/living/carbon/monkey/skrell/New()
-	..()
-	dna.mutantrace = "skrell"
-
-/mob/living/carbon/monkey/tajara/New()
-	..()
-	dna.mutantrace = "tajaran"
-
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0
 	if(reagents)

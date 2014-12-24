@@ -5,7 +5,7 @@
 
 	// type path referencing tools that can be used for this step, and how well are they suited for it
 	var/list/allowed_tools = null
-	// type paths referencing mutantraces that this step applies to.
+	// type paths referencing races that this step applies to.
 	var/list/allowed_species = null
 	var/list/disallowed_species = null
 
