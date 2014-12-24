@@ -909,7 +909,7 @@ datum/design/grapple_l_hand
 	desc = "Grappling Device"
 	id = "grapple_l_hand"
 	build_type = MECHFAB
-	req_tech = list("programming"= 3, "engineering" = 3, "materials" = 3)
+	req_tech = list("programming"= 4, "engineering" = 3, "materials" = 5)
 	build_path = "/obj/item/robot_parts/grapple/l_hand"
 	category = "Robot Parts"
 
@@ -918,7 +918,7 @@ datum/design/grapple_r_hand
 	desc = "Grappling Device"
 	id = "grapple_r_hand"
 	build_type = MECHFAB
-	req_tech = list("programming"= 3, "engineering" = 3, "materials" = 3)
+	req_tech = list("programming"= 4, "engineering" = 3, "materials" = 5)
 	build_path = "/obj/item/robot_parts/grapple/r_hand"
 	category = "Robot Parts"
 
