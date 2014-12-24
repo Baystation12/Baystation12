@@ -206,14 +206,6 @@
 	name = "warning cone"
 	icon_state = "cone"
 
-/obj/item/weapon/rack_parts
-	name = "rack parts"
-	desc = "Parts of a rack."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "rack_parts"
-	flags = FPRINT | TABLEPASS| CONDUCT
-	matter = list("metal" = 3750)
-
 /*/obj/item/weapon/syndicate_uplink
 	name = "station bounced radio"
 	desc = "Remain silent about this..."
@@ -291,36 +283,6 @@
 	throw_range = 5
 	w_class = 2.0
 	flags = FPRINT | TABLEPASS | NOSHIELD
-
-/obj/item/weapon/table_parts
-	name = "table parts"
-	desc = "Parts of a table. Poor table."
-	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
-	icon_state = "table_parts"
-	matter = list("metal" = 3750)
-	flags = FPRINT | TABLEPASS| CONDUCT
-	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
-
-/obj/item/weapon/table_parts/reinforced
-	name = "reinforced table parts"
-	desc = "Hard table parts. Well...harder..."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
-	flags = FPRINT | TABLEPASS| CONDUCT
-
-/obj/item/weapon/table_parts/wood
-	name = "wooden table parts"
-	desc = "Keep away from fire."
-	icon_state = "wood_tableparts"
-	flags = null
-
-/obj/item/weapon/table_parts/gambling
-	name = "gamble table parts"
-	desc = "Keep away from security."
-	icon_state = "gamble_tableparts"
-	flags = null
 
 /obj/item/weapon/wire
 	desc = "This is just a simple piece of regular insulated wire."
