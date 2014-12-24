@@ -662,10 +662,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
 		"You hear a terrible sound of ripping tendons and flesh.")
 
-		if(organ)
-			//Throw organs around
-			var/lol = pick(cardinal)
-			step(organ,lol)
+		//Throw organs around
+		if(istype(owner.loc,/turf) && organ)
+			step(organ,pick(cardinal))
 
 		owner.update_body(1)
 

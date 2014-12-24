@@ -189,17 +189,10 @@
 						target.unique_enzymes = md5(target.real_name)
 					updateappearance(scanner.occupant,target.uni_identity)
 					domutcheck(scanner.occupant, scanner, 1)
-
-					if(ishuman(scanner.occupant))
-						target.mutantrace = buffer.mutantrace
-						scanner.occupant:update_mutantrace()
 				if("se")
 					if(buffer.struc_enzymes)
 						target.struc_enzymes = buffer.struc_enzymes
 					domutcheck(scanner.occupant, scanner, 1)
-					if(ishuman(scanner.occupant))
-						target.mutantrace = buffer.mutantrace
-						scanner.occupant:update_mutantrace()
 				if("ui")
 					if(buffer.uni_identity)
 						target.uni_identity = buffer.uni_identity

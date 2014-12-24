@@ -730,13 +730,8 @@
 	return
 
 /mob/living/carbon/human/get_species()
-
 	if(!species)
 		set_species()
-
-	if(dna && dna.mutantrace == "golem")
-		return "Animated Construct"
-
 	return species.name
 
 /mob/living/carbon/human/proc/play_xylophone()
@@ -756,13 +751,13 @@
 
 	if(!lastpuke)
 		lastpuke = 1
-		src << "<spawn class='warning'>You feel nauseous..."
+		src << "<span class='warning'>You feel nauseous...</span>"
 		spawn(150)	//15 seconds until second warning
-			src << "<spawn class='warning'>You feel like you are about to throw up!"
+			src << "<span class='warning'>You feel like you are about to throw up!</span>"
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				Stun(5)
 
-				src.visible_message("<spawn class='warning'>[src] throws up!","<spawn class='warning'>You throw up!")
+				src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc
@@ -1289,3 +1284,8 @@
 		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
 			return 1
 	return 0
+
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+		return 0
+	..(slipped_on,stun_duration)

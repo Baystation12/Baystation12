@@ -57,7 +57,7 @@
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
-	. = ..(null,1)
+	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
@@ -511,3 +511,13 @@
 
 /mob/living/carbon/can_use_vents()
 	return
+
+/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+	if(buckled)
+		return 0
+	stop_pulling()
+	src << "<span class='warning'>You slipped on [slipped_on]!</span>"
+	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	Stun(stun_duration)
+	Weaken(Floor(stun_duration/2))
+	return 1
