@@ -220,8 +220,12 @@
 	
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
 	
+	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
-		return new src.type(loc, transfer)
+		var/obj/item/stack/newstack = new src.type(loc, transfer)
+		if (prob(transfer/orig_amount * 100))
+			newstack.copy_evidences(src)
+		return newstack
 	return null
 
 /obj/item/stack/proc/get_amount()
