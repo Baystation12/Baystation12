@@ -2228,7 +2228,7 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
-				if(aliens_allowed)
+				if(config.aliens_allowed)
 					new /datum/event/alien_infestation
 					message_admins("[key_name_admin(usr)] has spawned aliens", 1)
 			if("spiders")
@@ -2248,7 +2248,7 @@
 			if("spaceninja")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SN")
-				if(toggle_space_ninja)
+				if(config.ninjas_allowed)
 					if(space_ninja_arrival())//If the ninja is actually spawned. They may not be depending on a few factors.
 						message_admins("[key_name_admin(usr)] has sent in a space ninja", 1)
 			if("carp")

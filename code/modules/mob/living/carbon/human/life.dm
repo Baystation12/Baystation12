@@ -1379,7 +1379,7 @@
 			if(eye_blurry)			client.screen += global_hud.blurry
 			if(druggy)				client.screen += global_hud.druggy
 
-			if(tinted_weldhelh)
+			if(config.welder_vision)
 				var/found_welder
 				if(istype(glasses, /obj/item/clothing/glasses/welding))
 					var/obj/item/clothing/glasses/welding/O = glasses

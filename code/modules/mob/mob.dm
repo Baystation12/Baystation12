@@ -392,14 +392,14 @@ var/list/slot_equipment_priority = list( \
 	set name = "Respawn"
 	set category = "OOC"
 
-	if (!( abandon_allowed ))
-		usr << "\blue Respawn is disabled."
+	if (!( config.abandon_allowed ))
+		usr << "<span class='notice'>Respawn is disabled.</span>"
 		return
 	if ((stat != 2 || !( ticker )))
-		usr << "\blue <B>You must be dead to use this!</B>"
+		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
-		usr << "\blue Respawn is disabled for this roundtype."
+		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
