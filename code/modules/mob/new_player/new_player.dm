@@ -162,8 +162,11 @@
 
 		if(href_list["SelectedJob"])
 
-			if(!enter_allowed)
-				usr << "\blue There is an administrative lock on entering the game!"
+			if(!config.enter_allowed)
+				usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+				return
+			else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
+				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
 			if(client.prefs.species != "Human")
@@ -293,8 +296,8 @@
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "\red The round is either not ready, or has already finished..."
 			return 0
-		if(!enter_allowed)
-			usr << "\blue There is an administrative lock on entering the game!"
+		if(!config.enter_allowed)
+			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
 			return 0
 		if(!IsJobAvailable(rank))
 			src << alert("[rank] is not available. Please try another.")

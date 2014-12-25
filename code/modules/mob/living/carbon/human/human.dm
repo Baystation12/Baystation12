@@ -38,8 +38,6 @@
 
 	if(dna)
 		dna.real_name = real_name
-
-	prev_gender = gender // Debug for plural genders
 	make_blood()
 
 /mob/living/carbon/human/Stat()

@@ -1,3 +1,7 @@
+//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
+//(Exceptions: extended, sandbox and nuke) -Errorage
+var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
+
 /turf/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
@@ -94,7 +98,7 @@
 			var/safety = 1
 
 			while(move_to_z == src.z)
-				var/move_to_z_str = pickweight(accessable_z_levels)
+				var/move_to_z_str = pickweight(accessible_z_levels)
 				move_to_z = text2num(move_to_z_str)
 				safety++
 				if(safety > 10)
