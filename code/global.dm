@@ -79,7 +79,6 @@ var/blobevent = 0
 	///////////////
 
 var/diary = null
-var/diaryofmeanpeople = null
 var/href_logfile = null
 var/station_name = "NSS Exodus"
 var/game_version = "Baystation12"
