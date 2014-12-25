@@ -75,6 +75,30 @@
 						accordingly."}
 			round_time = 60 * 90
 
+		senator_renolds
+			author = "Assistant Editor Carl Ritz"
+			channel_name "The Gibson Gazette"
+			message = {"Martian senator Adam Renolds has recently shot to the top of the voting polls this week after
+			a successful speach at the  opening of a technical insitute last week in Sol. This seems to have given him a
+			great advantage over opponent Smith."}
+			round_time = 60 * 15
+
+		cryo_bad
+			author = "Assistant Editor Carl Ritz"
+			channel_name = "The Gibson Gazette"
+			message = {"Recent studies suggest that extended periods of time spent in cryogenic sleeping units frequently
+			found aboard vessels may result in severe brain damage if used excessively."}
+			round_time = 60 * 12
+
+		tajaran_film
+			author = "Entertainment Correspondant Alcia Fair"
+			channel_name = "The Gibson Gazette"
+			message = {"The famous film director Markus Ciolanti has this week unveiled his latest motion picture;
+			called 'The Struggle' it shows the tyranical rulership of the Tajaran homeworld: Ahdomai. Ciolanti stated it will
+			be brutal, harsh and unforgiving in his portrayal of the Overseers."}
+			round_time = 60 * 23
+
+
 	lotus_tree
 
 		explosions
@@ -113,6 +137,40 @@
 			\"further proof\" of the colony's anti-NanoTrasen stance. Meanwhile, Refuge Security has been unable to quell
 			the riots. More on this at 6."}
 			round_time = 60 * 60
+
+	corporate_news
+		lax_restrictions
+			channel_name = "Nyx Daily"
+			author = "Corporate Correspondant Nikolai Kiest"
+
+			message = {"Hesphaistos Industries have been under scrutiny in the past week for their incredibly
+			lax policies regarding firearm regulation and distribution. Chairmen Markus Tanos stated /" It's ludicrous
+			that we are being placed under scrutiny for giving weapons away to everyone, it's a free galaxy!/". It is
+			rumored that Sol Government are considering the enforcement of stricter firearm sale laws."}
+			round_time = 60 * 20
+
+		construction_project
+			channel_name = "Nyx Daily"
+		 	author = "Corporate Correspondant Nikolai Kiest"
+
+		 	message = {"Early this morning Grayson Manufactories announced they had been contracted to supply
+		 	the mass of raw materials needed to complete the latest ship in Hesphaistos Industries's cargo transportation
+		 	vessels. Details of this new ship are scarce however it's been rumoured the ship os over two thousand metres long
+		 	with room to hold enough firearms to supply an entire planet. Grayson has commented /"This is a great oppertunity
+		 	for our investors and stock holders to regain a large amount of their capital in this ambitous project/" We will keep
+		 	you up to date on this gargantuan of a ship as further details are released."}
+			round_time = 60 * 40
+
+		new_medication
+			channel_name = "Nyx Daily"
+			author = "Corporate Correspondant Nikolai Kiest"
+
+			message = {" In correspondance to the recent outbreak of babies born with lower than average IQ levels, Zeng-Hu Pharmaceuticals
+			have synthesised a new medication to be taken during pregnancy which they claim will help quell those 'dis-advantaged' infants
+			and bring way to a new era of smart babies. The drug is to be released next month under the label 'Azidozaline'."}
+			round_time = 60 * 52
+
+
 
 
 var/global/list/newscaster_standard_feeds = list(/datum/news_announcement/bluespace_research, /datum/news_announcement/lotus_tree, /datum/news_announcement/random_junk,  /datum/news_announcement/food_riots)
