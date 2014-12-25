@@ -1,16 +1,19 @@
 //#define TESTING
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+//items that ask to be called every cycle
 var/global/obj/effect/datacore/data_core = null
-
-
 var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
 var/global/list/med_hud_users = list() //list of all entities using a medical HUD.
 var/global/list/sec_hud_users = list() //list of all entities using a security HUD.
-		//items that ask to be called every cycle
+
+//Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
+var/list/restricted_camera_networks = list("thunder","ERT","NUKE")
+
+var/global/list/global_mutations = list() // list of hidden mutation things
 
 var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
 
@@ -24,9 +27,11 @@ var/global/list/global_map = null
 	//4 - Derelict
 	//3 - AI satellite
 	//5 - empty space
-
-
 	//////////////
+
+//Noises made when hit while typing.
+var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+
 var/list/paper_tag_whitelist = list("center","p","div","span","h1","h2","h3","h4","h5","h6","hr","pre",	\
 	"big","small","font","i","u","b","s","sub","sup","tt","br","hr","ol","ul","li","caption","col",	\
 	"table","td","th","tr")
@@ -256,3 +261,17 @@ var/DBConnection/dbcon_old = new()	//Tgstation database (Old database) - See the
 
 //added for Xenoarchaeology, might be useful for other stuff
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
+
+// Chemistry lists.
+var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
+var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
+var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
+var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
+
+//Used by robots and robot preferences.
+var/list/robot_module_types = list("Standard", "Engineering", "Construction", "Surgeon", "Crisis", "Miner", "Janitor", "Service", "Clerical", "Security")
+
+var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
+
+// Bomb cap!
+var/max_explosion_range = 14
