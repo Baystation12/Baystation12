@@ -523,6 +523,7 @@
 #include "code\game\objects\items\devices\radio\headset.dm"
 #include "code\game\objects\items\devices\radio\intercom.dm"
 #include "code\game\objects\items\devices\radio\radio.dm"
+#include "code\game\objects\items\robot\robot_extra_parts.dm"
 #include "code\game\objects\items\robot\robot_items.dm"
 #include "code\game\objects\items\robot\robot_parts.dm"
 #include "code\game\objects\items\robot\robot_upgrades.dm"
