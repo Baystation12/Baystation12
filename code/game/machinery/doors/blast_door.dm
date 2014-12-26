@@ -50,11 +50,11 @@
 /obj/machinery/door/blast/proc/force_open()
 	src.operating = 1
 	flick(icon_state_opening, src)
+	src.density = 0
+	update_nearby_tiles()
 	src.update_icon()
 	src.SetOpacity(0)
 	sleep(15)
-	src.density = 0
-	update_nearby_tiles()
 	src.operating = 0
 
 // Proc: force_close()
@@ -63,11 +63,11 @@
 /obj/machinery/door/blast/proc/force_close()
 	src.operating = 1
 	flick(icon_state_closing, src)
+	src.density = 1
+	update_nearby_tiles()
 	src.update_icon()
 	src.SetOpacity(initial(opacity))
 	sleep(15)
-	src.density = 1
-	update_nearby_tiles()
 	src.operating = 0
 
 // Proc: force_toggle()
@@ -88,6 +88,8 @@
 	if(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1))
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
 			force_toggle()
+		else
+			usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 		return
 	if(istype(C, /obj/item/stack/sheet/plasteel))
 		var/amt = repair_price()
