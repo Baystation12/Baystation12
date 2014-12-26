@@ -88,6 +88,19 @@
 		"brain" =    /datum/organ/internal/brain,
 		"appendix" = /datum/organ/internal/appendix,
 		"eyes" =     /datum/organ/internal/eyes
+		)                         // Determines the various limb types that the species spawns with.
+	var/list/has_limb = list(     // For now, parents need to be defined before children.
+		list("chest",  /datum/organ/external/chest,  null),
+		list("groin",  /datum/organ/external/groin,  "chest"),
+		list("head",   /datum/organ/external/head,   "chest"),
+		list("l_arm",  /datum/organ/external/l_arm,  "chest"),
+		list("r_arm",  /datum/organ/external/r_arm,  "chest"),
+		list("r_leg",  /datum/organ/external/r_leg,  "groin"),
+		list("l_leg",  /datum/organ/external/l_leg,  "groin"),
+		list("l_hand", /datum/organ/external/l_hand, "l_arm"),
+		list("r_hand", /datum/organ/external/r_hand, "r_arm"),
+		list("l_foot", /datum/organ/external/l_foot, "l_leg"),
+		list("r_foot", /datum/organ/external/r_foot, "r_leg")
 		)
 
 /datum/species/New()
@@ -104,31 +117,23 @@
 	var/datum/language/species_language = all_languages[language]
 	return species_language.get_random_name(gender)
 
+/datum/species/proc/create_limbs(var/mob/living/carbon/human/H)
+	if(H.organs_by_name) H.organs_by_name.Cut()
+	H.organs_by_name = list()
+	for(var/list/limb_data in has_limb)
+		var/limb_path = limb_data[2]
+		H.organs_by_name[limb_data[1]] = new limb_path(H.organs_by_name[limb_data[3]])
+
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	//Trying to work out why species changes aren't fixing organs properly.
 	if(H.organs)                  H.organs.Cut()
 	if(H.internal_organs)         H.internal_organs.Cut()
-	if(H.organs_by_name)          H.organs_by_name.Cut()
 	if(H.internal_organs_by_name) H.internal_organs_by_name.Cut()
 
 	H.organs = list()
 	H.internal_organs = list()
-	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
-
-	//This is a basic humanoid limb setup.
-	H.organs_by_name["chest"] = new/datum/organ/external/chest()
-	H.organs_by_name["groin"] = new/datum/organ/external/groin(H.organs_by_name["chest"])
-	H.organs_by_name["head"] = new/datum/organ/external/head(H.organs_by_name["chest"])
-	H.organs_by_name["l_arm"] = new/datum/organ/external/l_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_arm"] = new/datum/organ/external/r_arm(H.organs_by_name["chest"])
-	H.organs_by_name["r_leg"] = new/datum/organ/external/r_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_leg"] = new/datum/organ/external/l_leg(H.organs_by_name["groin"])
-	H.organs_by_name["l_hand"] = new/datum/organ/external/l_hand(H.organs_by_name["l_arm"])
-	H.organs_by_name["r_hand"] = new/datum/organ/external/r_hand(H.organs_by_name["r_arm"])
-	H.organs_by_name["l_foot"] = new/datum/organ/external/l_foot(H.organs_by_name["l_leg"])
-	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
 
 	for(var/organ in has_organ)
 		var/organ_type = has_organ[organ]

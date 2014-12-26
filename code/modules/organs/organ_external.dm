@@ -369,7 +369,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 */
 /datum/organ/external/proc/update_germs()
 	//Robotic limbs shouldn't be infected, nor should nonexistant limbs.
- 	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED))
+	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED))
 		germ_level = 0
 		return
 	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
