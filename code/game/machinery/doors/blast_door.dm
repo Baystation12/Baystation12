@@ -82,14 +82,31 @@
 // Proc: attackby()
 // Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
 // Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
-// This only works on broken doors or doors without power.
+// This only works on broken doors or doors without power. Also allows repair with Plasteel.
 /obj/machinery/door/blast/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if (!( istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1) ))
+	if(istype(C, /obj/item/weapon/crowbar) || (istype(C, /obj/item/weapon/twohanded/fireaxe) && C:wielded == 1))
+		if(((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
+			force_toggle()
 		return
-	if (((stat & NOPOWER) || (stat & BROKEN)) && !( src.operating ))
-		force_toggle()
-	return
+	if(istype(C, /obj/item/stack/sheet/plasteel))
+		var/amt = repair_price()
+		if(!amt)
+			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
+			return
+		var/obj/item/stack/sheet/plasteel/P = C
+		if(P.amount < amt)
+			usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+			return
+		usr << "<span class='notice'>You begin repairing [src]...</span>"
+		if(do_after(usr, 100))
+			if(P.use(amt))
+				usr << "<span class='notice'>You have repaired \The [src]</span>"
+				src.repair()
+			else
+				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+
+
 
 // Proc: open()
 // Parameters: None
@@ -110,6 +127,31 @@
 	if (src.operating || (stat & BROKEN || stat & NOPOWER))
 		return
 	force_close()
+
+// Proc: repair_price()
+// Parameters: None
+// Description: Determines amount of sheets needed for full repair. (max)150HP per sheet, (max)10 emitter hits per sheet.
+/obj/machinery/door/blast/proc/repair_price()
+	var/sheets_needed = 0
+	var/dam = maxhealth - health
+	var/bla = emitter_hits
+	while(dam > 0)
+		dam -= 150
+		sheets_needed++
+	while(bla > 0)
+		bla -= 10
+		sheets_needed++
+	return sheets_needed
+
+// Proc: repair()
+// Parameters: None
+// Description: Fully repairs the blast door.
+/obj/machinery/door/blast/proc/repair()
+	health = maxhealth
+	emitter_hits = 0
+	if(stat & BROKEN)
+		stat &= ~BROKEN
+
 
 
 
