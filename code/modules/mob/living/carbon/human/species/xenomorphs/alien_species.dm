@@ -110,7 +110,7 @@
 	name = "Xenomorph Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
-	slowdown = 2
+	slowdown = 1
 	tail = "xenos_drone_tail"
 	rarity_value = 5
 
@@ -149,7 +149,7 @@
 	name = "Xenomorph Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
-	slowdown = -1
+	slowdown = -2
 	total_health = 150
 	tail = "xenos_hunter_tail"
 
@@ -177,7 +177,7 @@
 	name = "Xenomorph Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
-	slowdown = 1
+	slowdown = 0
 	total_health = 125
 	tail = "xenos_sentinel_tail"
 
@@ -209,7 +209,7 @@
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
-	slowdown = 5
+	slowdown = 4
 	tail = "xenos_queen_tail"
 	rarity_value = 10
 
