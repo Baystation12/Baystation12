@@ -944,6 +944,7 @@
 
 	// Fix up any missing organs.
 	// This will ignore any prosthetics in the prefs currently.
+	species.create_limbs(src)
 	species.create_organs(src)
 
 	for (var/obj/item/organ/brain/H in world)
@@ -1121,6 +1122,7 @@
 
 	species = all_species[new_species]
 
+	species.create_limbs(src)
 	species.create_organs(src)
 
 	if(species.language)

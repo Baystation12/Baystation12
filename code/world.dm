@@ -52,6 +52,9 @@ var/global/datum/global_init/init = new ()
 
 	sleep_offline = 1
 
+	// Create tissue list for human limbs.
+	populate_tissue_list()
+
 	// Set up roundstart seed list. This is here because vendors were
 	// bugging out and not populating with the correct packet names
 	// due to this list not being instantiated.

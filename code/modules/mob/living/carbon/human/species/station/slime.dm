@@ -21,6 +21,7 @@
 		"brain" = /datum/organ/internal/brain/slime
 		)
 
+	tissues = list("slime","slime_innards")
 	breath_type = null
 	poison_type = null
 

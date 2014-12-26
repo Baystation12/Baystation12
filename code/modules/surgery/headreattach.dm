@@ -144,7 +144,7 @@
 		affected.status |= ORGAN_ATTACHABLE
 		affected.amputated = 1
 		affected.setAmputatedTree()
-		affected.open = 0
+		//affected.open = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

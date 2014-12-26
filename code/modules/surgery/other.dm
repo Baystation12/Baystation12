@@ -27,7 +27,7 @@
 			internal_bleeding = 1
 			break
 
-		return affected.open >= 2 && internal_bleeding
+		return affected.is_open() >= 2 && internal_bleeding
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -75,7 +75,7 @@
 
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 
-		return affected.open >= 2 && (affected.status & ORGAN_DEAD)
+		return affected.is_open() >= 2 && (affected.status & ORGAN_DEAD)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -88,7 +88,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has cut away necrotic tissue in [target]'s [affected.display_name] with \the [tool].", \
 			"\blue You have cut away necrotic tissue in [target]'s [affected.display_name] with \the [tool].")
-		affected.open = 3
+		//affected.is_open() = 3
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -127,7 +127,7 @@
 			return 0
 
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return affected.open == 3 && (affected.status & ORGAN_DEAD)
+		return affected.is_open() == 3 && (affected.status & ORGAN_DEAD)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

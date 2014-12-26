@@ -44,6 +44,7 @@
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+	tissues = list("scales","skin","muscle","bone")
 
 /datum/species/tajaran
 	name = "Tajara"
@@ -94,7 +95,7 @@
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
-
+	tissues = list("skin","muscle","cartilage")
 	reagent_tag = IS_SKRELL
 
 /datum/species/diona
@@ -126,6 +127,7 @@
 		"polyp segment" =      /datum/organ/internal/diona/polyp,
 		"anchoring ligament" = /datum/organ/internal/diona/ligament
 		)
+	tissues = list("diona_carapace","diona_ligaments","diona_strata")
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -144,7 +146,6 @@
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
-
 	reagent_tag = IS_DIONA
 
 /datum/species/diona/can_understand(var/mob/other)
@@ -204,6 +205,7 @@
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
 
+	tissues = list("metal_skin","robot_wiring")
 	has_organ = list() //TODO: Positronic brain.
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)

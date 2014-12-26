@@ -16,16 +16,16 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
-		return (sponge && sponge.damage > 0 && sponge.damage <= 20) && affected.open == 3
+		return (sponge && sponge.damage > 0 && sponge.damage <= 20) && affected.is_open() == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts taking bone chips out of [target]'s brain with \the [tool].", \
-		"You start taking bone chips out of [target]'s brain with \the [tool].")
+		"<span ='notice'>You start taking bone chips out of [target]'s brain with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\blue [user] takes out all the bone chips in [target]'s brain with \the [tool].",	\
-		"\blue You take out all the bone chips in [target]'s brain with \the [tool].")
+		"<span ='notice'>You take out all the bone chips in [target]'s brain with \the [tool].")
 		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
 		if (sponge)
 			sponge.damage = 0
@@ -48,7 +48,7 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		var/datum/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
-		return (sponge && sponge.damage > 20) && affected.open == 3
+		return (sponge && sponge.damage > 20) && affected.is_open() == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts mending hematoma in [target]'s brain with \the [tool].", \

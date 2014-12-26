@@ -13,10 +13,11 @@
 	var/max_damage = 0
 	var/max_size = 0
 	var/last_dam = -1
-
 	var/display_name
-	var/list/wounds = list()
 	var/number_wounds = 0 // cache the number of wounds, which is NOT wounds.len!
+
+	var/list/wounds = list()
+	var/list/tissue_layers = list()
 
 	var/tmp/perma_injury = 0
 	var/tmp/destspawn = 0 //Has it spawned the broken limb?
@@ -29,14 +30,9 @@
 	// Internal organs of this body part
 	var/list/datum/organ/internal/internal_organs
 
-	var/damage_msg = "\red You feel an intense pain"
-	var/broken_description
-
-	var/open = 0
 	var/stage = 0
 	var/cavity = 0
 	var/sabotaged = 0 // If a prosthetic limb is emagged, it will detonate when it fails.
-	var/encased       // Needs to be opened with a saw to access the organs.
 
 	var/obj/item/hidden = null
 	var/list/implants = list()
@@ -44,14 +40,44 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
-
-/datum/organ/external/New(var/datum/organ/external/P)
+/datum/organ/external/New(var/datum/organ/external/P, var/list/tissue_types)
 	if(P)
 		parent = P
 		if(!parent.children)
 			parent.children = list()
 		parent.children.Add(src)
+	if(!tissue_layers.len)
+		for(var/tissue_layer in tissue_types)
+			tissue_layers += new /datum/tissue_layer(src,tissue_layer)
 	return ..()
+
+// Check if organs are accessible.
+/datum/organ/external/proc/is_open(var/organs_accessible)
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		if(tissue_layer.is_open())
+			if(!organs_accessible)
+				return 1
+			if(tissue_layer.tissue.flags & TISSUE_ORGAN_LAYER)
+				return 1
+		else
+			return 0
+	return 1
+
+// Get the most immediately accessible layer.
+/datum/organ/external/proc/get_surface_layer()
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		if(tissue_layer.is_open())
+			continue
+		return tissue_layer
+	return
+
+// Checks if the tissue has an exposed tissue that can be infected.
+/datum/organ/external/proc/can_be_infected()
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		if(tissue_layer.is_split() && (tissue_layer.tissue.flags & TISSUE_INFECTS))
+			return 1
+	return 0
+
 
 /****************************************************
 			   DAMAGE PROCS
@@ -199,8 +225,8 @@ This function completely restores a damaged organ to perfect condition.
 */
 /datum/organ/external/proc/rejuvenate()
 	damage_state = "00"
-	if(status & 128)	//Robotic organs stay robotic.  Fix because right click rejuvinate makes IPC's organs organic.
-		status = 128
+	if(status & ORGAN_ROBOT)
+		status = ORGAN_ROBOT
 	else
 		status = 0
 	perma_injury = 0
@@ -342,18 +368,15 @@ INFECTION_LEVEL_THREE	above this germ level the player will take additional toxi
 Note that amputating the affected organ does in fact remove the infection from the player's body.
 */
 /datum/organ/external/proc/update_germs()
-
-	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED) || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	//Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED))
 		germ_level = 0
 		return
-
 	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//** Syncing germ levels with external wounds
 		handle_germ_sync()
-
 		//** Handle antibiotics and curing infections
 		handle_antibiotics()
-
 		//** Handle the effects of infections
 		handle_germ_effects()
 
@@ -431,7 +454,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		germ_level++
 		owner.adjustToxLoss(1)
 
-//Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
+//Updating wounds. Handles wound natural healing, internal bleedings and infections
 /datum/organ/external/proc/update_wounds()
 
 	if((status & ORGAN_ROBOT)) //Robotic limbs don't heal or get worse.
@@ -484,6 +507,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if (update_icon())
 		owner.UpdateDamageIcon(1)
 
+/datum/organ/external/proc/is_bleeding()
+	return 0
+
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /datum/organ/external/proc/update_damages()
 	number_wounds = 0
@@ -510,7 +536,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 		number_wounds += W.amount
 
-	if (open && !clamped && (H && !(H.species.flags & NO_BLOOD)))	//things tend to bleed if they are CUT OPEN
+	if (is_open() && is_bleeding() && (H && !(H.species.flags & NO_BLOOD)))	//things tend to bleed if they are CUT OPEN
 		status |= ORGAN_BLEEDING
 
 
@@ -738,7 +764,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		owner.emote("scream")
 
 	status |= ORGAN_BROKEN
-	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam
 
 	// Fractures have a chance of getting you out of restraints
@@ -865,7 +890,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	min_broken_damage = 40
 	body_part = UPPER_TORSO
 	vital = 1
-	encased = "ribcage"
+	//encased = "ribcage"
 
 /datum/organ/external/groin
 	name = "groin"
@@ -969,7 +994,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	body_part = HEAD
 	var/disfigured = 0
 	vital = 1
-	encased = "skull"
+	//encased = "skull"
 
 /datum/organ/external/head/get_icon(var/icon/race_icon, var/icon/deform_icon)
 	if (!owner)

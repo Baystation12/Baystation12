@@ -40,7 +40,7 @@
 				continue
 			if((organ.status & ORGAN_DESTROYED) && !organ.amputated)
 				src.traumatic_shock += 60
-			else if(organ.status & ORGAN_BROKEN || organ.open)
+			else if(organ.status & ORGAN_BROKEN || organ.is_open())
 				src.traumatic_shock += 30
 				if(organ.status & ORGAN_SPLINTED)
 					src.traumatic_shock -= 25

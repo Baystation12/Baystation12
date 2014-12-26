@@ -33,14 +33,14 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] has cut open [target]'s face and neck with \the [tool]." , \
-		"\blue You have cut open [target]'s face and neck with \the [tool].",)
+		user.visible_message("<span class='notice'>[user] has cut open [target]'s face and neck with \the [tool].</span>" , \
+		"<span class='notice'>You have cut open [target]'s face and neck with \the [tool].</span>",)
 		target.op_stage.face = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, slicing [target]'s throat wth \the [tool]!" , \
-		"\red Your hand slips, slicing [target]'s throat wth \the [tool]!" )
+		user.visible_message("<span class='danger'>[user]'s hand slips, slicing [target]'s throat wth \the [tool]!</span>" , \
+		"<span class='danger'>Your hand slips, slicing [target]'s throat wth \the [tool]!</span>")
 		affected.createwound(CUT, 60)
 		target.losebreath += 10
 
@@ -123,7 +123,7 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] cauterizes the incision on [target]'s face and neck with \the [tool].", \
 		"\blue You cauterize the incision on [target]'s face and neck with \the [tool].")
-		affected.open = 0
+		//affected.is_open() = 0
 		affected.status &= ~ORGAN_BLEEDING
 		if (target.op_stage.face == 3)
 			var/datum/organ/external/head/h = affected

@@ -65,7 +65,7 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(affecting.open == 0)
+		if(affecting.is_open())
 			if(!affecting.bandage())
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been bandaged."
 				return 1
@@ -108,7 +108,7 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(affecting.open == 0)
+		if(affecting.is_open())
 			if(!affecting.salve())
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
 				return 1
@@ -156,10 +156,10 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(affecting.open == 0)
+		if(affecting.is_open())
 			var/bandaged = affecting.bandage()
 			var/disinfected = affecting.disinfect()
-		
+
 			if(!(bandaged || disinfected))
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been treated."
 				return 1
@@ -204,7 +204,7 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(affecting.open == 0)
+		if(affecting.is_open())
 			if(!affecting.salve())
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
 				return 1
