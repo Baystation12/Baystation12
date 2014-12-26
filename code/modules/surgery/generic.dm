@@ -233,24 +233,30 @@
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
 			return 0
+
+		//If all layers are cut and retracted we can amputate.
+		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
+			if(!tissue_layer.is_open())
+				return 0
+
 		return target_zone != "chest" && target_zone != "groin" && target_zone != "head"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to cut off [target]'s [affected.display_name] with \the [tool]." , \
-		"You are beginning to cut off [target]'s [affected.display_name] with \the [tool].")
+		user.visible_message("[user] is beginning to amputate [target]'s [affected.display_name] with \the [tool]." , \
+		"You are beginning to amputate [target]'s [affected.display_name] with \the [tool].")
 		target.custom_pain("Your [affected.display_name] is being ripped apart!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\blue [user] cuts off [target]'s [affected.display_name] with \the [tool].", \
-		"\blue You cut off [target]'s [affected.display_name] with \the [tool].")
+		user.visible_message("\blue [user] amputates [target]'s [affected.display_name] with \the [tool].", \
+		"\blue You amputate [target]'s [affected.display_name] with \the [tool].")
 		affected.droplimb(1,0)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
+		user.visible_message("\red [user]'s hand slips, sawing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!")
 		affected.createwound(CUT, 30)
 		affected.fracture()

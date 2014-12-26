@@ -40,14 +40,14 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
-/datum/organ/external/New(var/datum/organ/external/P)
+/datum/organ/external/New(var/datum/organ/external/P, var/list/tissue_types)
 	if(P)
 		parent = P
 		if(!parent.children)
 			parent.children = list()
 		parent.children.Add(src)
-	if(!tissue_layers.len) //Hardcoding this in the root New() to avoid defining a template on every limb.
-		for(var/tissue_layer in list("skin","muscle","bone"))
+	if(!tissue_layers.len)
+		for(var/tissue_layer in tissue_types)
 			tissue_layers += new /datum/tissue_layer(src,tissue_layer)
 	return ..()
 

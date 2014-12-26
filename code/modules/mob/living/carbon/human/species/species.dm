@@ -88,7 +88,10 @@
 		"brain" =    /datum/organ/internal/brain,
 		"appendix" = /datum/organ/internal/appendix,
 		"eyes" =     /datum/organ/internal/eyes
-		)                         // Determines the various limb types that the species spawns with.
+		)
+
+	// Determines the various limb and tissue types that the species spawns with.
+	var/list/tissues = list("skin","muscle","bone")
 	var/list/has_limb = list(     // For now, parents need to be defined before children.
 		list("chest",  /datum/organ/external/chest,  null),
 		list("groin",  /datum/organ/external/groin,  "chest"),
@@ -122,7 +125,7 @@
 	H.organs_by_name = list()
 	for(var/list/limb_data in has_limb)
 		var/limb_path = limb_data[2]
-		H.organs_by_name[limb_data[1]] = new limb_path(H.organs_by_name[limb_data[3]])
+		H.organs_by_name[limb_data[1]] = new limb_path(H.organs_by_name[limb_data[3]], tissues)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 

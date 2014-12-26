@@ -51,6 +51,8 @@
 		"stack" =    /datum/organ/internal/stack/vox
 		)
 
+	tissues = list("scales","skin","muscle","bone")
+
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[default_language]
 	return species_language.get_random_name(gender)

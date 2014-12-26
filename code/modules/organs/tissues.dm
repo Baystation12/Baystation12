@@ -40,6 +40,63 @@ proc/populate_tissue_list()
 	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
 	regen_threshold = 0 // Cannot regen without surgery.
 
+/datum/tissue/scales
+	id = "scales"
+	descriptor = "scales"
+	hardness = HARDNESS_SAW
+	flags = 0
+
+/datum/tissue/cartilage
+	id = "cartilage"
+	descriptor = "cartilage"
+	hardness = HARDNESS_SAW
+	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
+
+/datum/tissue/slime
+	id = "slime"
+	descriptor = "slime"
+	flags = 0
+
+/datum/tissue/slime/innards
+	id = "slime_innards"
+	descriptor = "silky innards"
+	hardness = HARDNESS_SAW
+	flags = TISSUE_INFECTS | TISSUE_BLEEDS | TISSUE_ORGAN_LAYER
+
+/datum/tissue/metal
+	id = "metal_skin"
+	descriptor = "steel casing"
+	hardness = HARDNESS_TORCH
+	flags = 0
+
+/datum/tissue/cables
+	id = "robot_wiring"
+	descriptor = "internal conduits"
+	hardness = HARDNESS_SAW
+	flags = 0
+
+/datum/tissue/metal/adamantine
+	id = "adamantine"
+	descriptor = "adamantine casing"
+
+/datum/tissue/diona_carapace
+	id = "diona_carapace"
+	descriptor = "carapace"
+	hardness = HARDNESS_SAW
+	flags = 0
+
+/datum/tissue/diona_ligaments
+	id = "diona_ligaments"
+	descriptor = "structural ligaments"
+	hardness = HARDNESS_SCALPEL
+	flags = 0
+
+/datum/tissue/diona_strata
+	id = "diona_strata"
+	descriptor = "neural strata"
+	hardness = HARDNESS_SAW
+	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
+
 // Maybe generalize this out to a 'sharpness' var on items. Consider using sharp for it.
 /datum/tissue/proc/can_cut_with(var/obj/item/tool)
 	switch(hardness)

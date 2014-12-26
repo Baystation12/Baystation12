@@ -17,8 +17,7 @@
 		"brain" = /datum/organ/internal/brain/slime
 		)
 
-	inherent_verbs = list(
-		)
+	tissues = list("slime","slime_innards")
 
 	breath_type = null
 	poison_type = null
