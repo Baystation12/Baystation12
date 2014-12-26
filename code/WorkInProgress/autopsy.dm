@@ -195,7 +195,7 @@
 	if(!S)
 		usr << "<b>You can't scan this body part.</b>"
 		return
-	if(!S.open)
+	if(!S.is_open())
 		usr << "<b>You have to cut the limb open first!</b>"
 		return
 	for(var/mob/O in viewers(M))

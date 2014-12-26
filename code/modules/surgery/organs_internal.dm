@@ -10,7 +10,7 @@
 		return 0
 
 	var/datum/organ/external/affected = target.get_organ(target_zone)
-	return affected.open == (affected.encased ? 3 : 2)
+	return affected.is_open(1)
 
 //////////////////////////////////////////////////////////////////
 //					ALIEN EMBRYO SURGERY						//
@@ -32,10 +32,7 @@
 			embryo = 1
 			break
 
-		if (!hasorgans(target))
-			return
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && embryo && affected.open == 3 && target_zone == "chest"
+		return ..() && embryo && target_zone == "chest"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/msg = "[user] starts to pull something out from [target]'s ribcage with \the [tool]."

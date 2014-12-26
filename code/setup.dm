@@ -534,7 +534,7 @@
 #define ORGAN_DESTROYED 64
 #define ORGAN_ROBOT 128
 #define ORGAN_SPLINTED 256
-#define SALVED 512
+#define ORGAN_SALVED 512
 #define ORGAN_DEAD 1024
 #define ORGAN_MUTATED 2048
 
@@ -802,3 +802,8 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY 1
 #define SUIT_SENSOR_VITAL 2
 #define SUIT_SENSOR_TRACKING 3
+
+// Status flags
+#define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
+#define TISSUE_INFECTS 2     // Tissue can become infected.
+#define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.

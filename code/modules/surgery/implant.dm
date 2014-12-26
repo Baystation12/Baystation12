@@ -10,7 +10,7 @@
 		if(!hasorgans(target))
 			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return affected.open == (affected.encased ? 3 : 2) && !(affected.status & ORGAN_BLEEDING)
+		return affected.is_open(1) && !(affected.status & ORGAN_BLEEDING)
 
 	proc/get_max_wclass(datum/organ/external/affected)
 		switch (affected.name)

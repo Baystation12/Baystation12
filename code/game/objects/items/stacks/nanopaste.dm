@@ -27,7 +27,7 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
-		if(S.open == 1)
+		if(S.is_open() == 1)
 			if (S && (S.status & ORGAN_ROBOT))
 				if(S.get_damage())
 					S.heal_damage(15, 15, robo_repair = 1)

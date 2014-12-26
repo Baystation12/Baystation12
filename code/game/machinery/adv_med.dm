@@ -359,21 +359,23 @@
 
 		dat += "<tr>"
 
-		for(var/datum/wound/W in e.wounds) if(W.internal)
-			internal_bleeding = "<br>Internal bleeding"
-			break
+		for(var/datum/wound/W in e.wounds)
+			if(W.internal)
+				internal_bleeding = "<br>Internal bleeding"
+				break
+
 		if(istype(e, /datum/organ/external/chest) && occ["lung_ruptured"])
-			lung_ruptured = "Lung ruptured:"
+			lung_ruptured = "lung ruptured"
 		if(e.status & ORGAN_SPLINTED)
-			splint = "Splinted:"
+			splint = "splinted"
 		if(e.status & ORGAN_BLEEDING)
-			bled = "Bleeding:"
+			bled = "bleeding"
 		if(e.status & ORGAN_BROKEN)
-			AN = "[e.broken_description]:"
+			AN = "broken"
 		if(e.status & ORGAN_ROBOT)
-			robot = "Prosthetic:"
-		if(e.open)
-			open = "Open:"
+			robot = "prosthetic"
+		if(e.is_open())
+			open = "open"
 
 		switch (e.germ_level)
 			if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
