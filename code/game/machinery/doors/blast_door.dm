@@ -121,7 +121,7 @@ obj/machinery/door/blast/regular
 	icon_state_opening = "pdoorc1"
 	icon_state_closed = "pdoor1"
 	icon_state_closing = "pdoorc0"
-	icon_state = icon_state_closed
+	icon_state = "pdoor1"
 	maxhealth = 600
 
 // SUBTYPE: Shutters
@@ -131,5 +131,5 @@ obj/machinery/door/blast/regular
 	icon_state_opening = "shutterc1"
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc0"
-	icon_state = icon_state_closed
+	icon_state = "shutter1"
 	emitter_resistance = 20
