@@ -38,8 +38,6 @@
 
 	if(dna)
 		dna.real_name = real_name
-
-	prev_gender = gender // Debug for plural genders
 	make_blood()
 
 /mob/living/carbon/human/Stat()
@@ -944,7 +942,11 @@
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	for (var/obj/item/weapon/organ/head/H in world)
+	// Fix up any missing organs.
+	// This will ignore any prosthetics in the prefs currently.
+	species.create_organs(src)
+
+	for (var/obj/item/organ/brain/H in world)
 		if(H.brainmob)
 			if(H.brainmob.real_name == src.real_name)
 				if(H.brainmob.mind)
@@ -1143,6 +1145,13 @@
 		regenerate_icons()
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
+
+	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
+	if(client && client.screen)
+		client.screen.len = null
+		if(hud_used)
+			del(hud_used)
+		hud_used = new /datum/hud(src)
 
 	if(species)
 		return 1

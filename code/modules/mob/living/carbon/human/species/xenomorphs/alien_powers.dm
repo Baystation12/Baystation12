@@ -83,7 +83,7 @@
 	set desc = "Lay an egg to produce huggers to impregnate prey with."
 	set category = "Abilities"
 
-	if(!aliens_allowed)
+	if(!config.aliens_allowed)
 		src << "You begin to lay an egg, but hesitate. You suspect it isn't allowed."
 		verbs -= /mob/living/carbon/human/proc/lay_egg
 		return

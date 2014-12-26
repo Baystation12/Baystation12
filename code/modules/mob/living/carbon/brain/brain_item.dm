@@ -73,6 +73,7 @@
 			brainmob.mind.transfer_to(target)
 		else
 			target.key = brainmob.key
+	..()
 
 /obj/item/organ/brain/slime
 	name = "slime core"

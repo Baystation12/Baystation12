@@ -1,5 +1,12 @@
 /mob/living/carbon/human/gib()
 
+	for(var/datum/organ/internal/I in internal_organs)
+		var/obj/item/organ/current_organ = I.remove()
+		if(current_organ)
+			if(istype(loc,/turf))
+				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+			current_organ.removed(src)
+
 	for(var/datum/organ/external/E in src.organs)
 		if(istype(E, /datum/organ/external/chest))
 			continue
@@ -7,24 +14,6 @@
 		if(prob(100 - E.get_damage()))
 			// Override the current limb status and don't cause an explosion
 			E.droplimb(1,1)
-
-	for(var/datum/organ/internal/I in internal_organs)
-		var/obj/item/organ/current_organ = I.remove()
-		current_organ.loc = src.loc
-		current_organ.organ_data.rejecting = null
-		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in current_organ.reagents.reagent_list
-		if(!organ_blood || !organ_blood.data["blood_DNA"])
-			src.vessel.trans_to(current_organ, 5, 1, 1)
-
-		current_organ.removed(src)
-
-		if(current_organ && istype(loc,/turf))
-			var/target_dir = pick(cardinal)
-			var/turf/target_turf = loc
-			var/steps = rand(1,2)
-			for(var/i = 0;i<steps;i++)
-				target_turf = get_step(target_turf,target_dir)
-			current_organ.throw_at(target_turf)
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
