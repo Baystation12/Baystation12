@@ -24,8 +24,13 @@
 				return
 			else
 				message = Gibberish(message, (emp_damage*6))//scrambles the message, gets worse when emp_damage is higher
+
+		if(speaking && speaking.flags & HIVEMIND)
+			speaking.broadcast(src,trim(message))
+			return
+
 		if(istype(container, /obj/item/device/mmi/radio_enabled))
 			var/obj/item/device/mmi/radio_enabled/R = container
 			if(R.radio)
 				spawn(0) R.radio.hear_talk(src, trim(sanitize(message)), verb, speaking)
-		..()
+		..(trim(message), speaking, verb)
