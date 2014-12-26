@@ -896,6 +896,12 @@ var/list/robot_verbs_default = list(
 
 	add_fingerprint(user)
 
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			attack_generic(H, rand(30,50), "slashes")
+			return
+
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
