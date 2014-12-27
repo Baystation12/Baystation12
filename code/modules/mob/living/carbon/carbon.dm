@@ -200,8 +200,11 @@
 			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
-
-			if(lying || src.sleeping)
+				
+			if(player_logged)
+				M.visible_message("<span class='notice'>[M] shakes [src], but they do not respond. Probably suffering from SSD.", \
+				"<span class='notice'>You shake [src], but they are unresponsive. Probably suffering from SSD.</span>")
+			else if(lying || src.sleeping)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
