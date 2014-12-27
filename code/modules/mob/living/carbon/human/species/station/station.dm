@@ -120,12 +120,12 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/internal/diona/nutrients,
+		"neural strata" =      /obj/item/organ/internal/diona/strata,
+		"response node" =      /obj/item/organ/internal/diona/node,
+		"gas bladder" =        /obj/item/organ/internal/diona/bladder,
+		"polyp segment" =      /obj/item/organ/internal/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/internal/diona/ligament
 		)
 	tissues = list("diona_carapace","diona_ligaments","diona_strata")
 

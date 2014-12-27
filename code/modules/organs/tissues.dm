@@ -120,6 +120,7 @@ proc/populate_tissue_list()
 /datum/tissue_layer
 	var/damage = 0
 	var/retracted = 0
+	var/necrotic = 0
 	var/datum/tissue/tissue
 
 /datum/tissue_layer/New(var/newloc,var/tissue_type)
@@ -135,7 +136,8 @@ proc/populate_tissue_list()
 
 	// Get the amount we will need to subtract to heal all of our damage.
 	var/need_healing = min(healing_damage,damage/tissue.growth_factor)
-	damage = max(0,damage-(need_healing*tissue.growth_factor))
+	if(!necrotic) // Necrosis consumes health but doesn't actually heal.
+		damage = max(0,damage-(need_healing*tissue.growth_factor))
 	healing_damage -= need_healing
 	return healing_damage
 

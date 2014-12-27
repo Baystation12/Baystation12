@@ -64,7 +64,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
@@ -128,7 +128,7 @@
 	var/update = 0
 
 	// focus most of the blast on one organ
-	var/datum/organ/external/take_blast = pick(organs)
+	var/obj/item/organ/external/take_blast = pick(organs)
 	update |= take_blast.take_damage(b_loss * 0.9, f_loss * 0.9, used_weapon = "Explosive blast")
 
 	// distribute the remaining 10% on all limbs equally
@@ -137,7 +137,7 @@
 
 	var/weapon_message = "Explosive Blast"
 
-	for(var/datum/organ/external/temp in organs)
+	for(var/obj/item/organ/external/temp in organs)
 		switch(temp.name)
 			if("head")
 				update |= temp.take_damage(b_loss * 0.2, f_loss * 0.2, used_weapon = weapon_message)
@@ -166,7 +166,7 @@
 	if(stat == 2)	return
 	show_message("\red The blob attacks you!")
 	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
-	var/datum/organ/external/affecting = get_organ(ran_zone(dam_zone))
+	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
 	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
 	return
 
@@ -175,7 +175,7 @@
 		if ((M.client && !( M.blinded )))
 			M.show_message("\red [src] has been hit by [O]", 1)
 	if (health > 0)
-		var/datum/organ/external/affecting = get_organ(pick("chest", "chest", "chest", "head"))
+		var/obj/item/organ/external/affecting = get_organ(pick("chest", "chest", "chest", "head"))
 		if(!affecting)	return
 		if (istype(O, /obj/effect/immovablerod))
 			if(affecting.take_damage(101, 0))
@@ -192,14 +192,14 @@
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/datum/organ/external/affected = M.organs_by_name["head"]
+	var/obj/item/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
-			for(var/datum/organ/external/O in M.organs)
+			for(var/obj/item/organ/external/O in M.organs)
 				if(L in O.implants)
 					return 1
 	return 0
@@ -324,7 +324,7 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
-	var/datum/organ/external/head/head = get_organ("head")
+	var/obj/item/organ/external/head/head = get_organ("head")
 	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
@@ -355,7 +355,7 @@
 	if (!def_zone)
 		def_zone = pick("l_hand", "r_hand")
 
-	var/datum/organ/external/affected_organ = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
 	var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
 
 	return ..(shock_damage, source, siemens_coeff, def_zone)
@@ -681,7 +681,7 @@
 		return 2
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
-		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
 			return 2
 	else
@@ -923,7 +923,7 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-	for (var/datum/organ/external/O in organs)
+	for (var/obj/item/organ/external/O in organs)
 		O.status &= ~ORGAN_BROKEN
 		O.status &= ~ORGAN_BLEEDING
 		O.status &= ~ORGAN_SPLINTED
@@ -935,7 +935,7 @@
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 
-	var/datum/organ/external/head/h = organs_by_name["head"]
+	var/obj/item/organ/external/head/h = organs_by_name["head"]
 	h.disfigured = 0
 
 	if(species && !(species.flags & NO_BLOOD))
@@ -947,14 +947,14 @@
 	species.create_limbs(src)
 	species.create_organs(src)
 
-	for (var/obj/item/organ/brain/H in world)
+	for (var/obj/item/organ/internal/brain/H in world)
 		if(H.brainmob)
 			if(H.brainmob.real_name == src.real_name)
 				if(H.brainmob.mind)
 					H.brainmob.mind.transfer_to(src)
 					del(H)
 
-	for(var/datum/organ/internal/I in internal_organs)
+	for(var/obj/item/organ/internal/I in internal_organs)
 		I.damage = 0
 
 	for (var/datum/disease/virus in viruses)
@@ -969,11 +969,11 @@
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
@@ -1034,7 +1034,7 @@
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
-	for(var/datum/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.organs)
 		for(var/obj/item/weapon/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class) && !istype(O,/obj/item/weapon/shard/shrapnel))
 				visible_implants += O
@@ -1043,7 +1043,7 @@
 
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
-	for(var/datum/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.organs)
 		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
 			continue
 		for(var/obj/item/weapon/O in organ.implants)
@@ -1284,14 +1284,14 @@
 
 /mob/living/carbon/human/has_brain()
 	if(internal_organs_by_name["brain"])
-		var/datum/organ/internal/brain = internal_organs_by_name["brain"]
+		var/obj/item/organ/internal/brain = internal_organs_by_name["brain"]
 		if(brain && istype(brain))
 			return 1
 	return 0
 
 /mob/living/carbon/human/has_eyes()
 	if(internal_organs_by_name["eyes"])
-		var/datum/organ/internal/eyes = internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/eyes = internal_organs_by_name["eyes"]
 		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
 			return 1
 	return 0

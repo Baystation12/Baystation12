@@ -712,12 +712,12 @@ var/list/robot_verbs_default = list(
 				sleep(30)
 				user << "You damage some parts of the chassis, but eventually manage to rip out [mmi]!"
 				var/obj/item/robot_parts/robot_suit/C = new/obj/item/robot_parts/robot_suit(loc)
-				C.l_leg = new/obj/item/robot_parts/l_leg(C)
-				C.r_leg = new/obj/item/robot_parts/r_leg(C)
-				C.l_arm = new/obj/item/robot_parts/l_arm(C)
-				C.r_arm = new/obj/item/robot_parts/r_arm(C)
+				C.limbs["l_leg"] = new/obj/item/organ/external/l_leg/robot(C)
+				C.limbs["r_leg"] = new/obj/item/organ/external/r_leg/robot(C)
+				C.limbs["l_arm"] = new/obj/item/organ/external/l_arm/robot(C)
+				C.limbs["r_arm"] = new/obj/item/organ/external/r_arm/robot(C)
 				C.updateicon()
-				new/obj/item/robot_parts/chest(loc)
+				new /obj/item/organ/external/chest/robot(loc)
 				src.Del()
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?

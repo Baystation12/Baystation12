@@ -189,7 +189,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	// first check whether something actually changed about damage appearance
 	var/damage_appearance = ""
 
-	for(var/datum/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in organs)
 		if(O.status & ORGAN_DESTROYED) damage_appearance += "d"
 		else
 			damage_appearance += O.damage_state
@@ -205,7 +205,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/image/standing_image = new /image("icon" = standing)
 
 	// blend the individual damage states with our icons
-	for(var/datum/organ/external/O in organs)
+	for(var/obj/item/organ/external/O in organs)
 		if(!(O.status & ORGAN_DESTROYED))
 			O.update_icon()
 			if(O.damage_state == "00") continue
@@ -243,9 +243,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
 
 	var/icon_key = "[species.race_key][g][s_tone]"
-	for(var/datum/organ/external/part in organs)
+	for(var/obj/item/organ/external/part in organs)
 
-		if(istype(part,/datum/organ/external/head) && !(part.status & ORGAN_DESTROYED))
+		if(istype(part,/obj/item/organ/external/head) && !(part.status & ORGAN_DESTROYED))
 			has_head = 1
 
 		if(part.status & ORGAN_DESTROYED)
@@ -274,21 +274,21 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		//Robotic limbs are handled in get_icon() so all we worry about are missing or dead limbs.
 		//No icon stored, so we need to start with a basic one.
-		var/datum/organ/external/chest = get_organ("chest")
+		var/obj/item/organ/external/chest = get_organ("chest")
 		base_icon = chest.get_icon(race_icon,deform_icon,g)
 
 		if(chest.status & ORGAN_DEAD)
 			base_icon.ColorTone(necrosis_color_mod)
 			base_icon.SetIntensity(0.7)
 
-		for(var/datum/organ/external/part in organs)
+		for(var/obj/item/organ/external/part in organs)
 
 			var/icon/temp //Hold the bodypart icon for processing.
 
 			if(part.status & ORGAN_DESTROYED)
 				continue
 
-			if (istype(part, /datum/organ/external/groin) || istype(part, /datum/organ/external/head))
+			if (istype(part, /obj/item/organ/external/groin) || istype(part, /obj/item/organ/external/head))
 				temp = part.get_icon(race_icon,deform_icon,g)
 			else
 				temp = part.get_icon(race_icon,deform_icon)
@@ -302,29 +302,21 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if(part.icon_position&(LEFT|RIGHT))
 
 				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
-
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
-
 				if(!(part.icon_position & LEFT))
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_OVERLAY)
-
 				if(part.icon_position & LEFT)
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_UNDERLAY)
-
 			else
-
-				base_icon.Blend(temp, ICON_OVERLAY)
+				if(temp)
+					base_icon.Blend(temp, ICON_OVERLAY)
 
 		if(!skeleton)
 			if(husk)
@@ -393,7 +385,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	//Reset our hair
 	overlays_standing[HAIR_LAYER]	= null
 
-	var/datum/organ/external/head/head_organ = get_organ("head")
+	var/obj/item/organ/external/head/head_organ = get_organ("head")
 	if( !head_organ || (head_organ.status & ORGAN_DESTROYED) )
 		if(update_icons)   update_icons()
 		return

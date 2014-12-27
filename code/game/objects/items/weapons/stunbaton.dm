@@ -53,7 +53,7 @@
 /obj/item/weapon/melee/baton/examine(mob/user)
 	if(!..(user, 1))
 		return
-	
+
 	if(bcell)
 		user <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
 	if(!bcell)
@@ -133,7 +133,7 @@
 				return 0
 
 			var/mob/living/carbon/human/H = L
-			var/datum/organ/external/affecting = H.get_organ(target_zone)
+			var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 			if (affecting)
 				if(!status)
 					L.visible_message("<span class='warning'>[L] has been prodded in the [affecting.display_name] with [src] by [user]. Luckily it was off.</span>")
