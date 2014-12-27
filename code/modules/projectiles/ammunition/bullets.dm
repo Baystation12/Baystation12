@@ -67,7 +67,7 @@
 	name = "shotgun shell"
 	desc = "A blank shell."
 	icon_state = "blshell"
-	projectile_type = ""
+	projectile_type = "/obj/item/projectile/bullet/chameleon"
 	matter = list("metal" = 250)
 
 

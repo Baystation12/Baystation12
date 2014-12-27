@@ -95,7 +95,10 @@
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
 				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
-					Move(get_step(src,pick(cardinal)))
+					/var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
+					moving_to = pick(cardinal)
+					dir = moving_to			//How about we turn them the direction they are moving, yay.
+					Move(get_step(src,moving_to))
 					turns_since_move = 0
 
 	//Speaking
@@ -198,9 +201,6 @@
 			..()
 
 /mob/living/simple_animal/gib()
-	if(meat_amount && meat_type)
-		for(var/i = 0; i < meat_amount; i++)
-			new meat_type(src.loc)
 	..(icon_gib,1)
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
@@ -228,7 +228,7 @@
 		if("help")
 			if (health > 0)
 				M.visible_message("\blue [M] [response_help] \the [src]")
-		
+
 		if("disarm")
 			M.visible_message("\blue [M] [response_disarm] \the [src]")
 			//TODO: Push the mob away or something
@@ -255,43 +255,43 @@
 
 	return
 
-/mob/living/simple_animal/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
+/mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)  //Marker -Agouri
+
 	if(istype(O, /obj/item/stack/medical))
 
-		if(stat != DEAD)
-			var/obj/item/stack/medical/MED = O
-			if(health < maxHealth)
-				if(MED.get_amount() >= 1)
-					adjustBruteLoss(-MED.heal_brute)
-					MED.use(1)
-					for(var/mob/M in viewers(src, null))
-						if ((M.client && !( M.blinded )))
-							M.show_message("\blue [user] applies the [MED] on [src]")
+		if(stat != DEAD && health < maxHealth)
+			var/obj/item/stack/medical/medical_pack = O
+			if(medical_pack.use(1))
+				adjustBruteLoss(-medical_pack.heal_brute)
+				visible_message("<span class='warning'>\The [user] applies the [medical_pack] to \the [src].</span>")
 		else
-			user << "\blue this [src] is dead, medical items won't bring it back to life."
-	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
-			new meat_type (get_turf(src))
-			if(prob(95))
+			user << "<span class='warning'>\The [src] cannot benefit from medical items in its current state.</span>"
+		return
+
+	else if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
+		var/actual_meat_amount = max(1,(meat_amount/2))
+		if(meat_type && actual_meat_amount>0 && (stat == DEAD))
+			for(var/i=0;i<actual_meat_amount;i++)
+				var/obj/item/meat = new meat_type(get_turf(src))
+				meat.name = "[src.name] [meat.name]"
+			if(small)
+				user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
+				new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 				del(src)
-				return
-			gib()
+			else
+				user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
+				gib()
+			return
+
+	if(O.force)
+		var/damage = O.force
+		if (O.damtype == HALLOSS)
+			damage = 0
+		adjustBruteLoss(damage)
+		visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 	else
-		if(O.force)
-			var/damage = O.force
-			if (O.damtype == HALLOSS)
-				damage = 0
-			adjustBruteLoss(damage)
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red \b [src] has been attacked with the [O] by [user]. ")
-		else
-			usr << "\red This weapon is ineffective, it does no damage."
-			for(var/mob/M in viewers(src, null))
-				if ((M.client && !( M.blinded )))
-					M.show_message("\red [user] gently taps [src] with the [O]. ")
-
-
+		user << "<span class='danger'>This weapon is ineffective; it does no damage.</span>"
+		visible_message("<span class='danger'>\The [user] gently taps [src] with the [O].</span>")
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later

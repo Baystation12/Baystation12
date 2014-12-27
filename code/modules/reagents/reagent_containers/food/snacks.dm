@@ -665,7 +665,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	name = "meat"
-	desc = "A slab of meat"
+	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
 	filling_color = "#43DE18"
 

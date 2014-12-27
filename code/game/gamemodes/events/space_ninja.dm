@@ -90,7 +90,6 @@ I decided to scrap round-specific objectives since keeping track of them would r
 When I already created about 4 new objectives, this doesn't seem terribly important or needed.
 */
 
-/var/global/toggle_space_ninja = 0//If ninjas can spawn or not.
 /var/global/sent_ninja_to_station = 0//If a ninja is already on the station.
 
 var/ninja_selection_id = 1
@@ -437,7 +436,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(!toggle_space_ninja)
+	if(!config.ninjas_allowed)
 		alert("Space Ninjas spawning is disabled.")
 		return
 
@@ -467,7 +466,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(!ticker.mode)
 		alert("The game hasn't started yet!")
 		return
-	if(!toggle_space_ninja)
+	if(!config.ninjas_allowed)
 		alert("Space Ninjas spawning is disabled.")
 		return
 	if(alert("Are you sure you want to send in a space ninja?",,"Yes","No")=="No")
@@ -531,7 +530,6 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	else
 		equip_to_slot_or_del(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
 
-	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
 
 	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(src)
@@ -546,16 +544,16 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	equip_to_slot_or_del(ninjasuit,slot_back)
 
-	if(istype(wear_suit,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = wear_suit
-		if(rig.air_supply)
-			internal = rig.air_supply
-	if(!internal && s_store)
-		internal = s_store
-	if(internal)
-		internals.icon_state = "internal1"
-
 	spawn(10)
 		ninjasuit.toggle_seals(src,1)
+
+		if(istype(back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = back
+			if(rig.air_supply)
+				internal = rig.air_supply
+		if(!internal && s_store)
+			internal = s_store
+		if(internal)
+			internals.icon_state = "internal1"
 
 	return 1

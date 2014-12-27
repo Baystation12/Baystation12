@@ -9,7 +9,7 @@
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
 	var/last_power_draw = 0
 
-	connect_types = list(1,3) //connects to regular and scrubber pipes
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
 
 	level = 1
 

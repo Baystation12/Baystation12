@@ -304,10 +304,15 @@
 /obj/item/device/paicard/emp_act(severity)
 	for(var/mob/M in src)
 		M.emp_act(severity)
-	..()
 
 /obj/item/device/paicard/ex_act(severity)
 	if(pai)
 		pai.ex_act(severity)
 	else
 		del(src)
+
+/obj/item/device/paicard/see_emote(mob/living/M, text)
+	if(pai && pai.client)
+		var/rendered = "<span class='message'>[text]</span>"
+		pai.show_message(rendered, 2)
+	..()

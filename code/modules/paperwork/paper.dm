@@ -193,6 +193,10 @@
 	updateinfolinks()
 	update_icon()
 
+/obj/item/weapon/paper/proc/get_signature(var/obj/item/weapon/pen/P, mob/user as mob)
+	if(P)
+		return P.get_signature(user)
+	return (user && user.real_name) ? user.real_name : "Anonymous"
 
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
@@ -208,7 +212,7 @@
 	t = replacetext(t, "\[/u\]", "</U>")
 	t = replacetext(t, "\[large\]", "<font size=\"4\">")
 	t = replacetext(t, "\[/large\]", "</font>")
-	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
+	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
 
 	t = replacetext(t, "\[h1\]", "<H1>")

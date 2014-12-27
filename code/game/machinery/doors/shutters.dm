@@ -24,6 +24,13 @@
 			return
 	return
 
+/obj/machinery/door/poddoor/shutters/update_icon()
+	if(density)
+		icon_state = "shutter1"
+	else
+		icon_state = "shutter0"
+	return
+
 /obj/machinery/door/poddoor/shutters/open()
 	if(operating == 1) //doors can still open when emag-disabled
 		return

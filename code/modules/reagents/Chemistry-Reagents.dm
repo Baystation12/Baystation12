@@ -332,10 +332,9 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/human = M
-					if(human.dna.mutantrace == null)
-						M << "\red Your flesh rapidly mutates!"
-						human.dna.mutantrace = "slime"
-						human.update_mutantrace()
+					if(human.species.name != "Slime")
+						M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+						human.set_species("Slime")
 				..()
 				return
 

@@ -6,6 +6,7 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
+	emitter_resistance = 50 // Lots of emitter blasts, it's blast door after all.
 
 /obj/machinery/door/poddoor/New()
 	. = ..()
@@ -27,6 +28,7 @@
 	else
 		icon_state = "pdoor0"
 	return
+
 
 /obj/machinery/door/poddoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	src.add_fingerprint(user)
