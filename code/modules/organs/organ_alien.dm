@@ -1,41 +1,9 @@
 //DIONA ORGANS.
-/datum/organ/internal/diona
-	removed_type = /obj/item/organ/internal/diona
-
-/datum/organ/internal/diona/process()
-	return
-
-/datum/organ/internal/diona/strata
-	name = "neural strata"
-	parent_organ = "chest"
-
-/datum/organ/internal/diona/bladder
-	name = "gas bladder"
-	parent_organ = "head"
-
-/datum/organ/internal/diona/polyp
-	name = "polyp segment"
-	parent_organ = "groin"
-
-/datum/organ/internal/diona/ligament
-	name = "anchoring ligament"
-	parent_organ = "groin"
-
-/datum/organ/internal/diona/node
-	name = "receptor node"
-	parent_organ = "head"
-	removed_type = /obj/item/organ/internal/diona/node
-
-/datum/organ/internal/diona/nutrients
-	name = "nutrient vessel"
-	parent_organ = "chest"
-	removed_type = /obj/item/organ/internal/diona/nutrients
-
 /obj/item/organ/internal/diona
 	name = "diona nymph"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "nymph"
-	part = "special" // Turns into a nymph instantly, no transplanting possible.
+	body_part = "special" // Turns into a nymph instantly, no transplanting possible.
 
 /obj/item/organ/internal/diona/removed(var/mob/living/target,var/mob/living/user)
 
@@ -57,11 +25,30 @@
 		diona.request_player(D)
 		del(src)
 
+/obj/item/organ/internal/diona/process_internal()
+	return
+
+/obj/item/organ/internal/diona/strata
+	name = "neural strata"
+	parent_organ = "chest"
+
+/obj/item/organ/internal/diona/bladder
+	name = "gas bladder"
+	parent_organ = "head"
+
+/obj/item/organ/internal/diona/polyp
+	name = "polyp segment"
+	parent_organ = "groin"
+
+/obj/item/organ/internal/diona/ligament
+	name = "anchoring ligament"
+	parent_organ = "groin"
+
 // These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
 /obj/item/organ/internal/diona/nutrients
 	name = "nutrient vessel"
-	part = "nutrient vessel"
+	body_part = "nutrient vessel"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
@@ -70,7 +57,7 @@
 
 /obj/item/organ/internal/diona/node
 	name = "receptor node"
-	part = "receptor node"
+	body_part = "receptor node"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
@@ -78,13 +65,12 @@
 	return
 
 //CORTICAL BORER ORGANS.
-/datum/organ/internal/borer
+/obj/item/organ/internal/borer
 	name = "cortical borer"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/internal/borer
 	vital = 1
 
-/datum/organ/internal/borer/process()
+/obj/item/organ/internal/borer/process_internal()
 
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
 	for(var/chem in list("tricordrazine","tramadol","hyperzine","alkysine"))
@@ -110,8 +96,9 @@
 	name = "cortical borer"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borer"
-	part = "brain"
+	body_part = "brain"
 	desc = "A disgusting space slug."
+	vital = 1
 
 /obj/item/organ/internal/borer/removed(var/mob/living/target,var/mob/living/user)
 
@@ -126,104 +113,70 @@
 		del(src)
 
 //XENOMORPH ORGANS
-/datum/organ/internal/xenos/eggsac
-	name = "egg sac"
-	parent_organ = "groin"
-	removed_type = /obj/item/organ/internal/xenos/eggsac
-
-/datum/organ/internal/xenos/plasmavessel
-	name = "plasma vessel"
-	parent_organ = "chest"
-	removed_type = /obj/item/organ/internal/xenos/plasmavessel
-	var/stored_plasma = 0
-	var/max_plasma = 500
-
-/datum/organ/internal/xenos/plasmavessel/queen
-	name = "bloated plasma vessel"
-	stored_plasma = 200
-	max_plasma = 500
-
-/datum/organ/internal/xenos/plasmavessel/sentinel
-	stored_plasma = 100
-	max_plasma = 250
-
-/datum/organ/internal/xenos/plasmavessel/hunter
-	name = "tiny plasma vessel"
-	stored_plasma = 100
-	max_plasma = 150
-
-/datum/organ/internal/xenos/acidgland
-	name = "acid gland"
-	parent_organ = "head"
-	removed_type = /obj/item/organ/internal/xenos/acidgland
-
-/datum/organ/internal/xenos/hivenode
-	name = "hive node"
-	parent_organ = "chest"
-	removed_type = /obj/item/organ/internal/xenos/hivenode
-
-/datum/organ/internal/xenos/resinspinner
-	name = "resin spinner"
-	parent_organ = "head"
-	removed_type = /obj/item/organ/internal/xenos/resinspinner
-
 /obj/item/organ/internal/xenos
 	name = "xeno organ"
 	icon = 'icons/effects/blood.dmi'
 	desc = "It smells like an accident in a chemical factory."
 
-/obj/item/organ/internal/xenos/eggsac
-	name = "egg sac"
-	icon_state = "xgibmid1"
-	part = "egg sac"
-
 /obj/item/organ/internal/xenos/plasmavessel
 	name = "plasma vessel"
 	icon_state = "xgibdown1"
-	part = "plasma vessel"
+	body_part = "plasma vessel"
+	var/stored_plasma = 0
+	var/max_plasma = 500
+
+/obj/item/organ/internal/xenos/plasmavessel/queen
+	name = "bloated plasma vessel"
+	stored_plasma = 200
+	max_plasma = 500
+
+/obj/item/organ/internal/xenos/plasmavessel/sentinel
+	stored_plasma = 100
+	max_plasma = 250
+
+/obj/item/organ/internal/xenos/plasmavessel/hunter
+	name = "tiny plasma vessel"
+	stored_plasma = 100
+	max_plasma = 150
+
+/obj/item/organ/internal/xenos/eggsac
+	name = "egg sac"
+	icon_state = "xgibmid1"
+	body_part = "egg sac"
 
 /obj/item/organ/internal/xenos/acidgland
 	name = "acid gland"
 	icon_state = "xgibtorso"
-	part = "acid gland"
+	body_part = "acid gland"
 
 /obj/item/organ/internal/xenos/hivenode
 	name = "hive node"
 	icon_state = "xgibmid2"
-	part = "hive node"
+	body_part = "hive node"
 
 /obj/item/organ/internal/xenos/resinspinner
 	name = "hive node"
 	icon_state = "xgibmid2"
-	part = "resin spinner"
+	body_part = "resin spinner"
 
 //VOX ORGANS.
-/datum/organ/internal/stack
-	name = "cortical stack"
-	removed_type = /obj/item/organ/internal/stack
-	parent_organ = "head"
-	robotic = 2
-	vital = 1
-	var/backup_time = 0
-	var/datum/mind/backup
-
-/datum/organ/internal/stack/process()
-	if(owner && owner.stat != 2 && !is_broken())
-		backup_time = world.time
-		if(owner.mind) backup = owner.mind
-
-/datum/organ/internal/stack/vox
-	removed_type = /obj/item/organ/internal/stack/vox
-
-/datum/organ/internal/stack/vox/stack
 
 /obj/item/organ/internal/stack
 	name = "cortical stack"
 	icon_state = "brain-prosthetic"
-	part = "stack"
+	body_part = "stack"
 	robotic = 2
 	prosthetic_name = null
 	prosthetic_icon = null
+	parent_organ = "head"
+	vital = 1
+	var/backup_time = 0
+	var/datum/mind/backup
+
+/obj/item/organ/internal/stack/process_internal()
+	if(owner && owner.stat != 2 && !is_broken())
+		backup_time = world.time
+		if(owner.mind) backup = owner.mind
 
 /obj/item/organ/internal/stack/vox
 	name = "vox cortical stack"

@@ -14,7 +14,7 @@
 	flesh_color = "#05FFFB"
 
 	has_organ = list(
-		"brain" = /datum/organ/internal/brain/slime
+		"brain" = /obj/item/organ/internal/brain/slime
 		)
 
 	tissues = list("slime","slime_innards")

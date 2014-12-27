@@ -13,7 +13,7 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	prosthetic_name = "cyberbrain"
 	prosthetic_icon = "brain-prosthetic"
-	part = "brain"
+	body_part = "brain"
 
 	var/mob/living/carbon/brain/brainmob = null
 

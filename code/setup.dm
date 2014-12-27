@@ -525,7 +525,7 @@
 #define DROWSY		"drowsy"
 
 ///////////////////ORGAN DEFINES///////////////////
-
+#define PROCESS_ACCURACY 10
 #define ORGAN_CUT_AWAY 1
 #define ORGAN_GAUZED 2
 #define ORGAN_ATTACHABLE 4
@@ -537,6 +537,10 @@
 #define ORGAN_SALVED 512
 #define ORGAN_DEAD 1024
 #define ORGAN_MUTATED 2048
+// Tissue status flags
+#define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
+#define TISSUE_INFECTS 2     // Tissue can become infected.
+#define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
@@ -802,8 +806,3 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY 1
 #define SUIT_SENSOR_VITAL 2
 #define SUIT_SENSOR_TRACKING 3
-
-// Status flags
-#define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
-#define TISSUE_INFECTS 2     // Tissue can become infected.
-#define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.

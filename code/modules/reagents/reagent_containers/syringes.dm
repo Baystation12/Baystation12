@@ -234,7 +234,7 @@
 		if(istype(target, /mob/living/carbon/human))
 
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
-			var/datum/organ/external/affecting = target:get_organ(target_zone)
+			var/obj/item/organ/external/affecting = target:get_organ(target_zone)
 
 			if (!affecting)
 				return

@@ -14,7 +14,7 @@
 		return 0
 
 	// Check if they have a functioning hand.
-	var/datum/organ/external/E = user.organs_by_name["l_hand"]
+	var/obj/item/organ/external/E = user.organs_by_name["l_hand"]
 	if(E && !(E.status & ORGAN_DESTROYED))
 		return 1
 
@@ -70,7 +70,7 @@
 		target.apply_effect(3, WEAKEN, armour)
 
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	user.visible_message("<span class='warning'>[user] [pick(attack_verb)] [target] in the [affecting.display_name]!</span>")
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
@@ -103,7 +103,7 @@
 	damage = 0
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
 
 	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
@@ -142,7 +142,7 @@
 	if(!(zone in list("l_leg", "r_leg", "l_foot", "r_foot", "groin")))
 		return 0
 
-	var/datum/organ/external/E = user.organs_by_name["l_foot"]
+	var/obj/item/organ/external/E = user.organs_by_name["l_foot"]
 	if(E && !(E.status & ORGAN_DESTROYED))
 		return 1
 
@@ -153,7 +153,7 @@
 	return 0
 
 /datum/unarmed_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
 
 	attack_damage = Clamp(attack_damage, 1, 5)
@@ -182,7 +182,7 @@
 		return 0
 
 	if (target.lying && !user.lying)
-		var/datum/organ/external/E = user.organs_by_name["l_foot"]
+		var/obj/item/organ/external/E = user.organs_by_name["l_foot"]
 		if(E && !(E.status & ORGAN_DESTROYED))
 			return 1
 
@@ -193,7 +193,7 @@
 		return 0
 
 /datum/unarmed_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
 	var/organ = affecting.display_name
 
 	attack_damage = Clamp(attack_damage, 1, 5)
@@ -220,7 +220,7 @@
 
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/skill = user.skills["combat"]
-	var/datum/organ/external/affecting = target.get_organ(zone)
+	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
 	if(!skill)	skill = 1
 	attack_damage = Clamp(attack_damage, 1, 5)

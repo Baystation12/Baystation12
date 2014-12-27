@@ -241,11 +241,11 @@
 	space_chance = 100
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
 					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
-					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud", 
-					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", 
-					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in", 
-					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla", 
-					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", 
+					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud",
+					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo",
+					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in",
+					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
+					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
 					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
 
 /datum/language/gutter
@@ -282,7 +282,7 @@
 	var/mob/living/carbon/M = other
 	if(!istype(M))
 		return 1
-	if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+	if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 		return 1
 
 	return 0
