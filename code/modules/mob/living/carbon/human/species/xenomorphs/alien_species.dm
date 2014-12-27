@@ -86,17 +86,38 @@
 	if(!environment) return
 
 	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
-		if(H.health >= H.maxHealth - H.getCloneLoss())
+		if(!regenerate(H))
 			var/datum/organ/internal/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
 			P.stored_plasma += weeds_plasma_rate
 			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
-		else
-			H.adjustBruteLoss(-weeds_heal_rate)
-			H.adjustFireLoss(-weeds_heal_rate)
-			H.adjustOxyLoss(-weeds_heal_rate)
-			H.adjustToxLoss(-weeds_heal_rate)
 	..()
 
+/datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
+	var/heal_rate = weeds_heal_rate
+	var/mend_prob = 10
+	if (!H.resting)
+		heal_rate = weeds_heal_rate / 3
+		mend_prob = 1
+
+	//first heal damages
+	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
+		H.adjustBruteLoss(-heal_rate)
+		H.adjustFireLoss(-heal_rate)
+		H.adjustOxyLoss(-heal_rate)
+		H.adjustToxLoss(-heal_rate)
+		if (prob(5))
+			H << "\green You feel a soothing sensation come over you..."
+		return 1
+	
+	//next mend broken bones, approx 10 ticks each
+	for(var/datum/organ/external/E in H.bad_external_organs)
+		if (E.status & ORGAN_BROKEN)
+			if (prob(mend_prob))
+				if (E.mend_fracture())
+					H << "\green You feel something mend itself inside your [E.display_name]."
+			return 1
+	
+	return 0
 
 /datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
 	H.AddInfectionImages()
