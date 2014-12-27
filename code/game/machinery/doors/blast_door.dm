@@ -162,9 +162,9 @@
 // Your classical blast door, found almost everywhere.
 obj/machinery/door/blast/regular
 	icon_state_open = "pdoor0"
-	icon_state_opening = "pdoorc1"
+	icon_state_opening = "pdoorc0"
 	icon_state_closed = "pdoor1"
-	icon_state_closing = "pdoorc0"
+	icon_state_closing = "pdoorc1"
 	icon_state = "pdoor1"
 	maxhealth = 600
 
@@ -172,8 +172,8 @@ obj/machinery/door/blast/regular
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
 /obj/machinery/door/blast/shutters
 	icon_state_open = "shutter0"
-	icon_state_opening = "shutterc1"
+	icon_state_opening = "shutterc0"
 	icon_state_closed = "shutter1"
-	icon_state_closing = "shutterc0"
+	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
 	emitter_resistance = 20
