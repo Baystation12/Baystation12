@@ -26,7 +26,6 @@
 		G.assailant = src
 		G.layer = 20
 		G.affecting = target
-		target.grabbed_by += G
 		G.synch()
 		target.LAssailant = src
 
@@ -57,7 +56,7 @@
 			continue
 		turfs += thisturf
 	var/turf/target_turf = pick(turfs)
-	src.dir = get_dir(src, target_turf)
+	src.set_dir(get_dir(src, target_turf))
 	src.loc = target_turf
 
 	hibernate = 1
@@ -194,7 +193,7 @@
 					if(!next_turf.CanPass(src, next_turf))
 						break
 					src.loc = next_turf
-					src.dir = get_dir(src, target_mob)
+					src.set_dir(get_dir(src, target_mob))
 					next_turf = get_step(src, get_dir(next_turf,target_mob))
 					num_turfs--
 
@@ -234,7 +233,7 @@
 					if(!next_turf.CanPass(src, next_turf))
 						break
 					src.loc = next_turf
-					src.dir = get_dir(src, target_mob)
+					src.set_dir(get_dir(src, target_mob))
 					next_turf = get_step(src, get_dir(next_turf,target_turf))
 					num_turfs--
 	else if(G)

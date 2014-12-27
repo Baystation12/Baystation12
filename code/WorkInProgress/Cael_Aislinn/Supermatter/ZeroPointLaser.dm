@@ -34,7 +34,7 @@
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 	return 1
 
 /obj/machinery/zero_point_emitter/New()
@@ -98,7 +98,7 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
-		A.dir = src.dir
+		A.set_dir(src.dir)
 		switch(dir)
 			if(NORTH)
 				A.yo = 20

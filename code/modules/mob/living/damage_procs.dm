@@ -8,7 +8,7 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/used_weapon = null)
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/used_weapon = null, var/sharp = 0, var/edge = 0)
 	if(!damage || (blocked >= 2))	return 0
 	switch(damagetype)
 		if(BRUTE)
@@ -52,7 +52,8 @@
 		if(AGONY)
 			halloss += effect // Useful for objects that cause "subdual" damage. PAIN!
 		if(IRRADIATE)
-			radiation += max((((effect - (effect*(getarmor(null, "rad")/100))))/(blocked+1)),0)//Rads auto check armor
+			var/rad_protection = getarmor(null, "rad")/100
+			radiation += max((1-rad_protection)*effect/(blocked+1),0)//Rads auto check armor
 		if(STUTTER)
 			if(status_flags & CANSTUN) // stun is usually associated with stutter
 				stuttering = max(stuttering,(effect/(blocked+1)))

@@ -6,6 +6,13 @@
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
+#define IDEAL_GAS_ENTROPY_CONSTANT 	1164	//(mol^3 * s^3) / (kg^3 * L). Equal to (4*pi/(avrogadro's number * planck's constant)^2)^(3/2) / (avrogadro's number * 1000 Liters per m^3).
+
+//radiation constants
+#define STEFAN_BOLTZMANN_CONSTANT		5.6704e-8	//W/(m^2*K^4)
+#define COSMIC_RADIATION_TEMPERATURE	3.15		//K
+#define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
+#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -13,19 +20,21 @@
 #define O2STANDARD 0.21
 #define N2STANDARD 0.79
 
+#define MOLES_PHORON_VISIBLE 0.7 //Moles in a standard cell after which phoron is visible
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
 #define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN_DAMAGE are for when a mob breathes poisonous air
 #define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN_DAMAGE are for when a mob breathes poisonous air
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
+//Amount of air to take a from a tile
 #define BREATH_PERCENTAGE BREATH_VOLUME/CELL_VOLUME
-	//Amount of air to take a from a tile
+//Amount of air needed before pass out/suffocation commences
 #define HUMAN_NEEDED_OXYGEN	MOLES_CELLSTANDARD*BREATH_PERCENTAGE*0.16
-	//Amount of air needed before pass out/suffocation commences
+
+#define SOUND_MINIMUM_PRESSURE 10
 
 // Pressure limits.
 #define HAZARD_HIGH_PRESSURE 550	//This determins at what pressure the ultra-high pressure red icon is displayed. (This one is set as a constant)
@@ -35,10 +44,10 @@
 
 #define TEMPERATURE_DAMAGE_COEFFICIENT 1.5	//This is used in handle_temperature_damage() for humans, and in reagents that affect body temperature. Temperature damage is multiplied by this amount.
 #define BODYTEMP_AUTORECOVERY_DIVISOR 12 //This is the divisor which handles how much of the temperature difference between the current body temperature and 310.15K (optimal temperature) humans auto-regenerate each tick. The higher the number, the slower the recovery. This is applied each tick, so long as the mob is alive.
-#define BODYTEMP_AUTORECOVERY_MINIMUM 10 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
+#define BODYTEMP_AUTORECOVERY_MINIMUM 1 //Minimum amount of kelvin moved toward 310.15K per tick. So long as abs(310.15 - bodytemp) is more than 50.
 #define BODYTEMP_COLD_DIVISOR 6 //Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is lower than their body temperature. Make it lower to lose bodytemp faster.
 #define BODYTEMP_HEAT_DIVISOR 6 //Similar to the BODYTEMP_AUTORECOVERY_DIVISOR, but this is the divisor which is applied at the stage that follows autorecovery. This is the divisor which comes into play when the human's loc temperature is higher than their body temperature. Make it lower to gain bodytemp faster.
-#define BODYTEMP_COOLING_MAX 30 //The maximum number of degrees that your body can cool in 1 tick, when in a cold area.
+#define BODYTEMP_COOLING_MAX -30 //The maximum number of degrees that your body can cool in 1 tick, when in a cold area.
 #define BODYTEMP_HEATING_MAX 30 //The maximum number of degrees that your body can heat up in 1 tick, when in a hot area.
 
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
@@ -64,9 +73,6 @@
 #define MAX_HIGH_PRESSURE_DAMAGE 4	//This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
 #define LOW_PRESSURE_DAMAGE 2 	//The amounb of damage someone takes when in a low pressure area (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
 
-#define PRESSURE_SUIT_REDUCTION_COEFFICIENT 0.8 //This is how much (percentual) a suit with the flag STOPSPRESSUREDMAGE reduces pressure.
-#define PRESSURE_HEAD_REDUCTION_COEFFICIENT 0.4 //This is how much (percentual) a helmet/hat with the flag STOPSPRESSUREDMAGE reduces pressure.
-
 // Doors!
 #define DOOR_CRUSH_DAMAGE 10
 
@@ -81,41 +87,30 @@
 #define REAGENTS_EFFECT_MULTIPLIER REAGENTS_METABOLISM / 0.4
 
 
+//Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05
-	//Minimum ratio of air that must move to/from a tile to suspend group processing
+//Minimum amount of air that has to move before a group processing can be suspended
 #define MINIMUM_AIR_TO_SUSPEND MOLES_CELLSTANDARD*MINIMUM_AIR_RATIO_TO_SUSPEND
-	//Minimum amount of air that has to move before a group processing can be suspended
 
 #define MINIMUM_MOLES_DELTA_TO_MOVE MOLES_CELLSTANDARD*MINIMUM_AIR_RATIO_TO_SUSPEND //Either this must be active
 #define MINIMUM_TEMPERATURE_TO_MOVE	T20C+100 		  //or this (or both, obviously)
 
+//Minimum temperature difference before group processing is suspended
 #define MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND 0.012
 #define MINIMUM_TEMPERATURE_DELTA_TO_SUSPEND 4
-	//Minimum temperature difference before group processing is suspended
+//Minimum temperature difference before the gas temperatures are just set to be equal
 #define MINIMUM_TEMPERATURE_DELTA_TO_CONSIDER 0.5
-	//Minimum temperature difference before the gas temperatures are just set to be equal
-
 #define MINIMUM_TEMPERATURE_FOR_SUPERCONDUCTION		T20C+10
 #define MINIMUM_TEMPERATURE_START_SUPERCONDUCTION	T20C+200
 
+//Must be between 0 and 1. Values closer to 1 equalize temperature faster
+//Should not exceed 0.4 else strange heat flow occur
 #define FLOOR_HEAT_TRANSFER_COEFFICIENT 0.4
 #define WALL_HEAT_TRANSFER_COEFFICIENT 0.0
 #define DOOR_HEAT_TRANSFER_COEFFICIENT 0.0
 #define SPACE_HEAT_TRANSFER_COEFFICIENT 0.2 //a hack to partly simulate radiative heat
 #define OPEN_HEAT_TRANSFER_COEFFICIENT 0.4
 #define WINDOW_HEAT_TRANSFER_COEFFICIENT 0.1 //a hack for now
-	//Must be between 0 and 1. Values closer to 1 equalize temperature faster
-	//Should not exceed 0.4 else strange heat flow occur
-
-/*
-#define FIRE_MINIMUM_TEMPERATURE_TO_SPREAD	150+T0C
-#define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
-#define FIRE_SPREAD_RADIOSITY_SCALE		0.85
-#define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt phoron into the tile
-#define FIRE_GROWTH_RATE			40000 //For small fires
-
-#define WATER_BOIL_TEMP 393 */
 
 // Fire Damage
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
@@ -133,8 +128,10 @@
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
-//Used to be used by FEA
-//var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
+//XGM gas flags
+#define XGM_GAS_FUEL 1
+#define XGM_GAS_OXIDIZER 2
+#define XGM_GAS_CONTAMINANT 4
 
 #define TANK_LEAK_PRESSURE		(30.*ONE_ATMOSPHERE)	// Tank starts leaking
 #define TANK_RUPTURE_PRESSURE	(40.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere
@@ -142,22 +139,12 @@
 #define TANK_FRAGMENT_PRESSURE	(50.*ONE_ATMOSPHERE) // Boom 3x3 base explosion
 #define TANK_FRAGMENT_SCALE	    (10.*ONE_ATMOSPHERE) // +1 for each SCALE kPa aboe threshold
 								// was 2 atm
-
-//This was a define, but I changed it to a variable so it can be changed in-game.(kept the all-caps definition because... code...) -Errorage
-var/MAX_EXPLOSION_RANGE = 14
-//#define MAX_EXPLOSION_RANGE		14					// Defaults to 12 (was 8) -- TLE
-
 #define HUMAN_STRIP_DELAY 40 //takes 40ds = 4s to strip someone.
-
 #define ALIEN_SELECT_AFK_BUFFER 1 // How many minutes that a person can be AFK before not being allowed to be an alien.
-
 #define NORMPIPERATE 30					//pipe-insulation rate divisor
 #define HEATPIPERATE 8					//heat-exch pipe insulation
-
 #define FLOWFRAC 0.99				// fraction of gas transfered per process
-
 #define SHOES_SLOWDOWN -1.0			// How much shoes slow you down by default. Negative values speed you up
-
 
 //ITEM INVENTORY SLOT BITMASKS
 #define SLOT_OCLOTHING 1
@@ -174,24 +161,21 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
 #define SLOT_TWOEARS 8192
-#define SLOT_LEGS = 16384
+#define SLOT_TIE 16384
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
                                 //To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
 #define TABLEPASS 2			// can pass by a table or rack
-
-#define MASKINTERNALS	8	// mask allows internals
-//#define SUITSPACE		8	// suit protects against space
-
+#define NOBLUDGEON  4       // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
+#define AIRTIGHT	8	    // functions with internals
 #define USEDELAY 	16		// 1 second extra delay on use (Can be used once every 2s)
-#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
 #define NOSHIELD	32		// weapon not affected by shield
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
-#define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
 #define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
+#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
 
 #define GLASSESCOVERSEYES	1024
 #define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
@@ -220,19 +204,20 @@ var/MAX_EXPLOSION_RANGE = 14
 #define PASSBLOB	8
 
 //turf-only flags
-#define NOJAUNT		1
-
+#define NOJAUNT		1 //This is used in literally one place, turf.dm, to block ethereal jaunt.
 
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
-#define HIDEGLOVES		1	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
-#define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
-#define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
-#define HIDEFACE	8	//APPLIES ONLY TO HELMETS/MASKS!! Dictates whether we appear as unknown.
+//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDEGLOVES		1
+#define HIDESUITSTORAGE	2
+#define HIDEJUMPSUIT	4
+#define HIDESHOES		8
+#define HIDETAIL 		16
+//APPLIES ONLY TO HELMETS/MASKS!!
+#define HIDEMASK	1
+#define HIDEEARS	2	//headsets and such
+#define HIDEEYES	4	//glasses
+#define HIDEFACE	8	//Dictates whether we appear as unknown.
 
 //slots
 #define slot_back 1
@@ -256,26 +241,29 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_legcuffed 19
 #define slot_r_ear 20
 #define slot_legs 21
+#define slot_tie 22
 
 //Cant seem to find a mob bitflags area other than the powers one
 
 // bitflags for clothing parts
 #define HEAD			1
-#define UPPER_TORSO		2
-#define LOWER_TORSO		4
-#define LEG_LEFT		8
-#define LEG_RIGHT		16
-#define LEGS			24
-#define FOOT_LEFT		32
-#define FOOT_RIGHT		64
-#define FEET			96
-#define ARM_LEFT		128
-#define ARM_RIGHT		256
-#define ARMS			384
-#define HAND_LEFT		512
-#define HAND_RIGHT		1024
-#define HANDS			1536
-#define FULL_BODY		2047
+#define FACE			2
+#define EYES			4
+#define UPPER_TORSO		8
+#define LOWER_TORSO		16
+#define LEG_LEFT		32
+#define LEG_RIGHT		64
+#define LEGS			96
+#define FOOT_LEFT		128
+#define FOOT_RIGHT		256
+#define FEET			384
+#define ARM_LEFT		512
+#define ARM_RIGHT		1024
+#define ARMS			1536
+#define HAND_LEFT		2048
+#define HAND_RIGHT		4096
+#define HANDS			6144
+#define FULL_BODY		8191
 
 // bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection()
@@ -293,7 +281,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define THERMAL_PROTECTION_HAND_LEFT	0.025
 #define THERMAL_PROTECTION_HAND_RIGHT	0.025
 
-
 //bitflags for mutations
 	// Extra powers:
 #define SHADOW			(1<<10)	// shadow teleportation (create in/out portals anywhere) (25%)
@@ -306,11 +293,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SHIELD			(1<<17)	// shielding from all projectile attacks (30%)
 #define SHOCKWAVE		(1<<18)	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
 #define ELECTRICITY		(1<<19)	// ability to shoot electric attacks (15%)
-
-
-// String identifiers for associative list lookup
-
-// mob/var/list/mutations
 
 #define STRUCDNASIZE 27
 #define UNIDNASIZE 13
@@ -325,7 +307,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HUSK			7
 #define NOCLONE			8
 
-
 	// Extra powers:
 #define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
 #define HEAL			10 	// healing people with hands
@@ -339,8 +320,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SHIELD			18 	// shielding from all projectile attacks (30%)
 #define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
 #define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
-
-	//2spooky
 #define SKELETON 29
 #define PLANT 30
 
@@ -394,8 +373,6 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SHOCK	8
 #define SAFE	16
 
-#define ENGINE_EJECT_Z	3
-
 //metal, glass, rod stacks
 #define MAX_STACK_AMOUNT_METAL	50
 #define MAX_STACK_AMOUNT_GLASS	50
@@ -407,21 +384,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define GAS_CO2	(1 << 3)
 #define GAS_N2O	(1 << 4)
 
-
-var/list/accessable_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
-//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
-//(Exceptions: extended, sandbox and nuke) -Errorage
-//Was list("3" = 30, "4" = 70).
-//Spacing should be a reliable method of getting rid of a body -- Urist.
-//Go away Urist, I'm restoring this to the longer list. ~Errorage
-
 #define IS_MODE_COMPILED(MODE) (ispath(text2path("/datum/game_mode/"+(MODE))))
-
-
-var/list/global_mutations = list() // list of hidden mutation things
-
-//Bluh shields
-
 
 //Damage things	//TODO: merge these down to reduce on defines
 //Way to waste perfectly good damagetype names (BRUTE) on this... If you were really worried about case sensitivity, you could have just used lowertext(damagetype) in the proc...
@@ -459,8 +422,6 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
 #define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
 
-var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
-
 //Grab levels
 #define GRAB_PASSIVE	1
 #define GRAB_AGGRESSIVE	2
@@ -474,29 +435,11 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
+//click cooldowns, in tenths of a second
+
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
-
-var/list/liftable_structures = list(\
-
-	/obj/machinery/autolathe, \
-	/obj/machinery/constructable_frame, \
-	/obj/machinery/hydroponics, \
-	/obj/machinery/computer, \
-	/obj/machinery/optable, \
-	/obj/structure/dispenser, \
-	/obj/machinery/gibber, \
-	/obj/machinery/microwave, \
-	/obj/machinery/vending, \
-	/obj/machinery/seed_extractor, \
-	/obj/machinery/space_heater, \
-	/obj/machinery/recharge_station, \
-	/obj/machinery/flasher, \
-	/obj/structure/stool, \
-	/obj/structure/closet, \
-	/obj/machinery/photocopier, \
-	/obj/structure/filingcabinet, \
-	/obj/structure/reagent_dispensers, \
-	/obj/machinery/portable_atmospherics/canister)
 
 //A set of constants used to determine which type of mute an admin wishes to apply:
 //Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO etc = (MUTE_IC << 1)
@@ -533,9 +476,6 @@ var/list/liftable_structures = list(\
 #define SEE_INVISIBLE_LEVEL_TWO 45	//Used by some other stuff in code. It's really poorly organized.
 #define INVISIBILITY_LEVEL_TWO 45	//Used by some other stuff in code. It's really poorly organized.
 
-#define INVISIBILITY_SPIRIT 50
-#define SEE_SPIRITS 50
-
 #define INVISIBILITY_OBSERVER 60
 #define SEE_INVISIBLE_OBSERVER 60
 
@@ -555,15 +495,6 @@ var/list/liftable_structures = list(\
 //some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26	//Used to trigger removal from a processing list
 
-// Reference list for disposal sort junctions. Set the sortType variable on disposal sort junctions to
-// the index of the sort department that you want. For example, sortType set to 2 will reroute all packages
-// tagged for the Cargo Bay.
-var/list/TAGGERLOCATIONS = list("Disposals",
-	"Cargo Bay", "QM Office", "Engineering", "CE Office",
-	"Atmospherics", "Security", "HoS Office", "Medbay",
-	"CMO Office", "Chemistry", "Research", "RD Office",
-	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
-	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics","Drone Fabrication")
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
@@ -628,10 +559,9 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_SPAWN			4096
 #define R_MOD			8192
 #define R_MENTOR		16384
+#define R_HOST			32768
 
-#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
-
-#define R_HOST			65535
+#define R_MAXPERMISSION 32768 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 //Preference toggles
 #define SOUND_ADMINHELP	1
@@ -648,24 +578,28 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
-
+#define SHOW_TYPING 	16384
+#define CHAT_NOICONS	32768
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
-#define BE_TRAITOR		1
-#define BE_OPERATIVE	2
-#define BE_CHANGELING	4
-#define BE_WIZARD		8
-#define BE_MALF			16
-#define BE_REV			32
-#define BE_ALIEN		64
-#define BE_PAI			128
-#define BE_CULTIST		256
-#define BE_MONKEY		512
-#define BE_NINJA		1024
-#define BE_RAIDER		2048
-#define BE_PLANT		4096
+#define BE_TRAITOR    1
+#define BE_OPERATIVE  2
+#define BE_CHANGELING 4
+#define BE_WIZARD     8
+#define BE_MALF       16
+#define BE_REV        32
+#define BE_ALIEN      64
+#define BE_AI         128
+#define BE_CULTIST    256
+#define BE_MONKEY     512
+#define BE_NINJA      1024
+#define BE_RAIDER     2048
+#define BE_PLANT      4096
+#define BE_MUTINEER   8192
+#define BE_PAI        16384
 
+//Not sure if moving this to global.dm would break the defines.
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
 	"Operative" = BE_OPERATIVE,
@@ -674,12 +608,14 @@ var/list/be_special_flags = list(
 	"Malf AI" = BE_MALF,
 	"Revolutionary" = BE_REV,
 	"Xenomorph" = BE_ALIEN,
-	"pAI" = BE_PAI,
+	"Positronic Brain" = BE_AI,
 	"Cultist" = BE_CULTIST,
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
 	"Raider" = BE_RAIDER,
-	"Diona" = BE_PLANT
+	"Diona" = BE_PLANT,
+	"Mutineer" = BE_MUTINEER,
+	"pAI" = BE_PAI
 	)
 
 #define AGE_MIN 17			//youngest a character can be
@@ -716,46 +652,36 @@ var/list/be_special_flags = list(
 #define PULSE_FAST		3	//90-120 bpm
 #define PULSE_2FAST		4	//>120 bpm
 #define PULSE_THREADY	5	//occurs during hypovolemic shock
-//feel free to add shit to lists below
-var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
-var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
-var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
-var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
-
-//proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)
 #define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)
 
-var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
-	"thunder",
-	"ERT",
-	"NUKE"
-	)
-
 //Species flags.
-#define NO_BLOOD 1
-#define NO_BREATHE 2
-#define NO_SCAN 4
-#define NO_PAIN 8
-
-#define HAS_SKIN_TONE 16
-#define HAS_SKIN_COLOR 32
-#define HAS_LIPS 64
-#define HAS_UNDERWEAR 128
-#define HAS_TAIL 256
-
-#define IS_SLOW 512
-#define IS_PLANT 1024
-#define IS_WHITELISTED 2048
-
-#define RAD_ABSORB 4096
-#define REQUIRE_LIGHT 8192
-
-#define IS_SYNTHETIC 16384
+#define NO_BLOOD 1          // Vessel var is not filled with blood, cannot bleed out.
+#define NO_BREATHE 2        // Cannot suffocate or take oxygen loss.
+#define NO_SCAN 4           // Cannot be scanned in a DNA machine/genome-stolen.
+#define NO_PAIN 8           // Cannot suffer halloss/recieves deceptive health indicator
+#define NO_SLIP 16          // Cannot fall over
+#define NO_POISON 32        // Cannot not suffer toxloss
+#define HAS_SKIN_TONE 64    // Skin tone selectable in chargen (0-255)
+#define HAS_SKIN_COLOR 128  // Skin colour selectable in chargen (RGB)
+#define HAS_LIPS 256        // Lips are drawn onto the mob icon (lipstick)
+#define HAS_UNDERWEAR 512   // Underwear is drawn onto the mob icon
+#define IS_PLANT 1024       // Is a treeperson
+#define IS_WHITELISTED 2048 // Must be whitelisted to play
+#define IS_SYNTHETIC 4096   // Is a machine race
+#define HAS_EYE_COLOR 8192  // Eye colour selectable in chargen (RGB)
+#define CAN_JOIN 16384      // Species is selectable in chargen
+#define IS_RESTRICTED 32768 // Is not a core/normally playable species (castes, mutantraces)
 
 //Language flags.
-#define WHITELISTED 1  // Language is available if the speaker is whitelisted.
-#define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+#define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
+#define RESTRICTED 2   		// Language can only be accquired by spawning or an admin.
+#define NONVERBAL 4    		// Language has a significant non-verbal component. Speech is garbled without line-of-sight
+#define SIGNLANG 8     		// Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
+#define HIVEMIND 16         // Broadcast to all mobs with this language.
+#define NONGLOBAL 32		// Do not add to general languages list
+#define INNATE 64			// All mobs can be assumed to speak and understand this language (audible emotes)
+#define NO_TALK_MSG 128		// Do not show the "\The [speaker] talks into \the [radio]" message
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
@@ -770,3 +696,109 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
+
+/*
+	Germs and infections
+*/
+
+#define GERM_LEVEL_AMBIENT		110		//maximum germ level you can reach by standing still
+#define GERM_LEVEL_MOVE_CAP		200		//maximum germ level you can reach by running around
+
+#define INFECTION_LEVEL_ONE		100
+#define INFECTION_LEVEL_TWO		500
+#define INFECTION_LEVEL_THREE	1000
+
+/*
+	Shuttles
+*/
+
+// these define the time taken for the shuttle to get to SS13
+// and the time before it leaves again
+#define SHUTTLE_PREPTIME 				300	// 5 minutes = 300 seconds - after this time, the shuttle departs centcom and cannot be recalled
+#define SHUTTLE_LEAVETIME 				180	// 3 minutes = 180 seconds - the duration for which the shuttle will wait at the station after arriving
+#define SHUTTLE_TRANSIT_DURATION		300	// 5 minutes = 300 seconds - how long it takes for the shuttle to get to the station
+#define SHUTTLE_TRANSIT_DURATION_RETURN 120	// 2 minutes = 120 seconds - for some reason it takes less time to come back, go figure.
+
+//Shuttle moving status
+#define SHUTTLE_IDLE		0
+#define SHUTTLE_WARMUP		1
+#define SHUTTLE_INTRANSIT	2
+
+//Ferry shuttle processing status
+#define IDLE_STATE		0
+#define WAIT_LAUNCH		1
+#define FORCE_LAUNCH	2
+#define WAIT_ARRIVE		3
+#define WAIT_FINISH		4
+
+//computer3 error codes, move lower in the file when it passes dev -Sayu
+ #define PROG_CRASH      1  // Generic crash
+ #define MISSING_PERIPHERAL  2  // Missing hardware
+ #define BUSTED_ASS_COMPUTER  4  // Self-perpetuating error.  BAC will continue to crash forever.
+ #define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
+ #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
+ #define NETWORK_FAILURE  32
+
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+#define IS_SKRELL 3
+#define IS_UNATHI 4
+#define IS_XENOS 5
+
+#define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
+
+/*
+	Atmos Machinery
+*/
+#define MAX_SIPHON_FLOWRATE		2500	//L/s	This can be used to balance how fast a room is siphoned. Anything higher than CELL_VOLUME has no effect.
+#define MAX_SCRUBBER_FLOWRATE	200		//L/s	Max flow rate when scrubbing from a turf.
+
+//These balance how easy or hard it is to create huge pressure gradients with pumps and filters. Lower values means it takes longer to create large pressures differences.
+//Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
+#define ATMOS_PUMP_EFFICIENCY	2.5
+#define ATMOS_FILTER_EFFICIENCY	2.5
+
+//will not bother pumping or filtering if the gas source as fewer than this amount of moles, to help with performance.
+#define MINUMUM_MOLES_TO_PUMP	0.01
+#define MINUMUM_MOLES_TO_FILTER	0.1
+
+//The flow rate/effectiveness of various atmos devices is limited by their internal volume, so for many atmos devices these will control maximum flow rates in L/s
+#define ATMOS_DEFAULT_VOLUME_PUMP	200	//L
+#define ATMOS_DEFAULT_VOLUME_FILTER	200	//L
+#define ATMOS_DEFAULT_VOLUME_MIXER	200	//L
+#define ATMOS_DEFAULT_VOLUME_PIPE	70	//L
+
+// Reagent metabolism defines.
+#define FOOD_METABOLISM 0.4
+#define ALCOHOL_METABOLISM 0.1
+
+//Chemistry
+
+#define CHEM_SYNTH_ENERGY	500	//How much energy does it take to synthesize 1 unit of chemical, in J
+
+
+#define SPEED_OF_LIGHT 3e8 //not exact but hey!
+#define SPEED_OF_LIGHT_SQ 9e+16
+#define FIRE_DAMAGE_MODIFIER 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
+#define AIR_DAMAGE_MODIFIER 2.025 //More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
+#define INFINITY 1.#INF
+#define BACKGROUND_ENABLED 0    // The default value for all uses of set background. Set background can cause gradual lag and is recommended you only turn this on if necessary.
+								// 1 will enable set background. 0 will disable set background.
+
+//Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
+#define MAX_MESSAGE_LEN 1024
+#define MAX_PAPER_MESSAGE_LEN 3072
+#define MAX_BOOK_MESSAGE_LEN 9216
+#define MAX_NAME_LEN 26
+
+// Event defines.
+#define EVENT_LEVEL_MUNDANE 1
+#define EVENT_LEVEL_MODERATE 2
+#define EVENT_LEVEL_MAJOR 3
+
+// Suit sensor levels
+#define SUIT_SENSOR_OFF 0
+#define SUIT_SENSOR_BINARY 1
+#define SUIT_SENSOR_VITAL 2
+#define SUIT_SENSOR_TRACKING 3

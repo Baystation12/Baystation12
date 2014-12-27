@@ -54,7 +54,7 @@
 			return
 		cmd_admin_irc_pm()
 		return
-		
+
 
 
 	//Logs all hrefs
@@ -105,12 +105,12 @@
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
-	if(connection != "seeker")					//Invalid connection type.
+	if(!(connection in list("seeker", "web")))					//Invalid connection type.
 		return null
 	if(byond_version < MIN_CLIENT_VERSION)		//Out of date client.
 		return null
 
-	if(IsGuestKey(key))
+	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		del(src)
 		return
@@ -159,6 +159,7 @@
 	log_client_to_db()
 
 	send_resources()
+	nanomanager.send_resources(src)
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
@@ -254,8 +255,7 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
-//	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
-	
+
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
@@ -298,5 +298,7 @@
 		'icons/spideros_icons/sos_11.png',
 		'icons/spideros_icons/sos_12.png',
 		'icons/spideros_icons/sos_13.png',
-		'icons/spideros_icons/sos_14.png'
+		'icons/spideros_icons/sos_14.png',
+		'html/images/ntlogo.png',
+		'html/images/talisman.png'
 		)

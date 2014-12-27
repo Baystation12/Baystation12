@@ -5,7 +5,12 @@
 	item_state = "balaclava"
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
+	body_parts_covered = FACE
 	w_class = 2
+	sprite_sheets = list(
+		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
+		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		)
 
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"
@@ -15,6 +20,10 @@
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
 	w_class = 2
+	sprite_sheets = list(
+		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
+		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
+		)
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
@@ -23,6 +32,7 @@
 	item_state = "luchag"
 	flags = FPRINT|TABLEPASS|BLOCKHAIR
 	flags_inv = HIDEFACE
+	body_parts_covered = HEAD|FACE
 	w_class = 2
 	siemens_coefficient = 3.0
 

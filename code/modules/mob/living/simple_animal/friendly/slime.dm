@@ -41,7 +41,8 @@
 			if (!( AM.anchored ))
 				var/t = get_dir(src, AM)
 				if (istype(AM, /obj/structure/window))
-					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
+					var/obj/structure/window/W = AM
+					if(W.is_full_window())
 						for(var/obj/structure/window/win in get_step(AM,t))
 							now_pushing = 0
 							return
@@ -70,7 +71,7 @@
 	overlays += "aslime-:33"
 
 
-/mob/living/simple_animal/slime/adult/Die()
+/mob/living/simple_animal/slime/adult/death()
 	var/mob/living/simple_animal/slime/S1 = new /mob/living/simple_animal/slime (src.loc)
 	S1.icon_state = "[src.colour] baby slime"
 	S1.icon_living = "[src.colour] baby slime"

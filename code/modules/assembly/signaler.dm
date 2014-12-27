@@ -3,9 +3,7 @@
 	desc = "Used to remotely activate devices."
 	icon_state = "signaller"
 	item_state = "signaler"
-	m_amt = 1000
-	g_amt = 200
-	w_amt = 100
+	matter = list("metal" = 1000, "glass" = 200, "waste" = 100)
 	origin_tech = "magnets=1"
 	wires = WIRE_RECEIVE | WIRE_PULSE | WIRE_RADIO_PULSE | WIRE_RADIO_RECEIVE
 
@@ -15,6 +13,7 @@
 	var/frequency = 1457
 	var/delay = 0
 	var/airlock_wire = null
+	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
@@ -120,9 +119,8 @@
 
 
 	pulse(var/radio = 0)
-		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
-			var/obj/machinery/door/airlock/A = src.loc
-			A.pulse(src.airlock_wire)
+		if(src.connected && src.wires)
+			connected.Pulse(src)
 		else if(holder)
 			holder.process_activation(src, 1, 0)
 		else

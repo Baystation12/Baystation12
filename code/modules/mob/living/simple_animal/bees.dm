@@ -13,12 +13,11 @@
 	var/obj/machinery/apiary/parent
 	pass_flags = PASSTABLE
 	turns_per_move = 6
-	var/obj/machinery/hydroponics/my_hydrotray
+	var/obj/machinery/portable_atmospherics/hydroponics/my_hydrotray
 
 /mob/living/simple_animal/bee/New(loc, var/obj/machinery/apiary/new_parent)
 	..()
 	parent = new_parent
-	verbs -= /atom/movable/verb/pull
 
 /mob/living/simple_animal/bee/Del()
 	if(parent)
@@ -41,7 +40,7 @@
 				if(worn_helmet)
 					sting_prob -= min(worn_helmet.armor["bio"],30) // Is your helmet sealed? I can't get to 30% of your body.
 				if( prob(sting_prob) && (M.stat == CONSCIOUS || (M.stat == UNCONSCIOUS && prob(25))) ) // Try to sting! If you're not moving, think about stinging.
-					M.apply_damage(min(strength,2)+mut, BRUTE) // Stinging. The more mutated I am, the harder I sting.
+					M.apply_damage(min(strength,2)+mut, BRUTE, sharp=1) // Stinging. The more mutated I am, the harder I sting.
 					M.apply_damage((round(feral/10,1)*(max((round(strength/20,1)),1)))+toxic, TOX) // Bee venom based on how angry I am and how many there are of me!
 					M << "\red You have been stung!"
 					M.flash_pain()
@@ -155,10 +154,10 @@
 				turns_per_move = rand(1,3)
 			else if(feral < 0)
 				turns_since_move = 0
-			else if(!my_hydrotray || my_hydrotray.loc != src.loc || !my_hydrotray.planted || my_hydrotray.dead || !my_hydrotray.myseed)
-				var/obj/machinery/hydroponics/my_hydrotray = locate() in src.loc
+			else if(!my_hydrotray || my_hydrotray.loc != src.loc || my_hydrotray.dead || !my_hydrotray.seed)
+				var/obj/machinery/portable_atmospherics/hydroponics/my_hydrotray = locate() in src.loc
 				if(my_hydrotray)
-					if(my_hydrotray.planted && !my_hydrotray.dead && my_hydrotray.myseed)
+					if(!my_hydrotray.dead && my_hydrotray.seed)
 						turns_per_move = rand(20,50)
 					else
 						my_hydrotray = null

@@ -18,7 +18,7 @@
 			BB = new projectile_type(src)
 		pixel_x = rand(-10.0, 10)
 		pixel_y = rand(-10.0, 10)
-		dir = pick(cardinal)
+		set_dir(pick(cardinal))
 
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -41,6 +41,10 @@
 		else
 			user << "\blue There is no bullet in the casing to inscribe anything into."
 
+/obj/item/ammo_casing/examine(mob/user)
+	..()
+	if (!BB)
+		user << "This one is spent."
 
 //Boxes of ammo
 /obj/item/ammo_magazine
@@ -51,7 +55,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
-	m_amt = 50000
+	matter = list("metal" = 50000)
 	throwforce = 2
 	w_class = 2.0
 	throw_speed = 4

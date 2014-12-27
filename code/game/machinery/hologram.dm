@@ -33,6 +33,9 @@ var/const/HOLOPAD_MODE = 0
 	name = "\improper AI holopad"
 	desc = "It's a floor-mounted device for projecting holographic images. It is activated remotely."
 	icon_state = "holopad0"
+
+	layer = TURF_LAYER+0.1 //Preventing mice and drones from sneaking under them.
+
 	var/mob/living/silicon/ai/master//Which AI, if any, is controlling the object? Only one AI may control a hologram at any time.
 	var/last_request = 0 //to prevent request spam. ~Carn
 	var/holo_range = 5 // Change to change how far the AI can move away from the holopad before deactivating.
@@ -78,13 +81,28 @@ var/const/HOLOPAD_MODE = 0
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
-/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb)
+/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	if(M&&hologram&&master)//Master is mostly a safety in case lag hits or something.
-		if(!master.say_understands(M))//The AI will be able to understand most mobs talking through the holopad.
-			text = stars(text)
+		if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
+			if(speaking)
+				text = speaking.scramble(text)
+			else
+				text = stars(text)
 		var/name_used = M.GetVoice()
 		//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-		var/rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
+		var/rendered
+		if(speaking)
+			rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
+		else
+			rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
+		master.show_message(rendered, 2)
+	return
+
+/obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
+	if(M && hologram && master)
+		//var/name_used = M.GetVoice()
+		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
+		//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 		master.show_message(rendered, 2)
 	return
 
@@ -98,7 +116,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.SetLuminosity(2)	//hologram lighting
 	SetLuminosity(2)			//pad lighting
 	icon_state = "holopad1"
-	A.current = src
+	A.holo = src
 	master = A//AI is the master.
 	use_power = 2//Active power usage.
 	return 1
@@ -106,8 +124,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/proc/clear_holo()
 //	hologram.SetLuminosity(0)//Clear lighting.	//handled by the lighting controller when its ower is deleted
 	del(hologram)//Get rid of hologram.
-	if(master.current == src)
-		master.current = null
+	if(master.holo == src)
+		master.holo = null
 	master = null//Null the master, since no-one is using it now.
 	SetLuminosity(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 	icon_state = "holopad0"
@@ -149,12 +167,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	idle_power_usage = 5
 	active_power_usage = 100
 	var/obj/effect/overlay/hologram//The projection itself. If there is one, the instrument is on, off otherwise.
-
-/obj/machinery/hologram/power_change()
-	if (powered())
-		stat &= ~NOPOWER
-	else
-		stat |= ~NOPOWER
 
 //Destruction procs.
 /obj/machinery/hologram/ex_act(severity)

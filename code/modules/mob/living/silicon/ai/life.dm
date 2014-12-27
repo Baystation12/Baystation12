@@ -35,6 +35,9 @@
 			// Gain Power
 			adjustOxyLoss(-1)
 
+		// Handle EMP-stun
+		handle_stunned()
+
 		//stage = 1
 		//if (istype(src, /mob/living/silicon/ai)) // Are we not sure what we are?
 		var/blind = 0
@@ -163,12 +166,21 @@
 									src << "Receiving control information from APC."
 									sleep(2)
 									//bring up APC dialog
+									apc_override = 1
 									theAPC.attack_ai(src)
+									apc_override = 0
 									src:aiRestorePowerRoutine = 3
 									src << "Here are your current laws:"
 									src.show_laws()
 							sleep(50)
 							theAPC = null
+
+	regular_hud_updates()
+	switch(src.sensor_mode)
+		if (SEC_HUD)
+			process_sec_hud(src,0,src.eyeobj)
+		if (MED_HUD)
+			process_med_hud(src,0,src.eyeobj)
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)
@@ -179,3 +191,7 @@
 			health = 100 - getOxyLoss() - getToxLoss() - getBruteLoss()
 		else
 			health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
+
+/mob/living/silicon/ai/rejuvenate()
+	..()
+	add_ai_verbs(src)

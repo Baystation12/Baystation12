@@ -11,9 +11,12 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10.0
-	m_amt = 90
+	matter = list("metal" = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
-	var/max_water = 50
+	
+	var/spray_particles = 6
+	var/spray_amount = 2	//units of liquid per particle
+	var/max_water = 120
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
@@ -28,8 +31,9 @@
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
-	m_amt = 0
-	max_water = 30
+	max_water = 60
+	spray_particles = 6
+	spray_amount = 2
 	sprite_name = "miniFE"
 
 /obj/item/weapon/extinguisher/New()
@@ -38,11 +42,9 @@
 	R.my_atom = src
 	R.add_reagent("water", max_water)
 
-/obj/item/weapon/extinguisher/examine()
-	set src in usr
-
-	usr << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
-	..()
+/obj/item/weapon/extinguisher/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
 	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
@@ -57,8 +59,8 @@
 
 	if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(src,target) <= 1)
 		var/obj/o = target
-		o.reagents.trans_to(src, 50)
-		user << "\blue \The [src] is now refilled"
+		var/amount = o.reagents.trans_to(src, 50)
+		user << "\blue You fill [src] with [amount] units of the contents of [target]."
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 
@@ -78,19 +80,27 @@
 
 		if(usr.buckled && isobj(usr.buckled) && !usr.buckled.anchored )
 			spawn(0)
+				var/obj/structure/stool/bed/chair/C = null
+				if(istype(usr.buckled, /obj/structure/stool/bed/chair))
+					C = usr.buckled
 				var/obj/B = usr.buckled
 				var/movementdirection = turn(direction,180)
+				if(C)	C.propelled = 4
 				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(1)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				if(C)	C.propelled = 3
 				sleep(1)
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(1)
 				B.Move(get_step(usr,movementdirection), movementdirection)
-				sleep(1)
-				B.Move(get_step(usr,movementdirection), movementdirection)
+				if(C)	C.propelled = 2
 				sleep(2)
 				B.Move(get_step(usr,movementdirection), movementdirection)
+				if(C)	C.propelled = 1
 				sleep(2)
 				B.Move(get_step(usr,movementdirection), movementdirection)
+				if(C)	C.propelled = 0
 				sleep(3)
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(3)
@@ -104,25 +114,30 @@
 
 		var/list/the_targets = list(T,T1,T2)
 
-		for(var/a=0, a<5, a++)
+		for(var/a=0, a < spray_particles, a++)
 			spawn(0)
 				var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(src) )
 				var/turf/my_target = pick(the_targets)
-				var/datum/reagents/R = new/datum/reagents(5)
+				var/datum/reagents/R = new/datum/reagents(spray_amount)
 				if(!W) return
 				W.reagents = R
 				R.my_atom = W
 				if(!W || !src) return
-				src.reagents.trans_to(W,1)
+				src.reagents.trans_to(W, spray_amount)
+			
 				for(var/b=0, b<5, b++)
 					step_towards(W,my_target)
-					if(!W) return
+					if(!W || !W.reagents) return
 					W.reagents.reaction(get_turf(W))
 					for(var/atom/atm in get_turf(W))
-						if(!W) return
+						if(!W)
+							return
+						if(!W.reagents)
+							break
 						W.reagents.reaction(atm)
 					if(W.loc == my_target) break
 					sleep(2)
+				W.delete()
 
 		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			user.inertia_dir = get_dir(target, user)

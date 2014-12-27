@@ -5,18 +5,19 @@
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
 	w_class = 2.0 //It should be tiny! -Agouri
-	m_amt = 50
-	g_amt = 50
+
+	matter = list("metal" = 50,"glass" = 50)
 
 	req_access = list(access_engine)
 
+	var/secure = 0 //if set, then wires will be randomized and bolts will drop if the door is broken
 	var/list/conf_access = null
 	var/one_access = 0 //if set to 1, door would receive req_one_access instead of req_access
 	var/last_configurator = null
 	var/locked = 1
 
 	attack_self(mob/user as mob)
-		if (!ishuman(user) && !istype(user,/mob/living/silicon/robot/drone))
+		if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
 			return ..(user)
 
 		var/mob/living/carbon/human/H = user
@@ -59,7 +60,7 @@
 
 	Topic(href, href_list)
 		..()
-		if (usr.stat || usr.restrained() || !ishuman(usr))
+		if (usr.stat || usr.restrained() || (!ishuman(usr) && !istype(usr,/mob/living/silicon)))
 			return
 		if (href_list["close"])
 			usr << browse(null, "window=airlock")
@@ -109,3 +110,9 @@
 					if (!conf_access.len)
 						conf_access = null
 
+
+/obj/item/weapon/airlock_electronics/secure
+	name = "secure airlock electronics"
+	desc = "designed to be somewhat more resistant to hacking than standard electronics."
+	origin_tech = "programming=2"
+	secure = 1

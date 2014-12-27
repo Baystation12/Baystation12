@@ -28,6 +28,8 @@
 		del(src)
 		return
 
+	affecting.grabbed_by += src
+
 	hud = new /obj/screen/grab(src)
 	hud.icon_state = "reinforce"
 	hud.name = "reinforce grab"
@@ -191,10 +193,22 @@
 		return
 
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		if( (ishuman(user) && (FAT in user.mutations) && ismonkey(affecting) ) || ( isalien(user) && iscarbon(affecting) ) )
+		var/can_eat
+
+		if((FAT in user.mutations) && ismonkey(affecting))
+			can_eat = 1
+		else
+			var/mob/living/carbon/human/H = user
+			if(istype(H) && iscarbon(affecting) && H.species.gluttonous)
+				if(H.species.gluttonous == 2)
+					can_eat = 2
+				else if(!ishuman(affecting))
+					can_eat = 1
+
+		if(can_eat)
 			var/mob/living/carbon/attacker = user
 			user.visible_message("<span class='danger'>[user] is attempting to devour [affecting]!</span>")
-			if(istype(user, /mob/living/carbon/alien/humanoid/hunter))
+			if(can_eat == 2)
 				if(!do_mob(user, affecting)||!do_after(user, 30)) return
 			else
 				if(!do_mob(user, affecting)||!do_after(user, 100)) return

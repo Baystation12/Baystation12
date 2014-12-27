@@ -1,12 +1,8 @@
-
 // Allows you to monitor messages that passes the server.
 
-
-
-
 /obj/machinery/computer/message_monitor
-	name = "Message Monitor Console"
-	desc = "Used to Monitor the crew's messages, that are sent via PDA. Can also be used to view Request Console messages."
+	name = "messaging monitor console"
+	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
 	icon_state = "comm_logs"
 	var/hack_icon = "comm_logsc"
 	var/normal_icon = "comm_logs"
@@ -19,14 +15,14 @@
 	var/noserver = "<span class='alert'>ALERT: No server detected.</span>"
 	var/incorrectkey = "<span class='warning'>ALERT: Incorrect decryption key!</span>"
 	var/defaultmsg = "<span class='notice'>Welcome. Please select an option.</span>"
-	var/rebootmsg = "<span class='warning'>%$&(£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
+	var/rebootmsg = "<span class='warning'>%$&(Â£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!</span>"
 	//Computer properties
 	var/screen = 0 		// 0 = Main menu, 1 = Message Logs, 2 = Hacked screen, 3 = Custom Message
 	var/hacking = 0		// Is it being hacked into by the AI/Cyborg
 	var/emag = 0		// When it is emagged.
 	var/message = "<span class='notice'>System bootup complete. Please select an option.</span>"	// The message that shows on the main menu.
 	var/auth = 0 // Are they authenticated?
-	var/optioncount = 7
+	var/optioncount = 8
 	// Custom Message Properties
 	var/customsender = "System Administrator"
 	var/obj/item/device/pda/customrecepient = null
@@ -36,6 +32,7 @@
 
 /obj/machinery/computer/message_monitor/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))
+		..()
 		return
 	if(!istype(user))
 		return
@@ -52,7 +49,7 @@
 				var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
 				MK.loc = src.loc
 				// Will help make emagging the console not so easy to get away with.
-				MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
+				MK.info += "<br><br><font color='red'>Â£%@%(*$%&(Â£&?*(%&Â£/{}</font>"
 				spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
 				message = rebootmsg
 			else
@@ -122,6 +119,7 @@
 					dat += "<dd><A href='?src=\ref[src];clearr=1'>&#09;[++i]. Clear Request Console Logs</a><br></dd>"
 					dat += "<dd><A href='?src=\ref[src];pass=1'>&#09;[++i]. Set Custom Key</a><br></dd>"
 					dat += "<dd><A href='?src=\ref[src];msg=1'>&#09;[++i]. Send Admin Message</a><br></dd>"
+					dat += "<dd><A href='?src=\ref[src];spam=1'>&#09;[++i]. Modify Spam Filter</a><br></dd>"
 			else
 				for(var/n = ++i; n <= optioncount; n++)
 					dat += "<dd><font color='blue'>&#09;[n]. ---------------</font><br></dd>"
@@ -239,6 +237,19 @@
 				dat += {"<tr><td width = '5%'><center><A href='?src=\ref[src];deleter=\ref[rc]' style='color: rgb(255,0,0)'>X</a></center></td><td width='15%'>[rc.send_dpt]</td>
 				<td width='15%'>[rc.rec_dpt]</td><td width='300px'>[rc.message]</td><td width='15%'>[rc.stamp]</td><td width='15%'>[rc.id_auth]</td><td width='15%'>[rc.priority]</td></tr>"}
 			dat += "</table>"
+
+		//Spam filter modification
+		if(5)
+			dat += "<center><A href='?src=\ref[src];back=1'>Back</a> - <A href='?src=\ref[src];refresh=1'>Refresh</center><hr>"
+			var/index = 0
+			for(var/token in src.linkedServer.spamfilter)
+				index++
+				if(index > 3000)
+					break
+				dat += "<dd>[index]&#09; <a href='?src=\ref[src];deltoken=[index]'>\[[token]\]</a><br></dd>"
+			dat += "<hr>"
+			if (linkedServer.spamfilter.len < linkedServer.spamfilter_limit)
+				dat += "<a href='?src=\ref[src];addtoken=1'>Add token</a><br>"
 
 
 	dat += "</body>"
@@ -443,16 +454,7 @@
 						//Sender isn't faking as someone who exists
 						if(isnull(PDARec))
 							src.linkedServer.send_pda_message("[customrecepient.owner]", "[customsender]","[custommessage]")
-							if (!customrecepient.silent)
-								playsound(customrecepient.loc, 'sound/machines/twobeep.ogg', 50, 1)
-								for (var/mob/O in hearers(3, customrecepient.loc))
-									O.show_message(text("\icon[customrecepient] *[customrecepient.ttone]*"))
-								if( customrecepient.loc && ishuman(customrecepient.loc) )
-									var/mob/living/carbon/human/H = customrecepient.loc
-									H << "\icon[customrecepient] <b>Message from [customsender] ([customjob]), </b>\"[custommessage]\" (<a href='byond://?src=\ref[src];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
-								log_pda("[usr] (PDA: [customsender]) sent \"[custommessage]\" to [customrecepient.owner]")
-								customrecepient.overlays.Cut()
-								customrecepient.overlays += image('icons/obj/pda.dmi', "pda-r")
+							customrecepient.new_message(customsender, customsender, customjob, custommessage)
 						//Sender is faking as someone who exists
 						else
 
@@ -462,16 +464,7 @@
 							if(!customrecepient.conversations.Find("\ref[PDARec]"))
 								customrecepient.conversations.Add("\ref[PDARec]")
 
-							if (!customrecepient.silent)
-								playsound(customrecepient.loc, 'sound/machines/twobeep.ogg', 50, 1)
-								for (var/mob/O in hearers(3, customrecepient.loc))
-									O.show_message(text("\icon[customrecepient] *[customrecepient.ttone]*"))
-								if( customrecepient.loc && ishuman(customrecepient.loc) )
-									var/mob/living/carbon/human/H = customrecepient.loc
-									H << "\icon[customrecepient] <b>Message from [PDARec.owner] ([customjob]), </b>\"[custommessage]\" (<a href='byond://?src=\ref[customrecepient];choice=Message;skiprefresh=1;target=\ref[PDARec]'>Reply</a>)"
-								log_pda("[usr] (PDA: [PDARec.owner]) sent \"[custommessage]\" to [customrecepient.owner]")
-								customrecepient.overlays.Cut()
-								customrecepient.overlays += image('icons/obj/pda.dmi', "pda-r")
+							customrecepient.new_message(PDARec, custommessage)
 						//Finally..
 						ResetMessage()
 
@@ -484,6 +477,26 @@
 					src.screen = 4
 
 			//usr << href_list["select"]
+
+		if(href_list["spam"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				if(auth)
+					src.screen = 5
+
+		if(href_list["addtoken"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				src.linkedServer.spamfilter += input(usr,"Enter text you want to be filtered out","Token creation") as text|null
+
+		if(href_list["deltoken"])
+			if(src.linkedServer == null || (src.linkedServer.stat & (NOPOWER|BROKEN)))
+				message = noserver
+			else
+				var/tokennum = text2num(href_list["deltoken"])
+				src.linkedServer.spamfilter.Cut(tokennum,tokennum+1)
 
 		if (href_list["back"])
 			src.screen = 0
@@ -505,5 +518,5 @@
 					if(!isnull(server.decryptkey))
 						info = "<center><h2>Daily Key Reset</h2></center><br>The new message monitor key is '[server.decryptkey]'.<br>Please keep this a secret and away from the clown.<br>If necessary, change the password to a more secure one."
 						info_links = info
-						overlays += "paper_words"
+						icon_state = "paper_words"
 						break

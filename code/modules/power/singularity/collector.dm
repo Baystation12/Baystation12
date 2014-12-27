@@ -8,11 +8,11 @@ var/global/list/rad_collectors = list()
 	icon_state = "ca"
 	anchored = 0
 	density = 1
-	directwired = 1
 	req_access = list(access_engine_equip)
 //	use_power = 0
 	var/obj/item/weapon/tank/phoron/P = null
 	var/last_power = 0
+	var/last_power_new = 0
 	var/active = 0
 	var/locked = 0
 	var/drainratio = 1
@@ -26,13 +26,17 @@ var/global/list/rad_collectors = list()
 	..()
 
 /obj/machinery/power/rad_collector/process()
+	//so that we don't zero out the meter if the SM is processed first.
+	last_power = last_power_new
+	last_power_new = 0
+
+
 	if(P)
-		if(P.air_contents.phoron <= 0)
+		if(P.air_contents.gas["phoron"] == 0)
 			investigate_log("<font color='red'>out of fuel</font>.","singulo")
-			P.air_contents.phoron = 0
 			eject()
 		else
-			P.air_contents.adjust(tx = -0.001*drainratio)
+			P.air_contents.adjust_gas("phoron", -0.001*drainratio)
 	return
 
 
@@ -42,7 +46,7 @@ var/global/list/rad_collectors = list()
 			toggle_power()
 			user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 			"You turn the [src.name] [active? "on":"off"].")
-			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.phoron/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.gas["phoron"]/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
 			return
 		else
 			user << "\red The controls are locked!"
@@ -51,10 +55,7 @@ var/global/list/rad_collectors = list()
 
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/analyzer))
-		user << "\blue The [W.name] detects that [last_power]W were recently produced."
-		return 1
-	else if(istype(W, /obj/item/weapon/tank/phoron))
+	if(istype(W, /obj/item/weapon/tank/phoron))
 		if(!src.anchored)
 			user << "\red The [src] needs to be secured to the floor first."
 			return 1
@@ -65,6 +66,7 @@ var/global/list/rad_collectors = list()
 		src.P = W
 		W.loc = src
 		update_icons()
+		return 1
 	else if(istype(W, /obj/item/weapon/crowbar))
 		if(P && !src.locked)
 			eject()
@@ -82,6 +84,7 @@ var/global/list/rad_collectors = list()
 			connect_to_network()
 		else
 			disconnect_from_network()
+		return 1
 	else if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 		if (src.allowed(user))
 			if(active)
@@ -92,11 +95,13 @@ var/global/list/rad_collectors = list()
 				user << "\red The controls can only be locked when the [src] is active"
 		else
 			user << "\red Access denied!"
-			return 1
-	else
-		..()
 		return 1
+	return ..()
 
+/obj/machinery/power/rad_collector/examine(mob/user)
+	if (..(user, 3))
+		user << "The meter indicates that \the [src] is collecting [last_power] W."
+		return 1
 
 /obj/machinery/power/rad_collector/ex_act(severity)
 	switch(severity)
@@ -121,9 +126,9 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/proc/receive_pulse(var/pulse_strength)
 	if(P && active)
 		var/power_produced = 0
-		power_produced = P.air_contents.phoron*pulse_strength*20
+		power_produced = P.air_contents.gas["phoron"]*pulse_strength*20
 		add_avail(power_produced)
-		last_power = power_produced
+		last_power_new = power_produced
 		return
 	return
 

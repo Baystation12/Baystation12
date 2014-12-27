@@ -140,20 +140,19 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	//the amount of phoron pulled in each update is relative to the field strength, with 50T (max field strength) = 100% of area covered by the field
 	//at minimum strength, 0.25% of the field volume is pulled in per update (?)
 	//have a max of 1000 moles suspended
-	if(held_phoron.phoron < transfer_ratio * 1000)
+	if(held_phoron.gas["phoron"] < transfer_ratio * 1000)
 		var/moles_covered = environment.return_pressure()*volume_covered/(environment.temperature * R_IDEAL_GAS_EQUATION)
 		//world << "\blue moles_covered: [moles_covered]"
 		//
 		var/datum/gas_mixture/gas_covered = environment.remove(moles_covered)
 		var/datum/gas_mixture/phoron_captured = new /datum/gas_mixture()
 		//
-		phoron_captured.phoron = round(gas_covered.phoron * transfer_ratio)
+		phoron_captured.gas["phoron"] = round(gas_covered.gas["phoron"] * transfer_ratio)
 		//world << "\blue[phoron_captured.phoron] moles of phoron captured"
 		phoron_captured.temperature = gas_covered.temperature
 		phoron_captured.update_values()
 		//
-		gas_covered.phoron -= phoron_captured.phoron
-		gas_covered.update_values()
+		gas_covered.adjust_gas("phoron", -phoron_captured.gas["phoron"])
 		//
 		held_phoron.merge(phoron_captured)
 		//
@@ -171,7 +170,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 
 	//change held phoron temp according to energy levels
 	//SPECIFIC_HEAT_TOXIN
-	if(mega_energy > 0 && held_phoron.phoron)
+	if(mega_energy > 0 && held_phoron.gas["phoron"])
 		var/heat_capacity = held_phoron.heat_capacity()//200 * number of phoron moles
 		if(heat_capacity > 0.0003)	//formerly MINIMUM_HEAT_CAPACITY
 			held_phoron.temperature = (heat_capacity + mega_energy * 35000)/heat_capacity
@@ -179,7 +178,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	//if there is too much phoron in the field, lose some
 	/*if( held_phoron.phoron > (MOLES_CELLSTANDARD * 7) * (50 / field_strength) )
 		LosePhoron()*/
-	if(held_phoron.phoron > 1)
+	if(held_phoron.gas["phoron"] > 1)
 		//lose a random amount of phoron back into the air, increased by the field strength (want to switch this over to frequency eventually)
 		var/loss_ratio = rand() * (0.05 + (0.05 * 50 / field_strength))
 		//world << "lost [loss_ratio*100]% of held phoron"
@@ -187,16 +186,16 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 		var/datum/gas_mixture/phoron_lost = new
 		phoron_lost.temperature = held_phoron.temperature
 		//
-		phoron_lost.phoron = held_phoron.phoron * loss_ratio
+		phoron_lost.gas["phoron"] = held_phoron.gas["phoron"] * loss_ratio
 		//phoron_lost.update_values()
-		held_phoron.phoron -= held_phoron.phoron * loss_ratio
+		held_phoron.gas["phoron"] -= held_phoron.gas["phoron"] * loss_ratio
 		//held_phoron.update_values()
 		//
 		environment.merge(phoron_lost)
 		radiation += loss_ratio * mega_energy * 0.1
 		mega_energy -= loss_ratio * mega_energy * 0.1
 	else
-		held_phoron.phoron = 0
+		held_phoron.gas["phoron"] = null
 		//held_phoron.update_values()
 
 	//handle some reactants formatting

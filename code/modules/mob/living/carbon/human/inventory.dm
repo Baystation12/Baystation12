@@ -73,6 +73,8 @@
 			return has_organ("chest")
 		if(slot_in_backpack)
 			return 1
+		if(slot_tie)
+			return 1
 
 /mob/living/carbon/human/u_equip(obj/item/W as obj)
 	if(!W)	return 0
@@ -85,6 +87,8 @@
 		if(W)
 			success = 1
 		wear_suit = null
+		if(W.flags_inv & HIDESHOES)
+			update_inv_shoes(0)
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
@@ -108,8 +112,10 @@
 		update_inv_glasses()
 	else if (W == head)
 		head = null
-		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
+		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR)|| (W.flags_inv & HIDEMASK))
 			update_hair(0)	//rebuild hair
+			update_inv_ears(0)
+			update_inv_wear_mask(0)
 		success = 1
 		update_inv_head()
 	else if (W == l_ear)
@@ -133,6 +139,7 @@
 		success = 1
 		if((W.flags & BLOCKHAIR) || (W.flags & BLOCKHEADHAIR))
 			update_hair(0)	//rebuild hair
+			update_inv_ears(0)
 		if(internal)
 			if(internals)
 				internals.icon_state = "internal0"
@@ -197,13 +204,6 @@
 	if(!istype(W)) return
 	if(!has_organ_for_slot(slot)) return
 
-	if(W == src.l_hand)
-		src.l_hand = null
-		update_inv_l_hand() //So items actually disappear from hands.
-	else if(W == src.r_hand)
-		src.r_hand = null
-		update_inv_r_hand()
-
 	W.loc = src
 	switch(slot)
 		if(slot_back)
@@ -214,6 +214,7 @@
 			src.wear_mask = W
 			if((wear_mask.flags & BLOCKHAIR) || (wear_mask.flags & BLOCKHEADHAIR))
 				update_hair(redraw_mob)	//rebuild hair
+				update_inv_ears(0)
 			W.equipped(src, slot)
 			update_inv_wear_mask(redraw_mob)
 		if(slot_handcuffed)
@@ -267,8 +268,10 @@
 			update_inv_gloves(redraw_mob)
 		if(slot_head)
 			src.head = W
-			if((head.flags & BLOCKHAIR) || (head.flags & BLOCKHEADHAIR))
+			if((head.flags & BLOCKHAIR) || (head.flags & BLOCKHEADHAIR) || (head.flags_inv & HIDEMASK))
 				update_hair(redraw_mob)	//rebuild hair
+				update_inv_ears(0)
+				update_inv_wear_mask(0)
 			if(istype(W,/obj/item/clothing/head/kitty))
 				W.update_icon(src)
 			W.equipped(src, slot)
@@ -279,6 +282,8 @@
 			update_inv_shoes(redraw_mob)
 		if(slot_wear_suit)
 			src.wear_suit = W
+			if(wear_suit.flags_inv & HIDESHOES)
+				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform)
@@ -301,9 +306,19 @@
 			if(src.get_active_hand() == W)
 				src.u_equip(W)
 			W.loc = src.back
+		if(slot_tie)
+			var/obj/item/clothing/under/uniform = src.w_uniform
+			uniform.attackby(W,src)
 		else
 			src << "\red You are trying to eqip this item to an unsupported inventory slot. How the heck did you manage that? Stop it..."
 			return
+
+	if((W == src.l_hand) && (slot != slot_l_hand))
+		src.l_hand = null
+		update_inv_l_hand() //So items actually disappear from hands.
+	else if((W == src.r_hand) && (slot != slot_r_hand))
+		src.r_hand = null
+		update_inv_r_hand()
 
 	W.layer = 20
 
@@ -392,7 +407,7 @@
 				if (! target.w_uniform )
 					del(src)
 			if("internal")
-				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && istype(target.back, /obj/item/weapon/tank) && !( target.internal )) ) && !( target.internal )))
+				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && (istype(target.back, /obj/item/weapon/tank) || istype(target.belt, /obj/item/weapon/tank) || istype(target.s_store, /obj/item/weapon/tank)) && !( target.internal )) ) && !( target.internal )))
 					del(src)
 
 	var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel", "sensor", "internal", "tie")
@@ -671,20 +686,39 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_handcuffed
 			if (target.handcuffed)
 				strip_item = target.handcuffed
+			else if (source != target && ishuman(source))
+				//check that we are still grabbing them
+				var/grabbing = 0
+				for (var/obj/item/weapon/grab/G in target.grabbed_by)
+					if (G.loc == source && G.state >= GRAB_AGGRESSIVE)
+						grabbing = 1
+						break
+				if (!grabbing)
+					slot_to_process = null
+					source << "\red Your grasp was broken before you could restrain [target]!"
+
 		if("legcuff")
 			slot_to_process = slot_legcuffed
 			if (target.legcuffed)
 				strip_item = target.legcuffed
 		if("splints")
-			for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-				var/datum/organ/external/o = target.get_organ(organ)
-				if (o && o.status & ORGAN_SPLINTED)
-					var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
-					o.status &= ~ORGAN_SPLINTED
-					if (W)
-						W.loc = target.loc
-						W.layer = initial(W.layer)
-						W.add_fingerprint(source)
+			var/can_reach_splints = 1
+			if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
+				var/obj/item/clothing/suit/space/suit = target.wear_suit
+				if(suit.supporting_limbs && suit.supporting_limbs.len)
+					source << "You cannot remove the splints - [target]'s [suit] is supporting some of the breaks."
+					can_reach_splints = 0
+
+			if(can_reach_splints)
+				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+					var/datum/organ/external/o = target.get_organ(organ)
+					if (o && o.status & ORGAN_SPLINTED)
+						var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
+						o.status &= ~ORGAN_SPLINTED
+						if (W)
+							W.loc = target.loc
+							W.layer = initial(W.layer)
+							W.add_fingerprint(source)
 		if("CPR")
 			if ((target.health > config.health_threshold_dead && target.health < config.health_threshold_crit))
 				var/suff = min(target.getOxyLoss(), 5) //Pre-merge level, less healing, more prevention of dieing.

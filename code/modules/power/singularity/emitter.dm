@@ -1,4 +1,4 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
+#define EMITTER_DAMAGE_POWER_TRANSFER 450 //used to transfer power to containment field generators
 
 /obj/machinery/power/emitter
 	name = "Emitter"
@@ -8,14 +8,17 @@
 	anchored = 0
 	density = 1
 	req_access = list(access_engine_equip)
+	var/id = null
 
-	use_power = 0
-	idle_power_usage = 10
-	active_power_usage = 300
+	use_power = 0	//uses powernet power, not APC power
+	active_power_usage = 30000	//30 kW laser. I guess that means 30 kJ per shot.
 
 	var/active = 0
 	var/powered = 0
 	var/fire_delay = 100
+	var/max_burst_delay = 100
+	var/min_burst_delay = 20
+	var/burst_shots = 3
 	var/last_shot = 0
 	var/shot_number = 0
 	var/state = 0
@@ -30,14 +33,13 @@
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 	return 1
 
 /obj/machinery/power/emitter/initialize()
 	..()
 	if(state == 2 && anchored)
 		connect_to_network()
-		src.directwired = 1
 
 /obj/machinery/power/emitter/Del()
 	message_admins("Emitter deleted at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -51,9 +53,11 @@
 	else
 		icon_state = "emitter"
 
-
 /obj/machinery/power/emitter/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
+	activate(user)
+
+/obj/machinery/power/emitter/proc/activate(mob/user as mob)
 	if(state == 2)
 		if(!powernet)
 			user << "The emitter isn't connected to a wire."
@@ -101,8 +105,8 @@
 		return
 	if(((src.last_shot + src.fire_delay) <= world.time) && (src.active == 1))
 
-		if(!active_power_usage || avail(active_power_usage))
-			add_load(active_power_usage)
+		var/actual_load = draw_power(active_power_usage)
+		if(actual_load >= active_power_usage) //does the laser have enough power to shoot?
 			if(!powered)
 				powered = 1
 				update_icon()
@@ -115,19 +119,25 @@
 			return
 
 		src.last_shot = world.time
-		if(src.shot_number < 3)
+		if(src.shot_number < burst_shots)
 			src.fire_delay = 2
 			src.shot_number ++
 		else
-			src.fire_delay = rand(20,100)
+			src.fire_delay = rand(min_burst_delay, max_burst_delay)
 			src.shot_number = 0
+
+		//need to calculate the power per shot as the emitter doesn't fire continuously.
+		var/burst_time = (min_burst_delay + max_burst_delay)/2 + 2*(burst_shots-1)
+		var/power_per_shot = active_power_usage * (burst_time/10) / burst_shots
 		var/obj/item/projectile/beam/emitter/A = new /obj/item/projectile/beam/emitter( src.loc )
+		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
+
 		playsound(src.loc, 'sound/weapons/emitter.ogg', 25, 1)
 		if(prob(35))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, src)
 			s.start()
-		A.dir = src.dir
+		A.set_dir(src.dir)
 		switch(dir)
 			if(NORTH)
 				A.yo = 20
@@ -188,7 +198,6 @@
 						state = 2
 						user << "You weld the [src] to the floor."
 						connect_to_network()
-						src.directwired = 1
 				else
 					user << "\red You need more welding fuel to complete this task."
 			if(2)
@@ -202,7 +211,6 @@
 						state = 1
 						user << "You cut the [src] free from the floor."
 						disconnect_from_network()
-						src.directwired = 0
 				else
 					user << "\red You need more welding fuel to complete this task."
 		return

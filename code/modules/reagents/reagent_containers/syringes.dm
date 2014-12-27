@@ -11,11 +11,12 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
-	g_amt = 150
+	matter = list("glass" = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
 	w_class = 1
+	sharp = 1
 	var/mode = SYRINGE_DRAW
 
 	on_reagent_change()
@@ -43,9 +44,6 @@
 	attack_hand()
 		..()
 		update_icon()
-
-	attack_paw()
-		return attack_hand()
 
 	attackby(obj/item/I as obj, mob/user as mob)
 
@@ -127,7 +125,7 @@
 
 			if(SYRINGE_INJECT)
 				if(!reagents.total_volume)
-					user << "\red The Syringe is empty."
+					user << "\red The syringe is empty."
 					return
 				if(istype(target, /obj/item/weapon/implantcase/chem))
 					return
@@ -235,7 +233,7 @@
 
 		if(istype(target, /mob/living/carbon/human))
 
-			var/target_zone = check_zone(user.zone_sel.selecting, target)
+			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
 			var/datum/organ/external/affecting = target:get_organ(target_zone)
 
 			if (!affecting)
@@ -306,9 +304,6 @@
 	attack_hand()
 		..()
 		update_icon()
-
-	attack_paw()
-		return attack_hand()
 
 	attackby(obj/item/I as obj, mob/user as mob)
 
@@ -420,6 +415,17 @@
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/drugs
+	name = "Syringe (drugs)"
+	desc = "Contains aggressive drugs meant for torture."
+	New()
+		..()
+		reagents.add_reagent("space_drugs",  5)
+		reagents.add_reagent("mindbreaker",  5)
+		reagents.add_reagent("cryptobiolin", 5)
 		mode = SYRINGE_INJECT
 		update_icon()
 

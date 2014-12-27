@@ -29,6 +29,7 @@
 		if(/obj/item/weapon/twohanded/fireaxe) del src
 		if(/obj/item/weapon/hatchet) del src
 		if(/obj/item/weapon/melee/energy) del src
+		if(/obj/item/weapon/pickaxe/plasmacutter) del src
 
 		//less effective weapons
 		if(/obj/item/weapon/wirecutters)
@@ -154,7 +155,7 @@
 				return
 	return
 
-/obj/effect/biomass/temperature_expose(null, temp, volume) //hotspots kill biomass
+/obj/effect/biomass/fire_act(null, temp, volume) //hotspots kill biomass
 	del src
 
 

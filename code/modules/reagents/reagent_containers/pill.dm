@@ -9,7 +9,7 @@
 	item_state = "pill"
 	possible_transfer_amounts = null
 	w_class = 1
-	volume = 50
+	volume = 60
 
 	New()
 		..()

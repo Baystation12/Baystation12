@@ -6,9 +6,9 @@
 	icon_living = "alienh_running"
 	icon_dead = "alien_l"
 	icon_gib = "syndicate_gib"
-	response_help = "pokes the"
-	response_disarm = "shoves the"
-	response_harm = "hits the"
+	response_help = "pokes"
+	response_disarm = "shoves"
+	response_harm = "hits"
 	speed = -1
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	maxHealth = 100
@@ -16,7 +16,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	attacktext = "slashes"
+	attacktext = "slashed"
 	a_intent = "harm"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	min_oxy = 0
@@ -87,7 +87,7 @@
 	damage = 30
 	icon_state = "toxin"
 
-/mob/living/simple_animal/hostile/alien/Die()
+/mob/living/simple_animal/hostile/alien/death()
 	..()
 	visible_message("[src] lets out a waning guttural screech, green blood bubbling from its maw...")
 	playsound(src, 'sound/voice/hiss6.ogg', 100, 1)

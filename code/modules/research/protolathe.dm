@@ -12,6 +12,10 @@ Note: Must be placed west/left of and R&D console to function.
 	icon_state = "protolathe"
 	flags = OPENCONTAINER
 
+	use_power = 1
+	idle_power_usage = 30
+	active_power_usage = 5000
+
 	var/max_material_storage = 100000 //All this could probably be done better with a list but meh.
 	var/m_amount = 0.0
 	var/g_amount = 0.0
@@ -20,9 +24,6 @@ Note: Must be placed west/left of and R&D console to function.
 	var/phoron_amount = 0.0
 	var/uranium_amount = 0.0
 	var/diamond_amount = 0.0
-	var/clown_amount = 0.0
-	var/adamantine_amount = 0.0
-
 
 /obj/machinery/r_n_d/protolathe/New()
 	..()
@@ -37,7 +38,7 @@ Note: Must be placed west/left of and R&D console to function.
 	RefreshParts()
 
 /obj/machinery/r_n_d/protolathe/proc/TotalMaterials() //returns the total of all the stored materials. Makes code neater.
-	return m_amount + g_amount + gold_amount + silver_amount + phoron_amount + uranium_amount + diamond_amount + clown_amount
+	return m_amount + g_amount + gold_amount + silver_amount + phoron_amount + uranium_amount + diamond_amount
 
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
@@ -102,12 +103,6 @@ Note: Must be placed west/left of and R&D console to function.
 			if(diamond_amount >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(diamond_amount / G.perunit)
-			if(clown_amount >= 2000)
-				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
-				G.amount = round(clown_amount / G.perunit)
-			if(adamantine_amount >= 2000)
-				var/obj/item/stack/sheet/mineral/adamantine/G = new /obj/item/stack/sheet/mineral/adamantine(src.loc)
-				G.amount = round(adamantine_amount / G.perunit)
 			del(src)
 			return 1
 		else
@@ -140,8 +135,8 @@ Note: Must be placed west/left of and R&D console to function.
 		amount = 0
 	if(amount == 0)
 		return
-	if(amount > stack.amount)
-		amount = stack.amount
+	if(amount > stack.get_amount())
+		amount = stack.get_amount()
 	if(max_material_storage - TotalMaterials() < (amount*stack.perunit))//Can't overfill
 		amount = min(stack.amount, round((max_material_storage-TotalMaterials())/stack.perunit))
 
@@ -172,12 +167,12 @@ Note: Must be placed west/left of and R&D console to function.
 				uranium_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/diamond)
 				diamond_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/clown)
-				clown_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/adamantine)
-				adamantine_amount += amount * 2000
 	else
 		new stacktype(src.loc, amount)
 	busy = 0
 	src.updateUsrDialog()
+	return
+
+//This is to stop these machines being hackable via clicking.
+/obj/machinery/r_n_d/protolathe/attack_hand(mob/user as mob)
 	return

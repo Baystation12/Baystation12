@@ -35,8 +35,9 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -51,12 +52,13 @@
 		"\blue You have made a bloodless incision on [target]'s [affected.display_name] with \the [tool].",)
 		//Could be cleaner ...
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		spread_germs_to_organ(affected, user)
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -74,8 +76,9 @@
 	max_duration = 120
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -89,12 +92,13 @@
 		user.visible_message("\blue [user] has constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
 		affected.clamp()
 		affected.open = 2
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -114,10 +118,9 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if(isslime(target))
-			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -131,10 +134,11 @@
 		user.visible_message("\blue [user] has made an incision on [target]'s [affected.display_name] with \the [tool].", \
 		"\blue You have made an incision on [target]'s [affected.display_name] with \the [tool].",)
 		affected.open = 1
-		affected.status |= ORGAN_BLEEDING
+
+		if(istype(target) && !(target.species.flags & NO_BLOOD))
+			affected.status |= ORGAN_BLEEDING
+
 		affected.createwound(CUT, 1)
-		if (target_zone == "head")
-			target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -145,7 +149,7 @@
 /datum/surgery_step/generic/clamp_bleeders
 	allowed_tools = list(
 	/obj/item/weapon/hemostat = 100,	\
-	/obj/item/weapon/cable_coil = 75, 	\
+	/obj/item/stack/cable_coil = 75, 	\
 	/obj/item/device/assembly/mousetrap = 20
 	)
 
@@ -153,8 +157,9 @@
 	max_duration = 60
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open && (affected.status & ORGAN_BLEEDING)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open && (affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -187,8 +192,9 @@
 	max_duration = 40
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 1 && !(affected.status & ORGAN_BLEEDING)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 1 //&& !(affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -228,13 +234,13 @@
 			msg = "\red [user]'s hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]"
 			self_msg = "\red Your hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]!"
 		user.visible_message(msg, self_msg)
-		target.apply_damage(12, BRUTE, affected)
+		target.apply_damage(12, BRUTE, affected, sharp=1)
 
 /datum/surgery_step/generic/cauterize
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
 	/obj/item/clothing/mask/cigarette = 75,	\
-	/obj/item/weapon/lighter = 50,			\
+	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
 
@@ -242,8 +248,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

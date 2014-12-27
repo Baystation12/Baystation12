@@ -212,12 +212,14 @@ var/list/forbidden_varedit_object_types = list(
 			usr << "If a direction, direction is: [dir]"
 
 	var/class = "text"
+	var/list/choices = list("text","num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
 	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])", "DELETE FROM LIST")
-	else
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default", "DELETE FROM LIST")
+		choices += "marked datum ([holder.marked_datum.type])"
+	if(!isnull(default) && default != "num")
+		choices += "edit associated variable"
+	choices += "DELETE FROM LIST"
+
+	class = input("What kind of variable?","Variable Type",default) as null|anything in choices
 
 	if(!class)
 		return
@@ -264,11 +266,16 @@ var/list/forbidden_varedit_object_types = list(
 		if("marked datum")
 			L[L.Find(variable)] = holder.marked_datum
 
+		if("edit associated variable")
+			var/temp_var = mod_list_add_ass()
+			if(temp_var)
+				L[variable] = temp_var
+
 
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	if(!check_rights(R_VAREDIT))	return
 
-	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state", "mutantrace")
+	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "icon", "icon_state")
 
 	for(var/p in forbidden_varedit_object_types)
 		if( istype(O,p) )

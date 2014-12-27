@@ -8,6 +8,7 @@
 	throw_speed = 3
 	throw_range = 7
 	pressure_resistance = 10
+	layer = OBJ_LAYER - 0.1
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
 
@@ -19,11 +20,6 @@
 				attack_hand(usr, 1, 1)
 
 	return
-
-
-/obj/item/weapon/paper_bin/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if (hasorgans(user))
@@ -80,13 +76,12 @@
 	amount++
 
 
-/obj/item/weapon/paper_bin/examine()
-	set src in oview(1)
-
-	if(amount)
-		usr << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
-	else
-		usr << "<span class='notice'>There are no papers in the bin.</span>"
+/obj/item/weapon/paper_bin/examine(mob/user)
+	if(get_dist(src, user) <= 1)
+		if(amount)
+			user << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+		else
+			user << "<span class='notice'>There are no papers in the bin.</span>"
 	return
 
 

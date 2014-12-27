@@ -30,6 +30,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Advanced ProcCall"
 
 	if(!check_rights(R_DEBUG)) return
+	if(config.debugparanoid && !check_rights(R_ADMIN)) return
 
 	spawn(0)
 		var/target = null
@@ -131,7 +132,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 /client/proc/Cell()
 	set category = "Debug"
-	set name = "Air Status in Location"
+	set name = "Cell"
 	if(!mob)
 		return
 	var/turf/T = mob.loc
@@ -141,11 +142,11 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	var/datum/gas_mixture/env = T.return_air()
 
-	var/t = ""
-	t+= "Nitrogen : [env.nitrogen]\n"
-	t+= "Oxygen : [env.oxygen]\n"
-	t+= "Phoron : [env.phoron]\n"
-	t+= "CO2: [env.carbon_dioxide]\n"
+	var/t = "\blue Coordinates: [T.x],[T.y],[T.z]\n"
+	t += "\red Temperature: [env.temperature]\n"
+	t += "\red Pressure: [env.return_pressure()]kPa\n"
+	for(var/g in env.gas)
+		t += "\blue [g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa\n"
 
 	usr.show_message(t, 1)
 	feedback_add_details("admin_verb","ASL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -310,7 +311,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		else
 			if(alert("Spawn that person a tome?",,"Yes","No")=="Yes")
 				M << "\red You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie. A tome, a message from your new master, appears on the ground."
-				new /obj/item/weapon/tome(M.loc)
+				new /obj/item/weapon/book/tome(M.loc)
 			else
 				M << "\red You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie."
 			var/glimpse=pick("1","2","3","4","5","6","7","8")
@@ -366,9 +367,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Server"
 	set name = "Toggle Aliens"
 
-	aliens_allowed = !aliens_allowed
-	log_admin("[key_name(src)] has turned aliens [aliens_allowed ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned aliens [aliens_allowed ? "on" : "off"].", 0)
+	config.aliens_allowed = !config.aliens_allowed
+	log_admin("[key_name(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].")
+	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
@@ -426,15 +427,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 
 
-/client/proc/cmd_switch_radio()
-	set category = "Debug"
-	set name = "Switch Radio Mode"
-	set desc = "Toggle between normal radios and experimental radios. Have a coder present if you do this."
-
-	GLOBAL_RADIO_TYPE = !GLOBAL_RADIO_TYPE // toggle
-	log_admin("[key_name(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned the experimental radio system [GLOBAL_RADIO_TYPE ? "on" : "off"].", 0)
-	feedback_add_details("admin_verb","SRM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_areatest()
 	set category = "Mapping"
@@ -845,7 +837,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/clothing/mask/cigarette/cigar/havana(M), slot_wear_mask)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/deathsquad/beret(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), slot_belt)
-			M.equip_to_slot_or_del(new /obj/item/weapon/lighter/zippo(M), slot_r_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/flame/lighter/zippo(M), slot_r_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
 
 			var/obj/item/weapon/card/id/W = new(M)
@@ -956,7 +948,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
-				Phoron.air_contents.phoron = 70
+				Phoron.air_contents.gas["phoron"] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.loc = Rad
@@ -966,7 +958,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	for(var/obj/machinery/power/smes/SMES in world)
 		if(SMES.anchored)
-			SMES.chargemode = 1
+			SMES.input_attempt = 1
 
 /client/proc/setup_supermatter_engine()
 	set category = "Debug"
@@ -999,7 +991,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
 
-				Phoron.air_contents.phoron = 29.1154	//This is a full tank if you filled it from a canister
+				Phoron.air_contents.gas["phoron"] = 29.1154	//This is a full tank if you filled it from a canister
 				Rad.P = Phoron
 
 				Phoron.loc = Rad
@@ -1012,7 +1004,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				var/obj/machinery/atmospherics/binary/pump/Pump = M
 				if(Pump.name == "Engine Feed" && response == "Setup Completely")
 					found_the_pump = 1
-					Pump.air2.nitrogen = 3750	//The contents of 2 canisters.
+					Pump.air2.gas["nitrogen"] = 3750	//The contents of 2 canisters.
 					Pump.air2.temperature = 50
 					Pump.air2.update_values()
 				Pump.on=1
@@ -1026,21 +1018,21 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			else if(istype(M,/obj/machinery/power/smes))	//This is the SMES inside the engine room.  We don't need much power.
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
-				SMES.chargemode = 1
-				SMES.chargelevel = 200000
-				SMES.output = 75000
+				SMES.input_attempt = 1
+				SMES.input_level = 200000
+				SMES.output_level = 75000
 
 	if(!found_the_pump && response == "Setup Completely")
 		src << "\red Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter"
 		var/turf/simulated/T = SM.loc
-		T.zone.air.nitrogen += 450
+		T.zone.air.gas["nitrogen"] += 450
 		T.zone.air.temperature = 50
 		T.zone.air.update_values()
 

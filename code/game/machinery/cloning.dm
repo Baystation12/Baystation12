@@ -33,7 +33,7 @@
 	var/datum/dna2/record/buf=null
 	var/read_only = 0 //Well,it's still a floppy disk
 
-/obj/item/weapon/disk/data/proc/Initialize()
+/obj/item/weapon/disk/data/proc/initializeDisk()
 	buf = new
 	buf.dna=new
 
@@ -42,7 +42,7 @@
 	read_only = 1
 
 	New()
-		Initialize()
+		initializeDisk()
 		buf.types=DNA2_BUF_UE|DNA2_BUF_UI
 		//data = "066000033000000000AF00330660FF4DB002690"
 		//data = "0C80C80C80C80C80C8000000000000161FBDDEF" - Farmer Jeff
@@ -57,7 +57,7 @@
 	read_only = 1
 
 	New()
-		Initialize()
+		initializeDisk()
 		buf.types=DNA2_BUF_SE
 		var/list/new_SE=list(0x098,0x3E8,0x403,0x44C,0x39F,0x4B0,0x59D,0x514,0x5FC,0x578,0x5DC,0x640,0x6A4)
 		for(var/i=new_SE.len;i<=DNA_SE_LENGTH;i++)
@@ -72,14 +72,15 @@
 		return
 
 	var/mob/selected = null
-	for(var/mob/M in player_list)
+	for(var/mob/living/M in player_list)
 		//Dead people only thanks!
 		if ((M.stat != 2) || (!M.client))
 			continue
 		//They need a brain!
-		if ((istype(M, /mob/living/carbon/human)) && (M:brain_op_stage >= 4.0))
-			continue
-
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.has_organ["brain"] && !H.has_brain())
+				continue
 		if (M.ckey == find_key)
 			selected = M
 			break
@@ -95,10 +96,9 @@
 	src.read_only = !src.read_only
 	user << "You flip the write-protect tab to [src.read_only ? "protected" : "unprotected"]."
 
-/obj/item/weapon/disk/data/examine()
-	set src in oview(5)
-	..()
-	usr << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
+/obj/item/weapon/disk/data/examine(mob/user)
+	..(user)
+	user << text("The write-protect tab is set to [src.read_only ? "protected" : "unprotected"].")
 	return
 
 //Health Tracker Implant
@@ -121,8 +121,7 @@
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 	src.add_hiddenprint(user)
 	return attack_hand(user)
-/obj/machinery/clonepod/attack_paw(mob/user as mob)
-	return attack_hand(user)
+
 /obj/machinery/clonepod/attack_hand(mob/user as mob)
 	if ((isnull(src.occupant)) || (stat & NOPOWER))
 		return
@@ -183,12 +182,13 @@
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
+	callHook("clone", list(H))
 
 	switch(ticker.mode.name)
 		if("revolution")
 			if((H.mind in ticker.mode:revolutionaries) || (H.mind in ticker.mode:head_revolutionaries))
 				ticker.mode.update_all_rev_icons() //So the icon actually appears
-		if("nuclear emergency")
+		if("mercenary")
 			if(H.mind in ticker.mode.syndicates)
 				ticker.mode.update_all_synd_icons()
 		if("cult")
@@ -208,12 +208,11 @@
 	H.dna.UpdateSE()
 	H.dna.UpdateUI()
 
-	H.f_style = "Shaved"
-	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
-		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
+	H.set_cloned_appearance()
 
-	//for(var/datum/language/L in languages)
-	//	H.add_language(L.name)
+	for(var/datum/language/L in R.languages)
+		H.add_language(L.name)
+	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
 	src.attempting = 0
 	return 1
@@ -303,6 +302,21 @@
 		user.drop_item()
 		del(W)
 		return
+	else if (istype(W, /obj/item/weapon/wrench))
+		if(src.locked && (src.anchored || src.occupant))
+			user << "\red Can not do that while [src] is in use."
+		else
+			if(src.anchored)
+				src.anchored = 0
+				connected.pod1 = null
+				connected = null
+			else
+				src.anchored = 1
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+			if(anchored)
+				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
+			else
+				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
 	else
 		..()
 

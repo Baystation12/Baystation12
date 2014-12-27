@@ -13,10 +13,8 @@
 			survive.owner = H.mind
 			H.mind.objectives += survive
 			H << "<B>You are the survivor! Your own safety matters above all else, trust no one and kill anyone who gets in your way. However, armed as you are, now would be the perfect time to settle that score or grab that pair of yellow gloves you've been eyeing...</B>"
-			var/obj_count = 1
-			for(var/datum/objective/OBJ in H.mind.objectives)
-				H << "<B>Objective #[obj_count]</B>: [OBJ.explanation_text]"
-				obj_count++
+			show_objectives(H.mind)
+
 		var/randomize = pick("taser","egun","laser","revolver","detective","smg","nuclear","deagle","gyrojet","pulse","silenced","cannon","doublebarrel","shotgun","combatshotgun","mateba","smg","uzi","crossbow","saw")
 		switch (randomize)
 			if("taser")

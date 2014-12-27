@@ -122,7 +122,7 @@ client/verb/tcsrun()
 					if(Server.freq_listening.len > 0)
 						signal.frequency = Server.freq_listening[1]
 					else
-						signal.frequency = 1459
+						signal.frequency = PUB_FREQ
 					signal.data["name"] = ""
 					signal.data["job"] = ""
 					signal.data["reject"] = 0

@@ -1,14 +1,18 @@
 /* Toys!
- * ContainsL
+ * Contains:
  *		Balloons
  *		Fake telebeacon
  *		Fake singularity
  *		Toy gun
  *		Toy crossbow
  *		Toy swords
+ *      Toy mechs
  *		Crayons
  *		Snap pops
  *		Water flower
+ *      Therapy dolls
+ *      Toddler doll
+ *      Inflatable duck
  */
 
 
@@ -84,7 +88,7 @@
 		item_state = "balloon-empty"
 
 /obj/item/toy/syndicateballoon
-	name = "syndicate balloon"
+	name = "criminal balloon"
 	desc = "There is a tag on the back that reads \"FUK NT!11!\"."
 	throwforce = 0
 	throw_speed = 4
@@ -109,7 +113,7 @@
  * Fake singularity
  */
 /obj/item/toy/spinningtoy
-	name = "Gravitational Singularity"
+	name = "gravitational singularity"
 	desc = "\"Singulo\" brand spinning toy."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
@@ -126,16 +130,15 @@
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 3.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("glass" = 10,"metal" = 10)
+
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
 
-	examine()
-		set src in usr
-
-		src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
-		..()
+	examine(mob/user)
+		if(..(user, 0))
+			src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
 		return
 
 	attackby(obj/item/toy/ammo/gun/A as obj, mob/user as mob)
@@ -182,8 +185,9 @@
 	icon_state = "357-7"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	w_class = 1.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("metal" = 10,"glass" = 10)
+
 	var/amount_left = 7.0
 
 	update_icon()
@@ -206,11 +210,9 @@
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-	examine()
-		set src in view(2)
-		..()
-		if (bullets)
-			usr << "\blue It is loaded with [bullets] foam darts!"
+	examine(mob/user)
+		if(..(user, 2) && bullets)
+			user << "\blue It is loaded with [bullets] foam darts!"
 
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -400,7 +402,7 @@
 		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 		del(src)
 
-/obj/item/toy/snappop/HasEntered(H as mob|obj)
+/obj/item/toy/snappop/Crossed(H as mob|obj)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(M.m_intent == "run")
@@ -418,7 +420,7 @@
  * Water flower
  */
 /obj/item/toy/waterflower
-	name = "Water Flower"
+	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
 	icon = 'icons/obj/harvest.dmi'
 	icon_state = "sunflower"
@@ -478,11 +480,9 @@
 
 		return
 
-/obj/item/toy/waterflower/examine()
-        set src in usr
-        usr << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
-        ..()
-        return
+/obj/item/toy/waterflower/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
 
 
 /*
@@ -577,6 +577,55 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
+/obj/item/toy/therapy_red
+	name = "red therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is red."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyred"
+	item_state = "egg4" // It's the red egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_purple
+	name = "purple therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is purple."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapypurple"
+	item_state = "egg1" // It's the magenta egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_blue
+	name = "blue therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is blue."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyblue"
+	item_state = "egg2" // It's the blue egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_yellow
+	name = "yellow therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyyellow"
+	item_state = "egg5" // It's the yellow egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_orange
+	name = "orange therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is orange."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyorange"
+	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
+	w_class = 1
+
+/obj/item/toy/therapy_green
+	name = "green therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is green."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapygreen"
+	item_state = "egg3" // It's the green egg in items_left/righthand
+	w_class = 1
+
+
 /* NYET.
 /obj/item/weapon/toddler
 	icon_state = "toddler"
@@ -586,3 +635,14 @@
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 */
+
+//This should really be somewhere else but I don't know where. w/e
+
+/obj/item/weapon/inflatable_duck
+	name = "inflatable duck"
+	desc = "No bother to sink or swim when you can just float!"
+	icon_state = "inflatable"
+	item_state = "inflatable"
+	flags = FPRINT | TABLEPASS
+	icon = 'icons/obj/clothing/belts.dmi'
+	slot_flags = SLOT_BELT

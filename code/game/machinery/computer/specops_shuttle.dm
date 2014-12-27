@@ -12,7 +12,7 @@ var/specops_shuttle_time = 0
 var/specops_shuttle_timeleft = 0
 
 /obj/machinery/computer/specops_shuttle
-	name = "Spec. Ops. Shuttle Console"
+	name = "special operations shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_cent_specops)
@@ -246,9 +246,6 @@ var/specops_shuttle_timeleft = 0
 	return 1
 
 /obj/machinery/computer/specops_shuttle/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/specops_shuttle/attack_paw(var/mob/user as mob)
 	return attack_hand(user)
 
 /obj/machinery/computer/specops_shuttle/attackby(I as obj, user as mob)

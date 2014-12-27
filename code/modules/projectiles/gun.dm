@@ -6,7 +6,7 @@
 	item_state = "gun"
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
-	m_amt = 2000
+	matter = list("metal" = 2000)
 	w_class = 3.0
 	throwforce = 5
 	throw_speed = 4
@@ -53,10 +53,24 @@
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //It's adjacent, is the user, or is on the user's person
 	if(istype(target, /obj/machinery/recharger) && istype(src, /obj/item/weapon/gun/energy))	return//Shouldnt flag take care of this?
-	if(user && user.client && user.client.gun_mode && !(A in target))
-		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
-	else
-		Fire(A,user,params) //Otherwise, fire normally.
+
+
+	//decide whether to aim or shoot normally
+	var/aiming = 0
+	if(user && user.client && !(A in target))
+		var/client/C = user.client
+		//If help intent is on and we have clicked on an eligible target, switch to aim mode automatically
+		if(user.a_intent == "help" && isliving(A) && !C.gun_mode)
+			C.ToggleGunMode()
+
+		if(C.gun_mode)
+			aiming = PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
+
+	if (!aiming)
+		if(user && user.a_intent == "help") //regardless of what happens, refuse to shoot if help intent is on
+			user << "\red You refrain from firing your [src] as your intent is set to help."
+		else
+			Fire(A,user,params) //Otherwise, fire normally.
 
 /obj/item/weapon/gun/proc/isHandgun()
 	return 1
@@ -74,16 +88,11 @@
 				return
 
 	if (!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return
 	if(istype(user, /mob/living))
 		var/mob/living/M = user
 		if (HULK in M.mutations)
-			M << "\red Your meaty finger is much too large for the trigger guard!"
-			return
-	if(ishuman(user))
-		if(user.dna && user.dna.mutantrace == "adamantine")
-			user << "\red Your metal fingers don't fit in the trigger guard!"
+			M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 			return
 
 	add_fingerprint(user)
@@ -194,14 +203,14 @@
 				playsound(user, fire_sound, 10, 1)
 			else
 				playsound(user, fire_sound, 50, 1)
-			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))		
+			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
 				user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 				mouthshoot = 0
 				return
 
 			in_chamber.on_hit(M)
 			if (in_chamber.damage_type != HALLOSS)
-				user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
+				user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 				user.death()
 			else
 				user << "<span class = 'notice'>Ow...</span>"
@@ -218,7 +227,7 @@
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
-			in_chamber.damage *= 1.3
+			if(istype(in_chamber)) in_chamber.damage *= 1.3
 			Fire(M,user)
 			return
 		else if(target && M in target)

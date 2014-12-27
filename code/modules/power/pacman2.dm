@@ -35,8 +35,8 @@
 		component_parts = list()
 		component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 		component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-		component_parts += new /obj/item/weapon/cable_coil(src)
-		component_parts += new /obj/item/weapon/cable_coil(src)
+		component_parts += new /obj/item/stack/cable_coil(src)
+		component_parts += new /obj/item/stack/cable_coil(src)
 		component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 		component_parts += new board_path(src)
 		RefreshParts()
@@ -54,10 +54,10 @@
 		reliability = min(round(temp_reliability / 4), 100)
 		power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
-	examine()
-		..()
-		usr << "\blue The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle."
-		if(crit_fail) usr << "\red The generator seems to have broken down."
+	examine(mob/user)
+		..(user)
+		user << "\blue The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle."
+		if(crit_fail) user << "\red The generator seems to have broken down."
 
 	handleInactive()
 		heat -= 2

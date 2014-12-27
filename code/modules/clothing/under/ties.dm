@@ -6,7 +6,7 @@
 	item_state = ""	//no inhands
 	item_color = "bluetie"
 	flags = FPRINT | TABLEPASS
-	slot_flags = 0
+	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
@@ -22,7 +22,7 @@
 	has_suit = S
 	loc = has_suit
 	has_suit.overlays += inv_overlay
-	
+
 	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
 	src.add_fingerprint(user)
 
@@ -157,38 +157,38 @@
 	item_color = "red"
 
 /obj/item/clothing/tie/armband/cargo
-	name = "cargo bay guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is brown."
+	name = "cargo armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is brown."
 	icon_state = "cargo"
 	item_color = "cargo"
 
 /obj/item/clothing/tie/armband/engine
-	name = "engineering guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is orange with a reflective strip!"
+	name = "engineering armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is orange with a reflective strip!"
 	icon_state = "engie"
 	item_color = "engie"
 
 /obj/item/clothing/tie/armband/science
-	name = "science guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is purple."
+	name = "science armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is purple."
 	icon_state = "rnd"
 	item_color = "rnd"
 
 /obj/item/clothing/tie/armband/hydro
-	name = "hydroponics guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is green and blue."
+	name = "hydroponics armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is green and blue."
 	icon_state = "hydro"
 	item_color = "hydro"
 
 /obj/item/clothing/tie/armband/med
-	name = "medical guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is white."
+	name = "medical armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white."
 	icon_state = "med"
 	item_color = "med"
 
 /obj/item/clothing/tie/armband/medgreen
-	name = "medical guard armband"
-	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is white and green."
+	name = "EMT armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white and green."
 	icon_state = "medgreen"
 	item_color = "medgreen"
 
@@ -207,15 +207,17 @@
 /obj/item/clothing/tie/holster/proc/holster(obj/item/I, mob/user as mob)
 	if(holstered)
 		user << "\red There is already a [holstered] holstered here!"
-	
+		return
+
 	if (!istype(I, /obj/item/weapon/gun))
 		user << "\red Only guns can be holstered!"
-	
+		return
+
 	var/obj/item/weapon/gun/W = I
 	if (!can_holster(W))
 		user << "\red This [W] won't fit in the [src]!"
 		return
-	
+
 	holstered = W
 	user.drop_from_inventory(holstered)
 	holstered.loc = src
@@ -225,7 +227,7 @@
 /obj/item/clothing/tie/holster/proc/unholster(mob/user as mob)
 	if(!holstered)
 		return
-	
+
 	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
 		user << "\red You need an empty hand to draw the [holstered]!"
 	else
@@ -244,7 +246,7 @@
 		if (holstered)
 			unholster(user)
 		return
-	
+
 	..(user)
 
 /obj/item/clothing/tie/holster/attackby(obj/item/W as obj, mob/user as mob)
@@ -255,13 +257,12 @@
 		holstered.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/holster/examine()
-	set src in view()
-	..()
+/obj/item/clothing/tie/holster/examine(mob/user)
+	..(user)
 	if (holstered)
-		usr << "A [holstered] is holstered here."
+		user << "A [holstered] is holstered here."
 	else
-		usr << "It is empty."
+		user << "It is empty."
 
 /obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
@@ -278,7 +279,7 @@
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
-	
+
 	var/obj/item/clothing/tie/holster/H = null
 	if (istype(src, /obj/item/clothing/tie/holster))
 		H = src
@@ -286,7 +287,7 @@
 		var/obj/item/clothing/under/S = src
 		if (S.hastie)
 			H = S.hastie
-	
+
 	if (!H)
 		usr << "/red Something is very wrong."
 
@@ -328,26 +329,26 @@
 	if (has_suit)	//if we are part of a suit
 		hold.open(user)
 		return
-	
+
 	if (hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
 		..(user)
 
 /obj/item/clothing/tie/storage/MouseDrop(obj/over_object as obj)
 	if (has_suit)
 		return
-	
+
 	if (hold.handle_mousedrop(usr, over_object))
 		..(over_object)
 
 /obj/item/clothing/tie/storage/attackby(obj/item/W as obj, mob/user as mob)
-	hold.attackby(W, user)
+	return hold.attackby(W, user)
 
 /obj/item/clothing/tie/storage/emp_act(severity)
 	hold.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg)
-	hold.hear_talk(M, msg)
+/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
+	hold.hear_talk(M, msg, verb, speaking)
 	..()
 
 /obj/item/clothing/tie/storage/attack_self(mob/user as mob)
@@ -389,7 +390,7 @@
 	desc = "This glowing blue badge marks the holder as THE LAW."
 	icon_state = "holobadge"
 	item_color = "holobadge"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/emagged = 0 //Emagging removes Sec check.
 	var/stored_name = null
@@ -397,7 +398,7 @@
 /obj/item/clothing/tie/holobadge/cord
 	icon_state = "holobadge-cord"
 	item_color = "holobadge-cord"
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_MASK | SLOT_TIE
 
 /obj/item/clothing/tie/holobadge/attack_self(mob/user as mob)
 	if(!stored_name)
@@ -469,6 +470,6 @@
 	"/obj/item/weapon/kitchen/utensil/pknife",\
 	"/obj/item/weapon/kitchenknife",\
 	"/obj/item/weapon/kitchenknife/ritual")
-	
+
 	new /obj/item/weapon/hatchet/unathiknife(hold)
 	new /obj/item/weapon/hatchet/unathiknife(hold)

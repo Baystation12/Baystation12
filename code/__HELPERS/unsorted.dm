@@ -228,9 +228,12 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if (findtext(key, "Guest-", 1, 7) != 1) //was findtextEx
 		return 0
 
-	var/i, ch, len = length(key)
+	var/i = 7, ch, len = length(key)
 
-	for (i = 7, i <= len, ++i)
+	if(copytext(key, 7, 8) == "W") //webclient
+		i++
+
+	for (, i <= len, ++i)
 		ch = text2ascii(key, i)
 		if (ch < 48 || ch > 57)
 			return 0
@@ -330,13 +333,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 				//world << "<b>[newname] is the AI!</b>"
 				//world << sound('sound/AI/newAI.ogg')
 				// Set eyeobj name
-				if(A.eyeobj)
-					A.eyeobj.name = "[newname] (AI Eye)"
-
-				// Set ai pda name
-				if(A.aiPDA)
-					A.aiPDA.owner = newname
-					A.aiPDA.name = newname + " (" + A.aiPDA.ownjob + ")"
+				A.SetName(newname)
 
 
 		fully_replace_character_name(oldname,newname)
@@ -443,29 +440,36 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return creatures
 
-var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
-								"/mob/living/silicon/pai",
-								"/mob/living/silicon/robot",
-								"/mob/living/carbon/human",
-								"/mob/spirit/mask",
-								"/mob/living/carbon/brain",
-								"/mob/living/carbon/alien",
-								"/mob/dead/observer",
-								"/mob/new_player",
-								"/mob/living/carbon/monkey",
-								"/mob/living/carbon/slime",
-								"/mob/living/simple_animal",
-								"/mob/living/silicon/hivebot",
-								"/mob/living/silicon/hive_mainframe"	)
-
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
 	var/list/sortmob = sortAtom(mob_list)
-	for (var/path in sortMobsOrder)
-		for (var/mob/sorting in sortmob)
-			if (istype(sorting,text2path(path)))
-				moblist.Add(sorting)
+	for(var/mob/living/silicon/ai/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/silicon/pai/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/silicon/robot/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/carbon/human/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/carbon/brain/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/carbon/alien/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/dead/observer/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/new_player/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/carbon/monkey/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/carbon/slime/M in sortmob)
+		moblist.Add(M)
+	for(var/mob/living/simple_animal/M in sortmob)
+		moblist.Add(M)
+//	for(var/mob/living/silicon/hivebot/M in world)
+//		mob_list.Add(M)
+//	for(var/mob/living/silicon/hive_mainframe/M in world)
+//		mob_list.Add(M)
 	return moblist
 
 //E = MC^2
@@ -486,7 +490,7 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 		return -M
 
 
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1)
 	var/mob/M
 	var/client/C
 	var/key
@@ -531,7 +535,8 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 		else if(M.name)
 			name = M.name
 
-		if(include_link && is_special_character(M))
+
+		if(include_link && is_special_character(M) && highlight_special_characters)
 			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
@@ -541,14 +546,6 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
 
-
-//Will return the location of the turf an atom is ultimatly sitting on
-/proc/get_turf_loc(var/atom/movable/M) //gets the location of the turf that the atom is on, or what the atom is in is on, etc
-	//in case they're in a closet or sleeper or something
-	var/atom/loc = M.loc
-	while(!istype(loc, /turf/))
-		loc = loc.loc
-	return loc
 
 // returns the turf located at the map edge in the specified direction relative to A
 // used for mass driver
@@ -626,7 +623,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 //The variables should be apparent enough.
 	var/atom/movable/overlay/animation = new(location)
 	if(direction)
-		animation.dir = direction
+		animation.set_dir(direction)
 	animation.icon = a_icon
 	animation.layer = target:layer+1
 	if(a_icon_state)
@@ -856,10 +853,18 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 					var/old_icon_state1 = T.icon_state
 					var/old_icon1 = T.icon
 
-					var/turf/X = new T.type(B)
-					X.dir = old_dir1
+					var/turf/X = B.ChangeTurf(T.type)
+					X.set_dir(old_dir1)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+
+					var/turf/simulated/ST = T
+					if(istype(ST) && ST.zone)
+						var/turf/simulated/SX = X
+						if(!SX.air)
+							SX.make_air()
+						SX.air.copy_from(ST.zone.air)
+						ST.zone.remove(ST)
 
 					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
 					if(direction && findtext(X.icon_state, "swall_s"))
@@ -909,16 +914,7 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 					toupdate += X
 
 					if(turftoleave)
-						var/turf/ttl = new turftoleave(T)
-
-//						var/area/AR2 = ttl.loc
-
-//						if(AR2.lighting_use_dynamic)						//TODO: rewrite this code so it's not messed by lighting ~Carn
-//							ttl.opacity = !ttl.opacity
-//							ttl.sd_SetOpacity(!ttl.opacity)
-
-						fromupdate += ttl
-
+						fromupdate += T.ChangeTurf(turftoleave)
 					else
 						T.ChangeTurf(/turf/space)
 
@@ -1031,7 +1027,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 							continue moving
 
 					var/turf/X = new T.type(B)
-					X.dir = old_dir1
+					X.set_dir(old_dir1)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
@@ -1160,8 +1156,9 @@ proc/get_mob_with_client_list()
 	else if (zone == "r_foot") return "right foot"
 	else return zone
 
-
-/proc/get_turf(turf/location)
+//gets the turf the atom is located in (or itself, if it is a turf).
+//returns null if the atom is not in a turf.
+/proc/get_turf(atom/location)
 	while(location)
 		if(isturf(location))
 			return location
@@ -1181,7 +1178,7 @@ proc/get_mob_with_client_list()
 
 //Quick type checks for some tools
 var/global/list/common_tools = list(
-/obj/item/weapon/cable_coil,
+/obj/item/stack/cable_coil,
 /obj/item/weapon/wrench,
 /obj/item/weapon/weldingtool,
 /obj/item/weapon/screwdriver,
@@ -1205,7 +1202,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iscoil(O)
-	if(istype(O, /obj/item/weapon/cable_coil))
+	if(istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
@@ -1230,7 +1227,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iswire(O)
-	if(istype(O, /obj/item/weapon/cable_coil))
+	if(istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
@@ -1242,12 +1239,12 @@ proc/is_hot(obj/item/W as obj)
 				return 3800
 			else
 				return 0
-		if(/obj/item/weapon/lighter)
+		if(/obj/item/weapon/flame/lighter)
 			if(W:lit)
 				return 1500
 			else
 				return 0
-		if(/obj/item/weapon/match)
+		if(/obj/item/weapon/flame/match)
 			if(W:lit)
 				return 1000
 			else
@@ -1266,8 +1263,21 @@ proc/is_hot(obj/item/W as obj)
 
 	return 0
 
-//Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
-/proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
+//Whether or not the given item counts as sharp in terms of dealing damage
+/proc/is_sharp(obj/O as obj)
+	if (!O) return 0
+	if (O.sharp) return 1
+	if (O.edge) return 1
+	return 0
+
+//Whether or not the given item counts as cutting with an edge in terms of removing limbs
+/proc/has_edge(obj/O as obj)
+	if (!O) return 0
+	if (O.edge) return 1
+	return 0
+
+//Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
+/proc/can_puncture(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
 	if(!W) return 0
 	if(W.sharp) return 1
 	return ( \
@@ -1275,23 +1285,10 @@ proc/is_hot(obj/item/W as obj)
 		istype(W, /obj/item/weapon/screwdriver)                   || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)					  || \
-		istype(W, /obj/item/weapon/lighter/zippo)				  || \
-		istype(W, /obj/item/weapon/match)            		      || \
+		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \
+		istype(W, /obj/item/weapon/flame/match)            		  || \
 		istype(W, /obj/item/clothing/mask/cigarette) 		      || \
-		istype(W, /obj/item/weapon/wirecutters)                   || \
-		istype(W, /obj/item/weapon/circular_saw)                  || \
-		istype(W, /obj/item/weapon/melee/energy/sword)            || \
-		istype(W, /obj/item/weapon/melee/energy/blade)            || \
-		istype(W, /obj/item/weapon/shovel)                        || \
-		istype(W, /obj/item/weapon/kitchenknife)                  || \
-		istype(W, /obj/item/weapon/butch)						  || \
-		istype(W, /obj/item/weapon/scalpel)                       || \
-		istype(W, /obj/item/weapon/kitchen/utensil/knife)         || \
-		istype(W, /obj/item/weapon/shard)                         || \
-		istype(W, /obj/item/weapon/broken_bottle)				  || \
-		istype(W, /obj/item/weapon/reagent_containers/syringe)    || \
-		istype(W, /obj/item/weapon/kitchen/utensil/fork) && W.icon_state != "forkloaded" || \
-		istype(W, /obj/item/weapon/twohanded/fireaxe) \
+		istype(W, /obj/item/weapon/shovel) \
 	)
 
 /proc/is_surgery_tool(obj/item/W as obj)
@@ -1306,11 +1303,10 @@ proc/is_hot(obj/item/W as obj)
 
 //check if mob is lying down on something we can operate him on.
 /proc/can_operate(mob/living/carbon/M)
-	return (locate(/obj/machinery/optable, M.loc) && M.resting) || \
-	(locate(/obj/structure/stool/bed/roller, M.loc) && 	\
-	(M.buckled || M.lying || M.weakened || M.stunned || M.paralysis || M.sleeping || M.stat)) && prob(75) || 	\
-	(locate(/obj/structure/table/, M.loc) && 	\
-	(M.lying || M.weakened || M.stunned || M.paralysis || M.sleeping || M.stat) && prob(66))
+	return (M.lying && \
+	locate(/obj/machinery/optable, M.loc) || \
+	(locate(/obj/structure/stool/bed/roller, M.loc) && prob(75)) || \
+	(locate(/obj/structure/table/, M.loc) && prob(66)))
 
 /proc/reverse_direction(var/dir)
 	switch(dir)
@@ -1377,3 +1373,8 @@ var/list/WALLITEMS = list(
 
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+
+/proc/topic_link(var/datum/D, var/arglist, var/content)
+	if(istype(arglist,/list))
+		arglist = list2params(arglist)
+	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"

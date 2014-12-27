@@ -17,6 +17,11 @@
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
 		spawn(0)
+
+			if(target.buckled)
+				var/obj/structure/stool/bed/buckled_to = target.buckled.
+				buckled_to.unbuckle()
+
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
 			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )

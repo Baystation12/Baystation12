@@ -3,7 +3,9 @@
 
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
+
 	verbs += /datum/changeling/proc/EvolutionMenu
+	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
 
@@ -30,8 +32,7 @@
 		mind.changeling.absorbed_species += H.species.name
 
 	for(var/language in languages)
-		if(!(language in mind.changeling.absorbed_languages))
-			mind.changeling.absorbed_languages += language
+		mind.changeling.absorbed_languages |= language
 
 	return 1
 
@@ -80,6 +81,9 @@
 	for(var/language in updated_languages)
 		languages += language
 
+	//This isn't strictly necessary but just to be safe...
+	add_language("Changeling")
+
 	return
 
 //Used to switch species based on the changeling datum.
@@ -111,12 +115,13 @@
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 
 	src.verbs -= /mob/proc/changeling_change_species
-	spawn(10)	src.verbs += /mob/proc/changeling_change_species
+	H.set_species(S,1) //Until someone moves body colour into DNA, they're going to have to use the default.
 
-	H.set_species(S)
+	spawn(10)
+		src.verbs += /mob/proc/changeling_change_species
+		src.regenerate_icons()
 
 	changeling_update_languages(changeling.absorbed_languages)
-
 	feedback_add_details("changeling_powers","TR")
 
 	return 1
@@ -169,7 +174,7 @@
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
 				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
-				if(affecting.take_damage(39,0,1,"large organic needle"))
+				if(affecting.take_damage(39,0,1,0,"large organic needle"))
 					T:UpdateDamageIcon()
 					continue
 
@@ -452,7 +457,7 @@
 			changeling.chem_charges -= 20
 
 			// restore us to health
-			C.rejuvenate()
+			C.revive()
 
 			// remove our fake death flag
 			C.status_flags &= ~(FAKEDEATH)
@@ -843,11 +848,13 @@ var/list/datum/dna/hivemind_bank = list()
 	if(!changeling)
 		return 0
 
-	var/mob/living/carbon/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
+	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
 	if(!T)	return 0
 
 	T.dna.real_name = T.real_name
 	changeling.absorbed_dna |= T.dna
+	if(T.species && !(T.species.name in changeling.absorbed_species))
+		changeling.absorbed_species += T.species.name
 
 	feedback_add_details("changeling_powers","ED")
 	return 1

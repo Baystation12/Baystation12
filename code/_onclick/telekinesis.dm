@@ -141,7 +141,7 @@ var/const/tk_maxrange = 15
 
 		else
 			apply_focus_overlay()
-			focus.throw_at(target, 10, 1)
+			focus.throw_at(target, 10, 1, user)
 			last_throw = world.time
 		return
 
@@ -167,7 +167,7 @@ var/const/tk_maxrange = 15
 		O.anchored = 1
 		O.density = 0
 		O.layer = FLY_LAYER
-		O.dir = pick(cardinal)
+		O.set_dir(pick(cardinal))
 		O.icon = 'icons/effects/effects.dmi'
 		O.icon_state = "nothing"
 		flick("empdisable",O)

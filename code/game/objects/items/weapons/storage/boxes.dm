@@ -48,6 +48,8 @@
 /obj/item/weapon/storage/box/gloves
 	name = "box of latex gloves"
 	desc = "Contains white gloves."
+	icon_state = "latex"
+
 	New()
 		..()
 		new /obj/item/clothing/gloves/latex(src)
@@ -146,6 +148,20 @@
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
 		new /obj/item/ammo_casing/shotgun/beanbag(src)
 
+/obj/item/weapon/storage/box/shotgunammo
+	name = "box of shotgun shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+		new /obj/item/ammo_casing/shotgun(src)
+
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"
 	desc = "<B>WARNING: These devices are extremely dangerous and can cause blindness or deafness in repeated use.</B>"
@@ -236,7 +252,7 @@
 		new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass(src)
 
 /obj/item/weapon/storage/box/cdeathalarm_kit
-	name = "Death Alarm Kit"
+	name = "death alarm kit"
 	desc = "Box of stuff used to implant death alarms."
 	icon_state = "implant"
 	item_state = "syringe_kit"
@@ -381,7 +397,7 @@
 
 /obj/item/weapon/storage/box/mousetraps
 	name = "box of Pest-B-Gon mousetraps"
-	desc = "<B><FONT=red>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
+	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 
 	New()
@@ -430,14 +446,14 @@
 	w_class = 1
 	flags = TABLEPASS
 	slot_flags = SLOT_BELT
-	can_hold = list("/obj/item/weapon/match")
+	can_hold = list("/obj/item/weapon/flame/match")
 
 	New()
 		..()
 		for(var/i=1; i <= storage_slots; i++)
-			new /obj/item/weapon/match(src)
+			new /obj/item/weapon/flame/match(src)
 
-	attackby(obj/item/weapon/match/W as obj, mob/user as mob)
+	attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
 		if(istype(W) && !W.lit && !W.burnt)
 			W.lit = 1
 			W.damtype = "burn"

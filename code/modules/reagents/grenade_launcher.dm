@@ -11,14 +11,11 @@
 	force = 5.0
 	var/list/grenades = new/list()
 	var/max_grenades = 3
-	m_amt = 2000
+	matter = list("metal" = 2000)
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
-		usr << "\icon [src] Grenade launcher:"
-		usr << "\blue [grenades] / [max_grenades] Grenades."
+	examine(mob/user)
+		if(..(user, 2))
+			user << "\blue [grenades] / [max_grenades] Grenades."
 
 	attackby(obj/item/I as obj, mob/user as mob)
 
@@ -56,7 +53,7 @@
 			var/obj/item/weapon/grenade/chem_grenade/F = grenades[1] //Now with less copypasta!
 			grenades -= F
 			F.loc = user.loc
-			F.throw_at(target, 30, 2)
+			F.throw_at(target, 30, 2, user)
 			message_admins("[key_name_admin(user)] fired a grenade ([F.name]) from a grenade launcher ([src.name]).")
 			log_game("[key_name_admin(user)] used a grenade ([src.name]).")
 			F.active = 1

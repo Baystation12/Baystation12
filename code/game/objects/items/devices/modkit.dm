@@ -7,41 +7,66 @@
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user."
 	icon_state = "modkit"
 	var/parts = MODKIT_FULL
-	var/from_helmet = /obj/item/clothing/head/helmet/space/rig
-	var/from_suit = /obj/item/clothing/suit/space/rig
-	var/to_helmet = /obj/item/clothing/head/cardborg
-	var/to_suit = /obj/item/clothing/suit/cardborg
+	var/target_species = "Human"
 
-/obj/item/device/modkit/afterattack(obj/O, mob/user as mob)
-	var/flag
-	var/to_type
-	if(istype(O,from_helmet))
-		flag = MODKIT_HELMET
-		to_type = to_helmet
-	else if(istype(O,from_suit))
-		flag = MODKIT_SUIT
-		to_type = to_suit
-	else
+	var/list/permitted_types = list(
+		/obj/item/clothing/head/helmet/space/void,
+		/obj/item/clothing/suit/space/void
+		)
+
+/obj/item/device/modkit/afterattack(obj/O, mob/user as mob, proximity)
+	if(!proximity)
 		return
-	if(!(parts & flag))
+
+	if (!target_species)
+		return	//it shouldn't be null, okay?
+
+	if(!parts)
 		user << "<span class='warning'>This kit has no parts for this modification left.</span>"
+		user.drop_from_inventory(src)
+		del(src)
 		return
-	if(istype(O,to_type))
-		user << "<span class='notice'>[O] is already modified.</span>"
+
+	var/allowed = 0
+	for (var/permitted_type in permitted_types)
+		if(istype(O, permitted_type))
+			allowed = 1
+
+	var/obj/item/clothing/I = O
+	if (!istype(I) || !allowed)
+		user << "<span class='notice'>[src] is unable to modify that.</span>"
 		return
+
+	var/excluding = ("exclude" in I.species_restricted)
+	var/in_list = (target_species in I.species_restricted)
+	if (excluding ^ in_list)
+		user << "<span class='notice'>[I] is already modified.</span>"
+		return
+
 	if(!isturf(O.loc))
 		user << "<span class='warning'>[O] must be safely placed on the ground for modification.</span>"
 		return
+
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-	var/N = new to_type(O.loc)
-	user.visible_message("\red [user] opens \the [src] and modifies \the [O] into \the [N].","\red You open \the [src] and modify \the [O] into \the [N].")
-	del(O)
-	parts &= ~flag
+
+	user.visible_message("\red [user] opens \the [src] and modifies \the [O].","\red You open \the [src] and modify \the [O].")
+
+	I.refit_for_species(target_species)
+
+	if (istype(I, /obj/item/clothing/head/helmet))
+		parts &= ~MODKIT_HELMET
+	if (istype(I, /obj/item/clothing/suit))
+		parts &= ~MODKIT_SUIT
+
 	if(!parts)
+		user.drop_from_inventory(src)
 		del(src)
 
+/obj/item/device/modkit/examine(mob/user)
+	..(user)
+	user << "It looks as though it modifies hardsuits to fit [target_species] users."
+
 /obj/item/device/modkit/tajaran
-	name = "tajara hardsuit modification kit"
-	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajara."
-	to_helmet = /obj/item/clothing/head/helmet/space/rig/tajara
-	to_suit = /obj/item/clothing/suit/space/rig/tajara
+	name = "tajaran hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajaran."
+	target_species = "Tajara"

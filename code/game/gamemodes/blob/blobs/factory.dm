@@ -34,7 +34,7 @@
 	maxHealth = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 8
-	attacktext = "hits"
+	attacktext = "hit"
 	attack_sound = 'sound/weapons/genhit1.ogg'
 	var/obj/effect/blob/factory/factory = null
 	faction = "blob"
@@ -57,7 +57,7 @@
 			factory.spores += src
 		..(loc)
 		return
-	Die()
+	death()
 		..()
 		if(factory)
 			factory.spores -= src

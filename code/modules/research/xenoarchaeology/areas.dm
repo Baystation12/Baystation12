@@ -3,9 +3,13 @@
 	name = "Research Outpost"
 	icon_state = "anomaly"
 
+/area/research_outpost/filtering
+	name = "Research Outpost Filtering"
+	icon_state = "anofilter"
+
 /area/research_outpost/hallway
 	name = "Research Outpost Hallway"
-	icon_state = "hallC"
+	icon_state = "anohallway"
 
 /area/research_outpost/gearstore
 	name = "Expedition Preparation"
@@ -24,15 +28,27 @@
 	icon_state = "maintcentral"
 
 /area/research_outpost/iso1
-	name = "Isolation Cell"
+	name = "Isolation Cell 1"
+	icon_state = "iso1"
+
+/area/research_outpost/iso1_access
+	name = "Isolation Cell 1 - Access"
 	icon_state = "iso1"
 
 /area/research_outpost/iso2
-	name = "Isolation Cell"
+	name = "Isolation Cell 2"
+	icon_state = "iso2"
+
+/area/research_outpost/iso2_access
+	name = "Isolation Cell 2 - Access"
 	icon_state = "iso2"
 
 /area/research_outpost/iso3
-	name = "Isolation Cell"
+	name = "Isolation Cell 3"
+	icon_state = "iso3"
+
+/area/research_outpost/iso3_access
+	name = "Isolation Cell 3 - Access"
 	icon_state = "iso3"
 
 /area/research_outpost/harvesting
@@ -57,7 +73,7 @@
 
 /area/research_outpost/entry
 	name = "Research Outpost Shuttle Dock"
-	icon_state = "entry"
+	icon_state = "anoentry"
 
 /area/research_outpost/longtermstorage
 	name = "Long-Term Storage"

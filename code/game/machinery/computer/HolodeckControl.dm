@@ -1,203 +1,155 @@
+var/global/list/holodeck_programs = list(
+	"emptycourt" = /area/holodeck/source_emptycourt,		\
+	"boxingcourt" =	/area/holodeck/source_boxingcourt,	\
+	"basketball" =	/area/holodeck/source_basketball,	\
+	"thunderdomecourt" =	/area/holodeck/source_thunderdomecourt,	\
+	"beach" =	/area/holodeck/source_beach,	\
+	"desert" =	/area/holodeck/source_desert,	\
+	"space" =	/area/holodeck/source_space,	\
+	"picnicarea" = /area/holodeck/source_picnicarea,	\
+	"snowfield" =	/area/holodeck/source_snowfield,	\
+	"theatre" =	/area/holodeck/source_theatre,	\
+	"meetinghall" =	/area/holodeck/source_meetinghall,	\
+	"burntest" = 	/area/holodeck/source_burntest,	\
+	"wildlifecarp" = 	/area/holodeck/source_wildlife,	\
+	"turnoff" = 	/area/holodeck/source_plating	\
+	)
+
 /obj/machinery/computer/HolodeckControl
-	name = "Holodeck Control Computer"
+	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
 	icon_state = "holocontrol"
+
+	use_power = 1
+	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
+	var/item_power_usage = 500
+
 	var/area/linkedholodeck = null
 	var/area/target = null
 	var/active = 0
 	var/list/holographic_items = list()
+	var/list/holographic_mobs = list()
 	var/damaged = 0
+	var/safety_disabled = 0
+	var/mob/last_to_emag = null
 	var/last_change = 0
+	var/list/supported_programs = list( \
+	"Empty Court" = "emptycourt", \
+	"Boxing Court"="boxingcourt",	\
+	"Basketball Court" = "basketball",	\
+	"Thunderdome Court" = "thunderdomecourt",	\
+	"Beach" = "beach",	\
+	"Desert" = "desert",	\
+	"Space" = "space",	\
+	"Picnic Area" = "picnicarea",	\
+	"Snow Field" = "snowfield",	\
+	"Theatre" = "theatre",	\
+	"Meeting Hall" = "meetinghall"	\
+	)
+	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "Wildlife Simulation" = "wildlifecarp")
 
+/obj/machinery/computer/HolodeckControl/attack_ai(var/mob/user as mob)
+	return src.attack_hand(user)
 
-	attack_ai(var/mob/user as mob)
-		return src.attack_hand(user)
+/obj/machinery/computer/HolodeckControl/attack_hand(var/mob/user as mob)
 
-	attack_paw(var/mob/user as mob)
+	if(..())
 		return
+	user.set_machine(src)
+	var/dat
 
-	attack_hand(var/mob/user as mob)
+	dat += "<B>Holodeck Control System</B><BR>"
+	dat += "<HR>Current Loaded Programs:<BR>"
+	for(var/prog in supported_programs)
+		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>(([prog]))</A><BR>"
 
-		if(..())
-			return
-		user.set_machine(src)
-		var/dat
+	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
-
-		dat += "<B>Holodeck Control System</B><BR>"
-		dat += "<HR>Current Loaded Programs:<BR>"
-
-		dat += "<A href='?src=\ref[src];emptycourt=1'>((Empty Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];boxingcourt=1'>((Boxing Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];basketball=1'>((Basketball Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];thunderdomecourt=1'>((Thunderdome Court)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];beach=1'>((Beach)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];desert=1'>((Desert)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];space=1'>((Space)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];picnicarea=1'>((Picnic Area)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];snowfield=1'>((Snow Field)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];theatre=1'>((Theatre)</font>)</A><BR>"
-		dat += "<A href='?src=\ref[src];meetinghall=1'>((Meeting Hall)</font>)</A><BR>"
-//		dat += "<A href='?src=\ref[src];turnoff=1'>((Shutdown System)</font>)</A><BR>"
-
-		dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
-
-		if(emagged)
-			dat += "<A href='?src=\ref[src];burntest=1'>(<font color=red>Begin Atmospheric Burn Simulation</font>)</A><BR>"
-			dat += "Ensure the holodeck is empty before testing.<BR>"
-			dat += "<BR>"
-			dat += "<A href='?src=\ref[src];wildlifecarp=1'>(<font color=red>Begin Wildlife Simulation</font>)</A><BR>"
-			dat += "Ensure the holodeck is empty before testing.<BR>"
-			dat += "<BR>"
-			if(issilicon(user))
+	if(issilicon(user))
+		if(safety_disabled)
+			if (emagged)
+				dat += "<font color=red><b>ERROR</b>: Cannot re-enable Safety Protocols.</font><BR>"
+			else
 				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
-			dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
 		else
-			if(issilicon(user))
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+
+	if(safety_disabled)
+		for(var/prog in restricted_programs)
+			dat += "<A href='?src=\ref[src];program=[restricted_programs[prog]]'>(<font color=red>Begin [prog]</font>)</A><BR>"
+			dat += "Ensure the holodeck is empty before testing.<BR>"
 			dat += "<BR>"
-			dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
+		dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
+	else
+		dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
 
-		user << browse(dat, "window=computer;size=400x500")
-		onclose(user, "computer")
+	user << browse(dat, "window=computer;size=400x500")
+	onclose(user, "computer")
+
+	return
 
 
+/obj/machinery/computer/HolodeckControl/Topic(href, href_list)
+	if(..())
 		return
+	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+		usr.set_machine(src)
 
-
-	Topic(href, href_list)
-		if(..())
-			return
-		if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-			usr.set_machine(src)
-
-			if(href_list["emptycourt"])
-				target = locate(/area/holodeck/source_emptycourt)
+		if(href_list["program"])
+			var/prog = href_list["program"]
+			if(prog in holodeck_programs)
+				target = locate(holodeck_programs[prog])
 				if(target)
 					loadProgram(target)
 
-			else if(href_list["boxingcourt"])
-				target = locate(/area/holodeck/source_boxingcourt)
-				if(target)
-					loadProgram(target)
+		else if(href_list["AIoverride"])
+			if(!issilicon(usr))
+				return
 
-			else if(href_list["basketball"])
-				target = locate(/area/holodeck/source_basketball)
-				if(target)
-					loadProgram(target)
+			if(safety_disabled && emagged)
+				return //if a traitor has gone through the trouble to emag the thing, let them keep it.
 
-			else if(href_list["thunderdomecourt"])
-				target = locate(/area/holodeck/source_thunderdomecourt)
-				if(target)
-					loadProgram(target)
+			safety_disabled = !safety_disabled
+			update_projections()
+			if(safety_disabled)
+				message_admins("[key_name_admin(usr)] overrode the holodeck's safeties")
+				log_game("[key_name(usr)] overrided the holodeck's safeties")
+			else
+				message_admins("[key_name_admin(usr)] restored the holodeck's safeties")
+				log_game("[key_name(usr)] restored the holodeck's safeties")
 
-			else if(href_list["beach"])
-				target = locate(/area/holodeck/source_beach)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["desert"])
-				target = locate(/area/holodeck/source_desert)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["space"])
-				target = locate(/area/holodeck/source_space)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["picnicarea"])
-				target = locate(/area/holodeck/source_picnicarea)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["snowfield"])
-				target = locate(/area/holodeck/source_snowfield)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["theatre"])
-				target = locate(/area/holodeck/source_theatre)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["meetinghall"])
-				target = locate(/area/holodeck/source_meetinghall)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["turnoff"])
-				target = locate(/area/holodeck/source_plating)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["burntest"])
-				if(!emagged)	return
-				target = locate(/area/holodeck/source_burntest)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["wildlifecarp"])
-				if(!emagged)	return
-				target = locate(/area/holodeck/source_wildlife)
-				if(target)
-					loadProgram(target)
-
-			else if(href_list["AIoverride"])
-				if(!issilicon(usr))	return
-				emagged = !emagged
-				if(emagged)
-					message_admins("[key_name_admin(usr)] overrode the holodeck's safeties")
-					log_game("[key_name(usr)] overrided the holodeck's safeties")
-				else
-					message_admins("[key_name_admin(usr)] restored the holodeck's safeties")
-					log_game("[key_name(usr)] restored the holodeck's safeties")
-
-			src.add_fingerprint(usr)
-		src.updateUsrDialog()
-		return
-
-
-
-/obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
-//Warning, uncommenting this can have concequences. For example, deconstructing the computer may cause holographic eswords to never derez
-
-/*		if(istype(D, /obj/item/weapon/screwdriver))
-			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user, 20))
-				if (src.stat & BROKEN)
-					user << "\blue The broken glass falls out."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					new /obj/item/weapon/shard( src.loc )
-					var/obj/item/weapon/circuitboard/comm_traffic/M = new /obj/item/weapon/circuitboard/comm_traffic( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					A.circuit = M
-					A.state = 3
-					A.icon_state = "3"
-					A.anchored = 1
-					del(src)
-				else
-					user << "\blue You disconnect the monitor."
-					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-					var/obj/item/weapon/circuitboard/comm_traffic/M = new /obj/item/weapon/circuitboard/comm_traffic( A )
-					for (var/obj/C in src)
-						C.loc = src.loc
-					A.circuit = M
-					A.state = 4
-					A.icon_state = "4"
-					A.anchored = 1
-					del(src)
-
-*/
-	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
-		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
-		user << "\blue You vastly increase projector power and override the safety and security protocols."
-		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
-		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
+		src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return
+
+/obj/machinery/computer/HolodeckControl/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
+	if(istype(D, /obj/item/weapon/card/emag))
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+		last_to_emag = user //emag again to change the owner
+		if (!emagged)
+			emagged = 1
+			safety_disabled = 1
+			update_projections()
+			user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
+			user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call Nanotrasen maintenance and do not use the simulator."
+			log_game("[key_name(usr)] emagged the Holodeck Control Computer")
+	src.updateUsrDialog()
+	return
+
+/obj/machinery/computer/HolodeckControl/proc/update_projections()
+	if (safety_disabled)
+		item_power_usage = 2500
+		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+			H.damtype = BRUTE
+	else
+		item_power_usage = initial(item_power_usage)
+		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+			H.damtype = initial(H.damtype)
+
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		C.set_safety(!safety_disabled)
+		if (last_to_emag)
+			C.friends = list(last_to_emag)
 
 /obj/machinery/computer/HolodeckControl/New()
 	..()
@@ -231,14 +183,27 @@
 	emergencyShutdown()
 	..()
 
+/obj/machinery/computer/HolodeckControl/power_change()
+	var/oldstat
+	..()
+	if (stat != oldstat && active && (stat & NOPOWER))
+		emergencyShutdown()
+
 /obj/machinery/computer/HolodeckControl/process()
 	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
 
+	if (!safety_disabled)
+		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+			if (get_area(C.loc) != linkedholodeck)
+				holographic_mobs -= C
+				C.derez()
+
 	if(!..())
 		return
 	if(active)
+		use_power(item_power_usage * (holographic_items.len + holographic_mobs.len))
 
 		if(!checkInteg(linkedholodeck))
 			damaged = 1
@@ -246,6 +211,7 @@
 			if(target)
 				loadProgram(target)
 			active = 0
+			use_power = 1
 			for(var/mob/M in range(10,src))
 				M.show_message("The holodeck overloads!")
 
@@ -282,6 +248,7 @@
 
 	return 1
 
+//Why is it called toggle if it doesn't toggle?
 /obj/machinery/computer/HolodeckControl/proc/togglePower(var/toggleOn = 0)
 
 	if(toggleOn)
@@ -301,12 +268,14 @@
 							T.hotspot_expose(50000,50000,1)
 
 		active = 1
+		use_power = 2
 	else
 		for(var/item in holographic_items)
 			derez(item)
 		var/area/targetsource = locate(/area/holodeck/source_plating)
 		targetsource.copy_contents_to(linkedholodeck , 1)
 		active = 0
+		use_power = 1
 
 
 /obj/machinery/computer/HolodeckControl/proc/loadProgram(var/area/A)
@@ -321,21 +290,19 @@
 
 	last_change = world.time
 	active = 1
+	use_power = 2
 
 	for(var/item in holographic_items)
 		derez(item)
 
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		holographic_mobs -= C
+		C.derez()
+
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		del(B)
 
-	for(var/mob/living/simple_animal/hostile/carp/C in linkedholodeck)
-		del(C)
-
 	holographic_items = A.copy_contents_to(linkedholodeck , 1)
-
-	if(emagged)
-		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
-			H.damtype = BRUTE
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
@@ -349,13 +316,22 @@
 						T.temperature = 5000
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
-				new /mob/living/simple_animal/hostile/carp(L.loc)
+				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+
+			if(L.name=="Holocarp Spawn Random")
+				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
+					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+
+		update_projections()
 
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Get rid of any items
 	for(var/item in holographic_items)
 		derez(item)
+	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		holographic_mobs -= C
+		C.derez()
 	//Turn it back to the regular non-holographic room
 	target = locate(/area/holodeck/source_plating)
 	if(target)
@@ -364,6 +340,7 @@
 	var/area/targetsource = locate(/area/holodeck/source_plating)
 	targetsource.copy_contents_to(linkedholodeck , 1)
 	active = 0
+	use_power = 1
 
 
 
@@ -379,10 +356,9 @@
 /turf/simulated/floor/holofloor/grass
 	name = "Lush Grass"
 	icon_state = "grass1"
-	floor_tile = new/obj/item/stack/tile/grass
+	floor_type = /obj/item/stack/tile/grass
 
 	New()
-		floor_tile.New() //I guess New() isn't run on objects spawned without the definition of a turf to house them, ah well.
 		icon_state = "grass[pick("1","2","3","4")]"
 		..()
 		spawn(4)
@@ -392,18 +368,19 @@
 					var/turf/simulated/floor/FF = get_step(src,direction)
 					FF.update_icon() //so siding get updated properly
 
+/turf/simulated/floor/holofloor/desert
+	name = "desert sand"
+	desc = "Uncomfortably gritty for a hologram."
+	icon_state = "asteroid"
+
+/turf/simulated/floor/holofloor/desert/New()
+	..()
+	if(prob(10))
+		overlays += "asteroid[rand(0,9)]"
+
 /turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
-
-
-
-
-
-
-
-
-
 
 /obj/structure/table/holotable
 	name = "table"
@@ -415,39 +392,18 @@
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.
 
-
-/obj/structure/table/holotable/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-/obj/structure/table/holotable/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
-
-/obj/structure/table/holotable/attack_animal(mob/living/simple_animal/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
-
 /obj/structure/table/holotable/attack_hand(mob/user as mob)
 	return // HOLOTABLE DOES NOT GIVE A FUCK
 
 
 /obj/structure/table/holotable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if(G.state<2)
-			user << "\red You need a better grip to do that!"
-			return
-		G.affecting.loc = src.loc
-		G.affecting.Weaken(5)
-		visible_message("\red [G.assailant] puts [G.affecting] on the table.")
-		del(W)
-		return
-
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "It's a holotable!  There are no bolts!"
 		return
 
 	if(isrobot(user))
 		return
-		
+
 	..()
 
 /obj/structure/table/holotable/wood
@@ -498,7 +454,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | NOSHIELD
+	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
 	var/active = 0
 
 /obj/item/weapon/holo/esword/green
@@ -527,13 +483,13 @@
 		icon_state = "sword[item_color]"
 		w_class = 4
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		user << "\blue [src] is now active."
+		user << "<span class='notice'>[src] is now active.</span>"
 	else
 		force = 3
 		icon_state = "sword0"
 		w_class = 2
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		user << "\blue [src] can now be concealed."
+		user << "<span class='notice'>[src] can now be concealed.</span>"
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
@@ -555,7 +511,7 @@
 
 /obj/structure/holohoop
 	name = "basketball hoop"
-	desc = "Boom, Shakalaka!."
+	desc = "Boom, Shakalaka!"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "hoop"
 	anchored = 1
@@ -566,16 +522,16 @@
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if(G.state<2)
-			user << "\red You need a better grip to do that!"
+			user << "<span class='warning'>You need a better grip to do that!</span>"
 			return
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)
-		visible_message("\red [G.assailant] dunks [G.affecting] into the [src]!", 3)
+		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
 		del(W)
 		return
 	else if (istype(W, /obj/item) && get_dist(src,user)<2)
 		user.drop_item(src)
-		visible_message("\blue [user] dunks [W] into the [src]!", 3)
+		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
 		return
 
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -585,9 +541,9 @@
 			return
 		if(prob(50))
 			I.loc = src.loc
-			visible_message("\blue Swish! \the [I] lands in \the [src].", 3)
+			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", 3)
 		else
-			visible_message("\red \the [I] bounces off of \the [src]'s rim!", 3)
+			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -612,10 +568,6 @@
 	user << "The station AI is not to interact with these devices!"
 	return
 
-/obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device."
-	return
-
 /obj/machinery/readybutton/New()
 	..()
 
@@ -624,9 +576,13 @@
 	user << "The device is a solid button, there's nothing you can do with it!"
 
 /obj/machinery/readybutton/attack_hand(mob/user as mob)
+
 	if(user.stat || stat & (NOPOWER|BROKEN))
 		user << "This device is not powered."
 		return
+
+	if(!user.IsAdvancedToolUser())
+		return 0
 
 	currentarea = get_area(src.loc)
 	if(!currentarea)
@@ -668,19 +624,52 @@
 
 //Holorack
 
-/obj/structure/rack/holorack
+/obj/structure/table/rack/holorack
 	name = "rack"
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"
 
-/obj/structure/rack/holorack/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
-	return attack_hand(user)
-
-/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
 	return
 
-/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "It's a holorack!  You can't unwrench it!"
 		return
+
+//Holocarp
+
+/mob/living/simple_animal/hostile/carp/holodeck
+	icon = 'icons/mob/AI.dmi'
+	icon_state = "holo4"
+	icon_living = "holo4"
+	icon_dead = "holo4"
+	icon_gib = null
+	meat_amount = 0
+	meat_type = null
+
+/mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
+	if (safe)
+		faction = "neutral"
+		melee_damage_lower = 0
+		melee_damage_upper = 0
+		wall_smash = 0
+		destroy_surroundings = 0
+	else
+		faction = "carp"
+		melee_damage_lower = initial(melee_damage_lower)
+		melee_damage_upper = initial(melee_damage_upper)
+		wall_smash = initial(wall_smash)
+		destroy_surroundings = initial(destroy_surroundings)
+
+/mob/living/simple_animal/hostile/carp/holodeck/gib()
+	derez() //holograms can't gib
+
+/mob/living/simple_animal/hostile/carp/holodeck/death()
+	..()
+	derez()
+
+/mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
+	visible_message("<span class='notice'>\The [src] fades away!</span>")
+	del(src)

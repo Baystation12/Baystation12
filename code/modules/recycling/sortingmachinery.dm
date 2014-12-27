@@ -5,9 +5,14 @@
 	icon_state = "deliverycloset"
 	var/obj/wrapped = null
 	density = 1
-	var/sortTag = 0
+	var/sortTag = null
 	flags = FPRINT | NOBLUDGEON
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
+	var/examtext = null
+	var/nameset = 0
+	var/label_y
+	var/label_x
+	var/tag_x
 
 	attack_hand(mob/user as mob)
 		if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -21,32 +26,99 @@
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/device/destTagger))
 			var/obj/item/device/destTagger/O = W
-
-			if(src.sortTag != O.currTag)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue *[tag]*"
-				src.sortTag = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+			if(O.currTag)
+				if(src.sortTag != O.currTag)
+					user << "<span class='notice'>You have labeled the destination as [O.currTag].</span>"
+					if(!src.sortTag)
+						src.sortTag = O.currTag
+						update_icon()
+					else
+						src.sortTag = O.currTag
+					playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+				else
+					user << "<span class='warning'>The package is already labeled for [O.currTag].</span>"
+			else
+				user << "<span class='warning'>You need to set a destination first!</span>"
 
 		else if(istype(W, /obj/item/weapon/pen))
-			var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN)
-			if(!str || !length(str))
-				usr << "\red Invalid text."
-				return
-			for(var/mob/M in viewers())
-				M << "\blue [user] labels [src] as [str]."
-			src.name = "[src.name] ([str])"
+			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
+				if("Title")
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN))
+					if(!str || !length(str))
+						usr << "<span class='warning'> Invalid text.</span>"
+						return
+					user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
+					"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
+					"You hear someone scribbling a note.")
+					name = "[name] ([str])"
+					if(!examtext && !nameset)
+						nameset = 1
+						update_icon()
+					else
+						nameset = 1
+				if("Description")
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN))
+					if(!str || !length(str))
+						usr << "\red Invalid text."
+						return
+					if(!examtext && !nameset)
+						examtext = str
+						update_icon()
+					else
+						examtext = str
+					user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
+					"<span class='notice'>You label \the [src]: \"[examtext]\"</span>",\
+					"You hear someone scribbling a note.")
+		return
+
+	update_icon()
+		overlays = new()
+		if(nameset || examtext)
+			var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
+			if(icon_state == "deliverycloset")
+				I.pixel_x = 2
+				if(label_y == null)
+					label_y = rand(-6, 11)
+				I.pixel_y = label_y
+			else if(icon_state == "deliverycrate")
+				if(label_x == null)
+					label_x = rand(-8, 6)
+				I.pixel_x = label_x
+				I.pixel_y = -3
+			overlays += I
+		if(src.sortTag)
+			var/image/I = new/image('icons/obj/storage.dmi',"delivery_tag")
+			if(icon_state == "deliverycloset")
+				if(tag_x == null)
+					tag_x = rand(-2, 3)
+				I.pixel_x = tag_x
+				I.pixel_y = 9
+			else if(icon_state == "deliverycrate")
+				if(tag_x == null)
+					tag_x = rand(-8, 6)
+				I.pixel_x = tag_x
+				I.pixel_y = -3
+			overlays += I
+
+	examine(mob/user)
+		if(..(user, 4))
+			if(sortTag)
+				user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			if(examtext)
+				user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
 		return
 
 /obj/item/smallDelivery
 	desc = "A small wrapped package."
 	name = "small parcel"
 	icon = 'icons/obj/storage.dmi'
-	icon_state = "deliverycrateSmall"
+	icon_state = "deliverycrate3"
 	var/obj/item/wrapped = null
-	var/sortTag = 0
+	var/sortTag = null
 	flags = FPRINT
-
+	var/examtext = null
+	var/nameset = 0
+	var/tag_x
 
 	attack_self(mob/user as mob)
 		if (src.wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -54,7 +126,7 @@
 			if(ishuman(user))
 				user.put_in_hands(wrapped)
 			else
-				wrapped.loc = get_turf_loc(src)
+				wrapped.loc = get_turf(src)
 
 		del(src)
 		return
@@ -62,23 +134,84 @@
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/device/destTagger))
 			var/obj/item/device/destTagger/O = W
-
-			if(src.sortTag != O.currTag)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue *[tag]*"
-				src.sortTag = O.currTag
-				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+			if(O.currTag)
+				if(src.sortTag != O.currTag)
+					user << "<span class='notice'>You have labeled the destination as [O.currTag].</span>"
+					if(!src.sortTag)
+						src.sortTag = O.currTag
+						update_icon()
+					else
+						src.sortTag = O.currTag
+					playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
+				else
+					user << "<span class='warning'>The package is already labeled for [O.currTag].</span>"
+			else
+				user << "<span class='warning'>You need to set a destination first!</span>"
 
 		else if(istype(W, /obj/item/weapon/pen))
-			var/str = copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN)
-			if(!str || !length(str))
-				usr << "\red Invalid text."
-				return
-			for(var/mob/M in viewers())
-				M << "\blue [user] labels [src] as [str]."
-			src.name = "[src.name] ([str])"
+			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
+				if("Title")
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_NAME_LEN))
+					if(!str || !length(str))
+						usr << "<span class='warning'> Invalid text.</span>"
+						return
+					user.visible_message("\The [user] titles \the [src] with \a [W], marking down: \"[str]\"",\
+					"<span class='notice'>You title \the [src]: \"[str]\"</span>",\
+					"You hear someone scribbling a note.")
+					name = "[name] ([str])"
+					if(!examtext && !nameset)
+						nameset = 1
+						update_icon()
+					else
+						nameset = 1
+
+				if("Description")
+					var/str = trim(copytext(sanitize(input(usr,"Label text?","Set label","")),1,MAX_MESSAGE_LEN))
+					if(!str || !length(str))
+						usr << "\red Invalid text."
+						return
+					if(!examtext && !nameset)
+						examtext = str
+						update_icon()
+					else
+						examtext = str
+					user.visible_message("\The [user] labels \the [src] with \a [W], scribbling down: \"[examtext]\"",\
+					"<span class='notice'>You label \the [src]: \"[examtext]\"</span>",\
+					"You hear someone scribbling a note.")
 		return
 
+	update_icon()
+		overlays = new()
+		if((nameset || examtext) && icon_state != "deliverycrate1")
+			var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
+			if(icon_state == "deliverycrate5")
+				I.pixel_y = -1
+			overlays += I
+		if(src.sortTag)
+			var/image/I = new/image('icons/obj/storage.dmi',"delivery_tag")
+			switch(icon_state)
+				if("deliverycrate1")
+					I.pixel_y = -5
+				if("deliverycrate2")
+					I.pixel_y = -2
+				if("deliverycrate3")
+					I.pixel_y = 0
+				if("deliverycrate4")
+					if(tag_x == null)
+						tag_x = rand(0,5)
+					I.pixel_x = tag_x
+					I.pixel_y = 3
+				if("deliverycrate5")
+					I.pixel_y = -3
+			overlays += I
+
+	examine(mob/user)
+		if(..(user, 4))
+			if(sortTag)
+				user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			if(examtext)
+				user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+		return
 
 /obj/item/weapon/packageWrap
 	name = "package wrapper"
@@ -117,10 +250,24 @@
 				var/i = round(O.w_class)
 				if(i in list(1,2,3,4,5))
 					P.icon_state = "deliverycrate[i]"
+					switch(i)
+						if(1) P.name = "tiny parcel"
+						if(3) P.name = "normal-sized parcel"
+						if(4) P.name = "large parcel"
+						if(5) P.name = "huge parcel"
+				if(i < 1)
+					P.icon_state = "deliverycrate1"
+					P.name = "tiny parcel"
+				if(i > 5)
+					P.icon_state = "deliverycrate5"
+					P.name = "huge parcel"
 				P.add_fingerprint(usr)
 				O.add_fingerprint(usr)
 				src.add_fingerprint(usr)
 				src.amount -= 1
+				user.visible_message("\The [user] wraps \a [target] with \a [src].",\
+				"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
+				"You hear someone taping paper around a small object.")
 		else if (istype(target, /obj/structure/closet/crate))
 			var/obj/structure/closet/crate/O = target
 			if (src.amount > 3 && !O.opened)
@@ -129,8 +276,11 @@
 				P.wrapped = O
 				O.loc = P
 				src.amount -= 3
+				user.visible_message("\The [user] wraps \a [target] with \a [src].",\
+				"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
+				"You hear someone taping paper around a large object.")
 			else if(src.amount < 3)
-				user << "\blue You need more paper."
+				user << "<span class='warning'>You need more paper.</span>"
 		else if (istype (target, /obj/structure/closet))
 			var/obj/structure/closet/O = target
 			if (src.amount > 3 && !O.opened)
@@ -139,8 +289,11 @@
 				O.welded = 1
 				O.loc = P
 				src.amount -= 3
+				user.visible_message("\The [user] wraps \a [target] with \a [src].",\
+				"<span class='notice'>You wrap \the [target], leaving [amount] units of paper on \the [src].</span>",\
+				"You hear someone taping paper around a large object.")
 			else if(src.amount < 3)
-				user << "\blue You need more paper."
+				user << "<span class='warning'>You need more paper.</span>"
 		else
 			user << "\blue The object you are trying to wrap is unsuitable for the sorting machinery!"
 		if (src.amount <= 0)
@@ -149,10 +302,10 @@
 			return
 		return
 
-	examine()
-		if(src in usr)
-			usr << "\blue There are [amount] units of package wrap left!"
-		..()
+	examine(mob/user)
+		if(..(user, 0))
+			user << "\blue There are [amount] units of package wrap left!"
+		
 		return
 
 
@@ -161,11 +314,6 @@
 	desc = "Used to set the destination of properly wrapped packages."
 	icon_state = "dest_tagger"
 	var/currTag = 0
-	//The whole system for the sorttype var is determined based on the order of this list,
-	//disposals must always be 1, since anything that's untagged will automatically go to disposals, or sorttype = 1 --Superxpdude
-
-	//If you don't want to fuck up disposals, add to this list, and don't change the order.
-	//If you insist on changing the order, you'll have to change every sort junction to reflect the new order. --Pete
 
 	w_class = 2
 	item_state = "electronic"
@@ -173,16 +321,16 @@
 	slot_flags = SLOT_BELT
 
 	proc/openwindow(mob/user as mob)
-		var/dat = "<tt><center><h1><b>TagMaster 2.2</b></h1></center>"
+		var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 		dat += "<table style='width:100%; padding:4px;'><tr>"
-		for (var/i = 1, i <= TAGGERLOCATIONS.len, i++)
-			dat += "<td><a href='?src=\ref[src];nextTag=[i]'>[TAGGERLOCATIONS[i]]</a></td>"
+		for(var/i = 1, i <= tagger_locations.len, i++)
+			dat += "<td><a href='?src=\ref[src];nextTag=[tagger_locations[i]]'>[tagger_locations[i]]</a></td>"
 
 			if (i%4==0)
 				dat += "</tr><tr>"
 
-		dat += "</tr></table><br>Current Selection: [currTag ? TAGGERLOCATIONS[currTag] : "None"]</tt>"
+		dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
 
 		user << browse(dat, "window=destTagScreen;size=450x350")
 		onclose(user, "destTagScreen")
@@ -193,9 +341,8 @@
 
 	Topic(href, href_list)
 		src.add_fingerprint(usr)
-		if(href_list["nextTag"])
-			var/n = text2num(href_list["nextTag"])
-			src.currTag = n
+		if(href_list["nextTag"] && href_list["nextTag"] in tagger_locations)
+			src.currTag = href_list["nextTag"]
 		openwindow(usr)
 
 /obj/machinery/disposal/deliveryChute
@@ -242,20 +389,8 @@
 	flush()
 		flushing = 1
 		flick("intake-closing", src)
-		var/deliveryCheck = 0
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 													// travels through the pipes.
-		for(var/obj/structure/bigDelivery/O in src)
-			deliveryCheck = 1
-			if(O.sortTag == 0)
-				O.sortTag = 1
-		for(var/obj/item/smallDelivery/O in src)
-			deliveryCheck = 1
-			if (O.sortTag == 0)
-				O.sortTag = 1
-		if(deliveryCheck == 0)
-			H.destinationTag = 1
-
 		air_contents = new()		// new empty gas resv.
 
 		sleep(10)

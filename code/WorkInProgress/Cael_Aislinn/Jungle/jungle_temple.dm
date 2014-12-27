@@ -86,9 +86,6 @@
 					for(var/coin_type in typesof(/obj/item/weapon/coin))
 						possible_spawns += coin_type
 
-					//no icon_state for mythril coins
-					possible_spawns -= /obj/item/weapon/coin/mythril
-
 					var/coin_type = pick(possible_spawns)
 					for(var/i=0,i<amount,i++)
 						new coin_type(C)
@@ -235,7 +232,7 @@
 				var/obj/structure/closet/crate/secure/gear/C = new(src.loc)
 				var/num = rand(2,6)
 				for(var/i=0,i<num,i++)
-					var/spawn_type = pick(/obj/item/device/flashlight/flare, /obj/item/trash/candle, /obj/item/candle/, /obj/item/weapon/storage/box/matches)
+					var/spawn_type = pick(/obj/item/device/flashlight/flare, /obj/item/trash/candle, /obj/item/weapon/flame/candle/, /obj/item/weapon/storage/box/matches)
 					new spawn_type(C)
 			if("engineering")
 				var/obj/structure/closet/crate/secure/gear/C = new(src.loc)
@@ -306,7 +303,7 @@
 	switch(trap_type)
 		if("sawburst")
 			M << "\red <b>A sawblade shoots out of the ground and strikes you!</b>"
-			M.apply_damage(rand(5,10), BRUTE)
+			M.apply_damage(rand(5,10), BRUTE, sharp=1, edge=1)
 
 			var/atom/myloc = src.loc
 			var/image/flicker = image('code/WorkInProgress/Cael_Aislinn/Jungle/jungle.dmi',"sawblade")
@@ -371,7 +368,7 @@
 
 				var/predir = M.dir
 				step(M, throw_dir)
-				M.dir = predir
+				M.set_dir(predir)
 
 //gives turf a different description, to try and trick players
 /obj/effect/step_trigger/trap/fake

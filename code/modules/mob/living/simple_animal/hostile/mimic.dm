@@ -10,9 +10,9 @@
 	icon_living = "crate"
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
-	response_help = "touches the"
-	response_disarm = "pushes the"
-	response_harm = "hits the"
+	response_help = "touches"
+	response_disarm = "pushes"
+	response_harm = "hits"
 	speed = 4
 	maxHealth = 250
 	health = 250
@@ -20,7 +20,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	attacktext = "attacks"
+	attacktext = "attacked"
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	min_oxy = 0
@@ -39,14 +39,11 @@
 /mob/living/simple_animal/hostile/mimic/FindTarget()
 	. = ..()
 	if(.)
-		emote("growls at [.]")
+		audible_emote("growls at [.]")
 
-/mob/living/simple_animal/hostile/mimic/Die()
+/mob/living/simple_animal/hostile/mimic/death()
 	..()
-	visible_message("\red <b>[src]</b> stops moving!")
 	del(src)
-
-
 
 //
 // Crate Mimic
@@ -56,7 +53,7 @@
 // Aggro when you try to open them. Will also pickup loot when spawns and drop it when dies.
 /mob/living/simple_animal/hostile/mimic/crate
 
-	attacktext = "bites"
+	attacktext = "bitten"
 
 	stop_automated_movement = 1
 	wander = 0
@@ -107,7 +104,7 @@
 	..()
 	icon_state = initial(icon_state)
 
-/mob/living/simple_animal/hostile/mimic/crate/Die()
+/mob/living/simple_animal/hostile/mimic/crate/death()
 
 	var/obj/structure/closet/crate/C = new(get_turf(src))
 	// Put loot in crate
@@ -127,7 +124,7 @@
 // Copy Mimic
 //
 
-var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window)
+var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)
 
 /mob/living/simple_animal/hostile/mimic/copy
 
@@ -141,7 +138,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	..(loc)
 	CopyObject(copy, creator)
 
-/mob/living/simple_animal/hostile/mimic/copy/Die()
+/mob/living/simple_animal/hostile/mimic/copy/death()
 
 	for(var/atom/movable/M in src)
 		M.loc = get_turf(src)

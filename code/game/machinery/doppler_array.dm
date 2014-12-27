@@ -44,12 +44,11 @@ var/list/doppler_arrays = list()
 
 
 /obj/machinery/doppler_array/power_change()
+	..()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else
-		if( powered() )
+		if( !(stat & NOPOWER) )
 			icon_state = initial(icon_state)
-			stat &= ~NOPOWER
 		else
 			icon_state = "[initial(icon_state)]-off"
-			stat |= NOPOWER

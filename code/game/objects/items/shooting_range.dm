@@ -61,7 +61,7 @@
 						user.put_in_hands(src)
 						user << "You take the target out of the stake."
 				else
-					src.loc = get_turf_loc(user)
+					src.loc = get_turf(user)
 					user << "You take the target out of the stake."
 
 				stake.pinned_target = null
@@ -116,7 +116,7 @@
 
 			if(Proj.damage >= 20 || istype(Proj, /obj/item/projectile/beam/practice))
 				bmark.icon_state = "scorch"
-				bmark.dir = pick(NORTH,SOUTH,EAST,WEST) // random scorch design
+				bmark.set_dir(pick(NORTH,SOUTH,EAST,WEST)) // random scorch design
 
 
 			else

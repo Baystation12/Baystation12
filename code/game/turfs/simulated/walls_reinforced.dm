@@ -5,30 +5,19 @@
 	opacity = 1
 	density = 1
 
+	damage_cap = 1000
+	max_temperature = 6000
+	armor = 0.1 // Only 10% damage from gunfire, it's made from strong alloys and stuff.
+
 	walltype = "rwall"
 
 	var/d_state = 0
 
-/turf/simulated/wall/r_wall/attack_hand(mob/user as mob)
-	if (HULK in user.mutations)
-		if (prob(10) || rotting)
-			usr << text("\blue You smash through the wall.")
-			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			dismantle_wall(1)
-			return
-		else
-			usr << text("\blue You punch the wall.")
-			return
-
-	if(rotting)
-		user << "\blue This wall feels rather unstable."
-		return
-
-	user << "\blue You push the wall but nothing happens!"
-	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
-	src.add_fingerprint(user)
-	return
-
+/turf/simulated/wall/r_wall
+	hulk_destroy_prob = 10
+	hulk_take_damage = 0
+	rotting_destroy_touch = 0
+	rotting_touch_message = "\blue This wall feels rather unstable."
 
 /turf/simulated/wall/r_wall/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -80,6 +69,19 @@
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		user << "<span class='notice'>This wall is too thick to slice through. You will need to find a different path.</span>"
 		return
+
+	if(damage && istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.remove_fuel(0,user))
+			user << "<span class='notice'>You start repairing the damage to [src].</span>"
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+			if(do_after(user, max(5, damage / 5)) && WT && WT.isOn())
+				user << "<span class='notice'>You finish repairing the damage to [src].</span>"
+				take_damage(-damage)
+			return
+		else
+			user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
+			return
 
 	var/turf/T = user.loc	//get user's location for delay checks
 

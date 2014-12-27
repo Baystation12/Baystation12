@@ -20,7 +20,7 @@
 	harm_intent_damage = 8
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	attacktext = "bites"
+	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	//Space carp aren't affected by atmos.
@@ -34,7 +34,7 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	break_stuff_probability = 2
+	break_stuff_probability = 15
 
 	faction = "carp"
 

@@ -104,14 +104,17 @@
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/stack/sheet/metal) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
-		var/obj/item/weapon/ed209_assembly/B = new /obj/item/weapon/ed209_assembly
-		B.loc = get_turf(src)
-		user << "You armed the robot frame"
-		W:use(1)
-		if (user.get_inactive_hand()==src)
-			user.before_take_item(src)
-			user.put_in_inactive_hand(B)
-		del(src)
+		var/obj/item/stack/sheet/metal/M = W
+		if (M.use(1))
+			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
+			B.loc = get_turf(src)
+			user << "<span class='notice'>You armed the robot frame.</span>"
+			if (user.get_inactive_hand()==src)
+				user.before_take_item(src)
+				user.put_in_inactive_hand(B)
+			del(src)
+		else
+			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
 	if(istype(W, /obj/item/robot_parts/l_leg))
 		if(src.l_leg)	return
 		user.drop_item()
@@ -166,7 +169,7 @@
 		var/obj/item/device/mmi/M = W
 		if(check_completion())
 			if(!istype(loc,/turf))
-				user << "\red You can't put the [W] in, the frame has to be standing on the ground to be perfectly precise."
+				user << "\red You can't put \the [W] in, the frame has to be standing on the ground to be perfectly precise."
 				return
 			if(!M.brainmob)
 				user << "\red Sticking an empty [W] into the frame would sort of defeat the purpose."
@@ -179,7 +182,7 @@
 							ghost_can_reenter = 1
 							break
 				if(!ghost_can_reenter)
-					user << "<span class='notice'>The [W] is completely unresponsive; there's no point.</span>"
+					user << "<span class='notice'>\The [W] is completely unresponsive; there's no point.</span>"
 					return
 
 			if(M.brainmob.stat == DEAD)
@@ -222,6 +225,8 @@
 				cell_component.installed = 1
 
 			feedback_inc("cyborg_birth",1)
+			callHook("borgify", list(O))
+			O.notify_ai(1)
 			O.Namepick()
 
 			del(src)
@@ -250,12 +255,12 @@
 			W.loc = src
 			src.cell = W
 			user << "\blue You insert the cell!"
-	if(istype(W, /obj/item/weapon/cable_coil))
+	if(istype(W, /obj/item/stack/cable_coil))
 		if(src.wires)
 			user << "\blue You have already inserted wire!"
 			return
 		else
-			var/obj/item/weapon/cable_coil/coil = W
+			var/obj/item/stack/cable_coil/coil = W
 			coil.use(1)
 			src.wires = 1.0
 			user << "\blue You insert the wire!"
@@ -264,7 +269,10 @@
 /obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/device/flash))
-		if(src.flash1 && src.flash2)
+		if(istype(user,/mob/living/silicon/robot))
+			user << "\red How do you propose to do that?"
+			return
+		else if(src.flash1 && src.flash2)
 			user << "\blue You have already inserted the eyes!"
 			return
 		else if(src.flash1)

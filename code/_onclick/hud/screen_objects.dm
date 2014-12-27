@@ -91,7 +91,7 @@
 	if(master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
-			master.attackby(I, usr)
+			usr.ClickOn(master)
 			usr.next_move = world.time+2
 	return 1
 
@@ -235,8 +235,6 @@
 					if("walk")
 						usr.m_intent = "run"
 						usr.hud_used.move_intent.icon_state = "running"
-				if(istype(usr,/mob/living/carbon/alien/humanoid))
-					usr.update_icons()
 		if("m_intent")
 			if(!usr.m_int)
 				switch(usr.m_intent)
@@ -269,25 +267,39 @@
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
-						if(!istype(C.wear_mask, /obj/item/clothing/mask))
-							C << "<span class='notice'>You are not wearing a mask.</span>"
+
+						var/no_mask
+						if(!(C.wear_mask && C.wear_mask.flags & AIRTIGHT))
+							var/mob/living/carbon/human/H = C
+							if(!(H.head && H.head.flags & AIRTIGHT))
+								no_mask = 1
+
+						if(no_mask)
+							C << "<span class='notice'>You are not wearing a suitable mask or helmet.</span>"
 							return 1
 						else
 							var/list/nicename = null
 							var/list/tankcheck = null
 							var/breathes = "oxygen"    //default, we'll check later
-							var/list/contents = list()							
+							var/list/contents = list()
+							var/from = "on"
 
 							if(ishuman(C))
 								var/mob/living/carbon/human/H = C
 								breathes = H.species.breath_type
 								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
 								tankcheck = list (H.s_store, C.back, H.belt, C.r_hand, C.l_hand, H.l_store, H.r_store)
-
-							else    
-
-								nicename = list("Right Hand", "Left Hand", "Back")
+							else
+								nicename = list("right hand", "left hand", "back")
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
+
+							// Rigs are a fucking pain since they keep an air tank in nullspace.
+							if(istype(C.back,/obj/item/weapon/rig))
+								var/obj/item/weapon/rig/rig = C.back
+								if(rig.air_supply)
+									from = "in"
+									nicename |= "hardsuit"
+									tankcheck |= rig.air_supply
 
 							for(var/i=1, i<tankcheck.len+1, ++i)
 								if(istype(tankcheck[i], /obj/item/weapon/tank))
@@ -295,30 +307,30 @@
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									switch(breathes)					
+									switch(breathes)
 																		//These tanks we're sure of their contents
 										if("nitrogen") 							//So we're a bit more picky about them.
-											
-											if(t.air_contents.nitrogen && !t.air_contents.oxygen)
-												contents.Add(t.air_contents.nitrogen)
+
+											if(t.air_contents.gas["nitrogen"] && !t.air_contents.gas["oxygen"])
+												contents.Add(t.air_contents.gas["nitrogen"])
 											else
-												contents.Add(0)	
+												contents.Add(0)
 
 										if ("oxygen")
-											if(t.air_contents.oxygen && !t.air_contents.phoron) 
-												contents.Add(t.air_contents.oxygen)
+											if(t.air_contents.gas["oxygen"] && !t.air_contents.gas["phoron"])
+												contents.Add(t.air_contents.gas["oxygen"])
 											else
 												contents.Add(0)
 
 										// No races breath this, but never know about downstream servers.
 										if ("carbon dioxide")
-											if(t.air_contents.carbon_dioxide && !t.air_contents.phoron)
-												contents.Add(t.air_contents.carbon_dioxide)
+											if(t.air_contents.gas["carbon_dioxide"] && !t.air_contents.gas["phoron"])
+												contents.Add(t.air_contents.gas["carbon_dioxide"])
 											else
 												contents.Add(0)
-										
-	
-								else									
+
+
+								else
 									//no tank so we set contents to 0
 									contents.Add(0)
 
@@ -328,19 +340,19 @@
 							var/bestcontents = 0
 							for(var/i=1, i <  contents.len + 1 , ++i)
 								if(!contents[i])
-									continue	
+									continue
 								if(contents[i] > bestcontents)
 									best = i
 									bestcontents = contents[i]
-							
-							
+
+
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] on your [nicename[best]].</span>"
+								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>"
 								C.internal = tankcheck[best]
-							
-								
+
+
 							if(C.internal)
 								if(C.internals)
 									C.internals.icon_state = "internal1"
@@ -370,10 +382,21 @@
 			usr.drop_item_v()
 
 		if("module")
-			if(issilicon(usr))
-				if(usr:module)
+			if(isrobot(usr))
+				var/mob/living/silicon/robot/R = usr
+//				if(R.module)
+//					R.hud_used.toggle_show_robot_modules()
+//					return 1
+				R.pick_module()
+
+		if("inventory")
+			if(isrobot(usr))
+				var/mob/living/silicon/robot/R = usr
+				if(R.module)
+					R.hud_used.toggle_show_robot_modules()
 					return 1
-				usr:pick_module()
+				else
+					R << "You haven't selected a module yet."
 
 		if("radio")
 			if(issilicon(usr))
@@ -383,8 +406,13 @@
 				usr:installed_modules()
 
 		if("store")
-			if(issilicon(usr))
-				usr:uneq_active()
+			if(isrobot(usr))
+				var/mob/living/silicon/robot/R = usr
+				if(R.module)
+					R.uneq_active()
+					R.hud_used.update_robot_modules_display()
+				else
+					R << "You haven't selected a module yet."
 
 		if("module1")
 			if(istype(usr, /mob/living/silicon/robot))

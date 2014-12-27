@@ -510,14 +510,9 @@ datum/mind
 								I.Del()
 								break
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
-				if("add")
-					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-					L.imp_in = H
-					L.implanted = 1
-					var/datum/organ/external/affected = H.organs_by_name["head"]
-					affected.implants += L
-					L.part = affected
 
+				if("add")
+					H.implant_loyalty(H, override = TRUE)
 					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
 					if(src in ticker.mode.revolutionaries)
 						special_role = null
@@ -533,7 +528,7 @@ datum/mind
 						special_role = null
 						var/datum/game_mode/cult/cult = ticker.mode
 						if (istype(cult))
-							cult.memoize_cult_objectives(src)
+							cult.memorize_cult_objectives(src)
 						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being in a cult.  Have a productive day!</B></FONT>"
 						memory = ""
 					if(src in ticker.mode.traitors)
@@ -541,9 +536,11 @@ datum/mind
 						special_role = null
 						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+				else
+
 
 		else if (href_list["revolution"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)   
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 
 			switch(href_list["revolution"])
 				if("clear")
@@ -567,7 +564,7 @@ datum/mind
 						current << "\red <FONT size = 3><B>Revolution has been disappointed of your leader traits! You are a regular revolutionary now!</B></FONT>"
 					else if(!(src in ticker.mode.revolutionaries))
 						current << "\red <FONT size = 3> You are now a revolutionary! Help your cause. Do not harm your fellow freedom fighters. You can identify your comrades by the red \"R\" icons, and your leaders by the blue \"R\" icons. Help them kill the heads to win the revolution!</FONT>"
-						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						show_objectives(src)
 					else
 						return
 					ticker.mode.revolutionaries += src
@@ -580,7 +577,7 @@ datum/mind
 						ticker.mode.revolutionaries -= src
 						ticker.mode.update_rev_icons_removed(src)
 						current << "\red <FONT size = 3><B>You have proved your devotion to revoltion! You are a head revolutionary now!</B></FONT>"
-						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						show_objectives(src)
 					else if(!(src in ticker.mode.head_revolutionaries))
 						current << "\blue You are a member of the revolutionaries' leadership now!"
 					else
@@ -642,24 +639,33 @@ datum/mind
 			switch(href_list["cult"])
 				if("clear")
 					if(src in ticker.mode.cult)
-						ticker.mode.remove_cultist(src)
-						log_admin("[key_name_admin(usr)] has de-cult'ed [current].")
-				if("cultist")
-					if(!(src in ticker.mode.cult))
-						ticker.mode.add_cultist(src)
-						special_role = "Cultist"
-						current << "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</b></i></font>"
-						current << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
-						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						ticker.mode.cult -= src
+						ticker.mode.update_cult_icons_removed(src)
+						special_role = null
 						var/datum/game_mode/cult/cult = ticker.mode
 						if (istype(cult))
 							if(!config.objectives_disabled)
-								cult.memoize_cult_objectives(src)
+								cult.memorize_cult_objectives(src)
+						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a cultist!</B></FONT>"
+						memory = ""
+						log_admin("[key_name_admin(usr)] has de-cult'ed [current].")
+				if("cultist")
+					if(!(src in ticker.mode.cult))
+						ticker.mode.cult += src
+						ticker.mode.update_cult_icons_added(src)
+						special_role = "Cultist"
+						current << "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</b></i></font>"
+						current << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
+						var/datum/game_mode/cult/cult = ticker.mode
+						if (istype(cult))
+							if(!config.objectives_disabled)
+								cult.memorize_cult_objectives(src)
+						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has cult'ed [current].")
 				if("tome")
 					var/mob/living/carbon/human/H = current
 					if (istype(H))
-						var/obj/item/weapon/tome/T = new(H)
+						var/obj/item/weapon/book/tome/T = new(H)
 
 						var/list/slots = list (
 							"backpack" = slot_in_backpack,
@@ -695,7 +701,7 @@ datum/mind
 						special_role = "Wizard"
 						//ticker.mode.learn_basic_spells(current)
 						current << "<B>\red You are the Space Wizard!</B>"
-						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has wizard'ed [current].")
 				if("lair")
 					current.loc = pick(wizardstart)
@@ -726,8 +732,7 @@ datum/mind
 						ticker.mode.grant_changeling_powers(current)
 						special_role = "Changeling"
 						current << "<B><font color='red'>Your powers are awoken. A flash of memory returns to us...we are a changeling!</font></B>"
-						if(config.objectives_disabled)
-							current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has changeling'ed [current].")
 				if("autoobjectives")
 					if(!config.objectives_disabled)
@@ -756,8 +761,8 @@ datum/mind
 						special_role = null
 						for (var/datum/objective/nuclear/O in objectives)
 							objectives-=O
-						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a syndicate operative!</B></FONT>"
-						log_admin("[key_name_admin(usr)] has de-nuke op'ed [current].")
+						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer an operative!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-merc'd [current].")
 				if("nuclear")
 					if(!(src in ticker.mode.syndicates))
 						ticker.mode.syndicates += src
@@ -766,14 +771,11 @@ datum/mind
 							ticker.mode.prepare_syndicate_leader(src)
 						else
 							current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
-						special_role = "Syndicate"
+						special_role = "Mercenary"
 						current << "\blue You are a [syndicate_name()] agent!"
-						if(config.objectives_disabled)
-							current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
-						else
-							ticker.mode.forge_syndicate_objectives(src)
+						ticker.mode.forge_syndicate_objectives(src)
 						ticker.mode.greet_syndicate(src)
-						log_admin("[key_name_admin(usr)] has nuke op'ed [current].")
+						log_admin("[key_name_admin(usr)] has merc'd [current].")
 				if("lair")
 					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
 				if("dressup")
@@ -789,7 +791,7 @@ datum/mind
 					del(H.w_uniform)
 
 					if (!ticker.mode.equip_syndicate(current))
-						usr << "\red Equipping a syndicate failed!"
+						usr << "\red Equipping an operative failed!"
 				if("tellcode")
 					var/code
 					for (var/obj/machinery/nuclearbomb/bombue in machines)
@@ -797,7 +799,7 @@ datum/mind
 							code = bombue.r_code
 							break
 					if (code)
-						store_memory("<B>Syndicate Nuclear Bomb Code</B>: [code]", 0, 0)
+						store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
 						current << "The nuclear authorization code is: <B>[code]</B>"
 					else
 						usr << "\red No valid nuke found!"
@@ -823,8 +825,8 @@ datum/mind
 						special_role = "traitor"
 						current << "<B>\red You are a traitor!</B>"
 						log_admin("[key_name_admin(usr)] has traitor'ed [current].")
-						if (config.objectives_disabled)
-							current << "<i>You have been turned into an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
+						show_objectives()
+
 						if(istype(current, /mob/living/silicon))
 							var/mob/living/silicon/A = current
 							call(/datum/game_mode/proc/add_law_zero)(A)
@@ -966,13 +968,13 @@ datum/mind
 						var/crystals
 						if (suplink)
 							crystals = suplink.uses
-						crystals = input("Amount of telecrystals for [key]","Syndicate uplink", crystals) as null|num
+						crystals = input("Amount of telecrystals for [key]","Operative uplink", crystals) as null|num
 						if (!isnull(crystals))
 							if (suplink)
 								suplink.uses = crystals
 				if("uplink")
 					if (!ticker.mode.equip_traitor(current, !(src in ticker.mode.traitors)))
-						usr << "\red Equipping a syndicate failed!"
+						usr << "\red Equipping an operative failed!"
 
 		else if (href_list["obj_announce"])
 			var/obj_count = 1
@@ -1057,9 +1059,9 @@ datum/mind
 				ticker.mode.prepare_syndicate_leader(src)
 			else
 				current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
-			special_role = "Syndicate"
+			special_role = "Mercenary"
 			assigned_role = "MODE"
-			current << "\blue You are a [syndicate_name()] agent!"
+			current << "\blue You are a [syndicate_name()] mercenary!"
 			ticker.mode.forge_syndicate_objectives(src)
 			ticker.mode.greet_syndicate(src)
 
@@ -1117,7 +1119,7 @@ datum/mind
 			current << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
 			var/datum/game_mode/cult/cult = ticker.mode
 			if (istype(cult))
-				cult.memoize_cult_objectives(src)
+				cult.memorize_cult_objectives(src)
 			else
 				var/explanation = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it."
 				current << "<B>Objective #1</B>: [explanation]"
@@ -1127,7 +1129,7 @@ datum/mind
 
 		var/mob/living/carbon/human/H = current
 		if (istype(H))
-			var/obj/item/weapon/tome/T = new(H)
+			var/obj/item/weapon/book/tome/T = new(H)
 
 			var/list/slots = list (
 				"backpack" = slot_in_backpack,
@@ -1202,7 +1204,15 @@ datum/mind
 		return (duration <= world.time - brigged_since)
 
 
-
+//Antagonist role check
+/mob/living/proc/check_special_role(role)
+	if(mind)
+		if(!role)
+			return mind.special_role
+		else
+			return (mind.special_role == role) ? 1 : 0
+	else
+		return 0
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()
@@ -1232,27 +1242,6 @@ datum/mind
 	..()
 	mind.assigned_role = "slime"
 
-//XENO
-/mob/living/carbon/alien/mind_initialize()
-	..()
-	mind.assigned_role = "Alien"
-	//XENO HUMANOID
-/mob/living/carbon/alien/humanoid/queen/mind_initialize()
-	..()
-	mind.special_role = "Queen"
-
-/mob/living/carbon/alien/humanoid/hunter/mind_initialize()
-	..()
-	mind.special_role = "Hunter"
-
-/mob/living/carbon/alien/humanoid/drone/mind_initialize()
-	..()
-	mind.special_role = "Drone"
-
-/mob/living/carbon/alien/humanoid/sentinel/mind_initialize()
-	..()
-	mind.special_role = "Sentinel"
-	//XENO LARVA
 /mob/living/carbon/alien/larva/mind_initialize()
 	..()
 	mind.special_role = "Larva"

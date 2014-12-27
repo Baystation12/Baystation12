@@ -23,7 +23,6 @@
 										"diamond"=0,
 										"phoron"=0,
 										"uranium"=0,
-										//"bananium"=0 No need to state what it can no longer hold
 										)
 	var/res_max_amount = 200000
 	var/datum/research/files
@@ -36,6 +35,7 @@
 	var/screen = "main"
 	var/opened = 0
 	var/temp
+	var/output_dir = SOUTH	//the direction relative to the fabber at which completed parts appear.
 	var/list/part_sets = list( //set names must be unique
 	"Robot"=list(
 						/obj/item/robot_parts/robot_suit,
@@ -60,6 +60,9 @@
 						/obj/item/mecha_parts/part/ripley_left_leg,
 						/obj/item/mecha_parts/part/ripley_right_leg
 					),
+//	"Hoverpod"=list(
+//						/obj/structure/largecrate/hoverpod // Doesn't work, even with required vars. Why? - Gamerofthegame
+//					),
 	"Odysseus"=list(
 						/obj/item/mecha_parts/chassis/odysseus,
 						/obj/item/mecha_parts/part/odysseus_torso,
@@ -106,6 +109,7 @@
 						/obj/item/mecha_parts/mecha_equipment/tool/cable_layer,
 						/obj/item/mecha_parts/mecha_equipment/tool/sleeper,
 						/obj/item/mecha_parts/mecha_equipment/tool/syringe_gun,
+						/obj/item/mecha_parts/mecha_equipment/tool/passenger,
 						/obj/item/mecha_parts/chassis/firefighter,
 						///obj/item/mecha_parts/mecha_equipment/repair_droid,
 						/obj/item/mecha_parts/mecha_equipment/generator,
@@ -203,16 +207,6 @@
 	M << "<font color='red'>You don't have required permissions to use [src]</font>"
 	return 0
 
-/obj/machinery/mecha_part_fabricator/check_access(obj/item/weapon/card/id/I)
-	if(istype(I, /obj/item/device/pda))
-		var/obj/item/device/pda/pda = I
-		I = pda.id
-	if(!istype(I) || !I.access) //not ID or no access
-		return 0
-	for(var/req in req_access)
-		if(!(req in I.access)) //doesn't have this access
-			return 0
-	return 1
 
 /obj/machinery/mecha_part_fabricator/proc/emag()
 	sleep()
@@ -362,6 +356,11 @@
 
 /obj/machinery/mecha_part_fabricator/proc/build_part(var/obj/item/part)
 	if(!part) return
+
+	 // critical exploit prevention, do not remove unless you replace it -walter0o
+	if( !(locate(part, src.contents)) || !(part.vars.Find("construction_time")) || !(part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
+		return
+
 	src.being_built = new part.type(src)
 	src.desc = "It's building [src.being_built]."
 	src.remove_resources(part)
@@ -373,7 +372,7 @@
 	src.overlays -= "fab-active"
 	src.desc = initial(src.desc)
 	if(being_built)
-		src.being_built.Move(get_step(src,SOUTH))
+		src.being_built.Move(get_step(src,output_dir))
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"The following has been completed: [src.being_built] is built\".")
 		src.being_built = null
 	src.updateUsrDialog()
@@ -454,10 +453,10 @@
 	for(var/datum/design/D in files.known_designs)
 		if(D.build_type&16)
 			if(D.category in part_sets)//Checks if it's a valid category
-				if(add_part_to_set(D.category, text2path(D.build_path)))//Adds it to said category
+				if(add_part_to_set(D.category, D.build_path))//Adds it to said category
 					i++
 			else
-				if(add_part_to_set("Misc", text2path(D.build_path)))//If in doubt, chunk it into the Misc
+				if(add_part_to_set("Misc", D.build_path))//If in doubt, chunk it into the Misc
 					i++
 	return i
 
@@ -498,7 +497,7 @@
 				src.updateUsrDialog()
 			return
 */
-	if(!silent)	
+	if(!silent)
 		temp = "Updating local R&D database..."
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
@@ -603,9 +602,26 @@
 	onclose(user, "mecha_fabricator")
 	return
 
+/obj/machinery/mecha_part_fabricator/proc/exploit_prevention(var/obj/Part, mob/user as mob, var/desc_exploit)
+// critical exploit prevention, feel free to improve or replace this, but do not remove it -walter0o
+
+	if(!Part || !user || !istype(Part) || !istype(user)) // sanity
+		return 1
+
+	if( !(locate(Part, src.contents)) || !(Part.vars.Find("construction_time")) || !(Part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
+
+		var/turf/LOC = get_turf(user)
+		message_admins("[key_name_admin(user)] tried to exploit an Exosuit Fabricator to [desc_exploit ? "get the desc of" : "duplicate"] <a href='?_src_=vars;Vars=\ref[Part]'>[Part]</a> ! ([LOC ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[LOC.x];Y=[LOC.y];Z=[LOC.z]'>JMP</a>" : "null"])", 0)
+		log_admin("EXPLOIT : [key_name(user)] tried to exploit an Exosuit Fabricator to [desc_exploit ? "get the desc of" : "duplicate"] [Part] !")
+		return 1
+
+	return null
 
 /obj/machinery/mecha_part_fabricator/Topic(href, href_list)
-	..()
+
+	if(..()) // critical exploit prevention, do not remove unless you replace it -walter0o
+		return
+
 	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
 	if(href_list["part_set"])
 		var/tpart_set = filter.getStr("part_set")
@@ -616,13 +632,25 @@
 				src.part_set = tpart_set
 				screen = "parts"
 	if(href_list["part"])
-		var/list/part = filter.getObj("part")
+		var/obj/part = filter.getObj("part")
+
+		// critical exploit prevention, do not remove unless you replace it -walter0o
+		if(src.exploit_prevention(part, usr))
+			return
+
 		if(!processing_queue)
 			build_part(part)
 		else
 			add_to_queue(part)
 	if(href_list["add_to_queue"])
-		add_to_queue(filter.getObj("add_to_queue"))
+		var/obj/part = filter.getObj("add_to_queue")
+
+		// critical exploit prevention, do not remove unless you replace it -walter0o
+		if(src.exploit_prevention(part, usr))
+			return
+
+		add_to_queue(part)
+
 		return update_queue_on_page()
 	if(href_list["remove_from_queue"])
 		remove_from_queue(filter.getNum("remove_from_queue"))
@@ -661,6 +689,11 @@
 		return update_queue_on_page()
 	if(href_list["part_desc"])
 		var/obj/part = filter.getObj("part_desc")
+
+		// critical exploit prevention, do not remove unless you replace it -walter0o
+		if(src.exploit_prevention(part, usr, 1))
+			return
+
 		if(part)
 			temp = {"<h1>[part] description:</h1>
 						[part.desc]<br>
@@ -688,14 +721,17 @@
 			type = /obj/item/stack/sheet/mineral/phoron
 		if("uranium")
 			type = /obj/item/stack/sheet/mineral/uranium
-		/*if("bananium")
-			type = /obj/item/stack/sheet/mineral/clown Sorry, but no more clown mechs, even if you do manage to get to the clown planet.*/
 		else
 			return 0
 	var/result = 0
 	var/obj/item/stack/sheet/res = new type(src)
+
+	// amount available to take out
 	var/total_amount = round(resources[mat_string]/res.perunit)
-	res.amount = min(total_amount,amount)
+
+	// number of stacks we're going to take out
+	res.amount = round(min(total_amount,amount))
+
 	if(res.amount>0)
 		resources[mat_string] -= res.amount*res.perunit
 		res.Move(src.loc)
@@ -747,9 +783,6 @@
 			if(src.resources["diamond"] >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			/*if(src.resources["bananium"] >= 2000)
-				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
-				G.amount = round(src.resources["bananium"] / G.perunit) Sorry, but no bananium allowed*/
 			del(src)
 			return 1
 		else
@@ -759,6 +792,7 @@
 	if(istype(W, /obj/item/weapon/card/emag))
 		emag()
 		return
+
 	var/material
 	switch(W.type)
 		if(/obj/item/stack/sheet/mineral/gold)
@@ -773,8 +807,6 @@
 			material = "metal"
 		if(/obj/item/stack/sheet/glass)
 			material = "glass"
-		/*if(/obj/item/stack/sheet/mineral/clown)
-			material = "bananium"*/
 		if(/obj/item/stack/sheet/mineral/uranium)
 			material = "uranium"
 		else
@@ -783,14 +815,17 @@
 	if(src.being_built)
 		user << "The fabricator is currently processing. Please wait until completion."
 		return
+
 	var/obj/item/stack/sheet/stack = W
+
 	var/sname = "[stack.name]"
 	var/amnt = stack.perunit
 	if(src.resources[material] < res_max_amount)
-		var/count = 0
-		src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
-		sleep(10)
-		if(stack && stack.amount)
+		if(stack && stack.amount >= 1)
+			var/count = 0
+			src.overlays += "fab-load-[material]"//loading animation is now an overlay based on material type. No more spontaneous conversion of all ores to metal. -vey
+			sleep(10)
+
 			while(src.resources[material] < res_max_amount && stack)
 				src.resources[material] += amnt
 				stack.use(1)
@@ -798,6 +833,9 @@
 			src.overlays -= "fab-load-[material]"
 			user << "You insert [count] [sname] into the fabricator."
 			src.updateUsrDialog()
+		else
+			user << "The fabricator can only accept full sheets of [sname]."
+			return
 	else
 		user << "The fabricator cannot hold more [sname]."
 	return

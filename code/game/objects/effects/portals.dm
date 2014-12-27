@@ -16,9 +16,15 @@
 		return
 	return
 
-/obj/effect/portal/HasEntered(AM as mob|obj)
+/obj/effect/portal/Crossed(AM as mob|obj)
 	spawn(0)
 		src.teleport(AM)
+		return
+	return
+
+/obj/effect/portal/attack_hand(mob/user as mob)
+	spawn(0)
+		src.teleport(user)
 		return
 	return
 

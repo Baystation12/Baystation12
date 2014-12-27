@@ -17,6 +17,7 @@
 	var/range = MELEE //bitflags
 	reliability = 1000
 	var/salvageable = 1
+	var/required_type = /obj/mecha //may be either a type or a list of allowed types
 
 
 /obj/item/mecha_parts/mecha_equipment/proc/do_after_cooldown(target=1)
@@ -94,9 +95,16 @@
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/can_attach(obj/mecha/M as obj)
-	if(istype(M))
-		if(M.equipment.len<M.max_equip)
+	if(M.equipment.len >= M.max_equip)
+		return 0
+
+	if (ispath(required_type))
+		return istype(M, required_type)
+	
+	for (var/path in required_type)
+		if (istype(M, path))
 			return 1
+	
 	return 0
 
 /obj/item/mecha_parts/mecha_equipment/proc/attach(obj/mecha/M as obj)

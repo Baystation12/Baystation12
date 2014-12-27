@@ -48,10 +48,10 @@
 	M.amount = 50
 	src.modules += M
 
-	var/obj/item/stack/sheet/rglass/G = new /obj/item/stack/sheet/rglass(src)
+	var/obj/item/stack/sheet/glass/reinforced/G = new (src)
 	G.amount = 50
 	src.modules += G
 
-	var/obj/item/weapon/cable_coil/W = new /obj/item/weapon/cable_coil(src)
+	var/obj/item/stack/cable_coil/W = new /obj/item/stack/cable_coil(src)
 	W.amount = 50
 	src.modules += W

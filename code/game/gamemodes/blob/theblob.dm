@@ -25,7 +25,7 @@
 	New(loc, var/h = 30)
 		blobs += src
 		src.health = h
-		src.dir = pick(1,2,4,8)
+		src.set_dir(pick(1,2,4,8))
 		src.update_icon()
 		..(loc)
 		return
@@ -87,7 +87,7 @@
 			return 1
 		return 0
 
-/*	temperature_expose(datum/gas_mixture/air, temperature, volume) Blob is currently fireproof
+/*	fire_act(datum/gas_mixture/air, temperature, volume) Blob is currently fireproof
 		if(temperature > T0C+200)
 			health -= 0.01 * temperature
 			update()
@@ -195,7 +195,7 @@
 
 	New(loc, var/h = 10)
 		src.health = h
-		src.dir = pick(1,2,4,8)
+		src.set_dir(pick(1,2,4,8))
 		src.update_idle()
 
 

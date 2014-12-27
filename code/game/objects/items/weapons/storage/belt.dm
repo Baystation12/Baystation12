@@ -14,6 +14,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	can_hold = list(
+		//"/obj/item/weapon/combitool",
 		"/obj/item/weapon/crowbar",
 		"/obj/item/weapon/screwdriver",
 		"/obj/item/weapon/weldingtool",
@@ -21,10 +22,11 @@
 		"/obj/item/weapon/wrench",
 		"/obj/item/device/multitool",
 		"/obj/item/device/flashlight",
-		"/obj/item/weapon/cable_coil",
+		"/obj/item/stack/cable_coil",
 		"/obj/item/device/t_scanner",
 		"/obj/item/device/analyzer",
-		"/obj/item/taperoll/engineering")
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/robotanalyzer")
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -34,7 +36,7 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/weapon/cable_coil(src,30,pick("red","yellow","orange"))
+	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 
 
 /obj/item/weapon/storage/belt/utility/atmostech/New()
@@ -62,7 +64,7 @@
 		"/obj/item/weapon/reagent_containers/pill",
 		"/obj/item/weapon/reagent_containers/syringe",
 		"/obj/item/weapon/reagent_containers/glass/dispenser",
-		"/obj/item/weapon/lighter/zippo",
+		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/storage/fancy/cigarettes",
 		"/obj/item/weapon/storage/pill_bottle",
 		"/obj/item/stack/medical",
@@ -82,7 +84,7 @@
 	max_w_class = 3
 	max_combined_w_class = 21
 	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/grenade",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
 		"/obj/item/weapon/handcuffs",
 		"/obj/item/device/flash",
@@ -93,15 +95,14 @@
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
 		"/obj/item/weapon/melee/baton",
 		"/obj/item/weapon/gun/energy/taser",
-		"/obj/item/weapon/lighter/zippo",
+		"/obj/item/weapon/flame/lighter/zippo",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/clothing/glasses/hud/security",
 		"/obj/item/device/flashlight",
 		"/obj/item/device/pda",
 		"/obj/item/device/radio/headset",
 		"/obj/item/weapon/melee",
-		"/obj/item/taperoll/police",
-		"/obj/item/weapon/gun/energy/taser"
+		"/obj/item/taperoll/police"
 		)
 
 /obj/item/weapon/storage/belt/soulstone
@@ -134,12 +135,6 @@
 		"/obj/item/clothing/mask/luchador"
 		)
 
-/obj/item/weapon/storage/belt/inflatable
-	name = "inflatable duck"
-	desc = "No bother to sink or swim when you can just float!"
-	icon_state = "inflatable"
-	item_state = "inflatable"
-
 /obj/item/weapon/storage/belt/security/tactical
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
@@ -148,23 +143,3 @@
 	storage_slots = 9
 	max_w_class = 3
 	max_combined_w_class = 21
-	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
-		"/obj/item/weapon/reagent_containers/spray/pepper",
-		"/obj/item/weapon/handcuffs",
-		"/obj/item/device/flash",
-		"/obj/item/clothing/glasses",
-		"/obj/item/ammo_casing/shotgun",
-		"/obj/item/ammo_magazine",
-		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
-		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
-		"/obj/item/weapon/melee/baton",
-		"/obj/item/weapon/gun/energy/taser",
-		"/obj/item/weapon/lighter/zippo",
-		"/obj/item/weapon/cigpacket",
-		"/obj/item/clothing/glasses/hud/security",
-		"/obj/item/device/flashlight",
-		"/obj/item/device/pda",
-		"/obj/item/device/radio/headset",
-		"/obj/item/weapon/melee"
-		)

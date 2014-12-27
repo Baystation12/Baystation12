@@ -103,7 +103,7 @@ obj/item/check_airflow_movable(n)
 		density = 1
 		od = 1
 	while(airflow_speed > 0)
-		if(airflow_speed <= 0) return
+		if(airflow_speed <= 0) break
 		airflow_speed = min(airflow_speed,15)
 		airflow_speed -= vsc.airflow_speed_decay
 		if(airflow_speed > 7)
@@ -120,9 +120,9 @@ obj/item/check_airflow_movable(n)
 		if ((!( src.airflow_dest ) || src.loc == src.airflow_dest))
 			src.airflow_dest = locate(min(max(src.x + xo, 1), world.maxx), min(max(src.y + yo, 1), world.maxy), src.z)
 		if ((src.x == 1 || src.x == world.maxx || src.y == 1 || src.y == world.maxy))
-			return
+			break
 		if(!istype(loc, /turf))
-			return
+			break
 		step_towards(src, src.airflow_dest)
 		if(ismob(src) && src:client)
 			src:client:move_delay = world.time + vsc.airflow_mob_slowdown
@@ -224,11 +224,9 @@ mob/living/carbon/human/airflow_hit(atom/A)
 //	for(var/mob/M in hearers(src))
 //		M.show_message("\red <B>[src] slams into [A]!</B>",1,"\red You hear a loud slam!",2)
 	playsound(src.loc, "punch", 25, 1, -1)
-	loc:add_blood(src)
-	if (src.wear_suit)
-		src.wear_suit.add_blood(src)
-	if (src.w_uniform)
-		src.w_uniform.add_blood(src)
+	if (prob(33))
+		loc:add_blood(src)
+		bloody_body(src)
 	var/b_loss = airflow_speed * vsc.airflow_damage
 
 	var/blocked = run_armor_check("head","melee")

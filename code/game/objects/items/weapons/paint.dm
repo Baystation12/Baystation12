@@ -8,8 +8,7 @@ var/global/list/cached_icons = list()
 	icon = 'icons/obj/items.dmi'
 	icon_state = "paint_neutral"
 	item_state = "paintcan"
-	m_amt = 200
-	g_amt = 0
+	matter = list("metal" = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(10,20,30,50,70)
@@ -183,16 +182,12 @@ datum/reagent/paint
 	reaction_turf(var/turf/T, var/volume)
 		if(!istype(T) || istype(T, /turf/space))
 			return
-		var/ind = "[initial(T.icon)][color]"
-		if(!cached_icons[ind])
-			var/icon/overlay = new/icon(initial(T.icon))
-			overlay.Blend(color,ICON_MULTIPLY)
-			overlay.SetIntensity(1.4)
-			T.icon = overlay
-			cached_icons[ind] = T.icon
-		else
-			T.icon = cached_icons[ind]
-		return
+		T.color = color
+
+	reaction_obj(var/obj/O, var/volume)
+		..()
+		if(istype(O,/obj/item/weapon/light))
+			O.color = color
 
 	red
 		name = "Red Paint"

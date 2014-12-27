@@ -40,6 +40,7 @@
 		dat += "<h4>Station Status Display Interlink</h4>"
 
 		dat += "\[ <A HREF='?src=\ref[src];statdisp=blank'>Clear</A> \]<BR>"
+		dat += "\[ <A HREF='?src=\ref[src];statdisp=time'>Station Time</A> \]<BR>"
 		dat += "\[ <A HREF='?src=\ref[src];statdisp=shuttle'>Shuttle ETA</A> \]<BR>"
 		dat += "\[ <A HREF='?src=\ref[src];statdisp=message'>Message</A> \]"
 
@@ -64,6 +65,8 @@
 					post_status("message", message1, message2)
 				if("alert")
 					post_status("alert", href_list["alert"])
+				if("time")
+					post_status("time")
 
 				if("setmsg1")
 					message1 = input("Line 1", "Enter Message Text", message1) as text|null

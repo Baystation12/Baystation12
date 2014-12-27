@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	m_amt = 150
+	matter = list("metal" = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -44,8 +44,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	g_amt = 0
-	m_amt = 75
+	matter = list("metal" = 75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
@@ -103,9 +102,11 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	m_amt = 80
+	matter = list("metal" = 80)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -141,8 +142,7 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	m_amt = 70
-	g_amt = 30
+	matter = list("metal" = 70, "glass" = 30)
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -161,10 +161,9 @@
 	return
 
 
-/obj/item/weapon/weldingtool/examine()
-	set src in usr
-	usr << text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel )
-	return
+/obj/item/weapon/weldingtool/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel )
 
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
@@ -251,9 +250,9 @@
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
-		message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
-		log_game("[key_name(user)] triggered a fueltank explosion.")
-		user << "\red That was stupid of you."
+		message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
+		log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
+		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done."
 		var/obj/structure/reagent_dispensers/fueltank/tank = O
 		tank.explode()
 		return
@@ -334,6 +333,7 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
+			src.w_class = 4
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -348,6 +348,7 @@
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
+		src.w_class = initial(src.w_class)
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -356,7 +357,9 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		if(!E)
+			return
 		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
@@ -393,27 +396,24 @@
 
 
 /obj/item/weapon/weldingtool/largetank
-	name = "Industrial Welding Tool"
+	name = "industrial welding tool"
 	max_fuel = 40
-	m_amt = 70
-	g_amt = 60
+	matter = list("metal" = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "Upgraded Welding Tool"
+	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	m_amt = 70
-	g_amt = 120
+	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
-	name = "Experimental Welding Tool"
+	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	m_amt = 70
-	g_amt = 120
-	origin_tech = "engineering=4;phoron=3"
+	matter = list("metal" = 70, "glass" = 120)
+	origin_tech = "engineering=4;phorontech=3"
 	var/last_gen = 0
 
 
@@ -439,7 +439,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	m_amt = 50
+	matter = list("metal" = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
@@ -458,36 +458,77 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			if(user != M)
-				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src]",\
-				"\red You patch some dents on \the [M]'s [S.display_name]",\
-				"You hear a welder.")
-			else
-				user.visible_message("\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
-				"\red You patch some dents on your [S.display_name]",\
-				"You hear a welder.")
-			return
-
 		if(istype(M,/mob/living/carbon/human))
-
 			var/mob/living/carbon/human/H = M
-
 			if(H.species.flags & IS_SYNTHETIC)
-
-				if(H.getBruteLoss() > 0)
-
-					if(M == user)
-						user << "\red You can't repair damage to your own body - it's against OH&S."
-						return
-
-					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
-						"\red You patch some of the dents on \the [M].",\
-						"You hear a welder.")
-					H.heal_overall_damage(5,0)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
 					return
 
-		user << "Nothing to fix!"
+		if(S.brute_dam)
+			S.heal_damage(15,0,0,1)
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
+
 	else
 		return ..()
+
+/*/obj/item/weapon/combitool
+	name = "combi-tool"
+	desc = "It even has one of those nubbins for doing the thingy."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "combitool"
+	w_class = 2
+
+	var/list/spawn_tools = list(
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/wrench,
+		/obj/item/weapon/wirecutters,
+		/obj/item/weapon/kitchen/utensil/knife,
+		/obj/item/weapon/kitchen/utensil/fork,
+		/obj/item/weapon/hatchet
+		)
+	var/list/tools = list()
+	var/current_tool = 1
+
+/obj/item/weapon/combitool/examine()
+	..()
+	if(loc == usr && tools.len)
+		usr << "It has the following fittings:"
+		for(var/obj/item/tool in tools)
+			usr << "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]"
+
+/obj/item/weapon/combitool/New()
+	..()
+	for(var/type in spawn_tools)
+		tools |= new type(src)
+
+/obj/item/weapon/combitool/attack_self(mob/user as mob)
+	if(++current_tool > tools.len) current_tool = 1
+	var/obj/item/tool = tools[current_tool]
+	if(!tool)
+		user << "You can't seem to find any fittings in \the [src]."
+	else
+		user << "You switch \the [src] to the [tool.name] fitting."
+	return 1
+
+/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!M.Adjacent(user))
+		return 0
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	return (tool ? tool.attack(M,user) : 0)
+
+/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	if(!proximity)
+		return 0
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	tool.loc = user
+	var/resolved = target.attackby(tool,user)
+	if(!resolved && tool && target)
+		tool.afterattack(target,user,1)
+	if(tool)
+		tool.loc = src*/

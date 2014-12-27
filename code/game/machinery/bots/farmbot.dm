@@ -394,7 +394,7 @@
 	if ( emagged ) // Warning, hungry humans detected: throw fertilizer at them
 		spawn(0)
 			fert.loc = src.loc
-			fert.throw_at(target, 16, 3)
+			fert.throw_at(target, 16, 3, src)
 		src.visible_message("\red <b>[src] launches [fert.name] at [target.name]!</b>")
 		flick("farmbot_broke", src)
 		spawn (FARMBOT_EMAG_DELAY)
@@ -441,7 +441,7 @@
 			var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
 			var/datum/organ/external/affecting = human.get_organ(ran_zone(dam_zone))
 			var/armor = human.run_armor_check(affecting, "melee")
-			human.apply_damage(damage,BRUTE,affecting,armor)
+			human.apply_damage(damage,BRUTE,affecting,armor,sharp=1,edge=1)
 
 	else // warning, plants infested with weeds!
 		mode = FARMBOT_MODE_WAITING

@@ -8,10 +8,14 @@ It is used to destroy hand-held objects and advance technological research. Cont
 Note: Must be placed within 3 tiles of the R&D Console
 */
 /obj/machinery/r_n_d/destructive_analyzer
-	name = "Destructive Analyzer"
+	name = "destructive analyzer"
 	icon_state = "d_analyzer"
 	var/obj/item/weapon/loaded_item = null
 	var/decon_mod = 1
+	
+	use_power = 1
+	idle_power_usage = 30
+	active_power_usage = 2500
 
 /obj/machinery/r_n_d/destructive_analyzer/New()
 	..()
@@ -101,13 +105,3 @@ Note: Must be placed within 3 tiles of the R&D Console
 			busy = 0
 		return 1
 	return
-
-//For testing purposes only.
-/*/obj/item/weapon/deconstruction_test
-	name = "Test Item"
-	desc = "WTF?"
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "d20"
-	g_amt = 5000
-	m_amt = 5000
-	origin_tech = "materials=5;phorontech=5;syndicate=5;programming=9"*/

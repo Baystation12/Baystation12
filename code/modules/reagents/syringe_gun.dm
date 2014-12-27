@@ -13,13 +13,11 @@
 	force = 4.0
 	var/list/syringes = new/list()
 	var/max_syringes = 1
-	m_amt = 2000
+	matter = list("metal" = 2000)
 
-/obj/item/weapon/gun/syringe/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
-	usr << "\blue [syringes.len] / [max_syringes] syringes."
+/obj/item/weapon/gun/syringe/examine(mob/user)
+	if(..(user, 2))
+		user << "\blue [syringes.len] / [max_syringes] syringes."
 
 /obj/item/weapon/gun/syringe/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))

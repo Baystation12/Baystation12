@@ -17,11 +17,11 @@
 	icon_state = "welding"
 	flags = (FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH)
 	item_state = "welding"
-	m_amt = 3000
-	g_amt = 1000
+	matter = list("metal" = 3000, "glass" = 1000)
 	var/up = 0
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
+	body_parts_covered = HEAD|FACE|EYES
 	icon_action_button = "action_welding"
 	siemens_coefficient = 0.9
 	w_class = 3
@@ -48,7 +48,7 @@
 			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 			icon_state = "[initial(icon_state)]up"
 			usr << "You push the [src] up out of your face."
-		usr.update_inv_head()	//so our mob-overlays update
+		update_clothing_icon()	//so our mob-overlays update
 
 
 /*
@@ -63,6 +63,7 @@
 	var/status = 0
 	var/fire_resist = T0C+1300	//this is the max temp it can stand before you start to cook. although it might not burn away, you take damage
 	var/processing = 0 //I dont think this is used anywhere.
+	body_parts_covered = EYES
 
 /obj/item/clothing/head/cakehat/process()
 	if(!onfire)
@@ -124,32 +125,10 @@
 	item_color = "pumpkin"
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
-	var/brightness_on = 2 //luminosity when on
-	var/on = 0
+	body_parts_covered = HEAD|EYES
+	brightness_on = 2
+	light_overlay = "helmet_light"
 	w_class = 3
-
-	attack_self(mob/user)
-		if(!isturf(user.loc))
-			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
-			return
-		on = !on
-		icon_state = "hardhat[on]_[item_color]"
-		item_state = "hardhat[on]_[item_color]"
-
-		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
-		else	user.SetLuminosity(user.luminosity - brightness_on)
-
-	pickup(mob/user)
-		if(on)
-			user.SetLuminosity(user.luminosity + brightness_on)
-//			user.UpdateLuminosity()
-			SetLuminosity(0)
-
-	dropped(mob/user)
-		if(on)
-			user.SetLuminosity(user.luminosity - brightness_on)
-//			user.UpdateLuminosity()
-			SetLuminosity(brightness_on)
 
 /*
  * Kitty ears
@@ -159,6 +138,7 @@
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
 	flags = FPRINT | TABLEPASS
+	body_parts_covered = 0
 	var/icon/mob
 	var/icon/mob2
 	siemens_coefficient = 1.5

@@ -47,7 +47,7 @@
 	if(health <= 0)
 		del(src)
 
-/obj/effect/spider/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300)
 		health -= 5
 		healthcheck()
@@ -174,7 +174,7 @@
 			if(prob(25))
 				src.visible_message("\blue \the [src] skitters[pick(" away"," around","")].")
 	else if(prob(5))
-		//ventcrawl!
+		//vent crawl!
 		for(var/obj/machinery/atmospherics/unary/vent_pump/v in view(7,src))
 			if(!v.welded)
 				entry_vent = v

@@ -50,8 +50,10 @@
 		placeholder = 2
 	if (!( isnum(num) ))
 		return
-	if (!( num ))
-		return "0"
+	if (num == 0)
+		var/final = ""
+		for(var/i=1 to placeholder) final = "[final]0"
+		return final
 	var/hex = ""
 	var/i = 0
 	while(16 ** i < num)
@@ -192,6 +194,12 @@ proc/tg_list2text(list/list, glue=",")
 		. += copytext(text, last_found, found)
 		last_found = found + delim_len
 	while(found)
+	
+/proc/text2numlist(text, delimiter="\n")
+	var/list/num_list = list()
+	for(var/x in text2list(text, delimiter))
+		num_list += text2num(x)
+	return num_list
 
 //Case Sensitive!
 /proc/text2listEx(text, delimiter="\n")
@@ -298,6 +306,13 @@ proc/tg_list2text(list/list, glue=",")
 /proc/angle2text(var/degree)
 	return dir2text(angle2dir(degree))
 
+//Converts a blend_mode constant to one acceptable to icon.Blend()
+/proc/blendMode2iconMode(blend_mode)
+	switch(blend_mode)
+		if(BLEND_MULTIPLY) return ICON_MULTIPLY
+		if(BLEND_ADD)      return ICON_ADD
+		if(BLEND_SUBTRACT) return ICON_SUBTRACT
+		else               return ICON_OVERLAY
 
 //Converts a rights bitfield into a string
 /proc/rights2text(rights,seperator="")

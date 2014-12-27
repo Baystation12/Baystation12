@@ -1,9 +1,14 @@
+#define CAT_NORMAL 0
+#define CAT_HIDDEN 1
+#define CAT_COIN   2
+
 /datum/data/vending_product
 	var/product_name = "generic"
 	var/product_path = null
 	var/amount = 0
 	var/price = 0
 	var/display_color = "blue"
+	var/category = CAT_NORMAL
 
 
 
@@ -15,6 +20,11 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
+
+	use_power = 1
+	idle_power_usage = 10
+	var/vend_power_usage = 150 //actuators and stuff
+
 	var/active = 1 //No sales pitches if off!
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
 	var/vend_delay = 10 //How long does it take to vend?
@@ -45,12 +55,9 @@
 	var/shut_up = 1 //Stop spouting those godawful pitches!
 	var/extended_inventory = 0 //can we access the hidden inventory?
 	var/panel_open = 0 //Hacking that vending machine. Gonna get a free candy bar.
-	var/wires = 15
+	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
-	var/const/WIRE_EXTEND = 1
-	var/const/WIRE_SCANID = 2
-	var/const/WIRE_SHOCK = 3
-	var/const/WIRE_SHOOTINV = 4
+	var/datum/wires/vending/wires = null
 
 	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
 	var/obj/item/weapon/spacecash/ewallet/ewallet
@@ -58,6 +65,7 @@
 
 /obj/machinery/vending/New()
 	..()
+	wires = new(src)
 	spawn(4)
 		src.slogan_list = text2list(src.product_slogans, ";")
 
@@ -75,6 +83,14 @@
 		return
 
 	return
+
+/obj/machinery/vending/Del()
+	del(wires) // qdel
+	wires = null
+	if(coin)
+		del(coin) // qdel
+		coin = null
+	..()
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -104,25 +120,32 @@
 	return
 
 /obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+
 	for(var/typepath in productlist)
 		var/amount = productlist[typepath]
 		var/price = prices[typepath]
 		if(isnull(amount)) amount = 1
 
-		var/atom/temp = new typepath(null)
 		var/datum/data/vending_product/R = new /datum/data/vending_product()
-		R.product_name = temp.name
+
 		R.product_path = typepath
 		R.amount = amount
 		R.price = price
 		R.display_color = pick("red","blue","green")
 
 		if(hidden)
+			R.category=CAT_HIDDEN
 			hidden_records += R
 		else if(req_coin)
+			R.category=CAT_COIN
 			coin_records += R
 		else
+			R.category=CAT_NORMAL
 			product_records += R
+
+		var/atom/temp = typepath
+		R.product_name = initial(temp.name)
+
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
 
@@ -158,6 +181,20 @@
 		ewallet = W
 		user << "\blue You insert the [W] into the [src]"
 
+	else if(istype(W, /obj/item/weapon/wrench))
+
+		if(do_after(user, 20))
+			if(!src) return
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
+			switch (anchored)
+				if (0)
+					anchored = 1
+					user.visible_message("[user] tightens the bolts securing \the [src] to the floor.", "You tighten the bolts securing \the [src] to the floor.")
+				if (1)
+					user.visible_message("[user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
+					anchored = 0
+		return
+
 	else if(src.panel_open)
 
 		for(var/datum/data/vending_product/R in product_records)
@@ -173,59 +210,90 @@
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		if(check_accounts)
-			if(vendor_account)
-				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-				if(D)
-					var/transaction_amount = currently_vending.price
-					if(transaction_amount <= D.money)
-
-						//transfer the money
-						D.money -= transaction_amount
-						vendor_account.money += transaction_amount
-
-						//create entries in the two account transaction logs
-						var/datum/transaction/T = new()
-						T.target_name = "[vendor_account.owner_name] (via [src.name])"
-						T.purpose = "Purchase of [currently_vending.product_name]"
-						if(transaction_amount > 0)
-							T.amount = "([transaction_amount])"
-						else
-							T.amount = "[transaction_amount]"
-						T.source_terminal = src.name
-						T.date = current_date_string
-						T.time = worldtime2text()
-						D.transaction_log.Add(T)
-						//
-						T = new()
-						T.target_name = D.owner_name
-						T.purpose = "Purchase of [currently_vending.product_name]"
-						T.amount = "[transaction_amount]"
-						T.source_terminal = src.name
-						T.date = current_date_string
-						T.time = worldtime2text()
-						vendor_account.transaction_log.Add(T)
-
-						// Vend the item
-						src.vend(src.currently_vending, usr)
-						currently_vending = null
+		var/datum/money_account/CH = get_account(C.associated_account_number)
+		if (CH) // Only proceed if card contains proper account number.
+			if(!CH.suspended)
+				if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+					if(vendor_account)
+						var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+						var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+						transfer_and_vend(D)
+					else
+						usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 				else
-					usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
+					//Just Vend it.
+					transfer_and_vend(CH)
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
-			//Just Vend it.
+			usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
+
+/obj/machinery/vending/proc/transfer_and_vend(var/datum/money_account/acc)
+	if(acc)
+		var/transaction_amount = currently_vending.price
+		if(transaction_amount <= acc.money)
+
+			//transfer the money
+			acc.money -= transaction_amount
+			vendor_account.money += transaction_amount
+
+			//create entries in the two account transaction logs
+			var/datum/transaction/T = new()
+			T.target_name = "[vendor_account.owner_name] (via [src.name])"
+			T.purpose = "Purchase of [currently_vending.product_name]"
+			if(transaction_amount > 0)
+				T.amount = "([transaction_amount])"
+			else
+				T.amount = "[transaction_amount]"
+			T.source_terminal = src.name
+			T.date = current_date_string
+			T.time = worldtime2text()
+			acc.transaction_log.Add(T)
+							//
+			T = new()
+			T.target_name = acc.owner_name
+			T.purpose = "Purchase of [currently_vending.product_name]"
+			T.amount = "[transaction_amount]"
+			T.source_terminal = src.name
+			T.date = current_date_string
+			T.time = worldtime2text()
+			vendor_account.transaction_log.Add(T)
+
+			// Vend the item
 			src.vend(src.currently_vending, usr)
 			currently_vending = null
+		else
+			usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 	else
-		usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
-
-/obj/machinery/vending/attack_paw(mob/user as mob)
-	return attack_hand(user)
+		usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
 
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
+
+/obj/machinery/vending/proc/GetProductIndex(var/datum/data/vending_product/P)
+	var/list/plist
+	switch(P.category)
+		if(CAT_NORMAL)
+			plist=product_records
+		if(CAT_HIDDEN)
+			plist=hidden_records
+		if(CAT_COIN)
+			plist=coin_records
+		else
+			warning("UNKNOWN CATEGORY [P.category] IN TYPE [P.product_path] INSIDE [type]!")
+	return plist.Find(P)
+
+/obj/machinery/vending/proc/GetProductByID(var/pid, var/category)
+	switch(category)
+		if(CAT_NORMAL)
+			return product_records[pid]
+		if(CAT_HIDDEN)
+			return hidden_records[pid]
+		if(CAT_COIN)
+			return coin_records[pid]
+		else
+			warning("UNKNOWN PRODUCT: PID: [pid], CAT: [category] INSIDE [type]!")
+			return null
 
 /obj/machinery/vending/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
@@ -258,13 +326,13 @@
 	if (src.product_records.len == 0)
 		dat += "<font color = 'red'>No product loaded!</font>"
 	else
-		var/list/display_records = src.product_records
+		var/list/display_records = list()
+		display_records += src.product_records
+
 		if(src.extended_inventory)
-			display_records = src.product_records + src.hidden_records
+			display_records += src.hidden_records
 		if(src.coin)
-			display_records = src.product_records + src.coin_records
-		if(src.coin && src.extended_inventory)
-			display_records = src.product_records + src.hidden_records + src.coin_records
+			display_records += src.coin_records
 
 		for (var/datum/data/vending_product/R in display_records)
 			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
@@ -272,7 +340,8 @@
 			if(R.price)
 				dat += " <b>(Price: [R.price])</b>"
 			if (R.amount > 0)
-				dat += " <a href='byond://?src=\ref[src];vend=\ref[R]'>(Vend)</A>"
+				var/idx=GetProductIndex(R)
+				dat += " <a href='byond://?src=\ref[src];vend=[idx];cat=[R.category]'>(Vend)</A>"
 			else
 				dat += " <font color = 'red'>SOLD OUT</font>"
 			dat += "<br>"
@@ -280,35 +349,18 @@
 		dat += "</TT>"
 
 	if(panel_open)
-		var/list/vendwires = list(
-			"Violet" = 1,
-			"Orange" = 2,
-			"Goldenrod" = 3,
-			"Green" = 4,
-		)
-		dat += "<br><hr><br><B>Access Panel</B><br>"
-		for(var/wiredesc in vendwires)
-			var/is_uncut = src.wires & APCWireColorToFlag[vendwires[wiredesc]]
-			dat += "[wiredesc] wire: "
-			if(!is_uncut)
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Mend</a>"
-			else
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Cut</a> "
-				dat += "<a href='?src=\ref[src];pulsewire=[vendwires[wiredesc]]'>Pulse</a> "
-			dat += "<br>"
+		dat += wires()
 
-		dat += "<br>"
-		dat += "The orange light is [(src.seconds_electrified == 0) ? "off" : "on"].<BR>"
-		dat += "The red light is [src.shoot_inventory ? "off" : "blinking"].<BR>"
-		dat += "The green light is [src.extended_inventory ? "on" : "off"].<BR>"
-		dat += "The [(src.wires & WIRE_SCANID) ? "purple" : "yellow"] light is on.<BR>"
-
-		if (product_slogans != "")
-			dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
+		if(product_slogans != "")
+			dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
 
 	user << browse(dat, "window=vending")
 	onclose(user, "")
 	return
+
+// returns the wire panel text
+/obj/machinery/vending/proc/wires()
+	return wires.GetInteractWindow()
 
 /obj/machinery/vending/Topic(href, href_list)
 	if(stat & (BROKEN|NOPOWER))
@@ -351,12 +403,15 @@
 					usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
 					return
 
-			if ((!src.allowed(usr)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
-				usr << "\red Access denied." //Unless emagged of course
-				flick(src.icon_deny,src)
+			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+				usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
+				flick(icon_deny,src)
 				return
 
-			var/datum/data/vending_product/R = locate(href_list["vend"])
+			var/idx=text2num(href_list["vend"])
+			var/cat=text2num(href_list["cat"])
+
+			var/datum/data/vending_product/R = GetProductByID(idx,cat)
 			if (!R || !istype(R) || !R.product_path || R.amount <= 0)
 				return
 
@@ -381,27 +436,6 @@
 			src.updateUsrDialog()
 			return
 
-		else if ((href_list["cutwire"]) && (src.panel_open))
-			var/twire = text2num(href_list["cutwire"])
-			if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-				usr << "You need wirecutters!"
-				return
-			if (src.isWireColorCut(twire))
-				src.mend(twire)
-			else
-				src.cut(twire)
-
-		else if ((href_list["pulsewire"]) && (src.panel_open))
-			var/twire = text2num(href_list["pulsewire"])
-			if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return
-			if (src.isWireColorCut(twire))
-				usr << "You can't pulse a cut wire."
-				return
-			else
-				src.pulse(twire)
-
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
@@ -413,8 +447,8 @@
 	return
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
-	if ((!src.allowed(user)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
-		user << "\red Access denied." //Unless emagged of course
+	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+		usr << "<span class='warning'>Access denied.</span>"	//Unless emagged of course
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!
@@ -439,7 +473,7 @@
 			src.speak(src.vend_reply)
 			src.last_reply = world.time
 
-	use_power(5)
+	use_power(vend_power_usage)	//actuators and stuff
 	if (src.icon_vend) //Show the vending animation if needed
 		flick(src.icon_vend,src)
 	spawn(src.vend_delay)
@@ -489,16 +523,15 @@
 	return
 
 /obj/machinery/vending/power_change()
+	..()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else
-		if( powered() )
+		if( !(stat & NOPOWER) )
 			icon_state = initial(icon_state)
-			stat &= ~NOPOWER
 		else
 			spawn(rand(0, 15))
 				src.icon_state = "[initial(icon_state)]-off"
-				stat |= NOPOWER
 
 //Oh no we're malfunctioning!  Dump out some product and break.
 /obj/machinery/vending/proc/malfunction()
@@ -538,67 +571,9 @@
 	if (!throw_item)
 		return 0
 	spawn(0)
-		throw_item.throw_at(target, 16, 3)
+		throw_item.throw_at(target, 16, 3, src)
 	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
 	return 1
-
-/obj/machinery/vending/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/isWireCut(var/wireIndex)
-	var/wireFlag = APCIndexToFlag[wireIndex]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/cut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires &= ~wireFlag
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = 0
-		if(WIRE_SHOCK)
-			src.seconds_electrified = -1
-		if (WIRE_SHOOTINV)
-			if(!src.shoot_inventory)
-				src.shoot_inventory = 1
-
-
-/obj/machinery/vending/proc/mend(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor] //not used in this function
-	src.wires |= wireFlag
-	switch(wireIndex)
-//		if(WIRE_SCANID)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = 0
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = 0
-
-/obj/machinery/vending/proc/pulse(var/wireColor)
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = !src.extended_inventory
-//		if (WIRE_SCANID)
-		if (WIRE_SHOCK)
-			src.seconds_electrified = 30
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = !src.shoot_inventory
-
-
-/obj/machinery/vending/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
-		return 0
-	if(!prob(prb))
-		return 0
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, src)
-	s.start()
-	if (electrocute_mob(user, get_area(src), src, 0.7))
-		return 1
-	else
-		return 0
 
 /*
  * Vending machine types
@@ -649,6 +624,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
 	product_ads = "Drink up!;Booze is good for you!;Alcohol is humanity's best friend.;Quite delighted to serve you!;Care for a nice, cold beer?;Nothing cures you like booze!;Have a sip!;Have a drink!;Have a beer!;Beer is good for you!;Only the finest alcohol!;Best quality booze since 2053!;Award-winning wine!;Maximum alcohol!;Man loves beer.;A toast for progress!"
 	req_access_txt = "25"
@@ -666,9 +642,11 @@
 	icon_state = "coffee"
 	icon_vend = "coffee-vend"
 	vend_delay = 34
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25, /obj/item/weapon/reagent_containers/food/drinks/tea = 25, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
 
 
 
@@ -704,6 +682,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 //This one's from bay12
 /obj/machinery/vending/cart
@@ -724,10 +703,10 @@
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4)
-	contraband = list(/obj/item/weapon/lighter/zippo = 4)
-	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/lighter/random = 2)
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/flame/lighter/random = 4)
+	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
+	premium = list(/obj/item/weapon/storage/fancy/cigar = 5)
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/flame/lighter/random = 2)
 
 
 /obj/machinery/vending/medical
@@ -743,6 +722,7 @@
 					/obj/item/device/healthanalyzer = 5,/obj/item/weapon/reagent_containers/glass/beaker = 4, /obj/item/weapon/reagent_containers/dropper = 2,
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3,/obj/item/weapon/reagent_containers/pill/stox = 4,/obj/item/weapon/reagent_containers/pill/antitox = 6)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 
 //This one's from bay12
@@ -784,7 +764,7 @@
 	req_access_txt = "1"
 	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
-	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/fancy/donut_box = 2)
+	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/donut_box = 2)
 
 /obj/machinery/vending/hydronutrients
 	name = "NutriMax"
@@ -793,9 +773,10 @@
 	product_ads = "We like plants!;Don't you want some?;The greenest thumbs ever.;We like big plants.;Soft soil..."
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
-	products = list(/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/pestspray = 20,
+	products = list(/obj/item/weapon/reagent_containers/glass/fertilizer/ez = 35,/obj/item/weapon/reagent_containers/glass/fertilizer/l4z = 25,/obj/item/weapon/reagent_containers/glass/fertilizer/rh = 15,/obj/item/weapon/plantspray/pests = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
@@ -803,16 +784,45 @@
 	product_slogans = "THIS'S WHERE TH' SEEDS LIVE! GIT YOU SOME!;Hands down the best seed selection on the station!;Also certain mushroom varieties available, more for experts! Get certified today!"
 	product_ads = "We like plants!;Grow some crops!;Grow, baby, growww!;Aw h'yeah son!"
 	icon_state = "seeds"
+
 	products = list(/obj/item/seeds/bananaseed = 3,/obj/item/seeds/berryseed = 3,/obj/item/seeds/carrotseed = 3,/obj/item/seeds/chantermycelium = 3,/obj/item/seeds/chiliseed = 3,
 					/obj/item/seeds/cornseed = 3, /obj/item/seeds/eggplantseed = 3, /obj/item/seeds/potatoseed = 3, /obj/item/seeds/replicapod = 3,/obj/item/seeds/soyaseed = 3,
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,
-					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/sugarcaneseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
+					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/sugarcaneseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/peanutseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
 					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/toy/waterflower = 1)
 
+/obj/machinery/vending/hydroseeds/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+
+	for(var/typepath in productlist)
+		var/amount = productlist[typepath]
+		var/price = prices[typepath]
+		if(isnull(amount)) amount = 1
+
+		var/datum/data/vending_product/R = new /datum/data/vending_product()
+
+		R.product_path = typepath
+		R.amount = amount
+		R.price = price
+		R.display_color = pick("red","blue","green")
+
+		if(hidden)
+			R.category=CAT_HIDDEN
+			hidden_records += R
+		else if(req_coin)
+			R.category=CAT_COIN
+			coin_records += R
+		else
+			R.category=CAT_NORMAL
+			product_records += R
+
+		var/obj/item/seeds/S = new typepath(src)
+		R.product_name = S.name
+		del(S)
+	return
 
 /obj/machinery/vending/magivend
 	name = "MagiVend"
@@ -840,6 +850,7 @@
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda = 30)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola = 20)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool
 	name = "YouTool"
@@ -847,7 +858,7 @@
 	icon_state = "tool"
 	icon_deny = "tool-deny"
 	//req_access_txt = "12" //Maintenance access
-	products = list(/obj/item/weapon/cable_coil/random = 10,/obj/item/weapon/crowbar = 5,/obj/item/weapon/weldingtool = 3,/obj/item/weapon/wirecutters = 5,
+	products = list(/obj/item/stack/cable_coil/random = 10,/obj/item/weapon/crowbar = 5,/obj/item/weapon/weldingtool = 3,/obj/item/weapon/wirecutters = 5,
 					/obj/item/weapon/wrench = 5,/obj/item/device/analyzer = 5,/obj/item/device/t_scanner = 5,/obj/item/weapon/screwdriver = 5)
 	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2,/obj/item/clothing/gloves/fyellow = 2)
 	premium = list(/obj/item/clothing/gloves/yellow = 1)
@@ -872,7 +883,7 @@
 	products = list(/obj/item/clothing/under/rank/chief_engineer = 4,/obj/item/clothing/under/rank/engineer = 4,/obj/item/clothing/shoes/orange = 4,/obj/item/clothing/head/hardhat = 4,
 					/obj/item/weapon/storage/belt/utility = 4,/obj/item/clothing/glasses/meson = 4,/obj/item/clothing/gloves/yellow = 4, /obj/item/weapon/screwdriver = 12,
 					/obj/item/weapon/crowbar = 12,/obj/item/weapon/wirecutters = 12,/obj/item/device/multitool = 12,/obj/item/weapon/wrench = 12,/obj/item/device/t_scanner = 12,
-					/obj/item/weapon/cable_coil/heavyduty = 8, /obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
+					/obj/item/stack/cable_coil/heavyduty = 8, /obj/item/weapon/cell = 8, /obj/item/weapon/weldingtool = 8,/obj/item/clothing/head/welding = 8,
 					/obj/item/weapon/light/tube = 10,/obj/item/clothing/suit/fire = 4, /obj/item/weapon/stock_parts/scanning_module = 5,/obj/item/weapon/stock_parts/micro_laser = 5,
 					/obj/item/weapon/stock_parts/matter_bin = 5,/obj/item/weapon/stock_parts/manipulator = 5,/obj/item/weapon/stock_parts/console_screen = 5)
 	// There was an incorrect entry (cablecoil/power).  I improvised to cablecoil/heavyduty.
@@ -886,7 +897,7 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	req_access_txt = "29"
-	products = list(/obj/item/clothing/suit/storage/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/weapon/cable_coil = 4,/obj/item/device/flash = 4,
+	products = list(/obj/item/clothing/suit/storage/toggle/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/stack/cable_coil = 4,/obj/item/device/flash = 4,
 					/obj/item/weapon/cell/high = 12, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
 					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)

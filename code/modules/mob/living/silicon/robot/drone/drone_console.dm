@@ -14,11 +14,6 @@
 /obj/machinery/computer/drone_control/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/computer/drone_control/attack_paw(var/mob/user as mob)
-
-	return src.attack_hand(user)
-	return
-
 /obj/machinery/computer/drone_control/attack_hand(var/mob/user as mob)
 	if(..())
 		return
@@ -60,9 +55,9 @@
 	if (href_list["setarea"])
 
 		//Probably should consider using another list, but this one will do.
-		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in TAGGERLOCATIONS
+		var/t_area = input("Select the area to ping.", "Set Target Area", null) as null|anything in tagger_locations
 
-		if(!t_area || TAGGERLOCATIONS[t_area])
+		if(!t_area)
 			return
 
 		drone_call_area = t_area

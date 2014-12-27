@@ -6,53 +6,55 @@
 /mob/aiEye
 	name = "Inactive AI Eye"
 	icon = 'icons/obj/status_display.dmi' // For AI friend secret shh :o
+	var/list/visibleCameraChunks = list()
 	var/mob/living/silicon/ai/ai = null
 	density = 0
 	status_flags = GODMODE  // You can't damage it.
 	mouse_opacity = 0
 	see_in_dark = 7
 
-/mob/aiEye/New()
-	..()
-	visibility_interface = new /datum/visibility_interface/ai_eye(src)
-
 // Movement code. Returns 0 to stop air movement from moving it.
 /mob/aiEye/Move()
 	return 0
 
-// Hide popout menu verbs
-/mob/aiEye/examine()
+/mob/aiEye/examinate(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/aiEye/pull()
+/mob/aiEye/pointed(atom/A as mob|obj|turf in view())
 	set popup_menu = 0
 	set src = usr.contents
 	return 0
 
-/mob/aiEye/point()
-	set popup_menu = 0
-	set src = usr.contents
-	return 0
+/mob/aiEye/examine(mob/user)
 
 // Use this when setting the aiEye's location.
 // It will also stream the chunk that the new loc is in.
+/mob/aiEye/proc/setLoc(var/T, var/cancel_tracking = 1)
 
-/mob/aiEye/proc/setLoc(var/T)
 	if(ai)
 		if(!isturf(ai.loc))
 			return
+
+		if(cancel_tracking)
+			ai.ai_cancel_tracking()
+
 		T = get_turf(T)
 		loc = T
 		cameranet.visibility(src)
 		if(ai.client)
 			ai.client.eye = src
 		//Holopad
-		if(istype(ai.current, /obj/machinery/hologram/holopad))
-			var/obj/machinery/hologram/holopad/H = ai.current
-			H.move_hologram()
+		if(ai.holo)
+			ai.holo.move_hologram()
 
+/mob/aiEye/proc/getLoc()
+
+	if(ai)
+		if(!isturf(ai.loc) || !ai.client)
+			return
+		return ai.eyeobj.loc
 
 // AI MOVEMENT
 
@@ -63,7 +65,7 @@
 	var/sprint = 10
 	var/cooldown = 0
 	var/acceleration = 1
-
+	var/obj/machinery/hologram/holopad/holo = null
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
 /mob/living/silicon/ai/New()
@@ -82,7 +84,6 @@
 	if(istype(usr, /mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = usr
 		if(AI.eyeobj && AI.client.eye == AI.eyeobj)
-			AI.cameraFollow = null
 			AI.eyeobj.setLoc(src)
 
 // This will move the AIEye. It will also cause lights near the eye to light up, if toggled.
@@ -107,15 +108,13 @@
 	else
 		user.sprint = initial
 
-	user.cameraFollow = null
-
 	//user.unset_machine() //Uncomment this if it causes problems.
 	//user.lightNearbyCamera()
 
 
 // Return to the Core.
 
-/mob/living/silicon/ai/verb/core()
+/mob/living/silicon/ai/proc/core()
 	set category = "AI Commands"
 	set name = "AI Core"
 
@@ -123,26 +122,22 @@
 
 
 /mob/living/silicon/ai/proc/view_core()
-
-	current = null
-	cameraFollow = null
+	camera = null
 	unset_machine()
 
-	if(src.eyeobj && src.loc)
-		src.eyeobj.loc = src.loc
-	else
+	if(!src.eyeobj)
 		src << "ERROR: Eyeobj not found. Creating new eye..."
 		src.eyeobj = new(src.loc)
 		src.eyeobj.ai = src
-		src.eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+		src.SetName(src.name)
 
 	if(client && client.eye)
 		client.eye = src
-
-	for(var/datum/visibility_chunk/camera/c in eyeobj.visibility_interface.visible_chunks)
+	for(var/datum/camerachunk/c in eyeobj.visibleCameraChunks)
 		c.remove(eyeobj)
+	src.eyeobj.setLoc(src)
 
-/mob/living/silicon/ai/verb/toggle_acceleration()
+/mob/living/silicon/ai/proc/toggle_acceleration()
 	set category = "AI Commands"
 	set name = "Toggle Camera Acceleration"
 

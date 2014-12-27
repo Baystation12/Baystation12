@@ -19,18 +19,39 @@
 		/obj/item/alarm_frame,
 		/obj/item/firealarm_frame,
 		/obj/item/weapon/table_parts,
-		/obj/item/weapon/rack_parts,
+		/obj/item/weapon/table_parts/rack,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
-		/obj/item/weapon/circuitboard
+		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/smes_coil
 		)
 
-	//Item currently being held.
-	var/obj/item/wrapped = null
+	var/obj/item/wrapped = null // Item currently being held.
+
+// VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
+/obj/item/weapon/gripper/miner
+	can_hold = list(
+	/obj/item/weapon/cell,
+	/obj/item/weapon/stock_parts
+	)
+
+/obj/item/weapon/gripper/paperwork
+	name = "paperwork gripper"
+	desc = "A simple grasping tool for clerical work."
+	icon = 'icons/obj/device.dmi'
+	icon_state = "gripper"
+
+	can_hold = list(
+		/obj/item/weapon/clipboard,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/paper_bundle,
+		/obj/item/weapon/card/id
+		)
 
 /obj/item/weapon/gripper/attack_self(mob/user as mob)
 	if(wrapped)
-		wrapped.attack_self(user)
+		return wrapped.attack_self(user)
+	return ..()
 
 /obj/item/weapon/gripper/verb/drop_item()
 
@@ -53,10 +74,10 @@
 	wrapped = null
 	//update_icon()
 
-/obj/item/weapon/gripper/afterattack(atom/target, mob/user as mob)
+/obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	return (wrapped ? wrapped.attack(M,user) : 0)
 
-	if(!target) //Target is invalid.
-		return
+/obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
 
 	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 	if(!wrapped)
@@ -65,24 +86,22 @@
 			break
 
 	if(wrapped) //Already have an item.
-
+		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
-		//Pass the attack on to the target.
-		target.attackby(wrapped,user)
 
-		if(wrapped && src && wrapped.loc == user)
+		//Pass the attack on to the target. This might delete/relocate wrapped.
+		var/resolved = target.attackby(wrapped,user)
+		if(!resolved && wrapped && target)
+			wrapped.afterattack(target,user,1)
+
+		//If wrapped was neither deleted nor put into target, put it back into the gripper.
+		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
-
-		//Sanity/item use checks.
-
-		if(!wrapped || !user)
-			return
-
-		if(wrapped.loc != src.loc)
+		else
 			wrapped = null
 			return
 
-	if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
+	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
 
 		//...and that the item is not in a container.
 		if(!isturf(target.loc))
@@ -139,7 +158,12 @@
 		"plastic" = 0
 		)
 
-/obj/item/weapon/matter_decompiler/afterattack(atom/target, mob/user as mob)
+/obj/item/weapon/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	return
+
+/obj/item/weapon/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
+
+	if(!proximity) return //Not adjacent.
 
 	//We only want to deal with using this on turfs. Specific items aren't important.
 	var/turf/T = get_turf(target)
@@ -160,7 +184,7 @@
 			stored_comms["plastic"]++
 			return
 
-		else if(istype(M,/mob/living/silicon/robot/drone) && M.stat == 2 && !M.client)
+		else if(istype(M,/mob/living/silicon/robot/drone) && !M.client)
 
 			var/mob/living/silicon/robot/drone/D = src.loc
 
@@ -236,6 +260,8 @@
 			stored_comms["wood"]++
 			stored_comms["wood"]++
 			stored_comms["wood"]++
+		else if(istype(W,/obj/item/pipe))
+			// This allows drones and engiborgs to clear pipe assemblies from floors.
 		else
 			continue
 
@@ -258,10 +284,8 @@
 	if(!module)
 		module = new /obj/item/weapon/robot_module/drone(src)
 
-	var/dat = "<HEAD><TITLE>Drone modules</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += {"<A HREF='?src=\ref[src];mach_close=robotmod'>Close</A>
-	<BR>
-	<BR>
+	var/dat = "<HEAD><TITLE>Drone modules</TITLE></HEAD><BODY>\n"
+	dat += {"
 	<B>Activated Modules</B>
 	<BR>
 	Module 1: [module_state_1 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<A>" : "No Module"]<BR>
@@ -285,7 +309,7 @@
 		else
 			module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
 
-		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/weapon/cable_coil)))
+		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
 			tools += module_string
 		else
 			resources += module_string
@@ -302,7 +326,7 @@
 
 	dat += resources
 
-	src << browse(dat, "window=robotmod&can_close=0")
+	src << browse(dat, "window=robotmod")
 
 //Putting the decompiler here to avoid doing list checks every tick.
 /mob/living/silicon/robot/drone/use_power()

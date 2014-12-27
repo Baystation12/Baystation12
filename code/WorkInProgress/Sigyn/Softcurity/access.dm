@@ -198,7 +198,7 @@
 			return list(access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 		if("Medical Doctor")
 			return list(access_medical, access_morgue, access_surgery)
-		if("Botanist")	// -- TLE
+		if("Gardener")	// -- TLE
 			return list(access_hydroponics, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
 		if("Librarian") // -- TLE
 			return list(access_library)
@@ -496,7 +496,7 @@
 			return "Code Gold"
 
 /proc/get_all_jobs()
-	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Chef", "Botanist", "Quartermaster", "Cargo Technician",
+	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Chef", "Gardener", "Quartermaster", "Cargo Technician",
 				"Shaft Miner", "Clown", "Mime", "Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
 				"Atmospheric Technician", "Roboticist", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist",
 				"Research Director", "Scientist", "Head of Security", "Warden", "Detective", "Security Officer")

@@ -1,5 +1,4 @@
 /obj/item/weapon/gun/rocketlauncher
-	var/projectile
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon_state = "rocket"
@@ -11,17 +10,16 @@
 	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
 	slot_flags = 0
 	origin_tech = "combat=8;materials=5"
-	projectile = /obj/item/missile
+	var/projectile = /obj/item/missile
 	var/missile_speed = 2
 	var/missile_range = 30
 	var/max_rockets = 1
 	var/list/rockets = new/list()
 
-/obj/item/weapon/gun/rocketlauncher/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
-	usr << "\blue [rockets.len] / [max_rockets] rockets."
+/obj/item/weapon/gun/rocketlauncher/examine(mob/user)
+	if(!..(user, 2))
+		return
+	user << "\blue [rockets.len] / [max_rockets] rockets."
 
 /obj/item/weapon/gun/rocketlauncher/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))
@@ -43,7 +41,7 @@
 		var/obj/item/missile/M = new projectile(user.loc)
 		playsound(user.loc, 'sound/effects/bang.ogg', 50, 1)
 		M.primed = 1
-		M.throw_at(target, missile_range, missile_speed)
+		M.throw_at(target, missile_range, missile_speed,user)
 		message_admins("[key_name_admin(user)] fired a rocket from a rocket launcher ([src.name]).")
 		log_game("[key_name_admin(user)] used a rocket launcher ([src.name]).")
 		rockets -= I

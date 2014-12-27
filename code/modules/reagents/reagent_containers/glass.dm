@@ -10,8 +10,8 @@
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50)
-	volume = 50
+	possible_transfer_amounts = list(5,10,15,25,30,60)
+	volume = 60
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 	var/label_text = ""
@@ -40,23 +40,22 @@
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
-		/obj/machinery/hydroponics,
-		/obj/machinery/constructable_frame)
+		/obj/machinery/constructable_frame
+		)
 
 	New()
 		..()
 		base_name = name
 
-	examine()
-		set src in view()
-		..()
-		if (!(usr in view(2)) && usr!=src.loc) return
+	examine(mob/user)
+		if(!..(user, 2))
+			return
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
+			user << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue It is empty."
+			user << "\blue It is empty."
 		if (!is_open_container())
-			usr << "\blue Airtight lid seals it completely."
+			user << "\blue Airtight lid seals it completely."
 
 	attack_self()
 		..()
@@ -95,6 +94,7 @@
 			spawn(5) src.reagents.clear_reagents()
 			return
 		else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
+			target.add_fingerprint(user)
 
 			if(!target.reagents.total_volume && target.reagents)
 				user << "\red [target] is empty."
@@ -108,6 +108,7 @@
 			user << "\blue You fill [src] with [trans] units of the contents of [target]."
 
 		else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
+
 			if(!reagents.total_volume)
 				user << "\red [src] is empty."
 				return
@@ -118,10 +119,6 @@
 
 			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 			user << "\blue You transfer [trans] units of the solution to [target]."
-
-		//Safety for dumping stuff into a ninja suit. It handles everything through attackby() and this is unnecessary.
-		else if(istype(target, /obj/item/clothing/suit/space/space_ninja))
-			return
 
 		else if(istype(target, /obj/machinery/bunsen_burner))
 			return
@@ -156,12 +153,15 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
-	desc = "A beaker. Can hold up to 50 units."
+	desc = "A beaker."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker"
 	item_state = "beaker"
-	m_amt = 0
-	g_amt = 500
+	matter = list("glass" = 500)
+
+	New()
+		..()
+		desc += " Can hold up to [volume] units."
 
 	on_reagent_change()
 		update_icon()
@@ -203,40 +203,40 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/large
 	name = "large beaker"
-	desc = "A large beaker. Can hold up to 100 units."
+	desc = "A large beaker."
 	icon_state = "beakerlarge"
-	g_amt = 5000
-	volume = 100
+	matter = list("glass" = 5000)
+	volume = 120
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50,100)
+	possible_transfer_amounts = list(5,10,15,25,30,60,120)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	name = "cryostasis beaker"
-	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	desc = "A cryostasis beaker that allows for chemical storage without reactions."
 	icon_state = "beakernoreact"
-	g_amt = 500
-	volume = 50
+	matter = list("glass" = 500)
+	volume = 60
 	amount_per_transfer_from_this = 10
 	flags = FPRINT | TABLEPASS | OPENCONTAINER | NOREACT
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology. Can hold up to 300 units."
+	desc = "A bluespace beaker, powered by experimental bluespace technology."
 	icon_state = "beakerbluespace"
-	g_amt = 5000
+	matter = list("glass" = 5000)
 	volume = 300
 	amount_per_transfer_from_this = 10
-	possible_transfer_amounts = list(5,10,15,25,30,50,100,300)
+	possible_transfer_amounts = list(5,10,15,25,30,60,120,300)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
 	name = "vial"
-	desc = "A small glass vial. Can hold up to 25 units."
+	desc = "A small glass vial."
 	icon_state = "vial"
-	g_amt = 250
-	volume = 25
+	matter = list("glass" = 250)
+	volume = 30
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
@@ -250,13 +250,13 @@
 /obj/item/weapon/reagent_containers/glass/beaker/sulphuric
 	New()
 		..()
-		reagents.add_reagent("sacid", 50)
+		reagents.add_reagent("sacid", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/beaker/slime
 	New()
 		..()
-		reagents.add_reagent("slimejelly", 50)
+		reagents.add_reagent("slimejelly", 60)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket
@@ -265,12 +265,11 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
-	m_amt = 200
-	g_amt = 0
+	matter = list("metal" = 200)
 	w_class = 3.0
 	amount_per_transfer_from_this = 20
-	possible_transfer_amounts = list(10,20,30,50,70)
-	volume = 70
+	possible_transfer_amounts = list(10,20,30,60,120)
+	volume = 120
 	flags = FPRINT | OPENCONTAINER
 
 	attackby(var/obj/D, mob/user as mob)
@@ -280,7 +279,7 @@
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
 			del(src)
-			
+
 	update_icon()
 		overlays.Cut()
 

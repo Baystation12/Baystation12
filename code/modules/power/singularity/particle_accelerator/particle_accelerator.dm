@@ -6,7 +6,8 @@ proc
 emit_particle()
 
 1 power box
-the only part of this thing that uses power, can hack to mess with the pa/make it better
+the only part of this thing that uses power, can hack to mess with the pa/make it better.
+Lies, only the control computer draws power.
 
 1 fuel chamber
 contains procs for mixing gas and whatever other fuel it uses
@@ -90,7 +91,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 270)
+	src.set_dir(turn(src.dir, 270))
 	return 1
 
 /obj/structure/particle_accelerator/verb/rotateccw()
@@ -101,10 +102,10 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 	return 1
 
-/obj/structure/particle_accelerator/examine()
+/obj/structure/particle_accelerator/examine(mob/user)
 	switch(src.construction_state)
 		if(0)
 			src.desc = text("A [name], looks like it's not attached to the flooring")
@@ -281,7 +282,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 270)
+	src.set_dir(turn(src.dir, 270))
 	return 1
 
 /obj/machinery/particle_accelerator/verb/rotateccw()
@@ -292,13 +293,13 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	if (src.anchored || usr:stat)
 		usr << "It is fastened to the floor!"
 		return 0
-	src.dir = turn(src.dir, 90)
+	src.set_dir(turn(src.dir, 90))
 	return 1
 
 /obj/machinery/particle_accelerator/update_icon()
 	return
 
-/obj/machinery/particle_accelerator/examine()
+/obj/machinery/particle_accelerator/examine(mob/user)
 	switch(src.construction_state)
 		if(0)
 			src.desc = text("A [name], looks like it's not attached to the flooring")

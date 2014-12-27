@@ -190,8 +190,8 @@ log transactions
 							dat += "<b>Account balance:</b> $[authenticated_account.money]"
 							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
-							dat += "<input type='hidden' name='choice' value='withdrawal'>"
-							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw charge card'>"
+							dat += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
+							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw'>"
 							dat += "</form>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
@@ -217,6 +217,7 @@ log transactions
 			if("transfer")
 				if(authenticated_account)
 					var/transfer_amount = text2num(href_list["funds_amount"])
+					transfer_amount = round(transfer_amount, 0.01)
 					if(transfer_amount <= 0)
 						alert("That is not a valid amount.")
 					else if(transfer_amount <= authenticated_account.money)
@@ -300,8 +301,9 @@ log transactions
 						usr << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
 
 					previous_account_number = tried_account_num
-			if("withdrawal")
+			if("e_withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
+				amount = round(amount, 0.01)
 				if(amount <= 0)
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
@@ -312,7 +314,32 @@ log transactions
 						authenticated_account.money -= amount
 
 						//	spawn_money(amount,src.loc)
-						spawn_ewallet(amount,src.loc)
+						spawn_ewallet(amount,src.loc,usr)
+
+						//create an entry in the account transaction log
+						var/datum/transaction/T = new()
+						T.target_name = authenticated_account.owner_name
+						T.purpose = "Credit withdrawal"
+						T.amount = "([amount])"
+						T.source_terminal = machine_id
+						T.date = current_date_string
+						T.time = worldtime2text()
+						authenticated_account.transaction_log.Add(T)
+					else
+						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+			if("withdrawal")
+				var/amount = max(text2num(href_list["funds_amount"]),0)
+				amount = round(amount, 0.01)
+				if(amount <= 0)
+					alert("That is not a valid amount.")
+				else if(authenticated_account && amount > 0)
+					if(amount <= authenticated_account.money)
+						playsound(src, 'sound/machines/chime.ogg', 50, 1)
+
+						//remove the money
+						authenticated_account.money -= amount
+
+						spawn_money(amount,src.loc,usr)
 
 						//create an entry in the account transaction log
 						var/datum/transaction/T = new()
@@ -450,7 +477,9 @@ log transactions
 	held_card = null
 
 
-/obj/machinery/atm/proc/spawn_ewallet(var/sum, loc)
+/obj/machinery/atm/proc/spawn_ewallet(var/sum, loc, mob/living/carbon/human/human_user as mob)
 	var/obj/item/weapon/spacecash/ewallet/E = new /obj/item/weapon/spacecash/ewallet(loc)
+	if(ishuman(human_user) && !human_user.get_active_hand())
+		human_user.put_in_hands(E)
 	E.worth = sum
 	E.owner_name = authenticated_account.owner_name

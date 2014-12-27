@@ -20,7 +20,6 @@
 	50;/obj/structure/cult/pylon,\
 	100;/obj/machinery/auto_cloner,\
 	100;/obj/machinery/giga_drill,\
-	100;/obj/mecha/working/hoverpod,\
 	100;/obj/machinery/replicator,\
 	150;/obj/structure/crystal,\
 	1000;/obj/machinery/artifact)

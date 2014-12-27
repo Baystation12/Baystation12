@@ -539,7 +539,7 @@
 	var/turf/simulated/floor/W = new /turf/simulated/floor( locate(src.x, src.y, src.z) )
 
 	W.RemoveLattice()
-	W.dir = old_dir
+	W.set_dir(old_dir)
 	if(prior_icon) W.icon_state = prior_icon
 	else W.icon_state = "floor"
 
@@ -557,7 +557,7 @@
 	var/turf/simulated/floor/plating/W = new /turf/simulated/floor/plating( locate(src.x, src.y, src.z) )
 
 	W.RemoveLattice()
-	W.dir = old_dir
+	W.set_dir(old_dir)
 	if(prior_icon) W.icon_state = prior_icon
 	else W.icon_state = "plating"
 	W.opacity = 1
@@ -570,7 +570,7 @@
 
 	var/turf/simulated/floor/engine/E = new /turf/simulated/floor/engine( locate(src.x, src.y, src.z) )
 
-	E.dir = old_dir
+	E.set_dir(old_dir)
 	E.icon_state = "engine"
 
 /turf/simulated/Entered(atom/A, atom/OL)
@@ -633,13 +633,13 @@
 /turf/proc/ReplaceWithSpace()
 	var/old_dir = dir
 	var/turf/space/S = new /turf/space( locate(src.x, src.y, src.z) )
-	S.dir = old_dir
+	S.set_dir(old_dir)
 	return S
 
 /turf/proc/ReplaceWithLattice()
 	var/old_dir = dir
 	var/turf/space/S = new /turf/space( locate(src.x, src.y, src.z) )
-	S.dir = old_dir
+	S.set_dir(old_dir)
 	new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 	return S
 
@@ -692,10 +692,8 @@
 
 	ReplaceWithPlating(explode)
 
-/turf/simulated/wall/examine()
-	set src in oview(1)
-
-	usr << "It looks like a regular wall."
+/turf/simulated/wall/examine(mob/user)
+	user << "It looks like a regular wall."
 	return
 
 /turf/simulated/wall/ex_act(severity)
@@ -1630,9 +1628,9 @@ turf/simulated/floor/return_siding_icon_state()
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
 
-	if(istype(C, /obj/item/weapon/cable_coil))
+	if(istype(C, /obj/item/stack/cable_coil))
 		if(is_plating())
-			var/obj/item/weapon/cable_coil/coil = C
+			var/obj/item/stack/cable_coil/coil = C
 			coil.turf_place(src, user)
 		else
 			user << "\red You must remove the plating first."

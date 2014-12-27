@@ -65,9 +65,6 @@
 				if (istype(O,/obj/item/weapon/ore/uranium))
 					new /obj/item/weapon/ore/mineral/uranium(output.loc)
 					del(O)
-				/*if (istype(O,/obj/item/weapon/ore/adamantine))
-					new /obj/item/weapon/ore/adamantine(output.loc)
-					del(O)*/ //Dunno what this area does so I'll keep it commented out for now -Durandan
 				processed++
 				sleep(5);
 			processing = 0;

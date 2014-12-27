@@ -1,27 +1,28 @@
 /obj/item/weapon/gun/energy/laser
-	name = "laser gun"
-	desc = "a basic weapon designed kill with concentrated energy bolts"
+	name = "laser carbine"
+	desc = "A basic weapon designed to kill with concentrated energy bolts."
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	w_class = 3.0
-	m_amt = 2000
+	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
-	projectile_type = "/obj/item/projectile/beam"
+	projectile_type = /obj/item/projectile/beam
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
-	projectile_type = "/obj/item/projectile/beam/practice"
+	projectile_type = /obj/item/projectile/beam/practice
 	clumsy_check = 0
 
 obj/item/weapon/gun/energy/laser/retro
-	name ="retro laser"
+	name = "retro laser"
 	icon_state = "retro"
 	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 
 
 /obj/item/weapon/gun/energy/laser/captain
+	name = "antique laser gun"
 	icon_state = "caplaser"
 	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
 	force = 10
@@ -76,6 +77,22 @@ obj/item/weapon/gun/energy/laser/retro
 	isHandgun()
 		return 0
 
+/obj/item/weapon/gun/energy/lasercannon/mounted/load_into_chamber()
+	if(in_chamber)
+		return 1
+	var/obj/item/rig_module/module = loc
+	if(!istype(module))
+		return 0
+	if(module.holder && module.holder.wearer)
+		var/mob/living/carbon/human/H = module.holder.wearer
+		if(istype(H) && H.back)
+			var/obj/item/weapon/rig/suit = H.back
+			if(istype(suit) && suit.cell && suit.cell.charge >= 250)
+				suit.cell.use(250)
+				in_chamber = new /obj/item/projectile/beam/heavylaser(src)
+				return 1
+	return 0
+
 /obj/item/weapon/gun/energy/lasercannon/cyborg/load_into_chamber()
 	if(in_chamber)
 		return 1
@@ -83,7 +100,7 @@ obj/item/weapon/gun/energy/laser/retro
 		var/mob/living/silicon/robot/R = src.loc
 		if(R && R.cell)
 			R.cell.use(250)
-			in_chamber = new/obj/item/projectile/beam(src)
+			in_chamber = new/obj/item/projectile/beam/heavylaser(src)
 			return 1
 	return 0
 

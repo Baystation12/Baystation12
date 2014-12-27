@@ -28,47 +28,54 @@
 	var/required_enemies = 0
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
-	var/uplink_welcome = "Syndicate Uplink Console:"
+	var/ert_disabled = 0
+	var/uplink_welcome = "Illegal Uplink Console:"
 	var/uplink_uses = 10
-	var/uplink_items = {"Highly Visible and Dangerous Weapons;
-/obj/item/weapon/gun/projectile:6:Revolver;
-/obj/item/ammo_magazine/a357:2:Ammo-357;
-/obj/item/weapon/gun/energy/crossbow:5:Energy Crossbow;
-/obj/item/weapon/melee/energy/sword:4:Energy Sword;
-/obj/item/weapon/storage/box/syndicate:10:Syndicate Bundle;
-/obj/item/weapon/storage/box/emps:3:5 EMP Grenades;
-Whitespace:Seperator;
-Stealthy and Inconspicuous Weapons;
-/obj/item/weapon/pen/paralysis:3:Paralysis Pen;
-/obj/item/weapon/soap/syndie:1:Syndicate Soap;
-/obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
-Whitespace:Seperator;
-Stealth and Camouflage Items;
-/obj/item/weapon/storage/box/syndie_kit/chameleon:3:Chameleon Kit;
-/obj/item/clothing/shoes/syndigaloshes:2:No-Slip Syndicate Shoes;
-/obj/item/weapon/card/id/syndicate:2:Agent ID card;
-/obj/item/clothing/mask/gas/voice:4:Voice Changer;
-/obj/item/device/chameleon:4:Chameleon-Projector;
-Whitespace:Seperator;
-Devices and Tools;
-/obj/item/weapon/card/emag:3:Cryptographic Sequencer;
-/obj/item/weapon/storage/toolbox/syndicate:1:Fully Loaded Toolbox;
-/obj/item/weapon/storage/box/syndie_kit/space:3:Space Suit;
-/obj/item/clothing/glasses/thermal/syndi:3:Thermal Imaging Glasses;
-/obj/item/device/encryptionkey/binary:3:Binary Translator Key;
-/obj/item/weapon/aiModule/syndicate:7:Hacked AI Upload Module;
-/obj/item/weapon/plastique:2:C-4 (Destroys walls);
-/obj/item/device/powersink:5:Powersink (DANGER!);
-/obj/item/device/radio/beacon/syndicate:7:Singularity Beacon (DANGER!);
-/obj/item/weapon/circuitboard/teleporter:20:Teleporter Circuit Board;
-Whitespace:Seperator;
-Implants;
-/obj/item/weapon/storage/box/syndie_kit/imp_freedom:3:Freedom Implant;
-/obj/item/weapon/storage/box/syndie_kit/imp_uplink:10:Uplink Implant (Contains 5 Telecrystals);
-/obj/item/weapon/storage/box/syndie_kit/imp_explosive:6:Explosive Implant (DANGER!);
-/obj/item/weapon/storage/box/syndie_kit/imp_compress:4:Compressed Matter Implant;Whitespace:Seperator;
-(Pointless) Badassery;
-/obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"}
+	var/list/datum/uplink_item/uplink_items = list(
+		"Highly Visible and Dangerous Weapons" = list(
+			 new/datum/uplink_item(/obj/item/weapon/gun/projectile, 6, "Revolver", "RE"),
+			 new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, "Ammo-357", "RA"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
+			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
+			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM")
+			),
+		"Stealthy and Inconspicuous Weapons" = list(
+			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
+			new/datum/uplink_item(/obj/item/weapon/soap/syndie, 1, "Subversive Soap", "SP"),
+			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC")
+			),
+		"Stealth and Camouflage Items" = list(
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
+			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
+			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
+			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
+			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP")
+			),
+		"Devices and Tools" = list(
+			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
+			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/clerical, 3, "Morphic Clerical Kit", "CK"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/space, 3, "Space Suit", "SS"),
+			new/datum/uplink_item(/obj/item/clothing/glasses/thermal/syndi, 3, "Thermal Imaging Glasses", "TM"),
+			new/datum/uplink_item(/obj/item/device/encryptionkey/binary, 3, "Binary Translator Key", "BT"),
+			new/datum/uplink_item(/obj/item/weapon/aiModule/syndicate, 7, "Hacked AI Upload Module", "AI"),
+			new/datum/uplink_item(/obj/item/weapon/plastique, 2, "C-4 (Destroys walls)", "C4"),
+			new/datum/uplink_item(/obj/item/device/powersink, 5, "Powersink (DANGER!)", "PS",),
+			new/datum/uplink_item(/obj/item/device/radio/beacon/syndicate, 7, "Singularity Beacon (DANGER!)", "SB"),
+			new/datum/uplink_item(/obj/item/weapon/circuitboard/teleporter, 20, "Teleporter Circuit Board", "TP")
+			),
+		"Implants" = list(
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI")
+			),
+		"(Pointless) Badassery" = list(
+			new/datum/uplink_item(/obj/item/toy/syndicateballoon, 10, "For showing that You Are The BOSS (Useless Balloon)", "BS")
+			)
+		)
 
 // Items removed from above:
 /*
@@ -111,8 +118,6 @@ Implants;
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)
 		feedback_set_details("game_mode","[ticker.mode]")
-	if(revdata)
-		feedback_set_details("revision","[revdata.revision]")
 	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
@@ -124,10 +129,12 @@ Implants;
 
 
 /datum/game_mode/proc/check_finished() //to be called by ticker
-	if(emergency_shuttle.location==2 || station_was_nuked)
+	if(emergency_shuttle.returned() || station_was_nuked)
 		return 1
 	return 0
 
+/datum/game_mode/proc/cleanup()	//This is called when the round has ended but not the game, if any cleanup would be necessary in that case.
+	return
 
 /datum/game_mode/proc/declare_completion()
 	var/clients = 0
@@ -144,15 +151,17 @@ Implants;
 
 	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
+	var/pltext = "<font size=2><b>Player list:</b></font>"
+
 	for(var/mob/M in player_list)
 		if(M.client)
 			clients++
 			if(ishuman(M))
-				if(!M.stat)
+				if(M.stat != DEAD)
 					surviving_humans++
 					if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 						escaped_humans++
-			if(!M.stat)
+			if(M.stat != DEAD)
 				surviving_total++
 				if(M.loc && M.loc.loc && M.loc.loc.type in escape_locations)
 					escaped_total++
@@ -171,6 +180,15 @@ Implants;
 
 			if(isobserver(M))
 				ghosts++
+
+	var/text = ""
+	if(surviving_total > 0)
+		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]</b>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.</b><br>"
+	else
+		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>).</b>"
+	text += "<br>" + pltext //print player list after the general info
+	world << text
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
@@ -206,14 +224,14 @@ Implants;
 
 /datum/game_mode/proc/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested status information:</FONT><HR>"
-	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with the Syndicate:</B><br>"
+	intercepttext += "<B> In case you have misplaced your copy, attached is a list of personnel whom reliable sources&trade; suspect may be affiliated with subversive elements:</B><br>"
 
 
 	var/list/suspects = list()
 	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.mind)
 		// NT relation option
 		var/special_role = man.mind.special_role
-		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Syndicate" || special_role == "Vox Raider")
+		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Mercenary" || special_role == "Vox Raider")
 			continue	//NT intelligence ruled out possiblity that those are too classy to pretend to be a crew.
 		if(man.client.prefs.nanotrasen_relation == "Opposed" && prob(50) || \
 		   man.client.prefs.nanotrasen_relation == "Skeptical" && prob(20))
@@ -407,6 +425,9 @@ Implants;
 			heads += player.mind
 	return heads
 
+/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+	return 0
+
 /datum/game_mode/New()
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
@@ -477,3 +498,67 @@ proc/get_nt_opposed()
 				dudes += man
 	if(dudes.len == 0) return null
 	return pick(dudes)
+
+//Announces objectives/generic antag text.
+/proc/show_generic_antag_text(var/datum/mind/player)
+	if(player.current)
+		player.current << \
+		"You are an antagonist! <font color=blue>Within the rules,</font> \
+		try to act as an opposing force to the crew. Further RP and try to make sure \
+		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! \
+		Think through your actions and make the roleplay immersive! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to antagonists.</b>"
+
+/proc/show_objectives(var/datum/mind/player)
+
+	if(!player || !player.current) return
+
+	if(config.objectives_disabled)
+		show_generic_antag_text(player)
+		return
+
+	var/obj_count = 1
+	player.current << "\blue Your current objectives:"
+	for(var/datum/objective/objective in player.objectives)
+		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+		obj_count++
+
+/datum/game_mode/proc/print_player_lite(var/datum/mind/ply)
+	var/role = ply.assigned_role == "MODE" ? "\improper[ply.special_role]" : "\improper[ply.assigned_role]"
+	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
+	if(ply.current)
+		if(ply.current.stat == DEAD)
+			text += "died"
+		else
+			text += "survived"
+		if(ply.current.real_name != ply.name)
+			text += " as <b>[ply.current.real_name]</b>"
+	else
+		text += "body destroyed"
+	text += ")"
+
+	return text
+
+/datum/game_mode/proc/print_player_full(var/datum/mind/ply)
+	var/text = print_player_lite(ply)
+
+	var/TC_uses = 0
+	var/uplink_true = 0
+	var/purchases = ""
+	for(var/obj/item/device/uplink/H in world_uplinks)
+		if(H && H.uplink_owner && H.uplink_owner == ply)
+			TC_uses += H.used_TC
+			uplink_true = 1
+			var/list/refined_log = new()
+			for(var/datum/uplink_item/UI in H.purchase_log)
+				var/obj/I = new UI.path
+				refined_log.Add("[H.purchase_log[UI]]x\icon[I][I.name]")
+				del(I)
+			purchases = english_list(refined_log, nothing_text = "")
+	if(uplink_true)
+		text += " (used [TC_uses] TC)"
+		if(purchases)
+			text += "<br>[purchases]"
+
+	return text

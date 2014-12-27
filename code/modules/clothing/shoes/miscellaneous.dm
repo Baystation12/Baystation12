@@ -36,31 +36,18 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/space_ninja
-	name = "ninja shoes"
-	desc = "A pair of running shoes. Excellent for running and even better for smashing skulls."
-	icon_state = "s-ninja"
-	permeability_coefficient = 0.01
-	flags = NOSLIP
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
-	siemens_coefficient = 0.2
-
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
-	species_restricted = null
-
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
 	icon_state = "wizard"
 	species_restricted = null
+	body_parts_covered = 0
 
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."
 	name = "magic shoes"
 	icon_state = "black"
+	body_parts_covered = FEET
 
 /obj/item/clothing/shoes/galoshes
 	desc = "Rubber boots"
@@ -131,7 +118,7 @@
 /obj/item/clothing/shoes/swimmingfins
 	desc = "Help you swim good."
 	name = "swimming fins"
-	icon_state = "flipperfeet"
+	icon_state = "flippers"
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null

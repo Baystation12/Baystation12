@@ -75,6 +75,7 @@
 		/obj/item/weapon/storage/lockbox,
 		/obj/item/weapon/storage/secure,
 		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/rig,
 		/obj/item/device/eftpos,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/taperecorder,
@@ -100,7 +101,9 @@
 		/obj/machinery/bot,
 		/obj/machinery/door,
 		/obj/machinery/telecomms,
-		/obj/machinery/mecha_part_fabricator
+		/obj/machinery/mecha_part_fabricator,
+		/obj/machinery/gibber,
+		/obj/vehicle
 		)
 
 
@@ -200,7 +203,7 @@
 	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 	origin_tech = "syndicate=3"
 	var/registered_user=null
-	
+
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	..()
 	if(!isnull(user)) // Runtime prevention on laggy starts or where users log out because of lag at round start.
@@ -208,7 +211,7 @@
 	else
 		registered_name = "Agent Card"
 	assignment = "Agent"
-	name = "[registered_name]'s ID Card ([assignment])"		
+	name = "[registered_name]'s ID Card ([assignment])"
 
 /obj/item/weapon/card/id/syndicate/afterattack(var/obj/item/weapon/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -239,7 +242,7 @@
 		registered_user = user
 	else if(!registered_user || registered_user == user)
 
-		if(!registered_user) registered_user = user  // 
+		if(!registered_user) registered_user = user  //
 
 		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
 			if("Rename")

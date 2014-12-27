@@ -160,6 +160,7 @@
 			continue
 		else
 			O.real_name = randomname
+			O.dna.real_name = randomname
 			i++
 	O.UpdateAppearance()
 	O.take_overall_damage(M.getBruteLoss(), M.getFireLoss())
