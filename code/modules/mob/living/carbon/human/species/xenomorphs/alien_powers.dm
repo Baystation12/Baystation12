@@ -93,8 +93,7 @@
 		return
 
 	if(check_alien_ability(75,1,"egg sac"))
-		for(var/mob/O in viewers(src, null))
-			O.show_message(text("\green <B>[src] has laid an egg!</B>"), 1)
+		visible_message("\green <B>[src] has laid an egg!</B>")
 		new /obj/effect/alien/egg(loc)
 
 	return
@@ -110,9 +109,7 @@
 		return
 
 	if(check_alien_ability(500))
-		src << "\green You begin to evolve!"
-		for(var/mob/O in viewers(src, null))
-			O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
+		visible_message("\green <B>[src] begins to twist and contort!</B>", "\green You begin to evolve!")
 		src.set_species("Xenomorph Queen")
 
 	return
@@ -123,8 +120,7 @@
 	set category = "Abilities"
 
 	if(check_alien_ability(50,1,"resin spinner"))
-		for(var/mob/O in viewers(src, null))
-			O.show_message(text("\green <B>[src] has planted some alien weeds!</B>"), 1)
+		visible_message("\green <B>[src] has planted some alien weeds!</B>")
 		new /obj/effect/alien/weeds/node(loc)
 	return
 
@@ -176,11 +172,7 @@
 		src << "You cannot spit neurotoxin in your current state."
 		return
 
-	src << "\green You spit neurotoxin at [target]."
-
-	for(var/mob/O in oviewers())
-		if ((O.client && !(O.blinded )))
-			O << "\red [src] spits neurotoxin at [target]!"
+	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "\green You spit neurotoxin at [target].")
 
 	//I'm not motivated enough to revise this. Prjectile code in general needs update.
 	// Maybe change this to use throw_at? ~ Z
@@ -218,9 +210,7 @@
 	if(!check_alien_ability(75,1,"resin spinner"))
 		return
 
-	src << "\green You shape a [choice]."
-	for(var/mob/O in viewers(src, null))
-		O.show_message(text("\red <B>[src] vomits up a thick purple substance and begins to shape it!</B>"), 1)
+	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "\green You shape a [choice].")
 	switch(choice)
 		if("resin door")
 			new /obj/structure/mineral_door/resin(loc)
