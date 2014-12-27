@@ -312,7 +312,7 @@
 		// Extract the organ!
 		if(target.op_stage.current_organ)
 			var/datum/organ/internal/I = target.internal_organs_by_name[target.op_stage.current_organ]
-			var/obj/item/organ/O
+			var/obj/item/organ/internal/O
 			if(I && istype(I))
 				O = I.remove(user)
 				if(O && istype(O))
@@ -327,7 +327,7 @@
 
 /datum/surgery_step/internal/replace_organ
 	allowed_tools = list(
-	/obj/item/organ = 100
+	/obj/item/organ/internal = 100
 	)
 
 	min_duration = 60
@@ -335,7 +335,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
-		var/obj/item/organ/O = tool
+		var/obj/item/organ/internal/O = tool
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 
 		var/organ_compatible
@@ -352,25 +352,25 @@
 		var/o_a =  (O.gender == PLURAL) ? "" : "a "
 		var/o_do = (O.gender == PLURAL) ? "don't" : "doesn't"
 
-		if(target.species.has_organ[O.organ_tag])
+		if(target.species.has_organ[O.part])
 
 			if(!O.health)
-				user << "\red \The [O.organ_tag] [o_is] in no state to be transplanted."
+				user << "\red \The [O.part] [o_is] in no state to be transplanted."
 				return 2
 
-			if(!target.internal_organs_by_name[O.organ_tag])
+			if(!target.internal_organs_by_name[O.part])
 				organ_missing = 1
 			else
-				user << "\red \The [target] already has [o_a][O.organ_tag]."
+				user << "\red \The [target] already has [o_a][O.part]."
 				return 2
 
 			if(O.organ_data && affected.name == O.organ_data.parent_organ)
 				organ_compatible = 1
 			else
-				user << "\red \The [O.organ_tag] [o_do] normally go in \the [affected.display_name]."
+				user << "\red \The [O.part] [o_do] normally go in \the [affected.display_name]."
 				return 2
 		else
-			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.organ_tag]."
+			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.part]."
 			return 2
 
 		return ..() && organ_missing && organ_compatible
@@ -387,20 +387,20 @@
 		user.visible_message("\blue [user] has transplanted \the [tool] into [target]'s [affected.display_name].", \
 		"\blue You have transplanted \the [tool] into [target]'s [affected.display_name].")
 		user.drop_item(tool)
-		var/obj/item/organ/O = tool
+		var/obj/item/organ/internal/O = tool
 		if(istype(O))
 			O.replaced(target,affected)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, damaging \the [tool]!", \
 		"\red Your hand slips, damaging \the [tool]!")
-		var/obj/item/organ/I = tool
+		var/obj/item/organ/internal/I = tool
 		if(istype(I))
 			I.organ_data.take_damage(rand(3,5),0)
 
 /datum/surgery_step/internal/attach_organ
 	allowed_tools = list(
-	/obj/item/weapon/FixOVein = 100, \
+	/obj/item/weapon/biosealant = 100, \
 	/obj/item/stack/cable_coil = 75
 	)
 

@@ -621,50 +621,35 @@ Note that amputating the affected organ does in fact remove the infection from t
 		for(var/datum/organ/external/O in children)
 			O.droplimb(1)
 
-		var/obj/organ	//Dropped limb object
+		var/is_robotic = (status & ORGAN_ROBOT) ? 1 : 0
+		var/obj/item/organ/organ	//Dropped limb object
 		switch(body_part)
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				organ= new /obj/item/organ/external/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
 				owner.u_equip(owner.r_ear)
 				owner.u_equip(owner.wear_mask)
 			if(ARM_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_arm(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
+				organ= new /obj/item/organ/external/r_arm(owner.loc, owner, is_robotic)
 			if(ARM_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ= new /obj/item/robot_parts/l_arm(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
+				organ = new /obj/item/organ/external/l_arm(owner.loc, owner, is_robotic)
 			if(LEG_RIGHT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_leg(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
+				organ= new /obj/item/organ/external/r_leg(owner.loc, owner, is_robotic)
 			if(LEG_LEFT)
-				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_leg(owner.loc)
-				else
-					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
+				organ= new /obj/item/organ/external/l_leg(owner.loc, owner, is_robotic)
 			if(HAND_RIGHT)
-				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
+				organ= new /obj/item/organ/external/r_hand(owner.loc, owner, is_robotic)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
-				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
+				organ= new /obj/item/organ/external/l_hand(owner.loc, owner, is_robotic)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
-				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
+				organ= new /obj/item/organ/external/r_foot/(owner.loc, owner, is_robotic)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
-				if(!(status & ORGAN_ROBOT))
-					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
+				organ = new /obj/item/organ/external/l_foot(owner.loc, owner, is_robotic)
 				owner.u_equip(owner.shoes)
 
 		destspawn = 1
@@ -1018,141 +1003,3 @@ Note that amputating the affected organ does in fact remove the infection from t
 		"\red <b>Your face melts off!</b>",	\
 		"\red You hear a sickening sizzle.")
 	disfigured = 1
-
-/****************************************************
-			   EXTERNAL ORGAN ITEMS
-****************************************************/
-
-obj/item/weapon/organ
-	icon = 'icons/mob/human_races/r_human.dmi'
-	var/op_stage = 0
-	var/list/organs_internal = list()
-
-obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
-	..(loc)
-	if(!istype(H))
-		return
-	if(H.dna)
-		if(!blood_DNA)
-			blood_DNA = list()
-		blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-
-	// Transferring over organs from the host.
-	for(var/datum/organ/internal/I in H.internal_organs)
-		if(I.parent_organ != name)
-			continue
-		var/obj/item/organ/current_organ = I.remove()
-		current_organ.removed(H)
-		current_organ.loc = src
-		if(current_organ.organ_data)
-			organs_internal |= current_organ.organ_data
-
-	// Forming icon for the limb
-	// Setting base icon for this mob's race
-	var/icon/base
-	if(H.species && H.species.icobase)
-		base = icon(H.species.icobase)
-	else
-		base = icon('icons/mob/human_races/r_human.dmi')
-
-	if(base)
-		//Changing limb's skin tone to match owner
-		if(!H.species || H.species.flags & HAS_SKIN_TONE)
-			if (H.s_tone >= 0)
-				base.Blend(rgb(H.s_tone, H.s_tone, H.s_tone), ICON_ADD)
-			else
-				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
-
-	if(base)
-		//Changing limb's skin color to match owner
-		if(!H.species || H.species.flags & HAS_SKIN_COLOR)
-			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
-
-	icon = base
-	set_dir(SOUTH)
-	src.transform = turn(src.transform, rand(70,130))
-
-
-/****************************************************
-			   EXTERNAL ORGAN ITEMS DEFINES
-****************************************************/
-
-obj/item/weapon/organ/l_arm
-	name = "left arm"
-	icon_state = "l_arm"
-obj/item/weapon/organ/l_foot
-	name = "left foot"
-	icon_state = "l_foot"
-obj/item/weapon/organ/l_hand
-	name = "left hand"
-	icon_state = "l_hand"
-obj/item/weapon/organ/l_leg
-	name = "left leg"
-	icon_state = "l_leg"
-obj/item/weapon/organ/r_arm
-	name = "right arm"
-	icon_state = "r_arm"
-obj/item/weapon/organ/r_foot
-	name = "right foot"
-	icon_state = "r_foot"
-obj/item/weapon/organ/r_hand
-	name = "right hand"
-	icon_state = "r_hand"
-obj/item/weapon/organ/r_leg
-	name = "right leg"
-	icon_state = "r_leg"
-obj/item/weapon/organ/head
-	name = "head"
-	icon_state = "head_m"
-
-obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
-	if(istype(H))
-		src.icon_state = H.gender == MALE? "head_m" : "head_f"
-	..()
-	//Add (facial) hair.
-	if(H.f_style)
-		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
-		if(facial_hair_style)
-			var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-			if(facial_hair_style.do_colouration)
-				facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
-
-			overlays.Add(facial) // icon.Blend(facial, ICON_OVERLAY)
-
-	if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
-		var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
-		if(hair_style)
-			var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration)
-				hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
-
-			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
-
-	name = "[H.real_name]'s head"
-	H.regenerate_icons()
-
-obj/item/weapon/organ/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	switch(op_stage)
-		if(0)
-			if(istype(W,/obj/item/weapon/scalpel))
-				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!")
-				op_stage++
-				return
-		if(1)
-			if(istype(W,/obj/item/weapon/retractor))
-				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!")
-				op_stage++
-				return
-		if(2)
-			if(istype(W,/obj/item/weapon/hemostat))
-				if(contents.len)
-					var/obj/item/removing = pick(contents)
-					removing.loc = src.loc
-					if(istype(removing,/obj/item/organ))
-						var/obj/item/organ/removed_organ = removing
-						organs_internal -= removed_organ.organ_data
-					user.visible_message("<span class='danger'><b>[user]</b> extracts [removing] from [src] with [W]!")
-				else
-					user.visible_message("<span class='danger'><b>[user]</b> fishes around fruitlessly in [src] with [W].")
-				return
-	..()

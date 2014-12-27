@@ -14,7 +14,7 @@
 	var/robotic = 0 //For being a robot
 	var/removed_type //When removed, forms this object.
 	var/rejecting            // Is this organ already being rejected?
-	var/obj/item/organ/organ_holder // If not in a body, held in this item.
+	var/obj/item/organ/internal/organ_holder // If not in a body, held in this item.
 	var/list/transplant_data
 
 /datum/organ/internal/proc/rejuvenate()
@@ -144,12 +144,12 @@
 /datum/organ/internal/heart // This is not set to vital because death immediately occurs in blood.dm if it is removed.
 	name = "heart"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/heart
+	removed_type = /obj/item/organ/internal/heart
 
 /datum/organ/internal/lungs
 	name = "lungs"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/lungs
+	removed_type = /obj/item/organ/internal/lungs
 
 	process()
 		..()
@@ -168,7 +168,7 @@
 /datum/organ/internal/liver
 	name = "liver"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/liver
+	removed_type = /obj/item/organ/internal/liver
 
 	process()
 
@@ -226,7 +226,7 @@
 /datum/organ/internal/kidney
 	name = "kidneys"
 	parent_organ = "groin"
-	removed_type = /obj/item/organ/kidneys
+	removed_type = /obj/item/organ/internal/kidneys
 
 	process()
 
@@ -245,13 +245,13 @@
 /datum/organ/internal/brain
 	name = "brain"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/brain
+	removed_type = /obj/item/organ/internal/brain
 	vital = 1
 
 /datum/organ/internal/eyes
 	name = "eyes"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/eyes
+	removed_type = /obj/item/organ/internal/eyes
 
 	process() //Eye damage replaces the old eye_stat var.
 		..()
@@ -263,7 +263,7 @@
 /datum/organ/internal/appendix
 	name = "appendix"
 	parent_organ = "groin"
-	removed_type = /obj/item/organ/appendix
+	removed_type = /obj/item/organ/internal/appendix
 
 /datum/organ/internal/proc/remove(var/mob/user)
 
@@ -275,11 +275,10 @@
 	else
 		target_loc = get_turf(owner)
 
-	var/obj/item/organ/removed_organ = new removed_type(target_loc)
+	var/obj/item/organ/internal/removed_organ = new removed_type(target_loc)
 
 	if(istype(removed_organ))
 		removed_organ.organ_data = src
-		removed_organ.update()
 		organ_holder = removed_organ
 
 	return removed_organ

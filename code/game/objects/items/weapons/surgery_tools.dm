@@ -155,8 +155,9 @@
 	w_class = 2.0
 	throwforce = 1.0
 
-/obj/item/weapon/FixOVein
-	name = "FixOVein"
+/obj/item/weapon/biosealant
+	name = "biosealant"
+	desc = "A flexible and high-tech offering from Zeng-Hu Pharmaceuticals."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0

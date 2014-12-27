@@ -1,6 +1,6 @@
 //DIONA ORGANS.
 /datum/organ/internal/diona
-	removed_type = /obj/item/organ/diona
+	removed_type = /obj/item/organ/internal/diona
 
 /datum/organ/internal/diona/process()
 	return
@@ -24,20 +24,20 @@
 /datum/organ/internal/diona/node
 	name = "receptor node"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/diona/node
+	removed_type = /obj/item/organ/internal/diona/node
 
 /datum/organ/internal/diona/nutrients
 	name = "nutrient vessel"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/diona/nutrients
+	removed_type = /obj/item/organ/internal/diona/nutrients
 
-/obj/item/organ/diona
+/obj/item/organ/internal/diona
 	name = "diona nymph"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "nymph"
-	organ_tag = "special" // Turns into a nymph instantly, no transplanting possible.
+	part = "special" // Turns into a nymph instantly, no transplanting possible.
 
-/obj/item/organ/diona/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/internal/diona/removed(var/mob/living/target,var/mob/living/user)
 
 	..()
 	var/mob/living/carbon/human/H = target
@@ -59,29 +59,29 @@
 
 // These are different to the standard diona organs as they have a purpose in other
 // species (absorbing radiation and light respectively)
-/obj/item/organ/diona/nutrients
+/obj/item/organ/internal/diona/nutrients
 	name = "nutrient vessel"
-	organ_tag = "nutrient vessel"
+	part = "nutrient vessel"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
-/obj/item/organ/diona/nutrients/removed()
+/obj/item/organ/internal/diona/nutrients/removed()
 	return
 
-/obj/item/organ/diona/node
+/obj/item/organ/internal/diona/node
 	name = "receptor node"
-	organ_tag = "receptor node"
+	part = "receptor node"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "claw"
 
-/obj/item/organ/diona/node/removed()
+/obj/item/organ/internal/diona/node/removed()
 	return
 
 //CORTICAL BORER ORGANS.
 /datum/organ/internal/borer
 	name = "cortical borer"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/borer
+	removed_type = /obj/item/organ/internal/borer
 	vital = 1
 
 /datum/organ/internal/borer/process()
@@ -106,14 +106,14 @@
 			goo.basecolor = "#412464"
 			goo.update_icon()
 
-/obj/item/organ/borer
+/obj/item/organ/internal/borer
 	name = "cortical borer"
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borer"
-	organ_tag = "brain"
+	part = "brain"
 	desc = "A disgusting space slug."
 
-/obj/item/organ/borer/removed(var/mob/living/target,var/mob/living/user)
+/obj/item/organ/internal/borer/removed(var/mob/living/target,var/mob/living/user)
 
 	..()
 
@@ -129,12 +129,12 @@
 /datum/organ/internal/xenos/eggsac
 	name = "egg sac"
 	parent_organ = "groin"
-	removed_type = /obj/item/organ/xenos/eggsac
+	removed_type = /obj/item/organ/internal/xenos/eggsac
 
 /datum/organ/internal/xenos/plasmavessel
 	name = "plasma vessel"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/xenos/plasmavessel
+	removed_type = /obj/item/organ/internal/xenos/plasmavessel
 	var/stored_plasma = 0
 	var/max_plasma = 500
 
@@ -155,52 +155,52 @@
 /datum/organ/internal/xenos/acidgland
 	name = "acid gland"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/xenos/acidgland
+	removed_type = /obj/item/organ/internal/xenos/acidgland
 
 /datum/organ/internal/xenos/hivenode
 	name = "hive node"
 	parent_organ = "chest"
-	removed_type = /obj/item/organ/xenos/hivenode
+	removed_type = /obj/item/organ/internal/xenos/hivenode
 
 /datum/organ/internal/xenos/resinspinner
 	name = "resin spinner"
 	parent_organ = "head"
-	removed_type = /obj/item/organ/xenos/resinspinner
+	removed_type = /obj/item/organ/internal/xenos/resinspinner
 
-/obj/item/organ/xenos
+/obj/item/organ/internal/xenos
 	name = "xeno organ"
 	icon = 'icons/effects/blood.dmi'
 	desc = "It smells like an accident in a chemical factory."
 
-/obj/item/organ/xenos/eggsac
+/obj/item/organ/internal/xenos/eggsac
 	name = "egg sac"
 	icon_state = "xgibmid1"
-	organ_tag = "egg sac"
+	part = "egg sac"
 
-/obj/item/organ/xenos/plasmavessel
+/obj/item/organ/internal/xenos/plasmavessel
 	name = "plasma vessel"
 	icon_state = "xgibdown1"
-	organ_tag = "plasma vessel"
+	part = "plasma vessel"
 
-/obj/item/organ/xenos/acidgland
+/obj/item/organ/internal/xenos/acidgland
 	name = "acid gland"
 	icon_state = "xgibtorso"
-	organ_tag = "acid gland"
+	part = "acid gland"
 
-/obj/item/organ/xenos/hivenode
+/obj/item/organ/internal/xenos/hivenode
 	name = "hive node"
 	icon_state = "xgibmid2"
-	organ_tag = "hive node"
+	part = "hive node"
 
-/obj/item/organ/xenos/resinspinner
+/obj/item/organ/internal/xenos/resinspinner
 	name = "hive node"
 	icon_state = "xgibmid2"
-	organ_tag = "resin spinner"
+	part = "resin spinner"
 
 //VOX ORGANS.
 /datum/organ/internal/stack
 	name = "cortical stack"
-	removed_type = /obj/item/organ/stack
+	removed_type = /obj/item/organ/internal/stack
 	parent_organ = "head"
 	robotic = 2
 	vital = 1
@@ -213,17 +213,17 @@
 		if(owner.mind) backup = owner.mind
 
 /datum/organ/internal/stack/vox
-	removed_type = /obj/item/organ/stack/vox
+	removed_type = /obj/item/organ/internal/stack/vox
 
 /datum/organ/internal/stack/vox/stack
 
-/obj/item/organ/stack
+/obj/item/organ/internal/stack
 	name = "cortical stack"
 	icon_state = "brain-prosthetic"
-	organ_tag = "stack"
+	part = "stack"
 	robotic = 2
 	prosthetic_name = null
 	prosthetic_icon = null
 
-/obj/item/organ/stack/vox
+/obj/item/organ/internal/stack/vox
 	name = "vox cortical stack"

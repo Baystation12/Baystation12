@@ -16,8 +16,7 @@
 		if (affected.parent)
 			if (affected.parent.status & ORGAN_DESTROYED)
 				return 0
-		return affected.name != "head"
-
+		return 1
 
 /datum/surgery_step/limb/cut
 	allowed_tools = list(
@@ -54,7 +53,7 @@
 			"\red Your hand slips, cutting [target]'s [affected.display_name] open!")
 			affected.createwound(CUT, 10)
 
-
+// TODO: convert this to
 /datum/surgery_step/limb/mend
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
@@ -79,7 +78,6 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has finished repositioning flesh and nerve endings where [target]'s [affected.display_name] used to be with [tool].",	\
 		"\blue You have finished repositioning flesh and nerve endings where [target]'s [affected.display_name] used to be with [tool].")
-		//affected.is_open() = 3
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -131,17 +129,38 @@
 
 
 /datum/surgery_step/limb/attach
-	allowed_tools = list(/obj/item/robot_parts = 100)
+	/*
+	Reattachment:
+		/obj/item/weapon/retractor
+		/obj/item/weapon/biosealant
+		/obj/item/weapon/hemostat
+		/obj/item/weapon/cautery
+
+	On completion:
+		affected.status = 0
+		affected.amputated = 0
+		affected.destspawn = 0
+		target.update_body()
+		target.updatehealth()
+		target.UpdateDamageIcon()
+		for(var/obj/item/organ/internal/replacing_organ in tool)
+			replacing_organ.loc = get_turf(tool)
+			replacing_organ.replaced(target,affected)
+			del(replacing_organ) //Just in case.
+		del(tool)
+	*/
+
+/datum/surgery_step/limb/attach_robotic
+	allowed_tools = list(
+		/obj/item/organ = 100
+		)
 
 	min_duration = 80
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if(..())
-			var/obj/item/robot_parts/p = tool
-			if (p.part)
-				if (!(target_zone in p.part))
-					return 0
+			// Check if part is right for this slot.
 			var/datum/organ/external/affected = target.get_organ(target_zone)
 			return affected.status & ORGAN_ATTACHABLE
 
@@ -151,16 +170,20 @@
 		"You start attaching \the [tool] where [target]'s [affected.display_name] used to be.")
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/robot_parts/L = tool
+		var/obj/item/organ/new_limb = tool
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has attached \the [tool] where [target]'s [affected.display_name] used to be.",	\
 		"\blue You have attached \the [tool] where [target]'s [affected.display_name] used to be.")
+
 		affected.germ_level = 0
-		affected.robotize()
-		if(L.sabotaged)
-			affected.sabotaged = 1
-		else
-			affected.sabotaged = 0
+		// Prosthetic heads.
+		if(new_limb.robotic)
+			affected.robotize()
+			//affected.sabotaged = L.sabotaged
+		// Brain transfer.
+		var/mob/living/carbon/brain/B = locate() in tool
+		if(istype(B) && B.mind)
+			B.mind.transfer_to(target)
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
@@ -171,3 +194,50 @@
 		user.visible_message("\red [user]'s hand slips, damaging connectors on [target]'s [affected.display_name]!", \
 		"\red Your hand slips, damaging connectors on [target]'s [affected.display_name]!")
 		target.apply_damage(10, BRUTE, affected, sharp=1)
+
+/datum/surgery_step/limb/amputate
+	allowed_tools = list(
+	/obj/item/weapon/circular_saw = 100, \
+	/obj/item/weapon/hatchet = 75
+	)
+
+	min_duration = 110
+	max_duration = 160
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (target_zone == "eyes")	//there are specific steps for eye surgery
+			return 0
+		if (!hasorgans(target))
+			return 0
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		if (affected == null)
+			return 0
+		if (affected.status & ORGAN_DESTROYED)
+			return 0
+
+		//If all layers are cut and retracted we can amputate.
+		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
+			if(!tissue_layer.is_open())
+				return 0
+
+		return target_zone != "chest" && target_zone != "groin" && target_zone != "head"
+
+	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("[user] is beginning to amputate [target]'s [affected.display_name] with \the [tool]." , \
+		"You are beginning to amputate [target]'s [affected.display_name] with \the [tool].")
+		target.custom_pain("Your [affected.display_name] is being ripped apart!",1)
+		..()
+
+	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\blue [user] amputates [target]'s [affected.display_name] with \the [tool].", \
+		"\blue You amputate [target]'s [affected.display_name] with \the [tool].")
+		affected.droplimb(1,0)
+
+	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\red [user]'s hand slips, sawing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
+		"\red Your hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!")
+		affected.createwound(CUT, 30)
+		affected.fracture()

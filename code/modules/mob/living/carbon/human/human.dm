@@ -947,7 +947,7 @@
 	species.create_limbs(src)
 	species.create_organs(src)
 
-	for (var/obj/item/organ/brain/H in world)
+	for (var/obj/item/organ/internal/brain/H in world)
 		if(H.brainmob)
 			if(H.brainmob.real_name == src.real_name)
 				if(H.brainmob.mind)

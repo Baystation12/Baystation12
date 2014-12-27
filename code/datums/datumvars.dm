@@ -888,8 +888,8 @@ client
 				organ_slot = sanitize(copytext(organ_slot,1,MAX_MESSAGE_LEN))
 			else
 				if(I.removed_type)
-					var/obj/item/organ/O = new I.removed_type()
-					organ_slot = O.organ_tag
+					var/obj/item/organ/internal/O = new I.removed_type()
+					organ_slot = O.part
 					del(O)
 				else
 					organ_slot = "unknown organ"

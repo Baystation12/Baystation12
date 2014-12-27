@@ -214,49 +214,21 @@
 		"\red Your hand slips, leaving a small burn on [target]'s [affected.display_name] with \the [tool]!")
 		target.apply_damage(3, BURN, affected)
 
-/datum/surgery_step/generic/cut_limb
-	allowed_tools = list(
-	/obj/item/weapon/circular_saw = 100, \
-	/obj/item/weapon/hatchet = 75
-	)
+/*
+	Fix rigid layers
 
-	min_duration = 110
-	max_duration = 160
+	/obj/item/weapon/bonegel
+	/obj/item/weapon/bonesetter
+	/obj/item/weapon/bonegel
 
-	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if (target_zone == "eyes")	//there are specific steps for eye surgery
-			return 0
-		if (!hasorgans(target))
-			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		if (affected == null)
-			return 0
-		if (affected.status & ORGAN_DESTROYED)
-			return 0
+	Success:
+		affected.status &= ~ORGAN_BROKEN
+		affected.status &= ~ORGAN_SPLINTED
+		affected.stage = 0
+		affected.perma_injury = 0
 
-		//If all layers are cut and retracted we can amputate.
-		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
-			if(!tissue_layer.is_open())
-				return 0
-
-		return target_zone != "chest" && target_zone != "groin" && target_zone != "head"
-
-	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to amputate [target]'s [affected.display_name] with \the [tool]." , \
-		"You are beginning to amputate [target]'s [affected.display_name] with \the [tool].")
-		target.custom_pain("Your [affected.display_name] is being ripped apart!",1)
-		..()
-
-	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\blue [user] amputates [target]'s [affected.display_name] with \the [tool].", \
-		"\blue You amputate [target]'s [affected.display_name] with \the [tool].")
-		affected.droplimb(1,0)
-
-	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, sawing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 30)
+	Cockup:
 		affected.fracture()
+		h.createwound(BRUISE, 10)
+		h.disfigured = 1
+*/

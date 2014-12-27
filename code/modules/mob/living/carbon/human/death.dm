@@ -1,7 +1,7 @@
 /mob/living/carbon/human/gib()
 
 	for(var/datum/organ/internal/I in internal_organs)
-		var/obj/item/organ/current_organ = I.remove()
+		var/obj/item/organ/internal/current_organ = I.remove()
 		if(current_organ)
 			if(istype(loc,/turf))
 				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
