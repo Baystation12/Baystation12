@@ -364,18 +364,13 @@
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1)		// if off or ready, no need to charge
+	if(mode != 1) //if off or ready, no need to charge
 		update_use_power(1)
-		return
-
-	// otherwise charge
-	src.pressurize()
-
-	// if full enough, switch to ready mode
-	if(air_contents.return_pressure() >= SEND_PRESSURE)
-		mode = 2
+	else if(air_contents.return_pressure() >= SEND_PRESSURE) 
+		mode = 2 //if full enough, switch to ready mode
 		update()
-	return
+	else
+		src.pressurize() //otherwise charge
 
 /obj/machinery/disposal/proc/pressurize()
 	if(stat & NOPOWER)			// won't charge if no power
