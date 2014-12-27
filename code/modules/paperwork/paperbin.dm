@@ -23,7 +23,7 @@
 
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if (hasorgans(user))
-		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = user:organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())

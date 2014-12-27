@@ -81,29 +81,29 @@
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"appendix" = /datum/organ/internal/appendix,
-		"eyes" =     /datum/organ/internal/eyes
+		"heart" =    /obj/item/organ/internal/heart,
+		"lungs" =    /obj/item/organ/internal/lungs,
+		"liver" =    /obj/item/organ/internal/liver,
+		"kidneys" =  /obj/item/organ/internal/kidneys,
+		"brain" =    /obj/item/organ/internal/brain,
+		"appendix" = /obj/item/organ/internal/appendix,
+		"eyes" =     /obj/item/organ/internal/eyes
 		)
 
 	// Determines the various limb and tissue types that the species spawns with.
 	var/list/tissues = list("skin","muscle","bone")
 	var/list/has_limb = list(     // For now, parents need to be defined before children.
-		list("chest",  /datum/organ/external/chest,  null),
-		list("groin",  /datum/organ/external/groin,  "chest"),
-		list("head",   /datum/organ/external/head,   "chest"),
-		list("l_arm",  /datum/organ/external/l_arm,  "chest"),
-		list("r_arm",  /datum/organ/external/r_arm,  "chest"),
-		list("r_leg",  /datum/organ/external/r_leg,  "groin"),
-		list("l_leg",  /datum/organ/external/l_leg,  "groin"),
-		list("l_hand", /datum/organ/external/l_hand, "l_arm"),
-		list("r_hand", /datum/organ/external/r_hand, "r_arm"),
-		list("l_foot", /datum/organ/external/l_foot, "l_leg"),
-		list("r_foot", /datum/organ/external/r_foot, "r_leg")
+		list("chest",  /obj/item/organ/external/chest,  null),
+		list("groin",  /obj/item/organ/external/groin,  "chest"),
+		list("head",   /obj/item/organ/external/head,   "chest"),
+		list("l_arm",  /obj/item/organ/external/l_arm,  "chest"),
+		list("r_arm",  /obj/item/organ/external/r_arm,  "chest"),
+		list("r_leg",  /obj/item/organ/external/r_leg,  "groin"),
+		list("l_leg",  /obj/item/organ/external/l_leg,  "groin"),
+		list("l_hand", /obj/item/organ/external/l_hand, "l_arm"),
+		list("r_hand", /obj/item/organ/external/r_hand, "r_arm"),
+		list("l_foot", /obj/item/organ/external/l_foot, "l_leg"),
+		list("r_foot", /obj/item/organ/external/r_foot, "r_leg")
 		)
 
 /datum/species/New()
@@ -145,14 +145,14 @@
 	for(var/name in H.organs_by_name)
 		H.organs += H.organs_by_name[name]
 
-	for(var/datum/organ/external/O in H.organs)
+	for(var/obj/item/organ/external/O in H.organs)
 		O.owner = H
 
 	if(flags & IS_SYNTHETIC)
-		for(var/datum/organ/external/E in H.organs)
+		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
-		for(var/datum/organ/internal/I in H.internal_organs)
+		for(var/obj/item/organ/internal/I in H.internal_organs)
 			I.mechanize()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)

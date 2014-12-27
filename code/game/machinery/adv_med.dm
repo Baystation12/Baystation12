@@ -346,7 +346,7 @@
 	dat += "<th>Other Wounds</th>"
 	dat += "</tr>"
 
-	for(var/datum/organ/external/e in occ["external_organs"])
+	for(var/obj/item/organ/external/e in occ["external_organs"])
 		var/AN = ""
 		var/open = ""
 		var/infected = ""
@@ -364,7 +364,7 @@
 				internal_bleeding = "<br>Internal bleeding"
 				break
 
-		if(istype(e, /datum/organ/external/chest) && occ["lung_ruptured"])
+		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "lung ruptured"
 		if(e.status & ORGAN_SPLINTED)
 			splint = "splinted"
@@ -411,7 +411,7 @@
 			dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
 		dat += "</tr>"
 
-	for(var/datum/organ/internal/i in occ["internal_organs"])
+	for(var/obj/item/organ/internal/i in occ["internal_organs"])
 
 		var/mech = ""
 		if(i.robotic == 1)

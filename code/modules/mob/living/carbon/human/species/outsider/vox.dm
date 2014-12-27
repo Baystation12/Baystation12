@@ -42,13 +42,13 @@
 		)
 
 	has_organ = list(
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"eyes" =     /datum/organ/internal/eyes,
-		"stack" =    /datum/organ/internal/stack/vox
+		"heart" =    /obj/item/organ/internal/heart,
+		"lungs" =    /obj/item/organ/internal/lungs,
+		"liver" =    /obj/item/organ/internal/liver,
+		"kidneys" =  /obj/item/organ/internal/kidneys,
+		"brain" =    /obj/item/organ/internal/brain,
+		"eyes" =     /obj/item/organ/internal/eyes,
+		"stack" =    /obj/item/organ/internal/stack/vox
 		)
 
 	tissues = list("scales","skin","muscle","bone")

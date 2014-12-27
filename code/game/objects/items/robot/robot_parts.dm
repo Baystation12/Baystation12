@@ -63,12 +63,12 @@
 		if(!new_limb.robotic)
 			user << "That would be a bit ghoulish, wouldn't it? Use a robotic limb."
 			return
-		if(limbs[new_limb.part] != 0)
+		if(limbs[new_limb.body_part] != 0)
 			user << "The chassis already has a limb of that type installed."
 			return
 		user.drop_item()
 		W.loc = src
-		limbs[new_limb.part] = W
+		limbs[new_limb.body_part] = W
 		src.updateicon()
 
 	// MMI installation.
