@@ -59,12 +59,12 @@
 	set category = "Abilities"
 
 	if (get_dist(src,M) <= 1)
-		src << "\green You need to be closer."
+		src << "<span class='alium'>You need to be closer.</span>"
 		return
 
 	var/datum/organ/internal/xenos/plasmavessel/I = M.internal_organs_by_name["plasma vessel"]
 	if(!istype(I))
-		src << "\green Their plasma vessel is missing."
+		src << "<span class='alium'>Their plasma vessel is missing.</span>"
 		return
 
 	var/amount = input("Amount:", "Transfer Plasma to [M]") as num
@@ -72,8 +72,8 @@
 		amount = abs(round(amount))
 		if(check_alien_ability(amount,0,"plasma vessel"))
 			M.gain_plasma(amount)
-			M << "\green [src] has transfered [amount] plasma to you."
-			src << "\green You have transferred [amount] plasma to [M]"
+			M << "<span class='alium'>[src] has transfered [amount] plasma to you.</span>"
+			src << "<span class='alium'>You have transferred [amount] plasma to [M].</span>"
 	return
 
 // Queen verbs.
@@ -93,7 +93,7 @@
 		return
 
 	if(check_alien_ability(75,1,"egg sac"))
-		visible_message("\green <B>[src] has laid an egg!</B>")
+		visible_message("<span class='alium'><B>[src] has laid an egg!</B></span>")
 		new /obj/effect/alien/egg(loc)
 
 	return
@@ -109,7 +109,7 @@
 		return
 
 	if(check_alien_ability(500))
-		visible_message("\green <B>[src] begins to twist and contort!</B>", "\green You begin to evolve!")
+		visible_message("<span class='alium'><B>[src] begins to twist and contort!</B></span>", "<span class='alium'>You begin to evolve!</span>")
 		src.set_species("Xenomorph Queen")
 
 	return
@@ -120,7 +120,7 @@
 	set category = "Abilities"
 
 	if(check_alien_ability(50,1,"resin spinner"))
-		visible_message("\green <B>[src] has planted some alien weeds!</B>")
+		visible_message("<span class='alium'><B>[src] has planted some alien weeds!</B></span>")
 		new /obj/effect/alien/weeds/node(loc)
 	return
 
@@ -130,14 +130,14 @@
 	set category = "Abilities"
 
 	if(!O in oview(1))
-		src << "\green [O] is too far away."
+		src << "<span class='alium'>[O] is too far away.</span>"
 		return
 
 	// OBJ CHECK
 	if(isobj(O))
 		var/obj/I = O
 		if(I.unacidable)	//So the aliens don't destroy energy fields/singularies/other aliens/etc with their acid.
-			src << "\green You cannot dissolve this object."
+			src << "<span class='alium'>You cannot dissolve this object.</span>"
 			return
 
 	// TURF CHECK
@@ -145,18 +145,18 @@
 		var/turf/T = O
 		// R WALL
 		if(istype(T, /turf/simulated/wall/r_wall))
-			src << "\green You cannot dissolve this object."
+			src << "<span class='alium'>You cannot dissolve this object.</span>"
 			return
 		// R FLOOR
 		if(istype(T, /turf/simulated/floor/engine))
-			src << "\green You cannot dissolve this object."
+			src << "<span class='alium'>You cannot dissolve this object.</span>"
 			return
 		else// Not a type we can acid.
 			return
 
 	if(check_alien_ability(200,0,"acid gland"))
 		new /obj/effect/alien/acid(get_turf(O), O)
-		visible_message("\green <B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B>")
+		visible_message("<span class='alium'><B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
 
 	return
 
@@ -172,7 +172,7 @@
 		src << "You cannot spit neurotoxin in your current state."
 		return
 
-	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "\green You spit neurotoxin at [target].")
+	visible_message("<span class='warning'>[src] spits neurotoxin at [target]!</span>", "<span class='alium'>You spit neurotoxin at [target].</span>")
 
 	//I'm not motivated enough to revise this. Prjectile code in general needs update.
 	// Maybe change this to use throw_at? ~ Z
@@ -210,7 +210,7 @@
 	if(!check_alien_ability(75,1,"resin spinner"))
 		return
 
-	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "\green You shape a [choice].")
+	visible_message("<span class='warning'><B>[src] vomits up a thick purple substance and begins to shape it!</B></span>", "<span class='alium'>You shape a [choice].</span>")
 	switch(choice)
 		if("resin door")
 			new /obj/structure/mineral_door/resin(loc)

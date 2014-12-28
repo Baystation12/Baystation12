@@ -106,7 +106,7 @@
 		H.adjustOxyLoss(-heal_rate)
 		H.adjustToxLoss(-heal_rate)
 		if (prob(5))
-			H << "\green You feel a soothing sensation come over you..."
+			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
 		return 1
 	
 	//next mend broken bones, approx 10 ticks each
@@ -114,7 +114,7 @@
 		if (E.status & ORGAN_BROKEN)
 			if (prob(mend_prob))
 				if (E.mend_fracture())
-					H << "\green You feel something mend itself inside your [E.display_name]."
+					H << "<span class='alium'>You feel something mend itself inside your [E.display_name].</span>"
 			return 1
 	
 	return 0

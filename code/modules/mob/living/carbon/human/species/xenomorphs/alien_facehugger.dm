@@ -97,7 +97,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	if(stat == CONSCIOUS)
 		icon_state = "[initial(icon_state)]"
 		throwing = 0
-	GoIdle(30,50) //stunned for a few seconds - allows throwing them to be useful for positioning but not as an offensive action (unless you're setting up a trap)
+	GoIdle(30,100) //stunned for a few seconds - allows throwing them to be useful for positioning but not as an offensive action (unless you're setting up a trap)
 
 /obj/item/clothing/mask/facehugger/proc/Attach(M as mob)
 
