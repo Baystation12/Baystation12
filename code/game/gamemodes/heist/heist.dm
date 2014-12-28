@@ -22,7 +22,9 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		if (skipjack && skipjack.returned_home)
 			return 1
 
+
 	return 0
+
 
 
 /datum/game_mode/heist/cleanup()
