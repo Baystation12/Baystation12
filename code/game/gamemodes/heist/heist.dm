@@ -86,21 +86,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		send_intercept()
 
 /datum/game_mode/proc/create_raider(var/datum/mind/newraider)
-
-
-	var/sounds = rand(2,8)
-	var/i = 0
-	var/newname = ""
-
-	while(i<=sounds)
-		i++
-		newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
-
 	var/mob/living/carbon/human/raider = newraider.current
-
-	raider.real_name = capitalize(newname)
-	raider.name = raider.real_name
-	newraider.name = raider.name
 	raider.equip_raider()
 
 /datum/game_mode/proc/is_raider_crew_safe()
@@ -142,17 +128,16 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		objs += O
 
 		i++
-
-	//-All- raids have these two objectives. Failing them loses the game.
-	objs += new /datum/objective/heist/inviolate_crew
-	objs += new /datum/objective/heist/inviolate_death
-
 	return objs
 
 /datum/game_mode/proc/greet_raider(var/datum/mind/raider)
-	raider.current << "\blue <B>You are a Raider, fresh from lawless space!</b>"
-	raider.current << "It's been a long trip, but [station_name] is ripe for the picking! Try not to kill too many people or damage it too badly; you might want to come back."
-	show_objectives(raider)
+	spawn(0)
+		raider.current << "<span class='notice'><B>You are a Raider, fresh from lawless space!</b></span>"
+		raider.current << "It's been a long trip, but [station_name] is ripe for the picking! Try not to kill too many people or damage it too badly; you might want to come back."
+		show_objectives(raider)
+		if(is_alien_whitelisted(raider.current, "Vox"))
+			raider.current << "<span class='danger'>You are whitelisted for Vox. If you wish to become one, visit the bathroom in the pirate base and use the mirror.</span>"
+			raider.current << "<span class='danger'>There's some armour and weapons hidden away to the rear of the base for alien hands.</span>"
 
 /datum/game_mode/heist/declare_completion()
 
