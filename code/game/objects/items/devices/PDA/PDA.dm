@@ -487,6 +487,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(active_uplink_check(user))
 		return
 
+	mode = 0
 	ui_interact(user) //NanoUI requires this proc
 	return
 

@@ -354,6 +354,9 @@
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Mental interface failure."
 		return
+	if (subject.species.dhts == 1)
+		scantemp = "Error: DNA Sequence too complex to reconstruct successfully."
+		return
 	if (subject.species && subject.species.flags & NO_SCAN)
 		scantemp = "Error: Mental interface failure."
 		return
