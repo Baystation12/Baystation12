@@ -14,6 +14,7 @@
 	prosthetic_name = "cyberbrain"
 	prosthetic_icon = "brain-prosthetic"
 	organ_tag = "brain"
+	organ_type = /datum/organ/internal/brain
 
 	var/mob/living/carbon/brain/brainmob = null
 
