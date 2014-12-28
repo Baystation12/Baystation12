@@ -109,6 +109,14 @@
 			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
 		return 1
 	
+	//next internal organs
+	for(var/datum/organ/internal/I in H.internal_organs)
+		if(I.damage > 0)
+			I.damage = max(I.damage - heal_rate, 0)
+			if (prob(5))
+				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
+			return 1
+	
 	//next mend broken bones, approx 10 ticks each
 	for(var/datum/organ/external/E in H.bad_external_organs)
 		if (E.status & ORGAN_BROKEN)
