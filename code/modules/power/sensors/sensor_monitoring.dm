@@ -15,8 +15,9 @@
 	anchored = 1.0
 	circuit = /obj/item/weapon/circuitboard/powermonitor
 	var/list/grid_sensors = null
-	var/update_counter = 0 // Next icon update when this reaches 5 (ie every 5 ticks)
-	var/active_sensor = null
+	var/list/sensors_by_powernet = null
+	var/update_counter = 0 		// Next icon update when this reaches 5 (ie every 5 ticks)
+	var/active_sensor = null	//name_tag of the currently selected sensor
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
@@ -34,12 +35,19 @@
 
 /obj/machinery/computer/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
+	sensors_by_powernet = list()
 	for(var/obj/machinery/power/sensor/S in machines)
 		if((S.loc.z == src.loc.z) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				error("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")
 			else
-				grid_sensors += S
+				grid_sensors[S.name_tag] = S
+			
+				var/pnet = (S.powernet)? S.powernet : "none"
+				if (pnet in sensors_by_powernet)
+					sensors_by_powernet[pnet] += S
+				else
+					sensors_by_powernet[pnet] = list(S)
 
 
 /obj/machinery/computer/power_monitor/attack_ai(mob/user)
@@ -75,13 +83,10 @@
 		t += "<BR><A href='?src=\ref[src];close=1'>Close</A><BR><HR>"
 
 		if(!grid_sensors)
-			t += "Unable to connect to sensor!"
+			t += "No sensors available."
 		else
-			var/obj/machinery/power/sensor/OKS = null
-			for(var/obj/machinery/power/sensor/S in grid_sensors)
-				if(S.name_tag == active_sensor)
-					OKS = S
-			if(OKS)
+			if (active_sensor in grid_sensors)
+				var/obj/machinery/power/sensor/OKS = grid_sensors[active_sensor]
 				t += "<B>[OKS.name_tag] - Sensor Reading</B><BR>"
 				t += OKS.ReturnReading()
 			else
@@ -91,20 +96,36 @@
 	else
 		t += "<BR><A href='?src=\ref[src];update=1'>Refresh</A>"
 		t += "<BR><A href='?src=\ref[src];close=1'>Close</A><BR><HR>"
-		if((!grid_sensors) || (!grid_sensors.len))
-			t += "<B>ERROR - No Active Sensors Detected!</B>"
-		else
-			for(var/obj/machinery/power/sensor/S in grid_sensors)			// Show all data from current Z level.
-				if(S.check_grid_warning()) // Display grids with active alarms in bold text
-					t += "<B><A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A></B><BR>"
-				else
-					t += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
-
-
+		
+		t += render_sensor_list()
 
 	user << browse(t, "window=powcomp;size=600x900")
 	onclose(user, "powcomp")
 
+/obj/machinery/computer/power_monitor/proc/render_sensor_list()
+	if((!grid_sensors) || (!grid_sensors.len))
+		return "<B>ERROR - No Active Sensors Detected!</B>"
+	
+	var/html = "<table border='0'><tr><th>Power Network</th><th>Sensors</th></tr>"
+	for (var/pnet in sensors_by_powernet)
+		if (pnet && pnet != "none")
+			html += "<tr><td valign='top'>[uppertext("\ref[pnet]")]</td><td>"
+			for(var/obj/machinery/power/sensor/S in sensors_by_powernet[pnet])
+				//really, if one of them has a warning, they all should - but the interface doesn't guarantee that so whatever
+				if(S.check_grid_warning()) // Display grids with active alarms in bold text
+					html += "<B><A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A></B><BR>"
+				else
+					html += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
+			html += "</td></tr>"
+	
+	if ("none" in sensors_by_powernet)
+		html += "<tr><td>\[N/A\]</td><td>"
+		for(var/obj/machinery/power/sensor/S in sensors_by_powernet["none"])
+			html += "<A href='?src=\ref[src];setsensor=[S.name_tag]'>[S.name]</A><BR>"
+		html += "</td></tr>"
+	html += "</table>"
+	
+	return html
 
 /obj/machinery/computer/power_monitor/Topic(href, href_list)
 	..()

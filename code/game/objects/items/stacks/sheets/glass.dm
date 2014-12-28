@@ -28,6 +28,7 @@
 	icon_state = "sheet-glass"
 	matter = null
 	created_window = /obj/structure/window/basic
+	stacktype = /obj/item/stack/sheet/glass
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
 	construct_window(user)

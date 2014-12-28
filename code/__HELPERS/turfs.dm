@@ -8,3 +8,6 @@
 
 /proc/iswall(turf/T)
 	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
+
+/proc/isfloor(turf/T)
+	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor) || istype(T, /turf/simulated/shuttle/floor))
