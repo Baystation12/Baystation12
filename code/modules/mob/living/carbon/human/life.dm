@@ -1760,6 +1760,9 @@
 	return slurring
 
 /mob/living/carbon/human/handle_stunned()
+	if(species.flags & NO_PAIN)
+		stunned = 0
+		return 0
 	if(..())
 		speech_problem_flag = 1
 	return stunned
