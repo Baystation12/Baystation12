@@ -13,7 +13,7 @@
 
 	var/damage = 0
 	var/min_organ_damage = 0
-	var/min_bruised_damage = 0
+	var/min_bruised_damage = 15
 	var/min_broken_damage = 30
 
 	var/list/datum/autopsy_data/autopsy_data = list()

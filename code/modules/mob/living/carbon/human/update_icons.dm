@@ -302,29 +302,21 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if(part.icon_position&(LEFT|RIGHT))
 
 				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
-
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
-
 				if(!(part.icon_position & LEFT))
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_OVERLAY)
-
 				if(part.icon_position & LEFT)
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-
 				base_icon.Blend(temp2, ICON_UNDERLAY)
-
 			else
-
-				base_icon.Blend(temp, ICON_OVERLAY)
+				if(temp)
+					base_icon.Blend(temp, ICON_OVERLAY)
 
 		if(!skeleton)
 			if(husk)

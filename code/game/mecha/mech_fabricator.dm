@@ -119,7 +119,7 @@
 
 
 
-
+/*
 /obj/machinery/mecha_part_fabricator/New()
 	..()
 	component_parts = list()
@@ -818,3 +818,4 @@
 	else
 		user << "The fabricator cannot hold more [sname]."
 	return
+*/

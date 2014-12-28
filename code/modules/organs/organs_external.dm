@@ -52,7 +52,7 @@
 		tissue_layers += new /datum/tissue_layer(src,tissue_layer)
 
 	spawn(1)
-		if(!owner)
+		if(!istype(owner))
 			return
 		var/obj/item/organ/external/P = owner.organs_by_name[parent_organ]
 		if(P)
