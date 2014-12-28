@@ -62,7 +62,6 @@
 					new S.coretype(loc)
 					feedback_add_details("slime_core_harvested","[replacetext(S.colour," ","_")]")
 				..()
-				del(what)
 
 			input = /mob/living/carbon/slime
 			output = null
