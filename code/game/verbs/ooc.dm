@@ -20,14 +20,14 @@
 		return
 
 	if(!holder)
-		if(!ooc_allowed)
-			src << "\red OOC is globally muted"
+		if(!config.ooc_allowed)
+			src << "<span class='danger'>OOC is globally muted.</span>"
 			return
-		if(!dooc_allowed && (mob.stat == DEAD))
-			usr << "\red OOC for dead mobs has been turned off."
+		if(!config.dooc_allowed && (mob.stat == DEAD))
+			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
 			return
 		if(prefs.muted & MUTE_OOC)
-			src << "\red You cannot use OOC (muted)."
+			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
@@ -85,14 +85,14 @@
 		return
 
 	if(!holder)
-		if(!ooc_allowed)
-			src << "\red OOC is globally muted"
+		if(!config.ooc_allowed)
+			src << "<span class='danger'>OOC is globally muted.</span>"
 			return
-		if(!dooc_allowed && (mob.stat == DEAD))
-			usr << "\red OOC for dead mobs has been turned off."
+		if(!config.dooc_allowed && (mob.stat == DEAD))
+			usr << "<span class='danger'>OOC for dead mobs has been turned off.</span>"
 			return
 		if(prefs.muted & MUTE_OOC)
-			src << "\red You cannot use OOC (muted)."
+			src << "<span class='danger'>You cannot use OOC (muted).</span>"
 			return
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
@@ -106,7 +106,7 @@
 
 	var/mob/source = src.mob
 	var/list/heard = get_mobs_in_view(7, source)
-	
+
 	var/display_name = source.key
 	if(holder && holder.fakekey)
 		display_name = holder.fakekey

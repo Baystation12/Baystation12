@@ -84,7 +84,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	if(M&&hologram&&master)//Master is mostly a safety in case lag hits or something.
 		if(!master.say_understands(M, speaking))//The AI will be able to understand most mobs talking through the holopad.
-			text = stars(text)
+			if(speaking)
+				text = speaking.scramble(text)
+			else
+				text = stars(text)
 		var/name_used = M.GetVoice()
 		//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 		var/rendered

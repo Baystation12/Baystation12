@@ -5,13 +5,12 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/claws/strong
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 
 	has_fine_manipulation = 0
-	insulated = 1
+	siemens_coefficient = 0
 	gluttonous = 2
 
 	eyes = "blank_eyes"
@@ -26,7 +25,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
+	flags = IS_RESTRICTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 

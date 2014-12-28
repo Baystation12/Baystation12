@@ -44,16 +44,16 @@
 
 /mob/proc/say_dead(var/message)
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
+		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
 		return
 
 	if(!src.client.holder)
-		if(!dsay_allowed)
-			src << "\red Deadchat is globally muted"
+		if(!config.dsay_allowed)
+			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
-		usr << "\red You have deadchat muted."
+		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)

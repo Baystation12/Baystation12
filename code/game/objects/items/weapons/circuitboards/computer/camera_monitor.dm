@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/security
@@ -57,7 +57,7 @@
 			usr << "No input found please hang up and try your call again."
 			return
 		var/list/tempnetwork = text2list(input, ",")
-		tempnetwork = difflist(tempnetwork,RESTRICTED_CAMERA_NETWORKS,1)
+		tempnetwork = difflist(tempnetwork,restricted_camera_networks,1)
 		if(tempnetwork.len < 1)
 			usr << "No network found please hang up and try your call again."
 			return

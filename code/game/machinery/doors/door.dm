@@ -2,6 +2,8 @@
 #define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
 #define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
 
+#define DOOR_REPAIR_AMOUNT 50	//amount of health regained per stack amount used
+
 /obj/machinery/door
 	name = "Door"
 	desc = "It opens and closes."
@@ -29,6 +31,7 @@
 	var/emitter_resistance = 10 // Amount of emitter hits doors whistand
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
+	var/obj/item/stack/sheet/metal/repairing
 
 	//Multi-tile doors
 	dir = EAST
@@ -162,7 +165,6 @@
 		tforce = AM:throwforce
 	playsound(src.loc, hitsound, 100, 1)
 	take_damage(tforce)
-	//..() //Does this really need to be here twice? The parent proc doesn't even do anything yet. - Nodrak
 	return
 
 /obj/machinery/door/attack_ai(mob/user as mob)
@@ -185,27 +187,69 @@
 		user = null
 	if(!src.requiresID())
 		user = null
+	
 	if(istype(I, /obj/item/stack/sheet/metal))
 		if(stat & BROKEN)
-			user << "\blue [src.name] is damaged beyond repair and must be reconstructed!"
+			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
 			return
 		if(health >= maxhealth)
-			user << "\blue Nothing to fix!"
+			user << "<span class='notice'>Nothing to fix!</span>"
 			return
+		if(!density)
+			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
+			return
+		
+		//figure out how much metal we need
+		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT 
+		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
+		
 		var/obj/item/stack/sheet/metal/metalstack = I
-		var/health_per_sheet = 50
-		var/initialhealth = health
-		src.health = min(maxhealth, health + 100, health + (metalstack.amount * health_per_sheet))
-		user.visible_message("\The [user] patches some dents on \the [src] with \the [metalstack].")
-		metalstack.use(round((health - initialhealth)/health_per_sheet))
+		var/transfer
+		if (repairing)
+			transfer = metalstack.transfer_to(repairing, amount_needed - repairing.amount)
+			if (!transfer)
+				user << "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>"
+		else
+			repairing = metalstack.split(amount_needed)
+			if (repairing)
+				repairing.loc = src
+				transfer = repairing.amount
+		
+		if (transfer)
+			user << "<span class='notice'>You fit [transfer] [metalstack.singular_name]\s to damaged and broken parts on \the [src].</span>"
+		
 		return
 
-	if(src.density && ((operable() && istype(I, /obj/item/weapon/card/emag)) || istype(I, /obj/item/weapon/melee/energy/blade)))
+	if(repairing && istype(I, /obj/item/weapon/weldingtool))
+		if(!density)
+			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
+			return
+		
+		var/obj/item/weapon/weldingtool/welder = I
+		if(welder.remove_fuel(0,user))
+			user << "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>"
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
+			if(do_after(user, 5 * repairing.amount) && welder && welder.isOn())
+				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
+				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				update_icon()
+				del(repairing)
+		return
+
+	if(repairing && istype(I, /obj/item/weapon/crowbar))
+		user << "<span class='notice'>You remove \the [repairing].</span>"
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
+		repairing.loc = user.loc
+		repairing = null
+		return
+
+	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
 		flick("door_spark", src)
 		sleep(6)
 		open()
 		operating = -1
 		return 1
+	
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
@@ -213,16 +257,18 @@
 			if(W.force < min_force)
 				user.visible_message("\red <B>\The [user] hits \the [src] with \the [W] with no visible effect.</B>" )
 			else
-				user.visible_message("\red <B>\The [user] forcefully slams \the [src] with \the [W]!</B>" )
+				user.visible_message("\red <B>\The [user] forcefully strikes \the [src] with \the [W]!</B>" )
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
+	
 	if(src.allowed(user) && operable())
 		if(src.density)
 			open()
 		else
 			close()
 		return
+
 	if(src.density && !(stat & (NOPOWER|BROKEN)))
 		flick("door_deny", src)
 	return

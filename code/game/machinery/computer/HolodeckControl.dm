@@ -19,11 +19,11 @@ var/global/list/holodeck_programs = list(
 	name = "holodeck control console"
 	desc = "A computer used to control a nearby holodeck."
 	icon_state = "holocontrol"
-	
+
 	use_power = 1
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
 	var/item_power_usage = 500
-	
+
 	var/area/linkedholodeck = null
 	var/area/target = null
 	var/active = 0
@@ -105,10 +105,10 @@ var/global/list/holodeck_programs = list(
 		else if(href_list["AIoverride"])
 			if(!issilicon(usr))
 				return
-			
+
 			if(safety_disabled && emagged)
 				return //if a traitor has gone through the trouble to emag the thing, let them keep it.
-			
+
 			safety_disabled = !safety_disabled
 			update_projections()
 			if(safety_disabled)
@@ -145,7 +145,7 @@ var/global/list/holodeck_programs = list(
 		item_power_usage = initial(item_power_usage)
 		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
 			H.damtype = initial(H.damtype)
-	
+
 	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
@@ -193,13 +193,13 @@ var/global/list/holodeck_programs = list(
 	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
 		if(!(get_turf(item) in linkedholodeck))
 			derez(item, 0)
-	
+
 	if (!safety_disabled)
 		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
 				C.derez()
-	
+
 	if(!..())
 		return
 	if(active)
@@ -317,11 +317,11 @@ var/global/list/holodeck_programs = list(
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
 				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
-			
+
 			if(L.name=="Holocarp Spawn Random")
 				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
 					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
-		
+
 		update_projections()
 
 
@@ -367,6 +367,16 @@ var/global/list/holodeck_programs = list(
 				if(istype(get_step(src,direction),/turf/simulated/floor))
 					var/turf/simulated/floor/FF = get_step(src,direction)
 					FF.update_icon() //so siding get updated properly
+
+/turf/simulated/floor/holofloor/desert
+	name = "desert sand"
+	desc = "Uncomfortably gritty for a hologram."
+	icon_state = "asteroid"
+
+/turf/simulated/floor/holofloor/desert/New()
+	..()
+	if(prob(10))
+		overlays += "asteroid[rand(0,9)]"
 
 /turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	return
@@ -614,16 +624,16 @@ var/global/list/holodeck_programs = list(
 
 //Holorack
 
-/obj/structure/rack/holorack
+/obj/structure/table/rack/holorack
 	name = "rack"
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"
 
-/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
 	return
 
-/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "It's a holorack!  You can't unwrench it!"
 		return

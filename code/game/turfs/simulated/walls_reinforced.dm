@@ -5,7 +5,7 @@
 	opacity = 1
 	density = 1
 
-	damage_cap = 200
+	damage_cap = 1000
 	max_temperature = 6000
 	armor = 0.1 // Only 10% damage from gunfire, it's made from strong alloys and stuff.
 

@@ -333,6 +333,7 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
+			src.w_class = 4
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -347,6 +348,7 @@
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
+		src.w_class = initial(src.w_class)
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -473,7 +475,7 @@
 	else
 		return ..()
 
-/obj/item/weapon/combitool
+/*/obj/item/weapon/combitool
 	name = "combi-tool"
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
@@ -513,11 +515,15 @@
 	return 1
 
 /obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!M.Adjacent(user))
+		return 0
 	var/obj/item/tool = tools[current_tool]
 	if(!tool) return 0
 	return (tool ? tool.attack(M,user) : 0)
 
 /obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	if(!proximity)
+		return 0
 	var/obj/item/tool = tools[current_tool]
 	if(!tool) return 0
 	tool.loc = user
@@ -525,4 +531,4 @@
 	if(!resolved && tool && target)
 		tool.afterattack(target,user,1)
 	if(tool)
-		tool.loc = src
+		tool.loc = src*/

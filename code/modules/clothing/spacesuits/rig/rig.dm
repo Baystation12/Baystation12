@@ -555,7 +555,6 @@
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
-		H << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
 	var/obj/item/check_slot

@@ -19,7 +19,7 @@
 		/obj/item/alarm_frame,
 		/obj/item/firealarm_frame,
 		/obj/item/weapon/table_parts,
-		/obj/item/weapon/rack_parts,
+		/obj/item/weapon/table_parts/rack,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,

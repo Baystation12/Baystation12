@@ -90,7 +90,6 @@ I decided to scrap round-specific objectives since keeping track of them would r
 When I already created about 4 new objectives, this doesn't seem terribly important or needed.
 */
 
-/var/global/toggle_space_ninja = 0//If ninjas can spawn or not.
 /var/global/sent_ninja_to_station = 0//If a ninja is already on the station.
 
 var/ninja_selection_id = 1
@@ -437,7 +436,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(!toggle_space_ninja)
+	if(!config.ninjas_allowed)
 		alert("Space Ninjas spawning is disabled.")
 		return
 
@@ -467,7 +466,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(!ticker.mode)
 		alert("The game hasn't started yet!")
 		return
-	if(!toggle_space_ninja)
+	if(!config.ninjas_allowed)
 		alert("Space Ninjas spawning is disabled.")
 		return
 	if(alert("Are you sure you want to send in a space ninja?",,"Yes","No")=="No")

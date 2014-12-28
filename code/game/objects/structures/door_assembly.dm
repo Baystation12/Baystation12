@@ -223,7 +223,7 @@
 			user << "<span class='notice'>There was nothing to remove.</span>"
 			src.state = 1
 			return
-	
+
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove the electronics from the airlock assembly.")
 
@@ -271,7 +271,8 @@
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
 
-			new path(src.loc, src)
+			var/obj/machinery/door/new_airlock = new path(src.loc, src)
+			new_airlock.dir = src.dir
 			del(src)
 	else
 		..()

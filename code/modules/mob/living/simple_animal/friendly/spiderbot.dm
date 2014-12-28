@@ -208,7 +208,7 @@
 	held_item.loc = src.loc
 	held_item = null
 
-	robogibs(src.loc, viruses)
+	gibs(loc, viruses, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
 	src.Del()
 	return
 

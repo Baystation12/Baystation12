@@ -342,9 +342,8 @@
 
 					if(istype(L, /mob/living/carbon/human) && dna) //Ignore slime(wo)men
 						var/mob/living/carbon/human/H = L
-						if(H.dna)
-							if(H.dna.mutantrace == "slime")
-								continue
+						if(H.species.name == "Slime")
+							continue
 
 					if(!L.canmove) // Only one slime can latch on at a time.
 						var/notarget = 0
@@ -575,3 +574,6 @@
 	if (Leader) return 0
 	if (holding_still) return 0
 	return 1
+
+/mob/living/carbon/slime/slip() //Can't slip something without legs.
+	return 0
