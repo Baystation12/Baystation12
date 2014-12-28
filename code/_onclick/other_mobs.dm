@@ -131,7 +131,7 @@
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC || H.species.insulated)
+			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5))
 				return
 
 		var/power = max(0,min(10,(powerlevel+rand(0,3))))
