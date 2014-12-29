@@ -63,6 +63,8 @@ h1.alert, h2.alert		{color: #000000;}
 
 .emote					{font-style: italic;}
 
+/* Game Messages */
+
 .attack					{color: #ff0000;}
 .moderate				{color: #CC0000;}
 .disarm					{color: #990000;}
@@ -73,6 +75,9 @@ h1.alert, h2.alert		{color: #000000;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
+.alium					{color: #00ff00;}
+
+/* Languages */
 
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
