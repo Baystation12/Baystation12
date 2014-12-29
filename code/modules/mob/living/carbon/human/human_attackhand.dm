@@ -141,6 +141,8 @@
 						if(M.species.flags & IS_STRONG)
 							TugText = "ripping off"
 							TuggedText = "ripped off"
+						if (TugText=="tugging at"&&affected.name=="groin")
+							return
 						visible_message("<span class='danger'>[M] starts [TugText] [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts [TugText] your [affected.display_name]!</span>") // Begin tugging.
 						var/tugTime = 150
 						if(affected.name == "head" || affected.name == "groin")
