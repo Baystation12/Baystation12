@@ -87,7 +87,6 @@
 
 		//Organs and blood
 		handle_organs()
-		handle_blood()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
@@ -331,6 +330,8 @@
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
+
+		//TODO: Move this into lungs organ process_internal()
 
 		// HACK NEED CHANGING LATER
 		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))

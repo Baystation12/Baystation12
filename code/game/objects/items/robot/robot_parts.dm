@@ -60,7 +60,7 @@
 	// Robot chassis construction.
 	if(istype(W, /obj/item/organ))
 		var/obj/item/organ/new_limb = W
-		if(!new_limb.robotic)
+		if(!(new_limb.status & ORGAN_ROBOT))
 			user << "That would be a bit ghoulish, wouldn't it? Use a robotic limb."
 			return
 		if(limbs[new_limb.body_part] != 0)

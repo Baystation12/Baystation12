@@ -39,10 +39,10 @@
 	var/list/part_sets = list( //set names must be unique
 	"Robot"=list(
 						/obj/item/robot_parts/robot_suit,
-						/obj/item/organ/external/l_arm/robot,
-						/obj/item/organ/external/r_arm/robot,
-						/obj/item/organ/external/l_leg/robot,
-						/obj/item/organ/external/r_leg/robot,
+						/obj/item/organ/external/arm/robot,
+						/obj/item/organ/external/arm/right/robot,
+						/obj/item/organ/external/leg/robot,
+						/obj/item/organ/external/leg/right/robot,
 						/obj/item/organ/external/chest/robot,
 						/obj/item/organ/external/head/robot,
 					),

@@ -372,7 +372,7 @@
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 
 	if (prob(50))
-		new /obj/item/organ/external/l_arm/robot(Tsec)
+		new /obj/item/organ/external/arm/robot(Tsec)
 
 	while (amount)//Dumps the tiles into the appropriate sized stacks
 		if(amount >= 16)
@@ -432,10 +432,10 @@
 
 /obj/item/weapon/toolbox_tiles_sensor/attackby(var/obj/item/W, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/organ/external/l_arm) || istype(W, /obj/item/organ/external/r_arm))
+	if(istype(W, /obj/item/organ/external/arm))
 
 		var/obj/item/organ/limb = W
-		if(!limb.robotic)
+		if(!(limb.status & ORGAN_ROBOT))
 			user << "That's a bit ghoulish, isn't it? Use a robotic limb."
 			return
 

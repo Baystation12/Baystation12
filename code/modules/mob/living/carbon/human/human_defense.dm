@@ -176,7 +176,7 @@ emp_act
 		if(O.status & ORGAN_DESTROYED)	continue
 		O.emp_act(severity)
 		for(var/obj/item/organ/internal/I  in O.internal_organs)
-			if(I.robotic == 0)	continue
+			if(!(I.status & ORGAN_ROBOT))	continue
 			I.emp_act(severity)
 	..()
 
@@ -203,19 +203,6 @@ emp_act
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
 		return 0
-
-	if(istype(I,/obj/item/weapon/card/emag))
-		if(!(affecting.status & ORGAN_ROBOT))
-			user << "\red That limb isn't robotic."
-			return
-		if(affecting.sabotaged)
-			user << "\red [src]'s [affecting.display_name] is already sabotaged!"
-		else
-			user << "\red You sneakily slide [I] into the dataport on [src]'s [affecting.display_name] and short out the safeties."
-			var/obj/item/weapon/card/emag/emag = I
-			emag.uses--
-			affecting.sabotaged = 1
-		return 1
 
 	if(I.attack_verb.len)
 		visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [user]!</B>")

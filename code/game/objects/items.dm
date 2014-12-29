@@ -556,10 +556,10 @@
 				"\red You stab yourself in the eyes with [src]!" \
 			)
 
-		eyes.damage += rand(3,4)
-		if(eyes.damage >= eyes.min_bruised_damage)
+		eyes.take_damage(rand(3,4),0)
+		if(eyes.is_bruised())
 			if(M.stat != 2)
-				if(eyes.robotic <= 1) //robot eyes bleeding might be a bit silly
+				if(!(eyes.status & ORGAN_ROBOT)) //robot eyes bleeding might be a bit silly
 					M << "\red Your eyes start to bleed profusely!"
 			if(prob(50))
 				if(M.stat != 2)
@@ -568,7 +568,7 @@
 				M.eye_blurry += 10
 				M.Paralyse(1)
 				M.Weaken(4)
-			if (eyes.damage >= eyes.min_broken_damage)
+			if (eyes.is_broken())
 				if(M.stat != 2)
 					M << "\red You go blind!"
 		var/obj/item/organ/external/affecting = M:get_organ("head")

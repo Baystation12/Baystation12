@@ -111,7 +111,7 @@ obj/var/contaminated = 0
 	if(vsc.plc.GENETIC_CORRUPTION)
 		if(rand(1,10000) < vsc.plc.GENETIC_CORRUPTION)
 			randmutb(src)
-			src << "\red High levels of toxins cause you to spontaneously mutate."
+			src << "<span class='danger'>High levels of toxins cause you to spontaneously mutate.</span>"
 			domutcheck(src,null)
 
 
@@ -122,10 +122,10 @@ obj/var/contaminated = 0
 
 	var/obj/item/organ/internal/eyes/E = internal_organs_by_name["eyes"]
 	if(E)
-		if(prob(20)) src << "\red Your eyes burn!"
-		E.damage += 2.5
+		if(prob(20)) src << "<span class='danger'>Your eyes burn!</span>"
+		E.take_damage(0,2.5)
 		eye_blurry = min(eye_blurry+1.5,50)
-		if (prob(max(0,E.damage - 15) + 1) &&!eye_blind)
+		if (prob(max(0,E.get_damage() - 15) + 1) &&!eye_blind)
 			src << "\red You are blinded!"
 			eye_blind += 20
 

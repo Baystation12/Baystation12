@@ -11,8 +11,6 @@
 	throw_range = 5
 	origin_tech = "biotech=3"
 	attack_verb = list("attacked", "slapped", "whacked")
-	prosthetic_name = "cyberbrain"
-	prosthetic_icon = "brain-prosthetic"
 	body_part = "brain"
 
 	var/mob/living/carbon/brain/brainmob = null
@@ -78,17 +76,11 @@
 /obj/item/organ/internal/brain/slime
 	name = "slime core"
 	desc = "A complex, organic knot of jelly and crystalline particles."
-	prosthetic_name = null
-	prosthetic_icon = null
-	robotic = 2
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "green slime extract"
 
 /obj/item/organ/internal/brain/golem
 	name = "chem"
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
-	prosthetic_name = null
-	prosthetic_icon = null
-	robotic = 2
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "scroll"

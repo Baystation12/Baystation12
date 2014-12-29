@@ -70,7 +70,7 @@
 
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.damage > 0)
+			if(I.get_damage() > 0)
 				is_organ_damaged = 1
 				break
 		return ..() && is_organ_damaged
@@ -90,8 +90,8 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.damage > 0)
-				if(I.robotic < 2)
+			if(I && I.get_damage() > 0)
+				if(!(I.status & ORGAN_ROBOT))
 					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 					"You start treating damage to [target]'s [I.name] with [tool_name]." )
 
@@ -113,11 +113,11 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.damage > 0)
-				if(I.robotic < 2)
+			if(I && I.get_damage() > 0)
+				if(!(I.status & ORGAN_ROBOT))
 					user.visible_message("\blue [user] treats damage to [target]'s [I.name] with [tool_name].", \
 					"\blue You treat damage to [target]'s [I.name] with [tool_name]." )
-					I.damage = 0
+					I.set_damage(0,0)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -141,7 +141,7 @@
 				affected.createwound(CUT, 5)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.damage > 0)
+			if(I && I.get_damage() > 0)
 				I.take_damage(dam_amt,0)
 
 /datum/surgery_step/internal/fix_organ_robotic //For artificial organs
@@ -162,7 +162,7 @@
 
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.damage > 0 && I.robotic >= 2)
+			if(I.get_damage() > 0 && (I.status & ORGAN_ROBOT))
 				is_organ_damaged = 1
 				break
 		return ..() && is_organ_damaged
@@ -174,8 +174,8 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.damage > 0)
-				if(I.robotic >= 2)
+			if(I && I.get_damage() > 0)
+				if(I.status & ORGAN_ROBOT)
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 
@@ -190,11 +190,11 @@
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
 
-			if(I && I.damage > 0)
-				if(I.robotic >= 2)
+			if(I && I.get_damage() > 0)
+				if(I.status & ORGAN_ROBOT)
 					user.visible_message("\blue [user] repairs [target]'s [I.name] with [tool].", \
 					"\blue You repair [target]'s [I.name] with [tool]." )
-					I.damage = 0
+					I.set_damage(0,0)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 
@@ -313,7 +313,7 @@
 		if(target.op_stage.current_organ)
 			var/obj/item/organ/internal/I = target.internal_organs_by_name[target.op_stage.current_organ]
 			if(I && istype(I))
-				I.removed(target,user)
+				I.removed(user)
 			target.op_stage.current_organ = null
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

@@ -111,8 +111,8 @@
 	
 	//next internal organs
 	for(var/datum/organ/internal/I in H.internal_organs)
-		if(I.damage > 0)
-			I.damage = max(I.damage - heal_rate, 0)
+		if(I.get_damage() > 0)
+			I.heal_damage(heal_rate, heal_rate)
 			if (prob(5))
 				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
 			return 1

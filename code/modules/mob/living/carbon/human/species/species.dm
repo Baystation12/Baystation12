@@ -93,17 +93,17 @@
 	// Determines the various limb and tissue types that the species spawns with.
 	var/list/tissues = list("skin","muscle","bone")
 	var/list/has_limb = list(     // For now, parents need to be defined before children.
-		list("chest",  /obj/item/organ/external/chest,  null),
-		list("groin",  /obj/item/organ/external/groin,  "chest"),
-		list("head",   /obj/item/organ/external/head,   "chest"),
-		list("l_arm",  /obj/item/organ/external/l_arm,  "chest"),
-		list("r_arm",  /obj/item/organ/external/r_arm,  "chest"),
-		list("r_leg",  /obj/item/organ/external/r_leg,  "groin"),
-		list("l_leg",  /obj/item/organ/external/l_leg,  "groin"),
-		list("l_hand", /obj/item/organ/external/l_hand, "l_arm"),
-		list("r_hand", /obj/item/organ/external/r_hand, "r_arm"),
-		list("l_foot", /obj/item/organ/external/l_foot, "l_leg"),
-		list("r_foot", /obj/item/organ/external/r_foot, "r_leg")
+		list("chest",  /obj/item/organ/external/chest,      null),
+		list("groin",  /obj/item/organ/external/groin,      "chest"),
+		list("head",   /obj/item/organ/external/head,       "chest"),
+		list("l_arm",  /obj/item/organ/external/arm,        "chest"),
+		list("r_arm",  /obj/item/organ/external/arm/right,  "chest"),
+		list("r_leg",  /obj/item/organ/external/leg,        "groin"),
+		list("l_leg",  /obj/item/organ/external/leg/right,  "groin"),
+		list("l_hand", /obj/item/organ/external/hand,       "l_arm"),
+		list("r_hand", /obj/item/organ/external/hand/right, "r_arm"),
+		list("l_foot", /obj/item/organ/external/foot,       "l_leg"),
+		list("r_foot", /obj/item/organ/external/foot/right, "r_leg")
 		)
 
 /datum/species/New()
@@ -153,7 +153,7 @@
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
 		for(var/obj/item/organ/internal/I in H.internal_organs)
-			I.mechanize()
+			I.roboticize()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 

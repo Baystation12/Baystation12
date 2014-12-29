@@ -923,29 +923,15 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-	for (var/obj/item/organ/external/O in organs)
-		O.status &= ~ORGAN_BROKEN
-		O.status &= ~ORGAN_BLEEDING
-		O.status &= ~ORGAN_SPLINTED
-		O.status &= ~ORGAN_CUT_AWAY
-		O.status &= ~ORGAN_ATTACHABLE
-		if (!O.amputated)
-			O.status &= ~ORGAN_DESTROYED
-			O.destspawn = 0
-		O.wounds.Cut()
-		O.heal_damage(1000,1000,1,1)
-
-	var/obj/item/organ/external/head/h = organs_by_name["head"]
-	h.disfigured = 0
-
-	if(species && !(species.flags & NO_BLOOD))
-		vessel.add_reagent("blood",560-vessel.total_volume)
-		fixblood()
 
 	// Fix up any missing organs.
 	// This will ignore any prosthetics in the prefs currently.
 	species.create_limbs(src)
 	species.create_organs(src)
+
+	if(species && !(species.flags & NO_BLOOD))
+		vessel.add_reagent("blood",560-vessel.total_volume)
+		fixblood()
 
 	for (var/obj/item/organ/internal/brain/H in world)
 		if(H.brainmob)
@@ -953,9 +939,6 @@
 				if(H.brainmob.mind)
 					H.brainmob.mind.transfer_to(src)
 					del(H)
-
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.damage = 0
 
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
@@ -968,6 +951,7 @@
 
 	..()
 
+//TODO: MOVE TO LUNG ORGAN
 /mob/living/carbon/human/proc/is_lung_ruptured()
 	var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L && L.is_bruised()
@@ -977,7 +961,7 @@
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.take_damage(L.min_bruised_damage,0)
 
 /*
 /mob/living/carbon/human/verb/simulate()

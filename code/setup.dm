@@ -541,6 +541,7 @@
 #define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
 #define TISSUE_INFECTS 2     // Tissue can become infected.
 #define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.
+#define TISSUE_SUPPORTS 8    // This is a structural tissue.
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 

@@ -474,7 +474,7 @@
 		src.reagent_glass = null
 
 	if (prob(50))
-		new /obj/item/organ/external/l_arm/robot(Tsec)
+		new /obj/item/organ/external/arm/robot(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -537,12 +537,12 @@
 
 /obj/item/weapon/storage/firstaid/attackby(var/obj/item/robot_parts/S, mob/user as mob)
 
-	if ((!istype(S, /obj/item/organ/external/l_arm)) && (!istype(S, /obj/item/organ/external/r_arm)))
+	if (!istype(S, /obj/item/organ/external/arm))
 		..()
 		return
 
 	var/obj/item/organ/limb = S
-	if(!limb.robotic)
+	if(!(limb.status & ORGAN_ROBOT))
 		user << "That's a bit ghoulish, isn't it? Use a robotic limb."
 		return
 

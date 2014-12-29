@@ -336,7 +336,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 
 	if (prob(50))
-		new /obj/item/organ/external/l_arm/robot(Tsec)
+		new /obj/item/organ/external/arm/robot(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -346,10 +346,10 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 
 /obj/item/weapon/bucket_sensor/attackby(var/obj/item/W, mob/user as mob)
 	..()
-	if (istype(W, /obj/item/organ/external/l_arm) || istype(W, /obj/item/organ/external/r_arm))
+	if (istype(W, /obj/item/organ/external/arm))
 
 		var/obj/item/organ/limb = W
-		if(!limb.robotic)
+		if(!(limb.status & ORGAN_ROBOT))
 			user << "That's a bit ghoulish, isn't it? Use a robotic limb."
 			return
 

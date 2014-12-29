@@ -364,29 +364,27 @@
 			return
 		switch(safety)
 			if(1)
-				usr << "\red Your eyes sting a little."
-				E.damage += rand(1, 2)
-				if(E.damage > 12)
+				usr << "<span class='danger'>Your eyes sting a little.</span>"
+				E.take_damage(0,rand(1, 2))
+				if(E.get_damage() > 12)
 					user.eye_blurry += rand(3,6)
 			if(0)
-				usr << "\red Your eyes burn."
-				E.damage += rand(2, 4)
-				if(E.damage > 10)
-					E.damage += rand(4,10)
+				usr << "<span class='danger'>Your eyes burn.</span>"
+				E.take_damage(0,rand(2,4))
+				if(E.get_damage() > 10)
+					E.take_damage(0,rand(4,10))
 			if(-1)
-				usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
+				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
-				E.damage += rand(12, 16)
+				E.take_damage(0,rand(12, 16))
 		if(safety<2)
-
-			if(E.damage > 10)
-				user << "\red Your eyes are really starting to hurt. This can't be good for you!"
-
-			if (E.damage >= E.min_broken_damage)
-				user << "\red You go blind!"
+			if(E.get_damage() > 10)
+				user << "<span class='danger'>Your eyes are really starting to hurt. This can't be good for you!</span>"
+			if (E.is_broken())
+				user << "<span class='danger'>You go blind!</span>"
 				user.sdisabilities |= BLIND
-			else if (E.damage >= E.min_bruised_damage)
-				user << "\red You go blind!"
+			else if (E.is_bruised())
+				user << "<span class='danger'>You go blind!</span>"
 				user.eye_blind = 5
 				user.eye_blurry = 5
 				user.disabilities |= NEARSIGHTED

@@ -139,7 +139,6 @@
 	On completion:
 		affected.status = 0
 		affected.amputated = 0
-		affected.destspawn = 0
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
@@ -170,15 +169,15 @@
 		"You start attaching \the [tool] where [target]'s [affected.display_name] used to be.")
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/new_limb = tool
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] has attached \the [tool] where [target]'s [affected.display_name] used to be.",	\
 		"\blue You have attached \the [tool] where [target]'s [affected.display_name] used to be.")
 
-		affected.germ_level = 0
+		var/obj/item/organ/external/new_limb = tool
+		new_limb.replaced()
 		// Prosthetic heads.
-		if(new_limb.robotic)
-			affected.robotize()
+		if(new_limb.status & ORGAN_ROBOT)
+			affected.roboticize()
 			//affected.sabotaged = L.sabotaged
 		// Brain transfer.
 		var/mob/living/carbon/brain/B = locate() in tool
@@ -225,8 +224,8 @@
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is beginning to amputate [target]'s [affected.display_name] with \the [tool]." , \
-		"You are beginning to amputate [target]'s [affected.display_name] with \the [tool].")
-		target.custom_pain("Your [affected.display_name] is being ripped apart!",1)
+		"You are beginning to cut through [target]'s [affected.joint] with \the [tool].")
+		target.custom_pain("Your [affected.joint] is being ripped apart!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

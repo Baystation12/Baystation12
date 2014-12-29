@@ -57,7 +57,10 @@
 				continue
 			if(cut_layer.tissue.can_cut_with(tool))
 				cut_layer.set_damage(cut_layer.tissue.split_threshold)
-				tissues_cut += cut_layer.tissue.descriptor
+				if(cut_layer.tissue.descriptors[target_zone])
+					tissues_cut += cut_layer.tissue.descriptors[target_zone]
+				else
+					tissues_cut += cut_layer.tissue.descriptor
 				if((cut_layer.tissue.flags & TISSUE_BLEEDS) && !(affected.status & ORGAN_BLEEDING))
 					affected.status |= ORGAN_BLEEDING
 			else

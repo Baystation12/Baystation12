@@ -30,8 +30,7 @@
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name["brain"]
 		if(sponge)
 			sponge.take_damage(amount)
-			sponge.damage = min(max(brainloss, 0),(maxHealth*2))
-			brainloss = sponge.damage
+			brainloss = min(max(brainloss, 0),(maxHealth*2))
 		else
 			brainloss = 200
 	else
@@ -44,8 +43,8 @@
 	if(species && species.has_organ["brain"])
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name["brain"]
 		if(sponge)
-			sponge.damage = min(max(amount, 0),(maxHealth*2))
-			brainloss = sponge.damage
+			sponge.set_damage(amount/2,amount/2)
+			brainloss = sponge.get_damage()
 		else
 			brainloss = 200
 	else
@@ -58,7 +57,7 @@
 	if(species && species.has_organ["brain"])
 		var/obj/item/organ/internal/brain/sponge = internal_organs_by_name["brain"]
 		if(sponge)
-			brainloss = min(sponge.damage,maxHealth*2)
+			brainloss = min(sponge.get_damage(),maxHealth*2)
 		else
 			brainloss = 200
 	else
@@ -236,7 +235,7 @@
 /mob/living/carbon/human/proc/get_damageable_organs()
 	var/list/obj/item/organ/external/parts = list()
 	for(var/obj/item/organ/external/O in organs)
-		if(O.brute_dam + O.burn_dam < O.max_damage)
+		if(O.health > 0 && !(O.status & ORGAN_DEAD))
 			parts += O
 	return parts
 

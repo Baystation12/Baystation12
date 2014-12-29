@@ -13,6 +13,11 @@ proc/populate_tissue_list()
 /datum/tissue
 	var/id = "tissue"               // Index for global list.
 	var/descriptor = "tissue"       // Descriptive string shown for this layer.
+	var/list/descriptors = list()   // Some tissues have specific strings for bodyparts.
+
+	var/list/blunt_damage_strings = list("mangling","mashing","pulverizing")
+	var/list/edge_damage_strings = list("ripping","tearing","lacerating")
+	var/list/burn_damage_strings = list("scorching","melting","searing")
 
 	var/hardness = HARDNESS_SCALPEL // Minimum tool needed to cut this layer open.
 	var/brute_soak = 0              // Amount of damage removed from brute damage to the limb. TODO: blunt_soak and edge_soak.
@@ -21,7 +26,6 @@ proc/populate_tissue_list()
 	var/regen_threshold = 50        // After this point, damage will not be regenerated without surgery (ie. bone)
 	var/split_threshold = 50        // Point at which tissue is 'broken' or 'open'. Also serves as max damage for the layer.
 	var/growth_factor = 1           // Multiplier applied to the config brute regen value for this layer.
-
 	var/flags = TISSUE_BLEEDS | TISSUE_INFECTS // Various general status flags.
 
 /datum/tissue/skin
@@ -36,9 +40,11 @@ proc/populate_tissue_list()
 /datum/tissue/bone
 	id = "bone"
 	descriptor = "bone"
+	descriptors = list("head"="skull","chest"="ribcage","l_arm"="humerus","r_arm"="humerus","l_leg"="femur","r_leg"="femur")
 	hardness = HARDNESS_SAW
-	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
+	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER | TISSUE_SUPPORTS
 	regen_threshold = 0 // Cannot regen without surgery.
+	blunt_damage_strings = list("cracking","shattering","fracturing")
 
 /datum/tissue/scales
 	id = "scales"
@@ -49,8 +55,9 @@ proc/populate_tissue_list()
 /datum/tissue/cartilage
 	id = "cartilage"
 	descriptor = "cartilage"
+	descriptors = list("head"="brain caul","chest"="organ sheath")
 	hardness = HARDNESS_SAW
-	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
+	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER | TISSUE_SUPPORTS
 
 /datum/tissue/slime
 	id = "slime"
@@ -61,7 +68,7 @@ proc/populate_tissue_list()
 	id = "slime_innards"
 	descriptor = "silky innards"
 	hardness = HARDNESS_SAW
-	flags = TISSUE_INFECTS | TISSUE_BLEEDS | TISSUE_ORGAN_LAYER
+	flags = TISSUE_INFECTS | TISSUE_BLEEDS | TISSUE_ORGAN_LAYER | TISSUE_SUPPORTS
 
 /datum/tissue/metal
 	id = "metal_skin"

@@ -414,10 +414,8 @@
 	for(var/obj/item/organ/internal/i in occ["internal_organs"])
 
 		var/mech = ""
-		if(i.robotic == 1)
-			mech = "Assisted:"
-		if(i.robotic == 2)
-			mech = "Mechanical:"
+		if(i.status & ORGAN_ROBOT)
+			mech = "mechanical"
 
 		var/infection = "None"
 		switch (i.germ_level)
@@ -435,7 +433,7 @@
 				infection = "Acute Infection++:"
 
 		dat += "<tr>"
-		dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
+		dat += "<td>[i.name]</td><td>N/A</td><td>[i.get_damage()]</td><td>[infection]:[mech]</td><td></td>"
 		dat += "</tr>"
 	dat += "</table>"
 
