@@ -38,7 +38,6 @@
 	else
 		processing_objects |= src
 
-
 	// Is this item prosthetic?
 	if(spawn_robotic)
 		robotic = 1
@@ -46,6 +45,9 @@
 			name = prosthetic_name
 		else
 			name = "robotic [name]"
+
+	if(!istype(loc,/turf))
+		germ_level = 0
 
 /obj/item/organ/proc/take_damage()
 	return

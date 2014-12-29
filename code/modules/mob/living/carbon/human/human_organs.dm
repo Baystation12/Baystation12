@@ -40,7 +40,8 @@
 			bad_external_organs -= E
 			continue
 		else
-			E.process_internal()
+			if(bodytemperature >= 170) //Cryo stops organ processing.
+				E.process_internal()
 			number_wounds += E.number_wounds
 
 			if (!lying && world.time - l_move_time < 15)

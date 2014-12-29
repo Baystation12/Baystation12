@@ -321,18 +321,9 @@ This function completely restores a damaged organ to perfect condition.
 //Determines if we even need to process this organ.
 
 /obj/item/organ/external/proc/need_process()
-	if(destspawn)	//Missing limb is missing
+	if(destspawn || (status & ORGAN_ROBOT))	//Missing limb is missing
 		return 0
-	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
-		return 1
-	if(brute_dam || burn_dam)
-		return 1
-	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
-		last_dam = brute_dam + burn_dam
-		return 1
-	else
-		last_dam = brute_dam + burn_dam
-	if(germ_level)
+	if(brute_dam || burn_dam || germ_level)
 		return 1
 	return 0
 
@@ -800,7 +791,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
 		return 0	//will just immediately fracture again
-	
+
 	status &= ~ORGAN_BROKEN
 	return 1
 

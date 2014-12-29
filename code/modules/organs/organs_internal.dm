@@ -20,11 +20,12 @@
 
 /obj/item/organ/internal/New()
 	..()
-	if(owner)
-		var/obj/item/organ/external/E = owner.organs_by_name[src.parent_organ]
-		if(E.internal_organs == null)
-			E.internal_organs = list()
-		E.internal_organs |= src
+	if(istype(owner))
+		var/obj/item/organ/external/E = owner.organs_by_name[parent_organ]
+		if(E)
+			if(E.internal_organs == null)
+				E.internal_organs = list()
+			E.internal_organs |= src
 
 // Brain is defined in brain_item.dm.
 /obj/item/organ/internal/heart
@@ -37,7 +38,53 @@
 	dead_icon = "heart-off"
 	parent_organ = "chest"
 
+// Takes care blood loss and regeneration
 /obj/item/organ/internal/heart/process_internal()
+	..()
+
+	var/blood_volume = round(owner.vessel.get_reagent_amount("blood"))
+
+	//Blood regeneration if there is some space
+	if(blood_volume < 560)
+		var/datum/reagent/blood/B = locate() in owner.vessel.reagent_list //Grab some blood
+		if(B) // Make sure there's some blood at all
+			if(B.data["donor"] != src) //If it's not theirs, then we look for theirs
+				for(var/datum/reagent/blood/D in owner.vessel.reagent_list)
+					if(D.data["donor"] == src)
+						B = D
+						break
+
+			B.volume += 0.1 // regenerate blood VERY slowly
+			//TODO: move this to stomach organ.
+			if (owner.reagents.has_reagent("nutriment"))	//Getting food speeds it up
+				B.volume += 0.4
+				owner.reagents.remove_reagent("nutriment", 0.1)
+
+			if (owner.reagents.has_reagent("iron"))	//Hematogen candy anyone?
+				B.volume += 0.8
+				owner.reagents.remove_reagent("iron", 0.1)
+
+	// Damaged heart virtually reduces the blood volume, as the blood isn't
+	// being pumped properly anymore.
+	if(damage > 1 && damage < min_bruised_damage)
+		blood_volume *= 0.8
+	else if(damage >= min_bruised_damage && damage < min_broken_damage)
+		blood_volume *= 0.6
+	else if(damage >= min_broken_damage && damage < INFINITY)
+		blood_volume *= 0.3
+	// Mob can handle everything else since it uses only mob vars, not organ vars.
+	owner.handle_blood(blood_volume)
+
+/obj/item/organ/internal/lungs
+	name = "lungs"
+	icon_state = "lungs"
+	gender = PLURAL
+	prosthetic_name = "gas exchange system"
+	prosthetic_icon = "lungs-prosthetic"
+	body_part = "lungs"
+	parent_organ = "chest"
+
+/obj/item/organ/internal/lungs/process_internal()
 	..()
 	if (germ_level > INFECTION_LEVEL_ONE)
 		if(prob(5))
@@ -50,15 +97,6 @@
 		if(prob(4))
 			spawn owner.emote("me", 1, "gasps for air!")
 			owner.losebreath += 15
-
-/obj/item/organ/internal/lungs
-	name = "lungs"
-	icon_state = "lungs"
-	gender = PLURAL
-	prosthetic_name = "gas exchange system"
-	prosthetic_icon = "lungs-prosthetic"
-	body_part = "lungs"
-	parent_organ = "chest"
 
 /obj/item/organ/internal/kidneys
 	name = "kidneys"
