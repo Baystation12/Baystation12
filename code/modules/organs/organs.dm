@@ -188,3 +188,34 @@
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 	owner = target
 	src.loc = affected
+
+/obj/item/organ/proc/createwound(var/type = CUT, var/damage)
+	/*if(damage == 0) return
+
+	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
+	//Possibly trigger an internal wound, too.
+	var/local_damage = brute_dam + burn_dam + damage
+	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
+		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
+		wounds += I
+		owner.custom_pain("You feel something rip in your [display_name]!", 1)
+
+	// first check whether we can widen an existing wound
+	if(wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
+		if((type == CUT || type == BRUISE) && damage >= 5)
+			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
+			var/list/compatible_wounds = list()
+			for (var/datum/wound/W in wounds)
+				if (W.can_worsen(type, damage))
+					compatible_wounds += W
+
+			if(compatible_wounds.len)
+				var/datum/wound/W = pick(compatible_wounds)
+				W.open_wound(damage)
+				if(prob(25))
+					//maybe have a separate message for BRUISE type damage?
+					owner.visible_message(
+					"<span class='danger'>The wound on [owner.name]'s [display_name] widens with a nasty ripping noise.</span>",\
+					"<span class='danger'>The wound on your [display_name] widens with a nasty ripping noise.</span>",\
+					"<span class='danger'>You hear a nasty ripping noise, as if flesh is being torn apart.</span>")
+				return*/

@@ -23,9 +23,9 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		var/internal_bleeding = 0
-		for(var/datum/wound/W in affected.wounds) if(W.internal)
-			internal_bleeding = 1
-			break
+		//for(var/datum/wound/W in affected.wounds) if(W.internal)
+			//internal_bleeding = 1
+			//break
 
 		return affected.is_open() >= 2 && internal_bleeding
 
@@ -41,10 +41,12 @@
 		user.visible_message("\blue [user] has patched the damaged vein in [target]'s [affected.display_name] with \the [tool].", \
 			"\blue You have patched the damaged vein in [target]'s [affected.display_name] with \the [tool].")
 
-		for(var/datum/wound/W in affected.wounds) if(W.internal)
-			affected.wounds -= W
-			affected.update_damages()
-		if (ishuman(user) && prob(40)) user:bloody_hands(target, 0)
+		//for(var/datum/wound/W in affected.wounds) if(W.internal)
+			//affected.wounds -= W
+			//affected.update_damages()
+		if (ishuman(user) && prob(40))
+			var/mob/living/carbon/human/H = user
+			H.bloody_hands(target, 0)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)

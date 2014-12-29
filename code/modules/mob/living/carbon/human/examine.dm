@@ -244,7 +244,7 @@
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()
 	var/list/is_bleeding = list()
-	for(var/obj/item/organ/external/temp in organs)
+	/*for(var/obj/item/organ/external/temp in organs)
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
 				is_destroyed["[temp.display_name]"] = 1
@@ -325,7 +325,7 @@
 				if(temp.status & ORGAN_BLEEDING)
 					is_bleeding["[temp.display_name]"] = 1
 			else
-				wound_flavor_text["[temp.display_name]"] = ""
+				wound_flavor_text["[temp.display_name]"] = ""*/
 
 	//Handles the text strings being added to the actual description.
 	//If they have something that covers the limb, and it is not missing, put flavortext.  If it is covered but bleeding, add other flavortext.

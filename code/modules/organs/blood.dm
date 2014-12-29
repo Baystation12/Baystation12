@@ -85,8 +85,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	for(var/obj/item/organ/external/temp in organs)
 		if(!(temp.status & ORGAN_BLEEDING) || temp.status & ORGAN_ROBOT)
 			continue
-		for(var/datum/wound/W in temp.wounds) if(W.bleeding())
-			blood_max += W.damage / 40
+		//for(var/datum/wound/W in temp.wounds) if(W.bleeding())
+			//blood_max += W.damage / 40
 		if (temp.is_open())
 			blood_max += 2  //Yer stomach is cut open
 	drip(blood_max)

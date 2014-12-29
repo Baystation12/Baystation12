@@ -108,23 +108,23 @@
 		if (prob(5))
 			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
 		return 1
-	
+
 	//next internal organs
-	for(var/datum/organ/internal/I in H.internal_organs)
+	for(var/obj/item/organ/internal/I in H.internal_organs)
 		if(I.get_damage() > 0)
 			I.heal_damage(heal_rate, heal_rate)
 			if (prob(5))
 				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
 			return 1
-	
+
 	//next mend broken bones, approx 10 ticks each
-	for(var/datum/organ/external/E in H.bad_external_organs)
+	for(var/obj/item/organ/external/E in H.bad_external_organs)
 		if (E.status & ORGAN_BROKEN)
 			if (prob(mend_prob))
 				if (E.mend_fracture())
 					H << "<span class='alium'>You feel something mend itself inside your [E.display_name].</span>"
 			return 1
-	
+
 	return 0
 
 /datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)

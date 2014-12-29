@@ -66,7 +66,8 @@
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
 		if(affecting.is_open())
-			if(!affecting.bandage())
+			user << "You do a thing, but this code is commented out."
+			/*if(!affecting.bandage())
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been bandaged."
 				return 1
 			else
@@ -89,7 +90,7 @@
 				if (do_surgery(H,user,src))
 					return
 			else
-				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"*/
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
@@ -157,10 +158,10 @@
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
 		if(affecting.is_open())
-			var/bandaged = affecting.bandage()
-			var/disinfected = affecting.disinfect()
-
-			if(!(bandaged || disinfected))
+			//var/bandaged = affecting.bandage()
+			//var/disinfected = affecting.disinfect()
+			user << "You do a thing, but this code is commented out."
+			/*if(!(bandaged || disinfected))
 				user << "\red The wounds on [M]'s [affecting.display_name] have already been treated."
 				return 1
 			else
@@ -185,7 +186,7 @@
 				if (do_surgery(H,user,src))
 					return
 			else
-				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"*/
 
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
