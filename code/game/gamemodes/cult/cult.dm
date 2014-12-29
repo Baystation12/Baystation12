@@ -167,9 +167,26 @@
 		runerandom()
 	if (!word)
 		word=pick(allwords)
-	var/wordexp = "[cultwords[word]] is [word]..."
-	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexp]"
-	cult_mob.mind.store_memory("<B>You remember that</B> [wordexp]", 0, 0)
+	//var/wordexp = "[cultwords[word]] is [word]..."
+	//cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexp]"
+	var/wordexpjoin = "[cultwords["join"]] is join..."
+	var/wordexpblood = "[cultwords["blood"]] is blood..."
+	var/wordexpself = "[cultwords["self"]] is self..."
+	var/wordexphide = "[cultwords["hide"]] is hide..."
+	var/wordexptech = "[cultwords["technology"]] is technology..."
+	var/wordexphell = "[cultwords["hell"]] is hell..."
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexpjoin]"
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexpblood]"
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexpself]"
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexphide]"
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexptech]"
+	cult_mob << "\red You remember one thing from the dark teachings of your master... [wordexphell]"
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexpjoin]", 0, 0)
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexpblood]", 0, 0)
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexpself]", 0, 0)
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexphide]", 0, 0)
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexptech]", 0, 0)
+	cult_mob.mind.store_memory("<B>You remember that</B> [wordexphell]", 0, 0)
 
 
 /datum/game_mode/proc/add_cultist(datum/mind/cult_mind) //BASE
