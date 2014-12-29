@@ -660,3 +660,67 @@ area/shuttle/marina/elevator/groundfloor
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.40) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+75, T0C+80) // K
 	target_temperature = 343.15
+
+//Apartment doors. Sigh.
+
+/var/const/access_a1 = 110
+/var/const/access_a2 = 111
+/var/const/access_a3 = 112
+/var/const/access_a4 = 113
+/var/const/access_a5 = 114
+/var/const/access_a6 = 115
+/var/const/access_a7 = 116
+/var/const/access_a8 = 117
+/var/const/access_a9 = 118
+/var/const/access_a10 = 119
+/var/const/access_a11 = 120
+/var/const/access_a12 = 121
+/var/const/access_a13 = 122
+/var/const/access_b1 = 123
+/var/const/access_b2 = 124
+/var/const/access_b3 = 125
+/var/const/access_b4 = 126
+/var/const/access_c1 = 127
+/var/const/access_c2 = 128
+/var/const/access_c3 = 129
+/var/const/access_c4 = 130
+/var/const/access_c5 = 131
+/var/const/access_c6 = 132
+/var/const/access_c7 = 133
+/var/const/access_c8 = 134
+/var/const/access_d1 = 135
+/var/const/access_d2 = 136
+/var/const/access_d3 = 137
+/var/const/access_d4 = 138
+/var/const/access_d5 = 139
+/var/const/access_d6 = 140
+/var/const/access_d7 = 141
+/var/const/access_d8 = 142
+/var/const/access_d9 = 143
+/var/const/access_d10 = 144
+/var/const/access_d11 = 145
+/var/const/access_d12 = 146
+/var/const/access_e1 = 147
+/var/const/access_e2 = 148
+/var/const/access_e3 = 149
+/var/const/access_e4 = 151
+/var/const/access_e5 = 152
+/var/const/access_e6 = 153
+/var/const/access_e7 = 154
+/var/const/access_e8 = 155
+/var/const/access_e9 = 156
+/var/const/access_e10 = 157
+/var/const/access_e11 = 158
+/var/const/access_e12 = 159
+/var/const/access_e13 = 160
+/var/const/access_e14 = 161
+/var/const/access_e15 = 162
+
+/obj/item/weapon/card/id/apartment
+	name = "resident card"
+	desc = "A card used to provide ID and give access to apartments."
+	assignment = "Resident"
+
+/obj/item/weapon/card/id/apartment/a11
+	registered_name = "Vasily Surov"
+	access = list(access_a11)
