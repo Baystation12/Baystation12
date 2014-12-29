@@ -116,7 +116,7 @@
 	if(terminal)
 		terminal.connect_to_network()
 
-/obj/machinery/power/apc/drain_power(var/drain_check, var/surge)
+/obj/machinery/power/apc/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -131,7 +131,10 @@
 		update_icon()
 		return 0
 
-	return cell.drain_power(drain_check)
+	if(terminal && terminal.powernet)
+		terminal.powernet.trigger_warning()
+
+	return cell.drain_power(drain_check, surge, amount)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
@@ -178,10 +181,10 @@
 		del(cell) // qdel
 	if(terminal)
 		disconnect_terminal()
-	
+
 	//If there's no more APC then there shouldn't be a cause for alarm I guess
 	area.poweralert(1, src) //so that alarms don't go on forever
-	
+
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()
