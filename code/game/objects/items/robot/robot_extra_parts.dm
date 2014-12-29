@@ -135,8 +135,8 @@
 					else
 						I.attack_hand(hand.holder)
 				else if(istype(GraspTarget,/mob))
-					var/mob/M = GraspTarget
-					M.throw_at(hand.holder, 10, 1)
+					var/mob/H = hand.holder
+					H.throw_at(GraspTarget, 10, 1)
 				else if(istype(GraspTarget,/atom/movable))
 					var/atom/movable/M = GraspTarget
 					M.attack_hand(hand.holder)
