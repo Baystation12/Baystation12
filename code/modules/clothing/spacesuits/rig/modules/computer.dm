@@ -418,7 +418,7 @@
 		drain_complete(H)
 		return
 
-	holder.cell.Add(target_drained * CELLRATE)
+	holder.cell.give(target_drained * CELLRATE)
 	total_power_drained += target_drained
 
 	if(holder.cell.fully_charged())
