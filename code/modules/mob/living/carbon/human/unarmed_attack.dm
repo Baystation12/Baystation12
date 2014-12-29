@@ -200,5 +200,5 @@
 
 	switch(attack_damage)
 		if(1 to 2)	user.visible_message("<span class='danger'>[user] [pick("clomped on", "treaded on")] [target]'s [organ]!</span>")
-		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick("stomped down on", "slammed their [shoes ? copytext(shoes.name, 1, -1) : "foot"] down onto")] [target]'s [organ]!</span>")
-		if(5)		user.visible_message("<span class='danger'>[user] [pick("landed a devastating stomp on", "stomped down hard on", "slammed their [shoes ? copytext(shoes.name, 1, -1) : "foot"] down hard onto")] [target]'s [organ]!</span>")
+		if(3 to 4)	user.visible_message("<span class='danger'>[pick("[user] stomped down on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down onto")] [target]'s [organ]!</span>")
+		if(5)		user.visible_message("<span class='danger'>[pick("[user] landed a devastating stomp on", "[user] stomped down hard on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down hard onto")] [target]'s [organ]!</span>")
