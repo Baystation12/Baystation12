@@ -795,6 +795,15 @@ Note that amputating the affected organ does in fact remove the infection from t
 			suit.supporting_limbs |= src
 	return
 
+/obj/item/organ/external/proc/mend_fracture()
+	if(status & ORGAN_ROBOT)
+		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
+	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
+		return 0	//will just immediately fracture again
+	
+	status &= ~ORGAN_BROKEN
+	return 1
+
 /obj/item/organ/external/proc/robotize()
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
