@@ -6,7 +6,7 @@
 	var/has_pressure = 1  // Draw the pressure indicator.
 	var/has_nutrition = 1 // Draw the nutrition indicator.
 	var/has_bodytemp = 1  // Draw the bodytemp indicator.
-	var/has_hands = 1     // Set to draw shand.
+	var/has_hands = 1     // Set to draw hands.
 	var/has_drop = 1      // Set to draw drop button.
 	var/has_throw = 1     // Set to draw throw button.
 	var/has_resist = 1    // Set to draw resist button.
@@ -18,8 +18,8 @@
 	// unless you know exactly what it does.
 	var/list/gear = list(
 		"i_clothing" =   list("loc" = ui_iclothing, "slot" = slot_w_uniform, "state" = "center", "toggle" = 1, "dir" = SOUTH),
-		"o_clothing" =   list("loc" = ui_oclothing, "slot" = slot_wear_suit, "state" = "equip",  "toggle" = 1,  "dir" = SOUTH),
-		"mask" =         list("loc" = ui_mask,      "slot" = slot_wear_mask, "state" = "equip",  "toggle" = 1,  "dir" = NORTH),
+		"o_clothing" =   list("loc" = ui_oclothing, "slot" = slot_wear_suit, "state" = "equip",  "toggle" = 1, "dir" = SOUTH),
+		"mask" =         list("loc" = ui_mask,      "slot" = slot_wear_mask, "state" = "equip",  "toggle" = 1, "dir" = NORTH),
 		"gloves" =       list("loc" = ui_gloves,    "slot" = slot_gloves,    "state" = "gloves", "toggle" = 1),
 		"eyes" =         list("loc" = ui_glasses,   "slot" = slot_glasses,   "state" = "glasses","toggle" = 1),
 		"l_ear" =        list("loc" = ui_l_ear,     "slot" = slot_l_ear,     "state" = "ears",   "toggle" = 1),
@@ -51,3 +51,18 @@
 		equip_slots |= slot_tie
 
 	equip_slots |= slot_legcuffed
+
+/datum/hud_data/diona
+	has_internals = 0
+	gear = list(
+		"i_clothing" =   list("loc" = ui_iclothing, "slot" = slot_w_uniform, "state" = "center", "toggle" = 1, "dir" = SOUTH),
+		"o_clothing" =   list("loc" = ui_shoes,     "slot" = slot_wear_suit, "state" = "equip",  "toggle" = 1, "dir" = SOUTH),
+		"l_ear" =        list("loc" = ui_gloves,    "slot" = slot_l_ear,     "state" = "ears",   "toggle" = 1),
+		"head" =         list("loc" = ui_oclothing, "slot" = slot_head,      "state" = "hair",   "toggle" = 1),
+		"suit storage" = list("loc" = ui_sstore1,   "slot" = slot_s_store,   "state" = "belt",   "dir" = 8),
+		"back" =         list("loc" = ui_back,      "slot" = slot_back,      "state" = "back",   "dir" = NORTH),
+		"id" =           list("loc" = ui_id,        "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
+		"storage1" =     list("loc" = ui_storage1,  "slot" = slot_l_store,   "state" = "pocket"),
+		"storage2" =     list("loc" = ui_storage2,  "slot" = slot_r_store,   "state" = "pocket"),
+		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt")
+		)
