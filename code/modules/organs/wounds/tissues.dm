@@ -186,5 +186,10 @@ proc/populate_tissue_list()
 /datum/tissue_layer/proc/is_wounded()
 	return wound_area > 0
 
+/datum/tissue_layer/proc/is_cut()
+	for(var/datum/wound/wound in wounds)
+		if(wound.status == WOUND_OPEN || wound.status == WOUND_RETRACTED)
+			return 1
+
 /datum/tissue_layer/proc/is_bleeding()
 	return (tissue.flags & TISSUE_BLEEDS) && is_wounded()

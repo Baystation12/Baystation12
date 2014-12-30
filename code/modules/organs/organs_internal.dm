@@ -40,9 +40,6 @@
 
 	loc = owner.loc
 	rejecting = null
-	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	if(!organ_blood || !transplant_data["blood_DNA"])
-		owner.vessel.trans_to(src, 5, 1, 1)
 
 	if(owner && user && vital)
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"

@@ -5,9 +5,9 @@
 // EXTERNAL
 
 /obj/item/organ/external/chest
-	name = "chest"
+	limb_name = "chest"
 	icon_name = "torso"
-	display_name = "chest"
+	name = "chest"
 	health = 75
 	min_broken_damage = 35
 	body_part = UPPER_TORSO
@@ -15,9 +15,9 @@
 	joint = "spine"
 
 /obj/item/organ/external/groin
-	name = "groin"
+	limb_name = "groin"
 	icon_name = "groin"
-	display_name = "groin"
+	name = "groin"
 	health = 50
 	min_broken_damage = 20
 	body_part = LOWER_TORSO
@@ -26,8 +26,8 @@
 	joint = "lumbar"
 
 /obj/item/organ/external/arm
-	name = "l_arm"
-	display_name = "left arm"
+	limb_name = "l_arm"
+	name = "left arm"
 	icon_name = "l_arm"
 	health = 50
 	min_broken_damage = 30
@@ -40,8 +40,8 @@
 	process_grasp(owner.l_hand, "left hand")
 
 /obj/item/organ/external/arm/right
-	name = "r_arm"
-	display_name = "right arm"
+	limb_name = "r_arm"
+	name = "right arm"
 	icon_name = "r_arm"
 	health = 50
 	min_broken_damage = 30
@@ -54,8 +54,8 @@
 	process_grasp(owner.r_hand, "right hand")
 
 /obj/item/organ/external/leg
-	name = "l_leg"
-	display_name = "left leg"
+	limb_name = "l_leg"
+	name = "left leg"
 	icon_name = "l_leg"
 	health = 50
 	min_broken_damage = 30
@@ -65,8 +65,8 @@
 	joint = "left hip"
 
 /obj/item/organ/external/leg/right
-	name = "r_leg"
-	display_name = "right leg"
+	limb_name = "r_leg"
+	name = "right leg"
 	icon_name = "r_leg"
 	body_part = LEG_RIGHT
 	icon_position = RIGHT
@@ -74,8 +74,8 @@
 	joint = "right hip"
 
 /obj/item/organ/external/foot
-	name = "l_foot"
-	display_name = "left foot"
+	limb_name = "l_foot"
+	name = "left foot"
 	icon_name = "l_foot"
 	health = 30
 	min_broken_damage = 15
@@ -89,8 +89,8 @@
 	..()
 
 /obj/item/organ/external/foot/right
-	name = "r_foot"
-	display_name = "right foot"
+	limb_name = "r_foot"
+	name = "right foot"
 	icon_name = "r_foot"
 	body_part = FOOT_RIGHT
 	icon_position = RIGHT
@@ -98,8 +98,8 @@
 	joint = "right ankle"
 
 /obj/item/organ/external/hand
-	name = "l_hand"
-	display_name = "left hand"
+	limb_name = "l_hand"
+	name = "left hand"
 	icon_name = "l_hand"
 	health = 30
 	min_broken_damage = 15
@@ -116,8 +116,8 @@
 	..()
 
 /obj/item/organ/external/hand/right
-	name = "r_hand"
-	display_name = "right hand"
+	limb_name = "r_hand"
+	name = "right hand"
 	icon_name = "r_hand"
 	body_part = HAND_RIGHT
 	parent_organ = "r_arm"
@@ -128,9 +128,9 @@
 	process_grasp(owner.r_hand, "right hand")
 
 /obj/item/organ/external/head
-	name = "head"
+	limb_name = "head"
 	icon_name = "head"
-	display_name = "head"
+	name = "head"
 	health = 75
 	min_broken_damage = 35
 	body_part = HEAD
@@ -165,7 +165,7 @@
 
 			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
 
-	name = "[owner.real_name]'s [name]"
+	limb_name = "[owner.real_name]'s [name]"
 	owner.regenerate_icons()
 
 /obj/item/organ/external/head/removed()
@@ -198,7 +198,6 @@
 	status = ORGAN_ROBOT
 /obj/item/organ/external/chest/robot
 	status = ORGAN_ROBOT
-
 
 //INTERNAL
 

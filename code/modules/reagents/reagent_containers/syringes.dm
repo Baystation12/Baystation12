@@ -240,7 +240,7 @@
 				user << "<span class='danger'>You cannot see that limb on \the [target]!</span>"
 				return
 
-			var/hit_area = affecting.display_name
+			var/hit_area = affecting.name
 
 			var/mob/living/carbon/human/H = target
 			if((user != target) && H.check_shields(7, "the [src.name]"))

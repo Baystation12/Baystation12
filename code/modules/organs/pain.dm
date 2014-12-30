@@ -88,13 +88,13 @@ mob/var/next_pain_time = 0
 			damaged_organ = E
 			maxdam = dam
 	if(damaged_organ)
-		pain(damaged_organ.display_name, maxdam, 0)
+		pain(damaged_organ.name, maxdam, 0)
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/internal/I in internal_organs)
 		if(I.is_damaged() && prob(2))
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			src.custom_pain("You feel a sharp pain in your [parent.display_name]", 1)
+			src.custom_pain("You feel a sharp pain in your [parent]", 1)
 
 	switch(getToxLoss())
 		if(1 to 5)

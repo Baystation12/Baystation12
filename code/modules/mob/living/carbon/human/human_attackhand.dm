@@ -6,7 +6,7 @@
 		if(H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			H << "\red You can't use your [temp.display_name]."
+			H << "\red You can't use your [temp]."
 			return
 
 	..()
@@ -156,7 +156,7 @@
 					miss_type = 1
 
 			if(!miss_type && block)
-				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
+				attack_message = "[H] went for [src]'s [affecting.name] but was blocked!"
 				miss_type = 2
 
 			// See what attack they use

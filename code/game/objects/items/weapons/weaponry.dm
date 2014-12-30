@@ -429,7 +429,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	playsound(affecting.loc, 'sound/effects/sparks4.ogg', 50, 1)
 	anim(affecting.loc,affecting,'icons/mob/mob.dmi',,"phaseout",,affecting.dir)
 
-	affecting.visible_message("[affecting] vanishes in a flare of light!")
+	affecting.visible_message("[affecting.name] vanishes in a flare of light!")
 
 	if(holdingfacility.len)
 		affecting.loc = pick(holdingfacility)

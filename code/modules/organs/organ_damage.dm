@@ -63,7 +63,7 @@
 	..()
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(prob(5))
-		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+		owner.custom_pain("Something inside your [parent] hurts a lot.", 1)
 
 /obj/item/organ/proc/set_damage(var/new_brute, var/new_burn)
 	brute_dam = new_brute
@@ -110,7 +110,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	owner.visible_message(\
 		"<span class='danger'>You hear a loud cracking sound coming from \the [owner].</span>",\
-		"<span class='danger'><b>Something feels like it shattered in your [display_name]!</b></span>",\
+		"<span class='danger'><b>Something feels like it shattered in your [src.name]!</b></span>",\
 		"You hear a sickening crack.")
 
 	if(owner.species && !(owner.species.flags & NO_PAIN))
@@ -137,7 +137,7 @@ This function completely restores a damaged organ to perfect condition.
 			if(isnull(suit.supporting_limbs))
 				return
 
-			owner << "You feel \the [suit] constrict about your [display_name], supporting it."
+			owner << "You feel \the [suit] constrict about your [src.name], supporting it."
 			status |= ORGAN_SPLINTED
 			suit.supporting_limbs |= src
 	return

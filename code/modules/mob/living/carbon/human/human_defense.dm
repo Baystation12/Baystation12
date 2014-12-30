@@ -75,10 +75,10 @@ emp_act
 
 				u_equip(c_hand)
 				if (affected.status & ORGAN_ROBOT)
-					emote("me", 1, "drops what they were holding, their [affected.display_name] malfunctioning!")
+					emote("me", 1, "drops what they were holding, their [affected] malfunctioning!")
 				else
 					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.display_name]!")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -198,7 +198,7 @@ emp_act
 		user << "<span class='danger'>You cannot see that limb on \the [src]!</span>"
 		return
 
-	var/hit_area = affecting.display_name
+	var/hit_area = affecting.name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
 		return 0
@@ -325,7 +325,7 @@ emp_act
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
-		var/hit_area = affecting.display_name
+		var/hit_area = affecting.name
 
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
 		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here

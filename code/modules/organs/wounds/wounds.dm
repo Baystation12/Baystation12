@@ -15,7 +15,9 @@
 	update_wound_descriptor()
 
 /datum/wound/proc/heal(var/healing)
+	return
 	// Infection/necrosis can stop a limb from healing.
+	/*
 	switch(germ_level)
 		if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)
 			healing *= 0.7
@@ -28,6 +30,7 @@
 	severity -= healing
 	if(severity > 0)
 		update_wound_descriptor()
+		*/
 
 /datum/wound/proc/update_wound_descriptor()
 	switch(wound_type)

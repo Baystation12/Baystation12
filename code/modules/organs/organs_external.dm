@@ -12,7 +12,7 @@
 	var/icon/mob_icon
 
 	var/damage_state = "00" // Damage overlay key.
-	var/display_name        // Immersion-friendly descriptive string.
+	var/limb_name        // Index for organ lists, etc.
 	var/disfigured = 0      // Is this limb hideously scarred?
 	var/gendered_icon = 0   // During icon generation, does this limb's icon_state require a gender?
 	var/cavity = 0          // Can things currently be hidden in this organ?
@@ -206,11 +206,14 @@
 
 	release_restraints()
 
+	owner.organs -= src
+	owner.organs_by_name[limb_name] = null // Remove from owner's vars.
+
 	//Robotic limbs explode if sabotaged.
 	if(is_robotic)
 		owner.visible_message(
-			"<span class='danger'>\The [owner]'s [display_name] explodes violently!</span>",\
-			"<span class='danger'>Your [display_name] explodes!</span>",\
+			"<span class='danger'>\The [owner]'s [src.name] explodes violently!</span>",\
+			"<span class='danger'>Your [src.name] explodes!</span>",\
 			"<span class='danger'>You hear an explosion!</span>")
 		explosion(get_turf(owner),-1,-1,2,3)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -231,8 +234,8 @@
 			return
 
 	owner.visible_message(
-		"<span class='danger'>[owner.name]'s [display_name] flies off in an arc!</span>",\
-		"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+		"<span class='danger'>[owner.name]'s [src] flies off in an arc!</span>",\
+		"<span class='moderate'><b>Your [src] goes flying off!</b></span>",\
 		"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
 
 	src.removed(owner)
@@ -321,12 +324,12 @@
 	if (disfigured)
 		return
 	if(type == "brute")
-		owner.visible_message("\red You hear a sickening cracking sound coming from \the [owner]'s [display_name].",	\
-		"\red <b>Your [display_name] is mangled!</b>",	\
+		owner.visible_message("\red You hear a sickening cracking sound coming from \the [owner]'s [src].",	\
+		"\red <b>Your [src] is mangled!</b>",	\
 		"\red You hear a sickening crack.")
 	else
 		owner.visible_message(
-		"<span class='danger'>[owner]'s [display_name] is scorched into an unrecognizable mess!</span>",	\
-		"<span class='danger'>Your [display_name] melts!</span>",	\
+		"<span class='danger'>[owner]'s [src] is scorched into an unrecognizable mess!</span>",	\
+		"<span class='danger'>Your [src] melts!</span>",	\
 		"<span class='danger'>You hear a sickening sizzle.</span>")
 	disfigured = 1

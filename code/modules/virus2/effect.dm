@@ -122,7 +122,7 @@
 			var/obj/item/organ/external/E = H.organs_by_name[organ]
 			if (!(E.status & ORGAN_DEAD))
 				E.status |= ORGAN_DEAD
-				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
+				H << "<span class='notice'>You can't feel your [E] anymore...</span>"
 				for (var/obj/item/organ/external/C in E.children)
 					C.status |= ORGAN_DEAD
 			H.update_body(1)

@@ -24,20 +24,22 @@
 	..()
 	max_health = initial(health)
 	create_reagents(5)
+
 	if(!H) //Stopgap to stop runtimes filling up log during testing
 		del(src) // remove before merge
 	owner = H
-	if(!istype(H))
+	if(!istype(owner))
+		owner = null
 		return
-	if(H.dna)
+
+	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
+	if(!organ_blood)
+		owner.vessel.trans_to(src, 5, 1, 1)
+
+	if(owner.dna)
 		if(!blood_DNA)
 			blood_DNA = list()
-		blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-
-	if(owner)
-		processing_objects -= src
-	else
-		processing_objects |= src
+		blood_DNA[owner.dna.unique_enzymes] = owner.dna.b_type
 
 	// Is this item prosthetic?
 	if(spawn_robotic)
@@ -45,10 +47,17 @@
 
 	if(!istype(loc,/turf))
 		germ_level = 0
+	else
+		processing_objects |= src
 
 /obj/item/organ/proc/removed(var/mob/living/user)
+
 	germ_level = max(GERM_LEVEL_AMBIENT,germ_level)
 	src.status &= ~(ORGAN_BROKEN|ORGAN_BLEEDING|ORGAN_SPLINTED|ORGAN_DEAD)
+
+	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
+	if(!organ_blood)
+		owner.vessel.trans_to(src, 5, 1, 1)
 
 	var/turf/target_loc
 	if(user)

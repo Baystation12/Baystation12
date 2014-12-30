@@ -13,12 +13,15 @@
 	if(!dna)
 		dna = new /datum/dna(null)
 		// Species name is handled by set_species()
+	make_blood()
 
 	if(!species)
 		if(new_species)
 			set_species(new_species)
 		else
 			set_species()
+
+	dna.real_name = real_name
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
@@ -35,10 +38,6 @@
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
 	..()
-
-	if(dna)
-		dna.real_name = real_name
-	make_blood()
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -1036,11 +1035,11 @@
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
 				src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)

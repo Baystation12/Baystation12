@@ -36,7 +36,7 @@
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp], but cannot!"
 			return
 	if(has_extinguisher)
 		user.put_in_hands(has_extinguisher)

@@ -478,7 +478,7 @@
 				var/obj/item/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
 
 				H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), sharp=1)
-				visible_emote(pick("pecks [H]'s [affecting].", "cuts [H]'s [affecting] with its talons."))
+				visible_emote(pick("pecks [H]'s [affecting.name].", "cuts [H]'s [affecting.name] with its talons."))
 
 			else
 				L.adjustBruteLoss(damage)

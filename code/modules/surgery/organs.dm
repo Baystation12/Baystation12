@@ -95,7 +95,7 @@
 					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 					"You start treating damage to [target]'s [I.name] with [tool_name]." )
 
-		target.custom_pain("The pain in your [affected.display_name] is living hell!",1)
+		target.custom_pain("The pain in your [affected] is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -125,8 +125,8 @@
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		user.visible_message("\red [user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, getting mess and tearing the inside of [target]'s [affected.display_name] with \the [tool]!")
+		user.visible_message("\red [user]'s hand slips, getting mess and tearing the inside of [target]'s [affected] with \the [tool]!", \
+		"\red Your hand slips, getting mess and tearing the inside of [target]'s [affected] with \the [tool]!")
 		var/dam_amt = 2
 
 		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
@@ -179,7 +179,7 @@
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 
-		target.custom_pain("The pain in your [affected.display_name] is living hell!",1)
+		target.custom_pain("The pain in your [affected] is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -202,8 +202,8 @@
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		user.visible_message("\red [user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, gumming up the mechanisms inside of [target]'s [affected.display_name] with \the [tool]!")
+		user.visible_message("\red [user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected] with \the [tool]!", \
+		"\red Your hand slips, gumming up the mechanisms inside of [target]'s [affected] with \the [tool]!")
 
 		target.adjustToxLoss(5)
 		affected.take_damage(5,0,1,1)
@@ -251,7 +251,7 @@
 
 		user.visible_message("[user] starts to separate [target]'s [target.op_stage.current_organ] with \the [tool].", \
 		"You start to separate [target]'s [target.op_stage.current_organ] with \the [tool]." )
-		target.custom_pain("The pain in your [affected.display_name] is living hell!",1)
+		target.custom_pain("The pain in your [affected] is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -264,8 +264,8 @@
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!")
+		user.visible_message("\red [user]'s hand slips, slicing an artery inside [target]'s [affected] with \the [tool]!", \
+		"\red Your hand slips, slicing an artery inside [target]'s [affected] with \the [tool]!")
 		affected.take_damage(rand(30,50),0,1,1)
 
 /datum/surgery_step/internal/remove_organ
@@ -318,8 +318,8 @@
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!")
+		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected] with \the [tool]!", \
+		"\red Your hand slips, damaging the flesh in [target]'s [affected] with \the [tool]!")
 		affected.take_damage(20)
 
 /datum/surgery_step/internal/replace_organ
@@ -364,7 +364,7 @@
 			if(O && affected.name == O.parent_organ)
 				organ_compatible = 1
 			else
-				user << "\red \The [O.body_part] [o_do] normally go in \the [affected.display_name]."
+				user << "\red \The [O.body_part] [o_do] normally go in \the [affected]."
 				return 2
 		else
 			user << "\red You're pretty sure [target.species.name_plural] don't normally have [o_a][O.body_part]."
@@ -374,15 +374,15 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts transplanting \the [tool] into [target]'s [affected.display_name].", \
-		"You start transplanting \the [tool] into [target]'s [affected.display_name].")
-		target.custom_pain("Someone's rooting around in your [affected.display_name]!",1)
+		user.visible_message("[user] starts transplanting \the [tool] into [target]'s [affected].", \
+		"You start transplanting \the [tool] into [target]'s [affected].")
+		target.custom_pain("Someone's rooting around in your [affected]!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\blue [user] has transplanted \the [tool] into [target]'s [affected.display_name].", \
-		"\blue You have transplanted \the [tool] into [target]'s [affected.display_name].")
+		user.visible_message("\blue [user] has transplanted \the [tool] into [target]'s [affected].", \
+		"\blue You have transplanted \the [tool] into [target]'s [affected].")
 		user.drop_item(tool)
 		var/obj/item/organ/internal/O = tool
 		if(istype(O))
@@ -440,8 +440,8 @@
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!", \
-		"\red Your hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!")
+		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected] with \the [tool]!", \
+		"\red Your hand slips, damaging the flesh in [target]'s [affected] with \the [tool]!")
 		affected.take_damage(20)
 
 //////////////////////////////////////////////////////////////////
