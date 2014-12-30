@@ -105,6 +105,7 @@
 	if(..())
 		return 1
 
+	/*
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
@@ -123,6 +124,7 @@
 					return
 			else
 				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
+	*/
 
 /obj/item/stack/medical/bruise_pack/tajaran
 	name = "\improper S'rendarr's Hand leaf"
@@ -201,6 +203,7 @@
 	if(..())
 		return 1
 
+	/*
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
@@ -220,6 +223,7 @@
 					return
 			else
 				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
+	*/
 
 /obj/item/stack/medical/splint
 	name = "medical splints"

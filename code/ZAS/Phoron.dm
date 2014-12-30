@@ -125,7 +125,7 @@ obj/var/contaminated = 0
 		if(prob(20)) src << "<span class='danger'>Your eyes burn!</span>"
 		E.take_damage(0,2.5)
 		eye_blurry = min(eye_blurry+1.5,50)
-		if (prob(max(0,E.get_damage() - 15) + 1) &&!eye_blind)
+		if (prob(max(0,E.is_damaged() - 15) + 1) &&!eye_blind)
 			src << "\red You are blinded!"
 			eye_blind += 20
 

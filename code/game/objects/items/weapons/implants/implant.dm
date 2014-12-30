@@ -177,7 +177,7 @@ Implant Specifics:<BR>"}
 						if (istype(part,/obj/item/organ/external/chest) ||	\
 							istype(part,/obj/item/organ/external/groin) ||	\
 							istype(part,/obj/item/organ/external/head))
-							part.createwound(BRUISE, 60)	//mangle them instead
+							part.take_damage(60)	//mangle them instead
 							explosion(get_turf(imp_in), -1, -1, 2, 3)
 							del(src)
 						else
@@ -245,7 +245,7 @@ Implant Specifics:<BR>"}
 					if (istype(part,/obj/item/organ/external/chest) ||	\
 						istype(part,/obj/item/organ/external/groin) ||	\
 						istype(part,/obj/item/organ/external/head))
-						part.createwound(BRUISE, 60)	//mangle them instead
+						part.take_damage(60)	//mangle them instead
 					else
 						part.droplimb(1)
 				explosion(get_turf(imp_in), -1, -1, 2, 3)

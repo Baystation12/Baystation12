@@ -29,7 +29,7 @@
 
 		if(S.is_open() == 1)
 			if (S && (S.status & ORGAN_ROBOT))
-				if(S.get_damage())
+				if(S.is_damaged())
 					S.heal_damage(15, 15, robo_repair = 1)
 					H.updatehealth()
 					use(1)

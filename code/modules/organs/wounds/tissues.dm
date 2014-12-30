@@ -20,8 +20,6 @@ proc/populate_tissue_list()
 	var/list/burn_damage_strings = list("scorching","melting","searing")
 
 	var/hardness = HARDNESS_SCALPEL // Minimum tool needed to cut this layer open.
-	var/brute_soak = 0              // Amount of damage removed from brute damage to the limb. TODO: blunt_soak and edge_soak.
-	var/burn_soak = 0               // As above, for burn.
 
 	var/regen_threshold = 50        // After this point, damage will not be regenerated without surgery (ie. bone)
 	var/split_threshold = 50        // Point at which tissue is 'broken' or 'open'. Also serves as max damage for the layer.
@@ -125,10 +123,10 @@ proc/populate_tissue_list()
 // This datum is distinct from the previous in that it is just a holder/reference for
 // tissue layer status. Actual tissue data is defined in a global list (see top of file).
 /datum/tissue_layer
-	var/damage = 0
-	var/retracted = 0
-	var/necrotic = 0
+	var/area = 10      // Max available for wounds.
+	var/wound_area = 0 // Space occupied by wounds.
 	var/datum/tissue/tissue
+	var/list/wounds = list() // Current wounds.
 
 /datum/tissue_layer/New(var/newloc,var/tissue_type)
 	..()
@@ -136,46 +134,57 @@ proc/populate_tissue_list()
 		del(src)
 	tissue = tissues[tissue_type]
 
-/datum/tissue_layer/proc/heal_damage(var/healing_damage)
-	// Tissue layer is undamaged or beyond natural recovery.
-	if(damage == 0 || damage > tissue.regen_threshold)
-		return healing_damage
+/datum/tissue_layer/proc/create_wound(var/wound_type = WOUND_CUT, var/wound_depth = 1)
+	var/remainder = 0
 
-	// Get the amount we will need to subtract to heal all of our damage.
-	var/need_healing = min(healing_damage,damage/tissue.growth_factor)
-	if(!necrotic) // Necrosis consumes health but doesn't actually heal.
-		damage = max(0,damage-(need_healing*tissue.growth_factor))
-	healing_damage -= need_healing
-	return healing_damage
+	if(wound_area == area)
+		return wound_depth
 
-/datum/tissue_layer/proc/set_damage(var/new_damage)
-	damage = max(new_damage, tissue.split_threshold)
+	if(wound_depth > wound_area)
+		wound_depth = wound_area
+		remainder = wound_depth - wound_area
+		wound_area = 0
+	wounds += new /datum/wound (src, wound_type, wound_depth)
+	update()
+	return remainder
 
-/datum/tissue_layer/proc/take_damage(var/dealt_damage, var/damage_type)
-	// If the tissue is open (damage at or past threshold) we just pass right through.
-	if(damage >= tissue.split_threshold)
-		return dealt_damage
-	// Work out how much is soaked and how much remains for lower tissues.
-	var/remaining_damage = dealt_damage
-	var/damage_soaked = 0
-	switch(damage_type)
-		if(BRUTE)
-			damage_soaked = tissue.brute_soak
-		if(BURN)
-			damage_soaked = tissue.burn_soak
-	damage_soaked = remaining_damage * damage_soaked
-	remaining_damage = remaining_damage - damage_soaked
-	damage += damage_soaked
-	// Overflow damage is returned.
-	if(damage > tissue.split_threshold)
-		remaining_damage += damage - tissue.split_threshold
-	return remaining_damage
+/datum/tissue_layer/proc/update()
+	wound_area = 0
+	for(var/datum/wound/wound in wounds)
+		wound_area += wound.severity
+
+/datum/tissue_layer/proc/handle_healing(var/heal)
+	if(wound_area < tissue.regen_threshold) // Make sure this isn't too broken to heal (fractured)
+		var/list/healed_wounds = list()
+		heal *= tissue.growth_factor
+		for(var/datum/wound/wound in wounds)
+			// Can't heal a stretched-open wound.
+			if(!heal)
+				break
+			if(wound.status == WOUND_RETRACTED)
+				continue
+			if(heal > wound.severity)
+				heal -= wound.severity
+				wound.heal(wound.severity)
+			else
+				wound.heal(heal)
+				heal = 0
+			if(wound.severity <= 0)
+				healed_wounds |= wound
+			return
+		if(healed_wounds.len)
+			wounds -= healed_wounds
+	update()
+	return heal
 
 /datum/tissue_layer/proc/is_open()
-	return retracted
+	for(var/datum/wound/wound in wounds)
+		if(wound.status == WOUND_RETRACTED)
+			return 1
+	return 0
 
-/datum/tissue_layer/proc/is_split()
-	return damage >= tissue.split_threshold
+/datum/tissue_layer/proc/is_wounded()
+	return wound_area > 0
 
 /datum/tissue_layer/proc/is_bleeding()
-	return is_split() && (tissue.flags & TISSUE_BLEEDS)
+	return (tissue.flags & TISSUE_BLEEDS) && is_wounded()

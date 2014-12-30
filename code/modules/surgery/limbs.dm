@@ -51,7 +51,7 @@
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, cutting [target]'s [affected.display_name] open!", \
 			"\red Your hand slips, cutting [target]'s [affected.display_name] open!")
-			affected.createwound(CUT, 10)
+			affected.take_damage(10,0,1,1)
 
 // TODO: convert this to
 /datum/surgery_step/limb/mend
@@ -238,5 +238,5 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, sawing through the bone in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, sawwing through the bone in [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 30)
+		affected.take_damage(30,0,1,1)
 		affected.fracture()

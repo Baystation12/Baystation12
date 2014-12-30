@@ -96,7 +96,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 20, 1)
+		affected.take_damage(20, 0, 1, 1)
 
 /datum/surgery_step/treat_necrosis
 	priority = 2

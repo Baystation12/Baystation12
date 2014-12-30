@@ -70,7 +70,7 @@
 
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.get_damage() > 0)
+			if(I.is_damaged())
 				is_organ_damaged = 1
 				break
 		return ..() && is_organ_damaged
@@ -90,7 +90,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.get_damage() > 0)
+			if(I && I.is_damaged())
 				if(!(I.status & ORGAN_ROBOT))
 					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 					"You start treating damage to [target]'s [I.name] with [tool_name]." )
@@ -113,7 +113,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.get_damage() > 0)
+			if(I && I.is_damaged())
 				if(!(I.status & ORGAN_ROBOT))
 					user.visible_message("\blue [user] treats damage to [target]'s [I.name] with [tool_name].", \
 					"\blue You treat damage to [target]'s [I.name] with [tool_name]." )
@@ -138,10 +138,10 @@
 			else
 				dam_amt = 5
 				target.adjustToxLoss(10)
-				affected.createwound(CUT, 5)
+		affected.take_damage(5,0,1,1)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.get_damage() > 0)
+			if(I && I.is_damaged())
 				I.take_damage(dam_amt,0)
 
 /datum/surgery_step/internal/fix_organ_robotic //For artificial organs
@@ -162,7 +162,7 @@
 
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I.get_damage() > 0 && (I.status & ORGAN_ROBOT))
+			if(I.is_damaged() && (I.status & ORGAN_ROBOT))
 				is_organ_damaged = 1
 				break
 		return ..() && is_organ_damaged
@@ -174,7 +174,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
-			if(I && I.get_damage() > 0)
+			if(I && I.is_damaged())
 				if(I.status & ORGAN_ROBOT)
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
@@ -190,7 +190,7 @@
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
 
-			if(I && I.get_damage() > 0)
+			if(I && I.is_damaged())
 				if(I.status & ORGAN_ROBOT)
 					user.visible_message("\blue [user] repairs [target]'s [I.name] with [tool].", \
 					"\blue You repair [target]'s [I.name] with [tool]." )
@@ -206,7 +206,7 @@
 		"\red Your hand slips, gumming up the mechanisms inside of [target]'s [affected.display_name] with \the [tool]!")
 
 		target.adjustToxLoss(5)
-		affected.createwound(CUT, 5)
+		affected.take_damage(5,0,1,1)
 
 		for(var/obj/item/organ/internal/I in affected.internal_organs)
 			if(I)
@@ -266,7 +266,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, slicing an artery inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, rand(30,50), 1)
+		affected.take_damage(rand(30,50),0,1,1)
 
 /datum/surgery_step/internal/remove_organ
 
@@ -320,7 +320,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(BRUISE, 20)
+		affected.take_damage(20)
 
 /datum/surgery_step/internal/replace_organ
 	allowed_tools = list(
@@ -442,7 +442,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, damaging the flesh in [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(BRUISE, 20)
+		affected.take_damage(20)
 
 //////////////////////////////////////////////////////////////////
 //						HEART SURGERY							//

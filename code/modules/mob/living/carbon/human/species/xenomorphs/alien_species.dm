@@ -111,7 +111,7 @@
 
 	//next internal organs
 	for(var/obj/item/organ/internal/I in H.internal_organs)
-		if(I.get_damage() > 0)
+		if(I.is_damaged())
 			I.heal_damage(heal_rate, heal_rate)
 			if (prob(5))
 				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"

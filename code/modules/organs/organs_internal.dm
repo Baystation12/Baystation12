@@ -150,13 +150,3 @@
 						if(501 to INFINITY)
 							take_damage(4)
 							owner.reagents.add_reagent("toxin", rand(3,5))
-
-/obj/item/organ/internal/take_damage()
-	..()
-	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-	if(prob(5))
-		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
-
-/obj/item/organ/internal/die()
-	..()
-	if(dead_icon) icon_state = dead_icon

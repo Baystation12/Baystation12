@@ -1298,7 +1298,7 @@ datum
 					var/mob/living/carbon/human/H = M
 					var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
 					if(E && istype(E))
-						if(E.get_damage() > 0)
+						if(E.is_damaged())
 							E.heal_damage(1,1)
 				..()
 				return
@@ -1319,7 +1319,7 @@ datum
 
 					//Peridaxon is hard enough to get, it's probably fair to make this all internal organs
 					for(var/obj/item/organ/internal/I in H.internal_organs)
-						if(I.get_damage() > 0)
+						if(I.is_damaged())
 							I.heal_damage(0.20,0.20)
 				..()
 				return

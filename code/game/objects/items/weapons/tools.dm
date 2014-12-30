@@ -366,19 +366,19 @@
 			if(1)
 				usr << "<span class='danger'>Your eyes sting a little.</span>"
 				E.take_damage(0,rand(1, 2))
-				if(E.get_damage() > 12)
+				if(E.is_damaged() > 12)
 					user.eye_blurry += rand(3,6)
 			if(0)
 				usr << "<span class='danger'>Your eyes burn.</span>"
 				E.take_damage(0,rand(2,4))
-				if(E.get_damage() > 10)
+				if(E.is_damaged() > 10)
 					E.take_damage(0,rand(4,10))
 			if(-1)
 				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
 				E.take_damage(0,rand(12, 16))
 		if(safety<2)
-			if(E.get_damage() > 10)
+			if(E.is_damaged() > 10)
 				user << "<span class='danger'>Your eyes are really starting to hurt. This can't be good for you!</span>"
 			if (E.is_broken())
 				user << "<span class='danger'>You go blind!</span>"

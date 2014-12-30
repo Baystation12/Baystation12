@@ -195,10 +195,9 @@ emp_act
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 	if (!affecting)
-		return 0
-	if(affecting.status & ORGAN_DESTROYED)
-		user << "What [affecting.display_name]?"
-		return 0
+		user << "<span class='danger'>You cannot see that limb on \the [src]!</span>"
+		return
+
 	var/hit_area = affecting.display_name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))

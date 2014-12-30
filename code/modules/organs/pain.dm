@@ -81,7 +81,7 @@ mob/var/next_pain_time = 0
 		// amputated limbs don't cause pain
 		if(E.amputated) continue
 		if(E.status & ORGAN_DEAD) continue
-		var/dam = E.get_damage()
+		var/dam = E.is_damaged()
 		// make the choice of the organ depend on damage,
 		// but also sometimes use one of the less damaged ones
 		if(dam > maxdam && (maxdam == 0 || prob(70)) )
@@ -92,7 +92,7 @@ mob/var/next_pain_time = 0
 
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(I.get_damage() > 2) if(prob(2))
+		if(I.is_damaged() && prob(2))
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
 			src.custom_pain("You feel a sharp pain in your [parent.display_name]", 1)
 

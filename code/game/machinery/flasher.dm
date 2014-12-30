@@ -81,7 +81,7 @@
 		if (istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
 			var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
-			if (E && (E.is_bruised() && prob(E.get_damage() + 50)))
+			if (E && (E.is_bruised() && prob(E.is_damaged() + 50)))
 				flick("e_flash", O:flash)
 				E.take_damage(0,rand(1, 5))
 		else

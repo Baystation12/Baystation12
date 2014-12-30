@@ -238,12 +238,14 @@
 
 	// Damaged heart virtually reduces the blood volume, as the blood isn't
 	// being pumped properly anymore.
-	if(get_damage() > 1 && get_damage() < min_bruised_damage)
+	if(is_bruised())
+		if(is_broken())
+			blood_volume *= 0.3
+		else
+			blood_volume *= 0.6
+	else
 		blood_volume *= 0.8
-	else if(get_damage() >= min_bruised_damage && get_damage() < min_broken_damage)
-		blood_volume *= 0.6
-	else if(get_damage() >= min_broken_damage && get_damage() < INFINITY)
-		blood_volume *= 0.3
+
 	// Mob can handle everything else since it uses only mob vars, not organ vars.
 	owner.handle_blood(blood_volume)
 
@@ -376,7 +378,7 @@
 		if (!is_bruised() && owner.reagents.has_reagent("anti_toxin"))
 			src.heal_damage(0.2*PROCESS_ACCURACY,0)
 
-		if(src.get_damage() < 0)
+		if(src.is_damaged() < 0)
 			src.set_damage(0,0)
 
 		// Get the effectiveness of the liver.

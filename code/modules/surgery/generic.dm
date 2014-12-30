@@ -39,7 +39,7 @@
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			var/datum/tissue_layer/tissue_layer = affected.get_surface_layer()
-			return tissue_layer && !tissue_layer.is_split() && tissue_layer.tissue.can_cut_with(tool) && target_zone != "mouth"
+			return tissue_layer && !tissue_layer.is_wounded() && tissue_layer.tissue.can_cut_with(tool) && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -56,7 +56,6 @@
 			if(cut_layer.is_open())
 				continue
 			if(cut_layer.tissue.can_cut_with(tool))
-				cut_layer.set_damage(cut_layer.tissue.split_threshold)
 				if(cut_layer.tissue.descriptors[target_zone])
 					tissues_cut += cut_layer.tissue.descriptors[target_zone]
 				else
@@ -79,14 +78,13 @@
 
 		user.visible_message("<span class='notice'>[user] has cut on through the [tissue_cut_string] of [target]'s [affected.display_name] with \the [tool].</span>", \
 		"<span class='notice'>You have cut through the [tissue_cut_string] of [target]'s [affected.display_name] with \the [tool].</span>",)
-		affected.createwound(CUT, 1)
+		affected.take_damage(1, 0, 1, 1)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, cutting open [target]'s [affected.display_name] in the wrong place with \the [tool]!", \
-		"\red Your hand slips, slicing open [target]'s [affected.display_name] in the wrong place with \the [tool]!")
-		affected.createwound(CUT, 10)
-
+		user.visible_message("<span class='danger'>[user]'s hand slips, cutting open [target]'s [affected.display_name] in the wrong place with \the [tool]!</span>", \
+		"<span class='danger'>Your hand slips, slicing open [target]'s [affected.display_name] in the wrong place with \the [tool]!</span>")
+		affected.take_damage(10, 0, 1, 1)
 
 
 /datum/surgery_step/generic/retract
@@ -103,7 +101,7 @@
 		if(..())
 			var/obj/item/organ/external/affected = target.get_organ(target_zone)
 			var/datum/tissue_layer/tissue_layer = affected.get_surface_layer()
-			return tissue_layer && tissue_layer.is_split() && !tissue_layer.is_open() && target_zone != "mouth"
+			return tissue_layer && tissue_layer.is_wounded() && !tissue_layer.is_open() && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -119,8 +117,10 @@
 		for(var/datum/tissue_layer/cut_layer in affected.tissue_layers)
 			if(cut_layer.is_open())
 				continue
-			if(cut_layer.is_split() && !cut_layer.retracted)
-				cut_layer.retracted = 1
+			if(cut_layer.is_wounded())
+				for(var/datum/wound/wound in cut_layer.wounds)
+					wound.status = WOUND_RETRACTED
+					break
 				tissues_cut += cut_layer.tissue.descriptor
 			else
 				break
@@ -143,7 +143,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("<span class='danger'>[user]'s hand slips, tearing the edges of the incision on [target]'s [affected.display_name] with \the [tool]!</span>", \
 		"<span class='danger'>Your hand slips, tearing the edges of the incision on [target]'s [affected.display_name] with \the [tool]!</span>")
-		target.apply_damage(12, BRUTE, affected, sharp=1)
+		affected.take_damage(12, 0, 1, 1)
 
 /datum/surgery_step/generic/clamp_bleeders
 	allowed_tools = list(
@@ -171,14 +171,13 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] clamps bleeders in [target]'s [affected.display_name] with \the [tool].",	\
 		"\blue You clamp bleeders in [target]'s [affected.display_name] with \the [tool].")
-		affected.clamp()
 		spread_germs_to_organ(affected, user)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("\red [user]'s hand slips, tearing blood vessals and causing massive bleeding in [target]'s [affected.display_name] with \the [tool]!",	\
+		user.visible_message("\red [user]'s hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.display_name] with \the [tool]!",	\
 		"\red Your hand slips, tearing blood vessels and causing massive bleeding in [target]'s [affected.display_name] with \the [tool]!",)
-		affected.createwound(CUT, 10)
+		affected.take_damage(10, 0, 1, 1)
 
 /datum/surgery_step/generic/cauterize
 	allowed_tools = list(

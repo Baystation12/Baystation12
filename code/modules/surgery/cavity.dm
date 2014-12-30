@@ -64,7 +64,7 @@
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 20)
+		affected.take_damage(20,0,1,1)
 
 /datum/surgery_step/cavity/close_space
 	priority = 2
@@ -100,7 +100,8 @@
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 20)
+		affected.take_damage(20,0,1,1)
+
 
 /datum/surgery_step/cavity/place_item
 	priority = 0
@@ -140,7 +141,7 @@
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 20)
+		affected.take_damage(20,0,1,1)
 
 //////////////////////////////////////////////////////////////////
 //					IMPLANT/ITEM REMOVAL SURGERY						//
@@ -158,7 +159,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/internal/brain/sponge = target.internal_organs_by_name["brain"]
-		return ..() && (!sponge || sponge.get_damage() < 0)
+		return ..() && (!sponge || sponge.is_damaged())
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -225,7 +226,7 @@
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!", \
 		"\red Your hand slips, scraping tissue inside [target]'s [affected.display_name] with \the [tool]!")
-		affected.createwound(CUT, 20)
+		affected.take_damage(20,0,1,1)
 		if (affected.implants.len)
 			var/fail_prob = 10
 			fail_prob += 100 - tool_quality(tool)
