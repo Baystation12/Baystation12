@@ -117,7 +117,10 @@
 				user << "There is not tank to remove."
 				return
 
-			user.put_in_hands(air_supply)
+			if(user.r_hand && user.l_hand)
+				air_supply.loc = get_turf(user)
+			else
+				user.put_in_hands(air_supply)
 			user << "You detach and remove \the [air_supply]."
 			air_supply = null
 			return
@@ -146,7 +149,10 @@
 						user << "You detatch \the [cell] from \the [src]'s battery mount."
 						for(var/obj/item/rig_module/module in installed_modules)
 							module.deactivate()
-						cell.loc = user.put_in_hands(cell)
+						if(user.r_hand && user.l_hand)
+							cell.loc = get_turf(user)
+						else
+							cell.loc = user.put_in_hands(cell)
 						cell = null
 					else
 						user << "There is nothing loaded in that mount."

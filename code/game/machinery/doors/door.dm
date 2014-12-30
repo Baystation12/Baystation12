@@ -37,6 +37,13 @@
 	dir = EAST
 	var/width = 1
 
+/obj/machinery/door/attack_generic(var/mob/user, var/damage)
+	if(damage >= 10)
+		visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
+		take_damage(damage)
+	else
+		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+
 /obj/machinery/door/New()
 	. = ..()
 	if(density)
@@ -187,7 +194,7 @@
 		user = null
 	if(!src.requiresID())
 		user = null
-	
+
 	if(istype(I, /obj/item/stack/sheet/metal))
 		if(stat & BROKEN)
 			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
@@ -198,11 +205,11 @@
 		if(!density)
 			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
 			return
-		
+
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT 
+		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
-		
+
 		var/obj/item/stack/sheet/metal/metalstack = I
 		var/transfer
 		if (repairing)
@@ -214,17 +221,17 @@
 			if (repairing)
 				repairing.loc = src
 				transfer = repairing.amount
-		
+
 		if (transfer)
 			user << "<span class='notice'>You fit [transfer] [metalstack.singular_name]\s to damaged and broken parts on \the [src].</span>"
-		
+
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/weldingtool))
 		if(!density)
 			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
 			return
-		
+
 		var/obj/item/weapon/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
 			user << "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>"
@@ -249,7 +256,7 @@
 		open()
 		operating = -1
 		return 1
-	
+
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
@@ -261,7 +268,7 @@
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
-	
+
 	if(src.allowed(user) && operable())
 		if(src.density)
 			open()
