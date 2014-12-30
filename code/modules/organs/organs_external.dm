@@ -20,7 +20,10 @@
 
 	var/tmp/perma_injury = 0
 	var/tmp/amputated = 0 // Whether this has been cleanly amputated, thus causing no pain
-	var/joint = "joint"   // Descriptive string used in amputation.
+
+	var/joint = "joint"   // Descriptive string used in dislocation.
+	var/amputation_point  // Descriptive string used in amputation.
+	var/dislocated = 0    // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
 
 	var/obj/item/organ/external/parent // Organ that this organ is attached to.
 	var/list/tissue_layers = list()    // Layers comprising this organ.

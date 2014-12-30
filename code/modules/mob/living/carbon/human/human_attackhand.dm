@@ -273,9 +273,6 @@
 			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
 	return
 
-/mob/living/carbon/human/proc/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, inrange, params)
-	return
-
 /mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message)
 
 	if(!damage)
@@ -290,4 +287,16 @@
 	var/armor_block = run_armor_check(affecting, "melee")
 	apply_damage(damage, BRUTE, affecting, armor_block)
 	updatehealth()
+	return 1
+
+/mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
+
+	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
+	if(!organ || organ.is_dislocated() || organ.dislocated == -1) //Cannot dislocate this organ.
+		return 0
+
+	user.visible_message("<span class='danger'>[src] has been [pick(W.attack_verb)] in \the [organ] with \the [W] by [user]!</span>")
+	if(prob(W.force))
+		user.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")] with a grisly crunch!</span>")
+		organ.dislocate()
 	return 1

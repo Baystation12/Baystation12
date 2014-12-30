@@ -157,8 +157,10 @@
 		for(var/obj/item/organ/internal/I in H.internal_organs)
 			I.roboticize()
 
-	H.vessel.add_reagent("blood",560-H.vessel.total_volume)
-	H.fixblood()
+	spawn(10) //Putting this in a spawn so hopefully it will give it time to spawn.
+		if(H && H.vessel)
+			H.vessel.add_reagent("blood",560-H.vessel.total_volume)
+			H.fixblood()
 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 

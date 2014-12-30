@@ -4,6 +4,35 @@
 /obj/item/organ/proc/is_broken()
 	return (health < min_broken_damage) || (status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED))
 
+/obj/item/organ/external/is_broken()
+	return ..() || is_dislocated()
+
+/obj/item/organ/external/proc/is_dislocated()
+	if(dislocated)
+		return 1
+	if(parent)
+		return parent.is_dislocated()
+	return 0
+
+/obj/item/organ/external/proc/dislocate(var/primary)
+	if(dislocated != -1)
+		if(primary)
+			dislocated = 2
+		else
+			dislocated = 1
+	if(children && children.len)
+		for(var/obj/item/organ/external/child in children)
+			child.dislocate()
+
+/obj/item/organ/external/proc/undislocate()
+	if(dislocated != -1)
+		dislocated = 0
+	if(children && children.len)
+		for(var/obj/item/organ/external/child in children)
+			child.undislocate()
+	if(owner)
+		owner.shock_stage += 20
+
 /obj/item/organ/proc/is_bleeding()
 	if(istype(owner,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = owner

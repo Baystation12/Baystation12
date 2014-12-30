@@ -20,7 +20,7 @@
 	var/list/trace_chemicals = list() // traces of chemicals in the organ,
 									  // links chemical IDs to number of ticks for which they'll stay in the blood
 
-/obj/item/organ/New(var/mob/living/carbon/H, var/spawn_robotic)
+/obj/item/organ/New(var/mob/living/carbon/H, var/spawn_robotic, var/created_externally)
 	..()
 	max_health = initial(health)
 	create_reagents(5)
@@ -32,23 +32,24 @@
 		owner = null
 		return
 
-	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
-	if(!organ_blood)
-		owner.vessel.trans_to(src, 5, 1, 1)
-
-	if(owner.dna)
-		if(!blood_DNA)
-			blood_DNA = list()
-		blood_DNA[owner.dna.unique_enzymes] = owner.dna.b_type
+	spawn(10) // Putting this on a spawn so it gives the species spawn plenty of time to finish.
+		var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
+		if(!organ_blood)
+			owner.vessel.trans_to(src, 5, 1, 1)
+		if(owner.dna)
+			if(!blood_DNA)
+				blood_DNA = list()
+			blood_DNA[owner.dna.unique_enzymes] = owner.dna.b_type
 
 	// Is this item prosthetic?
 	if(spawn_robotic)
 		roboticize()
 
-	if(!istype(loc,/turf))
-		germ_level = 0
-	else
+	if(created_externally)
 		processing_objects |= src
+	else
+		germ_level = 0
+
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 
@@ -83,6 +84,12 @@
 	return
 
 /obj/item/organ/process()
+
+	if(istype(owner))
+		world << "[src] processing externally with owner [owner]"
+	else
+		world << "[src] processing externally with no owner"
+
 	if(status & (ORGAN_ROBOT|ORGAN_DEAD))
 		processing_objects -= src
 		return

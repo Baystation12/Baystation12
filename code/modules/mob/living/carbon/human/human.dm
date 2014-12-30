@@ -10,18 +10,11 @@
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
-	if(!dna)
-		dna = new /datum/dna(null)
-		// Species name is handled by set_species()
-	make_blood()
-
 	if(!species)
 		if(new_species)
 			set_species(new_species)
 		else
 			set_species()
-
-	dna.real_name = real_name
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
@@ -36,6 +29,12 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
+
+	if(!dna)
+		dna = new /datum/dna(null)
+		// Species name is handled by set_species()
+	dna.real_name = real_name
+	make_blood()
 
 	..()
 
@@ -1283,3 +1282,58 @@
 	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
+
+/mob/living/carbon/human/proc/undislocate()
+	set category = "Object"
+	set name = "Undislocate Joint"
+	set desc = "Pop a joint back into place. Extremely painful."
+	set src in view(1)
+
+	if(!isliving(usr) || usr.next_move > world.time)
+		return
+	usr.next_move = world.time + 20
+
+	if(usr.stat > 0)
+		usr << "You are unconcious and cannot do that!"
+		return
+
+	if(usr.restrained())
+		usr << "You are restrained and cannot do that!"
+		return
+
+	var/mob/S = src
+	var/mob/U = usr
+	var/self = null
+
+	if(S == U)
+		self = 1 // Removing object from yourself.
+
+	var/list/limbs = list()
+	for(var/limb in organs_by_name)
+		var/obj/item/organ/external/current_limb = organs_by_name[limb]
+		if(current_limb.dislocated == 2)
+			limbs |= limb
+
+	var/choice = input(src,"Which joint do you wish to relocate?") as null|anything in limbs
+
+	if(!choice)
+		return
+
+	var/obj/item/organ/external/current_limb = organs_by_name[choice]
+
+	if(self)
+		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
+	else
+		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
+
+	if(!do_after(U, 30))
+		return
+	if(!choice || !current_limb || !S || !U)
+		return
+
+	if(self)
+		src << "<span class='danger'>You pop your [current_limb.joint] back in!</span>"
+	else
+		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
+		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
+	current_limb.undislocate()

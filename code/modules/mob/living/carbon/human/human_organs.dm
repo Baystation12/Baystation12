@@ -25,7 +25,7 @@
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/internal/I in internal_organs)
-		I.process()
+		I.process_internal()
 
 	//losing a limb stops it from processing, so this has to be done separately
 	handle_stance()

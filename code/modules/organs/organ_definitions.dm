@@ -12,7 +12,9 @@
 	min_broken_damage = 35
 	body_part = UPPER_TORSO
 	vital = 1
-	joint = "spine"
+	amputation_point = "spines"
+	joint = "neck"
+	dislocated = -1
 
 /obj/item/organ/external/groin
 	limb_name = "groin"
@@ -23,7 +25,9 @@
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = "chest"
-	joint = "lumbar"
+	amputation_point = "lumbar"
+	joint = "hip"
+	dislocated = -1
 
 /obj/item/organ/external/arm
 	limb_name = "l_arm"
@@ -33,7 +37,8 @@
 	min_broken_damage = 30
 	body_part = ARM_LEFT
 	parent_organ = "chest"
-	joint = "left shoulder"
+	joint = "left elbow"
+	amputation_point = "left shoulder"
 
 /obj/item/organ/external/arm/process_internal()
 	..()
@@ -47,7 +52,8 @@
 	min_broken_damage = 30
 	body_part = ARM_RIGHT
 	parent_organ = "chest"
-	joint = "right shoulder"
+	joint = "right elbow"
+	amputation_point = "right shoulder"
 
 /obj/item/organ/external/arm/right/process_internal()
 	..()
@@ -62,7 +68,8 @@
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = "groin"
-	joint = "left hip"
+	joint = "left knee"
+	amputation_point = "left hip"
 
 /obj/item/organ/external/leg/right
 	limb_name = "r_leg"
@@ -71,7 +78,8 @@
 	body_part = LEG_RIGHT
 	icon_position = RIGHT
 	parent_organ = "groin"
-	joint = "right hip"
+	joint = "right knee"
+	amputation_point = "right hip"
 
 /obj/item/organ/external/foot
 	limb_name = "l_foot"
@@ -83,6 +91,7 @@
 	icon_position = LEFT
 	parent_organ = "l_leg"
 	joint = "left ankle"
+	amputation_point = "left ankle"
 
 /obj/item/organ/external/foot/removed()
 	if(owner) owner.u_equip(owner.shoes)
@@ -96,6 +105,7 @@
 	icon_position = RIGHT
 	parent_organ = "r_leg"
 	joint = "right ankle"
+	amputation_point = "right ankle"
 
 /obj/item/organ/external/hand
 	limb_name = "l_hand"
@@ -106,6 +116,7 @@
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	joint = "left wrist"
+	amputation_point = "left wrist"
 
 /obj/item/organ/external/hand/process_internal()
 	..()
@@ -122,6 +133,7 @@
 	body_part = HAND_RIGHT
 	parent_organ = "r_arm"
 	joint = "right wrist"
+	amputation_point = "right wrist"
 
 /obj/item/organ/external/hand/right/process_internal()
 	..()
@@ -136,7 +148,8 @@
 	body_part = HEAD
 	vital = 1
 	parent_organ = "chest"
-	joint = "neck"
+	joint = "jaw"
+	amputation_point = "neck"
 
 /obj/item/organ/external/head/New()
 
@@ -180,24 +193,43 @@
 // Prosthetics.
 /obj/item/organ/external/leg/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/leg/right/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/foot/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/foot/right/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/arm/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/arm/right/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/hand/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/hand/right/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/head/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
+
 /obj/item/organ/external/chest/robot
 	status = ORGAN_ROBOT
+	dislocated = -1
 
 //INTERNAL
 
