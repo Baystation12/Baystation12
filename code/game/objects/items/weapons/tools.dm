@@ -353,6 +353,7 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
+			src.w_class = 4
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -367,6 +368,7 @@
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
+		src.w_class = initial(src.w_class)
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
