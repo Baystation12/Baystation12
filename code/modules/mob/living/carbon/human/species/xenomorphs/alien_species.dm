@@ -10,7 +10,7 @@
 	rarity_value = 3
 
 	has_fine_manipulation = 0
-	insulated = 1
+	siemens_coefficient = 0
 	gluttonous = 2
 
 	eyes = "blank_eyes"

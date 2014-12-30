@@ -1594,7 +1594,7 @@ datum
 			id = "phoron"
 			description = "Phoron in its liquid form."
 			reagent_state = LIQUID
-			color = "#E71B00" // rgb: 231, 27, 0
+			color = "#9D14DB"
 			toxpwr = 3
 
 			on_mob_life(var/mob/living/M as mob)

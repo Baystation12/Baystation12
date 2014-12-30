@@ -280,6 +280,7 @@
 				radiation -= rads
 				nutrition += rads
 				adjustBruteLoss(-(rads))
+				adjustFireLoss(-(rads))
 				adjustOxyLoss(-(rads))
 				adjustToxLoss(-(rads))
 				updatehealth()
@@ -949,10 +950,11 @@
 			traumatic_shock -= light_amount
 
 			if(species.flags & IS_PLANT)
-				if(nutrition > 500)
-					nutrition = 500
+				if(nutrition > 450)
+					nutrition = 450
 				if(light_amount >= 3) //if there's enough light, heal
-					adjustBruteLoss(-(light_amount))
+					adjustBruteLoss(-(round(light_amount/2)))
+					adjustFireLoss(-(round(light_amount/2)))
 					adjustToxLoss(-(light_amount))
 					adjustOxyLoss(-(light_amount))
 					//TODO: heal wounds, heal broken limbs.
@@ -995,7 +997,7 @@
 	proc/handle_regular_status_updates()
 
 		if(status_flags & GODMODE)	return 0
-		
+
 		//SSD check, if a logged player is awake put them back to sleep!
 		if(player_logged && sleeping < 2)
 			sleeping = 2
@@ -1055,7 +1057,7 @@
 				adjustHalLoss(-3)
 				if (mind)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-					if(player_logged) 
+					if(player_logged)
 						sleeping = max(sleeping-1, 2)
 					else
 						sleeping = max(sleeping-1, 0)

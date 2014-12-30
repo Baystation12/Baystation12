@@ -77,8 +77,8 @@ emp_act
 				if (affected.status & ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.display_name] malfunctioning!")
 				else
-					var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
-					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [affected.display_name]!")
+					var/emote_scream = pick("screams in pain and ", "lets out a sharp cry and ", "cries out and ")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ]drops what they were holding in their [affected.display_name]!")
 
 	..(stun_amount, agony_amount, def_zone)
 
@@ -107,7 +107,7 @@ emp_act
 	if (!def_zone)
 		return 1.0
 
-	var/siemens_coefficient = 1.0
+	var/siemens_coefficient = species.siemens_coefficient
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 	for(var/obj/item/clothing/C in clothing_items)
@@ -282,7 +282,7 @@ emp_act
 		forcesay(hit_appends)	//forcesay checks stat already
 
 	//Melee weapon embedded object code.
-	if (I.damtype == BRUTE && !I.is_robot_module())
+	if (I && I.damtype == BRUTE && !I.is_robot_module())
 		var/damage = I.force
 		if (armor)
 			damage /= armor+1

@@ -30,6 +30,20 @@
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
+/obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
+	if(stat & (BROKEN|NOPOWER))
+		if(damage >= 10)
+			if(src.density)
+				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
+				open()
+			else
+				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
+				close()
+		else
+			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
+		return
+	..()
+
 /obj/machinery/door/airlock/command
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'

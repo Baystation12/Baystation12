@@ -98,7 +98,7 @@
 	T.Weaken(5)
 
 	//Only official cool kids get the grab and no self-prone.
-	if(src.mind && !src.mind.special_role)
+	if(!(src.mind && src.mind.special_role))
 		src.Weaken(5)
 		return
 

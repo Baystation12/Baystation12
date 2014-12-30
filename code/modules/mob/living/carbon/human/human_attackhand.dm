@@ -184,7 +184,7 @@
 				return 0
 
 			var/real_damage = rand_damage
-			real_damage += attack.damage // Adding species attack base damage
+			real_damage += attack.get_unarmed_damage(H)
 			real_damage *= damage_multiplier
 			rand_damage *= damage_multiplier
 			if(HULK in H.mutations)
