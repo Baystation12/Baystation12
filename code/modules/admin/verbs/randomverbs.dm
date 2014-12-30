@@ -540,6 +540,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			M.add_ion_law(input)
 			for(var/mob/living/silicon/ai/O in mob_list)
 				O << "\red " + input + "\red...LAWS UPDATED"
+				O.show_laws()
 
 	log_admin("Admin [key_name(usr)] has added a new AI law - [input]")
 	log_admin_single("Admin [key_name(usr)] has added a new AI law - [input]")

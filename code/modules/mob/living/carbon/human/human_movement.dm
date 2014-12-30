@@ -26,7 +26,16 @@
 	if(wear_suit)
 		tally += wear_suit.slowdown
 
-	if(!buckled || (buckled && !istype(buckled, /obj/structure/stool/bed/chair/wheelchair)))
+	if(istype(buckled, /obj/structure/stool/bed/chair/wheelchair))
+		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
+			var/datum/organ/external/E = get_organ(organ_name)
+			if(!E || (E.status & ORGAN_DESTROYED))
+				tally += 4
+			if(E.status & ORGAN_SPLINTED)
+				tally += 0.5
+			else if(E.status & ORGAN_BROKEN)
+				tally += 1.5
+	else
 		if(shoes)
 			tally += shoes.slowdown
 
@@ -38,17 +47,7 @@
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
-
-	if(buckled && istype(buckled, /obj/structure/stool/bed/chair/wheelchair))
-		for(var/organ_name in list("l_hand","r_hand","l_arm","r_arm"))
-			var/datum/organ/external/E = get_organ(organ_name)
-			if(!E || (E.status & ORGAN_DESTROYED))
-				tally += 4
-			if(E.status & ORGAN_SPLINTED)
-				tally += 0.5
-			else if(E.status & ORGAN_BROKEN)
-				tally += 1.5
-
+	
 	if(shock_stage >= 10) tally += 3
 
 	if(FAT in src.mutations)
