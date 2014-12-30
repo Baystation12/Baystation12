@@ -5,10 +5,11 @@
 	return (health < min_broken_damage) || (status & ORGAN_CUT_AWAY) || ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED))
 
 /obj/item/organ/external/is_broken()
-	return ..() || is_dislocated()
+	if(..() || is_dislocated() > 0)
+		return 1
 
 /obj/item/organ/external/proc/is_dislocated()
-	if(dislocated)
+	if(dislocated > 0)
 		return 1
 	if(parent)
 		return parent.is_dislocated()
@@ -20,18 +21,22 @@
 			dislocated = 2
 		else
 			dislocated = 1
+		owner.verbs |= /mob/living/carbon/human/proc/undislocate
+
 	if(children && children.len)
 		for(var/obj/item/organ/external/child in children)
 			child.dislocate()
 
-/obj/item/organ/external/proc/undislocate()
+/obj/item/organ/external/proc/undislocate(var/primary)
 	if(dislocated != -1)
 		dislocated = 0
+		if(owner)
+			owner.shock_stage += 20
+			if(primary && !(owner.species.flags & NO_PAIN))
+				owner.emote("scream")
 	if(children && children.len)
 		for(var/obj/item/organ/external/child in children)
 			child.undislocate()
-	if(owner)
-		owner.shock_stage += 20
 
 /obj/item/organ/proc/is_bleeding()
 	if(istype(owner,/mob/living/carbon/human))

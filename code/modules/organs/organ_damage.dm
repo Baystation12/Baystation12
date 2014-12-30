@@ -61,6 +61,8 @@
 
 /obj/item/organ/internal/take_damage()
 	..()
+	if(!istype(owner))
+		return
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
 	if(prob(5))
 		owner.custom_pain("Something inside your [parent] hurts a lot.", 1)
@@ -101,6 +103,8 @@ This function completely restores a damaged organ to perfect condition.
 	set_damage(0,0)
 
 /obj/item/organ/proc/is_damaged()
+	if(max_health == health)
+		return 0
 	return max_health - health
 
 /obj/item/organ/external/proc/fracture()

@@ -292,11 +292,13 @@
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/W, var/mob/living/user, var/def_zone)
 
 	var/obj/item/organ/external/organ = get_organ(check_zone(def_zone))
-	if(!organ || organ.is_dislocated() || organ.dislocated == -1) //Cannot dislocate this organ.
-		return 0
+	if(!organ || organ.is_dislocated()>0 || organ.dislocated == -1)
+		return 0  //Cannot dislocate this organ.
 
-	user.visible_message("<span class='danger'>[src] has been [pick(W.attack_verb)] in \the [organ] with \the [W] by [user]!</span>")
 	if(prob(W.force))
-		user.visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")] with a grisly crunch!</span>")
-		organ.dislocate()
+		user.visible_message("<span class='danger'>[src]'s [organ.joint] \
+		[pick("gives way","caves in","crumbles","collapses")] with a \
+		[pick("viseral","wet","grating","grisly")] \
+		[pick("pop","crackle","crunch")]!</span>")
+		organ.dislocate(1)
 	return 1

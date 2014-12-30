@@ -23,7 +23,7 @@
 
 	var/joint = "joint"   // Descriptive string used in dislocation.
 	var/amputation_point  // Descriptive string used in amputation.
-	var/dislocated = 0    // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
+	var/dislocated = 0    // If you target a joint, you can dislocate the limb, causing temporary broken status.
 
 	var/obj/item/organ/external/parent // Organ that this organ is attached to.
 	var/list/tissue_layers = list()    // Layers comprising this organ.
@@ -110,7 +110,7 @@
 /obj/item/organ/external/proc/need_process()
 	if(status & ORGAN_ROBOT)	//Missing limb is missing
 		return 0
-	if(brute_dam || burn_dam || germ_level)
+	if(dislocated > 0 || brute_dam || burn_dam || germ_level)
 		return 1
 	return 0
 

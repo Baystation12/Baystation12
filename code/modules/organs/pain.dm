@@ -94,7 +94,7 @@ mob/var/next_pain_time = 0
 	for(var/obj/item/organ/internal/I in internal_organs)
 		if(I.is_damaged() && prob(2))
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
-			src.custom_pain("You feel a sharp pain in your [parent]", 1)
+			src.custom_pain("You feel a sharp pain in your [parent.name].", 1)
 
 	switch(getToxLoss())
 		if(1 to 5)

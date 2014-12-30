@@ -98,10 +98,7 @@
 
 /obj/item/organ/internal/process_internal()
 
-	if(istype(owner))
-		world << "[src] processing inernally with owner [owner]"
-	else
-		world << "[src] processing internally with no owner"
+	..()
 
 	//Process infections
 	if (status & ORGAN_ROBOT)

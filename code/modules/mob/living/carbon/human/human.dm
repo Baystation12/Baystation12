@@ -1306,34 +1306,36 @@
 	var/self = null
 
 	if(S == U)
-		self = 1 // Removing object from yourself.
+		self = 1
 
 	var/list/limbs = list()
-	for(var/limb in organs_by_name)
-		var/obj/item/organ/external/current_limb = organs_by_name[limb]
-		if(current_limb.dislocated == 2)
+	for(var/obj/item/organ/external/limb in organs)
+		if(limb.dislocated == 2)
 			limbs |= limb
 
-	var/choice = input(src,"Which joint do you wish to relocate?") as null|anything in limbs
+	var/obj/item/organ/external/choice = input(U,"Which joint do you wish to relocate?") as null|anything in limbs
 
 	if(!choice)
 		return
 
-	var/obj/item/organ/external/current_limb = organs_by_name[choice]
-
 	if(self)
-		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
+		src << "<span class='warning'>You brace yourself to relocate your [choice.joint]...</span>"
 	else
-		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
+		U << "<span class='warning'>You begin to relocate [S]'s [choice.joint]...</span>"
 
-	if(!do_after(U, 30))
+	if(!do_after(U, 50))
 		return
-	if(!choice || !current_limb || !S || !U)
+	if(!choice || !S || !U)
 		return
 
 	if(self)
-		src << "<span class='danger'>You pop your [current_limb.joint] back in!</span>"
+		src << "<span class='danger'>You pop your [choice.joint] back in!</span>"
 	else
-		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
-		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
-	current_limb.undislocate()
+		U << "<span class='danger'>You pop [S]'s [choice.joint] back in!</span>"
+		S << "<span class='danger'>[U] pops your [choice.joint] back in!</span>"
+	choice.undislocate(1)
+
+	for(var/obj/item/organ/external/limb in organs)
+		if(limb.is_dislocated()==2)
+			return
+	src.verbs -= /mob/living/carbon/human/proc/undislocate

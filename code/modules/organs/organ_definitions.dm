@@ -403,7 +403,8 @@
 			//Damaged one shares the fun
 			else
 				var/obj/item/organ/internal/O = pick(owner.internal_organs)
-				if(O) O.take_damage(0.2*PROCESS_ACCURACY,0)
+				if(O)
+					O.take_damage(0.2*PROCESS_ACCURACY,0)
 
 		//Detox can heal small amounts of damage
 		if (!is_bruised() && owner.reagents.has_reagent("anti_toxin"))
