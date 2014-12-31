@@ -25,18 +25,26 @@
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 
-	// Tasers and stuff? No thanks.
-	if(Proj.damage_type == HALLOSS)
+	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
-	if(istype(Proj, /obj/item/projectile/beam/emitter))
-		Proj.damage /= 4
+	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
+	var/damage = min(Proj.damage, 100) * armor
 
-	take_damage(Proj.damage * armor)
+	take_damage(damage)
 	return
 
-
+/turf/simulated/wall/hitby(AM as mob|obj, var/speed=5)
+	..()
+	if(ismob(AM))
+		return
+	
+	var/tforce = AM:throwforce * (speed/5)
+	if (tforce < 15)
+		return
+	
+	take_damage(tforce * armor)
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
