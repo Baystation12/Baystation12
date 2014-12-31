@@ -282,7 +282,7 @@ emp_act
 		forcesay(hit_appends)	//forcesay checks stat already
 
 	//Melee weapon embedded object code.
-	if (I && I.damtype == BRUTE && !I.is_robot_module())
+	if (I && I.damtype == BRUTE && !I.anchored && !I.is_robot_module())
 		var/damage = I.force
 		if (armor)
 			damage /= armor+1
