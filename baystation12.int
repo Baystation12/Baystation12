@@ -1,6 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\cm_marines\Marine_Weapons_V2.dm;code\modules\cm_marines\closets.dm;code\modules\projectiles\guns\energy\stun.dm;code\modules\cm_marines\marine_areas.dm;code\modules\cm_marines\shuttles.dm;code\modules\cm_marines\newarmor.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules code\modules\cm_marines code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy icons icons\mob maps 
+LAST_COMPILE_TIME: 1419994726
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
