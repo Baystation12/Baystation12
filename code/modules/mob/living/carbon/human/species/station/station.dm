@@ -107,6 +107,9 @@
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
+	hud_type = /datum/hud_data/diona
+	siemens_coefficient = 0.3
+
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
 	there is no effective upper limit to the number that can fuse in gestalt, and reports exist	of the Epsilon Ursae \

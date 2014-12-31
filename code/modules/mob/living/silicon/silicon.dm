@@ -11,7 +11,6 @@
 	var/ioncheck[1]
 	var/obj/item/device/radio/common_radio
 
-	immune_to_ssd = 1
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 

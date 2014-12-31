@@ -280,6 +280,7 @@
 				radiation -= rads
 				nutrition += rads
 				adjustBruteLoss(-(rads))
+				adjustFireLoss(-(rads))
 				adjustOxyLoss(-(rads))
 				adjustToxLoss(-(rads))
 				updatehealth()
@@ -949,10 +950,11 @@
 			traumatic_shock -= light_amount
 
 			if(species.flags & IS_PLANT)
-				if(nutrition > 500)
-					nutrition = 500
+				if(nutrition > 450)
+					nutrition = 450
 				if(light_amount >= 3) //if there's enough light, heal
-					adjustBruteLoss(-(light_amount))
+					adjustBruteLoss(-(round(light_amount/2)))
+					adjustFireLoss(-(round(light_amount/2)))
 					adjustToxLoss(-(light_amount))
 					adjustOxyLoss(-(light_amount))
 					//TODO: heal wounds, heal broken limbs.
@@ -995,6 +997,10 @@
 	proc/handle_regular_status_updates()
 
 		if(status_flags & GODMODE)	return 0
+
+		//SSD check, if a logged player is awake put them back to sleep!
+		if(player_logged && sleeping < 2)
+			sleeping = 2
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
@@ -1050,7 +1056,10 @@
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
-					if((mind.active && client != null) || immune_to_ssd) //This also checks whether a client is connected, if not, sleep is not reduced.
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					if(player_logged)
+						sleeping = max(sleeping-1, 2)
+					else
 						sleeping = max(sleeping-1, 0)
 				blinded = 1
 				stat = UNCONSCIOUS
@@ -1753,6 +1762,9 @@
 	return slurring
 
 /mob/living/carbon/human/handle_stunned()
+	if(species.flags & NO_PAIN)
+		stunned = 0
+		return 0
 	if(..())
 		speech_problem_flag = 1
 	return stunned
