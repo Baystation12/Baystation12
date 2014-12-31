@@ -110,15 +110,15 @@
 	if (!..())
 		return 0
 
-	for(var/obj/effect/decal/cleanable/blood/B in contents)
-		if(!B.blood_DNA[M.dna.unique_enzymes])
-			B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-			B.virus2 = virus_copylist(M.virus2)
+	if(istype(M))
+		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(!B.blood_DNA[M.dna.unique_enzymes])
+				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+				B.virus2 = virus_copylist(M.virus2)
+			return 1 //we bloodied the floor
+		blood_splatter(src,M.get_blood(M.vessel),1)
 		return 1 //we bloodied the floor
-
-	blood_splatter(src,M.get_blood(M.vessel),1)
-	return 1 //we bloodied the floor
-
+	return 0
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
