@@ -340,7 +340,6 @@ This function restores all organs.
 		return 0
 	return
 
-
 /mob/living/carbon/human/proc/get_organ(var/zone)
 	if(!zone)	zone = "chest"
 	if (zone in list( "eyes", "mouth" ))
@@ -348,8 +347,6 @@ This function restores all organs.
 	return organs_by_name[zone]
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
-
-	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 
 	//Handle other types of damage
 	if((damagetype != BRUTE) && (damagetype != BURN))
@@ -369,7 +366,8 @@ This function restores all organs.
 	if(isorgan(def_zone))
 		organ = def_zone
 	else
-		if(!def_zone)	def_zone = ran_zone(def_zone)
+		if(!def_zone)
+			def_zone = ran_zone(def_zone)
 		organ = get_organ(check_zone(def_zone))
 	if(!organ)	return 0
 

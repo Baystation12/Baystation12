@@ -26,38 +26,51 @@
 
 /obj/item/organ/external/take_damage(var/brute, var/burn, var/sharp, var/edge)
 	if(brute)
-		if(sharp || edge)
-			take_cutting_trauma(brute)
-		else
-			take_blunt_trauma(brute)
+		// Try cutting first if we can, but if that fails, count it as brute.
+		if(!sharp || !take_cutting_trauma(brute, sharp, edge))
+			take_blunt_trauma(brute, edge)
 	if(burn)
 		take_burn_trauma(burn)
 	update_health()
 
 // Cutting trauma is focused on a small area and hence wounds multiple layers of tissue.
-/obj/item/organ/external/proc/take_cutting_trauma(var/damage)
-	var/max_depth
+/obj/item/organ/external/proc/take_cutting_trauma(var/damage, var/sharp, var/area)
+	world << "supplied damage is [damage]"
+	var/list/cut_layers = list()
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		damage = round(damage/2)
+		if(tissue_layer.tissue.can_cut_with(sharp))
+			cut_layers |= tissue_layer
+	if(!cut_layers.len) // The object isn't sharp enough to cut through any of the layers we have.
+		return 0
+	damage = round(damage/cut_layers.len)
+	for(var/datum/tissue_layer/tissue_layer in cut_layers)
 		tissue_layer.create_wound(WOUND_CUT, damage)
-		if(damage <= 0)
-			return
+	return 1
 
 // Blunt trauma is diffused over the topmost layer. Can cause wounds below the surface layer.
-/obj/item/organ/external/proc/take_blunt_trauma(var/damage)
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		damage = round(damage/2)
-		tissue_layer.create_wound(WOUND_BRUISE, damage)
-		if(damage <= 0)
-			return
+/obj/item/organ/external/proc/take_blunt_trauma(var/damage, var/area)
+	while(damage > 0)
+		for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+			if(tissue_layer.wound_area >= tissue_layer.area)
+				continue // No more room for wounds.
+			var/bruise_damage = round(damage*0.7)
+			if(bruise_damage == 0)
+				damage = 0
+				break
+			if(damage > bruise_damage)
+				damage -= bruise_damage
+			else
+				damage = 0
+			tissue_layer.create_wound(WOUND_BRUISE, bruise_damage)
 
 // Burn trauma will cover the topmost layer as much as possible before harming deeper layers.
 /obj/item/organ/external/proc/take_burn_trauma(var/damage)
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		damage = round(damage/2)
-		tissue_layer.create_wound(WOUND_BURN, damage)
-		if(damage <= 0)
+		if(tissue_layer.wound_area < tissue_layer.area)
+			tissue_layer.create_wound(WOUND_BURN, damage)
 			return
+	//If the entire surface area of every limb is burned, well, not much we else can do.
+	take_cutting_trauma(round(damage/2), 1, 1)
 
 /obj/item/organ/internal/take_damage()
 	..()

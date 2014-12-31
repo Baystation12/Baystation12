@@ -97,8 +97,11 @@ proc/populate_tissue_list()
 	flags = TISSUE_INFECTS | TISSUE_ORGAN_LAYER
 
 // Maybe generalize this out to a 'sharpness' var on items. Consider using sharp for it.
-/datum/tissue/proc/can_cut_with(var/obj/item/tool)
-	if(tool.sharp >= hardness)
+/datum/tissue/proc/can_cut_with(var/sharpness)
+	if(istype(sharpness,/obj))
+		var/obj/tool = sharpness
+		sharpness = tool.sharp
+	if(sharpness >= hardness)
 		return 1
 	return 0
 
@@ -110,23 +113,22 @@ proc/populate_tissue_list()
 	var/datum/tissue/tissue
 	var/list/wounds = list() // Current wounds.
 
-/datum/tissue_layer/New(var/newloc,var/tissue_type)
-	..()
+/datum/tissue_layer/New(var/tissue_type)
 	if(!tissue_type || !tissues || !tissues[tissue_type])
 		del(src)
 	tissue = tissues[tissue_type]
 
-/datum/tissue_layer/proc/create_wound(var/wound_type = WOUND_CUT, var/wound_depth = 1)
-	var/remainder = 0
+/datum/tissue_layer/proc/create_wound(var/wound_type, var/wound_depth)
 
+	// TODO: merge wounds if wound already exists (based on area)
+	var/remainder = 0
+	if(!wound_depth)
+		wound_depth = 1
+	if(!wound_type)
+		wound_type = WOUND_CUT
 	if(wound_area == area)
 		return wound_depth
-
-	if(wound_depth > wound_area)
-		wound_depth = wound_area
-		remainder = wound_depth - wound_area
-		wound_area = 0
-	wounds += new /datum/wound (src, wound_type, wound_depth)
+	wounds += new /datum/wound (wound_type, wound_depth)
 	update()
 	return remainder
 

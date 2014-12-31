@@ -11,19 +11,19 @@
 	var/icon_position = 0
 	var/icon/mob_icon
 
-	var/damage_state = "00" // Damage overlay key.
-	var/limb_name        // Index for organ lists, etc.
-	var/disfigured = 0      // Is this limb hideously scarred?
-	var/gendered_icon = 0   // During icon generation, does this limb's icon_state require a gender?
-	var/cavity = 0          // Can things currently be hidden in this organ?
-	var/obj/item/hidden     // Holder for cavity item.
+	var/damage_state = "00"            // Damage overlay key.
+	var/limb_name                      // Index for organ lists, etc.
+	var/disfigured = 0                 // Is this limb hideously scarred?
+	var/gendered_icon = 0              // During icon generation, does this limb's icon_state require a gender?
+	var/cavity = 0                     // Can things currently be hidden in this organ?
+	var/obj/item/hidden                // Holder for cavity item.
 
 	var/tmp/perma_injury = 0
-	var/tmp/amputated = 0 // Whether this has been cleanly amputated, thus causing no pain
+	var/tmp/amputated = 0              // Whether this has been cleanly amputated, thus causing no pain
 
-	var/joint = "joint"   // Descriptive string used in dislocation.
-	var/amputation_point  // Descriptive string used in amputation.
-	var/dislocated = 0    // If you target a joint, you can dislocate the limb, causing temporary broken status.
+	var/joint = "joint"                // Descriptive string used in dislocation.
+	var/amputation_point               // Descriptive string used in amputation.
+	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary broken status.
 
 	var/obj/item/organ/external/parent // Organ that this organ is attached to.
 	var/list/tissue_layers = list()    // Layers comprising this organ.
@@ -39,7 +39,11 @@
 
 	tissue_layers = list()
 	for(var/tissue_layer in tissue_types)
-		tissue_layers += new /datum/tissue_layer(src,tissue_layer)
+		tissue_layers += new /datum/tissue_layer(tissue_layer)
+
+	// Each tissue has a max area equivalent to the limb's health divided by number of tissues.
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		tissue_layer.area = round(max_health/tissue_layers.len)
 
 	spawn(1)
 		if(!istype(owner))
@@ -167,10 +171,29 @@
 /obj/item/organ/external/update_health()
 	brute_dam = 0
 	burn_dam = 0
-	status &= ~ORGAN_BLEEDING
-	//var/clamped = 0
-	if (is_open() && is_bleeding())
+
+	var/all_layers_broken = 1
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+
+		if(tissue_layer.wounds.len)
+			for(var/datum/wound/wound in tissue_layer.wounds)
+				if(wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_BRUISE)
+					brute_dam += wound.severity
+				else if(wound.wound_type == WOUND_BURN)
+					burn_dam += wound.severity
+
+		if(tissue_layer.wound_area < tissue_layer.area)
+			all_layers_broken = 0
+
+	if(is_open() && is_bleeding())
 		status |= ORGAN_BLEEDING
+	else
+		status &= ~ORGAN_BLEEDING
+
+	// This is a very, very mangled limb.
+	if(all_layers_broken)
+		droplimb(1)
+
 	..()
 
 /****************************************************
@@ -237,8 +260,8 @@
 			return
 
 	owner.visible_message(
-		"<span class='danger'>[owner.name]'s [src] flies off in an arc!</span>",\
-		"<span class='moderate'><b>Your [src] goes flying off!</b></span>",\
+		"<span class='danger'>[owner.name]'s [src.name] flies off in an arc!</span>",\
+		"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
 		"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
 
 	src.removed(owner)
