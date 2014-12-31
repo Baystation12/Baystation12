@@ -159,12 +159,12 @@
 	icon_state = "power"
 
 /obj/machinery/computer/power_monitor/proc/check_warnings()
-	var/warn = 0
 	if(grid_sensors)
-		for(var/obj/machinery/power/sensor/S in grid_sensors)
+		for(var/name_tag in grid_sensors)
+			var/obj/machinery/power/sensor/S = grid_sensors[name_tag]
 			if(S.check_grid_warning())
-				warn = 1
-	return warn
+				return 1
+	return 0
 
 
 /obj/machinery/computer/power_monitor/power_change()
