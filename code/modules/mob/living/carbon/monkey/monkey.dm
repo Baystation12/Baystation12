@@ -47,21 +47,13 @@
 	greaterform = "Aviskree"
 	uni_append = list(0x040,0xC7D)
 
-/mob/living/carbon/monkey/initialize()
-	if (!species)
-		species = all_species[greaterform]
-		add_language(species.language)
-
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
 
-	//Ensure that the all_species list has been initialized.
-	//If not then this must be round-start and initialize() will
-	//be called directly by the master controller, later.
-	if (ticker && ticker.current_state >= GAME_STATE_SETTING_UP)
-		initialize()
+	species = all_species[greaterform]
+	add_language(species.language)
 
 	if(name == initial(name)) //To stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"

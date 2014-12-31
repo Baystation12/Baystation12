@@ -39,6 +39,7 @@
 				ticker.mode:explosion_in_progress = 0
 		return
 
+/*
 /client/proc/artillery()
 	set category = "Special Verbs"
 	set name = "Fire Bluespace Artillery"
@@ -70,3 +71,4 @@
 			L+=T
 		var/loc = pick(L)
 		explosion(loc,2,5,11)
+*/

@@ -943,7 +943,7 @@
 			dpdir = dir | turn(dir, 180)
 		else
 			dpdir = dir | turn(dir, -90)
-
+			icon_state = "pipe-c"
 		update()
 		return
 

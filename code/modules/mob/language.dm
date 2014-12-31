@@ -156,6 +156,26 @@
 	key = "p"
 	flags = RESTRICTED
 
+/datum/language/mya
+	name = "Mya'"
+	desc = "The regular language of absent minded folks."
+	speech_verb = "myas"
+	ask_verb = "myers"
+	exclaim_verb = "MYAS"
+	//colour = "tajaran"
+	key = "t"
+	//flags = RESTRICTED
+
+/datum/language/hebrew
+	name = "Hebrew"
+	desc = "A language that comes from old religious folks who are good with money."
+	speech_verb = "murmurs"
+	ask_verb = "humms"
+	exclaim_verb = "yells"
+	//colour = "tajaran"
+	key = "r"
+	//flags = RESTRICTED
+
 /datum/language/xenocommon
 	name = "Xenomorph"
 	colour = "alien"

@@ -176,3 +176,9 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+/obj/item/clothing/shoes/flightshoes
+	name = "flight shoes"
+	desc = "Airmen shoes. For airmen."
+	icon_state = "flightshoes"
+	item_state = "flightshoes"

@@ -45,23 +45,27 @@ var/list/mechtoys = list(
 	anchored = 1
 	layer = 4
 	explosion_resistance = 5
+	var/flapcut = 0
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
-	if(istype(A) && A.checkpass(PASSGLASS))
-		return prob(60)
+	if (flapcut == 1)
+		return 1
+	else
+		if(istype(A) && A.checkpass(PASSGLASS))
+			return prob(60)
 
-	var/obj/structure/stool/bed/B = A
-	if (istype(A, /obj/structure/stool/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
-		return 0
-
-	if(istype(A, /obj/vehicle))	//no vehicles
-		return 0
-
-	if(istype(A, /mob/living)) // You Shall Not Pass!
-		var/mob/living/M = A
-		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
+		var/obj/structure/stool/bed/B = A
+		if (istype(A, /obj/structure/stool/bed) && B.buckled_mob)//if it's a bed/chair and someone is buckled, it will not pass
 			return 0
-	return ..()
+
+		if(istype(A, /obj/vehicle))	//no vehicles
+			return 0
+
+		if(istype(A, /mob/living)) // You Shall Not Pass!
+			var/mob/living/M = A
+			if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
+				return 0
+		return ..()
 
 /obj/structure/plasticflaps/ex_act(severity)
 	switch(severity)
@@ -73,6 +77,26 @@ var/list/mechtoys = list(
 		if (3)
 			if (prob(5))
 				del(src)
+
+/obj/structure/plasticflaps/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/weapon/wirecutters))
+		if(flapcut == 1)
+			user << "The [src] is cut already."
+		else
+			flapcut = 1
+			user << "You cut a hole in the [src]."
+			icon_state = "plasticflaps_cut"
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+	if(istype(I, /obj/item/stack/sheet/mineral/plastic))
+		var/obj/item/stack/sheet/mineral/plastic/P = I
+		if(flapcut == 0)
+			user << "The [src] is in no need of repair."
+		else
+			if(P.use(5))
+				flapcut = 0
+				icon_state = "plasticflaps"
+				user << "You repair the hole in the [src] with the [I.name]."
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 /obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
 	name = "\improper Airtight plastic flaps"

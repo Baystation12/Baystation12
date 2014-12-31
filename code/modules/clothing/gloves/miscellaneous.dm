@@ -60,3 +60,11 @@
 	item_state = "ggloves"
 	permeability_coefficient = 0.9
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/gloves/flightgloves
+	desc = "Airmen gloves. Worn by pilots for maximum work output."
+	name = "Flight Gloves"
+	icon_state = "flightgloves"
+	item_state = "flightgloves"
+	item_color = "flightgloves"
+	siemens_coefficient = 0
