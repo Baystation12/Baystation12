@@ -18,8 +18,8 @@
 	var/cavity = 0                     // Can things currently be hidden in this organ?
 	var/obj/item/hidden                // Holder for cavity item.
 
-	var/tmp/perma_injury = 0
-	var/tmp/amputated = 0              // Whether this has been cleanly amputated, thus causing no pain
+	var/amputated = 0                  // Whether this has been cleanly amputated, thus causing no pain
+	var/min_sever_area = 5             // Minimum edge value for a weapon to sever this limb.
 
 	var/joint = "joint"                // Descriptive string used in dislocation.
 	var/amputation_point               // Descriptive string used in amputation.
@@ -86,7 +86,6 @@
 /obj/item/organ/external/rejuvenate()
 	..()
 	damage_state = "00"
-	perma_injury = 0
 
 	// Handle wounded tissue layers.
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
@@ -147,8 +146,6 @@
 	//Bone fracurtes
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & ORGAN_ROBOT))
 		src.fracture()
-	if(!(status & ORGAN_BROKEN))
-		perma_injury = 0
 
 	//Infections
 	update_germs()
@@ -191,8 +188,8 @@
 		status &= ~ORGAN_BLEEDING
 
 	// This is a very, very mangled limb.
-	if(all_layers_broken)
-		droplimb(1)
+	if(all_layers_broken && !(status & ORGAN_DEAD))
+		die()
 
 	..()
 
@@ -211,6 +208,9 @@
 	var/is_robotic = status & ORGAN_ROBOT
 	..()
 
+	status |= ORGAN_DESTROYED
+	owner.bad_external_organs -= src
+
 	for(var/implant in implants) //todo: check if this can be left alone
 		del(implant)
 
@@ -219,15 +219,9 @@
 		tissue_layer.wounds.Cut()
 		tissue_layer.update()
 
-	if (parent)
-		parent.take_damage(20,0,1,1) //todo: amputation should not cause this kind of damage.
-		parent.update_health()
-
-	update_health()
-
 	// Attached organs also fly off.
 	for(var/obj/item/organ/external/O in children)
-		O.droplimb(1)
+		O.removed(owner)
 		O.loc = src //TODO: generate entire limb icons from contents.
 
 	release_restraints()
@@ -251,13 +245,14 @@
 		del(src)
 
 //Handles dismemberment
-/obj/item/organ/external/proc/droplimb(var/override = 0)
+/obj/item/organ/external/proc/droplimb(var/clean)
 
-	if(override)
-		status |= ORGAN_DESTROYED
 	if(status & ORGAN_DESTROYED)
 		if(body_part == UPPER_TORSO)
 			return
+
+	//if(!clean)
+	//	var/obj/item/organ/external/stump/stump = new(owner,
 
 	owner.visible_message(
 		"<span class='danger'>[owner.name]'s [src.name] flies off in an arc!</span>",\
@@ -266,7 +261,14 @@
 
 	src.removed(owner)
 
-	//Throw organs around
+	if(parent)
+		parent.take_damage(20,0,50,0) // Leave a bloody stump to remember us by.
+		parent.update_health()
+		parent = null
+
+	update_health()
+
+	//Throw limb around
 	if(src && owner && istype(owner.loc,/turf))
 		step(src,pick(cardinal))
 
@@ -308,12 +310,38 @@
 		spawn(10)
 			del(spark_system)
 
-/obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
+/obj/item/organ/external/proc/try_embed(var/obj/item/weapon/W, var/silent = 0, var/forced_embed = 0, var/mob/living/carbon/user)
+
+	if(W.anchored)
+		return
+
+	var/embedded_in = 0 //Set this on a successful embed.
+	// Embed the object appropriately within the tissue layers.
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		var/datum/wound/wound = tissue_layer.is_cut()
+		if(wound)
+			embedded_in++
+			wound.embedded = W
+		else
+			break
+
+	if(embedded_in > 0)
+		if(user)
+			user.drop_from_inventory(W)
+		var/datum/tissue_layer/tissue_layer = tissue_layers[embedded_in]
+		do_embed(W, tissue_layer.tissue.descriptor, silent)
+
+	return embedded_in
+
+/obj/item/organ/external/proc/do_embed(var/obj/item/weapon/W, var/layer_stuck = "wound", var/silent = 0)
+
 	if(!silent)
-		owner.visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+		owner.visible_message("<span class='danger'>\The [W] sticks in the [layer_stuck]!</span>")
+
+	W.loc = src
 	implants += W
 	owner.embedded_flag = 1
-	owner.verbs += /mob/proc/yank_out_object
+	owner.verbs |= /mob/proc/yank_out_object
 	W.add_blood(owner)
 	if(ismob(W.loc))
 		var/mob/living/H = W.loc

@@ -94,7 +94,7 @@
 	force = 10.0
 	throwforce = 10.0
 	sharp = 1
-	edge = 1
+	edge = 5
 
 	suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
@@ -137,7 +137,7 @@
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
 	flags = FPRINT | TABLEPASS | CONDUCT
 	sharp = HARDNESS_SCALPEL
-	edge = 1
+	edge = 15
 	force = 10.0
 	w_class = 3.0
 	throwforce = 6.0
@@ -177,7 +177,7 @@
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = HARDNESS_SAW
-	edge = 1
+	edge = 25
 
 /obj/item/weapon/butch/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)

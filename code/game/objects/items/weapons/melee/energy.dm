@@ -13,7 +13,7 @@
 	force = active_force
 	throwforce = active_throwforce
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 20
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 
@@ -73,7 +73,7 @@
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 30
 
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
@@ -167,7 +167,7 @@
 	icon_state = "blade"
 	force = 70.0//Normal attacks deal very high damage.
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 25
 	anchored = 1    // Never spawned outside of inventory, should be fine.
 	throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1

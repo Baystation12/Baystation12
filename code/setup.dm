@@ -556,6 +556,11 @@
 #define HARDNESS_SAW 10
 #define HARDNESS_TORCH 15
 
+#define WOUND_CLOSED 0
+#define WOUND_OPEN 1
+#define WOUND_RETRACTED 2
+#define WOUND_SUTURED 3
+
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
 //Please don't edit these values without speaking to Errorage first	~Carn

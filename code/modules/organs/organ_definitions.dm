@@ -15,6 +15,7 @@
 	amputation_point = "spines"
 	joint = "neck"
 	dislocated = -1
+	min_sever_area = 25
 
 /obj/item/organ/external/groin
 	limb_name = "groin"
@@ -28,6 +29,7 @@
 	amputation_point = "lumbar"
 	joint = "hip"
 	dislocated = -1
+	min_sever_area = 25
 
 /obj/item/organ/external/arm
 	limb_name = "l_arm"
@@ -39,6 +41,7 @@
 	parent_organ = "chest"
 	joint = "left elbow"
 	amputation_point = "left shoulder"
+	min_sever_area = 10
 
 /obj/item/organ/external/arm/process_internal()
 	..()
@@ -70,6 +73,7 @@
 	parent_organ = "groin"
 	joint = "left knee"
 	amputation_point = "left hip"
+	min_sever_area = 10
 
 /obj/item/organ/external/leg/right
 	limb_name = "r_leg"
@@ -150,6 +154,7 @@
 	parent_organ = "chest"
 	joint = "jaw"
 	amputation_point = "neck"
+	min_sever_area = 15
 
 /obj/item/organ/external/head/New()
 
@@ -178,7 +183,7 @@
 
 			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
 
-	limb_name = "[owner.real_name]'s [name]"
+	name = "[owner.real_name]'s [name]"
 	owner.regenerate_icons()
 
 /obj/item/organ/external/head/removed()

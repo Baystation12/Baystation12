@@ -34,43 +34,64 @@
 	update_health()
 
 // Cutting trauma is focused on a small area and hence wounds multiple layers of tissue.
-/obj/item/organ/external/proc/take_cutting_trauma(var/damage, var/sharp, var/area)
-	world << "supplied damage is [damage]"
+/obj/item/organ/external/proc/take_cutting_trauma(var/damage, var/sharp, var/weapon_area)
+
 	var/list/cut_layers = list()
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		if(tissue_layer.tissue.can_cut_with(sharp))
 			cut_layers |= tissue_layer
 	if(!cut_layers.len) // The object isn't sharp enough to cut through any of the layers we have.
 		return 0
+
 	damage = round(damage/cut_layers.len)
+	var/thickest_layer = 0
+	var/spillover = 0
+
+	// Split the damage up against all available layers.
+	// Areas that can fit no more wounds have damage carry over
+	// to lower levels. If the amount is significant, sever the limb.
 	for(var/datum/tissue_layer/tissue_layer in cut_layers)
-		tissue_layer.create_wound(WOUND_CUT, damage)
+		var/layer_damage = damage
+		if(spillover)
+			layer_damage += spillover
+			spillover = 0
+		if(tissue_layer.area > thickest_layer)
+			thickest_layer = tissue_layer.area
+		spillover = tissue_layer.create_wound(WOUND_CUT, damage)
+	owner.shock_stage += spillover
+	// If all the tissue layers are cut through and there's enough damage left over to get through the thickest, sever.
+	if(cut_layers.len >= tissue_layers.len && weapon_area >= min_sever_area && weapon_area + spillover > thickest_layer)
+		status |= ORGAN_DESTROYED
+		droplimb()
 	return 1
 
 // Blunt trauma is diffused over the topmost layer. Can cause wounds below the surface layer.
 /obj/item/organ/external/proc/take_blunt_trauma(var/damage, var/area)
-	while(damage > 0)
-		for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-			if(tissue_layer.wound_area >= tissue_layer.area)
-				continue // No more room for wounds.
-			var/bruise_damage = round(damage*0.7)
-			if(bruise_damage == 0)
-				damage = 0
-				break
-			if(damage > bruise_damage)
-				damage -= bruise_damage
-			else
-				damage = 0
-			tissue_layer.create_wound(WOUND_BRUISE, bruise_damage)
+	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+		if(tissue_layer.wound_area >= tissue_layer.area)
+			continue // No more room for wounds.
+		var/bruise_damage = round(damage*0.7)
+		if(bruise_damage <= 0)
+			damage = 0
+			break
+		if(damage > bruise_damage)
+			damage -= bruise_damage
+		else
+			damage = 0
+		if(damage)
+			tissue_layer.create_wound(WOUND_BRUISE, bruise_damage, WOUND_CLOSED)
+		else
+			return
+	owner.shock_stage += damage //If you can't wound them, dump it into pain.
 
 // Burn trauma will cover the topmost layer as much as possible before harming deeper layers.
 /obj/item/organ/external/proc/take_burn_trauma(var/damage)
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.wound_area < tissue_layer.area)
-			tissue_layer.create_wound(WOUND_BURN, damage)
+		damage -= tissue_layer.create_wound(WOUND_BURN, damage)
+		if(damage <= 0)
 			return
 	//If the entire surface area of every limb is burned, well, not much we else can do.
-	take_cutting_trauma(round(damage/2), 1, 1)
+	take_cutting_trauma((damage/2), 1, 1)
 
 /obj/item/organ/internal/take_damage()
 	..()
@@ -92,11 +113,9 @@
 		die()
 
 /obj/item/organ/proc/die()
-	name = "dead [initial(name)]"
 	status |= ORGAN_DEAD
 	health = 0
 	processing_objects -= src
-
 	//TODO: Grey out the icon state.
 	//TODO: Inject an organ with peridaxon to make it alive again.
 
@@ -134,7 +153,6 @@ This function completely restores a damaged organ to perfect condition.
 		owner.emote("scream")
 
 	status |= ORGAN_BROKEN
-	perma_injury = brute_dam
 
 	// Fractures have a chance of getting you out of restraints
 	if (prob(25))

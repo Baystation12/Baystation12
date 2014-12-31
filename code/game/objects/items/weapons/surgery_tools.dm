@@ -144,7 +144,7 @@
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharp = HARDNESS_SAW
-	edge = 1
+	edge = 15
 
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/bonegel

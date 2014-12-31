@@ -232,7 +232,7 @@
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\blue [user] amputates [target]'s [affected] with \the [tool].", \
 		"\blue You amputate [target]'s [affected] with \the [tool].")
-		affected.droplimb(1,0)
+		affected.droplimb()
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)

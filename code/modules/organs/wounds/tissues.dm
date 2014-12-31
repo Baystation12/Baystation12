@@ -118,17 +118,32 @@ proc/populate_tissue_list()
 		del(src)
 	tissue = tissues[tissue_type]
 
-/datum/tissue_layer/proc/create_wound(var/wound_type, var/wound_depth)
+/datum/tissue_layer/proc/create_wound(var/wound_type, var/wound_severity, var/wound_state)
 
-	// TODO: merge wounds if wound already exists (based on area)
-	var/remainder = 0
-	if(!wound_depth)
-		wound_depth = 1
+	if(!wound_severity)
+		wound_severity = 0
+	if(wound_area >= area)
+		return wound_severity
 	if(!wound_type)
 		wound_type = WOUND_CUT
-	if(wound_area == area)
-		return wound_depth
-	wounds += new /datum/wound (wound_type, wound_depth)
+
+	var/remainder = 0
+	var/available_area = area - wound_area
+	if(wound_severity > available_area)
+		remainder = wound_severity-available_area
+		wound_severity = available_area
+
+	if(prob((wound_area/area)*100)) //% chance based on current coverage to just make a previous wound worse.
+		for(var/datum/wound/wound in wounds)
+			if(wound.wound_type == wound_type)
+				if(wound_type == WOUND_CUT)
+					wound.expand(wound_severity,1)
+				else
+					wound.expand(wound_severity)
+				break
+	else
+		wounds += new /datum/wound(wound_type, wound_severity)
+
 	update()
 	return remainder
 
@@ -161,19 +176,22 @@ proc/populate_tissue_list()
 	update()
 	return heal
 
-/datum/tissue_layer/proc/is_open()
-	for(var/datum/wound/wound in wounds)
-		if(wound.status == WOUND_RETRACTED)
-			return 1
-	return 0
-
 /datum/tissue_layer/proc/is_wounded()
 	return wound_area > 0
 
+/datum/tissue_layer/proc/is_open()
+	if(is_wounded())
+		for(var/datum/wound/wound in wounds)
+			if(wound.status == WOUND_RETRACTED)
+				return wound
+	return 0
+
 /datum/tissue_layer/proc/is_cut()
-	for(var/datum/wound/wound in wounds)
-		if(wound.status == WOUND_OPEN || wound.status == WOUND_RETRACTED)
-			return 1
+	if(is_wounded())
+		for(var/datum/wound/wound in wounds)
+			if(wound.status == WOUND_OPEN || wound.status == WOUND_RETRACTED)
+				return wound
+	return 0
 
 /datum/tissue_layer/proc/is_bleeding()
 	return (tissue.flags & TISSUE_BLEEDS) && is_wounded()

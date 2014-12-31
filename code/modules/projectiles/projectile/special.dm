@@ -18,7 +18,7 @@
 	damage = 50
 	flag = "bullet"
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 30 // Should be able to blow off limbs.
 
 	on_hit(var/atom/target, var/blocked = 0)
 		explosion(target, -1, 0, 2)

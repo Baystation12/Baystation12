@@ -1,21 +1,27 @@
-#define WOUND_OPEN 1
-#define WOUND_RETRACTED 2
-#define WOUND_SUTURED 3
 
 /datum/wound
 	var/severity = 1
-	var/status = WOUND_OPEN
+	var/status = WOUND_CLOSED
 	var/wound_type = WOUND_CUT
 	var/germ_level = 0
 	var/wound_str
 	var/obj/item/embedded // If something is inside this wound.
 
 /datum/wound/New(var/new_wound_type, var/new_size)
-	world << "new wound with [new_wound_type] and [new_size] instantiated"
 	if(!new_size)
 		new_size = 1
 	if(new_size) severity = new_size
-	if(new_wound_type) wound_type  = new_wound_type
+	if(new_wound_type)
+		wound_type  = new_wound_type
+	if(wound_type == WOUND_CUT)
+		status = WOUND_OPEN
+	update_wound_descriptor()
+
+/datum/wound/proc/expand(var/amount, var/edged)
+	severity += amount
+	if(edged && status != WOUND_OPEN)
+		if(status != WOUND_SUTURED || prob(25))
+			status = WOUND_OPEN
 	update_wound_descriptor()
 
 /datum/wound/proc/heal(var/healing)

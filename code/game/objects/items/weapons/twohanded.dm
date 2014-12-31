@@ -115,7 +115,7 @@
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	force = 10
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 15
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_wielded = 40
@@ -160,7 +160,7 @@
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = HARDNESS_TORCH
-	edge = 1
+	edge = 25
 
 /obj/item/weapon/twohanded/dualsaber/update_icon()
 	icon_state = "dualsaber[wielded]"

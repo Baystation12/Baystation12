@@ -104,7 +104,7 @@
 	force = 40
 	throwforce = 10
 	sharp = HARDNESS_SAW
-	edge = 1
+	edge = 30
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -129,7 +129,7 @@
 	force = 40
 	throwforce = 10
 	sharp = HARDNESS_SAW
-	edge = 1
+	edge = 15
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -244,7 +244,7 @@
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		force = 15 //bay adjustments
 		throwforce = 12
-		edge = 1
+		edge = 5
 		sharp = HARDNESS_SCALPEL
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"

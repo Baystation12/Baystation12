@@ -1541,7 +1541,7 @@
 				E.cavity = 0
 			else 		//someone is having a bad day
 				E.take_damage(30, 0, 1, 1)
-				E.embed(surprise)
+				E.do_embed(surprise)
 		else if (ismonkey(M))
 			M.visible_message("<span class='danger'>[M] suddenly tears in half!</span>")
 			var/mob/living/carbon/monkey/ook = new monkey_type(M.loc)

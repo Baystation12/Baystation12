@@ -102,7 +102,7 @@
 	item_state = "beer"
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = HARDNESS_SCALPEL
-	edge = 0
+	edge = 5
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/weapon/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

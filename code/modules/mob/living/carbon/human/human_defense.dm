@@ -24,7 +24,7 @@ emp_act
 			if(!(def_zone in list("chest", "groin")))
 				reflectchance /= 2
 			if(prob(reflectchance))
-				visible_message("\red <B>The [P.name] gets reflected by [src]'s [wear_suit.name]!</B>")
+				visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s [wear_suit.name]!</span>")
 
 				// Find a turf near or on the original location to bounce to
 				if(P.starting)
@@ -50,7 +50,7 @@ emp_act
 			(SP.name) = "[P.name] shrapnel"
 			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
 			(SP.loc) = organ
-			organ.embed(SP)
+			organ.do_embed(SP)
 
 	return (..(P , def_zone))
 
@@ -143,17 +143,17 @@ emp_act
 	if(l_hand && istype(l_hand, /obj/item/weapon))//Current base is the prob(50-d/3)
 		var/obj/item/weapon/I = l_hand
 		if(I.IsShield() && (prob(50 - round(damage / 3))))
-			visible_message("\red <B>[src] blocks [attack_text] with the [l_hand.name]!</B>")
+			visible_message("<span class='danger'>[src] blocks [attack_text] with the [l_hand.name]!</span>")
 			return 1
 	if(r_hand && istype(r_hand, /obj/item/weapon))
 		var/obj/item/weapon/I = r_hand
 		if(I.IsShield() && (prob(50 - round(damage / 3))))
-			visible_message("\red <B>[src] blocks [attack_text] with the [r_hand.name]!</B>")
+			visible_message("<span class='danger'>[src] blocks [attack_text] with the [r_hand.name]!</span>")
 			return 1
 	if(wear_suit && istype(wear_suit, /obj/item/))
 		var/obj/item/I = wear_suit
 		if(I.IsShield() && (prob(35)))
-			visible_message("\red <B>The reactive teleport system flings [src] clear of [attack_text]!</B>")
+			visible_message("<span class='danger'>The reactive teleport system flings [src] clear of [attack_text]!</span>")
 			var/list/turfs = new/list()
 			for(var/turf/T in orange(6))
 				if(istype(T,/turf/space)) continue
@@ -190,7 +190,7 @@ emp_act
 	if(user == src) // Attacking yourself can't miss
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
-		visible_message("\red <B>[user] misses [src] with \the [I]!")
+		visible_message("<span class='danger'>[user] misses [src] with \the [I]!</span>")
 		return 0
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
@@ -263,7 +263,7 @@ emp_act
 			if("chest")//Easier to score a stun but lasts less time
 				if(prob((I.force + 10)))
 					apply_effect(6, WEAKEN, armor)
-					visible_message("\red <B>[src] has been knocked down!</B>")
+					visible_message("<span class='danger'>[src] has been knocked down!</span>")
 
 				if(bloody)
 					bloody_body(src)
@@ -283,7 +283,8 @@ emp_act
 
 		//Sharp objects will always embed if they do enough damage.
 		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
-			affecting.embed(I)
+			affecting.try_embed(I,0,0,user)
+
 	return 1
 
 //this proc handles being hit by a thrown atom
@@ -331,7 +332,7 @@ emp_act
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		var/hit_area = affecting.name
 
-		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
+		src.visible_message("<span class='danger'>[src] has been hit in the [hit_area] by [O].</span>")
 		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 
 		if(armor < 2)
@@ -345,6 +346,14 @@ emp_act
 				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
 				if(!istype(src,/mob/living/simple_animal/mouse))
 					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+
+
+		// Begin BS12 momentum-transfer code.
+		if(O.throw_source && speed >= 15)
+			var/momentum = speed/2
+			var/dir = get_dir(O.throw_source, src)
+			visible_message("<span class='danger'>[src] staggers under the impact!</span>","<span class='danger'>You stagger under the impact!</span>")
+			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 		//thrown weapon embedded object code.
 		if(dtype == BRUTE && istype(O,/obj/item))
@@ -362,27 +371,15 @@ emp_act
 				//Sharp objects will always embed if they do enough damage.
 				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
 				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
-					affecting.embed(I)
+					if(affecting.try_embed(I) > 2) //Projectile is embedded and suitable for pinning.
+						var/turf/T = near_wall(dir,2)
+						if(T)
+							src.loc = T
+							visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+							src.anchored = 1
+							src.pinned += O
 
-		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= 15)
-			var/obj/item/weapon/W = O
-			var/momentum = speed/2
-			var/dir = get_dir(O.throw_source, src)
 
-			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
-
-			if(!W || !src) return
-
-			if(W.loc == src && W.sharp) //Projectile is embedded and suitable for pinning.
-				var/turf/T = near_wall(dir,2)
-
-				if(T)
-					src.loc = T
-					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
-					src.pinned += O
 
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)

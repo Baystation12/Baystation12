@@ -1085,13 +1085,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 					affected = organ
 
 		affected.implants -= selection
-		H.shock_stage+=20
 		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
 
-		//if(prob(selection.w_class * 5)) //I'M SO ANEMIC I COULD JUST -DIE-.
-		//	var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
-		//	affected.wounds += I
-		//	H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
+			for(var/datum/wound/wound in tissue_layer.wounds)
+				if(wound.embedded == selection)
+					wound.expand(selection.edge+rand(1,3))
+					H.shock_stage+=20
+		affected.update_health()
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
