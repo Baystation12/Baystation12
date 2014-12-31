@@ -17,7 +17,7 @@
 	icon_state= "bolter"
 	damage = 50
 	flag = "bullet"
-	sharp = 1
+	sharp = HARDNESS_TORCH
 	edge = 1
 
 	on_hit(var/atom/target, var/blocked = 0)

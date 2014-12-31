@@ -11,7 +11,7 @@
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
-	sharp = 1
+	sharp = HARDNESS_TORCH
 	edge = 1
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
@@ -69,7 +69,7 @@
 	flags = FPRINT | CONDUCT | NOSHIELD | TABLEPASS | NOBLOODY
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	sharp = 1
+	sharp = HARDNESS_TORCH
 	edge = 1
 
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
@@ -156,7 +156,7 @@
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
 	force = 70.0//Normal attacks deal very high damage.
-	sharp = 1
+	sharp = HARDNESS_TORCH
 	edge = 1
 	throwforce = 1//Throwing or dropping the item deletes it.
 	throw_speed = 1

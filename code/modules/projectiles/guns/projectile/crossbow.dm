@@ -9,7 +9,7 @@
 	flags =  FPRINT | TABLEPASS
 	throwforce = 8
 	w_class = 3.0
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 0
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
@@ -18,7 +18,7 @@
 /obj/item/weapon/spike
 	name = "alloy spike"
 	desc = "It's about a foot of weird silver metal with a wicked point."
-	sharp = 1
+	sharp = HARDNESS_TORCH
 	edge = 0
 	throwforce = 5
 	w_class = 2

@@ -320,7 +320,7 @@
 	throwforce = 15.0
 	throw_speed = 4
 	throw_range = 4
-	sharp = 1
+	sharp = HARDNESS_SAW
 	edge = 1
 	matter = list("metal" = 15000)
 	origin_tech = "materials=2;combat=1"

@@ -6,7 +6,7 @@
 	nodamage = 0
 	flag = "bullet"
 	embed = 1
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 
 	on_hit(var/atom/target, var/blocked = 0)
 		if (..(target, blocked))

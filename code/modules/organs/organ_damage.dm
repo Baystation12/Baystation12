@@ -36,6 +36,7 @@
 
 // Cutting trauma is focused on a small area and hence wounds multiple layers of tissue.
 /obj/item/organ/external/proc/take_cutting_trauma(var/damage)
+	var/max_depth
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		damage = round(damage/2)
 		tissue_layer.create_wound(WOUND_CUT, damage)

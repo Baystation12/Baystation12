@@ -81,8 +81,8 @@
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
-	sharp = 1
-	edge = 1
+	sharp = 0
+	edge = 0
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -103,7 +103,7 @@
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
-	sharp = 1
+	sharp = HARDNESS_SAW
 	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -128,7 +128,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
 	throwforce = 10
-	sharp = 1
+	sharp = HARDNESS_SAW
 	edge = 1
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -146,7 +146,7 @@
 
 /obj/item/weapon/harpoon
 	name = "harpoon"
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 0
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
@@ -245,7 +245,7 @@
 		force = 15 //bay adjustments
 		throwforce = 12
 		edge = 1
-		sharp = 1
+		sharp = HARDNESS_SCALPEL
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3
@@ -303,7 +303,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	throw_speed = 10
 	throwforce =  15
 	throw_range = 15
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge =  1
 	matter = list("metal" = 500)
 

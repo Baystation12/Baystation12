@@ -3,7 +3,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
 	damage = 5
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 1
 
 /datum/unarmed_attack/diona
@@ -17,7 +17,7 @@
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	damage = 5
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 1
 
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)

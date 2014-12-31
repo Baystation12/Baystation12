@@ -210,6 +210,7 @@
 		if(0)
 			if(src.icon_state != "welder") //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 3
+				src.sharp = 0
 				src.damtype = "brute"
 				src.icon_state = "welder"
 				src.welding = 0
@@ -219,6 +220,7 @@
 		if(1)
 			if(src.icon_state != "welder1") //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 15
+				src.sharp = HARDNESS_TORCH
 				src.damtype = "fire"
 				src.icon_state = "welder1"
 			if(prob(5))
@@ -331,6 +333,7 @@
 		if (remove_fuel(1))
 			usr << "\blue You switch the [src] on."
 			src.force = 15
+			src.sharp = HARDNESS_TORCH
 			src.damtype = "fire"
 			src.icon_state = "welder1"
 			src.w_class = 4
@@ -345,6 +348,7 @@
 		else
 			usr << "\blue The [src] shuts off!"
 		src.force = 3
+		src.sharp = 0
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0

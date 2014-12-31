@@ -1,9 +1,3 @@
-// Tissue macros.
-// Tool values
-#define HARDNESS_SCALPEL 1
-#define HARDNESS_SAW 2
-#define HARDNESS_TORCH 3
-
 var/global/list/tissues = list()
 proc/populate_tissue_list()
 	for(var/T in typesof(/datum/tissue)-/datum/tissue)
@@ -104,20 +98,8 @@ proc/populate_tissue_list()
 
 // Maybe generalize this out to a 'sharpness' var on items. Consider using sharp for it.
 /datum/tissue/proc/can_cut_with(var/obj/item/tool)
-	switch(hardness)
-		if(HARDNESS_SCALPEL)
-			if(istype(tool,/obj/item/weapon/scalpel))
-				return 1
-		if(HARDNESS_SAW)
-			if(istype(tool,/obj/item/weapon/circular_saw))
-				return 1
-		if(HARDNESS_TORCH)
-			if(istype(tool,/obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/W = tool
-				if(W.isOn())
-					return 1
-		else
-			return 1
+	if(tool.sharp >= hardness)
+		return 1
 	return 0
 
 // This datum is distinct from the previous in that it is just a holder/reference for
