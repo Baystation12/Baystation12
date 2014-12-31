@@ -66,7 +66,7 @@
 // If drain_check is set it will not actually drain power, just return a value.
 // If surge is set, it will destroy/damage the recipient and not return any power.
 // Not sure where to define this, so it can sit here for the rest of time.
-/atom/proc/drain_power(var/drain_check,var/surge)
+/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
 // Show a message to all mobs in earshot of this one

@@ -22,6 +22,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.1
 	permeability_coefficient = 0.1
+	unacidable = 1
 
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
@@ -127,6 +128,7 @@
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
+		chest.slowdown = offline_slowdown
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -141,6 +143,7 @@
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
+		piece.unacidable = unacidable
 
 	update_icon(1)
 
@@ -235,12 +238,8 @@
 								if(!seal_target)
 									if(flags & AIRTIGHT)
 										helmet.flags |= AIRTIGHT
-									helmet.flags_inv |= (HIDEEYES|HIDEFACE|HIDEMASK)
-									helmet.body_parts_covered |= (FACE|EYES)
 								else
 									helmet.flags &= ~AIRTIGHT
-									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE|HIDEMASK)
-									helmet.body_parts_covered &= ~(FACE|EYES)
 								helmet.update_light(wearer)
 				else
 					failed_to_seal = 1
@@ -259,13 +258,9 @@
 			if(canremove)
 				if(flags & AIRTIGHT)
 					helmet.flags |= AIRTIGHT
-				helmet.flags_inv          |= (HIDEEYES|HIDEFACE)
-				helmet.body_parts_covered |= (FACE|EYES)
 			else
 				if(flags & AIRTIGHT)
 					helmet.flags &= ~AIRTIGHT
-				helmet.flags_inv          &= ~(HIDEEYES|HIDEFACE)
-				helmet.body_parts_covered &= ~(FACE|EYES)
 		update_icon(1)
 		return 0
 
@@ -312,14 +307,14 @@
 	else
 		if(offline)
 			offline = 0
-			slowdown = initial(slowdown)
+			chest.slowdown = initial(slowdown)
 
 	if(offline)
 		if(offline == 1)
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
 			offline = 2
-			slowdown = offline_slowdown
+			chest.slowdown = offline_slowdown
 		return
 
 	if(cell && cell.charge > 0 && electrified > 0)
@@ -520,12 +515,21 @@
 					module.charge_selected = href_list["charge_type"]
 	else if(href_list["toggle_ai_control"])
 		ai_override_enabled = !ai_override_enabled
+		notify_ai("Synthetic suit control has been [ai_override_enabled ? "enabled" : "disabled"].")
 	else if(href_list["toggle_suit_lock"])
 		locked = !locked
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	return
+
+/obj/item/weapon/rig/proc/notify_ai(var/message)
+	if(!message || !installed_modules || !installed_modules.len)
+		return
+	for(var/obj/item/rig_module/module in installed_modules)
+		for(var/mob/living/silicon/ai/ai in module.contents)
+			if(ai && ai.client && !ai.stat)
+				ai << "[message]"
 
 /obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
 	..()
@@ -547,11 +551,7 @@
 
 /obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
 
-	if(sealing)
-		return
-
-	if(!cell || !cell.charge)
-		H << "<span class='warning'>The suit is out of power.</span>"
+	if(sealing || !cell || !cell.charge)
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
