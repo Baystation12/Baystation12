@@ -154,15 +154,15 @@
 
 
 
-/obj/machinery/door/hitby(AM as mob|obj)
+/obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
 
 	..()
 	visible_message("\red <B>[src.name] was hit by [AM].</B>")
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 15
+		tforce = 15 * (speed/5)
 	else
-		tforce = AM:throwforce
+		tforce = AM:throwforce * (speed/5)
 	playsound(src.loc, hitsound, 100, 1)
 	take_damage(tforce)
 	return
