@@ -7,6 +7,7 @@
 #define FILE_DIR .
 // END_FILE_DIR
 // BEGIN_PREFERENCES
+#define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "code\global.dm"
@@ -316,7 +317,6 @@
 #include "code\game\machinery\machinery.dm"
 #include "code\game\machinery\magnet.dm"
 #include "code\game\machinery\mass_driver.dm"
-#include "code\game\machinery\monkeyrecycler.dm"
 #include "code\game\machinery\navbeacon.dm"
 #include "code\game\machinery\newscaster.dm"
 #include "code\game\machinery\OpTable.dm"
@@ -328,6 +328,7 @@
 #include "code\game\machinery\robot_fabricator.dm"
 #include "code\game\machinery\seed_extractor.dm"
 #include "code\game\machinery\Sleeper.dm"
+#include "code\game\machinery\slime_processor.dm"
 #include "code\game\machinery\spaceheater.dm"
 #include "code\game\machinery\status_display.dm"
 #include "code\game\machinery\suit_storage_unit.dm"
@@ -371,7 +372,6 @@
 #include "code\game\machinery\computer\HolodeckControl.dm"
 #include "code\game\machinery\computer\hologram.dm"
 #include "code\game\machinery\computer\law.dm"
-#include "code\game\machinery\computer\lift.dm"
 #include "code\game\machinery\computer\medical.dm"
 #include "code\game\machinery\computer\message.dm"
 #include "code\game\machinery\computer\Operating.dm"
@@ -523,7 +523,6 @@
 #include "code\game\objects\items\devices\radio\headset.dm"
 #include "code\game\objects\items\devices\radio\intercom.dm"
 #include "code\game\objects\items\devices\radio\radio.dm"
-#include "code\game\objects\items\robot\robot_extra_parts.dm"
 #include "code\game\objects\items\robot\robot_items.dm"
 #include "code\game\objects\items\robot\robot_parts.dm"
 #include "code\game\objects\items\robot\robot_upgrades.dm"
@@ -611,7 +610,6 @@
 #include "code\game\objects\structures\barsign.dm"
 #include "code\game\objects\structures\bedsheet_bin.dm"
 #include "code\game\objects\structures\coathanger.dm"
-#include "code\game\objects\structures\coffindispenser.dm"
 #include "code\game\objects\structures\curtains.dm"
 #include "code\game\objects\structures\displaycase.dm"
 #include "code\game\objects\structures\door_assembly.dm"
@@ -1484,7 +1482,6 @@
 #include "code\WorkInProgress\computer3\computers\crew.dm"
 #include "code\WorkInProgress\computer3\computers\customs.dm"
 #include "code\WorkInProgress\computer3\computers\HolodeckControl.dm"
-#include "code\WorkInProgress\computer3\computers\iaa.dm"
 #include "code\WorkInProgress\computer3\computers\law.dm"
 #include "code\WorkInProgress\computer3\computers\medical.dm"
 #include "code\WorkInProgress\computer3\computers\Operating.dm"
@@ -1520,5 +1517,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\Mutizphoenix2.dmm"
+#include "maps\Phoenix.dmm"
 // END_INCLUDE

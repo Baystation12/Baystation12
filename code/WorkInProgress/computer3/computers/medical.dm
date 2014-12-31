@@ -49,7 +49,7 @@
 		scan = computer.cardslot.reader
 		if(!interactable())
 			return
-		if (computer.z > 8)
+		if (computer.z > 6)
 			usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 			return
 		var/dat
@@ -263,7 +263,7 @@
 				switch(href_list["field"])
 					if("fingerprint")
 						if (istype(src.active1, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please input fingerprint hash:", "Med. records", src.active1.fields["fingerprint"], null)  as text)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please input fingerprint hash:", "Med. records", src.active1.fields["fingerprint"], null)  as text)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
 								return
 							src.active1.fields["fingerprint"] = t1
@@ -281,55 +281,55 @@
 							src.active1.fields["age"] = t1
 					if("mi_dis")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please input minor disabilities list:", "Med. records", src.active2.fields["mi_dis"], null)  as text)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please input minor disabilities list:", "Med. records", src.active2.fields["mi_dis"], null)  as text)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["mi_dis"] = t1
 					if("mi_dis_d")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please summarize minor dis.:", "Med. records", src.active2.fields["mi_dis_d"], null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please summarize minor dis.:", "Med. records", src.active2.fields["mi_dis_d"], null)  as message)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["mi_dis_d"] = t1
 					if("ma_dis")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please input major diabilities list:", "Med. records", src.active2.fields["ma_dis"], null)  as text)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please input major diabilities list:", "Med. records", src.active2.fields["ma_dis"], null)  as text)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["ma_dis"] = t1
 					if("ma_dis_d")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please summarize major dis.:", "Med. records", src.active2.fields["ma_dis_d"], null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please summarize major dis.:", "Med. records", src.active2.fields["ma_dis_d"], null)  as message)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["ma_dis_d"] = t1
 					if("alg")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please state allergies:", "Med. records", src.active2.fields["alg"], null)  as text)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please state allergies:", "Med. records", src.active2.fields["alg"], null)  as text)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["alg"] = t1
 					if("alg_d")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please summarize allergies:", "Med. records", src.active2.fields["alg_d"], null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please summarize allergies:", "Med. records", src.active2.fields["alg_d"], null)  as message)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["alg_d"] = t1
 					if("cdi")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please state diseases:", "Med. records", src.active2.fields["cdi"], null)  as text)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please state diseases:", "Med. records", src.active2.fields["cdi"], null)  as text)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["cdi"] = t1
 					if("cdi_d")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(trim(sanitize(input("Please summarize diseases:", "Med. records", src.active2.fields["cdi_d"], null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(trim(sanitize(input("Please summarize diseases:", "Med. records", src.active2.fields["cdi_d"], null)  as message)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["cdi_d"] = t1
 					if("notes")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = copytext(html_encode(trim(input("Please summarize notes:", "Med. records", html_decode(src.active2.fields["notes"]), null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(html_encode(trim(input("Please summarize notes:", "Med. records", html_decode(src.active2.fields["notes"]), null)  as message)),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!interactable() && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["notes"] = t1
@@ -377,8 +377,6 @@
 							src.active1.fields["p_stat"] = "Physically Unfit"
 						if("disabled")
 							src.active1.fields["p_stat"] = "Disabled"
-					if(PDA_Manifest.len)
-						PDA_Manifest.Cut()
 
 			if (href_list["m_stat"])
 				if (src.active1)

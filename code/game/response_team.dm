@@ -40,28 +40,12 @@ var/engineer_slots = 0
 	switch(selected_role)
 		if("Security")
 			ERT_TYPE = 1
-			command_slots = 1
-			sec_slots = 2
-			engineer_slots = 1
-			medic_slots = 1
 		if("Medical")
 			ERT_TYPE = 2
-			command_slots = 1
-			sec_slots = 1
-			engineer_slots = 1
-			medic_slots = 2
 		if("Engineering")
 			ERT_TYPE = 3
-			command_slots = 1
-			sec_slots = 1
-			engineer_slots = 2
-			medic_slots = 1
 		if("Other")
 			ERT_TYPE = 4
-			command_slots = 1
-			sec_slots = 2
-			engineer_slots = 2
-			medic_slots = 2
 
 	if(send_emergency_team)
 		usr << "\red Looks like somebody beat you to it!"
@@ -87,6 +71,27 @@ client/verb/JoinResponseTeam()
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
 			return
+
+		if(ERT_TYPE == 1)
+			command_slots = 1
+			sec_slots = 2
+			engineer_slots = 1
+			medic_slots = 1
+		else if(ERT_TYPE == 2)
+			command_slots = 1
+			sec_slots = 1
+			engineer_slots = 1
+			medic_slots = 2
+		else if(ERT_TYPE == 3)
+			command_slots = 1
+			sec_slots = 1
+			engineer_slots = 2
+			medic_slots = 1
+		else if(ERT_TYPE == 4)
+			command_slots = 1
+			sec_slots = 2
+			engineer_slots = 2
+			medic_slots = 2
 
 		var/selected_role = input("Choose your ERT role") in list ("Commander", "Security", "Medical", "Engineering")
 		switch(selected_role)

@@ -5,20 +5,19 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/alien
-	secondary_unarmed_type = /datum/unarmed_attack/alien
+	unarmed_type = /datum/unarmed_attack/claws/strong
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 
 	has_fine_manipulation = 0
 	insulated = 1
 	gluttonous = 2
-	darksight = 80
 
 	eyes = "blank_eyes"
 
-	brute_mod = 0.3 // Hardened carapace.
-	burn_mod = 0.3    // Weak to fire.
+	brute_mod = 0.5 // Hardened carapace.
+	burn_mod = 2    // Weak to fire.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -27,7 +26,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | IS_STRONG | GENDERLESS
+	flags = NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | IS_STRONG
 
 	reagent_tag = IS_XENOS
 
@@ -54,7 +53,7 @@
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
-	var/weeds_heal_rate = 10    // Health regen on weeds.
+	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
 
 /datum/species/xenos/can_understand(var/mob/other)
@@ -111,12 +110,10 @@
 /datum/species/xenos/drone
 	name = "Xenomorph Drone"
 	caste_name = "drone"
-	weeds_plasma_rate = 30
+	weeds_plasma_rate = 15
 	slowdown = 2
 	tail = "xenos_drone_tail"
 	rarity_value = 5
-	unarmed_type = /datum/unarmed_attack/alien/drone
-	secondary_unarmed_type = /datum/unarmed_attack/alien/drone
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_drone.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_drone.dmi'
@@ -133,14 +130,11 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/regurgitate,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/plant,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/evolve,
 		/mob/living/carbon/human/proc/resin,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/corrosive_acid
 		)
 
@@ -156,8 +150,6 @@
 	name = "Xenomorph Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
-	unarmed_type = /datum/unarmed_attack/alien/hunter
-	secondary_unarmed_type = /datum/unarmed_attack/alien/hunter
 	slowdown = -1
 	total_health = 150
 	tail = "xenos_hunter_tail"
@@ -178,9 +170,7 @@
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/leap,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/psychic_whisper,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/regurgitate
 		)
 
@@ -191,8 +181,6 @@
 	slowdown = 1
 	total_health = 125
 	tail = "xenos_sentinel_tail"
-	unarmed_type = /datum/unarmed_attack/alien/sentinel
-	secondary_unarmed_type = /datum/unarmed_attack/alien/sentinel
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_sentinel.dmi'
@@ -208,9 +196,7 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/leap,
 		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/transfer_plasma,
 		/mob/living/carbon/human/proc/corrosive_acid,
@@ -221,17 +207,12 @@
 
 	name = "Xenomorph Queen"
 	total_health = 250
-	weeds_heal_rate = 20
-	weeds_plasma_rate = 30
-	brute_mod = 0.2 // OP QUEEN
-	burn_mod = 0.2   // OP QUEEN
+	weeds_heal_rate = 5
+	weeds_plasma_rate = 20
 	caste_name = "queen"
 	slowdown = 5
 	tail = "xenos_queen_tail"
-	unarmed_type = /datum/unarmed_attack/alien/queen
-	secondary_unarmed_type = /datum/unarmed_attack/alien/queen
 	rarity_value = 10
-	/datum/unarmed_attack/alien
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'
@@ -249,8 +230,6 @@
 
 	inherent_verbs = list(
 		/mob/living/proc/ventcrawl,
-		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/nightvision,
 		/mob/living/carbon/human/proc/psychic_whisper,
 		/mob/living/carbon/human/proc/regurgitate,
 		/mob/living/carbon/human/proc/lay_egg,

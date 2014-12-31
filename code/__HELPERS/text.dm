@@ -48,17 +48,17 @@
 
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
-/proc/strip_html(var/t,var/limit=MAX_RECORDS)
+/proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
 	return copytext((sanitize(strip_html_simple(t))),1,limit)
 
 //Runs byond's sanitization proc along-side strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
-/proc/adminscrub(var/t,var/limit=MAX_RECORDS)
+/proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
 	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
 
 //Returns null if there is any bad text in the string
-/proc/reject_bad_text(var/text, var/max_length=6144)
+/proc/reject_bad_text(var/text, var/max_length=512)
 	if(length(text) > max_length)	return			//message too long
 	var/non_whitespace = 0
 	for(var/i=1, i<=length(text), i++)
@@ -71,7 +71,7 @@
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
 // Used to get a sanitized input.
-/proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_RECORDS)
+/proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
 	var/name = input(user, message, title, default)
 	return strip_html_simple(name, max_length)
 

@@ -33,7 +33,6 @@
 	M.dna.mutantrace = mutantrace
 	M.real_name = src.name
 	M.death(1) //Kills the new mob
-	M.iscorpse = 1
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
 	if(src.corpsesuit)
@@ -168,13 +167,13 @@
 
 /obj/effect/landmark/corpse/clown
 	name = "Clown"
-	corpseuniform = /obj/item/clothing/under/rank/clown/dead
+	corpseuniform = /obj/item/clothing/under/rank/clown
 	corpseshoes = /obj/item/clothing/shoes/clown_shoes
 	corpseradio = /obj/item/device/radio/headset
 	corpsemask = /obj/item/clothing/mask/gas/clown_hat
 	corpsepocket1 = /obj/item/weapon/bikehorn
 	corpseback = /obj/item/weapon/storage/backpack/clown
-	//corpseid = 1
+	corpseid = 1
 	corpseidjob = "Clown"
 	corpseidaccess = "Clown"
 

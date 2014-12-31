@@ -41,7 +41,7 @@
 
 /obj/machinery/computer/crew/Topic(href, href_list)
 	if(..()) return
-	if (src.z > 8)
+	if (src.z > 6)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return 0
 	if( href_list["close"] )
@@ -71,12 +71,10 @@
 
 		var/turf/pos = get_turf(C)
 
-		if((C) && (C.has_sensor) && (pos) && C.sensor_mode)
+		if((C) && (C.has_sensor) && (pos) && (pos.z == src.z) && C.sensor_mode)
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc
-				if(H.w_uniform != C)
-					continue
 
 				var/list/crewmemberData = list()
 
@@ -86,32 +84,22 @@
 				crewmemberData["tox"] = round(H.getToxLoss(), 1)
 				crewmemberData["fire"] = round(H.getFireLoss(), 1)
 				crewmemberData["brute"] = round(H.getBruteLoss(), 1)
-
+				
 				crewmemberData["name"] = "Unknown"
-				crewmemberData["rank"] = "Unknown"
+				crewmemberData["rank"] = "Unknown"				
 				if(H.wear_id && istype(H.wear_id, /obj/item/weapon/card/id) )
 					var/obj/item/weapon/card/id/I = H.wear_id
-					crewmemberData["name"] = I.name
+					crewmemberData["name"] = I.name	
 					crewmemberData["rank"] = I.rank
 				else if(H.wear_id && istype(H.wear_id, /obj/item/device/pda) )
-					var/obj/item/device/pda/P = H.wear_id
-					crewmemberData["name"] = (P.id ? P.id.name : "Unknown")
+					var/obj/item/device/pda/P = H.wear_id						
+					crewmemberData["name"] = (P.id ? P.id.name : "Unknown")				
 					crewmemberData["rank"] = (P.id ? P.id.rank : "Unknown")
-
+					
 				var/area/A = get_area(H)
-				var/newz = pos.z
-				if (pos.z == 1)
-					newz = 1
-				else if (pos.z == 7)
-					newz = 0
-				else if (pos.z == 8)
-					newz = 2
-				else
-					newz = pos.z
 				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
 				crewmemberData["y"] = pos.y
-				crewmemberData["Floor"] = newz
 
 				// Works around list += list2 merging lists; it's not pretty but it works
 				crewmembers += "temporary item"
@@ -124,12 +112,12 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "crew_monitor.tmpl", "Crew Monitoring Computer", 900, 800)
-
+		
 		// adding a template with the key "mapContent" enables the map ui functionality
 		ui.add_template("mapContent", "crew_monitor_map_content.tmpl")
 		// adding a template with the key "mapHeader" replaces the map header content
 		ui.add_template("mapHeader", "crew_monitor_map_header.tmpl")
-
+				
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -140,7 +128,6 @@
 /obj/machinery/computer/crew/proc/scan()
 	for(var/mob/living/carbon/human/H in mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
-			if (H.iscorpse == 1) continue
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C

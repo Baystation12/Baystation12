@@ -1,7 +1,4 @@
 /obj/machinery/computer3/arcade
-	icon = 'icons/obj/computer.dmi'
-	icon_state = "arcade"
-	show_keyboard = 0
 	default_prog	= /datum/file/program/arcade
 	spawn_parts		= list(/obj/item/part/computer/toybox) //NO HDD - the game is loaded on the circuitboard's OS slot
 

@@ -664,33 +664,6 @@
 			else
 				user << "There is no charge to draw from that APC."
 			return
-		else if(H.species.flags & IS_SYNTHETIC && H.a_intent == "disarm")
-			if(emagged || stat & BROKEN)
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-				s.set_up(3, 1, src)
-				s.start()
-				H << "\red The APC power currents surge eratically, damaging your chassis!"
-				H.adjustFireLoss(10,0)
-			else if(src.cell && src.cell.charge < src.cell.maxcharge)
-				if(H.nutrition > 0)
-
-					if(src.cell.charge <= src.cell.maxcharge-500)
-						H.nutrition -= 50
-						src.cell.charge += 500
-					else
-						H.nutrition -= ((src.cell.maxcharge-500)-src.cell.charge)/10
-						src.cell.charge = src.cell.maxcharge
-
-					user << "\blue You slot your fingers into the APC interface and transfer some of your own power stores to it."
-					if(src.cell.charge > src.cell.maxcharge) src.cell.charge = src.cell.maxcharge
-					if(H.nutrition < 0) H.nutrition = 0
-					src.charging = 1
-
-				else
-					user << "\blue You are completely discharged!"
-			else
-				user << "That APC is already full."
-			return
 		else if(H.species.can_shred(H))
 			user.visible_message("\red [user.name] slashes at the [src.name]!", "\blue You slash at the [src.name]!")
 			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)

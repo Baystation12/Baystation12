@@ -138,7 +138,7 @@
 
 	//proc/camera_list(var/datum/file/camnet_key/key)
 	get_machines(var/datum/file/camnet_key/key)
-		if (!computer || computer.z > 8)
+		if (!computer || computer.z > 6)
 			return null
 
 		var/list/L = list()
@@ -147,7 +147,7 @@
 			if(temp.len)
 				L.Add(C)
 
-		camera_sort(L)
+		//camera_sort(L)
 
 		return L
 	verify_machine(var/obj/machinery/camera/C,var/datum/file/camnet_key/key = null)

@@ -303,9 +303,3 @@
 	for(var/mob/M in src)
 		M.emp_act(severity)
 	..()
-
-/obj/item/device/paicard/ex_act(severity)
-	if(pai)
-		pai.ex_act(severity)
-	else
-		del(src)

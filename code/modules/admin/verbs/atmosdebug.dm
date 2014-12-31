@@ -6,7 +6,7 @@
 		src << "Only administrators may use this command."
 		return
 	feedback_add_details("admin_verb","CP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
+	
 	if(alert("WARNING: This command should not be run on a live server. Do you want to continue?", "Check Piping", "No", "Yes") == "No")
 		return
 
@@ -25,7 +25,7 @@
 	for (var/obj/machinery/atmospherics/pipe/simple/pipe in world)
 		if (!pipe.node1 || !pipe.node2)
 			usr << "Unconnected [pipe.name] located at [pipe.x],[pipe.y],[pipe.z] ([get_area(pipe.loc)])"
-/*
+
 	usr << "Checking for overlapping pipes..."
 	next_turf:
 		for(var/turf/T in world)
@@ -36,7 +36,7 @@
 						check++
 						if(check > 1)
 							usr << "Overlapping pipe ([pipe.name]) located at [T.x],[T.y],[T.z] ([get_area(T)])"
-							continue next_turf */
+							continue next_turf
 	usr << "Done"
 
 /client/proc/powerdebug()

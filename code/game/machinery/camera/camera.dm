@@ -33,9 +33,6 @@
 	var/light_disabled = 0
 	var/alarm_on = 0
 	var/busy = 0
-	var/overridedir = 0
-	var/overridenetwork = 0
-	var/overridec_tag = 0
 
 /obj/machinery/camera/New()
 	WireColorToFlag = randomCameraWires()
@@ -233,8 +230,6 @@
 	return see
 
 /atom/proc/auto_turn()
-	if(src:overridedir == 1)
-		return
 	//Automatically turns based on nearby walls.
 	var/turf/simulated/wall/T = null
 	for(var/i = 1, i <= 8; i += i)
@@ -253,8 +248,6 @@
 			break
 
 /atom/proc/window_auto_turn()
-	if(src:overridedir == 1)
-		return
 	//Automatically turns based on nearby windows/grilles.
 	for(var/i = 1, i <= 8; i += i)
 		var/A = src.windowcheck(i)
@@ -318,8 +311,6 @@
 
 
 /obj/machinery/camera/proc/network_check(var/area/A)
-	if(overridenetwork == 1)
-		return
 	src.network = list("SS13")
 	if(istype(A,/area/medical))
 		src.network += "Medical"

@@ -12,47 +12,25 @@
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
-				if (istype(M, /mob/living/carbon/slime))
-					if(!M.paralysis)
-						M.adjustToxLoss(2147483647)
-						M.AdjustParalysis(2147483647)
-						var/adminomaly = new/obj/effect/overlay/adminoverlay
-						spawn(50)
-							M.overlays += adminomaly
-						M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
-						message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
-						log_admin("[key_name(usr)] froze [key_name(M)]")
-						log_admin_single("[key_name(usr)] froze [key_name(M)]")
-					else if (M.paralysis)
-						M.AdjustParalysis(-2147483647)
-						M.blinded = 0
-						M.lying = 0
-						M.stat = 0
-						M << "<b> <font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
-						message_admins("\blue [key_name_admin(usr)] unfroze [key_name(M)]")
-						log_admin("[key_name(usr)] unfroze [key_name(M)]")
-						log_admin_single("[key_name(usr)] unfroze [key_name(M)]")
-						M.revive()
-				else
-					if(!M.paralysis)
-						M.AdjustParalysis(2147483647)
-						var/adminomaly = new/obj/effect/overlay/adminoverlay
-						spawn(50)
-							M.overlays += adminomaly
-						M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
-						message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
-						log_admin("[key_name(usr)] froze [key_name(M)]")
-						log_admin_single("[key_name(usr)] froze [key_name(M)]")
-					else if (M.paralysis)
-						M.AdjustParalysis(-2147483647)
-						M.blinded = 0
-						M.lying = 0
-						M.stat = 0
+				if(!M.paralysis)
+					M.AdjustParalysis(2147483647)
+					var/adminomaly = new/obj/effect/overlay/adminoverlay
+					spawn(50)
+						M.overlays += adminomaly
+					M << "<b><font color= red>You have been frozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
+					message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
+					log_admin("[key_name(usr)] froze [key_name(M)]")
+					log_admin_single("[key_name(usr)] froze [key_name(M)]")
+				else if (M.paralysis)
+					M.AdjustParalysis(-2147483647)
+					M.blinded = 0
+					M.lying = 0
+					M.stat = 0
 
-						M << "<b> <font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
-						message_admins("\blue [key_name_admin(usr)] unfroze [key_name(M)]")
-						log_admin("[key_name(usr)] unfroze [key_name(M)]")
-						log_admin_single("[key_name(usr)] unfroze [key_name(M)]")
+					M << "<b> <font color= red>You have been unfrozen by <a href='?priv_msg=\ref[usr.client]'>[key]</a></b></font>"
+					message_admins("\blue [key_name_admin(usr)] unfroze [key_name(M)]")
+					log_admin("[key_name(usr)] unfroze [key_name(M)]")
+					log_admin_single("[key_name(usr)] unfroze [key_name(M)]")
 
 
 /client/proc/freezemecha(obj/mecha/O as obj in world)

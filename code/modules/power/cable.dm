@@ -73,9 +73,7 @@
 
 	var/turf/T = src.loc			// hide if turf is not intact
 
-	if(level==1)
-		if(T)
-			hide(T.intact)
+	if(level==1) hide(T.intact)
 	cable_list += src
 	update_icon()
 
@@ -298,31 +296,6 @@
 		src.amount--
 		new/obj/item/stack/cable_coil(user.loc, 1,color)
 		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
-		src.updateicon()
-		src.update_wclass()
-		return
-
-	if( istype(W, /obj/item/toy/crayon))
-		var/crayon = W.type
-		switch(crayon)
-			if(/obj/item/toy/crayon/red)
-				color = COLOR_RED
-			if(/obj/item/toy/crayon/orange)
-				color = COLOR_ORANGE
-			if(/obj/item/toy/crayon/yellow)
-				color = COLOR_YELLOW
-			if(/obj/item/toy/crayon/green)
-				color = COLOR_GREEN
-			if(/obj/item/toy/crayon/blue)
-				color = COLOR_BLUE
-			if(/obj/item/toy/crayon/purple)
-				color = COLOR_PURPLE
-			if(/obj/item/toy/crayon/mime)
-				color = COLOR_WHITE
-			else
-				color = COLOR_RED
-		user << "<span class='notice'>You draw over the cable changing its colour.</span>"
-		src.color = color
 		src.updateicon()
 		src.update_wclass()
 		return

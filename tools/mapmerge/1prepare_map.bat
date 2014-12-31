@@ -1,4 +1,4 @@
-set MAPFILE=Mutizphoenix2.dmm
+set MAPFILE=Phoenix.dmm
 
 cd ../../maps
 copy %MAPFILE% %MAPFILE%.backup

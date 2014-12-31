@@ -32,7 +32,7 @@
 	if(scan)
 		usr << "You remove \the [scan] from \the [src]."
 		scan.loc = get_turf(src)
-		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
+		if(!usr.get_active_hand())
 			usr.put_in_hands(scan)
 		scan = null
 	else
@@ -57,7 +57,7 @@
 /obj/machinery/computer/secure_data/attack_hand(mob/user as mob)
 	if(..())
 		return
-	if (src.z > 8)
+	if (src.z > 6)
 		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
 	var/dat
@@ -483,7 +483,7 @@ What a mess.*/
 							active2.fields["ma_crim_d"] = t1
 					if("notes")
 						if (istype(active2, /datum/data/record))
-							var/t1 = copytext(html_encode(trim(input("Please summarize notes:", "Secure. records", html_decode(active2.fields["notes"]), null)  as message)),1,MAX_RECORDS)
+							var/t1 = copytext(html_encode(trim(input("Please summarize notes:", "Secure. records", html_decode(active2.fields["notes"]), null)  as message)),1,MAX_MESSAGE_LEN)
 							if (!t1 || active2 != a2)
 								return
 							active2.fields["notes"] = t1
@@ -601,8 +601,6 @@ What a mess.*/
 					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
 				if(5)
 					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
-					if(PDA_Manifest.len)
-						PDA_Manifest.Cut()
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

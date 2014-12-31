@@ -1316,16 +1316,6 @@
 
 		usr.client.cmd_admin_slimeize(H)
 
-	else if(href_list["makepai"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/M = locate(href_list["makepai"])
-		if(!istype(M))
-			usr << "This can only be used on instances of type /mob"
-			return
-
-		M.pAItransform()
-
 	else if(href_list["makerobot"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -1438,16 +1428,7 @@
 	else if(href_list["takeadminhelp"])
 		var/mob/M = locate(href_list["takeadminhelp"])
 		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name(M)]</a> is now being handled by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
-		var/recieve_msg = "\blue <b>Your issue is being dealt with by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[usr.client.holder.fakekey ? "Administrator" : usr.key].</a></font> Click their name to send them more information about your issue.</b>"
-		M << recieve_msg
-		for(var/client/X in admins)
-			if(check_rights(R_ADMIN|R_MOD|R_MENTOR,0))
-				X << take_msg
-
-	else if(href_list["takefax"])
-		var/mob/Sender = locate(href_list["takefax"])
-		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[Sender]'>[key_name(Sender)]</a> 's fax is being replied to by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
-		if(!ismob(Sender))
+		if(!ismob(M))
 			usr << "This can only be used on instances of type /mob"
 			return
 		for(var/client/X in admins)
@@ -1651,17 +1632,10 @@
 		var/mob/living/carbon/human/H = locate(href_list["CentcommFaxReply"])
 		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
-		var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
-		if(!inputsubject)	return
-
-		var/inputmessage = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!inputmessage)	return
-
-		var/inputsigned = input(src.owner, "Please enter Centcom Offical name.", "Outgoing message from Centcomm", "") as text|null
-		if(!inputsigned)	return
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!input)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-		var/input = "<center><b>NanoTrasen Fax Network</b></center><hr><center>RE: [inputsubject]</center><hr>[inputmessage]<hr><b>Signed:</b> <i>[inputsigned]</i>"
 
 		for(var/obj/machinery/faxmachine/F in machines)
 			if(F == fax)
@@ -1700,17 +1674,10 @@
 		var/mob/living/carbon/human/H = locate(href_list["SolGovFaxReply"])
 		var/obj/machinery/faxmachine/fax = locate(href_list["originfax"])
 
-		var/inputsubject = input(src.owner, "Please enter a Subject", "Outgoing message from Centcomm", "") as text|null
-		if(!inputsubject)	return
-
-		var/inputmessage = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
-		if(!inputmessage)	return
-
-		var/inputsigned = input(src.owner, "Please enter Centcom Offical name.", "Outgoing message from Centcomm", "") as text|null
-		if(!inputsigned)	return
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		if(!input)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-		var/input = "<center><b>Sol Government Fax Network</b></center><hr><center>RE: [inputsubject]</center><hr>[inputmessage]<hr><b>Signed:</b> <i>[inputsigned]</i>"
 
 		for(var/obj/machinery/faxmachine/F in machines)
 			if(F == fax)
@@ -2994,22 +2961,6 @@
 				icwl_addList(M.ckey)
 				message_admins("\blue [key_name_admin(usr)] has whitelisted [M.ckey]", 1)
 				log_admin("[key_name_admin(usr)] has whitelisted [M.ckey]")
-
-			show_player_panel(M)
-
-	else if(href_list["iaa"])
-		if(check_rights(R_ADMIN))
-
-			var/mob/M = locate(href_list["iaa"])
-
-			if(M.iaa == 1)
-				M.iaa = 0
-				message_admins("\blue [key_name_admin(usr)] has disabled internal affairs on [M.ckey]", 1)
-				log_admin("[key_name_admin(usr)] has disabled internal affairs on [M.ckey]")
-			else
-				M.iaa = 1
-				message_admins("\blue [key_name_admin(usr)] has enabled internal affairs on [M.ckey]", 1)
-				log_admin("[key_name_admin(usr)] has enabled internal affairs on [M.ckey]")
 
 			show_player_panel(M)
 

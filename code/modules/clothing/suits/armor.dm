@@ -35,7 +35,7 @@
 
 /obj/item/clothing/suit/armor/vest/protective
 	name = "Protective vest"
-	desc = "Not as strong as Security Armor but enough to protect against some damage."
+	desc = "Not as strong as Security Armor but enough to protecs against some damage."
 	icon_state = "armorvr"
 	item_state = "armorvr"
 	armor = list(melee = 50, bullet = 5, laser = 15, energy = 5, bomb = 15, bio = 0, rad = 0)
@@ -85,15 +85,15 @@
 	item_state = "swat_suit"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | THICKMATERIAL
+	flags = FPRINT | TABLEPASS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 1
-	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 100)
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 0, rad = 0)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0.6
+	siemens_coefficient = 0.5
 
 
 /obj/item/clothing/suit/armor/swat/officer

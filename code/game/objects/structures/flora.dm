@@ -78,30 +78,6 @@
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
 
-/obj/structure/flora/pottedplant/MouseDrop(atom/over_object)
-	if (istype(over_object, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = over_object
-		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object))
-			var/obj/item/weapon/pottedplant/S = new/obj/item/weapon/pottedplant()
-			S.icon_state = src.icon_state
-			src.loc = S
-			H.put_in_hands(S)
-			H.visible_message("\red [H] grabs [src] from the floor!", "\red You grab [src] from the floor!")
-
-/obj/item/weapon/pottedplant
-	name = "potted plant"
-	icon = 'icons/obj/plants.dmi'
-	icon_state = "plant-26"
-	item_state = "plant-26"
-	throwforce = 5
-
-	throw_impact(atom/hit_atom)
-		..()
-		new/obj/effect/decal/cleanable/plantpot(src.loc)
-		src.visible_message("\red [src.name] has been smashed","\red You hear a smash")
-		playsound(src, "shatter", 70, 1)
-		del(src)
-
 //newbushes
 
 /obj/structure/flora/ausbushes
@@ -203,7 +179,7 @@
 
 /obj/structure/flora/ausbushes/ppflowers/New()
 	..()
-	icon_state = "ppflowers_[rand(1, 3)]"
+	icon_state = "ppflowers_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/sparsegrass
 	icon_state = "sparsegrass_1"

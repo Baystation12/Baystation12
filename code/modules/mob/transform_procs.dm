@@ -316,20 +316,6 @@
 
 	del(src)
 
-/mob/proc/pAItransform()
-	var/obj/item/device/paicard/card = new /obj/item/device/paicard(src.loc)
-	card.pai = new /mob/living/silicon/pai(card)
-	var/mob/living/silicon/pai/player = card.pai
-	player.card = card
-	card.overlays += "pai-happy"
-	if(src.ckey)
-		player.ckey = src.ckey
-	player.name = pick(ninja_names)
-	player.real_name = player.name
-	processing_objects += card
-	del(src)
-
-
 /* Certain mob types have problems and should not be allowed to be controlled by players.
  *
  * This proc is here to force coders to manually place their mob in this list, hopefully tested.

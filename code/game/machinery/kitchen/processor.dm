@@ -55,16 +55,8 @@
 
 
 		slime
-			process(loc, what)
-				var/mob/living/carbon/slime/S = what
-				var/C = S.cores
-				for(var/i = 1, i <= C, i++)
-					new S.coretype(loc)
-					feedback_add_details("slime_core_harvested","[replacetext(S.colour," ","_")]")
-				..()
-
 			input = /mob/living/carbon/slime
-			output = null
+			output = /obj/item/weapon/reagent_containers/glass/beaker/slime
 
 		monkey
 			process(loc, what)

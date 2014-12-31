@@ -86,7 +86,7 @@
 
 	//Finally, check objects/mobs to block entry that are not on the border
 	for(var/atom/movable/obstacle in src)
-		if(!(obstacle.flags & ON_BORDER))
+		if(obstacle.flags & ~ON_BORDER)
 			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0
@@ -155,8 +155,6 @@
 /turf/proc/is_light_floor()
 	return 0
 /turf/proc/is_grass_floor()
-	return 0
-/turf/proc/is_gravel_floor()
 	return 0
 /turf/proc/is_wood_floor()
 	return 0

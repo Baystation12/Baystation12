@@ -904,23 +904,6 @@ datum/design/mech_generator_nuclear
 	build_path = "/obj/item/mecha_parts/mecha_equipment/generator/nuclear"
 	category = "Exosuit Equipment"
 
-datum/design/grapple_l_hand
-	name = "Grappling Device (Left Hand)"
-	desc = "Grappling Device"
-	id = "grapple_l_hand"
-	build_type = MECHFAB
-	req_tech = list("programming"= 4, "engineering" = 3, "materials" = 5)
-	build_path = "/obj/item/robot_parts/grapple/l_hand"
-	category = "Robot Parts"
-
-datum/design/grapple_r_hand
-	name = "Grappling Device (Right Hand)"
-	desc = "Grappling Device"
-	id = "grapple_r_hand"
-	build_type = MECHFAB
-	req_tech = list("programming"= 4, "engineering" = 3, "materials" = 5)
-	build_path = "/obj/item/robot_parts/grapple/r_hand"
-	category = "Robot Parts"
 
 ////////////////////////////////////////
 //////////Disk Construction Disks///////
@@ -1440,7 +1423,7 @@ datum/design/implant_chem
 	req_tech = list("materials" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implantcase/chem"
+	build_path = "/obj/item/weapon/implant/chem"
 
 datum/design/implant_free
 	name = "freedom implant"
@@ -1449,7 +1432,7 @@ datum/design/implant_free
 	req_tech = list("syndicate" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implantcase/freedom"
+	build_path = "/obj/item/weapon/implant/freedom"
 
 datum/design/chameleon
 	name = "Chameleon Kit"
@@ -1823,7 +1806,7 @@ datum/design/borg_syndicate_module
 /////////////PDA and Radio stuff/////////
 /////////////////////////////////////////
 datum/design/binaryencrypt
-	name = "binary encryption key"
+	name = "Binary Encrpytion Key"
 	desc = "An encyption key for a radio headset.  Contains cypherkeys."
 	id = "binaryencrypt"
 	req_tech = list("syndicate" = 2)

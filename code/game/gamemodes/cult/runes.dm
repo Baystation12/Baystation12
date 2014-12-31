@@ -104,7 +104,7 @@ var/list/sacrificed = list()
 				if(M.stat==2)
 					continue
 				usr.say("Mah[pick("'","`")]weyh pleggh at e'ntrath!")
-
+				
 				if (M.species && (M.species.flags & NO_PAIN))
 					M.visible_message("\red The markings below [M] glow a bloody red.")
 				else
@@ -122,7 +122,6 @@ var/list/sacrificed = list()
 						M.mind.special_role = "Cultist"
 						M << "<font color=\"purple\"><b><i>Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root.</b></i></font>"
 						M << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
-						ticker.mode:grant_runeword(usr)
 						return 1
 
 					else if(choice == "Resist")

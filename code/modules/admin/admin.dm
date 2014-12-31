@@ -74,8 +74,7 @@ var/global/floorIsLava = 0
 	"}
 
 	if(M.client)
-		var/iaa = M.iaa
-		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | <A href='?src=\ref[src];iaa=\ref[M]'><font color='[iaa?"red":"blue"]'>IAA</font></A>"
+		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
@@ -122,8 +121,7 @@ var/global/floorIsLava = 0
 				body += {"<A href='?src=\ref[src];makeai=\ref[M]'>Make AI</A> |
 					<A href='?src=\ref[src];makerobot=\ref[M]'>Make Robot</A> |
 					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A> |
-					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A> |
-					<A href='?src=\ref[src];makepai=\ref[M]'>Make pAI</A>
+					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A>
 				"}
 
 			//Simple Animals

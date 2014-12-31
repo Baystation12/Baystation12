@@ -19,11 +19,6 @@
 /obj/structure/grille/blob_act()
 	del(src)
 
-/obj/structure/grille/bumped/Bumped(AM as mob|obj)
-	..()
-	if (istype(AM, /obj/machinery/singularity/narsie))
-		del(src)
-
 /obj/structure/grille/meteorhit(var/obj/M)
 	del(src)
 
@@ -158,7 +153,7 @@
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
-
+			
 			var/wtype = ST.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)

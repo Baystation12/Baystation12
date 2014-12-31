@@ -6,7 +6,7 @@
 		return 1
 	if(T.z == 2)
 		return 1
-	if(T.z > 8)
+	if(T.z > 6)
 		return 1
 	return 0
 

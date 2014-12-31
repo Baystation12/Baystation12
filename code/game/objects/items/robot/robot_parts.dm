@@ -12,13 +12,6 @@
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
-	var/instin
-
-	proc/OnInstall()
-		instin = loc
-
-	proc/OnUninstall()
-		instin = null
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"

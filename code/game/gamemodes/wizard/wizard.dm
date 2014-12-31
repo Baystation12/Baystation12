@@ -9,7 +9,6 @@
 	required_players_secret = 10
 	required_enemies = 1
 	recommended_enemies = 1
-	restricted_species = list("Machine")
 
 	uplink_welcome = "Wizardly Uplink Console:"
 	uplink_uses = 10
@@ -29,12 +28,6 @@
 	if(!..())
 		return 0
 	var/list/datum/mind/possible_wizards = get_players_for_role(BE_WIZARD)
-
-	for(var/datum/mind/player in possible_wizards)
-		for(var/species in restricted_species)//Removing IPCs from the list
-			if(player.current.client.prefs.species == species)
-				possible_wizards -= player
-
 	if(possible_wizards.len==0)
 		return 0
 	var/datum/mind/wizard = pick(possible_wizards)

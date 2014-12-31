@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-//#define DEBUG
+#define DEBUG
 
 #define PI 3.1415
 
@@ -427,7 +427,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define GAS_N2O	(1 << 4)
 
 
-var/list/accessable_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60, "7" = 3, "8" = 3)
+var/list/accessable_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" = 60)
 //This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 //(Exceptions: extended, sandbox and nuke) -Errorage
 //Was list("3" = 30, "4" = 70).
@@ -772,7 +772,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_WHITELISTED 4096
 #define IS_SYNTHETIC 8192
 #define IS_STRONG 16384
-#define GENDERLESS 32768
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
@@ -809,7 +808,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
-#define COLOR_PURPLE 	"#993399"
 
 
 /*
@@ -843,9 +841,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Ferry shuttle processing status
 #define IDLE_STATE		0
 #define WAIT_LAUNCH		1
-#define FORCE_LAUNCH	2
-#define WAIT_ARRIVE		3
-#define WAIT_FINISH		4
+#define WAIT_ARRIVE		2
+#define WAIT_FINISH		3
 
 //computer3 error codes, move lower in the file when it passes dev -Sayu
  #define PROG_CRASH      1  // Generic crash

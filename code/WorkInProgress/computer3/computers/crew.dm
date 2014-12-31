@@ -26,7 +26,7 @@
 				if(istype(C.loc, /mob/living/carbon/human))
 
 					var/mob/living/carbon/human/H = C.loc
-					if (H.iscorpse == 1) continue
+
 					var/dam1 = round(H.getOxyLoss(),1)
 					var/dam2 = round(H.getToxLoss(),1)
 					var/dam3 = round(H.getFireLoss(),1)

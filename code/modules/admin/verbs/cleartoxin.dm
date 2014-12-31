@@ -36,5 +36,3 @@
 	if(location.name != "Space")
 		for(var/turf/space/S in location)
 			S.ChangeTurf(/turf/simulated/floor/plating)
-		for(var/turf/simulated/floor/open/O in location)
-			O.ChangeTurf(/turf/simulated/floor/plating)

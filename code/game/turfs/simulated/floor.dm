@@ -127,13 +127,6 @@ turf/simulated/floor/proc/update_icon()
 		if(!broken && !burnt)
 			if(!(icon_state in list("grass1","grass2","grass3","grass4")))
 				icon_state = "grass[pick("1","2","3","4")]"
-	else if(is_gravel_floor())
-		if(!broken && !burnt)
-			if(icon_state == "plating")
-				if(icon_regular_floor in list("gravel2","gravel"))
-					icon_state = icon_regular_floor
-			if(!(icon_state in list("gravel2","gravel")))
-				icon_state = "gravel"
 	else if(is_carpet_floor())
 		if(!broken && !burnt)
 			if(icon_state != "carpetsymbol")
@@ -256,12 +249,6 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
-/turf/simulated/floor/is_gravel_floor()
-	if(istype(floor_tile,/obj/item/stack/tile/gravel))
-		return 1
-	else
-		return 0
-
 /turf/simulated/floor/is_wood_floor()
 	if(istype(floor_tile,/obj/item/stack/tile/wood))
 		return 1
@@ -302,9 +289,6 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_grass_floor())
 		src.icon_state = "sand[pick("1","2","3")]"
 		broken = 1
-	else if(is_gravel_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
-		broken = 1
 
 /turf/simulated/floor/proc/burn_tile()
 	if(istype(src,/turf/simulated/floor/engine)) return
@@ -328,9 +312,6 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_grass_floor())
 		src.icon_state = "sand[pick("1","2","3")]"
 		burnt = 1
-	else if(is_gravel_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
-		broken = 1
 
 //This proc will delete the floor_tile and the update_iocn() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -426,22 +407,6 @@ turf/simulated/floor/proc/update_icon()
 	update_icon()
 	levelupdate()
 
-/turf/simulated/floor/proc/make_gravel_floor(var/obj/item/stack/tile/gravel/T = null)
-	broken = 0
-	burnt = 0
-	intact = 1
-	if(T)
-		if(istype(T,/obj/item/stack/tile/gravel))
-			floor_tile = T
-			update_icon()
-			levelupdate()
-			return
-	//if you gave a valid parameter, it won't get thisf ar.
-	floor_tile = new/obj/item/stack/tile/gravel
-
-	update_icon()
-	levelupdate()
-
 //This proc will make a turf into a wood floor. Fun eh? Insert the wood tile to be used as the argument
 //If no argument is given a new one will be made.
 /turf/simulated/floor/proc/make_wood_floor(var/obj/item/stack/tile/wood/T = null)
@@ -532,7 +497,7 @@ turf/simulated/floor/proc/update_icon()
 			user << "\blue Reinforcing the floor..."
 			if(do_after(user, 30) && is_plating())
 				if (R.use(2))
-					ChangeTurf(/turf/simulated/floor/engine/built)
+					ChangeTurf(/turf/simulated/floor/engine)
 					playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 			else

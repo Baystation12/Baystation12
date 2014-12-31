@@ -252,11 +252,6 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	icon = 'icons/obj/doors/Doorsilver.dmi'
 	mineral = "silver"
 
-/obj/machinery/door/airlock/silver/lift
-	name = "Lift Door"
-	icon = 'icons/obj/doors/Doorsilver.dmi'
-	mineral = "silver"
-
 /obj/machinery/door/airlock/diamond
 	name = "Diamond Airlock"
 	icon = 'icons/obj/doors/Doordiamond.dmi'

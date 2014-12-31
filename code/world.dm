@@ -1,15 +1,3 @@
-var/global/datum/global_init/init = new ()
-
-/*
-	Pre-map initialization stuff should go here.
-*/
-/datum/global_init/New()
-
-	makeDatumRefLists()
-
-	del(src)
-
-
 /world
 	mob = /mob/new_player
 	turf = /turf/space

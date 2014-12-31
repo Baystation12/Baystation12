@@ -646,15 +646,10 @@ Auto Patrol: []"},
 				src.threatlevel = src.assess_perp(C)
 
 		else if(istype(M, /mob/living/simple_animal/hostile))
-			if(istype(M, /mob/living/simple_animal/hostile/retaliate/goose))
-				continue
 			if(M.stat == DEAD)
 				continue
 			else
 				src.threatlevel = 4
-
-		else if(istype(M, /mob/living/simple_animal/hostile/retaliate/goose))
-			continue
 
 		if(!src.threatlevel)
 			continue

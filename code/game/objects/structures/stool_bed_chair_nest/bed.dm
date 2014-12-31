@@ -114,13 +114,7 @@
 			"You hear metal clanking")
 	M.buckled = src
 	M.loc = src.loc
-	if(istype(src, /obj/structure/stool/bed/chair/bench))
-		if(src.layer == 3)
-			M.dir = 2
-		else
-			M.dir = 1
-	else
-		M.dir = src.dir
+	M.dir = src.dir
 	M.update_canmove()
 	src.buckled_mob = M
 	src.add_fingerprint(user)

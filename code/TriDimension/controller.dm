@@ -149,7 +149,6 @@ atom/movable/Move() //Hackish
 				for(var/obj/o in below)
 					// ingore objects that have any form of invisibility
 					if(o.invisibility) continue
-					if(istype(o, /obj/machinery/singularity)) continue
 					new_list = 2
 					var/image/temp2 = image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer)
 					temp2.color = rgb(127,127,127)

@@ -27,8 +27,6 @@
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
-	verbs += /mob/dead/observer/proc/moveup
-	verbs += /mob/dead/observer/proc/movedown
 
 	stat = DEAD
 

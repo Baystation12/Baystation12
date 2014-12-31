@@ -48,7 +48,7 @@
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
 		return
-	if (!(src.z == 1 || src.z == 7 || src.z == 8))
+	if (src.z > 1)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
 	usr.set_machine(src)
@@ -302,7 +302,7 @@
 /obj/machinery/computer/communications/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	if (src.z > 8)
+	if (src.z > 6)
 		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
 

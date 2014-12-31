@@ -158,5 +158,7 @@
 	minbodytemp = 0
 
 /mob/living/simple_animal/hostile/viscerator/death()
-	..(null,"is smashed into pieces!")
+	..()
+	visible_message("\red <b>[src]</b> is smashed into pieces!")
 	del src
+	return

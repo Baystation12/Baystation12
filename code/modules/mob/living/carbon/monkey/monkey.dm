@@ -57,8 +57,11 @@
 	reagents = R
 	R.my_atom = src
 
-	species = all_species[greaterform]
-	add_language(species.language)
+	//Ensure that the all_species list has been initialized.
+	//If not then this must be round-start and initialize() will
+	//be called directly by the master controller, later.
+	if (ticker && ticker.current_state >= GAME_STATE_SETTING_UP)
+		initialize()
 
 	if(name == initial(name)) //To stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"

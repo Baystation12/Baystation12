@@ -133,13 +133,3 @@
 	layer = 2
 	icon = 'icons/effects/tomatodecal.dmi'
 	random_icon_states = list("smashed_pie")
-
-/obj/effect/decal/cleanable/plantpot //honk
-	name = "smashed plantpot"
-	desc = "It's a broken plant pot."
-	density = 0
-	anchored = 1
-	layer = 2
-	icon = 'icons/effects/effects.dmi'
-	random_icon_states = list("brokenplant")
-

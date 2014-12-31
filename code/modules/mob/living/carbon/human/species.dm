@@ -79,7 +79,6 @@
 	var/hidetail = 0
 	var/dhts = 0
 	var/wingicon = 0
-	var/falldmg = 0
 
 	//Size Differences
 	var/sizechange = 1
@@ -260,7 +259,6 @@
 	primitive = /mob/living/carbon/monkey/aviskree
 	wingicon = 1
 	sizechange = 1
-	falldmg = 1
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
@@ -272,8 +270,7 @@
 	language = "Siik'tajr"
 	tail = "tajtail"
 	unarmed_type = /datum/unarmed_attack/claws
-	darksight = 12
-	falldmg = 1
+	darksight = 8
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -297,11 +294,10 @@
 	language = "Siik'tajr"
 	tail = "Avisaran"
 	unarmed_type = /datum/unarmed_attack/claws_J
-	darksight = 25
+	darksight = 10
 	dhts = 1
 	wingicon = 1
 	sizechange = 1
-	falldmg = 1
 
 	cold_level_1 = 200 //Default 260
 	cold_level_2 = 140 //Default 200
@@ -385,7 +381,6 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	rarity_value = 10
-	sizechange = 1
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -454,7 +449,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | IS_STRONG | GENDERLESS
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | IS_STRONG
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -466,6 +461,10 @@
 	if(istype(D))
 		return 1
 	return 0
+
+/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.gender = NEUTER
+	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
 
@@ -491,7 +490,6 @@
 	language = "Encoded Audio Language"
 	unarmed_type = /datum/unarmed_attack/punch
 	rarity_value = 2
-	falldmg = 2
 
 	eyes = "blank_eyes"
 	brute_mod = 0.5
@@ -510,7 +508,7 @@
 
 	synth_temp_gain = 5 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR | GENDERLESS
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -519,6 +517,10 @@
 		"heart" =    /datum/organ/internal/heart,
 		"brain" =    /datum/organ/internal/brain,
 		)
+
+/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.gender = NEUTER
+	return ..()
 
 /datum/species/kidan
 	name = "Kidan"
@@ -604,7 +606,7 @@
 	sharp = 1
 	edge = 1
 
-/datum/unarmed_attack/claws_J
+/datum/unarmed_attack/claws_J   //Jamie's a bit stronger than the average guy, according to the old code
 	attack_verb = list("scratch", "claw")
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -612,27 +614,6 @@
 	sharp = 1
 	edge = 1
 	shredding = 1
-
-/datum/unarmed_attack/alien
-	attack_verb = list("slash", "maul")
-	attack_sound = 'sound/weapons/slice.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
-	damage = 8
-	sharp = 1
-	edge = 1
-	shredding = 1
-
-/datum/unarmed_attack/alien/drone
-	damage = 8
-
-/datum/unarmed_attack/alien/sentinel
-	damage = 10
-
-/datum/unarmed_attack/alien/hunter
-	damage = 13
-
-/datum/unarmed_attack/alien/queen
-	damage = 23
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")

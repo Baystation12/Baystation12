@@ -61,8 +61,6 @@ var/icwl_keylist = null		//to store the keys & ranks
 			minage = 18
 		if("Internal Affairs Agent")
 			minage = 25
-		if("Clown")
-			minage = 99
 
 	if(age >= minage)
 		return 1

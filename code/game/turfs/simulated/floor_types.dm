@@ -10,12 +10,7 @@
 		name = "floor"
 
 /turf/simulated/floor/airless/ceiling
-	name = "ceiling"
-	icon_state = "ceiling"
-
-/turf/simulated/floor/airless/ceiling/glass
-	name = "glass ceiling"
-	icon_state = "glass_ceiling"
+	icon_state = "rockvault"
 
 /turf/simulated/floor/light
 	name = "Light floor"
@@ -60,9 +55,6 @@
 	heat_capacity = 325000
 	intact = 0
 
-/turf/simulated/floor/engine/built
-	intact = 1
-
 /turf/simulated/floor/engine/nitrogen
 	oxygen = 0
 
@@ -84,7 +76,7 @@
 /turf/simulated/floor/engine/cult
 	name = "engraved floor"
 	icon_state = "cult"
-	intact = 1
+
 
 /turf/simulated/floor/engine/n20
 	New()
@@ -198,12 +190,6 @@
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
 
-/turf/simulated/floor/gravel
-	name = "Gravel patch"
-	icon_state = "gravel"
-	floor_tile = new/obj/item/stack/tile/gravel
-
-
 /turf/simulated/floor/carpet
 	name = "Carpet"
 	icon_state = "carpet"
@@ -233,7 +219,6 @@
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
-	intact = 1
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return

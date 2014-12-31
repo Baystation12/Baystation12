@@ -1413,33 +1413,3 @@
 	 desc = "This cane seems to have 'Ryals' engraved on its handle."
 	 icon_state = "cane"
 	 item_state = "stick"
-
-
-// Yithani
-/obj/item/weapon/kitchenknife/ritual/yithani
-	name = "pearl-hilted knife"
-	desc = "A vicious looking steel blade. The letter Z seems to be scratched into the guard."
-	force = 12
-	throwforce = 15
-	w_class = 2
-
-/obj/item/clothing/suit/unathi/mantle/yithani
-	name = "heavily padded mantle"
-	desc = "Padded to protect against some damage."
-	armor = list(melee = 50, bullet = 5, laser = 15, energy = 5, bomb = 15, bio = 0, rad = 0)
-
-/obj/item/clothing/tie/storage/knifeharness/yithani
-	desc = "A decorated knife harness of stitched leather. The blade slides home beneath the right shoulder."
-	slots = 1
-
-/obj/item/clothing/tie/storage/knifeharness/New()
-	..()
-
-	for(var/obj/item/K in hold.contents)
-		del(K)
-
-	new /obj/item/weapon/kitchenknife/ritual/yithani(hold)
-
-/obj/item/clothing/under/lawyer/black/yithani
-	name = "Zaramiyrh's suit"
-	desc = "A silk-woven black suit with dull gold embroidery. A clip hangs from the side, allowing a harness to be attached."

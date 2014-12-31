@@ -213,11 +213,8 @@ emp_act
 				updatehealth()
 				UpdateDamageIcon()
 				user.drop_from_inventory(I, loc)
-				I.loc = src
-				affected.RobotLimb = I
+				del(I)
 				user.UpdateAppearance()
-				var/obj/item/robot_parts/robolimb = I
-				robolimb.OnInstall()
 				handle_organs(1)
 				return 0
 			else

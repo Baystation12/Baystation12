@@ -155,9 +155,7 @@
 				L.visible_message("<span class='danger'>[L] has been prodded with [src] by [user]!</span>")
 
 	//stun effects
-	var/mob/living/carbon/human/H = L
-	if (!istype(H, /mob/living/carbon/human/xdrone) || !istype(H, /mob/living/carbon/human/xsentinel) || !istype(H, /mob/living/carbon/human/xhunter) || !istype(H, /mob/living/carbon/human/xqueen))
-		L.stun_effect_act(stun, agony, target_zone, src)
+	L.stun_effect_act(stun, agony, target_zone, src)
 
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 	msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
@@ -165,6 +163,7 @@
 	deductcharge(hitcost)
 
 	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
 		H.forcesay(hit_appends)
 
 	return 1
