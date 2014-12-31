@@ -14,6 +14,9 @@
 	if(drain_check)
 		return 1
 
+	if(charge <= 0)
+		return 0
+
 	var/cell_amt = min((amount * CELLRATE), charge)
 	use(cell_amt)
 	return cell_amt / CELLRATE
