@@ -11,7 +11,7 @@
 		// Only make the limb drop if it's not too damaged
 		if(prob(100 - E.is_damaged()))
 			// Override the current limb status and don't cause an explosion
-			E.droplimb(1,1)
+			E.droplimb(1)
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)

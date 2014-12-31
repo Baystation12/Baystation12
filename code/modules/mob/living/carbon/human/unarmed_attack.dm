@@ -174,6 +174,9 @@
 	if (user.legcuffed)
 		return 0
 
+	if(!target || !user)
+		return 0 // Something is wonky here, line 180 is causing a runtime.
+
 	if (!user.lying && (target.lying || zone in list("l_foot", "r_foot")))
 		if(target.grabbed_by == user && target.lying)
 			return 0

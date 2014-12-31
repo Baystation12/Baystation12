@@ -8,6 +8,7 @@
 	var/status = 0
 	var/vital //Lose a vital limb, die immediately.
 	var/parent_organ
+	var/rejecting = 0
 
 	var/brute_dam = 0
 	var/burn_dam = 0
@@ -16,9 +17,9 @@
 	var/min_bruised_damage = 15
 	var/min_broken_damage = 30
 
-	var/list/datum/autopsy_data/autopsy_data = list()
-	var/list/trace_chemicals = list() // traces of chemicals in the organ,
-									  // links chemical IDs to number of ticks for which they'll stay in the blood
+	var/list/transplant_data = list()                 // Stores info when removed.
+	var/list/datum/autopsy_data/autopsy_data = list() // Keeps track of trace chems and weapon damage.
+	var/list/trace_chemicals = list()                 // links chemical IDs to number of ticks for which they'll stay in the blood
 
 /obj/item/organ/New(var/mob/living/carbon/H, var/spawn_robotic)
 	..()
@@ -34,19 +35,20 @@
 		del(src) // remove before merge
 
 	owner = H
-
+	transplant_data = list()
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood)
-		if(!owner)
-			world << "[src] trying to get blood with no owner"
-		else
+		if(owner)
+			transplant_data["species"] = owner.species.name
 			if(!owner.vessel)
 				owner.make_blood()
 			owner.vessel.trans_to(src, 5, 1, 1)
-	if(owner.dna)
+	if(owner && owner.dna)
 		if(!blood_DNA)
 			blood_DNA = list()
 		blood_DNA[owner.dna.unique_enzymes] = owner.dna.b_type
+		transplant_data["blood_type"] = owner.dna.b_type
+		transplant_data["blood_DNA"] =  owner.dna.unique_enzymes
 
 	// Is this item prosthetic?
 	if(spawn_robotic)
@@ -60,6 +62,12 @@
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood)
 		owner.vessel.trans_to(src, 5, 1, 1)
+
+		transplant_data = list()
+		if(owner.dna)
+			transplant_data["blood_type"] = owner.dna.b_type
+			transplant_data["blood_DNA"] =  owner.dna.unique_enzymes
+		transplant_data["species"] =    owner.species.name
 
 	var/turf/target_loc
 	if(user)
@@ -105,3 +113,16 @@
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 	owner = target
 	src.loc = target
+
+/obj/item/organ/proc/sync_with(var/mob/living/carbon/human/target)
+	owner = target
+	transplant_data = list()
+	if(owner.dna)
+		transplant_data["blood_type"] = owner.dna.b_type
+		transplant_data["blood_DNA"] =  owner.dna.unique_enzymes
+	transplant_data["species"] = owner.species.name
+	rejecting = 0
+
+/mob/living/carbon/human/proc/sync_organs()
+	for(var/obj/item/organ/organ in organs)
+		organ.sync_with(src)

@@ -123,8 +123,6 @@
 		msg += "<span class='warning'>[t_He] [t_has] blood-stained hands!</span>\n"
 
 	//handcuffed?
-
-	//handcuffed?
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
 			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] restrained with cable!</span>\n"
@@ -245,23 +243,7 @@
 			wound_flavor_text["[limb_descriptor]"] = "<span class='warning'><b>[t_He] is missing [t_his] [limb_descriptor].</b></span>\n"
 			continue
 
-		if(temp.status & ORGAN_ROBOT)
-			if(temp.is_damaged())
-				var/damage_str = ""
-				if(temp.brute_dam)
-					if(temp.brute_dam > 10)
-						damage_str += "badly "
-					damage_str += "dented"
-				if(temp.burn_dam)
-					if(damage_str != "")
-						damage_str += " and "
-					if(temp.burn_dam > 10)
-						damage_str += "badly "
-					damage_str += "melted"
-				wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_He] has a robot [limb_descriptor]! It is [damage_str].</span>\n"
-			else if(!(species.flags & IS_SYNTHETIC))
-				wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_He] has a robot [limb_descriptor]!</span>\n"
-		else
+		if(temp.is_damaged())
 			var/wound_string = ""
 			for(var/datum/tissue_layer/tissue_layer in temp.tissue_layers)
 				if(!tissue_layer.is_wounded())
@@ -271,7 +253,8 @@
 					wound_string += "\[[wound.get_wound_descriptor()]\]"
 			if(wound_string != "")
 				wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_his] [limb_descriptor] has: [wound_string].</span>\n"
-
+		else if((temp.status & ORGAN_ROBOT) && !(species.flags & IS_SYNTHETIC))
+			wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_He] has a robot [limb_descriptor]!</span>\n"
 
 	//Handles the text strings being added to the actual description.
 	//If they have something that covers the limb, and it is not missing, put flavortext.  If it is covered but bleeding, add other flavortext.

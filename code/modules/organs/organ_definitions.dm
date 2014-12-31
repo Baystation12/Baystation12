@@ -269,23 +269,24 @@
 
 	// Damaged heart virtually reduces the blood volume, as the blood isn't
 	// being pumped properly anymore.
-	if(is_bruised())
-		if(is_broken())
-			blood_volume *= 0.3
+	if(is_damaged()>0)
+		if(is_bruised())
+			if(is_broken())
+				blood_volume *= 0.3
+			else
+				blood_volume *= 0.6
 		else
-			blood_volume *= 0.6
-	else
-		blood_volume *= 0.8
+			blood_volume *= 0.8
 
 	// Mob can handle everything else since it uses only mob vars, not organ vars.
-	owner.handle_blood(blood_volume)
+	owner.blood_volume = blood_volume
 
 /obj/item/organ/internal/heart/removed()
-	owner.handle_blood(0)
+	owner.blood_volume = 0
 	..()
 
 /obj/item/organ/internal/heart/die()
-	owner.handle_blood(0)
+	owner.blood_volume = 0
 	..()
 
 /obj/item/organ/internal/lungs

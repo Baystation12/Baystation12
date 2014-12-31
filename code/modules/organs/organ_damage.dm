@@ -16,7 +16,7 @@
 	burn_dam = max(0,burn_dam-new_burn)
 	update_health()
 
-/obj/item/organ/proc/take_damage(var/brute, var/burn)
+/obj/item/organ/proc/take_damage(var/brute = 0, var/burn = 0)
 	if(status & ORGAN_ROBOT)
 		brute *= 0.8
 		burn *= 0.8
@@ -25,7 +25,6 @@
 	update_health()
 
 /obj/item/organ/external/take_damage(var/brute, var/burn, var/sharp, var/edge)
-
 	if(brute)
 		if(sharp || edge)
 			take_cutting_trauma(brute)
@@ -147,8 +146,8 @@ This function completely restores a damaged organ to perfect condition.
 	return
 
 /obj/item/organ/external/proc/mend_fracture()
-	if(status & ORGAN_ROBOT)
-		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
+	//if(status & ORGAN_ROBOT)
+	//	return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
 		return 0	//will just immediately fracture again
 

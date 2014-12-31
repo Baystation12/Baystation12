@@ -9,6 +9,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 /mob/living/carbon/human/var/datum/reagents/vessel	//Container for blood and BLOOD ONLY. Do not transfer other chems here.
 /mob/living/carbon/human/var/var/pale = 0			//Should affect how mob sprite is drawn, but currently doesn't.
+/mob/living/carbon/human/var/blood_volume = 560
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
@@ -19,6 +20,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	vessel = new/datum/reagents(600)
 	vessel.my_atom = src
 	vessel.add_reagent("blood",560)
+	blood_volume = vessel.total_volume
 
 	spawn(1)
 		fixblood()
@@ -32,7 +34,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			B.color = B.data["blood_colour"]
 
 // Takes care blood loss and regeneration (called by the heart organ)
-/mob/living/carbon/human/proc/handle_blood(var/blood_volume)
+/mob/living/carbon/human/proc/handle_blood()
+
+	if(species.flags & NO_BLOOD)
+		pale = 0
+		return
+
 	switch(blood_volume)
 		if(BLOOD_VOLUME_SAFE to 10000)
 			if(pale)
@@ -43,7 +50,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				pale = 1
 				update_body()
 				src << "<span class='danger'>You feel [pick("dizzy","woozy","faint")]...</span>"
-			if(prob(1))
+			else if(prob(1))
 				src << "<span class='danger'>You feel [pick("dizzy","woozy","faint")]...</span>"
 			if(getOxyLoss() < 20)
 				adjustOxyLoss(3)

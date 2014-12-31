@@ -4,9 +4,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "appendix"
 
-	var/list/transplant_data = list()         // Stores info when removed.
-	var/dead_icon                             // Icon used when the organ dies.
-	var/rejecting = 0
+	var/dead_icon // Icon used when the organ dies.
 
 /obj/item/organ/internal/attack_self(mob/user as mob)
 
@@ -39,7 +37,7 @@
 	affected.internal_organs -= src
 
 	loc = owner.loc
-	rejecting = null
+	rejecting = 0
 
 	if(owner && user && vital)
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> removed a vital organ ([src]) from [owner.name] ([owner.ckey]) (INTENT: [uppertext(user.a_intent)])</font>"
@@ -105,47 +103,47 @@
 		germ_level = 0
 		return
 
-	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
-		//** Handle antibiotics and curing infections
-		handle_antibiotics()
+	if(owner.bodytemperature < 170)	//cryo stops germs from moving and doing their bad stuffs
+		return
 
-		//** Handle the effects of infections
-		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	//** Handle antibiotics and curing infections
+	handle_antibiotics()
 
-		if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
-			germ_level--
+	//** Handle the effects of infections
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 
-		if (germ_level >= INFECTION_LEVEL_ONE/2)
-			//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
-			if(antibiotics < 5 && prob(round(germ_level/6)))
-				germ_level++
+	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
+		germ_level--
 
-		if (germ_level >= INFECTION_LEVEL_TWO)
-			var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
-			//spread germs
-			if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
-				parent.germ_level++
+	if (germ_level >= INFECTION_LEVEL_ONE/2)
+		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+		if(antibiotics < 5 && prob(round(germ_level/6)))
+			germ_level++
 
-			if (prob(3))	//about once every 30 seconds
-				take_damage(1,silent=prob(30))
+	if (germ_level >= INFECTION_LEVEL_TWO)
+		var/obj/item/organ/external/parent = owner.get_organ(parent_organ)
+		//spread germs
+		if (antibiotics < 5 && parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+			parent.germ_level++
 
-		// Process unsuitable transplants. TODO: consider some kind of
-		// immunosuppressant that changes transplant data to make it match.
-		if(transplant_data)
-			if(!rejecting && prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type,owner.species,transplant_data["species"]))
-				rejecting = 1
-			else
-				rejecting++ //Rejection severity increases over time.
-				if(rejecting % 10 == 0) //Only fire every ten rejection ticks.
-					switch(rejecting)
-						if(1 to 50)
-							take_damage(1)
-						if(51 to 200)
-							owner.reagents.add_reagent("toxin", 1)
-							take_damage(1)
-						if(201 to 500)
-							take_damage(rand(2,3))
-							owner.reagents.add_reagent("toxin", 2)
-						if(501 to INFINITY)
-							take_damage(4)
-							owner.reagents.add_reagent("toxin", rand(3,5))
+		if (prob(3))	//about once every 30 seconds
+			take_damage(1,0)
+
+	// Process unsuitable transplants. TODO: consider some kind of
+	// immunosuppressant that changes transplant data to make it match.
+	if(transplant_data)
+		if(rejecting > 0 || (prob(20) && owner.dna && blood_incompatible(transplant_data["blood_type"],owner.dna.b_type,owner.species.name,transplant_data["species"])))
+			rejecting++ //Rejection severity increases over time.
+			if(rejecting % 10 == 0) //Only fire every ten rejection ticks.
+				switch(rejecting)
+					if(1 to 50)
+						take_damage(1)
+					if(51 to 200)
+						owner.reagents.add_reagent("toxin", 1)
+						take_damage(1)
+					if(201 to 500)
+						take_damage(rand(2,3))
+						owner.reagents.add_reagent("toxin", 2)
+					if(501 to INFINITY)
+						take_damage(4)
+						owner.reagents.add_reagent("toxin", rand(3,5))

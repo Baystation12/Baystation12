@@ -108,7 +108,7 @@
 //Determines if we even need to process this organ.
 
 /obj/item/organ/external/proc/need_process()
-	if(status & ORGAN_ROBOT)	//Missing limb is missing
+	if(status & ORGAN_ROBOT)
 		return 0
 	if(dislocated > 0 || brute_dam || burn_dam || germ_level)
 		return 1
