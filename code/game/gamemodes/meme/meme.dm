@@ -5,12 +5,11 @@
 /datum/game_mode/meme
 	name = "Memetic Anomaly"
 	config_tag = "meme"
-	required_players = 3
+	required_players = 2
 	required_players_secret = 10
 	restricted_jobs = list("AI", "Cyborg")
 	recommended_enemies = 2 // need at least a meme and a host
 	votable = 0 // temporarily disable this mode for voting
-
 
 
 	var/var/list/datum/mind/first_hosts = list()
@@ -111,21 +110,42 @@
 	if (config.objectives_disabled)
 		return
 
-	// meme always needs to attune X hosts
+/*	// meme always needs to attune X hosts
 	var/datum/objective/meme_attune/attune_objective = new
 	attune_objective.owner = meme
 	attune_objective.gen_amount_goal(3,6)
-	meme.objectives += attune_objective
+	meme.objectives += attune_objective*/
 
 	// generate some random objectives, use standard traitor objectives
-	var/job = first_host.assigned_role
+	//var/job = first_host.assigned_role
 
-	for(var/datum/objective/o in SelectObjectives(job, meme))
-		o.owner = meme
-		meme.objectives += o
+	switch(rand(1,100))
+		if(1 to 33)
+			var/datum/objective/assassinate/kill_objective = new
+			kill_objective.owner = meme
+			kill_objective.find_target()
+			meme.objectives += kill_objective
+		if(34 to 50)
+			var/datum/objective/brig/brig_objective = new
+			brig_objective.owner = meme
+			brig_objective.find_target()
+			meme.objectives += brig_objective
+		if(51 to 66)
+			var/datum/objective/harm/harm_objective = new
+			harm_objective.owner = meme
+			harm_objective.find_target()
+			meme.objectives += harm_objective
+		else
+			var/datum/objective/steal/steal_objective = new
+			steal_objective.owner = meme
+			steal_objective.find_target()
+			meme.objectives += steal_objective
+
+//	for(var/datum/objective/o in SelectObjectives(job, meme))
+	//	o.owner = meme
+	//	meme.objectives += o
 
 	greet_meme(meme)
-
 	return
 
 /datum/game_mode/proc/greet_meme(var/datum/mind/meme, var/you_are=1)

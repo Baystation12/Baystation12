@@ -336,7 +336,7 @@ datum/objective/silence
 					var/turf/T = get_turf(player)
 					if(!T)	continue
 					switch(T.loc.type)
-						if(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
+						if(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom, /area/shuttle/escape_pod_medical/centcom,  /area/shuttle/escape_pod_arrivals/centcom)
 							return 0
 		return 1
 
@@ -375,6 +375,14 @@ datum/objective/escape
 		if(istype(check_area, /area/shuttle/escape_pod3/centcom))
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod5/centcom))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_medical/centcom))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_medical/transit))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_arrivals/transit))
+			return 1
+		if(istype(check_area, /area/shuttle/escape_pod_arrivals/centcom))
 			return 1
 		else
 			return 0
@@ -500,6 +508,7 @@ datum/objective/steal
 		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
 		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"the captain's bar of soap" = /obj/item/weapon/soap/cap,
 	)
 
 	var/global/possible_items_special[] = list(
@@ -591,6 +600,10 @@ datum/objective/steal
 						if(istype(check_area, /area/shuttle/escape_pod3/centcom))
 							return 1
 						if(istype(check_area, /area/shuttle/escape_pod5/centcom))
+							return 1
+						if(istype(check_area, /area/shuttle/escape_pod_medical/centcom))
+							return 1
+						if(istype(check_area, /area/shuttle/escape_pod_arrivals/centcom))
 							return 1
 			else
 
@@ -744,6 +757,20 @@ datum/objective/absorb
 /*-------ENDOF CULTIST------*/
 */
 
+datum/objective/blood
+	proc/gen_amount_goal(low = 150, high = 400)
+		target_amount = rand(low,high)
+		target_amount = round(round(target_amount/5)*5)
+		explanation_text = "Accumulate atleast [target_amount] units of blood in total."
+		return target_amount
+
+	check_completion()
+		if(owner && owner.vampire && owner.vampire.bloodtotal && owner.vampire.bloodtotal >= target_amount)
+			return 1
+		else
+			return 0
+
+
 //Vox heist objectives.
 
 datum/objective/heist
@@ -793,7 +820,7 @@ datum/objective/heist/loot
 
 	choose_target()
 		var/loot = "an object"
-		switch(rand(1,8))
+		switch(rand(1,9))
 			if(1)
 				target = /obj/structure/particle_accelerator
 				target_amount = 6
@@ -826,6 +853,10 @@ datum/objective/heist/loot
 				target = /obj/item/weapon/gun/energy/ionrifle
 				target_amount = 1
 				loot = "an ion gun"
+			if(9)
+				target = /obj/item/weapon/soap/cap
+				target_amount = 1
+				loot = "the captain's bar of soap"
 
 		explanation_text = "We are lacking in hardware. Steal [loot]."
 

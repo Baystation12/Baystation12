@@ -108,32 +108,46 @@ Please contact me on #coderbus IRC. ~Carn x
 #define MUTANTRACE_LAYER		1
 #define MUTATIONS_LAYER			2
 #define DAMAGE_LAYER			3
-#define UNIFORM_LAYER			4
-#define TAIL_LAYER				5		//bs12 specific. this hack is probably gonna come back to haunt me
-#define ID_LAYER				6
-#define SHOES_LAYER				7
-#define GLOVES_LAYER			8
-#define SUIT_LAYER				9
-#define GLASSES_LAYER			10
-#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		12
-#define BACK_LAYER				13
-#define HAIR_LAYER				14		//TODO: make part of head layer?
-#define EARS_LAYER				15
-#define FACEMASK_LAYER			16
-#define HEAD_LAYER				17
+#define UNIFORM_LAYER			4			//bs12 specific. this hack is probably gonna come back to haunt me
+#define ID_LAYER				5
+#define SHOES_LAYER				6
+#define GLOVES_LAYER			7
+#define SUIT_LAYER				8
+#define GLASSES_LAYER			9
+#define BELT_LAYER				10		//Possible make this an overlay of somethign required to wear a belt?
+#define SUIT_STORE_LAYER		11
+#define BACK_LAYER				12
+#define HAIR_LAYER				13		//TODO: make part of head layer?
+#define EARS_LAYER				14
+#define FACEMASK_LAYER			15
+#define HEAD_LAYER				16
+#define NECK_LAYER				17
 #define COLLAR_LAYER			18
-#define HANDCUFF_LAYER			19
-#define LEGCUFF_LAYER			20
-#define L_HAND_LAYER			21
-#define R_HAND_LAYER			22
-#define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			23
+#define TAIL_LAYER				19
+#define HANDCUFF_LAYER			20
+#define LEGCUFF_LAYER			21
+#define L_HAND_LAYER			22
+#define R_HAND_LAYER			23
+#define TARGETED_LAYER			24		//BS12: Layer for the target overlay from weapon targeting system
+#define FIRE_LAYER				25
+#define TOTAL_LAYERS			25
 //////////////////////////////////
 
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
+
+
+/mob/living/carbon/human/proc/apply_overlay(cache_index)
+	var/image/I = overlays_standing[cache_index]
+	if(I)
+		overlays += I
+
+/mob/living/carbon/human/proc/remove_overlay(cache_index)
+	if(overlays_standing[cache_index])
+		overlays -= overlays_standing[cache_index]
+		overlays_standing[cache_index] = null
+
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 //this proc is messy as I was forced to include some old laggy cloaking code to it so that I don't break cloakers
@@ -429,6 +443,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
+	if(species.name == "Machine") //For showing Glasses over their monitors ~yash
+		if(glasses)
+			var/icon/glasses_worn
+			if(glasses.icon_override)
+				glasses_worn = new/icon("icon" = glasses.icon_override, "icon_state" = "[glasses.icon_state]")
+			else if(glasses.sprite_sheets && glasses.sprite_sheets[species.name])
+				glasses_worn= new/icon("icon" = glasses.sprite_sheets[species.name], "icon_state" = "[glasses.icon_state]")
+			else
+				glasses_worn= new/icon("icon" = 'icons/mob/eyes.dmi', "icon_state" = "[glasses.icon_state]")
+			face_standing.Blend(glasses_worn, ICON_OVERLAY)
+
 	overlays_standing[HAIR_LAYER]	= image(face_standing)
 
 	if(update_icons)   update_icons()
@@ -506,6 +531,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
 
+/mob/living/carbon/human/update_fire()
+
+	remove_overlay(FIRE_LAYER)
+	if(on_fire)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+	else
+		overlays_standing[FIRE_LAYER] = null
+
+	apply_overlay(FIRE_LAYER)
 
 /* --------------------------------------- */
 //For legacy support.
@@ -526,6 +560,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_belt(0)
 	update_inv_back(0)
 	update_inv_wear_suit(0)
+	update_inv_neck(0)
 	update_inv_r_hand(0)
 	update_inv_l_hand(0)
 	update_inv_handcuffed(0)
@@ -538,6 +573,19 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
+
+
+/mob/living/carbon/human/update_inv_neck(var/update_icons=1)
+	if(neck)
+		var/t_state = neck.item_state
+		if(!t_state)	t_state = neck.icon_state
+		var/image/standing	= image("icon" = ((neck.icon_override) ? neck.icon_override : 'icons/mob/neck.dmi'), "icon_state" = "[t_state]")
+		neck.screen_loc = ui_neck
+		overlays_standing[NECK_LAYER]	= standing
+	else
+		overlays_standing[NECK_LAYER]	= null
+	if(update_icons)   update_icons()
+
 
 /mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
@@ -637,6 +685,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_standing[GLASSES_LAYER]	= null
 	if(update_icons)   update_icons()
+	if(species.name == "Machine")
+		update_hair(1)
 
 /mob/living/carbon/human/update_inv_ears(var/update_icons=1)
 	overlays_standing[EARS_LAYER] = null
@@ -904,6 +954,20 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 			overlays_standing[TAIL_LAYER]	= image(tail_s)
 
+	if(species.wingicon)
+		var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
+		if(gender == "female")
+			tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_f_s")
+		tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		if(wear_suit) //runtime fix ~yash
+			if((wear_suit.flags_inv & HIDETAIL) && istype(wear_suit, /obj/item/clothing/suit/space))
+				var/icon/wings = new /icon ('icons/effects/species.dmi',"[species.tail]_s")
+				if(gender == "female")
+					wings = new /icon ('icons/effects/species.dmi',"[species.tail]_f_s")
+				tail_s.Blend(wings, ICON_OVERLAY)
+
+		overlays_standing[TAIL_LAYER]	= image(tail_s)
+
 	if(update_icons)
 		update_icons()
 
@@ -921,6 +985,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 	overlays_standing[COLLAR_LAYER]	= standing
 
 	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/update_inv_wear_pda(var/update_icons=1)
+	if(wear_pda)			wear_pda.screen_loc = ui_pda
+	if(update_icons)	update_icons()
 
 
 // Used mostly for creating head items
@@ -976,10 +1044,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef BACK_LAYER
 #undef HAIR_LAYER
 #undef HEAD_LAYER
+#undef NECK_LAYER
 #undef COLLAR_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
 #undef L_HAND_LAYER
 #undef R_HAND_LAYER
 #undef TARGETED_LAYER
+#undef FIRE_LAYER
 #undef TOTAL_LAYERS

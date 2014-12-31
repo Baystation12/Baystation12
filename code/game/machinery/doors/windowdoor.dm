@@ -13,9 +13,18 @@
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
 
+
+/obj/machinery/door/window/update_nearby_tiles(need_rebuild)
+	if(!air_master)
+		return 0
+
+	air_master.mark_for_update(get_turf(src))
+
+	return 1
+
 /obj/machinery/door/window/New()
 	..()
-	update_nearby_tiles()
+
 	if (src.req_access && src.req_access.len)
 		src.icon_state = "[src.icon_state]"
 		src.base_state = src.icon_state
@@ -24,7 +33,6 @@
 /obj/machinery/door/window/Del()
 	density = 0
 	playsound(src, "shatter", 70, 1)
-	update_nearby_tiles()
 	..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
@@ -323,6 +331,14 @@
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
 
+/obj/machinery/door/window/brigdoor/northright/reinforced
+	icon = 'icons/obj/doors/edge_Doorfire.dmi'
+	icon_state = "door"
+	base_state = "door"
+
+/obj/machinery/door/window/brigdoor/northright/reinforced/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	return
+
 /obj/machinery/door/window/brigdoor/eastright
 	dir = EAST
 	icon_state = "rightsecure"
@@ -337,3 +353,5 @@
 	dir = SOUTH
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
+
+

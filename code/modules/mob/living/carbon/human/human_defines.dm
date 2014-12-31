@@ -23,7 +23,7 @@
 	var/g_skin = 0
 	var/b_skin = 0
 
-	var/size_multiplier = 1 //multiplier for the mob's icon size
+	var/size_multiplier = 0.95 //multiplier for the mob's icon size
 	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
@@ -52,9 +52,11 @@
 	var/obj/item/l_ear = null
 	var/obj/item/r_ear = null
 	var/obj/item/wear_id = null
+	var/obj/item/wear_pda = null
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
+	var/obj/item/neck = null
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
@@ -81,3 +83,10 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+
+	var/stored_account_number = null
+	var/stored_account_pin = null
+	var/stored_account_money = null
+
+	var/emagged = 0
+	var/ripping = 0

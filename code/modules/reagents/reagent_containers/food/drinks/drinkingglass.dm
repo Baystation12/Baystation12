@@ -598,6 +598,12 @@
 					name = "Glass of ???"
 					desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 					center_of_mass = list("x"=16, "y"=5)
+				if("tea")
+					name = "Hot Tea"
+					desc = "A lovely hot cup of old english tea, how refreshing."
+					icon_state = "teacup"
+					item_state = "coffee"
+					center_of_mass = list("x"=16, "y"=14)
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"

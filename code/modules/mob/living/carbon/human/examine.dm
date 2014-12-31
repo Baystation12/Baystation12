@@ -158,6 +158,11 @@
 		else
 			msg += "[t_He] [t_has] \icon[wear_mask] \a [wear_mask] on [t_his] face.\n"
 
+	//neck
+	if(neck)
+		msg += "[t_He] [t_has] \icon[neck] \a [neck] on [t_his] neck.\n"
+
+
 	//eyes
 	if(glasses && !skipeyes)
 		if(glasses.blood_DNA)
@@ -172,6 +177,7 @@
 	//right ear
 	if(r_ear && !skipears)
 		msg += "[t_He] [t_has] \icon[r_ear] \a [r_ear] on [t_his] right ear.\n"
+
 
 	//ID
 	if(wear_id)
@@ -225,7 +231,10 @@
 					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
 
 	msg += "<span class='warning'>"
-
+	if(fire_stacks > 0)
+		msg += "[t_He] [t_is] covered in something flammable.\n"
+	if(fire_stacks < 0)
+		msg += "[t_He] looks a little soaked.\n"
 	if(nutrition < 100)
 		msg += "[t_He] [t_is] severely malnourished.\n"
 	else if(nutrition >= 500)
@@ -238,6 +247,9 @@
 
 	if(getBrainLoss() >= 60)
 		msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
+
+	if(powerloss>=10)
+		msg += "\red [t_He] appears to be losing power!\n"
 
 	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(!key)
@@ -464,9 +476,9 @@
 		var/mob/living/silicon/robot/R = M
 		switch(hudtype)
 			if("security")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/sec) || istype(R.module_state_2, /obj/item/borg/sight/hud/sec) || istype(R.module_state_3, /obj/item/borg/sight/hud/sec)
+				return istype(R.hud, /obj/item/borg/sight/hud/sec)
 			if("medical")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/med) || istype(R.module_state_2, /obj/item/borg/sight/hud/med) || istype(R.module_state_3, /obj/item/borg/sight/hud/med)
+				return istype(R.hud, /obj/item/borg/sight/hud/med)
 			else
 				return 0
 	else

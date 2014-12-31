@@ -12,7 +12,6 @@
 	var/code = 30
 	var/frequency = 1457
 	var/delay = 0
-	var/airlock_wire = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
@@ -118,10 +117,7 @@
 
 
 	pulse(var/radio = 0)
-		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
-			var/obj/machinery/door/airlock/A = src.loc
-			A.pulse(src.airlock_wire)
-		else if(holder)
+		if(holder)
 			holder.process_activation(src, 1, 0)
 		else
 			..(radio)

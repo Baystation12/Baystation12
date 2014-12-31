@@ -695,6 +695,15 @@ steam.start() -- spawns the effect
 		if(air_group) return 0
 		return !density
 
+
+	proc/update_nearby_tiles(need_rebuild)
+		if(!air_master)
+			return 0
+
+		air_master.mark_for_update(get_turf(src))
+
+		return 1
+
 /datum/effect/effect/system/reagents_explosion
 	var/amount 						// TNT equivalent
 	var/flashing = 0			// does explosion creates flash effect?
@@ -761,3 +770,86 @@ steam.start() -- spawns the effect
 				dmglevel = 3
 
 			if(dmglevel<4) holder.ex_act(dmglevel)
+
+////Yashaldie custom effects
+
+
+//blood water
+/obj/effect/effect/blood_water
+	name = "blood_water"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "blood_extinguish"
+	var/life = 15.0
+	flags = TABLEPASS
+	mouse_opacity = 0
+
+
+/obj/effect/effect/blood_water/New()
+	..()
+	//var/turf/T = src.loc
+	//if (istype(T, /turf))
+	//	T.firelevel = 0 //TODO: FIX
+	spawn( 70 )
+		delete()
+		return
+	return
+
+/obj/effect/effect/blood_water/Del()
+	//var/turf/T = src.loc
+	//if (istype(T, /turf))
+	//	T.firelevel = 0 //TODO: FIX
+	..()
+	return
+
+/obj/effect/effect/blood_water/Move(turf/newloc)
+	//var/turf/T = src.loc
+	//if (istype(T, /turf))
+	//	T.firelevel = 0 //TODO: FIX
+	if (--src.life < 1)
+		//SN src = null
+		delete()
+	if(newloc.density)
+		return 0
+	.=..()
+
+/obj/effect/effect/blood_water/Bump(atom/A)
+	if(reagents)
+		reagents.reaction(A)
+	return ..()
+
+
+//blood steam
+
+
+/obj/effect/effect/blood_steam
+	name = "blood_steam"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "blood_extinguish"
+	density = 0
+
+/datum/effect/effect/system/blood_steam_spread
+
+	set_up(n = 3, c = 0, turf/loc)
+		if(n > 10)
+			n = 10
+		number = n
+		cardinals = c
+		location = loc
+
+	start()
+		var/i = 0
+		for(i=0, i<src.number, i++)
+			spawn(0)
+				if(holder)
+					src.location = get_turf(holder)
+				var/obj/effect/effect/blood_steam/blood_steam = new /obj/effect/effect/blood_steam(src.location)
+				var/direction
+				if(src.cardinals)
+					direction = pick(cardinal)
+				else
+					direction = pick(alldirs)
+				for(i=0, i<pick(1,2,3), i++)
+					sleep(5)
+					step(blood_steam,direction)
+				spawn(20)
+					blood_steam.delete()

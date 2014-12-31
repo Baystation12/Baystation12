@@ -7,6 +7,11 @@ var/global/send_emergency_team = 0 // Used for automagic response teams
 var/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
 var/can_call_ert
 
+var/medic_slots = 0
+var/sec_slots = 0
+var/command_slots = 0
+var/engineer_slots = 0
+
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
 	set category = "Special Verbs"
@@ -30,17 +35,31 @@ var/can_call_ert
 		switch(alert("The station is not in red alert. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
+
+	var/selected_role = input("Choose the ERT type!") in list ("Security", "Medical", "Engineering", "Other")
+	switch(selected_role)
+		if("Security")
+			ERT_TYPE = 1
+		if("Medical")
+			ERT_TYPE = 2
+		if("Engineering")
+			ERT_TYPE = 3
+		if("Other")
+			ERT_TYPE = 4
+
 	if(send_emergency_team)
 		usr << "\red Looks like somebody beat you to it!"
 		return
 
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
+	log_admin_single("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1)
 
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
+	var/role_new
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
 		if(!send_emergency_team)
@@ -53,6 +72,56 @@ client/verb/JoinResponseTeam()
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
 			return
 
+		if(ERT_TYPE == 1)
+			command_slots = 1
+			sec_slots = 2
+			engineer_slots = 1
+			medic_slots = 1
+		else if(ERT_TYPE == 2)
+			command_slots = 1
+			sec_slots = 1
+			engineer_slots = 1
+			medic_slots = 2
+		else if(ERT_TYPE == 3)
+			command_slots = 1
+			sec_slots = 1
+			engineer_slots = 2
+			medic_slots = 1
+		else if(ERT_TYPE == 4)
+			command_slots = 1
+			sec_slots = 2
+			engineer_slots = 2
+			medic_slots = 2
+
+		var/selected_role = input("Choose your ERT role") in list ("Commander", "Security", "Medical", "Engineering")
+		switch(selected_role)
+			// ERT_ROLE: 1 = Security, 2 = Medical, 3 = Engineering, 4 = Commander
+			if("Commander")
+				if(command_slots == 0)
+					usr << "\red This slot has already been filled."
+					return
+				role_new = 4
+				command_slots--
+			if("Security")
+				if(sec_slots == 0)
+					usr << "\red This slot has already been filled."
+					return
+				role_new = 1
+				sec_slots--
+			if("Medical")
+				if(medic_slots == 0)
+					usr << "\red This slot has already been filled."
+					return
+				role_new = 2
+				medic_slots--
+			if("Engineering")
+				if(engineer_slots == 0)
+					usr << "\red This slot has already been filled."
+					return
+				role_new = 3
+				engineer_slots--
+
+
 		if(response_team_members.len > 5) usr << "The emergency response team is already full!"
 
 
@@ -62,15 +131,17 @@ client/verb/JoinResponseTeam()
 			if(!new_name)//Somebody changed his mind, place is available again.
 				L.name = "Commando"
 				return
+
+
 			var/leader_selected = isemptylist(response_team_members)
-			var/mob/living/carbon/human/new_commando = create_response_team(L.loc, leader_selected, new_name)
+			var/mob/living/carbon/human/new_commando = create_response_team(L.loc, leader_selected, new_name, role_new)
 			del(L)
 			new_commando.mind.key = usr.key
 			new_commando.key = usr.key
-
-			new_commando << "\blue You are [!leader_selected?"a member":"the <B>LEADER</B>"] of an Emergency Response Team, a type of military division, under CentComm's service. There is a code red alert on [station_name()], you are tasked to go and fix the problem."
+			new_commando.ert_role = role_new
+			new_commando << "\blue You are a part of an Emergency Response Team, a type of military division under CentComm's service. There is a distress signal originating from [station_name()], you are tasked to go and fix the problem."
 			new_commando << "<b>You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready."
-			if(!leader_selected)
+			if(new_commando.ert_role != 4)
 				new_commando << "<b>As member of the Emergency Response Team, you answer only to your leader and CentComm officials.</b>"
 			else
 				new_commando << "<b>As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
@@ -137,7 +208,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		can_call_ert = 0 // Only one call per round, ladies.
 		return
 
-	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "Central Command")
+	command_announcement.Announce("An emergency response team is being dispatched to [station_name()] in response to a distress signal we've recieved. It will be deployed as soon as possible.", "Nanotrasen Emergency Dispatch")
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1
@@ -159,7 +230,7 @@ proc/trigger_armed_response_team(var/force = 0)
 			continue
 */
 
-/client/proc/create_response_team(obj/spawn_location, leader_selected = 0, commando_name)
+/client/proc/create_response_team(obj/spawn_location, leader_selected = 0, commando_name, var/ert_role_new)
 
 	//usr << "\red ERT has been temporarily disabled. Talk to a coder."
 	//return
@@ -263,6 +334,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	M.name = commando_name
 	M.age = !leader_selected ? rand(23,35) : rand(35,45)
 
+	M.ert_role = ert_role_new
 	M.dna.ready_dna(M)//Creates DNA.
 
 	//Creates mind stuff.
@@ -275,6 +347,7 @@ proc/trigger_armed_response_team(var/force = 0)
 		ticker.minds += M.mind//Adds them to regular mind list.
 	M.loc = spawn_location
 	M.equip_strike_team(leader_selected)
+	M.implant_loyalty(M)
 	return M
 
 /mob/living/carbon/human/proc/equip_strike_team(leader_selected = 0)
@@ -314,12 +387,27 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
 */
 	var/obj/item/weapon/card/id/W = new(src)
-	W.assignment = "Emergency Response Team[leader_selected ? " Leader" : ""]"
+	var/ID_assignment
+	if(src.ert_role == 1)
+		W.assignment = "Emergency Response Team Security"
+		W.access = get_centcom_access("Security")
+		ID_assignment = "Emergency Response Team Security"
+	if(src.ert_role == 2)
+		W.assignment = "Emergency Response Team Medic"
+		W.access = get_centcom_access("Medic")
+		ID_assignment = "Emergency Response Team Medic"
+	if(src.ert_role == 3)
+		W.assignment = "Emergency Response Team Engineer"
+		W.access = get_centcom_access("Engineer")
+		ID_assignment = "Emergency Response Team Engineer"
+	if(src.ert_role == 4)
+		W.assignment = "Emergency Response Team Commander"
+		ID_assignment = "Emergency Response Team Commander"
+		W.access = get_centcom_access("Commander")
 	W.registered_name = real_name
-	W.name = "[real_name]'s ID Card ([W.assignment])"
+	W.name = "[real_name]'s ID Card ([ID_assignment])"
 	W.icon_state = "centcom"
-	W.access = get_all_accesses()
-	W.access += get_all_centcom_access()
+	W.access += get_all_accesses()
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1

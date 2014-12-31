@@ -112,6 +112,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	secured_wires = 1
 
 /obj/machinery/door/airlock/security
 	name = "Airlock"
@@ -137,6 +138,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
+	secured_wires = 1
 
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
@@ -154,6 +156,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	icon = 'icons/obj/doors/vault.dmi'
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
+	secured_wires = 1
 
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
@@ -179,6 +182,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
 	glass = 1
+	secured_wires = 1
 
 /obj/machinery/door/airlock/glass_engineering
 	name = "Maintenance Hatch"
@@ -322,6 +326,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	name = "High Tech Security Airlock"
 	icon = 'icons/obj/doors/hightechsecurity.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
+	secured_wires = 1
 
 /*
 About the new airlock wires panel:
@@ -868,9 +873,9 @@ About the new airlock wires panel:
 				t1 += "<a href='?src=\ref[src];wires=[wires[wiredesc]]'>Cut</a> "
 				t1 += "<a href='?src=\ref[src];pulse=[wires[wiredesc]]'>Pulse</a> "
 				if(src.signalers[wires[wiredesc]])
-					t1 += "<a href='?src=\ref[src];remove-signaler=[wires[wiredesc]]'>Detach signaler</a>"
+					t1 += "<a href='?src=\ref[src];remove-signaler=[wires[wiredesc]]'>Detach activator</a>"
 				else
-					t1 += "<a href='?src=\ref[src];signaler=[wires[wiredesc]]'>Attach signaler</a>"
+					t1 += "<a href='?src=\ref[src];signaler=[wires[wiredesc]]'>Attach activator</a>"
 			t1 += "<br>"
 
 		t1 += text("<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]<br>\n[]", (src.locked ? "The door bolts have fallen!" : "The door bolts look up."), (src.lights ? "The door bolt lights are on." : "The door bolt lights are off!"), ((src.arePowerSystemsOn()) ? "The test light is on." : "The test light is off!"), (src.aiControlDisabled==0 ? "The 'AI control allowed' light is on." : "The 'AI control allowed' light is off."),  (src.safe==0 ? "The 'Check Wiring' light is on." : "The 'Check Wiring' light is off."), (src.normalspeed==0 ? "The 'Check Timing Mechanism' light is on." : "The 'Check Timing Mechanism' light is off."))
@@ -898,6 +903,11 @@ About the new airlock wires panel:
 				user << "<span class='warning'>Unable to interface: Connection refused.</span>"
 		return 0
 	return 1
+
+/obj/machinery/door/airlock/hear_talk(mob/M, var/msg)
+	for (var/obj/item/device/assembly/R in src.signalers)
+		R.hear_talk(M, msg)
+	..()
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
 	if(!nowindow)
@@ -934,16 +944,16 @@ About the new airlock wires panel:
 				src.pulse(t1)
 		else if(href_list["signaler"])
 			var/wirenum = text2num(href_list["signaler"])
-			if(!istype(usr.get_active_hand(), /obj/item/device/assembly/signaler))
-				usr << "You need a signaller!"
+			if(!istype(usr.get_active_hand(), /obj/item/device/assembly))
+				usr << "You need an activator!"
 				return
 			if(src.isWireColorCut(wirenum))
-				usr << "You can't attach a signaller to a cut wire."
+				usr << "You can't attach a activator to a cut wire."
 				return
-			var/obj/item/device/assembly/signaler/R = usr.get_active_hand()
-			if(R.secured)
-				usr << "This radio can't be attached!"
-				return
+			var/obj/item/device/assembly/R = usr.get_active_hand()
+			//if(R.secured) That made some assemblies not work. Meh.
+				//usr << "This activator can't be attached!"
+				//return
 			var/mob/M = usr
 			M.drop_item()
 			R.loc = src
@@ -952,9 +962,9 @@ About the new airlock wires panel:
 		else if(href_list["remove-signaler"])
 			var/wirenum = text2num(href_list["remove-signaler"])
 			if(!(src.signalers[wirenum]))
-				usr << "There's no signaller attached to that wire!"
+				usr << "There's no activator attached to that wire!"
 				return
-			var/obj/item/device/assembly/signaler/R = src.signalers[wirenum]
+			var/obj/item/device/assembly/R = src.signalers[wirenum]
 			R.loc = usr.loc
 			R.airlock_wire = null
 			src.signalers[wirenum] = null
@@ -1168,7 +1178,7 @@ About the new airlock wires panel:
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(C, /obj/item/device/assembly))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C

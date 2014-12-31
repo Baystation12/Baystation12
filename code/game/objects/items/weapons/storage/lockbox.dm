@@ -68,6 +68,7 @@
 
 /obj/item/weapon/storage/lockbox/loyalty
 	name = "lockbox of loyalty implants"
+	desc = "A locked box full of loyalty implanters. (Warning, does not guarantee loyalty)"
 	req_access = list(access_security)
 
 	New()

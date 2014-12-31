@@ -98,13 +98,16 @@ var/list/alldepartments = list("Central Command")
 
 			if(dpt == "Central Command")
 				Centcomm_fax(src, tofax.info, tofax.name, usr)
+				investigate_log("\blue <b><font color='#006100'>CENTCOMM FAX: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 1800
 
 			else if(dpt == "Sol Government")
 				Solgov_fax(src, tofax.info, tofax.name, usr)
+				investigate_log("\blue <b><font color='#1F66A0'>SOL GOVERNMENT FAX: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 1800
 			else
 				SendFax(tofax.info, tofax.name, usr, dpt)
+				investigate_log("\blue <b><font color='#1F66A0'>FAX to [dpt]: </font>[key_name(usr, 1)]</b>: Receiving '[tofax.name]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[tofax.info]'>view message</a>","fax")
 				sendcooldown = 600
 
 			usr << "Message transmitted successfully."
@@ -183,18 +186,16 @@ var/list/alldepartments = list("Central Command")
 	return
 
 /proc/Centcomm_fax(var/originfax, var/sent, var/sentname, var/mob/Sender)
-
-	var/msg = "\blue <b><font color='#006100'>CENTCOMM FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;CentcommFaxReply=\ref[Sender];originfax=\ref[originfax]'>RPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
-
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if((R_ADMIN|R_MOD|R_MENTOR) & C.holder.rights)
+			var/msg = "\blue <b><font color='#006100'>CENTCOMM FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;CentcommFaxReply=\ref[Sender];originfax=\ref[originfax]'>RPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
 			C << msg
 
 /proc/Solgov_fax(var/originfax, var/sent, var/sentname, var/mob/Sender)
-	var/msg = "\blue <b><font color='#1F66A0'>SOL GOVERNMENT FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;SolGovFaxReply=\ref[Sender];originfax=\ref[originfax]'>RPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
-
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+
+		if((R_ADMIN|R_MOD|R_MENTOR) & C.holder.rights)
+			var/msg = "\blue <b><font color='#1F66A0'>SOL GOVERNMENT FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;SolGovFaxReply=\ref[Sender];originfax=\ref[originfax]'>RPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
 			C << msg
 
 

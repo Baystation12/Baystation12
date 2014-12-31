@@ -35,11 +35,13 @@ datum/mind
 	var/mob/living/current
 	var/mob/living/original	//TODO: remove.not used in any meaningful way ~Carn. First I'll need to tweak the way silicon-mobs handle minds.
 	var/active = 0
+	var/list/uplinkitems = list()
 
 	var/memory
 
 	var/assigned_role
 	var/special_role
+	var/assigned_DG_dept
 
 	var/role_alt_title
 
@@ -52,6 +54,7 @@ datum/mind
 
 	var/datum/faction/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
+	var/datum/vampire/vampire      //vampire holder
 
 	var/rev_cooldown = 0
 
@@ -71,6 +74,8 @@ datum/mind
 			if(changeling)
 				current.remove_changeling_powers()
 				current.verbs -= /datum/changeling/proc/EvolutionMenu
+			if(vampire)
+				current.remove_vampire_powers()
 			current.mind = null
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
@@ -82,7 +87,8 @@ datum/mind
 
 		if(changeling)
 			new_character.make_changeling()
-
+		if(vampire)
+			new_character.make_vampire()
 		if(active)
 			new_character.key = key		//now transfer the key to link the client to our new body
 
@@ -121,6 +127,7 @@ datum/mind
 			"changeling",
 			"nuclear",
 			"traitor", // "traitorchan",
+			"vampire",
 			"monkey",
 			"malfunction",
 		)
@@ -216,6 +223,26 @@ datum/mind
 //				text += "<br>All the changelings are dead! Restart in [round((changeling.TIME_TO_GET_REVIVED-(world.time-changeling.changelingdeathtime))/10)] seconds."
 			sections["changeling"] = text
 
+			/** VAMPIRE ***/
+			text = "vampire"
+			if (ticker.mode.config_tag=="vampire")
+				text = uppertext(text)
+			text = "<i><b>[text]</b></i>: "
+			if (src in ticker.mode.vampires)
+				text += "<b>YES</b>|<a href='?src=\ref[src];vampire=clear'>no</a>"
+				if (objectives.len==0)
+					text += "<br>Objectives are empty! <a href='?src=\ref[src];vampire=autoobjectives'>Randomize!</a>"
+			else
+				text += "<a href='?src=\ref[src];vampire=vampire'>yes</a>|<b>NO</b>"
+			sections["vampire"] = text
+
+			/** Enthralled ***/
+			text += "<br><b>enthralled</b>"
+			if(src in ticker.mode.enthralled)
+				text += " <b><font color='#FF0000'>YES</font></b> | no"
+			else
+				text += " yes | <font color='#00FF00'>NO</font></b>"
+			sections["vampire"] = text
 			/** NUCLEAR ***/
 			text = "nuclear"
 			if (ticker.mode.config_tag=="nuclear")
@@ -536,6 +563,7 @@ datum/mind
 						special_role = null
 						current << "\red <FONT size = 3><B>The nanobots in the loyalty implant remove all thoughts about being a traitor to Nanotrasen.  Have a nice day!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-traitor'ed [current].")
 				else
 
 
@@ -556,6 +584,7 @@ datum/mind
 						special_role = null
 						current.verbs -= /mob/living/carbon/human/proc/RevConvert
 					log_admin("[key_name_admin(usr)] has de-rev'ed [current].")
+					log_admin_single("[key_name_admin(usr)] has de-rev'ed [current].")
 
 				if("rev")
 					if(src in ticker.mode.head_revolutionaries)
@@ -571,6 +600,7 @@ datum/mind
 					ticker.mode.update_rev_icons_added(src)
 					special_role = "Revolutionary"
 					log_admin("[key_name(usr)] has rev'ed [current].")
+					log_admin_single("[key_name(usr)] has rev'ed [current].")
 
 				if("headrev")
 					if(src in ticker.mode.revolutionaries)
@@ -598,6 +628,7 @@ datum/mind
 					ticker.mode.update_rev_icons_added(src)
 					special_role = "Head Revolutionary"
 					log_admin("[key_name_admin(usr)] has head-rev'ed [current].")
+					log_admin_single("[key_name_admin(usr)] has head-rev'ed [current].")
 
 				if("autoobjectives")
 					ticker.mode.forge_revolutionary_objectives(src)
@@ -649,6 +680,7 @@ datum/mind
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a cultist!</B></FONT>"
 						memory = ""
 						log_admin("[key_name_admin(usr)] has de-cult'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-cult'ed [current].")
 				if("cultist")
 					if(!(src in ticker.mode.cult))
 						ticker.mode.cult += src
@@ -662,6 +694,7 @@ datum/mind
 								cult.memorize_cult_objectives(src)
 						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has cult'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has cult'ed [current].")
 				if("tome")
 					var/mob/living/carbon/human/H = current
 					if (istype(H))
@@ -695,6 +728,7 @@ datum/mind
 						current.spellremove(current, config.feature_object_spell_system? "object":"verb")
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a wizard!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-wizard'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-wizard'ed [current].")
 				if("wizard")
 					if(!(src in ticker.mode.wizards))
 						ticker.mode.wizards += src
@@ -703,6 +737,7 @@ datum/mind
 						current << "<B>\red You are the Space Wizard!</B>"
 						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has wizard'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has wizard'ed [current].")
 				if("lair")
 					current.loc = pick(wizardstart)
 				if("dressup")
@@ -726,6 +761,7 @@ datum/mind
 						if(changeling)	del(changeling)
 						current << "<FONT color='red' size = 3><B>You grow weak and lose your powers! You are no longer a changeling and are stuck in your current form!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-changeling'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-changeling'ed [current].")
 				if("changeling")
 					if(!(src in ticker.mode.changelings))
 						ticker.mode.changelings += src
@@ -734,6 +770,7 @@ datum/mind
 						current << "<B><font color='red'>Your powers are awoken. A flash of memory returns to us...we are a changeling!</font></B>"
 						show_objectives(src)
 						log_admin("[key_name_admin(usr)] has changeling'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has changeling'ed [current].")
 				if("autoobjectives")
 					if(!config.objectives_disabled)
 						ticker.mode.forge_changeling_objectives(src)
@@ -747,6 +784,36 @@ datum/mind
 						current.real_name = current.dna.real_name
 						current.UpdateAppearance()
 						domutcheck(current, null)
+
+		else if (href_list["vampire"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+			switch(href_list["vampire"])
+				if("clear")
+					if(src in ticker.mode.vampires)
+						ticker.mode.vampires -= src
+						special_role = null
+						current.remove_vampire_powers()
+						if(current.hud_used)
+							if(current.hud_used.vampire_blood_display)
+								current.client.screen -= current.hud_used.vampire_blood_display
+								current.hud_used.vampire_blood_display = null
+
+						if(vampire)  del(vampire)
+						current << "<FONT color='red' size = 3><B>You grow weak and lose your powers! You are no longer a vampire and are stuck in your current form!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-vampired [current].")
+				if("vampire")
+					if(!(src in ticker.mode.vampires))
+						ticker.mode.vampires += src
+						ticker.mode.grant_vampire_powers(current)
+						special_role = "Vampire"
+						current << "<B><font color='red'>Your powers are awoken. Your lust for blood grows... You are a Vampire!</font></B>"
+						if(config.objectives_disabled)
+							current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						log_admin("[key_name_admin(usr)] has vampired [current].")
+				if("autoobjectives")
+					if(!config.objectives_disabled)
+						ticker.mode.forge_vampire_objectives(src)
+					usr << "\blue The objectives for vampire [key] have been generated. You can edit them and announce manually."
 
 		else if (href_list["nuclear"])
 			var/mob/living/carbon/human/H = current
@@ -763,6 +830,7 @@ datum/mind
 							objectives-=O
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a syndicate operative!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-nuke op'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-nuke op'ed [current].")
 				if("nuclear")
 					if(!(src in ticker.mode.syndicates))
 						ticker.mode.syndicates += src
@@ -776,6 +844,7 @@ datum/mind
 						ticker.mode.forge_syndicate_objectives(src)
 						ticker.mode.greet_syndicate(src)
 						log_admin("[key_name_admin(usr)] has nuke op'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has nuke op'ed [current].")
 				if("lair")
 					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
 				if("dressup")
@@ -813,6 +882,7 @@ datum/mind
 						special_role = null
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a traitor!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-traitor'ed [current].")
 						if(isAI(current))
 							var/mob/living/silicon/ai/A = current
 							A.set_zeroth_law("")
@@ -825,6 +895,7 @@ datum/mind
 						special_role = "traitor"
 						current << "<B>\red You are a traitor!</B>"
 						log_admin("[key_name_admin(usr)] has traitor'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has traitor'ed [current].")
 						show_objectives()
 
 						if(istype(current, /mob/living/silicon))
@@ -848,6 +919,7 @@ datum/mind
 						var/mob/living/carbon/monkey/M = current
 						if (istype(H))
 							log_admin("[key_name(usr)] attempting to monkeyize [key_name(current)]")
+							log_admin_single("[key_name(usr)] attempting to monkeyize [key_name(current)]")
 							message_admins("\blue [key_name_admin(usr)] attempting to monkeyize [key_name_admin(current)]")
 							src = null
 							M = H.monkeyize()
@@ -863,6 +935,7 @@ datum/mind
 						var/mob/living/carbon/monkey/M = current
 						if (istype(H))
 							log_admin("[key_name(usr)] attempting to monkeyize and infect [key_name(current)]")
+							log_admin_single("[key_name(usr)] attempting to monkeyize and infect [key_name(current)]")
 							message_admins("\blue [key_name_admin(usr)] attempting to monkeyize and infect [key_name_admin(current)]", 1)
 							src = null
 							M = H.monkeyize()
@@ -878,6 +951,7 @@ datum/mind
 								D.cure(0)
 								sleep(0) //because deleting of virus is doing throught spawn(0)
 						log_admin("[key_name(usr)] attempting to humanize [key_name(current)]")
+						log_admin_single("[key_name(usr)] attempting to humanize [key_name(current)]")
 						message_admins("\blue [key_name_admin(usr)] attempting to humanize [key_name_admin(current)]")
 						var/obj/item/weapon/dnainjector/m2h/m2h = new
 						var/obj/item/weapon/implant/mobfinder = new(M) //hack because humanizing deletes mind --rastaf0
@@ -913,11 +987,12 @@ datum/mind
 
 						current << "\red <FONT size = 3><B>You have been patched! You are no longer malfunctioning!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-malf'ed [current].")
+						log_admin_single("[key_name_admin(usr)] has de-malf'ed [current].")
 
 				if("malf")
 					make_AI_Malf()
 					log_admin("[key_name_admin(usr)] has malf'ed [current].")
-
+					log_admin_single("[key_name_admin(usr)] has malf'ed [current].")
 				if("unemag")
 					var/mob/living/silicon/robot/R = current
 					if (istype(R))
@@ -934,7 +1009,7 @@ datum/mind
 							R.module_state_3 = null
 							R.contents -= R.module.emag
 						log_admin("[key_name_admin(usr)] has unemag'ed [R].")
-
+						log_admin_single("[key_name_admin(usr)] has unemag'ed [R].")
 				if("unemagcyborgs")
 					if (istype(current, /mob/living/silicon/ai))
 						var/mob/living/silicon/ai/ai = current
@@ -953,6 +1028,7 @@ datum/mind
 									R.module_state_3 = null
 									R.contents -= R.module.emag
 						log_admin("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
+						log_admin_single("[key_name_admin(usr)] has unemag'ed [ai]'s Cyborgs.")
 
 		else if (href_list["common"])
 			switch(href_list["common"])

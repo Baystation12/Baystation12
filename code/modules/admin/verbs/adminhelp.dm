@@ -19,14 +19,13 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
-	/**src.verbs -= /client/verb/adminhelp
+	src.verbs -= /client/verb/adminhelp
 
-	spawn(1200)
-		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps
+	spawn(300) // 30 Seconds
 		src.verbs += /client/verb/adminhelp	// 2 minute cool-down for adminhelps//Go to hell
-	**/
+
 	var/msg
-	var/list/type = list ("Gameplay/Roleplay question", "Rule/Gameplay issue", "Bug report")
+	var/list/type = list ("Gameplay/Roleplay", "Rule Issue", "Bug Report")
 	var/selected_type = input("Pick a category.", "Admin Help", null, null) as null|anything in type
 	if(selected_type)
 		msg = input("Please enter your message:", "Admin Help", null, null) as text
@@ -101,7 +100,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	if(!mob)	return						//this doesn't happen
 
 	var/ref_mob = "\ref[mob]"
-	var/mentor_msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 0, 0, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
+	var/mentor_msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 2, 0, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
 	var/dev_msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 3, 0, 1, 0)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
 	msg = "\blue <b><font color=red>[selected_upper]: </font>[get_options_bar(mob, 2, 1, 1)][ai_found ? " (<A HREF='?_src_=holder;adminchecklaws=[ref_mob]'>CL</A>)" : ""]:</b> [msg]"
 
@@ -117,7 +116,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			mentorholders += X
 			if(X.is_afk())
 				admin_number_afk++
-		if(R_DEBUG & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
+		if(R_DEV & X.holder.rights || R_DEBUG & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
 			debugholders += X
 			if(!(R_ADMIN & X.holder.rights))
 				if(X.is_afk())
@@ -128,7 +127,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				admin_number_afk++
 
 	switch(selected_type)
-		if("Gameplay/Roleplay question")
+		if("Gameplay/Roleplay")
 			if(mentorholders.len)
 				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
 					if(X.prefs.toggles & SOUND_ADMINHELP)
@@ -139,13 +138,18 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Rule/Gameplay issue")
+		if("Rule Issue")
+			if(mentorholders.len)
+				for(var/client/X in mentorholders) // Mentors get a message without buttons and no character name
+					if(X.prefs.toggles & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << mentor_msg
 			if(adminholders.len)
 				for(var/client/X in adminholders) // Admins of course get everything in their helps
 					if(X.prefs.toggles & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-		if("Bug report")
+		if("Bug Report")
 			if(debugholders.len)
 				for(var/client/X in debugholders)
 					if(R_ADMIN | R_MOD & X.holder.rights) // Admins get every button & special highlights in theirs

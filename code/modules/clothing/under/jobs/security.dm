@@ -28,6 +28,33 @@
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/rank/deptguardENG
+	name = "Engineering Department Guard's jumpsuit"
+	desc = "It has Engineering insignia on it's shoulders."
+	icon_state = "deptguard"
+	item_color = "deptguardENG"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/under/rank/deptguardRND
+	name = "Research Department Guard's jumpsuit"
+	desc = "It has Research insignia on it's shoulders."
+	icon_state = "deptguard"
+	item_color = "deptguardRND"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9
+
+/obj/item/clothing/under/rank/deptguardMED
+	name = "Medical Department Guard's jumpsuit"
+	desc = "It has Medical insignia on it's shoulders."
+	icon_state = "deptguard"
+	item_color = "deptguardMED"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9
+
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."

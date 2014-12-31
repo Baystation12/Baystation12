@@ -8,6 +8,45 @@
 	var/list/hud_list[9]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
+/mob/living/carbon/human/dummy
+	real_name = "Test Dummy"
+	status_flags = GODMODE|CANPUSH
+
+/mob/living/carbon/human/skrell/New(var/new_loc)
+	h_style = "Skrell Male Tentacles"
+	..(new_loc, "Skrell")
+
+/mob/living/carbon/human/Aviskree/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Aviskree")
+
+/mob/living/carbon/human/Kidan/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Kidan")
+
+/mob/living/carbon/human/tajaran/New(var/new_loc)
+	h_style = "Tajaran Ears"
+	..(new_loc, "Tajara")
+
+/mob/living/carbon/human/unathi/New(var/new_loc)
+	h_style = "Unathi Horns"
+	..(new_loc, "Unathi")
+
+/mob/living/carbon/human/vox/New(var/new_loc)
+	h_style = "Short Vox Quills"
+	..(new_loc, "Vox")
+
+/mob/living/carbon/human/voxarmalis/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Vox Armalis")
+
+/mob/living/carbon/human/diona/New(var/new_loc)
+	..(new_loc, "Diona")
+
+/mob/living/carbon/human/machine/New(var/new_loc)
+	h_style = "blue IPC screen"
+	..(new_loc, "Machine")
+
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
 	if(!dna)
@@ -73,6 +112,9 @@
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
+			if(mind.vampire)
+				stat("Useable Blood", mind.vampire.bloodusable)
+				stat("Total Accumulated Blood", mind.vampire.bloodtotal)
 
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
 			stat("Energy Charge", round(wear_suit:cell:charge/100))
@@ -92,6 +134,8 @@
 				gib()
 				return
 			else
+				handle_suit_punctures_torso(BURN, severity*20)
+				handle_suit_punctures_helmet(BURN, severity*20)
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
@@ -99,6 +143,8 @@
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
+			handle_suit_punctures_torso(BURN, severity*20)
+			handle_suit_punctures_helmet(BURN, severity*20)
 			if (!shielded)
 				b_loss += 60
 
@@ -116,6 +162,8 @@
 
 		if(3.0)
 			b_loss += 30
+			handle_suit_punctures_torso(BURN, severity*20)
+			handle_suit_punctures_helmet(BURN, severity*20)
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
@@ -204,8 +252,14 @@
 		if(armor >= 2)	return
 
 
+
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/implant_remembered_info = ""
+	implant_remembered_info += "<b>Your account number is:</b> #[M.stored_account_number]<br>"
+	implant_remembered_info += "<b>Your account pin is:</b> [M.stored_account_pin]<br>"
+	implant_remembered_info += "<b>Your account funds are:</b> $[M.stored_account_money]<br>"
 
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
@@ -213,10 +267,53 @@
 	var/datum/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
+	M.mind.memory = null
+	M << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
+	M << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
+	M << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
+	M << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
+	M << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
+	M << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
+	M.mind.store_memory(implant_remembered_info)
+	M.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
+
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
+			for(var/datum/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
+	return 0
+
+
+/mob/living/carbon/human/proc/implant_slave(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
+	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/implant_remembered_info = ""
+	implant_remembered_info += "<b>Your account number is:</b> #[M.stored_account_number]<br>"
+	implant_remembered_info += "<b>Your account pin is:</b> [M.stored_account_pin]<br>"
+	implant_remembered_info += "<b>Your account funds are:</b> $[M.stored_account_money]<br>"
+
+	var/obj/item/weapon/implant/enslavement/L = new/obj/item/weapon/implant/enslavement(M)
+	L.imp_in = M
+	L.implanted = 1
+	var/datum/organ/external/affected = M.organs_by_name["head"]
+	affected.implants += L
+	L.part = affected
+	M.mind.memory = null
+	M << "\red You feel your mind blank, and a dark, whispering voice echos through your mind, binding you to [M.slaver]."
+	M << "<b>1. You will follow any and all orders from [M.slaver] at all times.</b>"
+	M << "<b>2. You will not act against [M.slaver] in any way, shape, or form.</b>"
+	M << "<b>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>"
+	M.mind.store_memory(implant_remembered_info)
+	M.mind.store_memory("<b>1. You will follow any and all orders from [M.slaver] at all times.<br>2. You will not act against [M.slaver] in any way, shape, or form.<br>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>", 0, 0)
+
+
+
+/mob/living/carbon/human/proc/is_slave_implanted(mob/living/carbon/human/M)
+	for(var/L in M.contents)
+		if(istype(L, /obj/item/weapon/implant/enslavement))
 			for(var/datum/organ/external/O in M.organs)
 				if(L in O.implants)
 					return 1
@@ -315,12 +412,14 @@
 	<BR><B>Left Ear:</B> <A href='?src=\ref[src];item=l_ear'>[(l_ear ? l_ear : "Nothing")]</A>
 	<BR><B>Right Ear:</B> <A href='?src=\ref[src];item=r_ear'>[(r_ear ? r_ear : "Nothing")]</A>
 	<BR><B>Head:</B> <A href='?src=\ref[src];item=head'>[(head ? head : "Nothing")]</A>
+	<BR><B>Neck:</B> <A href='?src=\ref[src];item=neck'>[(neck ? neck : "Nothing")]</A>
 	<BR><B>Shoes:</B> <A href='?src=\ref[src];item=shoes'>[(shoes ? shoes : "Nothing")]</A>
 	<BR><B>Belt:</B> <A href='?src=\ref[src];item=belt'>[(belt ? belt : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(belt, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR><B>Uniform:</B> <A href='?src=\ref[src];item=uniform'>[(w_uniform ? w_uniform : "Nothing")]</A> [(suit) ? ((suit.has_sensor == 1) ? text(" <A href='?src=\ref[];item=sensor'>Sensors</A>", src) : "") :]
 	<BR><B>(Exo)Suit:</B> <A href='?src=\ref[src];item=suit'>[(wear_suit ? wear_suit : "Nothing")]</A>
 	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR><B>ID:</B> <A href='?src=\ref[src];item=id'>[(wear_id ? wear_id : "Nothing")]</A>
+	<BR><B>PDA:</B> <A href='?src=\ref[src];item=PDA'>[(wear_pda ? wear_pda : "Nothing")]</A>
 	<BR><B>Suit Storage:</B> <A href='?src=\ref[src];item=s_store'>[(s_store ? s_store : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(s_store, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(handcuffed ? text("<A href='?src=\ref[src];item=handcuff'>Handcuffed</A>") : text("<A href='?src=\ref[src];item=handcuff'>Not Handcuffed</A>"))]
 	<BR>[(legcuffed ? text("<A href='?src=\ref[src];item=legcuff'>Legcuffed</A>") : text(""))]
@@ -387,6 +486,8 @@
 		return get_id_name("Unknown")
 	if( head && (head.flags_inv&HIDEFACE) )
 		return get_id_name("Unknown")		//Likewise for hats
+	if( neck && (neck.flags_inv&HIDEFACE) )
+		return get_id_name("Unknown")		//Likewise for neck
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
 	if(id_name && (id_name != face_name))
@@ -748,14 +849,14 @@
 /mob/living/carbon/human/eyecheck()
 	var/number = 0
 
-	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
+	if(!species.has_organ["eyes"] && species.name != "Machine") //No eyes, can't hurt them.
 		return 2
 
-	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
+	if(internal_organs_by_name["eyes"] && species.name != "Machine") // Eyes are fucked, not a 'weak point'.
 		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
 			return 2
-	else
+	else if(species.name != "Machine") //IPCs have no eyes, but still have cameras and crap
 		return 2
 
 	if(istype(src.head, /obj/item/clothing/head/welding))
@@ -1202,6 +1303,7 @@
 		g_skin = 0
 		b_skin = 0
 
+	size_multiplier = species.sizechange
 	species.handle_post_spawn(src)
 
 	spawn(0)

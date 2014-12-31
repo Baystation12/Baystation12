@@ -80,6 +80,9 @@
 			send_pm_type = holder.rank + " "
 			if(!C.holder && holder && holder.fakekey)
 				recieve_pm_type = "Admin"
+			else if(holder.rank == "PrimaryAdmin" || holder.rank == "SecondaryAdmin" || holder.rank == "TertiaryAdmin") //If you're a Primary or Secondary admin, there's no reason for players to discriminate, so just show as an admin
+				recieve_pm_type = "Admin"
+				send_pm_type = "Admin" + " "
 			else
 				recieve_pm_type = holder.rank
 
@@ -118,6 +121,7 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
+	log_admin_single("PM: [key_name(src)]->[key_name(C)]: [msg]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
@@ -126,6 +130,53 @@
 			continue
 		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR)) )
 			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+
+/client/proc/cmd_admin_pm_antag(var/msg)
+	update_antag_list()
+	if(prefs.muted & MUTE_ADMINHELP)
+		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
+		return
+
+	//get message text, limit it's length.and clean/escape html
+	if(!msg)
+		msg = input(src,"Message:", "Private message to all antags") as text|null
+
+		if(!msg)	return
+
+	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
+		return
+
+	//clean the message if it's not sent by a high-rank admin
+	if(!check_rights(R_SERVER|R_DEBUG,0))
+		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+		if(!msg)	return
+
+	var/recieve_color = "purple"
+
+	if(holder)
+		//mod PMs are maroon
+		//PMs sent from admins and mods display their rank
+		if(holder)
+			if( holder.rights & R_ADMIN )
+				recieve_color = "red"
+			else
+				recieve_color = "maroon"
+
+	var/recieve_message = ""
+	recieve_message = "<font color='[recieve_color]'>All Antags PM from-<b>[src.key]</b>: [msg]</font>"
+	src << "<font color='blue'> PM to All Antags</b>: [msg]</font>"
+	log_admin("PM: [key_name(src)]-> All Antags: [msg]")
+	for(var/mob/AA in allantags)
+		AA << recieve_message
+		if(AA.client.prefs.toggles & SOUND_ADMINHELP)
+			AA << 'sound/effects/adminhelp.ogg'
+		for(var/client/X in admins)
+			if(X == AA.client || X == src)
+				continue
+			if(X.key!=key && X.key!=AA.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD) )
+				X << "<B><font color='blue'>PM: All Antags PM:</B> \blue [msg]</font>" //inform X
+
+
 
 /client/proc/cmd_admin_irc_pm()
 	if(prefs.muted & MUTE_ADMINHELP)
@@ -149,6 +200,7 @@
 	src << "<font color='blue'>IRC PM to-<b>IRC-Admins</b>: [msg]</font>"
 
 	log_admin("PM: [key_name(src)]->IRC: [msg]")
+	log_admin_single("PM: [key_name(src)]->IRC: [msg]")
 	for(var/client/X in admins)
 		if(X == src)
 			continue

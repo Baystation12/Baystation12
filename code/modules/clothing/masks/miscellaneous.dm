@@ -106,3 +106,27 @@
 	w_class = 2
 	var/voicechange = 0
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/mask/flightmask
+	name = "flight mask"
+	desc = "Airmen flight mask."
+	icon_state = "flightmask"
+	item_state = "flightmask"
+
+/obj/item/clothing/mask/redmaskbandana
+	name = "bandana mask"
+	desc = "Cover up yo face fool, we robbin dis place."
+	icon_state = "redmaskbandana"
+	item_state = "redmaskbandana"
+
+/obj/item/clothing/mask/bluemaskbandana
+	name = "bandana mask"
+	desc = "Cover up yo face fool, we robbin dis place."
+	icon_state = "bluemaskbandana"
+	item_state = "bluemaskbandana"
+
+/obj/item/clothing/mask/greenmaskbandana
+	name = "bandana mask"
+	desc = "Cover up yo face fool, we robbin dis place."
+	icon_state = "greenmaskbandana"
+	item_state = "greenmaskbandana"

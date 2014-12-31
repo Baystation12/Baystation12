@@ -17,7 +17,9 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"ninja" = "true",                                    // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
-	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"mutineer" = IS_MODE_COMPILED("mutiny"),            // 13
+	"meme" = IS_MODE_COMPILED("meme"),					// 14
+	"vampire" = IS_MODE_COMPILED("vampire")			 	// 15
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -52,7 +54,7 @@ datum/preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
 	var/gender = MALE					//gender of character (well duh)
-	var/age = 30						//age of character
+	var/age = 25						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
@@ -137,6 +139,7 @@ datum/preferences
 			if(load_preferences())
 				if(load_character())
 					return
+
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
 
@@ -232,6 +235,16 @@ datum/preferences
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
+	if(jobban_isbanned(user, species))
+		species = "Human"
+		h_style = hair_styles_list["Bald"]
+		f_style = facial_hair_styles_list["Shaved"]
+	if(user)
+		for(var/L in all_languages)
+			var/datum/language/lang = all_languages[L]
+			if((lang.flags & RESTRICTED))
+				if(language == lang.name)
+					language = "None"
 	update_preview_icon()
 	user << browse_rsc(preview_icon_front, "previewicon.png")
 	user << browse_rsc(preview_icon_side, "previewicon2.png")
@@ -449,7 +462,7 @@ datum/preferences
 
 	user << browse(dat, "window=preferences;size=560x736")
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
+/datum/preferences/proc/SetChoices(mob/user, limit = 18, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
 	if(!job_master)
 		return
 
@@ -491,6 +504,9 @@ datum/preferences
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			continue
+		if(!icwl_canHaveJob(user, rank))
+			HTML += "<del>[rank]</del></td><td><b> \[ICWL]</b></td></tr>"
 			continue
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
@@ -1107,7 +1123,13 @@ datum/preferences
 						new_species = whitelisted_species
 
 					species = input("Please select a species", "Character Generation", null) in new_species
-
+					if(jobban_isbanned(usr, species))
+						usr << "\red <B>You have been banned from using [species] if you wish to be unbanned contact an admin in-game or on the forums</B>"
+						species = "Human"
+						h_style = random_hair_style(gender, species)
+						f_style = random_facial_hair_style(gender, species)
+						savefile_update()
+						return
 					if(prev_species != species)
 						//grab one of the valid hair styles for the newly chosen species
 						var/list/valid_hairstyles = list()
@@ -1187,7 +1209,7 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Aviskree" || species == "Kidan")
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1267,7 +1289,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Aviskree" || species == "Kidan" || species == "Machine")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
@@ -1577,8 +1599,8 @@ datum/preferences
 
 	for(var/name in organ_data)
 
-		var/status = organ_data[name]		
-		var/datum/organ/external/O = character.organs_by_name[name]		
+		var/status = organ_data[name]
+		var/datum/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
@@ -1586,7 +1608,7 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
-		else			
+		else
 			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")

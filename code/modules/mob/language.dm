@@ -51,7 +51,15 @@
 	exclaim_verb = "roars"
 	colour = "soghun"
 	key = "o"
-	flags = WHITELISTED
+	flags = RESTRICTED
+
+/datum/language/Aviskree
+	name = "Aviachirp"
+	desc = "An expressive language is very beautiful execpt when you want to sleep."
+	speech_verb = "chirps"
+	colour = "Aviskree"
+	key = "y"
+	flags = RESTRICTED
 
 /datum/language/tajaran
 	name = "Siik'tajr"
@@ -61,7 +69,7 @@
 	exclaim_verb = "yowls"
 	colour = "tajaran"
 	key = "j"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -71,7 +79,17 @@
 	exclaim_verb = "warbles"
 	colour = "skrell"
 	key = "k"
-	flags = WHITELISTED
+	flags = RESTRICTED
+
+/datum/language/Chittin
+	name = "Chittin"
+	desc = "very silent almost telepath speech."
+	speech_verb = "chirps and hums"
+	ask_verb = "chirps and hums"
+	exclaim_verb = "chirps"
+	colour = "Chittin"
+	key = "5"
+	flags = RESTRICTED
 
 /datum/language/vox
 	name = "Vox-pidgin"
@@ -129,6 +147,34 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+
+/datum/language/Machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	colour = "machine"
+	key = "p"
+	flags = RESTRICTED
+
+/datum/language/mya
+	name = "Mya'"
+	desc = "The regular language of absent minded folks."
+	speech_verb = "myas"
+	ask_verb = "myers"
+	exclaim_verb = "MYAS"
+	//colour = "tajaran"
+	key = "t"
+	//flags = RESTRICTED
+
+/datum/language/hebrew
+	name = "Hebrew"
+	desc = "A language that comes from old religious folks who are good with money."
+	speech_verb = "murmurs"
+	ask_verb = "humms"
+	exclaim_verb = "yells"
+	//colour = "tajaran"
+	key = "r"
+	//flags = RESTRICTED
 
 /datum/language/xenocommon
 	name = "Xenomorph"

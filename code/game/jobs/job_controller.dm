@@ -65,9 +65,24 @@ var/global/datum/controller/occupations/job_master
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
 
+
 	proc/FreeRole(var/rank)	//making additional slot on the fly
 		var/datum/job/job = GetJob(rank)
 		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
+			job.total_positions++
+			return 1
+		return 0
+	proc/FreeDGRole(var/rank,dept)	//making additional slot on the fly
+		var/datum/job/job = GetJob(rank)
+		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
+			if(dept)
+				switch(dept)
+					if("Medical")
+						job:medical = 0
+					if("Engineering")
+						job:engine = 0
+					if("Research")
+						job:research = 0
 			job.total_positions++
 			return 1
 		return 0
@@ -81,6 +96,9 @@ var/global/datum/controller/occupations/job_master
 				continue
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
+				continue
+			if(!icwl_canHaveJob(player, job.title))
+				Debug("FOC character failed whitelist, Player: [player], Job: [job.title]")
 				continue
 			if(flag && (!player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
@@ -96,7 +114,7 @@ var/global/datum/controller/occupations/job_master
 			if(!job)
 				continue
 
-			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
+			if(istype(job, GetJob("Assistant")) && player.client.prefs.age > 17) // We don't want to give him assistant, that's boring, not unless he is really young!
 				continue
 
 			if(job in command_positions) //If you want a command position, select it!
@@ -108,6 +126,10 @@ var/global/datum/controller/occupations/job_master
 
 			if(!job.player_old_enough(player.client))
 				Debug("GRJ player not old enough, Player: [player]")
+				continue
+
+			if(!icwl_canHaveJob(player, job.title))
+				Debug("GRJ character failed whitelist, Player: [player], Job: [job.title]")
 				continue
 
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -183,6 +205,7 @@ var/global/datum/controller/occupations/job_master
 			var/mob/new_player/candidate = pick(candidates)
 			AssignRole(candidate, command_position)
 		return
+
 
 
 	proc/FillAIPosition()
@@ -296,7 +319,6 @@ var/global/datum/controller/occupations/job_master
 
 					// If the player wants that job on this level, then try give it to him.
 					if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
-
 						// If the job isn't filled
 						if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 							Debug("DO pass, Player: [player], Level:[level], Job:[job.title]")
@@ -384,7 +406,12 @@ var/global/datum/controller/occupations/job_master
 
 
 			//Equip job items.
-			job.equip(H)
+			if(istype(job,/datum/job/deptguard))
+				var/avaiabledept = getDGdept()
+				job.equip(H,avaiabledept)
+				H.mind.assigned_DG_dept = avaiabledept
+			else
+				job.equip(H)
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
@@ -392,14 +419,36 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late)
 			var/obj/S = null
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if(sloc.name != rank)	continue
-				if(locate(/mob/living) in sloc.loc)	continue
-				S = sloc
-				break
+			if(istype(job,/datum/job/deptguard))
+				for(var/obj/effect/landmark/start/sloc in landmarks_list)
+					if(sloc.Departmentguard == 0) continue
+					var/dept = H.mind.assigned_DG_dept
+					switch(sloc.name)
+						if("Medical Guard")
+							if(dept == "Medical")
+								S = sloc
+								break
+						if("Research Guard")
+							if(dept == "Research")
+								S = sloc
+								break
+						if("Engineering Guard")
+							if(dept == "Engineering")
+								S = sloc
+								break
+
+			else
+
+
+				for(var/obj/effect/landmark/start/sloc in landmarks_list)
+					if(sloc.name != rank)	continue
+					if(locate(/mob/living) in sloc.loc)	continue
+					S = sloc
+					break
 			if(!S)
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+
 				H.loc = S.loc
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
@@ -413,6 +462,10 @@ var/global/datum/controller/occupations/job_master
 			remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 			remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 			remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
+
+			H.stored_account_number = M.account_number
+			H.stored_account_pin = M.remote_access_pin
+			H.stored_account_money = M.money
 
 			if(M.transaction_log.len)
 				var/datum/transaction/T = M.transaction_log[1]
@@ -503,12 +556,13 @@ var/global/datum/controller/occupations/job_master
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 
-		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
-		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+		H << "<B>You are the [H.mind.assigned_DG_dept ? H.mind.assigned_DG_dept : null][H.mind.assigned_DG_dept ? " " : null][alt_title ? alt_title : rank].</B>"
+		H << "<b>As the [H.mind.assigned_DG_dept ? H.mind.assigned_DG_dept : null][H.mind.assigned_DG_dept ? " " : null][alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 		H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
 		if(job.req_admin_notify)
 			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
-
+		if(job.bs_jobban_warning)
+			H << "\red <b>AS A BLUESHIELD GUARD, YOU MUST FOLLOW A <a href='http://www.unbound-travels.com/showthread.php?2552-Blueshield-Standard-Operating-Procedure'>STRICT STANDARD OPERATING PROCEDURE</a>. IF YOU DO NOT, YOU WILL BE JOBBANNED. IF YOU ARE UNSURE ABOUT SOMETHING, ADMINHELP."
 		spawnId(H, rank, alt_title)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 
@@ -539,6 +593,9 @@ var/global/datum/controller/occupations/job_master
 		if(job)
 			if(job.title == "Cyborg")
 				return
+			else if(job.title == "Department Guard")
+				C = new job.idtype(H)
+				C.access = getdeptaccess(H.mind.assigned_DG_dept)
 			else
 				C = new job.idtype(H)
 				C.access = job.get_access()
@@ -548,7 +605,10 @@ var/global/datum/controller/occupations/job_master
 			C.registered_name = H.real_name
 			C.rank = rank
 			C.assignment = title ? title : rank
-			C.name = "[C.registered_name]'s ID Card ([C.assignment])"
+			if(job.title == "Department Guard")
+				C.name = "[C.registered_name]'s ID Card ([H.mind.assigned_DG_dept] [C.assignment])"
+			else
+				C.name = "[C.registered_name]'s ID Card ([C.assignment])"
 
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)
@@ -556,7 +616,7 @@ var/global/datum/controller/occupations/job_master
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_wear_pda)
 		if(locate(/obj/item/device/pda,H))
 			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
 			pda.owner = H.real_name
@@ -565,6 +625,31 @@ var/global/datum/controller/occupations/job_master
 
 		return 1
 
+	proc/getDGdept()
+		var/datum/job/job = null
+		for(var/datum/job/J in occupations)
+			if(J.title == "Department Guard")
+				job = J
+				break
+		var/list/avaiabledepartments = list()
+		if(job:medical == 0)
+			avaiabledepartments += "Medical"
+		if(job:engine == 0)
+			avaiabledepartments += "Engineering"
+		if(job:research == 0)
+			avaiabledepartments += "Research"
+		if(avaiabledepartments.len == 0)
+			return "None"
+		var/A = pick(avaiabledepartments)
+		if(A)
+			switch(A)
+				if("Medical")
+					job:medical = 1
+				if("Engineering")
+					job:engine = 1
+				if("Research")
+					job:research = 1
+			return A
 
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist
 		if(!config.load_jobs_from_txt)
@@ -611,6 +696,7 @@ var/global/datum/controller/occupations/job_master
 			var/level4 = 0 //never
 			var/level5 = 0 //banned
 			var/level6 = 0 //account too young
+			var/level7 = 0 //ICWL
 			for(var/mob/new_player/player in player_list)
 				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
@@ -620,6 +706,9 @@ var/global/datum/controller/occupations/job_master
 				if(!job.player_old_enough(player.client))
 					level6++
 					continue
+				if(icwl_canHaveJob(player, job.title))
+					level7++
+					continue
 				if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
 					level1++
 				else if(player.client.prefs.GetJobDepartment(job, 2) & job.flag)
@@ -628,5 +717,15 @@ var/global/datum/controller/occupations/job_master
 					level3++
 				else level4++ //not selected
 
-			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
+			tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|ICWL=[level7]|-"
 			feedback_add_details("job_preferences",tmp_str)
+
+	proc/getdeptaccess(var/dept)
+		var/list/deptaccess = list()
+		if(dept == "Medical")
+			deptaccess = list(access_security,access_medical,access_deptguard, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+		if(dept == "Engineering")
+			deptaccess = list(access_security,access_eva,access_deptguard, access_engine, access_engine_equip, access_tech_storage, access_external_airlocks, access_construction, access_atmospherics)
+		if(dept == "Research")
+			deptaccess = list(access_security,access_deptguard,access_tox, access_morgue,access_tox_storage, access_teleporter, access_research, access_robotics, access_xenobiology,access_xenoarch)
+		return deptaccess

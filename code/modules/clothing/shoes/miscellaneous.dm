@@ -84,12 +84,51 @@
 	species_restricted = null
 
 /obj/item/clothing/shoes/jackboots
+	var/modified = 0
 	name = "jackboots"
 	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
 	item_color = "hosred"
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/shoes/jackboots/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if (modified)
+			return
+
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user.visible_message("\red [user] cuts the toes off of [src].","\red You cut the toes off of [src].")
+
+		modified = 1
+		name = "toeless jackboots"
+		desc = "Modified Nanotrasen-issue Security combat boots with open toes for a more feral sort of paw."
+		icon_state = "digiboots"
+		item_state = "digiboots"
+		item_color = "hosred"
+		if("exclude" in species_restricted)
+			species_restricted -= "Unathi"
+			species_restricted -= "Tajara"
+		return
+
+/obj/item/clothing/shoes/jackboots/digitigrade
+	name = "toeless jackboots"
+	desc = "Modified Nanotrasen-issue Security combat boots with open toes for a more feral sort of paw."
+	icon_state = "digiboots"
+	item_state = "digiboots"
+	item_color = "hosred"
+	species_restricted = null
+	siemens_coefficient = 0.7
+	modified = 1
+
+/obj/item/clothing/shoes/clothboots
+	name = "cloth wraps"
+	desc = "Warm, clothen footwraps for digitigrade paws."
+	icon_state = "digit-cloth"
+	item_state = "digit-cloth"
+	species_restricted = null
+	body_parts_covered = 0
+	w_class = 2
 
 /obj/item/clothing/shoes/cult
 	name = "boots"
@@ -137,3 +176,9 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+/obj/item/clothing/shoes/flightshoes
+	name = "flight shoes"
+	desc = "Airmen shoes. For airmen."
+	icon_state = "flightshoes"
+	item_state = "flightshoes"

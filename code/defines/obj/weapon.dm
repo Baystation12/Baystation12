@@ -54,6 +54,10 @@
 /obj/item/weapon/soap/deluxe
 	icon_state = "soapdeluxe"
 
+/obj/item/weapon/soap/cap
+	desc = "The Captain's soap, looks like its made of gold!"
+	icon_state = "soapcap"
+
 /obj/item/weapon/soap/deluxe/New()
 	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
 
@@ -314,6 +318,7 @@
 	name = "wooden table parts"
 	desc = "Keep away from fire."
 	icon_state = "wood_tableparts"
+	matter = null
 	flags = null
 
 /obj/item/weapon/table_parts/gambling
@@ -647,4 +652,4 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "capacitor"
 	desc = "A debug item for research."
-	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8;phorontech=8;engineering=8"
+	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8"

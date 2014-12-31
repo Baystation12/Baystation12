@@ -192,12 +192,9 @@
 		if(reader)
 			reader.loc = loc
 			if(istype(L) && !L.get_active_hand())
-				if(istype(L,/mob/living/carbon/human))
-					L.put_in_hands(reader)
-				else
-					reader.loc = get_turf(computer)
+				L.put_in_hands(reader)
 			else
-				reader.loc = get_turf(computer)
+				reader.loc = computer.loc
 			reader = null
 			return 1
 		return 0
@@ -206,15 +203,15 @@
 		if(writer && dualslot)
 			writer.loc = loc
 			if(istype(L) && !L.get_active_hand())
-				if(istype(L,/mob/living/carbon/human))
-					L.put_in_hands(writer)
-				else
-					writer.loc = get_turf(computer)
+				L.put_in_hands(writer)
 			else
-				writer.loc = get_turf(computer)
+				writer.loc = computer.loc
 			writer = null
 			return 1
 		return 0
+
+
+
 
 	// Authorizes the user based on the computer's requirements
 	proc/authenticate()

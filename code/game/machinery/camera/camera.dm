@@ -247,6 +247,30 @@
 					src.dir = WEST
 			break
 
+/atom/proc/window_auto_turn()
+	//Automatically turns based on nearby windows/grilles.
+	for(var/i = 1, i <= 8; i += i)
+		var/A = src.windowcheck(i)
+		if(A != 0)
+			src.dir = turn(i,180)
+			break
+
+/atom/proc/windowcheck(var/wdir)
+	var/turf/T = get_step(src,wdir)
+	if(!T || !isturf(T) || !T.density )
+		var/window_check = 0
+		for(var/obj/structure/window/W in T)
+			window_check = 1
+			break
+		for(var/obj/structure/grille/G in T)
+			window_check = 1
+			break
+		if(window_check)
+			return 1
+		else
+			return 0
+
+
 //Return a working camera that can see a given mob
 //or null if none
 /proc/seen_by_camera(var/mob/M)
@@ -284,3 +308,52 @@
 		return 1
 	busy = 0
 	return 0
+
+
+/obj/machinery/camera/proc/network_check(var/area/A)
+	src.network = list("SS13")
+	if(istype(A,/area/medical))
+		src.network += "Medical"
+	if(istype(A,/area/rnd))
+		src.network += "Research"
+	if(istype(A,/area/research_outpost))
+		src.network += "Research"
+	if(istype(A,/area/engine))
+		src.network += "Engineering"
+	if(istype(A,/area/atmos))
+		src.network += "Engineering"
+	if(istype(A,/area/storage/tech))
+		src.network += "Engineering"
+	if(istype(A,/area/engine/engine_monitoring))
+		src.network += "Singularity"
+	if(istype(A,/area/engine/engine_room))
+		src.network += "Singularity"
+	if(istype(A,/area/engine/generators))
+		src.network += "Supermatter"
+	if(istype(A,/area/tdome))
+		src.network += "thunder"
+	if(istype(A,/area/tcommsat))
+		src.network += "Telecomms"
+	if(istype(A,/area/turret_protected/tcomsat))
+		src.network += "Telecomms"
+	if(istype(A,/area/turret_protected/tcomfoyer))
+		src.network += "Telecomms"
+	if(istype(A,/area/turret_protected/tcomwest))
+		src.network += "Telecomms"
+	if(istype(A,/area/turret_protected/tcomeast))
+		src.network += "Telecomms"
+	if(istype(A,/area/rnd/test_area))
+		src.network += "Toxins Test Area"
+	if(istype(A,/area/security))
+		src.network += "Security"
+	if(istype(A,/area/medical/guard))
+		src.network += "Security"
+	if(istype(A,/area/engine/guard))
+		src.network += "Security"
+	if(istype(A,/area/rnd/guard))
+		src.network += "Security"
+	if(istype(A,/area/security/interigation))
+		src.network += "Interrogation"
+	if(istype(A,/area/mine))
+		src.network += "MINE"
+

@@ -14,8 +14,9 @@
 	var/oxy_l = ((species.flags & NO_BREATHE) ? 0 : getOxyLoss())
 	var/tox_l = ((species.flags & NO_POISON) ? 0 : getToxLoss())
 	var/clone_l = getCloneLoss()
+	var/power_l = powerloss
 
-	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute
+	health = species.total_health - oxy_l - tox_l - clone_l - total_burn - total_brute - power_l
 
 	//TODO: fix husking
 	if( ((species.total_health - total_burn) < config.health_threshold_dead) && stat == DEAD)
@@ -183,6 +184,14 @@
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
 	hud_updateflag |= 1 << HEALTH_HUD
+
+
+/mob/living/carbon/human/update_canmove()
+	var/old_lying = lying
+	. = ..()
+	if(lying && !old_lying && !resting && !buckled) // fell down
+		playsound(loc, "bodyfall", 50, 1, -1)
+
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
 /mob/living/carbon/human/getOxyLoss()
@@ -360,7 +369,10 @@ This function restores all organs.
 		return 1
 
 	//Handle BRUTE and BURN damage
-	handle_suit_punctures(damagetype, damage)
+	if(def_zone == "head")
+		handle_suit_punctures_helmet(damagetype, damage)
+	if(def_zone == "chest" || def_zone == "groin" ||  def_zone == "l_arm" ||  def_zone == "r_arm" ||  def_zone == "l_leg" ||  def_zone == "r_leg")
+		handle_suit_punctures_torso(damagetype, damage)
 
 	if(blocked >= 2)	return 0
 

@@ -269,17 +269,25 @@
 
 		switch(slot)
 			if(slot_l_hand)
-				if(H.l_hand)
+				var/datum/organ/external/hand = H.organs_by_name["l_hand"]
+				if(H.l_hand || hand.status & ORGAN_DESTROYED || hand.destspawn)
 					return 0
 				return 1
 			if(slot_r_hand)
-				if(H.r_hand)
+				var/datum/organ/external/hand = H.organs_by_name["r_hand"]
+				if(H.r_hand || hand.status & ORGAN_DESTROYED || hand.destspawn)
 					return 0
 				return 1
 			if(slot_wear_mask)
 				if(H.wear_mask)
 					return 0
 				if( !(slot_flags & SLOT_MASK) )
+					return 0
+				return 1
+			if(slot_neck)
+				if(H.neck)
+					return 0
+				if( !(slot_flags & SLOT_NECK) )
 					return 0
 				return 1
 			if(slot_back)
@@ -331,7 +339,9 @@
 			if(slot_l_ear)
 				if(H.l_ear)
 					return 0
-				if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
+				if( w_class < 2	)
+					return 1
+				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.r_ear )
 					return 0
@@ -339,7 +349,9 @@
 			if(slot_r_ear)
 				if(H.r_ear)
 					return 0
-				if( (w_class > 1) && !(slot_flags & SLOT_EARS) )
+				if( w_class < 2 )
+					return 1
+				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.l_ear )
 					return 0
@@ -358,6 +370,17 @@
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
 				if( !(slot_flags & SLOT_ID) )
+					return 0
+				return 1
+
+			if(slot_wear_pda)  //PDA Slot
+				if(H.wear_pda)
+					return 0
+				if(!H.w_uniform)
+					if(!disable_warning)
+						H << "\red You need a jumpsuit before you can attach this [name]."
+					return 0
+				if( !(slot_flags & SLOT_PDA) )
 					return 0
 				return 1
 			if(slot_l_store)

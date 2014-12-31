@@ -124,10 +124,12 @@
 var/list/slot_equipment_priority = list( \
 		slot_back,\
 		slot_wear_id,\
+		slot_wear_pda,\
 		slot_w_uniform,\
 		slot_wear_suit,\
 		slot_wear_mask,\
 		slot_head,\
+		slot_neck,\
 		slot_shoes,\
 		slot_gloves,\
 		slot_l_ear,\
@@ -733,6 +735,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"GC-[master_controller.gc_cost]\t#[garbage.destroyed.len]-#dels[garbage.dels]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")
@@ -1080,6 +1083,3 @@ mob/proc/yank_out_object()
 			return I
 
 	return 0
-
-/mob/proc/updateicon()
-	return

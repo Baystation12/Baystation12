@@ -26,6 +26,7 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/gc_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
@@ -75,6 +76,7 @@ datum/controller/game_controller/proc/setup()
 	setupfactions()
 	setup_economy()
 	SetupXenoarch()
+	setup_cameras()
 
 	transfer_controller = new
 
@@ -120,6 +122,9 @@ datum/controller/game_controller/proc/setup_objects()
 
 	//Set up spawn points.
 	populate_spawn_points()
+
+	// Sort the machinery list so it doesn't cause a lagspike at roundstart
+	process_machines_sort()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)
@@ -228,6 +233,12 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
+
+				// GARBAGE COLLECTOR
+				timer = world.timeofday
+				last_thing_processed = garbage.type
+				garbage.process()
+				gc_cost = (world.timeofday - timer) / 10
 
 				//TICKER
 				timer = world.timeofday
@@ -397,4 +408,17 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
+
+
+datum/controller/game_controller/proc/setup_cameras()
+	world << "\red \b Initializing Cameras."
+	for(var/area/A in world)
+		var/index = 0
+		for(var/obj/machinery/camera/C in A)
+			index++
+			C.c_tag = "[get_area(C)]_[index]"
+			C.network_check(A)
+			C.window_auto_turn()
+			C.auto_turn()
+	world << "\red \b Cameras Initialized."
 

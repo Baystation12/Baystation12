@@ -359,6 +359,8 @@
 				dat += " <A HREF='?src=\ref[src];setstat;statdisp=alert;alert=biohazard'>Biohazard</A> \]<BR><HR>"
 			if(STATE_ALERT_LEVEL)
 				dat += "Current alert level: [get_security_level()]<BR>"
+				if(security_level == SEC_LEVEL_BLACK)
+					dat += "<font color='red'><b>The station is under Central Command ordered quarentine. Eliminate the biological threat and contact Central Command to lower the alert level.</b></font>"
 				if(security_level == SEC_LEVEL_DELTA)
 					dat += "<font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font>"
 				else

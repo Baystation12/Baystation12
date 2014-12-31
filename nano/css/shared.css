@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
+.link, .linkOn, .linkOff, .selected, .disabled {
     float: left;
     min-width: 15px;
     height: 16px;
@@ -173,11 +173,11 @@ h4 {
     font-weight: bold;
 }
 
-.redButton {
+.redBackground {
     background: #ea0000;
 }
 
-.yellowButton {
+.yellowBackground {
     background: #cacc00;
 }
 

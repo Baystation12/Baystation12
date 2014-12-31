@@ -129,6 +129,8 @@
 	create_reagents(200)
 	connect()
 	update_icon()
+	if(closed_system)
+		flags &= ~OPENCONTAINER
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
@@ -775,6 +777,11 @@
 
 	closed_system = !closed_system
 	usr << "You [closed_system ? "close" : "open"] the tray's lid."
+	if(closed_system)
+		flags &= ~OPENCONTAINER
+	else
+		flags |= OPENCONTAINER
+
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil

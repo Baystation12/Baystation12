@@ -64,6 +64,13 @@
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\red [] waves [] over []'s head.", user, src, M), 1)
 			return
+	if(M.mind)
+		if(M.mind.vampire)
+			if(ishuman(M))
+				if(!(VAMP_FULL in M.mind.vampire.powers))
+					M << "<span class='warning'>The nullrod's power interferes with your own!</span>"
+					M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
+	..()
 
 /obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity)

@@ -397,6 +397,30 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "zippoon"
 	icon_off = "zippo"
 
+/obj/item/weapon/flame/lighter/zippo/personal
+	name = "\improper R'Jirr's Lighter"
+	desc = "A strange blue zippo lighter with gold engravings has R'Jirr inscribed on the bottom."
+	icon_state = "personalzippo"
+	item_state = "personalzippo"
+	icon_on = "personalzippoon"
+	icon_off = "personalzippo"
+
+/obj/item/weapon/flame/lighter/zippo/captain
+	name = "\improper Captains Zippo lighter"
+	desc = "A blue zippo lighter with gold engravings."
+	icon_state = "personalzippo"
+	item_state = "personalzippo"
+	icon_on = "personalzippoon"
+	icon_off = "personalzippo"
+
+/obj/item/weapon/flame/lighter/zippo/security
+	name = "\improper Security Zippo lighter"
+	desc = "A zippo lighter with the colours of security."
+	icon_state = "securityzippo"
+	item_state = "securityzippo"
+	icon_on = "securityzippoon"
+	icon_off = "securityzippo"
+
 /obj/item/weapon/flame/lighter/random
 	New()
 		var/color = pick("r","c","y","g")
@@ -454,6 +478,19 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M].</span>")
 			else
 				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+	if(!isliving(M))
+		return
+	if(M.fire_stacks > 0)
+		M.IgniteMob()
+		if(user != M)
+			user.visible_message("\red \The [user] ignites the flammable liquid on [M] with \the [src]",\
+			"\red You ignite the flammable liquid on [M] with \the [src]]",\
+			"You hear a burning sound.")
+			return
+		else
+			user.visible_message("\red \The [user] ignites the flammable liquid on themself with \the [src]",\
+			"\red You ignite the flammable liquid on yourself with \the [src]",\
+			"You hear a burning sound.")
 	else
 		..()
 
@@ -476,3 +513,202 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		user.SetLuminosity(user.luminosity-2)
 		SetLuminosity(2)
 	return
+
+
+/////////////
+// ROLLIES //
+/////////////
+
+/obj/item/clothing/mask/cigarette/rollie
+	name = "rollie"
+	desc = "A roll of dried plant matter wrapped in thin paper."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "spliffoff"
+	icon_on = "spliffon"
+	icon_off = "spliffoff"
+	type_butt = /obj/item/weapon/cigbutt/roach
+	throw_speed = 0.5
+	item_state = "spliffoff"
+	smoketime = 180
+	chem_volume = 50
+
+/obj/item/clothing/mask/cigarette/rollie/New()
+	..()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+
+/obj/item/weapon/cigbutt/roach
+	name = "roach"
+	desc = "A manky old roach."
+	icon_state = "roach"
+
+/obj/item/weapon/cigbutt/roach/New()
+	..()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+
+///////////
+// BOWLS //
+///////////
+
+/obj/item/clothing/mask/cigarette/bowl
+	name = "Smoking Bowl"
+	desc = "A bowl, for smoking."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "bowl2"
+	item_state = "bowl2"
+	icon_on = "bowl2"  //Note - these are in masks.dmi
+	icon_off = "bowl2"
+	smoketime = 100
+
+/obj/item/clothing/mask/cigarette/bowl/second
+	name = "Smoking Bowl"
+	desc = "A bowl, for smoking."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "bowl3"
+	item_state = "bowl3"
+	icon_on = "bowl3"  //Note - these are in masks.dmi
+	icon_off = "bowl3"
+	smoketime = 100
+
+/obj/item/clothing/mask/cigarette/bowl/light(var/flavor_text = "[usr] lights the [name].")
+	if(!src.lit)
+		src.lit = 1
+		damtype = "fire"
+		icon_state = icon_on
+		item_state = icon_on
+		var/turf/T = get_turf(src)
+		T.visible_message(flavor_text)
+		processing_objects.Add(src)
+
+/obj/item/clothing/mask/cigarette/bowl/second/light(var/flavor_text = "[usr] lights the [name].")
+	if(!src.lit)
+		src.lit = 1
+		damtype = "fire"
+		icon_state = icon_on
+		item_state = icon_on
+		var/turf/T = get_turf(src)
+		T.visible_message(flavor_text)
+		processing_objects.Add(src)
+
+/obj/item/clothing/mask/cigarette/bowl/process()
+	var/turf/location = get_turf(src)
+	smoketime--
+	if(smoketime < 1)
+		new /obj/effect/decal/cleanable/ash(location)
+		if(ismob(loc))
+			var/mob/living/M = loc
+			M << "<span class='notice'>Your [name] goes out, and you empty the ash.</span>"
+			lit = 0
+			icon_state = icon_off
+			item_state = icon_off
+			M.update_inv_wear_mask(0)
+		processing_objects.Remove(src)
+		return
+	if(location)
+		location.hotspot_expose(700, 5)
+	return
+
+/obj/item/clothing/mask/cigarette/bowl/second/process()
+	var/turf/location = get_turf(src)
+	smoketime--
+	if(smoketime < 1)
+		new /obj/effect/decal/cleanable/ash(location)
+		if(ismob(loc))
+			var/mob/living/M = loc
+			M << "<span class='notice'>Your [name] goes out, and you empty the ash.</span>"
+			lit = 0
+			icon_state = icon_off
+			item_state = icon_off
+			M.update_inv_wear_mask(0)
+		processing_objects.Remove(src)
+		return
+	if(location)
+		location.hotspot_expose(700, 5)
+	return
+
+/obj/item/clothing/mask/cigarette/bowl/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())//
+			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/lighter/zippo))
+		var/obj/item/weapon/flame/lighter/zippo/Z = W
+		if(Z.lit)
+			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+/obj/item/clothing/mask/cigarette/bowl/second/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())//
+			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/lighter/zippo))
+		var/obj/item/weapon/flame/lighter/zippo/Z = W
+		if(Z.lit)
+			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/lighter))
+		var/obj/item/weapon/flame/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/flame/match))
+		var/obj/item/weapon/flame/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
+
+/obj/item/clothing/mask/cigarette/bowl/afterattack(atom/target, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	if(istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown/))
+		//var/obj/item/weapon/reagent_containers/food/snacks/grown/O = target
+		//if(O.dry)
+		user.u_equip(target, 1)
+		src.chem_volume = target.reagents.total_volume
+		target.reagents.trans_to(src, src.chem_volume)
+		user.put_in_active_hand(src)
+		user << "<span class='notice'>You pack the [target.name] into the bowl.</span>"
+		src.desc = "Dried [target.name] packed in a bowl."
+		del(target)
+		//else
+			//user << "<span class='warning'>You need to dry this first.</span>"
+	else
+		..()
+
+/obj/item/clothing/mask/cigarette/bowl/second/afterattack(atom/target, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	if(istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown/))
+		//var/obj/item/weapon/reagent_containers/food/snacks/grown/O = target
+		//if(O.dry)
+		user.u_equip(target, 1)
+		src.chem_volume = target.reagents.total_volume
+		target.reagents.trans_to(src, src.chem_volume)
+		user.put_in_active_hand(src)
+		user << "<span class='notice'>You pack the [target.name] into the bowl.</span>"
+		src.desc = "Dried [target.name] packed in a bowl."
+		del(target)
+		//else
+			//user << "<span class='warning'>You need to dry this first.</span>"
+	else
+		..()

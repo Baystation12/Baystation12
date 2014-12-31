@@ -49,9 +49,13 @@
 		if(slot_wear_id)
 			// the only relevant check for this is the uniform check
 			return 1
+		if(slot_wear_pda)
+			return 1
 		if(slot_l_ear)
 			return has_organ("head")
 		if(slot_r_ear)
+			return has_organ("head")
+		if(slot_neck)
 			return has_organ("head")
 		if(slot_glasses)
 			return has_organ("head")
@@ -95,6 +99,8 @@
 			drop_from_inventory(l_store)
 		if (wear_id)
 			drop_from_inventory(wear_id)
+		if (wear_pda)
+			drop_from_inventory(wear_pda)
 		if (belt)
 			drop_from_inventory(belt)
 		w_uniform = null
@@ -116,6 +122,10 @@
 			update_inv_wear_mask(0)
 		success = 1
 		update_inv_head()
+	else if (W == neck)
+		neck = null
+		success = 1
+		update_inv_neck()
 	else if (W == l_ear)
 		l_ear = null
 		success = 1
@@ -147,6 +157,10 @@
 		wear_id = null
 		success = 1
 		update_inv_wear_id()
+	else if (W == wear_pda)
+		wear_pda = null
+		success = 1
+		update_inv_wear_pda()
 	else if (W == r_store)
 		r_store = null
 		success = 1
@@ -229,6 +243,10 @@
 			src.legcuffed = W
 			W.equipped(src, slot)
 			update_inv_legcuffed(redraw_mob)
+		if(slot_neck)
+			src.neck = W
+			W.equipped(src, slot)
+			update_inv_neck(redraw_mob)
 		if(slot_l_hand)
 			src.l_hand = W
 			W.equipped(src, slot)
@@ -245,6 +263,10 @@
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
+		if(slot_wear_pda)
+			src.wear_pda = W
+			W.equipped(src, slot)
+			update_inv_wear_pda(redraw_mob)
 		if(slot_l_ear)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
@@ -372,6 +394,9 @@
 			if("back")
 				if (!( target.back ))
 					del(src)
+			if("neck")
+				if (!( target.neck ))
+					del(src)
 			if("syringe")
 				return
 			if("pill")
@@ -454,6 +479,19 @@
 					return
 				else
 					message = "\red <B>[source] is trying to take off the [target.glasses] from [target]'s eyes!</B>"
+			if("PDA")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their PDA ([target.wear_pda]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) PDA ([target.wear_pda])</font>")
+				message = "\red <B>[source] is trying to take off [target.wear_pda] from [target]'s uniform!</B>"
+			if("neck")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their neck item ([target.neck]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) neck item ([target.neck])</font>")
+				if(target.neck && !target.neck.canremove)
+					message = "\red <B>[source] fails to take off \a [target.neck] from [target]'s neck!</B>"
+					return
+				else
+					message = "\red <B>[source] is trying to take off the [target.neck] from [target]'s neck!</B>"
+					usr.update_inv_neck()
 			if("l_ear")
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their left ear item ([target.l_ear]) removed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) left ear item ([target.l_ear])</font>")
@@ -624,6 +662,10 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_head
 			if (target.head && target.head.canremove)
 				strip_item = target.head
+		if("neck")
+			slot_to_process = slot_neck
+			if (target.neck && target.neck.canremove)
+				strip_item = target.neck
 		if("l_ear")
 			slot_to_process = slot_l_ear
 			if (target.l_ear)
@@ -673,6 +715,14 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_wear_id
 			if (target.wear_id)
 				strip_item = target.wear_id
+		if("neck")
+			slot_to_process = slot_neck
+			if (target.neck && target.neck.canremove)
+				strip_item = target.neck
+		if("PDA")
+			slot_to_process = slot_wear_pda
+			if (target.wear_pda)
+				strip_item = target.wear_pda
 		if("back")
 			slot_to_process = slot_back
 			if (target.back)

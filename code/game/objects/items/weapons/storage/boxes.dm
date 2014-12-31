@@ -362,6 +362,50 @@
 		new /obj/item/weapon/card/id(src)
 		new /obj/item/weapon/card/id(src)
 
+/obj/item/weapon/storage/box/newids
+	name = "box of spare IDs(head/sec)"
+	desc = "Has so many empty IDs."
+	icon_state = "id"
+
+	New()
+		..()
+		new /obj/item/weapon/card/id/head(src)
+		new /obj/item/weapon/card/id/head(src)
+		new /obj/item/weapon/card/id/sec(src)
+		new /obj/item/weapon/card/id/sec(src)
+		new /obj/item/weapon/card/id/sec(src)
+		new /obj/item/weapon/card/id/sec(src)
+		new /obj/item/weapon/card/id/sec(src)
+
+/obj/item/weapon/storage/box/newids2
+	name = "box of spare IDs(med/sci)"
+	desc = "Has so many empty IDs."
+	icon_state = "id"
+
+	New()
+		..()
+		new /obj/item/weapon/card/id/med(src)
+		new /obj/item/weapon/card/id/med(src)
+		new /obj/item/weapon/card/id/med(src)
+		new /obj/item/weapon/card/id/med(src)
+		new /obj/item/weapon/card/id/sci(src)
+		new /obj/item/weapon/card/id/sci(src)
+		new /obj/item/weapon/card/id/sci(src)
+
+/obj/item/weapon/storage/box/newids3
+	name = "box of spare IDs(eng/detective)"
+	desc = "Has so many empty IDs."
+	icon_state = "id"
+
+	New()
+		..()
+		new /obj/item/weapon/card/id/eng(src)
+		new /obj/item/weapon/card/id/eng(src)
+		new /obj/item/weapon/card/id/eng(src)
+		new /obj/item/weapon/card/id/eng(src)
+		new /obj/item/weapon/card/id/eng(src)
+		new /obj/item/weapon/card/id/detective(src)
+		new /obj/item/weapon/card/id/detective(src)
 
 /obj/item/weapon/storage/box/seccarts
 	name = "box of spare R.O.B.U.S.T. Cartridges"
@@ -496,6 +540,15 @@
 	..()
 	for(var/i = 0; i < 21; i++)
 		new /obj/item/weapon/light/tube(src)
+
+/obj/item/weapon/storage/box/lights/emergency
+	name = "box of replacement emergency light bulbs"
+	icon_state = "lightr"
+
+/obj/item/weapon/storage/box/lights/emergency/New()
+	..()
+	for(var/i = 0; i < 21; i++)
+		new /obj/item/weapon/light/emergency/bulb(src)
 
 /obj/item/weapon/storage/box/lights/mixed
 	name = "box of replacement lights"

@@ -21,6 +21,10 @@ em						{font-style: normal;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
 .adminsay				{color: #9611D4;	font-weight: bold;}
 .headminsay				{color: #5A0A7F;	font-weight: bold;}
+.DEV					{color: #FF7F00;	font-weight: bold;}
+.DEVADMINMOD			{color: #FF6100;	font-weight: bold;}
+.VIP					{color: #ab4679;	font-weight: bold;}
+.VIPADMINMOD			{color: #B22424;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
@@ -65,11 +69,14 @@ h1.alert, h2.alert		{color: #000000;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
+.Aviskree				{color: #999900;}
+.Chittin				{color: #8C4600;}
 .soghun					{color: #228B22;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
+.machine				{font-family: Georgia, Verdana, sans-serif;		font-weight: bold;}
 
 .interface				{color: #330033;}
 </style>"}

@@ -63,6 +63,12 @@
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
+	R.add_language("Aviachirp", 0)
+	R.add_language("Chittin", 0)
+	R.add_language("Vox-pidgin", 0)
+	R.add_language("Rootspeak", 0)
+	R.add_language("Encoded Audio Language", 0)
+	R.add_language("Xenomorph", 0)
 
 
 /obj/item/weapon/robot_module/standard
@@ -127,7 +133,7 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/borg/sight/hud/med(src)
+		//src.modules += new /obj/item/borg/sight/hud/med(src)
 		src.modules += new /obj/item/device/healthanalyzer(src)
 		src.modules += new /obj/item/device/reagent_scanner/adv(src)
 		src.modules += new /obj/item/roller_holder(src)
@@ -174,13 +180,15 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/borg/sight/meson(src)
+		//src.modules += new /obj/item/borg/sight/meson(src)
 		src.modules += new /obj/item/weapon/extinguisher(src)
 		src.modules += new /obj/item/weapon/rcd/borg(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/crowbar(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
+
+		src.emag = new /obj/item/borg/stun(src)
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
@@ -197,7 +205,7 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/borg/sight/meson(src)
+		//src.modules += new /obj/item/borg/sight/meson(src)
 		src.modules += new /obj/item/weapon/extinguisher(src)
 		src.modules += new /obj/item/weapon/weldingtool/largetank(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
@@ -237,11 +245,12 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/borg/sight/hud/sec(src)
+		//src.modules += new /obj/item/borg/sight/hud/sec(src)
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		src.modules += new /obj/item/weapon/melee/baton/robot(src)
 		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
 		src.modules += new /obj/item/taperoll/police(src)
+		src.modules += new /obj/item/weapon/book/manual/security_space_law(src)
 		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 		return
 
@@ -268,7 +277,7 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 		src.modules += new /obj/item/weapon/storage/bag/trash(src)
-		src.modules += new /obj/item/weapon/mop(src)
+		src.modules += new /obj/item/weapon/mop/borg(src)
 		src.modules += new /obj/item/device/lightreplacer(src)
 		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 
@@ -323,6 +332,12 @@
 		R.add_language("Rootspeak", 1)
 		R.add_language("Tradeband", 1)
 		R.add_language("Gutter", 1)
+		R.add_language("Aviachirp", 1)
+		R.add_language("Chittin", 1)
+		R.add_language("Vox-pidgin", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Encoded Audio Language", 1)
+		R.add_language("Xenomorph", 0)
 
 /obj/item/weapon/robot_module/clerical
 	name = "clerical robot module"
@@ -345,6 +360,13 @@
 		R.add_language("Rootspeak", 1)
 		R.add_language("Tradeband", 1)
 		R.add_language("Gutter", 1)
+		R.add_language("Aviachirp", 1)
+		R.add_language("Chittin", 1)
+		R.add_language("Vox-pidgin", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Encoded Audio Language", 1)
+		R.add_language("Xenomorph", 0)
+
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -359,7 +381,7 @@
 	New()
 		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/device/flash(src)
-		src.modules += new /obj/item/borg/sight/meson(src)
+		//src.modules += new /obj/item/borg/sight/meson(src)
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)

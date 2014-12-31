@@ -135,7 +135,7 @@ var/global/Holiday = null
 
 	message_admins("\blue ADMIN: Event: [key_name(src)] force-set Holiday to \"[Holiday]\"")
 	log_admin("[key_name(src)] force-set Holiday to \"[Holiday]\"")
-
+	log_admin_single("[key_name(src)] force-set Holiday to \"[Holiday]\"")
 
 //Run at the  start of a round
 /proc/Holiday_Game_Start()

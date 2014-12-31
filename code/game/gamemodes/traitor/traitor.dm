@@ -6,7 +6,7 @@
 	name = "traitor"
 	config_tag = "traitor"
 	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
+	protected_jobs = list("Security Officer", "Warden", "Internal Affairs Agent", "Head of Security", "Captain")//AI", Currently out of the list as malf does not work for shit
 	required_players = 0
 	required_enemies = 1
 	recommended_enemies = 4
@@ -49,6 +49,9 @@
 		for(var/job in restricted_jobs)
 			if(player.assigned_role == job)
 				possible_traitors -= player
+			for(var/obj/item/weapon/implant/loyalty/L in player)
+				if(L && (L.imp_in == player))//Checks to see if the person contains an implant, then checks that the implant is actually inside of them
+					possible_traitors -= player
 
 	for(var/j = 0, j < num_traitors, j++)
 		if (!possible_traitors.len)
@@ -181,6 +184,13 @@
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 			text += printplayer(traitor)
+			text += "<br><b>Uplink Items: </b>"
+			if(traitor.uplinkitems != 0)
+				for(var/A in traitor.uplinkitems)
+					var/obj/icon = A
+					text += "\icon[icon]-[icon.name], "
+			else
+				text += "None"
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1

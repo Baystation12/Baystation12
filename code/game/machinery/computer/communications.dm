@@ -86,7 +86,7 @@
 					var/old_level = security_level
 					if(!tmp_alertlevel) tmp_alertlevel = SEC_LEVEL_GREEN
 					if(tmp_alertlevel < SEC_LEVEL_GREEN) tmp_alertlevel = SEC_LEVEL_GREEN
-					if(tmp_alertlevel > SEC_LEVEL_BLUE) tmp_alertlevel = SEC_LEVEL_BLUE //Cannot engage delta with this
+					if(tmp_alertlevel > SEC_LEVEL_RED) tmp_alertlevel = SEC_LEVEL_RED //Cannot engage delta with this
 					set_security_level(tmp_alertlevel)
 					if(security_level != old_level)
 						//Only notify the admins if an actual change happened
@@ -97,6 +97,8 @@
 								feedback_inc("alert_comms_green",1)
 							if(SEC_LEVEL_BLUE)
 								feedback_inc("alert_comms_blue",1)
+							if(SEC_LEVEL_RED)
+								feedback_inc("alert_comms_red", 1)
 					tmp_alertlevel = 0
 				else:
 					usr << "You are not authorized to do this."
@@ -182,6 +184,22 @@
 			src.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
+		if("ERTCentcomm")
+			if(src.authenticated==2)
+				if(centcomm_message_cooldown)
+					usr << "\red Arrays recycling.  Please stand by."
+					return
+				var/input = stripped_input(usr, "Please describe the full nature of your emergency for your distress signal.  Please be aware that launching a distress signal is very expensive, and abuse will lead to termination.  Transmission does not guarantee a response. There is a 30 minute delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+				if(!input || !(usr in view(1,src)))
+					return
+				Centcomm_ERT_announce(input, usr)
+				usr << "\blue Message transmitted."
+				log_say("[key_name(usr)] has made an Centcomm ERT request. Reason: [input]")
+				priority_announcement.Announce("Distress signal activated.")
+				centcomm_message_cooldown = 1
+				spawn(300)//10 minute cooldown
+					centcomm_message_cooldown = 0
+
 		if("MessageCentcomm")
 			if(src.authenticated==2)
 				if(centcomm_message_cooldown)
@@ -308,6 +326,7 @@
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=logout'>Log Out</A> \]"
 				if (src.authenticated==2)
 					dat += "<BR>\[ <A HREF='?src=\ref[src];operation=announce'>Make An Announcement</A> \]"
+					dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ERTCentcomm'>Request an Emergency Response Team from Centcomm</A> \]"
 					if(src.emagged == 0)
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=MessageCentcomm'>Send an emergency message to Centcomm</A> \]"
 					else
@@ -366,6 +385,7 @@
 			if(security_level == SEC_LEVEL_DELTA)
 				dat += "<font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font>"
 			else
+				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_RED]'>Red</A><BR>"
 				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_BLUE]'>Blue</A><BR>"
 				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_GREEN]'>Green</A>"
 		if(STATE_CONFIRM_LEVEL)
@@ -385,7 +405,10 @@
 	switch(src.aistate)
 		if(STATE_DEFAULT)
 			if(emergency_shuttle.location() && !emergency_shuttle.online())
-				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-callshuttle'>Call Emergency Shuttle</A> \]"
+				if(security_level == SEC_LEVEL_BLACK)
+					dat += "<BR>\The station has been quarentined. An emergency shuttle is not available."
+				else
+					dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-callshuttle'>Call Emergency Shuttle</A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-messagelist'>Message List</A> \]"
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=ai-status'>Set Status Display</A> \]"
 		if(STATE_CALLSHUTTLE)

@@ -118,6 +118,7 @@ var/datum/global_hud/global_hud = new()
 	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
+	var/obj/screen/vampire_blood_display
 	var/obj/screen/blobpwrdisplay
 	var/obj/screen/blobhealthdisplay
 	var/obj/screen/r_hand_hud_object
@@ -151,6 +152,7 @@ datum/hud/New(mob/owner)
 			if(H.w_uniform)	H.w_uniform.screen_loc = ui_iclothing
 			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
 			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
+			if(H.neck)		H.neck.screen_loc = ui_neck
 			if(H.head)		H.head.screen_loc = ui_head
 		else
 			if(H.shoes)		H.shoes.screen_loc = null
@@ -161,6 +163,7 @@ datum/hud/New(mob/owner)
 			if(H.w_uniform)	H.w_uniform.screen_loc = null
 			if(H.wear_suit)	H.wear_suit.screen_loc = null
 			if(H.wear_mask)	H.wear_mask.screen_loc = null
+			if(H.neck)		H.neck.screen_loc = null
 			if(H.head)		H.head.screen_loc = null
 
 
@@ -207,6 +210,8 @@ datum/hud/New(mob/owner)
 		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
+	else if(mymob.mind && mymob.mind.vampire)
+		vampire_hud()
 
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)

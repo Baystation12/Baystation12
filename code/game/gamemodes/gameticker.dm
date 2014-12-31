@@ -41,14 +41,18 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
+	/*
+	'sound/music/halloween/skeletons.ogg',\
 	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
+	'sound/music/halloween/ghosts.ogg',\
 	'sound/music/space.ogg',\
 	'sound/music/traitor.ogg',\
 	'sound/music/title2.ogg',\
 	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
+	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this guy can't sing; removing it.
+	*/
+	'sound/music/soclose.ogg') //Yogstation knows some good music
+
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
@@ -76,16 +80,18 @@ var/global/datum/controller/gameticker/ticker
 	if(master_mode=="secret")
 		src.hide_mode = 1
 	var/list/datum/game_mode/runnable_modes
-	if((master_mode=="random") || (master_mode=="secret"))
+	if((master_mode=="secret"))
 		runnable_modes = config.get_runnable_modes()
 		if (runnable_modes.len==0)
 			current_state = GAME_STATE_PREGAME
 			world << "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby."
 			return 0
-		if(secret_force_mode != "secret")
+		if(secret_force_mode == "secret")
 			var/datum/game_mode/M = config.pick_mode(secret_force_mode)
 			if(M.can_start())
 				src.mode = config.pick_mode(secret_force_mode)
+		else
+			src.mode = pickweight(runnable_modes)
 		job_master.ResetOccupations()
 		if(!src.mode)
 			src.mode = pickweight(runnable_modes)

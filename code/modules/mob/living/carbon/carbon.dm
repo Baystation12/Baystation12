@@ -57,7 +57,7 @@
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
-	. = ..(null,1)
+	. = ..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
@@ -507,6 +507,12 @@
 			tmob.LAssailant = src
 
 		now_pushing = 0
+		if (istype(src, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src
+			if(H.species.flags & IS_SYNTHETIC)
+				if (istype(AM, /obj/machinery/recharge_station))
+					var/obj/machinery/recharge_station/F = AM
+					F.move_inside()
 		..()
 		if (!( istype(AM, /atom/movable) ))
 			return

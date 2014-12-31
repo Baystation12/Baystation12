@@ -76,6 +76,12 @@
 	var/flesh_color = "#FFC896" //Pink.
 	var/base_color      //Used when setting species.
 
+	var/hidetail = 0
+	var/dhts = 0
+	var/wingicon = 0
+
+	//Size Differences
+	var/sizechange = 1
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
@@ -175,7 +181,8 @@
 	if(flags & IS_SYNTHETIC)
 		H.h_style = ""
 		spawn(100)
-			H.update_hair()
+			if (H) // That was crashing, for raisons.
+				H.update_hair()
 	return
 
 // Only used for alien plasma weeds atm, but could be used for Dionaea later.
@@ -225,7 +232,6 @@
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
-	gluttonous = 1
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -235,12 +241,26 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | IS_STRONG
 
 	flesh_color = "#34AF10"
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+
+/datum/species/Aviskree
+	name = "Aviskree"
+	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
+	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
+	language = "Aviachirp"
+	tail = "aviskreetail"
+	unarmed_type = /datum/unarmed_attack/claws
+	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	primitive = /mob/living/carbon/monkey/aviskree
+	wingicon = 1
+	sizechange = 1
+
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
 
 /datum/species/tajaran
 	name = "Tajara"
@@ -267,6 +287,30 @@
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
 
+/datum/species/avisaran
+	name = "Avisaran"
+	icobase = 'icons/mob/human_races/r_Avisaran.dmi'
+	deform = 'icons/mob/human_races/r_def_Avisaran.dmi'
+	language = "Siik'tajr"
+	tail = "Avisaran"
+	unarmed_type = /datum/unarmed_attack/claws_J
+	darksight = 10
+	dhts = 1
+	wingicon = 1
+	sizechange = 1
+
+	cold_level_1 = 200 //Default 260
+	cold_level_2 = 140 //Default 200
+	cold_level_3 = 80 //Default 120
+
+	heat_level_1 = 330 //Default 360
+	heat_level_2 = 380 //Default 400
+	heat_level_3 = 800 //Default 1000
+
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | IS_STRONG
+
+	flesh_color = "#BCBCBC"
+
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
@@ -292,6 +336,7 @@
 	unarmed_type = /datum/unarmed_attack/claws/strong
 	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
 	rarity_value = 2
+	sizechange = 0.8
 
 	speech_sounds = list('sound/voice/shriek1.ogg')
 	speech_chance = 20
@@ -404,7 +449,7 @@
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | IS_STRONG
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -442,7 +487,7 @@
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	language = "Tradeband"
+	language = "Encoded Audio Language"
 	unarmed_type = /datum/unarmed_attack/punch
 	rarity_value = 2
 
@@ -461,9 +506,9 @@
 	heat_level_2 = 1000
 	heat_level_3 = 2000
 
-	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
+	synth_temp_gain = 5 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | HAS_SKIN_COLOR
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -472,6 +517,25 @@
 		"heart" =    /datum/organ/internal/heart,
 		"brain" =    /datum/organ/internal/brain,
 		)
+
+/datum/species/machine/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.gender = NEUTER
+	return ..()
+
+/datum/species/kidan
+	name = "Kidan"
+	name_plural = "kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_type = /datum/unarmed_attack/claws
+
+	flags = IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
+
+	blood_color = "#328332"
+	flesh_color = "#8C4600"
+
 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)
@@ -542,15 +606,24 @@
 	sharp = 1
 	edge = 1
 
+/datum/unarmed_attack/claws_J   //Jamie's a bit stronger than the average guy, according to the old code
+	attack_verb = list("scratch", "claw")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 6
+	sharp = 1
+	edge = 1
+	shredding = 1
+
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slash")
-	damage = 10
-	shredding = 1
+	damage = 7
+	shredding = 0
 
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("maul")
-	damage = 15
-	shredding = 1
+	damage = 12
+	shredding = 0
 
 /datum/hud_data
 	var/icon              // If set, overrides ui_style.
@@ -585,7 +658,9 @@
 		"id" =           list("loc" = ui_id,        "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
 		"storage1" =     list("loc" = ui_storage1,  "slot" = slot_l_store,   "state" = "pocket"),
 		"storage2" =     list("loc" = ui_storage2,  "slot" = slot_r_store,   "state" = "pocket"),
-		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt")
+		"belt" =         list("loc" = ui_belt,      "slot" = slot_belt,      "state" = "belt"),
+		"pda" =          list("loc" = ui_pda,       "slot" = slot_wear_pda,  "state" = "pda"),
+		"neck" =         list("loc" = ui_neck,      "slot" = slot_neck,  	 "state" = "neck", "toggle" =1)
 		)
 
 /datum/hud_data/New()

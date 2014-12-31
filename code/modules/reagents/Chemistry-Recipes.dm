@@ -1827,8 +1827,6 @@ datum
 
 
 
-////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////
-
 		sbiten
 			name = "Sbiten"
 			id = "sbiten"

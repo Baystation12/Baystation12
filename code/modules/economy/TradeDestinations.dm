@@ -8,7 +8,7 @@ var/list/weighted_mundaneevent_locations = list()
 	var/distance = 0
 	var/list/willing_to_buy = list()
 	var/list/willing_to_sell = list()
-	var/can_shuttle_here = 0		//one day crew from the exodus will be able to travel to this destination
+	var/can_shuttle_here = 0		//one day crew from the Phoenix will be able to travel to this destination
 	var/list/viable_random_events = list()
 	var/list/temp_price_change[BIOMEDICAL]
 	var/list/viable_mundane_events = list()
@@ -43,7 +43,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/icarus
 	name = "NMV Icarus"
-	description = "Corvette assigned to patrol NSS Exodus local space."
+	description = "Corvette assigned to patrol NSS Phoenix local space."
 	distance = 0.1
 	willing_to_buy = list()
 	willing_to_sell = list()

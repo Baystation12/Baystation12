@@ -170,6 +170,15 @@
 
 	src.add_fingerprint(user)
 
+
+/obj/structure/cable/attack_ghost(mob/dead/observer/user as mob)
+
+	var/datum/powernet/PN = get_powernet()		// find the powernet
+	if(PN && (PN.avail > 0))		// is it powered?
+		user << "<span class='warning'>[PN.avail]W in power network.</span>"
+	else
+		user << "<span class='warning'>The cable is not powered.</span>"
+
 // shock the user with probability prb
 
 /obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
@@ -648,12 +657,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
+		/*if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
 				if(M == user)
 					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
+					return*/ // Fuck OH&S, IPCs aren't forced by laws to do that.
 
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)

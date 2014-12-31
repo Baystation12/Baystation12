@@ -17,7 +17,7 @@
 /obj/item/weapon/paper/fluff/sue_donem/New()
 	..()
 
-	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Exodus or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
+	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Phoenix or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
 
 	stamps = (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the NanoTrasen Synthetic Intelligence Division rubber stamp.</i>"
 
@@ -888,7 +888,7 @@
 
 /obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
 	name = "blue shield security armor"
-	desc = "An armored vest with the badge of a Blue Shield Security lieutenant."
+	desc = "An armored vest with the badge of a hired Blueshield Security agent."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "deus_blueshield"
 	item_state = "deus_blueshield"
@@ -1190,7 +1190,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
@@ -1204,7 +1204,7 @@
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 	var/obj/item/held //Item inside locket.
 
 /obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
@@ -1234,7 +1234,7 @@
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 
 ////// Emerald necklace - Ty Foster - Nega
 
@@ -1254,7 +1254,7 @@
 	icon_state = "michael_guess_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
-	slot_flags = SLOT_MASK
+	slot_flags = SLOT_NECK
 	body_parts_covered = 0
 
 //////////// Shoes ////////////

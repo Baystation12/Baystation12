@@ -90,7 +90,7 @@
 	var/list/languages = list()         // For speaking/listening.
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
-
+	var/slaver = null
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
@@ -108,6 +108,9 @@
 	var/floatiness = 0
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
+
+	//ERT stuff :(
+	var/ert_role = 0 // 1 = Security, 2 = Medical, 3 = Engineering, 4 = Commander
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
@@ -159,7 +162,7 @@
 	//see: setup.dm for list of mutations
 
 	var/voice_name = "unidentifiable voice"
-
+	var/speech_allowed = 1
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true.
 

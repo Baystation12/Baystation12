@@ -54,7 +54,10 @@
 		new /obj/item/weapon/cartridge/hop(src)
 		new /obj/item/device/radio/headset/heads/hop(src)
 		new /obj/item/weapon/storage/box/ids(src)
-		new /obj/item/weapon/storage/box/ids( src )
+		new /obj/item/weapon/storage/box/newids(src)
+		new /obj/item/weapon/storage/box/newids2(src)
+		new /obj/item/weapon/storage/box/newids3(src)
+		new /obj/item/weapon/storage/box/ids(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/device/flash(src)
 		return
@@ -126,6 +129,7 @@
 		new /obj/item/clothing/tie/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/head/beret/sec/hos(src)
+		new /obj/item/clothing/mask/sechailer/hos
 		return
 
 
@@ -163,14 +167,43 @@
 		new /obj/item/weapon/melee/baton/loaded(src)
 		new /obj/item/weapon/gun/energy/taser(src)
 		new /obj/item/weapon/storage/box/holobadge(src)
+		new /obj/item/clothing/mask/sechailer/warden
 		new /obj/item/clothing/head/beret/sec/warden(src)
 		return
 
 
 
+/obj/structure/closet/secure_closet/armor
+	name = "Armor Locker"
+	req_access = list(access_brig)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
+
+	New()
+		..()
+		sleep(2)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		new /obj/item/clothing/suit/armor/vest/security(src)
+		new /obj/item/clothing/head/helmet(src)
+		return
+
+
 /obj/structure/closet/secure_closet/security
 	name = "Security Officer's Locker"
-	req_access = list(access_security)
+	req_access = list(access_brig)
 	icon_state = "sec1"
 	icon_closed = "sec"
 	icon_locked = "sec1"
@@ -185,8 +218,8 @@
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_sec(src)
-		new /obj/item/clothing/suit/armor/vest/security(src)
-		new /obj/item/clothing/head/helmet(src)
+
+		new /obj/item/clothing/suit/armor/vest/protective(src)
 //		new /obj/item/weapon/cartridge/security(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/weapon/storage/belt/security(src)
@@ -199,9 +232,11 @@
 		new /obj/item/taperoll/police(src)
 		new /obj/item/device/hailer(src)
 		new /obj/item/clothing/tie/storage/black_vest(src)
-		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
+		new /obj/item/clothing/mask/sechailer(src)
+		new /obj/item/clothing/gloves/black(src)
 		return
+
 
 
 /obj/structure/closet/secure_closet/security/cargo
@@ -354,3 +389,31 @@
 				icon_state = icon_closed
 		else
 			icon_state = icon_opened
+
+/obj/structure/closet/secure_closet/deptguard
+	name = "Department Guards's Locker"
+	req_access = list(access_deptguard)
+	icon_state = "sec1"
+	icon_closed = "sec"
+	icon_locked = "sec1"
+	icon_opened = "secopen"
+	icon_broken = "secbroken"
+	icon_off = "secoff"
+
+	New()
+		..()
+		sleep(2)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/security(src)
+		else
+			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+
+		new /obj/item/clothing/suit/armor/vest/protective(src)
+		new /obj/item/weapon/storage/belt/security(src)
+		new /obj/item/device/flash(src)
+		new /obj/item/weapon/reagent_containers/spray/pepper(src)
+		new /obj/item/weapon/melee/baton/loaded(src)
+		new /obj/item/clothing/glasses/sunglasses/sechud(src)
+		new /obj/item/taperoll/police(src)
+		new /obj/item/clothing/gloves/black(src)
+		return

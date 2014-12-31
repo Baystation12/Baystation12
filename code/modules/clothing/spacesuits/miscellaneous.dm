@@ -33,9 +33,8 @@
 	desc = "That's not red paint. That's real blood."
 	icon_state = "deathsquad"
 	item_state = "deathsquad"
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 60)
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
-	siemens_coefficient = 0.6
+	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	siemens_coefficient = 0.2
 
 /obj/item/clothing/head/helmet/space/deathsquad/beret
 	name = "officer's beret"
@@ -85,5 +84,63 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.9
 	body_parts_covered = UPPER_TORSO|ARMS
+
+//clown suit
+
+/obj/item/clothing/head/helmet/space/clownspace
+	name = "clown helmet"
+	icon_state = "clownspace"
+	item_state = "clownspacehelmet"
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Only for the most fashionable of clowns! Honk!."
+	flags_inv = HIDEFACE
+	permeability_coefficient = 0.01
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+
+/obj/item/clothing/suit/armor/clown
+	name = "clown's armor"
+	desc = "A bulky, heavy-duty piece of exclusive Clown armor. Honk!"
+	icon_state = "suit-clown"
+	item_state = "clown_hardsuit"
+	w_class = 4
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.02
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
+	allowed = list(/obj/item/weapon/tank/emergency_oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	slowdown = 1.5
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.7
+
+//Mime Suit
+
+/obj/item/clothing/head/helmet/space/mimespace
+	name = "Mime helmet"
+	icon_state = "mimespace"
+	item_state = "mimespacehelmet"
+	desc = "     .                   ."
+	flags_inv = HIDEFACE
+	permeability_coefficient = 0.01
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+
+/obj/item/clothing/suit/armor/mime
+	name = "mime's armor"
+	desc = "       ,              .        !"
+	icon_state = "suit-mime"
+	item_state = "mime_hardsuit"
+	w_class = 4
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.02
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
+	allowed = list(/obj/item/weapon/tank/emergency_oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	slowdown = 1.5
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.7
 
 

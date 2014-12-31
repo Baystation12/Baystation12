@@ -251,10 +251,29 @@
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && src.welding)
-		message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
+		var/user_loc = usr.loc
 		log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
-		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done."
 		var/obj/structure/reagent_dispensers/fueltank/tank = O
+		user << "\red You begin welding on the fueltank and with a moment of lucidity you realize, this might not be the smartest thing you've ever done."
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) is starting to weld a fueltank! <A HREF='?_src_=holder;deleteweldertank=\ref[usr]'>Delete</A>")
+		sleep(100)
+		if(usr.loc != user_loc)
+			message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has stopped welding a fueltank.")
+			user << "\red You stop welding the fueltank."
+			return
+		message_admins("[key_name(usr, usr.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A>) in ([usr.x],[usr.y],[usr.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>) has made a fueltank explode.")
 		tank.explode()
 		return
 	if (src.welding)
@@ -334,7 +353,6 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
-			src.w_class = 4
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -349,7 +367,6 @@
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
-		src.w_class = initial(src.w_class)
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -450,21 +467,36 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+	if(!src.welding)
+		return ..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/D = M
+		if(D.fire_stacks > 0)
+			remove_fuel(1)
+			D.IgniteMob()
+			if(user != M)
+				user.visible_message("\red \The [user] ignites the flammable liquid on [M] with \the [src]",\
+				"\red You ignite the flammable liquid on [M] with \the [src]",\
+				"You hear a burning sound.")
+				return
+			else
+				user.visible_message("\red \The [user] ignites the flammable liquid on themself with \the [src]",\
+				"\red You ignite the flammable liquid on yourself with \the [src]",\
+				"You hear a burning sound.")
 
 	if(hasorgans(M))
-
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(istype(M,/mob/living/carbon/human))
+		/*if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			if(H.species.flags & IS_SYNTHETIC)
 				if(M == user)
 					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
+					return*/ // Fuck OH&S, IPCs aren't forced by laws to do that.
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)

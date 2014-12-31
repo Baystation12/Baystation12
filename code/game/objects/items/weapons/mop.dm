@@ -24,6 +24,8 @@
 			var/turf/simulated/T = src
 			T.dirt = 0
 		for(var/obj/effect/O in src)
+			if(istype(O,/obj/effect/overlay/adminoverlay))
+				return
 			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				del(O)
 	source.reagents.reaction(src, TOUCH, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
@@ -32,6 +34,8 @@
 
 /obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
+	if(istype(A,/obj/effect/overlay/adminoverlay))
+		return
 	if(istype(A, /turf) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/rune))
 		if(reagents.total_volume < 1)
 			user << "<span class='notice'>Your mop is dry!</span>"
@@ -50,3 +54,28 @@
 	if(istype(I, /obj/item/weapon/mop) || istype(I, /obj/item/weapon/soap))
 		return
 	..()
+
+
+/obj/item/weapon/mop/borg
+	name = "Cyborg Mop"
+	var/charge_cost = 50
+	var/charge_tick = 0
+	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
+	var/list/datum/reagents/reagent_list = list()
+	var/list/reagent_ids = list("water")
+	var/mode = 1
+
+/obj/item/weapon/mop/borg/process() //Every [recharge_time] seconds, recharge some reagents for the cyborg
+	charge_tick++
+	if(charge_tick < recharge_time) return 0
+	charge_tick = 0
+
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		if(R && R.cell)
+			var/datum/reagents/RG = reagent_list
+			if(RG.total_volume < RG.maximum_volume) 	//Don't recharge reagents and drain power if the storage is full.
+				R.cell.use(charge_cost) 					//Take power from borg...
+				RG.add_reagent("water", 5)		//And fill hypo with reagent.
+	//update_icon()
+	return 1

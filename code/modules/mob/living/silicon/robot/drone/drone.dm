@@ -34,6 +34,8 @@
 	..()
 
 	verbs += /mob/living/proc/hide
+	verbs += /mob/living/silicon/robot/drone/ventcrawl
+
 	remove_language("Robot Talk")
 	add_language("Robot Talk", 0)
 	add_language("Drone Talk", 1)
@@ -200,6 +202,14 @@
 		return
 	..()
 
+/mob/living/silicon/robot/drone/death(gibbed)
+
+	if(module)
+		var/obj/item/weapon/gripper/G = locate(/obj/item/weapon/gripper) in module
+		if(G) G.drop_item()
+
+	..(gibbed)
+
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/Process_Spaceslipping(var/prob_slip)
 	//TODO: Consider making a magboot item for drones to equip. ~Z
@@ -283,6 +293,7 @@
 /mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
 	return
 
+
 /mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
 
 	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
@@ -301,3 +312,4 @@
 /mob/living/silicon/robot/drone/add_robot_verbs()
 
 /mob/living/silicon/robot/drone/remove_robot_verbs()
+

@@ -147,10 +147,10 @@
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
-					return 0
+			//	var/datum/species/S = all_species[client.prefs.species]
+			//	if(!(S.flags & IS_WHITELISTED))
+			//		src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+			//		return 0
 
 			LateChoices()
 
@@ -168,10 +168,10 @@
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
-				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
-					return 0
+			//	var/datum/species/S = all_species[client.prefs.species]
+			//	if(!(S.flags & IS_WHITELISTED))
+			//		src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+			//		return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return
@@ -280,6 +280,7 @@
 		if(!job)	return 0
 		if((job.current_positions >= job.total_positions) && job.total_positions != -1)	return 0
 		if(jobban_isbanned(src,rank))	return 0
+		if(!icwl_canHaveJob(src, rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
 
@@ -348,7 +349,7 @@
 			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
 			if(character.mind.role_alt_title)
 				rank = character.mind.role_alt_title
-			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+			a.autosay("[character.real_name],[character.mind.assigned_DG_dept ? " [character.mind.assigned_DG_dept]" : null][rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 			del(a)
 
 	proc/LateChoices()
@@ -370,6 +371,9 @@
 					dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 		dat += "Choose from the following open positions:<br>"
+		if(!icwl_isWhitelisted(src.ckey))
+			dat += "Your account has not been added to the IC Whitelist so some jobs may not be avalible due to your age or species...<br><br>"
+
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))
 				var/active = 0

@@ -190,6 +190,48 @@
 	icon_state = "silver"
 	item_state = "silver_id"
 
+/obj/item/weapon/card/id/sec
+	name = "identification card"
+	desc = "A Red card which shows you that are a part of Security."
+	icon_state = "id_sec"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/med
+	name = "identification card"
+	desc = "A Blue and White card which shows that you are a part of Medical."
+	icon_state = "id_med"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/eng
+	name = "identification card"
+	desc = "A Orange card which shows that you are a part of Engineering."
+	icon_state = "id_eng"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/head
+	name = "identification card"
+	desc = "A Gold and Green card which shows that you are a Head of your department."
+	icon_state = "id_head"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/sci
+	name = "identification card"
+	desc = "A Purple card which shows that you are a part of Science."
+	icon_state = "id_sci"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/detective
+	name = "Dectective card"
+	desc = "A Dectective card which shows authority."
+	icon_state = "detective"
+	item_state = "silver_id"
+
+/obj/item/weapon/card/id/blueshield
+	name = "Blueshield Card"
+	desc = "A Blueshield Card that shows authority"
+	icon_state = "centcom"
+	item_state = "silver_id"
+
 /obj/item/weapon/card/id/gold
 	name = "identification card"
 	desc = "A golden card which shows power and might."
@@ -236,8 +278,24 @@
 			return
 		src.assignment = u
 		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
+
+		var/department = sd_Alert(user, "Which department would you like the ID to display?", buttons = list("Command","Security","Medical","Engineering","Research","Civilian"))
+		switch(department)
+			if("Command")
+				src.icon_state = "id_head"
+			if("Security")
+				src.icon_state = "id_sec"
+			if("Medical")
+				src.icon_state = "id_med"
+			if("Engineering")
+				src.icon_state = "id_eng"
+			if("Research")
+				src.icon_state = "id_sci"
+			if("Civilian")
+				src.icon_state = "id"
 		user << "\blue You successfully forge the ID card."
 		registered_user = user
+
 	else if(!registered_user || registered_user == user)
 
 		if(!registered_user) registered_user = user  //
@@ -256,8 +314,24 @@
 					return
 				src.assignment = u
 				src.name = "[src.registered_name]'s ID Card ([src.assignment])"
+				var/department = sd_Alert(user, "Which department would you like the ID to display?", buttons = list("Command","Security","Medical","Engineering","Research","Civilian"))
+				switch(department)
+					if("Command")
+						src.icon_state = "id_head"
+					if("Security")
+						src.icon_state = "id_sec"
+					if("Medical")
+						src.icon_state = "id_med"
+					if("Engineering")
+						src.icon_state = "id_eng"
+					if("Research")
+						src.icon_state = "id_sci"
+					if("Civilian")
+						src.icon_state = "id"
+
 				user << "\blue You successfully forge the ID card."
 				return
+
 			if("Show")
 				..()
 	else

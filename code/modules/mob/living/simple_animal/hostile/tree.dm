@@ -51,6 +51,7 @@
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
 
 /mob/living/simple_animal/hostile/tree/death()
-	..(null,"is hacked into pieces!")
+	..()
+	visible_message("\red <b>[src]</b> is hacked into pieces!")
 	new /obj/item/stack/sheet/wood(loc)
 	del(src)

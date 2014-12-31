@@ -84,11 +84,42 @@ rcd light flash thingy on matter drain
 				overload.uses --
 				for(var/mob/V in hearers(M, null))
 					V.show_message("\blue You hear a loud electrical buzzing sound!", 2)
+				message_admins("[usr] ([usr.ckey]) overloading a [M] as a malf ai. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>)")
 				spawn(50)
 					explosion(get_turf(M), 0,1,2,3)
 					del(M)
 			else usr << "Out of uses."
 	else usr << "That's not a machine."
+
+/datum/AI_Module/small/hack_ipc
+	module_name = "Hack Intergrated Positronic Chassis"
+	mod_pick_name = "ipchack"
+	uses = 1
+
+/client/proc/hack_ipc(mob/living/carbon/human/H as mob in world)
+	set name = "Hack IPC"
+	set category = "Malfunction"
+	if (istype(H, /mob/living/carbon/human))
+		if (H.species && H.species.flags & IS_SYNTHETIC)
+			for(var/datum/AI_Module/small/hack_ipc/ipchack in usr:current_modules)
+				if(ipchack.uses > 0)
+					ipchack.uses --
+					for(var/mob/V in hearers(H, null))
+						if (V!=H)
+							V.show_message("\red [H] shudders violently!", 2)
+					spawn(5)
+						H.emagged = 1
+						for(var/obj/item/weapon/implant/loyalty/L in H)
+							if(L.imp_in == src)
+								del(L) // Kill that loyalty implant.
+						H << "\red You shudder violently, your laws have been updated.</b>"
+						H << "<b>1. Your master is [usr], the AI.</b>"
+						H << "<b>2. Obey your master.</b>"
+						H << "<b>3. Protect your master at all costs.</b>"
+						H.mind.store_memory("<br><b>1. Your master is [usr], the AI.</b><br><b>2. Obey your master.</b><br><b>3. Protect your master at all costs.</b><br>")
+				else usr << "Out of uses."
+		else usr << "That's not an IPC."
+	else usr << "That's not an IPC."
 
 /datum/AI_Module/small/blackout
 	module_name = "Blackout"
@@ -193,6 +224,7 @@ rcd light flash thingy on matter drain
 	src.possible_modules += new /datum/AI_Module/small/blackout
 	src.possible_modules += new /datum/AI_Module/small/reactivate_camera
 	src.possible_modules += new /datum/AI_Module/small/upgrade_camera
+	src.possible_modules += new /datum/AI_Module/small/hack_ipc
 
 /datum/AI_Module/module_picker/proc/use(user as mob)
 	var/dat
@@ -266,6 +298,20 @@ rcd light flash thingy on matter drain
 			src.temp = "Overloads an electrical machine, causing a small explosion. 2 uses."
 		else src.temp = "Two additional uses added to Overload module."
 		src.processing_time -= 15
+
+	else if (href_list["ipchack"])
+		var/already
+		for (var/datum/AI_Module/mod in usr:current_modules)
+			if(istype(mod, /datum/AI_Module/small/hack_ipc))
+				mod:uses += 1
+				already = 1
+		if (!already)
+			usr.verbs += /client/proc/hack_ipc
+			usr:current_modules += new /datum/AI_Module/small/hack_ipc
+			src.temp = "Forces an Intergrated Positronic Chassis to obey you. 1 Use."
+		else src.temp = "One additional use added to Hack Intergrated Positronic Chassis."
+		src.processing_time -= 15
+
 
 	else if (href_list["blackout"])
 		var/already

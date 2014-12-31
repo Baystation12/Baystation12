@@ -98,7 +98,9 @@ var/intercom_range_display_status = 0
 						window_check = 1
 						break
 				if(!window_check)
-					output += "<li><font color='red'>Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Network: [C1.network]</color></li>"
+					var/area/A = get_area(C1)
+					if(!(istype(A,/area/tdome)))
+						output += "<li><font color='red'>Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Network: [C1.network]</color></li>"
 
 	output += "</ul>"
 	usr << browse(output,"window=airreport;size=1000x500")
@@ -142,7 +144,6 @@ var/list/debug_verbs = list (
         ,/client/proc/kaboom
         ,/client/proc/splash
         ,/client/proc/cmd_admin_areatest
-        ,/client/proc/cmd_admin_rejuvenate
         ,/datum/admins/proc/show_traitor_panel
         ,/client/proc/print_jobban_old
         ,/client/proc/print_jobban_old_filter
@@ -165,6 +166,27 @@ var/list/debug_verbs = list (
         ,/client/proc/view_power_update_stats_machines
         ,/client/proc/toggle_power_update_profiling
 		,/client/proc/atmos_toggle_debug
+		,/client/proc/getruntimelog                    /*allows us to access runtime logs to somebody*/
+		,/client/proc/Debug2
+		,/client/proc/kill_air
+		,/client/proc/ZASSettings
+		,/client/proc/cmd_debug_make_powernets
+		,/client/proc/kill_airgroup
+		,/client/proc/debug_controller
+		,/client/proc/cmd_debug_mob_lists
+		,/client/proc/cmd_debug_del_all
+		,/client/proc/cmd_debug_tog_aliens
+		,/client/proc/air_report
+		,/client/proc/reload_admins
+		,/client/proc/reload_mentors
+		,/client/proc/restart_controller
+		,/client/proc/remake_distribution_map
+		,/client/proc/show_distribution_map
+		,/client/proc/show_plant_genes
+		,/client/proc/callproc
+		,/client/proc/toggledebuglogs
+		,/client/proc/SDQL_query
+		,/client/proc/SDQL2_query
 	)
 
 
@@ -174,6 +196,10 @@ var/list/debug_verbs = list (
 
 	if(!check_rights(R_DEBUG)) return
 
+	if(!check_rights(R_DEV,0))
+		if(alert("These verbs have the potentional to BREAK EVERYTHING, are you sure you know what you are doing?",,"Yes","No")=="No")
+			return
+
 	verbs += debug_verbs
 
 	feedback_add_details("admin_verb","mDV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -182,7 +208,7 @@ var/list/debug_verbs = list (
 	set category = "Debug"
 	set name = "Hide Debug verbs"
 
-	if(!check_rights(R_DEBUG)) return
+	if(!check_rights(R_DEBUG,0)) return
 
 	verbs -= debug_verbs
 

@@ -50,10 +50,8 @@
 		placeholder = 2
 	if (!( isnum(num) ))
 		return
-	if (num == 0)
-		var/final = ""
-		for(var/i=1 to placeholder) final = "[final]0"
-		return final
+	if (!( num ))
+		return "0"
 	var/hex = ""
 	var/i = 0
 	while(16 ** i < num)
@@ -325,6 +323,12 @@ proc/tg_list2text(list/list, glue=",")
 	if(rights & R_SPAWN)		. += "[seperator]+SPAWN"
 	if(rights & R_MOD)			. += "[seperator]+MODERATOR"
 	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
+	if(rights & R_DEV)			. += "[seperator]+DEV"
+	return .
+
+/proc/vip_rights2text(rights,seperator="")
+	if(rights & V_EVENT)		. += "[seperator]+EVENT"
+	if(rights & V_DONATE)		. += "[seperator]+DONATE"
 	return .
 
 /proc/ui_style2icon(ui_style)

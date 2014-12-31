@@ -41,7 +41,7 @@
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
 	max_w_class = 4
-	max_combined_w_class = 28
+	max_combined_w_class = 30
 
 	New()
 		..()
@@ -51,11 +51,11 @@
 		if(crit_fail)
 			user << "\red The Bluespace generator isn't working."
 			return
-		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
+		/*if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			user << "\red The Bluespace interfaces of the two devices conflict and malfunction."
 			del(W)
-			return
-			/* //BoH+BoH=Singularity, commented out.
+			return*/
+			 //BoH+BoH=Singularity, commented out.
 		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
 			investigate_log("has become a singularity. Caused by [user.key]","singulo")
 			user << "\red The Bluespace interfaces of the two devices catastrophically malfunction!"
@@ -66,7 +66,7 @@
 			log_game("[key_name(user)] detonated a bag of holding")
 			del(src)
 			return
-			*/
+
 		..()
 
 	proc/failcheck(mob/user as mob)
@@ -125,6 +125,8 @@
 	desc = "It's a tough backpack for the daily grind of station life."
 	icon_state = "engiepack"
 	item_state = "engiepack"
+	storage_slots = 14
+	max_combined_w_class = 45
 
 /obj/item/weapon/storage/backpack/toxins
 	name = "laboratory backpack"
@@ -180,6 +182,8 @@
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
+	storage_slots = 14
+	max_combined_w_class = 45
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
@@ -247,6 +251,8 @@
 	name = "emergency response team engineer backpack"
 	desc = "A spacious backpack with lots of pockets, worn by engineering members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_engineering"
+	storage_slots = 14
+	max_combined_w_class = 45
 
 //Medical
 /obj/item/weapon/storage/backpack/ert/medical

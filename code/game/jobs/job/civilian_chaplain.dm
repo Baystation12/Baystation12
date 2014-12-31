@@ -19,7 +19,7 @@
 		var/obj/item/weapon/storage/bible/B = new /obj/item/weapon/storage/bible(H) //BS12 EDIT
 		H.equip_to_slot_or_del(B, slot_l_hand)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chaplain(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/chaplain(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/chaplain(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
@@ -76,7 +76,7 @@
 
 			while(!accepted)
 				if(!B) break // prevents possible runtime errors
-				new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon")
+				new_book_style = input(H,"Which bible style would you like?") in list("Bible", "Koran", "Scrapbook", "Creeper", "White Bible", "Holy Light", "Athiest", "Tome", "The King in Yellow", "Ithaqua", "Scientology", "the bible melts", "Necronomicon", "Machine")
 				switch(new_book_style)
 					if("Koran")
 						B.icon_state = "koran"
@@ -85,6 +85,11 @@
 							for(var/turf/T in A.contents)
 								if(T.icon_state == "carpetsymbol")
 									T.dir = 4
+					if("Machine")
+						B.icon_state = "bmachine"
+						B.item_state = "bmachine"
+						var/cardBorgHat = new /obj/item/clothing/head/cardborg(H.loc)
+						H.equip_to_slot_or_del(cardBorgHat, slot_head)
 					if("Scrapbook")
 						B.icon_state = "scrapbook"
 						B.item_state = "scrapbook"

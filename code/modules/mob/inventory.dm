@@ -197,6 +197,7 @@
 	var/list/items = new/list()
 
 	if(hasvar(src,"back")) if(src:back) items += src:back
+	if(hasvar(src,"neck")) if(src:neck) items += src:neck
 	if(hasvar(src,"belt")) if(src:belt) items += src:belt
 	if(hasvar(src,"l_ear")) if(src:l_ear) items += src:l_ear
 	if(hasvar(src,"r_ear")) if(src:r_ear) items += src:r_ear
@@ -239,6 +240,10 @@
 		if(slot_wear_mask)
 			if(!src.wear_mask)
 				src.wear_mask = W
+				equipped = 1
+		if(slot_neck)
+			if(!src.neck)
+				src.neck = W
 				equipped = 1
 		if(slot_handcuffed)
 			if(!src.handcuffed)
@@ -319,3 +324,29 @@
 		if (del_on_fail)
 			del(W)
 	return equipped
+
+
+/*mob/proc/get_item_by_slot(slot_id)
+	switch(slot_id)
+		if(slot_l_hand)
+			return l_hand
+		if(slot_r_hand)
+			return r_hand
+	return null
+
+/mob/living/carbon/human/get_item_by_slot(slot_id)
+	switch(slot_id)
+		if(slot_back)
+			return back
+		if(slot_wear_mask)
+			return wear_mask
+		if(slot_handcuffed)
+			return handcuffed
+		if(slot_legcuffed)
+			return legcuffed
+		if(slot_l_hand)
+			return l_hand
+		if(slot_r_hand)
+			return r_hand
+	return null
+*/

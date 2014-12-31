@@ -1563,11 +1563,12 @@
 		if (istype(M, /mob/living/carbon/human))
 			//Do not try to understand.
 			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
-			var/mob/ook = monkey_type
-			surprise.icon = initial(ook.icon)
-			surprise.icon_state = initial(ook.icon_state)
-			surprise.name = "malformed [initial(ook.name)]"
-			surprise.desc = "Looks like \a very deformed [initial(ook.name)], a little small for its kind. It shows no signs of life."
+			var/mob/living/carbon/monkey/ook = new monkey_type(null) //no other way to get access to the vars, alas
+			surprise.icon = ook.icon
+			surprise.icon_state = ook.icon_state
+			surprise.name = "malformed [ook.name]"
+			surprise.desc = "Looks like \a very deformed [ook.name], a little small for its kind. It shows no signs of life."
+			del(ook)	//rip nullspace monkey
 			surprise.transform *= 0.6
 			surprise.add_blood(M)
 			var/mob/living/carbon/human/H = M
@@ -1628,7 +1629,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = /mob/living/carbon/monkey/skrell
+	monkey_type ="skrell"
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
 	monkey_type =/mob/living/carbon/monkey/skrell
@@ -2929,6 +2930,25 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 7)
+	attackby(obj/item/weapon/reagent_containers/food/snacks/grown/chili/W as obj, mob/user as mob)
+		if(istype(W))
+			new /obj/item/weapon/reagent_containers/food/snacks/flamintaco(src)
+			user << "You add chili to the Taco. It catches fire!"
+			del(W)
+			del(src)
+			return
+		else
+			..()
+
+/obj/item/weapon/reagent_containers/food/snacks/flamintaco
+	name = "Flamin' Taco"
+	desc = "Extra Spicy!"
+	icon_state = "flamintaco"
+	bitesize = 3
+	New()
+		..()
+		reagents.add_reagent("nutriment", 7)
+		reagents.add_reagent("condensedcapsaicin", 30)
 
 /obj/item/weapon/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"

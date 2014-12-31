@@ -8,6 +8,8 @@
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
+	var/log_devsay = 0
+	var/log_vsay = 0					// log Vsay
 	var/log_debug = 1					// log debug output
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
@@ -81,8 +83,6 @@
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 
-	var/debugparanoid = 0
-
 	var/server
 	var/banappeals
 	var/wikiurl
@@ -91,8 +91,8 @@
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 	var/alert_desc_blue_upto = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
-	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
-	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
+	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed. Security additional access has been revoked."
+	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised. Security has been awarded additional access at this time."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
 
@@ -130,6 +130,7 @@
 	var/animal_delay = 0
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
+	var/vip_legacy_system = 1	//Defines whether the server uses the legacy vip system with vip.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 
@@ -202,6 +203,9 @@
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
 
+				if ("vip_legacy_system")
+					config.vip_legacy_system = 1
+
 				if ("ban_legacy_system")
 					config.ban_legacy_system = 1
 
@@ -226,9 +230,6 @@
 				if ("log_say")
 					config.log_say = 1
 
-				if ("debug_paranoid")
-					config.debugparanoid = 1
-
 				if ("log_admin")
 					config.log_admin = 1
 
@@ -252,6 +253,12 @@
 
 				if ("log_adminchat")
 					config.log_adminchat = 1
+
+				if ("log_devsay")
+					config.log_devsay = 1
+
+				if ("log_vsay")
+					config.log_vsay = 1
 
 				if ("log_adminwarn")
 					config.log_adminwarn = 1

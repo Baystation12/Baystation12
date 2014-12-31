@@ -34,6 +34,12 @@
 		update_nearby_tiles()
 		..()
 
+	proc/update_nearby_tiles(need_rebuild) //Copypasta from airlock code
+		if(!air_master)
+			return 0
+		air_master.mark_for_update(get_turf(src))
+		return 1
+
 
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -287,6 +293,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	max_combined_w_class = 21
+	w_class = 3.0
 
 	New()
 		..()

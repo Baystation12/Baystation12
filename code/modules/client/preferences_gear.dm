@@ -16,6 +16,84 @@ var/global/list/gear_datums = list()
 
 // This is sorted both by slot and alphabetically! Don't fuck it up!
 // Headslot items
+/datum/gear/bluebandana
+	display_name = "Blue Bandana (Neck)"
+	path = /obj/item/clothing/neck/bluebandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/greenbandana
+	display_name = "Green Bandana (Neck)"
+	path = /obj/item/clothing/neck/greenbandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/redbandana
+	display_name = "Red Bandana (Neck)"
+	path = /obj/item/clothing/neck/redbandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/greybandana
+	display_name = "Grey Bandana (Neck)"
+	path = /obj/item/clothing/neck/greybandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/purplebandana
+	display_name = "Purple Bandana (Neck)"
+	path = /obj/item/clothing/neck/purplebandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/piratebandana
+	display_name = "Pirate Bandana (Neck)"
+	path = /obj/item/clothing/neck/piratebandana
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/neckerchief_blue
+	display_name = "Blue Neckerchief (Neck)"
+	path = /obj/item/clothing/neck/neckerchief_blue
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/rubyneck
+	display_name = "Ruby Neck (Neck)"
+	path = /obj/item/clothing/neck/rubyneck
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/emeraldneck
+	display_name = "Emerald Neck (Neck)"
+	path = /obj/item/clothing/neck/emeraldneck
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/dollarchain
+	display_name = "Dollar Chain (Neck)"
+	path = /obj/item/clothing/neck/emeraldneck
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/silverchain
+	display_name = "Silver Chain (Neck)"
+	path = /obj/item/clothing/neck/silverchain
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/goldchain
+	display_name = "Gold Chain (Neck)"
+	path = /obj/item/clothing/neck/goldchain
+	cost = 1
+	slot = slot_neck
+
+/datum/gear/goldchain
+	display_name = "Silver Medallion (Aviskree)"
+	path = /obj/item/clothing/neck/Avischain
+	cost = 1
+	slot = slot_neck
+	whitelisted = "Aviskree"
 
 /datum/gear/gbandana
 	display_name = "bandana, green"
@@ -77,6 +155,12 @@ var/global/list/gear_datums = list()
 /datum/gear/flatcap
 	display_name = "cap, brown-flat"
 	path = /obj/item/clothing/head/flatcap
+	cost = 2
+	slot = slot_head
+
+/datum/gear/cargocap
+	display_name = "cap. cargo"
+	path = /obj/item/clothing/head/soft
 	cost = 2
 	slot = slot_head
 
@@ -314,7 +398,7 @@ var/global/list/gear_datums = list()
 
 // Attachments
 
-/datum/gear/armband_cargo
+/* /datum/gear/armband_cargo
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/tie/armband/cargo
 	cost = 1
@@ -348,6 +432,7 @@ var/global/list/gear_datums = list()
 	display_name = "armband, science"
 	path = /obj/item/clothing/tie/armband/science
 	cost = 1
+*/
 
 /datum/gear/armpit
 	display_name = "shoulder holster"
@@ -510,15 +595,27 @@ var/global/list/gear_datums = list()
 
 // Shoelocker
 
-/datum/gear/jackboots
+/*/datum/gear/jackboots
 	display_name = "jackboots"
 	path = /obj/item/clothing/shoes/jackboots
+	cost = 2
+	slot = slot_shoes
+*/
+/datum/gear/digiboots
+	display_name = "digitigrade jackboots"
+	path = /obj/item/clothing/shoes/jackboots/digitigrade
 	cost = 2
 	slot = slot_shoes
 
 /datum/gear/sandal
 	display_name = "sandals"
 	path = /obj/item/clothing/shoes/sandal
+	cost = 1
+	slot = slot_shoes
+
+/datum/gear/clothboots
+	display_name = "cloth footwraps"
+	path = /obj/item/clothing/shoes/clothboots
 	cost = 1
 	slot = slot_shoes
 

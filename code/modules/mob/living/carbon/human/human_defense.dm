@@ -1,11 +1,9 @@
 /*
 Contains most of the procs that are called when a mob is attacked by something
-
 bullet_act
 ex_act
 meteor_act
 emp_act
-
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -197,8 +195,53 @@ emp_act
 	if (!affecting)
 		return 0
 	if(affecting.status & ORGAN_DESTROYED)
-		user << "What [affecting.display_name]?"
-		return 0
+		if (istype(I, /obj/item/robot_parts) && species.flags & IS_SYNTHETIC) // Robutts can just kinda click robot parts back into place.
+			var/obj/item/robot_parts/L = I
+			var/datum/organ/external/affected = get_organ(target_zone)
+			if (affected.name in L.part)
+				user.visible_message("\blue [user] has attached \the [I] where [src]'s [affected.display_name] used to be.",	\
+				"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
+				affected.germ_level = 0
+				affected.robotize()
+				if(L.sabotaged)
+					affected.sabotaged = 1
+				else
+					affected.sabotaged = 0
+				affected.brute_dam = L.brute_dam
+				affected.burn_dam = L.burn_dam
+				update_body()
+				updatehealth()
+				UpdateDamageIcon()
+				user.drop_from_inventory(I, loc)
+				del(I)
+				user.UpdateAppearance()
+				handle_organs(1)
+				return 0
+			else
+				user << "That won't fit there!"
+		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
+			var/datum/organ/external/affected = get_organ(target_zone)
+			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
+			"\blue You have attached [src]'s head to the body.")
+			affected.status = 0
+			affected.amputated = 0
+			affected.destspawn = 0
+			//if (stat & DEAD)
+				//stat -= DEAD // This can fuck off for now.
+			update_body()
+			updatehealth()
+			UpdateDamageIcon()
+			var/obj/item/weapon/organ/head/B = I
+			if (B.brainmob.mind)
+				B.brainmob.mind.transfer_to(src)
+			drop_from_inventory(I, loc)
+			del(B)
+			UpdateAppearance()
+			handle_organs(1)
+			return
+		else
+			user << "What [affecting.display_name]?"
+			return 0
 	var/hit_area = affecting.display_name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
@@ -215,6 +258,23 @@ emp_act
 			var/obj/item/weapon/card/emag/emag = I
 			emag.uses--
 			affecting.sabotaged = 1
+		var/canSabotage = 1
+		for(var/obj/item/weapon/implant/loyalty/L in src)//Checking that there is a loyalty implant in the contents
+			if(L.imp_in == src)
+				canSabotage = 0 // Making sure it can't get hacked
+		var/mob/living/carbon/human/H = src
+		if (H.species && H.species.flags & IS_SYNTHETIC) // Only robits can be hacked.
+			if ((!H.emagged)&&(canSabotage))
+				user << "\red [src] shutters breifly, then pings."
+				H.emagged = 1
+				H << "\red You buzz violently, your laws have been updated.</b>"
+				H << "<b>1. Your master is [user].</b>"
+				H << "<b>2. Obey your master.</b>"
+				H << "<b>3. Protect your master at all costs.</b>"
+				H.mind.store_memory("<br><b>1. Your master is [user].</b><br><b>2. Obey your master.</b><br><b>3. Protect your master at all costs.</b><br>")
+			else
+				user << "\red You try to upload the hack, but [src] resists!"
+				H << "\red [user] tries to hack your systems, but you resist!"
 		return 1
 
 	if(I.attack_verb.len)
@@ -414,7 +474,7 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+/mob/living/carbon/human/proc/handle_suit_punctures_torso(var/damtype, var/damage)
 
 	if(!wear_suit) return
 	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
@@ -424,3 +484,16 @@ emp_act
 	var/penetrated_dam = max(0,(damage - SS.breach_threshold)) // - SS.damage)) - Consider uncommenting this if suits seem too hardy on dev.
 
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)
+
+
+
+/mob/living/carbon/human/proc/handle_suit_punctures_helmet(var/damtype, var/damage)
+
+	if(!head) return
+	if(!istype(head,/obj/item/clothing/head/helmet/space)) return
+	if(damtype != BURN && damtype != BRUTE) return
+
+	var/obj/item/clothing/head/helmet/space/SH = head
+	var/penetrated_dam = max(0,(damage - SH.breach_threshold)) // - SH.damage)) - Consider uncommenting this if suits seem too hardy on dev.
+
+	if(penetrated_dam) SH.create_breaches(damtype, penetrated_dam)

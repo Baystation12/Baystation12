@@ -11,7 +11,8 @@ var/const/ENGINEER			=(1<<6)
 var/const/ATMOSTECH			=(1<<7)
 var/const/AI				=(1<<8)
 var/const/CYBORG			=(1<<9)
-
+var/const/BLUESHIELD		=(1<<10)
+var/const/DEPTGUARD			=(1<<11)
 
 var/const/MEDSCI			=(1<<1)
 
@@ -96,7 +97,9 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
+	"Assistant",
+	"Clown",
+	"Mime"
 )
 
 
@@ -104,7 +107,9 @@ var/list/security_positions = list(
 	"Head of Security",
 	"Warden",
 	"Detective",
-	"Security Officer"
+	"Security Officer",
+	"Blueshield Guard",
+	"Department Guard"
 )
 
 

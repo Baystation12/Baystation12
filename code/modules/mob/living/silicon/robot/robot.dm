@@ -20,6 +20,7 @@ var/list/robot_verbs_default = list(
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 6
+	var/obj/item/borg/sight/hud = null
 
 //Hud stuff
 
@@ -38,6 +39,7 @@ var/list/robot_verbs_default = list(
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/weapon/cell/cell = null
+	var/old_cell = null //For Admin Rejuv ~yash
 	var/obj/machinery/camera/camera = null
 
 	// Components are basically robot organs.
@@ -191,6 +193,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "robot"
 			module_sprites["Drone"] = "drone-standard"
+			hud = null
+			sight_mode = 0
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
@@ -200,6 +204,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service" // How does this even work...? Oh well.
+			hud = null
+			sight_mode = 0
 
 		if("Clerical")
 			module = new /obj/item/weapon/robot_module/clerical(src)
@@ -209,6 +215,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 			module_sprites["Drone"] = "drone-service"
+			hud = null
+			sight_mode = 0
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
@@ -219,6 +227,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Advanced Droid"] = "droid-miner"
 			module_sprites["Treadhead"] = "Miner"
 			module_sprites["Drone"] = "drone-medical"
+			sight_mode = BORGMESON
+			hud = null
 
 		if("Crisis")
 			module = new /obj/item/weapon/robot_module/crisis(src)
@@ -229,6 +239,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Standard"] = "surgeon"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
+			hud = new /obj/item/borg/sight/hud/med(src)
+			sight_mode = 0
 
 		if("Surgeon")
 			module = new /obj/item/weapon/robot_module/surgeon(src)
@@ -241,6 +253,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
 			module_sprites["Drone"] = "drone-medical"
+			hud = new /obj/item/borg/sight/hud/med(src)
+			sight_mode = 0
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
@@ -251,6 +265,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Bloodhound"] = "bloodhound"
 			module_sprites["Bloodhound - Treaded"] = "secborg+tread"
 			module_sprites["Drone"] = "drone-sec"
+			hud = new /obj/item/borg/sight/hud/sec(src)
+			sight_mode = 0
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -262,6 +278,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Landmate"] = "landmate"
 			module_sprites["Landmate - Treaded"] = "engiborg+tread"
 			module_sprites["Drone"] = "drone-engineer"
+			sight_mode = BORGMESON
+			hud = null
 
 		if("Construction")
 			module = new /obj/item/weapon/robot_module/construction(src)
@@ -273,6 +291,8 @@ var/list/robot_verbs_default = list(
 			module_sprites["Landmate"] = "landmate"
 			module_sprites["Landmate - Treaded"] = "engiborg+tread"
 			module_sprites["Drone"] = "drone-engineer"
+			sight_mode = BORGMESON
+			hud = null
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
@@ -280,11 +300,15 @@ var/list/robot_verbs_default = list(
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"
 			module_sprites["Drone"] = "drone-janitor"
+			hud = null
+			sight_mode = 0
 
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Combat Android"] = "droid-combat"
 			module.channels = list("Security" = 1)
+			sight_mode = BORGTHERM
+			hud = new /obj/item/borg/sight/hud/sec(src)
 
 	//languages
 	module.add_languages(src)
@@ -455,6 +479,13 @@ var/list/robot_verbs_default = list(
 		C.toggled = 1
 		src << "\red You enable [C.name]."
 
+/mob/living/silicon/robot/blob_act()
+	if (stat != 2)
+		adjustBruteLoss(60)
+		updatehealth()
+		return 1
+	return 0
+
 // this function shows information about the malf_ai gameplay type in the status screen
 /mob/living/silicon/robot/show_malf_ai()
 	..()
@@ -508,6 +539,29 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/restrained()
 	return 0
 
+
+/mob/living/silicon/robot/ex_act(severity)
+	if(!blinded)
+		flick("flash", flash)
+
+	switch(severity)
+		if(1.0)
+			if (stat != 2)
+				adjustBruteLoss(100)
+				adjustFireLoss(100)
+				gib()
+				return
+		if(2.0)
+			if (stat != 2)
+				adjustBruteLoss(60)
+				adjustFireLoss(60)
+		if(3.0)
+			if (stat != 2)
+				adjustBruteLoss(30)
+
+	updatehealth()
+
+
 /mob/living/silicon/robot/meteorhit(obj/O as obj)
 	for(var/mob/M in viewers(src, null))
 		M.show_message(text("\red [src] has been hit by [O]"), 1)
@@ -519,10 +573,13 @@ var/list/robot_verbs_default = list(
 		updatehealth()
 	return
 
+
 /mob/living/silicon/robot/bullet_act(var/obj/item/projectile/Proj)
 	..(Proj)
+	updatehealth()
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
+
 
 /mob/living/silicon/robot/Bump(atom/movable/AM as mob|obj, yes)
 	spawn( 0 )
@@ -955,7 +1012,7 @@ var/list/robot_verbs_default = list(
 			return 1
 	return 0
 
-/mob/living/silicon/robot/updateicon()
+/mob/living/silicon/robot/proc/updateicon()
 
 	overlays.Cut()
 	if(stat == 0)
@@ -1145,6 +1202,8 @@ var/list/robot_verbs_default = list(
 					S.dirt = 0
 				for(var/A in tile)
 					if(istype(A, /obj/effect))
+						if(istype(A,/obj/effect/overlay/adminoverlay))
+							return
 						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))
 							del(A)
 					else if(istype(A, /obj/item))

@@ -110,6 +110,7 @@
 	apply_danger_level = 0
 	breach_detection = 0
 	post_alert = 0
+	frequency = 1441
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -150,7 +151,7 @@
 	if (alarm_area.master)
 		alarm_area = alarm_area.master
 	area_uid = alarm_area.uid
-	if (name == "alarm")
+	if (name in list("alarm NORTH", "alarm EAST", "alarm SOUTH", "alarm WEST"))
 		name = "[alarm_area.name] Air Alarm"
 
 	// breathable air according to human/Life()
@@ -693,14 +694,18 @@
 	current_settings = TLV["oxygen"]
 	var/oxygen_dangerlevel = get_danger_level(environment.gas["oxygen"]*partial_pressure, current_settings)
 	var/oxygen_percent = round(environment.gas["oxygen"] / total * 100, 2)
+	var/oxygen_moles = round(environment.gas["oxygen"], 2)
 
 	current_settings = TLV["carbon dioxide"]
 	var/co2_dangerlevel = get_danger_level(environment.gas["carbon_dioxide"]*partial_pressure, current_settings)
 	var/co2_percent = round(environment.gas["carbon_dioxide"] / total * 100, 2)
+	var/co2_moles = round(environment.gas["carbon_dioxide"], 2)
 
 	current_settings = TLV["phoron"]
 	var/phoron_dangerlevel = get_danger_level(environment.gas["phoron"]*partial_pressure, current_settings)
 	var/phoron_percent = round(environment.gas["phoron"] / total * 100, 2)
+	var/phoron_moles = round(environment.gas["phoron"], 2)
+
 
 	//current_settings = TLV["other"]
 	//var/other_moles = 0.0
@@ -713,9 +718,9 @@
 
 	output += {"
 Pressure: <span class='dl[pressure_dangerlevel]'>[environment_pressure]</span>kPa<br>
-Oxygen: <span class='dl[oxygen_dangerlevel]'>[oxygen_percent]</span>%<br>
-Carbon dioxide: <span class='dl[co2_dangerlevel]'>[co2_percent]</span>%<br>
-Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]</span>%<br>
+Oxygen: <span class='dl[oxygen_dangerlevel]'>[oxygen_percent]% ([oxygen_moles] moles)</span><br>
+Carbon dioxide: <span class='dl[co2_dangerlevel]'>[co2_percent]% ([co2_moles] moles)</span><br>
+Toxins: <span class='dl[phoron_dangerlevel]'>[phoron_percent]% ([phoron_moles] moles)</span>%<br>
 "}
 	//if (other_dangerlevel==2)
 	//	output += "Notice: <span class='dl2'>High Concentration of Unknown Particles Detected</span><br>"

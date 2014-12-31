@@ -1,5 +1,5 @@
 
-var/global/normal_ooc_colour = "#002eb8"
+var/global/normal_ooc_colour = "#505050"
 
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
@@ -42,17 +42,23 @@ var/global/normal_ooc_colour = "#002eb8"
 	log_ooc("[mob.name]/[key] : [msg]")
 
 	var/display_colour = normal_ooc_colour
+	if(vipholder)
+		if(vipholder.rights & V_EVENT)
+			display_colour = "#006e97"	//dark green
+		if(vipholder.rights & V_DONATE)
+			display_colour = "#005a31"	//dark green
+
 	if(holder && !holder.fakekey)
-		display_colour = "#2e78d9"	//light blue
+		display_colour = "#505050"	//light blue
 		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
 			display_colour = "#184880"	//dark blue
-		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
-			display_colour = "#1b521f"	//dark green
+		//if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
+		//	display_colour = "#184880"	//dark green
 		else if(holder.rights & R_ADMIN)
 			if(config.allow_admin_ooccolor)
 				display_colour = src.prefs.ooccolor
 			else
-				display_colour = "#b82e00"	//orange
+				display_colour = "#184880"	//orange
 
 	for(var/client/C in clients)
 		if(C.prefs.toggles & CHAT_OOC)
@@ -110,16 +116,16 @@ var/global/normal_ooc_colour = "#002eb8"
 		return
 
 	if(!holder)
-		if(!ooc_allowed)
-			src << "\red OOC is globally muted"
+		if(!looc_allowed)
+			src << "\red LOOC is globally muted"
 			return
 		if(!dooc_allowed && (mob.stat == DEAD))
 			usr << "\red OOC for dead mobs has been turned off."
 			return
-		if(prefs.muted & MUTE_OOC)
+		if(prefs.muted & MUTE_LOOC)
 			src << "\red You cannot use OOC (muted)."
 			return
-		if(handle_spam_prevention(msg,MUTE_OOC))
+		if(handle_spam_prevention(msg,MUTE_LOOC))
 			return
 		if(findtext(msg, "byond://"))
 			src << "<B>Advertising other servers is not allowed.</B>"
@@ -131,11 +137,11 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/list/heard = get_mobs_in_view(7, src.mob)
 	var/mob/S = src.mob
-	
+
 	var/display_name = S.key
 	if(S.stat != DEAD)
 		display_name = S.name
-	
+
 	// Handle non-admins
 	for(var/mob/M in heard)
 		if(!M.client)
@@ -152,15 +158,16 @@ var/global/normal_ooc_colour = "#002eb8"
 					else
 						display_name = holder.fakekey
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-	
+
 	// Now handle admins
 	display_name = S.key
 	if(S.stat != DEAD)
 		display_name = "[S.name]/([S.key])"
-	
+
 	for(var/client/C in admins)
-		if(C.prefs.toggles & CHAT_LOOC)
-			var/prefix = "(R)LOOC"
-			if (C.mob in heard)
-				prefix = "LOOC"
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+		if((R_ADMIN|R_MOD|R_MENTOR|R_DEV) & C.holder.rights)
+			if(C.prefs.toggles & CHAT_LOOC)
+				var/prefix = "(R)LOOC"
+				if (C.mob in heard)
+					prefix = "LOOC"
+				C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"

@@ -64,6 +64,11 @@
 	icon_state = "stamp-cent"
 	item_color = "centcomm"
 
+/obj/item/weapon/stamp/approved
+	name = "\improper APPROVED rubber stamp"
+	icon_state = "stamp-app"
+	item_color = "green"
+	desc = "A stamp for approving documents."
 
 /obj/item/weapon/stamp/attack_paw(mob/user as mob)
 	return attack_hand(user)

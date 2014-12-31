@@ -253,3 +253,55 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/corgi
+	name = "corgi suit head"
+	desc = "Woof!"
+	icon_state = "corgihead"
+	item_state = "chickensuit"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	siemens_coefficient = 2.0
+	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/flighthelmet
+	name = "flight helmet"
+	desc = "Airmen helmet. For the high altitudes."
+	icon_state = "flighthelmet"
+	item_state = "flighthelmet"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/flighthelmetb
+	name = "flight helmet"
+	desc = "Airmen helmet. For the high altitudes."
+	icon_state = "flighthelmetb"
+	item_state = "flighthelmetb"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/redbandana
+	name = "bandana"
+	desc = "Bandana for them OG homies."
+	icon_state = "redbandana"
+	item_state = "redbandana"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	body_parts_covered = HEAD
+
+/obj/item/clothing/head/bluebandana
+	name = "bandana"
+	desc = "Bandana for them OG homies."
+	icon_state = "bluebandana"
+	item_state = "bluebandana"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	body_parts_covered = HEAD
+
+/obj/item/clothing/head/greenbandana
+	name = "bandana"
+	desc = "Bandana for them OG homies."
+	icon_state = "greenbandana"
+	item_state = "greenbandana"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	body_parts_covered = HEAD

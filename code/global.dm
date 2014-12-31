@@ -1,5 +1,6 @@
 //#define TESTING
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31 Github Crap
+//Testing Staging Branch.
 
 var/global/obj/effect/datacore/data_core = null
 
@@ -17,6 +18,9 @@ var/global/list/sec_hud_users = list() //list of all entities using a security H
 var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
 
 var/global/list/global_map = null
+
+var/global/ERT_TYPE = 0 // 1 = Security, 2 = Medical, 3 = Engineering, 4 = Custom
+
 	//list/global_map = list(list(1,5),list(4,3))//an array of map Z levels.
 	//Resulting sector map looks like
 	//|_1_|_4_|
@@ -76,9 +80,10 @@ var/blobevent = 0
 	///////////////
 
 var/diary = null
+var/admindiary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-var/station_name = "NSS Exodus"
+var/station_name = "NSS Phoenix"
 var/game_version = "Baystation12"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)
@@ -93,7 +98,10 @@ var/host = null
 var/aliens_allowed = 0
 var/ooc_allowed = 1
 var/dsay_allowed = 1
+var/vsay_allowed = 1
 var/dooc_allowed = 1
+var/looc_allowed = 1
+var/devsay_allowed = 1
 var/traitor_scaling = 1
 //var/goonsay_allowed = 0
 var/dna_ident = 1
@@ -174,6 +182,7 @@ var/gravity_is_on = 1
 var/shuttlecoming = 0
 
 var/join_motd = null
+var/announcement_msg
 var/forceblob = 0
 
 // nanomanager, the manager for Nano UIs

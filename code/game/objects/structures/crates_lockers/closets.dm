@@ -21,7 +21,7 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
-	var/const/mob_size = 15
+	var/const/mob_size = 3
 
 /obj/structure/closet/New()
 	..()
@@ -268,6 +268,13 @@
 
 /obj/structure/closet/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
+
+/obj/structure/closet/attack_robot(mob/user as mob)
+	if(Adjacent(user))
+		return src.attack_hand(user)
+	else
+		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	return
 
 /obj/structure/closet/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)

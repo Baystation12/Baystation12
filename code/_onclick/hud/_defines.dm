@@ -38,6 +38,7 @@
 
 #define ui_alien_head "4:12,1:5"	//aliens
 #define ui_alien_oclothing "5:14,1:5"	//aliens
+#define ui_pda "11:22,1:5" //PDA slot
 
 #define ui_inv1 "6:16,1:5"			//borgs
 #define ui_inv2 "7:16,1:5"			//borgs
@@ -93,9 +94,10 @@
 #define ui_gloves "3:10,2:7"
 
 #define ui_glasses "1:6,3:9"
-#define ui_mask "2:8,3:9"
+#define ui_mask "1:6,4:11"
 #define ui_l_ear "3:10,3:9"
 #define ui_r_ear "3:10,4:11"
+#define ui_neck "2:8,3:9"
 
 #define ui_head "2:8,4:11"
 

@@ -81,6 +81,12 @@
 		if (HULK in M.mutations)
 			M << "\red Your meaty finger is much too large for the trigger guard!"
 			return
+
+		if (istype(src, /obj/item/weapon/gun/energy/staff))
+			if(M.iswizard == 0)
+				M << "\red Have have no idea how to use the.. [src]"
+				return
+
 	if(ishuman(user))
 		if(user.dna && user.dna.mutantrace == "adamantine")
 			user << "\red Your metal fingers don't fit in the trigger guard!"

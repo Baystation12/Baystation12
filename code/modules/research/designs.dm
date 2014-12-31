@@ -654,6 +654,7 @@ datum/design/gygax_main
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mecha/gygax/main"
+	locked = 1
 
 datum/design/gygax_peri
 	name = "Circuit Design (\"Gygax\" Peripherals Control module)"
@@ -681,6 +682,7 @@ datum/design/durand_main
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mecha/durand/main"
+	locked = 1
 
 datum/design/durand_peri
 	name = "Circuit Design (\"Durand\" Peripherals Control module)"
@@ -1421,7 +1423,7 @@ datum/design/implant_chem
 	req_tech = list("materials" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implantcase/chem"
+	build_path = "/obj/item/weapon/implant/chem"
 
 datum/design/implant_free
 	name = "freedom implant"
@@ -1430,7 +1432,7 @@ datum/design/implant_free
 	req_tech = list("syndicate" = 2, "biotech" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/implantcase/freedom"
+	build_path = "/obj/item/weapon/implant/freedom"
 
 datum/design/chameleon
 	name = "Chameleon Kit"
@@ -1637,6 +1639,7 @@ datum/design/phoronpistol
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$phoron" = 3000)
 	build_path = "/obj/item/weapon/gun/energy/toxgun"
+	locked = 1
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
@@ -1803,7 +1806,7 @@ datum/design/borg_syndicate_module
 /////////////PDA and Radio stuff/////////
 /////////////////////////////////////////
 datum/design/binaryencrypt
-	name = "binary encryption key"
+	name = "Binary Encrpytion Key"
 	desc = "An encyption key for a radio headset.  Contains cypherkeys."
 	id = "binaryencrypt"
 	req_tech = list("syndicate" = 2)

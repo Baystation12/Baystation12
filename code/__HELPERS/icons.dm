@@ -699,32 +699,34 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 		while(TRUE)
 			if(curIndex<=process.len)
 				current = process[curIndex]
-				if(current)
-					currentLayer = current:layer
-					if(currentLayer<0) // Special case for FLY_LAYER
-						if(currentLayer <= -1000) return flat
-						if(pSet == 0) // Underlay
-							currentLayer = A.layer+currentLayer/1000
-						else // Overlay
-							currentLayer = A.layer+(1000+currentLayer)/1000
+				if(!current)	continue
+				currentLayer = current:layer
+				if(currentLayer<0) // Special case for FLY_LAYER
+					if(currentLayer <= -1000) return flat
+					if(pSet == 0) // Underlay
+						currentLayer = A.layer+currentLayer/1000
+					else // Overlay
+						currentLayer = A.layer+(1000+currentLayer)/1000
 
-					// Sort add into layers list
-					for(cmpIndex=1,cmpIndex<=layers.len,cmpIndex++)
-						compare = layers[cmpIndex]
-						if(currentLayer < layers[compare]) // Associated value is the calculated layer
-							layers.Insert(cmpIndex,current)
-							layers[current] = currentLayer
-							break
-					if(cmpIndex>layers.len) // Reached end of list without inserting
-						layers[current]=currentLayer // Place at end
+				// Sort add into layers list
+				for(cmpIndex=1,cmpIndex<=layers.len,cmpIndex++)
+					compare = layers[cmpIndex]
+					if(currentLayer < layers[compare]) // Associated value is the calculated layer
+						layers.Insert(cmpIndex,current)
+						layers[current] = currentLayer
+						break
+				if(cmpIndex>layers.len) // Reached end of list without inserting
+					layers[current]=currentLayer // Place at end
 
 				curIndex++
-			else if(pSet == 0) // Switch to overlays
-				curIndex = 1
-				pSet = 1
-				process = A.overlays
-			else // All done
-				break
+
+			if(curIndex>process.len)
+				if(pSet == 0) // Switch to overlays
+					curIndex = 1
+					pSet = 1
+					process = A.overlays
+				else // All done
+					break
 
 		var/icon/add // Icon of overlay being added
 
@@ -853,3 +855,27 @@ proc/sort_atoms_by_layer(var/list/atoms)
 				result.Swap(i, gap + i)
 				swapped = 1
 	return result
+
+
+proc/text2icon(var/tn, var/px = 0, var/py = 0)
+	var/image/I = image('icons/mob/screen1_Midnight.dmi', "blank")
+
+
+	var/len = lentext(tn)
+
+	for(var/d = 1 to len)
+
+
+		var/char = capitalize(copytext(tn, len-d+1, len-d+2))
+
+		if(char == " ")
+			continue
+
+		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)
+
+		ID.pixel_x = -(d-1)*5 + px
+		ID.pixel_y = py
+
+		I.overlays += ID
+
+	return I

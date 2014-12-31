@@ -13,6 +13,9 @@
 /mob/proc/update_inv_handcuffed()
 	return
 
+mob/proc/update_inv_wear_pda()
+	return
+
 /mob/proc/update_inv_legcuffed()
 	return
 
@@ -26,6 +29,9 @@
 	return
 
 /mob/proc/update_inv_wear_mask()
+	return
+
+/mob/proc/update_inv_neck()
 	return
 
 /mob/proc/update_inv_wear_suit()

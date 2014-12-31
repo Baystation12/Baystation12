@@ -4,4 +4,12 @@
 *.rsc
 *.dmb
 *.lk
+*.bak
 data/
+baystation12.int
+maps/Phoenix.dmm.backup
+*.db
+*.int
+*.int
+*.int
+baystation12.int

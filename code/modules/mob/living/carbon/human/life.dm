@@ -36,7 +36,6 @@
 
 /mob/living/carbon/human/Life()
 
-
 	set invisibility = 0
 	set background = 1
 
@@ -95,15 +94,16 @@
 		//Disabilities
 		handle_disabilities()
 
-		//Organs and blood
+		//Organ failure.
 		handle_organs()
-		handle_blood()
-		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
 		handle_random_events()
 
 		handle_virus_updates()
+
+		//Check if we're on fire
+		handle_fire()
 
 		//stuff in the stomach
 		handle_stomach()
@@ -132,6 +132,9 @@
 	handle_regular_hud_updates()
 
 	pulse = handle_pulse()
+
+	if(mind && mind.vampire)
+		handle_vampire()
 
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
@@ -759,6 +762,16 @@
 
 		return
 
+	///FIRE CODE
+	handle_fire()
+		if(..())
+			return
+		var/thermal_protection = get_heat_protection(5000) //If you don't have spacesuit suit level protection, you get a temperature increase
+		if((1 - thermal_protection) > 0.0001)
+			bodytemperature += 90
+		return
+
+	//END FIRE CODE
 	/*
 	proc/adjust_body_temperature(current, loc_temp, boost)
 		var/temperature = current
@@ -779,7 +792,7 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC)
+		if (species.flags & IS_SYNTHETIC && !istype(wear_suit, /obj/item/clothing/suit/space/rig/machine)) // Assuming they're not wearing my new sexy hardsuit.
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
 			return
 
@@ -1067,6 +1080,22 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
+		if (drowsyness)
+			drowsyness--
+			eye_blurry = max(2, eye_blurry)
+			if (prob(5))
+				sleeping += 1
+				Paralyse(5)
+
+		confused = max(0, confused - 1)
+		// decrement dizziness counter, clamped to 0
+		if(resting)
+			dizziness = max(0, dizziness - 15)
+			jitteriness = max(0, jitteriness - 15)
+		else
+			dizziness = max(0, dizziness - 3)
+			jitteriness = max(0, jitteriness - 3)
+
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		updatehealth()
@@ -1082,6 +1111,10 @@
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
+			if(!in_stasis)
+				stabilize_body_temperature()	//Body temperature adjusts itself
+				handle_organs()	//Optimized.
+				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
 				death()
@@ -1095,6 +1128,31 @@
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if( (getOxyLoss() > 50) || (config.health_threshold_crit > health) )
 				Paralyse(3)
+
+				/* Done by handle_breath()
+				if( health <= 20 && prob(1) )
+					spawn(0)
+						emote("gasp")
+				if(!reagents.has_reagent("inaprovaline"))
+					adjustOxyLoss(1)*/
+
+			if (species && species.flags & IS_SYNTHETIC) // IPCs NEED power to not die. Atleast, Not Crit.
+				if (nutrition <= 150)
+					if (powerloss<160)
+						powerloss = min(powerloss+((150-nutrition)/(150/2)), 160)
+						updatehealth()
+						if (prob(0.5)) // Fairly low chance
+							Paralyse(1)
+							for(var/mob/V in hearers(src, null))
+								if (V!=src)
+									show_message("\red [src] shudders violently!", 2)
+							src << "\red You lock up breifly to conserve power."
+					if (prob(1)) // Yell at the IPC. Help them know WHY they're dying.
+						src << "\red [pick(list("WARNING","ERROR","PRIORITY"))]: [pick(list("POWER LEVELS", "CELL INTEGRITY"))] LOW. PLEASE [pick(list("FIND", "SEEK"))] [pick(list("POWER", "POWER SOURCE", "A CHARGER"))]!"
+				else if (powerloss>0)
+					powerloss = max(powerloss-10, 0)
+					updatehealth()
+
 
 			if(hallucination)
 				if(hallucination >= 20)
@@ -1138,16 +1196,27 @@
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
+				if(mind)
+					if(mind.vampire)
+						if(istype(loc, /obj/structure/closet/coffin))
+							adjustBruteLoss(-1)
+							adjustFireLoss(-1)
+							adjustToxLoss(-1)
+			else if(resting)
+				if(halloss > 0)
+					adjustHalLoss(-3)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
+				if(halloss > 0)
+					adjustHalLoss(-1)
 
-			//Periodically double-check embedded_flag
 			if(embedded_flag && !(life_tick % 10))
 				var/list/E
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
+
 
 			//Eyes
 			if(!species.has_organ["eyes"]) // Presumably if a species has no eyes, they see via something else.
@@ -1180,27 +1249,8 @@
 			else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
 				ear_damage = max(ear_damage-0.05, 0)
 
-			//Resting
-			if(resting)
-				dizziness = max(0, dizziness - 15)
-				jitteriness = max(0, jitteriness - 15)
-				adjustHalLoss(-3)
-			else
-				dizziness = max(0, dizziness - 3)
-				jitteriness = max(0, jitteriness - 3)
-				adjustHalLoss(-1)
-
 			//Other
 			handle_statuses()
-
-			if (drowsyness)
-				drowsyness--
-				eye_blurry = max(2, eye_blurry)
-				if (prob(5))
-					sleeping += 1
-					Paralyse(5)
-
-			confused = max(0, confused - 1)
 
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
@@ -1330,6 +1380,14 @@
 					if("shadow")
 						see_in_dark = 8
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
+
+			if(mind && mind.vampire)
+				if((VAMP_VISION in mind.vampire.powers) && !(VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_MOBS
+				if((VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+					see_in_dark = 8
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 			if(XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
@@ -1579,6 +1637,20 @@
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
 
+		/*if(hud_used)
+			if(!hud_used.changeling_chem_display)
+				hud_used.changeling_hud()
+				//hud_used.human_hud(hud_used.ui_style)
+			if(hud_used.ninja_cell_display && !hud_used.vampire_blood_display)
+				hud_used.changeling_chem_display.screen_loc = "13:28,9:15"
+			if(hud_used.ninja_cell_display && hud_used.vampire_blood_display)
+				hud_used.changeling_chem_display.screen_loc = "13:28,10:15"
+			hud_used.changeling_chem_display.overlays.Cut()
+			var/image/A = text2icon("CS:[num2text(round(mind.changeling.chem_charges))]",23,-9)
+			var/image/B = text2icon("GDT:[num2text(mind.changeling.geneticdamage)]",23,-17)
+			hud_used.changeling_chem_display.overlays += A
+			hud_used.changeling_chem_display.overlays += B
+		*/
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode

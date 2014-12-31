@@ -11,7 +11,7 @@
 		health = 100
 		stat = CONSCIOUS
 	else
-		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
+		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss - powerloss
 
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
@@ -242,8 +242,6 @@
 /mob/living/proc/restore_all_organs()
 	return
 
-
-
 /mob/living/proc/revive()
 	rejuvenate()
 	buckled = initial(src.buckled)
@@ -259,6 +257,8 @@
 		C.legcuffed = initial(C.legcuffed)
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
+	for(var/datum/disease/D in viruses)
+		D.cure(0)
 
 /mob/living/proc/rejuvenate()
 
@@ -270,6 +270,9 @@
 	SetParalysis(0)
 	SetStunned(0)
 	SetWeakened(0)
+	fire_stacks = 0
+	on_fire = 0
+
 
 	// shut down ongoing problems
 	radiation = 0
@@ -277,6 +280,8 @@
 	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
+	halloss = 0
+	hallucination = 0
 
 	// fix blindness and deafness
 	blinded = 0
@@ -286,13 +291,51 @@
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())
 
-	// restore all of a human's blood
 	if(ishuman(src))
 		var/mob/living/carbon/human/human_mob = src
 		human_mob.restore_blood()
+		human_mob.reagents.clear_reagents()
+		human_mob.species.create_organs(human_mob)
+		if(HUSK in human_mob.mutations)
+			human_mob.mutations.Remove(HUSK)
+			human_mob.status_flags |= DISFIGURED
+			human_mob.mutations.Remove(NOCLONE)
+			human_mob.update_mutantrace()
+			human_mob.UpdateAppearance()
+			human_mob.update_body(0)
+			human_mob.dna.ready_dna(human_mob)
+
 
 	// fix all of our organs
 	restore_all_organs()
+
+	if(isrobot(src))
+		var/mob/living/silicon/robot/R = src
+		for(var/V in R.components)
+			var/datum/robot_component/C = R.components[V]
+			C.installed = 1
+			C.brute_damage = 0
+			C.electronics_damage = 0
+			if(R.cell == null)
+				if(R.old_cell == null)
+					R.cell = new /obj/item/weapon/cell(R)
+				else
+					R.cell = R.old_cell
+					R.old_cell = null
+			R.cell.charge = R.cell.maxcharge
+			R.health = 200
+	if(isAI(src))
+		var/mob/living/silicon/ai/A = src
+		A.icon_state = A.rejuv_i_state
+		A.rejuv_i_state = null
+
+	if(isanimal(src))
+		var/mob/living/simple_animal/S = src
+		S.health = S.maxHealth
+		S.icon_state = S.icon_living
+		S.stat = CONSCIOUS
+		S.density = 1
+		S.Life()
 
 	// remove the character from the list of the dead
 	if(stat == 2)
@@ -608,6 +651,16 @@
 	//breaking out of handcuffs
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
+		if(CM.on_fire && CM.canmove)
+			CM.fire_stacks -= 5
+			CM.weakened = 5
+			CM.visible_message("<span class='danger'>[CM] rolls on the floor, trying to put themselves out!</span>", \
+				"<span class='notice'>You stop, drop, and roll!</span>")
+			if(fire_stacks <= 0)
+				CM.visible_message("<span class='danger'>[CM] has successfully extinguished themselves!</span>", \
+				"<span class='notice'>You extinguish yourself.</span>")
+				ExtinguishMob()
+			return
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
@@ -619,7 +672,8 @@
 				var/mob/living/carbon/human/H = CM
 				if(H.species.can_shred(H))
 					can_break_cuffs = 1
-
+				if(H.species.dhts == 1)
+					can_break_cuffs = 1
 			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
@@ -631,7 +685,11 @@
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the handcuffs!</B>", CM), 1)
 						CM << "\red You successfully break your handcuffs."
-						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
+						var/mob/living/carbon/human/J = CM
+						if(J.species.dhts == 1)
+							CM.say(pick("RAAAAAAAARGH!", "HNNNNNNNNNGGGGGGH!", "GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", "AAAAAAARRRGH!" ))
+						else
+							CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.handcuffed)
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()

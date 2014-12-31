@@ -25,6 +25,7 @@ var/global/datum/global_init/init = new ()
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
+	admindiary = file("data/logs/[date_string]_admin_only.log")
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
 	diary << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	diaryofmeanpeople << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
@@ -126,6 +127,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["players"] = n
 
 		s["admins"] = admins
+
+		s["vips"] = vips
 
 		return list2params(s)
 

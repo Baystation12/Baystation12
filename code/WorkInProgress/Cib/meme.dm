@@ -350,7 +350,7 @@ mob/living/parasite/meme/verb/Hallucinate()
 	set name	 = "Hallucinate(300)"
 	set desc     = "Makes your host hallucinate, has a short delay."
 
-	var/mob/target = select_indoctrinated("Hallucination", "Who should hallucinate?")
+	var/mob/living/carbon/target = select_indoctrinated("Hallucination", "Who should hallucinate?")
 
 	if(!target) return
 	if(!use_points(300)) return
@@ -531,7 +531,6 @@ mob/living/parasite/meme/verb/Possession()
 		host_mind.transfer_to(dummy)
 		meme_mind.transfer_to(host)
 		host_mind.current.clearHUD()
-		host.update_clothing()
 
 		dummy << "\blue You feel very drowsy.. Your eyelids become heavy..."
 
@@ -546,13 +545,12 @@ mob/living/parasite/meme/verb/Possession()
 		meme_mind.transfer_to(src)
 		host_mind.transfer_to(host)
 		meme_mind.current.clearHUD()
-		host.update_clothing()
 		src << "\red You lose control.."
 
 		del dummy
 
 // Enter dormant mode, increases meme point gain
-mob/living/parasite/meme/verb/Dormant()
+/mob/living/parasite/meme/verb/Dormant()
 	set category = "Meme"
 	set name	 = "Dormant(100)"
 	set desc     = "Speed up point recharging, will force you to cease all actions until all points are recharged."
@@ -571,7 +569,7 @@ mob/living/parasite/meme/verb/Dormant()
 
 	usr << "\red You have regained all points and exited dormant mode!"
 
-mob/living/parasite/meme/verb/Show_Points()
+/mob/living/parasite/meme/verb/Show_Points()
 	set category = "Meme"
 
 	usr << "<b>Meme Points: [src.meme_points]/[MAXIMUM_MEME_POINTS]</b>"
@@ -589,12 +587,7 @@ mob/living/parasite/meme/verb/Show_Points()
 
 // Game mode helpers, used for theft objectives
 // --------------------------------------------
-mob/living/parasite/check_contents_for(t)
+mob/living/parasite/proc/check_contents_for_reagent(t)
 	if(!host) return 0
 
-	return host.check_contents_for(t)
-
-mob/living/parasite/check_contents_for_reagent(t)
-	if(!host) return 0
-
-	return host.check_contents_for_reagent(t)
+	return host.reagents.has_reagent(t)

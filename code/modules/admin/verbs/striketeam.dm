@@ -95,6 +95,7 @@ var/global/sent_strike_team = 0
 
 	message_admins("\blue [key_name_admin(usr)] has spawned a CentCom strike squad.", 1)
 	log_admin("[key_name(usr)] used Spawn Death Squad.")
+	log_admin_single("[key_name(usr)] used Spawn Death Squad.")
 	return 1
 
 /client/proc/create_death_commando(obj/spawn_location, leader_selected = 0)

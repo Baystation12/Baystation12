@@ -698,6 +698,12 @@
 		remove_language("Sinta'unathi")
 		remove_language("Siik'tajr")
 		remove_language("Skrellian")
+		remove_language("Aviachirp")
+		remove_language("Chittin")
+		remove_language("Vox-pidgin")
+		remove_language("Rootspeak")
+		remove_language("Encoded Audio Language")
+		remove_language("Xenomorph")
 
 		src << "\blue Translator Module toggled OFF."
 
@@ -707,5 +713,11 @@
 		add_language("Sinta'unathi")
 		add_language("Siik'tajr")
 		add_language("Skrellian")
+		add_language("Aviachirp")
+		add_language("Chittin")
+		add_language("Vox-pidgin")
+		add_language("Rootspeak")
+		add_language("Encoded Audio Language")
+		add_language("Xenomorph")
 
 		src << "\blue Translator Module toggled ON."

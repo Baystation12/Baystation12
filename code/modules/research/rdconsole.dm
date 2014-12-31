@@ -378,10 +378,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								new_item.investigate_log("built by [key]","singulo")
 							new_item.reliability = being_built.reliability
 							if(linked_lathe.hacked) being_built.reliability = max((reliability / 2), 0)
-							/*if(being_built.locked)
+							if(being_built.locked)
 								var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_lathe.loc)
 								new_item.loc = L
-								L.name += " ([new_item.name])"*/
+								L.name += " ([new_item.name])"
+								if(istype(being_built, /datum/design/rapidsyringe))
+									L.req_access = list()
+									L.req_one_access = list(access_cmo,access_rd)
 							else
 								new_item.loc = linked_lathe.loc
 							linked_lathe.busy = 0
@@ -422,7 +425,18 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					var/obj/new_item = new being_built.build_path(src)
 					new_item.reliability = being_built.reliability
 					if(linked_imprinter.hacked) being_built.reliability = max((reliability / 2), 0)
-					new_item.loc = linked_imprinter.loc
+					if(being_built.locked)
+						var/obj/item/weapon/storage/lockbox/L = new/obj/item/weapon/storage/lockbox(linked_imprinter.loc)
+						new_item.loc = L
+						L.name += " ([new_item.name])"
+						if(istype(being_built, /datum/design/gygax_main))
+							L.req_access = list()
+							L.req_one_access = list(access_hos,access_rd)
+						if(istype(being_built, /datum/design/durand_main))
+							L.req_access = list()
+							L.req_one_access = list(access_hos,access_rd)
+					else
+						new_item.loc = linked_imprinter.loc
 					linked_imprinter.busy = 0
 					screen = 4.1
 					errored = 0

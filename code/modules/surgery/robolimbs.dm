@@ -161,6 +161,8 @@
 			affected.sabotaged = 1
 		else
 			affected.sabotaged = 0
+		affected.brute_dam = L.brute_dam
+		affected.burn_dam = L.burn_dam
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()

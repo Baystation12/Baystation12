@@ -184,8 +184,11 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_BACK 1024
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
-#define SLOT_TWOEARS 8192
-#define SLOT_LEGS = 16384
+#define SLOT_NECK 8192
+#define SLOT_TWOEARS 16384
+#define SLOT_PDA 32768
+#define SLOT_LEGS 65536
+
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -265,8 +268,10 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_s_store 17
 #define slot_in_backpack 18
 #define slot_legcuffed 19
-#define slot_r_ear 20
+#define slot_neck 20
 #define slot_legs 21
+#define slot_wear_pda 22
+#define slot_r_ear 23
 
 //Cant seem to find a mob bitflags area other than the powers one
 
@@ -289,6 +294,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HAND_RIGHT		4096
 #define HANDS			6144
 #define FULL_BODY		8191
+#define NECK			40
 
 // bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection()
@@ -486,6 +492,7 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_BLUE	1
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
+#define SEC_LEVEL_BLACK 4
 
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
@@ -516,10 +523,11 @@ var/list/liftable_structures = list(\
 //Therefore there needs to be a gap between the flags for the automute flags
 #define MUTE_IC			1
 #define MUTE_OOC		2
-#define MUTE_PRAY		4
-#define MUTE_ADMINHELP	8
-#define MUTE_DEADCHAT	16
-#define MUTE_ALL		31
+#define MUTE_LOOC		4
+#define MUTE_PRAY		8
+#define MUTE_ADMINHELP	16
+#define MUTE_DEADCHAT	31
+#define MUTE_ALL		62
 
 //Number of identical messages required to get the spam-prevention automute thing to trigger warnings and automutes
 #define SPAM_TRIGGER_WARNING 5
@@ -610,7 +618,12 @@ var/list/liftable_structures = list(\
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 
-
+//VIP Permissions
+//Please don't edit these values without speaking to Yashaldie first
+//VIP Permissions
+#define V_EVENT				1
+#define V_DONATE		2
+#define V_VIPMAXPERMISSION 	65534
 
 //Please don't edit these values without speaking to Errorage first	~Carn
 //Admin Permissions
@@ -629,9 +642,11 @@ var/list/liftable_structures = list(\
 #define R_SPAWN			4096
 #define R_MOD			8192
 #define R_MENTOR		16384
-#define R_HOST			32768
+#define R_DEV			32768
+#define R_HOST			65536
+#define R_MAXPERMISSION 65536 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
-#define R_MAXPERMISSION 32768 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+
 
 //Preference toggles
 #define SOUND_ADMINHELP	1
@@ -648,10 +663,11 @@ var/list/liftable_structures = list(\
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
 #define CHAT_GHOSTRADIO 8192
-#define SHOW_TYPING 	16384
+#define SHOW_TYPING		16384
+#define CHAT_DEVSAY		32768
+#define SHOW_SHUTTERLOGS 65536
 
-
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
+#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC|CHAT_DEVSAY)
 
 #define BE_TRAITOR    1
 #define BE_OPERATIVE  2
@@ -667,6 +683,8 @@ var/list/liftable_structures = list(\
 #define BE_RAIDER     2048
 #define BE_PLANT      4096
 #define BE_MUTINEER   8192
+#define BE_MEME		  16384
+#define BE_VAMPIRE	32768
 
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
@@ -682,7 +700,9 @@ var/list/be_special_flags = list(
 	"Ninja" = BE_NINJA,
 	"Raider" = BE_RAIDER,
 	"Diona" = BE_PLANT,
-	"Mutineer" = BE_MUTINEER
+	"Mutineer" = BE_MUTINEER,
+	"Meme" = BE_MEME,
+	"Vampire" = BE_VAMPIRE
 	)
 
 #define AGE_MIN 17			//youngest a character can be
@@ -747,9 +767,11 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_SKIN_COLOR 128
 #define HAS_LIPS 256
 #define HAS_UNDERWEAR 512
-#define IS_PLANT 1024
-#define IS_WHITELISTED 2048
-#define IS_SYNTHETIC 4096
+#define HAS_TAIL 1024
+#define IS_PLANT 2048
+#define IS_WHITELISTED 4096
+#define IS_SYNTHETIC 8192
+#define IS_STRONG 16384
 
 //Language flags.
 #define WHITELISTED 1  		// Language is available if the speaker is whitelisted.
@@ -762,6 +784,21 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define ZONE_ACTIVE 1
 #define ZONE_SLEEPING 0
 
+// Vampire power defines
+#define VAMP_REJUV 1
+#define VAMP_GLARE 2
+#define VAMP_HYPNO 3
+#define VAMP_SHAPE 4
+#define VAMP_VISION 5
+#define VAMP_DISEASE 6
+#define VAMP_CLOAK 7
+#define VAMP_BATS 8
+#define VAMP_SCREAM 9
+#define VAMP_JAUNT 10
+#define VAMP_SLAVE 11
+#define VAMP_BLINK 12
+#define VAMP_FULL 13
+
 //some colors
 #define COLOR_RED 		"#FF0000"
 #define COLOR_GREEN 	"#00FF00"
@@ -771,7 +808,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
-
 
 
 /*
@@ -805,9 +841,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Ferry shuttle processing status
 #define IDLE_STATE		0
 #define WAIT_LAUNCH		1
-#define FORCE_LAUNCH	2
-#define WAIT_ARRIVE		3
-#define WAIT_FINISH		4
+#define WAIT_ARRIVE		2
+#define WAIT_FINISH		3
 
 //computer3 error codes, move lower in the file when it passes dev -Sayu
  #define PROG_CRASH      1  // Generic crash
