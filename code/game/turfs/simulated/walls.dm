@@ -35,12 +35,12 @@
 	take_damage(damage)
 	return
 
-/turf/simulated/wall/hitby(AM as mob|obj, var/speed=5)
+/turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
 	..()
 	if(ismob(AM))
 		return
 	
-	var/tforce = AM:throwforce * (speed/5)
+	var/tforce = AM:throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
 	

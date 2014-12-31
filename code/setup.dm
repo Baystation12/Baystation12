@@ -68,6 +68,9 @@
 #define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
 #define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
+#define THROWFORCE_SPEED_DIVISOR 5		//The throwing speed value at which the throwforce multiplier is exactly 1.
+#define THROWNOBJ_KNOCKBACK_SPEED 15	//The minumum speed of a thrown object that will cause living mobs it hits to be knocked back.
+#define THROWNOBJ_KNOCKBACK_DIVISOR 2	//Affects how much speed the mob is knocked back with
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 //The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE
 #define MAX_HIGH_PRESSURE_DAMAGE 4	//This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
