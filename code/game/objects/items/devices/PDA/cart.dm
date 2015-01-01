@@ -272,7 +272,6 @@
 			if(S.name_tag == selected_sensor)
 				MS = S
 		values["power_sensors"] = sensors
-		world << "DEBUG: Sensors amount: [sensors.len]"
 		if(selected_sensor && MS)
 			values["sensor_reading"] = MS.return_reading_data()
 
