@@ -94,6 +94,7 @@
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
+	base_color = "#006666"
 
 	reagent_tag = IS_SKRELL
 
