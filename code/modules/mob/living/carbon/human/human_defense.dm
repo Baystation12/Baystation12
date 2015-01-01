@@ -288,11 +288,11 @@ emp_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = 5)
+/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 
-		if(in_throw_mode && !get_active_hand() && speed <= 5)	//empty active hand and we're in throw mode
+		if(in_throw_mode && !get_active_hand() && speed <= THROWFORCE_SPEED_DIVISOR)	//empty active hand and we're in throw mode
 			if(canmove && !restrained())
 				if(isturf(O.loc))
 					put_in_active_hand(O)
@@ -304,7 +304,7 @@ emp_act
 		if(istype(O,/obj/item/weapon))
 			var/obj/item/weapon/W = O
 			dtype = W.damtype
-		var/throw_damage = O.throwforce*(speed/5)
+		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone
 		if (istype(O.thrower, /mob/living))
@@ -349,10 +349,11 @@ emp_act
 
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= 15)
-			var/momentum = speed/2
+		if(O.throw_source && speed >= THROWNOBJ_KNOCKBACK_SPEED)
+			var/obj/item/weapon/W = O
+			var/momentum = speed/THROWNOBJ_KNOCKBACK_DIVISOR
 			var/dir = get_dir(O.throw_source, src)
-			visible_message("<span class='danger'>[src] staggers under the impact!</span>","<span class='danger'>You stagger under the impact!</span>")
+			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 		//thrown weapon embedded object code.
@@ -378,6 +379,7 @@ emp_act
 							visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 							src.anchored = 1
 							src.pinned += O
+
 
 
 

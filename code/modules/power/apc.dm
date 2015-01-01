@@ -77,6 +77,7 @@
 	var/lastused_light = 0
 	var/lastused_equip = 0
 	var/lastused_environ = 0
+	var/lastused_charging = 0
 	var/lastused_total = 0
 	var/main_status = 0
 	var/wiresexposed = 0
@@ -759,7 +760,8 @@
 		"powerCellStatus" = cell ? cell.percent() : null,
 		"chargeMode" = chargemode,
 		"chargingStatus" = charging,
-		"totalLoad" = round(lastused_equip + lastused_light + lastused_environ),
+		"totalLoad" = round(lastused_total),
+		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
 		"malfStatus" = get_malf_status(user),
@@ -1179,6 +1181,7 @@
 
 		// now trickle-charge the cell
 
+		lastused_charging = 0 // Clear the variable for new use.
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
@@ -1186,7 +1189,8 @@
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
-
+				lastused_charging = ch
+				lastused_total += ch // Sensors need this to stop reporting APC charging as "Other" load
 			else
 				charging = 0		// stop charging
 				chargecount = 0
