@@ -287,6 +287,15 @@
 
 /obj/item/weapon/rig/process()
 
+	// If we've lost any parts, grab them back.
+	var/mob/living/M
+	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
+		if(piece.loc != src && !(wearer && piece.loc == wearer))
+			if(istype(piece.loc, /mob/living))
+				M = piece.loc
+				M.drop_from_inventory(piece)
+			piece.loc = src
+
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)
 			if(electrified >0)
