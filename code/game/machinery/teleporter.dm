@@ -10,7 +10,7 @@
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
 
 /* Ghosts can't use this */
-/obj/machinery/computer/attack_ghost(user as mob)
+/obj/machinery/computer/teleporter/attack_ghost(user as mob)
 	return 1
 
 /obj/machinery/computer/teleporter/New()
