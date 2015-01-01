@@ -39,6 +39,7 @@
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
+		var/old_loc = get_turf(src)
 		if(on && powered && cell.charge < charge_use)
 			turn_off()
 
@@ -48,6 +49,7 @@
 			anchored = init_anc
 			return 0
 
+		set_dir(get_dir(old_loc, loc))
 		anchored = init_anc
 
 		if(on && powered)
@@ -152,6 +154,10 @@
 			turn_on()
 
 /obj/vehicle/attack_ai(mob/user as mob)
+	return
+
+// For downstream compatibility (in particular Paradise)
+/obj/vehicle/proc/handle_rotation()
 	return
 
 //-------------------------------------------

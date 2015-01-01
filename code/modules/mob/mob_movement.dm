@@ -262,12 +262,15 @@
 				move_delay += 7+config.walk_speed
 		move_delay += mob.movement_delay()
 
+		var/tickcomp = 0 //moved this out here so we can use it for vehicles
 		if(config.Tickcomp)
-			move_delay -= 1.3
-			var/tickcomp = ((1/(world.tick_lag))*1.3)
+			// move_delay -= 1.3 //~added to the tickcomp calculation below
+			tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
 			move_delay = move_delay + tickcomp
 
 		if(istype(mob.buckled, /obj/vehicle))
+			//manually set move_delay for vehicles so we dont inherit any mob movement penalties
+			move_delay = world.time + mob.movement_delay() + 1 + config.run_speed + tickcomp
 			return mob.buckled.relaymove(mob,direct)
 
 		if(istype(mob.machine, /obj/machinery))

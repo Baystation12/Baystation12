@@ -262,6 +262,25 @@
 
 	return ..()
 
+//-------------------------------------------
+// Latching/unlatching procs
+//-------------------------------------------
+
+/obj/vehicle/train/cargo/engine/latch(obj/vehicle/train/T, mob/user)
+	if(!istype(T) || !Adjacent(T))
+		return 0
+
+	//if we are attaching a trolley to an engine we don't care what direction
+	// it is in and it should probably be attached with the engine in the lead
+	if(istype(T, /obj/vehicle/train/cargo/trolley))
+		T.attach_to(src, user)
+	else
+		var/T_dir = get_dir(src, T)	//figure out where T is wrt src
+
+		if(dir == T_dir) 	//if car is ahead
+			src.attach_to(T, user)
+		else if(reverse_direction(dir) == T_dir)	//else if car is behind
+			T.attach_to(src, user)
 
 //-------------------------------------------------------
 // Stat update procs
