@@ -33,7 +33,7 @@
 	if (!iswall(W) || !isturf(user.loc))
 		user << "\red You can't place this here!"
 		return
-	
+
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in cardinal))
 		user << "<span class='warning'>You must stand directly in front of the wall you wish to place that on.</span>"
@@ -43,7 +43,7 @@
 	var/stuff_on_wall = 0
 	if (locate(/obj/structure/sign/poster) in W)
 		stuff_on_wall = 1
-	
+
 	//crude, but will cover most cases. We could do stuff like check pixel_x/y but it's not really worth it.
 	for (var/dir in cardinal)
 		var/turf/T = get_step(W, dir)
@@ -61,7 +61,7 @@
 
 	flick("poster_being_set", P)
 	//playsound(W, 'sound/items/poster_being_created.ogg', 100, 1) //why the hell does placing a poster make printer sounds?
-	
+
 	var/oldsrc = src //get a reference to src so we can delete it after detaching ourselves
 	src = null
 	spawn(17)
@@ -71,10 +71,10 @@
 			user << "<span class='notice'>You place the poster!</span>"
 		else
 			P.roll_and_drop(P.loc)
-	
+
 	del(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
 
-//I'm 
+//I'm
 /obj/structure/sign/poster/proc/placement_check()
 
 //############################## THE ACTUAL DECALS ###########################
@@ -88,16 +88,16 @@
 	var/poster_type		//So mappers can specify a desired poster
 	var/ruined = 0
 
-/obj/structure/sign/poster/New(var/newloc, var/placement_dir=null, var/serial=null)
+/obj/structure/sign/poster/New(var/newloc, var/placement_dir = null, var/serial = 0)
 	..(newloc)
 
-	if(!serial)
+	if(serial == 0)
 		serial = rand(1, poster_designs.len) //use a random serial if none is given
-	
+
 	serial_number = serial
 	var/datum/poster/design = poster_designs[serial_number]
 	set_poster(design)
-	
+
 	switch (placement_dir)
 		if (NORTH)
 			pixel_x = 0
@@ -180,21 +180,19 @@
 	user << "<span class='notice'>You start placing the poster on the wall...</span>" //Looks like it's uncluttered enough. Place the poster.
 
 	//declaring D because otherwise if P gets 'deconstructed' we lose our reference to P.resulting_poster
-	var/obj/structure/sign/poster/D = new(P.serial_number)
+	var/obj/structure/sign/poster/D = new(user.loc, placement_dir=get_dir(user, src), serial=P.serial_number)
 
-	var/temp_loc = user.loc
 	flick("poster_being_set",D)
-	D.loc = src
 	del(P)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
-	playsound(D.loc, 'sound/items/poster_being_created.ogg', 100, 1)
+	// playsound(D.loc, 'sound/items/poster_being_created.ogg', 100, 1)
 
 	sleep(17)
 	if(!D)	return
 
-	if(istype(src,/turf/simulated/wall) && user && user.loc == temp_loc)//Let's check if everything is still there
+	if(istype(src,/turf/simulated/wall) && user && user.loc == D.loc)//Let's check if everything is still there
 		user << "<span class='notice'>You place the poster!</span>"
 	else
-		D.roll_and_drop(temp_loc)
+		D.roll_and_drop(D.loc)
 	return
 
 /datum/poster
