@@ -7,6 +7,7 @@
 
 	var/damage = 0
 	var/damage_cap = 100 //Wall will break down to girders if damage reaches this point
+	var/armor = 0.5 // Damage is multiplied by this
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
@@ -21,6 +22,21 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "metal"
+
+/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+
+	// Tasers and stuff? No thanks.
+	if(Proj.damage_type == HALLOSS)
+		return
+
+	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
+	if(istype(Proj, /obj/item/projectile/beam/emitter))
+		Proj.damage /= 4
+
+	take_damage(Proj.damage * armor)
+	return
+
+
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
@@ -101,7 +117,7 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		take_damage(rand(10, 20) * (adj_temp / max_temperature))
+		take_damage(log(rand(0.9, 1.1) * (adj_temp - max_temperature)))
 
 	return ..()
 
@@ -225,28 +241,38 @@
 		ReplaceWithLattice()
 	return 0
 
+/turf/simulated/wall
+	var/hulk_destroy_prob = 40
+	var/hulk_take_damage = 1
+	var/rotting_destroy_touch = 1
+	var/rotting_touch_message = "\blue The wall crumbles under your touch."
+
 //Interactions
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
-		if (prob(40) || rotting)
+		if (prob(hulk_destroy_prob) || rotting)
 			usr << text("\blue You smash through the wall.")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 			dismantle_wall(1)
-			return
+			return 1
 		else
 			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
+			if(hulk_take_damage)
+				take_damage(rand(25, 75))
+			return 1
 
 	if(rotting)
-		user << "\blue The wall crumbles under your touch."
-		dismantle_wall()
-		return
+		user << rotting_touch_message
+		if(rotting_destroy_touch)
+			dismantle_wall()
+		return 1
+
+	if(..()) return 1
 
 	user << "\blue You push the wall but nothing happens!"
 	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
-	return
+	return 0
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
@@ -437,6 +463,9 @@
 	else if(istype(W,/obj/item/rust_fuel_assembly_port_frame))
 		var/obj/item/rust_fuel_assembly_port_frame/AH = W
 		AH.try_build(src)
+		return
+
+	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
 
 	else

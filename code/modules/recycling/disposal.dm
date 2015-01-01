@@ -49,8 +49,6 @@
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(isrobot(user) && !istype(I, /obj/item/weapon/storage/bag/trash))
-		return
 	src.add_fingerprint(user)
 	if(mode<=0) // It's off
 		if(istype(I, /obj/item/weapon/screwdriver))
@@ -123,7 +121,10 @@
 				msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 		return
 
-	if(!I)	return
+	if(isrobot(user))
+		return
+	if(!I)
+		return
 
 	user.drop_item()
 	if(I)
@@ -361,18 +362,13 @@
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1)		// if off or ready, no need to charge
+	if(mode != 1) //if off or ready, no need to charge
 		update_use_power(1)
-		return
-
-	// otherwise charge
-	src.pressurize()
-
-	// if full enough, switch to ready mode
-	if(air_contents.return_pressure() >= SEND_PRESSURE)
-		mode = 2
+	else if(air_contents.return_pressure() >= SEND_PRESSURE) 
+		mode = 2 //if full enough, switch to ready mode
 		update()
-	return
+	else
+		src.pressurize() //otherwise charge
 
 /obj/machinery/disposal/proc/pressurize()
 	if(stat & NOPOWER)			// won't charge if no power
@@ -740,6 +736,7 @@
 			icon_state = "[base_icon_state]f"
 		else
 			icon_state = base_icon_state*/
+		icon_state = base_icon_state
 		return
 
 

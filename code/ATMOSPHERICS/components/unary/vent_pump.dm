@@ -19,7 +19,7 @@
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
 
-	connect_types = list(1,2) //connects to regular and supply pipes
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
 
 	var/area/initial_loc
 	level = 1

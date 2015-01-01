@@ -108,6 +108,12 @@
 			Speaker: <A href='byond://?src=\ref[src];ch_name=[chan_name];listen=[!list]'>[list ? "Engaged" : "Disengaged"]</A><BR>
 			"}
 
+/obj/item/device/radio/proc/ToggleBroadcast()
+	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
+
+/obj/item/device/radio/proc/ToggleReception()
+	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
+
 /obj/item/device/radio/Topic(href, href_list)
 	//..()
 	if (usr.stat || !on)
@@ -135,11 +141,11 @@
 				return
 
 	else if (href_list["talk"])
-		broadcasting = !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL)) && text2num(href_list["talk"])
+		ToggleBroadcast()
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
-			listening = !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL)) && text2num(href_list["listen"])
+			ToggleReception()
 		else
 			if (channels[chan_name] & FREQ_LISTENING)
 				channels[chan_name] &= ~FREQ_LISTENING

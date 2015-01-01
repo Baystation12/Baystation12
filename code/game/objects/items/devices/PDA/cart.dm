@@ -35,27 +35,27 @@
 	var/list/stored_data = list()
 
 /obj/item/weapon/cartridge/engineering
-	name = "Power-ON Cartridge"
+	name = "\improper Power-ON cartridge"
 	icon_state = "cart-e"
 	access_engine = 1
 
 /obj/item/weapon/cartridge/atmos
-	name = "BreatheDeep Cartridge"
+	name = "\improper BreatheDeep cartridge"
 	icon_state = "cart-a"
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/medical
-	name = "Med-U Cartridge"
+	name = "\improper Med-U cartridge"
 	icon_state = "cart-m"
 	access_medical = 1
 
 /obj/item/weapon/cartridge/chemistry
-	name = "ChemWhiz Cartridge"
+	name = "\improper ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
 
 /obj/item/weapon/cartridge/security
-	name = "R.O.B.U.S.T. Cartridge"
+	name = "\improper R.O.B.U.S.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
@@ -65,31 +65,31 @@
 		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/detective
-	name = "D.E.T.E.C.T. Cartridge"
+	name = "\improper D.E.T.E.C.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 	access_medical = 1
 
 
 /obj/item/weapon/cartridge/janitor
-	name = "CustodiPRO Cartridge"
+	name = "\improper CustodiPRO cartridge"
 	desc = "The ultimate in clean-room design."
 	icon_state = "cart-j"
 	access_janitor = 1
 
 /obj/item/weapon/cartridge/lawyer
-	name = "P.R.O.V.E. Cartridge"
+	name = "\improper P.R.O.V.E. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
 /obj/item/weapon/cartridge/clown
-	name = "Honkworks 5.0"
+	name = "\improper Honkworks 5.0 cartridge"
 	icon_state = "cart-clown"
 	access_clown = 1
 	charges = 5
 
 /obj/item/weapon/cartridge/mime
-	name = "Gestur-O 1000"
+	name = "\improper Gestur-O 1000 cartridge"
 	icon_state = "cart-mi"
 	access_mime = 1
 	charges = 5
@@ -105,7 +105,7 @@
 	desc = "A data cartridge with an integrated radio signaler module."
 
 /obj/item/weapon/cartridge/signal/science
-	name = "Signal Ace 2"
+	name = "\improper Signal Ace 2 cartridge"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
 	access_reagent_scanner = 1
@@ -119,7 +119,7 @@
 
 
 /obj/item/weapon/cartridge/quartermaster
-	name = "Space Parts & Space Vendors Cartridge"
+	name = "\improper Space Parts & Space Vendors cartridge"
 	desc = "Perfect for the Quartermaster on the go!"
 	icon_state = "cart-q"
 	access_quartermaster = 1
@@ -130,12 +130,12 @@
 		radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/head
-	name = "Easy-Record DELUXE"
+	name = "\improper Easy-Record DELUXE"
 	icon_state = "cart-h"
 	access_status_display = 1
 
 /obj/item/weapon/cartridge/hop
-	name = "HumanResources9001"
+	name = "\improper HumanResources9001 cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
 	access_quartermaster = 1
@@ -148,7 +148,7 @@
 		radio = new /obj/item/radio/integrated/mule(src)
 
 /obj/item/weapon/cartridge/hos
-	name = "R.O.B.U.S.T. DELUXE"
+	name = "\improper R.O.B.U.S.T. DELUXE"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
@@ -159,21 +159,21 @@
 		radio = new /obj/item/radio/integrated/beepsky(src)
 
 /obj/item/weapon/cartridge/ce
-	name = "Power-On DELUXE"
+	name = "\improper Power-On DELUXE"
 	icon_state = "cart-ce"
 	access_status_display = 1
 	access_engine = 1
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/cmo
-	name = "Med-U DELUXE"
+	name = "\improper Med-U DELUXE"
 	icon_state = "cart-cmo"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_medical = 1
 
 /obj/item/weapon/cartridge/rd
-	name = "Signal Ace DELUXE"
+	name = "\improper Signal Ace DELUXE"
 	icon_state = "cart-rd"
 	access_status_display = 1
 	access_reagent_scanner = 1
@@ -185,7 +185,7 @@
 		radio = new /obj/item/radio/integrated/signal(src)
 
 /obj/item/weapon/cartridge/captain
-	name = "Value-PAK Cartridge"
+	name = "\improper Value-PAK cartridge"
 	desc = "Now with 200% more value!"
 	icon_state = "cart-c"
 	access_quartermaster = 1
@@ -198,7 +198,7 @@
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/syndicate
-	name = "Detomatix Cartridge"
+	name = "\improper Detomatix cartridge"
 	icon_state = "cart"
 	access_remote_door = 1
 	access_detonate_pda = 1

@@ -1,6 +1,6 @@
 //Contains the rapid construction device.
 /obj/item/weapon/rcd
-	name = "rapid-construction-device (RCD)"
+	name = "rapid construction device"
 	desc = "A device used to rapidly build walls and floors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
@@ -22,6 +22,9 @@
 	var/list/modes = list("Floor & Walls","Airlock","Deconstruct")
 	var/canRwall = 0
 	var/disabled = 0
+
+/obj/item/weapon/rcd/attack()
+	return 0
 
 /obj/item/weapon/rcd/examine()
 	..()
@@ -59,7 +62,7 @@
 	if(!proximity) return
 	if(disabled && !isrobot(user))
 		return 0
-	if(istype(A,/area/shuttle)||istype(A,/turf/space/transit))
+	if(istype(get_area(A),/area/shuttle)||istype(get_area(A),/turf/space/transit))
 		return 0
 	return alter_turf(A,user,(mode == 3))
 
@@ -96,7 +99,7 @@
 	else if(deconstruct && istype(T,/turf/simulated/wall))
 		build_delay = deconstruct ? 50 : 40
 		build_cost =  5
-		build_type =  (canRwall && istype(T,/turf/simulated/wall/r_wall)) ? "wall" : null
+		build_type =  (!canRwall && istype(T,/turf/simulated/wall/r_wall)) ? null : "wall"
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
@@ -124,6 +127,8 @@
 		return 0
 
 	working = 0
+	if(build_delay && (!user.Adjacent(T) || user.get_active_hand() != src || user.stat || user.restrained()))
+		return 0
 
 	if(build_turf)
 		T.ChangeTurf(build_turf)

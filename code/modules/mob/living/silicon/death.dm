@@ -1,6 +1,6 @@
 /mob/living/silicon/gib()
 	..("gibbed-r")
-	robogibs(loc, viruses)
+	gibs(loc, viruses, null, /obj/effect/gibspawner/robot)
 
 /mob/living/silicon/dust()
 	..("dust-r", /obj/effect/decal/remains/robot)

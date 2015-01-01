@@ -389,8 +389,6 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)
 
-	enter_allowed = 0
-
 	var/off_station = 0
 	var/turf/bomb_location = get_turf(src)
 	if(bomb_location && (bomb_location.z in config.station_levels))

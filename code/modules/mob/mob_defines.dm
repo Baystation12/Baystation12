@@ -214,8 +214,9 @@
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
-
-	var/immune_to_ssd = 0
+	
+	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
+	var/player_logged = 0
 
 	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes

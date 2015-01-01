@@ -347,8 +347,8 @@
 	hold.emp_act(severity)
 	..()
 
-/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg)
-	hold.hear_talk(M, msg)
+/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
+	hold.hear_talk(M, msg, verb, speaking)
 	..()
 
 /obj/item/clothing/tie/storage/attack_self(mob/user as mob)

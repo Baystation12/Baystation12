@@ -203,6 +203,12 @@
 		radio.talk_into(M, text)
 	return
 
+/obj/mecha/see_emote(mob/living/M, text)
+	if(occupant && occupant.client)
+		var/rendered = "<span class='message'>[text]</span>"
+		occupant.show_message(rendered, 2)
+	..()
+
 ////////////////////////////
 ///// Action processing ////
 ////////////////////////////
@@ -492,14 +498,17 @@
 		src.visible_message("The [src.name] armor deflects the projectile")
 		src.log_append_to_last("Armor saved.")
 		return
-	var/ignore_threshold
-	if(Proj.flag == "taser")
-		use_power(200)
-		return
-	if(istype(Proj, /obj/item/projectile/beam/pulse))
-		ignore_threshold = 1
-	src.take_damage(Proj.damage,Proj.flag)
-	src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
+
+	if(Proj.damage_type == HALLOSS)
+		use_power(Proj.agony * 5)
+
+	if(!(Proj.nodamage))
+		var/ignore_threshold
+		if(istype(Proj, /obj/item/projectile/beam/pulse))
+			ignore_threshold = 1
+		src.take_damage(Proj.damage,Proj.flag)
+		src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),ignore_threshold)
+
 	Proj.on_hit(src)
 	return
 

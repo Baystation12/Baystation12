@@ -96,6 +96,10 @@
 		device.attack_self(holder.wearer)
 		return 1
 
+	var/turf/T = get_turf(target)
+	if(istype(T) && !T.Adjacent(get_turf(src)))
+		return 0
+
 	var/resolved = target.attackby(device,holder.wearer)
 	if(!resolved && device && target)
 		device.afterattack(target,holder.wearer,1)
@@ -265,7 +269,7 @@
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = sanitize(copytext(raw_choice,1,MAX_MESSAGE_LEN))
-			usr << "You are now mimicking <B>[voice_holder.voice]</B>.</font>"
+			usr << "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>"
 	return 1
 
 /obj/item/rig_module/maneuvering_jets

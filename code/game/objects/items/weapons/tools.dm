@@ -333,6 +333,7 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
+			src.w_class = 4
 			processing_objects.Add(src)
 		else
 			usr << "\blue Need more fuel!"
@@ -347,6 +348,7 @@
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
+		src.w_class = initial(src.w_class)
 
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
@@ -394,20 +396,20 @@
 
 
 /obj/item/weapon/weldingtool/largetank
-	name = "Industrial Welding Tool"
+	name = "industrial welding tool"
 	max_fuel = 40
 	matter = list("metal" = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
-	name = "Upgraded Welding Tool"
+	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
-	name = "Experimental Welding Tool"
+	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
 	matter = list("metal" = 70, "glass" = 120)
@@ -473,11 +475,12 @@
 	else
 		return ..()
 
-/obj/item/weapon/combitool
+/*/obj/item/weapon/combitool
 	name = "combi-tool"
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
+	w_class = 2
 
 	var/list/spawn_tools = list(
 		/obj/item/weapon/screwdriver,
@@ -511,11 +514,21 @@
 		user << "You switch \the [src] to the [tool.name] fitting."
 	return 1
 
-/obj/item/weapon/combitool/attack(var/atom/target, var/mob/living/user)
+/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!M.Adjacent(user))
+		return 0
 	var/obj/item/tool = tools[current_tool]
-	if(!tool)
-		return ..()
+	if(!tool) return 0
+	return (tool ? tool.attack(M,user) : 0)
+
+/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
+	if(!proximity)
+		return 0
+	var/obj/item/tool = tools[current_tool]
+	if(!tool) return 0
+	tool.loc = user
 	var/resolved = target.attackby(tool,user)
 	if(!resolved && tool && target)
 		tool.afterattack(target,user,1)
-	return 1
+	if(tool)
+		tool.loc = src*/

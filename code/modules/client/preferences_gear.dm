@@ -507,7 +507,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/labcoat
 	display_name = "labcoat"
-	path = /obj/item/clothing/suit/storage/labcoat
+	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	cost = 3
 	slot = slot_wear_suit
 
@@ -814,6 +814,11 @@ var/global/list/gear_datums = list()
 	path = /obj/item/weapon/haircomb
 	sort_category = "misc"
 	cost = 2
+
+/*/datum/gear/combitool
+	display_name = "combi-tool"
+	path = /obj/item/weapon/combitool
+	cost = 3*/
 
 // Stuff worn on the ears. Items here go in the "ears" sort_category but they must not use
 // the slot_r_ear or slot_l_ear as the slot, or else players will spawn with no headset.

@@ -14,6 +14,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	can_hold = list(
+		//"/obj/item/weapon/combitool",
 		"/obj/item/weapon/crowbar",
 		"/obj/item/weapon/screwdriver",
 		"/obj/item/weapon/weldingtool",

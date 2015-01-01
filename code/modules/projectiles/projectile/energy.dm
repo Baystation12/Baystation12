@@ -65,4 +65,3 @@
 	damage = 20
 	damage_type = TOX
 	irradiate = 20
-

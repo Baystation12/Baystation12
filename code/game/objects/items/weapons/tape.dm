@@ -45,6 +45,7 @@
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"
+	overlays = W.overlays
 
 /obj/item/weapon/ducttape/attack_self(mob/user as mob)
 	if(!stuck)
@@ -56,6 +57,7 @@
 	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
+	overlays = null
 	del(src)
 
 /obj/item/weapon/ducttape/afterattack(var/A, mob/user as mob, flag, params)

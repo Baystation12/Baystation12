@@ -57,7 +57,7 @@
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
-	. = ..(null,1)
+	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
@@ -90,9 +90,8 @@
 		return 0
 
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-
 	playsound(loc, "sparks", 50, 1, -1)
-	if (shock_damage > 10)
+	if (shock_damage > 15)
 		src.visible_message(
 			"\red [src] was shocked by the [source]!", \
 			"\red <B>You feel a powerful shock course through your body!</B>", \
@@ -201,7 +200,10 @@
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
 
-			if(lying || src.sleeping)
+			if(player_logged)
+				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
+				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
+			else if(lying || src.sleeping)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
@@ -511,3 +513,13 @@
 
 /mob/living/carbon/can_use_vents()
 	return
+
+/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+	if(buckled)
+		return 0
+	stop_pulling()
+	src << "<span class='warning'>You slipped on [slipped_on]!</span>"
+	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	Stun(stun_duration)
+	Weaken(Floor(stun_duration/2))
+	return 1

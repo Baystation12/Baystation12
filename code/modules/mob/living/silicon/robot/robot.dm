@@ -159,9 +159,8 @@ var/list/robot_verbs_default = list(
 	connected_ai = select_active_ai_with_fewest_borgs()
 	if(connected_ai)
 		connected_ai.connected_robots += src
-		lawsync()
-		photosync()
 		lawupdate = 1
+		sync()
 	else
 		lawupdate = 0
 
@@ -178,6 +177,10 @@ var/list/robot_verbs_default = list(
 
 	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 
+/mob/living/silicon/robot/proc/sync()
+	if(lawupdate && connected_ai)
+		lawsync()
+		photosync()
 
 /mob/living/silicon/robot/drain_power(var/drain_check)
 
@@ -893,6 +896,12 @@ var/list/robot_verbs_default = list(
 
 	add_fingerprint(user)
 
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			attack_generic(H, rand(30,50), "slashed")
+			return
+
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
@@ -1031,9 +1040,9 @@ var/list/robot_verbs_default = list(
 
 
 /mob/living/silicon/robot/Topic(href, href_list)
-	if(usr != src)
-		return
 	if(..())
+		return
+	if(usr != src)
 		return
 
 	if (href_list["showalerts"])

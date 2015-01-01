@@ -93,8 +93,6 @@ LINEN BINS
 	item_color = "brown"
 
 
-
-
 /obj/structure/bedsheetbin
 	name = "linen bin"
 	desc = "A linen bin. It looks rather cosy."

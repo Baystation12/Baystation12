@@ -686,7 +686,7 @@
 				can_break_cuffs = 1
 			else if(istype(CM,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = CM
-				if(H.species.can_shred(H))
+				if(H.species.can_shred(H,1))
 					can_break_cuffs = 1
 
 			if(can_break_cuffs) //Don't want to do a lot of logic gating here.
@@ -839,3 +839,6 @@
 
 /mob/living/proc/has_eyes()
 	return 1
+
+/mob/living/proc/slip(var/slipped_on,stun_duration=8)
+	return 0

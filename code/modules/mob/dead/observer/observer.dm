@@ -83,18 +83,7 @@
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/book/tome))
 		var/mob/dead/M = src
-		if(src.invisibility != 0)
-			M.invisibility = 0
-			user.visible_message( \
-				"\red [user] drags ghost, [M], to our plan of reality!", \
-				"\red You drag [M] to our plan of reality!" \
-			)
-		else
-			user.visible_message ( \
-				"\red [user] just tried to smash his book into that ghost!  It's not very effective", \
-				"\red You get the feeling that the ghost can't become any more visible." \
-			)
-
+		M.manifest(user)
 
 /mob/dead/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
@@ -239,11 +228,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>You have no body.</span>"
 		return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
-		usr << "<span class='warning'>Another consciousness is in your body...It is resisting you.</span>"
+		usr << "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>"
 		return
-	if(mind.current.ajourn && mind.current.stat != DEAD)	//check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
-		var/obj/effect/rune/R = locate() in mind.current.loc	//whilst corpse is alive, we can only reenter the body if it's on the rune
-		if(!(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]))	//astral journeying rune
+	if(mind.current.ajourn && mind.current.stat != DEAD) //check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
+		var/found_rune
+		for(var/obj/effect/rune/R in mind.current.loc)   //whilst corpse is alive, we can only reenter the body if it's on the rune
+			if(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]) // Found an astral journey rune.
+				found_rune = 1
+				break
+		if(!found_rune)
 			usr << "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>"
 			return
 	mind.current.ajourn=0
@@ -556,9 +549,23 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A]</span>")
 	return 1
 
-/mob/dead/proc/manifest()
-	verbs += /mob/dead/proc/toggle_visibility
-	toggle_visibility()
+/mob/dead/proc/manifest(mob/user)
+	var/is_manifest = 0
+	if(!is_manifest)
+		is_manifest = 1
+		verbs += /mob/dead/proc/toggle_visibility
+
+	if(src.invisibility != 0)
+		user.visible_message( \
+			"<span class='warning'>[user] drags ghost, [src], to our plan of reality!</span>", \
+			"<span class='warning'>You drag [src] to our plan of reality!</span>" \
+		)
+		toggle_visibility(1)
+	else
+		user.visible_message ( \
+			"<span class='warning'>[user] just tried to smash his book into that ghost!  It's not very effective.</span>", \
+			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
+		)
 
 /mob/dead/proc/toggle_icon(var/icon)
 	if(!client)
@@ -574,22 +581,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)
 		client.images += J
 
-/mob/dead/proc/toggle_visibility()
+/mob/dead/proc/toggle_visibility(var/forced = 0)
 	set category = "Ghost"
 	set name = "Toggle Visibility"
 	set desc = "Allows you to turn (in)visible (almost) at will."
 
 	var/toggled_invisible
-
-	if(invisibility && world.time < toggled_invisible + 600)
+	if(!forced && invisibility && world.time < toggled_invisible + 600)
 		src << "You must gather strength before you can turn visible again..."
 		return
 
 	if(invisibility == 0)
 		toggled_invisible = world.time
-		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible</span>")
+		visible_message("<span class='emote'>It fades from sight...</span>", "<span class='info'>You are now invisible.</span>")
 	else
-		src << "<span class='info'>You are now visible</span>"
+		src << "<span class='info'>You are now visible!</span>"
 
 	invisibility = invisibility == INVISIBILITY_OBSERVER ? 0 : INVISIBILITY_OBSERVER
 	// Give the ghost a cult icon which should be visible only to itself
@@ -605,3 +611,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='info'>Your key won't be shown when you speak in dead chat.</span>"
 	else
 		src << "<span class='info'>Your key will be publicly visible again.</span>"
+
+/mob/dead/observer/canface()
+	return 1

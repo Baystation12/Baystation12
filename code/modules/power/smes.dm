@@ -32,6 +32,11 @@
 	var/last_input_attempt	= 0
 	var/last_charge			= 0
 
+	var/input_cut = 0
+	var/input_pulsed = 0
+	var/output_cut = 0
+	var/output_pulsed = 0
+
 	var/open_hatch = 0
 	var/name_tag = null
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
@@ -111,7 +116,6 @@
 
 
 /obj/machinery/power/smes/process()
-
 	if(stat & BROKEN)	return
 
 	//store machine state to see if we need to update the icon overlays
@@ -120,7 +124,7 @@
 	var/last_onln = outputting
 
 	//inputting
-	if(input_attempt)
+	if(input_attempt && (!input_pulsed && !input_cut))
 		var/target_load = min((capacity-charge)/SMESRATE, input_level)	// charge at set rate, limited to spare capacity
 		var/actual_load = draw_power(target_load)						// add the load to the terminal side network
 		charge += actual_load * SMESRATE								// increase the charge
@@ -133,7 +137,7 @@
 			inputting = 0
 
 	//outputting
-	if(outputting)
+	if(outputting && (!output_pulsed && !output_cut))
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
 
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
@@ -141,7 +145,7 @@
 		add_avail(output_used)				// add output to powernet (smes side)
 
 		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting = 0
+			outputting(0)
 			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 	else if(output_attempt && charge > output_level && output_level > 0)
 		outputting = 1
@@ -319,21 +323,12 @@
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
+/obj/machinery/power/smes/proc/Percentage()
+	return round(100.0*charge/capacity, 0.1)
 
 /obj/machinery/power/smes/Topic(href, href_list)
-	..()
-
-	if (usr.stat || usr.restrained() )
-		return
-	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		if(!istype(usr, /mob/living/silicon/ai))
-			usr << "\red You don't have the dexterity to do this!"
-			return
-
-//world << "[href] ; [href_list[href]]"
-
-	if (!istype(src.loc, /turf) && !istype(usr, /mob/living/silicon/))
-		return 0 // Do not update ui
+	if(..())
+		return 1
 
 	if( href_list["cmode"] )
 		inputting(!inputting)
@@ -426,5 +421,3 @@
 /obj/machinery/power/smes/magical/process()
 	charge = 5000000
 	..()
-
-#undef SMESRATE

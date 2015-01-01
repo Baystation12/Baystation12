@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/secure_data//TODO:SANITY
-	name = "Security Records"
-	desc = "Used to view and edit personnel's security records"
+	name = "security records console"
+	desc = "Used to view, edit and maintain security records"
 	icon_state = "security"
 	req_one_access = list(access_security, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/secure_data"
@@ -576,9 +576,9 @@ What a mess.*/
 		return photo.img
 	if(istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
-		var/datum/picture/selection = tempAI.GetPicture()
+		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if (selection)
-			return selection.fields["img"]
+			return selection.img
 
 /obj/machinery/computer/secure_data/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

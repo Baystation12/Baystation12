@@ -94,14 +94,7 @@
 				attack_generic(H,rand(1,3),"punched")
 				return
 
-			// See if they can attack, and which attacks to use.
-			var/datum/unarmed_attack/attack = H.species.unarmed
-			if(!attack.is_usable(H))
-				attack = H.species.secondary_unarmed
-			if(!attack.is_usable(H))
-				return 0
-
-			var/damage = rand(1, 5) + attack.damage
+			var/rand_damage = rand(1, 5)
 			var/block = 0
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
@@ -110,7 +103,7 @@
 			switch(src.a_intent)
 				if("help")
 					// We didn't see this coming, so we get the full blow
-					damage = attack.damage
+					rand_damage = 5
 					accurate = 1
 				if("hurt", "grab")
 					// We're in a fighting stance, there's a chance we block
@@ -119,7 +112,7 @@
 
 			if (M.grabbed_by.len)
 				// Someone got a good grip on them, they won't be able to do much damage
-				damage = max(1, damage - 2)
+				rand_damage = max(1, rand_damage - 2)
 
 			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
@@ -128,54 +121,83 @@
 			var/miss_type = 0
 			var/attack_message
 			if(!accurate)
-				/*
-					This is kind of convoluted, but it seems to break down like this:
-					(note that the chance to miss is exaggerated here since ran_zone() might roll "chest"
-					
+				/* ~Hubblenaut
+					This place is kind of convoluted and will need some explaining.
+					ran_zone() will pick out of 11 zones, thus the chance for hitting
+					our target where we want to hit them is circa 9.1%.
+
+					Now since we want to statistically hit our target organ a bit more
+					often than other organs, we add a base chance of 20% for hitting it.
+
+					This leaves us with the following chances:
+
 					If aiming for chest:
-						80% chance you hit your target
-						17% chance you hit a random zone
-						3% chance you miss
-					
+						27.3% chance you hit your target organ
+						70.5% chance you hit a random other organ
+						 2.2% chance you miss
+
 					If aiming for something else:
-						68% chance you hit your target
-						17% chance you hit a random zone
-						15% chance you miss
-					
-					Why don't we just use get_zone_with_miss_chance() ???
+						23.2% chance you hit your target organ
+						56.8% chance you hit a random other organ
+						15.0% chance you miss
+
+					Note: We don't use get_zone_with_miss_chance() here since the chances
+						  were made for projectiles.
+					TODO: proc for melee combat miss chances depending on organ?
 				*/
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!
-					attack_message = "[H] attempted to [pick(attack.attack_verb)] [src], but the [attack.attack_noun] missed!"
+					if(!src.lying)
+						attack_message = "[H] attempted to strike [src], but missed!"
+					else
+						attack_message = "[H] attempted to strike [src], but \he rolled out of the way!"
+						src.set_dir(pick(cardinal))
 					miss_type = 1
 
 			if(!miss_type && block)
 				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
 				miss_type = 2
 
+			// See what attack they use
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in H.species.unarmed_attacks)
+				if(!u_attack.is_usable(H, src, hit_zone))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
+				return 0
+
 			if(!attack_message)
-				attack.show_attack(H, src, hit_zone, damage)
+				attack.show_attack(H, src, hit_zone, rand_damage)
 			else
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
 			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
-			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]ed"] [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]ed"] by [H.name] ([H.ckey])</font>")
-			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]ed"] [key_name(src)]")
+			H.attack_log += text("\[[time_stamp()]\] <font color='red'>[miss_type ? (miss_type == 1 ? "Missed" : "Blocked") : "[pick(attack.attack_verb)]"] [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>[miss_type ? (miss_type == 1 ? "Was missed by" : "Has blocked") : "Has Been [pick(attack.attack_verb)]"] by [H.name] ([H.ckey])</font>")
+			msg_admin_attack("[key_name(H)] [miss_type ? (miss_type == 1 ? "has missed" : "was blocked by") : "has [pick(attack.attack_verb)]"] [key_name(src)]")
 
 			if(miss_type)
 				return 0
 
+			var/real_damage = rand_damage
+			real_damage += attack.get_unarmed_damage(H)
+			real_damage *= damage_multiplier
+			rand_damage *= damage_multiplier
 			if(HULK in H.mutations)
-				damage *= 2 // Hulks do twice the damage)
+				real_damage *= 2 // Hulks do twice the damage
+				rand_damage *= 2
+			real_damage = max(1, real_damage)
 
 			var/armour = run_armor_check(affecting, "melee")
 			// Apply additional unarmed effects.
-			attack.apply_effects(H,src,armour,damage,hit_zone)
+			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
+			apply_damage(real_damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if("disarm")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
@@ -208,7 +230,7 @@
 					return W.afterattack(target,src)
 
 			var/randn = rand(1, 100)
-			if (randn <= 25)
+			if(!(species.flags & NO_SLIP) && randn <= 25)
 				apply_effect(3, WEAKEN, run_armor_check(affecting, "melee"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				visible_message("\red <B>[M] has pushed [src]!</B>")

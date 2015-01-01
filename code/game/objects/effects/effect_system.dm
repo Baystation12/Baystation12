@@ -557,18 +557,9 @@ steam.start() -- spawns the effect
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
 	if(metal)
 		return
-
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP) || M.buckled)
-			return
-
-		M.stop_pulling()
-		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(5)
-		M.Weaken(2)
-
+	if(istype(AM, /mob/living))
+		var/mob/living/M = AM
+		M.slip("the foam",6)
 
 /datum/effect/effect/system/foam_spread
 	var/amount = 5				// the size of the foam spread.
@@ -733,15 +724,15 @@ steam.start() -- spawns the effect
 			var/light = -1
 			var/flash = -1
 
-			// Clamp all values to MAX_EXPLOSION_RANGE
+			// Clamp all values to max_explosion_range
 			if (round(amount/12) > 0)
-				devastation = min (MAX_EXPLOSION_RANGE, devastation + round(amount/12))
+				devastation = min (max_explosion_range, devastation + round(amount/12))
 
 			if (round(amount/6) > 0)
-				heavy = min (MAX_EXPLOSION_RANGE, heavy + round(amount/6))
+				heavy = min (max_explosion_range, heavy + round(amount/6))
 
 			if (round(amount/3) > 0)
-				light = min (MAX_EXPLOSION_RANGE, light + round(amount/3))
+				light = min (max_explosion_range, light + round(amount/3))
 
 			if (flash && flashing_factor)
 				flash += (round(amount/4) * flashing_factor)

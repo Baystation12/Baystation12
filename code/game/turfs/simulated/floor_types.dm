@@ -1,8 +1,8 @@
 /turf/simulated/floor/airless
 	icon_state = "floor"
 	name = "airless floor"
-	oxygen = 0.01
-	nitrogen = 0.01
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 	New()
@@ -11,13 +11,6 @@
 
 /turf/simulated/floor/airless/ceiling
 	icon_state = "rockvault"
-
-/turf/simulated/floor/airless/catwalk
-	name = "catwalk"
-	icon = 'icons/turf/catwalks.dmi'
-	icon_state = "catwalk0"
-	floor_type = null
-	intact = 0
 
 /turf/simulated/floor/light
 	name = "Light floor"
@@ -32,8 +25,6 @@
 			if(src)
 				update_icon()
 				name = n
-
-
 
 /turf/simulated/floor/wood
 	name = "floor"
@@ -93,7 +84,7 @@
 	name = "vacuum floor"
 	icon_state = "engine"
 	oxygen = 0
-	nitrogen = 0.001
+	nitrogen = 0
 	temperature = TCMB
 
 /turf/simulated/floor/plating
@@ -105,8 +96,8 @@
 /turf/simulated/floor/plating/airless
 	icon_state = "plating"
 	name = "airless plating"
-	oxygen = 0.01
-	nitrogen = 0.01
+	oxygen = 0
+	nitrogen = 0
 	temperature = TCMB
 
 	New()
@@ -226,9 +217,3 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
-
-/turf/simulated/floor/plating/airless/catwalk
-	icon = 'icons/turf/catwalks.dmi'
-	icon_state = "Floor3"
-	name = "catwalk"
-	desc = "Cats really don't like these things."

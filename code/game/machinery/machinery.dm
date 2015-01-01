@@ -129,8 +129,10 @@ Class Procs:
 		return 0
 	return apc.drain_power()
 
-/obj/machinery/New()
-	..()
+/obj/machinery/New(l, d=0)
+	..(l)
+	if(d)
+		set_dir(d)
 	if(!machinery_sort_required && ticker)
 		dd_insertObjectList(machines, src)
 	else
@@ -335,6 +337,7 @@ Class Procs:
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
@@ -375,7 +378,7 @@ Class Procs:
 		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
+		if(perp.species.name != "Human") //beepsky so racist.
 			threatcount += 2
 
 	if(check_records || check_arrest)

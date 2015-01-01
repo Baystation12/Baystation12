@@ -19,7 +19,7 @@
 		/obj/item/alarm_frame,
 		/obj/item/firealarm_frame,
 		/obj/item/weapon/table_parts,
-		/obj/item/weapon/rack_parts,
+		/obj/item/weapon/table_parts/rack,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
@@ -88,8 +88,12 @@
 	if(wrapped) //Already have an item.
 		//Temporary put wrapped into user so target's attackby() checks pass.
 		wrapped.loc = user
+
 		//Pass the attack on to the target. This might delete/relocate wrapped.
-		wrapped.afterattack(target,user)
+		var/resolved = target.attackby(wrapped,user)
+		if(!resolved && wrapped && target)
+			wrapped.afterattack(target,user,1)
+
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
 			wrapped.loc = src
