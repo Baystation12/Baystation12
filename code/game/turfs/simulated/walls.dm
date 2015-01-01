@@ -439,11 +439,6 @@
 		AH.try_build(src)
 		return
 
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
-		return
-
 	else
 		return attack_hand(user)
 	return
