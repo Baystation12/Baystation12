@@ -114,7 +114,7 @@
 /obj/vehicle/train/verb/unlatch_v()
 	set name = "Unlatch"
 	set desc = "Unhitches this train from the one in front of it."
-	set category = "Object"
+	set category = "Vehicle"
 	set src in view(1)
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -221,7 +221,7 @@
 	var/train_length = 0
 	while(T)
 		train_length++
-		if (powered && on)
+		if (T.powered && T.on)
 			active_engines++
 		T.update_car(train_length, active_engines)
 		T = T.lead

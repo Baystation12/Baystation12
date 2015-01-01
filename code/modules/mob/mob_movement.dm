@@ -269,8 +269,12 @@
 			move_delay = move_delay + tickcomp
 
 		if(istype(mob.buckled, /obj/vehicle))
-			//manually set move_delay for vehicles so we dont inherit any mob movement penalties
-			move_delay = world.time + mob.movement_delay() + 1 + config.run_speed + tickcomp
+			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
+			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
+			move_delay = world.time + tickcomp
+			//drunk driving
+			if(mob.confused)
+				direct = pick(cardinal)
 			return mob.buckled.relaymove(mob,direct)
 
 		if(istype(mob.machine, /obj/machinery))
@@ -289,6 +293,9 @@
 					var/datum/organ/external/r_hand = driver.get_organ("r_hand")
 					if((!l_hand || (l_hand.status & ORGAN_DESTROYED)) && (!r_hand || (r_hand.status & ORGAN_DESTROYED)))
 						return // No hands to drive your chair? Tough luck!
+				//drunk wheelchair driving
+				if(mob.confused)
+					direct = pick(cardinal)
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 

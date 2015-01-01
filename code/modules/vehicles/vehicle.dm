@@ -1,3 +1,9 @@
+//Dummy object for holding items in vehicles.
+//Prevents items from being interacted with.
+/datum/vehicle_dummy_load
+	var/name = "dummy load"
+	var/actual_load
+
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
@@ -55,8 +61,10 @@
 		if(on && powered)
 			cell.use(charge_use)
 
-		if(load)
-			load.forceMove(loc)// = loc
+		//Dummy loads do not have to be moved as they are just an overlay
+		//See load_object() proc in cargo_trains.dm for an example
+		if(load && !istype(load, /datum/vehicle_dummy_load))
+			load.forceMove(loc)
 			load.set_dir(dir)
 
 		return 1
@@ -263,8 +271,8 @@
 // calling this parent proc.
 //-------------------------------------------
 /obj/vehicle/proc/load(var/atom/movable/C)
-	//define allowed items for loading in specific vehicle definitions
-
+	//This loads objects onto the vehicle so they can still be interacted with.
+	//Define allowed items for loading in specific vehicle definitions.
 	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
 		return 0
 	if(load || C.anchored)
