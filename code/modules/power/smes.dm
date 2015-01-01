@@ -1,6 +1,7 @@
 // the SMES
 // stores power
 
+#define SMESRATE 0.05
 #define SMESMAXCHARGELEVEL 250000
 #define SMESMAXOUTPUT 250000
 
@@ -43,22 +44,15 @@
 	var/obj/machinery/power/terminal/terminal = null
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
 
-/obj/machinery/power/smes/drain_power(var/drain_check)
+/obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
 
-	if(!charge)
-		return 0
+	var/smes_amt = min((amount * SMESRATE), charge)
+	charge -= smes_amt
+	return smes_amt / SMESRATE
 
-	if(charge)
-		var/drained_power = rand(200,400)
-		if(charge < drained_power)
-			drained_power = charge
-			charge -= drained_power
-			return drained_power
-
-	return 0
 
 /obj/machinery/power/smes/New()
 	..()
@@ -111,9 +105,6 @@
 
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
-
-#define SMESRATE 0.05			// rate of internal charge to external power
-
 
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return

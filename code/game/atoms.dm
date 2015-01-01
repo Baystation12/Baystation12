@@ -382,22 +382,23 @@ its easier to just keep the beam vertical.
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
-	if(flags & NOBLOODY) return 0
-	.=1
-	if (!( istype(M, /mob/living/carbon/human) ))
+
+	if((flags & NOBLOODY) || !(flags & FPRINT))
 		return 0
-	if (!istype(M.dna, /datum/dna))
-		M.dna = new /datum/dna(null)
-		M.dna.real_name = M.real_name
-	M.check_dna()
-	if (!( src.flags ) & FPRINT)
-		return 0
+
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
+
 	blood_color = "#A10808"
-	if (M.species)
-		blood_color = M.species.blood_color
-	return
+	if(istype(M))
+		if (!istype(M.dna, /datum/dna))
+			M.dna = new /datum/dna(null)
+			M.dna.real_name = M.real_name
+		M.check_dna()
+		if (M.species)
+			blood_color = M.species.blood_color
+	. = 1
+	return 1
 
 /atom/proc/add_vomit_floor(mob/living/carbon/M as mob, var/toxvomit = 0)
 	if( istype(src, /turf/simulated) )

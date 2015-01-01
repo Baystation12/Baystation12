@@ -118,7 +118,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/heads
 	default_cartridge = /obj/item/weapon/cartridge/head
 	icon_state = "pda-h"
-	news_silent = 1 
+	news_silent = 1
 
 /obj/item/device/pda/heads/hop
 	default_cartridge = /obj/item/weapon/cartridge/hop
@@ -790,7 +790,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Toggle Door")
 			if(cartridge && cartridge.access_remote_door)
-				for(var/obj/machinery/door/poddoor/M in world)
+				for(var/obj/machinery/door/blast/M in world)
 					if(M.id == cartridge.remote_door_id)
 						if(M.density)
 							M.open()

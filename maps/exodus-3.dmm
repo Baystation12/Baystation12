@@ -91,7 +91,7 @@
 "bM" = (/obj/machinery/light/small,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bN" = (/turf/simulated/shuttle/plating,/turf/simulated/shuttle/wall{icon_state = "swall_f5"; dir = 2},/area/derelict/ship)
 "bO" = (/obj/item/trash/cheesie,/turf/space,/area/space)
-"bP" = (/obj/machinery/door/poddoor{id = "oldship_gun"; name = "Pod Bay Door"},/turf/simulated/shuttle/plating,/area/derelict/ship)
+"bP" = (/obj/machinery/door/blast/regular{id = "oldship_gun"; name = "Pod Bay Door"},/turf/simulated/shuttle/plating,/area/derelict/ship)
 "bQ" = (/obj/machinery/mass_driver{dir = 8; icon_state = "mass_driver"; id = "oldship_gun"},/turf/simulated/shuttle/plating,/area/derelict/ship)
 "bR" = (/obj/machinery/door/airlock/glass,/turf/simulated/shuttle/plating,/area/derelict/ship)
 "bS" = (/obj/machinery/door/airlock/glass{name = "Pod Bay"},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)

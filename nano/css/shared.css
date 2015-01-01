@@ -562,3 +562,8 @@ th.misc {
 .oxyloss {
     color: blue;
 }
+
+/* 75px width used in power monitoring console buttons */
+.width75btn {
+    width: 75px;
+}
