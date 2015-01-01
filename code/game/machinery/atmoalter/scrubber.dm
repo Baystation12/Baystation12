@@ -202,7 +202,7 @@ Flow Rate Regulator: <A href='?src=\ref[src];volume_adj=-1000'>-</A> <A href='?s
 		last_flow_rate = 0
 		last_power_draw = 0
 	else
-		last_power_draw = handle_power_draw(power_draw)
+		use_power(power_draw)
 		update_connected_network()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)

@@ -364,7 +364,7 @@
 
 	if(mode != 1) //if off or ready, no need to charge
 		update_use_power(1)
-	else if(air_contents.return_pressure() >= SEND_PRESSURE) 
+	else if(air_contents.return_pressure() >= SEND_PRESSURE)
 		mode = 2 //if full enough, switch to ready mode
 		update()
 	else
@@ -383,11 +383,8 @@
 		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 1	//don't force update - easier on CPU
-	else
-		handle_power_draw(power_draw)
+	if (power_draw > 0)
+		use_power(power_draw)
 
 // perform a flush
 /obj/machinery/disposal/proc/flush()
