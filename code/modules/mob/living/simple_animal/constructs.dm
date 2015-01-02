@@ -40,6 +40,17 @@
 	ghostize()
 	del src
 
+
+/mob/living/simple_animal/construct/attack_generic(var/mob/user)
+	if(istype(user, /mob/living/simple_animal/construct/builder))
+		if(health < maxHealth)
+			adjustBruteLoss(-5)
+			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+		else
+			user << "<span class='notice'>\The [src] is undamaged.</span>"
+		return
+	return ..()
+
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)
 	var/msg = ""
