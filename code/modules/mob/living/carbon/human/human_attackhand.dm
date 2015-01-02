@@ -141,6 +141,9 @@
 						if(M.species.flags & IS_STRONG)
 							TugText = "ripping off"
 							TuggedText = "ripped off"
+						if(HULK in M.mutations)
+							TugText = "dismembering"
+							TuggedText = "dismembered"
 						if (TugText=="tugging at"&&affected.name=="groin")
 							return
 						visible_message("<span class='danger'>[M] starts [TugText] [src]'s [affected.display_name]</span>", "<span class='danger'>[M] starts [TugText] your [affected.display_name]!</span>") // Begin tugging.
@@ -151,14 +154,22 @@
 							tugTime = 300
 						if(affected.status & ORGAN_ROBOT)
 							tugTime = tugTime/2 // Easier to rip off. Still likely messy.
-
+						if(HULK in M.mutations)
+							tugTime = tugTime/10
 						M.attack_log += text("\[[time_stamp()]\] <font color='red'>Began [TugText] [src.name] ([src.ckey])'s [affected.name]</font>")
 						src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] tugged at by [M.name] ([M.ckey])</font>")
 						if (M.species.flags & IS_STRONG || affected.status & ORGAN_ROBOT)
 							msg_admin_attack("[key_name(M)] began [TugText] [key_name(src)]'s [affected.name]") // Tell all the admins that ARM RIPPING FUN.
 						ripping = 1
 						spawn(tugTime)
-							if (ripping && (((!(M.species.flags & IS_STRONG)&&(affected.status & ORGAN_ROBOT)) || M.species.flags & IS_STRONG) && istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.a_intent == "grab" && M.Adjacent(src) && !M.lying && !affected.destspawn && get_organ(M.zone_sel.selecting)==affected)) // Are we still ripping?
+							var/CanRip = 0
+							if (M.species.flags & IS_STRONG)
+								CanRip = 1
+							if (affected.status & ORGAN_ROBOT)
+								CanRip = 1
+							if (HULK in M.mutations)
+								CanRip = 1
+							if (ripping && (CanRip) && istype(M.get_inactive_hand(), /obj/item/weapon/grab) && M.a_intent == "grab" && M.Adjacent(src) && !M.lying && !affected.destspawn && get_organ(M.zone_sel.selecting)==affected) // Are we still ripping?
 								affected.droplimb(1) // RIP.
 								M.attack_log += text("\[[time_stamp()]\] <font color='red'>Ripped off [src.name] ([src.ckey])'s [affected.name]</font>")
 								src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had their [affected.name] ripped off by [M.name] ([M.ckey])</font>")
