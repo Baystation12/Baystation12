@@ -52,15 +52,12 @@
 	return 1
 
 /datum/game_mode/ninja/post_setup()
+
 	for(var/datum/mind/ninja in ninjas)
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
 		if(!config.objectives_disabled)
 			forge_ninja_objectives(ninja)
 		show_objectives(ninja)
-
-		var/mob/living/carbon/human/N = ninja.current
-		N.internal = N.s_store
-		N.internals.icon_state = "internal1"
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()

@@ -362,13 +362,6 @@
 
 		show_objectives(player)
 
-		//Ninja objective announcement goes here.
-
-		//Set ninja internals.
-		var/mob/living/carbon/human/N = player.current
-		N.internal = N.s_store
-		N.internals.icon_state = "internal1"
-
 /datum/game_mode/calamity/proc/spawn_vox_raiders(var/list/candidates)
 
 	//Create objectives.
