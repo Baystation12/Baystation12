@@ -86,6 +86,7 @@
 	edge = 0
 
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+
 	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
 		return 0
 	if (user == target && (zone == "head" || zone == "eyes" || zone == "mouth"))
@@ -171,7 +172,11 @@
 	damage = 0
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+
 	if (user.legcuffed)
+		return 0
+
+	if(!istype(target))
 		return 0
 
 	if (!user.lying && (target.lying || zone in list("l_foot", "r_foot")))
