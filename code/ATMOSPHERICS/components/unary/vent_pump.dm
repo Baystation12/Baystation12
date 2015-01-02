@@ -26,6 +26,7 @@
 	var/area_uid
 	var/id_tag = null
 
+	var/hibernate = 0 //Do we even process?
 	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
@@ -153,6 +154,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/process()
 	..()
 
+	if (hibernate)
+		return 1
+
 	if (!node)
 		on = 0
 	if(!can_pump())
@@ -186,6 +190,16 @@
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
 
 			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
+	else
+		//If we're in an area that is fucking ideal, and we don't have to do anything, chances are we won't next tick either so why redo these calculations?
+		//JESUS FUCK.  THERE ARE LITERALLY 250 OF YOU MOTHERFUCKERS ON ZLEVEL ONE AND YOU DO THIS SHIT EVERY TICK WHEN VERY OFTEN THERE IS NO REASON TO
+
+		if(pump_direction && pressure_checks == PRESSURE_CHECK_EXTERNAL && controller_iteration > 10)	//99% of all vents
+			//Fucking hibernate because you ain't doing shit.  
+			hibernate = 1
+			spawn(rand(100,200))	//hibernate for 10 or 20 seconds randomly
+				hibernate = 0		
+		
 
 	if (power_draw < 0)
 		last_power_draw = 0
@@ -270,6 +284,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
 		return
+
+	hibernate = 0
+
 	//log_admin("DEBUG \[[world.timeofday]\]: /obj/machinery/atmospherics/unary/vent_pump/receive_signal([signal.debug_print()])")
 	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
 		return 0
