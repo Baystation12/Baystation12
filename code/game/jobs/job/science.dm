@@ -3,8 +3,8 @@
 	flag = RD
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#ffddff"
 	idtype = /obj/item/weapon/card/id/silver
@@ -42,8 +42,8 @@
 	flag = SCIENTIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 6
-	spawn_positions = 3
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
@@ -74,8 +74,8 @@
 	flag = XENOBIOLOGIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
@@ -104,8 +104,8 @@
 	flag = ROBOTICIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "research director"
 	selection_color = "#ffeeff"
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.

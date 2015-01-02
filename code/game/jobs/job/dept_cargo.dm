@@ -4,8 +4,8 @@
 	flag = QUARTERMASTER
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#8c7846"
 	idtype = /obj/item/weapon/card/id/silver
@@ -41,8 +41,8 @@
 	flag = CARGOTECH
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the quartermaster"
 	selection_color = "#aa9682"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
@@ -69,8 +69,8 @@
 	flag = MININGFOREMAN
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the quartermaster"
 	selection_color = "#aa9682"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
@@ -103,8 +103,8 @@
 	flag = MINER
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the mining foreman and the quartermaster"
 	selection_color = "#aa9682"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)

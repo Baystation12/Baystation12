@@ -3,8 +3,8 @@
 	flag = CMO
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#ffddf0"
 	idtype = /obj/item/weapon/card/id/silver
@@ -43,8 +43,8 @@
 	flag = DOCTOR
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 5
-	spawn_positions = 3
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
@@ -108,8 +108,8 @@
 	flag = CHEMIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
@@ -201,8 +201,8 @@
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief medical officer"
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)

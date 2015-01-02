@@ -4,8 +4,8 @@
 	flag = BARTENDER
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
@@ -45,8 +45,8 @@
 	flag = CHEF
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
@@ -74,8 +74,8 @@
 	flag = BOTANIST
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
@@ -184,8 +184,8 @@
 	flag = JANITOR
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_janitor, access_maint_tunnels)
@@ -211,8 +211,8 @@
 	flag = LIBRARIAN
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_library, access_maint_tunnels)
@@ -240,8 +240,8 @@
 	flag = LAWYER
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#dddddd"
 	access = list(access_lawyer, access_court, access_sec_doors, access_maint_tunnels)

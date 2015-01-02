@@ -5,8 +5,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = CAPTAIN
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "Nanotrasen officials and Corporate Regulations"
 	selection_color = "#ccccff"
 	idtype = /obj/item/weapon/card/id/gold
@@ -50,8 +50,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = HOP
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#ddddff"
 	idtype = /obj/item/weapon/card/id/silver

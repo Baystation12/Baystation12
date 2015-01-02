@@ -3,8 +3,8 @@
 	flag = CHIEF
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the captain"
 	selection_color = "#ffeeaa"
 	idtype = /obj/item/weapon/card/id/silver
@@ -46,8 +46,8 @@
 	flag = ENGINEER
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief engineer"
 	selection_color = "#fff5cc"
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
@@ -81,8 +81,8 @@
 	flag = ATMOSTECH
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the chief engineer"
 	selection_color = "#fff5cc"
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
