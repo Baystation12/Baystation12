@@ -1416,6 +1416,8 @@
 					switch(hal_screwyhud)
 						if(1)	healths.icon_state = "health6"
 						if(2)	healths.icon_state = "health7"
+						else if(species && species.flags & NO_PAIN)
+							healths.icon_state = "health_numb" // No pain no gain.
 						else
 							//switch(health - halloss)
 							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
