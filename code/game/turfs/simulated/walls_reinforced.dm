@@ -291,12 +291,7 @@
 		var/obj/item/light_fixture_frame/small/AH = W
 		AH.try_build(src)
 		return
-
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
-		return
-
+	
 	//Finally, CHECKING FOR FALSE WALLS if it isn't damaged
 	else if(!d_state)
 		return attack_hand(user)

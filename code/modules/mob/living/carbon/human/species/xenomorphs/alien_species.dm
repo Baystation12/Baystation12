@@ -268,9 +268,6 @@
 		/mob/living/carbon/human/proc/resin
 		)
 
-	//maxHealth = 250
-	//health = 250
-
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
 	..()
 	// Make sure only one official queen exists at any point.
