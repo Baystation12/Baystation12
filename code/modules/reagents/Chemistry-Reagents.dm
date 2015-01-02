@@ -2155,6 +2155,10 @@ datum
 							eyes_covered = 1
 							if ( !safe_thing )
 								safe_thing = victim.glasses
+						if (victim.species.flags & IS_SYNTHETIC)
+							victim << "\red Your vision is slightly distorted."
+							victim.eye_blurry = max(M.eye_blurry+5, 5)
+							return
 						if ( eyes_covered && mouth_covered )
 							victim << "\red Your [safe_thing] protects you from the pepperspray!"
 							return
