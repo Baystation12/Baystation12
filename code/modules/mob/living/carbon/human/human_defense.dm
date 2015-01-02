@@ -350,10 +350,11 @@ emp_act
 
 		// Begin BS12 momentum-transfer code.
 		if(O.throw_source && speed >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/obj/item/weapon/W = O
 			var/momentum = speed/THROWNOBJ_KNOCKBACK_DIVISOR
 			var/dir = get_dir(O.throw_source, src)
-			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+			visible_message(
+				"<span class='danger'>[src] staggers under the impact!</span>",\
+				"<span class='danger'>You stagger under the impact!</span>")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 		//thrown weapon embedded object code.

@@ -82,7 +82,8 @@
 			tissue_layer.create_wound(WOUND_BRUISE, bruise_damage, WOUND_CLOSED)
 		else
 			return
-	owner.shock_stage += damage //If you can't wound them, dump it into pain.
+	if(owner)
+		owner.shock_stage += damage //If you can't wound them, dump it into pain.
 
 // Burn trauma will cover the topmost layer as much as possible before harming deeper layers.
 /obj/item/organ/external/proc/take_burn_trauma(var/damage)

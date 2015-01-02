@@ -203,6 +203,11 @@
 		O.amputated=amputated
 		O.setAmputatedTree()
 
+/obj/item/organ/external/head/removed()
+	..()
+	if(owner)
+		owner.update_hair()
+
 /obj/item/organ/external/removed(var/mob/living/user)
 
 	var/is_robotic = status & ORGAN_ROBOT
@@ -224,8 +229,12 @@
 		O.removed(owner)
 		O.loc = src //TODO: generate entire limb icons from contents.
 
-	release_restraints()
+	// Grab all the internal giblets too.
+	for(var/obj/item/organ/internal/organ in internal_organs)
+		organ.removed(user)
+		organ.loc = src
 
+	release_restraints()
 	owner.organs -= src
 	owner.organs_by_name[limb_name] = null // Remove from owner's vars.
 
@@ -244,6 +253,14 @@
 			del(spark_system)
 		del(src)
 
+/obj/item/organ/external/head/removed()
+	if(owner)
+		name = "[owner.real_name]'s head"
+	return ..()
+
+/obj/item/organ/external/set_dir()
+	return
+
 //Handles dismemberment
 /obj/item/organ/external/proc/droplimb(var/clean)
 
@@ -255,10 +272,12 @@
 	//	var/obj/item/organ/external/stump/stump = new(owner,
 
 	owner.visible_message(
-		"<span class='danger'>[owner.name]'s [src.name] flies off in an arc!</span>",\
+		"<span class='danger'>\The [owner]'s [src.name] flies off in an arc!</span>",\
 		"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
 		"<span class='danger'>You hear a terrible sound of ripping tendons and flesh.</span>")
 
+	if(parent)
+		parent.children -= src
 	src.removed(owner)
 
 	if(parent)
@@ -267,14 +286,26 @@
 		parent = null
 
 	update_health()
+	owner.update_body()
+	compile_icon()
 
-	//Throw limb around
-	if(src && owner && istype(owner.loc,/turf))
-		step(src,pick(cardinal))
+	add_blood(owner)
+
+	var/matrix/M = matrix()
+	M.Turn(rand(180))
+	src.transform = M
+
+	// Throw limb around.
+	if(src && istype(loc,/turf))
+		throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
 /****************************************************
 			   HELPERS
 ****************************************************/
+
+/obj/item/organ/replaced()
+	get_icon()
+	return ..()
 
 /obj/item/organ/external/proc/release_restraints()
 	if (owner.handcuffed && body_part in list(ARM_LEFT, ARM_RIGHT, HAND_LEFT, HAND_RIGHT))

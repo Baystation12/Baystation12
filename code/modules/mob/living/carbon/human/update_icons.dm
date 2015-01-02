@@ -223,7 +223,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
-	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)
 	var/fat = (FAT in src.mutations)
@@ -261,41 +260,18 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
-		//Icon is cached, use existing icon.
 		base_icon = human_icon_cache[icon_key]
-
-		//log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
-
 	else
 
 	//BEGIN CACHED ICON GENERATION.
-		var/race_icon =   (skeleton ? 'icons/mob/human_races/r_skeleton.dmi' : species.icobase)
-		var/deform_icon = (skeleton ? 'icons/mob/human_races/r_skeleton.dmi' : species.icobase)
-
 		//Robotic limbs are handled in get_icon() so all we worry about are missing or dead limbs.
 		//No icon stored, so we need to start with a basic one.
-		var/obj/item/organ/external/chest = get_organ("chest")
-		base_icon = chest.get_icon(race_icon,deform_icon,g)
-
-		if(chest.status & ORGAN_DEAD)
-			base_icon.ColorTone(necrosis_color_mod)
-			base_icon.SetIntensity(0.7)
+		base_icon = new('icons/mob/human.dmi',"blank")
 
 		for(var/obj/item/organ/external/part in organs)
 
 			var/icon/temp //Hold the bodypart icon for processing.
-
-			if(part.status & ORGAN_DESTROYED)
-				continue
-
-			if (istype(part, /obj/item/organ/external/groin) || istype(part, /obj/item/organ/external/head))
-				temp = part.get_icon(race_icon,deform_icon,g)
-			else
-				temp = part.get_icon(race_icon,deform_icon)
-
-			if(part.status & ORGAN_DEAD)
-				temp.ColorTone(necrosis_color_mod)
-				temp.SetIntensity(0.7)
+			temp = part.get_icon(skeleton)
 
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -328,7 +304,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Handle husk overlay.
 		if(husk)
 			var/icon/mask = new(base_icon)
-			var/icon/husk_over = new(race_icon,"overlay_husk")
+			var/icon/husk_over = new((skeleton ? 'icons/mob/human_races/r_skeleton.dmi' : species.icobase),"overlay_husk")
 			mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 			husk_over.Blend(mask, ICON_ADD)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
@@ -349,10 +325,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 	//END CACHED ICON GENERATION.
 
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
-
-	//Skin colour. Not in cache because highly variable (and relatively benign).
-	if (species.flags & HAS_SKIN_COLOR)
-		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
 	if(has_head)
 		//Eyes
@@ -386,7 +358,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	overlays_standing[HAIR_LAYER]	= null
 
 	var/obj/item/organ/external/head/head_organ = get_organ("head")
-	if( !head_organ || (head_organ.status & ORGAN_DESTROYED) )
+	if(!head_organ || (head_organ.status & ORGAN_DESTROYED))
 		if(update_icons)   update_icons()
 		return
 

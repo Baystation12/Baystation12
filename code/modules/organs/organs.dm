@@ -79,7 +79,6 @@
 	if(!(status & ORGAN_ROBOT))
 		processing_objects |= src
 
-	owner.update_body(1)
 	if(vital)
 		owner.death()
 

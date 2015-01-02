@@ -5,22 +5,23 @@
 // EXTERNAL
 
 /obj/item/organ/external/chest
+	name = "upper body"
 	limb_name = "chest"
 	icon_name = "torso"
-	name = "chest"
 	health = 75
 	min_broken_damage = 35
 	body_part = UPPER_TORSO
 	vital = 1
-	amputation_point = "spines"
+	amputation_point = "spine"
 	joint = "neck"
 	dislocated = -1
 	min_sever_area = 25
+	gendered_icon = 1
 
 /obj/item/organ/external/groin
+	name = "lower body"
 	limb_name = "groin"
 	icon_name = "groin"
-	name = "groin"
 	health = 50
 	min_broken_damage = 20
 	body_part = LOWER_TORSO
@@ -30,6 +31,7 @@
 	joint = "hip"
 	dislocated = -1
 	min_sever_area = 25
+	gendered_icon = 1
 
 /obj/item/organ/external/arm
 	limb_name = "l_arm"
@@ -155,36 +157,7 @@
 	joint = "jaw"
 	amputation_point = "neck"
 	min_sever_area = 15
-
-/obj/item/organ/external/head/New()
-
-	..()
-
-	if(!istype(owner))
-		return
-
-	src.icon_state = owner.gender == MALE? "head_m" : "head_f"
-	//Add (facial) hair.
-	if(owner.f_style)
-		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
-		if(facial_hair_style)
-			var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-			if(facial_hair_style.do_colouration)
-				facial.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
-
-			overlays.Add(facial) // icon.Blend(facial, ICON_OVERLAY)
-
-	if(owner.h_style && !(owner.head && (owner.head.flags & BLOCKHEADHAIR)))
-		var/datum/sprite_accessory/hair_style = hair_styles_list[owner.h_style]
-		if(hair_style)
-			var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
-			if(hair_style.do_colouration)
-				hair.Blend(rgb(owner.r_hair, owner.g_hair, owner.b_hair), ICON_ADD)
-
-			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
-
-	name = "[owner.real_name]'s [name]"
-	owner.regenerate_icons()
+	gendered_icon = 1
 
 /obj/item/organ/external/head/removed()
 	if(owner)
