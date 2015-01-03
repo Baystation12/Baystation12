@@ -31,8 +31,6 @@ var/global/list/image/splatter_cache=list()
 	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
-	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
-		return // We handle our own drying.
 	if(src.type == /obj/effect/decal/cleanable/blood)
 		if(src.loc && isturf(src.loc))
 			for(var/obj/effect/decal/cleanable/blood/B in src.loc)

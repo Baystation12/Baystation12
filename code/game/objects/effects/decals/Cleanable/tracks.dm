@@ -143,11 +143,6 @@ var/global/list/image/fluidtrack_cache=list()
 			overlays += I
 		updatedtracks=0 // Clear our memory of updated tracks.
 
-/obj/effect/decal/cleanable/blood/tracks/New()
-	..()
-	spawn(DRYING_TIME)
-		dry()
-
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"
 	dryname = "dried footprints"
