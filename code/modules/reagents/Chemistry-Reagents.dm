@@ -1552,7 +1552,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(toxpwr)
 					M.adjustToxLoss(toxpwr*REM)
-					if(alien) ..() //Kind of a catch-all for aliens without kidneys.
+				if(alien) ..() // Kind of a catch-all for aliens without the liver. Because this does not metabolize 'naturally', only removed by the liver.
 				return
 
 		toxin/amatoxin
