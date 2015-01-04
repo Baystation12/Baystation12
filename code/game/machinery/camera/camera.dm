@@ -52,8 +52,10 @@
 	..()
 
 /obj/machinery/camera/Del()
-	if(!alarm_on)
-		triggerCameraAlarm()
+	// Tries to tell the location, but it's already been removed from the world.
+	// Runtimes like MAD
+	// if(!alarm_on)
+	//	triggerCameraAlarm()
 	
 	cancelCameraAlarm()
 	..()
