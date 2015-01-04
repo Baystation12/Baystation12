@@ -15,6 +15,12 @@
 
 	var/damtype = "brute"
 	var/force = 0
+	var/spawnchance = 100	// Chance that this object will really spawn into the world
+
+/obj/New()
+	..()
+	if(!prob(spawnchance))
+		del src
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
