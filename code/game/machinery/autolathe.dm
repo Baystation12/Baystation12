@@ -106,9 +106,6 @@
 		updateUsrDialog()
 		return
 
-	if(istype(O.loc, /obj/item/rig_module))
-		return
-
 	if (panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
 		if(istype(O, /obj/item/device/multitool) || istype(O, /obj/item/weapon/wirecutters))
