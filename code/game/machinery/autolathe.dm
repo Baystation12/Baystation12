@@ -117,6 +117,9 @@
 			dismantle()
 			return
 
+	if(O.loc != user && !(istype(O,/obj/item/stack)))
+		return 0
+
 	//Resources are being loaded.
 	var/obj/item/eating = O
 	if(!eating.matter)
