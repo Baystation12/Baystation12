@@ -127,8 +127,9 @@
 		return 0
 
 	working = 0
-	if(build_delay && (!user.Adjacent(T) || user.get_active_hand() != src || user.stat || user.restrained()))
-		return 0
+	if(build_delay && (!user.Adjacent(T) || user.stat || user.restrained()))
+		if(user.get_active_hand() != src && !istype(src,/obj/item/rig_module/device/rcd))
+			return 0
 
 	if(build_turf)
 		T.ChangeTurf(build_turf)
