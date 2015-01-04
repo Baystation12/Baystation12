@@ -52,10 +52,8 @@
 	..()
 
 /obj/machinery/camera/Del()
-	// Tries to tell the location, but it's already been removed from the world.
-	// Runtimes like MAD
-	// if(!alarm_on)
-	//	triggerCameraAlarm()
+	if(!alarm_on)
+		triggerCameraAlarm()
 	
 	cancelCameraAlarm()
 	..()
@@ -259,12 +257,18 @@
 
 /obj/machinery/camera/proc/triggerCameraAlarm()
 	alarm_on = 1
+	if(!get_area(src))
+		return
+	
 	for(var/mob/living/silicon/S in mob_list)
 		S.triggerAlarm("Camera", get_area(src), list(src), src)
 
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
 	alarm_on = 0
+	if(!get_area(src))
+		return
+	
 	for(var/mob/living/silicon/S in mob_list)
 		S.cancelAlarm("Camera", get_area(src), src)
 
