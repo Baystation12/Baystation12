@@ -5,7 +5,7 @@
 ---
 
 ### LICENSE
-Baystation is licensed under the GNU Affero General Public License version 3 as of ___ January 2015 any new contributions are licensed under the AGPL as well.  If you wish to use our code in a closed source manner you may use anything before commit ________ which is licensed under GPL v3.  The major change here is that if you host a server using any code licensed under AGPL you are required to provide full source code for your servers users as well including addons and modifications you have made.
+Baystation is licensed under the GNU Affero General Public License version 3 as of ___ January 2015 any new contributions are licensed under the AGPL as well, if you wish to submit code under the GPL v3 then commits and files must be marked as so in comments.  If you wish to use our code in a closed source manner you may use anything before commit ________ which is licensed under GPL v3.  The major change here is that if you host a server using any code licensed under AGPL you are required to provide full source code for your servers users as well including addons and modifications you have made.
 
 See [this](https://www.gnu.org/licenses/why-affero-gpl.html) for more information.
 
