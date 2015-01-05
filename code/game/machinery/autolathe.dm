@@ -23,7 +23,8 @@
 
 /obj/machinery/autolathe/interact(mob/user as mob)
 
-	if(..() || disabled)
+	if(..() || (disabled && !panel_open))
+		user << "\red \The [src] is disabled!"
 		return
 
 	if (shocked)
@@ -31,7 +32,7 @@
 
 	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
 
-	if(panel_open == 0)
+	if(!disabled)
 		dat += "<table width = '100%'>"
 		var/material_top = "<tr>"
 		var/material_bottom = "<tr>"
@@ -81,7 +82,7 @@
 
 		dat += "</table><hr>"
 	//Hacking.
-	else
+	if(panel_open)
 		dat += "<h2>Maintenance Panel</h2>"
 		dat += wires.GetInteractWindow()
 
