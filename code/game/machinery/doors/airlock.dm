@@ -1135,7 +1135,7 @@ About the new airlock wires panel:
 	update_icon()
 
 /obj/machinery/door/airlock/proc/hasPower()
-	return ((src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0) && !(stat & NOPOWER|BROKEN))
+	return ((src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0) && !(stat & (NOPOWER|BROKEN)))
 
 /obj/machinery/door/airlock/proc/prison_open()
 	src.unlock()
