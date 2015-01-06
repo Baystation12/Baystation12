@@ -139,20 +139,10 @@
 		if(I.unacidable)	//So the aliens don't destroy energy fields/singularies/other aliens/etc with their acid.
 			src << "<span class='alium'>You cannot dissolve this object.</span>"
 			return
-
 	// TURF CHECK
-	else if(istype(O, /turf/simulated))
-		var/turf/T = O
-		// R WALL
-		if(istype(T, /turf/simulated/wall/r_wall))
-			src << "<span class='alium'>You cannot dissolve this object.</span>"
-			return
-		// R FLOOR
-		if(istype(T, /turf/simulated/floor/engine))
-			src << "<span class='alium'>You cannot dissolve this object.</span>"
-			return
-		else// Not a type we can acid.
-			return
+	else if(istype(O, /turf/simulated/wall/r_wall) || istype(O, /turf/simulated/floor/engine))
+		src << "<span class='alium'>You cannot dissolve this object.</span>"
+		return
 
 	if(check_alien_ability(200,0,"acid gland"))
 		new /obj/effect/alien/acid(get_turf(O), O)

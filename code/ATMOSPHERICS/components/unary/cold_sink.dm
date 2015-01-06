@@ -13,12 +13,10 @@
 	var/heatsink_temperature = T20C	//the constant temperature resevoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600	//L
 
-	var/on = 0
 	use_power = 0
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
-	active_power_usage			//50 kW. The power rating of the freezer
 
-	var/max_power_usage = 20000 //power rating when the usage is turned up to 100
+	var/max_power_rating = 20000 //power rating when the usage is turned up to 100
 	var/power_setting = 100
 
 	var/set_temperature = T20C	//thermostat
@@ -37,7 +35,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 
-	active_power_usage = max_power_usage * (power_setting/100)
+	power_rating = max_power_rating * (power_setting/100)
 
 /obj/machinery/atmospherics/unary/freezer/initialize()
 	if(node) return
@@ -54,7 +52,7 @@
 
 /obj/machinery/atmospherics/unary/freezer/update_icon()
 	if(src.node)
-		if(src.on && cooling)
+		if(src.use_power && cooling)
 			icon_state = "freezer_1"
 		else
 			icon_state = "freezer"
@@ -71,7 +69,7 @@
 /obj/machinery/atmospherics/unary/freezer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
-	data["on"] = on ? 1 : 0
+	data["on"] = use_power ? 1 : 0
 	data["gasPressure"] = round(air_contents.return_pressure())
 	data["gasTemperature"] = round(air_contents.temperature)
 	data["minGasTemperature"] = 0
@@ -101,9 +99,8 @@
 
 /obj/machinery/atmospherics/unary/freezer/Topic(href, href_list)
 	if (href_list["toggleStatus"])
-		src.on = !src.on
+		src.use_power = !src.use_power
 		update_icon()
-		update_use_power(on)
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
@@ -119,31 +116,30 @@
 
 /obj/machinery/atmospherics/unary/freezer/process()
 	..()
-	if(stat & (NOPOWER|BROKEN) || !on)
+	if(stat & (NOPOWER|BROKEN) || !use_power)
 		cooling = 0
-		update_use_power(0)
 		update_icon()
 		return
 
 	if (network && air_contents.temperature > set_temperature)
 		cooling = 1
-		update_use_power(2)
 
 		var/heat_transfer = max( -air_contents.get_thermal_energy_change(set_temperature - 5), 0 )
 
 		//Assume the heat is being pumped into the hull which is fixed at heatsink_temperature
 		//not /really/ proper thermodynamics but whatever
 		var/cop = FREEZER_PERF_MULT * air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
-		heat_transfer = min(heat_transfer, cop * active_power_usage)	//limit heat transfer by available power
+		heat_transfer = min(heat_transfer, cop * power_rating)	//limit heat transfer by available power
 
 		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
 		if (debug)
 			visible_message("[src]: Removing [removed] W.")
 
+		use_power(power_rating)
+
 		network.update = 1
 	else
 		cooling = 0
-		update_use_power(1)
 
 	update_icon()
 
@@ -171,14 +167,14 @@
 	bin_rating /= bin_count
 	manip_rating /= manip_count
 
-	active_power_usage = initial(active_power_usage)*cap_rating			//more powerful
+	power_rating = initial(power_rating)*cap_rating			//more powerful
 	heatsink_temperature = initial(heatsink_temperature)/((manip_rating+bin_rating)/2)	//more efficient
 	air_contents.volume = max(initial(internal_volume) - 200, 0) + 200*bin_rating
 	set_power_level(power_setting)
 
 /obj/machinery/atmospherics/unary/freezer/proc/set_power_level(var/new_power_setting)
 	power_setting = new_power_setting
-	active_power_usage = max_power_usage * (power_setting/100)
+	power_rating = max_power_rating * (power_setting/100)
 
 //dismantling code. copied from autolathe
 /obj/machinery/atmospherics/unary/freezer/attackby(var/obj/item/O as obj, var/mob/user as mob)
