@@ -1141,6 +1141,8 @@
 
 	species.handle_post_spawn(src)
 
+	maxHealth = species.total_health
+
 	spawn(0)
 		regenerate_icons()
 		vessel.add_reagent("blood",560-vessel.total_volume)

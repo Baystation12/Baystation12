@@ -17,5 +17,6 @@ install:
   - cd ..
 
 script:
-  - $(for i in 1 2 3 4 5 6; do (grep -q 'step_[xy]' maps/exodus-$i.dmm; if [ $? -eq 1 ]; then exit 0; else exit 1; fi) done)
+  - shopt -s globstar
+  - (! grep 'step_[xy]' maps/**/*.dmm)
   - DreamMaker baystation12.dme

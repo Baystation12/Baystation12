@@ -22,14 +22,12 @@
 
 	level = 1
 
-	use_power = 1
+	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-	var/last_power_draw = 0
+	power_rating = 7500			//7500 W ~ 10 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER //connects to regular, supply and scrubbers pipes
 
-	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
 
 	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
@@ -77,7 +75,7 @@
 	if(!powered())
 		vent_icon += "off"
 	else
-		vent_icon += "[on ? "[pump_direction ? "out" : "in"]" : "off"]"
+		vent_icon += "[use_power ? "[pump_direction ? "out" : "in"]" : "off"]"
 
 	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
 
@@ -106,10 +104,10 @@
 /obj/machinery/atmospherics/binary/dp_vent_pump/process()
 	..()
 
-	if(stat & (NOPOWER|BROKEN) || !on)
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_power_draw = 0
-		last_flow_rate = 0
+	last_power_draw = 0
+	last_flow_rate = 0
+
+	if(stat & (NOPOWER|BROKEN) || !use_power)
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -122,35 +120,25 @@
 	if(pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
 			if (node1 && (environment.temperature || air1.temperature))
-				var/output_volume = environment.volume * environment.group_multiplier
-				var/air_temperature = environment.temperature? environment.temperature : air1.temperature
-				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-
-				power_draw = pump_gas(src, air1, environment, transfer_moles, active_power_usage)
+				var/transfer_moles = calculate_transfer_moles(air1, environment)
+				power_draw = pump_gas(src, air1, environment, transfer_moles, power_rating)
 
 				if(power_draw >= 0 && network1)
 					network1.update = 1
 		else //external -> internal
 			if (node2 && (environment.temperature || air2.temperature))
-				var/output_volume = air2.volume + (network2? network2.volume : 0)
-				var/air_temperature = air2.temperature? air2.temperature : environment.temperature
-				var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+				var/transfer_moles = calculate_transfer_moles(environment, air2, (network2)? network2.volume : 0)
 
 				//limit flow rate from turfs
 				transfer_moles = min(transfer_moles, environment.total_moles*air2.volume/environment.volume)	//group_multiplier gets divided out here
-
-				power_draw = pump_gas(src, environment, air2, transfer_moles, active_power_usage)
+				power_draw = pump_gas(src, environment, air2, transfer_moles, power_rating)
 
 				if(power_draw >= 0 && network2)
 					network2.update = 1
 
-	if (power_draw < 0)
-		last_power_draw = 0
-		last_flow_rate = 0
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-	else
-		last_power_draw = handle_power_draw(power_draw)
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 
 	return 1
 
@@ -191,7 +179,7 @@
 	signal.data = list(
 		"tag" = id,
 		"device" = "ADVP",
-		"power" = on,
+		"power" = use_power,
 		"direction" = pump_direction?("release"):("siphon"),
 		"checks" = pressure_checks,
 		"input" = input_pressure_min,
@@ -223,10 +211,10 @@
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
 	if(signal.data["power"])
-		on = text2num(signal.data["power"])
+		use_power = text2num(signal.data["power"])
 
 	if(signal.data["power_toggle"])
-		on = !on
+		use_power = !use_power
 
 	if(signal.data["direction"])
 		pump_direction = text2num(signal.data["direction"])
