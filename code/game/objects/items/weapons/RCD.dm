@@ -123,11 +123,14 @@
 	user << "[(deconstruct ? "Deconstructing" : "Building")] [build_type]..."
 
 	if(build_delay && !do_after(user, build_delay))
+		if(user)
+			user << "You gave up [(deconstruct ? "deconstructing" : "building")] [build_type]."
 		working = 0
 		return 0
 
 	working = 0
-	if(build_delay && (!user.Adjacent(T) || user.get_active_hand() != src || user.stat || user.restrained()))
+	if(build_delay && (!user.Adjacent(T) || !check_safety(user) || user.stat || user.restrained()))
+		user << "You failed [(deconstruct ? "deconstructing" : "building")] [build_type]."
 		return 0
 
 	if(build_turf)
@@ -139,6 +142,10 @@
 
 	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 	return 1
+
+// People always need to keep their thumb on the safety button, except when mounted on a rig
+/obj/item/weapon/rcd/proc/check_safety(var/mob/user)
+	return user.get_active_hand() == src
 
 /obj/item/weapon/rcd_ammo
 	name = "compressed matter cartridge"
@@ -167,6 +174,9 @@
 
 /obj/item/weapon/rcd/borg/attackby()
 	return
+
+/obj/item/weapon/rcd/mounted/check_safety(var/mob/user)
+	return 1
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*30
