@@ -193,16 +193,16 @@
 		return
 
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		var/can_eat
 
+		var/can_eat
 		if((FAT in user.mutations) && ismonkey(affecting))
 			can_eat = 1
 		else
 			var/mob/living/carbon/human/H = user
-			if(istype(H) && iscarbon(affecting) && H.species.gluttonous)
+			if(istype(H) && H.species.gluttonous)
 				if(H.species.gluttonous == 2)
 					can_eat = 2
-				else if(!ishuman(affecting))
+				else if(!ishuman(affecting) && !ismonkey(affecting) && (affecting.small || iscarbon(affecting)))
 					can_eat = 1
 
 		if(can_eat)
