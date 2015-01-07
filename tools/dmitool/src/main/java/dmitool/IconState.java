@@ -19,6 +19,21 @@ public class IconState {
     int loop;
     String hotspot;
     boolean movement;
+
+    public String getInfoLine() {
+        String extraInfo = "";
+        if(rewind) extraInfo += " rewind";
+        if(frames != 1) {
+            extraInfo += " loop(" + (loop==-1 ? "infinite" : loop) + ")";
+        }
+        if(hotspot != null) extraInfo += " hotspot('" + hotspot + "')";
+        if(movement) extraInfo += " movement";
+        if(extraInfo.equals("")) {
+            return String.format("state \"%s\", %d dir(s), %d frame(s)", name, dirs, frames);
+        } else {
+            return String.format("state \"%s\", %d dir(s), %d frame(s),%s", name, dirs, frames, extraInfo);
+        }
+    }
     
     @Override public IconState clone() {
         IconState is = new IconState(name, dirs, frames, images.clone(), delays==null ? null : delays.clone(), rewind, loop, hotspot, movement);
@@ -148,7 +163,7 @@ public class IconState {
         out.end();
     }
     
-    public static IconState importFromPNG(DMI dmi, InputStream inS, String name) throws DMIException {
+    public static IconState importFromPNG(DMI dmi, InputStream inS, String name, float[] delays, boolean rewind, int loop, String hotspot, boolean movement) throws DMIException {
         int w = dmi.w;
         int h = dmi.h;
         
@@ -192,15 +207,8 @@ public class IconState {
             }
         }
         
-        float[] delays = null;
-        if(frames != 1) {
-            delays = new float[frames];
-            for(int i=0; i<delays.length; i++) {
-                delays[i] = 1;
-            }
-        }
         //public IconState(String name, int dirs, int frames, Image[] images, float[] delays, boolean rewind, int loop, String hotspot, boolean movement) {
-        return new IconState(name, dirs, frames, images, delays, false, -1, null, false);
+        return new IconState(name, dirs, frames, images, delays, rewind, loop, hotspot, movement);
         
     }
 }
