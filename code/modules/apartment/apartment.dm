@@ -721,6 +721,157 @@ area/shuttle/marina/elevator/groundfloor
 	desc = "A card used to provide ID and give access to apartments."
 	assignment = "Resident"
 
+/obj/item/weapon/card/id/apartment/a1
+	access = list(access_a1)
+
+/obj/item/weapon/card/id/apartment/a2
+	access = list(access_a2)
+
+/obj/item/weapon/card/id/apartment/a3
+	access = list(access_a3)
+
+/obj/item/weapon/card/id/apartment/a4
+	access = list(access_a4)
+
+/obj/item/weapon/card/id/apartment/a5
+	access = list(access_a5)
+
+/obj/item/weapon/card/id/apartment/a6
+	access = list(access_a6)
+
+/obj/item/weapon/card/id/apartment/a7
+	access = list(access_a7)
+
+/obj/item/weapon/card/id/apartment/a8
+	access = list(access_a8)
+
+/obj/item/weapon/card/id/apartment/a9
+	access = list(access_a9)
+
+/obj/item/weapon/card/id/apartment/a10
+	access = list(access_a10)
+
 /obj/item/weapon/card/id/apartment/a11
+	name = "A-11 resident card"
 	registered_name = "Vasily Surov"
 	access = list(access_a11)
+
+/obj/item/weapon/card/id/apartment/a12
+	access = list(access_a12)
+
+/obj/item/weapon/card/id/apartment/a13
+	access = list(access_a13)
+
+/obj/item/weapon/card/id/apartment/b1
+	access = list(access_b1)
+
+/obj/item/weapon/card/id/apartment/b2
+	access = list(access_b2)
+
+/obj/item/weapon/card/id/apartment/b3
+	access = list(access_b3)
+
+/obj/item/weapon/card/id/apartment/b4
+	access = list(access_b4)
+
+/obj/item/weapon/card/id/apartment/c1
+	access = list(access_c1)
+
+/obj/item/weapon/card/id/apartment/c2
+	access = list(access_c2)
+
+/obj/item/weapon/card/id/apartment/c3
+	access = list(access_c3)
+
+/obj/item/weapon/card/id/apartment/c4
+	access = list(access_c4)
+
+/obj/item/weapon/card/id/apartment/c5
+	access = list(access_c5)
+
+/obj/item/weapon/card/id/apartment/c6
+	access = list(access_c6)
+
+/obj/item/weapon/card/id/apartment/c7
+	access = list(access_c7)
+
+/obj/item/weapon/card/id/apartment/c8
+	access = list(access_c8)
+
+/obj/item/weapon/card/id/apartment/d1
+	access = list(access_d1)
+
+/obj/item/weapon/card/id/apartment/d2
+	access = list(access_d2)
+
+/obj/item/weapon/card/id/apartment/d3
+	access = list(access_d3)
+
+/obj/item/weapon/card/id/apartment/d4
+	access = list(access_d4)
+
+/obj/item/weapon/card/id/apartment/d5
+	access = list(access_d5)
+
+/obj/item/weapon/card/id/apartment/d6
+	access = list(access_d6)
+
+/obj/item/weapon/card/id/apartment/d7
+	access = list(access_d7)
+
+/obj/item/weapon/card/id/apartment/d9
+	access = list(access_d9)
+
+/obj/item/weapon/card/id/apartment/d10
+	access = list(access_d10)
+
+/obj/item/weapon/card/id/apartment/d11
+	access = list(access_d11)
+
+/obj/item/weapon/card/id/apartment/d12
+	access = list(access_d12)
+
+/obj/item/weapon/card/id/apartment/e1
+	access = list(access_e1)
+
+/obj/item/weapon/card/id/apartment/e2
+	access = list(access_e2)
+
+/obj/item/weapon/card/id/apartment/e3
+	access = list(access_e3)
+
+/obj/item/weapon/card/id/apartment/e4
+	access = list(access_e4)
+
+/obj/item/weapon/card/id/apartment/e5
+	access = list(access_e5)
+
+/obj/item/weapon/card/id/apartment/e6
+	access = list(access_e6)
+
+/obj/item/weapon/card/id/apartment/e7
+	access = list(access_e7)
+
+/obj/item/weapon/card/id/apartment/e8
+	access = list(access_e8)
+
+/obj/item/weapon/card/id/apartment/e9
+	access = list(access_e9)
+
+/obj/item/weapon/card/id/apartment/e10
+	access = list(access_e10)
+
+/obj/item/weapon/card/id/apartment/e11
+	access = list(access_e11)
+
+/obj/item/weapon/card/id/apartment/e12
+	access = list(access_e12)
+
+/obj/item/weapon/card/id/apartment/e13
+	access = list(access_e13)
+
+/obj/item/weapon/card/id/apartment/e14
+	access = list(access_e14)
+
+/obj/item/weapon/card/id/apartment/e15
+	access = list(access_e15)

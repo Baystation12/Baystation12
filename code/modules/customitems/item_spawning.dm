@@ -40,10 +40,10 @@
 					var/obj/item/weapon/card/id/I = Item
 					for(var/obj/item/weapon/card/id/C in M)
 						//default settings
-						I.name = "[M.real_name]'s ID Card ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
+//						I.name = "[M.real_name]'s ID Card ([M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role])"
 						I.registered_name = M.real_name
-						I.access = C.access
-						I.assignment = C.assignment
+//						I.access = C.access
+//						I.assignment = C.assignment
 						I.blood_type = C.blood_type
 						I.dna_hash = C.dna_hash
 						I.fingerprint_hash = C.fingerprint_hash
