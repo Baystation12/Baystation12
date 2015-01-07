@@ -675,7 +675,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			robolimb.brute_dam = brute_dam
 			robolimb.burn_dam = burn_dam
 			robolimb.OnUninstall()
-		organ.loc = owner.loc
+			organ.loc = owner.loc
 		update_damages()
 		destspawn = 1
 		//Robotic limbs explode if sabotaged.
