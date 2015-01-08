@@ -5,13 +5,12 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
-	unarmed_type = /datum/unarmed_attack/claws/strong
-	secondary_unarmed_type = /datum/unarmed_attack/bite/strong
+	unarmed_types = list(/datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
 
 	has_fine_manipulation = 0
-	insulated = 1
+	siemens_coefficient = 0
 	gluttonous = 2
 
 	eyes = "blank_eyes"
@@ -26,7 +25,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags = NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
+	flags = IS_RESTRICTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 
@@ -87,17 +86,46 @@
 	if(!environment) return
 
 	if(environment.gas["phoron"] > 0 || locate(/obj/effect/alien/weeds) in T)
-		if(H.health >= H.maxHealth - H.getCloneLoss())
+		if(!regenerate(H))
 			var/datum/organ/internal/xenos/plasmavessel/P = H.internal_organs_by_name["plasma vessel"]
 			P.stored_plasma += weeds_plasma_rate
 			P.stored_plasma = min(max(P.stored_plasma,0),P.max_plasma)
-		else
-			H.adjustBruteLoss(-weeds_heal_rate)
-			H.adjustFireLoss(-weeds_heal_rate)
-			H.adjustOxyLoss(-weeds_heal_rate)
-			H.adjustToxLoss(-weeds_heal_rate)
 	..()
 
+/datum/species/xenos/proc/regenerate(var/mob/living/carbon/human/H)
+	var/heal_rate = weeds_heal_rate
+	var/mend_prob = 10
+	if (!H.resting)
+		heal_rate = weeds_heal_rate / 3
+		mend_prob = 1
+
+	//first heal damages
+	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
+		H.adjustBruteLoss(-heal_rate)
+		H.adjustFireLoss(-heal_rate)
+		H.adjustOxyLoss(-heal_rate)
+		H.adjustToxLoss(-heal_rate)
+		if (prob(5))
+			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
+		return 1
+
+	//next internal organs
+	for(var/datum/organ/internal/I in H.internal_organs)
+		if(I.damage > 0)
+			I.damage = max(I.damage - heal_rate, 0)
+			if (prob(5))
+				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
+			return 1
+
+	//next mend broken bones, approx 10 ticks each
+	for(var/datum/organ/external/E in H.bad_external_organs)
+		if (E.status & ORGAN_BROKEN)
+			if (prob(mend_prob))
+				if (E.mend_fracture())
+					H << "<span class='alium'>You feel something mend itself inside your [E.display_name].</span>"
+			return 1
+
+	return 0
 
 /datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
 	H.AddInfectionImages()
@@ -111,7 +139,7 @@
 	name = "Xenomorph Drone"
 	caste_name = "drone"
 	weeds_plasma_rate = 15
-	slowdown = 2
+	slowdown = 1
 	tail = "xenos_drone_tail"
 	rarity_value = 5
 
@@ -150,7 +178,7 @@
 	name = "Xenomorph Hunter"
 	weeds_plasma_rate = 5
 	caste_name = "hunter"
-	slowdown = -1
+	slowdown = -2
 	total_health = 150
 	tail = "xenos_hunter_tail"
 
@@ -178,7 +206,7 @@
 	name = "Xenomorph Sentinel"
 	weeds_plasma_rate = 10
 	caste_name = "sentinel"
-	slowdown = 1
+	slowdown = 0
 	total_health = 125
 	tail = "xenos_sentinel_tail"
 
@@ -210,7 +238,7 @@
 	weeds_heal_rate = 5
 	weeds_plasma_rate = 20
 	caste_name = "queen"
-	slowdown = 5
+	slowdown = 4
 	tail = "xenos_queen_tail"
 	rarity_value = 10
 
@@ -239,9 +267,6 @@
 		/mob/living/carbon/human/proc/neurotoxin,
 		/mob/living/carbon/human/proc/resin
 		)
-
-	//maxHealth = 250
-	//health = 250
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
 	..()

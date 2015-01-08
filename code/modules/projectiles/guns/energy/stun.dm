@@ -1,4 +1,3 @@
-
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
 	desc = "A small, low capacity gun used for non-lethal takedowns."
@@ -10,12 +9,6 @@
 	cell_type = "/obj/item/weapon/cell/crap"
 
 /obj/item/weapon/gun/energy/taser/cyborg
-	name = "taser gun"
-	desc = "A small, low capacity gun used for non-lethal takedowns."
-	icon_state = "taser"
-	fire_sound = 'sound/weapons/Taser.ogg'
-	charge_cost = 100
-	projectile_type = "/obj/item/projectile/beam/stun"
 	cell_type = "/obj/item/weapon/cell/secborg"
 	var/charge_tick = 0
 	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
@@ -107,5 +100,3 @@
 	force = 10
 	matter = list("metal" = 200000)
 	projectile_type = "/obj/item/projectile/energy/bolt/large"
-
-

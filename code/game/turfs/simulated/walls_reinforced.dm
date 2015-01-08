@@ -5,8 +5,9 @@
 	opacity = 1
 	density = 1
 
-	damage_cap = 200
+	damage_cap = 1000
 	max_temperature = 6000
+	armor = 0.1 // Only 10% damage from gunfire, it's made from strong alloys and stuff.
 
 	walltype = "rwall"
 
@@ -290,12 +291,7 @@
 		var/obj/item/light_fixture_frame/small/AH = W
 		AH.try_build(src)
 		return
-
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
-		return
-
+	
 	//Finally, CHECKING FOR FALSE WALLS if it isn't damaged
 	else if(!d_state)
 		return attack_hand(user)

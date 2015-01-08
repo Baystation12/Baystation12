@@ -12,14 +12,14 @@ em						{font-style: normal;font-weight: bold;}
 						{color: #638500;}
 
 .prefix					{font-weight: bold;}
-.log_message			{color: #789FC7;}
+.log_message			{color: #386AFF;	font-weight: bold;}
 
 /* OOC */
 .ooc					{font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
 .ooc .everyone			{color: #002eb8;}
-.ooc .looc				{color: #6699cc;}
+.ooc .looc				{color: #3A9696;}
 .ooc .elevated			{color: #2e78d9;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
@@ -29,12 +29,12 @@ em						{font-style: normal;font-weight: bold;}
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
 .pm  .out				{color: #B54A4A;}
-.pm  .other				{color: #498db6;}
+.pm  .other				{color: #164664;}
 
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}
-.mod_channel .admin		{color: #e40045;	font-weight: bold;}
-.admin_channel			{color: #402A14;	font-weight: bold;}
+.mod_channel .admin		{color: #b82e00;	font-weight: bold;}
+.admin_channel			{color: #9611D4;	font-weight: bold;}
 
 /* Radio: Misc */
 .deadsay				{color: #530FAD;}
@@ -63,6 +63,8 @@ h1.alert, h2.alert		{color: #000000;}
 
 .emote					{font-style: italic;}
 
+/* Game Messages */
+
 .attack					{color: #ff0000;}
 .moderate				{color: #CC0000;}
 .disarm					{color: #990000;}
@@ -73,12 +75,16 @@ h1.alert, h2.alert		{color: #000000;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
+.alium					{color: #00ff00;}
+
+/* Languages */
 
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
+.solcom					{color: #22228B;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}

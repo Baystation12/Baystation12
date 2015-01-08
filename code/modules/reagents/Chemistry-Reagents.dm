@@ -332,10 +332,9 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/human = M
-					if(human.dna.mutantrace == null)
-						M << "\red Your flesh rapidly mutates!"
-						human.dna.mutantrace = "slime"
-						human.update_mutantrace()
+					if(human.species.name != "Slime")
+						M << "<span class='danger'>Your flesh rapidly mutates!</span>"
+						human.set_species("Slime")
 				..()
 				return
 
@@ -380,7 +379,7 @@ datum
 			id = "inaprovaline"
 			description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#00BFFF" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE*2
 			scannable = 1
 
@@ -1318,9 +1317,9 @@ datum
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 
-					//Peridaxon is hard enough to get, it's probably fair to make this all internal organs
+					//Peridaxon heals only non-robotic organs
 					for(var/datum/organ/internal/I in H.internal_organs)
-						if(I.damage > 0)
+						if((I.damage > 0) && (I.robotic != 2))
 							I.damage = max(I.damage - 0.20, 0)
 				..()
 				return
@@ -1553,7 +1552,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(toxpwr)
 					M.adjustToxLoss(toxpwr*REM)
-					if(alien) ..() //Kind of a catch-all for aliens without kidneys.
+				if(alien) ..() // Kind of a catch-all for aliens without the liver. Because this does not metabolize 'naturally', only removed by the liver.
 				return
 
 		toxin/amatoxin
@@ -1595,7 +1594,7 @@ datum
 			id = "phoron"
 			description = "Phoron in its liquid form."
 			reagent_state = LIQUID
-			color = "#00BFFF" // rgb: 231, 27, 0
+			color = "#9D14DB"
 			toxpwr = 3
 
 			on_mob_life(var/mob/living/M as mob)

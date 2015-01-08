@@ -38,7 +38,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	Attach(M)
 
 /obj/item/clothing/mask/facehugger/New()
-	if(aliens_allowed)
+	if(config.aliens_allowed)
 		..()
 	else
 		del(src)
@@ -96,8 +96,8 @@ var/const/MAX_ACTIVE_TIME = 400
 	..()
 	if(stat == CONSCIOUS)
 		icon_state = "[initial(icon_state)]"
-		Attach(hit_atom)
 		throwing = 0
+	GoIdle(30,100) //stunned for a few seconds - allows throwing them to be useful for positioning but not as an offensive action (unless you're setting up a trap)
 
 /obj/item/clothing/mask/facehugger/proc/Attach(M as mob)
 
@@ -124,12 +124,14 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	L.visible_message("\red \b [src] leaps at [L]'s face!")
 
+	/* Tentatively removed since huggers can't be thrown anymore
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			H.visible_message("\red \b [src] smashes against [H]'s [H.head]!")
 			Die()
 			return
+	*/
 
 	if(iscarbon(M))
 		var/mob/living/carbon/target = L
@@ -191,7 +193,7 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	return
 
-/obj/item/clothing/mask/facehugger/proc/GoIdle()
+/obj/item/clothing/mask/facehugger/proc/GoIdle(var/min_time=MIN_ACTIVE_TIME, var/max_time=MAX_ACTIVE_TIME)
 	if(stat == DEAD || stat == UNCONSCIOUS)
 		return
 
@@ -200,7 +202,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	stat = UNCONSCIOUS
 	icon_state = "[initial(icon_state)]_inactive"
 
-	spawn(rand(MIN_ACTIVE_TIME,MAX_ACTIVE_TIME))
+	spawn(rand(min_time,max_time))
 		GoActive()
 	return
 

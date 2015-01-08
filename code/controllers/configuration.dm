@@ -83,6 +83,7 @@
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 
+	var/guests_allowed = 1
 	var/debugparanoid = 0
 
 	var/server
@@ -118,6 +119,8 @@
 
 	var/use_loyalty_implants = 0
 
+	var/welder_vision = 1
+
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
 	var/run_speed = 0
@@ -145,6 +148,8 @@
 
 	var/comms_password = ""
 
+	var/enter_allowed = 1
+
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
 	var/main_irc = ""
@@ -170,6 +175,12 @@
 	// 15, 45, 70 minutes respectively
 	var/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 9000,	EVENT_LEVEL_MODERATE = 27000,	EVENT_LEVEL_MAJOR = 42000)
 
+	var/aliens_allowed = 0
+	var/ninjas_allowed = 0
+	var/abandon_allowed = 1
+	var/ooc_allowed = 1
+	var/dooc_allowed = 1
+	var/dsay_allowed = 1
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -367,7 +378,22 @@
 					config.guest_jobban = 1
 
 				if ("guest_ban")
-					guests_allowed = 0
+					config.guests_allowed = 0
+
+				if ("disable_ooc")
+					config.ooc_allowed = 0
+
+				if ("disable_entry")
+					config.enter_allowed = 0
+
+				if ("disable_dead_ooc")
+					config.dooc_allowed = 0
+
+				if ("disable_dsay")
+					config.dsay_allowed = 0
+
+				if ("disable_respawn")
+					config.abandon_allowed = 0
 
 				if ("usewhitelist")
 					config.usewhitelist = 1
@@ -380,6 +406,12 @@
 
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
+
+				if ("aliens_allowed")
+					config.aliens_allowed = 1
+
+				if ("ninjas_allowed")
+					config.ninjas_allowed = 1
 
 				if ("objectives_disabled")
 					config.objectives_disabled = 1
@@ -504,11 +536,6 @@
 				if("python_path")
 					if(value)
 						config.python_path = value
-					else
-						if(world.system_type == UNIX)
-							config.python_path = "/usr/bin/env python2"
-						else //probably windows, if not this should work anyway
-							config.python_path = "python"
 
 				if("use_lib_nudge")
 					config.use_lib_nudge = 1
@@ -548,6 +575,9 @@
 
 				if("expected_round_length")
 					config.expected_round_length = MinutesToTicks(text2num(value))
+
+				if("disable_welder_vision")
+					config.welder_vision = 0
 
 				if("event_custom_start_mundane")
 					var/values = text2numlist(value, ";")
@@ -741,3 +771,11 @@
 			runnable_modes[M] = probabilities[M.config_tag]
 			//world << "DEBUG: runnable_mode\[[runnable_modes.len]\] = [M.config_tag]"
 	return runnable_modes
+
+/datum/configuration/proc/post_load()
+	//apply a default value to config.python_path, if needed
+	if (!config.python_path)
+		if(world.system_type == UNIX)
+			config.python_path = "/usr/bin/env python2"
+		else //probably windows, if not this should work anyway
+			config.python_path = "python"

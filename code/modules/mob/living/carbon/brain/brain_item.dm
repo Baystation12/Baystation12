@@ -14,6 +14,7 @@
 	prosthetic_name = "cyberbrain"
 	prosthetic_icon = "brain-prosthetic"
 	organ_tag = "brain"
+	organ_type = /datum/organ/internal/brain
 
 	var/mob/living/carbon/brain/brainmob = null
 
@@ -30,7 +31,7 @@
 			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/brain/proc/transfer_identity(var/mob/living/carbon/H)
-	name = "[H]'s brain"
+	name = "\the [H]'s [initial(src.name)]"
 	brainmob = new(src)
 	brainmob.name = H.real_name
 	brainmob.real_name = H.real_name
@@ -39,7 +40,7 @@
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
-	brainmob << "\blue You feel slightly disoriented. That's normal when you're just a brain."
+	brainmob << "<span class='notice'>You feel slightly disoriented. That's normal when you're just a [initial(src.name)].</span>"
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/brain/examine(mob/user) // -- TLE
@@ -73,3 +74,22 @@
 			brainmob.mind.transfer_to(target)
 		else
 			target.key = brainmob.key
+	..()
+
+/obj/item/organ/brain/slime
+	name = "slime core"
+	desc = "A complex, organic knot of jelly and crystalline particles."
+	prosthetic_name = null
+	prosthetic_icon = null
+	robotic = 2
+	icon = 'icons/mob/slimes.dmi'
+	icon_state = "green slime extract"
+
+/obj/item/organ/brain/golem
+	name = "chem"
+	desc = "A tightly furled roll of paper, covered with indecipherable runes."
+	prosthetic_name = null
+	prosthetic_icon = null
+	robotic = 2
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "scroll"

@@ -4,7 +4,7 @@
 var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda
-	name = "PDA"
+	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
@@ -28,7 +28,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/fon = 0 //Is the flashlight function on?
 	var/f_lum = 2 //Luminosity for the flashlight function
 	var/message_silent = 0 //To beep or not to beep, that is the question
-	var/news_silent = 0 //To beep or not to beep, that is the question
+	var/news_silent = 1 //To beep or not to beep, that is the question.  The answer is No.
 	var/toff = 0 //If 1, messenger disabled
 	var/tnote[0]  //Current Texts
 	var/last_text //No text spamming
@@ -118,6 +118,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/heads
 	default_cartridge = /obj/item/weapon/cartridge/head
 	icon_state = "pda-h"
+	news_silent = 1
 
 /obj/item/device/pda/heads/hop
 	default_cartridge = /obj/item/weapon/cartridge/hop
@@ -190,7 +191,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
 	message_silent = 1 //Quiet in the library!
-	news_silent = 1
+	news_silent = 0		// Librarian is above the law!  (That and alt job title is reporter)
 
 /obj/item/device/pda/clear
 	icon_state = "pda-transp"
@@ -789,7 +790,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Toggle Door")
 			if(cartridge && cartridge.access_remote_door)
-				for(var/obj/machinery/door/poddoor/M in world)
+				for(var/obj/machinery/door/blast/M in world)
 					if(M.id == cartridge.remote_door_id)
 						if(M.density)
 							M.open()
@@ -1023,7 +1024,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/new_info(var/beep_silent, var/message_tone, var/reception_message)
 	if (!beep_silent)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-		for (var/mob/O in hearers(3, loc))
+		for (var/mob/O in hearers(2, loc))
 			O.show_message(text("\icon[src] *[message_tone]*"))
 	//Search for holder of the PDA.
 	var/mob/living/L = null
@@ -1041,8 +1042,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/new_news(var/message)
 	new_info(news_silent, newstone, news_silent ? "" : "\icon[src] <b>[message]</b>")
 
-	new_news = 1
-	update_icon()
+	if(!news_silent)
+		new_news = 1
+		update_icon()
 
 /obj/item/device/pda/ai/new_news(var/message)
 	// Do nothing
@@ -1343,20 +1345,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	..()
 
 /obj/item/device/pda/clown/Crossed(AM as mob|obj) //Clown PDA is slippery.
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if ((istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP)) || M.m_intent == "walk")
-			return
+	if (istype(AM, /mob/living))
+		var/mob/living/M = AM
 
-		if ((istype(M, /mob/living/carbon/human) && (M.real_name != src.owner) && (istype(src.cartridge, /obj/item/weapon/cartridge/clown))))
-			if (src.cartridge.charges < 5)
+		if(M.slip("the PDA",8) && M.real_name != src.owner && istype(src.cartridge, /obj/item/weapon/cartridge/clown))
+			if(src.cartridge.charges < 5)
 				src.cartridge.charges++
-
-		M.stop_pulling()
-		M << "\blue You slipped on the PDA!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(8)
-		M.Weaken(5)
 
 /obj/item/device/pda/proc/available_pdas()
 	var/list/names = list()
@@ -1391,7 +1385,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 //Some spare PDAs in a box
 /obj/item/weapon/storage/box/PDAs
-	name = "spare PDAs"
+	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"

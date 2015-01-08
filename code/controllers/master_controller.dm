@@ -84,7 +84,7 @@ datum/controller/game_controller/proc/setup()
 		if(ticker)
 			ticker.pregame()
 
-	lighting_controller.Initialize()
+	lighting_controller.initializeLighting()
 
 
 datum/controller/game_controller/proc/setup_objects()

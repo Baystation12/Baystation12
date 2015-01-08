@@ -815,6 +815,11 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 2
 
+/*/datum/gear/combitool
+	display_name = "combi-tool"
+	path = /obj/item/weapon/combitool
+	cost = 3*/
+
 // Stuff worn on the ears. Items here go in the "ears" sort_category but they must not use
 // the slot_r_ear or slot_l_ear as the slot, or else players will spawn with no headset.
 /datum/gear/skrell_chain

@@ -29,7 +29,6 @@ effective or pretty fucking useless.
 	var/times_used = 0 //Number of times it's been used.
 	var/max_uses = 2
 
-
 /obj/item/device/batterer/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
 	if(!user) 	return
 	if(times_used >= max_uses)
@@ -55,7 +54,3 @@ effective or pretty fucking useless.
 	times_used += 1
 	if(times_used >= max_uses)
 		icon_state = "battererburnt"
-
-
-
-

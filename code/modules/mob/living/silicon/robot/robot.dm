@@ -182,7 +182,7 @@ var/list/robot_verbs_default = list(
 		lawsync()
 		photosync()
 
-/mob/living/silicon/robot/drain_power(var/drain_check)
+/mob/living/silicon/robot/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -190,14 +190,15 @@ var/list/robot_verbs_default = list(
 	if(!cell || !cell.charge)
 		return 0
 
-	if(cell.charge)
-		src << "<span class='danger'>Warning: Unauthorized access through power channel 12 detected.</span>"
-		var/drained_power = rand(200,400)
-		if(cell.charge < drained_power)
-			drained_power = cell.charge
-			cell.use(drained_power)
-			return drained_power
+	// Actual amount to drain from cell, using CELLRATE
+	var/cell_amount = amount * CELLRATE
 
+	if(cell.charge > cell_amount)
+		// Spam Protection
+		if(prob(10))
+			src << "<span class='danger'>Warning: Unauthorized access through power channel [rand(11,29)] detected!</span>"
+		cell.use(cell_amount)
+		return amount
 	return 0
 
 // setup the PDA and its name
@@ -895,6 +896,12 @@ var/list/robot_verbs_default = list(
 /mob/living/silicon/robot/attack_hand(mob/user)
 
 	add_fingerprint(user)
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.can_shred(H))
+			attack_generic(H, rand(30,50), "slashed")
+			return
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/datum/robot_component/cell_component = components["power cell"]

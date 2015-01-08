@@ -146,7 +146,7 @@ datum/nano_item_lists
 */
 
 /obj/item/device/uplink/hidden
-	name = "Hidden Uplink."
+	name = "hidden uplink"
 	desc = "There is something wrong if you're examining this."
 	var/active = 0
 

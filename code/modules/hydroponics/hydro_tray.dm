@@ -13,7 +13,7 @@
 
 	// Plant maintenance vars.
 	var/waterlevel = 100       // Water (max 100)
-	var/nutrilevel = 100       // Nutrient (max 100)
+	var/nutrilevel = 10        // Nutrient (max 10)
 	var/pestlevel = 0          // Pests (max 10)
 	var/weedlevel = 0          // Weeds (max 10)
 
@@ -88,7 +88,7 @@
 		"adminordrazine" =  1,
 		"milk" =            0.9,
 		"beer" =            0.7,
-		"flourine" =       -0.5,
+		"fluorine" =       -0.5,
 		"chlorine" =       -0.5,
 		"phosphorus" =     -0.5,
 		"water" =           1,

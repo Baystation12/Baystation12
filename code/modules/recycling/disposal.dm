@@ -5,9 +5,9 @@
 // Automatically recharges air (unless off), will flush when ready if pre-set
 // Can hold items and human size things, no other draggables
 // Toilets are a type of disposal bin for small objects only and work on magic. By magic, I mean torque rotation
-#define SEND_PRESSURE 50 //kPa
+#define SEND_PRESSURE 50 + ONE_ATMOSPHERE //kPa - assume the inside of a dispoal pipe is 1 atm
 #define PRESSURE_TANK_VOLUME 70	//L - a 0.3 m diameter * 1 m long cylindrical tank. Happens to be the same volume as the regular oxygen tanks, so seems appropriate.
-#define PUMP_MAX_FLOW_RATE 50	//L/s - 8 m/s using a 15 cm by 15 cm inlet
+#define PUMP_MAX_FLOW_RATE 100	//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -362,18 +362,13 @@
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1)		// if off or ready, no need to charge
+	if(mode != 1) //if off or ready, no need to charge
 		update_use_power(1)
-		return
-
-	// otherwise charge
-	src.pressurize()
-
-	// if full enough, switch to ready mode
-	if(air_contents.return_pressure() >= SEND_PRESSURE)
-		mode = 2
+	else if(air_contents.return_pressure() >= SEND_PRESSURE)
+		mode = 2 //if full enough, switch to ready mode
 		update()
-	return
+	else
+		src.pressurize() //otherwise charge
 
 /obj/machinery/disposal/proc/pressurize()
 	if(stat & NOPOWER)			// won't charge if no power
@@ -388,11 +383,8 @@
 		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 1	//don't force update - easier on CPU
-	else
-		handle_power_draw(power_draw)
+	if (power_draw > 0)
+		use_power(power_draw)
 
 // perform a flush
 /obj/machinery/disposal/proc/flush()
