@@ -15,3 +15,12 @@
 	..()
 	species = all_species["Diona"]
 	verbs += /mob/living/carbon/alien/diona/proc/merge
+
+/mob/living/cabon/alien/diona/start_pulling(var/atom/movable/AM)
+	//TODO: Collapse these checks into one proc (see pai and drone)
+	if(istype(AM,/obj/item))
+		var/obj/item/O = AM
+		if(O.w_class == 1)
+			..()
+		else
+			src << "<span class='warning'>You are too small to pull that.</span>"
