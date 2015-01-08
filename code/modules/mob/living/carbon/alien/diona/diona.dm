@@ -20,10 +20,14 @@
 	//TODO: Collapse these checks into one proc (see pai and drone)
 	if(istype(AM,/obj/item))
 		var/obj/item/O = AM
-		if(O.w_class == 1)
-			..()
-		else
+		if(O.w_class > 2)
 			src << "<span class='warning'>You are too small to pull that.</span>"
+			return
+		else
+			..()
+	else
+		src << "<span class='warning'>You are too small to pull that.</span>"
+		return
 
 /mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
