@@ -16,7 +16,7 @@
 	species = all_species["Diona"]
 	verbs += /mob/living/carbon/alien/diona/proc/merge
 
-/mob/living/cabon/alien/diona/start_pulling(var/atom/movable/AM)
+/mob/living/carbon/alien/diona/start_pulling(var/atom/movable/AM)
 	//TODO: Collapse these checks into one proc (see pai and drone)
 	if(istype(AM,/obj/item))
 		var/obj/item/O = AM
@@ -25,6 +25,6 @@
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
 
-/mob/living/cabon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
+/mob/living/carbon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
 	return 1
