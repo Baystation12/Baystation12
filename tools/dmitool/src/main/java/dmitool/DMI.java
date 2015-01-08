@@ -419,6 +419,12 @@ public class DMI implements Comparator<IconState> {
     public void printInfo() {
         System.out.println(totalImages + " images, " + images.size() + " states, size "+w+"x"+h);
     }
+    
+    public void printStateList() {
+        for(IconState s: images) {
+            System.out.println(s.getInfoLine());
+        }
+    }
 
     @Override public boolean equals(Object obj) {
         if(obj == this) return true;
