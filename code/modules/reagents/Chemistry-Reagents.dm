@@ -261,7 +261,7 @@ datum
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
-					S.apply_water()
+					S.apply_water(volume)
 
 		water/holywater
 			name = "Holy Water"

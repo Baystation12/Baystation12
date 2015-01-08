@@ -1,6 +1,5 @@
 /mob/living/carbon/slime/emote(var/act, var/m_type=1, var/message = null)
 
-
 	if (findtext(act, "-", 1, null))
 		var/t1 = findtext(act, "-", 1, null)
 		//param = copytext(act, t1 + 1, length(act) + 1)
@@ -68,9 +67,7 @@
 		if (m_type & 1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(message, m_type)
-				//Foreach goto(703)
 		else
 			for(var/mob/O in hearers(src, null))
 				O.show_message(message, m_type)
-				//Foreach goto(746)
 	return
