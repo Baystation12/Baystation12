@@ -24,3 +24,7 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
+
+/mob/living/cabon/alien/diona/put_in_hands(var/obj/item/W) // No hands.
+	W.loc = get_turf(src)
+	return 1
