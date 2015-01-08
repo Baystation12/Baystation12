@@ -1040,8 +1040,7 @@
 
 				if(halloss > 100)
 					src << "<span class='notice'>You're in too much pain to keep going...</span>"
-					for(var/mob/O in oviewers(src, null))
-						O.show_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.", 1)
+					src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
 					Paralyse(10)
 					setHalLoss(99)
 
