@@ -23,6 +23,11 @@ var/list/robot_verbs_default = list(
 	var/integrated_light_power = 6
 	var/datum/wires/robot/wires
 
+//Icon stuff
+
+	var/icontype //Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
+
 //Hud stuff
 
 	var/obj/screen/cells = null
@@ -109,6 +114,8 @@ var/list/robot_verbs_default = list(
 	robot_modules_background.icon_state = "block"
 	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
+	module_sprites["Basic"] = "robot"
+	icontype = "Default"
 	updatename("Default")
 	updateicon()
 
@@ -208,11 +215,10 @@ var/list/robot_verbs_default = list(
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-
 	if(module)
 		return
 
+	module_sprites = list()
 	switch(modtype)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
@@ -966,7 +972,7 @@ var/list/robot_verbs_default = list(
 	if(stat == 0)
 		overlays += "eyes"
 		overlays.Cut()
-		overlays += "eyes-[icon_state]"
+		overlays += "eyes-[module_sprites[icontype]]"
 	else
 		overlays -= "eyes"
 
@@ -987,15 +993,13 @@ var/list/robot_verbs_default = list(
 			overlays += "ov-openpanel -c"
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		overlays += "[icon_state]-shield"
+		overlays += "[module_sprites[icontype]]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "[module_sprites[icontype]]-roll"
 		else
-			icon_state = base_icon
+			icon_state = module_sprites[icontype]
 		return
 
 //Call when target overlay should be added/removed
@@ -1227,8 +1231,6 @@ var/list/robot_verbs_default = list(
 		return
 	else
 		triesleft--
-
-	var/icontype
 
 	if (custom_sprite == 1)
 		icontype = "Custom"
