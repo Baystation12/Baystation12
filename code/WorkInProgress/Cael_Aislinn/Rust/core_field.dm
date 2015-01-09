@@ -111,7 +111,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	//init values
 	major_radius = field_strength * 0.21875// max = 8.75
 	minor_radius = field_strength * 0.2125// max = 8.625
-	volume_covered = PI * major_radius * minor_radius * 2.5 * 2.5 * 1000
+	volume_covered = M_PI * major_radius * minor_radius * 2.5 * 2.5 * 1000
 
 	processing_objects.Add(src)
 
@@ -131,7 +131,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	var/transfer_ratio = field_strength / 50			//higher field strength will result in faster phoron aggregation
 	major_radius = field_strength * 0.21875// max = 8.75m
 	minor_radius = field_strength * 0.2125// max = 8.625m
-	volume_covered = PI * major_radius * minor_radius * 2.5 * 2.5 * 2.5 * 7 * 7 * transfer_ratio	//one tile = 2.5m*2.5m*2.5m
+	volume_covered = M_PI * major_radius * minor_radius * 2.5 * 2.5 * 2.5 * 7 * 7 * transfer_ratio	//one tile = 2.5m*2.5m*2.5m
 
 	//add phoron from the surrounding environment
 	var/datum/gas_mixture/environment = loc.return_air()
