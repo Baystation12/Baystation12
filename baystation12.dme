@@ -1198,6 +1198,7 @@
 #include "code\modules\power\apc.dm"
 #include "code\modules\power\batteryrack.dm"
 #include "code\modules\power\breaker_box.dm"
+#include "code\modules\power\bullshit.dm"
 #include "code\modules\power\cable.dm"
 #include "code\modules\power\cable_heavyduty.dm"
 #include "code\modules\power\cell.dm"
