@@ -169,3 +169,43 @@
 		"\red Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.display_name] with the [tool]!")
 
 		//no damage or anything, just wastes medicine
+
+/datum/surgery_step/hardsuit
+	allowed_tools = list(
+		/obj/item/weapon/weldingtool = 80,
+		/obj/item/weapon/circular_saw = 60,
+		/obj/item/weapon/pickaxe/plasmacutter = 100
+		)
+
+	can_infect = 0
+	blood_level = 0
+
+	min_duration = 120
+	max_duration = 180
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if(!istype(target))
+			return 0
+		if(istype(tool,/obj/item/weapon/weldingtool))
+			var/obj/item/weapon/weldingtool/welder = tool
+			if(!welder.isOn())
+				return 0
+		return (target_zone == "chest") && istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)
+
+	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		user.visible_message("[user] starts cutting through the support systems of [target]'s [target.back] with \the [tool]." , \
+		"You start cutting through the support systems of [target]'s [target.back] with \the [tool].")
+		..()
+
+	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+
+		var/obj/item/weapon/rig/rig = target.back
+		if(!istype(rig))
+			return
+		rig.reset()
+		user.visible_message("<span class='notice'>[user] has cut through the support systems of [target]'s [rig] with \the [tool].</span>", \
+			"<span class='notice'>You have cut through the support systems of [target]'s [rig] with \the [tool].</span>")
+
+	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		user.visible_message("<span class='danger'>[user]'s [tool] can't quite seem to get through the metal...</span>", \
+		"<span class='danger'>Your [tool] can't quite seem to get through the metal. It's weakening, though - try again.</span>")
