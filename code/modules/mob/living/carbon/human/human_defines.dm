@@ -68,6 +68,8 @@
 
 	var/speech_problem_flag = 0
 
+	var/rotate_client_dir_effect = 0 //If set to 1 will rotate their client once each tick, if set to -1 will reset the client back to normal and then turn off.
+
 	var/miming = null //Toggle for the mime's abilities.
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 

@@ -1153,6 +1153,9 @@
 		if(!client)
 			return 0
 
+		if(rotate_client_dir_effect != 0)
+			rotate_client_dir()
+
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
@@ -1773,6 +1776,7 @@
 	if(..())
 		speech_problem_flag = 1
 	return stuttering
+
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

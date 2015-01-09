@@ -1300,3 +1300,61 @@
 	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
+
+
+
+//Kills the player after a set amount of time and messing with them.
+//After 51 seconds of torture, gibs them.
+
+/mob/living/carbon/human/proc/delayed_satisfaction(var/i=300)
+	spawn(i)
+		src <<  "<span class=\"warning\">A sudden sense of dread comes over you.  These are your last moments.</span>"
+		silent = 1
+		speech_problem_flag = 1
+
+		sleep(100) //10 second delay
+		druggy = 9001
+
+		sleep(50) //5 second delay
+		rotate_client_dir_effect = 1 //spins their client view every life() tick.
+		hallucination = 9001
+
+		sleep(150) //15 second delay
+		src <<  "<span class=\"warning\">Your stomach swells.</span>"
+
+		sleep(150) //15 second delay
+		hallucination = 0 //Just long enough so when we gib them everything is back to normal.
+
+		sleep(30) //3 second delay
+		src.visible_message("<span class=\"warning\">[name]'s face suddenly turns red as if they are being squeezed by a vice.</span>")
+		rotate_client_dir_effect = -1 //and Stops it but not before setting client dir_effect back to 0
+		src << "A moment of clarity.  Your life flies past your eyes and just like that, you are snuffed out."
+                
+		sleep(30) //3 second delay, and here we go...
+		gib()
+
+/mob/living/carbon/human/proc/rotate_client_dir()
+	if(!client)
+		return
+
+	if(rotate_client_dir_effect == -1)
+		client.dir = 1
+		rotate_client_dir_effect = 0
+		return
+
+	switch(client.dir)
+		if(1)
+			client.dir = 2
+			return
+		if(2)
+			client.dir = 4
+			return
+		if(4)
+			client.dir = 8
+			return
+		if(8)
+			client.dir = 1
+			return
+		else
+			client.dir = 1
+			return
