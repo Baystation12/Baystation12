@@ -372,3 +372,7 @@
 	message = capitalize(trim_left(message))
 
 	..(message, null, verb)
+
+/mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
+	W.loc = get_turf(src)
+	return 1

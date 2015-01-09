@@ -557,8 +557,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(src.invisibility != 0)
 		user.visible_message( \
-			"<span class='warning'>[user] drags ghost, [src], to our plan of reality!</span>", \
-			"<span class='warning'>You drag [src] to our plan of reality!</span>" \
+			"<span class='warning'>[user] drags ghost, [src], to our plane of reality!</span>", \
+			"<span class='warning'>You drag [src] to our plane of reality!</span>" \
 		)
 		toggle_visibility(1)
 	else

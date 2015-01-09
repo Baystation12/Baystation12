@@ -769,7 +769,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
 	if(brute_dam > min_broken_damage * config.organ_health_multiplier)
 		return 0	//will just immediately fracture again
-	
+
 	status &= ~ORGAN_BROKEN
 	return 1
 
@@ -1131,7 +1131,9 @@ obj/item/weapon/organ/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			if(istype(W,/obj/item/weapon/hemostat))
 				if(contents.len)
 					var/obj/item/removing = pick(contents)
-					removing.loc = src.loc
+					removing.loc = get_turf(user.loc)
+					if(!(user.l_hand && user.r_hand))
+						user.put_in_hands(removing)
 					if(istype(removing,/obj/item/organ))
 						var/obj/item/organ/removed_organ = removing
 						organs_internal -= removed_organ.organ_data
