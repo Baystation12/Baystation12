@@ -243,7 +243,7 @@
 			wound_flavor_text["[limb_descriptor]"] = "<span class='warning'><b>[t_He] is missing [t_his] [limb_descriptor].</b></span>\n"
 			continue
 
-		if(temp.is_damaged())
+		/*if(temp.is_damaged())
 			var/wound_string = ""
 			for(var/datum/tissue_layer/tissue_layer in temp.tissue_layers)
 				if(!tissue_layer.is_wounded())
@@ -252,8 +252,8 @@
 				for(var/datum/wound/wound in tissue_layer.wounds)
 					wound_string += "\[[wound.get_wound_descriptor()]\]"
 			if(wound_string != "")
-				wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_his] [limb_descriptor] has: [wound_string].</span>\n"
-		else if((temp.status & ORGAN_ROBOT) && !(species.flags & IS_SYNTHETIC))
+				wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_his] [limb_descriptor] has: [wound_string].</span>\n"*/
+		if((temp.status & ORGAN_ROBOT) && !(species.flags & IS_SYNTHETIC))
 			wound_flavor_text["[limb_descriptor]"] = "<span class='warning'>[t_He] has a robot [limb_descriptor]!</span>\n"
 
 	//Handles the text strings being added to the actual description.

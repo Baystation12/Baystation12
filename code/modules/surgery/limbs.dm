@@ -215,9 +215,9 @@
 			return 0
 
 		//If all layers are cut and retracted we can amputate.
-		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
-			if(!tissue_layer.is_open())
-				return 0
+		//for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
+		//	if(!tissue_layer.is_open())
+		//		return 0
 
 		return target_zone != "chest"
 

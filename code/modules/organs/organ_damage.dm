@@ -36,6 +36,7 @@
 // Cutting trauma is focused on a small area and hence wounds multiple layers of tissue.
 /obj/item/organ/external/proc/take_cutting_trauma(var/damage, var/sharp, var/weapon_area)
 
+	/*
 	var/list/cut_layers = list()
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		if(tissue_layer.tissue.can_cut_with(sharp))
@@ -63,10 +64,12 @@
 	if(cut_layers.len >= tissue_layers.len && weapon_area >= min_sever_area && weapon_area + spillover > thickest_layer)
 		status |= ORGAN_DESTROYED
 		droplimb()
+		*/
 	return 1
 
 // Blunt trauma is diffused over the topmost layer. Can cause wounds below the surface layer.
 /obj/item/organ/external/proc/take_blunt_trauma(var/damage, var/area)
+	/*
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		if(tissue_layer.wound_area >= tissue_layer.area)
 			continue // No more room for wounds.
@@ -84,15 +87,18 @@
 			return
 	if(owner)
 		owner.shock_stage += damage //If you can't wound them, dump it into pain.
+	*/
 
 // Burn trauma will cover the topmost layer as much as possible before harming deeper layers.
 /obj/item/organ/external/proc/take_burn_trauma(var/damage)
+	/*
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		damage -= tissue_layer.create_wound(WOUND_BURN, damage)
 		if(damage <= 0)
 			return
 	//If the entire surface area of every limb is burned, well, not much we else can do.
 	take_cutting_trauma((damage/2), 1, 1)
+	*/
 
 /obj/item/organ/internal/take_damage()
 	..()

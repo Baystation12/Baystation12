@@ -26,7 +26,7 @@
 	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary broken status.
 
 	var/obj/item/organ/external/parent // Organ that this organ is attached to.
-	var/list/tissue_layers = list()    // Layers comprising this organ.
+	var/list/wounds = list()           // Current wounds.
 	var/list/children                  // Sub-organs (hands, etc)
 	var/list/internal_organs           // Organs contained in this limb.
 	var/list/implants = list()         // Implanted devices.
@@ -34,16 +34,8 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
-/obj/item/organ/external/New(var/mob/living/carbon/human/H, var/spawn_robotic, var/list/tissue_types)
+/obj/item/organ/external/New(var/mob/living/carbon/human/H, var/spawn_robotic)
 	..()
-
-	tissue_layers = list()
-	for(var/tissue_layer in tissue_types)
-		tissue_layers += new /datum/tissue_layer(tissue_layer)
-
-	// Each tissue has a max area equivalent to the limb's health divided by number of tissues.
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		tissue_layer.area = round(max_health/tissue_layers.len)
 
 	spawn(1)
 		if(!istype(owner))
@@ -58,39 +50,22 @@
 
 // Check if organs are accessible.
 /obj/item/organ/external/proc/is_open(var/organs_accessible)
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.is_open())
-			if(!organs_accessible)
-				return 1
-			if(tissue_layer.tissue.flags & TISSUE_ORGAN_LAYER)
-				return 1
-		else
-			return 0
-	return 1
+	return
 
 // Get the most immediately accessible layer.
 /obj/item/organ/external/proc/get_surface_layer()
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.is_open())
-			continue
-		return tissue_layer
 	return
 
 // Checks if the tissue has an exposed tissue that can be infected.
 /obj/item/organ/external/proc/can_be_infected()
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(tissue_layer.is_wounded() && (tissue_layer.tissue.flags & TISSUE_INFECTS))
-			return 1
 	return 0
 
 /obj/item/organ/external/rejuvenate()
 	..()
 	damage_state = "00"
 
-	// Handle wounded tissue layers.
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		tissue_layer.wounds.Cut()
-		tissue_layer.update()
+	// Handle wounds.
+	wounds.Cut()
 
 	// Handle internal organs
 	for(var/obj/item/organ/internal/current_organ in internal_organs)
@@ -153,14 +128,14 @@
 //Updating wounds. Handles wound natural healing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
 
-	if((status & ORGAN_ROBOT)) //Robotic limbs don't heal or get worse.
+	if((status & ORGAN_ROBOT) || !wounds.len) //Robotic limbs don't heal or get worse.
 		return
 
 	var/healing = 10 //arbitrary, todo
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		if(!tissue_layer.wounds.len)
-			continue
-		healing = tissue_layer.handle_healing(healing)
+	for(var/datum/wound/wound in wounds)
+		if(healing <= 0)
+			break
+		healing = wound.heal(healing)
 
 	src.update_health()
 
@@ -170,16 +145,13 @@
 	burn_dam = 0
 
 	var/all_layers_broken = 1
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
+	for(var/datum/wound/wound in wounds)
+		if(wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_BRUISE)
+			brute_dam += wound.severity
+		else if(wound.wound_type == WOUND_BURN)
+			burn_dam += wound.severity
 
-		if(tissue_layer.wounds.len)
-			for(var/datum/wound/wound in tissue_layer.wounds)
-				if(wound.wound_type == WOUND_CUT || wound.wound_type == WOUND_BRUISE)
-					brute_dam += wound.severity
-				else if(wound.wound_type == WOUND_BURN)
-					burn_dam += wound.severity
-
-		if(tissue_layer.wound_area < tissue_layer.area)
+		if(wound.depth < owner.species.tissues.len)
 			all_layers_broken = 0
 
 	if(is_open() && is_bleeding())
@@ -219,10 +191,7 @@
 	for(var/implant in implants) //todo: check if this can be left alone
 		del(implant)
 
-	//Replace all wounds on that arm with one wound on parent organ.
-	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
-		tissue_layer.wounds.Cut()
-		tissue_layer.update()
+	wounds.Cut() //todo: wound on the parent organ
 
 	// Attached organs also fly off.
 	for(var/obj/item/organ/external/O in children)
@@ -347,7 +316,7 @@
 		return
 
 	var/embedded_in = 0 //Set this on a successful embed.
-	// Embed the object appropriately within the tissue layers.
+	/*// Embed the object appropriately within the tissue layers.
 	for(var/datum/tissue_layer/tissue_layer in tissue_layers)
 		var/datum/wound/wound = tissue_layer.is_cut()
 		if(wound)
@@ -360,7 +329,7 @@
 		if(user)
 			user.drop_from_inventory(W)
 		var/datum/tissue_layer/tissue_layer = tissue_layers[embedded_in]
-		do_embed(W, tissue_layer.tissue.descriptor, silent)
+		do_embed(W, tissue_layer.tissue.descriptor, silent)*/
 
 	return embedded_in
 

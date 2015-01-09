@@ -1082,15 +1082,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
+					break
 
 		affected.implants -= selection
-		affected.take_damage((selection.w_class * 3), 0, 0, 1, "Embedded object extraction")
+		for(var/datum/wound/wound in affected.wounds)
+			if(wound.embedded == selection)
+				wound.expand(selection.edge+rand(1,3),0,species.tissues.len)
+				H.shock_stage+=(20*wound.depth)
+				break
 
-		for(var/datum/tissue_layer/tissue_layer in affected.tissue_layers)
-			for(var/datum/wound/wound in tissue_layer.wounds)
-				if(wound.embedded == selection)
-					wound.expand(selection.edge+rand(1,3))
-					H.shock_stage+=20
 		affected.update_health()
 
 		if (ishuman(U))

@@ -36,50 +36,18 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if(..())
-			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			var/datum/tissue_layer/tissue_layer = affected.get_surface_layer()
-			return tissue_layer && !tissue_layer.is_wounded() && tissue_layer.tissue.can_cut_with(tool) && target_zone != "mouth"
+		return ..()
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts cutting into [target]'s [affected] with \the [tool].", \
-		"You start cutting into [target]'s [affected] with \the [tool].")
-		target.custom_pain("You feel a horrible pain as if from a sharp knife in your [affected]!",1)
+		//user.visible_message(
+		//	"[user] starts cutting into [target]'s [affected] with \the [tool].", \
+		//	"You start cutting into [target]'s [affected] with \the [tool].")
+		//target.custom_pain("You feel a horrible pain as if from a sharp knife in your [affected]!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		var/list/tissues_cut = list()
-		for(var/datum/tissue_layer/cut_layer in affected.tissue_layers)
-			if(cut_layer.is_open())
-				continue
-			if(cut_layer.tissue.can_cut_with(tool))
-				if(!cut_layer.is_cut())
-					cut_layer.create_wound(WOUND_CUT,1)
-				if(cut_layer.tissue.descriptors[target_zone])
-					tissues_cut += cut_layer.tissue.descriptors[target_zone]
-				else
-					tissues_cut += cut_layer.tissue.descriptor
-				if((cut_layer.tissue.flags & TISSUE_BLEEDS) && !(affected.status & ORGAN_BLEEDING))
-					affected.status |= ORGAN_BLEEDING
-			else
-				break
-
-		var/tissue_cut_string = ""
-		var/i = 1
-		for(var/tissue_cut in tissues_cut)
-			if(i>1)
-				if(i<tissues_cut.len)
-					tissue_cut_string += ", "
-				else
-					tissue_cut_string += " and "
-			tissue_cut_string += "[tissue_cut]"
-			i++
-
-		user.visible_message("<span class='notice'>[user] has cut on through the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>", \
-		"<span class='notice'>You have cut through the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>",)
+		//user.visible_message("<span class='notice'>[user] has cut on through the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>", \
+		//"<span class='notice'>You have cut through the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>",)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -99,49 +67,17 @@
 	max_duration = 40
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if(..())
-			var/obj/item/organ/external/affected = target.get_organ(target_zone)
-			var/datum/tissue_layer/tissue_layer = affected.get_surface_layer()
-			return tissue_layer && tissue_layer.is_wounded() && !tissue_layer.is_open() && target_zone != "mouth"
+		return ..()
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts to pry open \the [target]'s [affected] with \the [tool].", \
-		"You start to pry open \the [target]'s [affected] with \the [tool].")
-		target.custom_pain("It feels like your [affected] is on fire!",1)
+		//user.visible_message("[user] starts to pry open \the [target]'s [affected] with \the [tool].", \
+		//"You start to pry open \the [target]'s [affected] with \the [tool].")
+		//target.custom_pain("It feels like your [affected] is on fire!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-
-		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		var/list/tissues_cut = list()
-		for(var/datum/tissue_layer/cut_layer in affected.tissue_layers)
-			if(cut_layer.is_open())
-				continue
-			if(cut_layer.is_wounded())
-				for(var/datum/wound/wound in cut_layer.wounds)
-					//if(wound.status == WOUND_SUTURED || wound.status == WOUND_CLOSED)
-					//	continue
-					wound.status = WOUND_RETRACTED
-					wound.update_wound_descriptor()
-					break
-				tissues_cut += cut_layer.tissue.descriptor
-			else
-				break
-
-		var/tissue_cut_string = ""
-		var/i = 1
-		for(var/tissue_cut in tissues_cut)
-			if(i>1)
-				if(i<tissues_cut.len)
-					tissue_cut_string += ", "
-				else
-					tissue_cut_string += " and "
-			tissue_cut_string += "[tissue_cut]"
-			i++
-
-		user.visible_message("<span class='notice'>[user] pries open the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>", \
-		"<span class='notice'>You have pried open the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>",)
+		//user.visible_message("<span class='notice'>[user] pries open the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>", \
+		//"<span class='notice'>You have pried open the [tissue_cut_string] of [target]'s [affected] with \the [tool].</span>",)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)

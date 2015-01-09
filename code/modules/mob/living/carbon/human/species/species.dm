@@ -125,7 +125,7 @@
 	H.organs_by_name = list()
 	for(var/list/limb_data in has_limb)
 		var/limb_path = limb_data[2]
-		H.organs_by_name[limb_data[1]] = new limb_path(H, 0, tissues)
+		H.organs_by_name[limb_data[1]] = new limb_path(H, 0)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
