@@ -199,12 +199,13 @@
 					if(worm.controlling)
 						target.release_control()
 					worm.detatch()
-
-				obj.loc = get_turf(target)
-				if(istype(obj,/obj/item/weapon/implant))
-					var/obj/item/weapon/implant/imp = obj
-					imp.imp_in = null
-					imp.implanted = 0
+					worm.leave_host()
+				else
+					obj.loc = get_turf(target)
+					if(istype(obj,/obj/item/weapon/implant))
+						var/obj/item/weapon/implant/imp = obj
+						imp.imp_in = null
+						imp.implanted = 0
 			else
 				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected].", \
 				"\blue There's something inside [target]'s [affected], but you just missed it this time." )

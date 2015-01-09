@@ -931,13 +931,18 @@
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	for (var/obj/item/organ/internal/brain/H in world)
-		if(H.brainmob)
-			if(H.brainmob.real_name == src.real_name)
-				if(H.brainmob.mind)
-					H.brainmob.mind.transfer_to(src)
-					del(H)
+	// Fix up any missing organs.
+	// This will ignore any prosthetics in the prefs currently.
+	species.create_organs(src)
 
+	if(!client || !key) //Don't boot out anyone already in the mob.
+		for (var/obj/item/organ/internal/brain/H in world)
+			if(H.brainmob && H.brainmob.real_name == src.real_name && H.brainmob.mind)
+				H.brainmob.mind.transfer_to(src)
+				del(H)
+				break
+
+	for(var/datum/organ/internal/I in internal_organs)
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
 	for (var/ID in virus2)
