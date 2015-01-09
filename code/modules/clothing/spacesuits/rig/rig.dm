@@ -169,6 +169,16 @@
 		return 0
 	return 1
 
+/obj/item/weapon/rig/proc/reset()
+	offline = 2
+	canremove = 1
+	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+		if(!piece) continue
+		piece.icon_state = "[initial(icon_state)]"
+		piece.flags &= ~STOPSPRESSUREDMAGE
+		piece.flags &= ~AIRTIGHT
+	update_icon(1)
+
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
 
 	if(sealing) return
@@ -280,10 +290,6 @@
 			piece.flags |=  STOPPRESSUREDAMAGE
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
-
-	if(instant && air_supply)
-		wearer.internals = air_supply
-		wearer.internals.icon_state = "internal1"
 
 /obj/item/weapon/rig/process()
 

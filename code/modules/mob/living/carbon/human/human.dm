@@ -946,12 +946,13 @@
 	// This will ignore any prosthetics in the prefs currently.
 	species.create_organs(src)
 
-	for (var/obj/item/organ/brain/H in world)
-		if(H.brainmob)
-			if(H.brainmob.real_name == src.real_name)
-				if(H.brainmob.mind)
-					H.brainmob.mind.transfer_to(src)
-					del(H)
+	if(!client || !key) //Don't boot out anyone already in the mob.
+		for (var/obj/item/organ/brain/H in world)
+			if(H.brainmob)
+				if(H.brainmob.real_name == src.real_name)
+					if(H.brainmob.mind)
+						H.brainmob.mind.transfer_to(src)
+						del(H)
 
 	for(var/datum/organ/internal/I in internal_organs)
 		I.damage = 0

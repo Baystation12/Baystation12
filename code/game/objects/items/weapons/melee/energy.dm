@@ -9,6 +9,8 @@
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
+	if(active)
+		return
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
@@ -19,13 +21,15 @@
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
+	if(!active)
+		return
+	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)
 	sharp = initial(sharp)
 	edge = initial(edge)
 	w_class = initial(w_class)
-	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
