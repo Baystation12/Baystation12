@@ -99,14 +99,14 @@
 /obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
-	
+
 	if (!can_use(required))
 		if (produced>1)
 			user << "\red You haven't got enough [src] to build \the [produced] [recipe.title]\s!"
 		else
 			user << "\red You haven't got enough [src] to build \the [recipe.title]!"
 		return
-	
+
 	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
 		user << "\red There is another [recipe.title] here!"
 		return
@@ -114,21 +114,21 @@
 	if (recipe.on_floor && !isfloor(user.loc))
 		user << "\red \The [recipe.title] must be constructed on the floor!"
 		return
-	
+
 	if (recipe.time)
 		user << "\blue Building [recipe.title] ..."
 		if (!do_after(user, recipe.time))
 			return
-	
+
 	if (use(required))
 		var/atom/O = new recipe.result_type(user.loc)
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
-		
+
 		if (istype(O, /obj/item/stack))
 			var/obj/item/stack/S = O
 			S.amount = produced
-		
+
 		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
 			for (var/obj/item/I in O)
 				del(I)
@@ -148,12 +148,12 @@
 		if (href_list["sublist"])
 			var/datum/stack_recipe_list/srl = recipes_list[text2num(href_list["sublist"])]
 			recipes_list = srl.recipes
-		
+
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
 		if (!multiplier || (multiplier <= 0)) //href exploit protection
 			return
-		
+
 		src.produce_recipe(R, multiplier, usr)
 
 	if (src && usr.machine==src) //do not reopen closed window
@@ -189,7 +189,7 @@
 	return 1
 
 /*
-	The transfer and split procs work differently than use() and add(). 
+	The transfer and split procs work differently than use() and add().
 	Whereas those procs take no action if the desired amount cannot be added or removed these procs will try to transfer whatever they can.
 	They also remove an equal amount from the source stack.
 */
@@ -209,7 +209,10 @@
 	if (transfer && src.use(transfer))
 		S.add(transfer)
 		if (prob(transfer/orig_amount * 100))
-			S.copy_evidences(src)
+			transfer_fingerprints_to(S)
+			if(blood_DNA)
+				S.blood_DNA |= blood_DNA
+				//todo bloody overlay
 		return transfer
 	return 0
 
@@ -217,14 +220,16 @@
 /obj/item/stack/proc/split(var/tamount)
 	if (!amount)
 		return null
-	
+
 	var/transfer = max(min(tamount, src.amount, initial(max_amount)), 0)
-	
+
 	var/orig_amount = src.amount
 	if (transfer && src.use(transfer))
 		var/obj/item/stack/newstack = new src.type(loc, transfer)
 		if (prob(transfer/orig_amount * 100))
-			newstack.copy_evidences(src)
+			transfer_fingerprints_to(newstack)
+			if(blood_DNA)
+				newstack.blood_DNA |= blood_DNA
 		return newstack
 	return null
 
@@ -271,13 +276,6 @@
 			if (src && usr.machine==src)
 				src.interact(usr)
 	else return ..()
-
-/obj/item/stack/proc/copy_evidences(obj/item/stack/from as obj)
-	src.blood_DNA |= from.blood_DNA
-	src.fingerprints  |= from.fingerprints
-	src.fingerprintshidden |= from.fingerprintshidden
-	src.fingerprintslast = from.fingerprintslast
-	//TODO bloody overlay
 
 /*
  * Recipe datum
