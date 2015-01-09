@@ -1608,8 +1608,7 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-
-	if(hud_updateflag & 1 << HEALTH_HUD)
+	if (BITTEST(hud_updateflag, HEALTH_HUD))
 		var/image/holder = hud_list[HEALTH_HUD]
 		if(stat == 2)
 			holder.icon_state = "hudhealth-100" 	// X_X
@@ -1617,8 +1616,8 @@
 			var/percentage_health = RoundHealth((health-config.health_threshold_crit)/(maxHealth-config.health_threshold_crit)*100)
 			holder.icon_state = "hud[percentage_health]"
 		hud_list[HEALTH_HUD] = holder
-
-	if(hud_updateflag & 1 << STATUS_HUD)
+	
+	if (BITTEST(hud_updateflag, STATUS_HUD))
 		var/foundVirus = 0
 		for(var/datum/disease/D in viruses)
 			if(!D.hidden[SCANNER])
@@ -1654,8 +1653,8 @@
 
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2
-
-	if(hud_updateflag & 1 << ID_HUD)
+	
+	if (BITTEST(hud_updateflag, ID_HUD))
 		var/image/holder = hud_list[ID_HUD]
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetID()
@@ -1668,8 +1667,8 @@
 
 
 		hud_list[ID_HUD] = holder
-
-	if(hud_updateflag & 1 << WANTED_HUD)
+	
+	if (BITTEST(hud_updateflag, WANTED_HUD))
 		var/image/holder = hud_list[WANTED_HUD]
 		holder.icon_state = "hudblank"
 		var/perpname = name
@@ -1694,8 +1693,11 @@
 						holder.icon_state = "hudreleased"
 						break
 		hud_list[WANTED_HUD] = holder
-
-	if(hud_updateflag & 1 << IMPLOYAL_HUD || hud_updateflag & 1 << IMPCHEM_HUD || hud_updateflag & 1 << IMPTRACK_HUD)
+	
+	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \
+	   || BITTEST(hud_updateflag,  IMPCHEM_HUD) \
+	   || BITTEST(hud_updateflag, IMPTRACK_HUD))
+		
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
 		var/image/holder2 = hud_list[IMPLOYAL_HUD]
 		var/image/holder3 = hud_list[IMPCHEM_HUD]
@@ -1715,9 +1717,9 @@
 
 		hud_list[IMPTRACK_HUD] = holder1
 		hud_list[IMPLOYAL_HUD] = holder2
-		hud_list[IMPCHEM_HUD] = holder3
-
-	if(hud_updateflag & 1 << SPECIALROLE_HUD)
+		hud_list[IMPCHEM_HUD]  = holder3
+	
+	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
 		if(mind)

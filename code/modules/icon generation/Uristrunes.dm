@@ -179,7 +179,7 @@ var/list/rune_animation = list(
 	var/icon/base = icon('icons/effects/uristrunes.dmi', "")
 
 	for(var/i = 0, i < 10, i++)
-		if(rune_bits & (1 << i))
+		if(BITTEST(rune_bits, i))
 			base.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1 << i]"), ICON_OVERLAY)
 
 	var/icon/result
@@ -217,7 +217,7 @@ var/list/rune_animation = list(
 	var/icon/I = icon('icons/effects/uristrunes.dmi', "blank")
 
 	for(var/i = 0, i < 10, i++)
-		if(rune & (1 << i))
+		if(BITTEST(rune, i))
 			I.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1 << i]"), ICON_OVERLAY)
 
 	var/obj/o = new(locate(x, y, z))
@@ -229,7 +229,7 @@ var/list/rune_animation = list(
 
 		var/rune = rand(1, 1023)
 		for(var/i = 0, i < 10, i++)
-			if(rune & (1 << i))
+			if(BITTEST(rune, i))
 				I.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1 << i]"), ICON_OVERLAY)
 
 		var/obj/o = new(t)

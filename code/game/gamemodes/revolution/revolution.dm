@@ -205,7 +205,7 @@
 	if(rev_mind in revolutionaries)
 		revolutionaries -= rev_mind
 		rev_mind.special_role = null
-		rev_mind.current.hud_updateflag |= 1 << SPECIALROLE_HUD
+		BITSET(rev_mind.current.hud_updateflag, SPECIALROLE_HUD)
 
 		if(beingborged)
 			rev_mind.current << "\red <FONT size = 3><B>The frame's firmware detects and deletes your neural reprogramming!  You remember nothing from the moment you were flashed until now.</B></FONT>"
