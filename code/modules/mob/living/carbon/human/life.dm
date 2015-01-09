@@ -134,7 +134,7 @@
 
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
-	if(wear_suit && (wear_suit.flags & STOPSPRESSUREDMAGE) && head && (head.flags & STOPSPRESSUREDMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
+	if(wear_suit && (wear_suit.flags & STOPPRESSUREDAMAGE) && head && (head.flags & STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
 		pressure_adjustment_coefficient = 0
 
 		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.

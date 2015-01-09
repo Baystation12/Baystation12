@@ -274,10 +274,10 @@
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
 		if(canremove)
-			piece.flags &= ~STOPSPRESSUREDMAGE
+			piece.flags &= ~STOPPRESSUREDAMAGE
 			piece.flags &= ~AIRTIGHT
 		else
-			piece.flags |=  STOPSPRESSUREDMAGE
+			piece.flags |=  STOPPRESSUREDAMAGE
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
 
