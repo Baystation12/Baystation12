@@ -69,7 +69,7 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
-		var/datum/organ/external/E = H.organs_by_name["head"]
+		var/obj/item/organ/external/E = H.organs_by_name["head"]
 		if(!E || (E.status & ORGAN_DESTROYED))
 			src << "\The [H] does not have a head!"
 

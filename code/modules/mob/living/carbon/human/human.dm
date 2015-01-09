@@ -942,7 +942,6 @@
 				del(H)
 				break
 
-	for(var/datum/organ/internal/I in internal_organs)
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
 	for (var/ID in virus2)
