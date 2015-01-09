@@ -268,14 +268,14 @@
 	affected.implants += L
 	L.part = affected
 	M.mind.memory = null
-	M << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
-	M << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
-	M << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
-	M << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
-	M << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
-	M << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
+	//M << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
+	//M << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
+	//M << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
+	//M << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
+	//M << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
+	//M << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
 	M.mind.store_memory(implant_remembered_info)
-	M.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
+	//M.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
 
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
