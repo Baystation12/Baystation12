@@ -145,14 +145,18 @@ var/global/list/image/fluidtrack_cache=list()
 
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "wet footprints"
+	dryname = "dried footprints"
 	desc = "Whoops..."
+	drydesc = "Whoops..."
 	coming_state = "human1"
 	going_state  = "human2"
 	amount = 0
 
 /obj/effect/decal/cleanable/blood/tracks/wheels
 	name = "wet tracks"
+	dryname = "dried tracks"
 	desc = "Whoops..."
+	drydesc = "Whoops..."
 	coming_state = "wheels"
 	going_state  = ""
 	desc = "They look like tracks left by wheels."

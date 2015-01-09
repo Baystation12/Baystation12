@@ -643,6 +643,12 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
 
+		if(jobban_isbanned(M, "Borer"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'><font color=red>Borer</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'>Borer</a></td>"
+
+
 		jobs += "</tr></table>"
 
 

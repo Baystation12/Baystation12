@@ -1317,9 +1317,9 @@ datum
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 
-					//Peridaxon is hard enough to get, it's probably fair to make this all internal organs
+					//Peridaxon heals only non-robotic organs
 					for(var/obj/item/organ/internal/I in H.internal_organs)
-						if(I.is_damaged())
+						if(I.is_damaged() && !(I.status & ORGAN_ROBOT))
 							I.heal_damage(0.20,0.20)
 				..()
 				return
@@ -1552,7 +1552,7 @@ datum
 				if(!M) M = holder.my_atom
 				if(toxpwr)
 					M.adjustToxLoss(toxpwr*REM)
-					if(alien) ..() //Kind of a catch-all for aliens without kidneys.
+				if(alien) ..() // Kind of a catch-all for aliens without the liver. Because this does not metabolize 'naturally', only removed by the liver.
 				return
 
 		toxin/amatoxin
