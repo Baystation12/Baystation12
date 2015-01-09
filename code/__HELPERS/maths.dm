@@ -1,9 +1,5 @@
 // Credits to Nickr5 for the useful procs I've taken from his library resource.
 
-var/const/E     = 2.71828183
-var/const/Pi    = 3.14159265
-var/const/Sqrt2 = 1.41421356
-
 // List of square roots for the numbers 1-100.
 var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,
                           5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7,
