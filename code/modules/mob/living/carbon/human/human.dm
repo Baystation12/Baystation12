@@ -923,17 +923,29 @@
 /mob/living/carbon/human/revive()
 
 	// Fix up any missing organs.
-	// This will ignore any prosthetics in the prefs currently.
+	var/list/robot_organs_internal = list()
+	var/list/robot_organs_external = list()
+
+	for(var/organ in organs_by_name)
+		var/obj/item/organ/external/organ_obj = organs_by_name[organ]
+		if(organ_obj.status & ORGAN_ROBOT) robot_organs_external |= organ
+	for(var/organ in internal_organs_by_name)
+		var/obj/item/organ/internal/organ_obj = internal_organs_by_name[organ]
+		if(organ_obj.status & ORGAN_ROBOT) robot_organs_internal |= organ
+
 	species.create_limbs(src)
 	species.create_organs(src)
+
+	for(var/organ in robot_organs_external)
+		var/obj/item/organ/organ_obj = organs_by_name[organ]
+		if(organ_obj) organ_obj.roboticize()
+	for(var/organ in robot_organs_internal)
+		var/obj/item/organ/organ_obj = internal_organs_by_name[organ]
+		if(organ_obj) organ_obj.roboticize()
 
 	if(species && !(species.flags & NO_BLOOD))
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
-
-	// Fix up any missing organs.
-	// This will ignore any prosthetics in the prefs currently.
-	species.create_organs(src)
 
 	if(!client || !key) //Don't boot out anyone already in the mob.
 		for (var/obj/item/organ/internal/brain/H in world)
