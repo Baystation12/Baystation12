@@ -909,6 +909,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/tactical/marine(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/security/marine(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/marine(M), slot_back)
 
