@@ -35,14 +35,21 @@
 		spell_list += new spell(src)
 
 /mob/living/simple_animal/construct/death()
-	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
-	for(var/mob/M in viewers(src, null))
-		if((M.client && !( M.blinded )))
-			M.show_message("\red [src] collapses in a shattered heap. ")
+	..(null,"collapses in a shattered heap.")
 	ghostize()
 	del src
-	return
+
+
+/mob/living/simple_animal/construct/attack_generic(var/mob/user)
+	if(istype(user, /mob/living/simple_animal/construct/builder))
+		if(health < maxHealth)
+			adjustBruteLoss(-5)
+			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+		else
+			user << "<span class='notice'>\The [src] is undamaged.</span>"
+		return
+	return ..()
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)

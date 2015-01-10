@@ -1,7 +1,7 @@
 /obj/item/weapon/gun/energy
-	icon_state = "energy"
 	name = "energy gun"
 	desc = "A basic energy-based gun."
+	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses

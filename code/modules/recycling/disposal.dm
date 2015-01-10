@@ -5,9 +5,9 @@
 // Automatically recharges air (unless off), will flush when ready if pre-set
 // Can hold items and human size things, no other draggables
 // Toilets are a type of disposal bin for small objects only and work on magic. By magic, I mean torque rotation
-#define SEND_PRESSURE 50 //kPa
+#define SEND_PRESSURE 50 + ONE_ATMOSPHERE //kPa - assume the inside of a dispoal pipe is 1 atm
 #define PRESSURE_TANK_VOLUME 70	//L - a 0.3 m diameter * 1 m long cylindrical tank. Happens to be the same volume as the regular oxygen tanks, so seems appropriate.
-#define PUMP_MAX_FLOW_RATE 50	//L/s - 8 m/s using a 15 cm by 15 cm inlet
+#define PUMP_MAX_FLOW_RATE 100	//L/s - 4 m/s using a 15 cm by 15 cm inlet
 
 /obj/machinery/disposal
 	name = "disposal unit"
@@ -49,8 +49,6 @@
 	if(stat & BROKEN || !I || !user)
 		return
 
-	if(isrobot(user) && !istype(I, /obj/item/weapon/storage/bag/trash))
-		return
 	src.add_fingerprint(user)
 	if(mode<=0) // It's off
 		if(istype(I, /obj/item/weapon/screwdriver))
@@ -123,7 +121,10 @@
 				msg_admin_attack("[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 		return
 
-	if(!I)	return
+	if(isrobot(user))
+		return
+	if(!I)
+		return
 
 	user.drop_item()
 	if(I)
@@ -270,14 +271,15 @@
 	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
 		usr << "\red The disposal units power is disabled."
 		return
-	..()
-	src.add_fingerprint(usr)
+	if(..())
+		return
+
 	if(stat & BROKEN)
 		return
 	if(usr.stat || usr.restrained() || src.flushing)
 		return
 
-	if (in_range(src, usr) && istype(src.loc, /turf))
+	if(istype(src.loc, /turf))
 		usr.set_machine(src)
 
 		if(href_list["close"])
@@ -292,12 +294,13 @@
 				mode = 0
 			update()
 
-		if(href_list["handle"])
-			flush = text2num(href_list["handle"])
-			update()
+		if(!isAI(usr))
+			if(href_list["handle"])
+				flush = text2num(href_list["handle"])
+				update()
 
-		if(href_list["eject"])
-			eject()
+			if(href_list["eject"])
+				eject()
 	else
 		usr << browse(null, "window=disposal")
 		usr.unset_machine()
@@ -359,18 +362,13 @@
 	if(flush && air_contents.return_pressure() >= SEND_PRESSURE )	// flush can happen even without power
 		flush()
 
-	if(mode != 1)		// if off or ready, no need to charge
+	if(mode != 1) //if off or ready, no need to charge
 		update_use_power(1)
-		return
-
-	// otherwise charge
-	src.pressurize()
-
-	// if full enough, switch to ready mode
-	if(air_contents.return_pressure() >= SEND_PRESSURE)
-		mode = 2
+	else if(air_contents.return_pressure() >= SEND_PRESSURE)
+		mode = 2 //if full enough, switch to ready mode
 		update()
-	return
+	else
+		src.pressurize() //otherwise charge
 
 /obj/machinery/disposal/proc/pressurize()
 	if(stat & NOPOWER)			// won't charge if no power
@@ -385,11 +383,8 @@
 		var/transfer_moles = (PUMP_MAX_FLOW_RATE/env.volume)*env.total_moles	//group_multiplier is divided out here
 		power_draw = pump_gas(src, env, air_contents, transfer_moles, active_power_usage)
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 1	//don't force update - easier on CPU
-	else
-		handle_power_draw(power_draw)
+	if (power_draw > 0)
+		use_power(power_draw)
 
 // perform a flush
 /obj/machinery/disposal/proc/flush()
@@ -541,7 +536,7 @@
 
 		loc = D.trunk
 		active = 1
-		dir = DOWN
+		set_dir(DOWN)
 		spawn(1)
 			move()		// spawn off the movement process
 
@@ -700,7 +695,7 @@
 	//
 	proc/transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 
@@ -738,6 +733,7 @@
 			icon_state = "[base_icon_state]f"
 		else
 			icon_state = base_icon_state*/
+		icon_state = base_icon_state
 		return
 
 
@@ -806,7 +802,7 @@
 			for(var/D in cardinal)
 				if(D & dpdir)
 					var/obj/structure/disposalpipe/broken/P = new(src.loc)
-					P.dir = D
+					P.set_dir(D)
 
 		src.invisibility = 101	// make invisible (since we won't delete the pipe immediately)
 		var/obj/structure/disposalholder/H = locate() in src
@@ -917,7 +913,7 @@
 			if("pipe-tagger-partial")
 				C.ptype = 14
 		src.transfer_fingerprints_to(C)
-		C.dir = dir
+		C.set_dir(dir)
 		C.density = 0
 		C.anchored = 1
 		C.update()
@@ -963,7 +959,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 
 		var/turf/T
 		var/obj/structure/disposalpipe/P
@@ -1227,7 +1223,7 @@
 
 	transfer(var/obj/structure/disposalholder/H)
 		var/nextdir = nextdir(H.dir, H.destinationTag)
-		H.dir = nextdir
+		H.set_dir(nextdir)
 		var/turf/T = H.nextloc()
 		var/obj/structure/disposalpipe/P = H.findpipe(T)
 

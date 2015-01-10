@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/engineering_chief
-	name = "Chief Engineer's Locker"
+	name = "chief engineer's locker"
 	req_access = list(access_ce)
 	icon_state = "securece1"
 	icon_closed = "securece"
@@ -38,7 +38,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_electrical
-	name = "Electrical Supplies"
+	name = "electrical supplies"
 	req_access = list(access_engine_equip)
 	icon_state = "secureengelec1"
 	icon_closed = "secureengelec"
@@ -66,7 +66,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_welding
-	name = "Welding Supplies"
+	name = "welding supplies"
 	req_access = list(access_construction)
 	icon_state = "secureengweld1"
 	icon_closed = "secureengweld"
@@ -92,7 +92,7 @@
 
 
 /obj/structure/closet/secure_closet/engineering_personal
-	name = "Engineer's Locker"
+	name = "engineer's locker"
 	req_access = list(access_engine_equip)
 	icon_state = "secureeng1"
 	icon_closed = "secureeng"
@@ -121,7 +121,7 @@
 		new /obj/item/taperoll/engineering(src)
 		return
 /obj/structure/closet/secure_closet/atmos_personal
-	name = "Technician's Locker"
+	name = "technician's locker"
 	req_access = list(access_atmospherics)
 	icon_state = "secureatm1"
 	icon_closed = "secureatm"

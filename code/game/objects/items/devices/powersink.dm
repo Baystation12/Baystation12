@@ -1,8 +1,8 @@
 // Powersink - used to drain station power
 
 /obj/item/device/powersink
-	desc = "A nulling power sink which drains energy from electrical systems."
 	name = "power sink"
+	desc = "A nulling power sink which drains energy from electrical systems."
 	icon_state = "powersink0"
 	item_state = "electronic"
 	w_class = 4.0
@@ -100,11 +100,17 @@
 				// now look for APCs and drain their cells
 				if(drained < drain_rate)
 					for(var/obj/machinery/power/terminal/T in PN.nodes)
+						// Enough power drained this tick, no need to torture more APCs
+						if(drained >= drain_rate)
+							break
 						if(istype(T.master, /obj/machinery/power/apc))
 							var/obj/machinery/power/apc/A = T.master
 							if(A.operating && A.cell)
-								A.cell.charge = max(0, A.cell.charge - (2000 * CELLRATE))
-								power_drained += 2000
+								var/cur_charge = A.cell.charge / CELLRATE
+								var/drain_val = min(2000, cur_charge)
+
+								A.cell.use(drain_val * CELLRATE)
+								drained += drain_val
 
 
 			if(power_drained > max_power * 0.95)

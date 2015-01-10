@@ -1,8 +1,3 @@
-#define IDLE_STATE		0
-#define WAIT_LAUNCH		1
-#define WAIT_ARRIVE		2
-#define WAIT_FINISH		3
-
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/ferry
@@ -68,6 +63,10 @@
 		return area_station
 	return area_offsite
 
+/*
+	Please ensure that long_jump() and short_jump() are only called from here. This applies to subtypes as well.
+	Doing so will ensure that multiple jumps cannot be initiated in parallel.
+*/
 /datum/shuttle/ferry/proc/process()
 	switch(process_state)
 		if (WAIT_LAUNCH)
@@ -80,11 +79,21 @@
 					short_jump()
 
 				process_state = WAIT_ARRIVE
+
+		if (FORCE_LAUNCH)
+			if (move_time && area_transition)
+				long_jump(interim=area_transition, travel_time=move_time, direction=transit_direction)
+			else
+				short_jump()
+			
+			process_state = WAIT_ARRIVE
+		
 		if (WAIT_ARRIVE)
 			if (moving_status == SHUTTLE_IDLE)
 				dock()
 				in_use = null	//release lock
 				process_state = WAIT_FINISH
+		
 		if (WAIT_FINISH)
 			if (skip_docking_checks() || docking_controller.docked() || world.time > last_dock_attempt_time + DOCK_ATTEMPT_TIMEOUT)
 				process_state = IDLE_STATE
@@ -112,13 +121,7 @@
 
 	in_use = user	//obtain an exclusive lock on the shuttle
 
-	if (move_time && area_transition)
-		long_jump(interim=area_transition, travel_time=move_time, direction=transit_direction)
-	else
-		short_jump()
-
-
-	process_state = WAIT_ARRIVE
+	process_state = FORCE_LAUNCH
 
 /datum/shuttle/ferry/proc/cancel_launch(var/user)
 	if (!can_cancel()) return
@@ -150,13 +153,13 @@
 	return 0
 
 /datum/shuttle/ferry/proc/can_cancel()
-	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)
+	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
 		return 1
 	return 0
 
 //returns 1 if the shuttle is getting ready to move, but is not in transit yet
 /datum/shuttle/ferry/proc/is_launching()
-	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)	
+	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)
 
 //This gets called when the shuttle finishes arriving at it's destination
 //This can be used by subtypes to do things when the shuttle arrives.

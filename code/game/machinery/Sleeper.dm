@@ -13,7 +13,7 @@
 
 	use_power = 1
 	idle_power_usage = 40
-
+	interact_offline = 1
 
 /obj/machinery/sleep_console/process()
 	if(stat & (NOPOWER|BROKEN))
@@ -170,7 +170,7 @@
 
 	New()
 		..()
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"
@@ -189,10 +189,12 @@
 		if(filtering > 0)
 			if(beaker)
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
-					src.occupant.vessel.trans_to(beaker, 1)
+					var/pumped = 0
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
 						src.occupant.reagents.trans_to(beaker, 3)
-						src.occupant.vessel.trans_to(beaker, 1)
+						pumped++
+					if (ishuman(src.occupant))
+						src.occupant.vessel.trans_to(beaker, pumped + 1)
 		src.updateUsrDialog()
 		return
 

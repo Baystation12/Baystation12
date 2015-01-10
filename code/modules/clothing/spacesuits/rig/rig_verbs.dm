@@ -27,8 +27,7 @@
 		usr << "<span class='warning'>The suit is not active.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	if(!visor)
@@ -51,8 +50,7 @@
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	toggle_piece("helmet",wearer)
@@ -64,8 +62,7 @@
 	set category = "Hardsuit"
 	set src = usr.contents
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	toggle_piece("chest",wearer)
@@ -81,8 +78,7 @@
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	toggle_piece("gauntlets",wearer)
@@ -98,8 +94,7 @@
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	toggle_piece("boots",wearer)
@@ -115,8 +110,7 @@
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	if(!check_power_cost(usr))
@@ -135,8 +129,7 @@
 		usr << "<span class='warning'>The hardsuit is not being worn.</span>"
 		return
 
-	if((security_check_enabled && !src.allowed(wearer)) || control_overridden)
-		wearer << "<span class='danger'>Access denied.</span>"
+	if(!check_suit_access(usr))
 		return
 
 	toggle_seals(wearer)

@@ -77,6 +77,7 @@
 	var/lastused_light = 0
 	var/lastused_equip = 0
 	var/lastused_environ = 0
+	var/lastused_charging = 0
 	var/lastused_total = 0
 	var/main_status = 0
 	var/wiresexposed = 0
@@ -116,7 +117,7 @@
 	if(terminal)
 		terminal.connect_to_network()
 
-/obj/machinery/power/apc/drain_power(var/drain_check, var/surge)
+/obj/machinery/power/apc/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -131,7 +132,10 @@
 		update_icon()
 		return 0
 
-	return cell.drain_power(drain_check)
+	if(terminal && terminal.powernet)
+		terminal.powernet.trigger_warning()
+
+	return cell.drain_power(drain_check, surge, amount)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()
@@ -143,9 +147,9 @@
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
 	if (building)
-		dir = ndir
+		set_dir(ndir)
 	src.tdir = dir		// to fix Vars bug
-	dir = SOUTH
+	set_dir(SOUTH)
 
 	pixel_x = (src.tdir & 3)? 0 : (src.tdir == 4 ? 24 : -24)
 	pixel_y = (src.tdir & 3)? (src.tdir ==1 ? 24 : -24) : 0
@@ -178,13 +182,17 @@
 		del(cell) // qdel
 	if(terminal)
 		disconnect_terminal()
+
+	//If there's no more APC then there shouldn't be a cause for alarm I guess
+	area.poweralert(1, src) //so that alarms don't go on forever
+
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()
 	// create a terminal object at the same position as original turf loc
 	// wires will attach to this
 	terminal = new/obj/machinery/power/terminal(src.loc)
-	terminal.dir = tdir
+	terminal.set_dir(tdir)
 	terminal.master = src
 
 /obj/machinery/power/apc/proc/init()
@@ -752,7 +760,8 @@
 		"powerCellStatus" = cell ? cell.percent() : null,
 		"chargeMode" = chargemode,
 		"chargingStatus" = charging,
-		"totalLoad" = round(lastused_equip + lastused_light + lastused_environ),
+		"totalLoad" = round(lastused_total),
+		"totalCharging" = round(lastused_charging),
 		"coverLocked" = coverlocked,
 		"siliconUser" = istype(user, /mob/living/silicon),
 		"malfStatus" = get_malf_status(user),
@@ -1139,7 +1148,7 @@
 		else if(longtermpower > -10)
 			longtermpower -= 2
 
-		if(cell.charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+		if((cell.percent() > 30) || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
 			if(autoflag != 3)
 				equipment = autoset(equipment, 1)
 				lighting = autoset(lighting, 1)
@@ -1148,21 +1157,21 @@
 				area.poweralert(1, src)
 				if(cell.charge >= 4000)
 					area.poweralert(1, src)
-		else if(cell.charge < 1250 && cell.charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
+		else if((cell.percent() <= 30) && (cell.percent() > 15) && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 2
-		else if(cell.charge < 750 && cell.charge > 10)        // <15%, turn off lighting & equipment
+		else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
 			if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 2)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 1
-		else if(cell.charge <= 0)                                   // zero charge, turn all off
+		else                                   // zero charge, turn all off
 			if(autoflag != 0)
 				equipment = autoset(equipment, 0)
 				lighting = autoset(lighting, 0)
@@ -1172,6 +1181,7 @@
 
 		// now trickle-charge the cell
 
+		lastused_charging = 0 // Clear the variable for new use.
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
@@ -1179,7 +1189,8 @@
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
-
+				lastused_charging = ch
+				lastused_total += ch // Sensors need this to stop reporting APC charging as "Other" load
 			else
 				charging = 0		// stop charging
 				chargecount = 0

@@ -103,7 +103,7 @@
 		return 1
 
 	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
-	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/posibrain))
+	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
 		integrate_ai(input_device,user)
 		return 1
 
@@ -138,11 +138,15 @@
 
 	if(ai_card)
 		if(istype(ai_card, /obj/item/device/aicard))
-			if(integrated_ai && integrated_ai.client)
+			if(integrated_ai && !integrated_ai.stat)
 				if(user)
 					user << "<span class='danger'>You cannot eject your currently stored AI. Purge it manually.</span>"
 				return 0
-			del(ai_card)
+			user << "<span class='danger'>You purge the remaining scraps of data from your previous AI, freeing it for use.</span>"
+			if(integrated_ai)
+				integrated_ai.ghostize()
+				del(integrated_ai)
+			if(ai_card) del(ai_card)
 		else if(user)
 			user.put_in_hands(ai_card)
 		else
@@ -291,7 +295,7 @@
 	toggleable = 1
 	usable = 0
 
-	engage_string = "Enable Countermeasures"
+	activate_string = "Enable Countermeasures"
 	deactivate_string = "Disable Countermeasures"
 
 	interface_name = "electrowarfare system"
@@ -322,7 +326,7 @@
 	activates_on_touch = 1
 	disruptive = 0
 
-	engage_string = "Enable Power Sink"
+	activate_string = "Enable Power Sink"
 	deactivate_string = "Disable Power Sink"
 
 	interface_name = "niling d-sink"
@@ -407,30 +411,33 @@
 		drain_complete(H)
 		return
 
-	var/target_drained = interfaced_with.drain_power()
+	if(holder.cell.fully_charged())
+		H << "<span class = 'warning'>Your power sink flashes an amber light; your rig cell is full.</span>"
+		drain_complete(H)
+		return
+
+	// Attempts to drain up to 40kW, determines this value from remaining cell capacity to ensure we don't drain too much..
+	var/to_drain = min(40000, ((holder.cell.maxcharge - holder.cell.charge) / CELLRATE))
+	var/target_drained = interfaced_with.drain_power(0,0,to_drain)
 	if(target_drained <= 0)
 		H << "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>"
 		drain_complete(H)
 		return
 
-	holder.cell.charge += target_drained
+	holder.cell.give(target_drained * CELLRATE)
 	total_power_drained += target_drained
 
-	if(holder.cell.charge > holder.cell.maxcharge)
-		H << "<span class = 'warning'>Your power sink flashes an amber light; your rig cell is full.</span>"
-		holder.cell.charge = holder.cell.maxcharge
-		drain_complete(H)
-		return
+
 
 	return 1
 
 /obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
 
 	if(!interfaced_with)
-		if(M) M << "<font color='blue'><b>Total power drained:</b> [total_power_drained]W.</font>"
+		if(M) M << "<font color='blue'><b>Total power drained:</b> [round(total_power_drained/1000)]kJ.</font>"
 	else
-		if(M) M << "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [total_power_drained]W.</font>"
-		interfaced_with.drain_power(0,1) // Damage the victim.
+		if(M) M << "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained/1000)]kJ.</font>"
+		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
 	interfaced_with = null
 	total_power_drained = 0

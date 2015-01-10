@@ -167,7 +167,7 @@
 
 /obj/effect/hotspot/New()
 	..()
-	dir = pick(cardinal)
+	set_dir(pick(cardinal))
 	return
 
 /*

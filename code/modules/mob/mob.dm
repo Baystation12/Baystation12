@@ -66,7 +66,7 @@
 // If drain_check is set it will not actually drain power, just return a value.
 // If surge is set, it will destroy/damage the recipient and not return any power.
 // Not sure where to define this, so it can sit here for the rest of time.
-/atom/proc/drain_power(var/drain_check,var/surge)
+/atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
 // Show a message to all mobs in earshot of this one
@@ -392,14 +392,14 @@ var/list/slot_equipment_priority = list( \
 	set name = "Respawn"
 	set category = "OOC"
 
-	if (!( abandon_allowed ))
-		usr << "\blue Respawn is disabled."
+	if (!( config.abandon_allowed ))
+		usr << "<span class='notice'>Respawn is disabled.</span>"
 		return
 	if ((stat != 2 || !( ticker )))
-		usr << "\blue <B>You must be dead to use this!</B>"
+		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
-		usr << "\blue Respawn is disabled for this roundtype."
+		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
@@ -436,6 +436,8 @@ var/list/slot_equipment_priority = list( \
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
+
+	announce_ghost_joinleave(client, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
@@ -650,9 +652,6 @@ var/list/slot_equipment_priority = list( \
 		var/mob/pulled = AM
 		pulled.inertia_dir = 0
 
-/mob/proc/get_combat_buff(var/damage)
-	return damage
-
 /mob/proc/can_use_hands()
 	return
 
@@ -821,6 +820,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 			for(var/atom/A in listed_turf)
 				if(A.invisibility > see_invisible)
 					continue
+				if(is_type_in_list(A, shouldnt_see))
+					continue
 				statpanel(listed_turf.name, null, A)
 
 	if(spell_list && spell_list.len)
@@ -843,7 +844,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(stat==2)							return 0
 	if(anchored)						return 0
 	if(monkeyizing)						return 0
-	if(restrained())					return 0
 	return 1
 
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
@@ -904,10 +904,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/facedir(var/ndir)
 	if(!canface())	return 0
-	dir = ndir
+	set_dir(ndir)
 	if(buckled && buckled.movable)
-		buckled.dir = ndir
-		buckled.handle_rotation()
+		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
 
@@ -1157,3 +1156,6 @@ mob/proc/yank_out_object()
 			return I
 
 	return 0
+
+/mob/proc/updateicon()
+	return

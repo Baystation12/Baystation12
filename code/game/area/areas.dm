@@ -57,7 +57,7 @@
 						a.triggerAlarm("Power", src, cameras, source)
 	return
 
-/area/proc/atmosalert(danger_level)
+/area/proc/atmosalert(danger_level, var/set_firelocks=1)
 //	if(type==/area) //No atmos alarms in space
 //		return 0 //redudant
 
@@ -68,7 +68,7 @@
 				danger_level = max(danger_level, AA.danger_level)
 
 	if(danger_level != atmosalm)
-		if (danger_level < 1 && atmosalm >= 1)
+		if (set_firelocks && danger_level < 1 && atmosalm >= 1)
 			//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 			air_doors_open()
 
@@ -92,7 +92,8 @@
 				aiPlayer.triggerAlarm("Atmosphere", src, cameras, src)
 			for(var/obj/machinery/computer/station_alert/a in machines)
 				a.triggerAlarm("Atmosphere", src, cameras, src)
-			air_doors_close()
+			if (set_firelocks)
+				air_doors_close()
 
 		atmosalm = danger_level
 		for(var/area/RA in related)

@@ -5,7 +5,7 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
-        
+
 	message = trim_strip_html_properly(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
@@ -29,34 +29,50 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
-		message = copytext(message,3)
+		message = copytext(message,2+length(speaking.key))
 
 	whisper_say(message, speaking, alt_name)
 
 
 //This is used by both the whisper verb and human/say() to handle whispering
 /mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
+
+	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
+
 	var/message_range = 1
 	var/eavesdropping_range = 2
 	var/watching_range = 5
 	var/italics = 1
 
+	var/not_heard //the message displayed to people who could not hear the whispering
 	if (speaking)
-		verb = speaking.speech_verb + pick(" quietly", " softly")
+		if (speaking.whisper_verb)
+			verb = speaking.whisper_verb
+			not_heard = "[verb] something"
+		else
+			var/adverb = pick("quietly", "softly")
+			verb = "[speaking.speech_verb] [adverb]"
+			not_heard = "[speaking.speech_verb] something [adverb]"
+	else
+		not_heard = "[verb] something" //TODO get rid of the null language and just prevent speech if language is null
 
 	message = capitalize(trim(message))
 
-	//TODO: handle_speech_problems for silent
-	if (!message || silent || miming)
-		return
+	if(speech_problem_flag)
+		var/list/handle_r = handle_speech_problems(message)
+		message = handle_r[1]
+		verb = handle_r[2]
+		if(verb == "yells loudly")
+			verb = "slurs emphatically"
+		else
+			var/adverb = pick("quietly", "softly")
+			verb = "[verb] [adverb]"
 
-	// Mute disability
-	//TODO: handle_speech_problems
-	if (src.sdisabilities & MUTE)
-		return
+		speech_problem_flag = handle_r[3]
 
-	//TODO: handle_speech_problems
-	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+	if(!message || message=="")
 		return
 
 	//looks like this only appears in whisper. Should it be elsewhere as well? Maybe handle_speech_problems?
@@ -93,10 +109,6 @@
 			message = replacetext(message, "u", "µ")
 			message = replacetext(message, "b", "ß")
 
-	//TODO: handle_speech_problems
-	if (src.stuttering)
-		message = stutter(message)
-
 	var/list/listening = hearers(message_range, src)
 	listening |= src
 
@@ -117,7 +129,7 @@
 	for (var/obj/O in view(message_range, src))
 		spawn (0)
 			if (O)
-				O.hear_talk(src, message)	//O.hear_talk(src, message, verb, speaking)
+				O.hear_talk(src, message, verb, speaking)
 
 	var/list/eavesdropping = hearers(eavesdropping_range, src)
 	eavesdropping -= src
@@ -144,6 +156,6 @@
 			M.hear_say(new_message, verb, speaking, alt_name, italics, src)
 
 	if (watching.len)
-		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> whispers something.</span>"
+		var/rendered = "<span class='game say'><span class='name'>[src.name]</span> [not_heard].</span>"
 		for (var/mob/M in watching)
 			M.show_message(rendered, 2)

@@ -1,29 +1,19 @@
-// Constructable SMES version. Based on Coils. Each SMES can hold 6 Coils by default.
-// Each coil adds 250kW I/O and 5M capacity.
-// This is second version, now subtype of regular SMES.
-
-
-//Board
-/obj/item/weapon/circuitboard/smes
-	name = "Circuit board (SMES Cell)"
-	build_path = "/obj/machinery/power/smes/buildable"
-	board_type = "machine"
-	origin_tech = "powerstorage=6;engineering=4" // Board itself is high tech. Coils have to be ordered from cargo or salvaged from existing SMESs.
-	frame_desc = "Requires 1 superconducting magnetic coil and 30 wires."
-	req_components = list("/obj/item/weapon/smes_coil" = 1, "/obj/item/stack/cable_coil" = 30)
+// BUILDABLE SMES(Superconducting Magnetic Energy Storage) UNIT
+//
+// Last Change 1.1.2015 by Atlantis - Happy New Year!
+//
+// This is subtype of SMES that should be normally used. It can be constructed, deconstructed and hacked.
+// It also supports RCON System which allows you to operate it remotely, if properly set.
 
 //Construction Item
 /obj/item/weapon/smes_coil
-	name = "Superconducting Magnetic Coil"
-	desc = "Heavy duty superconducting magnetic coil, mainly used in construction of SMES units."
+	name = "superconductive magnetic coil"
+	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"			// Just few icons patched together. If someone wants to make better icon, feel free to do so!
 	w_class = 4.0 						// It's LARGE (backpack size)
 	var/ChargeCapacity = 5000000
 	var/IOCapacity = 250000
-
-
-
 
 // SMES itself
 /obj/machinery/power/smes/buildable
@@ -31,11 +21,45 @@
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
 	var/failing = 0 			// If 1 critical failure has occured and SMES explosion is imminent.
+	var/datum/wires/smes/wires
+	var/grounding = 1			// Cut to quickly discharge, at cost of "minor" electrical issues in output powernet.
+	var/RCon = 1				// Cut to disable AI and remote control.
+	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
+	charge = 0
+	should_be_mapped = 1
 
+// Proc: process()
+// Parameters: None
+// Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
+// This also causes the SMES to quickly discharge, and has small chance of damaging output APCs.
+/obj/machinery/power/smes/buildable/process()
+	if(!grounding && (Percentage() > 5))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, src)
+		s.start()
+		charge -= (output_level_max * SMESRATE)
+		if(prob(1)) // Small chance of overload occuring since grounding is disabled.
+			apcs_overload(5,10)
+
+	..()
+
+// Proc: attack_ai()
+// Parameters: None
+// Description: AI requires the RCON wire to be intact to operate the SMES.
+/obj/machinery/power/smes/buildable/attack_ai()
+	if(RCon)
+		..()
+	else // RCON wire cut
+		usr << "<span class='warning'>Connection error: Destination Unreachable.</span>"
+
+// Proc: New()
+// Parameters: None
+// Description: Adds standard components for this SMES, and forces recalculation of properties.
 /obj/machinery/power/smes/buildable/New()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
 	component_parts += new /obj/item/weapon/circuitboard/smes(src)
+	src.wires = new /datum/wires/smes(src)
 
 	// Allows for mapped-in SMESs with larger capacity/IO
 	for(var/i = 1, i <= cur_coils, i++)
@@ -44,6 +68,17 @@
 	recalc_coils()
 	..()
 
+// Proc: attack_hand()
+// Parameters: None
+// Description: Opens the UI as usual, and if cover is removed opens the wiring panel.
+/obj/machinery/power/smes/buildable/attack_hand()
+	..()
+	if(open_hatch)
+		wires.Interact(usr)
+
+// Proc: recalc_coils()
+// Parameters: None
+// Description: Updates properties (IO, capacity, etc.) of this SMES by checking internal components.
 /obj/machinery/power/smes/buildable/proc/recalc_coils()
 	if ((cur_coils <= max_coils) && (cur_coils >= 1))
 		capacity = 0
@@ -58,6 +93,10 @@
 	else
 		return 0
 
+// Proc: total_system_failure()
+// Parameters: 2 (intensity - how strong the failure is, user - person which caused the failure)
+// Description: Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
+/obj/machinery/power/smes/buildable/proc/total_system_failure(var/intensity = 0, var/mob/user as mob)
 	// SMESs store very large amount of power. If someone screws up (ie: Disables safeties and attempts to modify the SMES) very bad things happen.
 	// Bad things are based on charge percentage.
 	// Possible effects:
@@ -67,7 +106,7 @@
 	// Light Overload - X% chance to overload each lighting circuit in connected powernet. APC based.
 	// APC Failure - X% chance to destroy APC causing very weak explosion too. Won't cause hull breach or serious harm.
 	// SMES Explosion - X% chance to destroy the SMES, in moderate explosion. May cause small hull breach.
-/obj/machinery/power/smes/buildable/proc/total_system_failure(var/intensity = 0, var/mob/user as mob)
+
 	if (!intensity)
 		return
 
@@ -86,6 +125,8 @@
 		var/obj/item/clothing/gloves/G = h_user.gloves
 		if(G.siemens_coefficient == 0)
 			user_protected = 1
+	log_game("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100")
+	message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
 
 	switch (intensity)
@@ -134,7 +175,7 @@
 				empulse(src.loc, 8, 16)
 			charge = 0
 			apcs_overload(1, 10)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Uncontrolled discharge detected.\"")
+			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
 
 		if (61 to INFINITY)
 			// Massive overcharge
@@ -149,21 +190,30 @@
 				empulse(src.loc, 32, 64)
 			charge = 0
 			apcs_overload(5, 25)
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Output regulators malfunction. Significant uncontrolled discharge detected.\"")
+			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
 
 			if (prob(50))
-				src.visible_message("\icon[src] <b>[src]</b> beeps: \"DANGER! Magnetic containment field unstable! Containment field failure imminent!\"")
+				// Added admin-notifications so they can stop it when griffed.
+				log_game("SMES explosion imminent.")
+				message_admins("SMES explosion imminent.")
+				src.ping("DANGER! Magnetic containment field unstable! Containment field failure imminent!")
 				failing = 1
 				// 30 - 60 seconds and then BAM!
 				spawn(rand(300,600))
-					src.visible_message("\icon[src] <b>[src]</b> beeps: \"DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...\"")
+					if(!failing) // Admin can manually set this var back to 0 to stop overload, for use when griffed.
+						update_icon()
+						src.ping("Magnetic containment stabilised.")
+						return
+					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					del(src)
 
 
 
-	// Gets powernet APCs and overloads lights or breaks the APC completely, depending on percentages.
+// Proc: apcs_overload()
+// Parameters: 2 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights)
+// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
 /obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance)
 	if (!src.powernet)
 		return
@@ -173,10 +223,12 @@
 			var/obj/machinery/power/apc/A = T.master
 			if (prob(overload_chance))
 				A.overload_lighting()
-			else if (prob(failure_chance))
+			if (prob(failure_chance))
 				A.set_broken()
 
-	// Failing SMES has special icon overlay.
+// Proc: update_icon()
+// Parameters: None
+// Description: Allows us to use special icon overlay for critical SMESs
 /obj/machinery/power/smes/buildable/update_icon()
 	if (failing)
 		overlays.Cut()
@@ -184,6 +236,9 @@
 	else
 		..()
 
+// Proc: attackby()
+// Parameters: 2 (W - object that was used on this machine, user - person which used the object)
+// Description: Handles tool interaction. Allows deconstruction/upgrading/fixing.
 /obj/machinery/power/smes/buildable/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	// No more disassembling of overloaded SMESs. You broke it, now enjoy the consequences.
 	if (failing)
@@ -194,8 +249,15 @@
 	// - No action was taken in parent function (terminal de/construction atm).
 	if (..())
 
+		// Multitool - change RCON tag
+		if(istype(W, /obj/item/device/multitool))
+			var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
+			if(newtag)
+				RCon_tag = newtag
+				user << "<span class='notice'>You changed the RCON tag to: [newtag]</span>"
+			return
 		// Charged above 1% and safeties are enabled.
-		if((charge > (capacity/100)) && safeties_enabled && (!istype(W, /obj/item/device/multitool)))
+		if((charge > (capacity/100)) && safeties_enabled)
 			user << "<span class='warning'>Safety circuit of [src] is preventing modifications while it's charged!</span>"
 			return
 
@@ -252,8 +314,30 @@
 			else
 				usr << "\red You can't insert more coils to this SMES unit!"
 
-		// Multitool - Toggle the safeties.
-		else if(istype(W, /obj/item/device/multitool))
-			safeties_enabled = !safeties_enabled
-			user << "<span class='warning'>You [safeties_enabled ? "connected" : "disconnected"] the safety circuit.</span>"
-			src.visible_message("\icon[src] <b>[src]</b> beeps: \"Caution. Safety circuit has been: [safeties_enabled ? "re-enabled" : "disabled. Please excercise caution."]\"")
+// Proc: toggle_input()
+// Parameters: None
+// Description: Switches the input on/off depending on previous setting
+/obj/machinery/power/smes/buildable/proc/toggle_input()
+	input_attempt = !input_attempt
+	update_icon()
+
+// Proc: toggle_output()
+// Parameters: None
+// Description: Switches the output on/off depending on previous setting
+/obj/machinery/power/smes/buildable/proc/toggle_output()
+	output_attempt = !output_attempt
+	update_icon()
+
+// Proc: set_input()
+// Parameters: 1 (new_input - New input value in Watts)
+// Description: Sets input setting on this SMES. Trims it if limits are exceeded.
+/obj/machinery/power/smes/buildable/proc/set_input(var/new_input = 0)
+	input_level = between(0, new_input, input_level_max)
+	update_icon()
+
+// Proc: set_output()
+// Parameters: 1 (new_output - New output value in Watts)
+// Description: Sets output setting on this SMES. Trims it if limits are exceeded.
+/obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
+	output_level = between(0, new_output, output_level_max)
+	update_icon()

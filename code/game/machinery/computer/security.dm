@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/secure_data//TODO:SANITY
-	name = "Security Records"
-	desc = "Used to view and edit personnel's security records"
+	name = "security records console"
+	desc = "Used to view, edit and maintain security records"
 	icon_state = "security"
 	req_one_access = list(access_security, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/secure_data"
@@ -32,7 +32,7 @@
 	if(scan)
 		usr << "You remove \the [scan] from \the [src]."
 		scan.loc = get_turf(src)
-		if(!usr.get_active_hand())
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
@@ -576,9 +576,9 @@ What a mess.*/
 		return photo.img
 	if(istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
-		var/datum/picture/selection = tempAI.GetPicture()
+		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if (selection)
-			return selection.fields["img"]
+			return selection.img
 
 /obj/machinery/computer/secure_data/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -598,6 +598,8 @@ What a mess.*/
 					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
 				if(5)
 					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
+					if(PDA_Manifest.len)
+						PDA_Manifest.Cut()
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

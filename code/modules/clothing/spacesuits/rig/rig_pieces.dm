@@ -5,10 +5,10 @@
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | THICKMATERIAL
-	flags_inv = 		 HIDEEARS
-	body_parts_covered = HEAD
-	heat_protection =    HEAD
-	cold_protection =    HEAD
+	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE
+	body_parts_covered = HEAD|FACE|EYES
+	heat_protection =    HEAD|FACE|EYES
+	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
 	species_restricted = null
 
@@ -21,12 +21,13 @@
 	species_restricted = null
 	gender = PLURAL
 
-/obj/item/clothing/shoes/rig
+/obj/item/clothing/shoes/magboots/rig
 	name = "boots"
 	cold_protection = FEET
 	heat_protection = FEET
 	species_restricted = null
 	gender = PLURAL
+	icon_base = null
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"

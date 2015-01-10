@@ -26,7 +26,7 @@
 		var/obj/item/stack/sheet/metal/M = O
 		if (M.use(1))
 			use(1)
-			new/obj/item/stack/tile/light(user.loc)
+			new/obj/item/stack/tile/light(get_turf(user))
 			user << "<span class='notice'>You make a light tile.</span>"
 		else
 			user << "<span class='warning'>You need one metal sheet to finish the light tile.</span>"

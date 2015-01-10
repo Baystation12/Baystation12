@@ -98,7 +98,7 @@
 				holder.icon_state = "hudhealth-100"
 				C.images += holder
 			else
-				holder.icon_state = "hud[RoundHealth((patient.health-config.health_threshold_crit)/(patient.species.total_health-config.health_threshold_crit)*100)]"
+				holder.icon_state = "hud[RoundHealth((patient.health-config.health_threshold_crit)/(patient.maxHealth-config.health_threshold_crit)*100)]"
 				C.images += holder
 
 			holder = patient.hud_list[STATUS_HUD]

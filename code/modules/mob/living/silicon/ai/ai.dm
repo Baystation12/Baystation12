@@ -45,6 +45,7 @@ var/list/ai_verbs_default = list(
 	anchored = 1 // -- TLE
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE
+	shouldnt_see = list(/obj/effect/rune)
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
@@ -71,6 +72,7 @@ var/list/ai_verbs_default = list(
 
 	var/mob/living/silicon/ai/parent = null
 
+	var/apc_override = 0 //hack for letting the AI use its APC even when visionless
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -129,7 +131,7 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language("Robot Talk", 1)
-	add_language("Galactic Common", 0)
+	add_language("Galactic Common", 1)
 	add_language("Sol Common", 0)
 	add_language("Sinta'unathi", 0)
 	add_language("Siik'tajr", 0)
@@ -228,7 +230,7 @@ var/list/ai_verbs_default = list(
 */
 /obj/machinery/ai_powersupply
 	name="Power Supply"
-	active_power_usage=1000
+	active_power_usage=50000 // Station AIs use significant amounts of power. This, when combined with charged SMES should mean AI lasts for 1hr without external power.
 	use_power = 2
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null
@@ -419,13 +421,6 @@ var/list/ai_verbs_default = list(
 	user.reset_view(camera)
 	return 1
 
-/mob/living/silicon/ai/blob_act()
-	if (stat != 2)
-		adjustBruteLoss(60)
-		updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/ai/restrained()
 	return 0
 
@@ -437,26 +432,6 @@ var/list/ai_verbs_default = list(
 			if(2)
 				ai_call_shuttle()
 	..()
-
-/mob/living/silicon/ai/ex_act(severity)
-	if(!blinded)
-		flick("flash", flash)
-
-	switch(severity)
-		if(1.0)
-			if (stat != 2)
-				adjustBruteLoss(100)
-				adjustFireLoss(100)
-		if(2.0)
-			if (stat != 2)
-				adjustBruteLoss(60)
-				adjustFireLoss(60)
-		if(3.0)
-			if (stat != 2)
-				adjustBruteLoss(30)
-
-	updatehealth()
-
 
 /mob/living/silicon/ai/Topic(href, href_list)
 	if(usr != src)
@@ -522,11 +497,6 @@ var/list/ai_verbs_default = list(
 			adjustFireLoss(40)
 		updatehealth()
 	return
-
-/mob/living/silicon/ai/bullet_act(var/obj/item/projectile/Proj)
-	..(Proj)
-	updatehealth()
-	return 2
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)
@@ -600,7 +570,7 @@ var/list/ai_verbs_default = list(
 		if(!C.can_use())
 			continue
 
-		var/list/tempnetwork = difflist(C.network,RESTRICTED_CAMERA_NETWORKS,1)
+		var/list/tempnetwork = difflist(C.network,restricted_camera_networks,1)
 		if(tempnetwork.len)
 			for(var/i in tempnetwork)
 				cameralist[i] = i

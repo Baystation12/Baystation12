@@ -643,6 +643,12 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
 
+		if(jobban_isbanned(M, "Borer"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'><font color=red>Borer</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'>Borer</a></td>"
+
+
 		jobs += "</tr></table>"
 
 
@@ -1496,14 +1502,11 @@
 			//open a browse window listing the contents instead
 			var/data = ""
 			var/obj/item/weapon/paper_bundle/B = fax
-			
+
 			for (var/page = 1, page <= B.amount, page++)
 				var/obj/pageobj = B.contents[page]
 				data += "<A href='?src=\ref[src];AdminFaxViewPage=[page];paper_bundle=\ref[B]'>Page [page] - [pageobj.name]</A><BR>"
-			
-			world << data
-			world << "usr = [usr]"
-			
+
 			usr << browse(data, "window=[B.name]")
 		else
 			usr << "\red The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]"
@@ -1511,9 +1514,9 @@
 	else if (href_list["AdminFaxViewPage"])
 		var/page = text2num(href_list["AdminFaxViewPage"])
 		var/obj/item/weapon/paper_bundle/bundle = locate(href_list["paper_bundle"])
-		
+
 		if (!bundle) return
-		
+
 		if (istype(bundle.contents[page], /obj/item/weapon/paper))
 			var/obj/item/weapon/paper/P = bundle.contents[page]
 			P.show_content(src.owner, 1)
@@ -1530,13 +1533,13 @@
 		if(!input)	return
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
-		
+
 		// Create the reply message
 		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( null ) //hopefully the null loc won't cause trouble for us
 		P.name = "[command_name()]- [customname]"
 		P.info = input
 		P.update_icon()
-		
+
 		// Stamps
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
 		stampoverlay.icon_state = "paper_stamp-cent"
@@ -1552,7 +1555,7 @@
 			message_admins("[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(sender)]", 1)
 		else
 			src.owner << "\red Message reply failed."
-		
+
 		spawn(100)
 			del(P)
 		return
@@ -1769,7 +1772,7 @@
 					else
 						var/atom/O = new path(target)
 						if(O)
-							O.dir = obj_dir
+							O.set_dir(obj_dir)
 							if(obj_name)
 								O.name = obj_name
 								if(istype(O,/mob))
@@ -2116,18 +2119,18 @@
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")
-				switch(MAX_EXPLOSION_RANGE)
-					if(14)	MAX_EXPLOSION_RANGE = 16
-					if(16)	MAX_EXPLOSION_RANGE = 20
-					if(20)	MAX_EXPLOSION_RANGE = 28
-					if(28)	MAX_EXPLOSION_RANGE = 56
-					if(56)	MAX_EXPLOSION_RANGE = 128
-					if(128)	MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
+				switch(max_explosion_range)
+					if(14)	max_explosion_range = 16
+					if(16)	max_explosion_range = 20
+					if(20)	max_explosion_range = 28
+					if(28)	max_explosion_range = 56
+					if(56)	max_explosion_range = 128
+					if(128)	max_explosion_range = 14
+				var/range_dev = max_explosion_range *0.25
+				var/range_high = max_explosion_range *0.5
+				var/range_low = max_explosion_range
 				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
 
 			if("flicklights")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2231,7 +2234,7 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
-				if(aliens_allowed)
+				if(config.aliens_allowed)
 					new /datum/event/alien_infestation
 					message_admins("[key_name_admin(usr)] has spawned aliens", 1)
 			if("spiders")
@@ -2251,7 +2254,7 @@
 			if("spaceninja")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SN")
-				if(toggle_space_ninja)
+				if(config.ninjas_allowed)
 					if(space_ninja_arrival())//If the ninja is actually spawned. They may not be depending on a few factors.
 						message_admins("[key_name_admin(usr)] has sent in a space ninja", 1)
 			if("carp")
@@ -2756,6 +2759,24 @@
 				vsc.ChangeSettingsDialog(usr,vsc.plc.settings)
 			if(href_list["vsc"] == "default")
 				vsc.SetDefault(usr)
+
+	else if(href_list["toglang"])
+		if(check_rights(R_SPAWN))
+			var/mob/M = locate(href_list["toglang"])
+			if(!istype(M))
+				usr << "[M] is illegal type, must be /mob!"
+				return
+			var/lang2toggle = href_list["lang"]
+			var/datum/language/L = all_languages[lang2toggle]
+
+			if(L in M.languages)
+				if(!M.remove_language(lang2toggle))
+					usr << "Failed to remove language '[lang2toggle]' from \the [M]!"
+			else
+				if(!M.add_language(lang2toggle))
+					usr << "Failed to add language '[lang2toggle]' from \the [M]!"
+
+			show_player_panel(M)
 
 	// player info stuff
 

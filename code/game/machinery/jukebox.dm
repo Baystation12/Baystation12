@@ -34,6 +34,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/Del()
 	StopPlaying()
+	..()
 
 /obj/machinery/media/jukebox/power_change()
 	if(!powered(power_channel) || !anchored)

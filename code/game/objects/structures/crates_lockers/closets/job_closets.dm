@@ -25,7 +25,7 @@
 	new /obj/item/clothing/under/sl_suit(src)
 	new /obj/item/clothing/under/rank/bartender(src)
 	new /obj/item/clothing/under/rank/bartender(src)
-	new /obj/item/clothing/under/dress/dress_saloon
+	new /obj/item/clothing/under/dress/dress_saloon(src)
 	new /obj/item/clothing/suit/wcoat(src)
 	new /obj/item/clothing/suit/wcoat(src)
 	new /obj/item/clothing/shoes/black(src)
@@ -35,7 +35,7 @@
  * Chef
  */
 /obj/structure/closet/chefcloset
-	name = "\proper chef's closet"
+	name = "chef's closet"
 	desc = "It's a storage unit for foodservice garments."
 	icon_state = "black"
 	icon_closed = "black"

@@ -1,6 +1,6 @@
 /obj/item/weapon/camera_assembly
 	name = "camera assembly"
-	desc = "The basic construction for Nanotrasen-Always-Watching-You cameras."
+	desc = "A pre-fabricated security camera kit, ready to be assembled and mounted to a surface."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "cameracase"
 	w_class = 2
@@ -100,7 +100,7 @@
 				C.auto_turn()
 
 				C.network = uniquelist(tempnetwork)
-				tempnetwork = difflist(C.network,RESTRICTED_CAMERA_NETWORKS)
+				tempnetwork = difflist(C.network,restricted_camera_networks)
 				if(!tempnetwork.len)//Camera isn't on any open network - remove its chunk from AI visibility.
 					cameranet.removeCamera(C)
 

@@ -16,9 +16,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)	return
 	if(!reagents.total_volume)
-		if(M == usr)
-			usr << "<span class='notice'>You finish eating \the [src].</span>"
-		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>")
+		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>","<span class='notice'>You finish eating \the [src].</span>")
 		usr.drop_from_inventory(src)	//so icons update :[
 
 		if(trash)
@@ -206,24 +204,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
-
 /obj/item/weapon/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
-
-	if(isanimal(user) || isalien(user))
-
-		if(bitecount == 0 || prob(50))
-			user.custom_emote(1,"nibbles away at the [src]")
-			bitecount++
-
-			if(reagents && user.reagents)
-				reagents.trans_to_ingest(user, bitesize)
-
-			spawn(5)
-				if(!src && !user.client)
-					user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
-					del(src)
-
-			On_Consume(user)
+	if(!isanimal(user) && !isalien(user))
+		return
+	user.visible_message("<b>[user]</b> nibbles away at the [src].","You nibble away at the [src].")
+	bitecount++
+	if(reagents && user.reagents)
+		reagents.trans_to_ingest(user, bitesize)
+	spawn(5)
+		if(!src && !user.client)
+			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
+			del(src)
+	On_Consume(user)
 
 //////////////////////////////////////////////////
 ////////////////////////////////////////////Snacks
@@ -673,7 +665,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 	name = "meat"
-	desc = "A slab of meat"
+	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
 	filling_color = "#43DE18"
 
@@ -1531,12 +1523,11 @@
 		if (istype(M, /mob/living/carbon/human))
 			//Do not try to understand.
 			var/obj/item/weapon/surprise = new/obj/item/weapon(M)
-			var/mob/living/carbon/monkey/ook = new monkey_type(null) //no other way to get access to the vars, alas
-			surprise.icon = ook.icon
-			surprise.icon_state = ook.icon_state
-			surprise.name = "malformed [ook.name]"
-			surprise.desc = "Looks like \a very deformed [ook.name], a little small for its kind. It shows no signs of life."
-			del(ook)	//rip nullspace monkey
+			var/mob/ook = monkey_type
+			surprise.icon = initial(ook.icon)
+			surprise.icon_state = initial(ook.icon_state)
+			surprise.name = "malformed [initial(ook.name)]"
+			surprise.desc = "Looks like \a very deformed [initial(ook.name)], a little small for its kind. It shows no signs of life."
 			surprise.transform *= 0.6
 			surprise.add_blood(M)
 			var/mob/living/carbon/human/H = M
@@ -1597,7 +1588,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type ="skrell"
+	monkey_type = /mob/living/carbon/monkey/skrell
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
 	monkey_type =/mob/living/carbon/monkey/skrell

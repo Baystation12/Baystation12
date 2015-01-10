@@ -495,6 +495,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper north east of the mining asteroid"
 	icon_state = "north"
 
+/area/syndicate_station/arrivals_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
+/area/syndicate_station/maint_dock
+	name = "\improper docked with station"
+	icon_state = "shuttle"
+
 /area/syndicate_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
@@ -762,8 +770,15 @@ var/list/ghostteleportlocs = list()
 /area/maintenance/substation/engineering // Probably will be connected to engineering SMES room, as wires cannot be crossed properly without them sharing powernets.
 	name = "Engineering Substation"
 
+// No longer used:
 /area/maintenance/substation/medical_science // Medbay and Science. Each has it's own separated machinery, but it originates from the same room.
 	name = "Medical Research Substation"
+
+/area/maintenance/substation/medical // Medbay
+	name = "Medical Substation"
+
+/area/maintenance/substation/research // Research
+	name = "Research Substation"
 
 /area/maintenance/substation/civilian_east // Bar, kitchen, dorms, ...
 	name = "Civilian East Substation"
@@ -904,16 +919,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering Washroom"
 	icon_state = "toilet"
 
-/area/crew_quarters/sleep/bedrooms/one
+/area/crew_quarters/sleep/bedrooms
 	name = "\improper Dormitory Bedroom One"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/bedrooms/two
-	name = "\improper Dormitory Bedroom Two"
-	icon_state = "Sleep"
-
-/area/crew_quarters/sleep/bedrooms/three
-	name = "\improper Dormitory Bedroom Three"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep/cryo
@@ -1040,6 +1047,7 @@ var/list/ghostteleportlocs = list()
 
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
+	has_gravity = 0
 
 
 

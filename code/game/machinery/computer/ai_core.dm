@@ -1,7 +1,7 @@
 /obj/structure/AIcore
 	density = 1
 	anchored = 0
-	name = "AI core"
+	name = "\improper AI core"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	var/state = 0
@@ -123,21 +123,22 @@
 				laws.add_inherent_law(M.newFreeFormLaw)
 				usr << "Added a freeform law."
 
-			if(istype(P, /obj/item/device/mmi) || istype(P, /obj/item/device/mmi/posibrain))
-				if(!P:brainmob)
+			if(istype(P, /obj/item/device/mmi))
+				var/obj/item/device/mmi/M = P
+				if(!M.brainmob)
 					user << "\red Sticking an empty [P] into the frame would sort of defeat the purpose."
 					return
-				if(P:brainmob.stat == 2)
+				if(M.brainmob.stat == 2)
 					user << "\red Sticking a dead [P] into the frame would sort of defeat the purpose."
 					return
 
-				if(jobban_isbanned(P:brainmob, "AI"))
+				if(jobban_isbanned(M.brainmob, "AI"))
 					user << "\red This [P] does not seem to fit."
 					return
 
-				if(P:brainmob.mind)
-					ticker.mode.remove_cultist(P:brainmob.mind, 1)
-					ticker.mode.remove_revolutionary(P:brainmob.mind, 1)
+				if(M.brainmob.mind)
+					ticker.mode.remove_cultist(M.brainmob.mind, 1)
+					ticker.mode.remove_revolutionary(M.brainmob.mind, 1)
 
 				user.drop_item()
 				P.loc = src
@@ -174,7 +175,7 @@
 				del(src)
 
 /obj/structure/AIcore/deactivated
-	name = "Inactive AI"
+	name = "inactive AI"
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "ai-empty"
 	anchored = 1

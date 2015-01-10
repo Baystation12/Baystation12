@@ -9,7 +9,7 @@ MASS SPECTROMETER
 REAGENT SCANNER
 */
 /obj/item/device/t_scanner
-	name = "T-ray scanner"
+	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
 	icon_state = "t-ray0"
 	var/on = 0
@@ -65,10 +65,10 @@ REAGENT SCANNER
 
 
 /obj/item/device/healthanalyzer
-	name = "Health Analyzer"
+	name = "health analyzer"
+	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	icon_state = "health"
 	item_state = "analyzer"
-	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
@@ -227,8 +227,8 @@ REAGENT SCANNER
 
 
 /obj/item/device/analyzer
-	desc = "A hand-held environmental scanner which reports current gas levels."
 	name = "analyzer"
+	desc = "A hand-held environmental scanner which reports current gas levels."
 	icon_state = "atmos"
 	item_state = "analyzer"
 	w_class = 2.0
@@ -274,8 +274,8 @@ REAGENT SCANNER
 	return
 
 /obj/item/device/mass_spectrometer
+	name = "mass spectrometer"
 	desc = "A hand-held mass spectrometer which identifies trace chemicals in a blood sample."
-	name = "mass-spectrometer"
 	icon_state = "spectrometer"
 	item_state = "analyzer"
 	w_class = 2.0
@@ -342,7 +342,7 @@ REAGENT SCANNER
 	return
 
 /obj/item/device/mass_spectrometer/adv
-	name = "advanced mass-spectrometer"
+	name = "advanced mass spectrometer"
 	icon_state = "adv_spectrometer"
 	details = 1
 	origin_tech = "magnets=4;biotech=2"

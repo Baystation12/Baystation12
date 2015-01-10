@@ -1,6 +1,5 @@
 /*********************MANUALS (BOOKS)***********************/
 
-//Oh god what the fuck I am not good at computer
 /obj/item/weapon/book/manual
 	icon = 'icons/obj/library.dmi'
 	due_date = 0 // Game time in 1/10th seconds
@@ -13,19 +12,20 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Station Repairs and Construction"
 
+/obj/item/weapon/book/manual/engineering_construction/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
 
 		"}
-
 
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
@@ -33,6 +33,8 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Particle Accelerator User's Guide"
 
+/obj/item/weapon/book/manual/engineering_particle_accelerator/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -78,6 +80,8 @@
 	author = "Waleed Asad"
 	title = "Supermatter Engine User's Guide"
 
+/obj/item/weapon/book/manual/supermatter_engine/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -188,13 +192,15 @@
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
 
+/obj/item/weapon/book/manual/engineering_hacking/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
@@ -743,13 +749,15 @@
 	author = "NanoTrasen"
 	title = "Corporate Regulations"
 
+/obj/item/weapon/book/manual/security_space_law/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
@@ -765,6 +773,8 @@
 	author = "NanoTrasen Medicine Department"
 	title = "NT Medical Diagnostics Manual"
 
+/obj/item/weapon/book/manual/medical_diagnostics_manual/New()
+	..()
 	dat = {"<html>
 				<head>
 				<style>
@@ -797,7 +807,7 @@
 
 				<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
 
-				<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+				<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
 				</body>
 			</html>
 
@@ -810,13 +820,15 @@
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
 
+/obj/item/weapon/book/manual/engineering_guide/New()
+	..()
 	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 

@@ -157,37 +157,41 @@
 /obj/structure/window/attack_generic(var/mob/user, var/damage)
 	if(!damage)
 		return
-	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
-	take_damage(damage)
+	if(damage >= 10)
+		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		take_damage(damage)
+	else
+		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
-	if(W.flags & NOBLUDGEON) return
-
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
-		if (istype(G.affecting, /mob/living))
+		if(istype(G.affecting,/mob/living))
 			var/mob/living/M = G.affecting
 			var/state = G.state
 			del(W)	//gotta delete it here because if window breaks, it won't get deleted
 			switch (state)
 				if(1)
+					M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
 					M.apply_damage(7)
 					hit(10)
-					visible_message("\red [user] slams [M] against \the [src]!")
 				if(2)
+					M.visible_message("<span class='danger'>[user] bashes [M] against \the [src]!</span>")
 					if (prob(50))
 						M.Weaken(1)
 					M.apply_damage(10)
 					hit(25)
-					visible_message("\red <b>[user] bashes [M] against \the [src]!</b>")
 				if(3)
+					M.visible_message("<span class='danger'><big>[user] crushes [M] against \the [src]!</big></span>")
 					M.Weaken(5)
 					M.apply_damage(20)
 					hit(50)
-					visible_message("\red <big><b>[user] crushes [M] against \the [src]!</b></big>")
 			return
+
+	if(W.flags & NOBLUDGEON) return
+
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(reinf && state >= 1)
 			state = 3 - state
@@ -214,7 +218,7 @@
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
 				var/obj/item/stack/sheet/mats = new glasstype(loc)
-				mats.amount = 2
+				mats.amount = is_fulltile() ? 4 : 2
 			else
 				new glasstype(loc)
 			del(src)
@@ -246,7 +250,7 @@
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	dir = turn(dir, 90)
+	set_dir(turn(dir, 90))
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -262,7 +266,7 @@
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	dir = turn(dir, 270)
+	set_dir(turn(dir, 270))
 //	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -292,7 +296,7 @@
 		anchored = 0
 
 	if (start_dir)
-		dir = start_dir
+		set_dir(start_dir)
 
 	health = maxhealth
 
@@ -313,17 +317,8 @@
 	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
 	..()
-	dir = ini_dir
+	set_dir(ini_dir)
 	update_nearby_tiles(need_rebuild=1)
-
-
-//This proc has to do with airgroups and atmos, it has nothing to do with smoothwindows, that's update_nearby_tiles().
-/obj/structure/window/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-	air_master.mark_for_update(get_turf(src))
-
-	return 1
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()

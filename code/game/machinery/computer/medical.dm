@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/med_data//TODO:SANITY
-	name = "Medical Records"
-	desc = "This can be used to check medical records."
+	name = "medical records console"
+	desc = "Used to view, edit and maintain medical records."
 	icon_state = "medcomp"
 	req_one_access = list(access_medical, access_forensics_lockers)
 	circuit = "/obj/item/weapon/circuitboard/med_data"
@@ -26,7 +26,7 @@
 	if(scan)
 		usr << "You remove \the [scan] from \the [src]."
 		scan.loc = get_turf(src)
-		if(!usr.get_active_hand())
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
@@ -364,6 +364,8 @@
 							src.active1.fields["p_stat"] = "Physically Unfit"
 						if("disabled")
 							src.active1.fields["p_stat"] = "Disabled"
+					if(PDA_Manifest.len)
+						PDA_Manifest.Cut()
 
 			if (href_list["m_stat"])
 				if (src.active1)
@@ -533,6 +535,8 @@
 					R.fields["b_type"] = pick("A-", "B-", "AB-", "O-", "A+", "B+", "AB+", "O+")
 				if(5)
 					R.fields["p_stat"] = pick("*SSD*", "Active", "Physically Unfit", "Disabled")
+					if(PDA_Manifest.len)
+						PDA_Manifest.Cut()
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

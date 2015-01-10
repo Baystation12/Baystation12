@@ -59,7 +59,7 @@
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
-	var/list/skills = null
+	var/list/skills = list()
 
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
@@ -82,5 +82,3 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
-
-	var/attack_move = 0 //Used in combat to check if user is performing an attack over several ticks

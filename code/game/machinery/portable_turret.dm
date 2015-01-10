@@ -36,11 +36,12 @@
 	var/last_fired = 0		//1: if the turret is cooling down from a shot, 0: turret is ready to fire
 	var/shot_delay = 15		//1.5 seconds between each shot
 
-	var/check_records = 1	//checks if it can use the security records
-	var/auth_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
-	var/stun_all = 1		//if this is active, the turret shoots everything that does not meet the access requirements
+	var/check_arrest = 1	//checks if the perp is set to arrest
+	var/check_records = 1	//checks if a security record exists at all
+	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
+	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
-	var/ai		 = 0 		//if active, will shoot at anything not an AI or cyborg
+	var/check_synth	 = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 			// AI cannot use this
 
 	var/attacked = 0		//if set to 1, the turret gets pissed off and shoots at people nearby (unless they have sec access!)
@@ -53,6 +54,8 @@
 	var/eshot_sound			//what sound should play when the emagged turret fires
 
 	var/datum/effect/effect/system/spark_spread/spark_system	//the spark system, used for generating... sparks?
+
+	var/wrenching = 0
 
 /obj/machinery/porta_turret/stationary
 	lethal = 1
@@ -71,54 +74,55 @@
 	setup()
 
 /obj/machinery/porta_turret/proc/setup()
-	var/obj/item/weapon/gun/energy/E = new installation	//All energy-based weapons are applicable
+	var/obj/item/weapon/gun/energy/E = installation	//All energy-based weapons are applicable
 	//var/obj/item/ammo_casing/shottype = E.projectile_type
 
-	projectile = E.projectile_type
+	projectile = initial(E.projectile_type)
 	eprojectile = projectile
-	shot_sound = E.fire_sound
+	shot_sound = initial(E.fire_sound)
 	eshot_sound = shot_sound
 
-	weapon_setup(E)
+	weapon_setup(installation)
 
-/obj/machinery/porta_turret/proc/weapon_setup(var/obj/item/weapon/gun/energy/E)
-	if(/obj/item/weapon/gun/energy/laser/practice)
-		iconholder = 1
-		eprojectile = /obj/item/projectile/beam
+/obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
+	switch(guntype)
+		if(/obj/item/weapon/gun/energy/laser/practice)
+			iconholder = 1
+			eprojectile = /obj/item/projectile/beam
 
 //			if(/obj/item/weapon/gun/energy/laser/practice/sc_laser)
 //				iconholder = 1
 //				eprojectile = /obj/item/projectile/beam
 
-	if(/obj/item/weapon/gun/energy/laser/retro)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/laser/retro)
+			iconholder = 1
 
 //			if(/obj/item/weapon/gun/energy/laser/retro/sc_retro)
 //				iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/laser/captain)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/laser/captain)
+			iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/lasercannon)
-		iconholder = 1
+		if(/obj/item/weapon/gun/energy/lasercannon)
+			iconholder = 1
 
-	if(/obj/item/weapon/gun/energy/taser)
-		eprojectile = /obj/item/projectile/beam
-		eshot_sound = 'sound/weapons/Laser.ogg'
+		if(/obj/item/weapon/gun/energy/taser)
+			eprojectile = /obj/item/projectile/beam
+			eshot_sound = 'sound/weapons/Laser.ogg'
 
-	if(/obj/item/weapon/gun/energy/stunrevolver)
-		eprojectile = /obj/item/projectile/beam
-		eshot_sound = 'sound/weapons/Laser.ogg'
+		if(/obj/item/weapon/gun/energy/stunrevolver)
+			eprojectile = /obj/item/projectile/beam
+			eshot_sound = 'sound/weapons/Laser.ogg'
 
-	if(/obj/item/weapon/gun/energy/gun)
-		eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
-		eshot_sound = 'sound/weapons/Laser.ogg'
-		egun = 1
+		if(/obj/item/weapon/gun/energy/gun)
+			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
+			eshot_sound = 'sound/weapons/Laser.ogg'
+			egun = 1
 
-	if(/obj/item/weapon/gun/energy/gun/nuclear)
-		eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
-		eshot_sound = 'sound/weapons/Laser.ogg'
-		egun = 1
+		if(/obj/item/weapon/gun/energy/gun/nuclear)
+			eprojectile = /obj/item/projectile/beam	//If it has, going to kill mode
+			eshot_sound = 'sound/weapons/Laser.ogg'
+			egun = 1
 
 /obj/machinery/porta_turret/update_icon()
 	if(!anchored)
@@ -180,17 +184,21 @@
 					Neutralize All Non-Synthetics: []<BR>"},
 
 					"<A href='?src=\ref[src];operation=togglelethal'>[lethal ? "Enabled" : "Disabled"]</A>",
-					"<A href='?src=\ref[src];operation=toggleai'>[ai ? "Yes" : "No"]</A>")
-		if(!ai)
+					"<A href='?src=\ref[src];operation=toggleai'>[check_synth ? "Yes" : "No"]</A>")
+		if(!check_synth)
 			dat += text({"Check for Weapon Authorization: []<BR>
 					Check Security Records: []<BR>
+					Check Arrest Status: []<BR>
 					Neutralize All Non-Authorized Personnel: []<BR>
 					Neutralize All Unidentified Life Signs: []<BR>"},
 
-					"<A href='?src=\ref[src];operation=authweapon'>[auth_weapons ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=authweapon'>[check_weapons ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
-					"<A href='?src=\ref[src];operation=shootall'>[stun_all ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkarrest'>[check_arrest ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkaccess'>[check_access ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>" )
+	else
+		dat += "<div class='notice icon'>Swipe ID card to unlock interface</div>"
 
 	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
 	onclose(user, "autosec")
@@ -206,37 +214,37 @@
 	if(!can_use(usr))
 		return 1
 
+	if(HasController())
+		usr << "<span class='notice'>Turrets can only be controlled using the assigned turret controller.</span>"
+		return
+
 	usr.set_machine(src)
 	if(href_list["power"])
 		if(anchored)	//you can't turn a turret on/off if it's not anchored/secured
-			if(HasController())
-				usr << "<span class='notice'>Turrets can only be [on ? "disabled" : "enabled"] using the assigned turret controller.</span>"
-			else
-				on = !on	//toggle on/off
+			on = !on	//toggle on/off
 		else
 			usr << "<span class='notice'>It has to be secured first!</span>"
 
-		updateUsrDialog()
+		attack_hand(usr)
 		return
 
 	switch(href_list["operation"])	//toggles customizable behavioural protocols
 		if("togglelethal")
 			if(!controllock)
-				if(HasController())
-					usr << "<span class='notice'>Weapon mode can only be altered using the assigned turret controller.</span>"
-				else
-					lethal = !lethal
+				lethal = !lethal
 		if("toggleai")
-			ai = !ai
+			check_synth = !check_synth
 		if("authweapon")
-			auth_weapons = !auth_weapons
+			check_weapons = !check_weapons
 		if("checkrecords")
 			check_records = !check_records
-		if("shootall")
-			stun_all = !stun_all
+		if("checkarrests")
+			check_arrest = !check_arrest
+		if("checkaccess")
+			check_access = !check_access
 		if("checkxenos")
 			check_anomalies = !check_anomalies
-	updateUsrDialog()
+	attack_hand(usr)
 
 
 /obj/machinery/porta_turret/power_change()
@@ -282,19 +290,32 @@
 		sleep(60) //6 seconds for the traitor to gtfo of the area before the turret decides to ruin his shit
 		on = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 
-	else if((istype(I, /obj/item/weapon/wrench)) && (!on))
-		if(raised) return
+	else if((istype(I, /obj/item/weapon/wrench)))
+		if(on || raised)
+			user << "<span class='warning'You cannot unsecure an active turret!</span>"
+			return
+		if(wrenching)
+			user << "<span class='warning'>Someone is already [anchored ? "un" : ""]securing the turret!</span>"
+			return
+		if(!anchored && isinspace())
+			user << "<span class='warning'>Cannot secure turrets in space!</span>"
+			return
 
+		user.visible_message( \
+				"<span class='warning'>[user] begins [anchored ? "un" : ""]securing the turret.</span>", \
+				"<span class='notice'>You begin [anchored ? "un" : ""]securing the turret.</span>" \
+			)
+
+		wrenching = 1
 		if(do_after(user, 50))
 			//This code handles moving the turret around. After all, it's a portable turret!
-			if(!anchored && !isinspace())
+			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 1
 				invisibility = INVISIBILITY_LEVEL_TWO
 				update_icon()
 				user << "<span class='notice'>You secure the exterior bolts on the turret.</span>"
-				cover = new /obj/machinery/porta_turret_cover(loc) //create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
-				cover.Parent_Turret = src //make the cover's parent src
+				create_cover()
 			else if(anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				anchored = 0
@@ -302,6 +323,7 @@
 				invisibility = 0
 				update_icon()
 				del(cover) //deletes the cover, and the turret instance itself becomes its own cover. - qdel
+		wrenching = 0
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
 		//Behavior lock/unlock mangement
@@ -315,9 +337,7 @@
 	else
 		//if the turret was attacked with the intention of harming it:
 		user.changeNext_move(CLICK_CD_MELEE)
-		health -= I.force * 0.5
-		if(health <= 0)
-			die()
+		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
 				attacked = 1
@@ -326,8 +346,18 @@
 					attacked = 0
 		..()
 
+/obj/machinery/porta_turret/proc/take_damage(var/force)
+	health -= force
+	if (force > 5 && prob(45))
+		spark_system.start()
+	if(health <= 0)
+		die()	//the death process :(
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
+
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	if(on)
 		if(!attacked && !emagged)
 			attacked = 1
@@ -335,23 +365,20 @@
 				sleep(60)
 				attacked = 0
 
-	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		health -= Proj.damage
-
 	..()
 
-	if(prob(45) && Proj.damage > 0)
-		spark_system.start()
-	if(health <= 0)
-		die()	//the death process :(
+	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		take_damage(Proj.damage)
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(on)
 		//if the turret is on, the EMP no matter how severe disables the turret for a while
 		//and scrambles its settings, with a slight chance of having an emag effect
-		check_records = pick(0, 1)
-		auth_weapons = pick(0, 1)
-		stun_all = pick(0, 0, 0, 0, 1)	//stun_all is a pretty big deal, so it's least likely to get turned on
+		check_arrest = prob(50)
+		check_records = prob(50)
+		check_weapons = prob(50)
+		check_access = prob(20)	// check_access is a pretty big deal, so it's least likely to get turned on
+		check_anomalies = prob(50)
 		if(prob(5))
 			emagged = 1
 
@@ -363,10 +390,16 @@
 	..()
 
 /obj/machinery/porta_turret/ex_act(severity)
-	if(severity >= 3)	//turret dies if an explosion touches it!
-		del(src) // qdel
-	else
-		die()
+	switch (severity)
+		if (1)
+			del(src)
+		if (2)
+			if (prob(25))
+				del(src)
+			else
+				take_damage(150) //should instakill most turrets
+		if (3)
+			take_damage(50)
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
@@ -378,7 +411,10 @@
 	update_icon()
 	del(cover)	//deletes the cover - no need on keeping it there! - del
 
-
+/obj/machinery/porta_turret/proc/create_cover()
+	if(cover == null && anchored)
+		cover = new /obj/machinery/porta_turret_cover(loc)	//if the turret has no cover and is anchored, give it a cover
+		cover.Parent_Turret = src	//assign the cover its Parent_Turret, which would be this (src)
 
 /obj/machinery/porta_turret/process()
 	//the main machinery process
@@ -389,9 +425,7 @@
 		if(stat & BROKEN)	//if the turret is borked
 			del(cover)	//delete its cover, assuming it has one. Workaround for a pesky little bug - qdel
 		else
-
-			cover = new /obj/machinery/porta_turret_cover(loc)	//if the turret has no cover and is anchored, give it a cover
-			cover.Parent_Turret = src	//assign the cover its Parent_Turret, which would be this (src)
+			create_cover()
 
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
@@ -428,6 +462,12 @@
 			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+	if(!istype(L))
+		return TURRET_NOT_TARGET
+
+	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
+		return TURRET_NOT_TARGET
+
 	if(!L)
 		return TURRET_NOT_TARGET
 
@@ -445,9 +485,9 @@
 	if(dst > 7)
 		return 0
 
-	if(ai)	//If it's set to attack all non-silicons, target them!
+	if(check_synth)	//If it's set to attack all non-silicons, target them!
 		if(L.lying)
-			return TURRET_SECONDARY_TARGET
+			return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 		return TURRET_PRIORITY_TARGET
 
 	if(iscuffed(L)) // If the target is handcuffed, leave it alone
@@ -459,11 +499,11 @@
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
-		if(assess_perp(L, auth_weapons, check_records) < 4)
+		if(assess_perp(L, check_weapons, check_records, check_arrest) < 4)
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
-		return TURRET_SECONDARY_TARGET
+		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
@@ -511,7 +551,7 @@
 
 
 /obj/machinery/porta_turret/on_assess_perp(mob/living/carbon/human/perp)
-	if((stun_all || attacked) && !allowed(perp))
+	if((check_access || attacked) && !allowed(perp))
 		//if the turret has been attacked or is angry, target all non-authorized personnel, see req_access
 		return 10
 
@@ -524,7 +564,7 @@
 	if(target && (target.stat != DEAD) && (!(target.lying) || emagged))
 		spawn()
 			popUp()				//pop the turret up if it's not already up.
-		dir = get_dir(src, target)	//even if you can't shoot, follow the target
+		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
 		spawn()
 			shootAt(target)
 		return 1
@@ -569,12 +609,32 @@
 	spawn(1)
 		A.process()
 
-/obj/machinery/porta_turret/proc/setState(var/on, var/lethal)
+/datum/turret_checks
+	var/on
+	var/lethal
+	var/check_synth
+	var/check_access
+	var/check_records
+	var/check_arrest
+	var/check_weapons
+	var/check_anomalies
+	var/ailock
+
+/obj/machinery/porta_turret/proc/setState(var/datum/turret_checks/TC)
 	if(controllock)
 		return
-	src.on = on
-	src.lethal = lethal
-	src.iconholder = lethal
+	src.on = TC.on
+	src.lethal = TC.lethal
+	src.iconholder = TC.lethal
+
+	check_synth = TC.check_synth
+	check_access = TC.check_access
+	check_records = TC.check_records
+	check_arrest = TC.check_arrest
+	check_weapons = TC.check_weapons
+	check_anomalies = TC.check_anomalies
+	ailock = TC.ailock
+
 	src.power_change()
 
 /*
@@ -803,11 +863,6 @@
 	density = 0
 	var/obj/machinery/porta_turret/Parent_Turret = null
 
-
-//The below code is pretty much just recoded from the initial turret object. It's necessary but uncommented because it's exactly the same!
-//>necessary
-//I'm not fixing it because i'm fucking bored of this code already, but someone should just reroute these to the parent turret's procs.
-
 /obj/machinery/porta_turret_cover/attack_ai(mob/user)
 	return attack_hand(user)
 
@@ -816,7 +871,6 @@
 
 /obj/machinery/porta_turret_cover/Topic(href, href_list)
 	Parent_Turret.Topic(href, href_list, 1)	// Calling another object's Topic requires that we claim to not have a window, otherwise BYOND's base proc will runtime.
-	updateUsrDialog()
 
 /obj/machinery/porta_turret_cover/attackby(obj/item/I, mob/user)
 	Parent_Turret.attackby(I, user)

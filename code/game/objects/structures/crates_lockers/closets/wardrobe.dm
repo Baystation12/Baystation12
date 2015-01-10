@@ -213,7 +213,7 @@
 
 
 /obj/structure/closet/wardrobe/pjs
-	name = "Pajama wardrobe"
+	name = "pajama wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
 
@@ -246,9 +246,9 @@
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/slippers
-	new /obj/item/clothing/shoes/slippers
-	new /obj/item/clothing/shoes/slippers
+	new /obj/item/clothing/shoes/slippers(src)
+	new /obj/item/clothing/shoes/slippers(src)
+	new /obj/item/clothing/shoes/slippers(src)
 	return
 
 

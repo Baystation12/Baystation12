@@ -36,7 +36,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
-/obj/structure/cable/drain_power(var/drain_check)
+/obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -44,18 +44,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/datum/powernet/PN = get_powernet()
 	if(!PN) return 0
 
-	var/drained_power = round(rand(200,400)/2)
-	var/drained_this_tick = PN.draw_power(drained_power)
-
-	if(drained_this_tick < drained_power)
-		for(var/obj/machinery/power/terminal/T in PN.nodes)
-			if(istype(T.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/AP = T.master
-				if(AP.emagged)
-					continue
-				drained_power += AP.drain_power() //Indirect draw won't emag the APC, should this be amended?
-
-	return drained_power
+	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
@@ -114,11 +103,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	updateicon()
 
 /obj/structure/cable/proc/updateicon()
-	if(invisibility)
-		icon_state = "[d1]-[d2]-f"
-	else
-		icon_state = "[d1]-[d2]"
-
+	icon_state = "[d1]-[d2]"
+	alpha = invisibility ? 127 : 255
 
 // returns the powernet this cable belongs to
 /obj/structure/cable/proc/get_powernet()			//TODO: remove this as it is obsolete
@@ -589,6 +575,31 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		usr << "\blue You cannot do that."
 	..()
+
+/obj/item/stack/cable_coil/robot/verb/set_colour()
+	set name = "Change Colour"
+	set category = "Object"
+
+	var/list/possible_colours = list ("Yellow", "Green", "Pink", "Blue", "Orange", "Cyan", "Red")
+	var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_colours
+
+	if(selected_type)
+		switch(selected_type)
+			if("Yellow")
+				color = COLOR_YELLOW
+			if("Green")
+				color = COLOR_GREEN
+			if("Pink")
+				color = COLOR_PINK
+			if("Blue")
+				color = COLOR_BLUE
+			if("Orange")
+				color = COLOR_ORANGE
+			if("Cyan")
+				color = COLOR_CYAN
+			else
+				color = COLOR_RED
+		usr << "You change your cable coil's colour to [selected_type]"
 
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !

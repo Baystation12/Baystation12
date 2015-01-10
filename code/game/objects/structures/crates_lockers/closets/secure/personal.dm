@@ -1,6 +1,6 @@
 /obj/structure/closet/secure_closet/personal
-	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	name = "personal closet"
+	desc = "It's a secure locker for personnel. The first card swiped gains control."
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
 
@@ -21,7 +21,9 @@
 /obj/structure/closet/secure_closet/personal/patient/New()
 	..()
 	spawn(4)
-		contents = list()
+		// Not really the best way to do this, but it's better than "contents = list()"!
+		for(var/atom/movable/AM in contents)
+			del(AM)
 		new /obj/item/clothing/under/color/white( src )
 		new /obj/item/clothing/shoes/white( src )
 	return
@@ -51,7 +53,9 @@
 /obj/structure/closet/secure_closet/personal/cabinet/New()
 	..()
 	spawn(4)
-		contents = list()
+		// Not really the best way to do this, but it's better than "contents = list()"!
+		for(var/atom/movable/AM in contents)
+			del(AM)
 		new /obj/item/weapon/storage/backpack/satchel/withwallet( src )
 		new /obj/item/device/radio/headset( src )
 	return

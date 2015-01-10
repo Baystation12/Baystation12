@@ -21,6 +21,7 @@
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
 		
+		moving_status = SHUTTLE_INTRANSIT //shouldn't matter but just to be safe
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
 

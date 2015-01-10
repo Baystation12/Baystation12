@@ -1,5 +1,3 @@
-
-
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "station bounced radio"
@@ -12,7 +10,7 @@
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/obj/item/device/radio/patch_link = null
-	var/wires = WIRE_SIGNAL | WIRE_RECEIVE | WIRE_TRANSMIT
+	var/datum/wires/radio/wires = null
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
@@ -29,13 +27,8 @@
 	w_class = 2
 
 	matter = list("glass" = 25,"metal" = 75)
-
-	var/const/WIRE_SIGNAL = 1 //sends a signal, like to set off a bomb or electrocute someone
-	var/const/WIRE_RECEIVE = 2
-	var/const/WIRE_TRANSMIT = 4
-	var/const/TRANSMISSION_DELAY = 5 // only 2/second/radio
 	var/const/FREQ_LISTENING = 1
-		//FREQ_BROADCASTING = 2
+
 
 /obj/item/device/radio
 	var/datum/radio_frequency/radio_connection
@@ -48,6 +41,7 @@
 
 /obj/item/device/radio/New()
 	..()
+	wires = new(src)
 	if(radio_controller)
 		initialize()
 
@@ -102,14 +96,9 @@
 	return
 
 /obj/item/device/radio/proc/text_wires()
-	if (!b_stat)
-		return ""
-	return {"
-			<hr>
-			Green Wire: <A href='byond://?src=\ref[src];wires=4'>[(wires & 4) ? "Cut" : "Mend"] Wire</A><BR>
-			Red Wire:   <A href='byond://?src=\ref[src];wires=2'>[(wires & 2) ? "Cut" : "Mend"] Wire</A><BR>
-			Blue Wire:  <A href='byond://?src=\ref[src];wires=1'>[(wires & 1) ? "Cut" : "Mend"] Wire</A><BR>
-			"}
+	if (b_stat)
+		return wires.GetInteractWindow()
+	return
 
 
 /obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
@@ -118,6 +107,12 @@
 			<B>[chan_name]</B><br>
 			Speaker: <A href='byond://?src=\ref[src];ch_name=[chan_name];listen=[!list]'>[list ? "Engaged" : "Disengaged"]</A><BR>
 			"}
+
+/obj/item/device/radio/proc/ToggleBroadcast()
+	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
+
+/obj/item/device/radio/proc/ToggleReception()
+	listening = !listening && !(wires.IsIndexCut(WIRE_RECEIVE) || wires.IsIndexCut(WIRE_SIGNAL))
 
 /obj/item/device/radio/Topic(href, href_list)
 	//..()
@@ -146,24 +141,17 @@
 				return
 
 	else if (href_list["talk"])
-		broadcasting = text2num(href_list["talk"])
+		ToggleBroadcast()
 	else if (href_list["listen"])
 		var/chan_name = href_list["ch_name"]
 		if (!chan_name)
-			listening = text2num(href_list["listen"])
+			ToggleReception()
 		else
 			if (channels[chan_name] & FREQ_LISTENING)
 				channels[chan_name] &= ~FREQ_LISTENING
 			else
 				channels[chan_name] |= FREQ_LISTENING
-	else if (href_list["wires"])
-		var/t1 = text2num(href_list["wires"])
-		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-			return
-		if (wires & t1)
-			wires &= ~t1
-		else
-			wires |= t1
+
 	if (!( master ))
 		if (istype(loc, /mob))
 			interact(loc)
@@ -223,7 +211,7 @@
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
-	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
+	if(wires.IsIndexCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return 0
 
 	M.last_target_click = world.time
@@ -438,7 +426,7 @@
 	// what the range is in which mobs will hear the radio
 	// returns: -1 if can't receive, range otherwise
 
-	if (!(wires & WIRE_RECEIVE))
+	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return -1
 	if(!listening)
 		return -1

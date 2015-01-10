@@ -268,7 +268,6 @@ client
 			body += "<option value='?_src_=vars;remverb=\ref[D]'>Remove Verb</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
-				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
 				body += "<option value='?_src_=vars;setspecies=\ref[D]'>Set Species</option>"
 				body += "<option value='?_src_=vars;makeai=\ref[D]'>Make AI</option>"
 				body += "<option value='?_src_=vars;makerobot=\ref[D]'>Make cyborg</option>"
@@ -582,7 +581,7 @@ client
 			usr << "This can only be used on instances of type /mob/living/carbon/human"
 			return
 
-		H.makeSkeleton()
+		H.ChangeToSkeleton()
 		href_list["datumrefresh"] = href_list["make_skeleton"]
 
 	else if(href_list["delall"])
@@ -670,8 +669,8 @@ client
 			return
 
 		switch(href_list["rotatedir"])
-			if("right")	A.dir = turn(A.dir, -45)
-			if("left")	A.dir = turn(A.dir, 45)
+			if("right")	A.set_dir(turn(A.dir, -45))
+			if("left")	A.set_dir(turn(A.dir, 45))
 		href_list["datumrefresh"] = href_list["rotatedatum"]
 
 	else if(href_list["makemonkey"])
@@ -744,27 +743,6 @@ client
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
 
-	else if(href_list["setmutantrace"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["setmutantrace"])
-		if(!istype(H))
-			usr << "This can only be done to instances of type /mob/living/carbon/human"
-			return
-
-		var/new_mutantrace = input("Please choose a new mutantrace","Mutantrace",null) as null|anything in list("NONE","golem","lizard","slime","plant","shadow","tajaran","skrell","vox")
-		switch(new_mutantrace)
-			if(null)
-				return
-			if("NONE")
-				new_mutantrace = ""
-		if(!H)
-			usr << "Mob doesn't exist anymore"
-			return
-		if(H.dna)
-			H.dna.mutantrace = new_mutantrace
-			H.update_mutantrace()
-
 	else if(href_list["setspecies"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -794,6 +772,9 @@ client
 
 		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in all_languages
 
+		if(!new_language)
+			return
+
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
@@ -816,6 +797,9 @@ client
 			return
 
 		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
+
+		if(!rem_language)
+			return
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -915,6 +899,7 @@ client
 				del(I)
 				return
 
+			H.internal_organs |= I
 			H.internal_organs_by_name[organ_slot] = I
 			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
 		else

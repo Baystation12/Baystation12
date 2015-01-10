@@ -1,4 +1,3 @@
-
 /datum/shuttle/ferry/emergency
 	//pass
 
@@ -46,7 +45,7 @@
 
 		//initiating or cancelling a launch ALWAYS requires authorization, but if we are already set to launch anyways than forcing does not.
 		//this is so that people can force launch if the docking controller cannot safely undock without needing X heads to swipe.
-		if (process_state != WAIT_LAUNCH && !C.has_authorization())
+		if (!(process_state == WAIT_LAUNCH || C.has_authorization()))
 			return 0
 	return ..()
 
@@ -175,7 +174,7 @@
 				shuttle_status = "Standing-by at [station_name]."
 			else
 				shuttle_status = "Standing-by at Central Command."
-		if(WAIT_LAUNCH)
+		if(WAIT_LAUNCH, FORCE_LAUNCH)
 			shuttle_status = "Shuttle has recieved command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."

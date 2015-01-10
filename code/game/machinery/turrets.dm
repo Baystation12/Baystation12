@@ -89,6 +89,8 @@
 	return
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == HALLOSS)
+		return
 	take_damage(Proj.damage)
 	..()
 	return
@@ -232,7 +234,7 @@
 
 /obj/machinery/turret/proc/target()
 	while(src && enabled && !stat && check_target(cur_target))
-		src.dir = get_dir(src, cur_target)
+		src.set_dir(get_dir(src, cur_target))
 		shootAt(cur_target)
 		sleep(shot_delay)
 	return
@@ -297,6 +299,8 @@
 				popping = 0
 
 /obj/machinery/turret/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.damage_type == HALLOSS)
+		return
 	src.health -= Proj.damage
 	..()
 	if(prob(45) && Proj.damage > 0) src.spark_system.start()
@@ -376,6 +380,8 @@
 
 
 	bullet_act(var/obj/item/projectile/Proj)
+		if(Proj.damage_type == HALLOSS)
+			return
 		take_damage(Proj.damage)
 		..()
 		return
@@ -487,7 +493,7 @@
 		if(!target)
 			cur_target = null
 			return
-		src.dir = get_dir(src,target)
+		src.set_dir(get_dir(src,target))
 		var/turf/targloc = get_turf(target)
 		var/target_x = targloc.x
 		var/target_y = targloc.y

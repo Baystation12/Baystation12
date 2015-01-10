@@ -1,5 +1,5 @@
 /obj/machinery/computer/crew
-	name = "Crew monitoring computer"
+	name = "crew monitoring computer"
 	desc = "Used to monitor active health sensors built into most of the crew's uniforms."
 	icon_state = "crew"
 	use_power = 1
@@ -75,6 +75,8 @@
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc
+				if(H.w_uniform != C)
+					continue
 
 				var/list/crewmemberData = list()
 

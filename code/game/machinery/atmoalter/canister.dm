@@ -19,6 +19,9 @@
 	var/release_log = ""
 	var/update_flag = 0
 
+/obj/machinery/portable_atmospherics/canister/drain_power()
+	return -1
+
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
 	name = "Canister: \[N2O\]"
 	icon_state = "redws"
@@ -108,6 +111,7 @@ update_flag
 	if (src.destroyed)
 		src.overlays = 0
 		src.icon_state = text("[]-1", src.canister_color)
+		return
 
 	if(icon_state != "[canister_color]")
 		icon_state = "[canister_color]"

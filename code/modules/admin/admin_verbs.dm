@@ -102,7 +102,6 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_add_random_ai_law,
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
-	/client/proc/set_ooc,
 	/client/proc/editappear
 	)
 var/list/admin_verbs_spawn = list(
@@ -157,6 +156,12 @@ var/list/admin_verbs_debug = list(
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
 	)
+
+var/list/admin_verbs_paranoid_debug = list(
+	/client/proc/callproc,
+	/client/proc/debug_controller
+	)
+
 var/list/admin_verbs_possess = list(
 	/proc/possess,
 	/proc/release
@@ -170,7 +175,6 @@ var/list/admin_verbs_rejuv = list(
 
 //verbs which can be hidden - needs work
 var/list/admin_verbs_hideable = list(
-	/client/proc/set_ooc,
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
 	/client/proc/toggleprayers,
@@ -276,7 +280,10 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_BAN)			verbs += admin_verbs_ban
 		if(holder.rights & R_FUN)			verbs += admin_verbs_fun
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
-		if(holder.rights & R_DEBUG)			verbs += admin_verbs_debug
+		if(holder.rights & R_DEBUG)
+			verbs += admin_verbs_debug
+			if(config.debugparanoid && !check_rights(R_ADMIN)) 
+				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
 		if(holder.rights & R_STEALTH)		verbs += /client/proc/stealth
@@ -379,7 +386,8 @@ var/list/admin_verbs_mentor = list(
 	else
 		//ghostize
 		var/mob/body = mob
-		body.ghostize(1)
+		var/mob/dead/observer/ghost = body.ghostize(1)
+		ghost.admin_ghosted = 1
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -467,10 +475,13 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "OOC Text Color"
 	if(!holder)	return
-	var/new_ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color|null
-	if(new_ooccolor)
-		prefs.ooccolor = new_ooccolor
-		prefs.save_preferences()
+	var/response = alert(src, "Please choose a distinct color that is easy to read and doesn't mix with all the other chat and radio frequency colors.", "Change own OOC color", "Pick new color", "Reset to default", "Cancel")
+	if(response == "Pick new color")
+		prefs.ooccolor = input(src, "Please select your OOC colour.", "OOC colour") as color
+	else if(response == "Reset to default")
+		prefs.ooccolor = initial(prefs.ooccolor)
+	prefs.save_preferences()
+
 	feedback_add_details("admin_verb","OC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 

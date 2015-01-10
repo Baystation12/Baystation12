@@ -15,11 +15,11 @@ Pipelines + Other Objects -> Pipe network
 	active_power_usage = 0
 	power_channel = ENVIRON
 	var/nodealert = 0
+	var/power_rating //the maximum amount of power the machine can use to do work, affects how powerful the machine is, in Watts
 
 	layer = 2.4 //under wires with their 2.44
 
-	var/connect_types[] = list(1) //1=regular, 2=supply, 3=scrubber
-	var/connected_to = 1 //same as above, currently not used for anything
+	var/connect_types = CONNECT_TYPE_REGULAR
 	var/icon_connect_type = "" //"-supply" or "-scrubbers"
 
 	var/initialize_directions = 0
@@ -63,29 +63,10 @@ Pipelines + Other Objects -> Pipe network
 		return 0
 
 obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/atmos1, obj/machinery/atmospherics/atmos2)
-	var/i
-	var/list1[] = atmos1.connect_types
-	var/list2[] = atmos2.connect_types
-	for(i=1,i<=list1.len,i++)
-		var/j
-		for(j=1,j<=list2.len,j++)
-			if(list1[i] == list2[j])
-				var/n = list1[i]
-				return n
-	return 0
+	return (atmos1.connect_types & atmos2.connect_types)
 
-obj/machinery/atmospherics/proc/check_connect_types_construction(obj/machinery/atmospherics/atmos1, obj/item/pipe/pipe2)
-	var/i
-	var/list1[] = atmos1.connect_types
-	var/list2[] = pipe2.connect_types
-	for(i=1,i<=list1.len,i++)
-		var/j
-		for(j=1,j<=list2.len,j++)
-			if(list1[i] == list2[j])
-				var/n = list1[i]
-				return n
-	return 0
-
+/obj/machinery/atmospherics/proc/check_connect_types_construction(obj/machinery/atmospherics/atmos1, obj/item/pipe/pipe2)
+	return (atmos1.connect_types & pipe2.connect_types)
 
 /obj/machinery/atmospherics/proc/check_icon_cache(var/safety = 0)
 	if(!istype(icon_manager))

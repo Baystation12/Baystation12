@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 /obj/machinery/computer/card
-	name = "Identification Computer"
+	name = "\improper ID card modification console"
 	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
 	icon_state = "id"
 	req_access = list(access_change_ids)
@@ -40,13 +40,13 @@
 	if(scan)
 		usr << "You remove \the [scan] from \the [src]."
 		scan.loc = get_turf(src)
-		if(!usr.get_active_hand())
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else if(modify)
 		usr << "You remove \the [modify] from \the [src]."
 		modify.loc = get_turf(src)
-		if(!usr.get_active_hand())
+		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(modify)
 		modify = null
 	else
@@ -282,7 +282,7 @@
 	return 1
 
 /obj/machinery/computer/card/centcom
-	name = "CentCom Identification Computer"
+	name = "\improper CentCom ID card modification console"
 	circuit = "/obj/item/weapon/circuitboard/card/centcom"
 	req_access = list(access_cent_captain)
 

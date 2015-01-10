@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled {
+.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
     float: left;
     min-width: 15px;
     height: 16px;
@@ -173,11 +173,11 @@ h4 {
     font-weight: bold;
 }
 
-.redBackground {
+.redButton {
     background: #ea0000;
 }
 
-.yellowBackground {
+.yellowButton {
     background: #cacc00;
 }
 
@@ -561,4 +561,9 @@ th.misc {
 
 .oxyloss {
     color: blue;
+}
+
+/* 75px width used in power monitoring console buttons */
+.width75btn {
+    width: 75px;
 }

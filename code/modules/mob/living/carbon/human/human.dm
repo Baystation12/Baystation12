@@ -16,7 +16,7 @@
 
 	if(!species)
 		if(new_species)
-			set_species(new_species)
+			set_species(new_species,1)
 		else
 			set_species()
 
@@ -38,8 +38,6 @@
 
 	if(dna)
 		dna.real_name = real_name
-
-	prev_gender = gender // Debug for plural genders
 	make_blood()
 
 /mob/living/carbon/human/Stat()
@@ -708,29 +706,6 @@
 			number += 2
 	return number
 
-/mob/living/carbon/human/proc/magboot_stomp(mob/living/carbon/human/H as mob, datum/organ/external/affecting)
-	visible_message("\red [src] raises one of \his magboots over [H]'s [affecting.display_name]...")
-	attack_move = 1
-	if(do_after(usr, 20))
-		if(src.canmove && !src.lying && src.Adjacent(H) && H.lying)
-			visible_message("\red <B>[src] stomps \his magboot down on [H]'s [affecting.display_name] with full force!</B>")
-			apply_damage(rand(20,30), BRUTE, affecting, run_armor_check(affecting, "melee"))
-			playsound(loc, 'sound/weapons/genhit3.ogg', 25, 1, -1)
-			attack_move = 0
-
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>Magboot-stomped [H.name] ([H.ckey])</font>")
-			H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been magboot-stomped by [src.name] ([src.ckey])</font>")
-			msg_admin_attack("[key_name(src)] magboot-stomped [key_name(H)]")
-			return 1
-	return 0
-
-/mob/living/carbon/human/get_combat_buff(var/damage)
-	if(check_special_role("Ninja") || check_special_role("Changeling"))
-		damage += 3 // We assume Ninjas and Changelings are slightly better in combat than the usual human
-	if(HULK in mutations)
-		damage *= 2 // Hulks do twice the damage
-	return damage * damage_multiplier
-
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
 	if(species.has_fine_manipulation)
 		return 1
@@ -753,13 +728,8 @@
 	return
 
 /mob/living/carbon/human/get_species()
-
 	if(!species)
 		set_species()
-
-	if(dna && dna.mutantrace == "golem")
-		return "Animated Construct"
-
 	return species.name
 
 /mob/living/carbon/human/proc/play_xylophone()
@@ -779,13 +749,13 @@
 
 	if(!lastpuke)
 		lastpuke = 1
-		src << "<spawn class='warning'>You feel nauseous..."
+		src << "<span class='warning'>You feel nauseous...</span>"
 		spawn(150)	//15 seconds until second warning
-			src << "<spawn class='warning'>You feel like you are about to throw up!"
+			src << "<span class='warning'>You feel like you are about to throw up!</span>"
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				Stun(5)
 
-				src.visible_message("<spawn class='warning'>[src] throws up!","<spawn class='warning'>You throw up!")
+				src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc
@@ -972,12 +942,17 @@
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	for (var/obj/item/weapon/organ/head/H in world)
-		if(H.brainmob)
-			if(H.brainmob.real_name == src.real_name)
-				if(H.brainmob.mind)
-					H.brainmob.mind.transfer_to(src)
-					del(H)
+	// Fix up any missing organs.
+	// This will ignore any prosthetics in the prefs currently.
+	species.create_organs(src)
+
+	if(!client || !key) //Don't boot out anyone already in the mob.
+		for (var/obj/item/organ/brain/H in world)
+			if(H.brainmob)
+				if(H.brainmob.real_name == src.real_name)
+					if(H.brainmob.mind)
+						H.brainmob.mind.transfer_to(src)
+						del(H)
 
 	for(var/datum/organ/internal/I in internal_organs)
 		I.damage = 0
@@ -987,6 +962,9 @@
 	for (var/ID in virus2)
 		var/datum/disease2/disease/V = virus2[ID]
 		V.cure(src)
+
+	losebreath = 0
+	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 
 	..()
 
@@ -1037,9 +1015,9 @@
 	if (!..())
 		return 0
 	//if this blood isn't already in the list, add it
-	if(blood_DNA[M.dna.unique_enzymes])
-		return 0 //already bloodied with this blood. Cannot add more.
-	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	if(istype(M))
+		if(!blood_DNA[M.dna.unique_enzymes])
+			blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	hand_blood_color = blood_color
 	src.update_inv_gloves()	//handles bloody hands overlays and updating
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
@@ -1164,10 +1142,19 @@
 
 	species.handle_post_spawn(src)
 
+	maxHealth = species.total_health
+
 	spawn(0)
 		regenerate_icons()
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
+
+	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
+	if(client && client.screen)
+		client.screen.len = null
+		if(hud_used)
+			del(hud_used)
+		hud_used = new /datum/hud(src)
 
 	if(species)
 		return 1
@@ -1309,3 +1296,8 @@
 		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
 			return 1
 	return 0
+
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
+		return 0
+	..(slipped_on,stun_duration)

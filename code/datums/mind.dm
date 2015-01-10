@@ -777,7 +777,7 @@ datum/mind
 						ticker.mode.greet_syndicate(src)
 						log_admin("[key_name_admin(usr)] has merc'd [current].")
 				if("lair")
-					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
+					current.loc = pick(synd_spawn)
 				if("dressup")
 					del(H.belt)
 					del(H.back)
@@ -1065,7 +1065,7 @@ datum/mind
 			ticker.mode.forge_syndicate_objectives(src)
 			ticker.mode.greet_syndicate(src)
 
-			current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
+			current.loc = pick(synd_spawn)
 
 			var/mob/living/carbon/human/H = current
 			del(H.belt)

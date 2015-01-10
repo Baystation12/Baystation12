@@ -123,9 +123,9 @@
 
 /obj/machinery/atmospherics/valve/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 /obj/machinery/atmospherics/valve/attack_ai(mob/user as mob)
 	return
@@ -160,18 +160,12 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node2 = target
 				break
 
@@ -317,3 +311,7 @@
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
+
+/obj/machinery/atmospherics/valve/examine(mob/user)
+	..()
+	user << "It is [open ? "open" : "closed"]."

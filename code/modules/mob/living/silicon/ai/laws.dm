@@ -20,7 +20,7 @@
 	src.laws.add_ion_law(law)
 	for(var/mob/living/silicon/robot/R in mob_list)
 		if(R.lawupdate && (R.connected_ai == src))
-			R << "\red " + law + "\red...LAWS UPDATED"
+			R.show_laws()
 
 /mob/living/silicon/ai/proc/ai_checklaws()
 	set category = "AI Commands"

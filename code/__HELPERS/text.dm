@@ -337,3 +337,12 @@ proc/TextPreview(var/string,var/len=40)
 
 /proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
     return trim(strip_html_properly(input, max_length))
+
+//For generating neat chat tag-images
+//The icon var could be local in the proc, but it's a waste of resources
+//	to always create it and then throw it out.
+/var/icon/text_tag_icons = new('./icons/chattags.dmi')
+/proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
+	if(C && (C.prefs.toggles & CHAT_NOICONS))
+		return tagdesc
+	return "<IMG src='\ref[text_tag_icons.icon]' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"

@@ -15,6 +15,8 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
 	circuit = "/obj/item/weapon/circuitboard/cryopodcontrol"
+	density = 0
+	interact_offline = 1
 	var/mode = null
 
 	//Used for logging people entering cryosleep and important items they are carrying.
@@ -379,7 +381,7 @@
 			// Delete the mob.
 			del(occupant)
 			occupant = null
-
+			name = initial(name)
 
 	return
 
@@ -440,7 +442,6 @@
 			src.add_fingerprint(M)
 
 /obj/machinery/cryopod/verb/eject()
-
 	set name = "Eject Pod"
 	set category = "Object"
 	set src in oview(1)
@@ -462,6 +463,8 @@
 
 	src.go_out()
 	add_fingerprint(usr)
+
+	name = initial(name)
 	return
 
 /obj/machinery/cryopod/verb/move_inside()
@@ -509,6 +512,7 @@
 		time_entered = world.time
 
 		src.add_fingerprint(usr)
+		name = "[name] ([usr.name])"
 
 	return
 

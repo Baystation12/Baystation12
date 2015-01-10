@@ -131,7 +131,7 @@
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC || H.species.insulated)
+			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5))
 				return
 
 		var/power = max(0,min(10,(powerlevel+rand(0,3))))
@@ -175,7 +175,7 @@
 		return
 
 	if(melee_damage_upper == 0 && istype(A,/mob/living))
-		custom_emote(1,"[friendly] [src]!")
+		custom_emote(1,"[friendly] [A]!")
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)

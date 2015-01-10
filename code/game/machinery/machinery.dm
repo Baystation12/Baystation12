@@ -109,27 +109,13 @@ Class Procs:
 	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/manual = 0
+	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/global/gl_uid = 1
 
-/obj/machinery/drain_power(var/drain_check)
-
-	if(drain_check)
-		return 1
-
-	if(!powered())
-		return 0
-
-	var/area/area = get_area(src)
-	if(!area)
-		return 0
-
-	var/obj/machinery/power/apc/apc = area.get_apc()
-	if(!apc)
-		return 0
-	return apc.drain_power()
-
-/obj/machinery/New()
-	..()
+/obj/machinery/New(l, d=0)
+	..(l)
+	if(d)
+		set_dir(d)
 	if(!machinery_sort_required && ticker)
 		dd_insertObjectList(machines, src)
 	else
@@ -152,7 +138,7 @@ Class Procs:
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
 		pulse2.anchored = 1
-		pulse2.dir = pick(cardinal)
+		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
 			pulse2.delete()
@@ -197,34 +183,65 @@ Class Procs:
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
 	return (stat & (NOPOWER|BROKEN|additional_flags))
 
+
 /obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	if(..())
 		return 1
-	if(inoperable())
+	if(!can_be_used_by(usr, be_close = checkrange))
 		return 1
-	if(usr.restrained() || usr.lying || usr.stat)
-		return 1
-	if ( ! (istype(usr, /mob/living/carbon/human) || \
-			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey)) )
-		usr << "\red You don't have the dexterity to do this!"
-		return 1
-
-	var/norange = 0
-	if(istype(usr, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = usr
-		if(istype(H.l_hand, /obj/item/tk_grab))
-			norange = 1
-		else if(istype(H.r_hand, /obj/item/tk_grab))
-			norange = 1
-
-	if(checkrange && !norange)
-		if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
-			return 1
-
-	src.add_fingerprint(usr)
-
+	add_fingerprint(usr)
 	return 0
+
+/obj/machinery/proc/can_be_used_by(mob/user, be_close = 1)
+	if(!interact_offline && stat & (NOPOWER|BROKEN))
+		return 0
+	if(!user.canUseTopic(src, be_close))
+		return 0
+	return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+/mob/proc/canUseTopic(atom/movable/M, be_close = 1)
+	return
+
+/mob/dead/observer/canUseTopic(atom/movable/M, be_close = 1)
+	if(check_rights(R_ADMIN, 0))
+		return
+
+/mob/living/canUseTopic(atom/movable/M, be_close = 1, no_dextery = 0)
+	if(no_dextery)
+		src << "<span class='notice'>You don't have the dexterity to do this!</span>"
+		return 0
+	return be_close && !in_range(M, src)
+
+/mob/living/carbon/human/canUseTopic(atom/movable/M, be_close = 1)
+	if(restrained() || lying || stat || stunned || weakened)
+		return
+	if(be_close && !in_range(M, src))
+		if(TK in mutations)
+			var/mob/living/carbon/human/H = M
+			if(istype(H.l_hand, /obj/item/tk_grab) || istype(H.r_hand, /obj/item/tk_grab))
+				return 1
+		return
+	if(!isturf(M.loc) && M.loc != src)
+		return
+	return 1
+
+/mob/living/silicon/ai/canUseTopic(atom/movable/M)
+	if(stat)
+		return
+	//stop AIs from leaving windows open and using then after they lose vision
+	//apc_override is needed here because AIs use their own APC when powerless
+	if(cameranet && !cameranet.checkTurfVis(get_turf(M)) && !apc_override)
+		return
+	return 1
+
+/mob/living/silicon/robot/canUseTopic(atom/movable/M)
+	if(stat || lockcharge || stunned || weakened)
+		return
+	return 1
+
+////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_ai(mob/user as mob)
 	if(isrobot(user))
@@ -303,6 +320,7 @@ Class Procs:
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
+	M.set_dir(src.dir)
 	M.state = 2
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
@@ -318,7 +336,7 @@ Class Procs:
 /obj/machinery/proc/is_assess_emagged()
 	return emagged
 
-/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records)
+/obj/machinery/proc/assess_perp(mob/living/carbon/human/perp, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = 0	//the integer returned
 
 	if(is_assess_emagged())
@@ -343,15 +361,19 @@ Class Procs:
 		if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(perp.dna && perp.dna.mutantrace && perp.dna.mutantrace != "none")
+		if(perp.species.name != "Human") //beepsky so racist.
 			threatcount += 2
-	if(check_records)
+
+	if(check_records || check_arrest)
 		var/perpname = perp.name
 		if(id)
 			perpname = id.registered_name
 
 		var/datum/data/record/R = find_security_record("name", perpname)
-		if(R && (R.fields["criminal"] == "*Arrest*"))
+		if(check_records && !R)
+			threatcount += 4
+
+		if(check_arrest && R && (R.fields["criminal"] == "*Arrest*"))
 			threatcount += 4
 
 	return threatcount

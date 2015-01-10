@@ -31,9 +31,6 @@
 		msg = "Unidentified hackers have targetted a combat drone wing deployed from the NMV Icarus. If any are sighted in the area, approach with caution."
 	command_announcement.Announce(msg, "Rogue drone alert")
 
-/datum/event/rogue_drone/tick()
-	return
-
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
 	for(var/mob/living/simple_animal/hostile/retaliate/malf_drone/D in drones_list)

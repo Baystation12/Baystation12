@@ -379,16 +379,17 @@ var/global/datum/controller/occupations/job_master
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
-							if(H.equip_to_slot_or_del(new G.path(H), G.slot))
+							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
+							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
+								custom_equip_leftovers += thing
+							else if(H.equip_to_slot_or_del(new G.path(H), G.slot))
 								H << "\blue Equipping you with [thing]!"
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
-
 						else
 							spawn_in_storage += thing
-
-
 			//Equip job items.
 			job.equip(H)
 			job.apply_fingerprints(H)
@@ -422,7 +423,7 @@ var/global/datum/controller/occupations/job_master
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
 				H.buckled.loc = H.loc
-				H.buckled.dir = H.dir
+				H.buckled.set_dir(H.dir)
 
 		//give them an account in the station database
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
@@ -516,7 +517,7 @@ var/global/datum/controller/occupations/job_master
 				var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair(H.loc)
 				H.buckled = W
 				H.update_canmove()
-				W.dir = H.dir
+				W.set_dir(H.dir)
 				W.buckled_mob = H
 				W.add_fingerprint(H)
 

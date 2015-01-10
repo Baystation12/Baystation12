@@ -15,7 +15,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude","Diona","Vox")
+	species_restricted = list("exclude","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 
 	var/obj/machinery/camera/camera
 	var/list/camera_networks
@@ -62,7 +62,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude","Diona","Vox")
+	species_restricted = list("exclude","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
 
@@ -70,27 +70,25 @@
 	check_limb_support()
 	..()
 
-/obj/item/clothing/suit/space/dropped()
-	check_limb_support()
+/obj/item/clothing/suit/space/dropped(var/mob/user)
+	check_limb_support(user)
 	..()
 
 // Some space suits are equipped with reactive membranes that support
 // broken limbs - at the time of writing, only the ninja suit, but
 // I can see it being useful for other suits as we expand them. ~ Z
 // The actual splinting occurs in /datum/organ/external/proc/fracture()
-/obj/item/clothing/suit/space/proc/check_limb_support()
+/obj/item/clothing/suit/space/proc/check_limb_support(var/mob/living/carbon/human/user)
 
 	// If this isn't set, then we don't need to care.
 	if(!supporting_limbs || !supporting_limbs.len)
 		return
 
-	var/mob/living/carbon/human/H = src.loc
-
-	// If the holder isn't human, or the holder IS and is wearing the suit, it keeps supporting the limbs.
-	if(!istype(H) || H.wear_suit == src)
+	if(!istype(user) || user.wear_suit == src)
 		return
 
 	// Otherwise, remove the splints.
 	for(var/datum/organ/external/E in supporting_limbs)
 		E.status &= ~ ORGAN_SPLINTED
+		user << "The suit stops supporting your [E.display_name]."
 	supporting_limbs = list()

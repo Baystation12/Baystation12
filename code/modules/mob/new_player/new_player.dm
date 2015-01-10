@@ -29,8 +29,10 @@
 		output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
 
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-			if(!ready)	output += "<p><a href='byond://?src=\ref[src];ready=1'>Declare Ready</A></p>"
-			else	output += "<p><b>You are ready</b> (<a href='byond://?src=\ref[src];ready=2'>Cancel</A>)</p>"
+			if(ready)
+				output += "<p>\[ <b>Ready</b> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
+			else
+				output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <b>Not Ready</b> \]</p>"
 
 		else
 			output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
@@ -59,7 +61,7 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		src << browse(output,"window=playersetup;size=210x280;can_close=0")
 		return
 
 	Stat()
@@ -96,7 +98,7 @@
 
 		if(href_list["ready"])
 			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
-				ready = !ready
+				ready = text2num(href_list["ready"])
 			else
 				ready = 0
 
@@ -121,6 +123,7 @@
 				observer.loc = O.loc
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
+				announce_ghost_joinleave(src)
 				client.prefs.update_preview_icon()
 				observer.icon = client.prefs.preview_icon
 				observer.alpha = 127
@@ -142,7 +145,7 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human")
+			if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0))
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
@@ -159,8 +162,11 @@
 
 		if(href_list["SelectedJob"])
 
-			if(!enter_allowed)
-				usr << "\blue There is an administrative lock on entering the game!"
+			if(!config.enter_allowed)
+				usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+				return
+			else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
+				usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 				return
 
 			if(client.prefs.species != "Human")
@@ -169,8 +175,8 @@
 					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
-				if(!(S.flags & IS_WHITELISTED))
-					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+				if(!(S.flags & CAN_JOIN))
+					src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
@@ -290,8 +296,8 @@
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "\red The round is either not ready, or has already finished..."
 			return 0
-		if(!enter_allowed)
-			usr << "\blue There is an administrative lock on entering the game!"
+		if(!config.enter_allowed)
+			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
 			return 0
 		if(!IsJobAvailable(rank))
 			src << alert("[rank] is not available. Please try another.")
@@ -330,7 +336,7 @@
 		// Moving wheelchair if they have one
 		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
 			character.buckled.loc = character.loc
-			character.buckled.dir = character.dir
+			character.buckled.set_dir(character.dir)
 
 		ticker.mode.latespawn(character)
 
@@ -371,7 +377,10 @@
 		var/mins = (mills % 36000) / 600
 		var/hours = mills / 36000
 
+		var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+
 		var/dat = "<html><body><center>"
+		dat += "<b>Welcome, [name].<br></b>"
 		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
 
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.

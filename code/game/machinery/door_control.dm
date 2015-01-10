@@ -96,7 +96,7 @@
 					D.safe = 1
 
 /obj/machinery/door_control/proc/handle_pod()
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == src.id)
 			if(M.density)
 				spawn(0)
@@ -171,7 +171,7 @@
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.open()
@@ -185,7 +185,7 @@
 
 	sleep(50)
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.close()
