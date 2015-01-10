@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /*
 Research and Development (R&D) Console
 
@@ -27,8 +25,6 @@ cause a ton of data to be lost, an admin can go send it back.
 - The second method is with Technology Disks and Design Disks. Each of these disks can hold a single technology or design datum in
 it's entirety. You can then take the disk to any R&D console and upload it's data to it. This method is a lot more secure (since it
 won't update every console in existence) but it's more of a hassle to do. Also, the disks can be stolen.
-
-
 */
 
 /obj/machinery/computer/rdconsole
@@ -121,8 +117,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		for(var/datum/design/D in files.known_designs)
 			C.files.AddDesign2Known(D)
 		C.files.RefreshResearch()
-
-
 
 /obj/machinery/computer/rdconsole/New()
 	..()
@@ -571,8 +565,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	dat += "</UL>"
 	return dat
 
-
-
 /obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -948,8 +940,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
-
-
 
 /obj/machinery/computer/rdconsole/robotics
 	name = "Robotics R&D Console"
