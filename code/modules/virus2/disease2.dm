@@ -26,7 +26,10 @@
 			holder.getrandomeffect()
 		effects += holder
 	uniqueID = rand(0,10000)
-	infectionchance = rand(60,90)
+	if (greater)
+		infectionchance = rand(60,90)
+	else
+		infectionchance = 1
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"

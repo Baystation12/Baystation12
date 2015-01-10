@@ -56,6 +56,13 @@
 
 ////////////////////////STAGE 4/////////////////////////////////
 
+/datum/disease2/effect/nothing
+	name = "Nil Syndrome"
+	stage = 4
+	badness = 1
+	activate()
+		return
+
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
 	stage = 4
@@ -67,12 +74,14 @@
 	name = "Radian's Syndrome"
 	stage = 4
 	maxm = 3
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.radiation += (2*multiplier)
 
 /datum/disease2/effect/deaf
 	name = "Dead Ear Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.ear_deaf += 20
 
@@ -101,12 +110,14 @@
 /datum/disease2/effect/killertoxins
 	name = "Toxification Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss(15*multiplier)
 
 /datum/disease2/effect/dna
 	name = "Reverse Pattern Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.bodytemperature = max(mob.bodytemperature, 350)
 		scramble(0,mob,10)
@@ -115,6 +126,7 @@
 /datum/disease2/effect/organs
 	name = "Shutdown Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -140,6 +152,7 @@
 /datum/disease2/effect/immortal
 	name = "Longevity Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -157,11 +170,10 @@
 		var/backlash_amt = 5*multiplier
 		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
 
-////////////////////////STAGE 3/////////////////////////////////
-
 /datum/disease2/effect/bones
 	name = "Fragile Bones Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -173,6 +185,8 @@
 			var/mob/living/carbon/human/H = mob
 			for (var/datum/organ/external/E in H.organs)
 				E.min_broken_damage = initial(E.min_broken_damage)
+
+////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/toxins
 	name = "Hyperacidity"
@@ -238,7 +252,6 @@
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.apply_damage(2, CLONE)
-
 
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"

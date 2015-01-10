@@ -96,20 +96,23 @@ proc/airborne_can_reach(turf/source, turf/target)
 		M.virus2["[D.uniqueID]"] = D
 		M.hud_updateflag |= 1 << STATUS_HUD
 
+//Infects mob M with disease D
+/proc/infect_mob(var/mob/living/carbon/M, var/datum/disease2/disease/D)
+	infect_virus2(M,D,1)
+	M.hud_updateflag |= 1 << STATUS_HUD
+
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom()
 	D.infectionchance = 1
-	infect_virus2(M,D,1)
-	M.hud_updateflag |= 1 << STATUS_HUD
+	infect_mob(M, D)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
-	infect_virus2(M,D,1)
-	M.hud_updateflag |= 1 << STATUS_HUD
+	infect_mob(M, D)
 
 //Fancy prob() function.
 /proc/dprob(var/p)
