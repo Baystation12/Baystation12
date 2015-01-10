@@ -33,7 +33,7 @@
 			multiplier = rand(1,effect.maxm)
 
 /datum/disease2/effectholder/proc/majormutate()
-	getrandomeffect(2)
+	getrandomeffect(3)
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////EFFECTS/////////////////////////////////
@@ -66,7 +66,7 @@
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.gib()
 
@@ -88,7 +88,7 @@
 /datum/disease2/effect/monkey
 	name = "Monkism Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob,/mob/living/carbon/human))
 			var/mob/living/carbon/human/h = mob
@@ -97,7 +97,7 @@
 /datum/disease2/effect/suicide
 	name = "Suicidal Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.suiciding = 1
 		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while

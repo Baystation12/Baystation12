@@ -10,10 +10,10 @@ datum/event/viral_infection/setup()
 	for (var/i=0, i < num_diseases, i++)
 		var/datum/disease2/disease/D = new /datum/disease2/disease
 		
-		var/greater = 0 //whether the disease is of the greater or lesser variety
+		var/strength = 1 //whether the disease is of the greater or lesser variety
 		if (severity >= EVENT_LEVEL_MAJOR && prob(50))
-			greater = 1
-		D.makerandom(greater)
+			strength = 2
+		D.makerandom(strength)
 		viruses += D
 
 datum/event/viral_infection/announce()
@@ -32,6 +32,7 @@ datum/event/viral_infection/start()
 	severity = max(EVENT_LEVEL_MUNDANE, severity - 1)
 	var/actual_severity = severity * rand(1, 3)
 	while(actual_severity > 0 && candidates.len)
-		infect_mob(candidates[1], pick(viruses))
+		var/datum/disease2/disease/D = pick(viruses)
+		infect_mob(candidates[1], D.getcopy())
 		candidates.Remove(candidates[1])
 		actual_severity--

@@ -16,20 +16,21 @@
 	uniqueID = rand(0,10000)
 	..()
 
-/datum/disease2/disease/proc/makerandom(var/greater=0)
+/datum/disease2/disease/proc/makerandom(var/severity=1)
 	for(var/i=1 ; i <= max_stage ; i++ )
 		var/datum/disease2/effectholder/holder = new /datum/disease2/effectholder
 		holder.stage = i
-		if(greater)
-			holder.getrandomeffect(2)
-		else
-			holder.getrandomeffect()
+		holder.getrandomeffect(severity)
 		effects += holder
 	uniqueID = rand(0,10000)
-	if (greater)
-		infectionchance = rand(60,90)
-	else
-		infectionchance = 1
+	switch(severity)
+		if(1)
+			infectionchance = 1
+		if(2)
+			infectionchance = rand(10,50)
+		else
+			infectionchance = rand(60,90)
+	
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
