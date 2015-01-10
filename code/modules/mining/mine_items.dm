@@ -49,9 +49,9 @@
 /*****************************Pickaxe********************************/
 
 /obj/item/weapon/pickaxe
-	name = "pickaxe"
+	name = "basic mining drill"
 	icon = 'icons/obj/items.dmi'
-	icon_state = "pickaxe"
+	icon_state = "jackhammer"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT
 	force = 15.0
@@ -64,6 +64,7 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "picking"
+	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	sharp = 1
 
 	var/excavation_amount = 100
