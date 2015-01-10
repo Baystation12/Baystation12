@@ -400,6 +400,11 @@
 		icon_state = "hair_joestar"
 		gender = MALE
 
+	pixiecut
+		name = "Pixie Cut"
+		icon_state "pixie"
+		gender = FEMALE
+
 	bald
 		name = "Bald"
 		icon_state = "bald"
