@@ -40,7 +40,7 @@
 ////////////////////////////////////////////////////////////////
 
 /datum/disease2/effect
-	var/chance_maxm = 50
+	var/chance_maxm = 50 //note that disease effects only proc once every 3 ticks for humans
 	var/name = "Blanking effect"
 	var/stage = 4
 	var/maxm = 1
@@ -60,8 +60,7 @@
 	name = "Nil Syndrome"
 	stage = 4
 	badness = 1
-	activate()
-		return
+	chance_maxm = 0
 
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
@@ -256,6 +255,7 @@
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"
 	stage = 3
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*groan")
 ////////////////////////STAGE 2/////////////////////////////////
@@ -263,6 +263,7 @@
 /datum/disease2/effect/scream
 	name = "Loudness Syndrome"
 	stage = 2
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*scream")
 
@@ -275,6 +276,7 @@
 /datum/disease2/effect/sleepy
 	name = "Resting Syndrome"
 	stage = 2
+	chance_maxm = 15
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
 
@@ -301,6 +303,7 @@
 /datum/disease2/effect/fridge
 	name = "Refridgerator Syndrome"
 	stage = 2
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*shiver")
 
@@ -346,17 +349,19 @@
 	name = "Flemmingtons"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "\red Mucous runs down the back of your throat."
+		mob << "<span class='warning'>Mucous runs down the back of your throat.</span>"
 
 /datum/disease2/effect/drool
 	name = "Saliva Effect"
 	stage = 1
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*drool")
 
 /datum/disease2/effect/twitch
 	name = "Twitcher"
 	stage = 1
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*twitch")
 
@@ -364,4 +369,4 @@
 	name = "Headache"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class = 'notice'> Your head hurts a bit</span>"
+		mob << "<span class='warning'>Your head hurts a bit.</span>"

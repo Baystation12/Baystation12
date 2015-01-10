@@ -80,7 +80,7 @@
 		clicks += 10
 
 	//Moving to the next stage
-	if(clicks > stage*100 && prob(10))
+	if(clicks > max(stage*100, 200) && prob(10))
 		if(stage == max_stage)
 			src.cure(mob)
 			mob.antibodies |= src.antigen

@@ -11,13 +11,22 @@ datum/event/viral_infection/setup()
 		var/datum/disease2/disease/D = new /datum/disease2/disease
 		
 		var/strength = 1 //whether the disease is of the greater or lesser variety
-		if (severity >= EVENT_LEVEL_MAJOR && prob(50))
+		if (severity >= EVENT_LEVEL_MAJOR && prob(75))
 			strength = 2
 		D.makerandom(strength)
 		viruses += D
 
 datum/event/viral_infection/announce()
-	command_announcement.Announce("Confirmed outbreak of level five biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak5.ogg')
+	var/level
+	if (severity == EVENT_LEVEL_MUNDANE)
+		return
+	else if (severity == EVENT_LEVEL_MODERATE)
+		level = pick("one", "two", "three", "four")
+	else
+		level = "five"
+	
+	if (severity == EVENT_LEVEL_MAJOR || prob(60))
+		command_announcement.Announce("Confirmed outbreak of level [level] biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak5.ogg')
 
 datum/event/viral_infection/start()
 	if(!viruses.len) return
