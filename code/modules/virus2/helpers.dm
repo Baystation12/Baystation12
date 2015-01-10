@@ -72,17 +72,13 @@ proc/airborne_can_reach(turf/source, turf/target)
 		return
 	if(M.reagents.has_reagent("spaceacillin"))
 		return
-
-	if(!istype(M,/mob/living/carbon))
-		return
-		
+	
 	if(!disease.affected_species.len)
 		return
-		
-	var/mob/living/carbon/C = M
-	if (!(C.species.name in disease.affected_species))
+	
+	if (!(M.species.name in disease.affected_species))
 		if (forced)
-			disease.affected_species[1] = C.species.name
+			disease.affected_species[1] = M.species.name
 		else
 			return //not compatible with this species
 
