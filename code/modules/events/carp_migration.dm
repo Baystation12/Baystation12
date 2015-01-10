@@ -21,7 +21,7 @@
 		for(var/i = 1 to rand(3,5))
 			spawn_fish(landmarks_list.len)
 	else if(severity == EVENT_LEVEL_MODERATE)
-		spawn_fish(landmarks_list.len)
+		spawn_fish(rand(10,30))
 	else
 		spawn_fish(rand(1, 5))
 
