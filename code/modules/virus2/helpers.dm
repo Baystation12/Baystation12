@@ -73,15 +73,18 @@ proc/airborne_can_reach(turf/source, turf/target)
 	if(M.reagents.has_reagent("spaceacillin"))
 		return
 
-	if(istype(M,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/chimp = M
-		if (!(chimp.greaterform in disease.affected_species))
-			return
+	if(!disease.affected_species.len)
+		return
 
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/chump = M
-		if (!(chump.species.name in disease.affected_species))
-			return
+	if(!istype(M,/mob/living/carbon))
+		return
+		
+	var/mob/living/carbon/C = M
+	if (!(C.species.name in disease.affected_species))
+		if (forced)
+			disease.affected_species[1] = C.species.name
+		else
+			return //not compatible with this species
 
 //	log_debug("Infecting [M]")
 
