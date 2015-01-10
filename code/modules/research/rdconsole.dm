@@ -531,11 +531,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		spawn(20)
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
 			if( text2num(href_list["print"]) == 2)
-				PR.name = "research list"
-				PR.info = GetResearchListInfo()
+				PR.name = "list of researched technologies"
+				PR.info = "<center><h2>List of researched technologies</h2>"
+				PR.info += "<i>by [station_name()] Research Lab at [worldtime2text()] station time</i></center><br>"
+				PR.info += GetResearchListInfo()
 			else
-				PR.name = "research levels"
-				PR.info = GetResearchLevelsInfo()
+				PR.name = "researched technology levels"
+				PR.info = "<center><h2>Researched technology levels</h2>"
+				PR.info += "<i>by [station_name()] Research Lab at [worldtime2text()] station time</i></center><br>"
+				PR.info += GetResearchLevelsInfo()
 			PR.info_links = PR.info
 			PR.icon_state = "paper_words"
 			PR.loc = src.loc
@@ -548,7 +552,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
 	var/dat
-	dat += "Current Research Levels:<BR><BR>"
 	dat += "<UL>"
 	for(var/datum/tech/T in files.known_tech)
 		dat += "<LI>"
@@ -561,7 +564,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/proc/GetResearchListInfo()
 	var/dat
-	dat += "List of Researched Technologies and Designs:"
 	dat += "<UL>"
 	for(var/datum/design/D in files.known_designs)
 		if(D.build_path)
@@ -643,6 +645,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(1.1) //Research viewer
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=1'>Print This Page</A><HR>"
+			dat += "Current Research Levels:<BR><BR>"
 			dat += GetResearchLevelsInfo()
 			dat += "</UL>"
 
@@ -940,6 +943,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(5.0)
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
 			dat += "<A href='?src=\ref[src];print=2'>Print This Page</A><HR>"
+			dat += "List of Researched Technologies and Designs:"
 			dat += GetResearchListInfo()
 
 	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
