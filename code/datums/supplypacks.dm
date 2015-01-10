@@ -5,7 +5,7 @@
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 
-var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Atmospherics","Medical","Science","Hydroponics", "Supply", "Miscellaneous")
+var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Atmospherics","Medical","Science","Hydroponics", "Supply", "Resources", "Miscellaneous")
 
 /datum/supply_packs
 	var/name = null
@@ -1399,3 +1399,58 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 
 
+// CUSTOM STUFF CIRCA DRE9889
+
+/datum/supply_packs/plastic_sheet
+	name = "Plastic sheets (50)"
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Plastic)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/plastic)
+	amount = 50
+
+/datum/supply_packs/silver_sheet
+	name = "Silver sheets (50)"
+	cost = 50
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Silver)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/silver)
+	amount = 50
+
+/datum/supply_packs/gold_sheet
+	name = "Gold sheets (50)"
+	cost = 50
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Gold)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/gold)
+	amount = 50
+
+/datum/supply_packs/uranium_sheet
+	name = "Uranium sheets (50)"
+	cost = 40
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Uranium)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/uranium)
+	amount = 50
+
+/datum/supply_packs/diamond_sheet
+	name = "Diamonds (50)"
+	cost = 100
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Diamond)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/diamond)
+	amount = 50
+
+/datum/supply_packs/phoron_sheet
+	name = "Phoron sheets (50)"
+	cost = 60
+	containertype = /obj/structure/closet/crate
+	containername = "Mineral crate (Phoron)"
+	group = "Resources"
+	contains = list(/obj/item/stack/sheet/mineral/phoron)
+	amount = 50

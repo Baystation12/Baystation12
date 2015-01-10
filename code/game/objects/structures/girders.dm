@@ -8,10 +8,6 @@
 
 
 	bullet_act(var/obj/item/projectile/Proj)
-				//Tasers and the like should not damage girders.
-		if(Proj.damage_type == HALLOSS || Proj.damage_type == TOX || Proj.damage_type == CLONE)
-			return
-
 		if(istype(Proj, /obj/item/projectile/beam))
 			health -= Proj.damage
 			..()
@@ -249,7 +245,6 @@
 			del(src)
 
 	bullet_act(var/obj/item/projectile/Proj) //No beam check- How else will you destroy the cult girder with silver bullets?????
-
 		health -= Proj.damage
 		..()
 		if(health <= 0)
