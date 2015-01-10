@@ -45,6 +45,10 @@
 
 	log_debug("Event '[EM.name]' has completed at [worldtime2text()].")
 
+/datum/event_manager/proc/delay_events(var/container, var/delay)
+	var/list/datum/event_container/EC = event_containers[container]
+	EC.next_event_time += delay
+
 /datum/event_manager/proc/Interact(var/mob/living/user)
 
 	var/html = GetInteractWindow()
