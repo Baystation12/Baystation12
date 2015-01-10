@@ -131,11 +131,11 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	var/list/heard = get_mobs_in_view(7, src.mob)
 	var/mob/S = src.mob
-	
+
 	var/display_name = S.key
 	if(S.stat != DEAD)
 		display_name = S.name
-	
+
 	// Handle non-admins
 	for(var/mob/M in heard)
 		if(!M.client)
@@ -152,15 +152,70 @@ var/global/normal_ooc_colour = "#002eb8"
 					else
 						display_name = holder.fakekey
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
-	
+
 	// Now handle admins
 	display_name = S.key
 	if(S.stat != DEAD)
 		display_name = "[S.name]/([S.key])"
-	
+
 	for(var/client/C in admins)
 		if(C.prefs.toggles & CHAT_LOOC)
 			var/prefix = "(R)LOOC"
 			if (C.mob in heard)
 				prefix = "LOOC"
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+
+// LE TROLL BEGINS HERE
+
+/client/verb/dreooc(msg as text)
+	set name = "DreOOC"
+	set category = "OOC"
+
+	if(say_disabled)
+		usr << "\red Speech is currently admin-disabled."
+		return
+
+	if(!mob)	return
+	if(IsGuestKey(key))
+		src << "Guests may not use DreOOC."
+		return
+
+	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	if(!msg)	return
+
+	if(!(prefs.toggles & CHAT_OOC))
+		src << "\red You have DreOOC muted."
+		return
+
+	if(!holder)
+		if(!ooc_allowed)
+			src << "\red DreOOC is globally muted"
+			return
+		if(!dooc_allowed && (mob.stat == DEAD))
+			usr << "\red DreOOC for dead mobs has been turned off."
+			return
+		if(prefs.muted & MUTE_OOC)
+			src << "\red You cannot use DreOOC (muted)."
+			return
+		if(handle_spam_prevention(msg,MUTE_OOC))
+			return
+		if(findtext(msg, "byond://"))
+			src << "<B>Advertising other servers is not allowed.</B>"
+			log_admin("[key_name(src)] has attempted to advertise in DreOOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to advertise in DreOOC: [msg]")
+			return
+
+	log_ooc("[mob.name]/[key] : [msg]")
+
+	var/display_colour = normal_ooc_colour
+	if(holder && !holder.fakekey)
+		display_colour = "#2e78d9"	//light blue
+		if(holder.rights & R_MOD && !(holder.rights & R_ADMIN))
+			display_colour = "#184880"	//dark blue
+		if(holder.rights & R_DEBUG && !(holder.rights & R_ADMIN))
+			display_colour = "#1b521f"	//dark green
+		else if(holder.rights & R_ADMIN)
+			if(config.allow_admin_ooccolor)
+				display_colour = src.prefs.ooccolor
+			else
+				display_colour = "#b82e00"	//orange

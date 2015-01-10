@@ -57,6 +57,7 @@
 	return
 
 /*
+
  * Wooden Table Parts
  */
 /obj/item/weapon/table_parts/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -101,6 +102,8 @@
 	user.drop_item()
 	del(src)
 	return
+
+
 /*
  * Rack Parts
  */

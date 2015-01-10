@@ -96,5 +96,5 @@
 
 /mob/living/carbon/human/proc/Drain()
 	ChangeToHusk()
-	mutations |= HUSK
+	//mutations |= NOCLONE
 	return
