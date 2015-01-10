@@ -45,8 +45,8 @@
 
 	log_debug("Event '[EM.name]' has completed at [worldtime2text()].")
 
-/datum/event_manager/proc/delay_events(var/container, var/delay)
-	var/list/datum/event_container/EC = event_containers[container]
+/datum/event_manager/proc/delay_events(var/severity, var/delay)
+	var/list/datum/event_container/EC = event_containers[severity]
 	EC.next_event_time += delay
 
 /datum/event_manager/proc/Interact(var/mob/living/user)
@@ -96,7 +96,7 @@
 			html += "<td>[EM.max_weight]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_enabled=\ref[EM]'>[EM.enabled]</A></td>"
-			html += "<td><span class='alert'>[EM.get_weight()]</span></td>"
+			html += "<td><span class='alert'>[EM.get_weight(number_active_with_role())]</span></td>"
 			html += "<td><A align='right' href='?src=\ref[src];remove=\ref[EM];EC=\ref[selected_event_container]'>Remove</A></td>"
 			html += "</tr>"
 		html += "</table>"
