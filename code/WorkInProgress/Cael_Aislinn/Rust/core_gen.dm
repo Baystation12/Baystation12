@@ -61,7 +61,6 @@ max volume of phoron storeable by the field = the total volume of a number of ti
 	idle_power_usage = 50
 	active_power_usage = 500	//multiplied by field strength
 	var/cached_power_avail = 0
-	directwired = 1
 	anchored = 0
 
 	var/state = 0
@@ -120,7 +119,6 @@ max volume of phoron storeable by the field = the total volume of a number of ti
 						state = 2
 						user << "You weld the [src] to the floor."
 						connect_to_network()
-						src.directwired = 1
 				else
 					user << "\red You need more welding fuel to complete this task."
 			if(2)
@@ -134,7 +132,6 @@ max volume of phoron storeable by the field = the total volume of a number of ti
 						state = 1
 						user << "You cut the [src] free from the floor."
 						disconnect_from_network()
-						src.directwired = 0
 				else
 					user << "\red You need more welding fuel to complete this task."
 		return

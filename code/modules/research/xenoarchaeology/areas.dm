@@ -3,9 +3,13 @@
 	name = "Research Outpost"
 	icon_state = "anomaly"
 
+/area/research_outpost/filtering
+	name = "Research Outpost Filtering"
+	icon_state = "anofilter"
+
 /area/research_outpost/hallway
 	name = "Research Outpost Hallway"
-	icon_state = "hallC"
+	icon_state = "anohallway"
 
 /area/research_outpost/gearstore
 	name = "Expedition Preparation"
@@ -69,7 +73,7 @@
 
 /area/research_outpost/entry
 	name = "Research Outpost Shuttle Dock"
-	icon_state = "entry"
+	icon_state = "anoentry"
 
 /area/research_outpost/longtermstorage
 	name = "Long-Term Storage"

@@ -143,13 +143,5 @@ proc/announce_newscaster_news(datum/news_announcement/news)
 		sendto.is_admin_channel = 1
 		news_network.network_channels += sendto
 
-	var/datum/feed_message/newMsg = new /datum/feed_message
-	newMsg.author = news.author ? news.author : sendto.author
-	newMsg.is_admin_message = !news.can_be_redacted
-	newMsg.body = news.message
-	newMsg.message_type = news.message_type
-
-	sendto.messages += newMsg
-
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
-		NEWSCASTER.newsAlert(news.channel_name)
+	var/author = news.author ? news.author : sendto.author
+	news_network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)

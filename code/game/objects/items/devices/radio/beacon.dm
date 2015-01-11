@@ -1,5 +1,5 @@
 /obj/item/device/radio/beacon
-	name = "Tracking Beacon"
+	name = "tracking beacon"
 	desc = "A beacon used by a teleporter."
 	icon_state = "beacon"
 	item_state = "signaler"
@@ -43,7 +43,7 @@
 /obj/item/device/radio/beacon/syndicate/attack_self(mob/user as mob)
 	if(user)
 		user << "\blue Locked In"
-		new /obj/machinery/singularity_beacon/syndicate( user.loc )
+		new /obj/machinery/power/singularity_beacon/syndicate( user.loc )
 		playsound(src, 'sound/effects/pop.ogg', 100, 1, 1)
 		del(src)
 	return

@@ -226,6 +226,7 @@
 
 			feedback_inc("cyborg_birth",1)
 			callHook("borgify", list(O))
+			O.notify_ai(1)
 			O.Namepick()
 
 			del(src)

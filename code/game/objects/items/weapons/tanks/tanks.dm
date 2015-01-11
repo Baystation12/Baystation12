@@ -39,12 +39,12 @@
 
 	..()
 
-/obj/item/weapon/tank/examine()
+/obj/item/weapon/tank/examine(mob/user)
 	var/obj/icon = src
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
-	if (!in_range(src, usr))
-		if (icon == src) usr << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
+	if (!in_range(src, user))
+		if (icon == src) user << "\blue It's \a \icon[icon][src]! If you want any more information you'll need to get closer."
 		return
 
 	var/celsius_temperature = src.air_contents.temperature-T0C
@@ -63,7 +63,7 @@
 	else
 		descriptive = "furiously hot"
 
-	usr << "\blue \The \icon[icon][src] feels [descriptive]"
+	user << "\blue \The \icon[icon][src] feels [descriptive]"
 
 	return
 
@@ -135,8 +135,13 @@
 	data["maskConnected"] = 0
 	if(istype(loc,/mob/living/carbon))
 		var/mob/living/carbon/location = loc
-		if(location.internal == src || (location.wear_mask && (location.wear_mask.flags & MASKINTERNALS)))
-			data["maskConnected"] = 1
+		if(location.internal == src)
+			if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+				data["maskConnected"] = 1
+			else if(istype(location, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = location
+				if(H.head && (H.head.flags & AIRTIGHT))
+					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -177,7 +182,16 @@
 				if (location.internals)
 					location.internals.icon_state = "internal0"
 			else
-				if(location.wear_mask && (location.wear_mask.flags & MASKINTERNALS))
+
+				var/can_open_valve
+				if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
+					can_open_valve = 1
+				else if(istype(location,/mob/living/carbon/human))
+					var/mob/living/carbon/human/H = location
+					if(H.head && (H.head.flags & AIRTIGHT))
+						can_open_valve = 1
+
+				if(can_open_valve)
 					location.internal = src
 					usr << "\blue You open \the [src] valve."
 					if (location.internals)
@@ -237,7 +251,7 @@
 		air_contents.react()
 		pressure = air_contents.return_pressure()
 		var/range = (pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE
-		range = min(range, MAX_EXPLOSION_RANGE)		// was 8 - - - Changed to a configurable define -- TLE
+		range = min(range, max_explosion_range)		// was 8 - - - Changed to a configurable define -- TLE
 		var/turf/epicenter = get_turf(loc)
 
 		//world << "\blue Exploding Pressure: [pressure] kPa, intensity: [range]"

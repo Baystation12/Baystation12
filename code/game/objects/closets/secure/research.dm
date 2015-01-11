@@ -10,7 +10,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/scientist(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -35,7 +34,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/rd(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)

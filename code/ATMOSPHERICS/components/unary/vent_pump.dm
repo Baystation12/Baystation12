@@ -15,21 +15,18 @@
 
 	name = "Air Vent"
 	desc = "Has a valve and pump attached to it"
-	use_power = 1
+	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
+	power_rating = 7500			//7500 W ~ 10 HP
 
-	connect_types = list(1,2) //connects to regular and supply pipes
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
 
 	var/area/initial_loc
 	level = 1
 	var/area_uid
 	var/id_tag = null
 
-	var/on = 0
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
-
-	var/last_power_draw = 0
 
 	var/external_pressure_bound = EXTERNAL_PRESSURE_BOUND
 	var/internal_pressure_bound = INTERNAL_PRESSURE_BOUND
@@ -53,14 +50,14 @@
 	var/radio_filter_in
 
 /obj/machinery/atmospherics/unary/vent_pump/on
-	on = 1
+	use_power = 1
 	icon_state = "map_vent_out"
 
 /obj/machinery/atmospherics/unary/vent_pump/siphon
 	pump_direction = 0
 
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on
-	on = 1
+	use_power = 1
 	icon_state = "map_vent_in"
 
 /obj/machinery/atmospherics/unary/vent_pump/New()
@@ -82,7 +79,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
-	active_power_usage = 15000	//15 kW ~ 20 HP
+	power_rating = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
@@ -91,7 +88,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
-	active_power_usage = 15000	//15 kW ~ 20 HP
+	power_rating = 15000	//15 kW ~ 20 HP
 
 /obj/machinery/atmospherics/unary/vent_pump/engine/New()
 	..()
@@ -101,7 +98,7 @@
 	if(!check_icon_cache())
 		return
 	if (!node)
-		on = 0
+		use_power = 0
 
 	overlays.Cut()
 
@@ -119,7 +116,7 @@
 	else if(!powered())
 		vent_icon += "off"
 	else
-		vent_icon += "[on ? "[pump_direction ? "out" : "in"]" : "off"]"
+		vent_icon += "[use_power ? "[pump_direction ? "out" : "in"]" : "off"]"
 
 	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
 
@@ -144,7 +141,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/proc/can_pump()
 	if(stat & (NOPOWER|BROKEN))
 		return 0
-	if(!on)
+	if(!use_power)
 		return 0
 	if(welded)
 		return 0
@@ -153,12 +150,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/process()
 	..()
 
+	last_power_draw = 0
+	last_flow_rate = 0
+
 	if (!node)
-		on = 0
+		use_power = 0
 	if(!can_pump())
-		update_use_power(0)	//usually we get here because a player turned a pump off - definitely want to update.
-		last_power_draw = 0
-		last_flow_rate = 0
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -171,29 +168,18 @@
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
-			var/output_volume = environment.volume * environment.group_multiplier
-			var/air_temperature = environment.temperature? environment.temperature : air_contents.temperature
-			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
-			//src.visible_message("DEBUG >>> [src]: output_volume = [output_volume]L; air_temperature = [air_temperature]K; transfer_moles = [transfer_moles] mol")
-
-			power_draw = pump_gas(src, air_contents, environment, transfer_moles, active_power_usage)
+			var/transfer_moles = calculate_transfer_moles(air_contents, environment)
+			power_draw = pump_gas(src, air_contents, environment, transfer_moles, power_rating)
 		else //external -> internal
-			var/output_volume = air_contents.volume + (network? network.volume : 0)
-			var/air_temperature = air_contents.temperature? air_contents.temperature : environment.temperature
-			var/transfer_moles = pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)
+			var/transfer_moles = calculate_transfer_moles(environment, air_contents, (network)? network.volume : 0)
 
 			//limit flow rate from turfs
 			transfer_moles = min(transfer_moles, environment.total_moles*air_contents.volume/environment.volume)	//group_multiplier gets divided out here
+			power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 
-			power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
-
-	if (power_draw < 0)
-		last_power_draw = 0
-		last_flow_rate = 0
-		//update_use_power(0)
-		use_power = 0	//don't force update - easier on CPU
-	else
-		last_power_draw = handle_power_draw(power_draw)
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 		if(network)
 			network.update = 1
 
@@ -236,7 +222,7 @@
 		"area" = src.area_uid,
 		"tag" = src.id_tag,
 		"device" = "AVP",
-		"power" = on,
+		"power" = use_power,
 		"direction" = pump_direction?("release"):("siphon"),
 		"checks" = pressure_checks,
 		"internal" = internal_pressure_bound,
@@ -283,10 +269,10 @@
 		pump_direction = 1
 
 	if(signal.data["power"] != null)
-		on = text2num(signal.data["power"])
+		use_power = text2num(signal.data["power"])
 
 	if(signal.data["power_toggle"] != null)
-		on = !on
+		use_power = !use_power
 
 	if(signal.data["checks"] != null)
 		if (signal.data["checks"] == "default")
@@ -375,15 +361,13 @@
 	else
 		..()
 
-/obj/machinery/atmospherics/unary/vent_pump/examine()
-	set src in oview(1)
-	..()
-	if (get_dist(usr, src) <= 1)
-		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user)
+	if(..(user, 1))
+		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
-		usr << "You are too far away to read the gauge."
+		user << "You are too far away to read the gauge."
 	if(welded)
-		usr << "It seems welded shut."
+		user << "It seems welded shut."
 
 /obj/machinery/atmospherics/unary/vent_pump/power_change()
 	var/old_stat = stat
@@ -394,7 +378,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
-	if (!(stat & NOPOWER) && on)
+	if (!(stat & NOPOWER) && use_power)
 		user << "\red You cannot unwrench this [src], turn it off first."
 		return 1
 	var/turf/T = src.loc

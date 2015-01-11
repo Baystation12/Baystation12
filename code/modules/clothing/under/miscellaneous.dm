@@ -392,6 +392,14 @@
 	item_color = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
+/obj/item/clothing/under/sundress_white
+	name = "white sundress"
+	desc = "A white sundress decorated with purple lilies."
+	icon_state = "sundress_white"
+	item_state = "sundress_white"
+	item_color = "sundress_white"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
@@ -461,3 +469,11 @@
 	icon_state = "mechanic_s"
 	item_state = "mechanic_s"
 	item_color = "mechanic_s"
+
+/obj/item/clothing/under/cheongsam
+	name = "White Cheongsam"
+	desc = "It is a white cheongsam dress."
+	icon_state = "mai_yang"
+	item_state = "mai_yang"
+	item_color = "mai_yang"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS

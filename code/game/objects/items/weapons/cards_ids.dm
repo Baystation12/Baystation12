@@ -75,6 +75,7 @@
 		/obj/item/weapon/storage/lockbox,
 		/obj/item/weapon/storage/secure,
 		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/rig,
 		/obj/item/device/eftpos,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/taperecorder,
@@ -101,6 +102,7 @@
 		/obj/machinery/door,
 		/obj/machinery/telecomms,
 		/obj/machinery/mecha_part_fabricator,
+		/obj/machinery/gibber,
 		/obj/vehicle
 		)
 

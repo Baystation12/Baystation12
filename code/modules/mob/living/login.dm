@@ -4,6 +4,8 @@
 	//Mind updates
 	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
 	mind.active = 1		//indicates that the mind is currently synced with a client
+	//If they're SSD, remove it so they can wake back up.
+	player_logged = 0
 
 	//Round specific stuff like hud updates
 	if(ticker && ticker.mode)
@@ -14,7 +16,7 @@
 			if("cult")
 				if(mind in ticker.mode:cult)
 					ticker.mode.update_cult_icons_added(src.mind)
-			if("nuclear emergency")
+			if("mercenary")
 				if(mind in ticker.mode:syndicates)
 					ticker.mode.update_all_synd_icons()
 			if("mutiny")

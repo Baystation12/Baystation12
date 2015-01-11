@@ -1,5 +1,5 @@
 /obj/machinery/computer/crew
-	name = "Crew monitoring computer"
+	name = "crew monitoring computer"
 	desc = "Used to monitor active health sensors built into most of the crew's uniforms."
 	icon_state = "crew"
 	use_power = 1
@@ -87,25 +87,16 @@
 				crewmemberData["fire"] = round(H.getFireLoss(), 1)
 				crewmemberData["brute"] = round(H.getBruteLoss(), 1)
 
-				crewmemberData["name"] = "Unknown"
-				crewmemberData["rank"] = "Unknown"
-				if(H.wear_id && istype(H.wear_id, /obj/item/weapon/card/id) )
-					var/obj/item/weapon/card/id/I = H.wear_id
-					crewmemberData["name"] = I.name
-					crewmemberData["rank"] = I.rank
-				else if(H.wear_id && istype(H.wear_id, /obj/item/device/pda) )
-					var/obj/item/device/pda/P = H.wear_id
-					crewmemberData["name"] = (P.id ? P.id.name : "Unknown")
-					crewmemberData["rank"] = (P.id ? P.id.rank : "Unknown")
+				crewmemberData["name"] = H.get_authentification_name(if_no_id="Unknown")
+				crewmemberData["rank"] = H.get_authentification_rank(if_no_id="Unknown", if_no_job="No Job")
+				crewmemberData["assignment"] = H.get_assignment(if_no_id="Unknown", if_no_job="No Job")
 
 				var/area/A = get_area(H)
 				crewmemberData["area"] = sanitize(A.name)
 				crewmemberData["x"] = pos.x
 				crewmemberData["y"] = pos.y
 
-				// Works around list += list2 merging lists; it's not pretty but it works
-				crewmembers += "temporary item"
-				crewmembers[crewmembers.len] = crewmemberData
+				crewmembers[++crewmembers.len] = crewmemberData
 
 	crewmembers = sortByKey(crewmembers, "name")
 

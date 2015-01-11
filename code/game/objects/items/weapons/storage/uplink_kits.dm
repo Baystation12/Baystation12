@@ -9,7 +9,6 @@
 				new /obj/item/clothing/shoes/syndigaloshes(src)
 				return
 
-			if ("stealth")
 			if("stealth")
 				new /obj/item/weapon/gun/energy/crossbow(src)
 				new /obj/item/weapon/pen/paralysis(src)
@@ -22,6 +21,8 @@
 				new /obj/item/device/powersink(src)
 				new /obj/item/clothing/suit/space/syndicate(src)
 				new /obj/item/clothing/head/helmet/space/syndicate(src)
+				new /obj/item/clothing/mask/gas/syndicate(src)
+				new /obj/item/weapon/tank/emergency_oxygen/double(src)
 				return
 
 			if("guns")
@@ -55,6 +56,8 @@
 				new /obj/item/device/radio/beacon/syndicate(src)
 				new /obj/item/clothing/suit/space/syndicate(src)
 				new /obj/item/clothing/head/helmet/space/syndicate(src)
+				new /obj/item/clothing/mask/gas/syndicate(src)
+				new /obj/item/weapon/tank/emergency_oxygen/double(src)
 				new /obj/item/weapon/card/emag(src)
 				return
 
@@ -116,9 +119,12 @@
 	..()
 	new /obj/item/clothing/suit/space/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
+	new /obj/item/clothing/mask/gas/syndicate(src)
+	new /obj/item/weapon/tank/emergency_oxygen/double(src)
 	return
+
 /obj/item/weapon/storage/box/syndie_kit/chameleon
-	name = "Chameleon Kit"
+	name = "chameleon kit"
 	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
 	storage_slots = 10
 
@@ -134,3 +140,12 @@
 	new /obj/item/clothing/glasses/chameleon(src)
 	new /obj/item/weapon/gun/projectile/chameleon(src)
 	new /obj/item/ammo_magazine/chameleon(src)
+
+/obj/item/weapon/storage/box/syndie_kit/clerical
+	name = "clerical kit"
+	desc = "Comes with all you need to fake paperwork. Assumes you have passed basic writing lessons."
+
+/obj/item/weapon/storage/box/syndie_kit/clerical/New()
+	..()
+	new /obj/item/weapon/stamp/chameleon(src)
+	new /obj/item/weapon/pen/chameleon(src)

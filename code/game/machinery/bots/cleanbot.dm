@@ -197,7 +197,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(!src.target || src.target == null)
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in src.target_types)
-				if(isnull(D.targeted_by) && (D.type == T || D.parent_type == T) && D != src.oldtarget)   // If the mess isn't targeted
+				if(isnull(D.targeted_by) && istype(D, T) && D != src.oldtarget)   // If the mess isn't targeted (D.type == T || D.parent_type == T)
 					src.oldtarget = D								 // or if it is but the bot is gone.
 					src.target = D									 // and it's stuff we clean?  Clean it.
 					D.targeted_by = src	// Claim the mess we are targeting.

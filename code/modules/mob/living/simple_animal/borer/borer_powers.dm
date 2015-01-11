@@ -69,6 +69,10 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
+		var/datum/organ/external/E = H.organs_by_name["head"]
+		if(!E || (E.status & ORGAN_DESTROYED))
+			src << "\The [H] does not have a head!"
+
 		if(!H.species.has_organ["brain"])
 			src << "\The [H] does not seem to have an ear canal to breach."
 			return
@@ -124,6 +128,7 @@
 		src << "They are no longer in range!"
 		return
 
+/*
 /mob/living/simple_animal/borer/verb/devour_brain()
 	set category = "Abilities"
 	set name = "Devour Brain"
@@ -147,6 +152,7 @@
 
 	src << "<span class = 'danger'>It only takes a few moments to render the dead host brain down into a nutrient-rich slurry...</span>"
 	replace_brain()
+*/
 
 // BRAIN WORM ZOMBIES AAAAH.
 /mob/living/simple_animal/borer/proc/replace_brain()
@@ -214,9 +220,9 @@
 	if(chemicals < 50)
 		src << "You don't have enough chemicals!"
 
-	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine","alkysine")
+	var/chem = input("Select a chemical to secrete.", "Chemicals") as null|anything in list("alkysine","bicaridine","hyperzine","tramadol")
 
-	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
+	if(!chem || chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
 
 	src << "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>"

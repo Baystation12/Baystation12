@@ -10,9 +10,8 @@
 
 
 obj/structure/windoor_assembly
+	name = "windoor assembly"
 	icon = 'icons/obj/doors/windoor.dmi'
-
-	name = "Windoor Assembly"
 	icon_state = "l_windoor_assembly01"
 	anchored = 0
 	density = 0
@@ -32,9 +31,9 @@ obj/structure/windoor_assembly/New(Loc, start_dir=NORTH, constructed=0)
 		anchored = 0
 	switch(start_dir)
 		if(NORTH, SOUTH, EAST, WEST)
-			dir = start_dir
+			set_dir(start_dir)
 		else //If the user is facing northeast. northwest, southeast, southwest or north, default to north
-			dir = NORTH
+			set_dir(NORTH)
 	
 	update_nearby_tiles(need_rebuild=1)
 
@@ -220,7 +219,7 @@ obj/structure/windoor_assembly/Del()
 						else
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
-						windoor.dir = src.dir
+						windoor.set_dir(src.dir)
 						windoor.density = 0
 
 						if(src.electronics.one_access)
@@ -238,7 +237,7 @@ obj/structure/windoor_assembly/Del()
 						else
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
-						windoor.dir = src.dir
+						windoor.set_dir(src.dir)
 						windoor.density = 0
 
 						if(src.electronics.one_access)
@@ -272,7 +271,7 @@ obj/structure/windoor_assembly/Del()
 	if(src.state != "01")
 		update_nearby_tiles(need_rebuild=1) //Compel updates before
 
-	src.dir = turn(src.dir, 270)
+	src.set_dir(turn(src.dir, 270))
 
 	if(src.state != "01")
 		update_nearby_tiles(need_rebuild=1)

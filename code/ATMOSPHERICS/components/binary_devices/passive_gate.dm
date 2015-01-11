@@ -14,7 +14,7 @@
 
 	use_power = 0
 	
-	var/on = 0	//doesn't actually use power. this is just whether the valve is open or not
+	var/unlocked = 0	//If 0, then the valve is locked closed, otherwise it is open(-able, it's a one-way valve so it closes if gas would flow backwards).
 	var/target_pressure = ONE_ATMOSPHERE
 	var/max_pressure_setting = 15000	//kPa
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP * 2.5
@@ -32,7 +32,7 @@
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP * 2.5
 
 /obj/machinery/atmospherics/binary/passive_gate/update_icon()
-	icon_state = (on && flowing)? "on" : "off"
+	icon_state = (unlocked && flowing)? "on" : "off"
 
 /obj/machinery/atmospherics/binary/passive_gate/update_underlays()
 	if(..())
@@ -48,8 +48,10 @@
 
 /obj/machinery/atmospherics/binary/passive_gate/process()
 	..()
-	if(!on)
-		last_flow_rate = 0
+	
+	last_flow_rate = 0
+	
+	if(!unlocked)
 		return 0
 
 	var/output_starting_pressure = air2.return_pressure()
@@ -73,30 +75,22 @@
 		//Figure out how much gas to transfer to meet the target pressure.
 		switch (regulate_mode)
 			if (REGULATE_INPUT)
-				var/air_temperature = (air1.temperature > 0)? air1.temperature : air2.temperature
-				var/input_volume = air1.volume + (network1? network1.volume : 0)
-				transfer_moles = min(transfer_moles, pressure_delta*input_volume/(air_temperature * R_IDEAL_GAS_EQUATION))
+				transfer_moles = min(transfer_moles, calculate_transfer_moles(air2, air1, pressure_delta, (network1)? network1.volume : 0))
 			if (REGULATE_OUTPUT)
-				var/air_temperature = (air2.temperature > 0)? air2.temperature : air1.temperature
-				var/output_volume = air2.volume + (network2? network2.volume : 0)
-				
-				transfer_moles = min(transfer_moles, pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION))	
+				transfer_moles = min(transfer_moles, calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0))
 		
 		//pump_gas() will return a negative number if no flow occurred
 		returnval = pump_gas(src, air1, air2, transfer_moles, available_power=0)	//available_power=0 means we only move gas if it would flow naturally
 	
-	if (returnval < 0)
-		flowing = 0
-		last_flow_rate = 0
-	else
+	if (returnval >= 0)
 		if(network1)
 			network1.update = 1
 
 		if(network2)
 			network2.update = 1
 		
-		if (!last_flow_rate)
-			flowing = 0
+	if (last_flow_rate)
+		flowing = 1
 	
 	update_icon()
 
@@ -120,7 +114,7 @@
 	signal.data = list(
 		"tag" = id,
 		"device" = "AGP",
-		"power" = on,
+		"power" = unlocked,
 		"target_output" = target_pressure,
 		"regulate_mode" = regulate_mode,
 		"set_flow_rate" = set_flow_rate,
@@ -141,10 +135,10 @@
 		return 0
 
 	if("power" in signal.data)
-		on = text2num(signal.data["power"])
+		unlocked = text2num(signal.data["power"])
 
 	if("power_toggle" in signal.data)
-		on = !on
+		unlocked = !unlocked
 
 	if("set_target_pressure" in signal.data)
 		target_pressure = between(
@@ -188,7 +182,7 @@
 	var/data[0]
 	
 	data = list(
-		"on" = on,
+		"on" = unlocked,
 		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
 		"max_pressure" = max_pressure_setting,
 		"input_pressure" = round(air1.return_pressure()*100),
@@ -213,7 +207,7 @@
 	if(..()) return
 	
 	if(href_list["toggle_valve"])
-		on = !on
+		unlocked = !unlocked
 	
 	if(href_list["regulate_mode"])
 		switch(href_list["regulate_mode"])
@@ -247,7 +241,7 @@
 /obj/machinery/atmospherics/binary/passive_gate/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
-	if (on)
+	if (unlocked)
 		user << "\red You cannot unwrench this [src], turn it off first."
 		return 1
 	var/datum/gas_mixture/int_air = return_air()

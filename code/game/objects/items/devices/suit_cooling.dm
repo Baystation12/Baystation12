@@ -161,26 +161,25 @@
 	else
 		icon_state = "suitcooler0"
 
-/obj/item/device/suit_cooling_unit/examine()
-	set src in view(1)
-	
-	..()
+/obj/item/device/suit_cooling_unit/examine(mob/user)
+	if(!..(user, 1))
+		return
 	
 	if (on)
 		if (attached_to_suit(src.loc))
-			usr << "It's switched on and running."
+			user << "It's switched on and running."
 		else
-			usr << "It's switched on, but not attached to anything."
+			user << "It's switched on, but not attached to anything."
 	else
-		usr << "It is switched off."
+		user << "It is switched off."
 	
 	if (cover_open)
 		if(cell)
-			usr << "The panel is open, exposing the [cell]."
+			user << "The panel is open, exposing the [cell]."
 		else
-			usr << "The panel is open."
+			user << "The panel is open."
 	
 	if (cell)
-		usr << "The charge meter reads [round(cell.percent())]%."
+		user << "The charge meter reads [round(cell.percent())]%."
 	else
-		usr << "It doesn't have a power cell installed."
+		user << "It doesn't have a power cell installed."

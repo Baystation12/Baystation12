@@ -62,6 +62,7 @@ Class Procs:
 
 /connection_edge/var/list/connecting_turfs = list()
 /connection_edge/var/direct = 0
+/connection_edge/var/sleeping = 1
 
 /connection_edge/var/coefficient = 0
 
@@ -87,6 +88,8 @@ Class Procs:
 	//world << "[type] Erased."
 
 /connection_edge/proc/tick()
+
+/connection_edge/proc/recheck()
 
 /connection_edge/proc/flow(list/movable, differential, repelled)
 	for(var/i = 1; i <= movable.len; i++)
@@ -147,35 +150,38 @@ Class Procs:
 	if(A.invalid || B.invalid)
 		erase()
 		return
-	//world << "[id]: Tick [air_master.current_cycle]: \..."
-	if(direct)
-		if(air_master.equivalent_pressure(A, B))
-			//world << "merged."
-			erase()
-			air_master.merge(A, B)
-			//world << "zones merged."
-			return
 
-	//air_master.equalize(A, B)
-	A.air.share_ratio(B.air, coefficient)
-	air_master.mark_zone_update(A)
-	air_master.mark_zone_update(B)
-	//world << "equalized."
+	var/equiv = A.air.share_ratio(B.air, coefficient)
 
 	var/differential = A.air.return_pressure() - B.air.return_pressure()
-	if(abs(differential) < vsc.airflow_lightest_pressure) return
+	if(abs(differential) >= vsc.airflow_lightest_pressure)
+		var/list/attracted
+		var/list/repelled
+		if(differential > 0)
+			attracted = A.movables()
+			repelled = B.movables()
+		else
+			attracted = B.movables()
+			repelled = A.movables()
 
-	var/list/attracted
-	var/list/repelled
-	if(differential > 0)
-		attracted = A.movables()
-		repelled = B.movables()
-	else
-		attracted = B.movables()
-		repelled = A.movables()
+		flow(attracted, abs(differential), 0)
+		flow(repelled, abs(differential), 1)
 
-	flow(attracted, abs(differential), 0)
-	flow(repelled, abs(differential), 1)
+	if(equiv)
+		if(direct)
+			erase()
+			air_master.merge(A, B)
+			return
+		else
+			A.air.equalize(B.air)
+			air_master.mark_edge_sleeping(src)
+
+	air_master.mark_zone_update(A)
+	air_master.mark_zone_update(B)
+
+/connection_edge/zone/recheck()
+	if(!A.air.compare(B.air))
+		air_master.mark_edge_active(src)
 
 //Helper proc to get connections for a zone.
 /connection_edge/zone/proc/get_connected_zone(zone/from)
@@ -214,20 +220,27 @@ Class Procs:
 	if(A.invalid)
 		erase()
 		return
-	//world << "[id]: Tick [air_master.current_cycle]: To [B]!"
-	//A.air.mimic(B, coefficient)
-	A.air.share_space(air, dbg_out)
-	air_master.mark_zone_update(A)
+
+	var/equiv = A.air.share_space(air)
 
 	var/differential = A.air.return_pressure() - air.return_pressure()
-	if(abs(differential) < vsc.airflow_lightest_pressure) return
+	if(abs(differential) >= vsc.airflow_lightest_pressure)
+		var/list/attracted = A.movables()
+		flow(attracted, abs(differential), differential < 0)
 
-	var/list/attracted = A.movables()
-	flow(attracted, abs(differential), differential < 0)
+	if(equiv)
+		A.air.copy_from(air)
+		air_master.mark_edge_sleeping(src)
+
+	air_master.mark_zone_update(A)
+
+/connection_edge/unsimulated/recheck()
+	if(!A.air.compare(air))
+		air_master.mark_edge_active(src)
 
 proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//This implements a simplistic version of the Stefan-Boltzmann law.
-	var/energy_delta = ((A.temperature - B.temperature) ** 4) * 5.6704e-8 * connecting_tiles * 2.5
+	var/energy_delta = ((A.temperature - B.temperature) ** 4) * STEFAN_BOLTZMANN_CONSTANT * connecting_tiles * 2.5
 	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
 	if(maximum_energy_delta > abs(energy_delta))
 		if(energy_delta < 0)

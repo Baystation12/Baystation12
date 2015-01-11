@@ -64,11 +64,17 @@
 	..()
 
 /obj/structure/largecrate/hoverpod
-	name = "Hoverpod assembly crate"
+	name = "\improper Hoverpod assembly crate"
 	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
 	icon_state = "mulecrate"
 
 /obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/crowbar))
-		new /obj/mecha/hoverpod(loc)
+		var/obj/item/mecha_parts/mecha_equipment/ME
+		var/obj/mecha/working/hoverpod/H = new (loc)
+		
+		ME = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
+		ME.attach(H)
+		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
+		ME.attach(H)
 	..()

@@ -36,35 +36,30 @@
 		else
 			stored_ore[O.name] = 1
 
-/obj/structure/ore_box/examine()
-	set name = "Examine"
-	set category = "IC"
-	set src in view(usr.client) //If it can be seen, it can be examined.
+/obj/structure/ore_box/examine(mob/user)
+	user << "That's an [src]."
+	user << desc
 
-	if (!( usr ))
-		return
-	usr << "That's an [src]."
-	usr << desc
-
-	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can check the contents of ore boxes.
+	// Borgs can now check contents too.
+	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
 		return
 
-	if(!Adjacent(usr)) //Can only check the contents of ore boxes if you can physically reach them.
+	if(!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.
 		return
 
-	add_fingerprint(usr)
+	add_fingerprint(user)
 
 	if(!contents.len)
-		usr << "It is empty."
+		user << "It is empty."
 		return
 
 	if(world.time > last_update + 10)
 		update_ore_count()
 		last_update = world.time
 
-	usr << "It holds:"
+	user << "It holds:"
 	for(var/ore in stored_ore)
-		usr << "- [stored_ore[ore]] [ore]"
+		user << "- [stored_ore[ore]] [ore]"
 	return
 
 

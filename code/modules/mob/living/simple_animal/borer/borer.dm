@@ -7,8 +7,8 @@
 	speak_emote = list("chirrups")
 	emote_hear = list("chirrups")
 	response_help  = "pokes"
-	response_disarm = "prods the"
-	response_harm   = "stomps on the"
+	response_disarm = "prods"
+	response_harm   = "stomps on"
 	icon_state = "brainslug"
 	icon_living = "brainslug"
 	icon_dead = "brainslug_dead"
@@ -16,7 +16,7 @@
 	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attacktext = "nips"
+	attacktext = "nipped"
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE
@@ -174,7 +174,7 @@
 //Procs for grabbing players.
 /mob/living/simple_animal/borer/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Syndicate"))
+		if(jobban_isbanned(O, "Borer"))
 			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_ALIEN)
@@ -193,15 +193,21 @@
 
 /mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
 
-	if(!candidate)
+	if(!candidate || !candidate.mob || !candidate.mob.mind)
 		return
 
 	src.mind = candidate.mob.mind
+	candidate.mob.mind.current = src
 	src.ckey = candidate.ckey
+
 	if(src.mind)
 		src.mind.assigned_role = "Cortical Borer"
 		src.mind.special_role = "Cortical Borer"
-		ticker.mode.borers |= src.mind
+
+	src << "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
+	your host and your eventual spawn safe and warm."
+	src << "You can speak to your victim with <b>say</b>, to other borers with <b>say :x</b>, and use your Abilities tab to access powers."
 
 /mob/living/simple_animal/borer/can_use_vents()
 	return

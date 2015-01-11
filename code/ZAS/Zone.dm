@@ -138,6 +138,10 @@ Class Procs:
 		graphic_add.len = 0
 		graphic_remove.len = 0
 
+	for(var/connection_edge/E in edges)
+		if(E.sleeping)
+			E.recheck()
+
 /zone/proc/dbg_data(mob/M)
 	M << name
 	for(var/g in air.gas)

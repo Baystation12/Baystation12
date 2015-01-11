@@ -194,6 +194,12 @@ proc/tg_list2text(list/list, glue=",")
 		. += copytext(text, last_found, found)
 		last_found = found + delim_len
 	while(found)
+	
+/proc/text2numlist(text, delimiter="\n")
+	var/list/num_list = list()
+	for(var/x in text2list(text, delimiter))
+		num_list += text2num(x)
+	return num_list
 
 //Case Sensitive!
 /proc/text2listEx(text, delimiter="\n")

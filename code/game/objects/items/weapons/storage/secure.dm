@@ -27,13 +27,9 @@
 	max_w_class = 2
 	max_combined_w_class = 14
 
-	examine()
-		set src in oview(1)
-		..()
-		usr << text("The service panel is [src.open ? "open" : "closed"].")
-
-	attack_paw(mob/user as mob)
-		return attack_hand(user)
+	examine(mob/user)
+		if(..(user, 1))
+			user << text("The service panel is [src.open ? "open" : "closed"].")
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
