@@ -120,7 +120,7 @@
 		else
 			msg += "[t_He] [t_has] \icon[gloves] \a [gloves] on [t_his] hands.\n"
 	else if(blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] blood-stained hands!</span>\n"
+		msg += "<span class='warning'>[t_He] [t_has] [(hand_blood_color != "#030303") ? "blood" : "oil"]-stained hands!</span>\n"
 
 	//handcuffed?
 
@@ -145,7 +145,7 @@
 		else
 			msg += "[t_He] [t_is] wearing \icon[shoes] \a [shoes] on [t_his] feet.\n"
 	else if(feet_blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] blood-stained feet!</span>\n"
+		msg += "<span class='warning'>[t_He] [t_has] [(feet_blood_color != "#030303") ? "blood" : "oil"]-stained feet!</span>\n"
 
 	//mask
 	if(wear_mask && !skipmask)

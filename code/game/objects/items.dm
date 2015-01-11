@@ -117,8 +117,10 @@
 			size = "huge"
 		else
 	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	var/custom_suffix = "It is a [size] item."
-	return ..(user, distance, suffix = custom_suffix)
+	usr << "This is a [blood_DNA ? blood_color != "#030303" ? "bloody " : "oil-stained " : ""]\icon[src][src.name]. It is a [size] item."
+	if(src.desc)
+		usr << src.desc
+	return
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
