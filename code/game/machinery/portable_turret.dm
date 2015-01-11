@@ -546,7 +546,7 @@
 	raising = 0
 	cover.icon_state = "turretCover"
 	raised = 0
-	invisibility = 2
+	invisibility = INVISIBILITY_LEVEL_TWO
 	update_icon()
 
 
