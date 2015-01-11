@@ -96,7 +96,7 @@
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+			user << "<span class='notice'>There is nothing to recover from storage.</span>"
 			return
 
 		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
@@ -104,10 +104,10 @@
 			return
 
 		if(!(I in frozen_items))
-			user << "\blue \The [I] is no longer in storage."
+			user << "<span class='notice'>\The [I] is no longer in storage.</span>"
 			return
 
-		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
+		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
 
 		I.loc = get_turf(src)
 		frozen_items -= I
@@ -116,10 +116,10 @@
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+			user << "<span class='notice'>There is nothing to recover from storage.</span>"
 			return
 
-		visible_message("\blue The console beeps happily as it disgorges the desired objects.", 3)
+		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
 
 		for(var/obj/item/I in frozen_items)
 			I.loc = get_turf(src)
@@ -141,7 +141,7 @@
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
 
-	name = "\improper cryogenic feed"
+	name = "cryogenic feed"
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
@@ -163,7 +163,7 @@
 
 //Cryopods themselves.
 /obj/machinery/cryopod
-	name = "\improper cryogenic freezer"
+	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
@@ -277,113 +277,125 @@
 				if(!find_control_computer(urgent=1))
 					return
 
-			//Drop all items into the pod.
-			for(var/obj/item/W in occupant)
-				if(istype(W, /obj/item/device/mmi))
-					if(istype(occupant, /mob/living/silicon/robot))
-						var/mob/living/silicon/robot/R = occupant
-						if(R.mmi == W)
-							del(W)
-							continue
-				occupant.drop_from_inventory(W)
-				W.loc = src
+			despawn_occupant()
 
-				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
-					for(var/obj/item/O in W.contents)
-						if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
-							continue
-						O.loc = src
+// This function can not be undone; do not call this unless you are sure
+// Also make sure there is a valid control computer
+/obj/machinery/cryopod/robot/despawn_occupant()
+	var/mob/living/silicon/robot/R = occupant
+	if(!istype(R)) return ..()
 
-			//Delete all items not on the preservation list.
-			var/list/items = src.contents
-			items -= occupant // Don't delete the occupant
-			items -= announce // or the autosay radio.
+	del(R.mmi)
+	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
+		for(var/obj/item/O in I) // the things inside the tools, if anything; mainly for janiborg trash bags
+			O.loc = R
+		del(I)
+	del(R.module)
 
-			for(var/obj/item/W in items)
+	return ..()
 
-				var/preserve = null
-				for(var/T in preserve_items)
-					if(istype(W,T))
-						preserve = 1
-						break
+// This function can not be undone; do not call this unless you are sure
+// Also make sure there is a valid control computer
+/obj/machinery/cryopod/proc/despawn_occupant()
+	//Drop all items into the pod.
+	for(var/obj/item/W in occupant)
+		occupant.drop_from_inventory(W)
+		W.loc = src
 
-				if(!preserve)
-					del(W)
-				else
-					if(control_computer && control_computer.allow_items)
-						control_computer.frozen_items += W
-						W.loc = null
-					else
-						W.loc = src.loc
+		if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
+			for(var/obj/item/O in W.contents)
+				if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
+					continue
+				O.loc = src
 
-			//Update any existing objectives involving this mob.
-			for(var/datum/objective/O in all_objectives)
-				// We don't want revs to get objectives that aren't for heads of staff. Letting
-				// them win or lose based on cryo is silly so we remove the objective.
-				if(istype(O,/datum/objective/mutiny) && O.target == occupant.mind)
-					del(O)
-				else if(O.target && istype(O.target,/datum/mind))
-					if(O.target == occupant.mind)
-						if(O.owner && O.owner.current)
-							O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
-						O.target = null
-						spawn(1) //This should ideally fire after the occupant is deleted.
-							if(!O) return
-							O.find_target()
-							if(!(O.target))
-								all_objectives -= O
-								O.owner.objectives -= O
-								del(O)
+	//Delete all items not on the preservation list.
+	var/list/items = src.contents
+	items -= occupant // Don't delete the occupant
+	items -= announce // or the autosay radio.
 
-			//Handle job slot/tater cleanup.
-			var/job = occupant.mind.assigned_role
+	for(var/obj/item/W in items)
 
-			job_master.FreeRole(job)
+		var/preserve = null
+		for(var/T in preserve_items)
+			if(istype(W,T))
+				preserve = 1
+				break
 
-			if(occupant.mind.objectives.len)
-				del(occupant.mind.objectives)
-				occupant.mind.special_role = null
+		if(!preserve)
+			del(W)
+		else
+			if(control_computer && control_computer.allow_items)
+				control_computer.frozen_items += W
+				W.loc = null
 			else
-				if(ticker.mode.name == "AutoTraitor")
-					var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-					current_mode.possible_traitors.Remove(occupant)
+				W.loc = src.loc
 
-			// Delete them from datacore.
+	//Update any existing objectives involving this mob.
+	for(var/datum/objective/O in all_objectives)
+		// We don't want revs to get objectives that aren't for heads of staff. Letting
+		// them win or lose based on cryo is silly so we remove the objective.
+		if(istype(O,/datum/objective/mutiny) && O.target == occupant.mind)
+			del(O)
+		else if(O.target && istype(O.target,/datum/mind))
+			if(O.target == occupant.mind)
+				if(O.owner && O.owner.current)
+					O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]...</span>"
+				O.target = null
+				spawn(1) //This should ideally fire after the occupant is deleted.
+					if(!O) return
+					O.find_target()
+					if(!(O.target))
+						all_objectives -= O
+						O.owner.objectives -= O
+						del(O)
 
-			if(PDA_Manifest.len)
-				PDA_Manifest.Cut()
-			for(var/datum/data/record/R in data_core.medical)
-				if ((R.fields["name"] == occupant.real_name))
-					del(R)
-			for(var/datum/data/record/T in data_core.security)
-				if ((T.fields["name"] == occupant.real_name))
-					del(T)
-			for(var/datum/data/record/G in data_core.general)
-				if ((G.fields["name"] == occupant.real_name))
-					del(G)
+	//Handle job slot/tater cleanup.
+	var/job = occupant.mind.assigned_role
 
-			if(orient_right)
-				icon_state = "[base_icon_state]-r"
-			else
-				icon_state = base_icon_state
+	job_master.FreeRole(job)
 
-			//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
+	if(occupant.mind.objectives.len)
+		del(occupant.mind.objectives)
+		occupant.mind.special_role = null
+	else
+		if(ticker.mode.name == "AutoTraitor")
+			var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
+			current_mode.possible_traitors.Remove(occupant)
 
-			//This should guarantee that ghosts don't spawn.
-			occupant.ckey = null
+	// Delete them from datacore.
 
-			//Make an announcement and log the person entering storage.
-			control_computer.frozen_crew += "[occupant.real_name]"
+	if(PDA_Manifest.len)
+		PDA_Manifest.Cut()
+	for(var/datum/data/record/R in data_core.medical)
+		if ((R.fields["name"] == occupant.real_name))
+			del(R)
+	for(var/datum/data/record/T in data_core.security)
+		if ((T.fields["name"] == occupant.real_name))
+			del(T)
+	for(var/datum/data/record/G in data_core.general)
+		if ((G.fields["name"] == occupant.real_name))
+			del(G)
 
-			announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
-			visible_message("\blue \The [src] hums and hisses as it moves [occupant.real_name] into storage.", 3)
+	if(orient_right)
+		icon_state = "[base_icon_state]-r"
+	else
+		icon_state = base_icon_state
 
-			// Delete the mob.
-			del(occupant)
-			occupant = null
-			name = initial(name)
+	//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
 
-	return
+	//This should guarantee that ghosts don't spawn.
+	occupant.ckey = null
+
+	//Make an announcement and log the person entering storage.
+	control_computer.frozen_crew += "[occupant.real_name]"
+
+	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
+	visible_message("<span class='notice'>\The [src] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
+
+	// Delete the mob.
+	del(occupant)
+	occupant = null
+	name = initial(name)
 
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
@@ -391,7 +403,7 @@
 	if(istype(G, /obj/item/weapon/grab))
 
 		if(occupant)
-			user << "\blue \The [src] is in use."
+			user << "<span class='notice'>\The [src] is in use.</span>"
 			return
 
 		if(!ismob(G:affecting))
@@ -428,15 +440,15 @@
 			else
 				icon_state = occupied_icon_state
 
-			M << "\blue [on_enter_occupant_message]"
-			M << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
+			M << "<span class='notice'>[on_enter_occupant_message]</span>"
+			M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 			occupant = M
 			time_entered = world.time
 
 			// Book keeping!
 			var/turf/location = get_turf(src)
 			log_admin("[key_name_admin(M)] has entered a stasis pod. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-			message_admins("\blue [key_name_admin(M)] has entered a stasis pod.")
+			message_admins("<span class='notice'>[key_name_admin(M)] has entered a stasis pod.</span>")
 
 			//Despawning occurs when process() is called with an occupant without a client.
 			src.add_fingerprint(M)
@@ -476,7 +488,7 @@
 		return
 
 	if(src.occupant)
-		usr << "\blue <B>\The [src] is in use.</B>"
+		usr << "<span class='notice'><B>\The [src] is in use.</B></span>"
 		return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
@@ -492,7 +504,7 @@
 			return
 
 		if(src.occupant)
-			usr << "\blue <B>\The [src] is in use.</B>"
+			usr << "<span class='notice'><B>\The [src] is in use.</B></span>"
 			return
 
 		usr.stop_pulling()
@@ -506,8 +518,8 @@
 		else
 			icon_state = occupied_icon_state
 
-		usr << "\blue [on_enter_occupant_message]"
-		usr << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
+		usr << "<span class='notice'>[on_enter_occupant_message]</span>"
+		usr << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 		occupant = usr
 		time_entered = world.time
 

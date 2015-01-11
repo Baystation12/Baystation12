@@ -966,6 +966,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
 	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = readd_quotes(t)
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)

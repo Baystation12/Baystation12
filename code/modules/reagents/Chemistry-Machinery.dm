@@ -187,20 +187,20 @@
 	max_energy = 100
 	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
-	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko","grapesoda")
-				hackedcheck = 1
-				return
+/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You change the mode from 'McNano' to 'Pizza King'."
+			dispensable_reagents += list("thirteenloko","grapesoda")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents -= list("thirteenloko")
-				hackedcheck = 0
-				return
+		else
+			user << "You change the mode from 'Pizza King' to 'McNano'."
+			dispensable_reagents -= list("thirteenloko","grapesoda")
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
@@ -212,21 +212,21 @@
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
 	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
-	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
+/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
 
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
-				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 1
-				return
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
+			dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
-				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 0
-				return
+		else
+			user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
+			dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/meds
 	name = "chem dispenser magic"
