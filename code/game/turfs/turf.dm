@@ -241,9 +241,9 @@
 		//W.Assimilate_Air()
 
 		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
+
+		if(W.lighting_lumcount)
+			W.UpdateAffectingLights()
 
 		if(old_fire)
 			fire = old_fire
