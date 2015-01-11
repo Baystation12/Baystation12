@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 506.1249
+WINDOW: core\_stubs.dm;code\modules\admin\admin.dm
+DIR: code code\modules code\modules\admin code\WorkInProgress\carn core 
+FILE: core\_stubs.dm
+LAST_COMPILE_TIME: 1420996428
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
