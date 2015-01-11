@@ -58,7 +58,7 @@ datum/controller/game_controller/New()
 	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
 datum/controller/game_controller/proc/setup()
-	world.tick_lag = config.Ticklag
+	world.tick_lag = 0.3
 
 	spawn(20)
 		createRandomZlevel()
