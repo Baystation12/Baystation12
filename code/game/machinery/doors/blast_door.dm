@@ -55,6 +55,7 @@
 	src.update_icon()
 	src.SetOpacity(0)
 	sleep(15)
+	src.layer = open_layer
 	src.operating = 0
 
 // Proc: force_close()
@@ -62,6 +63,7 @@
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
 	src.operating = 1
+	src.layer = closed_layer
 	flick(icon_state_closing, src)
 	src.density = 1
 	update_nearby_tiles()
