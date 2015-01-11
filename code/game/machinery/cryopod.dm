@@ -96,7 +96,7 @@
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+			user << "<span class='notice'>There is nothing to recover from storage.</span>"
 			return
 
 		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
@@ -104,10 +104,10 @@
 			return
 
 		if(!(I in frozen_items))
-			user << "\blue \The [I] is no longer in storage."
+			user << "<span class='notice'>\The [I] is no longer in storage.</span>"
 			return
 
-		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
+		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
 
 		I.loc = get_turf(src)
 		frozen_items -= I
@@ -116,10 +116,10 @@
 		if(!allow_items) return
 
 		if(frozen_items.len == 0)
-			user << "\blue There is nothing to recover from storage."
+			user << "<span class='notice'>There is nothing to recover from storage.</span>"
 			return
 
-		visible_message("\blue The console beeps happily as it disgorges the desired objects.", 3)
+		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
 
 		for(var/obj/item/I in frozen_items)
 			I.loc = get_turf(src)
@@ -141,7 +141,7 @@
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
 
-	name = "\improper cryogenic feed"
+	name = "cryogenic feed"
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
@@ -163,7 +163,7 @@
 
 //Cryopods themselves.
 /obj/machinery/cryopod
-	name = "\improper cryogenic freezer"
+	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
@@ -339,7 +339,7 @@
 		else if(O.target && istype(O.target,/datum/mind))
 			if(O.target == occupant.mind)
 				if(O.owner && O.owner.current)
-					O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+					O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]...</span>"
 				O.target = null
 				spawn(1) //This should ideally fire after the occupant is deleted.
 					if(!O) return
@@ -390,7 +390,7 @@
 	control_computer.frozen_crew += "[occupant.real_name]"
 
 	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
-	visible_message("\blue \The [src] hums and hisses as it moves [occupant.real_name] into storage.", 3)
+	visible_message("<span class='notice'>\The [src] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	// Delete the mob.
 	del(occupant)
@@ -403,7 +403,7 @@
 	if(istype(G, /obj/item/weapon/grab))
 
 		if(occupant)
-			user << "\blue \The [src] is in use."
+			user << "<span class='notice'>\The [src] is in use.</span>"
 			return
 
 		if(!ismob(G:affecting))
@@ -440,15 +440,15 @@
 			else
 				icon_state = occupied_icon_state
 
-			M << "\blue [on_enter_occupant_message]"
-			M << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
+			M << "<span class='notice'>[on_enter_occupant_message]</span>"
+			M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 			occupant = M
 			time_entered = world.time
 
 			// Book keeping!
 			var/turf/location = get_turf(src)
 			log_admin("[key_name_admin(M)] has entered a stasis pod. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
-			message_admins("\blue [key_name_admin(M)] has entered a stasis pod.")
+			message_admins("<span class='notice'>[key_name_admin(M)] has entered a stasis pod.</span>")
 
 			//Despawning occurs when process() is called with an occupant without a client.
 			src.add_fingerprint(M)
@@ -488,7 +488,7 @@
 		return
 
 	if(src.occupant)
-		usr << "\blue <B>\The [src] is in use.</B>"
+		usr << "<span class='notice'><B>\The [src] is in use.</B></span>"
 		return
 
 	for(var/mob/living/carbon/slime/M in range(1,usr))
@@ -504,7 +504,7 @@
 			return
 
 		if(src.occupant)
-			usr << "\blue <B>\The [src] is in use.</B>"
+			usr << "<span class='notice'><B>\The [src] is in use.</B></span>"
 			return
 
 		usr.stop_pulling()
@@ -518,8 +518,8 @@
 		else
 			icon_state = occupied_icon_state
 
-		usr << "\blue [on_enter_occupant_message]"
-		usr << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
+		usr << "<span class='notice'>[on_enter_occupant_message]</span>"
+		usr << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 		occupant = usr
 		time_entered = world.time
 
