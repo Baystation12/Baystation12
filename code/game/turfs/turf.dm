@@ -112,34 +112,27 @@
 	if(!istype(atom, /atom/movable))
 		return
 
-	var/atom/movable/M = atom
+	var/atom/movable/A = atom
 
 	var/loopsanity = 100
-	if(ismob(M))
-		if(!M:lastarea)
-			M:lastarea = get_area(M.loc)
-		if(M:lastarea.has_gravity == 0)
+	if(ismob(A))
+		var/mob/M = A
+		if(!M.lastarea)
+			M.lastarea = get_area(M.loc)
+		if(M.lastarea.has_gravity == 0)
 			inertial_drift(M)
-
-	/*
-		if(M.flags & NOGRAV)
-			inertial_drift(M)
-	*/
-
-
 
 		else if(!istype(src, /turf/space))
-			M:inertia_dir = 0
-			var/mob/M1 = M
-			M1.make_floating(0)
+			M.inertia_dir = 0
+			M.make_floating(0)
 	..()
 	var/objects = 0
-	for(var/atom/A as mob|obj|turf|area in range(1))
+	for(var/atom/O as mob|obj|turf|area in range(1))
 		if(objects > loopsanity)	break
 		objects++
 		spawn( 0 )
-			if ((A && M))
-				A.HasProximity(M, 1)
+			if ((O && A))
+				O.HasProximity(A, 1)
 			return
 	return
 
