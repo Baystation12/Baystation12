@@ -428,9 +428,9 @@
 
 //checks whether this item is a module of the robot it is located in.
 /obj/item/proc/is_robot_module()
-	if (!istype(src.loc.loc, /mob/living/silicon/robot))
+	if (!istype(src.loc, /mob/living/silicon/robot))
 		return 0
 
-	var/mob/living/silicon/robot/R = src.loc.loc
+	var/mob/living/silicon/robot/R = src.loc
 
 	return (src in R.module.modules)
