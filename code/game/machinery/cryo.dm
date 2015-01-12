@@ -273,6 +273,9 @@
 	if (!istype(M))
 		usr << "\red <B>The cryo cell cannot handle such a lifeform!</B>"
 		return
+	if (M.species && M.species.flags & NO_CRYO)
+		usr << "\red <B>The cryo cell is in-effective at curing this species!<B>"
+		return
 	if (occupant)
 		usr << "\red <B>The cryo cell is already occupied!</B>"
 		return

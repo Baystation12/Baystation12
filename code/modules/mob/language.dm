@@ -21,6 +21,7 @@
 	for(var/mob/player in player_list)
 
 		var/understood = 0
+		var/msg = ""
 
 		if(istype(player,/mob/dead))
 			understood = 1
@@ -29,7 +30,10 @@
 
 		if(understood)
 			if(!speaker_mask) speaker_mask = speaker.name
-			var/msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			if(name == "Wryn Hivemind")
+				msg = "<i><span class='game say'>[name], <span class='name'>A voice</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+			else
+				msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
 			player << "[msg]"
 
 /datum/language/proc/check_special_condition(var/mob/other)
@@ -156,6 +160,26 @@
 	if(!istype(M))
 		return 1
 	if(locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		return 1
+
+	return 0
+
+/datum/language/wryn
+	name = "Wryn Hivemind"
+	desc = "Wryn have the strange ability to commune over a psychic hivemind."
+	speech_verb = "chitters"
+	ask_verb = "chitters"
+	exclaim_verb = "chitters"
+	colour = "alien"
+	key = "y"
+	flags = RESTRICTED | HIVEMIND
+
+/datum/language/wryn/check_special_condition(var/mob/other)
+
+	var/mob/living/carbon/M = other
+	if(!istype(M))
+		return 1
+	if(locate(/datum/organ/internal/wryn/hivenode) in M.internal_organs)
 		return 1
 
 	return 0

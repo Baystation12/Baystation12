@@ -14,7 +14,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	//Species-specific stuff.
-	species_restricted = list("exclude","Unathi","Tajara","Skrell","Diona","Vox")
+	species_restricted = list("exclude","Unathi","Tajara","Skrell","Diona","Vox","Wryn")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
@@ -64,7 +64,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+	species_restricted = list("exclude","Unathi","Tajara","Diona","Vox","Wryn")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
@@ -365,7 +365,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
 	var/obj/machinery/camera/camera
-	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox")
+	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox","Wryn")
 
 
 /obj/item/clothing/head/helmet/space/rig/syndi/attack_self(mob/user)
@@ -393,7 +393,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
-	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox")
+	species_restricted = list("exclude","Unathi","Tajara","Skrell","Vox","Wryn")
 
 
 //Wizard Rig

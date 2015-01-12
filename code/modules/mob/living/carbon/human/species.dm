@@ -463,7 +463,7 @@
 
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | NO_CRYO
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
@@ -472,6 +472,56 @@
 		"heart" =    /datum/organ/internal/heart,
 		"brain" =    /datum/organ/internal/brain,
 		)
+
+
+/datum/species/wryn
+	name = "Wryn"
+	name_plural = "Wryn"
+	icobase = 'icons/mob/human_races/r_wryn.dmi'
+	deform = 'icons/mob/human_races/r_wryn.dmi'
+	language = "Wryn Hivemind"
+	tail = "wryntail"
+	unarmed_type = /datum/unarmed_attack/punch/weak
+	primitive = /mob/living/carbon/monkey/wryn
+
+	darksight = 3
+
+	slowdown = 3
+
+	cold_level_1 = 200 //Default 260 - Lower is better
+	cold_level_2 = 150 //Default 200
+	cold_level_3 = 115 //Default 120
+
+	heat_level_1 = 300 //Default 360 - Higher is better
+	heat_level_2 = 310 //Default 400
+	heat_level_3 = 317 //Default 1000
+
+	body_temperature = 286
+
+	has_organ = list(
+		"heart" =    /datum/organ/internal/heart,
+		"brain" =    /datum/organ/internal/brain,
+		"eyes" =     /datum/organ/internal/eyes,
+		"appendix" = /datum/organ/internal/appendix,
+		"antennae" =    /datum/organ/internal/wryn/hivenode
+		)
+
+
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | NO_BREATHE | HAS_SKIN_COLOR | NO_SCAN | NO_CRYO | HIVEMIND
+
+	reagent_tag = IS_WRYN
+
+	base_color = "#704300"
+	flesh_color = "#704300"
+	blood_color = "#FFFF99"
+
+/*
+/datum/species/wryn/handle_death(var/mob/living/carbon/human/H)
+	for(var/mob/living/carbon/C in world)
+		if(locate(/datum/organ/internal/wryn/hivenode) in C.internal_organs)
+			C << "\red <B>Your antennae tingle as you are overcome with pain...</B>"
+			C << "\red It feels like part of you has died."
+*/
 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)
@@ -529,6 +579,10 @@
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
 	damage = 3
+
+/datum/unarmed_attack/punch/weak
+	attack_verb = list("flail")
+	damage = 1
 
 /datum/unarmed_attack/diona
 	attack_verb = list("lash", "bludgeon")

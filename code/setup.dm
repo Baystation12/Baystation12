@@ -742,6 +742,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_PAIN 8
 #define NO_SLIP 16
 #define NO_POISON 32
+#define NO_CRYO 8192
 
 #define HAS_SKIN_TONE 64
 #define HAS_SKIN_COLOR 128
@@ -823,6 +824,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_SKRELL 3
 #define IS_UNATHI 4
 #define IS_XENOS 5
+#define IS_WRYN 6
 
 #define MAX_GEAR_COST 5 //Used in chargen for loadout limit.
 

@@ -39,6 +39,13 @@
 	greaterform = "Unathi"
 	uni_append = list(0x044,0xC5D) // 044C5D
 
+/mob/living/carbon/monkey/wryn
+	name = "lajavi"
+	voice_name = "lajavi"
+	speak_emote = list("hisses")
+	icon_state = "wrynkey1"
+	uni_append = list(0x022,0xF5D) // 022F5D
+
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
