@@ -555,9 +555,9 @@
 						for(var/mob/O in viewers(C))
 							O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
 						C << "\blue You successfully unbuckle yourself."
-						C.buckled.manual_unbuckle(C)
+						C.buckled.user_unbuckle_mob(C)
 		else
-			L.buckled.manual_unbuckle(L)
+			L.buckled.user_unbuckle_mob(L)
 
 	//Breaking out of a locker?
 	else if( src.loc && (istype(src.loc, /obj/structure/closet)) )
@@ -657,6 +657,8 @@
 						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.handcuffed)
 						CM.handcuffed = null
+						if(buckled && buckled.buckle_require_restraints)
+							buckled.unbuckle_mob()
 						CM.update_inv_handcuffed()
 			else
 				var/obj/item/weapon/handcuffs/HC = CM.handcuffed

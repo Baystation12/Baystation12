@@ -20,7 +20,7 @@
 			var/mob/living/carbon/human/H = user
 			if(H.species.can_shred(user))
 				attack_generic(user,1,"slices")
-	return
+	return ..()
 
 /obj/structure/blob_act()
 	if(prob(50))
@@ -67,10 +67,10 @@
 /obj/structure/MouseDrop_T(mob/target, mob/user)
 
 	var/mob/living/H = user
-	if(!istype(H) || target != user) // No making other people climb onto tables.
-		return
-
-	do_climb(target)
+	if(istype(H) && can_climb(H) && target == user)
+		do_climb(target)
+	else
+		return ..()
 
 /obj/structure/proc/can_climb(var/mob/living/user)
 	if (!can_touch(user) || !climbable)

@@ -11,8 +11,10 @@
 	name = "bed"
 	desc = "This is used to lie in, sleep in or strap on."
 	icon_state = "bed"
-	var/mob/living/buckled_mob
-	var/movable = 0 // For mobility checks
+	can_buckle = 1
+	buckle_lying = 1
+	//var/mob/living/buckled_mob
+	//var/movable = 0 // For mobility checks
 
 /obj/structure/stool/bed/psych
 	name = "psychiatrists couch"
@@ -24,7 +26,7 @@
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
 
-/obj/structure/stool/bed/Del()
+/*/obj/structure/stool/bed/Del()
 	unbuckle()
 	..()
 	return
@@ -80,7 +82,7 @@
 /obj/structure/stool/bed/proc/buckle_mob(mob/M as mob, mob/user as mob)
 	if (!ticker)
 		user << "You can't buckle anyone in before the game starts."
-	if ( !ismob(M) || (get_dist(src, user) > 1) || (M.loc != src.loc) || user.restrained() || user.lying || user.stat || M.buckled || M.pinned.len || istype(user, /mob/living/silicon/pai) )
+	if (!ismob(M) || (get_dist(src, user) > 1) || (M.loc != src.loc) || user.restrained() || user.lying || user.stat || M.buckled || M.pinned.len || istype(user, /mob/living/silicon/pai) )
 		return
 
 	if (istype(M, /mob/living/carbon/slime))
@@ -106,7 +108,7 @@
 	src.buckled_mob = M
 	src.add_fingerprint(user)
 	afterbuckle(M)
-	return
+	return*/
 
 /*
  * Roller beds
@@ -120,7 +122,7 @@
 /obj/structure/stool/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/roller_holder))
 		if(buckled_mob)
-			manual_unbuckle()
+			user_unbuckle_mob(user)
 		else
 			visible_message("[user] collapses \the [src.name].")
 			new/obj/item/roller(get_turf(src))
@@ -185,29 +187,19 @@
 		else
 			buckled_mob = null
 
-/obj/structure/stool/bed/roller/buckle_mob(mob/M as mob, mob/user as mob)
-	if ( !ismob(M) || (get_dist(src, user) > 1) || (M.loc != src.loc) || user.restrained() || user.lying || user.stat || M.buckled || istype(usr, /mob/living/silicon/pai) )
-		return
-	M.pixel_y = 6
-	M.old_y = 6
-	density = 1
-	icon_state = "up"
-	..()
-	return
+/obj/structure/stool/bed/roller/post_buckle_mob(mob/living/M as mob)
+	if(M == buckled_mob)
+		M.pixel_y = 6
+		M.old_y = 6
+		density = 1
+		icon_state = "up"
+	else
+		buckled_mob.pixel_y = 0
+		buckled_mob.old_y = 0
+		density = 0
+		icon_state = "down"
 
-/obj/structure/stool/bed/roller/manual_unbuckle(mob/user as mob)
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)	//this is probably unneccesary, but it doesn't hurt
-			buckled_mob.pixel_y = 0
-			buckled_mob.old_y = 0
-			buckled_mob.anchored = initial(buckled_mob.anchored)
-			buckled_mob.buckled = null
-			buckled_mob.update_canmove()
-			buckled_mob = null
-	density = 0
-	icon_state = "down"
-	..()
-	return
+	return ..()
 
 /obj/structure/stool/bed/roller/MouseDrop(over_object, src_location, over_location)
 	..()
