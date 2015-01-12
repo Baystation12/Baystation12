@@ -190,7 +190,7 @@
 				"\blue You take [obj] out of incision on [target]'s [affected.display_name]s with \the [tool]." )
 				affected.implants -= obj
 
-				target.hud_updateflag |= 1 << IMPLOYAL_HUD
+				BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 
 				//Handle possessive brain borers.
 				if(istype(obj,/mob/living/simple_animal/borer))

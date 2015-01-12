@@ -109,7 +109,7 @@
 	var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
 
 	var/power_draw = -1
-	if (transfer_moles > MINUMUM_MOLES_TO_FILTER)
+	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
 		power_draw = filter_gas(src, filtered_out, air1, air2, air3, transfer_moles, power_rating)
 
 		if(network2)
