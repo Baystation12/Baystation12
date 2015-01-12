@@ -46,7 +46,7 @@
 	overlays += I
 	turn_off()	//so engine verbs are correctly set
 
-/obj/vehicle/train/cargo/engine/Move()
+/obj/vehicle/train/cargo/engine/Move(var/turf/destination)
 	if(on && cell.charge < charge_use)
 		turn_off()
 		update_stats()
@@ -54,6 +54,10 @@
 			load << "The drive motor briefly whines, then drones to a stop."
 
 	if(is_train_head() && !on)
+		return 0
+	
+	//space check ~no flying space trains sorry
+	if(on && istype(destination, /turf/space))
 		return 0
 
 	return ..()
@@ -186,8 +190,8 @@
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"
-	set category = "Object"
-	set src in view(1)
+	set category = "Vehicle"
+	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
@@ -207,8 +211,8 @@
 
 /obj/vehicle/train/cargo/engine/verb/stop_engine()
 	set name = "Stop engine"
-	set category = "Object"
-	set src in view(1)
+	set category = "Vehicle"
+	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
@@ -223,8 +227,8 @@
 
 /obj/vehicle/train/cargo/engine/verb/remove_key()
 	set name = "Remove key"
-	set category = "Object"
-	set src in view(1)
+	set category = "Vehicle"
+	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
@@ -251,7 +255,12 @@
 	if(!istype(C,/obj/machinery) && !istype(C,/obj/structure/closet) && !istype(C,/obj/structure/largecrate) && !istype(C,/obj/structure/reagent_dispensers) && !istype(C,/obj/structure/ore_box) && !istype(C, /mob/living/carbon/human))
 		return 0
 
-	..()
+	//if there are any items you don't want to be able to interact with, add them to this check
+	// ~no more shielded, emitter armed death trains
+	if(istype(C, /obj/machinery))
+		load_object(C)
+	else
+		..()
 
 	if(load)
 		return 1
@@ -262,6 +271,64 @@
 
 	return ..()
 
+//Load the object "inside" the trolley and add an overlay of it.
+//This prevents the object from being interacted with until it has
+// been unloaded. A dummy object is loaded instead so the loading
+// code knows to handle it correctly.
+/obj/vehicle/train/cargo/trolley/proc/load_object(var/atom/movable/C)
+	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
+		return 0
+	if(load || C.anchored)
+		return 0
+
+	var/datum/vehicle_dummy_load/dummy_load = new()
+	load = dummy_load
+
+	if(!load)
+		return
+	dummy_load.actual_load = C
+	C.forceMove(src)
+
+	if(load_item_visible)
+		C.pixel_x += load_offset_x
+		C.pixel_y += load_offset_y
+		C.layer = layer
+
+		overlays += C
+
+		//we can set these back now since we have already cloned the icon into the overlay
+		C.pixel_x = initial(C.pixel_x)
+		C.pixel_y = initial(C.pixel_y)
+		C.layer = initial(C.layer)
+
+/obj/vehicle/train/cargo/trolley/unload(var/mob/user, var/direction)
+	if(istype(load, /datum/vehicle_dummy_load))
+		var/datum/vehicle_dummy_load/dummy_load = load
+		load = dummy_load.actual_load
+		dummy_load.actual_load = null
+		del(dummy_load)
+		overlays.Cut()
+	..()
+
+//-------------------------------------------
+// Latching/unlatching procs
+//-------------------------------------------
+
+/obj/vehicle/train/cargo/engine/latch(obj/vehicle/train/T, mob/user)
+	if(!istype(T) || !Adjacent(T))
+		return 0
+
+	//if we are attaching a trolley to an engine we don't care what direction
+	// it is in and it should probably be attached with the engine in the lead
+	if(istype(T, /obj/vehicle/train/cargo/trolley))
+		T.attach_to(src, user)
+	else
+		var/T_dir = get_dir(src, T)	//figure out where T is wrt src
+
+		if(dir == T_dir) 	//if car is ahead
+			src.attach_to(T, user)
+		else if(reverse_direction(dir) == T_dir)	//else if car is behind
+			T.attach_to(src, user)
 
 //-------------------------------------------------------
 // Stat update procs

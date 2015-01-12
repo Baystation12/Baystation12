@@ -98,14 +98,14 @@
 	T.Weaken(5)
 
 	//Only official cool kids get the grab and no self-prone.
-	if(src.mind && src.mind.special_role)
+	if(!(src.mind && src.mind.special_role))
 		src.Weaken(5)
 		return
 
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
-			src << "\red You need to have one hand free to grab someone."
+			src << "<span class='danger'>You need to have one hand free to grab someone.</span>"
 			return
 		else
 			use_hand = "right"

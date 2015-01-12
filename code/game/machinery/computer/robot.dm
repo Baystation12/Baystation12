@@ -1,9 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
-
 /obj/machinery/computer/robotics
-	name = "Robotics Control"
-	desc = "Used to remotely lockdown or detonate linked Cyborgs."
+	name = "robotics control console"
+	desc = "Used to remotely lockdown or detonate linked cyborgs."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "robot"
 	req_access = list(access_robotics)

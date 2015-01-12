@@ -7,6 +7,7 @@
 
 	var/damage = 0
 	var/damage_cap = 100 //Wall will break down to girders if damage reaches this point
+	var/armor = 0.5 // Damage is multiplied by this
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
@@ -21,6 +22,29 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "metal"
+
+/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+
+	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
+	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
+	var/damage = min(Proj.damage, 100) * armor
+
+	take_damage(damage)
+	return
+
+/turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
+	..()
+	if(ismob(AM))
+		return
+	
+	var/tforce = AM:throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
+	if (tforce < 15)
+		return
+	
+	take_damage(tforce * armor)
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
@@ -101,7 +125,7 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		take_damage(rand(10, 20) * (adj_temp / max_temperature))
+		take_damage(log(rand(0.9, 1.1) * (adj_temp - max_temperature)))
 
 	return ..()
 
@@ -449,9 +473,7 @@
 		AH.try_build(src)
 		return
 
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
+	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
 
 	else

@@ -142,6 +142,7 @@
 	toggleable = 1
 	use_power_cost = 50
 	active_power_cost = 5
+	passive_power_cost = 0
 
 	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
 
@@ -152,7 +153,7 @@
 			deactivate()
 			return 0
 
-	..()
+	return ..()
 
 /obj/item/rig_module/mounted/energy_blade/activate()
 

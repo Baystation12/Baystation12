@@ -8,7 +8,7 @@
 	attack_verb = list("diced")
 
 /obj/item/weapon/dice/New()
-	icon_state = "[name][rand(sides)]"
+	icon_state = "[name][rand(1,sides)]"
 
 /obj/item/weapon/dice/d20
 	name = "d20"

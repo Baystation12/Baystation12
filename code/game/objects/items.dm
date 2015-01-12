@@ -117,8 +117,10 @@
 			size = "huge"
 		else
 	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	var/custom_suffix = "It is a [size] item."
-	return ..(user, distance, suffix = custom_suffix)
+	usr << "This is a [blood_DNA ? blood_color != "#030303" ? "bloody " : "oil-stained " : ""]\icon[src][src.name]. It is a [size] item."
+	if(src.desc)
+		usr << src.desc
+	return
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -605,10 +607,10 @@
 		overlays += blood_overlay
 
 	//if this blood isn't already in the list, add it
-
-	if(blood_DNA[M.dna.unique_enzymes])
-		return 0 //already bloodied with this blood. Cannot add more.
-	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	if(istype(M))
+		if(blood_DNA[M.dna.unique_enzymes])
+			return 0 //already bloodied with this blood. Cannot add more.
+		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
 /obj/item/proc/generate_blood_overlay()

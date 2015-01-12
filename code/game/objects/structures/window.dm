@@ -157,8 +157,11 @@
 /obj/structure/window/attack_generic(var/mob/user, var/damage)
 	if(!damage)
 		return
-	user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
-	take_damage(damage)
+	if(damage >= 10)
+		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		take_damage(damage)
+	else
+		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)

@@ -14,6 +14,11 @@
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
+
+	//Tasers and the like should not damage girders.
+	if(Proj.damage_type == HALLOSS || Proj.damage_type == TOX || Proj.damage_type == CLONE)
+		return
+
 	if(istype(Proj, /obj/item/projectile/beam))
 		health -= Proj.damage
 		..()
@@ -218,38 +223,45 @@
 	layer = 2
 	var/health = 250
 
+/obj/structure/cultgirder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
+	if(!damage || !wallbreaker)
+		return 0
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	dismantle()
+	return 1
+
+/obj/structure/cultgirder/proc/dismantle()
+	new /obj/effect/decal/remains/human(get_turf(src))
+	del(src)
+
 /obj/structure/cultgirder/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		user << "\blue Now disassembling the girder"
 		if(do_after(user,40))
 			user << "\blue You dissasembled the girder!"
-			new /obj/effect/decal/remains/human(get_turf(src))
-			del(src)
+			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 		user << "\blue Now slicing apart the girder"
 		if(do_after(user,30))
 			user << "\blue You slice apart the girder!"
-		new /obj/effect/decal/remains/human(get_turf(src))
-		del(src)
+		dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		user << "\blue You drill through the girder!"
 		new /obj/effect/decal/remains/human(get_turf(src))
-		del(src)
+		dismantle()
 
 /obj/structure/cultgirder/blob_act()
 	if(prob(40))
-		del(src)
+		dismantle()
 
 /obj/structure/cultgirder/bullet_act(var/obj/item/projectile/Proj) //No beam check- How else will you destroy the cult girder with silver bullets?????
 	health -= Proj.damage
 	..()
 	if(health <= 0)
-		new /obj/item/stack/sheet/metal(get_turf(src))
-		del(src)
-
+		dismantle()
 	return
 
 /obj/structure/cultgirder/ex_act(severity)
@@ -259,13 +271,11 @@
 			return
 		if(2.0)
 			if (prob(30))
-				new /obj/effect/decal/remains/human(loc)
-				del(src)
+				dismantle()
 			return
 		if(3.0)
 			if (prob(5))
-				new /obj/effect/decal/remains/human(loc)
-				del(src)
+				dismantle()
 			return
 		else
 	return

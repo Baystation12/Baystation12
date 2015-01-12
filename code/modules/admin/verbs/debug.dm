@@ -367,9 +367,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Server"
 	set name = "Toggle Aliens"
 
-	aliens_allowed = !aliens_allowed
-	log_admin("[key_name(src)] has turned aliens [aliens_allowed ? "on" : "off"].")
-	message_admins("[key_name_admin(src)] has turned aliens [aliens_allowed ? "on" : "off"].", 0)
+	config.aliens_allowed = !config.aliens_allowed
+	log_admin("[key_name(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].")
+	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
@@ -1007,7 +1007,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 					Pump.air2.gas["nitrogen"] = 3750	//The contents of 2 canisters.
 					Pump.air2.temperature = 50
 					Pump.air2.update_values()
-				Pump.on=1
+				Pump.use_power=1
 				Pump.target_pressure = 4500
 				Pump.update_icon()
 
