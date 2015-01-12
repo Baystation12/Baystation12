@@ -5,9 +5,9 @@
  */
 
 /obj/item/device/debugger
-	icon = 'icons/obj/hacktool.dmi'
 	name = "debugger"
 	desc = "Used to debug electronic equipment."
+	icon = 'icons/obj/hacktool.dmi'
 	icon_state = "hacktool-g"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	force = 5.0

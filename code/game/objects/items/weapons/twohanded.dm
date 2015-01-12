@@ -62,6 +62,7 @@
 		return
 
 	..()
+
 	if(wielded) //Trying to unwield it
 		unwield()
 		user << "<span class='notice'>You are now carrying the [name] with one hand.</span>"
@@ -71,7 +72,6 @@
 		var/obj/item/weapon/twohanded/offhand/O = user.get_inactive_hand()
 		if(O && istype(O))
 			O.unwield()
-		return
 
 	else //Trying to wield it
 		if(user.get_inactive_hand())
@@ -86,7 +86,13 @@
 		O.name = "[initial(name)] - offhand"
 		O.desc = "Your second grip on the [initial(name)]"
 		user.put_in_inactive_hand(O)
-		return
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
+	return
 
 ///////////OFFHAND///////////////
 /obj/item/weapon/twohanded/offhand
@@ -198,4 +204,3 @@
 /obj/item/weapon/twohanded/spear/update_icon()
 	icon_state = "spearglass[wielded]"
 	return
-

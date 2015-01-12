@@ -462,6 +462,9 @@
 			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
+	if(!istype(L))
+		return TURRET_NOT_TARGET
+
 	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
 		return TURRET_NOT_TARGET
 
@@ -543,7 +546,7 @@
 	raising = 0
 	cover.icon_state = "turretCover"
 	raised = 0
-	invisibility = 2
+	invisibility = INVISIBILITY_LEVEL_TWO
 	update_icon()
 
 

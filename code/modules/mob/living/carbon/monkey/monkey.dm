@@ -40,6 +40,9 @@
 	uni_append = list(0x044,0xC5D) // 044C5D
 
 /mob/living/carbon/monkey/New()
+
+	verbs += /mob/living/proc/ventcrawl
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -81,18 +84,6 @@
 	..()
 	update_icons()
 	return
-
-/mob/living/carbon/monkey/unathi/New()
-	..()
-	dna.mutantrace = "lizard"
-
-/mob/living/carbon/monkey/skrell/New()
-	..()
-	dna.mutantrace = "skrell"
-
-/mob/living/carbon/monkey/tajara/New()
-	..()
-	dna.mutantrace = "tajaran"
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0
@@ -146,9 +137,17 @@
 		help_shake_act(M)
 	else
 		if (M.a_intent == "hurt")
-			var/datum/unarmed_attack/attack = M.species.unarmed
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in M.species.unarmed_attacks)
+				if(!u_attack.is_usable(M, src))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
+				return 0
 			if ((prob(75) && health > 0))
-				visible_message("\red <B>[M] [pick(attack.attack_verb)]ed [src]!</B>")
+				visible_message("\red <B>[M] [pick(attack.attack_verb)] [src]!</B>")
 
 				playsound(loc, "punch", 25, 1, -1)
 				var/damage = rand(5, 10)

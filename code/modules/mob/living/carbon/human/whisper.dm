@@ -5,7 +5,7 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
-        
+
 	message = trim_strip_html_properly(message)
 	log_whisper("[src.name]/[src.key] : [message]")
 
@@ -36,6 +36,11 @@
 
 //This is used by both the whisper verb and human/say() to handle whispering
 /mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
+
+	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
+
 	var/message_range = 1
 	var/eavesdropping_range = 2
 	var/watching_range = 5
@@ -55,17 +60,19 @@
 
 	message = capitalize(trim(message))
 
-	//TODO: handle_speech_problems for silent
-	if (!message || silent || miming)
-		return
+	if(speech_problem_flag)
+		var/list/handle_r = handle_speech_problems(message)
+		message = handle_r[1]
+		verb = handle_r[2]
+		if(verb == "yells loudly")
+			verb = "slurs emphatically"
+		else
+			var/adverb = pick("quietly", "softly")
+			verb = "[verb] [adverb]"
 
-	// Mute disability
-	//TODO: handle_speech_problems
-	if (src.sdisabilities & MUTE)
-		return
+		speech_problem_flag = handle_r[3]
 
-	//TODO: handle_speech_problems
-	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+	if(!message || message=="")
 		return
 
 	//looks like this only appears in whisper. Should it be elsewhere as well? Maybe handle_speech_problems?
@@ -101,10 +108,6 @@
 			message = replacetext(message, "s", "§")
 			message = replacetext(message, "u", "µ")
 			message = replacetext(message, "b", "ß")
-
-	//TODO: handle_speech_problems
-	if (src.stuttering)
-		message = stutter(message)
 
 	var/list/listening = hearers(message_range, src)
 	listening |= src

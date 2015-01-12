@@ -185,7 +185,7 @@ datum/tech/materials
 
 datum/tech/engineering
 	name = "Engineering Research"
-	desc = "Development of new and improved engineering parts and."
+	desc = "Development of new and improved engineering parts."
 	id = "engineering"
 
 datum/tech/phorontech
@@ -257,7 +257,7 @@ datum/tech/robotics
 
 
 /obj/item/weapon/disk/tech_disk
-	name = "Technology Disk"
+	name = "technology disk"
 	desc = "A disk for storing technology data for further research."
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
@@ -267,5 +267,19 @@ datum/tech/robotics
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+/obj/item/weapon/disk/design_disk
+	name = "component design disk"
+	desc = "A disk for storing device design data for construction in lathes."
+	icon = 'icons/obj/cloning.dmi'
+	icon_state = "datadisk2"
+	item_state = "card-id"
+	w_class = 2.0
+	matter = list("metal" = 30,"glass" = 10)
+	var/datum/design/blueprint
+
+/obj/item/weapon/disk/design_disk/New()
 	src.pixel_x = rand(-5.0, 5)
 	src.pixel_y = rand(-5.0, 5)

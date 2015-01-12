@@ -76,6 +76,7 @@
 		target << "\red <b>You have detected a change in your laws information:</b>"
 		target << law
 		target.add_ion_law(law)
+		target.show_laws()
 
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)

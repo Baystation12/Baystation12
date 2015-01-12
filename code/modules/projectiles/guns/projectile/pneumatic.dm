@@ -27,7 +27,6 @@
 	tank_container.tag = "gas_tank_holder"
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
-
 	set name = "Set Valve Pressure"
 	set category = "Object"
 	set src in range(0)
@@ -37,7 +36,6 @@
 		usr << "You dial the pressure valve to [pressure_setting]%."
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/eject_tank() //Remove the tank.
-
 	set name = "Eject Tank"
 	set category = "Object"
 	set src in range(0)
@@ -79,7 +77,6 @@
 		user << "That won't fit into the hopper."
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)
-
 	if(contents.len > 0)
 		var/obj/item/removing = contents[contents.len]
 		if(removing == in_chamber)

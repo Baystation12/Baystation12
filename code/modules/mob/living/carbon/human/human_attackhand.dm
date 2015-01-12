@@ -94,14 +94,7 @@
 				attack_generic(H,rand(1,3),"punched")
 				return
 
-			// See if they can attack, and which attacks to use.
-			var/datum/unarmed_attack/attack = H.species.unarmed
-			if(!attack.is_usable(H))
-				attack = H.species.secondary_unarmed
-			if(!attack.is_usable(H))
-				return 0
-
-			var/damage = rand(1, 5)
+			var/rand_damage = rand(1, 5)
 			var/block = 0
 			var/accurate = 0
 			var/hit_zone = H.zone_sel.selecting
@@ -110,7 +103,7 @@
 			switch(src.a_intent)
 				if("help")
 					// We didn't see this coming, so we get the full blow
-					damage = 5
+					rand_damage = 5
 					accurate = 1
 				if("hurt", "grab")
 					// We're in a fighting stance, there's a chance we block
@@ -119,7 +112,7 @@
 
 			if (M.grabbed_by.len)
 				// Someone got a good grip on them, they won't be able to do much damage
-				damage = max(1, damage - 2)
+				rand_damage = max(1, rand_damage - 2)
 
 			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
@@ -155,17 +148,30 @@
 				if(prob(80))
 					hit_zone = ran_zone(hit_zone)
 				if(prob(15) && hit_zone != "chest") // Missed!
-					attack_message = "[H] attempted to strike [src], but missed!"
+					if(!src.lying)
+						attack_message = "[H] attempted to strike [src], but missed!"
+					else
+						attack_message = "[H] attempted to strike [src], but \he rolled out of the way!"
+						src.set_dir(pick(cardinal))
 					miss_type = 1
-			else
-				hit_zone = ran_zone(hit_zone)
 
 			if(!miss_type && block)
 				attack_message = "[H] went for [src]'s [affecting.display_name] but was blocked!"
 				miss_type = 2
 
+			// See what attack they use
+			var/datum/unarmed_attack/attack = null
+			for(var/datum/unarmed_attack/u_attack in H.species.unarmed_attacks)
+				if(!u_attack.is_usable(H, src, hit_zone))
+					continue
+				else
+					attack = u_attack
+					break
+			if(!attack)
+				return 0
+
 			if(!attack_message)
-				attack.show_attack(H, src, hit_zone, damage)
+				attack.show_attack(H, src, hit_zone, rand_damage)
 			else
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
@@ -177,18 +183,21 @@
 			if(miss_type)
 				return 0
 
-			damage += attack.damage // Adding species attack base damage
-			damage *= damage_multiplier
+			var/real_damage = rand_damage
+			real_damage += attack.get_unarmed_damage(H)
+			real_damage *= damage_multiplier
+			rand_damage *= damage_multiplier
 			if(HULK in H.mutations)
-				damage *= 2 // Hulks do twice the damage
-			damage = max(1, damage)
+				real_damage *= 2 // Hulks do twice the damage
+				rand_damage *= 2
+			real_damage = max(1, real_damage)
 
 			var/armour = run_armor_check(affecting, "melee")
 			// Apply additional unarmed effects.
-			attack.apply_effects(H,src,armour,damage,hit_zone)
+			attack.apply_effects(H, src, armour, rand_damage, hit_zone)
 
 			// Finally, apply damage to target
-			apply_damage(damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
+			apply_damage(real_damage, BRUTE, affecting, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if("disarm")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
@@ -221,7 +230,7 @@
 					return W.afterattack(target,src)
 
 			var/randn = rand(1, 100)
-			if (randn <= 25)
+			if(!(species.flags & NO_SLIP) && randn <= 25)
 				apply_effect(3, WEAKEN, run_armor_check(affecting, "melee"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				visible_message("\red <B>[M] has pushed [src]!</B>")

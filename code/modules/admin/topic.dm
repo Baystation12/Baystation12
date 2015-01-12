@@ -643,6 +643,12 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
 
+		if(jobban_isbanned(M, "Borer"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'><font color=red>Borer</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Borer;jobban4=\ref[M]'>Borer</a></td>"
+
+
 		jobs += "</tr></table>"
 
 
@@ -2113,18 +2119,18 @@
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")
-				switch(MAX_EXPLOSION_RANGE)
-					if(14)	MAX_EXPLOSION_RANGE = 16
-					if(16)	MAX_EXPLOSION_RANGE = 20
-					if(20)	MAX_EXPLOSION_RANGE = 28
-					if(28)	MAX_EXPLOSION_RANGE = 56
-					if(56)	MAX_EXPLOSION_RANGE = 128
-					if(128)	MAX_EXPLOSION_RANGE = 14
-				var/range_dev = MAX_EXPLOSION_RANGE *0.25
-				var/range_high = MAX_EXPLOSION_RANGE *0.5
-				var/range_low = MAX_EXPLOSION_RANGE
+				switch(max_explosion_range)
+					if(14)	max_explosion_range = 16
+					if(16)	max_explosion_range = 20
+					if(20)	max_explosion_range = 28
+					if(28)	max_explosion_range = 56
+					if(56)	max_explosion_range = 128
+					if(128)	max_explosion_range = 14
+				var/range_dev = max_explosion_range *0.25
+				var/range_high = max_explosion_range *0.5
+				var/range_low = max_explosion_range
 				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
-				log_admin("[key_name_admin(usr)] changed the bomb cap to [MAX_EXPLOSION_RANGE]")
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
 
 			if("flicklights")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2228,7 +2234,7 @@
 			if("aliens")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","AL")
-				if(aliens_allowed)
+				if(config.aliens_allowed)
 					new /datum/event/alien_infestation
 					message_admins("[key_name_admin(usr)] has spawned aliens", 1)
 			if("spiders")
@@ -2248,7 +2254,7 @@
 			if("spaceninja")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SN")
-				if(toggle_space_ninja)
+				if(config.ninjas_allowed)
 					if(space_ninja_arrival())//If the ninja is actually spawned. They may not be depending on a few factors.
 						message_admins("[key_name_admin(usr)] has sent in a space ninja", 1)
 			if("carp")

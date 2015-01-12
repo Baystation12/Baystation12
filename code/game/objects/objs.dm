@@ -136,3 +136,6 @@
 		mo.show_message(rendered, 2)
 		*/
 	return
+
+/obj/proc/see_emote(mob/M as mob, text, var/emote_type)
+	return

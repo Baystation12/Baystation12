@@ -1,4 +1,3 @@
-
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
 /datum/shuttle/ferry
