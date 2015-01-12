@@ -27,7 +27,7 @@
 		if(1)
 			infectionchance = 1
 		if(2)
-			infectionchance = rand(10,50)
+			infectionchance = rand(10,20)
 		else
 			infectionchance = rand(60,90)
 	
