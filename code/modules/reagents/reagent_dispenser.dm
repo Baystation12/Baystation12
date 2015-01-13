@@ -89,6 +89,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
+	var/exploding = 0
 	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
 	New()
@@ -164,6 +165,16 @@
 	explode()
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()
+
+	if (exploding) return //No spam pls
+	exploding = 1
+	src.visible_message("[src] begins to rumble and shake. It's gonna blow!")
+	message_admins("Fuel tank explosion imminent at [loc.loc.name] ([loc.x],[loc.y],[loc.z] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)  (<A href='?_src_=holder;cancelfuelexplosion=1;fueltank=\ref[src]'>ABORT</a>)")
+	sleep(300)
+	if(!exploding)
+		src.visible_message("The violent reaction in [src] seems to stop.")
+		return
+
 	if (reagents.total_volume > 500)
 		explosion(src.loc,1,2,4)
 	else if (reagents.total_volume > 100)
