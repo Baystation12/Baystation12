@@ -1,5 +1,5 @@
 #define MIN_SURFACE_COUNT 500
-#define MIN_RARE_COUNT 500
+#define MIN_RARE_COUNT 200
 #define MIN_DEEP_COUNT 100
 #define RESOURCE_HIGH_MAX 4
 #define RESOURCE_HIGH_MIN 2
@@ -171,10 +171,18 @@ Deep minerals:
 		iterate(iteration, x,       y+hsize, hsize)
 		iterate(iteration, x+hsize, y+hsize, hsize)
 
-/datum/random_map/ore/apply_to_turf(var/x,var/y,var/turf/T)
+/datum/random_map/ore/apply_to_map()
+	for(var/x = 0, x < real_size, x++)
+		if((origin_x + x) > limit_x) continue
+		for(var/y = 0, y < real_size, y++)
+			if((origin_y + y) > limit_y) continue
+			sleep(-1)
+			apply_to_turf(x,y)
 
-	var/tx = (x-1)*chunk_size
-	var/ty = (y-1)*chunk_size
+/datum/random_map/ore/apply_to_turf(var/x,var/y)
+
+	var/tx = origin_x+((x-1)*chunk_size)
+	var/ty = origin_y+((y-1)*chunk_size)
 
 	for(var/i=0,i<chunk_size,i++)
 		if(ty+i>limit_y)
@@ -183,11 +191,9 @@ Deep minerals:
 			if(tx+j>limit_x)
 				continue
 
-			T = locate(tx+j, ty+i, origin_z)
+			var/turf/T = locate(tx+j, ty+i, origin_z)
 			if(!T || !T.has_resources)
 				continue
-
-			T.color = "#FF0000"
 
 			sleep(-1)
 

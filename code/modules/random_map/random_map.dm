@@ -1,3 +1,4 @@
+#define ORE_COUNT 800
 /*
 	This module is used to generate the debris fields/distribution maps/procedural stations.
 */
@@ -5,8 +6,8 @@
 var/global/list/random_maps = list()
 
 /datum/random_map
-	var/descriptor = "debris field" // Display name.
-	var/real_size = 128             // Size of each edge (must be square :().
+	var/descriptor = "asteroid" // Display name.
+	var/real_size = 246             // Size of each edge (must be square :().
 	var/size = 2                    // In basic implementation this will only be used for 3x3 blocks.
 	var/cell_range = 2              // Random range for initial cells.
 	var/iterations = 5              // Number of times to apply the automata rule.
@@ -78,10 +79,10 @@ var/global/list/random_maps = list()
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(x == 1 || x == real_size || y == 1 || y == real_size)
-				map[current_cell] = rand(1,2)
+			if(prob(55))
+				map[current_cell] = 2
 			else
-				map[current_cell] = rand(1,cell_range)
+				map[current_cell] = 1
 
 /datum/random_map/proc/clear_map()
 	for(var/x = 1, x <= real_size, x++)
@@ -135,14 +136,28 @@ var/global/list/random_maps = list()
 	if(!within_bounds(current_cell))
 		return
 	var/turf/T = locate(x,y,origin_z)
-	if(!T)
+	if(!T || !istype(T,/turf/unsimulated/mask))
 		return
 	switch(map[current_cell])
 		if(1)
 			T.ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 		if(2)
 			T.ChangeTurf(/turf/simulated/mineral)
+		if(3)
+			T.ChangeTurf(/turf/simulated/mineral/random)
+		if(4)
+			T.ChangeTurf(/turf/simulated/mineral/random/high_chance)
 
 /datum/random_map/proc/cleanup()
 	sleep(-1)
+	var/ore_count = ORE_COUNT
+	while(ore_count)
+		var/check_cell = get_map_cell(rand(1,real_size),rand(1,real_size))
+		if(!(within_bounds(check_cell)) || map[check_cell] != 2)
+			continue
+		if(prob(25))
+			map[check_cell] = 4
+		else
+			map[check_cell] = 3
+		ore_count--
 	return 1

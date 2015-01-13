@@ -29,7 +29,8 @@
 
 /turf/simulated/mineral/New()
 
-	MineralSpread()
+	spawn(0)
+		MineralSpread()
 
 	spawn(2)
 		var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
@@ -86,7 +87,7 @@
 	if(mineral && mineral.spread)
 		for(var/trydir in cardinal)
 			if(prob(mineral.spread_chance))
-				var/turf/simulated/mineral/random/target_turf = get_step(src, trydir)
+				var/turf/simulated/mineral/target_turf = get_step(src, trydir)
 				if(istype(target_turf) && !target_turf.mineral)
 					target_turf.mineral = mineral
 					target_turf.UpdateMineral()
@@ -363,7 +364,7 @@
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
 	var/mineralSpawnChanceList = list("Uranium" = 5, "Platinum" = 5, "Iron" = 35, "Coal" = 35, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 10)
-	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
+	var/mineralChance = 100 //10 //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
 	if (prob(mineralChance) && !mineral)
@@ -379,7 +380,7 @@
 	. = ..()
 
 /turf/simulated/mineral/random/high_chance
-	mineralChance = 25
+	mineralChance = 100 //25
 	mineralSpawnChanceList = list("Uranium" = 10, "Platinum" = 10, "Iron" = 20, "Coal" = 20, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 20)
 
 
