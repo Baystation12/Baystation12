@@ -1546,10 +1546,7 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\exodus-1.dmm"
-#include "maps\exodus-2.dmm"
-#include "maps\exodus-3.dmm"
-#include "maps\exodus-4.dmm"
-#include "maps\exodus-5.dmm"
-#include "maps\exodus-6.dmm"
+#include "maps\buildstation-1.dmm"
+#include "maps\buildstation-2.dmm"
+#include "maps\buildstation-3.dmm"
 // END_INCLUDE
