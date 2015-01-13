@@ -4,18 +4,6 @@
 
 var/global/list/random_maps = list()
 
-/obj/item/test_randmap/New()
-	new /datum/random_map(input("Seed?") as text|null)
-	del(src)
-
-/obj/item/test_randmap/ore/New()
-	new /datum/random_map/ore(input("Seed?") as text|null)
-	del(src)
-
-///obj/item/test_randmap/maze/New()
-//	new /datum/random_map/maze(input("Seed?") as text|null)
-//	del(src)
-
 /datum/random_map
 	var/descriptor = "debris field" // Display name.
 	var/real_size = 128             // Size of each edge (must be square :().
