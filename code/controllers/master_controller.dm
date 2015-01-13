@@ -33,7 +33,7 @@ datum/controller/game_controller
 	var/mob/list/expensive_mobs = list()
 
 	var/list/shuttle_list	                    // For debugging and VV
-	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
+	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
 
 
 datum/controller/game_controller/New()
@@ -109,8 +109,9 @@ datum/controller/game_controller/proc/setup_objects()
 			T.broadcast_status()
 
 	//Create the mining ore distribution map.
-	asteroid_ore_map = new /datum/ore_distribution()
-	asteroid_ore_map.populate_distribution_map()
+	// These values determine the specific area that the map is applied to.
+	// If you do not use the official Baycode asteroid map, you will need to change them.
+	asteroid_ore_map = new /datum/random_map/ore(null,13,32,5,217,223)
 
 	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
 	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
