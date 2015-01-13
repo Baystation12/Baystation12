@@ -2,12 +2,18 @@
 	This module is used to generate the debris fields/distribution maps/procedural stations.
 */
 
+var/global/list/random_maps = list()
+
 /obj/item/test_randmap/New()
 	new /datum/random_map(input("Seed?") as text|null)
 	del(src)
 
 /obj/item/test_randmap/ore/New()
 	new /datum/random_map/ore(input("Seed?") as text|null)
+	del(src)
+
+/obj/item/test_randmap/maze/New()
+	new /datum/random_map/maze(input("Seed?") as text|null)
 	del(src)
 
 /datum/random_map
@@ -24,8 +30,31 @@
 	var/origin_z = 1                // Target Z-level.
 	var/limit_x = 256               // Maximum x bound.
 	var/limit_y = 256               // Maximum y bound.
+	var/iterate_before_fail = 120   // Infinite loop safeguard.
+
+/datum/random_map/proc/get_map_cell(var/x,var/y)
+	return ((y-1)*real_size)+x
+
+/datum/random_map/proc/display_map(atom/user)
+
+	if(!user)
+		user = world
+
+	for(var/x = 1, x <= real_size, x++)
+		var/line = ""
+		for(var/y = 1, y <= real_size, y++)
+			var/current_cell = get_map_cell(x,y)
+			if(within_bounds(current_cell))
+				if(map[current_cell] == 2)
+					line += "#"
+				else
+					line += "."
+		user << line
 
 /datum/random_map/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly)
+
+	// Store this for debugging.
+	random_maps |= src
 
 	// Initialize map.
 	set_map_size()
@@ -46,8 +75,10 @@
 		if(generate())
 			world << "<span class='danger'>[capitalize(descriptor)] generation completed in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</span>"
 			return
-	world << "<span class='danger'>[capitalize(descriptor)] generation failed: could not produce sane map.</span>"
-	del(src)
+	world << "<span class='danger'>[capitalize(descriptor)] generation failed in [round(0.1*(world.timeofday-start_time),0.1)] seconds: could not produce sane map.</span>"
+
+/datum/random_map/proc/within_bounds(var/val)
+	return (val>0) && (val<=raw_map_size)
 
 /datum/random_map/proc/set_map_size(var/raw_size)
 	if(!raw_size)
@@ -58,19 +89,20 @@
 /datum/random_map/proc/seed_map()
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
+			var/current_cell = get_map_cell(x,y)
 			if(x == 1 || x == real_size || y == 1 || y == real_size)
-				map[MAP_CELL] = rand(1,2)
+				map[current_cell] = rand(1,2)
 			else
-				map[MAP_CELL] = rand(1,cell_range)
+				map[current_cell] = rand(1,cell_range)
 
 /datum/random_map/proc/clear_map()
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
-			map[MAP_CELL] = 0
+			map[get_map_cell(x,y)] = 0
 
 /datum/random_map/proc/generate()
 	seed_map()
-	for(var/i=0;i<iterations;i++)
+	for(var/i=1;i<=iterations;i++)
 		iterate(i)
 	if(check_map_sanity())
 		cleanup()
@@ -82,20 +114,21 @@
 	var/list/next_map[raw_map_size]
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
+			var/current_cell = get_map_cell(x,y)
 			// Sanity check.
-			if(MAP_CELL <= 0  || MAP_CELL > raw_map_size)
+			if(!within_bounds(current_cell))
 				continue
 			// Copy over original value.
-			next_map[MAP_CELL] = map[MAP_CELL]
+			next_map[current_cell] = map[current_cell]
 			// Check all neighbors.
 			var/count = 0
-			for(var/cell in list(MAP_CELL,MAP_TOP_LEFT,MAP_MID_TOP,MAP_TOP_RIGHT,MAP_MID_RIGHT,MAP_BOTTOM_RIGHT,MAP_MID_BOTTOM,MAP_BOTTOM_LEFT,MAP_MID_LEFT))
-				if((cell > 0) && (cell <= raw_map_size) && (map[cell] == 2))
+			for(var/cell in list(current_cell,get_map_cell(x+1,y+1),get_map_cell(x-1,y-1),get_map_cell(x+1,y-1),get_map_cell(x-1,y+1),get_map_cell(x-1,y),get_map_cell(x,y-1),get_map_cell(x+1,y),get_map_cell(x,y+1)))
+				if(within_bounds(cell) && map[cell] == 2)
 					count++
 			if(count>=5)
-				next_map[MAP_CELL] = 2 // becomes a wall
+				next_map[current_cell] = 2 // becomes a wall
 			else
-				next_map[MAP_CELL] = 1 // becomes a floor
+				next_map[current_cell] = 1 // becomes a floor
 	map = next_map
 
 /datum/random_map/proc/check_map_sanity()
@@ -109,12 +142,13 @@
 			apply_to_turf(origin_x+x,origin_y+y)
 
 /datum/random_map/proc/apply_to_turf(var/x,var/y)
-	if((MAP_CELL <= 0) || (MAP_CELL > raw_map_size))
+	var/current_cell = get_map_cell(x,y)
+	if(!within_bounds(current_cell))
 		return
 	var/turf/T = locate(x,y,origin_z)
 	if(!T)
 		return
-	switch(map[MAP_CELL])
+	switch(map[current_cell])
 		if(1)
 			T.ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 		if(2)
