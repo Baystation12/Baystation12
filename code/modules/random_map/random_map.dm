@@ -12,9 +12,9 @@ var/global/list/random_maps = list()
 	new /datum/random_map/ore(input("Seed?") as text|null)
 	del(src)
 
-/obj/item/test_randmap/maze/New()
-	new /datum/random_map/maze(input("Seed?") as text|null)
-	del(src)
+///obj/item/test_randmap/maze/New()
+//	new /datum/random_map/maze(input("Seed?") as text|null)
+//	del(src)
 
 /datum/random_map
 	var/descriptor = "debris field" // Display name.
@@ -139,6 +139,7 @@ var/global/list/random_maps = list()
 		if((origin_x + x) > limit_x) continue
 		for(var/y = 0, y < real_size, y++)
 			if((origin_y + y) > limit_y) continue
+			sleep(-1)
 			apply_to_turf(origin_x+x,origin_y+y)
 
 /datum/random_map/proc/apply_to_turf(var/x,var/y)
@@ -155,4 +156,5 @@ var/global/list/random_maps = list()
 			T.ChangeTurf(/turf/simulated/mineral)
 
 /datum/random_map/proc/cleanup()
+	sleep(-1)
 	return 1
