@@ -38,7 +38,7 @@
 		for(var/obj/O in src.modules)
 			if(O.type == T)
 				S = O
-				continue
+				break
 
 		if(!S)
 			src.modules -= null
