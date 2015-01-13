@@ -210,7 +210,7 @@ datum/pipeline
 		
 		//if the h/e pipes radiate less than the AVERAGE_SOLAR_RADIATION, then they will heat up, otherwise they will cool down. It turns out the critical temperature is -26 C
 		// Only would happen if both sides (all 2 square meters of surface area) were exposed to sunlight.  We now assume it aligned edge on.
-		heat_gain += surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4
+		heat_gain -= surface * STEFAN_BOLTZMANN_CONSTANT * thermal_conductivity * (air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4
 		
 		air.add_thermal_energy(heat_gain)
 		if(network)
