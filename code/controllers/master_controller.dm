@@ -60,9 +60,10 @@ datum/controller/game_controller/New()
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = 0.3
 
+	/* Used for away missions - no point running it at the moment.
 	spawn(20)
 		createRandomZlevel()
-
+	*/
 	if(!air_master)
 		air_master = new /datum/controller/air_system()
 		air_master.Setup()

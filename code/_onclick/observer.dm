@@ -57,7 +57,7 @@
 /obj/effect/portal/attack_ghost(mob/user as mob)
 	if(target)
 		user.loc = get_turf(target)
-
+/* Used for teleporting to away gates as a ghost.
 /obj/machinery/gateway/centerstation/attack_ghost(mob/user as mob)
 	if(awaygate)
 		user.loc = awaygate.loc
@@ -69,6 +69,7 @@
 		user.loc = stationgate.loc
 	else
 		user << "[src] has no destination."
+*/
 
 // -------------------------------------------
 // This was supposed to be used by adminghosts
