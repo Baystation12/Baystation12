@@ -402,7 +402,7 @@
 
 	pixiecut
 		name = "Pixie Cut"
-		icon_state = "pixie"
+		icon_state = "hair_pixie"
 		gender = FEMALE
 
 	bald
