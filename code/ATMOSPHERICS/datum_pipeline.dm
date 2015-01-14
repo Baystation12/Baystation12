@@ -205,8 +205,9 @@ datum/pipeline
 		var/gas_density = air.total_moles/air.volume
 		thermal_conductivity *= min(gas_density / ( RADIATOR_OPTIMUM_PRESSURE/(R_IDEAL_GAS_EQUATION*T20C) ), 1)
 		
-		//if the h/e pipes radiate less than the AVERAGE_SOLAR_RADIATION, then they will heat up, otherwise they will cool down. It turns out the critical temperature is -26 C
-		var/heat_gain = surface*(AVERAGE_SOLAR_RADIATION - STEFAN_BOLTZMANN_CONSTANT*thermal_conductivity*(air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4)
+		//if the h/e pipes radiate less than the AVERAGE_SOLAR_RADIATION/2, then they will heat up, otherwise they will cool down. It turns out the critical temperature is 140K.
+		//the h/e pipse can only be struck by sunlight on one side, hence the AVERAGE_SOLAR_RADIATION/2
+		var/heat_gain = surface*(AVERAGE_SOLAR_RADIATION/2 - STEFAN_BOLTZMANN_CONSTANT*thermal_conductivity*(air.temperature - COSMIC_RADIATION_TEMPERATURE) ** 4)
 		
 		air.add_thermal_energy(heat_gain)
 		if(network)
