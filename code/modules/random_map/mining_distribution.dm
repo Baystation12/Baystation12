@@ -28,9 +28,6 @@ Deep minerals:
 	descriptor = "resource distribution map"
 	real_size = 65         // Must be (power of 2)+1 for diamond-square.
 	cell_range = 255       // These values are used to seed ore values rather than to determine a turf type.
-	var/cell_base          // Set in New()
-	var/initial_cell_range // Set in New()
-
 	iterations = 0        // We'll handle iterating on our end (recursive, with args).
 
 	var/chunk_size = 4              // Size each cell represents on map
@@ -38,6 +35,8 @@ Deep minerals:
 	var/random_element = 0.5        // Determines the variance when smoothing out cell values.
 	var/deep_val = 0.8              // Threshold for deep metals, set in new as percentage of cell_range.
 	var/rare_val = 0.7              // Threshold for rare metal, set in new as percentage of cell_range.
+	var/cell_base          // Set in New()
+	var/initial_cell_range // Set in New()
 
 /datum/random_map/ore/New()
 	rare_val = cell_range * rare_val
@@ -77,9 +76,6 @@ Deep minerals:
 //Halfassed diamond-square algorithm with some fuckery since it's a single dimension array.
 /datum/random_map/ore/seed_map()
 
-	// Reset size.
-	size = real_size-1
-
 	// Instantiate the grid.
 	for(var/x = 1, x <= real_size, x++)
 		for(var/y = 1, y <= real_size, y++)
@@ -90,7 +86,7 @@ Deep minerals:
 	map[get_map_cell(1,real_size)]         = cell_base+rand(initial_cell_range)
 	map[get_map_cell(real_size,real_size)] = cell_base+rand(initial_cell_range)
 	map[get_map_cell(real_size,1)]         = cell_base+rand(initial_cell_range)
-	iterate(1,1,1,size) // Start the recursion here.
+	iterate(1,1,1,(real_size-1)) // Start the recursion here.
 
 /datum/random_map/ore/display_map(atom/user)
 

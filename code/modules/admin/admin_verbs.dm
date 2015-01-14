@@ -149,6 +149,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reload_mentors,
 	/client/proc/restart_controller,
 	/client/proc/print_random_map,
+	/client/proc/create_random_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,

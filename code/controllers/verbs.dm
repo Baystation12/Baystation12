@@ -13,6 +13,23 @@
 		return
 	choice.display_map(usr)
 
+
+/client/proc/create_random_map()
+	set category = "Debug"
+	set name = "Create Random Map"
+	set desc = "Create a random map."
+
+	if(!holder)	return
+
+	var/map_datum = input("Choose a map to create.") as null|anything in typesof(/datum/random_map)-/datum/random_map
+	if(!map_datum)
+		return
+	var/seed = input("Seed? (default null)")  as text|null
+	var/tx =    input("X? (default 1)")       as text|null
+	var/ty =    input("Y? (default 1)")       as text|null
+	var/tz =    input("Z? (default 1)")       as text|null
+	new map_datum(seed,tx,ty,tz)
+
 /client/proc/restart_controller(controller in list("Master","Failsafe","Lighting","Supply"))
 	set category = "Debug"
 	set name = "Restart Controller"

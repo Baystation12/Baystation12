@@ -108,15 +108,19 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 
+	// Create hidden rooms after asteroid is generated but before ore.
+	for(var/i = 0, i < max_secret_rooms, i++)
+		make_mining_asteroid_secret()
+
 	// Create the mining ore distribution map.
 	// These values determine the specific area that the map is applied to.
 	// If you do not use the official Baycode asteroid map, you will need to change them.
 	asteroid_ore_map = new /datum/random_map/ore(null,13,32,5,217,223)
 
 	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
-	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
-		T.updateMineralOverlays()
-		T.name = "asteroid"
+	//for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+	//	T.updateMineralOverlays()
+	//	T.name = "asteroid"
 
 	//Set up spawn points.
 	populate_spawn_points()
