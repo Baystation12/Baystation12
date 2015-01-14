@@ -329,7 +329,7 @@
 		return 1
 
 	if( href_list["cmode"] )
-		inputting(!inputting)
+		inputting(!input_attempt)
 		update_icon()
 
 	else if( href_list["online"] )
