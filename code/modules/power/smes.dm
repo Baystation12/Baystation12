@@ -303,7 +303,7 @@
 
 	if(outputting)
 		data["outputting"] = 2			// smes is outputting
-	else if(!outputting && output_attempt && charge < output_level)
+	else if(!outputting && output_attempt)
 		data["outputting"] = 1			// smes is online but not outputting because it's charge level is too low
 	else
 		data["outputting"] = 0			// smes is not outputting
