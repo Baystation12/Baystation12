@@ -1,5 +1,6 @@
 /obj/item/clothing
 	name = "clothing"
+	siemens_coefficient = 0.9
 	var/list/species_restricted = null //Only these species can wear this kit.
 
 	/*
@@ -22,9 +23,8 @@
 		return 0
 
 	if(species_restricted && istype(M,/mob/living/carbon/human))
-
-		var/wearable = null
 		var/exclusive = null
+		var/wearable = null
 		var/mob/living/carbon/human/H = M
 
 		if("exclude" in species_restricted)
@@ -38,17 +38,16 @@
 				if(H.species.name in species_restricted)
 					wearable = 1
 
-			if(!wearable && (slot != 15 && slot != 16)) //Pockets.
-				M << "\red Your species cannot wear [src]."
+			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
+				H << "<span class='danger'>Your species cannot wear [src].</span>"
 				return 0
-
 	return 1
 
 /obj/item/clothing/proc/refit_for_species(var/target_species)
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -67,9 +66,9 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox")
+			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -143,7 +142,7 @@
 		desc = O.desc
 		icon = O.icon
 		icon_state = O.icon_state
-		dir = O.dir
+		set_dir(O.dir)
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
@@ -196,11 +195,6 @@ BLIND     // can't see anything
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 
-/obj/item/clothing/gloves/examine()
-	set src in usr
-	..()
-	return
-
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -247,6 +241,79 @@ BLIND     // can't see anything
 	slot_flags = SLOT_HEAD
 	w_class = 2.0
 
+	var/light_overlay = "helmet_light"
+	var/light_applied
+	var/brightness_on
+	var/on = 0
+
+/obj/item/clothing/head/New()
+	..()
+	if(!icon_action_button && brightness_on)
+		icon_action_button = "[icon_state]"
+
+/obj/item/clothing/head/attack_self(mob/user)
+	if(brightness_on)
+		if(!isturf(user.loc))
+			user << "You cannot turn the light on while in this [user.loc]"
+			return
+		on = !on
+		user << "You [on ? "enable" : "disable"] the helmet light."
+		update_light(user)
+	else
+		return ..(user)
+
+/obj/item/clothing/head/proc/update_light(var/mob/user = null)
+	if(on && !light_applied)
+		if(loc == user)
+			user.SetLuminosity(user.luminosity + brightness_on)
+		SetLuminosity(brightness_on)
+		light_applied = 1
+	else if(!on && light_applied)
+		if(loc == user)
+			user.SetLuminosity(user.luminosity - brightness_on)
+		SetLuminosity(0)
+		light_applied = 0
+	update_icon(user)
+
+/obj/item/clothing/head/equipped(mob/user)
+	..()
+	spawn(1)
+		if(on && loc == user && !light_applied)
+			user.SetLuminosity(user.luminosity + brightness_on)
+			light_applied = 1
+
+/obj/item/clothing/head/dropped(mob/user)
+	..()
+	spawn(1)
+		if(on && loc != user && light_applied)
+			user.SetLuminosity(user.luminosity - brightness_on)
+			light_applied = 0
+
+/obj/item/clothing/head/update_icon(var/mob/user)
+
+	overlays.Cut()
+	if(on)
+		if(!light_overlay_cache["[light_overlay]_icon"])
+			light_overlay_cache["[light_overlay]_icon"] = image("icon" = 'icons/obj/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		if(!light_overlay_cache["[light_overlay]"])
+			light_overlay_cache["[light_overlay]"] = image("icon" = 'icons/mob/light_overlays.dmi', "icon_state" = "[light_overlay]")
+		overlays |= light_overlay_cache["[light_overlay]_icon"]
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_head()
+
+/obj/item/clothing/head/equipped(mob/user)
+	..()
+	update_light(user)
+
+/obj/item/clothing/head/pickup(mob/user)
+	..()
+	update_light(user)
+
+/obj/item/clothing/head/dropped(mob/user)
+	..()
+	update_light(user)
+
 /obj/item/clothing/head/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -283,6 +350,7 @@ BLIND     // can't see anything
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
+	force = 2
 	species_restricted = list("exclude","Unathi","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
@@ -387,20 +455,19 @@ BLIND     // can't see anything
 			return
 	return
 
-/obj/item/clothing/under/examine()
-	set src in view()
-	..()
+/obj/item/clothing/under/examine(mob/user)
+	..(user)
 	switch(src.sensor_mode)
 		if(0)
-			usr << "Its sensors appear to be disabled."
+			user << "Its sensors appear to be disabled."
 		if(1)
-			usr << "Its binary life sensors appear to be enabled."
+			user << "Its binary life sensors appear to be enabled."
 		if(2)
-			usr << "Its vital tracker appears to be enabled."
+			user << "Its vital tracker appears to be enabled."
 		if(3)
-			usr << "Its vital tracker and tracking beacon appear to be enabled."
+			user << "Its vital tracker and tracking beacon appear to be enabled."
 	if(hastie)
-		usr << "\A [hastie] is clipped to it."
+		user << "\A [hastie] is clipped to it."
 
 /obj/item/clothing/under/proc/set_sensors(mob/usr as mob)
 	var/mob/M = usr
@@ -493,4 +560,3 @@ BLIND     // can't see anything
 	if (hastie)
 		hastie.emp_act(severity)
 	..()
-

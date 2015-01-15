@@ -5,7 +5,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/chef(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -20,7 +19,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
 		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
 		new /obj/item/weapon/reagent_containers/food/drinks/beer( src )
@@ -39,7 +37,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/bartender(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -57,7 +54,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/hydro
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -72,7 +68,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/janitor(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -86,7 +81,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/lawyer(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -102,7 +96,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/librarian(src)
 		//
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
@@ -116,7 +109,6 @@
 
 	New()
 		..()
-		sleep(2)
 		new /obj/item/wardrobe/chaplain(src)
 		//
 		new /obj/item/weapon/storage/backpack/cultpack (src)

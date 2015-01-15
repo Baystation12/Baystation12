@@ -1,7 +1,7 @@
 //Engine control and monitoring console
 
 /obj/machinery/computer/engines
-	name = "engines control console"
+	name = "engine control console"
 	icon_state = "id"
 	var/state = "status"
 	var/list/engines = list()

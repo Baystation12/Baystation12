@@ -1,0 +1,23 @@
+<!--
+Title: Security Camera Console (Main content)
+Used In File(s): \code\game\machinery\computer\camera.dm
+ -->
+{{:helper.link('Show Map', 'pin-s', {'showMap' : 1})}}
+{{:helper.link('Reset', 'refresh', {'reset' : 1})}}
+<div class='item'>
+	<div class='itemLabel'>Current Camera: </div>
+	{{if data.current}}
+		<div class='itemContent'><b>{{:data.current.name}}</b></div>
+	{{else}}
+		<div class='itemContent'>None</div>
+	{{/if}}
+</div>
+{{for data.cameras}}
+	{{if data.current && value.name == data.current.name}}
+		{{:helper.link(value.name, '', {'switchTo' : value.camera}, 'selected')}}
+	{{else value.deact}}
+		{{:helper.link(value.name + " (deactivated)", '', {}, 'inactive')}}
+	{{else}}
+		{{:helper.link(value.name, '', {'switchTo' : value.camera})}}
+	{{/if}}
+{{/for}}

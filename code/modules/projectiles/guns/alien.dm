@@ -1,6 +1,5 @@
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/spikethrower
-
 	name = "Vox spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
@@ -31,9 +30,9 @@
 		last_regen = world.time
 		update_icon()
 
-/obj/item/weapon/gun/launcher/spikethrower/examine()
-	..()
-	usr << "It has [spikes] [spikes == 1 ? "spike" : "spikes"] remaining."
+/obj/item/weapon/gun/launcher/spikethrower/examine(mob/user)
+	..(user)
+	user << "It has [spikes] [spikes == 1 ? "spike" : "spikes"] remaining."
 
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
@@ -65,7 +64,6 @@
 
 //This gun only functions for armalis. The on-sprite is too huge to render properly on other sprites.
 /obj/item/weapon/gun/energy/noisecannon
-
 	name = "alien heavy cannon"
 	desc = "It's some kind of enormous alien weapon, as long as a man is tall."
 

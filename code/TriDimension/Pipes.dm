@@ -84,9 +84,9 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 
 obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
 	if(dir==3)
-		dir = 1
+		set_dir(1)
 	else if(dir==12)
-		dir = 4
+		set_dir(4)
 
 obj/machinery/atmospherics/pipe/zpipe/Del()
 	if(node1)
@@ -134,10 +134,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 
@@ -148,10 +145,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 			if(above)
 				for(var/obj/machinery/atmospherics/target in above)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
-						var/c = check_connect_types(target,src)
-						if (c)
-							target.connected_to = c
-							src.connected_to = c
+						if (check_connect_types(target,src))
 							node2 = target
 							break
 
@@ -181,10 +175,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 
@@ -195,10 +186,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 			if(below)
 				for(var/obj/machinery/atmospherics/target in below)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
-						var/c = check_connect_types(target,src)
-						if (c)
-							target.connected_to = c
-							src.connected_to = c
+						if (check_connect_types(target,src))
 							node2 = target
 							break
 
@@ -214,7 +202,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
 	icon_state = "up-scrubbers"
 	name = "upwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect upwards."
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -223,7 +211,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/supply
 	icon_state = "up-supply"
 	name = "upwards supply pipe"
 	desc = "A supply pipe segment to connect upwards."
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -232,7 +220,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 	icon_state = "down-scrubbers"
 	name = "downwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect downwards."
-	connect_types = list(3)
+	connect_types = CONNECT_TYPE_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -241,7 +229,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/supply
 	icon_state = "down-supply"
 	name = "downwards supply pipe"
 	desc = "A supply pipe segment to connect downwards."
-	connect_types = list(2)
+	connect_types = CONNECT_TYPE_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE

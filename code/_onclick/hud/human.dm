@@ -34,7 +34,7 @@
 		inv_box.icon_state =  slot_data["state"]
 
 		if(slot_data["dir"])
-			inv_box.dir = slot_data["dir"]
+			inv_box.set_dir(slot_data["dir"])
 
 		if(slot_data["toggle"])
 			src.other += inv_box
@@ -58,7 +58,7 @@
 
 		using = new /obj/screen()
 		using.name = "act_intent"
-		using.dir = SOUTHWEST
+		using.set_dir(SOUTHWEST)
 		using.icon = ui_style
 		using.icon_state = "intent_"+mymob.a_intent
 		using.screen_loc = ui_acti
@@ -125,7 +125,7 @@
 	if(hud_data.has_m_intent)
 		using = new /obj/screen()
 		using.name = "mov_intent"
-		using.dir = SOUTHWEST
+		using.set_dir(SOUTHWEST)
 		using.icon = ui_style
 		using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 		using.screen_loc = ui_movi
@@ -160,7 +160,7 @@
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.name = "r_hand"
-		inv_box.dir = WEST
+		inv_box.set_dir(WEST)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_inactive"
 		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
@@ -176,7 +176,7 @@
 
 		inv_box = new /obj/screen/inventory()
 		inv_box.name = "l_hand"
-		inv_box.dir = EAST
+		inv_box.set_dir(EAST)
 		inv_box.icon = ui_style
 		inv_box.icon_state = "hand_inactive"
 		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
@@ -191,7 +191,7 @@
 
 		using = new /obj/screen/inventory()
 		using.name = "hand"
-		using.dir = SOUTH
+		using.set_dir(SOUTH)
 		using.icon = ui_style
 		using.icon_state = "hand1"
 		using.screen_loc = ui_swaphand1
@@ -202,7 +202,7 @@
 
 		using = new /obj/screen/inventory()
 		using.name = "hand"
-		using.dir = SOUTH
+		using.set_dir(SOUTH)
 		using.icon = ui_style
 		using.icon_state = "hand2"
 		using.screen_loc = ui_swaphand2
@@ -358,7 +358,7 @@
 
 	if (mymob.client)
 		if (mymob.client.gun_mode) // If in aim mode, correct the sprite
-			mymob.gun_setting_icon.dir = 2
+			mymob.gun_setting_icon.set_dir(2)
 
 
 	mymob.client.screen = null

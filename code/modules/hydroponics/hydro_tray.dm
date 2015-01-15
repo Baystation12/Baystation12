@@ -13,7 +13,7 @@
 
 	// Plant maintenance vars.
 	var/waterlevel = 100       // Water (max 100)
-	var/nutrilevel = 100       // Nutrient (max 100)
+	var/nutrilevel = 10        // Nutrient (max 10)
 	var/pestlevel = 0          // Pests (max 10)
 	var/weedlevel = 0          // Weeds (max 10)
 
@@ -88,7 +88,7 @@
 		"adminordrazine" =  1,
 		"milk" =            0.9,
 		"beer" =            0.7,
-		"flourine" =       -0.5,
+		"fluorine" =       -0.5,
 		"chlorine" =       -0.5,
 		"phosphorus" =     -0.5,
 		"water" =           1,
@@ -121,6 +121,25 @@
 		"radium" =  8,
 		"mutagen" = 15
 		)
+
+/obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
+	if(istype(user,/mob/living/carbon/alien/diona))
+		var/mob/living/carbon/alien/diona/nymph = user
+
+		if(nymph.stat == DEAD || nymph.paralysis || nymph.weakened || nymph.stunned || nymph.restrained())
+			return
+
+		if(weedlevel > 0)
+			nymph.reagents.add_reagent("nutriment", weedlevel)
+			weedlevel = 0
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> begins rooting through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You begin rooting through [src], ripping out weeds and eating them noisily.</font>")
+		else if(nymph.nutrition > 100 && nutrilevel < 10)
+			nymph.nutrition -= ((10-nutrilevel)*5)
+			nutrilevel = 10
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> secretes a trickle of green liquid, refilling [src].</font>","<font color='blue'>You secrete a trickle of green liquid, refilling [src].</font>")
+		else
+			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
+		return
 
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()

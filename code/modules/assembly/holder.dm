@@ -84,14 +84,13 @@
 					src.overlays += O
 */
 
-	examine()
-		set src in view()
-		..()
-		if ((in_range(src, usr) || src.loc == usr))
+	examine(mob/user)
+		..(user)
+		if ((in_range(src, user) || src.loc == user))
 			if (src.secured)
-				usr << "\The [src] is ready!"
+				user << "\The [src] is ready!"
 			else
-				usr << "\The [src] can be attached!"
+				user << "\The [src] can be attached!"
 		return
 
 
@@ -212,11 +211,11 @@
 		return 1
 
 
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg)
+/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
 	if(a_right)
-		a_right.hear_talk(M,msg)
+		a_right.hear_talk(M,msg,verb,speaking)
 	if(a_left)
-		a_left.hear_talk(M,msg)
+		a_left.hear_talk(M,msg,verb,speaking)
 
 
 

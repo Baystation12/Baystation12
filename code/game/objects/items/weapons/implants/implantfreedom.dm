@@ -67,5 +67,3 @@ mechanisms<BR>
 life can drive down to only 1 use.<HR>
 No Implant Specifics"}
 		return dat
-
-

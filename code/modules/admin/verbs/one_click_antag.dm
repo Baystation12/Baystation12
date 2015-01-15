@@ -264,7 +264,7 @@ client/proc/one_click_antag()
 
 		if(nuke_spawn)
 			var/obj/item/weapon/paper/P = new
-			P.info = "Sadly, the Syndicate could not get you a nuclear bomb.  We have, however, acquired the arming code for the station's onboard nuke.  The nuclear authorization code is: <b>[nuke_code]</b>"
+			P.info = "Sadly, your employers could not get you a nuclear bomb.  They have, however, acquired the arming code for the station's onboard nuke.  The nuclear authorization code is: <b>[nuke_code]</b>"
 			P.name = "nuclear bomb code and instructions"
 			P.loc = nuke_spawn.loc
 
@@ -327,7 +327,7 @@ client/proc/one_click_antag()
 	//Generates a list of commandos from active ghosts. Then the user picks which characters to respawn as the commandos.
 	for(var/mob/dead/observer/G in player_list)
 		spawn(0)
-			switch(alert(G,"Do you wish to be considered for an elite syndicate strike team being sent in?","Please answer in 30 seconds!","Yes","No"))
+			switch(alert(G,"Do you wish to be considered for an elite mercenary strike team being sent in?","Please answer in 30 seconds!","Yes","No"))
 				if("Yes")
 					if((world.time-time_passed)>300)//If more than 30 game seconds passed.
 						return
@@ -369,7 +369,7 @@ client/proc/one_click_antag()
 				//So they don't forget their code or mission.
 
 
-				new_syndicate_commando << "\blue You are an Elite Syndicate. [!syndicate_leader_selected?"commando":"<B>LEADER</B>"] in the service of the Syndicate. \nYour current mission is: \red<B> [input]</B>"
+				new_syndicate_commando << "\blue You are an Elite Mercenary. [!syndicate_leader_selected?"commando":"<B>LEADER</B>"] in the service of criminal elements hostile to NanoTrasen. \nYour current mission is: \red<B> [input]</B>"
 
 				numagents--
 		if(numagents >= 6)
@@ -424,7 +424,7 @@ client/proc/one_click_antag()
 	//Creates mind stuff.
 	new_syndicate_commando.mind_initialize()
 	new_syndicate_commando.mind.assigned_role = "MODE"
-	new_syndicate_commando.mind.special_role = "Syndicate Commando"
+	new_syndicate_commando.mind.special_role = "Mercenary"
 
 	//Adds them to current traitor list. Which is really the extra antagonist list.
 	ticker.mode.traitors += new_syndicate_commando.mind
@@ -511,7 +511,6 @@ client/proc/one_click_antag()
 	new_vox.age = rand(12,20)
 
 	new_vox.dna.ready_dna(new_vox) // Creates DNA.
-	new_vox.dna.mutantrace = "vox"
 	new_vox.mind_initialize()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"

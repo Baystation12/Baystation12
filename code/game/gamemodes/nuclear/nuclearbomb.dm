@@ -165,9 +165,6 @@ var/bomb_set
 				return
 	..()
 
-/obj/machinery/nuclearbomb/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
 	if (src.extended)
 		if (!ishuman(user))
@@ -392,18 +389,16 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)
 
-	enter_allowed = 0
-
 	var/off_station = 0
 	var/turf/bomb_location = get_turf(src)
-	if( bomb_location && (bomb_location.z == 1) )
+	if(bomb_location && (bomb_location.z in config.station_levels))
 		if( (bomb_location.x < (128-NUKERANGE)) || (bomb_location.x > (128+NUKERANGE)) || (bomb_location.y < (128-NUKERANGE)) || (bomb_location.y > (128+NUKERANGE)) )
 			off_station = 1
 	else
 		off_station = 2
 
 	if(ticker)
-		if(ticker.mode && ticker.mode.name == "nuclear emergency")
+		if(ticker.mode && ticker.mode.name == "mercenary")
 			var/obj/machinery/computer/shuttle_control/multi/syndicate/syndie_location = locate(/obj/machinery/computer/shuttle_control/multi/syndicate)
 			if(syndie_location)
 				ticker.mode:syndies_didnt_escape = (syndie_location.z > 1 ? 0 : 1)	//muskets will make me change this, but it will do for now
@@ -411,7 +406,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 		ticker.station_explosion_cinematic(off_station,null)
 		if(ticker.mode)
 			ticker.mode.explosion_in_progress = 0
-			if(ticker.mode.name == "nuclear emergency")
+			if(ticker.mode.name == "mercenary")
 				ticker.mode:nukes_left --
 			else
 				world << "<B>The station was destoyed by the nuclear blast!</B>"

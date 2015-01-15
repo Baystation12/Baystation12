@@ -100,13 +100,12 @@
 				I.pixel_y = -3
 			overlays += I
 
-	examine()
-		..()
-		if(src in oview(4))
+	examine(mob/user)
+		if(..(user, 4))
 			if(sortTag)
-				usr << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+				user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
 			if(examtext)
-				usr << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+				user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
 		return
 
 /obj/item/smallDelivery
@@ -206,13 +205,12 @@
 					I.pixel_y = -3
 			overlays += I
 
-	examine()
-		..()
-		if(src in oview(4))
+	examine(mob/user)
+		if(..(user, 4))
 			if(sortTag)
-				usr << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
+				user << "<span class='notice'>It is labeled \"[sortTag]\"</span>"
 			if(examtext)
-				usr << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+				user << "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
 		return
 
 /obj/item/weapon/packageWrap
@@ -304,10 +302,10 @@
 			return
 		return
 
-	examine()
-		if(src in usr)
-			usr << "\blue There are [amount] units of package wrap left!"
-		..()
+	examine(mob/user)
+		if(..(user, 0))
+			user << "\blue There are [amount] units of package wrap left!"
+		
 		return
 
 

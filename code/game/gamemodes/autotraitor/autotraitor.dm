@@ -70,7 +70,6 @@
 
 /datum/game_mode/traitor/autotraitor/post_setup()
 	..()
-	abandon_allowed = 1
 	traitorcheckloop()
 
 /datum/game_mode/traitor/autotraitor/proc/traitorcheckloop()
@@ -132,7 +131,7 @@
 					equip_traitor(newtraitor)
 
 				traitors += newtraitor.mind
-				newtraitor << "\red <B>ATTENTION:</B> \black It is time to pay your debt to the Syndicate..."
+				newtraitor << "\red <B>No time like the present.</B> \black It's time to take matters into your own hands..."
 				newtraitor << "<B>You are now a traitor.</B>"
 				newtraitor.mind.special_role = "traitor"
 				newtraitor.hud_updateflag |= 1 << SPECIALROLE_HUD

@@ -172,9 +172,6 @@
 /obj/machinery/atmospherics/tvalve/attack_ai(mob/user as mob)
 	return
 
-/obj/machinery/atmospherics/tvalve/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
 /obj/machinery/atmospherics/tvalve/attack_hand(mob/user as mob)
 	src.add_fingerprint(usr)
 	update_icon(1)
@@ -202,26 +199,17 @@
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node2 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
 		if(target.initialize_directions & get_dir(target,src))
-			var/c = check_connect_types(target,src)
-			if (c)
-				target.connected_to = c
-				src.connected_to = c
+			if (check_connect_types(target,src))
 				node3 = target
 				break
 

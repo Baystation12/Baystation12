@@ -57,6 +57,9 @@
 	if(environment)	// More error checking -- TLE
 		handle_environment(environment)
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Status updates, death etc.
 	handle_regular_status_updates()
 	update_canmove()
@@ -260,7 +263,7 @@
 		if(internal)
 			if (!contents.Find(internal))
 				internal = null
-			if (!wear_mask || !(wear_mask.flags|MASKINTERNALS) )
+			if (!(wear_mask && (wear_mask.flags & AIRTIGHT)))
 				internal = null
 			if(internal)
 				if (internals)
@@ -629,3 +632,9 @@
 	proc/handle_changeling()
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
+
+/mob/living/carbon/monkey/handle_fire()
+	if(..())
+		return
+	adjustFireLoss(6)
+	return

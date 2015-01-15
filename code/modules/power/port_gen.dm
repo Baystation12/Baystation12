@@ -32,7 +32,7 @@ tank [un]loading stuff
 /obj/machinery/power/port_gen/attack_hand(mob/user)
 turn on/off
 
-/obj/machinery/power/port_gen/examine()
+/obj/machinery/power/port_gen/examine(mob/user)
 display round(lastgen) and phorontank amount
 
 */
@@ -48,7 +48,6 @@ display round(lastgen) and phorontank amount
 	icon_state = "portgen0"
 	density = 1
 	anchored = 0
-	directwired = 0
 	use_power = 0
 
 	var/active = 0
@@ -80,14 +79,18 @@ display round(lastgen) and phorontank amount
 		icon_state = initial(icon_state)
 		handleInactive()
 
+/obj/machinery/power/powered()
+	return 1 //doesn't require an external power source
+
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
 		return
 	if(!anchored)
 		return
 
-/obj/machinery/power/port_gen/examine()
-	set src in oview(1)
+/obj/machinery/power/port_gen/examine(mob/user)
+	if(!..(user,1 ))
+		return
 	if(active)
 		usr << "\blue The generator is on."
 	else
@@ -140,10 +143,10 @@ display round(lastgen) and phorontank amount
 	reliability = min(round(temp_reliability / 4), 100)
 	power_gen = round(initial(power_gen) * (max(2, temp_rating) / 2))
 
-/obj/machinery/power/port_gen/pacman/examine()
-	..()
-	usr << "\blue The generator has [sheets] units of [sheet_name] fuel left, producing [power_gen] per cycle."
-	if(crit_fail) usr << "\red The generator seems to have broken down."
+/obj/machinery/power/port_gen/pacman/examine(mob/user)
+	..(user)
+	user << "\blue The generator has [sheets] units of [sheet_name] fuel left, producing [power_gen] per cycle."
+	if(crit_fail) user << "\red The generator seems to have broken down."
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	if(sheets >= 1 / (time_per_sheet / power_output) - sheet_left)
@@ -264,9 +267,6 @@ display round(lastgen) and phorontank amount
 	interact(user)
 
 /obj/machinery/power/port_gen/pacman/attack_ai(mob/user as mob)
-	interact(user)
-
-/obj/machinery/power/port_gen/pacman/attack_paw(mob/user as mob)
 	interact(user)
 
 /obj/machinery/power/port_gen/pacman/interact(mob/user)

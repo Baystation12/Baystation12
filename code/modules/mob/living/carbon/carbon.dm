@@ -57,7 +57,7 @@
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
-	. = ..(null,1)
+	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
@@ -83,22 +83,6 @@
 
 	return
 
-
-/mob/living/carbon/attack_paw(mob/M as mob)
-	if(!istype(M, /mob/living/carbon)) return
-
-	for(var/datum/disease/D in viruses)
-
-		if(D.spread_by_touch())
-			M.contract_disease(D, 0, 1, CONTACT_HANDS)
-
-	for(var/datum/disease/D in M.viruses)
-
-		if(D.spread_by_touch())
-			contract_disease(D, 0, 1, CONTACT_HANDS)
-
-	return
-
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
 	if(status_flags & GODMODE)	return 0	//godmode
 	shock_damage *= siemens_coeff
@@ -106,9 +90,8 @@
 		return 0
 
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
-
 	playsound(loc, "sparks", 50, 1, -1)
-	if (shock_damage > 10)
+	if (shock_damage > 15)
 		src.visible_message(
 			"\red [src] was shocked by the [source]!", \
 			"\red <B>You feel a powerful shock course through your body!</B>", \
@@ -146,9 +129,9 @@
 			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "hand_active"
 	/*if (!( src.hand ))
-		src.hands.dir = NORTH
+		src.hands.set_dir(NORTH)
 	else
-		src.hands.dir = SOUTH*/
+		src.hands.set_dir(SOUTH)*/
 	return
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
@@ -217,7 +200,10 @@
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
 
-			if(lying || src.sleeping)
+			if(player_logged)
+				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
+				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
+			else if(lying || src.sleeping)
 				src.sleeping = max(0,src.sleeping-5)
 				if(src.sleeping == 0)
 					src.resting = 0
@@ -527,3 +513,13 @@
 
 /mob/living/carbon/can_use_vents()
 	return
+
+/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+	if(buckled)
+		return 0
+	stop_pulling()
+	src << "<span class='warning'>You slipped on [slipped_on]!</span>"
+	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	Stun(stun_duration)
+	Weaken(Floor(stun_duration/2))
+	return 1

@@ -62,10 +62,9 @@
 	failmsg = "The [name]'s refill light blinks red."
 	..()
 
-/obj/item/device/lightreplacer/examine()
-	set src in view(2)
-	..()
-	usr << "It has [uses] lights remaining."
+/obj/item/device/lightreplacer/examine(mob/user)
+	if(..(user, 2))
+		user << "It has [uses] lights remaining."
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W,  /obj/item/weapon/card/emag) && emagged == 0)

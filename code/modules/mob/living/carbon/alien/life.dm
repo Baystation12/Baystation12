@@ -61,28 +61,28 @@
 		silent = 0
 	else
 		updatehealth()
-
+		handle_stunned()
+		handle_weakened()
 		if(health <= 0)
 			death()
 			blinded = 1
 			silent = 0
 			return 1
 
-		if(paralysis)
-			AdjustParalysis(-1)
+		if(paralysis && paralysis > 0)
+			handle_paralysed()
 			blinded = 1
 			stat = UNCONSCIOUS
 			if(halloss > 0)
 				adjustHalLoss(-3)
-		else if(sleeping)
 
+		if(sleeping)
 			adjustHalLoss(-3)
 			if (mind)
-				if((mind.active && client != null) || immune_to_ssd)
+				if(mind.active && client != null)
 					sleeping = max(sleeping-1, 0)
 			blinded = 1
 			stat = UNCONSCIOUS
-
 		else if(resting)
 			if(halloss > 0)
 				adjustHalLoss(-3)

@@ -223,7 +223,13 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (istype(M))
 		return 0
-	if (M.internal != null && M.wear_mask && (M.wear_mask.flags & MASKINTERNALS))
+	if (M.internal != null)
+		if(M.wear_mask && (M.wear_mask.flags & AIRTIGHT))
+			return 0
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.head && (H.head.flags & AIRTIGHT))
+				return 0
 		return 0
 	return 1
 
@@ -396,7 +402,7 @@ steam.start() -- spawns the effect
 					if(istype(T, /turf/space))
 						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
 						src.oldposition = T
-						I.dir = src.holder.dir
+						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
@@ -443,7 +449,7 @@ steam.start() -- spawns the effect
 					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
-					I.dir = src.holder.dir
+					I.set_dir(src.holder.dir)
 					spawn(10)
 						I.delete()
 						src.number--
@@ -551,18 +557,9 @@ steam.start() -- spawns the effect
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
 	if(metal)
 		return
-
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP) || M.buckled)
-			return
-
-		M.stop_pulling()
-		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(5)
-		M.Weaken(2)
-
+	if(istype(AM, /mob/living))
+		var/mob/living/M = AM
+		M.slip("the foam",6)
 
 /datum/effect/effect/system/foam_spread
 	var/amount = 5				// the size of the foam spread.
@@ -653,10 +650,6 @@ steam.start() -- spawns the effect
 		if(metal==1 || prob(50))
 			del(src)
 
-	attack_paw(var/mob/user)
-		attack_hand(user)
-		return
-
 	attack_hand(var/mob/user)
 		if ((HULK in user.mutations) || (prob(75 - metal*25)))
 			user << "\blue You smash through the metal foam wall."
@@ -731,15 +724,15 @@ steam.start() -- spawns the effect
 			var/light = -1
 			var/flash = -1
 
-			// Clamp all values to MAX_EXPLOSION_RANGE
+			// Clamp all values to max_explosion_range
 			if (round(amount/12) > 0)
-				devastation = min (MAX_EXPLOSION_RANGE, devastation + round(amount/12))
+				devastation = min (max_explosion_range, devastation + round(amount/12))
 
 			if (round(amount/6) > 0)
-				heavy = min (MAX_EXPLOSION_RANGE, heavy + round(amount/6))
+				heavy = min (max_explosion_range, heavy + round(amount/6))
 
 			if (round(amount/3) > 0)
-				light = min (MAX_EXPLOSION_RANGE, light + round(amount/3))
+				light = min (max_explosion_range, light + round(amount/3))
 
 			if (flash && flashing_factor)
 				flash += (round(amount/4) * flashing_factor)

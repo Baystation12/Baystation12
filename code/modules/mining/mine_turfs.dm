@@ -14,6 +14,7 @@
 	var/mineral/mineral
 	var/mined_ore = 0
 	var/last_act = 0
+	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
 
 	var/datum/geosample/geologic_data
 	var/excavation_level = 0
@@ -50,6 +51,16 @@
 				GetDrilled()
 		if(1.0)
 			mined_ore = 2 //some of the stuff gets blown up
+			GetDrilled()
+
+/turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
+
+	// Emitter blasts
+	if(istype(Proj, /obj/item/projectile/beam/emitter))
+		emitter_blasts_taken++
+
+		if(emitter_blasts_taken > 2) // 3 blasts per tile
+			mined_ore = 1
 			GetDrilled()
 
 /turf/simulated/mineral/Bumped(AM)
@@ -379,9 +390,9 @@
 	name = "asteroid"
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "asteroid"
-	oxygen = 0.01
-	nitrogen = 0.01
-	temperature = T0C
+	oxygen = 0
+	nitrogen = 0
+	temperature = TCMB
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail

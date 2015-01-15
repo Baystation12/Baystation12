@@ -274,6 +274,10 @@ macro "hotkeymode"
 		command = "a-intent hurt"
 		is-disabled = false
 	elem 
+		name = "5"
+		command = ".me"
+		is-disabled = false
+	elem 
 		name = "A+REP"
 		command = ".west"
 		is-disabled = false
@@ -1424,7 +1428,7 @@ window "outputwindow"
 		visited-color = #ff00ff
 		style = ".system {color:#ff0000;}"
 		enable-http-images = false
-		max-lines = 1000
+		max-lines = 0
 		image = ""
 
 window "rpane"
