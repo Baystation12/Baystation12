@@ -35,6 +35,9 @@
 		else
 			user.update_inv_r_hand()
 
+/obj/item/weapon/gun/energy/gun/mounted
+	abstract = 1
+
 /obj/item/weapon/gun/energy/gun/mounted/load_into_chamber()
 	if(in_chamber)
 		return 1

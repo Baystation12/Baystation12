@@ -77,6 +77,9 @@ obj/item/weapon/gun/energy/laser/retro
 	isHandgun()
 		return 0
 
+/obj/item/weapon/gun/energy/lasercannon/mounted
+	abstract = 1
+
 /obj/item/weapon/gun/energy/lasercannon/mounted/load_into_chamber()
 	if(in_chamber)
 		return 1

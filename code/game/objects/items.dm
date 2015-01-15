@@ -630,7 +630,7 @@
 	set category = "Object"
 
 	var/obj/item/I = get_active_hand()
-	if(I && !I.abstract)
+	if(I && !istype(I, /obj/item/weapon/grab))
 		I.showoff(src)
 
 /*

@@ -118,6 +118,9 @@
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
 
+/obj/item/weapon/pickaxe/plasmacutter/mounted
+	abstract = 1
+
 /obj/item/weapon/pickaxe/diamond
 	name = "diamond pickaxe"
 	icon_state = "dpickaxe"
@@ -134,6 +137,9 @@
 	origin_tech = "materials=6;powerstorage=4;engineering=5"
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
+
+/obj/item/weapon/pickaxe/diamonddrill/mounted
+	abstract = 1
 
 /obj/item/weapon/pickaxe/borgdrill
 	name = "cyborg mining drill"

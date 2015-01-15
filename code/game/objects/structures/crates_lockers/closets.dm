@@ -191,7 +191,8 @@
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))
-			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
+			var/obj/item/weapon/grab/G = W
+			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -203,6 +204,8 @@
 			for(var/mob/M in viewers(src))
 				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
 			del(src)
+			return
+		if(istype(W, /obj/item) && W.abstract)
 			return
 		if(isrobot(user))
 			return

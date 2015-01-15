@@ -93,6 +93,9 @@
 	name = "energy dart thrower"
 	projectile_type = "/obj/item/projectile/energy/dart"
 
+/obj/item/weapon/gun/energy/crossbow/ninja/mounted
+	abstract = 1
+
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "Energy Crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."

@@ -175,6 +175,9 @@
 	return (user.Adjacent(T) && !user.stat)
 
 
+/obj/item/weapon/rcd/mounted
+	abstract = 1
+
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*30
 	if(istype(loc,/obj/item/rig_module))
