@@ -144,7 +144,7 @@
 	active_power_cost = 5
 	passive_power_cost = 0
 
-	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja
+	gun_type = /obj/item/weapon/gun/energy/crossbow/ninja/mounted
 
 /obj/item/rig_module/mounted/energy_blade/process()
 

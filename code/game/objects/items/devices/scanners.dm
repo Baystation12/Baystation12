@@ -79,6 +79,9 @@ REAGENT SCANNER
 	origin_tech = "magnets=1;biotech=1"
 	var/mode = 1;
 
+/obj/item/device/healthanalyzer/mounted
+	abstract = 1
+
 
 /obj/item/device/healthanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
 	if (( (CLUMSY in user.mutations) || user.getBrainLoss() >= 60) && prob(50))

@@ -416,6 +416,9 @@
 
 
 	// Handle dismantling or placing things on the table from here on.
+	if(istype(W, /obj/item) && W.abstract)
+		return
+
 	if(isrobot(user))
 		return
 

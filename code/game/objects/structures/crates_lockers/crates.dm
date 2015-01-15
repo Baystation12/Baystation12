@@ -68,6 +68,8 @@
 
 /obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(opened)
+		if(istype(W, /obj/item) && W.abstract)
+			return
 		if(isrobot(user))
 			return
 		user.drop_item()

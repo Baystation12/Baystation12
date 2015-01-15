@@ -33,7 +33,7 @@
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
 
-	device_type = /obj/item/weapon/pickaxe/plasmacutter
+	device_type = /obj/item/weapon/pickaxe/plasmacutter/mounted
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
@@ -41,7 +41,7 @@
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
 
-	device_type = /obj/item/device/healthanalyzer
+	device_type = /obj/item/device/healthanalyzer/mounted
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit drill mount"
@@ -51,7 +51,7 @@
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
 
-	device_type = /obj/item/weapon/pickaxe/diamonddrill
+	device_type = /obj/item/weapon/pickaxe/diamonddrill/mounted
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
