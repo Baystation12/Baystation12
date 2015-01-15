@@ -876,6 +876,7 @@ About the new airlock wires panel:
 				src.welded = 1
 			else
 				src.welded = null
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			src.update_icon()
 			return
 		else
@@ -924,7 +925,7 @@ About the new airlock wires panel:
 				da.created_name = src.name
 				da.update_state()
 
-				if(operating == -1)
+				if(operating == -1 || (stat & BROKEN))
 					new /obj/item/weapon/circuitboard/broken(src.loc)
 					operating = 0
 				else
