@@ -23,8 +23,9 @@
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
+	switch(copytext(message,1,2))
+		if("*") return emote(copytext(message,2))
+		if("^") return custom_emote(1, copytext(message,2))
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
