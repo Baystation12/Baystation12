@@ -70,6 +70,8 @@
 	if(opened)
 		if(isrobot(user))
 			return
+		if(W.loc != user) // This should stop mounted modules ending up outside the module.
+			return
 		user.drop_item()
 		if(W)
 			W.loc = src.loc
