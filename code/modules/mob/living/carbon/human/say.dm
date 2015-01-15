@@ -25,6 +25,8 @@
 
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
+	else if(copytext(message,1,2) == "^")
+		return custom_emote(1, copytext(message,2))
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
