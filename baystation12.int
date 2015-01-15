@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\carbon\human\human_attackhand.dm;code\modules\mob\living\carbon\human\species.dm;code\game\verbs\who.dm;code\modules\mob\living\carbon\human\human_movement.dm
+WINDOW: icons\misc\fullscreen.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\mecha code\game\mecha\equipment code\game\mecha\equipment\tools code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\verbs code\modules code\modules\admin code\modules\awaymissions code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\new_player 
-FILE: code\modules\mob\living\carbon\human\human_movement.dm
-LAST_COMPILE_TIME: 1421345119
+DIR: icons icons\misc 
+FILE: icons\misc\fullscreen.dmi
+LAST_COMPILE_TIME: 1421345582
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
