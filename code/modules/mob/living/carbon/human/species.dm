@@ -485,8 +485,10 @@
 	primitive = /mob/living/carbon/monkey/wryn
 
 	darksight = 3
+	slowdown = 1
 
-	slowdown = 3
+	warning_low_pressure = -300
+	hazard_low_pressure = 1
 
 	cold_level_1 = 200 //Default 260 - Lower is better
 	cold_level_2 = 150 //Default 200
@@ -507,7 +509,7 @@
 		)
 
 
-	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | NO_BREATHE | HAS_SKIN_COLOR | NO_SCAN | NO_CRYO | HIVEMIND
+	flags = HAS_LIPS | HAS_UNDERWEAR | NO_BREATHE | HAS_SKIN_COLOR | NO_SCAN | NO_CRYO | HIVEMIND
 
 	reagent_tag = IS_WRYN
 
@@ -515,13 +517,13 @@
 	flesh_color = "#704300"
 	blood_color = "#FFFF99"
 
-/*
+
 /datum/species/wryn/handle_death(var/mob/living/carbon/human/H)
 	for(var/mob/living/carbon/C in world)
 		if(locate(/datum/organ/internal/wryn/hivenode) in C.internal_organs)
 			C << "\red <B>Your antennae tingle as you are overcome with pain...</B>"
 			C << "\red It feels like part of you has died."
-*/
+
 
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H)

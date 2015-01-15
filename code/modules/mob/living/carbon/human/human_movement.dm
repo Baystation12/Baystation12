@@ -14,11 +14,11 @@
 					loc_temp = environment.temperature
 
 				switch(loc_temp)			//messy switch statement to assign the proper speed
-					if(0 to 213.15)			tally = -6	 //you deserve this, god speed to you
-					if(213.15 to 250.15) 	tally = -5	 //must get colder..
-					if(260.15 to 273.15)	tally = -4
-					if(273.15 to 283.15) 	tally = -3	 //pretty fast, though will likely never happen
-					if(283.15 to 300.15)	tally = 2	 //slower than humans at normal room temperatures
+					if(0 to 213.15)			tally = -2	 //you deserve this, god speed to you
+					if(213.15 to 250.15) 	tally = -1.2	 //must get colder..
+					if(260.15 to 273.15)	tally = -0.8
+					if(273.15 to 283.15) 	tally = 0	 //pretty fast, though will likely never happen
+					if(283.15 to 300.15)	tally = 3	 //slower than humans at normal room temperatures
 					if(300.15 to 310.15)	tally = 5
 					if(317.15 to 400)		tally = 8
 					else					tally = 12	//Stop running into fire you stupid bug

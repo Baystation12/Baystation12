@@ -9,11 +9,13 @@
 	for(var/client/C in clients)
 		var/entry = ""
 		if(C.holder && (R_ADMIN & C.holder.rights) && !C.holder.fakekey)
-			entry = "<b><font color='#FF3333'>{Admin}</font> ~ </b> [C.key]"
+			entry = "<b>{<font color='#FF3333'>Admin</font>} ~ </b> [C.key]"
 		else if(C.holder && (R_MOD & C.holder.rights) && !C.holder.fakekey)
-			entry = "<b><font color='#3333FF'>{Mod}</font> ~ </b> [C.key]"
+			entry = "<b>{<font color='#3333FF'>Mod</font>} ~ </b> [C.key]"
+		else if(C.holder && (R_DEBUG & C.holder.rights) && !C.holder.fakekey)
+			entry = "<b>{<font color='#FF9933'>Dev</font>} ~ </b> [C.key]"
 		else
-			entry = "<b><font color='#666666'>{Player}</font> ~ </b> [C.key]"
+			entry = "<b>{<font color='#666666'>Player</font>} ~ </b> [C.key]"
 
 		if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
 			if(C.holder && C.holder.fakekey)
