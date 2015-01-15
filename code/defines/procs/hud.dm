@@ -12,12 +12,12 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 		if(P.Mob.see_invisible < patient.invisibility)
 			continue
 
-		if(!(local_scanner || hassensorlevel(patient, SUIT_SENSOR_BINARY)))
+		if(!(local_scanner || hassensorlevel(patient, SUIT_SENSOR_VITAL)))
 			continue
 
-		P.Client.images += patient.hud_list[STATUS_HUD]
-		if(local_scanner || hassensorlevel(patient, SUIT_SENSOR_VITAL))
-			P.Client.images += patient.hud_list[HEALTH_HUD]
+		P.Client.images += patient.hud_list[HEALTH_HUD]
+		if(local_scanner)
+			P.Client.images += patient.hud_list[STATUS_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
 proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
