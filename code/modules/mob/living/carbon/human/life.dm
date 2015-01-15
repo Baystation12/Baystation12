@@ -112,6 +112,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(environment)		//Optimized a good bit.
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Status updates, death etc.
 	handle_regular_status_updates()		//Optimized a bit
 	update_canmove()
@@ -784,6 +787,8 @@
 
 		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
+		if (on_fire)
+			return //too busy for pesky convection
 
 		if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 			if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
@@ -1773,6 +1778,26 @@
 	if(..())
 		speech_problem_flag = 1
 	return stuttering
+
+/mob/living/carbon/human/handle_fire()
+	if(..())
+		return
+	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures
+	if(wear_suit)
+		if(wear_suit.max_heat_protection_temperature >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
+			thermal_protection += (wear_suit.max_heat_protection_temperature*0.7)
+	if(head)
+		if(head.max_heat_protection_temperature >= FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE)
+			thermal_protection += (head.max_heat_protection_temperature*THERMAL_PROTECTION_HEAD)
+	thermal_protection = round(thermal_protection)
+	if(thermal_protection >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
+		return
+	if(thermal_protection >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
+		bodytemperature += 11
+		return
+	else
+		bodytemperature += BODYTEMP_HEATING_MAX
+	return
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

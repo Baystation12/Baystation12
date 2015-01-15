@@ -5,7 +5,8 @@
 #define M_L_HAND_LAYER			4
 #define M_R_HAND_LAYER			5
 #define TARGETED_LAYER			6
-#define M_TOTAL_LAYERS			6
+#define M_FIRE_LAYER			6
+#define M_TOTAL_LAYERS			7
 /////////////////////////////////
 
 /mob/living/carbon/monkey
@@ -19,6 +20,7 @@
 	update_inv_r_hand(0)
 	update_inv_l_hand(0)
 	update_inv_handcuffed(0)
+	update_fire(0)
 	update_icons()
 	//Hud Stuff
 	update_hud()
@@ -109,6 +111,12 @@
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
 
+/mob/living/carbon/monkey/update_fire(var/update_icons=1)
+	if(on_fire)
+		overlays_standing[M_FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"= -M_FIRE_LAYER)
+	else
+		overlays_standing[M_FIRE_LAYER] = null
+	if(update_icons)		update_icons()
 //Monkey Overlays Indexes////////
 #undef M_MASK_LAYER
 #undef M_BACK_LAYER
@@ -116,5 +124,6 @@
 #undef M_L_HAND_LAYER
 #undef M_R_HAND_LAYER
 #undef TARGETED_LAYER
+#undef M_FIRE_LAYER
 #undef M_TOTAL_LAYERS
 
