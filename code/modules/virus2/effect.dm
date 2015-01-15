@@ -191,10 +191,10 @@
 /datum/disease2/effect/telepathic
 	name = "Telepathy Syndrome"
 	stage = 3
+	happensonce = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.dna.check_integrity()
 		mob.dna.SetSEState(REMOTETALKBLOCK,1)
-		domutcheck(mob, null)
+		domutcheck(mob, null, MUTCHK_FORCED)
 
 /datum/disease2/effect/mind
 	name = "Lazy Mind Syndrome"
