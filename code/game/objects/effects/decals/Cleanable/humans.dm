@@ -114,13 +114,19 @@ var/global/list/image/splatter_cache=list()
         amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
-        name = "drips of blood"
-        desc = "It's red."
-        gender = PLURAL
-        icon = 'icons/effects/drip.dmi'
-        icon_state = "1"
-        random_icon_states = list("1","2","3","4","5")
-        amount = 0
+	name = "drips of blood"
+	desc = "It's red."
+	gender = PLURAL
+	icon = 'icons/effects/drip.dmi'
+	icon_state = "1"
+	random_icon_states = list("1","2","3","4","5")
+	amount = 0
+	var/list/drips = list()
+
+/obj/effect/decal/cleanable/blood/drip/New()
+	..()
+	spawn(1)
+		drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"
