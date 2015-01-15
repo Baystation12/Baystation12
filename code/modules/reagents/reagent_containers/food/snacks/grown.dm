@@ -17,9 +17,13 @@
 		..()
 		src.pixel_x = rand(-5.0, 5)
 		src.pixel_y = rand(-5.0, 5)
+	dried_type = -1
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/New()
 	..()
+
+	if (dried_type == -1)
+		dried_type = src.type
 
 	//Handle some post-spawn var stuff.
 	spawn(1)
