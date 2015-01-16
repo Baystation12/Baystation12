@@ -53,4 +53,4 @@
 		if (istype(loc, /obj/item/device/aicard))
 			loc.icon_state = "aicard-404"
 
-	return ..(gibbed)
+	return ..(gibbed,"gives one shrill beep before falling lifeless.")
