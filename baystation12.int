@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\misc\fullscreen.dmi
+WINDOW: code\hub.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: icons icons\misc 
-FILE: icons\misc\fullscreen.dmi
+DIR: code icons icons\misc 
+FILE: code\hub.dm
 LAST_COMPILE_TIME: 1421345582
 AUTO_FILE_DIR: OFF
 */
