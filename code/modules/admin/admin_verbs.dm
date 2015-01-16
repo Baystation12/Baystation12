@@ -46,6 +46,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
+	/client/proc/rename_ai,				/*properly renames the AI*/
 	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
@@ -282,7 +283,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !check_rights(R_ADMIN)) 
+			if(config.debugparanoid && !check_rights(R_ADMIN))
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions
@@ -707,6 +708,17 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 	if(holder)
 		src.holder.output_ai_laws()
+
+/client/proc/rename_ai(mob/living/silicon/ai/AI in world)
+	set name = "Rename AI"
+	set category = "Admin"
+
+	if(holder)
+		var/new_name = trim_strip_input(src, "Enter new AI name. Leave blank or as is to cancel.", "Enter new AI Name", AI.name)
+		if(new_name && new_name != AI.name)
+			admin_log_and_message_admins("has renamed the AI '[AI.name]' to '[new_name]'")
+			AI.SetName(new_name)
+	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 //---- bs12 verbs ----
