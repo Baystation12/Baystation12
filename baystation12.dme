@@ -7,7 +7,6 @@
 #define FILE_DIR .
 // END_FILE_DIR
 // BEGIN_PREFERENCES
-#define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "code\global.dm"
@@ -317,6 +316,7 @@
 #include "code\game\machinery\machinery.dm"
 #include "code\game\machinery\magnet.dm"
 #include "code\game\machinery\mass_driver.dm"
+#include "code\game\machinery\monkeyrecycler.dm"
 #include "code\game\machinery\navbeacon.dm"
 #include "code\game\machinery\newscaster.dm"
 #include "code\game\machinery\OpTable.dm"
@@ -328,7 +328,6 @@
 #include "code\game\machinery\robot_fabricator.dm"
 #include "code\game\machinery\seed_extractor.dm"
 #include "code\game\machinery\Sleeper.dm"
-#include "code\game\machinery\slime_processor.dm"
 #include "code\game\machinery\spaceheater.dm"
 #include "code\game\machinery\status_display.dm"
 #include "code\game\machinery\suit_storage_unit.dm"

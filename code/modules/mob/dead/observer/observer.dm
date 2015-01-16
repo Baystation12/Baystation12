@@ -552,3 +552,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		W.message = message
 		W.add_hiddenprint(src)
 		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")
+
+
+/mob/dead/observer/verb/char_edit()
+	set category = "Ghost"
+	set name = "Edit character"
+	set desc = "Edit your saved characters while waiting. (Doesn't change your ghost's sprites!)"
+
+	set src = usr
+
+	client.prefs.ShowChoices(usr) //Let's see if this works.

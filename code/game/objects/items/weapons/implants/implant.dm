@@ -348,21 +348,21 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			H.visible_message("[H] buzzes for a second, the implant instantly frying.", "You see static for a moment, yet your integrity holds.")
 			return 0
 
-		var/implant_remembered_info = ""
-		implant_remembered_info += "<b>Your account number is:</b> #[H.stored_account_number]<br>"
-		implant_remembered_info += "<b>Your account pin is:</b> [H.stored_account_pin]<br>"
-		implant_remembered_info += "<b>Your account funds are:</b> $[H.stored_account_money]<br>"
+		//var/implant_remembered_info = ""
+		//implant_remembered_info += "<b>Your account number is:</b> #[H.stored_account_number]<br>"
+		//implant_remembered_info += "<b>Your account pin is:</b> [H.stored_account_pin]<br>"
+		//implant_remembered_info += "<b>Your account funds are:</b> $[H.stored_account_money]<br>"
 
 
-		H.mind.memory = null
-		H << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
-		H << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
-		H << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
-		H << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
-		H << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
-		H << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
-		H.mind.store_memory(implant_remembered_info)
-		H.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
+		//H.mind.memory = null
+		//H << "\blue You feel your mind blank, and a suggestive, whispering voice echos through your mind about the wonders of Nanotrasen."
+		//H << "<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.</b>"
+		//H << "<b>2. You will follow all Nanotrasen orders and commands.</b>"
+		//H << "<b>3. Criminals and violators of Corporate Regulations are to be apprehended.</b>"
+		//H << "<b>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.</b>"
+		//H << "<b>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>"
+		//H.mind.store_memory(implant_remembered_info)
+		//H.mind.store_memory("<b>1. You will not speak badly of Nanotrasen as a company under any circumstances.<br>2. You will follow all Nanotrasen orders and commands.<br>3. Criminals and violators of Corporate Regulations are to be apprehended.<br>4. You will not harm a crew member under any circumstances. You will give aid to station crew within your capabilities. Arresting a criminal crew member takes priority over giving them aid.<br>5. You will not harm or speak out against a Nanotrasen official under any circumstances.</b>")
 		return 1
 
 

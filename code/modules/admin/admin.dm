@@ -1246,3 +1246,13 @@ var/global/floorIsLava = 0
 //ALL DONE
 //*********************************************************************************************************
 //
+
+/datum/admins/proc/cancelfuelexplosion(var/obj/structure/reagent_dispensers/fueltank/T as obj)
+	set category = "Admin"
+	set name = "Cancel Fuel Explosion"
+	set desc="Stop that fuel tank explosion."
+
+	T.exploding = 0
+
+	usr << "Aborted explosion"
+	log_admin("[key_name(usr)] has stopped a fuel tank explosion.")

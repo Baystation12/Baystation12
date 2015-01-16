@@ -123,6 +123,16 @@
 
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey)
 
+	else if(href_list["cancelfuelexplosion"])
+		if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
+
+
+		var/tank = href_list["fueltank"]
+		var/target = locate(tank) //This is probably roundabout
+		if(!target) return
+
+		cancelfuelexplosion(target)
+
 	else if(href_list["editrights"])
 		if(!check_rights(R_PERMISSIONS))
 			message_admins("[key_name_admin(usr)] attempted to edit the admin permissions without sufficient rights.")
