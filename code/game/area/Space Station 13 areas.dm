@@ -604,6 +604,10 @@ var/list/ghostteleportlocs = list()
 	name = "Solitary Confinement"
 	icon_state = "brig"
 
+/area/prison/execution
+	name = "Execution Chamber"
+	icon_state = "brig"
+
 /area/prison/cell_block/A
 	name = "Prison Cell Block A"
 	icon_state = "brig"
@@ -706,6 +710,10 @@ var/list/ghostteleportlocs = list()
 
 /area/maintenance/evahallway
 	name = "\improper EVA Maintenance"
+	icon_state = "maint_eva"
+
+/area/maintenance/ghettosurgery
+	name = "\improper Ghetto Surgery"
 	icon_state = "maint_eva"
 
 /area/maintenance/dormitory
