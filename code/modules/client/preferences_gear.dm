@@ -517,7 +517,7 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_wear_suit
 
-/datum/gear/gponcho
+/datum/gear/bponcho
 	display_name = "poncho, blue"
 	path = /obj/item/clothing/suit/poncho/blue
 	cost = 3
@@ -529,7 +529,7 @@ var/global/list/gear_datums = list()
 	cost = 3
 	slot = slot_wear_suit
 
-/datum/gear/rponcho
+/datum/gear/pponcho
 	display_name = "poncho, purple"
 	path = /obj/item/clothing/suit/poncho/purple
 	cost = 3
