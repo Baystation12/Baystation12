@@ -126,8 +126,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define LEGCUFF_LAYER			19
 #define L_HAND_LAYER			20
 #define R_HAND_LAYER			21
-#define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
-#define FIRE_LAYER				23		//If you're on fire
+#define FIRE_LAYER				22		//If you're on fire
+#define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
 #define TOTAL_LAYERS			23
 //////////////////////////////////
 

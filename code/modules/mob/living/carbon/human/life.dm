@@ -1791,10 +1791,7 @@
 			thermal_protection += (head.max_heat_protection_temperature*THERMAL_PROTECTION_HEAD)
 	thermal_protection = round(thermal_protection)
 	if(thermal_protection >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
-		return
-	if(thermal_protection >= FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE)
 		bodytemperature += 11
-		return
 	else
 		bodytemperature += BODYTEMP_HEATING_MAX
 	return

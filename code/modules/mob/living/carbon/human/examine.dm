@@ -221,7 +221,7 @@
 					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
 	if(fire_stacks)
 		msg += "[t_He] [t_is] covered in some liquid.\n"
-	if(fire_stacks)
+	if(on_fire)
 		msg += "<span class='warning'>[t_He] [t_is] on fire!.</span>\n"
 	msg += "<span class='warning'>"
 

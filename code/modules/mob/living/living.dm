@@ -636,6 +636,7 @@
 		if(CM.on_fire && CM.canmove)
 			CM.fire_stacks -= 5
 			CM.Weaken(3)
+			CM.spin(32,2)
 			CM.visible_message("<span class='danger'>[CM] rolls on the floor, trying to put themselves out!</span>", \
 				"<span class='notice'>You stop, drop, and roll!</span>")
 			sleep(30)
@@ -855,3 +856,21 @@
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
+
+/mob/living/carbon/proc/spin(spintime, speed)
+	spawn()
+		var/D = dir
+		while(spintime >= speed)
+			sleep(speed)
+			switch(D)
+				if(NORTH)
+					D = EAST
+				if(SOUTH)
+					D = WEST
+				if(EAST)
+					D = SOUTH
+				if(WEST)
+					D = NORTH
+			set_dir(D)
+			spintime -= speed
+	return
