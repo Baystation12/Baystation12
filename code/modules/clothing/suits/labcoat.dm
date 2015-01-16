@@ -97,6 +97,18 @@
 			if("aeneasrinil_open")
 				src.icon_state = "aeneasrinil"
 				usr << "You button up the labcoat."
+			if("kidafrag_open")
+				src.icon_state = "kidafrag_buttoned"
+				src.icon_state = "kidafrag_buttoned"
+				usr << "You button up the coat."
+			if("kidafrag_buttoned")
+				src.icon_state = "kidafrag_zipped"
+				src.icon_state = "kidafrag_zipped"
+				usr << "You zip up the coat."
+			if("kidafrag_zipped")
+				src.icon_state = "kidafrag_open"
+				src.icon_state = "kidafrag_open"
+				usr << "You open the coat."
 			else
 				usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 				return

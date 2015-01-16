@@ -247,6 +247,8 @@ datum/preferences
 					language = "None"
 		if (species == "Tajaran")
 			species = "Tajara"
+		if (species == "kidan")
+			species = "Kidan"
 	update_preview_icon()
 	user << browse_rsc(preview_icon_front, "previewicon.png")
 	user << browse_rsc(preview_icon_side, "previewicon2.png")
