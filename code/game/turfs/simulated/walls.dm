@@ -273,7 +273,7 @@
 		user << rotting_touch_message
 		if(rotting_destroy_touch)
 			dismantle_wall()
-		return 1
+			return 1
 
 	if(..()) return 1
 
@@ -475,6 +475,9 @@
 
 	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
+	
+	else if(istype(W, /obj/item/weapon/reagent_containers))
+		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
 
 	else
 		return attack_hand(user)
