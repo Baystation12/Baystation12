@@ -77,7 +77,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		greet_changeling(changeling)
 
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 	..()
 	return
 

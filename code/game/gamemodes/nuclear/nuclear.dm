@@ -160,7 +160,7 @@ var/global/list/turf/synd_spawn = list()
 		the_bomb.r_code = nuke_code
 
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 
 	return ..()
 

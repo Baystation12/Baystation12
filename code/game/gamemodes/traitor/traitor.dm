@@ -72,7 +72,7 @@
 			greet_traitor(traitor)
 	modePlayer += traitors
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 	..()
 	return 1
 

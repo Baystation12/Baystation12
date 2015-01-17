@@ -94,7 +94,7 @@
 	if(emergency_shuttle)
 		emergency_shuttle.auto_recall = 1
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 	..()
 
 

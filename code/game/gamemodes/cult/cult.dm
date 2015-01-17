@@ -104,7 +104,7 @@
 		cult_mind.special_role = "Cultist"
 
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 	..()
 
 

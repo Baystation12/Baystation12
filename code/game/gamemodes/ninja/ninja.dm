@@ -65,7 +65,7 @@
 			var/obj/item/clothing/suit/space/space_ninja/S = N.wear_suit
 			S:randomize_param()
 	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	//	send_intercept()
 	return ..()
 
 /datum/game_mode/ninja/check_finished()

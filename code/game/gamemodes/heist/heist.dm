@@ -82,8 +82,8 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 		if(!config.objectives_disabled && raid_objectives)
 			raider.objectives = raid_objectives
 
-	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+//	spawn (rand(waittime_l, waittime_h))
+//		send_intercept()
 
 /datum/game_mode/proc/create_vox(var/datum/mind/newraider)
 

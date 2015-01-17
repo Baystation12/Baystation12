@@ -26,7 +26,7 @@
 /datum/game_mode/rp_revolution/announce()
 	world << "<B>The current game mode is - Revolution RP!</B>"
 
-/datum/game_mode/rp_revolution/send_intercept()
+/*/datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
 	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
 
@@ -52,7 +52,7 @@
 			comm.messagetext.Add(intercepttext)
 
 	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")
-
+*/
 /datum/game_mode/rp_revolution/post_setup()
 
 	var/list/revs_possible = list()
@@ -93,7 +93,7 @@
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 
-/datum/game_mode/rp_revolution/send_intercept()
+/*/datum/game_mode/rp_revolution/send_intercept()
 	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
 	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
 
@@ -139,7 +139,7 @@
 		spawn(12000)
 			command_alert("Repeating the previous message over intercoms due to urgency. The station has enemy operatives onboard by the names of [reveal_rev_heads()], please arrest them at once.", "The revolution leaders have been determined.")
 
-
+*/
 /datum/game_mode/rp_revolution/proc/reveal_rev_heads()
 	. = ""
 	for(var/i = 1, i <= head_revolutionaries.len,i++)
