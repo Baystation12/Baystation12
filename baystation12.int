@@ -1,8 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: maps\tgstation2.dmm;code\game\jobs\job\civilian_chaplain.dm;code\game\verbs\who.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
+DIR: code code\game code\game\jobs code\game\jobs\job code\game\verbs maps 
+FILE: code\game\verbs\who.dm
 LAST_COMPILE_TIME: 1421345582
 AUTO_FILE_DIR: OFF
 */
