@@ -1,10 +1,8 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\hub.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code icons icons\misc 
-FILE: code\hub.dm
+DIR: maps 
 LAST_COMPILE_TIME: 1421345582
 AUTO_FILE_DIR: OFF
 */
