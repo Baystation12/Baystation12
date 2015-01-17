@@ -70,6 +70,7 @@
 		dat += "<font color='red'>No seeds</font>"
 	else
 		dat += "<table style='text-align:center;'><tr><td>Name</td>"
+		dat += "<td>Variety</td>"
 		if ("stats" in scanner)
 			dat += "<td>E</td><td>Y</td><td>L</td><td>M</td><td>Pr</td><td>Pt</td><td>Harvest</td>"
 		if ("produce" in scanner)
@@ -85,6 +86,7 @@
 			var/datum/seed/seed = S.seed_type
 			dat += "<tr>"
 			dat += "<td>[S.name]</td>"
+			dat += "<td>#[seed.uid]</td>"
 			if ("stats" in scanner)
 				dat += "<td>[seed.endurance]</td><td>[seed.yield]</td><td>[seed.lifespan]</td><td>[seed.maturation]</td><td>[seed.production]</td><td>[seed.potency]</td>"
 				if(seed.harvest_repeat)
