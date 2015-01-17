@@ -205,7 +205,7 @@ var/global/list/uneatable = list(
 
 
 /obj/machinery/singularity/proc/eat()
-	set background = 1
+
 	// Let's just make this one loop.
 	for(var/atom/X in orange(grav_pull,src))
 		var/dist = get_dist(X, src)
@@ -561,7 +561,7 @@ var/global/list/uneatable = list(
 	grav_pull = 0
 
 /obj/machinery/singularity/narsie/wizard/eat()
-	set background = 1
+
 	for(var/atom/X in orange(consume_range,src))
 		if(isturf(X) || istype(X, /atom/movable))
 			consume(X)

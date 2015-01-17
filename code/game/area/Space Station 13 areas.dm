@@ -2038,7 +2038,7 @@ var/list/ghostteleportlocs = list()
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+
 
 		var/sound/S = null
 		var/sound_delay = 0
@@ -2160,7 +2160,7 @@ var/list/the_station_areas = list (
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+
 
 		var/sound/S = null
 		var/sound_delay = 0

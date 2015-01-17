@@ -222,7 +222,7 @@ var/world_topic_spam_protect_time = world.timeofday
 #define INACTIVITY_KICK	6000	//10 minutes in ticks (approx.)
 /world/proc/KickInactiveClients()
 	spawn(-1)
-		set background = 1
+
 		while(1)
 			sleep(INACTIVITY_KICK)
 			for(var/client/C in clients)
