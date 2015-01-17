@@ -9,6 +9,10 @@
 	var/trash = null
 	var/slice_path
 	var/slices_num
+	var/eatverb
+	var/dried_type = null
+	var/cooktype[0]
+	var/deepfried = 0
 	center_of_mass = list("x"=15, "y"=15)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -1290,6 +1294,10 @@
 		reagents.add_reagent("toxin", 1)
 		reagents.add_reagent("carbon", 3)
 		bitesize = 2
+
+		// it's burned! it should start off being classed as any cooktype that burns
+		cooktype["grilled"] = 1
+		cooktype["deep fried"] = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 	name = "Meat steak"
