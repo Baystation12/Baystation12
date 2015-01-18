@@ -45,6 +45,8 @@ var/global/datum/global_init/init = new ()
 	callHook("startup")
 	//Emergency Fix
 	load_mods()
+	//loads donators
+	load_donators()
 	//end-emergency fix
 
 	src.update_status()
