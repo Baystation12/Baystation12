@@ -57,15 +57,21 @@ var/global/list/image/splatter_cache=list()
 	if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
 		hasfeet = 0
 	if(perp.shoes && !perp.buckled)//Adding blood to shoes
-		perp.shoes.blood_color = basecolor
-		perp.shoes:track_blood = max(amount,perp.shoes:track_blood)
-		if(!perp.shoes.blood_overlay)
-			perp.shoes.generate_blood_overlay()
-		if(!perp.shoes.blood_DNA)
-			perp.shoes.blood_DNA = list()
-			perp.shoes.blood_overlay.color = basecolor
-			perp.shoes.overlays += perp.shoes.blood_overlay
-		perp.shoes.blood_DNA |= blood_DNA.Copy()
+		var/obj/item/clothing/shoes/S = perp.shoes
+		if(istype(S))
+			S.blood_color = basecolor
+			S.track_blood = max(amount,S.track_blood)
+			if(!S.blood_overlay)
+				S.generate_blood_overlay()
+			if(!S.blood_DNA)
+				S.blood_DNA = list()
+				S.blood_overlay.color = basecolor
+				S.overlays += S.blood_overlay
+			if(S.blood_overlay && S.blood_overlay.color != basecolor)
+				S.blood_overlay.color = basecolor
+				S.overlays.Cut()
+				S.overlays += S.blood_overlay
+			S.blood_DNA |= blood_DNA.Copy()
 
 	else if (hasfeet)//Or feet
 		perp.feet_blood_color = basecolor
@@ -108,13 +114,19 @@ var/global/list/image/splatter_cache=list()
         amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
-        name = "drips of blood"
-        desc = "It's red."
-        gender = PLURAL
-        icon = 'icons/effects/drip.dmi'
-        icon_state = "1"
-        random_icon_states = list("1","2","3","4","5")
-        amount = 0
+	name = "drips of blood"
+	desc = "It's red."
+	gender = PLURAL
+	icon = 'icons/effects/drip.dmi'
+	icon_state = "1"
+	random_icon_states = list("1","2","3","4","5")
+	amount = 0
+	var/list/drips = list()
+
+/obj/effect/decal/cleanable/blood/drip/New()
+	..()
+	spawn(1)
+		drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"

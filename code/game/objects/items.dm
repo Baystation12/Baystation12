@@ -115,10 +115,7 @@
 			size = "bulky"
 		if(5.0)
 			size = "huge"
-		else
-	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
-	var/custom_suffix = "It is a [size] item."
-	return ..(user, distance, suffix = custom_suffix)
+	return ..(user, distance, "", "It is a [size] item.")
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
