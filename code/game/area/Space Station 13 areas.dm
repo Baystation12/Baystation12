@@ -708,6 +708,10 @@ var/list/ghostteleportlocs = list()
 	name = "Engineering Maintenance"
 	icon_state = "maint_engineering"
 
+/area/maintenance/shadygarden
+	name = "\improper Shady Garden"
+	icon_state = "maint_engineering"
+
 /area/maintenance/evahallway
 	name = "\improper EVA Maintenance"
 	icon_state = "maint_eva"
