@@ -133,7 +133,7 @@
 		return 1
 
 
-
+/*
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
@@ -161,7 +161,7 @@
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_gen(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
-		return 1
+		return 1	*/
 
 /*/datum/job/virologist
 	title = "Virologist"

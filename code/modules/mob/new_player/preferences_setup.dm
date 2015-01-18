@@ -499,7 +499,7 @@ datum/preferences
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-med"), ICON_OVERLAY)
 						if(4)
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
-				if(GENETICIST)
+				/*if(GENETICIST)
 					clothes_s = new /icon('icons/mob/uniform.dmi', "geneticswhite_s")
 					clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
 					if(prob(1))
@@ -512,7 +512,7 @@ datum/preferences
 						if(3)
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel-gen"), ICON_OVERLAY)
 						if(4)
-							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
+							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)*/
 				if(VIROLOGIST)
 					clothes_s = new /icon('icons/mob/uniform.dmi', "virologywhite_s")
 					clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
