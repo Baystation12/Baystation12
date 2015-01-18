@@ -35,17 +35,18 @@
 		switch(zone) // strong punches can have effects depending on where they hit
 			if("head", "mouth", "eyes")
 				// Induce blurriness
-				target.visible_message("<span class='danger'>[target] looks dazed.</span>", "<span class='danger'>You see stars.</span>")
+				target.visible_message("<span class='danger'>[target] looks momentarily disoriented.</span>", "<span class='danger'>You see stars.</span>")
 				target.apply_effect(attack_damage*2, EYE_BLUR, armour)
 			if("l_arm", "l_hand")
 				if (target.l_hand)
 					// Disarm left hand
-					target.visible_message("<span class='danger'>[src] [pick("dropped", "let go off")] \the [target.l_hand][pick("", " with a scream")]!</span>")
+					//Urist McAssistant dropped the macguffin with a scream just sounds odd. Plus it doesn't work with NO_PAIN
+					target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [src]'s grasp!</span>")
 					target.drop_l_hand()
 			if("r_arm", "r_hand")
 				if (target.r_hand)
 					// Disarm right hand
-					target.visible_message("<span class='danger'>[src] [pick("dropped", "let go off")] \the [target.r_hand][pick("", " with a scream")]!</span>")
+					target.visible_message("<span class='danger'>\The [target.r_hand] was knocked right out of [src]'s grasp!</span>")
 					target.drop_r_hand()
 			if("chest")
 				if(!target.lying)
@@ -113,21 +114,30 @@
 			if("head", "mouth", "eyes")
 				// ----- HEAD ----- //
 				switch(attack_damage)
-					if(1 to 2)  user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
-					if(3 to 4)	user.visible_message("<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] gave [target] a resounding slap to the face!</span>")
-			if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_let", "l_foot", "r_foot")
+					if(1 to 2)
+						user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
+					if(3 to 4)
+						user.visible_message(pick(
+							80; "<span class='danger'>[user] [pick(attack_verb)] [target] in the head!</span>", //striking someone with a 'closed fist' is called punching them.
+							20; "<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>"
+							))
+					if(5)
+						user.visible_message(pick(
+							10; "<span class='danger'>[user] gave [target] a resounding slap to the face!</span>",
+							90; "<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [organ]!</span>"
+							))
+			else
 				// ----- BODY ----- //
 				switch(attack_damage)
 					if(1 to 2)	user.visible_message("<span class='danger'>[user] slapped [target]'s [organ]!</span>")
 					if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] slammed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
+					if(5)		user.visible_message("<span class='danger'>[user] smashed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
 	else
-		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>")
+		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>") //why do we have a separate set of verbs for lying targets?
 
 /datum/unarmed_attack/kick
-	attack_verb = list("kicked", "kneed")
-	attack_noun = list("kick", "knee strike")
+	attack_verb = list("kicked", "kicked", "kicked", "kneed")
+	attack_noun = list("kick", "kick", "kick", "knee strike")
 	attack_sound = "swing_hit"
 	damage = 0
 
@@ -161,7 +171,7 @@
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	switch(attack_damage)
-		if(1 to 2)	user.visible_message("<span class='danger'>[user] gave [target] a light [pick(attack_noun)] to the [organ]!</span>")
+		if(1 to 2)	user.visible_message("<span class='danger'>[user] threw [target] a glancing [pick(attack_noun)] to the [organ]!</span>") //it's not that they're kicking lightly, it's that the kick didn't quite connect
 		if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
 		if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
 
@@ -204,6 +214,6 @@
 	attack_damage = Clamp(attack_damage, 1, 5)
 
 	switch(attack_damage)
-		if(1 to 2)	user.visible_message("<span class='danger'>[user] [pick("clomped on", "treaded on")] [target]'s [organ]!</span>")
-		if(3 to 4)	user.visible_message("<span class='danger'>[pick("[user] stomped down on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down onto")] [target]'s [organ]!</span>")
-		if(5)		user.visible_message("<span class='danger'>[pick("[user] landed a devastating stomp on", "[user] stomped down hard on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down hard onto")] [target]'s [organ]!</span>")
+		if(1 to 2)	user.visible_message("<span class='danger'>[user] [pick("stepped on", "treaded on")] [target]'s [organ]!</span>") //stepped on conveys the same meaning and is more recognizable as an actual word than "clomped"
+		if(3 to 4)	user.visible_message("<span class='danger'>[pick("[user] stomped on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down onto")] [target]'s [organ]!</span>")
+		if(5)		user.visible_message("<span class='danger'>[pick("[user] landed a powerful stomp on", "[user] stomped down hard on", "[user] slammed \his [shoes ? copytext(shoes.name, 1, -1) : "foot"] down hard onto")] [target]'s [organ]!</span>") //Devastated lol. No. We want to say that the stomp was powerful or forceful, not that it /wrought devastation/
