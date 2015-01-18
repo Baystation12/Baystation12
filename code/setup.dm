@@ -247,7 +247,7 @@
 #define LEGS        96   //  LEG_LEFT | LEG_RIGHT
 #define FOOT_LEFT   128
 #define FOOT_RIGHT  256
-#define FEET        384  // FOOT_LEFT | FOOR_RIGHT
+#define FEET        384  // FOOT_LEFT | FOOT_RIGHT
 #define ARM_LEFT    512
 #define ARM_RIGHT   1024
 #define ARMS        1536 //  ARM_LEFT | ARM_RIGHT
@@ -721,7 +721,7 @@ var/list/be_special_flags = list(
 
 // These balance how easy or hard it is to create huge pressure gradients with pumps and filters.
 // Lower values means it takes longer to create large pressures differences.
-// Has no effect on pumping gasses from high pressure to low, only from low to high. Must be between 0 and 1.
+// Has no effect on pumping gasses from high pressure to low, only from low to high.
 #define ATMOS_PUMP_EFFICIENCY   2.5
 #define ATMOS_FILTER_EFFICIENCY 2.5
 
