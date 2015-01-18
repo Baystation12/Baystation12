@@ -45,7 +45,7 @@
  */
 /obj/item/clothing/head/bomb_hood
 	name = "bomb hood"
-	desc = "Use in case of bomb."
+	desc = "Use in case someone sets us up the bomb"
 	icon_state = "bombsuit"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 100, bio = 0, rad = 0)
@@ -56,7 +56,7 @@
 
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
-	desc = "A suit designed for safety when handling explosives."
+	desc = "Use in case someone sets us up the bomb."
 	icon_state = "bombsuit"
 	item_state = "bombsuit"
 	w_class = 4//bulky item

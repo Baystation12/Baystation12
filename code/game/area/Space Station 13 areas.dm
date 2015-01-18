@@ -1745,6 +1745,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Construction Area"
 	icon_state = "yellow"
 
+/area/expansionzone
+	name = "\improper Expansion Zone"
+	icon_state = "yellow"
+
 /area/construction/supplyshuttle
 	name = "\improper Supply Shuttle"
 	icon_state = "yellow"
