@@ -33,7 +33,7 @@
 
 	var/now_pushing = null
 
-	var/cameraFollow = null
+	var/mob/living/cameraFollow = null
 
 	var/tod = null // Time of death
 	var/update_slimes = 1

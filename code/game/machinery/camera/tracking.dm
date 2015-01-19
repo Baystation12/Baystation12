@@ -154,6 +154,7 @@
 		return
 
 	src << "Follow camera mode [forced ? "terminated" : "ended"]."
+	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
 /mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
@@ -162,6 +163,7 @@
 
 	U.cameraFollow = target
 	U << "Now tracking [target.name] on camera."
+	target.tracking_initiated()
 
 	spawn (0)
 		while (U.cameraFollow == target)
@@ -235,8 +237,6 @@ mob/living/proc/near_camera()
 	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
 /mob/living/silicon/robot/tracking_status()
-	if(scrambledcodes)
-		return TRACKING_NO_COVERAGE
 	. = ..()
 	if(. == TRACKING_NO_COVERAGE)
 		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
@@ -258,7 +258,24 @@ mob/living/proc/near_camera()
 		return
 
 	if(. == TRACKING_NO_COVERAGE)
-		return z in config.station_levels && hassensorlevel(src, SUIT_SENSOR_TRACKING) ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+		var/turf/T = get_turf(src)
+		if(T && (T.z in config.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
+			return TRACKING_POSSIBLE
+
+mob/living/proc/tracking_initiated()
+
+mob/living/silicon/robot/tracking_initiated()
+	tracking_entities++
+	if(tracking_entities == 1 && has_zeroth_law())
+		src << "<span class='warning'>Internal camera is currently being accessed.</span>"
+
+mob/living/proc/tracking_cancelled()
+
+mob/living/silicon/robot/tracking_initiated()
+	tracking_entities--
+	if(!tracking_entities && has_zeroth_law())
+		src << "<span class='notice'>Internal camera is no longer being accessed.</span>"
+
 
 #undef TRACKING_POSSIBLE
 #undef TRACKING_NO_COVERAGE

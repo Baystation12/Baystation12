@@ -11,7 +11,6 @@
 	var/mapping = 0//For the overview file, interesting bit of code.
 	circuit = /obj/item/weapon/circuitboard/security
 
-
 	attack_ai(var/mob/user as mob)
 		return attack_hand(user)
 
@@ -19,7 +18,7 @@
 		if (user.stat || ((get_dist(user, src) > 1 || !( user.canmove ) || user.blinded) && !istype(user, /mob/living/silicon))) //user can't see - not sure why canmove is here.
 			return null
 		if ( !current || !current.can_use() ) //camera doesn't work
-			current = null
+			reset_current()
 		user.reset_view(current)
 		return 1
 
@@ -81,7 +80,7 @@
 		else if(href_list["reset"])
 			if(src.z>6 || stat&(NOPOWER|BROKEN)) return
 			if(usr.stat || ((get_dist(usr, src) > 1 || !( usr.canmove ) || usr.blinded) && !istype(usr, /mob/living/silicon))) return
-			current = null
+			reset_current()
 			usr.check_eye(current)
 			return 1
 		else
@@ -113,7 +112,7 @@
 
 		if (!C.can_use() || user.stat || (get_dist(user, src) > 1 || user.machine != src || user.blinded || !( user.canmove ) && !istype(user, /mob/living/silicon)))
 			return 0
-		src.current = C
+		set_current(C)
 		check_eye(user)
 		use_power(50)
 		return 1
@@ -147,6 +146,27 @@
 			return
 		if(can_access_camera(jump_to))
 			switch_to_camera(user,jump_to)
+
+/obj/machinery/computer/security/proc/set_current(var/obj/machinery/camera/C)
+	if(current == C)
+		return
+
+	if(current)
+		reset_current()
+
+	src.current = C
+	if(current)
+		var/mob/living/L = current.loc
+		if(istype(L))
+			L.tracking_initiated()
+
+/obj/machinery/computer/security/proc/reset_current()
+	if(current)
+		var/mob/living/L = current.loc
+		if(istype(L))
+			L.tracking_cancelled()
+	current = null
+
 //Camera control: mouse.
 /atom/DblClick()
 	..()

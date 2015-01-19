@@ -200,7 +200,7 @@
 
 	Reset()
 		..()
-		current = null
+		reset_current()
 		for(var/mob/living/L in viewers(1))
 			if(!istype(L,/mob/living/silicon/ai) && L.machine == src)
 				L.reset_view(null)
@@ -259,13 +259,13 @@
 		if("show" in href_list)
 			var/obj/machinery/camera/C = locate(href_list["show"])
 			if(istype(C) && C.status)
-				current = C
+				set_current(C)
 				usr.reset_view(C)
 				interact()
 				return
 
 		if("keyselect" in href_list)
-			current = null
+			reset_current()
 			usr.reset_view(null)
 			key = input(usr,"Select a camera network key:", "Key Select", null) as null|anything in computer.list_files(/datum/file/camnet_key)
 			camera_list = null
@@ -276,6 +276,26 @@
 			else
 				usr << "The screen turns to static."
 			return
+
+/datum/file/program/security/proc/set_current(var/obj/machinery/camera/C)
+	if(current == C)
+		return
+
+	if(current)
+		reset_current()
+
+	src.current = C
+	if(current)
+		var/mob/living/L = current.loc
+		if(istype(L))
+			L.tracking_initiated()
+
+/datum/file/program/security/proc/reset_current()
+	if(current)
+		var/mob/living/L = current.loc
+		if(istype(L))
+			L.tracking_cancelled()
+	current = null
 
 			// Atlantis: Required for camnetkeys to work.
 /datum/file/program/security/hidden
