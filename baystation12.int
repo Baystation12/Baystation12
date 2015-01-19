@@ -1,31 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-WINDOW: code\game\verbs\who.dm;code\modules\mining\mine_items.dm;maps\tgstation2.dmm
+WINDOW: code\game\verbs\who.dm;code\modules\admin\verbs\adminsay.dm;code\modules\admin\verbs\deadsay.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\objects code\modules maps 
-FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1421193017
-=======
-WINDOW: maps\tgstation2.dmm;code\game\objects\structures\fence.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\datums code\defines code\defines\procs code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\events code\game\gamemodes\meteor code\game\jobs\job code\game\machinery\computer code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\items code\game\objects\items\stacks code\game\objects\structures code\game\turfs code\game\turfs\unsimulated maps 
-FILE: code\game\objects\structures\fence.dm
-LAST_COMPILE_TIME: 1421618981
->>>>>>> 6df5368938d59f31b8ea741fae515e909e0e247c
-=======
-WINDOW: maps\tgstation2.dmm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\datums code\defines code\defines\procs code\game code\game\area code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\events code\game\gamemodes\meteor code\game\jobs\job code\game\machinery\computer code\game\objects maps 
-FILE: maps\tgstation2.dmm
-<<<<<<< HEAD
+DIR: code code\game code\game\jobs\job code\game\machinery\computer code\game\verbs code\modules code\modules\admin code\modules\admin\verbs 
+FILE: code\modules\admin\verbs\adminsay.dm
 LAST_COMPILE_TIME: 1421657522
->>>>>>> 31b7354a6995bfd6121422c7e04edfe722427253
-=======
-LAST_COMPILE_TIME: 1421691686
->>>>>>> 09ce50571f296930adadefef91b3b10db411a6b6
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
