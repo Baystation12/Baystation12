@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm
+WINDOW: maps\tgstation2.dmm;code\game\objects\structures\fence.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\datums code\defines code\defines\procs code\game code\game\area code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\computer code\game\objects code\game\objects\effects code\game\objects\effects\decals maps 
-FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1421615912
+DIR: code code\datums code\defines code\defines\procs code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\events code\game\gamemodes\meteor code\game\jobs\job code\game\machinery\computer code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\items code\game\objects\items\stacks code\game\objects\structures code\game\turfs code\game\turfs\unsimulated maps 
+FILE: code\game\objects\structures\fence.dm
+LAST_COMPILE_TIME: 1421618981
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
