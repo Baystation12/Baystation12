@@ -6,15 +6,21 @@
 	icon_closed = "securecrate"
 	var/code = null
 	var/lastattempt = null
-	var/attempts = 3
+	var/attempts = 10
+	var/codelen = 4
 	locked = 1
-	var/min = 1
-	var/max = 10
 
 /obj/structure/closet/crate/secure/loot/New()
 	..()
-	code = rand(min,max)
-	var/loot = rand(1,30)
+	var/list/digits = list("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+	
+	code = ""
+	for(var/i = 0, i < codelen, i++)
+		var/dig = pick(digits)
+		code += dig
+		digits -= dig  // Player can enter codes with matching digits, but there are never matching digits in the answer
+	
+	var/loot = rand(1, 13)
 	switch(loot)
 		if(1)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/rum(src)
@@ -27,53 +33,40 @@
 			new/obj/item/clothing/suit/space(src)
 			new/obj/item/clothing/head/helmet/space(src)
 		if(3)
-			return
-		if(4)
 			new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
-		if(5 to 6)
+		if(4 to 5)
 			for(var/i = 0, i < 10, i++)
 				new/obj/item/weapon/ore/diamond(src)
-		if(7)
-			return
-		if(8)
-			return
-		if(9)
+		if(6)
 			for(var/i = 0, i < 3, i++)
 				new/obj/machinery/portable_atmospherics/hydroponics(src)
-		if(10)
+		if(7)
 			for(var/i = 0, i < 3, i++)
 				new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)
-		if(11 to 13)
+		if(8 to 10)
 			new/obj/item/weapon/melee/classic_baton(src)
-		if(14)
-			return
-		if(15)
+		if(11)
 			new/obj/item/clothing/under/chameleon(src)
 			for(var/i = 0, i < 7, i++)
 				new/obj/item/clothing/tie/horrible(src)
-		if(16)
+		if(12)
 			new/obj/item/clothing/under/shorts(src)
 			new/obj/item/clothing/under/shorts/red(src)
 			new/obj/item/clothing/under/shorts/blue(src)
-		//Dummy crates start here.
-		if(17 to 29)
-			return
-		//Dummy crates end here.
-		if(30)
+		if(13)
 			new/obj/item/weapon/melee/baton(src)
 
 /obj/structure/closet/crate/secure/loot/togglelock(mob/user as mob)
 	if(locked)
 		user << "<span class='notice'>The crate is locked with a Deca-code lock.</span>"
-		var/input = input(usr, "Enter digit from [min] to [max].", "Deca-Code Lock", "") as num
+		var/input = input(usr, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
 		if(in_range(src, user))
-			input = Clamp(input, 0, 10)
 			if (input == code)
 				user << "<span class='notice'>The crate unlocks!</span>"
 				locked = 0
 				overlays.Cut()
 				overlays += greenlight
-			else if (input == null || input > max || input < min)
+			else if (input == null || length(input) != codelen)
 				user << "<span class='notice'>You leave the crate alone.</span>"
 			else
 				user << "<span class='warning'>A red light flashes.</span>"
@@ -96,19 +89,26 @@
 		if (istype(W, /obj/item/weapon/card/emag))
 			user << "<span class='notice'>The crate unlocks!</span>"
 			locked = 0
-		if (istype(W, /obj/item/device/multitool))
+		if (istype(W, /obj/item/device/multitool)) // Greetings Urist McProfessor, how about a nice game of cows and bulls?
 			user << "<span class='notice'>DECA-CODE LOCK REPORT:</span>"
 			if (attempts == 1)
 				user << "<span class='warning'>* Anti-Tamper Bomb will activate on next failed access attempt.</span>"
 			else
 				user << "<span class='notice'>* Anti-Tamper Bomb will activate after [src.attempts] failed access attempts.</span>"
-			if (lastattempt == null)
-				user << "<span class='notice'> has been made to open the crate thus far.</span>"
-				return
-			// hot and cold
-			if (code > lastattempt)
-				user << "<span class='notice'>* Last access attempt lower than expected code.</span>"
-			else
-				user << "<span class='notice'>* Last access attempt higher than expected code.</span>"
+			if (lastattempt != null)
+				var/list/guess = list()
+				var/bulls = 0
+				var/cows = 0
+				for(var/i = 1, i < codelen + 1, i++)
+					var/a = copytext(lastattempt, i, i+1) // Stuff the code into the list
+					guess += a
+					guess[a] = i
+				for(var/i in guess) // Go through list and count matches
+					var/a = findtext(code, i)
+					if(a == guess[i])
+						++bulls
+					else if(a)
+						++cows
+				user << "<span class='notice'>Last code attempt had [bulls] correct digits at correct positions and [cows] correct digits at incorrect positions.</span>"
 		else ..()
 	else ..()
