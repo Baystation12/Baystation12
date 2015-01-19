@@ -143,6 +143,15 @@
 		desc = ""
 		drill_verb = "drilling"
 
+	safe
+		name = "Safety Pickaxe"
+		icon_state = "pickaxe"
+		item_state = "pickaxe"
+		digspeed = 50
+		force = 1.0
+		throwforce = 1.0
+		desc = "A safer version of the pickaxe, specially designed for dangerous criminals."
+
 /*****************************Shovel********************************/
 
 /obj/item/weapon/shovel
