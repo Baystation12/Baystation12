@@ -45,3 +45,13 @@
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 		else			// Mentors get same message without fancy coloring of name if special_role.
 			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1,1,0)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+
+/client/proc/cmd_dev_say(msg as text)
+	set category = "Special Verbs"
+	set name = "devsay"
+	set hidden = 1
+
+	if(!check_rights(R_DEBUG))	return
+
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	log_admin("<b><font color='#50a7a9'>DEV: [key_name(src)] : [msg]</font></b>")

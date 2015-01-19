@@ -20,12 +20,15 @@
 
 	var/stafftype = null
 
+	if (src.holder.rights & R_DEBUG)
+		stafftype = "DEV"
+
 	if (src.holder.rights & R_MOD)
 		stafftype = "MOD"
 
 	if (src.holder.rights & R_MENTOR)
 		stafftype = "MENTOR"
-		
+
 	if (src.holder.rights & R_ADMIN)
 		stafftype = "ADMIN"
 
