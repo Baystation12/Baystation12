@@ -78,7 +78,7 @@ var/blobevent = 0
 var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-var/station_name = "NSS Exodus"
+var/station_name = "Apollo Station 18"
 var/game_version = "Baystation12"
 var/changelog_hash = ""
 var/game_year = (text2num(time2text(world.realtime, "YYYY")) + 544)
@@ -215,7 +215,7 @@ var/list/AAlarmWireColorToIndex
 #define shuttle_time_to_arrive 6000 // 10 minutes to arrive
 
 	//away missions
-var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to
+//var/list/awaydestinations = list()	//a list of landmarks that the warpgate can take you to
 
 	// MySQL configuration
 

@@ -50,7 +50,7 @@
 
 
 	proc/Pulse(var/pulse = 0, var/origin_dir = 0)//Todo: Fix spaceblob expand
-		set background = 1
+
 		if(!istype(src,/obj/effect/blob/core) && !istype(src,/obj/effect/blob/node))//Ill put these in the children later
 			if(run_action())//If we can do something here then we dont need to pulse more
 				return

@@ -381,7 +381,7 @@
 	icon_state = "asteroid"
 	oxygen = 0.01
 	nitrogen = 0.01
-	temperature = T0C
+	temperature = 0
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail

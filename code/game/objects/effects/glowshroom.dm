@@ -101,7 +101,7 @@
 			potency += rand(4,6)
 
 /obj/effect/glowshroom/proc/CalcDir(turf/location = loc)
-	set background = 1
+
 	var/direction = 16
 
 	for(var/wallDir in cardinal)

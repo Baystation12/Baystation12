@@ -604,6 +604,10 @@ var/list/ghostteleportlocs = list()
 	name = "Solitary Confinement"
 	icon_state = "brig"
 
+/area/prison/execution
+	name = "Execution Chamber"
+	icon_state = "brig"
+
 /area/prison/cell_block/A
 	name = "Prison Cell Block A"
 	icon_state = "brig"
@@ -704,8 +708,16 @@ var/list/ghostteleportlocs = list()
 	name = "Engineering Maintenance"
 	icon_state = "maint_engineering"
 
+/area/maintenance/shadygarden
+	name = "\improper Shady Garden"
+	icon_state = "maint_engineering"
+
 /area/maintenance/evahallway
 	name = "\improper EVA Maintenance"
+	icon_state = "maint_eva"
+
+/area/maintenance/ghettosurgery
+	name = "\improper Ghetto Surgery"
 	icon_state = "maint_eva"
 
 /area/maintenance/dormitory
@@ -1733,6 +1745,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Construction Area"
 	icon_state = "yellow"
 
+/area/expansionzone
+	name = "\improper Expansion Zone"
+	icon_state = "yellow"
+
 /area/construction/supplyshuttle
 	name = "\improper Supply Shuttle"
 	icon_state = "yellow"
@@ -2030,7 +2046,7 @@ var/list/ghostteleportlocs = list()
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+
 
 		var/sound/S = null
 		var/sound_delay = 0
@@ -2152,7 +2168,7 @@ var/list/the_station_areas = list (
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+
 
 		var/sound/S = null
 		var/sound_delay = 0

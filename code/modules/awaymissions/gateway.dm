@@ -7,21 +7,6 @@
 	anchored = 1
 	var/active = 0
 
-
-/obj/machinery/gateway/initialize()
-	update_icon()
-	if(dir == 2)
-		density = 0
-
-
-/obj/machinery/gateway/update_icon()
-	if(active)
-		icon_state = "on"
-		return
-	icon_state = "off"
-
-
-
 //this is da important part wot makes things go
 /obj/machinery/gateway/centerstation
 	density = 1
@@ -33,6 +18,19 @@
 	var/ready = 0				//have we got all the parts for a gateway?
 	var/wait = 0				//this just grabs world.time at world start
 	var/obj/machinery/gateway/centeraway/awaygate = null
+
+/* Stuff for away missions - Unused at the moment.
+/obj/machinery/gateway/initialize()
+	update_icon()
+	if(dir == 2)
+		density = 0
+
+
+/obj/machinery/gateway/update_icon()
+	if(active)
+		icon_state = "on"
+		return
+	icon_state = "off"
 
 /obj/machinery/gateway/centerstation/initialize()
 	update_icon()
@@ -234,3 +232,5 @@ obj/machinery/gateway/centerstation/process()
 			user << "\blue <b>Recalibration successful!</b>: \black This gate's systems have been fine tuned.  Travel to this gate will now be on target."
 			calibrated = 1
 			return
+
+*/

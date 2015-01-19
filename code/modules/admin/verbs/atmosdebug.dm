@@ -1,12 +1,12 @@
 /client/proc/atmosscan()
 	set category = "Mapping"
 	set name = "Check Piping"
-	set background = 1
+
 	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	feedback_add_details("admin_verb","CP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	
+
 	if(alert("WARNING: This command should not be run on a live server. Do you want to continue?", "Check Piping", "No", "Yes") == "No")
 		return
 

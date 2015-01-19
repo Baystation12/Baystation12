@@ -32,8 +32,10 @@
 			if(!speaker_mask) speaker_mask = speaker.name
 			if(name == "Wryn Hivemind")
 				msg = "<i><span class='game say'>[name], <span class='name'>A voice</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+				log_say("[name]/[key] : [message]")
 			else
 				msg = "<i><span class='game say'>[name], <span class='name'>[speaker_mask]</span> <span class='message'>[speech_verb], \"<span class='[colour]'>[message]</span><span class='message'>\"</span></span></i>"
+				log_say("[name]/[key] : [message]")
 			player << "[msg]"
 
 /datum/language/proc/check_special_condition(var/mob/other)

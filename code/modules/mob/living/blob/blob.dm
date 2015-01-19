@@ -28,7 +28,7 @@
 
 	Life()
 		set invisibility = 0
-		set background = 1
+
 
 		clamp_values()
 		UpdateDamage()

@@ -53,7 +53,7 @@
 
 /*
 	Pulse(var/pulse = 0, var/origin_dir = 0)//Todo: Fix spaceblob expand
-		set background = 1
+
 		if(pulse > 20)	return
 		//Looking for another blob to pulse
 		var/list/dirs = list(1,2,4,8)

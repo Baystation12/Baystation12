@@ -1,11 +1,19 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+<<<<<<< HEAD
 WINDOW: code\game\verbs\who.dm;code\modules\mining\mine_items.dm;maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 506.1249
 DIR: code code\game code\game\objects code\modules maps 
 FILE: maps\tgstation2.dmm
 LAST_COMPILE_TIME: 1421193017
+=======
+WINDOW: maps\tgstation2.dmm;code\game\objects\structures\fence.dm
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\datums code\defines code\defines\procs code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\events code\game\gamemodes\meteor code\game\jobs\job code\game\machinery\computer code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\items code\game\objects\items\stacks code\game\objects\structures code\game\turfs code\game\turfs\unsimulated maps 
+FILE: code\game\objects\structures\fence.dm
+LAST_COMPILE_TIME: 1421618981
+>>>>>>> 6df5368938d59f31b8ea741fae515e909e0e247c
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
