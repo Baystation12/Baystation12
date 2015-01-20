@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\defines code\defines\procs code\game code\game\objects code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon 
-LAST_COMPILE_TIME: 1421716317
+WINDOW: maps\tgstation2.dmm;code\modules\clothing\spacesuits\rig.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\defines\procs code\game\area code\game\machinery code\game\machinery\computer code\game\objects code\js code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\clothing code\modules\clothing\spacesuits code\modules\mob\dead icons icons\mob icons\obj icons\obj\clothing maps 
+FILE: code\modules\clothing\spacesuits\rig.dm
+LAST_COMPILE_TIME: 1421790473
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

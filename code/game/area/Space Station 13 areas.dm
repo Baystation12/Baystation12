@@ -1909,18 +1909,22 @@ var/list/ghostteleportlocs = list()
 // Labor Camp
 /area/laborcamp
 	name = "Labor Camp"
-	icon_state = "Labor Camp"
+	icon_state = "brig"
 
 /area/laborcamp/cargohold
 	name = "\improper Cargohold"
 	icon_state = "brig"
 
-/area/laborcamp/mineequip
-	name = "\improper Mining Equipment"
+/area/laborcamp/armory
+	name = "\improper Armory"
 	icon_state = "brig"
 
-/area/laborcamp/powerstorage
-	name = "\improper Power Equipment"
+/area/laborcamp/office
+	name = "\improper Office"
+	icon_state = "brig"
+
+/area/laborcamp/officebackroom
+	name = "\improper Office Backroom"
 	icon_state = "brig"
 
 /area/laborcamp/atmosphericsequip
@@ -1941,6 +1945,22 @@ var/list/ghostteleportlocs = list()
 
 /area/laborcamp/guardpostsouth
 	name = "\improper Guard Post South"
+	icon_state = "brig"
+
+/area/laborcamp/medical
+	name = "\improper Medical Room"
+	icon_state = "brig"
+
+/area/laborcamp/recreation
+	name = "\improper Recreation"
+	icon_state = "brig"
+
+/area/laborcamp/hallwaynorth
+	name = "\improper North Wing"
+	icon_state = "brig"
+
+/area/laborcamp/hallwaysouth
+	name = "\improper South Wing"
 	icon_state = "brig"
 
 
