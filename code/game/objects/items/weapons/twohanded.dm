@@ -114,8 +114,8 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	force = 10
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 15
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_wielded = 40
@@ -159,8 +159,8 @@
 	flags = FPRINT | TABLEPASS | NOSHIELD
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_TORCH
+	edge = 25
 
 /obj/item/weapon/twohanded/dualsaber/update_icon()
 	icon_state = "dualsaber[wielded]"
@@ -196,7 +196,7 @@
 	throwforce = 20
 	throw_speed = 3
 	edge = 0
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")

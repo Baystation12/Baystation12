@@ -1689,21 +1689,20 @@ datum/preferences
 	for(var/name in organ_data)
 
 		var/status = organ_data[name]
-		var/datum/organ/external/O = character.organs_by_name[name]
+		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
 				O.status |= ORGAN_DESTROYED
-				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
 		else
-			var/datum/organ/internal/I = character.internal_organs_by_name[name]
-			if(I)
+			var/obj/item/organ/internal/I = character.internal_organs_by_name[name]
+			if(I) // TODO: no more 'assisted'
 				if(status == "assisted")
-					I.mechassist()
+					I.roboticize()
 				else if(status == "mechanical")
-					I.mechanize()
+					I.roboticize()
 
 	if(underwear > underwear_m.len || underwear < 1)
 		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES

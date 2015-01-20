@@ -123,16 +123,16 @@
 	if(state < GRAB_AGGRESSIVE)
 		if(!allow_upgrade)
 			return
-		assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
+		assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting.name] aggressively (now hands)!</span>")
 		state = GRAB_AGGRESSIVE
 		icon_state = "grabbed1"
 	else
 		if(state < GRAB_NECK)
 			if(isslime(affecting))
-				assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
+				assailant << "<span class='notice'>You squeeze [affecting.name], but nothing interesting happens.</span>"
 				return
 
-			assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
+			assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting.name] (now neck)!</span>")
 			state = GRAB_NECK
 			icon_state = "grabbed+1"
 			if(!affecting.buckled)
@@ -144,7 +144,7 @@
 			hud.name = "disarm/kill"
 		else
 			if(state < GRAB_UPGRADING)
-				assailant.visible_message("<span class='danger'>[assailant] starts to tighten \his grip on [affecting]'s neck!</span>")
+				assailant.visible_message("<span class='danger'>[assailant] starts to tighten \his grip on [affecting.name]'s neck!</span>")
 				hud.icon_state = "disarm/kill1"
 				state = GRAB_UPGRADING
 				if(do_after(assailant, UPGRADE_KILL_TIMER))
@@ -157,7 +157,7 @@
 						del(src)
 						return
 					state = GRAB_KILL
-					assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
+					assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting.name]'s neck!</span>")
 					affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>"
 					assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
 					msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
@@ -165,7 +165,7 @@
 					assailant.next_move = world.time + 10
 					affecting.losebreath += 1
 				else
-					assailant.visible_message("<span class='warning'>[assailant] was unable to tighten \his grip on [affecting]'s neck!</span>")
+					assailant.visible_message("<span class='warning'>[assailant] was unable to tighten \his grip on [affecting.name]'s neck!</span>")
 					hud.icon_state = "disarm/kill"
 					state = GRAB_NECK
 
@@ -207,12 +207,12 @@
 
 		if(can_eat)
 			var/mob/living/carbon/attacker = user
-			user.visible_message("<span class='danger'>[user] is attempting to devour [affecting]!</span>")
+			user.visible_message("<span class='danger'>[user] is attempting to devour [affecting.name]!</span>")
 			if(can_eat == 2)
 				if(!do_mob(user, affecting)||!do_after(user, 30)) return
 			else
 				if(!do_mob(user, affecting)||!do_after(user, 100)) return
-			user.visible_message("<span class='danger'>[user] devours [affecting]!</span>")
+			user.visible_message("<span class='danger'>[user] devours [affecting.name]!</span>")
 			affecting.loc = user
 			attacker.stomach_contents.Add(affecting)
 			del(src)

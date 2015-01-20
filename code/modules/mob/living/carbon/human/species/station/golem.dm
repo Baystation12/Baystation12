@@ -17,10 +17,12 @@
 	flesh_color = "#137E8F"
 
 	has_organ = list(
-		"brain" = /datum/organ/internal/brain/golem
+		"brain" = /obj/item/organ/internal/brain/golem
 		)
 
 	death_message = "becomes completely motionless..."
+
+	tissues = list("adamantine")
 
 /datum/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(H.mind)

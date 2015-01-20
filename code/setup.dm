@@ -528,7 +528,7 @@
 #define DROWSY		"drowsy"
 
 ///////////////////ORGAN DEFINES///////////////////
-
+#define PROCESS_ACCURACY 10
 #define ORGAN_CUT_AWAY 1
 #define ORGAN_GAUZED 2
 #define ORGAN_ATTACHABLE 4
@@ -537,13 +537,34 @@
 #define ORGAN_DESTROYED 64
 #define ORGAN_ROBOT 128
 #define ORGAN_SPLINTED 256
-#define SALVED 512
+#define ORGAN_SALVED 512
 #define ORGAN_DEAD 1024
 #define ORGAN_MUTATED 2048
+// Tissue status flags
+#define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
+#define TISSUE_INFECTS 2     // Tissue can become infected.
+#define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.
+#define TISSUE_SUPPORTS 8    // This is a structural tissue.
+// Wound status flags.
+#define WOUND_BURN 1
+#define WOUND_BRUISE 2
+#define WOUND_CUT 3
+
+#define WOUND_OPEN 1
+#define WOUND_RETRACTED 2
+#define WOUND_SUTURED 3
+
+// Tool values
+#define HARDNESS_SCALPEL 5
+#define HARDNESS_SAW 10
+#define HARDNESS_TORCH 15
+
+#define WOUND_CLOSED 0
+#define WOUND_OPEN 1
+#define WOUND_RETRACTED 2
+#define WOUND_SUTURED 3
 
 #define ROUNDSTART_LOGOUT_REPORT_TIME 6000 //Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
-
-
 
 //Please don't edit these values without speaking to Errorage first	~Carn
 //Admin Permissions

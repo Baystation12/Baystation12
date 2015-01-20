@@ -43,7 +43,7 @@
 
 	force = 15 //Smashing bottles over someoen's head hurts.
 
-	var/datum/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
+	var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
 
 	var/armor_block = 0 //Get the target's armour values for normal attack damage.
 	var/armor_duration = 0 //The more force the bottle has, the longer the duration.
@@ -101,8 +101,8 @@
 	throw_range = 5
 	item_state = "beer"
 	attack_verb = list("stabbed", "slashed", "attacked")
-	sharp = 1
-	edge = 0
+	sharp = HARDNESS_SCALPEL
+	edge = 5
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/weapon/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

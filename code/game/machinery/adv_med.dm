@@ -346,7 +346,7 @@
 	dat += "<th>Other Wounds</th>"
 	dat += "</tr>"
 
-	for(var/datum/organ/external/e in occ["external_organs"])
+	for(var/obj/item/organ/external/e in occ["external_organs"])
 		var/AN = ""
 		var/open = ""
 		var/infected = ""
@@ -359,21 +359,23 @@
 
 		dat += "<tr>"
 
-		for(var/datum/wound/W in e.wounds) if(W.internal)
-			internal_bleeding = "<br>Internal bleeding"
-			break
-		if(istype(e, /datum/organ/external/chest) && occ["lung_ruptured"])
-			lung_ruptured = "Lung ruptured:"
+		//for(var/datum/wound/W in e.wounds)
+		//	if(W.internal)
+		//		internal_bleeding = "<br>Internal bleeding"
+		//		break
+
+		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
+			lung_ruptured = "lung ruptured"
 		if(e.status & ORGAN_SPLINTED)
-			splint = "Splinted:"
+			splint = "splinted"
 		if(e.status & ORGAN_BLEEDING)
-			bled = "Bleeding:"
+			bled = "bleeding"
 		if(e.status & ORGAN_BROKEN)
-			AN = "[e.broken_description]:"
+			AN = "broken"
 		if(e.status & ORGAN_ROBOT)
-			robot = "Prosthetic:"
-		if(e.open)
-			open = "Open:"
+			robot = "prosthetic"
+		if(e.is_open())
+			open = "open"
 
 		switch (e.germ_level)
 			if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
@@ -404,18 +406,16 @@
 		if(!AN && !open && !infected & !imp)
 			AN = "None:"
 		if(!(e.status & ORGAN_DESTROYED))
-			dat += "<td>[e.display_name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+			dat += "<td>[e]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
 		else
-			dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
+			dat += "<td>[e]</td><td>-</td><td>-</td><td>Not Found</td>"
 		dat += "</tr>"
 
-	for(var/datum/organ/internal/i in occ["internal_organs"])
+	for(var/obj/item/organ/internal/i in occ["internal_organs"])
 
 		var/mech = ""
-		if(i.robotic == 1)
-			mech = "Assisted:"
-		if(i.robotic == 2)
-			mech = "Mechanical:"
+		if(i.status & ORGAN_ROBOT)
+			mech = "mechanical"
 
 		var/infection = "None"
 		switch (i.germ_level)
@@ -433,7 +433,7 @@
 				infection = "Acute Infection++:"
 
 		dat += "<tr>"
-		dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
+		dat += "<td>[i.name]</td><td>N/A</td><td>[i.is_damaged()]</td><td>[infection]:[mech]</td><td></td>"
 		dat += "</tr>"
 	dat += "</table>"
 

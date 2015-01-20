@@ -4,7 +4,7 @@
 	name = "glass shard"
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 1
 	desc = "Could probably be used as ... a throwing weapon?"
 	w_class = 2.0
@@ -80,7 +80,7 @@
 				return
 
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
-				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
+				var/obj/item/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
 				if(affecting.take_damage(5, 0))
