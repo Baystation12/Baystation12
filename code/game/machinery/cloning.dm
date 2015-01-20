@@ -182,6 +182,7 @@
 	clonemind.transfer_to(H)
 	H.ckey = R.ckey
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
+	H << "<span class='notice'><b>You are now suffering from Cloning Memory Disorder. You do not remember dying, and you cannot recall any memories up to 30 minutes before your death.</b></span>"
 
 	// -- Mode/mind specific stuff goes here
 	callHook("clone", list(H))

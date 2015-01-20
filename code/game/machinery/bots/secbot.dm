@@ -69,8 +69,8 @@
 	var/list/preparing_arrest_sounds = new('sound/voice/bgod.ogg', 'sound/voice/biamthelaw.ogg', 'sound/voice/bsecureday.ogg', 'sound/voice/bradio.ogg', 'sound/voice/binsult.ogg', 'sound/voice/bcreep.ogg')
 
 /obj/machinery/bot/secbot/beepsky
-	name = "Officer Beep O'sky"
-	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
+	name = "Officer Byond"
+	desc = "It's James Byond! He takes his assistants beaten, not battered."
 	idcheck = 0
 	auto_patrol = 1
 
