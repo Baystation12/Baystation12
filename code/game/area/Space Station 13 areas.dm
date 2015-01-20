@@ -977,11 +977,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "law"
 
 
-
-
-
-
-
 /area/holodeck
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
@@ -1035,15 +1030,6 @@ var/list/ghostteleportlocs = list()
 
 /area/holodeck/source_space
 	name = "\improper Holodeck - Space"
-
-
-
-
-
-
-
-
-
 
 
 //Engineering
@@ -1208,6 +1194,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "teleporter"
 	music = "signal"
 	ambience = list('sound/ambience/ambimalf.ogg')
+
 
 //MedBay
 
@@ -1745,6 +1732,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Construction Area"
 	icon_state = "yellow"
 
+/area/expansionzone
+	name = "\improper Expansion Zone"
+	icon_state = "yellow"
+
 /area/construction/supplyshuttle
 	name = "\improper Supply Shuttle"
 	icon_state = "yellow"
@@ -1914,6 +1905,43 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Telecommunications Satellite Lounge"
 	icon_state = "tcomsatlounge"
 
+
+// Labor Camp
+/area/laborcamp
+	name = "Labor Camp"
+	icon_state = "Labor Camp"
+
+/area/laborcamp/cargohold
+	name = "\improper Cargohold"
+	icon_state = "brig"
+
+/area/laborcamp/mineequip
+	name = "\improper Mining Equipment"
+	icon_state = "brig"
+
+/area/laborcamp/powerstorage
+	name = "\improper Power Equipment"
+	icon_state = "brig"
+
+/area/laborcamp/atmosphericsequip
+	name = "\improper Atmospherics Equipment"
+	icon_state = "brig"
+
+/area/laborcamp/yard
+	name = "\improper Yard"
+	icon_state = "brig"
+
+/area/laborcamp/yardairlock
+	name = "\improper Yard Airlock"
+	icon_state = "brig"
+
+/area/laborcamp/guardpostnorth
+	name = "\improper Guard Post North"
+	icon_state = "brig"
+
+/area/laborcamp/guardpostsouth
+	name = "\improper Guard Post South"
+	icon_state = "brig"
 
 
 // Away Missions

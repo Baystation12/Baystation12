@@ -61,6 +61,7 @@ h1.alert, h2.alert		{color: #000000;}
 
 .mod					{color: #735638;	font-weight: bold;}
 .modooc					{color: #184880;	font-weight: bold;}
+.dev					{color: #005900;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}

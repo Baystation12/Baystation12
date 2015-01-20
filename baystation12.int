@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;code\game\objects\explosion.dm;code\modules\admin\verbs\adminhelp.dm;code\modules\admin\verbs\adminsay.dm;code\modules\admin\admin_verbs.dm;code\modules\supermatter\supermatter.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\objects code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\supermatter code\WorkInProgress code\WorkInProgress\carn icons icons\turf 
-FILE: code\game\objects\explosion.dm
-LAST_COMPILE_TIME: 1421715742
+DIR: code code\defines code\defines\procs code\game code\game\objects code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon 
+LAST_COMPILE_TIME: 1421716317
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

@@ -3,6 +3,7 @@
 	desc = "A ridable electric car designed for pulling cargo trolleys."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "cargo_engine"
+
 	on = 0
 	powered = 1
 	locked = 0
@@ -10,6 +11,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	mob_offset_y = 7
+	var/car_type = 0 // Specifies the type of train, 0 for cargo, 1 for science, 2 for security
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
@@ -25,7 +27,8 @@
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
 	icon = 'icons/obj/vehicles.dmi'
-	icon_state = "cargo_trailer"
+	icon_state = "trailer"
+
 	anchored = 0
 	passenger_allowed = 0
 	locked = 0
@@ -47,13 +50,20 @@
 	overlays += I
 	turn_off()	//so engine verbs are correctly set
 
+	if( car_type == 2 )
+		icon_state = "security_engine"
+	else if( car_type == 1 )
+		icon_state = "science_engine"
+	else
+		icon_state = "cargo_engine"
+
 /obj/vehicle/train/cargo/engine/Move()
 	if(on && cell.charge < charge_use)
 		turn_off()
 		update_stats()
 		if(load && is_train_head())
 			load << "The drive motor briefly whines, then drones to a stop."
-	
+
 	if(is_train_head() && !on)
 		return 0
 
@@ -81,6 +91,7 @@
 		icon_state = initial(icon_state) + "_open"
 	else
 		icon_state = initial(icon_state)
+
 
 /obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
 	return
@@ -118,7 +129,7 @@
 
 		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
 		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
-		
+
 		if(on)
 			verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
 		else
@@ -129,7 +140,7 @@
 
 	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
 	verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
-	
+
 	if(!on)
 		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
 	else
@@ -180,7 +191,7 @@
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(get_dist(usr,src) <= 1)
 		usr << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 		usr << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
@@ -192,7 +203,7 @@
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(on)
 		usr << "The engine is already running."
 		return
@@ -210,10 +221,10 @@
 	set name = "Stop engine"
 	set category = "Object"
 	set src in view(1)
-	
+
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(!on)
 		usr << "The engine is already stopped."
 		return
@@ -229,10 +240,10 @@
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
-	
+
 	if(!key || (load && load != usr))
 		return
-	
+
 	if(on)
 		turn_off()
 
@@ -291,7 +302,7 @@
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)
 	src.train_length = train_length
 	src.active_engines = active_engines
-	
+
 	if(!lead && !tow)
 		anchored = 0
 		if(verbs.Find(/atom/movable/verb/pull))
