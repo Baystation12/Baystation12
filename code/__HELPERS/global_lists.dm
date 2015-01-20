@@ -100,7 +100,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
-	
+
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		language_keys[":[lowertext(L.key)]"] = L

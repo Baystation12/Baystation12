@@ -16,6 +16,8 @@
 			entry = "<b>{<font color='#FF9933'>Dev</font>} ~ </b> [C.key]"
 		else if(is_donator(C))
 			entry = "<b>{<font color='#990099'>Donator</font>} ~ </b> [C.key]"
+		else if(is_event_staff(C))
+			entry = "<b>{<font color='#009933'>Event</font>} ~ </b> [C.key]"
 		else
 			entry = "<b>{<font color='#666666'>Player</font>} ~ </b> [C.key]"
 

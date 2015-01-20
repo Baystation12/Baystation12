@@ -128,9 +128,6 @@
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
-	if(holder)
-		admins += src
-		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]
@@ -153,6 +150,8 @@
 		world.update_status()
 
 	if(holder)
+		admins += src
+		holder.owner = src
 		add_admin_verbs()
 		admin_memo_show()
 

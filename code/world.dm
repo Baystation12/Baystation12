@@ -47,6 +47,8 @@ var/global/datum/global_init/init = new ()
 	load_mods()
 	//loads donators
 	load_donators()
+	//loads event staff
+	load_event_staff()
 	//end-emergency fix
 
 	src.update_status()
