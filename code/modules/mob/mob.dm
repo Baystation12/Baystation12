@@ -1087,7 +1087,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 		affected.implants -= selection
 		for(var/datum/wound/wound in affected.wounds)
 			if(wound.embedded == selection)
-				wound.expand(selection.edge+rand(1,3),0,species.tissues.len)
+				wound.expand(selection.edge+rand(1,3),0,H.species.tissues.len)
 				H.shock_stage+=(20*wound.depth)
 				break
 
