@@ -106,7 +106,8 @@ var/list/admin_verbs_fun = list(
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/virus2_editor
 	)
 var/list/admin_verbs_server = list(
 	/client/proc/Set_Holiday,
@@ -282,7 +283,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)
 			verbs += admin_verbs_debug
-			if(config.debugparanoid && !check_rights(R_ADMIN)) 
+			if(config.debugparanoid && !check_rights(R_ADMIN))
 				verbs.Remove(admin_verbs_paranoid_debug)			//Right now it's just callproc but we can easily add others later on.
 		if(holder.rights & R_POSSESS)		verbs += admin_verbs_possess
 		if(holder.rights & R_PERMISSIONS)	verbs += admin_verbs_permissions

@@ -30,7 +30,7 @@
 			infectionchance = rand(10,20)
 		else
 			infectionchance = rand(60,90)
-	
+
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
@@ -133,6 +133,7 @@
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
 		newholder.effect = new holder.effect.type
+		newholder.effect.generate(holder.effect.data)
 		newholder.chance = holder.chance
 		newholder.cure = holder.cure
 		newholder.multiplier = holder.multiplier
@@ -174,6 +175,12 @@ var/global/list/virusDB = list()
 	if ("[uniqueID]" in virusDB)
 		var/datum/data/record/V = virusDB["[uniqueID]"]
 		.= V.fields["name"]
+
+/datum/disease2/disease/proc/get_basic_info()
+	var/t = ""
+	for(var/datum/disease2/effectholder/E in effects)
+		t += ", [E.effect.name]"
+	return "[name()] ([copytext(t,3)])"
 
 /datum/disease2/disease/proc/get_info()
 	var/r = {"

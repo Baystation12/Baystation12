@@ -1,5 +1,5 @@
 /obj/machinery/disease2/incubator/
-	name = "Pathogenic incubator"
+	name = "pathogenic incubator"
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/virology.dmi'
@@ -108,6 +108,7 @@
 				dish.virus2.majormutate()
 				if(dish.info)
 					dish.info = "OUTDATED : [dish.info]"
+					dish.basic_info = "OUTDATED: [dish.basic_info]"
 					dish.analysed = 0
 				ping("\The [src] pings, \"Mutant viral strain detected.\"")
 			else if(prob(5))

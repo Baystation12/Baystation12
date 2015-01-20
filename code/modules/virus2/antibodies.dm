@@ -3,30 +3,38 @@
 // reserving some numbers for later special antigens
 var/global/const/ANTIGEN_A  = 1
 var/global/const/ANTIGEN_B  = 2
-var/global/const/ANTIGEN_RH = 4
-var/global/const/ANTIGEN_Q  = 8
-var/global/const/ANTIGEN_U  = 16
-var/global/const/ANTIGEN_V  = 32
-var/global/const/ANTIGEN_X  = 64
-var/global/const/ANTIGEN_Y  = 128
-var/global/const/ANTIGEN_Z  = 256
-var/global/const/ANTIGEN_M  = 512
-var/global/const/ANTIGEN_N  = 1024
-var/global/const/ANTIGEN_P  = 2048
-var/global/const/ANTIGEN_O  = 4096
+var/global/const/ANTIGEN_C  = 4
+var/global/const/ANTIGEN_D  = 8
+var/global/const/ANTIGEN_E  = 16
+var/global/const/ANTIGEN_M  = 32
+var/global/const/ANTIGEN_N  = 64
+var/global/const/ANTIGEN_O  = 128
+var/global/const/ANTIGEN_P  = 256
+var/global/const/ANTIGEN_Q  = 512
+var/global/const/ANTIGEN_U  = 1024
+var/global/const/ANTIGEN_V  = 2048
+var/global/const/ANTIGEN_W  = 4096
+var/global/const/ANTIGEN_X  = 8192
+var/global/const/ANTIGEN_Y  = 16384
+var/global/const/ANTIGEN_Z  = 32768
 
 var/global/list/ANTIGENS = list(
 "[ANTIGEN_A]" = "A",
 "[ANTIGEN_B]" = "B",
-"[ANTIGEN_RH]" = "RH",
+"[ANTIGEN_C]" = "C",
+"[ANTIGEN_E]" = "E",
+"[ANTIGEN_D]" = "D",
+"[ANTIGEN_M]" = "M",
+"[ANTIGEN_N]" = "N",
+"[ANTIGEN_O]" = "O",
+"[ANTIGEN_P]" = "P",
 "[ANTIGEN_Q]" = "Q",
 "[ANTIGEN_U]" = "U",
 "[ANTIGEN_V]" = "V",
-"[ANTIGEN_Z]" = "Z",
-"[ANTIGEN_M]" = "M",
-"[ANTIGEN_N]" = "N",
-"[ANTIGEN_P]" = "P",
-"[ANTIGEN_O]" = "O"
+"[ANTIGEN_W]" = "W",
+"[ANTIGEN_X]" = "X",
+"[ANTIGEN_Y]" = "Y",
+"[ANTIGEN_Z]" = "Z"
 )
 
 // pure concentrated antibodies
