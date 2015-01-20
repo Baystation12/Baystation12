@@ -72,6 +72,12 @@ var/list/ai_status_emotions = list(
 	var/emote = input("Please, select a status!", "AI Status", null, null) in ai_emotions
 	src.emotion = emote
 
+/obj/machinery/ai_status_display/process()
+	if(stat & NOPOWER)
+		remove_display()
+		return
+	update()
+
 /obj/machinery/ai_status_display/proc/update()
 	if(mode==0) //Blank
 		overlays.Cut()
@@ -91,3 +97,7 @@ var/list/ai_status_emotions = list(
 	if(overlays.len)
 		overlays.Cut()
 	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+
+/obj/machinery/ai_status_display/proc/remove_display()
+	if(overlays.len)
+		overlays.Cut()
