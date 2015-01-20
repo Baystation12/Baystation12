@@ -45,7 +45,6 @@
 	var/initialhealth = health
 
 	if(silicate)
-		world << "[silicate] silicate, damage is reduced from [damage] to [round(damage * (1 - silicate / 200))]"
 		damage = damage * (1 - silicate / 200)
 
 	health = max(0, health - damage)
