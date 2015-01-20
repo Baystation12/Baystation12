@@ -66,15 +66,20 @@
 	return
 
 /obj/machinery/turretid/proc/can_use(mob/user)
+	if(ailock && issilicon(user))
+		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+		return 0
+
 	if (get_dist(src, user) > 0 && !issilicon(user))
 		user << "<span class='notice'>You are too far away.</span>"
 		user.unset_machine()
 		user << browse(null, "window=turretid")
 		return 0
 
-	if(ailock && issilicon(user))
-		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
+	if(locked && !issilicon(user))
+		user << "<span class='notice'>Access denied.</span>"
 		return 0
+
 	return 1
 
 /obj/machinery/turretid/attackby(obj/item/weapon/W, mob/user)
@@ -124,7 +129,9 @@
 	if (!istype(loc, /area))
 		return
 	var/area/area = loc
-	var/dat = ""
+	var/dat = text({"Status: []<BR>
+				Behaviour controls are [locked ? "locked" : "unlocked"]"},
+				"<A href='?src=\ref[src];operation=toggleon'>[enabled ? "On" : "Off"]</A>" )
 
 	if(!locked || issilicon(user))
 		dat += text({"<BR><BR>
