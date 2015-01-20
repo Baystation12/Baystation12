@@ -43,6 +43,7 @@ var/list/ai_status_emotions = list(
 		if(istype(M, /obj/machinery/ai_status_display))
 			var/obj/machinery/ai_status_display/AISD = M
 			AISD.emotion = emote
+			AISD.update()
 		//if Friend Computer, change ALL displays
 		else if(istype(M, /obj/machinery/status_display))
 
@@ -73,10 +74,7 @@ var/list/ai_status_emotions = list(
 	src.emotion = emote
 
 /obj/machinery/ai_status_display/process()
-	if(stat & NOPOWER)
-		remove_display()
-		return
-	update()
+	return
 
 /obj/machinery/ai_status_display/proc/update()
 	if(mode==0) //Blank
@@ -98,6 +96,10 @@ var/list/ai_status_emotions = list(
 		overlays.Cut()
 	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
 
-/obj/machinery/ai_status_display/proc/remove_display()
-	if(overlays.len)
-		overlays.Cut()
+/obj/machinery/ai_status_display/power_change()
+	..()
+	if(stat & NOPOWER)
+		if(overlays.len)
+			overlays.Cut()
+	else
+		update()
