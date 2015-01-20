@@ -16,7 +16,6 @@
 	var/shardtype = /obj/item/weapon/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
-	var/icon/silicateIcon = null // the silicated icon
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
@@ -72,16 +71,13 @@
 		updateSilicate()
 
 /obj/structure/window/proc/updateSilicate()
-	if(!silicate)
-		icon = initial(icon)
-		return
+	if (overlays)
+		overlays.Cut()
 
-	var/icon/I = icon(initial(icon))
-	var/r = (silicate / 100) + 1
-	var/g = (silicate / 70) + 1
-	var/b = (silicate / 50) + 1
-	I.SetIntensity(r,g,b)
-	icon = I
+	var/image/img = image(src.icon, src.icon_state)
+	img.color = "#ffffff"
+	img.alpha = silicate * 255 / 100
+	overlays += img
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
