@@ -35,23 +35,29 @@
 		if("head", "mouth", "eyes")
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
-				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")] [pick("", "", "", "with spread [pick(attack_noun)]")]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[pick("[user] [pick(attack_verb)] [target] across \his face!", "[user] rakes \his [pick(attack_noun)] across [target]'s face!")]</span>")
-		if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
+				if(1 to 2)
+					user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
+				if(3 to 4)
+					user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")]!</span>") //'with spread claws' sounds a little bit odd, just enough that conciseness is better here I think
+				if(5)
+					user.visible_message(pick(
+						"<span class='danger'>[user] rakes \his [pick(attack_noun)] across [target]'s face!</span>",
+						"<span class='danger'>[user] tears \his [pick(attack_noun)] into [target]'s face!</span>",
+						))
+		else
 			// ----- BODY ----- //
 			switch(attack_damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target]'s [affecting.display_name]!</span>")
 				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("", "", "the side of")] [target]'s [affecting.display_name]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.display_name]!</span>")
 
 /datum/unarmed_attack/claws/strong
-	attack_verb = list("slash")
+	attack_verb = list("slashed")
 	damage = 10
 	shredding = 1
 
 /datum/unarmed_attack/bite/strong
-	attack_verb = list("maul")
+	attack_verb = list("mauled")
 	damage = 15
 	shredding = 1
 
