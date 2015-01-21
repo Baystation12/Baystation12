@@ -360,7 +360,7 @@
 	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
 	icon_state = "rig0-mining-prisoner"
 	item_state = "mining_helm"
-	item_color = "mining"
+	item_color = "mining-prisoner"
 	armor = list(melee = 20, bullet = 0, laser = 0, energy = 5, bomb = 55, bio = 100, rad = 20)
 
 /obj/item/clothing/suit/space/rig/mining/prisoner

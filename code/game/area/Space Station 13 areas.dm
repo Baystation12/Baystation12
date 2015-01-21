@@ -321,6 +321,14 @@ var/list/ghostteleportlocs = list()
 	icon_state = "yellow"
 	requires_power = 0
 
+/area/shuttle/laborcamp/station
+	name = "\improper Labor Camp Shuttle"
+	icon_state = "shuttlered"
+
+/area/shuttle/laborcamp/outpost
+	name = "\improper Labor Camp Shuttle"
+	icon_state = "shuttlered"
+
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
