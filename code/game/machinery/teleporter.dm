@@ -121,8 +121,10 @@
 				areaindex[tmpname] = 1
 			L[tmpname] = I
 
-	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
-	if(get_dist(src, usr) > 1)
+	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
+	if(!desc)
+		return
+	if(get_dist(src, usr) > 1 && !issilicon(usr))
 		return
 
 	src.locked = L[desc]
