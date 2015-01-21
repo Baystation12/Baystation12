@@ -102,7 +102,7 @@
 						spawned_obj.desc += " It is made of [source_material]."
 					else
 						spawned_obj.desc = "It is made of [source_material]."
-				source_material.loc = null
+				del(source_material)
 
 			spawn_progress_time = 0
 			max_spawn_time = rand(30,100)
