@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\mob\say.dm;code\modules\admin\verbs\adminsay.dm;code\world.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\defines code\defines\procs code\game code\game\objects code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon 
-LAST_COMPILE_TIME: 1421716317
+DIR: code 
+FILE: code\world.dm
+LAST_COMPILE_TIME: 1421854205
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
