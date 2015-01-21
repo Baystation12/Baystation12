@@ -67,8 +67,7 @@
 /datum/surgery_step/open_encased/retract
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
-	/obj/item/weapon/crowbar = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/crowbar = 75
 	)
 
 	min_duration = 30
@@ -124,8 +123,7 @@
 /datum/surgery_step/open_encased/close
 	allowed_tools = list(
 	/obj/item/weapon/retractor = 100, 	\
-	/obj/item/weapon/crowbar = 75,	\
-	/obj/item/weapon/kitchen/utensil/fork = 20
+	/obj/item/weapon/crowbar = 75
 	)
 
 	min_duration = 20

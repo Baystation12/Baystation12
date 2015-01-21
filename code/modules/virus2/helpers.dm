@@ -72,16 +72,15 @@ proc/airborne_can_reach(turf/source, turf/target)
 		return
 	if(M.reagents.has_reagent("spaceacillin"))
 		return
-
-	if(istype(M,/mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/chimp = M
-		if (!(chimp.greaterform in disease.affected_species))
-			return
-
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/chump = M
-		if (!(chump.species.name in disease.affected_species))
-			return
+	
+	if(!disease.affected_species.len)
+		return
+	
+	if (!(M.species.name in disease.affected_species))
+		if (forced)
+			disease.affected_species[1] = M.species.name
+		else
+			return //not compatible with this species
 
 //	log_debug("Infecting [M]")
 
@@ -96,20 +95,22 @@ proc/airborne_can_reach(turf/source, turf/target)
 		M.virus2["[D.uniqueID]"] = D
 		M.hud_updateflag |= 1 << STATUS_HUD
 
+//Infects mob M with disease D
+/proc/infect_mob(var/mob/living/carbon/M, var/datum/disease2/disease/D)
+	infect_virus2(M,D,1)
+	M.hud_updateflag |= 1 << STATUS_HUD
+
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
-	D.makerandom()
-	D.infectionchance = 1
-	infect_virus2(M,D,1)
-	M.hud_updateflag |= 1 << STATUS_HUD
+	D.makerandom(1)
+	infect_mob(M, D)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
-	D.makerandom(1)
-	infect_virus2(M,D,1)
-	M.hud_updateflag |= 1 << STATUS_HUD
+	D.makerandom(2)
+	infect_mob(M, D)
 
 //Fancy prob() function.
 /proc/dprob(var/p)
