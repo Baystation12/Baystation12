@@ -1307,6 +1307,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Exam Room"
 	icon_state = "exam_room"
 
+/area/medical/storage
+	name = "\improper Stroage Room"
+	icon_state = "medbay3"
+
 /area/medical/genetics
 	name = "\improper Genetics Lab"
 	icon_state = "genetics"
