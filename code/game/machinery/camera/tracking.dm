@@ -236,7 +236,11 @@
 	return 1
 
 /proc/trackable(var/mob/living/M)
-	return near_camera(M) || (M.loc.z in config.station_levels && hassensorlevel(M, SUIT_SENSOR_TRACKING))
+	var/turf/T = get_turf(M)
+	if(T && (T.z in config.station_levels) && hassensorlevel(M, SUIT_SENSOR_TRACKING))
+		return 1
+
+	return near_camera(M)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))

@@ -307,7 +307,7 @@ var/global/datum/controller/radio/radio_controller
 	//1 = radio transmission
 	//2 = subspace transmission
 
-	var/data = list()
+	var/list/data = list()
 	var/encryption
 
 	var/frequency = 0
