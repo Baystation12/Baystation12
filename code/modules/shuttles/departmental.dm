@@ -15,3 +15,9 @@
 	shuttle_tag = "Research"
 	//req_access = list(access_research)
 	circuit = /obj/item/weapon/circuitboard/research_shuttle
+
+/obj/machinery/computer/shuttle_control/laborcamp
+	name = "labor camp shuttle console"
+	shuttle_tag = "Labor Camp"
+	//req_one_access_txt = "11;24"
+	circuit = /obj/item/weapon/circuitboard/laborcamp_shuttle
