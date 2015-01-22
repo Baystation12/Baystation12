@@ -5,7 +5,7 @@ obj/structure/firedoor_assembly
 	icon_state = "door_construction"
 	anchored = 0
 	opacity = 0
-	density = 0
+	density = 1
 	var/wired = 0
 
 obj/structure/firedoor_assembly/update_icon()
@@ -35,7 +35,7 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			user << "<span class='notice'>You cut the wires!</span>"
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			wired = 0
-	
+
 	else if(istype(C, /obj/item/weapon/airalarm_electronics) && wired)
 		if(anchored)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -48,7 +48,6 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			user << "<span class='warning'>You must secure \the [src] first!</span>"
 	else if(istype(C, /obj/item/weapon/wrench))
 		anchored = !anchored
-		density = !density
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")
