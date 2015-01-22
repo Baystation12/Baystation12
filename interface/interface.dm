@@ -29,7 +29,11 @@
 	set desc = "Show Server Rules."
 	set hidden = 1
 	src << browse(file(RULES_FILE), "window=rules;size=480x320")
-#undef RULES_FILE
+	if(prefs.readrules != read_the_rules)
+		prefs.readrules = read_the_rules
+		prefs.save_preferences()
+		winset(src, "rpane.rulesb", "background-colour=none;font-style=;")
+	#undef RULES_FILE
 
 /client/verb/hotkeys_help()
 	set name = "hotkeys-help"

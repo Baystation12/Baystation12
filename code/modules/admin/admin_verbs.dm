@@ -9,6 +9,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
 //	/client/proc/check_antagonists,		/*shows all antags*/
 	/client/proc/cmd_mentor_check_new_players
+	/client/proc/fules
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
 var/list/admin_verbs_admin = list(
@@ -77,6 +78,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */
+	/client/proc/clean,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
+	/client/proc/fules
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -128,7 +133,8 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
-	/client/proc/nanomapgen_DumpImage
+	/client/proc/nanomapgen_DumpImage,
+	/client/proc/nuke
 	)
 var/list/admin_verbs_debug = list(
         /client/proc/getruntimelog,                     /*allows us to access runtime logs to somebody*/
@@ -155,6 +161,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/toggledebuglogs,
 	/client/proc/SDQL_query,
 	/client/proc/SDQL2_query,
+	/client/proc/cleartox,
+	/client/proc/fillspace
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -170,7 +178,9 @@ var/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
 var/list/admin_verbs_rejuv = list(
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/freeze,
+	/client/proc/freezemecha
 	)
 
 //verbs which can be hidden - needs work
@@ -241,8 +251,13 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/enable_debug_verbs,
+	/client/proc/nuke,
 	/proc/possess,
-	/proc/release
+	/proc/release,
+	/client/proc/fules,
+	/client/proc/clean,
+	/client/proc/freeze,
+	/client/proc/freezemecha
 	)
 var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
@@ -259,7 +274,9 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_panel,
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
-	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/fules,
+	/client/proc/clean
 )
 
 var/list/admin_verbs_mentor = list(
@@ -309,7 +326,12 @@ var/list/admin_verbs_mentor = list(
 		admin_verbs_rejuv,
 		admin_verbs_sounds,
 		admin_verbs_spawn,
-		debug_verbs
+		debug_verbs,
+		/client/proc/nuke,
+		/client/proc/fules,
+		/client/proc/freeze,
+		/client/proc/freezemecha,
+		/client/proc/clean
 		)
 
 /client/proc/hide_most_verbs()//Allows you to keep some functionality while hiding some verbs

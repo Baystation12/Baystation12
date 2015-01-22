@@ -34,7 +34,7 @@
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/color/orange
-	name = "orange jumpsuit"
+	name = "orange prisoner jumpsuit"
 	desc = "It's standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
 	icon_state = "orange"
 	item_state = "o_suit"

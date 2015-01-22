@@ -106,3 +106,23 @@
 	w_class = 2
 	var/voicechange = 0
 	siemens_coefficient = 0.9
+	
+/obj/item/clothing/mask/flower
+	name = "paper flower"
+	icon = 'icons/moraak/items/papercrafts.dmi'
+	icon_override = 'icons/mob/mask.dmi'
+	desc = "A Paper flower."
+	item_state = "paperflower"
+	icon_state = "paperflower"
+	flags = FPRINT|TABLEPASS
+	slot_flags = SLOT_MASK
+	body_parts_covered = FACE|EYES
+
+/obj/item/clothing/mask/flower/attackby(var/obj/item/I, mob/user as mob)
+	if(istype(I, /obj/item/weapon/scissors))
+		var/obj/item/clothing/head/paperflower/F = new /obj/item/clothing/head/paperflower
+		user.before_take_item(src)
+		user.put_in_hands(F)
+		user << "<span class='notice'>You snip the stem off the flower.</span>"
+		del src
+	..()

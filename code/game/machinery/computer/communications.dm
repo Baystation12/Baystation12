@@ -365,6 +365,8 @@
 			dat += "Current alert level: [get_security_level()]<BR>"
 			if(security_level == SEC_LEVEL_DELTA)
 				dat += "<font color='red'><b>The self-destruct mechanism is active. Find a way to deactivate the mechanism to lower the alert level or evacuate.</b></font>"
+			if(security_level == SEC_LEVEL_GAMMA)
+				dat += "<font color='red'><b>In light of recent events, a nuclear warhead has been fired from the defensive perimeter to liquidate our assets. The station will be impacted in 15 seconds, and by the end of this transmission you will probably already be deceased. It was nice knowing you...</b></font>"
 			else
 				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_BLUE]'>Blue</A><BR>"
 				dat += "<A HREF='?src=\ref[src];operation=securitylevel;newalertlevel=[SEC_LEVEL_GREEN]'>Green</A>"

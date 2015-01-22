@@ -104,6 +104,11 @@
 	path = /obj/item/weapon/kitchenknife
 	category = "General"
 
+/datum/autolathe/recipe/scissors
+	name = "scissors"
+	path = /obj/item/weapon/scissors
+	category = "General"
+	
 /datum/autolathe/recipe/taperecorder
 	name = "tape recorder"
 	path = /obj/item/device/taperecorder

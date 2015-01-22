@@ -50,6 +50,7 @@
 	//general preferences
 	S["ooccolor"]			>> ooccolor
 	S["lastchangelog"]		>> lastchangelog
+	S["readrules"]		>>readrules
 	S["UI_style"]			>> UI_style
 	S["be_special"]			>> be_special
 	S["default_slot"]		>> default_slot
@@ -60,6 +61,7 @@
 	//Sanitize
 	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
+	readrules		= sanitize_text(readrules, initial(readrules))
 	UI_style		= sanitize_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
 	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
 	default_slot	= sanitize_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
@@ -80,6 +82,7 @@
 	//general preferences
 	S["ooccolor"]			<< ooccolor
 	S["lastchangelog"]		<< lastchangelog
+	S["readrules"]		<< readrules
 	S["UI_style"]			<< UI_style
 	S["be_special"]			<< be_special
 	S["default_slot"]		<< default_slot

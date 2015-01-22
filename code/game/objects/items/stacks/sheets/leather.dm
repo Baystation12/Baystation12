@@ -94,6 +94,8 @@
 	if(	istype(W, /obj/item/weapon/kitchenknife) || \
 		istype(W, /obj/item/weapon/kitchen/utensil/knife) || \
 		istype(W, /obj/item/weapon/twohanded/fireaxe) || \
+		istype(W, /obj/item/weapon/scissors) || \
+		istype(W, /obj/item/weapon/improvised/scissorknife) || \
 		istype(W, /obj/item/weapon/hatchet) )
 
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)

@@ -27,7 +27,9 @@
 				update_icon()
 				name = n
 
-
+/turf/simulated/floor/steps
+	name = "steps"
+	icon_state = "ramptop"
 
 /turf/simulated/floor/wood
 	name = "floor"

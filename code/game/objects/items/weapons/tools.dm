@@ -475,3 +475,69 @@
 
 	else
 		return ..()
+
+//Half of a scissor... Ow
+
+/obj/item/weapon/improvised/scissorknife
+	name = "Makeshift knife"
+	desc = "The seperated part of a scissor. Where's the other half?"
+	icon = 'icons/moraak/items/improvised.dmi'
+	icon_state = "scissor-knife"
+	item_state = "scissor"
+	force = 10
+	throwforce = 10.0
+	throw_speed = 4
+	throw_range = 10
+	attack_verb = list("slices", "cuts", "stabs", "jabs")
+	sharp = 1
+	w_class = 2
+
+	suicide_act(mob/user)
+		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src]! It looks like \he's trying to commit suicide.</b>", \
+							"\red <b>[user] is slitting \his throat with the [src]! It looks like \he's trying to commit suicide.</b>")
+		return (BRUTELOSS)
+
+/obj/item/weapon/improvised/scissorknife/attackby(var/obj/item/I, mob/user as mob)
+	..()
+	if(istype(I, /obj/item/weapon/improvised/scissorknife))
+		var/obj/item/weapon/scissors/assembly/N = new /obj/item/weapon/scissors/assembly
+
+		user.before_take_item(I)
+		user.before_take_item(src)
+
+		user.put_in_hands(N)
+		user << "<span class='notice'>You slide one knife into another, forming a loose pair of scissors</span>"
+
+		del(I)
+		del(src)
+
+
+/obj/item/weapon/shiv
+	name = "shiv"
+	desc = "A small improvised blade made out of a glass shard. Looks like it could do some damage to a kidney or two..."
+	icon = 'icons/moraak/items/improvised.dmi'
+	icon_state = "shiv"
+	item_state = "shard-glass"
+	force = 11
+	throwforce = 5
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("stabbed", "slashed", "sliced", "cut")
+	w_class = 2.0
+	sharp = 1
+
+	suicide_act(mob/user)
+		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src]! It looks like \he's trying to commit suicide.</b>", \
+							"\red <b>[user] is slitting \his throat with the [src]! It looks like \he's trying to commit suicide.</b>")
+		return (BRUTELOSS)
+
+/obj/item/weapon/shard/attackby(var/obj/item/I, mob/user as mob)
+	..()
+	if(istype(I, /obj/item/weapon/bedsheet))
+		var/obj/item/weapon/shiv/S = new /obj/item/weapon/shiv
+		user.before_take_item(I)
+		user.before_take_item(src)
+
+		user.put_in_hands(S)
+		user << "<span class='notice'>You carefully wrap the bedsheet around the shard to form a crude grip.</span>"
+		del(I)
+		del(src)

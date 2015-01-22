@@ -95,7 +95,8 @@
 	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
-
+	var/alert_desc_gamma = "In light of recent events, a nuclear warhead has been fired from the defensive perimeter to liquidate our assets. The station will be impacted in 15 seconds, and by the end of this transmission you will probably already be deceased. It was nice knowing you..."
+	
 	var/forbid_singulo_possession = 0
 
 	//game_options.txt configs
@@ -409,6 +410,9 @@
 				if("alert_delta")
 					config.alert_desc_delta = value
 
+				if("alert_gamma")
+					config.alert_desc_gamma = value
+				
 				if("forbid_singulo_possession")
 					forbid_singulo_possession = 1
 
