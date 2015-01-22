@@ -144,6 +144,7 @@
 	name = "Winter Is Coming"
 	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep the station from freezing during planetary occultation!\""
 
+/* too ugly
 /datum/poster/bay_30
 	icon_state="bsposter30"
 	name = "Ambrosia Vulgaris"
@@ -158,6 +159,7 @@
 	icon_state="bsposter32"
 	name = "Eat!"
 	desc = "A poster depicting a hamburger. The poster orders you to consume the hamburger."
+*/
 
 /datum/poster/bay_33
 	icon_state="bsposter33"
