@@ -41,6 +41,7 @@ datum/preferences
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/readrules = ""
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
@@ -53,7 +54,7 @@ datum/preferences
 	var/be_random_name = 0				//whether we are a random name every round
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
-	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
+	var/spawnpoint = "Cryogenic Storage" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
 	var/undershirt = 1					//undershirt type
@@ -1381,7 +1382,7 @@ datum/preferences
 						spawnkeys += S
 					var/choice = input(user, "Where would you like to spawn when latejoining?") as null|anything in spawnkeys
 					if(!choice || !spawntypes[choice])
-						spawnpoint = "Arrivals Shuttle"
+						spawnpoint = "Cryogenic Storage"
 						return
 					spawnpoint = choice
 

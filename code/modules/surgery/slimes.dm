@@ -13,6 +13,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/kitchenknife = 75,	\
+	/obj/item/weapon/improvised/scissorknife = 60, \
 	/obj/item/weapon/shard = 50, 		\
 	)
 
@@ -39,6 +40,7 @@
 	allowed_tools = list(
 	/obj/item/weapon/scalpel = 100,		\
 	/obj/item/weapon/kitchenknife = 75,	\
+	/obj/item/weapon/improvised/scissorknife = 60, \
 	/obj/item/weapon/shard = 50, 		\
 	)
 

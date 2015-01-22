@@ -29,7 +29,8 @@ var/global/datum/global_init/init = new ()
 	diary << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	diaryofmeanpeople << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
-
+	read_the_rules = md5('html/rules.html')
+	
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
 
@@ -298,13 +299,16 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>[station_name()]</b>";
+	s += "[station_name()]";
+	s += "<b> {Cosmic Horror/Sci-fi Thriller} "
+	s += "{Mid-High RP} "
+	s += "{Mature content}</b>"
 	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://www.heavensgatestation.com/\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-	s += "</a>"
-	s += ")"
+	s += "Forums";  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "</a>";
+	s += ")";
 
 	var/list/features = list()
 
@@ -331,9 +335,9 @@ var/world_topic_spam_protect_time = world.timeofday
 			n++
 
 	if (n > 1)
-		features += "~[n] players"
+		features += "~[n] crew"
 	else if (n > 0)
-		features += "~[n] player"
+		features += "~[n] crew"
 
 	/*
 	is there a reason for this? the byond site shows 'hosted by X' when there is a proper host already.

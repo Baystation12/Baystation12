@@ -177,3 +177,6 @@
 
 /obj/structure/stool/bed/chair/office/dark
 	icon_state = "officechair_dark"
+	
+/obj/structure/stool/bed/chair/command
+	icon_state = "bridge"

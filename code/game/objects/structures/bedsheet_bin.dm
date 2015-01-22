@@ -91,7 +91,10 @@ LINEN BINS
 /obj/item/weapon/bedsheet/brown
 	icon_state = "sheetbrown"
 	item_color = "brown"
-
+	
+/obj/item/weapon/bedsheet/ian
+	icon_state = "sheetian"
+	item_color = "ian"
 
 
 

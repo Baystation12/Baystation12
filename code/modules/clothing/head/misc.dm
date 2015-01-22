@@ -253,3 +253,18 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
+	
+/obj/item/clothing/head/papercrown
+	name = "Paper Crown"
+	desc = "A Paper Crown. Long Live The King!"
+	icon_state = "papercrown"
+	item_state = "papercrown"
+	flags = FPRINT|TABLEPASS
+	flags_inv = HIDEEARS
+	
+//Paper flower hat thingy stuff
+/obj/item/clothing/head/paperflower
+	name = "paper flower"
+	desc = "A Paper Flower. To put in your hair."
+	icon_state = "paperFlower_H"
+	flags = FPRINT|TABLEPASS

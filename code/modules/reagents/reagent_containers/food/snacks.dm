@@ -166,6 +166,7 @@
 			istype(W, /obj/item/weapon/kitchenknife) || \
 			istype(W, /obj/item/weapon/butch) || \
 			istype(W, /obj/item/weapon/scalpel) || \
+			istype(W, /obj/item/weapon/improvised/scissorknife) || \
 			istype(W, /obj/item/weapon/kitchen/utensil/knife) \
 		)
 	else if( \
