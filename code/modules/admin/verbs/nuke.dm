@@ -20,7 +20,6 @@
 
 
 		message_admins("\red [ckey] decided to blow up the station.")
-		command_alert("Nuclear Device Detected")
 		set_security_level("gamma")
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))

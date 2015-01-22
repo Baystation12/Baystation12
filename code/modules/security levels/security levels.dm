@@ -64,7 +64,7 @@
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
 			if(SEC_LEVEL_GAMMA)
-				security_announcemen_up.Announce("[config.alert_desc_gamma]", "Attention! Gamma security level reached!")
+				security_announcement_up.Announce("[config.alert_desc_gamma]", "Attention! Gamma security level reached!")
 				security_level = SEC_LEVEL_GAMMA
 				for(var/obj/machinery/firealarm/FA in machines)
 					if(FA.z == 1 || FA.z == 5)
