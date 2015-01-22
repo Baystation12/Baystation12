@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\say.dm;code\modules\admin\verbs\adminsay.dm;code\world.dm
+WINDOW: code\modules\mob\new_player\new_player.dm;code\modules\mob\living\carbon\human\species.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code 
-FILE: code\world.dm
-LAST_COMPILE_TIME: 1421854205
+DIR: code code\modules code\modules\admin code\modules\admin\verbs code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\new_player icons icons\effects icons\mob icons\obj icons\obj\clothing 
+FILE: code\modules\mob\living\carbon\human\species.dm
+LAST_COMPILE_TIME: 1421945830
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
