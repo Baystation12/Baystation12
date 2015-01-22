@@ -878,7 +878,7 @@
 "aqT" = (/turf/simulated/floor/plating/airless,/area/solar/fore)
 "aqU" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/lawoffice)
 "aqV" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/lawoffice)
-"aqW" = (/obj/structure/stool/bed/chair/office/dark,/obj/effect/landmark/start{name = "Internal Affairs Agent"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/junction,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/lawoffice)
+"aqW" = (/obj/structure/stool/bed/chair/office/dark,/obj/effect/landmark/start{name = "Internal Affairs Agent"},/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/lawoffice)
 "aqX" = (/obj/machinery/camera{c_tag = "Detective South"; dir = 1},/obj/machinery/computer/secure_data,/turf/simulated/floor{icon_state = "white"},/area/security/detectives_office)
 "aqY" = (/obj/structure/disposalpipe/segment,/obj/item/device/radio/intercom{broadcasting = 0; listening = 1; name = "Station Intercom (General)"; pixel_y = -30},/turf/simulated/floor{icon_state = "white"},/area/security/detectives_office)
 "aqZ" = (/obj/structure/closet{name = "Evidence Closet"},/obj/item/weapon/storage/box/bodybags,/obj/item/weapon/storage/box/evidence,/turf/simulated/floor{icon_state = "white"},/area/security/detectives_office)
