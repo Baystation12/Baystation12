@@ -138,7 +138,7 @@
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor
+		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
@@ -227,7 +227,7 @@
 				if(!failed_to_seal && M.back == src && piece == compare_piece)
 
 					if(!instant)
-						if(!do_after(M,SEAL_DELAY))
+						if(!do_after(M,SEAL_DELAY,needhand=0))
 							failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
@@ -251,6 +251,13 @@
 								else
 									helmet.flags &= ~AIRTIGHT
 								helmet.update_light(wearer)
+					
+					//sealed pieces become airtight, protecting against diseases
+					if (!seal_target)
+						piece.armor["bio"] = 100
+					else
+						piece.armor["bio"] = src.armor["bio"]
+					
 				else
 					failed_to_seal = 1
 
