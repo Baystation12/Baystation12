@@ -362,6 +362,8 @@
 
 		SV.life()
 
+		if(!SV) continue
+
 		if(SV.energy < 2) //If tile isn't fully grown
 			var/chance
 			if(seed)

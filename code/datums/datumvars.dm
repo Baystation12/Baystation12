@@ -866,6 +866,7 @@ client
 			return
 
 		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/obj/item/organ/internal)-/obj/item/organ/internal
+		if(!new_organ) return
 
 		if(!M)
 			usr << "Mob doesn't exist anymore"

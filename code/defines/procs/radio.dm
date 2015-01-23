@@ -47,7 +47,7 @@
 /proc/get_receiver_reception(var/receiver, var/datum/signal/signal)
 	if(receiver && check_signal(signal))
 		var/turf/pos = get_turf(receiver)
-		if(pos.z in signal.data["level"])
+		if(pos && (pos.z in signal.data["level"]))
 			return TELECOMMS_RECEPTION_RECEIVER
 	return TELECOMMS_RECEPTION_NONE
 
