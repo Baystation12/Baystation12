@@ -4,7 +4,7 @@ obj/effect/decal/cleanable/liquid_fuel
 	icon_state = "fuel"
 	layer = TURF_LAYER+0.2
 	anchored = 1
-	var/amount = 1 //Basically moles.
+	var/amount = 10 //Basically moles.
 
 	New(turf/newLoc,amt=1,nologs=0)
 		if(!nologs)
