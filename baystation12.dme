@@ -1263,7 +1263,6 @@
 #include "code\modules\projectiles\projectile\energy.dm"
 #include "code\modules\projectiles\projectile\force.dm"
 #include "code\modules\projectiles\projectile\special.dm"
-#include "code\modules\random_map\maze.dm"
 #include "code\modules\random_map\mining_distribution.dm"
 #include "code\modules\random_map\random_map.dm"
 #include "code\modules\reagents\Chemistry-Colours.dm"
