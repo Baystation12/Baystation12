@@ -9,7 +9,7 @@
 	desc = "Used to debug electronic equipment."
 	icon = 'icons/obj/hacktool.dmi'
 	icon_state = "hacktool-g"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 5.0
 	w_class = 2.0
 	throwforce = 5.0

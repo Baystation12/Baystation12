@@ -17,7 +17,7 @@
 	w_class = 4
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
+	flags = STOPSPRESSUREDMAGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/tank/emergency_oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	slowdown = 1.5
@@ -34,7 +34,7 @@
 	icon_state = "deathsquad"
 	item_state = "deathsquad"
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 100, rad = 60)
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
+	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
 	siemens_coefficient = 0.6
 
 /obj/item/clothing/head/helmet/space/deathsquad/beret
@@ -42,7 +42,7 @@
 	desc = "An armored beret commonly used by special operations officers."
 	icon_state = "beret_badge"
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
+	flags = HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
 	siemens_coefficient = 0.9
 
 //Space santa outfit suit
@@ -50,7 +50,7 @@
 	name = "Santa's hat"
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = "santahat"
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
+	flags = HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
 	body_parts_covered = HEAD
 
 /obj/item/clothing/suit/space/santa
@@ -59,7 +59,7 @@
 	icon_state = "santa"
 	item_state = "santa"
 	slowdown = 0
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL | STOPSPRESSUREDMAGE
+	flags = ONESIZEFITSALL | STOPSPRESSUREDMAGE
 	allowed = list(/obj/item) //for stuffing exta special presents
 
 
@@ -70,7 +70,7 @@
 	icon_state = "pirate"
 	item_state = "pirate"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
+	flags = HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
 	body_parts_covered = 0
 	siemens_coefficient = 0.9
 

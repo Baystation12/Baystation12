@@ -16,7 +16,7 @@
 	var/obj/item/device/igniter/part2 = null
 	var/obj/item/clothing/suit/armor/vest/part3 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/m_i_ptank
 	desc = "A very intricate igniter and proximity sensor electrical assembly mounted onto top of a plasma tank."
@@ -26,7 +26,7 @@
 	var/obj/item/device/igniter/part2 = null
 	var/obj/item/weapon/tank/plasma/part3 = null
 	status = 0.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/prox_ignite
 	name = "Proximity/Igniter Assembly"
@@ -35,7 +35,7 @@
 	var/obj/item/device/prox_sensor/part1 = null
 	var/obj/item/device/igniter/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/r_i_ptank
 	desc = "A very intricate igniter and signaller electrical assembly mounted onto top of a plasma tank."
@@ -45,7 +45,7 @@
 	var/obj/item/device/igniter/part2 = null
 	var/obj/item/weapon/tank/plasma/part3 = null
 	status = 0.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/anal_ignite
 	name = "Health-Analyzer/Igniter Assembly"
@@ -54,7 +54,7 @@
 	var/obj/item/device/healthanalyzer/part1 = null
 	var/obj/item/device/igniter/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	item_state = "electronic"
 
 /obj/item/assembly/time_ignite
@@ -64,7 +64,7 @@
 	var/obj/item/device/timer/part1 = null
 	var/obj/item/device/igniter/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/t_i_ptank
 	desc = "A very intricate igniter and timer assembly mounted onto top of a plasma tank."
@@ -74,7 +74,7 @@
 	var/obj/item/device/igniter/part2 = null
 	var/obj/item/weapon/tank/plasma/part3 = null
 	status = 0.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/rad_ignite
 	name = "Radio/Igniter Assembly"
@@ -83,7 +83,7 @@
 	var/obj/item/device/radio/signaler/part1 = null
 	var/obj/item/device/igniter/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/rad_infra
 	name = "Signaller/Infrared Assembly"
@@ -92,7 +92,7 @@
 	var/obj/item/device/radio/signaler/part1 = null
 	var/obj/item/device/infra/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/rad_prox
 	name = "Signaller/Prox Sensor Assembly"
@@ -101,7 +101,7 @@
 	var/obj/item/device/radio/signaler/part1 = null
 	var/obj/item/device/prox_sensor/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 /obj/item/assembly/rad_time
 	name = "Signaller/Timer Assembly"
@@ -110,7 +110,7 @@
 	var/obj/item/device/radio/signaler/part1 = null
 	var/obj/item/device/timer/part2 = null
 	status = null
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 */
 
 /obj/item/assembly/time_ignite/premade/New()

@@ -21,7 +21,7 @@
 
 	var/obj/effect/beam/laser/beam 	// the created beam
 
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 
 	attack_ai()
 		return

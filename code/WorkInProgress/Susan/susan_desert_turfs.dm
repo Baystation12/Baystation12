@@ -252,7 +252,6 @@ Alien plants should do something if theres a lot of poison
 	item_state = "wardendnavyclothes"
 	item_color = "wardendnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/navysecurity
 	name = "security officer's jumpsuit"
@@ -261,7 +260,6 @@ Alien plants should do something if theres a lot of poison
 	item_state = "officerdnavyclothes"
 	item_color = "officerdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/navyhead_of_security
 	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
@@ -270,7 +268,6 @@ Alien plants should do something if theres a lot of poison
 	item_state = "hosdnavyclothes"
 	item_color = "hosdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/suit/armor/hosnavycoat
 	name = "armored coat"
@@ -283,26 +280,22 @@ Alien plants should do something if theres a lot of poison
 	name = "security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "officerberet"
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/head/beret/navywarden
 	name = "warden's beret"
 	desc = "A beret with a two-colored security insignia emblazoned on it. For wardens that are more inclined towards style than safety."
 	icon_state = "wardenberet"
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/head/beret/navyhos
 	name = "security head's beret"
 	desc = "A stylish beret bearing a golden insignia that proudly displays the security coat of arms. A commander's must-have."
 	icon_state = "hosberet"
-	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/suit/armor/navysecvest
 	name = "armored coat"
 	desc = "An armored coat that protects against some damage."
 	icon_state = "officerdnavyjacket"
 	item_state = "armor"
-	flags = FPRINT | TABLEPASS
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/navywardenvest
@@ -310,7 +303,6 @@ Alien plants should do something if theres a lot of poison
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "wardendnavyjacket"
 	item_state = "armor"
-	flags = FPRINT | TABLEPASS
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
 //hostile entities or npcs

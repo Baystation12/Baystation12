@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BACK	//you can carry it on your back if you want, but it won't do anything unless attached to suit storage
 	
 	//copied from tank.dm
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 5.0
 	throwforce = 10.0
 	throw_speed = 1

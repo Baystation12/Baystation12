@@ -169,7 +169,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	unique = 1
 	var/notedat = ""
 	var/tomedat = ""

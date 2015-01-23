@@ -3,7 +3,6 @@
 /obj/item/weapon/stamperaser
 	name = "eraser"
 	desc = "It looks like some kind of eraser."
-	flags = FPRINT | TABLEPASS
 	icon = 'icons/obj/items.dmi'
 	icon_state = "zippo"
 	item_state = "zippo"
@@ -15,7 +14,6 @@
 	desc = "It blinks and has an antenna on it.  Weird."
 	icon_state = "t-ray0"
 	var/on = 0
-	flags = FPRINT|TABLEPASS
 	w_class = 1
 	var/list/obj/item/device/radio/Old = list()
 	var/list/obj/item/device/radio/Curr = list()

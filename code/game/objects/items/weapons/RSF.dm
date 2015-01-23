@@ -14,7 +14,6 @@ RSF
 	anchored = 0.0
 	var/stored_matter = 30
 	var/mode = 1
-	flags = TABLEPASS
 	w_class = 3.0
 
 /obj/item/weapon/rsf/examine(mob/user)

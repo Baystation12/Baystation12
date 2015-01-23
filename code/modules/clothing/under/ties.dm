@@ -5,7 +5,6 @@
 	icon_state = "bluetie"
 	item_state = ""	//no inhands
 	item_color = "bluetie"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to

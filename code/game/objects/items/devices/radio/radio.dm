@@ -20,7 +20,7 @@
 	var/syndie = 0//Holder to see if it's a syndicate encrpyed radio
 	var/maxf = 1499
 //			"Example" = FREQ_LISTENING|FREQ_BROADCASTING
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throw_speed = 2
 	throw_range = 9

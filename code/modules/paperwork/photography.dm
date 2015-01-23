@@ -123,7 +123,7 @@ var/global/photo_count = 0
 	icon_state = "camera"
 	item_state = "electropack"
 	w_class = 2.0
-	flags = FPRINT | CONDUCT | TABLEPASS
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	matter = list("metal" = 2000)
 	var/pictures_max = 10

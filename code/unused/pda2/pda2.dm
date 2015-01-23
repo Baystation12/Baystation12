@@ -34,7 +34,6 @@
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	slow_flags = SLOT_BELT
 
 	var/owner = null
