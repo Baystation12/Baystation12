@@ -21,8 +21,8 @@
 /xgm_gas/phoron
 	id = "phoron"
 	name = "Phoron"
-	specific_heat = 200	// J/(mol*K)
-	
+	specific_heat = 400	// J/(mol*K)
+
 	//Hypothetical group 14 (same as carbon), period 8 element.
 	//Using multiplicity rule, it's atomic number is 162
 	//and following a N/Z ratio of 1.5, the molar mass of a monatomic gas is:

@@ -66,13 +66,12 @@ datum/controller/vote
 		current_votes.Cut()
 		additional_text.Cut()
 
-	/*	if(auto_muted && !ooc_allowed)
+		if(auto_muted && !ooc_allowed)
 			auto_muted = 0
 			ooc_allowed = !( ooc_allowed )
 			world << "<b>The OOC channel has been automatically enabled due to vote end.</b>"
 			log_admin("OOC was toggled automatically due to vote end.")
-			message_admins("OOC has been toggled on automatically.")
-	*/
+			message_admins("OOC has been toggled automatically.")
 
 	proc/get_result()
 		//get the highest number of votes
@@ -128,21 +127,26 @@ datum/controller/vote
 		if(winners.len > 0)
 			if(winners.len > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
-					text = "<b>Vote Tied Between:</b>\n"
+					/*text = "<b>Vote Tied Between:</b>\n"
 					for(var/option in winners)
 						text += "\t[option]\n"
+					*/
+					text = "<b>Vote Tied. Breaking tie...</b>\n"
 			. = pick(winners)
 
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
 			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
-				text += "<b>Vote Result: [.]</b>"
+				text += "<b>Vote Result: Hidden</b>"
 			else
 				if(mode != "gamemode")
-					text += "<b>Vote Result: [.]</b>"
+					text += "<b>Vote Result: Hidden</b>"
 				else
 					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+
+			log_admin("Vote Result: [.]")
+			message_admins("Vote Result: [.]")
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
@@ -264,14 +268,14 @@ datum/controller/vote
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"
 				log_admin("OOC was toggled automatically due to crew_transfer vote.")
-				message_admins("OOC has been toggled off automatically.")
+				message_admins("OOC has been toggled off automatically.") */
 			if(mode == "gamemode" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
 				log_admin("OOC was toggled automatically due to gamemode vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "custom" && ooc_allowed)
+				message_admins("OOC has been toggled automatically.")
+/*			if(mode == "custom" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a custom vote.</b>"
@@ -308,9 +312,9 @@ datum/controller/vote
 				if(!votes)	votes = 0
 				. += "<tr>"
 				if(current_votes[C.ckey] == i)
-					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>Hidden</td>"
 				else
-					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>Hidden</td>"
 
 				if (additional_text.len >= i)
 					. += additional_text[i]

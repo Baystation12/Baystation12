@@ -44,5 +44,5 @@
 
 /obj/item/weapon/reagent_containers/blood/empty
 	name = "Empty BloodPack"
-	desc = "Seems pretty useless... Maybe if there were a way to fill it?"
+	desc = "Seems pretty useless on its own. Stick it into an IV drip to fill it."
 	icon_state = "empty"

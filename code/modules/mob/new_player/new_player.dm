@@ -72,10 +72,11 @@
 		statpanel("Lobby")
 		if(client.statpanel=="Lobby" && ticker)
 			if(ticker.hide_mode)
-				stat("Game Mode:", "Secret")
+				stat("Game Mode:", "Hidden")
 			else
 				if(ticker.hide_mode == 0)
-					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
+//					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
+					stat("Game Mode:", "Hidden")
 
 			if(ticker.current_state == GAME_STATE_PREGAME)
 				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
