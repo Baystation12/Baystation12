@@ -116,8 +116,7 @@ var/global/datum/controller/gameticker/ticker
 		for (var/datum/game_mode/M in runnable_modes)
 			modes+=M.name
 		modes = sortList(modes)
-		world << "<B>The current game mode is - Secret!</B>"
-		world << "<B>Possibilities:</B> [english_list(modes)]"
+		world << "<B>The current game mode is - Hidden!</B>"
 	else
 		src.mode.announce()
 
