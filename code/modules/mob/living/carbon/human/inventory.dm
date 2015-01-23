@@ -187,9 +187,9 @@
 			if (client)
 				client.screen -= W
 			W.loc = loc
+			W.layer = initial(W.layer)
 			W.dropped(src)
-			//if(W)
-				//W.layer = initial(W.layer)
+
 	update_action_buttons()
 	return 1
 
