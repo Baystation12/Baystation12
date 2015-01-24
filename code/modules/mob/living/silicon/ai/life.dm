@@ -59,7 +59,7 @@
 			src.sight |= SEE_MOBS
 			src.sight |= SEE_OBJS
 			src.see_in_dark = 8
-			src.see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			src.see_invisible = SEE_INVISIBLE_LIVING
 
 
 			//Congratulations!  You've found a way for AI's to run without using power!
