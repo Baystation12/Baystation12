@@ -624,7 +624,7 @@ proc/populate_seed_list()
 	return (P ? P : 0)
 
 //Place the plant products at the feet of the user.
-/datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample)
+/datum/seed/proc/harvest(var/mob/user,var/yield_mod,var/harvest_sample,var/force_amount)
 
 	if(!user)
 		return
@@ -633,8 +633,8 @@ proc/populate_seed_list()
 	if(!isnull(products) && products.len && yield > 0)
 		got_product = 1
 
-	if(!got_product && !harvest_sample)
-		user << "\red You fail to harvest anything useful."
+	if(!force_amount && !got_product && !harvest_sample)
+		user << "<span class='danger'>You fail to harvest anything useful.</span>"
 	else
 		user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
 
@@ -651,13 +651,16 @@ proc/populate_seed_list()
 			return
 
 		var/total_yield = 0
-		if(yield > -1)
-			if(isnull(yield_mod) || yield_mod < 1)
-				yield_mod = 0
-				total_yield = yield
-			else
-				total_yield = yield + rand(yield_mod)
-			total_yield = max(1,total_yield)
+		if(!isnull(force_amount))
+			total_yield = force_amount
+		else
+			if(yield > -1)
+				if(isnull(yield_mod) || yield_mod < 1)
+					yield_mod = 0
+					total_yield = yield
+				else
+					total_yield = yield + rand(yield_mod)
+				total_yield = max(1,total_yield)
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
