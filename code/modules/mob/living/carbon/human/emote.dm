@@ -536,6 +536,17 @@
 			else
 				if (!muzzled)
 					message = "<B>[src]</B> screams!"
+					var/scream_sound
+
+					if( gender == "male" )
+						scream_sound = pick(\
+						'sound/voice/mscream1.ogg',
+						'sound/voice/mscream2.ogg',
+						'sound/voice/mscream3.ogg')
+					else if( gender == "female" )
+						scream_sound = 'sound/voice/wscream1.ogg'
+
+					playsound(loc, scream_sound, 80, 1)
 					m_type = 2
 				else
 					message = "<B>[src]</B> makes a very loud noise."

@@ -469,6 +469,7 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/narsie/large/New()
 	..()
+	playsound(loc, 'sound/voice/narsierisen.ogg', 255, 1)
 	world << "<font size='28' color='red'><b>NAR-SIE HAS RISEN</b></font>"
 	if(emergency_shuttle && emergency_shuttle.can_call())
 		emergency_shuttle.call_evac()
