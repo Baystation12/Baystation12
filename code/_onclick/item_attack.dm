@@ -4,8 +4,12 @@
 	return
 
 // No comment
-/atom/proc/attackby(obj/item/W, mob/user)
+/atom/proc/attackby(obj/item/W, mob/user, var/expanded)
 	return
+
+/atom/proc/handle_actions(obj/item/W, mob/user, var/list/actions, var/expanded)
+	return
+
 /atom/movable/attackby(obj/item/W, mob/user)
 	if(!(W.flags&NOBLUDGEON))
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")

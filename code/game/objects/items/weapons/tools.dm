@@ -27,6 +27,8 @@
 	matter = list("metal" = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
+	properties = list("wrench" = 1)
+	main_property = "wrench"
 
 
 /*
@@ -46,6 +48,8 @@
 	throw_range = 5
 	matter = list("metal" = 75)
 	attack_verb = list("stabbed")
+	properties = list("screwdriver" = 1)
+	main_property = "screwdriver"
 
 	suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</b>", \
@@ -107,6 +111,8 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
+	properties = list("wirecutters" = 1)
+	main_property = "wirecutters"
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -143,6 +149,8 @@
 
 	//Cost to make in the autolathe
 	matter = list("metal" = 70, "glass" = 30)
+	properties = list("welder" = 1, "fueled" = 1)
+	main_property = "welder"
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -442,6 +450,8 @@
 	matter = list("metal" = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
+	properties = list("crowbar" = 1)
+	main_property = "crowbar"
 
 /obj/item/weapon/crowbar/red
 	icon = 'icons/obj/items.dmi'
@@ -475,60 +485,11 @@
 	else
 		return ..()
 
-/*/obj/item/weapon/combitool
+/obj/item/weapon/combitool
 	name = "combi-tool"
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
 	w_class = 2
-
-	var/list/spawn_tools = list(
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
-		)
-	var/list/tools = list()
-	var/current_tool = 1
-
-/obj/item/weapon/combitool/examine()
-	..()
-	if(loc == usr && tools.len)
-		usr << "It has the following fittings:"
-		for(var/obj/item/tool in tools)
-			usr << "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]"
-
-/obj/item/weapon/combitool/New()
-	..()
-	for(var/type in spawn_tools)
-		tools |= new type(src)
-
-/obj/item/weapon/combitool/attack_self(mob/user as mob)
-	if(++current_tool > tools.len) current_tool = 1
-	var/obj/item/tool = tools[current_tool]
-	if(!tool)
-		user << "You can't seem to find any fittings in \the [src]."
-	else
-		user << "You switch \the [src] to the [tool.name] fitting."
-	return 1
-
-/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!M.Adjacent(user))
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	return (tool ? tool.attack(M,user) : 0)
-
-/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
-	if(!proximity)
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	tool.loc = user
-	var/resolved = target.attackby(tool,user)
-	if(!resolved && tool && target)
-		tool.afterattack(target,user,1)
-	if(tool)
-		tool.loc = src*/
+	properties = list("screwdriver" = 0.8, "wrench" = 0.7, "wirecutters" = 0.8, "knife" = 0.8, "fork" = 0.8, "hatchet" = 0.6)
+	main_property = "screwdriver"
