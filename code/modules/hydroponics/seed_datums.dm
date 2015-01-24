@@ -115,11 +115,44 @@ proc/populate_seed_list()
 
 	// Special traits.
 	var/produces_power              // Can be used to make a battery.
-	var/thorny                      // Harvested thorns can act as syringes for injecting plant reagents.
 	var/juicy                       // When thrown, causes a splatter decal.
+	var/thorny						// Can cause damage/inject reagents when thrown or handled.
 	var/explosive                   // When thrown, acts as a grenade.
 	var/teleporting                 // Uses the bluespace tomato effect.
 	var/splat_type = /obj/effect/decal/cleanable/tomato_smudge
+
+// Adds reagents to a target.
+/datum/seed/proc/do_thorns(var/mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+
+	var/datum/organ/external/affecting = target.get_organ(pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin"))
+	var/damage = 0
+
+	if(carnivorous == 2)
+		target << "<span class='danger'>The thorns pierce your flesh greedily!</span>"
+		damage = potency/2
+	else
+		if(affecting)
+			target << "<span class='danger'>Several thorns dig deeply into your [affecting.display_name]!</span>"
+		else
+			target << "<span class='danger'>Several thorns dig deeply into your flesh!</span>"
+		damage = potency/5
+
+	if(affecting)
+		affecting.take_damage(damage, 0)
+		affecting.add_autopsy_data("Thorns",damage)
+	else
+		target.adjustBruteLoss(damage)
+	target.UpdateDamageIcon()
+	target.updatehealth()
+
+	// Inject some chems.
+	if(chems && chems.len)
+		target << "<span class='danger'>You feel something seeping into your flesh!</span>"
+		for(var/rid in chems)
+			var/injecting = min(5,max(1,potency/5))
+			target.reagents.add_reagent(rid,injecting)
 
 //Applies an effect to a target atom.
 /datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target)
@@ -130,11 +163,10 @@ proc/populate_seed_list()
 		splatted = apply_special_effect(target,thrown)
 	else if(istype(target,/turf))
 		splatted = 1
-		for(var/mob/living/M in target,thrown)
+		for(var/mob/living/M in target.contents)
 			apply_special_effect(M)
 
 	if(juicy && splatted)
-
 		if(thrown.reagents)
 			thrown.reagents.reaction(get_turf(target))
 			for(var/atom/hit_atom in get_turf(target))
@@ -147,33 +179,33 @@ proc/populate_seed_list()
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
 
 	var/impact = 1
-
 	// Thorns have a chance of injecting reagents.
-	if(thorny && prob(50))
-		target << "<span class='danger'>Several thorns are embedded in your flesh!</span>"
-		//Todo: cause brute, transfer some reagents over.
+	if(thorny && prob(potency*5))
+		do_thorns(target)
 
 	// Bluespace tomato code copied over from grown.dm.
 	if(teleporting)
 
 		//Plant potency determines radius of teleport.
-		var/outer_teleport_radius = potency/10
+		var/outer_teleport_radius = potency/5
 		var/inner_teleport_radius = potency/15
 
-		var/list/turfs
+		var/list/turfs = list()
 		if(inner_teleport_radius > 0)
-			turfs = orange(target,outer_teleport_radius) - orange(target,inner_teleport_radius)
+			for(var/turf/T in orange(target,outer_teleport_radius))
+				if(get_dist(target,T) >= inner_teleport_radius)
+					turfs |= T
 
-		if(!turfs.len)
-			target.visible_message("<span class='notice'>The [thrown.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
-			del(thrown)
-			return
+		if(turfs.len)
+			// Moves the mob, causes sparks.
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(3, 1, get_turf(target))
+			s.start()
+			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
+			new/obj/effect/decal/cleanable/molten_item(get_turf(target)) // Leave a pile of goo behind for dramatic effect...
+			target.loc = picked                                          // And teleport them to the chosen location.
 
-		// Moves the mob, causes sparks.
-		var/turf/picked = pick(turfs)
-		new/obj/effect/decal/cleanable/molten_item(picked) //Leave a pile of goo behind for dramatic effect...
-		target.loc = picked//And teleport them to the chosen location.
-		impact = 1
+			impact = 1
 
 	return impact
 

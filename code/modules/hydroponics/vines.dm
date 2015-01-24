@@ -107,38 +107,7 @@
 
 		// FEED ME, SEYMOUR.
 		if(buckled_mob && seed && (buckled_mob.stat != DEAD)) //Don't bother with a dead mob.
-
-			var/mob/living/M = buckled_mob
-			if(!istype(M)) return
-			var/mob/living/carbon/human/H = buckled_mob
-
-			// Drink some blood/cause some brute.
-			if(seed.carnivorous == 2)
-				buckled_mob << "<span class='danger'>\The [src] pierces your flesh greedily!</span>"
-
-				var/damage = rand(round(seed.potency/2),seed.potency)
-				if(!istype(H))
-					H.adjustBruteLoss(damage)
-					return
-
-				var/datum/organ/external/affecting = H.get_organ(pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin"))
-
-				if(affecting)
-					affecting.take_damage(damage, 0)
-					if(affecting.parent)
-						affecting.parent.add_autopsy_data("[plant_damage_noun]", damage)
-				else
-					H.adjustBruteLoss(damage)
-
-				H.UpdateDamageIcon()
-				H.updatehealth()
-
-			// Inject some chems.
-			if(seed.chems && seed.chems.len && istype(H))
-				H << "<span class='danger'>You feel something seeping into your skin!</span>"
-				for(var/rid in seed.chems)
-					var/injecting = min(5,max(1,seed.potency/5))
-					H.reagents.add_reagent(rid,injecting)
+			seed.do_thorns(buckled_mob)
 
 /obj/effect/plantsegment/proc/update()
 	if(!seed) return
