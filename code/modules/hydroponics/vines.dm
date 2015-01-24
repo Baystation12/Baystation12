@@ -107,7 +107,8 @@
 
 		// FEED ME, SEYMOUR.
 		if(buckled_mob && seed && (buckled_mob.stat != DEAD)) //Don't bother with a dead mob.
-			seed.do_thorns(buckled_mob)
+			seed.do_thorns(buckled_mob,src)
+			seed.do_sting(buckled_mob,src)
 
 /obj/effect/plantsegment/proc/update()
 	if(!seed) return

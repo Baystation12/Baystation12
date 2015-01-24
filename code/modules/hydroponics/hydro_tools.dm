@@ -159,8 +159,8 @@
 	if(grown_seed.produces_power)
 		user << "<br>The fruit will function as a battery if prepared appropriately."
 
-	if(grown_seed.thorny)
-		user << "<br>The fruit is covered in sharp, hollow thorns."
+	if(grown_seed.stings)
+		user << "<br>The fruit is covered in stinging spines."
 
 	if(grown_seed.juicy)
 		user << "<br>The fruit is excessively juicy."
