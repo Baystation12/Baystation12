@@ -62,24 +62,35 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(seed && seed.produces_power)
-		if(istype(W, /obj/item/stack/cable_coil))
-			var/obj/item/stack/cable_coil/C = W
-			if(C.use(5))
-				//TODO: generalize this.
-				user << "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery encasing.</span>"
-				var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(user.loc)
-				pocell.maxcharge = src.potency * 10
-				pocell.charge = pocell.maxcharge
-				del(src)
-				return
+	if(seed && seed.produces_power && istype(W, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = W
+		if(C.use(5))
+			//TODO: generalize this.
+			user << "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery encasing.</span>"
+			var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(get_turf(user))
+			if(src.loc == user && !(user.l_hand && user.r_hand) && istype(user,/mob/living/carbon/human))
+				user.put_in_hands(pocell)
+			pocell.maxcharge = src.potency * 10
+			pocell.charge = pocell.maxcharge
+			del(src)
+			return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack_self(mob/user as mob)
 
-	if(!seed || !seed.spread != 1)
+	if(!seed)
 		return
 
 	if(istype(user.loc,/turf/space))
+		return
+
+	if(user.a_intent == "hurt")
+		user.visible_message("<span class='danger'>\The [user] squashes \the [src]!</span>")
+		seed.thrown_at(src,user)
+		sleep(-1)
+		if(src) del(src)
+		return
+
+	if(seed.spread == 0)
 		return
 
 	// TODO: Generalize.
