@@ -32,9 +32,10 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
-	if(!reagents.total_volume)						//Shouldn't be needed but it checks to see if it has anything left in it.
-		user << "\red None of [src] left, oh no!"
-		M.drop_from_inventory(src)	//so icons update :[
+
+	if(!reagents.total_volume)
+		user << "<span class='danger'>None of [src] left!</span>"
+		user.drop_from_inventory(src)
 		del(src)
 		return 0
 
@@ -105,9 +106,6 @@
 			return 1
 
 	return 0
-
-/obj/item/weapon/reagent_containers/food/snacks/afterattack(obj/target, mob/user, proximity)
-	return ..()
 
 /obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
 	if(!..(user, 1))

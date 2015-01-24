@@ -28,8 +28,8 @@
 	return
 
 /obj/item/weapon/reagent_containers/attack(mob/M as mob, mob/user as mob, def_zone)
-	if (can_operate(M))        //Checks if mob is lying down on table for surgery
-		if (do_surgery(M,user,src))
+	if(can_operate(M))        //Checks if mob is lying down on table for surgery
+		if(do_surgery(M,user,src))
 			return
 
 // this prevented pills, food, and other things from being picked up by bags.

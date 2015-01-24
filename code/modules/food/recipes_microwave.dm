@@ -607,7 +607,7 @@ I said no!
 /datum/recipe/nettlesoup
 	reagents = list("water" = 10)
 	items = list(
-		/obj/item/weapon/grown/nettle,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/nettle,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato,
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
 	)

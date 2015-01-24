@@ -99,7 +99,7 @@ proc/populate_seed_list()
 	var/spread = 0                  // 0 limits plant to tray, 1 = creepers, 2 = vines.
 	var/carnivorous = 0             // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
 	var/parasite = 0                // 0 = no, 1 = gain health from weed level.
-	var/immutable = 0                // If set, plant will never mutate. If -1, plant is  highly mutable.
+	var/immutable = 0               // If set, plant will never mutate. If -1, plant is highly mutable.
 	var/alter_temp                  // If set, the plant will periodically alter local temp by this amount.
 
 	// Cosmetics.
@@ -116,27 +116,32 @@ proc/populate_seed_list()
 	// Special traits.
 	var/produces_power              // Can be used to make a battery.
 	var/juicy                       // When thrown, causes a splatter decal.
-	var/thorny						// Can cause damage/inject reagents when thrown or handled.
+	var/stings						// Can cause damage/inject reagents when thrown or handled.
 	var/explosive                   // When thrown, acts as a grenade.
 	var/teleporting                 // Uses the bluespace tomato effect.
 	var/splat_type = /obj/effect/decal/cleanable/tomato_smudge
 
-// Adds reagents to a target.
-/datum/seed/proc/do_thorns(var/mob/living/carbon/human/target)
-	if(!istype(target))
+// Does brute damage to a target.
+/datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
+
+	if(!istype(target) || !carnivorous)
 		return
 
-	var/datum/organ/external/affecting = target.get_organ(pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin"))
+	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
+	var/datum/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 
 	if(carnivorous == 2)
-		target << "<span class='danger'>The thorns pierce your flesh greedily!</span>"
+		if(affecting)
+			target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.display_name] greedily!</span>"
+		else
+			target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
 		damage = potency/2
 	else
 		if(affecting)
-			target << "<span class='danger'>Several thorns dig deeply into your [affecting.display_name]!</span>"
+			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.display_name]!</span>"
 		else
-			target << "<span class='danger'>Several thorns dig deeply into your flesh!</span>"
+			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
 		damage = potency/5
 
 	if(affecting)
@@ -147,9 +152,12 @@ proc/populate_seed_list()
 	target.UpdateDamageIcon()
 	target.updatehealth()
 
-	// Inject some chems.
+// Adds reagents to a target.
+/datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
+	if(!stings)
+		return
 	if(chems && chems.len)
-		target << "<span class='danger'>You feel something seeping into your flesh!</span>"
+		target << "<span class='danger'>You are stung by \the [fruit]!</span>"
 		for(var/rid in chems)
 			var/injecting = min(5,max(1,potency/5))
 			target.reagents.add_reagent(rid,injecting)
@@ -179,9 +187,8 @@ proc/populate_seed_list()
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
 
 	var/impact = 1
-	// Thorns have a chance of injecting reagents.
-	if(thorny && prob(potency*5))
-		do_thorns(target)
+	do_sting(target,thrown)
+	do_thorns(target,thrown)
 
 	// Bluespace tomato code copied over from grown.dm.
 	if(teleporting)
@@ -877,7 +884,7 @@ proc/populate_seed_list()
 	name = "nettle"
 	seed_name = "nettle"
 	display_name = "nettles"
-	products = list(/obj/item/weapon/grown/nettle)
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle)
 	mutants = list("deathnettle")
 	packet_icon = "seed-nettle"
 	plant_icon = "nettle"
@@ -889,12 +896,13 @@ proc/populate_seed_list()
 	yield = 4
 	potency = 10
 	growth_stages = 5
+	stings = 1
 
 /datum/seed/nettle/death
 	name = "deathnettle"
 	seed_name = "death nettle"
 	display_name = "death nettles"
-	products = list(/obj/item/weapon/grown/nettle/death)
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle/death)
 	mutants = null
 	packet_icon = "seed-deathnettle"
 	plant_icon = "deathnettle"
@@ -1275,7 +1283,7 @@ proc/populate_seed_list()
 	seed_name = "sunflower"
 	display_name = "sunflowers"
 	packet_icon = "seed-sunflower"
-	products = list(/obj/item/weapon/grown/sunflower)
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sunflower)
 	plant_icon = "sunflower"
 
 	lifespan = 25
