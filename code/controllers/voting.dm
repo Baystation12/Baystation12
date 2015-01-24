@@ -141,7 +141,7 @@ datum/controller/vote
 				text += "<b>Vote Result: Hidden</b>"
 			else
 				if(mode != "gamemode")
-					text += "<b>Vote Result: Hidden</b>"
+					text += "<b>Vote Result: [.]</b>"
 				else
 					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
@@ -282,14 +282,24 @@ datum/controller/vote
 				log_admin("OOC was toggled automatically due to custom vote.")
 				message_admins("OOC has been toggled off automatically.")
 		*/
-
-
-
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0
 
 	proc/interface(var/client/C)
+		var/list/required_players = list()
+		if( mode == "gamemode" )
+			var/list/L = typesof(/datum/game_mode) - /datum/game_mode
+			for (var/F in choices)
+				for (var/T in L)
+					var/datum/game_mode/M = new T()
+					if (M.config_tag == F)
+						required_players.Add( M.required_players ) // Swings and roundabouts just to get the required playercount :V
+
+		var/total_players = 0
+		for(var/client/D in clients)
+
+			total_players = total_players+1
 		if(!C)	return
 		var/admin = 0
 		var/trialmin = 0
@@ -310,14 +320,26 @@ datum/controller/vote
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
-				. += "<tr>"
-				if(current_votes[C.ckey] == i)
-					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>Hidden</td>"
-				else
-					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>Hidden</td>"
 
-				if (additional_text.len >= i)
-					. += additional_text[i]
+				. += "<tr>"
+				if(mode == "gamemode" )
+					if( total_players >= required_players[i] )
+						if(current_votes[C.ckey] == i)
+							. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						else
+							. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						if (additional_text.len >= i)
+							. += additional_text[i]
+				else
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+
+					if (additional_text.len >= i)
+						. += additional_text[i]
+
+
 				. += "</tr>"
 
 			. += "</table><hr>"
