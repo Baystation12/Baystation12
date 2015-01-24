@@ -119,7 +119,7 @@ proc/populate_seed_list()
 	var/stings						// Can cause damage/inject reagents when thrown or handled.
 	var/explosive                   // When thrown, acts as a grenade.
 	var/teleporting                 // Uses the bluespace tomato effect.
-	var/splat_type = /obj/effect/decal/cleanable/tomato_smudge
+	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge
 
 // Does brute damage to a target.
 /datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
@@ -162,10 +162,106 @@ proc/populate_seed_list()
 			var/injecting = min(5,max(1,potency/5))
 			target.reagents.add_reagent(rid,injecting)
 
+//Splatter a turf.
+/datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
+	if(splat_type)
+		var/obj/effect/decal/cleanable/fruit_smudge/splat = new splat_type(T)
+		splat.name = "[thrown.name] [pick("smear","smudge","splatter")]"
+		if(biolum)
+			if(biolum_colour)
+				splat.l_color = biolum_colour
+			splat.SetLuminosity(biolum)
+		if(istype(splat))
+			if(product_colour)
+				splat.color = product_colour
+
+	if(chems)
+		for(var/mob/living/M in T.contents)
+			if(!M.reagents)
+				continue
+			for(var/chem in chems)
+				var/injecting = min(5,max(1,potency/3))
+				M.reagents.add_reagent(chem,injecting)
+
 //Applies an effect to a target atom.
 /datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target)
 
 	var/splatted
+	var/turf/origin_turf = get_turf(target)
+
+	if(explosive)
+
+		var/flood_dist = min(10,max(1,potency/10))
+		var/list/open_turfs = list()
+		var/list/closed_turfs = list()
+		var/list/valid_turfs = list()
+		open_turfs |= origin_turf
+
+		// Flood fill to get affected turfs.
+		while(open_turfs.len)
+			var/turf/T = pick(open_turfs)
+			open_turfs -= T
+			closed_turfs |= T
+			valid_turfs |= T
+
+			for(var/dir in alldirs)
+				var/turf/neighbor = get_step(T,dir)
+				if(!neighbor || (neighbor in closed_turfs) || (neighbor in open_turfs))
+					continue
+				if(neighbor.density || get_dist(neighbor,origin_turf) > flood_dist || istype(neighbor,/turf/space))
+					closed_turfs |= neighbor
+					continue
+				// Check for windows.
+				var/no_los
+				for(var/turf/target_turf in getline(origin_turf,neighbor))
+					if(target_turf.density)
+						no_los = 1
+						break
+
+				if(!no_los)
+					var/los_dir = get_dir(neighbor,origin_turf)
+					var/list/blocked = list()
+					for(var/obj/machinery/door/D in neighbor.contents)
+						if(istype(D,/obj/machinery/door/window))
+							blocked |= D.dir
+						else
+							if(D.density)
+								no_los = 1
+								break
+					for(var/obj/structure/window/W in neighbor.contents)
+						if(W.is_fulltile())
+							no_los = 1
+							break
+						blocked |= W.dir
+					if(!no_los)
+						switch(los_dir)
+							if(NORTHEAST)
+								if((NORTH in blocked) && (EAST in blocked))
+									no_los = 1
+							if(SOUTHEAST)
+								if((SOUTH in blocked) && (EAST in blocked))
+									no_los = 1
+							if(NORTHWEST)
+								if((NORTH in blocked) && (WEST in blocked))
+									no_los = 1
+							if(SOUTHWEST)
+								if((SOUTH in blocked) && (WEST in blocked))
+									no_los = 1
+							else
+								if(los_dir in blocked)
+									no_los = 1
+				if(no_los)
+					closed_turfs |= neighbor
+					continue
+				open_turfs |= neighbor
+
+		for(var/turf/T in valid_turfs)
+			for(var/mob/living/M in T.contents)
+				apply_special_effect(M)
+			splatter(T,thrown)
+		origin_turf.visible_message("<span class='danger'>The [thrown.name] violently explodes against [target]!</span>")
+		del(thrown)
+		return
 
 	if(istype(target,/mob/living))
 		splatted = apply_special_effect(target,thrown)
@@ -175,13 +271,8 @@ proc/populate_seed_list()
 			apply_special_effect(M)
 
 	if(juicy && splatted)
-		if(thrown.reagents)
-			thrown.reagents.reaction(get_turf(target))
-			for(var/atom/hit_atom in get_turf(target))
-				thrown.reagents.reaction(hit_atom)
-
-		new splat_type (get_turf(thrown))
-		thrown.visible_message("The [thrown.name] splatters against [target]!")
+		splatter(origin_turf,thrown)
+		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		del(thrown)
 
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
@@ -294,6 +385,20 @@ proc/populate_seed_list()
 
 	if(prob(20))
 		harvest_repeat = 1
+
+	if(prob(15))
+		juicy = 1
+
+	if(prob(5))
+		stings = 1
+
+	if(prob(5))
+		produces_power = 1
+
+	if(prob(1))
+		explosive = 1
+	else if(prob(1))
+		teleporting = 1
 
 	if(prob(5))
 		consume_gasses = list()
@@ -964,7 +1069,6 @@ proc/populate_seed_list()
 	packet_icon = "seed-bluetomato"
 	plant_icon = "bluetomato"
 	chems = list("nutriment" = list(1,20), "lube" = list(1,5))
-	splat_type = /obj/effect/decal/cleanable/blood/oil
 
 /datum/seed/tomato/blue/teleport
 	name = "bluespacetomato"
@@ -1131,7 +1235,6 @@ proc/populate_seed_list()
 	packet_icon = "mycelium-reishi"
 	plant_icon = "reishi"
 	chems = list("nutriment" = list(1,50), "psilocybin" = list(3,5))
-
 	maturation = 10
 	production = 5
 	yield = 4
@@ -1209,6 +1312,8 @@ proc/populate_seed_list()
 	lifespan = 120
 	maturation = 15
 	yield = 3
+	explosive = 1
+	splat_type = /obj/effect/glowshroom
 	potency = 30
 	growth_stages = 4
 	biolum = 1
