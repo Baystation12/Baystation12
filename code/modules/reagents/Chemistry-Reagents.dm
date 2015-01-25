@@ -1515,6 +1515,57 @@ datum
 				..()
 				return
 
+//////////////////////////Ground crayons/////////////////////
+
+
+		crayon_dust
+			name = "Crayon dust"
+			id = "crayon_dust"
+			description = "Intensely coloured powder obtained by grinding crayons."
+			reagent_state = LIQUID
+			color = "#888888"
+			overdose = 5
+
+		crayon_dust/red
+			name = "Red crayon dust"
+			id = "crayon_dust_red"
+			color = "#DA0000"
+
+		crayon_dust/orange
+			name = "Orange crayon dust"
+			id = "crayon_dust_orange"
+			color = "#FF9300"
+
+		crayon_dust/yellow
+			name = "Yellow crayon dust"
+			id = "crayon_dust_yellow"
+			color = "#FFF200"
+
+		crayon_dust/green
+			name = "Green crayon dust"
+			id = "crayon_dust_green"
+			color = "#A8E61D"
+
+		crayon_dust/blue
+			name = "Blue crayon dust"
+			id = "crayon_dust_blue"
+			color = "#00B7EF"
+
+		crayon_dust/purple
+			name = "Purple crayon dust"
+			id = "crayon_dust_purple"
+			color = "#DA00FF"
+
+		crayon_dust/grey
+			name = "Grey crayon dust"
+			id = "crayon_dust_grey"
+			color = "#808080"
+
+		crayon_dust/brown
+			name = "Brown crayon dust"
+			id = "crayon_dust_brown"
+			color = "#846F35"
+
 //////////////////////////Poison stuff///////////////////////
 
 		toxin
