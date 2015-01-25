@@ -46,7 +46,7 @@
 			var/cameras[0]
 			for(var/obj/machinery/camera/C in L)
 				var/cam[0]
-				cam["name"] = C.c_tag
+				cam["name"] = sanitize(C.c_tag)
 				cam["deact"] = !C.can_use()
 				cam["camera"] = "\ref[C]"
 				cam["x"] = C.x
