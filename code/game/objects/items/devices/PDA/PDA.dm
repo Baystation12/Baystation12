@@ -464,7 +464,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data_core.get_manifest_json(user.client)
+		data_core.get_manifest_json()
 
 
 	if(mode==3)
@@ -537,12 +537,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	// update the ui if it exists, returns null if no ui is passed/found
 	if(ui)
 		ui.load_cached_data(ManifestJSON)
-
+		
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+	        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400)
 		// when the ui is first opened this is the data it will use
 
