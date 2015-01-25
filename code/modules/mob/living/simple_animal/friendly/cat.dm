@@ -18,6 +18,7 @@
 	response_harm   = "kicks"
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/flee_target
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
@@ -43,27 +44,71 @@
 		break
 
 	if(!stat && !resting && !buckled)
-		handle_movement_target()
+		turns_since_scan++
+		if (turns_since_scan > 5)
+			walk_to(src,0)
+			turns_since_scan = 0
+			
+			if (flee_target) //fleeing takes precendence
+				handle_flee_target()
+			else
+				handle_movement_target()
 
 /mob/living/simple_animal/cat/proc/handle_movement_target()
-	turns_since_scan++
-	if(turns_since_scan > 5)
-		walk_to(src,0)
-		turns_since_scan = 0
+	//if our target is neither inside a turf or inside a human(???), stop
+	if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
+		movement_target = null
+		stop_automated_movement = 0
+	//if we have no target or our current one is out of sight/too far away
+	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
+		movement_target = null
+		stop_automated_movement = 0
+		for(var/mob/living/simple_animal/mouse/snack in oview(src)) //search for a new target
+			if(isturf(snack.loc) && !snack.stat)
+				movement_target = snack
+				break
+	
+	if(movement_target)
+		stop_automated_movement = 1
+		walk_to(src,movement_target,0,3)
 
-		if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
-			movement_target = null
-			stop_automated_movement = 0
-		if( !movement_target || !(movement_target.loc in oview(src, 4)) )
-			movement_target = null
-			stop_automated_movement = 0
-			for(var/mob/living/simple_animal/mouse/snack in oview(src))
-				if(isturf(snack.loc) && !snack.stat)
-					movement_target = snack
-					break
-		if(movement_target)
-			stop_automated_movement = 1
-			walk_to(src,movement_target,0,3)
+/mob/living/simple_animal/cat/proc/handle_flee_target()
+	//see if we should stop fleeing
+	if (flee_target && !(flee_target.loc in view(src)))
+		flee_target = null
+		stop_automated_movement = 0
+
+	if (flee_target)
+		if(prob(25)) say("HSSSSS")
+		stop_automated_movement = 1
+		walk_away(src, flee_target, 7, 2)
+
+/mob/living/simple_animal/cat/proc/set_flee_target(atom/A)
+	if(A)
+		flee_target = A
+		turns_since_scan = 5
+
+/mob/living/simple_animal/cat/attackby(var/obj/item/O, var/mob/user)
+	. = ..()
+	if(O.force)
+		set_flee_target(user? user : src.loc)
+
+/mob/living/simple_animal/cat/attack_hand(mob/living/carbon/human/M as mob)
+	. = ..()
+	if(M.a_intent == "hurt")
+		set_flee_target(M)
+
+/mob/living/simple_animal/cat/ex_act()
+	. = ..()
+	set_flee_target(src.loc)
+
+/mob/living/simple_animal/cat/bullet_act(var/obj/item/projectile/proj)
+	. = ..()
+	set_flee_target(proj.firer? proj.firer : src.loc)
+	
+/mob/living/simple_animal/cat/hitby(atom/movable/AM)
+	. = ..()
+	set_flee_target(AM.thrower? AM.thrower : src.loc)
 
 /mob/living/simple_animal/cat/MouseDrop(atom/over_object)
 
@@ -114,7 +159,7 @@
 			if (prob(10))
 				say("Meow!")
 
-	if (!(bff && movement_target == bff))
+	if (!bff || movement_target != bff)
 		..()
 
 /mob/living/simple_animal/cat/fluff/Life()
