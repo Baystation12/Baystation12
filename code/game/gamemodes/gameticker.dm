@@ -107,7 +107,7 @@ var/global/datum/controller/gameticker/ticker
 	if(!can_continue)
 		del(mode)
 		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
+		world << "<B>Error setting up hidden.</B> Reverting to pre-game lobby."
 		job_master.ResetOccupations()
 		return 0
 
