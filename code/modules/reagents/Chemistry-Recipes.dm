@@ -1344,6 +1344,89 @@ datum
 				var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 				Z.loc = get_turf(holder.my_atom)
 				Z.announce_to_ghosts()
+
+//////////////////////////////////////////PAINT///////////////////////////////////////////
+//Crayon dust -> paint
+		red_paint
+			name = "Red paint"
+			id = "red_paint"
+			result = "paint_red"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_red" = 1)
+			result_amount = 5
+
+		orange_paint
+			name = "Orange paint"
+			id = "orange_paint"
+			result = "paint_orange"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_orange" = 1)
+			result_amount = 5
+
+		yellow_paint
+			name = "Yellow paint"
+			id = "yellow_paint"
+			result = "paint_yellow"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_yellow" = 1)
+			result_amount = 5
+
+		green_paint
+			name = "Green paint"
+			id = "green_paint"
+			result = "paint_green"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_green" = 1)
+			result_amount = 5
+
+		blue_paint
+			name = "Blue paint"
+			id = "blue_paint"
+			result = "paint_blue"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_blue" = 1)
+			result_amount = 5
+
+		purple_paint
+			name = "Purple paint"
+			id = "purple_paint"
+			result = "paint_purple"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_purple" = 1)
+			result_amount = 5
+
+		grey_paint
+			name = "Grey paint"
+			id = "grey_paint"
+			result = "paint_grey"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_grey" = 1)
+			result_amount = 5
+
+		brown_paint
+			name = "Brown paint"
+			id = "brown_paint"
+			result = "paint_brown"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_brown" = 1)
+			result_amount = 5
+
+//Ghetto reactions
+
+		blood_paint
+			name = "Blood paint"
+			id = "blood_paint"
+			result = "paint_red"
+			required_reagents = list("plasticide" = 1, "water" = 3, "blood" = 2)
+			result_amount = 5
+
+		milk_paint
+			name = "Milk paint"
+			id = "milk_paint"
+			result = "paint_white"
+			required_reagents = list("plasticide" = 1, "water" = 3, "milk" = 5)
+			result_amount = 5
+
+		carbon_paint
+			name = "Carbon paint"
+			id = "carbon_paint"
+			result = "paint_black"
+			required_reagents = list("plasticide" = 1, "water" = 3, "carbon" = 1)
+			result_amount = 5
+
+
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
 		tofu

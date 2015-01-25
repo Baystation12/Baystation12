@@ -1526,45 +1526,97 @@ datum
 			color = "#888888"
 			overdose = 5
 
-		crayon_dust/red
-			name = "Red crayon dust"
-			id = "crayon_dust_red"
-			color = "#DA0000"
+			red
+				name = "Red crayon dust"
+				id = "crayon_dust_red"
+				color = "#FE191A"
 
-		crayon_dust/orange
-			name = "Orange crayon dust"
-			id = "crayon_dust_orange"
-			color = "#FF9300"
+			orange
+				name = "Orange crayon dust"
+				id = "crayon_dust_orange"
+				color = "#FFBE4F"
 
-		crayon_dust/yellow
-			name = "Yellow crayon dust"
-			id = "crayon_dust_yellow"
-			color = "#FFF200"
+			yellow
+				name = "Yellow crayon dust"
+				id = "crayon_dust_yellow"
+				color = "#FDFE7D"
 
-		crayon_dust/green
-			name = "Green crayon dust"
-			id = "crayon_dust_green"
-			color = "#A8E61D"
+			green
+				name = "Green crayon dust"
+				id = "crayon_dust_green"
+				color = "#18A31A"
 
-		crayon_dust/blue
-			name = "Blue crayon dust"
-			id = "crayon_dust_blue"
-			color = "#00B7EF"
+			blue
+				name = "Blue crayon dust"
+				id = "crayon_dust_blue"
+				color = "#247CFF"
 
-		crayon_dust/purple
-			name = "Purple crayon dust"
-			id = "crayon_dust_purple"
-			color = "#DA00FF"
+			purple
+				name = "Purple crayon dust"
+				id = "crayon_dust_purple"
+				color = "#CC0099"
 
-		crayon_dust/grey
-			name = "Grey crayon dust"
-			id = "crayon_dust_grey"
+			grey //Mime
+				name = "Grey crayon dust"
+				id = "crayon_dust_grey"
+				color = "#808080"
+
+			brown //Rainbow
+				name = "Brown crayon dust"
+				id = "crayon_dust_brown"
+				color = "#846F35"
+
+//////////////////////////Paint//////////////////////////////
+
+		paint
+			name = "Paint"
+			id = "paint"
+			description = "This paint will stick to almost any object"
+			reagent_state = LIQUID
 			color = "#808080"
+			overdose = 15
 
-		crayon_dust/brown
-			name = "Brown crayon dust"
-			id = "crayon_dust_brown"
-			color = "#846F35"
+			//Paints corresponding to crayons are hardcoded
+			red
+				id = "paint_red"
+				color = "#FE191A"
+
+			orange
+				id = "paint_orange"
+				color = "#FFBE4F"
+
+			yellow
+				id = "paint_yellow"
+				color = "#FDFE7D"
+
+			green
+				id = "paint_green"
+				color = "#18A31A"
+
+			blue
+				id = "paint_blue"
+				color = "#247CFF"
+
+			purple
+				id = "paint_purple"
+				color = "#CC0099"
+
+			grey //Mime
+				id = "paint_grey"
+				color = "#808080"
+
+			brown //Rainbow
+				id = "paint_brown"
+				color = "#846F35"
+
+			black
+				id = "paint_black"
+				color = "#333333"
+
+			white
+				id = "paint_white"
+				color = "#F0F8FF"
+
 
 //////////////////////////Poison stuff///////////////////////
 
