@@ -50,7 +50,7 @@
 	if(turns_since_scan > 5)
 		walk_to(src,0)
 		turns_since_scan = 0
-		
+
 		if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 			movement_target = null
 			stop_automated_movement = 0
@@ -81,14 +81,91 @@
 		return //since the holder icon looks like a living cat
 	..()
 
+
+/mob/living/simple_animal/cat/fluff
+	var/bff_name
+	var/mob/living/carbon/human/bff
+
+/mob/living/simple_animal/cat/fluff/handle_movement_target()
+	if (!bff)
+		for (var/mob/living/carbon/human/M in player_list)
+			if (M.real_name == bff_name)
+				bff = M
+				break
+
+	if (bff)
+		var/follow_dist = 5
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
+			follow_dist = 1
+		else if (bff.stat || bff.health <= 50) //danger or just sleeping
+			follow_dist = 2
+		var/near_dist = max(follow_dist - 3, 1)
+		var/current_dist = get_dist(src, bff)
+
+		if (movement_target != bff)
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
+				//stop existing movement
+				walk_to(src,0)
+				turns_since_scan = 0
+
+				//walk to bff
+				stop_automated_movement = 1
+				movement_target = bff
+				walk_to(src, movement_target, near_dist, 4)
+
+		//already following and close enough, stop
+		else if (current_dist <= near_dist)
+			walk_to(src,0)
+			movement_target = null
+			stop_automated_movement = 0
+
+	if (!(bff && movement_target == bff))
+		..()
+
+/mob/living/simple_animal/cat/fluff/Life()
+	..()
+	if (stat || !bff)
+		return
+	if (get_dist(src, bff) <= 1)
+		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
+			if (prob((bff.stat < DEAD)? 50 : 15))
+				audible_emote(pick("meows in distress.", "meows anxiously."))
+		else
+			if (prob(5))
+				visible_emote(pick("nuzzles [bff].",
+								   "brushes against [bff].",
+								   "rubs against [bff].",
+								   "purrs."))
+	else if (bff.health <= 50)
+		if (prob(10)) audible_emote("meows anxiously.")
+
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/cat/Runtime
+/mob/living/simple_animal/cat/fluff/Runtime
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
+
+/mob/living/simple_animal/cat/fluff/Runtime/verb/friend()
+	set name = "Become Friends"
+	set category = "IC"
+	set src in view(1)
+
+	if (bff || !(ishuman(usr) && usr.job == "Chief Medical Officer"))
+		if (usr == bff)
+			set_dir(get_dir(src, bff))
+			say("Meow!")
+		else
+			usr << "<span class='notice'>[src] ignores you.</span>"
+		return
+
+	bff = usr
+	bff_name = usr.real_name
+
+	set_dir(get_dir(src, bff))
+	say("Meow!")
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
