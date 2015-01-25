@@ -160,17 +160,25 @@
 
 	if(href_list["splice"])
 		if(dish)
-			if (memorybank)
-				var/target = text2num(href_list["splice"])
-				if(target < 1 || target > 4) return // out of bounds
+			var/target = text2num(href_list["splice"]) // target = 1 to 4 for effects, 5 for species
+			if(memorybank && 0 < target && target <= 4)
 				if(target < memorybank.effect.stage) return // too powerful, catching this for href exploit prevention
 
+				var/datum/disease2/effectholder/target_holder
+				var/list/illegal_types = list()
 				for(var/datum/disease2/effectholder/e in dish.virus2.effects)
 					if(e.stage == target)
-						e.effect = memorybank.effect
+						target_holder = e
+					else
+						illegal_types += e.effect.type
+				if(memorybank.effect.type in illegal_types) return
+				target_holder.effect = memorybank.effect
 
-			if (species_buffer)
+			else if(species_buffer && target == 5)
 				dish.virus2.affected_species = species_buffer
+
+			else
+				return
 
 			splicing = 10
 			dish.virus2.uniqueID = rand(0,10000)

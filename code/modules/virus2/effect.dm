@@ -13,11 +13,13 @@
 		if(happensonce == 1)
 			happensonce = -1
 
-/datum/disease2/effectholder/proc/getrandomeffect(var/badness = 1)
+/datum/disease2/effectholder/proc/getrandomeffect(var/badness = 1, exclude_types=list())
 	var/list/datum/disease2/effect/list = list()
 	for(var/e in (typesof(/datum/disease2/effect) - /datum/disease2/effect))
 		var/datum/disease2/effect/f = e
-		if (initial(f.badness) > badness)	//we don't want such strong effects
+		if(e in exclude_types)
+			continue
+		if(initial(f.badness) > badness)	//we don't want such strong effects
 			continue
 		if(initial(f.stage) <= src.stage)
 			list += f
@@ -34,8 +36,8 @@
 		if(2)
 			multiplier = rand(1,effect.maxm)
 
-/datum/disease2/effectholder/proc/majormutate()
-	getrandomeffect(3)
+/datum/disease2/effectholder/proc/majormutate(exclude_types=list())
+	getrandomeffect(3, exclude_types)
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////EFFECTS/////////////////////////////////

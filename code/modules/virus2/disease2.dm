@@ -17,10 +17,12 @@
 	..()
 
 /datum/disease2/disease/proc/makerandom(var/severity=1)
+	var/list/excludetypes = list()
 	for(var/i=1 ; i <= max_stage ; i++ )
 		var/datum/disease2/effectholder/holder = new /datum/disease2/effectholder
 		holder.stage = i
-		holder.getrandomeffect(severity)
+		holder.getrandomeffect(severity, excludetypes)
+		excludetypes += holder.effect.type
 		effects += holder
 	uniqueID = rand(0,10000)
 	switch(severity)
@@ -115,7 +117,11 @@
 /datum/disease2/disease/proc/majormutate()
 	uniqueID = rand(0,10000)
 	var/datum/disease2/effectholder/holder = pick(effects)
-	holder.majormutate()
+	var/list/exclude = list()
+	for(var/datum/disease2/effectholder/D in effects)
+		if(D != holder)
+			exclude += D.effect.type
+	holder.majormutate(exclude)
 	if (prob(5))
 		antigen = text2num(pick(ANTIGENS))
 		antigen |= text2num(pick(ANTIGENS))
@@ -243,3 +249,10 @@ proc/virology_letterhead(var/report_name)
 		<center><small><i>[station_name()] Virology Lab</i></small></center>
 		<hr>
 "}
+
+proc/can_add_symptom(type)
+	for(var/datum/disease2/effectholder/H in effects)
+		if(H.effect.type == type)
+			return 0
+
+	return 1
