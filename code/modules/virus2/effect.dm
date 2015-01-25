@@ -9,7 +9,7 @@
 
 /datum/disease2/effectholder/proc/runeffect(var/mob/living/carbon/human/mob,var/stage)
 	if(happensonce > -1 && effect.stage <= stage && prob(chance))
-		effect.activate(mob)
+		effect.activate(mob, multiplier)
 		if(happensonce == 1)
 			happensonce = -1
 
