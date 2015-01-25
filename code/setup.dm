@@ -12,8 +12,16 @@
 #define STEFAN_BOLTZMANN_CONSTANT		5.6704e-8	//W/(m^2*K^4)
 #define COSMIC_RADIATION_TEMPERATURE	3.15		//K
 #define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.  From the numbers on Erebus, this'd be an orbit of 23.3 lightseconds.
-#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
-#define RADIATOR_EXPOSED_SURFACE_AREA 0.03  //The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's three centimeters thick and only explosed to the sun edge-on.
+#define RADIATOR_OPTIMUM_PRESSURE		3771		//kPa - this should be higher as gasses aren't great conductors until they are dense. Used the critical pressure for air.
+#define GAS_CRITICAL_TEMPERATURE		132.65		//K - the critical point temperature for air 
+
+/*
+	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's 
+	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on. 
+	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight 
+	to the total surface area is the same as the ratio of the perimeter of the cross-section.
+*/
+#define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)) //unitless ratio
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
