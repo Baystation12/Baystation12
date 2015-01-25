@@ -1572,3 +1572,13 @@ obj/item/clothing/head/ushanka/fluff/rufaro_nia
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nirukacap"
 	item_state = "nirukacap"
+	
+/////////////////////////////// Acera ///////////////////////////////////////////////////////
+
+
+/obj/item/clothing/under/rank/medical/fluff/valeera 
+	name = "Valeera's black scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "blackscrubs"
+	item_state = "blackscrubs"
