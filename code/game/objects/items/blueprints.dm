@@ -87,12 +87,12 @@ move an amendment</a> to the drawing.</p>
 		/area/admin,
 		/area/arrival,
 		/area/centcom,
-		/area/asteroid,
 		/area/tdome,
 		/area/syndicate_station,
-		/area/wizard_station,
-		/area/prison
-		// /area/derelict //commented out, all hail derelict-rebuilders!
+		/area/wizard_station
+		// /area/asteroid // Rude, CE might want to be helpful on the roid ;o (or tators with all access?)
+		// /area/prison // In case convicts want to make Labor Camp Arrivals into FUN CAMP ?
+		// /area/derelict //  commented out, all hail derelict-rebuilders! 
 	)
 	for (var/type in SPECIALS)
 		if ( istype(A,type) )
