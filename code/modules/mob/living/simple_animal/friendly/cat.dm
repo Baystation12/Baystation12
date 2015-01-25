@@ -81,7 +81,7 @@
 		return //since the holder icon looks like a living cat
 	..()
 
-
+//Basic friend AI
 /mob/living/simple_animal/cat/fluff
 	var/bff_name
 	var/mob/living/carbon/human/bff
@@ -99,7 +99,7 @@
 			follow_dist = 1
 		else if (bff.stat || bff.health <= 50) //danger or just sleeping
 			follow_dist = 2
-		var/near_dist = max(follow_dist - 3, 1)
+		var/near_dist = max(follow_dist - 2, 1)
 		var/current_dist = get_dist(src, bff)
 
 		if (movement_target != bff)
@@ -118,6 +118,8 @@
 			walk_to(src,0)
 			movement_target = null
 			stop_automated_movement = 0
+			if (prob(10))
+				say("Meow!")
 
 	if (!(bff && movement_target == bff))
 		..()
@@ -129,7 +131,8 @@
 	if (get_dist(src, bff) <= 1)
 		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
 			if (prob((bff.stat < DEAD)? 50 : 15))
-				audible_emote(pick("meows in distress.", "meows anxiously."))
+				var/verb = pick("meows", "mews", "mrowls")
+				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
 		else
 			if (prob(5))
 				visible_emote(pick("nuzzles [bff].",
@@ -137,7 +140,9 @@
 								   "rubs against [bff].",
 								   "purrs."))
 	else if (bff.health <= 50)
-		if (prob(10)) audible_emote("meows anxiously.")
+		if (prob(10))
+			var/verb = pick("meows", "mews", "mrowls")
+			audible_emote("[verb] anxiously.")
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/fluff/Runtime
@@ -174,3 +179,7 @@
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
 	gender = NEUTER
+
+/mob/living/simple_animal/cat/kitten/New()
+	gender = pick(MALE, FEMALE)
+	..()
