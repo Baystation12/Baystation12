@@ -27,8 +27,8 @@
 	matter = list("metal" = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
-	properties = list("wrench" = 1)
-	main_property = "wrench"
+	properties = list(TOOL_WRENCH = 1)
+	main_property = TOOL_WRENCH
 
 
 /*
@@ -48,8 +48,8 @@
 	throw_range = 5
 	matter = list("metal" = 75)
 	attack_verb = list("stabbed")
-	properties = list("screwdriver" = 1)
-	main_property = "screwdriver"
+	properties = list(TOOL_SCREWDRIVER = 1)
+	main_property = TOOL_SCREWDRIVER
 
 	suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</b>", \
@@ -111,8 +111,8 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
-	properties = list("wirecutters" = 1)
-	main_property = "wirecutters"
+	properties = list(TOOL_WIRECUTTERS = 1)
+	main_property = TOOL_WIRECUTTERS
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -149,7 +149,7 @@
 
 	//Cost to make in the autolathe
 	matter = list("metal" = 70, "glass" = 30)
-	properties = list("welder" = 1, "fueled" = 1)
+	properties = list(TOOL_WELDER = 1)
 	main_property = "welder"
 
 	//R&D tech level
@@ -450,8 +450,8 @@
 	matter = list("metal" = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-	properties = list("crowbar" = 1)
-	main_property = "crowbar"
+	properties = list(TOOL_CROWBAR = 1)
+	main_property = TOOL_CROWBAR
 
 /obj/item/weapon/crowbar/red
 	icon = 'icons/obj/items.dmi'
@@ -491,5 +491,5 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
 	w_class = 2
-	properties = list("screwdriver" = 0.8, "wrench" = 0.7, "wirecutters" = 0.8, "knife" = 0.8, "fork" = 0.8, "hatchet" = 0.6)
-	main_property = "screwdriver"
+	properties = list(TOOL_SCREWDRIVER = 0.8, TOOL_WRENCH = 0.7, TOOL_WIRECUTTERS = 0.8, TOOL_KNIFE = 0.8, TOOL_FORK = 0.8, TOOL_HATCHET = 0.6)
+	main_property = TOOL_SCREWDRIVER
