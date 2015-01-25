@@ -1413,12 +1413,6 @@
 
 ////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////
 
-/obj/item/weapon/holder/cat/fluff/bones
-	name = "Bones"
-	desc = "It's Bones! Meow."
-	gender = MALE
-	icon_state = "cat3"
-
 //Use this subtype for spawning in the custom item.
 /obj/item/weapon/holder/cat/fluff/bones/custom_item
 
@@ -1426,6 +1420,12 @@
 	if (!contents.len)
 		new/mob/living/simple_animal/cat/fluff/bones (src)
 	..()
+
+/obj/item/weapon/holder/cat/fluff/bones
+	name = "Bones"
+	desc = "It's Bones! Meow."
+	gender = MALE
+	icon_state = "cat3"
 
 /mob/living/simple_animal/cat/fluff/bones
 	name = "Bones"
@@ -1435,4 +1435,12 @@
 	icon_living = "cat3"
 	icon_dead = "cat3_dead"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
-	bff_name = "Erstatz Vryroxes"
+	var/bff_name = "Erstatz Vryroxes"
+
+/mob/living/simple_animal/cat/fluff/bones/handle_movement_target()
+	if (!bff)
+		for (var/mob/living/carbon/human/M in player_list)
+			if (M.real_name == bff_name)
+				bff = M
+				break
+	..()

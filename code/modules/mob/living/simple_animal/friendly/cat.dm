@@ -83,16 +83,9 @@
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
-	var/bff_name
 	var/mob/living/carbon/human/bff
 
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
-	if (!bff)
-		for (var/mob/living/carbon/human/M in player_list)
-			if (M.real_name == bff_name)
-				bff = M
-				break
-
 	if (bff)
 		var/follow_dist = 5
 		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
@@ -167,7 +160,6 @@
 		return
 
 	bff = usr
-	bff_name = usr.real_name
 
 	set_dir(get_dir(src, bff))
 	say("Meow!")
