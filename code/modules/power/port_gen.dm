@@ -75,6 +75,9 @@
 	explosion(src.loc, -1, 3, 5, -1)
 	del(src)
 
+#define TEMPERATURE_DIVISOR 40
+#define TEMPERATURE_CHANGE_MAX 20
+
 //A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
@@ -143,7 +146,7 @@
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	..(user)
-	user << "\The [src] appears to be outputing [power_gen*power_output] W."
+	user << "\The [src] appears to be producing [power_gen*power_output] W."
 	user << "There are [sheets] [sheet_name]\s left in the hopper."
 	if(IsBroken()) user << "<span class='warning'>\The [src] seems to have broken down.</span>"
 	if(overheating) user << "<span class='danger'>\The [src] is overheating!</span>"
@@ -183,16 +186,31 @@
 		sheet_left -= needed_sheets
 
 	//calculate the "target" temperature range
+	//This should probably depend on the external temperature somehow, but whatever.
 	var/lower_limit = 56 + power_output * temperature_gain
 	var/upper_limit = 76 + power_output * temperature_gain
+	
+	/*
+		Hot or cold environments can affect the equilibrium temperature
+		The lower the pressure the less effect it has. I guess it cools using a radiator or something when in vacuum.
+		Gives traitors more opportunities to sabotage the generator or allows enterprising engineers to build additional
+		cooling in order to get more power out.
+	*/
+	var/datum/gas_mixture/environment = loc.return_air()
+	if (environment)
+		var/ratio = min(environment.return_pressure()/ONE_ATMOSPHERE, 1)
+		var/ambient = environment.temperature - T20C
+		lower_limit += ambient*ratio
+		upper_limit += ambient*ratio
+	
 	var/average = (upper_limit + lower_limit)/2
 	
 	//calculate the temperature increase
 	var/bias = 0
 	if (temperature < lower_limit)
-		bias = round((average - temperature)/40, 1)
+		bias = min(round((average - temperature)/TEMPERATURE_DIVISOR, 1), TEMPERATURE_CHANGE_MAX)
 	else if (temperature > upper_limit)
-		bias = round((temperature - average)/40, 1)
+		bias = max(round((temperature - average)/TEMPERATURE_DIVISOR, 1), -TEMPERATURE_CHANGE_MAX)
 	
 	temperature += rand(-7 + bias, 7 + bias)
 
@@ -202,9 +220,17 @@
 		overheating--
 
 /obj/machinery/power/port_gen/pacman/handleInactive()
-	if (temperature > 0)
-		var/temp_loss = max(2, temperature/50 + rand(-2,2))
-		temperature = max(temperature - temp_loss, 0)
+	var/cooling_temperature = 20
+	var/datum/gas_mixture/environment = loc.return_air()
+	if (environment)
+		var/ratio = min(environment.return_pressure()/ONE_ATMOSPHERE, 1)
+		var/ambient = environment.temperature - T20C
+		cooling_temperature += ambient*ratio
+	
+	if (temperature > cooling_temperature)
+		var/temp_loss = (temperature - cooling_temperature)/TEMPERATURE_DIVISOR
+		temp_loss = between(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
+		temperature = max(temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 
 /obj/machinery/power/port_gen/pacman/proc/overheat()
