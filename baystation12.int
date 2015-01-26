@@ -1,10 +1,8 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\silicon\robot\robot.dm;icons\mob\custom-synthetic.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\modules code\modules\admin code\modules\admin\verbs code\modules\customitems code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\WorkInProgress code\WorkInProgress\computer3 code\WorkInProgress\computer3\computers icons icons\mob icons\obj 
-FILE: code\modules\mob\living\silicon\robot\robot.dm
+DIR: code code\modules code\modules\admin code\modules\admin\verbs code\modules\customitems code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\WorkInProgress code\WorkInProgress\computer3 
 LAST_COMPILE_TIME: 1422291417
 AUTO_FILE_DIR: OFF
 */
