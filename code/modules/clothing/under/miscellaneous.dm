@@ -400,12 +400,12 @@
 	item_color = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-/obj/item/clothing/under/purplejumpskirt
-	name = "purple jumpskirt"
-	desc = "A purple jumpskirt, Sol size 0."
-	icon_state = "purplejumpskirt"
-	item_state = "purplejumpskirt"
-	item_color = "purplejumpskirt"
+/obj/item/clothing/under/blackjumpskirt
+	name = "black jumpskirt"
+	desc = "A black jumpskirt, Sol size 0."
+	icon_state = "blackjumpskirt"
+	item_state = "blackjumpskirt"
+	item_color = "blackjumpskirt"
 
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
