@@ -117,7 +117,7 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		take_damage(log(rand(0.9, 1.1) * (adj_temp - max_temperature)))
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - max_temperature)))
 
 	return ..()
 

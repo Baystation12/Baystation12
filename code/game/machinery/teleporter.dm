@@ -119,6 +119,9 @@
 			L[tmpname] = I
 
 	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
+	if(get_dist(src, usr) > 1)
+		return
+
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\blue Locked In", 2)

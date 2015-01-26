@@ -79,6 +79,7 @@
 
 /datum/event_manager/proc/GetInteractWindow()
 	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
+	html += "<A align='right' href='?src=\ref[src];pause_all=[!config.allow_random_events]'>Pause All - [config.allow_random_events ? "Pause" : "Resume"]</A>"
 
 	if(selected_event_container)
 		var/event_time = max(0, selected_event_container.next_event_time - world.time)
@@ -211,6 +212,9 @@
 		var/datum/event_container/EC = locate(href_list["pause"])
 		EC.delayed = !EC.delayed
 		admin_log_and_message_admins("has [EC.delayed ? "paused" : "resumed"] countdown for [severity_to_string[EC.severity]] events.")
+	else if(href_list["pause_all"])
+		config.allow_random_events = text2num(href_list["pause_all"])
+		admin_log_and_message_admins("has [config.allow_random_events ? "resumed" : "paused"] countdown for all events.")
 	else if(href_list["interval"])
 		var/delay = input("Enter delay modifier. A value less than one means events fire more often, higher than one less often.", "Set Interval Modifier") as num|null
 		if(delay && delay > 0)

@@ -399,8 +399,6 @@ BLIND     // can't see anything
 		*/
 	var/obj/item/clothing/tie/hastie = null
 	var/displays_id = 1
-	var/rolled_down = 0
-	var/basecolor
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/uniform.dmi')
 
 /obj/item/clothing/under/update_clothing_icon()
@@ -526,11 +524,14 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(copytext(item_color,-2) != "_d")
-		basecolor = item_color
-	if(basecolor + "_d_s" in icon_states('icons/mob/uniform.dmi'))
-		body_parts_covered = "[basecolor]" ? LEGS|LOWER_TORSO : UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-		item_color = item_color == "[basecolor]" ? "[basecolor]_d" : "[basecolor]"
+	if(initial(item_color) + "_d_s" in icon_states('icons/mob/uniform.dmi'))
+		if (item_color == initial(item_color))
+			body_parts_covered &= LOWER_TORSO|LEGS|FEET
+			item_color = "[initial(item_color)]_d"
+		else
+			body_parts_covered = initial(body_parts_covered)
+			item_color = initial(item_color)
+		
 		update_clothing_icon()
 	else
 		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
