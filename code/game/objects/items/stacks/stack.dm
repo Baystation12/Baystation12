@@ -310,7 +310,3 @@
 		src.title = title
 		src.recipes = recipes
 		src.req_amount = req_amount
-
-/obj/item/stack/examine(mob/user)
-	user << "\icon[src] It contains [src.amount] [src.name]!"
-	return

@@ -13,7 +13,7 @@
 	force = 10.0
 	matter = list("metal" = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
-
+	
 	var/spray_particles = 6
 	var/spray_amount = 2	//units of liquid per particle
 	var/max_water = 120
@@ -43,7 +43,8 @@
 	R.add_reagent("water", max_water)
 
 /obj/item/weapon/extinguisher/examine(mob/user)
-	user << "\icon[src] [src.name] contains [src.reagents.total_volume] units of water left!"
+	if(..(user, 0))
+		user << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
 	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
@@ -123,7 +124,7 @@
 				R.my_atom = W
 				if(!W || !src) return
 				src.reagents.trans_to(W, spray_amount)
-
+			
 				for(var/b=0, b<5, b++)
 					step_towards(W,my_target)
 					if(!W || !W.reagents) return

@@ -13,10 +13,6 @@
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
 
-/obj/item/stack/rods/examine(mob/user)
-	user << "\icon[src] It's a stack of [src.amount] [src.name]!"
-	return
-
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/weldingtool))

@@ -64,8 +64,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
 /obj/item/device/pda/examine(mob/user)
-	user << "\icon[src]The time [worldtime2text()] is displayed in the corner of the screen."
-	return
+	if(..(user, 1))
+		user << "The time [worldtime2text()] is displayed in the corner of the screen."
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
