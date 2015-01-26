@@ -16,8 +16,6 @@
 
 /turf/simulated/wall/g_wall/update_damage()
 	var/cap = damage_cap
-	if(rotting)
-		cap = cap / 10
 
 	if(damage >= cap)
 		dismantle_wall( 1, 0 )
@@ -25,7 +23,6 @@
 		update_icon()
 
 	return
-
 
 /turf/simulated/wall/g_wall/attack_tk(mob/user as mob)
 	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
@@ -102,25 +99,7 @@
 
 	return
 
-/turf/simulated/wall/g_wall/proc/fungi_inter( obj/item/W as obj, mob/user as mob )
-	if(istype(W, /obj/item/weapon/weldingtool) )
-		var/obj/item/weapon/weldingtool/WT = W
-		if( WT.remove_fuel(0,user) )
-			user << "<span class='notice'>You burn away the fungi with \the [WT].</span>"
-			playsound(src, 'sound/items/Welder.ogg', 10, 1)
-			for(var/obj/effect/E in src) if(E.name == "Wallrot")
-				del E
-			rotting = 0
-			return
-	else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
-		user << "<span class='notice'>\The [src] collapses under the force of your [W.name].</span>"
-		src.dismantle_wall()
-		return
-
-	return
-
-
-	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
+//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 /turf/simulated/wall/g_wall/proc/thermite_inter( obj/item/W as obj, mob/user as mob )
 	if( istype(W, /obj/item/weapon/weldingtool) )
 		var/obj/item/weapon/weldingtool/WT = W
@@ -223,9 +202,9 @@
 		if( MS.amount == 0 )
 			del MS
 		user << "<span class='notice'>You add a reinforcing frame.</span>"
+		ChangeTurf(/turf/space)
+		new /turf/simulated/wall/g_wall/reinforced( locate(src.x, src.y, src.z) )
 
-		 /turf/simulated/wall/g_wall/ChangeState()
-		..(/turf/simulated/wall/g_wall/reinforced)
 	else
 		user << "<span class='notice'>Not enough metal rods to reinforce the glass.</span>"
 	return
@@ -259,11 +238,6 @@
 
 	//get that user's location
 	if( !istype( user.loc, /turf ))	return	//can't do this stuff whilst inside objects and such
-
-	// Rot interactions
-	if(rotting)
-		fungi_inter( W, user )
-		return
 
 	// Thermite interactions
 	else if( thermite )

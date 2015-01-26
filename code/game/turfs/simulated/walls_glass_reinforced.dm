@@ -36,7 +36,7 @@
 
 				user << "<span class='notice'>You remove the reinforcing frame.</span>"
 
-				 /turf/simulated/wall/g_wall/reinforced/ChangeState()
-				..(/turf/simulated/wall/g_wall)
+				ChangeTurf(/turf/space)
+				new /turf/simulated/wall/g_wall( locate(src.x, src.y, src.z) )
 
 				return

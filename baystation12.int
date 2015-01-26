@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\turf\walls.dmi;code\game\objects\structures\girders.dm;code\game\turfs\simulated\walls.dm;code\game\turfs\simulated\walls_glass.dm;code\game\turfs\simulated\walls_glass_reinforced.dm;code\game\objects\items\weapons\shards.dm;maps\tgstation2.dmm;code\game\objects\items\weapons\tools.dm;code\ZAS\_gas_mixture.dm;code\ZAS\Fire.dm;code\_onclick\hud\hud.dm;code\ZAS\_xgm_gas_data.dm;code\game\turfs\turf.dm
+WINDOW: icons\turf\walls.dmi;code\game\turfs\turf.dm;code\game\turfs\simulated\walls.dm;code\game\turfs\simulated\walls_glass.dm;code\game\turfs\simulated\walls_glass_reinforced.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\_onclick code\_onclick\hud code\game code\game\gamemodes code\game\jobs code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\turfs code\game\turfs\simulated code\modules code\modules\admin code\modules\admin\verbs code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\carbon\human code\modules\mob\new_player code\ZAS icons icons\turf maps sound sound\items 
+DIR: code code\datums code\datums\spells code\game code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\turfs code\game\turfs\simulated code\TriDimension code\ZAS icons icons\Testing icons\turf 
 FILE: code\game\turfs\simulated\walls_glass.dm
-LAST_COMPILE_TIME: 1422227844
+LAST_COMPILE_TIME: 1422235281
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

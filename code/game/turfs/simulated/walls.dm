@@ -298,7 +298,6 @@
 	return
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
@@ -320,6 +319,7 @@
 			user << "<span class='notice'>\The [src] crumbles away under the force of your [W.name].</span>"
 			src.dismantle_wall(1)
 			return
+	return
 
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 	if( thermite )
