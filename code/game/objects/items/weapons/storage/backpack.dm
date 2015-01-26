@@ -253,3 +253,14 @@
 	name = "emergency response team medical backpack"
 	desc = "A spacious backpack with lots of pockets, worn by medical members of a Nanotrasen Emergency Response Team."
 	icon_state = "ert_medical"
+
+/obj/item/weapon/storage/backpack/rig_storage
+	name = "Rig Storage Module"
+	desc = "You wear this on your suit and put items into it."
+	icon_state = "box"
+	item_state = "backpack"
+	slot_flags = null
+	w_class = 3
+	max_w_class = 3
+	max_combined_w_class = 12
+	storage_slots = 4
