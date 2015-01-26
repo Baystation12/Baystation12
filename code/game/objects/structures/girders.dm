@@ -98,19 +98,6 @@
 								del(src)
 						return
 
-				if(/obj/item/stack/sheet/glass, /obj/item/stack/sheet/glass/cyborg)
-					if(S.get_amount() < 2) return ..()
-					user << "<span class='notice'>Inserting glass into the frame...</span>"
-					if (do_after(user,40))
-						if (S.use(2))
-							user << "<span class='notice'>You inserted the glass!!</span>"
-							var/turf/Tsrc = get_turf(src)
-							Tsrc.ChangeTurf(/turf/simulated/wall/g_wall)
-							for(var/turf/simulated/wall/g_wall/X in Tsrc.loc)
-								if(X)	X.add_hiddenprint(usr)
-							del(src)
-					return
-
 				if(/obj/item/stack/sheet/plasteel)
 					if(!anchored)
 						if(S.use(2))

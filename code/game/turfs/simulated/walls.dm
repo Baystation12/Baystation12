@@ -109,15 +109,28 @@
 	if(istype(src,/turf/simulated/wall/g_wall))
 		if(!devastated)
 			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-			new /obj/structure/girder( src )
+			new /obj/structure/grille( src )
 			new /obj/item/stack/sheet/glass( src )
 			new /obj/item/stack/sheet/glass( src )
 		else
 			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
-			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/rods( src )
 			new /obj/item/weapon/shard( src )
 			new /obj/item/weapon/shard( src )
+
+	else if(istype(src,/turf/simulated/wall/g_wall/reinforced))
+		if(!devastated)
+			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
+			new /obj/structure/grille( src )
+			new /obj/item/stack/sheet/glass/reinforced( src )
+			new /obj/item/stack/sheet/glass/reinforced( src )
+		else
+			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
+			new /obj/structure/grille( src )
+			new /obj/item/stack/rods( src )
+			new /obj/item/weapon/shard( src )
+			new /obj/item/weapon/shard( src )
+
 
 	else if(istype(src,/turf/simulated/wall/r_wall))
 		if(!devastated)

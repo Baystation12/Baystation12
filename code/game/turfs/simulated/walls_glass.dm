@@ -31,7 +31,7 @@
 
 /turf/simulated/wall/g_wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
-		if (prob(10) || rotting)
+		if (prob(5) || rotting)
 			usr << text("\blue You shatter the glass wall!")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 			dismantle_wall(1, 0)
@@ -99,31 +99,6 @@
 
 	return
 
-//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
-/turf/simulated/wall/g_wall/proc/thermite_inter( obj/item/W as obj, mob/user as mob )
-	if( istype(W, /obj/item/weapon/weldingtool) )
-		var/obj/item/weapon/weldingtool/WT = W
-		if( WT.remove_fuel(0,user) )
-			thermitemelt(user)
-			return
-
-	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		thermitemelt(user)
-		return
-
-	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
-		var/obj/item/weapon/melee/energy/blade/EB = W
-
-		EB.spark_system.start()
-		user << "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>"
-		playsound(src, "sparks", 50, 1)
-		playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
-
-		thermitemelt(user)
-		return
-
-	return
-
 
 /turf/simulated/wall/g_wall/proc/deconstruction( obj/item/W as obj, mob/user as mob )
 	var/turf/T = user.loc	//get user's location for delay checks
@@ -167,21 +142,6 @@
 	return
 
 
-/turf/simulated/wall/g_wall/proc/drill_inter( obj/item/W as obj, mob/user as mob )
-	var/turf/T = user.loc	//get user's location for delay checks
-
-	user << "<span class='notice'>The glass begins to creak and break as you drill into it.</span>"
-
-	sleep(60)
-	if( !istype(src, /turf/simulated/wall/g_wall) || !user || !W || !T )	return
-
-	if( user.loc == T && user.get_active_hand() == W )
-		user << "<span class='notice'>Your drill shatters the sheet of glass!</span>"
-		dismantle_wall( 1, 0 )
-
-	return
-
-
 /turf/simulated/wall/g_wall/proc/repair_inter( obj/item/W as obj, mob/user as mob )
 	var/obj/item/stack/sheet/glass/MS = W
 
@@ -198,9 +158,7 @@
 /turf/simulated/wall/g_wall/proc/reinforce( obj/item/W as obj, mob/user as mob )
 	var/obj/item/stack/rods/MS = W
 	if( MS.amount >= 2 )
-		MS.amount = MS.amount-2
-		if( MS.amount == 0 )
-			del MS
+		MS.use( 2 )
 		user << "<span class='notice'>You add a reinforcing frame.</span>"
 		ChangeTurf(/turf/space)
 		new /turf/simulated/wall/g_wall/reinforced( locate(src.x, src.y, src.z) )
@@ -239,17 +197,8 @@
 	//get that user's location
 	if( !istype( user.loc, /turf ))	return	//can't do this stuff whilst inside objects and such
 
-	// Thermite interactions
-	else if( thermite )
-		thermite_inter( W, user )
-
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		EB_inter( W, user )
-
-	// drilling
-	if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
-		drill_inter( W, user )
-		return
 
 	// repairing
 	else if( istype(W, /obj/item/stack/sheet/glass))
