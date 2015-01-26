@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\modules code\modules\admin code\modules\admin\verbs code\modules\customitems code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\WorkInProgress code\WorkInProgress\computer3 
-LAST_COMPILE_TIME: 1422291417
+DIR: code code\game code\game\turfs code\game\turfs\simulated icons icons\turf 
+FILE: code\game\smoothwall.dm
+LAST_COMPILE_TIME: 1422306824
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
