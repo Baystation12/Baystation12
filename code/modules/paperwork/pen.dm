@@ -94,7 +94,6 @@
 
 	if(!(istype(M,/mob)))
 		return
-
 	..()
 
 
@@ -108,7 +107,7 @@
 	var/datum/reagents/R = new/datum/reagents(50)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("zombiepowder", 10)
+	R.add_reagent("chloralhydrate", 10)
 	R.add_reagent("cryptobiolin", 15)
 	..()
 	return

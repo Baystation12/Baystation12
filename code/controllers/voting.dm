@@ -335,11 +335,8 @@ datum/controller/vote
 						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 					else
 						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
-
 					if (additional_text.len >= i)
 						. += additional_text[i]
-
-
 				. += "</tr>"
 
 			. += "</table><hr>"
