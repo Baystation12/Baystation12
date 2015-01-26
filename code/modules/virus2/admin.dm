@@ -13,6 +13,8 @@
 			usr << "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]"
 		usr << "Antigens: [antigens2string(antigen)]"
 
+		return 1
+
 /datum/admins/var/datum/virus2_editor/virus2_editor_datum = new
 /client/proc/virus2_editor()
 	set name = "Virus Editor"
@@ -28,7 +30,7 @@
 	var/species = list()
 	var/infectionchance = 70
 	var/spreadtype = "Contact"
-	var/antigens = 0
+	var/list/antigens = list()
 	var/speed = 1
 	var/mob/living/carbon/infectee = null
 
@@ -84,10 +86,10 @@
 		<br />
 		"}
 		f = 1
-		for(var/k in ANTIGENS)
+		for(var/k in ALL_ANTIGENS)
 			if(!f) H += " | "
 			else f = 0
-			H += "<a href='?src=\ref[src];what=antigen;toggle=[k]' style='color:[(text2num(k) & antigens) ? "#006600" : "#ff0000"]'>[ANTIGENS[k]]</a>"
+			H += "<a href='?src=\ref[src];what=antigen;toggle=[k]' style='color:[(k in antigens) ? "#006600" : "#ff0000"]'>[k]</a>"
 		H += {"
 		<a href="?src=\ref[src];what=antigen;reset=1" style="color:#0000aa">Reset</a>
 		<br />
@@ -145,13 +147,14 @@
 				speed = S
 			if("antigen")
 				if(href_list["toggle"])
-					var/T = text2num(href_list["toggle"])
-					if(T&antigens)
-						antigens &= ~T
+					var/T = href_list["toggle"]
+					if(length(T) != 1) return
+					if(T in antigens)
+						antigens -= T
 					else
 						antigens |= T
 				else if(href_list["reset"])
-					antigens = 0
+					antigens = list()
 			if("infectee")
 				var/list/candidates = list()
 				for(var/mob/living/carbon/G in living_mob_list)
@@ -167,7 +170,7 @@
 				infectee = candidates[I]
 				species |= infectee.species.name
 			if("go")
-				if(!antigens)
+				if(!antigens.len)
 					var/a = alert("This disease has no antigens; it will be impossible to permanently immunise anyone without them.\
 									It is strongly recommended to set at least one antigen. Do you want to go back and edit your virus?", "Antigens", "Yes", "Yes", "No")
 					if(a == "Yes") return

@@ -8,7 +8,7 @@
 	var/clicks = 0
 	var/uniqueID = 0
 	var/list/datum/disease2/effectholder/effects = list()
-	var/antigen = 0 // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
+	var/antigen = list() // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
 	var/list/affected_species = list("Human","Unathi","Skrell","Tajara")
 
@@ -33,8 +33,8 @@
 		else
 			infectionchance = rand(60,90)
 
-	antigen |= text2num(pick(ANTIGENS))
-	antigen |= text2num(pick(ANTIGENS))
+	antigen = list(pick(ALL_ANTIGENS))
+	antigen |= pick(ALL_ANTIGENS)
 	spreadtype = prob(70) ? "Airborne" : "Contact"
 
 	if(all_species.len)
@@ -123,8 +123,8 @@
 			exclude += D.effect.type
 	holder.majormutate(exclude)
 	if (prob(5))
-		antigen = text2num(pick(ANTIGENS))
-		antigen |= text2num(pick(ANTIGENS))
+		antigen = list(pick(ALL_ANTIGENS))
+		antigen |= pick(ALL_ANTIGENS)
 	if (prob(5) && all_species.len)
 		affected_species = get_infectable_species()
 
@@ -250,7 +250,7 @@ proc/virology_letterhead(var/report_name)
 		<hr>
 "}
 
-proc/can_add_symptom(type)
+/datum/disease2/disease/proc/can_add_symptom(type)
 	for(var/datum/disease2/effectholder/H in effects)
 		if(H.effect.type == type)
 			return 0

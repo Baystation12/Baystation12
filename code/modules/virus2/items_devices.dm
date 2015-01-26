@@ -20,7 +20,7 @@
 			report("Scan aborted: The target does not have blood.", user)
 			return
 
-	if(!C.antibodies)
+	if(!C.antibodies.len)
 		report("Scan Complete: No antibodies detected.", user)
 		return
 
@@ -76,7 +76,7 @@
 	if(.) return
 
 	if(href_list["info"])
-		usr << browse(info, "window=virusinfo")
+		usr << browse(info, "window=info_\ref[src]")
 		return 1
 
 /obj/item/weapon/ruinedvirusdish

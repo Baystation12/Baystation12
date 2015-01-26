@@ -1,5 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
+/*
 // reserving some numbers for later special antigens
 var/global/const/ANTIGEN_A  = 1
 var/global/const/ANTIGEN_B  = 2
@@ -36,10 +37,18 @@ var/global/list/ANTIGENS = list(
 "[ANTIGEN_Y]" = "Y",
 "[ANTIGEN_Z]" = "Z"
 )
+*/
+
+var/global/list/ALL_ANTIGENS = list(
+		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+	)
+
+/hook/startup/proc/randomise_antigens_order()
+	ALL_ANTIGENS = shuffle(ALL_ANTIGENS)
 
 // pure concentrated antibodies
 datum/reagent/antibodies
-	data = list("antibodies"=0)
+	data = list("antibodies"=list())
 	name = "Antibodies"
 	id = "antibodies"
 	reagent_state = LIQUID
@@ -47,14 +56,26 @@ datum/reagent/antibodies
 
 	reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 		if(istype(M,/mob/living/carbon))
+			var/mob/living/carbon/C = M
 			if(src.data && method == INGEST)
-				if(M:virus2) if(src.data["antibodies"] & M:virus2.antigen)
-					M:virus2.dead = 1
-				M:antibodies |= src.data["antibodies"]
+				//if(C.virus2) if(src.data["antibodies"] & C.virus2.antigen)
+				//	C.virus2.dead = 1
+				C.antibodies |= src.data["antibodies"]
 		return
 
 // iterate over the list of antigens and see what matches
-/proc/antigens2string(var/antigens)
+/proc/antigens2string(list/antigens, none="None")
+	if(!istype(antigens))
+		CRASH("Illegal type!")
+	if(!antigens.len)
+		return none
+
 	var/code = ""
-	for(var/V in ANTIGENS) if(text2num(V) & antigens) code += ANTIGENS[V]
+	for(var/V in ALL_ANTIGENS)
+		if(V in antigens)
+			code += V
+
+	if(!code)
+		return none
+
 	return code
