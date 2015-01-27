@@ -334,11 +334,12 @@ datum/controller/vote
 						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 					if (additional_text.len >= i)
 						. += additional_text[i]
+
 				. += "</tr>"
+
 			. += "</table><hr>"
 			if(admin)
 				. += "<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a> "
-			. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		else
 			. += "<h2>Start a vote:</h2><hr><ul><li>"
 			//restart

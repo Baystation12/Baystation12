@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;code\controllers\voting.dm
+WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;code\controllers\voting.dm;maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\turfs code\game\turfs\simulated icons icons\turf 
-FILE: code\controllers\voting.dm
-LAST_COMPILE_TIME: 1422306824
+DIR: code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\turfs code\game\turfs\simulated icons icons\turf maps 
+FILE: icons\turf\walls.dmi
+LAST_COMPILE_TIME: 1422326556
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
