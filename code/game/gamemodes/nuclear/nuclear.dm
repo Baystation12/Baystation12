@@ -11,7 +11,7 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/nuclear
 	name = "mercenary"
-	config_tag = "nuclear"
+	config_tag = "mercenary"
 	required_players = 15
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
