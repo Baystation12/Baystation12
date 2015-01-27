@@ -20,21 +20,12 @@
 	var/list/actions = list()
 	switch(state)
 		if(0)
-			if(circuit && (TOOL_WRENCH in item_props))
+			if(TOOL_WRENCH in item_props)
 				actions += TOOL_WRENCH
-			if(istype(P, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = P
-				if(!WT.remove_fuel(0, user))
-					user << "The welding tool must be on to complete this task."
-					return
-				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-				if(do_after(user, 20))
-					if(!src || !WT.isOn()) return
-					user << "\blue You deconstruct the frame."
-					new /obj/item/stack/sheet/metal( src.loc, 5 )
-					del(src)
+			if(TOOL_WELDER in item_props)
+				actions += TOOL_WELDER
 		if(1)
-			if(circuit && (TOOL_WRENCH in item_props))
+			if(TOOL_WRENCH in item_props)
 				actions += TOOL_WRENCH
 			if(istype(P, /obj/item/weapon/circuitboard) && !circuit)
 				var/obj/item/weapon/circuitboard/B = P
@@ -112,8 +103,9 @@
 						src.icon_state = "0"
 						circuit.loc = src.loc
 						src.circuit = null
-						return
-					user << "<span class='notice'>You fail to remove the circuit board.</span>"
+					else
+						user << "<span class='notice'>You fail to remove the circuit board.</span>"
+					return
 				return
 			if(state == 4)
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -150,7 +142,14 @@
 						del(src)
 					user << "<span class='notice'>You fail to connect the monitor.</span>"
 				return
-		if(TOOL_WELDER) // TODO because fuel
+		if(TOOL_WELDER)
+			if(state == 0)
+				if(W.use_tool(user, 1))
+					playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+					if(do_after(user, 20))
+						user << "\blue You deconstruct the frame."
+						new /obj/item/stack/sheet/metal( src.loc, 5 )
+						del(src)
 			
 		if(TOOL_WIRECUTTERS)
 			if(state == 3)

@@ -710,3 +710,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return
+
+/obj/item/proc/use_tool(var/mob/user, var/amount) // Used to handle any effects on the tool when it's used, e.g. welding tool fuel use, emag charge use, etc.
+	return 1 // returns 1 if used succesfully

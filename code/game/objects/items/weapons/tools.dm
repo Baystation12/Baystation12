@@ -150,7 +150,7 @@
 	//Cost to make in the autolathe
 	matter = list("metal" = 70, "glass" = 30)
 	properties = list(TOOL_WELDER = 1)
-	main_property = "welder"
+	main_property = TOOL_WELDER
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -402,6 +402,11 @@
 					user.disabilities &= ~NEARSIGHTED
 	return
 
+/obj/item/weapon/weldingtool/use_tool(var/mob/user, var/amount)
+	if(!isOn())
+		return 0
+	return remove_fuel(amount, user)
+
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
@@ -432,6 +437,32 @@
 	if(reagents > max_fuel)
 		reagents = max_fuel
 
+/obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+	if(hasorgans(M))
+
+		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+
+		if (!S) return
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+			return ..()
+
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return
+
+		if(S.brute_dam)
+			S.heal_damage(15,0,0,1)
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
+
+	else
+		return ..()
+
 /*
  * Crowbar
  */
@@ -457,33 +488,6 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
-
-/obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
-
-	if(hasorgans(M))
-
-		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
-
-		if (!S) return
-		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
-			return ..()
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
-				if(M == user)
-					user << "\red You can't repair damage to your own body - it's against OH&S."
-					return
-
-		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
-			return
-		else
-			user << "Nothing to fix!"
-
-	else
-		return ..()
 
 /obj/item/weapon/combitool
 	name = "combi-tool"
