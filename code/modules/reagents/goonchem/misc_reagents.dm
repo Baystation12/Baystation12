@@ -12,9 +12,9 @@ datum/reagent/oil
 	color = "#C8A5DC" // rgb: 200, 165, 220
 
 datum/reagent/stable_plasma
-	name = "Stable Plasma"
+	name = "Stable Phoron"
 	id = "stable_plasma"
-	description = "Non-flammable plasma locked into a liquid form that cannot ignite or become gaseous/solid."
+	description = "Non-flammable phoron locked into a liquid form that cannot ignite or become gaseous/solid."
 	reagent_state = LIQUID
 	color = "#C8A5DC" // rgb: 200, 165, 220
 
