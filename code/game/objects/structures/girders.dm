@@ -6,7 +6,6 @@
 	var/state = 0
 	var/health = 200
 
-
 	bullet_act(var/obj/item/projectile/Proj)
 				//Tasers and the like should not damage girders.
 		if(Proj.damage_type == HALLOSS || Proj.damage_type == TOX || Proj.damage_type == CLONE)

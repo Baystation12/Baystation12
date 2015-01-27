@@ -102,11 +102,37 @@
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
 		if(max_temperature < 7000)
-			take_damage(rand(10, 20) * (adj_temp / max_temperature))
+			take_damage(rand(1, 5) * (adj_temp / max_temperature))
 	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
-	if(istype(src,/turf/simulated/wall/r_wall))
+	if(istype(src,/turf/simulated/wall/g_wall))
+		if(!devastated)
+			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
+			new /obj/structure/grille( src )
+			new /obj/item/stack/sheet/glass( src )
+			new /obj/item/stack/sheet/glass( src )
+		else
+			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
+			new /obj/item/stack/rods( src )
+			new /obj/item/weapon/shard( src )
+			new /obj/item/weapon/shard( src )
+
+	else if(istype(src,/turf/simulated/wall/g_wall/reinforced))
+		if(!devastated)
+			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
+			new /obj/structure/grille( src )
+			new /obj/item/stack/sheet/glass/reinforced( src )
+			new /obj/item/stack/sheet/glass/reinforced( src )
+		else
+			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
+			new /obj/structure/grille( src )
+			new /obj/item/stack/rods( src )
+			new /obj/item/weapon/shard( src )
+			new /obj/item/weapon/shard( src )
+
+
+	else if(istype(src,/turf/simulated/wall/r_wall))
 		if(!devastated)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/structure/girder/reinforced(src)
@@ -115,6 +141,7 @@
 			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/sheet/plasteel( src )
+
 	else if(istype(src,/turf/simulated/wall/cult))
 		if(!devastated)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
@@ -260,6 +287,7 @@
 	M << "\blue You push the wall but nothing happens!"
 	return
 
+
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
 		if (prob(40) || rotting)
@@ -283,7 +311,6 @@
 	return
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
@@ -357,6 +384,8 @@
 
 				if( user.loc == T && user.get_active_hand() == WT )
 					user << "<span class='notice'>You remove the outer plating.</span>"
+					new /obj/item/stack/sheet/metal( src )
+					new /obj/item/stack/sheet/metal( src )
 					dismantle_wall()
 			return
 		else

@@ -669,6 +669,8 @@
 #include "code\game\turfs\simulated\floor.dm"
 #include "code\game\turfs\simulated\floor_types.dm"
 #include "code\game\turfs\simulated\walls.dm"
+#include "code\game\turfs\simulated\walls_glass.dm"
+#include "code\game\turfs\simulated\walls_glass_reinforced.dm"
 #include "code\game\turfs\simulated\walls_mineral.dm"
 #include "code\game\turfs\simulated\walls_misc.dm"
 #include "code\game\turfs\simulated\walls_reinforced.dm"

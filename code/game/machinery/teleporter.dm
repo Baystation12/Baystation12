@@ -121,7 +121,12 @@
 				areaindex[tmpname] = 1
 			L[tmpname] = I
 
-	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
+	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
+	if(!desc)
+		return
+	if(get_dist(src, usr) > 1 && !issilicon(usr))
+		return
+
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\blue Locked In", 2)

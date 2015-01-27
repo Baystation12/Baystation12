@@ -126,7 +126,7 @@
 //CIG PACK//
 ////////////
 /obj/item/weapon/storage/fancy/cigarettes
-	name = "cigarette packet"
+	name = "NanoSmokens packet"
 	desc = "The most popular brand of Space Cigarettes, sponsors of the Space Olympics."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
@@ -181,6 +181,13 @@
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
+
+/obj/item/weapon/storage/fancy/cigarettes/lucky7
+	name = "\improper Lucky Sevens packet"
+	desc = "A packet of seven \"Lucky Sevens\" cigarettes. A label on the packaging reads \"Take a chance with Lucky Sevens\"."
+	storage_slots = 7
+	icon_state = "L7packet"
+	item_state = "L7packet"
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"

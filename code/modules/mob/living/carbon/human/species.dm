@@ -508,8 +508,7 @@
 		"antennae" =    /datum/organ/internal/wryn/hivenode
 		)
 
-
-	flags = HAS_LIPS | HAS_UNDERWEAR | NO_BREATHE | HAS_SKIN_COLOR | NO_SCAN | NO_CRYO | HIVEMIND
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | NO_BREATHE | HAS_SKIN_COLOR | NO_SCAN | NO_CRYO | HIVEMIND
 
 	reagent_tag = IS_WRYN
 

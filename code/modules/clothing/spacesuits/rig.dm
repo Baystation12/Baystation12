@@ -354,6 +354,22 @@
 	item_state = "mining_hardsuit"
 	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 20)
 
+//Prisoner Mining rig
+/obj/item/clothing/head/helmet/space/rig/mining/prisoner
+	name = "prisoner mining hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
+	icon_state = "rig0-mining-prisoner"
+	item_state = "mining_helm"
+	item_color = "mining-prisoner"
+	armor = list(melee = 20, bullet = 0, laser = 0, energy = 5, bomb = 55, bio = 100, rad = 20)
+
+/obj/item/clothing/suit/space/rig/mining/prisoner
+	icon_state = "rig-mining-prisoner"
+	name = "prisoner mining hardsuit"
+	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
+	item_state = "mining_hardsuit"
+	armor = list(melee = 20, bullet = 0, laser = 0, energy = 5, bomb = 55, bio = 100, rad = 20)
+
 
 //Syndicate rig
 /obj/item/clothing/head/helmet/space/rig/syndi

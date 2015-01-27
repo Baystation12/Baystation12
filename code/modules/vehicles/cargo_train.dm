@@ -12,10 +12,10 @@
 	load_offset_x = 0
 	mob_offset_y = 7
 	var/car_type = 0 // Specifies the type of train, 0 for cargo, 1 for science, 2 for security
-
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
 	var/obj/item/weapon/key/cargo_train/key
+	var/icon_state_init = "cargo_engine"
 
 /obj/item/weapon/key/cargo_train
 	name = "key"
@@ -57,6 +57,8 @@
 	else
 		icon_state = "cargo_engine"
 
+	icon_state_init = icon_state
+
 /obj/vehicle/train/cargo/engine/Move()
 	if(on && cell.charge < charge_use)
 		turn_off()
@@ -87,10 +89,11 @@
 	..()
 
 /obj/vehicle/train/cargo/update_icon()
-	if(open)
-		icon_state = initial(icon_state) + "_open"
+	/*if(open)
+		icon_state = icon_state_init + "_open"
 	else
-		icon_state = initial(icon_state)
+		icon_state = icon_state_init
+	*/
 
 
 /obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)

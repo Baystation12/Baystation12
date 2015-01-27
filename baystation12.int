@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\defines code\defines\procs code\game code\game\objects code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon 
-LAST_COMPILE_TIME: 1421716317
+WINDOW: icons\turf\floors.dmi;icons\turf\wallsblah.dmi;icons\turf\space.dmi;code\game\objects\items\weapons\storage\bags.dm;code\game\objects\items\weapons\storage\belt.dm;code\game\objects\items\weapons\storage\boxes.dm;code\game\objects\items\weapons\storage\fancy.dm;icons\obj\cigarettes.dmi
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\obj icons\turf 
+FILE: icons\obj\cigarettes.dmi
+LAST_COMPILE_TIME: 1422391914
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

@@ -131,9 +131,11 @@
 //Announces the game type//
 ///////////////////////////
 /datum/game_mode/revolution/rp_revolution/announce()
+/*
 	world << "<B>The current game mode is - Revolution!</B>"
 	world << "<B>Some crewmembers are attempting to start a revolution!</B>"
-
+*/
+	world << "<B>The current game mode is - Hidden!</B>"
 
 //////////////////////////////////////////////////////////////////////
 //Announces the end of the game with all relavent information stated//
