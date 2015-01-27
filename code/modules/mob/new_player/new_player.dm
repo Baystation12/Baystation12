@@ -72,10 +72,11 @@
 		statpanel("Lobby")
 		if(client.statpanel=="Lobby" && ticker)
 			if(ticker.hide_mode)
-				stat("Game Mode:", "Secret")
+				stat("Game Mode:", "Hidden")
 			else
 				if(ticker.hide_mode == 0)
-					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
+//					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
+					stat("Game Mode:", "Hidden")
 
 			if(ticker.current_state == GAME_STATE_PREGAME)
 				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
@@ -144,15 +145,13 @@
 
 			if(client.prefs.species != "Human")
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-					if(client.prefs.species != "Wryn")
-						src << alert("You are currently not whitelisted to play [client.prefs.species].")
-						return 0
+					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
 				if(!(S.flags & IS_WHITELISTED))
-					if(client.prefs.species != "Wryn")
-						src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
-						return 0
+					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+					return 0
 
 			LateChoices()
 
@@ -167,15 +166,13 @@
 
 			if(client.prefs.species != "Human")
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-					if(client.prefs.species != "Wryn")
-						src << alert("You are currently not whitelisted to play [client.prefs.species].")
-						return 0
+					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
 
 				var/datum/species/S = all_species[client.prefs.species]
 				if(!(S.flags & IS_WHITELISTED))
-					if(client.prefs.species != "Wryn")
-						src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
-						return 0
+					src << alert("Your current species,[client.prefs.species], is not available for play on the station.")
+					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 			return

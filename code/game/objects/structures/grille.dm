@@ -109,6 +109,33 @@
 	return 0
 
 /obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/stack/sheet/glass) || istype(W, /obj/item/stack/sheet/glass/cyborg))
+		var/obj/item/stack/sheet/S = W
+		if(S.get_amount() < 2) return ..()
+		user << "<span class='notice'>Inserting glass into the frame...</span>"
+		if (do_after(user,40))
+			if (S.use(2))
+				user << "<span class='notice'>You inserted the glass!!</span>"
+				var/turf/Tsrc = get_turf(src)
+				Tsrc.ChangeTurf(/turf/simulated/wall/g_wall)
+				for(var/turf/simulated/wall/g_wall/X in Tsrc.loc)
+					if(X)	X.add_hiddenprint(usr)
+				del(src)
+		return
+	else if(istype(W, /obj/item/stack/sheet/glass/reinforced) || istype(W, /obj/item/stack/sheet/glass/reinforced/cyborg))
+		var/obj/item/stack/sheet/S = W
+		if(S.get_amount() < 2) return ..()
+		user << "<span class='notice'>Insertingthe reinforced glass into the frame...</span>"
+		if (do_after(user,40))
+			if (S.use(2))
+				user << "<span class='notice'>You inserted the reinforced glass!!</span>"
+				var/turf/Tsrc = get_turf(src)
+				Tsrc.ChangeTurf(/turf/simulated/wall/g_wall/reinforced)
+				for(var/turf/simulated/wall/g_wall/reinforced/X in Tsrc.loc)
+					if(X)	X.add_hiddenprint(usr)
+				del(src)
+		return
+
 	if(iswirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -153,7 +180,7 @@
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 					user << "<span class='notice'>There is already a window facing this way there.</span>"
 					return
-			
+
 			var/wtype = ST.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)

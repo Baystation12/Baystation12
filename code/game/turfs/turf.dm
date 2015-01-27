@@ -364,3 +364,7 @@
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
+
+/turf/proc/ChangeState(var/turf/N)
+	if (!N)
+		return

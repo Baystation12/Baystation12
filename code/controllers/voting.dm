@@ -66,13 +66,12 @@ datum/controller/vote
 		current_votes.Cut()
 		additional_text.Cut()
 
-	/*	if(auto_muted && !ooc_allowed)
+		if(auto_muted && !ooc_allowed)
 			auto_muted = 0
 			ooc_allowed = !( ooc_allowed )
 			world << "<b>The OOC channel has been automatically enabled due to vote end.</b>"
 			log_admin("OOC was toggled automatically due to vote end.")
-			message_admins("OOC has been toggled on automatically.")
-	*/
+			message_admins("OOC has been toggled automatically.")
 
 	proc/get_result()
 		//get the highest number of votes
@@ -128,21 +127,23 @@ datum/controller/vote
 		if(winners.len > 0)
 			if(winners.len > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
-					text = "<b>Vote Tied Between:</b>\n"
+					/*text = "<b>Vote Tied Between:</b>\n"
 					for(var/option in winners)
 						text += "\t[option]\n"
+					*/
+					text = "<b>Vote Tied. Breaking tie...</b>\n"
 			. = pick(winners)
 
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
-			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
-				text += "<b>Vote Result: [.]</b>"
+			if( mode == "gamemode" )
+				text += "<b>Vote Result: Hidden</b>"
 			else
-				if(mode != "gamemode")
-					text += "<b>Vote Result: [.]</b>"
-				else
-					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+				text += "<b>Vote Result: [.]</b>"
+
+			log_admin("Vote Result: [.]")
+			message_admins("Vote Result: [.]")
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
@@ -264,28 +265,38 @@ datum/controller/vote
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"
 				log_admin("OOC was toggled automatically due to crew_transfer vote.")
-				message_admins("OOC has been toggled off automatically.")
+				message_admins("OOC has been toggled off automatically.") */
 			if(mode == "gamemode" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
 				log_admin("OOC was toggled automatically due to gamemode vote.")
-				message_admins("OOC has been toggled off automatically.")
-			if(mode == "custom" && ooc_allowed)
+				message_admins("OOC has been toggled automatically.")
+/*			if(mode == "custom" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a custom vote.</b>"
 				log_admin("OOC was toggled automatically due to custom vote.")
 				message_admins("OOC has been toggled off automatically.")
 		*/
-
-
-
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0
 
 	proc/interface(var/client/C)
+		var/list/required_players = list()
+		if( mode == "gamemode" )
+			var/list/L = typesof(/datum/game_mode) - /datum/game_mode
+			for (var/F in choices)
+				for (var/T in L)
+					var/datum/game_mode/M = new T()
+					if (M.config_tag == F)
+						required_players.Add( M.required_players ) // Swings and roundabouts just to get the required playercount :V
+
+		var/total_players = 0
+		for(var/client/D in clients)
+			total_players = total_players+1
+
 		if(!C)	return
 		var/admin = 0
 		var/trialmin = 0
@@ -306,19 +317,29 @@ datum/controller/vote
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
-				. += "<tr>"
-				if(current_votes[C.ckey] == i)
-					. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
-				else
-					. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 
-				if (additional_text.len >= i)
-					. += additional_text[i]
+				. += "<tr>"
+				if(mode == "gamemode" )
+					if( total_players >= required_players[i] )
+						if(current_votes[C.ckey] == i)
+							. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						else
+							. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						if (additional_text.len >= i)
+							. += additional_text[i]
+				else
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+					if (additional_text.len >= i)
+						. += additional_text[i]
+
 				. += "</tr>"
 
 			. += "</table><hr>"
 			if(admin)
-				. += "(<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a>) "
+				. += "<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a> "
 		else
 			. += "<h2>Start a vote:</h2><hr><ul><li>"
 			//restart
@@ -347,6 +368,7 @@ datum/controller/vote
 			if(trialmin)
 				. += "<li><a href='?src=\ref[src];vote=custom'>Custom</a></li>"
 			. += "</ul><hr>"
+
 		. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		return .
 

@@ -5,6 +5,23 @@
 	var/last_event = 0
 	var/active = null
 
+/turf/simulated/wall/mineral/glass
+	name = "glass window"
+	desc = "A wall made from glass! Do'h!"
+	icon_state = "gwall0"
+	walltype = "gwall"
+	mineral = "glass"
+	opacity = 0
+
+
+/turf/simulated/wall/mineral/rglass
+	name = "reinforced glass window"
+	desc = "A wall made from reinforced glass! Looks tough."
+	icon_state = "grwall0"
+	walltype = "grwall"
+	mineral = "rglsss"
+	opacity = 0
+
 /turf/simulated/wall/mineral/gold
 	name = "gold wall"
 	desc = "A wall with gold plating. Swag!"

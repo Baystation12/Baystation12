@@ -41,7 +41,10 @@
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
+					// Playing red alert sound
+					security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/alarm.ogg'))
 					security_announcement_up.Announce("[config.alert_desc_red_upto]", "Attention! Code red!")
+					security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 				else
 					security_announcement_down.Announce("[config.alert_desc_red_downto]", "Attention! Code red!")
 				security_level = SEC_LEVEL_RED

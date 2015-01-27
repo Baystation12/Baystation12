@@ -5,4 +5,6 @@
 *.dmb
 *.lk
 data/
+cfg/
 baystation12.int
+code/hub.dm

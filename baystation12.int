@@ -1,11 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;code\modules\clothing\spacesuits\rig.dm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\defines\procs code\game\area code\game\machinery code\game\machinery\computer code\game\objects code\js code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\clothing code\modules\clothing\spacesuits code\modules\mob\dead icons icons\mob icons\obj icons\obj\clothing maps 
-FILE: code\modules\clothing\spacesuits\rig.dm
-LAST_COMPILE_TIME: 1421790473
+WINDOW: icons\turf\floors.dmi;icons\turf\wallsblah.dmi
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\turf 
+LAST_COMPILE_TIME: 1422336806
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
