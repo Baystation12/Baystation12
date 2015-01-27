@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi
+WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;code\controllers\voting.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\turfs code\game\turfs\simulated icons icons\turf 
-FILE: code\game\smoothwall.dm
+DIR: code code\controllers code\game code\game\turfs code\game\turfs\simulated icons icons\turf 
+FILE: code\controllers\voting.dm
 LAST_COMPILE_TIME: 1422306824
 AUTO_FILE_DIR: OFF
 */

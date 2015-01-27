@@ -137,13 +137,10 @@ datum/controller/vote
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
-			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+			if( mode == "gamemode" )
 				text += "<b>Vote Result: Hidden</b>"
 			else
-				if(mode != "gamemode")
-					text += "<b>Vote Result: [.]</b>"
-				else
-					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
+				text += "<b>Vote Result: [.]</b>"
 
 			log_admin("Vote Result: [.]")
 			message_admins("Vote Result: [.]")
@@ -298,8 +295,8 @@ datum/controller/vote
 
 		var/total_players = 0
 		for(var/client/D in clients)
-
 			total_players = total_players+1
+
 		if(!C)	return
 		var/admin = 0
 		var/trialmin = 0
@@ -338,10 +335,10 @@ datum/controller/vote
 					if (additional_text.len >= i)
 						. += additional_text[i]
 				. += "</tr>"
-
 			. += "</table><hr>"
 			if(admin)
-				. += "(<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a>) "
+				. += "<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a> "
+			. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		else
 			. += "<h2>Start a vote:</h2><hr><ul><li>"
 			//restart
@@ -370,6 +367,7 @@ datum/controller/vote
 			if(trialmin)
 				. += "<li><a href='?src=\ref[src];vote=custom'>Custom</a></li>"
 			. += "</ul><hr>"
+
 		. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		return .
 
