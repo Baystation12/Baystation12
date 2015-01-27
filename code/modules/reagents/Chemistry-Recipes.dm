@@ -16,6 +16,9 @@ datum
 		var/list/secondary_results = list()		//additional reagents produced by the reaction
 		var/requires_heating = 0
 
+		var/required_temp = 0
+		var/mix_message = "The solution begins to bubble."
+
 		proc
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				return
@@ -120,18 +123,11 @@ datum
 			required_catalysts = list("phoron" = 1)
 			result_amount = 1
 
-		//cyanide
-		//	name = "Cyanide"
-		//	id = "cyanide"
-		//	result = "cyanide"
-		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
-		//	result_amount = 1
-
 		water //I can't believe we never had this.
 			name = "Water"
 			id = "water"
 			result = "water"
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
+			required_reagents = list("oxygen" = 1, "hydrogen" = 2) // someone needs to think about how you could make water's recipe be "2 oxygen 1 hydrogen". H2O, not O2H.
 			result_amount = 1
 
 		thermite

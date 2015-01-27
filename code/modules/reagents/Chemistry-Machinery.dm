@@ -13,8 +13,8 @@
 	use_power = 0
 	idle_power_usage = 40
 	var/ui_title = "Chem Dispenser 5000"
-	var/energy = 100
-	var/max_energy = 100
+	var/energy = 150
+	var/max_energy = 150
 	var/amount = 30
 	var/accept_glass = 0 //At 0 ONLY accepts glass containers. Kinda misleading varname.
 	var/atom/beaker = null
@@ -22,7 +22,7 @@
 	var/hackedcheck = 0
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
-	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
+	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten","fuel","silver","iodine","bromine","fluorine","stable_plasma")
 
 /obj/machinery/chem_dispenser/proc/recharge()
 	if(stat & (BROKEN|NOPOWER)) return
@@ -448,6 +448,23 @@
 			else
 				var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(src.loc)
 				reagents.trans_to(P,50)
+		else if(href_list["createpatch"])
+			if(reagents.total_volume == 0) return
+			var/amount = 1
+			var/vol_each = min(reagents.total_volume, 50)
+			if(text2num(href_list["many"]))
+				amount = min(max(round(input(usr, "Amount:", "How many patches?") as num), 1), 10)
+				vol_each = min(reagents.total_volume/amount, 50)
+			var/name = reject_bad_text(input(usr,"Name:","Name your patch!", "[reagents.get_master_reagent_name()] ([vol_each]u)"))
+			var/obj/item/weapon/reagent_containers/pill/patch/P
+
+			for(var/i = 0; i < amount; i++)
+				P = new/obj/item/weapon/reagent_containers/pill/patch(src.loc)
+				if(!name) name = reagents.get_master_reagent_name()
+				P.name = "[name] patch"
+				P.pixel_x = rand(-7, 7) //random position
+				P.pixel_y = rand(-7, 7)
+				reagents.trans_to(P,vol_each)
 		else if(href_list["change_pill"])
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
@@ -529,6 +546,8 @@
 		if(!condi)
 			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (60 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
+			dat += "<HR><BR><A href='?src=\ref[src];createpatch=1;many=0'>Create patch (60 units max)</A><BR>"
+			dat += "<A href='?src=\ref[src];createpatch=1;many=1'>Create patches (10 patches max)</A><BR><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle-[bottlesprite].png\" /></A>"
 		else
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
