@@ -5,7 +5,7 @@
 	initial_icon = "engineering_pod"
 	internal_damage_threshold = 80
 	step_in = 4
-	step_energy_drain = 15
+	step_energy_drain = 10
 	max_temperature = 20000
 	health = 150
 	infra_luminosity = 6
