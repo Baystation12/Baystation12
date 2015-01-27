@@ -5,10 +5,10 @@ mob/living/carbon/verb/give(var/mob/living/carbon/target in view(1)-usr)
 		return
 	var/obj/item/I
 	if(!usr.hand && usr.r_hand == null)
-		usr << "\red You don't have anything in your right hand to give to [target.name]"
+		usr << "<span class='warning'>You don't have anything in your right hand to give to [target.name]</span>"
 		return
 	if(usr.hand && usr.l_hand == null)
-		usr << "\red You don't have anything in your left hand to give to [target.name]"
+		usr << "<span class='warning'>You don't have anything in your left hand to give to [target.name]</span>"
 		return
 	if(usr.hand)
 		I = usr.l_hand
@@ -22,16 +22,16 @@ mob/living/carbon/verb/give(var/mob/living/carbon/target in view(1)-usr)
 				if(!I)
 					return
 				if(!Adjacent(usr))
-					usr << "\red You need to stay in reaching distance while giving an object."
-					target << "\red [usr.name] moved too far away."
+					usr << "<span class='warning'>You need to stay in reaching distance while giving an object.</span>"
+					target << "<span class='warning'>[usr.name] moved too far away.</span>"
 					return
 				if((usr.hand && usr.l_hand != I) || (!usr.hand && usr.r_hand != I))
-					usr << "\red You need to keep the item in your active hand."
-					target << "\red [usr.name] seem to have given up on giving \the [I.name] to you."
+					usr << "<span class='warning'>You need to keep the item in your active hand.</span>"
+					target << "<span class='warning'>[usr.name] seem to have given up on giving \the [I.name] to you.</span>"
 					return
-				if(src.r_hand != null && src.l_hand != null)
-					target << "\red Your hands are full."
-					usr << "\red Their hands are full."
+				if(target.r_hand != null && target.l_hand != null)
+					target << "<span class='warning'>Your hands are full.</span>"
+					usr << "<span class='warning'>Their hands are full.</span>"
 					return
 				else
 					usr.drop_item()
@@ -46,8 +46,8 @@ mob/living/carbon/verb/give(var/mob/living/carbon/target in view(1)-usr)
 				target.update_inv_r_hand()
 				usr.update_inv_l_hand()
 				usr.update_inv_r_hand()
-				target.visible_message("\blue [usr.name] handed \the [I.name] to [target.name].")
+				target.visible_message("<span class='notice'>[usr.name] handed \the [I.name] to [target.name].</span>")
 			if("No")
-				target.visible_message("\red [usr.name] tried to hand [I.name] to [target.name] but [target.name] didn't want it.")
+				target.visible_message("<span class='warning'>[usr.name] tried to hand [I.name] to [target.name] but [target.name] didn't want it.</span>")
 	else
-		usr << "\red [target.name]'s hands are full."
+		usr << "<span class='warning'>[target.name]'s hands are full.</span>"
