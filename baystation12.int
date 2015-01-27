@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;code\controllers\voting.dm
+WINDOW: code\controllers\voting.dm;code\game\gamemodes\gameticker.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\turfs code\game\turfs\simulated icons icons\turf 
+DIR: code code\controllers code\game code\game\gamemodes icons icons\effects icons\mob icons\turf 
 FILE: code\controllers\voting.dm
-LAST_COMPILE_TIME: 1422306824
+LAST_COMPILE_TIME: 1422323578
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
