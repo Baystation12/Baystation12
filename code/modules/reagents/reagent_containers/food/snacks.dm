@@ -2805,7 +2805,48 @@
 		reagents.add_reagent("radium", 2)
 		bitesize = 2
 
+////////////////////////////////ICE CREAM///////////////////////////////////
+/obj/item/weapon/reagent_containers/food/snacks/icecream
+        name = "ice cream"
+        desc = "Delicious ice cream."
+        icon = 'icons/obj/kitchen.dmi'
+        icon_state = "icecream_cone"
+        New()
+                ..()
+                reagents.add_reagent("nutriment", 1)
+                reagents.add_reagent("sugar",1)
+                bitesize = 1
+                update_icon()
 
+        update_icon()
+                overlays.Cut()
+                var/image/filling = image('icons/obj/kitchen.dmi', src, "icecream_color")
+                filling.icon += mix_color_from_reagents(reagents.reagent_list)
+                overlays += filling
+
+/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone
+        name = "ice cream cone"
+        desc = "Delicious ice cream."
+        icon_state = "icecream_cone"
+        volume = 500
+        New()
+                ..()
+                reagents.add_reagent("nutriment", 2)
+                reagents.add_reagent("sugar",6)
+                reagents.add_reagent("ice",2)
+                bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcup
+        name = "chocolate ice cream cone"
+        desc = "Delicious ice cream."
+        icon_state = "icecream_cup"
+        volume = 500
+        New()
+                ..()
+                reagents.add_reagent("nutriment", 4)
+                reagents.add_reagent("sugar",8)
+                reagents.add_reagent("ice",2)
+                bitesize = 6
 
 
 ///////////////////////////////////////////
