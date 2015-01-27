@@ -1,10 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\turf\floors.dmi;icons\turf\wallsblah.dmi;maps\tgstation2.dmm
+WINDOW: icons\turf\floors.dmi;icons\turf\wallsblah.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\turf maps 
-FILE: icons\turf\wallsblah.dmi
+DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\turf 
 LAST_COMPILE_TIME: 1422336806
 AUTO_FILE_DIR: OFF
 */
