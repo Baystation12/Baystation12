@@ -14,7 +14,7 @@
 			if(!host.ckey && !host.client)
 				host.death()  // This seems redundant, but a lot of mobs don't
 				host.stat = 2 // handle death() properly. Better safe than etc.
-				host.visible_message("\red <b>[host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds.")
+				host.visible_message("<span class='danger'>[host] is malformed and unable to survive. It expires pitifully, leaving behind some seeds.</span>")
 
 				var/total_yield = rand(1,3)
 				for(var/j = 0;j<=total_yield;j++)
