@@ -1,8 +1,9 @@
 #define HYDRO_SPEED_MULTIPLIER 1
+var/global/list/plant_icon_cache = list()
 
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = 1
 	anchored = 1
@@ -455,21 +456,40 @@
 			overlays += "over_lowhealth3"
 
 		if(dead)
-			overlays += "[seed.plant_icon]-dead"
-		else if(harvest)
-			overlays += "[seed.plant_icon]-harvest"
-		else if(age < seed.maturation)
-
-			var/t_growthstate
-			if(age >= seed.maturation)
-				t_growthstate = seed.growth_stages
-			else
-				t_growthstate = round(seed.maturation / seed.growth_stages)
-
-			overlays += "[seed.plant_icon]-grow[t_growthstate]"
-			lastproduce = age
+			var/ikey = "[seed.plant_icon]-dead"
+			var/image/dead_overlay = plant_icon_cache["[ikey]"]
+			if(!dead_overlay)
+				dead_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
+			overlays |= dead_overlay
 		else
-			overlays += "[seed.plant_icon]-grow[seed.growth_stages]"
+			if(!seed.growth_stages)
+				seed.update_growth_stages()
+			if(!seed.growth_stages)
+				world << "<span class='danger'>Seed type [seed.plant_icon] cannot find a growth stage value.</span>"
+				return
+			var/overlay_stage = 1
+			if(age >= seed.maturation)
+				overlay_stage = seed.growth_stages
+				lastproduce = age
+			else
+				overlay_stage = max(1,round(seed.maturation / seed.growth_stages))
+
+			var/ikey = "[seed.plant_icon]-[overlay_stage]"
+			var/image/plant_overlay = plant_icon_cache["[ikey]-[seed.plant_colour]"]
+			if(!plant_overlay)
+				plant_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
+				plant_overlay.color = seed.plant_colour
+				plant_icon_cache["[ikey]-[seed.plant_colour]"] = plant_overlay
+			overlays |= plant_overlay
+
+			if(harvest)
+				ikey = "[seed.product_icon]"
+				var/image/harvest_overlay = plant_icon_cache["product-[ikey]-[seed.product_colour]"]
+				if(!harvest_overlay)
+					harvest_overlay = image('icons/obj/hydroponics_products.dmi', "[ikey]")
+					harvest_overlay.color = seed.product_colour
+					plant_icon_cache["product-[ikey]-[seed.product_colour]"] = harvest_overlay
+				overlays |= harvest_overlay
 
 	//Draw the cover.
 	if(closed_system)
@@ -793,7 +813,6 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil
 	name = "soil"
-	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "soil"
 	density = 0
 	use_power = 0

@@ -181,7 +181,7 @@
 // *************************************
 
 /obj/item/weapon/plantspray
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	item_state = "spray"
 	flags = NOBLUDGEON
 	slot_flags = SLOT_BELT

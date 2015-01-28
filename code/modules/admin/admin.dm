@@ -996,7 +996,7 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/spawn_fruit()
 	set category = "Debug"
-	set desc = "(seed index) Spawn the product of a seed."
+	set desc = "Spawn the product of a seed."
 	set name = "Spawn Fruit"
 
 	if(!check_rights(R_SPAWN))	return
