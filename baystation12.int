@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;icons\turf\floors.dmi;icons\turf\walls.dmi;icons\turf\wallsblah.dmi;code\game\machinery\spaceheater.dm;icons\obj\atmos.dmi
+WINDOW: maps\tgstation2.dmm;icons\obj\power.dmi;icons\turf\catwalks.dmi;icons\obj\monitors.dmi;code\game\machinery\camera\camera.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\obj icons\turf maps 
-FILE: icons\obj\atmos.dmi
-LAST_COMPILE_TIME: 1422399292
+DIR: code code\controllers code\game code\game\gamemodes code\game\machinery code\game\machinery\camera code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated icons icons\obj icons\turf maps 
+FILE: maps\tgstation2.dmm
+LAST_COMPILE_TIME: 1422431952
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

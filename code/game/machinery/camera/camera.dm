@@ -53,6 +53,9 @@
 		ASSERT(src.network.len > 0)
 	..()
 
+	if(src.dir == 2 )
+		src.pixel_y = 20
+
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
@@ -239,6 +242,7 @@
 			switch(i)
 				if(NORTH)
 					src.dir = SOUTH
+					src.pixel_y = 20
 				if(SOUTH)
 					src.dir = NORTH
 				if(WEST)
