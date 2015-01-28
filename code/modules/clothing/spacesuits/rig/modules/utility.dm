@@ -12,6 +12,7 @@
  * /obj/item/rig_module/chem_dispenser
  * /obj/item/rig_module/chem_dispenser/injector
  * /obj/item/rig_module/voice
+ * /obj/item/rig_module/storage
  */
 
 /obj/item/rig_module/device
@@ -339,3 +340,23 @@
 	jets.ion_trail.set_up(jets)
 
 /obj/item/rig_module/foam_sprayer
+
+/obj/item/rig_module/storage
+	name = "Storage module"
+	desc = "Small module for storing items."
+	toggleable = 1
+	interface_name = "Storage Module"
+	interface_desc = "Smal module for storing items."
+
+	var/obj/item/weapon/storage/backpack/rig_storage/storage
+
+/obj/item/rig_module/storage/New()
+	. = ..()
+	storage = new (src)
+
+/obj/item/rig_module/storage/Del()
+	del storage
+	. = ..()
+
+/obj/item/rig_module/storage/activate()
+	storage.open(usr)
