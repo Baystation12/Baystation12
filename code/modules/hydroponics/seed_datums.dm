@@ -128,9 +128,9 @@ proc/populate_seed_list()
 
 	// Cosmetics.
 	var/plant_icon                  // Icon to use for the plant growing in the tray.
-	var/plant_colour = "#4BC445"    // Colour of the plant icon.
-	var/product_icon                // Base to use for fruit coming from this plant (if a vine).
-	var/product_colour              // Colour to apply to product base (if a vine).
+	var/plant_colour = "#6EF86A"    // Colour of the plant icon.
+	var/product_icon                // Icon to use for fruit coming from this plant.
+	var/product_colour              // Colour to apply to product icon.
 	var/packet_icon = "seed"        // Icon to use for physical seed packet item.
 	var/biolum                      // Plant is bioluminescent.
 	var/biolum_colour               // The colour of the plant's radiance.
@@ -156,18 +156,21 @@ proc/populate_seed_list()
 	var/datum/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 
-	if(carnivorous == 2)
-		if(affecting)
-			target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.display_name] greedily!</span>"
+	if(carnivorous)
+		if(carnivorous == 2)
+			if(affecting)
+				target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.display_name] greedily!</span>"
+			else
+				target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
+			damage = potency/2
 		else
-			target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
-		damage = potency/2
+			if(affecting)
+				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.display_name]!</span>"
+			else
+				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
+			damage = potency/5
 	else
-		if(affecting)
-			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.display_name]!</span>"
-		else
-			target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
-		damage = potency/5
+		return
 
 	if(affecting)
 		affecting.take_damage(damage, 0)
