@@ -22,7 +22,7 @@
 	var/hackedcheck = 0
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
-	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten","fuel","silver","iodine","bromine","fluorine","stable_plasma")
+	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten","fuel","silver","iodine","bromine","fluorine","stable_phoron")
 
 /obj/machinery/chem_dispenser/proc/recharge()
 	if(stat & (BROKEN|NOPOWER)) return
@@ -262,10 +262,12 @@
 	var/condi = 0
 	var/useramount = 30 // Last used amount
 	var/pillamount = 10
+	var/patchamount = 10
 	var/bottlesprite = "1" //yes, strings
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
 	var/max_pill_count = 20
+	var/max_patch_count = 20
 
 /obj/machinery/chem_master/New()
 	..()
@@ -433,7 +435,33 @@
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
 						P.loc = loaded_pill_bottle
 						src.updateUsrDialog()
+		else if (href_list["createpatch"] || href_list["createpatch_multiple"])
+			var/count = 1
 
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
+			if (href_list["createpatch_multiple"])
+				count = Clamp(isgoodnumber(input("Select the number of patches to make.", 10, patchamount) as num),1,max_patch_count)
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
+			var/amount_per_patch = reagents.total_volume/count
+			if (amount_per_patch > 60) amount_per_patch = 60
+
+			var/name = reject_bad_text(input(usr,"Name:","Name your patch!","[reagents.get_master_reagent_name()] ([amount_per_patch] units)"))
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+			while (count--)
+				var/obj/item/weapon/reagent_containers/pill/patch/P = new/obj/item/weapon/reagent_containers/pill/patch(src.loc)
+				if(!name) name = reagents.get_master_reagent_name()
+				P.name = "[name] patch"
+				P.pixel_x = rand(-7, 7) //random position
+				P.pixel_y = rand(-7, 7)
+				reagents.trans_to(P,amount_per_patch)
+				src.updateUsrDialog()
 		else if (href_list["createbottle"])
 			if(!condi)
 				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))
@@ -546,8 +574,8 @@
 		if(!condi)
 			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (60 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
 			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
-			dat += "<HR><BR><A href='?src=\ref[src];createpatch=1;many=0'>Create patch (60 units max)</A><BR>"
-			dat += "<A href='?src=\ref[src];createpatch=1;many=1'>Create patches (10 patches max)</A><BR><BR>"
+			dat += "<HR><BR><A href='?src=\ref[src];createpatch=1'>Create patch (60 units max)</A><BR>"
+			dat += "<A href='?src=\ref[src];createpatch_multiple=1'>Create multiple patches</A><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (60 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle-[bottlesprite].png\" /></A>"
 		else
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"

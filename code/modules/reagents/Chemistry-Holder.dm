@@ -1,5 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
+#DEFINE CHEMICAL_PROCESS_RATE 3
+#DEFINE ADDICTION_PROCESS_RATE 6
 var/const/TOUCH = 1
 var/const/INGEST = 2
 
@@ -265,7 +266,7 @@ datum
 */
 
 			metabolize(var/mob/M,var/alien)
-				if(last_tick == 3)
+				if(last_tick == CHEMICAL_PROCESS_RATE)
 					last_tick = 1
 					for(var/A in reagent_list)
 						var/datum/reagent/R = A
@@ -283,26 +284,26 @@ datum
 									if(istype(R, addicted_reagent))
 										addicted_reagent.addiction_stage = -15 // you're satisfied for a good while.
 							R.on_mob_life(M, alien)
-				if(addiction_tick == 6)
+				if(addiction_tick == ADDICTION_PROCESS_RATE)
 					addiction_tick = 1
 					for(var/A in addiction_list)
 						var/datum/reagent/R = A
-						if(M && R)
-							if(R.addiction_stage <= 0)
+						switch(R.addiction_stage)
+							if(-15 to 0)
 								R.addiction_stage++
-							if(R.addiction_stage > 0 && R.addiction_stage <= 10)
-								R.addiction_act_stage1(M)
+							if(1 to 10)
+								R.addiction_act(M, 1)
 								R.addiction_stage++
-							if(R.addiction_stage > 10 && R.addiction_stage <= 20)
-								R.addiction_act_stage2(M)
+							if(11 to 20)
+								R.addiction_act(M, 2)
 								R.addiction_stage++
-							if(R.addiction_stage > 20 && R.addiction_stage <= 30)
-								R.addiction_act_stage3(M)
+							if(21 to 30)
+								R.addiction_act(M, 3)
 								R.addiction_stage++
-							if(R.addiction_stage > 30 && R.addiction_stage <= 40)
-								R.addiction_act_stage4(M)
+							if(31 to 40)
+								R.addiction_act(M, 4)
 								R.addiction_stage++
-							if(R.addiction_stage > 40)
+							if(41)
 								M << "<span class = 'notice'>You feel like you've gotten over your need for [R.name].</span>"
 								addiction_list.Remove(R)
 				addiction_tick++

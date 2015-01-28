@@ -127,7 +127,7 @@ datum
 			name = "Water"
 			id = "water"
 			result = "water"
-			required_reagents = list("oxygen" = 1, "hydrogen" = 2) // someone needs to think about how you could make water's recipe be "2 oxygen 1 hydrogen". H2O, not O2H.
+			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
 			result_amount = 1
 
 		thermite

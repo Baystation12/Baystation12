@@ -78,9 +78,6 @@ datum
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!istype(M, /mob/living))
 					return //Noticed runtime errors from pacid trying to damage ghosts, this should fix. --NEO
-				//if( (overdose > 0) && (volume >= overdose))//Overdosing, wooo
-				//	M.adjustToxLoss(overdose_dam)
-				// moved to overdose_process() -- Iamgoofball
 				holder.remove_reagent(src.id, custom_metabolism) //By default it slowly disappears.
 				return
 
@@ -104,24 +101,21 @@ datum
 				M.adjustToxLoss(1)
 				return
 
-			addiction_act_stage1(var/mob/living/M as mob)
-				if(prob(30))
-					M << "<span class = 'notice'>You feel like some [name] right about now.</span>"
-				return
-
-			addiction_act_stage2(var/mob/living/M as mob)
-				if(prob(30))
-					M << "<span class = 'notice'>You feel like you need [name]. You just can't get enough.</span>"
-				return
-
-			addiction_act_stage3(var/mob/living/M as mob)
-				if(prob(30))
-					M << "<span class = 'danger'>You have an intense craving for [name].</span>"
-				return
-
-			addiction_act_stage4(var/mob/living/M as mob)
-				if(prob(30))
-					M << "<span class = 'userdanger'>You're not feeling good at all! You really need some [name].</span>"
+			addiction_act(var/mob/living/M as mob, var/stage)
+				if(stage)
+					switch(stage)
+						if(1)
+							if(prob(30))
+								M << "<span class = 'notice'>You feel like some [name] right about now.</span>"
+						if(2)
+							if(prob(30))
+								M << "<span class = 'notice'>You feel like you need [name]. You just can't get enough.</span>"
+						if(3)
+							if(prob(30))
+								M << "<span class = 'danger'>You have an intense craving for [name].</span>"
+						if(4)
+							if(prob(30))
+								M << "<span class = 'userdanger'>You're not feeling good at all! You really need some [name].</span>"
 				return
 
 
@@ -1652,22 +1646,6 @@ datum
 					M.adjustToxLoss(rand(20,60)*REM)
 				else if(prob(40))
 					M.heal_organ_damage(5*REM,0)
-				..()
-				return
-
-		toxin/cyanide //Fast and Lethal
-			name = "Cyanide"
-			id = "cyanide"
-			description = "A highly toxic chemical."
-			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
-			toxpwr = 4
-			custom_metabolism = 0.4
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(4*REM)
-				M.sleeping += 1
 				..()
 				return
 
