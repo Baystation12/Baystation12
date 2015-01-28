@@ -1553,7 +1553,7 @@ proc/populate_seed_list()
 	packet_icon =    "seed-soybean"
 	product_icon =   "bean"
 	product_colour = "#EBE7C0"
-	plant_icon =     "stalk4"
+	plant_icon =     "stalk"
 
 /datum/seed/wheat
 	name = "wheat"
@@ -1654,7 +1654,7 @@ proc/populate_seed_list()
 	product_icon =   "stalk"
 	product_colour = "#B4D6BD"
 	plant_colour =   "#6BBD68"
-	plant_icon =     "stalk4"
+	plant_icon =     "stalk3"
 
 /datum/seed/watermelon
 	name = "watermelon"

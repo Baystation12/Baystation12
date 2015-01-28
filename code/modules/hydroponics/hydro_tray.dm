@@ -760,44 +760,53 @@ var/global/list/plant_icon_cache = list()
 	else if(dead)
 		remove_dead(user)
 
+/obj/machinery/portable_atmospherics/hydroponics/examine()
+
+	..()
+
+	if(!Adjacent(usr))
+		return
+
+	if(seed)
+		usr << "[src] has <span class='notice'>[seed.display_name]</span> planted."
+		if(dead)
+			usr << "<span class='danger'>The plant is dead.</span>"
+		else if(health <= (seed.endurance / 2))
+			usr << "The plant looks <span class='danger'>unhealthy</span>."
 	else
-		if(seed && !dead)
-			usr << "[src] has <span class='notice'>[seed.display_name]</span> planted."
-			if(health <= (seed.endurance / 2))
-				usr << "The plant looks <span class='danger'>unhealthy</span>."
-		else
-			usr << "[src] is empty."
-		usr << "Water: [round(waterlevel,0.1)]/100"
-		usr << "Nutrient: [round(nutrilevel,0.1)]/10"
-		if(weedlevel >= 5)
-			usr << "[src] is <span class='danger'>filled with weeds</span>!"
-		if(pestlevel >= 5)
-			usr << "[src] is <span class='danger'>filled with tiny worms</span>!"
+		usr << "[src] is empty."
+	usr << "Water: [round(waterlevel,0.1)]/100"
+	usr << "Nutrient: [round(nutrilevel,0.1)]/10"
 
-		if(!istype(src,/obj/machinery/portable_atmospherics/hydroponics/soil))
+	if(weedlevel >= 5)
+		usr << "[src] is <span class='danger'>filled with weeds</span>!"
+	if(pestlevel >= 5)
+		usr << "[src] is <span class='danger'>filled with tiny worms</span>!"
 
-			var/turf/T = loc
-			var/datum/gas_mixture/environment
+	if(!istype(src,/obj/machinery/portable_atmospherics/hydroponics/soil))
 
-			if(closed_system && (connected_port || holding))
-				environment = air_contents
+		var/turf/T = loc
+		var/datum/gas_mixture/environment
 
-			if(!environment)
-				if(istype(T))
-					environment = T.return_air()
+		if(closed_system && (connected_port || holding))
+			environment = air_contents
 
-			if(!environment) //We're in a crate or nullspace, bail out.
-				return
+		if(!environment)
+			if(istype(T))
+				environment = T.return_air()
 
-			var/area/A = T.loc
-			var/light_available
-			if(A)
-				if(A.lighting_use_dynamic)
-					light_available = max(0,min(10,T.lighting_lumcount)-5)
-				else
-					light_available =  5
+		if(!environment) //We're in a crate or nullspace, bail out.
+			return
 
-			usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K."
+		var/area/A = T.loc
+		var/light_available
+		if(A)
+			if(A.lighting_use_dynamic)
+				light_available = max(0,min(10,T.lighting_lumcount)-5)
+			else
+				light_available =  5
+
+		usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K."
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid()
 	set name = "Toggle Tray Lid"
