@@ -963,6 +963,15 @@
 	item_color = "milohachert"
 
 
+/obj/item/clothing/under/fluff/ert
+	name = "ERT dress uniform"
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. The ERT insignia is embroidered upon the jacket's shoulder bar."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "milohachert"
+	item_state = "milohachert"
+	item_color = "milohachert"
+
+
 /obj/item/clothing/under/fluff/kaine_kalim_2
     name = "Formal Medical Uniform"
     desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
@@ -1330,6 +1339,14 @@
 	item_state = "retpolcoat"
 	item_color = "retpolcoat"
 
+/obj/item/clothing/suit/storage/det_suit/fluff/retdetcoat
+	name = "retired metropolitian detective's coat"
+	desc = "A clean, black nylon windbreaker with the words \"Metropolitian Detective Bureau\" embroidered in gold-dyed thread on the back. \"RETIRED\" is tastefully embroidered below in a smaller font."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpolcoat"
+	item_state = "retpolcoat"
+	item_color = "retpolcoat"
+
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
 	desc = "A clean and properly creased colony police cap. The badge is shined and polished, the word \"RETIRED\" engraved professionally under the words \"OUTER LIGHT POLICE.\""
@@ -1339,6 +1356,13 @@
 /obj/item/clothing/under/det/fluff/retpoluniform
 	name = "retired colony patrolman's uniform"
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpoluniform"
+	item_color = "retpoluniform"
+
+/obj/item/clothing/under/det/fluff/retdetuniform
+	name = "retired metropolitian detective's uniform"
+	desc = "A meticulously clean police uniform belonging to Precinct 52, Metropolitian Detective Bureau. The word \"RETIRED\" is engraved tastefully and professionally under the Detective Sergeant badge below the number, 28."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
 	item_color = "retpoluniform"
@@ -1572,11 +1596,11 @@ obj/item/clothing/head/ushanka/fluff/rufaro_nia
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nirukacap"
 	item_state = "nirukacap"
-	
+
 /////////////////////////////// Acera ///////////////////////////////////////////////////////
 
 
-/obj/item/clothing/under/rank/medical/fluff/valeera 
+/obj/item/clothing/under/rank/medical/fluff/valeera
 	name = "Valeera's black scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
 	icon = 'icons/obj/custom_items.dmi'

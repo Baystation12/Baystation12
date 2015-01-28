@@ -4,6 +4,26 @@
 	icon_state = "blue"
 	icon_closed = "blue"
 
+/obj/structure/closet/wardrobe/redback
+	name = "security wardrobe"
+	icon_state = "red"
+	icon_closed = "red"
+
+/obj/structure/closet/wardrobe/redback/New()
+	..()
+	new /obj/item/weapon/storage/backpack/satchel_sec
+	new /obj/item/weapon/storage/backpack/satchel_sec
+	new /obj/item/weapon/storage/backpack/satchel_sec
+	new /obj/item/weapon/storage/backpack/security
+	new /obj/item/weapon/storage/backpack/security
+	new /obj/item/weapon/storage/backpack/security
+	new /obj/item/clothing/gloves/black/sec
+	new /obj/item/clothing/gloves/black/sec
+	new /obj/item/clothing/gloves/black/sec
+	new /obj/item/clothing/gloves/black/sec
+	new /obj/item/clothing/gloves/black/sec
+	return
+
 /obj/structure/closet/wardrobe/red
 	name = "security wardrobe"
 	icon_state = "red"

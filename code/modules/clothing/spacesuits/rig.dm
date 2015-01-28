@@ -354,6 +354,21 @@
 	item_state = "mining_hardsuit"
 	armor = list(melee = 50, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 20)
 
+/obj/item/clothing/head/helmet/space/rig/miningf
+	name = "foreman hardsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating. Written across the back of the helmet is 'Foreman.'"
+	icon_state = "rig0-mining"
+	item_state = "mining_helm"
+	item_color = "mining"
+	armor = list(melee = 55, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 25)
+
+/obj/item/clothing/suit/space/rig/miningf
+	icon_state = "rig-mining"
+	name = "foreman hardsuit"
+	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating. Engraved on each shoulder is 'Mining Foreman'"
+	item_state = "mining_hardsuit"
+	armor = list(melee = 55, bullet = 5, laser = 20,energy = 5, bomb = 55, bio = 100, rad = 25)
+
 
 //Syndicate rig
 /obj/item/clothing/head/helmet/space/rig/syndi

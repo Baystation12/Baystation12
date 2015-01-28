@@ -83,6 +83,9 @@
 	icon_state = "ert_uniform"
 	item_state = "bl_suit"
 	item_color = "ert_uniform"
+	has_sensor = 1
+	armor = list(melee = 10, bullet = 5, laser = 5,energy = 5, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
