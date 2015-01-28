@@ -13,7 +13,8 @@ var/global/list/plant_sprites = list(
 	"stalk" =     4, "stalk2" =    6,
 	"vine" =      2, "vine2" =     4,
 	"carrot" =    4, "carrot2" =   6,
-	"ambrosia" =  6
+	"ambrosia" =  6,
+	"corn" = 4
 	)
 
 var/global/list/plant_product_sprites = list(
