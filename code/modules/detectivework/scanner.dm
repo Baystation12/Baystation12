@@ -105,3 +105,11 @@
 		fresh.merge(old)
 		. = 1
 	stored["\ref [A]"] = fresh
+
+/obj/item/device/detective_scanner/verb/wipe()
+	set name = "Wipe Forensic Data"
+	set category = "Object"
+	set src in view(1)
+	if (alert("Are you sure you want to wipe all data from [src]?",,"Yes","No") == "Yes")
+		stored = list()
+		usr << "<span class='notice'>Forensic data erase complete.</span>"
