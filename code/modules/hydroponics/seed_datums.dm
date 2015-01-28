@@ -2,49 +2,8 @@ var/global/list/seed_types = list()       // A list of all seed data.
 var/global/list/gene_tag_masks = list()   // Gene obfuscation for delicious trial and error goodness.
 
 // Index is the root icon_state, value is the number of states.
-var/global/list/plant_sprites = list(
-	"bush" =      6, "bush2" =     6, "bush3" =     6, "bush4" =     6, "bush5" =      5, "bush6" = 4, "bush7" = 4,
-	"mushroom" =  3, "mushroom2" = 3, "mushroom3" = 3, "mushroom4" = 3, "mushroom5" =  3,
-	"mushroom6" = 4, "mushroom7" = 4, "mushroom8" = 3, "mushroom9" = 3, "mushroom10" = 3,
-	"tree" =      6, "tree2" =     5, "tree3" =     5, "tree4" =     6, "tree5" =      6,
-	"alien" =     4, "alien2" =    4, "alien3" =    3, "alien4" =    6,
-	"flower" =    4, "flower2" =   3, "flower3" =   3,
-	"grass" =     2, "grass2" =    4,
-	"stalk" =     4, "stalk2" =    6,
-	"vine" =      2, "vine2" =     4,
-	"carrot" =    4, "carrot2" =   6,
-	"ambrosia" =  6,
-	"corn" = 4
-	)
-
-var/global/list/plant_product_sprites = list(
-	"berry",
-	"chili",
-	"eggplant",
-	"bean",
-	"tomato",
-	"wheat",
-	"nuts",
-	"nettles",
-	"bananas",
-	"treefruit",
-	"cash",
-	"rice",
-	"potato",
-	"corn",
-	"cabbage",
-	"vine",
-	"diona",
-	"stalk",
-	"ambrosia",
-	"unknown",
-	"carrot",    "carrot2",
-	"grass",     "grass2",
-	"flowers",   "flower2",   "flower3",   "flower4", "flower5",
-	"alien",     "alien2",    "alien3",    "alien4", "alien5",
-	"mushroom",  "mushroom2", "mushroom3", "mushroom4", "mushroom5",
-	"mushroom6", "mushroom7", "mushroom8", "mushroom9", "mushroom10", "mushroom11"
-	)
+var/global/list/plant_sprites = list()
+var/global/list/plant_product_sprites = list()
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
@@ -67,6 +26,26 @@ var/global/list/plant_product_sprites = list(
 // Looks like shit but it's sort of necessary.
 
 proc/populate_seed_list()
+
+	// Build the icon lists.
+	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
+		var/split = findtext(icostate,"-")
+		if(!split)
+			// invalid icon_state
+			continue
+
+		var/ikey = copytext(icostate,(split+1))
+		if(ikey == "dead")
+			// don't count dead icons
+			continue
+		ikey = text2num(ikey)
+		var/base = copytext(icostate,1,split)
+
+		if(!(plant_sprites[base]) || (plant_sprites[base]<ikey))
+			plant_sprites[base] = ikey
+
+	for(var/icostate in icon_states('icons/obj/hydroponics_products.dmi'))
+		plant_product_sprites |= icostate
 
 	// Populate the global seed datum list.
 	for(var/type in typesof(/datum/seed)-/datum/seed)
@@ -237,7 +216,7 @@ proc/populate_seed_list()
 
 	if(explosive)
 
-		var/flood_dist = min(10,max(1,potency/10))
+		var/flood_dist = min(10,max(1,potency/15))
 		var/list/open_turfs = list()
 		var/list/closed_turfs = list()
 		var/list/valid_turfs = list()
