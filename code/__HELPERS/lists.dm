@@ -581,3 +581,6 @@ datum/proc/dd_SortValue()
 
 /obj/machinery/dd_SortValue()
 	return "[sanitize(name)]"
+
+/obj/machinery/camera/dd_SortValue()
+	return "[c_tag]"
