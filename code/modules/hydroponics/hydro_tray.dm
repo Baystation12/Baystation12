@@ -482,7 +482,7 @@ var/global/list/plant_icon_cache = list()
 				plant_icon_cache["[ikey]-[seed.plant_colour]"] = plant_overlay
 			overlays |= plant_overlay
 
-			if(harvest)
+			if(harvest && overlay_stage == seed.growth_stages)
 				ikey = "[seed.product_icon]"
 				var/image/harvest_overlay = plant_icon_cache["product-[ikey]-[seed.product_colour]"]
 				if(!harvest_overlay)

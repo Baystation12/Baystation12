@@ -1439,7 +1439,7 @@ proc/populate_seed_list()
 	product_icon =   "grapes"
 	product_colour = "#BB6AC4"
 	plant_colour =   "#378F2E"
-	plant_icon =     "grapes"
+	plant_icon =     "vine"
 
 /datum/seed/grapes/green
 	name = "greengrapes"
