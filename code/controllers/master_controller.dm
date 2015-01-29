@@ -167,6 +167,9 @@ datum/controller/game_controller/proc/process()
 
 				sleep(breather_ticks)
 
+				//MAKING ANNOUNCEMENTS
+				announcements()
+
 				//SUN
 				timer = world.timeofday
 				last_thing_processed = sun.type
@@ -384,6 +387,23 @@ datum/controller/game_controller/proc/process_events()
 			continue
 		events.Cut(i,i+1)
 	checkEvent()
+
+datum/controller/game_controller/proc/announcements()
+	var/announcement
+
+	if( rand( 1, 163 ) == 1 )
+		announcement = pick("<font color='blue'><b>Come join our <a href='http://steamcommunity.com/groups/apcom'>steam group</a> for event notifications and for playing games outside of a space station!</font><br></b>",
+								"<font color='blue'><b>Make sure to check out our <a href='http://apollo-community.org/'>forums</a>. Many people post many important things there!<br></font></b>",
+								"<font color='blue'><b>Be sure check out our <a href='https://github.com/stuicey/AS_Project/'>source repository</a>. We're always welcoming new developers, and we'd love you have you on board!<br></font></b>",
+								"<font color='blue'><b>Got a little spare change jingling in your pockets? We'd love it if you <a href='http://apollo-community.org/viewtopic.php?f=29&t=34'>tossed it our way</a>!<br></font></b>",
+								"<font color='blue'><b>Feel free to come and hop on our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a> and chat with us!<br></font></b>",
+								"<font color='blue'><b>Make sure to read the <a href='http://apollo-community.org/viewtopic.php?f=4&t=6'>full rules</a>, otherwise you may get in trouble!<br></font></b>",
+								"<font color='blue'><b>We have community meetings every Saturday at 4 PM EST in our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a>. Got a problem? Bring it up there!<br></font></b>",
+								"<font color='blue'><b>Enjoy the game, and have a great day!<br></font></b>" )
+
+		world << "<br>"
+		world << announcement
+
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

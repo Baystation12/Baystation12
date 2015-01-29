@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;code\game\objects\items\weapons\storage\storage.dm;code\game\gamemodes\gameticker.dm;icons\misc\chaticons.dmi;code\modules\events\comms_blackout.dm;code\modules\admin\topic.dm;code\game\gamemodes\events.dm;code\game\gamemodes\events\wormholes.dm;code\modules\events\event_dynamic.dm;code\modules\events\meteors.dm;code\modules\events\radiation_storm.dm;code\modules\mob\living\silicon\ai\ai.dm;code\modules\mob\new_player\new_player.dm
+WINDOW: maps\tgstation2.dmm;code\controllers\failsafe.dm;code\controllers\master_controller.dm;code\modules\paperwork\pen.dm;code\modules\reagents\Chemistry-Reagents.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\events code\game\machinery code\game\machinery\camera code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\modules code\modules\admin code\modules\events code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai code\modules\mob\new_player icons icons\misc maps 
-FILE: code\modules\mob\new_player\new_player.dm
-LAST_COMPILE_TIME: 1422485141
+DIR: code code\controllers code\datums code\game\gamemodes\blob code\game\gamemodes\events code\game\machinery\camera code\game\objects\closets code\game\objects\items code\modules code\modules\paperwork code\modules\reagents maps 
+FILE: code\controllers\master_controller.dm
+LAST_COMPILE_TIME: 1422514612
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
