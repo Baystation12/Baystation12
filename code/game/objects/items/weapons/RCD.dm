@@ -102,7 +102,7 @@
 		build_type = "airlock"
 		build_other = /obj/machinery/door/airlock
 	else if(!deconstruct && istype(T,/turf/space))
-		build_cost =  10
+		build_cost =  2
 		build_type =  "floor"
 		build_turf =  /turf/simulated/floor/plating/airless
 	else if(deconstruct && istype(T,/turf/simulated/wall))
@@ -112,7 +112,7 @@
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
-		build_cost =  deconstruct ? 10 : 3
+		build_cost =  deconstruct ? 10 : 4
 		build_type =  deconstruct ? "floor" : "wall"
 		build_turf =  deconstruct ? /turf/space : /turf/simulated/wall
 	else
