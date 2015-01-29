@@ -197,8 +197,53 @@ emp_act
 	if (!affecting)
 		return 0
 	if(affecting.status & ORGAN_DESTROYED)
-		user << "What [affecting.display_name]?"
-		return 0
+		if (istype(I, /obj/item/robot_parts) && species.flags & IS_SYNTHETIC) // Robutts can just kinda click robot parts back into place.
+			var/obj/item/robot_parts/L = I
+			var/datum/organ/external/affected = get_organ(target_zone)
+			if (affected.name in L.part)
+				user.visible_message("\blue [user] has attached \the [I] where [src]'s [affected.display_name] used to be.",	\
+				"\blue You have attached \the [I] where [src]'s [affected.display_name] used to be.")
+				affected.germ_level = 0
+				affected.robotize()
+				if(L.sabotaged)
+					affected.sabotaged = 1
+				else
+					affected.sabotaged = 0
+				affected.brute_dam = L.brute_dam
+				affected.burn_dam = L.burn_dam
+				update_body()
+				updatehealth()
+				UpdateDamageIcon()
+				user.drop_from_inventory(I, loc)
+				I.loc = src
+				user.UpdateAppearance()
+				handle_organs(1)
+				return 0
+			else
+				user << "That won't fit there!"
+		else if (istype(I, /obj/item/weapon/organ/head/posi) && species.flags & IS_SYNTHETIC)
+			var/datum/organ/external/affected = get_organ(target_zone)
+			user.visible_message("\blue [user] has attached [src]'s head to the body.",	\
+			"\blue You have attached [src]'s head to the body.")
+			affected.status = 0
+			affected.amputated = 0
+			affected.destspawn = 0
+			//if (stat & DEAD)
+				//stat -= DEAD // This can fuck off for now.
+			update_body()
+			updatehealth()
+			UpdateDamageIcon()
+			var/obj/item/weapon/organ/head/B = I
+			if (B.brainmob.mind)
+				B.brainmob.mind.transfer_to(src)
+			drop_from_inventory(I, loc)
+			del(B)
+			UpdateAppearance()
+			handle_organs(1)
+			return
+		else
+			user << "What [affecting.display_name]?"
+			return 0
 	var/hit_area = affecting.display_name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))

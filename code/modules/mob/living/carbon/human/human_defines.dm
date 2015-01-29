@@ -81,3 +81,5 @@
 	var/hand_blood_color
 
 	var/list/flavor_texts = list()
+
+	var/ripping = 0 //Check if they're already delimbing someone.

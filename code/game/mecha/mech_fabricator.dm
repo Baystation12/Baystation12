@@ -45,6 +45,13 @@
 						/obj/item/robot_parts/r_arm,
 						/obj/item/robot_parts/l_leg,
 						/obj/item/robot_parts/r_leg,
+					),
+	"Robot Parts"=list(
+						/obj/item/robot_parts/groin,
+						/obj/item/robot_parts/l_hand,
+						/obj/item/robot_parts/r_hand,
+						/obj/item/robot_parts/l_foot,
+						/obj/item/robot_parts/r_foot,
 						/obj/item/robot_parts/robot_component/binary_communication_device,
 						/obj/item/robot_parts/robot_component/radio,
 						/obj/item/robot_parts/robot_component/actuator,
