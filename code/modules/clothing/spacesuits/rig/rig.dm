@@ -251,13 +251,13 @@
 								else
 									helmet.flags &= ~AIRTIGHT
 								helmet.update_light(wearer)
-					
+
 					//sealed pieces become airtight, protecting against diseases
 					if (!seal_target)
 						piece.armor["bio"] = 100
 					else
 						piece.armor["bio"] = src.armor["bio"]
-					
+
 				else
 					failed_to_seal = 1
 
@@ -515,6 +515,8 @@
 		return
 
 	if(href_list["toggle_piece"])
+		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
+			return 0
 		toggle_piece(href_list["toggle_piece"], usr)
 	else if(href_list["toggle_seals"])
 		toggle_seals(usr)
@@ -543,7 +545,7 @@
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	return
+	return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
@@ -577,6 +579,9 @@
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
+		return
+
+	if(usr == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the usr isn't wearing the suit it's probably an AI.
 		return
 
 	var/obj/item/check_slot
