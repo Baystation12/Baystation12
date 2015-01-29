@@ -1,7 +1,7 @@
 
 /proc/power_failure(var/announce = 1)
 	if(announce)
-		command_announcement.Announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
+		command_announcement.Announce("Abnormal fluctuations detected in multiple power systems. Main power is now going offline for automatic repairs.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
 
 	var/list/skipped_areas = list(/area/turret_protected/ai)
 
@@ -27,7 +27,7 @@
 	var/list/skipped_areas = list(/area/turret_protected/ai)
 
 	if(announce)
-		command_announcement.Announce("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
+		command_announcement.Announce("Station power will be restored at this time. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z == 1)
 			C.cell.charge = C.cell.maxcharge

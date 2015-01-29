@@ -9,7 +9,7 @@
 	endWhen = rand(10,25) * 3
 
 /datum/event/meteor_wave/announce()
-	command_announcement.Announce("Meteors have been detected on collision course with the station.", "Meteor Alert", new_sound = 'sound/AI/meteors.ogg')
+	command_announcement.Announce("Caution: Meteors have been detected on collision course with the station.", "Meteor Alert", new_sound = 'sound/AI/meteors.ogg')
 
 /datum/event/meteor_wave/tick()
 	if(IsMultiple(activeFor, 3))

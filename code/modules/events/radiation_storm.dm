@@ -8,7 +8,7 @@
 
 /datum/event/radiation_storm/start()
 	spawn()
-		command_announcement.Announce("High levels of radiation detected near the station. Please evacuate into one of the shielded maintenance tunnels.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
+		command_announcement.Announce("High levels of radiation have been detected. Please evacuate into one of the shielded maintenance tunnels.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 		make_maint_all_access()
 
 
