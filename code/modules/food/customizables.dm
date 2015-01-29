@@ -499,7 +499,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/icecream
         name = "ice cream"
         desc = "Delicious ice cream."
-        icon = 'icons/obj/kitchen.dmi'
+        icon = 'icons/obj/cooking_machines.dmi'
         icon_state = "icecream_cone"
         New()
                 ..()
