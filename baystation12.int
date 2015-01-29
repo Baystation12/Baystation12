@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;code\controllers\failsafe.dm;code\controllers\master_controller.dm;code\modules\paperwork\pen.dm;code\modules\reagents\Chemistry-Reagents.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\datums code\game\gamemodes\blob code\game\gamemodes\events code\game\machinery\camera code\game\objects\closets code\game\objects\items code\modules code\modules\paperwork code\modules\reagents maps 
-FILE: code\controllers\master_controller.dm
-LAST_COMPILE_TIME: 1422514612
+WINDOW: icons\mob\mask.dmi;icons\obj\clothing\masks.dmi;code\modules\clothing\masks\gasmask.dm;code\controllers\master_controller.dm;icons\misc\chaticons.dmi;code\modules\clothing\suits\miscellaneous.dm;code\modules\mob\living\carbon\brain\brain_item.dm;code\modules\mob\living\carbon\human\emote.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\living\silicon\robot\robot.dm;code\modules\mob\living\carbon\brain\posibrain.dm;code\modules\mob\living\carbon\human\examine.dm;code\WorkInProgress\computer3\test_machines.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\controllers code\datums code\game\gamemodes\blob code\game\gamemodes\events code\game\machinery\camera code\game\objects\closets code\game\objects\items code\modules code\modules\clothing code\modules\clothing\masks code\modules\clothing\suits code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\brain code\modules\mob\living\carbon\human code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\mob\new_player code\modules\power code\modules\power\singularity code\modules\power\singularity\particle_accelerator code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\modules\reagents code\TriDimension code\WorkInProgress code\WorkInProgress\computer3 icons icons\misc icons\mob icons\mob\species icons\mob\species\armalis icons\obj icons\obj\clothing 
+FILE: code\WorkInProgress\computer3\test_machines.dm
+LAST_COMPILE_TIME: 1422563172
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
