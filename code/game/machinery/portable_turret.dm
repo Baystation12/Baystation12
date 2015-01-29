@@ -154,7 +154,7 @@
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 0
 
-	if (get_dist(src, user) > 0 && !issilicon(user))
+	if (get_dist(src, user) > 1 && !issilicon(user))
 		user << "<span class='notice'>You are too far away.</span>"
 		user.unset_machine()
 		user << browse(null, "window=turretid")
