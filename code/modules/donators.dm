@@ -50,7 +50,7 @@ proc/donator_tier(client/C)
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 
 	log_admin("DON: [key_name(src)] : [msg]")
-	msg = "<span class='donatorsay'><span class='prefix'>DON:</span> [src]: <span class='message'>[msg]</span></span>"
+	msg = "<span class='donatorsay'><big><img src=\ref['icons/misc/don.png']> </img></big>[src]: <span class='message'>[msg]</span></span>"
 	for(var/client/C in clients)
 		if((C.holder && (C.holder.rights & R_ADMIN || C.holder.rights & R_MOD)) || is_donator(C))
 			C << msg
