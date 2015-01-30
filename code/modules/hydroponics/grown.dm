@@ -155,13 +155,8 @@
 	if(seed.get_trait(TRAIT_SPREAD) == 0)
 		return
 
-	// TODO: Generalize.
-	var/obj/effect/glowshroom/planted = new /obj/effect/glowshroom(user.loc)
-	planted.delay = 50
-	planted.endurance = 100
-	planted.potency = potency
-
 	user << "<span class='notice'>You plant the [src.name].</span>"
+	new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
 	del(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)

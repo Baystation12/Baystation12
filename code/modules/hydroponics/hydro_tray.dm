@@ -7,7 +7,7 @@
 	flags = OPENCONTAINER
 	volume = 100
 
-	var/draw_warnings = 1 //Set to 0 to stop it from drawing the alert lights.
+	var/mechanical = 1 //Set to 0 to stop it from drawing the alert lights.
 
 	// Plant maintenance vars.
 	var/waterlevel = 100       // Water (max 100)
@@ -200,7 +200,7 @@
 	// If there is no seed data (and hence nothing planted),
 	// or the plant is dead, process nothing further.
 	if(!seed || dead)
-		if(draw_warnings) update_icon() //Harvesting would fail to set alert icons properly.
+		if(mechanical) update_icon() //Harvesting would fail to set alert icons properly.
 		return
 
 	// Advance plant age.
@@ -291,7 +291,7 @@
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
 	else if(seed.products && seed.products.len && \
 	 (age > seed.get_trait(TRAIT_PRODUCTION)) && \
-	 (*age - lastproduce) > seed.get_trait(TRAIT_PRODUCTION)) && \
+	 ((age - lastproduce) > seed.get_trait(TRAIT_PRODUCTION)) && \
 	 (!harvest && !dead))
 
 		harvest = 1
@@ -400,7 +400,7 @@
 	yield_mod = 0
 	mutation_mod = 0
 
-	user << "You remove the dead plant from the [src]."
+	user << "You remove the dead plant."
 	check_level_sanity()
 	update_icon()
 	return
@@ -413,7 +413,7 @@
 	// Updates the plant overlay.
 	if(!isnull(seed))
 
-		if(draw_warnings && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
+		if(mechanical && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
 			overlays += "over_lowhealth3"
 
 		if(dead)
@@ -457,7 +457,7 @@
 		overlays += "hydrocover"
 
 	//Updated the various alert icons.
-	if(draw_warnings)
+	if(mechanical)
 		if(waterlevel <= 10)
 			overlays += "over_lowwater3"
 		if(nutrilevel <= 2)
@@ -678,7 +678,7 @@
 		check_level_sanity()
 		update_icon()
 
-	else if(istype(O, /obj/item/weapon/wrench))
+	else if(mechanical && istype(O, /obj/item/weapon/wrench))
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
@@ -740,11 +740,11 @@
 	usr << "Nutrient: [round(nutrilevel,0.1)]/10"
 
 	if(weedlevel >= 5)
-		usr << "[src] is <span class='danger'>filled with weeds</span>!"
+		usr << "[src] is <span class='danger'>infested with weeds</span>!"
 	if(pestlevel >= 5)
-		usr << "[src] is <span class='danger'>filled with tiny worms</span>!"
+		usr << "[src] is <span class='danger'>infested with tiny worms</span>!"
 
-	if(!istype(src,/obj/machinery/portable_atmospherics/hydroponics/soil))
+	if(mechanical)
 
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
@@ -786,7 +786,7 @@
 	icon_state = "soil"
 	density = 0
 	use_power = 0
-	draw_warnings = 0
+	mechanical = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/shovel))
@@ -800,3 +800,42 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/New()
 	..()
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/CanPass()
+	return 1
+
+// This is a hack pending a proper rewrite of the plant controller.
+// Icons for plants are generated as overlays, so setting it to invisible wouldn't work.
+// Hence using a blank icon.
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible
+	name = "plant"
+	icon = 'icons/obj/seeds.dmi'
+	icon_state = "blank"
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed)
+	..()
+	seed = newseed
+	dead = 0
+	age = 1
+	health = seed.get_trait(TRAIT_ENDURANCE)
+	lastcycle = world.time
+	pixel_y = 0-rand(8,12)
+	check_level_sanity()
+	update_icon()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead()
+	..()
+	del(src)
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/harvest()
+	..()
+	if(!seed)
+		del(src)
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/process()
+	if(!seed)
+		del(src)
+		return
+	else if(name=="plant")
+		name = seed.display_name
+	..()
