@@ -1576,5 +1576,4 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\BayStation27Nov14.dmm"
 // END_INCLUDE
