@@ -50,6 +50,9 @@
 		if("tube")
 			newlight = new /obj/machinery/light_construct(constrloc)
 	newlight.dir = constrdir
+	if( newlight.dir == 1 )
+		newlight.pixel_y = 19
+
 	newlight.fingerprints = src.fingerprints
 	newlight.fingerprintshidden = src.fingerprintshidden
 	newlight.fingerprintslast = src.fingerprintslast

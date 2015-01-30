@@ -1575,14 +1575,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Test Room"
 	icon_state = "storage"
 
-//DJSTATION
+//ENGINEERING OUTPOST
 
 /area/djstation
-	name = "\improper Listening Post"
+	name = "\improper Engineering Outpost"
 	icon_state = "LP"
 
 /area/djstation/solars
-	name = "\improper Listening Post Solars"
+	name = "\improper Engineering Outpost Solars"
 	icon_state = "LPS"
 
 //DERELICT

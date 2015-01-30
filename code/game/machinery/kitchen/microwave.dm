@@ -53,6 +53,8 @@
 ********************/
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
+
+
 	if(src.broken > 0)
 		if(src.broken == 2 && istype(O, /obj/item/weapon/screwdriver)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
@@ -82,6 +84,23 @@
 		else
 			user << "\red It's broken!"
 			return 1
+	else if( istype( O, /obj/item/weapon/wrench ))
+		if( anchored )
+			user.visible_message( \
+				"\blue [user] unwrenches the securing bolts from the microwave.", \
+				"\blue You have unwrenched the securing bolts from the microwave." \
+			)
+
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			anchored = 0
+		else
+			user.visible_message( \
+				"\blue [user] secures the bolts on the microwave.", \
+				"\blue You have secured the bolts on the microwave." \
+			)
+
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			anchored = 1
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner)) // If they're trying to clean it then let them
 			user.visible_message( \

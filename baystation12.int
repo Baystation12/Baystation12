@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\turf\floors.dmi;code\controllers\voting.dm;code\modules\mining\mine_areas.dm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\turfs code\game\turfs\simulated code\modules code\modules\mining icons icons\turf 
-FILE: code\modules\mining\mine_areas.dm
-LAST_COMPILE_TIME: 1422568418
+WINDOW: code\modules\reagents\Chemistry-Machinery.dm;code\game\area\Space Station 13 areas.dm;maps\tgstation2.dmm;code\game\objects\structures.dm;code\game\machinery\computer\HolodeckControl.dm;icons\obj\objects.dmi;code\defines\obj\weapon.dm;icons\obj\items.dmi;code\game\objects\items\devices\lightreplacer.dm;code\game\objects\items\stacks\sheets\light.dm;code\game\objects\items\stacks\tiles\light.dm;icons\obj\lighting.dmi;code\modules\power\lighting.dm;icons\obj\monitors.dmi
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\controllers code\datums code\datums\spells code\defines code\defines\obj code\game code\game\area code\game\machinery code\game\machinery\computer code\game\machinery\kitchen code\game\machinery\pipe code\game\objects code\game\objects\closets code\game\objects\effects code\game\objects\items code\game\objects\items\devices code\game\objects\items\stacks code\game\objects\items\stacks\sheets code\game\objects\items\stacks\tiles code\modules code\modules\power code\modules\reagents icons icons\effects icons\obj maps 
+FILE: icons\obj\monitors.dmi
+LAST_COMPILE_TIME: 1422600332
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
