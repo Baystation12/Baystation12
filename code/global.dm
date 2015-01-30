@@ -254,6 +254,9 @@ var/static/list/scarySounds = list(
 // Bomb cap!
 var/max_explosion_range = 14
 
+// A list of colours comprising the rainbow.
+var/list/rainbow = list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF")
+
 // Several cache lists for plants/hydroponics.
 var/global/list/seed_types = list()       // A list of all seed data.
 var/global/list/gene_tag_masks = list()   // Gene obfuscation for delicious trial and error goodness.

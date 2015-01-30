@@ -85,7 +85,7 @@
 			user << "There is already a seed loaded."
 			return
 		var/obj/item/seeds/S =W
-		if(S.seed && S.seed.immutable > 0)
+		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			user << "That seed is not compatible with our genetics technology."
 		else
 			user.drop_item(W)

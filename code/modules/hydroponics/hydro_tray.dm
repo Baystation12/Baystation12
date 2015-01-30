@@ -150,7 +150,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
 
 	//Don't act on seeds like dionaea that shouldn't change.
-	if(seed && seed.immutable > 0)
+	if(seed && seed.get_trait(TRAIT_IMMUTABLE) > 0)
 		return
 
 	//Override for somatoray projectiles.
@@ -194,7 +194,7 @@
 	// There's a chance for a weed explosion to happen if the weeds take over.
 	// Plants that are themselves weeds (weed_tolerance > 10) are unaffected.
 	if (weedlevel >= 10 && prob(10))
-		if(!seed || weedlevel >= seed.weed_tolerance)
+		if(!seed || weedlevel >= seed.get_trait(TRAIT_WEED_TOLERANCE))
 			weed_invasion()
 
 	// If there is no seed data (and hence nothing planted),
@@ -207,28 +207,28 @@
 	if(prob(30)) age += 1 * HYDRO_SPEED_MULTIPLIER
 
 	//Highly mutable plants have a chance of mutating every tick.
-	if(seed.immutable == -1)
+	if(seed.get_trait(TRAIT_IMMUTABLE) == -1)
 		var/mut_prob = rand(1,100)
 		if(mut_prob <= 5) mutate(mut_prob == 1 ? 2 : 1)
 
 	// Other plants also mutate if enough mutagenic compounds have been added.
-	if(!seed.immutable)
+	if(!seed.get_trait(TRAIT_IMMUTABLE))
 		if(prob(min(mutation_level,100)))
 			mutate((rand(100) < 15) ? 2 : 1)
 			mutation_level = 0
 
 	// Maintain tray nutrient and water levels.
-	if(seed.nutrient_consumption > 0 && nutrilevel > 0 && prob(25))
-		nutrilevel -= max(0,seed.nutrient_consumption * HYDRO_SPEED_MULTIPLIER)
-	if(seed.water_consumption > 0 && waterlevel > 0  && prob(25))
-		waterlevel -= max(0,seed.water_consumption * HYDRO_SPEED_MULTIPLIER)
+	if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0 && nutrilevel > 0 && prob(25))
+		nutrilevel -= max(0,seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) * HYDRO_SPEED_MULTIPLIER)
+	if(seed.get_trait(TRAIT_WATER_CONSUMPTION) > 0 && waterlevel > 0 && prob(25))
+		waterlevel -= max(0,seed.get_trait(TRAIT_WATER_CONSUMPTION) * HYDRO_SPEED_MULTIPLIER)
 
 	// Make sure the plant is not starving or thirsty. Adequate
 	// water and nutrients will cause a plant to become healthier.
 	var/healthmod = rand(1,3) * HYDRO_SPEED_MULTIPLIER
-	if(seed.requires_nutrients && prob(35))
+	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && prob(35))
 		health += (nutrilevel < 2 ? -healthmod : healthmod)
-	if(seed.requires_water && prob(35))
+	if(seed.get_trait(TRAIT_REQUIRES_WATER) && prob(35))
 		health += (waterlevel < 10 ? -healthmod : healthmod)
 
 	// Check that pressure, heat and light are all within bounds.
@@ -254,30 +254,30 @@
 	// toxins are sucked up each tick and slowly reduce over time.
 	if(toxins > 0)
 		var/toxin_uptake = max(1,round(toxins/10))
-		if(toxins > seed.toxins_tolerance)
+		if(toxins > seed.get_trait(TRAIT_TOXINS_TOLERANCE))
 			health -= toxin_uptake
 		toxins -= toxin_uptake
 
 	// Check for pests and weeds.
 	// Some carnivorous plants happily eat pests.
 	if(pestlevel > 0)
-		if(seed.carnivorous)
+		if(seed.get_trait(TRAIT_CARNIVOROUS))
 			health += HYDRO_SPEED_MULTIPLIER
 			pestlevel -= HYDRO_SPEED_MULTIPLIER
-		else if (pestlevel >= seed.pest_tolerance)
+		else if (pestlevel >= seed.get_trait(TRAIT_PEST_TOLERANCE))
 			health -= HYDRO_SPEED_MULTIPLIER
 
 	// Some plants thrive and live off of weeds.
 	if(weedlevel > 0)
-		if(seed.parasite)
+		if(seed.get_trait(TRAIT_PARASITE))
 			health += HYDRO_SPEED_MULTIPLIER
 			weedlevel -= HYDRO_SPEED_MULTIPLIER
-		else if (weedlevel >= seed.weed_tolerance)
+		else if (weedlevel >= seed.get_trait(TRAIT_WEED_TOLERANCE))
 			health -= HYDRO_SPEED_MULTIPLIER
 
 	// Handle life and death.
 	// If the plant is too old, it loses health fast.
-	if(age > seed.lifespan)
+	if(age > seed.get_trait(TRAIT_LIFESPAN))
 		health -= rand(3,5) * HYDRO_SPEED_MULTIPLIER
 
 	// When the plant dies, weeds thrive and pests die off.
@@ -289,8 +289,11 @@
 		pestlevel = 0
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
-	else if(seed.products && seed.products.len && age > seed.production && \
-	 (age - lastproduce) > seed.production && (!harvest && !dead))
+	else if(seed.products && seed.products.len && \
+	 (age > seed.get_trait(TRAIT_PRODUCTION)) && \
+	 (*age - lastproduce) > seed.get_trait(TRAIT_PRODUCTION)) && \
+	 (!harvest && !dead))
+
 		harvest = 1
 		lastproduce = age
 
@@ -370,7 +373,7 @@
 	harvest = 0
 	lastproduce = age
 
-	if(!seed.harvest_repeat)
+	if(!seed.get_trait(TRAIT_HARVEST_REPEAT))
 		yield_mod = 0
 		seed = null
 		dead = 0
@@ -410,11 +413,11 @@
 	// Updates the plant overlay.
 	if(!isnull(seed))
 
-		if(draw_warnings && health <= (seed.endurance / 2))
+		if(draw_warnings && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
 			overlays += "over_lowhealth3"
 
 		if(dead)
-			var/ikey = "[seed.plant_icon]-dead"
+			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-dead"
 			var/image/dead_overlay = plant_icon_cache["[ikey]"]
 			if(!dead_overlay)
 				dead_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
@@ -423,30 +426,30 @@
 			if(!seed.growth_stages)
 				seed.update_growth_stages()
 			if(!seed.growth_stages)
-				world << "<span class='danger'>Seed type [seed.plant_icon] cannot find a growth stage value.</span>"
+				world << "<span class='danger'>Seed type [seed.get_trait(TRAIT_PLANT_ICON)] cannot find a growth stage value.</span>"
 				return
 			var/overlay_stage = 1
-			if(age >= seed.maturation)
+			if(age >= seed.get_trait(TRAIT_MATURATION))
 				overlay_stage = seed.growth_stages
 				lastproduce = age
 			else
-				overlay_stage = max(1,round(seed.maturation / seed.growth_stages))
+				overlay_stage = max(1,round(seed.get_trait(TRAIT_MATURATION) / seed.growth_stages))
 
-			var/ikey = "[seed.plant_icon]-[overlay_stage]"
-			var/image/plant_overlay = plant_icon_cache["[ikey]-[seed.plant_colour]"]
+			var/ikey = "[seed.get_trait(TRAIT_PLANT_ICON)]-[overlay_stage]"
+			var/image/plant_overlay = plant_icon_cache["[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
 			if(!plant_overlay)
 				plant_overlay = image('icons/obj/hydroponics_growing.dmi', "[ikey]")
-				plant_overlay.color = seed.plant_colour
-				plant_icon_cache["[ikey]-[seed.plant_colour]"] = plant_overlay
+				plant_overlay.color = seed.get_trait(TRAIT_PLANT_COLOUR)
+				plant_icon_cache["[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"] = plant_overlay
 			overlays |= plant_overlay
 
 			if(harvest && overlay_stage == seed.growth_stages)
-				ikey = "[seed.product_icon]"
-				var/image/harvest_overlay = plant_icon_cache["product-[ikey]-[seed.product_colour]"]
+				ikey = "[seed.get_trait(TRAIT_PRODUCT_ICON)]"
+				var/image/harvest_overlay = plant_icon_cache["product-[ikey]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"]
 				if(!harvest_overlay)
 					harvest_overlay = image('icons/obj/hydroponics_products.dmi', "[ikey]")
-					harvest_overlay.color = seed.product_colour
-					plant_icon_cache["product-[ikey]-[seed.product_colour]"] = harvest_overlay
+					harvest_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+					plant_icon_cache["product-[ikey]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"] = harvest_overlay
 				overlays |= harvest_overlay
 
 	//Draw the cover.
@@ -466,10 +469,10 @@
 
 	// Update bioluminescence.
 	if(seed)
-		if(seed.biolum)
-			SetLuminosity(round(seed.potency/10))
-			if(seed.biolum_colour)
-				l_color = seed.biolum_colour
+		if(seed.get_trait(TRAIT_BIOLUM))
+			SetLuminosity(round(seed.get_trait(TRAIT_POTENCY)/10))
+			if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
+				l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
 			else
 				l_color = null
 			return
@@ -487,7 +490,7 @@
 
 	dead = 0
 	age = 0
-	health = seed.endurance
+	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	harvest = 0
 	weedlevel = 0
@@ -521,7 +524,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
 	//Make sure various values are sane.
 	if(seed)
-		health =     max(0,min(seed.endurance,health))
+		health =     max(0,min(seed.get_trait(TRAIT_ENDURANCE),health))
 	else
 		health = 0
 		dead = 0
@@ -545,7 +548,7 @@
 	dead = 0
 	mutate(1)
 	age = 0
-	health = seed.endurance
+	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	harvest = 0
 	weedlevel = 0
@@ -620,7 +623,7 @@
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
 
-			if(S.seed.spread == 2)
+			if(S.seed.get_trait(TRAIT_SPREAD) == 2)
 				msg_admin_attack("[key_name(user)] has planted a spreading vine packet.")
 				var/obj/effect/plant_controller/PC = new(get_turf(src))
 				if(PC)
@@ -630,7 +633,7 @@
 				dead = 0
 				age = 1
 				//Snowflakey, maybe move this to the seed datum
-				health = (istype(S, /obj/item/seeds/cutting) ? round(seed.endurance/rand(2,5)) : seed.endurance)
+				health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
 
 				lastcycle = world.time
 
@@ -729,7 +732,7 @@
 		usr << "[src] has <span class='notice'>[seed.display_name]</span> planted."
 		if(dead)
 			usr << "<span class='danger'>The plant is dead.</span>"
-		else if(health <= (seed.endurance / 2))
+		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
 			usr << "The plant looks <span class='danger'>unhealthy</span>."
 	else
 		usr << "[src] is empty."

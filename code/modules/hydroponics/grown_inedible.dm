@@ -23,7 +23,7 @@
 		if(!S || !S.chems)
 			return
 
-		potency = S.potency
+		potency = S.get_trait(TRAIT_POTENCY)
 
 		for(var/rid in S.chems)
 			var/list/reagent_data = S.chems[rid]

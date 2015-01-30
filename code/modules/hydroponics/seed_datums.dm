@@ -1,3 +1,4 @@
+// Sprite lists.
 var/global/list/plant_sprites = list()         // List of all harvested product sprites.
 var/global/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
 
@@ -56,18 +57,17 @@ proc/populate_seed_list()
 		S.update_seed()
 
 	//Might as well mask the gene types while we're at it.
-	var/list/gene_tags = list("products","consumption","environment","resistance","vigour","flowers")
 	var/list/used_masks = list()
-
-	while(gene_tags && gene_tags.len)
-		var/gene_tag = pick(gene_tags)
+	var/list/plant_traits = ALL_TRAITS
+	while(plant_traits && plant_traits.len)
+		var/gene_tag = pick(plant_traits)
 		var/gene_mask = "[num2hex(rand(0,255))]"
 
 		while(gene_mask in used_masks)
 			gene_mask = "[num2hex(rand(0,255))]"
 
 		used_masks += gene_mask
-		gene_tags -= gene_tag
+		plant_traits -= gene_tag
 		gene_tag_masks[gene_tag] = gene_mask
 
 /datum/plantgene
@@ -84,87 +84,47 @@ proc/populate_seed_list()
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
-
-	// Output.
+	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
+	var/list/traits = list()       // Initialized in New()
 	var/list/products              // Possible fruit/other product paths.
 	var/list/mutants               // Possible predefined mutant varieties, if any.
 	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
+	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 
-	//Tolerances.
-	var/requires_nutrients = 1      // The plant can starve.
-	var/nutrient_consumption = 0.25 // Plant eats this much per tick.
-	var/requires_water = 1          // The plant can become dehydrated.
-	var/water_consumption = 3       // Plant drinks this much per tick.
-	var/ideal_heat = 293            // Preferred temperature in Kelvin.
-	var/heat_tolerance = 20         // Departure from ideal that is survivable.
-	var/ideal_light = 8             // Preferred light level in luminosity.
-	var/light_tolerance = 5         // Departure from ideal that is survivable.
-	var/toxins_tolerance = 5        // Resistance to poison.
-	var/lowkpa_tolerance = 25       // Low pressure capacity.
-	var/highkpa_tolerance = 200     // High pressure capacity.
-	var/pest_tolerance = 5          // Threshold for pests to impact health.
-	var/weed_tolerance = 5          // Threshold for weeds to impact health.
+/datum/seed/proc/get_trait(var/trait)
+	return traits["[trait]"]
 
-	//General traits.
-	var/endurance = 100             // Maximum plant HP when growing.
-	var/yield = 0                   // Amount of product.
-	var/lifespan = 0                // Time before the plant dies.
-	var/maturation = 0              // Time taken before the plant is mature.
-	var/production = 0              // Time before harvesting can be undertaken again.
-	var/growth_stages = 6           // Number of stages the plant passes through before it is mature.
-	var/harvest_repeat = 0          // If 1, this plant will fruit repeatedly..
-	var/potency = 1                 // General purpose plant strength value.
-	var/spread = 0                  // 0 limits plant to tray, 1 = creepers, 2 = vines.
-	var/carnivorous = 0             // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
-	var/parasite = 0                // 0 = no, 1 = gain health from weed level.
-	var/immutable = 0               // If set, plant will never mutate. If -1, plant is highly mutable.
-	var/alter_temp                  // If set, the plant will periodically alter local temp by this amount.
-
-	// Cosmetics.
-	var/plant_icon                  // Icon to use for the plant growing in the tray.
-	var/plant_colour = "#6EF86A"    // Colour of the plant icon.
-	var/product_icon                // Icon to use for fruit coming from this plant.
-	var/product_colour              // Colour to apply to product icon.
-	var/packet_icon = "seed"        // Icon to use for physical seed packet item.
-	var/biolum                      // Plant is bioluminescent.
-	var/biolum_colour               // The colour of the plant's radiance.
-	var/flowers                     // Plant has a flower overlay.
-	var/flower_icon = "vine_fruit"  // Which overlay to use.
-	var/flower_colour               // Which colour to use.
-
-	// Special traits.
-	var/produces_power              // Can be used to make a battery.
-	var/juicy                       // When thrown, causes a splatter decal.
-	var/stings						// Can cause damage/inject reagents when thrown or handled.
-	var/explosive                   // When thrown, acts as a grenade.
-	var/teleporting                 // Uses the bluespace tomato effect.
-	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge
+/datum/seed/proc/set_trait(var/trait,var/nval,var/ubound,var/lbound, var/degrade)
+	if(!isnull(degrade)) nval *= degrade
+	if(!isnull(ubound))  nval = min(nval,ubound)
+	if(!isnull(lbound))  nval = max(nval,lbound)
+	traits["[trait]"] =  nval
 
 // Does brute damage to a target.
 /datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
 
-	if(!istype(target) || !carnivorous)
+	if(!istype(target) || !get_trait(TRAIT_CARNIVOROUS))
 		return
 
 	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
 	var/datum/organ/external/affecting = target.get_organ(target_limb)
 	var/damage = 0
 
-	if(carnivorous)
-		if(carnivorous == 2)
+	if(get_trait(TRAIT_CARNIVOROUS))
+		if(get_trait(TRAIT_CARNIVOROUS) == 2)
 			if(affecting)
 				target << "<span class='danger'>\The [fruit]'s thorns pierce your [affecting.display_name] greedily!</span>"
 			else
 				target << "<span class='danger'>\The [fruit]'s thorns pierce your flesh greedily!</span>"
-			damage = potency/2
+			damage = get_trait(TRAIT_POTENCY)/2
 		else
 			if(affecting)
 				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your [affecting.display_name]!</span>"
 			else
 				target << "<span class='danger'>\The [fruit]'s thorns dig deeply into your flesh!</span>"
-			damage = potency/5
+			damage = get_trait(TRAIT_POTENCY)/5
 	else
 		return
 
@@ -178,12 +138,12 @@ proc/populate_seed_list()
 
 // Adds reagents to a target.
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
-	if(!stings)
+	if(!get_trait(TRAIT_STINGS))
 		return
 	if(chems && chems.len)
 		target << "<span class='danger'>You are stung by \the [fruit]!</span>"
 		for(var/rid in chems)
-			var/injecting = min(5,max(1,potency/5))
+			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/5))
 			target.reagents.add_reagent(rid,injecting)
 
 //Splatter a turf.
@@ -191,20 +151,20 @@ proc/populate_seed_list()
 	if(splat_type)
 		var/obj/effect/decal/cleanable/fruit_smudge/splat = new splat_type(T)
 		splat.name = "[thrown.name] [pick("smear","smudge","splatter")]"
-		if(biolum)
-			if(biolum_colour)
-				splat.l_color = biolum_colour
-			splat.SetLuminosity(biolum)
+		if(get_trait(TRAIT_BIOLUM))
+			if(get_trait(TRAIT_BIOLUM_COLOUR))
+				splat.l_color = get_trait(TRAIT_BIOLUM_COLOUR)
+			splat.SetLuminosity(get_trait(TRAIT_BIOLUM))
 		if(istype(splat))
-			if(product_colour)
-				splat.color = product_colour
+			if(get_trait(TRAIT_PRODUCT_COLOUR))
+				splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 	if(chems)
 		for(var/mob/living/M in T.contents)
 			if(!M.reagents)
 				continue
 			for(var/chem in chems)
-				var/injecting = min(5,max(1,potency/3))
+				var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
 				M.reagents.add_reagent(chem,injecting)
 
 //Applies an effect to a target atom.
@@ -213,9 +173,9 @@ proc/populate_seed_list()
 	var/splatted
 	var/turf/origin_turf = get_turf(target)
 
-	if(explosive)
+	if(get_trait(TRAIT_EXPLOSIVE))
 
-		var/flood_dist = min(10,max(1,potency/15))
+		var/flood_dist = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
 		var/list/open_turfs = list()
 		var/list/closed_turfs = list()
 		var/list/valid_turfs = list()
@@ -294,7 +254,7 @@ proc/populate_seed_list()
 		for(var/mob/living/M in target.contents)
 			apply_special_effect(M)
 
-	if(juicy && splatted)
+	if(get_trait(TRAIT_JUICY) && splatted)
 		splatter(origin_turf,thrown)
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		del(thrown)
@@ -317,16 +277,16 @@ proc/populate_seed_list()
 
 	// Process it.
 	var/pressure = environment.return_pressure()
-	if(pressure < lowkpa_tolerance || pressure > highkpa_tolerance)
+	if(pressure < get_trait(TRAIT_LOWKPA_TOLERANCE)|| pressure > get_trait(TRAIT_HIGHKPA_TOLERANCE))
 		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
-	if(abs(environment.temperature - ideal_heat) > heat_tolerance)
+	if(abs(environment.temperature - get_trait(TRAIT_IDEAL_HEAT)) > get_trait(TRAIT_HEAT_TOLERANCE))
 		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	// Handle gas production.
 	if(exude_gasses && exude_gasses.len)
 		for(var/gas in exude_gasses)
-			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*potency)/exude_gasses.len)))
+			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*get_trait(TRAIT_POTENCY))/exude_gasses.len)))
 
 	// Handle light requirements.
 	var/area/A = get_area(current_turf)
@@ -336,7 +296,7 @@ proc/populate_seed_list()
 			light_available = max(0,min(10,current_turf.lighting_lumcount)-5)
 		else
 			light_available =  5
-		if(abs(light_available - ideal_light) > light_tolerance)
+		if(abs(light_available - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	return health_change
@@ -348,11 +308,11 @@ proc/populate_seed_list()
 	do_thorns(target,thrown)
 
 	// Bluespace tomato code copied over from grown.dm.
-	if(teleporting)
+	if(get_trait(TRAIT_TELEPORTING))
 
 		//Plant potency determines radius of teleport.
-		var/outer_teleport_radius = potency/5
-		var/inner_teleport_radius = potency/15
+		var/outer_teleport_radius = get_trait(TRAIT_POTENCY)/5
+		var/inner_teleport_radius = get_trait(TRAIT_POTENCY)/15
 
 		var/list/turfs = list()
 		if(inner_teleport_radius > 0)
@@ -380,37 +340,35 @@ proc/populate_seed_list()
 	seed_name = "strange plant"     // TODO: name generator.
 	display_name = "strange plants" // TODO: name generator.
 	mysterious = 1
-
 	seed_noun = pick("spores","nodes","cuttings","seeds")
 	products = list(pick(typesof(/obj/item/weapon/reagent_containers/food/snacks/grown)-/obj/item/weapon/reagent_containers/food/snacks/grown))
-	potency = rand(5,30)
 
-	packet_icon = "seed-replicapod"
-	product_icon = pick(plant_product_sprites)
-	plant_icon = pick(plant_sprites)
-	plant_colour   = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-	product_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
+	set_trait(TRAIT_PRODUCT_ICON,pick(plant_product_sprites))
+	set_trait(TRAIT_PLANT_ICON,pick(plant_sprites))
+	set_trait(TRAIT_PLANT_COLOUR,"#[pick(rainbow)]")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#[pick(rainbow)]")
 	update_growth_stages()
 
 	if(prob(20))
-		harvest_repeat = 1
+		set_trait(TRAIT_HARVEST_REPEAT,1)
 
 	if(prob(15))
 		if(prob(15))
-			juicy = 2
+			set_trait(TRAIT_JUICY,2)
 		else
-			juicy = 1
+			set_trait(TRAIT_JUICY,1)
 
 	if(prob(5))
-		stings = 1
+		set_trait(TRAIT_STINGS,1)
 
 	if(prob(5))
-		produces_power = 1
+		set_trait(TRAIT_PRODUCES_POWER,1)
 
 	if(prob(1))
-		explosive = 1
+		set_trait(TRAIT_EXPLOSIVE,1)
 	else if(prob(1))
-		teleporting = 1
+		set_trait(TRAIT_TELEPORTING,1)
 
 	if(prob(5))
 		consume_gasses = list()
@@ -474,67 +432,67 @@ proc/populate_seed_list()
 			chems[new_chem] = list(rand(1,10),rand(10,20))
 
 	if(prob(90))
-		requires_nutrients = 1
-		nutrient_consumption = rand(100)*0.1
+		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)
+		set_trait(TRAIT_NUTRIENT_CONSUMPTION,rand(100)*0.1)
 	else
-		requires_nutrients = 0
+		set_trait(TRAIT_REQUIRES_NUTRIENTS,0)
 
 	if(prob(90))
-		requires_water = 1
-		water_consumption = rand(10)
+		set_trait(TRAIT_REQUIRES_WATER,1)
+		set_trait(TRAIT_WATER_CONSUMPTION,rand(10))
 	else
-		requires_water = 0
+		set_trait(TRAIT_REQUIRES_WATER,0)
 
-	ideal_heat =       rand(100,400)
-	heat_tolerance =   rand(10,30)
-	ideal_light =      rand(2,10)
-	light_tolerance =  rand(2,7)
-	toxins_tolerance = rand(2,7)
-	pest_tolerance =   rand(2,7)
-	weed_tolerance =   rand(2,7)
-	lowkpa_tolerance = rand(10,50)
-	highkpa_tolerance = rand(100,300)
+	set_trait(TRAIT_IDEAL_HEAT,       rand(100,400))
+	set_trait(TRAIT_HEAT_TOLERANCE,   rand(10,30))
+	set_trait(TRAIT_IDEAL_LIGHT,      rand(2,10))
+	set_trait(TRAIT_LIGHT_TOLERANCE,  rand(2,7))
+	set_trait(TRAIT_TOXINS_TOLERANCE, rand(2,7))
+	set_trait(TRAIT_PEST_TOLERANCE,   rand(2,7))
+	set_trait(TRAIT_WEED_TOLERANCE,   rand(2,7))
+	set_trait(TRAIT_LOWKPA_TOLERANCE, rand(10,50))
+	set_trait(TRAIT_HIGHKPA_TOLERANCE,rand(100,300))
 
 	if(prob(5))
-		alter_temp = rand(-5,5)
+		set_trait(TRAIT_ALTER_TEMP,rand(-5,5))
 
 	if(prob(1))
-		immutable = -1
+		set_trait(TRAIT_IMMUTABLE,-1)
 
 	var/carnivore_prob = rand(100)
 	if(carnivore_prob < 5)
-		carnivorous = 2
+		set_trait(TRAIT_CARNIVOROUS,2)
 	else if(carnivore_prob < 10)
-		carnivorous = 1
+		set_trait(TRAIT_CARNIVOROUS,1)
 
 	if(prob(10))
-		parasite = 1
+		set_trait(TRAIT_PARASITE,1)
 
 	var/vine_prob = rand(100)
 	if(vine_prob < 5)
-		spread = 2
+		set_trait(TRAIT_SPREAD,2)
 	else if(vine_prob < 10)
-		spread = 1
+		set_trait(TRAIT_SPREAD,1)
 
 	if(prob(5))
-		biolum = 1
-		biolum_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+		set_trait(TRAIT_BIOLUM,1)
+		set_trait(TRAIT_BIOLUM_COLOUR,"#[pick(rainbow)]")
 
-	endurance = rand(60,100)
-	yield = rand(3,15)
-	maturation = rand(5,15)
-	production = maturation + rand(2,5)
-	lifespan = production + rand(5,10)
+	set_trait(TRAIT_ENDURANCE,rand(60,100))
+	set_trait(TRAIT_YIELD,rand(3,15))
+	set_trait(TRAIT_MATURATION,rand(5,15))
+	set_trait(TRAIT_PRODUCTION,get_trait(TRAIT_MATURATION)+rand(2,5))
+	set_trait(TRAIT_LIFESPAN,get_trait(TRAIT_PRODUCTION)+rand(5,10))
 
 //Returns a key corresponding to an entry in the global seed list.
 /datum/seed/proc/get_mutant_variant()
-	if(!mutants || !mutants.len || immutable > 0) return 0
+	if(!mutants || !mutants.len || get_trait(TRAIT_IMMUTABLE) > 0) return 0
 	return pick(mutants)
 
 //Mutates the plant overall (randomly).
 /datum/seed/proc/mutate(var/degree,var/turf/source_turf)
 
-	if(!degree || immutable > 0) return
+	if(!degree || get_trait(TRAIT_IMMUTABLE) > 0) return
 
 	source_turf.visible_message("<span class='notice'>\The [display_name] quivers!</span>")
 
@@ -543,184 +501,118 @@ proc/populate_seed_list()
 	for(var/i = 0;i<total_mutations;i++)
 		switch(rand(0,12))
 			if(0) //Plant cancer!
-				lifespan = max(0,lifespan-rand(1,5))
-				endurance = max(0,endurance-rand(10,20))
+				set_trait(TRAIT_LIFESPAN, get_trait(TRAIT_LIFESPAN)-rand(1,5),null,0)
+				set_trait(TRAIT_ENDURANCE,get_trait(TRAIT_ENDURANCE)-rand(10,20),null,0)
 				source_turf.visible_message("<span class='danger'>\The [display_name] withers rapidly!</span>")
 			if(1)
-				nutrient_consumption =      max(0,  min(5,   nutrient_consumption + rand(-(degree*0.1),(degree*0.1))))
-				water_consumption =         max(0,  min(50,  water_consumption    + rand(-degree,degree)))
-				juicy =  (juicy ? 0 : 1)
-				stings = (stings ? 0 : 1)
+				set_trait(TRAIT_NUTRIENT_CONSUMPTION,get_trait(TRAIT_NUTRIENT_CONSUMPTION)+rand(-(degree*0.1),(degree*0.1)),5,0)
+				set_trait(TRAIT_WATER_CONSUMPTION,   get_trait(TRAIT_WATER_CONSUMPTION)   +rand(-degree,degree),50,0)
+				set_trait(TRAIT_JUICY,              !get_trait(TRAIT_JUICY))
+				set_trait(TRAIT_STINGS,             !get_trait(TRAIT_STINGS))
 			if(2)
-				ideal_heat =                max(70, min(800, ideal_heat           + (rand(-5,5)   * degree)))
-				heat_tolerance =            max(70, min(800, heat_tolerance       + (rand(-5,5)   * degree)))
-				lowkpa_tolerance =          max(0,  min(80,  lowkpa_tolerance     + (rand(-5,5)   * degree)))
-				highkpa_tolerance =         max(110, min(500,highkpa_tolerance    + (rand(-5,5)   * degree)))
-				explosive =                 1
+				set_trait(TRAIT_IDEAL_HEAT,          get_trait(TRAIT_IDEAL_HEAT) +      (rand(-5,5)*degree),800,70)
+				set_trait(TRAIT_HEAT_TOLERANCE,      get_trait(TRAIT_HEAT_TOLERANCE) +  (rand(-5,5)*degree),800,70)
+				set_trait(TRAIT_LOWKPA_TOLERANCE,    get_trait(TRAIT_LOWKPA_TOLERANCE)+ (rand(-5,5)*degree),80,0)
+				set_trait(TRAIT_HIGHKPA_TOLERANCE,   get_trait(TRAIT_HIGHKPA_TOLERANCE)+(rand(-5,5)*degree),500,110)
+				set_trait(TRAIT_EXPLOSIVE,1)
 			if(3)
-				ideal_light =               max(0,  min(30,  ideal_light          + (rand(-1,1)   * degree)))
-				light_tolerance =           max(0,  min(10,  light_tolerance      + (rand(-2,2)   * degree)))
+				set_trait(TRAIT_IDEAL_LIGHT,         get_trait(TRAIT_IDEAL_LIGHT)+(rand(-1,1)*degree),30,0)
+				set_trait(TRAIT_LIGHT_TOLERANCE,     get_trait(TRAIT_LIGHT_TOLERANCE)+(rand(-2,2)*degree),10,0)
 			if(4)
-				toxins_tolerance =          max(0,  min(10,  weed_tolerance       + (rand(-2,2)   * degree)))
+				set_trait(TRAIT_TOXINS_TOLERANCE,    get_trait(TRAIT_TOXINS_TOLERANCE)+(rand(-2,2)*degree),10,0)
 			if(5)
-				weed_tolerance  =           max(0,  min(10,  weed_tolerance       + (rand(-2,2)   * degree)))
+				set_trait(TRAIT_WEED_TOLERANCE,      get_trait(TRAIT_WEED_TOLERANCE)+(rand(-2,2)*degree),10, 0)
 				if(prob(degree*5))
-					carnivorous =           max(0,  min(2,   carnivorous          + rand(-degree,degree)))
-					if(carnivorous)
+					set_trait(TRAIT_CARNIVOROUS,     get_trait(TRAIT_CARNIVOROUS)+rand(-degree,degree),2, 0)
+					if(get_trait(TRAIT_CARNIVOROUS))
 						source_turf.visible_message("<span class='notice'>\The [display_name] shudders hungrily.</span>")
 			if(6)
-				weed_tolerance  =           max(0,  min(10,  weed_tolerance       + (rand(-2,2)   * degree)))
-				if(prob(degree*5))          parasite = !parasite
-
-			if(7)
-				lifespan =                  max(10, min(30,  lifespan             + (rand(-2,2)   * degree)))
-				if(yield != -1) yield =     max(0,  min(10,  yield                + (rand(-2,2)   * degree)))
-			if(8)
-				endurance =                 max(10, min(100, endurance            + (rand(-5,5)   * degree)))
-				production =                max(1,  min(10,  production           + (rand(-1,1)   * degree)))
-				potency =                   max(0,  min(200, potency              + (rand(-20,20) * degree)))
+				set_trait(TRAIT_WEED_TOLERANCE,      get_trait(TRAIT_WEED_TOLERANCE)+(rand(-2,2)*degree),10, 0)
 				if(prob(degree*5))
-					spread =                max(0,  min(2,   spread               + rand(-1,1)))
+					set_trait(TRAIT_PARASITE,!get_trait(TRAIT_PARASITE))
+			if(7)
+				set_trait(TRAIT_LIFESPAN,            get_trait(TRAIT_LIFESPAN)+(rand(-2,2)*degree),30,10)
+				if(get_trait(TRAIT_YIELD) != -1)
+					set_trait(TRAIT_YIELD,           get_trait(TRAIT_YIELD)+(rand(-2,2)*degree),10,0)
+			if(8)
+				set_trait(TRAIT_ENDURANCE,           get_trait(TRAIT_ENDURANCE)+(rand(-5,5)*degree),100,10)
+				set_trait(TRAIT_PRODUCTION,          get_trait(TRAIT_PRODUCTION)+(rand(-1,1)*degree),10, 1)
+				set_trait(TRAIT_POTENCY,             get_trait(TRAIT_POTENCY)+(rand(-20,20)*degree),200, 0)
+				if(prob(degree*5))
+					set_trait(TRAIT_SPREAD,          get_trait(TRAIT_SPREAD)+rand(-1,1),2, 0)
 					source_turf.visible_message("<span class='notice'>\The [display_name] spasms visibly, shifting in the tray.</span>")
 			if(9)
-				maturation =                max(0,  min(30,  maturation      + (rand(-1,1)   * degree)))
+				set_trait(TRAIT_MATURATION,          get_trait(TRAIT_MATURATION)+(rand(-1,1)*degree),30, 0)
 				if(prob(degree*5))
-					harvest_repeat = !harvest_repeat
+					set_trait(TRAIT_HARVEST_REPEAT, !get_trait(TRAIT_HARVEST_REPEAT))
 			if(10)
 				if(prob(degree*2))
-					biolum = !biolum
-					if(biolum)
+					set_trait(TRAIT_BIOLUM,         !get_trait(TRAIT_BIOLUM))
+					if(get_trait(TRAIT_BIOLUM))
 						source_turf.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
 						if(prob(degree*2))
-							biolum_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[biolum_colour]'>changes colour</font>!")
+							set_trait(TRAIT_BIOLUM_COLOUR,"#[pick(rainbow)]")
+							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
 			if(11)
 				if(prob(degree*2))
-					flowers = !flowers
-					if(flowers)
+					set_trait(TRAIT_FLOWERS,!get_trait(TRAIT_FLOWERS))
+					if(get_trait(TRAIT_FLOWERS))
 						source_turf.visible_message("<span class='notice'>\The [display_name] sprouts a bevy of flowers!</span>")
 						if(prob(degree*2))
-							flower_colour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-						source_turf.visible_message("<span class='notice'>\The [display_name]'s flowers </span><font=[flower_colour]>changes colour</font>!")
+							set_trait(TRAIT_FLOWER_COLOUR,"#[pick(rainbow)]")
+						source_turf.visible_message("<span class='notice'>\The [display_name]'s flowers </span><font=[get_trait(TRAIT_FLOWER_COLOUR)]>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s flowers wither and fall off.</span>")
 			if(12)
-				teleporting = 1
+				set_trait(TRAIT_TELEPORTING,1)
 
 	return
 
 //Mutates a specific trait/set of traits.
 /datum/seed/proc/apply_gene(var/datum/plantgene/gene)
 
-	if(!gene || !gene.values || immutable > 0) return
+	if(!gene || !gene.values || get_trait(TRAIT_IMMUTABLE) > 0) return
 
-	switch(gene.genetype)
+	// Splicing products has some detrimental effects on yield and lifespan.
+	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
+	if(gene.genetype == GENE_PRODUCTS)
+		for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE, TRAIT_LIFESPAN))
+			if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-		//Splicing products has some detrimental effects on yield and lifespan.
-		if("products")
+		if(!products) products = list()
+		products |= gene.values["[TRAIT_PRODUCTS]"]
 
-			if(gene.values.len < 6) return
+		if(!chems) chems = list()
 
-			if(yield > 0)     yield =     max(1,round(yield*0.85))
-			if(endurance > 0) endurance = max(1,round(endurance*0.85))
-			if(lifespan > 0)  lifespan =  max(1,round(lifespan*0.85))
+		var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
+		for(var/rid in gene_value)
 
-			if(!products) products = list()
-			products |= gene.values[1]
+			var/list/gene_chem = gene_value[rid]
 
-			if(!chems) chems = list()
+			if(!chems[rid])
+				chems[rid] = gene_chem.Copy()
+				continue
 
-			var/list/gene_value = gene.values[2]
-			for(var/rid in gene_value)
+			for(var/i=1;i<=gene_chem.len;i++)
 
-				var/list/gene_chem = gene_value[rid]
+				if(isnull(gene_chem[i])) gene_chem[i] = 0
 
-				if(!chems[rid])
-					chems[rid] = gene_chem.Copy()
-					continue
+				if(chems[rid][i])
+					chems[rid][i] = max(1,round((gene_chem[i] + chems[rid][i])/2))
+				else
+					chems[rid][i] = gene_chem[i]
 
-				for(var/i=1;i<=gene_chem.len;i++)
+		var/list/new_gasses = gene.values["[TRAIT_EXUDE_GASSES]"]
+		if(islist(new_gasses))
+			if(!exude_gasses) exude_gasses = list()
+			exude_gasses |= new_gasses
+			for(var/gas in exude_gasses)
+				exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
 
-					if(isnull(gene_chem[i])) gene_chem[i] = 0
-
-					if(chems[rid][i])
-						chems[rid][i] = max(1,round((gene_chem[i] + chems[rid][i])/2))
-					else
-						chems[rid][i] = gene_chem[i]
-
-			var/list/new_gasses = gene.values[3]
-			if(islist(new_gasses))
-				if(!exude_gasses) exude_gasses = list()
-				exude_gasses |= new_gasses
-				for(var/gas in exude_gasses)
-					exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
-
-			alter_temp =           gene.values[4]
-			potency =              gene.values[5]
-			harvest_repeat =       gene.values[6]
-			produces_power =       gene.values[7]
-			juicy =                gene.values[8]
-			product_icon =         gene.values[9]
-			plant_icon =           gene.values[10]
-
-		if("consumption")
-
-			if(gene.values.len < 7) return
-
-			consume_gasses =       gene.values[1]
-			requires_nutrients =   gene.values[2]
-			nutrient_consumption = gene.values[3]
-			requires_water =       gene.values[4]
-			water_consumption =    gene.values[5]
-			carnivorous =          gene.values[6]
-			parasite =             gene.values[7]
-			stings =               gene.values[8]
-
-		if("environment")
-
-			if(gene.values.len < 6) return
-
-			ideal_heat =           gene.values[1]
-			heat_tolerance =       gene.values[2]
-			ideal_light =          gene.values[3]
-			light_tolerance =      gene.values[4]
-			lowkpa_tolerance  =    gene.values[5]
-			highkpa_tolerance =    gene.values[6]
-			explosive =            gene.values[7]
-
-		if("resistance")
-
-			if(gene.values.len < 3) return
-
-			toxins_tolerance =     gene.values[1]
-			pest_tolerance =       gene.values[2]
-			weed_tolerance =       gene.values[3]
-
-		if("vigour")
-
-			if(gene.values.len < 6) return
-
-			endurance =            gene.values[1]
-			yield =                gene.values[2]
-			lifespan =             gene.values[3]
-			spread =               gene.values[4]
-			maturation =           gene.values[5]
-			production =           gene.values[6]
-			teleporting =          gene.values[7]
-
-		if("flowers")
-
-			if(gene.values.len < 7) return
-
-			plant_colour =         gene.values[1]
-			product_colour =       gene.values[2]
-			biolum =               gene.values[3]
-			biolum_colour =        gene.values[4]
-			flowers =              gene.values[5]
-			flower_icon =          gene.values[6]
-			flower_colour =        gene.values[7]
+	for(var/trait in gene.values)
+		set_trait(trait,gene.values["[trait]"])
 
 	update_growth_stages()
 
@@ -729,76 +621,31 @@ proc/populate_seed_list()
 
 	if(!genetype) return 0
 
+	var/list/traits_to_copy
 	var/datum/plantgene/P = new()
 	P.genetype = genetype
+	P.values = list()
 
 	switch(genetype)
-		if("products")
-			P.values = list(
-				(products             ? products             : 0),
-				(chems                ? chems                : 0),
-				(exude_gasses         ? exude_gasses         : 0),
-				(alter_temp           ? alter_temp           : 0),
-				(potency              ? potency              : 0),
-				(harvest_repeat       ? harvest_repeat       : 0),
-				(produces_power       ? produces_power       : 0),
-				(juicy                ? juicy                : 0),
-				(product_icon         ? product_icon         : 0),
-				(plant_icon           ? plant_icon           : 0)
-				)
+		if(GENE_PRODUCTS)
+			P.values["[TRAIT_PRODUCTS]"] =       products
+			P.values["[TRAIT_CHEMS]"] =          chems
+			P.values["[TRAIT_EXUDE_GASSES]"] =   exude_gasses
+			traits_to_copy = list(TRAIT_ALTER_TEMP,TRAIT_POTENCY,TRAIT_HARVEST_REPEAT,TRAIT_PRODUCES_POWER,TRAIT_JUICY,TRAIT_PRODUCT_ICON,TRAIT_PLANT_ICON)
+		if(GENE_CONSUMPTION)
+			P.values["[TRAIT_CONSUME_GASSES]"] = consume_gasses
+			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_NUTRIENT_CONSUMPTION,TRAIT_REQUIRES_WATER,TRAIT_WATER_CONSUMPTION,TRAIT_CARNIVOROUS,TRAIT_PARASITE,TRAIT_STINGS)
+		if(GENE_ENVIRONMENT)
+			traits_to_copy = list(TRAIT_IDEAL_HEAT,TRAIT_HEAT_TOLERANCE,TRAIT_IDEAL_LIGHT,TRAIT_LIGHT_TOLERANCE,TRAIT_LOWKPA_TOLERANCE,TRAIT_HIGHKPA_TOLERANCE,TRAIT_EXPLOSIVE)
+		if(GENE_RESISTANCE)
+			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE)
+		if(GENE_VIGOUR)
+			traits_to_copy = list(TRAIT_ENDURANCE,TRAIT_YIELD,TRAIT_LIFESPAN,TRAIT_SPREAD,TRAIT_MATURATION,TRAIT_PRODUCTION,TRAIT_TELEPORTING)
+		if(GENE_FLOWERS)
+			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM,TRAIT_BIOLUM_COLOUR,TRAIT_FLOWERS,TRAIT_FLOWER_ICON,TRAIT_FLOWER_COLOUR)
 
-		if("consumption")
-			P.values = list(
-				(consume_gasses       ? consume_gasses       : 0),
-				(requires_nutrients   ? requires_nutrients   : 0),
-				(nutrient_consumption ? nutrient_consumption : 0),
-				(requires_water       ? requires_water       : 0),
-				(water_consumption    ? water_consumption    : 0),
-				(carnivorous          ? carnivorous          : 0),
-				(parasite             ? parasite             : 0),
-				(stings               ? stings               : 0)
-				)
-
-		if("environment")
-			P.values = list(
-				(ideal_heat           ? ideal_heat           : 0),
-				(heat_tolerance       ? heat_tolerance       : 0),
-				(ideal_light          ? ideal_light          : 0),
-				(light_tolerance      ? light_tolerance      : 0),
-				(lowkpa_tolerance     ? lowkpa_tolerance     : 0),
-				(highkpa_tolerance    ? highkpa_tolerance    : 0),
-				(explosive            ? explosive            : 0)
-				)
-
-		if("resistance")
-			P.values = list(
-				(toxins_tolerance     ? toxins_tolerance     : 0),
-				(pest_tolerance       ? pest_tolerance       : 0),
-				(weed_tolerance       ? weed_tolerance       : 0)
-				)
-
-		if("vigour")
-			P.values = list(
-				(endurance            ? endurance            : 0),
-				(yield                ? yield                : 0),
-				(lifespan             ? lifespan             : 0),
-				(spread               ? spread               : 0),
-				(maturation           ? maturation           : 0),
-				(production           ? production           : 0),
-				(teleporting          ? teleporting          : 0),
-				)
-
-		if("flowers")
-			P.values = list(
-				(plant_colour         ? plant_colour         : 0),
-				(product_colour       ? product_colour       : 0),
-				(biolum               ? biolum               : 0),
-				(biolum_colour        ? biolum_colour        : 0),
-				(flowers              ? flowers              : 0),
-				(flower_icon          ? flower_icon          : 0),
-				(flower_colour        ? flower_colour        : 0)
-				)
-
+	for(var/trait in traits_to_copy)
+		P.values["[trait]"] = get_trait(trait)
 	return (P ? P : 0)
 
 //Place the plant products at the feet of the user.
@@ -808,7 +655,7 @@ proc/populate_seed_list()
 		return
 
 	var/got_product
-	if(!isnull(products) && products.len && yield > 0)
+	if(!isnull(products) && products.len && get_trait(TRAIT_YIELD) > 0)
 		got_product = 1
 
 	if(!force_amount && !got_product && !harvest_sample)
@@ -832,12 +679,12 @@ proc/populate_seed_list()
 		if(!isnull(force_amount))
 			total_yield = force_amount
 		else
-			if(yield > -1)
+			if(get_trait(TRAIT_YIELD) > -1)
 				if(isnull(yield_mod) || yield_mod < 1)
 					yield_mod = 0
-					total_yield = yield
+					total_yield = get_trait(TRAIT_YIELD)
 				else
-					total_yield = yield + rand(yield_mod)
+					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
 				total_yield = max(1,total_yield)
 
 		currently_querying = list()
@@ -845,20 +692,20 @@ proc/populate_seed_list()
 			var/product_type = pick(products)
 			var/obj/item/product = new product_type(get_turf(user),name)
 
-			if(product_colour)
-				product.color = product_colour
+			if(get_trait(TRAIT_PRODUCT_COLOUR))
+				product.color = get_trait(TRAIT_PRODUCT_COLOUR)
 				if(istype(product,/obj/item/weapon/reagent_containers/food))
 					var/obj/item/weapon/reagent_containers/food/food = product
-					food.filling_color = product_colour
+					food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)
 				product.name += "?"
 				product.desc += " On second thought, something about this one looks strange."
 
-			if(biolum)
-				if(biolum_colour)
-					product.l_color = biolum_colour
-				product.SetLuminosity(biolum)
+			if(get_trait(TRAIT_BIOLUM))
+				if(get_trait(TRAIT_BIOLUM_COLOUR))
+					product.l_color = get_trait(TRAIT_BIOLUM_COLOUR)
+				product.SetLuminosity(get_trait(TRAIT_BIOLUM))
 
 			//Handle spawning in living, mobile products (like dionaea).
 			if(istype(product,/mob/living))
@@ -871,7 +718,7 @@ proc/populate_seed_list()
 // be put into the global datum list until the product is harvested, though.
 /datum/seed/proc/diverge(var/modified)
 
-	if(immutable > 0) return
+	if(get_trait(TRAIT_IMMUTABLE) > 0) return
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
@@ -889,54 +736,62 @@ proc/populate_seed_list()
 	new_seed.seed_name =            "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][seed_name]"
 	new_seed.display_name =         "[(roundstart ? "[(modified ? "modified" : "mutant")] " : "")][display_name]"
 	new_seed.seed_noun =            seed_noun
-
-	new_seed.requires_nutrients =   requires_nutrients
-	new_seed.nutrient_consumption = nutrient_consumption
-	new_seed.requires_water =       requires_water
-	new_seed.water_consumption =    water_consumption
-	new_seed.ideal_heat =           ideal_heat
-	new_seed.heat_tolerance =       heat_tolerance
-	new_seed.ideal_light =          ideal_light
-	new_seed.light_tolerance =      light_tolerance
-	new_seed.toxins_tolerance =     toxins_tolerance
-	new_seed.lowkpa_tolerance =     lowkpa_tolerance
-	new_seed.highkpa_tolerance =    highkpa_tolerance
-	new_seed.pest_tolerance =       pest_tolerance
-	new_seed.weed_tolerance =       weed_tolerance
-	new_seed.endurance =            endurance
-	new_seed.yield =                yield
-	new_seed.lifespan =             lifespan
-	new_seed.maturation =           maturation
-	new_seed.production =           production
-	new_seed.harvest_repeat =       harvest_repeat
-	new_seed.potency =              potency
-	new_seed.spread =               spread
-	new_seed.carnivorous =          carnivorous
-	new_seed.parasite =             parasite
-	new_seed.plant_icon =           plant_icon
-	new_seed.plant_colour =         plant_colour
-	new_seed.product_icon =         product_icon
-	new_seed.product_colour =       product_colour
-	new_seed.packet_icon =          packet_icon
-	new_seed.biolum =               biolum
-	new_seed.biolum_colour =        biolum_colour
-	new_seed.flowers =              flowers
-	new_seed.flower_icon =          flower_icon
-	new_seed.alter_temp = 			alter_temp
+	new_seed.traits = traits.Copy()
 	new_seed.update_growth_stages()
 	return new_seed
 
 /datum/seed/proc/update_growth_stages()
-	if(plant_icon)
-		growth_stages = plant_sprites[plant_icon]
+	if(get_trait(TRAIT_PLANT_ICON))
+		growth_stages = plant_sprites[get_trait(TRAIT_PLANT_ICON)]
 	else
 		growth_stages = 0
 
 /datum/seed/New()
-	..()
+
+	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
+	set_trait(TRAIT_HARVEST_REPEAT,       0)            // If 1, this plant will fruit repeatedly.
+	set_trait(TRAIT_PRODUCES_POWER,       0)            // Can be used to make a battery.
+	set_trait(TRAIT_JUICY,                0)            // When thrown, causes a splatter decal.
+	set_trait(TRAIT_EXPLOSIVE,            0)            // When thrown, acts as a grenade.
+	set_trait(TRAIT_CARNIVOROUS,          0)            // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
+	set_trait(TRAIT_PARASITE,             0)            // 0 = no, 1 = gain health from weed level.
+	set_trait(TRAIT_STINGS,               0)            // Can cause damage/inject reagents when thrown or handled.
+	set_trait(TRAIT_YIELD,                0)            // Amount of product.
+	set_trait(TRAIT_LIFESPAN,             0)            // Time before the plant dies.
+	set_trait(TRAIT_SPREAD,               0)            // 0 limits plant to tray, 1 = creepers, 2 = vines.
+	set_trait(TRAIT_MATURATION,           0)            // Time taken before the plant is mature.
+	set_trait(TRAIT_PRODUCTION,           0)            // Time before harvesting can be undertaken again.
+	set_trait(TRAIT_TELEPORTING,          0)            // Uses the bluespace tomato effect.
+	set_trait(TRAIT_BIOLUM,               0)            // Plant is bioluminescent.
+	set_trait(TRAIT_FLOWERS,              0)            // Plant has a flower overlay.
+	set_trait(TRAIT_ALTER_TEMP,           0)            // If set, the plant will periodically alter local temp by this amount.
+	set_trait(TRAIT_PRODUCT_ICON,         0)            // Icon to use for fruit coming from this plant.
+	set_trait(TRAIT_PLANT_ICON,           0)            // Icon to use for the plant growing in the tray.
+	set_trait(TRAIT_PRODUCT_COLOUR,       0)            // Colour to apply to product icon.
+	set_trait(TRAIT_BIOLUM_COLOUR,        0)            // The colour of the plant's radiance.
+	set_trait(TRAIT_FLOWER_COLOUR,        0)            // Which colour to use.
+	set_trait(TRAIT_POTENCY,              1)            // General purpose plant strength value.
+	set_trait(TRAIT_REQUIRES_NUTRIENTS,   1)            // The plant can starve.
+	set_trait(TRAIT_REQUIRES_WATER,       1)            // The plant can become dehydrated.
+	set_trait(TRAIT_WATER_CONSUMPTION,    3)            // Plant drinks this much per tick.
+	set_trait(TRAIT_LIGHT_TOLERANCE,      5)            // Departure from ideal that is survivable.
+	set_trait(TRAIT_TOXINS_TOLERANCE,     5)            // Resistance to poison.
+	set_trait(TRAIT_PEST_TOLERANCE,       5)            // Threshold for pests to impact health.
+	set_trait(TRAIT_WEED_TOLERANCE,       5)            // Threshold for weeds to impact health.
+	set_trait(TRAIT_IDEAL_LIGHT,          8)            // Preferred light level in luminosity.
+	set_trait(TRAIT_HEAT_TOLERANCE,       20)           // Departure from ideal that is survivable.
+	set_trait(TRAIT_LOWKPA_TOLERANCE,     25)           // Low pressure capacity.
+	set_trait(TRAIT_ENDURANCE,            100)          // Maximum plant HP when growing.
+	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
+	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
+	set_trait(TRAIT_PLANT_COLOUR,         "#6EF86A")    // Colour of the plant icon.
+	set_trait(TRAIT_FLOWER_ICON,          "vine_fruit") // Which overlay to use.
+
 	spawn(5)
 		sleep(-1)
 		update_growth_stages()
+
 
 // Actual roundstart seed types after this point.
 // Chili plants/variants.
@@ -947,16 +802,18 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/chili)
 	chems = list("capsaicin" = list(3,5), "nutriment" = list(1,25))
 	mutants = list("icechili")
-	harvest_repeat = 1
-	lifespan = 20
-	maturation = 5
-	production = 5
-	yield = 4
-	potency = 20
-	packet_icon =    "seed-chili"
-	product_icon =   "chili"
-	product_colour = "#ED3300"
-	plant_icon =     "bush2"
+
+/datum/seed/chili/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,20)
+	set_trait(TRAIT_PRODUCT_ICON,"chili")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#ED3300")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
 
 /datum/seed/chili/ice
 	name = "icechili"
@@ -965,10 +822,12 @@ proc/populate_seed_list()
 	mutants = null
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/icepepper)
 	chems = list("frostoil" = list(3,5), "nutriment" = list(1,50))
-	maturation = 4
-	production = 4
-	packet_icon =    "seed-icepepper"
-	product_colour = "#00EDC6"
+
+/datum/seed/chili/ice/New()
+	..()
+	set_trait(TRAIT_MATURATION,4)
+	set_trait(TRAIT_PRODUCTION,4)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#00EDC6")
 
 // Berry plants/variants.
 /datum/seed/berry
@@ -977,18 +836,20 @@ proc/populate_seed_list()
 	display_name = "berry bush"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/berries)
 	mutants = list("glowberries","poisonberries")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	juicy = 1
-	lifespan = 20
-	maturation = 5
-	production = 5
-	yield = 2
-	potency = 10
-	packet_icon =    "seed-berry"
-	product_icon =   "berry"
-	product_colour = "#FA1616"
-	plant_icon =     "bush"
+
+/datum/seed/berry/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"berry")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FA1616")
+	set_trait(TRAIT_PLANT_ICON,"bush")
 
 /datum/seed/berry/glow
 	name = "glowberries"
@@ -997,17 +858,18 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/glowberries)
 	mutants = null
 	chems = list("nutriment" = list(1,10), "uranium" = list(3,5))
-	spread = 1
-	biolum = 1
-	biolum_colour = "#006622"
-	lifespan = 30
-	maturation = 5
-	production = 5
-	yield = 2
-	potency = 10
-	packet_icon =    "seed-glowberry"
-	product_colour = "C9FA16"
-	biolum
+
+/datum/seed/berry/glow/New()
+	..()
+	set_trait(TRAIT_SPREAD,1)
+	set_trait(TRAIT_BIOLUM,1)
+	set_trait(TRAIT_BIOLUM_COLOUR,"#006622")
+	set_trait(TRAIT_LIFESPAN,30)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_COLOUR,"c9fa16")
 
 /datum/seed/berry/poison
 	name = "poisonberries"
@@ -1016,8 +878,10 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries)
 	mutants = list("deathberries")
 	chems = list("nutriment" = list(1), "toxin" = list(3,5))
-	packet_icon =    "seed-poisonberry"
-	product_colour = "#6DC961"
+
+/datum/seed/berry/poison/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#6DC961")
 
 /datum/seed/berry/poison/death
 	name = "deathberries"
@@ -1026,10 +890,12 @@ proc/populate_seed_list()
 	mutants = null
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/deathberries)
 	chems = list("nutriment" = list(1), "toxin" = list(3,3), "lexorin" = list(1,5))
-	yield = 3
-	potency = 50
-	packet_icon =    "seed-deathberry"
-	product_colour = "#7A5454"
+
+/datum/seed/berry/poison/death/New()
+	..()
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,50)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#7A5454")
 
 // Nettles/variants.
 /datum/seed/nettle
@@ -1038,18 +904,20 @@ proc/populate_seed_list()
 	display_name = "nettles"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle)
 	mutants = list("deathnettle")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,50), "sacid" = list(0,1))
-	lifespan = 30
-	maturation = 6
-	production = 6
-	yield = 4
-	potency = 10
-	stings = 1
-	packet_icon =    "seed-nettle"
-	plant_icon =     "bush5"
-	product_icon =   "nettles"
-	product_colour = "#728A54"
+
+/datum/seed/nettle/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,30)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_STINGS,1)
+	set_trait(TRAIT_PLANT_ICON,"bush5")
+	set_trait(TRAIT_PRODUCT_ICON,"nettles")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#728A54")
 
 /datum/seed/nettle/death
 	name = "deathnettle"
@@ -1058,11 +926,13 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle/death)
 	mutants = null
 	chems = list("nutriment" = list(1,50), "pacid" = list(0,1))
-	maturation = 8
-	yield = 2
-	packet_icon =    "seed-deathnettle"
-	product_colour = "#8C5030"
-	plant_colour =   "#634941"
+
+/datum/seed/nettle/death/New()
+	..()
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8C5030")
+	set_trait(TRAIT_PLANT_COLOUR,"#634941")
 
 //Tomatoes/variants.
 /datum/seed/tomato
@@ -1071,19 +941,20 @@ proc/populate_seed_list()
 	display_name = "tomato plant"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/tomato)
 	mutants = list("bluetomato","bloodtomato")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	juicy = 1
-	lifespan = 25
-	maturation = 8
-	production = 6
-	yield = 2
-	potency = 10
 
-	packet_icon =    "seed-tomato"
-	product_icon =   "tomato"
-	product_colour = "#D10000"
-	plant_icon =     "bush3"
+/datum/seed/tomato/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"tomato")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#D10000")
+	set_trait(TRAIT_PLANT_ICON,"bush3")
 
 /datum/seed/tomato/blood
 	name = "bloodtomato"
@@ -1093,9 +964,11 @@ proc/populate_seed_list()
 	mutants = list("killer")
 	chems = list("nutriment" = list(1,10), "blood" = list(1,5))
 	splat_type = /obj/effect/decal/cleanable/blood/splatter
-	yield = 3
-	packet_icon =    "seed-bloodtomato"
-	product_colour = "#FF0000"
+
+/datum/seed/tomato/blood/New()
+	..()
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FF0000")
 
 /datum/seed/tomato/killer
 	name = "killertomato"
@@ -1103,9 +976,11 @@ proc/populate_seed_list()
 	display_name = "killer tomato plant"
 	products = list(/mob/living/simple_animal/tomato)
 	mutants = null
-	yield = 2
-	packet_icon =    "seed-killertomato"
-	product_colour = "#A86747"
+
+/datum/seed/tomato/killer/New()
+	..()
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#A86747")
 
 /datum/seed/tomato/blue
 	name = "bluetomato"
@@ -1114,9 +989,11 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato)
 	mutants = list("bluespacetomato")
 	chems = list("nutriment" = list(1,20), "lube" = list(1,5))
-	packet_icon =    "seed-bluetomato"
-	product_colour = "#4D86E8"
-	plant_colour =   "#070AAD"
+
+/datum/seed/tomato/blue/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#4D86E8")
+	set_trait(TRAIT_PLANT_COLOUR,"#070AAD")
 
 /datum/seed/tomato/blue/teleport
 	name = "bluespacetomato"
@@ -1124,13 +1001,14 @@ proc/populate_seed_list()
 	display_name = "bluespace tomato plant"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/bluespacetomato)
 	mutants = null
-	packet_icon = "seed-bluespacetomato"
 	chems = list("nutriment" = list(1,20), "singulo" = list(1,5))
-	teleporting = 1
-	packet_icon =    "seed-bluespacetomato"
-	product_colour = "#00E5FF"
-	biolum = 1
-	biolum_colour = "#4DA4A8"
+
+/datum/seed/tomato/blue/teleport/New()
+	..()
+	set_trait(TRAIT_TELEPORTING,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#00E5FF")
+	set_trait(TRAIT_BIOLUM,1)
+	set_trait(TRAIT_BIOLUM_COLOUR,"#4DA4A8")
 
 //Eggplants/varieties.
 /datum/seed/eggplant
@@ -1139,17 +1017,19 @@ proc/populate_seed_list()
 	display_name = "eggplants"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/eggplant)
 	mutants = list("realeggplant")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	lifespan = 25
-	maturation = 6
-	production = 6
-	yield = 2
-	potency = 20
-	packet_icon =    "seed-eggplant"
-	product_icon =   "eggplant"
-	product_colour = "#892694"
-	plant_icon =     "bush4"
+
+/datum/seed/eggplant/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,20)
+	set_trait(TRAIT_PRODUCT_ICON,"eggplant")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#892694")
+	set_trait(TRAIT_PLANT_ICON,"bush4")
 
 /datum/seed/eggplant/eggs
 	name = "realeggplant"
@@ -1157,10 +1037,12 @@ proc/populate_seed_list()
 	display_name = "egg-plants"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/egg)
 	mutants = null
-	lifespan = 75
-	production = 12
-	packet_icon =    "seed-eggy"
-	product_colour = "#E7EDD1"
+
+/datum/seed/eggplant/eggs/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,75)
+	set_trait(TRAIT_PRODUCTION,12)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#E7EDD1")
 
 //Apples/varieties.
 /datum/seed/apple
@@ -1169,17 +1051,19 @@ proc/populate_seed_list()
 	display_name = "apple tree"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/apple)
 	mutants = list("poisonapple","goldapple")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	lifespan = 55
-	maturation = 6
-	production = 6
-	yield = 5
-	potency = 10
-	packet_icon =    "seed-apple"
-	product_icon =   "treefruit"
-	product_colour = "#FF540A"
-	plant_icon =     "tree2"
+
+/datum/seed/apple/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,55)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FF540A")
+	set_trait(TRAIT_PLANT_ICON,"tree2")
 
 /datum/seed/apple/poison
 	name = "poisonapple"
@@ -1194,12 +1078,14 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/goldapple)
 	mutants = null
 	chems = list("nutriment" = list(1,10), "gold" = list(1,5))
-	maturation = 10
-	production = 10
-	yield = 3
-	packet_icon =    "seed-goldapple"
-	product_colour = "#FFDD00"
-	plant_colour =   "#D6B44D"
+
+/datum/seed/apple/gold/New()
+	..()
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,10)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFDD00")
+	set_trait(TRAIT_PLANT_COLOUR,"#D6B44D")
 
 //Ambrosia/varieties.
 /datum/seed/ambrosia
@@ -1208,17 +1094,19 @@ proc/populate_seed_list()
 	display_name = "ambrosia vulgaris"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris)
 	mutants = list("ambrosiadeus")
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1), "space_drugs" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1), "toxin" = list(1,10))
-	lifespan = 60
-	maturation = 6
-	production = 6
-	yield = 6
-	potency = 5
-	packet_icon =    "seed-ambrosiavulgaris"
-	product_icon =   "ambrosia"
-	product_colour = "#9FAD55"
-	plant_icon =     "ambrosia"
+
+/datum/seed/ambrosia/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,60)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"ambrosia")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#9FAD55")
+	set_trait(TRAIT_PLANT_ICON,"ambrosia")
 
 /datum/seed/ambrosia/deus
 	name = "ambrosiadeus"
@@ -1227,9 +1115,11 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus)
 	mutants = null
 	chems = list("nutriment" = list(1), "bicaridine" = list(1,8), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "space_drugs" = list(1,10))
-	packet_icon =    "seed-ambrosiadeus"
-	product_colour = "#A3F0AD"
-	plant_colour =   "#2A9C61"
+
+/datum/seed/ambrosia/deus/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#A3F0AD")
+	set_trait(TRAIT_PLANT_COLOUR,"#2A9C61")
 
 //Mushrooms/varieties.
 /datum/seed/mushroom
@@ -1240,16 +1130,18 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle)
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list("nutriment" = list(1,25))
-	lifespan = 35
-	maturation = 7
-	production = 1
-	yield = 5
-	potency = 1
-	packet_icon =    "mycelium-chanter"
-	product_icon =   "mushroom4"
-	product_colour = "#DBDA72"
-	plant_colour =   "#D9C94E"
-	plant_icon =     "mushroom"
+
+/datum/seed/mushroom/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,35)
+	set_trait(TRAIT_MATURATION,7)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom4")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#DBDA72")
+	set_trait(TRAIT_PLANT_COLOUR,"#D9C94E")
+	set_trait(TRAIT_PLANT_ICON,"mushroom")
 
 /datum/seed/mushroom/mold
 	name = "mold"
@@ -1257,14 +1149,17 @@ proc/populate_seed_list()
 	display_name = "brown mold"
 	products = null
 	mutants = null
-	spread = 1
-	lifespan = 50
-	maturation = 10
-	yield = -1
-	product_icon =   "mushroom5"
-	product_colour = "#7A5F20"
-	plant_colour =   "#7A5F20"
-	plant_icon =     "mushroom9"
+
+/datum/seed/mushroom/mold/New()
+	..()
+	set_trait(TRAIT_SPREAD,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_YIELD,-1)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom5")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#7A5F20")
+	set_trait(TRAIT_PLANT_COLOUR,"#7A5F20")
+	set_trait(TRAIT_PLANT_ICON,"mushroom9")
 
 /datum/seed/mushroom/plump
 	name = "plumphelmet"
@@ -1273,15 +1168,17 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/plumphelmet)
 	mutants = list("walkingmushroom","towercap")
 	chems = list("nutriment" = list(2,10))
-	lifespan = 25
-	maturation = 8
-	yield = 4
-	potency = 0
-	packet_icon =    "mycelium-plump"
-	product_icon =   "mushroom10"
-	product_colour = "#B57BB0"
-	plant_colour =   "#9E4F9D"
-	plant_icon =     "mushroom2"
+
+/datum/seed/mushroom/plump/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,0)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom10")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#B57BB0")
+	set_trait(TRAIT_PLANT_COLOUR,"#9E4F9D")
+	set_trait(TRAIT_PLANT_ICON,"mushroom2")
 
 /datum/seed/mushroom/plump/walking
 	name = "walkingmushroom"
@@ -1289,11 +1186,13 @@ proc/populate_seed_list()
 	display_name = "walking mushrooms"
 	products = list(/mob/living/simple_animal/mushroom)
 	mutants = null
-	maturation = 5
-	yield = 1
-	packet_icon =    "mycelium-walkingmushroom"
-	product_colour = "#FAC0F2"
-	plant_colour =   "#C4B1C2"
+
+/datum/seed/mushroom/plump/walking/New()
+	..()
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_YIELD,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FAC0F2")
+	set_trait(TRAIT_PLANT_COLOUR,"#C4B1C2")
 
 /datum/seed/mushroom/hallucinogenic
 	name = "reishi"
@@ -1302,15 +1201,17 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/reishi)
 	mutants = list("libertycap","glowshroom")
 	chems = list("nutriment" = list(1,50), "psilocybin" = list(3,5))
-	maturation = 10
-	production = 5
-	yield = 4
-	potency = 15
-	packet_icon =    "mycelium-reishi"
-	product_icon =   "mushroom11"
-	product_colour = "#FFB70F"
-	plant_colour =   "#F58A18"
-	plant_icon =     "mushroom6"
+
+/datum/seed/mushroom/hallucinogenic/New()
+	..()
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,15)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom11")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFB70F")
+	set_trait(TRAIT_PLANT_COLOUR,"#F58A18")
+	set_trait(TRAIT_PLANT_ICON,"mushroom6")
 
 /datum/seed/mushroom/hallucinogenic/strong
 	name = "libertycap"
@@ -1319,14 +1220,16 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/libertycap)
 	mutants = null
 	chems = list("nutriment" = list(1), "stoxin" = list(3,3), "space_drugs" = list(1,25))
-	lifespan = 25
-	production = 1
-	potency = 15
-	packet_icon =    "mycelium-liberty"
-	product_icon =   "mushroom8"
-	product_colour = "#F2E550"
-	plant_colour =   "#D1CA82"
-	plant_icon =     "mushroom3"
+
+/datum/seed/mushroom/hallucinogenic/strong/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_POTENCY,15)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom8")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#F2E550")
+	set_trait(TRAIT_PLANT_COLOUR,"#D1CA82")
+	set_trait(TRAIT_PLANT_ICON,"mushroom3")
 
 /datum/seed/mushroom/poison
 	name = "amanita"
@@ -1335,16 +1238,18 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/amanita)
 	mutants = list("destroyingangel","plastic")
 	chems = list("nutriment" = list(1), "amatoxin" = list(3,3), "psilocybin" = list(1,25))
-	lifespan = 50
-	maturation = 10
-	production = 5
-	yield = 4
-	potency = 10
-	packet_icon =    "mycelium-amanita"
-	product_icon =   "mushroom"
-	product_colour = "#FF4545"
-	plant_colour =   "#F5F2D0"
-	plant_icon =     "mushroom4"
+
+/datum/seed/mushroom/poison/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FF4545")
+	set_trait(TRAIT_PLANT_COLOUR,"#F5F2D0")
+	set_trait(TRAIT_PLANT_ICON,"mushroom4")
 
 /datum/seed/mushroom/poison/death
 	name = "destroyingangel"
@@ -1353,14 +1258,16 @@ proc/populate_seed_list()
 	mutants = null
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/angel)
 	chems = list("nutriment" = list(1,50), "amatoxin" = list(13,3), "psilocybin" = list(1,25))
-	maturation = 12
-	yield = 2
-	potency = 35
-	packet_icon =    "mycelium-angel"
-	product_icon =   "mushroom3"
-	product_colour = "#EDE8EA"
-	plant_colour =   "#E6D8DD"
-	plant_icon =     "mushroom5"
+
+/datum/seed/mushroom/poison/death/New()
+	..()
+	set_trait(TRAIT_MATURATION,12)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,35)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom3")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#EDE8EA")
+	set_trait(TRAIT_PLANT_COLOUR,"#E6D8DD")
+	set_trait(TRAIT_PLANT_ICON,"mushroom5")
 
 /datum/seed/mushroom/towercap
 	name = "towercap"
@@ -1368,14 +1275,15 @@ proc/populate_seed_list()
 	display_name = "tower caps"
 	mutants = null
 	products = list(/obj/item/weapon/grown/log)
-	packet_icon = "mycelium-tower"
-	lifespan = 80
-	maturation = 15
 
-	product_icon =   "mushroom7"
-	product_colour = "#79A36D"
-	plant_colour =   "#857F41"
-	plant_icon =     "mushroom8"
+/datum/seed/mushroom/towercap/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,80)
+	set_trait(TRAIT_MATURATION,15)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom7")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#79A36D")
+	set_trait(TRAIT_PLANT_COLOUR,"#857F41")
+	set_trait(TRAIT_PLANT_ICON,"mushroom8")
 
 /datum/seed/mushroom/glowshroom
 	name = "glowshroom"
@@ -1384,20 +1292,22 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom)
 	mutants = null
 	chems = list("radium" = list(1,20))
-	spread = 1
-	lifespan = 120
-	maturation = 15
-	yield = 3
-	explosive = 1
 	splat_type = /obj/effect/glowshroom
-	potency = 30
-	biolum = 1
-	biolum_colour = "#006622"
-	packet_icon =    "mycelium-glowshroom"
-	product_icon =   "mushroom2"
-	product_colour = "#DDFAB6"
-	plant_colour =   "#EFFF8A"
-	plant_icon =     "mushroom7"
+
+/datum/seed/mushroom/glowshroom/New()
+	..()
+	set_trait(TRAIT_SPREAD,1)
+	set_trait(TRAIT_LIFESPAN,120)
+	set_trait(TRAIT_MATURATION,15)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_EXPLOSIVE,1)
+	set_trait(TRAIT_POTENCY,30)
+	set_trait(TRAIT_BIOLUM,1)
+	set_trait(TRAIT_BIOLUM_COLOUR,"#006622")
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom2")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#DDFAB6")
+	set_trait(TRAIT_PLANT_COLOUR,"#EFFF8A")
+	set_trait(TRAIT_PLANT_ICON,"mushroom7")
 
 /datum/seed/mushroom/plastic
 	name = "plastic"
@@ -1406,16 +1316,18 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium)
 	mutants = null
 	chems = list("plasticide" = list(1,10))
-	lifespan = 15
-	maturation = 5
-	production = 6
-	yield = 6
-	potency = 20
-	packet_icon =    "mycelium-plast"
-	product_icon =   "mushroom6"
-	product_colour = "#E6E6E6"
-	plant_colour =   "#E6E6E6"
-	plant_icon =     "mushroom10"
+
+/datum/seed/mushroom/plastic/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,15)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,20)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom6")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#E6E6E6")
+	set_trait(TRAIT_PLANT_COLOUR,"#E6E6E6")
+	set_trait(TRAIT_PLANT_ICON,"mushroom10")
 
 //Flowers/varieties
 /datum/seed/flower
@@ -1424,15 +1336,17 @@ proc/populate_seed_list()
 	display_name = "harebells"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/harebell)
 	chems = list("nutriment" = list(1,20))
-	lifespan = 100
-	maturation = 7
-	production = 1
-	yield = 2
-	packet_icon =    "seed-harebell"
-	product_icon =   "flower5"
-	product_colour = "#C492D6"
-	plant_colour =   "#6B8C5E"
-	plant_icon =     "flower"
+
+/datum/seed/flower/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,100)
+	set_trait(TRAIT_MATURATION,7)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_PRODUCT_ICON,"flower5")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#C492D6")
+	set_trait(TRAIT_PLANT_COLOUR,"#6B8C5E")
+	set_trait(TRAIT_PLANT_ICON,"flower")
 
 /datum/seed/flower/poppy
 	name = "poppies"
@@ -1440,27 +1354,31 @@ proc/populate_seed_list()
 	display_name = "poppies"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/poppy)
 	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10))
-	lifespan = 25
-	potency = 20
-	maturation = 8
-	production = 6
-	yield = 6
-	packet_icon =    "seed-poppy"
-	product_icon =   "flower3"
-	product_colour = "#B33715"
-	plant_icon =     "flower3"
+
+/datum/seed/flower/poppy/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_POTENCY,20)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_PRODUCT_ICON,"flower3")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#B33715")
+	set_trait(TRAIT_PLANT_ICON,"flower3")
 
 /datum/seed/flower/sunflower
 	name = "sunflowers"
 	seed_name = "sunflower"
 	display_name = "sunflowers"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sunflower)
-	lifespan = 25
-	maturation = 6
-	packet_icon =    "seed-sunflower"
-	product_icon =   "flower2"
-	product_colour = "#FFF700"
-	plant_icon =     "flower2"
+
+/datum/seed/flower/sunflower/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCT_ICON,"flower2")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFF700")
+	set_trait(TRAIT_PLANT_ICON,"flower2")
 
 //Grapes/varieties
 /datum/seed/grapes
@@ -1469,18 +1387,20 @@ proc/populate_seed_list()
 	display_name = "grapevines"
 	mutants = list("greengrapes")
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/grapes)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10), "sugar" = list(1,5))
-	lifespan = 50
-	maturation = 3
-	production = 5
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-grapes"
-	product_icon =   "grapes"
-	product_colour = "#BB6AC4"
-	plant_colour =   "#378F2E"
-	plant_icon =     "vine"
+
+/datum/seed/grapes/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"grapes")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#BB6AC4")
+	set_trait(TRAIT_PLANT_COLOUR,"#378F2E")
+	set_trait(TRAIT_PLANT_ICON,"vine")
 
 /datum/seed/grapes/green
 	name = "greengrapes"
@@ -1489,8 +1409,10 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/greengrapes)
 	mutants = null
 	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5))
-	packet_icon = "seed-greengrapes"
-	product_colour = "42ED2F"
+
+/datum/seed/grapes/green/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"42ed2f")
 
 //Everything else
 /datum/seed/peanuts
@@ -1498,52 +1420,58 @@ proc/populate_seed_list()
 	seed_name = "peanut"
 	display_name = "peanut vines"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/peanut)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	lifespan = 55
-	maturation = 6
-	production = 6
-	yield = 6
-	potency = 10
-	packet_icon =    "seed-peanut"
-	product_icon =   "potato"
-	product_colour = "#96855D"
-	plant_icon =     "bush2"
+
+/datum/seed/peanuts/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,55)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"potato")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#96855D")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
 
 /datum/seed/cabbage
 	name = "cabbage"
 	seed_name = "cabbage"
 	display_name = "cabbages"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10))
-	lifespan = 50
-	maturation = 3
-	production = 5
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-cabbage"
-	product_icon =   "cabbage"
-	product_colour = "#84BD82"
-	plant_colour =   "#6D9C6B"
-	plant_icon =     "vine2"
+
+/datum/seed/cabbage/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"cabbage")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#84BD82")
+	set_trait(TRAIT_PLANT_COLOUR,"#6D9C6B")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
 
 /datum/seed/banana
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/banana)
-	harvest_repeat = 1
 	chems = list("banana" = list(1,10))
-	lifespan = 50
-	maturation = 6
-	production = 6
-	yield = 3
-	packet_icon =    "seed-banana"
-	product_icon =   "bananas"
-	product_colour = "#FFEC1F"
-	plant_colour =   "#69AD50"
-	plant_icon =     "tree4"
+
+/datum/seed/banana/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_PRODUCT_ICON,"bananas")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFEC1F")
+	set_trait(TRAIT_PLANT_COLOUR,"#69AD50")
+	set_trait(TRAIT_PLANT_ICON,"tree4")
 
 /datum/seed/corn
 	name = "corn"
@@ -1551,16 +1479,18 @@ proc/populate_seed_list()
 	display_name = "ears of corn"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/corn)
 	chems = list("nutriment" = list(1,10))
-	lifespan = 25
-	maturation = 8
-	production = 6
-	yield = 3
-	potency = 20
-	packet_icon =    "seed-corn"
-	product_icon =   "corn"
-	product_colour = "#FFF23B"
-	plant_colour =   "#87C969"
-	plant_icon =     "corn"
+
+/datum/seed/corn/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,20)
+	set_trait(TRAIT_PRODUCT_ICON,"corn")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFF23B")
+	set_trait(TRAIT_PLANT_COLOUR,"#87C969")
+	set_trait(TRAIT_PLANT_ICON,"corn")
 
 /datum/seed/potato
 	name = "potato"
@@ -1568,33 +1498,37 @@ proc/populate_seed_list()
 	display_name = "potatoes"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/potato)
 	chems = list("nutriment" = list(1,10))
-	produces_power = 1
-	lifespan = 30
-	maturation = 10
-	production = 1
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-potato"
-	product_icon =   "potato"
-	product_colour = "#D4CAB4"
-	plant_icon =     "bush2"
+
+/datum/seed/potato/New()
+	..()
+	set_trait(TRAIT_PRODUCES_POWER,1)
+	set_trait(TRAIT_LIFESPAN,30)
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"potato")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#D4CAB4")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
 
 /datum/seed/soybean
 	name = "soybean"
 	seed_name = "soybean"
 	display_name = "soybeans"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/soybeans)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,20))
-	lifespan = 25
-	maturation = 4
-	production = 4
-	yield = 3
-	potency = 5
-	packet_icon =    "seed-soybean"
-	product_icon =   "bean"
-	product_colour = "#EBE7C0"
-	plant_icon =     "stalk"
+
+/datum/seed/soybean/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,4)
+	set_trait(TRAIT_PRODUCTION,4)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"bean")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#EBE7C0")
+	set_trait(TRAIT_PLANT_ICON,"stalk")
 
 /datum/seed/wheat
 	name = "wheat"
@@ -1602,16 +1536,18 @@ proc/populate_seed_list()
 	display_name = "wheat stalks"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/wheat)
 	chems = list("nutriment" = list(1,25))
-	lifespan = 25
-	maturation = 6
-	production = 1
-	yield = 4
-	potency = 5
-	packet_icon =    "seed-wheat"
-	product_icon =   "wheat"
-	product_colour = "#DBD37D"
-	plant_colour =   "#BFAF82"
-	plant_icon =     "stalk2"
+
+/datum/seed/wheat/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"wheat")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#DBD37D")
+	set_trait(TRAIT_PLANT_COLOUR,"#BFAF82")
+	set_trait(TRAIT_PLANT_ICON,"stalk2")
 
 /datum/seed/rice
 	name = "rice"
@@ -1619,16 +1555,18 @@ proc/populate_seed_list()
 	display_name = "rice stalks"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk)
 	chems = list("nutriment" = list(1,25))
-	lifespan = 25
-	maturation = 6
-	production = 1
-	yield = 4
-	potency = 5
-	packet_icon =    "seed-rice"
-	product_icon =   "rice"
-	product_colour = "#D5E6D1"
-	plant_colour =   "#8ED17D"
-	plant_icon =     "stalk2"
+
+/datum/seed/rice/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"rice")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#D5E6D1")
+	set_trait(TRAIT_PLANT_COLOUR,"#8ED17D")
+	set_trait(TRAIT_PLANT_ICON,"stalk2")
 
 /datum/seed/carrots
 	name = "carrot"
@@ -1636,31 +1574,35 @@ proc/populate_seed_list()
 	display_name = "carrots"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
 	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5))
-	lifespan = 25
-	maturation = 10
-	production = 1
-	yield = 5
-	potency = 10
-	packet_icon =    "seed-carrot"
-	product_icon =   "carrot"
-	product_colour = "#FFDB4A"
-	plant_icon =     "carrot"
+
+/datum/seed/carrots/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"carrot")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFDB4A")
+	set_trait(TRAIT_PLANT_ICON,"carrot")
 
 /datum/seed/weeds
 	name = "weeds"
 	seed_name = "weed"
 	display_name = "weeds"
-	lifespan = 100
-	maturation = 5
-	production = 1
-	yield = -1
-	potency = -1
-	immutable = -1
-	packet_icon =    "seed-ambrosiavulgaris"
-	product_icon =   "flower4"
-	product_colour = "#FCEB2B"
-	plant_colour =   "#59945A"
-	plant_icon =     "bush6"
+
+/datum/seed/weeds/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,100)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,-1)
+	set_trait(TRAIT_POTENCY,-1)
+	set_trait(TRAIT_IMMUTABLE,-1)
+	set_trait(TRAIT_PRODUCT_ICON,"flower4")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FCEB2B")
+	set_trait(TRAIT_PLANT_COLOUR,"#59945A")
+	set_trait(TRAIT_PLANT_ICON,"bush6")
 
 /datum/seed/whitebeets
 	name = "whitebeet"
@@ -1668,137 +1610,155 @@ proc/populate_seed_list()
 	display_name = "white-beets"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/whitebeet)
 	chems = list("nutriment" = list(0,20), "sugar" = list(1,5))
-	lifespan = 60
-	maturation = 6
-	production = 6
-	yield = 6
-	potency = 10
-	packet_icon =    "seed-whitebeet"
-	product_icon =   "carrot2"
-	product_colour = "#EEF5B0"
-	plant_colour =   "#4D8F53"
-	plant_icon =     "carrot2"
+
+/datum/seed/whitebeets/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,60)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"carrot2")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#EEF5B0")
+	set_trait(TRAIT_PLANT_COLOUR,"#4D8F53")
+	set_trait(TRAIT_PLANT_ICON,"carrot2")
 
 /datum/seed/sugarcane
 	name = "sugarcane"
 	seed_name = "sugarcane"
 	display_name = "sugarcanes"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sugarcane)
-	harvest_repeat = 1
 	chems = list("sugar" = list(4,5))
-	lifespan = 60
-	maturation = 3
-	production = 6
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-sugarcane"
-	product_icon =   "stalk"
-	product_colour = "#B4D6BD"
-	plant_colour =   "#6BBD68"
-	plant_icon =     "stalk3"
+
+/datum/seed/sugarcane/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,60)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"stalk")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#B4D6BD")
+	set_trait(TRAIT_PLANT_COLOUR,"#6BBD68")
+	set_trait(TRAIT_PLANT_ICON,"stalk3")
 
 /datum/seed/watermelon
 	name = "watermelon"
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/watermelon)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,6))
-	juicy = 1
-	lifespan = 50
-	maturation = 6
-	production = 6
-	yield = 3
-	potency = 1
-	packet_icon =    "seed-watermelon"
-	product_icon =   "vine"
-	product_colour = "#326B30"
-	plant_colour =   "#257522"
-	plant_icon =     "vine2"
+
+/datum/seed/watermelon/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_ICON,"vine")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#326B30")
+	set_trait(TRAIT_PLANT_COLOUR,"#257522")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
 
 /datum/seed/pumpkin
 	name = "pumpkin"
 	seed_name = "pumpkin"
 	display_name = "pumpkin vine"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,6))
-	lifespan = 50
-	maturation = 6
-	production = 6
-	yield = 3
-	potency = 10
-	packet_icon =    "seed-pumpkin"
-	product_icon =   "vine"
-	product_colour = "#B4D4B9"
-	plant_colour =   "#BAE8C1"
-	plant_icon =     "vine2"
+
+/datum/seed/pumpkin/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"vine")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#B4D4B9")
+	set_trait(TRAIT_PLANT_COLOUR,"#BAE8C1")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
 
 /datum/seed/citrus
 	name = "lime"
 	seed_name = "lime"
 	display_name = "lime trees"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,20))
-	juicy = 1
-	lifespan = 55
-	maturation = 6
-	production = 6
-	yield = 4
-	potency = 15
-	packet_icon =    "seed-lime"
-	product_icon =   "treefruit"
-	product_colour = "#3AF026"
-	plant_icon =     "tree"
+
+/datum/seed/citrus/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_LIFESPAN,55)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,15)
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3AF026")
+	set_trait(TRAIT_PLANT_ICON,"tree")
 
 /datum/seed/citrus/lemon
 	name = "lemon"
 	seed_name = "lemon"
 	display_name = "lemon trees"
-	produces_power = 1
-	packet_icon =    "seed-lemon"
-	product_colour = "#F0E226"
+
+/datum/seed/citrus/lemon/New()
+	..()
+	set_trait(TRAIT_PRODUCES_POWER,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#F0E226")
 
 /datum/seed/citrus/orange
 	name = "orange"
 	seed_name = "orange"
 	display_name = "orange trees"
-	packet_icon = "seed-orange"
-	product_colour = "#FFC20A"
+
+/datum/seed/citrus/orange/New()
+	..()
+	set_trait(TRAIT_PRODUCT_COLOUR,"#FFC20A")
 
 /datum/seed/grass
 	name = "grass"
 	seed_name = "grass"
 	display_name = "grass"
 	products = list(/obj/item/stack/tile/grass)
-	harvest_repeat = 1
-	lifespan = 60
-	maturation = 2
-	production = 5
-	yield = 5
-	packet_icon =    "seed-grass"
-	product_icon =   "grass"
-	product_colour = "#09FF00"
-	plant_colour =   "#07D900"
-	plant_icon =     "grass"
+
+/datum/seed/grass/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,60)
+	set_trait(TRAIT_MATURATION,2)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_PRODUCT_ICON,"grass")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#09FF00")
+	set_trait(TRAIT_PLANT_COLOUR,"#07D900")
+	set_trait(TRAIT_PLANT_ICON,"grass")
 
 /datum/seed/cocoa
 	name = "cocoa"
 	seed_name = "cacao"
 	display_name = "cacao tree"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,10), "coco" = list(4,5))
-	lifespan = 20
-	maturation = 5
-	production = 5
-	yield = 2
-	potency = 10
-	packet_icon =    "seed-cocoapod"
-	product_icon =   "treefruit"
-	product_colour = "#CCA935"
-	plant_icon =     "tree2"
+
+/datum/seed/cocoa/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#CCA935")
+	set_trait(TRAIT_PLANT_ICON,"tree2")
 
 /datum/seed/cherries
 	name = "cherry"
@@ -1806,18 +1766,20 @@ proc/populate_seed_list()
 	seed_noun = "pits"
 	display_name = "cherry tree"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cherries)
-	harvest_repeat = 1
 	chems = list("nutriment" = list(1,15), "sugar" = list(1,15))
-	juicy = 1
-	lifespan = 35
-	maturation = 5
-	production = 5
-	yield = 3
-	potency = 10
-	packet_icon =    "seed-cherry"
-	product_icon =   "treefruit"
-	product_colour = "#8C0101"
-	plant_icon =     "tree2"
+
+/datum/seed/cherries/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_JUICY,1)
+	set_trait(TRAIT_LIFESPAN,35)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#8C0101")
+	set_trait(TRAIT_PLANT_ICON,"tree2")
 
 /datum/seed/kudzu
 	name = "kudzu"
@@ -1825,17 +1787,19 @@ proc/populate_seed_list()
 	display_name = "kudzu vines"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/kudzupod)
 	chems = list("nutriment" = list(1,50), "anti_toxin" = list(1,25))
-	lifespan = 20
-	maturation = 6
-	production = 6
-	yield = 4
-	potency = 10
-	spread = 2
-	packet_icon =    "seed-kudzu"
-	product_icon =   "treefruit"
-	product_colour = "#96D278"
-	plant_colour =   "#6F7A63"
-	plant_icon =     "vine2"
+
+/datum/seed/kudzu/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_SPREAD,2)
+	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#96D278")
+	set_trait(TRAIT_PLANT_COLOUR,"#6F7A63")
+	set_trait(TRAIT_PLANT_ICON,"vine2")
 
 /datum/seed/diona
 	name = "diona"
@@ -1844,18 +1808,20 @@ proc/populate_seed_list()
 	display_name = "replicant pods"
 	products = list(/mob/living/carbon/alien/diona)
 	product_requires_player = 1
-	immutable = 1
-	lifespan = 50
-	endurance = 8
-	maturation = 5
-	production = 10
-	yield = 1
-	potency = 30
-	packet_icon =    "seed-replicapod"
-	product_icon =   "diona"
-	product_colour = "#799957"
-	plant_colour =   "#66804B"
-	plant_icon =     "alien4"
+
+/datum/seed/diona/New()
+	..()
+	set_trait(TRAIT_IMMUTABLE,1)
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_ENDURANCE,8)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,10)
+	set_trait(TRAIT_YIELD,1)
+	set_trait(TRAIT_POTENCY,30)
+	set_trait(TRAIT_PRODUCT_ICON,"diona")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#799957")
+	set_trait(TRAIT_PLANT_COLOUR,"#66804B")
+	set_trait(TRAIT_PLANT_ICON,"alien4")
 
 /datum/seed/shand
 	name = "shand"
@@ -1863,16 +1829,18 @@ proc/populate_seed_list()
 	display_name = "S'randar's hand leaves"
 	products = list(/obj/item/stack/medical/bruise_pack/tajaran)
 	chems = list("bicaridine" = list(0,10))
-	lifespan = 50
-	maturation = 3
-	production = 5
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-shand"
-	product_icon =   "alien3"
-	product_colour = "#378C61"
-	plant_colour =   "#378C61"
-	plant_icon =     "tree5"
+
+/datum/seed/shand/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"alien3")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#378C61")
+	set_trait(TRAIT_PLANT_COLOUR,"#378C61")
+	set_trait(TRAIT_PLANT_ICON,"tree5")
 
 /datum/seed/mtear
 	name = "mtear"
@@ -1880,13 +1848,127 @@ proc/populate_seed_list()
 	display_name = "Messa's tear leaves"
 	products = list(/obj/item/stack/medical/ointment/tajaran)
 	chems = list("honey" = list(1,10), "kelotane" = list(3,5))
-	lifespan = 50
-	maturation = 3
-	production = 5
-	yield = 4
-	potency = 10
-	packet_icon =    "seed-mtear"
-	product_icon =   "alien4"
-	product_colour = "#4CC5C7"
-	plant_colour =   "#4CC789"
-	plant_icon =     "bush7"
+
+/datum/seed/mtear/New()
+	..()
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_MATURATION,3)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"alien4")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#4CC5C7")
+	set_trait(TRAIT_PLANT_COLOUR,"#4CC789")
+	set_trait(TRAIT_PLANT_ICON,"bush7")
+
+/datum/seed/telriis
+	name = "telriis"
+	seed_name = "telriis"
+	display_name = "telriis grass"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/telriis_clump)
+
+/datum/seed/telriis/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"telriis")
+	set_trait(TRAIT_LIFESPAN,50)
+	set_trait(TRAIT_ENDURANCE,50)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,5)
+
+/datum/seed/thaadra
+	name = "thaadra"
+	seed_name = "thaa'dra"
+	display_name = "thaa'dra lichen"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/thaadrabloom)
+
+/datum/seed/thaadra/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"thaadra")
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_ENDURANCE,10)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,9)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,5)
+
+/datum/seed/jurlmah
+	name = "jurlmah"
+	seed_name = "jurl'mah"
+	display_name = "jurl'mah reeds"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/jurlmah)
+
+/datum/seed/jurlmah/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"jurlmah")
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_ENDURANCE,12)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,9)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,10)
+
+/datum/seed/amauri
+	name = "amauri"
+	seed_name = "amauri"
+	display_name = "amauri plant"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/amauri)
+
+/datum/seed/amauri/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"amauri")
+	set_trait(TRAIT_LIFESPAN,30)
+	set_trait(TRAIT_ENDURANCE,10)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,9)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+
+/datum/seed/gelthi
+	name = "gelthi"
+	seed_name = "gelthi"
+	display_name = "gelthi plant"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/gelthi)
+
+/datum/seed/gelthi/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"gelthi")
+	set_trait(TRAIT_LIFESPAN,20)
+	set_trait(TRAIT_ENDURANCE,15)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,2)
+	set_trait(TRAIT_POTENCY,1)
+
+/datum/seed/vale
+	name = "vale"
+	seed_name = "vale"
+	display_name = "vale bush"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/vale)
+
+/datum/seed/vale/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"vale")
+	set_trait(TRAIT_LIFESPAN,25)
+	set_trait(TRAIT_ENDURANCE,15)
+	set_trait(TRAIT_MATURATION,8)
+	set_trait(TRAIT_PRODUCTION,10)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,3)
+
+/datum/seed/surik
+	name = "surik"
+	seed_name = "surik"
+	display_name = "surik vine"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/surik)
+
+/datum/seed/surik/New()
+	..()
+	set_trait(TRAIT_PLANT_ICON,"surik")
+	set_trait(TRAIT_LIFESPAN,30)
+	set_trait(TRAIT_ENDURANCE,18)
+	set_trait(TRAIT_MATURATION,7)
+	set_trait(TRAIT_PRODUCTION,7)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,3)

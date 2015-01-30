@@ -29,22 +29,22 @@ var/global/list/plant_seed_sprites = list()
 	overlays.Cut()
 	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
 	var/image/seed_mask
-	var/seed_base_key = "base-[is_seeds ? seed.plant_colour : "spores"]"
+	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
 	if(plant_seed_sprites[seed_base_key])
 		seed_mask = plant_seed_sprites[seed_base_key]
 	else
 		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
 		if(is_seeds) // Spore glass bits aren't coloured.
-			seed_mask.color = seed.plant_colour
+			seed_mask.color = seed.get_trait(TRAIT_PLANT_COLOUR)
 		plant_seed_sprites[seed_base_key] = seed_mask
 
 	var/image/seed_overlay
-	var/seed_overlay_key = "[seed.product_icon]-[seed.product_colour]"
+	var/seed_overlay_key = "[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
 	if(plant_seed_sprites[seed_overlay_key])
 		seed_overlay = plant_seed_sprites[seed_overlay_key]
 	else
-		seed_overlay = image('icons/obj/seeds.dmi',"[seed.product_icon]")
-		seed_overlay.color = seed.product_colour
+		seed_overlay = image('icons/obj/seeds.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]")
+		seed_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 		plant_seed_sprites[seed_overlay_key] = seed_overlay
 
 	overlays |= seed_mask
@@ -262,3 +262,24 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
+
+/obj/item/seeds/jurlmah
+	seed_type = "jurlmah"
+
+/obj/item/seeds/amauri
+	seed_type = "amauri"
+
+/obj/item/seeds/gelthi
+	seed_type = "gelthi"
+
+/obj/item/seeds/vale
+	seed_type = "vale"
+
+/obj/item/seeds/surik
+	seed_type = "surik"
+
+/obj/item/seeds/telriis
+	seed_type = "telriis"
+
+/obj/item/seeds/thaadra
+	seed_type = "thaadra"

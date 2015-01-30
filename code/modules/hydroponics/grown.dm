@@ -23,7 +23,7 @@
 		if(!seed || !seed.chems)
 			return
 
-		potency = seed.potency
+		potency = seed.get_trait(TRAIT_POTENCY)
 
 		for(var/rid in seed.chems)
 			var/list/reagent_data = seed.chems[rid]
@@ -36,7 +36,7 @@
 		bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
-	if(seed && seed.juicy == 2)
+	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
 		if(istype(M))
 
 			if(M.buckled)
@@ -63,7 +63,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-	if(seed && seed.produces_power && istype(W, /obj/item/stack/cable_coil))
+	if(seed && seed.get_trait(TRAIT_PRODUCES_POWER) && istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		if(C.use(5))
 			//TODO: generalize this.
@@ -117,7 +117,7 @@
 						M.take_organ_damage(0, force)
 			M.updatehealth()
 
-		if(seed && seed.stings)
+		if(seed && seed.get_trait(TRAIT_STINGS))
 			if(!reagents || reagents.total_volume <= 0)
 				return
 			reagents.remove_any(rand(1,3))
@@ -152,7 +152,7 @@
 		if(src) del(src)
 		return
 
-	if(seed.spread == 0)
+	if(seed.get_trait(TRAIT_SPREAD) == 0)
 		return
 
 	// TODO: Generalize.
@@ -168,10 +168,10 @@
 	..()
 	if(!seed)
 		return
-	if(seed.biolum)
-		user.SetLuminosity(user.luminosity + seed.biolum)
+	if(seed.get_trait(TRAIT_BIOLUM))
+		user.SetLuminosity(user.luminosity + seed.get_trait(TRAIT_BIOLUM))
 		SetLuminosity(0)
-	if(seed.stings)
+	if(seed.get_trait(TRAIT_STINGS))
 		var/mob/living/carbon/human/H = user
 		if(istype(H) && H.gloves)
 			return
@@ -184,9 +184,9 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/dropped(mob/user)
 	if(!..() || !seed)
 		return
-	if(seed.biolum)
-		user.SetLuminosity(user.luminosity - seed.biolum)
-		SetLuminosity(seed.biolum)
+	if(seed.get_trait(TRAIT_BIOLUM))
+		user.SetLuminosity(user.luminosity - seed.get_trait(TRAIT_BIOLUM))
+		SetLuminosity(seed.get_trait(TRAIT_BIOLUM))
 
 // Food object defines follow.
 /obj/item/weapon/reagent_containers/food/snacks/grown/corn

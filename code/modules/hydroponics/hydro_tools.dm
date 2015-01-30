@@ -53,12 +53,12 @@
 	dat += "<h2>General Data</h2>"
 
 	dat += "<table>"
-	dat += "<tr><td><b>Endurance</b></td><td>[grown_seed.endurance]</td></tr>"
-	dat += "<tr><td><b>Yield</b></td><td>[grown_seed.yield]</td></tr>"
-	dat += "<tr><td><b>Lifespan</b></td><td>[grown_seed.lifespan]</td></tr>"
-	dat += "<tr><td><b>Maturation time</b></td><td>[grown_seed.maturation]</td></tr>"
-	dat += "<tr><td><b>Production time</b></td><td>[grown_seed.production]</td></tr>"
-	dat += "<tr><td><b>Potency</b></td><td>[grown_seed.potency]</td></tr>"
+	dat += "<tr><td><b>Endurance</b></td><td>[grown_seed.get_trait(TRAIT_ENDURANCE)]</td></tr>"
+	dat += "<tr><td><b>Yield</b></td><td>[grown_seed.get_trait(TRAIT_YIELD)]</td></tr>"
+	dat += "<tr><td><b>Lifespan</b></td><td>[grown_seed.get_trait(TRAIT_LIFESPAN)]</td></tr>"
+	dat += "<tr><td><b>Maturation time</b></td><td>[grown_seed.get_trait(TRAIT_MATURATION)]</td></tr>"
+	dat += "<tr><td><b>Production time</b></td><td>[grown_seed.get_trait(TRAIT_PRODUCTION)]</td></tr>"
+	dat += "<tr><td><b>Potency</b></td><td>[grown_seed.get_trait(TRAIT_POTENCY)]</td></tr>"
 	dat += "</table>"
 
 	if(grown_reagents && grown_reagents.reagent_list && grown_reagents.reagent_list.len)
@@ -70,29 +70,29 @@
 
 	dat += "<h2>Other Data</h2>"
 
-	if(grown_seed.harvest_repeat)
+	if(grown_seed.get_trait(TRAIT_HARVEST_REPEAT))
 		dat += "This plant can be harvested repeatedly.<br>"
 
-	if(grown_seed.immutable == -1)
+	if(grown_seed.get_trait(TRAIT_IMMUTABLE) == -1)
 		dat += "This plant is highly mutable.<br>"
-	else if(grown_seed.immutable > 0)
+	else if(grown_seed.get_trait(TRAIT_IMMUTABLE) > 0)
 		dat += "This plant does not possess genetics that are alterable.<br>"
 
 	if(grown_seed.products && grown_seed.products.len)
 		dat += "The mature plant will produce [grown_seed.products.len == 1 ? "fruit" : "[grown_seed.products.len] varieties of fruit"].<br>"
 
-	if(grown_seed.requires_nutrients)
-		if(grown_seed.nutrient_consumption < 0.05)
+	if(grown_seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
+		if(grown_seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
 			dat += "It consumes a small amount of nutrient fluid.<br>"
-		else if(grown_seed.nutrient_consumption > 0.2)
+		else if(grown_seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) > 0.2)
 			dat += "It requires a heavy supply of nutrient fluid.<br>"
 		else
 			dat += "It requires a supply of nutrient fluid.<br>"
 
-	if(grown_seed.requires_water)
-		if(grown_seed.water_consumption < 1)
+	if(grown_seed.get_trait(TRAIT_REQUIRES_WATER))
+		if(grown_seed.get_trait(TRAIT_WATER_CONSUMPTION) < 1)
 			dat += "It requires very little water.<br>"
-		else if(grown_seed.water_consumption > 5)
+		else if(grown_seed.get_trait(TRAIT_WATER_CONSUMPTION) > 5)
 			dat += "It requires a large amount of water.<br>"
 		else
 			dat += "It requires a stable supply of water.<br>"
@@ -100,77 +100,77 @@
 	if(grown_seed.mutants && grown_seed.mutants.len)
 		dat += "It exhibits a high degree of potential subspecies shift.<br>"
 
-	dat += "It thrives in a temperature of [grown_seed.ideal_heat] Kelvin."
+	dat += "It thrives in a temperature of [grown_seed.get_trait(TRAIT_IDEAL_HEAT)] Kelvin."
 
-	if(grown_seed.lowkpa_tolerance < 20)
+	if(grown_seed.get_trait(TRAIT_LOWKPA_TOLERANCE) < 20)
 		dat += "<br>It is well adapted to low pressure levels."
-	if(grown_seed.highkpa_tolerance > 220)
+	if(grown_seed.get_trait(TRAIT_HIGHKPA_TOLERANCE) > 220)
 		dat += "<br>It is well adapted to high pressure levels."
 
-	if(grown_seed.heat_tolerance > 30)
+	if(grown_seed.get_trait(TRAIT_HEAT_TOLERANCE) > 30)
 		dat += "<br>It is well adapted to a range of temperatures."
-	else if(grown_seed.heat_tolerance < 10)
+	else if(grown_seed.get_trait(TRAIT_HEAT_TOLERANCE) < 10)
 		dat += "<br>It is very sensitive to temperature shifts."
 
-	dat += "<br>It thrives in a light level of [grown_seed.ideal_light] lumen[grown_seed.ideal_light == 1 ? "" : "s"]."
+	dat += "<br>It thrives in a light level of [grown_seed.get_trait(TRAIT_IDEAL_LIGHT)] lumen[grown_seed.get_trait(TRAIT_IDEAL_LIGHT) == 1 ? "" : "s"]."
 
-	if(grown_seed.light_tolerance > 10)
+	if(grown_seed.get_trait(TRAIT_LIGHT_TOLERANCE) > 10)
 		dat += "<br>It is well adapted to a range of light levels."
-	else if(grown_seed.light_tolerance < 3)
+	else if(grown_seed.get_trait(TRAIT_LIGHT_TOLERANCE) < 3)
 		dat += "<br>It is very sensitive to light level shifts."
 
-	if(grown_seed.toxins_tolerance < 3)
+	if(grown_seed.get_trait(TRAIT_TOXINS_TOLERANCE) < 3)
 		dat += "<br>It is highly sensitive to toxins."
-	else if(grown_seed.toxins_tolerance > 6)
+	else if(grown_seed.get_trait(TRAIT_TOXINS_TOLERANCE) > 6)
 		dat += "<br>It is remarkably resistant to toxins."
 
-	if(grown_seed.pest_tolerance < 3)
+	if(grown_seed.get_trait(TRAIT_PEST_TOLERANCE) < 3)
 		dat += "<br>It is highly sensitive to pests."
-	else if(grown_seed.pest_tolerance > 6)
+	else if(grown_seed.get_trait(TRAIT_PEST_TOLERANCE) > 6)
 		dat += "<br>It is remarkably resistant to pests."
 
-	if(grown_seed.weed_tolerance < 3)
+	if(grown_seed.get_trait(TRAIT_WEED_TOLERANCE) < 3)
 		dat += "<br>It is highly sensitive to weeds."
-	else if(grown_seed.weed_tolerance > 6)
+	else if(grown_seed.get_trait(TRAIT_WEED_TOLERANCE) > 6)
 		dat += "<br>It is remarkably resistant to weeds."
 
-	switch(grown_seed.spread)
+	switch(grown_seed.get_trait(TRAIT_SPREAD))
 		if(1)
 			dat += "<br>It is able to be planted outside of a tray."
 		if(2)
 			dat += "<br>It is a robust and vigorous vine that will spread rapidly."
 
-	switch(grown_seed.carnivorous)
+	switch(grown_seed.get_trait(TRAIT_CARNIVOROUS))
 		if(1)
 			dat += "<br>It is carniovorous and will eat tray pests for sustenance."
 		if(2)
 			dat	+= "<br>It is carnivorous and poses a significant threat to living things around it."
 
-	if(grown_seed.parasite)
+	if(grown_seed.get_trait(TRAIT_PARASITE))
 		dat += "<br>It is capable of parisitizing and gaining sustenance from tray weeds."
-	if(grown_seed.alter_temp)
-		dat += "<br>It will periodically alter the local temperature by [grown_seed.alter_temp] degrees Kelvin."
+	if(grown_seed.get_trait(TRAIT_ALTER_TEMP))
+		dat += "<br>It will periodically alter the local temperature by [grown_seed.get_trait(TRAIT_ALTER_TEMP)] degrees Kelvin."
 
-	if(grown_seed.biolum)
-		dat += "<br>It is [grown_seed.biolum_colour ? "<font color='[grown_seed.biolum_colour]'>bio-luminescent</font>" : "bio-luminescent"]."
-	if(grown_seed.flowers)
-		dat += "<br>It has [grown_seed.flower_colour ? "<font color='[grown_seed.flower_colour]'>flowers</font>" : "flowers"]."
+	if(grown_seed.get_trait(TRAIT_BIOLUM))
+		dat += "<br>It is [grown_seed.get_trait(TRAIT_BIOLUM_COLOUR)  ? "<font color='[grown_seed.get_trait(TRAIT_BIOLUM_COLOUR)]'>bio-luminescent</font>" : "bio-luminescent"]."
+	if(grown_seed.get_trait(TRAIT_FLOWERS))
+		dat += "<br>It has [grown_seed.get_trait(TRAIT_FLOWER_COLOUR) ? "<font color='[grown_seed.get_trait(TRAIT_FLOWER_COLOUR)]'>flowers</font>" : "flowers"]."
 
-	if(grown_seed.produces_power)
+	if(grown_seed.get_trait(TRAIT_PRODUCES_POWER))
 		user << "<br>The fruit will function as a battery if prepared appropriately."
 
-	if(grown_seed.stings)
+	if(grown_seed.get_trait(TRAIT_STINGS))
 		user << "<br>The fruit is covered in stinging spines."
 
-	if(grown_seed.juicy == 1)
+	if(grown_seed.get_trait(TRAIT_JUICY) == 1)
 		user << "<br>The fruit is soft-skinned and juicy."
-	else if(grown_seed.juicy == 2)
+	else if(grown_seed.get_trait(TRAIT_JUICY) == 2)
 		user << "<br>The fruit is excessively juicy."
 
-	if(grown_seed.explosive)
+	if(grown_seed.get_trait(TRAIT_EXPLOSIVE))
 		user << "<br>The fruit is internally unstable."
 
-	if(grown_seed.teleporting)
+	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		user << "<br>The fruit is temporal/spatially unstable."
 
 	if(dat)

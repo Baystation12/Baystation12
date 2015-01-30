@@ -188,9 +188,9 @@
 				if(prob(10))
 					H.lastcycle -= 5
 				if(prob(10))
-					H.seed.lifespan = max(initial(H.seed.lifespan) * 1.5, H.seed.lifespan + 1)
+					H.seed.set_trait(TRAIT_LIFESPAN,max(H.seed.get_trait(TRAIT_LIFESPAN)*1.5,H.seed.get_trait(TRAIT_LIFESPAN)+1))
 				if(prob(10))
-					H.seed.endurance = max(initial(H.seed.endurance) * 1.5, H.seed.endurance + 1)
+					H.seed.set_trait(TRAIT_ENDURANCE,max(H.seed.get_trait(TRAIT_ENDURANCE)*1.5,H.seed.get_trait(TRAIT_ENDURANCE)+1))
 				if(H.toxins && prob(10))
 					H.toxins = min(0, H.toxins - 1)
 					toxic++

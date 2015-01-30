@@ -42,7 +42,7 @@ var/global/list/image/splatter_cache=list()
 		dry()
 
 /obj/effect/decal/cleanable/blood/update_icon()
-	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	if(basecolor == "rainbow") basecolor = "#[pick(rainbow)]"
 	color = basecolor
 
 /obj/effect/decal/cleanable/blood/Crossed(mob/living/carbon/human/perp)
@@ -165,11 +165,11 @@ var/global/list/image/splatter_cache=list()
 
 	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
 	if(!fleshcolor || fleshcolor == "rainbow")
-		fleshcolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+		fleshcolor = "#[pick(rainbow)]"
 	giblets.color = fleshcolor
 
 	var/icon/blood = new(base_icon,"[icon_state]",dir)
-	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	if(basecolor == "rainbow") basecolor = "#[pick(rainbow)]"
 	blood.Blend(basecolor,ICON_MULTIPLY)
 
 	icon = blood

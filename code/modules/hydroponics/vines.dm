@@ -20,6 +20,7 @@
 	// Life vars/
 	var/energy = 0
 	var/obj/effect/plant_controller/master = null
+	var/mob/living/buckled_mob
 	var/datum/seed/seed
 
 /obj/effect/plantsegment/New()
@@ -55,7 +56,7 @@
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user)) del src
 			else
-				user_unbuckle_mob(user)
+				manual_unbuckle(user)
 				return
 		// Plant-b-gone damage is handled in its entry in chemistry-reagents.dm
 	..()
@@ -70,7 +71,39 @@
 		update()
 		return
 
-	user_unbuckle_mob(user)
+	manual_unbuckle(user)
+
+/obj/effect/plantsegment/proc/unbuckle()
+	if(buckled_mob)
+		if(buckled_mob.buckled == src)	//this is probably unneccesary, but it doesn't hurt
+			buckled_mob.buckled = null
+			buckled_mob.anchored = initial(buckled_mob.anchored)
+			buckled_mob.update_canmove()
+		buckled_mob = null
+	return
+
+/obj/effect/plantsegment/proc/manual_unbuckle(mob/user as mob)
+	if(buckled_mob)
+		if(prob(seed ? min(max(0,100 - seed.get_trait(TRAIT_POTENCY)),100) : 50))
+			if(buckled_mob.buckled == src)
+				if(buckled_mob != user)
+					buckled_mob.visible_message(\
+						"<span class='notice'>[user.name] frees [buckled_mob.name] from [src].</span>",\
+						"<span class='notice'>[user.name] frees you from [src].</span>",\
+						"<span class='warning'>You hear shredding and ripping.</span>")
+				else
+					buckled_mob.visible_message(\
+						"<span class='notice'>[buckled_mob.name] struggles free of [src].</span>",\
+						"<span class='notice'>You untangle [src] from around yourself.</span>",\
+						"<span class='warning'>You hear shredding and ripping.</span>")
+			unbuckle()
+		else
+			var/text = pick("rips","tears","pulls")
+			user.visible_message(\
+				"<span class='notice'>[user.name] [text] at [src].</span>",\
+				"<span class='notice'>You [text] at [src].</span>",\
+				"<span class='warning'>You hear shredding and ripping.</span>")
+	return
 
 /obj/effect/plantsegment/proc/grow()
 
@@ -94,7 +127,7 @@
 	if(limited_growth)
 		return
 
-	if(prob(seed ? seed.potency : 25))
+	if(prob(seed ? seed.get_trait(TRAIT_POTENCY) : 25))
 
 		if(!buckled_mob)
 			var/mob/living/carbon/V = locate() in src.loc
@@ -114,10 +147,10 @@
 	if(!seed) return
 
 	// Update bioluminescence.
-	if(seed.biolum)
-		SetLuminosity(1+round(seed.potency/10))
-		if(seed.biolum_colour)
-			l_color = seed.biolum_colour
+	if(seed.get_trait(TRAIT_BIOLUM))
+		SetLuminosity(1+round(seed.get_trait(TRAIT_POTENCY)/10))
+		if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
+			l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
 		else
 			l_color = null
 		return
@@ -126,21 +159,21 @@
 
 	// Update flower/product overlay.
 	overlays.Cut()
-	if(age >= seed.maturation)
-		if(prob(20) && seed.products && seed.products.len && !harvest && ((age-lastproduce) > seed.production))
+	if(age >= seed.get_trait(TRAIT_MATURATION))
+		if(prob(20) && seed.products && seed.products.len && !harvest && ((age-lastproduce) > seed.get_trait(TRAIT_PRODUCTION)))
 			harvest = 1
 			lastproduce = age
 
 		if(harvest)
 			var/image/fruit_overlay = image('icons/obj/hydroponics_vines.dmi',"")
-			if(seed.product_colour)
-				fruit_overlay.color = seed.product_colour
+			if(seed.get_trait(TRAIT_PRODUCT_COLOUR))
+				fruit_overlay.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 			overlays += fruit_overlay
 
-		if(seed.flowers)
-			var/image/flower_overlay = image('icons/obj/hydroponics_vines.dmi',"[seed.flower_icon]")
-			if(seed.flower_colour)
-				flower_overlay.color = seed.flower_colour
+		if(seed.get_trait(TRAIT_FLOWERS))
+			var/image/flower_overlay = image('icons/obj/hydroponics_vines.dmi',"[seed.get_trait(TRAIT_FLOWER_ICON)]")
+			if(seed.get_trait(TRAIT_FLOWER_COLOUR))
+				flower_overlay.color = seed.get_trait(TRAIT_FLOWER_COLOUR)
 			overlays += flower_overlay
 
 /obj/effect/plantsegment/proc/spread()
@@ -194,11 +227,11 @@
 		return
 
 	var/pressure = environment.return_pressure()
-	if(pressure < seed.lowkpa_tolerance || pressure > seed.highkpa_tolerance)
+	if(pressure < seed.get_trait(TRAIT_LOWKPA_TOLERANCE) || pressure > seed.get_trait(TRAIT_HIGHKPA_TOLERANCE))
 		die()
 		return
 
-	if(abs(environment.temperature - seed.ideal_heat) > seed.heat_tolerance)
+	if(abs(environment.temperature - seed.get_trait(TRAIT_IDEAL_HEAT)) > seed.get_trait(TRAIT_HEAT_TOLERANCE))
 		die()
 		return
 
@@ -209,7 +242,7 @@
 			light_available = max(0,min(10,T.lighting_lumcount)-5)
 		else
 			light_available =  5
-		if(abs(light_available - seed.ideal_light) > seed.light_tolerance)
+		if(abs(light_available - seed.get_trait(TRAIT_IDEAL_LIGHT)) > seed.get_trait(TRAIT_LIGHT_TOLERANCE))
 			die()
 			return
 
@@ -270,16 +303,16 @@
 		return
 
 	// Check if we're too big for our own good.
-	if(vines.len >= (seed ? seed.potency * collapse_limit : 250) && !reached_collapse_size)
+	if(vines.len >= (seed?seed.get_trait(TRAIT_POTENCY)*collapse_limit : 250)&&!reached_collapse_size)
 		reached_collapse_size = 1
-	if(vines.len >= (seed ? seed.potency * slowdown_limit : 30) && !reached_slowdown_size )
+	if(vines.len >= (seed?seed.get_trait(TRAIT_POTENCY)*slowdown_limit : 30)&&!reached_slowdown_size)
 		reached_slowdown_size = 1
 
 	var/length = 0
 	if(reached_collapse_size)
 		length = 0
 	else if(reached_slowdown_size)
-		if(prob(seed ? seed.potency : 25))
+		if(prob(seed ? seed.get_trait(TRAIT_POTENCY) : 25))
 			length = 1
 		else
 			length = 0
@@ -304,7 +337,7 @@
 		if(SV.energy < 2) //If tile isn't fully grown
 			var/chance
 			if(seed)
-				chance = limited_growth ? round(seed.potency/2,1) : seed.potency
+				chance = limited_growth ? round(seed.get_trait(TRAIT_POTENCY)/2,1) : seed.get_trait(TRAIT_POTENCY)
 			else
 				chance = 20
 
