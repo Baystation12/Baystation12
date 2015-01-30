@@ -12,6 +12,7 @@
 	matter = list("metal" = 1875)
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
+	properties = list("crowbar" = 0.3)
 
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
 	..()

@@ -27,6 +27,8 @@
 	matter = list("metal" = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
+	properties = list(TOOL_WRENCH = 1)
+	main_property = TOOL_WRENCH
 
 
 /*
@@ -46,6 +48,8 @@
 	throw_range = 5
 	matter = list("metal" = 75)
 	attack_verb = list("stabbed")
+	properties = list(TOOL_SCREWDRIVER = 1)
+	main_property = TOOL_SCREWDRIVER
 
 	suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</b>", \
@@ -107,6 +111,8 @@
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
 	edge = 1
+	properties = list(TOOL_WIRECUTTERS = 1)
+	main_property = TOOL_WIRECUTTERS
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -143,6 +149,8 @@
 
 	//Cost to make in the autolathe
 	matter = list("metal" = 70, "glass" = 30)
+	properties = list(TOOL_WELDER = 1)
+	main_property = TOOL_WELDER
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -394,6 +402,11 @@
 					user.disabilities &= ~NEARSIGHTED
 	return
 
+/obj/item/weapon/weldingtool/use_tool(var/mob/user, var/amount)
+	if(!isOn())
+		return 0
+	return remove_fuel(amount, user)
+
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
@@ -424,32 +437,7 @@
 	if(reagents > max_fuel)
 		reagents = max_fuel
 
-/*
- * Crowbar
- */
-
-/obj/item/weapon/crowbar
-	name = "crowbar"
-	desc = "Used to remove floors and to pry open doors."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "crowbar"
-	flags = FPRINT | TABLEPASS| CONDUCT
-	slot_flags = SLOT_BELT
-	force = 5.0
-	throwforce = 7.0
-	item_state = "crowbar"
-	w_class = 2.0
-	matter = list("metal" = 50)
-	origin_tech = "engineering=1"
-	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-
-/obj/item/weapon/crowbar/red
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_crowbar"
-	item_state = "crowbar_red"
-
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
-
 	if(hasorgans(M))
 
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
@@ -475,60 +463,37 @@
 	else
 		return ..()
 
-/*/obj/item/weapon/combitool
+/*
+ * Crowbar
+ */
+
+/obj/item/weapon/crowbar
+	name = "crowbar"
+	desc = "Used to remove floors and to pry open doors."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "crowbar"
+	flags = FPRINT | TABLEPASS| CONDUCT
+	slot_flags = SLOT_BELT
+	force = 5.0
+	throwforce = 7.0
+	item_state = "crowbar"
+	w_class = 2.0
+	matter = list("metal" = 50)
+	origin_tech = "engineering=1"
+	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
+	properties = list(TOOL_CROWBAR = 1)
+	main_property = TOOL_CROWBAR
+
+/obj/item/weapon/crowbar/red
+	icon = 'icons/obj/items.dmi'
+	icon_state = "red_crowbar"
+	item_state = "crowbar_red"
+
+/obj/item/weapon/combitool
 	name = "combi-tool"
 	desc = "It even has one of those nubbins for doing the thingy."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "combitool"
 	w_class = 2
-
-	var/list/spawn_tools = list(
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/wirecutters,
-		/obj/item/weapon/kitchen/utensil/knife,
-		/obj/item/weapon/kitchen/utensil/fork,
-		/obj/item/weapon/hatchet
-		)
-	var/list/tools = list()
-	var/current_tool = 1
-
-/obj/item/weapon/combitool/examine()
-	..()
-	if(loc == usr && tools.len)
-		usr << "It has the following fittings:"
-		for(var/obj/item/tool in tools)
-			usr << "\icon[tool] - [tool.name][tools[current_tool]==tool?" (selected)":""]"
-
-/obj/item/weapon/combitool/New()
-	..()
-	for(var/type in spawn_tools)
-		tools |= new type(src)
-
-/obj/item/weapon/combitool/attack_self(mob/user as mob)
-	if(++current_tool > tools.len) current_tool = 1
-	var/obj/item/tool = tools[current_tool]
-	if(!tool)
-		user << "You can't seem to find any fittings in \the [src]."
-	else
-		user << "You switch \the [src] to the [tool.name] fitting."
-	return 1
-
-/obj/item/weapon/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!M.Adjacent(user))
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	return (tool ? tool.attack(M,user) : 0)
-
-/obj/item/weapon/combitool/afterattack(var/atom/target, var/mob/living/user, proximity, params)
-	if(!proximity)
-		return 0
-	var/obj/item/tool = tools[current_tool]
-	if(!tool) return 0
-	tool.loc = user
-	var/resolved = target.attackby(tool,user)
-	if(!resolved && tool && target)
-		tool.afterattack(target,user,1)
-	if(tool)
-		tool.loc = src*/
+	properties = list(TOOL_SCREWDRIVER = 0.8, TOOL_WRENCH = 0.7, TOOL_WIRECUTTERS = 0.8, TOOL_KNIFE = 0.8, TOOL_FORK = 0.8, TOOL_HATCHET = 0.6)
+	main_property = TOOL_SCREWDRIVER

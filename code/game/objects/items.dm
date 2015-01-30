@@ -17,6 +17,9 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 
+	var/list/properties
+	var/main_property = null
+
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/max_heat_protection_temperature //Set this variable to determine up to which temperature (IN KELVIN) the item protects against heat damage. Keep at null to disable protection. Only protects areas set by heat_protection flags
@@ -707,3 +710,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return
+
+/obj/item/proc/use_tool(var/mob/user, var/amount) // Used to handle any effects on the tool when it's used, e.g. welding tool fuel use, emag charge use, etc.
+	return 1 // returns 1 if used succesfully

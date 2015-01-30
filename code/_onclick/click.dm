@@ -54,9 +54,11 @@
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
 		AltClickOn(A)
 		return
+	/* AIs and borgs have their own ClickOn, so this is not a problem
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
 		return
+	*/
 
 	if(stat || paralysis || stunned || weakened)
 		return
@@ -112,11 +114,18 @@
 			if(W.flags&USEDELAY)
 				next_move += 5
 
-			var/resolved = A.attackby(W,src)
+			var/resolved = 0
+			if(modifiers["ctrl"])
+				resolved = A.attackby(W,src,1)
+			else
+				resolved = A.attackby(W,src,0)
 			if(!resolved && A && W)
 				W.afterattack(A,src,1,params) // 1 indicates adjacency
 		else
-			UnarmedAttack(A, 1)
+			if(modifiers["ctrl"])
+				CtrlClickOn(A)
+			else
+				UnarmedAttack(A, 1)
 		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
@@ -133,11 +142,18 @@
 					next_move += 5
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = A.attackby(W,src)
+				var/resolved = 0
+				if(modifiers["ctrl"])
+					resolved = A.attackby(W,src,1)
+				else
+					resolved = A.attackby(W,src,0)
 				if(!resolved && A && W)
 					W.afterattack(A,src,1,params) // 1: clicking something Adjacent
 			else
-				UnarmedAttack(A, 1)
+				if(modifiers["ctrl"])
+					CtrlClickOn(A)
+				else
+					UnarmedAttack(A, 1)
 			return
 		else // non-adjacent click
 			if(W)
@@ -260,6 +276,7 @@
 /*
 	Ctrl click
 	For most objects, pull
+	Now handles ONLY unarmed ctrl-click unless overriden
 */
 /mob/proc/CtrlClickOn(var/atom/A)
 	A.CtrlClick(src)
