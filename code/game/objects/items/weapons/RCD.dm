@@ -29,7 +29,7 @@
 
 /obj/item/weapon/rcd/examine()
 	..()
-	if(loc == usr)
+	if(src.type == /obj/item/weapon/rcd && loc == usr)
 		usr << "It currently holds [stored_matter]/30 matter-units."
 
 /obj/item/weapon/rcd/New()
@@ -42,7 +42,7 @@
 
 	if(istype(W, /obj/item/weapon/rcd_ammo))
 		if(stored_matter == capacity)
-			user << "<span class='notice'>The RCD is full and can't hold any more matter-units.</span>"
+			user << "<span class='notice'>\The [src] is full and can't hold any more matter-units.</span>"
 			return
 
 		stored_matter += W.stored_matter
@@ -51,11 +51,11 @@
 		if(stored_matter > capacity)
 			W.stored_matter = stored_matter - capacity
 			stored_matter = capacity
-			user << "<span class='notice'>The RCD was filled to full capacity. There are [W.stored_matter] matter units remining in the [W.name].</span>"
+			user << "<span class='notice'>\The [src] was filled to full capacity. There are [W.stored_matter] matter units remining in the [W.name].</span>"
 			return
 		else
 			del(W)
-			user << "You load full cartridge into RCD. It now contains [stored_matter] matter units"
+			user << "You load full a cartridge into \the [src]. It now contains [stored_matter] matter units"
 
 		return
 	..()
