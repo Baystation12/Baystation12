@@ -4165,7 +4165,7 @@
 "bCe" = (/obj/machinery/camera{c_tag = "Medbay Cloning"; network = list("SS13")},/obj/structure/closet/wardrobe/medic_white,/obj/item/clothing/under/rank/geneticist_new,/obj/item/weapon/storage/backpack/satchel_gen,/turf/simulated/floor{icon_state = "white"},/area/medical/genetics_cloning)
 "bCf" = (/turf/simulated/floor{icon_state = "white"},/area/medical/genetics_cloning)
 "bCg" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/obj/item/device/radio/intercom{broadcasting = 0; name = "Station Intercom (General)"; pixel_y = 20},/turf/simulated/floor{icon_state = "white"},/area/medical/genetics_cloning)
-"bCh" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 8; name = "west bump-derelict"; operating = 1; pixel_x = -24},/turf/simulated/floor{dir = 9; icon_state = "blue"},/area/medical/morgue)
+"bCh" = (/obj/structure/cable/green{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 8; name = "west bump-derelict"; operating = 0; pixel_x = -24},/turf/simulated/floor{dir = 9; icon_state = "blue"},/area/medical/morgue)
 "bCi" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor{dir = 1; icon_state = "blue"},/area/medical/morgue)
 "bCj" = (/obj/machinery/camera{c_tag = "Genetics Fore"; network = list("SS13")},/obj/machinery/light_switch{pixel_y = 28},/turf/simulated/floor{dir = 1; icon_state = "blue"},/area/medical/morgue)
 "bCk" = (/turf/simulated/floor{dir = 1; icon_state = "blue"},/area/medical/morgue)
