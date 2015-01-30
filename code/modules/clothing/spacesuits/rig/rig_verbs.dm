@@ -120,8 +120,8 @@
 
 /obj/item/weapon/rig/verb/toggle_seals_verb()
 
-	set name = "Toggle Seals"
-	set desc = "Activates or deactivates your rig seals."
+	set name = "Toggle Hardsuit"
+	set desc = "Activates or deactivates your rig."
 	set category = "Hardsuit"
 	set src = usr.contents
 
@@ -208,6 +208,8 @@
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
 	if(!istype(module))
+		selected_module = null
+		usr << "<font color='blue'><b>Primary system is now: deselected.</b></font>"
 		return
 
 	selected_module = module
