@@ -1,6 +1,3 @@
-#define HYDRO_SPEED_MULTIPLIER 1
-var/global/list/plant_icon_cache = list()
-
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics_machines.dmi'
@@ -239,58 +236,19 @@ var/global/list/plant_icon_cache = list()
 
 	var/turf/T = loc
 	var/datum/gas_mixture/environment
-
 	// If we're closed, take from our internal sources.
 	if(closed_system && (connected_port || holding))
 		environment = air_contents
-
 	// If atmos input is not there, grab from turf.
-	if(!environment)
-		if(istype(T))
-			environment = T.return_air()
-
+	if(!environment && istype(T)) environment = T.return_air()
 	if(!environment) return
 
-	// Handle gas consumption.
-	if(seed.consume_gasses && seed.consume_gasses.len)
-		var/missing_gas = 0
-		for(var/gas in seed.consume_gasses)
-			if(environment && environment.gas && environment.gas[gas] && \
-			 environment.gas[gas] >= seed.consume_gasses[gas])
-				environment.adjust_gas(gas,-seed.consume_gasses[gas],1)
-			else
-				missing_gas++
-
-		if(missing_gas > 0)
-			health -= missing_gas * HYDRO_SPEED_MULTIPLIER
-
-	// Process it.
-	var/pressure = environment.return_pressure()
-	if(pressure < seed.lowkpa_tolerance || pressure > seed.highkpa_tolerance)
-		health -= healthmod
-
-	if(abs(environment.temperature - seed.ideal_heat) > seed.heat_tolerance)
-		health -= healthmod
-
-	// Handle gas production.
-	if(seed.exude_gasses && seed.exude_gasses.len)
-		for(var/gas in seed.exude_gasses)
-			environment.adjust_gas(gas, max(1,round((seed.exude_gasses[gas]*seed.potency)/seed.exude_gasses.len)))
+	// Seed datum handles gasses, light and pressure.
+	health -= seed.handle_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && connected_port)
 		update_connected_network()
-
-	// Handle light requirements.
-	var/area/A = T.loc
-	if(A)
-		var/light_available
-		if(A.lighting_use_dynamic)
-			light_available = max(0,min(10,T.lighting_lumcount)-5)
-		else
-			light_available =  5
-		if(abs(light_available - seed.ideal_light) > seed.light_tolerance)
-			health -= healthmod
 
 	// Toxin levels beyond the plant's tolerance cause damage, but
 	// toxins are sucked up each tick and slowly reduce over time.
@@ -839,5 +797,3 @@ var/global/list/plant_icon_cache = list()
 /obj/machinery/portable_atmospherics/hydroponics/soil/New()
 	..()
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid
-
-#undef HYDRO_SPEED_MULTIPLIER

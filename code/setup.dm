@@ -774,3 +774,6 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
+
+//General-purpose life speed define for plants.
+#define HYDRO_SPEED_MULTIPLIER 1

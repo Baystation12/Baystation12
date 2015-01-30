@@ -254,5 +254,11 @@ var/static/list/scarySounds = list(
 // Bomb cap!
 var/max_explosion_range = 14
 
+// Several cache lists for plants/hydroponics.
+var/global/list/seed_types = list()       // A list of all seed data.
+var/global/list/gene_tag_masks = list()   // Gene obfuscation for delicious trial and error goodness.
+var/global/list/plant_icon_cache = list() // Stores images of growth, fruits and seeds.
+
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
+

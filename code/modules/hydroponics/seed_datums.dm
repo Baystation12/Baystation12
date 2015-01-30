@@ -1,9 +1,5 @@
-var/global/list/seed_types = list()       // A list of all seed data.
-var/global/list/gene_tag_masks = list()   // Gene obfuscation for delicious trial and error goodness.
-
-// Index is the root icon_state, value is the number of states.
-var/global/list/plant_sprites = list()
-var/global/list/plant_product_sprites = list()
+var/global/list/plant_sprites = list()         // List of all harvested product sprites.
+var/global/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
@@ -303,6 +299,48 @@ proc/populate_seed_list()
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		del(thrown)
 
+/datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment)
+
+	var/health_change = 0
+	// Handle gas consumption.
+	if(consume_gasses && consume_gasses.len)
+		var/missing_gas = 0
+		for(var/gas in consume_gasses)
+			if(environment && environment.gas && environment.gas[gas] && \
+			 environment.gas[gas] >= consume_gasses[gas])
+				environment.adjust_gas(gas,-consume_gasses[gas],1)
+			else
+				missing_gas++
+
+		if(missing_gas > 0)
+			health_change += missing_gas * HYDRO_SPEED_MULTIPLIER
+
+	// Process it.
+	var/pressure = environment.return_pressure()
+	if(pressure < lowkpa_tolerance || pressure > highkpa_tolerance)
+		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+
+	if(abs(environment.temperature - ideal_heat) > heat_tolerance)
+		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+
+	// Handle gas production.
+	if(exude_gasses && exude_gasses.len)
+		for(var/gas in exude_gasses)
+			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*potency)/exude_gasses.len)))
+
+	// Handle light requirements.
+	var/area/A = get_area(current_turf)
+	if(A)
+		var/light_available
+		if(A.lighting_use_dynamic)
+			light_available = max(0,min(10,current_turf.lighting_lumcount)-5)
+		else
+			light_available =  5
+		if(abs(light_available - ideal_light) > light_tolerance)
+			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
+
+	return health_change
+
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
 
 	var/impact = 1
@@ -358,7 +396,10 @@ proc/populate_seed_list()
 		harvest_repeat = 1
 
 	if(prob(15))
-		juicy = 1
+		if(prob(15))
+			juicy = 2
+		else
+			juicy = 1
 
 	if(prob(5))
 		stings = 1

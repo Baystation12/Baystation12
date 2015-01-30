@@ -162,7 +162,9 @@
 	if(grown_seed.stings)
 		user << "<br>The fruit is covered in stinging spines."
 
-	if(grown_seed.juicy)
+	if(grown_seed.juicy == 1)
+		user << "<br>The fruit is soft-skinned and juicy."
+	else if(grown_seed.juicy == 2)
 		user << "<br>The fruit is excessively juicy."
 
 	if(grown_seed.explosive)

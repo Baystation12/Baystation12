@@ -36,7 +36,7 @@
 		bitesize = 1+round(reagents.total_volume / 2, 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
-	if(seed && seed.juicy)
+	if(seed && seed.juicy == 2)
 		if(istype(M))
 
 			if(M.buckled)
@@ -48,10 +48,14 @@
 					return
 
 			M.stop_pulling()
-			M << "\blue You slipped on the [name]!"
+			M << "<span class='notice'>You slipped on the [name]!</span>"
 			playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 			M.Stun(8)
 			M.Weaken(5)
+			seed.thrown_at(src,M)
+			sleep(-1)
+			if(src) del(src)
+			return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/throw_impact(atom/hit_atom)
 	..()
