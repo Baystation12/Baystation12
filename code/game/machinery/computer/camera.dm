@@ -41,6 +41,9 @@
 
 			var/cameras[0]
 			for(var/obj/machinery/camera/C in cameranet.cameras)
+				if(!can_access_camera(C))
+					continue
+
 				var/cam[0]
 				cam["name"] = sanitize(C.c_tag)
 				cam["deact"] = !C.can_use()
