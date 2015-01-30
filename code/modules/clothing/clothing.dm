@@ -44,6 +44,9 @@
 	return 1
 
 /obj/item/clothing/proc/refit_for_species(var/target_species)
+	if(!species_restricted)
+		return //this item doesn't use the species_restricted system
+
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
@@ -63,6 +66,9 @@
 		icon = initial(icon)
 
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
+	if(!species_restricted)
+		return //this item doesn't use the species_restricted system
+	
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")

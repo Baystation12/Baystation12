@@ -55,6 +55,13 @@
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 
+/obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
+	..()
+	if(istype(helmet))
+		helmet.refit_for_species(target_species)
+	if(istype(boots))
+		boots.refit_for_species(target_species)
+
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()
 
