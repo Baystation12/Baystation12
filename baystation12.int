@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\misc\chaticons.dmi;code\modules\admin\verbs\deadsay.dm;code\stylesheet.dm;code\game\verbs\ooc.dm;code\modules\donators.dm;code\modules\admin\verbs\adminsay.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\verbs code\modules code\modules\admin code\modules\admin\verbs icons icons\misc 
-FILE: code\game\verbs\ooc.dm
-LAST_COMPILE_TIME: 1422659491
+DIR: maps 
+LAST_COMPILE_TIME: 1422661782
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

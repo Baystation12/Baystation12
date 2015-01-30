@@ -10,6 +10,11 @@
 	var/slice_path
 	var/slices_num
 	center_of_mass = list("x"=15, "y"=15)
+	var/eatverb
+	var/wrapped = 0
+	var/dried_type = null
+	var/cooktype[0]
+	var/deepfried = 0
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -17,7 +22,7 @@
 	if(!reagents.total_volume)
 		if(M == usr)
 			usr << "<span class='notice'>You finish eating \the [src].</span>"
-		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>")
+		usr.visible_message("<span class='notice'>[usr] finishes eating \the [src].</span>")
 		usr.drop_from_inventory(src)	//so icons update :[
 
 		if(trash)
@@ -79,7 +84,12 @@
 
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
-				msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+				log_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)])")
+
+				if(!iscarbon(user))
+					M.LAssailant = null
+				else
+					M.LAssailant = user
 
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message("\red [user] feeds [M] [src].", 1)
@@ -91,18 +101,20 @@
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
-				if(reagents.total_volume > bitesize)
-					/*
-					 * I totally cannot understand what this code supposed to do.
-					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-					reagents.trans_to(M, temp_bitesize)
-					*/
-					reagents.trans_to_ingest(M, bitesize)
-				else
-					reagents.trans_to_ingest(M, reagents.total_volume)
-				bitecount++
-				On_Consume(M)
+				reagents.reaction(M, INGEST)
+				spawn(5)
+					if(reagents.total_volume > bitesize)
+						/*
+						 * I totally cannot understand what this code supposed to do.
+						 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
+						var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
+						reagents.trans_to(M, temp_bitesize)
+						*/
+						reagents.trans_to_ingest(M, bitesize)
+					else
+						reagents.trans_to_ingest(M, reagents.total_volume)
+					bitecount++
+					On_Consume(M)
 			return 1
 
 	return 0
@@ -123,13 +135,16 @@
 	else
 		usr << "\blue \The [src] was bitten multiple times!"
 
-/obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/storage))
-		..() // -> item/attackby()
+/obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W,/obj/item/weapon/pen))
+		var/n_name = copytext(sanitize(input(usr, "What would you like to name this dish?", "Food Renaming", null)  as text), 1, MAX_NAME_LEN)
+		if((loc == usr && usr.stat == 0))
+			name = "[n_name]"
+		return
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
 
-	if(istype(W,/obj/item/weapon/kitchen/utensil))
+/*	if(istype(W,/obj/item/weapon/kitchen/utensil))
 
 		var/obj/item/weapon/kitchen/utensil/U = W
 
@@ -157,7 +172,7 @@
 		if (reagents.total_volume <= 0)
 			del(src)
 		return
-
+*/
 	if((slices_num <= 0 || !slices_num) || !slice_path)
 		return 0
 
@@ -1538,7 +1553,6 @@
 	bitesize = 12
 	filling_color = "#ADAC7F"
 
-	var/wrapped = 0
 	var/monkey_type = /mob/living/carbon/monkey
 
 	New()
@@ -2848,6 +2862,25 @@
                 reagents.add_reagent("ice",2)
                 bitesize = 6
 
+/obj/item/weapon/reagent_containers/food/snacks/cereal
+	name = "box of cereal"
+	desc = "A box of cereal."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "cereal_box"
+	bitesize = 2
+	New()
+		..()
+		reagents.add_reagent("nutriment", 30)
+
+/obj/item/weapon/reagent_containers/food/snacks/deepfryholder
+	name = "Deep Fried Foods Holder Obj"
+	desc = "If you can see this description the code for the deep fryer fucked up."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "deepfried_holder_icon"
+	bitesize = 2
+	New()
+		..()
+		reagents.add_reagent("nutriment", 30)
 
 ///////////////////////////////////////////
 // new old food stuff from bs12
