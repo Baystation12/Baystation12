@@ -55,7 +55,7 @@
 			return
 		else
 			del(W)
-			user << "You load full a cartridge into \the [src]. It now contains [stored_matter] matter units"
+			user << "You load \the [W] into \the [src]. It now contains [stored_matter] matter units"
 
 		return
 	..()
