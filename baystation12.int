@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\reagents\Chemistry-Machinery.dm;code\game\area\Space Station 13 areas.dm;maps\tgstation2.dmm;code\game\machinery\camera\camera.dm;code\modules\power\lighting.dm;icons\obj\objects.dmi;code\modules\admin\verbs\adminpm.dm;code\modules\client\client defines.dm;code\modules\client\client procs.dm;code\modules\projectiles\guns\energy\nuclear.dm;code\modules\projectiles\guns\energy\pulse.dm;code\modules\projectiles\guns\energy\stun.dm;code\modules\admin\admin_verbs.dm
+WINDOW: code\game\area\Space Station 13 areas.dm;maps\tgstation2.dmm;code\modules\reagents\Chemistry-Machinery.dm;code\modules\reagents\Chemistry-Xenoarch.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\datums code\datums\spells code\defines code\defines\obj code\game code\game\area code\game\machinery code\game\machinery\camera code\game\machinery\computer code\game\machinery\kitchen code\game\machinery\pipe code\game\objects code\game\objects\closets code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\power code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\modules\reagents icons icons\obj maps 
-FILE: code\modules\admin\admin_verbs.dm
-LAST_COMPILE_TIME: 1422606645
+DIR: code code\controllers code\datums code\datums\spells code\defines code\defines\obj code\game code\game\area code\game\machinery code\game\machinery\camera code\game\machinery\computer code\game\machinery\kitchen code\game\machinery\pipe code\game\objects code\modules code\modules\reagents maps 
+FILE: code\modules\reagents\Chemistry-Xenoarch.dm
+LAST_COMPILE_TIME: 1422645984
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
