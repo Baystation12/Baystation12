@@ -2,7 +2,7 @@
 	name = "GPS"
 	icon = 'icons/obj/device.dmi'
 	icon_state = "pinoff"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0
 	item_state = "electronic"

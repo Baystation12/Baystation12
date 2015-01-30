@@ -304,7 +304,7 @@ var/global/ManifestJSON
 	throwforce = 0.0
 	throw_speed = 1
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		user.drop_item()
