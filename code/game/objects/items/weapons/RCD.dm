@@ -29,8 +29,8 @@
 
 /obj/item/weapon/rcd/examine()
 	..()
-	if(src.type == /obj/item/weapon/rcd && loc == usr)
-		usr << "It currently holds [stored_matter]/30 matter-units."
+	if(src.type == /obj/item/weapon/rcd || src.type == /obj/item/weapon/rcd/mounted && loc == usr)
+		usr << "It currently holds [stored_matter]/[src.capacity] matter-units."
 
 /obj/item/weapon/rcd/New()
 	..()
@@ -54,9 +54,8 @@
 			user << "<span class='notice'>\The [src] was filled to full capacity. There are [W.stored_matter] matter units remining in the [W.name].</span>"
 			return
 		else
+			user << "You load a full cartridge into \the [src]. It now contains [stored_matter] matter units"
 			del(W)
-			user << "You load \the [W] into \the [src]. It now contains [stored_matter] matter units"
-
 		return
 	..()
 
@@ -97,7 +96,7 @@
 		build_delay = 50
 		build_type = "airlock"
 	else if(mode == 2 && !deconstruct && istype(T,/turf/simulated/floor))
-		build_cost =  6
+		build_cost =  10
 		build_delay = 50
 		build_type = "airlock"
 		build_other = /obj/machinery/door/airlock
@@ -112,7 +111,7 @@
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
-		build_cost =  deconstruct ? 10 : 4
+		build_cost =  deconstruct ? 5 : 5
 		build_type =  deconstruct ? "floor" : "wall"
 		build_turf =  deconstruct ? /turf/space : /turf/simulated/wall
 	else
@@ -184,7 +183,6 @@
 /obj/item/weapon/rcd/borg/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.stat)
 
-
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*30
 	if(istype(loc,/obj/item/rig_module))
@@ -195,8 +193,9 @@
 				return 1
 	return 0
 
-/obj/item/weapon/rcd/mounted/attackby()
-	return
-
 /obj/item/weapon/rcd/mounted/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.stat && !user.restrained())
+
+/obj/item/weapon/rcd/mounted/attackby()
+    return
+
