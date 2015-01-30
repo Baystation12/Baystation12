@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\reagents\Chemistry-Machinery.dm;code\game\area\Space Station 13 areas.dm;maps\tgstation2.dmm;code\game\objects\structures.dm;code\game\machinery\computer\HolodeckControl.dm;icons\obj\objects.dmi;code\defines\obj\weapon.dm;icons\obj\items.dmi;code\game\objects\items\devices\lightreplacer.dm;code\game\objects\items\stacks\sheets\light.dm;code\game\objects\items\stacks\tiles\light.dm;icons\obj\lighting.dmi;code\modules\power\lighting.dm;icons\obj\monitors.dmi
+WINDOW: code\modules\reagents\Chemistry-Machinery.dm;code\game\area\Space Station 13 areas.dm;maps\tgstation2.dmm;code\game\machinery\camera\camera.dm;code\modules\power\lighting.dm;icons\obj\objects.dmi;code\modules\admin\verbs\adminpm.dm;code\modules\client\client defines.dm;code\modules\client\client procs.dm;code\modules\projectiles\guns\energy\nuclear.dm;code\modules\projectiles\guns\energy\pulse.dm;code\modules\projectiles\guns\energy\stun.dm;code\modules\admin\admin_verbs.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\datums code\datums\spells code\defines code\defines\obj code\game code\game\area code\game\machinery code\game\machinery\computer code\game\machinery\kitchen code\game\machinery\pipe code\game\objects code\game\objects\closets code\game\objects\effects code\game\objects\items code\game\objects\items\devices code\game\objects\items\stacks code\game\objects\items\stacks\sheets code\game\objects\items\stacks\tiles code\modules code\modules\power code\modules\reagents icons icons\effects icons\obj maps 
-FILE: icons\obj\monitors.dmi
-LAST_COMPILE_TIME: 1422600332
+DIR: code code\controllers code\datums code\datums\spells code\defines code\defines\obj code\game code\game\area code\game\machinery code\game\machinery\camera code\game\machinery\computer code\game\machinery\kitchen code\game\machinery\pipe code\game\objects code\game\objects\closets code\modules code\modules\admin code\modules\admin\verbs code\modules\client code\modules\power code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\modules\reagents icons icons\obj maps 
+FILE: code\modules\admin\admin_verbs.dm
+LAST_COMPILE_TIME: 1422606645
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

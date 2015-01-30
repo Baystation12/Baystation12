@@ -242,7 +242,7 @@
 			switch(i)
 				if(NORTH)
 					src.dir = SOUTH
-					src.pixel_y = 20
+					src.pixel_y = 19
 				if(SOUTH)
 					src.dir = NORTH
 				if(WEST)

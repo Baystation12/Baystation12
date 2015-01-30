@@ -96,7 +96,8 @@
 			C.adminhelped = 0
 
 		//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
-		if(config.popup_admin_pm)
+		//Set so it'll make a popup window if the admin is ANGRY
+		if( angry )
 			spawn(0)	//so we don't hold the caller proc up
 				var/sender = src
 				var/sendername = key
@@ -115,7 +116,10 @@
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.prefs && C.prefs.toggles & SOUND_ADMINHELP)
-		C << 'sound/effects/adminhelp.ogg'
+		if( angry )
+			C << 'sound/effects/adminhelpLOUD.ogg'
+		else
+			C << 'sound/effects/adminhelp.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 

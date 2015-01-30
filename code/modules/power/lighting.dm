@@ -264,6 +264,8 @@
 	..()
 
 /obj/machinery/light/update_icon()
+	if( src.dir == 1 )
+		src.pixel_y = 19
 
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
@@ -309,6 +311,9 @@
 	active_power_usage = (luminosity * 10)
 	if(on != on_gs)
 		on_gs = on
+
+	if( src.dir == 1 )
+		src.pixel_y = 19
 
 
 // attempt to set the light's on/off status
