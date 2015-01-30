@@ -1601,8 +1601,8 @@ obj/item/clothing/head/ushanka/fluff/rufaro_nia
 
 
 /obj/item/clothing/under/rank/medical/fluff/valeera
-	name = "Valeera's black scrubs"
+	name = "Black scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
 	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "blackscrubs"
-	item_state = "blackscrubs"
+	icon_state = "scrubsblack"
+	item_state = "scrubsblack"
