@@ -29,7 +29,7 @@
 
 /obj/item/weapon/rcd/examine()
 	..()
-	if(src.type == /obj/item/weapon/rcd || src.type == /obj/item/weapon/rcd/mounted && loc == usr)
+	if(src.type == /obj/item/weapon/rcd && loc == usr)
 		usr << "It currently holds [stored_matter]/[src.capacity] matter-units."
 
 /obj/item/weapon/rcd/New()
