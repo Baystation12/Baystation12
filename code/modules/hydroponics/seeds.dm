@@ -1,8 +1,10 @@
+var/global/list/plant_seed_sprites = list()
+
 //Seed packet object/procs.
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "seed"
+	icon_state = "blank"
 	w_class = 2.0
 
 	var/seed_type
@@ -22,9 +24,38 @@
 //Updates strings and icon appropriately based on seed datum.
 /obj/item/seeds/proc/update_appearance()
 	if(!seed) return
-	icon_state = seed.packet_icon
-	src.name = "packet of [seed.seed_name] [seed.seed_noun]"
-	src.desc = "It has a picture of [seed.display_name] on the front."
+
+	// Update icon.
+	overlays.Cut()
+	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
+	var/image/seed_mask
+	var/seed_base_key = "base-[is_seeds ? seed.plant_colour : "spores"]"
+	if(plant_seed_sprites[seed_base_key])
+		seed_mask = plant_seed_sprites[seed_base_key]
+	else
+		seed_mask = image('icons/obj/seeds.dmi',"[is_seeds ? "seed" : "spore"]-mask")
+		if(is_seeds) // Spore glass bits aren't coloured.
+			seed_mask.color = seed.plant_colour
+		plant_seed_sprites[seed_base_key] = seed_mask
+
+	var/image/seed_overlay
+	var/seed_overlay_key = "[seed.product_icon]-[seed.product_colour]"
+	if(plant_seed_sprites[seed_overlay_key])
+		seed_overlay = plant_seed_sprites[seed_overlay_key]
+	else
+		seed_overlay = image('icons/obj/seeds.dmi',"[seed.product_icon]")
+		seed_overlay.color = seed.product_colour
+		plant_seed_sprites[seed_overlay_key] = seed_overlay
+
+	overlays |= seed_mask
+	overlays |= seed_overlay
+
+	if(is_seeds)
+		src.name = "packet of [seed.seed_name] [seed.seed_noun]"
+		src.desc = "It has a picture of [seed.display_name] on the front."
+	else
+		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
+		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
 	..(user)
