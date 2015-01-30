@@ -1807,7 +1807,6 @@ proc/populate_seed_list()
 	seed_noun = "nodes"
 	display_name = "replicant pods"
 	products = list(/mob/living/carbon/alien/diona)
-	product_requires_player = 1
 
 /datum/seed/diona/New()
 	..()

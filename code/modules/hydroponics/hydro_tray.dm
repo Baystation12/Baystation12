@@ -819,7 +819,7 @@
 	age = 1
 	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
-	pixel_y = 0-rand(8,12)
+	pixel_y = rand(12)
 	check_level_sanity()
 	update_icon()
 

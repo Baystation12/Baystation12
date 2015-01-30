@@ -157,21 +157,21 @@
 		dat += "<br>It has [grown_seed.get_trait(TRAIT_FLOWER_COLOUR) ? "<font color='[grown_seed.get_trait(TRAIT_FLOWER_COLOUR)]'>flowers</font>" : "flowers"]."
 
 	if(grown_seed.get_trait(TRAIT_PRODUCES_POWER))
-		user << "<br>The fruit will function as a battery if prepared appropriately."
+		dat += "<br>The fruit will function as a battery if prepared appropriately."
 
 	if(grown_seed.get_trait(TRAIT_STINGS))
-		user << "<br>The fruit is covered in stinging spines."
+		dat += "<br>The fruit is covered in stinging spines."
 
 	if(grown_seed.get_trait(TRAIT_JUICY) == 1)
-		user << "<br>The fruit is soft-skinned and juicy."
+		dat += "<br>The fruit is soft-skinned and juicy."
 	else if(grown_seed.get_trait(TRAIT_JUICY) == 2)
-		user << "<br>The fruit is excessively juicy."
+		dat += "<br>The fruit is excessively juicy."
 
 	if(grown_seed.get_trait(TRAIT_EXPLOSIVE))
-		user << "<br>The fruit is internally unstable."
+		dat += "<br>The fruit is internally unstable."
 
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
-		user << "<br>The fruit is temporal/spatially unstable."
+		dat += "<br>The fruit is temporal/spatially unstable."
 
 	if(dat)
 		user << browse(dat,"window=plant_analyzer")
