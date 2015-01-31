@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\projectiles\guns\projectile\crossbow.dm;icons\turf\walls.dmi;code\game\machinery\computer\HolodeckControl.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
-LAST_COMPILE_TIME: 1422661782
+DIR: code code\game code\game\machinery code\game\machinery\computer code\modules code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\projectile icons icons\turf maps 
+FILE: code\game\machinery\computer\HolodeckControl.dm
+LAST_COMPILE_TIME: 1422667477
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

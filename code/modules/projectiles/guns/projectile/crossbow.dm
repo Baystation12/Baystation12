@@ -43,7 +43,7 @@
 	icon_state = "metal-rod"
 
 /obj/item/weapon/arrow/rod/removed(mob/user)
-	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
+	if(throwforce == 10) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
 		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
@@ -176,11 +176,11 @@
 
 	if(!user || !cell || !in_chamber) return
 	if(cell.charge < 500) return
-	if(in_chamber.throwforce >= 15) return
+	if(in_chamber.throwforce >= 10) return
 	if(!istype(in_chamber,/obj/item/weapon/arrow/rod)) return
 
 	user << "<span class='notice'>[in_chamber] plinks and crackles as it begins to glow red-hot.</span>"
-	in_chamber.throwforce = 15
+	in_chamber.throwforce = 10
 	in_chamber.icon_state = "metal-rod-superheated"
 	cell.use(500)
 
