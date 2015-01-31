@@ -7,7 +7,7 @@
 	flags = OPENCONTAINER
 	volume = 100
 
-	var/mechanical = 1 //Set to 0 to stop it from drawing the alert lights.
+	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 
 	// Plant maintenance vars.
 	var/waterlevel = 100       // Water (max 100)
@@ -300,6 +300,10 @@
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
 
+	// Some seeds will self-harvest if you don't keep a lid on them.
+	if(seed && seed.can_self_harvest && harvest && !closed_system && prob(5))
+		harvest()
+
 	check_level_sanity()
 	update_icon()
 	return
@@ -360,14 +364,17 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/harvest(var/mob/user)
 
 	//Harvest the product of the plant,
-	if(!seed || !harvest || !user)
+	if(!seed || !harvest)
 		return
 
 	if(closed_system)
-		user << "You can't harvest from the plant while the lid is shut."
+		if(user) user << "You can't harvest from the plant while the lid is shut."
 		return
 
-	seed.harvest(user,yield_mod)
+	if(user)
+		seed.harvest(user,yield_mod)
+	else
+		seed.harvest(get_turf(src),yield_mod)
 
 	// Reset values.
 	harvest = 0

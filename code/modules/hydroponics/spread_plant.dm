@@ -15,8 +15,8 @@
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
 	var/floor = 0
-	var/spread_chance = 40
-	var/spread_into_adjacent = 60
+	var/spread_chance = 100 //40
+	var/spread_into_adjacent = 100 //60
 	var/evolve_chance = 2
 	var/last_tick = 0
 	var/hibernating = 0
@@ -27,8 +27,8 @@
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed)
 
 	..()
-	if(!newseed)
-		newseed = DEFAULT_SEED
+	if(!istype(newseed))
+		newseed = seed_types[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
 		del(src)

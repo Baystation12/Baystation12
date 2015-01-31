@@ -84,6 +84,7 @@ proc/populate_seed_list()
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
+	var/can_self_harvest = 0       // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
 	var/list/products              // Possible fruit/other product paths.
@@ -660,9 +661,9 @@ proc/populate_seed_list()
 		got_product = 1
 
 	if(!force_amount && !got_product && !harvest_sample)
-		user << "<span class='danger'>You fail to harvest anything useful.</span>"
+		if(istype(user)) user << "<span class='danger'>You fail to harvest anything useful.</span>"
 	else
-		user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
+		if(istype(user)) user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
 
 		//This may be a new line. Update the global if it is.
 		if(name == "new line" || !(name in seed_types))
@@ -728,6 +729,7 @@ proc/populate_seed_list()
 	new_seed.name = "new line"
 	new_seed.uid = 0
 	new_seed.roundstart = 0
+	new_seed.can_self_harvest = can_self_harvest
 
 	//Copy over everything else.
 	if(products)       new_seed.products = products.Copy()
@@ -979,6 +981,7 @@ proc/populate_seed_list()
 	display_name = "killer tomato plant"
 	products = list(/mob/living/simple_animal/tomato)
 	mutants = null
+	can_self_harvest = 1
 
 /datum/seed/tomato/killer/New()
 	..()
@@ -1190,6 +1193,7 @@ proc/populate_seed_list()
 	display_name = "walking mushrooms"
 	products = list(/mob/living/simple_animal/mushroom)
 	mutants = null
+	can_self_harvest = 1
 
 /datum/seed/mushroom/plump/walking/New()
 	..()
@@ -1810,6 +1814,7 @@ proc/populate_seed_list()
 	seed_noun = "nodes"
 	display_name = "replicant pods"
 	products = list(/mob/living/carbon/alien/diona)
+	can_self_harvest = 1
 
 /datum/seed/diona/New()
 	..()
