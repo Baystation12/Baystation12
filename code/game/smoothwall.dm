@@ -139,6 +139,7 @@
 	var/turf/simulated/wall/wall = src
 	wall.icon_state = "[wall.walltype][junction]"
 
+/*
 	if(wall.walltype == "grwall" || wall.walltype == "gwall")
 		var/jun2 = 0
 		junction = 0 //will be used to determine from which side the wall is connected to other walls
@@ -169,4 +170,5 @@
 					if(11)	wall.icon_state="[wall.walltype]_spec_11"
 					if(14)	wall.icon_state="[wall.walltype]_spec_14"
 					if(15)	wall.icon_state="[wall.walltype]_spec_15"
+	*/
 	return
