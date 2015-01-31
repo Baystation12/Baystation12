@@ -149,13 +149,13 @@ proc/populate_seed_list()
 //Splatter a turf.
 /datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
 	if(splat_type)
-		var/obj/effect/decal/cleanable/fruit_smudge/splat = new splat_type(T)
-		splat.name = "[thrown.name] [pick("smear","smudge","splatter")]"
-		if(get_trait(TRAIT_BIOLUM))
-			if(get_trait(TRAIT_BIOLUM_COLOUR))
-				splat.l_color = get_trait(TRAIT_BIOLUM_COLOUR)
-			splat.SetLuminosity(get_trait(TRAIT_BIOLUM))
-		if(istype(splat))
+		var/obj/effect/plant/splat = new splat_type(T, src)
+		if(!istype(splat)) // Plants handle their own stuff.
+			splat.name = "[thrown.name] [pick("smear","smudge","splatter")]"
+			if(get_trait(TRAIT_BIOLUM))
+				if(get_trait(TRAIT_BIOLUM_COLOUR))
+					splat.l_color = get_trait(TRAIT_BIOLUM_COLOUR)
+				splat.SetLuminosity(get_trait(TRAIT_BIOLUM))
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				splat.color = get_trait(TRAIT_PRODUCT_COLOUR)
 
@@ -259,7 +259,7 @@ proc/populate_seed_list()
 		origin_turf.visible_message("<span class='danger'>The [thrown.name] splatters against [target]!</span>")
 		del(thrown)
 
-/datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment)
+/datum/seed/proc/handle_environment(var/turf/current_turf, var/datum/gas_mixture/environment, var/check_only)
 
 	var/health_change = 0
 	// Handle gas consumption.
@@ -268,7 +268,8 @@ proc/populate_seed_list()
 		for(var/gas in consume_gasses)
 			if(environment && environment.gas && environment.gas[gas] && \
 			 environment.gas[gas] >= consume_gasses[gas])
-				environment.adjust_gas(gas,-consume_gasses[gas],1)
+				if(!check_only)
+					environment.adjust_gas(gas,-consume_gasses[gas],1)
 			else
 				missing_gas++
 
@@ -284,7 +285,7 @@ proc/populate_seed_list()
 		health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
 	// Handle gas production.
-	if(exude_gasses && exude_gasses.len)
+	if(exude_gasses && exude_gasses.len && !check_only)
 		for(var/gas in exude_gasses)
 			environment.adjust_gas(gas, max(1,round((exude_gasses[gas]*get_trait(TRAIT_POTENCY))/exude_gasses.len)))
 
@@ -1132,7 +1133,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle)
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list("nutriment" = list(1,25))
-	splat_type = /obj/effect/shroom
+	splat_type = /obj/effect/plant
 
 /datum/seed/mushroom/New()
 	..()

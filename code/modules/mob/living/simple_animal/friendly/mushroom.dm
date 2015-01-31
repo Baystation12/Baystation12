@@ -16,7 +16,7 @@
 	harm_intent_damage = 5
 	var/datum/seed/seed
 
-/mob/living/simple_animal/mushroom
+/mob/living/simple_animal/mushroom/verb/spawn_spores()
 
 	set name = "Explode"
 	set category = "Abilities"
@@ -28,7 +28,7 @@
 		return
 
 	if(!seed)
-		usr << "<span class='danger'>You are sterile!</span>
+		usr << "<span class='danger'>You are sterile!</span>"
 		return
 
 	spore_explode()

@@ -1,106 +1,139 @@
-//separate dm since hydro is getting bloated already
+#define DEFAULT_SEED "glowshroom"
 
-/obj/effect/glowshroom
-	name = "glowshroom"
+/obj/effect/plant
+	name = "plant"
 	anchored = 1
 	opacity = 0
 	density = 0
-	icon = 'icons/obj/lighting.dmi'
-	icon_state = "glowshroomf"
+	icon = 'icons/obj/hydroponics_growing.dmi'
+	icon_state = "bush4-1"
 	layer = 2.1
-	l_color = "#003300"
 
-	var/endurance = 30
-	var/potency = 30
-	var/delay = 1200
+	var/health = 100
+	var/max_health = 100
+
+	var/obj/effect/plant/parent
+	var/datum/seed/seed
 	var/floor = 0
-	var/yield = 3
-	var/spreadChance = 40
-	var/spreadIntoAdjacentChance = 60
-	var/evolveChance = 2
-	var/lastTick = 0
-	var/spreaded = 1
+	var/spread_chance = 40
+	var/spread_into_adjacent = 60
+	var/evolve_chance = 2
+	var/last_tick = 0
+	var/hibernating = 0
 
-/obj/effect/glowshroom/single
-	spreadChance = 0
+/obj/effect/plant/single
+	spread_chance = 0
 
-/obj/effect/glowshroom/New()
+/obj/effect/plant/New(var/newloc, var/datum/seed/newseed)
 
 	..()
+	if(!newseed)
+		newseed = DEFAULT_SEED
+	seed = newseed
+	if(!seed)
+		del(src)
+		return
 
-	set_dir(CalcDir())
+	max_health = seed.get_trait(TRAIT_ENDURANCE)
+	health = max_health
 
+	set_dir(calc_dir())
+	update_icon()
+	processing_objects |= src
+	last_tick = world.timeofday
+
+/obj/effect/plant/update_icon()
+
+	// TODO: convert this to an icon cache.
+	icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[rand(1,max(1,round(seed.growth_stages/2)))]"
+	color = seed.get_trait(TRAIT_PLANT_COLOUR)
 	if(!floor)
-		switch(dir) //offset to make it be on the wall rather than on the floor
-			if(NORTH)
-				pixel_y = 32
-			if(SOUTH)
-				pixel_y = -32
-			if(EAST)
-				pixel_x = 32
+		// This should make the plant grow flush against the wall it's meant to be growing from.
+		pixel_y = -(rand(8,12))
+		src.transform = null
+		var/matrix/M = matrix()
+		switch(dir)
 			if(WEST)
-				pixel_x = -32
-		icon_state = "glowshroom[rand(1,3)]"
-	else //if on the floor, glowshroom on-floor sprite
-		icon_state = "glowshroomf"
+				M.Turn(90)
+			if(NORTH)
+				M.Turn(180)
+			if(EAST)
+				M.Turn(270)
+		src.transform = M
 
-	processing_objects += src
+	// Apply colour and light from seed datum.
+	if(seed.get_trait(TRAIT_BIOLUM))
+		SetLuminosity(1+round(seed.get_trait(TRAIT_POTENCY)/10))
+		if(seed.get_trait(TRAIT_BIOLUM_COLOUR))
+			l_color = seed.get_trait(TRAIT_BIOLUM_COLOUR)
+		else
+			l_color = null
+		return
+	else
+		SetLuminosity(0)
 
-	SetLuminosity(round(potency/15))
-	lastTick = world.timeofday
-
-/obj/effect/glowshroom/Del()
+/obj/effect/plant/Del()
 	processing_objects -= src
 	..()
 
-/obj/effect/glowshroom/process()
-	if(!spreaded)
+/obj/effect/plant/proc/die_off()
+	// Kill off any of our children (and add an added bonus, other plants in this area)
+	for(var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant in get_turf(src))
+		plant.dead = 1
+		plant.update_icon()
+	// Cause the plants around us to update.
+	for(var/obj/effect/plant/neighbor in view(1,src))
+		neighbor.hibernating = 0
+	del(src)
+
+/obj/effect/plant/process()
+
+	if(!seed)
+		die_off()
+
+	// Handle life.
+	var/turf/simulated/T = get_turf(src)
+	if(istype(T))
+		health -= seed.handle_environment(T, T.return_air(),1)
+
+	// Hibernating or too far from parent, no chance of spreading.
+	if(hibernating || (parent && (get_dist(parent,src) > seed.get_trait(TRAIT_POTENCY)/15)))
 		return
 
-	if(((world.timeofday - lastTick) > delay) || ((world.timeofday - lastTick) < 0))
-		lastTick = world.timeofday
-		spreaded = 0
+	// Count our neighbors and possible locations for spreading.
+	var/list/possible_locs = list()
+	var/count = 0
+	for(var/turf/simulated/floor/floor in view(1,src))
+		if(!floor.Adjacent(src) || floor.density || (locate(/obj/effect/plant) in floor.contents))
+			count++
+			continue
+		possible_locs |= floor
 
-		for(var/i=1,i<=yield,i++)
-			if(prob(spreadChance))
-				var/list/possibleLocs = list()
-				var/spreadsIntoAdjacent = 0
+	//Entirely surrounded, spawn an actual plant.
+	if(count>=8)
+		hibernating = 1 // Suspend processing for now.
+		if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in T.contents))
+			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/new_plant = new(T,seed)
+			new_plant.age = seed.get_trait(TRAIT_MATURATION)
+			new_plant.update_icon()
 
-				if(prob(spreadIntoAdjacentChance))
-					spreadsIntoAdjacent = 1
+	if(prob(spread_chance))
+		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
+			if(!possible_locs.len)
+				break
+			if(prob(spread_into_adjacent))
+				var/turf/target_turf = pick(possible_locs)
+				possible_locs -= target_turf
+				var/obj/effect/plant/child = new(target_turf, seed)
+				child.parent = get_root()
 
-				for(var/turf/simulated/floor/plating/airless/asteroid/earth in view(3,src))
-					if(spreadsIntoAdjacent || !locate(/obj/effect/glowshroom) in view(1,earth))
-						possibleLocs += earth
+/obj/effect/plant/proc/get_root()
+	if(parent)
+		return parent.get_root()
+	else
+		return src
 
-				if(!possibleLocs.len)
-					break
-
-				var/turf/newLoc = pick(possibleLocs)
-
-				var/shroomCount = 0 //hacky
-				var/placeCount = 1
-				for(var/obj/effect/glowshroom/shroom in newLoc)
-					shroomCount++
-				for(var/wallDir in cardinal)
-					var/turf/isWall = get_step(newLoc,wallDir)
-					if(isWall.density)
-						placeCount++
-				if(shroomCount >= placeCount)
-					continue
-
-				var/obj/effect/glowshroom/child = new /obj/effect/glowshroom(newLoc)
-				child.potency = potency
-				child.yield = yield
-				child.delay = delay
-				child.endurance = endurance
-
-				spreaded++
-
-		if(prob(evolveChance)) //very low chance to evolve on its own
-			potency += rand(4,6)
-
-/obj/effect/glowshroom/proc/CalcDir(turf/location = loc)
+/obj/effect/plant/proc/calc_dir(turf/location = loc)
 	set background = 1
 	var/direction = 16
 
@@ -109,7 +142,7 @@
 		if(newTurf.density)
 			direction |= wallDir
 
-	for(var/obj/effect/glowshroom/shroom in location)
+	for(var/obj/effect/plant/shroom in location)
 		if(shroom == src)
 			continue
 		if(shroom.floor) //special
@@ -133,14 +166,22 @@
 	floor = 1
 	return 1
 
-/obj/effect/glowshroom/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
+/obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
 
-	endurance -= W.force
+	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
+		if(!seed)
+			user << "There is nothing to take a sample from in \the [src]."
+			return
+		// Create a sample.
+		seed.harvest(user,0,1)
+		health -= (rand(3,5)*10)
+	else
+		..()
+		if(W.force)
+			health -= W.force
+	check_health()
 
-	CheckEndurance()
-
-/obj/effect/glowshroom/ex_act(severity)
+/obj/effect/plant/ex_act(severity)
 	switch(severity)
 		if(1.0)
 			del(src)
@@ -156,11 +197,6 @@
 		else
 	return
 
-/obj/effect/glowshroom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(exposed_temperature > 300)
-		endurance -= 5
-		CheckEndurance()
-
-/obj/effect/glowshroom/proc/CheckEndurance()
-	if(endurance <= 0)
+/obj/effect/plant/proc/check_health()
+	if(health <= 0)
 		del(src)
