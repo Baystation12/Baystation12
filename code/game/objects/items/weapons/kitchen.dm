@@ -61,6 +61,8 @@
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return
+	else
+		..()
 
 /obj/item/weapon/kitchen/utensil/fork
 	name = "fork"
