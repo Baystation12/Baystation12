@@ -4,8 +4,8 @@
 #define GENE_ENVIRONMENT "environment"
 #define GENE_RESISTANCE "resistance"
 #define GENE_VIGOUR "vigour"
-#define GENE_FLOWERS "flowers"
-#define ALL_TRAITS list(GENE_PRODUCTS,GENE_CONSUMPTION,GENE_ENVIRONMENT,GENE_RESISTANCE,GENE_VIGOUR,GENE_FLOWERS)
+#define GENE_PIGMENT "appearance"
+#define ALL_GENES list(GENE_PRODUCTS,GENE_CONSUMPTION,GENE_ENVIRONMENT,GENE_RESISTANCE,GENE_VIGOUR,GENE_PIGMENT)
 
 //Definitions for traits (individual descriptors)
 #define TRAIT_PRODUCTS             1
@@ -46,7 +46,4 @@
 #define TRAIT_PRODUCT_COLOUR       36
 #define TRAIT_BIOLUM               37
 #define TRAIT_BIOLUM_COLOUR        38
-#define TRAIT_FLOWERS              39
-#define TRAIT_FLOWER_ICON          40
-#define TRAIT_FLOWER_COLOUR        41
-#define TRAIT_IMMUTABLE            42
+#define TRAIT_IMMUTABLE            39

@@ -1846,8 +1846,10 @@ datum
 					alien_weeds.healthcheck()
 				else if(istype(O,/obj/effect/plant)) //even a small amount is enough to kill it
 					del(O)
-				else if(istype(O,/obj/effect/plantsegment))
-					if(prob(50)) del(O) //Kills kudzu too.
+				else if(istype(O,/obj/effect/plant))
+					if(prob(50))
+						var/obj/effect/plant/plant = O
+						plant.die_off()
 				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
 					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
 

@@ -2,6 +2,27 @@
 var/global/list/plant_sprites = list()         // List of all harvested product sprites.
 var/global/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
 
+// Proc for creating a random seed type.
+/proc/create_random_seed(var/survive_on_station)
+	var/datum/seed/seed = new()
+	seed.randomize()
+	seed.uid = seed_types.len + 1
+	seed.name = "[seed.uid]"
+	seed_types[seed.name] = seed
+
+	if(survive_on_station)
+		if(seed.consume_gasses)
+			seed.consume_gasses["phoron"] = null
+			seed.consume_gasses["carbon_dioxide"] = null
+		seed.set_trait(TRAIT_IDEAL_HEAT,293)
+		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)
+		seed.set_trait(TRAIT_IDEAL_LIGHT,8)
+		seed.set_trait(TRAIT_LIGHT_TOLERANCE,5)
+		seed.set_trait(TRAIT_LOWKPA_TOLERANCE,25)
+		seed.set_trait(TRAIT_HIGHKPA_TOLERANCE,200)
+
+	return seed
+
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
 	set category = "Debug"
@@ -58,7 +79,7 @@ proc/populate_seed_list()
 
 	//Might as well mask the gene types while we're at it.
 	var/list/used_masks = list()
-	var/list/plant_traits = ALL_TRAITS
+	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)
 		var/gene_tag = pick(plant_traits)
 		var/gene_mask = "[num2hex(rand(0,255))]"
@@ -93,6 +114,48 @@ proc/populate_seed_list()
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
+
+/datum/seed/New()
+
+	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
+	set_trait(TRAIT_HARVEST_REPEAT,       0)            // If 1, this plant will fruit repeatedly.
+	set_trait(TRAIT_PRODUCES_POWER,       0)            // Can be used to make a battery.
+	set_trait(TRAIT_JUICY,                0)            // When thrown, causes a splatter decal.
+	set_trait(TRAIT_EXPLOSIVE,            0)            // When thrown, acts as a grenade.
+	set_trait(TRAIT_CARNIVOROUS,          0)            // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
+	set_trait(TRAIT_PARASITE,             0)            // 0 = no, 1 = gain health from weed level.
+	set_trait(TRAIT_STINGS,               0)            // Can cause damage/inject reagents when thrown or handled.
+	set_trait(TRAIT_YIELD,                0)            // Amount of product.
+	set_trait(TRAIT_SPREAD,               0)            // 0 limits plant to tray, 1 = creepers, 2 = vines.
+	set_trait(TRAIT_MATURATION,           0)            // Time taken before the plant is mature.
+	set_trait(TRAIT_PRODUCTION,           0)            // Time before harvesting can be undertaken again.
+	set_trait(TRAIT_TELEPORTING,          0)            // Uses the bluespace tomato effect.
+	set_trait(TRAIT_BIOLUM,               0)            // Plant is bioluminescent.
+	set_trait(TRAIT_ALTER_TEMP,           0)            // If set, the plant will periodically alter local temp by this amount.
+	set_trait(TRAIT_PRODUCT_ICON,         0)            // Icon to use for fruit coming from this plant.
+	set_trait(TRAIT_PLANT_ICON,           0)            // Icon to use for the plant growing in the tray.
+	set_trait(TRAIT_PRODUCT_COLOUR,       0)            // Colour to apply to product icon.
+	set_trait(TRAIT_BIOLUM_COLOUR,        0)            // The colour of the plant's radiance.
+	set_trait(TRAIT_POTENCY,              1)            // General purpose plant strength value.
+	set_trait(TRAIT_REQUIRES_NUTRIENTS,   1)            // The plant can starve.
+	set_trait(TRAIT_REQUIRES_WATER,       1)            // The plant can become dehydrated.
+	set_trait(TRAIT_WATER_CONSUMPTION,    3)            // Plant drinks this much per tick.
+	set_trait(TRAIT_LIGHT_TOLERANCE,      5)            // Departure from ideal that is survivable.
+	set_trait(TRAIT_TOXINS_TOLERANCE,     5)            // Resistance to poison.
+	set_trait(TRAIT_PEST_TOLERANCE,       5)            // Threshold for pests to impact health.
+	set_trait(TRAIT_WEED_TOLERANCE,       5)            // Threshold for weeds to impact health.
+	set_trait(TRAIT_IDEAL_LIGHT,          8)            // Preferred light level in luminosity.
+	set_trait(TRAIT_HEAT_TOLERANCE,       20)           // Departure from ideal that is survivable.
+	set_trait(TRAIT_LOWKPA_TOLERANCE,     25)           // Low pressure capacity.
+	set_trait(TRAIT_ENDURANCE,            100)          // Maximum plant HP when growing.
+	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
+	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
+	set_trait(TRAIT_PLANT_COLOUR,         "#6EF86A")    // Colour of the plant icon.
+
+	spawn(5)
+		sleep(-1)
+		update_growth_stages()
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
@@ -198,43 +261,14 @@ proc/populate_seed_list()
 					continue
 				// Check for windows.
 				var/no_los
+				var/turf/last_turf = origin_turf
 				for(var/turf/target_turf in getline(origin_turf,neighbor))
-					if(target_turf.density)
+					if(!last_turf.Enter(target_turf) || target_turf.density)
 						no_los = 1
 						break
-
-				if(!no_los)
-					var/los_dir = get_dir(neighbor,origin_turf)
-					var/list/blocked = list()
-					for(var/obj/machinery/door/D in neighbor.contents)
-						if(istype(D,/obj/machinery/door/window))
-							blocked |= D.dir
-						else
-							if(D.density)
-								no_los = 1
-								break
-					for(var/obj/structure/window/W in neighbor.contents)
-						if(W.is_fulltile())
-							no_los = 1
-							break
-						blocked |= W.dir
-					if(!no_los)
-						switch(los_dir)
-							if(NORTHEAST)
-								if((NORTH in blocked) && (EAST in blocked))
-									no_los = 1
-							if(SOUTHEAST)
-								if((SOUTH in blocked) && (EAST in blocked))
-									no_los = 1
-							if(NORTHWEST)
-								if((NORTH in blocked) && (WEST in blocked))
-									no_los = 1
-							if(SOUTHWEST)
-								if((SOUTH in blocked) && (WEST in blocked))
-									no_los = 1
-							else
-								if(los_dir in blocked)
-									no_los = 1
+					last_turf = target_turf
+				if(!no_los && !origin_turf.Enter(neighbor))
+					no_los = 1
 				if(no_los)
 					closed_turfs |= neighbor
 					continue
@@ -348,8 +382,8 @@ proc/populate_seed_list()
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_product_sprites))
 	set_trait(TRAIT_PLANT_ICON,pick(plant_sprites))
-	set_trait(TRAIT_PLANT_COLOUR,"#[pick(rainbow)]")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#[pick(rainbow)]")
+	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
 	update_growth_stages()
 
 	if(prob(20))
@@ -478,7 +512,7 @@ proc/populate_seed_list()
 
 	if(prob(5))
 		set_trait(TRAIT_BIOLUM,1)
-		set_trait(TRAIT_BIOLUM_COLOUR,"#[pick(rainbow)]")
+		set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
 
 	set_trait(TRAIT_ENDURANCE,rand(60,100))
 	set_trait(TRAIT_YIELD,rand(3,15))
@@ -500,7 +534,7 @@ proc/populate_seed_list()
 	//This looks like shit, but it's a lot easier to read/change this way.
 	var/total_mutations = rand(1,1+degree)
 	for(var/i = 0;i<total_mutations;i++)
-		switch(rand(0,12))
+		switch(rand(0,11))
 			if(0) //Plant cancer!
 				set_trait(TRAIT_ENDURANCE,get_trait(TRAIT_ENDURANCE)-rand(10,20),null,0)
 				source_turf.visible_message("<span class='danger'>\The [display_name] withers rapidly!</span>")
@@ -550,21 +584,11 @@ proc/populate_seed_list()
 					if(get_trait(TRAIT_BIOLUM))
 						source_turf.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
 						if(prob(degree*2))
-							set_trait(TRAIT_BIOLUM_COLOUR,"#[pick(rainbow)]")
+							set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
 							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
 			if(11)
-				if(prob(degree*2))
-					set_trait(TRAIT_FLOWERS,!get_trait(TRAIT_FLOWERS))
-					if(get_trait(TRAIT_FLOWERS))
-						source_turf.visible_message("<span class='notice'>\The [display_name] sprouts a bevy of flowers!</span>")
-						if(prob(degree*2))
-							set_trait(TRAIT_FLOWER_COLOUR,"#[pick(rainbow)]")
-						source_turf.visible_message("<span class='notice'>\The [display_name]'s flowers </span><font=[get_trait(TRAIT_FLOWER_COLOUR)]>changes colour</font>!")
-					else
-						source_turf.visible_message("<span class='notice'>\The [display_name]'s flowers wither and fall off.</span>")
-			if(12)
 				set_trait(TRAIT_TELEPORTING,1)
 
 	return
@@ -640,8 +664,8 @@ proc/populate_seed_list()
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_ENDURANCE,TRAIT_YIELD,TRAIT_SPREAD,TRAIT_MATURATION,TRAIT_PRODUCTION,TRAIT_TELEPORTING)
-		if(GENE_FLOWERS)
-			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM,TRAIT_BIOLUM_COLOUR,TRAIT_FLOWERS,TRAIT_FLOWER_ICON,TRAIT_FLOWER_COLOUR)
+		if(GENE_PIGMENT)
+			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM,TRAIT_BIOLUM_COLOUR)
 
 	for(var/trait in traits_to_copy)
 		P.values["[trait]"] = get_trait(trait)
@@ -747,52 +771,6 @@ proc/populate_seed_list()
 		growth_stages = plant_sprites[get_trait(TRAIT_PLANT_ICON)]
 	else
 		growth_stages = 0
-
-/datum/seed/New()
-
-	set_trait(TRAIT_IMMUTABLE,            0)            // If set, plant will never mutate. If -1, plant is highly mutable.
-	set_trait(TRAIT_HARVEST_REPEAT,       0)            // If 1, this plant will fruit repeatedly.
-	set_trait(TRAIT_PRODUCES_POWER,       0)            // Can be used to make a battery.
-	set_trait(TRAIT_JUICY,                0)            // When thrown, causes a splatter decal.
-	set_trait(TRAIT_EXPLOSIVE,            0)            // When thrown, acts as a grenade.
-	set_trait(TRAIT_CARNIVOROUS,          0)            // 0 = none, 1 = eat pests in tray, 2 = eat living things  (when a vine).
-	set_trait(TRAIT_PARASITE,             0)            // 0 = no, 1 = gain health from weed level.
-	set_trait(TRAIT_STINGS,               0)            // Can cause damage/inject reagents when thrown or handled.
-	set_trait(TRAIT_YIELD,                0)            // Amount of product.
-	set_trait(TRAIT_SPREAD,               0)            // 0 limits plant to tray, 1 = creepers, 2 = vines.
-	set_trait(TRAIT_MATURATION,           0)            // Time taken before the plant is mature.
-	set_trait(TRAIT_PRODUCTION,           0)            // Time before harvesting can be undertaken again.
-	set_trait(TRAIT_TELEPORTING,          0)            // Uses the bluespace tomato effect.
-	set_trait(TRAIT_BIOLUM,               0)            // Plant is bioluminescent.
-	set_trait(TRAIT_FLOWERS,              0)            // Plant has a flower overlay.
-	set_trait(TRAIT_ALTER_TEMP,           0)            // If set, the plant will periodically alter local temp by this amount.
-	set_trait(TRAIT_PRODUCT_ICON,         0)            // Icon to use for fruit coming from this plant.
-	set_trait(TRAIT_PLANT_ICON,           0)            // Icon to use for the plant growing in the tray.
-	set_trait(TRAIT_PRODUCT_COLOUR,       0)            // Colour to apply to product icon.
-	set_trait(TRAIT_BIOLUM_COLOUR,        0)            // The colour of the plant's radiance.
-	set_trait(TRAIT_FLOWER_COLOUR,        0)            // Which colour to use.
-	set_trait(TRAIT_POTENCY,              1)            // General purpose plant strength value.
-	set_trait(TRAIT_REQUIRES_NUTRIENTS,   1)            // The plant can starve.
-	set_trait(TRAIT_REQUIRES_WATER,       1)            // The plant can become dehydrated.
-	set_trait(TRAIT_WATER_CONSUMPTION,    3)            // Plant drinks this much per tick.
-	set_trait(TRAIT_LIGHT_TOLERANCE,      5)            // Departure from ideal that is survivable.
-	set_trait(TRAIT_TOXINS_TOLERANCE,     5)            // Resistance to poison.
-	set_trait(TRAIT_PEST_TOLERANCE,       5)            // Threshold for pests to impact health.
-	set_trait(TRAIT_WEED_TOLERANCE,       5)            // Threshold for weeds to impact health.
-	set_trait(TRAIT_IDEAL_LIGHT,          8)            // Preferred light level in luminosity.
-	set_trait(TRAIT_HEAT_TOLERANCE,       20)           // Departure from ideal that is survivable.
-	set_trait(TRAIT_LOWKPA_TOLERANCE,     25)           // Low pressure capacity.
-	set_trait(TRAIT_ENDURANCE,            100)          // Maximum plant HP when growing.
-	set_trait(TRAIT_HIGHKPA_TOLERANCE,    200)          // High pressure capacity.
-	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
-	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
-	set_trait(TRAIT_PLANT_COLOUR,         "#6EF86A")    // Colour of the plant icon.
-	set_trait(TRAIT_FLOWER_ICON,          "vine_fruit") // Which overlay to use.
-
-	spawn(5)
-		sleep(-1)
-		update_growth_stages()
-
 
 // Actual roundstart seed types after this point.
 // Chili plants/variants.

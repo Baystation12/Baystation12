@@ -139,6 +139,9 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
+/obj/machinery/portable_atmospherics/hydroponics/proc/can_label()
+	return 1
+
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
 	temp_chem_holder = new()
@@ -629,20 +632,12 @@
 				return
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
-
-			if(S.seed.get_trait(TRAIT_SPREAD) == 2)
-				msg_admin_attack("[key_name(user)] has planted a spreading vine packet.")
-				var/obj/effect/plant_controller/PC = new(get_turf(src))
-				if(PC)
-					PC.seed = S.seed
-			else
-				seed = S.seed //Grab the seed datum.
-				dead = 0
-				age = 1
-				//Snowflakey, maybe move this to the seed datum
-				health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
-
-				lastcycle = world.time
+			seed = S.seed //Grab the seed datum.
+			dead = 0
+			age = 1
+			//Snowflakey, maybe move this to the seed datum
+			health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
+			lastcycle = world.time
 
 			del(O)
 
@@ -798,10 +793,7 @@
 	mechanical = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/shovel))
-		user << "You clear up [src]!"
-		del(src)
-	else if(istype(O,/obj/item/weapon/shovel) || istype(O,/obj/item/weapon/tank))
+	if(istype(O,/obj/item/weapon/tank))
 		return
 	else
 		..()
@@ -809,6 +801,9 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/New()
 	..()
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/can_label()
+	return 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/CanPass()
 	return 1
@@ -840,10 +835,21 @@
 	if(!seed)
 		del(src)
 
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/die()
+	del(src)
+
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/process()
 	if(!seed)
 		del(src)
 		return
 	else if(name=="plant")
 		name = seed.display_name
+	..()
+
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Del()
+	// Check if we're masking a decal that needs to be visible again.
+	for(var/obj/effect/plant/plant in get_turf(src))
+		if(plant.invisibility == INVISIBILITY_MAXIMUM)
+			plant.invisibility = initial(plant.invisibility)
+		plant.die_off()
 	..()

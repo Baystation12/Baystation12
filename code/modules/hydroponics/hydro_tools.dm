@@ -152,8 +152,6 @@
 
 	if(grown_seed.get_trait(TRAIT_BIOLUM))
 		dat += "<br>It is [grown_seed.get_trait(TRAIT_BIOLUM_COLOUR)  ? "<font color='[grown_seed.get_trait(TRAIT_BIOLUM_COLOUR)]'>bio-luminescent</font>" : "bio-luminescent"]."
-	if(grown_seed.get_trait(TRAIT_FLOWERS))
-		dat += "<br>It has [grown_seed.get_trait(TRAIT_FLOWER_COLOUR) ? "<font color='[grown_seed.get_trait(TRAIT_FLOWER_COLOUR)]'>flowers</font>" : "flowers"]."
 
 	if(grown_seed.get_trait(TRAIT_PRODUCES_POWER))
 		dat += "<br>The fruit will function as a battery if prepared appropriately."
@@ -366,8 +364,8 @@
 
 /obj/item/weapon/scythe/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
-	if(istype(A, /obj/effect/plantsegment))
-		for(var/obj/effect/plantsegment/B in orange(A,1))
+	if(istype(A, /obj/effect/plant))
+		for(var/obj/effect/plant/B in orange(A,1))
 			if(prob(80))
-				del B
+				B.die_off(1)
 		del A
