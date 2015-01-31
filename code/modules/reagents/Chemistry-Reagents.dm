@@ -1844,7 +1844,7 @@ datum
 					var/obj/effect/alien/weeds/alien_weeds = O
 					alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
 					alien_weeds.healthcheck()
-				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
+				else if(istype(O,/obj/effect/shroom)) //even a small amount is enough to kill it
 					del(O)
 				else if(istype(O,/obj/effect/plantsegment))
 					if(prob(50)) del(O) //Kills kudzu too.
@@ -2075,7 +2075,7 @@ datum
 						M.take_organ_damage(min(6*toxpwr, volume * toxpwr))
 
 			reaction_obj(var/obj/O, var/volume)
-				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(meltprob * 3))
+				if((istype(O,/obj/item) || istype(O,/obj/effect/shroom/glow)) && prob(meltprob * 3))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
 						I.desc = "Looks like this was \an [O] some time ago."

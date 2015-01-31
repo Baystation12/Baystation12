@@ -168,12 +168,12 @@ proc/populate_seed_list()
 				M.reagents.add_reagent(chem,injecting)
 
 //Applies an effect to a target atom.
-/datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target)
+/datum/seed/proc/thrown_at(var/obj/item/thrown,var/atom/target, var/force_explode)
 
 	var/splatted
 	var/turf/origin_turf = get_turf(target)
 
-	if(get_trait(TRAIT_EXPLOSIVE))
+	if(force_explode || get_trait(TRAIT_EXPLOSIVE))
 
 		var/flood_dist = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
 		var/list/open_turfs = list()
@@ -243,7 +243,7 @@ proc/populate_seed_list()
 			for(var/mob/living/M in T.contents)
 				apply_special_effect(M)
 			splatter(T,thrown)
-		origin_turf.visible_message("<span class='danger'>The [thrown.name] violently explodes against [target]!</span>")
+		origin_turf.visible_message("<span class='danger'>The [thrown.name] explodes!</span>")
 		del(thrown)
 		return
 
@@ -709,9 +709,11 @@ proc/populate_seed_list()
 
 			//Handle spawning in living, mobile products (like dionaea).
 			if(istype(product,/mob/living))
-
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
+				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
+					var/mob/living/simple_animal/mushroom/mush = product
+					mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually
@@ -1130,6 +1132,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle)
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list("nutriment" = list(1,25))
+	splat_type = /obj/effect/shroom
 
 /datum/seed/mushroom/New()
 	..()
@@ -1292,7 +1295,6 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom)
 	mutants = null
 	chems = list("radium" = list(1,20))
-	splat_type = /obj/effect/glowshroom
 
 /datum/seed/mushroom/glowshroom/New()
 	..()

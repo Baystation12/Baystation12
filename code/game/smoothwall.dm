@@ -109,7 +109,7 @@
 			W.relativewall()
 
 	for(var/direction in cardinal)
-		for(var/obj/effect/glowshroom/shroom in get_step(src,direction))
+		for(var/obj/effect/shroom/glow/shroom in get_step(src,direction))
 			if(!shroom.floor) //shrooms drop to the floor
 				shroom.floor = 1
 				shroom.icon_state = "glowshroomf"
