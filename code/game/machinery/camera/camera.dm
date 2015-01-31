@@ -242,7 +242,6 @@
 			switch(i)
 				if(NORTH)
 					src.dir = SOUTH
-					src.pixel_y = 19
 				if(SOUTH)
 					src.dir = NORTH
 				if(WEST)
@@ -250,6 +249,9 @@
 				if(EAST)
 					src.dir = WEST
 			break
+
+			if( src.dir == 6 || src.dir = SOUTH )
+				src.pixel_y = 19
 
 //Return a working camera that can see a given mob
 //or null if none
