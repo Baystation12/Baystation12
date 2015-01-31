@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;maps\tgstation3.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game\machinery code\game\machinery\atmoalter code\modules code\modules\clothing code\modules\clothing\masks icons icons\atmos icons\effects icons\obj icons\obj\atmospherics icons\turf maps 
-FILE: maps\tgstation3.dmm
-LAST_COMPILE_TIME: 1422724871
+DIR: code code\game code\game\machinery maps 
+LAST_COMPILE_TIME: 1422732806
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
