@@ -231,7 +231,7 @@ BLIND     // can't see anything
 		user.visible_message("\red [user] cuts the fingertips off of the [src].","\red You cut the fingertips off of the [src].")
 
 		clipped = 1
-		name = "mangled [name]"
+		name = "modified [name]"
 		desc = "[desc]<br>They have had the fingertips cut off of them."
 		if("exclude" in species_restricted)
 			species_restricted -= "Unathi"
@@ -535,7 +535,7 @@ BLIND     // can't see anything
 		else
 			body_parts_covered = initial(body_parts_covered)
 			item_color = initial(item_color)
-		
+
 		update_clothing_icon()
 	else
 		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
