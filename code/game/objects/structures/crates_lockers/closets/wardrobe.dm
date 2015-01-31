@@ -4,25 +4,26 @@
 	icon_state = "blue"
 	icon_closed = "blue"
 
-/obj/structure/closet/wardrobe/redback
+/obj/structure/closet/wardrobe/redother
 	name = "security wardrobe"
 	icon_state = "red"
 	icon_closed = "red"
 
-/obj/structure/closet/wardrobe/redback/New()
+/obj/structure/closet/wardrobe/redother/New()
 	..()
-	new /obj/item/weapon/storage/backpack/satchel_sec
-	new /obj/item/weapon/storage/backpack/satchel_sec
-	new /obj/item/weapon/storage/backpack/satchel_sec
-	new /obj/item/weapon/storage/backpack/security
-	new /obj/item/weapon/storage/backpack/security
-	new /obj/item/weapon/storage/backpack/security
-	new /obj/item/clothing/gloves/black/sec
-	new /obj/item/clothing/gloves/black/sec
-	new /obj/item/clothing/gloves/black/sec
-	new /obj/item/clothing/gloves/black/sec
-	new /obj/item/clothing/gloves/black/sec
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
 	return
+
 
 /obj/structure/closet/wardrobe/red
 	name = "security wardrobe"
