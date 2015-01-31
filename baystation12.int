@@ -1,8 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;maps\tgstation3.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\machinery maps 
+DIR: maps 
+FILE: maps\tgstation3.dmm
 LAST_COMPILE_TIME: 1422732806
 AUTO_FILE_DIR: OFF
 */
