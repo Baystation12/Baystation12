@@ -13,7 +13,6 @@
 
 	flags = FPRINT
 
-
 /obj/machinery/space_heater/New()
 	..()
 	cell = new(src)

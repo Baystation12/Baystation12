@@ -53,6 +53,8 @@
 ********************/
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
+
+
 	if(src.broken > 0)
 		if(src.broken == 2 && istype(O, /obj/item/weapon/screwdriver)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
@@ -82,6 +84,23 @@
 		else
 			user << "\red It's broken!"
 			return 1
+	else if( istype( O, /obj/item/weapon/wrench ))
+		if( anchored )
+			user.visible_message( \
+				"\blue [user] unwrenches the securing bolts from the microwave.", \
+				"\blue You have unwrenched the securing bolts from the microwave." \
+			)
+
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			anchored = 0
+		else
+			user.visible_message( \
+				"\blue [user] secures the bolts on the microwave.", \
+				"\blue You have secured the bolts on the microwave." \
+			)
+
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			anchored = 1
 	else if(src.dirty==100) // The microwave is all dirty so can't be used!
 		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner)) // If they're trying to clean it then let them
 			user.visible_message( \
@@ -153,13 +172,13 @@
 ********************/
 
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
-	var/dat = ""
+	var/dat = "<div class='statusDisplay'>"
 	if(src.broken > 0)
-		dat = {"<TT>Bzzzzttttt</TT>"}
+		dat += "ERROR: 09734014-A2379-D18746 --Bad memory<BR>Contact your operator or use command line to rebase memory ///git checkout {HEAD} -a commit pull --rebase push {*NEW HEAD*}</div>"    //Thats how all the git fiddling looks to me
 	else if(src.operating)
-		dat = {"<TT>Microwaving in progress!<BR>Please wait...!</TT>"}
+		dat += "Microwaving in progress!<BR>Please wait...!</div>"
 	else if(src.dirty==100)
-		dat = {"<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"}
+		dat += "ERROR: >> 0 --Responce input zero<BR>Contact your operator of the device manifactor support.</div>"
 	else
 		var/list/items_counts = new
 		var/list/items_measures = new
@@ -176,9 +195,9 @@
 				items_measures[display_name] = "slab of meat"
 				items_measures_p[display_name] = "slabs of meat"
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/donkpocket))
-				display_name = "Turnovers"
-				items_measures[display_name] = "turnover"
-				items_measures_p[display_name] = "turnovers"
+				display_name = "Donk Pockets"
+				items_measures[display_name] = "donk pocket"
+				items_measures_p[display_name] = "donk pockets"
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/carpmeat))
 				items_measures[display_name] = "fillet of meat"
 				items_measures_p[display_name] = "fillets of meat"
@@ -186,34 +205,32 @@
 		for (var/O in items_counts)
 			var/N = items_counts[O]
 			if (!(O in items_measures))
-				dat += {"<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"}
+				dat += "[capitalize(O)]: [N] [lowertext(O)]\s<BR>"
 			else
 				if (N==1)
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"}
+					dat += "[capitalize(O)]: [N] [items_measures[O]]<BR>"
 				else
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
+					dat += "[capitalize(O)]: [N] [items_measures_p[O]]<BR>"
 
 		for (var/datum/reagent/R in reagents.reagent_list)
 			var/display_name = R.name
 			if (R.id == "capsaicin")
-				display_name = "Hotsauce"
+				display_name = "hot sauce"
 			if (R.id == "frostoil")
-				display_name = "Coldsauce"
-			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
+				display_name = "cold sauce"
+			dat += "[display_name]: [R.volume] unit\s<BR>"
 
 		if (items_counts.len==0 && reagents.reagent_list.len==0)
-			dat = {"<B>The microwave is empty</B><BR>"}
+			dat += "The microwave is empty.</div>"
 		else
-			dat = {"<b>Ingredients:</b><br>[dat]"}
-		dat += {"<HR><BR>\
-<A href='?src=\ref[src];action=cook'>Turn on!<BR>\
-<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
-"}
+			dat = "<h3>Ingredients:</h3>[dat]</div>"
+		dat += "<A href='?src=\ref[src];action=cook'>Turn on</A>"
+		dat += "<A href='?src=\ref[src];action=dispose'>Eject ingredients</A>"
 
-	user << browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
-	onclose(user, "microwave")
+	var/datum/browser/popup = new(user, "microwave", name, 300, 300)
+	popup.set_content(dat)
+	popup.open()
 	return
-
 
 
 /***********************************

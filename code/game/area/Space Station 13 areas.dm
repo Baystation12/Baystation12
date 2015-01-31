@@ -100,7 +100,7 @@ var/list/ghostteleportlocs = list()
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
+	ambience = list('sound/ambience/ambispace.ogg','sound/ambience/ambispace1.ogg', 'sound/ambience/ambispace2.ogg')
 
 /area/space/firealert()
 	return
@@ -1471,6 +1471,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Garden"
 	icon_state = "garden"
 
+/area/hydroponics/pasture
+	name = "\improper Pasture"
+	icon_state = "garden"
+
 //rnd (Research and Development
 /area/rnd/research
 	name = "\improper Research and Development"
@@ -1575,14 +1579,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Test Room"
 	icon_state = "storage"
 
-//DJSTATION
+//ENGINEERING OUTPOST
 
 /area/djstation
-	name = "\improper Listening Post"
+	name = "\improper Engineering Outpost"
 	icon_state = "LP"
 
 /area/djstation/solars
-	name = "\improper Listening Post Solars"
+	name = "\improper Engineering Outpost Solars"
 	icon_state = "LPS"
 
 //DERELICT

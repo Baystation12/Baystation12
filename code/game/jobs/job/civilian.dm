@@ -68,14 +68,14 @@
 		return 1
 
 
-
+/*
 /datum/job/hydro
 	title = "Gardener"
 	flag = BOTANIST
 	department_flag = CIVILIAN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
@@ -98,7 +98,7 @@
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
-
+*/
 
 
 //Cargo
@@ -229,7 +229,7 @@
 		return 1
 
 
-
+*/
 /datum/job/mime
 	title = "Mime"
 	flag = MIME
@@ -263,12 +263,12 @@
 			H.equip_to_slot_or_del(new /obj/item/toy/crayon/mime(H), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_in_backpack)
 		H.verbs += /client/proc/mimespeak
-		H.verbs += /client/proc/mimewall
+		//H.verbs += /client/proc/mimewall
 		H.mind.special_verbs += /client/proc/mimespeak
-		H.mind.special_verbs += /client/proc/mimewall
+		//H.mind.special_verbs += /client/proc/mimewall
 		H.miming = 1
 		return 1
-*/
+
 
 
 /datum/job/janitor

@@ -50,6 +50,9 @@
 		if("tube")
 			newlight = new /obj/machinery/light_construct(constrloc)
 	newlight.dir = constrdir
+	if( newlight.dir == 1 )
+		newlight.pixel_y = 19
+
 	newlight.fingerprints = src.fingerprints
 	newlight.fingerprintshidden = src.fingerprintshidden
 	newlight.fingerprintslast = src.fingerprintslast
@@ -261,6 +264,8 @@
 	..()
 
 /obj/machinery/light/update_icon()
+	if( src.dir == 1 )
+		src.pixel_y = 19
 
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
@@ -306,6 +311,9 @@
 	active_power_usage = (luminosity * 10)
 	if(on != on_gs)
 		on_gs = on
+
+	if( src.dir == 1 )
+		src.pixel_y = 19
 
 
 // attempt to set the light's on/off status

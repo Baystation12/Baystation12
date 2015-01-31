@@ -147,8 +147,10 @@ datum/controller/game_controller/proc/process()
 				shuttle_controller.process()
 				process_newscaster()
 
-				//AIR
+				//MAKING OOC ANNOUNCEMENTS
+				announcements()
 
+				//AIR
 				if(!air_processing_killed)
 					timer = world.timeofday
 					last_thing_processed = air_master.type
@@ -384,6 +386,23 @@ datum/controller/game_controller/proc/process_events()
 			continue
 		events.Cut(i,i+1)
 	checkEvent()
+
+datum/controller/game_controller/proc/announcements()
+	var/announcement
+
+	if( controller_iteration % 300 == 0 )// Make an announcement every 10 minutes
+		announcement = pick("<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Come join our <a href='http://steamcommunity.com/groups/apcom'>steam group</a> for event notifications and for playing games outside of a space station!</font><br></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to check out our <a href='http://apollo-community.org/'>forums</a>. Many people post many important things there!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Be sure check out our <a href='https://github.com/stuicey/AS_Project/'>source repository</a>. We're always welcoming new developers, and we'd love you have you on board!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Got a little spare change jingling in your pockets? We'd love it if you <a href='http://apollo-community.org/viewtopic.php?f=29&t=34'>tossed it our way</a>!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Feel free to come and hop on our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a> and chat with us!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to read the <a href='http://apollo-community.org/viewtopic.php?f=4&t=6'>full rules</a>, otherwise you may get in trouble!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> We have community meetings every Saturday at 4 PM EST in our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a>. Got a problem? Bring it up there!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Enjoy the game, and have a great day!<br></font></b>",
+								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Find a bug or exploit? Let us know on our <a href='https://github.com/stuicey/AS_Project/issues?q=is%3Aopen+is%3Aissue'>bugtracker</a>!<br></font></b>" )
+		world << "<br>"
+		world << announcement
+
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

@@ -71,7 +71,8 @@ datum/controller/vote
 			ooc_allowed = !( ooc_allowed )
 			world << "<b>The OOC channel has been automatically enabled due to vote end.</b>"
 			log_admin("OOC was toggled automatically due to vote end.")
-			message_admins("OOC has been toggled automatically.")
+			message_admins("OOC has been toggled on automatically.")
+
 
 	proc/get_result()
 		//get the highest number of votes
@@ -127,23 +128,23 @@ datum/controller/vote
 		if(winners.len > 0)
 			if(winners.len > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
-					/*text = "<b>Vote Tied Between:</b>\n"
-					for(var/option in winners)
-						text += "\t[option]\n"
-					*/
-					text = "<b>Vote Tied. Breaking tie...</b>\n"
+					text = "<b>Vote Tied! Breaking tie...\n"
 			. = pick(winners)
 
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
-			if( mode == "gamemode" )
+			if( mode == "gamemode" ) // Announce Extended gamemode, but not other gamemodes
 				text += "<b>Vote Result: Hidden</b>"
+				log_admin("Vote Result: [.]")
+				message_admins("Vote Result: [.]")
 			else
-				text += "<b>Vote Result: [.]</b>"
-
-			log_admin("Vote Result: [.]")
-			message_admins("Vote Result: [.]")
+				if(mode != "gamemode")
+					text += "<b>Vote Result: [.]</b>"
+					log_admin("Vote Result: [.]")
+					message_admins("Vote Result: [.]")
+				else
+					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
@@ -265,13 +266,13 @@ datum/controller/vote
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"
 				log_admin("OOC was toggled automatically due to crew_transfer vote.")
-				message_admins("OOC has been toggled off automatically.") */
+				message_admins("OOC has been toggled off automatically.")*/
 			if(mode == "gamemode" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
 				log_admin("OOC was toggled automatically due to gamemode vote.")
-				message_admins("OOC has been toggled automatically.")
+				message_admins("OOC has been toggled off automatically.")
 /*			if(mode == "custom" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
@@ -279,6 +280,9 @@ datum/controller/vote
 				log_admin("OOC was toggled automatically due to custom vote.")
 				message_admins("OOC has been toggled off automatically.")
 		*/
+
+
+
 			time_remaining = round(config.vote_period/10)
 			return 1
 		return 0
@@ -317,24 +321,20 @@ datum/controller/vote
 			for(var/i = 1, i <= choices.len, i++)
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
-
 				. += "<tr>"
-				if(mode == "gamemode" )
-					if( total_players >= required_players[i] )
-						if(current_votes[C.ckey] == i)
-							. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
-						else
-							. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
-						if (additional_text.len >= i)
-							. += additional_text[i]
+				if( mode == "gamemode" )
+					if(current_votes[C.ckey] == i)
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+					else
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
 				else
 					if(current_votes[C.ckey] == i)
 						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 					else
 						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
-					if (additional_text.len >= i)
-						. += additional_text[i]
 
+				if (additional_text.len >= i)
+					. += additional_text[i]
 				. += "</tr>"
 
 			. += "</table><hr>"
@@ -369,7 +369,6 @@ datum/controller/vote
 			if(trialmin)
 				. += "<li><a href='?src=\ref[src];vote=custom'>Custom</a></li>"
 			. += "</ul><hr>"
-
 		. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		return .
 

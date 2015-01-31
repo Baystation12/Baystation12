@@ -16,7 +16,7 @@
 	for(var/client/C in admins)
 		if((R_ADMIN & C.holder.rights))
 			if(!(R_MOD & C.holder.rights))
-				C << "<span class='[color]'><span class='prefix'>ADMIN:</span> <EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+				C << "<span class='[color]'><big><img src=\ref['icons/misc/asay.png']> </img></big><EM>[key_name(usr, 1)]</EM> (<a href='?_src_=holder;adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 
 
 	feedback_add_details("admin_verb","M") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -37,10 +37,9 @@
 	if (check_rights(R_ADMIN,0))
 		color = "adminmod"
 
-	var/channel = "MOD:"
 	for(var/client/C in admins)
 		if((R_ADMIN|R_MOD) & C.holder.rights)
-			C << "<span class='[color]'><span class='prefix'>[channel]</span> <EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+			C << "<span class='[color]'><big><img src=\ref['icons/misc/msay.png']> </img></big><EM>[key_name(src,1)]</EM> (<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 
 
 /client/proc/cmd_dev_say(msg as text)

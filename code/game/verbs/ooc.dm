@@ -69,7 +69,7 @@ var/global/normal_ooc_colour = "#002eb8"
 						display_name = "[holder.fakekey]/([src.key])"
 					else
 						display_name = holder.fakekey
-			C << "<font color='[display_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+			C << "<font color='[display_colour]'><span class='ooc'><big><img src=\ref['icons/misc/ooc.png']> </img></big><EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 
 			/*
 			if(holder)
@@ -157,7 +157,7 @@ var/global/normal_ooc_colour = "#002eb8"
 						display_name = "[holder.fakekey]/([src.key])"
 					else
 						display_name = holder.fakekey
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
+			C << "<font color='#6699CC'><span class='ooc'><big><img src=\ref['icons/misc/looc.png']> </img></big><EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 
 	// Now handle admins
 	display_name = S.key

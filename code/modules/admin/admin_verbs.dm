@@ -71,8 +71,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggledrones,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
-	/client/proc/man_up,
-	/client/proc/global_man_up,
+	///client/proc/man_up,
+	///client/proc/global_man_up,
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
@@ -244,6 +244,7 @@ var/list/admin_verbs_hideable = list(
 	/proc/release
 	)
 var/list/admin_verbs_mod = list(
+	/client/proc/angrymode,
 	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
 	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
@@ -847,6 +848,23 @@ var/list/admin_verbs_mentor = list(
 		usr << "You now won't get debug log messages"
 
 
+// Activates ANGRY ADMIN MODE where everything you do is super annoying to the person on the recieving end
+/client/proc/angrymode()
+	set category = "Fun"
+	set name = "Get Mad!"
+	set desc = "Demand to see life's manager!"
+
+	if( angry )
+		angry = 0
+		log_admin("[key_name(usr)] has CALMED DOWN!")
+		message_admins("\blue [key_name_admin(usr)] has CALMED DOWN!", 1)
+	else
+		angry = 1
+		log_admin("[key_name(usr)] has become ANGRY!")
+		message_admins("\blue [key_name_admin(usr)] has become ANGRY!", 1)
+
+
+/* This is the worst frickin verb, why did anyone ever think it was a good idea?
 /client/proc/man_up(mob/T as mob in mob_list)
 	set category = "Fun"
 	set name = "Man Up"
@@ -869,3 +887,4 @@ var/list/admin_verbs_mentor = list(
 
 	log_admin("[key_name(usr)] told everyone to man up and deal with it.")
 	message_admins("\blue [key_name_admin(usr)] told everyone to man up and deal with it.", 1)
+*/

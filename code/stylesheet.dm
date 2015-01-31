@@ -75,4 +75,6 @@ h1.alert, h2.alert		{color: #000000;}
 .donatorsay				{color: #990099;}
 
 .interface				{color: #330033;}
+
+BIG IMG.icon 			{width: 26px; height: 12px}
 </style>"}

@@ -4,11 +4,12 @@
 
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
+	desc = "Creates and dispenses chemicals."
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dispenser"
-	use_power = 0
+	use_power = 1
 	idle_power_usage = 40
 	var/ui_title = "Chem Dispenser 5000"
 	var/energy = 100
@@ -815,6 +816,11 @@
 
 		//Sheets
 		/obj/item/stack/sheet/mineral/phoron = list("phoron" = 20),
+		/obj/item/stack/sheet/metal = list("iron" = 20),
+		/obj/item/stack/sheet/plasteel = list("iron" = 20, "plasma" = 20),
+		/obj/item/stack/sheet/wood = list("carbon" = 20),
+		/obj/item/stack/sheet/glass = list("silicon" = 20),
+		/obj/item/stack/sheet/glass/reinforced = list("silicon" = 20, "iron" = 20),
 		/obj/item/stack/sheet/mineral/uranium = list("uranium" = 20),
 		/obj/item/stack/sheet/mineral/silver = list("silver" = 20),
 		/obj/item/stack/sheet/mineral/gold = list("gold" = 20),
