@@ -4,7 +4,7 @@
 	density = 1
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "scooler0"
-	name = "air conditioner"
+	name = "space conditioner"
 	desc = "If you can't take the heat, use one of these."
 	set_temperature = 20		// in celcius, add T0C for kelvin
 	var/cooling_power = 80000

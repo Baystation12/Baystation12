@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;maps\tgstation3.dmm
+WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;maps\tgstation3.dmm;code\controllers\_DynamicAreaLighting_TG.dm;maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
-FILE: maps\tgstation3.dmm
-LAST_COMPILE_TIME: 1422732806
+DIR: code code\controllers code\game code\game\machinery maps 
+FILE: code\game\machinery\spacecooler.dm
+LAST_COMPILE_TIME: 1422740142
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
