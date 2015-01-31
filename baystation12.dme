@@ -1501,5 +1501,5 @@
 #include "core\updateQueueWorker.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\tgstation3.dmm"
 // END_INCLUDE

@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;icons\turf\walls.dmi;icons\obj\atmospherics\orange_pipe_tank.dmi;icons\obj\atmos.dmi;icons\obj\tank.dmi;icons\effects\tile_effects.dmi;icons\obj\objects.dmi;icons\obj\power.dmi;icons\obj\singularity.dmi;icons\atmos\tank.dmi;icons\obj\structures.dmi;code\controllers\master_controller.dm
+WINDOW: maps\tgstation2.dmm;maps\tgstation3.dmm
 LAST_COMPILE_VERSION: 506.1249
 DIR: code code\controllers code\game\machinery code\game\machinery\atmoalter code\modules code\modules\clothing code\modules\clothing\masks icons icons\atmos icons\effects icons\obj icons\obj\atmospherics icons\turf maps 
-FILE: icons\turf\walls.dmi
-LAST_COMPILE_TIME: 1422694025
+FILE: maps\tgstation3.dmm
+LAST_COMPILE_TIME: 1422724871
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
