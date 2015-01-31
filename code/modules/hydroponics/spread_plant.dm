@@ -25,7 +25,6 @@
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed)
-
 	..()
 	if(!istype(newseed))
 		newseed = seed_types[DEFAULT_SEED]
@@ -34,7 +33,8 @@
 		del(src)
 		return
 
-	max_health = seed.get_trait(TRAIT_ENDURANCE)
+	name = seed.display_name
+	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	health = max_health
 
 	set_dir(calc_dir())
@@ -45,7 +45,7 @@
 /obj/effect/plant/update_icon()
 
 	// TODO: convert this to an icon cache.
-	icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[rand(1,max(1,round(seed.growth_stages/2)))]"
+	icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[rand(1,max(1,seed.growth_stages-1))]"
 	color = seed.get_trait(TRAIT_PLANT_COLOUR)
 	if(!floor)
 		// This should make the plant grow flush against the wall it's meant to be growing from.
@@ -75,6 +75,10 @@
 /obj/effect/plant/Del()
 	processing_objects -= src
 	..()
+/obj/effect/plant/examine()
+	..()
+	usr << "Max dist from parent is [round(seed.get_trait(TRAIT_POTENCY)/15)]."
+	usr << "Current dist is [get_dist(get_root(),src)]."
 
 /obj/effect/plant/proc/die_off()
 	// Kill off any of our children (and add an added bonus, other plants in this area)
@@ -97,7 +101,7 @@
 		health -= seed.handle_environment(T, T.return_air(),1)
 
 	// Hibernating or too far from parent, no chance of spreading.
-	if(hibernating || (parent && (get_dist(parent,src) > seed.get_trait(TRAIT_POTENCY)/15)))
+	if(hibernating || (parent && (get_dist(get_root(),src) > round(seed.get_trait(TRAIT_POTENCY)/15))))
 		return
 
 	// Count our neighbors and possible locations for spreading.

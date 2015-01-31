@@ -276,21 +276,12 @@
 			health -= HYDRO_SPEED_MULTIPLIER
 
 	// Handle life and death.
-	// If the plant is too old, it loses health fast.
-	if(age > seed.get_trait(TRAIT_LIFESPAN))
-		health -= rand(3,5) * HYDRO_SPEED_MULTIPLIER
-
 	// When the plant dies, weeds thrive and pests die off.
-	if(health <= 0)
-		dead = 1
-		mutation_level = 0
-		harvest = 0
-		weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
-		pestlevel = 0
+	check_health()
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
-	else if(seed.products && seed.products.len && \
-	 (age > seed.get_trait(TRAIT_PRODUCTION)) && \
+	if(seed.products && seed.products.len && \
+	 (age > seed.get_trait(TRAIT_MATURATION)) && \
 	 ((age - lastproduce) > seed.get_trait(TRAIT_PRODUCTION)) && \
 	 (!harvest && !dead))
 
@@ -304,9 +295,21 @@
 	if(seed && seed.can_self_harvest && harvest && !closed_system && prob(5))
 		harvest()
 
+	check_health()
+	return
+
+/obj/machinery/portable_atmospherics/hydroponics/proc/check_health()
+	if(seed && !dead && health <= 0)
+		die()
 	check_level_sanity()
 	update_icon()
-	return
+
+/obj/machinery/portable_atmospherics/hydroponics/proc/die()
+	dead = 1
+	mutation_level = 0
+	harvest = 0
+	weedlevel += 1 * HYDRO_SPEED_MULTIPLIER
+	pestlevel = 0
 
 //Process reagents being input into the tray.
 /obj/machinery/portable_atmospherics/hydroponics/proc/process_reagents()
@@ -357,8 +360,7 @@
 			toxins -= round(water_added/4)
 
 	temp_chem_holder.reagents.clear_reagents()
-	check_level_sanity()
-	update_icon()
+	check_health()
 
 //Harvests the product of a plant.
 /obj/machinery/portable_atmospherics/hydroponics/proc/harvest(var/mob/user)
@@ -388,8 +390,7 @@
 		sampled = 0
 		mutation_mod = 0
 
-	check_level_sanity()
-	update_icon()
+	check_health()
 	return
 
 //Clears out a dead plant.
@@ -408,8 +409,7 @@
 	mutation_mod = 0
 
 	user << "You remove the dead plant."
-	check_level_sanity()
-	update_icon()
+	check_health()
 	return
 
 //Refreshes the icon and sets the luminosity
@@ -592,7 +592,7 @@
 			sampled = 1
 
 		// Bookkeeping.
-		check_level_sanity()
+		check_health()
 		force_update = 1
 		process()
 
@@ -646,8 +646,7 @@
 
 			del(O)
 
-			check_level_sanity()
-			update_icon()
+			check_health()
 
 		else
 			user << "<span class='danger'>\The [src] already has seeds in it!</span>"
@@ -681,9 +680,7 @@
 		user << "You spray [src] with [O]."
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
 		del(O)
-
-		check_level_sanity()
-		update_icon()
+		check_health()
 
 	else if(mechanical && istype(O, /obj/item/weapon/wrench))
 
@@ -708,6 +705,11 @@
 			A.icon_state = src.icon_state
 			A.hydrotray_type = src.type
 			del(src)
+	else if(O.force && seed)
+		user.visible_message("<span class='danger'>\The [src] attacks the [seed.display_name] with \the [O]!</span>")
+		if(!dead)
+			health -= O.force
+			check_health()
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_tk(mob/user as mob)
@@ -827,8 +829,7 @@
 	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
 	pixel_y = rand(-5,5)
-	check_level_sanity()
-	update_icon()
+	check_health()
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/remove_dead()
 	..()
