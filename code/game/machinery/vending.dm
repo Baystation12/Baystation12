@@ -969,7 +969,7 @@
 	name = "Auto Tailor"
 	desc = "For all your fashion needs at the lowest imaginable prices."
 	icon = 'icons/obj/clothingmachine.dmi'
-	icon_state = "idle"
+	icon_state = "tailor"
 	product_slogans = "Dress to impress!"
 	product_ads = "Putting sweatshop workers out of work for over three hundred years!;Made in Andromeda!;Support your local inanimate machinery against competition!"
 	products = list(/obj/item/clothing/under/color/blackf = 4,/obj/item/clothing/under/lightpurple = 4,/obj/item/clothing/under/lightgreen = 4,/obj/item/clothing/under/lightblue = 4,
