@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;code\controllers\voting.dm
+WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;code\controllers\voting.dm;maps\tgstation2.dmm;code\modules\mining\coins.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\machinery code\modules code\modules\supermatter maps 
-FILE: code\controllers\voting.dm
-LAST_COMPILE_TIME: 1422742064
+DIR: code code\modules code\modules\mining maps 
+FILE: code\modules\mining\coins.dm
+LAST_COMPILE_TIME: 1422742415
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
