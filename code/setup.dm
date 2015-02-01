@@ -854,4 +854,4 @@ var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 
 // Reagent metabolism defines.
 #define FOOD_METABOLISM 0.4
-#define ALCOHOL_METABOLISM 0.1
+#define ALCOHOL_METABOLISM 0.05

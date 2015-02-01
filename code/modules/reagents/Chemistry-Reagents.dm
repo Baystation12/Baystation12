@@ -2971,10 +2971,10 @@ datum
 			var/adj_sleepy = 0
 			var/slurr_adj = 3
 			var/confused_adj = 2
-			var/slur_start = 90			//amount absorbed after which mob starts slurring
-			var/confused_start = 150	//amount absorbed after which mob starts confusing directions
-			var/blur_start = 300	//amount absorbed after which mob starts getting blurred vision
-			var/pass_out = 400	//amount absorbed after which mob starts passing out
+			var/slur_start = 180			//amount absorbed after which mob starts slurring
+			var/confused_start = 300	//amount absorbed after which mob starts confusing directions
+			var/blur_start = 600	//amount absorbed after which mob starts getting blurred vision
+			var/pass_out = 800	//amount absorbed after which mob starts passing out
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				M:nutrition += nutriment_factor
