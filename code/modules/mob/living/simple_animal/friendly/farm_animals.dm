@@ -222,15 +222,18 @@ var/global/chicken_count = 0
 	chicken_count -= 1
 
 /mob/living/simple_animal/chicken/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown/wheat)) //feedin' dem chickens
-		if(!stat && eggsleft < 8)
-			user.visible_message("\blue [user] feeds [O] to [name]! It clucks happily.","\blue You feed [O] to [name]! It clucks happily.")
-			user.drop_item()
-			del(O)
-			eggsleft += rand(1, 4)
-			//world << eggsleft
+	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown)) //feedin' dem chickens
+		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = O
+		if(G.seed && G.seed.kitchen_tag == "wheat")
+			if(!stat && eggsleft < 8)
+				user.visible_message("\blue [user] feeds [O] to [name]! It clucks happily.","\blue You feed [O] to [name]! It clucks happily.")
+				user.drop_item()
+				del(O)
+				eggsleft += rand(1, 4)
+			else
+				user << "\blue [name] doesn't seem hungry!"
 		else
-			user << "\blue [name] doesn't seem hungry!"
+			user << "[name] doesn't seem interested in that."
 	else
 		..()
 

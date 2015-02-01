@@ -28,6 +28,7 @@
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
 		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
+	/*
 	potato
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
 		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
@@ -43,6 +44,7 @@
 	wheat
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
 		output = /obj/item/weapon/reagent_containers/food/snacks/flour
+	*/
 
 	spaghetti
 		input = /obj/item/weapon/reagent_containers/food/snacks/flour

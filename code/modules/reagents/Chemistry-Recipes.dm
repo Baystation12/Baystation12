@@ -586,6 +586,14 @@ datum
 			required_reagents = list("capsaicin" = 2)
 			required_catalysts = list("phoron" = 5)
 			result_amount = 1
+
+		ketchup
+			name = "Ketchup"
+			id = "ketchup"
+			result = "ketchup"
+			required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+			result_amount = 4
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // foam and foam precursor

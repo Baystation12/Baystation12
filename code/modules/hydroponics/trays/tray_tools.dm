@@ -108,9 +108,6 @@
 	else if(grown_seed.get_trait(TRAIT_IMMUTABLE) > 0)
 		dat += "This plant does not possess genetics that are alterable.<br>"
 
-	if(grown_seed.products && grown_seed.products.len)
-		dat += "The mature plant will produce [grown_seed.products.len == 1 ? "fruit" : "[grown_seed.products.len] varieties of fruit"].<br>"
-
 	if(grown_seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
 		if(grown_seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
 			dat += "It consumes a small amount of nutrient fluid.<br>"

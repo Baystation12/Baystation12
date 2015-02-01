@@ -107,8 +107,7 @@
 	check_health()
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
-	if(seed.products && seed.products.len && \
-	 (age > seed.get_trait(TRAIT_MATURATION)) && \
+	if((age > seed.get_trait(TRAIT_MATURATION)) && \
 	 ((age - lastproduce) > seed.get_trait(TRAIT_PRODUCTION)) && \
 	 (!harvest && !dead))
 		harvest = 1

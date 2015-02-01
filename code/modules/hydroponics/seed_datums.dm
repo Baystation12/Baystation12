@@ -3,9 +3,9 @@
 	name = "chili"
 	seed_name = "chili"
 	display_name = "chili plants"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/chili)
 	chems = list("capsaicin" = list(3,5), "nutriment" = list(1,25))
 	mutants = list("icechili")
+	kitchen_tag = "chili"
 
 /datum/seed/chili/New()
 	..()
@@ -23,8 +23,8 @@
 	seed_name = "ice pepper"
 	display_name = "ice-pepper plants"
 	mutants = null
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/icepepper)
 	chems = list("frostoil" = list(3,5), "nutriment" = list(1,50))
+	kitchen_tag = "icechili"
 
 /datum/seed/chili/ice/New()
 	..()
@@ -37,9 +37,9 @@
 	name = "berries"
 	seed_name = "berry"
 	display_name = "berry bush"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/berries)
 	mutants = list("glowberries","poisonberries")
-	chems = list("nutriment" = list(1,10))
+	chems = list("nutriment" = list(1,10), "berryjuice" = list(1,10))
+	kitchen_tag = "berries"
 
 /datum/seed/berry/New()
 	..()
@@ -57,7 +57,6 @@
 	name = "glowberries"
 	seed_name = "glowberry"
 	display_name = "glowberry bush"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/glowberries)
 	mutants = null
 	chems = list("nutriment" = list(1,10), "uranium" = list(3,5))
 
@@ -76,9 +75,8 @@
 	name = "poisonberries"
 	seed_name = "poison berry"
 	display_name = "poison berry bush"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries)
 	mutants = list("deathberries")
-	chems = list("nutriment" = list(1), "toxin" = list(3,5))
+	chems = list("nutriment" = list(1), "toxin" = list(3,5), "poisonberryjuice" = list(3,5))
 
 /datum/seed/berry/poison/New()
 	..()
@@ -89,7 +87,6 @@
 	seed_name = "death berry"
 	display_name = "death berry bush"
 	mutants = null
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/deathberries)
 	chems = list("nutriment" = list(1), "toxin" = list(3,3), "lexorin" = list(1,5))
 
 /datum/seed/berry/poison/death/New()
@@ -103,9 +100,10 @@
 	name = "nettle"
 	seed_name = "nettle"
 	display_name = "nettles"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle)
 	mutants = list("deathnettle")
 	chems = list("nutriment" = list(1,50), "sacid" = list(0,1))
+	kitchen_tag = "nettle"
+	kitchen_tag = "nettle"
 
 /datum/seed/nettle/New()
 	..()
@@ -123,9 +121,9 @@
 	name = "deathnettle"
 	seed_name = "death nettle"
 	display_name = "death nettles"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/nettle/death)
 	mutants = null
 	chems = list("nutriment" = list(1,50), "pacid" = list(0,1))
+	kitchen_tag = "deathnettle"
 
 /datum/seed/nettle/death/New()
 	..()
@@ -139,9 +137,9 @@
 	name = "tomato"
 	seed_name = "tomato"
 	display_name = "tomato plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/tomato)
 	mutants = list("bluetomato","bloodtomato")
-	chems = list("nutriment" = list(1,10))
+	chems = list("nutriment" = list(1,10), "tomatojuice" = list(1,10))
+	kitchen_tag = "tomato"
 
 /datum/seed/tomato/New()
 	..()
@@ -159,7 +157,6 @@
 	name = "bloodtomato"
 	seed_name = "blood tomato"
 	display_name = "blood tomato plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/bloodtomato)
 	mutants = list("killer")
 	chems = list("nutriment" = list(1,10), "blood" = list(1,5))
 	splat_type = /obj/effect/decal/cleanable/blood/splatter
@@ -173,7 +170,6 @@
 	name = "killertomato"
 	seed_name = "killer tomato"
 	display_name = "killer tomato plant"
-	products = list(/mob/living/simple_animal/tomato)
 	mutants = null
 	can_self_harvest = 1
 
@@ -186,7 +182,6 @@
 	name = "bluetomato"
 	seed_name = "blue tomato"
 	display_name = "blue tomato plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato)
 	mutants = list("bluespacetomato")
 	chems = list("nutriment" = list(1,20), "lube" = list(1,5))
 
@@ -199,7 +194,6 @@
 	name = "bluespacetomato"
 	seed_name = "bluespace tomato"
 	display_name = "bluespace tomato plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/bluespacetomato)
 	mutants = null
 	chems = list("nutriment" = list(1,20), "singulo" = list(1,5))
 
@@ -215,9 +209,9 @@
 	name = "eggplant"
 	seed_name = "eggplant"
 	display_name = "eggplants"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/eggplant)
 	mutants = list("realeggplant")
 	chems = list("nutriment" = list(1,10))
+	kitchen_tag = "eggplant"
 
 /datum/seed/eggplant/New()
 	..()
@@ -230,26 +224,14 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#892694")
 	set_trait(TRAIT_PLANT_ICON,"bush4")
 
-/datum/seed/eggplant/eggs
-	name = "realeggplant"
-	seed_name = "egg-plant"
-	display_name = "egg-plants"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/egg)
-	mutants = null
-
-/datum/seed/eggplant/eggs/New()
-	..()
-	set_trait(TRAIT_PRODUCTION,12)
-	set_trait(TRAIT_PRODUCT_COLOUR,"#E7EDD1")
-
 //Apples/varieties.
 /datum/seed/apple
 	name = "apple"
 	seed_name = "apple"
 	display_name = "apple tree"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/apple)
 	mutants = list("poisonapple","goldapple")
 	chems = list("nutriment" = list(1,10))
+	kitchen_tag = "apple"
 
 /datum/seed/apple/New()
 	..()
@@ -265,16 +247,15 @@
 /datum/seed/apple/poison
 	name = "poisonapple"
 	mutants = null
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/apple/poisoned)
 	chems = list("cyanide" = list(1,5))
 
 /datum/seed/apple/gold
 	name = "goldapple"
 	seed_name = "golden apple"
 	display_name = "gold apple tree"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/goldapple)
 	mutants = null
 	chems = list("nutriment" = list(1,10), "gold" = list(1,5))
+	kitchen_tag = "goldapple"
 
 /datum/seed/apple/gold/New()
 	..()
@@ -289,9 +270,9 @@
 	name = "ambrosia"
 	seed_name = "ambrosia vulgaris"
 	display_name = "ambrosia vulgaris"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris)
 	mutants = list("ambrosiadeus")
 	chems = list("nutriment" = list(1), "space_drugs" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1), "toxin" = list(1,10))
+	kitchen_tag = "ambrosia"
 
 /datum/seed/ambrosia/New()
 	..()
@@ -308,9 +289,9 @@
 	name = "ambrosiadeus"
 	seed_name = "ambrosia deus"
 	display_name = "ambrosia deus"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus)
 	mutants = null
 	chems = list("nutriment" = list(1), "bicaridine" = list(1,8), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "space_drugs" = list(1,10))
+	kitchen_tag = "ambrosiadeus"
 
 /datum/seed/ambrosia/deus/New()
 	..()
@@ -323,10 +304,10 @@
 	seed_name = "chanterelle"
 	seed_noun = "spores"
 	display_name = "chanterelle mushrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle)
 	mutants = list("reishi","amanita","plumphelmet")
 	chems = list("nutriment" = list(1,25))
 	splat_type = /obj/effect/plant
+	kitchen_tag = "mushroom"
 
 /datum/seed/mushroom/New()
 	..()
@@ -343,7 +324,6 @@
 	name = "mold"
 	seed_name = "brown mold"
 	display_name = "brown mold"
-	products = null
 	mutants = null
 
 /datum/seed/mushroom/mold/New()
@@ -360,9 +340,9 @@
 	name = "plumphelmet"
 	seed_name = "plump helmet"
 	display_name = "plump helmet mushrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/plumphelmet)
 	mutants = list("walkingmushroom","towercap")
 	chems = list("nutriment" = list(2,10))
+	kitchen_tag = "plumphelmet"
 
 /datum/seed/mushroom/plump/New()
 	..()
@@ -378,7 +358,6 @@
 	name = "walkingmushroom"
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
-	products = list(/mob/living/simple_animal/mushroom)
 	mutants = null
 	can_self_harvest = 1
 
@@ -393,7 +372,6 @@
 	name = "reishi"
 	seed_name = "reishi"
 	display_name = "reishi"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/reishi)
 	mutants = list("libertycap","glowshroom")
 	chems = list("nutriment" = list(1,50), "psilocybin" = list(3,5))
 
@@ -412,7 +390,6 @@
 	name = "libertycap"
 	seed_name = "liberty cap"
 	display_name = "liberty cap mushrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/libertycap)
 	mutants = null
 	chems = list("nutriment" = list(1), "stoxin" = list(3,3), "space_drugs" = list(1,25))
 
@@ -429,7 +406,6 @@
 	name = "amanita"
 	seed_name = "fly amanita"
 	display_name = "fly amanita mushrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/amanita)
 	mutants = list("destroyingangel","plastic")
 	chems = list("nutriment" = list(1), "amatoxin" = list(3,3), "psilocybin" = list(1,25))
 
@@ -449,7 +425,6 @@
 	seed_name = "destroying angel"
 	display_name = "destroying angel mushrooms"
 	mutants = null
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/angel)
 	chems = list("nutriment" = list(1,50), "amatoxin" = list(13,3), "psilocybin" = list(1,25))
 
 /datum/seed/mushroom/poison/death/New()
@@ -467,7 +442,6 @@
 	seed_name = "tower cap"
 	display_name = "tower caps"
 	mutants = null
-	products = list(/obj/item/weapon/grown/log)
 
 /datum/seed/mushroom/towercap/New()
 	..()
@@ -481,7 +455,6 @@
 	name = "glowshroom"
 	seed_name = "glowshroom"
 	display_name = "glowshrooms"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom)
 	mutants = null
 	chems = list("radium" = list(1,20))
 
@@ -503,7 +476,6 @@
 	name = "plastic"
 	seed_name = "plastellium"
 	display_name = "plastellium"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium)
 	mutants = null
 	chems = list("plasticide" = list(1,10))
 
@@ -523,7 +495,6 @@
 	name = "harebells"
 	seed_name = "harebell"
 	display_name = "harebells"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/harebell)
 	chems = list("nutriment" = list(1,20))
 
 /datum/seed/flower/New()
@@ -540,8 +511,8 @@
 	name = "poppies"
 	seed_name = "poppy"
 	display_name = "poppies"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/poppy)
 	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10))
+	kitchen_tag = "poppy"
 
 /datum/seed/flower/poppy/New()
 	..()
@@ -557,7 +528,6 @@
 	name = "sunflowers"
 	seed_name = "sunflower"
 	display_name = "sunflowers"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sunflower)
 
 /datum/seed/flower/sunflower/New()
 	..()
@@ -572,8 +542,7 @@
 	seed_name = "grape"
 	display_name = "grapevines"
 	mutants = list("greengrapes")
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/grapes)
-	chems = list("nutriment" = list(1,10), "sugar" = list(1,5))
+	chems = list("nutriment" = list(1,10), "sugar" = list(1,5), "grapejuice" = list(1,10))
 
 /datum/seed/grapes/New()
 	..()
@@ -591,9 +560,8 @@
 	name = "greengrapes"
 	seed_name = "green grape"
 	display_name = "green grapevines"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/greengrapes)
 	mutants = null
-	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5))
+	chems = list("nutriment" = list(1,10), "kelotane" = list(3,5), "grapejuice" = list(1,10))
 
 /datum/seed/grapes/green/New()
 	..()
@@ -604,7 +572,6 @@
 	name = "peanut"
 	seed_name = "peanut"
 	display_name = "peanut vines"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/peanut)
 	chems = list("nutriment" = list(1,10))
 
 /datum/seed/peanuts/New()
@@ -622,8 +589,8 @@
 	name = "cabbage"
 	seed_name = "cabbage"
 	display_name = "cabbages"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage)
 	chems = list("nutriment" = list(1,10))
+	kitchen_tag = "cabbage"
 
 /datum/seed/cabbage/New()
 	..()
@@ -641,8 +608,9 @@
 	name = "banana"
 	seed_name = "banana"
 	display_name = "banana tree"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/banana)
 	chems = list("banana" = list(1,10))
+	trash_type = /obj/item/weapon/bananapeel
+	kitchen_tag = "banana"
 
 /datum/seed/banana/New()
 	..()
@@ -659,8 +627,9 @@
 	name = "corn"
 	seed_name = "corn"
 	display_name = "ears of corn"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/corn)
-	chems = list("nutriment" = list(1,10))
+	chems = list("nutriment" = list(1,10), "cornoil" = list(1,10))
+	kitchen_tag = "corn"
+	trash_type = /obj/item/weapon/corncob
 
 /datum/seed/corn/New()
 	..()
@@ -677,8 +646,8 @@
 	name = "potato"
 	seed_name = "potato"
 	display_name = "potatoes"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/potato)
-	chems = list("nutriment" = list(1,10))
+	chems = list("nutriment" = list(1,10), "potato" = list(1,10))
+	kitchen_tag = "potato"
 
 /datum/seed/potato/New()
 	..()
@@ -695,8 +664,8 @@
 	name = "soybean"
 	seed_name = "soybean"
 	display_name = "soybeans"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/soybeans)
-	chems = list("nutriment" = list(1,20))
+	chems = list("nutriment" = list(1,20), "soymilk" = list(1,20))
+	kitchen_tag = "soybeans"
 
 /datum/seed/soybean/New()
 	..()
@@ -713,8 +682,8 @@
 	name = "wheat"
 	seed_name = "wheat"
 	display_name = "wheat stalks"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/wheat)
 	chems = list("nutriment" = list(1,25))
+	kitchen_tag = "wheat"
 
 /datum/seed/wheat/New()
 	..()
@@ -731,8 +700,8 @@
 	name = "rice"
 	seed_name = "rice"
 	display_name = "rice stalks"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk)
-	chems = list("nutriment" = list(1,25))
+	chems = list("nutriment" = list(1,25), "rice" = list(1,25))
+	kitchen_tag = "rice"
 
 /datum/seed/rice/New()
 	..()
@@ -749,8 +718,8 @@
 	name = "carrot"
 	seed_name = "carrot"
 	display_name = "carrots"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
-	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5))
+	chems = list("nutriment" = list(1,20), "imidazoline" = list(3,5), "carrotjuice" = list(1,20))
+	kitchen_tag = "carrot"
 
 /datum/seed/carrots/New()
 	..()
@@ -783,8 +752,8 @@
 	name = "whitebeet"
 	seed_name = "white-beet"
 	display_name = "white-beets"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/whitebeet)
 	chems = list("nutriment" = list(0,20), "sugar" = list(1,5))
+	kitchen_tag = "whitebeet"
 
 /datum/seed/whitebeets/New()
 	..()
@@ -801,7 +770,6 @@
 	name = "sugarcane"
 	seed_name = "sugarcane"
 	display_name = "sugarcanes"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sugarcane)
 	chems = list("sugar" = list(4,5))
 
 /datum/seed/sugarcane/New()
@@ -820,8 +788,7 @@
 	name = "watermelon"
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/watermelon)
-	chems = list("nutriment" = list(1,6))
+	chems = list("nutriment" = list(1,6), "watermelonjuice" = list(1,6))
 
 /datum/seed/watermelon/New()
 	..()
@@ -840,8 +807,8 @@
 	name = "pumpkin"
 	seed_name = "pumpkin"
 	display_name = "pumpkin vine"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin)
 	chems = list("nutriment" = list(1,6))
+	kitchen_tag = "pumpkin"
 
 /datum/seed/pumpkin/New()
 	..()
@@ -859,8 +826,8 @@
 	name = "lime"
 	seed_name = "lime"
 	display_name = "lime trees"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown)
-	chems = list("nutriment" = list(1,20))
+	chems = list("nutriment" = list(1,20), "limejuice" = list(1,20))
+	kitchen_tag = "lime"
 
 /datum/seed/citrus/New()
 	..()
@@ -878,6 +845,8 @@
 	name = "lemon"
 	seed_name = "lemon"
 	display_name = "lemon trees"
+	chems = list("nutriment" = list(1,20), "lemonjuice" = list(1,20))
+	kitchen_tag = "lemon"
 
 /datum/seed/citrus/lemon/New()
 	..()
@@ -888,6 +857,7 @@
 	name = "orange"
 	seed_name = "orange"
 	display_name = "orange trees"
+	kitchen_tag = "orange"
 
 /datum/seed/citrus/orange/New()
 	..()
@@ -897,7 +867,7 @@
 	name = "grass"
 	seed_name = "grass"
 	display_name = "grass"
-	products = list(/obj/item/stack/tile/grass)
+	chems = list("nutriment" = list(1,20), "orangejuice" = list(1,20))
 
 /datum/seed/grass/New()
 	..()
@@ -914,7 +884,6 @@
 	name = "cocoa"
 	seed_name = "cacao"
 	display_name = "cacao tree"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod)
 	chems = list("nutriment" = list(1,10), "coco" = list(4,5))
 
 /datum/seed/cocoa/New()
@@ -933,8 +902,8 @@
 	seed_name = "cherry"
 	seed_noun = "pits"
 	display_name = "cherry tree"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cherries)
-	chems = list("nutriment" = list(1,15), "sugar" = list(1,15))
+	chems = list("nutriment" = list(1,15), "sugar" = list(1,15), "cherryjelly" = list(1,15))
+	kitchen_tag = "cherries"
 
 /datum/seed/cherries/New()
 	..()
@@ -952,7 +921,6 @@
 	name = "kudzu"
 	seed_name = "kudzu"
 	display_name = "kudzu vines"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/kudzupod)
 	chems = list("nutriment" = list(1,50), "anti_toxin" = list(1,25))
 
 /datum/seed/kudzu/New()
@@ -972,7 +940,6 @@
 	seed_name = "diona"
 	seed_noun = "nodes"
 	display_name = "replicant pods"
-	products = list(/mob/living/carbon/alien/diona)
 	can_self_harvest = 1
 
 /datum/seed/diona/New()
@@ -992,7 +959,6 @@
 	name = "shand"
 	seed_name = "S'randar's hand"
 	display_name = "S'randar's hand leaves"
-	products = list(/obj/item/stack/medical/bruise_pack/tajaran)
 	chems = list("bicaridine" = list(0,10))
 
 /datum/seed/shand/New()
@@ -1010,7 +976,6 @@
 	name = "mtear"
 	seed_name = "Messa's tear"
 	display_name = "Messa's tear leaves"
-	products = list(/obj/item/stack/medical/ointment/tajaran)
 	chems = list("honey" = list(1,10), "kelotane" = list(3,5))
 
 /datum/seed/mtear/New()
@@ -1028,7 +993,6 @@
 	name = "telriis"
 	seed_name = "telriis"
 	display_name = "telriis grass"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/telriis_clump)
 	chems = list("pwine" = list(1,5), "nutriment" = list(1,6))
 
 /datum/seed/telriis/New()
@@ -1044,7 +1008,6 @@
 	name = "thaadra"
 	seed_name = "thaa'dra"
 	display_name = "thaa'dra lichen"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/thaadrabloom)
 	chems = list("frostoil" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/thaadra/New()
@@ -1060,7 +1023,6 @@
 	name = "jurlmah"
 	seed_name = "jurl'mah"
 	display_name = "jurl'mah reeds"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/jurlmah)
 	chems = list("serotrotium" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/jurlmah/New()
@@ -1076,7 +1038,6 @@
 	name = "amauri"
 	seed_name = "amauri"
 	display_name = "amauri plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/amauri)
 	chems = list("zombiepowder" = list(1,10),"condensedcapsaicin" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/amauri/New()
@@ -1092,7 +1053,6 @@
 	name = "gelthi"
 	seed_name = "gelthi"
 	display_name = "gelthi plant"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/gelthi)
 	chems = list("stoxin" = list(1,5),"capsaicin" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/gelthi/New()
@@ -1108,7 +1068,6 @@
 	name = "vale"
 	seed_name = "vale"
 	display_name = "vale bush"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/vale)
 	chems = list("paracetamol" = list(1,5),"dexalin" = list(1,2),"nutriment"= list(1,5))
 
 /datum/seed/vale/New()
@@ -1124,7 +1083,6 @@
 	name = "surik"
 	seed_name = "surik"
 	display_name = "surik vine"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/surik)
 	chems = list("impedrezene" = list(1,3),"synaptizine" = list(1,2),"nutriment" = list(1,5))
 
 /datum/seed/surik/New()

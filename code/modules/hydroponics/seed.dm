@@ -108,12 +108,13 @@ proc/populate_seed_list()
 	var/can_self_harvest = 0       // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
-	var/list/products              // Possible fruit/other product paths.
 	var/list/mutants               // Possible predefined mutant varieties, if any.
 	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
+	var/kitchen_tag                // Used by the reagent grinder.
+	var/trash_type                 // Garbage item produced when eaten.
 
 /datum/seed/New()
 
@@ -377,7 +378,6 @@ proc/populate_seed_list()
 	display_name = "strange plants" // TODO: name generator.
 	mysterious = 1
 	seed_noun = pick("spores","nodes","cuttings","seeds")
-	products = list(pick(typesof(/obj/item/weapon/reagent_containers/food/snacks/grown)-/obj/item/weapon/reagent_containers/food/snacks/grown))
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_product_sprites))
@@ -604,9 +604,6 @@ proc/populate_seed_list()
 		for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 			if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-		if(!products) products = list()
-		products |= gene.values["[TRAIT_PRODUCTS]"]
-
 		if(!chems) chems = list()
 
 		var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
@@ -651,7 +648,6 @@ proc/populate_seed_list()
 
 	switch(genetype)
 		if(GENE_PRODUCTS)
-			P.values["[TRAIT_PRODUCTS]"] =       products
 			P.values["[TRAIT_CHEMS]"] =          chems
 			P.values["[TRAIT_EXUDE_GASSES]"] =   exude_gasses
 			traits_to_copy = list(TRAIT_ALTER_TEMP,TRAIT_POTENCY,TRAIT_HARVEST_REPEAT,TRAIT_PRODUCES_POWER,TRAIT_JUICY,TRAIT_PRODUCT_ICON,TRAIT_PLANT_ICON)
@@ -677,11 +673,7 @@ proc/populate_seed_list()
 	if(!user)
 		return
 
-	var/got_product
-	if(!isnull(products) && products.len && get_trait(TRAIT_YIELD) > 0)
-		got_product = 1
-
-	if(!force_amount && !got_product && !harvest_sample)
+	if(!force_amount && get_trait(TRAIT_YIELD) == 0 && !harvest_sample)
 		if(istype(user)) user << "<span class='danger'>You fail to harvest anything useful.</span>"
 	else
 		if(istype(user)) user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
@@ -712,9 +704,7 @@ proc/populate_seed_list()
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
-			var/product_type = pick(products)
-			var/obj/item/product = new product_type(get_turf(user),name)
-
+			var/obj/item/product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				product.color = get_trait(TRAIT_PRODUCT_COLOUR)
 				if(istype(product,/obj/item/weapon/reagent_containers/food))
@@ -751,9 +741,10 @@ proc/populate_seed_list()
 	new_seed.uid = 0
 	new_seed.roundstart = 0
 	new_seed.can_self_harvest = can_self_harvest
+	new_seed.kitchen_tag = kitchen_tag
+	new_seed.trash_type = trash_type
 
 	//Copy over everything else.
-	if(products)       new_seed.products = products.Copy()
 	if(mutants)        new_seed.mutants = mutants.Copy()
 	if(chems)          new_seed.chems = chems.Copy()
 	if(consume_gasses) new_seed.consume_gasses = consume_gasses.Copy()

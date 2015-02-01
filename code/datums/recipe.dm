@@ -34,11 +34,11 @@
  * */
 
 /datum/recipe
-	var/list/reagents // example:  = list("berryjuice" = 5) // do not list same reagent twice
-	var/list/items // example: =list(/obj/item/weapon/crowbar, /obj/item/weapon/welder) // place /foo/bar before /foo
-	var/result //example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
-	var/time = 100 // 1/10 part of second
-
+	var/list/reagents // example: = list("berryjuice" = 5) // do not list same reagent twice
+	var/list/items    // example: = list(/obj/item/weapon/crowbar, /obj/item/weapon/welder) // place /foo/bar before /foo
+	var/list/fruit    // example: = list("fruit" = 3)
+	var/result        // example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
+	var/time = 100    // 1/10 part of second
 
 /datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents) //1=precisely, 0=insufficiently, -1=superfluous
 	. = 1
@@ -53,15 +53,31 @@
 		return -1
 	return .
 
+/datum/recipe/proc/check_fruit(var/obj/container)
+	if(!fruit)
+		. = 1
+		return 1
+
+	var/list/checklist = fruit.Copy()
+	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
+		if(!G.seed)
+			return
+		if(!G.seed.kitchen_tag || !checklist[G.seed.kitchen_tag] || checklist[G.seed.kitchen_tag] <= 0)
+			continue
+		checklist[G.seed.kitchen_tag]--
+
+	for(var/ktag in checklist)
+		if(checklist[ktag] && checklist[ktag] > 0)
+			. = -1
+			return -1
+	return .
+
 /datum/recipe/proc/check_items(var/obj/container as obj) //1=precisely, 0=insufficiently, -1=superfluous
 	if (!items)
-		if (locate(/obj/) in container)
-			return -1
-		else
-			return 1
+		return 1
 	. = 1
 	var/list/checklist = items.Copy()
-	for (var/obj/O in container)
+	for(var/obj/O in container)
 		var/found = 0
 		for (var/type in checklist)
 			if (istype(O,type))
@@ -100,7 +116,7 @@
 		exact = -1
 	var/list/datum/recipe/possible_recipes = new
 	for (var/datum/recipe/recipe in avaiable_recipes)
-		if (recipe.check_reagents(obj.reagents)==exact && recipe.check_items(obj)==exact)
+		if (recipe.check_reagents(obj.reagents)==exact && recipe.check_items(obj)==exact && recipe.check_fruit(obj)==exact)
 			possible_recipes+=recipe
 	if (possible_recipes.len==0)
 		return null

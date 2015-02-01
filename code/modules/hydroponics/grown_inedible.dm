@@ -80,3 +80,14 @@
 		new /obj/item/clothing/mask/cigarette/pipe/cobpipe (user.loc)
 		del(src)
 		return
+
+/obj/item/weapon/bananapeel
+	name = "banana peel"
+	desc = "A peel from a banana."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "banana_peel"
+	item_state = "banana_peel"
+	w_class = 2.0
+	throwforce = 0
+	throw_speed = 4
+	throw_range = 20
