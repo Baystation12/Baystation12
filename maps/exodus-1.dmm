@@ -3329,7 +3329,7 @@
 "bma" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor{dir = 2; icon_state = "purple"},/area/hallway/primary/starboard)
 "bmb" = (/turf/simulated/floor{dir = 6; icon_state = "purple"},/area/hallway/primary/starboard)
 "bmc" = (/turf/simulated/wall/r_wall,/area/hallway/secondary/exit)
-"bmd" = (/obj/machinery/door/airlock{name = "Starboard Emergency Storage"; req_access_txt = "0"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/hallway/secondary/exit)
+"bmd" = (/obj/machinery/door/airlock/maintenance{name = "Maintenance Access"; req_access_txt = "12"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/plating,/area/hallway/secondary/exit)
 "bme" = (/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/wall,/area/hallway/secondary/exit)
 "bmf" = (/obj/machinery/light{dir = 4},/obj/machinery/firealarm{dir = 4; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/hallway/secondary/entry/aft)
 "bmg" = (/obj/machinery/conveyor{dir = 1; id = "garbage"},/turf/simulated/floor/plating,/area/maintenance/disposal)
