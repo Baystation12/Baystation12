@@ -240,7 +240,7 @@
 						if(!(src.holder in src.master))
 							return
 
-						t = copytext(sanitize(t), 1, 20)
+						t = sanitize(copytext(t, 1, 20))
 						src.message_tone = t
 
 					if("note")
@@ -289,7 +289,7 @@
 							return
 
 						var/t = input(usr, "Please enter new name", src.name, F.name) as text
-						t = copytext(sanitize(t), 1, 16)
+						t = sanitize(copytext(t, 1, 16))
 						if (!t)
 							return
 						if (!in_range(src.master, usr) || !(F.holder in src.master))

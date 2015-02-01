@@ -175,7 +175,7 @@
 
 	text = input("What would you like to say?", "Speak to creature", null, null)
 
-	text = trim(copytext(sanitize(text), 1, MAX_MESSAGE_LEN))
+	text = trim(sanitize(copytext(text, 1, MAX_MESSAGE_LEN)))
 
 	if(!text) return
 
