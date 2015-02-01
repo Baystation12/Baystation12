@@ -74,13 +74,13 @@
 		grown_reagents = H.reagents
 
 	if(!grown_seed)
-		user << "\red [src] can tell you nothing about \the [target]."
+		user << "<span class='danger'>[src] can tell you nothing about \the [target].</span>"
 		return
 
-	var/dat = "<h3>Plant data for [target]</h3>"
-	user.visible_message("\blue [user] runs the scanner over \the [target].")
-
 	form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
+	var/dat = "<h3>Plant data for [form_title]</h3>"
+	user.visible_message("<span class='notice'>[user] runs the scanner over \the [target].</span>")
+
 	dat += "<h2>General Data</h2>"
 
 	dat += "<table>"
@@ -201,7 +201,7 @@
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		dat += "<br>The fruit is temporal/spatially unstable."
 
-	dat += "<br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
+	dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
 	if(dat)
 		user << browse(dat,"window=plant_analyzer")
 		last_data = dat
