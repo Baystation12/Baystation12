@@ -1,5 +1,5 @@
 #define DEFAULT_SEED "glowshroom"
-#define VINE_GROWTH_STAGES 4
+#define VINE_GROWTH_STAGES 5
 
 /proc/spacevine_infestation()
 	spawn() //to stop the secrets panel hanging
@@ -23,6 +23,7 @@
 	anchored = 1
 	opacity = 0
 	density = 0
+	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attackby()
 	..()
@@ -37,7 +38,7 @@
 	density = 0
 	icon = 'icons/obj/hydroponics_growing.dmi'
 	icon_state = "bush4-1"
-	layer = 2
+	layer = 3
 
 	var/health = 10
 	var/max_health = 100
@@ -47,6 +48,7 @@
 
 	var/list/children = list()
 	var/obj/effect/plant/parent
+	var/mob/living/buckled_mob
 	var/datum/seed/seed
 	var/floor = 0
 	var/spread_chance = 40
@@ -68,12 +70,11 @@
 		del(src)
 		return
 
-	layer = rand(3,4) // Will display over pipes/machines at all times and mobs half the time.
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD)==2)
 		max_growth = VINE_GROWTH_STAGES
-		growth_threshold = round(max_health/VINE_GROWTH_STAGES)
+		growth_threshold = max_health/VINE_GROWTH_STAGES
 		icon = 'icons/obj/hydroponics_vines.dmi'
 		growth_type = 2 // Vines by default.
 		if(seed.get_trait(TRAIT_CARNIVOROUS) == 2)
@@ -85,7 +86,7 @@
 				growth_type = 4 // Mold
 	else
 		max_growth = seed.growth_stages
-		growth_threshold = round(max_health/seed.growth_stages)
+		growth_threshold = max_health/seed.growth_stages
 
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
@@ -143,93 +144,19 @@
 	else
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
+	layer = (growth == max_growth ? 4 : 3)
+
 /obj/effect/plant/Del()
+	if(children && children.len)
+		die_off(null,1)
 	processing_objects -= src
 	..()
-
-/obj/effect/plant/proc/die_off(var/no_remains)
-	// Remove ourselves from our parent.
-	if(parent && parent.children)
-		parent.children -= src
-	// Kill off any of our children (and add an added bonus, other plants in this area)
-	for(var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant in get_turf(src))
-		plant.dead = 1
-		plant.update_icon()
-	// Cause the plants around us to update.
-	if(children && children.len)
-		for(var/obj/effect/plant/child in children)
-			child.die_off()
-	for(var/obj/effect/plant/neighbor in view(1,src))
-		neighbor.hibernating = 0
-	if(!no_remains && !(locate(/obj/effect/dead_plant) in get_turf(src)))
-		var/obj/effect/dead_plant/plant_remains = new(get_turf(src))
-		plant_remains.icon = src.icon
-		plant_remains.icon_state = src.icon_state
-	del(src)
 
 /obj/effect/plant/proc/get_dist_to_parent(var/current_count)
 	if(!parent)
 		return current_count
 	current_count++
 	return parent.get_dist_to_parent(current_count)
-
-/obj/effect/plant/process()
-
-	// Something is very wrong, kill ourselves.
-	if(!seed)
-		die_off()
-
-	// Handle life.
-	var/turf/simulated/T = get_turf(src)
-	if(istype(T))
-		health -= seed.handle_environment(T, T.return_air(),1)
-	if(health < max_health)
-		health += rand(3,5)
-		if(health > max_health)
-			health = max_health
-	refresh_icon()
-
-	// Damaged, young hibernating or too far from parent, no chance of spreading.
-	if(health < (max_health/2) || hibernating || (parent && (get_dist_to_parent(0) > spread_distance)))
-		return
-
-	// Count our neighbors and possible locations for spreading.
-	var/list/possible_locs = list()
-	var/count = 0
-	for(var/turf/simulated/floor/floor in view(1,src))
-		if((locate(/obj/effect/dead_plant) in floor.contents) || !floor.Enter(src) || floor.density)
-			continue
-		if(locate(/obj/effect/plant) in floor.contents)
-			count++
-			continue
-		possible_locs |= floor
-
-	//Entirely surrounded, try to spawn an actual plant.
-	if(count>=8 && prob(5))
-		if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in T.contents))
-			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/new_plant = new(T,seed)
-			new_plant.age = seed.get_trait(TRAIT_MATURATION)-5
-			new_plant.update_icon()
-			if(growth_type==0) //Vines do not become invisible.
-				invisibility = INVISIBILITY_MAXIMUM
-
-	if(prob(spread_chance))
-		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
-			if(!possible_locs.len)
-				break
-			if(prob(spread_into_adjacent))
-				var/turf/target_turf = pick(possible_locs)
-				possible_locs -= target_turf
-				var/obj/effect/plant/child = new(target_turf, seed)
-				child.parent = get_root()
-				child.parent.children |= child
-
-	/*
-	var/need_hibernate = 0
-	if(need_hibernate)
-		hibernating = 1
-		world << "[src] at [x],[y] is hibernating"
-	*/
 
 /obj/effect/plant/proc/get_root()
 	if(parent)
@@ -303,4 +230,7 @@
 
 /obj/effect/plant/proc/check_health()
 	if(health <= 0)
-		die_off()
+		die_off(1)
+
+/obj/effect/plant/proc/is_mature()
+	return (health < (max_health/3))

@@ -25,11 +25,17 @@
 		usr << "\red Movement is admin-disabled." //This is to identify lag problems
 		return
 
-	if (istype(A,/mob/living/carbon))
-		var/mob/living/carbon/M = A
+	if (istype(A,/mob/living))
+		var/mob/living/M = A
 		if(M.lying)
 			..()
 			return
+
+		// Ugly hack :( Should never have multiple plants in the same tile.
+		var/obj/effect/plant/plant = locate() in contents
+		if(plant) plant.trodden_on(M)
+
+		// Dirt overlays.
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)

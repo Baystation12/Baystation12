@@ -1,3 +1,6 @@
+//Misc
+#define DEAD_PLANT_COLOUR "#C2A180"
+
 // Definitions for genes (trait groupings)
 #define GENE_PRODUCTS "products"
 #define GENE_CONSUMPTION "consumption"
