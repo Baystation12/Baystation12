@@ -353,13 +353,10 @@ datum
 								if(C.result)
 									feedback_add_details("chemical_reaction","[C.result]|[C.result_amount*multiplier]")
 									multiplier = max(multiplier, 1) //this shouldnt happen ...
-									world << "chemical_reaction [C.result]|[C.result_amount*multiplier][C.resultcolor]"
-									if(!isnull(C.resultcolor))
-										world << "Paint made with colour [C.resultcolor]"
+									if(!isnull(C.resultcolor)) //paints
 										add_reagent(C.result, C.result_amount*multiplier, C.resultcolor)
 									else
 										add_reagent(C.result, C.result_amount*multiplier)
-										world << "This happened? [preserved_data]"
 										set_data(C.result, preserved_data)
 
 									//add secondary products
@@ -504,18 +501,16 @@ datum
 							if(R.color && data)
 								var/list/mix = new /list(2)
 								//fill the list
-								var/datum/reagent/paint/P1 = chemical_reagents_list["paint"]
+								var/datum/reagent/paint/P = chemical_reagents_list["paint"]
+								var/datum/reagent/paint/P1 = new P.type()
 								P1.color = R.color
 								P1.volume = R.volume - amount //since we just increased that
-								world << "First paint [P1.color] vol [P1.volume]"
-								var/datum/reagent/paint/P2 = chemical_reagents_list["paint"]
+								var/datum/reagent/paint/P2 = new P.type()
 								P2.color = data
 								P2.volume = amount
-								world << "Second paint [P2.color] vol [P2.volume]"
-								mix += P1
-								mix += P2
+								mix[1] = P1
+								mix[2] = P2
 								R.color = mix_color_from_reagents(mix)
-								world << "Eventual mixed colour [R.color]"
 						if(!safety)
 							handle_reactions()
 						my_atom.on_reagent_change()
@@ -530,7 +525,6 @@ datum
 					R.volume = amount
 					if(reagent == "paint")
 						R.color = data
-						world << "The paint is given [data] colour"
 					else
 						SetViruses(R, data) // Includes setting data for blood
 

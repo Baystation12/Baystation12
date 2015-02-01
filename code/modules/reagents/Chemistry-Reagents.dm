@@ -1575,48 +1575,17 @@ datum
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
-/*
-			//Paints corresponding to crayons are hardcoded
-			red
-				id = "paint_red"
-				color = "#FE191A"
 
-			orange
-				id = "paint_orange"
-				color = "#FFBE4F"
+			reaction_turf(var/turf/T, var/volume)
+				if(!istype(T) || istype(T, /turf/space))
+					return
+				T.color = color
 
-			yellow
-				id = "paint_yellow"
-				color = "#FDFE7D"
+			reaction_obj(var/obj/O, var/volume)
+				..()
+				if(istype(O,/obj/item/weapon/light))
+					O.color = color
 
-			green
-				id = "paint_green"
-				color = "#18A31A"
-
-			blue
-				id = "paint_blue"
-				color = "#247CFF"
-
-			purple
-				id = "paint_purple"
-				color = "#CC0099"
-
-			grey //Mime
-				id = "paint_grey"
-				color = "#808080"
-
-			brown //Rainbow
-				id = "paint_brown"
-				color = "#846F35"
-
-			black
-				id = "paint_black"
-				color = "#333333"
-
-			white
-				id = "paint_white"
-				color = "#F0F8FF"
-*/
 
 //////////////////////////Poison stuff///////////////////////
 
