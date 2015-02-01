@@ -1,5 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
+/proc/invalidateCameraCache()
+	for(var/obj/machinery/computer/security/s in world)
+		s.camera_cache = null
 
 /obj/machinery/computer/security
 	name = "security camera monitor"
@@ -10,6 +13,7 @@
 	var/list/network = list("SS13")
 	var/mapping = 0//For the overview file, interesting bit of code.
 	circuit = /obj/item/weapon/circuitboard/security
+	var/camera_cache = null
 
 
 	attack_ai(var/mob/user as mob)
@@ -32,29 +36,45 @@
 
 		data["current"] = null
 
-		var/list/L = list()
-		for (var/obj/machinery/camera/C in cameranet.cameras)
-			if(can_access_camera(C))
-				L.Add(C)
+		if(isnull(camera_cache))
+			cameranet.process_sort()
 
-		camera_sort(L)
+			var/cameras[0]
+			for(var/obj/machinery/camera/C in cameranet.cameras)
+				if(!can_access_camera(C))
+					continue
 
-		var/cameras[0]
-		for(var/obj/machinery/camera/C in L)
-			var/cam[0]
-			cam["name"] = C.c_tag
-			cam["deact"] = !C.can_use()
-			cam["camera"] = "\ref[C]"
-			cam["x"] = C.x
-			cam["y"] = C.y
-			cam["z"] = C.z
+				var/cam[0]
+				cam["name"] = sanitize(C.c_tag)
+				cam["deact"] = !C.can_use()
+				cam["camera"] = "\ref[C]"
+				cam["x"] = C.x
+				cam["y"] = C.y
+				cam["z"] = C.z
 
-			cameras[++cameras.len] = cam
+				cameras[++cameras.len] = cam
 
-			if(C == current)
+				if(C == current)
+					data["current"] = cam
+
+				var/list/camera_list = list("cameras" = cameras)
+				camera_cache=list2json(camera_list)
+
+		else
+			if(current)
+				var/cam[0]
+				cam["name"] = current.c_tag
+				cam["deact"] = !current.can_use()
+				cam["camera"] = "\ref[current]"
+				cam["x"] = current.x
+				cam["y"] = current.y
+				cam["z"] = current.z
+
 				data["current"] = cam
 
-		data["cameras"] = cameras
+
+		if(ui)
+			ui.load_cached_data(camera_cache)
 
 		ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 		if (!ui)
@@ -65,6 +85,7 @@
 			// adding a template with the key "mapHeader" replaces the map header content
 			ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
 
+			ui.load_cached_data(camera_cache)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)

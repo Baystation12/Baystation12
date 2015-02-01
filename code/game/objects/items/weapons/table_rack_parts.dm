@@ -7,7 +7,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "table_parts"
 	matter = list("metal" = 3750)
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
 
 	var/build_type = /obj/structure/table
@@ -50,7 +50,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "reinf_tableparts"
 	matter = list("metal" = 7500)
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 
 	stack_types = list(/obj/item/stack/sheet/metal, /obj/item/stack/rods)
 	build_type = /obj/structure/table/reinforced

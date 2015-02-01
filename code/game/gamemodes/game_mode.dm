@@ -151,8 +151,6 @@
 
 	var/list/area/escape_locations = list(/area/shuttle/escape/centcom, /area/shuttle/escape_pod1/centcom, /area/shuttle/escape_pod2/centcom, /area/shuttle/escape_pod3/centcom, /area/shuttle/escape_pod5/centcom)
 
-	var/pltext = "<font size=2><b>Player list:</b></font>"
-
 	for(var/mob/M in player_list)
 		if(M.client)
 			clients++
@@ -187,7 +185,6 @@
 		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.</b><br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>).</b>"
-	text += "<br>" + pltext //print player list after the general info
 	world << text
 
 	if(clients > 0)
@@ -553,7 +550,7 @@ proc/get_nt_opposed()
 			var/list/refined_log = new()
 			for(var/datum/uplink_item/UI in H.purchase_log)
 				var/obj/I = new UI.path
-				refined_log.Add("[H.purchase_log[UI]]x\icon[I][I.name]")
+				refined_log.Add("[H.purchase_log[UI]]x\icon[I][UI.name]")
 				del(I)
 			purchases = english_list(refined_log, nothing_text = "")
 	if(uplink_true)
