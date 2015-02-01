@@ -7,7 +7,7 @@
 
 	damage = 0
 	damage_cap = 150
-	max_temperature = 5000
+	max_temperature = 3500
 
 	walltype = "grwall"
 
