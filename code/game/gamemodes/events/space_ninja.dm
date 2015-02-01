@@ -116,7 +116,7 @@ var/ninja_confirmed_selection = 0
 	var/commando_list[] = list()//Commandos.
 
 	//We want the ninja to appear only in certain modes.
-//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","nuclear","malfunction","monkey")  // Commented out for both testing and ninjas
+//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","mercenary","malfunction","monkey")  // Commented out for both testing and ninjas
 //	if(!(current_mode.config_tag in acceptable_modes_list))
 //		return
 

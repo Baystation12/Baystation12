@@ -418,7 +418,6 @@ var/global/list/holodeck_programs = list(
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
 	anchored = 1.0
-	flags = FPRINT
 	pressure_resistance = 15
 
 
@@ -454,7 +453,7 @@ var/global/list/holodeck_programs = list(
 	throw_range = 5
 	throwforce = 0
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
+	flags = NOSHIELD | NOBLOODY
 	var/active = 0
 
 /obj/item/weapon/holo/esword/green

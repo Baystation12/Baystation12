@@ -349,6 +349,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
+	unlimited_power = 1
 
 /area/centcom/control
 	name = "\improper Centcom Control"

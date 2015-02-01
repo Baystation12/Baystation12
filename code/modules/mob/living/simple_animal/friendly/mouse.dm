@@ -28,6 +28,7 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
 	universal_understand = 1
+	mob_size = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()

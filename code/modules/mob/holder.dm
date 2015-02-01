@@ -40,8 +40,9 @@
 /mob/living/var/holder_type
 
 /mob/living/proc/get_scooped(var/mob/living/carbon/grabber)
-	if(!holder_type)
+	if(!holder_type || buckled || pinned.len)
 		return
+
 	var/obj/item/weapon/holder/H = new holder_type(loc)
 	src.loc = H
 	H.name = loc.name
