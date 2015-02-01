@@ -1029,6 +1029,7 @@
 	seed_name = "telriis"
 	display_name = "telriis grass"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/telriis_clump)
+	chems = list("pwine" = list(1,5), "nutriment" = list(1,6))
 
 /datum/seed/telriis/New()
 	..()
@@ -1044,6 +1045,7 @@
 	seed_name = "thaa'dra"
 	display_name = "thaa'dra lichen"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/thaadrabloom)
+	chems = list("frostoil" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/thaadra/New()
 	..()
@@ -1059,6 +1061,7 @@
 	seed_name = "jurl'mah"
 	display_name = "jurl'mah reeds"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/jurlmah)
+	chems = list("serotrotium" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/jurlmah/New()
 	..()
@@ -1074,6 +1077,7 @@
 	seed_name = "amauri"
 	display_name = "amauri plant"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/amauri)
+	chems = list("zombiepowder" = list(1,10),"condensedcapsaicin" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/amauri/New()
 	..()
@@ -1089,6 +1093,7 @@
 	seed_name = "gelthi"
 	display_name = "gelthi plant"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/gelthi)
+	chems = list("stoxin" = list(1,5),"capsaicin" = list(1,5),"nutriment" = list(1,5))
 
 /datum/seed/gelthi/New()
 	..()
@@ -1104,6 +1109,7 @@
 	seed_name = "vale"
 	display_name = "vale bush"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/vale)
+	chems = list("paracetamol" = list(1,5),"dexalin" = list(1,2),"nutriment"= list(1,5))
 
 /datum/seed/vale/New()
 	..()
@@ -1119,6 +1125,7 @@
 	seed_name = "surik"
 	display_name = "surik vine"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/surik)
+	chems = list("impedrezene" = list(1,3),"synaptizine" = list(1,2),"nutriment" = list(1,5))
 
 /datum/seed/surik/New()
 	..()
