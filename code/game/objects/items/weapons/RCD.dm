@@ -40,7 +40,7 @@
 
 /obj/item/weapon/rcd/attackby(obj/item/weapon/rcd_ammo/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/rcd_ammo))
+	if(istype(W))
 		if(stored_matter == capacity)
 			user << "<span class='notice'>\The [src] is full and can't hold any more matter-units.</span>"
 			return
@@ -51,7 +51,7 @@
 		if(stored_matter > capacity)
 			W.stored_matter = stored_matter - capacity
 			stored_matter = capacity
-			user << "<span class='notice'>\The [src] was filled to full capacity. There are [W.stored_matter] matter units remining in the [W.name].</span>"
+			user << "<span class='notice'>\The [src] was filled to full capacity. There are [W.stored_matter] matter units remining in \the [W].</span>"
 			return
 		else
 			user << "You load a full cartridge into \the [src]. It now contains [stored_matter] matter units"
