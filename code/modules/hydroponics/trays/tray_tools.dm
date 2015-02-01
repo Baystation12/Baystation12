@@ -9,8 +9,38 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hydro"
 	item_state = "analyzer"
+	var/form_title
+	var/last_data
+
+/obj/item/device/analyzer/plant_analyzer/proc/print_report_verb()
+	set name = "Print Plant Report"
+	set category = "Object"
+	set src = usr
+
+	if(usr.stat || usr.restrained() || usr.lying)
+		return
+	print_report(usr)
+
+/obj/item/device/analyzer/plant_analyzer/Topic(href, href_list)
+	if(..())
+		return
+	if(href_list["print"])
+		print_report(usr)
+
+/obj/item/device/analyzer/plant_analyzer/proc/print_report(var/mob/living/user)
+	if(!last_data)
+		user << "There is no scan data to print."
+		return
+	var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(get_turf(src))
+	P.name = "paper - [form_title]"
+	P.info = "[last_data]"
+	if(istype(user,/mob/living/carbon/human) && !(user.l_hand && user.r_hand))
+		user.put_in_hands(P)
+	user.visible_message("\The [src] spits out a piece of paper.")
+	return
 
 /obj/item/device/analyzer/plant_analyzer/attack_self(mob/user as mob)
+	print_report(user)
 	return 0
 
 /obj/item/device/analyzer/plant_analyzer/afterattack(obj/target, mob/user, flag)
@@ -44,12 +74,13 @@
 		grown_reagents = H.reagents
 
 	if(!grown_seed)
-		user << "\red [src] can tell you nothing about [target]."
+		user << "\red [src] can tell you nothing about \the [target]."
 		return
 
 	var/dat = "<h3>Plant data for [target]</h3>"
-	user.visible_message("\blue [user] runs the scanner over [target].")
+	user.visible_message("\blue [user] runs the scanner over \the [target].")
 
+	form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
 	dat += "<h2>General Data</h2>"
 
 	dat += "<table>"
@@ -170,8 +201,10 @@
 	if(grown_seed.get_trait(TRAIT_TELEPORTING))
 		dat += "<br>The fruit is temporal/spatially unstable."
 
+	dat += "<br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"
 	if(dat)
 		user << browse(dat,"window=plant_analyzer")
+		last_data = dat
 
 	return
 
