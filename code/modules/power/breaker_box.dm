@@ -11,7 +11,6 @@
 	//directwired = 0
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
-	flags = FPRINT
 	density = 1
 	anchored = 1
 	var/on = 0

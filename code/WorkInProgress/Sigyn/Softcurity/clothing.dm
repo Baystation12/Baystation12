@@ -5,7 +5,7 @@
 	item_state = "ba_suit"
 	color = "hosblueclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/advisor
 	name = "correctional advisor's jumpsuit"
@@ -14,7 +14,7 @@
 	item_state = "ba_suit"
 	color = "wardenblueclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/supervisor
 	name = "crew supervisor's jumpsuit"
@@ -23,7 +23,7 @@
 	item_state = "ba_suit"
 	color = "officerblueclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = ONESIZEFITSALL
 
 /obj/item/clothing/shoes/boots
 	name = "boots"

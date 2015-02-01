@@ -4,7 +4,6 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "closed"
 	density = 1
-	flags = FPRINT
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -21,7 +20,7 @@
 	var/store_items = 1
 	var/store_mobs = 1
 
-	var/const/mob_size = 15
+	var/const/default_mob_size = 15
 
 /obj/structure/closet/initialize()
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
@@ -121,20 +120,17 @@
 
 /obj/structure/closet/proc/store_mobs(var/stored_units)
 	var/added_units = 0
-	for(var/mob/M in src.loc)
-		if(stored_units + added_units + mob_size > storage_capacity)
-			break
-		if(istype (M, /mob/dead/observer))
-			continue
+	for(var/mob/living/M in src.loc)
 		if(M.buckled || M.pinned.len)
 			continue
-
+		var/current_mob_size = (M.mob_size ? M.mob_size : default_mob_size)
+		if(stored_units + added_units + current_mob_size > storage_capacity)
+			break
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
-
 		M.loc = src
-		added_units += mob_size
+		added_units += current_mob_size
 	return added_units
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
