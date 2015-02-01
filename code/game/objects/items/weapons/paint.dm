@@ -171,7 +171,7 @@ var/global/list/cached_icons = list()
 			target.icon = initial(target.icon)
 		return
 */
-
+/*
 datum/reagent/paint
 	name = "Paint"
 	id = "paint_"
@@ -235,3 +235,4 @@ datum/reagent/paint_remover
 		if(istype(T) && T.icon != initial(T.icon))
 			T.icon = initial(T.icon)
 		return
+*/

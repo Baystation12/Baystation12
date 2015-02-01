@@ -88,7 +88,7 @@ datum
 			on_new(var/data)
 				return
 
-			// Called when two reagents of the same are mixing.
+			// Called when two reagents of the same are mixing. <-- Blatant lies
 			on_merge(var/data)
 				return
 
@@ -1575,7 +1575,7 @@ datum
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
-
+/*
 			//Paints corresponding to crayons are hardcoded
 			red
 				id = "paint_red"
@@ -1616,7 +1616,7 @@ datum
 			white
 				id = "paint_white"
 				color = "#F0F8FF"
-
+*/
 
 //////////////////////////Poison stuff///////////////////////
 
