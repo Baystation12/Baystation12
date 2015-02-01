@@ -213,7 +213,7 @@
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
 
-	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
+	var/msg = sanitize(copytext(input("Message:", "Psychic Whisper") as text|null, 1, MAX_MESSAGE_LEN))
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
 		M << "\green You hear a strange, alien voice in your head... \italic [msg]"
