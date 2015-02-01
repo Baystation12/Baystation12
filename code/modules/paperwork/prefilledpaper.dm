@@ -501,27 +501,29 @@ Stamp below:\[br\]
 	prefilledtemp = new /datum/prefilledpaper()
 	prefilledtemp.name = "Security: Search Warrant"
 	allpapers.Add(prefilledtemp)
-	prefilledtemp.text = {"\[Large\]\[center\]\[b\]\[u\]Warrant for Search and Seizure\[/u\]\[/Large\]\[/center\]\[/b\]\[br\]
-\[center\]\[i\]\[u\]NanoTrasen Hypatia Space Station\[/center\]\[/i\]\[/u\]
+	prefilledtemp.text = {"\[large\]\[center\]\[b\] Warrant for Search and Seizure \[/b]\[/large\]
+
+\[i\]\[u\]NanoTrasen Hypatia Space Station\[/u\]\[/i\]\[/center\]
+\[hr]
+\[br]
+\[i\]Official Requesting the Search:\[/i\] \[field\]
+
+\[i\]Person(s)/area being searched:\[/i\] \[field\]
+
+\[i\]Probable Cause for search:\[/i\] \[field\]
+
+\[br\]
+Officers of NanoTrasen's Hypatia Space Station are commanded to search the following personnel without unnecessary delay.
+\[br\]
+\[b\]Important\[/b\]: Any illegal items found upon the searched individual may be seized by the searching officer and the person being searched is to be arrested for any crimes linked to the item(s).
 \[hr\]
-\[center\]Official Requesting the Search:\[field\]\[/center\]\[br\]
-\[center\]\[i\]Person(s) being searched:\[/i\]\[field\]\[/center\]\[br\]
-\[center\]\[i\]Probable Cause for search:\[/i\]\[field\]\[/center\]
 \[br\]
-Officers of NanoTrasens Hypatia Space Station are commanded to search the following personnel without unnecessary delay. \[field\]\[small\]\[i\](name of person to be searched)\[/small\]\[/i\]\[br\]
-They are accused of having the following items on their being:\[field\]\[br\]
-\[i\]List the facts that give reason for this warrant.Describe the event or suspicion that lead to this warrant:\[/i\]\[field\]
-\[br\]
-\[large\]Important: Any illegal items found upon the searched individual may be seized by the searching officer and the person being searched is to be arrested for any crimes linked to the item(s)
-\[u\]Head of Security Signature:\[/u\]\[field\]\[br\]
-\[u\]Captain/Head of Personnel:\[/u\]\[field\]\[br\]
-\[small\]A Head of Security and Captain (Or Head of Personnel if no Captain is present or physically able) Stamps of Approval is required to make this warrant just and proper. Without these stamps of approval, this warrant cannot be acted on.\[/small\]\[br\]
-\[br\]
-\[center\] Office Information\[/center\]
-\[u\]Date:\[/u\]\[field\]
-\[u\]Time:\[/u\]\[field\]
-\[u\]Search Officer(s):\[/u\]\[field\]\[br\]
-\[br\]
+\[u\]Head of Security Signature:\[/u\] \[field\]
+
+\[u\]Captain/Head of Personnel:\[/u\] \[field\]
+\[br]
+\[small\]A Captain or Head of Personnel signature is required to make this warrant just and proper. Without this signature of approval alongside the Head of Security's signature, this warrant cannot be acted on.\[/small\]
+\[br\]\[br\]
 Note that a warrant is not required to obtain illegal items or objects that are in plain view, may cause danger to the station, or are found through a consented search."}
 
 	prefilledtemp = new /datum/prefilledpaper()
@@ -537,17 +539,17 @@ Note that a warrant is not required to obtain illegal items or objects that are 
 Officers of NanoTrasens Hypatia Space Station are commanded to arrest the following personnel and bring to the stations Brig without unnecessary delay. \[field\]\[small\]\[i\](name of person to be arrested)\[/small\]\[/i\]
 \[br\]
 They are accused of an offense or violation of the following laws of NanoTrasen:(Please write Yes to the crimes committed)\[br\]
-\[center\]Minor Crimes\[/center\]
+\[center]Minor Crimes\[/center]
 \[list\]\[*\]101\[field\]\[*\]102\[field\]\[*\]103\[field\]\[*\]104\[field\]\[*\]105\[field\]\[*\]106\[field\]\[*\]107\[field\]\[*\]108\[field\]\[*\]109\[field\]\[*\]110\[field\]\[*\]111\[field\]\[*\]112\[field\]\[*\]113\[field\]\[*\]114\[field\]\[*\]115\[field\]\[/list\]
 \[hr\]
 \[center\]Medium Crimes\[/center\]
 \[list\]\[*\]201\[field\]\[*\]202\[field\]\[*\]203\[field\]\[*\]204\[field\]\[*\]205\[field\]\[*\]206\[field\]\[*\]207\[field\]\[*\]208\[field\]\[*\]209\[field\]\[*\]210\[field\]\[*\]211\[field\]\[*\]212\[field\]\[*\]213\[field\]\[*\]214\[field\]\[*\]215\[field\]\[*\]216\[field\]\[*\]217\[field\]\[*\]218\[field\]\[*\]219\[field\]\[*\]220\[field\]\[*\]221\[field\]\[/list\]
 \[hr\]
 \[center\]Major Crimes\[/center\]
-\[list\]\[*\]101\[field\]\[*\]102\[field\]\[*\]103\[field\]\[*\]104\[field\]\[*\]105\[field\]\[*\]106\[field\]\[*\]107\[field\]\[*\]108\[field\]\[/list\]
+\[list\]\[*\]301\[field\]\[*\]302\[field\]\[*\]303\[field\]\[*\]304\[field\]\[*\]305\[field\]\[*\]306\[field\]\[*\]307\[field\]\[*\]308\[field\]\[/list\]
 \[hr\]
 \[i\]Briefly describe the event causing the arrest:\[/i\]\[field\]
-\[br\]
+\[br]
 \[u\]Head of Security Signature:\[/u\]\[field\]\[br\]
 \[small\]A Head of Security Stamp of Approval is required to make this warrant just and proper. Without a stamp of approval, this warrant cannot be acted on.\[/small\]\[br\]
 \[br\]
@@ -557,6 +559,36 @@ They are accused of an offense or violation of the following laws of NanoTrasen:
 \[u\]Arresting Officer(s):\[/u\]\[field\]\[br\]
 \[br\]
 Note that a warrant is not required for a crime that was committed in Security's presence, search incident to a lawful arrest, if an illegal act/item is in plain view, emergencies/hot pursuit, or if to prevent danger to the station or crew."}
+
+	prefilledtemp = new /datum/prefilledpaper()
+	prefilledtemp.name = "Security: Investigation/Incident Report"
+	allpapers.Add(prefilledtemp)
+	prefilledtemp.text = {"\[Large\]\[u\]Investigation/Incident Report\[/u\]\[/Large\]\[br\]
+\[br\]
+\[br\]
+Fill in only what applies, otherwise write "N/A'
+Lead Investigator: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Reporting Officer: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Occupation: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Case Number: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+\[br\]
+Parties Involved: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+\[br\]
+Date of Incident: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Type of Incident: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Lead Suspect: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Suspect in Custody: (Y/N) \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+Case Status: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+\[br\]
+Details: \[u\]\[i\]\[field\]\[/i\]\[/u\]\[br\]
+\[br\]
+\[br\]
+\[hr\]
+\[br\]
+Lead Investigator/Reporting Officer's signature: \[field\]\[br\]
+Head of Security's signature: \[field\]\[br\]
+\[br\]
+Note:  Under case status, one of the following should be filled in: Cleared by arrest, cleared by exceptional means, or cold. Cold is self-explanatory, cleared by arrest means that the suspect is in custody, and cleared by exceptional means is defined as 'We know who committed the crime, but for any reason we are not able to fully prove it' such as a witness refusing to come forward, the suspect is deceased, et cetera."}
 
 	prefilledtemp = new /datum/prefilledpaper()
 	prefilledtemp.name = "Security: Emergency Armament"
