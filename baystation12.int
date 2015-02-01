@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;code\controllers\voting.dm;maps\tgstation2.dmm
+WINDOW: code\game\machinery\spacecooler.dm;code\game\turfs\simulated\walls.dm;icons\turf\walls.dmi;maps\tgstation2.dmm;code\game\machinery\camera\camera.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\machinery code\modules code\modules\mining code\modules\supermatter maps 
+DIR: code code\controllers code\game code\game\machinery code\game\machinery\bots code\game\machinery\camera code\game\objects code\game\objects\closets code\game\objects\closets\secure code\game\objects\items code\game\objects\items\devices code\game\objects\items\devices\PDA code\game\turfs code\game\turfs\simulated code\modules code\modules\mining code\modules\supermatter icons icons\turf maps 
 FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1422757055
+LAST_COMPILE_TIME: 1422758772
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
