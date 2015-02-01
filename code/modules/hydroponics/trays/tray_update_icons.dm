@@ -1,8 +1,18 @@
 //Refreshes the icon and sets the luminosity
 /obj/machinery/portable_atmospherics/hydroponics/update_icon()
+	// Update name.
+	if(seed)
+		if(mechanical)
+			name = "[base_name] (#[seed.uid])"
+		else
+			name = "[seed.seed_name]"
+	else
+		name = initial(name)
+
+	if(labelled)
+		name += " ([labelled])"
 
 	overlays.Cut()
-
 	// Updates the plant overlay.
 	if(!isnull(seed))
 

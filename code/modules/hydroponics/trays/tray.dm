@@ -8,6 +8,7 @@
 	volume = 100
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
+	var/base_name = "tray"
 
 	// Plant maintenance vars.
 	var/waterlevel = 100       // Water (max 100)
@@ -19,7 +20,7 @@
 	var/dead = 0               // Is it dead?
 	var/harvest = 0            // Is it ready to harvest?
 	var/age = 0                // Current plant age
-	var/sampled = 0            // Have wa taken a sample?
+	var/sampled = 0            // Have we taken a sample?
 
 	// Harvest/mutation mods.
 	var/yield_mod = 0          // Modifier to yield
@@ -35,6 +36,7 @@
 	var/closed_system          // If set, the tray will attempt to take atmos from a pipe.
 	var/force_update           // Set this to bypass the cycle time check.
 	var/obj/temp_chem_holder   // Something to hold reagents during process_reagents()
+	var/labelled
 
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
@@ -120,6 +122,12 @@
 		"mutagen" = 15
 		)
 
+/obj/machinery/portable_atmospherics/hydroponics/AltClick()
+	if(mechanical && !usr.stat && !usr.lying && Adjacent(usr))
+		close_lid(usr)
+		return
+	return ..()
+
 /obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
 	if(istype(user,/mob/living/carbon/alien/diona))
 		var/mob/living/carbon/alien/diona/nymph = user
@@ -139,15 +147,13 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
-/obj/machinery/portable_atmospherics/hydroponics/proc/can_label()
-	return 1
-
 /obj/machinery/portable_atmospherics/hydroponics/New()
 	..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	create_reagents(200)
-	connect()
+	if(mechanical)
+		connect()
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/bullet_act(var/obj/item/projectile/Proj)
@@ -328,6 +334,22 @@
 	seed.mutate(severity,get_turf(src))
 
 	return
+
+/obj/machinery/portable_atmospherics/hydroponics/verb/remove_label()
+
+	set name = "Remove Label"
+	set category = "Object"
+	set src in view(1)
+
+	if(labelled)
+		usr << "You remove the label."
+		labelled = null
+		update_icon()
+	else
+		usr << "There is no label to remove."
+	return
+
+/obj/machinery/portable_atmospherics/hydroponics/verb/set_light()
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/check_level_sanity()
 	//Make sure various values are sane.
@@ -527,27 +549,29 @@
 
 	..()
 
+	if(!seed)
+		usr << "[src] is empty."
+		return
+
+	usr << "<span class='notice'>[seed.display_name]</span> are growing here.</span>"
+
 	if(!Adjacent(usr))
 		return
 
-	if(seed)
-		usr << "[src] has <span class='notice'>[seed.display_name]</span> planted."
-		if(dead)
-			usr << "<span class='danger'>The plant is dead.</span>"
-		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			usr << "The plant looks <span class='danger'>unhealthy</span>."
-	else
-		usr << "[src] is empty."
 	usr << "Water: [round(waterlevel,0.1)]/100"
 	usr << "Nutrient: [round(nutrilevel,0.1)]/10"
 
 	if(weedlevel >= 5)
-		usr << "[src] is <span class='danger'>infested with weeds</span>!"
+		usr << "\The [src] is <span class='danger'>infested with weeds</span>!"
 	if(pestlevel >= 5)
-		usr << "[src] is <span class='danger'>infested with tiny worms</span>!"
+		usr << "\The [src] is <span class='danger'>infested with tiny worms</span>!"
+
+	if(dead)
+		usr << "<span class='danger'>The plant is dead.</span>"
+	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
+		usr << "The plant looks <span class='danger'>unhealthy</span>."
 
 	if(mechanical)
-
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
@@ -571,14 +595,16 @@
 
 		usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K."
 
-/obj/machinery/portable_atmospherics/hydroponics/verb/close_lid()
+/obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
 	set category = "Object"
 	set src in view(1)
+	close_lid(usr)
 
-	if(!usr || usr.stat || usr.restrained())
+/obj/machinery/portable_atmospherics/hydroponics/proc/close_lid(var/mob/living/user)
+	if(!user || user.stat || user.restrained())
 		return
 
 	closed_system = !closed_system
-	usr << "You [closed_system ? "close" : "open"] the tray's lid."
+	user << "You [closed_system ? "close" : "open"] the tray's lid."
 	update_icon()
