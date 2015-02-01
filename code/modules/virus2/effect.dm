@@ -9,7 +9,7 @@
 
 /datum/disease2/effectholder/proc/runeffect(var/mob/living/carbon/human/mob,var/stage)
 	if(happensonce > -1 && effect.stage <= stage && prob(chance))
-		effect.activate(mob)
+		effect.activate(mob, multiplier)
 		if(happensonce == 1)
 			happensonce = -1
 
@@ -33,14 +33,14 @@
 			multiplier = rand(1,effect.maxm)
 
 /datum/disease2/effectholder/proc/majormutate()
-	getrandomeffect(2)
+	getrandomeffect(3)
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////EFFECTS/////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
 /datum/disease2/effect
-	var/chance_maxm = 50
+	var/chance_maxm = 50 //note that disease effects only proc once every 3 ticks for humans
 	var/name = "Blanking effect"
 	var/stage = 4
 	var/maxm = 1
@@ -56,10 +56,16 @@
 
 ////////////////////////STAGE 4/////////////////////////////////
 
+/datum/disease2/effect/nothing
+	name = "Nil Syndrome"
+	stage = 4
+	badness = 1
+	chance_maxm = 0
+
 /datum/disease2/effect/gibbingtons
 	name = "Gibbingtons Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.gib()
 
@@ -67,19 +73,21 @@
 	name = "Radian's Syndrome"
 	stage = 4
 	maxm = 3
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.radiation += (2*multiplier)
 
 /datum/disease2/effect/deaf
 	name = "Dead Ear Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.ear_deaf += 20
 
 /datum/disease2/effect/monkey
 	name = "Monkism Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob,/mob/living/carbon/human))
 			var/mob/living/carbon/human/h = mob
@@ -88,7 +96,7 @@
 /datum/disease2/effect/suicide
 	name = "Suicidal Syndrome"
 	stage = 4
-	badness = 2
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.suiciding = 1
 		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
@@ -101,12 +109,14 @@
 /datum/disease2/effect/killertoxins
 	name = "Toxification Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss(15*multiplier)
 
 /datum/disease2/effect/dna
 	name = "Reverse Pattern Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.bodytemperature = max(mob.bodytemperature, 350)
 		scramble(0,mob,10)
@@ -115,6 +125,7 @@
 /datum/disease2/effect/organs
 	name = "Shutdown Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -140,6 +151,7 @@
 /datum/disease2/effect/immortal
 	name = "Longevity Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -157,11 +169,10 @@
 		var/backlash_amt = 5*multiplier
 		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
 
-////////////////////////STAGE 3/////////////////////////////////
-
 /datum/disease2/effect/bones
 	name = "Fragile Bones Syndrome"
 	stage = 4
+	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
@@ -173,6 +184,8 @@
 			var/mob/living/carbon/human/H = mob
 			for (var/datum/organ/external/E in H.organs)
 				E.min_broken_damage = initial(E.min_broken_damage)
+
+////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/toxins
 	name = "Hyperacidity"
@@ -192,9 +205,8 @@
 	name = "Telepathy Syndrome"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.dna.check_integrity()
 		mob.dna.SetSEState(REMOTETALKBLOCK,1)
-		domutcheck(mob, null)
+		domutcheck(mob, null, MUTCHK_FORCED)
 
 /datum/disease2/effect/mind
 	name = "Lazy Mind Syndrome"
@@ -239,10 +251,10 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.apply_damage(2, CLONE)
 
-
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"
 	stage = 3
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*groan")
 ////////////////////////STAGE 2/////////////////////////////////
@@ -250,6 +262,7 @@
 /datum/disease2/effect/scream
 	name = "Loudness Syndrome"
 	stage = 2
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*scream")
 
@@ -262,6 +275,7 @@
 /datum/disease2/effect/sleepy
 	name = "Resting Syndrome"
 	stage = 2
+	chance_maxm = 15
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
 
@@ -288,6 +302,7 @@
 /datum/disease2/effect/fridge
 	name = "Refridgerator Syndrome"
 	stage = 2
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*shiver")
 
@@ -333,17 +348,19 @@
 	name = "Flemmingtons"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "\red Mucous runs down the back of your throat."
+		mob << "<span class='warning'>Mucous runs down the back of your throat.</span>"
 
 /datum/disease2/effect/drool
 	name = "Saliva Effect"
 	stage = 1
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*drool")
 
 /datum/disease2/effect/twitch
 	name = "Twitcher"
 	stage = 1
+	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*twitch")
 
@@ -351,4 +368,4 @@
 	name = "Headache"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class = 'notice'> Your head hurts a bit</span>"
+		mob << "<span class='warning'>Your head hurts a bit.</span>"

@@ -234,3 +234,7 @@
 			sight_mode |= module_state_3:sight_mode
 	else
 		src << "<span class='notice'>You need to disable a module first!</span>"
+
+/mob/living/silicon/robot/put_in_hands(var/obj/item/W) // No hands.
+	W.loc = get_turf(src)
+	return 1

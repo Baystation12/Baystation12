@@ -12,15 +12,11 @@
 	if(src.stat == 2)
 		return
 
-	var/list/L = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		L.Add(C)
-
-	camera_sort(L)
+	cameranet.process_sort()
 
 	var/list/T = list()
 	T["Cancel"] = "Cancel"
-	for (var/obj/machinery/camera/C in L)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (tempnetwork.len)
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
@@ -226,7 +222,7 @@ mob/living/proc/near_camera()
 	// Don't detect mobs on Centcom. Since the wizard den is on Centcomm, we only need this.
 	if(InvalidPlayerTurf(get_turf(src)))
 		return TRACKING_TERMINATE
-	if(invisibility >= INVISIBILITY_LEVEL_ONE)//cloaked
+	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
 		return TRACKING_TERMINATE
 	if(digitalcamo)
 		return TRACKING_TERMINATE

@@ -35,7 +35,7 @@
 					var/life_status = "[H.stat > 1 ? "<font color=red>Deceased</font>" : "Living"]"
 					var/damage_report = "(<font color='blue'>[dam1]</font>/<font color='green'>[dam2]</font>/<font color='orange'>[dam3]</font>/<font color='red'>[dam4]</font>)"
 
-					log += "<tr><td width='40%'>[H.get_id_name()]</td>"
+					log += "<tr><td width='40%'>[H.get_authentification_name()] ([H.get_assignment()])</td>"
 
 					switch(C.sensor_mode)
 						if(1)

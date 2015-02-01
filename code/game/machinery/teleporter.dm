@@ -91,7 +91,7 @@
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
-		if(T.z == 2 || T.z > 7)
+		if(!(T.z in config.player_levels))
 			continue
 		var/tmpname = T.loc.name
 		if(areaindex[tmpname])
@@ -118,7 +118,12 @@
 				areaindex[tmpname] = 1
 			L[tmpname] = I
 
-	var/desc = input("Please select a location to lock in.", "Locking Computer") in L
+	var/desc = input("Please select a location to lock in.", "Locking Computer") in L|null
+	if(!desc)
+		return
+	if(get_dist(src, usr) > 1 && !issilicon(usr))
+		return
+
 	src.locked = L[desc]
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\blue Locked In", 2)

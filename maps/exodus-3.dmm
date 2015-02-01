@@ -101,7 +101,7 @@
 "bW" = (/obj/structure/table,/obj/item/weapon/screwdriver,/obj/machinery/light,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bX" = (/obj/structure/table,/obj/item/device/radio/off,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/derelict/ship)
 "bY" = (/obj/structure/lattice,/obj/structure/grille,/turf/space,/area/space)
-"bZ" = (/obj/machinery/power/solar/fake,/turf/simulated/floor{icon_state = "solarpanel"},/area/space)
+"bZ" = (/obj/machinery/power/solar/fake,/turf/simulated/floor/airless{icon_state = "solarpanel"},/area/space)
 "ca" = (/turf/simulated/floor/plating/airless,/area/space)
 "cb" = (/obj/structure/lattice,/obj/structure/grille{density = 0; icon_state = "brokengrille"},/turf/space,/area/space)
 "cc" = (/obj/machinery/camera{c_tag = "North Solars"; dir = 8; network = list("Tcomsat")},/turf/space,/area/space)

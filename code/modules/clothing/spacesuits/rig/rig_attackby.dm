@@ -180,7 +180,7 @@
 					installed_modules -= removed
 					update_icon()
 
-			return
+		return
 
 	// If we've gotten this far, all we have left to do before we pass off to root procs
 	// is check if any of the loaded modules want to use the item we've been given.
