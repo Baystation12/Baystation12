@@ -6,14 +6,14 @@
 	w_class = 3.0
 	throw_speed = 2
 	throw_range = 4
-	flags = FPRINT | TABLEPASS| CONDUCT //Copied this from old code, so this may or may not be necessary
+	flags = CONDUCT //Copied this from old code, so this may or may not be necessary
 	var/status = 0   //0 - not readied //1 - bomb finished with welder
 	var/obj/item/device/assembly_holder/bombassembly = null   //The first part of the bomb is an assembly holder, holding an igniter+some device
 	var/obj/item/weapon/tank/bombtank = null //the second part of the bomb is a phoron tank
 
-/obj/item/device/onetankbomb/examine()
-	..()
-	bombtank.examine()
+/obj/item/device/onetankbomb/examine(mob/user)
+	..(user)
+	user.examinate(bombtank)
 
 /obj/item/device/onetankbomb/update_icon()
 	if(bombtank)

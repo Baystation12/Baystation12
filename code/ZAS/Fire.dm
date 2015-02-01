@@ -161,7 +161,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(!istype(loc, /turf))
 		del src
 
-	dir = pick(cardinal)
+	set_dir(pick(cardinal))
 	SetLuminosity(3)
 	firelevel = fl
 	air_master.active_hotspots.Add(src)

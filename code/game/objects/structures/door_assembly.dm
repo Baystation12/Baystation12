@@ -1,7 +1,6 @@
-obj/structure/door_assembly
-	icon = 'icons/obj/doors/door_assembly.dmi'
-
+/obj/structure/door_assembly
 	name = "airlock assembly"
+	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_as_0"
 	anchored = 0
 	density = 1
@@ -17,120 +16,120 @@ obj/structure/door_assembly
 	New()
 		update_state()
 
-	door_assembly_com
-		base_icon_state = "com"
-		base_name = "Command Airlock"
-		glass_type = "/glass_command"
-		airlock_type = "/command"
+/obj/structure/door_assembly/door_assembly_com
+	base_icon_state = "com"
+	base_name = "Command Airlock"
+	glass_type = "/glass_command"
+	airlock_type = "/command"
 
-	door_assembly_sec
-		base_icon_state = "sec"
-		base_name = "Security Airlock"
-		glass_type = "/glass_security"
-		airlock_type = "/security"
+/obj/structure/door_assembly/door_assembly_sec
+	base_icon_state = "sec"
+	base_name = "Security Airlock"
+	glass_type = "/glass_security"
+	airlock_type = "/security"
 
-	door_assembly_eng
-		base_icon_state = "eng"
-		base_name = "Engineering Airlock"
-		glass_type = "/glass_engineering"
-		airlock_type = "/engineering"
+/obj/structure/door_assembly/door_assembly_eng
+	base_icon_state = "eng"
+	base_name = "Engineering Airlock"
+	glass_type = "/glass_engineering"
+	airlock_type = "/engineering"
 
-	door_assembly_min
-		base_icon_state = "min"
-		base_name = "Mining Airlock"
-		glass_type = "/glass_mining"
-		airlock_type = "/mining"
+/obj/structure/door_assembly/door_assembly_min
+	base_icon_state = "min"
+	base_name = "Mining Airlock"
+	glass_type = "/glass_mining"
+	airlock_type = "/mining"
 
-	door_assembly_atmo
-		base_icon_state = "atmo"
-		base_name = "Atmospherics Airlock"
-		glass_type = "/glass_atmos"
-		airlock_type = "/atmos"
+/obj/structure/door_assembly/door_assembly_atmo
+	base_icon_state = "atmo"
+	base_name = "Atmospherics Airlock"
+	glass_type = "/glass_atmos"
+	airlock_type = "/atmos"
 
-	door_assembly_research
-		base_icon_state = "res"
-		base_name = "Research Airlock"
-		glass_type = "/glass_research"
-		airlock_type = "/research"
+/obj/structure/door_assembly/door_assembly_research
+	base_icon_state = "res"
+	base_name = "Research Airlock"
+	glass_type = "/glass_research"
+	airlock_type = "/research"
 
-	door_assembly_science
-		base_icon_state = "sci"
-		base_name = "Science Airlock"
-		glass_type = "/glass_science"
-		airlock_type = "/science"
+/obj/structure/door_assembly/door_assembly_science
+	base_icon_state = "sci"
+	base_name = "Science Airlock"
+	glass_type = "/glass_science"
+	airlock_type = "/science"
 
-	door_assembly_med
-		base_icon_state = "med"
-		base_name = "Medical Airlock"
-		glass_type = "/glass_medical"
-		airlock_type = "/medical"
+/obj/structure/door_assembly/door_assembly_med
+	base_icon_state = "med"
+	base_name = "Medical Airlock"
+	glass_type = "/glass_medical"
+	airlock_type = "/medical"
 
-	door_assembly_mai
-		base_icon_state = "mai"
-		base_name = "Maintenance Airlock"
-		airlock_type = "/maintenance"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_mai
+	base_icon_state = "mai"
+	base_name = "Maintenance Airlock"
+	airlock_type = "/maintenance"
+	glass = -1
 
-	door_assembly_ext
-		base_icon_state = "ext"
-		base_name = "External Airlock"
-		airlock_type = "/external"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_ext
+	base_icon_state = "ext"
+	base_name = "External Airlock"
+	airlock_type = "/external"
+	glass = -1
 
-	door_assembly_fre
-		base_icon_state = "fre"
-		base_name = "Freezer Airlock"
-		airlock_type = "/freezer"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_fre
+	base_icon_state = "fre"
+	base_name = "Freezer Airlock"
+	airlock_type = "/freezer"
+	glass = -1
 
-	door_assembly_hatch
-		base_icon_state = "hatch"
-		base_name = "Airtight Hatch"
-		airlock_type = "/hatch"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_hatch
+	base_icon_state = "hatch"
+	base_name = "Airtight Hatch"
+	airlock_type = "/hatch"
+	glass = -1
 
-	door_assembly_mhatch
-		base_icon_state = "mhatch"
-		base_name = "Maintenance Hatch"
-		airlock_type = "/maintenance_hatch"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_mhatch
+	base_icon_state = "mhatch"
+	base_name = "Maintenance Hatch"
+	airlock_type = "/maintenance_hatch"
+	glass = -1
 
-	door_assembly_highsecurity // Borrowing this until WJohnston makes sprites for the assembly
-		base_icon_state = "highsec"
-		base_name = "High Security Airlock"
-		airlock_type = "/highsecurity"
-		glass = -1
+/obj/structure/door_assembly/door_assembly_highsecurity // Borrowing this until WJohnston makes sprites for the assembly
+	base_icon_state = "highsec"
+	base_name = "High Security Airlock"
+	airlock_type = "/highsecurity"
+	glass = -1
 
-	multi_tile
-		icon = 'icons/obj/doors/door_assembly2x1.dmi'
-		dir = EAST
-		var/width = 1
+/obj/structure/door_assembly/multi_tile
+	icon = 'icons/obj/doors/door_assembly2x1.dmi'
+	dir = EAST
+	var/width = 1
 
 /*Temporary until we get sprites.
-		glass_type = "/multi_tile/glass"
-		airlock_type = "/multi_tile/maint"
-		glass = 1*/
-		base_icon_state = "g" //Remember to delete this line when reverting "glass" var to 1.
-		airlock_type = "/multi_tile/glass"
-		glass = -1 //To prevent bugs in deconstruction process.
+	glass_type = "/multi_tile/glass"
+	airlock_type = "/multi_tile/maint"
+	glass = 1*/
+	base_icon_state = "g" //Remember to delete this line when reverting "glass" var to 1.
+	airlock_type = "/multi_tile/glass"
+	glass = -1 //To prevent bugs in deconstruction process.
 
-		New()
-			if(dir in list(EAST, WEST))
-				bound_width = width * world.icon_size
-				bound_height = world.icon_size
-			else
-				bound_width = world.icon_size
-				bound_height = width * world.icon_size
-			update_state()
+	New()
+		if(dir in list(EAST, WEST))
+			bound_width = width * world.icon_size
+			bound_height = world.icon_size
+		else
+			bound_width = world.icon_size
+			bound_height = width * world.icon_size
+		update_state()
 
-		Move()
-			. = ..()
-			if(dir in list(EAST, WEST))
-				bound_width = width * world.icon_size
-				bound_height = world.icon_size
-			else
-				bound_width = world.icon_size
-				bound_height = width * world.icon_size
+	Move()
+		. = ..()
+		if(dir in list(EAST, WEST))
+			bound_width = width * world.icon_size
+			bound_height = world.icon_size
+		else
+			bound_width = world.icon_size
+			bound_height = width * world.icon_size
 
 
 
@@ -205,7 +204,7 @@ obj/structure/door_assembly
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
-	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1 && W:icon_state != "door_electronics_smoked")
+	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1)
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
 
@@ -219,6 +218,12 @@ obj/structure/door_assembly
 			src.electronics = W
 
 	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
+		//This should never happen, but just in case I guess
+		if (!electronics)
+			user << "<span class='notice'>There was nothing to remove.</span>"
+			src.state = 1
+			return
+
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove the electronics from the airlock assembly.")
 
@@ -227,13 +232,8 @@ obj/structure/door_assembly
 			user << "\blue You removed the airlock electronics!"
 			src.state = 1
 			src.name = "Wired Airlock Assembly"
-			var/obj/item/weapon/airlock_electronics/ae
-			if (!electronics)
-				ae = new/obj/item/weapon/airlock_electronics( src.loc )
-			else
-				ae = electronics
-				electronics = null
-				ae.loc = src.loc
+			electronics.loc = src.loc
+			electronics = null
 
 	else if(istype(W, /obj/item/stack/sheet) && !glass)
 		var/obj/item/stack/sheet/S = W
@@ -270,23 +270,9 @@ obj/structure/door_assembly
 				path = text2path("/obj/machinery/door/airlock[glass_type]")
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
-			
-			var/obj/machinery/door/airlock/door = new path(src.loc)
-			
-			door.assembly_type = type
-			door.electronics = src.electronics
-			if (istype(electronics, /obj/item/weapon/airlock_electronics/secure))
-				door.randomize_wires()
-			if(src.electronics.one_access)
-				door.req_access = null
-				door.req_one_access = src.electronics.conf_access
-			else
-				door.req_access = src.electronics.conf_access
-			if(created_name)
-				door.name = created_name
-			else
-				door.name = "[istext(glass) ? "[glass] airlock" : base_name]"
-			src.electronics.loc = door
+
+			var/obj/machinery/door/new_airlock = new path(src.loc, src)
+			new_airlock.dir = src.dir
 			del(src)
 	else
 		..()

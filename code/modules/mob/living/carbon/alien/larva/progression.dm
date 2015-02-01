@@ -1,8 +1,3 @@
-/mob/living/carbon/alien/larva/update_progression()
-	if(amount_grown < max_grown)
-		amount_grown++
-	return
-
 /mob/living/carbon/alien/larva/confirm_evolution()
 
 	src << "\blue <b>You are growing into a beautiful alien! It is time to choose a caste.</b>"

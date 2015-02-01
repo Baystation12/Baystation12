@@ -55,7 +55,7 @@
 	item_state = "flashbang"
 	throw_speed = 4
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
 /obj/item/weapon/firbang/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
@@ -76,7 +76,7 @@
 			spawn( src.det_time )
 				prime()
 				return
-		user.dir = get_dir(user, target)
+		user.set_dir(get_dir(user, target))
 		user.drop_item()
 		var/t = (isturf(target) ? target : target.loc)
 		walk_towards(src, t, 3)

@@ -23,11 +23,9 @@
 		return
 
 
-	examine()
-		set src in usr
-		..()
-		if(air_contents.gas["oxygen"] < 10)
-			usr << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+	examine(mob/user)
+		if(..(user, 0) && air_contents.gas["oxygen"] < 10)
+			user << text("\red <B>The meter on the [src.name] indicates you are almost out of oxygen!</B>")
 			//playsound(usr, 'sound/effects/alert.ogg', 50, 1)
 
 
@@ -67,12 +65,10 @@
 	icon_state = "oxygen"
 
 
-	examine()
-		set src in usr
-		..()
-		if(air_contents.gas["oxygen"] < 1 && loc==usr)
-			usr << "\red <B>The meter on the [src.name] indicates you are almost out of air!</B>"
-			usr << sound('sound/effects/alert.ogg')
+	examine(mob/user)
+		if(..(user, 0) && air_contents.gas["oxygen"] < 1 && loc==user)
+			user << "\red <B>The meter on the [src.name] indicates you are almost out of air!</B>"
+			user << sound('sound/effects/alert.ogg')
 
 /obj/item/weapon/tank/air/New()
 	..()
@@ -89,7 +85,7 @@
 	name = "phoron tank"
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = null	//they have no straps!
 
 
@@ -118,7 +114,7 @@
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 2.0
 	force = 4.0
@@ -133,12 +129,10 @@
 		return
 
 
-	examine()
-		set src in usr
-		..()
-		if(air_contents.gas["oxygen"] < 0.2 && loc==usr)
-			usr << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
-			usr << sound('sound/effects/alert.ogg')
+	examine(mob/user)
+		if(..(user, 0) && air_contents.gas["oxygen"] < 0.2 && loc==user)
+			user << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
+			user << sound('sound/effects/alert.ogg')
 
 /obj/item/weapon/tank/emergency_oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
@@ -166,9 +160,7 @@
 	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
 	return
 
-/obj/item/weapon/tank/nitrogen/examine()
-	set src in usr
-	..()
-	if(air_contents.gas["nitrogen"] < 10)
-		usr << text("\red <B>The meter on the [src.name] indicates you are almost out of air!</B>")
-		//playsound(usr, 'sound/effects/alert.ogg', 50, 1)
+/obj/item/weapon/tank/nitrogen/examine(mob/user)
+	if(..(user, 0) && air_contents.gas["nitrogen"] < 10)
+		user << text("\red <B>The meter on the [src.name] indicates you are almost out of nitrogen!</B>")
+		//playsound(user, 'sound/effects/alert.ogg', 50, 1)

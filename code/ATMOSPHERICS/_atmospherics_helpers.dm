@@ -9,6 +9,7 @@
 
 
 /obj/machinery/atmospherics/var/last_flow_rate = 0
+/obj/machinery/atmospherics/var/last_power_draw = 0
 /obj/machinery/portable_atmospherics/var/last_flow_rate = 0
 
 
@@ -390,21 +391,13 @@
 
 	return specific_power
 
-//This proc handles power usages.
-//Calling update_use_power() or use_power() too often will result in lag since updating area power can be costly.
-//This proc implements an approximation scheme that will cause area power updates to be triggered less often.
-//By having atmos machinery use this proc it is easy to change the power usage approximation for all atmos machines
-/obj/machinery/proc/handle_power_draw(var/usage_amount)
-	//This code errs on the side of using more power. Using this will mean that sometimes atmos machines use more power than they need, but won't get power for free.
-	if (usage_amount > idle_power_usage)
-		update_use_power(2)
-	else
-		if (use_power >= 2)
-			use_power = 1	//Don't update here. We will use more power than we are supposed to, but trigger less area power updates.
-		else
-			update_use_power(1)
-
-	switch (use_power)
-		if (0) return 0
-		if (1) return idle_power_usage
-		if (2 to INFINITY) return max(idle_power_usage, usage_amount)
+//Calculates the APPROXIMATE amount of moles that would need to be transferred to change the pressure of sink by pressure_delta
+//If set, sink_volume_mod adjusts the effective output volume used in the calculation. This is useful when the output gas_mixture is 
+//part of a pipenetwork, and so it's volume isn't representative of the actual volume since the gas will be shared across the pipenetwork when it processes.
+/proc/calculate_transfer_moles(datum/gas_mixture/source, datum/gas_mixture/sink, var/pressure_delta, var/sink_volume_mod=0)
+	//Make the approximation that the sink temperature is unchanged after transferring gas
+	var/air_temperature = (sink.temperature > 0)? sink.temperature : source.temperature
+	var/output_volume = (sink.volume * sink.group_multiplier) + sink_volume_mod
+		
+	//get the number of moles that would have to be transfered to bring sink to the target pressure
+	return pressure_delta*output_volume/(air_temperature * R_IDEAL_GAS_EQUATION)

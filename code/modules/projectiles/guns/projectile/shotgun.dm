@@ -6,7 +6,7 @@
 	max_shells = 4
 	w_class = 4.0
 	force = 10
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
 	origin_tech = "combat=4;materials=2"
@@ -66,7 +66,7 @@
 	max_shells = 2
 	w_class = 4.0
 	force = 10
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
 	origin_tech = "combat=3;materials=1"
@@ -91,7 +91,6 @@
 
 		if(AC.BB)
 			in_chamber = AC.BB //Load projectile into chamber.
-			AC.BB.loc = src //Set projectile loc to gun.
 			return 1
 		return 0
 

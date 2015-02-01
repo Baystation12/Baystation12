@@ -52,7 +52,7 @@
 //Radio
 	using = new src.h_type( src )
 	using.name = "radio"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "radio"
 	using.screen_loc = ui_movi_old
@@ -62,21 +62,21 @@
 //Generic overlays
 
 	using = new src.h_type(src) //Right hud bar
-	using.dir = SOUTH
+	using.set_dir(SOUTH)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.screen_loc = "EAST+1,SOUTH to EAST+1,NORTH"
 	using.layer = 19
 	src.adding += using
 
 	using = new src.h_type(src) //Lower hud bar
-	using.dir = EAST
+	using.set_dir(EAST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.screen_loc = "WEST,SOUTH-1 to EAST,SOUTH-1"
 	using.layer = 19
 	src.adding += using
 
 	using = new src.h_type(src) //Corner Button
-	using.dir = NORTHWEST
+	using.set_dir(NORTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.screen_loc = "EAST+1,SOUTH-1"
 	using.layer = 19
@@ -87,7 +87,7 @@
 
 	using = new src.h_type( src )
 	using.name = "module1"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
@@ -97,7 +97,7 @@
 
 	using = new src.h_type( src )
 	using.name = "module2"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
@@ -107,7 +107,7 @@
 
 	using = new src.h_type( src )
 	using.name = "module3"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
@@ -120,7 +120,7 @@
 //Intent
 	using = new src.h_type( src )
 	using.name = "act_intent"
-	using.dir = SOUTHWEST
+	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = (mymob.a_intent == "hurt" ? "harm" : mymob.a_intent)
 	using.screen_loc = ui_acti
@@ -132,7 +132,7 @@
 	using.name = "arrowleft"
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "s_arrow"
-	using.dir = WEST
+	using.set_dir(WEST)
 	using.screen_loc = ui_iarrowleft
 	using.layer = 19
 	src.adding += using
@@ -141,7 +141,7 @@
 	using.name = "arrowright"
 	using.icon = 'icons/mob/screen1_robot.dmi'
 	using.icon_state = "s_arrow"
-	using.dir = EAST
+	using.set_dir(EAST)
 	using.screen_loc = ui_iarrowright
 	using.layer = 19
 	src.adding += using

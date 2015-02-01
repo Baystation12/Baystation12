@@ -1,5 +1,5 @@
 /obj/random
-	name = "Random Object"
+	name = "random object"
 	desc = "This item type is used to spawn random objects at round-start"
 	icon = 'icons/misc/mark.dmi'
 	icon_state = "rup"
@@ -26,7 +26,7 @@
 
 
 /obj/random/tool
-	name = "Random Tool"
+	name = "random tool"
 	desc = "This is a random tool"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "welder"
@@ -40,7 +40,7 @@
 
 
 /obj/random/technology_scanner
-	name = "Random Scanner"
+	name = "random scanner"
 	desc = "This is a random technology scanner."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "atmos"
@@ -51,7 +51,7 @@
 
 
 /obj/random/powercell
-	name = "Random Powercell"
+	name = "random powercell"
 	desc = "This is a random powercell."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cell"
@@ -64,7 +64,7 @@
 
 
 /obj/random/bomb_supply
-	name = "Bomb Supply"
+	name = "bomb supply"
 	desc = "This is a random bomb supply."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = "signaller"
@@ -76,7 +76,7 @@
 
 
 /obj/random/toolbox
-	name = "Random Toolbox"
+	name = "random toolbox"
 	desc = "This is a random toolbox."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
@@ -87,7 +87,7 @@
 
 
 /obj/random/tech_supply
-	name = "Random Tech Supply"
+	name = "random tech supply"
 	desc = "This is a random piece of technology supplies."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "cell"
@@ -102,4 +102,5 @@
 					prob(3);/obj/item/stack/cable_coil,\
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
-					prob(5);/obj/random/tool)
+					prob(5);/obj/random/tool,\
+					prob(2);/obj/item/weapon/tape_roll)

@@ -80,9 +80,6 @@
 	else
 		..()
 
-/obj/machinery/shield_gen/attack_paw(user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/shield_gen/attack_ai(user as mob)
 	return src.attack_hand(user)
 
@@ -146,16 +143,16 @@
 		//figure out how much energy we need to draw from the capacitor
 		if(active && owned_capacitor && owned_capacitor.active)
 			var/target_renwick_increase = min(target_field_strength - average_field_strength, strengthen_rate) + renwick_upkeep_per_field //per field tile
-		
+
 			var/required_energy = field.len * target_renwick_increase / energy_conversion_rate
 			var/assumed_charge = min(owned_capacitor.stored_charge, required_energy)
 			total_renwick_increase = assumed_charge * energy_conversion_rate
 			owned_capacitor.stored_charge -= assumed_charge
 		else
 			renwick_upkeep_per_field = max(renwick_upkeep_per_field, 0.5)
-		
+
 		var/renwick_increase_per_field = total_renwick_increase/field.len //per field tile
-		
+
 		average_field_strength = 0 //recalculate the average field strength
 		for(var/obj/effect/energy_field/E in field)
 			var/amount_to_strengthen = renwick_increase_per_field - renwick_upkeep_per_field
@@ -164,7 +161,7 @@
 				E.ticks_recovering -= 1
 			else
 				E.Strengthen(amount_to_strengthen)
-			
+
 			average_field_strength += E.strength
 
 		average_field_strength /= field.len
@@ -190,7 +187,7 @@
 		strengthen_rate = between(0,  strengthen_rate + text2num(href_list["strengthen_rate"]), max_strengthen_rate)
 	else if( href_list["target_field_strength"] )
 		target_field_strength = between(1, target_field_strength + text2num(href_list["target_field_strength"]), max_field_strength)
-	
+
 	updateDialog()
 
 /obj/machinery/shield_gen/ex_act(var/severity)
@@ -236,24 +233,24 @@
 //grab the border tiles in a circle around this machine
 /obj/machinery/shield_gen/proc/get_shielded_turfs()
 	var/list/out = list()
-	
+
 	var/turf/gen_turf = get_turf(src)
 	if (!gen_turf)
 		return
-	
+
 	var/turf/T
 	for (var/x_offset = -field_radius; x_offset <= field_radius; x_offset++)
 		T = locate(gen_turf.x + x_offset, gen_turf.y - field_radius, gen_turf.z)
 		if (T) out += T
-		
+
 		T = locate(gen_turf.x + x_offset, gen_turf.y + field_radius, gen_turf.z)
 		if (T) out += T
-	
+
 	for (var/y_offset = -field_radius+1; y_offset < field_radius; y_offset++)
 		T = locate(gen_turf.x - field_radius, gen_turf.y + y_offset, gen_turf.z)
 		if (T) out += T
-		
+
 		T = locate(gen_turf.x + field_radius, gen_turf.y + y_offset, gen_turf.z)
 		if (T) out += T
-	
+
 	return out

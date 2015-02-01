@@ -14,9 +14,9 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
-	response_help  = "pets the"
-	response_disarm = "gently pushes aside the"
-	response_harm   = "pokes the"
+	response_help  = "pets"
+	response_disarm = "gently pushes aside"
+	response_harm   = "pokes"
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 60
 	health = 60
@@ -74,7 +74,7 @@
 					stance_step = max(0, stance_step) //If we have not seen a mob in a while, the stance_step will be negative, we need to reset it to 0 as soon as we see a mob again.
 					stance_step++
 					found_mob = 1
-					src.dir = get_dir(src,target_mob)	//Keep staring at the mob
+					src.set_dir(get_dir(src,target_mob))	//Keep staring at the mob
 
 					if(stance_step in list(1,4,7)) //every 3 ticks
 						var/action = pick( list( "growls at [target_mob]", "stares angrily at [target_mob]", "prepares to attack [target_mob]", "closely watches [target_mob]" ) )
@@ -90,7 +90,7 @@
 
 		if(HOSTILE_STANCE_ATTACKING)
 			if(stance_step >= 20)	//attacks for 20 ticks, then it gets tired and needs to rest
-				custom_emote(1, "is worn out and needs to rest" )
+				custom_emote(1, "is worn out and needs to rest." )
 				stance = HOSTILE_STANCE_TIRED
 				stance_step = 0
 				walk(src, 0) //This stops the bear's walking
@@ -141,10 +141,10 @@
 		var/mob/living/L = target_mob
 		L.adjustBruteLoss(damage)
 		return L
-	else if(istype(target_mob,/obj/mecha))
-		var/obj/mecha/M = target_mob
-		M.attack_animal(src)
-		return M
+	//else if(istype(target_mob,/obj/mecha))
+		//var/obj/mecha/M = target_mob
+		//M.attack_animal(src)
+		//return M
 
 
 

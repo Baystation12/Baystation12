@@ -63,16 +63,13 @@
 		user.visible_message("\blue [user] gathers up[could_fill ? " " : " most of "]the pile of items and puts it into [src].")
 		update_icon()
 
-	examine()
-		set src in view()
-		..()
-		if(src in usr)
-			usr << "It claims to contain [contents.len ? descriptor : descriptor + "... but it looks empty"]."
-			if(seal_torn && !contents.len)
-				usr << "The seal on the bag is broken."
-			else
-				usr << "The seal on the bag is[seal_torn ? ", however, not intact" : " intact"]."
-		return
+	examine(mob/user)
+		..(user)
+		user << "It claims to contain [contents.len ? descriptor : descriptor + "... but it looks empty"]."
+		if(seal_torn && !contents.len)
+			user << "The seal on the bag is broken."
+		else
+			user << "The seal on the bag is[seal_torn ? ", however, not intact" : " intact"]."
 
 	update_icon()
 		if(contents.len)

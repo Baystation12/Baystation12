@@ -5,7 +5,7 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	w_class = 5.0
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
 	fire_sound = 'sound/weapons/tablehit1.ogg'
@@ -14,7 +14,7 @@
 	var/max_w_class = 3                                 // Hopper intake size.
 	var/max_combined_w_class = 20                       // Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
-	var/obj/item/weapon/storage/tank_container = new()  // Something to hold the tank item so we don't accidentally fire it.
+	var/obj/item/weapon/storage/tank_container  // Something to hold the tank item so we don't accidentally fire it.
 	var/pressure_setting = 10                           // Percentage of the gas in the tank used to fire the projectile.
 	var/possible_pressure_amounts = list(5,10,20,25,50) // Possible pressure settings.
 	var/minimum_tank_pressure = 10                      // Minimum pressure to fire the gun.
@@ -23,10 +23,10 @@
 	                                                    // analyzer with a force_divisor of 10 hit with a damage multiplier of 3000+.
 /obj/item/weapon/gun/launcher/pneumatic/New()
 	..()
+	tank_container = new(src)
 	tank_container.tag = "gas_tank_holder"
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.
-
 	set name = "Set Valve Pressure"
 	set category = "Object"
 	set src in range(0)
@@ -36,7 +36,6 @@
 		usr << "You dial the pressure valve to [pressure_setting]%."
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/eject_tank() //Remove the tank.
-
 	set name = "Eject Tank"
 	set category = "Object"
 	set src in range(0)
@@ -78,7 +77,6 @@
 		user << "That won't fit into the hopper."
 
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)
-
 	if(contents.len > 0)
 		var/obj/item/removing = contents[contents.len]
 		if(removing == in_chamber)
@@ -98,15 +96,14 @@
 	in_chamber = contents[1]
 	return !isnull(in_chamber)
 
-/obj/item/weapon/gun/launcher/pneumatic/examine()
-	set src in view()
-	..()
-	if (!(usr in view(2)) && usr!=src.loc) return
-	usr << "The valve is dialed to [pressure_setting]%."
+/obj/item/weapon/gun/launcher/pneumatic/examine(mob/user)
+	if(!..(user, 2))
+		return
+	user << "The valve is dialed to [pressure_setting]%."
 	if(tank)
-		usr << "The tank dial reads [tank.air_contents.return_pressure()] kPa."
+		user << "The tank dial reads [tank.air_contents.return_pressure()] kPa."
 	else
-		usr << "Nothing is attached to the tank valve!"
+		user << "Nothing is attached to the tank valve!"
 
 /obj/item/weapon/gun/launcher/pneumatic/special_check(user)
 
@@ -147,14 +144,14 @@
 /obj/item/weapon/cannonframe/update_icon()
 	icon_state = "pneumatic[buildstate]"
 
-/obj/item/weapon/cannonframe/examine()
-	..()
+/obj/item/weapon/cannonframe/examine(mob/user)
+	..(user)
 	switch(buildstate)
-		if(1) usr << "It has a pipe segment installed."
-		if(2) usr << "It has a pipe segment welded in place."
-		if(3) usr << "It has an outer chassis installed."
-		if(4) usr << "It has an outer chassis welded in place."
-		if(5) usr << "It has a transfer valve installed."
+		if(1) user << "It has a pipe segment installed."
+		if(2) user << "It has a pipe segment welded in place."
+		if(3) user << "It has an outer chassis installed."
+		if(4) user << "It has an outer chassis welded in place."
+		if(5) user << "It has a transfer valve installed."
 
 /obj/item/weapon/cannonframe/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/pipe))

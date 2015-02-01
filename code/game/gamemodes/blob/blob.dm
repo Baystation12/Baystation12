@@ -82,7 +82,7 @@ var/list/blob_nodes = list()
 			sleep(-1)
 			if(!blobs.len)	break
 			var/obj/effect/blob/B = pick(blobs)
-			if(B.z != 1)
+			if(isNotStationLevel(B.z))
 				continue
 			B.Life()
 

@@ -4,7 +4,9 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
+	var/dryname = "dried blood"
 	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
+	var/drydesc = "It's dry and crusty. Someone is not doing their job."
 	gender = PLURAL
 	density = 0
 	anchored = 1
@@ -29,8 +31,6 @@ var/global/list/image/splatter_cache=list()
 	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
-	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
-		return // We handle our own drying.
 	if(src.type == /obj/effect/decal/cleanable/blood)
 		if(src.loc && isturf(src.loc))
 			for(var/obj/effect/decal/cleanable/blood/B in src.loc)
@@ -87,10 +87,10 @@ var/global/list/image/splatter_cache=list()
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
-		name = "dried [src.name]"
-		desc = "It's dry and crusty. Someone is not doing their job."
-		color = adjust_brightness(color, -50)
-		amount = 0
+	name = dryname
+	desc = drydesc
+	color = adjust_brightness(color, -50)
+	amount = 0
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
@@ -114,13 +114,19 @@ var/global/list/image/splatter_cache=list()
         amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
-        name = "drips of blood"
-        desc = "It's red."
-        gender = PLURAL
-        icon = 'icons/effects/drip.dmi'
-        icon_state = "1"
-        random_icon_states = list("1","2","3","4","5")
-        amount = 0
+	name = "drips of blood"
+	desc = "It's red."
+	gender = PLURAL
+	icon = 'icons/effects/drip.dmi'
+	icon_state = "1"
+	random_icon_states = list("1","2","3","4","5")
+	amount = 0
+	var/list/drips = list()
+
+/obj/effect/decal/cleanable/blood/drip/New()
+	..()
+	spawn(1)
+		drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing
 	icon_state = "tracks"
@@ -139,9 +145,9 @@ var/global/list/image/splatter_cache=list()
 	else
 		icon_state = "writing1"
 
-/obj/effect/decal/cleanable/blood/writing/examine()
-	..()
-	usr << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
+/obj/effect/decal/cleanable/blood/writing/examine(mob/user)
+	..(user)
+	user << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"

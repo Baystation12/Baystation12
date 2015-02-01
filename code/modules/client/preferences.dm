@@ -11,16 +11,15 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"malf AI" = IS_MODE_COMPILED("malfunction"),         // 4
 	"revolutionary" = IS_MODE_COMPILED("revolution"),    // 5
 	"alien candidate" = 1, //always show                 // 6
-	"pAI candidate" = 1, // -- TLE                       // 7
+	"positronic brain" = 1,                              // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",                                    // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
 	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
+	"pAI candidate" = 1, // -- TLE                       // 14
 )
-
-var/const/MAX_SAVE_SLOTS = 10
 
 //used for alternate_option
 #define GET_RANDOM_JOB 0
@@ -41,7 +40,7 @@ datum/preferences
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
-	var/ooccolor = "#b82e00"
+	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
@@ -74,6 +73,7 @@ datum/preferences
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"               //Species datum to use.
+	var/species_preview                 //Used for the species selection window.
 	var/language = "None"				//Secondary language
 	var/list/gear						//Custom/fluff item loadout.
 
@@ -114,6 +114,7 @@ datum/preferences
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/list/flavor_texts = list()
+	var/list/flavour_texts_robot = list()
 
 	var/med_record = ""
 	var/sec_record = ""
@@ -138,7 +139,7 @@ datum/preferences
 				if(load_character())
 					return
 	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender)
+	real_name = random_name(gender,species)
 
 	gear = list()
 
@@ -302,7 +303,7 @@ datum/preferences
 	dat += "<br><table><tr><td><b>Body</b> "
 	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 	dat += "<br>"
-	dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
+	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
 	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 	dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
@@ -397,6 +398,7 @@ datum/preferences
 	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
+	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
 
 	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
 	dat += "<br>"
@@ -430,11 +432,8 @@ datum/preferences
 		var/n = 0
 		for (var/i in special_roles)
 			if(special_roles[i]) //if mode is available on the server
-				if(jobban_isbanned(user, i))
-					dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
-				else if(i == "pai candidate")
-					if(jobban_isbanned(user, "pAI"))
-						dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
+				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
+					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
 				else
 					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 			n++
@@ -509,6 +508,8 @@ datum/preferences
 				HTML += " <font color=green>\[Yes]</font>"
 			else
 				HTML += " <font color=red>\[No]</font>"
+			if(job.alt_titles) //Blatantly cloned from a few lines down.
+				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 			continue
 
@@ -588,6 +589,70 @@ datum/preferences
 	user << browse(HTML, "window=records;size=350x300")
 	return
 
+/datum/preferences/proc/SetSpecies(mob/user)
+	if(!species_preview || !(species_preview in all_species))
+		species_preview = "Human"
+	var/datum/species/current_species = all_species[species_preview]
+	var/dat = "<body>"
+	dat += "<center><h2>[current_species.name] \[<a href='?src=\ref[user];preference=species;task=change'>change</a>\]</h2></center><hr/>"
+	dat += "<table padding='8px'>"
+	dat += "<tr>"
+	dat += "<td width = 400>[current_species.blurb]</td>"
+	dat += "<td width = 200 align='center'>"
+	if("preview" in icon_states(current_species.icobase))
+		usr << browse_rsc(icon(current_species.icobase,"preview"), "species_preview_[current_species.name].png")
+		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
+	dat += "<b>Language:</b> [current_species.language]<br/>"
+	dat += "<small>"
+	if(current_species.flags & CAN_JOIN)
+		dat += "</br><b>Often present on human stations.</b>"
+	if(current_species.flags & IS_WHITELISTED)
+		dat += "</br><b>Whitelist restricted.</b>"
+	if(current_species.flags & NO_BLOOD)
+		dat += "</br><b>Does not have blood.</b>"
+	if(current_species.flags & NO_BREATHE)
+		dat += "</br><b>Does not breathe.</b>"
+	if(current_species.flags & NO_SCAN)
+		dat += "</br><b>Does not have DNA.</b>"
+	if(current_species.flags & NO_PAIN)
+		dat += "</br><b>Does not feel pain.</b>"
+	if(current_species.flags & NO_SLIP)
+		dat += "</br><b>Has excellent traction.</b>"
+	if(current_species.flags & NO_POISON)
+		dat += "</br><b>Immune to most poisons.</b>"
+	if(current_species.flags & HAS_SKIN_TONE)
+		dat += "</br><b>Has a variety of skin tones.</b>"
+	if(current_species.flags & HAS_SKIN_COLOR)
+		dat += "</br><b>Has a variety of skin colours.</b>"
+	if(current_species.flags & HAS_EYE_COLOR)
+		dat += "</br><b>Has a variety of eye colours.</b>"
+	if(current_species.flags & IS_PLANT)
+		dat += "</br><b>Has a plantlike physiology.</b>"
+	if(current_species.flags & IS_SYNTHETIC)
+		dat += "</br><b>Is machine-based.</b>"
+	dat += "</small></td>"
+	dat += "</tr>"
+	dat += "</table><center><hr/>"
+
+	var/restricted = 0
+	if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
+		if(!(current_species.flags & CAN_JOIN))
+			restricted = 2
+		else if((current_species.flags & IS_WHITELISTED) && !is_alien_whitelisted(user,current_species))
+			restricted = 1
+
+	if(restricted)
+		if(restricted == 1)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='?src=\ref[user];preference=open_whitelist_forum'>the forums</a>.</small></b></font></br>"
+		else if(restricted == 2)
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font></br>"
+	if(!restricted || check_rights(R_ADMIN, 0))
+		dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
+	dat += "</center></body>"
+
+	user << browse(null, "window=preferences")
+	user << browse(dat, "window=species;size=700x400")
+
 /datum/preferences/proc/SetAntagoptions(mob/user)
 	if(uplinklocation == "" || !uplinklocation)
 		uplinklocation = "PDA"
@@ -650,6 +715,25 @@ datum/preferences
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=flavor_text;size=430x300")
+	return
+
+/datum/preferences/proc/SetFlavourTextRobot(mob/user)
+	var/HTML = "<body>"
+	HTML += "<tt><center>"
+	HTML += "<b>Set Robot Flavour Text</b> <hr />"
+	HTML += "<br></center>"
+	HTML += "<a href ='byond://?src=\ref[user];preference=flavour_text_robot;task=Default'>Default:</a> "
+	HTML += TextPreview(flavour_texts_robot["Default"])
+	HTML += "<hr />"
+	for(var/module in robot_module_types)
+		HTML += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=[module]'>[module]:</a> "
+		HTML += TextPreview(flavour_texts_robot[module])
+		HTML += "<br>"
+	HTML += "<hr />"
+	HTML +="<a href='?src=\ref[user];preference=flavour_text_robot;task=done'>\[Done\]</a>"
+	HTML += "<tt>"
+	user << browse(null, "window=preferences")
+	user << browse(HTML, "window=flavour_text_robot;size=430x300")
 	return
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
@@ -788,6 +872,14 @@ datum/preferences
 	if(!user)	return
 
 	if(!istype(user, /mob/new_player))	return
+
+	if(href_list["preference"] == "open_whitelist_forum")
+		if(config.forumurl)
+			user << link(config.forumurl)
+		else
+			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			return
+
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
 			if("close")
@@ -918,6 +1010,30 @@ datum/preferences
 		SetFlavorText(user)
 		return
 
+	else if(href_list["preference"] == "flavour_text_robot")
+		switch(href_list["task"])
+			if("open")
+				SetFlavourTextRobot(user)
+				return
+			if("done")
+				user << browse(null, "window=flavour_text_robot")
+				ShowChoices(user)
+				return
+			if("Default")
+				var/msg = input(usr,"Set the default flavour text for your robot. It will be used for any module without individual setting.","Flavour Text",html_decode(flavour_texts_robot["Default"])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				flavour_texts_robot[href_list["task"]] = msg
+			else
+				var/msg = input(usr,"Set the flavour text for your robot with [href_list["task"]] module. If you leave this empty, default flavour text will be used for this module.","Flavour Text",html_decode(flavour_texts_robot[href_list["task"]])) as message
+				if(msg != null)
+					msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+					msg = html_encode(msg)
+				flavour_texts_robot[href_list["task"]] = msg
+		SetFlavourTextRobot(user)
+		return
+
 	else if(href_list["preference"] == "pAI")
 		paiController.recruitWindow(user, 0)
 		return 1
@@ -1035,10 +1151,18 @@ datum/preferences
 					break
 
 	switch(href_list["task"])
+		if("change")
+			if(href_list["preference"] == "species")
+				// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
+				var/choice = input("Which species would you like to look at?") as null|anything in playable_species
+				if(!choice) return
+				species_preview = choice
+				SetSpecies(user)
+
 		if("random")
 			switch(href_list["preference"])
 				if("name")
-					real_name = random_name(gender)
+					real_name = random_name(gender,species)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
 				if("hair")
@@ -1090,24 +1214,11 @@ datum/preferences
 					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
+
 				if("species")
-
-					var/list/new_species = list("Human")
+					user << browse(null, "window=species")
 					var/prev_species = species
-					var/whitelisted = 0
-
-					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-						for(var/S in whitelisted_species)
-							if(is_alien_whitelisted(user,S))
-								new_species += S
-								whitelisted = 1
-						if(!whitelisted)
-							alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-					else //Not using the whitelist? Aliens for everyone!
-						new_species = whitelisted_species
-
-					species = input("Please select a species", "Character Generation", null) in new_species
-
+					species = href_list["newspecies"]
 					if(prev_species != species)
 						//grab one of the valid hair styles for the newly chosen species
 						var/list/valid_hairstyles = list()
@@ -1510,7 +1621,7 @@ datum/preferences
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, safety = 0)
 	if(be_random_name)
-		real_name = random_name(gender)
+		real_name = random_name(gender,species)
 
 	if(config.humans_need_surnames)
 		var/firstspace = findtext(real_name, " ")
@@ -1577,8 +1688,8 @@ datum/preferences
 
 	for(var/name in organ_data)
 
-		var/status = organ_data[name]		
-		var/datum/organ/external/O = character.organs_by_name[name]		
+		var/status = organ_data[name]
+		var/datum/organ/external/O = character.organs_by_name[name]
 		if(O)
 			if(status == "amputated")
 				O.amputated = 1
@@ -1586,7 +1697,7 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
-		else			
+		else
 			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
@@ -1620,7 +1731,7 @@ datum/preferences
 	if(S)
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
-		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+		for(var/i=1, i<= config.character_slots, i++)
 			S.cd = "/character[i]"
 			S["real_name"] >> name
 			if(!name)	name = "Character[i]"

@@ -5,7 +5,7 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
 	w_class = 4.0
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	charge_cost = 100
 	projectile_type = "/obj/item/projectile/ion"
@@ -33,7 +33,7 @@ obj/item/weapon/gun/energy/staff
 	icon_state = "staffofchange"
 	item_state = "staffofchange"
 	fire_sound = 'sound/weapons/emitter.ogg'
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 4.0
 	charge_cost = 200
@@ -214,7 +214,7 @@ obj/item/weapon/gun/energy/staff/focus
 	projectile_type = "/obj/item/projectile/energy/phoron"
 
 /obj/item/weapon/gun/energy/sniperrifle
-	name = "L.W.A.P. Sniper Rifle"
+	name = "\improper L.W.A.P. sniper rifle"
 	desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "sniper"

@@ -64,12 +64,6 @@
 	else
 		..()
 
-/obj/machinery/shield_capacitor/attack_paw(user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/shield_capacitor/attack_ai(user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/shield_capacitor/attack_hand(mob/user)
 	if(stat & (BROKEN))
 		return
@@ -107,14 +101,14 @@
 /obj/machinery/shield_capacitor/process()
 	if (!anchored)
 		active = 0
-	
+
 	//see if we can connect to a power net.
 	var/datum/powernet/PN
 	var/turf/T = src.loc
 	var/obj/structure/cable/C = T.get_cable_node()
 	if (C)
 		PN = C.powernet
-	
+
 	if (PN)
 		var/power_draw = between(0, max_charge - stored_charge, charge_rate) //what we are trying to draw
 		power_draw = PN.draw_power(power_draw) //what we actually get
@@ -138,7 +132,7 @@
 		active = !active
 	if( href_list["charge_rate"] )
 		charge_rate = between(10000, charge_rate + text2num(href_list["charge_rate"]), max_charge_rate)
-	
+
 	updateDialog()
 
 /obj/machinery/shield_capacitor/power_change()
@@ -155,5 +149,5 @@
 	if (src.anchored)
 		usr << "It is fastened to the floor!"
 		return
-	src.dir = turn(src.dir, 270)
+	src.set_dir(turn(src.dir, 270))
 	return
