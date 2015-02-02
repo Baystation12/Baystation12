@@ -206,14 +206,14 @@
 	t = replacetext(t, "\[/large\]", "</font>")
 	t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[user ? user.real_name : "Anonymous"]</i></font>")
 	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
-	
+
 	t = replacetext(t, "\[h1\]", "<H1>")
 	t = replacetext(t, "\[/h1\]", "</H1>")
 	t = replacetext(t, "\[h2\]", "<H2>")
 	t = replacetext(t, "\[/h2\]", "</H2>")
 	t = replacetext(t, "\[h3\]", "<H3>")
 	t = replacetext(t, "\[/h3\]", "</H3>")
-	
+
 	if(!iscrayon)
 		t = replacetext(t, "\[*\]", "<li>")
 		t = replacetext(t, "\[hr\]", "<HR>")
@@ -498,6 +498,18 @@
 /obj/item/weapon/paper/sop
 	name = "paper- 'Standard Operating Procedure'"
 	info = "Alert Levels:<BR>\nBlue- Emergency<BR>\n\t1. Caused by fire<BR>\n\t2. Caused by manual interaction<BR>\n\tAction:<BR>\n\t\tClose all fire doors. These can only be opened by reseting the alarm<BR>\nRed- Ejection/Self Destruct<BR>\n\t1. Caused by module operating computer.<BR>\n\tAction:<BR>\n\t\tAfter the specified time the module will eject completely.<BR>\n<BR>\nEngine Maintenance Instructions:<BR>\n\tShut off ignition systems:<BR>\n\tActivate internal power<BR>\n\tActivate orbital balance matrix<BR>\n\tRemove volatile liquids from area<BR>\n\tWear a fire suit<BR>\n<BR>\n\tAfter<BR>\n\t\tDecontaminate<BR>\n\t\tVisit medical examiner<BR>\n<BR>\nToxin Laboratory Procedure:<BR>\n\tWear a gas mask regardless<BR>\n\tGet an oxygen tank.<BR>\n\tActivate internal atmosphere<BR>\n<BR>\n\tAfter<BR>\n\t\tDecontaminate<BR>\n\t\tVisit medical examiner<BR>\n<BR>\nDisaster Procedure:<BR>\n\tFire:<BR>\n\t\tActivate sector fire alarm.<BR>\n\t\tMove to a safe area.<BR>\n\t\tGet a fire suit<BR>\n\t\tAfter:<BR>\n\t\t\tAssess Damage<BR>\n\t\t\tRepair damages<BR>\n\t\t\tIf needed, Evacuate<BR>\n\tMeteor Shower:<BR>\n\t\tActivate fire alarm<BR>\n\t\tMove to the back of ship<BR>\n\t\tAfter<BR>\n\t\t\tRepair damage<BR>\n\t\t\tIf needed, Evacuate<BR>\n\tAccidental Reentry:<BR>\n\t\tActivate fire alarms in front of ship.<BR>\n\t\tMove volatile matter to a fire proof area!<BR>\n\t\tGet a fire suit.<BR>\n\t\tStay secure until an emergency ship arrives.<BR>\n<BR>\n\t\tIf ship does not arrive-<BR>\n\t\t\tEvacuate to a nearby safe area!"
+
+/obj/item/weapon/paper/hos
+	name = "Armory Inventory"
+	info = "<center><Large><b>NSS Exodus</b></large><br> <small>Armoury Inventory</small></center> <hr> <hr> <br> <b>Weaponry</b><br> <field> Energy Gun(s)<br> <field> Laser Gun(s)<br> <field> Ion Rifle(s)<br> <field> Combat Shotgun(s) <hr> <b>Armour</b><br> <field> Bulletproof Vest(s)<br> <field> Abalative Vest(s)<br> <field> Biohazard Suit(s)<br> <field> Bomb Suit(s) <hr> <b>Auxiliary Equipment</b><br> <field> Gasmask(s)<br> <field> box(es) of Flashbangs<br> <field> box(es) of Handcuffs<br> <field> box(es) of R.O.B.U.S.T. Cartridges <hr> <b>Riot Equipment</b><br> <field> Stun Baton(s)<br> <field> Riot Suit(s)<br> <field> Riot Shield(s) <hr> <b>Tactical Equipment</b><br> <field> Tactical Armour(s)<br> <field> Tactical Helmet(s)<br> <field> Tactical Jumpsuit(s)<br> <field> Green Balaclava(s)<br> <field> Tactical HUD(s)<br> <field> Combat Belt(s)<br> <field> Black Glove(s)<br> <field> Jackboot(s) <hr> <b>Implants</b><br> <field> Tracking Implant Box(es)<br> <field> Chemical Implant Box(es) <hr> <b>Defense Systems</b><br> <field> Deployable Barrier(s)<br> <field> Portable Flasher(s) <hr> <b>Other</b><br> <field> Holobadge Box(es) <hr> <b><center>Warden's's Signature:</b> <field></center> <hr>"
+
+/obj/item/weapon/paper/wiz
+	name = "List of Available Spells"
+	info = "<p><b>LIST OF SPELLS AVAILABLE</b></p><p>Magic Missile:<br>This spell fires several, slow moving, magic projectiles at nearby targets. If they hit a target, it is paralyzed and takes minor damage.</p><p>Fireball:<br>This spell fires a fireball at a target and does not require wizard garb. Be careful not to fire it at people that are standing next to you.</p><p>Disintegrate:</br>This spell instantly kills somebody adjacent to you with the vilest of magick. It has a long cooldown.</p><p>Disable Technology:<br>This spell disables all weapons, cameras and most other technology in range.</p><p>Smoke:<br>This spell spawns a cloud of choking smoke at your location and does not require wizard garb.</p><p>Blind:<br>This spell temporarly blinds a single person and does not require wizard garb.<p>Forcewall:<br>This spell creates an unbreakable wall that lasts for 30 seconds and does not require wizard garb.</p><p>Blink:<br>This spell randomly teleports you a short distance. Useful for evasion or getting into areas if you have patience.</p><p>Teleport:<br>This spell teleports you to a type of area of your selection. Very useful if you are in danger, but has a decent cooldown, and is unpredictable.</p><p>Mutate:<br>This spell causes you to turn into a hulk, and gain telekinesis for a short while.</p><p>Ethereal Jaunt:<br>This spell creates your ethereal form, temporarily making you invisible and able to pass through walls.</p><p>Knock:<br>This spell opens nearby doors and does not require wizard garb.</p>"
+
+/obj/item/weapon/paper/cmo
+	name = "CMO's Outgoing Notes"
+	info = "<i><center>To the incoming CMO of Exodus:</center><br><br>I wish you and your crew well. Do take note:<br><br><br>The Medical Emergency Red Phone system has proven itself well. Take care to keep the phones in their designated places as they have been optimised for broadcast. The two handheld green radios (I have left one in this office, and one near the Emergency Entrance) are free to be used. The system has proven effective at alerting Medbay of important details, especially during power outages.<br><br>I think I may have left the toilet cubicle doors shut. It might be a good idea to open them so the staff and patients know they are not engaged.<br><br>The new syringe gun has been stored in secondary storage. I tend to prefer it stored in my office, but 'guidelines' are 'guidelines'.<br><br>Also in secondary storage is the grenade equipment crate. I've just realised I've left it open - you may wish to shut it.<br><br>There were a few problems with their installation, but the Medbay Quarantine shutters should now be working again  - they lock down the Emergency and Main entrances to prevent travel in and out. Pray you shan't have to use them.<br><br>The new version of the Medical Diagnostics Manual arrived. I distributed them to the shelf in the staff break room, and one on the table in the corner of this room.<br><br>The exam/triage room has the walking canes in it. I'm not sure why we'd need them - but there you have it.<br><br>Emergency Cryo bags are beside the emergency entrance, along with a kit.<br><br>Spare paper cups for the reception are on the left side of the reception desk.<br><br>I've fed Runtime. She should be fine.<br><br><br><center>That should be all. Good luck!</center>"
 
 /obj/item/weapon/paper/crumpled
 	name = "paper scrap"
