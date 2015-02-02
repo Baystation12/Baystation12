@@ -626,7 +626,7 @@
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
-				<A href='byond://?src=\ref[src];shutup=1'>Toggle Loudspeaker</A><BR>
+				Loudspeaker: [shut_up ? "<A href='byond://?src=\ref[src];shutup=0'>Disengaged</A>" : "<A href='byond://?src=\ref[src];shutup=1'>Engaged</A>"]<BR>
 				"}
 
 	if(subspace_transmission)//Don't even bother if subspace isn't turned on
