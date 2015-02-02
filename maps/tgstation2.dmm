@@ -2436,7 +2436,7 @@
 "aUR" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)
 "aUS" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/mint{layer = 3.1; pixel_x = 7; pixel_y = 4},/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)
 "aUT" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/table,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/food/condiment/enzyme{pixel_x = 6},/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
-"aUU" = (/obj/structure/table,/obj/item/weapon/kitchen/rollingpin,/obj/item/weapon/kitchen/utensil/knife,/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
+"aUU" = (/obj/structure/table,/obj/item/weapon/kitchen/rollingpin,/obj/item/weapon/kitchenknife,/turf/simulated/floor{icon_state = "cafeteria"; dir = 2},/area/crew_quarters/kitchen)
 "aUV" = (/obj/structure/disposalpipe/trunk{dir = 1},/obj/machinery/disposal,/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)
 "aUW" = (/obj/structure/table,/obj/machinery/cooking/candy{pixel_y = 8},/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)
 "aUX" = (/obj/structure/table,/obj/machinery/chem_dispenser/soda,/turf/simulated/floor{icon_state = "cafeteria"; dir = 5},/area/crew_quarters/kitchen)

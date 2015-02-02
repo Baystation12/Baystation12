@@ -19,6 +19,18 @@
 	if(on)
 		user << "The machine is already running."
 		return
+	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
+		return
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/customizable))
+		user << "<span class='warning'>That would probably break [src].</span>"
+		return
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/cereal))
+		user << "<span class='warning'>That isn't going to fit.</span>"
+		return
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/deepfryholder))
+		user << "<span class='userdanger'>That is probably not a great idea.</span>"
+		return
 	else
 		var/obj/item/F = I
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/C
