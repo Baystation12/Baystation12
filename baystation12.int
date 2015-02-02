@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;code\modules\food\icecream_vat.dm;code\modules\reagents\reagent_containers\food\condiment.dm;code\modules\reagents\reagent_containers\food\snacks.dm
+WINDOW: code\modules\reagents\reagent_containers\food\condiment.dm;code\modules\reagents\reagent_containers\food\snacks.dm;code\modules\food\icecream_vat.dm;code\modules\supermatter\supermatter.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\modules code\modules\food code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food 
+DIR: code code\modules code\modules\food code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\supermatter icons icons\obj 
 FILE: code\modules\reagents\reagent_containers\food\snacks.dm
-LAST_COMPILE_TIME: 1422818212
+LAST_COMPILE_TIME: 1422895792
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
