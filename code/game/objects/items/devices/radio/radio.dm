@@ -194,7 +194,7 @@
 		return radio_connection
 
 	// Otherwise, if a channel is specified, look for it.
-	if(channels)
+	if(channels && channels.len > 0)
 		if (message_mode == "department") // Department radio shortcut
 			message_mode = channels[1]
 
@@ -506,6 +506,7 @@
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
 	canhear_range = 3
+	subspace_transmission = 1
 
 /obj/item/device/radio/borg/talk_into()
 	. = ..()
@@ -594,11 +595,11 @@
 	if (href_list["mode"])
 		if(subspace_transmission != 1)
 			subspace_transmission = 1
-			usr << "Subspace Transmission is disabled"
+			usr << "Subspace Transmission is enabled"
 		else
 			subspace_transmission = 0
-			usr << "Subspace Transmission is enabled"
-		if(subspace_transmission == 1)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+			usr << "Subspace Transmission is disabled"
+		if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 			channels = list()
 		else
 			recalculateChannels()
@@ -628,7 +629,7 @@
 				<A href='byond://?src=\ref[src];shutup=1'>Toggle Loudspeaker</A><BR>
 				"}
 
-	if(!subspace_transmission)//Don't even bother if subspace isn't turned on
+	if(subspace_transmission)//Don't even bother if subspace isn't turned on
 		for (var/ch_name in channels)
 			dat+=text_sec_channel(ch_name, channels[ch_name])
 	dat+={"[text_wires()]</TT></body></html>"}
