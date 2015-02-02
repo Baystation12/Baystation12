@@ -604,12 +604,24 @@
 		reagents.add_reagent("nutriment", 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/flour
-	name = "flour"
+	name = "Flour bag"
 	desc = "A small bag filled with some flour."
 	icon_state = "flour"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 1)
+
+	afterattack(obj/target, mob/user , flag)
+		if(istype(target, /obj/machinery/icecream_vat))
+			if(!reagents.total_volume)
+				user << "\red [src] is empty."
+				return
+			if(target.reagents.total_volume >= target.reagents.maximum_volume)
+				user << "\red you can't add anymore to [target]."
+				return
+			target.reagents.add_reagent("flour", 5)
+			user << "\blue You transfer 5 units of the flour to [target]."
+			del(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/organ
 

@@ -616,6 +616,17 @@ datum
 				..()
 				return
 
+		flour
+			name = "Flour"
+			id = "flour"
+			description = "A white oderless compound used as a basic cooking ingredient,produced by grinding wheat."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255, 255, 255
+
+			on_mob_life(var/mob/living/M as mob)
+				M.nutrition += 1*REM
+				..()
+				return
 
 		glycerol
 			name = "Glycerol"

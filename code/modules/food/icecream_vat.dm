@@ -107,6 +107,8 @@
 		return 1
 	else if(O.is_open_container())
 		return
+	else if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/flour))
+		return
 	else
 		..()
 
