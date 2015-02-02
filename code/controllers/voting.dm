@@ -339,7 +339,8 @@ datum/controller/vote
 
 			. += "</table><hr>"
 			if(admin)
-				. += "(<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a>) "
+				. += "<a href='?src=\ref[src];vote=cancel'>Cancel Vote</a> "
+			. += "<a href='?src=\ref[src];vote=close' style='position:absolute;right:50px'>Close</a></body></html>"
 		else
 			. += "<h2>Start a vote:</h2><hr><ul><li>"
 			//restart

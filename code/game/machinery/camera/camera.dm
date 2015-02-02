@@ -250,7 +250,11 @@
 					src.dir = WEST
 			break
 
+<<<<<<< HEAD
 			if( src.dir == 6 || src.dir = SOUTH )
+=======
+			if( src.dir == 6 || src.dir == SOUTH )
+>>>>>>> origin/master
 				src.pixel_y = 19
 
 //Return a working camera that can see a given mob

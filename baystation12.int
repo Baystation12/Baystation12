@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\machinery\spaceheater.dm;code\game\machinery\spacecooler.dm;code\modules\supermatter\supermatter.dm;maps\tgstation3.dmm;code\controllers\_DynamicAreaLighting_TG.dm;maps\tgstation2.dmm
+WINDOW: maps\tgstation2.dmm;code\modules\food\icecream_vat.dm;code\modules\reagents\reagent_containers\food\condiment.dm;code\modules\reagents\reagent_containers\food\snacks.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers code\game code\game\machinery maps 
-FILE: code\game\machinery\spacecooler.dm
-LAST_COMPILE_TIME: 1422740142
+DIR: code code\modules code\modules\food code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food 
+FILE: code\modules\reagents\reagent_containers\food\snacks.dm
+LAST_COMPILE_TIME: 1422818212
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
