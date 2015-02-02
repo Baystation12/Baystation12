@@ -1,26 +1,43 @@
 /obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
 	var/obj/item/weapon/reagent_containers/food/snacks/customizable/sandwich/S = new(get_turf(user))
 	S.attackby(W,user)
 	del(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
 	var/obj/item/weapon/reagent_containers/food/snacks/customizable/burger/S = new(get_turf(user))
 	S.attackby(W,user)
 	del(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
 	var/obj/item/weapon/reagent_containers/food/snacks/customizable/pizza/S = new(get_turf(user))
 	S.attackby(W,user)
 	del(src)
 
 
 /obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
 	var/obj/item/weapon/reagent_containers/food/snacks/customizable/pasta/S = new(get_turf(user))
 	S.attackby(W,user)
 	del(src)
 
 
 /obj/item/trash/plate/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
+	if(istype(W, /obj/item/trash/plate) || istype(W, /obj/item/trash/bowl))
+		return
 	var/obj/item/weapon/reagent_containers/food/snacks/customizable/fullycustom/S = new(get_turf(user))
 	S.attackby(W,user)
 	del(src)
@@ -32,7 +49,11 @@
 	icon_state = "soup"
 
 /obj/item/trash/bowl/attackby(obj/item/W as obj, mob/user as mob)
-
+	if(!istype(W, /obj/item/weapon/reagent_containers/food/snacks/))
+		user << "<span class='warning'>That doesn't look tasty.</span>"
+		return
+	if(istype(W, /obj/item/trash/plate) || istype(W, /obj/item/trash/bowl))
+		return
 	if(istype(W,/obj/item/))
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/soup/S = new(get_turf(user))
 		S.attackby(W,user)
