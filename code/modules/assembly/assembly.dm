@@ -3,7 +3,7 @@
 	desc = "A small electronic device that should never exist."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = ""
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	matter = list("metal" = 100)
 	throwforce = 2

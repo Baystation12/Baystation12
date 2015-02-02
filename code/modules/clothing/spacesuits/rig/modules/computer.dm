@@ -334,6 +334,7 @@
 
 	var/atom/interfaced_with // Currently draining power from this device.
 	var/total_power_drained = 0
+	var/drain_loc
 
 /obj/item/rig_module/power_sink/deactivate()
 
@@ -373,6 +374,7 @@
 
 	H << "<span class = 'danger'>You begin draining power from [target]!</span>"
 	interfaced_with = target
+	drain_loc = interfaced_with.loc
 
 	holder.spark_system.start()
 	playsound(H.loc, 'sound/effects/sparks2.ogg', 50, 1)
@@ -406,7 +408,7 @@
 		drain_complete(H)
 		return
 
-	if(!interfaced_with || !interfaced_with.Adjacent(H))
+	if(!interfaced_with || !interfaced_with.Adjacent(H) || !(interfaced_with.loc == drain_loc))
 		H << "<span class = 'warning'>Your power sink retracts into its casing.</span>"
 		drain_complete(H)
 		return
@@ -427,8 +429,6 @@
 	holder.cell.give(target_drained * CELLRATE)
 	total_power_drained += target_drained
 
-
-
 	return 1
 
 /obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
@@ -439,5 +439,6 @@
 		if(M) M << "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained/1000)]kJ.</font>"
 		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
+	drain_loc = null
 	interfaced_with = null
 	total_power_drained = 0

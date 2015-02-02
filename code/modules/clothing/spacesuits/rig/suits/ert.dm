@@ -23,7 +23,6 @@
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/datajack,
-		/obj/item/rig_module/mounted
 		)
 
 /obj/item/weapon/rig/ert/engineer
@@ -62,5 +61,5 @@
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/grenade_launcher,
-		/obj/item/rig_module/mounted
+		/obj/item/rig_module/mounted/egun,
 		)

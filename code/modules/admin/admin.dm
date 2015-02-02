@@ -949,7 +949,7 @@ var/global/floorIsLava = 0
 			return 2
 		return 1
 	if(M.mind in ticker.mode.syndicates)
-		if (ticker.mode.config_tag == "nuclear")
+		if (ticker.mode.config_tag == "mercenary")
 			return 2
 		return 1
 	if(M.mind in ticker.mode.wizards)

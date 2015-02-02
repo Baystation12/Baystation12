@@ -55,6 +55,13 @@
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 
+/obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
+	..()
+	if(istype(helmet))
+		helmet.refit_for_species(target_species)
+	if(istype(boots))
+		boots.refit_for_species(target_species)
+
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()
 
@@ -68,20 +75,15 @@
 	if(helmet)
 		if(H.head)
 			M << "You are unable to deploy your suit's helmet as \the [H.head] is in the way."
-		else
+		else if (H.equip_to_slot_if_possible(helmet, slot_head))
 			M << "Your suit's helmet deploys with a hiss."
-			//TODO: Species check, skull damage for forcing an unfitting helmet on?
-			helmet.loc = H
-			H.equip_to_slot(helmet, slot_head)
 			helmet.canremove = 0
 
 	if(boots)
 		if(H.shoes)
 			M << "You are unable to deploy your suit's magboots as \the [H.shoes] are in the way."
-		else
+		else if (H.equip_to_slot_if_possible(boots, slot_shoes))
 			M << "Your suit's boots deploy with a hiss."
-			boots.loc = H
-			H.equip_to_slot(boots, slot_shoes)
 			boots.canremove = 0
 
 /obj/item/clothing/suit/space/void/dropped()
@@ -132,12 +134,10 @@
 		if(H.head)
 			H << "<span class='danger'>You cannot deploy your helmet while wearing another helmet.</span>"
 			return
-		//TODO: Species check, skull damage for forcing an unfitting helmet on?
-		helmet.loc = H
-		helmet.pickup(H)
-		H.equip_to_slot(helmet, slot_head)
-		helmet.canremove = 0
-		H << "<font color='blue'><b>You deploy your suit helmet, sealing you off from the world.</b></font>"
+		if(H.equip_to_slot_if_possible(helmet, slot_head))
+			helmet.pickup(H)
+			helmet.canremove = 0
+			H << "<font color='blue'><b>You deploy your suit helmet, sealing you off from the world.</b></font>"
 	helmet.update_light(H)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)

@@ -20,7 +20,7 @@
 //		var/maxshieldload = 200
 		var/obj/structure/cable/attached		// the attached cable
 		var/storedpower = 0
-		flags = FPRINT | CONDUCT
+		flags = CONDUCT
 		//There have to be at least two posts, so these are effectively doubled
 		var/power_draw = 30000 //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
 		var/max_stored_power = 50000 //50 kW

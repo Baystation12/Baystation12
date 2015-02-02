@@ -122,6 +122,18 @@
 	throw_speed = 3
 	throw_range = 5
 
+/obj/item/weapon/f_card/add_fingerprint(mob/living/M as mob, ignoregloves = 0)
+	if(..())
+		var/mob/living/carbon/human/H = M
+		var/full_print = md5(H.dna.uni_identity)
+		fingerprints[full_print] = full_print
+
+/obj/item/weapon/f_card/examine(mob/user)
+	..()
+	if(fingerprints.len)
+		user << "<span class='notice'>Fingerprints on this card:</span>"
+		for(var/print in fingerprints)
+			user << "<span class='notice'>\t[fingerprints[print]]</span>"
 
 /obj/item/weapon/fcardholder
 	name = "fingerprint card case"
