@@ -524,15 +524,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		screen = 0.5
 		spawn(20)
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
-			if( text2num(href_list["print"]) == 2)
-				PR.name = "list of researched technologies"
-				PR.info = "<center><h2>List of researched technologies</h2>"
-				PR.info += "<i>by [station_name()] Research Lab at [worldtime2text()] station time</i></center><br>"
+			PR.name = "list of researched technologies"
+			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
+			PR.info += "<i>report prepared at [worldtime2text()] station time</i></center><br>"
+			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
 			else
-				PR.name = "researched technology levels"
-				PR.info = "<center><h2>Researched technology levels</h2>"
-				PR.info += "<i>by [station_name()] Research Lab at [worldtime2text()] station time</i></center><br>"
 				PR.info += GetResearchLevelsInfo()
 			PR.info_links = PR.info
 			PR.icon_state = "paper_words"
