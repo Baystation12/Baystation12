@@ -4,7 +4,7 @@
 	desc = "A device used to rapidly build walls and floors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 10.0
 	throwforce = 10.0
 	throw_speed = 1

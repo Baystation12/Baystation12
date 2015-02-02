@@ -3,7 +3,6 @@
 	icon = 'escapepod.dmi'
 	icon_state = "podfire"
 	density = 1
-	flags = FPRINT
 	anchored = 1.0
 	var/speed = 10.0
 	var/maximum_speed = 10.0
