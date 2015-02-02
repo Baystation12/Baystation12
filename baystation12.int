@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi
-LAST_COMPILE_VERSION: 506.1249
+WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;maps\tgstation2.dmm
+LAST_COMPILE_VERSION: 506.1247
 DIR: code code\game code\modules code\modules\mining code\modules\paperwork code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food icons icons\turf maps 
-FILE: icons\turf\walls.dmi
-LAST_COMPILE_TIME: 1422897545
+FILE: maps\tgstation2.dmm
+LAST_COMPILE_TIME: 1422913981
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
