@@ -168,9 +168,15 @@
 			if(istype(P, /obj/item/weapon/screwdriver))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "\blue You connect the monitor."
-				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
-				if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
-					A.rename_self("ai", 1)
+				if(!brain)
+					var/open_for_latejoin = alert(user, "Would you like this core to be open for latejoining AIs?", "Latejoin", "Yes", "Yes", "No") == "Yes"
+					var/obj/structure/AIcore/deactivated/D = new(loc)
+					if(open_for_latejoin)
+						empty_playable_ai_cores += D
+				else
+					var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
+					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
+						A.rename_self("ai", 1)
 				feedback_inc("cyborg_ais_created",1)
 				del(src)
 
@@ -207,14 +213,32 @@
 			if (ai.mind == malfai)
 				return 1
 
-/obj/structure/AIcore/deactivated/attackby(var/obj/item/device/aicard/card, var/mob/user)
+/obj/structure/AIcore/deactivated/attackby(var/obj/item/weapon/W, var/mob/user)
 
-	if(istype(card))
+	if(istype(W, /obj/item/device/aicard))
+		var/obj/item/device/aicard/card = W
 		var/mob/living/silicon/ai/transfer = locate() in card
 		if(transfer)
 			load_ai(transfer,card,user)
 		else
 			user << "\red <b>ERROR</b>: \black Unable to locate artificial intelligence."
 		return
-
-	..()
+	else if(istype(W, /obj/item/weapon/wrench))
+		if(anchored)
+			user.visible_message("\blue \The [user] starts to unbolt \the [src] from the plating...")
+			if(!do_after(user,40))
+				user.visible_message("\blue \The [user] decides not to unbolt \the [src].")
+				return
+			user.visible_message("\blue \The [user] finishes unfastening \the [src]!")
+			anchored = 0
+			return
+		else
+			user.visible_message("\blue \The [user] starts to bolt \the [src] to the plating...")
+			if(!do_after(user,40))
+				user.visible_message("\blue \The [user] decides not to bolt \the [src].")
+				return
+			user.visible_message("\blue \The [user] finishes fastening down \the [src]!")
+			anchored = 1
+			return
+	else
+		return ..()
