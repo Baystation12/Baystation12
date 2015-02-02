@@ -233,3 +233,60 @@ obj/item/weapon/gun/energy/staff/focus
 	set popup_menu = 1
 
 	zoom()
+
+
+/obj/item/weapon/gun/energy/icarus
+	name = "\improper N.D.V. Icarus"
+	desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire point defense lasers.."
+	projectile_type = "/obj/item/projectile/icarus/pointdefense"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "rubberducky"
+	item_state = "rubberducky"
+	charge_cost = 0
+	silenced = 1
+	var/popgun = 1
+
+	attack_self(mob/living/user as mob)
+		if(popgun)
+			popgun = 0
+			desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire the main guns."
+			projectile_type = "/obj/item/projectile/icarus/guns"
+			user << "You switch to using the main guns."
+
+		else
+			popgun = 1
+			desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire point defense lasers.."
+			projectile_type = "/obj/item/projectile/icarus/pointdefense"
+			user << "You switch to using the point-defense lasers."
+		. = ..()
+
+	update_icon()
+		return
+
+	verb/fuckshitup()
+		set name = "fuckshitup"
+		set desc = "This will kill a lot of people."
+		set hidden = 1
+
+		popgun = 0
+		desc = "It feels like the fate of the Exodus is in your han- wait, what the hell ARE YOU DOING!?"
+		projectile_type = "/obj/item/projectile/icarus/torpedo"
+		usr << "You tell the crew to load the highly illegal phasic torpedos.  After the mutiny has been put down, you are ready to burn the world."
+
+
+/obj/item/weapon/gun/energy/variable
+	name = "abstract weapon"
+	desc = "It seems to shift and flow as you watch."
+	charge_cost = 0
+	silenced = 1
+
+	update_icon()
+		return
+
+	attack_self(mob/living/user as mob)
+		var/type = input(user,"What projectile type?","Projectile", null) as null|anything in typesof(/obj/item/projectile)
+		if(!type)
+			return ..()
+
+		projectile_type = "[type]"
+		. = ..()
