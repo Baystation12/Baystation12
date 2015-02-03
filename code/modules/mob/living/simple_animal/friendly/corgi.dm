@@ -18,6 +18,8 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 	see_in_dark = 5
+	mob_size = 8
+
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger

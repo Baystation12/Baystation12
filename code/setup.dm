@@ -11,8 +11,17 @@
 //radiation constants
 #define STEFAN_BOLTZMANN_CONSTANT		5.6704e-8	//W/(m^2*K^4)
 #define COSMIC_RADIATION_TEMPERATURE	3.15		//K
-#define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
-#define RADIATOR_OPTIMUM_PRESSURE		110			//kPa at 20 C
+#define AVERAGE_SOLAR_RADIATION			200			//W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.  From the numbers on Erebus, this'd be an orbit of 23.3 lightseconds.
+#define RADIATOR_OPTIMUM_PRESSURE		3771		//kPa - this should be higher as gasses aren't great conductors until they are dense. Used the critical pressure for air.
+#define GAS_CRITICAL_TEMPERATURE		132.65		//K - the critical point temperature for air 
+
+/*
+	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's 
+	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on. 
+	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight 
+	to the total surface area is the same as the ratio of the perimeter of the cross-section.
+*/
+#define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)) //unitless ratio
 
 #define CELL_VOLUME 2500	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
@@ -68,6 +77,15 @@
 #define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
 #define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
+//Fire
+#define FIRE_MIN_STACKS -20
+#define FIRE_MAX_STACKS 25
+//If the number of stacks goes above this firesuits won't protect you anymore. If not you can walk around while on fire like a badass.
+#define FIRE_MAX_FIRESUIT_STACKS 20
+
+#define THROWFORCE_SPEED_DIVISOR 5		//The throwing speed value at which the throwforce multiplier is exactly 1.
+#define THROWNOBJ_KNOCKBACK_SPEED 15	//The minumum speed of a thrown object that will cause living mobs it hits to be knocked back.
+#define THROWNOBJ_KNOCKBACK_DIVISOR 2	//Affects how much speed the mob is knocked back with
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 //The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE
 #define MAX_HIGH_PRESSURE_DAMAGE 4	//This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
@@ -166,36 +184,34 @@
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
                                 //To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
-#define TABLEPASS 2			// can pass by a table or rack
-#define NOBLUDGEON  4       // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
-#define AIRTIGHT	8	    // functions with internals
-#define USEDELAY 	16		// 1 second extra delay on use (Can be used once every 2s)
-#define NOSHIELD	32		// weapon not affected by shield
-#define CONDUCT		64		// conducts electricity (metal etc.)
-#define FPRINT		256		// takes a fingerprint
-#define ON_BORDER	512		// item has priority to check when entering or leaving
-#define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
-#define NODELAY 	32768	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
+#define NOBLUDGEON  2       // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
+#define AIRTIGHT	4	    // functions with internals
+#define USEDELAY 	8		// 1 second extra delay on use (Can be used once every 2s)
+#define NOSHIELD	16		// weapon not affected by shield
+#define CONDUCT		32		// conducts electricity (metal etc.)
+#define ON_BORDER	64		// item has priority to check when entering or leaving
+#define NOBLOODY	512	// used to items if they don't want to get a blood overlay
+#define NODELAY 	8192	// 1 second attackby delay skipped (Can be used once every 0.2s). Most objects have a 1s attackby delay, which doesn't require a flag.
 
-#define GLASSESCOVERSEYES	1024
-#define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
-#define HEADCOVERSEYES		1024		// feel free to realloc these numbers for other purposes
-#define MASKCOVERSMOUTH		2048		// on other items, these are just for mask/head
-#define HEADCOVERSMOUTH		2048
+#define GLASSESCOVERSEYES	256
+#define MASKCOVERSEYES		256		// get rid of some of the other retardation in these flags
+#define HEADCOVERSEYES		256		// feel free to realloc these numbers for other purposes
+#define MASKCOVERSMOUTH		512		// on other items, these are just for mask/head
+#define HEADCOVERSMOUTH		512
 
-#define THICKMATERIAL 1024		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
-#define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
+#define THICKMATERIAL 256		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
+#define NOSLIP		256 		//prevents from slipping on wet floors, in space etc
 
-#define OPENCONTAINER	4096	// is an open container for chemistry purposes
+#define OPENCONTAINER	1024	// is an open container for chemistry purposes
 
-#define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
-#define ONESIZEFITSALL 8192
-#define PHORONGUARD 16384			//Does not get contaminated by phoron.
+#define BLOCK_GAS_SMOKE_EFFECT 2048	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
+#define ONESIZEFITSALL 2048
+#define PHORONGUARD 4096			//Does not get contaminated by phoron.
 
-#define	NOREACT		16384 			//Reagents dont' react inside this container.
+#define	NOREACT		4096 			//Reagents dont' react inside this container.
 
 #define BLOCKHEADHAIR 4             // temporarily removes the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR	32768			// temporarily removes the user's hair, facial and otherwise.
+#define BLOCKHAIR	8192			// temporarily removes the user's hair, facial and otherwise.
 
 //flags for pass_flags
 #define PASSTABLE	1
@@ -478,6 +494,8 @@
 
 #define INVISIBILITY_OBSERVER 60
 #define SEE_INVISIBLE_OBSERVER 60
+#define INVISIBILITY_AI_EYE 61
+#define SEE_INVISIBLE_OBSERVER_AI_EYE 61
 
 #define INVISIBILITY_MAXIMUM 100
 

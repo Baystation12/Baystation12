@@ -288,6 +288,12 @@ var/global/list/gear_datums = list()
 	slot = slot_w_uniform
 	cost = 3
 
+/datum/gear/blackjumpskirt
+	display_name = "jumpskirt, black"
+	path = /obj/item/clothing/under/blackjumpskirt
+	slot = slot_w_uniform
+	cost = 2
+
 /datum/gear/skirt_blue
 	display_name = "plaid skirt, blue"
 	path = /obj/item/clothing/under/dress/plaid_blue
@@ -492,6 +498,12 @@ var/global/list/gear_datums = list()
 	cost = 3
 	slot = slot_wear_suit
 
+/datum/gear/blue_lawyer_jacket
+	display_name = "suit jacket, blue"
+	path = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	cost = 3
+	slot = slot_wear_suit
+
 /datum/gear/hoodie
 	display_name = "hoodie, grey"
 	path = /obj/item/clothing/suit/hoodie
@@ -517,7 +529,7 @@ var/global/list/gear_datums = list()
 	cost = 2
 	slot = slot_wear_suit
 
-/datum/gear/gponcho
+/datum/gear/bponcho
 	display_name = "poncho, blue"
 	path = /obj/item/clothing/suit/poncho/blue
 	cost = 3
@@ -529,7 +541,7 @@ var/global/list/gear_datums = list()
 	cost = 3
 	slot = slot_wear_suit
 
-/datum/gear/rponcho
+/datum/gear/pponcho
 	display_name = "poncho, purple"
 	path = /obj/item/clothing/suit/poncho/purple
 	cost = 3
@@ -657,7 +669,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/dress_shoes
 	display_name = "shoes, dress"
-	path = /obj/item/clothing/shoes/centcom
+	path = /obj/item/clothing/shoes/laceup
 	cost = 1
 	slot = slot_shoes
 

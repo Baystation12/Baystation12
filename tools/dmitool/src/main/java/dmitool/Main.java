@@ -11,37 +11,56 @@ import java.util.Set;
 public class Main {
     public static int VERBOSITY = 0;
     public static boolean STRICT = false;
-    
+    public static final String VERSION = "v0.6 (7 Jan 2015)";
+
     public static final String[] dirs = new String[] {
         "S", "N", "E", "W", "SE", "SW", "NE", "NW"
     };
-    
+
     public static final String helpStr =
             "help\n" +
             "\tthis text\n" +
-            
+
+            "version\n" +
+            "\tprint version and exit\n" +
+
             "verify [file]\n" +
             "\tattempt to load the given file to check format\n" +
-            
+
+            "info [file]\n" +
+            "\tprint information about [file], including a list of states\n" +
+
             "diff [file1] [file2]\n" +
             "\tdiff between [file1] and [file2]\n" +
-            
+
             "sort [file]\n" +
             "\tsort the icon_states in [file] into ASCIIbetical order\n" +
-            
+
             "merge [base] [file1] [file2] [out]\n" +
             "\tmerge [file1] and [file2]'s changes from a common ancestor [base], saving the result in [out]\n" +
             "\tconflicts will be placed in [out].conflict.dmi\n" +
-            
+
             "extract [file] [state] [out] {args}\n"+
             "\textract [state] from [file] in PNG format to [out]\n" +
             "\targs specify direction and frame; input 'f' followed by a frame specifier, and/or 'd' followed by a direction specifier\n" +
             "\tframe specifier can be a single number or number-number for a range\n" +
             "\tdirection specifier can be a single direction, or direction-direction\n" +
             "\tdirection can be 0-7 or S, N, E, W, SE, SW, NE, NW (non-case-sensitive)\n" +
-            
+
+            "import [file] [state] [in] [options]\n" +
+            "\timport a PNG image from [in] into [file], with the name [state]\n" +
+            "\tinput should be in the same format given by the 'extract' command with no direction or frame arguments\n" +
+            "\t(i.e. frames should be on the x-axis, and directions on the y)\n" +
+            "\tpossible options:\n" +
+            "\t  nodup | nd | n : if the state [state] already exists in [file], replace it instead of append\n" +
+            "\t  rewind | rw | r : if there is more than one frame, the animation should be played forwards-backwards-forwards-[...]\n" +
+            "\t  loop | lp | l : loop the animation infinitely; equivalent to \"loopn -1\"\n" +
+            "\t  loopn N | lpn N | ln N : loop the animation N times; for infinite animations, use 'loop' or N = -1\n" +
+            "\t  movement | move | mov | m : [state] should be marked as a movement state\n" +
+            "\t  delays L | delay L | del L | d L : use the list L as a comma-separated list of delays (e.g. '1,1,2,2,1')\n" +
+            "\t  hotspot H | hs H | h H : use H as the hotspot for this state\n" +
             "";
-    
+
     public static void main(String[] args) throws FileNotFoundException, IOException, DMIException {
         Deque<String> argq = new ArrayDeque<>();
         for(String s: args) {
@@ -63,9 +82,9 @@ public class Main {
             argq.pollFirst();
         }
         String op = argq.pollFirst();
-        
+
         switch(op) {
-            case "diff":
+            case "diff": {
                 if(argq.size() < 2) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -73,7 +92,7 @@ public class Main {
                 }
                 String a = argq.pollFirst();
                 String b = argq.pollFirst();
-                
+
                 if(VERBOSITY >= 0) System.out.println("Loading " + a);
                 DMI dmi = doDMILoad(a);
                 if(VERBOSITY >= 0) dmi.printInfo();
@@ -85,22 +104,24 @@ public class Main {
                 DMIDiff dmid = new DMIDiff(dmi, dmi2);
                 System.out.println(dmid);
                 break;
-            case "sort":
+                }
+            case "sort": {
                 if(argq.size() < 1) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
                     return;
                 }
                 String f = argq.pollFirst();
-                
+
                 if(VERBOSITY >= 0) System.out.println("Loading " + f);
-                dmi = doDMILoad(f);
+                DMI dmi = doDMILoad(f);
                 if(VERBOSITY >= 0) dmi.printInfo();
-                
+
                 if(VERBOSITY >= 0) System.out.println("Saving " + f);
                 dmi.writeDMI(new FileOutputStream(f), true);
                 break;
-            case "merge":
+                }
+            case "merge": {
                 if(argq.size() < 4) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -113,26 +134,26 @@ public class Main {
                 if(VERBOSITY >= 0) System.out.println("Loading " + baseF);
                 DMI base = doDMILoad(baseF);
                 if(VERBOSITY >= 0) base.printInfo();
-                
+
                 if(VERBOSITY >= 0) System.out.println("Loading " + aF);
                 DMI aDMI = doDMILoad(aF);
                 if(VERBOSITY >= 0) aDMI.printInfo();
-                
+
                 if(VERBOSITY >= 0) System.out.println("Loading " + bF);
                 DMI bDMI = doDMILoad(bF);
                 if(VERBOSITY >= 0) bDMI.printInfo();
-                
+
                 DMIDiff aDiff = new DMIDiff(base, aDMI);
                 DMIDiff bDiff = new DMIDiff(base, bDMI);
                 DMIDiff mergedDiff = new DMIDiff();
                 DMI conflictDMI = new DMI(32, 32);
-                
+
                 Set<String> cf = aDiff.mergeDiff(bDiff, conflictDMI, mergedDiff, aF, bF);
-                
+
                 mergedDiff.applyToDMI(base);
-                
+
                 base.writeDMI(new FileOutputStream(mergedF));
-                
+
                 if(!cf.isEmpty()) {
                     if(VERBOSITY >= 0) for(String s: cf) {
                         System.out.println(s);
@@ -145,7 +166,8 @@ public class Main {
                     System.exit(0);
                 }
                 break;
-            case "extract":
+                }
+            case "extract": {
                 if(argq.size() < 3) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -154,10 +176,10 @@ public class Main {
                 String file = argq.pollFirst(),
                        state = argq.pollFirst(),
                        outFile = argq.pollFirst();
-                
-                dmi = doDMILoad(file);
+
+                DMI dmi = doDMILoad(file);
                 if(VERBOSITY >= 0) dmi.printInfo();
-                
+
                 IconState is = dmi.getIconState(state);
                 if(is == null) {
                     System.out.println("icon_state '"+state+"' does not exist!");
@@ -166,10 +188,10 @@ public class Main {
                 // minDir, Maxdir, minFrame, Maxframe
                 int mDir=0, Mdir=is.dirs-1;
                 int mFrame=0, Mframe=is.frames-1;
-                
+
                 while(argq.size() > 1) {
                     String arg = argq.pollFirst();
-                    
+
                     switch(arg) {
                         case "d":
                         case "dir":
@@ -231,7 +253,120 @@ public class Main {
                 }
                 is.dumpToPNG(new FileOutputStream(outFile), mDir, Mdir, mFrame, Mframe);
                 break;
-            case "verify":
+                }
+            case "import": {
+                if(argq.size() < 3) {
+                    System.out.println("Insufficient arguments for command!");
+                    System.out.println(helpStr);
+                    return;
+                }
+                String dmiFile = argq.pollFirst(),
+                       stateName = argq.pollFirst(),
+                       pngFile = argq.pollFirst();
+
+                boolean noDup = false;
+                boolean rewind = false;
+                int loop = 0;
+                boolean movement = false;
+                String hotspot = null;
+                float[] delays = null;
+                while(!argq.isEmpty()) {
+                    String s = argq.pollFirst();
+                    switch(s.toLowerCase()) {
+                        case "nodup":
+                        case "nd":
+                        case "n":
+                            noDup = true;
+                            break;
+                        case "rewind":
+                        case "rw":
+                        case "r":
+                            rewind = true;
+                            break;
+                        case "loop":
+                        case "lp":
+                        case "l":
+                            loop = -1;
+                            break;
+                        case "loopn":
+                        case "lpn":
+                        case "ln":
+                            if(!argq.isEmpty()) {
+                                String loopTimes = argq.pollFirst();
+                                try {
+                                    loop = Integer.parseInt(loopTimes);
+                                } catch(NumberFormatException nfe) {
+                                    System.out.println("Illegal number '" + loopTimes + "' as argument to '" + s + "'!");
+                                    return;
+                                }
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a numeric argument following it!");
+                                return;
+                            }
+                            break;
+                        case "movement":
+                        case "move":
+                        case "mov":
+                        case "m":
+                            movement = true;
+                            break;
+                        case "delays":
+                        case "delay":
+                        case "del":
+                        case "d":
+                            if(!argq.isEmpty()) {
+                                String delaysString = argq.pollFirst();
+                                String[] delaysSplit = delaysString.split(",");
+                                delays = new float[delaysSplit.length];
+                                for(int i=0; i<delaysSplit.length; i++) {
+                                    try {
+                                        delays[i] = Integer.parseInt(delaysSplit[i]);
+                                    } catch(NumberFormatException nfe) {
+                                        System.out.println("Illegal number '" + delaysSplit[i] + "' as argument to '" + s + "'!");
+                                        return;
+                                    }
+                                }
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a list of delays (in the format 'a,b,c,d,[...]') following it!");
+                                return;
+                            }
+                            break;
+                        case "hotspot":
+                        case "hs":
+                        case "h":
+                            if(!argq.isEmpty()) {
+                                hotspot = argq.pollFirst();
+                            } else {
+                                System.out.println("Argument '" + s + "' requires a hotspot string following it!");
+                                return;
+                            }
+                            break;
+                        default:
+                            System.out.println("Unknown import argument '" + s + "', ignoring.");
+                            break;
+                    }
+                }
+
+                if(VERBOSITY >= 0) System.out.println("Loading " + dmiFile);
+                DMI toImportTo = doDMILoad(dmiFile);
+                if(VERBOSITY >= 0) toImportTo.printInfo();
+                IconState is = IconState.importFromPNG(toImportTo, new FileInputStream(pngFile), stateName, delays, rewind, loop, hotspot, movement);
+
+                if(noDup) {
+                    if(!toImportTo.setIconState(is)) {
+                        toImportTo.addIconState(null, is);
+                    }
+                } else {
+                    toImportTo.addIconState(null, is);
+                }
+
+                if(VERBOSITY >= 0) toImportTo.printInfo();
+
+                if(VERBOSITY >= 0) System.out.println("Saving " + dmiFile);
+                toImportTo.writeDMI(new FileOutputStream(dmiFile));
+                break;
+                }
+            case "verify": {
                 if(argq.size() < 1) {
                     System.out.println("Insufficient arguments for command!");
                     System.out.println(helpStr);
@@ -242,6 +377,23 @@ public class Main {
                 DMI v = doDMILoad(vF);
                 if(VERBOSITY >= 0) v.printInfo();
                 break;
+                }
+            case "info": {
+                if(argq.size() < 1) {
+                    System.out.println("Insufficient arguments for command!");
+                    System.out.println(helpStr);
+                    return;
+                }
+                String infoFile = argq.pollFirst();
+                if(VERBOSITY >= 0) System.out.println("Loading " + infoFile);
+                DMI info = doDMILoad(infoFile);
+                info.printInfo();
+                info.printStateList();
+                break;
+                }
+            case "version":
+                System.out.println(VERSION);
+                return;
             default:
                 System.out.println("Command '" + op + "' not found!");
             case "help":
@@ -249,7 +401,7 @@ public class Main {
                 break;
         }
     }
-    
+
     static int parseDir(String s, IconState is) {
         try {
             int i = Integer.parseInt(s);
@@ -275,7 +427,7 @@ public class Main {
             return -1;
         }
     }
-    
+
     static int parseFrame(String s, IconState is) {
         try {
             int i = Integer.parseInt(s);
@@ -290,7 +442,7 @@ public class Main {
             return -1;
         }
     }
-    
+
     static DMI doDMILoad(String file) {
         try {
             DMI dmi = new DMI(file);

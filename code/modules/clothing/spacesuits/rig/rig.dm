@@ -138,7 +138,7 @@
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor
+		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
@@ -168,6 +168,16 @@
 	if(chest_type && !(chest && wearer.wear_suit == chest))
 		return 0
 	return 1
+
+/obj/item/weapon/rig/proc/reset()
+	offline = 2
+	canremove = 1
+	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+		if(!piece) continue
+		piece.icon_state = "[initial(icon_state)]"
+		piece.flags &= ~STOPSPRESSUREDMAGE
+		piece.flags &= ~AIRTIGHT
+	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
 
@@ -217,7 +227,7 @@
 				if(!failed_to_seal && M.back == src && piece == compare_piece)
 
 					if(!instant)
-						if(!do_after(M,SEAL_DELAY))
+						if(!do_after(M,SEAL_DELAY,needhand=0))
 							failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
@@ -241,6 +251,13 @@
 								else
 									helmet.flags &= ~AIRTIGHT
 								helmet.update_light(wearer)
+
+					//sealed pieces become airtight, protecting against diseases
+					if (!seal_target)
+						piece.armor["bio"] = 100
+					else
+						piece.armor["bio"] = src.armor["bio"]
+
 				else
 					failed_to_seal = 1
 
@@ -280,10 +297,6 @@
 			piece.flags |=  STOPSPRESSUREDMAGE
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
-
-	if(instant && air_supply)
-		wearer.internals = air_supply
-		wearer.internals.icon_state = "internal1"
 
 /obj/item/weapon/rig/process()
 
@@ -502,6 +515,8 @@
 		return
 
 	if(href_list["toggle_piece"])
+		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
+			return 0
 		toggle_piece(href_list["toggle_piece"], usr)
 	else if(href_list["toggle_seals"])
 		toggle_seals(usr)
@@ -530,7 +545,7 @@
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	return
+	return 1
 
 /obj/item/weapon/rig/proc/notify_ai(var/message)
 	if(!message || !installed_modules || !installed_modules.len)
@@ -564,6 +579,9 @@
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
+		return
+
+	if(usr == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the usr isn't wearing the suit it's probably an AI.
 		return
 
 	var/obj/item/check_slot

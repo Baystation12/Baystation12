@@ -4,7 +4,7 @@
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 3
 
@@ -117,10 +117,16 @@
 	ui_interact(user)
 
 /obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	var/mob/living/carbon/location = null
 
+	if(istype(loc, /obj/item/weapon/rig))		// check for tanks in rigs
+		if(istype(loc.loc, /mob/living/carbon))
+			location = loc.loc
+	else if(istype(loc, /mob/living/carbon))
+		location = loc
+	
 	var/using_internal
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
+	if(istype(location))
 		if(location.internal==src)
 			using_internal = 1
 
@@ -133,9 +139,20 @@
 	data["valveOpen"] = using_internal ? 1 : 0
 
 	data["maskConnected"] = 0
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
-		if(location.internal == src)
+
+	if(istype(location))
+		var/mask_check = 0
+
+		if(location.internal == src)	// if tank is current internal
+			mask_check = 1
+		else if(src in location)		// or if tank is in the mobs possession
+			if(!location.internal)		// and they do not have any active internals
+				mask_check = 1
+		else if(istype(src.loc, /obj/item/weapon/rig) && src.loc in location)	// or the rig is in the mobs possession
+			if(!location.internal)		// and they do not have any active internals
+				mask_check = 1
+
+		if(mask_check)
 			if(location.wear_mask && (location.wear_mask.flags & AIRTIGHT))
 				data["maskConnected"] = 1
 			else if(istype(location, /mob/living/carbon/human))

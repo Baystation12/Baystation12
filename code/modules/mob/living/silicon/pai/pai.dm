@@ -390,6 +390,9 @@
 			..()
 		else
 			src << "<span class='warning'>You are too small to pull that.</span>"
+	else
+		src << "<span class='warning'>You are too small to pull that.</span>"
+		return
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

@@ -12,6 +12,10 @@
 	var/alert_pressure = 80*ONE_ATMOSPHERE
 		//minimum pressure before check_pressure(...) should be called
 
+	can_buckle = 1
+	buckle_require_restraints = 1
+	buckle_lying = -1
+
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 

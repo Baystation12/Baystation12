@@ -64,46 +64,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			if(long_range_link == 0 && machine.long_range_link == 0)
 				continue
 		// If we're sending a copy, be sure to create the copy for EACH machine and paste the data
-		var/datum/signal/copy = new
+		var/datum/signal/copy
 		if(copysig)
-
+			copy = new
 			copy.transmission_method = 2
 			copy.frequency = signal.frequency
-			// Copy the main data contents! Workaround for some nasty bug where the actual array memory is copied and not its contents.
-			copy.data = list(
-
-			"mob" = signal.data["mob"],
-			"mobtype" = signal.data["mobtype"],
-			"realname" = signal.data["realname"],
-			"name" = signal.data["name"],
-			"job" = signal.data["job"],
-			"key" = signal.data["key"],
-			"vmessage" = signal.data["vmessage"],
-			"vname" = signal.data["vname"],
-			"vmask" = signal.data["vmask"],
-			"compression" = signal.data["compression"],
-			"message" = signal.data["message"],
-			"connection" = signal.data["connection"],
-			"radio" = signal.data["radio"],
-			"slow" = signal.data["slow"],
-			"traffic" = signal.data["traffic"],
-			"type" = signal.data["type"],
-			"server" = signal.data["server"],
-			"reject" = signal.data["reject"],
-			"level" = signal.data["level"],
-			"verb" = signal.data["verb"],
-			"language" = signal.data["language"]
-			)
+			copy.data = signal.data.Copy()
 
 			// Keep the "original" signal constant
 			if(!signal.data["original"])
 				copy.data["original"] = signal
 			else
 				copy.data["original"] = signal.data["original"]
-
-		else
-			del(copy)
-
 
 		send_count++
 		if(machine.is_freq_listening(signal))
@@ -232,13 +204,13 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else if(on)
 		produce_heat()
 		delay = initial(delay)
-		
-		
+
+
 
 /obj/machinery/telecomms/proc/produce_heat()
 	if (!produces_heat)
 		return
-	
+
 	if (!use_power)
 		return
 
@@ -252,11 +224,11 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
 			if(removed)
-				
+
 				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
 				if (traffic <= 0)
 					heat_produced *= 0.30	//if idle, produce less heat.
-				
+
 				removed.add_thermal_energy(heat_produced)
 
 			env.merge(removed)

@@ -57,6 +57,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/ambience = list('sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg','sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg','sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg','sound/ambience/ambigen8.ogg','sound/ambience/ambigen9.ogg','sound/ambience/ambigen10.ogg','sound/ambience/ambigen11.ogg','sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg')
 	var/sound/forced_ambience = null
 
+	var/rad_shielded = 0
+
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
 var/list/teleportlocs = list()
@@ -347,6 +349,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Centcom"
 	icon_state = "centcom"
 	requires_power = 0
+	unlimited_power = 1
 
 /area/centcom/control
 	name = "\improper Centcom Control"
@@ -458,6 +461,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "yellow"
 	requires_power = 0
 	unlimited_power = 1
+	rad_shielded = 1
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -512,35 +516,33 @@ var/list/ghostteleportlocs = list()
 	icon_state = "yellow"
 	requires_power = 0
 
+/area/vox_station
+	requires_power = 0
+	rad_shielded = 1
+
 /area/vox_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
-	requires_power = 0
 
 /area/vox_station/southwest_solars
 	name = "\improper aft port solars"
 	icon_state = "southwest"
-	requires_power = 0
 
 /area/vox_station/northwest_solars
 	name = "\improper fore port solars"
 	icon_state = "northwest"
-	requires_power = 0
 
 /area/vox_station/northeast_solars
 	name = "\improper fore starboard solars"
 	icon_state = "northeast"
-	requires_power = 0
 
 /area/vox_station/southeast_solars
 	name = "\improper aft starboard solars"
 	icon_state = "southeast"
-	requires_power = 0
 
 /area/vox_station/mining
 	name = "\improper nearby mining asteroid"
 	icon_state = "north"
-	requires_power = 0
 
 //PRISON
 /area/prison
@@ -632,6 +634,9 @@ var/list/ghostteleportlocs = list()
  	icon_state = "atmos"
 
 //Maintenance
+
+/area/maintenance
+	rad_shielded = 1
 
 /area/maintenance/aft
 	name = "Aft Maintenance"
@@ -906,6 +911,7 @@ var/list/ghostteleportlocs = list()
 /area/crew_quarters
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
+	rad_shielded = 1
 
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"

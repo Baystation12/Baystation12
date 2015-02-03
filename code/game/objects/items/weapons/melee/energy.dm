@@ -5,10 +5,12 @@
 	var/active_w_class
 	sharp = 0
 	edge = 0
-	flags = FPRINT | TABLEPASS | NOBLOODY
+	flags = NOBLOODY
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	anchored = 1
+	if(active)
+		return
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
@@ -19,13 +21,15 @@
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
+	if(!active)
+		return
+	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 	active = 0
 	force = initial(force)
 	throwforce = initial(throwforce)
 	sharp = initial(sharp)
 	edge = initial(edge)
 	w_class = initial(w_class)
-	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 
 /obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
@@ -69,7 +73,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3
-	flags = FPRINT | CONDUCT | NOSHIELD | TABLEPASS | NOBLOODY
+	flags = CONDUCT | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	sharp = 1
@@ -105,7 +109,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2
-	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
+	flags = NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
@@ -173,7 +177,7 @@
 	throw_speed = 1
 	throw_range = 1
 	w_class = 4.0//So you can't hide it in your pocket or some such.
-	flags = FPRINT | TABLEPASS | NOSHIELD | NOBLOODY
+	flags = NOSHIELD | NOBLOODY
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system

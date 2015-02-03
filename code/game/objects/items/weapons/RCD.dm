@@ -7,7 +7,7 @@
 	opacity = 0
 	density = 0
 	anchored = 0.0
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 10.0
 	throwforce = 10.0
 	throw_speed = 1
@@ -25,6 +25,9 @@
 
 /obj/item/weapon/rcd/attack()
 	return 0
+
+/obj/item/weapon/rcd/proc/can_use(var/mob/user,var/turf/T)
+	return (user.Adjacent(T) && user.get_active_hand() == src && !user.stat && !user.restrained())
 
 /obj/item/weapon/rcd/examine()
 	..()
@@ -127,7 +130,7 @@
 		return 0
 
 	working = 0
-	if(build_delay && (!user.Adjacent(T) || user.get_active_hand() != src || user.stat || user.restrained()))
+	if(build_delay && !can_use(user,T))
 		return 0
 
 	if(build_turf)
@@ -168,6 +171,10 @@
 /obj/item/weapon/rcd/borg/attackby()
 	return
 
+/obj/item/weapon/rcd/borg/can_use(var/mob/user,var/turf/T)
+	return (user.Adjacent(T) && !user.stat)
+
+
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*30
 	if(istype(loc,/obj/item/rig_module))
@@ -180,3 +187,6 @@
 
 /obj/item/weapon/rcd/mounted/attackby()
 	return
+
+/obj/item/weapon/rcd/mounted/can_use(var/mob/user,var/turf/T)
+	return (user.Adjacent(T) && !user.stat && !user.restrained())

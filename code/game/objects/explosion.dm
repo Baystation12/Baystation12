@@ -70,8 +70,12 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		var/lighting_controller_was_processing = lighting_controller.processing	//Pause the lighting updates for a bit
 		lighting_controller.processing = 0
+
+
+		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
 		var/powernet_rebuild_was_deferred_already = defer_powernet_rebuild
-		if(defer_powernet_rebuild != 2)
+		// Large enough explosion. For performance reasons, powernets will be rebuilt manually
+		if(!defer_powernet_rebuild && (approximate_intensity > 25))
 			defer_powernet_rebuild = 1
 
 		if(heavy_impact_range > 1)
@@ -110,9 +114,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		sleep(8)
 
 		if(!lighting_controller.processing)	lighting_controller.processing = lighting_controller_was_processing
-		if(!powernet_rebuild_was_deferred_already)
-			if(defer_powernet_rebuild != 2)
-				defer_powernet_rebuild = 0
+		if(!powernet_rebuild_was_deferred_already && defer_powernet_rebuild)
+			makepowernets()
+			defer_powernet_rebuild = 0
 
 	return 1
 

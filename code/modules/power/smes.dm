@@ -218,6 +218,8 @@
 	add_fingerprint(user)
 	ui_interact(user)
 
+/obj/machinery/power/smes/attack_ghost(mob/user)
+	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)
@@ -301,6 +303,13 @@
 	data["outputMax"] = output_level_max
 	data["outputLoad"] = round(output_used)
 
+	if(outputting)
+		data["outputting"] = 2			// smes is outputting
+	else if(!outputting && output_attempt)
+		data["outputting"] = 1			// smes is online but not outputting because it's charge level is too low
+	else
+		data["outputting"] = 0			// smes is not outputting
+
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -322,11 +331,11 @@
 		return 1
 
 	if( href_list["cmode"] )
-		inputting(!inputting)
+		inputting(!input_attempt)
 		update_icon()
 
 	else if( href_list["online"] )
-		outputting(!outputting)
+		outputting(!output_attempt)
 		update_icon()
 	else if( href_list["input"] )
 		switch( href_list["input"] )

@@ -187,20 +187,20 @@
 	max_energy = 100
 	dispensable_reagents = list("water","ice","coffee","cream","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","watermelonjuice")
 
-	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko","grapesoda")
-				hackedcheck = 1
-				return
+/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You change the mode from 'McNano' to 'Pizza King'."
+			dispensable_reagents += list("thirteenloko","grapesoda")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents -= list("thirteenloko")
-				hackedcheck = 0
-				return
+		else
+			user << "You change the mode from 'Pizza King' to 'McNano'."
+			dispensable_reagents -= list("thirteenloko","grapesoda")
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
@@ -212,21 +212,21 @@
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
 	dispensable_reagents = list("lemon_lime","sugar","orangejuice","limejuice","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
-	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
+/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
 
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
-				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 1
-				return
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
+			dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 1
+			return
 
-			else
-				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
-				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 0
-				return
+		else
+			user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
+			dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/meds
 	name = "chem dispenser magic"
@@ -646,7 +646,7 @@
 				if(type in diseases) // Make sure this is a disease
 					D = new type(0, null)
 			var/list/data = list("viruses"=list(D))
-			var/name = sanitize(input(usr,"Name:","Name the culture",D.name))
+			var/name = sanitize(copytext(input(usr,"Name:","Name the culture",D.name), 1, MAX_NAME_LEN))
 			if(!name || name == " ") name = D.name
 			B.name = "[name] culture bottle"
 			B.desc = "A small bottle. Contains [D.agent] culture in synthblood medium."
@@ -851,7 +851,10 @@
 
 		//All types that you can put into the grinder to transfer the reagents to the beaker. !Put all recipes above this.!
 		/obj/item/weapon/reagent_containers/pill = list(),
-		/obj/item/weapon/reagent_containers/food = list()
+		/obj/item/weapon/reagent_containers/food = list(),
+
+		//Crayons
+		/obj/item/toy/crayon = list()
 	)
 
 	var/list/juice_items = list (
@@ -1184,6 +1187,21 @@
 
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
+		remove_object(O)
+
+	//crayons
+	for (var/obj/item/toy/crayon/O in holdingitems)
+		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
+			break
+		var/amount = round(O.uses/3) //full crayon gives 10 juice
+		var/dustcolour = "red"
+		if (O.colourName == "mime")
+			dustcolour = "grey" //black+white
+		else if (O.colourName == "rainbow")
+			dustcolour = "brown" //mix of all colours
+		else if (!isnull(O.colourName)) //all other defined colours
+			dustcolour = O.colourName
+		beaker.reagents.add_reagent("crayon_dust_[dustcolour]",amount)
 		remove_object(O)
 
 	//Everything else - Transfers reagents from it into beaker

@@ -23,7 +23,6 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
-	emitter_resistance = 50 // Lots of emitter blasts, it's *blast* door after all.
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
@@ -55,6 +54,7 @@
 	src.update_icon()
 	src.SetOpacity(0)
 	sleep(15)
+	src.layer = open_layer
 	src.operating = 0
 
 // Proc: force_close()
@@ -62,6 +62,7 @@
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
 	src.operating = 1
+	src.layer = closed_layer
 	flick(icon_state_closing, src)
 	src.density = 1
 	update_nearby_tiles()
@@ -136,12 +137,8 @@
 /obj/machinery/door/blast/proc/repair_price()
 	var/sheets_needed = 0
 	var/dam = maxhealth - health
-	var/bla = emitter_hits
 	while(dam > 0)
 		dam -= 150
-		sheets_needed++
-	while(bla > 0)
-		bla -= 10
 		sheets_needed++
 	return sheets_needed
 
@@ -150,13 +147,8 @@
 // Description: Fully repairs the blast door.
 /obj/machinery/door/blast/proc/repair()
 	health = maxhealth
-	emitter_hits = 0
 	if(stat & BROKEN)
 		stat &= ~BROKEN
-
-
-
-
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
@@ -176,4 +168,3 @@ obj/machinery/door/blast/regular
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
-	emitter_resistance = 20

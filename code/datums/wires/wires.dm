@@ -7,7 +7,7 @@
 
 var/list/same_wires = list()
 // 14 colours, if you're adding more than 14 wires then add more colours here
-var/list/wireColours = list("red", "blue", "green", "white", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
+var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 
 /datum/wires
 
@@ -97,7 +97,7 @@ var/list/wireColours = list("red", "blue", "green", "white", "orange", "brown", 
 		html += " <A href='?src=\ref[src];action=1;attach=[colour]'>[IsAttached(colour) ? "Detach" : "Attach"] Signaller</A></td></tr>"
 	html += "</table>"
 	html += "</div>"
-	
+
 	if (random)
 		html += "<i>\The [holder] appears to have tamper-resistant electronics installed.</i><br><br>" //maybe this could be more generic?
 

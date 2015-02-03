@@ -14,6 +14,11 @@
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
+
+	//Tasers and the like should not damage girders.
+	if(Proj.damage_type == HALLOSS || Proj.damage_type == TOX || Proj.damage_type == CLONE)
+		return
+
 	if(istype(Proj, /obj/item/projectile/beam))
 		health -= Proj.damage
 		..()

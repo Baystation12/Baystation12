@@ -27,7 +27,9 @@
 
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
-		if(M.lying)        return
+		if(M.lying)
+			..()
+			return
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)
@@ -77,7 +79,7 @@
 		for (var/obj/structure/stool/bed/chair/C in loc)
 			if (C.buckled_mob == M)
 				noslip = 1
-		if (noslip)
+		if((wet == 1 && M.m_intent == "walk") || noslip)
 			return // no slipping while sitting in a chair, plz
 
 		if(src.wet)
