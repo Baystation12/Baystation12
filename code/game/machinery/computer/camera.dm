@@ -37,14 +37,13 @@
 		data["current"] = null
 
 		if(isnull(camera_cache))
-			var/list/L = list()
-			for (var/obj/machinery/camera/C in cameranet.cameras)
-				if(can_access_camera(C))
-					L.Add(C)
-			camera_sort(L)
+			cameranet.process_sort()
 
 			var/cameras[0]
-			for(var/obj/machinery/camera/C in L)
+			for(var/obj/machinery/camera/C in cameranet.cameras)
+				if(!can_access_camera(C))
+					continue
+
 				var/cam[0]
 				cam["name"] = sanitize(C.c_tag)
 				cam["deact"] = !C.can_use()
@@ -72,7 +71,7 @@
 				cam["z"] = current.z
 
 				data["current"] = cam
-			
+
 
 		if(ui)
 			ui.load_cached_data(camera_cache)

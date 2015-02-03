@@ -22,6 +22,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
+	mob_size = 5
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!
@@ -50,7 +51,7 @@
 	if(turns_since_scan > 5)
 		walk_to(src,0)
 		turns_since_scan = 0
-		
+
 		if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 			movement_target = null
 			stop_automated_movement = 0

@@ -24,12 +24,20 @@ macro "macro"
 		command = ".northwest"
 		is-disabled = false
 	elem 
+		name = "ALT+WEST"
+		command = "westfaceperm"
+		is-disabled = false
+	elem 
 		name = "CTRL+WEST"
 		command = "westface"
 		is-disabled = false
 	elem 
 		name = "WEST+REP"
 		command = ".west"
+		is-disabled = false
+	elem 
+		name = "ALT+NORTH"
+		command = "northfaceperm"
 		is-disabled = false
 	elem 
 		name = "CTRL+NORTH"
@@ -40,12 +48,20 @@ macro "macro"
 		command = ".north"
 		is-disabled = false
 	elem 
+		name = "ALT+EAST"
+		command = "eastfaceperm"
+		is-disabled = false
+	elem 
 		name = "CTRL+EAST"
 		command = "eastface"
 		is-disabled = false
 	elem 
 		name = "EAST+REP"
 		command = ".east"
+		is-disabled = false
+	elem 
+		name = "ALT+SOUTH"
+		command = "southfaceperm"
 		is-disabled = false
 	elem 
 		name = "CTRL+SOUTH"

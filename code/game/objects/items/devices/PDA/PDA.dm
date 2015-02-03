@@ -10,7 +10,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_ID | SLOT_BELT
 
 	//Main variables
@@ -537,7 +536,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	// update the ui if it exists, returns null if no ui is passed/found
 	if(ui)
 		ui.load_cached_data(ManifestJSON)
-		
+
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
@@ -727,7 +726,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = copytext(sanitize(t), 1, 20)
+						t = sanitize(copytext(t, 1, 20))
 						ttone = t
 			else
 				ui.close()
@@ -736,7 +735,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/t = input(U, "Please enter new news tone", name, newstone) as text
 			if (in_range(src, U) && loc == U)
 				if (t)
-					t = copytext(sanitize(t), 1, 20)
+					t = sanitize(copytext(t, 1, 20))
 					newstone = t
 			else
 				ui.close()
@@ -972,7 +971,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
 	t = readd_quotes(t)
 	if (!t || !istype(P))
 		return
