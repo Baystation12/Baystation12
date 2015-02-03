@@ -187,17 +187,9 @@ Class Procs:
 /obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	if(..())
 		return 1
-	if(!can_be_used_by(usr, be_close = checkrange))
-		return 1
-	add_fingerprint(usr)
-	return 0
-
-/obj/machinery/proc/can_be_used_by(mob/user, be_close = 1)
 	if(!interact_offline && stat & (NOPOWER|BROKEN))
-		return 0
-	if(user.can_interact_with_interface(src, be_close) != STATUS_INTERACTIVE)
-		return 0
-	return 1
+		return 1
+	return 0
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -183,36 +183,37 @@ nanoui is used to open and update nano browser uis
 	if(!T || !(z == T.z || (T.z in config.player_levels)))
 		return STATUS_CLOSE
 
-	// If loc is a turf then we're an operational AI chassi
-	if(istype(loc, /turf))
+	// If an object is in view then we can interact with it
+	if(src_object in view(client.view, src))
+		return STATUS_INTERACTIVE
+
+	// If we're installed in a chassi, rather than transfered to an inteliCard or other container, then check if we have camera view
+	if(is_in_chassis())
 		//stop AIs from leaving windows open and using then after they lose vision
 		//apc_override is needed here because AIs use their own APC when powerless
 		if(cameranet && !cameranet.checkTurfVis(get_turf(src_object)))
 			return apc_override ? STATUS_INTERACTIVE : STATUS_CLOSE
 		return STATUS_INTERACTIVE
 
-	// If the loc isn't a turf then the AI has been transfered to an inteliCard (or other container). Objects must now be in view to be interacted with.
-	if(src_object in view(client.view, src))
-		return STATUS_INTERACTIVE
 	return 	STATUS_CLOSE
 
-/mob/living/proc/shared_living_nano_interaction(var/atom/movable/src_object)
-	if(!isturf(src_object.loc) && src_object.loc != src)
-		return STATUS_CLOSE
-
-	var/dist = get_dist(src_object, src)
-	if (dist > 4)
-		return STATUS_CLOSE
-
+/mob/living/proc/shared_living_nano_interaction(var/src_object)
 	if (src.stat != CONSCIOUS)
 		return STATUS_CLOSE						// no updates, close the interface
 	else if (restrained() || lying || stat || stunned || weakened)
 		return STATUS_UPDATE					// update only (orange visibility)
-	else if (!(src_object in view(4, src))) 	// If the src object is not in visable, disable updates
-		return STATUS_DISABLED
 	return STATUS_INTERACTIVE
 
-/mob/living/proc/shared_living_nano_distance(var/src_object)
+/mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
+	if(!isturf(src_object.loc))
+		if(src.contents.Find(src_object.loc)) // This is a hidden uplink
+			return STATUS_INTERACTIVE
+		if(src_object.loc != src)
+			return STATUS_CLOSE
+
+	if (!(src_object in view(4, src))) 	// If the src object is not in visable, disable updates
+		return STATUS_CLOSE
+
 	var/dist = get_dist(src_object, src)
 	if (dist <= 1)
 		return STATUS_INTERACTIVE	// interactive (green visibility)
@@ -220,23 +221,21 @@ nanoui is used to open and update nano browser uis
 		return STATUS_UPDATE 		// update only (orange visibility)
 	else if (dist <= 4)
 		return STATUS_DISABLED 		// no updates, completely disabled (red visibility)
+	return STATUS_CLOSE
 
-/mob/living/can_interact_with_interface(var/src_object)
+/mob/living/can_interact_with_interface(var/src_object, var/be_close = 1)
 	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE)
+	if(. == STATUS_INTERACTIVE && be_close)
 		. = shared_living_nano_distance(src_object)
-		if(STATUS_INTERACTIVE)
-			return STATUS_UPDATE
+	if(STATUS_INTERACTIVE)
+		return STATUS_UPDATE
 
 /mob/living/carbon/human/can_interact_with_interface(var/src_object, var/be_close = 1)
 	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE)
-		if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
-			return STATUS_INTERACTIVE	     					// Will build in distance checks on the topics for sanity.
-		if(be_close)
-			. = shared_living_nano_distance(src_object)
-			if(. == STATUS_DISABLED && (TK in mutations))
-				return STATUS_INTERACTIVE
+	if(. == STATUS_INTERACTIVE && be_close)
+		. = shared_living_nano_distance(src_object)
+		if(. == STATUS_UPDATE && (TK in mutations))	// If we have telekinesis and remain close enough, allow interaction.
+			return STATUS_INTERACTIVE
 
  /**
   * Set the ui to auto update (every master_controller tick)
