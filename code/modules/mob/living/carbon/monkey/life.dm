@@ -54,6 +54,9 @@
 	if(environment)	// More error checking -- TLE
 		handle_environment(environment)
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Status updates, death etc.
 	handle_regular_status_updates()
 	update_canmove()
@@ -585,3 +588,9 @@
 	proc/handle_changeling()
 		if(mind && mind.changeling)
 			mind.changeling.regenerate()
+
+/mob/living/carbon/monkey/handle_fire()
+	if(..())
+		return
+	adjustFireLoss(6)
+	return
