@@ -32,7 +32,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 
 	var/situation = null
 	while(!situation)
-		situation = copytext(sanitize(input(src, "Please specify the mission the emergency response team will undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+		situation = sanitize(copytext(input(src, "Please specify the mission the emergency response team will undertake.", "Specify Mission", ""),1,MAX_MESSAGE_LEN))
 		if(!situation)
 			if(alert("You haven't specified a mission. Exit the setup process?",,"No","Yes")=="Yes")
 				return
