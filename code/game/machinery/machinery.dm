@@ -282,7 +282,7 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	return 0
+	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return

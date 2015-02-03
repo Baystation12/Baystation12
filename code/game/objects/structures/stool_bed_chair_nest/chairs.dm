@@ -2,11 +2,9 @@
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
+	buckle_lying = 0 //force people to sit up in chairs when buckled
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
-
-/obj/structure/stool/MouseDrop(atom/over_object)
-	return
 
 /obj/structure/stool/bed/chair/New()
 	..()
@@ -68,11 +66,6 @@
 		src.set_dir(turn(src.dir, 90))
 		return
 
-/obj/structure/stool/bed/chair/MouseDrop_T(mob/M as mob, mob/user as mob)
-	if(!istype(M)) return
-	buckle_mob(M, user)
-	return
-
 // Chair types
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
@@ -105,7 +98,7 @@
 
 	return ..()
 
-/obj/structure/stool/bed/chair/comfy/afterbuckle()
+/obj/structure/stool/bed/chair/comfy/post_buckle_mob()
 	if(buckled_mob)
 		overlays += armrest
 	else
@@ -122,7 +115,7 @@
 
 /obj/structure/stool/bed/chair/office
 	anchored = 0
-	movable = 1
+	buckle_movable = 1
 
 /obj/structure/stool/bed/chair/comfy/black
 	color = rgb(167,164,153)
@@ -143,15 +136,14 @@
 					if (O != occupant)
 						Bump(O)
 			else
-				unbuckle()
+				unbuckle_mob()
 
 /obj/structure/stool/bed/chair/office/Bump(atom/A)
 	..()
 	if(!buckled_mob)	return
 
 	if(propelled)
-		var/mob/living/occupant = buckled_mob
-		unbuckle()
+		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
