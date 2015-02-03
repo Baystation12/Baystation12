@@ -46,7 +46,11 @@
 			playsound(loc, hitsound, 50, 1, -1)
 		return hit
 	else
-		user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
+		if(attack_verb.len)
+			user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
+		else
+			user.visible_message("<span class='danger'>[M] has been attacked with [src] by [user]!</span>")
+		
 		if (hitsound)
 			playsound(loc, hitsound, 50, 1, -1)
 		switch(damtype)

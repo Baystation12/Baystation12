@@ -92,7 +92,13 @@
 
 /obj/machinery/camera/New()
 	..()
-	cameranet.cameras += src //Camera must be added to global list of all cameras no matter what...
+	//Camera must be added to global list of all cameras no matter what...
+	if(cameranet.cameras_unsorted || !ticker)
+		cameranet.cameras += src
+		cameranet.cameras_unsorted = 1
+	else
+		dd_insertObjectList(cameranet.cameras, src)
+
 	var/list/open_networks = difflist(network,restricted_camera_networks) //...but if all of camera's networks are restricted, it only works for specific camera consoles.
 	if(open_networks.len) //If there is at least one open network, chunk is available for AI usage.
 		cameranet.addCamera(src)

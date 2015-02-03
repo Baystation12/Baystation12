@@ -167,6 +167,8 @@
 		update_inv_back()
 	else if (W == handcuffed)
 		handcuffed = null
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
 		success = 1
 		update_inv_handcuffed()
 	else if (W == legcuffed)
@@ -640,9 +642,10 @@ It can still be worn/put on as normal.
 						W.hold.close(usr)
 				usr.put_in_hands(tie)
 				suit.hastie = null*/
-			suit.hastie.on_removed(usr)
-			suit.hastie = null
-			target.update_inv_w_uniform()
+			if(suit && suit.hastie)
+				suit.hastie.on_removed(usr)
+				suit.hastie = null
+				target.update_inv_w_uniform()
 		if("id")
 			slot_to_process = slot_wear_id
 			if (target.wear_id)

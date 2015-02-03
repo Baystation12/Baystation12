@@ -410,11 +410,10 @@
 			loc.assume_air(breath)
 
 			//spread some viruses while we are at it
-			if (virus2.len > 0)
-				if (prob(10) && get_infection_chance(src))
-//					log_debug("[src] : Exhaling some viruses")
-					for(var/mob/living/carbon/M in view(1,src))
-						src.spread_disease_to(M)
+			if (virus2.len > 0 && prob(10))
+//				log_debug("[src] : Exhaling some viruses")
+				for(var/mob/living/carbon/M in view(1,src))
+					src.spread_disease_to(M)
 
 
 	proc/get_breath_from_internal(volume_needed)
@@ -602,8 +601,9 @@
 			failed_last_breath = 0
 			adjustOxyLoss(-5)
 
+
 		// Hot air hurts :(
-		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
+		if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
 
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
@@ -647,6 +647,10 @@
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
 
+		else if(breath.temperature >= species.heat_discomfort_level)
+			species.get_environment_discomfort(src,"heat")
+		else if(breath.temperature <= species.cold_discomfort_level)
+			species.get_environment_discomfort(src,"cold")
 
 		breath.update_values()
 		return 1
@@ -1045,8 +1049,7 @@
 
 				if(halloss > 100)
 					src << "<span class='notice'>You're in too much pain to keep going...</span>"
-					for(var/mob/O in oviewers(src, null))
-						O.show_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.", 1)
+					src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
 					Paralyse(10)
 					setHalLoss(99)
 
@@ -1431,21 +1434,19 @@
 				client.screen |= G.overlay
 			if(G.vision_flags)
 				sight |= G.vision_flags
-				if(!druggy)
+				if(!druggy && !seer)
 					see_invisible = SEE_INVISIBLE_MINIMUM
-			if(istype(G,/obj/item/clothing/glasses/night))
+			if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 				see_invisible = SEE_INVISIBLE_MINIMUM
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
+			var/obj/item/clothing/glasses/hud/O = G
 			if(istype(G, /obj/item/clothing/glasses/sunglasses/sechud))
-				var/obj/item/clothing/glasses/sunglasses/sechud/O = G
-				if(O.hud)		O.hud.process_hud(src)
-				if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
-			else if(istype(G, /obj/item/clothing/glasses/hud))
-				var/obj/item/clothing/glasses/hud/O = G
+				var/obj/item/clothing/glasses/sunglasses/sechud/S = G
+				O = S.hud
+			if(istype(O))
 				O.process_hud(src)
-				if(!druggy)
-					see_invisible = SEE_INVISIBLE_LIVING
+				if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
 
 	proc/handle_random_events()
 		// Puke if toxloss is too high

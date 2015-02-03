@@ -20,7 +20,6 @@
 	// Life vars/
 	var/energy = 0
 	var/obj/effect/plant_controller/master = null
-	var/mob/living/buckled_mob
 	var/datum/seed/seed
 
 /obj/effect/plantsegment/New()
@@ -56,7 +55,7 @@
 				var/obj/item/weapon/weldingtool/WT = W
 				if(WT.remove_fuel(0, user)) del src
 			else
-				manual_unbuckle(user)
+				user_unbuckle_mob(user)
 				return
 		// Plant-b-gone damage is handled in its entry in chemistry-reagents.dm
 	..()
@@ -71,39 +70,7 @@
 		update()
 		return
 
-	manual_unbuckle(user)
-
-/obj/effect/plantsegment/proc/unbuckle()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)	//this is probably unneccesary, but it doesn't hurt
-			buckled_mob.buckled = null
-			buckled_mob.anchored = initial(buckled_mob.anchored)
-			buckled_mob.update_canmove()
-		buckled_mob = null
-	return
-
-/obj/effect/plantsegment/proc/manual_unbuckle(mob/user as mob)
-	if(buckled_mob)
-		if(prob(seed ? min(max(0,100 - seed.potency),100) : 50))
-			if(buckled_mob.buckled == src)
-				if(buckled_mob != user)
-					buckled_mob.visible_message(\
-						"<span class='notice'>[user.name] frees [buckled_mob.name] from [src].</span>",\
-						"<span class='notice'>[user.name] frees you from [src].</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
-				else
-					buckled_mob.visible_message(\
-						"<span class='notice'>[buckled_mob.name] struggles free of [src].</span>",\
-						"<span class='notice'>You untangle [src] from around yourself.</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
-			unbuckle()
-		else
-			var/text = pick("rips","tears","pulls")
-			user.visible_message(\
-				"<span class='notice'>[user.name] [text] at [src].</span>",\
-				"<span class='notice'>You [text] at [src].</span>",\
-				"<span class='warning'>You hear shredding and ripping.</span>")
-	return
+	user_unbuckle_mob(user)
 
 /obj/effect/plantsegment/proc/grow()
 
@@ -361,6 +328,8 @@
 		growth_queue -= SV
 
 		SV.life()
+
+		if(!SV) continue
 
 		if(SV.energy < 2) //If tile isn't fully grown
 			var/chance

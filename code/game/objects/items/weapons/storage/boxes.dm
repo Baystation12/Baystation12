@@ -444,7 +444,6 @@
 	item_state = "zippo"
 	storage_slots = 10
 	w_class = 1
-	flags = TABLEPASS
 	slot_flags = SLOT_BELT
 	can_hold = list("/obj/item/weapon/flame/match")
 
