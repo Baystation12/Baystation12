@@ -34,7 +34,7 @@
 	return
 
 /obj/structure/stool/MouseDrop(atom/over_object)
-	if (istype(over_object, /mob/living/carbon/human))
+	if(istype(over_object, /mob/living/carbon/human) && type == /obj/structure/stool) //i am sorry for this, but the inheritance mess requires it
 		var/mob/living/carbon/human/H = over_object
 		if (H==usr && !H.restrained() && !H.stat && in_range(src, over_object))
 			var/obj/item/weapon/stool/S = new/obj/item/weapon/stool()
@@ -42,6 +42,8 @@
 			src.loc = S
 			H.put_in_hands(S)
 			H.visible_message("\red [H] grabs [src] from the floor!", "\red You grab [src] from the floor!")
+			return
+	return ..()
 
 /obj/item/weapon/stool
 	name = "stool"

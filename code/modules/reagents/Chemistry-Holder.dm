@@ -79,9 +79,9 @@ datum
 					if(A.volume > the_volume)
 						the_volume = A.volume
 						the_reagent = A
-				
+
 				return the_reagent
-			
+
 			get_master_reagent_name()
 				var/the_name = null
 				var/the_volume = 0
@@ -353,8 +353,11 @@ datum
 								if(C.result)
 									feedback_add_details("chemical_reaction","[C.result]|[C.result_amount*multiplier]")
 									multiplier = max(multiplier, 1) //this shouldnt happen ...
-									add_reagent(C.result, C.result_amount*multiplier)
-									set_data(C.result, preserved_data)
+									if(!isnull(C.resultcolor)) //paints
+										add_reagent(C.result, C.result_amount*multiplier, C.resultcolor)
+									else
+										add_reagent(C.result, C.result_amount*multiplier)
+										set_data(C.result, preserved_data)
 
 									//add secondary products
 									for(var/S in C.secondary_results)
@@ -458,7 +461,7 @@ datum
 									else R.reaction_obj(A, R.volume+volume_modifier)
 				return
 
-			add_reagent(var/reagent, var/amount, var/list/data=null, var/safety = 0)
+			add_reagent(var/reagent, var/amount, var/data=null, var/safety = 0)
 				if(!isnum(amount)) return 1
 				update_total()
 				if(total_volume + amount > maximum_volume) amount = (maximum_volume - total_volume) //Doesnt fit in. Make it disappear. Shouldnt happen. Will happen.
@@ -469,7 +472,6 @@ datum
 					if (R.id == reagent)
 						R.volume += amount
 						update_total()
-						my_atom.on_reagent_change()
 
 						// mix dem viruses
 						if(R.id == "blood" && reagent == "blood")
@@ -495,9 +497,23 @@ datum
 											if(!istype(D, /datum/disease/advance))
 												preserve += D
 										R.data["viruses"] = preserve
-
+						if(R.id == "paint" && reagent == "paint")
+							if(R.color && data)
+								var/list/mix = new /list(2)
+								//fill the list
+								var/datum/reagent/paint/P = chemical_reagents_list["paint"]
+								var/datum/reagent/paint/P1 = new P.type()
+								P1.color = R.color
+								P1.volume = R.volume - amount //since we just increased that
+								var/datum/reagent/paint/P2 = new P.type()
+								P2.color = data
+								P2.volume = amount
+								mix[1] = P1
+								mix[2] = P2
+								R.color = mix_color_from_reagents(mix)
 						if(!safety)
 							handle_reactions()
+						my_atom.on_reagent_change()
 						return 0
 
 				var/datum/reagent/D = chemical_reagents_list[reagent]
@@ -507,7 +523,10 @@ datum
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
-					SetViruses(R, data) // Includes setting data
+					if(reagent == "paint")
+						R.color = data
+					else
+						SetViruses(R, data) // Includes setting data for blood
 
 					//debug
 					//world << "Adding data"
@@ -611,6 +630,7 @@ datum
 					my_atom.reagents = null
 
 			copy_data(var/datum/reagent/current_reagent)
+				if (current_reagent.id == "paint") return current_reagent.color
 				if (!current_reagent || !current_reagent.data) return null
 				if (!istype(current_reagent.data, /list)) return current_reagent.data
 

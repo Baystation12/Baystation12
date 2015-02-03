@@ -153,30 +153,6 @@
 	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")
 
-/obj/item/weapon/baseballbat
-	name = "wooden bat"
-	desc = "HOME RUN!"
-	icon_state = "woodbat"
-	item_state = "woodbat"
-	sharp = 0
-	edge = 0
-	w_class = 3
-	force = 15
-	throw_speed = 3
-	throw_range = 7
-	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
-	hitsound = 'sound/weapons/genhit3.ogg'
-
-
-/obj/item/weapon/baseballbat/metal
-	name = "metal bat"
-	desc = "A shiny metal bat."
-	icon_state = "metalbat"
-	item_state = "metalbat"
-	force = 18
-	w_class = 3.0
-
 /obj/item/weapon/butterfly
 	name = "butterfly knife"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."

@@ -20,6 +20,7 @@
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
+<A href='?src=\ref[src];make=43;dir=1'>Manual T-Valve - Mirrored</A><BR>
 <A href='?src=\ref[src];make=21;dir=1'>Upward Pipe</A><BR>
 <A href='?src=\ref[src];make=22;dir=1'>Downward Pipe</A><BR>
 <b>Supply pipes:</b><BR>
@@ -48,10 +49,10 @@
 <A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
 <A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
 <A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
-<A href='?src=\ref[src];make=23;dir=1'>Gas Filter-Mirrored</A><BR>
+<A href='?src=\ref[src];make=23;dir=1'>Gas Filter - Mirrored</A><BR>
 <A href='?src=\ref[src];make=14;dir=1'>Gas Mixer</A><BR>
-<A href='?src=\ref[src];make=25;dir=1'>Gas Mixer-Mirrored</A><BR>
-<A href='?src=\ref[src];make=24;dir=1'>Gas Mixer-T</A><BR>
+<A href='?src=\ref[src];make=25;dir=1'>Gas Mixer - Mirrored</A><BR>
+<A href='?src=\ref[src];make=24;dir=1'>Gas Mixer - T</A><BR>
 <A href='?src=\ref[src];make=26;dir=1'>Omni Gas Mixer</A><BR>
 <A href='?src=\ref[src];make=27;dir=1'>Omni Gas Filter</A><BR>
 <b>Heat exchange:</b><BR>
