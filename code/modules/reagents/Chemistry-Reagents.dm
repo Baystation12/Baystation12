@@ -88,7 +88,7 @@ datum
 			on_new(var/data)
 				return
 
-			// Called when two reagents of the same are mixing.
+			// Called when two reagents of the same are mixing. <-- Blatant lies
 			on_merge(var/data)
 				return
 
@@ -1514,6 +1514,78 @@ datum
 				M.reagents.remove_all_type(/datum/reagent/ethanol, 1*REM, 0, 1)
 				..()
 				return
+
+//////////////////////////Ground crayons/////////////////////
+
+
+		crayon_dust
+			name = "Crayon dust"
+			id = "crayon_dust"
+			description = "Intensely coloured powder obtained by grinding crayons."
+			reagent_state = LIQUID
+			color = "#888888"
+			overdose = 5
+
+			red
+				name = "Red crayon dust"
+				id = "crayon_dust_red"
+				color = "#FE191A"
+
+			orange
+				name = "Orange crayon dust"
+				id = "crayon_dust_orange"
+				color = "#FFBE4F"
+
+			yellow
+				name = "Yellow crayon dust"
+				id = "crayon_dust_yellow"
+				color = "#FDFE7D"
+
+			green
+				name = "Green crayon dust"
+				id = "crayon_dust_green"
+				color = "#18A31A"
+
+			blue
+				name = "Blue crayon dust"
+				id = "crayon_dust_blue"
+				color = "#247CFF"
+
+			purple
+				name = "Purple crayon dust"
+				id = "crayon_dust_purple"
+				color = "#CC0099"
+
+			grey //Mime
+				name = "Grey crayon dust"
+				id = "crayon_dust_grey"
+				color = "#808080"
+
+			brown //Rainbow
+				name = "Brown crayon dust"
+				id = "crayon_dust_brown"
+				color = "#846F35"
+
+//////////////////////////Paint//////////////////////////////
+
+		paint
+			name = "Paint"
+			id = "paint"
+			description = "This paint will stick to almost any object"
+			reagent_state = LIQUID
+			color = "#808080"
+			overdose = 15
+
+			reaction_turf(var/turf/T, var/volume)
+				if(!istype(T) || istype(T, /turf/space))
+					return
+				T.color = color
+
+			reaction_obj(var/obj/O, var/volume)
+				..()
+				if(istype(O,/obj/item/weapon/light))
+					O.color = color
+
 
 //////////////////////////Poison stuff///////////////////////
 

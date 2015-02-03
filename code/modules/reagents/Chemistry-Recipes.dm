@@ -4,6 +4,7 @@ datum
 		var/name = null
 		var/id = null
 		var/result = null
+		var/resultcolor = null //for paint
 		var/list/required_reagents = new/list()
 		var/list/required_catalysts = new/list()
 
@@ -131,7 +132,7 @@ datum
 			name = "Water"
 			id = "water"
 			result = "water"
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
+			required_reagents = list("oxygen" = 1, "hydrogen" = 2)
 			result_amount = 1
 
 		thermite
@@ -1344,6 +1345,109 @@ datum
 				var/obj/effect/golemrune/Z = new /obj/effect/golemrune
 				Z.loc = get_turf(holder.my_atom)
 				Z.announce_to_ghosts()
+
+//////////////////////////////////////////PAINT///////////////////////////////////////////
+//Crayon dust -> paint
+		red_paint
+			name = "Red paint"
+			id = "red_paint"
+			result = "paint"
+			resultcolor = "#FE191A"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_red" = 1)
+			result_amount = 5
+
+		orange_paint
+			name = "Orange paint"
+			id = "orange_paint"
+			result = "paint"
+			resultcolor = "#FFBE4F"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_orange" = 1)
+			result_amount = 5
+
+		yellow_paint
+			name = "Yellow paint"
+			id = "yellow_paint"
+			result = "paint"
+			resultcolor = "#FDFE7D"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_yellow" = 1)
+			result_amount = 5
+
+		green_paint
+			name = "Green paint"
+			id = "green_paint"
+			result = "paint"
+			resultcolor = "#18A31A"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_green" = 1)
+			result_amount = 5
+
+		blue_paint
+			name = "Blue paint"
+			id = "blue_paint"
+			result = "paint"
+			resultcolor = "#247CFF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_blue" = 1)
+			result_amount = 5
+
+		purple_paint
+			name = "Purple paint"
+			id = "purple_paint"
+			result = "paint"
+			resultcolor = "#CC0099"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_purple" = 1)
+			result_amount = 5
+
+		grey_paint //mime
+			name = "Grey paint"
+			id = "grey_paint"
+			result = "paint"
+			resultcolor = "#808080"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_grey" = 1)
+			result_amount = 5
+
+		brown_paint
+			name = "Brown paint"
+			id = "brown_paint"
+			result = "paint"
+			resultcolor = "#846F35"
+			required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_brown" = 1)
+			result_amount = 5
+
+//Ghetto reactions
+
+		blood_paint
+			name = "Blood paint"
+			id = "blood_paint"
+			result = "paint"
+			resultcolor = "#FE191A"
+			required_reagents = list("plasticide" = 1, "water" = 3, "blood" = 2)
+			result_amount = 5
+
+		milk_paint
+			name = "Milk paint"
+			id = "milk_paint"
+			result = "paint"
+			resultcolor = "#F0F8FF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "milk" = 5)
+			result_amount = 5
+
+		carbon_paint
+			name = "Carbon paint"
+			id = "carbon_paint"
+			result = "paint"
+			resultcolor = "#333333"
+			required_reagents = list("plasticide" = 1, "water" = 3, "carbon" = 1)
+			result_amount = 5
+
+//Aluminum "non-ghetto" white paint
+
+		aluminum_paint
+			name = "Aluminum paint"
+			id = "aluminum_paint"
+			result = "paint"
+			resultcolor = "#F0F8FF"
+			required_reagents = list("plasticide" = 1, "water" = 3, "aluminum" = 1)
+			result_amount = 5
+
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
 		tofu
