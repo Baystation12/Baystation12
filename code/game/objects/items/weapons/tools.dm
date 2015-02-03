@@ -19,7 +19,7 @@
 	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	throwforce = 7.0
@@ -37,7 +37,7 @@
 	desc = "You can be totally screwwy with this."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "screwdriver"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	w_class = 1.0
@@ -96,7 +96,7 @@
 	desc = "This cuts wires."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "cutters"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 6.0
 	throw_speed = 2
@@ -119,6 +119,8 @@
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
 		C.handcuffed = null
+		if(C.buckled && C.buckled.buckle_require_restraints)
+			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()
 		return
 	else
@@ -131,7 +133,7 @@
 	name = "welding tool"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "welder"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
 	//Amount of OUCH when it's thrown
@@ -259,6 +261,9 @@
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
+		if(isliving(O))
+			var/mob/living/L = O
+			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return
@@ -433,7 +438,7 @@
 	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "crowbar"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 5.0
 	throwforce = 7.0

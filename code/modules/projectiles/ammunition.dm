@@ -3,7 +3,7 @@
 	desc = "A bullet casing."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "s-casing"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 1
 	w_class = 1.0
@@ -26,7 +26,7 @@
 		if(BB)
 			if(initial(BB.name) == "bullet")
 				var/tmp_label = ""
-				var/label_text = sanitize(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label))
+				var/label_text = sanitize(copytext(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), 1, MAX_NAME_LEN))
 				if(length(label_text) > 20)
 					user << "\red The inscription can be at most 20 characters long."
 				else
@@ -52,7 +52,7 @@
 	desc = "A box of ammo"
 	icon_state = "357"
 	icon = 'icons/obj/ammo.dmi'
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
 	matter = list("metal" = 50000)

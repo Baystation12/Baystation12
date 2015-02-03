@@ -17,7 +17,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	matter = list("metal" = 10000, "glass" = 5000)
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 
@@ -30,7 +30,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	matter = list("metal" = 5000, "glass" = 2500)
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "pinched")
@@ -44,7 +44,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	matter = list("metal" = 5000, "glass" = 2500)
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("burnt")
@@ -59,7 +59,7 @@
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	matter = list("metal" = 15000, "glass" = 10000)
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 15.0
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
@@ -78,7 +78,7 @@
 	desc = "Cut, cut, and once more cut."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 10.0
 	sharp = 1
 	edge = 1
@@ -134,7 +134,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	force = 15.0
 	w_class = 2.0
 	throwforce = 9.0

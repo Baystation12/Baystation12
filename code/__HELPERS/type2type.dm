@@ -70,19 +70,19 @@
 /proc/list2text(list/ls, sep)
 	if (ls.len <= 1) // Early-out code for empty or singleton lists.
 		return ls.len ? ls[1] : ""
-
+	
 	var/l = ls.len // Made local for sanic speed.
 	var/i = 0      // Incremented every time a list index is accessed.
-
+	
 	if (sep <> null)
 		// Macros expand to long argument lists like so: sep, ls[++i], sep, ls[++i], sep, ls[++i], etc...
 		#define S1  sep, ls[++i]
 		#define S4  S1,  S1,  S1,  S1
 		#define S16 S4,  S4,  S4,  S4
 		#define S64 S16, S16, S16, S16
-
+		
 		. = "[ls[++i]]" // Make sure the initial element is converted to text.
-
+		
 		// Having the small concatenations come before the large ones boosted speed by an average of at least 5%.
 		if (l-1 & 0x01) // 'i' will always be 1 here.
 			. = text("[][][]", ., S1) // Append 1 element if the remaining elements are not a multiple of 2.
@@ -111,7 +111,7 @@
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", ., S64, S64)
-
+		
 		#undef S64
 		#undef S16
 		#undef S4
@@ -122,9 +122,9 @@
 		#define S4  S1,  S1,  S1,  S1
 		#define S16 S4,  S4,  S4,  S4
 		#define S64 S16, S16, S16, S16
-
+		
 		. = "[ls[++i]]" // Make sure the initial element is converted to text.
-
+		
 		if (l-1 & 0x01) // 'i' will always be 1 here.
 			. += S1 // Append 1 element if the remaining elements are not a multiple of 2.
 		if (l-i & 0x02)
@@ -145,7 +145,7 @@
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]\
 			          [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]", ., S64, S64)
-
+		
 		#undef S64
 		#undef S16
 		#undef S4
@@ -163,14 +163,33 @@ proc/tg_list2text(list/list, glue=",")
 // Converts a string into a list by splitting the string at each delimiter found. (discarding the seperator)
 /proc/text2list(text, delimiter="\n")
 	var/delim_len = length(delimiter)
-	if (delim_len < 1) return list(text)
+	if (delim_len < 1)
+		return list(text)
+	
 	. = list()
 	var/last_found = 1
 	var/found
+	
 	do
-		found = findtext(text, delimiter, last_found, 0)
-		. += copytext(text, last_found, found)
-		last_found = found + delim_len
+		found       = findtext(text, delimiter, last_found, 0)
+		.          += copytext(text, last_found, found)
+		last_found  = found + delim_len
+	while (found)
+
+// Case sensitive version of /proc/text2list().
+/proc/text2listEx(text, delimiter="\n")
+	var/delim_len = length(delimiter)
+	if (delim_len < 1)
+		return list(text)
+	
+	. = list()
+	var/last_found = 1
+	var/found
+	
+	do
+		found       = findtextEx(text, delimiter, last_found, 0)
+		.          += copytext(text, last_found, found)
+		last_found  = found + delim_len
 	while (found)
 
 /proc/text2numlist(text, delimiter="\n")
@@ -178,19 +197,6 @@ proc/tg_list2text(list/list, glue=",")
 	for(var/x in text2list(text, delimiter))
 		num_list += text2num(x)
 	return num_list
-
-// Case Sensitive!
-/proc/text2listEx(text, delimiter="\n")
-	var/delim_len = length(delimiter)
-	if (delim_len < 1) return list(text)
-	. = list()
-	var/last_found = 1
-	var/found
-	do
-		found = findtextEx(text, delimiter, last_found, 0)
-		. += copytext(text, last_found, found)
-		last_found = found + delim_len
-	while (found)
 
 // Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator="\n")
@@ -291,3 +297,31 @@ proc/tg_list2text(list/list, glue=",")
 		if ("Orange")   return 'icons/mob/screen1_Orange.dmi'
 		if ("Midnight") return 'icons/mob/screen1_Midnight.dmi'
 		else            return 'icons/mob/screen1_White.dmi'
+
+// heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
+/proc/heat2color(temp)
+	return rgb(heat2color_r(temp), heat2color_g(temp), heat2color_b(temp))
+
+/proc/heat2color_r(temp)
+	temp /= 100
+	if(temp <= 66)
+		. = 255
+	else
+		. = max(0, min(255, 329.698727446 * (temp - 60) ** -0.1332047592))
+
+/proc/heat2color_g(temp)
+	temp /= 100
+	if(temp <= 66)
+		. = max(0, min(255, 99.4708025861 * log(temp) - 161.1195681661))
+	else
+		. = max(0, min(255, 288.1221695283 * ((temp - 60) ** -0.0755148492)))
+
+/proc/heat2color_b(temp)
+	temp /= 100
+	if(temp >= 66)
+		. = 255
+	else
+		if(temp <= 16)
+			. = 0
+		else
+			. = max(0, min(255, 138.5177312231 * log(temp - 10) - 305.0447927307))

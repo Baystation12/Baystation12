@@ -1295,4 +1295,5 @@ var/list/robot_verbs_default = list(
 		if(2) //New Module
 			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [module.name].</span><br>"
 		if(3) //New Name
-			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [oldname] is now designated as [newname].</span><br>"
+			if(oldname != newname)
+				connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [oldname] is now designated as [newname].</span><br>"

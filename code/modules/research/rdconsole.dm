@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /*
 Research and Development (R&D) Console
 
@@ -27,8 +25,6 @@ cause a ton of data to be lost, an admin can go send it back.
 - The second method is with Technology Disks and Design Disks. Each of these disks can hold a single technology or design datum in
 it's entirety. You can then take the disk to any R&D console and upload it's data to it. This method is a lot more secure (since it
 won't update every console in existence) but it's more of a hassle to do. Also, the disks can be stolen.
-
-
 */
 
 /obj/machinery/computer/rdconsole
@@ -523,8 +519,49 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			spawn(20)
 				screen = 1.6
 				updateUsrDialog()
+
+	else if (href_list["print"]) //Print research information
+		screen = 0.5
+		spawn(20)
+			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
+			PR.name = "list of researched technologies"
+			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
+			PR.info += "<i>report prepared at [worldtime2text()] station time</i></center><br>"
+			if(text2num(href_list["print"]) == 2)
+				PR.info += GetResearchListInfo()
+			else
+				PR.info += GetResearchLevelsInfo()
+			PR.info_links = PR.info
+			PR.icon_state = "paper_words"
+			PR.loc = src.loc
+			spawn(10)
+				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
+				updateUsrDialog()
+
 	updateUsrDialog()
 	return
+
+/obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
+	var/dat
+	dat += "<UL>"
+	for(var/datum/tech/T in files.known_tech)
+		dat += "<LI>"
+		dat += "[T.name]"
+		dat += "<UL>"
+		dat +=  "<LI>Level: [T.level]"
+		dat +=  "<LI>Summary: [T.desc]"
+		dat += "</UL>"
+	return dat
+
+/obj/machinery/computer/rdconsole/proc/GetResearchListInfo()
+	var/dat
+	dat += "<UL>"
+	for(var/datum/design/D in files.known_designs)
+		if(D.build_path)
+			dat += "<LI><B>[D.name]</B>: [D.desc]"
+	dat += "</UL>"
+	return dat
 
 /obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
@@ -570,6 +607,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(0.4)
 			dat += "Imprinting Circuit. Please Wait..."
 
+		if(0.5)
+			dat += "Printing Research Information. Please Wait..."
+
 		if(1.0) //Main Menu
 			dat += "Main Menu:<BR><BR>"
 			dat += "Loaded disk: "
@@ -593,16 +633,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "</UL>"
 
 		if(1.1) //Research viewer
-			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
+			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
+			dat += "<A href='?src=\ref[src];print=1'>Print This Page</A><HR>"
 			dat += "Current Research Levels:<BR><BR>"
-			dat += "<UL>"
-			for(var/datum/tech/T in files.known_tech)
-				dat += "<LI>"
-				dat += "[T.name]"
-				dat += "<UL>"
-				dat +=  "<LI>Level: [T.level]"
-				dat +=  "<LI>Summary: [T.desc]"
-				dat += "</UL>"
+			dat += GetResearchLevelsInfo()
 			dat += "</UL>"
 
 		if(1.2) //Technology Disk Menu
@@ -897,14 +931,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 		///////////////////Research Information Browser////////////////////
 		if(5.0)
-			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A><HR>"
+			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "
+			dat += "<A href='?src=\ref[src];print=2'>Print This Page</A><HR>"
 			dat += "List of Researched Technologies and Designs:"
-			dat += "<UL>"
-			for(var/datum/design/D in files.known_designs)
-				if(D.build_path)
-					dat += "<LI><B>[D.name]</B>: [D.desc]"
-			dat += "</UL>"
-			
+			dat += GetResearchListInfo()
 
 	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")

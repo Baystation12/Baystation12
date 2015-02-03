@@ -13,7 +13,7 @@
 	user.put_in_hands(tape)
 */
 
-/obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user as mob)
+/obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user)
 	if(!istype(W, /obj/item/weapon/paper))
 		return
 	
@@ -30,14 +30,14 @@
 	w_class = 1
 	layer = 4
 	anchored = 1 //it's sticky, no you cant move it
-	
+
 	var/obj/item/weapon/stuck = null
 
 /obj/item/weapon/ducttape/New()
 	..()
 	flags |= NOBLUDGEON
 
-/obj/item/weapon/ducttape/examine(mob/user as mob)
+/obj/item/weapon/ducttape/examine(mob/user)
 	return stuck.examine(user)
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
@@ -47,7 +47,7 @@
 	name = W.name + " (taped)"
 	overlays = W.overlays
 
-/obj/item/weapon/ducttape/attack_self(mob/user as mob)
+/obj/item/weapon/ducttape/attack_self(mob/user)
 	if(!stuck)
 		return
 
@@ -60,7 +60,7 @@
 	overlays = null
 	del(src)
 
-/obj/item/weapon/ducttape/afterattack(var/A, mob/user as mob, flag, params)
+/obj/item/weapon/ducttape/afterattack(var/A, mob/user, flag, params)
 	if(!in_range(user, A) || istype(A, /obj/machinery/door) || !stuck)
 		return
 
@@ -70,6 +70,9 @@
 	var/dir_offset = 0
 	if(target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
+		if(!(dir_offset in cardinal))
+			user << "You cannot reach that from here."		// can only place stuck papers in cardinal directions, to
+			return											// reduce papers around corners issue.
 
 	user.drop_from_inventory(src)
 	forceMove(source_turf)

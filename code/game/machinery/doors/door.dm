@@ -190,7 +190,7 @@
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/detective_scanner))
 		return
-	if(src.operating || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
+	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
 	if(!Adjacent(user))
 		user = null
@@ -252,13 +252,6 @@
 		repairing = null
 		return
 
-	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
-		flick("door_spark", src)
-		sleep(6)
-		open()
-		operating = -1
-		return 1
-
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
@@ -270,6 +263,15 @@
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
+
+	if(src.operating) return
+
+	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
+		flick("door_spark", src)
+		sleep(6)
+		open()
+		operating = -1
+		return 1
 
 	if(src.allowed(user) && operable())
 		if(src.density)

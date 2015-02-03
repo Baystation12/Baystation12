@@ -28,8 +28,8 @@ em						{font-style: normal;font-weight: bold;}
 /* Admin: Private Messages */
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
-.pm  .out				{color: #B54A4A;}
-.pm  .other				{color: #164664;}
+.pm  .out				{color: #ff0000;}
+.pm  .other				{color: #0000ff;}
 
 /* Admin: Channels */
 .mod_channel			{color: #735638;	font-weight: bold;}

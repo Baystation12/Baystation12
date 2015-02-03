@@ -47,7 +47,7 @@
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
-	
+
 	if(shock_stage >= 10) tally += 3
 
 	if(FAT in src.mutations)

@@ -116,7 +116,7 @@ var/ninja_confirmed_selection = 0
 	var/commando_list[] = list()//Commandos.
 
 	//We want the ninja to appear only in certain modes.
-//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","nuclear","malfunction","monkey")  // Commented out for both testing and ninjas
+//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","mercenary","malfunction","monkey")  // Commented out for both testing and ninjas
 //	if(!(current_mode.config_tag in acceptable_modes_list))
 //		return
 
@@ -472,7 +472,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	var/mission
 	while(!mission)
-		mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+		mission = sanitize(copytext(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", ""),1,MAX_MESSAGE_LEN))
 		if(!mission)
 			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
 				return

@@ -13,7 +13,16 @@
 #define STEFAN_BOLTZMANN_CONSTANT    5.6704e-8 // W/(m^2*K^4).
 #define COSMIC_RADIATION_TEMPERATURE 3.15      // K.
 #define AVERAGE_SOLAR_RADIATION      200       // W/m^2. Kind of arbitrary. Really this should depend on the sun position much like solars.
-#define RADIATOR_OPTIMUM_PRESSURE    110       // kPa at 20 C.
+#define RADIATOR_OPTIMUM_PRESSURE    3771      // kPa at 20 C. This should be higher as gases aren't great conductors until they are dense. Used the critical pressure for air.
+#define GAS_CRITICAL_TEMPERATURE     132.65    // K. The critical point temperature for air.
+
+/*
+	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's 
+	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on. 
+	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight 
+	to the total surface area is the same as the ratio of the perimeter of the cross-section.
+*/
+#define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
 
 #define CELL_VOLUME        2500 // Liters in a cell.
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION)) // Moles in a 2.5 m^3 cell at 101.325 kPa and 20 C.
@@ -67,6 +76,11 @@
 #define       ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600   // For armor.
 #define      GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For some gloves.
 #define        SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For shoes.
+
+// Fire.
+#define FIRE_MIN_STACKS          -20
+#define FIRE_MAX_STACKS           25
+#define FIRE_MAX_FIRESUIT_STACKS  20 // If the number of stacks goes above this firesuits won't protect you anymore. If not, you can walk around while on fire like a badass.
 
 #define THROWFORCE_SPEED_DIVISOR    5  // The throwing speed value at which the throwforce multiplier is exactly 1.
 #define THROWNOBJ_KNOCKBACK_SPEED   15 // The minumum speed of a thrown object that will cause living mobs it hits to be knocked back.
@@ -156,36 +170,30 @@
 // Flags bitmasks.
 #define STOPPRESSUREDAMAGE 1 // This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
                              // To successfully stop you taking all pressure damage you must have both a suit and head item with this flag.
-#define TABLEPASS          2     // Can pass by a table or rack
-#define NOBLUDGEON         4     // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
-#define AIRTIGHT           8     // Functions with internals.
-#define USEDELAY           16    // 1 second extra delay on use. (Can be used once every 2s)
-#define NOSHIELD           32    // Weapon not affected by shield.
-#define CONDUCT            64    // Conducts electricity. (metal etc.)
-#define FPRINT             256   // Takes a fingerprint.
-#define ON_BORDER          512   // Item has priority to check when entering or leaving.
-#define NOBLOODY           2048  // Used for items if they don't want to get a blood overlay.
-#define NODELAY            32768 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
+#define NOBLUDGEON         2    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
+#define AIRTIGHT           4    // Functions with internals.
+#define USEDELAY           8    // 1 second extra delay on use. (Can be used once every 2s)
+#define NOSHIELD           16   // Weapon not affected by shield.
+#define CONDUCT            32   // Conducts electricity. (metal etc.)
+#define ON_BORDER          64   // Item has priority to check when entering or leaving.
+#define NOBLOODY           512  // Used for items if they don't want to get a blood overlay.
+#define NODELAY            8192 // 1 second attack-by delay skipped (Can be used once every 0.2s). Most objects have a 1s attack-by delay, which doesn't require a flag.
 
-#define GLASSESCOVERSEYES 1024
-#define    MASKCOVERSEYES 1024 // Get rid of some of the other retardation in these flags.
-#define    HEADCOVERSEYES 1024 // Feel free to reallocate these numbers for other purposes.
-#define   MASKCOVERSMOUTH 2048 // On other items, these are just for mask/head.
-#define   HEADCOVERSMOUTH 2048
+#define GLASSESCOVERSEYES 256
+#define    MASKCOVERSEYES 256 // Get rid of some of the other retardation in these flags.
+#define    HEADCOVERSEYES 256 // Feel free to reallocate these numbers for other purposes.
+#define   MASKCOVERSMOUTH 512 // On other items, these are just for mask/head.
+#define   HEADCOVERSMOUTH 512
 
-#define THICKMATERIAL 1024 // From /tg/station: prevents syringes, parapens and hyposprays if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
-#define NOSLIP        1024 // Prevents from slipping on wet floors, in space, etc.
-
-#define OPENCONTAINER 4096 // Is an open container for chemistry purposes.
-
-#define BLOCK_GAS_SMOKE_EFFECT 8192  // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
-#define ONESIZEFITSALL         8192
-#define PHORONGUARD            16384 // Does not get contaminated by phoron.
-
-#define	NOREACT 16384 // Reagents don't react inside this container.
-
-#define BLOCKHEADHAIR 4     // Temporarily removes the user's hair overlay. Leaves facial hair.
-#define BLOCKHAIR     32768 // Temporarily removes the user's hair, facial and otherwise.
+#define THICKMATERIAL          256  // From /tg/station: prevents syringes, parapens and hyposprays if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
+#define NOSLIP                 256  // Prevents from slipping on wet floors, in space, etc.
+#define OPENCONTAINER          1024 // Is an open container for chemistry purposes.
+#define BLOCK_GAS_SMOKE_EFFECT 2048 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
+#define ONESIZEFITSALL         2048
+#define PHORONGUARD            4096 // Does not get contaminated by phoron.
+#define	NOREACT                4096 // Reagents don't react inside this container.
+#define BLOCKHEADHAIR          4    // Temporarily removes the user's hair overlay. Leaves facial hair.
+#define BLOCKHAIR              8192 // Temporarily removes the user's hair, facial and otherwise.
 
 // Flags for pass_flags.
 #define PASSTABLE  1
@@ -197,14 +205,14 @@
 #define NOJAUNT 1 // This is used in literally one place, turf.dm, to block ethereal jaunt.
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
-// APPLIES ONLY TO THE EXTERIOR SUIT!!
+// WARNING: The following flags apply only to the external suit!
 #define HIDEGLOVES      1
 #define HIDESUITSTORAGE 2
 #define HIDEJUMPSUIT    4
 #define HIDESHOES       8
 #define HIDETAIL        16
 
-// APPLIES ONLY TO HELMETS/MASKS!!
+// WARNING: The following flags apply only to the helmets and masks!
 #define HIDEMASK 1
 #define HIDEEARS 2 // Headsets and such.
 #define HIDEEYES 4 // Glasses.
@@ -233,8 +241,6 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
-
-//Cant seem to find a mob bitflags area other than the powers one
 
 // Bitflags for clothing parts.
 #define HEAD        1
@@ -458,22 +464,22 @@
 #define BANTYPE_JOB_TEMP    4
 #define BANTYPE_ANY_FULLBAN 5 // Used to locate stuff to unban.
 
-#define SEE_INVISIBLE_MINIMUM             5
-#define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
+// Invisibility constants.
 #define INVISIBILITY_LIGHTING             20
-#define SEE_INVISIBLE_LIVING              25
-
-// Used by some stuff in code. It's really poorly organized.
-#define SEE_INVISIBLE_LEVEL_ONE           35
 #define INVISIBILITY_LEVEL_ONE            35
-
-// Used by some other stuff in code. It's really poorly organized.
-#define SEE_INVISIBLE_LEVEL_TWO           45
 #define INVISIBILITY_LEVEL_TWO            45
-
 #define INVISIBILITY_OBSERVER             60
+#define INVISIBILITY_AI_EYE               61
+
+#define SEE_INVISIBLE_LIVING              25
+#define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
+#define SEE_INVISIBLE_LEVEL_ONE           35
+#define SEE_INVISIBLE_LEVEL_TWO           45
 #define SEE_INVISIBLE_OBSERVER            60
-#define INVISIBILITY_MAXIMUM              100
+#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+
+#define SEE_INVISIBLE_MINIMUM 5
+#define  INVISIBILITY_MAXIMUM 100
 
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
