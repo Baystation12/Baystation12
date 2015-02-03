@@ -175,10 +175,10 @@
 					post_status(href_list["statdisp"])
 
 		if("setmsg1")
-			stat_msg1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", stat_msg1) as text|null), 1, 40)), 40)
+			stat_msg1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", stat_msg1) as text|null, 1, 40))), 40)
 			src.updateDialog()
 		if("setmsg2")
-			stat_msg2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", stat_msg2) as text|null), 1, 40)), 40)
+			stat_msg2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", stat_msg2) as text|null, 1, 40))), 40)
 			src.updateDialog()
 
 		// OMG CENTCOMM LETTERHEAD
@@ -496,12 +496,12 @@
 			return
 
 	emergency_shuttle.call_transfer()
-	
+
 	//delay events in case of an autotransfer
 	if (isnull(user))
 		event_manager.delay_events(EVENT_LEVEL_MODERATE, 9000) //15 minutes
-		event_manager.delay_events(EVENT_LEVEL_MAJOR, 9000) 
-	
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, 9000)
+
 	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
 

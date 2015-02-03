@@ -50,7 +50,9 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
-
+	
+	attack_ghost(user as mob)
+		return 1
 
 
 /obj/machinery/computer/borgupload
@@ -83,3 +85,6 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
+
+	attack_ghost(user as mob)
+		return 1

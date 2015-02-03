@@ -88,7 +88,7 @@ datum
 			on_new(var/data)
 				return
 
-			// Called when two reagents of the same are mixing.
+			// Called when two reagents of the same are mixing. <-- Blatant lies
 			on_merge(var/data)
 				return
 
@@ -258,10 +258,15 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
 					S.apply_water()
+				if(method == TOUCH && isliving(M))
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
 
 		water/holywater
 			name = "Holy Water"
@@ -911,6 +916,12 @@ datum
 				M.adjustToxLoss(1)
 				..()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 
 		space_cleaner
 			name = "Space cleaner"
@@ -1515,6 +1526,78 @@ datum
 				..()
 				return
 
+//////////////////////////Ground crayons/////////////////////
+
+
+		crayon_dust
+			name = "Crayon dust"
+			id = "crayon_dust"
+			description = "Intensely coloured powder obtained by grinding crayons."
+			reagent_state = LIQUID
+			color = "#888888"
+			overdose = 5
+
+			red
+				name = "Red crayon dust"
+				id = "crayon_dust_red"
+				color = "#FE191A"
+
+			orange
+				name = "Orange crayon dust"
+				id = "crayon_dust_orange"
+				color = "#FFBE4F"
+
+			yellow
+				name = "Yellow crayon dust"
+				id = "crayon_dust_yellow"
+				color = "#FDFE7D"
+
+			green
+				name = "Green crayon dust"
+				id = "crayon_dust_green"
+				color = "#18A31A"
+
+			blue
+				name = "Blue crayon dust"
+				id = "crayon_dust_blue"
+				color = "#247CFF"
+
+			purple
+				name = "Purple crayon dust"
+				id = "crayon_dust_purple"
+				color = "#CC0099"
+
+			grey //Mime
+				name = "Grey crayon dust"
+				id = "crayon_dust_grey"
+				color = "#808080"
+
+			brown //Rainbow
+				name = "Brown crayon dust"
+				id = "crayon_dust_brown"
+				color = "#846F35"
+
+//////////////////////////Paint//////////////////////////////
+
+		paint
+			name = "Paint"
+			id = "paint"
+			description = "This paint will stick to almost any object"
+			reagent_state = LIQUID
+			color = "#808080"
+			overdose = 15
+
+			reaction_turf(var/turf/T, var/volume)
+				if(!istype(T) || istype(T, /turf/space))
+					return
+				T.color = color
+
+			reaction_obj(var/obj/O, var/volume)
+				..()
+				if(istype(O,/obj/item/weapon/light))
+					O.color = color
+
+
 //////////////////////////Poison stuff///////////////////////
 
 		toxin
@@ -1593,6 +1676,12 @@ datum
 				src = null
 				T.assume_gas("volatile_fuel", volume, T20C)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 
 		toxin/lexorin
 			name = "Lexorin"
@@ -2018,21 +2107,19 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(50)) M.heal_organ_damage(1,0)
 				M.nutrition += nutriment_factor	// For hunger and fatness
-/*
-				// If overeaten - vomit and fall down
-				// Makes you feel bad but removes reagents and some effect
-				// from your body
-				if (M.nutrition > 650)
-					M.nutrition = rand (250, 400)
-					M.weakened += rand(2, 10)
-					M.jitteriness += rand(0, 5)
-					M.dizziness = max (0, (M.dizziness - rand(0, 15)))
-					M.druggy = max (0, (M.druggy - rand(0, 15)))
-					M.adjustToxLoss(rand(-15, -5)))
-					M.updatehealth()
-*/
 				..()
 				return
+
+		nutriment/protein // Bad for Skrell!
+			name = "animal protein"
+			id = "protein"
+			color = "#440000"
+
+			on_mob_life(var/mob/living/M, var/alien)
+				if(alien && alien == IS_SKRELL)
+					M.adjustToxLoss(0.5)
+					M.nutrition -= nutriment_factor
+				..()
 
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
@@ -3265,6 +3352,12 @@ datum
 						usr << "It wasn't enough..."
 				return
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
+					return
 		ethanol/beer
 			name = "Beer"
 			id = "beer"
