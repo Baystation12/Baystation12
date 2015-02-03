@@ -540,9 +540,9 @@ var/global/datum/controller/occupations/job_master
 				G.prescription = 1
 //		H.update_icons()
 
-		H.hud_updateflag |= (1 << ID_HUD)
-		H.hud_updateflag |= (1 << IMPLOYAL_HUD)
-		H.hud_updateflag |= (1 << SPECIALROLE_HUD)
+		BITSET(H.hud_updateflag, ID_HUD)
+		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 		return H
 
 
