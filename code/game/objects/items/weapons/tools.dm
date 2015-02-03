@@ -261,6 +261,9 @@
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
+		if(isliving(O))
+			var/mob/living/L = O
+			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return

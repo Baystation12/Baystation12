@@ -258,10 +258,15 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
 					S.apply_water()
+				if(method == TOUCH && isliving(M))
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
 
 		water/holywater
 			name = "Holy Water"
@@ -911,6 +916,12 @@ datum
 				M.adjustToxLoss(1)
 				..()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 
 		space_cleaner
 			name = "Space cleaner"
@@ -1665,6 +1676,12 @@ datum
 				src = null
 				T.assume_gas("volatile_fuel", volume, T20C)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 
 		toxin/lexorin
 			name = "Lexorin"
@@ -3335,6 +3352,12 @@ datum
 						usr << "It wasn't enough..."
 				return
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 15)
+					return
 		ethanol/beer
 			name = "Beer"
 			id = "beer"
