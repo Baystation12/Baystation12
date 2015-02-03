@@ -569,8 +569,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_standing[ID_LAYER]	= null
 
-	hud_updateflag |= 1 << ID_HUD
-	hud_updateflag |= 1 << WANTED_HUD
+	BITSET(hud_updateflag, ID_HUD)
+	BITSET(hud_updateflag, WANTED_HUD)
 
 	if(update_icons)   update_icons()
 
