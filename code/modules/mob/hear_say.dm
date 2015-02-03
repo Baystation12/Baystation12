@@ -124,18 +124,28 @@
 	var/changed_voice
 
 	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
+		part_a = "<span class='say_quote'>\[[worldtime2text()]\]</span>" + part_a
 		var/jobname // the mob's "job"
-		var/mob/living/carbon/human/impersonating //The crewmember being impersonated, if any.
+		var/mob/living/carbon/human/impersonating //The crew member being impersonated, if any.
 
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
 
-			if((H.wear_id && istype(H.wear_id,/obj/item/weapon/card/id/syndicate)) && (H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice)))
-
+			if(H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice))
 				changed_voice = 1
-				var/mob/living/carbon/human/I = locate(speaker_name)
+				var/list/impersonated = new()
+				var/mob/living/carbon/human/I = impersonated[speaker_name]
 
-				if(I)
+				if(!I)
+					for(var/mob/living/carbon/human/M in mob_list)
+						if(M.real_name == speaker_name)
+							I = M
+							impersonated[speaker_name] = I
+							break
+
+				// If I's display name is currently different from the voice name and using an agent ID then don't impersonate
+				// as this would allow the AI to track I and realize the mismatch.
+				if(I && !(I.name != speaker_name && I.wear_id && istype(I.wear_id,/obj/item/weapon/card/id/syndicate)))
 					impersonating = I
 					jobname = impersonating.get_assignment()
 				else

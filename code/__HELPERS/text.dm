@@ -34,12 +34,9 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","�"="�"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
 	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
-			index = findtext(t, char)
+		replacetext(t, char, repl_chars[char])
 	return t
 
 /proc/readd_quotes(var/t)
@@ -83,7 +80,7 @@
 /proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
 	var/name = input(user, message, title, default)
 	return strip_html_properly(name, max_length)
-    
+
 // Used to get a trimmed, properly sanitized input, of max_length
 /proc/trim_strip_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
 	return trim(stripped_input(user, message, title, default, max_length))
@@ -342,7 +339,7 @@ proc/TextPreview(var/string,var/len=40)
 		input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
 	if(max_length)
 		input = copytext(input,1,max_length)
-	return input
+	return sanitize(input)
 
 /proc/trim_strip_html_properly(var/input, var/max_length = MAX_MESSAGE_LEN)
     return trim(strip_html_properly(input, max_length))

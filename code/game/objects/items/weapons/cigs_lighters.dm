@@ -42,6 +42,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	attack_verb = list("burnt", "singed")
 
 /obj/item/weapon/flame/match/process()
+	if(isliving(loc))
+		var/mob/living/M = loc
+		M.IgniteMob()
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
@@ -395,7 +398,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/icon_off = "lighter-g"
 	w_class = 1
 	throwforce = 4
-	flags = TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	attack_verb = list("burnt", "singed")
 
@@ -454,6 +457,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
+	M.IgniteMob()
 
 	if(istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == "mouth" && lit)
 		var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask

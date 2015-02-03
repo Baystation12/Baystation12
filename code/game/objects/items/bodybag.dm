@@ -39,7 +39,7 @@
 	close_sound = 'sound/items/zip.ogg'
 	var/item_path = /obj/item/bodybag
 	density = 0
-	storage_capacity = (mob_size * 2) - 1
+	storage_capacity = (default_mob_size * 2) - 1
 	var/contains_body = 0
 
 /obj/structure/closet/body_bag/attackby(W as obj, mob/user as mob)
@@ -49,7 +49,7 @@
 			return
 		if (!in_range(src, user) && src.loc != user)
 			return
-		t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 		if (t)
 			src.name = "body bag - "
 			src.name += t
