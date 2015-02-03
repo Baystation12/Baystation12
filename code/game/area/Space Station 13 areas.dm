@@ -94,6 +94,11 @@ var/list/ghostteleportlocs = list()
 	return 1
 
 /*-----------------------------------------------------------------------------*/
+
+/////////
+//SPACE//
+/////////
+
 /area/space
 	name = "\improper Space"
 	icon_state = "space"
@@ -113,8 +118,7 @@ var/list/ghostteleportlocs = list()
 
 /area/space/partyalert()
 	return
-/area/engine/
-	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
+
 /area/turret_protected/
 
 /area/arrival
@@ -130,9 +134,12 @@ var/list/ghostteleportlocs = list()
 
 
 
-//These are shuttle areas, they must contain two areas in a subgroup if you want to move a shuttle from one
+////////////
+//SHUTTLES//
+////////////
+//shuttle areas must contain at least two areas in a subgroup if you want to move a shuttle from one
 //place to another. Look at escape shuttle for example.
-//All shuttles show now be under shuttle since we have smooth-wall code.
+//All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
 	requires_power = 0
@@ -626,12 +633,10 @@ var/list/ghostteleportlocs = list()
 /area/prison/cell_block/C
 	name = "Prison Cell Block C"
 	icon_state = "brig"
-
-//STATION13
-
-/area/atmos
- 	name = "Atmospherics"
- 	icon_state = "atmos"
+	
+////////////////////
+//SPACE STATION 13//
+////////////////////
 
 //Maintenance
 
@@ -997,9 +1002,6 @@ var/list/ghostteleportlocs = list()
 
 
 
-
-
-
 /area/holodeck
 	name = "\improper Holodeck"
 	icon_state = "Holodeck"
@@ -1058,89 +1060,77 @@ var/list/ghostteleportlocs = list()
 
 
 
-
-
-
-
-
-
-
 //Engineering
 
-/area/engine
+/area/engineering/
+	name = "\improper Engineering"
+	icon_state = "engineering"
+	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
+	
+/area/engineering/atmos
+ 	name = "\improper Atmospherics"
+ 	icon_state = "atmos"
 
-	drone_fabrication
-		name = "\improper Drone Fabrication"
-		icon_state = "engine"
+/area/engineering/atmos/monitoring
+	name = "\improper Atmospherics Monitoring Room"
+	icon_state = "atmos_monitoring"
 
-	engine_smes
-		name = "Engineering SMES"
-		icon_state = "engine_smes"
-//		requires_power = 0//This area only covers the batteries and they deal with their own power
+/area/engineering/atmos/storage
+	name = "\improper Atmospherics Storage"
+	icon_state = "atmos_storage"
+	
+/area/engineering/drone_fabrication
+	name = "\improper Drone Fabrication"
+	icon_state = "drone_fab"
 
-	engine_room
-		name = "\improper Engine Room"
-		icon_state = "engine"
+/area/engineering/engine_smes
+	name = "\improper Engineering SMES"
+	icon_state = "engine_smes"
 
-	engine_airlock
-		name = "\improper Engine Room Airlock"
-		icon_state = "engine"
+/area/engineering/engine_room
+	name = "\improper Engine Room"
+	icon_state = "engine"
 
-	engine_monitoring
-		name = "\improper Engine Monitoring Room"
-		icon_state = "engine_monitoring"
+/area/engineering/engine_airlock
+	name = "\improper Engine Room Airlock"
+	icon_state = "engine"
 
-	engine_waste
-		name = "\improper Engine Waste Handling"
-		icon_state = "engine_waste"
+/area/engineering/engine_monitoring
+	name = "\improper Engine Monitoring Room"
+	icon_state = "engine_monitoring"
 
-	engineering_monitoring
-		name = "\improper Engineering Monitoring Room"
-		icon_state = "engine_monitoring"
+/area/engineering/engine_waste
+	name = "\improper Engine Waste Handling"
+	icon_state = "engine_waste"
 
-	atmos_monitoring
-		name = "\improper Atmospherics Monitoring Room"
-		icon_state = "engine_monitoring"
+/area/engineering/engineering_monitoring
+	name = "\improper Engineering Monitoring Room"
+	icon_state = "engine_monitoring"
 
-	engineering
-		name = "Engineering"
-		icon_state = "engine_smes"
+/area/engineering/foyer
+	name = "\improper Engineering Foyer"
+	icon_state = "engineering_foyer"
 
-	engineering_foyer
-		name = "\improper Engineering Foyer"
-		icon_state = "engine"
+/area/engineering/storage
+	name = "\improper Engineering Storage"
+	icon_state = "engineering_storage"
 
-	engineering_supply
-		name = "Engineering Supply"
-		icon_state = "engine_supply"
+/area/engineering/break_room
+	name = "\improper Engineering Break Room"
+	icon_state = "engineering_break"
 
-	break_room
-		name = "\improper Engineering Break Room"
-		icon_state = "engine"
+/area/engineering/engine_eva
+	name = "\improper Engine EVA"
+	icon_state = "engine_eva"
 
-	hallway
-		name = "\improper Engineering Hallway"
-		icon_state = "engine_hallway"
+/area/engineering/locker_room
+	name = "\improper Engineering Locker Room"
+	icon_state = "engineering_locker"
+	
+/area/engineering/workshop
+	name = "\improper Engineering Workshop"
+	icon_state = "engineering_workshop"
 
-	engine_hallway
-		name = "\improper Engine Room Hallway"
-		icon_state = "engine_hallway"
-
-	engine_eva
-		name = "\improper Engine EVA"
-		icon_state = "engine_eva"
-
-	engine_eva_maintenance
-		name = "\improper Engine EVA Maintenance"
-		icon_state = "engine_eva"
-
-	workshop
-		name = "\improper Engineering Workshop"
-		icon_state = "engine_storage"
-
-	locker_room
-		name = "\improper Engineering Locker Room"
-		icon_state = "engine_storage"
 
 
 //Solars
@@ -2124,7 +2114,6 @@ var/list/the_station_areas = list (
 	/area/shuttle/prison/station,
 	/area/shuttle/administration/station,
 	/area/shuttle/specops/station,
-	/area/atmos,
 	/area/maintenance,
 	/area/hallway,
 	/area/bridge,
@@ -2134,7 +2123,7 @@ var/list/the_station_areas = list (
 	/area/library,
 	/area/chapel,
 	/area/lawoffice,
-	/area/engine,
+	/area/engineering,
 	/area/solar,
 	/area/assembly,
 	/area/teleporter,
