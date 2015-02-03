@@ -4,7 +4,6 @@
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
 	item_state = "utility"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 
@@ -14,6 +13,7 @@
 	icon_state = "utilitybelt"
 	item_state = "utility"
 	can_hold = list(
+		//"/obj/item/weapon/combitool",
 		"/obj/item/weapon/crowbar",
 		"/obj/item/weapon/screwdriver",
 		"/obj/item/weapon/weldingtool",
@@ -24,7 +24,8 @@
 		"/obj/item/stack/cable_coil",
 		"/obj/item/device/t_scanner",
 		"/obj/item/device/analyzer",
-		"/obj/item/taperoll/engineering")
+		"/obj/item/taperoll/engineering",
+		"/obj/item/device/robotanalyzer")
 
 
 /obj/item/weapon/storage/belt/utility/full/New()
@@ -82,7 +83,7 @@
 	max_w_class = 3
 	max_combined_w_class = 21
 	can_hold = list(
-		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/grenade",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
 		"/obj/item/weapon/handcuffs",
 		"/obj/item/device/flash",
@@ -141,7 +142,6 @@
 	storage_slots = 9
 	max_w_class = 3
 	max_combined_w_class = 21
-
 
 /obj/item/weapon/storage/belt/security/ert
 	name = "ERT tactical belt"
@@ -205,5 +205,5 @@
 		"/obj/item/device/flashlight/pen",
 		"/obj/item/clothing/mask/surgical",
 		"/obj/item/clothing/gloves/latex",
-	        "/obj/item/weapon/reagent_containers/hypospray"
-		)
+	    "/obj/item/weapon/reagent_containers/hypospray"
+	    )

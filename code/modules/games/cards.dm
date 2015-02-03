@@ -181,11 +181,12 @@
 /obj/item/weapon/hand/attack_self(var/mob/user as mob)
 	src.hi.show(user)
 
-/obj/item/weapon/hand/examine()
-	. = ..()
-
-	if((!concealed || src.loc == usr) && cards.len)
-		usr.show_message("It contains: ")
+/obj/item/weapon/hand/examine(mob/user)
+	..(user)
+	if((!concealed || src.loc == user) && cards.len)
+		user << "It contains: "
+		for(var/datum/playingcard/P in cards)
+			user << "The [P.name]."
 
 		for (var/datum/playingcard/card in cards)
 			usr.show_message("The [card.name].")
