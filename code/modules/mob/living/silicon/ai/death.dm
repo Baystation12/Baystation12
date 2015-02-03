@@ -54,4 +54,4 @@
 			var/obj/item/device/aicard/card = loc
 			card.update_icon()
 
-	return ..(gibbed)
+	return ..(gibbed,"gives one shrill beep before falling lifeless.")

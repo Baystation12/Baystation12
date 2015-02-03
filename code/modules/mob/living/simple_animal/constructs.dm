@@ -129,6 +129,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attacktext = "smashed their armoured gauntlet into"
+	mob_size = 20
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -259,6 +260,7 @@
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'
+	mob_size = 20
 	var/energy = 0
 	var/max_energy = 1000
 

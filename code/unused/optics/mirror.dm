@@ -21,7 +21,6 @@
 	icon_state = "mirrorA"
 	set_dir(1)
 	desc = "A large, optical-grade mirror firmly mounted on a stand."
-	flags = FPRINT
 	anchored = 0
 	var/rotatable = 0	// true if mirror can be rotated
 	var/angle = 0		// normal of mirror, 0-15. 0=N, 1=NNE, 2=NE, 3=ENE, 4=E etc

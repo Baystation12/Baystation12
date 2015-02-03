@@ -131,6 +131,10 @@
 		else
 			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] handcuffed!</span>\n"
 
+	//buckled
+	if(buckled)
+		msg += "<span class='warning'>[t_He] [t_is] \icon[buckled] buckled to [buckled]!</span>\n"
+
 	//belt
 	if(belt)
 		if(belt.blood_DNA)

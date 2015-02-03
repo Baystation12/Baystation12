@@ -90,7 +90,8 @@
 		clicks = 0
 	//Do nasty effects
 	for(var/datum/disease2/effectholder/e in effects)
-		e.runeffect(mob,stage)
+		if(prob(33))
+			e.runeffect(mob,stage)
 
 	//Short airborne spread
 	if(src.spreadtype == "Airborne")

@@ -905,7 +905,7 @@ About the new airlock wires panel:
 			beingcrowbarred = 1 //derp, Agouri
 		else
 			beingcrowbarred = 0
-		if( beingcrowbarred && src.p_open && (operating == -1 || (src.locked && welded && !src.arePowerSystemsOn() && BROKEN) || (density && welded && operating != 1 && !src.arePowerSystemsOn() && !src.locked)) )
+		if( beingcrowbarred && src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40))

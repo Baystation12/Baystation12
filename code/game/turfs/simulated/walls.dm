@@ -125,7 +125,7 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		take_damage(log(rand(0.9, 1.1) * (adj_temp - max_temperature)))
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - max_temperature)))
 
 	return ..()
 
@@ -273,7 +273,7 @@
 		user << rotting_touch_message
 		if(rotting_destroy_touch)
 			dismantle_wall()
-		return 1
+			return 1
 
 	if(..()) return 1
 
@@ -475,6 +475,9 @@
 
 	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
+	
+	else if(istype(W, /obj/item/weapon/reagent_containers))
+		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
 
 	else
 		return attack_hand(user)

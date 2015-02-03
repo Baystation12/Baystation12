@@ -10,7 +10,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_ID | SLOT_BELT
 
 	//Main variables
@@ -464,7 +463,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data["manifest"] = data_core.get_manifest_json()
+		data_core.get_manifest_json()
 
 
 	if(mode==3)
@@ -535,12 +534,19 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
+	if(ui)
+		ui.load_cached_data(ManifestJSON)
+
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+	        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400)
 		// when the ui is first opened this is the data it will use
+
+		ui.load_cached_data(ManifestJSON)
+
 		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
@@ -720,7 +726,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						U << "The PDA softly beeps."
 						ui.close()
 					else
-						t = copytext(sanitize(t), 1, 20)
+						t = sanitize(copytext(t, 1, 20))
 						ttone = t
 			else
 				ui.close()
@@ -729,7 +735,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			var/t = input(U, "Please enter new news tone", name, newstone) as text
 			if (in_range(src, U) && loc == U)
 				if (t)
-					t = copytext(sanitize(t), 1, 20)
+					t = sanitize(copytext(t, 1, 20))
 					newstone = t
 			else
 				ui.close()
@@ -965,7 +971,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U.visible_message("<span class='notice'>[U] taps on \his PDA's screen.</span>")
 	U.last_target_click = world.time
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
 	t = readd_quotes(t)
 	if (!t || !istype(P))
 		return

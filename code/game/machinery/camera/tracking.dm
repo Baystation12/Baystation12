@@ -15,15 +15,11 @@
 	if(src.stat == 2)
 		return
 
-	var/list/L = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		L.Add(C)
-
-	camera_sort(L)
+	cameranet.process_sort()
 
 	var/list/T = list()
 	T["Cancel"] = "Cancel"
-	for (var/obj/machinery/camera/C in L)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (tempnetwork.len)
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
@@ -54,7 +50,7 @@
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
-	loc = copytext(sanitize(loc), 1, MAX_MESSAGE_LEN)
+	loc = sanitize(copytext(loc, 1, MAX_MESSAGE_LEN))
 	if(!loc)
 		src << "\red Must supply a location name"
 		return
@@ -236,7 +232,11 @@
 	return 1
 
 /proc/trackable(var/mob/living/M)
-	return near_camera(M) || (M.loc.z in config.station_levels && hassensorlevel(M, SUIT_SENSOR_TRACKING))
+	var/turf/T = get_turf(M)
+	if(T && (T.z in config.station_levels) && hassensorlevel(M, SUIT_SENSOR_TRACKING))
+		return 1
+
+	return near_camera(M)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
@@ -248,19 +248,3 @@
 
 /mob/living/silicon/ai/attack_ai(var/mob/user as mob)
 	ai_camera_list()
-
-/proc/camera_sort(list/L)
-	var/obj/machinery/camera/a
-	var/obj/machinery/camera/b
-
-	for (var/i = L.len, i > 0, i--)
-		for (var/j = 1 to i - 1)
-			a = L[j]
-			b = L[j + 1]
-			if (a.c_tag_order != b.c_tag_order)
-				if (a.c_tag_order > b.c_tag_order)
-					L.Swap(j, j + 1)
-			else
-				if (sorttext(a.c_tag, b.c_tag) < 0)
-					L.Swap(j, j + 1)
-	return L
