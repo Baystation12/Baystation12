@@ -646,7 +646,7 @@
 				if(type in diseases) // Make sure this is a disease
 					D = new type(0, null)
 			var/list/data = list("viruses"=list(D))
-			var/name = sanitize(input(usr,"Name:","Name the culture",D.name))
+			var/name = sanitize(copytext(input(usr,"Name:","Name the culture",D.name), 1, MAX_NAME_LEN))
 			if(!name || name == " ") name = D.name
 			B.name = "[name] culture bottle"
 			B.desc = "A small bottle. Contains [D.agent] culture in synthblood medium."
