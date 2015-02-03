@@ -10,6 +10,7 @@ nanoui is used to open and update nano browser uis
 #define STATUS_INTERACTIVE 2 // GREEN Visability
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
+#define STATUS_CLOSE -1 // Close the interface
 
 /datum/nanoui
 	// the user who opened this ui
@@ -58,9 +59,6 @@ nanoui is used to open and update nano browser uis
 	var/status = STATUS_INTERACTIVE
 
 	var/cached_data = null
-
-	// Only allow users with a certain user.stat to get updates. Defaults to 0 (concious)
-	var/allowed_user_stat = 0 // -1 = ignore, 0 = alive, 1 = unconcious or alive, 2 = dead concious or alive
 
  /**
   * Create a new nanoui instance.
@@ -132,6 +130,43 @@ nanoui is used to open and update nano browser uis
 			if (push_update || status == 0)
 				push_data(null, 1) // Update the UI, force the update in case the status is 0, data is null so that previous data is used
 
+/mob/proc/can_interact_with_interface(var/src_object)
+	return STATUS_DISABLED						// By default no mob can do anything with NanoUI
+
+/mob/dead/observer/can_interact_with_interface()
+	return STATUS_UPDATE						// Ghosts can view updates
+
+/mob/living/can_interact_with_interface()
+	return STATUS_UPDATE						// Living movs can also view updates
+
+/mob/living/carbon/human/can_interact_with_interface(var/src_object)
+	var/dist = get_dist(src_object, src)
+	if (dist > 4)
+		return STATUS_CLOSE
+
+	if (src.stat != CONSCIOUS)
+		return STATUS_CLOSE						// no updates, close the interface
+	else if (src.restrained() || src.lying)
+		return STATUS_UPDATE					// update only (orange visibility)
+	else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
+		return STATUS_INTERACTIVE	     		// Will build in distance checks on the topics for sanity.
+	else if (!(src_object in view(4, src))) 	// If the src object is not in visable, set status to 0
+		return STATUS_DISABLED 					// interactive (green visibility)
+	else if (dist <= 1)
+		return STATUS_INTERACTIVE				 // interactive (green visibility)
+	else if (dist <= 2)
+		return STATUS_UPDATE 					// update only (orange visibility)
+	else if (dist <= 4)
+		return STATUS_DISABLED 					// no updates, completely disabled (red visibility)
+
+/mob/living/silicon/robot/can_interact_with_interface(var/src_object)
+	if (src_object in view(7, src))	// robots can see and interact with things they can see within 7 tiles
+		return STATUS_INTERACTIVE		// interactive (green visibility)
+	return STATUS_DISABLED				// no updates, completely disabled (red visibility)
+
+/mob/living/silicon/robot/AI/can_interact_with_interface(var/src_object)
+	return STATUS_INTERACTIVE
+
  /**
   * Update the status (visibility) of this ui based on the user's status
   *
@@ -140,37 +175,11 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	if (istype(user, /mob/dead/observer)) 
-		/* Ghosts see updates but can't interact */
-		set_status(STATUS_UPDATE, push_update)
-	else if (istype(user, /mob/living/silicon/ai) || (get_dist(get_turf(user),get_turf(src_object)) <= 1))
-		set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
-	else if (istype(user, /mob/living/silicon/robot))
-		if (src_object in view(7, user)) // robots can see and interact with things they can see within 7 tiles
-			set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
-		else
-			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
+	var/status = user.can_interact_with_interface(src_object)
+	if(status == STATUS_CLOSE)
+		close()
 	else
-		var/dist = get_dist(src_object, user)
-
-		if (dist > 4)
-			close()
-			return
-
-		if ((allowed_user_stat > -1) && (user.stat > allowed_user_stat))
-			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
-		else if (user.restrained() || user.lying)
-			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
-		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
-			set_status(STATUS_INTERACTIVE, push_update)	     // Will build in distance checks on the topics for sanity.
-		else if (!(src_object in view(4, user))) // If the src object is not in visable, set status to 0
-			set_status(STATUS_DISABLED, push_update) // interactive (green visibility)
-		else if (dist <= 1)
-			set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
-		else if (dist <= 2)
-			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
-		else if (dist <= 4)
-			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
+		set_status(status, push_update)
 
  /**
   * Set the ui to auto update (every master_controller tick)
