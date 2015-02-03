@@ -34,14 +34,20 @@
 	if(!stacktypes || !stacktypes.len) return
 
 	for(var/T in stacktypes)
-		var/O = locate(T) in src.modules
-		var/obj/item/stack/S = O
+		var/obj/item/stack/S
+		for(var/obj/O in src.modules)
+			if(O.type == T)
+				S = O
+				break
 
 		if(!S)
 			src.modules -= null
 			S = new T(src)
 			src.modules |= S
 			S.amount = 1
+
+		if(!istype(S))
+			continue
 
 		if(S && S.amount < stacktypes[T])
 			S.amount++

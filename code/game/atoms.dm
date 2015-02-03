@@ -195,7 +195,10 @@ its easier to just keep the beam vertical.
 			f_name = "some "
 		else
 			f_name = "a "
-		f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
+		if(blood_color != "#030303")
+			f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
+		else
+			f_name += "oil-stained [name][infix]."
 
 	user << "\icon[src] That's [f_name] [suffix]"
 

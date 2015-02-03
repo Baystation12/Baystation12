@@ -496,8 +496,14 @@
 			return
 
 	emergency_shuttle.call_transfer()
-	log_game("[key_name(user)] has called the shuttle.")
-	message_admins("[key_name_admin(user)] has called the shuttle.", 1)
+	
+	//delay events in case of an autotransfer
+	if (isnull(user))
+		event_manager.delay_events(EVENT_LEVEL_MODERATE, 9000) //15 minutes
+		event_manager.delay_events(EVENT_LEVEL_MAJOR, 9000) 
+	
+	log_game("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
+	message_admins("[user? key_name_admin(user) : "Autotransfer"] has called the shuttle.", 1)
 
 	return
 

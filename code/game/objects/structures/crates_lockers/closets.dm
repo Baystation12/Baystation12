@@ -191,7 +191,8 @@
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
 		if(istype(W, /obj/item/weapon/grab))
-			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
+			var/obj/item/weapon/grab/G = W
+			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 		if(istype(W,/obj/item/tk_grab))
 			return 0
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -205,6 +206,8 @@
 			del(src)
 			return
 		if(isrobot(user))
+			return
+		if(W.loc != user) // This should stop mounted modules ending up outside the module.
 			return
 		usr.drop_item()
 		if(W)

@@ -427,7 +427,7 @@ datum
 					holder.remove_reagent(src.id, 0.25 * REAGENTS_METABOLISM)
 				return
 
-/*		silicate
+		silicate
 			name = "Silicate"
 			id = "silicate"
 			description = "A compound that can be used to reinforce glass."
@@ -437,31 +437,9 @@ datum
 			reaction_obj(var/obj/O, var/volume)
 				src = null
 				if(istype(O,/obj/structure/window))
-					if(O:silicate <= 200)
-
-						O:silicate += volume
-						O:health += volume * 3
-
-						if(!O:silicateIcon)
-							var/icon/I = icon(O.icon,O.icon_state,O.dir)
-
-							var/r = (volume / 100) + 1
-							var/g = (volume / 70) + 1
-							var/b = (volume / 50) + 1
-							I.SetIntensity(r,g,b)
-							O.icon = I
-							O:silicateIcon = I
-						else
-							var/icon/I = O:silicateIcon
-
-							var/r = (volume / 100) + 1
-							var/g = (volume / 70) + 1
-							var/b = (volume / 50) + 1
-							I.SetIntensity(r,g,b)
-							O.icon = I
-							O:silicateIcon = I
-
-				return*/
+					var/obj/structure/window/W = O
+					W.apply_silicate(volume)
+				return
 
 		oxygen
 			name = "Oxygen"

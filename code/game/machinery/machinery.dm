@@ -230,6 +230,10 @@ Class Procs:
 /mob/living/silicon/ai/canUseTopic(atom/movable/M)
 	if(stat)
 		return
+	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
+	// unless it's on the same level as the object it's interacting with.
+	if(!(z == M.z || M.z in config.player_levels))
+		return
 	//stop AIs from leaving windows open and using then after they lose vision
 	//apc_override is needed here because AIs use their own APC when powerless
 	if(cameranet && !cameranet.checkTurfVis(get_turf(M)) && !apc_override)

@@ -5,7 +5,8 @@ obj/structure/firedoor_assembly
 	icon_state = "door_construction"
 	anchored = 0
 	opacity = 0
-	density = 0
+	density = 1
+	var/wired = 0
 
 obj/structure/firedoor_assembly/update_icon()
 	if(anchored)
@@ -14,7 +15,28 @@ obj/structure/firedoor_assembly/update_icon()
 		icon_state = "door_construction"
 
 obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
-	if(istype(C, /obj/item/weapon/airalarm_electronics))
+	if(istype(C, /obj/item/stack/cable_coil) && !wired && anchored)
+		var/obj/item/stack/cable_coil/cable = C
+		if (cable.get_amount() < 1)
+			user << "<span class='warning'>You need one length of coil to wire \the [src].</span>"
+			return
+		user.visible_message("[user] wires \the [src].", "You start to wire \the [src].")
+		if(do_after(user, 40) && !wired && anchored)
+			if (cable.use(1))
+				wired = 1
+				user << "<span class='notice'>You wire \the [src].</span>"
+
+	else if(istype(C, /obj/item/weapon/wirecutters) && wired )
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user.visible_message("[user] cuts the wires from \the [src].", "You start to cut the wires from \the [src].")
+
+		if(do_after(user, 40))
+			if(!src) return
+			user << "<span class='notice'>You cut the wires!</span>"
+			new/obj/item/stack/cable_coil(src.loc, 1)
+			wired = 0
+
+	else if(istype(C, /obj/item/weapon/airalarm_electronics) && wired)
 		if(anchored)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='warning'>[user] has inserted a circuit into \the [src]!</span>",
@@ -26,7 +48,6 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			user << "<span class='warning'>You must secure \the [src] first!</span>"
 	else if(istype(C, /obj/item/weapon/wrench))
 		anchored = !anchored
-		density = !density
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")

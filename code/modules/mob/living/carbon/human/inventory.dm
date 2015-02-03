@@ -640,9 +640,10 @@ It can still be worn/put on as normal.
 						W.hold.close(usr)
 				usr.put_in_hands(tie)
 				suit.hastie = null*/
-			suit.hastie.on_removed(usr)
-			suit.hastie = null
-			target.update_inv_w_uniform()
+			if(suit && suit.hastie)
+				suit.hastie.on_removed(usr)
+				suit.hastie = null
+				target.update_inv_w_uniform()
 		if("id")
 			slot_to_process = slot_wear_id
 			if (target.wear_id)

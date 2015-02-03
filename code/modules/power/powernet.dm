@@ -16,9 +16,11 @@
 
 /datum/powernet/New()
 	powernets += src
+	..()
 
 /datum/powernet/Del()
 	powernets -= src
+	..()
 
 //Returns the amount of excess power (before refunding to SMESs) from last tick.
 //This is for machines that might adjust their power consumption using this data.
@@ -110,8 +112,7 @@
 			S.restore()				// and restore some of the power that was used
 
 	//updates the viewed load (as seen on power computers)
-	viewload = 0.8*viewload + 0.2*load
-	viewload = round(viewload)
+	viewload = round(load)
 
 	//reset the powernet
 	load = 0

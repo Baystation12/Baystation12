@@ -12,6 +12,7 @@
 	status_flags = GODMODE  // You can't damage it.
 	mouse_opacity = 0
 	see_in_dark = 7
+	invisibility = INVISIBILITY_MAXIMUM
 
 // Movement code. Returns 0 to stop air movement from moving it.
 /mob/aiEye/Move()
