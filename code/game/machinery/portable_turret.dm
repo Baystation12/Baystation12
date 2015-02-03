@@ -154,7 +154,7 @@
 		user << "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>"
 		return 0
 
-	if (get_dist(src, user) > 0 && !issilicon(user))
+	if (get_dist(src, user) > 1 && !issilicon(user))
 		user << "<span class='notice'>You are too far away.</span>"
 		user.unset_machine()
 		user << browse(null, "window=turretid")
@@ -821,7 +821,7 @@
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
 		var/t = input(user, "Enter new turret name", name, finish_name) as text
-		t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t, 1, MAX_MESSAGE_LEN))
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

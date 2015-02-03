@@ -19,6 +19,7 @@
 	use_power_cost = 5
 	active_power_cost = 1
 	passive_power_cost = 0
+	module_cooldown = 30
 
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
