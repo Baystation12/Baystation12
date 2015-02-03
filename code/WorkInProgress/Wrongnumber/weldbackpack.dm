@@ -46,8 +46,7 @@
 		user << "\blue The pack is already full!"
 		return
 
-/obj/item/weapon/weldpack/examine()
-	set src in usr
-	usr << text("\icon[] [] units of fuel left!", src, src.reagents.total_volume)
-	..()
+/obj/item/weapon/weldpack/examine(mob/user)
+	..(user)
+	user << text("\icon[] [] units of fuel left!", src, src.reagents.total_volume)
 	return

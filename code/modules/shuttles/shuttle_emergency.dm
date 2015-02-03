@@ -1,4 +1,3 @@
-
 /datum/shuttle/ferry/emergency
 	//pass
 

@@ -16,12 +16,12 @@
 	else
 		return temp_access
 
-/obj/item/weapon/card/id/guest/examine()
-	..()
+/obj/item/weapon/card/id/guest/examine(mob/user)
+	..(user)
 	if (world.time < expiration_time)
-		usr << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
+		user << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
 	else
-		usr << "<span class='warning'>It expired at [worldtime2text(expiration_time)].</span>"
+		user << "<span class='warning'>It expired at [worldtime2text(expiration_time)].</span>"
 
 /obj/item/weapon/card/id/guest/read()
 	if (world.time > expiration_time)
@@ -69,9 +69,6 @@
 			user << "<span class='warning'>There is already ID card inside.</span>"
 
 /obj/machinery/computer/guestpass/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/computer/guestpass/attack_paw(var/mob/user as mob)
 	return attack_hand(user)
 
 /obj/machinery/computer/guestpass/attack_hand(var/mob/user as mob)

@@ -1,27 +1,19 @@
-/mob/living/silicon/pai/examine() //removed as it was pointless...moved to the pai-card instead.
-	/* This is totally pointless because this mob is contained inside a card!
-	set src in oview()
+/mob/living/silicon/pai/examine(mob/user)
+	..(user, infix = ", personal AI")
 
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
-	if (src.stat == DEAD)
-		msg += "<span class='deadsay'>It appears to be offline.</span>\n"
-	else
-		msg += "<span class='warning'>"
-		if (src.getBruteLoss())
-			if (src.getBruteLoss() < 30)
-				msg += "It looks slightly dented.\n"
-			else
-				msg += "<B>Its casing appears cracked and broken!</B>\n"
-		if (src.getFireLoss())
-			if (src.getFireLoss() < 30)
-				msg += "It looks slightly charred!\n"
-			else
-				msg += "<B>Its casing is melted and heat-warped!</B>\n"
-		if (src.stat == UNCONSCIOUS)
-			msg += "It doesn't seem to be responding and its text-output is lagging.\n"
-		msg += "</span>"
-	msg += "*---------*</span>"
+	var/msg = ""
+	switch(src.stat)
+		if(CONSCIOUS)
+			if(!src.client)	msg += "\nIt appears to be in stand-by mode." //afk
+		if(UNCONSCIOUS)		msg += "\n<span class='warning'>It doesn't seem to be responding.</span>"
+		if(DEAD)			msg += "\n<span class='deadsay'>It looks completely unsalvageable.</span>"
+	msg += "\n*---------*</span>"
 
-	usr << msg
-	*/
-	return
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+
+	if (pose)
+		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+			pose = addtext(pose,".") //Makes sure all emotes end with a period.
+		msg += "\nIt is [pose]"
+
+	user << msg

@@ -904,13 +904,12 @@ var/linenums = 0
 
 
 
-/obj/machinery/connector/examine()
-	set src in oview(1)
-	..()
-	if(connected)
-		usr << "It is connected to \an [connected.name]."
-	else
-		usr << "It is unconnected."
+/obj/machinery/connector/examine(mob/user)
+	if(..(user, 1))
+		if(connected)
+			usr << "It is connected to \an [connected.name]."
+		else
+			usr << "It is unconnected."
 
 
 
@@ -1319,10 +1318,9 @@ var/linenums = 0
 
 	icon_state = "valve[open]"
 
-/obj/machinery/valve/mvalve/examine()
-	set src in oview(1)
-
-	usr << "[desc] It is [ open? "open" : "closed"]."
+/obj/machinery/valve/mvalve/examine(mob/user)
+	if(..(user, 1))
+		user << "[desc] It is [ open? "open" : "closed"]."
 
 
 
@@ -1456,14 +1454,12 @@ var/linenums = 0
 
 	icon_state = "dvalve[open]"
 
-/obj/machinery/valve/dvalve/examine()
-	set src in oview(1)
-	if(NOPOWER)
-		usr << "[desc] It is unpowered! It is [ open? "open" : "closed"]."
-		return
-	usr << "[desc] It is [ open? "open" : "closed"]."
-
-
+/obj/machinery/valve/dvalve/examine(mob/user)
+	if(..(user, 1))
+		if(NOPOWER)
+			user << "It is unpowered! It is [ open? "open" : "closed"]."
+			return
+		user << "It is [ open? "open" : "closed"]."
 
 /obj/machinery/valve/dvalve/buildnodes()
 	var/turf/T = src.loc

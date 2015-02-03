@@ -1,15 +1,14 @@
 /obj/machinery/atmospherics/unary/vent_scrubber
 	icon = 'icons/atmos/vent_scrubber.dmi'
-	icon_state = "map_scrubber"
+	icon_state = "map_scrubber_off"
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it"
-	use_power = 1
+	use_power = 0
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	active_power_usage = 7500	//This also doubles as a measure of how powerful the pump is, in Watts. 7500 W ~ 10 HP
-	var/last_power_draw = 0
+	power_rating = 7500			//7500 W ~ 10 HP
 
-	connect_types = list(1,3) //connects to regular and scrubber pipes
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
 
 	level = 1
 
@@ -18,7 +17,6 @@
 	var/frequency = 1439
 	var/datum/radio_frequency/radio_connection
 
-	var/on = 0
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
 	var/list/scrubbing_gas = list("carbon_dioxide")
 
@@ -29,7 +27,8 @@
 	var/radio_filter_in
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
-	on = 1
+	use_power = 1
+	icon_state = "map_scrubber_on"
 
 /obj/machinery/atmospherics/unary/vent_scrubber/New()
 	..()
@@ -62,7 +61,7 @@
 	if(!powered())
 		scrubber_icon += "off"
 	else
-		scrubber_icon += "[on ? "[scrubbing ? "on" : "in"]" : "off"]"
+		scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
 
 	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
 
@@ -97,7 +96,7 @@
 		"tag" = id_tag,
 		"device" = "AScr",
 		"timestamp" = world.time,
-		"power" = on,
+		"power" = use_power,
 		"scrubbing" = scrubbing,
 		"panic" = panic,
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
@@ -123,13 +122,14 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/process()
 	..()
+
+	last_power_draw = 0
+	last_flow_rate = 0
+
 	if (!node)
-		on = 0
+		use_power = 0
 	//broadcast_status()
-	if(!on || (stat & (NOPOWER|BROKEN)))
-		update_use_power(0)	//we got here because a player turned a pump off - definitely want to update.
-		last_flow_rate = 0
-		last_power_draw = 0
+	if(!use_power || (stat & (NOPOWER|BROKEN)))
 		return 0
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -139,20 +139,16 @@
 		//limit flow rate from turfs
 		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SCRUBBER_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 
-		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, active_power_usage)
+		power_draw = scrub_gas(src, scrubbing_gas, environment, air_contents, transfer_moles, power_rating)
 	else //Just siphon all air
 		//limit flow rate from turfs
 		var/transfer_moles = min(environment.total_moles, environment.total_moles*MAX_SIPHON_FLOWRATE/environment.volume)	//group_multiplier gets divided out here
 
-		power_draw = pump_gas(src, environment, air_contents, transfer_moles, active_power_usage)
+		power_draw = pump_gas(src, environment, air_contents, transfer_moles, power_rating)
 
-	if (power_draw < 0)
-		//update_use_power(0)
-		use_power = 0	//don't force update. Sure, we will continue to use power even though we're not pumping anything, but it is easier on the CPU
-		last_power_draw = 0
-		last_flow_rate = 0
-	else
-		last_power_draw = handle_power_draw(power_draw)
+	if (power_draw >= 0)
+		last_power_draw = power_draw
+		use_power(power_draw)
 
 	if(network)
 		network.update = 1
@@ -170,21 +166,21 @@
 		return 0
 
 	if(signal.data["power"] != null)
-		on = text2num(signal.data["power"])
+		use_power = text2num(signal.data["power"])
 	if(signal.data["power_toggle"] != null)
-		on = !on
+		use_power = !use_power
 
 	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
 		panic = text2num(signal.data["panic_siphon"] != null)
 		if(panic)
-			on = 1
+			use_power = 1
 			scrubbing = 0
 		else
 			scrubbing = 1
 	if(signal.data["toggle_panic_siphon"] != null)
 		panic = !panic
 		if(panic)
-			on = 1
+			use_power = 1
 			scrubbing = 0
 		else
 			scrubbing = 1
@@ -237,7 +233,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
-	if (!(stat & NOPOWER) && on)
+	if (!(stat & NOPOWER) && use_power)
 		user << "\red You cannot unwrench this [src], turn it off first."
 		return 1
 	var/turf/T = src.loc
@@ -260,13 +256,11 @@
 		new /obj/item/pipe(loc, make_from=src)
 		del(src)
 
-/obj/machinery/atmospherics/unary/vent_scrubber/examine()
-	set src in oview(1)
-	..()
-	if (get_dist(usr, src) <= 1)
-		usr << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+/obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
+	if(..(user, 1))
+		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
-		usr << "You are too far away to read the gauge."
+		user << "You are too far away to read the gauge."
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Del()
 	if(initial_loc)

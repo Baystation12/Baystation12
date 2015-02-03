@@ -2,6 +2,8 @@
 #define LIQUID 2
 #define GAS 3
 
+#define CHEM_DISPENSER_ENERGY_COST	0.1	//How many energy points do we use per unit of chemical?
+
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
 	density = 1
@@ -28,7 +30,7 @@
 	var/oldenergy = energy
 	energy = min(energy + addenergy, max_energy)
 	if(energy != oldenergy)
-		use_power(1500) // This thing uses up alot of power (this is still low as shit for creating reagents from thin air)
+		use_power(CHEM_SYNTH_ENERGY / CHEM_DISPENSER_ENERGY_COST) // This thing uses up "alot" of power (this is still low as shit for creating reagents from thin air)
 		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
@@ -137,8 +139,10 @@
 			var/datum/reagents/R = B.reagents
 			var/space = R.maximum_volume - R.total_volume
 
-			R.add_reagent(href_list["dispense"], min(amount, energy * 10, space))
-			energy = max(energy - min(amount, energy * 10, space) / 10, 0)
+			//uses 1 energy per 10 units.
+			var/added_amount = min(amount, energy / CHEM_DISPENSER_ENERGY_COST, space)
+			R.add_reagent(href_list["dispense"], added_amount)
+			energy = max(energy - added_amount * CHEM_DISPENSER_ENERGY_COST, 0)
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
@@ -166,9 +170,6 @@
 		return
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/chem_dispenser/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/chem_dispenser/attack_hand(mob/user as mob)
@@ -226,6 +227,24 @@
 			dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
 			hackedcheck = 0
 			return
+
+/obj/machinery/chem_dispenser/meds
+	name = "chem dispenser magic"
+	density = 1
+	anchored = 1
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "dispenser"
+	use_power = 0
+	idle_power_usage = 40
+	ui_title = "Chem Dispenser 9000"
+	energy = 100
+	max_energy = 100
+	amount = 30
+	accept_glass = 0 //At 0 ONLY accepts glass containers. Kinda misleading varname.
+	beaker = null
+	recharged = 0
+	hackedcheck = 0
+	dispensable_reagents = list("inaprovaline","ryetalyn","paracetamol","tramadol","oxycodone","sterilizine","leporazine","kelotane","dermaline","dexalin","dexalinp","tricordrazine","anti_toxin","synaptizine","hyronalin","arithrazine","alkysine","imidazoline","peridaxon","bicaridine","hyperzine","rezadone","spaceacillin","ethylredoxrazine","stoxin","chloralhydrate","cryoxadone","clonexadone")
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -456,9 +475,6 @@
 /obj/machinery/chem_master/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/chem_master/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/chem_master/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
@@ -680,9 +696,6 @@
 	return
 
 /obj/machinery/computer/pandemic/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/computer/pandemic/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/computer/pandemic/attack_hand(mob/user as mob)
@@ -917,9 +930,6 @@
 	holdingitems += O
 	src.updateUsrDialog()
 	return 0
-
-/obj/machinery/reagentgrinder/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/reagentgrinder/attack_ai(mob/user as mob)
 	return 0

@@ -40,7 +40,7 @@ obj/effect/decal/cleanable/liquid_fuel
 		icon_state = "mustard"
 		anchored = 0
 		New(newLoc, amt = 1, d = 0)
-			dir = d //Setting this direction means you won't get torched by your own flamethrower.
+			set_dir(d) //Setting this direction means you won't get torched by your own flamethrower.
 			. = ..()
 
 		Spread()

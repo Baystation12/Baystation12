@@ -1,6 +1,6 @@
 /obj/item/mecha_parts/mecha_equipment/tool/sleeper
-	name = "Mounted Sleeper"
-	desc = "Mounted Sleeper. (Can be attached to: Medical Exosuits)"
+	name = "mounted sleeper"
+	desc = "A sleeper. Mountable to an exosuit. (Can be attached to: Medical Exosuits)"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_0"
 	origin_tech = "programming=2;biotech=3"
@@ -337,7 +337,7 @@
 			var/turf/simulated/floor/T = new_turf
 			if(!T.is_plating())
 				if(!T.broken && !T.burnt)
-					new T.floor_tile.type(T)
+					new T.floor_type(T)
 				T.make_plating()
 		return !new_turf.intact
 
@@ -365,9 +365,7 @@
 
 		if(!PN)
 			PN = new()
-			powernets += PN
-		NC.powernet = PN
-		PN.cables += NC
+		PN.add_cable(NC)
 		NC.mergeConnectedNetworks(NC.d2)
 
 		//NC.mergeConnectedNetworksOnTurf()
@@ -375,7 +373,7 @@
 		return 1
 
 /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun
-	name = "Syringe Gun"
+	name = "syringe gun"
 	desc = "Exosuit-mounted chem synthesizer with syringe gun. Reagents inside are held in stasis, so no reactions will occur. (Can be attached to: Medical Exosuits)"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "syringegun"

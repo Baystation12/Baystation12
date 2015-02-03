@@ -299,7 +299,7 @@ field_generator power level display
 			fields += CF
 			G.fields += CF
 			CF.loc = T
-			CF.dir = field_dir
+			CF.set_dir(field_dir)
 	var/listcheck = 0
 	for(var/obj/machinery/field_generator/FG in connected_gens)
 		if (isnull(FG))

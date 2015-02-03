@@ -174,8 +174,9 @@
 			vendmode = 1
 
 		if("cancel")
-			relap.loc = src.loc
-			relap = null
+			if(relap)
+				relap.loc = src.loc
+				relap = null
 			vendmode = 0
 
 	src.updateUsrDialog()
@@ -263,7 +264,7 @@
 		choose_progs(C)
 		vend()
 		popup.close()
-		newlap.close_computer()
+		newlap.close_laptop()
 		newlap = null
 		cardreader = 0
 		floppy = 0

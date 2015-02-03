@@ -1,7 +1,7 @@
 /atom
 	layer = 2
 	var/level = 2
-	var/flags = FPRINT
+	var/flags = 0
 	var/list/fingerprints
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
@@ -138,7 +138,7 @@ its easier to just keep the beam vertical.
 	//of range or to another z-level, then the beam will stop.  Otherwise it will
 	//continue to draw.
 
-		dir=get_dir(src,BeamTarget)	//Causes the source of the beam to rotate to continuosly face the BeamTarget.
+		set_dir(get_dir(src,BeamTarget))	//Causes the source of the beam to rotate to continuosly face the BeamTarget.
 
 		for(var/obj/effect/overlay/beam/O in orange(10,src))	//This section erases the previously drawn beam because I found it was easier to
 			if(O.BeamSource==src)				//just draw another instance of the beam instead of trying to manipulate all the
@@ -187,23 +187,35 @@ its easier to just keep the beam vertical.
 
 
 //All atoms
-/atom/verb/examine()
-	set name = "Examine"
-	set category = "IC"
-	set src in view(usr.client) //If it can be seen, it can be examined.
+/atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+	//This reformat names to get a/an properly working on item descriptions when they are bloody
+	var/f_name = "\a [src][infix]."
+	if(src.blood_DNA && !istype(src, /obj/effect/decal))
+		if(gender == PLURAL)
+			f_name = "some "
+		else
+			f_name = "a "
+		if(blood_color != "#030303")
+			f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
+		else
+			f_name += "oil-stained [name][infix]."
 
-	if (!( usr ))
-		return
-	usr << "That's \a [src]." //changed to "That's" from "This is" because "This is some metal sheets" sounds dumb compared to "That's some metal sheets" ~Carn
-	usr << desc
-	// *****RM
-	//usr << "[name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
-	return
+	user << "\icon[src] That's [f_name] [suffix]"
+
+	if(desc)
+		user << desc
+
+	return distance == -1 || (get_dist(src, user) <= distance)
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
 /atom/proc/relaymove()
 	return
+
+//called to set the atom's dir and used to add behaviour to dir-changes
+/atom/proc/set_dir(new_dir)
+	. = new_dir != dir
+	dir = new_dir
 
 /atom/proc/ex_act()
 	return
@@ -222,8 +234,6 @@ its easier to just keep the beam vertical.
 /atom/proc/add_hiddenprint(mob/living/M as mob)
 	if(isnull(M)) return
 	if(isnull(M.key)) return
-	if (!( src.flags ) & FPRINT)
-		return
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (!istype(H.dna, /datum/dna))
@@ -244,12 +254,10 @@ its easier to just keep the beam vertical.
 			src.fingerprintslast = M.key
 	return
 
-/atom/proc/add_fingerprint(mob/living/M as mob)
+/atom/proc/add_fingerprint(mob/living/M as mob, ignoregloves = 0)
 	if(isnull(M)) return
 	if(isAI(M)) return
 	if(isnull(M.key)) return
-	if (!( src.flags ) & FPRINT)
-		return
 	if (ishuman(M))
 		//Add the list if it does not exist.
 		if(!fingerprintshidden)
@@ -280,11 +288,12 @@ its easier to just keep the beam vertical.
 			H.gloves.add_fingerprint(M)
 
 		//Deal with gloves the pass finger/palm prints.
-		if(H.gloves != src)
-			if(prob(75) && istype(H.gloves, /obj/item/clothing/gloves/latex))
-				return 0
-			else if(H.gloves && !istype(H.gloves, /obj/item/clothing/gloves/latex))
-				return 0
+		if(!ignoregloves)
+			if(H.gloves != src)
+				if(prob(75) && istype(H.gloves, /obj/item/clothing/gloves/latex))
+					return 0
+				else if(H.gloves && !istype(H.gloves, /obj/item/clothing/gloves/latex))
+					return 0
 
 		//More adminstuffz
 		if(fingerprintslast != H.key)
@@ -372,22 +381,23 @@ its easier to just keep the beam vertical.
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
-	if(flags & NOBLOODY) return 0
-	.=1
-	if (!( istype(M, /mob/living/carbon/human) ))
+
+	if(flags & NOBLOODY)
 		return 0
-	if (!istype(M.dna, /datum/dna))
-		M.dna = new /datum/dna(null)
-		M.dna.real_name = M.real_name
-	M.check_dna()
-	if (!( src.flags ) & FPRINT)
-		return 0
+
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
+
 	blood_color = "#A10808"
-	if (M.species)
-		blood_color = M.species.blood_color
-	return
+	if(istype(M))
+		if (!istype(M.dna, /datum/dna))
+			M.dna = new /datum/dna(null)
+			M.dna.real_name = M.real_name
+		M.check_dna()
+		if (M.species)
+			blood_color = M.species.blood_color
+	. = 1
+	return 1
 
 /atom/proc/add_vomit_floor(mob/living/carbon/M as mob, var/toxvomit = 0)
 	if( istype(src, /turf/simulated) )
@@ -423,3 +433,9 @@ its easier to just keep the beam vertical.
 
 /atom/proc/checkpass(passflag)
 	return pass_flags&passflag
+
+/atom/proc/isinspace()
+	if(istype(get_turf(src), /turf/space))
+		return 1
+	else
+		return 0

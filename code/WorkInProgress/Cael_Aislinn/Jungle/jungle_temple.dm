@@ -368,7 +368,7 @@
 
 				var/predir = M.dir
 				step(M, throw_dir)
-				M.dir = predir
+				M.set_dir(predir)
 
 //gives turf a different description, to try and trick players
 /obj/effect/step_trigger/trap/fake

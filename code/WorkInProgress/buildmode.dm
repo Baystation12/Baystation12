@@ -48,15 +48,15 @@
 	Click()
 		switch(dir)
 			if(NORTH)
-				dir = EAST
+				set_dir(EAST)
 			if(EAST)
-				dir = SOUTH
+				set_dir(SOUTH)
 			if(SOUTH)
-				dir = WEST
+				set_dir(WEST)
 			if(WEST)
-				dir = NORTHWEST
+				set_dir(NORTHWEST)
 			if(NORTHWEST)
-				dir = NORTH
+				set_dir(NORTH)
 		return 1
 
 /obj/effect/bmode/buildhelp
@@ -219,19 +219,19 @@
 				switch(holder.builddir.dir)
 					if(NORTH)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
-						WIN.dir = NORTH
+						WIN.set_dir(NORTH)
 					if(SOUTH)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
-						WIN.dir = SOUTH
+						WIN.set_dir(SOUTH)
 					if(EAST)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
-						WIN.dir = EAST
+						WIN.set_dir(EAST)
 					if(WEST)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
-						WIN.dir = WEST
+						WIN.set_dir(WEST)
 					if(NORTHWEST)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))
-						WIN.dir = NORTHWEST
+						WIN.set_dir(NORTHWEST)
 		if(2)
 			if(pa.Find("left"))
 				if(ispath(holder.buildmode.objholder,/turf))
@@ -239,7 +239,7 @@
 					T.ChangeTurf(holder.buildmode.objholder)
 				else
 					var/obj/A = new holder.buildmode.objholder (get_turf(object))
-					A.dir = holder.builddir.dir
+					A.set_dir(holder.builddir.dir)
 			else if(pa.Find("right"))
 				if(isobj(object)) del(object)
 

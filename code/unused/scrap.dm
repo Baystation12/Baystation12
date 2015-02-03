@@ -21,7 +21,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = 1
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 #define MAX_SCRAP	15000	// maximum content amount of a scrap pile
 

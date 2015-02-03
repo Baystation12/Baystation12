@@ -13,7 +13,7 @@
 
 /obj/item/projectile/missile/process(var/turf/newtarget)
 	target = newtarget
-	dir = get_dir(src.loc, target)
+	set_dir(get_dir(src.loc, target))
 	walk_towards(src, target, MISSILE_SPEED)
 
 /obj/item/projectile/missile/Bump(atom/A)
@@ -164,7 +164,7 @@
 
 /obj/machinery/meteor_battery/proc/target()
 	while(src && enabled && !stat)
-		src.dir = get_dir(src, cur_target)
+		src.set_dir(get_dir(src, cur_target))
 		shootAt(cur_target)
 		sleep(shot_delay)
 	return

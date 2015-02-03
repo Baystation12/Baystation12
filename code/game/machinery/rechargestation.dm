@@ -70,8 +70,9 @@
 	allow_drop()
 		return 0
 
-	examine()
-		usr << "The charge meter reads: [round(chargepercentage())]%"
+	examine(mob/user)
+		..(user)
+		user << "The charge meter reads: [round(chargepercentage())]%"
 
 	proc/chargepercentage()
 		return ((current_internal_charge / max_internal_charge) * 100)

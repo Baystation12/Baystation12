@@ -21,12 +21,12 @@
 		src.anchored = 1
 
 		var/obj/ship_builder/L = new(locate(src.x, src.y, src.z))
-		L.dir = WEST
+		L.set_dir(WEST)
 		L.distance = width/2
 		L.core = src
 
 		var/obj/ship_builder/R = new(locate(src.x+1, src.y, src.z))
-		R.dir = EAST
+		R.set_dir(EAST)
 		R.distance = (width/2)-1
 		R.core = src
 
@@ -38,22 +38,22 @@
 		var/h
 		for(h=1, h<height/2, h++)
 			var/obj/ship_builder/A = new(locate(src.x+1, src.y+h, src.z))
-			A.dir = EAST
+			A.set_dir(EAST)
 			A.distance = (width/2)-1
 			A.core = src
 
 			var/obj/ship_builder/B = new(locate(src.x, src.y+h, src.z))
-			B.dir = WEST
+			B.set_dir(WEST)
 			B.distance = width/2
 			B.core = src
 
 			var/obj/ship_builder/C = new(locate(src.x+1, src.y-h, src.z))
-			C.dir = EAST
+			C.set_dir(EAST)
 			C.distance = (width/2)-1
 			C.core = src
 
 			var/obj/ship_builder/D = new(locate(src.x, src.y-h, src.z))
-			D.dir = WEST
+			D.set_dir(WEST)
 			D.distance = width/2
 			D.core = src
 

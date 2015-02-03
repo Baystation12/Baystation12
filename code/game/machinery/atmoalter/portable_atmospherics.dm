@@ -9,7 +9,8 @@
 	var/volume = 0
 	var/destroyed = 0
 
-	var/maximum_pressure = 90*ONE_ATMOSPHERE
+	var/start_pressure = ONE_ATMOSPHERE
+	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/New()
 	..()
@@ -38,6 +39,14 @@
 	del(air_contents)
 
 	..()
+
+/obj/machinery/portable_atmospherics/proc/StandardAirMix()
+	return list(
+		"oxygen" = O2STANDARD * MolesForPressure(),
+		"nitrogen" = N2STANDARD *  MolesForPressure())
+
+/obj/machinery/portable_atmospherics/proc/MolesForPressure(var/target_pressure = start_pressure)
+	return (target_pressure * air_contents.volume) / (R_IDEAL_GAS_EQUATION * air_contents.temperature)
 
 /obj/machinery/portable_atmospherics/update_icon()
 	return null

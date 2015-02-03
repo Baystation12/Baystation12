@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/detective
-	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
 	name = "revolver"
+	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
 	icon_state = "detective"
 	max_shells = 6
 	caliber = "38"
@@ -71,8 +71,8 @@
 
 
 /obj/item/weapon/gun/projectile/detective/semiauto
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
 	name = "\improper Colt M1911"
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
 	icon_state = "colt"
 	max_shells = 7
 	caliber = ".45"
@@ -103,7 +103,7 @@
 // You can spin the chamber to randomize the position of the bullet.
 
 /obj/item/weapon/gun/projectile/russian
-	name = "Russian Revolver"
+	name = "\improper Russian revolver"
 	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in it's chamber for a bullet."
 	max_shells = 6
 	origin_tech = "combat=2;materials=2"
@@ -113,7 +113,6 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/russian/proc/Spin()
-
 	for(var/obj/item/ammo_casing/AC in loaded)
 		del(AC)
 	loaded = list()
@@ -126,7 +125,6 @@
 
 
 /obj/item/weapon/gun/projectile/russian/attackby(var/obj/item/A as obj, mob/user as mob)
-
 	if(!A) return
 
 	var/num_loaded = 0
@@ -155,13 +153,11 @@
 	return
 
 /obj/item/weapon/gun/projectile/russian/attack_self(mob/user as mob)
-
 	user.visible_message("<span class='warning'>[user] spins the chamber of the revolver.</span>", "<span class='warning'>You spin the revolver's chamber.</span>")
 	if(getAmmo() > 0)
 		Spin()
 
 /obj/item/weapon/gun/projectile/russian/attack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj)
-
 	if(!loaded.len)
 		user.visible_message("\red *click*", "\red *click*")
 		playsound(user, 'sound/weapons/empty.ogg', 100, 1)
@@ -186,4 +182,3 @@
 					user.apply_damage(300, BRUTE, affecting, sharp=1) // You are dead, dead, dead.
 				return
 	..()
-

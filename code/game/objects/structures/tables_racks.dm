@@ -1,30 +1,53 @@
-/* Tables and Racks
- * Contains:
- *		Tables
- *		Wooden tables
- *		Reinforced tables
- *		Racks
- */
+// Tables and racks.
 
-
-/*
- * Tables
- */
 /obj/structure/table
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
 	density = 1
-	anchored = 1.0
+	anchored = 1
 	layer = 2.8
-	throwpass = 1	//You can throw objects over this, despite it's density.")
+	throwpass = 1
 	climbable = 1
 	breakable = 1
 	parts = /obj/item/weapon/table_parts
 
 	var/flipped = 0
 	var/health = 100
+
+/obj/structure/table/woodentable
+	name = "wooden table"
+	desc = "Do not apply fire to this. Rumour says it burns easily."
+	icon_state = "wood_table"
+	parts = /obj/item/weapon/table_parts/wood
+	health = 50
+
+/obj/structure/table/gamblingtable
+	name = "gambling table"
+	desc = "A curved wooden table with a thin carpet of green fabric."
+	icon_state = "gamble_table"
+	parts = /obj/item/weapon/table_parts/gambling
+	health = 50
+
+/obj/structure/table/reinforced
+	icon_state = "reinf_table"
+	health = 200
+	parts = /obj/item/weapon/table_parts/reinforced
+
+/obj/structure/table/rack
+	name = "rack"
+	desc = "Different from the Middle Ages version."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "rack"
+	health = 100
+	parts = /obj/item/weapon/table_parts/rack
+	flipped = -1 //Cannot flip.
+
+/obj/structure/table/examine()
+	..()
+	if(health > 100)
+		usr << "This one looks like it has been reinforced."
 
 /obj/structure/table/proc/update_adjacent()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -45,14 +68,18 @@
 	..()
 
 /obj/structure/table/update_icon()
+
+	if(health > 100)
+		name = "reinforced [initial(name)]"
+
 	spawn(2) //So it properly updates when deleting
 
-		if(flipped)
+		if(flipped == 1)
 			var/type = 0
 			var/tabledirs = 0
 			for(var/direction in list(turn(dir,90), turn(dir,-90)) )
 				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-				if (T && T.flipped && T.dir == src.dir)
+				if (T && T.flipped == 1 && T.dir == src.dir)
 					type++
 					tabledirs |= direction
 			var/base = "table"
@@ -100,7 +127,7 @@
 					continue
 			if(!skip_sum) //means there is a window between the two tiles in this direction
 				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-				if(T && !T.flipped)
+				if(T && T.flipped == 0) // This should let us ignore racks for table icons/flipping. Should.
 					if(direction <5)
 						dir_sum += direction
 					else
@@ -250,9 +277,9 @@
 				if(6)
 					icon_state = "tabledir3"
 		if (dir_sum in list(1,2,4,8,5,6,9,10))
-			dir = dir_sum
+			set_dir(dir_sum)
 		else
-			dir = 2
+			set_dir(2)
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
@@ -265,7 +292,7 @@
 		return 1
 	if(locate(/obj/structure/table) in get_turf(mover))
 		return 1
-	if (flipped)
+	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
@@ -274,7 +301,13 @@
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
-	var/turf/cover = flipped ? get_turf(src) : get_step(loc, get_dir(from, loc))
+	var/turf/cover
+	if(flipped==1)
+		cover = get_turf(src)
+	else if(flipped==0)
+		cover = get_step(loc, get_dir(from, loc))
+	if(!cover)
+		return 1
 	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 	if (get_turf(P.original) == cover)
@@ -283,7 +316,7 @@
 			var/mob/M = P.original
 			if (M.lying)
 				chance += 20				//Lying down lets you catch less bullets
-		if(flipped)
+		if(flipped==1)
 			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
 				chance += 20
 			else
@@ -302,7 +335,7 @@
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASSTABLE))
 		return 1
-	if (flipped)
+	if (flipped==1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
@@ -323,6 +356,8 @@
 
 /obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
 	if (!W) return
+
+	// Handle harm intent grabbing/tabling.
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
@@ -331,26 +366,60 @@
 				if(user.a_intent == "hurt")
 					if (prob(15))	M.Weaken(5)
 					M.apply_damage(8,def_zone = "head")
-					visible_message("\red [G.assailant] slams [G.affecting]'s face against \the [src]!")
+					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 				else
-					user << "\red You need a better grip to do that!"
+					user << "<span class='danger'>You need a better grip to do that!</span>"
 					return
 			else
 				G.affecting.loc = src.loc
 				G.affecting.Weaken(5)
-				visible_message("\red [G.assailant] puts [G.affecting] on \the [src].")
+				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
 			del(W)
 			return
 
+	// Handle dissembly.
 	if (istype(W, /obj/item/weapon/wrench))
-		user << "\blue Now disassembling table"
+		if(health > 100)
+			user << "<span class='danger'>\The [src] is too well constructed to be collapsed. Weaken it first.</span>"
+			return
+		user << "<span class='notice'>You locate the bolts and begin disassembling \the [src]...</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user,50))
 			destroy()
 		return
 
+	// Handle weakening.
+	if (istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())
+			if(initial(health)>100)
+				if(WT.remove_fuel(0, user))
+					if(src.health>100)
+						user << "<span class='notice'>You start weakening \the [src]...</span>"
+						playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+						if(!do_after(user, 50) || !src || health<100 || !WT.isOn())
+							return
+						user << "<span class='notice'>You have weakened \the [src].</span>"
+						health -= 100
+					else if(src.health <= 100)
+						user << "<span class='notice'>You start strengthening \the [src]...</span>"
+						playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+						if(!do_after(user, 50) || !src || health > 100 || !WT.isOn())
+							return
+						user << "<span class='notice'>You have strengthened \the [src].</span>"
+						health += 100
+				update_icon()
+			else
+				user << "<span class='notice'>\The [src] is too flimsy to be reinforced or weakened.</span>"
+			return
+
+
+	// Handle dismantling or placing things on the table from here on.
 	if(isrobot(user))
+		return
+
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
 		return
 
 	if(istype(W, /obj/item/weapon/melee/energy/blade))
@@ -359,8 +428,7 @@
 		spark_system.start()
 		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
-		for(var/mob/O in viewers(user, 4))
-			O.show_message("\blue The [src] was sliced apart by [user]!", 1, "\red You hear [src] coming apart.", 2)
+		user.visible_message("<span class='danger'>The [src] was sliced apart by [user]!</span>")
 		destroy()
 
 	user.drop_item(src)
@@ -370,14 +438,14 @@
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
 		T = locate() in get_step(src.loc,turn(direction,angle))
-		if(T && !T.flipped)
+		if(T && T.flipped == 0)
 			return 0
 	T = locate() in get_step(src.loc,direction)
-	if (!T || T.flipped)
+	if (!T || T.flipped == 1)
 		return 1
 	if (istype(T,/obj/structure/table/reinforced/))
 		var/obj/structure/table/reinforced/R = T
-		if (R.status == 2)
+		if (R.health > 100)
 			return 0
 	return T.straight_table_check(direction)
 
@@ -390,7 +458,7 @@
 	if (!can_touch(usr) || ismouse(usr))
 		return
 
-	if(!flip(get_cardinal_dir(usr,src)))
+	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
 		return
 
@@ -402,7 +470,13 @@
 	return
 
 /obj/structure/table/proc/unflipping_check(var/direction)
+
 	for(var/mob/M in oview(src,0))
+		return 0
+
+	var/obj/occupied = turf_is_crowded()
+	if(occupied)
+		usr << "There's \a [occupied] in the way."
 		return 0
 
 	var/list/L = list()
@@ -414,7 +488,7 @@
 	for(var/new_dir in L)
 		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
 		if(T)
-			if(T.flipped && T.dir == src.dir && !T.unflipping_check(new_dir))
+			if(T.flipped == 1 && T.dir == src.dir && !T.unflipping_check(new_dir))
 				return 0
 	return 1
 
@@ -445,7 +519,7 @@
 			spawn(0)
 				A.throw_at(pick(targets),1,1)
 
-	dir = direction
+	set_dir(direction)
 	if(dir != NORTH)
 		layer = 5
 	climbable = 0 //flipping tables allows them to be used as makeshift barriers
@@ -453,7 +527,7 @@
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
 		var/obj/structure/table/T = locate() in get_step(src,D)
-		if(T && !T.flipped)
+		if(T && T.flipped == 0)
 			T.flip(direction)
 	update_icon()
 	update_adjacent()
@@ -470,118 +544,15 @@
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)
-		if(T && T.flipped && T.dir == src.dir)
+		if(T && T.flipped == 1 && T.dir == src.dir)
 			T.unflip()
 	update_icon()
 	update_adjacent()
 
 	return 1
 
-/*
- * Wooden tables
- */
-/obj/structure/table/woodentable
-	name = "wooden table"
-	desc = "Do not apply fire to this. Rumour says it burns easily."
-	icon_state = "wood_table"
-	parts = /obj/item/weapon/table_parts/wood
-	health = 50
-/*
- * Gambling tables
- */
-/obj/structure/table/gamblingtable
-	name = "gambling table"
-	desc = "A curved wooden table with a thin carpet of green fabric."
-	icon_state = "gamble_table"
-	parts = /obj/item/weapon/table_parts/gambling
-	health = 50
-/*
- * Reinforced tables
- */
-/obj/structure/table/reinforced
-	name = "reinforced table"
-	desc = "A version of the four legged table. It is stronger."
-	icon_state = "reinf_table"
-	health = 200
-	var/status = 2
-	parts = /obj/item/weapon/table_parts/reinforced
-
-/obj/structure/table/reinforced/flip(var/direction)
-	if (status == 2)
-		return 0
-	else
-		return ..()
-
-/obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
-			if(src.status == 2)
-				user << "\blue Now weakening the reinforced table"
-				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-				if (do_after(user, 50))
-					if(!src || !WT.isOn()) return
-					user << "\blue Table weakened"
-					src.status = 1
-			else
-				user << "\blue Now strengthening the reinforced table"
-				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-				if (do_after(user, 50))
-					if(!src || !WT.isOn()) return
-					user << "\blue Table strengthened"
-					src.status = 2
-			return
-		return
-
-	if (istype(W, /obj/item/weapon/wrench))
-		if(src.status == 2)
-			return
-
-	..()
-
-/*
- * Racks
- */
-/obj/structure/rack
-	name = "rack"
-	desc = "Different from the Middle Ages version."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "rack"
-	density = 1
-	flags = FPRINT
-	anchored = 1.0
-	throwpass = 1	//You can throw objects over this, despite it's density.
-	breakable = 1
-	climbable = 1
-	parts = /obj/item/weapon/rack_parts
-
-/obj/structure/rack/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(src.density == 0) //Because broken racks -Agouri |TODO: SPRITE!|
-		return 1
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	else
-		return 0
-
-/obj/structure/rack/MouseDrop_T(obj/O as obj, mob/user as mob)
-	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
-		return
-	if(isrobot(user))
-		return
-	user.drop_item()
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+// No need to handle any of this, racks are not contiguous..
+/obj/structure/table/rack/update_icon()
 	return
-
-/obj/structure/rack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/weapon/rack_parts( src.loc )
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		del(src)
-		return
-	if(isrobot(user))
-		return
-	user.drop_item()
-	if(W && W.loc)	W.loc = src.loc
+/obj/structure/table/rack/update_adjacent()
 	return
