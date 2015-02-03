@@ -109,7 +109,7 @@
 	rev_mind.special_role = "Revolutionary"
 	show_objectives(rev_mind)
 	update_rev_icons_added(rev_mind)
-	H.hud_updateflag |= 1 << SPECIALROLE_HUD
+	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 	return 1
 
 /////////////////////////////

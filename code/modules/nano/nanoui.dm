@@ -206,10 +206,10 @@ nanoui is used to open and update nano browser uis
 
 /mob/living/proc/shared_living_nano_distance(var/atom/movable/src_object)
 	if(!isturf(src_object.loc))
-		if(src.contents.Find(src_object.loc)) // This is a hidden uplink
+		if(src_object.loc == src)				// Item in the inventory
 			return STATUS_INTERACTIVE
-		if(src_object.loc != src)
-			return STATUS_CLOSE
+		if(src.contents.Find(src_object.loc))	// A hidden uplink inside an item
+			return STATUS_INTERACTIVE
 
 	if (!(src_object in view(4, src))) 	// If the src object is not in visable, disable updates
 		return STATUS_CLOSE
