@@ -48,7 +48,7 @@ max volume of phoron storeable by the field = the total volume of a number of ti
 /obj/machinery/power/rust_core
 	name = "RUST Tokamak core"
 	desc = "Enormous solenoid for generating extremely high power electromagnetic fields"
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
+	icon = 'icons/rust.dmi'
 	icon_state = "core0"
 	density = 1
 	var/obj/effect/rust_em_field/owned_field

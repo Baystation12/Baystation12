@@ -2,7 +2,7 @@
 
 /obj/machinery/rust_fuel_assembly_port
 	name = "Fuel Assembly Port"
-	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/rust.dmi'
+	icon = 'icons/rust.dmi'
 	icon_state = "port2"
 	density = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly

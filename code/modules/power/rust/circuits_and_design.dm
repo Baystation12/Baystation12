@@ -1,4 +1,4 @@
-
+#define	IMPRINTER	1	//For circuits. Uses glass/chemicals.
 //////////////////////////////////////
 // RUST Core Control computer
 
