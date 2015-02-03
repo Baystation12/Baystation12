@@ -459,6 +459,13 @@
 	filling_color = "#59691B"
 	plantname = "kudzu"
 
+/obj/item/weapon/reagent_containers/food/snacks/grown/tobacco
+	name = "tobacco leaf"
+	desc = "Contains nicotine."
+	icon_state = "tobacco"
+	filling_color = "#009900"
+	plantname = "tobacco"
+
 /obj/item/weapon/reagent_containers/food/snacks/grown/icepepper
 	name = "ice-pepper"
 	desc = "It's a mutant strain of chili"
