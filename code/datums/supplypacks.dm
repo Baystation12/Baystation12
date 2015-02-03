@@ -1422,5 +1422,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/dress/dress_saloon)
 	group = "Miscellaneous"
 
+/datum/supply_packs/painters
+	name = "Station Painting Supplies"
+	cost = 10
+	containername = "station painting supplies crate"
+	containertype = /obj/structure/closet/crate
+	group = "Engineering"
+	contains = list(/obj/item/device/pipe_painter,
+					/obj/item/device/pipe_painter,
+					/obj/item/device/floor_painter,
+					/obj/item/device/floor_painter)
+
 
 

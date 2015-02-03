@@ -6180,7 +6180,7 @@
 "coR" = (/obj/structure/table,/obj/item/device/radio/off{pixel_y = 6},/obj/item/device/radio/off{pixel_x = 6; pixel_y = 4},/obj/item/device/radio/off{pixel_x = -6; pixel_y = 4},/obj/item/device/radio/off,/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/turf/simulated/floor,/area/engineering/workshop)
 "coS" = (/obj/structure/table,/obj/machinery/light,/obj/item/weapon/wrench,/obj/item/device/flashlight,/obj/machinery/cell_charger,/turf/simulated/floor,/area/engineering/workshop)
 "coT" = (/obj/structure/table,/obj/item/weapon/storage/toolbox/mechanical{pixel_y = 5},/obj/item/weapon/storage/toolbox/mechanical{pixel_y = 5},/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor,/area/engineering/workshop)
-"coU" = (/obj/structure/table,/obj/item/device/multitool{pixel_x = 5},/obj/item/device/t_scanner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor,/area/engineering/workshop)
+"coU" = (/obj/structure/table,/obj/item/device/floor_painter,/obj/item/device/multitool{pixel_x = 5},/obj/item/device/t_scanner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor,/area/engine/workshop)
 "coV" = (/obj/machinery/atmospherics/pipe/simple/visible/purple,/turf/simulated/floor,/area/engineering/atmos)
 "coW" = (/obj/machinery/atmospherics/binary/passive_gate,/turf/simulated/floor,/area/engineering/atmos)
 "coX" = (/obj/machinery/atmospherics/pipe/simple/visible/green,/turf/simulated/floor,/area/engineering/atmos)
