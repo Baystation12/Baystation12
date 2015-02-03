@@ -124,6 +124,7 @@
 	var/changed_voice
 
 	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
+		part_a = "<span class='say_quote'>\[[worldtime2text()]\]</span>" + part_a
 		var/jobname // the mob's "job"
 		var/mob/living/carbon/human/impersonating //The crewmember being impersonated, if any.
 
