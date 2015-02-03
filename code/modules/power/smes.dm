@@ -218,6 +218,8 @@
 	add_fingerprint(user)
 	ui_interact(user)
 
+/obj/machinery/power/smes/attack_ghost(mob/user)
+	ui_interact(user)
 
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)

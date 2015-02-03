@@ -211,6 +211,11 @@
 /obj/machinery/shower/proc/wash(atom/movable/O as obj|mob)
 	if(!on) return
 
+	if(isliving(O))
+		var/mob/living/L = O
+		L.ExtinguishMob()
+		L.fire_stacks = -20 //Douse ourselves with water to avoid fire more easily
+
 	if(iscarbon(O))
 		var/mob/living/carbon/M = O
 		if(M.r_hand)

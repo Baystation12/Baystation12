@@ -3,7 +3,7 @@
 	desc = "You sit in this. Either by will or force."
 	icon_state = "wheelchair"
 	anchored = 0
-	movable = 1
+	buckle_movable = 1
 
 	var/driving = 0
 	var/mob/living/pulling = null
@@ -93,7 +93,7 @@
 						if (O != occupant)
 							Bump(O)
 				else
-					unbuckle()
+					unbuckle_mob()
 			if (pulling && (get_dist(src, pulling) > 1))
 				pulling.pulledby = null
 				pulling << "\red You lost your grip!"
@@ -102,11 +102,11 @@
 			if (occupant && (src.loc != occupant.loc))
 				src.loc = occupant.loc // Failsafe to make sure the wheelchair stays beneath the occupant after driving
 
-/obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/user as mob)
+/obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/living/user as mob)
 	if (pulling)
 		MouseDrop(usr)
 	else
-		manual_unbuckle(user)
+		user_unbuckle_mob(user)
 	return
 
 /obj/structure/stool/bed/chair/wheelchair/MouseDrop(over_object, src_location, over_location)
@@ -138,8 +138,7 @@
 	if(!buckled_mob)	return
 
 	if(propelled || (pulling && (pulling.a_intent == "hurt")))
-		var/mob/living/occupant = buckled_mob
-		unbuckle()
+		var/mob/living/occupant = unbuckle_mob()
 
 		if (pulling && (pulling.a_intent == "hurt"))
 			occupant.throw_at(A, 3, 3, pulling)

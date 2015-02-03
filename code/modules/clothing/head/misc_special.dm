@@ -153,3 +153,10 @@
 		var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner2")
 		mob.Blend(earbit, ICON_OVERLAY)
 		mob2.Blend(earbit2, ICON_OVERLAY)
+
+/obj/item/clothing/head/richard
+	name = "chicken mask"
+	desc = "You can hear the distant sounds of rhythmic electronica."
+	icon_state = "richard"
+	body_parts_covered = HEAD|FACE
+	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR

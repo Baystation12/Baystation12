@@ -167,6 +167,8 @@
 		update_inv_back()
 	else if (W == handcuffed)
 		handcuffed = null
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
 		success = 1
 		update_inv_handcuffed()
 	else if (W == legcuffed)
