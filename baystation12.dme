@@ -871,7 +871,6 @@
 #include "code\modules\clothing\spacesuits\rig\modules\computer.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\modules.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\ninja.dm"
-#include "code\modules\clothing\spacesuits\rig\modules\rig_weapons.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\utility.dm"
 #include "code\modules\clothing\spacesuits\rig\modules\vision.dm"
 #include "code\modules\clothing\spacesuits\rig\suits\alien.dm"
