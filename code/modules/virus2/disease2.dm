@@ -81,13 +81,18 @@
 		mob.reagents.remove_reagent("virusfood",0.1)
 		clicks += 10
 
+	if(prob(1) && prob(stage)) // Increasing chance of curing as the virus progresses
+		src.cure(mob)
+		mob.antibodies |= src.antigen
+
 	//Moving to the next stage
 	if(clicks > max(stage*100, 200) && prob(10))
-		if(stage == max_stage)
+		if((stage <= max_stage) && prob(20)) // ~60% of viruses will be cured by the end of S4 with this
 			src.cure(mob)
 			mob.antibodies |= src.antigen
 		stage++
 		clicks = 0
+
 	//Do nasty effects
 	for(var/datum/disease2/effectholder/e in effects)
 		if(prob(33))
@@ -100,7 +105,7 @@
 				infect_virus2(M,src)
 
 	//fever
-	mob.bodytemperature = max(mob.bodytemperature, min(310+5*stage ,mob.bodytemperature+5*stage))
+	mob.bodytemperature = max(mob.bodytemperature, min(310+5*min(stage,max_stage) ,mob.bodytemperature+5*min(stage,max_stage)))
 	clicks+=speed
 
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob)
