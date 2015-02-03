@@ -95,7 +95,7 @@
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
-			A.dir = src.dir
+			A.set_dir(src.dir)
 			if(src.dir == 1)//Up
 				A.yo = 20
 				A.xo = 0
@@ -125,7 +125,7 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, src)
 			s.start()*/
-		A.dir = src.dir
+		A.set_dir(src.dir)
 		if(src.dir == 1)//Up
 			A.yo = 20
 			A.xo = 0

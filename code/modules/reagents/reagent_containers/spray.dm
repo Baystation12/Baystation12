@@ -4,7 +4,7 @@
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cleaner"
 	item_state = "cleaner"
-	flags = TABLEPASS|OPENCONTAINER|FPRINT|NOBLUDGEON
+	flags = OPENCONTAINER|NOBLUDGEON
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = 2.0
@@ -22,7 +22,7 @@
 	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/rack) || istype(A, /obj/structure/closet) \
+	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) \
 	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
@@ -94,10 +94,9 @@
 	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
 
-/obj/item/weapon/reagent_containers/spray/examine()
-	set src in usr
-	..()
-	usr << "[round(src.reagents.total_volume)] units left."
+/obj/item/weapon/reagent_containers/spray/examine(mob/user)
+	if(..(user, 0) && user==src.loc)
+		user << "[round(src.reagents.total_volume)] units left."
 	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
@@ -142,10 +141,9 @@
 	..()
 	reagents.add_reagent("condensedcapsaicin", 40)
 
-/obj/item/weapon/reagent_containers/spray/pepper/examine()
-	..()
-	if(get_dist(usr,src) <= 1)
-		usr << "The safety is [safety ? "on" : "off"]."
+/obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
+	if(..(user, 1))
+		user << "The safety is [safety ? "on" : "off"]."
 
 /obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
 	safety = !safety

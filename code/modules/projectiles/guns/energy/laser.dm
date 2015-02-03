@@ -1,18 +1,18 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "a basic weapon designed kill with concentrated energy bolts"
+	desc = "A basic weapon designed to kill with concentrated energy bolts."
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	w_class = 3.0
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
-	projectile_type = "/obj/item/projectile/beam"
+	projectile_type = /obj/item/projectile/beam
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
-	projectile_type = "/obj/item/projectile/beam/practice"
+	projectile_type = /obj/item/projectile/beam/practice
 	clumsy_check = 0
 
 obj/item/weapon/gun/energy/laser/retro
@@ -84,7 +84,7 @@ obj/item/weapon/gun/energy/laser/retro
 		var/mob/living/silicon/robot/R = src.loc
 		if(R && R.cell)
 			R.cell.use(250)
-			in_chamber = new/obj/item/projectile/beam(src)
+			in_chamber = new/obj/item/projectile/beam/heavylaser(src)
 			return 1
 	return 0
 

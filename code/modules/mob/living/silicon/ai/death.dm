@@ -51,6 +51,7 @@
 		spawn( 0 )
 		O.mode = 2
 		if (istype(loc, /obj/item/device/aicard))
-			loc.icon_state = "aicard-404"
+			var/obj/item/device/aicard/card = loc
+			card.update_icon()
 
 	return ..(gibbed,"gives one shrill beep before falling lifeless.")

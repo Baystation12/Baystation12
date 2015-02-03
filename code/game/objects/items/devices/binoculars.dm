@@ -4,7 +4,7 @@
 	desc = "A pair of binoculars."
 	icon_state = "binoculars"
 
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	force = 5.0
 	w_class = 2.0
 	throwforce = 5.0

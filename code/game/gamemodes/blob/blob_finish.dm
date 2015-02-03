@@ -7,12 +7,12 @@
 		return 1
 
 	for(var/obj/effect/blob/B in blob_cores)
-		if(B && B.z != 1)	continue
+		if(B && isNotStationLevel(B.z))	continue
 		return 0
 
 	var/nodes = 0
 	for(var/obj/effect/blob/B in blob_nodes)
-		if(B && B.z != 1)	continue
+		if(B && isNotStationLevel(B.z))	continue
 		nodes++
 		if(nodes > 4)//Perhapse make a new core with a low prob
 			return 0
@@ -62,7 +62,7 @@
 					if (istype(T, /turf/space))
 						numSpace += 1
 					else if(istype(T, /turf))
-						if (M.z!=1)
+						if (isNotStationLevel(M.z))
 							numOffStation += 1
 						else
 							numAlive += 1

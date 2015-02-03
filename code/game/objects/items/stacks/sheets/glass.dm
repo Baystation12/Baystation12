@@ -28,6 +28,7 @@
 	icon_state = "sheet-glass"
 	matter = null
 	created_window = /obj/structure/window/basic
+	stacktype = /obj/item/stack/sheet/glass
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -66,7 +67,6 @@
 	if(!user || !src)	return 0
 	if(!istype(user.loc,/turf)) return 0
 	if(!user.IsAdvancedToolUser())
-		user << "\red You don't have the dexterity to do this!"
 		return 0
 	var/title = "Sheet-[name]"
 	title += " ([src.amount] sheet\s left)"
@@ -112,6 +112,7 @@
 			src.use(4)
 		if("Windoor")
 			if(!is_reinforced) return 1
+
 
 			if(!src || src.loc != user) return 1
 

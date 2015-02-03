@@ -12,6 +12,18 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
+	//Let's try to make users fix their errors - we try to detect single, out-of-place letters and 'unintended' words
+	/*
+	var/first_letter = copytext(message,1,2)
+	if((copytext(message,2,3) == " " && first_letter != "I" && first_letter != "A" && first_letter != ";") || cmptext(copytext(message,1,5), "say ") || cmptext(copytext(message,1,4), "me ") || cmptext(copytext(message,1,6), "looc ") || cmptext(copytext(message,1,5), "ooc ") || cmptext(copytext(message,2,6), "say "))
+		var/response = alert(usr, "Do you really want to say this using the *say* verb?\n\n[message]\n", "Confirm your message", "Yes", "Edit message", "No")
+		if(response == "Edit message")
+			message = input(usr, "Please edit your message carefully:", "Edit message", message)
+			if(!message)
+				return
+		else if(response == "No")
+			return
+	*/
 
 	set_typing_indicator(0)
 	usr.say(message)
@@ -24,7 +36,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = strip_html_properly(message)
 
 	set_typing_indicator(0)
 	if(use_me)
@@ -33,43 +45,20 @@
 		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	var/name = src.real_name
-	var/alt_name = ""
-
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "\red Speech is currently admin-disabled."
+		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
 		return
 
 	if(!src.client.holder)
-		if(!dsay_allowed)
-			src << "\red Deadchat is globally muted"
+		if(!config.dsay_allowed)
+			src << "<span class='danger'>Deadchat is globally muted.</span>"
 			return
 
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
-		usr << "\red You have deadchat muted."
+		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
-	if(mind && mind.name)
-		name = "[mind.name]"
-	else
-		name = real_name
-	if(name != real_name)
-		alt_name = " (died as [real_name])"
-
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
-
-	for(var/mob/M in player_list)
-		if(istype(M, /mob/new_player))
-			continue
-		if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD))
-			M << rendered
-			continue
-
-		if(M.client && M.client.holder && !is_mentor(M.client) && (M.client.prefs.toggles & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
-			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-
-
-	return
+	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
@@ -91,6 +80,9 @@
 		if (istype(other, src.type) || istype(src, other.type))
 			return 1
 		return 0
+
+	if(speaking.flags & INNATE)
+		return 1
 
 	//Language check.
 	for(var/datum/language/L in src.languages)
@@ -155,6 +147,9 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
+	if(length(message) >= 1 && copytext(message,1,2) == "!")
+		return all_languages["Noise"]
+
 	if(length(message) >= 2)
 		var/language_prefix = lowertext(copytext(message, 1 ,3))
 		var/datum/language/L = language_keys[language_prefix]

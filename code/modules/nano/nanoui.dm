@@ -11,7 +11,7 @@ nanoui is used to open and update nano browser uis
 #define STATUS_UPDATE 1 // ORANGE Visability
 #define STATUS_DISABLED 0 // RED Visability
 
-/datum/nanoui	
+/datum/nanoui
 	// the user who opened this ui
 	var/mob/user
 	// the object this ui "belongs" to
@@ -56,6 +56,8 @@ nanoui is used to open and update nano browser uis
 	var/is_auto_updating = 0
 	// the current status/visibility of the ui
 	var/status = STATUS_INTERACTIVE
+
+	var/cached_data = null
 
 	// Only allow users with a certain user.stat to get updates. Defaults to 0 (concious)
 	var/allowed_user_stat = 0 // -1 = ignore, 0 = alive, 1 = unconcious or alive, 2 = dead concious or alive
@@ -103,13 +105,13 @@ nanoui is used to open and update nano browser uis
 	add_script("libraries.min.js") // A JS file comprising of jQuery, doT.js and jQuery Timer libraries (compressed together)
 	add_script("nano_utility.js") // The NanoUtility JS, this is used to store utility functions.
 	add_script("nano_template.js") // The NanoTemplate JS, this is used to render templates.
-	add_script("nano_state_manager.js") // The NanoStateManager JS, it handles updates from the server and passes data to the current state 
-	add_script("nano_state.js") // The NanoState JS, this is the base state which all states must inherit from 
-	add_script("nano_state_default.js") // The NanoStateDefault JS, this is the "default" state (used by all UIs by default), which inherits from NanoState 
+	add_script("nano_state_manager.js") // The NanoStateManager JS, it handles updates from the server and passes data to the current state
+	add_script("nano_state.js") // The NanoState JS, this is the base state which all states must inherit from
+	add_script("nano_state_default.js") // The NanoStateDefault JS, this is the "default" state (used by all UIs by default), which inherits from NanoState
 	add_script("nano_base_callbacks.js") // The NanoBaseCallbacks JS, this is used to set up (before and after update) callbacks which are common to all UIs
 	add_script("nano_base_helpers.js") // The NanoBaseHelpers JS, this is used to set up template helpers which are common to all UIs
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
-	add_stylesheet("icons.css") // this CSS sheet is common to all UIs	
+	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
 
  /**
   * Set the current status (also known as visibility) of this ui.
@@ -127,7 +129,7 @@ nanoui is used to open and update nano browser uis
 				update()
 		else
 			status = state
-			if (push_update || status == 0)				
+			if (push_update || status == 0)
 				push_data(null, 1) // Update the UI, force the update in case the status is 0, data is null so that previous data is used
 
  /**
@@ -138,7 +140,7 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	if (istype(user, /mob/living/silicon/ai))
+	if (istype(user, /mob/living/silicon/ai) || (get_dist(get_turf(user),get_turf(src_object)) <= 1))
 		set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
 	else if (istype(user, /mob/living/silicon/robot))
 		if (src_object in view(7, user)) // robots can see and interact with things they can see within 7 tiles
@@ -151,12 +153,12 @@ nanoui is used to open and update nano browser uis
 		if (dist > 4)
 			close()
 			return
-		
+
 		if ((allowed_user_stat > -1) && (user.stat > allowed_user_stat))
 			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
 		else if (user.restrained() || user.lying)
 			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
-		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI 
+		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
 			set_status(STATUS_INTERACTIVE, push_update)	     // Will build in distance checks on the topics for sanity.
 		else if (!(src_object in view(4, user))) // If the src object is not in visable, set status to 0
 			set_status(STATUS_DISABLED, push_update) // interactive (green visibility)
@@ -203,7 +205,7 @@ nanoui is used to open and update nano browser uis
 			"showMap" = show_map,
 			"mapZLevel" = map_z_level,
 			"user" = list("name" = user.name)
-		)	
+		)
 	return config_data
 
  /**
@@ -215,12 +217,12 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/get_send_data(var/list/data)
 	var/list/config_data = get_config_data()
-	
+
 	var/list/send_data = list("config" = config_data)
-	
+
 	if (!isnull(data))
 		send_data["data"] = data
-		
+
 	return send_data
 
  /**
@@ -267,11 +269,11 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/add_template(key, filename)
 	templates[key] = filename
-	
+
  /**
   * Set the layout key for use in the frontend Javascript
   * The layout key is the basic layout key for the page
-  * Two files are loaded on the client based on the layout key varable: 
+  * Two files are loaded on the client based on the layout key varable:
   *     -> a template in /nano/templates with the filename "layout_<layout_key>.tmpl
   *     -> a CSS stylesheet in /nano/css with the filename "layout_<layout_key>.css
   *
@@ -301,7 +303,7 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/set_auto_update_content(nstate)
 	auto_update_content = nstate
-	
+
  /**
   * Set the state key for use in the frontend Javascript
   *
@@ -310,8 +312,8 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/set_state_key(nstate_key)
-	state_key = nstate_key 
-	
+	state_key = nstate_key
+
  /**
   * Toggle showing the map ui
   *
@@ -321,7 +323,7 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/set_show_map(nstate)
 	show_map = nstate
-	
+
  /**
   * Toggle showing the map ui
   *
@@ -352,21 +354,21 @@ nanoui is used to open and update nano browser uis
 	// before the UI opens, add the layout files based on the layout key
 	add_stylesheet("layout_[layout_key].css")
 	add_template("layout", "layout_[layout_key].tmpl")
-	
+
 	var/head_content = ""
-	
+
 	for (var/filename in scripts)
 		head_content += "<script type='text/javascript' src='[filename]'></script> "
-	
+
 	for (var/filename in stylesheets)
 		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'> "
-		
+
 	var/template_data_json = "{}" // An empty JSON object
 	if (templates.len > 0)
 		template_data_json = list2json(templates)
 
 	var/list/send_data = get_send_data(initial_data)
-	var/initial_data_json = list2json(send_data)
+	var/initial_data_json = list2json(send_data, cached_data)
 
 	var/url_parameters_json = list2json(list("src" = "\ref[src]"))
 
@@ -378,7 +380,7 @@ nanoui is used to open and update nano browser uis
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
-				// We need both jQuery and NanoStateManager to be able to recieve data				
+				// We need both jQuery and NanoStateManager to be able to recieve data
 				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoStateManager != 'undefined' && typeof jQuery != 'undefined')
 				{
@@ -388,7 +390,7 @@ nanoui is used to open and update nano browser uis
 		</script>
 		[head_content]
 	</head>
-	<body scroll=auto data-template-data='[template_data_json]' data-url-parameters='[url_parameters_json]' data-initial-data='[initial_data_json]'>		
+	<body scroll=auto data-template-data='[template_data_json]' data-url-parameters='[url_parameters_json]' data-initial-data='[initial_data_json]'>
 		<div id='uiLayout'>
 		</div>
 		<noscript>
@@ -407,8 +409,8 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/open()	
-	
+/datum/nanoui/proc/open()
+
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
@@ -442,6 +444,19 @@ nanoui is used to open and update nano browser uis
 
 	winset(user, window_id, "on-close=\"nanoclose [params]\"")
 
+/**
+ * Appends already processed json txt to the list2json proc when setting initial-data and data pushes
+ * Used for data that is fucking huge like manifests and camera lists that doesn't change often.
+ * And we only want to process them when they change.
+ * Fuck javascript
+ *
+ * @return nothing
+ */
+/datum/nanoui/proc/load_cached_data(var/data)
+	cached_data = data
+	return
+
+
  /**
   * Push data to an already open UI window
   *
@@ -453,9 +468,9 @@ nanoui is used to open and update nano browser uis
 		return // Cannot update UI, no visibility
 
 	var/list/send_data = get_send_data(data)
-	
+
 	//user << list2json(data) // used for debugging
-	user << output(list2params(list(list2json(send_data))),"[window_id].browser:receiveUpdateData")
+	user << output(list2params(list(list2json(send_data,cached_data))),"[window_id].browser:receiveUpdateData")
 
  /**
   * This Topic() proc is called whenever a user clicks on a link within a Nano UI
@@ -468,13 +483,13 @@ nanoui is used to open and update nano browser uis
 	update_status(0) // update the status
 	if (status != STATUS_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
 		return
-	
+
 	// This is used to toggle the nano map ui
 	var/map_update = 0
 	if(href_list["showMap"])
 		set_show_map(text2num(href_list["showMap"]))
 		map_update = 1
-		
+
 	if(href_list["mapZLevel"])
 		set_map_z_level(text2num(href_list["mapZLevel"]))
 		map_update = 1
@@ -494,12 +509,12 @@ nanoui is used to open and update nano browser uis
 	if (!src_object || !user)
 		close()
 		return
-		
+
 	if (status && (update || is_auto_updating))
 		update() // Update the UI (update_status() is called whenever a UI is updated)
 	else
 		update_status(1) // Not updating UI, so lets check here if status has changed
-		
+
  /**
   * Update the UI
   *

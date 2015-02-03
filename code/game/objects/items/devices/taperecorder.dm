@@ -1,6 +1,6 @@
 /obj/item/device/taperecorder
-	desc = "A device that can record up to an hour of dialogue and play it back. It automatically translates the content in playback."
 	name = "universal recorder"
+	desc = "A device that can record up to an hour of dialogue and play it back. It automatically translates the content in playback."
 	icon_state = "taperecorderidle"
 	item_state = "analyzer"
 	w_class = 2.0
@@ -15,7 +15,7 @@
 	var/list/storedinfo = new/list()
 	var/list/timestamp = new/list()
 	var/canprint = 1
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	throwforce = 2
 	throw_speed = 4
 	throw_range = 20

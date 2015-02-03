@@ -1,3 +1,9 @@
+//Dummy object for holding items in vehicles.
+//Prevents items from being interacted with.
+/datum/vehicle_dummy_load
+	var/name = "dummy load"
+	var/actual_load
+
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
@@ -39,6 +45,7 @@
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)
+		var/old_loc = get_turf(src)
 		if(on && powered && cell.charge < charge_use)
 			turn_off()
 
@@ -48,14 +55,17 @@
 			anchored = init_anc
 			return 0
 
+		set_dir(get_dir(old_loc, loc))
 		anchored = init_anc
 
 		if(on && powered)
 			cell.use(charge_use)
 
-		if(load)
-			load.forceMove(loc)// = loc
-			load.dir = dir
+		//Dummy loads do not have to be moved as they are just an overlay
+		//See load_object() proc in cargo_trains.dm for an example
+		if(load && !istype(load, /datum/vehicle_dummy_load))
+			load.forceMove(loc)
+			load.set_dir(dir)
 
 		return 1
 	else
@@ -100,15 +110,6 @@
 	else
 		..()
 
-/obj/vehicle/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-	health -= M.melee_damage_upper
-	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
-	M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	if(prob(10))
-		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	healthcheck()
-
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.damage
 	..()
@@ -149,7 +150,7 @@
 	pulse2.icon_state = "empdisable"
 	pulse2.name = "emp sparks"
 	pulse2.anchored = 1
-	pulse2.dir = pick(cardinal)
+	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
 		pulse2.delete()
@@ -163,6 +164,7 @@
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
+// For downstream compatibility (in particular Paradise)
 /obj/vehicle/proc/handle_rotation()
 	return
 
@@ -269,8 +271,8 @@
 // calling this parent proc.
 //-------------------------------------------
 /obj/vehicle/proc/load(var/atom/movable/C)
-	//define allowed items for loading in specific vehicle definitions
-
+	//This loads objects onto the vehicle so they can still be interacted with.
+	//Define allowed items for loading in specific vehicle definitions.
 	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
 		return 0
 	if(load || C.anchored)
@@ -282,7 +284,7 @@
 		crate.close()
 
 	C.forceMove(loc)
-	C.dir = dir
+	C.set_dir(dir)
 	C.anchored = 1
 
 	load = C
@@ -334,8 +336,8 @@
 		return 0
 
 	load.forceMove(dest)
-	load.dir = get_dir(loc, dest)
-	load.anchored = initial(load.anchored)
+	load.set_dir(get_dir(loc, dest))
+	load.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
 	load.pixel_x = initial(load.pixel_x)
 	load.pixel_y = initial(load.pixel_y)
 	load.layer = initial(load.layer)
@@ -356,3 +358,14 @@
 //-------------------------------------------------------
 /obj/vehicle/proc/update_stats()
 	return
+
+/obj/vehicle/attack_generic(var/mob/user, var/damage, var/attack_message)
+	if(!damage)
+		return
+	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	src.health -= damage
+	if(prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	spawn(1) healthcheck()
+	return 1

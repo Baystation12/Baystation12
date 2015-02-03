@@ -19,9 +19,8 @@
 /obj/optical/mirror
 	icon = 'optical.dmi'
 	icon_state = "mirrorA"
-	dir = 1
+	set_dir(1)
 	desc = "A large, optical-grade mirror firmly mounted on a stand."
-	flags = FPRINT
 	anchored = 0
 	var/rotatable = 0	// true if mirror can be rotated
 	var/angle = 0		// normal of mirror, 0-15. 0=N, 1=NNE, 2=NE, 3=ENE, 4=E etc
@@ -65,19 +64,19 @@
 			icon_state = "mirrorA"
 		switch(round(angle/2)*2)
 			if(0)
-				dir = 1
+				set_dir(1)
 			if(2)
-				dir = 5
+				set_dir(5)
 			if(4)
-				dir = 4
+				set_dir(4)
 			if(6)
-				dir = 6
+				set_dir(6)
 			if(8)
-				dir = 2
+				set_dir(2)
 			if(10)
-				dir = 10
+				set_dir(10)
 			if(12)
-				dir = 8
+				set_dir(8)
 			if(14)
-				dir = 9
+				set_dir(9)
 		return

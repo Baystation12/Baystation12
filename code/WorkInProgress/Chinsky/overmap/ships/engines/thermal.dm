@@ -89,7 +89,7 @@
 	anchored = 1
 
 	New(var/turf/nloc, var/ndir, var/temp)
-		dir = ndir
+		set_dir(ndir)
 		..(nloc)
 
 		if(nloc)
