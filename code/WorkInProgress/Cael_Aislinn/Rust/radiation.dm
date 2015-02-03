@@ -26,7 +26,7 @@
 		if(!dir)
 			RadiateParticleRand(energy, ionizing)
 		var/obj/effect/accelerated_particle/particle = new
-		particle.dir = dir
+		particle.set_dir(dir)
 		particle.ionizing = ionizing
 		if(energy)
 			particle.energy = energy

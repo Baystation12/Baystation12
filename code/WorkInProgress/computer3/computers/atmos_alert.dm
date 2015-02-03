@@ -8,9 +8,6 @@
 	desc = "Recieves alerts over the radio."
 	active_state = "alert:2"
 	refresh = 1
-	var/list/priority_alarms = list()
-	var/list/minor_alarms = list()
-
 
 	execute(var/datum/file/program/source)
 		..(source)
@@ -19,14 +16,6 @@
 			computer.Crash(MISSING_PERIPHERAL)
 
 		computer.radio.set_frequency(1437,RADIO_ATMOSIA)
-
-
-	Reset()
-		..()
-		// Never save your work
-		priority_alarms.Cut()
-		minor_alarms.Cut()
-
 
 	// This will be called as long as the program is running on the parent computer
 	// and the computer has the radio peripheral
@@ -37,12 +26,12 @@
 		var/severity = signal.data["alert"]
 		if(!zone || !severity) return
 
-		minor_alarms -= zone
-		priority_alarms -= zone
+		minor_air_alarms -= zone
+		priority_air_alarms -= zone
 		if(severity=="severe")
-			priority_alarms += zone
+			priority_air_alarms += zone
 		else if (severity=="minor")
-			minor_alarms += zone
+			minor_air_alarms += zone
 		update_icon()
 		return
 
@@ -59,9 +48,9 @@
 
 	update_icon()
 		..()
-		if(priority_alarms.len > 0)
+		if(priority_air_alarms.len > 0)
 			overlay.icon_state = "alert:2"
-		else if(minor_alarms.len > 0)
+		else if(minor_air_alarms.len > 0)
 			overlay.icon_state = "alert:1"
 		else
 			overlay.icon_state = "alert:0"
@@ -74,14 +63,14 @@
 		var/priority_text = "<h2>Priority Alerts:</h2>"
 		var/minor_text = "<h2>Minor Alerts:</h2>"
 
-		if(priority_alarms.len)
-			for(var/zone in priority_alarms)
+		if(priority_air_alarms.len)
+			for(var/zone in priority_air_alarms)
 				priority_text += "<FONT color='red'><B>[format_text(zone)]</B></FONT> [topic_link(src,"priority_clear=[ckey(zone)]","X")]<BR>"
 		else
 			priority_text += "No priority alerts detected.<BR>"
 
-		if(minor_alarms.len)
-			for(var/zone in minor_alarms)
+		if(minor_air_alarms.len)
+			for(var/zone in minor_air_alarms)
 				minor_text += "<B>[format_text(zone)]</B> [topic_link(src,"minor_clear=[ckey(zone)]","X")]<BR>"
 		else
 			minor_text += "No minor alerts detected.<BR>"
@@ -95,16 +84,16 @@
 
 		if("priority_clear" in href_list)
 			var/removing_zone = href_list["priority_clear"]
-			for(var/zone in priority_alarms)
+			for(var/zone in priority_air_alarms)
 				if(ckey(zone) == removing_zone)
 					usr << "\green Priority Alert for area [zone] cleared."
-					priority_alarms -= zone
+					priority_air_alarms -= zone
 
 		if("minor_clear" in href_list)
 			var/removing_zone = href_list["minor_clear"]
-			for(var/zone in minor_alarms)
+			for(var/zone in minor_air_alarms)
 				if(ckey(zone) == removing_zone)
 					usr << "\green Minor Alert for area [zone] cleared."
-					minor_alarms -= zone
+					minor_air_alarms -= zone
 
 		computer.updateUsrDialog()

@@ -372,7 +372,7 @@
 				if (!M)
 					message = "<B>[src]</B> points."
 				else
-					M.point()
+					pointed(M)
 
 				if (M)
 					message = "<B>[src]</B> points to [M]."

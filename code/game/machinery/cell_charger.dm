@@ -28,12 +28,13 @@
 	else
 		overlays.Cut()
 	
-/obj/machinery/cell_charger/examine()
-	set src in oview(5)
-	..()
-	usr << "There's [charging ? "a" : "no"] cell in the charger."
+/obj/machinery/cell_charger/examine(mob/user)
+	if(!..(user, 5))
+		return
+	
+	user << "There's [charging ? "a" : "no"] cell in the charger."
 	if(charging)
-		usr << "Current charge: [charging.charge]"
+		user << "Current charge: [charging.charge]"
 
 /obj/machinery/cell_charger/attackby(obj/item/weapon/W, mob/user)
 	if(stat & BROKEN)
@@ -78,7 +79,16 @@
 		updateicon()
 
 /obj/machinery/cell_charger/attack_ai(mob/user)
-	return
+	if(istype(user, /mob/living/silicon/robot) && Adjacent(user)) // Borgs can remove the cell if they are near enough
+		if(!src.charging)
+			return
+
+		charging.loc = src.loc
+		charging.updateicon()
+		charging = null
+		update_icon()
+		user.visible_message("[user] removes the cell from the charger.", "You remove the cell from the charger.")
+
 
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))

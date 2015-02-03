@@ -105,7 +105,7 @@
 	var/use_hand = "left"
 	if(l_hand)
 		if(r_hand)
-			src << "\red You need to have one hand free to grab someone."
+			src << "<span class='danger'>You need to have one hand free to grab someone.</span>"
 			return
 		else
 			use_hand = "right"

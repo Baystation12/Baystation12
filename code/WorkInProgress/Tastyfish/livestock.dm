@@ -63,15 +63,15 @@
 
 					if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 						if (movement_target.loc.x < src.x)
-							dir = WEST
+							set_dir(WEST)
 						else if (movement_target.loc.x > src.x)
-							dir = EAST
+							set_dir(EAST)
 						else if (movement_target.loc.y < src.y)
-							dir = SOUTH
+							set_dir(SOUTH)
 						else if (movement_target.loc.y > src.y)
-							dir = NORTH
+							set_dir(NORTH)
 						else
-							dir = SOUTH
+							set_dir(SOUTH)
 
 					if(isturf(movement_target.loc))
 						movement_target.attack_animal(src)

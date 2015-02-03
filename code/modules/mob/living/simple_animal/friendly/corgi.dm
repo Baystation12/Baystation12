@@ -14,10 +14,12 @@
 	turns_per_move = 10
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	meat_amount = 3
-	response_help  = "pets the"
-	response_disarm = "bops the"
-	response_harm   = "kicks the"
+	response_help  = "pets"
+	response_disarm = "bops"
+	response_harm   = "kicks"
 	see_in_dark = 5
+	mob_size = 8
+
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger
@@ -58,7 +60,7 @@
 				for (var/mob/M in viewers(src, null))
 					M.show_message("\red [user] gently taps [src] with the [O]. ")
 			if(prob(15))
-				emote("looks at [user] with [pick("an amused","an annoyed","a confused","a resentful", "a happy", "an excited")] expression on \his face")
+				visible_emote("looks at [user] with [pick("an amused","an annoyed","a confused","a resentful", "a happy", "an excited")] expression on \his face")
 			return
 	..()
 
@@ -297,27 +299,26 @@
 
 				if(movement_target)		//Not redundant due to sleeps, Item can be gone in 6 decisecomds
 					if (movement_target.loc.x < src.x)
-						dir = WEST
+						set_dir(WEST)
 					else if (movement_target.loc.x > src.x)
-						dir = EAST
+						set_dir(EAST)
 					else if (movement_target.loc.y < src.y)
-						dir = SOUTH
+						set_dir(SOUTH)
 					else if (movement_target.loc.y > src.y)
-						dir = NORTH
+						set_dir(NORTH)
 					else
-						dir = SOUTH
+						set_dir(SOUTH)
 
 					if(isturf(movement_target.loc) )
-						movement_target.attack_animal(src)
-					else if(ishuman(movement_target.loc) )
-						if(prob(20))
-							emote("stares at the [movement_target] that [movement_target.loc] has with a sad puppy-face")
+						UnarmedAttack(movement_target)
+					else if(ishuman(movement_target.loc) && prob(20))
+						visible_emote("stares at the [movement_target] that [movement_target.loc] has with sad puppy eyes.")
 
 		if(prob(1))
-			emote(pick("dances around","chases its tail"))
+			visible_emote(pick("dances around","chases their tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
+					set_dir(i)
 					sleep(1)
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
@@ -370,7 +371,7 @@
 					M.show_message("\blue [user] baps [name] on the nose with the rolled up [O]")
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2))
-					dir = i
+					set_dir(i)
 					sleep(1)
 	else
 		..()
@@ -469,8 +470,8 @@
 
 
 		if(prob(1))
-			emote(pick("dances around","chases her tail"))
+			visible_emote(pick("dances around","chases her tail"))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
-					dir = i
+					set_dir(i)
 					sleep(1)

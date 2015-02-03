@@ -147,10 +147,12 @@
 
 	return
 
+/mob/proc/changeNext_move(num)
+	next_move = world.time + num
+
 // Default behavior: ignore double clicks, consider them normal clicks instead
 /mob/proc/DblClickOn(var/atom/A, var/params)
 	ClickOn(A,params)
-
 
 /*
 	Translates into attack_hand, etc.
@@ -164,6 +166,21 @@
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
+
+/mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
+
+	if(!ticker)
+		src << "You cannot attack people before the game has started."
+		return 0
+
+	if (istype(get_area(src), /area/start))
+		src << "No attacking people at spawn, you jackass."
+		return 0
+
+	if(stat)
+		return 0
+
+	return 1
 
 /*
 	Ranged unarmed attack:
@@ -205,7 +222,20 @@
 */
 /mob/proc/MiddleClickOn(var/atom/A)
 	return
+
 /mob/living/carbon/MiddleClickOn(var/atom/A)
+	swap_hand()
+
+/mob/living/carbon/human/MiddleClickOn(var/atom/A)
+
+	if(back)
+		var/obj/item/weapon/rig/rig = back
+		if(istype(rig) && rig.selected_module)
+			if(world.time <= next_move) return
+			next_move = world.time + 8
+			rig.selected_module.engage(A)
+			return
+
 	swap_hand()
 
 // In case of use break glass
@@ -224,8 +254,7 @@
 	return
 /atom/proc/ShiftClick(var/mob/user)
 	if(user.client && user.client.eye == user)
-		examine()
-		user.face_atom(src)
+		user.examinate(src)
 	return
 
 /*
@@ -301,17 +330,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-
-	// Snowflake for space vines.
-	var/is_buckled = 0
-	if(buckled)
-		if(istype(buckled))
-			if(!buckled.movable)
-				is_buckled = 1
-		else
-			is_buckled = 0
-
-	if( stat || is_buckled || !A || !x || !y || !A.x || !A.y ) return
+	if(!A || !x || !y || !A.x || !A.y) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return
@@ -323,7 +342,5 @@
 	else
 		if(dx > 0)	direction = EAST
 		else		direction = WEST
-	usr.dir = direction
-	if(buckled && buckled.movable)
-		buckled.dir = direction
-		buckled.handle_rotation()
+	if(direction != dir)
+		facedir(direction)

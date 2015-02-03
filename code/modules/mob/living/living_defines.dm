@@ -37,12 +37,5 @@
 
 	var/tod = null // Time of death
 	var/update_slimes = 1
-	var/silent = null 		//Can't talk. Value goes down every life proc.
-
-	// Putting these here for attack_animal().
-	var/melee_damage_lower = 0
-	var/melee_damage_upper = 0
-	var/attacktext = "attacks"
-	var/attack_sound = null
-	var/friendly = "nuzzles"
-	var/wall_smash = 0
+	var/silent = null 		// Can't talk. Value goes down every life proc.
+	var/mob_size            // Used by lockers.

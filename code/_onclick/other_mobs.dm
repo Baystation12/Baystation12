@@ -1,3 +1,7 @@
+// Generic damage proc (slimes and monkeys).
+/atom/proc/attack_generic(mob/user as mob)
+	return 0
+
 /*
 	Humans:
 	Adds an exception for gloves, to allow special glove types like the ninja ones.
@@ -5,15 +9,19 @@
 	Otherwise pretty standard.
 */
 /mob/living/carbon/human/UnarmedAttack(var/atom/A, var/proximity)
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+
+	if(!..())
+		return
 
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	if(proximity && istype(G) && G.Touch(A,1))
+	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
+	if(istype(G) && G.Touch(A,1))
 		return
 
 	A.attack_hand(src)
+
 /atom/proc/attack_hand(mob/user as mob)
 	return
 
@@ -41,23 +49,20 @@
 				return
 		A.attack_tk(src)
 
-/*
-	Animals & All Unspecified
-*/
-/mob/living/UnarmedAttack(var/atom/A)
-	A.attack_animal(src)
-/atom/proc/attack_animal(mob/user as mob)
-	return
 /mob/living/RestrainedClickOn(var/atom/A)
 	return
 
 /*
 	Monkeys
 */
-/mob/living/carbon/monkey/UnarmedAttack(var/atom/A)
-	A.attack_paw(src)
-/atom/proc/attack_paw(mob/user as mob)
-	return
+
+
+/mob/living/carbon/monkey/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return
+
+	A.attack_hand(src)
 
 /*
 	Monkey RestrainedClickOn() was apparently the
@@ -88,26 +93,91 @@
 
 /*
 	Aliens
-	Defaults to same as monkey in most places
 */
 
 /mob/living/carbon/alien/RestrainedClickOn(var/atom/A)
 	return
 
+/mob/living/carbon/alien/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return 0
+
+	A.attack_generic(src,rand(5,6),"bitten")
+
 /*
 	Slimes
 	Nothing happening here
 */
-/mob/living/carbon/slime/UnarmedAttack(var/atom/A)
-	A.attack_slime(src)
-/atom/proc/attack_slime(mob/user as mob)
-	return
+
 /mob/living/carbon/slime/RestrainedClickOn(var/atom/A)
 	return
 
+/mob/living/carbon/slime/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return
+
+	// Eating
+	if(Victim)
+		return
+
+	// Basic attack.
+	A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
+
+	// Handle mob shocks.
+	var/mob/living/M = A
+	if(istype(M) && powerlevel > 0 && !istype(A,/mob/living/carbon/slime))
+
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5))
+				return
+
+		var/power = max(0,min(10,(powerlevel+rand(0,3))))
+
+		var/stunprob = 10
+		switch(power*10)
+			if(1 to 2) stunprob = 20
+			if(3 to 4) stunprob = 30
+			if(5 to 6) stunprob = 40
+			if(7 to 8) stunprob = 60
+			if(9) 	   stunprob = 70
+			if(10) 	   stunprob = 95
+
+		if(prob(stunprob))
+			powerlevel = max(0,powerlevel-3)
+			src.visible_message("\red <B>The [name] has shocked [M]!</B>")
+			M.Weaken(power)
+			M.Stun(power)
+			if (M.stuttering < power) M.stuttering = power
+
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			s.set_up(5, 1, M)
+			s.start()
+
+			if(prob(stunprob) && powerlevel >= 8)
+				M.adjustFireLoss(powerlevel * rand(6,10))
+			M.updatehealth()
 /*
 	New Players:
 	Have no reason to click on anything at all.
 */
 /mob/new_player/ClickOn()
 	return
+
+/*
+	Animals
+*/
+/mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
+
+	if(!..())
+		return
+
+	if(melee_damage_upper == 0 && istype(A,/mob/living))
+		custom_emote(1,"[friendly] [A]!")
+		return
+
+	var/damage = rand(melee_damage_lower, melee_damage_upper)
+	if(A.attack_generic(src,damage,attacktext,wall_smash) && loc && attack_sound)
+		playsound(loc, attack_sound, 50, 1, 1)

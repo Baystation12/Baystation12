@@ -313,7 +313,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/orange
 	name = "orange"
-	desc = "It's an tangy fruit."
+	desc = "It's a tangy fruit."
 	icon_state = "orange"
 	potency = 20
 	filling_color = "#FAAD28"
@@ -428,16 +428,9 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato/Crossed(AM as mob|obj)
-	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if (istype(M, /mob/living/carbon/human) && (isobj(M:shoes) && M:shoes.flags&NOSLIP) || M.buckled)
-			return
-
-		M.stop_pulling()
-		M << "\blue You slipped on the [name]!"
-		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-		M.Stun(8)
-		M.Weaken(5)
+	if (istype(AM, /mob/living))
+		var/mob/living/M = AM
+		M.slip("the [src]!")
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
 	name = "wheat"

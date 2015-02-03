@@ -21,11 +21,6 @@
 
 	return
 
-
-/obj/item/weapon/paper_bin/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if (hasorgans(user))
 		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
@@ -81,13 +76,12 @@
 	amount++
 
 
-/obj/item/weapon/paper_bin/examine()
-	set src in oview(1)
-
-	if(amount)
-		usr << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
-	else
-		usr << "<span class='notice'>There are no papers in the bin.</span>"
+/obj/item/weapon/paper_bin/examine(mob/user)
+	if(get_dist(src, user) <= 1)
+		if(amount)
+			user << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+		else
+			user << "<span class='notice'>There are no papers in the bin.</span>"
 	return
 
 
