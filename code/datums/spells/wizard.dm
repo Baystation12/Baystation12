@@ -2,7 +2,6 @@
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
 
-	school = "evocation"
 	charge_max = 150
 	clothes_req = 1
 	invocation = "FORTI GY AMA"
@@ -31,7 +30,6 @@
 	name = "Mutate"
 	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
 
-	school = "transmutation"
 	charge_max = 400
 	clothes_req = 1
 	invocation = "BIRUZ BENNAR"
@@ -47,7 +45,6 @@
 	name = "Disintegrate"
 	desc = "This spell instantly kills somebody adjacent to you with the vilest of magick."
 
-	school = "evocation"
 	charge_max = 600
 	clothes_req = 1
 	invocation = "EI NATH"
@@ -63,7 +60,6 @@
 	name = "Smoke"
 	desc = "This spell spawns a cloud of choking smoke at your location and does not require wizard garb."
 
-	school = "conjuration"
 	charge_max = 120
 	clothes_req = 0
 	invocation = "none"
@@ -91,7 +87,6 @@
 	name = "Blink"
 	desc = "This spell randomly teleports you a short distance."
 
-	school = "abjuration"
 	charge_max = 20
 	clothes_req = 1
 	invocation = "none"
@@ -111,7 +106,6 @@
 	name = "Teleport"
 	desc = "This spell teleports you to a type of area of your selection."
 
-	school = "abjuration"
 	charge_max = 600
 	clothes_req = 1
 	invocation = "SCYAR NILA"
@@ -126,14 +120,13 @@
 	name = "Forcewall"
 	desc = "This spell creates an unbreakable wall that lasts for 30 seconds and does not need wizard garb."
 
-	school = "transmutation"
 	charge_max = 100
 	clothes_req = 0
 	invocation = "TARCOL MINTI ZHERI"
 	invocation_type = "whisper"
 	range = 0
 
-	summon_type = list("/obj/effect/forcefield")
+	summon_type = list(/obj/effect/forcefield)
 	summon_lifespan = 300
 
 
@@ -141,7 +134,6 @@
 	name = "Summon Carp"
 	desc = "This spell conjures a simple carp."
 
-	school = "conjuration"
 	charge_max = 1200
 	clothes_req = 1
 	invocation = "NOUK FHUNMM SACP RISSKA"
@@ -155,7 +147,6 @@
 	name = "Artificer"
 	desc = "This spell conjures a construct which may be controlled by Shades"
 
-	school = "conjuration"
 	charge_max = 600
 	clothes_req = 0
 	invocation = "none"
@@ -169,7 +160,6 @@
 	name = "Summon Creature Swarm"
 	desc = "This spell tears the fabric of reality, allowing horrific daemons to spill forth"
 
-	school = "conjuration"
 	charge_max = 1200
 	clothes_req = 0
 	invocation = "IA IA"
@@ -183,7 +173,6 @@
 	name = "Blind"
 	desc = "This spell temporarily blinds a single person and does not require wizard garb."
 
-	school = "transmutation"
 	charge_max = 300
 	clothes_req = 0
 	invocation = "STI KALY"
@@ -204,7 +193,6 @@
 	name = "Fireball"
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
 
-	school = "evocation"
 	charge_max = 100
 	clothes_req = 0
 	invocation = "ONI SOMA"
@@ -231,97 +219,3 @@
 	ex_heavy = -1
 	ex_light = 2
 	ex_flash = 5
-
-
-
-
-
-
-//////////////////////////////Construct Spells/////////////////////////
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser
-	charge_max = 1800
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/floor
-	name = "Floor Construction"
-	desc = "This spell constructs a cult floor"
-
-	school = "conjuration"
-	charge_max = 20
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/turf/simulated/floor/engine/cult)
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/wall
-	name = "Leser Construction"
-	desc = "This spell constructs a cult wall"
-
-	school = "conjuration"
-	charge_max = 100
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/turf/simulated/wall/cult)
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/wall/reinforced
-	name = "Greater Construction"
-	desc = "This spell constructs a reinforced metal wall"
-
-	school = "conjuration"
-	charge_max = 300
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-	delay = 50
-
-	summon_type = list(/turf/simulated/wall/r_wall)
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone
-	name = "Summon Soulstone"
-	desc = "This spell reaches into Nar-Sie's realm, summoning one of the legendary fragments across time and space"
-
-	school = "conjuration"
-	charge_max = 3000
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-
-	summon_type = list(/obj/item/device/soulstone)
-
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall
-	name = "Shield"
-	desc = "This spell creates a temporary forcefield to shield yourself and allies from incoming fire"
-
-	school = "transmutation"
-	charge_max = 300
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/obj/effect/forcefield)
-	summon_lifespan = 50
-
-
-/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift
-	name = "Phase Shift"
-	desc = "This spell allows you to pass through walls"
-
-	school = "transmutation"
-	charge_max = 200
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = -1
-	include_user = 1
-	phaseshift = 1
-	jaunt_duration = 50 //in deciseconds
-	centcomm_cancast = 0 //Stop people from getting to centcomm

@@ -46,9 +46,9 @@
 							del(summoned_object)
 	else
 		switch(charge_type)
-			if("recharge")
+			if(1)
 				charge_counter = charge_max - 5//So you don't lose charge for a failed spell(Also prevents most over-fill)
-			if("charges")
+			if(2)
 				charge_counter++//Ditto, just for different spell types
 
 

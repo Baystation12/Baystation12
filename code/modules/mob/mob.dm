@@ -827,11 +827,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 	if(spell_list && spell_list.len)
 		for(var/obj/effect/proc_holder/spell/S in spell_list)
 			switch(S.charge_type)
-				if("recharge")
+				if(SPELL_RECHARGE)
 					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
-				if("charges")
+				if(SPELL_CHARGES)
 					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
-				if("holdervar")
+				if(SPELL_HOLDERVAR)
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
 
 

@@ -163,7 +163,7 @@
 							temp = "Nothing could possibly go wrong with arming a crew of lunatics just itching for an excuse to kill eachother. Just be careful not to get hit in the crossfire!"
 						if("staffchange")
 							feedback_add_details("wizard_spell_learned","ST") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							new /obj/item/weapon/gun/energy/staff(get_turf(H))
+							new /obj/item/weapon/gun/magic/change(get_turf(H))
 							temp = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
 							max_uses--
 						if("mentalfocus")
@@ -187,7 +187,7 @@
 							max_uses--
 						if("staffanimation")
 							feedback_add_details("wizard_spell_learned","SA") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							new /obj/item/weapon/gun/energy/staff/animate(get_turf(H))
+							new /obj/item/weapon/gun/magic/animate(get_turf(H))
 							temp = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
 							max_uses--
 						if("scrying")

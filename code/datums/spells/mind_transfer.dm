@@ -2,7 +2,6 @@
 	name = "Mind Transfer"
 	desc = "This spell allows the user to switch bodies with a target."
 
-	school = "transmutation"
 	charge_max = 600
 	clothes_req = 0
 	invocation = "GIN'YU CAPAN"

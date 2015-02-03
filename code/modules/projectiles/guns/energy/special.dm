@@ -26,58 +26,6 @@
 	charge_cost = 100
 	projectile_type = "/obj/item/projectile/energy/declone"
 
-obj/item/weapon/gun/energy/staff
-	name = "staff of change"
-	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
-	icon = 'icons/obj/gun.dmi'
-	icon_state = "staffofchange"
-	item_state = "staffofchange"
-	fire_sound = 'sound/weapons/emitter.ogg'
-	flags =  FPRINT | TABLEPASS | CONDUCT
-	slot_flags = SLOT_BACK
-	w_class = 4.0
-	charge_cost = 200
-	projectile_type = "/obj/item/projectile/change"
-	origin_tech = null
-	clumsy_check = 0
-	var/charge_tick = 0
-
-
-	New()
-		..()
-		processing_objects.Add(src)
-
-
-	Del()
-		processing_objects.Remove(src)
-		..()
-
-
-	process()
-		charge_tick++
-		if(charge_tick < 4) return 0
-		charge_tick = 0
-		if(!power_supply) return 0
-		power_supply.give(200)
-		return 1
-
-	update_icon()
-		return
-
-
-	click_empty(mob/user = null)
-		if (user)
-			user.visible_message("*fizzle*", "\red <b>*fizzle*</b>")
-		else
-			src.visible_message("*fizzle*")
-		playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 1)
-
-/obj/item/weapon/gun/energy/staff/animate
-	name = "staff of animation"
-	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
-	projectile_type = "/obj/item/projectile/animate"
-	charge_cost = 100
-
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."

@@ -140,6 +140,9 @@
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
 	..()
 
+	if(!Proj)
+		return
+
 	//Tasers and the like should not damage doors. Nor should TOX, OXY, CLONE, etc damage types
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return

@@ -12,7 +12,7 @@
 		return
 	invocation(thearea)
 	spawn(0)
-		if(charge_type == "recharge" && recharge)
+		if(charge_type == 1 && recharge)
 			start_recharge()
 	cast(targets,thearea)
 	after_cast(targets)
@@ -72,10 +72,6 @@
 		switch(invocation_type)
 			if("shout")
 				usr.say("[invocation] [uppertext(chosenarea.name)]")
-				if(usr.gender==MALE)
-					playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
-				else
-					playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
 			if("whisper")
 				usr.whisper("[invocation] [uppertext(chosenarea.name)]")
 

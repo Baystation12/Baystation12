@@ -1,12 +1,9 @@
 /obj/effect/proc_holder/spell/targeted/horsemask
 	name = "Curse of the Horseman"
 	desc = "This spell triggers a curse on a target, causing them to wield an unremovable horse head mask. They will speak like a horse! Any masks they are wearing will be disintegrated. This spell does not require robes."
-	school = "transmutation"
-	charge_type = "recharge"
 	charge_max = 150
 	charge_counter = 0
 	clothes_req = 0
-	stat_allowed = 0
 	invocation = "KN'A FTAGHU, PUCK 'BTHNK!"
 	invocation_type = "shout"
 	range = 7
