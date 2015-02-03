@@ -113,7 +113,7 @@
 				if("rename")
 					spawn(0)
 						var/t = input(usr, "Please enter new name", F.name, null) as text
-						t = copytext(sanitize(t), 1, 16)
+						t = sanitize(copytext(t, 1, 16))
 						if (!t)
 							return
 						if (!in_range(src.master, usr) || !(F.holder in src.master))
