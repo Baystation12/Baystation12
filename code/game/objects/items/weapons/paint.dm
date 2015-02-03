@@ -12,7 +12,7 @@ var/global/list/cached_icons = list()
 	w_class = 3.0
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(10,20,30,50,70)
-	volume = 70
+	volume = 60
 	flags = OPENCONTAINER
 	var/paint_type = ""
 
@@ -33,7 +33,13 @@ var/global/list/cached_icons = list()
 		else if(paint_type && lentext(paint_type) > 0)
 			name = paint_type + " " + name
 		..()
-		reagents.add_reagent("paint_[paint_type]", volume)
+		reagents.add_reagent("water", volume*3/5)
+		reagents.add_reagent("plasticide", volume/5)
+		if(paint_type == "white") //why don't white crayons exist
+			reagents.add_reagent("aluminum", volume/5)
+		else
+			reagents.add_reagent("crayon_dust_[paint_type]", volume/5)
+		reagents.handle_reactions()
 
 	on_reagent_change() //Until we have a generic "paint", this will give new colours to all paints in the can
 		var/mixedcolor = mix_color_from_reagents(reagents.reagent_list)
@@ -44,6 +50,10 @@ var/global/list/cached_icons = list()
 		icon_state = "paint_red"
 		paint_type = "red"
 
+	yellow
+		icon_state = "paint_yellow"
+		paint_type = "yellow"
+
 	green
 		icon_state = "paint_green"
 		paint_type = "green"
@@ -52,17 +62,13 @@ var/global/list/cached_icons = list()
 		icon_state = "paint_blue"
 		paint_type = "blue"
 
-	yellow
-		icon_state = "paint_yellow"
-		paint_type = "yellow"
-
 	violet
 		icon_state = "paint_violet"
-		paint_type = "violet"
+		paint_type = "purple"
 
 	black
 		icon_state = "paint_black"
-		paint_type = "black"
+		paint_type = "gray"
 
 	white
 		icon_state = "paint_white"
@@ -80,71 +86,6 @@ var/global/list/cached_icons = list()
 	color = "FFFFFF"
 	item_state = "paintcan"
 	w_class = 3.0
-
-/obj/item/weapon/paint/red
-	name = "red paint"
-	color = "FF0000"
-	icon_state = "paint_red"
-
-/obj/item/weapon/paint/green
-	name = "green paint"
-	color = "00FF00"
-	icon_state = "paint_green"
-
-/obj/item/weapon/paint/blue
-	name = "blue paint"
-	color = "0000FF"
-	icon_state = "paint_blue"
-
-/obj/item/weapon/paint/yellow
-	name = "yellow paint"
-	color = "FFFF00"
-	icon_state = "paint_yellow"
-
-/obj/item/weapon/paint/violet
-	name = "violet paint"
-	color = "FF00FF"
-	icon_state = "paint_violet"
-
-/obj/item/weapon/paint/black
-	name = "black paint"
-	color = "333333"
-	icon_state = "paint_black"
-
-/obj/item/weapon/paint/white
-	name = "white paint"
-	color = "FFFFFF"
-	icon_state = "paint_white"
-
-
-/obj/item/weapon/paint/anycolor
-	gender= PLURAL
-	name = "any color"
-	icon_state = "paint_neutral"
-
-	attack_self(mob/user as mob)
-		var/t1 = input(user, "Please select a color:", "Locking Computer", null) in list( "red", "blue", "green", "yellow", "black", "white")
-		if ((user.get_active_hand() != src || user.stat || user.restrained()))
-			return
-		switch(t1)
-			if("red")
-				color = "FF0000"
-			if("blue")
-				color = "0000FF"
-			if("green")
-				color = "00FF00"
-			if("yellow")
-				color = "FFFF00"
-			if("violet")
-				color = "FF00FF"
-			if("white")
-				color = "FFFFFF"
-			if("black")
-				color = "333333"
-		icon_state = "paint_[t1]"
-		add_fingerprint(user)
-		return
-
 
 /obj/item/weapon/paint/afterattack(turf/target, mob/user as mob, proximity)
 	if(!proximity) return
@@ -171,7 +112,7 @@ var/global/list/cached_icons = list()
 			target.icon = initial(target.icon)
 		return
 */
-
+/*
 datum/reagent/paint
 	name = "Paint"
 	id = "paint_"
@@ -179,15 +120,7 @@ datum/reagent/paint
 	color = "#808080"
 	description = "This paint will only adhere to floor tiles."
 
-	reaction_turf(var/turf/T, var/volume)
-		if(!istype(T) || istype(T, /turf/space))
-			return
-		T.color = color
 
-	reaction_obj(var/obj/O, var/volume)
-		..()
-		if(istype(O,/obj/item/weapon/light))
-			O.color = color
 
 	red
 		name = "Red Paint"
@@ -235,3 +168,4 @@ datum/reagent/paint_remover
 		if(istype(T) && T.icon != initial(T.icon))
 			T.icon = initial(T.icon)
 		return
+*/

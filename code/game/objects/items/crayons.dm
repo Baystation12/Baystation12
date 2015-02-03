@@ -91,7 +91,8 @@
 /obj/item/toy/crayon/attack(mob/M as mob, mob/user as mob)
 	if(M == user)
 		user << "You take a bite of the crayon and swallow it."
-//		user.nutrition += 5
+		user.nutrition += 1
+		user.reagents.add_reagent("crayon_dust",min(5,uses)/3)
 		if(uses)
 			uses -= 5
 			if(uses <= 0)

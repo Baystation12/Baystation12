@@ -99,6 +99,8 @@
 		"power" = use_power,
 		"scrubbing" = scrubbing,
 		"panic" = panic,
+		"filter_o2" = ("oxygen" in scrubbing_gas),
+		"filter_n2" = ("nitrogen" in scrubbing_gas),
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
 		"filter_phoron" = ("phoron" in scrubbing_gas),
 		"filter_n2o" = ("sleeping_agent" in scrubbing_gas),
@@ -191,6 +193,16 @@
 		scrubbing = !scrubbing
 
 	var/list/toggle = list()
+
+	if(!isnull(signal.data["o2_scrub"]) && text2num(signal.data["o2_scrub"]) != ("oxygen" in scrubbing_gas))
+		toggle += "oxygen"
+	else if(signal.data["toggle_o2_scrub"])
+		toggle += "oxygen"
+
+	if(!isnull(signal.data["n2_scrub"]) && text2num(signal.data["n2_scrub"]) != ("nitrogen" in scrubbing_gas))
+		toggle += "nitrogen"
+	else if(signal.data["toggle_n2_scrub"])
+		toggle += "nitrogen"
 
 	if(!isnull(signal.data["co2_scrub"]) && text2num(signal.data["co2_scrub"]) != ("carbon_dioxide" in scrubbing_gas))
 		toggle += "carbon_dioxide"
