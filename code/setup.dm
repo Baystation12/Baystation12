@@ -68,6 +68,12 @@
 #define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
 #define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
+//Fire
+#define FIRE_MIN_STACKS -20
+#define FIRE_MAX_STACKS 25
+//If the number of stacks goes above this firesuits won't protect you anymore. If not you can walk around while on fire like a badass.
+#define FIRE_MAX_FIRESUIT_STACKS 20
+
 #define THROWFORCE_SPEED_DIVISOR 5		//The throwing speed value at which the throwforce multiplier is exactly 1.
 #define THROWNOBJ_KNOCKBACK_SPEED 15	//The minumum speed of a thrown object that will cause living mobs it hits to be knocked back.
 #define THROWNOBJ_KNOCKBACK_DIVISOR 2	//Affects how much speed the mob is knocked back with
