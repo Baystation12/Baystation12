@@ -113,7 +113,7 @@ var/list/beam_master = list()
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
-	damage = 30
+	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
 
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"

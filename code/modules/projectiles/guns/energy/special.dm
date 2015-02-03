@@ -235,43 +235,37 @@ obj/item/weapon/gun/energy/staff/focus
 	zoom()
 
 
+// Serves as a target spotter for the Icarus.
 /obj/item/weapon/gun/energy/icarus
-	name = "\improper N.D.V. Icarus"
-	desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire point defense lasers.."
+	name = "rubber ducky"
+	desc = "It's a cute rubber duck.  With an evil gleam in it's eye."
 	projectile_type = "/obj/item/projectile/icarus/pointdefense"
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
 	charge_cost = 0
 	silenced = 1
-	var/popgun = 1
 
 	attack_self(mob/living/user as mob)
-		if(popgun)
-			popgun = 0
-			desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire the main guns."
+		if(projectile_type == "/obj/item/projectile/icarus/pointdefense")
 			projectile_type = "/obj/item/projectile/icarus/guns"
-			user << "You switch to using the main guns."
-
+			user << "You inform the Icarus to switch to the main guns."
 		else
-			popgun = 1
-			desc = "It feels like the fate of the Exodus in your hands.  SO STOP FUCKING IT UP.  It's set to fire point defense lasers.."
 			projectile_type = "/obj/item/projectile/icarus/pointdefense"
-			user << "You switch to using the point-defense lasers."
+			user << "You inform the Icarus to switch to the point-defense lasers."
+
 		. = ..()
 
 	update_icon()
 		return
 
-	verb/fuckshitup()
-		set name = "fuckshitup"
-		set desc = "This will kill a lot of people."
-		set hidden = 1
+	verb/SetIcarusAngle()
+		set src in usr
+		set name = "Set Firing Angle"
+		set desc = "Sets the angle from which the icarus will fire."
+		set category = "Object"
 
-		popgun = 0
-		desc = "It feels like the fate of the Exodus is in your han- wait, what the hell ARE YOU DOING!?"
-		projectile_type = "/obj/item/projectile/icarus/torpedo"
-		usr << "You tell the crew to load the highly illegal phasic torpedos.  After the mutiny has been put down, you are ready to burn the world."
+		Icarus_SetPosition(usr)
 
 
 /obj/item/weapon/gun/energy/variable

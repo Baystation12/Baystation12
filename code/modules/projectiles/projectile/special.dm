@@ -140,66 +140,14 @@
 
 /obj/item/projectile/icarus/pointdefense
 	process()
-		// should step down as:
-		// 1000, 500, 333, 250, 200, 167, 142, 125, 111, 100, 90
-		var/damage = 1000
-		for(var/i in 2 to 12)
-			var/obj/item/projectile/beam/in_chamber = new (src.loc)
-			in_chamber.original = original
-			in_chamber.starting = starting
-			in_chamber.shot_from = shot_from
-			in_chamber.silenced = silenced
-			in_chamber.current = current
-			in_chamber.yo = yo
-			in_chamber.xo = xo
-			in_chamber.damage = damage
-			in_chamber.process()
-			damage -= damage / i
-			sleep(-1)
-
-		// Let everyone know what hit them.
-		var/obj/item/projectile/beam/in_chamber = new (src.loc)
-		in_chamber.original = original
-		in_chamber.name = "point defense laser"
-		in_chamber.starting = starting
-		in_chamber.shot_from = shot_from
-		in_chamber.silenced = 0
-		in_chamber.firer = "Icarus" // Never displayed, but we want this to display the hit message.
-		in_chamber.current = current
-		in_chamber.yo = yo
-		in_chamber.xo = xo
-		in_chamber.damage = 0
-		in_chamber.process()
+		Icarus_FireLaser(get_turf(original))
 		spawn(1)
 			del src
 
 		return
 
-/obj/item/projectile/icarus/guns
-	process()
-		var/turf/location = get_turf(src)
-		//Find the world endge targetted.
-		var/x = xo > 0 ? (world.maxx - location.x) / xo : xo < 0 ? (-location.x) / xo : 1.#INF
-		var/y = yo > 0 ? (world.maxy - location.y) / yo : yo < 0 ? (-location.y) / yo : 1.#INF
-		// Get the minimum number of steps using the rise/run shit.
-		var/iterations = round(min(x,y)) - 1
-
-		var/turf/target = locate(location.x + iterations * xo, location.y + iterations * yo, location.z)
-		var/turf/start = get_step(location, get_dir(location, target))
-		var/obj/effect/meteor/small/projectile = new (start) // Let's not squish the firer.
-		projectile.dest = target
-		projectile.name = "main gun projectile" // stealthy
-		projectile.hits = 6
-		projectile.detonation_chance = 99 // it's a missile/cannon round thing!
-
-		spawn(0)
-			projectile.throw_at(projectile.dest, 1.#INF, 5)
-			walk_towards(projectile, projectile.dest, 1)
-
-		spawn(1)
-			del src
-
-		return
-
-/obj/item/projectile/icarus/torpedo
-	//TODO
+/obj/item/projectile/icarus/guns/process()
+	Icarus_FireCannon(get_turf(original))
+	spawn
+		del src
+	return
