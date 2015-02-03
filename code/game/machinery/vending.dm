@@ -182,7 +182,34 @@
 			currently_vending = null
 		else
 			usr << "\icon[src]<span class='warning'>Your chargecard does not have enough money!</span>"
-			
+	
+	// we shouldn't hit spacewallets by now since they were handled above, so this is cash only
+	else if (istype(W, /obj/item/weapon/spacecash) && currently_vending)
+		var/obj/item/weapon/spacecash/C = W
+		if(C.worth >= currently_vending.price)
+			if(istype(C, /obj/item/weapon/spacecash/bundle))
+				visible_message("<span class='info'>[usr] inserts some cash into [src].</span>")
+				C.worth -= currently_vending.price
+				if(!C.worth)
+					usr.drop_from_inventory(W)
+					del(W)
+				else
+					W.update_icon()
+			else
+				// Non-bundles are whole bills. We eat the whole cash item and spit out change
+				visible_message("<span class='info'>[usr] inserts a bill into [src].</span>")
+				var/left = C.worth - currently_vending.price
+				
+				usr.drop_from_inventory(W)
+				del(W)
+				if(left)
+					spawn_money(left, src.loc, user)
+					
+			src.vend(src.currently_vending, usr)
+			currently_vending = null
+		else
+			usr << "\icon[src]<span class='warning'>That is not enough money to cover the price!</span>"
+	
 	else if(istype(W, /obj/item/weapon/wrench))
 
 		if(do_after(user, 20))
@@ -310,7 +337,7 @@
 
 	if(src.currently_vending)
 		var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
-		dat += "<b>Product selected:</b> [currently_vending.product_name]<br><b>Charge:</b> [currently_vending.price]<br><br>Please swipe a card to pay for the item.</b><br>"
+		dat += "<b>Product selected:</b> [currently_vending.product_name]<br><b>Charge:</b> [currently_vending.price]<br><br>Please swipe a card or insert cash to pay for the item.</b><br>"
 		dat += "<a href='byond://?src=\ref[src];cancel_buying=1'>Cancel</a>"
 		user << browse(dat, "window=vending")
 		onclose(user, "")
