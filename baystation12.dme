@@ -1536,5 +1536,10 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\BS12ship.dmm"
+#include "maps\BS12ship-z1-Maintenance.dmm"
+#include "maps\BS12ship-z2-Command.dmm"
+#include "maps\BS12ship-z3-Supply.dmm"
+#include "maps\BS12ship-z4-RnD-Sec-Med.dmm"
+#include "maps\BS12ship-z5-Civilian.dmm"
+#include "maps\BS12ship-z6-RnR.dmm"
 // END_INCLUDE

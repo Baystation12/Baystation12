@@ -1,7 +1,7 @@
-set MAPFILE=BS12ship.dmm
-
-
 cd ../../maps
 
-copy %MAPFILE% %MAPFILE%.backup
+FOR %%f IN (*.dmm) DO (
+  copy %%f %%f.backup
+)
+
 pause
