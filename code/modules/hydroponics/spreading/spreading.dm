@@ -48,7 +48,6 @@
 
 	var/list/children = list()
 	var/obj/effect/plant/parent
-	var/mob/living/buckled_mob
 	var/datum/seed/seed
 	var/floor = 0
 	var/spread_chance = 40

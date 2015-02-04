@@ -59,7 +59,7 @@
 		for(var/typepath in starting_seeds)
 			var/amount = starting_seeds[typepath]
 			if(isnull(amount)) amount = 1
-			
+
 			for (var/i = 1 to amount)
 				var/O = new typepath
 				add(O)
@@ -121,7 +121,7 @@
 						dat += "<td>Norm</td>"
 				else
 					dat += "<td>No</td>"
-			
+
 			dat += "<td>"
 			if ("mutants" in scanner)
 				if(seed.mutants && seed.mutants.len)

@@ -13,19 +13,18 @@
 /obj/structure/closet/crate/secure/loot/New()
 	..()
 	var/list/digits = list("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-	
+
 	code = ""
 	for(var/i = 0, i < codelen, i++)
 		var/dig = pick(digits)
 		code += dig
 		digits -= dig  // Player can enter codes with matching digits, but there are never matching digits in the answer
-	
+
 	var/loot = rand(1, 100)
 	switch(loot)
 		if(1 to 5) // Common things go, 5%
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/rum(src)
 			new/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey(src)
-			new/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus(src)
 			new/obj/item/weapon/flame/lighter/zippo(src)
 		if(6 to 10)
 			new/obj/item/weapon/pickaxe/drill(src)

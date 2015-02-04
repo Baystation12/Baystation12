@@ -39,7 +39,6 @@
 	icon = 'icons/obj/harvest.dmi'
 	icon_state = "logs"
 	force = 5
-	flags = TABLEPASS
 	throwforce = 5
 	w_class = 3.0
 	throw_speed = 3
