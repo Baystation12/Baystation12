@@ -17,6 +17,9 @@ datum
 		var/list/secondary_results = list()		//additional reagents produced by the reaction
 		var/requires_heating = 0
 
+		var/required_temp = 0
+		var/mix_message = "The solution begins to bubble."
+
 		proc
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				return
@@ -120,13 +123,6 @@ datum
 			required_reagents = list("ethanol" = 1, "tramadol" = 1)
 			required_catalysts = list("phoron" = 1)
 			result_amount = 1
-
-		//cyanide
-		//	name = "Cyanide"
-		//	id = "cyanide"
-		//	result = "cyanide"
-		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
-		//	result_amount = 1
 
 		water //I can't believe we never had this.
 			name = "Water"

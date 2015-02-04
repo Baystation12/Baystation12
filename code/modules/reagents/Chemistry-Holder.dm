@@ -1,5 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
+#DEFINE CHEMICAL_PROCESS_RATE 3
+#DEFINE ADDICTION_PROCESS_RATE 6
 var/const/TOUCH = 1
 var/const/INGEST = 2
 
@@ -11,6 +12,10 @@ datum
 		var/total_volume = 0
 		var/maximum_volume = 100
 		var/atom/my_atom = null
+		var/chem_temp = 150
+		var/last_tick = 1
+		var/addiction_tick = 1
+		var/list/datum/reagent/addiction_list = new/list()
 
 		New(maximum=100)
 			maximum_volume = maximum
@@ -261,11 +266,48 @@ datum
 */
 
 			metabolize(var/mob/M,var/alien)
-
-				for(var/A in reagent_list)
-					var/datum/reagent/R = A
-					if(M && R)
-						R.on_mob_life(M,alien)
+				if(last_tick == CHEMICAL_PROCESS_RATE)
+					last_tick = 1
+					for(var/A in reagent_list)
+						var/datum/reagent/R = A
+						if(M && R)
+							if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
+								R.overdosed = 1
+								M << "<span class = 'userdanger'>You feel like you took too much of [R.name]!</span>"
+							if(R.volume >= R.addiction_threshold && !is_type_in_list(R, addiction_list) && R.addiction_threshold > 0)
+								var/datum/reagent/new_reagent = new R.type()
+								addiction_list.Add(new_reagent)
+							if(R.overdosed)
+								R.overdose_process(M)
+							if(is_type_in_list(R,addiction_list))
+								for(var/datum/reagent/addicted_reagent in addiction_list)
+									if(istype(R, addicted_reagent))
+										addicted_reagent.addiction_stage = -15 // you're satisfied for a good while.
+							R.on_mob_life(M, alien)
+				if(addiction_tick == ADDICTION_PROCESS_RATE)
+					addiction_tick = 1
+					for(var/A in addiction_list)
+						var/datum/reagent/R = A
+						switch(R.addiction_stage)
+							if(-15 to 0)
+								R.addiction_stage++
+							if(1 to 10)
+								R.addiction_act(M, 1)
+								R.addiction_stage++
+							if(11 to 20)
+								R.addiction_act(M, 2)
+								R.addiction_stage++
+							if(21 to 30)
+								R.addiction_act(M, 3)
+								R.addiction_stage++
+							if(31 to 40)
+								R.addiction_act(M, 4)
+								R.addiction_stage++
+							if(41)
+								M << "<span class = 'notice'>You feel like you've gotten over your need for [R.name].</span>"
+								addiction_list.Remove(R)
+				addiction_tick++
+				last_tick++
 				update_total()
 
 			conditional_update_move(var/atom/A, var/Running = 0)
@@ -307,6 +349,7 @@ datum
 							var/matching_container = 0
 							var/matching_other = 0
 							var/list/multipliers = new/list()
+							var/required_temp = C.required_temp
 
 							for(var/B in C.required_reagents)
 								if(!has_reagent(B, C.required_reagents[B]))	break
@@ -339,9 +382,10 @@ datum
 										matching_other = 1
 
 
+							if(required_temp == 0)
+								required_temp = chem_temp
 
-
-							if(total_matching_reagents == total_required_reagents && total_matching_catalysts == total_required_catalysts && matching_container && matching_other)
+							if(total_matching_reagents == total_required_reagents && total_matching_catalysts == total_required_catalysts && matching_container && matching_other && chem_temp >= required_temp)
 								var/multiplier = min(multipliers)
 								var/preserved_data = null
 								for(var/B in C.required_reagents)
@@ -365,7 +409,7 @@ datum
 
 								var/list/seen = viewers(4, get_turf(my_atom))
 								for(var/mob/M in seen)
-									M << "\blue \icon[my_atom] The solution begins to bubble."
+									M << "\blue \icon[my_atom] [C.mix_message]."
 
 							/*	if(istype(my_atom, /obj/item/slime_core))
 									var/obj/item/slime_core/ME = my_atom

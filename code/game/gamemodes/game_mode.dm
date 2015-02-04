@@ -51,7 +51,8 @@
 			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
 			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
 			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
-			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP")
+			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chemical, 1, "Poison Kit", "PK")
 			),
 		"Devices and Tools" = list(
 			new/datum/uplink_item(/obj/item/weapon/card/emag, 3, "Cryptographic Sequencer", "EC"),
