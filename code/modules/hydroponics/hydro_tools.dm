@@ -273,7 +273,7 @@
 	name = "fertilizer bottle"
 	desc = "A small glass bottle. Can hold up to 10 units."
 	icon = 'icons/obj/chemical.dmi'
-	icon_state = "bottle16"
+	icon_state = "bottle-4"
 	flags = FPRINT |  TABLEPASS | OPENCONTAINER
 	possible_transfer_amounts = null
 	w_class = 2.0
@@ -292,20 +292,21 @@
 
 	if(fertilizer)
 		reagents.add_reagent(fertilizer,10)
+		update_icon()
 
 /obj/item/weapon/reagent_containers/glass/fertilizer/ez
 	name = "bottle of E-Z-Nutrient"
-	icon_state = "bottle16"
+	icon_state = "bottle-4"
 	fertilizer = "eznutrient"
 
 /obj/item/weapon/reagent_containers/glass/fertilizer/l4z
 	name = "bottle of Left 4 Zed"
-	icon_state = "bottle18"
+	icon_state = "bottle-4"
 	fertilizer = "left4zed"
 
 /obj/item/weapon/reagent_containers/glass/fertilizer/rh
 	name = "bottle of Robust Harvest"
-	icon_state = "bottle15"
+	icon_state = "bottle-4"
 	fertilizer = "robustharvest"
 
 //Hatchets and things to kill kudzu
