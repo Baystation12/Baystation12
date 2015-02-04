@@ -1271,7 +1271,6 @@
 #include "code\modules\power\antimatter\containment_jar.dm"
 #include "code\modules\power\antimatter\control.dm"
 #include "code\modules\power\antimatter\shielding.dm"
-#include "code\modules\power\rust\areas.dm"
 #include "code\modules\power\rust\circuits_and_design.dm"
 #include "code\modules\power\rust\core_control.dm"
 #include "code\modules\power\rust\core_field.dm"
