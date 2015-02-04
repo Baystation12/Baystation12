@@ -348,20 +348,19 @@ var/list/mob/living/forced_ambiance_list = new
 					M.make_floating(1)
 
 /area/proc/thunk(mob)
-	if(istype(mob,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-		if((istype(mob:shoes, /obj/item/clothing/shoes/magboots) && (mob:shoes.flags & NOSLIP)))
-			return
-
 	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
 		return
 
-	if((istype(mob,/mob/living/carbon/human/)) && (mob:m_intent == "run")) // Only clumbsy humans can fall on their asses.
-		mob:AdjustStunned(5)
-		mob:AdjustWeakened(5)
+	if(istype(mob,/mob/living/carbon/human/))
+		var/mob/living/carbon/human/H = mob
+		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.flags & NOSLIP))
+			return
 
-	else if (istype(mob,/mob/living/carbon/human/))
-		mob:AdjustStunned(2)
-		mob:AdjustWeakened(2)
-
-	mob << "Gravity!"
+		if(H.m_intent == "run")
+			H.AdjustStunned(2)
+			H.AdjustWeakened(2)
+		else
+			H.AdjustStunned(1)
+			H.AdjustWeakened(1)
+		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
 
