@@ -1,7 +1,7 @@
 //wip wip wup
 /obj/structure/mirror
-	name = "\improper SalonPro Nano-Mirror(TM)"
-	desc = "The leading technology in hair salon products, utilizing nano-machinery to style your hair just right."
+	name = "mirror"
+	desc = "A SalonPro Nano-Mirror(TM) brand mirror! The leading technology in hair salon products, utilizing nano-machinery to style your hair just right."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror"
 	density = 0
@@ -70,6 +70,9 @@
 
 
 /obj/structure/mirror/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+
 	if(prob(Proj.damage * 2))
 		if(!shattered)
 			shatter()

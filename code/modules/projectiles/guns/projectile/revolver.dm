@@ -7,7 +7,6 @@
 	origin_tech = "combat=2;materials=2"
 	ammo_type = "/obj/item/ammo_casing/c38"
 
-
 	special_check(var/mob/living/carbon/human/M)
 		if(caliber == initial(caliber))
 			return 1
@@ -77,12 +76,8 @@
 	max_shells = 7
 	caliber = ".45"
 	ammo_type = "/obj/item/ammo_casing/c45r"
-	load_method = 2
-
-/obj/item/weapon/gun/projectile/detective/semiauto/New()
-	..()
-	empty_mag = new /obj/item/ammo_magazine/c45r/empty(src)
-	return
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/c45r/empty
 
 /obj/item/weapon/gun/projectile/detective/semiauto/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -130,7 +125,7 @@
 	var/num_loaded = 0
 	if(istype(A, /obj/item/ammo_magazine))
 
-		if((load_method == 2) && loaded.len)	return
+		if((load_method == MAGAZINE) && loaded.len)	return
 		var/obj/item/ammo_magazine/AM = A
 		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
 			if(getAmmo() > 0 || loaded.len >= max_shells)

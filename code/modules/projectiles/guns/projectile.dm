@@ -4,7 +4,7 @@
 
 /obj/item/weapon/gun/projectile
 	name = "revolver"
-	desc = "A classic revolver. Uses 357 ammo"
+	desc = "A classic revolver. Uses .357 ammo"
 	icon_state = "revolver"
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
@@ -16,12 +16,14 @@
 	var/max_shells = 7
 	var/load_method = SPEEDLOADER //0 = Single shells or quick loader, 1 = box, 2 = magazine
 	var/obj/item/ammo_magazine/empty_mag = null
-
+	var/mag_type = null
 
 /obj/item/weapon/gun/projectile/New()
 	..()
 	for(var/i = 1, i <= max_shells, i++)
 		loaded += new ammo_type(src)
+	if(load_method == MAGAZINE)
+		empty_mag = new mag_type(src)
 	update_icon()
 	return
 

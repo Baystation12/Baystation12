@@ -105,6 +105,10 @@ var/list/beam_master = list()
 	icon_state = "u_laser"
 	damage = 50
 
+/obj/item/projectile/beam/pulse/on_hit(var/atom/target, var/blocked = 0)
+	if(isturf(target))
+		target.ex_act(2)
+	..()
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
@@ -169,5 +173,6 @@ var/list/beam_master = list()
 	name = "stun beam"
 	icon_state = "stun"
 	nodamage = 1
+	taser_effect = 1
 	agony = 40
 	damage_type = HALLOSS
