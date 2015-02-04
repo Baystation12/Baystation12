@@ -696,6 +696,10 @@ siphoning
 					if(data["scrubbing"])
 						sensor_data += {"
 <B>Filtering:</B>
+Oxygen
+<A href='?src=\ref[source];id_tag=[id_tag];command=o2_scrub;val=[!data["filter_o2"]]'>[data["filter_o2"]?"on":"off"]</A>;
+Nitrogen
+<A href='?src=\ref[source];id_tag=[id_tag];command=n2_scrub;val=[!data["filter_n2"]]'>[data["filter_n2"]?"on":"off"]</A>;
 Carbon Dioxide
 <A href='?src=\ref[source];id_tag=[id_tag];command=co2_scrub;val=[!data["filter_co2"]]'>[data["filter_co2"]?"on":"off"]</A>;
 Toxins
@@ -817,6 +821,8 @@ table tr:first-child th:first-child { border: none;}
 					"adjust_external_pressure",
 					"set_external_pressure",
 					"checks",
+					"o2_scrub",
+					"n2_scrub",
 					"co2_scrub",
 					"tox_scrub",
 					"n2o_scrub",

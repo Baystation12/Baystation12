@@ -131,6 +131,10 @@
 		else
 			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] handcuffed!</span>\n"
 
+	//buckled
+	if(buckled)
+		msg += "<span class='warning'>[t_He] [t_is] \icon[buckled] buckled to [buckled]!</span>\n"
+
 	//belt
 	if(belt)
 		if(belt.blood_DNA)
@@ -219,7 +223,10 @@
 					usr << "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
 				else
 					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
-
+	if(fire_stacks)
+		msg += "[t_He] [t_is] covered in some liquid.\n"
+	if(on_fire)
+		msg += "<span class='warning'>[t_He] [t_is] on fire!.</span>\n"
 	msg += "<span class='warning'>"
 
 	if(nutrition < 100)

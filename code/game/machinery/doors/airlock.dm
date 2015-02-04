@@ -1074,10 +1074,6 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
 	..()
 
-	//High-sec airlocks are much harder to completely break by emitters.
-	if(secured_wires)
-		emitter_resistance *= 3
-
 	//if assembly is given, create the new door from the assembly
 	if (assembly)
 		assembly_type = assembly.type

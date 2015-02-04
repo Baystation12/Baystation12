@@ -23,7 +23,6 @@
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
-	emitter_resistance = 50 // Lots of emitter blasts, it's *blast* door after all.
 
 // Proc: Bumped()
 // Parameters: 1 (AM - Atom that tried to walk through this object)
@@ -138,12 +137,8 @@
 /obj/machinery/door/blast/proc/repair_price()
 	var/sheets_needed = 0
 	var/dam = maxhealth - health
-	var/bla = emitter_hits
 	while(dam > 0)
 		dam -= 150
-		sheets_needed++
-	while(bla > 0)
-		bla -= 10
 		sheets_needed++
 	return sheets_needed
 
@@ -152,13 +147,8 @@
 // Description: Fully repairs the blast door.
 /obj/machinery/door/blast/proc/repair()
 	health = maxhealth
-	emitter_hits = 0
 	if(stat & BROKEN)
 		stat &= ~BROKEN
-
-
-
-
 
 // SUBTYPE: Regular
 // Your classical blast door, found almost everywhere.
@@ -178,4 +168,3 @@ obj/machinery/door/blast/regular
 	icon_state_closed = "shutter1"
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
-	emitter_resistance = 20
