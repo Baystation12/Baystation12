@@ -165,7 +165,7 @@
 
 	if(isliving(target) && isliving(user))
 		if(target == user)
-			var/datum/organ/external/affecting = user.zone_sel.selecting
+			var/obj/item/organ/external/affecting = user.zone_sel.selecting
 			if(affecting == "head")
 
 				var/obj/item/ammo_casing/AC = loaded[1]

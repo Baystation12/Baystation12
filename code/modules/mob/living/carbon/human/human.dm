@@ -10,10 +10,6 @@
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
-	if(!dna)
-		dna = new /datum/dna(null)
-		// Species name is handled by set_species()
-
 	if(!species)
 		if(new_species)
 			set_species(new_species,1)
@@ -34,11 +30,13 @@
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
-	..()
-
-	if(dna)
-		dna.real_name = real_name
+	if(!dna)
+		dna = new /datum/dna(null)
+		// Species name is handled by set_species()
+	dna.real_name = real_name
 	make_blood()
+
+	..()
 
 /mob/living/carbon/human/Stat()
 	..()
@@ -64,7 +62,7 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/datum/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
+		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name["plasma vessel"]
 		if(P)
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
@@ -128,7 +126,7 @@
 	var/update = 0
 
 	// focus most of the blast on one organ
-	var/datum/organ/external/take_blast = pick(organs)
+	var/obj/item/organ/external/take_blast = pick(organs)
 	update |= take_blast.take_damage(b_loss * 0.9, f_loss * 0.9, used_weapon = "Explosive blast")
 
 	// distribute the remaining 10% on all limbs equally
@@ -137,7 +135,7 @@
 
 	var/weapon_message = "Explosive Blast"
 
-	for(var/datum/organ/external/temp in organs)
+	for(var/obj/item/organ/external/temp in organs)
 		switch(temp.name)
 			if("head")
 				update |= temp.take_damage(b_loss * 0.2, f_loss * 0.2, used_weapon = weapon_message)
@@ -166,7 +164,7 @@
 	if(stat == 2)	return
 	show_message("\red The blob attacks you!")
 	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
-	var/datum/organ/external/affecting = get_organ(ran_zone(dam_zone))
+	var/obj/item/organ/external/affecting = get_organ(ran_zone(dam_zone))
 	apply_damage(rand(30,40), BRUTE, affecting, run_armor_check(affecting, "melee"))
 	return
 
@@ -175,7 +173,7 @@
 		if ((M.client && !( M.blinded )))
 			M.show_message("\red [src] has been hit by [O]", 1)
 	if (health > 0)
-		var/datum/organ/external/affecting = get_organ(pick("chest", "chest", "chest", "head"))
+		var/obj/item/organ/external/affecting = get_organ(pick("chest", "chest", "chest", "head"))
 		if(!affecting)	return
 		if (istype(O, /obj/effect/immovablerod))
 			if(affecting.take_damage(101, 0))
@@ -192,14 +190,14 @@
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
 	L.imp_in = M
 	L.implanted = 1
-	var/datum/organ/external/affected = M.organs_by_name["head"]
+	var/obj/item/organ/external/affected = M.organs_by_name["head"]
 	affected.implants += L
 	L.part = affected
 
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
-			for(var/datum/organ/external/O in M.organs)
+			for(var/obj/item/organ/external/O in M.organs)
 				if(L in O.implants)
 					return 1
 	return 0
@@ -324,7 +322,7 @@
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
-	var/datum/organ/external/head/head = get_organ("head")
+	var/obj/item/organ/external/head/head = get_organ("head")
 	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
@@ -355,7 +353,7 @@
 	if (!def_zone)
 		def_zone = pick("l_hand", "r_hand")
 
-	var/datum/organ/external/affected_organ = get_organ(check_zone(def_zone))
+	var/obj/item/organ/external/affected_organ = get_organ(check_zone(def_zone))
 	var/siemens_coeff = base_siemens_coeff * get_siemens_coefficient_organ(affected_organ)
 
 	return ..(shock_damage, source, siemens_coeff, def_zone)
@@ -681,7 +679,7 @@
 		return 2
 
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
-		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
 			return 2
 	else
@@ -924,39 +922,38 @@
 		germ_level += n
 
 /mob/living/carbon/human/revive()
-	for (var/datum/organ/external/O in organs)
-		O.status &= ~ORGAN_BROKEN
-		O.status &= ~ORGAN_BLEEDING
-		O.status &= ~ORGAN_SPLINTED
-		O.status &= ~ORGAN_CUT_AWAY
-		O.status &= ~ORGAN_ATTACHABLE
-		if (!O.amputated)
-			O.status &= ~ORGAN_DESTROYED
-			O.destspawn = 0
-		O.wounds.Cut()
-		O.heal_damage(1000,1000,1,1)
 
-	var/datum/organ/external/head/h = organs_by_name["head"]
-	h.disfigured = 0
+	// Fix up any missing organs.
+	var/list/robot_organs_internal = list()
+	var/list/robot_organs_external = list()
+
+	for(var/organ in organs_by_name)
+		var/obj/item/organ/external/organ_obj = organs_by_name[organ]
+		if(organ_obj.status & ORGAN_ROBOT) robot_organs_external |= organ
+	for(var/organ in internal_organs_by_name)
+		var/obj/item/organ/internal/organ_obj = internal_organs_by_name[organ]
+		if(organ_obj.status & ORGAN_ROBOT) robot_organs_internal |= organ
+
+	species.create_limbs(src)
+	species.create_organs(src)
+
+	for(var/organ in robot_organs_external)
+		var/obj/item/organ/organ_obj = organs_by_name[organ]
+		if(organ_obj) organ_obj.roboticize()
+	for(var/organ in robot_organs_internal)
+		var/obj/item/organ/organ_obj = internal_organs_by_name[organ]
+		if(organ_obj) organ_obj.roboticize()
 
 	if(species && !(species.flags & NO_BLOOD))
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
 
-	// Fix up any missing organs.
-	// This will ignore any prosthetics in the prefs currently.
-	species.create_organs(src)
-
 	if(!client || !key) //Don't boot out anyone already in the mob.
-		for (var/obj/item/organ/brain/H in world)
-			if(H.brainmob)
-				if(H.brainmob.real_name == src.real_name)
-					if(H.brainmob.mind)
-						H.brainmob.mind.transfer_to(src)
-						del(H)
-
-	for(var/datum/organ/internal/I in internal_organs)
-		I.damage = 0
+		for (var/obj/item/organ/internal/brain/H in world)
+			if(H.brainmob && H.brainmob.real_name == src.real_name && H.brainmob.mind)
+				H.brainmob.mind.transfer_to(src)
+				del(H)
+				break
 
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
@@ -969,16 +966,17 @@
 
 	..()
 
+//TODO: MOVE TO LUNG ORGAN
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 	return L && L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+	var/obj/item/organ/internal/lungs/L = internal_organs_by_name["lungs"]
 
 	if(L && !L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
-		L.damage = L.min_bruised_damage
+		L.take_damage(L.min_bruised_damage,0)
 
 /*
 /mob/living/carbon/human/verb/simulate()
@@ -1035,7 +1033,7 @@
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
-	for(var/datum/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.organs)
 		for(var/obj/item/weapon/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class) && !istype(O,/obj/item/weapon/shard/shrapnel))
 				visible_implants += O
@@ -1044,7 +1042,7 @@
 
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
-	for(var/datum/organ/external/organ in src.organs)
+	for(var/obj/item/organ/external/organ in src.organs)
 		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
 			continue
 		for(var/obj/item/weapon/O in organ.implants)
@@ -1053,11 +1051,11 @@
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
 				src << msg
 
 				organ.take_damage(rand(1,3), 0, 0)
@@ -1123,6 +1121,7 @@
 
 	species = all_species[new_species]
 
+	species.create_limbs(src)
 	species.create_organs(src)
 
 	if(species.language)
@@ -1149,6 +1148,7 @@
 		regenerate_icons()
 		vessel.add_reagent("blood",560-vessel.total_volume)
 		fixblood()
+		sync_organs()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
 	if(client && client.screen)
@@ -1286,14 +1286,14 @@
 
 /mob/living/carbon/human/has_brain()
 	if(internal_organs_by_name["brain"])
-		var/datum/organ/internal/brain = internal_organs_by_name["brain"]
+		var/obj/item/organ/internal/brain = internal_organs_by_name["brain"]
 		if(brain && istype(brain))
 			return 1
 	return 0
 
 /mob/living/carbon/human/has_eyes()
 	if(internal_organs_by_name["eyes"])
-		var/datum/organ/internal/eyes = internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/eyes = internal_organs_by_name["eyes"]
 		if(eyes && istype(eyes) && !eyes.status & ORGAN_CUT_AWAY)
 			return 1
 	return 0
@@ -1302,3 +1302,60 @@
 	if((species.flags & NO_SLIP) || (shoes && (shoes.flags & NOSLIP)))
 		return 0
 	..(slipped_on,stun_duration)
+
+/mob/living/carbon/human/proc/undislocate()
+	set category = "Object"
+	set name = "Undislocate Joint"
+	set desc = "Pop a joint back into place. Extremely painful."
+	set src in view(1)
+
+	if(!isliving(usr) || usr.next_move > world.time)
+		return
+	usr.next_move = world.time + 20
+
+	if(usr.stat > 0)
+		usr << "You are unconcious and cannot do that!"
+		return
+
+	if(usr.restrained())
+		usr << "You are restrained and cannot do that!"
+		return
+
+	var/mob/S = src
+	var/mob/U = usr
+	var/self = null
+
+	if(S == U)
+		self = 1
+
+	var/list/limbs = list()
+	for(var/obj/item/organ/external/limb in organs)
+		if(limb.dislocated == 2)
+			limbs |= limb
+
+	var/obj/item/organ/external/choice = input(U,"Which joint do you wish to relocate?") as null|anything in limbs
+
+	if(!choice)
+		return
+
+	if(self)
+		src << "<span class='warning'>You brace yourself to relocate your [choice.joint]...</span>"
+	else
+		U << "<span class='warning'>You begin to relocate [S]'s [choice.joint]...</span>"
+
+	if(!do_after(U, 50))
+		return
+	if(!choice || !S || !U)
+		return
+
+	if(self)
+		src << "<span class='danger'>You pop your [choice.joint] back in!</span>"
+	else
+		U << "<span class='danger'>You pop [S]'s [choice.joint] back in!</span>"
+		S << "<span class='danger'>[U] pops your [choice.joint] back in!</span>"
+	choice.undislocate(1)
+
+	for(var/obj/item/organ/external/limb in organs)
+		if(limb.is_dislocated()==2)
+			return
+	src.verbs -= /mob/living/carbon/human/proc/undislocate

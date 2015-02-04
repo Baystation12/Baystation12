@@ -40,9 +40,9 @@
 		var/obj/item/weapon/gun/energy/laser/redtag/G = new /obj/item/weapon/gun/energy/laser/redtag(Tsec)
 		G.power_supply.charge = 0
 	if (prob(50))
-		new /obj/item/robot_parts/l_leg(Tsec)
+		new /obj/item/organ/external/leg/robot(Tsec)
 		if (prob(25))
-			new /obj/item/robot_parts/r_leg(Tsec)
+			new /obj/item/organ/external/leg/right/robot(Tsec)
 	if (prob(25))//50% chance for a helmet OR vest
 		if (prob(50))
 			new /obj/item/clothing/head/helmet(Tsec)
@@ -66,7 +66,13 @@
 
 	switch(build_step)
 		if(0,1)
-			if( istype(W, /obj/item/robot_parts/l_leg) || istype(W, /obj/item/robot_parts/r_leg) )
+			if(istype(W, /obj/item/organ/external/leg) )
+
+				var/obj/item/organ/limb = W
+				if(!(limb.status & ORGAN_ROBOT))
+					user << "That's a bit ghoulish, isn't it? Use a robotic limb."
+					return
+
 				user.drop_item()
 				del(W)
 				build_step++

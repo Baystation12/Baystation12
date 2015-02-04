@@ -9,6 +9,6 @@
 	if(istype(container, /obj/item/device/mmi))
 		del(container)//Gets rid of the MMI if there is one
 	if(loc)
-		if(istype(loc,/obj/item/organ/brain))
+		if(istype(loc,/obj/item/organ/internal/brain))
 			del(loc)//Gets rid of the brain item
 	..(null,1)

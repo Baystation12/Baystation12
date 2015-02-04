@@ -78,8 +78,8 @@
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
-	sharp = 1
-	edge = 1
+	sharp = 0
+	edge = 0
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -100,8 +100,8 @@
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_SAW
+	edge = 30
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -125,8 +125,8 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
 	throwforce = 10
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_SAW
+	edge = 15
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -143,7 +143,7 @@
 
 /obj/item/weapon/harpoon
 	name = "harpoon"
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 0
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
@@ -152,6 +152,7 @@
 	throwforce = 15
 	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")
+
 
 /obj/item/weapon/butterfly
 	name = "butterfly knife"
@@ -217,8 +218,8 @@
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		force = 15 //bay adjustments
 		throwforce = 12
-		edge = 1
-		sharp = 1
+		edge = 5
+		sharp = HARDNESS_SCALPEL
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		icon_state += "_open"
 		w_class = 3
@@ -276,7 +277,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	throw_speed = 10
 	throwforce =  15
 	throw_range = 15
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge =  1
 	matter = list("metal" = 500)
 
@@ -402,7 +403,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	playsound(affecting.loc, 'sound/effects/sparks4.ogg', 50, 1)
 	anim(affecting.loc,affecting,'icons/mob/mob.dmi',,"phaseout",,affecting.dir)
 
-	affecting.visible_message("[affecting] vanishes in a flare of light!")
+	affecting.visible_message("[affecting.name] vanishes in a flare of light!")
 
 	if(holdingfacility.len)
 		affecting.loc = pick(holdingfacility)

@@ -417,7 +417,7 @@
 			B.host_brain.name = target_host.name
 			B.host_brain.real_name = target_host.real_name
 
-			var/datum/organ/external/head = target_host.get_organ("head")
+			var/obj/item/organ/external/head = target_host.get_organ("head")
 			head.implants += B
 
 			if(!config.objectives_disabled)

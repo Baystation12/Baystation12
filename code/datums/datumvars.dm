@@ -858,14 +858,14 @@ client
 			H.verbs -= verb
 
 	else if(href_list["addorgan"])
-		if(!check_rights(R_SPAWN))	return
+	/*	if(!check_rights(R_SPAWN))	return
 
 		var/mob/living/carbon/M = locate(href_list["addorgan"])
 		if(!istype(M))
 			usr << "This can only be done to instances of type /mob/living/carbon"
 			return
 
-		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/datum/organ/internal)-/datum/organ/internal
+		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/obj/item/organ/internal)-/obj/item/organ/internal
 		if(!new_organ) return
 
 		if(!M)
@@ -878,7 +878,7 @@ client
 
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/I = new new_organ(H)
+			var/obj/item/organ/internal/I = new new_organ(H)
 
 			var/organ_slot = input(usr, "Which slot do you want the organ to go in ('default' for default)?")  as text|null
 
@@ -889,8 +889,8 @@ client
 				organ_slot = sanitize(copytext(organ_slot,1,MAX_MESSAGE_LEN))
 			else
 				if(I.removed_type)
-					var/obj/item/organ/O = new I.removed_type()
-					organ_slot = O.organ_tag
+					var/obj/item/organ/internal/O = new I.removed_type()
+					organ_slot = O.body_part
 					del(O)
 				else
 					organ_slot = "unknown organ"
@@ -905,7 +905,7 @@ client
 			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
 		else
 			new new_organ(M)
-			usr << "Added new [new_organ] to [M]."
+			usr << "Added new [new_organ] to [M]."*/
 
 	else if(href_list["remorgan"])
 		if(!check_rights(R_SPAWN))	return

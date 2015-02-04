@@ -44,6 +44,7 @@
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+	tissues = list("scales","skin","muscle","bone")
 
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
@@ -119,8 +120,8 @@
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
+	tissues = list("skin","muscle","cartilage")
 	base_color = "#006666"
-
 	reagent_tag = IS_SKRELL
 
 /datum/species/diona
@@ -145,13 +146,14 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/internal/diona/nutrients,
+		"neural strata" =      /obj/item/organ/internal/diona/strata,
+		"response node" =      /obj/item/organ/internal/diona/node,
+		"gas bladder" =        /obj/item/organ/internal/diona/bladder,
+		"polyp segment" =      /obj/item/organ/internal/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/internal/diona/ligament
 		)
+	tissues = list("diona_carapace","diona_ligaments","diona_strata")
 
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
@@ -170,7 +172,6 @@
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
-
 	reagent_tag = IS_DIONA
 
 /datum/species/diona/can_understand(var/mob/other)
@@ -230,6 +231,7 @@
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
 
+	tissues = list("metal_skin","robot_wiring")
 	has_organ = list() //TODO: Positronic brain.
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)

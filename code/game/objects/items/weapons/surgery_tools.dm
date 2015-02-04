@@ -80,7 +80,7 @@
 	icon_state = "scalpel"
 	flags = CONDUCT
 	force = 10.0
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	edge = 1
 	w_class = 2.0
 	throwforce = 5.0
@@ -143,8 +143,8 @@
 	matter = list("metal" = 20000,"glass" = 10000)
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
-	sharp = 1
-	edge = 1
+	sharp = HARDNESS_SAW
+	edge = 15
 
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/bonegel
@@ -155,8 +155,9 @@
 	w_class = 2.0
 	throwforce = 1.0
 
-/obj/item/weapon/FixOVein
-	name = "FixOVein"
+/obj/item/weapon/biosealant
+	name = "biosealant"
+	desc = "A flexible and high-tech offering from Zeng-Hu Pharmaceuticals."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0

@@ -7,58 +7,6 @@
 	slot_flags = SLOT_BELT
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
-	var/list/part = null
-	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
-
-/obj/item/robot_parts/l_arm
-	name = "robot left arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
-	icon_state = "l_arm"
-	construction_time = 200
-	construction_cost = list("metal"=18000)
-	part = list("l_arm","l_hand")
-
-/obj/item/robot_parts/r_arm
-	name = "robot right arm"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
-	icon_state = "r_arm"
-	construction_time = 200
-	construction_cost = list("metal"=18000)
-	part = list("r_arm","r_hand")
-
-/obj/item/robot_parts/l_leg
-	name = "robot left leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
-	icon_state = "l_leg"
-	construction_time = 200
-	construction_cost = list("metal"=15000)
-	part = list("l_leg","l_foot")
-
-/obj/item/robot_parts/r_leg
-	name = "robot right leg"
-	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
-	icon_state = "r_leg"
-	construction_time = 200
-	construction_cost = list("metal"=15000)
-	part = list("r_leg","r_foot")
-
-/obj/item/robot_parts/chest
-	name = "robot torso"
-	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
-	icon_state = "chest"
-	construction_time = 350
-	construction_cost = list("metal"=40000)
-	var/wires = 0.0
-	var/obj/item/weapon/cell/cell = null
-
-/obj/item/robot_parts/head
-	name = "robot head"
-	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
-	icon_state = "head"
-	construction_time = 350
-	construction_cost = list("metal"=25000)
-	var/obj/item/device/flash/flash1 = null
-	var/obj/item/device/flash/flash2 = null
 
 /obj/item/robot_parts/robot_suit
 	name = "robot endoskeleton"
@@ -66,12 +14,14 @@
 	icon_state = "robo_suit"
 	construction_time = 500
 	construction_cost = list("metal"=50000)
-	var/obj/item/robot_parts/l_arm/l_arm = null
-	var/obj/item/robot_parts/r_arm/r_arm = null
-	var/obj/item/robot_parts/l_leg/l_leg = null
-	var/obj/item/robot_parts/r_leg/r_leg = null
-	var/obj/item/robot_parts/chest/chest = null
-	var/obj/item/robot_parts/head/head = null
+	var/list/limbs = list(
+		"head" = 0,
+		"chest" = 0,
+		"l_arm" = 0,
+		"r_arm" = 0,
+		"l_leg" = 0,
+		"r_leg" = 0
+		)
 	var/created_name = ""
 
 /obj/item/robot_parts/robot_suit/New()
@@ -80,30 +30,21 @@
 
 /obj/item/robot_parts/robot_suit/proc/updateicon()
 	src.overlays.Cut()
-	if(src.l_arm)
-		src.overlays += "l_arm+o"
-	if(src.r_arm)
-		src.overlays += "r_arm+o"
-	if(src.chest)
-		src.overlays += "chest+o"
-	if(src.l_leg)
-		src.overlays += "l_leg+o"
-	if(src.r_leg)
-		src.overlays += "r_leg+o"
-	if(src.head)
-		src.overlays += "head+o"
+	for(var/limb in limbs)
+		if(limbs[limbs] != 0)
+			src.overlays += "[limb]+o"
 
 /obj/item/robot_parts/robot_suit/proc/check_completion()
-	if(src.l_arm && src.r_arm)
-		if(src.l_leg && src.r_leg)
-			if(src.chest && src.head)
-				feedback_inc("cyborg_frames_built",1)
-				return 1
-	return 0
+	for(var/limb in limbs)
+		if(!limbs[limbs])
+			return 0
+	feedback_inc("cyborg_frames_built",1)
+	return 1
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/stack/sheet/metal) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
+
+	// Security bot construction.
+	if(istype(W, /obj/item/stack/sheet/metal) && !limbs.len)
 		var/obj/item/stack/sheet/metal/M = W
 		if (M.use(1))
 			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
@@ -115,56 +56,22 @@
 			del(src)
 		else
 			user << "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>"
-	if(istype(W, /obj/item/robot_parts/l_leg))
-		if(src.l_leg)	return
+
+	// Robot chassis construction.
+	if(istype(W, /obj/item/organ))
+		var/obj/item/organ/new_limb = W
+		if(!(new_limb.status & ORGAN_ROBOT))
+			user << "That would be a bit ghoulish, wouldn't it? Use a robotic limb."
+			return
+		if(limbs[new_limb.body_part] != 0)
+			user << "The chassis already has a limb of that type installed."
+			return
 		user.drop_item()
 		W.loc = src
-		src.l_leg = W
+		limbs[new_limb.body_part] = W
 		src.updateicon()
 
-	if(istype(W, /obj/item/robot_parts/r_leg))
-		if(src.r_leg)	return
-		user.drop_item()
-		W.loc = src
-		src.r_leg = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/l_arm))
-		if(src.l_arm)	return
-		user.drop_item()
-		W.loc = src
-		src.l_arm = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/r_arm))
-		if(src.r_arm)	return
-		user.drop_item()
-		W.loc = src
-		src.r_arm = W
-		src.updateicon()
-
-	if(istype(W, /obj/item/robot_parts/chest))
-		if(src.chest)	return
-		if(W:wires && W:cell)
-			user.drop_item()
-			W.loc = src
-			src.chest = W
-			src.updateicon()
-		else if(!W:wires)
-			user << "\blue You need to attach wires to it first!"
-		else
-			user << "\blue You need to attach a cell to it first!"
-
-	if(istype(W, /obj/item/robot_parts/head))
-		if(src.head)	return
-		if(W:flash2 && W:flash1)
-			user.drop_item()
-			W.loc = src
-			src.head = W
-			src.updateicon()
-		else
-			user << "\blue You need to attach a flash to it first!"
-
+	// MMI installation.
 	if(istype(W, /obj/item/device/mmi))
 		var/obj/item/device/mmi/M = W
 		if(check_completion())
@@ -206,17 +113,11 @@
 			O.invisibility = 0
 			O.custom_name = created_name
 			O.updatename("Default")
-
 			M.brainmob.mind.transfer_to(O)
-
-			if(O.mind && O.mind.special_role)
-				O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
-
 			O.job = "Cyborg"
-
-			O.cell = chest.cell
-			O.cell.loc = O
-			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
+			//O.cell = chest.cell
+			//O.cell.loc = O
+			W.loc = O //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 			// Since we "magically" installed a cell, we also have to update the correct component.
 			if(O.cell)
@@ -234,7 +135,7 @@
 			user << "\blue The MMI must go in after everything else!"
 
 	if (istype(W, /obj/item/weapon/pen))
-		var/t = stripped_input(user, "Enter new robot name", src.name, src.created_name, MAX_NAME_LEN)
+		var/t = stripped_input(user, "Enter new robot name:", src.name, src.created_name, MAX_NAME_LEN)
 		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)
@@ -243,63 +144,3 @@
 		src.created_name = t
 
 	return
-
-/obj/item/robot_parts/chest/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/weapon/cell))
-		if(src.cell)
-			user << "\blue You have already inserted a cell!"
-			return
-		else
-			user.drop_item()
-			W.loc = src
-			src.cell = W
-			user << "\blue You insert the cell!"
-	if(istype(W, /obj/item/stack/cable_coil))
-		if(src.wires)
-			user << "\blue You have already inserted wire!"
-			return
-		else
-			var/obj/item/stack/cable_coil/coil = W
-			coil.use(1)
-			src.wires = 1.0
-			user << "\blue You insert the wire!"
-	return
-
-/obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/device/flash))
-		if(istype(user,/mob/living/silicon/robot))
-			user << "\red How do you propose to do that?"
-			return
-		else if(src.flash1 && src.flash2)
-			user << "\blue You have already inserted the eyes!"
-			return
-		else if(src.flash1)
-			user.drop_item()
-			W.loc = src
-			src.flash2 = W
-			user << "\blue You insert the flash into the eye socket!"
-		else
-			user.drop_item()
-			W.loc = src
-			src.flash1 = W
-			user << "\blue You insert the flash into the eye socket!"
-	else if(istype(W, /obj/item/weapon/stock_parts/manipulator))
-		user << "\blue You install some manipulators and modify the head, creating a functional spider-bot!"
-		new /mob/living/simple_animal/spiderbot(get_turf(loc))
-		user.drop_item()
-		del(W)
-		del(src)
-		return
-	return
-
-/obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/card/emag))
-		if(sabotaged)
-			user << "\red [src] is already sabotaged!"
-		else
-			user << "\red You slide [W] into the dataport on [src] and short out the safeties."
-			sabotaged = 1
-		return
-	..()

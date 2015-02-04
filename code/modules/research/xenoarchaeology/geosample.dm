@@ -20,7 +20,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "sliver1"	//0-4
 	w_class = 1
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
 	//item_state = "electronic"
 	var/source_rock = "/turf/simulated/mineral/"
 	var/datum/geosample/geological_data

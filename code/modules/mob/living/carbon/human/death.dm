@@ -1,19 +1,17 @@
 /mob/living/carbon/human/gib()
 
-	for(var/datum/organ/internal/I in internal_organs)
-		var/obj/item/organ/current_organ = I.remove()
-		if(current_organ)
-			if(istype(loc,/turf))
-				current_organ.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
-			current_organ.removed(src)
+	for(var/obj/item/organ/internal/I in internal_organs)
+		I.removed()
+		if(istype(loc,/turf))
+			I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
 
-	for(var/datum/organ/external/E in src.organs)
-		if(istype(E, /datum/organ/external/chest))
+	for(var/obj/item/organ/external/E in src.organs)
+		if(istype(E, /obj/item/organ/external/chest))
 			continue
 		// Only make the limb drop if it's not too damaged
-		if(prob(100 - E.get_damage()))
+		if(prob(100 - E.is_damaged()))
 			// Override the current limb status and don't cause an explosion
-			E.droplimb(1,1)
+			E.droplimb()
 
 	..(species.gibbed_anim)
 	gibs(loc, viruses, dna, null, species.flesh_color, species.blood_color)
@@ -37,7 +35,7 @@
 	if(species) species.handle_death(src)
 
 	//Handle brain slugs.
-	var/datum/organ/external/head = get_organ("head")
+	var/obj/item/organ/external/head = get_organ("head")
 	var/mob/living/simple_animal/borer/B
 
 	for(var/I in head.implants)

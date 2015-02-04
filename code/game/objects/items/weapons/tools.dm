@@ -212,6 +212,7 @@
 		if(0)
 			if(src.icon_state != "welder") //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 3
+				src.sharp = 0
 				src.damtype = "brute"
 				src.icon_state = "welder"
 				src.welding = 0
@@ -221,6 +222,7 @@
 		if(1)
 			if(src.icon_state != "welder1") //Check that the sprite is correct, if it isnt, it means toggle() was not called
 				src.force = 15
+				src.sharp = HARDNESS_TORCH
 				src.damtype = "fire"
 				src.icon_state = "welder1"
 			if(prob(5))
@@ -336,6 +338,7 @@
 		if (remove_fuel(1))
 			usr << "\blue You switch the [src] on."
 			src.force = 15
+			src.sharp = HARDNESS_TORCH
 			src.damtype = "fire"
 			src.icon_state = "welder1"
 			src.w_class = 4
@@ -350,6 +353,7 @@
 		else
 			usr << "\blue The [src] shuts off!"
 		src.force = 3
+		src.sharp = 0
 		src.damtype = "brute"
 		src.icon_state = "welder"
 		src.welding = 0
@@ -362,36 +366,34 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
 		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
 			if(1)
-				usr << "\red Your eyes sting a little."
-				E.damage += rand(1, 2)
-				if(E.damage > 12)
+				usr << "<span class='danger'>Your eyes sting a little.</span>"
+				E.take_damage(0,rand(1, 2))
+				if(E.is_damaged() > 12)
 					user.eye_blurry += rand(3,6)
 			if(0)
-				usr << "\red Your eyes burn."
-				E.damage += rand(2, 4)
-				if(E.damage > 10)
-					E.damage += rand(4,10)
+				usr << "<span class='danger'>Your eyes burn.</span>"
+				E.take_damage(0,rand(2,4))
+				if(E.is_damaged() > 10)
+					E.take_damage(0,rand(4,10))
 			if(-1)
-				usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
+				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
-				E.damage += rand(12, 16)
+				E.take_damage(0,rand(12, 16))
 		if(safety<2)
-
-			if(E.damage > 10)
-				user << "\red Your eyes are really starting to hurt. This can't be good for you!"
-
-			if (E.damage >= E.min_broken_damage)
-				user << "\red You go blind!"
+			if(E.is_damaged() > 10)
+				user << "<span class='danger'>Your eyes are really starting to hurt. This can't be good for you!</span>"
+			if (E.is_broken())
+				user << "<span class='danger'>You go blind!</span>"
 				user.sdisabilities |= BLIND
-			else if (E.damage >= E.min_bruised_damage)
-				user << "\red You go blind!"
+			else if (E.is_bruised())
+				user << "<span class='danger'>You go blind!</span>"
 				user.eye_blind = 5
 				user.eye_blurry = 5
 				user.disabilities |= NEARSIGHTED
@@ -457,7 +459,7 @@
 
 	if(hasorgans(M))
 
-		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+		var/obj/item/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
@@ -472,7 +474,7 @@
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

@@ -769,7 +769,7 @@ Auto Patrol: []"},
 /obj/machinery/bot/secbot/proc/on_explosion(var/turf/Tsec)
 	new /obj/item/weapon/melee/baton(Tsec)
 	if(prob(50))
-		new /obj/item/robot_parts/l_arm(Tsec)
+		new /obj/item/organ/external/arm/robot(Tsec)
 
 //Secbot Construction
 
@@ -809,7 +809,13 @@ Auto Patrol: []"},
 		src.name = "helmet/signaler/prox sensor assembly"
 		del(W)
 
-	else if(((istype(W, /obj/item/robot_parts/l_arm)) || (istype(W, /obj/item/robot_parts/r_arm))) && (src.build_step == 2))
+	else if(istype(W, /obj/item/organ/external/arm) && (src.build_step == 2))
+
+		var/obj/item/organ/limb = W
+		if(!(limb.status & ORGAN_ROBOT))
+			user << "That's a bit ghoulish, isn't it? Use a robotic limb."
+			return
+
 		user.drop_item()
 		src.build_step++
 		user << "You add the robot arm to [src]!"

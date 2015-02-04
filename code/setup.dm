@@ -774,3 +774,20 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
+
+// Tissue status flags
+#define TISSUE_BLEEDS 1      // Tissue bleeds when cut open.
+#define TISSUE_INFECTS 2     // Tissue can become infected.
+#define TISSUE_ORGAN_LAYER 4 // This tissue layer must be open to reach the organs.
+#define TISSUE_SUPPORTS 8    // This is a structural tissue.
+// Wound status flags.
+#define WOUND_BURN 1
+#define WOUND_BRUISE 2
+#define WOUND_CUT 3
+// Tool values
+#define HARDNESS_SCALPEL 5
+#define HARDNESS_SAW 10
+#define HARDNESS_TORCH 15
+#define WOUND_OPEN 1
+#define WOUND_RETRACTED 2
+#define WOUND_SUTURED 3

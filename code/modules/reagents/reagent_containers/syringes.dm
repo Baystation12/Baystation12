@@ -16,7 +16,8 @@
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
 	w_class = 1
-	sharp = 1
+	sharp = HARDNESS_SCALPEL
+
 	var/mode = SYRINGE_DRAW
 
 	on_reagent_change()
@@ -234,14 +235,13 @@
 		if(istype(target, /mob/living/carbon/human))
 
 			var/target_zone = ran_zone(check_zone(user.zone_sel.selecting, target))
-			var/datum/organ/external/affecting = target:get_organ(target_zone)
+			var/obj/item/organ/external/affecting = target:get_organ(target_zone)
 
 			if (!affecting)
+				user << "<span class='danger'>You cannot see that limb on \the [target]!</span>"
 				return
-			if(affecting.status & ORGAN_DESTROYED)
-				user << "What [affecting.display_name]?"
-				return
-			var/hit_area = affecting.display_name
+
+			var/hit_area = affecting.name
 
 			var/mob/living/carbon/human/H = target
 			if((user != target) && H.check_shields(7, "the [src.name]"))
