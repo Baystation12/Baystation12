@@ -88,7 +88,7 @@
 "bJ" = (/turf/simulated/floor/airless{tag = "icon-gcircuit"; icon_state = "gcircuit"},/area/constructionsite/ai)
 "bK" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/solar{id = "construction_solar"; name = "Construction Solar Array"},/turf/simulated/floor/airless{icon_state = "solarpanel"},/area/djstation/solars)
 "bL" = (/obj/item/weapon/extinguisher,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/djstation)
-"bM" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/smes/buildable{charge = 2e+006},/turf/simulated/floor/plating,/area/djstation)
+"bM" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"; pixel_y = 0},/obj/machinery/power/smes/buildable{charge = 2e+006; RCon_tag = "Outpost - Engineering"},/turf/simulated/floor/plating,/area/djstation)
 "bN" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/djstation)
 "bO" = (/obj/structure/table,/obj/item/clothing/head/helmet/space/void/engineering,/obj/item/clothing/suit/space/void/engineering,/turf/simulated/floor/plating,/area/djstation)
 "bP" = (/obj/machinery/driver_button{id = "constructiondriver1"; name = "Construction Driver #1"; pixel_x = 25; pixel_y = 7},/turf/simulated/floor/plating,/area/djstation)
