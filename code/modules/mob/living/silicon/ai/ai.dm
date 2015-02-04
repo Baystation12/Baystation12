@@ -211,9 +211,8 @@ var/list/ai_verbs_default = list(
 	else
 		stat(null, text("Systems nonfunctional"))
 
-/mob/living/silicon/ai/proc/SetName(pickedName as text)
-	real_name = pickedName
-	name = pickedName
+/mob/living/silicon/ai/SetName(pickedName as text)
+	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
 		eyeobj.name = "[pickedName] (AI Eye)"
