@@ -143,7 +143,7 @@
 		return 0
 
 	if(istype(ai.loc, /turf/))
-		new /obj/structure/AIcore/deactivated(get_turf(ai))
+		new /obj/structure/AIcore/deactivated/nolatejoin(get_turf(ai))
 
 	src.name = "inteliCard - [ai.name]"
 
