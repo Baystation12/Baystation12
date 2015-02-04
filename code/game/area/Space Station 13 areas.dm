@@ -1028,6 +1028,10 @@ var/list/ghostteleportlocs = list()
 /area/holodeck/source_thunderdomecourt
 	name = "\improper Holodeck - Thunderdome Court"
 
+/area/holodeck/source_courtroom
+	name = "\improper Holodeck - Courtroom"
+	icon_state = "Holodeck"
+
 /area/holodeck/source_beach
 	name = "\improper Holodeck - Beach"
 	icon_state = "Holodeck" // Lazy.

@@ -470,7 +470,7 @@ var/global/list/gear_datums = list()
 
 /datum/gear/bomber
 	display_name = "bomber jacket"
-	path = /obj/item/clothing/suit/storage/bomber
+	path = /obj/item/clothing/suit/storage/toggle/bomber
 	cost = 4
 	slot = slot_wear_suit
 
@@ -506,9 +506,13 @@ var/global/list/gear_datums = list()
 
 /datum/gear/hoodie
 	display_name = "hoodie, grey"
-	path = /obj/item/clothing/suit/hoodie
+	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	cost = 2
 	slot = slot_wear_suit
+
+/datum/gear/hoodie/black
+	display_name = "hoodie, black"
+	path = /obj/item/clothing/suit/storage/toggle/hoodie/black
 
 /datum/gear/unathi_mantle
 	display_name = "hide mantle (Unathi)"
