@@ -124,7 +124,6 @@
 	var/changed_voice
 
 	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
-		part_a = "<span class='say_quote'>\[[worldtime2text()]\]</span>" + part_a
 		var/jobname // the mob's "job"
 		var/mob/living/carbon/human/impersonating //The crew member being impersonated, if any.
 
@@ -185,10 +184,19 @@
 	if(sdisabilities & DEAF || ear_deaf)
 		if(prob(20))
 			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
-	else if(track)
-		src << "[part_a][track][part_b][formatted]</span></span>"
 	else
-		src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+		on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+
+/mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	src << "[part_a][speaker_name][part_b][formatted]</span></span>"
+
+/mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	var/time = "<span class='say_quote'>\[[worldtime2text()]\]</span>"
+	src << "[time][part_a][speaker_name][part_b][formatted]</span></span>"
+
+/mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
+	var/time = "<span class='say_quote'>\[[worldtime2text()]\]</span>"
+	src << "[time][part_a][track][part_b][formatted]</span></span>"
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
