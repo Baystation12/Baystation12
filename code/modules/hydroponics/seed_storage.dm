@@ -69,12 +69,10 @@
 	if (piles.len == 0)
 		dat += "<font color='red'>No seeds</font>"
 	else
-		dat += "<table style='text-align:center;'><tr><td>Name</td>"
+		dat += "<table style='text-align:center;border-style:solid;border-width:1px;padding:4px'><tr><td>Name</td>"
 		dat += "<td>Variety</td>"
 		if ("stats" in scanner)
 			dat += "<td>E</td><td>Y</td><td>L</td><td>M</td><td>Pr</td><td>Pt</td><td>Harvest</td>"
-		if ("produce" in scanner)
-			dat += "<td>Produce</td>"
 		if ("temperature" in scanner)
 			dat += "<td>Temp</td>"
 		if ("light" in scanner)
@@ -85,37 +83,32 @@
 		for (var/datum/seed_pile/S in piles)
 			var/datum/seed/seed = S.seed_type
 			dat += "<tr>"
-			dat += "<td>[S.name]</td>"
+			dat += "<td>[seed.seed_name]</td>"
 			dat += "<td>#[seed.uid]</td>"
 			if ("stats" in scanner)
-				dat += "<td>[seed.endurance]</td><td>[seed.yield]</td><td>[seed.lifespan]</td><td>[seed.maturation]</td><td>[seed.production]</td><td>[seed.potency]</td>"
-				if(seed.harvest_repeat)
+				dat += "<td>[seed.get_trait(TRAIT_ENDURANCE)]</td><td>[seed.get_trait(TRAIT_YIELD)]</td><td>[seed.get_trait(TRAIT_MATURATION)]</td><td>[seed.get_trait(TRAIT_PRODUCTION)]</td><td>[seed.get_trait(TRAIT_POTENCY)]</td>"
+				if(seed.get_trait(TRAIT_HARVEST_REPEAT))
 					dat += "<td>Multiple</td>"
 				else
 					dat += "<td>Single</td>"
-			if ("produce" in scanner)
-				if (seed.products && seed.products.len)
-					dat += "<td>Fruit: [seed.products.len]</td>"
-				else
-					dat += "<td>N/A</td>"
 			if ("temperature" in scanner)
-				dat += "<td>[seed.ideal_heat] K</td>"
+				dat += "<td>[seed.get_trait(TRAIT_IDEAL_HEAT)] K</td>"
 			if ("light" in scanner)
-				dat += "<td>[seed.ideal_light] L</td>"
+				dat += "<td>[seed.get_trait(TRAIT_IDEAL_LIGHT)] L</td>"
 			if ("soil" in scanner)
-				if(seed.requires_nutrients)
-					if(seed.nutrient_consumption < 0.05)
+				if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS))
+					if(seed.get_trait(TRAIT_NUTRIENT_CONSUMPTION) < 0.05)
 						dat += "<td>Low</td>"
-					else if(seed.nutrient_consumption > 0.2)
+					else if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) > 0.2)
 						dat += "<td>High</td>"
 					else
 						dat += "<td>Norm</td>"
 				else
 					dat += "<td>No</td>"
-				if(seed.requires_water)
-					if(seed.water_consumption < 1)
+				if(seed.get_trait(TRAIT_REQUIRES_WATER))
+					if(seed.get_trait(TRAIT_WATER_CONSUMPTION) < 1)
 						dat += "<td>Low</td>"
-					else if(seed.water_consumption > 5)
+					else if(seed.get_trait(TRAIT_WATER_CONSUMPTION) > 5)
 						dat += "<td>High</td>"
 					else
 						dat += "<td>Norm</td>"
@@ -126,58 +119,56 @@
 			if ("mutants" in scanner)
 				if(seed.mutants && seed.mutants.len)
 					dat += "SUBSP "
-				if(seed.immutable == -1)
+				if(seed.get_trait(TRAIT_IMMUTABLE) == -1)
 					dat += "MUT "
-				else if(seed.immutable > 0)
+				else if(seed.get_trait(TRAIT_IMMUTABLE) > 0)
 					dat += "NOMUT "
-			switch(seed.carnivorous)
+			switch(seed.get_trait(TRAIT_CARNIVOROUS))
 				if(1)
 					dat += "CARN "
 				if(2)
 					dat	+= "<font color='red'>CARN </font>"
-			switch(seed.spread)
+			switch(seed.get_trait(TRAIT_SPREAD))
 				if(1)
 					dat += "VINE "
 				if(2)
 					dat	+= "<font color='red'>VINE </font>"
 			if ("pressure" in scanner)
-				if(seed.lowkpa_tolerance < 20)
+				if(seed.get_trait(TRAIT_LOWKPA_TOLERANCE) < 20)
 					dat += "LP "
-				if(seed.highkpa_tolerance > 220)
+				if(seed.get_trait(TRAIT_HIGHKPA_TOLERANCE) > 220)
 					dat += "HP "
 			if ("temperature" in scanner)
-				if(seed.heat_tolerance > 30)
+				if(seed.get_trait(TRAIT_HEAT_TOLERANCE) > 30)
 					dat += "TEMRES "
-				else if(seed.heat_tolerance < 10)
+				else if(seed.get_trait(TRAIT_HEAT_TOLERANCE) < 10)
 					dat += "TEMSEN "
 			if ("light" in scanner)
-				if(seed.light_tolerance > 10)
+				if(seed.get_trait(TRAIT_LIGHT_TOLERANCE) > 10)
 					dat += "LIGRES "
-				else if(seed.light_tolerance < 3)
+				else if(seed.get_trait(TRAIT_LIGHT_TOLERANCE) < 3)
 					dat += "LIGSEN "
-			if(seed.toxins_tolerance < 3)
+			if(seed.get_trait(TRAIT_TOXINS_TOLERANCE) < 3)
 				dat += "TOXSEN "
-			else if(seed.toxins_tolerance > 6)
+			else if(seed.get_trait(TRAIT_TOXINS_TOLERANCE) > 6)
 				dat += "TOXRES "
-			if(seed.pest_tolerance < 3)
+			if(seed.get_trait(TRAIT_PEST_TOLERANCE) < 3)
 				dat += "PESTSEN "
-			else if(seed.pest_tolerance > 6)
+			else if(seed.get_trait(TRAIT_PEST_TOLERANCE) > 6)
 				dat += "PESTRES "
-			if(seed.weed_tolerance < 3)
+			if(seed.get_trait(TRAIT_WEED_TOLERANCE) < 3)
 				dat += "WEEDSEN "
-			else if(seed.weed_tolerance > 6)
+			else if(seed.get_trait(TRAIT_WEED_TOLERANCE) > 6)
 				dat += "WEEDRES "
-			if(seed.parasite)
+			if(seed.get_trait(TRAIT_PARASITE))
 				dat += "PAR "
 			if ("temperature" in scanner)
-				if(seed.alter_temp > 0)
+				if(seed.get_trait(TRAIT_ALTER_TEMP) > 0)
 					dat += "TEMP+ "
-				if(seed.alter_temp < 0)
+				if(seed.get_trait(TRAIT_ALTER_TEMP) < 0)
 					dat += "TEMP- "
-			if(seed.biolum)
+			if(seed.get_trait(TRAIT_BIOLUM))
 				dat += "LUM "
-			if(seed.flowers)
-				dat += "<br>[seed.flower_colour ? "<font color='[seed.flower_colour]'>FLOW</font>" : "FLOW"]."
 			dat += "</td>"
 			dat += "<td>[S.amount]</td>"
 			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
