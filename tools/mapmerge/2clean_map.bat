@@ -1,7 +1,8 @@
-set MAPFILE=BS12ship.dmm
+SET z_levels=6
+cd 
 
-
-java -jar MapPatcher.jar -clean ../../maps/%MAPFILE%.backup ../../maps/%MAPFILE% ../../maps/%MAPFILE%
-
+FOR %%f IN (../../maps/*.dmm) DO (
+  java -jar MapPatcher.jar -clean ../../maps/%%f.backup ../../maps/%%f ../../maps/%%f
+)
 
 pause

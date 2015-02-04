@@ -1,7 +1,9 @@
 #!/bin/sh
 
-MAPFILE='BS12ship.dmm'
-
-git show HEAD:maps/$MAPFILE > tmp.dmm
-java -jar MapPatcher.jar -clean tmp.dmm '../../maps/'$MAPFILE '../../maps/'$MAPFILE
-rm tmp.dmm
+for MAPFILE in ../../maps/*.dmm
+do
+	MAPNAME=$(basename $MAPFILE)
+	git show HEAD:maps/$MAPNAME > tmp.dmm
+	java -jar MapPatcher.jar -clean tmp.dmm $MAPFILE $MAPFILE
+	rm tmp.dmm
+done
