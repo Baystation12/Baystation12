@@ -70,76 +70,91 @@
 		del(in_chamber) //No need for it anymore
 		return output //Send it back to the gun!
 
+	//Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if missed.
+	proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier = -30)
+		//accuracy bonus from aiming
+		if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
+			var/obj/item/weapon/gun/daddy = shot_from //Kinda balanced by fact you need like 2 seconds to aim
+			if (daddy.target && target_mob in daddy.target) //As opposed to no-delay pew pew
+				miss_modifier += -30
+		
+		//roll to-hit
+		//set def_zone, so if the projectile ends up hitting someone else later (to be implemented), it is more likely to hit the same part
+		def_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier + 15*distance)
+		if(!def_zone)
+			visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			return 0
+		
+		//hit messages
+		if(silenced)
+			target_mob << "<span class='danger'>You've been hit in the [parse_zone(def_zone)] by \the [src]!</span>"
+		else
+			visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [parse_zone(def_zone)]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+
+		//admin logs
+		if(istype(firer, /mob))
+			target_mob.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
+			firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src.type]</b>"
+			msg_admin_attack("[firer] ([firer.ckey]) shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
+		else
+			target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with a <b>[src]</b>"
+			msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
+		
+		target_mob.bullet_act(src, def_zone)
+		
+		return 1
+
 	Bump(atom/A as mob|obj|turf|area)
 		if(A == firer)
 			loc = A.loc
 			return 0 //cannot shoot yourself
 
-		if(bumped)	return 0
-		var/forcedodge = 0 // force the projectile to pass
+		if(bumped) 
+			return 0
+		
+		var/passthrough = 0 //if the projectile should continue flying
+		var/distance = get_dist(starting,loc)
 
 		bumped = 1
-		if(firer && istype(A, /mob))
+		if(ismob(A))
 			var/mob/M = A
-			if(!istype(A, /mob/living))
-				loc = A.loc
-				return 0// nope.avi
-
-			var/distance = get_dist(starting,loc)
-			var/miss_modifier = -30
-
-			if (istype(shot_from,/obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
-				var/obj/item/weapon/gun/daddy = shot_from //Kinda balanced by fact you need like 2 seconds to aim
-				if (daddy.target && original in daddy.target) //As opposed to no-delay pew pew
-					miss_modifier += -30
-			def_zone = get_zone_with_miss_chance(def_zone, M, miss_modifier + 15*distance)
-
-			if(!def_zone)
-				visible_message("\blue \The [src] misses [M] narrowly!")
-				forcedodge = -1
+			if(istype(A, /mob/living))
+				passthrough = !attack_mob(M, distance)
 			else
-				if(silenced)
-					M << "\red You've been shot in the [parse_zone(def_zone)] by the [src.name]!"
-				else
-					visible_message("\red [A.name] is hit by the [src.name] in the [parse_zone(def_zone)]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
-				if(istype(firer, /mob))
-					M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
-					firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
-					msg_admin_attack("[firer] ([firer.ckey]) shot [M] ([M.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-				else
-					M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
-					msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
-
-		if(A)
-			if (!forcedodge)
-				forcedodge = A.bullet_act(src, def_zone) // searches for return value
-			if(forcedodge == -1) // the bullet passes through a dense object!
-				bumped = 0 // reset bumped variable!
-				if(istype(A, /turf))
-					loc = A
-				else
-					loc = A.loc
-				permutated.Add(A)
-				return 0
-			if(istype(A,/turf))
-				for(var/obj/O in A)
-					O.bullet_act(src)
-				for(var/mob/M in A)
-					M.bullet_act(src, def_zone)
-			density = 0
-			invisibility = 101
-			del(src)
+				passthrough = 1
+		
+		else if(isobj(A))
+			passthrough = (A.bullet_act(src, def_zone) == -1)
+		
+		else if(isturf(A))
+			for(var/obj/O in A)
+				O.bullet_act(src)
+			for(var/mob/M in A)
+				attack_mob(M, distance)
+		
+		//the bullet passes through a dense object!
+		if(passthrough) 
+			bumped = 0 //reset bumped variable!
+			if(istype(A, /turf))
+				loc = A
+			else
+				loc = A.loc
+			permutated.Add(A)
+			return 0
+		
+		//stop flying
+		density = 0
+		invisibility = 101
+		del(src)
 		return 1
-
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 		if(air_group || (height==0)) return 1
 
-		if(istype(mover, /obj/item/projectile))
+		if(istype(mover, /obj/item/projectile)) //ha
 			return prob(95)
 		else
 			return 1
-
 
 	process()
 		if(kill_count < 1)
