@@ -246,26 +246,26 @@ obj/item/weapon/gun/energy/staff/focus
 	charge_cost = 0
 	silenced = 1
 
-	attack_self(mob/living/user as mob)
-		if(projectile_type == "/obj/item/projectile/icarus/pointdefense")
-			projectile_type = "/obj/item/projectile/icarus/guns"
-			user << "You inform the Icarus to switch to the main guns."
-		else
-			projectile_type = "/obj/item/projectile/icarus/pointdefense"
-			user << "You inform the Icarus to switch to the point-defense lasers."
+/obj/item/weapon/gun/energy/icarus/attack_self(mob/living/user as mob)
+	if(projectile_type == "/obj/item/projectile/icarus/pointdefense")
+		projectile_type = "/obj/item/projectile/icarus/guns"
+		user << "You inform the Icarus to switch to the main guns."
+	else
+		projectile_type = "/obj/item/projectile/icarus/pointdefense"
+		user << "You inform the Icarus to switch to the point-defense lasers."
 
-		. = ..()
+	. = ..()
 
-	update_icon()
-		return
+/obj/item/weapon/gun/energy/icarus/update_icon()
+	return
 
-	verb/SetIcarusAngle()
-		set src in usr
-		set name = "Set Firing Angle"
-		set desc = "Sets the angle from which the icarus will fire."
-		set category = "Object"
+/obj/item/weapon/gun/energy/icarus/verb/SetIcarusAngle()
+	set src in usr
+	set name = "Set Firing Angle"
+	set desc = "Sets the angle from which the icarus will fire."
+	set category = "Object"
 
-		Icarus_SetPosition(usr)
+	Icarus_SetPosition(usr)
 
 
 /obj/item/weapon/gun/energy/variable
@@ -274,13 +274,12 @@ obj/item/weapon/gun/energy/staff/focus
 	charge_cost = 0
 	silenced = 1
 
-	update_icon()
-		return
+/obj/item/weapon/gun/energy/variable/update_icon()
+	return
 
-	attack_self(mob/living/user as mob)
-		var/type = input(user,"What projectile type?","Projectile", null) as null|anything in typesof(/obj/item/projectile)
-		if(!type)
-			return ..()
+/obj/item/weapon/gun/energy/variable/attack_self(mob/living/user as mob)
+	var/type = input(user,"What projectile type?","Projectile", null) as null|anything in typesof(/obj/item/projectile)
+	if(!type)
+		return ..()
 
-		projectile_type = "[type]"
-		. = ..()
+	. = ..()
