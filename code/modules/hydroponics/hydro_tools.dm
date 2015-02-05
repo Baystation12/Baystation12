@@ -270,7 +270,7 @@
 	desc = "A small glass bottle. Can hold up to 10 units."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-	flags = OPENCONTAINER
+	flags = 0
 	possible_transfer_amounts = null
 	w_class = 2.0
 
