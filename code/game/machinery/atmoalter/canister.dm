@@ -40,6 +40,9 @@
 	canister_color = "blue"
 	can_label = 0
 
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled
+	name = "Canister: \[O2 (Cryo)\]"
+
 /obj/machinery/portable_atmospherics/canister/phoron
 	name = "Canister \[Phoron\]"
 	icon_state = "orange"
@@ -368,6 +371,14 @@ update_flag
 	..()
 
 	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.update_icon()
+	return 1
+
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
+	..()
+
+	src.air_contents.adjust_gas("oxygen", MolesForPressure())
+	src.air_contents.temperature = 80
 	src.update_icon()
 	return 1
 
