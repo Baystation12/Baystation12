@@ -65,14 +65,16 @@
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"
-	matter = list("metal" = 2000)
+	matter = list("metal" = 2000, "uranium" = 100)
 	origin_tech = "combat=2;magnets=2;syndicate=5"
 	silenced = 1
+	charge_cost = 250
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = "/obj/item/projectile/energy/bolt"
 	cell_type = "/obj/item/weapon/cell/crap"
 	var/charge_tick = 0
-
+	var/charge_rate = 250
+	var/charge_time = 30
 
 	New()
 		..()
@@ -86,10 +88,10 @@
 
 	process()
 		charge_tick++
-		if(charge_tick < 4) return 0
+		if(charge_tick < charge_time) return 0
 		charge_tick = 0
 		if(!power_supply) return 0
-		power_supply.give(100)
+		power_supply.give(charge_rate)
 		return 1
 
 

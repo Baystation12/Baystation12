@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\mob\AI.dmi;code\game\machinery\requests_console.dm;code\modules\mob\living\silicon\ai\ai.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\FEA code\game code\game\machinery code\game\machinery\atmoalter code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai icons icons\effects icons\mob 
-FILE: icons\mob\AI.dmi
-LAST_COMPILE_TIME: 1423107784
+WINDOW: code\modules\mob\living\silicon\robot\spy-bug\spybug_damage.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug_helmet.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug_abilities.dm;icons\mob\mask.dmi;code\modules\clothing\clothing.dm;code\modules\clothing\spacesuits\ninja.dm;code\game\gamemodes\events\ninja_abilities.dm;code\game\gamemodes\events\space_ninja.dm;code\modules\mob\living\silicon\robot\drone\drone.dm;code\modules\mob\living\silicon\robot\laws.dm;code\modules\mob\living\silicon\robot\robot.dm;code\modules\clothing\spacesuits\rig.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\_onclick code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\datums code\datums\diseases code\datums\spells code\game code\game\gamemodes code\game\gamemodes\changeling code\game\gamemodes\events code\game\gamemodes\traitor code\game\gamemodes\wizard code\game\machinery code\game\machinery\atmoalter code\game\machinery\computer code\game\objects code\game\objects\items code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\under code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\modules\mob\living\silicon\robot\drone code\modules\mob\living\silicon\robot\spy-bug code\modules\power code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\unused code\unused\mining code\WorkInProgress code\WorkInProgress\computer3 code\WorkInProgress\computer3\computers code\WorkInProgress\Sigyn code\WorkInProgress\Sigyn\Softcurity icons icons\mob icons\obj maps maps\RandomZLevels 
+FILE: code\modules\mob\living\silicon\robot\spy-bug\spybug_helmet.dm
+LAST_COMPILE_TIME: 1423172990
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

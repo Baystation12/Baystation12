@@ -76,3 +76,9 @@
 	desc = "It's a slimy brain slug. Gross."
 	icon_state = "borer"
 	origin_tech = "biotech=6"
+
+/obj/item/weapon/holder/spybug
+	name = "spy bug"
+	desc = "It's a small robot bug with a microscopic camera and microphone."
+	icon_state = "drone"
+	origin_tech = "engineering=5 illegal=2"
