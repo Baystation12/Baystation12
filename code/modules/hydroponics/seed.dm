@@ -1,96 +1,3 @@
-// Sprite lists.
-var/global/list/plant_sprites = list()         // List of all harvested product sprites.
-var/global/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
-
-// Proc for creating a random seed type.
-/proc/create_random_seed(var/survive_on_station)
-	var/datum/seed/seed = new()
-	seed.randomize()
-	seed.uid = seed_types.len + 1
-	seed.name = "[seed.uid]"
-	seed_types[seed.name] = seed
-
-	if(survive_on_station)
-		if(seed.consume_gasses)
-			seed.consume_gasses["phoron"] = null
-			seed.consume_gasses["carbon_dioxide"] = null
-		seed.set_trait(TRAIT_IDEAL_HEAT,293)
-		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)
-		seed.set_trait(TRAIT_IDEAL_LIGHT,8)
-		seed.set_trait(TRAIT_LIGHT_TOLERANCE,5)
-		seed.set_trait(TRAIT_LOWKPA_TOLERANCE,25)
-		seed.set_trait(TRAIT_HIGHKPA_TOLERANCE,200)
-
-	return seed
-
-// Debug for testing seed genes.
-/client/proc/show_plant_genes()
-	set category = "Debug"
-	set name = "Show Plant Genes"
-	set desc = "Prints the round's plant gene masks."
-
-	if(!holder)	return
-
-	if(!gene_tag_masks)
-		usr << "Gene masks not set."
-		return
-
-	for(var/mask in gene_tag_masks)
-		usr << "[mask]: [gene_tag_masks[mask]]"
-
-// Predefined/roundstart varieties use a string key to make it
-// easier to grab the new variety when mutating. Post-roundstart
-// and mutant varieties use their uid converted to a string instead.
-// Looks like shit but it's sort of necessary.
-
-proc/populate_seed_list()
-
-	// Build the icon lists.
-	for(var/icostate in icon_states('icons/obj/hydroponics_growing.dmi'))
-		var/split = findtext(icostate,"-")
-		if(!split)
-			// invalid icon_state
-			continue
-
-		var/ikey = copytext(icostate,(split+1))
-		if(ikey == "dead")
-			// don't count dead icons
-			continue
-		ikey = text2num(ikey)
-		var/base = copytext(icostate,1,split)
-
-		if(!(plant_sprites[base]) || (plant_sprites[base]<ikey))
-			plant_sprites[base] = ikey
-
-	for(var/icostate in icon_states('icons/obj/hydroponics_products.dmi'))
-		plant_product_sprites |= icostate
-
-	// Populate the global seed datum list.
-	for(var/type in typesof(/datum/seed)-/datum/seed)
-		var/datum/seed/S = new type
-		seed_types[S.name] = S
-		S.uid = "[seed_types.len]"
-		S.roundstart = 1
-
-	// Make sure any seed packets that were mapped in are updated
-	// correctly (since the seed datums did not exist a tick ago).
-	for(var/obj/item/seeds/S in world)
-		S.update_seed()
-
-	//Might as well mask the gene types while we're at it.
-	var/list/used_masks = list()
-	var/list/plant_traits = ALL_GENES
-	while(plant_traits && plant_traits.len)
-		var/gene_tag = pick(plant_traits)
-		var/gene_mask = "[num2hex(rand(0,255))]"
-
-		while(gene_mask in used_masks)
-			gene_mask = "[num2hex(rand(0,255))]"
-
-		used_masks += gene_mask
-		plant_traits -= gene_tag
-		gene_tag_masks[gene_tag] = gene_mask
-
 /datum/plantgene
 	var/genetype    // Label used when applying trait.
 	var/list/values // Values to copy into the target seed datum.
@@ -380,8 +287,8 @@ proc/populate_seed_list()
 	seed_noun = pick("spores","nodes","cuttings","seeds")
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
-	set_trait(TRAIT_PRODUCT_ICON,pick(plant_product_sprites))
-	set_trait(TRAIT_PLANT_ICON,pick(plant_sprites))
+	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.plant_product_sprites))
+	set_trait(TRAIT_PLANT_ICON,pick(plant_controller.plant_sprites))
 	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
 	update_growth_stages()
@@ -679,10 +586,10 @@ proc/populate_seed_list()
 		if(istype(user)) user << "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name]."
 
 		//This may be a new line. Update the global if it is.
-		if(name == "new line" || !(name in seed_types))
-			uid = seed_types.len + 1
+		if(name == "new line" || !(name in plant_controller.seeds))
+			uid = plant_controller.seeds.len + 1
 			name = "[uid]"
-			seed_types[name] = src
+			plant_controller.seeds[name] = src
 
 		if(harvest_sample)
 			var/obj/item/seeds/seeds = new(get_turf(user))
@@ -759,6 +666,6 @@ proc/populate_seed_list()
 
 /datum/seed/proc/update_growth_stages()
 	if(get_trait(TRAIT_PLANT_ICON))
-		growth_stages = plant_sprites[get_trait(TRAIT_PLANT_ICON)]
+		growth_stages = plant_controller.plant_sprites[get_trait(TRAIT_PLANT_ICON)]
 	else
 		growth_stages = 0

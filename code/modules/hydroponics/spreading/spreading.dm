@@ -13,7 +13,7 @@
 
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)
-			var/datum/seed/seed = create_random_seed(1)
+			var/datum/seed/seed = plant_controller.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)            // So it will function properly as vines.
 			seed.set_trait(TRAIT_POTENCY,rand(40,50)) // Guarantee a wide spread and powerful effects.
 			new /obj/effect/plant(T,seed)
@@ -25,10 +25,13 @@
 	density = 0
 	color = DEAD_PLANT_COLOUR
 
+/obj/effect/dead_plant/attack_hand()
+	del(src)
+
 /obj/effect/dead_plant/attackby()
 	..()
 	for(var/obj/effect/plant/neighbor in view(1,src))
-		neighbor.hibernating = 0
+		plant_controller.add_plant(neighbor)
 	del(src)
 
 /obj/effect/plant
@@ -55,7 +58,7 @@
 	var/spread_into_adjacent = 60
 	var/evolve_chance = 2
 	var/last_tick = 0
-	var/hibernating = 0
+	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
 
 /obj/effect/plant/single
 	spread_chance = 0
@@ -63,7 +66,7 @@
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed)
 	..()
 	if(!istype(newseed))
-		newseed = seed_types[DEFAULT_SEED]
+		newseed = plant_controller.seeds[DEFAULT_SEED]
 	seed = newseed
 	if(!seed)
 		del(src)
@@ -96,7 +99,7 @@
 
 	set_dir(calc_dir())
 	update_icon()
-	processing_objects |= src
+	plant_controller.add_plant(src)
 	last_tick = world.timeofday
 
 /obj/effect/plant/update_icon()
@@ -148,7 +151,6 @@
 /obj/effect/plant/Del()
 	if(children && children.len)
 		die_off(null,1)
-	processing_objects -= src
 	..()
 
 /obj/effect/plant/proc/get_dist_to_parent(var/current_count)

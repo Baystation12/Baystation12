@@ -53,13 +53,13 @@
 	else if(istype(target,/obj/item/weapon/reagent_containers/food/snacks/grown))
 
 		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
-		grown_seed = seed_types[G.plantname]
+		grown_seed = plant_controller.seeds[G.plantname]
 		grown_reagents = G.reagents
 
 	else if(istype(target,/obj/item/weapon/grown))
 
 		var/obj/item/weapon/grown/G = target
-		grown_seed = seed_types[G.plantname]
+		grown_seed = plant_controller.seeds[G.plantname]
 		grown_reagents = G.reagents
 
 	else if(istype(target,/obj/item/seeds))

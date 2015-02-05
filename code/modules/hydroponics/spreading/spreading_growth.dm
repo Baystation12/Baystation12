@@ -14,37 +14,47 @@
 			health = max_health
 	refresh_icon()
 
-	// Damaged, young hibernating or too far from parent, no chance of spreading.
-	if(is_mature() || hibernating || (parent && (get_dist_to_parent(0) > spread_distance)))
-		return
+	if(buckled_mob)
+		seed.do_sting(buckled_mob,src)
+		if(seed.get_trait(TRAIT_CARNIVOROUS))
+			// Todo: refactor to be less hardcoded.
+			if(istype(buckled_mob, /mob/living/simple_animal/mouse))
+				new /obj/effect/decal/remains/mouse(get_turf(src))
+				del(buckled_mob)
+				buckled_mob = null
+				return
+			else if(istype(buckled_mob, /mob/living/simple_animal/lizard))
+				new /obj/effect/decal/remains/lizard(get_turf(src))
+				del(buckled_mob)
+				buckled_mob = null
+				return
+			seed.do_thorns(buckled_mob,src)
 
+	var/failed_growth
 	// Count our neighbors and possible locations for spreading.
 	var/list/possible_locs = list()
-	var/count = 0
+	var/plant_count = 0
 	for(var/turf/simulated/floor/floor in view(1,src))
 		if((locate(/obj/effect/dead_plant) in floor.contents) || !floor.Enter(src) || floor.density)
 			continue
 		if(locate(/obj/effect/plant) in floor.contents)
-			count++
+			plant_count++
 			continue
 		possible_locs |= floor
 
-	//Entirely surrounded, try to spawn an actual plant.
-	if(count>=8)
-		if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in T.contents))
-			var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/new_plant = new(T,seed)
-			new_plant.age = seed.get_trait(TRAIT_MATURATION)-1
-			new_plant.update_icon()
-			if(growth_type==0) //Vines do not become invisible.
-				invisibility = INVISIBILITY_MAXIMUM
-			else
-				new_plant.layer = 4.1
+	if(health == max_health && plant_count >= 4 && !plant)
+		plant = new(T,seed)
+		plant.age = seed.get_trait(TRAIT_MATURATION)-1
+		plant.update_icon()
+		if(growth_type==0) //Vines do not become invisible.
+			invisibility = INVISIBILITY_MAXIMUM
+		else
+			plant.layer = layer + 0.1
 
 	if(prob(spread_chance))
 		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
 			if(!possible_locs.len)
-				hibernating = 1
-				world << "[src] at [x],[y] is hibernating"
+				failed_growth = 1
 				break
 			if(prob(spread_into_adjacent))
 				var/turf/target_turf = pick(possible_locs)
@@ -53,11 +63,14 @@
 				child.parent = get_root()
 				child.parent.children |= child
 
+	if(health != max_health || !failed_growth || (plant_count > 4 && !plant))
+		plant_controller.add_plant(src)
+
 /obj/effect/plant/proc/die_off(var/no_remains, var/no_del)
 	// Remove ourselves from our parent.
 	if(parent && parent.children)
 		parent.children -= src
-	// Kill off any of our children (and add an added bonus, other plants in this area)
+	// Kill off any of our children (and as an added bonus, other plants in this area)
 	for(var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant in get_turf(src))
 		plant.dead = 1
 		plant.update_icon()
@@ -66,7 +79,8 @@
 		for(var/obj/effect/plant/child in children)
 			child.die_off()
 	for(var/obj/effect/plant/neighbor in view(1,src))
-		neighbor.hibernating = 0
+		plant_controller.add_plant(neighbor)
+
 	if(!no_remains && !(locate(/obj/effect/dead_plant) in get_turf(src)))
 		var/obj/effect/dead_plant/plant_remains = new(get_turf(src))
 		plant_remains.icon = src.icon

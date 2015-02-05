@@ -19,7 +19,7 @@
 	//Handle some post-spawn var stuff.
 	if(planttype)
 		plantname = planttype
-		var/datum/seed/S = seed_types[plantname]
+		var/datum/seed/S = plant_controller.seeds[plantname]
 		if(!S || !S.chems)
 			return
 

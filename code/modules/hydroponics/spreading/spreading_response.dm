@@ -1,7 +1,6 @@
 /obj/effect/plant/HasProximity(var/atom/movable/AM)
 
-	hibernating = 0
-
+	plant_controller.add_plant(src)
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
@@ -9,16 +8,15 @@
 	if(!istype(M))
 		return
 
-	if(!buckled_mob && !M.buckled && !M.anchored && prob(round(seed.get_trait(TRAIT_POTENCY)/2)))
+	if(!buckled_mob && !M.buckled && !M.anchored && (M.small || prob(round(seed.get_trait(TRAIT_POTENCY)/2))))
 		entangle(M)
 
 /obj/effect/plant/attack_hand(mob/user as mob)
-	hibernating = 0
+	plant_controller.add_plant(src)
 	manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
-	hibernating = 0
-	world << "Blah."
+	plant_controller.add_plant(src)
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim
