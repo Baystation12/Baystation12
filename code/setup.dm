@@ -475,6 +475,7 @@
 #define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
 #define SEE_INVISIBLE_LEVEL_ONE           35
 #define SEE_INVISIBLE_LEVEL_TWO           45
+#define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
 #define SEE_INVISIBLE_OBSERVER            60
 #define SEE_INVISIBLE_OBSERVER_AI_EYE     61
 
@@ -484,7 +485,7 @@
 // Object specific defines.
 #define CANDLE_LUM 3 // For how bright candles are.
 
-// Some mob defines below.
+//Some mob defines below
 #define AI_CAMERA_LUMINOSITY 6
 
 #define BORGMESON 1

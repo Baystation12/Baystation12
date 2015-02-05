@@ -833,7 +833,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/eyepatch(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/mask/cigarette/cigar/havana(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(M), slot_wear_mask)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/deathsquad/beret(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), slot_belt)
 			M.equip_to_slot_or_del(new /obj/item/weapon/flame/lighter/zippo(M), slot_r_store)
@@ -982,7 +982,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(!M.loc.loc)
 			continue
 
-		if(istype(M.loc.loc,/area/engine/engine_room))
+		if(istype(M.loc.loc,/area/engineering/engine_room))
 			if(istype(M,/obj/machinery/power/rad_collector))
 				var/obj/machinery/power/rad_collector/Rad = M
 				Rad.anchored = 1
@@ -1021,7 +1021,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				SMES.input_level = 200000
 				SMES.output_level = 75000
 
-		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
+		else if(istype(M.loc.loc,/area/engineering/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
 			if(istype(M,/obj/machinery/power/smes))
 				var/obj/machinery/power/smes/SMES = M
 				SMES.input_attempt = 1

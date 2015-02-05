@@ -118,7 +118,6 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 			if(!processing)
 				sleep(PLANT_TICK_TIME)
 			else
-				var/processed = 0
 				for(var/x=0;x<PLANTS_PER_TICK;x++)
 					if(!plants.len)
 						break

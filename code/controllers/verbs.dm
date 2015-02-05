@@ -1,26 +1,34 @@
 //TODO: rewrite and standardise all controller datums to the datum/controller type
 //TODO: allow all controllers to be deleted for clean restarts (see WIP master controller stuff) - MC done - lighting done
 
-/client/proc/show_distribution_map()
+/client/proc/print_random_map()
 	set category = "Debug"
-	set name = "Show Distribution Map"
-	set desc = "Print the asteroid ore distribution map to the world."
+	set name = "Display Random Map"
+	set desc = "Show the contents of a random map."
 
 	if(!holder)	return
 
-	if(master_controller && master_controller.asteroid_ore_map)
-		master_controller.asteroid_ore_map.print_distribution_map(usr)
+	var/datum/random_map/choice = input("Choose a map to debug.") as null|anything in random_maps
+	if(!choice)
+		return
+	choice.display_map(usr)
 
-/client/proc/remake_distribution_map()
+
+/client/proc/create_random_map()
 	set category = "Debug"
-	set name = "Remake Distribution Map"
-	set desc = "Rebuild the asteroid ore distribution map."
+	set name = "Create Random Map"
+	set desc = "Create a random map."
 
 	if(!holder)	return
 
-	if(master_controller && master_controller.asteroid_ore_map)
-		master_controller.asteroid_ore_map = new /datum/ore_distribution()
-		master_controller.asteroid_ore_map.populate_distribution_map()
+	var/map_datum = input("Choose a map to create.") as null|anything in typesof(/datum/random_map)-/datum/random_map
+	if(!map_datum)
+		return
+	var/seed = input("Seed? (default null)")  as text|null
+	var/tx =    input("X? (default 1)")       as text|null
+	var/ty =    input("Y? (default 1)")       as text|null
+	var/tz =    input("Z? (default 1)")       as text|null
+	new map_datum(seed,tx,ty,tz)
 
 /client/proc/restart_controller(controller in list("Master","Failsafe","Lighting","Supply"))
 	set category = "Debug"

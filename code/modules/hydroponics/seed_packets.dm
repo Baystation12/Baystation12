@@ -252,6 +252,9 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/cherryseed
 	seed_type = "cherry"
 
+/obj/item/seeds/tobaccoseed
+	seed_type = "tobacco"
+
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
 
