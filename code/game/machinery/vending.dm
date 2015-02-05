@@ -147,6 +147,29 @@
 	return
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (currently_vending)
+		var/paid = 0
+		var/handled = 0
+		if(istype(W, /obj/item/weapon/card/id))
+			var/obj/item/weapon/card/id/C = W
+			paid = pay_with_card(C)
+			handled = 1
+		else if (istype(W, /obj/item/weapon/spacecash/ewallet))
+			var/obj/item/weapon/spacecash/ewallet/C = W
+			paid = pay_with_ewallet(C)
+			handled = 1
+		else if (istype(W, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = W
+			paid = pay_with_cash(C, user)
+			handled = 1
+
+		if(paid)
+			src.vend(currently_vending, usr)
+			currently_vending = null
+			return
+		else if(handled)
+			return // don't smack that machine with your 2 thalers
+
 	if (istype(W, /obj/item/weapon/card/emag))
 		src.emagged = 1
 		user << "You short out the product lock on [src]"
@@ -169,49 +192,7 @@
 		coin = W
 		user << "\blue You insert the [W] into the [src]"
 		return
-	else if(istype(W, /obj/item/weapon/card) && currently_vending)
-		var/obj/item/weapon/card/I = W
-		scan_card(I)
-	else if (istype(W, /obj/item/weapon/spacecash/ewallet) && currently_vending)
-		var/obj/item/weapon/spacecash/ewallet/I = W
-		if(I.worth >= currently_vending.price)
-			I.worth -= currently_vending.price
-			visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-			
-			src.vend(src.currently_vending, usr)
-			currently_vending = null
-		else
-			usr << "\icon[src]<span class='warning'>Your chargecard does not have enough money!</span>"
-	
-	// we shouldn't hit spacewallets by now since they were handled above, so this is cash only
-	else if (istype(W, /obj/item/weapon/spacecash) && currently_vending)
-		var/obj/item/weapon/spacecash/C = W
-		if(C.worth >= currently_vending.price)
-			if(istype(C, /obj/item/weapon/spacecash/bundle))
-				visible_message("<span class='info'>[usr] inserts some cash into [src].</span>")
-				C.worth -= currently_vending.price
-				if(!C.worth)
-					usr.drop_from_inventory(W)
-					del(W)
-				else
-					W.update_icon()
-			else
-				// Non-bundles are whole bills. We eat the whole cash item and spit out change
-				visible_message("<span class='info'>[usr] inserts a bill into [src].</span>")
-				var/left = C.worth - currently_vending.price
-				
-				usr.drop_from_inventory(W)
-				del(W)
-				if(left)
-					spawn_money(left, src.loc, user)
-					
-			src.vend(src.currently_vending, usr)
-			currently_vending = null
-		else
-			usr << "\icon[src]<span class='warning'>That is not enough money to cover the price!</span>"
-	
 	else if(istype(W, /obj/item/weapon/wrench))
-
 		if(do_after(user, 20))
 			if(!src) return
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -234,67 +215,133 @@
 	else
 		..()
 
-/obj/machinery/vending/proc/scan_card(var/obj/item/weapon/card/I)
-	if(!currently_vending) return
-	if (istype(I, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/C = I
-		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		var/datum/money_account/CH = get_account(C.associated_account_number)
-		if (CH) // Only proceed if card contains proper account number.
-			if(!CH.suspended)
-				if(CH.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
-					if(vendor_account)
-						var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-						var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-						transfer_and_vend(D)
-					else
-						usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
-				else
-					//Just Vend it.
-					transfer_and_vend(CH)
-			else
-				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
+/**
+ *  Receive payment with cashmoney.
+ *
+ *  usr is the mob who gets the change.
+ */
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
+	if(currently_vending.price > cashmoney.worth)
+		usr << "\icon[src] <span class='warning'>That is not enough money.</span>"
+		return 0
+
+	if(istype(cashmoney, /obj/item/weapon/spacecash/bundle))
+		// Bundles can just have money subtracted, and will work
+
+		visible_message("<span class='info'>[usr] inserts some cash into [src].</span>")
+		var/obj/item/weapon/spacecash/bundle/cashmoney_bundle = cashmoney
+		cashmoney_bundle.worth -= currently_vending.price
+
+		if(cashmoney_bundle.worth <= 0)
+			usr.drop_from_inventory(cashmoney_bundle)
+			del(cashmoney_bundle)
 		else
-			usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
-
-/obj/machinery/vending/proc/transfer_and_vend(var/datum/money_account/acc)
-	if(acc)
-		var/transaction_amount = currently_vending.price
-		if(transaction_amount <= acc.money)
-
-			//transfer the money
-			acc.money -= transaction_amount
-			vendor_account.money += transaction_amount
-
-			//create entries in the two account transaction logs
-			var/datum/transaction/T = new()
-			T.target_name = "[vendor_account.owner_name] (via [src.name])"
-			T.purpose = "Purchase of [currently_vending.product_name]"
-			if(transaction_amount > 0)
-				T.amount = "([transaction_amount])"
-			else
-				T.amount = "[transaction_amount]"
-			T.source_terminal = src.name
-			T.date = current_date_string
-			T.time = worldtime2text()
-			acc.transaction_log.Add(T)
-							//
-			T = new()
-			T.target_name = acc.owner_name
-			T.purpose = "Purchase of [currently_vending.product_name]"
-			T.amount = "[transaction_amount]"
-			T.source_terminal = src.name
-			T.date = current_date_string
-			T.time = worldtime2text()
-			vendor_account.transaction_log.Add(T)
-
-			// Vend the item
-			src.vend(src.currently_vending, usr)
-			currently_vending = null
-		else
-			usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
+			cashmoney_bundle.update_icon()
 	else
-		usr << "\icon[src]<span class='warning'>Error: Unable to access your account. Please contact technical support if problem persists.</span>"
+		// Bills (banknotes) cannot really have worth different than face value,
+		// so we have to eat the bill and spit out change in a bundle
+		// This is really dirty, but there's no superclass for all bills, so we
+		// just assume that all spacecash that's not something else is a bill
+
+		visible_message("<span class='info'>[usr] inserts a bill into [src].</span>")
+		var/left = cashmoney.worth - currently_vending.price
+		usr.drop_from_inventory(cashmoney)
+		del(cashmoney)
+
+		if(left)
+			spawn_money(left, src.loc, user)
+
+	// Vending machines have no idea who paid with cash
+	credit_purchase("(cash)")
+	return 1
+
+/**
+ * Scan a chargecard and deduct payment from it. 
+ *
+ * Takes payment for whatever is the currently_vending item. Returns 1 if 
+ * successful, 0 if failed.
+ */
+/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
+	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+	if(currently_vending.price > wallet.worth)
+		usr << "\icon[src] <span class='warning'>Insufficient funds on chargecard.</span>"
+		return 0
+	else
+		wallet.worth -= currently_vending.price
+		credit_purchase("[wallet.owner_name] (chargecard)")
+		return 1
+
+/**
+ * Scan a card and attempt to transfer payment from associated account.
+ *
+ * Takes payment for whatever is the currently_vending item. Returns 1 if 
+ * successful, 0 if failed
+ */
+/obj/machinery/vending/proc/pay_with_card(var/obj/item/weapon/card/id/I)
+	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+	var/datum/money_account/customer_account = get_account(I.associated_account_number)
+	if (!customer_account)
+		usr << "\icon[src] <span class='warning'>Error: Unable to access account. Please contact technical support if problem persists.</span>"
+		return 0
+
+	if(customer_account.suspended)
+		usr << "\icon[src] <span class='warning'>Unable to access account: account suspended.</span>"
+		return 0
+
+	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
+	// empty at high security levels
+	if(customer_account.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+		var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
+
+		if(!customer_account)
+			usr << "\icon[src] <span class='warning'>Unable to access account: incorrect credentials.</span>"
+			return 0
+
+	if(currently_vending.price > customer_account.money)
+		usr << "\icon[src] <span class='warning'>Insufficient funds in account.</span>"
+		return 0
+	else
+		// Okay to move the money at this point
+
+		// debit money from the purchaser's account
+		customer_account.money -= currently_vending.price
+
+		// create entry in the purchaser's account log
+		var/datum/transaction/T = new()
+		T.target_name = "[vendor_account.owner_name] (via [src.name])"
+		T.purpose = "Purchase of [currently_vending.product_name]"
+		if(currently_vending.price > 0)
+			T.amount = "([currently_vending.price])"
+		else
+			T.amount = "[currently_vending.price]"
+		T.source_terminal = src.name
+		T.date = current_date_string
+		T.time = worldtime2text()
+		customer_account.transaction_log.Add(T)
+
+		// Give the vendor the money. We use the account owner name, which means
+		// that purchases made with stolen/borrowed card will look like the card
+		// owner made them
+		credit_purchase(customer_account.owner_name)
+		return 1
+
+/**
+ *  Add money for current purchase to the vendor account.
+ * 
+ *  Called after the money has already been taken from the customer.
+ */ 
+/obj/machinery/vending/proc/credit_purchase(var/target as text)
+	vendor_account.money += currently_vending.price
+
+	var/datum/transaction/T = new()
+	T.target_name = target
+	T.purpose = "Purchase of [currently_vending.product_name]"
+	T.amount = "[currently_vending.price]"
+	T.source_terminal = src.name
+	T.date = current_date_string
+	T.time = worldtime2text()
+	vendor_account.transaction_log.Add(T)
 
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
