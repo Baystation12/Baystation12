@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\smoothwall.dm;icons\turf\walls.dmi;maps\tgstation2.dmm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\game code\modules code\modules\mining code\modules\paperwork code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food icons icons\turf maps 
-FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1422913981
+WINDOW: icons\mob\AI.dmi;code\game\machinery\requests_console.dm;code\modules\mob\living\silicon\ai\ai.dm
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\FEA code\game code\game\machinery code\game\machinery\atmoalter code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai icons icons\effects icons\mob 
+FILE: icons\mob\AI.dmi
+LAST_COMPILE_TIME: 1423107784
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

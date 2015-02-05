@@ -156,7 +156,6 @@
 					if(get_dir(src,W) != 2)
 						jun2 |= get_dir(src,W)
 
-
 		if(jun2 != junction)
 			if(junction == 1)
 				wall.icon_state = "[wall.walltype]_spec_3"
