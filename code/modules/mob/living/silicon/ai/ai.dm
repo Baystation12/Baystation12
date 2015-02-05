@@ -766,5 +766,8 @@ var/list/ai_verbs_default = list(
 		return 1
 	return 0
 
+/mob/living/silicon/ai/proc/is_in_chassis()
+	return istype(loc, /turf)
+
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

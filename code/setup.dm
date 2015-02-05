@@ -17,9 +17,9 @@
 #define GAS_CRITICAL_TEMPERATURE     132.65    // K. The critical point temperature for air.
 
 /*
-	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's 
-	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on. 
-	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight 
+	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's
+	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on.
+	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight
 	to the total surface area is the same as the ratio of the perimeter of the cross-section.
 */
 #define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
@@ -775,3 +775,10 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
+
+// NanoUI flags
+#define STATUS_INTERACTIVE 2 // GREEN Visability
+#define STATUS_UPDATE 1 // ORANGE Visability
+#define STATUS_DISABLED 0 // RED Visability
+#define STATUS_CLOSE -1 // Close the interface
+
