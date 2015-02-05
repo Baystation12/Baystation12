@@ -2032,7 +2032,7 @@
 "Nd" = (/obj/machinery/computer/secure_data,/obj/machinery/camera{c_tag = "Crescent Arrivals North"; dir = 8},/turf/unsimulated/floor{icon_state = "floor"},/area/centcom/control)
 "Ne" = (/turf/simulated/shuttle/wall{tag = "icon-swall2"; icon_state = "swall2"; dir = 2},/area/shuttle/escape/centcom)
 "Nf" = (/obj/machinery/computer/crew,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/escape/centcom)
-"Ng" = (/obj/structure/AIcore/deactivated/nolatejoin,/turf/simulated/shuttle/floor,/area/shuttle/escape/centcom)
+"Ng" = (/obj/structure/AIcore/deactivated,/turf/simulated/shuttle/floor,/area/shuttle/escape/centcom)
 "Nh" = (/obj/machinery/computer/security,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/escape/centcom)
 "Ni" = (/obj/machinery/computer/secure_data,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/escape/centcom)
 "Nj" = (/obj/machinery/computer/station_alert,/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/shuttle/escape/centcom)

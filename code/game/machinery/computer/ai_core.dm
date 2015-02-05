@@ -187,13 +187,6 @@
 	anchored = 1
 	state = 20//So it doesn't interact based on the above. Not really necessary.
 
-/obj/structure/AIcore/deactivated/nolatejoin
-
-/obj/structure/AIcore/deactivated/nolatejoin/New()
-	spawn(1)
-		if(src in empty_playable_ai_cores)
-			empty_playable_ai_cores -= src
-
 /obj/structure/AIcore/deactivated/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
 
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
