@@ -4,7 +4,7 @@
 
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | THICKMATERIAL
+	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES
@@ -14,7 +14,7 @@
 
 /obj/item/clothing/gloves/rig
 	name = "gauntlets"
-	flags = FPRINT | TABLEPASS | THICKMATERIAL
+	flags = THICKMATERIAL
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
@@ -36,7 +36,7 @@
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv =          HIDEJUMPSUIT|HIDETAIL
-	flags =              FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | THICKMATERIAL | AIRTIGHT
+	flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	slowdown = 0
 	breach_threshold = 35
 	can_breach = 1

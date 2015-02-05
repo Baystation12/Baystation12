@@ -30,7 +30,7 @@
 			infectionchance = rand(10,20)
 		else
 			infectionchance = rand(60,90)
-	
+
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
@@ -88,7 +88,8 @@
 		clicks = 0
 	//Do nasty effects
 	for(var/datum/disease2/effectholder/e in effects)
-		e.runeffect(mob,stage)
+		if(prob(33))
+			e.runeffect(mob,stage)
 
 	//Short airborne spread
 	if(src.spreadtype == "Airborne")
@@ -104,7 +105,7 @@
 	for(var/datum/disease2/effectholder/e in effects)
 		e.effect.deactivate(mob)
 	mob.virus2.Remove("[uniqueID]")
-	mob.hud_updateflag |= 1 << STATUS_HUD
+	BITSET(mob.hud_updateflag, STATUS_HUD)
 
 /datum/disease2/disease/proc/minormutate()
 	//uniqueID = rand(0,10000)

@@ -56,7 +56,6 @@ proc/infection_check(var/mob/living/carbon/M, var/vector = "Airborne")
 //Checks if table-passing table can reach target (5 tile radius)
 proc/airborne_can_reach(turf/source, turf/target)
 	var/obj/dummy = new(source)
-	dummy.flags = FPRINT | TABLEPASS
 	dummy.pass_flags = PASSTABLE
 
 	for(var/i=0, i<5, i++) if(!step_towards(dummy, target)) break
@@ -98,7 +97,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 		D.minormutate()
 //		log_debug("Adding virus")
 		M.virus2["[D.uniqueID]"] = D
-		M.hud_updateflag |= 1 << STATUS_HUD
+		BITSET(M.hud_updateflag, STATUS_HUD)
 
 
 //Infects mob M with disease D
@@ -109,12 +108,14 @@ proc/airborne_can_reach(turf/source, turf/target)
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
+	
 	D.makerandom(1)
 	infect_mob(M, D)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
+	
 	D.makerandom(2)
 	infect_mob(M, D)
 

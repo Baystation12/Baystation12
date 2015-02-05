@@ -1,7 +1,7 @@
 /atom
 	layer = 2
 	var/level = 2
-	var/flags = FPRINT
+	var/flags = 0
 	var/list/fingerprints
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
@@ -234,8 +234,6 @@ its easier to just keep the beam vertical.
 /atom/proc/add_hiddenprint(mob/living/M as mob)
 	if(isnull(M)) return
 	if(isnull(M.key)) return
-	if (!( src.flags ) & FPRINT)
-		return
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (!istype(H.dna, /datum/dna))
@@ -260,8 +258,6 @@ its easier to just keep the beam vertical.
 	if(isnull(M)) return
 	if(isAI(M)) return
 	if(isnull(M.key)) return
-	if (!( src.flags ) & FPRINT)
-		return
 	if (ishuman(M))
 		//Add the list if it does not exist.
 		if(!fingerprintshidden)
@@ -386,7 +382,7 @@ its easier to just keep the beam vertical.
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
 
-	if((flags & NOBLOODY) || !(flags & FPRINT))
+	if(flags & NOBLOODY)
 		return 0
 
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
