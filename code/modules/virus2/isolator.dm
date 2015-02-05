@@ -4,7 +4,7 @@
 #define ENTRY "entry"
 
 /obj/machinery/disease2/isolator/
-	name = "Pathogenic Isolator"
+	name = "pathogenic isolator"
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/virology.dmi'
