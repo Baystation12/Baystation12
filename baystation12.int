@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\mob\living\silicon\robot\spy-bug\spybug_damage.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug_helmet.dm;code\modules\mob\living\silicon\robot\spy-bug\spybug_abilities.dm;icons\mob\mask.dmi;code\modules\clothing\clothing.dm;code\modules\clothing\spacesuits\ninja.dm;code\game\gamemodes\events\ninja_abilities.dm;code\game\gamemodes\events\space_ninja.dm;code\modules\mob\living\silicon\robot\drone\drone.dm;code\modules\mob\living\silicon\robot\laws.dm;code\modules\mob\living\silicon\robot\robot.dm;code\modules\clothing\spacesuits\rig.dm
-LAST_COMPILE_VERSION: 506.1247
-DIR: code code\_onclick code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\datums code\datums\diseases code\datums\spells code\game code\game\gamemodes code\game\gamemodes\changeling code\game\gamemodes\events code\game\gamemodes\traitor code\game\gamemodes\wizard code\game\machinery code\game\machinery\atmoalter code\game\machinery\computer code\game\objects code\game\objects\items code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\under code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\modules\mob\living\silicon\robot\drone code\modules\mob\living\silicon\robot\spy-bug code\modules\power code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy code\unused code\unused\mining code\WorkInProgress code\WorkInProgress\computer3 code\WorkInProgress\computer3\computers code\WorkInProgress\Sigyn code\WorkInProgress\Sigyn\Softcurity icons icons\mob icons\obj maps maps\RandomZLevels 
-FILE: code\modules\mob\living\silicon\robot\spy-bug\spybug_helmet.dm
-LAST_COMPILE_TIME: 1423172990
+WINDOW: code\WorkInProgress\computer3\computers\robot.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug.dm;code\modules\mob\living\silicon\pai\pai.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug_helmet.dm;icons\mob\head.dmi;icons\mob\species\armalis\head.dmi;icons\obj\clothing\hats.dmi
+LAST_COMPILE_VERSION: 506.1249
+DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\game\dna code\game\dna\genes code\game\gamemodes\autotraitor code\game\gamemodes\changeling code\game\gamemodes\events code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\pai code\modules\mob\living\silicon\vr_platform code\modules\mob\living\silicon\vr_platform\spy-bug code\WorkInProgress code\WorkInProgress\computer3 code\WorkInProgress\computer3\computers icons icons\mob icons\mob\species icons\mob\species\armalis icons\obj icons\obj\clothing 
+FILE: code\modules\mob\living\silicon\vr_platform\spy-bug\spybug_helmet.dm
+LAST_COMPILE_TIME: 1423238463
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
