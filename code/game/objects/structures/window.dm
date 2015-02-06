@@ -59,7 +59,7 @@
 		return
 
 	..()
-	take_damage(Proj.damage * 4)
+	take_damage(Proj.damage)
 	return
 
 
