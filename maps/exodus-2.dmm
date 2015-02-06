@@ -811,7 +811,7 @@
 "pE" = (/obj/machinery/cell_charger,/obj/structure/table/reinforced{icon_state = "table"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/shuttle/administration/centcom)
 "pF" = (/turf/unsimulated/wall,/area/centcom/living)
 "pG" = (/obj/structure/table/woodentable/holotable,/turf/simulated/floor/holofloor{icon_state = "carpet15-15"; dir = 4},/area/holodeck/source_courtroom)
-"pH" = (/obj/structure/stool/bed/chair{dir = 8},/obj/machinery/flasher_button{id = "syndieflash"; name = "Flasher"; pixel_x = 27; pixel_y = 0; tag = "permflash"},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
+"pH" = (/obj/structure/stool/bed/chair{dir = 8},/obj/machinery/button/flasher{id = "syndieflash"; name = "Flasher"; pixel_x = 27; pixel_y = 0; tag = "permflash"},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "pI" = (/obj/machinery/suit_cycler/syndicate{locked = 0},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "pJ" = (/obj/structure/table,/obj/machinery/computer/pod/old/syndicate{id = "smindicate"},/obj/machinery/door/window{dir = 4; name = "Blast Door Control"; req_access_txt = "150"},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "pK" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 4},/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
