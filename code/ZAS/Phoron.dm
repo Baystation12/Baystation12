@@ -47,17 +47,21 @@ obj/var/contaminated = 0
 	else if(istype(src,/obj/item/weapon/storage/backpack)) return 0 //Cannot be washed :(
 	else if(istype(src,/obj/item/clothing)) return 1
 
+
 /obj/item/proc/contaminate()
 	//Do a contamination overlay? Temporary measure to keep contamination less deadly than it was.
 	if(!contaminated)
 		contaminated = 1
 		overlays += contamination_overlay
 
+
 /obj/item/proc/decontaminate()
 	contaminated = 0
 	overlays -= contamination_overlay
 
+
 /mob/proc/contaminate()
+
 
 /mob/living/carbon/human/contaminate()
 	//See if anything can be contaminated.
@@ -72,7 +76,9 @@ obj/var/contaminated = 0
 //	if(istype(back,/obj/item/weapon/storage/backpack))
 //		back.contaminate()
 
+
 /mob/proc/pl_effects()
+
 
 /mob/living/carbon/human/pl_effects()
 	//Handles all the bad things phoron can do.
@@ -129,6 +135,7 @@ obj/var/contaminated = 0
 			src << "\red You are blinded!"
 			eye_blind += 20
 
+
 /mob/living/carbon/human/proc/pl_head_protected()
 	//Checks if the head is adequately sealed.
 	if(head)
@@ -139,6 +146,7 @@ obj/var/contaminated = 0
 			return 1
 	return 0
 
+
 /mob/living/carbon/human/proc/pl_suit_protected()
 	//Checks if the suit is adequately sealed.
 	if(wear_suit)
@@ -148,6 +156,7 @@ obj/var/contaminated = 0
 			if(wear_suit.flags_inv & HIDEJUMPSUIT) return 1
 		//should check HIDETAIL as well, but for the moment tails are not a part that can be damaged separately
 	return 0
+
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
