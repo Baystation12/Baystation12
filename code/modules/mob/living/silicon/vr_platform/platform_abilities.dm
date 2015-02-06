@@ -1,4 +1,4 @@
-/mob/living/silicon/platform/verb/activate( var/mob/living/M )
+/mob/living/silicon/platform/proc/activate( var/mob/living/M )
 	active = 1
 	user_body = M
 	M.mind.transfer_to(src)

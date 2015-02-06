@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\WorkInProgress\computer3\computers\robot.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug.dm;code\modules\mob\living\silicon\pai\pai.dm;code\modules\mob\living\silicon\vr_platform\vr_helmet.dm
+WINDOW: code\WorkInProgress\computer3\computers\robot.dm;code\modules\mob\living\silicon\silicon.dm;code\modules\mob\living\silicon\vr_platform\spy-bug\spybug.dm;code\modules\mob\living\silicon\pai\pai.dm;code\modules\mob\living\silicon\vr_platform\vr_helmet.dm;code\modules\mob\living\silicon\vr_platform\platform_abilities.dm
 LAST_COMPILE_VERSION: 506.1249
 DIR: code code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\game\dna code\game\dna\genes code\game\gamemodes\autotraitor code\game\gamemodes\changeling code\game\gamemodes\events code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\pai code\modules\mob\living\silicon\vr_platform code\modules\mob\living\silicon\vr_platform\spy-bug code\WorkInProgress code\WorkInProgress\computer3 code\WorkInProgress\computer3\computers 
 FILE: code\modules\mob\living\silicon\vr_platform\vr_helmet.dm
-LAST_COMPILE_TIME: 1423243733
+LAST_COMPILE_TIME: 1423246387
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
