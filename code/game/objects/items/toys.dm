@@ -88,7 +88,7 @@
 		item_state = "balloon-empty"
 
 /obj/item/toy/syndicateballoon
-	name = "syndicate balloon"
+	name = "criminal balloon"
 	desc = "There is a tag on the back that reads \"FUK NT!11!\"."
 	throwforce = 0
 	throw_speed = 4
@@ -113,7 +113,7 @@
  * Fake singularity
  */
 /obj/item/toy/spinningtoy
-	name = "Gravitational Singularity"
+	name = "gravitational singularity"
 	desc = "\"Singulo\" brand spinning toy."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
@@ -127,7 +127,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "revolver"
 	item_state = "gun"
-	flags =  FPRINT | TABLEPASS | CONDUCT
+	flags =  CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 3.0
 
@@ -136,11 +136,9 @@
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
 
-	examine()
-		set src in usr
-
-		src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
-		..()
+	examine(mob/user)
+		if(..(user, 0))
+			src.desc = text("There are [] caps\s left. Looks almost like the real thing! Ages 8 and up.", src.bullets)
 		return
 
 	attackby(obj/item/toy/ammo/gun/A as obj, mob/user as mob)
@@ -185,7 +183,7 @@
 	desc = "There are 7 caps left! Make sure to recyle the box in an autolathe when it gets empty."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "357-7"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = CONDUCT
 	w_class = 1.0
 
 	matter = list("metal" = 10,"glass" = 10)
@@ -207,16 +205,13 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow"
-	flags = FPRINT | TABLEPASS
 	w_class = 2.0
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
-	examine()
-		set src in view(2)
-		..()
-		if (bullets)
-			usr << "\blue It is loaded with [bullets] foam darts!"
+	examine(mob/user)
+		if(..(user, 2) && bullets)
+			user << "\blue It is loaded with [bullets] foam darts!"
 
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -303,7 +298,6 @@
 	desc = "It's nerf or nothing! Ages 8 and up."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
-	flags = FPRINT | TABLEPASS
 	w_class = 1.0
 
 /obj/effect/foam_dart_dummy
@@ -326,7 +320,7 @@
 	item_state = "sword0"
 	var/active = 0.0
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | NOSHIELD
+	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)
@@ -358,7 +352,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "katana"
 	item_state = "katana"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
@@ -424,7 +418,7 @@
  * Water flower
  */
 /obj/item/toy/waterflower
-	name = "Water Flower"
+	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
 	icon = 'icons/obj/harvest.dmi'
 	icon_state = "sunflower"
@@ -484,11 +478,9 @@
 
 		return
 
-/obj/item/toy/waterflower/examine()
-        set src in usr
-        usr << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
-        ..()
-        return
+/obj/item/toy/waterflower/examine(mob/user)
+	if(..(user, 0))
+		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
 
 
 /*
@@ -576,7 +568,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "katana"
 	item_state = "katana"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
@@ -649,6 +641,5 @@
 	desc = "No bother to sink or swim when you can just float!"
 	icon_state = "inflatable"
 	item_state = "inflatable"
-	flags = FPRINT | TABLEPASS
 	icon = 'icons/obj/clothing/belts.dmi'
 	slot_flags = SLOT_BELT

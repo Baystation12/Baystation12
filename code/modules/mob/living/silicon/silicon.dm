@@ -3,7 +3,14 @@
 	voice_name = "synthesized voice"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
-	immune_to_ssd = 1
+	var/list/additional_law_channels = list("State")
+	var/const/MAIN_CHANNEL = "Main Frequency"
+	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
+	var/list/stating_laws = list()// Channels laws are currently being stated on
+	var/lawcheck[1]
+	var/ioncheck[1]
+	var/obj/item/device/radio/common_radio
+
 	var/list/hud_list[9]
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
@@ -117,7 +124,7 @@
 	return 0
 
 
-// this function shows the health of the pAI in the Status panel
+// this function shows the health of the AI in the Status panel
 /mob/living/silicon/proc/show_system_integrity()
 	if(!src.stat)
 		stat(null, text("System integrity: [round((health/maxHealth)*100)]%"))
@@ -195,7 +202,8 @@
 	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
 
 	for(var/datum/language/L in languages)
-		dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
+		if(!(L.flags & NONGLOBAL))
+			dat += "<b>[L.name] (:[L.key])</b><br/>Speech Synthesizer: <i>[(L in speech_synthesizer_langs)? "YES":"NOT SUPPORTED"]</i><br/>[L.desc]<br/><br/>"
 
 	src << browse(dat, "window=checklanguage")
 	return
@@ -218,17 +226,37 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  copytext(sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text), 1, MAX_MESSAGE_LEN)
+	pose =  sanitize(copytext(input(usr, "This is [src]. It is...", "Pose", null)  as text, 1, MAX_MESSAGE_LEN))
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"
 
-	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
+	flavor_text =  sanitize(copytext(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text, 1))
 
 /mob/living/silicon/binarycheck()
 	return 1
+
+/mob/living/silicon/Topic(href, href_list)
+	..()
+
+	if (href_list["lawr"]) // Selects on which channel to state laws
+		var/list/channels = list(MAIN_CHANNEL)
+		if(common_radio)
+			for (var/ch_name in common_radio.channels)
+				channels += ch_name
+
+		channels += additional_law_channels
+		channels += "Cancel"
+
+		var/setchannel = input(usr, "Specify channel.", "Channel selection") in channels
+		if(setchannel != "Cancel")
+			lawchannel = setchannel
+			checklaws()
+		return 1
+
+	return 0
 
 /mob/living/silicon/ex_act(severity)
 	if(!blinded)

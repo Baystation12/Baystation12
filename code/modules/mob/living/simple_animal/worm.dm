@@ -57,7 +57,7 @@
 
 		melee_damage_lower = 10
 		melee_damage_upper = 15
-		attacktext = "bites"
+		attacktext = "bitten"
 
 		animate_movement = SLIDE_STEPS
 
@@ -75,7 +75,7 @@
 			if(stat == CONSCIOUS || stat == UNCONSCIOUS)
 				icon_state = "spacewormhead[previous?1:0]"
 				if(previous)
-					dir = get_dir(previous,src)
+					set_dir(get_dir(previous,src))
 			else
 				icon_state = "spacewormheaddead"
 
@@ -129,7 +129,7 @@
 				icon_state = "spaceworm[get_dir(src,previous) | get_dir(src,next)]" //see 3 lines below
 			else //tail
 				icon_state = "spacewormtail"
-				dir = get_dir(src,next) //next will always be present since it's not a head and if it's dead, it goes in the other if branch
+				set_dir(get_dir(src,next)) //next will always be present since it's not a head and if it's dead, it goes in the other if branch
 		else
 			icon_state = "spacewormdead"
 

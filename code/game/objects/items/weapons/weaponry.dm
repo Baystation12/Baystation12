@@ -1,9 +1,8 @@
 /obj/item/weapon/banhammer
-	desc = "A banhammer"
+	desc = "banhammer"
 	name = "banhammer"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "toyhammer"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	throwforce = 0
 	w_class = 2.0
@@ -20,7 +19,6 @@
 	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of paranormal phenomenae."
 	icon_state = "nullrod"
 	item_state = "nullrod"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	force = 15
 	throw_speed = 1
@@ -77,7 +75,6 @@
 	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
 	icon_state = "sord"
 	item_state = "sord"
-	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
@@ -99,7 +96,7 @@
 	desc = "What are you standing around staring at this for? Get to killing!"
 	icon_state = "claymore"
 	item_state = "claymore"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
@@ -124,7 +121,7 @@
 	desc = "Woefully underpowered in D20"
 	icon_state = "katana"
 	item_state = "katana"
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 40
 	throwforce = 10
@@ -294,3 +291,192 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 		del(src)
 		update_icon(user)
 	update_icon(user)
+
+/obj/item/weapon/star
+	name = "shuriken"
+	desc = "A sharp, perfectly weighted piece of metal."
+	icon_state = "star"
+	force = 5
+	throw_speed = 10
+	throwforce =  15
+	throw_range = 15
+	sharp = 1
+	edge =  1
+	matter = list("metal" = 500)
+
+	var/poisoned = 0
+
+/obj/item/weapon/star/New()
+	..()
+	src.pixel_x = rand(-12, 12)
+	src.pixel_y = rand(-12, 12)
+
+//TODO: consider making this something done with reagents.
+/obj/item/weapon/star/throw_impact(atom/hit_atom)
+	..()
+	if(poisoned && istype(hit_atom,/mob/living))
+		var/mob/living/M = hit_atom
+		M.adjustToxLoss(rand(20,40))
+		poisoned = 0
+		color = null
+
+/obj/item/weapon/star/ninja
+	color = "#007700"
+	poisoned = 1
+
+/obj/item/weapon/energy_net
+	name = "energy net"
+	desc = "It's a net made of green energy."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "energynet"
+	throwforce = 0
+	force = 0
+	var/net_type = /obj/effect/energy_net
+
+/obj/item/weapon/energy_net/dropped()
+	spawn(10)
+		if(src) del(src)
+
+/obj/item/weapon/energy_net/throw_impact(atom/hit_atom)
+	..()
+
+	var/mob/living/M = hit_atom
+
+	if(!istype(M) || locate(/obj/effect/energy_net) in M.loc)
+		del(src)
+		return 0
+
+	var/turf/T = get_turf(M)
+	if(T)
+		var/obj/effect/energy_net/net = new net_type(T)
+		net.layer = M.layer+1
+		M.captured = 1
+		net.affecting = M
+		T.visible_message("[M] was caught in an energy net!")
+		del(src)
+
+	// If we miss or hit an obstacle, we still want to delete the net.
+	spawn(10)
+		if(src) del(src)
+
+/obj/effect/energy_net
+	name = "energy net"
+	desc = "It's a net made of green energy."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "energynet"
+
+	density = 1
+	opacity = 0
+	mouse_opacity = 1
+	anchored = 1
+
+	var/health = 25
+	var/mob/living/affecting = null //Who it is currently affecting, if anyone.
+	var/mob/living/master = null    //Who shot web. Will let this person know if the net was successful.
+	var/countdown = -1
+
+/obj/effect/energy_net/teleport
+	countdown = 60
+
+/obj/effect/energy_net/New()
+	..()
+	processing_objects |= src
+
+/obj/effect/energy_net/Del()
+
+	if(affecting)
+		var/mob/living/carbon/M = affecting
+		M.anchored = initial(affecting.anchored)
+		M.captured = 0
+		M << "You are free of the net!"
+
+	processing_objects -= src
+	..()
+
+/obj/effect/energy_net/proc/healthcheck()
+
+	if(health <=0)
+		density = 0
+		src.visible_message("The energy net is torn apart!")
+		del(src)
+	return
+
+/obj/effect/energy_net/process()
+
+	if(isnull(affecting) || affecting.loc != loc)
+		del(src)
+		return
+
+	// Countdown begin set to -1 will stop the teleporter from firing.
+	// Clientless mobs can be netted but they will not teleport or decrement the timer.
+	var/mob/living/M = affecting
+	if(countdown == -1 || (istype(M) && !M.client))
+		return
+
+	if(countdown > 0)
+		countdown--
+		return
+
+	// TODO: consider removing or altering this; energy nets are useful on their own
+	// merits and the teleportation was never properly implemented; it's halfassed.
+	density = 0
+	invisibility = 101 //Make the net invisible so all the animations can play out.
+	health = INFINITY  //Make the net invincible so that an explosion/something else won't kill it during anims.
+
+	playsound(affecting.loc, 'sound/effects/sparks4.ogg', 50, 1)
+	anim(affecting.loc,affecting,'icons/mob/mob.dmi',,"phaseout",,affecting.dir)
+
+	affecting.visible_message("[affecting] vanishes in a flare of light!")
+
+	if(holdingfacility.len)
+		affecting.loc = pick(holdingfacility)
+
+	affecting << "You appear in a strange place!"
+
+	playsound(affecting.loc, 'sound/effects/phasein.ogg', 25, 1)
+	playsound(affecting.loc, 'sound/effects/sparks2.ogg', 50, 1)
+	anim(affecting.loc,affecting,'icons/mob/mob.dmi',,"phasein",,affecting.dir)
+
+	del(src)
+
+/obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
+	health -= Proj.damage
+	healthcheck()
+	return 0
+
+/obj/effect/energy_net/ex_act()
+	health = 0
+	healthcheck()
+
+/obj/effect/energy_net/blob_act()
+	health = 0
+	healthcheck()
+
+/obj/effect/energy_net/meteorhit()
+	health = 0
+	healthcheck()
+
+/obj/effect/energy_net/attack_hand(var/mob/user)
+
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		if(H.species.can_shred(H))
+			playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
+			health -= rand(10, 20)
+		else
+			health -= rand(1,3)
+
+	else if (HULK in user.mutations)
+		health = 0
+	else
+		health -= rand(5,8)
+
+	H << "<span class='danger'>You claw at the energy net.</span>"
+
+	healthcheck()
+	return
+
+/obj/effect/energy_net/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	health -= W.force
+	healthcheck()
+	..()

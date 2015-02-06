@@ -37,7 +37,7 @@ obj/machinery/atmospherics/mains_pipe
 	layer = 2.4 //under wires with their 2.5
 
 	force = 20
-	
+
 	var/volume = 0
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
@@ -137,9 +137,9 @@ obj/machinery/atmospherics/mains_pipe/simple
 
 	proc/normalize_dir()
 		if(dir==3)
-			dir = 1
+			set_dir(1)
 		else if(dir==12)
-			dir = 4
+			set_dir(4)
 
 	update_icon()
 		if(nodes[1] && nodes[2])
@@ -148,7 +148,7 @@ obj/machinery/atmospherics/mains_pipe/simple
 			//var/node1_direction = get_dir(src, node1)
 			//var/node2_direction = get_dir(src, node2)
 
-			//dir = node1_direction|node2_direction
+			//set_dir(node1_direction|node2_direction)
 
 		else
 			if(!nodes[1]&&!nodes[2])
@@ -597,9 +597,9 @@ obj/machinery/atmospherics/mains_pipe/valve
 
 	proc/normalize_dir()
 		if(dir==3)
-			dir = 1
+			set_dir(1)
 		else if(dir==12)
-			dir = 4
+			set_dir(4)
 
 	proc/open()
 		if(open) return 0

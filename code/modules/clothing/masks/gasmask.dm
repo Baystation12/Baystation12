@@ -1,8 +1,8 @@
 /obj/item/clothing/mask/gas
 	name = "gas mask"
 	desc = "A face-covering mask that can be connected to an air supply. Filters harmful gases from the air."
-	icon_state = "gas_mask"
-	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
+	icon_state = "gas_alt"
+	flags = MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = FACE|EYES
 	w_class = 2.0
@@ -12,6 +12,7 @@
 	siemens_coefficient = 0.9
 	var/gas_filter_strength = 1			//For gas mask filters
 	var/list/filtered_gases = list("phoron", "sleeping_agent")
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 75, rad = 0)
 
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
 	var/datum/gas_mixture/filtered = new
@@ -32,7 +33,7 @@
 	desc = "A modernised version of the classic design, this mask will not only filter out phoron but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
-	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 75, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
 	body_parts_covered = HEAD|FACE
 
 /obj/item/clothing/mask/gas/swat
@@ -43,26 +44,10 @@
 	body_parts_covered = FACE|EYES
 
 /obj/item/clothing/mask/gas/syndicate
-	name = "syndicate mask"
+	name = "tactical mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	siemens_coefficient = 0.7
-
-/obj/item/clothing/mask/gas/voice
-	name = "gas mask"
-	//desc = "A face-covering mask that can be connected to an air supply. It seems to house some odd electronics."
-	var/mode = 0// 0==Scouter | 1==Night Vision | 2==Thermal | 3==Meson
-	var/voice = "Unknown"
-	var/vchange = 0//This didn't do anything before. It now checks if the mask has special functions/N
-	origin_tech = "syndicate=4"
-
-/obj/item/clothing/mask/gas/voice/space_ninja
-	name = "ninja mask"
-	desc = "A close-fitting mask that acts both as an air filter and a post-modern fashion statement."
-	icon_state = "s-ninja"
-	item_state = "s-ninja_mask"
-	vchange = 1
-	siemens_coefficient = 0.2
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"

@@ -119,7 +119,7 @@
 				if(istype(AM, /obj/structure/window) || istype(AM, /obj/structure/grille))
 					if(nutrition <= get_hunger_nutrition() && !Atkcool)
 						if (is_adult || prob(5))
-							AM.attack_slime(src)
+							UnarmedAttack(AM)
 							spawn()
 								Atkcool = 1
 								sleep(45)
@@ -254,84 +254,7 @@
 		updatehealth()
 	return
 
-/mob/living/carbon/slime/attack_slime(mob/living/carbon/slime/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (Victim) return // can't attack while eating!
-
-	if (health > -100)
-
-		visible_message("<span class='danger'> The [M.name] has glomped [src]!</span>", \
-				"<span class='userdanger'> The [M.name] has glomped [src]!</span>")
-		var/damage = rand(1, 3)
-		attacked += 5
-
-		if(M.is_adult)
-			damage = rand(1, 6)
-		else
-			damage = rand(1, 3)
-
-		adjustBruteLoss(damage)
-
-		updatehealth()
-	return
-
-/mob/living/carbon/slime/attack_animal(mob/living/M as mob)
-	if(M.melee_damage_upper == 0)
-		M.emote("[M.friendly] [src]")
-	else
-		if(M.attack_sound)
-			playsound(loc, M.attack_sound, 50, 1, 1)
-		visible_message("<span class='danger'>[M] [M.attacktext] [src]!</span>", \
-				"<span class='userdanger'>[M] [M.attacktext] [src]!</span>")
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
-		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
-		attacked += 10
-		adjustBruteLoss(damage)
-		updatehealth()
-
-/mob/living/carbon/slime/attack_paw(mob/living/carbon/monkey/M as mob)
-	if(!(istype(M, /mob/living/carbon/monkey)))
-		return // Fix for aliens receiving double messages when attacking other aliens.
-
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
-	..()
-
-	switch(M.a_intent)
-
-		if ("help")
-			help_shake_act(M)
-		else
-			if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
-				return
-			if (health > 0)
-				attacked += 10
-				//playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
-				visible_message("<span class='danger'>[M.name] has attacked [src]!</span>", \
-						"<span class='userdanger'>[M.name] has attacked [src]!</span>")
-				adjustBruteLoss(rand(1, 3))
-				updatehealth()
-	return
-
-
 /mob/living/carbon/slime/attack_hand(mob/living/carbon/human/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (istype(loc, /turf) && istype(loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
 
 	..()
 
@@ -387,18 +310,6 @@
 				step_away(src,M)
 
 			return
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.use(2500)
-					visible_message("<span class='warning'>[src] has been touched with the stun gloves by [M]!</span>")
-					return
-				else
-					M << "\red Not enough charge! "
-					return
 
 	switch(M.a_intent)
 
@@ -684,7 +595,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 		pet.colour = "[M.colour]"
 		user <<"You feed the slime the potion, removing it's powers and calming it."
 		del(M)
-		var/newname = copytext(sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text),1,MAX_NAME_LEN)
+		var/newname = sanitize(copytext(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text,1,MAX_NAME_LEN))
 
 		if (!newname)
 			newname = "pet slime"
@@ -715,7 +626,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 		pet.colour = "[M.colour]"
 		user <<"You feed the slime the potion, removing it's powers and calming it."
 		del(M)
-		var/newname = copytext(sanitize(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text),1,MAX_NAME_LEN)
+		var/newname = sanitize(copytext(input(user, "Would you like to give the slime a name?", "Name your new pet", "pet slime") as null|text,1,MAX_NAME_LEN))
 
 		if (!newname)
 			newname = "pet slime"
@@ -767,90 +678,6 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 			target.enahnced = 1
 			del(src)*/
 
-////////Adamantine Golem stuff I dunno where else to put it
-
-// This will eventually be removed.
-
-/obj/item/clothing/under/golem
-	name = "adamantine skin"
-	desc = "a golem's skin"
-	icon_state = "golem"
-	item_state = "golem"
-	item_color = "golem"
-	has_sensor = 0
-	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	canremove = 0
-
-/obj/item/clothing/suit/golem
-	name = "adamantine shell"
-	desc = "a golem's thick outter shell"
-	icon_state = "golem"
-	item_state = "golem"
-	w_class = 4//bulky item
-	gas_transfer_coefficient = 0.90
-	permeability_coefficient = 0.50
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS|HEAD
-	slowdown = 1.0
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL | STOPSPRESSUREDMAGE
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS | HEAD
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS | HEAD
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	canremove = 0
-	armor = list(melee = 80, bullet = 20, laser = 20, energy = 10, bomb = 0, bio = 0, rad = 0)
-
-/obj/item/clothing/shoes/golem
-	name = "golem's feet"
-	desc = "sturdy adamantine feet"
-	icon_state = "golem"
-	item_state = null
-	canremove = 0
-	flags = NOSLIP
-	slowdown = SHOES_SLOWDOWN+1
-
-
-/obj/item/clothing/mask/gas/golem
-	name = "golem's face"
-	desc = "the imposing face of an adamantine golem"
-	icon_state = "golem"
-	item_state = "golem"
-	canremove = 0
-	siemens_coefficient = 0
-	unacidable = 1
-
-/obj/item/clothing/mask/gas/golem
-	name = "golem's face"
-	desc = "the imposing face of an adamantine golem"
-	icon_state = "golem"
-	item_state = "golem"
-	canremove = 0
-	siemens_coefficient = 0
-	unacidable = 1
-
-
-/obj/item/clothing/gloves/golem
-	name = "golem's hands"
-	desc = "strong adamantine hands"
-	icon_state = "golem"
-	item_state = null
-	siemens_coefficient = 0
-	canremove = 0
-
-
-/obj/item/clothing/head/space/golem
-	icon_state = "golem"
-	item_state = "dermal"
-	item_color = "dermal"
-	name = "golem's head"
-	desc = "a golem's head"
-	canremove = 0
-	unacidable = 1
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
-	heat_protection = HEAD
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 80, bullet = 20, laser = 20, energy = 10, bomb = 0, bio = 0, rad = 0)
-
 /obj/effect/golemrune
 	anchored = 1
 	desc = "a strange rune used to create golems. It glows when spirits are nearby."
@@ -886,16 +713,8 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 		if(!ghost)
 			user << "The rune fizzles uselessly. There is no spirit nearby."
 			return
-		var/mob/living/carbon/human/G = new /mob/living/carbon/human
-		G.dna.mutantrace = "adamantine"
-		G.real_name = text("Adamantine Golem ([rand(1, 1000)])")
-		G.equip_to_slot_or_del(new /obj/item/clothing/under/golem(G), slot_w_uniform)
-		G.equip_to_slot_or_del(new /obj/item/clothing/suit/golem(G), slot_wear_suit)
-		G.equip_to_slot_or_del(new /obj/item/clothing/shoes/golem(G), slot_shoes)
-		G.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/golem(G), slot_wear_mask)
-		G.equip_to_slot_or_del(new /obj/item/clothing/gloves/golem(G), slot_gloves)
-		//G.equip_to_slot_or_del(new /obj/item/clothing/head/space/golem(G), slot_head)
-		G.loc = src.loc
+		var/mob/living/carbon/human/G = new(src.loc)
+		G.set_species("Golem")
 		G.key = ghost.key
 		G << "You are an adamantine golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools. Serve [user], and assist them in completing their goals at any cost."
 		del (src)

@@ -6,8 +6,8 @@ var/global/list/uneatable = list(
 	)
 
 /obj/machinery/singularity/
-	name = "Gravitational Singularity"
-	desc = "A Gravitational Singularity."
+	name = "gravitational singularity"
+	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 	anchored = 1
@@ -42,7 +42,7 @@ var/global/list/uneatable = list(
 		spawn(temp)
 			del(src)
 	..()
-	for(var/obj/machinery/singularity_beacon/singubeacon in machines)
+	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break

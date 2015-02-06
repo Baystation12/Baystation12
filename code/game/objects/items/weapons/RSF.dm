@@ -14,13 +14,11 @@ RSF
 	anchored = 0.0
 	var/stored_matter = 30
 	var/mode = 1
-	flags = TABLEPASS
 	w_class = 3.0
 
-/obj/item/weapon/rsf/examine()
-	set src in view(1)
-	..()
-	usr << "It currently holds [stored_matter]/30 fabrication-units."
+/obj/item/weapon/rsf/examine(mob/user)
+	if(..(user, 0))
+		user << "It currently holds [stored_matter]/30 fabrication-units."
 
 /obj/item/weapon/rsf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()

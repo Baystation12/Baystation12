@@ -9,9 +9,6 @@
 	set_temperature = 20		// in celcius, add T0C for kelvin
 	var/cooling_power = 80000
 
-	flags = FPRINT
-
-
 /obj/machinery/space_heater/space_cooler/New()
 	..()
 	cell = new(src)

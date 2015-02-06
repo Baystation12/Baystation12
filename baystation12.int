@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm
+WINDOW: code\modules\admin\verbs\randomverbs.dm;code\modules\admin\admin_verbs.dm;maps\exodus-1.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\modules code\modules\paperwork code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food maps 
-FILE: maps\tgstation2.dmm
+DIR: maps 
+FILE: maps\exodus-1.dmm
 LAST_COMPILE_TIME: 1422897545
 AUTO_FILE_DIR: OFF
 */

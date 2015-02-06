@@ -139,36 +139,4 @@
 	var/turf/simulated/wall/wall = src
 	wall.icon_state = "[wall.walltype][junction]"
 
-/*
-	if(wall.walltype == "grwall" || wall.walltype == "gwall")
-		var/jun2 = 0
-		junction = 0 //will be used to determine from which side the wall is connected to other walls
-
-		for(var/turf/simulated/wall/W in orange(src,1))
-			if(abs(src.x-W.x)-abs(src.y-W.y)) //doesn't count diagonal walls
-				if(src.mineral == W.mineral)//Only 'like' walls connect -Sieve
-					if(get_dir(src,W) != 2)
-						junction |= get_dir(src,W)
-
-		for(var/turf/simulated/wall/W in orange(src,1))
-			if(abs(src.x-W.x)-abs(src.y-W.y)) //doesn't count diagonal walls
-				if(W.walltype == "grwall" || W.walltype == "gwall")
-					if(get_dir(src,W) != 2)
-						jun2 |= get_dir(src,W)
-
-
-		if(jun2 != junction)
-			if(junction == 1)
-				wall.icon_state = "[wall.walltype]_spec_3"
-			else
-				switch(junction)
-					if(2)	wall.icon_state="[wall.walltype]_spec_2"
-					if(3)	wall.icon_state="[wall.walltype]_spec_3"
-					if(6)	wall.icon_state="[wall.walltype]_spec_6"
-					if(7)	wall.icon_state="[wall.walltype]_spec_7"
-					if(10)	wall.icon_state="[wall.walltype]_spec_10"
-					if(11)	wall.icon_state="[wall.walltype]_spec_11"
-					if(14)	wall.icon_state="[wall.walltype]_spec_14"
-					if(15)	wall.icon_state="[wall.walltype]_spec_15"
-	*/
 	return

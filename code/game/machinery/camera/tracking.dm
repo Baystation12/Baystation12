@@ -15,15 +15,11 @@
 	if(src.stat == 2)
 		return
 
-	var/list/L = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		L.Add(C)
-
-	camera_sort(L)
+	cameranet.process_sort()
 
 	var/list/T = list()
 	T["Cancel"] = "Cancel"
-	for (var/obj/machinery/camera/C in L)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (tempnetwork.len)
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
@@ -54,7 +50,7 @@
 	set name = "Store Camera Location"
 	set desc = "Stores your current camera location by the given name"
 
-	loc = copytext(sanitize(loc), 1, MAX_MESSAGE_LEN)
+	loc = sanitize(copytext(loc, 1, MAX_MESSAGE_LEN))
 	if(!loc)
 		src << "\red Must supply a location name"
 		return
@@ -136,8 +132,10 @@
 			//Cameras can't track people wearing an agent card or a ninja hood.
 			if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
 				continue
-			if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-				continue
+			if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
+				var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
+				if(helmet.prevent_track())
+					continue
 
 		 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 		if(!near_camera(M))
@@ -186,9 +184,6 @@
 	var/mob/living/silicon/ai/U = usr
 
 	U.cameraFollow = target
-	//U << text("Now tracking [] on camera.", target.name)
-	//if (U.machine == null)
-	//	U.machine = U
 	U << "Now tracking [target.name] on camera."
 
 	spawn (0)
@@ -200,9 +195,11 @@
 				if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
 					U.ai_cancel_tracking(1)
 					return
-				if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-					U.ai_cancel_tracking(1)
-					return
+				if(istype(H.head, /obj/item/clothing/head/helmet/space/rig))
+					var/obj/item/clothing/head/helmet/space/rig/helmet = H.head
+					if(helmet.prevent_track())
+						U.ai_cancel_tracking(1)
+						return
 				if(H.digitalcamo)
 					U.ai_cancel_tracking(1)
 					return
@@ -211,7 +208,7 @@
 				U.ai_cancel_tracking()
 				return
 
-			if (!near_camera(target))
+			if (!trackable(target))
 				U << "Target is not near any active cameras."
 				sleep(100)
 				continue
@@ -234,6 +231,13 @@
 		return 0
 	return 1
 
+/proc/trackable(var/mob/living/M)
+	var/turf/T = get_turf(M)
+	if(T && (T.z in config.station_levels) && hassensorlevel(M, SUIT_SENSOR_TRACKING))
+		return 1
+
+	return near_camera(M)
+
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
 		return
@@ -244,19 +248,3 @@
 
 /mob/living/silicon/ai/attack_ai(var/mob/user as mob)
 	ai_camera_list()
-
-/proc/camera_sort(list/L)
-	var/obj/machinery/camera/a
-	var/obj/machinery/camera/b
-
-	for (var/i = L.len, i > 0, i--)
-		for (var/j = 1 to i - 1)
-			a = L[j]
-			b = L[j + 1]
-			if (a.c_tag_order != b.c_tag_order)
-				if (a.c_tag_order > b.c_tag_order)
-					L.Swap(j, j + 1)
-			else
-				if (sorttext(a.c_tag, b.c_tag) < 0)
-					L.Swap(j, j + 1)
-	return L

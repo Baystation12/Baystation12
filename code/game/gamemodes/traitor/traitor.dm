@@ -23,10 +23,6 @@
 
 
 /datum/game_mode/traitor/announce()
-/*
-	world << "<B>The current game mode is - Traitor!</B>"
-	world << "<B>There is a syndicate traitor on the station. Do not let the traitor succeed!</B>"
-*/
 	world << "<B>The current game mode is - Hidden!</B>"
 
 /datum/game_mode/traitor/pre_setup()
@@ -153,7 +149,7 @@
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 /datum/game_mode/proc/give_codewords(mob/living/traitor_mob)
-	traitor_mob << "<u><b>The Syndicate provided you with the following information on how to identify their agents:</b></u>"
+	traitor_mob << "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>"
 	traitor_mob << "<b>Code Phrase</b>: <span class='danger'>[syndicate_code_phrase]</span>"
 	traitor_mob << "<b>Code Response</b>: <span class='danger'>[syndicate_code_response]</span>"
 	traitor_mob.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
@@ -182,7 +178,7 @@
 		var/text = "<FONT size = 2><B>The traitors were:</B></FONT>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
-			text += printplayer(traitor)
+			text += print_player_full(traitor)
 
 			if(traitor.objectives.len)//If the traitor had no objectives, don't need to process this.
 				var/count = 1
@@ -275,6 +271,7 @@
 			freq = freqlist[rand(1, freqlist.len)]
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			target_radio.hidden_uplink = T
 			target_radio.traitor_frequency = freq
 			traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
@@ -284,6 +281,7 @@
 			var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Delta","Omega")]"
 
 			var/obj/item/device/uplink/hidden/T = new(R)
+			T.uplink_owner = traitor_mob.mind
 			R.hidden_uplink = T
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass

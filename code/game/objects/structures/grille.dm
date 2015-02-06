@@ -1,11 +1,11 @@
 /obj/structure/grille
-	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
 	name = "grille"
+	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "grille"
 	density = 1
 	anchored = 1
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
 	explosion_resistance = 5
@@ -26,27 +26,17 @@
 /obj/structure/grille/Bumped(atom/user)
 	if(ismob(user)) shock(user, 70)
 
-
-/obj/structure/grille/attack_paw(mob/user as mob)
-	attack_hand(user)
-
 /obj/structure/grille/attack_hand(mob/user as mob)
 
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 
-	var/damage_dealt
+	var/damage_dealt = 1
+	var/attack_message = "kicks"
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
+			attack_message = "mangles"
 			damage_dealt = 5
-			user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
-					 "<span class='warning'>You mangle [src].</span>", \
-					 "You hear twisting metal.")
-
-	if(!damage_dealt)
-		user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='warning'>You kick [src].</span>", \
-						 "You hear twisting metal.")
 
 	if(shock(user, 70))
 		return
@@ -56,35 +46,7 @@
 	else
 		damage_dealt += 1
 
-	health -= damage_dealt
-	healthcheck()
-
-/obj/structure/grille/attack_slime(mob/user as mob)
-	var/mob/living/carbon/slime/S = user
-	if (!S.is_adult)
-		return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] smashes against [src].</span>", \
-						 "<span class='warning'>You smash against [src].</span>", \
-						 "You hear twisting metal.")
-
-	health -= rand(2,3)
-	healthcheck()
-	return
-
-/obj/structure/grille/attack_animal(var/mob/living/simple_animal/M as mob)
-	if(M.melee_damage_upper == 0)	return
-
-	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-	M.visible_message("<span class='warning'>[M] smashes against [src].</span>", \
-					  "<span class='warning'>You smash against [src].</span>", \
-					  "You hear twisting metal.")
-
-	health -= M.melee_damage_upper
-	healthcheck()
-	return
-
+	attack_generic(user,damage_dealt,attack_message)
 
 /obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -109,33 +71,6 @@
 	return 0
 
 /obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/stack/sheet/glass) || istype(W, /obj/item/stack/sheet/glass/cyborg))
-		var/obj/item/stack/sheet/S = W
-		if(S.get_amount() < 2) return ..()
-		user << "<span class='notice'>Inserting glass into the frame...</span>"
-		if (do_after(user,40))
-			if (S.use(2))
-				user << "<span class='notice'>You inserted the glass!!</span>"
-				var/turf/Tsrc = get_turf(src)
-				Tsrc.ChangeTurf(/turf/simulated/wall/g_wall)
-				for(var/turf/simulated/wall/g_wall/X in Tsrc.loc)
-					if(X)	X.add_hiddenprint(usr)
-				del(src)
-		return
-	else if(istype(W, /obj/item/stack/sheet/glass/reinforced) || istype(W, /obj/item/stack/sheet/glass/reinforced/cyborg))
-		var/obj/item/stack/sheet/S = W
-		if(S.get_amount() < 2) return ..()
-		user << "<span class='notice'>Insertingthe reinforced glass into the frame...</span>"
-		if (do_after(user,40))
-			if (S.use(2))
-				user << "<span class='notice'>You inserted the reinforced glass!!</span>"
-				var/turf/Tsrc = get_turf(src)
-				Tsrc.ChangeTurf(/turf/simulated/wall/g_wall/reinforced)
-				for(var/turf/simulated/wall/g_wall/reinforced/X in Tsrc.loc)
-					if(X)	X.add_hiddenprint(usr)
-				del(src)
-		return
-
 	if(iswirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -233,6 +168,8 @@
 	var/obj/structure/cable/C = T.get_cable_node()
 	if(C)
 		if(electrocute_mob(user, C, src))
+			if(C.powernet)
+				C.powernet.trigger_warning()
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -247,3 +184,9 @@
 			health -= 1
 			healthcheck()
 	..()
+
+/obj/structure/grille/attack_generic(var/mob/user, var/damage, var/attack_verb)
+	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	health -= damage
+	spawn(1) healthcheck()
+	return 1

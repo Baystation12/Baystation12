@@ -17,7 +17,8 @@
 	//List of active tile overlays for this gas_mixture.  Updated by check_tile_graphic()
 	var/list/graphic = list()
 
-//Takes a gas string, and the amount of moles to adjust by.  Calls update_values() if update isn't 0.
+
+//Takes a gas string and the amount of moles to adjust by.  Calls update_values() if update isn't 0.
 /datum/gas_mixture/proc/adjust_gas(gasid, moles, update = 1)
 	if(moles == 0)
 		return
@@ -29,6 +30,7 @@
 
 	if(update)
 		update_values()
+
 
 //Same as adjust_gas(), but takes a temperature which is mixed in with the gas.
 /datum/gas_mixture/proc/adjust_gas_temp(gasid, moles, temp, update = 1)
@@ -50,7 +52,8 @@
 	if(update)
 		update_values()
 
-//Variadic version of adjust_gas().  Takes any number of gas and mole pairs, and applies them.
+
+//Variadic version of adjust_gas().  Takes any number of gas and mole pairs and applies them.
 /datum/gas_mixture/proc/adjust_multi()
 	ASSERT(!(args.len % 2))
 
@@ -59,7 +62,8 @@
 
 	update_values()
 
-//Variadic version of adjust_gas_temp().  Takes any number of gas, mole, and temperature tuples, and applies them.
+
+//Variadic version of adjust_gas_temp().  Takes any number of gas, mole and temperature associations and applies them.
 /datum/gas_mixture/proc/adjust_multi_temp()
 	ASSERT(!(args.len % 3))
 
@@ -68,8 +72,10 @@
 
 	update_values()
 
+
 //Merges all the gas from another mixture into this one.  Respects group_multipliers and adjusts temperature correctly.
-/datum/gas_mixture/proc/merge(datum/gas_mixture/giver)
+//Does not modify giver in any way.
+/datum/gas_mixture/proc/merge(const/datum/gas_mixture/giver)
 	if(!giver)
 		return
 
@@ -89,6 +95,24 @@
 
 	update_values()
 
+
+/datum/gas_mixture/proc/equalize(datum/gas_mixture/sharer)
+	for(var/g in sharer.gas)
+		var/comb = gas[g] + sharer.gas[g]
+		comb /= volume + sharer.volume
+		gas[g] = comb * volume
+		sharer.gas[g] = comb * sharer.volume
+
+	var/our_heatcap = heat_capacity()
+	var/share_heatcap = sharer.heat_capacity()
+
+	if(our_heatcap + share_heatcap)
+		temperature = ((temperature * our_heatcap) + (sharer.temperature * share_heatcap)) / (our_heatcap + share_heatcap)
+	sharer.temperature = temperature
+
+	return 1
+
+
 //Returns the heat capacity of the gas mix based on the specific heat of the gases.
 /datum/gas_mixture/proc/heat_capacity()
 	. = 0
@@ -96,11 +120,12 @@
 		. += gas_data.specific_heat[g] * gas[g]
 	. *= group_multiplier
 
+
 //Adds or removes thermal energy. Returns the actual thermal energy change, as in the case of removing energy we can't go below TCMB.
 /datum/gas_mixture/proc/add_thermal_energy(var/thermal_energy)
 	if (total_moles == 0)
 		return 0
-	
+
 	var/heat_capacity = heat_capacity()
 	if (thermal_energy < 0)
 		if (temperature < TCMB)
@@ -114,42 +139,46 @@
 /datum/gas_mixture/proc/get_thermal_energy_change(var/new_temperature)
 	return heat_capacity()*(max(new_temperature, 0) - temperature)
 
+
 //Technically vacuum doesn't have a specific entropy. Just use a really big number (infinity would be ideal) here so that it's easy to add gas to vacuum and hard to take gas out.
 #define SPECIFIC_ENTROPY_VACUUM		150000
+
 
 //Returns the ideal gas specific entropy of the whole mix. This is the entropy per mole of /mixed/ gas.
 /datum/gas_mixture/proc/specific_entropy()
 	if (!gas.len || total_moles == 0)
 		return SPECIFIC_ENTROPY_VACUUM
-	
+
 	. = 0
 	for(var/g in gas)
 		. += gas[g] * specific_entropy_gas(g)
 	. /= total_moles
 
+
 /*
 	It's arguable whether this should even be called entropy anymore. It's more "based on" entropy than actually entropy now.
-	
+
 	Returns the ideal gas specific entropy of a specific gas in the mix. This is the entropy due to that gas per mole of /that/ gas in the mixture, not the entropy due to that gas per mole of gas mixture.
-	
+
 	For the purposes of SS13, the specific entropy is just a number that tells you how hard it is to move gas. You can replace this with whatever you want.
 	Just remember that returning a SMALL number == adding gas to this gas mix is HARD, taking gas away is EASY, and that returning a LARGE number means the opposite (so a vacuum should approach infinity).
 
-	So returning a constant/(partial pressure) would probably do what most players expect. Although the version I have implemented below is a bit more nuanced than simply 1/P in that it scales in a way 
+	So returning a constant/(partial pressure) would probably do what most players expect. Although the version I have implemented below is a bit more nuanced than simply 1/P in that it scales in a way
 	which is bit more realistic (natural log), and returns a fairly accurate entropy around room temperatures and pressures.
 */
 /datum/gas_mixture/proc/specific_entropy_gas(var/gasid)
 	if (!(gasid in gas) || gas[gasid] == 0)
 		return SPECIFIC_ENTROPY_VACUUM	//that gas isn't here
-	
+
 	//group_multiplier gets divided out in volume/gas[gasid] - also, V/(m*T) = R/(partial pressure)
 	var/molar_mass = gas_data.molar_mass[gasid]
 	var/specific_heat = gas_data.specific_heat[gasid]
 	return R_IDEAL_GAS_EQUATION * ( log( (IDEAL_GAS_ENTROPY_CONSTANT*volume/(gas[gasid] * temperature)) * (molar_mass*specific_heat*temperature)**(2/3) + 1 ) +  15 )
-	
+
 	//alternative, simpler equation
 	//var/partial_pressure = gas[gasid] * R_IDEAL_GAS_EQUATION * temperature / volume
 	//return R_IDEAL_GAS_EQUATION * ( log (1 + IDEAL_GAS_ENTROPY_CONSTANT/partial_pressure) + 20 )
+
 
 //Updates the total_moles count and trims any empty gases.
 /datum/gas_mixture/proc/update_values()
@@ -160,11 +189,13 @@
 		else
 			total_moles += gas[g]
 
+
 //Returns the pressure of the gas mix.  Only accurate if there have been no gas modifications since update_values() has been called.
 /datum/gas_mixture/proc/return_pressure()
 	if(volume)
 		return total_moles * R_IDEAL_GAS_EQUATION * temperature / volume
 	return 0
+
 
 //Removes moles from the gas mixture and returns a gas_mixture containing the removed air.
 /datum/gas_mixture/proc/remove(amount)
@@ -183,6 +214,7 @@
 	removed.update_values()
 
 	return removed
+
 
 //Removes a ratio of gas from the mixture and returns a gas_mixture containing the removed air.
 /datum/gas_mixture/proc/remove_ratio(ratio, out_group_multiplier = 1)
@@ -204,6 +236,7 @@
 	removed.update_values()
 
 	return removed
+
 
 //Removes moles from the gas mixture, limited by a given flag.  Returns a gax_mixture containing the removed air.
 /datum/gas_mixture/proc/remove_by_flag(flag, amount)
@@ -228,8 +261,9 @@
 
 	return removed
 
+
 //Copies gas and temperature from another gas_mixture.
-/datum/gas_mixture/proc/copy_from(datum/gas_mixture/sample)
+/datum/gas_mixture/proc/copy_from(const/datum/gas_mixture/sample)
 	gas = sample.gas.Copy()
 	temperature = sample.temperature
 
@@ -237,8 +271,9 @@
 
 	return 1
 
+
 //Checks if we are within acceptable range of another gas_mixture to suspend processing or merge.
-/datum/gas_mixture/proc/compare(datum/gas_mixture/sample)
+/datum/gas_mixture/proc/compare(const/datum/gas_mixture/sample)
 	if(!sample) return 0
 
 	var/list/marked = list()
@@ -264,8 +299,10 @@
 
 	return 1
 
+
 /datum/gas_mixture/proc/react(atom/dump_location)
 	zburn(null)
+
 
 //Rechecks the gas_mixture and adjusts the graphic list if needed.
 //Two lists can be passed by reference if you need know specifically which graphics were added and removed.
@@ -293,6 +330,7 @@
 		graphic -= graphic_remove
 		. = 1
 
+
 //Simpler version of merge(), adjusts gas amounts directly and doesn't account for temperature or group_multiplier.
 /datum/gas_mixture/proc/add(datum/gas_mixture/right_side)
 	for(var/g in right_side.gas)
@@ -300,6 +338,7 @@
 
 	update_values()
 	return 1
+
 
 //Simpler version of remove(), adjusts gas amounts directly and doesn't account for group_multiplier.
 /datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
@@ -309,6 +348,7 @@
 	update_values()
 	return 1
 
+
 //Multiply all gas amounts by a factor.
 /datum/gas_mixture/proc/multiply(factor)
 	for(var/g in gas)
@@ -317,6 +357,7 @@
 	update_values()
 	return 1
 
+
 //Divide all gas amounts by a factor.
 /datum/gas_mixture/proc/divide(factor)
 	for(var/g in gas)
@@ -324,6 +365,7 @@
 
 	update_values()
 	return 1
+
 
 //Shares gas with another gas_mixture based on the amount of connecting tiles and a fixed lookup table.
 /datum/gas_mixture/proc/share_ratio(datum/gas_mixture/other, connecting_tiles, share_size = null, one_way = 0)
@@ -369,19 +411,13 @@
 	update_values()
 	other.update_values()
 
-	if(compare(other)) return 1
-	else return 0
+	return compare(other)
+
 
 //A wrapper around share_ratio for spacing gas at the same rate as if it were going into a large airless room.
 /datum/gas_mixture/proc/share_space(datum/gas_mixture/unsim_air)
-	if(!unsim_air)
-		return 0
+	return share_ratio(unsim_air, unsim_air.group_multiplier, max(1, max(group_multiplier + 3, 1) + unsim_air.group_multiplier), one_way = 1)
 
-	var/old_pressure = return_pressure()
-
-	share_ratio(unsim_air, unsim_air.group_multiplier, max(1, max(group_multiplier + 3, 1) + unsim_air.group_multiplier), one_way = 1)
-
-	return abs(old_pressure - return_pressure())
 
 //Equalizes a list of gas mixtures.  Used for pipe networks.
 /proc/equalize_gases(datum/gas_mixture/list/gases)

@@ -189,6 +189,16 @@ h4 {
     color: #272727;
 }
 
+.caption {
+    font-size: 10px;
+    font-weight: bold;
+	padding: 5px;
+}
+
+.footer {
+	font-size: 10px;
+}
+
 .noticePlaceholder {
     position: relative;
     font-size: 12px;
@@ -412,6 +422,12 @@ div.notice {
     float: left;
 }
 
+.fixedLeftWiderRed {
+    width: 220px;
+    float: left;
+	background: #ee0000;
+}
+
 .floatRight {
     float: right;
 }
@@ -545,4 +561,9 @@ th.misc {
 
 .oxyloss {
     color: blue;
+}
+
+/* 75px width used in power monitoring console buttons */
+.width75btn {
+    width: 75px;
 }

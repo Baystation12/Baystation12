@@ -32,6 +32,8 @@
 	var/list/users_to_open = new
 	var/next_process_time = 0
 
+	var/hatch_open = 0
+
 	power_channel = ENVIRON
 	use_power = 1
 	idle_power_usage = 5
@@ -70,17 +72,14 @@
 	. = ..()
 
 
-/obj/machinery/door/firedoor/examine()
-	set src in view()
-	. = ..()
-
-	if(get_dist(src, usr) > 1 && !isAI(usr))
+/obj/machinery/door/firedoor/examine(mob/user)
+	if(!..(user, 1) && !isAI(user))
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
-		usr << "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
+		user << "<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
 
-	usr << "<b>Sensor readings:</b>"
+	user << "<b>Sensor readings:</b>"
 	for(var/index = 1; index <= tile_info.len; index++)
 		var/o = "&nbsp;&nbsp;"
 		switch(index)
@@ -94,7 +93,7 @@
 				o += "WEST: "
 		if(tile_info[index] == null)
 			o += "<span class='warning'>DATA UNAVAILABLE</span>"
-			usr << o
+			user << o
 			continue
 		var/celsius = convert_k2c(tile_info[index][1])
 		var/pressure = tile_info[index][2]
@@ -105,14 +104,14 @@
 		o += "[celsius]&deg;C</span> "
 		o += "<span style='color:blue'>"
 		o += "[pressure]kPa</span></li>"
-		usr << o
+		user << o
 
 	if(islist(users_to_open) && users_to_open.len)
 		var/users_to_open_string = users_to_open[1]
 		if(users_to_open.len >= 2)
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
-		usr << "These people have opened \the [src] during an alert: [users_to_open_string]."
+		user << "These people have opened \the [src] during an alert: [users_to_open_string]."
 
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(p_open || operating)
@@ -187,21 +186,54 @@
 	add_fingerprint(user)
 	if(operating)
 		return//Already doing something.
-	if(istype(C, /obj/item/weapon/weldingtool))
+	if(istype(C, /obj/item/weapon/weldingtool) && !repairing)
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0, user))
 			blocked = !blocked
 			user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
 			"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
 			"You hear something being welded.")
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			update_icon()
 			return
 
-	if(blocked)
-		user << "<span class='danger'>\The [src] is welded solid!</span>"
+	if(density && istype(C, /obj/item/weapon/screwdriver))
+		hatch_open = !hatch_open
+		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
+									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
+		update_icon()
 		return
 
-	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/melee/energy/blade) || istype(C,/obj/item/weapon/twohanded/fireaxe))
+	if(blocked && istype(C, /obj/item/weapon/crowbar) && !repairing)
+		if(!hatch_open)
+			user << "<span class='danger'>You must open the maintenance hatch first!</span>"
+		else
+			user.visible_message("<span class='danger'>[user] is removing the electronics from \the [src].</span>",
+									"You start to remove the electronics from [src].")
+			if(do_after(user,30))
+				if(blocked && density && hatch_open)
+					playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
+					user.visible_message("<span class='danger'>[user] has removed the electronics from \the [src].</span>",
+										"You have removed the electronics from [src].")
+
+					if (stat & BROKEN)
+						new /obj/item/weapon/circuitboard/broken(src.loc)
+					else
+						new/obj/item/weapon/airalarm_electronics(src.loc)
+
+					var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(src.loc)
+					FA.anchored = 1
+					FA.density = 1
+					FA.wired = 1
+					FA.update_icon()
+					del(src)
+		return
+
+	if(blocked)
+		user << "<span class='danger'>\The [src] is welded shut!</span>"
+		return
+
+	if(istype(C, /obj/item/weapon/crowbar) || istype(C,/obj/item/weapon/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -236,6 +268,8 @@
 				spawn(0)
 					close()
 			return
+		
+	return ..()
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/process()
@@ -300,6 +334,11 @@
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
+	if(hatch_open)
+		hatch_open = 0
+		visible_message("The maintenance hatch of \the [src] closes.")
+		update_icon()
+
 	if(!forced)
 		if(stat & (BROKEN|NOPOWER))
 			return //needs power to open unless it was forced
@@ -324,6 +363,8 @@
 	overlays.Cut()
 	if(density)
 		icon_state = "door_closed"
+		if(hatch_open)
+			overlays += "hatch"
 		if(blocked)
 			overlays += "welded"
 		if(pdiff_alert)

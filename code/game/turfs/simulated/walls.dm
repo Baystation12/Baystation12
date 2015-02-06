@@ -7,11 +7,12 @@
 
 	var/damage = 0
 	var/damage_cap = 100 //Wall will break down to girders if damage reaches this point
+	var/armor = 0.5 // Damage is multiplied by this
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
 
-	var/max_temperature = 4000 //K, walls will take damage if they're next to a fire hotter than this
+	var/max_temperature = 1800 //K, walls will take damage if they're next to a fire hotter than this
 
 	opacity = 1
 	density = 1
@@ -21,6 +22,21 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "metal"
+
+/turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
+
+	// Tasers and stuff? No thanks.
+	if(Proj.damage_type == HALLOSS)
+		return
+
+	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
+	if(istype(Proj, /obj/item/projectile/beam/emitter))
+		Proj.damage /= 4
+
+	take_damage(Proj.damage * armor)
+	return
+
+
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
@@ -32,22 +48,22 @@
 
 //Appearance
 
-/turf/simulated/wall/examine()
-	. = ..()
+/turf/simulated/wall/examine(mob/user)
+	. = ..(user)
 
 	if(!damage)
-		usr << "<span class='notice'>It looks fully intact.</span>"
+		user << "<span class='notice'>It looks fully intact.</span>"
 	else
 		var/dam = damage / damage_cap
 		if(dam <= 0.3)
-			usr << "<span class='warning'>It looks slightly damaged.</span>"
+			user << "<span class='warning'>It looks slightly damaged.</span>"
 		else if(dam <= 0.6)
-			usr << "<span class='warning'>It looks moderately damaged.</span>"
+			user << "<span class='warning'>It looks moderately damaged.</span>"
 		else
-			usr << "<span class='danger'>It looks heavily damaged.</span>"
+			user << "<span class='danger'>It looks heavily damaged.</span>"
 
 	if(rotting)
-		usr << "<span class='warning'>There is fungus growing on [src].</span>"
+		user << "<span class='warning'>There is fungus growing on [src].</span>"
 
 /turf/simulated/wall/proc/update_icon()
 	if(!damage_overlays[1]) //list hasn't been populated
@@ -101,38 +117,12 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		if(max_temperature < 7000)
-			take_damage(rand(1, 5) * (adj_temp / max_temperature))
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - max_temperature)))
+
 	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
-	if(istype(src,/turf/simulated/wall/g_wall))
-		if(!devastated)
-			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-			new /obj/structure/grille( src )
-			new /obj/item/stack/sheet/glass( src )
-			new /obj/item/stack/sheet/glass( src )
-		else
-			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
-			new /obj/item/stack/rods( src )
-			new /obj/item/weapon/shard( src )
-			new /obj/item/weapon/shard( src )
-
-	else if(istype(src,/turf/simulated/wall/g_wall/reinforced))
-		if(!devastated)
-			playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
-			new /obj/structure/grille( src )
-			new /obj/item/stack/sheet/glass/reinforced( src )
-			new /obj/item/stack/sheet/glass/reinforced( src )
-		else
-			playsound(src, pick( '\sound/effects/Glassbr1.ogg', '\sound/effects/Glassbr2.ogg', '\sound/effects/Glassbr3.ogg' ), 80, 1)
-			new /obj/structure/grille( src )
-			new /obj/item/stack/rods( src )
-			new /obj/item/weapon/shard( src )
-			new /obj/item/weapon/shard( src )
-
-
-	else if(istype(src,/turf/simulated/wall/r_wall))
+	if(istype(src,/turf/simulated/wall/r_wall))
 		if(!devastated)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/structure/girder/reinforced(src)
@@ -141,7 +131,6 @@
 			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/sheet/plasteel( src )
-
 	else if(istype(src,/turf/simulated/wall/cult))
 		if(!devastated)
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
@@ -252,65 +241,58 @@
 		ReplaceWithLattice()
 	return 0
 
+/turf/simulated/wall
+	var/hulk_destroy_prob = 40
+	var/hulk_take_damage = 1
+	var/rotting_destroy_touch = 1
+	var/rotting_touch_message = "\blue The wall crumbles under your touch."
+
 //Interactions
-
-/turf/simulated/wall/attack_paw(mob/user as mob)
-	if ((HULK in user.mutations))
-		if (prob(40))
-			usr << text("\blue You smash through the wall.")
-			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			dismantle_wall(1)
-			return
-		else
-			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
-
-	return src.attack_hand(user)
-
-
-/turf/simulated/wall/attack_animal(mob/living/M as mob)
-	if(M.wall_smash)
-		if (istype(src, /turf/simulated/wall/r_wall) && !rotting)
-			M << text("\blue This wall is far too strong for you to destroy.")
-			return
-		else
-			if (prob(40) || rotting)
-				M << text("\blue You smash through the wall.")
-				dismantle_wall(1)
-				return
-			else
-				M << text("\blue You smash against the wall.")
-				take_damage(rand(25, 75))
-				return
-
-	M << "\blue You push the wall but nothing happens!"
-	return
-
-
 /turf/simulated/wall/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
-		if (prob(40) || rotting)
+		if (prob(hulk_destroy_prob) || rotting)
 			usr << text("\blue You smash through the wall.")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 			dismantle_wall(1)
-			return
+			return 1
 		else
 			usr << text("\blue You punch the wall.")
-			take_damage(rand(25, 75))
-			return
+			if(hulk_take_damage)
+				take_damage(rand(25, 75))
+			return 1
 
 	if(rotting)
-		user << "\blue The wall crumbles under your touch."
-		dismantle_wall()
-		return
+		user << rotting_touch_message
+		if(rotting_destroy_touch)
+			dismantle_wall()
+		return 1
+
+	if(..()) return 1
 
 	user << "\blue You push the wall but nothing happens!"
 	playsound(src, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
-	return
+	return 0
+
+/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+
+	if(!damage || !wallbreaker)
+		user << "You push the wall but nothing happens."
+		return
+
+	if(istype(src,/turf/simulated/wall/r_wall) && !rotting)
+		user << "This wall is far too strong for you to destroy."
+
+	if(rotting || prob(40))
+		user << "You smash through the wall!"
+		spawn(1) dismantle_wall(1)
+	else
+		user << "You smash against the wall."
+		take_damage(rand(25,75))
+	return 1
 
 /turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
+
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return
@@ -378,15 +360,14 @@
 			else if(response == "Dismantle")
 				user << "<span class='notice'>You begin slicing through the outer plating.</span>"
 				playsound(src, 'sound/items/Welder.ogg', 100, 1)
-
-				sleep(100)
-				if( !istype(src, /turf/simulated/wall) || !user || !WT || !WT.isOn() || !T )	return
-
-				if( user.loc == T && user.get_active_hand() == WT )
+				if(!do_after(user,100))
+					return
+				if(WT.isOn())
 					user << "<span class='notice'>You remove the outer plating.</span>"
-					new /obj/item/stack/sheet/metal( src )
-					new /obj/item/stack/sheet/metal( src )
 					dismantle_wall()
+					for(var/mob/O in viewers(user, 5))
+						O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
+					return
 			return
 		else
 			user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
@@ -397,16 +378,17 @@
 		user << "<span class='notice'>You begin slicing through the outer plating.</span>"
 		playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
-		sleep(60)
-		if(mineral == "diamond")//Oh look, it's tougher
-			sleep(60)
-		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+		var/delay = 60
+		if(mineral == "diamond")
+			delay += 60
 
-		if( user.loc == T && user.get_active_hand() == W )
-			user << "<span class='notice'>You remove the outer plating.</span>"
-			dismantle_wall()
-			for(var/mob/O in viewers(user, 5))
-				O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
+		if(!do_after(user,delay))
+			return
+
+		user << "<span class='notice'>You remove the outer plating.</span>"
+		dismantle_wall()
+		for(var/mob/O in viewers(user, 5))
+			O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart.</span>", 2)
 		return
 
 	//DRILLING
@@ -414,16 +396,17 @@
 
 		user << "<span class='notice'>You begin to drill though the wall.</span>"
 
-		sleep(60)
+		var/delay = 60
 		if(mineral == "diamond")
-			sleep(60)
-		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
+			delay += 60
 
-		if( user.loc == T && user.get_active_hand() == W )
-			user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
-			dismantle_wall()
-			for(var/mob/O in viewers(user, 5))
-				O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)
+		if(!do_after(user,delay))
+			return
+
+		user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
+		dismantle_wall()
+		for(var/mob/O in viewers(user, 5))
+			O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)
 		return
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
@@ -482,9 +465,7 @@
 		AH.try_build(src)
 		return
 
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
+	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
 
 	else
