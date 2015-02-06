@@ -1,4 +1,5 @@
 //NEVER USE THIS IT SUX	-PETETHEGOAT
+//THE GOAT WAS RIGHT - RKF
 
 var/global/list/cached_icons = list()
 
@@ -14,7 +15,7 @@ var/global/list/cached_icons = list()
 	possible_transfer_amounts = list(10,20,30,60)
 	volume = 60
 	flags = OPENCONTAINER
-	var/paint_type = ""
+	var/paint_type = "red"
 
 	afterattack(turf/simulated/target, mob/user, proximity)
 		if(!proximity) return
@@ -28,9 +29,7 @@ var/global/list/cached_icons = list()
 			return ..()
 
 	New()
-		if(paint_type == "remover")
-			name = "paint remover bucket"
-		else if(paint_type && lentext(paint_type) > 0)
+		if(paint_type && lentext(paint_type) > 0)
 			name = paint_type + " " + name
 		..()
 		reagents.add_reagent("water", volume*3/5)
@@ -40,11 +39,6 @@ var/global/list/cached_icons = list()
 		else
 			reagents.add_reagent("crayon_dust_[paint_type]", volume/5)
 		reagents.handle_reactions()
-
-	on_reagent_change() //Until we have a generic "paint", this will give new colours to all paints in the can
-		var/mixedcolor = mix_color_from_reagents(reagents.reagent_list)
-		for(var/datum/reagent/paint/P in reagents.reagent_list)
-			P.color = mixedcolor
 
 	red
 		icon_state = "paint_red"

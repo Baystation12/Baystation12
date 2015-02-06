@@ -941,6 +941,7 @@ datum
 					if(istype(T, /turf/simulated))
 						var/turf/simulated/S = T
 						S.dirt = 0
+					T.color = initial(T.color) //paint
 					T.clean_blood()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
