@@ -1,5 +1,5 @@
 //Virtual-Reality Helmet for the spy bug
-/obj/item/clothing/head/helmet/VR
+/obj/item/clothing/head/helmet/virtual
 	name = "virtual reality helmet"
 	desc = "Used to enter virtual reality simulations and uplinks. Has a built-in beta-wave sensor and neural clamp."
 
@@ -7,24 +7,24 @@
 	item_state = "VR-helmet"
 	var/mob/living/user = null
 
-/obj/item/clothing/head/helmet/VR/equipped(mob/M)
+/obj/item/clothing/head/helmet/virtual/equipped(mob/M)
 	user = M
-	verbs += /obj/item/clothing/head/helmet/VR/verb/connect
+	verbs += /obj/item/clothing/head/helmet/virtual/verb/connect
 
-/obj/item/clothing/head/helmet/VR/verb/connect()
+/obj/item/clothing/head/helmet/virtual/verb/connect()
 	set name = "Connect"
 	set desc = "Connect to the VR uplink."
 	set category = "Virtual Reality"
 
 	var/list/platforms_in_area
 
-	for(var/mob/living/silicon/platform/O in orange( user, 3 ))
+	for(var/mob/living/silicon/platform/O in orange( user, 3 )) // Finding suitable VR platforms in area
 		platforms_in_area += O
 		user << "Platform \"[O.name]\" found on [O.loc]"
 
 	if( platforms_in_area )
 		user << "<b>Attempting connection...</b>"
-		var/mob/living/silicon/platform/P = input(src, "Which platform do you wish to connect to?") in null|platforms_in_area
+		var/mob/living/silicon/platform/P = input(user, "Which platform do you wish to connect to?") in null|platforms_in_area
 		if(isnull( P ))
 			user << "\red Connection aborted."
 			return
