@@ -36,6 +36,8 @@ var/global/list/cached_icons = list()
 		reagents.add_reagent("plasticide", volume/5)
 		if(paint_type == "white") //why don't white crayons exist
 			reagents.add_reagent("aluminum", volume/5)
+		else if (paint_type == "black")
+			reagents.add_reagent("carbon", volume/5)
 		else
 			reagents.add_reagent("crayon_dust_[paint_type]", volume/5)
 		reagents.handle_reactions()
@@ -56,13 +58,13 @@ var/global/list/cached_icons = list()
 		icon_state = "paint_blue"
 		paint_type = "blue"
 
-	violet
+	purple
 		icon_state = "paint_violet"
 		paint_type = "purple"
 
 	black
 		icon_state = "paint_black"
-		paint_type = "gray"
+		paint_type = "black"
 
 	white
 		icon_state = "paint_white"

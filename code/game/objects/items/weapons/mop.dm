@@ -19,6 +19,9 @@
 /turf/proc/clean(atom/source)
 	if(source.reagents.has_reagent("water", 1))
 		clean_blood()
+		if(istype(src, /turf))
+			var/turf/L = src
+			L.color = initial(L.color) //paint
 		if(istype(src, /turf/simulated))
 			var/turf/simulated/T = src
 			T.dirt = 0
