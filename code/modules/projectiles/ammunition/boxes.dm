@@ -31,6 +31,13 @@
 	max_ammo = 7
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/c45f
+	name = "magazine (.45 flash)"
+	icon_state = "45"
+	ammo_type = "/obj/item/ammo_casing/c45f"
+	max_ammo = 7
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/c45r/empty
 	max_ammo = 0
 

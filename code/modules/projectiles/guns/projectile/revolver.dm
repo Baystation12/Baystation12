@@ -79,6 +79,13 @@
 	load_method = MAGAZINE
 	mag_type = /obj/item/ammo_magazine/c45r/empty
 
+/obj/item/weapon/gun/projectile/detective/semiauto/flash
+	ammo_type = "/obj/item/ammo_casing/c45f"
+
+/obj/item/weapon/gun/projectile/detective/semiauto/colt
+	desc = "A cheap Martian knock-off of a Colt M1911."
+	ammo_type = "/obj/item/ammo_casing/c45"
+
 /obj/item/weapon/gun/projectile/detective/semiauto/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
 	if(!loaded.len && empty_mag)

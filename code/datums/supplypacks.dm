@@ -731,9 +731,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/shield/riot,
 					/obj/item/weapon/shield/riot,
 					/obj/item/weapon/shield/riot,
-					/obj/item/weapon/storage/box/flashbangs,
-					/obj/item/weapon/storage/box/flashbangs,
-					/obj/item/weapon/storage/box/flashbangs,
 					/obj/item/weapon/handcuffs,
 					/obj/item/weapon/handcuffs,
 					/obj/item/weapon/handcuffs,
@@ -742,13 +739,26 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/helmet/riot,
 					/obj/item/clothing/suit/armor/riot,
 					/obj/item/clothing/head/helmet/riot,
-					/obj/item/clothing/suit/armor/riot)
+					/obj/item/clothing/suit/armor/riot,
+					/obj/item/weapon/storage/box/flashbangs,
+					/obj/item/weapon/storage/box/beanbags,
+					/obj/item/weapon/storage/box/handcuffs)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Riot gear crate"
 	access = access_armory
 	group = "Security"
 
+/datum/supply_packs/energyweapons
+	name = "Energy weapons crate"
+	contains = list(/obj/item/weapon/gun/energy/laser,
+					/obj/item/weapon/gun/energy/laser,
+					/obj/item/weapon/gun/energy/gun)
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "energy weapons crate"
+	access = access_armory
+	group = "Security"
 
 /datum/supply_packs/ballistic
 	name = "Ballistic gear crate"
@@ -775,13 +785,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 
 /datum/supply_packs/shotgunammo
-	name = "Shotgun shells"
+	name = "Ballistic ammunition crate"
 	contains = list(/obj/item/weapon/storage/box/shotgunammo,
 					/obj/item/weapon/storage/box/shotgunammo,
-					/obj/item/weapon/storage/box/shotgunammo)
+					/obj/item/weapon/storage/box/shotgunshells,
+					/obj/item/weapon/storage/box/shotgunshells)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
-	containername = "Shotgun shells"
+	containername = "ballistic ammunition crate"
 	access = access_armory
 	group = "Security"
 
