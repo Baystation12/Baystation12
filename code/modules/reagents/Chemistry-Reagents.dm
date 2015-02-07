@@ -1592,13 +1592,13 @@ datum
 
 			reaction_obj(var/obj/O, var/volume)
 				..()
-				if(istype(O,/obj) && !istype(O,/obj/item/weapon/reagent_containers))
-					//painting glasses would just be a headache
+				if(istype(O,/obj))
 					O.color = color
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				..()
-				if(istype(M,/mob))
+				if(istype(M,/mob) && !istype(M,/mob/dead))
+					//painting ghosts: not allowed
 					M.color = color
 
 
