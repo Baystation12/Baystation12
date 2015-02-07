@@ -77,6 +77,8 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.
+	if(!user) return
+	
 	if(clumsy_check)
 		if(istype(user, /mob/living))
 			var/mob/living/M = user
@@ -97,11 +99,6 @@
 
 	add_fingerprint(user)
 
-	var/turf/curloc = get_turf(user)
-	var/turf/targloc = get_turf(target)
-	if (!istype(targloc) || !istype(curloc))
-		return
-
 	if(!special_check(user))
 		return
 
@@ -116,18 +113,6 @@
 	if(!in_chamber)
 		return
 
-	in_chamber.firer = user
-	in_chamber.def_zone = user.zone_sel.selecting
-	if(targloc == curloc)
-		user.bullet_act(in_chamber)
-		del(in_chamber)
-		update_icon()
-		return
-
-	if(recoil)
-		spawn()
-			shake_camera(user, recoil + 1, recoil)
-
 	if(silenced)
 		playsound(user, fire_sound, 10, 1)
 	else
@@ -136,34 +121,46 @@
 		"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>", \
 		"You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
 
-	in_chamber.original = target
-	in_chamber.loc = get_turf(user)
-	in_chamber.starting = get_turf(user)
-	in_chamber.shot_from = src
 	user.next_move = world.time + 4
-	in_chamber.silenced = silenced
-	in_chamber.current = curloc
-	in_chamber.yo = targloc.y - curloc.y
-	in_chamber.xo = targloc.x - curloc.x
+	
+	var/x_offset = 0
+	var/y_offset = 0
 	if(istype(user, /mob/living/carbon))
 		var/mob/living/carbon/mob = user
 		if(mob.shock_stage > 120)
-			in_chamber.yo += rand(-2,2)
-			in_chamber.xo += rand(-2,2)
+			y_offset = rand(-2,2)
+			x_offset = rand(-2,2)
 		else if(mob.shock_stage > 70)
-			in_chamber.yo += rand(-1,1)
-			in_chamber.xo += rand(-1,1)
+			y_offset = rand(-1,1)
+			x_offset = rand(-1,1)
 
+	var/p_x
+	var/p_y
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])
-			in_chamber.p_x = text2num(mouse_control["icon-x"])
+			p_x = text2num(mouse_control["icon-x"])
 		if(mouse_control["icon-y"])
-			in_chamber.p_y = text2num(mouse_control["icon-y"])
+			p_y = text2num(mouse_control["icon-y"])
+	
+	if(in_chamber)
+		var/fail = in_chamber.launch(
+			target = target, 
+			user = user, 
+			launcher = src, 
+			target_zone = user.zone_sel.selecting, 
+			x_offset = x_offset, 
+			y_offset = y_offset, 
+			px = p_x,
+			py = p_y
+			)
+		
+		if(fail) return
+			
+	if(recoil)
+		spawn()
+			shake_camera(user, recoil + 1, recoil)
 
-	spawn()
-		if(in_chamber)
-			in_chamber.process()
 	sleep(1)
 	in_chamber = null
 

@@ -202,7 +202,7 @@
 	category = "Medical"
 
 /datum/autolathe/recipe/shotgun_blanks
-	name = "ammunition (shotgun, blanks)"
+	name = "ammunition (shotgun, blank)"
 	path = /obj/item/ammo_casing/shotgun/blank
 	category = "Arms and Ammunition"
 
@@ -211,9 +211,19 @@
 	path = /obj/item/ammo_casing/shotgun/beanbag
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/shotgun_flash
+	name = "ammunition (shotgun, flash)"
+	path = /obj/item/ammo_casing/shotgun/flash
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/magazine_rubber
 	name = "ammunition (rubber)"
 	path = /obj/item/ammo_magazine/c45r
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_flash
+	name = "ammunition (flash)"
+	path = /obj/item/ammo_magazine/c45f
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
@@ -285,14 +295,14 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun
-	name = "ammunition (shell, shotgun)"
+	name = "ammunition (slug, shotgun)"
 	path = /obj/item/ammo_casing/shotgun
 	hidden = 1
 	category = "Arms and Ammunition"
 
-/datum/autolathe/recipe/shotgun_dart
-	name = "ammunition (dart, shotgun)"
-	path = /obj/item/ammo_casing/shotgun/dart
+/datum/autolathe/recipe/shotgun_pellet
+	name = "ammunition (shell, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/pellet
 	hidden = 1
 	category = "Arms and Ammunition"
 
