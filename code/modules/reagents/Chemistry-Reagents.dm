@@ -941,7 +941,6 @@ datum
 					if(istype(T, /turf/simulated))
 						var/turf/simulated/S = T
 						S.dirt = 0
-					T.color = initial(T.color) //paint
 					T.clean_blood()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
@@ -1581,20 +1580,26 @@ datum
 		paint
 			name = "Paint"
 			id = "paint"
-			description = "This paint will stick to almost any object"
+			description = "This paint will stick to almost any object."
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
 
 			reaction_turf(var/turf/T, var/volume)
-				if(!istype(T) || istype(T, /turf/space))
-					return
-				T.color = color
+				..()
+				if(istype(T) && !istype(T, /turf/space))
+					T.color = color
 
 			reaction_obj(var/obj/O, var/volume)
 				..()
-				if(istype(O,/obj/item/weapon/light))
+				if(istype(O,/obj) && !istype(O,/obj/item/weapon/reagent_containers))
+					//painting glasses would just be a headache
 					O.color = color
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				..()
+				if(istype(M,/mob))
+					M.color = color
 
 
 //////////////////////////Poison stuff///////////////////////
