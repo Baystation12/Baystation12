@@ -33,22 +33,22 @@
 	var/fire_delay = 6
 	var/last_fired = 0
 
-	proc/ready_to_fire()
-		if(world.time >= last_fired + fire_delay)
-			last_fired = world.time
-			return 1
-		else
-			return 0
-
-	proc/load_into_chamber()
+/obj/item/weapon/gun/proc/ready_to_fire()
+	if(world.time >= last_fired + fire_delay)
+		last_fired = world.time
+		return 1
+	else
 		return 0
 
-	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
-		return 1
+/obj/item/weapon/gun/proc/load_into_chamber()
+	return 0
 
-	emp_act(severity)
-		for(var/obj/O in contents)
-			O.emp_act(severity)
+/obj/item/weapon/gun/proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
+	return 1
+
+/obj/item/weapon/gun/emp_act(severity)
+	for(var/obj/O in contents)
+		O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //It's adjacent, is the user, or is on the user's person
