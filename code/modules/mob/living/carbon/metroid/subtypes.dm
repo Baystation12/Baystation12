@@ -1,4 +1,4 @@
-proc/mutation_table(var/colour)
+/mob/living/carbon/slime/proc/mutation_table(var/colour)
 	var/list/slime_mutation[4]
 	switch(colour)
 		//Tier 1

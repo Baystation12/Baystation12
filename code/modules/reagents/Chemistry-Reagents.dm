@@ -261,7 +261,7 @@ datum
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
-					S.apply_water()
+					S.apply_water(volume)
 				if(method == TOUCH && isliving(M))
 					M.adjust_fire_stacks(-(volume / 10))
 					if(M.fire_stacks <= 0)
