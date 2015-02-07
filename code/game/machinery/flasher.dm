@@ -119,17 +119,13 @@
 			user.show_message(text("\red [src] is now secured."))
 			src.overlays += "[base_state]-s"
 
-/obj/machinery/flasher_button/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/flasher
+	name = "flasher button"
+	desc = "A remote control switch for a mounted flasher."
 
-/obj/machinery/flasher_button/attackby(obj/item/weapon/W, mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/flasher/attack_hand(mob/user as mob)
 
-/obj/machinery/flasher_button/attack_hand(mob/user as mob)
-
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(active)
+	if(..())
 		return
 
 	use_power(5)
