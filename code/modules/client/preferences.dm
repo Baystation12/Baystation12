@@ -643,7 +643,7 @@ datum/preferences
 
 	if(restricted)
 		if(restricted == 1)
-			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='http://baystation12.net/forums/viewtopic.php?f=46&t=5319'>the forums</a>.</small></b></font></br>"
+			dat += "<font color='red'><b>You cannot play as this species.</br><small>If you wish to be whitelisted, you can make an application post on <a href='?src=\ref[user];preference=open_whitelist_forum'>the forums</a>.</small></b></font></br>"
 		else if(restricted == 2)
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font></br>"
 	if(!restricted || check_rights(R_ADMIN, 0))
@@ -872,6 +872,14 @@ datum/preferences
 	if(!user)	return
 
 	if(!istype(user, /mob/new_player))	return
+
+	if(href_list["preference"] == "open_whitelist_forum")
+		if(config.forumurl)
+			user << link(config.forumurl)
+		else
+			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			return
+
 	if(href_list["preference"] == "job")
 		switch(href_list["task"])
 			if("close")

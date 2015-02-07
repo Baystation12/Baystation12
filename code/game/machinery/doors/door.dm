@@ -27,8 +27,7 @@
 	var/air_properties_vary_with_direction = 0
 	var/maxhealth = 300
 	var/health
-	var/emitter_hits = 0 // For use when tracking amount of emitter hits taken.
-	var/emitter_resistance = 10 // Amount of emitter hits doors whistand
+	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
 	var/obj/item/stack/sheet/metal/repairing
@@ -36,6 +35,13 @@
 	//Multi-tile doors
 	dir = EAST
 	var/width = 1
+
+/obj/machinery/door/attack_generic(var/mob/user, var/damage)
+	if(damage >= 10)
+		visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
+		take_damage(damage)
+	else
+		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 
 /obj/machinery/door/New()
 	. = ..()
@@ -139,30 +145,33 @@
 		return
 
 	// Emitter Blasts - these will eventually completely destroy the door, given enough time.
-	if (istype(Proj, /obj/item/projectile/beam/emitter))
-		if(health > 0)
-			Proj.damage /= 4
-		else
-			emitter_hits ++
-			if(emitter_hits >= emitter_resistance)
-				visible_message("\red <B>[src.name] breaks apart!</B>", 1)
-				new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-				del(src)
+	if (Proj.damage > 90) 
+		destroy_hits--
+		if (destroy_hits <= 0)
+			visible_message("\red <B>\The [src.name] disintegrates!</B>")
+			switch (Proj.damage_type)
+				if(BRUTE)
+					new /obj/item/stack/sheet/metal(src.loc, 2)
+					new /obj/item/stack/rods(src.loc, 3)
+				if(BURN)
+					new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
+			del(src)
 
 	if(Proj.damage)
-		take_damage(Proj.damage)
+		//cap projectile damage so that there's still a minimum number of hits required to break the door
+		take_damage(min(Proj.damage, 100))
 
 
 
-/obj/machinery/door/hitby(AM as mob|obj)
+/obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
 
 	..()
 	visible_message("\red <B>[src.name] was hit by [AM].</B>")
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 15
+		tforce = 15 * (speed/5)
 	else
-		tforce = AM:throwforce
+		tforce = AM:throwforce * (speed/5)
 	playsound(src.loc, hitsound, 100, 1)
 	take_damage(tforce)
 	return
@@ -181,13 +190,13 @@
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/detective_scanner))
 		return
-	if(src.operating || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
+	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
 	if(!Adjacent(user))
 		user = null
 	if(!src.requiresID())
 		user = null
-	
+
 	if(istype(I, /obj/item/stack/sheet/metal))
 		if(stat & BROKEN)
 			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
@@ -198,11 +207,11 @@
 		if(!density)
 			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
 			return
-		
+
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT 
+		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
-		
+
 		var/obj/item/stack/sheet/metal/metalstack = I
 		var/transfer
 		if (repairing)
@@ -214,17 +223,17 @@
 			if (repairing)
 				repairing.loc = src
 				transfer = repairing.amount
-		
+
 		if (transfer)
 			user << "<span class='notice'>You fit [transfer] [metalstack.singular_name]\s to damaged and broken parts on \the [src].</span>"
-		
+
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/weldingtool))
 		if(!density)
 			user << "<span class='warning'>\The [src] must be closed before you can repair it.</span>"
 			return
-		
+
 		var/obj/item/weapon/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
 			user << "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>"
@@ -243,13 +252,6 @@
 		repairing = null
 		return
 
-	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
-		flick("door_spark", src)
-		sleep(6)
-		open()
-		operating = -1
-		return 1
-	
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == "hurt" && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
@@ -261,7 +263,16 @@
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
-	
+
+	if(src.operating) return
+
+	if(src.density && (operable() && istype(I, /obj/item/weapon/card/emag)))
+		flick("door_spark", src)
+		sleep(6)
+		open()
+		operating = -1
+		return 1
+
 	if(src.allowed(user) && operable())
 		if(src.density)
 			open()

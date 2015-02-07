@@ -39,6 +39,9 @@
 		icon_state = initial(icon_state)
 		handleInactive()
 
+/obj/machinery/power/powered()
+	return 1 //doesn't require an external power source
+
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
 		return

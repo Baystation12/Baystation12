@@ -61,7 +61,9 @@
 	var/ending = copytext(scrambled_text, length(scrambled_text))
 	if(ending == ".")
 		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
-	scrambled_text += copytext(input, length(input))
+	var/input_ending = copytext(input, input_size)
+	if(input_ending in list("!","?","."))
+		scrambled_text += input_ending
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
@@ -251,11 +253,11 @@
 	space_chance = 100
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
 					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
-					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud", 
-					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", 
-					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in", 
-					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla", 
-					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", 
+					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud",
+					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo",
+					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in",
+					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
+					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
 					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
 
 /datum/language/gutter

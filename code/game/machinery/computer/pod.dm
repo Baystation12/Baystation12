@@ -31,7 +31,7 @@
 		viewers(null, null) << "Cannot locate mass driver connector. Cancelling firing sequence!"
 		return
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == id)
 			M.open()
 
@@ -43,7 +43,7 @@
 			M.drive()
 
 	sleep(50)
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == id)
 			M.close()
 			return
@@ -181,7 +181,7 @@
 			time += tp
 			time = min(max(round(time), 0), 120)
 		if(href_list["door"])
-			for(var/obj/machinery/door/poddoor/M in world)
+			for(var/obj/machinery/door/blast/M in world)
 				if(M.id == id)
 					if(M.density)
 						M.open()

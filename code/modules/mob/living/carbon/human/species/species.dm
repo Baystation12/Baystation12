@@ -56,7 +56,7 @@
 	var/cold_level_3 = 120                            // Cold damage level 3 below this point.
 	var/heat_level_1 = 360                            // Heat damage level 1 above this point.
 	var/heat_level_2 = 400                            // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000                           // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000                           // Heat damage level 3 above this point.
 	var/synth_temp_gain = 0			                  // IS_SYNTHETIC species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
@@ -65,6 +65,20 @@
 	var/light_dam                                     // If set, mob will be damaged in light over this value and heal in light below its negative.
 	var/body_temperature = 310.15	                  // Non-IS_SYNTHETIC species will try to stabilize at this temperature.
 	                                                  // (also affects temperature processing)
+
+	var/heat_discomfort_level = 315                   // Aesthetic messages about feeling warm.
+	var/cold_discomfort_level = 285                   // Aesthetic messages about feeling chilly.
+	var/list/heat_discomfort_strings = list(
+		"You feel sweat drip down your neck.",
+		"You feel uncomfortably warm.",
+		"Your skin prickles in the heat."
+		)
+	var/list/cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddely.",
+		"Your chilly flesh stands out in goosebumps."
+		)
+
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type
@@ -72,7 +86,7 @@
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
 	var/has_fine_manipulation = 1 // Can use small items.
-	var/insulated                 // Immune to electrocution and glass shards to the feet.
+	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
@@ -99,6 +113,27 @@
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
 		unarmed_attacks += new u_type()
+
+/datum/species/proc/get_environment_discomfort(var/mob/living/carbon/human/H, var/msg_type)
+
+	if(!prob(5))
+		return
+
+	var/covered = 0 // Basic coverage can help.
+	for(var/obj/item/clothing/clothes in H)
+		if(H.l_hand == clothes|| H.r_hand == clothes)
+			continue
+		if((clothes.body_parts_covered & UPPER_TORSO) && (clothes.body_parts_covered & LOWER_TORSO))
+			covered = 1
+			break
+
+	switch(msg_type)
+		if("cold")
+			if(!covered)
+				H << "<span class='danger'>[pick(cold_discomfort_strings)]</span>"
+		if("heat")
+			if(covered)
+				H << "<span class='danger'>[pick(heat_discomfort_strings)]</span>"
 
 /datum/species/proc/get_random_name(var/gender)
 	var/datum/language/species_language = all_languages[language]
@@ -204,7 +239,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(ignore_intent && H.a_intent != "hurt")
+	if(!ignore_intent && H.a_intent != "hurt")
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)

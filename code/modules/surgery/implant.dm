@@ -70,7 +70,7 @@
 	priority = 2
 	allowed_tools = list(
 	/obj/item/weapon/cautery = 100,			\
-	/obj/item/clothing/mask/cigarette = 75,	\
+	/obj/item/clothing/mask/smokable/cigarette = 75,	\
 	/obj/item/weapon/flame/lighter = 50,			\
 	/obj/item/weapon/weldingtool = 25
 	)
@@ -190,7 +190,7 @@
 				"\blue You take [obj] out of incision on [target]'s [affected.display_name]s with \the [tool]." )
 				affected.implants -= obj
 
-				target.hud_updateflag |= 1 << IMPLOYAL_HUD
+				BITSET(target.hud_updateflag, IMPLOYAL_HUD)
 
 				//Handle possessive brain borers.
 				if(istype(obj,/mob/living/simple_animal/borer))
@@ -198,12 +198,13 @@
 					if(worm.controlling)
 						target.release_control()
 					worm.detatch()
-
-				obj.loc = get_turf(target)
-				if(istype(obj,/obj/item/weapon/implant))
-					var/obj/item/weapon/implant/imp = obj
-					imp.imp_in = null
-					imp.implanted = 0
+					worm.leave_host()
+				else
+					obj.loc = get_turf(target)
+					if(istype(obj,/obj/item/weapon/implant))
+						var/obj/item/weapon/implant/imp = obj
+						imp.imp_in = null
+						imp.implanted = 0
 			else
 				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected.display_name].", \
 				"\blue There's something inside [target]'s [affected.display_name], but you just missed it this time." )

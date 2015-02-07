@@ -24,6 +24,14 @@
 //////////////////////////////
 
 // common helper procs for all power machines
+/obj/machinery/power/drain_power(var/drain_check, var/surge, var/amount = 0)
+	if(drain_check)
+		return 1
+
+	if(powernet && powernet.avail)
+		powernet.trigger_warning()
+		return powernet.draw_power(amount)
+
 /obj/machinery/power/proc/add_avail(var/amount)
 	if(powernet)
 		powernet.newavail += amount
@@ -286,6 +294,8 @@
 	for(var/obj/structure/cable/Cable in net2.cables) //merge cables
 		net1.add_cable(Cable)
 
+	if(!net2) return net1
+
 	for(var/obj/machinery/power/Node in net2.nodes) //merge power machines
 		if(!Node.connect_to_network())
 			Node.disconnect_from_network() //if somehow we can't connect the machine to the new powernet, disconnect it from the old nonetheless
@@ -299,12 +309,6 @@
 //No animations will be performed by this proc.
 /proc/electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
 	if(istype(M.loc,/obj/mecha))	return 0	//feckin mechs are dumb
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		if(H.gloves)
-			var/obj/item/clothing/gloves/G = H.gloves
-			if(G.siemens_coefficient == 0)	return 0		//to avoid spamming with insulated glvoes on
-
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source
@@ -330,6 +334,23 @@
 	else
 		log_admin("ERROR: /proc/electrocute_mob([M], [power_source], [source]): wrong power_source")
 		return 0
+	//Triggers powernet warning, but only for 5 ticks (if applicable)
+	//If following checks determine user is protected we won't alarm for long.
+	if(PN)
+		PN.trigger_warning(5)
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.species.siemens_coefficient == 0)
+			return
+		if(H.gloves)
+			var/obj/item/clothing/gloves/G = H.gloves
+			if(G.siemens_coefficient == 0)	return 0		//to avoid spamming with insulated glvoes on
+
+	//Checks again. If we are still here subject will be shocked, trigger standard 20 tick warning
+	//Since this one is longer it will override the original one.
+	if(PN)
+		PN.trigger_warning()
+
 	if (!cell && !PN)
 		return 0
 	var/PN_damage = 0

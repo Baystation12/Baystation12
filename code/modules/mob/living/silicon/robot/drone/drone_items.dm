@@ -186,21 +186,20 @@
 
 		else if(istype(M,/mob/living/silicon/robot/drone) && !M.client)
 
-			var/mob/living/silicon/robot/drone/D = src.loc
+			var/mob/living/silicon/robot/D = src.loc
 
 			if(!istype(D))
 				return
 
-			D << "\red You begin decompiling the other drone."
+			D << "<span class='danger'>You begin decompiling [M].</span>"
 
 			if(!do_after(D,50))
-				D << "\red You need to remain still while decompiling such a large object."
+				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
 				return
 
 			if(!M || !D) return
 
-			D << "\red You carefully and thoroughly decompile your downed fellow, storing as much of its resources as you can within yourself."
-
+			D << "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>"
 			del(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -208,7 +207,6 @@
 			stored_comms["glass"] += 15
 			stored_comms["wood"] += 5
 			stored_comms["plastic"] += 5
-
 			return
 		else
 			continue

@@ -25,18 +25,26 @@
 
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 
-	// Tasers and stuff? No thanks.
-	if(Proj.damage_type == HALLOSS)
+	// Tasers and stuff? No thanks. Also no clone or tox damage crap.
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	// Emitter blasts are somewhat weaker as emitters have large rate of fire and don't require limited power cell to run
-	if(istype(Proj, /obj/item/projectile/beam/emitter))
-		Proj.damage /= 4
+	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
+	var/damage = min(Proj.damage, 100) * armor
 
-	take_damage(Proj.damage * armor)
+	take_damage(damage)
 	return
 
-
+/turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
+	..()
+	if(ismob(AM))
+		return
+	
+	var/tforce = AM:throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
+	if (tforce < 15)
+		return
+	
+	take_damage(tforce * armor)
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
@@ -117,7 +125,7 @@
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
 	if(adj_temp > max_temperature)
-		take_damage(log(rand(0.9, 1.1) * (adj_temp - max_temperature)))
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - max_temperature)))
 
 	return ..()
 
@@ -265,7 +273,7 @@
 		user << rotting_touch_message
 		if(rotting_destroy_touch)
 			dismantle_wall()
-		return 1
+			return 1
 
 	if(..()) return 1
 
@@ -465,13 +473,12 @@
 		AH.try_build(src)
 		return
 
-	//Poster stuff
-	else if(istype(W,/obj/item/weapon/contraband/poster))
-		place_poster(W,user)
-		return
-
 	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
+	
+	else if(istype(W, /obj/item/weapon/reagent_containers))
+		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
+
 	else
 		return attack_hand(user)
 	return

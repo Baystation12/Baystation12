@@ -36,6 +36,9 @@
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
+
+	invalidateCameraCache()
+
 	/* // Use this to look for cameras that have the same c_tag.
 	for(var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
@@ -61,6 +64,7 @@
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof())
 		if(prob(100/severity))
+			invalidateCameraCache()
 			stat |= EMPED
 			SetLuminosity(0)
 			kick_viewers()
@@ -71,7 +75,7 @@
 				stat &= ~EMPED
 				cancelCameraAlarm()
 				update_icon()
-			
+				invalidateCameraCache()
 			..()
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
@@ -118,7 +122,7 @@
 		destroy()
 
 /obj/machinery/camera/attackby(obj/W as obj, mob/living/user as mob)
-
+	invalidateCameraCache()
 	// DECONSTRUCTION
 	if(isscrewdriver(W))
 		//user << "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>"
@@ -199,6 +203,7 @@
 		//legacy support, if choice is != 1 then just kick viewers without changing status
 		kick_viewers()
 	else
+		invalidateCameraCache()
 		set_status( !src.status )
 		if (!(src.status))
 			visible_message("\red [user] has deactivated [src]!")
@@ -218,6 +223,7 @@
 
 //Used when someone breaks a camera 
 /obj/machinery/camera/proc/destroy()
+	invalidateCameraCache()
 	stat |= BROKEN
 	kick_viewers()
 	triggerCameraAlarm()
@@ -232,6 +238,7 @@
 /obj/machinery/camera/proc/set_status(var/newstatus)
 	if (status != newstatus)
 		status = newstatus
+		invalidateCameraCache()
 		// now disconnect anyone using the camera
 		//Apparently, this will disconnect anyone even if the camera was re-activated.
 		//I guess that doesn't matter since they couldn't use it anyway?
@@ -257,12 +264,18 @@
 
 /obj/machinery/camera/proc/triggerCameraAlarm()
 	alarm_on = 1
+	if(!get_area(src))
+		return
+	
 	for(var/mob/living/silicon/S in mob_list)
 		S.triggerAlarm("Camera", get_area(src), list(src), src)
 
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
 	alarm_on = 0
+	if(!get_area(src))
+		return
+	
 	for(var/mob/living/silicon/S in mob_list)
 		S.cancelAlarm("Camera", get_area(src), src)
 

@@ -40,6 +40,17 @@
 	ghostize()
 	del src
 
+
+/mob/living/simple_animal/construct/attack_generic(var/mob/user)
+	if(istype(user, /mob/living/simple_animal/construct/builder))
+		if(health < maxHealth)
+			adjustBruteLoss(-5)
+			user.visible_message("<b>\The [user]</b> mends some of \the [src]'s wounds.")
+		else
+			user << "<span class='notice'>\The [src] is undamaged.</span>"
+		return
+	return ..()
+
 /mob/living/simple_animal/construct/examine(mob/user)
 	..(user)
 	var/msg = ""
@@ -118,6 +129,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attacktext = "smashed their armoured gauntlet into"
+	mob_size = 20
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -248,6 +260,7 @@
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'
+	mob_size = 20
 	var/energy = 0
 	var/max_energy = 1000
 

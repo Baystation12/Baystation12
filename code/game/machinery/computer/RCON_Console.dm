@@ -1,3 +1,9 @@
+// RCON REMOTE CONTROL CONSOLE
+//
+// Last Change 1.1.2015 by Atlantis
+//
+// Allows remote operation of electrical systems on station (SMESs and Breaker Boxes)
+
 /obj/machinery/computer/rcon
 	name = "\improper RCON remote control console"
 	desc = "Console used to remotely control machinery on the station."
@@ -8,14 +14,21 @@
 	var/current_tag = null
 	var/list/known_SMESs = null
 	var/list/known_breakers = null
+	// Allows you to hide specific parts of the UI
+	var/hide_SMES = 0
+	var/hide_SMES_details = 0
+	var/hide_breakers = 0
 
-/obj/machinery/computer/rcon/attack_ai(var/mob/user as mob)
-	return attack_hand(user)
-
+// Proc: attack_hand()
+// Parameters: 1 (user - Person which clicked this computer)
+// Description: Opens UI of this machine.
 /obj/machinery/computer/rcon/attack_hand(var/mob/user as mob)
 	..()
 	ui_interact(user)
 
+// Proc: ui_interact()
+// Parameters: 4 (standard NanoUI parameters)
+// Description: Uses dark magic (NanoUI) to render this machine's UI
 /obj/machinery/computer/rcon/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	FindDevices() // Update our devices list
 	var/data[0]
@@ -42,20 +55,20 @@
 		"enabled" = BR.on
 		)))
 	data["breaker_info"] = breakerlist
+	data["hide_smes"] = hide_SMES
+	data["hide_smes_details"] = hide_SMES_details
+	data["hide_breakers"] = hide_breakers
 
-	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Control Console", 600, 400)
-		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
-		// open the new ui window
 		ui.open()
-		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
+// Proc: Topic()
+// Parameters: 2 (href, href_list - allows us to process UI clicks)
+// Description: Allows us to process UI clicks, which are relayed in form of hrefs.
 /obj/machinery/computer/rcon/Topic(href, href_list)
 	if(href_list["smes_in_toggle"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_toggle"])
@@ -86,7 +99,17 @@
 				usr << "The breaker box was recently toggled. Please wait before toggling it again."
 			else
 				toggle.auto_toggle()
+	if(href_list["hide_smes"])
+		hide_SMES = !hide_SMES
+	if(href_list["hide_smes_details"])
+		hide_SMES_details = !hide_SMES_details
+	if(href_list["hide_breakers"])
+		hide_breakers = !hide_breakers
 
+
+// Proc: GetSMESByTag()
+// Parameters: 1 (tag - RCON tag of SMES we want to look up)
+// Description: Looks up and returns SMES which has matching RCON tag
 /obj/machinery/computer/rcon/proc/GetSMESByTag(var/tag)
 	if(!tag)
 		return
@@ -95,6 +118,9 @@
 		if(S.RCon_tag == tag)
 			return S
 
+// Proc: FindDevices()
+// Parameters: None
+// Description: Refreshes local list of known devices.
 /obj/machinery/computer/rcon/proc/FindDevices()
 	known_SMESs = new /list()
 	for(var/obj/machinery/power/smes/buildable/SMES in machines)

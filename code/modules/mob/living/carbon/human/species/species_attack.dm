@@ -1,87 +1,3 @@
-//Species unarmed attacks
-/datum/unarmed_attack
-	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
-	var/attack_noun = list("fist")
-	var/damage = 0						// Extra empty hand attack damage.
-	var/attack_sound = "punch"
-	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
-	var/sharp = 0
-	var/edge = 0
-
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user)
-	if(user.restrained())
-		return 0
-
-	// Check if they have a functioning hand.
-	var/datum/organ/external/E = user.organs_by_name["l_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	E = user.organs_by_name["r_hand"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	return 0
-
-/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
-
-	var/stun_chance = rand(0, 100)
-
-	if(attack_damage >= 5 && armour < 2 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
-		switch(zone) // strong punches can have effects depending on where they hit
-			if("head", "mouth", "eyes")
-				// Induce blurriness
-				target.visible_message("<span class='danger'>[target] looks dazed.</span>", "<span class='danger'>You see stars.</span>")
-				target.apply_effect(attack_damage*2, EYE_BLUR, armour)
-			if("l_arm", "l_hand")
-				if (target.l_hand)
-					// Disarm left hand
-					target.visible_message("<span class='danger'>[src] [pick("dropped", "let go off")] \the [target.l_hand][pick("", " with a scream")]!</span>")
-					target.drop_l_hand()
-			if("r_arm", "r_hand")
-				if (target.r_hand)
-					// Disarm right hand
-					target.visible_message("<span class='danger'>[src] [pick("dropped", "let go off")] \the [target.r_hand][pick("", " with a scream")]!</span>")
-					target.drop_r_hand()
-			if("chest")
-				if(!target.lying)
-					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
-					if(!T.density)
-						step(target, get_dir(get_turf(user), get_turf(target)))
-						target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
-					else
-						target.visible_message("<span class='danger'>[target] slams into [T]!</span>")
-					if(prob(50))
-						target.set_dir(reverse_dir[target.dir])
-					target.apply_effect(attack_damage * 0.4, WEAKEN, armour)
-			if("groin")
-				target.visible_message("<span class='warning'>[target] looks like \he is in pain!</span>", "<span class='warning'>[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your[pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]</span>")
-				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
-			if("l_leg", "l_foot", "r_leg", "r_foot")
-				if(!target.lying)
-					target.visible_message("<span class='warning'>[src] gives way slightly.</span>")
-					target.apply_effect(attack_damage*3, AGONY, armour)
-	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 2) // Chance to get the usual throwdown as well (25% standard chance)
-		if(!target.lying)
-			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
-		else
-			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
-		target.apply_effect(3, WEAKEN, armour)
-
-/datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
-	user.visible_message("<span class='warning'>[user] [pick(attack_verb)] [target] in the [affecting.display_name]!</span>")
-	playsound(user.loc, attack_sound, 25, 1, -1)
-
-/datum/unarmed_attack/bite
-	attack_verb = list("bit")
-	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
-	damage = 0
-	sharp = 0
-	edge = 0
-
 /datum/unarmed_attack/bite/sharp //eye teeth
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
@@ -89,120 +5,6 @@
 	damage = 5
 	sharp = 1
 	edge = 1
-
-/datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (user.wear_mask && istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-		return 0
-	if (user == target && (zone == "head" || zone == "eyes" || zone == "mouth"))
-		return 0
-	return 1
-
-/datum/unarmed_attack/punch
-	attack_verb = list("punched")
-	attack_noun = list("fist")
-	damage = 0
-
-/datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
-	var/organ = affecting.display_name
-
-	attack_damage = Clamp(attack_damage, 1, 5) // We expect damage input of 1 to 5 for this proc. But we leave this check juuust in case.
-
-	if(target == user)
-		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
-		return 0
-
-	if(!target.lying)
-		switch(zone)
-			if("head", "mouth", "eyes")
-				// ----- HEAD ----- //
-				switch(attack_damage)
-					if(1 to 2)  user.visible_message("<span class='danger'>[user] slapped [target] across \his cheek!</span>")
-					if(3 to 4)	user.visible_message("<span class='danger'>[user] struck [target] in the head[pick("", " with a closed fist")]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] gave [target] a resounding slap to the face!</span>")
-			if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_let", "l_foot", "r_foot")
-				// ----- BODY ----- //
-				switch(attack_damage)
-					if(1 to 2)	user.visible_message("<span class='danger'>[user] slapped [target]'s [organ]!</span>")
-					if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-					if(5)		user.visible_message("<span class='danger'>[user] slammed \his [pick(attack_noun)] into [target]'s [organ]!</span>")
-	else
-		user.visible_message("<span class='danger'>[user] [pick("punched", "threw a punch", "struck", "slapped", "rammed their [pick(attack_noun)] into")] [target]'s [organ]!</span>")
-
-/datum/unarmed_attack/kick
-	attack_verb = list("kicked", "kneed")
-	attack_noun = list("kick")
-	attack_sound = "swing_hit"
-	damage = 1
-
-/datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (target.legcuffed)
-		return 0
-
-	if(!(zone in list("l_leg", "r_leg", "l_foot", "r_foot", "groin")))
-		return 0
-
-	var/datum/organ/external/E = user.organs_by_name["l_foot"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	E = user.organs_by_name["r_foot"]
-	if(E && !(E.status & ORGAN_DESTROYED))
-		return 1
-
-	return 0
-
-/datum/unarmed_attack/kick/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
-	var/organ = affecting.display_name
-
-	attack_damage = Clamp(attack_damage, 1, 5)
-
-	switch(zone)
-		if("groin", "l_leg", "r_leg")
-			// -- LOWER BODY -- //
-			switch(attack_damage)
-				if(1 to 2)	user.visible_message("<span class='danger'>[user] gave [target] a light [pick(attack_noun)] to the [organ]!</span>")
-				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target] in \his [organ]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] landed a strong [pick(attack_noun)] against [target]'s [organ]!</span>")
-		if("l_foot", "r_foot")
-			// ----- FEET ----- //
-			switch(attack_damage)
-				if(1 to 4)	user.visible_message("<span class='danger'>[user] kicked [target] in \his [organ]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] stomped down hard on [target]'s [organ]!</span>")
-
-/datum/unarmed_attack/stomp
-	attack_verb = null
-	attack_noun = list("kick")
-	attack_sound = "swing_hit"
-	damage = 3
-
-/datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	if (target.legcuffed)
-		return 0
-
-	if (target.lying && !user.lying)
-		var/datum/organ/external/E = user.organs_by_name["l_foot"]
-		if(E && !(E.status & ORGAN_DESTROYED))
-			return 1
-
-		E = user.organs_by_name["r_foot"]
-		if(E && !(E.status & ORGAN_DESTROYED))
-			return 1
-
-		return 0
-
-/datum/unarmed_attack/stomp/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
-	var/datum/organ/external/affecting = target.get_organ(zone)
-	var/organ = affecting.display_name
-
-	attack_damage = Clamp(attack_damage, 1, 5)
-
-	switch(attack_damage)
-		if(1 to 3)
-			user.visible_message("<span class='danger'>[user] [pick("gave a kick against", "kicked against", "stomped down on", "slammed their foot into")] [target]'s [organ]!</span>")
-		if(4 to 5)
-			user.visible_message("<span class='danger'>[user] [pick("landed a strong kick against", "kicked against", "stomped down hard on", "rammed their foot into")] [target]'s [organ]!</span>")
 
 /datum/unarmed_attack/diona
 	attack_verb = list("lashed", "bludgeoned")
@@ -233,23 +35,29 @@
 		if("head", "mouth", "eyes")
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
-				if(3 to 4) 	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")] [pick("", "", "", "with spread [pick(attack_noun)]")]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[pick("[user] [pick(attack_verb)] [target] across \his face!", "[user] rakes \his [pick(attack_noun)] across [target]'s face!")]</span>")
-		if("chest", "l_arm", "r_arm", "l_hand", "r_hand", "groin", "l_leg", "r_leg", "l_foot", "r_foot")
+				if(1 to 2)
+					user.visible_message("<span class='danger'>[user] scratched [target] across \his cheek!</span>")
+				if(3 to 4)
+					user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [target]'s [pick("head", "neck")]!</span>") //'with spread claws' sounds a little bit odd, just enough that conciseness is better here I think
+				if(5)
+					user.visible_message(pick(
+						"<span class='danger'>[user] rakes \his [pick(attack_noun)] across [target]'s face!</span>",
+						"<span class='danger'>[user] tears \his [pick(attack_noun)] into [target]'s face!</span>",
+						))
+		else
 			// ----- BODY ----- //
 			switch(attack_damage)
 				if(1 to 2)	user.visible_message("<span class='danger'>[user] scratched [target]'s [affecting.display_name]!</span>")
 				if(3 to 4)	user.visible_message("<span class='danger'>[user] [pick(attack_verb)] [pick("", "", "the side of")] [target]'s [affecting.display_name]!</span>")
-				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] deep into [target]'s [affecting.display_name]!</span>")
+				if(5)		user.visible_message("<span class='danger'>[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.display_name]!</span>")
 
 /datum/unarmed_attack/claws/strong
-	attack_verb = list("slash")
+	attack_verb = list("slashed")
 	damage = 10
 	shredding = 1
 
 /datum/unarmed_attack/bite/strong
-	attack_verb = list("maul")
+	attack_verb = list("mauled")
 	damage = 15
 	shredding = 1
 

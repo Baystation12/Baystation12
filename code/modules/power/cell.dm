@@ -9,16 +9,17 @@
 	spawn(5)
 		updateicon()
 
-/obj/item/weapon/cell/drain_power(var/drain_check)
+/obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
 
-	var/drained_power = rand(200,400)
-	if(charge < drained_power)
-		drained_power = charge
-	use(drained_power)
-	return drained_power
+	if(charge <= 0)
+		return 0
+
+	var/cell_amt = min((amount * CELLRATE), charge)
+	use(cell_amt)
+	return cell_amt / CELLRATE
 
 /obj/item/weapon/cell/proc/updateicon()
 	overlays.Cut()

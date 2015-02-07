@@ -96,7 +96,7 @@
 					D.safe = 1
 
 /obj/machinery/door_control/proc/handle_pod()
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in world)
 		if(M.id == src.id)
 			if(M.density)
 				spawn(0)
@@ -148,30 +148,20 @@
 	else
 		icon_state = "doorctrl0"
 
-/obj/machinery/driver_button/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/driver
+	name = "mass driver button"
+	desc = "A remote control switch for a mass driver."
 
-/obj/machinery/driver_button/attackby(obj/item/weapon/W, mob/user as mob)
-
-	if(istype(W, /obj/item/device/detective_scanner))
+/obj/machinery/button/driver/attack_hand(mob/user as mob)
+	if(..())
 		return
-	return src.attack_hand(user)
-
-/obj/machinery/driver_button/attack_hand(mob/user as mob)
-
-	src.add_fingerprint(usr)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(active)
-		return
-	add_fingerprint(user)
 
 	use_power(5)
 
 	active = 1
 	icon_state = "launcheract"
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.open()
@@ -179,13 +169,13 @@
 
 	sleep(20)
 
-	for(var/obj/machinery/mass_driver/M in world)
+	for(var/obj/machinery/mass_driver/M in machines)
 		if(M.id == src.id)
 			M.drive()
 
 	sleep(50)
 
-	for(var/obj/machinery/door/poddoor/M in world)
+	for(var/obj/machinery/door/blast/M in machines)
 		if (M.id == src.id)
 			spawn( 0 )
 				M.close()

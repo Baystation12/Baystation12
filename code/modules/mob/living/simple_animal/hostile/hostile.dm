@@ -113,7 +113,11 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
-	L += mechas_list
+	
+	for (var/obj/mecha/M in mechas_list)
+		if (get_dist(src, M) <= dist)
+			L += M
+	
 	return L
 
 /mob/living/simple_animal/hostile/death()

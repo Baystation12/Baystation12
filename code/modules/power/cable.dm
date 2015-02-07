@@ -36,7 +36,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
-/obj/structure/cable/drain_power(var/drain_check)
+/obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -44,18 +44,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/datum/powernet/PN = get_powernet()
 	if(!PN) return 0
 
-	var/drained_power = round(rand(200,400)/2)
-	var/drained_this_tick = PN.draw_power(drained_power)
-
-	if(drained_this_tick < drained_power)
-		for(var/obj/machinery/power/terminal/T in PN.nodes)
-			if(istype(T.master, /obj/machinery/power/apc))
-				var/obj/machinery/power/apc/AP = T.master
-				if(AP.emagged)
-					continue
-				drained_power += AP.drain_power() //Indirect draw won't emag the APC, should this be amended?
-
-	return drained_power
+	return PN.draw_power(amount)
 
 /obj/structure/cable/yellow
 	color = COLOR_YELLOW
@@ -488,7 +477,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	throw_speed = 2
 	throw_range = 5
 	matter = list("metal" = 50, "glass" = 20)
-	flags = TABLEPASS | FPRINT | CONDUCT
+	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")

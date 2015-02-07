@@ -11,7 +11,7 @@ var/global/list/turf/synd_spawn = list()
 
 /datum/game_mode/nuclear
 	name = "mercenary"
-	config_tag = "nuclear"
+	config_tag = "mercenary"
 	required_players = 15
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
@@ -175,7 +175,7 @@ var/global/list/turf/synd_spawn = list()
 		var/obj/item/weapon/paper/P = new
 		P.info = "The nuclear authorization code is: <b>[nuke_code]</b>"
 		P.name = "nuclear bomb code"
-		if (ticker.mode.config_tag=="nuclear")
+		if (ticker.mode.config_tag=="mercenary")
 			P.loc = code_spawn.loc
 		else
 			var/mob/living/carbon/human/H = synd_mind.current

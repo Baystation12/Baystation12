@@ -43,7 +43,7 @@ var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 	//Underwear
 var/global/list/underwear_m = list("White", "Grey", "Green", "Blue", "Black", "Mankini", "None") //Curse whoever made male/female underwear diffrent colours
-var/global/list/underwear_f = list("Red", "White", "Yellow", "Blue", "Black", "Thong", "None")
+var/global/list/underwear_f = list("Red", "White", "Yellow", "Blue", "Black", "Thong", "Black Sports","White Sports","None")
 	//undershirt
 var/global/list/undershirt_t = list("Black Tank top", "White Tank top", "Black shirt", "White shirt", "None")
 	//Backpacks
@@ -86,12 +86,6 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/surgery_step/S = new T
 		surgery_steps += S
 	sort_surgeries()
-
-	//Medical side effects. List all effects by their names
-	paths = typesof(/datum/medical_effect)-/datum/medical_effect
-	for(var/T in paths)
-		var/datum/medical_effect/M = new T
-		side_effects[M.name] = T
 
 	//List of job. I can't believe this was calculated multiple times per tick!
 	paths = typesof(/datum/job) -list(/datum/job,/datum/job/ai,/datum/job/cyborg)

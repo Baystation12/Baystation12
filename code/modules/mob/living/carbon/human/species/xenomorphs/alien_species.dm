@@ -10,7 +10,7 @@
 	rarity_value = 3
 
 	has_fine_manipulation = 0
-	insulated = 1
+	siemens_coefficient = 0
 	gluttonous = 2
 
 	eyes = "blank_eyes"
@@ -108,7 +108,7 @@
 		if (prob(5))
 			H << "<span class='alium'>You feel a soothing sensation come over you...</span>"
 		return 1
-	
+
 	//next internal organs
 	for(var/datum/organ/internal/I in H.internal_organs)
 		if(I.damage > 0)
@@ -116,7 +116,7 @@
 			if (prob(5))
 				H << "<span class='alium'>You feel a soothing sensation within your [I.parent_organ]...</span>"
 			return 1
-	
+
 	//next mend broken bones, approx 10 ticks each
 	for(var/datum/organ/external/E in H.bad_external_organs)
 		if (E.status & ORGAN_BROKEN)
@@ -124,7 +124,7 @@
 				if (E.mend_fracture())
 					H << "<span class='alium'>You feel something mend itself inside your [E.display_name].</span>"
 			return 1
-	
+
 	return 0
 
 /datum/species/xenos/handle_login_special(var/mob/living/carbon/human/H)
@@ -267,9 +267,6 @@
 		/mob/living/carbon/human/proc/neurotoxin,
 		/mob/living/carbon/human/proc/resin
 		)
-
-	//maxHealth = 250
-	//health = 250
 
 /datum/species/xenos/queen/handle_login_special(var/mob/living/carbon/human/H)
 	..()

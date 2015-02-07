@@ -183,7 +183,8 @@ proc/populate_seed_list()
 		list("seed-cocoapod",           "cocoapod"),
 		list("seed-cherry",             "cherry"),
 		list("seed-kudzu",              "kudzu"),
-		list("seed-replicapod",         "replicapod")
+		list("seed-replicapod",         "replicapod"),
+		list("seed-tobacco",            "tobacco")
 		))
 
 	packet_icon = plant_icons[1]
@@ -217,8 +218,8 @@ proc/populate_seed_list()
 			"water",
 			"potassium",
 			"plasticide",
-			"slimetoxin",
-			"aslimetoxin",
+			"mutationtoxin",
+			"amutationtoxin",
 			"inaprovaline",
 			"space_drugs",
 			"paroxetine",
@@ -1558,6 +1559,22 @@ proc/populate_seed_list()
 	yield = 3
 	potency = 10
 	growth_stages = 5
+
+/datum/seed/tobacco
+	name = "tobacco"
+	seed_name = "tobacco"
+	display_name = "tobacco plant"
+	packet_icon = "seed-tobacco"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/tobacco)
+	plant_icon = "tobacco"
+	chems = list("nutriment" = list(1), "nicotine" = list(1,10))
+
+	lifespan = 50
+	maturation = 5
+	production = 5
+	yield = 4
+	potency = 10
+	growth_stages = 3
 
 /datum/seed/kudzu
 	name = "kudzu"

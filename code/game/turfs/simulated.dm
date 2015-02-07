@@ -27,7 +27,9 @@
 
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
-		if(M.lying)        return
+		if(M.lying)
+			..()
+			return
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 50)
@@ -77,7 +79,7 @@
 		for (var/obj/structure/stool/bed/chair/C in loc)
 			if (C.buckled_mob == M)
 				noslip = 1
-		if (noslip)
+		if((wet == 1 && M.m_intent == "walk") || noslip)
 			return // no slipping while sitting in a chair, plz
 
 		if(src.wet)
@@ -110,15 +112,15 @@
 	if (!..())
 		return 0
 
-	for(var/obj/effect/decal/cleanable/blood/B in contents)
-		if(!B.blood_DNA[M.dna.unique_enzymes])
-			B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-			B.virus2 = virus_copylist(M.virus2)
+	if(istype(M))
+		for(var/obj/effect/decal/cleanable/blood/B in contents)
+			if(!B.blood_DNA[M.dna.unique_enzymes])
+				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+				B.virus2 = virus_copylist(M.virus2)
+			return 1 //we bloodied the floor
+		blood_splatter(src,M.get_blood(M.vessel),1)
 		return 1 //we bloodied the floor
-
-	blood_splatter(src,M.get_blood(M.vessel),1)
-	return 1 //we bloodied the floor
-
+	return 0
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)

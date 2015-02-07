@@ -21,9 +21,16 @@
 
 	var/datum/wires/autolathe/wires = null
 
+/obj/machinery/autolathe/proc/update_recipe_list()
+	if(!machine_recipes)
+		machine_recipes = autolathe_recipes
+
 /obj/machinery/autolathe/interact(mob/user as mob)
 
-	if(..() || disabled)
+	update_recipe_list()
+
+	if(..() || (disabled && !panel_open))
+		user << "<span class='danger'>\The [src] is disabled!</span>"
 		return
 
 	if (shocked)
@@ -31,7 +38,7 @@
 
 	var/dat = "<center><h1>Autolathe Control Panel</h1><hr/>"
 
-	if(panel_open == 0)
+	if(!disabled)
 		dat += "<table width = '100%'>"
 		var/material_top = "<tr>"
 		var/material_bottom = "<tr>"
@@ -81,7 +88,7 @@
 
 		dat += "</table><hr>"
 	//Hacking.
-	else
+	if(panel_open)
 		dat += "<h2>Maintenance Panel</h2>"
 		dat += wires.GetInteractWindow()
 
@@ -96,7 +103,7 @@
 		return
 
 	if (busy)
-		user << "\red \The [src] is busy. Please wait for completion of previous operation."
+		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
 		return
 
 	if(istype(O, /obj/item/weapon/screwdriver))
@@ -116,6 +123,9 @@
 		if(istype(O, /obj/item/weapon/crowbar))
 			dismantle()
 			return
+
+	if(O.loc != user && !(istype(O,/obj/item/stack)))
+		return 0
 
 	//Resources are being loaded.
 	var/obj/item/eating = O
@@ -153,7 +163,7 @@
 		mass_per_sheet += eating.matter[material]
 
 	if(!filltype)
-		user << "\red \The [src] is full. Please remove material from the autolathe in order to insert more."
+		user << "<span class='notice'>\The [src] is full. Please remove material from the autolathe in order to insert more.</span>"
 		return
 	else if(filltype == 1)
 		user << "You fill \the [src] to capacity with \the [eating]."
@@ -185,7 +195,7 @@
 	add_fingerprint(usr)
 
 	if(busy)
-		usr << "\red The autolathe is busy. Please wait for completion of previous operation."
+		usr << "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>"
 		return
 
 	if(href_list["change_category"])
@@ -257,11 +267,6 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
-
-
-/obj/machinery/autolathe/initialize()
-	..()
-	machine_recipes = autolathe_recipes
 
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()

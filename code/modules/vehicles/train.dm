@@ -114,9 +114,9 @@
 /obj/vehicle/train/verb/unlatch_v()
 	set name = "Unlatch"
 	set desc = "Unhitches this train from the one in front of it."
-	set category = "Object"
+	set category = "Vehicle"
 	set src in view(1)
-	
+
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
@@ -131,6 +131,7 @@
 //-------------------------------------------
 
 //attempts to attach src as a follower of the train T
+//Note: there is a modified version of this in code\modules\vehicles\cargo_train.dm specifically for cargo train engines
 /obj/vehicle/train/proc/attach_to(obj/vehicle/train/T, mob/user)
 	if (get_dist(src, T) > 1)
 		user << "\red [src] is too far away from [T] to hitch them together."
@@ -139,11 +140,11 @@
 	if (lead)
 		user << "\red [src] is already hitched to something."
 		return
-	
+
 	if (T.tow)
 		user << "\red [T] is already towing something."
 		return
-	
+
 	//check for cycles.
 	var/obj/vehicle/train/next_car = T
 	while (next_car)
@@ -151,15 +152,15 @@
 			user << "\red That seems very silly."
 			return
 		next_car = next_car.lead
-	
+
 	//latch with src as the follower
 	lead = T
 	T.tow = src
 	set_dir(lead.dir)
-	
+
 	if(user)
 		user << "\blue You hitch [src] to [T]."
-	
+
 	update_stats()
 
 
@@ -168,10 +169,10 @@
 	if (!lead)
 		user << "\red [src] is not hitched to anything."
 		return
-	
+
 	lead.tow = null
 	lead.update_stats()
-	
+
 	user << "\blue You unhitch [src] from [lead]."
 	lead = null
 
@@ -190,7 +191,7 @@
 
 //returns 1 if this is the lead car of the train
 /obj/vehicle/train/proc/is_train_head()
-	if (lead) 
+	if (lead)
 		return 0
 	return 1
 
@@ -209,7 +210,7 @@
 		if (T.tow == src)
 			lead.tow = null
 			lead.update_stats()
-			
+
 			lead = null
 			update_stats()
 			return
@@ -220,7 +221,7 @@
 	var/train_length = 0
 	while(T)
 		train_length++
-		if (powered && on)
+		if (T.powered && T.on)
 			active_engines++
 		T.update_car(train_length, active_engines)
 		T = T.lead

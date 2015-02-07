@@ -22,6 +22,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.1
 	permeability_coefficient = 0.1
+	unacidable = 1
 
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
@@ -127,6 +128,7 @@
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
+		chest.slowdown = offline_slowdown
 		verbs |= /obj/item/weapon/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
@@ -136,11 +138,12 @@
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
 		piece.icon_state = "[initial(icon_state)]"
-		piece.armor = armor
+		piece.armor = armor.Copy()
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		piece.siemens_coefficient = siemens_coefficient
 		piece.permeability_coefficient = permeability_coefficient
+		piece.unacidable = unacidable
 
 	update_icon(1)
 
@@ -165,6 +168,16 @@
 	if(chest_type && !(chest && wearer.wear_suit == chest))
 		return 0
 	return 1
+
+/obj/item/weapon/rig/proc/reset()
+	offline = 2
+	canremove = 1
+	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
+		if(!piece) continue
+		piece.icon_state = "[initial(icon_state)]"
+		piece.flags &= ~STOPPRESSUREDAMAGE
+		piece.flags &= ~AIRTIGHT
+	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
 
@@ -214,7 +227,7 @@
 				if(!failed_to_seal && M.back == src && piece == compare_piece)
 
 					if(!instant)
-						if(!do_after(M,SEAL_DELAY))
+						if(!do_after(M,SEAL_DELAY,needhand=0))
 							failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
@@ -235,13 +248,16 @@
 								if(!seal_target)
 									if(flags & AIRTIGHT)
 										helmet.flags |= AIRTIGHT
-									helmet.flags_inv |= (HIDEEYES|HIDEFACE|HIDEMASK)
-									helmet.body_parts_covered |= (FACE|EYES)
 								else
 									helmet.flags &= ~AIRTIGHT
-									helmet.flags_inv &= ~(HIDEEYES|HIDEFACE|HIDEMASK)
-									helmet.body_parts_covered &= ~(FACE|EYES)
 								helmet.update_light(wearer)
+
+					//sealed pieces become airtight, protecting against diseases
+					if (!seal_target)
+						piece.armor["bio"] = 100
+					else
+						piece.armor["bio"] = src.armor["bio"]
+
 				else
 					failed_to_seal = 1
 
@@ -259,13 +275,9 @@
 			if(canremove)
 				if(flags & AIRTIGHT)
 					helmet.flags |= AIRTIGHT
-				helmet.flags_inv          |= (HIDEEYES|HIDEFACE)
-				helmet.body_parts_covered |= (FACE|EYES)
 			else
 				if(flags & AIRTIGHT)
 					helmet.flags &= ~AIRTIGHT
-				helmet.flags_inv          &= ~(HIDEEYES|HIDEFACE)
-				helmet.body_parts_covered &= ~(FACE|EYES)
 		update_icon(1)
 		return 0
 
@@ -279,18 +291,23 @@
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
 		if(canremove)
-			piece.flags &= ~STOPSPRESSUREDMAGE
+			piece.flags &= ~STOPPRESSUREDAMAGE
 			piece.flags &= ~AIRTIGHT
 		else
-			piece.flags |=  STOPSPRESSUREDMAGE
+			piece.flags |=  STOPPRESSUREDAMAGE
 			piece.flags |=  AIRTIGHT
 	update_icon(1)
 
-	if(instant && air_supply)
-		wearer.internals = air_supply
-		wearer.internals.icon_state = "internal1"
-
 /obj/item/weapon/rig/process()
+
+	// If we've lost any parts, grab them back.
+	var/mob/living/M
+	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
+		if(piece.loc != src && !(wearer && piece.loc == wearer))
+			if(istype(piece.loc, /mob/living))
+				M = piece.loc
+				M.drop_from_inventory(piece)
+			piece.loc = src
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)
@@ -312,14 +329,14 @@
 	else
 		if(offline)
 			offline = 0
-			slowdown = initial(slowdown)
+			chest.slowdown = initial(slowdown)
 
 	if(offline)
 		if(offline == 1)
 			for(var/obj/item/rig_module/module in installed_modules)
 				module.deactivate()
 			offline = 2
-			slowdown = offline_slowdown
+			chest.slowdown = offline_slowdown
 		return
 
 	if(cell && cell.charge > 0 && electrified > 0)
@@ -498,6 +515,8 @@
 		return
 
 	if(href_list["toggle_piece"])
+		if(ishuman(usr) && (usr.stat || usr.stunned || usr.lying))
+			return 0
 		toggle_piece(href_list["toggle_piece"], usr)
 	else if(href_list["toggle_seals"])
 		toggle_seals(usr)
@@ -520,12 +539,21 @@
 					module.charge_selected = href_list["charge_type"]
 	else if(href_list["toggle_ai_control"])
 		ai_override_enabled = !ai_override_enabled
+		notify_ai("Synthetic suit control has been [ai_override_enabled ? "enabled" : "disabled"].")
 	else if(href_list["toggle_suit_lock"])
 		locked = !locked
 
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	return
+	return 1
+
+/obj/item/weapon/rig/proc/notify_ai(var/message)
+	if(!message || !installed_modules || !installed_modules.len)
+		return
+	for(var/obj/item/rig_module/module in installed_modules)
+		for(var/mob/living/silicon/ai/ai in module.contents)
+			if(ai && ai.client && !ai.stat)
+				ai << "[message]"
 
 /obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
 	..()
@@ -547,14 +575,13 @@
 
 /obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode)
 
-	if(sealing)
-		return
-
-	if(!cell || !cell.charge)
-		H << "<span class='warning'>The suit is out of power.</span>"
+	if(sealing || !cell || !cell.charge)
 		return
 
 	if(!istype(wearer) || !wearer.back == src)
+		return
+
+	if(usr == wearer && (usr.stat||usr.paralysis||usr.stunned)) // If the usr isn't wearing the suit it's probably an AI.
 		return
 
 	var/obj/item/check_slot

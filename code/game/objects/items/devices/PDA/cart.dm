@@ -28,8 +28,7 @@
 	var/datum/data/record/active1 = null //General
 	var/datum/data/record/active2 = null //Medical
 	var/datum/data/record/active3 = null //Security
-	var/obj/machinery/power/monitor/powmonitor = null // Power Monitor
-	var/list/powermonitors = list()
+	var/selected_sensor = null // Power Sensor
 	var/message1	// used for status_displays
 	var/message2
 	var/list/stored_data = list()
@@ -263,41 +262,18 @@
 
 
 	/*		Power Monitor (Mode: 43 / 433)			*/
-	/*
+
 	if(mode==43 || mode==433)
-		var/pMonData[0]
-		var/apcData[0]
-		for(var/obj/machinery/computer/power_monitor/pMon in world)
-			if(!(pMon.stat & (NOPOWER|BROKEN)) )
-				var/turf/monitorturf = locate(pMon.x,pMon.y,pMon.z)
-				var/area/monitorarea = monitorturf.loc
-				pMonData[++pMonData.len] = list ("Name" = html_encode(monitorarea ? pMon.name + " in " + monitorarea.name : pMon.name), "ref" = "\ref[pMon]")
-				if(isnull(powmonitor)) powmonitor = pMon
+		var/list/sensors = list()
+		var/obj/machinery/power/sensor/MS = null
 
-		values["powermonitors"] = pMonData
-
-		if (!isnull(powmonitor.powernet))
-			values["powerconnected"] = 1
-			values["poweravail"] = powmonitor.powernet.avail
-			values["powerload"] = num2text(powmonitor.powernet.viewload,10)
-			var/list/L = list()
-			for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
-				if(istype(term.master, /obj/machinery/power/apc))
-					var/obj/machinery/power/apc/A = term.master
-					L += A
-
-			var/list/Status = list(0,0,1,1) // Status:  off, auto-off, on, auto-on
-			var/list/chg = list(0,1,1)	// Charging: nope, charging, full
-			for(var/obj/machinery/power/apc/A in L)
-				apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
-
-			values["apcs"] = apcData
-		else
-			values["powerconnected"] = 0
-	*/
-
-
-
+		for(var/obj/machinery/power/sensor/S in machines)
+			sensors.Add(list(list("name_tag" = S.name_tag)))
+			if(S.name_tag == selected_sensor)
+				MS = S
+		values["power_sensors"] = sensors
+		if(selected_sensor && MS)
+			values["sensor_reading"] = MS.return_reading_data()
 
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
@@ -586,19 +562,22 @@
 				if("alert")
 					post_status("alert", href_list["alert"])
 				if("setmsg1")
-					message1 = reject_bad_text(trim(copytext(sanitize(input("Line 1", "Enter Message Text", message1) as text|null), 1, 40)), 40)
+					message1 = reject_bad_text(trim(sanitize(copytext(input("Line 1", "Enter Message Text", message1) as text|null, 1, 40))), 40)
 					updateSelfDialog()
 				if("setmsg2")
-					message2 = reject_bad_text(trim(copytext(sanitize(input("Line 2", "Enter Message Text", message2) as text|null), 1, 40)), 40)
+					message2 = reject_bad_text(trim(sanitize(copytext(input("Line 2", "Enter Message Text", message2) as text|null, 1, 40))), 40)
 					updateSelfDialog()
 				else
 					post_status(href_list["statdisp"])
-		/*
+
 		if("Power Select")
-			var/pref = href_list["target"]
-			powmonitor = locate(pref)
+			selected_sensor = href_list["target"]
 			loc:mode = 433
 			mode = 433
-		´*/
+		if("Power Clear")
+			selected_sensor = null
+			loc:mode = 43
+			mode = 43
+
 
 	return 1

@@ -28,8 +28,9 @@
 
 	if(stat == DEAD) return
 
-	hud_updateflag |= 1 << HEALTH_HUD
-	hud_updateflag |= 1 << STATUS_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+
 	handle_hud_list()
 
 	//Handle species-specific deaths.
@@ -84,7 +85,7 @@
 
 /mob/living/carbon/human/proc/Drain()
 	ChangeToHusk()
-	//mutations |= NOCLONE
+	mutations |= HUSK
 	return
 
 /mob/living/carbon/human/proc/ChangeToSkeleton()

@@ -185,7 +185,7 @@ datum/tech/materials
 
 datum/tech/engineering
 	name = "Engineering Research"
-	desc = "Development of new and improved engineering parts and."
+	desc = "Development of new and improved engineering parts."
 	id = "engineering"
 
 datum/tech/phorontech

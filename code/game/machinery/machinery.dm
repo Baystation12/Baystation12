@@ -112,23 +112,6 @@ Class Procs:
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/global/gl_uid = 1
 
-/obj/machinery/drain_power(var/drain_check)
-
-	if(drain_check)
-		return 1
-
-	if(!powered())
-		return 0
-
-	var/area/area = get_area(src)
-	if(!area)
-		return 0
-
-	var/obj/machinery/power/apc/apc = area.get_apc()
-	if(!apc)
-		return 0
-	return apc.drain_power()
-
 /obj/machinery/New(l, d=0)
 	..(l)
 	if(d)
@@ -204,59 +187,9 @@ Class Procs:
 /obj/machinery/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	if(..())
 		return 1
-	if(!can_be_used_by(usr, be_close = checkrange))
-		return 1
-	add_fingerprint(usr)
-	return 0
-
-/obj/machinery/proc/can_be_used_by(mob/user, be_close = 1)
 	if(!interact_offline && stat & (NOPOWER|BROKEN))
-		return 0
-	if(!user.canUseTopic(src, be_close))
-		return 0
-	return 1
-
-////////////////////////////////////////////////////////////////////////////////////////////
-
-/mob/proc/canUseTopic(atom/movable/M, be_close = 1)
-	return
-
-/mob/dead/observer/canUseTopic(atom/movable/M, be_close = 1)
-	if(check_rights(R_ADMIN, 0))
-		return
-
-/mob/living/canUseTopic(atom/movable/M, be_close = 1, no_dextery = 0)
-	if(no_dextery)
-		src << "<span class='notice'>You don't have the dexterity to do this!</span>"
-		return 0
-	return be_close && !in_range(M, src)
-
-/mob/living/carbon/human/canUseTopic(atom/movable/M, be_close = 1)
-	if(restrained() || lying || stat || stunned || weakened)
-		return
-	if(be_close && !in_range(M, src))
-		if(TK in mutations)
-			var/mob/living/carbon/human/H = M
-			if(istype(H.l_hand, /obj/item/tk_grab) || istype(H.r_hand, /obj/item/tk_grab))
-				return 1
-		return
-	if(!isturf(M.loc) && M.loc != src)
-		return
-	return 1
-
-/mob/living/silicon/ai/canUseTopic(atom/movable/M)
-	if(stat)
-		return
-	//stop AIs from leaving windows open and using then after they lose vision
-	//apc_override is needed here because AIs use their own APC when powerless
-	if(cameranet && !cameranet.checkTurfVis(get_turf(M)) && !apc_override)
-		return
-	return 1
-
-/mob/living/silicon/robot/canUseTopic(atom/movable/M)
-	if(stat || lockcharge || stunned || weakened)
-		return
-	return 1
+		return 1
+	return 0
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -295,7 +228,7 @@ Class Procs:
 
 	src.add_fingerprint(user)
 
-	return 0
+	return ..()
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
 	return

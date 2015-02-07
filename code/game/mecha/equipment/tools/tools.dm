@@ -189,48 +189,51 @@
 		if(get_dist(chassis, target)>2) return
 		set_ready_state(0)
 		if(do_after_cooldown(target))
-			if(istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
+			if( istype(target, /obj/structure/reagent_dispensers/watertank) && get_dist(chassis,target) <= 1)
 				var/obj/o = target
 				var/amount = o.reagents.trans_to(src, 200)
 				occupant_message("\blue [amount] units transferred into internal tank.")
 				playsound(chassis, 'sound/effects/refill.ogg', 50, 1, -6)
-			else
-				if(src.reagents.total_volume > 0)
-					playsound(chassis, 'sound/effects/extinguish.ogg', 75, 1, -3)
-					var/direction = get_dir(chassis,target)
-					var/turf/T = get_turf(target)
-					var/turf/T1 = get_step(T,turn(direction, 90))
-					var/turf/T2 = get_step(T,turn(direction, -90))
+				return
 
-					var/list/the_targets = list(T,T1,T2)
-					for(var/a=0, a<spray_particles, a++)
-						spawn(0)
-							var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(chassis))
+			if (src.reagents.total_volume < 1)
+				occupant_message("\red \The [src] is empty.")
+				return
+
+			playsound(chassis, 'sound/effects/extinguish.ogg', 75, 1, -3)
+
+			var/direction = get_dir(chassis,target)
+
+			var/turf/T = get_turf(target)
+			var/turf/T1 = get_step(T,turn(direction, 90))
+			var/turf/T2 = get_step(T,turn(direction, -90))
+
+			var/list/the_targets = list(T,T1,T2)
+
+			for(var/a=0, a<5, a++)
+				spawn(0)
+					var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(chassis) )
+					var/turf/my_target = pick(the_targets)
+					var/datum/reagents/R = new/datum/reagents(5)
+					if(!W) return
+					W.reagents = R
+					R.my_atom = W
+					if(!W || !src) return
+					src.reagents.trans_to(W,1)
+					for(var/b=0, b<5, b++)
+						step_towards(W,my_target)
+						if(!W || !W.reagents) return
+						W.reagents.reaction(get_turf(W))
+						for(var/atom/atm in get_turf(W))
 							if(!W)
 								return
-							var/turf/my_target = pick(the_targets)
-							var/datum/reagents/R = new/datum/reagents(spray_amount)
-							W.reagents = R
-							R.my_atom = W
-							src.reagents.trans_to(W, spray_amount)
-						
-							for(var/b=0, b<4, b++)
-								if(!W)
-									return
-								step_towards(W,my_target)
-								if(!W)
-									return
-								if(!W.reagents)
-									break
-								var/turf/W_turf = get_turf(W)
-								W.reagents.reaction(W_turf)
-								for(var/atom/atm in W_turf)
-									W.reagents.reaction(atm)
-								if(W.loc == my_target)
-									break
-								sleep(2)
-							W.delete()
-		return 1
+							if(!W.reagents)
+								break
+							W.reagents.reaction(atm)
+						if(W.loc == my_target) break
+						sleep(2)
+					W.delete()
+			return 1
 
 	get_equip_info()
 		return "[..()] \[[src.reagents.total_volume]\]"
@@ -1105,7 +1108,7 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-		
+
 	if(usr != occupant)
 		return
 	occupant << "You climb out from \the [src]."
@@ -1136,7 +1139,7 @@
 	if(occupant)
 		occupant_message("Unable to detach [src] - equipment occupied.")
 		return
-		
+
 	var/obj/mecha/M = chassis
 	..()
 	if (M && !(locate(/obj/item/mecha_parts/mecha_equipment/tool/passenger) in M))
@@ -1152,7 +1155,7 @@
 		occupant_message("Passenger compartment hatch [door_locked? "locked" : "unlocked"].")
 		if (chassis)
 			chassis.visible_message("The hatch on \the [chassis] [door_locked? "locks" : "unlocks"].", "You hear something latching.")
-		
+
 
 #define LOCKED 1
 #define OCCUPIED 2
@@ -1166,20 +1169,20 @@
 	//check that usr can climb in
 	if (usr.stat || !ishuman(usr))
 		return
-	
+
 	if (!usr.Adjacent(src))
 		return
-	
+
 	if (!isturf(usr.loc))
 		usr << "\red You can't reach the passenger compartment from here."
 		return
-	
+
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
 			usr << "\red Kinda hard to climb in while handcuffed don't you think?"
 			return
-	
+
 	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
 			usr << "\red You're too busy getting your life sucked out of you."
@@ -1194,11 +1197,11 @@
 		if (P.door_locked)
 			feedback |= LOCKED
 			continue
-		
+
 		//found a boardable compartment
 		P.move_inside(usr)
 		return
-	
+
 	//didn't find anything
 	switch (feedback)
 		if (OCCUPIED)

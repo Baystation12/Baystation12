@@ -15,6 +15,7 @@ Pipelines + Other Objects -> Pipe network
 	active_power_usage = 0
 	power_channel = ENVIRON
 	var/nodealert = 0
+	var/power_rating //the maximum amount of power the machine can use to do work, affects how powerful the machine is, in Watts
 
 	layer = 2.4 //under wires with their 2.44
 

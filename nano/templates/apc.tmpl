@@ -137,7 +137,11 @@
 			Total Load:
 		</div>
 		<div class="itemContent">
-			{{:data.totalLoad}}&nbsp;W
+			{{if data.totalCharging}}
+				{{:data.totalLoad}}W (+ {{:data.totalCharging}}W Charging)
+			{{else}}
+				{{:data.totalLoad}}W
+			{{/if}}
 		</div>
 	</div>
 

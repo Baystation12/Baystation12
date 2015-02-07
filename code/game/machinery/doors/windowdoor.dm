@@ -24,9 +24,35 @@
 		src.base_state = src.icon_state
 	return
 
+/obj/machinery/door/window/proc/shatter(var/display_message = 1)
+	new /obj/item/weapon/shard(src.loc)
+	var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
+	CC.amount = 2
+	var/obj/item/weapon/airlock_electronics/ae
+	if(!electronics)
+		ae = new/obj/item/weapon/airlock_electronics( src.loc )
+		if(!src.req_access)
+			src.check_access()
+		if(src.req_access.len)
+			ae.conf_access = src.req_access
+		else if (src.req_one_access.len)
+			ae.conf_access = src.req_one_access
+			ae.one_access = 1
+	else
+		ae = electronics
+		electronics = null
+		ae.loc = src.loc
+	if(operating == -1)
+		ae.icon_state = "door_electronics_smoked"
+		operating = 0
+	src.density = 0
+	playsound(src, "shatter", 70, 1)
+	if(display_message)
+		visible_message("[src] shatters!")
+	del(src)
+
 /obj/machinery/door/window/Del()
 	density = 0
-	playsound(src, "shatter", 70, 1)
 	update_nearby_tiles()
 	..()
 
@@ -120,28 +146,7 @@
 /obj/machinery/door/window/take_damage(var/damage)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
-		new /obj/item/weapon/shard(src.loc)
-		var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
-		CC.amount = 2
-		var/obj/item/weapon/airlock_electronics/ae
-		if(!electronics)
-			ae = new/obj/item/weapon/airlock_electronics( src.loc )
-			if(!src.req_access)
-				src.check_access()
-			if(src.req_access.len)
-				ae.conf_access = src.req_access
-			else if (src.req_one_access.len)
-				ae.conf_access = src.req_one_access
-				ae.one_access = 1
-		else
-			ae = electronics
-			electronics = null
-			ae.loc = src.loc
-		if(operating == -1)
-			ae.icon_state = "door_electronics_smoked"
-			operating = 0
-		src.density = 0
-		del(src)
+		shatter()
 		return
 
 /obj/machinery/door/window/attack_ai(mob/user as mob)
@@ -215,7 +220,7 @@
 			ae.icon_state = "door_electronics_smoked"
 
 			operating = 0
-			del(src)
+			shatter(src)
 			return
 
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)

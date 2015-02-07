@@ -45,6 +45,10 @@
 
 	log_debug("Event '[EM.name]' has completed at [worldtime2text()].")
 
+/datum/event_manager/proc/delay_events(var/severity, var/delay)
+	var/list/datum/event_container/EC = event_containers[severity]
+	EC.next_event_time += delay
+
 /datum/event_manager/proc/Interact(var/mob/living/user)
 
 	var/html = GetInteractWindow()
@@ -75,6 +79,7 @@
 
 /datum/event_manager/proc/GetInteractWindow()
 	var/html = "<A align='right' href='?src=\ref[src];refresh=1'>Refresh</A>"
+	html += "<A align='right' href='?src=\ref[src];pause_all=[!config.allow_random_events]'>Pause All - [config.allow_random_events ? "Pause" : "Resume"]</A>"
 
 	if(selected_event_container)
 		var/event_time = max(0, selected_event_container.next_event_time - world.time)
@@ -92,7 +97,7 @@
 			html += "<td>[EM.max_weight]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_enabled=\ref[EM]'>[EM.enabled]</A></td>"
-			html += "<td><span class='alert'>[EM.get_weight()]</span></td>"
+			html += "<td><span class='alert'>[EM.get_weight(number_active_with_role())]</span></td>"
 			html += "<td><A align='right' href='?src=\ref[src];remove=\ref[EM];EC=\ref[selected_event_container]'>Remove</A></td>"
 			html += "</tr>"
 		html += "</table>"
@@ -190,12 +195,12 @@
 		admin_log_and_message_admins("has [report_at_round_end ? "enabled" : "disabled"] the round end event report.")
 	else if(href_list["dec_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		var/decrease = (60 * RaiseToPower(10, text2num(href_list["dec_timer"])))
+		var/decrease = 60 * (10 ** text2num(href_list["dec_timer"]))
 		EC.next_event_time -= decrease
 		admin_log_and_message_admins("decreased timer for [severity_to_string[EC.severity]] events by [decrease/600] minute(s).")
 	else if(href_list["inc_timer"])
 		var/datum/event_container/EC = locate(href_list["event"])
-		var/increase = (60 * RaiseToPower(10, text2num(href_list["inc_timer"])))
+		var/increase = 60 * (10 ** text2num(href_list["inc_timer"]))
 		EC.next_event_time += increase
 		admin_log_and_message_admins("increased timer for [severity_to_string[EC.severity]] events by [increase/600] minute(s).")
 	else if(href_list["select_event"])
@@ -207,6 +212,9 @@
 		var/datum/event_container/EC = locate(href_list["pause"])
 		EC.delayed = !EC.delayed
 		admin_log_and_message_admins("has [EC.delayed ? "paused" : "resumed"] countdown for [severity_to_string[EC.severity]] events.")
+	else if(href_list["pause_all"])
+		config.allow_random_events = text2num(href_list["pause_all"])
+		admin_log_and_message_admins("has [config.allow_random_events ? "resumed" : "paused"] countdown for all events.")
 	else if(href_list["interval"])
 		var/delay = input("Enter delay modifier. A value less than one means events fire more often, higher than one less often.", "Set Interval Modifier") as num|null
 		if(delay && delay > 0)

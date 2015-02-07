@@ -76,17 +76,18 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.species.flags & IS_SYNTHETIC || H.species.insulated)
+			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5)) //Thick skin.
 				return
 
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
-				H.Weaken(3)
 				if(affecting.take_damage(5, 0))
 					H.UpdateDamageIcon()
 				H.updatehealth()
+				if(!(H.species & NO_PAIN))
+					H.Weaken(3)
 	..()
 
 // Shrapnel

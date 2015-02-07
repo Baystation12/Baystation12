@@ -45,6 +45,20 @@
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
 
+	heat_discomfort_level = 295
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+		)
+
+	cold_discomfort_level = 292
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+		)
+
 /datum/species/tajaran
 	name = "Tajara"
 	name_plural = "Tajaran"
@@ -54,6 +68,9 @@
 	tail = "tajtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
+	slowdown = -1
+	brute_mod = 1.2
+
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
 	influenced heavily by their long history of Slavemaster rule. They have a structured, clan-influenced way \
@@ -75,6 +92,14 @@
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
 
+	heat_discomfort_level = 292
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+	cold_discomfort_level = 275
+
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
@@ -94,6 +119,7 @@
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
+	base_color = "#006666"
 
 	reagent_tag = IS_SKRELL
 
@@ -107,6 +133,9 @@
 	primitive = /mob/living/carbon/alien/diona
 	slowdown = 7
 	rarity_value = 3
+	hud_type = /datum/hud_data/diona
+	siemens_coefficient = 0.3
+
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
 	there is no effective upper limit to the number that can fuse in gestalt, and reports exist	of the Epsilon Ursae \

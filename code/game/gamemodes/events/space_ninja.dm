@@ -116,7 +116,7 @@ var/ninja_confirmed_selection = 0
 	var/commando_list[] = list()//Commandos.
 
 	//We want the ninja to appear only in certain modes.
-//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","nuclear","malfunction","monkey")  // Commented out for both testing and ninjas
+//	var/acceptable_modes_list[] = list("traitor","revolution","cult","wizard","changeling","traitorchan","mercenary","malfunction","monkey")  // Commented out for both testing and ninjas
 //	if(!(current_mode.config_tag in acceptable_modes_list))
 //		return
 
@@ -207,8 +207,6 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		//The ninja will be created on the right spawn point or at late join.
 		var/mob/living/carbon/human/new_ninja = create_space_ninja(pick(ninjastart.len ? ninjastart : latejoin))
 		new_ninja.key = ninja_key
-		new_ninja.internal = new_ninja.s_store //So the poor ninja has something to breath when they spawn in spess.
-		new_ninja.internals.icon_state = "internal1"
 
 		//Now for the rest of the stuff.
 
@@ -474,7 +472,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 	var/mission
 	while(!mission)
-		mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+		mission = sanitize(copytext(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", ""),1,MAX_MESSAGE_LEN))
 		if(!mission)
 			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
 				return
@@ -515,6 +513,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	return 1
 
 /mob/living/carbon/human/proc/equip_space_ninja(safety=0)//Safety in case you need to unequip stuff for existing characters.
+
 	if(safety)
 		del(w_uniform)
 		del(wear_suit)
@@ -533,27 +532,22 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
 
 	var/obj/item/weapon/rig/light/ninja/ninjasuit = new(src)
+	equip_to_slot_or_del(ninjasuit,slot_back)
+	ninjasuit.toggle_seals(src,1)
 
 	// Make sure the ninja can actually equip the suit.
 	if(src.dna && src.dna.unique_enzymes)
 		ninjasuit.locked_dna = src.dna.unique_enzymes
-		spawn(10)
-			src << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
+		src << "<span class='warning'>Suit hardware locked to your DNA hash.</span>"
 	else
 		ninjasuit.req_access = list()
-
-	equip_to_slot_or_del(ninjasuit,slot_back)
-
+	if(istype(back,/obj/item/weapon/rig))
+		var/obj/item/weapon/rig/rig = back
+		if(rig.air_supply)
+			internal = rig.air_supply
 	spawn(10)
-		ninjasuit.toggle_seals(src,1)
-
-		if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/rig = back
-			if(rig.air_supply)
-				internal = rig.air_supply
-		if(!internal && s_store)
-			internal = s_store
 		if(internal)
 			internals.icon_state = "internal1"
-
+		else
+			src << "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>"
 	return 1

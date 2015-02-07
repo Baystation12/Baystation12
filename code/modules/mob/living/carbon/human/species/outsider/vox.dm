@@ -28,7 +28,7 @@
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
-	insulated = 1
+	siemens_coefficient = 0.2
 
 	flags = IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
 

@@ -23,6 +23,11 @@ var/list/robot_verbs_default = list(
 	var/integrated_light_power = 6
 	var/datum/wires/robot/wires
 
+//Icon stuff
+
+	var/icontype //Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
+
 //Hud stuff
 
 	var/obj/screen/cells = null
@@ -76,6 +81,7 @@ var/list/robot_verbs_default = list(
 	var/lockcharge //Used when locking down a borg to preserve cell charge
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
+	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 
 /mob/living/silicon/robot/syndicate
@@ -106,6 +112,8 @@ var/list/robot_verbs_default = list(
 	robot_modules_background.icon_state = "block"
 	robot_modules_background.layer = 19 //Objects that appear on screen are on layer 20, UI should be just below it.
 	ident = rand(1, 999)
+	module_sprites["Basic"] = "robot"
+	icontype = "Default"
 	updatename("Default")
 	updateicon()
 
@@ -177,12 +185,16 @@ var/list/robot_verbs_default = list(
 
 	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 
+/mob/living/silicon/robot/SetName(pickedName as text)
+	custom_name = pickedName
+	updatename()
+
 /mob/living/silicon/robot/proc/sync()
 	if(lawupdate && connected_ai)
 		lawsync()
 		photosync()
 
-/mob/living/silicon/robot/drain_power(var/drain_check)
+/mob/living/silicon/robot/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
 		return 1
@@ -190,14 +202,15 @@ var/list/robot_verbs_default = list(
 	if(!cell || !cell.charge)
 		return 0
 
-	if(cell.charge)
-		src << "<span class='danger'>Warning: Unauthorized access through power channel 12 detected.</span>"
-		var/drained_power = rand(200,400)
-		if(cell.charge < drained_power)
-			drained_power = cell.charge
-			cell.use(drained_power)
-			return drained_power
+	// Actual amount to drain from cell, using CELLRATE
+	var/cell_amount = amount * CELLRATE
 
+	if(cell.charge > cell_amount)
+		// Spam Protection
+		if(prob(10))
+			src << "<span class='danger'>Warning: Unauthorized access through power channel [rand(11,29)] detected!</span>"
+		cell.use(cell_amount)
+		return amount
 	return 0
 
 // setup the PDA and its name
@@ -226,11 +239,10 @@ var/list/robot_verbs_default = list(
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
-	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-
 	if(module)
 		return
 
+	module_sprites = list()
 	switch(modtype)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
@@ -957,38 +969,25 @@ var/list/robot_verbs_default = list(
 
 	overlays.Cut()
 	if(stat == 0)
-		overlays += "eyes"
-		overlays.Cut()
-		overlays += "eyes-[icon_state]"
-	else
-		overlays -= "eyes"
-
-	if(opened && custom_sprite == 1) //Custom borgs also have custom panels, heh
-		if(wiresexposed)
-			overlays += "[src.ckey]-openpanel +w"
-		else if(cell)
-			overlays += "[src.ckey]-openpanel +c"
-		else
-			overlays += "[src.ckey]-openpanel -c"
+		overlays += "eyes-[module_sprites[icontype]]"
 
 	if(opened)
+		var/panelprefix = custom_sprite ? src.ckey : "ov"
 		if(wiresexposed)
-			overlays += "ov-openpanel +w"
+			overlays += "[panelprefix]-openpanel +w"
 		else if(cell)
-			overlays += "ov-openpanel +c"
+			overlays += "[panelprefix]-openpanel +c"
 		else
-			overlays += "ov-openpanel -c"
+			overlays += "[panelprefix]-openpanel -c"
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
-		overlays += "[icon_state]-shield"
+		overlays += "[module_sprites[icontype]]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "[module_sprites[icontype]]-roll"
 		else
-			icon_state = base_icon
+			icon_state = module_sprites[icontype]
 		return
 
 //Call when target overlay should be added/removed
@@ -1221,8 +1220,6 @@ var/list/robot_verbs_default = list(
 	else
 		triesleft--
 
-	var/icontype
-
 	if (custom_sprite == 1)
 		icontype = "Custom"
 		triesleft = 0
@@ -1284,16 +1281,6 @@ var/list/robot_verbs_default = list(
 		return 1
 	return 0
 
-/mob/living/silicon/robot/syndicate/canUseTopic(atom/movable/M)
-	if(stat || lockcharge || stunned || weakened)
-		return
-	if(z in config.admin_levels)
-		return 1
-	if(istype(M, /obj/machinery))
-		var/obj/machinery/Machine = M
-		return Machine.emagged
-	return 1
-
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
 	if(!connected_ai)
 		return
@@ -1303,4 +1290,5 @@ var/list/robot_verbs_default = list(
 		if(2) //New Module
 			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [module.name].</span><br>"
 		if(3) //New Name
-			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [oldname] is now designated as [newname].</span><br>"
+			if(oldname != newname)
+				connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [oldname] is now designated as [newname].</span><br>"

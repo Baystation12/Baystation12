@@ -12,13 +12,20 @@
 
 	message = trim_strip_html_properly(message)
 
-	if(stat == 2)
-		return say_dead(message)
+	if(stat)
+		if(stat == 2)
+			return say_dead(message)
+		return
+
+	if (istype(src.wear_mask, /obj/item/clothing/mask/muzzle))
+		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
+		return
 
 	var/message_mode = parse_message_mode(message, "headset")
 
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
+	switch(copytext(message,1,2))
+		if("*") return emote(copytext(message,2))
+		if("^") return custom_emote(1, copytext(message,2))
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
@@ -52,9 +59,6 @@
 		if(ending=="?")
 			verb="asks"
 
-	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
-		return
-
 	message = trim(message)
 
 	if(speech_problem_flag)
@@ -63,7 +67,7 @@
 		verb = handle_r[2]
 		speech_problem_flag = handle_r[3]
 
-	if(!message || stat)
+	if(!message || message == "")
 		return
 
 	var/list/obj/item/used_radios = new
@@ -265,45 +269,46 @@
 	return verb
 
 /mob/living/carbon/human/proc/handle_speech_problems(var/message)
+
 	var/list/returns[3]
 	var/verb = "says"
 	var/handled = 0
-	if(silent)
+	if(silent || (sdisabilities & MUTE))
 		message = ""
 		handled = 1
-	if(sdisabilities & MUTE)
-		message = ""
-		handled = 1
-	if(wear_mask)
-		if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
-			var/obj/item/clothing/mask/horsehead/hoers = wear_mask
-			if(hoers.voicechange)
-				if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
-					message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-					verb = pick("whinnies","neighs", "says")
-					handled = 1
+	if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
+		var/obj/item/clothing/mask/horsehead/hoers = wear_mask
+		if(hoers.voicechange)
+			if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
+				message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+				verb = pick("whinnies","neighs", "says")
+				handled = 1
 
-	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollers")
-		handled = 1
-	if(slurring)
-		message = slur(message)
-		verb = pick("stammers","stutters")
-		handled = 1
-
-	var/braindam = getBrainLoss()
-	if(braindam >= 60)
-		handled = 1
-		if(prob(braindam/4))
+	if(message != "")
+		if((HULK in mutations) && health >= 25 && length(message))
+			message = "[uppertext(message)]!!!"
+			verb = pick("yells","roars","hollers")
+			handled = 1
+		if(slurring)
+			message = slur(message)
+			verb = pick("slobbers","slurs")
+			handled = 1
+		if(stuttering)
 			message = stutter(message)
-			verb = pick("stammers", "stutters")
-		if(prob(braindam))
-			message = uppertext(message)
-			verb = pick("yells like an idiot","says rather loudly")
+			verb = pick("stammers","stutters")
+			handled = 1
+
+		var/braindam = getBrainLoss()
+		if(braindam >= 60)
+			handled = 1
+			if(prob(braindam/4))
+				message = stutter(message)
+				verb = pick("stammers", "stutters")
+			if(prob(braindam))
+				message = uppertext(message)
+				verb = "yells loudly"
 
 	returns[1] = message
 	returns[2] = verb
 	returns[3] = handled
-
 	return returns

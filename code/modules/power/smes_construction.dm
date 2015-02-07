@@ -1,6 +1,11 @@
-// Constructable SMES version (based on SMES Coils)
+// BUILDABLE SMES(Superconducting Magnetic Energy Storage) UNIT
+//
+// Last Change 1.1.2015 by Atlantis - Happy New Year!
+//
+// This is subtype of SMES that should be normally used. It can be constructed, deconstructed and hacked.
+// It also supports RCON System which allows you to operate it remotely, if properly set.
 
-//Construction Items
+//Construction Item
 /obj/item/weapon/smes_coil
 	name = "superconductive magnetic coil"
 	desc = "Heavy duty superconductive magnetic coil, mainly used in construction of SMES units."
@@ -23,6 +28,10 @@
 	charge = 0
 	should_be_mapped = 1
 
+// Proc: process()
+// Parameters: None
+// Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
+// This also causes the SMES to quickly discharge, and has small chance of damaging output APCs.
 /obj/machinery/power/smes/buildable/process()
 	if(!grounding && (Percentage() > 5))
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -34,13 +43,18 @@
 
 	..()
 
-
+// Proc: attack_ai()
+// Parameters: None
+// Description: AI requires the RCON wire to be intact to operate the SMES.
 /obj/machinery/power/smes/buildable/attack_ai()
 	if(RCon)
 		..()
 	else // RCON wire cut
 		usr << "<span class='warning'>Connection error: Destination Unreachable.</span>"
 
+// Proc: New()
+// Parameters: None
+// Description: Adds standard components for this SMES, and forces recalculation of properties.
 /obj/machinery/power/smes/buildable/New()
 	component_parts = list()
 	component_parts += new /obj/item/stack/cable_coil(src,30)
@@ -54,11 +68,17 @@
 	recalc_coils()
 	..()
 
+// Proc: attack_hand()
+// Parameters: None
+// Description: Opens the UI as usual, and if cover is removed opens the wiring panel.
 /obj/machinery/power/smes/buildable/attack_hand()
 	..()
 	if(open_hatch)
 		wires.Interact(usr)
 
+// Proc: recalc_coils()
+// Parameters: None
+// Description: Updates properties (IO, capacity, etc.) of this SMES by checking internal components.
 /obj/machinery/power/smes/buildable/proc/recalc_coils()
 	if ((cur_coils <= max_coils) && (cur_coils >= 1))
 		capacity = 0
@@ -73,6 +93,10 @@
 	else
 		return 0
 
+// Proc: total_system_failure()
+// Parameters: 2 (intensity - how strong the failure is, user - person which caused the failure)
+// Description: Checks the sensors for alerts. If change (alerts cleared or detected) occurs, calls for icon update.
+/obj/machinery/power/smes/buildable/proc/total_system_failure(var/intensity = 0, var/mob/user as mob)
 	// SMESs store very large amount of power. If someone screws up (ie: Disables safeties and attempts to modify the SMES) very bad things happen.
 	// Bad things are based on charge percentage.
 	// Possible effects:
@@ -82,7 +106,7 @@
 	// Light Overload - X% chance to overload each lighting circuit in connected powernet. APC based.
 	// APC Failure - X% chance to destroy APC causing very weak explosion too. Won't cause hull breach or serious harm.
 	// SMES Explosion - X% chance to destroy the SMES, in moderate explosion. May cause small hull breach.
-/obj/machinery/power/smes/buildable/proc/total_system_failure(var/intensity = 0, var/mob/user as mob)
+
 	if (!intensity)
 		return
 
@@ -187,7 +211,9 @@
 
 
 
-	// Gets powernet APCs and overloads lights or breaks the APC completely, depending on percentages.
+// Proc: apcs_overload()
+// Parameters: 2 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights)
+// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
 /obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance)
 	if (!src.powernet)
 		return
@@ -200,7 +226,9 @@
 			if (prob(failure_chance))
 				A.set_broken()
 
-	// Failing SMES has special icon overlay.
+// Proc: update_icon()
+// Parameters: None
+// Description: Allows us to use special icon overlay for critical SMESs
 /obj/machinery/power/smes/buildable/update_icon()
 	if (failing)
 		overlays.Cut()
@@ -208,6 +236,9 @@
 	else
 		..()
 
+// Proc: attackby()
+// Parameters: 2 (W - object that was used on this machine, user - person which used the object)
+// Description: Handles tool interaction. Allows deconstruction/upgrading/fixing.
 /obj/machinery/power/smes/buildable/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	// No more disassembling of overloaded SMESs. You broke it, now enjoy the consequences.
 	if (failing)
@@ -283,18 +314,30 @@
 			else
 				usr << "\red You can't insert more coils to this SMES unit!"
 
+// Proc: toggle_input()
+// Parameters: None
+// Description: Switches the input on/off depending on previous setting
 /obj/machinery/power/smes/buildable/proc/toggle_input()
 	input_attempt = !input_attempt
 	update_icon()
 
+// Proc: toggle_output()
+// Parameters: None
+// Description: Switches the output on/off depending on previous setting
 /obj/machinery/power/smes/buildable/proc/toggle_output()
 	output_attempt = !output_attempt
 	update_icon()
 
+// Proc: set_input()
+// Parameters: 1 (new_input - New input value in Watts)
+// Description: Sets input setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_input(var/new_input = 0)
-	input_level = new_input
+	input_level = between(0, new_input, input_level_max)
 	update_icon()
 
+// Proc: set_output()
+// Parameters: 1 (new_output - New output value in Watts)
+// Description: Sets output setting on this SMES. Trims it if limits are exceeded.
 /obj/machinery/power/smes/buildable/proc/set_output(var/new_output = 0)
-	output_level = new_output
+	output_level = between(0, new_output, output_level_max)
 	update_icon()
