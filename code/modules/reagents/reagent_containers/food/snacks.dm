@@ -141,9 +141,40 @@
 		return
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
-/*
-	if((slices_num <= 0 || !slices_num) || !slice_path)
-		return 0
+
+	// Eating with forks
+	if(istype(W,/obj/item/weapon/kitchen/utensil))
+		var/obj/item/weapon/kitchen/utensil/U = W
+
+		if(!U.reagents)
+			U.create_reagents(5)
+
+		if (U.reagents.total_volume > 0)
+			user << "\red You already have something on your [U]."
+			return
+
+		user.visible_message( \
+			"[user] scoops up some [src] with \the [U]!", \
+			"\blue You scoop up some [src] with \the [U]!" \
+		)
+
+		src.bitecount++
+		U.overlays.Cut()
+		U.loaded = "[src]"
+		var/image/I = new(U.icon, "loadedfood")
+		I.color = src.filling_color
+		U.overlays += I
+
+		reagents.trans_to(U,min(reagents.total_volume,5))
+
+		if (reagents.total_volume <= 0)
+			del(src)
+		return
+
+	if (is_sliceable())
+		//these are used to allow hiding edge items in food that is not on a table/tray
+		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
+		var/hide_item = !has_edge(W) || !can_slice_here
 
 		if (hide_item)
 			if (W.w_class >= src.w_class || W.is_robot_module())
@@ -176,7 +207,7 @@
 				reagents.trans_to(slice,reagents_per_slice)
 			del(src)
 			return
-*/
+
 /obj/item/weapon/reagent_containers/food/snacks/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
 

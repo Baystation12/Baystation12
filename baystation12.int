@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\verbs\randomverbs.dm;maps\exodus-1.dmm;maps\randomcrap.dmm
+WINDOW: code\game\verbs\ooc.dm;code\modules\reagents\reagent_containers\food\snacks.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
-FILE: maps\exodus-1.dmm
-LAST_COMPILE_TIME: 1423255543
+DIR: code code\game code\game\verbs code\modules code\modules\admin code\modules\admin\verbs code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food maps 
+FILE: code\game\verbs\ooc.dm
+LAST_COMPILE_TIME: 1423342570
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
