@@ -62,7 +62,6 @@
 		item_state = "pneumatic-tank"
 		user.update_icons()
 	else if(W.w_class <= max_w_class)
-
 		var/total_stored = 0
 		for(var/obj/item/O in src.contents)
 			total_stored += O.w_class
@@ -79,9 +78,6 @@
 /obj/item/weapon/gun/launcher/pneumatic/attack_self(mob/user as mob)
 	if(contents.len > 0)
 		var/obj/item/removing = contents[contents.len]
-		if(removing == in_chamber)
-			in_chamber = null
-
 		removing.loc = get_turf(src)
 		user.put_in_hands(removing)
 		user << "You remove [removing] from the hopper."
@@ -89,12 +85,16 @@
 		user << "There is nothing to remove in \the [src]."
 	return
 
-/obj/item/weapon/gun/launcher/pneumatic/load_into_chamber()
+/obj/item/weapon/gun/launcher/pneumatic/get_next_projectile()
+	if(!contents.len)
+		return null
+	return contents[1]
+
+/obj/item/weapon/gun/launcher/pneumatic/can_fire()
 	if(!contents.len)
 		return 0
-
-	in_chamber = contents[1]
-	return !isnull(in_chamber)
+	var/fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
+	return (fire_pressure >= minimum_tank_pressure)
 
 /obj/item/weapon/gun/launcher/pneumatic/examine(mob/user)
 	if(!..(user, 2))
@@ -106,7 +106,6 @@
 		user << "Nothing is attached to the tank valve!"
 
 /obj/item/weapon/gun/launcher/pneumatic/special_check(user)
-
 	if (!tank)
 		user << "There is no gas tank in [src]!"
 		return 0
@@ -116,20 +115,23 @@
 		user << "There isn't enough gas in the tank to fire [src]."
 		return 0
 
-	return 1
+	return ..()
 
-/obj/item/weapon/gun/launcher/pneumatic/update_release_force()
-	if(!in_chamber) return
-	release_force = ((fire_pressure*tank.volume)/in_chamber.w_class)/force_divisor //projectile speed.
-	if(release_force >80) release_force = 80 //damage cap.
+/obj/item/weapon/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
+	if(tank)
+		release_force = ((fire_pressure*tank.volume)/projectile.w_class)/force_divisor //projectile speed.
+		if(release_force > 80) release_force = 80 //damage cap.
+	else
+		release_force = 0
 
-/obj/item/weapon/gun/launcher/pneumatic/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
-
-	if(!tank || !..()) return //Only do this on a successful shot.
-
-	var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
-	var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
-	user.loc.assume_air(removed)
+/obj/item/weapon/gun/launcher/pneumatic/handle_post_fire()
+	if(tank)
+		var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
+		var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
+		
+		var/turf/T = get_turf(src.loc)
+		if(T) T.assume_air(removed)
+	..()
 
 //Constructable pneumatic cannon.
 

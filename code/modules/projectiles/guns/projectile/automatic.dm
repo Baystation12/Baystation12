@@ -7,12 +7,9 @@
 	caliber = "9mm"
 	origin_tech = "combat=4;materials=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
-	automatic = 1
+	multi_aim = 1
 
 	fire_delay = 0
-
-	isHandgun()
-		return 0
 
 /obj/item/weapon/gun/projectile/automatic/test
 	name = "test gun"
@@ -27,9 +24,6 @@
 	caliber = ".45"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/c45"
-
-	isHandgun()
-		return 1
 
 
 /obj/item/weapon/gun/projectile/automatic/c20r

@@ -208,10 +208,6 @@
 			if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
 				usr << "\blue You need your gun equiped to holster it."
 				return
-			var/obj/item/weapon/gun/W = usr.get_active_hand()
-			if (!W.isHandgun())
-				usr << "\red This gun won't fit in \the belt!"
-				return
 			holstered = usr.get_active_hand()
 			usr.drop_item()
 			holstered.loc = src

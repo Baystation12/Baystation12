@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/rocketlauncher
+/obj/item/weapon/gun/launcher/rocket
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon_state = "rocket"
@@ -10,18 +10,19 @@
 	flags =  CONDUCT | USEDELAY
 	slot_flags = 0
 	origin_tech = "combat=8;materials=5"
-	var/projectile = /obj/item/missile
-	var/missile_speed = 2
-	var/missile_range = 30
+	fire_sound = 'sound/effects/bang.ogg'
+	
+	release_force = 15
+	throw_distance = 30
 	var/max_rockets = 1
 	var/list/rockets = new/list()
 
-/obj/item/weapon/gun/rocketlauncher/examine(mob/user)
+/obj/item/weapon/gun/launcher/rocket/examine(mob/user)
 	if(!..(user, 2))
 		return
 	user << "\blue [rockets.len] / [max_rockets] rockets."
 
-/obj/item/weapon/gun/rocketlauncher/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/weapon/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
 			user.drop_item()
@@ -32,20 +33,19 @@
 		else
 			usr << "\red [src] cannot hold more rockets."
 
-/obj/item/weapon/gun/rocketlauncher/can_fire()
+/obj/item/weapon/gun/launcher/rocket/can_fire()
 	return rockets.len
 
-/obj/item/weapon/gun/rocketlauncher/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
+/obj/item/weapon/gun/launcher/rocket/get_next_projectile()
 	if(rockets.len)
 		var/obj/item/ammo_casing/rocket/I = rockets[1]
-		var/obj/item/missile/M = new projectile(user.loc)
-		playsound(user.loc, 'sound/effects/bang.ogg', 50, 1)
+		var/obj/item/missile/M = new (src)
 		M.primed = 1
-		M.throw_at(target, missile_range, missile_speed,user)
-		message_admins("[key_name_admin(user)] fired a rocket from a rocket launcher ([src.name]).")
-		log_game("[key_name_admin(user)] used a rocket launcher ([src.name]).")
 		rockets -= I
-		del(I)
-		return
-	else
-		usr << "\red [src] is empty."
+		return M
+	return null
+
+/obj/item/weapon/gun/launcher/rocket/handle_post_fire(mob/user, atom/target)
+	message_admins("[key_name_admin(user)] fired a rocket from a rocket launcher ([src.name]) at [target].")
+	log_game("[key_name_admin(user)] used a rocket launcher ([src.name]) at [target].")
+	..()

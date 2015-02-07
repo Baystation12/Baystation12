@@ -6,11 +6,11 @@
 	name = "revolver"
 	desc = "A classic revolver. Uses .357 ammo"
 	icon_state = "revolver"
-	caliber = "357"
 	origin_tech = "combat=2;materials=2"
 	w_class = 3.0
 	matter = list("metal" = 1000)
 	recoil = 1
+	var/caliber = "357"
 	var/ammo_type = "/obj/item/ammo_casing/a357"
 	var/list/loaded = list()
 	var/max_shells = 7
@@ -27,24 +27,28 @@
 	update_icon()
 	return
 
-
-/obj/item/weapon/gun/projectile/load_into_chamber()
-	if(in_chamber)
-		return 1 //{R}
-
+/obj/item/weapon/gun/projectile/can_fire()
 	if(!loaded.len)
 		return 0
-	var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-	loaded -= AC //Remove casing from loaded list.
-	if(isnull(AC) || !istype(AC))
-		return 0
-	AC.loc = get_turf(src) //Eject casing onto ground.
-	if(AC.BB)
-		in_chamber = AC.BB //Load projectile into chamber.
-		AC.BB.loc = src //Set projectile loc to gun.
-		return 1
-	return 0
+	return 1
 
+/obj/item/weapon/gun/projectile/get_next_projectile()
+	if(!loaded.len)
+		return null
+	var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
+	if(isnull(AC) || !istype(AC))
+		return null
+	if(AC.BB)
+		AC.BB.loc = src //Set projectile loc to gun.
+		return AC.BB //Load projectile into chamber.
+	return null
+
+/obj/item/weapon/gun/projectile/handle_post_fire()
+	..()
+	if(loaded.len)
+		var/obj/item/ammo_casing/AC = loaded[1]
+		loaded -= AC
+		AC.loc = get_turf(src) //Eject casing onto ground.
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
 
@@ -81,7 +85,7 @@
 	return
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if (target)
+	if (aim_targets)
 		return ..()
 	if (loaded.len)
 		if (load_method == SPEEDLOADER)

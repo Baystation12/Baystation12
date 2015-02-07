@@ -51,11 +51,10 @@
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
-	ejectshell = 0                          // No spent shells.
-	mouthshoot = 1                          // No suiciding with this weapon, causes runtimes.
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25
 
+	var/obj/item/bolt
 	var/tension = 0                         // Current draw on the bow.
 	var/max_tension = 5                     // Highest possible tension.
 	var/release_speed = 5                   // Speed per unit of tension.
@@ -75,19 +74,25 @@
 /obj/item/weapon/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
-/obj/item/weapon/gun/launcher/crossbow/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
+/obj/item/weapon/gun/launcher/crossbow/can_fire()
+	return (tension && bolt)
 
-	if(!..()) return //Only do this on a successful shot.
+/obj/item/weapon/gun/launcher/crossbow/get_next_projectile()
+	return bolt
+
+/obj/item/weapon/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
+	bolt = null
 	icon_state = "crossbow"
 	tension = 0
+	..()
 
 /obj/item/weapon/gun/launcher/crossbow/attack_self(mob/living/user as mob)
 	if(tension)
-		if(in_chamber && in_chamber.loc == src) //Just in case they click it the tick after firing.
-			user.visible_message("[user] relaxes the tension on [src]'s string and removes [in_chamber].","You relax the tension on [src]'s string and remove [in_chamber].")
-			in_chamber.loc = get_turf(src)
-			var/obj/item/weapon/arrow/A = in_chamber
-			in_chamber = null
+		if(bolt)
+			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
+			bolt.loc = get_turf(src)
+			var/obj/item/weapon/arrow/A = bolt
+			bolt = null
 			A.removed(user)
 		else
 			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
@@ -98,7 +103,7 @@
 
 /obj/item/weapon/gun/launcher/crossbow/proc/draw(var/mob/user as mob)
 
-	if(!in_chamber)
+	if(!bolt)
 		user << "You don't have anything nocked to [src]."
 		return
 
@@ -112,7 +117,7 @@
 
 /obj/item/weapon/gun/launcher/crossbow/proc/increase_tension(var/mob/user as mob)
 
-	if(!in_chamber || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
+	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
 
 	tension++
@@ -126,22 +131,22 @@
 		spawn(25) increase_tension(user)
 
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
-	if(!in_chamber)
+	if(!bolt)
 		if (istype(W,/obj/item/weapon/arrow))
 			user.drop_item()
-			in_chamber = W
-			in_chamber.loc = src
-			user.visible_message("[user] slides [in_chamber] into [src].","You slide [in_chamber] into [src].")
+			bolt = W
+			bolt.loc = src
+			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			icon_state = "crossbow-nocked"
 			return
 		else if(istype(W,/obj/item/stack/rods))
 			var/obj/item/stack/rods/R = W
 			if (R.use(1))
-				in_chamber = new /obj/item/weapon/arrow/rod(src)
-				in_chamber.fingerprintslast = src.fingerprintslast
-				in_chamber.loc = src
+				bolt = new /obj/item/weapon/arrow/rod(src)
+				bolt.fingerprintslast = src.fingerprintslast
+				bolt.loc = src
 				icon_state = "crossbow-nocked"
-				user.visible_message("[user] jams [in_chamber] into [src].","You jam [in_chamber] into [src].")
+				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
 			return
 
@@ -168,14 +173,14 @@
 		..()
 
 /obj/item/weapon/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
-	if(!user || !cell || !in_chamber) return
+	if(!user || !cell || !bolt) return
 	if(cell.charge < 500) return
-	if(in_chamber.throwforce >= 15) return
-	if(!istype(in_chamber,/obj/item/weapon/arrow/rod)) return
+	if(bolt.throwforce >= 15) return
+	if(!istype(bolt,/obj/item/weapon/arrow/rod)) return
 
-	user << "<span class='notice'>[in_chamber] plinks and crackles as it begins to glow red-hot.</span>"
-	in_chamber.throwforce = 15
-	in_chamber.icon_state = "metal-rod-superheated"
+	user << "<span class='notice'>[bolt] plinks and crackles as it begins to glow red-hot.</span>"
+	bolt.throwforce = 15
+	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
 
 

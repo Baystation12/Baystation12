@@ -8,15 +8,13 @@
 	ammo_type = "/obj/item/ammo_casing/c38"
 
 	special_check(var/mob/living/carbon/human/M)
-		if(caliber == initial(caliber))
-			return 1
-		if(prob(70 - (loaded.len * 10)))	//minimum probability of 10, maximum of 60
+		if(caliber == initial(caliber) && prob(70 - (loaded.len * 10)))	//minimum probability of 10, maximum of 60
 			M << "<span class='danger'>[src] blows up in your face.</span>"
 			M.take_organ_damage(0,20)
 			M.drop_item()
 			del(src)
 			return 0
-		return 1
+		return ..()
 
 	verb/rename_gun()
 		set name = "Name Gun"
@@ -101,6 +99,7 @@
 	icon_state = "mateba"
 	origin_tech = "combat=2;materials=2"
 
+/*
 // A gun to play Russian Roulette!
 // You can spin the chamber to randomize the position of the bullet.
 
@@ -184,3 +183,4 @@
 					user.apply_damage(300, BRUTE, affecting, sharp=1) // You are dead, dead, dead.
 				return
 	..()
+*/

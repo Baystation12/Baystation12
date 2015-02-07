@@ -199,10 +199,6 @@
 	item_color = "holster"
 	var/obj/item/weapon/gun/holstered = null
 
-//subtypes can override this to specify what can be holstered
-/obj/item/clothing/tie/holster/proc/can_holster(obj/item/weapon/gun/W)
-	return W.isHandgun()
-
 /obj/item/clothing/tie/holster/proc/holster(obj/item/I, mob/user as mob)
 	if(holstered)
 		user << "\red There is already a [holstered] holstered here!"
@@ -213,9 +209,6 @@
 		return
 
 	var/obj/item/weapon/gun/W = I
-	if (!can_holster(W))
-		user << "\red This [W] won't fit in the [src]!"
-		return
 
 	holstered = W
 	user.drop_from_inventory(holstered)

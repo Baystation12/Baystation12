@@ -15,14 +15,8 @@
 	var/pumped = 0
 	var/obj/item/ammo_casing/current_shell = null
 
-	isHandgun()
-		return 0
-
-	load_into_chamber()
-		if(in_chamber)
-			return 1
-		return 0
-
+	get_next_projectile()
+		return current_shell.BB
 
 	attack_self(mob/living/user as mob)
 		if(recentpump)	return
@@ -39,14 +33,10 @@
 		if(current_shell)//We have a shell in the chamber
 			current_shell.loc = get_turf(src)//Eject casing
 			current_shell = null
-			if(in_chamber)
-				in_chamber = null
 		if(!loaded.len)	return 0
 		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
 		loaded -= AC //Remove casing from loaded list.
 		current_shell = AC
-		if(AC.BB)
-			in_chamber = AC.BB //Load projectile into chamber.
 		update_icon()	//I.E. fix the desc
 		return 1
 
@@ -78,21 +68,6 @@
 
 		update_icon()
 		return
-
-	load_into_chamber()
-//		if(in_chamber)
-//			return 1 {R}
-		if(!loaded.len)
-			return 0
-
-		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-		loaded -= AC //Remove casing from loaded list.
-		AC.desc += " This one is spent."
-
-		if(AC.BB)
-			in_chamber = AC.BB //Load projectile into chamber.
-			return 1
-		return 0
 
 	attack_self(mob/living/user as mob)
 		if(!(locate(/obj/item/ammo_casing/shotgun) in src) && !loaded.len)
