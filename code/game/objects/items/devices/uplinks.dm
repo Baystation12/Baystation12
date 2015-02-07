@@ -108,6 +108,9 @@ datum/nano_item_lists
 	return pick(random_items)
 
 /obj/item/device/uplink/Topic(href, href_list)
+	if(..())
+		return 1
+
 	if(href_list["buy_item"] == "random")
 		var/datum/uplink_item/UI = chooseRandomItem()
 		href_list["buy_item"] = UI.reference
@@ -208,10 +211,10 @@ datum/nano_item_lists
 // The purchasing code.
 /obj/item/device/uplink/hidden/Topic(href, href_list)
 	if (usr.stat || usr.restrained())
-		return
+		return 1
 
 	if (!( istype(usr, /mob/living/carbon/human)))
-		return 0
+		return 1
 	var/mob/user = usr
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 	if ((usr.contents.Find(src.loc) || (in_range(src.loc, usr) && istype(src.loc.loc, /turf))))

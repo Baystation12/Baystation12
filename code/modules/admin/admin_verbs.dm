@@ -46,7 +46,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
-	/client/proc/rename_ai,				/*properly renames the AI*/
+	/client/proc/rename_silicon,		/*properly renames silicons*/
 	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
@@ -110,7 +110,8 @@ var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_plant,
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/virus2_editor
 	)
 var/list/admin_verbs_server = list(
 	/client/proc/Set_Holiday,
@@ -695,15 +696,15 @@ var/list/admin_verbs_mentor = list(
 	if(holder)
 		src.holder.output_ai_laws()
 
-/client/proc/rename_ai(mob/living/silicon/ai/AI in world)
-	set name = "Rename AI"
+/client/proc/rename_silicon(mob/living/silicon/S in world)
+	set name = "Rename Silicon"
 	set category = "Admin"
 
 	if(holder)
-		var/new_name = trim_strip_input(src, "Enter new AI name. Leave blank or as is to cancel.", "Enter new AI Name", AI.name)
-		if(new_name && new_name != AI.name)
-			admin_log_and_message_admins("has renamed the AI '[AI.name]' to '[new_name]'")
-			AI.SetName(new_name)
+		var/new_name = trim_strip_input(src, "Enter new name. Leave blank or as is to cancel.", "Enter new silicon name", S.real_name)
+		if(new_name && new_name != S.real_name)
+			admin_log_and_message_admins("has renamed the silicon '[S.real_name]' to '[new_name]'")
+			S.SetName(new_name)
 	feedback_add_details("admin_verb","RAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 

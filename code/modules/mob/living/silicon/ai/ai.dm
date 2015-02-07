@@ -211,9 +211,8 @@ var/list/ai_verbs_default = list(
 	else
 		stat(null, text("Systems nonfunctional"))
 
-/mob/living/silicon/ai/proc/SetName(pickedName as text)
-	real_name = pickedName
-	name = pickedName
+/mob/living/silicon/ai/SetName(pickedName as text)
+	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
 		eyeobj.name = "[pickedName] (AI Eye)"
@@ -765,6 +764,9 @@ var/list/ai_verbs_default = list(
 		src << "\red System Error - Transceiver Disabled!"
 		return 1
 	return 0
+
+/mob/living/silicon/ai/proc/is_in_chassis()
+	return istype(loc, /turf)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
