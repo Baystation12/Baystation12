@@ -806,7 +806,7 @@
 "apz" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor{icon_state = "white"},/area/security/detectives_office)
 "apA" = (/obj/machinery/requests_console{pixel_x = 30},/turf/simulated/floor{icon_state = "white"},/area/security/detectives_office)
 "apB" = (/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/maintenance/dormitory)
-"apC" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/maintenance/dormitory)
+"apC" = (/obj/machinery/light/small{dir = 8},/obj/machinery/media/jukebox,/turf/simulated/floor/wood,/area/maintenance/dormitory)
 "apD" = (/obj/structure/stool{pixel_y = 8},/turf/simulated/floor/wood,/area/maintenance/dormitory)
 "apE" = (/obj/structure/stool/bed/chair/wood/wings,/turf/simulated/floor/wood,/area/maintenance/dormitory)
 "apF" = (/turf/simulated/floor/wood,/area/maintenance/dormitory)
