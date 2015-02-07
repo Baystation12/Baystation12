@@ -19,11 +19,6 @@ var/const/VENDING_WIRE_IDSCAN = 8
 		return 1
 	return 0
 
-/datum/wires/vending/Interact(var/mob/living/user)
-	if(CanUse(user))
-		var/obj/machinery/vending/V = holder
-		V.attack_hand(user)
-
 /datum/wires/vending/GetInteractWindow()
 	var/obj/machinery/vending/V = holder
 	. += ..()

@@ -56,6 +56,8 @@
 	var/vend_delay = 10 //How long does it take to vend?
 	var/categories = CAT_NORMAL // Bitmask of cats we're currently showing
 	var/datum/data/vending_product/currently_vending = null // What we're requesting payment for right now
+	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
+	var/status_error = 0 // Set to 1 if status_message is an error
 	
 	/*
 		Variables used to initialize the product list
@@ -195,9 +197,9 @@
 
 		if(paid)
 			src.vend(currently_vending, usr)
-			currently_vending = null
 			return
 		else if(handled)
+			nanomanager.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
 	if (istype(W, /obj/item/weapon/card/emag))
@@ -210,7 +212,8 @@
 		src.overlays.Cut()
 		if(src.panel_open)
 			src.overlays += image(src.icon, "[initial(icon_state)]-panel")
-		src.updateUsrDialog()
+			
+		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
 		if(src.panel_open)
@@ -220,7 +223,9 @@
 		user.drop_item()
 		W.loc = src
 		coin = W
+		categories |= CAT_COIN
 		user << "\blue You insert the [W] into the [src]"
+		nanomanager.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		if(do_after(user, 20))
@@ -237,7 +242,7 @@
 
 	else if(src.panel_open)
 
-		for(var/datum/data/vending_product/R  in product_records)
+		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
 				del(W)
@@ -252,7 +257,10 @@
  */
 /obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
 	if(currently_vending.price > cashmoney.worth)
-		usr << "\icon[src] <span class='warning'>That is not enough money.</span>"
+	
+		// This is not a status display message, since it's something the character 
+		// themselves is meant to see BEFORE putting the money in
+		usr << "\icon[cashmoney] <span class='warning'>That is not enough money.</span>"
 		return 0
 
 	if(istype(cashmoney, /obj/item/weapon/spacecash/bundle))
@@ -294,7 +302,8 @@
 /obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
 	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 	if(currently_vending.price > wallet.worth)
-		usr << "\icon[src] <span class='warning'>Insufficient funds on chargecard.</span>"
+		src.status_message = "Insufficient funds on chargecard."
+		src.status_error = 1
 		return 0
 	else
 		wallet.worth -= currently_vending.price
@@ -311,11 +320,13 @@
 	visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if (!customer_account)
-		usr << "\icon[src] <span class='warning'>Error: Unable to access account. Please contact technical support if problem persists.</span>"
+		src.status_message = "Error: Unable to access account. Please contact technical support if problem persists."
+		src.status_error = 1
 		return 0
 
 	if(customer_account.suspended)
-		usr << "\icon[src] <span class='warning'>Unable to access account: account suspended.</span>"
+		src.status_message = "Unable to access account: account suspended."
+		src.status_error = 1
 		return 0
 
 	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
@@ -325,11 +336,13 @@
 		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
 
 		if(!customer_account)
-			usr << "\icon[src] <span class='warning'>Unable to access account: incorrect credentials.</span>"
+			src.status_message = "Unable to access account: incorrect credentials."
+			src.status_error = 1
 			return 0
 
 	if(currently_vending.price > customer_account.money)
-		usr << "\icon[src] <span class='warning'>Insufficient funds in account.</span>"
+		src.status_message = "Insufficient funds in account."
+		src.status_error = 1
 		return 0
 	else
 		// Okay to move the money at this point
@@ -379,62 +392,63 @@
 /obj/machinery/vending/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	user.set_machine(src)
 
 	if(src.seconds_electrified != 0)
 		if(src.shock(user, 100))
 			return
 
-	var/vendorname = (src.name)  //import the machine's name
+	wires.Interact(user)
+	ui_interact(user)
 
-	if(src.currently_vending)
-		var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
-		dat += "<b>Product selected:</b> [currently_vending.product_name]<br><b>Charge:</b> [currently_vending.price]<br><br>Please swipe a card or insert cash to pay for the item.</b><br>"
-		dat += "<a href='byond://?src=\ref[src];cancel_buying=1'>Cancel</a>"
-		user << browse(dat, "window=vending")
-		onclose(user, "")
-		return
-
-	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
-	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
-
-	if (src.product_records.len == 0)
-		dat += "<font color = 'red'>No product loaded!</font>"
+/**
+ *  Display the NanoUI window for the vending machine.
+ *
+ *  See NanoUI documentation for details. 
+ */
+/obj/machinery/vending/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	user.set_machine(src)
+	
+	var/list/data = list()
+	if(currently_vending)
+		data["mode"] = 1
+		data["product"] = currently_vending.product_name
+		data["price"] = currently_vending.price
+		data["message_err"] = 0
+		data["message"] = src.status_message
+		data["message_err"] = src.status_error
 	else
+		data["mode"] = 0
+		var/list/listed_products = list()
 
-		for(var/idx = 1 to src.product_records.len)
-			var/datum/data/vending_product/product = src.product_records[idx]
-			if(!(product.category & src.categories))
+		for(var/key = 1 to src.product_records.len)
+			var/datum/data/vending_product/I = src.product_records[key]
+			
+			if(!(I.category & src.categories))
 				continue
+			
+			listed_products.Add(list(list(
+				"key" = key,
+				"name" = I.product_name,
+				"price" = I.price,
+				"color" = I.display_color,
+				"amount" = I.amount)))
 				
-			if(product.display_color)
-				dat += "<FONT color = '[product.display_color]'><B>[product.product_name]</B>:"
-				dat += " <b>[product.amount]</b> </font>"
-			else 
-				dat += "<b>[product.product_name]</b>: <b>[product.amount]</b>"
-			if(product.price)
-				dat += " <b>(Price: [product.price])</b>"
-			if (product.amount > 0)
-				dat += " <a href='byond://?src=\ref[src];vend=[idx]'>(Vend)</A>"
-			else
-				dat += " <font color = 'red'>SOLD OUT</font>"
-			dat += "<br>"
-
-		dat += "</TT>"
-
-	if(panel_open)
-		dat += wires()
-
-		if(slogan_list.len > 0)
-			dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
-
-	user << browse(dat, "window=vending")
-	onclose(user, "")
-	return
-
-// returns the wire panel text
-/obj/machinery/vending/proc/wires()
-	return wires.GetInteractWindow()
+		data["products"] = listed_products
+	
+	if(src.coin)
+		data["coin"] = src.coin.name
+	
+	if(src.panel_open)
+		data["panel"] = 1
+		data["speaker"] = src.shut_up ? 0 : 1
+	else
+		data["panel"] = 0
+	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "vending_machine.tmpl", src.name, 440, 600)
+		ui.set_initial_data(data)
+		ui.open()
 
 /obj/machinery/vending/Topic(href, href_list)
 	if(stat & (BROKEN|NOPOWER))
@@ -452,9 +466,9 @@
 			usr.put_in_hands(coin)
 		usr << "\blue You remove the [coin] from the [src]"
 		coin = null
+		categories &= ~CAT_COIN
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
-		usr.set_machine(src)
 		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
 
 			if(istype(usr,/mob/living/silicon))
@@ -479,23 +493,17 @@
 				src.vend(R, usr)
 			else
 				src.currently_vending = R
-				src.updateUsrDialog()
-			return
+				src.status_message = "Please swipe a card or insert cash to pay for the item."
+				src.status_error = 0
 
-		else if (href_list["cancel_buying"])
+		else if (href_list["cancelpurchase"])
 			src.currently_vending = null
-			src.updateUsrDialog()
-			return
 
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
 		src.add_fingerprint(usr)
-		src.updateUsrDialog()
-	else
-		usr << browse(null, "window=vending")
-		return
-	return
+		nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
@@ -503,7 +511,10 @@
 		flick(src.icon_deny,src)
 		return
 	src.vend_ready = 0 //One thing at a time!!
-
+	src.status_message = "Vending..."
+	src.status_error = 0
+	nanomanager.update_uis(src)
+	
 	if (R.category & CAT_COIN)
 		if(!coin)
 			user << "\blue You need to insert a coin to get this item."
@@ -514,8 +525,10 @@
 			else
 				user << "\blue You weren't able to pull the coin out fast enough, the machine ate it, string and all."
 				del(coin)
+				categories &= ~CAT_COIN
 		else
 			del(coin)
+			categories &= ~CAT_COIN
 
 	R.amount--
 
@@ -529,17 +542,18 @@
 		flick(src.icon_vend,src)
 	spawn(src.vend_delay)
 		new R.product_path(get_turf(src))
+		src.status_message = ""
+		src.status_error = 0
 		src.vend_ready = 1
-		return
-
-	src.updateUsrDialog()
+		currently_vending = null
+		nanomanager.update_uis(src)
 
 /obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
 	if(src.panel_open)
 		user << "\blue You stock the [src] with \a [R.product_name]"
 		R.amount++
 
-	src.updateUsrDialog()
+	nanomanager.update_uis(src)
 
 /obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
