@@ -70,7 +70,7 @@
 		"/obj/item/device/flashlight/pen",
 		"/obj/item/clothing/mask/surgical",
 		"/obj/item/clothing/gloves/latex",
-	    "/obj/item/weapon/reagent_containers/hypospray"
+		"/obj/item/weapon/reagent_containers/hypospray"
 	)
 
 /obj/item/weapon/storage/belt/medical/emt
