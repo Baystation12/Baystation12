@@ -17,68 +17,69 @@ var/list/beam_master = list()
 	flag = "laser"
 	eyeblur = 4
 	var/frequency = 1
-	process()
-		var/reference = "\ref[src]" //So we do not have to recalculate it a ton
-		var/first = 1 //So we don't make the overlay in the same tile as the firer
-		spawn while(src) //Move until we hit something
 
-			if((!( current ) || loc == current)) //If we pass our target
-				current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
-			if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
-				del(src) //Delete if it passes the world edge
-				return
-			step_towards(src, current) //Move~
+/obj/item/projectile/beam/process()
+	var/reference = "\ref[src]" //So we do not have to recalculate it a ton
+	var/first = 1 //So we don't make the overlay in the same tile as the firer
+	spawn while(src) //Move until we hit something
 
-			if(kill_count < 1)
-				del(src)
-			kill_count--
+		if((!( current ) || loc == current)) //If we pass our target
+			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
+		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
+			del(src) //Delete if it passes the world edge
+			return
+		step_towards(src, current) //Move~
 
-			if(!bumped && !isturf(original))
-				if(loc == get_turf(original))
-					if(!(original in permutated))
-						Bump(original)
+		if(kill_count < 1)
+			del(src)
+		kill_count--
 
-			if(!first) //Add the overlay as we pass over tiles
-				var/target_dir = get_dir(src, current) //So we don't call this too much
+		if(!bumped && !isturf(original))
+			if(loc == get_turf(original))
+				if(!(original in permutated))
+					Bump(original)
 
-				//If the icon has not been added yet
-				if( !("[icon_state][target_dir]" in beam_master) )
-					var/image/I = image(icon,icon_state,10,target_dir) //Generate it.
-					beam_master["[icon_state][target_dir]"] = I //And cache it!
+		if(!first) //Add the overlay as we pass over tiles
+			var/target_dir = get_dir(src, current) //So we don't call this too much
 
-				//Finally add the overlay
-				src.loc.overlays += beam_master["[icon_state][target_dir]"]
+			//If the icon has not been added yet
+			if( !("[icon_state][target_dir]" in beam_master) )
+				var/image/I = image(icon,icon_state,10,target_dir) //Generate it.
+				beam_master["[icon_state][target_dir]"] = I //And cache it!
 
-				//Add the turf to a list in the beam master so they can be cleaned up easily.
-				if(reference in beam_master)
-					var/list/turf_master = beam_master[reference]
-					if("[icon_state][target_dir]" in turf_master)
-						var/list/turfs = turf_master["[icon_state][target_dir]"]
-						turfs += loc
-					else
-						turf_master["[icon_state][target_dir]"] = list(loc)
+			//Finally add the overlay
+			src.loc.overlays += beam_master["[icon_state][target_dir]"]
+
+			//Add the turf to a list in the beam master so they can be cleaned up easily.
+			if(reference in beam_master)
+				var/list/turf_master = beam_master[reference]
+				if("[icon_state][target_dir]" in turf_master)
+					var/list/turfs = turf_master["[icon_state][target_dir]"]
+					turfs += loc
 				else
-					var/list/turfs = list()
-					turfs["[icon_state][target_dir]"] = list(loc)
-					beam_master[reference] = turfs
+					turf_master["[icon_state][target_dir]"] = list(loc)
 			else
-				first = 0
-		cleanup(reference)
-		return
+				var/list/turfs = list()
+				turfs["[icon_state][target_dir]"] = list(loc)
+				beam_master[reference] = turfs
+		else
+			first = 0
+	cleanup(reference)
+	return
 
-	Del()
-		cleanup("\ref[src]")
-		..()
+/obj/item/projectile/beam/Del()
+	cleanup("\ref[src]")
+	..()
 
-	proc/cleanup(reference) //Waits .3 seconds then removes the overlay.
-		src = null //we're getting deleted! this will keep the code running
-		spawn(3)
-			var/list/turf_master = beam_master[reference]
-			for(var/laser_state in turf_master)
-				var/list/turfs = turf_master[laser_state]
-				for(var/turf/T in turfs)
-					T.overlays -= beam_master[laser_state]
-		return
+/obj/item/projectile/beam/proc/cleanup(reference) //Waits .3 seconds then removes the overlay.
+	src = null //we're getting deleted! this will keep the code running
+	spawn(3)
+		var/list/turf_master = beam_master[reference]
+		for(var/laser_state in turf_master)
+			var/list/turfs = turf_master[laser_state]
+			for(var/turf/T in turfs)
+				T.overlays -= beam_master[laser_state]
+	return
 
 /obj/item/projectile/beam/practice
 	name = "laser"
@@ -88,7 +89,6 @@ var/list/beam_master = list()
 	damage_type = BURN
 	flag = "laser"
 	eyeblur = 2
-
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
@@ -105,12 +105,10 @@ var/list/beam_master = list()
 	icon_state = "u_laser"
 	damage = 50
 
-
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
 	damage = 30
-
 
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"
@@ -120,12 +118,12 @@ var/list/beam_master = list()
 	damage_type = BURN
 	flag = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
-				M.Weaken(5)
-		return 1
+/obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if(istype(M.wear_suit, /obj/item/clothing/suit/redtag))
+			M.Weaken(5)
+	return 1
 
 /obj/item/projectile/beam/lastertag/red
 	name = "lasertag beam"
@@ -135,12 +133,12 @@ var/list/beam_master = list()
 	damage_type = BURN
 	flag = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
-				M.Weaken(5)
-		return 1
+/obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag))
+			M.Weaken(5)
+	return 1
 
 /obj/item/projectile/beam/lastertag/omni//A laser tag bolt that stuns EVERYONE
 	name = "lasertag beam"
@@ -150,12 +148,12 @@ var/list/beam_master = list()
 	damage_type = BURN
 	flag = "laser"
 
-	on_hit(var/atom/target, var/blocked = 0)
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/M = target
-			if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
-				M.Weaken(5)
-		return 1
+/obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
+			M.Weaken(5)
+	return 1
 
 /obj/item/projectile/beam/sniper
 	name = "sniper beam"
