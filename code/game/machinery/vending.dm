@@ -1,17 +1,38 @@
-#define CAT_NORMAL 0
-#define CAT_HIDDEN 1
-#define CAT_COIN   2
+#define CAT_NORMAL 1
+#define CAT_HIDDEN 2  // also used in corresponding wires/vending.dm
+#define CAT_COIN   4
 
+/**
+ *  Datum used to hold information about a product in a vending machine
+ */
 /datum/data/vending_product
-	var/product_name = "generic"
+	var/product_name = "generic" // Display name for the product
 	var/product_path = null
-	var/amount = 0
-	var/price = 0
-	var/display_color = "blue"
-	var/category = CAT_NORMAL
+	var/amount = 0  // Amount held in the vending machine
+	var/price = 0  // Price to buy one
+	var/display_color = null  // Display color for vending machine listing
+	var/category = CAT_NORMAL  // CAT_HIDDEN for contraband, CAT_COIN for premium
 
+/datum/data/vending_product/New(var/path, var/name = null, var/amount = 1, var/price = 0, var/color = null, var/category = CAT_NORMAL)
+	..()
+	
+	src.product_path = path
+	
+	if(!name)
+		var/atom/tmp = new path
+		src.product_name = initial(tmp.name)
+		del(tmp)
+	else
+		src.product_name = name
+	
+	src.amount = amount
+	src.price = price
+	src.display_color = color
+	src.category = category
 
-
+/**
+ *  A vending machine
+ */
 /obj/machinery/vending
 	name = "Vendomat"
 	desc = "A generic vending machine."
@@ -21,65 +42,104 @@
 	anchored = 1
 	density = 1
 
+	var/icon_vend //Icon_state when vending
+	var/icon_deny //Icon_state when denying access
+
+	// Power
 	use_power = 1
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
+	// Vending-related
 	var/active = 1 //No sales pitches if off!
 	var/vend_ready = 1 //Are we ready to vend?? Is it time??
 	var/vend_delay = 10 //How long does it take to vend?
-	var/datum/data/vending_product/currently_vending = null // A /datum/data/vending_product instance of what we're paying for right now.
-
-	// To be filled out at compile time
+	var/categories = CAT_NORMAL // Bitmask of cats we're currently showing
+	var/datum/data/vending_product/currently_vending = null // What we're requesting payment for right now
+	
+	/*
+		Variables used to initialize the product list
+		These are used for initialization only, and so are optional if
+		product_records is specified
+	*/
 	var/list/products	= list() // For each, use the following pattern:
 	var/list/contraband	= list() // list(/type/path = amount,/type/path2 = amount2)
 	var/list/premium 	= list() // No specified amount = only one in stock
 	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
 
-	var/product_slogans = "" //String of slogans separated by semicolons, optional
-	var/product_ads = "" //String of small ad messages in the vending screen - random chance
+	// List of vending_product items available.
 	var/list/product_records = list()
-	var/list/hidden_records = list()
-	var/list/coin_records = list()
+
+
+	// Variables used to initialize advertising
+	var/product_slogans = "" //String of slogans spoken out loud, separated by semicolons
+	var/product_ads = "" //String of small ad messages in the vending screen
+
+	var/list/ads_list = list()
+
+	// Stuff relating vocalizations
 	var/list/slogan_list = list()
-	var/list/small_ads = list() // small ad messages in the vending screen - random chance of popping up whenever you open it
+	var/shut_up = 1 //Stop spouting those godawful pitches!
 	var/vend_reply //Thank you for shopping!
 	var/last_reply = 0
 	var/last_slogan = 0 //When did we last pitch?
 	var/slogan_delay = 6000 //How long until we can pitch again?
-	var/icon_vend //Icon_state when vending!
-	var/icon_deny //Icon_state when vending!
-	//var/emagged = 0 //Ignores if somebody doesn't have card access to that machine.
+
+	// Things that can go wrong
+	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
-	var/shut_up = 1 //Stop spouting those godawful pitches!
-	var/extended_inventory = 0 //can we access the hidden inventory?
+
 	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
 	var/datum/wires/vending/wires = null
-
-	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
 
 /obj/machinery/vending/New()
 	..()
 	wires = new(src)
 	spawn(4)
-		src.slogan_list = text2list(src.product_slogans, ";")
+		if(src.product_slogans)
+			src.slogan_list += text2list(src.product_slogans, ";")
 
-		// So not all machines speak at the exact same time.
-		// The first time this machine says something will be at slogantime + this random value,
-		// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
-		src.last_slogan = world.time + rand(0, slogan_delay)
+			// So not all machines speak at the exact same time.
+			// The first time this machine says something will be at slogantime + this random value,
+			// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
+			src.last_slogan = world.time + rand(0, slogan_delay)
 
-		src.build_inventory(products)
-		 //Add hidden inventory
-		src.build_inventory(contraband, 1)
-		src.build_inventory(premium, 0, 1)
+		if(src.product_ads)
+			src.ads_list += text2list(src.product_ads, ";")
+
+		src.build_inventory()
 		power_change()
 
 		return
 
 	return
+
+/**
+ *  Build src.produdct_records from the products lists
+ *
+ *  src.products, src.contraband, src.premium, and src.prices allow specifying
+ *  products that the vending machine is to carry without manually populating
+ *  src.product_records.
+ */
+/obj/machinery/vending/proc/build_inventory()
+	var/list/all_products = list(
+		list(src.products, CAT_NORMAL),
+		list(src.contraband, CAT_HIDDEN),
+		list(src.premium, CAT_COIN))
+
+	for(var/current_list in all_products)
+		var/category = current_list[2]
+
+		for(var/entry in current_list[1])
+			var/datum/data/vending_product/product = new/datum/data/vending_product(entry)
+
+			product.price = (entry in src.prices) ? src.prices[entry] : 0
+			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			product.category = category
+			
+			src.product_records.Add(product)
 
 /obj/machinery/vending/Del()
 	del(wires) // qdel
@@ -114,36 +174,6 @@
 			del(src)
 		return
 
-	return
-
-/obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
-
-	for(var/typepath in productlist)
-		var/amount = productlist[typepath]
-		var/price = prices[typepath]
-		if(isnull(amount)) amount = 1
-
-		var/datum/data/vending_product/R = new /datum/data/vending_product()
-
-		R.product_path = typepath
-		R.amount = amount
-		R.price = price
-		R.display_color = pick("red","blue","green")
-
-		if(hidden)
-			R.category=CAT_HIDDEN
-			hidden_records += R
-		else if(req_coin)
-			R.category=CAT_COIN
-			coin_records += R
-		else
-			R.category=CAT_NORMAL
-			product_records += R
-
-		var/atom/temp = typepath
-		R.product_name = initial(temp.name)
-
-//		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -207,7 +237,7 @@
 
 	else if(src.panel_open)
 
-		for(var/datum/data/vending_product/R in product_records)
+		for(var/datum/data/vending_product/R  in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
 				del(W)
@@ -346,31 +376,6 @@
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/vending/proc/GetProductIndex(var/datum/data/vending_product/P)
-	var/list/plist
-	switch(P.category)
-		if(CAT_NORMAL)
-			plist=product_records
-		if(CAT_HIDDEN)
-			plist=hidden_records
-		if(CAT_COIN)
-			plist=coin_records
-		else
-			warning("UNKNOWN CATEGORY [P.category] IN TYPE [P.product_path] INSIDE [type]!")
-	return plist.Find(P)
-
-/obj/machinery/vending/proc/GetProductByID(var/pid, var/category)
-	switch(category)
-		if(CAT_NORMAL)
-			return product_records[pid]
-		if(CAT_HIDDEN)
-			return hidden_records[pid]
-		if(CAT_COIN)
-			return coin_records[pid]
-		else
-			warning("UNKNOWN PRODUCT: PID: [pid], CAT: [category] INSIDE [type]!")
-			return null
-
 /obj/machinery/vending/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -393,28 +398,24 @@
 	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
 
-	if (premium.len > 0)
-		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br>"
-
 	if (src.product_records.len == 0)
 		dat += "<font color = 'red'>No product loaded!</font>"
 	else
-		var/list/display_records = list()
-		display_records += src.product_records
 
-		if(src.extended_inventory)
-			display_records += src.hidden_records
-		if(src.coin)
-			display_records += src.coin_records
-
-		for (var/datum/data/vending_product/R in display_records)
-			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
-			dat += " <b>[R.amount]</b> </font>"
-			if(R.price)
-				dat += " <b>(Price: [R.price])</b>"
-			if (R.amount > 0)
-				var/idx=GetProductIndex(R)
-				dat += " <a href='byond://?src=\ref[src];vend=[idx];cat=[R.category]'>(Vend)</A>"
+		for(var/idx = 1 to src.product_records.len)
+			var/datum/data/vending_product/product = src.product_records[idx]
+			if(!(product.category & src.categories))
+				continue
+				
+			if(product.display_color)
+				dat += "<FONT color = '[product.display_color]'><B>[product.product_name]</B>:"
+				dat += " <b>[product.amount]</b> </font>"
+			else 
+				dat += "<b>[product.product_name]</b>: <b>[product.amount]</b>"
+			if(product.price)
+				dat += " <b>(Price: [product.price])</b>"
+			if (product.amount > 0)
+				dat += " <a href='byond://?src=\ref[src];vend=[idx]'>(Vend)</A>"
 			else
 				dat += " <font color = 'red'>SOLD OUT</font>"
 			dat += "<br>"
@@ -424,7 +425,7 @@
 	if(panel_open)
 		dat += wires()
 
-		if(product_slogans != "")
+		if(slogan_list.len > 0)
 			dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
 
 	user << browse(dat, "window=vending")
@@ -471,14 +472,10 @@
 				flick(icon_deny,src)
 				return
 
-			var/idx=text2num(href_list["vend"])
-			var/cat=text2num(href_list["cat"])
+			var/key = text2num(href_list["vend"])
+			var/datum/data/vending_product/R = product_records[key]
 
-			var/datum/data/vending_product/R = GetProductByID(idx,cat)
-			if (!R || !istype(R) || !R.product_path || R.amount <= 0)
-				return
-
-			if(R.price == null)
+			if(R.price <= 0)
 				src.vend(R, usr)
 			else
 				src.currently_vending = R
@@ -507,7 +504,7 @@
 		return
 	src.vend_ready = 0 //One thing at a time!!
 
-	if (R in coin_records)
+	if (R.category & CAT_COIN)
 		if(!coin)
 			user << "\blue You need to insert a coin to get this item."
 			return
@@ -848,35 +845,32 @@
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/toy/waterflower = 1)
+	
+/**
+ *  Populate hydroseeds product_records
+ *
+ *  This needs to be customized to fetch the actual names of the seeds, otherwise
+ *  the machine would simply list "packet of seeds" times 20
+ */
+/obj/machinery/vending/hydroseeds/build_inventory()
+	var/list/all_products = list(
+		list(src.products, CAT_NORMAL),
+		list(src.contraband, CAT_HIDDEN),
+		list(src.premium, CAT_COIN))
 
-/obj/machinery/vending/hydroseeds/build_inventory(var/list/productlist,hidden=0,req_coin=0)
+	for(var/current_list in all_products)
+		var/category = current_list[2]
 
-	for(var/typepath in productlist)
-		var/amount = productlist[typepath]
-		var/price = prices[typepath]
-		if(isnull(amount)) amount = 1
+		for(var/entry in current_list[1])
+			var/obj/item/seeds/S = new entry(src)
+			var/name = S.name
+			var/datum/data/vending_product/product = new/datum/data/vending_product(entry, name)
 
-		var/datum/data/vending_product/R = new /datum/data/vending_product()
-
-		R.product_path = typepath
-		R.amount = amount
-		R.price = price
-		R.display_color = pick("red","blue","green")
-
-		if(hidden)
-			R.category=CAT_HIDDEN
-			hidden_records += R
-		else if(req_coin)
-			R.category=CAT_COIN
-			coin_records += R
-		else
-			R.category=CAT_NORMAL
-			product_records += R
-
-		var/obj/item/seeds/S = new typepath(src)
-		R.product_name = S.name
-		del(S)
-	return
+			product.price = (entry in src.prices) ? src.prices[entry] : 0
+			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
+			product.category = category
+			
+			src.product_records.Add(product)
 
 /obj/machinery/vending/magivend
 	name = "MagiVend"
