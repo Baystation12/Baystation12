@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\admin\verbs\randomverbs.dm;maps\exodus-1.dmm;maps\randomcrap.dmm
+WINDOW: maps\exodus-1.dmm;code\game\area\Space Station 13 areas.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
+DIR: code code\game code\game\area maps 
 FILE: maps\exodus-1.dmm
-LAST_COMPILE_TIME: 1423255543
+LAST_COMPILE_TIME: 1423377778
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
