@@ -413,6 +413,8 @@ BLIND     // can't see anything
 /obj/item/clothing/under/proc/can_attach_accessory(obj/item/clothing/accessory/A)
 	if(istype(A))
 		.=1
+	else
+		return 0
 	if(accessories.len && (A.slot in list("utility","armband")))
 		for(var/obj/item/clothing/accessory/AC in accessories)
 			if (AC.slot == A.slot)
