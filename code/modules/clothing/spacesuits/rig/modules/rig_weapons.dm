@@ -28,7 +28,7 @@
 			var/obj/item/weapon/rig/suit = H.back
 			if(istype(suit) && suit.cell && suit.cell.charge >= 250)
 				suit.cell.use(250)
-				var/prog_path = text2path(projectile_type)
+				var/prog_path = projectile_type
 				in_chamber = new prog_path(src)
 				return 1
 	return 0
@@ -45,7 +45,7 @@
 			var/obj/item/weapon/rig/suit = H.back
 			if(istype(suit) && suit.cell && suit.cell.charge >= 250)
 				suit.cell.use(250)
-				var/prog_path = text2path(projectile_type)
+				var/prog_path = projectile_type
 				in_chamber = new prog_path(src)
 				return 1
 	return 0

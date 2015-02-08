@@ -45,7 +45,8 @@
 		"output_load" = round(SMES.output_used),
 		"RCON_tag" = SMES.RCon_tag
 		)))
-	data["smes_info"] = smeslist
+
+	data["smes_info"] = sortByKey(smeslist, "RCON_tag")
 
 	// BREAKER DATA (simplified view)
 	var/list/breakerlist[0]

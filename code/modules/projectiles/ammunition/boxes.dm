@@ -31,6 +31,13 @@
 	max_ammo = 7
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/c45f
+	name = "magazine (.45 flash)"
+	icon_state = "45"
+	ammo_type = "/obj/item/ammo_casing/c45f"
+	max_ammo = 7
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/c45r/empty
 	max_ammo = 0
 
@@ -56,7 +63,7 @@
 	icon_state = "9x19p"
 	origin_tech = "combat=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
-	max_ammo = 8
+	max_ammo = 10
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/mc9mm/empty

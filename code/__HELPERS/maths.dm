@@ -1,9 +1,5 @@
-#define RAND_F(L, H) (rand()*(H-L) + L)
-
-// Credits to Nickr5 for the useful procs I've taken from his library resource.
-
-var/const/E		= 2.71828183
-var/const/Sqrt2	= 1.41421356
+// Macro functions.
+#define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
 
 // List of square roots for the numbers 1-100.
 var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5,
@@ -11,111 +7,127 @@ var/list/sqrtTable = list(1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 
                           7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
                           8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10)
 
-/proc/Atan2(x, y)
-	if(!x && !y) return 0
-	var/a = arccos(x / sqrt(x*x + y*y))
-	return y >= 0 ? a : -a
-
-/proc/Ceiling(x)
-	return -round(-x)
-
 /proc/Clamp(val, min, max)
 	return max(min, min(val, max))
-
-// cotangent
-/proc/Cot(x)
-	return 1 / Tan(x)
-
-// cosecant
-/proc/Csc(x)
-	return 1 / sin(x)
-
-/proc/Default(a, b)
-	return a ? a : b
-
-/proc/Floor(x)
-	return round(x)
-
-// Greatest Common Divisor - Euclid's algorithm
-/proc/Gcd(a, b)
-	return b ? Gcd(b, a % b) : a
-
-/proc/Inverse(x)
-	return 1 / x
-
-/proc/IsAboutEqual(a, b, deviation = 0.1)
-	return abs(a - b) <= deviation
-
-/proc/IsEven(x)
-	return x % 2 == 0
-
-// Returns true if val is from min to max, inclusive.
-/proc/IsInRange(val, min, max)
-	return min <= val && val <= max
-
-/proc/IsInteger(x)
-	return Floor(x) == x
-
-/proc/IsOdd(x)
-	return !IsEven(x)
-
-/proc/IsMultiple(x, y)
-	return x % y == 0
-
-// Least Common Multiple
-/proc/Lcm(a, b)
-	return abs(a) / Gcd(a, b) * abs(b)
-
-// Performs a linear interpolation between a and b.
-// Note that amount=0 returns a, amount=1 returns b, and
-// amount=0.5 returns the mean of a and b.
-/proc/Lerp(a, b, amount = 0.5)
-	return a + (b - a) * amount
-
-/proc/Mean(...)
-	var/values 	= 0
-	var/sum		= 0
-	for(var/val in args)
-		values++
-		sum += val
-	return sum / values
-
-
-// Returns the nth root of x.
-/proc/Root(n, x)
-	return x ** (1 / n)
-
-// secant
-/proc/Sec(x)
-	return 1 / cos(x)
-
-// The quadratic formula. Returns a list with the solutions, or an empty list
-// if they are imaginary.
-/proc/SolveQuadratic(a, b, c)
-	ASSERT(a)
-	. = list()
-	var/d		= b*b - 4 * a * c
-	var/bottom  = 2 * a
-	if(d < 0) return
-	var/root = sqrt(d)
-	. += (-b + root) / bottom
-	if(!d) return
-	. += (-b - root) / bottom
-
-// tangent
-/proc/Tan(x)
-	return sin(x) / cos(x)
-
-/proc/ToDegrees(radians)
-				  // 180 / Pi
-	return radians * 57.2957795
-
-/proc/ToRadians(degrees)
-				  // Pi / 180
-	return degrees * 0.0174532925
 
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
 	var/d = max - min
 	var/t = Floor((val - min) / d)
 	return val - (t * d)
+
+/proc/Default(a, b)
+	return a ? a : b
+
+// Trigonometric functions.
+/proc/Tan(x)
+	return sin(x) / cos(x)
+
+/proc/Csc(x)
+	return 1 / sin(x)
+
+/proc/Sec(x)
+	return 1 / cos(x)
+
+/proc/Cot(x)
+	return 1 / Tan(x)
+
+/proc/Atan2(x, y)
+	if(!x && !y) return 0
+	var/a = arccos(x / sqrt(x*x + y*y))
+	return y >= 0 ? a : -a
+
+/proc/Floor(x)
+	return round(x)
+
+/proc/Ceiling(x)
+	return -round(-x)
+
+// Greatest Common Divisor: Euclid's algorithm.
+/proc/Gcd(a, b)
+	while (1)
+		if (!b) return a
+		a %= b
+		if (!a) return b
+		b %= a
+
+// Least Common Multiple. The formula is a consequence of: a*b = LCM*GCD.
+/proc/Lcm(a, b)
+	return abs(a) * abs(b) / Gcd(a, b)
+
+// Useful in the cases when x is a large expression, e.g. x = 3a/2 + b^2 + Function(c)
+/proc/Square(x)
+	return x*x
+
+/proc/Inverse(x)
+	return 1 / x
+
+// Condition checks.
+/proc/IsAboutEqual(a, b, delta = 0.1)
+	return abs(a - b) <= delta
+
+// Returns true if val is from min to max, inclusive.
+/proc/IsInRange(val, min, max)
+	return (val >= min) && (val <= max)
+
+/proc/IsInteger(x)
+	return Floor(x) == x
+
+/proc/IsMultiple(x, y)
+	return x % y == 0
+
+/proc/IsEven(x)
+	return !(x & 0x1)
+
+/proc/IsOdd(x)
+	return  (x & 0x1)
+
+// Performs a linear interpolation between a and b.
+// Note: weight=0 returns a, weight=1 returns b, and weight=0.5 returns the mean of a and b.
+/proc/Interpolate(a, b, weight = 0.5)
+	return a + (b - a) * weight // Equivalent to: a*(1 - weight) + b*weight
+
+/proc/Mean(...)
+	var/sum = 0
+	for(var/val in args)
+		sum += val
+	return sum / args.len
+
+// Returns the nth root of x.
+/proc/Root(n, x)
+	return x ** (1 / n)
+
+// The quadratic formula. Returns a list with the solutions, or an empty list
+// if they are imaginary.
+/proc/SolveQuadratic(a, b, c)
+	ASSERT(a)
+	
+	. = list()
+	var/discriminant = b*b - 4*a*c
+	var/bottom       = 2*a
+	
+	// Return if the roots are imaginary.
+	if(discriminant < 0)
+		return
+	
+	var/root = sqrt(discriminant)
+	. += (-b + root) / bottom
+	
+	// If discriminant == 0, there would be two roots at the same position.
+	if(discriminant != 0)
+		. += (-b - root) / bottom
+
+/proc/ToDegrees(radians)
+	// 180 / Pi ~ 57.2957795
+	return radians * 57.2957795
+
+/proc/ToRadians(degrees)
+	// Pi / 180 ~ 0.0174532925
+	return degrees * 0.0174532925
+
+// Vector algebra.
+/proc/squaredNorm(x, y)
+	return x*x + y*y
+
+/proc/norm(x, y)
+	return sqrt(squaredNorm(x, y))
