@@ -1,3 +1,5 @@
+#define SCRAMBLE_CACHE_LEN 20
+
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -35,10 +37,20 @@
 
 	return "[trim(full_name)]"
 
+/datum/language
+	var/list/scramble_cache = list()
+
 /datum/language/proc/scramble(var/input)
 
 	if(!syllables || !syllables.len)
 		return stars(input)
+
+	// If the input is cached already, move it to the end of the cache and return it
+	if(input in scramble_cache)
+		var/n = scramble_cache[input]
+		scramble_cache -= input
+		scramble_cache[input] = n
+		return n
 
 	var/input_size = length(input)
 	var/scrambled_text = ""
@@ -64,6 +76,13 @@
 	var/input_ending = copytext(input, input_size)
 	if(input_ending in list("!","?","."))
 		scrambled_text += input_ending
+
+	// Add it to cache, cutting old entries if the list is too long
+	scramble_cache[input] = scrambled_text
+	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
+		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
+
+
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
@@ -425,3 +444,5 @@
 
 	src << browse(dat, "window=checklanguage")
 	return
+
+#undef SCRAMBLE_CACHE_LEN
