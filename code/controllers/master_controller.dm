@@ -33,8 +33,7 @@ datum/controller/game_controller
 	var/mob/list/expensive_mobs = list()
 
 	var/list/shuttle_list	                    // For debugging and VV
-	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
-
+	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -59,6 +58,9 @@ datum/controller/game_controller/New()
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
 
+	//Create the asteroid Z-level.
+	new /datum/random_map(null,13,32,5,217,223)
+
 	spawn(20)
 		createRandomZlevel()
 
@@ -76,9 +78,6 @@ datum/controller/game_controller/proc/setup()
 	SetupXenoarch()
 
 	transfer_controller = new
-
-	for(var/i=0, i<max_secret_rooms, i++)
-		make_mining_asteroid_secret()
 
 	spawn(0)
 		if(ticker)
@@ -108,14 +107,15 @@ datum/controller/game_controller/proc/setup_objects()
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
 
-	//Create the mining ore distribution map.
-	asteroid_ore_map = new /datum/ore_distribution()
-	asteroid_ore_map.populate_distribution_map()
+	// Create the mining ore distribution map.
+	// These values determine the specific area that the map is applied to.
+	// If you do not use the official Baycode asteroid map, you will need to change them.
+	asteroid_ore_map = new /datum/random_map/ore(null,13,32,5,217,223)
 
 	//Shitty hack to fix mining turf overlays, for some reason New() is not being called.
-	for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
-		T.updateMineralOverlays()
-		T.name = "asteroid"
+	//for(var/turf/simulated/floor/plating/airless/asteroid/T in world)
+	//	T.updateMineralOverlays()
+	//	T.name = "asteroid"
 
 	//Set up spawn points.
 	populate_spawn_points()

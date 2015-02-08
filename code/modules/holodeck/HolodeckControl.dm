@@ -10,6 +10,7 @@ var/global/list/holodeck_programs = list(
 	"snowfield" =	/area/holodeck/source_snowfield,	\
 	"theatre" =	/area/holodeck/source_theatre,	\
 	"meetinghall" =	/area/holodeck/source_meetinghall,	\
+	"courtroom" =	/area/holodeck/source_courtroom,	\
 	"burntest" = 	/area/holodeck/source_burntest,	\
 	"wildlifecarp" = 	/area/holodeck/source_wildlife,	\
 	"turnoff" = 	/area/holodeck/source_plating	\
@@ -33,18 +34,20 @@ var/global/list/holodeck_programs = list(
 	var/safety_disabled = 0
 	var/mob/last_to_emag = null
 	var/last_change = 0
+	var/last_gravity_change = 0
 	var/list/supported_programs = list( \
 	"Empty Court" = "emptycourt", \
-	"Boxing Court"="boxingcourt",	\
 	"Basketball Court" = "basketball",	\
 	"Thunderdome Court" = "thunderdomecourt",	\
+	"Boxing Ring"="boxingcourt",	\
 	"Beach" = "beach",	\
 	"Desert" = "desert",	\
 	"Space" = "space",	\
 	"Picnic Area" = "picnicarea",	\
 	"Snow Field" = "snowfield",	\
 	"Theatre" = "theatre",	\
-	"Meeting Hall" = "meetinghall"	\
+	"Meeting Hall" = "meetinghall",	\
+	"Courtroom" = "courtroom"	\
 	)
 	var/list/restricted_programs = list("Atmospheric Burn Simulation" = "burntest", "Wildlife Simulation" = "wildlifecarp")
 
@@ -61,11 +64,16 @@ var/global/list/holodeck_programs = list(
 	dat += "<B>Holodeck Control System</B><BR>"
 	dat += "<HR>Current Loaded Programs:<BR>"
 	for(var/prog in supported_programs)
-		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>(([prog]))</A><BR>"
+		dat += "<A href='?src=\ref[src];program=[supported_programs[prog]]'>([prog])</A><BR>"
 
+	dat += "<BR>"
+	dat += "<A href='?src=\ref[src];program=turnoff'>(Turn Off)</A><BR>"
+
+	dat += "<BR>"
 	dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
 	if(issilicon(user))
+		dat += "<BR>"
 		if(safety_disabled)
 			if (emagged)
 				dat += "<font color=red><b>ERROR</b>: Cannot re-enable Safety Protocols.</font><BR>"
@@ -73,6 +81,8 @@ var/global/list/holodeck_programs = list(
 				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
 		else
 			dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+
+	dat += "<BR>"
 
 	if(safety_disabled)
 		for(var/prog in restricted_programs)
@@ -82,6 +92,11 @@ var/global/list/holodeck_programs = list(
 		dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
 	else
 		dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
+
+	if(linkedholodeck.has_gravity)
+		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=green>(ON)</font></A><BR>"
+	else
+		dat += "Gravity is <A href='?src=\ref[src];gravity=1'><font color=blue>(OFF)</font></A><BR>"
 
 	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
@@ -117,6 +132,9 @@ var/global/list/holodeck_programs = list(
 			else
 				message_admins("[key_name_admin(usr)] restored the holodeck's safeties")
 				log_game("[key_name(usr)] restored the holodeck's safeties")
+
+		else if(href_list["gravity"])
+			toggleGravity(linkedholodeck)
 
 		src.add_fingerprint(usr)
 	src.updateUsrDialog()
@@ -272,6 +290,9 @@ var/global/list/holodeck_programs = list(
 	else
 		for(var/item in holographic_items)
 			derez(item)
+		if(!linkedholodeck.has_gravity)
+			linkedholodeck.gravitychange(1,linkedholodeck)
+
 		var/area/targetsource = locate(/area/holodeck/source_plating)
 		targetsource.copy_contents_to(linkedholodeck , 1)
 		active = 0
@@ -325,6 +346,24 @@ var/global/list/holodeck_programs = list(
 		update_projections()
 
 
+/obj/machinery/computer/HolodeckControl/proc/toggleGravity(var/area/A)
+	if(world.time < (last_gravity_change + 25))
+		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
+			return
+		for(var/mob/M in range(3,src))
+			M.show_message("\b ERROR. Recalibrating gravity field.")
+			last_change = world.time
+			return
+
+	last_gravity_change = world.time
+	active = 1
+	use_power = 1
+
+	if(A.has_gravity)
+		A.gravitychange(0,A)
+	else
+		A.gravitychange(1,A)
+
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Get rid of any items
 	for(var/item in holographic_items)
@@ -337,338 +376,10 @@ var/global/list/holodeck_programs = list(
 	if(target)
 		loadProgram(target)
 
+	if(!linkedholodeck.has_gravity)
+		linkedholodeck.gravitychange(1,linkedholodeck)
+
 	var/area/targetsource = locate(/area/holodeck/source_plating)
 	targetsource.copy_contents_to(linkedholodeck , 1)
 	active = 0
 	use_power = 1
-
-
-
-
-
-
-
-// Holographic Items!
-
-/turf/simulated/floor/holofloor/
-	thermal_conductivity = 0
-
-/turf/simulated/floor/holofloor/grass
-	name = "Lush Grass"
-	icon_state = "grass1"
-	floor_type = /obj/item/stack/tile/grass
-
-	New()
-		icon_state = "grass[pick("1","2","3","4")]"
-		..()
-		spawn(4)
-			update_icon()
-			for(var/direction in cardinal)
-				if(istype(get_step(src,direction),/turf/simulated/floor))
-					var/turf/simulated/floor/FF = get_step(src,direction)
-					FF.update_icon() //so siding get updated properly
-
-/turf/simulated/floor/holofloor/desert
-	name = "desert sand"
-	desc = "Uncomfortably gritty for a hologram."
-	icon_state = "asteroid"
-
-/turf/simulated/floor/holofloor/desert/New()
-	..()
-	if(prob(10))
-		overlays += "asteroid[rand(0,9)]"
-
-/turf/simulated/floor/holofloor/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	return
-	// HOLOFLOOR DOES NOT GIVE A FUCK
-
-/obj/structure/table/holotable
-	name = "table"
-	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "table"
-	density = 1
-	anchored = 1.0
-	layer = 2.8
-	throwpass = 1	//You can throw objects over this, despite it's density.
-
-/obj/structure/table/holotable/attack_hand(mob/user as mob)
-	return // HOLOTABLE DOES NOT GIVE A FUCK
-
-
-/obj/structure/table/holotable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holotable!  There are no bolts!"
-		return
-
-	if(isrobot(user))
-		return
-
-	..()
-
-/obj/structure/table/holotable/wood
-	name = "table"
-	desc = "A square piece of wood standing on four wooden legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "wood_table"
-
-/obj/structure/holostool
-	name = "stool"
-	desc = "Apply butt."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "stool"
-	anchored = 1.0
-	pressure_resistance = 15
-
-
-/obj/item/clothing/gloves/boxing/hologlove
-	name = "boxing gloves"
-	desc = "Because you really needed another excuse to punch your crewmates."
-	icon_state = "boxing"
-	item_state = "boxing"
-
-/obj/structure/holowindow
-	name = "reinforced window"
-	icon = 'icons/obj/structures.dmi'
-	icon_state = "rwindow"
-	desc = "A window."
-	density = 1
-	layer = 3.2//Just above doors
-	pressure_resistance = 4*ONE_ATMOSPHERE
-	anchored = 1.0
-	flags = ON_BORDER
-
-
-/obj/structure/holowindow/Del()
-	..()
-
-/obj/item/weapon/holo
-	damtype = HALLOSS
-
-/obj/item/weapon/holo/esword
-	desc = "May the force be within you. Sorta."
-	icon_state = "sword0"
-	force = 3.0
-	throw_speed = 1
-	throw_range = 5
-	throwforce = 0
-	w_class = 2.0
-	flags = NOSHIELD | NOBLOODY
-	var/active = 0
-
-/obj/item/weapon/holo/esword/green
-	New()
-		item_color = "green"
-
-/obj/item/weapon/holo/esword/red
-	New()
-		item_color = "red"
-
-/obj/item/weapon/holo/esword/IsShield()
-	if(active)
-		return 1
-	return 0
-
-/obj/item/weapon/holo/esword/attack(target as mob, mob/user as mob)
-	..()
-
-/obj/item/weapon/holo/esword/New()
-	item_color = pick("red","blue","green","purple")
-
-/obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)
-	active = !active
-	if (active)
-		force = 30
-		icon_state = "sword[item_color]"
-		w_class = 4
-		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		user << "<span class='notice'>[src] is now active.</span>"
-	else
-		force = 3
-		icon_state = "sword0"
-		w_class = 2
-		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		user << "<span class='notice'>[src] can now be concealed.</span>"
-
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		H.update_inv_l_hand()
-		H.update_inv_r_hand()
-
-	add_fingerprint(user)
-	return
-
-//BASKETBALL OBJECTS
-
-/obj/item/weapon/beach_ball/holoball
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "basketball"
-	name = "basketball"
-	item_state = "basketball"
-	desc = "Here's your chance, do your dance at the Space Jam."
-	w_class = 4 //Stops people from hiding it in their bags/pockets
-
-/obj/structure/holohoop
-	name = "basketball hoop"
-	desc = "Boom, Shakalaka!"
-	icon = 'icons/obj/basketball.dmi'
-	icon_state = "hoop"
-	anchored = 1
-	density = 1
-	throwpass = 1
-
-/obj/structure/holohoop/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if(G.state<2)
-			user << "<span class='warning'>You need a better grip to do that!</span>"
-			return
-		G.affecting.loc = src.loc
-		G.affecting.Weaken(5)
-		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
-		del(W)
-		return
-	else if (istype(W, /obj/item) && get_dist(src,user)<2)
-		user.drop_item(src)
-		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
-		return
-
-/obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if (istype(mover,/obj/item) && mover.throwing)
-		var/obj/item/I = mover
-		if(istype(I, /obj/item/projectile))
-			return
-		if(prob(50))
-			I.loc = src.loc
-			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", 3)
-		else
-			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", 3)
-		return 0
-	else
-		return ..(mover, target, height, air_group)
-
-
-/obj/machinery/readybutton
-	name = "Ready Declaration Device"
-	desc = "This device is used to declare ready. If all devices in an area are ready, the event will begin!"
-	icon = 'icons/obj/monitors.dmi'
-	icon_state = "auth_off"
-	var/ready = 0
-	var/area/currentarea = null
-	var/eventstarted = 0
-
-	anchored = 1.0
-	use_power = 1
-	idle_power_usage = 2
-	active_power_usage = 6
-	power_channel = ENVIRON
-
-/obj/machinery/readybutton/attack_ai(mob/user as mob)
-	user << "The station AI is not to interact with these devices!"
-	return
-
-/obj/machinery/readybutton/New()
-	..()
-
-
-/obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	user << "The device is a solid button, there's nothing you can do with it!"
-
-/obj/machinery/readybutton/attack_hand(mob/user as mob)
-
-	if(user.stat || stat & (NOPOWER|BROKEN))
-		user << "This device is not powered."
-		return
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
-	currentarea = get_area(src.loc)
-	if(!currentarea)
-		del(src)
-
-	if(eventstarted)
-		usr << "The event has already begun!"
-		return
-
-	ready = !ready
-
-	update_icon()
-
-	var/numbuttons = 0
-	var/numready = 0
-	for(var/obj/machinery/readybutton/button in currentarea)
-		numbuttons++
-		if (button.ready)
-			numready++
-
-	if(numbuttons == numready)
-		begin_event()
-
-/obj/machinery/readybutton/update_icon()
-	if(ready)
-		icon_state = "auth_on"
-	else
-		icon_state = "auth_off"
-
-/obj/machinery/readybutton/proc/begin_event()
-
-	eventstarted = 1
-
-	for(var/obj/structure/holowindow/W in currentarea)
-		del(W)
-
-	for(var/mob/M in currentarea)
-		M << "FIGHT!"
-
-//Holorack
-
-/obj/structure/table/rack/holorack
-	name = "rack"
-	desc = "Different from the Middle Ages version."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "rack"
-
-/obj/structure/table/rack/holorack/attack_hand(mob/user as mob)
-	return
-
-/obj/structure/table/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/wrench))
-		user << "It's a holorack!  You can't unwrench it!"
-		return
-
-//Holocarp
-
-/mob/living/simple_animal/hostile/carp/holodeck
-	icon = 'icons/mob/AI.dmi'
-	icon_state = "holo4"
-	icon_living = "holo4"
-	icon_dead = "holo4"
-	icon_gib = null
-	meat_amount = 0
-	meat_type = null
-
-/mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
-	if (safe)
-		faction = "neutral"
-		melee_damage_lower = 0
-		melee_damage_upper = 0
-		wall_smash = 0
-		destroy_surroundings = 0
-	else
-		faction = "carp"
-		melee_damage_lower = initial(melee_damage_lower)
-		melee_damage_upper = initial(melee_damage_upper)
-		wall_smash = initial(wall_smash)
-		destroy_surroundings = initial(destroy_surroundings)
-
-/mob/living/simple_animal/hostile/carp/holodeck/gib()
-	derez() //holograms can't gib
-
-/mob/living/simple_animal/hostile/carp/holodeck/death()
-	..()
-	derez()
-
-/mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
-	visible_message("<span class='notice'>\The [src] fades away!</span>")
-	del(src)

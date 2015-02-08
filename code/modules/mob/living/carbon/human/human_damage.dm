@@ -87,7 +87,7 @@
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
 	if(species && species.burn_mod)
@@ -97,7 +97,7 @@
 		take_overall_damage(0, amount)
 	else
 		heal_overall_damage(0, -amount)
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
 	if(species && species.brute_mod)
@@ -112,7 +112,7 @@
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
 
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
 	if(species && species.burn_mod)
@@ -127,7 +127,7 @@
 			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
 			O.heal_damage(0, -amount, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
 
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/Stun(amount)
 	if(HULK in mutations)	return
@@ -185,7 +185,7 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
 /mob/living/carbon/human/getOxyLoss()
@@ -249,7 +249,7 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.heal_damage(brute,burn))
 		UpdateDamageIcon()
-		hud_updateflag |= 1 << HEALTH_HUD
+		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 
 
@@ -265,7 +265,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.take_damage(brute,burn,sharp,edge))
 		UpdateDamageIcon()
-		hud_updateflag |= 1 << HEALTH_HUD
+		BITSET(hud_updateflag, HEALTH_HUD)
 	updatehealth()
 	speech_problem_flag = 1
 
@@ -288,7 +288,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 
 		parts -= picked
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 	speech_problem_flag = 1
 	if(update)	UpdateDamageIcon()
 
@@ -309,7 +309,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 
 		parts -= picked
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 	if(update)	UpdateDamageIcon()
 
 
@@ -336,7 +336,7 @@ This function restores all organs.
 	if(istype(E, /datum/organ/external))
 		if (E.heal_damage(brute, burn))
 			UpdateDamageIcon()
-			hud_updateflag |= 1 << HEALTH_HUD
+			BITSET(hud_updateflag, HEALTH_HUD)
 	else
 		return 0
 	return
@@ -393,5 +393,5 @@ This function restores all organs.
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
-	hud_updateflag |= 1 << HEALTH_HUD
+	BITSET(hud_updateflag, HEALTH_HUD)
 	return 1

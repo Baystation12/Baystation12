@@ -6,7 +6,7 @@
 	force = 10
 	fire_sound = 'sound/weapons/pulse.ogg'
 	charge_cost = 200
-	projectile_type = "/obj/item/projectile/beam/pulse"
+	projectile_type = /obj/item/projectile/beam/pulse
 	cell_type = "/obj/item/weapon/cell/super"
 	var/mode = 2
 	fire_delay = 25
@@ -18,19 +18,19 @@
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
-				projectile_type = "/obj/item/projectile/beam/stun"
+				projectile_type = /obj/item/projectile/beam/stun
 			if(0)
 				mode = 1
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Laser.ogg'
 				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/beam"
+				projectile_type = /obj/item/projectile/beam
 			if(1)
 				mode = 2
 				charge_cost = 200
 				fire_sound = 'sound/weapons/pulse.ogg'
 				user << "\red [src.name] is now set to DESTROY."
-				projectile_type = "/obj/item/projectile/beam/pulse"
+				projectile_type = /obj/item/projectile/beam/pulse
 		return
 
 	isHandgun()

@@ -30,6 +30,10 @@
 	..()
 	add_language("Galactic Common")
 
+/mob/living/silicon/proc/SetName(pickedName as text)
+	real_name = pickedName
+	name = real_name
+
 /mob/living/silicon/proc/show_laws()
 	return
 

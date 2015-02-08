@@ -21,11 +21,11 @@
 			B.health -= damage
 			B.update_icon()
 
-		new/obj/effect/effect/smoke/flashbang(src.loc)
+		new/obj/effect/effect/smoke/illumination(src.loc, brightness=15)
 		del(src)
 		return
 
-	proc/bang(var/turf/T , var/mob/living/carbon/M)						// Added a new proc called 'bang' that takes a location and a person to be banged.
+	proc/bang(var/turf/T , var/mob/living/carbon/M)					// Added a new proc called 'bang' that takes a location and a person to be banged.
 		if (locate(/obj/item/weapon/cloaking_device, M))			// Called during the loop that bangs people in lockers/containers and when banging
 			for(var/obj/item/weapon/cloaking_device/S in M)			// people in normal view.  Could theroetically be called during other explosions.
 				S.active = 0										// -- Polymorph
@@ -99,16 +99,6 @@
 			if (M.ear_damage >= 5)
 				M << "\red Your ears start to ring!"
 		M.update_icons()
-
-/obj/effect/effect/smoke/flashbang
-	name = "illumination"
-	time_to_live = 10
-	opacity = 0
-	icon_state = "sparks"
-
-/obj/effect/effect/smoke/flashbang/New()
-	..()
-	SetLuminosity(15)
 
 /obj/item/weapon/grenade/flashbang/clusterbang//Created by Polymorph, fixed by Sieve
 	desc = "Use of this weapon may constiute a war crime in your area, consult your local captain."
