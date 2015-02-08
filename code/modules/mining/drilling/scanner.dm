@@ -23,7 +23,7 @@
 		"exotic matter" = 0
 		)
 
-	for(var/turf/T in oview(3,get_turf(user)))
+	for(var/turf/T in range(3,get_turf(user)))
 
 		if(!T.has_resources)
 			continue
