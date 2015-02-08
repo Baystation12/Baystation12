@@ -352,6 +352,13 @@ var/global/datum/controller/occupations/job_master
 
 		var/datum/job/job = GetJob(rank)
 		var/list/spawn_in_storage = list()
+		var/alt_title = null
+
+		if(H.mind)
+			H.mind.assigned_role = rank
+			alt_title = H.mind.role_alt_title
+
+		H.job = alt_title
 
 		if(job)
 
@@ -407,8 +414,6 @@ var/global/datum/controller/occupations/job_master
 		else
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
-		H.job = rank
-
 		if(!joined_late)
 			var/obj/S = null
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
@@ -455,11 +460,7 @@ var/global/datum/controller/occupations/job_master
 		spawn(0)
 			H << "\blue<b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b>"
 
-		var/alt_title = null
 		if(H.mind)
-			H.mind.assigned_role = rank
-			alt_title = H.mind.role_alt_title
-
 			switch(rank)
 				if("Cyborg")
 					return H.Robotize()
