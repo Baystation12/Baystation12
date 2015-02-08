@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\verbs\ooc.dm;code\modules\reagents\reagent_containers\food\snacks.dm
+WINDOW: code\game\verbs\ooc.dm;code\modules\reagents\reagent_containers\food\snacks.dm;maps\exodus-1.dmm;icons\obj\jukebox.dmi;code\game\machinery\jukebox.dm;code\controllers\shuttle_controller.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\verbs code\modules code\modules\admin code\modules\admin\verbs code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food maps 
-FILE: code\game\verbs\ooc.dm
-LAST_COMPILE_TIME: 1423342570
+DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\weapons code\modules code\modules\power code\modules\power\antimatter code\TriDimension code\ZAS icons icons\obj maps 
+FILE: code\controllers\shuttle_controller.dm
+LAST_COMPILE_TIME: 1423362857
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

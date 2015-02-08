@@ -176,7 +176,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_offsite = "research_outpost_dock"
 	shuttles["Research"] = shuttle
 	process_shuttles += shuttle
-
+/*	Disabled for now
 	shuttle = new()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/laborcamp/outpost)
@@ -186,7 +186,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	shuttle.dock_target_offsite = "laborcamp_outpost_dock"
 	shuttles["Labor Camp"] = shuttle
 	process_shuttles += shuttle
-
+*/
 	// ERT Shuttle
 	var/datum/shuttle/ferry/multidock/specops/ERT = new()
 	ERT.location = 0

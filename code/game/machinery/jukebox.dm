@@ -30,6 +30,11 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
+		new/datum/track("Jukebox Hero", 'sound/music/jukeboxhero.ogg'),
+		new/datum/track("Unknown Title", 'sound/music/sandstorm.ogg'),
+		new/datum/track("Gummy Bears", 'sound/music/gummybear.ogg'),
+		new/datum/track("Narwhals", 'sound/music/gummybear.ogg'),
+		new/datum/track("Rasputin", 'sound/music/rasputin.ogg'),
 	)
 
 /obj/machinery/media/jukebox/Del()
@@ -83,7 +88,7 @@ datum/track/New(var/title_name, var/audio)
 		StopPlaying()
 	else if(href_list["play"])
 		if(emagged)
-			playsound(src.loc, 'sound/items/AirHorn.ogg', 100, 1)
+			playsound(src.loc, 'sound/music/nyancat.ogg', 100, 1)
 			for(var/mob/living/carbon/M in ohearers(6, src))
 				if(istype(M, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = M
@@ -98,7 +103,7 @@ datum/track/New(var/title_name, var/audio)
 					M.Paralyse(4)
 				else
 					M.make_jittery(500)
-			spawn(15)
+			spawn(278)
 				explode()
 		else if(current_track == null)
 			usr << "No track selected."
