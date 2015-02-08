@@ -104,7 +104,7 @@
 "bZ" = (/obj/item/weapon/book/manual/security_space_law,/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/space)
 "ca" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/wood,/area/space)
 "cb" = (/obj/structure/table/woodentable,/obj/structure/noticeboard{pixel_x = 31},/turf/simulated/floor/wood,/area/space)
-"cc" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/matches,/obj/item/clothing/mask/cigarette/cigar,/obj/item/weapon/reagent_containers/food/drinks/flask{pixel_x = 8},/turf/simulated/floor/carpet,/area/space)
+"cc" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/matches,/obj/item/weapon/reagent_containers/food/drinks/flask{pixel_x = 8},/turf/simulated/floor/carpet,/area/space)
 "cd" = (/obj/structure/stool/bed,/obj/item/weapon/bedsheet/captain,/turf/simulated/floor/carpet,/area/space)
 "ce" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/obj/machinery/light_switch{dir = 2; name = "light switch "; pixel_x = 0; pixel_y = -22},/turf/simulated/floor/carpet,/area/space)
 "cf" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin{pixel_x = -3; pixel_y = 7},/obj/item/weapon/pen,/obj/item/device/megaphone,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/wood,/area/space)
@@ -492,7 +492,7 @@
 "jx" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/space)
 "jy" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only{dir = 2},/turf/simulated/floor/plating,/area/space)
 "jz" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/machinery/door/firedoor/border_only{dir = 2},/turf/simulated/floor/plating,/area/space)
-"jA" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/glass{icon = 'icons/obj/doors/Doorresearchglass.dmi'; name = "Away Mission Briefing Room"},/turf/simulated/floor,/area/space)
+"jA" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/glass{icon = 'icons/obj/doors/doorresearchglass.dmi'; name = "Away Mission Briefing Room"},/turf/simulated/floor,/area/space)
 "jB" = (/turf/space,/turf/simulated/shuttle/wall{tag = "icon-propulsion (EAST)"; icon_state = "propulsion"; dir = 4},/area/space)
 "jC" = (/obj/structure/shuttle/engine/heater{dir = 8},/turf/simulated/floor/plating,/area/space)
 "jD" = (/turf/simulated/shuttle/plating,/area/space)
@@ -773,7 +773,7 @@
 "oS" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/space)
 "oT" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/space)
 "oU" = (/obj/structure/stool/bed/chair{dir = 4},/turf/simulated/floor{icon_state = "dark"},/area/space)
-"oV" = (/obj/structure/table,/obj/item/ashtray/bronze,/obj/item/clothing/mask/cigarette/cigar/havana,/turf/simulated/floor{icon_state = "dark"},/area/space)
+"oV" = (/obj/structure/table,/obj/item/ashtray/bronze,/turf/simulated/floor{icon_state = "dark"},/area/space)
 "oW" = (/obj/structure/stool/bed/chair{dir = 8},/turf/simulated/floor{icon_state = "dark"},/area/space)
 "oX" = (/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/space)
 "oY" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "dark"},/area/space)
@@ -955,3 +955,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 pxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
