@@ -33,7 +33,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Jukebox Hero", 'sound/music/jukeboxhero.ogg'),
 		new/datum/track("Unknown Title", 'sound/music/sandstorm.ogg'),
 		new/datum/track("Gummy Bears", 'sound/music/gummybear.ogg'),
-		new/datum/track("Narwhals", 'sound/music/gummybear.ogg'),
+		new/datum/track("Narwhals", 'sound/music/narwhal.ogg'),
 		new/datum/track("Rasputin", 'sound/music/rasputin.ogg'),
 	)
 
