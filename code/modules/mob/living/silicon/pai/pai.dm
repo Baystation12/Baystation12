@@ -69,6 +69,7 @@
 
 	var/translator_on = 0 // keeps track of the translator module
 
+	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
 

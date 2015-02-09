@@ -66,7 +66,7 @@
 			if(answer == "Yes")
 				var/turf/T = get_turf_or_move(P.loc)
 				for (var/mob/v in viewers(T))
-					v.show_message("\blue [M] presses \his thumb against [P].", 3, "\blue [P] makes a sharp clicking sound as it extracts DNA material from [M].", 2)
+					v.show_message("<span class='notice'>[M] presses \his thumb against [P].</span>", 3, "<span class='notice'>[P] makes a sharp clicking sound as it extracts DNA material from [M].</span>", 2)
 				var/datum/dna/dna = M.dna
 				P << "<font color = red><h3>[M]'s UE string : [dna.unique_enzymes]</h3></font>"
 				if(dna.unique_enzymes == P.master_dna)
@@ -145,6 +145,76 @@
 	id = "messenger"
 	toggle = 0
 
+	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
+		var/data[0]
+
+		data["receiver_off"] = user.pda.toff
+		data["ringer_off"] = user.pda.message_silent
+		data["current_ref"] = null
+		data["current_name"] = user.current_pda_messaging
+
+		var/pdas[0]
+		if(!user.pda.toff)
+			for(var/obj/item/device/pda/P in sortAtom(PDAs))
+				if(!P.owner || P.toff || P == user.pda || P.hidden) continue
+				var/pda[0]
+				pda["name"] = "[P]"
+				pda["owner"] = "[P.owner]"
+				pda["ref"] = "\ref[P]"
+				if(P.owner == user.current_pda_messaging)
+					data["current_ref"] = "\ref[P]"
+				pdas[++pdas.len] = pda
+
+		data["pdas"] = pdas
+
+		var/messages[0]
+		if(user.current_pda_messaging)
+			for(var/index in user.pda.tnote)
+				if(index["owner"] != user.current_pda_messaging)
+					continue
+				var/msg[0]
+				var/sent = index["sent"]
+				msg["sent"] = sent ? 1 : 0
+				msg["target"] = index["owner"]
+				msg["message"] = index["message"]
+				messages[++messages.len] = msg
+
+		data["messages"] = messages
+
+		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		if(!ui)
+			// Don't copy-paste this unless you're making a pAI software module!
+			ui = new(user, user, id, "pai_messenger.tmpl", "Digital Messenger", 450, 600)
+			ui.set_initial_data(data)
+			ui.open()
+			ui.set_auto_update(1)
+
+	Topic(href, href_list)
+		var/mob/living/silicon/pai/P = usr
+		if(!istype(P)) return
+
+		if(!isnull(P.pda))
+			if(href_list["toggler"])
+				P.pda.toff = href_list["toggler"] != "1"
+				return 1
+			else if(href_list["ringer"])
+				P.pda.message_silent = href_list["ringer"] != "1"
+				return 1
+			else if(href_list["select"])
+				var/s = href_list["select"]
+				if(s == "*NONE*")
+					P.current_pda_messaging = null
+				else
+					P.current_pda_messaging = s
+				return 1
+			else if(href_list["target"])
+				if(P.silence_time)
+					return alert("Communications circuits remain uninitialized.")
+
+				var/target = locate(href_list["target"])
+				P.pda.create_message(P, target, 1)
+				return 1
+
 /datum/pai_software/med_records
 	name = "Medical Records"
 	ram_cost = 15
@@ -221,7 +291,7 @@
 		var/datum/data/record/S = user.securityActive2
 		data["general"] = G ? G.fields : null
 		data["security"] = S ? S.fields : null
-		data["could_not_find"] = user.medical_cannotfind
+		data["could_not_find"] = user.security_cannotfind
 
 		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
@@ -241,15 +311,19 @@
 				var/datum/data/record/R = record
 				var/datum/data/record/S = null
 				if (!( data_core.general.Find(R) ))
-					P.medical_cannotfind = 1
+					P.securityActive1 = null
+					P.securityActive2 = null
+					P.security_cannotfind = 1
 				else
-					P.medical_cannotfind = 0
+					P.security_cannotfind = 0
 					for(var/datum/data/record/E in data_core.security)
 						if ((E.fields["name"] == R.fields["name"] || E.fields["id"] == R.fields["id"]))
 							S = E
 					P.securityActive1 = R
 					P.securityActive2 = S
 			else
+				P.securityActive1 = null
+				P.securityActive2 = null
 				P.security_cannotfind = 1
 			return 1
 

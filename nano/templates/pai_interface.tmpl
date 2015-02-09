@@ -19,7 +19,6 @@ code/modules/mob/living/silicon/pai/software.dm
 	</span>
 	<span class="itemContent">
 		{{for data.bought}}
-			<!-- value.on ? 'yellowButton' : null -->
 			{{:helper.link(value.name, '', {"software" : value.id}, null, value.on ? 'selected' : null)}}
 		{{/for}}
 	</span>
