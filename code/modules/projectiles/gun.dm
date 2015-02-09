@@ -134,16 +134,9 @@
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
 
-	var/p_x
-	var/p_y
-	if(params)
-		var/list/mouse_control = params2list(params)
-		if(mouse_control["icon-x"])
-			p_x = text2num(mouse_control["icon-x"])
-		if(mouse_control["icon-y"])
-			p_y = text2num(mouse_control["icon-y"])
-	
 	if(in_chamber)
+		if(params) in_chamber.set_clickpoint(params)
+	
 		var/fail = in_chamber.launch(
 			target = target, 
 			user = user, 

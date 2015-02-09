@@ -81,8 +81,16 @@
 	del(in_chamber) //No need for it anymore
 	return output //Send it back to the gun!
 
+//sets the click point of the projectile using mouse input params
+/obj/item/projectile/proc/set_clickpoint(var/params)
+	var/list/mouse_control = params2list(params)
+	if(mouse_control["icon-x"])
+		p_x = text2num(mouse_control["icon-x"])
+	if(mouse_control["icon-y"])
+		p_y = text2num(mouse_control["icon-y"])
+
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0, var/px=null, var/py=null)
+/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
 	var/turf/curloc = get_turf(user)
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
@@ -106,8 +114,6 @@
 	current = curloc
 	yo = targloc.y - curloc.y + y_offset
 	xo = targloc.x - curloc.x + x_offset
-	if(!isnull(py)) p_y = py
-	if(!isnull(px)) p_x = px
 
 	shot_from = launcher
 	silenced = launcher.silenced
