@@ -179,7 +179,7 @@
 	return
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (currently_vending)
+	if (currently_vending && vendor_account && !vendor_account.suspended)
 		var/paid = 0
 		var/handled = 0
 		if(istype(W, /obj/item/weapon/card/id))
@@ -493,8 +493,12 @@
 				src.vend(R, usr)
 			else
 				src.currently_vending = R
-				src.status_message = "Please swipe a card or insert cash to pay for the item."
-				src.status_error = 0
+				if(!vendor_account || vendor_account.suspended)
+					src.status_message = "This machine is currently unable to process payments due to problems with the associated account."
+					src.status_error = 1
+				else
+					src.status_message = "Please swipe a card or insert cash to pay for the item."
+					src.status_error = 0
 
 		else if (href_list["cancelpurchase"])
 			src.currently_vending = null
@@ -611,7 +615,7 @@
 			new dump_path(src.loc)
 			R.amount--
 		break
-
+	
 	stat |= BROKEN
 	src.icon_state = "[initial(icon_state)]-broken"
 	return
