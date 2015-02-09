@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\exodus-1.dmm
+WINDOW: maps\exodus-1.dmm;code\modules\power\cable.dm;code\game\objects\structures\lattice.dm;code\game\turfs\simulated\floor.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\datums code\datums\spells code\game code\game\area code\game\objects code\game\objects\structures code\game\turfs code\game\turfs\simulated code\modules code\modules\power code\TriDimension code\ZAS icons icons\obj icons\Testing maps 
-FILE: maps\exodus-1.dmm
-LAST_COMPILE_TIME: 1423421362
+DIR: code code\__HELPERS code\controllers code\datums code\datums\spells code\game code\game\area code\game\objects code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\game\turfs code\game\turfs\simulated code\modules code\modules\power maps 
+FILE: code\game\turfs\simulated\floor.dm
+LAST_COMPILE_TIME: 1423496821
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

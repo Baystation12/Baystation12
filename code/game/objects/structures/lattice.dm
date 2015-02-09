@@ -11,7 +11,7 @@
 
 /obj/structure/lattice/New()
 	..()
-	if(!(istype(src.loc, /turf/space)))
+	if(!( istype( src.loc, /turf/space )) && !( istype(src.loc, /turf/simulated/floor/plating/airless/fakespace )))
 		del(src)
 	for(var/obj/structure/lattice/LAT in src.loc)
 		if(LAT != src)
@@ -74,7 +74,7 @@
 		if(locate(/obj/structure/lattice, get_step(src, direction)))
 			dir_sum += direction
 		else
-			if(!(istype(get_step(src, direction), /turf/space)))
+			if(!(istype(get_step(src, direction), /turf/space))  && !( istype( get_step(src, direction), /turf/simulated/floor/plating/airless/fakespace )))
 				dir_sum += direction
 
 	icon_state = "[name][dir_sum]"
@@ -92,6 +92,8 @@
 	icon_state = "catwalkfull"
 
 /obj/structure/lattice/catwalk/New()
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.ChangeTurf(/turf/simulated/floor/plating/airless/fakespace)
 	..()
 
 /obj/structure/lattice/catwalk/Move()
@@ -104,20 +106,28 @@
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
 		C.Del()
+
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.ChangeTurf(/turf/space)
 	..()
 
 /obj/structure/lattice/catwalk/Deconstruct()
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
 		C.Del()
+
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.ChangeTurf(/turf/space)
 	..()
 
 /obj/structure/lattice/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	..()
+	user << "You look at your hand to make sure you have a cable..."
 	if(istype(C, /obj/item/stack/cable_coil))
+		user << "Finding place to put cable..."
 		var/obj/item/stack/cable_coil/coil = C
 		coil.turf_place(src, user)
 		return
+	..()
 
 /obj/structure/lattice/catwalk/updateOverlays()
 	overlays.Cut()

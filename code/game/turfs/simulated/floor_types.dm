@@ -104,6 +104,15 @@
 		..()
 		name = "plating"
 
+/turf/simulated/floor/plating/airless/fakespace
+	icon = 'icons/turf/space.dmi'
+	icon_state = "16"
+	name = "space"
+	lighting_lumcount = 4
+
+	New()
+		..()
+
 /turf/simulated/floor/bluegrid
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bcircuit"
