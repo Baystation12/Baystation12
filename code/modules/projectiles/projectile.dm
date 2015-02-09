@@ -230,16 +230,21 @@
 /obj/item/projectile/process()
 	if(kill_count < 1)
 		del(src)
-		return
-	step_towards(src, current)
-	sleep(1)
-	if(!bumped && !isturf(original))
-		if(loc == get_turf(original))
-			if(!(original in permutated))
-				Bump(original)
-				sleep(1)
+	kill_count--
+	spawn while(src)
+		if((!( current ) || loc == current))
+			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
+		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
+			del(src)
+			return
+		step_towards(src, current)
+		sleep(1)
+		if(!bumped && !isturf(original))
+			if(loc == get_turf(original))
+				if(!(original in permutated))
+					Bump(original)
+					sleep(1)
 
-//"Tracing" projectile
 /obj/item/projectile/test //Used to see if you can hit them.
 	invisibility = 101 //Nope!  Can't see me!
 	yo = null
