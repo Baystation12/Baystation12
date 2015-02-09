@@ -125,14 +125,12 @@
 	// Power-related checks. If shuttle contains power related machinery, update powernets.
 	var/update_power = 0
 	for(var/obj/machinery/power/P in destination)
-		if(istype(P))
-			update_power = 1
-			break
+		update_power = 1
+		break
 
 	for(var/obj/structure/cable/C in destination)
-		if(istype(C))
-			update_power = 1
-			break
+		update_power = 1
+		break
 
 	if(update_power)
 		makepowernets()
