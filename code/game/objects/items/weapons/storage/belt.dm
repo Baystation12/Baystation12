@@ -70,8 +70,15 @@
 		"/obj/item/device/flashlight/pen",
 		"/obj/item/clothing/mask/surgical",
 		"/obj/item/clothing/gloves/latex",
-	        "/obj/item/weapon/reagent_containers/hypospray"
+		"/obj/item/weapon/reagent_containers/hypospray"
 	)
+
+/obj/item/weapon/storage/belt/medical/emt
+	name = "EMT utility belt"
+	desc = "A sturdy black webbing belt with attached pouches."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "emsbelt"
+	item_state = "emsbelt"
 
 
 /obj/item/weapon/storage/belt/security

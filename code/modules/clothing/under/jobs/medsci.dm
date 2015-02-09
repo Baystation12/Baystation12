@@ -130,6 +130,12 @@
 	icon_state = "scrubspurple"
 	item_color = "scrubspurple"
 
+/obj/item/clothing/under/rank/medical/black
+	name = "medical scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
+	icon_state = "scrubsblack"
+	item_color = "scrubsblack"
+
 /obj/item/clothing/under/rank/psych
 	desc = "A basic white jumpsuit. It has turqouise markings that denote the wearer as a psychiatrist."
 	name = "psychiatrist's jumpsuit"
