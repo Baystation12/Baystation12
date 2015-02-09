@@ -78,7 +78,7 @@
 /obj/item/weapon/gun/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.
 	if(!user) return
-	
+
 	if(clumsy_check)
 		if(istype(user, /mob/living))
 			var/mob/living/M = user
@@ -122,7 +122,7 @@
 		"You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
 
 	user.next_move = world.time + 4
-	
+
 	var/x_offset = 0
 	var/y_offset = 0
 	if(istype(user, /mob/living/carbon))
@@ -135,21 +135,20 @@
 			x_offset = rand(-1,1)
 
 	if(in_chamber)
-		if(params) in_chamber.set_clickpoint(params)
-	
+		if(params) 
+			in_chamber.set_clickpoint(params)
+
 		var/fail = in_chamber.launch(
-			target = target, 
-			user = user, 
-			launcher = src, 
-			target_zone = user.zone_sel.selecting, 
-			x_offset = x_offset, 
-			y_offset = y_offset, 
-			px = p_x,
-			py = p_y
+			target = target,
+			user = user,
+			launcher = src,
+			target_zone = user.zone_sel.selecting,
+			x_offset = x_offset,
+			y_offset = y_offset
 			)
-		
+
 		if(fail) return
-			
+
 	if(recoil)
 		spawn()
 			shake_camera(user, recoil + 1, recoil)

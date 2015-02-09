@@ -217,13 +217,13 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_rubber
-	name = "ammunition (rubber)"
-	path = /obj/item/ammo_magazine/c45r
+	name = "ammunition (.45, rubber)"
+	path = /obj/item/ammo_magazine/c45m/rubber
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_flash
-	name = "ammunition (flash)"
-	path = /obj/item/ammo_magazine/c45f
+	name = "ammunition (.45, flash)"
+	path = /obj/item/ammo_magazine/c45m/flash
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen

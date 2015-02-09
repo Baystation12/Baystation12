@@ -1,3 +1,13 @@
+/obj/item/weapon/gun/projectile/revolver
+	name = "revolver"
+	desc = "A classic revolver. Uses .357 ammo"
+	icon_state = "revolver"
+	caliber = "357"
+	origin_tech = "combat=2;materials=2"
+	
+	max_shells = 7
+	ammo_type = /obj/item/ammo_casing/a357
+
 /obj/item/weapon/gun/projectile/detective
 	name = "revolver"
 	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
@@ -5,7 +15,7 @@
 	max_shells = 6
 	caliber = "38"
 	origin_tech = "combat=2;materials=2"
-	ammo_type = "/obj/item/ammo_casing/c38"
+	ammo_type = /obj/item/ammo_casing/c38
 
 	special_check(var/mob/living/carbon/human/M)
 		if(caliber == initial(caliber))
@@ -73,37 +83,27 @@
 	name = "\improper Colt M1911"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
 	icon_state = "colt"
-	max_shells = 7
 	caliber = ".45"
-	ammo_type = "/obj/item/ammo_casing/c45r"
 	load_method = MAGAZINE
-	mag_type = /obj/item/ammo_magazine/c45r/empty
+	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/detective/semiauto/flash
-	ammo_type = "/obj/item/ammo_casing/c45f"
+	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/detective/semiauto/colt
 	desc = "A cheap Martian knock-off of a Colt M1911."
-	ammo_type = "/obj/item/ammo_casing/c45"
+	magazine_type = /obj/item/ammo_magazine/c45m
 
-/obj/item/weapon/gun/projectile/detective/semiauto/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-	..()
-	if(!loaded.len && empty_mag)
-		empty_mag.loc = get_turf(src.loc)
-		empty_mag = null
-		user << "<span class='notice'>The Magazine falls out and clatters on the floor!</span>"
-	return
-
-
-/obj/item/weapon/gun/projectile/mateba
+/obj/item/weapon/gun/projectile/revolver/mateba
 	name = "mateba"
 	desc = "When you absolutely, positively need a 10mm hole in the other guy. Uses .357 ammo."	//>10mm hole >.357
 	icon_state = "mateba"
 	origin_tech = "combat=2;materials=2"
 
+
 // A gun to play Russian Roulette!
 // You can spin the chamber to randomize the position of the bullet.
-
+/*
 /obj/item/weapon/gun/projectile/russian
 	name = "\improper Russian revolver"
 	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in it's chamber for a bullet."
@@ -184,3 +184,4 @@
 					user.apply_damage(300, BRUTE, affecting, sharp=1) // You are dead, dead, dead.
 				return
 	..()
+*/

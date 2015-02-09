@@ -16,12 +16,23 @@
 /obj/item/ammo_casing/c38
 	desc = "A .38 bullet casing."
 	caliber = "38"
+	projectile_type = /obj/item/projectile/bullet/pistol
+
+/obj/item/ammo_casing/c38r
+	desc = "A .38 rubber bullet casing."
+	caliber = "38"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol
+
+/obj/item/ammo_casing/c9mmf
+	desc = "A 9mm flash shell casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/energy/flash
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."

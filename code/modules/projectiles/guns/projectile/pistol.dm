@@ -2,41 +2,31 @@
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
 	icon_state = "silenced_pistol"
-	w_class = 3.0
-	max_shells = 12
+	w_class = 3
 	caliber = ".45"
 	silenced = 1
 	origin_tech = "combat=2;materials=2;syndicate=8"
-	ammo_type = "/obj/item/ammo_casing/c45"
-
-
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c45m
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
 	desc = "A robust handgun that uses .50 AE ammo"
 	icon_state = "deagle"
 	force = 14.0
-	max_shells = 7
 	caliber = ".50"
-	ammo_type ="/obj/item/ammo_casing/a50"
 	load_method = MAGAZINE
-	mag_type = /obj/item/ammo_magazine/a50/empty
+	magazine_type = /obj/item/ammo_magazine/a50
+	auto_eject = 1
 
-	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-		..()
-		if(!loaded.len && empty_mag)
-			empty_mag.loc = get_turf(src.loc)
-			empty_mag = null
-			playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-			update_icon()
-		return
+/obj/item/weapon/gun/projectile/deagle/eject_magazine(mob/user)
+	..()
+	playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
 	item_state = "deagleg"
-
-
 
 /obj/item/weapon/gun/projectile/deagle/camo
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
@@ -55,44 +45,34 @@
 	origin_tech = "combat=3"
 	ammo_type = "/obj/item/ammo_casing/a75"
 	load_method = MAGAZINE
-	mag_type = /obj/item/ammo_magazine/a75/empty
+	magazine_type = /obj/item/ammo_magazine/a75
+	auto_eject = 1
 
-	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-		..()
-		if(!loaded.len && empty_mag)
-			empty_mag.loc = get_turf(src.loc)
-			empty_mag = null
-			playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-			update_icon()
-		return
+/obj/item/weapon/gun/projectile/gyropistol/eject_magazine(mob/user)
+	..()
+	playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
 
-	update_icon()
-		..()
-		if(empty_mag)
-			icon_state = "gyropistolloaded"
-		else
-			icon_state = "gyropistol"
-		return
+/obj/item/weapon/gun/projectile/gyropistol/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "gyropistolloaded"
+	else
+		icon_state = "gyropistol"
 
 /obj/item/weapon/gun/projectile/pistol
 	name = "\improper Stechtkin pistol"
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	w_class = 2
-	max_shells = 10
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = "combat=2;materials=2;syndicate=2"
-	ammo_type = "/obj/item/ammo_casing/c9mm"
 	load_method = MAGAZINE
-	mag_type = /obj/item/ammo_magazine/mc9mm/empty
+	magazine_type = /obj/item/ammo_magazine/mc9mm
 
-/obj/item/weapon/gun/projectile/pistol/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
-	..()
-	if(!loaded.len && empty_mag)
-		empty_mag.loc = get_turf(src.loc)
-		empty_mag = null
-	return
+/obj/item/weapon/gun/projectile/pistol/flash
+	desc = "A small, easily concealable gun. Uses 9mm illumination rounds."
+	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)
 	if(loc == user)
@@ -107,7 +87,6 @@
 			update_icon()
 			return
 	..()
-
 
 /obj/item/weapon/gun/projectile/pistol/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/silencer))

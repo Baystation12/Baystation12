@@ -49,7 +49,7 @@
 			if("combatshotgun")
 				new /obj/item/weapon/gun/projectile/shotgun/pump/combat(get_turf(H))
 			if("mateba")
-				new /obj/item/weapon/gun/projectile/mateba(get_turf(H))
+				new /obj/item/weapon/gun/projectile/revolver/mateba(get_turf(H))
 			if("smg")
 				new /obj/item/weapon/gun/projectile/automatic(get_turf(H))
 			if("uzi")
