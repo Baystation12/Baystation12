@@ -52,6 +52,7 @@
 	..(0)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil(src)
 	recalc_coils()
 
 
