@@ -253,6 +253,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	max_combined_w_class = 21
+	can_hold = list(/obj/item/inflatable)
 
 	New()
 		..()

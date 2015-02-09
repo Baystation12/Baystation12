@@ -4,9 +4,6 @@
 	desc = "A device used to rapidly build walls and floors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "rcd"
-	opacity = 0
-	density = 0
-	anchored = 0.0
 	flags = CONDUCT
 	force = 10.0
 	throwforce = 10.0
@@ -22,6 +19,7 @@
 	var/list/modes = list("Floor & Walls","Airlock","Deconstruct")
 	var/canRwall = 0
 	var/disabled = 0
+	var/capacity = 30
 
 /obj/item/weapon/rcd/attack()
 	return 0
@@ -32,7 +30,7 @@
 /obj/item/weapon/rcd/examine()
 	..()
 	if(src.type == /obj/item/weapon/rcd && loc == usr)
-		usr << "It currently holds [stored_matter]/30 matter-units."
+		usr << "It currently holds [stored_matter]/[src.capacity] matter-units."
 
 /obj/item/weapon/rcd/New()
 	..()
@@ -40,17 +38,24 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/item/weapon/rcd/attackby(obj/item/weapon/W, mob/user)
+/obj/item/weapon/rcd/attackby(obj/item/weapon/rcd_ammo/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/rcd_ammo))
-		if((stored_matter + 10) > 30)
-			user << "<span class='notice'>The RCD can't hold any more matter-units.</span>"
+	if(istype(W))
+		if(stored_matter == capacity)
+			user << "<span class='notice'>\The [src] is full and can't hold any more matter-units.</span>"
 			return
-		user.drop_from_inventory(W)
-		del(W)
-		stored_matter += 10
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		user << "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>"
+
+		stored_matter += W.stored_matter
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 2)
+
+		if(stored_matter > capacity)
+			W.stored_matter = stored_matter - capacity
+			stored_matter = capacity
+			user << "<span class='notice'>\The [src] was filled to full capacity. There are [W.stored_matter] matter units remining in \the [W].</span>"
+			return
+		else
+			user << "You load a full cartridge into \the [src]. It now contains [stored_matter] matter units"
+			del(W)
 		return
 	..()
 
@@ -96,7 +101,7 @@
 		build_type = "airlock"
 		build_other = /obj/machinery/door/airlock
 	else if(!deconstruct && istype(T,/turf/space))
-		build_cost =  1
+		build_cost =  2
 		build_type =  "floor"
 		build_turf =  /turf/simulated/floor/plating/airless
 	else if(deconstruct && istype(T,/turf/simulated/wall))
@@ -106,7 +111,7 @@
 		build_turf =  /turf/simulated/floor
 	else if(istype(T,/turf/simulated/floor))
 		build_delay = deconstruct ? 50 : 20
-		build_cost =  deconstruct ? 10 : 3
+		build_cost =  deconstruct ? 5 : 5
 		build_type =  deconstruct ? "floor" : "wall"
 		build_turf =  deconstruct ? /turf/space : /turf/simulated/wall
 	else
@@ -149,11 +154,15 @@
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "rcd"
 	item_state = "rcdammo"
-	opacity = 0
-	density = 0
-	anchored = 0.0
 	origin_tech = "materials=2"
 	matter = list("metal" = 30000,"glass" = 15000)
+	var/stored_matter = 10
+
+/obj/item/weapon/rcd_ammo/examine()
+	..()
+	if(loc == usr)
+		usr << "It contains [stored_matter] matter units"
+
 
 /obj/item/weapon/rcd/borg
 	canRwall = 1
@@ -174,7 +183,6 @@
 /obj/item/weapon/rcd/borg/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.stat)
 
-
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
 	var/cost = amount*30
 	if(istype(loc,/obj/item/rig_module))
@@ -185,8 +193,9 @@
 				return 1
 	return 0
 
-/obj/item/weapon/rcd/mounted/attackby()
-	return
-
 /obj/item/weapon/rcd/mounted/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.stat && !user.restrained())
+
+/obj/item/weapon/rcd/mounted/attackby()
+    return
+
