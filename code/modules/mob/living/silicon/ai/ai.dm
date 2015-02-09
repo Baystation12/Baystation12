@@ -324,31 +324,8 @@ var/list/ai_verbs_default = list(
 	set category = "AI Commands"
 	set name = "Show Alerts"
 
-	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
-	for (var/cat in alarms)
-		dat += text("<B>[]</B><BR>\n", cat)
-		var/list/alarmlist = alarms[cat]
-		if (alarmlist.len)
-			for (var/area_name in alarmlist)
-				var/datum/alarm/alarm = alarmlist[area_name]
-				dat += "<NOBR>"
-
-				var/cameratext = ""
-				if (alarm.cameras)
-					for (var/obj/machinery/camera/I in alarm.cameras)
-						cameratext += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (cameratext=="") ? "" : " | ", src, I, I.c_tag)
-				dat += text("-- [] ([])", alarm.area.name, (cameratext)? cameratext : "No Camera")
-
-				if (alarm.sources.len > 1)
-					dat += text(" - [] sources", alarm.sources.len)
-				dat += "</NOBR><BR>\n"
-		else
-			dat += "-- All Systems Nominal<BR>\n"
-		dat += "<BR>\n"
-
-	viewalerts = 1
-	src << browse(dat, "window=aialerts&can_close=0")
+	//PsiFix
+	//nano_alarm.ui_interact(usr)
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -520,29 +497,6 @@ var/list/ai_verbs_default = list(
 	//machine = src
 
 	return 1
-
-/mob/living/silicon/ai/triggerAlarm(var/class, area/A, list/cameralist, var/source)
-	if (stat == 2)
-		return 1
-
-	..()
-
-	var/cameratext = ""
-	for (var/obj/machinery/camera/C in cameralist)
-		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
-
-	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class)
-
-	if (viewalerts) ai_alerts()
-
-/mob/living/silicon/ai/cancelAlarm(var/class, area/A as area, var/source)
-	var/has_alarm = ..()
-
-	if (!has_alarm)
-		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
-		if (viewalerts) ai_alerts()
-
-	return has_alarm
 
 /mob/living/silicon/ai/cancel_camera()
 	set category = "AI Commands"

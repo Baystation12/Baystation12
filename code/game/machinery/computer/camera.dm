@@ -3,6 +3,8 @@
 /proc/invalidateCameraCache()
 	for(var/obj/machinery/computer/security/s in world)
 		s.camera_cache = null
+	for(var/datum/alarm/A in alarm_manager.active_alarms())
+		A.cameras = null
 
 /obj/machinery/computer/security
 	name = "security camera monitor"

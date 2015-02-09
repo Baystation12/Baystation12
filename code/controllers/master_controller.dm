@@ -26,6 +26,7 @@ datum/controller/game_controller
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
 	var/events_cost		= 0
+	var/alarms_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
 
@@ -231,6 +232,11 @@ datum/controller/game_controller/proc/process()
 				process_events()
 				events_cost = (world.timeofday - timer) / 10
 
+				//ALARMS
+				timer = world.timeofday
+				process_alarms()
+				alarms_cost = (world.timeofday - timer) / 10
+
 				//TICKER
 				timer = world.timeofday
 				last_thing_processed = ticker.type
@@ -238,7 +244,7 @@ datum/controller/game_controller/proc/process()
 				ticker_cost = (world.timeofday - timer) / 10
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + alarms_cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)	//why not just use world.time instead?
@@ -333,8 +339,12 @@ datum/controller/game_controller/proc/process_nano()
 		nanomanager.processing_uis.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_events()
-	last_thing_processed = /datum/event
+	last_thing_processed = /datum/event_manager
 	event_manager.process()
+
+datum/controller/game_controller/proc/process_alarms()
+	last_thing_processed = /datum/subsystem/alarm
+	alarm_manager.fire()
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
