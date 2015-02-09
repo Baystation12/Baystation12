@@ -138,7 +138,7 @@
 		if(output_used < 0.0001)			// either from no charge or set to 0
 			outputting(0)
 			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
-	else if(output_attempt && charge > output_level && output_level > 0)
+	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
 		output_used = 0
