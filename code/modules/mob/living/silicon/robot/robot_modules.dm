@@ -63,7 +63,7 @@
 	//full set of languages
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
-	R.add_language("Sinta'unathi", 0)
+	R.add_language("Sinta'soghun", 0)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 0)
@@ -270,6 +270,7 @@
 
 /obj/item/weapon/robot_module/butler/New()
 	..()
+	src.modules += new /obj/item/device/flashlight(src)
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 	src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
@@ -298,16 +299,13 @@
 /obj/item/weapon/robot_module/butler/add_languages(var/mob/living/silicon/robot/R)
 	//full set of languages
 	R.add_language("Sol Common", 1)
-	R.add_language("Sinta'unathi", 1)
+	R.add_language("Sinta'soghun", 1)
 	R.add_language("Siik'maas", 1)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 1)
 	R.add_language("Rootspeak", 1)
 	R.add_language("Tradeband", 1)
 	R.add_language("Gutter", 1)
-
-/obj/item/weapon/robot_module/clerical
-	name = "clerical robot module"
 
 /obj/item/weapon/robot_module/clerical/New()
 	..()
@@ -319,7 +317,7 @@
 
 /obj/item/weapon/robot_module/clerical/add_languages(var/mob/living/silicon/robot/R)
 	R.add_language("Sol Common", 1)
-	R.add_language("Sinta'unathi", 1)
+	R.add_language("Sinta'soghun", 1)
 	R.add_language("Siik'maas", 1)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 1)
@@ -371,7 +369,7 @@
 	//full set of languages
 	R.add_language("Sol Common", 1)
 	R.add_language("Tradeband", 1)
-	R.add_language("Sinta'unathi", 0)
+	R.add_language("Sinta'soghun", 1)
 	R.add_language("Siik'tajr", 0)
 	R.add_language("Skrellian", 0)
 	R.add_language("Gutter", 1)

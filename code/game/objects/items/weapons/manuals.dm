@@ -99,7 +99,7 @@
 				-Waleed Asad</br></br>
 
 				Station,</br>
-				Exodus</br></br>
+				Hypatia</br></br>
 
 				A word of caution, do not enter the engine room for any reason without radiation protection and meson scanners on. The status of the engine may be unpredictable even when you believe it is 'off.' This is an important level of personal protection.</br></br>
 
@@ -757,7 +757,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="http://wiki.hypatiastation.net/index.php?title=Space_Law&printable=yes" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>

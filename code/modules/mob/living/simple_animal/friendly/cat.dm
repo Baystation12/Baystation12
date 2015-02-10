@@ -82,15 +82,27 @@
 		return //since the holder icon looks like a living cat
 	..()
 
-//RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/cat/Runtime
-	name = "Runtime"
+//HAPPYKITTEN IS ALIVE! SQUEEEEEEEE~
+/mob/living/simple_animal/cat/happykitten
+	name = "Happy Kitten"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
 	icon_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
 
+
+//PHEAR THE GHOSTKITTEH
+/mob/living/simple_animal/cat/ghost
+	name = "Ghostly cat"
+	desc = "Fear the ghost kitty."
+	icon_state = "ghostcat"
+	icon_living = "ghostcat"
+	response_help  = "tries to pet the"
+	response_disarm = "tries to push aside the"
+	response_harm   = "tries to kick the"
+
+//OMG ITS A KITTEN!
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
 	desc = "D'aaawwww"

@@ -146,6 +146,33 @@
 					toner = 0
 	return
 
+/obj/machinery/photocopier/proc/print(var/datum/prefilledpaper/prepaper)
+	var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)
+	c.info = html_encode(prepaper.text)
+	c.info = replacetext(c.info, "\n", "<BR>")
+	c.info = c.parsepencode(c.info, null, usr, 0)
+	c.name = prepaper.name
+	//allthough not necessery for prints leave it in, it might come in handy, one day...
+	/*
+	var/list/temp_overlays = copy.overlays       //Iterates through stamps
+	var/image/img                                //and puts a matching
+	for (var/j = 1, j <= temp_overlays.len, j++) //gray overlay onto the copy
+		if (findtext(copy.ico[j], "cap") || findtext(copy.ico[j], "cent"))
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
+		else if (findtext(copy.ico[j], "deny"))
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-x")
+		else
+			img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")
+		img.pixel_x = copy.offset_x[j]
+		img.pixel_y = copy.offset_y[j]
+		c.overlays += img
+	*/
+	c.updateinfolinks()
+	c.update_icon()
+	toner--
+	return c
+
+
 /obj/machinery/photocopier/blob_act()
 	if(prob(50))
 		del(src)

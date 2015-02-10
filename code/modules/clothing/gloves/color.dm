@@ -39,6 +39,10 @@
 	ce
 		item_color = "chief"			//Exists for washing machines. Is not different from black gloves in any way.
 
+	sec
+		item_color = "hosred"		//Exists for wardrobes.  Is not different from black gloves in any way.
+
+
 /obj/item/clothing/gloves/orange
 	name = "orange gloves"
 	desc = "A pair of gloves, they don't look special in any way."

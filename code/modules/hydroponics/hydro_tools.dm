@@ -327,7 +327,7 @@
 	return ..()
 
 //If it's a hatchet it goes here. I guess
-/obj/item/weapon/hatchet/unathiknife
+/obj/item/weapon/hatchet/soghunknife
 	name = "duelling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/weapons.dmi'

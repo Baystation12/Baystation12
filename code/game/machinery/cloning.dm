@@ -3,7 +3,7 @@
 
 //Potential replacement for genetics revives or something I dunno (?)
 
-#define CLONE_BIOMASS 150
+#define CLONE_BIOMASS 1
 
 /obj/machinery/clonepod
 	anchored = 1
@@ -65,6 +65,12 @@
 		buf.dna.SE=new_SE
 		buf.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
+/obj/item/cloning/charge
+    name = "Short-Term Biological Suspension Unit (SBSU)"
+    //desc = "PLACEHOLDER"
+    var/charges = 1
+    icon = 'icons/obj/storage.dmi'
+    icon_state = "stem-charge"
 
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(var/find_key)
@@ -296,9 +302,9 @@
 		src.locked = 0
 		src.go_out()
 		return
-	else if (istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
+	else if (istype(W, /obj/item/cloning/charge))
 		user << "\blue \The [src] processes \the [W]."
-		biomass += 50
+		biomass += 1
 		user.drop_item()
 		del(W)
 		return

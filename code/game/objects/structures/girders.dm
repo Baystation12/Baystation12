@@ -13,6 +13,7 @@
 	spawn(1) dismantle()
 	return 1
 
+
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
 
 	//Tasers and the like should not damage girders.

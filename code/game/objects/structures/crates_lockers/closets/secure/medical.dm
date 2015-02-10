@@ -189,6 +189,31 @@
 	wall_mounted = 1
 	req_access = list(access_medical)
 
+/obj/structure/closet/secure_closet/medical_secpara
+	name = "Paramedic Closet"
+	desc = "It's a secure wall-mounted storage unit for first aid supplies."
+	icon_state = "medical_wall_locked"
+	icon_closed = "medical_wall_unlocked"
+	icon_locked = "medical_wall_locked"
+	icon_opened = "medical_wall_open"
+	icon_broken = "medical_wall_spark"
+	icon_off = "medical_wall_off"
+	anchored = 1
+	density = 0
+	wall_mounted = 1
+	req_access = list(access_medical)
+
+
+	New()
+		..()
+		sleep(2)
+		new /obj/item/weapon/storage/box/pillbottles(src)
+		new /obj/item/device/radio/headset/headset_secpara(src)
+		new /obj/item/weapon/storage/belt/security(src)
+		new /obj/item/clothing/suit/storage/labcoat(src)
+		new /obj/item/clothing/glasses/hud/health/mech(src)
+		return
+
 /obj/structure/closet/secure_closet/medical_wall/update_icon()
 	if(broken)
 		icon_state = icon_broken

@@ -50,7 +50,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Soghun","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -72,9 +72,9 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Soghun","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		if("Human")
-			species_restricted = list("exclude","Skrell","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+			species_restricted = list("exclude","Skrell","Soghun","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 		else
 			species_restricted = list(target_species)
 
@@ -198,7 +198,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude","Unathi","Tajara")
+	species_restricted = list("exclude","Soghun","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 
 /obj/item/clothing/gloves/update_clothing_icon()
@@ -234,7 +234,7 @@ BLIND     // can't see anything
 		name = "modified [name]"
 		desc = "[desc]<br>They have had the fingertips cut off of them."
 		if("exclude" in species_restricted)
-			species_restricted -= "Unathi"
+			species_restricted -= "Soghun"
 			species_restricted -= "Tajara"
 		return
 
@@ -357,7 +357,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	force = 2
-	species_restricted = list("exclude","Unathi","Tajara")
+	species_restricted = list("exclude","Soghun","Tajara")
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/shoes.dmi')
 
 /obj/item/clothing/shoes/update_clothing_icon()

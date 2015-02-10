@@ -9,6 +9,10 @@
 	var/trash = null
 	var/slice_path
 	var/slices_num
+	var/eatverb
+	var/dried_type = null
+	var/cooktype[0]
+	var/deepfried = 0
 	center_of_mass = list("x"=15, "y"=15)
 	w_class = 2
 
@@ -1251,6 +1255,10 @@
 		reagents.add_reagent("carbon", 3)
 		bitesize = 2
 
+		// it's burned! it should start off being classed as any cooktype that burns
+		cooktype["grilled"] = 1
+		cooktype["deep fried"] = 1
+
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak
 	name = "Meat steak"
 	desc = "A piece of hot spicy meat."
@@ -1580,10 +1588,10 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
 	name = "stok cube"
-	monkey_type = /mob/living/carbon/monkey/unathi
+	monkey_type = /mob/living/carbon/monkey/soghun
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
 	name = "stok cube"
-	monkey_type =/mob/living/carbon/monkey/unathi
+	monkey_type =/mob/living/carbon/monkey/soghun
 
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube

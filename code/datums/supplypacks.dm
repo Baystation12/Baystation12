@@ -27,6 +27,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 		manifest += "<li>[initial(path.name)]</li>"
 	manifest += "</ul>"
 
+/datum/supply_packs/stemcell
+        name = "Stem-Cell Pack (2)"
+        contains = list(/obj/item/cloning/charge,
+                                        /obj/item/cloning/charge)
+        cost = 125
+        containertype = /obj/structure/closet/crate/secure/bio
+        containername = "Stem-Cell Long Term Storage Unit"
+        access = access_medical
+        group = "Medical"
+
 /datum/supply_packs/specialops
 	name = "Special Ops supplies"
 	contains = list(/obj/item/weapon/storage/box/emps,
@@ -1160,8 +1170,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping crate"
 	contains = list(/obj/item/beezeez,
+					/obj/item/beezeez,
 					/obj/item/weapon/bee_net,
 					/obj/item/apiary,
+					/obj/item/queen_bee,
+					/obj/item/queen_bee,
 					/obj/item/queen_bee)
 	cost = 40
 	contraband = 1

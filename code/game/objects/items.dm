@@ -116,6 +116,7 @@
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
+
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
 	if (hasorgans(user))

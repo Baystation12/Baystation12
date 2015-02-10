@@ -31,12 +31,12 @@
 	greaterform = "Skrell"
 	uni_append = list(0x01C,0xC92) // 01CC92
 
-/mob/living/carbon/monkey/unathi
+/mob/living/carbon/monkey/soghun
 	name = "stok"
 	voice_name = "stok"
 	speak_emote = list("hisses")
 	icon_state = "stokkey1"
-	greaterform = "Unathi"
+	greaterform = "Soghun"
 	uni_append = list(0x044,0xC5D) // 044C5D
 
 /mob/living/carbon/monkey/New()

@@ -201,6 +201,11 @@
 	desc = "Flash-resistant goggles with inbuilt combat and security information."
 	icon_state = "swatgoggles"
 
+/obj/item/clothing/glasses/sunglasses/sechud/ert
+	name = "ERT tactical HUD"
+	desc = "Flash-resistant goggles with inbuilt combat and security information."
+	icon_state = "swatgoggles"
+
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"
 	desc = "Thermals in the shape of glasses."

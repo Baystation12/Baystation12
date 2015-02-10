@@ -11,6 +11,7 @@
 	name = "bed"
 	desc = "This is used to lie in, sleep in or strap on."
 	icon_state = "bed"
+	icon = 'icons/obj/hypatia.dmi'
 	var/mob/living/buckled_mob
 	var/movable = 0 // For mobility checks
 
@@ -18,11 +19,13 @@
 	name = "psychiatrists couch"
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
+	icon = 'icons/obj/objects.dmi'
 
 /obj/structure/stool/bed/alien
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
+	icon = 'icons/obj/objects.dmi'
 
 /obj/structure/stool/bed/Del()
 	unbuckle()

@@ -92,6 +92,28 @@
 		user << "<span class='notice'>The Magazine falls out and clatters on the floor!</span>"
 	return
 
+/obj/item/weapon/gun/projectile/colt
+	desc = "A higher quality knockoff of a Colt M1911. Uses lethal .45 rounds."
+	name = "\improper Colt M1911"
+	icon_state = "colt"
+	max_shells = 7
+	caliber = ".45"
+	ammo_type = "/obj/item/ammo_casing/c45"
+	load_method = 2
+
+/obj/item/weapon/gun/projectile/detective/semiauto/New()
+	..()
+	empty_mag = new /obj/item/ammo_magazine/c45/empty(src)
+	return
+
+/obj/item/weapon/gun/projectile/detective/semiauto/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
+	..()
+	if(!loaded.len && empty_mag)
+		empty_mag.loc = get_turf(src.loc)
+		empty_mag = null
+		user << "<span class='notice'>The Magazine falls out and clatters on the floor!</span>"
+	return
+
 
 /obj/item/weapon/gun/projectile/mateba
 	name = "mateba"

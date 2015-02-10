@@ -97,6 +97,7 @@
 	data["all_centcom_access"] = null
 	data["regions"] = null
 
+	data["cargo_jobs"] = format_jobs(cargo_positions)
 	data["engineering_jobs"] = format_jobs(engineering_positions)
 	data["medical_jobs"] = format_jobs(medical_positions)
 	data["science_jobs"] = format_jobs(science_positions)

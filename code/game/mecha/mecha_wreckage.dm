@@ -177,6 +177,9 @@
 	name = "Phazon wreckage"
 	icon_state = "phazon-broken"
 
+/obj/effect/decal/mecha_wreckage/obphazon
+	name = "Dark Phazon wreckage"
+	icon_state = "obphazon-broken"
 
 /obj/effect/decal/mecha_wreckage/odysseus
 	name = "Odysseus wreckage"

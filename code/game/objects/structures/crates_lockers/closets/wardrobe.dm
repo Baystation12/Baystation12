@@ -4,6 +4,27 @@
 	icon_state = "blue"
 	icon_closed = "blue"
 
+/obj/structure/closet/wardrobe/redother
+	name = "security wardrobe"
+	icon_state = "red"
+	icon_closed = "red"
+
+/obj/structure/closet/wardrobe/redother/New()
+	..()
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/satchel_sec(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/weapon/storage/backpack/security(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	new /obj/item/clothing/gloves/black/sec(src)
+	return
+
+
 /obj/structure/closet/wardrobe/red
 	name = "security wardrobe"
 	icon_state = "red"
@@ -110,8 +131,8 @@
 
 /obj/structure/closet/wardrobe/xenos/New()
 	..()
-	new /obj/item/clothing/suit/unathi/mantle(src)
-	new /obj/item/clothing/suit/unathi/robe(src)
+	new /obj/item/clothing/suit/soghun/mantle(src)
+	new /obj/item/clothing/suit/soghun/robe(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)
 	new /obj/item/clothing/shoes/sandal(src)

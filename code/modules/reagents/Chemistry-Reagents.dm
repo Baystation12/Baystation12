@@ -3218,10 +3218,14 @@ datum
 			var/adj_sleepy = 0
 			var/slurr_adj = 3
 			var/confused_adj = 2
-			var/slur_start = 90			//amount absorbed after which mob starts slurring
-			var/confused_start = 150	//amount absorbed after which mob starts confusing directions
-			var/blur_start = 300	//amount absorbed after which mob starts getting blurred vision
-			var/pass_out = 400	//amount absorbed after which mob starts passing out
+			var/slur_start = 180			//amount absorbed after which mob starts slurring
+			var/confused_start = 300	//amount absorbed after which mob starts confusing directions
+			var/blur_start = 600	//amount absorbed after which mob starts getting blurred vision
+			var/pass_out = 800	//amount absorbed after which mob starts passing out
+
+			glass_icon_state = "glass_clear"
+			glass_name = "glass of ethanol"
+			glass_desc = "A well-known alcohol with a variety of applications."
 
 			glass_icon_state = "glass_clear"
 			glass_name = "glass of ethanol"

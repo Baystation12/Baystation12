@@ -1,6 +1,6 @@
 /obj/item/device/aicard
 	name = "inteliCard"
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/pda2.dmi'
 	icon_state = "aicard" // aicard-full
 	item_state = "electronic"
 	w_class = 2.0

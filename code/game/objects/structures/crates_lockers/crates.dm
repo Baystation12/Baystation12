@@ -489,3 +489,16 @@
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
 //		new /obj/item/weapon/pestspray(src)
+
+/obj/structure/closet/crate/secure/bio
+        desc = "A specialized orange freezer, designed to biologically suspend \
+the valuable stem cells used to clone people on board the station \
+inside the genetics lab. Designed to hold stem cells for very long \
+periods of time. There is some small print on top, \n \
+<B><FONT COLOR=RED>\"Warning: The contents of this Biological Suspension Unit (BSU) are incredibly valuable. Waste of these stem cells will result in termination and you will be expected to compensate.\"</B></FONT>"
+        name = "Biological Suspension Unit (BSU)"
+        icon = 'icons/obj/storage.dmi'
+        density = 1
+        icon_state = "bio"
+        icon_opened = "bioopen"
+        icon_closed = "bio"

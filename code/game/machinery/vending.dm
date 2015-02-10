@@ -762,7 +762,7 @@
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access_txt = "1"
-	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
+	products = list(/obj/item/weapon/handcuffs = 16,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
 	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/donut_box = 2)
 
@@ -903,3 +903,17 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+//Clothing vendor
+/obj/machinery/vending/clothing
+	name = "Auto Tailor"
+	desc = "For all your fashion needs at the lowest imaginable prices."
+	icon = 'icons/obj/clothingmachine.dmi'
+	icon_state = "tailor"
+	product_slogans = "Dress to impress!"
+	product_ads = "Putting sweatshop workers out of work for over three hundred years!;Made in Andromeda!;Support your local inanimate machinery against competition!"
+	products = list(/obj/item/clothing/under/color/blackf = 4,/obj/item/clothing/under/lightpurple = 4,/obj/item/clothing/under/lightgreen = 4,/obj/item/clothing/under/lightblue = 4,
+					/obj/item/clothing/under/purple = 4,/obj/item/clothing/under/sapphiredress = 4,/obj/item/clothing/under/pencilskirt = 4,/obj/item/clothing/head/ushanka = 4,
+					/obj/item/clothing/head/greenbandana = 4, /obj/item/clothing/suit/apron/overalls=4, /obj/item/clothing/suit/wcoat)
+	contraband = list(/obj/item/clothing/under/rainbow = 1, /obj/item/clothing/gloves/rainbow = 1, /obj/item/clothing/shoes/rainbow = 1,/obj/item/clothing/under/owl = 1,/obj/item/clothing/suit/ianshirt = 1,)
+	premium = list(/obj/item/clothing/under/sexyclown = 1, /obj/item/clothing/under/rank/clown = 1)
+	prices = list()

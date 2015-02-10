@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /obj/effect/organstructure //used obj for the "contents" var
 	name = "organs"
 

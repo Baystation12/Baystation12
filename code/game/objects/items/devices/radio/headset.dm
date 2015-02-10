@@ -70,6 +70,13 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/headset_sec
 
+/obj/item/device/radio/headset/headset_secpara
+	name = "security paramedic radio headset"
+	desc = "This is used by the medic for security. Channels are as follows: :s - Security, :m - Medical."
+	icon_state = "sec_headset"
+	item_state = "headset"
+	keyslot2 = new /obj/item/device/encryptionkey/headset_secpara
+
 /obj/item/device/radio/headset/headset_eng
 	name = "engineering radio headset"
 	desc = "When the engineers wish to chat like girls."
@@ -175,14 +182,14 @@
 	icon_state = "mine_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/headset_mine
-
+*/
 /obj/item/device/radio/headset/heads/qm
 	name = "quartermaster's headset"
-	desc = "The headset of the man who control your toiletpaper supply. To access the cargo channel, use :q. For mining, use :d."
+	desc = "The headset of the man who control your toiletpaper supply. To access the supply channel, use :u. For command, use :c."
 	icon_state = "cargo_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/heads/qm
-*/
+
 /obj/item/device/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the QM and his slaves."

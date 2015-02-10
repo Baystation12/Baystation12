@@ -32,6 +32,12 @@
 	icon_state = "sec_cypherkey"
 	channels = list("Security" = 1)
 
+/obj/item/device/encryptionkey/headset_secpara
+	name = "Security Paramedic Radio Encryption Key"
+	desc = "An encyption key for a radio headset.  Contains cypherkeys."
+	icon_state = "sec_cypherkey"
+	channels = list("Security" = 1, "Medical" = 1)
+
 /obj/item/device/encryptionkey/headset_eng
 	name = "engineering radio encryption key"
 	icon_state = "eng_cypherkey"
@@ -102,12 +108,12 @@
 	name = "mining radio encryption key"
 	icon_state = "mine_cypherkey"
 	channels = list("Mining" = 1)
-
+*/
 /obj/item/device/encryptionkey/heads/qm
 	name = "quartermaster's encryption key"
 	icon_state = "qm_cypherkey"
-	channels = list("Cargo" = 1, "Mining" = 1)
-*/
+	channels = list("Supply" = 1, "Command" = 1)
+
 /obj/item/device/encryptionkey/headset_cargo
 	name = "supply radio encryption key"
 	icon_state = "cargo_cypherkey"

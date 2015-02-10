@@ -13,6 +13,7 @@ var/list/admin_verbs_default = list(
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
+	/client/proc/cmd_banhammer,			//BANHAMMER!!!!!! --Numbers
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
@@ -75,6 +76,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/man_up,
 	/client/proc/global_man_up,
 	/client/proc/response_team, // Response Teams admin verb
+	/client/proc/cmd_mob_weaken,
+	/client/proc/cmd_mob_unweaken,
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
 	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
@@ -259,8 +262,11 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_panel,
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
-	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
-)
+	/client/proc/cmd_admin_subtle_message, 	/*send an message to somebody as a 'voice in their head'*/
+	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+	/datum/admins/proc/view_atk_log,	/*shows the server combat-log, doesn't do anything presently*/
+	/client/proc/cmd_admin_say,
+	)
 
 var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_admin_pm_context,
@@ -271,6 +277,15 @@ var/list/admin_verbs_mentor = list(
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
 	/client/proc/cmd_admin_subtle_message
+)
+
+var/list/admin_verbs_donor = list(
+	/datum/admins/proc/view_txt_log,	/*shows the server log (diary) for today*/
+	/datum/admins/proc/view_atk_log,	/*shows the server combat-log, doesn't do anything presently*/
+	/client/proc/cmd_admin_say,
+	/client/proc/cmd_mod_say,
+	/client/proc/dsay,
+	/client/proc/admin_ghost
 )
 
 /client/proc/add_admin_verbs()
@@ -293,6 +308,7 @@ var/list/admin_verbs_mentor = list(
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
 		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
+		if(holder.rights & R_DONOR)			verbs += admin_verbs_donor
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -723,7 +739,7 @@ var/list/admin_verbs_mentor = list(
 	if(!istype(M, /mob/living/carbon/human))
 		usr << "\red You can only do this to humans!"
 		return
-	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi, Vox and Tajaran can result in unintended consequences.",,"Yes","No"))
+	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Soghun, Vox and Tajaran can result in unintended consequences.",,"Yes","No"))
 		if("No")
 			return
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
@@ -744,7 +760,7 @@ var/list/admin_verbs_mentor = list(
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
 
-	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
+	var/new_skin = input("Please select body color. This is for Tajaran, Soghun, and Skrell only!", "Character Generation") as color
 	if(new_skin)
 		M.r_skin = hex2num(copytext(new_skin, 2, 4))
 		M.g_skin = hex2num(copytext(new_skin, 4, 6))

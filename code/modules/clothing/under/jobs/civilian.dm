@@ -171,3 +171,10 @@
 	icon_state = "miner"
 	item_state = "miner"
 	item_color = "miner"
+
+/obj/item/clothing/under/rank/miner/foreman
+	desc = "It's a snappy jumpsuit with a sturdy set of overalls. It is very dirty. This one looks fancier than most."
+	name = "mining foreman's jumpsuit"
+	icon_state = "overalls"
+	item_state = "overalls"
+	item_color = "overalls"

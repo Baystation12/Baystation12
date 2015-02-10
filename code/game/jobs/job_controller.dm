@@ -420,6 +420,8 @@ var/global/datum/controller/occupations/job_master
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
+			else // Last resort, use late join location.
+				H.loc = pick(latejoin)
 			// Moving wheelchair if they have one
 			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
 				H.buckled.loc = H.loc
@@ -498,7 +500,7 @@ var/global/datum/controller/occupations/job_master
 
 		//TODO: Generalize this by-species
 		if(H.species)
-			if(H.species.name == "Tajara" || H.species.name == "Unathi")
+			if(H.species.name == "Tajara" || H.species.name == "Soghun")
 				H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
 			else if(H.species.name == "Vox")
 				H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)

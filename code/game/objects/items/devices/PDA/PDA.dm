@@ -6,7 +6,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/pda2.dmi'
 	icon_state = "pda"
 	item_state = "electronic"
 	w_class = 2.0
@@ -503,6 +503,32 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		for(FC in news_network.network_channels)
 			if(FC.channel_name == active_feed["name"])
 				break
+
+		var/list/feed = feed_info[active_feed]
+		if(!feed)
+			feed = list()
+			feed["channel"] = FC.channel_name
+			feed["author"]	= "Unknown"
+			feed["censored"]= 0
+			feed["updated"] = -1
+			feed_info[active_feed] = feed
+
+		if(FC.updated > feed["updated"] && has_reception)
+			feed["author"]	= FC.author
+			feed["updated"]	= FC.updated
+			feed["censored"] = FC.censored
+
+			var/list/messages = list()
+			if(!FC.censored)
+				var/index = 0
+				for(var/datum/feed_message/FM in FC.messages)
+					index++
+					if(FM.img)
+						usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feed["channel"]]_[index].png")
+					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+					var/body = replacetext(FM.body, "\n", "<br>")
+					messages[++messages.len] = list("author" = FM.author, "body" = body, "message_type" = FM.message_type, "time_stamp" = FM.time_stamp, "has_image" = (FM.img != null), "caption" = FM.caption, "index" = index)
+			feed["messages"] = messages
 
 		var/list/feed = feed_info[active_feed]
 		if(!feed)
@@ -1394,7 +1420,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/weapon/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/pda2.dmi'
 	icon_state = "pdabox"
 
 	New()

@@ -6,29 +6,29 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
 	blurb = "Humanity originated in the Sol system, and over the last five centuries has spread \
 	colonies across a wide swathe of space. They hold a wide range of forms and creeds.<br/><br/> \
-	While the central Sol government maintains control of its far-flung people, powerful corporate \
-	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
-	worlds tumultous at best."
+	Politically, Humanity has long since splintered into hundreds of feuding states. While an\
+	uneasy peace reigns in the core regions, the edges of known space are alive with proxy wars,\
+	piracy and intrigue."
 
 	flags = CAN_JOIN | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
-/datum/species/unathi
-	name = "Unathi"
-	name_plural = "Unathi"
+/datum/species/soghun
+	name = "Soghun"
+	name_plural = "Soghuns"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
-	language = "Sinta'unathi"
+	language = "Sinta'soghun"
 	tail = "sogtail"
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	primitive = /mob/living/carbon/monkey/unathi
+	primitive = /mob/living/carbon/monkey/soghun
 	darksight = 3
 	gluttonous = 1
 
-	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
+	blurb = "A heavily built reptillian species, Soghun hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
 	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
-	their native tongue is a heavy hissing laungage called Sinta'Unathi."
+	their native tongue is a heavy hissing laungage called Sinta'Soghun."
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -42,7 +42,7 @@
 
 	flesh_color = "#34AF10"
 
-	reagent_tag = IS_UNATHI
+	reagent_tag = IS_SOGHUN
 	base_color = "#066000"
 
 /datum/species/tajaran

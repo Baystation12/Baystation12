@@ -54,6 +54,18 @@
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
 
+/obj/machinery/computer/guestpass/update_icon()
+
+	if(stat & BROKEN)
+		icon_state = "requestb"
+	else
+		if(stat & NOPOWER)
+			src.icon_state = "request0"
+			stat |= NOPOWER
+		else
+			icon_state = initial(icon_state)
+			stat &= ~NOPOWER
+
 /obj/machinery/computer/guestpass/New()
 	..()
 	uid = "[rand(100,999)]-G[rand(10,99)]"

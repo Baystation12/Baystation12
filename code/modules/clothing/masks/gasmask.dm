@@ -43,6 +43,13 @@
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
 
+/obj/item/clothing/mask/gas/ert
+	name = "\improper hazard filter"
+	desc = "A close-fitting tactical mask that can be connected to an air supply."
+	icon_state = "swat"
+	siemens_coefficient = 0.7
+	armor = list(melee = 5, bullet = 2, laser = 2,energy = 2, bomb = 2, bio = 50, rad = 5)
+	body_parts_covered = FACE|EYES
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."

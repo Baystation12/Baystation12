@@ -695,7 +695,7 @@
 	if(translator_on)
 		translator_on = 0
 
-		remove_language("Sinta'unathi")
+		remove_language("Sinta'soghun")
 		remove_language("Siik'tajr")
 		remove_language("Skrellian")
 
@@ -704,7 +704,7 @@
 	else
 		translator_on = 1
 
-		add_language("Sinta'unathi")
+		add_language("Sinta'soghun")
 		add_language("Siik'tajr")
 		add_language("Skrellian")
 

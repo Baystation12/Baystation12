@@ -1,6 +1,7 @@
 /obj/structure/stool/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "chair"
 
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs

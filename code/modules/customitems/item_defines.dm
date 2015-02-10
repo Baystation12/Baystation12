@@ -17,7 +17,7 @@
 /obj/item/weapon/paper/fluff/sue_donem/New()
 	..()
 
-	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Exodus or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
+	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Hypatia or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
 
 	stamps = (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the NanoTrasen Synthetic Intelligence Division rubber stamp.</i>"
 
@@ -655,7 +655,7 @@
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
 	item_color="white"
-	species_restricted = list("exclude","Unathi")
+	species_restricted = list("exclude","Soghun")
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
 	name = "mittens"
@@ -716,6 +716,20 @@
 	desc = "A black velvet eyepatch monogrammed in dark purple thread with the initials 'E. A.'"
 
 //////////// Hats ////////////
+
+/obj/item/clothing/glasses/monocle/fluff/ebele    //bean-dip's custom item. -- Dalekfodder // Naughty Dalek, it goes here -- Marajin
+	name = "Electronic Eye"
+	desc = "This is an electronic eye made to fit, and appear similar to a Soghun's eye. From time to time, it blinks red and blue."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "electronic-eye_Ebele"
+	item_state = "electronic-eye_Ebele"
+	species_restricted = list("Soghun")  // Don't forget to change the description if you want this removed.
+
+/obj/item/clothing/head/fluff/kaine_kalim_1
+    name = "Formal Medical Cap"
+    desc = "An unusually sterile and folded cap. It seems to bare the Nanotrasen logo."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "kainecap"
 
 /obj/item/clothing/head/secsoft/fluff/swatcap //deusdactyl: James Girard
 	name = "\improper SWAT hat"
@@ -791,7 +805,7 @@
 
 /obj/item/clothing/head/helmet/fluff/adapted
 	name = "Adapted helmet"
-	desc = "Standard Security gear. Protects the head from impacts. This helmet is specially made for horned Unathi."
+	desc = "Standard Security gear. Protects the head from impacts. This helmet is specially made for horned Soghun."
 	item_state = "adapted_h"
 	icon_state = "adapted_h"
 	icon = 'icons/obj/custom_items.dmi'
@@ -944,7 +958,16 @@
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
 	name = "field dress uniform"
-	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket�s shoulder bar."
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket's shoulder bar."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "milohachert"
+	item_state = "milohachert"
+	item_color = "milohachert"
+
+
+/obj/item/clothing/under/fluff/ert
+	name = "ERT dress uniform"
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. The ERT insignia is embroidered upon the jacket's shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
@@ -1307,6 +1330,14 @@
 	item_state = "retpolcoat"
 	item_color = "retpolcoat"
 
+/obj/item/clothing/suit/storage/det_suit/fluff/retdetcoat
+	name = "retired metropolitian detective's coat"
+	desc = "A clean, black nylon windbreaker with the words \"Metropolitian Detective Bureau\" embroidered in gold-dyed thread on the back. \"RETIRED\" is tastefully embroidered below in a smaller font."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpolcoat"
+	item_state = "retpolcoat"
+	item_color = "retpolcoat"
+
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
 	desc = "A clean and properly creased colony police cap. The badge is shined and polished, the word \"RETIRED\" engraved professionally under the words \"OUTER LIGHT POLICE.\""
@@ -1316,6 +1347,13 @@
 /obj/item/clothing/under/det/fluff/retpoluniform
 	name = "retired colony patrolman's uniform"
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "retpoluniform"
+	item_color = "retpoluniform"
+
+/obj/item/clothing/under/det/fluff/retdetuniform
+	name = "retired metropolitian detective's uniform"
+	desc = "A meticulously clean police uniform belonging to Precinct 52, Metropolitian Detective Bureau. The word \"RETIRED\" is engraved tastefully and professionally under the Detective Sergeant badge below the number, 28."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
 	item_color = "retpoluniform"
@@ -1399,6 +1437,161 @@
 	 desc = "This cane seems to have 'Ryals' engraved on its handle."
 	 icon_state = "cane"
 	 item_state = "stick"
+
+// Chi codes some items. :3
+
+///////////////////////////// IceCreamAndHoney ////////////////////////////////
+
+/obj/item/clothing/head/hairflower/fluff/icecreamandhoney
+	name = "silken flower pin"
+	desc = "A rose flower hair pin. The petals seem to be made of silk."
+
+//////////////////////////// TheBujinkan ///////////////////////////////////////////
+
+/obj/item/weapon/coin/silver/fluff/thebujinkan
+	name = "Pound Coin"
+	desc = "An extremely old item of currency from Terra. The two sides of the coin are very tarnished with age. However, you can just about make out a face upon one of them..."
+
+/////////////////////////// ChiGarnett /////////////////////////////////////////////
+
+/obj/item/weapon/storage/belt/utility/fluff/chigarnett
+	name = "black leather belt"
+	desc = "A utility belt made from black leather. It looks as though it was meant to hold tools."
+	icon_state = "securitybelt"
+
+////////////////////////// Sandcom ///////////////////////////////////////////////////
+
+/obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil/sandcom
+	name = "black hooded trenchcoat"
+	desc = "A black, hooded trenchcoat with red stitching down the back. The very look of it seems oddly tailored but fairly practical. Anyone who wears this clearly had it made with not being seen in mind."
+
+/obj/item/clothing/tie/fluff/nasir_khayyam_1/sandcom
+	name = "O'Brian family crest"
+	desc = "An obsidian medallion with silver edging, strung on a silver necklace. In the center is a coat of arms, on which a skull is in the top left corner, a pen in the top right, a cross over a shield on the bottom left, and an energy gun crossed over what appears to be an energy sword in the bottom right."
+
+///////////////////////// Bewawolf19 //////////////////////////////////////////////////
+
+/obj/item/clothing/suit/storage/lawyer/bluejacket/fluff/bewawolf19
+	name = "pristine blue suit jacket"
+	desc = "A fine-looking suit jacket that has \"Property of Vasiliv Tarkov\" scrawled on the back tag."
+
+//////////////////////////// Grolarg ///////////////////////////////////////////////////
+
+/obj/item/clothing/head/collectable/HoS/fluff/grolarg
+	name = "Hala\'s black cap"
+	desc = "A fancy-looking black hat. The initials \'H.A.\' are printed on the inside."
+
+//////////////////////////// BitFlimsy ///////////////////////////////////////////////////
+
+/obj/item/device/measuring_tape/fluff/harold_tompkins
+	desc = "A simple tape measure, looking slightly worn"
+
+/obj/item/weapon/gun/projectile/detective/fluff/shaun_pavlov
+	name = "engraved Colt M1911"
+	desc = "From afar it is clear that this handgun is well looked after. Upon closer inspection you see an intricately carved handgun. The slide has the names 'Calum, Katie, Brenna, Georgi, James, Lynn' all linked together in a stylish flowing scripture, the latter name seeming to be a fresher engraving. The hand grip covers are made of polished walnut and the words 'Habitare in memoria' are carved cleanly in the same style as that of the slide.."
+
+//////////////////////////// FatalEYES ///////////////////////////////////////////////////
+
+/obj/item/weapon/coin/diamond/fluff/lechoslaw_basinger
+	name = "scratched diamond coin"
+	desc = "A regular looking diamond coin that seems to have some scratches on each of the side of it."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "coin_diamondscratch"
+	item_state = "coin_diamondscratch"
+
+
+/obj/item/weapon/coin/diamond/fluff/lechoslaw_basinger/attack_self(mob/user as mob)
+	user.visible_message("<span class='notice'>[user] has thrown \the [src]. It lands on tails! </span>")
+
+//////////////////////////// Cutovercascade ///////////////////////////////////////////////////
+
+obj/item/clothing/head/ushanka/fluff/rufaro_nia
+	name = "Nia's ushanka"
+	desc = "This pink Russian ushanka has been modified to have sewn-in holes in the back for her spines to poke out of the hat without causing a rip. It covers everything to an inch above her eye. The spines point straight out her head, but point at an acute angle backwards to the top of her head, to the base of her neck in one neat row. The Ushanka itself has a Tendaji flag and symbol on the front, where the normal soviet star would go. The earflaps are unbuttoned and left down."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "niaushanka"
+	item_state = "niaushanka"
+
+//////////////////////////// DerpMaestro ///////////////////////////////////////////////////
+
+/obj/item/device/kit/suit/fluff/dave_mararan
+	name = "Sam's hazard hardsuit modification kit"
+	desc = "A kit for modifying hard-suits. The label on the box says, 'To Dad, for when the going gets tough.'."
+
+	new_name = "Sam's hazard"
+	new_suit_desc = "An older model of armored NT Hardsuit emblazoned in security colors."
+	new_helmet_desc = "An older NT Hardsuit Helmet with built-in atmospheric filters."
+	helmet_icon = "rig0-hazardhardsuit"
+	suit_icon = "rig-hazardhardsuit"
+	helmet_color = "hazardhardsuit"
+
+//////////////////////////// Serendipitous O. Currance ///////////////////////////////////////////////////
+
+/obj/item/clothing/suit/storage/labcoat/fluff/chris_broadwalk
+	name = "Chris' worn lab-coat"
+	desc = "The lab-coat is burned and stained from years of use and abuse.."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "labcoat_burnt"
+	item_state = "labcoat_burnt"
+
+//////////////////////////// Vexif ///////////////////////////////////////////////////
+
+/obj/item/weapon/storage/fancy/cigar/fluff/natachalavoie
+	name = "engraved cigar case"
+	desc = "It is a engraved cigar case with hand wrapped cigars"
+
+//////////////////////////// Crystal9156 ///////////////////////////////////////////////////
+
+/obj/item/weapon/pen/fluff/crystal_nole
+	name = "Gilded Pen"
+	desc = "A fancy golden pen with the initials C.E.N engraved into the side with Obsidian colored lettering."
+
+/obj/item/clothing/suit/storage/labcoat/fluff/ezra_mennai
+	name = "medical trenchcoat"
+	desc = "A specialized trench-coat with a big white square with a red cross over it on the breast, while the rest of the trench-coat is black with red trim."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "ezramennai"
+	item_state = "ezramennai"
+
+//////////////////////////// Goragh ///////////////////////////////////////////////////
+
+/obj/item/weapon/pen/blue/fluff/marc_mosser
+	name = "fancy pen"
+	desc = "A fancy metal pen. It uses blue ink. An inscription on one side reads, 'CCIA Staff.'"
+
+//////////////////////////// Nitebomber ///////////////////////////////////////////////////
+
+/obj/item/clothing/glasses/sunglasses/fluff/saeed_alfilistine
+	name = "Saeed's sunglasses"
+	desc = "A pair of futuristic sunglasses that appear to attach directly to someone's forehead, just above their eyebrows. This pair appears to be designed for a tajaran"
+	icon_state = "jensenshades"
+
+//////////////////////////// Dr. Bean-Dip ///////////////////////////////////////////////////
+
+/obj/item/clothing/suit/armor/vest/warden/fluff/niruka
+	name = "Niruka's warden jacket"
+	desc = "This is a slightly faded warden jacket with a hide mantle thrown over it. Looking closely, you can see the name, 'Isingoma Niruka' written on the collar. That is, if it isn't being worn."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nirukajacket"
+	item_state = "nirukajacket"
+
+
+/obj/item/clothing/head/helmet/warden/fluff/niruka
+	name = "Niruka's warden cap"
+	desc = "A blue colored, old looking warden's hat with 'Isingoma Niruka: 337' written on the metal on top of the badge"
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nirukacap"
+	item_state = "nirukacap"
+
+/////////////////////////////// Acera ///////////////////////////////////////////////////////
+
+
+/obj/item/clothing/under/rank/medical/fluff/valeera
+	name = "Black scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "scrubsblack"
+	item_state = "scrubsblack"
 
 ////////////////////////////// Foxler - Erstatz Vryroxes /////////////////////////////////////////////////
 
