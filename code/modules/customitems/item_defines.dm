@@ -1111,15 +1111,26 @@
 	item_color = "lillian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-////// Cybernetic Casings - Parker Eliza - MrSnapwalk
+////// Tailored Security Uniform - Parker Eliza - MrSnapwalk
+
 /obj/item/clothing/under/fluff/parkereliza
-	name = "cybernetic casings"
-	desc = "A set of somewhat bulky white casings for robotic limbs, paired with a basic blue tank top and black cargo pants. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
+	name = "tailored security uniform"
+	desc = "A red uniform shirt (tailored for easy access to the shoulder joint) and black cargo pants, paired with a set of somewhat bulky white casings for robotic limbs. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza"
 	item_state = "parker_eliza"
 	item_color = "parker_eliza"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
+
+////// Bishop "GOLEM" V2200 Industrial Limb Augments - Parker Eliza - MrSnapwalk
+
+/obj/item/clothing/suit/fluff/parkereliza
+	name = "Bishop \"GOLEM\" V2200 Industrial Limb Augments"
+	desc = "A set of top-of-the-line cyberlimbs, only usable to someone with extensive bone structure augmentation. Often used in industrial applications, they are capable of throwing a man clear across a room. The load limitation circuit in this set appears to be modified."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "parker_eliza_arms"
+	item_state = "parker_eliza_arms"
+	item_color = "parker_eliza_arms"
 
 
 ////////////// Accessories /////
