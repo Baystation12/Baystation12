@@ -8,6 +8,7 @@
 	matter = list("metal" = 1000)
 	recoil = 1
 
+	var/eject_casings = 1 //experimental: for guns that don't eject casings, like revolvers.
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 
 	//For SINGLE_CASING or SPEEDLOADER guns
@@ -45,10 +46,19 @@
 		ammo_magazine.stored_ammo -= C
 
 	if(istype(C))
-		C.loc = get_turf(src) //Eject casing onto ground.
+		if(eject_casings)
+			C.loc = get_turf(src) //Eject casing onto ground.
+		else
+			//cycle it to the end
+			if(ammo_magazine)
+				ammo_magazine.stored_ammo += C
+			else
+				loaded += C
+		
 		if(C.BB)
 			in_chamber = C.BB
 			C.BB.loc = src  //Set projectile loc to gun.
+			C.BB = null
 			return 1
 
 	return 0
@@ -63,12 +73,16 @@
 		switch(AM.mag_type)
 			if(MAGAZINE)
 				if(ammo_magazine)
-					return //already a magazine here
+					user << "<span class='warning'>[src] already has a magazine loaded!</span>" //already a magazine here
+					return
 				user.remove_from_mob(AM)
 				AM.loc = src
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src]!</span>")
 			if(SPEEDLOADER)
+				if(loaded.len >= max_shells)
+					user << "<span class='warning'>[src] is full!</span>"
+					return
 				var/count = 0
 				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
 					if(loaded.len >= max_shells)
@@ -86,12 +100,15 @@
 
 	else if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = A
-		if(!(load_method & SINGLE_CASING) || caliber != C.caliber || loaded.len >= max_shells)
-			return //incompatible or full
+		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
+			return //incompatible
+		if(loaded.len >= max_shells)
+			user << "<span class='warning'>[src] is full!</span>"
+			return
 
 		user.remove_from_mob(C)
 		C.loc = src
-		loaded += C
+		loaded.Insert(C, 1) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src]!</span>")
 		update_icon()
 		return
@@ -125,7 +142,7 @@
 		update_icon()
 
 	else
-		user << "<span class='warning'>There's nothing loaded in [src]!</span>"
+		user << "<span class='warning'>[src] is empty!</span>"
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
 	load_ammo(A, user)
