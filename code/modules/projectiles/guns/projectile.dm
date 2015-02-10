@@ -117,7 +117,7 @@
 				loaded.Cut()
 			if(count)
 				user.visible_message("[user] unloads [src].", "<span class='notice'>You unload [count] round\s from [src]!</span>")
-		else
+		else if(load_method & SINGLE_CASING)
 			var/obj/item/ammo_casing/C = loaded[loaded.len]
 			loaded.len--
 			user.put_in_hands(C)
@@ -135,6 +135,16 @@
 		return ..()
 	unload_ammo(user)
 
+/obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
+	//allow guns with both SPEEDLOADER and SINGLE_CASING a way to remove casings without dumping everything on the floor
+	if((load_method & SINGLE_CASING) && loaded.len && (src in user))
+		var/obj/item/ammo_casing/C = loaded[loaded.len]
+		loaded.len--
+		user.put_in_hands(C)
+		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src]!</span>")
+	else
+		return ..()
+
 /obj/item/weapon/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
 	if(auto_eject && !ammo_magazine.stored_ammo.len)
@@ -145,7 +155,7 @@
 	if(ammo_magazine)
 		ammo_magazine.loc = get_turf(src.loc)
 		user.visible_message(
-			"[ammo_magazine] falls out and clatters on the floor!", 
+			"[ammo_magazine] falls out and clatters on the floor!",
 			"<span class='notice'>[ammo_magazine] falls out and clatters on the floor!</span>"
 			)
 		ammo_magazine = null
@@ -166,6 +176,6 @@
 	var/bullets = 0
 	if(loaded)
 		bullets += loaded.len
-	if(ammo_magazine.stored_ammo)
+	if(ammo_magazine && ammo_magazine.stored_ammo)
 		bullets += ammo_magazine.stored_ammo.len
 	return bullets
