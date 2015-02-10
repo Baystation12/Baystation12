@@ -101,10 +101,12 @@
 
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
+		on_impact(user)
 		del(src)
 		return 0
 	if(targloc == curloc) //Shooting something in the same turf
 		target.bullet_act(src, target_zone)
+		on_impact(target)
 		del(src)
 		return 0
 

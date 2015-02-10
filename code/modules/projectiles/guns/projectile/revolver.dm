@@ -88,6 +88,8 @@
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/detective/semiauto/flash
+	name = "\improper Colt M1911 signal pistol"
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 signal flash rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
 /obj/item/weapon/gun/projectile/detective/semiauto/colt

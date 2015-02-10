@@ -71,7 +71,8 @@
 	magazine_type = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/flash
-	desc = "A small, easily concealable gun. Uses 9mm illumination rounds."
+	name = "\improper Stechtkin signal pistol"
+	desc = "A small, easily concealable gun. Uses 9mm signal flash rounds."
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)

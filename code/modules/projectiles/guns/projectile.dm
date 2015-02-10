@@ -153,9 +153,9 @@
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
 	..(user)
+	user << "Has [getAmmo()] round\s remaining."
 	if(ammo_magazine)
 		user << "It has \a [ammo_magazine] loaded."
-	user << "Has [getAmmo()] round\s remaining."
 //		if(in_chamber && !loaded.len)
 //			user << "However, it has a chambered round."
 //		if(in_chamber && loaded.len)
