@@ -1394,10 +1394,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/randomised/webbing
 	name = "Webbing crate"
 	num_contained = 1
-	contains = list(/obj/item/clothing/tie/holster,
-					/obj/item/clothing/tie/storage/brown_vest,
-					/obj/item/clothing/tie/storage/webbing,
-					/obj/item/clothing/tie/storage)
+	contains = list(/obj/item/clothing/accessory/holster,
+					/obj/item/clothing/accessory/storage/brown_vest,
+					/obj/item/clothing/accessory/storage/webbing,
+					/obj/item/clothing/accessory/storage)
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "Webbing crate"

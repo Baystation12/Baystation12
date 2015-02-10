@@ -114,7 +114,7 @@
 
 /////////////////////// Cataguettes - Lucy's Stethoscope - Lucy Kemmerer //////
 
-/obj/item/clothing/tie/stethoscope/fluff/lucystethos
+/obj/item/clothing/accessory/stethoscope/fluff/lucystethos
    name = "Lucy's Stethoscope"
    desc = "A medical apparatus intended to ease in listening to the sounds of the human body. This one looks cleaner and sparklier than the rest. There is a small silver plaque attached to the tubing, with the words 'Lucy Kemmerer' engraved on it."
    icon_state = "lucystethos"
@@ -1126,7 +1126,7 @@
 
 //////////////////// Blood Red Pendant - Mewth - Mu'taz Radi ////////////////
 
-/obj/item/clothing/tie/fluff/radi
+/obj/item/clothing/accessory/fluff/radi
 	name = "Blood Red Pendant"
 	desc = "A blue chained necklace with a ruby in the middle, it looks pretty!"
 	icon = 'icons/obj/custom_items.dmi'
@@ -1168,7 +1168,7 @@
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
-/obj/item/clothing/tie/fluff/altair_locket
+/obj/item/clothing/accessory/fluff/altair_locket
 	name = "small locket"
 	desc = "A small golden locket attached to an Ii'rka-reed string. Inside the locket is a holo-picture of a female Tajaran, and an inscription writtin in Siik'mas."
 	icon = 'icons/obj/custom_items.dmi'
@@ -1181,7 +1181,7 @@
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
-/obj/item/clothing/tie/fluff/konaa_hirano
+/obj/item/clothing/accessory/fluff/konaa_hirano
 	name = "silver locket"
 	desc = "This oval shaped, argentium sterling silver locket hangs on an incredibly fine, refractive string, almost thin as hair and microweaved from links to a deceptive strength, of similar material. The edges are engraved very delicately with an elegant curving design, but overall the main is unmarked and smooth to the touch, leaving room for either remaining as a stolid piece or future alterations. There is an obvious internal place for a picture or lock of some sort, but even behind that is a very thin compartment unhinged with the pinch of a thumb and forefinger."
 	icon = 'icons/obj/custom_items.dmi'
@@ -1193,13 +1193,13 @@
 	slot_flags = SLOT_MASK | SLOT_TIE
 	var/obj/item/held //Item inside locket.
 
-/obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
+/obj/item/clothing/accessory/fluff/konaa_hirano/attack_self(mob/user as mob)
 	if(held)
 		user << "You open [src] and [held] falls out."
 		held.loc = get_turf(user)
 		src.held = null
 
-/obj/item/clothing/tie/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/accessory/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/paper))
 		if(held)
 			usr << "[src] already has something inside it."
@@ -1213,7 +1213,7 @@
 
 //////  Medallion - Nasir Khayyam - Jamini
 
-/obj/item/clothing/tie/fluff/nasir_khayyam_1
+/obj/item/clothing/accessory/fluff/nasir_khayyam_1
 	name = "medallion"
 	desc = "This silvered medallion bears the symbol of the Hadii Clan of the Tajaran."
 	icon = 'icons/obj/custom_items.dmi'
