@@ -12,7 +12,7 @@
 		src << "Guests may not use OOC."
 		return
 
-	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	msg = trim(sanitize(copytext(msg, 1, MAX_MESSAGE_LEN)))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_OOC))
@@ -77,7 +77,7 @@
 		src << "Guests may not use OOC."
 		return
 
-	msg = trim(copytext(sanitize(msg), 1, MAX_MESSAGE_LEN))
+	msg = trim(sanitize(copytext(msg, 1, MAX_MESSAGE_LEN)))
 	if(!msg)	return
 
 	if(!(prefs.toggles & CHAT_LOOC))

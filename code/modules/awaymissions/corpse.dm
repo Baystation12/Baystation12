@@ -219,7 +219,7 @@
 
 /obj/effect/landmark/corpse/commander
 	name = "Commander"
-	corpseuniform = /obj/item/clothing/under/rank/centcom_commander
+	corpseuniform = /obj/item/clothing/under/rank/centcom_captain
 	corpsesuit = /obj/item/clothing/suit/armor/bulletproof
 	corpseradio = /obj/item/device/radio/headset/heads/captain
 	corpseglasses = /obj/item/clothing/glasses/eyepatch

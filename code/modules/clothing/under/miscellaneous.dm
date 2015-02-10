@@ -61,19 +61,30 @@
 	item_state = "gy_suit"
 	item_color = "vice"
 
-/obj/item/clothing/under/rank/centcom_officer
-	desc = "It's a jumpsuit worn by CentCom Officers."
-	name = "\improper CentCom officer's jumpsuit"
+
+/obj/item/clothing/under/rank/centcom
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Ensign.\""
+	name = "\improper NanoTrasen Navy Uniform"
 	icon_state = "officer"
 	item_state = "g_suit"
 	item_color = "officer"
+	displays_id = 0
 
-/obj/item/clothing/under/rank/centcom_commander
-	desc = "It's a jumpsuit worn by CentCom's highest-tier Commanders."
-	name = "\improper CentCom officer's jumpsuit"
+/obj/item/clothing/under/rank/centcom_officer
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Lieutenant Commander.\""
+	name = "\improper NanoTrasen Officers Uniform"
+	icon_state = "officer"
+	item_state = "g_suit"
+	item_color = "officer"
+	displays_id = 0
+
+/obj/item/clothing/under/rank/centcom_captain
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\""
+	name = "\improper NanoTrasen Captains Uniform"
 	icon_state = "centcom"
 	item_state = "dg_suit"
 	item_color = "centcom"
+	displays_id = 0
 
 /obj/item/clothing/under/ert
 	name = "ERT tactical uniform"
