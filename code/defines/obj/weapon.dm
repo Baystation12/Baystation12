@@ -98,6 +98,24 @@
 	matter = list("metal" = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
+/obj/item/weapon/cane/concealed/attack_self(mob/user)
+    user.visible_message("<span class='warning'>[user] has unsheathed a blade from \his [src]!</span>", "You unsheathe the blade from \the [src].")
+    var/blade = new/obj/item/weapon/butterfly/concealed
+    user.drop_from_inventory(src)
+    user.put_in_hands(blade)
+    del(src)
+
+/obj/item/weapon/kitchenknife/concealed
+	name = "cane blade"
+	desc = "A now less than concealed cane blade."
+
+/obj/item/weapon/kitchenknife/concealed/attack_self(mob/user)
+    var/cane = new/obj/item/weapon/cane/concealed
+    user.drop_from_inventory(src)
+    user.put_in_hands(cane)
+    del(src)
+    user.visible_message("<span class='warning'>[user] has sheathed a blade into \his [cane]!</span>", "You sheathe the blade into \the [cane].")
+
 /obj/item/weapon/disk
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
