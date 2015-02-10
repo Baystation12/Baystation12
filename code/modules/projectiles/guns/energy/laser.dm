@@ -6,6 +6,7 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 3.0
+	force = 10 //it has a stock, might as well give some kind of perk over the egun
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = /obj/item/projectile/beam

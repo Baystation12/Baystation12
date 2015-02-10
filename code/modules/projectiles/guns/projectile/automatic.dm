@@ -31,6 +31,7 @@
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3
+	force = 10
 	caliber = "12mm"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -58,6 +59,7 @@
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = 4
+	force = 10
 	slot_flags = 0
 	max_shells = 50
 	caliber = "a762"

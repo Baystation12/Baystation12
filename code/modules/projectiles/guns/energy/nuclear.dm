@@ -41,6 +41,7 @@
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"
 	slot_flags = SLOT_BELT
+	force = 8
 	var/lightfail = 0
 	var/charge_tick = 0
 

@@ -5,6 +5,7 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
 	w_class = 4.0
+	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	charge_cost = 100
@@ -227,6 +228,7 @@ obj/item/weapon/gun/energy/staff/focus
 	slot_flags = SLOT_BACK
 	charge_cost = 250
 	fire_delay = 35
+	force = 10
 	w_class = 4
 	zoomdevicename = "scope"
 
