@@ -70,18 +70,19 @@
 	var/initial_ammo = null
 	
 	var/multiple_sprites = 0
-	var/list/icon_map = list()
+	//because BYOND doesn't support numbers as keys in associative lists
+	var/list/icon_keys = list()		//keys
+	var/list/ammo_states = list()	//values
 
 /obj/item/ammo_magazine/New()
 	if(multiple_sprites)
 		//should probably be cached or something.
-		icon_map = list(max_ammo = icon_state)
 		var/list/states = icon_states(icon)
 		for(var/i = 0, i <= max_ammo, i++)
 			var/ammo_state = "[icon_state]-[i]"
 			if(ammo_state in states)
-				//icon_map += i //so stupid BYOND understands that it's an association
-				icon_map[i] = ammo_state
+				icon_keys += i
+				ammo_states += ammo_state
 
 	if(isnull(initial_ammo))
 		initial_ammo = max_ammo
@@ -119,9 +120,10 @@
 	if(multiple_sprites)
 		//find the lowest key greater than or equal to stored_ammo.len
 		var/new_state = null
-		for(var/i in icon_map)
-			if (i >= stored_ammo.len)
-				new_state = icon_map[i]
+		for(var/idx in 1 to icon_keys.len)
+			var/ammo_count = icon_keys[idx]
+			if (ammo_count >= stored_ammo.len)
+				new_state = ammo_states[idx]
 				break
 		icon_state = (new_state)? new_state : initial(icon_state)
 
