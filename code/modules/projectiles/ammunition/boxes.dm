@@ -66,8 +66,10 @@
 	max_ammo = 10
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/mc9mm/empty
-	max_ammo = 0
+/obj/item/ammo_magazine/mc9mm/empty/New()
+	..()
+	stored_ammo = list()
+	update_icon()
 
 /obj/item/ammo_magazine/c9mm
 	name = "Ammunition Box (9mm)"

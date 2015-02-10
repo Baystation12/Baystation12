@@ -163,3 +163,12 @@
 	new /obj/item/device/spy_bug(src)
 	new /obj/item/device/spy_bug(src)
 	new /obj/item/device/spy_monitor(src)
+
+/obj/item/weapon/storage/box/syndie_kit/g9mm
+	name = "Smooth operator"
+	desc = "9mm with silencer kit."
+
+/obj/item/weapon/storage/box/syndie_kit/g9mm/New()
+	..()
+	new /obj/item/weapon/gun/projectile/pistol(src)
+	new /obj/item/weapon/silencer(src)

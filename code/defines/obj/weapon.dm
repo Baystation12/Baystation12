@@ -100,7 +100,7 @@
 
 /obj/item/weapon/cane/concealed/attack_self(mob/user)
     user.visible_message("<span class='warning'>[user] has unsheathed a blade from \his [src]!</span>", "You unsheathe the blade from \the [src].")
-    var/blade = new/obj/item/weapon/butterfly/concealed
+    var/blade = new/obj/item/weapon/kitchenknife/concealed
     user.drop_from_inventory(src)
     user.put_in_hands(blade)
     del(src)

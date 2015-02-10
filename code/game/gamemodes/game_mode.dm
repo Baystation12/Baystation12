@@ -33,10 +33,12 @@
 	var/uplink_uses = 10
 	var/list/datum/uplink_item/uplink_items = list(
 		"Highly Visible and Dangerous Weapons" = list(
+			 new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "Ammo-9mm", "R9"),
 			 new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, "Ammo-357", "RA"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),
 			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
+			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/g9mm, 5, "Silenced 9mm", "S9"),
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/projectile, 6, "Revolver", "RE"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndicate, 10, "Mercenary Bundle", "BU")
