@@ -317,9 +317,9 @@ datum/controller/vote
 						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
 				else
 					if(current_votes[C.ckey] == i)
-						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
 					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
 
 				if (additional_text.len >= i)
 					. += additional_text[i]

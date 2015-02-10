@@ -56,7 +56,6 @@
 
 
 	equip(var/mob/living/carbon/human/H)
-		world << H.job
 		if(!H)	return 0
 		if(H.job == "Chef" || H.job == "Cook")
 			H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
