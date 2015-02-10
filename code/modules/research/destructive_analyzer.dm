@@ -12,6 +12,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 	icon_state = "d_analyzer"
 	var/obj/item/weapon/loaded_item = null
 	var/decon_mod = 1
+	var/min_reliability = 90
 	
 	use_power = 1
 	idle_power_usage = 30
@@ -29,9 +30,9 @@ Note: Must be placed within 3 tiles of the R&D Console
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/S in src)
-		T += S.rating * 0.1
-	T = between (0, T, 1)
-	decon_mod = T
+		T += S.rating
+	decon_mod = T * 0.1
+	min_reliability = 93 - T
 
 /obj/machinery/r_n_d/destructive_analyzer/meteorhit()
 	del(src)
@@ -43,65 +44,58 @@ Note: Must be placed within 3 tiles of the R&D Console
 		temp_list[O] = text2num(temp_list[O])
 	return temp_list
 
+/obj/machinery/r_n_d/destructive_analyzer/update_icon()
+	if(panel_open)
+		icon_state = "d_analyzer_t"
+	else if(loaded_item)
+		icon_state = "d_analyzer_l"
+	else
+		icon_state = "d_analyzer"
 
 /obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/O as obj, var/mob/user as mob)
-	if (shocked)
-		shock(user,50)
-	if (istype(O, /obj/item/weapon/screwdriver))
-		if (!opened)
-			opened = 1
-			if(linked_console)
-				linked_console.linked_destroy = null
-				linked_console = null
-			icon_state = "d_analyzer_t"
-			user << "You open the maintenance hatch of [src]."
-		else
-			opened = 0
-			icon_state = "d_analyzer"
-			user << "You close the maintenance hatch of [src]."
+	if(shocked)
+		shock(user, 50)
+	if(default_deconstruction_screwdriver(user, O))
+		if(linked_console)
+			linked_console.linked_destroy = null
+			linked_console = null
 		return
-	if (opened)
-		if(istype(O, /obj/item/weapon/crowbar))
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-			M.state = 2
-			M.icon_state = "box_1"
-			for(var/obj/I in component_parts)
-				I.loc = src.loc
-			del(src)
-			return 1
-		else
-			user << "\red You can't load the [src.name] while it's opened."
-			return 1
-	if (disabled)
+	if(default_deconstruction_crowbar(user, O))
 		return
-	if (!linked_console)
-		user << "\red The destructive analyzer must be linked to an R&D console first!"
+	if(default_part_replacement(user, O))
 		return
-	if (busy)
-		user << "\red The destructive analyzer is busy right now."
+	if(panel_open)
+		user << "<span class='notice'>You can't load \the [src] while it's opened.</span>"
+		return 1
+	if(disabled)
 		return
-	if (istype(O, /obj/item) && !loaded_item)
+	if(!linked_console)
+		user << "<span class='notice'>\The [src] must be linked to an R&D console first!</span>"
+		return
+	if(busy)
+		user << "<span class='notice'>\The [src] is busy right now.</span>"
+		return
+	if(istype(O, /obj/item) && !loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
 			return
 		if(!O.origin_tech)
-			user << "\red This doesn't seem to have a tech origin!"
+			user << "<span class='notice'>This doesn't seem to have a tech origin!</span>"
 			return
 		var/list/temp_tech = ConvertReqString2List(O.origin_tech)
-		if (temp_tech.len == 0)
-			user << "\red You cannot deconstruct this item!"
+		if(temp_tech.len == 0)
+			user << "<span class='notice'>You cannot deconstruct this item!</span>"
 			return
-		if(O.reliability < 90 && O.crit_fail == 0)
-			usr << "\red Item is neither reliable enough nor broken enough to learn from."
+		if(O.reliability < min_reliability && O.crit_fail == 0)
+			usr << "<span class='warning'>Item is neither reliable enough nor broken enough to learn from.</span>"
 			return
 		busy = 1
 		loaded_item = O
 		user.drop_item()
 		O.loc = src
-		user << "\blue You add the [O.name] to the machine!"
+		user << "<span class='notice'>You add \the [O] to \the [src]!</span>"
 		flick("d_analyzer_la", src)
 		spawn(10)
-			icon_state = "d_analyzer_l"
+			update_icon()
 			busy = 0
 		return 1
 	return
