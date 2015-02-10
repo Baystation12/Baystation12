@@ -149,3 +149,14 @@
 	..()
 	new /obj/item/weapon/stamp/chameleon(src)
 	new /obj/item/weapon/pen/chameleon(src)
+	
+/obj/item/weapon/storage/box/syndie_kit/spy
+	name = "spy kit"
+	desc = "For when you want to conduct voyeurism from afar."
+
+/obj/item/weapon/storage/box/syndie_kit/spy/New()
+	..()
+	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_monitor(src)
