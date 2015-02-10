@@ -5,7 +5,7 @@
 	icon_state = "detective"
 	item_state = "gun"
 	flags =  CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	matter = list("metal" = 2000)
 	w_class = 3.0
 	throwforce = 5
@@ -71,9 +71,6 @@
 			user << "\red You refrain from firing your [src] as your intent is set to help."
 		else
 			Fire(A,user,params) //Otherwise, fire normally.
-
-/obj/item/weapon/gun/proc/isHandgun()
-	return 1
 
 /obj/item/weapon/gun/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.

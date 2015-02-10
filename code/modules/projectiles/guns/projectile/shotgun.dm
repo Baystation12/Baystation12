@@ -16,9 +16,6 @@
 	var/pumped = 0
 	var/obj/item/ammo_casing/current_shell = null
 
-/obj/item/weapon/gun/projectile/shotgun/pump/isHandgun()
-	return 0
-
 /obj/item/weapon/gun/projectile/shotgun/pump/load_into_chamber()
 	if(in_chamber)
 		return 1
@@ -66,6 +63,7 @@
 	//SPEEDLOADER because rapid unloading.
 	//In principle someone could make a speedloader for it, so it makes sense.
 	load_method = SINGLE_CASING|SPEEDLOADER
+	eject_casings = 0
 	max_shells = 2
 	w_class = 4
 	force = 10
@@ -90,7 +88,7 @@
 			w_class = 3
 			item_state = "gun"
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
-			slot_flags |= SLOT_BELT		//but you can wear it on your belt (poorly concealed under a trenchcoat, ideally)
+			slot_flags |= SLOT_BELT|SLOT_HOLSTER //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally), or in a holster, why not.
 			name = "sawn-off shotgun"
 			desc = "Omar's coming!"
 			user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"

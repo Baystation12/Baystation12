@@ -13,10 +13,6 @@
 /obj/item/weapon/gun/launcher/load_into_chamber()
 	return (!isnull(in_chamber))
 
-//This should not fit in a combat belt or holster.
-/obj/item/weapon/gun/launcher/isHandgun()
-	return 0
-
 //Launchers are mechanical, no other impact.
 /obj/item/weapon/gun/launcher/emp_act(severity)
 	return

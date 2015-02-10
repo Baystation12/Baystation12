@@ -55,6 +55,7 @@
 	mouthshoot = 1                          // No suiciding with this weapon, causes runtimes.
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25
+	slot_flags = SLOT_BACK
 
 	var/tension = 0                         // Current draw on the bow.
 	var/max_tension = 5                     // Highest possible tension.

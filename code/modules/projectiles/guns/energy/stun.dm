@@ -60,6 +60,7 @@
 	item_state = "crossbow"
 	matter = list("metal" = 2000)
 	origin_tech = "combat=2;magnets=2;syndicate=5"
+	slot_flags = SLOT_BELT
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
@@ -96,7 +97,7 @@
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "Energy Crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	matter = list("metal" = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large

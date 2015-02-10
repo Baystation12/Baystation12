@@ -4,6 +4,7 @@
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
+	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 3.0
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
@@ -70,12 +71,10 @@ obj/item/weapon/gun/energy/laser/retro
 	icon_state = "lasercannon"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	origin_tech = "combat=4;materials=3;powerstorage=3"
+	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = "/obj/item/projectile/beam/heavylaser"
 
 	fire_delay = 20
-
-	isHandgun()
-		return 0
 
 /obj/item/weapon/gun/energy/lasercannon/cyborg/load_into_chamber()
 	if(in_chamber)
@@ -106,6 +105,7 @@ obj/item/weapon/gun/energy/laser/retro
 	desc = "Standard issue weapon of the Imperial Guard"
 	projectile_type = "/obj/item/projectile/beam/lastertag/blue"
 	origin_tech = "combat=1;magnets=2"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	clumsy_check = 0
 	var/charge_tick = 0
 
@@ -143,6 +143,7 @@ obj/item/weapon/gun/energy/laser/retro
 	desc = "Standard issue weapon of the Imperial Guard"
 	projectile_type = "/obj/item/projectile/beam/lastertag/red"
 	origin_tech = "combat=1;magnets=2"
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	clumsy_check = 0
 	var/charge_tick = 0
 

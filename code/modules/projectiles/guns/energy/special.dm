@@ -141,6 +141,7 @@ obj/item/weapon/gun/energy/staff
 	desc = "For the love of god, make sure you're aiming this the right way!"
 	icon_state = "riotgun"
 	item_state = "c20r"
+	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = 4
 	projectile_type = "/obj/item/projectile/meteor"
 	charge_cost = 100
@@ -176,6 +177,7 @@ obj/item/weapon/gun/energy/staff
 	icon_state = "pen"
 	item_state = "pen"
 	w_class = 1
+	slot_flags = SLOT_BELT
 
 
 /obj/item/weapon/gun/energy/mindflayer
@@ -191,6 +193,7 @@ obj/item/weapon/gun/energy/staff/focus
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "focus"
 	item_state = "focus"
+	slot_flags = SLOT_BACK
 	projectile_type = "/obj/item/projectile/forcebolt"
 	/*
 	attack_self(mob/living/user as mob)
@@ -215,7 +218,7 @@ obj/item/weapon/gun/energy/staff/focus
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "\improper L.W.A.P. sniper rifle"
-	desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
+	desc = "A high-power laser rifle fitted with a SMART aiming-system scope."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "sniper"
 	fire_sound = 'sound/weapons/marauder.ogg'
@@ -224,7 +227,7 @@ obj/item/weapon/gun/energy/staff/focus
 	slot_flags = SLOT_BACK
 	charge_cost = 250
 	fire_delay = 35
-	w_class = 4.0
+	w_class = 4
 	zoomdevicename = "scope"
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()

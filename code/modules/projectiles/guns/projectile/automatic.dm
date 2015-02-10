@@ -7,13 +7,11 @@
 	max_shells = 22
 	caliber = "9mm"
 	origin_tech = "combat=4;materials=2"
+	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c9mm
 	automatic = 1
 
 	fire_delay = 0
-
-	isHandgun()
-		return 0
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
@@ -26,9 +24,6 @@
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = /obj/item/ammo_casing/c45
 
-	isHandgun()
-		return 1
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
@@ -38,6 +33,7 @@
 	w_class = 3
 	caliber = "12mm"
 	origin_tech = "combat=5;materials=2;syndicate=8"
+	slot_flags = SLOT_BELT|SLOT_BACK
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a12mm
@@ -66,6 +62,7 @@
 	max_shells = 50
 	caliber = "a762"
 	origin_tech = "combat=5;materials=1;syndicate=2"
+	slot_flags = SLOT_BACK
 	ammo_type = "/obj/item/ammo_casing/a762"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
 	load_method = MAGAZINE

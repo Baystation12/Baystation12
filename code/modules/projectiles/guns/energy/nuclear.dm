@@ -40,6 +40,7 @@
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"
+	slot_flags = SLOT_BELT
 	var/lightfail = 0
 	var/charge_tick = 0
 

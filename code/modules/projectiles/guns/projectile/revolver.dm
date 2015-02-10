@@ -5,14 +5,22 @@
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
 	
+	eject_casings = 0
 	max_shells = 7
 	ammo_type = /obj/item/ammo_casing/a357
+
+/obj/item/weapon/gun/projectile/revolver/mateba
+	name = "mateba"
+	desc = "When you absolutely, positively need a 10mm hole in the other guy. Uses .357 ammo."	//>10mm hole >.357
+	icon_state = "mateba"
+	origin_tech = "combat=2;materials=2"
 
 /obj/item/weapon/gun/projectile/detective
 	name = "revolver"
 	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
 	icon_state = "detective"
 	max_shells = 6
+	eject_casings = 0
 	caliber = "38"
 	origin_tech = "combat=2;materials=2"
 	ammo_type = /obj/item/ammo_casing/c38
@@ -84,6 +92,7 @@
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
 	icon_state = "colt"
 	caliber = ".45"
+	eject_casings = 1
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
@@ -95,13 +104,6 @@
 /obj/item/weapon/gun/projectile/detective/semiauto/colt
 	desc = "A cheap Martian knock-off of a Colt M1911."
 	magazine_type = /obj/item/ammo_magazine/c45m
-
-/obj/item/weapon/gun/projectile/revolver/mateba
-	name = "mateba"
-	desc = "When you absolutely, positively need a 10mm hole in the other guy. Uses .357 ammo."	//>10mm hole >.357
-	icon_state = "mateba"
-	origin_tech = "combat=2;materials=2"
-
 
 // A gun to play Russian Roulette!
 // You can spin the chamber to randomize the position of the bullet.

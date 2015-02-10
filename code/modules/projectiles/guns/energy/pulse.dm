@@ -3,6 +3,7 @@
 	desc = "A heavy-duty, pulse-based energy weapon, preferred by front-line combat personnel."
 	icon_state = "pulse"
 	item_state = null	//so the human update icon uses the icon_state instead.
+	slot_flags = SLOT_BELT|SLOT_BACK
 	force = 10
 	fire_sound = 'sound/weapons/pulse.ogg'
 	charge_cost = 200
@@ -33,9 +34,6 @@
 				projectile_type = /obj/item/projectile/beam/pulse
 		return
 
-	isHandgun()
-		return 0
-
 /obj/item/weapon/gun/energy/pulse_rifle/cyborg/load_into_chamber()
 	if(in_chamber)
 		return 1
@@ -62,9 +60,7 @@
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
 	name = "\improper M1911-P"
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"
 	cell_type = "/obj/item/weapon/cell/infinite"
 	fire_delay = 10
-
-	isHandgun()
-		return 1
