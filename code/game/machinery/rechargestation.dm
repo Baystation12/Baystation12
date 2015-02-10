@@ -8,10 +8,11 @@
 	idle_power_usage = 50
 	active_power_usage = 50
 	var/mob/occupant = null
-	var/max_internal_charge = 15000 		// Two charged borgs in a row with default cell
-	var/current_internal_charge = 15000 	// Starts charged, to prevent power surges on round start
-	var/charging_cap_active = 25000			// Active Cap - When cyborg is inside
-	var/charging_cap_passive = 2500			// Passive Cap - Recharging internal capacitor when no cyborg is inside
+	var/obj/item/weapon/cell/cell = null
+	//var/max_internal_charge = 15000 		// Two charged borgs in a row with default cell
+	//var/current_internal_charge = 15000 	// Starts charged, to prevent power surges on round start
+	var/charging_cap_active = 1000			// Active Cap - When cyborg is inside
+	var/charging_cap_passive = 250			// Passive Cap - Recharging internal capacitor when no cyborg is inside
 	var/icon_update_tick = 0				// Used to update icon only once every 10 ticks
 	var/charge_rate = 250					// How much charge is restored per tick
 	var/weld_rate = 0						// How much brute damage is repaired per tick
@@ -26,6 +27,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	component_parts += new /obj/item/weapon/cell/high(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 5)
 
 	build_icon()
@@ -37,7 +39,7 @@
 	if(stat & (BROKEN))
 		return
 
-	if((stat & (NOPOWER)) && !current_internal_charge) // No Power.
+	if((stat & (NOPOWER)) && (!cell || cell.percent() <= 0)) // No Power.
 		return
 
 	var/chargemode = 0
@@ -46,27 +48,21 @@
 		chargemode = 1
 	// Power Stuff
 
+	if(!cell) // Shouldn't be possible, but sanity check
+		return
+
 	if(stat & NOPOWER)
-		current_internal_charge = max(0, (current_internal_charge - (50 * CELLRATE))) // Internal Circuitry, 50W load. No power - Runs from internal cell
+		cell.use(50 * CELLRATE) // Internal Circuitry, 50W load. No power - Runs from internal cell
 		return // No external power = No charging
 
-	if(max_internal_charge < current_internal_charge)
-		current_internal_charge = max_internal_charge// Safety check if varedit adminbus or something screws up
 	// Calculating amount of power to draw
-	var/charge_diff = max_internal_charge - current_internal_charge // OK we have charge differences
-	charge_diff = charge_diff / CELLRATE 							// Deconvert from Charge to Joules
-	if(chargemode)													// Decide if use passive or active power
-		charge_diff = between(0, charge_diff, charging_cap_active)	// Trim the values to limits
-	else															// We should have load for this tick in Watts
-		charge_diff = between(0, charge_diff, charging_cap_passive)
+	var/charge_diff = (chargemode ? charging_cap_active : charging_cap_passive) + 50 // 50W for circuitry
 
-	charge_diff += 50 // 50W for circuitry
+	charge_diff = cell.give(charge_diff)
 
 	if(idle_power_usage != charge_diff) // Force update, but only when our power usage changed this tick.
 		idle_power_usage = charge_diff
 		update_use_power(1, 1)
-
-	current_internal_charge = min((current_internal_charge + ((charge_diff - 50) * CELLRATE)), max_internal_charge)
 
 	if(icon_update_tick >= 10)
 		update_icon()
@@ -85,7 +81,9 @@
 	user << "The charge meter reads: [round(chargepercentage())]%"
 
 /obj/machinery/recharge_station/proc/chargepercentage()
-	return ((current_internal_charge / max_internal_charge) * 100)
+	if(!cell)
+		return 0
+	return cell.percent()
 
 /obj/machinery/recharge_station/relaymove(mob/user as mob)
 	if(user.stat)
@@ -100,6 +98,8 @@
 	if(occupant)
 		occupant.emp_act(severity)
 		go_out()
+	if(cell)
+		cell.emp_act(severity)
 	..(severity)
 
 /obj/machinery/recharge_station/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -123,8 +123,10 @@
 			cap_rating += P.rating
 		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
 			man_rating += P.rating
+	cell = locate(/obj/item/weapon/cell) in component_parts
 
 	charge_rate = 125 * cap_rating
+	charging_cap_passive = charge_rate
 	weld_rate = max(0, man_rating - 3)
 	wire_rate = max(0, man_rating - 5)
 
@@ -165,9 +167,8 @@
 				return
 			if(!R.cell.fully_charged())
 				var/diff = min(R.cell.maxcharge - R.cell.charge, charge_rate) 	// Capped at charge_rate charge / tick
-				diff = min(diff, current_internal_charge) 				// No over-discharging
-				R.cell.give(diff)
-				current_internal_charge -= diff
+				if (cell.use(diff))
+					R.cell.give(diff)
 			if(weld_rate && R.getBruteLoss())
 				R.adjustBruteLoss(-1)
 			if(wire_rate && R.getFireLoss())
