@@ -3,7 +3,6 @@
 	var/list/values // Values to copy into the target seed datum.
 
 /datum/seed
-
 	//Tracking.
 	var/uid                        // Unique identifier.
 	var/name                       // Index for global list.
@@ -19,9 +18,9 @@
 	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
 	var/list/consume_gasses        // The plant will absorb these gasses during its life.
 	var/list/exude_gasses          // The plant will exude these gasses during its life.
-	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/kitchen_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
+	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 
 /datum/seed/New()
 
@@ -507,7 +506,7 @@
 
 	// Splicing products has some detrimental effects on yield and lifespan.
 	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
-	if(gene.genetype == GENE_PRODUCTS)
+	if(gene.genetype == GENE_BIOCHEMISTRY)
 		for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 			if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
@@ -538,6 +537,10 @@
 			for(var/gas in exude_gasses)
 				exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
 
+	else if(gene.genetype == GENE_DIET)
+		var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
+		consume_gasses |= new_gasses
+
 	for(var/trait in gene.values)
 		set_trait(trait,gene.values["[trait]"])
 
@@ -554,21 +557,33 @@
 	P.values = list()
 
 	switch(genetype)
-		if(GENE_PRODUCTS)
-			P.values["[TRAIT_CHEMS]"] =          chems
-			P.values["[TRAIT_EXUDE_GASSES]"] =   exude_gasses
-			traits_to_copy = list(TRAIT_ALTER_TEMP,TRAIT_POTENCY,TRAIT_HARVEST_REPEAT,TRAIT_PRODUCES_POWER,TRAIT_JUICY,TRAIT_PRODUCT_ICON,TRAIT_PLANT_ICON)
-		if(GENE_CONSUMPTION)
-			P.values["[TRAIT_CONSUME_GASSES]"] = consume_gasses
-			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_NUTRIENT_CONSUMPTION,TRAIT_REQUIRES_WATER,TRAIT_WATER_CONSUMPTION,TRAIT_CARNIVOROUS,TRAIT_PARASITE,TRAIT_STINGS)
-		if(GENE_ENVIRONMENT)
-			traits_to_copy = list(TRAIT_IDEAL_HEAT,TRAIT_HEAT_TOLERANCE,TRAIT_IDEAL_LIGHT,TRAIT_LIGHT_TOLERANCE,TRAIT_LOWKPA_TOLERANCE,TRAIT_HIGHKPA_TOLERANCE,TRAIT_EXPLOSIVE)
-		if(GENE_RESISTANCE)
-			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE)
+		if(GENE_BIOCHEMISTRY)
+			P.values["[TRAIT_CHEMS]"] =        chems
+			P.values["[TRAIT_EXUDE_GASSES]"] = exude_gasses
+			traits_to_copy = list(TRAIT_POTENCY)
+		if(GENE_OUTPUT)
+			traits_to_copy = list(TRAIT_PRODUCES_POWER,TRAIT_BIOLUM)
+		if(GENE_ATMOSPHERE)
+			traits_to_copy = list(TRAIT_HEAT_TOLERANCE,TRAIT_LOWKPA_TOLERANCE,TRAIT_HIGHKPA_TOLERANCE)
+		if(GENE_HARDINESS)
+			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
+		if(GENE_METABOLISM)
+			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
-			traits_to_copy = list(TRAIT_ENDURANCE,TRAIT_YIELD,TRAIT_SPREAD,TRAIT_MATURATION,TRAIT_PRODUCTION,TRAIT_TELEPORTING)
+			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
+		if(GENE_DIET)
+			P.values["[TRAIT_CONSUME_GASSES]"] = consume_gasses
+			traits_to_copy = list(TRAIT_CARNIVOROUS,TRAIT_PARASITE,TRAIT_NUTRIENT_CONSUMPTION,TRAIT_WATER_CONSUMPTION)
+		if(GENE_ENVIRONMENT)
+			traits_to_copy = list(TRAIT_IDEAL_HEAT,TRAIT_IDEAL_LIGHT,TRAIT_LIGHT_TOLERANCE)
 		if(GENE_PIGMENT)
-			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM,TRAIT_BIOLUM_COLOUR)
+			traits_to_copy = list(TRAIT_PLANT_COLOUR,TRAIT_PRODUCT_COLOUR,TRAIT_BIOLUM_COLOUR)
+		if(GENE_STRUCTURE)
+			traits_to_copy = list(TRAIT_PLANT_ICON,TRAIT_PRODUCT_ICON,TRAIT_HARVEST_REPEAT)
+		if(GENE_FRUIT)
+			traits_to_copy = list(TRAIT_STINGS,TRAIT_EXPLOSIVE,TRAIT_JUICY)
+		if(GENE_SPECIAL)
+			traits_to_copy = list(TRAIT_TELEPORTING)
 
 	for(var/trait in traits_to_copy)
 		P.values["[trait]"] = get_trait(trait)

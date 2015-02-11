@@ -2,13 +2,20 @@
 #define DEAD_PLANT_COLOUR "#C2A180"
 
 // Definitions for genes (trait groupings)
-#define GENE_PRODUCTS "products"
-#define GENE_CONSUMPTION "consumption"
+#define GENE_BIOCHEMISTRY "biochemistry"
+#define GENE_HARDINESS "hardiness"
 #define GENE_ENVIRONMENT "environment"
-#define GENE_RESISTANCE "resistance"
+#define GENE_METABOLISM "metabolism"
+#define GENE_STRUCTURE "appearance"
+#define GENE_DIET "diet"
+#define GENE_PIGMENT "pigment"
+#define GENE_OUTPUT "output"
+#define GENE_ATMOSPHERE "atmosphere"
 #define GENE_VIGOUR "vigour"
-#define GENE_PIGMENT "appearance"
-#define ALL_GENES list(GENE_PRODUCTS,GENE_CONSUMPTION,GENE_ENVIRONMENT,GENE_RESISTANCE,GENE_VIGOUR,GENE_PIGMENT)
+#define GENE_FRUIT "fruit"
+#define GENE_SPECIAL "special"
+
+#define ALL_GENES list(GENE_BIOCHEMISTRY,GENE_HARDINESS,GENE_ENVIRONMENT,GENE_METABOLISM,GENE_STRUCTURE,GENE_DIET,GENE_PIGMENT,GENE_OUTPUT,GENE_ATMOSPHERE,GENE_VIGOUR,GENE_FRUIT,GENE_SPECIAL)
 
 //Definitions for traits (individual descriptors)
 #define TRAIT_CHEMS                1
