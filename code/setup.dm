@@ -291,33 +291,8 @@
 #define FAT             6
 #define HUSK            7
 #define NOCLONE         8
-
-// Extra powers:
-// FIXME: These are duplicated below, but it seems that these should be in the latter form. The flags duplicated are never used anywhere else.
-#define SHADOW        (1 << 10) // 25% - Shadow teleportation. (create in/out portals anywhere)
-#define SCREAM        (1 << 11) // 25% - Supersonic screaming.
-#define EXPLOSIVE     (1 << 12) // 15% - Exploding on-demand.
-#define REGENERATION  (1 << 13) // 30% - Superhuman regeneration.
-#define REPROCESSOR   (1 << 14) // 50% - Eat anything.
-#define SHAPESHIFTING (1 << 15) // 40% - Take on the appearance of anything.
-#define PHASING       (1 << 16) // 40% - Ability to phase through walls.
-#define SHIELD        (1 << 17) // 30% - Shielding from all projectile attacks.
-#define SHOCKWAVE     (1 << 18) // 25% - Attack a nearby tile and cause a massive shockwave, knocking most people on their asses.
-#define ELECTRICITY   (1 << 19) // 15% - Ability to shoot electric attacks.
-
-#define LASER         9  // Harm intent - click anywhere to shoot lasers from eyes.
-#define HEAL          10 // Healing people with hands.
-
-#define SHADOW        11 // 25% - Shadow teleportation. (create in/out portals anywhere)
-#define SCREAM        12 // 25% - Supersonic screaming.
-#define EXPLOSIVE     13 // 15% - Sxploding on-demand.
-#define REGENERATION  14 // 30% - Superhuman regeneration.
-#define REPROCESSOR   15 // 50% - Eat anything.
-#define SHAPESHIFTING 16 // 40% - Take on the appearance of anything.
-#define PHASING       17 // 40% - Ability to phase through walls.
-#define SHIELD        18 // 30% - Shielding from all projectile attacks.
-#define SHOCKWAVE     19 // 25% - Attack a nearby tile and cause a massive shockwave, knocking most people on their asses.
-#define ELECTRICITY   20 // 15% - Ability to shoot electric attacks.
+#define LASER           9  // Harm intent - click anywhere to shoot lasers from eyes.
+#define HEAL            10 // Healing people with hands.
 
 #define SKELETON      29
 #define PLANT         30

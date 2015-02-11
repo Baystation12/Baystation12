@@ -196,7 +196,7 @@
 	slowdown = 1
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
-	var/obj/item/clothing/tie/holster/holster
+	var/obj/item/clothing/accessory/holster/holster
 
 /obj/item/clothing/suit/armor/tactical/New()
 	..()
@@ -216,12 +216,11 @@
 	if(!holster.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
-			usr << "\blue You need your gun equiped to holster it."
+			usr << "<span class='warning'>You need your gun equiped to holster it.</span>"
 			return
 		holster.holster(W, usr)
 	else
 		holster.unholster(usr)
-
 
 //Non-hardsuit ERT armor.
 /obj/item/clothing/suit/armor/vest/ert

@@ -108,7 +108,7 @@
 
 		user.remove_from_mob(C)
 		C.loc = src
-		loaded.Insert(C, 1) //add to the head of the list
+		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src]!</span>")
 		update_icon()
 		return

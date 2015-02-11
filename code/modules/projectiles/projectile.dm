@@ -236,10 +236,9 @@
 		return 1
 
 /obj/item/projectile/process()
-	if(kill_count < 1)
-		del(src)
-	kill_count--
 	spawn while(src)
+		if(kill_count-- < 1)
+			del(src)
 		if((!( current ) || loc == current))
 			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))

@@ -13,13 +13,13 @@
 /obj/structure/closet/crate/secure/loot/New()
 	..()
 	var/list/digits = list("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-	
+
 	code = ""
 	for(var/i = 0, i < codelen, i++)
 		var/dig = pick(digits)
 		code += dig
 		digits -= dig  // Player can enter codes with matching digits, but there are never matching digits in the answer
-	
+
 	var/loot = rand(1, 100)
 	switch(loot)
 		if(1 to 5) // Common things go, 5%
@@ -53,7 +53,7 @@
 		if(46 to 50)
 			new/obj/item/clothing/under/chameleon(src)
 			for(var/i = 0, i < 7, i++)
-				new/obj/item/clothing/tie/horrible(src)
+				new/obj/item/clothing/accessory/horrible(src)
 		if(51 to 52) // Uncommon, 2% each
 			new/obj/item/weapon/melee/classic_baton(src)
 		if(53 to 54)

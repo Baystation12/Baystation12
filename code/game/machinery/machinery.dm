@@ -28,6 +28,9 @@ Class Variables:
    component_parts (list)
       A list of component parts of machine used by frame based machines.
 
+   panel_open (num)
+      Whether the panel is open
+
    uid (num)
       Unique id of machine across all machines.
 
@@ -42,9 +45,6 @@ Class Variables:
          POWEROFF:4 -- tbd
          MAINT:8 -- machine is currently under going maintenance.
          EMPED:16 -- temporary broken by EMP pulse
-
-   manual (num)
-      Currently unused.
 
 Class Procs:
    New()                     'game/machinery/machine.dm'
@@ -104,13 +104,12 @@ Class Procs:
 		//2 = run auto, use active
 	var/idle_power_usage = 0
 	var/active_power_usage = 0
-	var/power_channel = EQUIP
-		//EQUIP,ENVIRON or LIGHT
-	var/list/component_parts = list() //list of all the parts used to build it, if made from certain kinds of frames.
+	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
+	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
-	var/manual = 0
-	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/panel_open = 0
 	var/global/gl_uid = 1
+	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -238,15 +237,15 @@ Class Procs:
 	gl_uid++
 
 /obj/machinery/proc/state(var/msg)
-  for(var/mob/O in hearers(src, null))
-    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+	for(var/mob/O in hearers(src, null))
+		O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
 
 /obj/machinery/proc/ping(text=null)
-  if (!text)
-    text = "\The [src] pings."
+	if (!text)
+		text = "\The [src] pings."
 
-  state(text, "blue")
-  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	state(text, "blue")
+	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())
@@ -266,6 +265,54 @@ Class Procs:
 		return 1
 	else
 		return 0
+
+/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+	if(!istype(C))
+		return 0
+	if(!panel_open)
+		return 0
+	. = dismantle()
+
+/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
+	if(!istype(S))
+		return 0
+	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	panel_open = !panel_open
+	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
+	update_icon()
+	return 1
+
+/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
+	if(!istype(R))
+		return 0
+	if(!component_parts)
+		return 0
+	if(panel_open)
+		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/P
+		for(var/obj/item/weapon/stock_parts/A in component_parts)
+			for(var/D in CB.req_components)
+				var/T = text2path(D)
+				if(ispath(A.type, T))
+					P = T
+					break
+			for(var/obj/item/weapon/stock_parts/B in R.contents)
+				if(istype(B, P) && istype(A, P))
+					if(B.rating > A.rating)
+						R.remove_from_storage(B, src)
+						R.handle_item_insertion(A, 1)
+						component_parts -= A
+						component_parts += B
+						B.loc = null
+						user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+						break
+			update_icon()
+			RefreshParts()
+	else
+		user << "<span class='notice'>Following parts detected in the machine:</span>"
+		for(var/var/obj/item/C in component_parts)
+			user << "<span class='notice'>    [C.name]</span>"
+	return 1
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)

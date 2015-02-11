@@ -1580,20 +1580,26 @@ datum
 		paint
 			name = "Paint"
 			id = "paint"
-			description = "This paint will stick to almost any object"
+			description = "This paint will stick to almost any object."
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
 
 			reaction_turf(var/turf/T, var/volume)
-				if(!istype(T) || istype(T, /turf/space))
-					return
-				T.color = color
+				..()
+				if(istype(T) && !istype(T, /turf/space))
+					T.color = color
 
 			reaction_obj(var/obj/O, var/volume)
 				..()
-				if(istype(O,/obj/item/weapon/light))
+				if(istype(O,/obj))
 					O.color = color
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				..()
+				if(istype(M,/mob) && !istype(M,/mob/dead))
+					//painting ghosts: not allowed
+					M.color = color
 
 
 //////////////////////////Poison stuff///////////////////////
@@ -2631,7 +2637,7 @@ datum
 			name = "Carrot juice"
 			id = "carrotjuice"
 			description = "It is just like a carrot but without crunching."
-			color = "#973800" // rgb: 151, 56, 0
+			color = "#FF8C00" // rgb: 255, 140, 0
 
 			glass_icon_state = "carrotjuice"
 			glass_name = "glass of carrot juice"
@@ -2701,7 +2707,7 @@ datum
 			name = "Watermelon Juice"
 			id = "watermelonjuice"
 			description = "Delicious juice made from watermelon."
-			color = "#863333" // rgb: 134, 51, 51
+			color = "#B83333" // rgb: 184, 51, 51
 
 			glass_icon_state = "glass_red"
 			glass_name = "glass of watermelon juice"
@@ -2711,7 +2717,7 @@ datum
 			name = "Lemon Juice"
 			id = "lemonjuice"
 			description = "This juice is VERY sour."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#AFAF00" // rgb: 175, 175, 0
 
 			glass_icon_state = "lemonjuice"
 			glass_name = "glass of lemon juice"
@@ -2721,7 +2727,7 @@ datum
 			name = "Banana Juice"
 			id = "banana"
 			description = "The raw essence of a banana."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#C3AF00" // rgb: 195, 175, 0
 
 			glass_icon_state = "banana"
 			glass_name = "glass of banana juice"

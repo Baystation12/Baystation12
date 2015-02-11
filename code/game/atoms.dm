@@ -409,6 +409,7 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/clean_blood()
+	src.color = initial(src.color) //paint
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		del(blood_DNA)
