@@ -698,6 +698,23 @@
 		reagents.add_reagent("protein", 6)
 		bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket
+	name = "\improper Sin-pocket"
+	desc = "The food of choice for the veteran. Do <B>NOT</B> overconsume."
+	filling_color = "#6D6D00"
+	heated_reagents = list("doctorsdelight" = 5, "hyperzine" = 5, "synaptizine" = 1)
+	var/has_been_heated = 0
+
+/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
+	if(has_been_heated)
+		user << "<span class='notice'>The heating chemicals have already been spent.</span>"
+		return
+	has_been_heated = 1
+	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
+	spawn(200)
+		user << "You think \the [src] is ready to eat about now."
+		heat()
+
 /obj/item/weapon/reagent_containers/food/snacks/donkpocket
 	name = "Donk-pocket"
 	desc = "The food of choice for the seasoned traitor."
@@ -710,12 +727,22 @@
 		reagents.add_reagent("protein", 2)
 
 	var/warm = 0
-	proc/cooltime() //Not working, derp?
+	var/list/heated_reagents = list("tricordrazine" = 5)
+	proc/heat()
+		warm = 1
+		for(var/reagent in heated_reagents)
+			reagents.add_reagent(reagent, heated_reagents[reagent])
+		bitesize = 6
+		name = "Warm " + name
+		cooltime()
+
+	proc/cooltime()
 		if (src.warm)
-			spawn( 4200 )
+			spawn(4200)
 				src.warm = 0
-				src.reagents.del_reagent("tricordrazine")
-				src.name = "donk-pocket"
+				for(var/reagent in heated_reagents)
+					src.reagents.del_reagent(reagent)
+				src.name = initial(name)
 		return
 
 /obj/item/weapon/reagent_containers/food/snacks/brainburger

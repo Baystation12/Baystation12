@@ -98,23 +98,43 @@
 	matter = list("metal" = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
+/obj/item/weapon/cane/concealed
+	var/atom/movable/concealed_blade
+
+/obj/item/weapon/cane/concealed/New(var/blade)
+	..()
+	if(!isturf(blade))
+		concealed_blade = blade
+	else
+		concealed_blade = new/obj/item/weapon/kitchenknife/concealed(src)
+	loc = blade
+
 /obj/item/weapon/cane/concealed/attack_self(mob/user)
     user.visible_message("<span class='warning'>[user] has unsheathed a blade from \his [src]!</span>", "You unsheathe the blade from \the [src].")
-    var/blade = new/obj/item/weapon/kitchenknife/concealed
+    // Calling drop/put in hands to properly call item drop/pickup procs
     user.drop_from_inventory(src)
-    user.put_in_hands(blade)
-    del(src)
+    user.put_in_hands(concealed_blade)
+    loc = concealed_blade
 
 /obj/item/weapon/kitchenknife/concealed
 	name = "cane blade"
 	desc = "A now less than concealed cane blade."
+	var/atom/movable/container
+
+/obj/item/weapon/kitchenknife/concealed/New(var/container)
+	..()
+	if(!isturf(container))
+		src.container = container
+	else
+		container = new/obj/item/weapon/cane/concealed(src)
+	loc = container
 
 /obj/item/weapon/kitchenknife/concealed/attack_self(mob/user)
-    var/cane = new/obj/item/weapon/cane/concealed
+    user.visible_message("<span class='warning'>[user] has sheathed a blade into \his [container]!</span>", "You sheathe the blade into \the [container].")
+    // Calling drop/put in hands to properly call item drop/pickup procs
     user.drop_from_inventory(src)
-    user.put_in_hands(cane)
-    del(src)
-    user.visible_message("<span class='warning'>[user] has sheathed a blade into \his [cane]!</span>", "You sheathe the blade into \the [cane].")
+    user.put_in_hands(container)
+    loc = container
 
 /obj/item/weapon/disk
 	name = "disk"
