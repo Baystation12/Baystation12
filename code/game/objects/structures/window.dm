@@ -100,7 +100,7 @@
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
 
 	//Tasers and the like should not damage windows.
-	if(Proj.damage_type == HALLOSS)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
 	..()

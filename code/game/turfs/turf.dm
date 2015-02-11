@@ -54,18 +54,6 @@
 		step(user.pulling, get_dir(user.pulling.loc, src))
 	return 1
 
-/turf/bullet_act(var/obj/item/projectile/Proj)
-	if(istype(Proj ,/obj/item/projectile/beam/pulse))
-		src.ex_act(2)
-	..()
-	return 0
-
-/turf/bullet_act(var/obj/item/projectile/Proj)
-	if(istype(Proj ,/obj/item/projectile/bullet/gyro))
-		explosion(src, -1, 0, 2)
-	..()
-	return 0
-
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
 		usr << "\red Movement is admin-disabled." //This is to identify lag problems

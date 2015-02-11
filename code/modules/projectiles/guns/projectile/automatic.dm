@@ -3,7 +3,7 @@
 	desc = "A lightweight, fast firing gun. Uses 9mm rounds."
 	icon_state = "saber"	//ugly
 	w_class = 3.0
-	max_shells = 18
+	max_shells = 22
 	caliber = "9mm"
 	origin_tech = "combat=4;materials=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
@@ -14,6 +14,9 @@
 	isHandgun()
 		return 0
 
+/obj/item/weapon/gun/projectile/automatic/test
+	name = "test gun"
+	ammo_type = "/obj/item/ammo_casing/a145"
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
@@ -40,15 +43,8 @@
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/a12mm"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
-	load_method = 2
-
-
-	New()
-		..()
-		empty_mag = new /obj/item/ammo_magazine/a12mm/empty(src)
-		update_icon()
-		return
-
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/a12mm/empty
 
 	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 		..()
@@ -80,7 +76,7 @@
 	origin_tech = "combat=5;materials=1;syndicate=2"
 	ammo_type = "/obj/item/ammo_casing/a762"
 	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
-	load_method = 2
+	load_method = MAGAZINE
 	var/cover_open = 0
 	var/mag_inserted = 1
 

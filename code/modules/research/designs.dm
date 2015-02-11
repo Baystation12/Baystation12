@@ -760,6 +760,14 @@ datum/design/item/stock_part/AssembleDesignDesc()
 	if(!desc)
 		desc = "A stock part used in the construction of various devices."
 
+/datum/design/item/stock_part/RPED
+	name = "Rapid Part Exchange Device"
+	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
+	id = "rped"
+	req_tech = list("engineering" = 3, "materials" = 3)
+	materials = list("$metal" = 15000, "$glass" = 5000)
+	build_path = /obj/item/weapon/storage/part_replacer
+
 datum/design/item/stock_part/basic_capacitor
 	build_type = PROTOLATHE | AUTOLATHE
 	id = "basic_capacitor"
@@ -970,6 +978,18 @@ datum/design/circuit/secure_airlock
 	id = "securedoor"
 	req_tech = list("programming" = 3)
 	build_path = /obj/item/weapon/airlock_electronics/secure
+
+datum/design/circuit/biogenerator
+	name = "biogenerator"
+	id = "biogenerator"
+	req_tech = list("programming" = 2)
+	build_path = /obj/item/weapon/circuitboard/biogenerator
+
+datum/design/circuit/recharge_station
+	name = "cyborg recharge station"
+	id = "recharge_station"
+	req_tech = list("programming" = 3, "engineering" = 2)
+	build_path = /obj/item/weapon/circuitboard/recharge_station
 
 /////////////////////////////////////////
 ////////Power Stuff Circuitboards////////

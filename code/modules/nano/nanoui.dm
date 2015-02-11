@@ -142,6 +142,12 @@ nanoui is used to open and update nano browser uis
 	Procs called by update_status()
 */
 
+/mob/living/silicon/pai/can_interact_with_interface(src_object)
+	if(src_object == src && !stat)
+		return STATUS_INTERACTIVE
+	else
+		return ..()
+
 /mob/proc/can_interact_with_interface(var/src_object)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 

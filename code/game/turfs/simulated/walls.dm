@@ -6,8 +6,7 @@
 	var/rotting = 0
 
 	var/damage = 0
-	var/damage_cap = 100 //Wall will break down to girders if damage reaches this point
-	var/armor = 0.5 // Damage is multiplied by this
+	var/damage_cap = 150 //Wall will break down to girders if damage reaches this point
 
 	var/damage_overlay
 	var/global/damage_overlays[8]
@@ -30,7 +29,7 @@
 		return
 
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(Proj.damage, 100) * armor
+	var/damage = min(Proj.damage, 100)
 
 	take_damage(damage)
 	return
@@ -39,12 +38,12 @@
 	..()
 	if(ismob(AM))
 		return
-	
+
 	var/tforce = AM:throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
-	
-	take_damage(tforce * armor)
+
+	take_damage(tforce)
 
 /turf/simulated/wall/Del()
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
@@ -475,7 +474,7 @@
 
 	else if(istype(W,/obj/item/weapon/rcd)) //I bitterly resent having to write this. ~Z
 		return
-	
+
 	else if(istype(W, /obj/item/weapon/reagent_containers))
 		return // They tend to have meaningful afterattack - let them apply it without destroying a rotting wall
 

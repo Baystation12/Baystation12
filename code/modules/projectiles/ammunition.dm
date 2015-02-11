@@ -7,14 +7,14 @@
 	slot_flags = SLOT_BELT
 	throwforce = 1
 	w_class = 1.0
-	var/caliber = ""							//Which kind of guns it can be loaded into
-	var/projectile_type = ""//The bullet type to create when New() is called
-	var/obj/item/projectile/BB = null 			//The loaded bullet
+	var/caliber = ""					//Which kind of guns it can be loaded into
+	var/projectile_type					//The bullet type to create when New() is called
+	var/obj/item/projectile/BB = null	//The loaded bullet
 
 
 	New()
 		..()
-		if(projectile_type)
+		if(ispath(projectile_type))
 			BB = new projectile_type(src)
 		pixel_x = rand(-10.0, 10)
 		pixel_y = rand(-10.0, 10)
