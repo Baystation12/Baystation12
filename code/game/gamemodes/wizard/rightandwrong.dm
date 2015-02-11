@@ -26,7 +26,7 @@
 			if("revolver")
 				new /obj/item/weapon/gun/projectile(get_turf(H))
 			if("detective")
-				new /obj/item/weapon/gun/projectile/detective(get_turf(H))
+				new /obj/item/weapon/gun/projectile/revolver/detective(get_turf(H))
 			if("smg")
 				new /obj/item/weapon/gun/projectile/automatic/c20r(get_turf(H))
 			if("nuclear")

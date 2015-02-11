@@ -9,8 +9,7 @@
 	origin_tech = "combat=4;materials=2"
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c9mm
-	automatic = 1
-
+	multi_aim = 1
 	fire_delay = 0
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
@@ -23,7 +22,6 @@
 	caliber = ".45"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = /obj/item/ammo_casing/c45
-
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
@@ -39,10 +37,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a12mm
 	auto_eject = 1
-
-/obj/item/weapon/gun/projectile/automatic/c20r/eject_magazine(mob/user)
-	..()
-	playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()

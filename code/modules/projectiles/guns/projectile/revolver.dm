@@ -4,8 +4,7 @@
 	icon_state = "revolver"
 	caliber = "357"
 	origin_tech = "combat=2;materials=2"
-	
-	eject_casings = 0
+	handle_casings = CYCLE_CASINGS
 	max_shells = 7
 	ammo_type = /obj/item/ammo_casing/a357
 
@@ -15,26 +14,23 @@
 	icon_state = "mateba"
 	origin_tech = "combat=2;materials=2"
 
-/obj/item/weapon/gun/projectile/detective
+/obj/item/weapon/gun/projectile/revolver/detective
 	name = "revolver"
 	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
 	icon_state = "detective"
 	max_shells = 6
-	eject_casings = 0
 	caliber = "38"
 	origin_tech = "combat=2;materials=2"
 	ammo_type = /obj/item/ammo_casing/c38
 
 	special_check(var/mob/living/carbon/human/M)
-		if(caliber == initial(caliber))
-			return 1
-		if(prob(70 - (loaded.len * 10)))	//minimum probability of 10, maximum of 60
+		if(caliber == initial(caliber) && prob(70 - (loaded.len * 10)))	//minimum probability of 10, maximum of 60
 			M << "<span class='danger'>[src] blows up in your face.</span>"
 			M.take_organ_damage(0,20)
 			M.drop_item()
 			del(src)
 			return 0
-		return 1
+		return ..()
 
 	verb/rename_gun()
 		set name = "Name Gun"
@@ -86,28 +82,9 @@
 					desc = initial(desc)
 					user << "<span class='warning'>You remove the modifications on [src]! Now it will fire .38 rounds.</span>"
 
-
-/obj/item/weapon/gun/projectile/detective/semiauto
-	name = "\improper Colt M1911"
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
-	icon_state = "colt"
-	caliber = ".45"
-	eject_casings = 1
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/c45m/rubber
-
-/obj/item/weapon/gun/projectile/detective/semiauto/flash
-	name = "\improper Colt M1911 signal pistol"
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 signal flash rounds."
-	magazine_type = /obj/item/ammo_magazine/c45m/flash
-
-/obj/item/weapon/gun/projectile/detective/semiauto/colt
-	desc = "A cheap Martian knock-off of a Colt M1911."
-	magazine_type = /obj/item/ammo_magazine/c45m
-
+/*
 // A gun to play Russian Roulette!
 // You can spin the chamber to randomize the position of the bullet.
-/*
 /obj/item/weapon/gun/projectile/russian
 	name = "\improper Russian revolver"
 	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in it's chamber for a bullet."

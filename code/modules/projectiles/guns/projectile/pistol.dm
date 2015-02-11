@@ -1,3 +1,21 @@
+/obj/item/weapon/gun/projectile/detective
+	name = "\improper Colt M1911"
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
+	icon_state = "colt"
+	caliber = ".45"
+	origin_tech = "combat=2;materials=2"
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c45m/rubber
+
+/obj/item/weapon/gun/projectile/detective/flash
+	name = "\improper Colt M1911 signal pistol"
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 signal flash rounds."
+	magazine_type = /obj/item/ammo_magazine/c45m/flash
+
+/obj/item/weapon/gun/projectile/detective/colt
+	desc = "A cheap Martian knock-off of a Colt M1911."
+	magazine_type = /obj/item/ammo_magazine/c45m
+
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
@@ -19,10 +37,6 @@
 	magazine_type = /obj/item/ammo_magazine/a50
 	auto_eject = 1
 
-/obj/item/weapon/gun/projectile/deagle/eject_magazine(mob/user)
-	..()
-	playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
@@ -32,6 +46,7 @@
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 
 
@@ -47,10 +62,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a75
 	auto_eject = 1
-
-/obj/item/weapon/gun/projectile/gyropistol/eject_magazine(mob/user)
-	..()
-	playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 /obj/item/weapon/gun/projectile/gyropistol/update_icon()
 	..()

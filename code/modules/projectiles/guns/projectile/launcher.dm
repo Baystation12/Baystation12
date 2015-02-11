@@ -7,78 +7,29 @@
 	slot_flags = SLOT_BACK
 
 	var/release_force = 0
-	var/fire_sound_text = "a launcher firing"
-
-//Check if we're drawing and if the bow is loaded.
-/obj/item/weapon/gun/launcher/load_into_chamber()
-	return (!isnull(in_chamber))
-
-//Launchers are mechanical, no other impact.
-/obj/item/weapon/gun/launcher/emp_act(severity)
-	return
+	var/throw_distance = 10
+	fire_sound_text = "a launcher firing"
 
 //This normally uses a proc on projectiles and our ammo is not strictly speaking a projectile.
 /obj/item/weapon/gun/launcher/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
-	return
+	return 1
 
 //Override this to avoid a runtime with suicide handling.
-/obj/item/weapon/gun/launcher/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
-	if (M == user && user.zone_sel.selecting == "mouth")
-		user << "\red Shooting yourself with \a [src] is pretty tricky. You can't seem to manage it."
-		return
-	..()
+/obj/item/weapon/gun/launcher/handle_suicide(mob/living/user)
+	user << "\red Shooting yourself with \a [src] is pretty tricky. You can't seem to manage it."
+	return
 
-/obj/item/weapon/gun/launcher/proc/update_release_force()
+/obj/item/weapon/gun/launcher/proc/update_release_force(obj/item/projectile)
 	return 0
 
-/obj/item/weapon/gun/launcher/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
-
-	if (!user.IsAdvancedToolUser())
-		return 0
-
-	add_fingerprint(user)
-
-	//Make sure target turfs both exist.
-	var/turf/curloc = get_turf(user)
-	var/turf/targloc = get_turf(target)
-	if (!istype(targloc) || !istype(curloc))
-		return 0
-
-	if(!special_check(user))
-		return 0
-
-	if (!ready_to_fire())
-		if (world.time % 3) //to prevent spam
-			user << "<span class='warning'>[src] is not ready to fire again!"
-		return 0
-
-	if(!load_into_chamber()) //CHECK
-		return click_empty(user)
-
-	if(!in_chamber)
-		return 0
-
-	update_release_force()
-
-	playsound(user, fire_sound, 50, 1)
-	user.visible_message("<span class='warning'>[user] fires [src][reflex ? " by reflex":""]!</span>", \
-	"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>", \
-	"You hear [fire_sound_text]!")
-
-	in_chamber.loc = get_turf(user)
-	in_chamber.throw_at(target,10,release_force)
-
-	sleep(1)
-
-	in_chamber = null
-
-	update_icon()
-
-	if(user.hand)
-		user.update_inv_l_hand()
-	else
-		user.update_inv_r_hand()
-
+/obj/item/weapon/gun/launcher/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
+	if(!istype(projectile, /obj/item)) return 0
+	
+	var/obj/item/I = projectile
+	
+	update_release_force(I)
+	I.loc = get_turf(user)
+	I.throw_at(target, throw_distance, release_force, user)
 	return 1
 
 /obj/item/weapon/gun/launcher/attack_self(mob/living/user as mob)

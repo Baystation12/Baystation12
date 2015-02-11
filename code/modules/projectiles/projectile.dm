@@ -69,16 +69,16 @@
 /obj/item/projectile/proc/on_penetrate(var/atom/A)
 	return 1
 
-/obj/item/projectile/proc/check_fire(var/mob/living/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
+/obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
 	if(!istype(target) || !istype(user))
 		return 0
-	var/obj/item/projectile/test/in_chamber = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
-	in_chamber.target = target
-	in_chamber.flags = flags //Set the flags...
-	in_chamber.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	in_chamber.firer = user
-	var/output = in_chamber.process() //Test it!
-	del(in_chamber) //No need for it anymore
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	trace.target = target
+	trace.flags = flags //Set the flags...
+	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
+	trace.firer = user
+	var/output = trace.process() //Test it!
+	del(trace) //No need for it anymore
 	return output //Send it back to the gun!
 
 //sets the click point of the projectile using mouse input params
@@ -141,7 +141,7 @@
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
 		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
-		if (daddy.target && original in daddy.target) //As opposed to no-delay pew pew
+		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
 			miss_modifier += -30
 
 	//roll to-hit

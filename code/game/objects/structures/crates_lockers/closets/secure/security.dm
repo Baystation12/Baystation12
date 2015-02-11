@@ -261,7 +261,7 @@
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/taperoll/police(src)
-		new /obj/item/weapon/gun/projectile/detective/semiauto(src)
+		new /obj/item/weapon/gun/projectile/detective(src)
 		new /obj/item/clothing/accessory/holster/armpit(src)
 		return
 

@@ -12,40 +12,35 @@
 	origin_tech = "combat=4;materials=2"
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	handle_casings = HOLD_CASINGS
 	var/recentpump = 0 // to prevent spammage
-	var/pumped = 0
-	var/obj/item/ammo_casing/current_shell = null
 
-/obj/item/weapon/gun/projectile/shotgun/pump/load_into_chamber()
-	if(in_chamber)
-		return 1
-	return 0
+/obj/item/weapon/gun/projectile/shotgun/pump/can_fire()
+	return (chambered && chambered.BB)
+
+/obj/item/weapon/gun/projectile/shotgun/pump/get_next_projectile()
+	if(chambered)
+		return chambered.BB
+	return null
 
 /obj/item/weapon/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
 	if(world.time >= recentpump + 10)
 		pump(user)
 		recentpump = world.time
 
-/obj/item/weapon/gun/projectile/shotgun/pump/getAmmo()
-	. = ..()
-	if(current_shell) .++
-	
 /obj/item/weapon/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
 	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
-	pumped = 0
-	if(current_shell)//We have a shell in the chamber
-		current_shell.loc = get_turf(src)//Eject casing
-		current_shell = null
-		if(in_chamber)
-			in_chamber = null
-	if(!loaded.len)	return 0
-	var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-	loaded -= AC //Remove casing from loaded list.
-	current_shell = AC
-	if(AC.BB)
-		in_chamber = AC.BB //Load projectile into chamber.
-	update_icon()	//I.E. fix the desc
-	return 1
+	
+	if(chambered)//We have a shell in the chamber
+		chambered.loc = get_turf(src)//Eject casing
+		chambered = null
+	
+	if(loaded.len)
+		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
+		loaded -= AC //Remove casing from loaded list.
+		chambered = AC
+	
+	update_icon()
 
 /obj/item/weapon/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
@@ -63,7 +58,7 @@
 	//SPEEDLOADER because rapid unloading.
 	//In principle someone could make a speedloader for it, so it makes sense.
 	load_method = SINGLE_CASING|SPEEDLOADER
-	eject_casings = 0
+	handle_casings = CYCLE_CASINGS
 	max_shells = 2
 	w_class = 4
 	force = 10
@@ -88,7 +83,7 @@
 			w_class = 3
 			item_state = "gun"
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
-			slot_flags |= SLOT_BELT|SLOT_HOLSTER //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally), or in a holster, why not.
+			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
 			name = "sawn-off shotgun"
 			desc = "Omar's coming!"
 			user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"
