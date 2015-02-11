@@ -114,6 +114,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.anchored = 1//So space wind cannot drag it.
 	hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
 	hologram.SetLuminosity(2)	//hologram lighting
+	hologram.color = color //painted holopad gives coloured holograms
 	SetLuminosity(2)			//pad lighting
 	icon_state = "holopad1"
 	A.holo = src

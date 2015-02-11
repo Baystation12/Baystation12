@@ -15,7 +15,7 @@
 		if(I.matter && !recipe.resources) //This can be overidden in the datums.
 			recipe.resources = list()
 			for(var/material in I.matter)
-				recipe.resources[material] = round(I.matter[material]*1.25) // More expensive to produce than they are to recycle.
+				recipe.resources[material] = I.matter[material]*1.25 // More expensive to produce than they are to recycle.
 			del(I)
 
 /datum/autolathe/recipe

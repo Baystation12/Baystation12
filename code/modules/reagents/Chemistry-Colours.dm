@@ -8,6 +8,7 @@
 	var/list/greencolor = new /list(contents)
 	var/list/bluecolor = new /list(contents)
 	var/i
+
 	//fill the list of weights
 	for(i=1; i<=contents; i++)
 		var/datum/reagent/re = reagent_list[i]
@@ -15,6 +16,7 @@
 		if(istype(re, /datum/reagent/paint))
 			reagentweight *= 20 //Paint colours a mixture twenty times as much
 		weight[i] = reagentweight
+
 
 	//fill the lists of colours
 	for(i=1; i<=contents; i++)

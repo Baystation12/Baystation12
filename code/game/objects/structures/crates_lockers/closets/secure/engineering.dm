@@ -16,9 +16,9 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/blueprints(src)
 		new /obj/item/clothing/under/rank/chief_engineer(src)
 		new /obj/item/clothing/head/hardhat/white(src)
@@ -109,9 +109,9 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/weapon/storage/toolbox/mechanical(src)
 		new /obj/item/device/radio/headset/headset_eng(src)
 		new /obj/item/clothing/suit/storage/hazardvest(src)
@@ -138,9 +138,9 @@
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
 		if (prob(70))
-			new /obj/item/clothing/tie/storage/brown_vest(src)
+			new /obj/item/clothing/accessory/storage/brown_vest(src)
 		else
-			new /obj/item/clothing/tie/storage/webbing(src)
+			new /obj/item/clothing/accessory/storage/webbing(src)
 		new /obj/item/clothing/suit/fire/firefighter(src)
 		new /obj/item/device/flashlight(src)
 		new /obj/item/weapon/extinguisher(src)
