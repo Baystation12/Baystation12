@@ -1,6 +1,6 @@
 /obj/item/device/spy_bug
-	name = "tiny device"
-	desc = "It looks like a tiny camera, microphone, and transmission device in a happy union. Also mass-fabricated."
+	name = "bug"
+	desc = ""	// Nothing to see here
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "eshield0"
 	item_state = "nothing"
@@ -23,8 +23,21 @@
 	radio = new(src)
 	camera = new(src)
 
+/obj/item/device/spy_bug/examine(mob/user)
+	. = ..(user, 0)
+	if(.)
+		user << "It's a tiny camera, microphone, and transmission device in a happy union."
+		user << "Needs to be both configured and brought in contact with monitor device to be fully functional."
+
 /obj/item/device/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
+
+/obj/item/device/spy_bug/attackby(obj/W as obj, mob/living/user as mob)
+	if(istype(W, /obj/item/device/spy_monitor))
+		var/obj/item/device/spy_monitor/SM = W
+		SM.pair(src, user)
+	else
+		..()
 
 /obj/item/device/spy_bug/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
 	radio.hear_talk(M, msg, speaking)
@@ -50,8 +63,9 @@
 	radio = new(src)
 
 /obj/item/device/spy_monitor/examine(mob/user)
-	if(..(user, 1))
-		user << "The time '12:00' is blinking in the corner of the screen. \The [src] looks very cheaply made."
+	. = ..(user, 1)
+	if(.)
+		user << "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made."
 
 /obj/item/device/spy_monitor/attack_self(mob/user)
 	if(operating)
@@ -62,15 +76,17 @@
 
 /obj/item/device/spy_monitor/attackby(obj/W as obj, mob/living/user as mob)
 	if(istype(W, /obj/item/device/spy_bug))
-		var/obj/item/device/spy_bug/SB = W
-		if(SB.camera in cameras)
-			user << "<span class='notice'>\The [SB] has been unpaired from \the [src].</span>"
-			cameras -= SB.camera
-		else
-			user << "<span class='notice'>\The [SB] has been paired with \the [src].</span>"
-			cameras += SB.camera
+		pair(W, user)
 	else
 		return ..()
+
+/obj/item/device/spy_monitor/proc/pair(var/obj/item/device/spy_bug/SB, var/mob/living/user)
+	if(SB.camera in cameras)
+		user << "<span class='notice'>\The [SB] has been unpaired from \the [src].</span>"
+		cameras -= SB.camera
+	else
+		user << "<span class='notice'>\The [SB] has been paired with \the [src].</span>"
+		cameras += SB.camera
 
 /obj/item/device/spy_monitor/proc/view_cameras(mob/user)
 	if(!can_use_cam(user))
