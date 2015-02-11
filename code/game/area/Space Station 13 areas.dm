@@ -633,7 +633,7 @@ var/list/ghostteleportlocs = list()
 /area/prison/cell_block/C
 	name = "Prison Cell Block C"
 	icon_state = "brig"
-	
+
 ////////////////////
 //SPACE STATION 13//
 ////////////////////
@@ -1070,7 +1070,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Engineering"
 	icon_state = "engineering"
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
-	
+
 /area/engineering/atmos
  	name = "\improper Atmospherics"
  	icon_state = "atmos"
@@ -1082,7 +1082,7 @@ var/list/ghostteleportlocs = list()
 /area/engineering/atmos/storage
 	name = "\improper Atmospherics Storage"
 	icon_state = "atmos_storage"
-	
+
 /area/engineering/drone_fabrication
 	name = "\improper Drone Fabrication"
 	icon_state = "drone_fab"
@@ -1130,7 +1130,7 @@ var/list/ghostteleportlocs = list()
 /area/engineering/locker_room
 	name = "\improper Engineering Locker Room"
 	icon_state = "engineering_locker"
-	
+
 /area/engineering/workshop
 	name = "\improper Engineering Workshop"
 	icon_state = "engineering_workshop"
@@ -1753,6 +1753,11 @@ var/list/ghostteleportlocs = list()
 /area/solar/constructionsite
 	name = "\improper Construction Site Solars"
 	icon_state = "aft"
+
+/area/constructionsite/teleporter
+	name = "Construction Site Teleporter"
+	icon_state = "yellow"
+
 
 //area/constructionsite
 //	name = "\improper Construction Site Shuttle"
