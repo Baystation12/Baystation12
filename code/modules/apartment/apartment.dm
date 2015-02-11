@@ -715,6 +715,7 @@ area/shuttle/marina/elevator/groundfloor
 /var/const/access_e13 = 160
 /var/const/access_e14 = 161
 /var/const/access_e15 = 162
+/var/const/access_ship1 = 300
 
 /obj/item/weapon/card/id/apartment
 	name = "resident card"
@@ -752,8 +753,6 @@ area/shuttle/marina/elevator/groundfloor
 	access = list(access_a10)
 
 /obj/item/weapon/card/id/apartment/a11
-	name = "A-11 resident card"
-	registered_name = "Vasily Surov"
 	access = list(access_a11)
 
 /obj/item/weapon/card/id/apartment/a12
@@ -875,3 +874,8 @@ area/shuttle/marina/elevator/groundfloor
 
 /obj/item/weapon/card/id/apartment/e15
 	access = list(access_e15)
+	name = "A-11 resident card"
+	registered_name = "Vasily Surov"
+
+/obj/item/weapon/card/id/apartment/ship1
+	access = list(access_ship1)
