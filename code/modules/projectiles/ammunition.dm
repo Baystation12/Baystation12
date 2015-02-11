@@ -10,6 +10,7 @@
 	var/caliber = ""					//Which kind of guns it can be loaded into
 	var/projectile_type					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
+	var/spent_icon = null
 
 /obj/item/ammo_casing/New()
 	..()
@@ -18,6 +19,12 @@
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
 	set_dir(pick(cardinal))
+
+//removes the projectile from the ammo casing
+/obj/item/ammo_casing/proc/expend()
+	. = BB
+	BB = null
+	update_icon()
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
@@ -35,6 +42,10 @@
 		else
 			user << "\blue You inscribe \"[label_text]\" into \the [initial(BB.name)]."
 			BB.name = "[initial(BB.name)] (\"[label_text]\")"
+
+/obj/item/ammo_casing/update_icon()
+	if(spent_icon && !BB)
+		icon_state = spent_icon
 
 /obj/item/ammo_casing/examine(mob/user)
 	..()
@@ -62,7 +73,7 @@
 	throw_range = 10
 	
 	var/list/stored_ammo = list()
-	var/mag_type = SPEEDLOADER //ammo_magazines can only be used with compatible guns
+	var/mag_type = SPEEDLOADER //ammo_magazines can only be used with compatible guns. This is not a bitflag, the load_method var on guns is.
 	var/caliber = "357"
 	var/max_ammo = 7
 	

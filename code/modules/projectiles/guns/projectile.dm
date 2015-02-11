@@ -60,7 +60,7 @@
 /obj/item/weapon/gun/projectile/handle_post_fire()
 	..()
 	if(chambered)
-		chambered.BB = null
+		chambered.expend()
 		switch(handle_casings)
 			if(EJECT_CASINGS) //eject casing onto ground.
 				chambered.loc = get_turf(src)

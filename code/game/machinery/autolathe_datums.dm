@@ -294,6 +294,24 @@
 	hidden = 1
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/magazine_stetchkin
+	name = "ammunition (9mm)"
+	path = /obj/item/ammo_magazine/mc9mm
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_stetchkin_flash
+	name = "ammunition (9mm, flash)"
+	path = /obj/item/ammo_magazine/mc9mm/flash
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_c20r
+	name = "ammunition (12mm)"
+	path = /obj/item/ammo_magazine/a12mm
+	hidden = 1
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/shotgun
 	name = "ammunition (slug, shotgun)"
 	path = /obj/item/ammo_casing/shotgun
@@ -303,6 +321,12 @@
 /datum/autolathe/recipe/shotgun_pellet
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/pellet
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/stunshell
+	name = "ammunition (stun cartridge, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/stunshell
 	hidden = 1
 	category = "Arms and Ammunition"
 
