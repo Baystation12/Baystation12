@@ -666,40 +666,30 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 // called when cable_coil is clicked on a turf/simulated/floor
 /obj/item/stack/cable_coil/proc/turf_place(turf/simulated/floor/F, mob/user)
-	user << "Hmmm 0..."
 	if(!isturf(user.loc) && !(/obj/structure/lattice/catwalk in F))
 		user << "You can't lay a cable there!"
 		return
 
-	user << "Hmmm 1..."
 	if(get_amount() < 1) // Out of cable
 		user << "There is no cable left."
 		return
 
-	user << "Hmmm 2..."
 	if(get_dist(F,user) > 1) // Too far
 		user << "You can't lay cable at a place that far away."
 		return
 
-	user << "Hmmm 3..."
 	/*
 	if(F.intact && !(/obj/structure/lattice/catwalk in F))		// Ff floor is intact, complain
 		user << "You can't lay cable there unless the floor tiles are removed."
 		return
 	*/
 
-	user << "Hmmm 4..."
-
 	var/dirn
 
 	if(user.loc == F)
 		dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
-		user << "Hmmm 4.1..."
 	else
 		dirn = get_dir(F, user)
-		user << "Hmmm 4.2..."
-
-	user << "Hmmm 5..."
 
 	for(var/obj/structure/cable/LC in F)
 		if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
@@ -712,8 +702,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
 				user << "<span class='warning'>There's already a cable at that position.</span>"
 				return
-
-		user << "Placing cable..."
 
 		var/turf/simulated/floor/open/temp = F
 		var/obj/structure/cable/C = new(F)
@@ -749,8 +737,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
 				user << "There's already a cable at that position."
 				return
-
-		user << "Placing cable 2..."
 
 		var/obj/structure/cable/C = new(F)
 

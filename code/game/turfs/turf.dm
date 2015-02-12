@@ -202,7 +202,8 @@
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
+	var/obj/structure/lattice/catwalk/W = locate(/obj/structure/lattice/catwalk/, src)
+	if(L && !W)
 		del L
 
 //Creates a new turf

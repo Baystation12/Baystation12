@@ -100,6 +100,9 @@
 	var/turf/T = loc
 	for(var/obj/structure/cable/C in T)
 		C.Del()
+
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.ChangeTurf(/turf/space)
 	..()
 
 /obj/structure/lattice/catwalk/Destroy()
@@ -121,13 +124,8 @@
 	..()
 
 /obj/structure/lattice/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	user << "You look at your hand to make sure you have a cable..."
-	if(istype(C, /obj/item/stack/cable_coil))
-		user << "Finding place to put cable..."
-		var/obj/item/stack/cable_coil/coil = C
-		coil.turf_place(src, user)
-		return
-	..()
+	var/turf/Tsrc = get_turf(src)
+	Tsrc.attackby(C, user)
 
 /obj/structure/lattice/catwalk/updateOverlays()
 	overlays.Cut()

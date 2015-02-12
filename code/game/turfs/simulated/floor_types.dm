@@ -106,12 +106,14 @@
 
 /turf/simulated/floor/plating/airless/fakespace
 	icon = 'icons/turf/space.dmi'
-	icon_state = "16"
+	icon_state = ""
 	name = "space"
 	lighting_lumcount = 4
 
 	New()
 		..()
+		icon_state += rand( 1, 16 )
+		name = "space"
 
 /turf/simulated/floor/bluegrid
 	icon = 'icons/turf/floors.dmi'
