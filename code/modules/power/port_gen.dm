@@ -149,7 +149,7 @@
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	..(user)
 	user << "\The [src] appears to be producing [power_gen*power_output] W."
-	user << "There [sheets == 1 ? "is" : "are"] [sheets] sheet[sheets == 1 ? "" : "s"] left in the hopper."
+	user << "There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper."
 	if(IsBroken()) user << "<span class='warning'>\The [src] seems to have broken down.</span>"
 	if(overheating) user << "<span class='danger'>\The [src] is overheating!</span>"
 
@@ -263,7 +263,7 @@
 		if(amount < 1)
 			user << "\blue The [src.name] is full!"
 			return
-		user << "\blue You add [amount] sheet[amount == 1 ? "" : "s"] to the [src.name]."
+		user << "\blue You add [amount] sheet\s to the [src.name]."
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()
