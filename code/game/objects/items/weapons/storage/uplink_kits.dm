@@ -162,6 +162,9 @@
 	new /obj/item/device/spy_bug(src)
 	new /obj/item/device/spy_bug(src)
 	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_bug(src)
+	new /obj/item/device/spy_bug(src)
 	new /obj/item/device/spy_monitor(src)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
@@ -172,3 +175,45 @@
 	..()
 	new /obj/item/weapon/gun/projectile/pistol(src)
 	new /obj/item/weapon/silencer(src)
+
+/obj/item/weapon/storage/box/syndie_kit/cigarette
+	name = "cigarette kit"
+	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
+
+/obj/item/weapon/storage/box/syndie_kit/cigarette/New()
+	..()
+	var/obj/item/weapon/storage/fancy/cigarettes/pack
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	fill_cigarre_package(pack, list("aluminum" = 5, "potassium" = 5, "sulfur" = 5))
+	pack.desc += " 'F' has been scribbled on it."
+
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	fill_cigarre_package(pack, list("aluminum" = 5, "potassium" = 5, "sulfur" = 5))
+	pack.desc += " 'F' has been scribbled on it."
+
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	fill_cigarre_package(pack, list("potassium" = 5, "sugar" = 5, "phosphorus" = 5))
+	pack.desc += " 'S' has been scribbled on it."
+
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	fill_cigarre_package(pack, list("potassium" = 5, "sugar" = 5, "phosphorus" = 5))
+	pack.desc += " 'S' has been scribbled on it."
+
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	// Dylovene. Going with 1.5 rather than 1.6666666...
+	fill_cigarre_package(pack, list("potassium" = 1.5, "nitrogen" = 1.5, "silicon" = 1.5))
+	// Mindbreaker
+	fill_cigarre_package(pack, list("silicon" = 4.5, "hydrogen" = 4.5))
+
+	pack.desc += " 'MB' has been scribbled on it."
+
+	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
+	pack.reagents.add_reagent("tricordrazine", 15 * pack.storage_slots)
+	pack.desc += " 'T' has been scribbled on it."
+
+	new /obj/item/weapon/flame/lighter/zippo(src)
+
+/proc/fill_cigarre_package(var/obj/item/weapon/storage/fancy/cigarettes/C, var/list/reagents)
+	for(var/reagent in reagents)
+		C.reagents.add_reagent(reagent, reagents[reagent] * C.storage_slots)
+
