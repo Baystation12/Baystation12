@@ -34,7 +34,7 @@
 			user.client.remove_gun_icons()
 	return ..()
 
-//Removes lock fro mall targets
+//Removes lock from all targets
 /obj/item/weapon/gun/proc/stop_aim()
 	if(aim_targets)
 		for(var/mob/living/M in aim_targets)
@@ -272,6 +272,7 @@
 		screen -= usr.gun_run_icon
 
 /client/verb/ToggleGunMode()
+	set name = "Toggle Gun Mode"
 	set hidden = 1
 	gun_mode = !gun_mode
 	if(gun_mode)
