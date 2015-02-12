@@ -21,6 +21,7 @@
 	var/kitchen_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
+	var/has_mob_product
 
 /datum/seed/New()
 
@@ -506,40 +507,48 @@
 
 	// Splicing products has some detrimental effects on yield and lifespan.
 	// We handle this before we do the rest of the looping, as normal traits don't really include lists.
-	if(gene.genetype == GENE_BIOCHEMISTRY)
-		for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
-			if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
+	switch(gene.genetype)
+		if(GENE_BIOCHEMISTRY)
+			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
+				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-		if(!chems) chems = list()
+			if(!chems) chems = list()
 
-		var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
-		for(var/rid in gene_value)
+			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
+			for(var/rid in gene_value)
 
-			var/list/gene_chem = gene_value[rid]
+				var/list/gene_chem = gene_value[rid]
 
-			if(!chems[rid])
-				chems[rid] = gene_chem.Copy()
-				continue
+				if(!chems[rid])
+					chems[rid] = gene_chem.Copy()
+					continue
 
-			for(var/i=1;i<=gene_chem.len;i++)
+				for(var/i=1;i<=gene_chem.len;i++)
 
-				if(isnull(gene_chem[i])) gene_chem[i] = 0
+					if(isnull(gene_chem[i])) gene_chem[i] = 0
 
-				if(chems[rid][i])
-					chems[rid][i] = max(1,round((gene_chem[i] + chems[rid][i])/2))
-				else
-					chems[rid][i] = gene_chem[i]
+					if(chems[rid][i])
+						chems[rid][i] = max(1,round((gene_chem[i] + chems[rid][i])/2))
+					else
+						chems[rid][i] = gene_chem[i]
 
-		var/list/new_gasses = gene.values["[TRAIT_EXUDE_GASSES]"]
-		if(islist(new_gasses))
-			if(!exude_gasses) exude_gasses = list()
-			exude_gasses |= new_gasses
-			for(var/gas in exude_gasses)
-				exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
+			var/list/new_gasses = gene.values["[TRAIT_EXUDE_GASSES]"]
+			if(islist(new_gasses))
+				if(!exude_gasses) exude_gasses = list()
+				exude_gasses |= new_gasses
+				for(var/gas in exude_gasses)
+					exude_gasses[gas] = max(1,round(exude_gasses[gas]*0.8))
 
-	else if(gene.genetype == GENE_DIET)
-		var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
-		consume_gasses |= new_gasses
+			gene.values["[TRAIT_EXUDE_GASSES]"] = null
+			gene.values["[TRAIT_CHEMS]"] = null
+
+		if(GENE_DIET)
+			var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
+			consume_gasses |= new_gasses
+			gene.values["[TRAIT_CONSUME_GASSES]"] = null
+		if(GENE_METABOLISM)
+			has_mob_product = gene.values["mob_product"]
+			gene.values["mob_product"] = null
 
 	for(var/trait in gene.values)
 		set_trait(trait,gene.values["[trait]"])
@@ -568,6 +577,7 @@
 		if(GENE_HARDINESS)
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
 		if(GENE_METABOLISM)
+			P.values["mob_product"] = has_mob_product
 			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
@@ -626,7 +636,11 @@
 
 		currently_querying = list()
 		for(var/i = 0;i<total_yield;i++)
-			var/obj/item/product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+			var/obj/item/product
+			if(has_mob_product)
+				product = new has_mob_product(get_turf(user),name)
+			else
+				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				product.color = get_trait(TRAIT_PRODUCT_COLOUR)
 				if(istype(product,/obj/item/weapon/reagent_containers/food))
@@ -659,13 +673,13 @@
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
-	new_seed.name = "new line"
-	new_seed.uid = 0
-	new_seed.roundstart = 0
+	new_seed.name =            "new line"
+	new_seed.uid =              0
+	new_seed.roundstart =       0
 	new_seed.can_self_harvest = can_self_harvest
-	new_seed.kitchen_tag = kitchen_tag
-	new_seed.trash_type = trash_type
-
+	new_seed.kitchen_tag =      kitchen_tag
+	new_seed.trash_type =       trash_type
+	new_seed.has_mob_product =  has_mob_product
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
 	if(chems)          new_seed.chems = chems.Copy()
