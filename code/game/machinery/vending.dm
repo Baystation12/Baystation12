@@ -488,7 +488,11 @@
 
 			var/key = text2num(href_list["vend"])
 			var/datum/data/vending_product/R = product_records[key]
-
+			
+			// This should not happen unless the request from NanoUI was bad
+			if(!(R.category & src.categories))
+				return
+			
 			if(R.price <= 0)
 				src.vend(R, usr)
 			else
