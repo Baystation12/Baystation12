@@ -16,7 +16,7 @@
 */
 
 //Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
-//#define POWER_FACTOR 1.0
+#define POWER_FACTOR 1.0
 #define DECAY_FACTOR 700			//Affects how fast the supermatter power decays
 #define CRITICAL_TEMPERATURE 7000	//K
 #define CHARGING_FACTOR 0.05
