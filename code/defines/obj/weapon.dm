@@ -84,7 +84,6 @@
 	throw_speed = 4
 	throw_range = 5
 
-
 /obj/item/weapon/cane
 	name = "cane"
 	desc = "A cane used by a true gentlemen. Or a clown."
@@ -99,42 +98,44 @@
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
 /obj/item/weapon/cane/concealed
-	var/atom/movable/concealed_blade
+	var/concealed_blade
 
-/obj/item/weapon/cane/concealed/New(var/blade)
+/obj/item/weapon/cane/concealed/New()
 	..()
-	if(!isturf(blade))
-		concealed_blade = blade
-	else
-		concealed_blade = new/obj/item/weapon/kitchenknife/concealed(src)
-	loc = blade
+	concealed_blade = new/obj/item/weapon/butterfly/switchblade(src)
 
 /obj/item/weapon/cane/concealed/attack_self(mob/user)
-    user.visible_message("<span class='warning'>[user] has unsheathed a blade from \his [src]!</span>", "You unsheathe the blade from \the [src].")
-    // Calling drop/put in hands to properly call item drop/pickup procs
-    user.drop_from_inventory(src)
-    user.put_in_hands(concealed_blade)
-    loc = concealed_blade
-
-/obj/item/weapon/kitchenknife/concealed
-	name = "cane blade"
-	desc = "A now less than concealed cane blade."
-	var/atom/movable/container
-
-/obj/item/weapon/kitchenknife/concealed/New(var/container)
-	..()
-	if(!isturf(container))
-		src.container = container
+	if(concealed_blade)
+		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
+		// Calling drop/put in hands to properly call item drop/pickup procs
+		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		user.drop_from_inventory(src)
+		user.put_in_hands(concealed_blade)
+		user.put_in_hands(src)
+		concealed_blade = null
+		update_icon()
 	else
-		container = new/obj/item/weapon/cane/concealed(src)
-	loc = container
+		..()
 
-/obj/item/weapon/kitchenknife/concealed/attack_self(mob/user)
-    user.visible_message("<span class='warning'>[user] has sheathed a blade into \his [container]!</span>", "You sheathe the blade into \the [container].")
-    // Calling drop/put in hands to properly call item drop/pickup procs
-    user.drop_from_inventory(src)
-    user.put_in_hands(container)
-    loc = container
+/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/butterfly/W, var/mob/user)
+	if(!src.concealed_blade && istype(W))
+		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into \his [src]!</span>", "You sheathe \the [W] into \the [src].")
+		user.drop_from_inventory(W)
+		W.loc = src
+		src.concealed_blade = W
+		update_icon()
+	else
+		..()
+
+/obj/item/weapon/cane/concealed/update_icon()
+	if(concealed_blade)
+		name = initial(name)
+		icon_state = initial(icon_state)
+		item_state = initial(icon_state)
+	else
+		name = "cane shaft"
+		icon_state = "nullrod"
+		item_state = "foldcane"
 
 /obj/item/weapon/disk
 	name = "disk"

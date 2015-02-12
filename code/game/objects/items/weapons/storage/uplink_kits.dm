@@ -168,7 +168,7 @@
 	new /obj/item/device/spy_monitor(src)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
-	name = "Smooth operator"
+	name = "\improper Smooth operator"
 	desc = "9mm with silencer kit."
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm/New()
@@ -177,7 +177,7 @@
 	new /obj/item/weapon/silencer(src)
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette
-	name = "cigarette kit"
+	name = "\improper Tricky smokes"
 	desc = "Comes with the following brands of cigarettes, in this order: 2xFlash, 2xSmoke, 1xMindBreaker, 1xTricordrazine. Avoid mixing them up."
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette/New()

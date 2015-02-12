@@ -84,7 +84,7 @@
 		..()
 		if (empty) return
 		new /obj/item/weapon/reagent_containers/pill/dexalin( src )
-		new /obj/item/weapon/reagent_containers/pill/( src )
+		new /obj/item/weapon/reagent_containers/pill/dexalin( src )
 		new /obj/item/weapon/reagent_containers/pill/dexalin( src )
 		new /obj/item/weapon/reagent_containers/pill/dexalin( src )
 		new /obj/item/weapon/reagent_containers/hypospray/autoinjector( src )

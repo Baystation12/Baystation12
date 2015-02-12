@@ -105,10 +105,10 @@
 	spawn(0)
 		while(selected_camera && Adjacent(user))
 			var/turf/T = get_turf(selected_camera)
-			if(!T || T.z != user.z)
+			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()
 				user.reset_view(null)
-				user << "<span class='notice'>[selected_camera] out of range.</span>"
+				user << "<span class='notice'>[selected_camera] unavailable.</span>"
 				sleep(90)
 			else
 				user.set_machine(selected_camera)
