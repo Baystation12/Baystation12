@@ -1,8 +1,8 @@
-//Attempts to offload processing for the spreading plants from the MC.
+// Attempts to offload processing for the spreading plants from the MC.
 // Processes vines/spreading plants.
 
 #define PLANTS_PER_TICK 5
-#define PLANT_TICK_TIME 5
+#define PLANT_TICK_TIME 10
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
@@ -12,7 +12,7 @@
 
 	if(!holder)	return
 
-	if(!plant_controller.gene_tag_masks)
+	if(!plant_controller || !plant_controller.gene_tag_masks)
 		usr << "Gene masks not set."
 		return
 
@@ -22,13 +22,13 @@
 var/global/datum/controller/plants/plant_controller // Set in New().
 
 /datum/controller/plants
-	var/list/plants = list()                // All currently processing plants.
+	var/list/next_plants = list()           // All queued plants.
 	var/list/seeds = list()                 // All seed data stored here.
 	var/list/gene_tag_masks = list()        // Gene obfuscation for delicious trial and error goodness.
 	var/list/plant_icon_cache = list()      // Stores images of growth, fruits and seeds.
 	var/list/plant_sprites = list()         // List of all harvested product sprites.
 	var/list/plant_product_sprites = list() // List of all growth sprites plus number of growth stages.
-	var/processing = 0
+	var/processing = 0                      // Off/on.
 
 /datum/controller/plants/New()
 	if(plant_controller && plant_controller != src)
@@ -114,10 +114,13 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	processing = 1
 	spawn(0)
 		set background = 1
+		var/processed = 0
 		while(1)
 			if(!processing)
 				sleep(PLANT_TICK_TIME)
 			else
+				var/list/plants = next_plants
+				next_plants = list()
 				for(var/x=0;x<PLANTS_PER_TICK;x++)
 					if(!plants.len)
 						break
@@ -125,6 +128,10 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 					var/obj/effect/plant/plant = pick(plants)
 					plants -= plant
 					plant.process()
+					processed++
+				if(plants.len)
+					next_plants |= plants
+				sleep(PLANT_TICK_TIME - processed)
 
 /datum/controller/plants/proc/add_plant(var/obj/effect/plant/plant)
-	plants |= plant
+	next_plants |= plant

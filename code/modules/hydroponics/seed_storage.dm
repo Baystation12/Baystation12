@@ -81,7 +81,9 @@
 			dat += "<td>Nutri</td><td>Water</td>"
 		dat += "<td>Notes</td><td>Amount</td><td></td></tr>"
 		for (var/datum/seed_pile/S in piles)
-			var/datum/seed/seed = S.seed_type
+			var/datum/seed/seed = plant_controller.seeds[S.seed_type]
+			if(!seed)
+				continue
 			dat += "<tr>"
 			dat += "<td>[seed.seed_name]</td>"
 			dat += "<td>#[seed.uid]</td>"

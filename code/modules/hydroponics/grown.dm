@@ -2,9 +2,9 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown
 
 	name = "fruit"
-	//icon = 'icons/obj/harvest.dmi' //Todo convert to greyscale
 	icon = 'icons/obj/hydroponics_products.dmi'
-	desc = "The product of some kind of plant." //Todo store descs for retrieval.
+	icon_state = "blank"
+	desc = "The product of some kind of plant."
 
 	var/plantname
 	var/datum/seed/seed
@@ -37,8 +37,7 @@
 		return
 
 	name = "[seed.seed_name]"
-	icon_state = "[seed.get_trait(TRAIT_PRODUCT_ICON)]"
-	color = "[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
+	update_icon()
 
 	if(!seed.chems)
 		return
@@ -54,6 +53,26 @@
 
 	if(reagents.total_volume > 0)
 		bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
+	if(!seed || !plant_controller || !plant_controller.plant_icon_cache)
+		return
+	overlays.Cut()
+	var/image/plant_icon
+	var/icon_key = "fruit-[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"
+	if(plant_controller.plant_icon_cache[icon_key])
+		plant_icon = plant_controller.plant_icon_cache[icon_key]
+	else
+		plant_icon = image('icons/obj/hydroponics_products.dmi',"blank")
+		var/image/fruit_base = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-product")
+		fruit_base.color = "[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
+		plant_icon.overlays |= fruit_base
+		if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in icon_states('icons/obj/hydroponics_products.dmi'))
+			var/image/fruit_leaves = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
+			fruit_leaves.color = "[seed.get_trait(TRAIT_PLANT_COLOUR)]"
+			plant_icon.overlays |= fruit_leaves
+		plant_controller.plant_icon_cache[icon_key] = plant_icon
+	overlays |= plant_icon
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
 	if(seed && seed.get_trait(TRAIT_JUICY) == 2)
@@ -81,20 +100,36 @@
 	..()
 	if(seed) seed.thrown_at(src,hit_atom)
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(seed && seed.get_trait(TRAIT_PRODUCES_POWER) && istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
-		if(C.use(5))
-			//TODO: generalize this.
-			user << "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>"
-			var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(get_turf(user))
-			if(src.loc == user && !(user.l_hand && user.r_hand) && istype(user,/mob/living/carbon/human))
-				user.put_in_hands(pocell)
-			pocell.maxcharge = src.potency * 10
-			pocell.charge = pocell.maxcharge
+/obj/item/weapon/reagent_containers/food/snacks/grown/attackby(var/obj/item/weapon/W, var/mob/user)
+
+	if(seed)
+		if(seed.get_trait(TRAIT_PRODUCES_POWER) && istype(W, /obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/C = W
+			if(C.use(5))
+				//TODO: generalize this.
+				user << "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>"
+				var/obj/item/weapon/cell/potato/pocell = new /obj/item/weapon/cell/potato(get_turf(user))
+				if(src.loc == user && !(user.l_hand && user.r_hand) && istype(user,/mob/living/carbon/human))
+					user.put_in_hands(pocell)
+				pocell.maxcharge = src.potency * 10
+				pocell.charge = pocell.maxcharge
+				del(src)
+				return
+		else if(seed.get_trait(TRAIT_PRODUCT_ICON) == "mushroom7" && (istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy)))
+			user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
+			for(var/i=0,i<2,i++)
+				var/obj/item/stack/sheet/wood/NG = new (user.loc)
+				NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+				for (var/obj/item/stack/sheet/wood/G in user.loc)
+					if(G==NG)
+						continue
+					if(G.amount>=G.max_amount)
+						continue
+					G.attackby(NG, user)
+					user << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
 			del(src)
 			return
+	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack(var/mob/living/carbon/M, var/mob/user, var/def_zone)
 	if(user == M)
