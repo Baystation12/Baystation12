@@ -1412,19 +1412,19 @@
 /obj/item/weapon/holder/cat/fluff/bones/custom_item
 
 /obj/item/weapon/holder/cat/fluff/bones/custom_item/New()
-	if (!contents.len)
-		new/mob/living/simple_animal/cat/fluff/bones (src)
+//	if (!contents.len)
+//		new/mob/living/simple_animal/cat/fluff/bones (src)
 	..()
 
 /mob/living/simple_animal/cat/fluff/bones
 	name = "Bones"
-	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
+	desc = "That's Bones the cat. He's a laid back, black stray cat. Meow."
 	gender = MALE
 	icon_state = "cat3"
 	icon_living = "cat3"
 	icon_dead = "cat3_dead"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
-	bff_name = "Erstatz Vryroxes"
+	bff_name = "Genma Iroe"
 
 /mob/living/simple_animal/cat/fluff
 	var/bff_name
