@@ -64,12 +64,13 @@
 		switch(handle_casings)
 			if(EJECT_CASINGS) //eject casing onto ground.
 				chambered.loc = get_turf(src)
-			if(CYCLE_CASINGS) //cycle the casubg back to the end.
+				chambered = null
+			if(CYCLE_CASINGS) //cycle the casing back to the end.
 				if(ammo_magazine)
 					ammo_magazine.stored_ammo += chambered
 				else
 					loaded += chambered
-		chambered = null
+				chambered = null
 
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
