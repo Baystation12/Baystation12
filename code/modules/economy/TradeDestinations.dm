@@ -8,7 +8,7 @@ var/list/weighted_mundaneevent_locations = list()
 	var/distance = 0
 	var/list/willing_to_buy = list()
 	var/list/willing_to_sell = list()
-	var/can_shuttle_here = 0		//one day crew from the exodus will be able to travel to this destination
+	var/can_shuttle_here = 0		//one day crew from the Apollo will be able to travel to this destination
 	var/list/viable_random_events = list()
 	var/list/temp_price_change[BIOMEDICAL]
 	var/list/viable_mundane_events = list()

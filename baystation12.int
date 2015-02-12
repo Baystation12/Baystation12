@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\exodus-1.dmm;code\modules\mob\living\simple_animal\friendly\cat.dm;code\modules\organs\organ.dm;code\modules\customitems\item_defines.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\controllers code\datums code\datums\diseases code\datums\spells code\game code\game\area code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\structures code\modules code\modules\customitems code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\organs code\modules\surgery maps 
-FILE: code\modules\customitems\item_defines.dm
-LAST_COMPILE_TIME: 1423726119
+WINDOW: maps\exodus-1.dmm;code\modules\paperwork\dispenser\dispenser.dm;code\modules\reagents\Chemistry-Machinery.dm;code\modules\paperwork\dispenser\dispenser_papers.dm;code\modules\paperwork\paper.dm;icons\mob\animal.dmi;maps\exodus-4.dmm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\__HELPERS code\controllers code\datums code\datums\diseases code\datums\spells code\game code\game\area code\game\gamemodes code\game\gamemodes\heist code\game\machinery code\game\machinery\computer code\game\objects code\game\objects\items code\modules code\modules\paperwork code\modules\paperwork\dispenser code\modules\power code\modules\reagents icons icons\mob maps 
+FILE: code\modules\paperwork\dispenser\dispenser_papers.dm
+LAST_COMPILE_TIME: 1423777999
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

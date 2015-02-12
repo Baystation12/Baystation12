@@ -591,10 +591,10 @@
 			return
 		if(2.0)
 			if (prob(75))
-				broken()
+				broken(1)
 		if(3.0)
 			if (prob(50))
-				broken()
+				broken(1)
 	return
 
 //blob effect
@@ -626,7 +626,7 @@
 
 /obj/machinery/light/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(prob(max(0, exposed_temperature - 673)))   //0% at <400C, 100% at >500C
-		broken()
+		broken(1)
 
 // explode the light
 

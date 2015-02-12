@@ -1,0 +1,28 @@
+<!-- 
+Title: PaperWork 1600 UI 
+Used In File(s): \code\modules\paperwork\dispenser\dispenser.dm
+ -->
+<div class="item">
+	<div class="itemLabel">
+		Paper Amount:
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.paper_amount, 0, data.max_paper, 'good', data.paper_amount)}}
+	</div>
+</div>
+
+<div class="item">&nbsp;</div>
+<div class="item">
+	<div class="itemLabel" style="width: 100%;">
+		Paperwork Printer
+	</div>
+</div>
+<div class="item">
+	<div class="itemContentWide" style="width: 100%;">
+		{{for data.papers}}
+			{{:helper.link(value.title, 'circle-arrow-s', value.commands, null, 'fixedLeft')}}
+		{{/for}}
+	</div>
+</div>
+<div class="item">&nbsp;</div>
+
