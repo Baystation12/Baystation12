@@ -28,6 +28,13 @@
 	icon_state = "datadisk_arcade"
 	spawn_files = list(/datum/file/program/security)
 
+/obj/item/weapon/disk/file/cameras/syndicate
+	name = "Camera Viewer"
+	desc = "A program install disk. A crude skull has been drawn on it and there is a list of items:\nFloppy Drive\nCamera Card\nNetwork Card: Adjacent\nPosition laptop nearby camera, enjoy."
+	icon = 'icons/obj/stock_parts.dmi'
+	icon_state = "datadisk_arcade"
+	spawn_files = list(/datum/file/program/security/syndicate)
+
 /obj/item/weapon/disk/file/card
 	name = "ID Card Modifier"
 	desc = "A program install disk."

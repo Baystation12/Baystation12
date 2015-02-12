@@ -55,7 +55,8 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Spy Kit", "SK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
 			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP"),
-			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC")
+			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
+			new/datum/uplink_item(/obj/item/weapon/disk/file/cameras/syndicate, 6, "Camera Network Access - Floppy", "SF")
 			),
 		"Devices and Tools" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/toolbox/syndicate, 1, "Fully Loaded Toolbox", "ST"),
