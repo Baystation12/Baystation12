@@ -124,9 +124,7 @@
 				src.state = STATE_CALLSHUTTLE
 		if("callshuttle2")
 			if(src.authenticated)
-				call_shuttle_proc(usr)
-				if(emergency_shuttle.online())
-					post_status("shuttle")
+				usr << "<span class='warning'>You are not authorized to call these station-side.</span>"
 			src.state = STATE_DEFAULT
 		if("cancelshuttle")
 			src.state = STATE_DEFAULT

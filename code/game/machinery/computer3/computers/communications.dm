@@ -131,9 +131,7 @@
 			if(!computer.radio.subspace)
 				return
 			if(authenticated)
-				call_shuttle_proc(usr)
-				if(emergency_shuttle.online())
-					post_status("shuttle")
+				usr << "<span class='warning'>You are not authorized to call these station-side.</span>"
 			state = STATE_DEFAULT
 		if("cancelshuttle" in href_list)
 			state = STATE_DEFAULT
