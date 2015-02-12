@@ -4,7 +4,7 @@
 	name = "fruit"
 	icon = 'icons/obj/hydroponics_products.dmi'
 	icon_state = "blank"
-	desc = "The product of some kind of plant."
+	desc = "Nutritious! Probably."
 
 	var/plantname
 	var/datum/seed/seed
@@ -37,6 +37,7 @@
 		return
 
 	name = "[seed.seed_name]"
+
 	update_icon()
 
 	if(!seed.chems)
@@ -50,9 +51,76 @@
 		if(reagent_data.len > 1 && potency > 0)
 			rtotal += round(potency/reagent_data[2])
 		reagents.add_reagent(rid,max(1,rtotal))
-
+	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/proc/update_desc()
+
+	if(!seed)
+		return
+	if(!plant_controller)
+		sleep(250) // ugly hack, should mean roundstart plants are fine.
+	if(!plant_controller)
+		world << "<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>"
+		del(src)
+		return
+
+	if(plant_controller.product_descs[seed.uid])
+		desc = plant_controller.product_descs[seed.uid]
+	else
+		var/list/descriptors = list()
+		if(reagents.has_reagent("sugar") || reagents.has_reagent("cherryjelly") || reagents.has_reagent("honey") || reagents.has_reagent("berryjuice"))
+			descriptors |= "sweet"
+		if(reagents.has_reagent("anti_toxin"))
+			descriptors |= "astringent"
+		if(reagents.has_reagent("frostoil"))
+			descriptors |= "numbing"
+		if(reagents.has_reagent("nutriment"))
+			descriptors |= "nutritious"
+		if(reagents.has_reagent("condensedcapsaicin") || reagents.has_reagent("capsaicin"))
+			descriptors |= "spicy"
+		if(reagents.has_reagent("coco"))
+			descriptors |= "bitter"
+		if(reagents.has_reagent("orangejuice") || reagents.has_reagent("lemonjuice") || reagents.has_reagent("limejuice"))
+			descriptors |= "sweet-sour"
+		if(reagents.has_reagent("radium") || reagents.has_reagent("uranium"))
+			descriptors |= "radioactive"
+		if(reagents.has_reagent("amatoxin") || reagents.has_reagent("toxin"))
+			descriptors |= "poisonous"
+		if(reagents.has_reagent("psilocybin") || reagents.has_reagent("space_drugs"))
+			descriptors |= "hallucinogenic"
+		if(reagents.has_reagent("bicaridine"))
+			descriptors |= "medicinal"
+		if(reagents.has_reagent("gold"))
+			descriptors |= "shiny"
+		if(reagents.has_reagent("lube"))
+			descriptors |= "slippery"
+		if(reagents.has_reagent("pacid") || reagents.has_reagent("sacid"))
+			descriptors |= "acidic"
+		if(seed.get_trait(TRAIT_JUICY))
+			descriptors |= "juicy"
+		if(seed.get_trait(TRAIT_STINGS))
+			descriptors |= "stinging"
+		if(seed.get_trait(TRAIT_TELEPORTING))
+			descriptors |= "glowing"
+		if(seed.get_trait(TRAIT_EXPLOSIVE))
+			descriptors |= "bulbous"
+
+		var/descriptor_num = rand(2,4)
+		var/descriptor_count = descriptor_num
+		desc = "A"
+		while(descriptors.len && descriptor_num > 0)
+			var/chosen = pick(descriptors)
+			descriptors -= chosen
+			desc += "[(descriptor_count>1 && descriptor_count!=descriptor_num) ? "," : "" ] [chosen]"
+			descriptor_num--
+		if(seed.seed_noun == "spores")
+			desc += " mushroom"
+		else
+			desc += " fruit"
+		plant_controller.product_descs[seed.uid] = desc
+	desc += ". Delicious! Probably."
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
 	if(!seed || !plant_controller || !plant_controller.plant_icon_cache)
@@ -115,20 +183,27 @@
 				pocell.charge = pocell.maxcharge
 				del(src)
 				return
-		else if(seed.get_trait(TRAIT_PRODUCT_ICON) == "mushroom7" && (istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy)))
-			user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
-			for(var/i=0,i<2,i++)
-				var/obj/item/stack/sheet/wood/NG = new (user.loc)
-				NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
-				for (var/obj/item/stack/sheet/wood/G in user.loc)
-					if(G==NG)
-						continue
-					if(G.amount>=G.max_amount)
-						continue
-					G.attackby(NG, user)
+		else if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy))
+			if(seed.get_trait(TRAIT_PRODUCT_ICON) == "mushroom7")
+				user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
+				for(var/i=0,i<2,i++)
+					var/obj/item/stack/sheet/wood/NG = new (user.loc)
+					NG.color = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+					for (var/obj/item/stack/sheet/wood/G in user.loc)
+						if(G==NG)
+							continue
+						if(G.amount>=G.max_amount)
+							continue
+						G.attackby(NG, user)
 					user << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
-			del(src)
-			return
+				del(src)
+				return
+			else if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
+				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
+				new /obj/item/clothing/head/pumpkinhead (user.loc)
+				del(src)
+				return
+
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/attack(var/mob/living/carbon/M, var/mob/user, var/def_zone)
@@ -207,12 +282,26 @@
 		if(src) del(src)
 		return
 
-	if(seed.get_trait(TRAIT_SPREAD) == 0)
+	if(seed.get_trait(TRAIT_SPREAD) > 0)
+		user << "<span class='notice'>You plant the [src.name].</span>"
+		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
+		del(src)
 		return
 
-	user << "<span class='notice'>You plant the [src.name].</span>"
-	new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
-	del(src)
+	if(seed.kitchen_tag)
+		switch(seed.kitchen_tag)
+			if("shand")
+				var/obj/item/stack/medical/bruise_pack/tajaran/poultice = new /obj/item/stack/medical/bruise_pack/tajaran(user.loc)
+				poultice.heal_brute = potency
+				user << "<span class='notice'>You mash the leaves into a poultice.</span>"
+				del(src)
+				return
+			if("mtear")
+				var/obj/item/stack/medical/ointment/tajaran/poultice = new /obj/item/stack/medical/ointment/tajaran(user.loc)
+				poultice.heal_burn = potency
+				user << "<span class='notice'>You mash the petals into a poultice.</span>"
+				del(src)
+				return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pickup(mob/user)
 	..()

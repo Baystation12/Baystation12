@@ -22,6 +22,7 @@
 var/global/datum/controller/plants/plant_controller // Set in New().
 
 /datum/controller/plants
+	var/list/product_descs = list()         // Stores generated fruit descs.
 	var/list/next_plants = list()           // All queued plants.
 	var/list/seeds = list()                 // All seed data stored here.
 	var/list/gene_tag_masks = list()        // Gene obfuscation for delicious trial and error goodness.
