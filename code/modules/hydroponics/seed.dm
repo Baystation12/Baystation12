@@ -375,7 +375,7 @@
 
 	if(prob(90))
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,1)
-		set_trait(TRAIT_NUTRIENT_CONSUMPTION,rand(100)*0.1)
+		set_trait(TRAIT_NUTRIENT_CONSUMPTION,rand(25)/25)
 	else
 		set_trait(TRAIT_REQUIRES_NUTRIENTS,0)
 

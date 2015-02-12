@@ -5,7 +5,7 @@
 // Allows remote operation of electrical systems on station (SMESs and Breaker Boxes)
 
 /obj/machinery/computer/rcon
-	name = "\improper RCON remote control console"
+	name = "\improper RCON console"
 	desc = "Console used to remotely control machinery on the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"
@@ -62,7 +62,7 @@
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Control Console", 600, 400)
+		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
