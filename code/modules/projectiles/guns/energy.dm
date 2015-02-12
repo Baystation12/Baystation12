@@ -54,7 +54,7 @@
 		update_icon()
 	return 1
 
-/obj/item/weapon/gun/energy/get_next_projectile()
+/obj/item/weapon/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
 	if(!power_supply.use(charge_cost)) return null

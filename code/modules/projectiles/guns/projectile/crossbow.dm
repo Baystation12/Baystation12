@@ -66,19 +66,13 @@
 	if(cell && severity)
 		cell.use(100*severity)
 
-/obj/item/weapon/gun/launcher/crossbow/special_check(user)
-	if(tension <= 0)
-		user << "\red \The [src] is not drawn back!"
-		return 0
-	return 1
-
 /obj/item/weapon/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
-/obj/item/weapon/gun/launcher/crossbow/can_fire()
-	return (tension && bolt)
-
-/obj/item/weapon/gun/launcher/crossbow/get_next_projectile()
+/obj/item/weapon/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
+	if(tension <= 0)
+		user << "\red \The [src] is not drawn back!"
+		return null
 	return bolt
 
 /obj/item/weapon/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)

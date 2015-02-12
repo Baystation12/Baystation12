@@ -63,10 +63,10 @@
 		return
 
 	//Armor
-	var/absorb = run_armor_check(def_zone, P.flag)
+	var/absorb = run_armor_check(def_zone, P.check_armour)
 	var/proj_sharp = is_sharp(P)
 	var/proj_edge = has_edge(P)
-	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.flag)))
+	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.check_armour)))
 		proj_sharp = 0
 		proj_edge = 0
 

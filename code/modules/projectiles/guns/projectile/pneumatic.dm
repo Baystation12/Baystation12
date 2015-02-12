@@ -86,16 +86,19 @@
 		user << "There is nothing to remove in \the [src]."
 	return
 
-/obj/item/weapon/gun/launcher/pneumatic/get_next_projectile()
+/obj/item/weapon/gun/launcher/pneumatic/consume_next_projectile(mob/user=null)
 	if(!contents.len)
 		return null
-	return contents[1]
+	if (!tank)
+		user << "There is no gas tank in [src]!"
+		return null
 
-/obj/item/weapon/gun/launcher/pneumatic/can_fire()
-	if(!contents.len)
-		return 0
 	var/fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
-	return (fire_pressure >= minimum_tank_pressure)
+	if(fire_pressure < minimum_tank_pressure)
+		user << "There isn't enough gas in the tank to fire [src]."
+		return null
+
+	return contents[1]
 
 /obj/item/weapon/gun/launcher/pneumatic/examine(mob/user)
 	if(!..(user, 2))
@@ -105,18 +108,6 @@
 		user << "The tank dial reads [tank.air_contents.return_pressure()] kPa."
 	else
 		user << "Nothing is attached to the tank valve!"
-
-/obj/item/weapon/gun/launcher/pneumatic/special_check(user)
-	if (!tank)
-		user << "There is no gas tank in [src]!"
-		return 0
-
-	fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
-	if (fire_pressure < minimum_tank_pressure)
-		user << "There isn't enough gas in the tank to fire [src]."
-		return 0
-
-	return ..()
 
 /obj/item/weapon/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
 	if(tank)

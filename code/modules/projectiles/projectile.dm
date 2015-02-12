@@ -37,7 +37,7 @@
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
-	var/flag = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
+	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
@@ -70,16 +70,7 @@
 	return 1
 
 /obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
-	if(!istype(target) || !istype(user))
-		return 0
-	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
-	trace.target = target
-	trace.flags = flags //Set the flags...
-	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	trace.firer = user
-	var/output = trace.process() //Test it!
-	del(trace) //No need for it anymore
-	return output //Send it back to the gun!
+	check_trajectory(target, user, pass_flags, flags)
 
 //sets the click point of the projectile using mouse input params
 /obj/item/projectile/proc/set_clickpoint(var/params)
@@ -293,3 +284,16 @@
 			M = locate() in get_step(src,target)
 			if(istype(M))
 				return 1
+
+/proc/check_trajectory(atom/target as mob, var/mob/living/user as mob, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+	if(!istype(target) || !istype(user))
+		return 0
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	trace.target = target
+	if(!isnull(flags))
+		trace.flags = flags //Set the flags...
+	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
+	trace.firer = user
+	var/output = trace.process() //Test it!
+	del(trace) //No need for it anymore
+	return output //Send it back to the gun!

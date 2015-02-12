@@ -3,7 +3,7 @@
 	icon_state = "spark"
 	damage = 0
 	damage_type = BURN
-	flag = "energy"
+	check_armour = "energy"
 
 
 //releases a very short burst of light on impact, mainly used to blind people

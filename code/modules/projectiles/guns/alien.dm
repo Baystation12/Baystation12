@@ -50,10 +50,7 @@
 /obj/item/weapon/gun/launcher/spikethrower/update_release_force()
 	return
 
-/obj/item/weapon/gun/launcher/spikethrower/can_fire()
-	return (spikes >= 1) 
-
-/obj/item/weapon/gun/launcher/spikethrower/get_next_projectile()
+/obj/item/weapon/gun/launcher/spikethrower/consume_next_projectile()
 	if(spikes < 1) return null
 	spikes--
 	return new /obj/item/weapon/spike(src)
@@ -100,7 +97,7 @@
 	icon_state = "particle"
 	damage = 60
 	damage_type = BRUTE
-	flag = "bullet"
+	check_armour = "bullet"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 
 	embed = 0

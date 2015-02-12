@@ -4,7 +4,7 @@
 	damage = 60
 	damage_type = BRUTE
 	nodamage = 0
-	flag = "bullet"
+	check_armour = "bullet"
 	embed = 1
 	sharp = 1
 

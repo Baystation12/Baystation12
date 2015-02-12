@@ -53,15 +53,18 @@
 	if(HULK in M.mutations)
 		M << "<span class='danger'>Your fingers are much too large for the trigger guard!</span>"
 		return 0
-	if((CLUMSY in M.mutations) && prob(40) && can_fire()) //Clumsy handling
-		var/obj/P = get_next_projectile()
-		if(P && process_projectile(P, user, user, pick("l_foot", "r_foot")))
-			handle_post_fire(user, user)
-			user.visible_message(
-				"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>", 
-				"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
-				)
-			M.drop_item()
+	if((CLUMSY in M.mutations) && prob(40)) //Clumsy handling
+		var/obj/P = consume_next_projectile()
+		if(P)
+			if(process_projectile(P, user, user, pick("l_foot", "r_foot")))
+				handle_post_fire(user, user)
+				user.visible_message(
+					"<span class='danger'>[user] shoots \himself in the foot with \the [src]!</span>", 
+					"<span class='danger'>You shoot yourself in the foot with \the [src]!</span>"
+					)
+				M.drop_item()
+		else
+			handle_click_empty(user)
 		return 0
 	return 1
 
@@ -110,14 +113,14 @@
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
 
-	var/obj/in_chamber = get_next_projectile()
-	if(!in_chamber)
+	var/obj/projectile = consume_next_projectile()
+	if(!projectile)
 		handle_click_empty(user)
 		return
 
 	user.next_move = world.time + 4
 
-	if(process_projectile(in_chamber, user, target, user.zone_sel.selecting, params, pointblank, reflex))
+	if(process_projectile(projectile, user, target, user.zone_sel.selecting, params, pointblank, reflex))
 		handle_post_fire(user, target, pointblank, reflex)
 
 		update_icon()
@@ -127,20 +130,17 @@
 			user.update_inv_r_hand()
 
 
-//returns the next projectile to fire
-/obj/item/weapon/gun/proc/get_next_projectile()
+//obtains the next projectile to fire
+/obj/item/weapon/gun/proc/consume_next_projectile()
 	return null
-
-//TODO integrate this with gun code better.
-//TODO maybe provide user so that subtypes can emit messages if they want?
-/obj/item/weapon/gun/proc/can_fire()
-	return 0
 
 //used by aiming code
 /obj/item/weapon/gun/proc/can_hit(atom/target as mob, var/mob/living/user as mob)
 	if(!special_check(user))
 		return 2
-	return 0 //in_chamber.check_fire(target,user)
+	//just assume we can shoot through glass and stuff. No big deal, the player can just choose to not target someone 
+	//on the other side of a window if it makes a difference. Or if they run behind a window, too bad.
+	return check_trajectory(target, user)
 
 //called if there was no projectile to shoot
 /obj/item/weapon/gun/proc/handle_click_empty(mob/user)
@@ -208,7 +208,7 @@
 		M.visible_message("\blue [user] decided life was worth living")
 		mouthshoot = 0
 		return
-	var/obj/item/projectile/in_chamber = get_next_projectile()
+	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 		if(silenced)

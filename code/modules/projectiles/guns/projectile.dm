@@ -36,15 +36,7 @@
 		ammo_magazine = new magazine_type(src)
 	update_icon()
 
-/obj/item/weapon/gun/projectile/can_fire()
-	var/obj/item/ammo_casing/C
-	if(loaded.len)
-		C = loaded[1]
-	else if(ammo_magazine && ammo_magazine.stored_ammo.len)
-		C = ammo_magazine.stored_ammo[1]
-	return (C && C.BB)
-
-/obj/item/weapon/gun/projectile/get_next_projectile()
+/obj/item/weapon/gun/projectile/consume_next_projectile()
 	//store the next ammo_casing in a var so that handle_post_fire() knows which one to eject
 	//also we might as well remove chambered here, so that we don't have to figure out where it came from later
 	if(loaded.len)

@@ -14,7 +14,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 	eyeblur = 4
 	var/frequency = 1
 
@@ -87,7 +87,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 	eyeblur = 2
 
 /obj/item/projectile/beam/heavylaser
@@ -121,7 +121,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
 /obj/item/projectile/beam/lastertag/blue/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -136,7 +136,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))
@@ -151,7 +151,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
-	flag = "laser"
+	check_armour = "laser"
 
 /obj/item/projectile/beam/lastertag/omni/on_hit(var/atom/target, var/blocked = 0)
 	if(istype(target, /mob/living/carbon/human))

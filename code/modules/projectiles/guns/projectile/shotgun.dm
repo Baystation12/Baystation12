@@ -15,10 +15,7 @@
 	handle_casings = HOLD_CASINGS
 	var/recentpump = 0 // to prevent spammage
 
-/obj/item/weapon/gun/projectile/shotgun/pump/can_fire()
-	return (chambered && chambered.BB)
-
-/obj/item/weapon/gun/projectile/shotgun/pump/get_next_projectile()
+/obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
 		return chambered.BB
 	return null
