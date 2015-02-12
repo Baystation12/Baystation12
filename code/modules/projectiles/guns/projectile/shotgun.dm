@@ -10,7 +10,7 @@
 	slot_flags = SLOT_BACK
 	caliber = "shotgun"
 	origin_tech = "combat=4;materials=2"
-	ammo_type = "/obj/item/ammo_casing/shotgun/beanbag"
+	ammo_type = "/obj/item/ammo_casing/shotgun/pellet"
 	var/recentpump = 0 // to prevent spammage
 	var/pumped = 0
 	var/obj/item/ammo_casing/current_shell = null

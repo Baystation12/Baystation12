@@ -38,6 +38,9 @@
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+	
 	health -= Proj.damage
 	..()
 	if(health <= 0)

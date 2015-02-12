@@ -115,17 +115,13 @@
 	ignite()
 	..(severity)
 
-/obj/machinery/ignition_switch/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/ignition
+	name = "ignition switch"
+	desc = "A remote control switch for a mounted igniter."
 
-/obj/machinery/ignition_switch/attackby(obj/item/weapon/W, mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/button/ignition/attack_hand(mob/user as mob)
 
-/obj/machinery/ignition_switch/attack_hand(mob/user as mob)
-
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(active)
+	if(..())
 		return
 
 	use_power(5)

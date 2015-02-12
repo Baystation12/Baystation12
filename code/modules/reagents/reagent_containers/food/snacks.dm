@@ -9,6 +9,8 @@
 	var/trash = null
 	var/slice_path
 	var/slices_num
+	var/dried_type = null
+	var/dry = 0
 	center_of_mass = list("x"=15, "y"=15)
 	w_class = 2
 

@@ -19,13 +19,8 @@
 	max_shells = 7
 	caliber = ".50"
 	ammo_type ="/obj/item/ammo_casing/a50"
-	load_method = 2
-	New()
-		..()
-		empty_mag = new /obj/item/ammo_magazine/a50/empty(src)
-		update_icon()
-		return
-
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/a50/empty
 
 	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 		..()
@@ -59,13 +54,8 @@
 	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = "combat=3"
 	ammo_type = "/obj/item/ammo_casing/a75"
-	load_method = 2
-	New()
-		..()
-		empty_mag = new /obj/item/ammo_magazine/a75/empty(src)
-		update_icon()
-		return
-
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/a75/empty
 
 	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 		..()
@@ -89,17 +79,13 @@
 	desc = "A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	w_class = 2
-	max_shells = 8
+	max_shells = 10
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = "combat=2;materials=2;syndicate=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
-	load_method = 2
-
-/obj/item/weapon/gun/projectile/pistol/New()
-	..()
-	empty_mag = new /obj/item/ammo_magazine/mc9mm/empty(src)
-	return
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/mc9mm/empty
 
 /obj/item/weapon/gun/projectile/pistol/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
