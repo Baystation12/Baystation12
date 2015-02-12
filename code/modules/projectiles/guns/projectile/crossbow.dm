@@ -62,10 +62,6 @@
 	var/obj/item/weapon/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
 
-/obj/item/weapon/gun/launcher/crossbow/emp_act(severity)
-	if(cell && severity)
-		cell.use(100*severity)
-
 /obj/item/weapon/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
@@ -148,8 +144,8 @@
 	if(istype(W, /obj/item/weapon/cell))
 		if(!cell)
 			user.drop_item()
-			W.loc = src
 			cell = W
+			cell.loc = src
 			user << "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>"
 			superheat_rod(user)
 		else

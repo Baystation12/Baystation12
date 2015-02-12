@@ -19,9 +19,8 @@
 	var/charge_tick = 0
 
 /obj/item/weapon/gun/energy/emp_act(severity)
-	power_supply.use(round(power_supply.maxcharge / severity))
-	update_icon()
 	..()
+	update_icon()
 
 /obj/item/weapon/gun/energy/New()
 	..()
