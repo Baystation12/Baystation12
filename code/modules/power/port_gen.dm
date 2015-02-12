@@ -15,7 +15,7 @@
 	var/power_output = 1
 
 /obj/machinery/power/port_gen/proc/IsBroken()
-	return (crit_fail || (stat & BROKEN|EMPED))
+	return (crit_fail || (stat & (BROKEN|EMPED)))
 
 /obj/machinery/power/port_gen/proc/HasFuel() //Placeholder for fuel check.
 	return 1
