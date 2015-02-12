@@ -33,12 +33,7 @@ emp_act
 					var/turf/curloc = get_turf(src)
 
 					// redirect the projectile
-					P.original = locate(new_x, new_y, P.z)
-					P.starting = curloc
-					P.current = curloc
-					P.firer = src
-					P.yo = new_y - curloc.y
-					P.xo = new_x - curloc.x
+					P.redirect(new_x, new_y, curloc, src)
 
 				return -1 // complete projectile permutation
 
@@ -47,9 +42,9 @@ emp_act
 		var/armor = getarmor_organ(organ, "bullet")
 		if((P.embed && prob(20 + max(P.damage - armor, -10))))
 			var/obj/item/weapon/shard/shrapnel/SP = new()
-			(SP.name) = "[P.name] shrapnel"
-			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
-			(SP.loc) = organ
+			SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
+			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
+			SP.loc = organ
 			organ.do_embed(SP)
 
 	return (..(P , def_zone))

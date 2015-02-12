@@ -33,7 +33,7 @@
 
 	var/now_pushing = null
 
-	var/cameraFollow = null
+	var/mob/living/cameraFollow = null
 
 	var/tod = null // Time of death
 	var/update_slimes = 1
@@ -41,3 +41,4 @@
 	var/mob_size            // Used by lockers.
 	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks
+

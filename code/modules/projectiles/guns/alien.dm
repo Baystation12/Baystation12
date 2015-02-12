@@ -73,7 +73,7 @@
 	recoil = 1
 
 	force = 10
-	projectile_type = "/obj/item/projectile/energy/sonic"
+	projectile_type = /obj/item/projectile/energy/sonic
 	cell_type = "/obj/item/weapon/cell/super"
 	fire_delay = 40
 	fire_sound = 'sound/effects/basscannon.ogg'

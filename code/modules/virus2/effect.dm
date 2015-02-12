@@ -13,15 +13,19 @@
 		if(happensonce == 1)
 			happensonce = -1
 
-/datum/disease2/effectholder/proc/getrandomeffect(var/badness = 1)
+/datum/disease2/effectholder/proc/getrandomeffect(var/badness = 1, exclude_types=list())
 	var/list/datum/disease2/effect/list = list()
 	for(var/e in (typesof(/datum/disease2/effect) - /datum/disease2/effect))
-		var/datum/disease2/effect/f = new e
-		if (f.badness > badness)	//we don't want such strong effects
+		var/datum/disease2/effect/f = e
+		if(e in exclude_types)
 			continue
-		if(f.stage == src.stage)
+		if(initial(f.badness) > badness)	//we don't want such strong effects
+			continue
+		if(initial(f.stage) <= src.stage)
 			list += f
-	effect = pick(list)
+	var/type = pick(list)
+	effect = new type()
+	effect.generate()
 	chance = rand(0,effect.chance_maxm)
 	multiplier = rand(1,effect.maxm)
 
@@ -32,8 +36,8 @@
 		if(2)
 			multiplier = rand(1,effect.maxm)
 
-/datum/disease2/effectholder/proc/majormutate()
-	getrandomeffect(3)
+/datum/disease2/effectholder/proc/majormutate(exclude_types=list())
+	getrandomeffect(3, exclude_types)
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////EFFECTS/////////////////////////////////
@@ -45,8 +49,11 @@
 	var/stage = 4
 	var/maxm = 1
 	var/badness = 1
+	var/data = null // For semi-procedural effects; this should be generated in generate() if used
+
 	proc/activate(var/mob/living/carbon/mob,var/multiplier)
 	proc/deactivate(var/mob/living/carbon/mob)
+	proc/generate(copy_data) // copy_data will be non-null if this is a copy; it should be used to initialise the data for this effect if present
 
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
@@ -67,7 +74,23 @@
 	stage = 4
 	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.gib()
+		// Probabilities have been tweaked to kill in ~2-3 minutes, giving 5-10 messages.
+		// Probably needs more balancing, but it's better than LOL U GIBBED NOW, especially now that viruses can potentially have no signs up until Gibbingtons.
+		mob.adjustBruteLoss(10*multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			var/datum/organ/external/O = pick(H.organs)
+			if(prob(25))
+				mob << "<span class='warning'>Your [O.display_name] feels as if it might fall off!</span>"
+			if(prob(10))
+				spawn(50)
+					if(O)
+						O.droplimb(1)
+		else
+			if(prob(75))
+				mob << "<span class='warning'>Your whole body feels like it might fall apart!</span>"
+			if(prob(10))
+				mob.adjustBruteLoss(25*multiplier)
 
 /datum/disease2/effect/radian
 	name = "Radian's Syndrome"
@@ -257,6 +280,26 @@
 	chance_maxm = 25
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*groan")
+
+/datum/disease2/effect/chem_synthesis
+	name = "Chemical Synthesis"
+	stage = 3
+	chance_maxm = 25
+
+	generate(c_data)
+		if(c_data)
+			data = c_data
+		else
+			data = pick("bicaridine", "kelotane", "dylovene", "inaprovaline", "space_drugs", "sugar",
+						"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
+						"mindbreaker", "nutriment")
+		var/datum/reagent/R = chemical_reagents_list[data]
+		name = "[initial(name)] ([initial(R.name)])"
+
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if (mob.reagents.get_reagent_amount(data) < 5)
+			mob.reagents.add_reagent(data, 2)
+
 ////////////////////////STAGE 2/////////////////////////////////
 
 /datum/disease2/effect/scream

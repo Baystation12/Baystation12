@@ -16,11 +16,14 @@
 	var/damtype = "brute"
 	var/force = 0
 
-/obj/Topic(href, href_list, var/nowindow = 0)
+/obj/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
 	// Calling Topic without a corresponding window open causes runtime errors
-	if(nowindow)
-		return 0
-	return ..()
+	if(!nowindow && ..())
+		return 1
+	if(usr.can_interact_with_interface(src, checkrange) != STATUS_INTERACTIVE)
+		return 1
+	add_fingerprint(usr)
+	return 0
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
