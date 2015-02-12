@@ -330,7 +330,7 @@ About the new airlock wires panel:
 	return ((src.aiControlDisabled==1) && (!hackProof) && (!src.isAllPowerLoss()));
 
 /obj/machinery/door/airlock/proc/arePowerSystemsOn()
-	if (stat & NOPOWER)
+	if (stat & (NOPOWER|BROKEN))
 		return 0
 	return (src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0)
 
@@ -451,7 +451,7 @@ About the new airlock wires panel:
 			if(density)
 				flick("door_spark", src)
 		if("deny")
-			if(density && !(stat & (BROKEN|NOPOWER)))
+			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
 	return
 
@@ -900,12 +900,7 @@ About the new airlock wires panel:
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
-		var/beingcrowbarred = null
-		if(istype(C, /obj/item/weapon/crowbar) )
-			beingcrowbarred = 1 //derp, Agouri
-		else
-			beingcrowbarred = 0
-		if( beingcrowbarred && src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
+		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN)))) )
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40))
@@ -936,7 +931,7 @@ About the new airlock wires panel:
 
 				del(src)
 				return
-		else if(arePowerSystemsOn() && !(stat & BROKEN))
+		else if(arePowerSystemsOn())
 			user << "\blue The airlock's motors resist your efforts to force it."
 		else if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
@@ -946,22 +941,22 @@ About the new airlock wires panel:
 			else
 				spawn(0)	close(1)
 
-	else if(istype(C, /obj/item/weapon/twohanded/fireaxe) && (!arePowerSystemsOn() || (stat & BROKEN)))
+	else if(istype(C, /obj/item/weapon/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
 			user << "\blue The airlock's bolts prevent it from being forced."
 		else if( !welded && !operating )
 			if(density)
 				var/obj/item/weapon/twohanded/fireaxe/F = C
-				if(F:wielded)
+				if(F.wielded)
 					spawn(0)	open(1)
 				else
-					user << "\red You need to be wielding the Fire axe to do that."
+					user << "\red You need to be wielding \the [C] to do that."
 			else
 				var/obj/item/weapon/twohanded/fireaxe/F = C
-				if(F:wielded)
+				if(F.wielded)
 					spawn(0)	close(1)
 				else
-					user << "\red You need to be wielding the Fire axe to do that."
+					user << "\red You need to be wielding \the [C] to do that."
 
 	else
 		..()
@@ -1007,7 +1002,9 @@ About the new airlock wires panel:
 	if(operating || welded || locked)
 		return
 	if(!forced)
-		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS) )
+		//despite the name, this wire is for general door control. 
+		//Bolts are already covered by the check for locked, above
+		if( !arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return
 	if(safe)
 		for(var/turf/turf in locs)
@@ -1130,9 +1127,6 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason
 	..()
 	update_icon()
-
-/obj/machinery/door/airlock/proc/hasPower()
-	return ((src.secondsMainPowerLost==0 || src.secondsBackupPowerLost==0) && !(stat & (NOPOWER|BROKEN)))
 
 /obj/machinery/door/airlock/proc/prison_open()
 	src.unlock()
