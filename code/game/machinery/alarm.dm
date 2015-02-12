@@ -921,8 +921,13 @@ table tr:first-child th:first-child { border: none;}
 				update_icon()
 				return
 
-			if (wiresexposed && ((istype(W, /obj/item/device/multitool) || istype(W, /obj/item/weapon/wirecutters))))
-				return attack_hand(user)
+			if (wiresexposed && istype(W, /obj/item/weapon/wirecutters))
+				user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
+				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+				new/obj/item/stack/cable_coil(get_turf(src), 5)
+				buildstage = 1
+				update_icon()
+				return
 
 			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
@@ -1309,7 +1314,7 @@ FIRE ALARM
 /obj/machinery/firealarm/proc/delayed_reset()
 	var/area/A = get_area(src)
 	if (!A) return
-	
+
 	src = null
 	spawn(600)
 		A.firereset()

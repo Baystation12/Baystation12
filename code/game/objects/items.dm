@@ -141,9 +141,10 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
+	if(src.loc == user)
+		src.pickup(user)
 	return
 
 
