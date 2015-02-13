@@ -1,3 +1,25 @@
+//
+// setup.dm: Contains macros and constants used for code.
+//
+
+//
+// Style notes and guidelines:
+//   * Organisation:
+//     - Group and order related sets of macros together.
+//     - Put comments for entire sets of macros on their own line.
+//     - Put comments for specific macros to their left.
+//   * Case:
+//     - All macro names must be in full uppercase, e.g.: "MYMACRONAME" instead of "MyMacroName" or "mymacroname".
+//     - "#define" must be written in lowercase.
+//   * Padding:
+//     - Pad the values on the left, only with spaces (e.g. "#define MYMACRONAME <spaces> 1234") so they line up vertically.
+//     - Pad the comments on the left, also only with spaces, so the comments line up with themselves vertically.
+//     - Add a space after "//" and "/*" before writing your actual comments, e.g.: //<space>This is an example comment.
+//   * Miscellany:
+//     - Write the units for physical constants in a comment, with the metric system and SI units, e.g.: #define <NAME> <VALUE> // N/m^2.
+//     - Use proper punctuation for comments, e.g. add full-stops '.' at the end of every sentence in a comment.
+//
+
 #define DEBUG
 
 // Math constants.
@@ -31,15 +53,15 @@
 #define N2STANDARD 0.79
 
 #define MOLES_PHORON_VISIBLE 0.7 // Moles in a standard cell after which phoron is visible.
-#define MOLES_O2STANDARD     (MOLES_CELLSTANDARD * O2STANDARD) // O2 standard value (21%)
-#define MOLES_N2STANDARD     (MOLES_CELLSTANDARD * N2STANDARD) // N2 standard value (79%)
+#define MOLES_O2STANDARD     (MOLES_CELLSTANDARD * O2STANDARD) // O2 standard value. (21%)
+#define MOLES_N2STANDARD     (MOLES_CELLSTANDARD * N2STANDARD) // N2 standard value. (79%)
 
 // These are for when a mob breathes poisonous air.
 #define MIN_TOXIN_DAMAGE 1
 #define MAX_TOXIN_DAMAGE 10
 
 #define BREATH_VOLUME       0.5 // Liters in a normal breath.
-#define BREATH_MOLES        (ONE_ATMOSPHERE * BREATH_VOLUME / (T20C * R_IDEAL_GAS_EQUATION)) // Amount of air to take a from a tile
+#define BREATH_MOLES        (ONE_ATMOSPHERE * BREATH_VOLUME / (T20C * R_IDEAL_GAS_EQUATION)) // Amount of air to take from a tile.
 #define BREATH_PERCENTAGE   (BREATH_VOLUME / CELL_VOLUME)                                    // Amount of air needed before pass out/suffocation commences.
 #define HUMAN_NEEDED_OXYGEN (MOLES_CELLSTANDARD * BREATH_PERCENTAGE * 0.16)
 
@@ -87,21 +109,21 @@
 #define THROWNOBJ_KNOCKBACK_DIVISOR 2  // Affects how much speed the mob is knocked back with.
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 // The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE.
-#define    MAX_HIGH_PRESSURE_DAMAGE 4 // This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
+#define    MAX_HIGH_PRESSURE_DAMAGE 4 // Previously set to 20 by Polymorph.
 #define         LOW_PRESSURE_DAMAGE 2 // The amount of damage someone takes when in a low pressure area. (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
 
 // Doors!
 #define DOOR_CRUSH_DAMAGE 10
 
-#define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases
+#define HUNGER_FACTOR              0.05 // Factor of how fast mob nutrition decreases.
 #define REAGENTS_METABOLISM        0.2  // How many units of reagent are consumed per tick, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust
-                                                               // all effects according to how they originally were with the 0.4 metabolism
+                                                               // all effects according to how they originally were with the 0.4 metabolism.
 
-#define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
-#define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended
-#define MINIMUM_MOLES_DELTA_TO_MOVE  (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Either this must be active
-#define MINIMUM_TEMPERATURE_TO_MOVE  (T20C + 100)                                        // or this (or both, obviously)
+#define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing.
+#define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended.
+#define MINIMUM_MOLES_DELTA_TO_MOVE  (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Either this must be active,
+#define MINIMUM_TEMPERATURE_TO_MOVE  (T20C + 100)                                        // or this. (or both, obviously.)
 
 #define MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND      0.012        // Minimum temperature difference before group processing is suspended.
 #define MINIMUM_TEMPERATURE_DELTA_TO_SUSPEND      4
@@ -129,9 +151,9 @@
 #define PHORON_MINIMUM_OXYGEN_PHORON_RATIO 20
 #define PHORON_OXYGEN_FULLBURN             10
 
-#define T0C  273.15 //    0.0 degrees celcius
-#define T20C 293.15 //   20.0 degrees celcius
-#define TCMB 2.7    // -270.3 degrees celcius
+#define T0C  273.15 //    0.0 degrees celcius.
+#define T20C 293.15 //   20.0 degrees celcius.
+#define TCMB 2.7    // -270.3 degrees celcius.
 
 // XGM gas flags.
 #define XGM_GAS_FUEL        1
@@ -440,19 +462,19 @@
 #define BANTYPE_ANY_FULLBAN 5 // Used to locate stuff to unban.
 
 // Invisibility constants.
-#define INVISIBILITY_LIGHTING             20
-#define INVISIBILITY_LEVEL_ONE            35
-#define INVISIBILITY_LEVEL_TWO            45
-#define INVISIBILITY_OBSERVER             60
-#define INVISIBILITY_AI_EYE               61
+#define INVISIBILITY_LIGHTING              20
+#define INVISIBILITY_LEVEL_ONE             35
+#define INVISIBILITY_LEVEL_TWO             45
+#define INVISIBILITY_OBSERVER              60
+#define INVISIBILITY_AI_EYE                61
 
-#define SEE_INVISIBLE_LIVING              25
-#define SEE_INVISIBLE_OBSERVER_NOLIGHTING 15
-#define SEE_INVISIBLE_LEVEL_ONE           35
-#define SEE_INVISIBLE_LEVEL_TWO           45
+#define SEE_INVISIBLE_LIVING               25
+#define SEE_INVISIBLE_OBSERVER_NOLIGHTING  15
+#define SEE_INVISIBLE_LEVEL_ONE            35
+#define SEE_INVISIBLE_LEVEL_TWO            45
 #define SEE_INVISIBLE_OBSERVER_NOOBSERVERS 59
-#define SEE_INVISIBLE_OBSERVER            60
-#define SEE_INVISIBLE_OBSERVER_AI_EYE     61
+#define SEE_INVISIBLE_OBSERVER             60
+#define SEE_INVISIBLE_OBSERVER_AI_EYE      61
 
 #define SEE_INVISIBLE_MINIMUM 5
 #define  INVISIBILITY_MAXIMUM 100
@@ -746,15 +768,14 @@ var/list/be_special_flags = list(
 #define EVENT_LEVEL_MODERATE 2
 #define EVENT_LEVEL_MAJOR    3
 
-// Suit sensor levels
+// Suit sensor levels.
 #define SUIT_SENSOR_OFF      0
 #define SUIT_SENSOR_BINARY   1
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
 
-// NanoUI flags
-#define STATUS_INTERACTIVE 2 // GREEN Visability
-#define STATUS_UPDATE 1 // ORANGE Visability
-#define STATUS_DISABLED 0 // RED Visability
-#define STATUS_CLOSE -1 // Close the interface
-
+// NanoUI flags.
+#define STATUS_INTERACTIVE  2 //  GREEN visibility.
+#define STATUS_UPDATE       1 // ORANGE visibility.
+#define STATUS_DISABLED     0 //    RED visibility.
+#define STATUS_CLOSE       -1 // Close the interface.
