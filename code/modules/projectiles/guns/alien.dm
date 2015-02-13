@@ -16,11 +16,11 @@
 
 /obj/item/weapon/gun/launcher/spikethrower/New()
 	..()
-	processing_objects.Add(src)
+	SSobj.processing.Add(src)
 	last_regen = world.time
 
 /obj/item/weapon/gun/launcher/spikethrower/Del()
-	processing_objects.Remove(src)
+	SSobj.processing.Remove(src)
 	..()
 
 /obj/item/weapon/gun/launcher/spikethrower/process()

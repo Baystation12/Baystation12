@@ -119,9 +119,11 @@ Class Procs:
 		dd_insertObjectList(machines, src)
 	else
 		machines += src
+		SSmachine.processing += src
 		machinery_sort_required = 1
 
 /obj/machinery/Del()
+	SSmachine.processing -= src
 	machines -= src
 	..()
 

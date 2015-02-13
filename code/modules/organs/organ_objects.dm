@@ -26,18 +26,18 @@
 	..()
 	create_reagents(5)
 	if(!robotic)
-		processing_objects += src
+		SSobj.processing += src
 	spawn(1)
 		update()
 
 /obj/item/organ/Del()
-	if(!robotic) processing_objects -= src
+	if(!robotic) SSobj.processing -= src
 	..()
 
 /obj/item/organ/process()
 
 	if(robotic)
-		processing_objects -= src
+		SSobj.processing -= src
 		return
 
 	// Don't process if we're in a freezer, an MMI or a stasis bag. //TODO: ambient temperature?
@@ -57,7 +57,7 @@
 	name = "dead [initial(name)]"
 	if(dead_icon) icon_state = dead_icon
 	health = 0
-	processing_objects -= src
+	SSobj.processing -= src
 	//TODO: Grey out the icon state.
 	//TODO: Inject an organ with peridaxon to make it alive again.
 

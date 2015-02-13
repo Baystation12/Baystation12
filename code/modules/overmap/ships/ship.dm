@@ -22,7 +22,7 @@
 		if (H.z == map_z)
 			nav_control = H
 			break
-	processing_objects.Add(src)
+	SSobj.processing.Add(src)
 
 /obj/effect/map/ship/relaymove(mob/user, direction)
 	accelerate(direction)

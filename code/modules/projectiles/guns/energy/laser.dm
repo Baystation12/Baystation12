@@ -32,11 +32,11 @@ obj/item/weapon/gun/energy/laser/retro
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 
@@ -118,11 +118,11 @@ obj/item/weapon/gun/energy/laser/retro
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 
@@ -155,11 +155,11 @@ obj/item/weapon/gun/energy/laser/retro
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 

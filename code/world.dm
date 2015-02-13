@@ -60,7 +60,7 @@ var/global/datum/global_init/init = new ()
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
 
-	master_controller = new /datum/controller/game_controller()
+	master_controller.world_call()
 	spawn(1)
 		master_controller.setup()
 

@@ -2,7 +2,7 @@
 //It ensures master_controller.process() is never doubled up by killing the MC (hence terminating any of its sleeping procs)
 //WIP, needs lots of work still
 
-var/global/datum/controller/game_controller/master_controller //Set in world.New()
+var/global/datum/controller/game_controller/master_controller = new()
 
 var/global/controller_iteration = 0
 var/global/last_tick_timeofday = world.timeofday
@@ -21,8 +21,6 @@ datum/controller/game_controller
 	var/sun_cost		= 0
 	var/mobs_cost		= 0
 	var/diseases_cost	= 0
-	var/machines_cost	= 0
-	var/objects_cost	= 0
 	var/networks_cost	= 0
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
@@ -37,17 +35,7 @@ datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
 	var/datum/random_map/ore/asteroid_ore_map   // For debugging and VV.
 
-datum/controller/game_controller/New()
-	//There can be only one master_controller. Out with the old and in with the new.
-	if(master_controller != src)
-		if(istype(master_controller))
-			Recover()
-			master_controller.Del()
-		else
-			init_subtypes(/datum/subsystem, subsystems)
-
-		master_controller = src
-
+datum/controller/game_controller/proc/world_call()
 	if(!job_master)
 		job_master = new /datum/controller/occupations()
 		job_master.SetupOccupations()
@@ -58,6 +46,17 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
 	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
+
+datum/controller/game_controller/New()
+	//There can be only one master_controller. Out with the old and in with the new.
+	if(master_controller != src)
+		if(istype(master_controller))
+			Recover()
+			master_controller.Del()
+		else
+			init_subtypes(/datum/subsystem, subsystems)
+
+		master_controller = src
 
 /*
 calculate the longest number of ticks the MC can wait between each cycle without causing subsystems to not fire on schedule
@@ -139,9 +138,6 @@ datum/controller/game_controller/proc/setup_objects()
 	//Set up spawn points.
 	populate_spawn_points()
 
-	// Sort the machinery list so it doesn't cause a lagspike at roundstart
-	process_machines_sort()
-
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
@@ -214,20 +210,6 @@ datum/controller/game_controller/proc/process()
 
 				sleep(breather_ticks)
 
-				//MACHINES
-				timer = world.timeofday
-				process_machines()
-				machines_cost = (world.timeofday - timer) / 10
-
-				sleep(breather_ticks)
-
-				//OBJECTS
-				timer = world.timeofday
-				process_objects()
-				objects_cost = (world.timeofday - timer) / 10
-
-				sleep(breather_ticks)
-
 				//PIPENETS
 				if(!pipe_processing_killed)
 					timer = world.timeofday
@@ -265,7 +247,7 @@ datum/controller/game_controller/proc/process()
 				process_subsystems()
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + networks_cost + powernets_cost + nano_cost + events_cost + cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)	//why not just use world.time instead?
@@ -327,39 +309,6 @@ datum/controller/game_controller/proc/process_diseases()
 			i++
 			continue
 		active_diseases.Cut(i,i+1)
-
-datum/controller/game_controller/proc/process_machines()
-	process_machines_sort()
-	process_machines_process()
-
-/var/global/machinery_sort_required = 0
-datum/controller/game_controller/proc/process_machines_sort()
-	if(machinery_sort_required)
-		machinery_sort_required = 0
-		machines = dd_sortedObjectList(machines)
-
-datum/controller/game_controller/proc/process_machines_process()
-	for(var/obj/machinery/Machine in machines)
-		last_thing_processed = Machine.type
-		if(Machine.process() != PROCESS_KILL)
-			if(Machine)
-				Machine.power_change()
-				if(Machine.use_power)
-					Machine.auto_use_power()
-				continue
-		machines -= Machine
-
-
-datum/controller/game_controller/proc/process_objects()
-	var/i = 1
-	while(i<=processing_objects.len)
-		var/obj/Object = processing_objects[i]
-		if(Object)
-			last_thing_processed = Object.type
-			Object.process()
-			i++
-			continue
-		processing_objects.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_pipenets()
 	last_thing_processed = /datum/pipe_network

@@ -102,7 +102,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	processing_objects |= src
+	SSobj.processing |= src
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
@@ -153,7 +153,7 @@
 		if(istype(M))
 			M.drop_from_inventory(piece)
 		del(piece)
-	processing_objects -= src
+	SSobj.processing -= src
 	..()
 
 /obj/item/weapon/rig/proc/suit_is_deployed()

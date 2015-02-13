@@ -15,11 +15,11 @@
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 	process() //Every [recharge_time] ticks, recharge a shot for the cyborg
@@ -69,11 +69,11 @@
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 

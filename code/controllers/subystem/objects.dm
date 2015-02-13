@@ -21,9 +21,9 @@ var/datum/subsystem/objects/SSobj
 
 /datum/subsystem/objects/fire()
 	var/i=1
-	for(var/thing in SSobj.processing)
+	for(var/obj/thing in SSobj.processing)
 		if(thing)
-			thing:process(wait)
+			thing.process(wait)
 			++i
 			continue
 		SSobj.processing.Cut(i, i+1)

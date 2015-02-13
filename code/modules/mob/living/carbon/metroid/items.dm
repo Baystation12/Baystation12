@@ -239,7 +239,7 @@
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 	process()
 		var/mob/dead/observer/ghost

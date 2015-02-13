@@ -28,8 +28,13 @@
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
 /obj/proc/process()
-	processing_objects.Remove(src)
+	SSobj.processing.Remove(src)
 	return 0
+
+/obj/Del()
+	if(!istype(src, /obj/machinery))
+		SSobj.processing.Remove(src) // TODO: Have a processing bitflag to reduce on unnecessary loops through the processing lists
+	..()
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)

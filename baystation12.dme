@@ -102,6 +102,7 @@
 #include "code\controllers\verbs.dm"
 #include "code\controllers\voting.dm"
 #include "code\controllers\subystem\garbage.dm"
+#include "code\controllers\subystem\machines.dm"
 #include "code\controllers\subystem\objects.dm"
 #include "code\datums\ai_laws.dm"
 #include "code\datums\browser.dm"

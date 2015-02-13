@@ -188,10 +188,10 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	processing_objects |= src
+	SSobj.processing |= src
 
 /obj/item/weapon/melee/energy/blade/Del()
-	processing_objects -= src
+	SSobj.processing -= src
 	..()
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)

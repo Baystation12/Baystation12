@@ -176,7 +176,7 @@
 		turn_off()
 		if(!fuel)
 			src.icon_state = "[initial(icon_state)]-empty"
-		processing_objects -= src
+		SSobj.processing -= src
 
 /obj/item/device/flashlight/flare/proc/turn_off()
 	on = 0
@@ -203,7 +203,7 @@
 		user.visible_message("<span class='notice'>[user] activates the flare.</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
 		src.force = on_damage
 		src.damtype = "fire"
-		processing_objects += src
+		SSobj.processing += src
 
 /obj/item/device/flashlight/slime
 	gender = PLURAL

@@ -113,7 +113,7 @@
 
 
 	process()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		return
 
 

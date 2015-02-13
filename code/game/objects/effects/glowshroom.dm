@@ -44,13 +44,13 @@
 	else //if on the floor, glowshroom on-floor sprite
 		icon_state = "glowshroomf"
 
-	processing_objects += src
+	SSobj.processing += src
 
 	SetLuminosity(round(potency/15))
 	lastTick = world.timeofday
 
 /obj/effect/glowshroom/Del()
-	processing_objects -= src
+	SSobj.processing -= src
 	..()
 
 /obj/effect/glowshroom/process()

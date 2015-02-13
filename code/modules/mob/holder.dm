@@ -9,10 +9,10 @@
 /obj/item/weapon/holder/New()
 	item_state = icon_state
 	..()
-	processing_objects.Add(src)
+	SSobj.processing.Add(src)
 
 /obj/item/weapon/holder/Del()
-	processing_objects.Remove(src)
+	SSobj.processing.Remove(src)
 	..()
 
 /obj/item/weapon/holder/process()

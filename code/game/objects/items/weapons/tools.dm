@@ -215,7 +215,7 @@
 				src.damtype = "brute"
 				src.icon_state = "welder"
 				src.welding = 0
-			processing_objects.Remove(src)
+			SSobj.processing.Remove(src)
 			return
 		//Welders left on now use up fuel, but lets not have them run out quite that fast
 		if(1)
@@ -307,7 +307,7 @@
 			src.force = 15
 			src.damtype = "fire"
 			src.icon_state = "welder1"
-			processing_objects.Add(src)
+			SSobj.processing |= src
 		else
 			usr << "\blue Need more fuel!"
 			src.welding = 0
@@ -339,7 +339,7 @@
 			src.damtype = "fire"
 			src.icon_state = "welder1"
 			src.w_class = 4
-			processing_objects.Add(src)
+			SSobj.processing |= src
 		else
 			usr << "\blue Need more fuel!"
 			src.welding = 0

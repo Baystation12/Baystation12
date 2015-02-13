@@ -356,7 +356,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 
 /obj/effect/energy_net/New()
 	..()
-	processing_objects |= src
+	SSobj.processing |= src
 
 /obj/effect/energy_net/Del()
 
@@ -366,7 +366,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 		M.captured = 0
 		M << "You are free of the net!"
 
-	processing_objects -= src
+	SSobj.processing -= src
 	..()
 
 /obj/effect/energy_net/proc/healthcheck()

@@ -323,7 +323,7 @@
 		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
 		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
 		new /obj/item/weapon/reagent_containers/food/snacks/donkpocket(src)
-		
+
 /obj/item/weapon/storage/box/sinpockets
 	name = "box of sin-pockets"
 	desc = "<B>Instructions:</B> <I>Crush bottom of package to initiate chemical heating. Wait for 20 seconds before consumption. Product will cool if not eaten within seven minutes.</I>"
@@ -485,7 +485,7 @@
 			W.lit = 1
 			W.damtype = "burn"
 			W.icon_state = "match_lit"
-			processing_objects.Add(W)
+			SSobj.processing.Add(W)
 		W.update_icon()
 		return
 

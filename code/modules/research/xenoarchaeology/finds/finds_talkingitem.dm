@@ -16,11 +16,11 @@
 
 /datum/talking_atom/proc/init()
 	if(holder_atom)
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 /datum/talking_atom/proc/process()
 	if(!holder_atom)
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 
 	else if(heard_words.len >= 1 && world.time > last_talk_time + talk_interval && prob(talk_chance))
 		SaySomething()

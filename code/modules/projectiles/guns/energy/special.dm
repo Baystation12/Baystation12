@@ -45,11 +45,11 @@ obj/item/weapon/gun/energy/staff
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 
@@ -93,10 +93,10 @@ obj/item/weapon/gun/energy/staff
 
 /obj/item/weapon/gun/energy/floragun/New()
 	..()
-	processing_objects.Add(src)
+	SSobj.processing.Add(src)
 
 /obj/item/weapon/gun/energy/floragun/Del()
-	processing_objects.Remove(src)
+	SSobj.processing.Remove(src)
 	..()
 
 /obj/item/weapon/gun/energy/floragun/process()
@@ -151,11 +151,11 @@ obj/item/weapon/gun/energy/staff
 
 	New()
 		..()
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 	process()

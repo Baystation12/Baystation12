@@ -59,10 +59,10 @@
 			del(src)
 
 		spawn_biomass_piece(src.loc)
-		processing_objects.Add(src)
+		SSobj.processing.Add(src)
 
 	Del()
-		processing_objects.Remove(src)
+		SSobj.processing.Remove(src)
 		..()
 
 	proc/spawn_biomass_piece(var/turf/location)

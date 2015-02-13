@@ -28,14 +28,14 @@
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
 
-	processing_objects.Add(src)
+	SSobj.processing += src
 	return
 
 /obj/item/weapon/tank/Del()
 	if(air_contents)
 		del(air_contents)
 
-	processing_objects.Remove(src)
+	SSobj.processing -= src
 
 	..()
 
@@ -124,7 +124,7 @@
 			location = loc.loc
 	else if(istype(loc, /mob/living/carbon))
 		location = loc
-	
+
 	var/using_internal
 	if(istype(location))
 		if(location.internal==src)

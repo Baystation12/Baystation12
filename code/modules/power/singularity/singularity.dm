@@ -490,7 +490,8 @@ var/global/list/uneatable = list(
 	else if(istype(A,/obj))
 		var/obj/O = A
 		machines -= O
-		processing_objects -= O
+		SSobj.processing -= O
+		SSmachine.processing -= O
 		O.loc = null
 	else if(isturf(A))
 		var/turf/T = A

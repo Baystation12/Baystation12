@@ -5,10 +5,10 @@ datum/controller/transfer_controller
 	var/currenttick = 0
 datum/controller/transfer_controller/New()
 	timerbuffer = config.vote_autotransfer_initial
-	processing_objects += src
+	SSobj.processing += src
 
 datum/controller/transfer_controller/Del()
-	processing_objects -= src
+	SSobj.processing -= src
 
 datum/controller/transfer_controller/proc/process()
 	currenttick = currenttick + 1
