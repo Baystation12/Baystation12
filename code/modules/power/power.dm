@@ -63,8 +63,10 @@
 	if(!src.loc)
 		return 0
 
-	if(!use_power)
-		return 1
+	//Don't do this. It allows machines that set use_power to 0 when off (many machines) to
+	//be turned on again and used after a power failure because they never gain the NOPOWER flag.
+	//if(!use_power)
+	//	return 1
 
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)

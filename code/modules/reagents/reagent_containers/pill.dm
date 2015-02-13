@@ -190,6 +190,38 @@
 		..()
 		reagents.add_reagent("dexalin", 15)
 
+/obj/item/weapon/reagent_containers/pill/dexalin_plus
+	name = "Dexalin Plus pill"
+	desc = "Used to treat extreme oxygen deprivation."
+	icon_state = "pill8"
+	New()
+		..()
+		reagents.add_reagent("dexalin", 15)
+
+/obj/item/weapon/reagent_containers/pill/dermaline
+	name = "Dermaline pill"
+	desc = "Used to treat burn wounds."
+	icon_state = "pill12"
+	New()
+		..()
+		reagents.add_reagent("dermaline", 15)
+
+/obj/item/weapon/reagent_containers/pill/dylovene
+	name = "Dylovene pill"
+	desc = "A broad-spectrum anti-toxin."
+	icon_state = "pill13"
+	New()
+		..()
+		reagents.add_reagent("anti_toxin", 15)
+
+/obj/item/weapon/reagent_containers/pill/inaprovaline
+	name = "Inaprovaline pill"
+	desc = "Used to stabilize patients."
+	icon_state = "pill20"
+	New()
+		..()
+		reagents.add_reagent("inaprovaline", 30)
+
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
 	desc = "Used to treat physical injuries."
@@ -216,3 +248,11 @@
 		reagents.add_reagent("impedrezene", 10)
 		reagents.add_reagent("synaptizine", 5)
 		reagents.add_reagent("hyperzine", 5)
+
+ /obj/item/weapon/reagent_containers/pill/spaceacillin
+	name = "Spaceacillin"
+	desc = "Contains antiviral agents."
+	icon_state = "pill19"
+	New()
+		..()
+		reagents.add_reagent("spaceacillin", 15)

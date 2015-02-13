@@ -104,7 +104,7 @@
 		return
 
 	..()
-	take_damage(Proj.damage * 4)
+	take_damage(Proj.damage)
 	return
 
 
@@ -484,10 +484,12 @@
 		animate(src, color="#222222", time=5)
 		SetOpacity(1)
 
+
+
 /obj/machinery/button/windowtint
 	name = "window tint control"
 	icon = 'icons/obj/power.dmi'
-	icon_state = "light1"
+	icon_state = "light0"
 	desc = "A remote control switch for polarized windows."
 	var/range = 7
 
@@ -495,13 +497,24 @@
 	if(..())
 		return 1
 
+	toggle_tint()
+
+/obj/machinery/button/windowtint/proc/toggle_tint()
 	use_power(5)
 
 	active = !active
-	icon_state = "light[active]"
+	update_icon()
 
 	for(var/obj/structure/window/reinforced/polarized/W in range(src,range))
 		if (W.id == src.id || !W.id)
-			spawn( 0 )
+			spawn(0)
 				W.toggle()
 				return
+
+/obj/machinery/button/windowtint/power_change()
+	..()
+	if(active && !powered(power_channel))
+		toggle_tint()
+
+/obj/machinery/button/windowtint/update_icon()
+	icon_state = "light[active]"
