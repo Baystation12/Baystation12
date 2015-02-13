@@ -22,7 +22,7 @@
 
 /obj/machinery/power/generator/New()
 	..()
-
+	desc = initial(desc) + " Rated for [round(max_power/1000)] kW."
 	spawn(1)
 		reconnect()
 
@@ -132,8 +132,11 @@
 
 /obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
-		user << "\blue You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor."
+		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
+					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
+					"You hear a ratchet")
 		use_power = anchored
 		reconnect()
 	else
@@ -160,7 +163,7 @@
 		t += " <BR>"
 		t += "<B>Primary Circulator (top or left)</B><BR>"
 		t += "Flow Capacity: [round(circ1.volume_capacity_used*100)]%<BR>"
-		t += "<BR><BR>"
+		t += " <BR>"
 		t += "Inlet Pressure: [round(circ1.air1.return_pressure(), 0.1)] kPa<BR>"
 		t += "Inlet Temperature: [round(circ1.air1.temperature, 0.1)] K<BR>"
 		t += " <BR>"
@@ -184,7 +187,7 @@
 	t += "<HR>"
 	t += "<A href='?src=\ref[src]'>Refresh</A> <A href='?src=\ref[src];close=1'>Close</A>"
 
-	user << browse(t, "window=teg;size=460x300")
+	user << browse(t, "window=teg;size=360x420")
 	onclose(user, "teg")
 	return 1
 

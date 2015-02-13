@@ -26,8 +26,8 @@
 
 /obj/machinery/atmospherics/binary/circulator/New()
 	..()
-	desc = initial(desc) + "  Its outlet port is to the [dir2text(dir)]."
-	air1.volume = 500
+	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
+	air1.volume = 400
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 	var/datum/gas_mixture/removed
@@ -89,8 +89,11 @@
 
 /obj/machinery/atmospherics/binary/circulator/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
-		user << "\blue You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor."
+		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
+					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
+					"You hear a ratchet")
 
 		if(anchored)
 			if(dir & (NORTH|SOUTH))
