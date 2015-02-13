@@ -1,66 +1,94 @@
-/obj/item/weapon/dart_cartridge
+/obj/item/projectile/bullet/chemdart
+	name = "dart"
+	icon_state = "cbbolt"
+	damage = 3
+	sharp = 1
+	embed = 1
+	var/reagent_amount = 15
+	kill_count = 10 //short range
+
+/obj/item/projectile/bullet/chemdart/New()
+	reagents = new/datum/reagents(reagent_amount)
+	reagents.my_atom = src
+
+/obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
+	if(blocked < 2 && isliving(target))
+		var/mob/living/L = target
+		if(L.can_inject(target_zone=def_zone))
+			reagents.trans_to(L, reagent_amount)
+
+/obj/item/ammo_casing/chemdart
+	name = "chemical dart"
+	desc = "A small hollow dart."
+	icon_state = "dart"
+	caliber = "dart"
+	projectile_type = /obj/item/projectile/bullet/chemdart
+
+/obj/item/ammo_magazine/chemdart
 	name = "dart cartridge"
 	desc = "A rack of hollow darts."
-	icon = 'icons/obj/ammo.dmi'
-	icon_state = "darts-5"
+	icon_state = "darts"
 	item_state = "rcdammo"
-	opacity = 0
-	density = 0
-	anchored = 0.0
 	origin_tech = "materials=2"
-	var/darts = 5
+	mag_type = MAGAZINE
+	caliber = "dart"
+	max_ammo = 5
+	multiple_sprites = 1
 
-/obj/item/weapon/dart_cartridge/update_icon()
-	if(!darts)
-		icon_state = "darts-0"
-	else if(darts > 5)
-		icon_state = "darts-5"
-	else
-		icon_state = "darts-[darts]"
-	return 1
-
-/obj/item/weapon/gun/dartgun
+/obj/item/weapon/gun/projectile/dartgun
 	name = "dart gun"
 	desc = "A small gas-powered dartgun, capable of delivering chemical cocktails swiftly across short distances."
 	icon_state = "dartgun-empty"
 
+	caliber = "dart"
+	fire_sound = 'sound/weapons/empty.ogg'
+	fire_sound_text = "a metallic click"
+	recoil = 0
+	silenced = 1
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/chemdart
+	auto_eject = 0
+
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
-	var/obj/item/weapon/dart_cartridge/cartridge = null //Container of darts.
 	var/max_beakers = 3
 	var/dart_reagent_amount = 15
 	var/container_type = /obj/item/weapon/reagent_containers/glass/beaker
 	var/list/starting_chems = null
 
-/obj/item/weapon/gun/dartgun/update_icon()
-
-	if(!cartridge)
-		icon_state = "dartgun-empty"
-		return 1
-
-	if(!cartridge.darts)
-		icon_state = "dartgun-0"
-	else if(cartridge.darts > 5)
-		icon_state = "dartgun-5"
-	else
-		icon_state = "dartgun-[cartridge.darts]"
-	return 1
-
-/obj/item/weapon/gun/dartgun/New()
-
+/obj/item/weapon/gun/projectile/dartgun/dartgun/New()
 	..()
 	if(starting_chems)
 		for(var/chem in starting_chems)
 			var/obj/B = new container_type(src)
-			B.reagents.add_reagent(chem, 50)
+			B.reagents.add_reagent(chem, 60)
 			beakers += B
-	cartridge = new /obj/item/weapon/dart_cartridge(src)
 	update_icon()
 
-/obj/item/weapon/gun/dartgun/examine(mob/user)
-	update_icon()
-	if (!..(user, 2))
-		return
+/obj/item/weapon/gun/projectile/dartgun/update_icon()
+	if(!ammo_magazine)
+		icon_state = "dartgun-empty"
+		return 1
+
+	if(!ammo_magazine.stored_ammo || ammo_magazine.stored_ammo.len)
+		icon_state = "dartgun-0"
+	else if(ammo_magazine.stored_ammo.len > 5)
+		icon_state = "dartgun-5"
+	else
+		icon_state = "dartgun-[ammo_magazine.stored_ammo.len]"
+	return 1
+
+/obj/item/weapon/gun/projectile/dartgun/consume_next_projectile()
+	. = ..()
+	var/obj/item/projectile/bullet/chemdart/dart = .
+	if(istype(dart))
+		fill_dart(dart)
+
+/obj/item/weapon/gun/projectile/dartgun/examine(mob/user)
+	//update_icon()
+	//if (!..(user, 2))
+	//	return
+	..()
 	if (beakers.len)
 		user << "\blue [src] contains:"
 		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in beakers)
@@ -68,28 +96,7 @@
 				for(var/datum/reagent/R in B.reagents.reagent_list)
 					user << "\blue [R.volume] units of [R.name]"
 
-/obj/item/weapon/gun/dartgun/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/dart_cartridge))
-
-		var/obj/item/weapon/dart_cartridge/D = I
-
-		if(!D.darts)
-			user << "\blue [D] is empty."
-			return 0
-
-		if(cartridge)
-			if(cartridge.darts <= 0)
-				src.remove_cartridge()
-			else
-				user << "\blue There's already a cartridge in [src]."
-				return 0
-
-		user.drop_item()
-		cartridge = D
-		D.loc = src
-		user << "\blue You slot [D] into [src]."
-		update_icon()
-		return
+/obj/item/weapon/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(!istype(I, container_type))
 			user << "\blue [I] doesn't seem to fit into [src]."
@@ -103,112 +110,16 @@
 		beakers += B
 		user << "\blue You slot [B] into [src]."
 		src.updateUsrDialog()
-
-/obj/item/weapon/gun/dartgun/can_fire()
-	if(!cartridge)
-		return 0
-	else
-		return cartridge.darts
-
-/obj/item/weapon/gun/dartgun/proc/has_selected_beaker_reagents()
-	return 0
-
-/obj/item/weapon/gun/dartgun/proc/remove_cartridge()
-	if(cartridge)
-		usr << "\blue You pop the cartridge out of [src]."
-		var/obj/item/weapon/dart_cartridge/C = cartridge
-		C.loc = get_turf(src)
-		C.update_icon()
-		cartridge = null
-		src.update_icon()
-
-/obj/item/weapon/gun/dartgun/proc/get_mixed_syringe()
-	if (!cartridge)
-		return 0
-	if(!cartridge.darts)
-		return 0
-
-	var/obj/item/weapon/reagent_containers/syringe/dart = new(src)
-
-	if(mixing.len)
-		var/mix_amount = dart_reagent_amount/mixing.len
-		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in mixing)
-			B.reagents.trans_to(dart,mix_amount)
-
-	return dart
-
-/obj/item/weapon/gun/dartgun/proc/fire_dart(atom/target, mob/user)
-	if (locate (/obj/structure/table, src.loc))
-		return
-	else
-		var/turf/trg = get_turf(target)
-		var/obj/effect/syringe_gun_dummy/D = new/obj/effect/syringe_gun_dummy(get_turf(src))
-		var/obj/item/weapon/reagent_containers/syringe/S = get_mixed_syringe()
-		if(!S)
-			user << "\red There are no darts in [src]!"
-			return
-		if(!S.reagents)
-			user << "\red There are no reagents available!"
-			return
-		cartridge.darts--
-		src.update_icon()
-		S.reagents.trans_to(D, S.reagents.total_volume)
-		del(S)
-		D.icon_state = "syringeproj"
-		D.name = "syringe"
-		D.flags |= NOREACT
-		playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
-
-		for(var/i=0, i<6, i++)
-			if(!D) break
-			if(D.loc == trg) break
-			step_towards(D,trg)
-
-			if(D)
-				for(var/mob/living/carbon/M in D.loc)
-					if(!istype(M,/mob/living/carbon)) continue
-					if(M == user) continue
-					//Syringe gun attack logging by Yvarov
-					var/R
-					if(D.reagents)
-						for(var/datum/reagent/A in D.reagents.reagent_list)
-							R += A.id + " ("
-							R += num2text(A.volume) + "),"
-					if (istype(M, /mob))
-						M.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						user.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						msg_admin_attack("[user] ([user.ckey]) shot [M] ([M.ckey]) with a dartgun ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-					else
-						M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>dartgun</b> ([R])"
-						msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a <b>dartgun</b> ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-					if(D.reagents)
-						D.reagents.trans_to(M, 15)
-					M << "<span class='danger'>You feel a slight prick.</span>"
-
-					del(D)
-					break
-			if(D)
-				for(var/atom/A in D.loc)
-					if(A == user) continue
-					if(A.density) del(D)
-
-			sleep(1)
-
-		if (D) spawn(10) del(D)
-
-		return
-
-/obj/item/weapon/gun/dartgun/afterattack(obj/target, mob/user , flag)
-	if(!isturf(target.loc) || target == user) return
 	..()
 
-/obj/item/weapon/gun/dartgun/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
-	return 1
+//fills the given dart with reagents
+/obj/item/weapon/gun/projectile/dartgun/proc/fill_dart(var/obj/item/projectile/bullet/chemdart/dart)
+	if(mixing.len)
+		var/mix_amount = dart.reagent_amount/mixing.len
+		for(var/obj/item/weapon/reagent_containers/glass/beaker/B in mixing)
+			B.reagents.trans_to(dart, mix_amount)
 
-/obj/item/weapon/gun/dartgun/attack_self(mob/user)
-
+/obj/item/weapon/gun/projectile/dartgun/attack_self(mob/user)
 	user.set_machine(src)
 	var/dat = "<b>[src] mixing control:</b><br><br>"
 
@@ -230,9 +141,9 @@
 	else
 		dat += "There are no beakers inserted!<br><br>"
 
-	if(cartridge)
-		if(cartridge.darts)
-			dat += "The dart cartridge has [cartridge.darts] shots remaining."
+	if(ammo_magazine)
+		if(ammo_magazine.stored_ammo && ammo_magazine.stored_ammo.len)
+			dat += "The dart cartridge has [ammo_magazine.stored_ammo.len] shots remaining."
 		else
 			dat += "<font color='red'>The dart cartridge is empty!</font>"
 		dat += " \[<A href='?src=\ref[src];eject_cart=1'>Eject</A>\]"
@@ -240,7 +151,7 @@
 	user << browse(dat, "window=dartgun")
 	onclose(user, "dartgun", src)
 
-/obj/item/weapon/gun/dartgun/proc/check_beaker_mixing(var/obj/item/B)
+/obj/item/weapon/gun/projectile/dartgun/proc/check_beaker_mixing(var/obj/item/B)
 	if(!mixing || !beakers)
 		return 0
 	for(var/obj/item/M in mixing)
@@ -248,7 +159,7 @@
 			return 1
 	return 0
 
-/obj/item/weapon/gun/dartgun/Topic(href, href_list)
+/obj/item/weapon/gun/projectile/dartgun/Topic(href, href_list)
 	src.add_fingerprint(usr)
 	if(href_list["stop_mix"])
 		var/index = text2num(href_list["stop_mix"])
@@ -271,23 +182,16 @@
 				beakers -= B
 				B.loc = get_turf(src)
 	else if (href_list["eject_cart"])
-		remove_cartridge()
+		unload_ammo(usr)
 	src.updateUsrDialog()
 	return
 
-/obj/item/weapon/gun/dartgun/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
-	if(cartridge)
-		spawn(0) fire_dart(target,user)
-	else
-		usr << "\red [src] is empty."
-
-
-/obj/item/weapon/gun/dartgun/vox
+/obj/item/weapon/gun/projectile/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
 
-/obj/item/weapon/gun/dartgun/vox/medical
+/obj/item/weapon/gun/projectile/dartgun/vox/medical
 	starting_chems = list("kelotane","bicaridine","anti_toxin")
 
-/obj/item/weapon/gun/dartgun/vox/raider
+/obj/item/weapon/gun/projectile/dartgun/vox/raider
 	starting_chems = list("space_drugs","stoxin","impedrezene")

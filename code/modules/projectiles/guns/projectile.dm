@@ -1,4 +1,4 @@
-#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns
+#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
 #define EJECT_CASINGS	1 //drop spent casings on the ground after firing
 #define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns
 
@@ -53,16 +53,19 @@
 	..()
 	if(chambered)
 		chambered.expend()
+	
+	//check chambered again in case it deleted itself
+	if(chambered && handle_casings != HOLD_CASINGS)
 		switch(handle_casings)
 			if(EJECT_CASINGS) //eject casing onto ground.
 				chambered.loc = get_turf(src)
-				chambered = null
 			if(CYCLE_CASINGS) //cycle the casing back to the end.
 				if(ammo_magazine)
 					ammo_magazine.stored_ammo += chambered
 				else
 					loaded += chambered
-				chambered = null
+		chambered = null
+		
 
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
@@ -81,6 +84,7 @@
 				AM.loc = src
 				ammo_magazine = AM
 				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src]!</span>")
+				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
 					user << "<span class='warning'>[src] is full!</span>"
@@ -96,6 +100,7 @@
 						count++
 				if(count)
 					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src]!</span>")
+					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = A
@@ -109,20 +114,22 @@
 		C.loc = src
 		loaded.Insert(1, C) //add to the head of the list
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src]!</span>")
+		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 
 	update_icon()
 
 
-//attempts to unload src
-/obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user)
+//attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
+/obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
 		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src]!</span>")
+		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
 	else if(loaded.len)
 		//presumably, if it can be speed-loaded, it can be speed-unloaded.
-		if(load_method & SPEEDLOADER)
+		if(allow_dump && load_method & SPEEDLOADER)
 			var/count = 0
 			var/turf/T = get_turf(user)
 			if(T)
@@ -145,17 +152,11 @@
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if (aim_targets) //TODO replace untargeting with a hotkey
-		return ..()
 	unload_ammo(user)
 
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
-	//allow guns with both SPEEDLOADER and SINGLE_CASING a way to remove casings without dumping everything on the floor
-	if((load_method & SINGLE_CASING) && loaded.len && (src in user))
-		var/obj/item/ammo_casing/C = loaded[loaded.len]
-		loaded.len--
-		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src]!</span>")
+	if(src in user)
+		unload_ammo(user, allow_dump=0)
 	else
 		return ..()
 

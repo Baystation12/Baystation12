@@ -229,6 +229,7 @@
 /obj/item/projectile/process()
 	spawn while(src)
 		if(kill_count-- < 1)
+			on_impact(src.loc) //for any final impact behaviours
 			del(src)
 		if((!( current ) || loc == current))
 			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)

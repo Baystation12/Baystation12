@@ -148,8 +148,7 @@
 
 			if(W.sharp) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
-				O.loc = src
-				src.embedded += O
+				embed(O)
 
 				var/turf/T = near_wall(dir,2)
 
@@ -158,7 +157,11 @@
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 					src.anchored = 1
 					src.pinned += O
-					src.verbs += /mob/proc/yank_out_object
+
+/mob/living/proc/embed(var/obj/O, var/def_zone=null)
+	O.loc = src
+	src.embedded += O
+	src.verbs += /mob/proc/yank_out_object
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)

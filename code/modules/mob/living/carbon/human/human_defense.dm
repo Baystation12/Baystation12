@@ -389,6 +389,13 @@ emp_act
 					src.anchored = 1
 					src.pinned += O
 
+/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
+	if(!def_zone) ..()
+	
+	var/datum/organ/external/affecting = get_organ(def_zone)
+	if(affecting)
+		affecting.embed(O)
+
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)

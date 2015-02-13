@@ -18,6 +18,7 @@
 	w_class = 1
 	sharp = 1
 	var/mode = SYRINGE_DRAW
+	var/image/filling //holds a reference to the current filling overlay
 
 	on_reagent_change()
 		update_icon()
@@ -217,7 +218,7 @@
 		item_state = "syringe_[rounded_vol]"
 
 		if(reagents.total_volume)
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
+			filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
 
 			filling.icon_state = "syringe[rounded_vol]"
 
@@ -225,7 +226,7 @@
 			overlays += filling
 
 
-	/obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
+	proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
 
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
@@ -268,11 +269,17 @@
 		src.reagents.reaction(target, INGEST)
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		src.reagents.trans_to(target, syringestab_amount_transferred)
+		src.break_syringe(target, user)
+		
+	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 		src.desc += " It is broken."
 		src.mode = SYRINGE_BROKEN
-		src.add_blood(target)
-		src.add_fingerprint(usr)
+		if(target)
+			src.add_blood(target)
+		if(user)
+			src.add_fingerprint(user)
 		src.update_icon()
+
 
 
 /obj/item/weapon/reagent_containers/ld50_syringe

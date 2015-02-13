@@ -79,7 +79,7 @@
 /obj/item/weapon/storage/box/syringes
 	name = "box of syringes"
 	desc = "A box full of syringes."
-	desc = "A biohazard alert warning is printed on the box"
+//	desc = "A biohazard alert warning is printed on the box"
 	icon_state = "syringe"
 
 	New()
@@ -91,6 +91,22 @@
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
+
+/obj/item/weapon/storage/box/syringegun
+	name = "box of compressed gas cartridges"
+	desc = "A box full of compressed gas cartridges."
+	icon_state = "syringe"
+
+	New()
+		..()
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/ammo_casing/gas_cartridge( src )
+
 
 /obj/item/weapon/storage/box/beakers
 	name = "box of beakers"

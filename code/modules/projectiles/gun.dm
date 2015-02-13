@@ -165,6 +165,7 @@
 	if(recoil)
 		spawn()
 			shake_camera(user, recoil + 1, recoil)
+	update_icon()
 
 //does the actual shooting
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
