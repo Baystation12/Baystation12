@@ -792,7 +792,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("Status"))	//not looking at that panel
+	if(statpanel("MC"))	//not looking at that panel
 
 		if(client && client.holder)
 			stat(null,"Location:\t([x], [y], [z])")
@@ -806,6 +806,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"Events-[master_controller.events_cost]\t#[event_manager.active_events.len]")
 				for(var/datum/subsystem/SS in master_controller.subsystems)
 					if(SS.can_fire)
 						SS.stat_entry()
