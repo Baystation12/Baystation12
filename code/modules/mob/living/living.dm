@@ -173,7 +173,7 @@
 
 
 /mob/living/get_desc_fluff()
-	if(flavor_text) //Get flavor text for the yellow text.
+	if(flavor_text) //Get flavor text for the green text.
 		return flavor_text
 	else if(desc_fluff) //No flavor text?  Try for hardcoded fluff instead.
 		return desc_fluff

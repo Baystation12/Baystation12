@@ -6,7 +6,7 @@
 	desc_info = "Drones are player-controlled synthetics which are lawed to maintain the station and not \
 				interact with anyone else, except for other drones.  They hold a wide array of tools to build, repair, maintain, and clean. \
 				They fuction similarly to other synthetics, in that they require recharging regularly, have laws, and are resilient to many hazards, \
-				such as fire, radiation, vaccum, and more.  Ghosts can join the round as a maintenance drone by using the appropiate verb in the 'ghost' tab."
+				such as fire, radiation, vacuum, and more.  Ghosts can join the round as a maintenance drone by using the appropriate verb in the 'ghost' tab."
 	//desc_fluff is already provided with flavor_text.
 	maxHealth = 35
 	health = 35

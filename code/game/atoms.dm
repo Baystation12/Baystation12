@@ -14,7 +14,7 @@
 
 	//Examine tab vars
 	var/desc_info = null //Blue 'tutorial' text, which details how this atom works, and perhaps some tips and tricks.
-	var/desc_fluff = null //Yellow text, with quotes, to tell a short blurb or a paragraph about this atom's place in the fluff, should one exist.
+	var/desc_fluff = null //Green text, with quotes, to tell a short blurb or a paragraph about this atom's place in the fluff, should one exist.
 
 
 	///Chemistry.
