@@ -22,6 +22,10 @@
 var/global/datum/controller/plants/plant_controller // Set in New().
 
 /datum/controller/plants
+
+	var/plants_per_tick = PLANTS_PER_TICK
+	var/plant_tick_time = PLANT_TICK_TIME
+
 	var/list/product_descs = list()         // Stores generated fruit descs.
 	var/list/next_plants = list()           // All queued plants.
 	var/list/seeds = list()                 // All seed data stored here.
@@ -118,11 +122,12 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		var/processed = 0
 		while(1)
 			if(!processing)
-				sleep(PLANT_TICK_TIME)
+				sleep(plant_tick_time)
 			else
+				processed = 0
 				var/list/plants = next_plants
 				next_plants = list()
-				for(var/x=0;x<PLANTS_PER_TICK;x++)
+				for(var/x=0;x<plants_per_tick;x++)
 					if(!plants.len)
 						break
 					sleep(-1)
@@ -132,7 +137,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 					processed++
 				if(plants.len)
 					next_plants |= plants
-				sleep(PLANT_TICK_TIME - processed)
+				sleep(plant_tick_time - processed)
 
 /datum/controller/plants/proc/add_plant(var/obj/effect/plant/plant)
 	next_plants |= plant

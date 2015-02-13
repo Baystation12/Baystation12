@@ -66,8 +66,8 @@
 		del(src)
 		return
 
-	if(plant_controller.product_descs[seed.uid])
-		desc = plant_controller.product_descs[seed.uid]
+	if(plant_controller.product_descs["[seed.uid]"])
+		desc = plant_controller.product_descs["[seed.uid]"]
 	else
 		var/list/descriptors = list()
 		if(reagents.has_reagent("sugar") || reagents.has_reagent("cherryjelly") || reagents.has_reagent("honey") || reagents.has_reagent("berryjuice"))

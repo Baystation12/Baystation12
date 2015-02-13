@@ -1,5 +1,4 @@
 /obj/effect/plant/HasProximity(var/atom/movable/AM)
-
 	plant_controller.add_plant(src)
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
