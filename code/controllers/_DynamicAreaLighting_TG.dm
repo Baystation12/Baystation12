@@ -87,6 +87,8 @@ datum/light_source
 	proc/remove_effect()
 		// before we apply the effect we remove the light's current effect.
 		for(var/turf/T in effect)	// negate the effect of this light source
+			T.l_color = null
+			readrgb(owner.l_color)
 			T.update_lumcount(-effect[T], col_r, col_g, col_b, 1)
 		effect.Cut()					// clear the effect list
 

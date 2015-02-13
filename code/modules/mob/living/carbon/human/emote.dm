@@ -558,10 +558,6 @@
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."
 
-
-
-
-
 	if (message)
 		log_emote("[name]/[key] : [message]")
 

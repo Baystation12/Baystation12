@@ -7,8 +7,11 @@
 /turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	if(graphic_add && graphic_add.len)
 		overlays += graphic_add
+		mouse_opacity = 0
 	if(graphic_remove && graphic_remove.len)
 		overlays -= graphic_remove
+		mouse_opacity = 1
+		l_color = null
 
 /turf/proc/update_air_properties()
 	var/block = c_airblock(src)

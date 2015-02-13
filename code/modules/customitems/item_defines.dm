@@ -1418,7 +1418,7 @@
 
 /mob/living/simple_animal/cat/fluff/bones
 	name = "Bones"
-	desc = "That's Bones the cat. He's a laid back, black stray cat. Meow."
+	desc = "That's Bones the cat. He's a laid back, brown stray cat. Meow."
 	gender = MALE
 	icon_state = "cat3"
 	icon_living = "cat3"

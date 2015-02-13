@@ -9,7 +9,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	var/CLOTH_CONTAMINATION_NAME = "Cloth Contamination"
 	var/CLOTH_CONTAMINATION_DESC = "If this is on, phoron does damage by getting into cloth."
 
-	var/PHORONGUARD_ONLY = 0
+	var/PHORONGUARD_ONLY = 1
 	var/PHORONGUARD_ONLY_NAME = "\"PhoronGuard Only\""
 	var/PHORONGUARD_ONLY_DESC = "If this is on, only biosuits and spacesuits protect against contamination and ill effects."
 
@@ -17,7 +17,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	var/GENETIC_CORRUPTION_NAME = "Genetic Corruption Chance"
 	var/GENETIC_CORRUPTION_DESC = "Chance of genetic corruption as well as toxic damage, X in 10,000."
 
-	var/SKIN_BURNS = 0
+	var/SKIN_BURNS = 1
 	var/SKIN_BURNS_DESC = "Phoron has an effect similar to mustard gas on the un-suited."
 	var/SKIN_BURNS_NAME = "Skin Burns"
 
@@ -93,8 +93,8 @@ obj/var/contaminated = 0
 	//Burn skin if exposed.
 	if(vsc.plc.SKIN_BURNS)
 		if(!pl_head_protected() || !pl_suit_protected())
-			burn_skin(0.75)
-			if(prob(20)) src << "\red Your skin burns!"
+			burn_skin(5)
+			if(prob(20)) src << pick( "\red Your skin burns!", "\red You feel your skin peeling away!", "\red Blisters begin to form on your skin!", "\red Your skin is unbearably itchy!" )
 			updatehealth()
 
 	//Burn eyes if exposed.
@@ -135,6 +135,16 @@ obj/var/contaminated = 0
 			src << "\red You are blinded!"
 			eye_blind += 20
 
+/mob/living/carbon/human/proc/burn_lungs()
+	//The proc that handles lung damage.
+	if(!species.has_organ["lungs"])
+		return
+
+	var/datum/organ/internal/lungs/E = internal_organs_by_name["lungs"]
+	if(E)
+		if(prob(20))
+			src << pick( "\red Your lungs burn!", "\red You find it extremely hard to breath!", "\red You cough uncontrollably!" )
+			E.damage += 2.5
 
 /mob/living/carbon/human/proc/pl_head_protected()
 	//Checks if the head is adequately sealed.

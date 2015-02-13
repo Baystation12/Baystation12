@@ -108,6 +108,7 @@ turf/simulated
 
 	proc/update_visuals(datum/gas_mixture/model)
 		overlays.Cut()
+		mouse_opacity = 1
 
 		var/siding_icon_state = return_siding_icon_state()
 		if(siding_icon_state)
@@ -116,10 +117,10 @@ turf/simulated
 		switch(model.graphic)
 			if("plasma")
 				overlays.Add(plmaster)
+				mouse_opacity = 0
 			if("sleeping_agent")
 				overlays.Add(slmaster)
-
-
+				mouse_opacity = 0
 
 	New()
 		..()
