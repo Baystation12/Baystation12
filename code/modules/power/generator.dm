@@ -14,6 +14,9 @@
 	var/obj/machinery/atmospherics/binary/circulator/circ1
 	var/obj/machinery/atmospherics/binary/circulator/circ2
 
+	var/last_circ1_gen = 0
+	var/last_circ2_gen = 0
+	var/last_thermal_gen = 0
 	var/stored_energy = 0
 	var/lastgen1 = 0
 	var/lastgen2 = 0
@@ -73,6 +76,9 @@
 
 	lastgen2 = lastgen1
 	lastgen1 = 0
+	last_thermal_gen = 0
+	last_circ1_gen = 0
+	last_circ2_gen = 0
 
 	if(air1 && air2)
 		var/air1_heat_capacity = air1.heat_capacity()
@@ -82,7 +88,7 @@
 		if(delta_temperature > 0 && air1_heat_capacity > 0 && air2_heat_capacity > 0)
 			var/energy_transfer = delta_temperature*air2_heat_capacity*air1_heat_capacity/(air2_heat_capacity+air1_heat_capacity)
 			var/heat = energy_transfer*(1-thermal_efficiency)
-			stored_energy += energy_transfer*thermal_efficiency
+			last_thermal_gen = energy_transfer*thermal_efficiency
 
 			if(air2.temperature > air1.temperature)
 				air2.temperature = air2.temperature - energy_transfer/air2_heat_capacity
@@ -111,8 +117,9 @@
 		stored_energy *= 0.5
 
 	//Power
-	stored_energy += circ1.return_stored_energy()
-	stored_energy += circ2.return_stored_energy()
+	last_circ1_gen = circ1.return_stored_energy()
+	last_circ2_gen = circ2.return_stored_energy()
+	stored_energy += last_thermal_gen + last_circ1_gen + last_circ2_gen
 	lastgen1 = stored_energy*0.4 //smoothened power generation to prevent slingshotting as pressure is equalized, then restored by pumps
 	stored_energy -= lastgen1
 	effective_gen = (lastgen1 + lastgen2) / 2
@@ -156,12 +163,18 @@
 
 	user.set_machine(src)
 
-	var/t = "<PRE><B>Thermo-Electric Generator</B><HR>"
+	var/t = "<PRE><B>Thermoelectric Generator</B><HR>"
+	t += "Total Output: [round(effective_gen/1000)] kW<HR>"
+	t += "Thermal Output: [round(last_thermal_gen/1000)] kW<BR>"
+	t += " <BR>"
+
+	var/vertical = 0
+	if (dir == NORTH || dir == SOUTH)
+		vertical = 1
 
 	if(circ1 && circ2)
-		t += "Output : [round(effective_gen/1000)] kW<BR>"
-		t += " <BR>"
-		t += "<B>Primary Circulator (top or left)</B><BR>"
+		t += "<B>Primary Circulator ([vertical ? "top" : "left"])</B><BR>"
+		t += "Turbine Output: [round(last_circ1_gen/1000)] kW<BR>"
 		t += "Flow Capacity: [round(circ1.volume_capacity_used*100)]%<BR>"
 		t += " <BR>"
 		t += "Inlet Pressure: [round(circ1.air1.return_pressure(), 0.1)] kPa<BR>"
@@ -170,7 +183,8 @@
 		t += "Outlet Pressure: [round(circ1.air2.return_pressure(), 0.1)] kPa<BR>"
 		t += "Outlet Temperature: [round(circ1.air2.temperature, 0.1)] K<BR>"
 		t += " <BR>"
-		t += "<B>Secondary Circulator (bottom or right)</B><BR>"
+		t += "<B>Secondary Circulator ([vertical ? "bottom" : "right"])</B><BR>"
+		t += "Turbine Output: [round(last_circ2_gen/1000)] kW<BR>"
 		t += "Flow Capacity: [round(circ2.volume_capacity_used*100)]%<BR>"
 		t += " <BR>"
 		t += "Inlet Pressure: [round(circ2.air1.return_pressure(), 0.1)] kPa<BR>"
@@ -183,11 +197,11 @@
 		t += "Unable to connect to circulators.<br>"
 		t += "Ensure both are in position and wrenched into place."
 
-	t += "<BR>"
+	t += " <BR>"
 	t += "<HR>"
 	t += "<A href='?src=\ref[src]'>Refresh</A> <A href='?src=\ref[src];close=1'>Close</A>"
 
-	user << browse(t, "window=teg;size=360x420")
+	user << browse(t, "window=teg;size=400x500")
 	onclose(user, "teg")
 	return 1
 

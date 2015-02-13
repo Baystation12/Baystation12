@@ -4,7 +4,7 @@
 #define ADIABATIC_EXPONENT 0.667 //Actually adiabatic exponent - 1.
 
 /obj/machinery/atmospherics/binary/circulator
-	name = "circulator/heat exchanger"
+	name = "circulator"
 	desc = "A gas circulator turbine and heat exchanger."
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "circ-off"
