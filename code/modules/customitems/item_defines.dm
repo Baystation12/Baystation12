@@ -1447,7 +1447,7 @@
 /obj/item/clothing/suit/storage/labcoat/kidafrag //Fraggloid
 	name = "frag jacket"
 	desc = "A slightly worn and battered combat jacket, with Kida military insignia. That fur collar looks quite cosy."
-	icon_state = "kidafrag"
+	icon_state = "kidafrag_open"
 	item_state = "kidafrag_open"
 	armor = list(melee = 25, bullet = 25, laser = 15, energy = 5, bomb = 5, bio = 0, rad = 0) //Just a little bit of armor. We want this guy to be wearing it on code green.
 
