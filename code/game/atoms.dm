@@ -12,6 +12,11 @@
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 
+	//Examine tab vars
+	var/desc_info = null //Blue 'tutorial' text, which details how this atom works, and perhaps some tips and tricks.
+	var/desc_fluff = null //Yellow text, with quotes, to tell a short blurb or a paragraph about this atom's place in the fluff, should one exist.
+
+
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
@@ -202,10 +207,35 @@ its easier to just keep the beam vertical.
 
 	user << "\icon[src] That's [f_name] [suffix]"
 
+	if(name) //This shouldn't be needed but I'm paranoid.
+		user.desc_name_holder = "[src.name]" //\icon[src]
+
+	user.desc_icon_holder = "\icon[src]"
+
 	if(desc)
 		user << desc
+		user.desc_holder = src.desc
+	else
+		user.desc_holder = null //This is needed, or else if you examine one thing with a desc, then another without, the panel will retain the first examined's desc.
+
+	user.desc_info_holder = get_desc_info()
+	user.desc_fluff_holder = get_desc_fluff()
 
 	return distance == -1 || (get_dist(src, user) <= distance)
+
+//Override these if you need special behaviour for a specific type.
+
+/atom/proc/get_desc_info()
+	if(desc_info)
+		return desc_info
+	else
+		return
+
+/atom/proc/get_desc_fluff()
+	if(desc_fluff)
+		return src.desc_fluff
+	else
+		return
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
