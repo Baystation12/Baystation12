@@ -171,7 +171,7 @@
 			if(!E.event_meta)
 				continue
 			var/datum/event_meta/EM = E.event_meta
-			var/ends_at = E.startedAt + (E.lastProcessAt() * master_controller.minimum_ticks)	// A best estimate
+			var/ends_at = E.startedAt + (E.lastProcessAt() * master_controller.processing_interval)	// A best estimate
 			var/ends_in = max(0, round((ends_at - world.time) / 600, 0.1))
 			html += "<tr>"
 			html += "<td>[severity_to_string[EM.severity]]</td>"

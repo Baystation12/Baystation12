@@ -14,7 +14,8 @@ var/global/pipe_processing_killed = 0
 datum/controller/game_controller
 	var/processing = 0
 	var/breather_ticks = 2		//a somewhat crude attempt to iron over the 'bumps' caused by high-cpu use by letting the MC have a breather for this many ticks after every loop
-	var/minimum_ticks = 20		//The minimum length of time between MC ticks
+	var/cost = 0
+	var/processing_interval = 20		//The minimum length of time between MC ticks
 
 	var/air_cost 		= 0
 	var/sun_cost		= 0
@@ -30,6 +31,7 @@ datum/controller/game_controller
 	var/total_cost		= 0
 
 	var/last_thing_processed
+	var/list/subsystems = list()
 	var/mob/list/expensive_mobs = list()
 
 	var/list/shuttle_list	                    // For debugging and VV
@@ -38,10 +40,12 @@ datum/controller/game_controller
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
 	if(master_controller != src)
-		log_debug("Rebuilding Master Controller")
 		if(istype(master_controller))
 			Recover()
-			del(master_controller)
+			master_controller.Del()
+		else
+			init_subtypes(/datum/subsystem, subsystems)
+
 		master_controller = src
 
 	if(!job_master)
@@ -54,6 +58,18 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
 	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
+
+/*
+calculate the longest number of ticks the MC can wait between each cycle without causing subsystems to not fire on schedule
+Note: you can set the datum's defined processing_interval to some integer to set an -absolute- minimum wait duration.
+*/
+	var/GCD
+	for(var/datum/subsystem/SS in subsystems)
+		if(SS.wait)
+			GCD = Gcd(SS.wait, GCD)
+	GCD = round(GCD)
+	if(GCD > processing_interval)
+		processing_interval = GCD
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
@@ -85,12 +101,15 @@ datum/controller/game_controller/proc/setup()
 
 	lighting_controller.initializeLighting()
 
-
 datum/controller/game_controller/proc/setup_objects()
-	world << "\red \b Initializing objects"
-	sleep(-1)
-	for(var/atom/movable/object in world)
-		object.initialize()
+	world << "<span class='danger'>Initializing Subsystems...</span>"
+	//sort subsystems by priority, so they initialize in the correct order
+	sortTim(subsystems, /proc/cmp_subsystem_priority)
+
+	//Eventually all this other setup stuff should be contained in subsystems and done in subsystem.Initialize()
+	for(var/datum/subsystem/S in subsystems)
+		S.Initialize(world.timeofday)
+		sleep(-1)
 
 	world << "\red \b Initializing pipe networks"
 	sleep(-1)
@@ -126,11 +145,17 @@ datum/controller/game_controller/proc/setup_objects()
 	world << "\red \b Initializations complete."
 	sleep(-1)
 
-
+#define MC_AVERAGE(average, current) (0.8*(average) + 0.2*(current))
 datum/controller/game_controller/proc/process()
 	processing = 1
 	spawn(0)
 		set background = 1
+		var/timer = world.time
+
+		for(var/datum/subsystem/SS in subsystems)
+			timer += processing_interval
+			SS.next_fire = timer
+
 		while(1)	//far more efficient than recursively calling ourself
 			if(!Failsafe)	new /datum/controller/failsafe()
 
@@ -139,7 +164,6 @@ datum/controller/game_controller/proc/process()
 			last_tick_timeofday = currenttime
 
 			if(processing)
-				var/timer
 				var/start_time = world.timeofday
 				controller_iteration++
 
@@ -237,15 +261,46 @@ datum/controller/game_controller/proc/process()
 				ticker.process()
 				ticker_cost = (world.timeofday - timer) / 10
 
+				//Subsystems
+				process_subsystems()
+
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)	//why not just use world.time instead?
 					start_time -= 864000    //deciseconds in a day
-				sleep( round(minimum_ticks - (end_time - start_time),1) )
+				sleep( round(processing_interval - (end_time - start_time),1) )
 			else
 				sleep(10)
+
+
+datum/controller/game_controller/proc/process_subsystems()
+	var/cpu
+	var/timer
+	var/start_time = world.timeofday
+	for(var/datum/subsystem/SS in subsystems)
+		if(SS.can_fire > 0)
+			if(SS.next_fire <= world.time)
+				SS.next_fire += SS.wait
+
+				timer = world.timeofday
+				cpu = world.cpu
+				last_thing_processed = SS.type
+				SS.last_fire = world.time
+				SS.fire()
+				SS.cpu = MC_AVERAGE(SS.cpu, world.cpu - cpu)
+				SS.cost = MC_AVERAGE(SS.cost, world.timeofday - timer)
+				++SS.times_fired
+				sleep(-1)
+
+	cost = MC_AVERAGE(cost, world.timeofday - start_time)
+
+#undef MC_AVERAGE
+
+/datum/controller/game_controller/proc/roundHasStarted()
+	for(var/datum/subsystem/SS in subsystems)
+		SS.can_fire = 1
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
