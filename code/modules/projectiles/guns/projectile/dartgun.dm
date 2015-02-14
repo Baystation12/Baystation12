@@ -1,11 +1,11 @@
 /obj/item/projectile/bullet/chemdart
 	name = "dart"
-	icon_state = "cbbolt"
-	damage = 3
+	icon_state = "dart"
+	damage = 1
 	sharp = 1
-	embed = 1
+	embed = 0
 	var/reagent_amount = 15
-	kill_count = 10 //short range
+	kill_count = 10 //shorter range
 
 /obj/item/projectile/bullet/chemdart/New()
 	reagents = new/datum/reagents(reagent_amount)
@@ -24,6 +24,9 @@
 	caliber = "dart"
 	projectile_type = /obj/item/projectile/bullet/chemdart
 
+/obj/item/ammo_casing/chemdart/expend()
+	del(src)
+
 /obj/item/ammo_magazine/chemdart
 	name = "dart cartridge"
 	desc = "A rack of hollow darts."
@@ -32,6 +35,7 @@
 	origin_tech = "materials=2"
 	mag_type = MAGAZINE
 	caliber = "dart"
+	ammo_type = /obj/item/ammo_casing/chemdart
 	max_ammo = 5
 	multiple_sprites = 1
 

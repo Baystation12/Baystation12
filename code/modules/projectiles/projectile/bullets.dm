@@ -123,6 +123,7 @@
 
 /obj/item/projectile/bullet/rifle/a762
 	damage = 25
+	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
 	damage = 90
