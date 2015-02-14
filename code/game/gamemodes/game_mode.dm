@@ -32,11 +32,15 @@
 	var/uplink_welcome = "Illegal Uplink Console:"
 	var/uplink_uses = 10
 	var/list/datum/uplink_item/uplink_items = list(
+		"Ammunition" = list(
+			new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, ".357", "RA"),
+			new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "9mm", "R9"),
+			new/datum/uplink_item(/obj/item/weapon/dart_cartridge, 2, "Darts", "AD"),
+			),
 		"Highly Visible and Dangerous Weapons" = list(
-			 new/datum/uplink_item(/obj/item/ammo_magazine/mc9mm, 2, "Ammo-9mm", "R9"),
-			 new/datum/uplink_item(/obj/item/ammo_magazine/a357, 2, "Ammo-357", "RA"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/emps, 3, "5 EMP Grenades", "EM"),
 			 new/datum/uplink_item(/obj/item/weapon/melee/energy/sword, 4, "Energy Sword", "ES"),
+			 new/datum/uplink_item(/obj/item/weapon/gun/dartgun, 5, "Dart Gun", "DG"),
 			 new/datum/uplink_item(/obj/item/weapon/gun/energy/crossbow, 5, "Energy Crossbow", "XB"),
 			 new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/g9mm, 5, "Silenced 9mm", "S9"),
 			 new/datum/uplink_item(/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser, 6, "Exosuit Rigged Laser", "RL"),
@@ -48,7 +52,8 @@
 			new/datum/uplink_item(/obj/item/weapon/cane/concealed, 2, "Concealed Cane Sword", "CC"),
 			new/datum/uplink_item(/obj/item/weapon/cartridge/syndicate, 3, "Detomatix PDA Cartridge", "DC"),
 			new/datum/uplink_item(/obj/item/weapon/pen/paralysis, 3, "Paralysis Pen", "PP"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/cigarette, 4, "Cigarette Kit", "BH"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/toxin, 4, "Random Toxin - Beaker", "RT")
 			),
 		"Stealth and Camouflage Items" = list(
 			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
@@ -80,8 +85,8 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
 			),
 		"Medical" = list(
-			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Donk-Pockets", "DP"),
-			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 3, "Surgery kit", "SK"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Sin-Pockets", "DP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 5, "Surgery kit", "SK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/combat, 5, "Combat medical kit", "CM")
 		),
 		"(Pointless) Badassery" = list(

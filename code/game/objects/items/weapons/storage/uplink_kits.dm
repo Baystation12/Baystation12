@@ -30,6 +30,7 @@
 				new /obj/item/ammo_magazine/a357(src)
 				new /obj/item/weapon/card/emag(src)
 				new /obj/item/weapon/plastique(src)
+				new /obj/item/weapon/plastique(src)
 				return
 
 			if("murder")
@@ -47,6 +48,7 @@
 				return
 
 			if("hacker")
+				new /obj/item/device/encryptionkey/syndicate(src)
 				new /obj/item/weapon/aiModule/syndicate(src)
 				new /obj/item/weapon/card/emag(src)
 				new /obj/item/device/encryptionkey/binary(src)
@@ -62,10 +64,9 @@
 				return
 
 			if("smoothoperator")
-				new /obj/item/weapon/gun/projectile/pistol(src)
-				new /obj/item/weapon/silencer(src)
-				new /obj/item/weapon/soap/syndie(src)
+				new /obj/item/weapon/storage/box/syndie_kit/g9mm(src)
 				new /obj/item/weapon/storage/bag/trash(src)
+				new /obj/item/weapon/soap/syndie(src)
 				new /obj/item/bodybag(src)
 				new /obj/item/clothing/under/suit_jacket(src)
 				new /obj/item/clothing/shoes/laceup(src)
@@ -174,8 +175,16 @@
 /obj/item/weapon/storage/box/syndie_kit/g9mm/New()
 	..()
 	new /obj/item/weapon/gun/projectile/pistol(src)
-	new /obj/item/weapon/storage/bag/trash(src)
 	new /obj/item/weapon/silencer(src)
+
+/obj/item/weapon/storage/box/syndie_kit/toxin
+	name = "toxin kit"
+	desc = "An apple will not be enough to keep the doctor away after this."
+
+/obj/item/weapon/storage/box/syndie_kit/toxin/New()
+	..()
+	new /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin(src)
+	new /obj/item/weapon/reagent_containers/syringe(src)
 
 /obj/item/weapon/storage/box/syndie_kit/cigarette
 	name = "\improper Tricky smokes"
