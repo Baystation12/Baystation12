@@ -549,6 +549,7 @@
 #include "code\game\objects\items\devices\pipe_painter.dm"
 #include "code\game\objects\items\devices\powersink.dm"
 #include "code\game\objects\items\devices\scanners.dm"
+#include "code\game\objects\items\devices\spy_bug.dm"
 #include "code\game\objects\items\devices\suit_cooling.dm"
 #include "code\game\objects\items\devices\taperecorder.dm"
 #include "code\game\objects\items\devices\traitordevices.dm"

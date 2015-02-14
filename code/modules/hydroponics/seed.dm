@@ -74,6 +74,25 @@
 	if(!isnull(lbound))  nval = max(nval,lbound)
 	traits["[trait]"] =  nval
 
+/datum/seed/proc/create_spores(var/turf/T)
+	if(!T)
+		return
+	if(!istype(T))
+		T = get_turf(T)
+	if(!T)
+		return
+
+	var/datum/reagents/R = new/datum/reagents(100)
+	if(chems.len)
+		for(var/rid in chems)
+			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
+			R.add_reagent(rid,injecting)
+
+	var/datum/effect/effect/system/smoke_spread/chem/spores/S = new(name)
+	S.attach(T)
+	S.set_up(R, round(get_trait(TRAIT_POTENCY)/4), 0, T)
+	S.start()
+
 // Does brute damage to a target.
 /datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
 
@@ -156,6 +175,8 @@
 	var/turf/origin_turf = get_turf(target)
 
 	if(force_explode || get_trait(TRAIT_EXPLOSIVE))
+
+		create_spores(origin_turf)
 
 		var/flood_dist = min(10,max(1,get_trait(TRAIT_POTENCY)/15))
 		var/list/open_turfs = list()
