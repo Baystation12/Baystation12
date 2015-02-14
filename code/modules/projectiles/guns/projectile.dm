@@ -129,7 +129,7 @@
 		ammo_magazine = null
 	else if(loaded.len)
 		//presumably, if it can be speed-loaded, it can be speed-unloaded.
-		if(allow_dump && load_method & SPEEDLOADER)
+		if(allow_dump && (load_method & SPEEDLOADER))
 			var/count = 0
 			var/turf/T = get_turf(user)
 			if(T)

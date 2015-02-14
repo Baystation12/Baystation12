@@ -74,14 +74,15 @@ obj/item/weapon/gun/energy/laser/retro
 	fire_delay = 35
 	force = 10
 	w_class = 4
-	zoomdevicename = "scope"
+	accuracy = -3 //shooting at the hip
+	scoped_accuracy = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
 	set category = "Object"
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	zoom()
+	toggle_scope(2.0)
 
 ////////Laser Tag////////////////////
 

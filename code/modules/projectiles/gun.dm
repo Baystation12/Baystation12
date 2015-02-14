@@ -15,6 +15,7 @@
 	force = 5
 	origin_tech = "combat=1"
 	attack_verb = list("struck", "hit", "bashed")
+	zoomdevicename = "scope"
 
 	var/fire_delay = 6
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
@@ -22,6 +23,7 @@
 	var/recoil = 0		//screen shake
 	var/silenced = 0
 	var/accuracy = 0 //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
+	var/scoped_accuracy = null
 
 	var/last_fired = 0
 	
@@ -34,6 +36,11 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 
+/obj/item/weapon/gun/New()
+	..()
+	if(isnull(scoped_accuracy))
+		scoped_accuracy = accuracy
+
 //Returns 1 if the gun is able to be fired
 /obj/item/weapon/gun/proc/ready_to_fire()
 	if(world.time >= last_fired + fire_delay)
@@ -43,6 +50,8 @@
 		return 0
 
 //Checks whether a given mob can use the gun
+//Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
+//Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
 /obj/item/weapon/gun/proc/special_check(var/mob/user)
 	if(!istype(user, /mob/living))
 		return 0
@@ -114,7 +123,7 @@
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
 
-	var/obj/projectile = consume_next_projectile()
+	var/obj/projectile = consume_next_projectile(user)
 	if(!projectile)
 		handle_click_empty(user)
 		return
@@ -165,7 +174,7 @@
 	
 	if(recoil)
 		spawn()
-			shake_camera(user, recoil + 1, recoil)
+			shake_camera(user, recoil+1, recoil)
 	update_icon()
 
 //does the actual shooting
@@ -236,3 +245,19 @@
 		handle_click_empty(user)
 		mouthshoot = 0
 		return
+
+/obj/item/weapon/gun/proc/toggle_scope(var/zoom_amount=2.0)
+	//looking through a scope limits your periphereal vision
+	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
+	var/zoom_offset = round(world.view * zoom_amount)
+	var/view_size = round(world.view + zoom_amount)
+	var/scoped_accuracy_mod = zoom_offset
+	
+	zoom(zoom_offset, view_size)
+	if(zoom)
+		accuracy = scoped_accuracy + scoped_accuracy_mod
+		if(recoil)
+			recoil = round(recoil*zoom_amount+1) //recoil is worse when looking through a scope
+	else
+		accuracy = (accuracy)
+		recoil = initial(recoil)
