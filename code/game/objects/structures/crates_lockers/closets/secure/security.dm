@@ -54,6 +54,7 @@
 		new /obj/item/weapon/storage/box/ids(src)
 		new /obj/item/weapon/storage/box/ids( src )
 		new /obj/item/weapon/gun/energy/gun(src)
+		new /obj/item/weapon/gun/projectile/detective/flash(src)
 		new /obj/item/device/flash(src)
 		return
 

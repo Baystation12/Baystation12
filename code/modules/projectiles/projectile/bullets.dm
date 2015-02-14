@@ -21,9 +21,8 @@
 
 	if(ismob(A))
 		if(iscarbon(A))
-			//squishy mobs absorb KE
-			if (damage <= 20) return 0
-			damage *= 0.7
+			if (damage <= 20 && !prob(damage)) return 0
+			damage *= 0.7 //squishy mobs absorb KE
 		return 1
 
 	if(istype(A, /obj/machinery) || istype(A, /obj/structure))

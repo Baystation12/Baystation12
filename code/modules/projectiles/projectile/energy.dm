@@ -6,11 +6,12 @@
 	check_armour = "energy"
 
 
-//releases a very short burst of light on impact, mainly used to blind people
+//releases a burst of light on impact or after travelling a distance
 /obj/item/projectile/energy/flash
-	name = "shell" //a chemical filled shell or something
+	name = "chemical shell"
 	icon_state = "bullet"
 	damage = 5
+	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	var/flash_range = 0
 	var/brightness = 7
 	var/light_duration = 5

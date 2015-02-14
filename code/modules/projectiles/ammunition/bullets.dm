@@ -101,7 +101,7 @@
 //Does not stun, only blinds, but has area of effect.
 /obj/item/ammo_casing/shotgun/flash
 	name = "flash shell"
-	desc = "A flash shell used to provide illumination."
+	desc = "A chemical shell used to signal distress or provide illumination."
 	icon_state = "fshell"
 	projectile_type = /obj/item/projectile/energy/flash/flare
 	matter = list("metal" = 250, "glass" = 250)

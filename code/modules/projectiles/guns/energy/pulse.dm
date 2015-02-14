@@ -18,19 +18,19 @@
 			mode = 0
 			charge_cost = 100
 			fire_sound = 'sound/weapons/Taser.ogg'
-			user << "\red [src.name] is now set to stun."
+			user << "<span class='warning'>[src.name] is now set to stun.</span>"
 			projectile_type = /obj/item/projectile/beam/stun
 		if(0)
 			mode = 1
 			charge_cost = 100
 			fire_sound = 'sound/weapons/Laser.ogg'
-			user << "\red [src.name] is now set to kill."
+			user << "<span class='warning'>[src.name] is now set to kill.</span>"
 			projectile_type = /obj/item/projectile/beam
 		if(1)
 			mode = 2
 			charge_cost = 200
 			fire_sound = 'sound/weapons/pulse.ogg'
-			user << "\red [src.name] is now set to DESTROY."
+			user << "<span class='warning'>[src.name] is now set to DESTROY.</span>"
 			projectile_type = /obj/item/projectile/beam/pulse
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted
@@ -44,7 +44,7 @@
 	fire_delay = 10
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
-	user << "\red [src.name] has three settings, and they are all DESTROY."
+	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"
 
 
 //WHY?

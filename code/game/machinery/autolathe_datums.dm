@@ -201,6 +201,11 @@
 	path = /obj/item/weapon/reagent_containers/syringe
 	category = "Medical"
 
+/datum/autolathe/recipe/syringegun_ammo
+	name = "syringe"
+	path = /obj/item/weapon/syringe_cartridge
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/shotgun_blanks
 	name = "ammunition (shotgun, blank)"
 	path = /obj/item/ammo_casing/shotgun/blank

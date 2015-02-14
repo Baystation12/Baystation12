@@ -595,7 +595,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/cloaking_device(M), slot_r_store)
 
-			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile(M), slot_r_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver(M), slot_r_hand)
 			M.equip_to_slot_or_del(new /obj/item/ammo_magazine/a357(M), slot_l_store)
 
 		if ("tournament chef") //Steven Seagal FTW

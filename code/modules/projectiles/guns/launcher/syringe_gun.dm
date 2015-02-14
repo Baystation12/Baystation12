@@ -1,16 +1,16 @@
 /obj/item/weapon/syringe_cartridge
-	name = "compressed gas cartridge"
+	name = "syringe gun cartridge"
 	desc = "An impact-triggered compressed gas cartridge that can fitted to a syringe for rapid injection."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
+	matter = list("metal" = 125, "glass" = 375)
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	force = 3
 	w_class = 1
 	var/obj/item/weapon/reagent_containers/syringe/syringe
-	var/primed = 0
 
 /obj/item/weapon/syringe_cartridge/update_icon()
 	underlays.Cut()
@@ -39,14 +39,13 @@
 	//the icon state will revert back when update_icon() is called from throw_impact()
 	icon_state = icon_flight
 	underlays.Cut()
-	primed = 1
 
 /obj/item/weapon/syringe_cartridge/throw_impact(atom/hit_atom, var/speed)
 	..() //handles embedding for us. Should have a decent chance if thrown fast enough
 	if(syringe)
 		//check speed to see if we hit hard enough to trigger the rapid injection
 		//incidentally, this means syringe_cartridges can be used with the pneumatic launcher
-		if(speed >= 10 && primed && isliving(hit_atom))
+		if(speed >= 10 && isliving(hit_atom))
 			var/mob/living/L = hit_atom
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
 			if(L.can_inject())
@@ -93,7 +92,7 @@
 
 /obj/item/weapon/gun/launcher/syringe/attack_self(mob/living/user as mob)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relax the bolt on [src].", "<span class='notice'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
+		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
 		next = null
 	else if(darts.len)
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
@@ -106,7 +105,7 @@
 			user << "<span class='warning'>[src] is empty.</span>"
 			return
 		if(next)
-			user << "<span class='warning'>The cover on [src] is locked shut.</span>"
+			user << "<span class='warning'>[src]'s cover is locked shut.</span>"
 			return
 		var/obj/item/weapon/syringe_cartridge/C = darts[1]
 		darts -= C
@@ -129,7 +128,7 @@
 		..()
 
 /obj/item/weapon/gun/launcher/syringe/rapid
-	name = "rapid syringe gun"
-	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to four syringes. The spring still needs to be drawn between shots."
+	name = "syringe gun revolver"
+	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
 	icon_state = "rapidsyringegun"
-	max_darts = 4
+	max_darts = 5

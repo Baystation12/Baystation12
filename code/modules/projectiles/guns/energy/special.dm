@@ -43,13 +43,13 @@
 		if(0)
 			mode = 1
 			charge_cost = 100
-			user << "\red The [src.name] is now set to increase yield."
+			user << "<span class='warning'>The [src.name] is now set to increase yield.</span>"
 			projectile_type = /obj/item/projectile/energy/florayield
 			modifystate = "florayield"
 		if(1)
 			mode = 0
 			charge_cost = 100
-			user << "\red The [src.name] is now set to induce mutations."
+			user << "<span class='warning'>The [src.name] is now set to induce mutations.</span>"
 			projectile_type = /obj/item/projectile/energy/floramut
 			modifystate = "floramut"
 	update_icon()
@@ -58,7 +58,7 @@
 /obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
 	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		user.visible_message("\red <b> \The [user] fires \the [src] into \the [target]!</b>")
+		user.visible_message("<span class='danger'>\The [user] fires \the [src] into \the [target]!</span>")
 		Fire(target,user)
 		return
 	..()
@@ -123,7 +123,7 @@
 
 /obj/item/weapon/gun/energy/staff/handle_click_empty(mob/user = null)
 	if (user)
-		user.visible_message("*fizzle*", "\red <b>*fizzle*</b>")
+		user.visible_message("*fizzle*", "<span class='danger'>*fizzle*</span>")
 	else
 		src.visible_message("*fizzle*")
 	playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 1)
@@ -146,11 +146,11 @@ obj/item/weapon/gun/energy/staff/focus
 	attack_self(mob/living/user as mob)
 		if(projectile_type == "/obj/item/projectile/forcebolt")
 			charge_cost = 200
-			user << "\red The [src.name] will now strike a small area."
+			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt/strong"
 		else
 			charge_cost = 100
-			user << "\red The [src.name] will now strike only a single person."
+			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
 

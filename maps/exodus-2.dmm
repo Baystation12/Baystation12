@@ -705,7 +705,7 @@
 "nC" = (/obj/structure/closet/secure_closet/freezer/kitchen{req_access = null; req_access_txt = "150"},/turf/unsimulated/floor{icon_state = "white"},/area/syndicate_mothership)
 "nD" = (/obj/structure/table/reinforced,/obj/item/weapon/tray{pixel_y = 5},/turf/unsimulated/floor{icon_state = "white"},/area/syndicate_mothership)
 "nE" = (/obj/structure/table/reinforced,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka{pixel_x = 3; pixel_y = 12},/obj/item/weapon/reagent_containers/food/drinks/bottle/wine{pixel_x = -1; pixel_y = 8},/turf/unsimulated/floor{icon_state = "white"},/area/syndicate_mothership)
-"nF" = (/obj/structure/table/rack,/obj/item/weapon/storage/belt/security,/obj/item/weapon/storage/belt/security,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
+"nF" = (/obj/structure/table/rack,/obj/item/weapon/storage/belt/security,/obj/item/weapon/storage/belt/security,/obj/item/ammo_magazine/mc9mm/flash,/obj/item/weapon/gun/projectile/pistol/flash,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
 "nG" = (/obj/structure/table/rack,/obj/item/clothing/shoes/magboots,/obj/item/clothing/suit/space/syndicate/black/red,/obj/item/clothing/mask/breath,/obj/item/clothing/head/helmet/space/syndicate/black/red,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "nH" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/syndicate_station/start)
 "nI" = (/obj/structure/table,/obj/machinery/recharger,/turf/simulated/shuttle/floor{icon_state = "floor6"},/area/syndicate_station/start)
