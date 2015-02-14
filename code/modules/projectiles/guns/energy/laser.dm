@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser gun"
-	desc = "a basic weapon designed kill with concentrated energy bolts"
+	desc = "a basic weapon designed to kill with concentrated energy bolts"
 	icon_state = "oldlaser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -14,11 +14,6 @@
 	desc = "A common laser weapon, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
-	fire_sound = 'sound/weapons/Laser.ogg'
-	w_class = 3.0
-	matter = list("metal" = 2000)
-	origin_tech = "combat=4;magnets=3"
-	projectile_type = /obj/item/projectile/beam
 	charge_cost = 75
 	fire_delay = -3
 
