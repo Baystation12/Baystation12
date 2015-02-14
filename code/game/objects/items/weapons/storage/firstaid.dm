@@ -128,6 +128,22 @@
 	new /obj/item/stack/medical/splint(src)
 	return
 
+/obj/item/weapon/storage/firstaid/surgery
+	name = "surgery kit"
+	desc = "Contains tools for surgery."
+
+/obj/item/weapon/storage/firstaid/surgery/New()
+	..()
+	if (empty) return
+	new /obj/item/weapon/bonesetter(src)
+	new /obj/item/weapon/cautery(src)
+	new /obj/item/weapon/circular_saw(src)
+	new /obj/item/weapon/hemostat(src)
+	new /obj/item/weapon/retractor(src)
+	new /obj/item/weapon/scalpel(src)
+	new /obj/item/weapon/surgicaldrill(src)
+	return
+
 /*
  * Pill Bottles
  */

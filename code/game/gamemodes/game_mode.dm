@@ -53,7 +53,7 @@
 		"Stealth and Camouflage Items" = list(
 			new/datum/uplink_item(/obj/item/weapon/card/id/syndicate, 2, "Agent ID card", "AC"),
 			new/datum/uplink_item(/obj/item/clothing/shoes/syndigaloshes, 2, "No-Slip Shoes", "SH"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Bug Kit", "SK"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/spy, 2, "Bug Kit", "BK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/chameleon, 3, "Chameleon Kit", "CB"),
 			new/datum/uplink_item(/obj/item/device/chameleon, 4, "Chameleon-Projector", "CP"),
 			new/datum/uplink_item(/obj/item/clothing/mask/gas/voice, 4, "Voice Changer", "VC"),
@@ -79,8 +79,9 @@
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
 			),
-		"Health Aids" = list(
+		"Medical" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/donkpockets, 1, "Box of Donk-Pockets", "DP"),
+			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/surgery, 3, "Surgery kit", "SK"),
 			new/datum/uplink_item(/obj/item/weapon/storage/firstaid/combat, 5, "Combat medical kit", "CM")
 		),
 		"(Pointless) Badassery" = list(
