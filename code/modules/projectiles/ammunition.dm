@@ -87,13 +87,7 @@
 
 /obj/item/ammo_magazine/New()
 	if(multiple_sprites)
-		//should probably be cached or something.
-		var/list/states = icon_states(icon)
-		for(var/i = 0, i <= max_ammo, i++)
-			var/ammo_state = "[icon_state]-[i]"
-			if(ammo_state in states)
-				icon_keys += i
-				ammo_states += ammo_state
+		initialize_magazine_icondata(src)
 
 	if(isnull(initial_ammo))
 		initial_ammo = max_ammo
@@ -141,3 +135,29 @@
 /obj/item/ammo_magazine/examine(mob/user)
 	..()
 	user << "There [(stored_ammo.len > 1)? "are" : "is"] [stored_ammo.len] round\s left!"
+
+//magazine icon state caching
+/var/global/list/magazine_icondata_keys = list()
+/var/global/list/magazine_icondata_states = list()
+
+/proc/initialize_magazine_icondata(var/obj/item/ammo_magazine/M)
+	var/typestr = "[M.type]"
+	if(!(typestr in magazine_icondata_keys) || !(typestr in magazine_icondata_states))
+		magazine_icondata_cache_add(M)
+	
+	M.icon_keys = magazine_icondata_keys[typestr]
+	M.ammo_states = magazine_icondata_states[typestr]
+	
+/proc/magazine_icondata_cache_add(var/obj/item/ammo_magazine/M)
+	var/list/icon_keys = list()
+	var/list/ammo_states = list()
+	var/list/states = icon_states(M.icon)
+	for(var/i = 0, i <= M.max_ammo, i++)
+		var/ammo_state = "[M.icon_state]-[i]"
+		if(ammo_state in states)
+			icon_keys += i
+			ammo_states += ammo_state
+
+	magazine_icondata_keys["[M.type]"] = icon_keys
+	magazine_icondata_states["[M.type]"] = ammo_states
+
