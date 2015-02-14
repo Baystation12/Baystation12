@@ -74,21 +74,19 @@
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
 	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(loaded.len, 25) : "-empty"]"
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, flag, params) //what I tried to do here is just add a check to see if the cover is open or not and add an icon_state change because I can't figure out how c-20rs do it with overlays
+/obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
-		user << "<span class='notice'>[src]'s cover is open! Close it before firing!</span>"
-	else
-		..()
-		update_icon()
+		user << "<span class='warning'>[src]'s cover is open! Close it before firing!</span>"
+		return 0
+	return ..()
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
-	if(loc != user)
-		..() //let them pick it up
-	else if(cover_open)
-		unload_ammo(user)
+/obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
+	if(!cover_open)
+		user << "<span class='warning'>You need to open the cover to load [src].</span>"
+		return
+	..()
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/attackby(var/obj/item/A as obj, mob/user as mob)
-	if(istype(A,/obj/item/ammo_magazine) && !cover_open)
-		user << "<span class='notice'>[src]'s cover is closed! You can't insert a new mag!</span>"
+/obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user)
+	if(!cover_open)
 		return
 	..()

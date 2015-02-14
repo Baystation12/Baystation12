@@ -100,7 +100,7 @@
 		next = darts[1]
 
 /obj/item/weapon/gun/launcher/syringe/attack_hand(mob/living/user as mob)
-	if(src in user)
+	if(loc == user)
 		if(!darts.len)
 			user << "<span class='warning'>[src] is empty.</span>"
 			return

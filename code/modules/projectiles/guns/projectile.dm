@@ -155,7 +155,7 @@
 	unload_ammo(user)
 
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
-	if(src in user)
+	if(loc == user)
 		unload_ammo(user, allow_dump=0)
 	else
 		return ..()
