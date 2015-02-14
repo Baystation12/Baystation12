@@ -45,14 +45,16 @@
 
 //Orange syndicate space suit
 /obj/item/clothing/head/helmet/space/syndicate/orange
-	name = "Orange Space Helmet"
+	name = "Emergency Space Helmet"
 	icon_state = "syndicate-helm-orange"
 	item_state = "syndicate-helm-orange"
+	desc = "A simple helmet with a built in light, smells like mothballs."
 
 /obj/item/clothing/suit/space/syndicate/orange
-	name = "Orange Space Suit"
+	name = "Emergency Softsuit"
 	icon_state = "syndicate-orange"
 	item_state = "syndicate-orange"
+	desc = "A thin softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 
 
 //Blue syndicate space suit

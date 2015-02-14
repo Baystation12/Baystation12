@@ -217,13 +217,18 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_rubber
-	name = "ammunition (rubber)"
+	name = "ammunition (.45 rubber)"
 	path = /obj/item/ammo_magazine/c45r
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_flash
 	name = "ammunition (flash)"
 	path = /obj/item/ammo_magazine/c45f
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg_2
+	name = "ammunition (9mm rubber top mounted)"
+	path = /obj/item/ammo_magazine/mc9mmtr
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
@@ -303,6 +308,18 @@
 /datum/autolathe/recipe/shotgun_pellet
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/pellet
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_smg_1
+	name = "ammunition (9mm top mounted)"
+	path = /obj/item/ammo_magazine/mc9mmt
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/magazine_carbine_1
+	name = "ammunition (5.56)"
+	path = /obj/item/ammo_magazine/a556
 	hidden = 1
 	category = "Arms and Ammunition"
 

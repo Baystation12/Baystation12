@@ -448,3 +448,8 @@
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
+
+/obj/structure/sink/hardhat
+	name = "upturned hardhat"
+	icon_state = "hardhatwater"
+	desc = "A dirty upturned hardhat with a cross carved into the side. It's filled with cool, clean water."

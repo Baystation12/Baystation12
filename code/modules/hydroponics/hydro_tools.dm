@@ -335,6 +335,15 @@
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
 
+/obj/item/weapon/hatchet/tacknife
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	attack_verb = list("stabbed", "chopped", "cut")
+	w_class = 1.0
+
+
 /obj/item/weapon/scythe
 	icon_state = "scythe0"
 	name = "scythe"

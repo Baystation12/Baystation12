@@ -23,6 +23,11 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol
 
+/obj/item/ammo_casing/c9mmr
+	desc = "A 9mm rubber bullet casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber
+
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
 	caliber = ".45"
@@ -104,6 +109,11 @@
 	desc = "A 14.5mm AP shell."
 	icon_state = "slshell"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
+
+/obj/item/ammo_casing/a556
+	desc = "A 5.56 bullet casing."
+	caliber = "a556"
+	projectile_type = /obj/item/projectile/bullet/rifle/a556
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"

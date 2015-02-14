@@ -64,6 +64,85 @@
 			icon_state = "c20r"
 		return
 
+/obj/item/weapon/gun/projectile/automatic/WT550
+	name = "\improper W-T 550 Saber"
+	desc = "A cheap, mass produced Ward-Takahashi PDW. Uses 9mm rounds."
+	icon_state = "smg"
+	w_class = 3.0
+	max_shells = 20
+	caliber = "9mm"
+	origin_tech = "combat=5;materials=2"
+	ammo_type = "/obj/item/ammo_casing/c9mmr"
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/mc9mmtr/empty
+
+
+	New()
+		..()
+		empty_mag = new /obj/item/ammo_magazine/mc9mmtr/empty(src)
+		update_icon()
+		return
+
+
+	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
+		..()
+		if(!loaded.len && empty_mag)
+			empty_mag.loc = get_turf(src.loc)
+			empty_mag = null
+			playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+			update_icon()
+		return
+
+
+	update_icon()
+		..()
+		if(empty_mag)
+			icon_state = "smg-[round(loaded.len,4)]"
+		else
+			icon_state = "smg"
+		return
+
+/obj/item/weapon/gun/projectile/automatic/carbine
+	name = "\improper Z8 Bulldog"
+	desc = "An older model bullpup carbine, made by the now defunct Zendai Foundries. Uses 5.56 rounds. Makes you feel like a space marine when you hold it."
+	icon_state = "carbine"
+	item_state = "carbine"
+	w_class = 4.0
+	max_shells = 10
+	caliber = "a556"
+	origin_tech = "combat=8;materials=3"
+	ammo_type = "/obj/item/ammo_casing/a556"
+	fire_sound = 'sound/weapons/Gunshot.ogg'
+	load_method = MAGAZINE
+	mag_type = /obj/item/ammo_magazine/a556/empty
+
+
+	New()
+		..()
+		empty_mag = new /obj/item/ammo_magazine/a556/empty(src)
+		update_icon()
+		return
+
+
+	afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
+		..()
+		if(!loaded.len && empty_mag)
+			empty_mag.loc = get_turf(src.loc)
+			empty_mag = null
+			playsound(user, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+			update_icon()
+		return
+
+
+	update_icon()
+		..()
+		if(empty_mag)
+			icon_state = "carbine-[round(loaded.len,2)]"
+		else
+			icon_state = "carbine"
+		return
+
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"
 	desc = "A rather traditionally made light machine gun with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
@@ -140,4 +219,3 @@
    around simulating a removable magazine by adding the casings into the loaded list and spawning an empty magazine
    when the gun is out of rounds. Which means you can't eject magazines with rounds in them. The below is a very
    rough and poor attempt at making that happen. -Ausops */
-  
