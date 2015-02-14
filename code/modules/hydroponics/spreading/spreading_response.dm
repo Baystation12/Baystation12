@@ -1,5 +1,5 @@
 /obj/effect/plant/HasProximity(var/atom/movable/AM)
-	plant_controller.add_plant(src)
+	wake_up()
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
@@ -11,15 +11,15 @@
 		entangle(M)
 
 /obj/effect/plant/attack_hand(mob/user as mob)
-	plant_controller.add_plant(src)
+	wake_up()
 	manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
-	plant_controller.add_plant(src)
+	wake_up()
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim
-	if(!istype(H) || H.shoes)
+	if(istype(H) && H.shoes)
 		return
 	seed.do_thorns(victim,src)
 	seed.do_sting(victim,src,pick("r_foot","l_foot","r_leg","l_leg"))

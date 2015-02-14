@@ -17,32 +17,18 @@
 	if(buckled_mob)
 		seed.do_sting(buckled_mob,src)
 		if(seed.get_trait(TRAIT_CARNIVOROUS))
-			// Todo: refactor to be less hardcoded.
-			if(istype(buckled_mob, /mob/living/simple_animal/mouse))
-				new /obj/effect/decal/remains/mouse(get_turf(src))
-				del(buckled_mob)
-				buckled_mob = null
-				return
-			else if(istype(buckled_mob, /mob/living/simple_animal/lizard))
-				new /obj/effect/decal/remains/lizard(get_turf(src))
-				del(buckled_mob)
-				buckled_mob = null
-				return
 			seed.do_thorns(buckled_mob,src)
 
-	var/failed_growth
-	// Count our neighbors and possible locations for spreading.
 	var/list/possible_locs = list()
-	var/plant_count = 0
-	for(var/turf/simulated/floor/floor in view(1,src))
-		if((locate(/obj/effect/dead_plant) in floor.contents) || !floor.Enter(src) || floor.density)
-			continue
-		if(locate(/obj/effect/plant) in floor.contents)
-			plant_count++
-			continue
-		possible_locs |= floor
+	var/failed_turfs = 0
 
-	if(health == max_health && plant_count >= 4 && !plant)
+	for(var/turf/simulated/floor/floor in range(1))
+		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) || floor.density)
+			failed_turfs++
+		if(floor.Enter(src))
+			possible_locs |= floor
+
+	if(health == max_health && failed_turfs > 3 && !plant)
 		plant = new(T,seed)
 		plant.age = seed.get_trait(TRAIT_MATURATION)-1
 		plant.update_icon()
@@ -51,10 +37,9 @@
 		else
 			plant.layer = layer + 0.1
 
-	if(prob(spread_chance))
+	if(possible_locs.len && prob(spread_chance))
 		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
 			if(!possible_locs.len)
-				failed_growth = 1
 				break
 			if(prob(spread_into_adjacent))
 				var/turf/target_turf = pick(possible_locs)
@@ -63,7 +48,11 @@
 				child.parent = get_root()
 				child.parent.children |= child
 
-	if(health != max_health || !failed_growth || (plant_count > 4 && !plant))
+	if(buckled_mob || health != max_health || possible_locs.len)
+		wake_up() // We still need to process!
+
+/obj/effect/plant/proc/wake_up()
+	if(plant_controller)
 		plant_controller.add_plant(src)
 
 /obj/effect/plant/proc/die_off(var/no_remains, var/no_del)
@@ -79,7 +68,7 @@
 		for(var/obj/effect/plant/child in children)
 			child.die_off()
 	for(var/obj/effect/plant/neighbor in view(1,src))
-		plant_controller.add_plant(neighbor)
+		neighbor.wake_up()
 
 	if(!no_remains && !(locate(/obj/effect/dead_plant) in get_turf(src)))
 		var/obj/effect/dead_plant/plant_remains = new(get_turf(src))

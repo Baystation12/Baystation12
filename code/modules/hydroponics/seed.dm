@@ -77,8 +77,18 @@
 // Does brute damage to a target.
 /datum/seed/proc/do_thorns(var/mob/living/carbon/human/target, var/obj/item/fruit, var/target_limb)
 
-	if(!istype(target) || !get_trait(TRAIT_CARNIVOROUS))
+	if(!get_trait(TRAIT_CARNIVOROUS))
 		return
+
+	if(!istype(target))
+		if(istype(target, /mob/living/simple_animal/mouse))
+			new /obj/effect/decal/remains/mouse(get_turf(target))
+			del(target)
+		else if(istype(target, /mob/living/simple_animal/lizard))
+			new /obj/effect/decal/remains/lizard(get_turf(target))
+			del(target)
+		return
+
 
 	if(!target_limb) target_limb = pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin")
 	var/datum/organ/external/affecting = target.get_organ(target_limb)

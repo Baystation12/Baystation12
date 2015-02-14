@@ -51,6 +51,7 @@
 
 /turf/simulated/wall/ChangeTurf(var/newtype)
 	for(var/obj/effect/E in src) if(E.name == "Wallrot") del E
+	for(var/obj/effect/plant/plant in range(1)) plant.wake_up()
 	..(newtype)
 
 //Appearance

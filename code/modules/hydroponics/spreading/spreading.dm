@@ -31,7 +31,7 @@
 /obj/effect/dead_plant/attackby()
 	..()
 	for(var/obj/effect/plant/neighbor in view(1,src))
-		plant_controller.add_plant(neighbor)
+		neighbor.wake_up()
 	del(src)
 
 /obj/effect/plant
@@ -42,6 +42,7 @@
 	icon = 'icons/obj/hydroponics_growing.dmi'
 	icon_state = "bush4-1"
 	layer = 3
+	pass_flags = PASSTABLE
 
 	var/health = 10
 	var/max_health = 100
@@ -107,7 +108,7 @@
 
 	set_dir(calc_dir())
 	update_icon()
-	plant_controller.add_plant(src)
+	wake_up()
 	last_tick = world.timeofday
 
 /obj/effect/plant/update_icon()
