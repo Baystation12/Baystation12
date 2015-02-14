@@ -94,6 +94,17 @@
 		user << "<span class='notice'>The Magazine falls out and clatters on the floor!</span>"
 	return
 
+/obj/item/weapon/gun/projectile/detective/semiauto/sec
+	desc = "A Nanotrasen designed sidearm, found pretty much everywhere humans are. Uses less-than-lethal .45 rounds."
+	name = "\improper NT Mk58"
+	icon_state = "secguncomp"
+
+
+/obj/item/weapon/gun/projectile/detective/semiauto/sec/wood
+	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses less-than-lethal .45 rounds."
+	name = "\improper Custom NT Mk58"
+	icon_state = "secgundark"
+
 
 /obj/item/weapon/gun/projectile/mateba
 	name = "mateba"

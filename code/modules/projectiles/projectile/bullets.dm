@@ -36,7 +36,7 @@
 			chance = round(damage/D.maxhealth*100)
 		else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
 			chance = 100
-		
+
 		if(prob(chance))
 			if(A.opacity)
 				//display a message so that people on the other side aren't so confused
@@ -127,6 +127,10 @@
 /obj/item/projectile/bullet/rifle/a145
 	damage = 90
 	penetrating = 5
+
+/obj/item/projectile/bullet/rifle/a556
+	damage = 45
+	penetrating = 2
 
 /* Miscellaneous */
 

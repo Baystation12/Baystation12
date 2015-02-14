@@ -55,3 +55,9 @@
 	spawn(0)
 		return
 	return
+
+
+/obj/structure/cult/tome
+	name = "Altar"
+	desc = "A simple wooden altar covered in red cloth."
+	icon_state = "churchaltar"

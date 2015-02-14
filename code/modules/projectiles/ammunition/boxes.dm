@@ -78,6 +78,29 @@
 	ammo_type = "/obj/item/ammo_casing/c9mm"
 	max_ammo = 30
 
+/obj/item/ammo_magazine/mc9mmt
+	name = "top mounted magazine (9mm)"
+	icon_state = "9mmt"
+	origin_tech = "combat=2"
+	ammo_type = "/obj/item/ammo_casing/c9mm"
+	max_ammo = 20
+	multiple_sprites = 1
+	matter = list("metal" = 1000, "glass" = 250)
+
+/obj/item/ammo_magazine/mc9mmt/empty
+	max_ammo = 0
+
+/obj/item/ammo_magazine/mc9mmtr
+	name = "top mounted magazine (9mm rubber)"
+	icon_state = "9mmt"
+	origin_tech = "combat=2"
+	ammo_type = "/obj/item/ammo_casing/c9mmr"
+	max_ammo = 20
+	multiple_sprites = 1
+	matter = list("metal" = 800, "glass" = 250)
+
+/obj/item/ammo_magazine/mc9mmtr/empty
+	max_ammo = 0
 
 
 /obj/item/ammo_magazine/c45
@@ -87,6 +110,18 @@
 	ammo_type = "/obj/item/ammo_casing/c45"
 	max_ammo = 30
 
+
+/obj/item/ammo_magazine/a556
+	name = "magazine (5.56)"
+	icon_state = "5.56"
+	origin_tech = "combat=2"
+	ammo_type = "/obj/item/ammo_casing/a556"
+	max_ammo = 10
+	multiple_sprites = 1
+	matter = list("metal" = 1250)
+
+/obj/item/ammo_magazine/a556/empty
+	max_ammo = 0
 
 
 /obj/item/ammo_magazine/a12mm
