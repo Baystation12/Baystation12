@@ -62,7 +62,7 @@
 		icon_state = "pneumatic-tank"
 		item_state = "pneumatic-tank"
 		user.update_icons()
-	else if(W.w_class <= max_w_class)
+	else if(istype(W) && W.w_class <= max_w_class)
 		var/total_stored = 0
 		for(var/obj/item/O in src.contents)
 			total_stored += O.w_class

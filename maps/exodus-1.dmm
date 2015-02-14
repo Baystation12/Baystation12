@@ -5795,7 +5795,7 @@
 "chw" = (/obj/structure/sign/biohazard,/turf/simulated/wall,/area/medical/virologyaccess)
 "chx" = (/obj/structure/disposaloutlet,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/plating/airless,/area/medical/virology)
 "chy" = (/obj/structure/bedsheetbin,/obj/structure/table,/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/obj/structure/cable/green,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor{icon_state = "dark"},/area/medical/biostorage)
-"chz" = (/obj/structure/table,/obj/item/bodybag/cryobag{pixel_x = -3},/obj/item/bodybag/cryobag{pixel_x = -3},/obj/item/weapon/gun/projectile/syringe,/obj/item/weapon/storage/box/syringegun,/turf/simulated/floor{icon_state = "dark"},/area/medical/biostorage)
+"chz" = (/obj/structure/table,/obj/item/bodybag/cryobag{pixel_x = -3},/obj/item/bodybag/cryobag{pixel_x = -3},/obj/item/weapon/gun/launcher/syringe,/obj/item/weapon/storage/box/syringegun,/turf/simulated/floor{icon_state = "dark"},/area/medical/biostorage)
 "chA" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/maintenance/research_port)
 "chB" = (/turf/simulated/floor/plating,/area/maintenance/research_port)
 "chC" = (/obj/machinery/door/airlock/medical{autoclose = 0; icon_state = "door_open"; id_tag = "cubicle1"; name = "Cubicle 1"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/medical/patient_wing)

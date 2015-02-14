@@ -103,10 +103,7 @@
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
 		var/obj/O = AM
-		var/dtype = BRUTE
-		if(istype(O,/obj/item/weapon))
-			var/obj/item/weapon/W = O
-			dtype = W.damtype
+		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/miss_chance = 15
@@ -136,17 +133,21 @@
 					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/obj/item/weapon/W = O
-			var/momentum = speed/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/mass = 1.5
+		if(istype(O, /obj/item))
+			var/obj/item/I = O
+			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/momentum = speed*mass
+		
+		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
-			if(!W || !src) return
+			if(!O || !src) return
 
-			if(W.sharp) //Projectile is suitable for pinning.
+			if(O.sharp) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
 				embed(O)
 

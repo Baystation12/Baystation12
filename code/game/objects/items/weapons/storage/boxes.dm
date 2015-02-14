@@ -99,13 +99,13 @@
 
 	New()
 		..()
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
-		new /obj/item/ammo_casing/gas_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
 
 
 /obj/item/weapon/storage/box/beakers

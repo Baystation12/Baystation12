@@ -1312,7 +1312,7 @@ datum/design/item/weapon/rapidsyringe
 	id = "rapidsyringe"
 	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
 	materials = list("$metal" = 5000, "$glass" = 1000)
-	build_path = /obj/item/weapon/gun/projectile/syringe/rapid
+	build_path = /obj/item/weapon/gun/launcher/syringe/rapid
 /*
 datum/design/item/weapon/largecrossbow
 	name = "Energy Crossbow"

@@ -49,7 +49,7 @@
 	projectile_type = /obj/item/projectile/energy/dart
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
-	name = "Energy Crossbow"
+	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = 4
 	force = 10

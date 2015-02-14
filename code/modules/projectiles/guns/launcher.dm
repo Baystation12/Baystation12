@@ -22,14 +22,10 @@
 /obj/item/weapon/gun/launcher/proc/update_release_force(obj/item/projectile)
 	return 0
 
-/obj/item/weapon/gun/launcher/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
-	if(!istype(projectile, /obj/item)) return 0
-	
-	var/obj/item/I = projectile
-	
-	update_release_force(I)
-	I.loc = get_turf(user)
-	I.throw_at(target, throw_distance, release_force, user)
+/obj/item/weapon/gun/launcher/process_projectile(obj/item/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
+	update_release_force(projectile)
+	projectile.loc = get_turf(user)
+	projectile.throw_at(target, throw_distance, release_force, user)
 	return 1
 
 /obj/item/weapon/gun/launcher/attack_self(mob/living/user as mob)

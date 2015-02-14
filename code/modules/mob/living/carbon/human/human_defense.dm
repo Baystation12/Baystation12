@@ -304,10 +304,7 @@ emp_act
 					throw_mode_off()
 					return
 
-		var/dtype = BRUTE
-		if(istype(O,/obj/item/weapon))
-			var/obj/item/weapon/W = O
-			dtype = W.damtype
+		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone
@@ -370,17 +367,21 @@ emp_act
 					affecting.embed(I)
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/obj/item/weapon/W = O
-			var/momentum = speed/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/mass = 1.5
+		if(istype(O, /obj/item))
+			var/obj/item/I = O
+			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/momentum = speed*mass
+		
+		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			
+			if(!O || !src) return
 
-			if(!W || !src) return
-
-			if(W.loc == src && W.sharp) //Projectile is embedded and suitable for pinning.
+			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
 				var/turf/T = near_wall(dir,2)
 
 				if(T)

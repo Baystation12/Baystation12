@@ -1,6 +1,6 @@
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/spikethrower
-	name = "Vox spike thrower"
+	name = "vox spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
 	var/last_regen = 0

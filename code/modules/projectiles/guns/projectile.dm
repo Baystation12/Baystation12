@@ -78,12 +78,12 @@
 		switch(AM.mag_type)
 			if(MAGAZINE)
 				if(ammo_magazine)
-					user << "<span class='warning'>[src] already has a magazine loaded!</span>" //already a magazine here
+					user << "<span class='warning'>[src] already has a magazine loaded.</span>" //already a magazine here
 					return
 				user.remove_from_mob(AM)
 				AM.loc = src
 				ammo_magazine = AM
-				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src]!</span>")
+				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
 				playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
@@ -99,7 +99,7 @@
 						AM.stored_ammo -= C //should probably go inside an ammo_magazine proc, but I guess less proc calls this way...
 						count++
 				if(count)
-					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src]!</span>")
+					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
 					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
@@ -107,13 +107,13 @@
 		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
 			return //incompatible
 		if(loaded.len >= max_shells)
-			user << "<span class='warning'>[src] is full!</span>"
+			user << "<span class='warning'>[src] is full.</span>"
 			return
 
 		user.remove_from_mob(C)
 		C.loc = src
 		loaded.Insert(1, C) //add to the head of the list
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src]!</span>")
+		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 
 	update_icon()
@@ -123,7 +123,7 @@
 /obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
 	if(ammo_magazine)
 		user.put_in_hands(ammo_magazine)
-		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src]!</span>")
+		user.visible_message("[user] removes [ammo_magazine] from [src].", "<span class='notice'>You remove [ammo_magazine] from [src].</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
@@ -138,14 +138,14 @@
 					count++
 				loaded.Cut()
 			if(count)
-				user.visible_message("[user] unloads [src].", "<span class='notice'>You unload [count] round\s from [src]!</span>")
+				user.visible_message("[user] unloads [src].", "<span class='notice'>You unload [count] round\s from [src].</span>")
 		else if(load_method & SINGLE_CASING)
 			var/obj/item/ammo_casing/C = loaded[loaded.len]
 			loaded.len--
 			user.put_in_hands(C)
-			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src]!</span>")
+			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
 	else
-		user << "<span class='warning'>[src] is empty!</span>"
+		user << "<span class='warning'>[src] is empty.</span>"
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
