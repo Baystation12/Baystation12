@@ -1619,7 +1619,7 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\exodus-1.dmm"
+#include "maps\exodus-1a.dmm"
 #include "maps\exodus-2.dmm"
 #include "maps\exodus-3.dmm"
 #include "maps\exodus-4.dmm"
