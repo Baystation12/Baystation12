@@ -132,6 +132,7 @@
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
 		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
+		miss_modifier -= round(15*daddy.accuracy)
 		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
 			miss_modifier += -30
 
