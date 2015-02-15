@@ -1702,8 +1702,8 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(33))
 					M.take_organ_damage(1*REM, 0)
-				M.adjustOxyLoss(3)
-				if(prob(20)) M.emote("gasp")
+				if(M.losebreath < 15)
+					M.losebreath++
 				..()
 				return
 
