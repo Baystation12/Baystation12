@@ -123,6 +123,12 @@
 	desc = "Monitors the prison."
 	networks = list("Prison")
 
+/datum/file/camnet_key/syndicate
+	name = "Camera Network Key"
+	title = "%!#BUFFER OVERFLOW"
+	desc = "Connects to security cameras."
+	networks = list("SS13")
+	hidden_file = 1
 
 
 /*
@@ -174,7 +180,7 @@
 
 /datum/file/program/security
 	name			= "camera monitor"
-	desc			= "Connets to the Nanotrasen Camera Network"
+	desc			= "Connects to the Nanotrasen Camera Network"
 	image			= 'icons/ntos/camera.png'
 	active_state	= "camera-static"
 
@@ -268,14 +274,18 @@
 			reset_current()
 			usr.reset_view(null)
 			key = input(usr,"Select a camera network key:", "Key Select", null) as null|anything in computer.list_files(/datum/file/camnet_key)
-			camera_list = null
-			update_icon()
-			computer.update_icon()
+			select_key(key)
 			if(key)
 				interact()
 			else
 				usr << "The screen turns to static."
 			return
+
+/datum/file/program/security/proc/select_key(var/selected_key)
+	key = selected_key
+	camera_list = null
+	update_icon()
+	computer.update_icon()
 
 /datum/file/program/security/proc/set_current(var/obj/machinery/camera/C)
 	if(current == C)
@@ -300,3 +310,35 @@
 			// Atlantis: Required for camnetkeys to work.
 /datum/file/program/security/hidden
 	hidden_file = 1
+
+/*
+	Camera monitoring program
+
+	Works much as the parent program, except:
+	* It requires a camera to be found using the proximity network card.
+	* It begins with all cam-access.
+*/
+
+/datum/file/program/security/syndicate
+	name			= "camer# moni!%r"
+	desc			= "Cons the Nanotrash Camera Network"
+	var/special_key		= new/datum/file/camnet_key/syndicate
+	var/camera_conn	= null
+
+	interact()
+		if(!interactable())
+			return
+
+		if(!computer.net)
+			computer.Crash(MISSING_PERIPHERAL)
+			return
+
+		camera_conn = computer.net.connect_to(/obj/machinery/camera,camera_conn)
+
+		if(!camera_conn)
+			computer.Crash(NETWORK_FAILURE)
+			return
+
+		// On interact, override camera key selection
+		select_key(special_key)
+		..()

@@ -85,7 +85,7 @@
 	origin_tech = "combat=2;materials=2;syndicate=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
 	load_method = MAGAZINE
-	mag_type = /obj/item/ammo_magazine/mc9mm/empty
+	mag_type = /obj/item/ammo_magazine/mc9mm
 
 /obj/item/weapon/gun/projectile/pistol/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
