@@ -433,6 +433,29 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Virus sample crate"
 	access = access_cmo
 	group = "Science"
+	
+/datum/supply_packs/virologysupplies
+	name = "Virology supplies"
+	contains = list(/obj/item/device/antibody_scanner,
+		/obj/item/weapon/storage/fancy/vials,
+		/obj/item/weapon/storage/fancy/vials,
+		/obj/item/weapon/storage/lockbox/vials)
+	cost = 15
+	containertype = "/obj/structure/closet/crate"
+	containername = "Virology supplies crate"
+	group = "Science"
+	
+/datum/supply_packs/chemistrysupplies
+	name = "Chemistry supplies"
+	contains = list(/obj/item/weapon/reagent_containers/glass/beaker/large,
+		/obj/item/weapon/reagent_containers/glass/beaker/large,
+		/obj/item/weapon/storage/box/beakers,
+		/obj/item/weapon/reagent_containers/dropper,
+		/obj/item/weapon/reagent_containers/dropper)
+	cost = 15
+	containertype = "/obj/structure/closet/crate"
+	containername = "Chemistry supplies crate"
+	group = "Science"
 
 /datum/supply_packs/metal50
 	name = "50 metal sheets"
