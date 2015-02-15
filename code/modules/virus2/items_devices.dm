@@ -36,13 +36,31 @@
 ///////////////VIRUS DISH///////////////
 
 /obj/item/weapon/virusdish
-	name = "virus containment/growth dish"
+	base_name = "virus dish"
+	name = "virus dish"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-b"
 	var/datum/disease2/disease/virus2 = null
 	var/growth = 0
 	var/info = 0
 	var/analysed = 0
+	var/label_text = ""
+	
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
+			var/tmp_label = sanitize(copytext(input(user, "Enter a label for [src.name]","Label",src.label_text), 1, MAX_NAME_LEN))
+			if(length(tmp_label) > 10)
+				user << "\red The label can be at most 10 characters long."
+			else
+				user << "\blue You set the label to \"[tmp_label]\"."
+				src.label_text = tmp_label
+				src.update_name_label()
+
+	proc/update_name_label()
+		if(src.label_text == "")
+			src.name = src.base_name
+		else
+			src.name = "[src.base_name] ([src.label_text])"
 
 /obj/item/weapon/virusdish/random
 	name = "virus sample"
