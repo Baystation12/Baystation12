@@ -9,11 +9,14 @@
 	origin_tech = "combat=8;materials=2;syndicate=8"
 	caliber = "14.5mm"
 	recoil = 2 //extra kickback
+	//fire_sound = 'sound/weapons/sniper.ogg'
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145
-	accuracy = -1 //made this not as bad as the LWAP's penalty because only one shot
+	//+2 accuracy over the LWAP because only one shot
+	accuracy = -1
+	scoped_accuracy = 2
 	var/bolt_open = 0
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
@@ -36,11 +39,12 @@
 	else
 		user << "<span class='notice'>You work the bolt closed.</span>"
 		bolt_open = 0
+	user.next_move = world.time + 4 //prevent spam, also makes having to work the bolt more of a drawback
 	update_icon()
 
 /obj/item/weapon/gun/projectile/heavysniper/special_check(mob/user)
 	if(bolt_open)
-		user << "<span class='warning'>You can't fire [src] with the bolt open!</span>"
+		user << "<span class='warning'>You can't fire [src] while the bolt is open!</span>"
 		return 0
 	return ..()
 
@@ -58,11 +62,6 @@
 	set category = "Object"
 	set name = "Use Scope"
 	set popup_menu = 1
-	
+
 	toggle_scope(2.0)
 
-//need to override zoom() so that accuracy is properly reset even if we move while zoomed in.
-/obj/item/weapon/gun/projectile/heavysniper/zoom()
-	..()
-	if(zoom)
-		accuracy -= initial(accuracy) //remove the accuracy penalty if zoomed in

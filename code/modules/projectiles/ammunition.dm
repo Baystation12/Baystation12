@@ -18,12 +18,12 @@
 		BB = new projectile_type(src)
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
-	set_dir(pick(cardinal))
 
 //removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
+	set_dir(pick(cardinal)) //spin spent casings
 	update_icon()
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -118,6 +118,7 @@
 	user << "<span class='notice'>You empty [src].</span>"
 	for(var/obj/item/ammo_casing/C in stored_ammo)
 		C.loc = user.loc
+		C.set_dir(pick(cardinal))
 	stored_ammo.Cut()
 	update_icon()
 
