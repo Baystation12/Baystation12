@@ -160,7 +160,7 @@ obj/item/weapon/gun/energy/staff/focus
 /obj/item/weapon/gun/energy/icarus
 	name = "rubber ducky"
 	desc = "It's a cute rubber duck.  With an evil gleam in it's eye."
-	projectile_type = "/obj/item/projectile/icarus/pointdefense"
+	projectile_type = /obj/item/projectile/icarus/pointdefense
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
@@ -168,11 +168,11 @@ obj/item/weapon/gun/energy/staff/focus
 	silenced = 1
 
 /obj/item/weapon/gun/energy/icarus/attack_self(mob/living/user as mob)
-	if(projectile_type == "/obj/item/projectile/icarus/pointdefense")
-		projectile_type = "/obj/item/projectile/icarus/guns"
+	if(projectile_type == /obj/item/projectile/icarus/pointdefense)
+		projectile_type = /obj/item/projectile/icarus/guns
 		user << "You inform the Icarus to switch to the main guns."
 	else
-		projectile_type = "/obj/item/projectile/icarus/pointdefense"
+		projectile_type = /obj/item/projectile/icarus/pointdefense
 		user << "You inform the Icarus to switch to the point-defense lasers."
 
 	. = ..()
@@ -202,5 +202,5 @@ obj/item/weapon/gun/energy/staff/focus
 	var/type = input(user,"What projectile type?","Projectile", null) as null|anything in typesof(/obj/item/projectile)
 	if(!type)
 		return ..()
-
+	projectile_type = type
 	. = ..()
