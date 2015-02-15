@@ -129,7 +129,7 @@
 			shake_camera(user, recoil + 1, recoil)
 
 	if(silenced)
-		playsound(user, fire_sound, 10, 1)
+		playsound(user, fire_sound, 3, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
 		user.visible_message("<span class='warning'>[user] fires [src][reflex ? " by reflex":""]!</span>", \
