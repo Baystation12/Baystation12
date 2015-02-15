@@ -315,11 +315,11 @@ emp_act
 			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit
+		var/miss_chance = 15
 		if (O.throw_source)
 			var/distance = get_dist(O.throw_source, loc)
-			zone = get_zone_with_miss_chance(zone, src, min(15*(distance-2), 0))
-		else
-			zone = get_zone_with_miss_chance(zone, src, 15)
+			miss_chance = max(15*(distance-2), 0)
+		zone = get_zone_with_miss_chance(zone, src, miss_chance)
 
 		if(!zone)
 			visible_message("\blue \The [O] misses [src] narrowly!")
