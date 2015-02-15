@@ -40,7 +40,7 @@
 	var/result        // example: = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 	var/time = 100    // 1/10 part of second
 
-/datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents) //1=precisely, 0=insufficiently, -1=superfluous
+/datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents)
 	. = 1
 	for (var/r_r in reagents)
 		var/aval_r_amnt = avail_reagents.get_reagent_amount(r_r)
@@ -54,40 +54,39 @@
 	return .
 
 /datum/recipe/proc/check_fruit(var/obj/container)
-	if(!fruit)
-		. = 1
-		return 1
-
-	var/list/checklist = fruit.Copy()
-	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
-		if(!G.seed)
-			return
-		if(!G.seed.kitchen_tag || !checklist[G.seed.kitchen_tag] || checklist[G.seed.kitchen_tag] <= 0)
-			continue
-		checklist[G.seed.kitchen_tag]--
-
-	for(var/ktag in checklist)
-		if(checklist[ktag] && checklist[ktag] > 0)
-			. = -1
-			return -1
+	. = 1
+	if(fruit && fruit.len)
+		var/list/checklist = list()
+		for(var/fruittype in fruit) // I do not trust Copy().
+			checklist[fruittype] = fruit[fruittype]
+		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
+			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]) || checklist[G.seed.kitchen_tag] <= 0)
+				continue
+			checklist[G.seed.kitchen_tag]--
+		for(var/ktag in checklist)
+			if(!isnull(checklist[ktag]))
+				if(checklist[ktag] < 0)
+					. = -1
+				else if(checklist[ktag] > 0)
+					. = 0
+					break
 	return .
 
-/datum/recipe/proc/check_items(var/obj/container as obj) //1=precisely, 0=insufficiently, -1=superfluous
-	if (!items)
-		return 1
+/datum/recipe/proc/check_items(var/obj/container as obj)
 	. = 1
-	var/list/checklist = items.Copy()
-	for(var/obj/O in container)
-		var/found = 0
-		for (var/type in checklist)
-			if (istype(O,type))
-				checklist-=type
-				found = 1
-				break
-		if (!found)
-			. = -1
-	if (checklist.len)
-		return 0
+	if (items && items.len)
+		var/list/checklist = items.Copy()
+		for(var/obj/O in container)
+			var/found = 0
+			for (var/type in checklist)
+				if (istype(O,type))
+					checklist-=type
+					found = 1
+					break
+			if (!found)
+				. = -1
+		if (checklist.len)
+			. = 0
 	return .
 
 //general version
@@ -111,9 +110,11 @@
 	container.reagents.clear_reagents()
 	return result_obj
 
-/proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact = 1 as num)
+/proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact)
 	if (!exact)
 		exact = -1
+	else
+		exact = 1
 	var/list/datum/recipe/possible_recipes = new
 	for (var/datum/recipe/recipe in avaiable_recipes)
 		if (recipe.check_reagents(obj.reagents)==exact && recipe.check_items(obj)==exact && recipe.check_fruit(obj)==exact)
@@ -123,14 +124,11 @@
 	else if (possible_recipes.len==1)
 		return possible_recipes[1]
 	else //okay, let's select the most complicated recipe
-		var/r_count = 0
-		var/i_count = 0
+		var/highest_count = 0
 		. = possible_recipes[1]
 		for (var/datum/recipe/recipe in possible_recipes)
-			var/N_i = (recipe.items)?(recipe.items.len):0
-			var/N_r = (recipe.reagents)?(recipe.reagents.len):0
-			if (N_i > i_count || (N_i== i_count && N_r > r_count ))
-				r_count = N_r
-				i_count = N_i
+			var/count = ((recipe.items)?(recipe.items.len):0) + ((recipe.reagents)?(recipe.reagents.len):0) + ((recipe.fruit)?(recipe.fruit.len):0)
+			if (count >= highest_count)
+				highest_count = count
 				. = recipe
 		return .
