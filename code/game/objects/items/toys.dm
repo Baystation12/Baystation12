@@ -6,6 +6,7 @@
  *		Toy gun
  *		Toy crossbow
  *		Toy swords
+ *		Toy bosun's whistle
  *      Toy mechs
  *		Crayons
  *		Snap pops
@@ -98,7 +99,7 @@
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
 	w_class = 4.0
-	
+
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
 	desc = "Across the balloon the following is printed: \"Man, I love NT soooo much. I use only NanoTrasen products. You have NO idea.\""
@@ -498,6 +499,22 @@
 	if(..(user, 0))
 		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
 
+/*
+ * Bosun's whistle
+ */
+
+ /obj/item/toy/bosunwhistle
+ 	name = "bosun's whistle"
+ 	desc = "A genuine Admiral Krush Bosun's Whistle, for the aspiring ship's captain! Suitable for ages 8 and up, do not swallow."
+ 	icon = 'icons/obj/toy.dmi'
+ 	icon_state = "bosunwhistle"
+ 	var/cooldown = 0
+
+/obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
+	if(cooldown < world.time - 35)
+		user << "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>"
+		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
+		cooldown = world.time
 
 /*
  * Mech prizes
