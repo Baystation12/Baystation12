@@ -40,7 +40,7 @@
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
-	cell_type = "/obj/item/weapon/cell/infinite"
+	cell_type = /obj/item/weapon/cell/infinite
 	fire_delay = 10
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
@@ -53,5 +53,5 @@
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"
-	cell_type = "/obj/item/weapon/cell/infinite"
+	cell_type = /obj/item/weapon/cell/infinite
 	fire_delay = 10

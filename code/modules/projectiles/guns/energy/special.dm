@@ -72,7 +72,7 @@
 	w_class = 4
 	projectile_type = /obj/item/projectile/meteor
 	charge_cost = 100
-	cell_type = "/obj/item/weapon/cell/potato"
+	cell_type = /obj/item/weapon/cell/potato
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
