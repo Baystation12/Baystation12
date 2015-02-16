@@ -1277,7 +1277,7 @@
 	else
 		return ..()
 
-/mob/living/carbon/human/get_desc_fluff()
+/mob/living/carbon/human/get_descriptions_fluff()
 	return print_flavor_text(0)
 
 /mob/living/carbon/human/getDNA()

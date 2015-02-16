@@ -3,7 +3,13 @@
 	real_name = "drone"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "repairbot"
-	desc_info = "Drones are player-controlled synthetics which are lawed to maintain the station and not \
+	descriptions = new/datum/descriptions("Drones are player-controlled synthetics which are lawed to maintain the station and not \
+				interact with anyone else, except for other drones.  They hold a wide array of tools to build, repair, maintain, and clean. \
+				They fuction similarly to other synthetics, in that they require recharging regularly, have laws, and are resilient to many hazards, \
+				such as fire, radiation, vacuum, and more.  Ghosts can join the round as a maintenance drone by using the appropriate verb in the 'ghost' tab. \
+				An inactive drone can be rebooted by swiping an ID card on it with engineering or robotics access.",\
+				,"An <u>Electromagnetic Sequencer</u> can be used to subvert the drone to your cause.")
+//	desc_info = "Drones are player-controlled synthetics which are lawed to maintain the station and not \
 				interact with anyone else, except for other drones.  They hold a wide array of tools to build, repair, maintain, and clean. \
 				They fuction similarly to other synthetics, in that they require recharging regularly, have laws, and are resilient to many hazards, \
 				such as fire, radiation, vacuum, and more.  Ghosts can join the round as a maintenance drone by using the appropriate verb in the 'ghost' tab."

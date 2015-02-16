@@ -12,10 +12,8 @@
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 
-	//Examine tab vars
-	var/desc_info = null //Blue 'tutorial' text, which details how this atom works, and perhaps some tips and tricks.
-	var/desc_fluff = null //Green text, with quotes, to tell a short blurb or a paragraph about this atom's place in the fluff, should one exist.
-
+	//Examine tab
+	var/datum/descriptions/descriptions = null //See code/datums/descriptions.dm for details.
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -207,35 +205,52 @@ its easier to just keep the beam vertical.
 
 	user << "\icon[src] That's [f_name] [suffix]"
 
-	if(name) //This shouldn't be needed but I'm paranoid.
-		user.desc_name_holder = "[src.name]" //\icon[src]
+	var/datum/descriptions/D = descriptions
+	if(istype(D))
+		user.description_holders["info"] = get_descriptions_info()
+		user.description_holders["fluff"] = get_descriptions_fluff()
+		if(user.mind.special_role)
+			user.description_holders["antag"] = get_descriptions_antag()
+	else
+		user.description_holders["info"] = null
+		user.description_holders["fluff"] = null
+		user.description_holders["antag"] = null
 
-	user.desc_icon_holder = "\icon[src]"
+	if(name) //This shouldn't be needed but I'm paranoid.
+		user.description_holders["name"] = "[src.name]" //\icon[src]
+
+	user.description_holders["icon"] = "\icon[src]"
 
 	if(desc)
 		user << desc
-		user.desc_holder = src.desc
+		user.description_holders["desc"] = src.desc
 	else
-		user.desc_holder = null //This is needed, or else if you examine one thing with a desc, then another without, the panel will retain the first examined's desc.
-
-	user.desc_info_holder = get_desc_info()
-	user.desc_fluff_holder = get_desc_fluff()
+		user.description_holders["desc"] = null //This is needed, or else if you examine one thing with a desc, then another without, the panel will retain the first examined's desc.
 
 	return distance == -1 || (get_dist(src, user) <= distance)
 
 //Override these if you need special behaviour for a specific type.
 
-/atom/proc/get_desc_info()
-	if(desc_info)
-		return desc_info
+/atom/proc/get_descriptions_info()
+	var/datum/descriptions/D = descriptions
+	if(istype(D) && D.info)
+		return D.info
 	else
-		return
+		return null
 
-/atom/proc/get_desc_fluff()
-	if(desc_fluff)
-		return src.desc_fluff
+/atom/proc/get_descriptions_fluff()
+	var/datum/descriptions/D = descriptions
+	if(istype(D) && D.fluff)
+		return D.fluff
 	else
-		return
+		return null
+
+/atom/proc/get_descriptions_antag()
+	var/datum/descriptions/D = descriptions
+	if(istype(D) && D.antag)
+		return D.antag
+	else
+		return null
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
