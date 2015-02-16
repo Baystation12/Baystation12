@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\ZAS\Turf.dm;code\ZAS\Phoron.dm;code\ZAS\_gas_mixture_xgm.dm;code\ZAS\_xgm_gas_data.dm;code\ZAS\Fire.dm;code\ZAS\Zone.dm;code\controllers\_DynamicAreaLighting_TG.dm
+WINDOW: code\game\jobs\job\medical.dm;code\game\jobs\jobprocs.dm;code\game\jobs\job\job.dm;code\game\jobs\jobs.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\_onclick code\_onclick\hud code\controllers code\datums code\datums\diseases code\datums\spells code\defines code\FEA code\game code\game\area code\game\gamemodes code\game\gamemodes\events code\game\gamemodes\heist code\game\machinery code\game\machinery\computer code\game\machinery\doors code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\effects\decals\Cleanable code\game\objects\items code\game\objects\items\weapons code\game\objects\structures code\game\turfs code\game\turfs\simulated code\modules code\modules\clothing\masks code\modules\food code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\xenomorphs code\ZAS icons icons\effects maps maps\overmap maps\overmap\bearcat 
-FILE: code\ZAS\Fire.dm
-LAST_COMPILE_TIME: 1423807053
+DIR: code code\game code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\doors code\game\objects code\game\objects\items code\game\objects\items\devices code\modules code\modules\awaymissions code\modules\virus2 code\TriDimension code\unused\hivebot 
+FILE: code\game\jobs\jobs.dm
+LAST_COMPILE_TIME: 1424045527
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
