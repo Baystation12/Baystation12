@@ -1,9 +1,11 @@
 /obj/nano_module/crew_monitor
+	name = "Crew monitor"
 	var/list/tracked = new
 
 /obj/nano_module/crew_monitor/Topic(href, href_list)
 	if(..()) return
-	if (!(src.loc.z in config.player_levels))
+	var/turf/T = get_turf(src)
+	if (!T || !(T.z in config.player_levels))
 		usr << "<span class='warning'>Unable to establish a connection<span>: You're too far away from the station!"
 		return 0
 	if(href_list["close"] )
@@ -21,13 +23,13 @@
 	src.scan()
 
 	var/data[0]
+	var/turf/T = get_turf(src)
 	var/list/crewmembers = list()
-
 	for(var/obj/item/clothing/under/C in src.tracked)
 
 		var/turf/pos = get_turf(C)
 
-		if((C) && (C.has_sensor) && (pos) && (pos.z == src.loc.z) && (C.sensor_mode != SUIT_SENSOR_OFF))
+		if((C) && (C.has_sensor) && (pos) && (T && pos.z == T.z) && (C.sensor_mode != SUIT_SENSOR_OFF))
 			if(istype(C.loc, /mob/living/carbon/human))
 
 				var/mob/living/carbon/human/H = C.loc

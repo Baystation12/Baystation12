@@ -25,7 +25,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/toggle_acceleration,
 	/mob/living/silicon/ai/proc/toggle_camera_light,
 	/mob/living/silicon/ai/proc/nano_rcon,
-	/mob/living/silicon/ai/proc/nano_crew_monitor
+	/mob/living/silicon/ai/proc/nano_crew_monitor,
+	/mob/living/silicon/ai/proc/nano_power_monitor
 )
 
 //Not sure why this is necessary...
