@@ -114,6 +114,7 @@
 		beakers += B
 		user << "\blue You slot [B] into [src]."
 		src.updateUsrDialog()
+		return 1
 	..()
 
 //fills the given dart with reagents
