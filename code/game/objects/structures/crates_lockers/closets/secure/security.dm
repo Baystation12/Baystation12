@@ -54,7 +54,7 @@
 		new /obj/item/weapon/storage/box/ids(src)
 		new /obj/item/weapon/storage/box/ids( src )
 		new /obj/item/weapon/gun/energy/gun(src)
-		new /obj/item/weapon/gun/projectile/detective/flash(src)
+		new /obj/item/weapon/gun/projectile/colt/flash(src)
 		new /obj/item/device/flash(src)
 		return
 
@@ -262,7 +262,7 @@
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/taperoll/police(src)
-		new /obj/item/weapon/gun/projectile/detective(src)
+		new /obj/item/weapon/gun/projectile/colt/detective(src)
 		new /obj/item/clothing/accessory/holster/armpit(src)
 		return
 

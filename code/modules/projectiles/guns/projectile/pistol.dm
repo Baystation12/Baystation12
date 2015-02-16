@@ -1,20 +1,38 @@
-/obj/item/weapon/gun/projectile/detective
+/obj/item/weapon/gun/projectile/colt
 	name = "\improper Colt M1911"
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
+	desc = "A cheap Martian knock-off of a Colt M1911."
+	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = "combat=2;materials=2"
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
-/obj/item/weapon/gun/projectile/detective/flash
+/obj/item/weapon/gun/projectile/colt/flash
 	name = "\improper Colt M1911 signal pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 signal flash rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
-/obj/item/weapon/gun/projectile/detective/colt
-	desc = "A cheap Martian knock-off of a Colt M1911."
-	magazine_type = /obj/item/ammo_magazine/c45m
+/obj/item/weapon/gun/projectile/colt/detective
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
+	magazine_type = /obj/item/ammo_magazine/c45m/rubber
+
+/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
+	set name = "Name Gun"
+	set category = "Object"
+	set desc = "Rename your gun. If you're the detective."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+	if(!M.mind.assigned_role == "Detective")
+		M << "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>"
+		return 0
+
+	var/input = stripped_input(usr,"What do you want to name the gun?", ,"", MAX_NAME_LEN)
+
+	if(src && input && !M.stat && in_range(M,src))
+		name = input
+		M << "You name the gun [input]. Say hello to your new friend."
+		return 1
 
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
