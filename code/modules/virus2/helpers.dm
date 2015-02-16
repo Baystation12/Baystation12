@@ -127,7 +127,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 	if (src == victim)
 		return "retardation"
 
-	if(isipc(M))
+	if(isipc(victim))
 		return
 //	log_debug("Spreading [vector] diseases from [src] to [victim]")
 	if (virus2.len > 0)
