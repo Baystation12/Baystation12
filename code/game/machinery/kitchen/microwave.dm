@@ -274,7 +274,7 @@
 			cooked.loc = src.loc
 		return
 
-/obj/machinery/microwave/proc/wzhzhzh(var/seconds as num)
+/obj/machinery/microwave/proc/wzhzhzh(var/seconds as num) // Whoever named this proc is fucking literally Satan. ~ Z
 	for (var/i=1 to seconds)
 		if (stat & (NOPOWER|BROKEN))
 			return 0
