@@ -57,7 +57,7 @@
 		for(var/fruittype in fruit) // I do not trust Copy().
 			checklist[fruittype] = fruit[fruittype]
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in container)
-			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]) || checklist[G.seed.kitchen_tag] <= 0)
+			if(!G.seed || !G.seed.kitchen_tag || isnull(checklist[G.seed.kitchen_tag]))
 				continue
 			checklist[G.seed.kitchen_tag]--
 		for(var/ktag in checklist)
@@ -72,12 +72,16 @@
 /datum/recipe/proc/check_items(var/obj/container as obj)
 	. = 1
 	if (items && items.len)
-		var/list/checklist = items.Copy()
+		var/list/checklist = list()
+		for(var/item_type in items)
+			checklist |= item_type //Still don't trust Copy().
 		for(var/obj/O in container)
+			if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown))
+				continue // Fruit is handled in check_fruit().
 			var/found = 0
-			for (var/type in checklist)
-				if (istype(O,type))
-					checklist-=type
+			for(var/item_type in checklist)
+				if (istype(O,item_type))
+					checklist-=item_type
 					found = 1
 					break
 			if (!found)
@@ -97,9 +101,8 @@
 
 // food-related
 /datum/recipe/proc/make_food(var/obj/container as obj)
-	world << "trying to make [result]."
 	if(!result)
-		world << "<span class='danger'>Recipe is defined without a result, please bug this.</span>"
+		world << "<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>"
 		return
 	var/obj/result_obj = new result(container)
 	for (var/obj/O in (container.contents-result_obj))
@@ -113,10 +116,11 @@
 
 /proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact)
 	var/list/datum/recipe/possible_recipes = new
+	var/target = exact ? 0 : 1
 	for (var/datum/recipe/recipe in avaiable_recipes)
-		var/target = exact ? 0 : 1
-		if(recipe.check_reagents(obj.reagents) >= target && recipe.check_items(obj) >= target && recipe.check_fruit(obj) >= target)
-			possible_recipes |= recipe
+		if((recipe.check_reagents(obj.reagents) < target) || (recipe.check_items(obj) < target) || (recipe.check_fruit(obj) < target))
+			continue
+		possible_recipes |= recipe
 	if (possible_recipes.len==0)
 		return null
 	else if (possible_recipes.len==1)

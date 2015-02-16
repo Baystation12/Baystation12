@@ -67,7 +67,7 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/normal
 
-/datum/recipe/human/burger
+/datum/recipe/humanburger
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
 		/obj/item/weapon/reagent_containers/food/snacks/bun
@@ -365,7 +365,7 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donut/chaos
 
-/datum/recipe/human/kabob
+/datum/recipe/humankabob
 	items = list(
 		/obj/item/stack/rods,
 		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
@@ -434,7 +434,6 @@ I said no!
 /datum/recipe/popcorn
 	fruit = list("corn" = 1)
 	result = /obj/item/weapon/reagent_containers/food/snacks/popcorn
-
 
 /datum/recipe/cookie
 	reagents = list("milk" = 5, "sugar" = 5)
