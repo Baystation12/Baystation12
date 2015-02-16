@@ -37,7 +37,7 @@
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/taser_effect = 0 //If set then the projectile will apply it's agony damage using stun_effect_act() to mobs it hits, and other damage will be ignored
-	var/flag = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
+	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
 	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
@@ -69,20 +69,19 @@
 /obj/item/projectile/proc/on_penetrate(var/atom/A)
 	return 1
 
-/obj/item/projectile/proc/check_fire(var/mob/living/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
-	if(!istype(target) || !istype(user))
-		return 0
-	var/obj/item/projectile/test/in_chamber = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
-	in_chamber.target = target
-	in_chamber.flags = flags //Set the flags...
-	in_chamber.pass_flags = pass_flags //And the pass flags to that of the real projectile...
-	in_chamber.firer = user
-	var/output = in_chamber.process() //Test it!
-	del(in_chamber) //No need for it anymore
-	return output //Send it back to the gun!
+/obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
+	check_trajectory(target, user, pass_flags, flags)
+
+//sets the click point of the projectile using mouse input params
+/obj/item/projectile/proc/set_clickpoint(var/params)
+	var/list/mouse_control = params2list(params)
+	if(mouse_control["icon-x"])
+		p_x = text2num(mouse_control["icon-x"])
+	if(mouse_control["icon-y"])
+		p_y = text2num(mouse_control["icon-y"])
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0, var/px=null, var/py=null)
+/obj/item/projectile/proc/launch(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
 	var/turf/curloc = get_turf(user)
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
@@ -93,10 +92,12 @@
 
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
+		on_impact(user)
 		del(src)
 		return 0
-	if(targloc == curloc) //Shooting the ground
-		targloc.bullet_act(src, target_zone)
+	if(targloc == curloc) //Shooting something in the same turf
+		target.bullet_act(src, target_zone)
+		on_impact(target)
 		del(src)
 		return 0
 
@@ -106,8 +107,6 @@
 	current = curloc
 	yo = targloc.y - curloc.y + y_offset
 	xo = targloc.x - curloc.x + x_offset
-	if(!isnull(py)) p_y = py
-	if(!isnull(px)) p_x = px
 
 	shot_from = launcher
 	silenced = launcher.silenced
@@ -129,15 +128,16 @@
 	xo = new_x - starting_loc.x
 
 //Called when the projectile intercepts a mob. Returns 1 if the projectile hit the mob, 0 if it missed and should keep flying.
-/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier = -30)
+/obj/item/projectile/proc/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
 	//accuracy bonus from aiming
 	if (istype(shot_from, /obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
 		var/obj/item/weapon/gun/daddy = shot_from	//Kinda balanced by fact you need like 2 seconds to aim
-		if (daddy.target && original in daddy.target) //As opposed to no-delay pew pew
+		miss_modifier -= round(15*daddy.accuracy)
+		if (daddy.aim_targets && original in daddy.aim_targets) //As opposed to no-delay pew pew
 			miss_modifier += -30
 
 	//roll to-hit
-	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, max(miss_modifier + 15*distance, 0))
+	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, max(miss_modifier + 15*(distance-2), 0))
 	if(!hit_zone)
 		visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
 		return 0
@@ -228,10 +228,10 @@
 		return 1
 
 /obj/item/projectile/process()
-	if(kill_count < 1)
-		del(src)
-	kill_count--
 	spawn while(src)
+		if(kill_count-- < 1)
+			on_impact(src.loc) //for any final impact behaviours
+			del(src)
 		if((!( current ) || loc == current))
 			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
@@ -245,6 +245,7 @@
 					Bump(original)
 					sleep(1)
 
+//"Tracing" projectile
 /obj/item/projectile/test //Used to see if you can hit them.
 	invisibility = 101 //Nope!  Can't see me!
 	yo = null
@@ -285,3 +286,16 @@
 			M = locate() in get_step(src,target)
 			if(istype(M))
 				return 1
+
+/proc/check_trajectory(atom/target as mob, var/mob/living/user as mob, var/pass_flags=PASSTABLE|PASSGLASS|PASSGRILLE, flags=null)  //Checks if you can hit them or not.
+	if(!istype(target) || !istype(user))
+		return 0
+	var/obj/item/projectile/test/trace = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+	trace.target = target
+	if(!isnull(flags))
+		trace.flags = flags //Set the flags...
+	trace.pass_flags = pass_flags //And the pass flags to that of the real projectile...
+	trace.firer = user
+	var/output = trace.process() //Test it!
+	del(trace) //No need for it anymore
+	return output //Send it back to the gun!

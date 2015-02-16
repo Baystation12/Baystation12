@@ -79,7 +79,6 @@
 /obj/item/weapon/storage/box/syringes
 	name = "box of syringes"
 	desc = "A box full of syringes."
-	desc = "A biohazard alert warning is printed on the box"
 	icon_state = "syringe"
 
 	New()
@@ -91,6 +90,22 @@
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
 		new /obj/item/weapon/reagent_containers/syringe( src )
+
+/obj/item/weapon/storage/box/syringegun
+	name = "box of syringe gun cartridges"
+	desc = "A box full of compressed gas cartridges."
+	icon_state = "syringe"
+
+	New()
+		..()
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+		new /obj/item/weapon/syringe_cartridge( src )
+
 
 /obj/item/weapon/storage/box/beakers
 	name = "box of beakers"
@@ -175,6 +190,48 @@
 		new /obj/item/ammo_casing/shotgun/pellet(src)
 		new /obj/item/ammo_casing/shotgun/pellet(src)
 		new /obj/item/ammo_casing/shotgun/pellet(src)
+
+/obj/item/weapon/storage/box/flashshells
+	name = "box of illumination shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+		new /obj/item/ammo_casing/shotgun/flash(src)
+
+/obj/item/weapon/storage/box/stunshells
+	name = "box of stun shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+		new /obj/item/ammo_casing/shotgun/stunshell(src)
+
+/obj/item/weapon/storage/box/heavysniperammo
+	name = "box of 14.5mm AP shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+
+	New()
+		..()
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a145(src)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"

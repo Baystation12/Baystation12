@@ -16,12 +16,23 @@
 /obj/item/ammo_casing/c38
 	desc = "A .38 bullet casing."
 	caliber = "38"
+	projectile_type = /obj/item/projectile/bullet/pistol
+
+/obj/item/ammo_casing/c38r
+	desc = "A .38 rubber bullet casing."
+	caliber = "38"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol
+
+/obj/item/ammo_casing/c9mmf
+	desc = "A 9mm flash shell casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/energy/flash
+
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
@@ -73,26 +84,27 @@
 	projectile_type = /obj/item/projectile/bullet/shotgun/beanbag
 	matter = list("metal" = 500)
 
+//Can stun in one hit if aimed at the head, but 
+//is blocked by clothing that stops tasers and is vulnerable to EMP
 /obj/item/ammo_casing/shotgun/stunshell
 	name = "stun shell"
 	desc = "A 12 gauge taser cartridge."
 	icon_state = "stunshell"
+	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	matter = list("metal" = 1250, "glass" = 1250)
 
+/obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
+	if(prob(100/severity)) BB = null
+	update_icon()
+
+//Does not stun, only blinds, but has area of effect.
 /obj/item/ammo_casing/shotgun/flash
 	name = "flash shell"
-	desc = "A flash shell used to provide illumination."
+	desc = "A chemical shell used to signal distress or provide illumination."
 	icon_state = "fshell"
 	projectile_type = /obj/item/projectile/energy/flash/flare
 	matter = list("metal" = 250, "glass" = 250)
-
-/obj/item/ammo_casing/shotgun/dart
-	name = "shotgun dart"
-	desc = "A dart for use in shotguns."
-	icon_state = "dart"
-	projectile_type = /obj/item/projectile/energy/dart
-	matter = list("metal" = 12500)
 
 /obj/item/ammo_casing/a762
 	desc = "A 7.62mm bullet casing."
@@ -100,9 +112,11 @@
 	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
 /obj/item/ammo_casing/a145
-	name = "\improper AP shell casing"
+	name = "shell casing"
 	desc = "A 14.5mm AP shell."
-	icon_state = "slshell"
+	icon_state = "lcasing"
+	spent_icon = "lcasing-spent"
+	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
 
 /obj/item/ammo_casing/rocket
@@ -118,6 +132,7 @@
 	projectile_type = /obj/item/projectile/bullet/chameleon
 	caliber = ".45"
 
+/*
 /obj/item/ammo_casing/a418
 	desc = "A .418 bullet casing."
 	caliber = "357"
@@ -127,3 +142,4 @@
 	desc = "A .666 bullet casing."
 	caliber = "357"
 	projectile_type = /obj/item/projectile/bullet/cyanideround
+*/
