@@ -26,6 +26,10 @@
 	var/obj/item/ammo_magazine/ammo_magazine = null //stored magazine
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
+	//TODO generalize ammo icon states for guns
+	//var/magazine_states = 0
+	//var/list/icon_keys = list()		//keys
+	//var/list/ammo_states = list()	//values
 
 /obj/item/weapon/gun/projectile/New()
 	..()
@@ -37,8 +41,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/consume_next_projectile()
-	//store the next ammo_casing in a var so that handle_post_fire() knows which one to eject
-	//also we might as well remove chambered here, so that we don't have to figure out where it came from later
+	//get the next casing
 	if(loaded.len)
 		chambered = loaded[1] //load next casing.
 		if(handle_casings != HOLD_CASINGS)
@@ -47,25 +50,36 @@
 		chambered = ammo_magazine.stored_ammo[1]
 		if(handle_casings != HOLD_CASINGS)
 			ammo_magazine.stored_ammo -= chambered
-	return chambered.BB
+	
+	if (chambered)
+		return chambered.BB
+	return null
 
 /obj/item/weapon/gun/projectile/handle_post_fire()
 	..()
 	if(chambered)
 		chambered.expend()
-	
-	//check chambered again in case it deleted itself
-	if(chambered && handle_casings != HOLD_CASINGS)
-		switch(handle_casings)
-			if(EJECT_CASINGS) //eject casing onto ground.
-				chambered.loc = get_turf(src)
-			if(CYCLE_CASINGS) //cycle the casing back to the end.
-				if(ammo_magazine)
-					ammo_magazine.stored_ammo += chambered
-				else
-					loaded += chambered
+		process_chambered()
+
+/obj/item/weapon/gun/projectile/handle_click_empty()
+	..()
+	process_chambered()
+
+/obj/item/weapon/gun/projectile/proc/process_chambered()
+	if (!chambered) return
+
+	switch(handle_casings)
+		if(EJECT_CASINGS) //eject casing onto ground.
+			chambered.loc = get_turf(src)
+		if(CYCLE_CASINGS) //cycle the casing back to the end.
+			if(ammo_magazine)
+				ammo_magazine.stored_ammo += chambered
+			else
+				loaded += chambered
+
+	if(handle_casings != HOLD_CASINGS)
 		chambered = null
-		
+
 
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
@@ -117,7 +131,6 @@
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 
 	update_icon()
-
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
@@ -172,7 +185,7 @@
 			playsound(user, auto_eject_sound, 40, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
-		update_icon()
+		update_icon() //make sure to do this after unsetting ammo_magazine
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
 	..(user)

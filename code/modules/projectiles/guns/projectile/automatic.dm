@@ -48,7 +48,7 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/sts35
-	name = "\improper STS-35 Automatic Rifle"
+	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of make popular on the frontier, despite it's bulk. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "assltrifle"
 	item_state = "shotgun"
