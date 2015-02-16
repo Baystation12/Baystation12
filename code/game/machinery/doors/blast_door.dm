@@ -179,3 +179,13 @@ obj/machinery/door/blast/regular
 	icon_state_closing = "shutterc1"
 	icon_state = "shutter1"
 	emitter_resistance = 20
+
+obj/machinery/door/blast/curtain
+	name = "curtain"
+	desc = "A red velvet curtain."
+	icon_state_open = "curtain0"
+	icon_state_opening = "curtain1"
+	icon_state_closed = "curtainc0"
+	icon_state_closing = "curtainc1"
+	icon_state = "curtainc0"
+	maxhealth = 30

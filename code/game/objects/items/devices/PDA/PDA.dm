@@ -109,10 +109,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/mime
 	default_cartridge = /obj/item/weapon/cartridge/mime
 	icon_state = "pda-mime"
-	message_silent = 1
-	news_silent = 1
-	ttone = "silence"
-	newstone = "silence"
+	ttone = "tada"
 
 /obj/item/device/pda/heads
 	default_cartridge = /obj/item/weapon/cartridge/head
