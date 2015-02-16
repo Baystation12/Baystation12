@@ -1407,7 +1407,7 @@
 "aBc" = (/obj/machinery/camera{c_tag = "Dormitory Bedroom Aft"; dir = 1},/turf/simulated/floor/carpet{tag = "icon-carpet1-0"; icon_state = "carpet1-0"},/area/crew_quarters/sleep/bedrooms)
 "aBd" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/structure/cable/green{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor{icon_state = "neutralcorner"; dir = 2},/area/crew_quarters/sleep)
 "aBe" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_y = -24},/obj/structure/flora/pottedplant{tag = "icon-plant-22"; icon_state = "plant-22"},/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/turf/simulated/floor{icon_state = "neutral"},/area/crew_quarters/sleep)
-"aBf" = (/obj/machinery/light_switch{pixel_y = -25},/obj/structure/closet/secure_closet/personal,/turf/simulated/floor{icon_state = "neutral"},/area/crew_quarters/sleep)
+"aBf" = (/obj/machinery/light_switch{pixel_y = -25},/obj/structure/undies_wardrobe,/turf/simulated/floor{icon_state = "neutral"},/area/crew_quarters/sleep)
 "aBg" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor{icon_state = "neutral"},/area/crew_quarters/sleep)
 "aBh" = (/obj/structure/closet/wardrobe/pjs,/turf/simulated/floor{icon_state = "neutral"},/area/crew_quarters/sleep)
 "aBi" = (/obj/structure/closet/wardrobe/pjs,/turf/simulated/floor{icon_state = "neutral"; dir = 6},/area/crew_quarters/sleep)
