@@ -47,7 +47,7 @@
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
-	
+
 	if(shock_stage >= 10) tally += 3
 
 	if(FAT in src.mutations)
@@ -55,7 +55,7 @@
 	if (bodytemperature < 283.222)
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
-	tally += 2*stance_damage //damaged/missing feet or legs is slow
+	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
 
 	if(mRun in mutations)
 		tally = 0

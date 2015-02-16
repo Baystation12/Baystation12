@@ -96,7 +96,7 @@
 					if(sender)
 						C.cmd_admin_pm(sender,reply)										//sender is still about, let's reply to them
 					else
-						adminhelp_admin(reply)													//sender has left, adminhelp instead
+						adminhelp(reply)													//sender has left, adminhelp instead
 				return
 	src << "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>"
 	C << "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>: <span class='message'>[msg]</span></span></span>"

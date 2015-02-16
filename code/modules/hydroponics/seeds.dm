@@ -3,7 +3,6 @@
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "seed"
-	flags = FPRINT | TABLEPASS
 	w_class = 2.0
 
 	var/seed_type
@@ -229,6 +228,9 @@
 
 /obj/item/seeds/cherryseed
 	seed_type = "cherry"
+
+/obj/item/seeds/tobaccoseed
+	seed_type = "tobacco"
 
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"

@@ -129,6 +129,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attacktext = "smashed their armoured gauntlet into"
+	mob_size = 20
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -165,8 +166,8 @@
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
 			adjustBruteLoss(P.damage * 0.5)
-			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
-							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
+			visible_message("<span class='danger'>\The [P] was reflected by \the [src]'s shell!</span>", \
+							"<span class='userdanger'>\The [P] was reflected by \the [src]'s shell!</span>")
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -175,12 +176,7 @@
 				var/turf/curloc = get_turf(src)
 
 				// redirect the projectile
-				P.original = locate(new_x, new_y, P.z)
-				P.starting = curloc
-				P.current = curloc
-				P.firer = src
-				P.yo = new_y - curloc.y
-				P.xo = new_x - curloc.x
+				P.redirect(new_x, new_y, curloc, src)
 
 			return -1 // complete projectile permutation
 
@@ -259,6 +255,7 @@
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'
+	mob_size = 20
 	var/energy = 0
 	var/max_energy = 1000
 

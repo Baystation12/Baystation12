@@ -114,7 +114,7 @@
 
 /////////////////////// Cataguettes - Lucy's Stethoscope - Lucy Kemmerer //////
 
-/obj/item/clothing/tie/stethoscope/fluff/lucystethos
+/obj/item/clothing/accessory/stethoscope/fluff/lucystethos
    name = "Lucy's Stethoscope"
    desc = "A medical apparatus intended to ease in listening to the sounds of the human body. This one looks cleaner and sparklier than the rest. There is a small silver plaque attached to the tubing, with the words 'Lucy Kemmerer' engraved on it."
    icon_state = "lucystethos"
@@ -407,7 +407,6 @@
 	item_state = "ciglit"
 	w_class = 1
 	body_parts_covered = null
-	flags = FPRINT|TABLEPASS
 
 //Strange penlight, Nerezza: Asher Spock
 
@@ -787,7 +786,6 @@
 	name = "colonial marine beret"
 	desc = "A well-worn navy blue beret. The insignia of the Martian Colonial Marine Corps is affixed to the front."
 	icon_state = "officerberet"
-	flags = FPRINT | TABLEPASS
 
 ////////////////////////////// Serithi - Adapted Security Helmet //////////////////////////////
 
@@ -841,7 +839,6 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
 	icon = 'icons/obj/chemical.dmi'
-	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
 	New(loc, var/color, var/labeled)
 		..()
 		name = "[labeled] bottle"
@@ -1073,7 +1070,6 @@
 	item_color = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
-	flags = FPRINT | TABLEPASS
 
 //Suit roll-down toggle.
 /obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()
@@ -1115,29 +1111,39 @@
 	item_color = "lillian_dress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-////// Cybernetic Casings - Parker Eliza - MrSnapwalk
+////// Tailored Security Uniform - Parker Eliza - MrSnapwalk
+
 /obj/item/clothing/under/fluff/parkereliza
-	name = "cybernetic casings"
-	desc = "A set of somewhat bulky white casings for robotic limbs, paired with a basic blue tank top and black cargo pants. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
+	name = "tailored security uniform"
+	desc = "A red uniform shirt (tailored for easy access to the shoulder joint) and black cargo pants, paired with a set of somewhat bulky white casings for robotic limbs. The arms have a small label on the inner elbow, which reads \"Bishop Corporation Cybernetic Solutions\"."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "parker_eliza"
 	item_state = "parker_eliza"
 	item_color = "parker_eliza"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 
+////// Bishop "GOLEM" V2200 Industrial Limb Augments - Parker Eliza - MrSnapwalk
+
+/obj/item/clothing/suit/fluff/parkereliza
+	name = "Bishop \"GOLEM\" V2200 Industrial Limb Augments"
+	desc = "A set of top-of-the-line cyberlimbs, only usable to someone with extensive bone structure augmentation. Often used in industrial applications, they are capable of throwing a man clear across a room. The load limitation circuit in this set appears to be modified."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "parker_eliza_arms"
+	item_state = "parker_eliza_arms"
+	item_color = "parker_eliza_arms"
+
 
 ////////////// Accessories /////
 
 //////////////////// Blood Red Pendant - Mewth - Mu'taz Radi ////////////////
 
-/obj/item/clothing/tie/fluff/radi
+/obj/item/clothing/accessory/fluff/radi
 	name = "Blood Red Pendant"
 	desc = "A blue chained necklace with a ruby in the middle, it looks pretty!"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "radi_pendant"
 	item_state = "radi_pendant"
 	item_color = "radi_pendant"
-	flags = FPRINT|TABLEPASS
 	w_class = 2.0
 
 //////////// Masks ////////////
@@ -1149,7 +1155,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "flagmask"
 	item_state = "flagmask"
-	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 */
@@ -1159,7 +1165,6 @@
 	desc = "A silver and emerald shamrock pendant. It has the initials \"M.K.\" engraved on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mara_kilpatrick_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 
 /////////////// Oen'g Issek Medical Mask //////////////////////////
@@ -1174,7 +1179,7 @@
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
-/obj/item/clothing/tie/fluff/altair_locket
+/obj/item/clothing/accessory/fluff/altair_locket
 	name = "small locket"
 	desc = "A small golden locket attached to an Ii'rka-reed string. Inside the locket is a holo-picture of a female Tajaran, and an inscription writtin in Siik'mas."
 	icon = 'icons/obj/custom_items.dmi'
@@ -1182,13 +1187,12 @@
 	item_state = "altair_locket"
 	item_color = "altair_locket"
 	slot_flags = 0
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
 
-/obj/item/clothing/tie/fluff/konaa_hirano
+/obj/item/clothing/accessory/fluff/konaa_hirano
 	name = "silver locket"
 	desc = "This oval shaped, argentium sterling silver locket hangs on an incredibly fine, refractive string, almost thin as hair and microweaved from links to a deceptive strength, of similar material. The edges are engraved very delicately with an elegant curving design, but overall the main is unmarked and smooth to the touch, leaving room for either remaining as a stolid piece or future alterations. There is an obvious internal place for a picture or lock of some sort, but even behind that is a very thin compartment unhinged with the pinch of a thumb and forefinger."
 	icon = 'icons/obj/custom_items.dmi'
@@ -1196,18 +1200,17 @@
 	item_state = "konaahirano"
 	item_color = "konaahirano"
 	slot_flags = 0
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
 	var/obj/item/held //Item inside locket.
 
-/obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
+/obj/item/clothing/accessory/fluff/konaa_hirano/attack_self(mob/user as mob)
 	if(held)
 		user << "You open [src] and [held] falls out."
 		held.loc = get_turf(user)
 		src.held = null
 
-/obj/item/clothing/tie/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/accessory/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/paper))
 		if(held)
 			usr << "[src] already has something inside it."
@@ -1221,12 +1224,11 @@
 
 //////  Medallion - Nasir Khayyam - Jamini
 
-/obj/item/clothing/tie/fluff/nasir_khayyam_1
+/obj/item/clothing/accessory/fluff/nasir_khayyam_1
 	name = "medallion"
 	desc = "This silvered medallion bears the symbol of the Hadii Clan of the Tajaran."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nasir_khayyam_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK | SLOT_TIE
 
@@ -1237,7 +1239,6 @@
 	desc = "A brass necklace with a green emerald placed at the end. It has a small inscription on the top of the chain, saying \'Foster\'"
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ty_foster"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 
 ////// Apollon Pendant - Michael Guess - Dragor23
@@ -1246,7 +1247,6 @@
 	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "michael_guess_1"
-	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK
 	body_parts_covered = 0
@@ -1340,22 +1340,21 @@
 	desc = "A stun baton used for incapacitating targets; there seems to be a bunch of tally marks set into the handle."
 
 ///// Deckard .44 - Callum Leamas - Roaper
-/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas
 	name = "Deckard .44"
 	desc = "A custom built revolver, based off the semi-popular Detective Special model."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "leamas-empty"
+	ammo_type = /obj/item/ammo_magazine/c38/rubber
 
-/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas/update_icon()
-
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas/update_icon()
 	..()
 	if(loaded.len)
 		icon_state = "leamas-loaded"
 	else
 		icon_state = "leamas-empty"
 
-/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
-
+/obj/item/weapon/gun/projectile/revolver/detective/fluff/callum_leamas/load_ammo(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()

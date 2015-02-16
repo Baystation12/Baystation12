@@ -5,7 +5,7 @@
 	icon_state = "grille"
 	density = 1
 	anchored = 1
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
 	layer = 2.9
 	explosion_resistance = 5
@@ -59,16 +59,33 @@
 			return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
-
 	if(!Proj)	return
 
 	//Tasers and the like should not damage grilles.
-	if(Proj.damage_type == HALLOSS)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	src.health -= Proj.damage*0.2
-	healthcheck()
-	return 0
+	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
+	var/damage = Proj.damage
+	var/passthrough
+	if(damage > 30)
+		passthrough = 1
+		if(prob(20))
+			Proj.damage *= 0.5 //weaken the projectile
+	else
+		//weaker bullets are affected to a greater extent
+		if(prob(20))
+			passthrough = 0
+		else
+			Proj.damage *= 0.5 //weaken the projectile
+			passthrough = 1
+	
+	if(passthrough)
+		. = -1
+		damage *= 0.1 //if the bullet passes through then the grille avoids most of the damage
+	
+	src.health -= damage*0.2
+	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
 /obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(iswirecutter(W))

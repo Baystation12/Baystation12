@@ -1,3 +1,16 @@
+/*
+Add fingerprints to items when we put them in our hands.
+This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
+
+*/
+/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
+	. = ..()
+	if(.) W.add_fingerprint(src)
+
+/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
+	. = ..()
+	if(.) W.add_fingerprint(src)
+
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
@@ -167,6 +180,8 @@
 		update_inv_back()
 	else if (W == handcuffed)
 		handcuffed = null
+		if(buckled && buckled.buckle_require_restraints)
+			buckled.unbuckle_mob()
 		success = 1
 		update_inv_handcuffed()
 	else if (W == legcuffed)
@@ -495,15 +510,17 @@
 				message = "\red <B>[source] is trying to unlegcuff [target]!</B>"
 			if("tie")
 				var/obj/item/clothing/under/suit = target.w_uniform
-				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their accessory ([suit.hastie]) removed by [source.name] ([source.ckey])</font>")
-				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) accessory ([suit.hastie])</font>")
-				if(istype(suit.hastie, /obj/item/clothing/tie/holobadge) || istype(suit.hastie, /obj/item/clothing/tie/medal))
-					for(var/mob/M in viewers(target, null))
-						M.show_message("\red <B>[source] tears off \the [suit.hastie] from [target]'s suit!</B>" , 1)
-					done()
-					return
-				else
-					message = "\red <B>[source] is trying to take off \a [suit.hastie] from [target]'s suit!</B>"
+				if(suit.accessories.len)
+					var/obj/item/clothing/accessory/A = suit.accessories[1]
+					target.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their accessory ([A]) removed by [source.name] ([source.ckey])</font>"
+					source.attack_log += "\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) accessory ([A])</font>"
+					if(istype(A, /obj/item/clothing/accessory/holobadge) || istype(A, /obj/item/clothing/accessory/medal))
+						for(var/mob/M in viewers(target, null))
+							M.show_message("\red <B>[source] tears off \the [A] from [target]'s [suit]!</B>" , 1)
+						done()
+						return
+					else
+						message = "\red <B>[source] is trying to take off \a [A] from [target]'s [suit]!</B>"
 			if("pockets")
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their pockets emptied by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to empty [target.name]'s ([target.ckey]) pockets</font>")
@@ -632,17 +649,18 @@ It can still be worn/put on as normal.
 				strip_item = target.wear_suit
 		if("tie")
 			var/obj/item/clothing/under/suit = target.w_uniform
-			//var/obj/item/clothing/tie/tie = suit.hastie
+			//var/obj/item/clothing/accessory/tie = suit.hastie
 			/*if(tie)
-				if (istype(tie,/obj/item/clothing/tie/storage))
-					var/obj/item/clothing/tie/storage/W = tie
+				if (istype(tie,/obj/item/clothing/accessory/storage))
+					var/obj/item/clothing/accessory/storage/W = tie
 					if (W.hold)
 						W.hold.close(usr)
 				usr.put_in_hands(tie)
 				suit.hastie = null*/
-			if(suit && suit.hastie)
-				suit.hastie.on_removed(usr)
-				suit.hastie = null
+			if(suit && suit.accessories.len)
+				var/obj/item/clothing/accessory/A = suit.accessories[1]
+				A.on_removed(usr)
+				suit.accessories -= A
 				target.update_inv_w_uniform()
 		if("id")
 			slot_to_process = slot_wear_id
