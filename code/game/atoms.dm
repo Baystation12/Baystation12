@@ -232,25 +232,19 @@ its easier to just keep the beam vertical.
 //Override these if you need special behaviour for a specific type.
 
 /atom/proc/get_descriptions_info()
-	var/datum/descriptions/D = descriptions
-	if(istype(D) && D.info)
-		return D.info
-	else
-		return null
+	if(descriptions && descriptions.info)
+		return descriptions.info
+	return
 
 /atom/proc/get_descriptions_fluff()
-	var/datum/descriptions/D = descriptions
-	if(istype(D) && D.fluff)
-		return D.fluff
-	else
-		return null
+	if(descriptions && descriptions.fluff)
+		return descriptions.fluff
+	return
 
 /atom/proc/get_descriptions_antag()
-	var/datum/descriptions/D = descriptions
-	if(istype(D) && D.antag)
-		return D.antag
-	else
-		return null
+	if(descriptions && descriptions.antag)
+		return descriptions.antag
+	return
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
