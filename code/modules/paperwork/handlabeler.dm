@@ -36,7 +36,7 @@
 	if(isobserver(A))
 		user << "<span class='notice'>[src] passes through [A.name].</span>"
 		return
-	if(istype(A, /obj/item/weapon/reagent_containers/glass))
+	if(istype(A, /obj/item/weapon/reagent_containers/glass) || istype(A, /obj/item/weapon/virusdish)
 		user << "<span class='notice'>The label can't stick to the [A.name].  (Try using a pen)</span>"
 		return
 
