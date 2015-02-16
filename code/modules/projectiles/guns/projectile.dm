@@ -170,6 +170,7 @@
 			)
 		if(auto_eject_sound)
 			playsound(user, auto_eject_sound, 40, 1)
+		ammo_magazine.update_icon()
 		ammo_magazine = null
 		update_icon()
 
