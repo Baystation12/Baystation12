@@ -92,6 +92,7 @@
 	icon_state = "emergencyhelm"
 	item_state = "emergencyhelm"
 	desc = "A simple helmet with a built in light, smells like mothballs."
+	body_parts_covered = HEAD|FACE
 
 
 /obj/item/clothing/suit/space/emergency
