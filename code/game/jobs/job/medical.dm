@@ -186,7 +186,10 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
+		//starts the virus hunting process
+		rng_join_virus()
 		return 1
+
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"

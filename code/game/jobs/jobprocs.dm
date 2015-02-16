@@ -64,3 +64,15 @@
 		spawn(3000)
 			H.miming = 1
 	return
+
+//Virologist relevance
+
+/proc/rng_join_virus()
+	//Goes through every player and has a small chance to infect them after 100s -> 1000s waiting.
+	spawn(rand(1000,10000))
+		for(var/mob/living/carbon/human/G in player_list)
+			if(rand(25)<5)
+				if(rand(2)==2)
+					infect_mob_random_lesser(G)
+				else
+					infect_mob_random_greater(G)
