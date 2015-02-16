@@ -141,7 +141,7 @@ var/list/ai_verbs_default = list(
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
-			new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
+			empty_playable_ai_cores += new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
 			del(src)//Delete AI.
 			return
 		else
@@ -211,9 +211,8 @@ var/list/ai_verbs_default = list(
 	else
 		stat(null, text("Systems nonfunctional"))
 
-/mob/living/silicon/ai/proc/SetName(pickedName as text)
-	real_name = pickedName
-	name = pickedName
+/mob/living/silicon/ai/SetName(pickedName as text)
+	..()
 	announcement.announcer = pickedName
 	if(eyeobj)
 		eyeobj.name = "[pickedName] (AI Eye)"
@@ -765,6 +764,9 @@ var/list/ai_verbs_default = list(
 		src << "\red System Error - Transceiver Disabled!"
 		return 1
 	return 0
+
+/mob/living/silicon/ai/proc/is_in_chassis()
+	return istype(loc, /turf)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

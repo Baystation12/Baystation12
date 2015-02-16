@@ -17,9 +17,13 @@
 		..()
 		src.pixel_x = rand(-5.0, 5)
 		src.pixel_y = rand(-5.0, 5)
+	dried_type = -1
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/New()
 	..()
+
+	if (dried_type == -1)
+		dried_type = src.type
 
 	//Handle some post-spawn var stuff.
 	spawn(1)
@@ -454,6 +458,13 @@
 	icon_state = "kudzupod"
 	filling_color = "#59691B"
 	plantname = "kudzu"
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/tobacco
+	name = "tobacco leaf"
+	desc = "Contains nicotine."
+	icon_state = "tobacco"
+	filling_color = "#009900"
+	plantname = "tobacco"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/icepepper
 	name = "ice-pepper"

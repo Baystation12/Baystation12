@@ -10,7 +10,6 @@
 	var/burning = null
 	var/hitsound = null
 	var/w_class = 3.0
-	flags = FPRINT | TABLEPASS
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	pass_flags = PASSTABLE
 	pressure_resistance = 5
@@ -142,9 +141,10 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
+	if(src.loc == user)
+		src.pickup(user)
 	return
 
 
@@ -412,9 +412,9 @@
 						H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
 					return 0
 				var/obj/item/clothing/under/uniform = H.w_uniform
-				if(uniform.hastie)
+				if(uniform.accessories.len && !uniform.can_attach_accessory(src))
 					if (!disable_warning)
-						H << "<span class='warning'>You already have [uniform.hastie] attached to your [uniform].</span>"
+						H << "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>"
 					return 0
 				if( !(slot_flags & SLOT_TIE) )
 					return 0

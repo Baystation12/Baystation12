@@ -26,7 +26,7 @@
 
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
-	see_invisible = SEE_INVISIBLE_OBSERVER
+	see_invisible = SEE_INVISIBLE_OBSERVER_AI_EYE
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
 
@@ -404,14 +404,20 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
 
 
-/mob/dead/observer/verb/toggle_darkness()
-	set name = "Toggle Darkness"
+/mob/dead/observer/verb/toggle_sight()
+	set name = "Toggle Sight"
 	set category = "Ghost"
 
-	if (see_invisible == SEE_INVISIBLE_OBSERVER_NOLIGHTING)
-		see_invisible = SEE_INVISIBLE_OBSERVER
-	else
-		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	switch(see_invisible)
+		if(SEE_INVISIBLE_OBSERVER_AI_EYE)
+			see_invisible = SEE_INVISIBLE_OBSERVER_NOOBSERVERS
+			usr << "<span class='notice'>You no longer see other observers or the AI eye.</span>"
+		if(SEE_INVISIBLE_OBSERVER_NOOBSERVERS)
+			see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+			usr << "<span class='notice'>You no longer see darkness.</span>"
+		else
+			see_invisible = SEE_INVISIBLE_OBSERVER_AI_EYE
+			usr << "<span class='notice'>You again see everything.</span>"
 
 /mob/dead/observer/verb/become_mouse()
 	set name = "Become mouse"

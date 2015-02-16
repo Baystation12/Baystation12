@@ -92,7 +92,7 @@
 			return
 		if ((!in_range(src, usr) && src.loc != user))
 			return
-		t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 		if (t)
 			src.name = text("Morgue- '[]'", t)
 		else
@@ -258,7 +258,7 @@
 			return
 		if ((!in_range(src, usr) > 1 && src.loc != user))
 			return
-		t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+		t = sanitize(copytext(t,1,MAX_MESSAGE_LEN))
 		if (t)
 			src.name = text("Crematorium- '[]'", t)
 		else
@@ -316,7 +316,7 @@
 					var/mob/living/carbon/C = M
 					if (!(C.species && (C.species.flags & NO_PAIN)))
 						C.emote("scream")
-				
+
 			//Logging for this causes runtimes resulting in the cremator locking up. Commenting it out until that's figured out.
 			//M.attack_log += "\[[time_stamp()]\] Has been cremated by <b>[user]/[user.ckey]</b>" //No point in this when the mob's about to be deleted
 			//user.attack_log +="\[[time_stamp()]\] Cremated <b>[M]/[M.ckey]</b>"
@@ -379,12 +379,21 @@
 			//Foreach goto(99)
 	return
 
-/obj/machinery/crema_switch/attack_hand(mob/user as mob)
+/obj/machinery/button/crematorium
+	name = "crematorium igniter"
+	desc = "Burn baby burn!"
+	icon = 'icons/obj/power.dmi'
+	icon_state = "crema_switch"
+	req_access = list(access_crematorium)
+	id = 1
+
+/obj/machinery/button/crematorium/attack_hand(mob/user as mob)
+	if(..())
+		return
 	if(src.allowed(usr))
 		for (var/obj/structure/crematorium/C in world)
 			if (C.id == id)
 				if (!C.cremating)
 					C.cremate(user)
 	else
-		usr << "\red Access denied."
-	return
+		usr << "<span class='warning'>Access denied.</span>"

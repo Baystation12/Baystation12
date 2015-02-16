@@ -134,11 +134,11 @@
 	unload(0)
 	switch(severity)
 		if(2)
-			wires &= ~(1 << rand(0,9))
-			wires &= ~(1 << rand(0,9))
-			wires &= ~(1 << rand(0,9))
+			BITRESET(wires, rand(0,9))
+			BITRESET(wires, rand(0,9))
+			BITRESET(wires, rand(0,9))
 		if(3)
-			wires &= ~(1 << rand(0,9))
+			BITRESET(wires, rand(0,9))
 	..()
 	return
 
@@ -309,7 +309,7 @@
 
 			if("setid")
 				refresh=0
-				var/new_id = copytext(sanitize(input("Enter new bot ID", "Mulebot [suffix ? "([suffix])" : ""]", suffix) as text|null),1,MAX_NAME_LEN)
+				var/new_id = sanitize(copytext(input("Enter new bot ID", "Mulebot [suffix ? "([suffix])" : ""]", suffix) as text|null,1,MAX_NAME_LEN))
 				refresh=1
 				if(new_id)
 					suffix = new_id

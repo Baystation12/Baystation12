@@ -9,17 +9,18 @@
 	src:Topic(href, href_list)
 	return null
 
-/proc/get_area(O)
-	var/atom/location = O
-	var/i
-	for(i=1, i<=20, i++)
-		if(isarea(location))
-			return location
-		else if (istype(location))
-			location = location.loc
-		else
-			return null
+/proc/is_on_same_plane_or_station(var/z1, var/z2)
+	if(z1 == z2)
+		return 1
+	if((z1 in config.station_levels) &&	(z2 in config.station_levels))
+		return 1
 	return 0
+
+/proc/get_area(O)
+	var/turf/loc = get_turf(O)
+	if(!loc)
+		return null
+	return loc.loc
 
 /proc/get_area_name(N) //get area by its name
 	for(var/area/A in world)
@@ -49,7 +50,7 @@
 	return level in config.station_levels
 
 /proc/isNotStationLevel(var/level)
-	return !isStationLevel()
+	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
 	return level in config.player_levels

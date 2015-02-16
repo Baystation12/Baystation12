@@ -5,7 +5,7 @@
 	icon_state = "fire_extinguisher0"
 	item_state = "fire_extinguisher"
 	hitsound = 'sound/weapons/smash.ogg'
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	throwforce = 10
 	w_class = 3.0
 	throw_speed = 2
@@ -13,7 +13,7 @@
 	force = 10.0
 	matter = list("metal" = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
-	
+
 	var/spray_particles = 6
 	var/spray_amount = 2	//units of liquid per particle
 	var/max_water = 120
@@ -27,7 +27,6 @@
 	icon_state = "miniFE0"
 	item_state = "miniFE"
 	hitsound = null	//it is much lighter, after all.
-	flags = FPRINT | TABLEPASS
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
@@ -124,7 +123,7 @@
 				R.my_atom = W
 				if(!W || !src) return
 				src.reagents.trans_to(W, spray_amount)
-			
+
 				for(var/b=0, b<5, b++)
 					step_towards(W,my_target)
 					if(!W || !W.reagents) return
@@ -135,6 +134,9 @@
 						if(!W.reagents)
 							break
 						W.reagents.reaction(atm)
+						if(isliving(atm)) //For extinguishing mobs on fire
+							var/mob/living/M = atm
+							M.ExtinguishMob()
 					if(W.loc == my_target) break
 					sleep(2)
 				W.delete()

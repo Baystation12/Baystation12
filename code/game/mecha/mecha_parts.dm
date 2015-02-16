@@ -9,7 +9,7 @@
 	icon = 'icons/mecha/mech_construct.dmi'
 	icon_state = "blank"
 	w_class = 5
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 	origin_tech = "programming=2;materials=2"
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
@@ -20,7 +20,7 @@
 	icon_state = "backbone"
 	var/datum/construction/construct
 	construction_cost = list("metal"=20000)
-	flags = FPRINT | CONDUCT
+	flags = CONDUCT
 
 	attackby(obj/item/W as obj, mob/user as mob)
 		if(!construct || !construct.action(W, user))

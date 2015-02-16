@@ -23,6 +23,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
+	mob_size = 5
 
 /mob/living/simple_animal/cat/Life()
 	//MICE!
@@ -113,7 +114,7 @@
 /mob/living/simple_animal/cat/MouseDrop(atom/over_object)
 
 	var/mob/living/carbon/H = over_object
-	if(!istype(H)) return ..()
+	if(!istype(H) || !Adjacent(H)) return ..()
 
 	if(H.a_intent == "help")
 		get_scooped(H)
@@ -128,27 +129,28 @@
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
-	var/mob/living/carbon/human/bff
+	var/mob/living/carbon/human/friend
+	var/befriend_job = null
 
 /mob/living/simple_animal/cat/fluff/handle_movement_target()
-	if (bff)
+	if (friend)
 		var/follow_dist = 5
-		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit) //danger
+		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit) //danger
 			follow_dist = 1
-		else if (bff.stat || bff.health <= 50) //danger or just sleeping
+		else if (friend.stat || friend.health <= 50) //danger or just sleeping
 			follow_dist = 2
 		var/near_dist = max(follow_dist - 2, 1)
-		var/current_dist = get_dist(src, bff)
+		var/current_dist = get_dist(src, friend)
 
-		if (movement_target != bff)
-			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (bff in oview(src)))
+		if (movement_target != friend)
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in oview(src)))
 				//stop existing movement
 				walk_to(src,0)
 				turns_since_scan = 0
 
-				//walk to bff
+				//walk to friend
 				stop_automated_movement = 1
-				movement_target = bff
+				movement_target = friend
 				walk_to(src, movement_target, near_dist, 4)
 
 		//already following and close enough, stop
@@ -159,28 +161,47 @@
 			if (prob(10))
 				say("Meow!")
 
-	if (!bff || movement_target != bff)
+	if (!friend || movement_target != friend)
 		..()
 
 /mob/living/simple_animal/cat/fluff/Life()
 	..()
-	if (stat || !bff)
+	if (stat || !friend)
 		return
-	if (get_dist(src, bff) <= 1)
-		if (bff.stat >= DEAD || bff.health <= config.health_threshold_softcrit)
-			if (prob((bff.stat < DEAD)? 50 : 15))
+	if (get_dist(src, friend) <= 1)
+		if (friend.stat >= DEAD || friend.health <= config.health_threshold_softcrit)
+			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")
 				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
 		else
 			if (prob(5))
-				visible_emote(pick("nuzzles [bff].",
-								   "brushes against [bff].",
-								   "rubs against [bff].",
+				visible_emote(pick("nuzzles [friend].",
+								   "brushes against [friend].",
+								   "rubs against [friend].",
 								   "purrs."))
-	else if (bff.health <= 50)
+	else if (friend.health <= 50)
 		if (prob(10))
 			var/verb = pick("meows", "mews", "mrowls")
 			audible_emote("[verb] anxiously.")
+
+/mob/living/simple_animal/cat/fluff/verb/friend()
+	set name = "Become Friends"
+	set category = "IC"
+	set src in view(1)
+
+	if(friend && usr == friend)
+		set_dir(get_dir(src, friend))
+		say("Meow!")
+		return
+	
+	if (!(ishuman(usr) && befriend_job && usr.job == befriend_job))
+		usr << "<span class='notice'>[src] ignores you.</span>"
+		return
+
+	friend = usr
+
+	set_dir(get_dir(src, friend))
+	say("Meow!")
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/cat/fluff/Runtime
@@ -190,24 +211,7 @@
 	icon_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
-
-/mob/living/simple_animal/cat/fluff/Runtime/verb/friend()
-	set name = "Become Friends"
-	set category = "IC"
-	set src in view(1)
-
-	if (bff || !(ishuman(usr) && usr.job == "Chief Medical Officer"))
-		if (usr == bff)
-			set_dir(get_dir(src, bff))
-			say("Meow!")
-		else
-			usr << "<span class='notice'>[src] ignores you.</span>"
-		return
-
-	bff = usr
-
-	set_dir(get_dir(src, bff))
-	say("Meow!")
+	befriend_job = "Chief Medical Officer"
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"

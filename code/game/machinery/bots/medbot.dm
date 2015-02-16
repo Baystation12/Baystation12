@@ -281,9 +281,6 @@
 					src.speak(message)
 					src.visible_message("<b>[src]</b> points at [C.name]!")
 					src.last_newpatient_speak = world.time
-					if(declare_treatment)
-						var/area/location = get_area(src)
-						broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
 				break
 			else
 				continue
@@ -437,6 +434,10 @@
 				else
 					src.patient.reagents.add_reagent(reagent_id,src.injection_amount)
 				visible_message("\red <B>[src] injects [src.patient] with the syringe!</B>")
+
+				if(declare_treatment)
+					var/area/location = get_area(src)
+					broadcast_medical_hud_message("[src.name] is treating <b>[C]</b> in <b>[location]</b>", src)
 
 			src.icon_state = "medibot[src.on]"
 			src.currently_healing = 0

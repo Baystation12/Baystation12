@@ -4,7 +4,7 @@
 	icon_state = "megaphone"
 	item_state = "radio"
 	w_class = 2.0
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = CONDUCT
 
 	var/spamcheck = 0
 	var/emagged = 0
@@ -25,7 +25,7 @@
 		user << "\red \The [src] needs to recharge!"
 		return
 
-	var/message = copytext(sanitize(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
+	var/message = sanitize(copytext(input(user, "Shout a message?", "Megaphone", null)  as text,1,MAX_MESSAGE_LEN))
 	if(!message)
 		return
 	message = capitalize(message)

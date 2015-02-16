@@ -6,7 +6,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 
 	charge_cost = 100 //How much energy is needed to fire.
-	projectile_type = "/obj/item/projectile/beam/stun"
+	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = "combat=3;magnets=2"
 	modifystate = "energystun"
 
@@ -20,37 +20,20 @@
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Laser.ogg'
 				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/beam"
+				projectile_type = /obj/item/projectile/beam
 				modifystate = "energykill"
 			if(1)
 				mode = 0
 				charge_cost = 100
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
-				projectile_type = "/obj/item/projectile/beam/stun"
+				projectile_type = /obj/item/projectile/beam/stun
 				modifystate = "energystun"
 		update_icon()
 		if(user.l_hand == src)
 			user.update_inv_l_hand()
 		else
 			user.update_inv_r_hand()
-
-/obj/item/weapon/gun/energy/gun/mounted/load_into_chamber()
-	if(in_chamber)
-		return 1
-	var/obj/item/rig_module/module = loc
-	if(!istype(module))
-		return 0
-	if(module.holder && module.holder.wearer)
-		var/mob/living/carbon/human/H = module.holder.wearer
-		if(istype(H) && H.back)
-			var/obj/item/weapon/rig/suit = H.back
-			if(istype(suit) && suit.cell && suit.cell.charge >= 250)
-				suit.cell.use(250)
-				var/prog_path = text2path(projectile_type)
-				in_chamber = new prog_path(src)
-				return 1
-	return 0
 
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
