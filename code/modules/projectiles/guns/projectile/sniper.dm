@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/heavysniper
 	name = "\improper PTRS-7 rifle"
-	desc = "A portable anti-armour rifle fitted with a scope. Fires 14.5mm AP shells."
+	desc = "A portable anti-armour rifle fitted with a scope. Originally designed to used against lightly armoured exosuits, it is capable of punching through non-reinforced walls with ease. Fires 14.5mm AP shells."
 	icon_state = "heavysniper"
 	item_state = "sniper0"
 	w_class = 4
