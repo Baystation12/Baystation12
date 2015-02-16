@@ -59,7 +59,7 @@
 		..()
 
 /obj/item/weapon/gun/launcher/grenade/attack_hand(mob/user)
-	if(loc == user)
+	if(user.get_inactive_hand() == src)
 		if(grenades.len)
 			var/obj/item/weapon/grenade/G = grenades[grenades.len]
 			grenades.len--

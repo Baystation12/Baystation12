@@ -106,7 +106,7 @@
 	magazine_type = /obj/item/ammo_magazine/mc9mm/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/user as mob)
-	if(loc == user)
+	if(user.get_inactive_hand() == src)
 		if(silenced)
 			if(user.l_hand != src && user.r_hand != src)
 				..()

@@ -98,10 +98,10 @@
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
 		next = darts[1]
-	user.next_move = world.time + 4
+	add_fingerprint(user)
 
 /obj/item/weapon/gun/launcher/syringe/attack_hand(mob/living/user as mob)
-	if(loc == user)
+	if(user.get_inactive_hand() == src)
 		if(!darts.len)
 			user << "<span class='warning'>[src] is empty.</span>"
 			return

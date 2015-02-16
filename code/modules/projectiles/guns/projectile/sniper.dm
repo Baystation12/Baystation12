@@ -39,7 +39,7 @@
 	else
 		user << "<span class='notice'>You work the bolt closed.</span>"
 		bolt_open = 0
-	user.next_move = world.time + 4 //prevent spam, also makes having to work the bolt more of a drawback
+	add_fingerprint(user)
 	update_icon()
 
 /obj/item/weapon/gun/projectile/heavysniper/special_check(mob/user)
