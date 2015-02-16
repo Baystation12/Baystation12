@@ -4,6 +4,11 @@
 		return 1
 	return 0
 
+/proc/isipc(A)
+	if(istype(A, /mob/living/carbon/human/machine))
+		return 1
+	return 0
+
 /proc/isalien(A)
 	if(istype(A, /mob/living/carbon/alien))
 		return 1
