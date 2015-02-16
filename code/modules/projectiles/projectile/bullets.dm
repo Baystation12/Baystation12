@@ -122,7 +122,7 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle/a762
-	damage = 25
+	damage = 30
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145

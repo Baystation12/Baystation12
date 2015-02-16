@@ -25,7 +25,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
-	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
+	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm pistol rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3
@@ -47,6 +47,22 @@
 		icon_state = "c20r"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/sts35
+	name = "\improper STS-35 Automatic Rifle"
+	desc = "A durable, rugged looking automatic weapon of make popular on the frontier, despite it's bulk. Uses 7.62mm rounds. It is unmarked."
+	icon_state = "assltrifle"
+	item_state = "shotgun"
+	w_class = 4
+	force = 10
+	caliber = "a762"
+	origin_tech = "combat=5;materials=1;syndicate=8"
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c762
+
+/obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
+	..()
+	icon_state = (ammo_magazine)? "assltrifle" : "assltrifle-noclip"
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"

@@ -2,7 +2,7 @@
 	name = "\improper PTRS-7 rifle"
 	desc = "A portable anti-armour rifle fitted with a scope. Fires 14.5mm AP shells."
 	icon_state = "heavysniper"
-	item_state = "shotgun"
+	item_state = "sniper0"
 	w_class = 4
 	force = 10
 	slot_flags = SLOT_BACK

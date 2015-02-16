@@ -112,7 +112,7 @@
 	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
 /obj/item/ammo_casing/a145
-	name = "\improper AP shell casing"
+	name = "shell casing"
 	desc = "A 14.5mm AP shell."
 	icon_state = "lcasing"
 	spent_icon = "lcasing-spent"
