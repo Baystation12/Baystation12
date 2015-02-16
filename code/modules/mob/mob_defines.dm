@@ -227,12 +227,4 @@
 	//Examine tab vars
 	//These hold the descriptions and other info, to relay to the actual tab.
 	var/description_holders[0]
-	/*
-	description_holders["name"] = null
-	description_holders["icon"] = null
-	description_holders["desc"] = null
-	description_holders["info"] = null
-	description_holders["fluff"] = null
-	description_holders["antag"] = null
-	*/
 
