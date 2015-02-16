@@ -116,6 +116,7 @@
 
 			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
+				rand_damage = 5
 
 			// Process evasion and blocking
 			var/miss_type = 0
