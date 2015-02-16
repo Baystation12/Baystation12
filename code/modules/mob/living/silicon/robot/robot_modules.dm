@@ -223,9 +223,9 @@
 	src.modules += new /obj/item/borg/sight/hud/sec(src)
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
-	src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
+	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
 	src.modules += new /obj/item/taperoll/police(src)
-	src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
+	src.emag = new /obj/item/weapon/gun/energy/laser/mounted(src)
 	return
 
 /obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R)
@@ -236,7 +236,7 @@
 		F.icon_state = "flash"
 	else if(F.times_used)
 		F.times_used--
-	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in src.modules
+	var/obj/item/weapon/gun/energy/taser/mounted/cyborg/T = locate() in src.modules
 	if(T.power_supply.charge < T.power_supply.maxcharge)
 		T.power_supply.give(T.charge_cost)
 		T.update_icon()
@@ -383,11 +383,11 @@
 	..()
 	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/thermal(src)
-	src.modules += new /obj/item/weapon/gun/energy/laser/cyborg(src)
+	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
-	src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
+	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
 	return
 
 /obj/item/weapon/robot_module/drone
