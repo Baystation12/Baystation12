@@ -135,7 +135,7 @@ datum/controller/vote
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
 			if( mode == "gamemode" ) // Announce Extended gamemode, but not other gamemodes
-			//	text += "<b>Vote Result: Hidden</b>"		Stop hidden hidden ?
+				text += "<b>The vote has ended.</b>"
 				log_admin("Vote Result: [.]")
 				message_admins("Vote Result: [.]")
 			else
@@ -312,14 +312,14 @@ datum/controller/vote
 				. += "<tr>"
 				if(mode == "gamemode")
 					if(current_votes[C.ckey] == i)
-						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>-</td>"
 					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>[votes]</td>"
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[gamemode_names[choices[i]]]</a></b></td><td align = 'center'>-</td>"
 				else
 					if(current_votes[C.ckey] == i)
-						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						. += "<td><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 					else
-						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>-</td>"
+						. += "<td><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></td><td align = 'center'>[votes]</td>"
 
 				if (additional_text.len >= i)
 					. += additional_text[i]
