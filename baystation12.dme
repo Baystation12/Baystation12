@@ -1228,6 +1228,7 @@
 #include "code\modules\nano\nanomapgen.dm"
 #include "code\modules\nano\nanoprocs.dm"
 #include "code\modules\nano\nanoui.dm"
+#include "code\modules\nano\modules\crew_monitor.dm"
 #include "code\modules\nano\modules\rcon.dm"
 #include "code\modules\organs\blood.dm"
 #include "code\modules\organs\organ.dm"
