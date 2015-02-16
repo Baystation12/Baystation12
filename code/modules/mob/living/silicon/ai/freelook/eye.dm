@@ -49,7 +49,7 @@
 			ai.client.eye = src
 		//Holopad
 		if(ai.holo)
-			ai.holo.move_hologram()
+			ai.holo.move_hologram(ai)
 
 /mob/aiEye/proc/getLoc()
 
