@@ -28,6 +28,7 @@
 			var/mob/living/L = usr
 			if(L.electrocute_act(17, src))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				playsound(loc, 'sound/effects/zap.ogg', 80, 1)
 				s.set_up(5, 1, src)
 				s.start()
 				return 2

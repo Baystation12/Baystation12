@@ -1281,7 +1281,7 @@ FIRE ALARM
 		return
 	A.firealert()
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
+	playsound(src.loc, 'sound/effects/alert.ogg', 75, 0)
 	return
 
 /obj/machinery/firealarm/New(loc, dir, building)

@@ -5,7 +5,7 @@
  * I wanted to call it clusterfuck, but I figure that's a bit too overt. Think of
  * the children.
  * ~ Zuhayr
- */
+*/
 
 /datum/game_mode/calamity
 	name = "calamity"
@@ -29,9 +29,9 @@
 /datum/game_mode/calamity/announce()
 /*
 	world << "<B>The current game mode is - Calamity!</B>"
-	world << "<B>This must be a Thursday. You never could get the hang of Thursdays...</B>"
 */
-	world << "<B>The current game mode is - Hidden!</B>"
+	world << "<B>This must be a Thursday. You never could get the hang of Thursdays...</B>"
+
 
 /datum/game_mode/calamity/can_start()
 

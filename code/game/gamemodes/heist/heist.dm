@@ -29,7 +29,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	world << "<B>Raiders:</B> Loot [station_name()] for anything and everything you need."
 	world << "<B>Personnel:</B> Repel the raiders and their low, low prices and/or crossbows."
 */
-	world << "<B>The current game mode is - Hidden!</B>"
+
 
 /datum/game_mode/heist/can_start()
 

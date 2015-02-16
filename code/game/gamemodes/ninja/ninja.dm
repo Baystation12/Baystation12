@@ -15,7 +15,6 @@
 /*
 	world << "<B>The current game mode is Ninja!</B>"
 */
-	world << "<B>The current game mode is - Hidden!</B>"
 
 /datum/game_mode/ninja/can_start()
 	if(!..())

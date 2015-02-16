@@ -23,7 +23,6 @@
 
 
 /datum/game_mode/traitor/announce()
-	world << "<B>The current game mode is - Hidden!</B>"
 
 /datum/game_mode/traitor/pre_setup()
 

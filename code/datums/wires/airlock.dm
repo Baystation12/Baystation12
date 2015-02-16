@@ -141,10 +141,12 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			if(!A.locked)
 				A.locked = 1
 				A.audible_message("You hear a click from the bottom of the door.", null,  1)
+				playsound(A.loc, 'sound/effects/doorbolt.ogg', 50, 1)
 			else
 				if(A.arePowerSystemsOn()) //only can raise bolts if power's on
 					A.locked = 0
 					A.audible_message("You hear a click from the bottom of the door.", null, 1)
+					playsound(A.loc, 'sound/effects/doorunbolt.ogg', 50, 1)
 			A.update_icon()
 
 		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)

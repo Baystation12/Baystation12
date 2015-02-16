@@ -107,7 +107,7 @@ var/global/datum/controller/gameticker/ticker
 	if(!can_continue)
 		del(mode)
 		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up hidden.</B> Reverting to pre-game lobby."
+		world << "<B>Error setting up gamemode.</B> Reverting to pre-game lobby."
 		job_master.ResetOccupations()
 		return 0
 
@@ -116,7 +116,6 @@ var/global/datum/controller/gameticker/ticker
 		for (var/datum/game_mode/M in runnable_modes)
 			modes+=M.name
 		modes = sortList(modes)
-		world << "<B>The current game mode is - Hidden!</B>"
 	else
 		src.mode.announce()
 

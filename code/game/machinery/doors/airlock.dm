@@ -1052,6 +1052,8 @@ About the new airlock wires panel:
 	if (operating || src.locked) return 0
 
 	src.locked = 1
+	playsound(src.loc, 'sound/effects/doorbolt.ogg', 50, 1)
+	sleep(1)
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
@@ -1062,6 +1064,8 @@ About the new airlock wires panel:
 
 	if (forced || (src.arePowerSystemsOn())) //only can raise bolts if power's on
 		src.locked = 0
+		playsound(src.loc, 'sound/effects/doorunbolt.ogg', 50, 1)
+		sleep(1)
 		for(var/mob/M in range(1,src))
 			M.show_message("You hear a click from the bottom of the door.", 2)
 		update_icon()

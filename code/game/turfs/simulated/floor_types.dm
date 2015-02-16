@@ -26,6 +26,13 @@
 				update_icon()
 				name = n
 
+/turf/simulated/floor/light/rainbow
+	name = "Dance floor"
+	luminosity = 5
+	icon_state = "light_on-c"
+	floor_type = /obj/item/stack/tile/light
+
+
 /turf/simulated/floor/wood
 	name = "floor"
 	icon_state = "wood"

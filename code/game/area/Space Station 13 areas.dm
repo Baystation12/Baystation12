@@ -993,6 +993,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Bar"
 	icon_state = "bar"
 
+/area/crew_quarters/commodationhall
+	name = "\improper Commodation Hall"
+	icon_state = "bar"
+
+/area/crew_quarters/dancefloor
+	name = "\improper Dance Floor"
+	icon_state = "bar"
+
 /area/crew_quarters/theatre
 	name = "\improper Theatre"
 	icon_state = "Theatre"

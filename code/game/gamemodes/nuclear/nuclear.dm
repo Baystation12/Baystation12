@@ -30,7 +30,6 @@ var/global/list/turf/synd_spawn = list()
 
 
 /datum/game_mode/nuclear/announce()
-	world << "<B>The current game mode is - Hidden!</B>"
 
 /datum/game_mode/nuclear/can_start()//This could be better, will likely have to recode it later
 	if(!..())

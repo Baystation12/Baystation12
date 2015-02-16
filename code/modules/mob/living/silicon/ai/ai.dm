@@ -280,7 +280,7 @@ var/list/ai_verbs_default = list(
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input( "Select an icon!", "AI", null, null ) in list( "Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Agreeable" )
+	else icontype = input( "Select an icon!", "AI", null, null ) in list( "Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Agreeable", "Love" )
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
 		if("Rainbow") icon_state = "ai-clown"
@@ -303,6 +303,7 @@ var/list/ai_verbs_default = list(
 		if("Heartline") icon_state = "ai-heartline"
 		if("Chatterbox") icon_state = "ai-president"
 		if("Agreeable") icon_state = "ai-yes"
+		if("Love") icon_state = "ai-love"
 		else icon_state = "ai"
 	//else
 			//usr <<"You can only change your display once!"
