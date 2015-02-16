@@ -432,7 +432,8 @@
 
 
 						step(pulling, get_dir(pulling.loc, T))
-						M.start_pulling(t)
+						if(t)
+							M.start_pulling(t)
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
