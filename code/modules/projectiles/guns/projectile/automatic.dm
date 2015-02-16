@@ -8,6 +8,7 @@
 	origin_tech = "combat=4;materials=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
 	automatic = 1
+	fire_sound = 'sound/weapons/guns/mp5.ogg'
 
 	fire_delay = 0
 
@@ -24,6 +25,7 @@
 	caliber = ".45"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/c45"
+	fire_sound = 'sound/weapons/guns/uzi.ogg'
 
 	isHandgun()
 		return 1
@@ -39,7 +41,7 @@
 	caliber = "12mm"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/a12mm"
-	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	fire_sound = 'sound/weapons/guns/xm8.ogg'
 	load_method = 2
 
 
@@ -79,7 +81,7 @@
 	caliber = "a762"
 	origin_tech = "combat=5;materials=1;syndicate=2"
 	ammo_type = "/obj/item/ammo_casing/a762"
-	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	fire_sound = 'sound/weapons/guns/rpk.ogg'
 	load_method = 2
 	var/cover_open = 0
 	var/mag_inserted = 1
@@ -144,4 +146,3 @@
    around simulating a removable magazine by adding the casings into the loaded list and spawning an empty magazine
    when the gun is out of rounds. Which means you can't eject magazines with rounds in them. The below is a very
    rough and poor attempt at making that happen. -Ausops */
-  

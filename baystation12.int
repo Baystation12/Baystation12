@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\game\jobs\job\medical.dm;code\game\jobs\jobprocs.dm;code\game\jobs\job\job.dm;code\game\jobs\jobs.dm;baystation12.dme;maps\apollo-1.dmm;code\modules\paperwork\handlabeler.dm;code\modules\virus2\helpers.dm;code\modules\virus2\items_devices.dm;icons\obj\curtains.dmi;code\game\objects\structures\curtains.dm
-LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\doors code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\structures code\modules code\modules\awaymissions code\modules\paperwork code\modules\virus2 code\TriDimension icons icons\obj maps 
-FILE: code\game\objects\structures\curtains.dm
-LAST_COMPILE_TIME: 1424045527
+WINDOW: code\game\jobs\job\medical.dm;code\game\jobs\job\job.dm;code\game\jobs\jobs.dm;maps\apollo-1.dmm;code\modules\projectiles\guns\projectile\pistol.dm;code\modules\projectiles\gun.dm;code\modules\projectiles\guns\projectile\shotgun.dm;code\modules\projectiles\guns\projectile\automatic.dm;code\modules\projectiles\guns\projectile\crossbow.dm;code\modules\projectiles\guns\projectile\revolver.dm
+LAST_COMPILE_VERSION: 506.1247
+DIR: code code\game code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\doors code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\structures code\modules code\modules\awaymissions code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\projectile maps sound sound\effects sound\effects\guns 
+FILE: code\modules\projectiles\guns\projectile\shotgun.dm
+LAST_COMPILE_TIME: 1424106978
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

@@ -50,7 +50,7 @@
 	desc = "A 2557AD twist on an old classic. Pick up that can."
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
-	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
+	fire_sound = 'sound/weapons/guns/crossbow.ogg' // TODO: Decent THWOK noise.
 	ejectshell = 0                          // No spent shells.
 	mouthshoot = 1                          // No suiciding with this weapon, causes runtimes.
 	fire_sound_text = "a solid thunk"

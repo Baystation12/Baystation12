@@ -6,7 +6,7 @@
 	caliber = "38"
 	origin_tech = "combat=2;materials=2"
 	ammo_type = "/obj/item/ammo_casing/c38"
-
+	fire_sound = 'sound/weapons/guns/revolver.ogg'
 
 	special_check(var/mob/living/carbon/human/M)
 		if(caliber == initial(caliber))
@@ -98,6 +98,7 @@
 	desc = "When you absolutely, positively need a 10mm hole in the other guy. Uses .357 ammo."	//>10mm hole >.357
 	icon_state = "mateba"
 	origin_tech = "combat=2;materials=2"
+	fire_sound = 'sound/weapons/guns/m60.ogg'
 
 // A gun to play Russian Roulette!
 // You can spin the chamber to randomize the position of the bullet.
@@ -107,6 +108,7 @@
 	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in it's chamber for a bullet."
 	max_shells = 6
 	origin_tech = "combat=2;materials=2"
+	fire_sound = 'sound/weapons/guns/revolver.ogg'
 
 /obj/item/weapon/gun/projectile/russian/New()
 	Spin()

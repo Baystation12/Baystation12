@@ -8,7 +8,7 @@
 	silenced = 1
 	origin_tech = "combat=2;materials=2;syndicate=8"
 	ammo_type = "/obj/item/ammo_casing/c45"
-
+	fire_sound = 'sound/weapons/guns/silencedpistol.ogg'
 
 
 /obj/item/weapon/gun/projectile/deagle
@@ -20,6 +20,8 @@
 	caliber = ".50"
 	ammo_type ="/obj/item/ammo_casing/a50"
 	load_method = 2
+	fire_sound = 'sound/weapons/guns/deagle.ogg'
+
 	New()
 		..()
 		empty_mag = new /obj/item/ammo_magazine/a50/empty(src)
@@ -95,6 +97,8 @@
 	origin_tech = "combat=2;materials=2;syndicate=2"
 	ammo_type = "/obj/item/ammo_casing/c9mm"
 	load_method = 2
+	fire_sound = 'sound/weapons/guns/kriss.ogg'
+
 
 /obj/item/weapon/gun/projectile/pistol/New()
 	..()
