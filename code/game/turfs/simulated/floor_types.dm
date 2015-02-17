@@ -10,7 +10,13 @@
 		name = "floor"
 
 /turf/simulated/floor/airless/ceiling
-	icon_state = "rockvault"
+	icon_state = "ceiling"
+	desc = "There's probably a room under this."
+	lighting_lumcount = 2
+
+	New()
+		..()
+		name = "ceiling"
 
 /turf/simulated/floor/light
 	name = "Light floor"

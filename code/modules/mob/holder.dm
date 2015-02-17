@@ -59,7 +59,7 @@
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
 	icon_state = "nymph"
-	origin_tech = "magnets=3;biotech=5"
+	origin_tech = "biotech=5"
 	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
 
 /obj/item/weapon/holder/drone
@@ -79,3 +79,9 @@
 	desc = "It's a slimy brain slug. Gross."
 	icon_state = "borer"
 	origin_tech = "biotech=6"
+
+/obj/item/weapon/holder/bunny
+	name = "bunny"
+	desc = "It's a cute little bunny."
+	icon_state = "bunny"
+	origin_tech = null

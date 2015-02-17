@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\clothing\spacesuits\void\station.dm;maps\apollo-1.dmm;code\modules\clothing\spacesuits\void\void.dm;icons\mob\rig_back.dmi;icons\mob\rig_modules.dmi;icons\obj\rig_modules.dmi;icons\mob\roaper.dmi;icons\mob\suit.dmi
+WINDOW: code\modules\clothing\suits\miscellaneous.dm;icons\obj\clothing\hats.dmi;icons\obj\clothing\uniforms.dmi;icons\obj\clothing\shoes.dmi;code\modules\clothing\under\miscellaneous.dm;code\modules\clothing\shoes\miscellaneous.dm;code\modules\clothing\head\misc.dm;code\game\jobs\job\civilian.dm;maps\apollo-1.dmm;code\modules\mob\dead\observer\observer.dm;code\game\turfs\simulated\floor_types.dm;code\controllers\_DynamicAreaLighting_TG.dm;icons\turf\floors.dmi;icons\mob\items_lefthand.dmi;icons\mob\items_righthand.dmi;code\modules\mob\holder.dm;icons\obj\objects.dmi;code\modules\hydroponics\seed_datums.dm;code\modules\mob\living\simple_animal\friendly\cat.dm;maps\apollo-3.dmm;maps\apollo-7.dmm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\game code\game\gamemodes code\game\gamemodes\wizard code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\spacesuits\rig code\modules\clothing\spacesuits\rig\modules code\modules\clothing\spacesuits\void icons icons\mob icons\obj maps 
-FILE: icons\mob\suit.dmi
-LAST_COMPILE_TIME: 1424138107
+DIR: code code\_onclick code\controllers code\game code\game\gamemodes code\game\gamemodes\changeling code\game\gamemodes\nuclear code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\doors code\game\objects code\game\objects\effects code\game\turfs code\game\turfs\simulated code\modules code\modules\admin code\modules\assembly code\modules\clothing code\modules\clothing\head code\modules\clothing\shoes code\modules\clothing\suits code\modules\clothing\under code\modules\customitems code\modules\destilery code\modules\detectivework code\modules\hydroponics code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\reagents code\TriDimension icons icons\mob icons\obj icons\obj\clothing icons\turf maps 
+FILE: maps\apollo-7.dmm
+LAST_COMPILE_TIME: 1424162215
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

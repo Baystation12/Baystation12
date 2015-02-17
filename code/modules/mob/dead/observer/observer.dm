@@ -614,3 +614,30 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/canface()
 	return 1
+
+/mob/dead/observer/verb/go_down_z()
+	set category = "Ghost"
+	set name = "Travel Downwards"
+	set desc = "Go down a z-level."
+
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.down)
+			var/turf/below = locate(src.x, src.y, controller.down_target)
+			usr.loc = below
+		else
+			usr << "Can't go any lower!"
+
+
+/mob/dead/observer/verb/go_up_z()
+	set category = "Ghost"
+	set name = "Travel Upwards"
+	set desc = "Go up a z-level."
+
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.up)
+			var/turf/upwards = locate(src.x, src.y, controller.up_target)
+			usr.loc = upwards
+		else
+			usr << "Can't go any higher!"
