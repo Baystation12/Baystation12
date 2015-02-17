@@ -13,7 +13,7 @@
 		var/mob/living/L = target
 		shake_camera(L, 3, 2)
 
-/obj/item/projectile/bullet/on_penetrate(var/atom/A)
+/obj/item/projectile/bullet/check_penetrate(var/atom/A)
 	if(!A || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
 
 	if(istype(A, /obj/mecha))
@@ -21,8 +21,9 @@
 
 	if(ismob(A))
 		if(iscarbon(A))
-			if (damage <= 20 && !prob(damage)) return 0
-			damage *= 0.7 //squishy mobs absorb KE
+			//squishy mobs absorb KE
+			if(can_embed()) return 0
+			damage *= 0.7
 		return 1
 
 	var/chance = 0

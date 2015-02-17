@@ -65,8 +65,19 @@
 /obj/item/projectile/proc/on_impact(var/atom/A)
 	return
 
+//Checks if the projectile is eligible for embedding. Not that it necessarily will.
+//Mainly used to ensure that projectiles won't embed if they are penetrating the mob.
+/obj/item/projectile/proc/can_embed()
+	//embed must be enabled and damage type must be brute
+	if(!embed || damage_type != BRUTE)
+		return 0
+	//can't embed if the projectile is penetrating through the mob
+	if(penetrating > 0 && damage > 20 && prob(damage))
+		return 0
+	return 1
+
 //return 1 if the projectile should be allowed to pass through after all, 0 if not.
-/obj/item/projectile/proc/on_penetrate(var/atom/A)
+/obj/item/projectile/proc/check_penetrate(var/atom/A)
 	return 1
 
 /obj/item/projectile/proc/check_fire(atom/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
@@ -197,7 +208,7 @@
 
 	//penetrating projectiles can pass through things that otherwise would not let them
 	if(!passthrough && penetrating > 0)
-		if(on_penetrate(A))
+		if(check_penetrate(A))
 			passthrough = 1
 		penetrating--
 
