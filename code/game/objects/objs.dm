@@ -20,7 +20,8 @@
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(!nowindow && ..())
 		return 1
-	if(usr.can_interact_with_interface(src, checkrange) != STATUS_INTERACTIVE)
+
+	if(usr.can_interact_with_interface(nano_host(), checkrange) != STATUS_INTERACTIVE)
 		return 1
 	add_fingerprint(usr)
 	return 0

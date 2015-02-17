@@ -141,7 +141,6 @@
 		if(isliving(src.loc))
 			return
 		user.next_move = max(user.next_move+2,world.time + 2)
-	add_fingerprint(user)
 	user.put_in_active_hand(src)
 	if(src.loc == user)
 		src.pickup(user)
@@ -638,8 +637,8 @@ For zooming with scope or binoculars. This is called from
 modules/mob/mob_movement.dm if you move you will be zoomed out
 modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */
-
-/obj/item/proc/zoom(var/tileoffset = 11,var/viewsize = 12) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
+//Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
+/obj/item/proc/zoom(var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
 
 	var/devicename
 
@@ -685,14 +684,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 				usr.client.pixel_y = 0
 
 		usr.visible_message("[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].")
-
-		/*
-		if(istype(usr,/mob/living/carbon/human/))
-			var/mob/living/carbon/human/H = usr
-			usr.visible_message("[usr] holds [devicename] up to [H.get_visible_gender() == MALE ? "his" : H.get_visible_gender() == FEMALE ? "her" : "their"] eyes.")
-		else
-			usr.visible_message("[usr] holds [devicename] up to its eyes.")
-		*/
 
 	else
 		usr.client.view = world.view
