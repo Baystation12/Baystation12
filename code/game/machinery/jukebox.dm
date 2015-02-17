@@ -34,7 +34,11 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Unknown Title", 'sound/music/sandstorm.ogg'),
 		new/datum/track("Narwhals", 'sound/music/narwhal.ogg'),
 		new/datum/track("Rasputin", 'sound/music/rasputin.ogg'),
-		new/datum/track("Secret Agent", 'sound/music/secretasian.mid'),
+		new/datum/track("Secret Agent", 'sound/music/midis/secretasian.mid'),
+		new/datum/track("Waiting", 'sound/music/lobby.ogg'),
+		new/datum/track("Exterminate", 'sound/music/courtneygears.ogg'),
+		new/datum/track("Rising Sun", 'sound/music/midis/houseoftherisingsun.mid'),
+		new/datum/track("Beyond the Sea", 'sound/music/midis/beyondthesea.mid'),
 	)
 
 /obj/machinery/media/jukebox/New()

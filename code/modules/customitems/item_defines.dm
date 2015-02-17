@@ -1490,3 +1490,28 @@
 								   "purrs."))
 	else if (bff.health <= 50)
 		if (prob(10)) audible_emote("meows anxiously.")
+
+
+////////////////////////////// Mysticflame98 - Fluffles the bunny /////////////////////////////////////////////////
+
+
+/mob/living/simple_animal/bunny/fluff/fluffles
+	name = "Fluffles"
+	desc = "That's Fluffles the bunny! He looks like he wants a carrot."
+	gender = MALE
+	icon_state = "bunny_fuffles"
+	icon_living = "bunny_fluffles"
+	icon_dead = "bunny_fluffles_dead"
+	holder_type = /obj/item/weapon/holder/bunny
+
+	New()
+		..()
+		icon_state = "bunny_fuffles"
+		icon_living = "bunny_fluffles"
+		icon_dead = "bunny_fluffles_dead"
+
+/mob/living/simple_animal/bunny/fluff/fluffles/custom_item
+
+/mob/living/simple_animal/bunny/fluff/fluffles/custom_item/New()
+	if (!contents.len)
+		new/mob/living/simple_animal/bunny/fluff/fluffles (src)
