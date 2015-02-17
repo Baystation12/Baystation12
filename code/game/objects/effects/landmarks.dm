@@ -6,7 +6,6 @@
 	unacidable = 1
 
 /obj/effect/landmark/New()
-
 	..()
 	tag = text("landmark*[]", name)
 	invisibility = 101
@@ -112,6 +111,13 @@
 	invisibility = 101
 
 	return 1
+
+/obj/effect/landmark/start/ninja
+	name = "ninja"
+
+/obj/effect/landmark/start/ninja/New()
+	..()
+	ninjastart += loc
 
 //Costume spawner landmarks
 
