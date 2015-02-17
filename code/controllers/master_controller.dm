@@ -294,6 +294,7 @@ datum/controller/game_controller/proc/process_machines_process()
 		last_thing_processed = Machine.type
 		if(Machine.process() != PROCESS_KILL)
 			if(Machine)
+				Machine.power_change()
 				if(Machine.use_power)
 					Machine.auto_use_power()
 				continue

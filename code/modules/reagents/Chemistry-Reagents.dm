@@ -261,7 +261,7 @@ datum
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
-					S.apply_water()
+					S.apply_water(volume)
 				if(method == TOUCH && isliving(M))
 					M.adjust_fire_stacks(-(volume / 10))
 					if(M.fire_stacks <= 0)
@@ -1580,20 +1580,26 @@ datum
 		paint
 			name = "Paint"
 			id = "paint"
-			description = "This paint will stick to almost any object"
+			description = "This paint will stick to almost any object."
 			reagent_state = LIQUID
 			color = "#808080"
 			overdose = 15
 
 			reaction_turf(var/turf/T, var/volume)
-				if(!istype(T) || istype(T, /turf/space))
-					return
-				T.color = color
+				..()
+				if(istype(T) && !istype(T, /turf/space))
+					T.color = color
 
 			reaction_obj(var/obj/O, var/volume)
 				..()
-				if(istype(O,/obj/item/weapon/light))
+				if(istype(O,/obj))
 					O.color = color
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				..()
+				if(istype(M,/mob) && !istype(M,/mob/dead))
+					//painting ghosts: not allowed
+					M.color = color
 
 
 //////////////////////////Poison stuff///////////////////////
@@ -1892,10 +1898,10 @@ datum
 					if(15 to 49)
 						if(prob(50))
 							M.Weaken(2)
-						M.drowsyness  = max(M.drowsyness, 20)
+						M.drowsyness = max(M.drowsyness, 20)
 					if(50 to INFINITY)
-						M.Weaken(20)
-						M.drowsyness  = max(M.drowsyness, 30)
+						M.sleeping = max(M.sleeping, 20)
+						M.drowsyness = max(M.drowsyness, 60)
 				data++
 				..()
 				return
@@ -1919,10 +1925,11 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 199)
+					if(2 to 20)
 						M.Weaken(30)
-					if(200 to INFINITY)
-						M.sleeping += 1
+						M.eye_blurry = max(M.eye_blurry, 10)
+					if(20 to INFINITY)
+						M.sleeping = max(M.sleeping, 30)
 				..()
 				return
 
@@ -2631,7 +2638,7 @@ datum
 			name = "Carrot juice"
 			id = "carrotjuice"
 			description = "It is just like a carrot but without crunching."
-			color = "#973800" // rgb: 151, 56, 0
+			color = "#FF8C00" // rgb: 255, 140, 0
 
 			glass_icon_state = "carrotjuice"
 			glass_name = "glass of carrot juice"
@@ -2701,7 +2708,7 @@ datum
 			name = "Watermelon Juice"
 			id = "watermelonjuice"
 			description = "Delicious juice made from watermelon."
-			color = "#863333" // rgb: 134, 51, 51
+			color = "#B83333" // rgb: 184, 51, 51
 
 			glass_icon_state = "glass_red"
 			glass_name = "glass of watermelon juice"
@@ -2711,7 +2718,7 @@ datum
 			name = "Lemon Juice"
 			id = "lemonjuice"
 			description = "This juice is VERY sour."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#AFAF00" // rgb: 175, 175, 0
 
 			glass_icon_state = "lemonjuice"
 			glass_name = "glass of lemon juice"
@@ -2721,7 +2728,7 @@ datum
 			name = "Banana Juice"
 			id = "banana"
 			description = "The raw essence of a banana."
-			color = "#863333" // rgb: 175, 175, 0
+			color = "#C3AF00" // rgb: 195, 175, 0
 
 			glass_icon_state = "banana"
 			glass_name = "glass of banana juice"

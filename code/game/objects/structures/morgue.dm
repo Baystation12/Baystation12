@@ -379,12 +379,21 @@
 			//Foreach goto(99)
 	return
 
-/obj/machinery/crema_switch/attack_hand(mob/user as mob)
+/obj/machinery/button/crematorium
+	name = "crematorium igniter"
+	desc = "Burn baby burn!"
+	icon = 'icons/obj/power.dmi'
+	icon_state = "crema_switch"
+	req_access = list(access_crematorium)
+	id = 1
+
+/obj/machinery/button/crematorium/attack_hand(mob/user as mob)
+	if(..())
+		return
 	if(src.allowed(usr))
 		for (var/obj/structure/crematorium/C in world)
 			if (C.id == id)
 				if (!C.cremating)
 					C.cremate(user)
 	else
-		usr << "\red Access denied."
-	return
+		usr << "<span class='warning'>Access denied.</span>"

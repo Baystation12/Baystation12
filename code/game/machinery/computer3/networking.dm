@@ -169,6 +169,9 @@
 		if(typekey == null)
 			typekey = /obj/machinery
 		var/list/machines = list()
+		for(var/obj/O in T)
+			if(istype(O,typekey))
+				machines += O
 		for(var/d in cardinal)
 			var/turf/T2 = get_step(T,d)
 			for(var/obj/O in T2)

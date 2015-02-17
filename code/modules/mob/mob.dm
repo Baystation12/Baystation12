@@ -792,7 +792,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/Stat()
 	..()
 
-	if(statpanel("Status"))	//not looking at that panel
+	if(statpanel("MC"))	//not looking at that panel
 
 		if(client && client.holder)
 			stat(null,"Location:\t([x], [y], [z])")

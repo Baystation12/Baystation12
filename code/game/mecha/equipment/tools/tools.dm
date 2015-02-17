@@ -585,7 +585,7 @@
 			chassis.visible_message("The [chassis.name] armor deflects the projectile")
 			chassis.log_append_to_last("Armor saved.")
 		else
-			chassis.take_damage(round(Proj.damage*src.damage_coeff),Proj.flag)
+			chassis.take_damage(round(Proj.damage*src.damage_coeff),Proj.check_armour)
 			chassis.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 			Proj.on_hit(chassis)
 		set_ready_state(0)
@@ -1083,6 +1083,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/destroy()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(get_turf(src))
+		AM << "<span class='danger'>You tumble out of the destroyed [src.name]!"
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/tool/passenger/Exit(atom/movable/O)

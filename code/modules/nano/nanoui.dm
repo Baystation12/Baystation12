@@ -132,7 +132,12 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	var/status = user.can_interact_with_interface(src_object)
+	var/atom/movable/host = src_object.nano_host()
+	if(!host.nano_can_update())
+		close()
+		return
+
+	var/status = user.can_interact_with_interface(host.nano_host())
 	if(status == STATUS_CLOSE)
 		close()
 	else
@@ -141,6 +146,12 @@ nanoui is used to open and update nano browser uis
 /*
 	Procs called by update_status()
 */
+
+/mob/living/silicon/pai/can_interact_with_interface(src_object)
+	if(src_object == src && !stat)
+		return STATUS_INTERACTIVE
+	else
+		return ..()
 
 /mob/proc/can_interact_with_interface(var/src_object)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
@@ -175,7 +186,7 @@ nanoui is used to open and update nano browser uis
 	return STATUS_UPDATE
 
 /mob/living/silicon/ai/can_interact_with_interface(var/src_object)
-	if(stat || !client)
+	if(!client || check_unable(1))
 		return STATUS_CLOSE
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.

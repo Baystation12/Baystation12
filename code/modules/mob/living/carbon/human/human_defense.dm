@@ -24,7 +24,7 @@ emp_act
 			if(!(def_zone in list("chest", "groin")))
 				reflectchance /= 2
 			if(prob(reflectchance))
-				visible_message("\red <B>The [P.name] gets reflected by [src]'s [wear_suit.name]!</B>")
+				visible_message("\red <B>\The [P] gets reflected by \the [src]'s [wear_suit.name]!</B>")
 
 				// Find a turf near or on the original location to bounce to
 				if(P.starting)
@@ -33,12 +33,7 @@ emp_act
 					var/turf/curloc = get_turf(src)
 
 					// redirect the projectile
-					P.original = locate(new_x, new_y, P.z)
-					P.starting = curloc
-					P.current = curloc
-					P.firer = src
-					P.yo = new_y - curloc.y
-					P.xo = new_x - curloc.x
+					P.redirect(new_x, new_y, curloc, src)
 
 				return -1 // complete projectile permutation
 
@@ -47,9 +42,9 @@ emp_act
 		var/armor = getarmor_organ(organ, "bullet")
 		if((P.embed && prob(20 + max(P.damage - armor, -10))))
 			var/obj/item/weapon/shard/shrapnel/SP = new()
-			(SP.name) = "[P.name] shrapnel"
-			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
-			(SP.loc) = organ
+			SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
+			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
+			SP.loc = organ
 			organ.embed(SP)
 
 	return (..(P , def_zone))
@@ -309,10 +304,7 @@ emp_act
 					throw_mode_off()
 					return
 
-		var/dtype = BRUTE
-		if(istype(O,/obj/item/weapon))
-			var/obj/item/weapon/W = O
-			dtype = W.damtype
+		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone
@@ -323,11 +315,11 @@ emp_act
 			zone = ran_zone("chest",75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit
+		var/miss_chance = 15
 		if (O.throw_source)
 			var/distance = get_dist(O.throw_source, loc)
-			zone = get_zone_with_miss_chance(zone, src, min(15*(distance-2), 0))
-		else
-			zone = get_zone_with_miss_chance(zone, src, 15)
+			miss_chance = max(15*(distance-2), 0)
+		zone = get_zone_with_miss_chance(zone, src, miss_chance)
 
 		if(!zone)
 			visible_message("\blue \The [O] misses [src] narrowly!")
@@ -375,17 +367,21 @@ emp_act
 					affecting.embed(I)
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/obj/item/weapon/W = O
-			var/momentum = speed/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/mass = 1.5
+		if(istype(O, /obj/item))
+			var/obj/item/I = O
+			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
+		var/momentum = speed*mass
+		
+		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			
+			if(!O || !src) return
 
-			if(!W || !src) return
-
-			if(W.loc == src && W.sharp) //Projectile is embedded and suitable for pinning.
+			if(O.loc == src && O.sharp) //Projectile is embedded and suitable for pinning.
 				var/turf/T = near_wall(dir,2)
 
 				if(T)
@@ -393,6 +389,13 @@ emp_act
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
 					src.anchored = 1
 					src.pinned += O
+
+/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
+	if(!def_zone) ..()
+	
+	var/datum/organ/external/affecting = get_organ(def_zone)
+	if(affecting)
+		affecting.embed(O)
 
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)

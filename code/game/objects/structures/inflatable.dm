@@ -38,6 +38,9 @@
 	return 0
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
+	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		return
+	
 	health -= Proj.damage
 	..()
 	if(health <= 0)
@@ -250,6 +253,7 @@
 	icon_state = "inf_box"
 	item_state = "syringe_kit"
 	max_combined_w_class = 21
+	can_hold = list(/obj/item/inflatable)
 
 	New()
 		..()

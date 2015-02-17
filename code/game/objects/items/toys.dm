@@ -98,6 +98,18 @@
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
 	w_class = 4.0
+	
+/obj/item/toy/nanotrasenballoon
+	name = "criminal balloon"
+	desc = "Across the balloon the following is printed: \"Man, I love NT soooo much. I use only NanoTrasen products. You have NO idea.\""
+	throwforce = 0
+	throw_speed = 4
+	throw_range = 20
+	force = 0
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "ntballoon"
+	item_state = "ntballoon"
+	w_class = 4.0
 
 /*
  * Fake telebeacon
@@ -128,7 +140,7 @@
 	icon_state = "revolver"
 	item_state = "gun"
 	flags =  CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
 
 	matter = list("glass" = 10,"metal" = 10)
@@ -379,6 +391,10 @@
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
 		return (BRUTELOSS|OXYLOSS)
+
+	New()
+		name = "[colourName] crayon"
+		..()
 
 /*
  * Snap pops

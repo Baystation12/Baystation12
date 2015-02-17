@@ -45,6 +45,7 @@ var/global/list/ALL_ANTIGENS = list(
 
 /hook/startup/proc/randomise_antigens_order()
 	ALL_ANTIGENS = shuffle(ALL_ANTIGENS)
+	return 1
 
 // pure concentrated antibodies
 datum/reagent/antibodies
