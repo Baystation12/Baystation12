@@ -254,3 +254,29 @@
 	icon_state = "orange_bandana"
 	item_state = "orange_bandana"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/jesterhat
+	name = "Jester Hat"
+	desc = "A hat fit for a fool."
+	icon_state = "jesterhat"
+	item_state = "jesterhat"
+	flags = BLOCKHAIR
+	flags_inv = 0
+
+/obj/item/clothing/head/butte
+	name = "butt"
+	desc = "For those who can't get their heads out of their ass."
+	icon_state = "butt"
+	item_state = "butt"
+
+
+/obj/item/clothing/head/roman
+	name = "roman soldier's hat"
+	desc = "A fearsome soldier's helm."
+	icon_state = "roman"
+	item_state = "roman"
+
+
+/obj/item/clothing/head/roman/fluff
+	icon_state = "roman2"
+	item_state = "roman2"

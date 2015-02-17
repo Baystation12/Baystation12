@@ -298,26 +298,27 @@
 	selection_color = "#dddddd"
 	access = list(access_mime, access_theatre, access_maint_tunnels)
 	minimal_access = list(access_mime, access_theatre)
-	alt_titles = list("Mime", "Clown")
+	alt_titles = list("Mime", "Jester")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
-		if(H.job == "Clown")
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/clown(H), slot_back)
+		if(H.job == "Jester")
+			if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+			if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/clown(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/clown_shoes(H), slot_shoes)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/jester(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jester(H), slot_shoes)
 			H.equip_to_slot_or_del(new /obj/item/device/pda/clown(H), slot_belt)
-			H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/clown_hat(H), slot_wear_mask)
-			H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/snacks/grown/banana(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/weapon/bikehorn(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/weapon/stamp/clown(H), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/toy/crayon/rainbow(H), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/crayons(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/toy/waterflower(H), slot_in_backpack)
+			H.equip_to_slot_or_del(new /obj/item/clothing/head/jesterhat(H), slot_head)
+			if(H.backbag == 1)
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+			else
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.mutations.Add(CLUMSY)
 			return 1
-		else
+		else if(H.job == "Mime")
 			if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
 			if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/mime(H), slot_w_uniform)
@@ -336,11 +337,24 @@
 				H.equip_to_slot_or_del(new /obj/item/toy/crayon/mime(H), slot_in_backpack)
 				H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), slot_in_backpack)
 			H.verbs += /client/proc/mimespeak
-			//H.verbs += /client/proc/mimewall
 			H.mind.special_verbs += /client/proc/mimespeak
+			//H.verbs += /client/proc/mimewall
 			//H.mind.special_verbs += /client/proc/mimewall
 			H.miming = 1
 			return 1
+		else
+			if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
+			if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/burgundy(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
+			H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_belt)
+			H.equip_to_slot_or_del(new /obj/item/clothing/head/collectable/tophat(H), slot_head)
+			if(H.backbag == 1)
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+			else
+				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+			return 1
+
 
 /datum/job/janitor
 	title = "Janitor"

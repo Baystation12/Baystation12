@@ -129,3 +129,32 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+
+obj/item/clothing/shoes/jester
+	name = "Jester Shoes"
+	desc = "As worn by the clowns of old."
+	icon_state = "jestershoes"
+	item_state = "jestershoes"
+	force = 0
+	species_restricted = null
+
+/obj/item/clothing/shoes/roman
+	name = "roman soldier's shoes"
+	desc = "Et tu boote?"
+	icon_state = "roman"
+	item_state = "roman"
+	item_color = "roman"
+	force = 3
+	species_restricted = null
+
+/obj/item/clothing/shoes/kneehigh
+	name = "knee-high socks"
+	desc = "These go all the way up your shinny-shin-shins!"
+	icon_state = "kneesock"
+	item_state = "kneesock"
+	item_color = "kneesock"
+	force = 0
+	species_restricted = null
+
+	cold_protection = FEET
+	min_cold_protection_temperature = T0C - 20

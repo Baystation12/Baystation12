@@ -390,3 +390,4 @@
 	item_state = "grey_hoodie"
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+

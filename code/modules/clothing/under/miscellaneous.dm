@@ -483,3 +483,32 @@
 	item_state = "mai_yang"
 	item_color = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/jester
+	name = "Jester Suit"
+	desc = "Only a fool would wear such a suit."
+	icon_state = "jester"
+	item_state = "jester"
+	item_color = "jester"
+
+/obj/item/clothing/under/bpajamas
+	name = "blue pajamas"
+	desc = "Nice and warm!"
+	icon_state = "bluepajamas"
+	item_state = "bluepajamas"
+	item_color = "bluepajamas"
+	min_cold_protection_temperature = T0C - 20
+
+/obj/item/clothing/under/roman
+	name = "Roman soldier's uniform"
+	desc = "A recreation of the ancient roman attire!"
+	icon_state = "roman"
+	item_state = "roman"
+	item_color = "roman"
+
+/obj/item/clothing/under/biomech
+	name = "Biomechanic jumpsuit"
+	desc = "Perfect for those creating monstrosities of man and machine."
+	icon_state = "biomech"
+	item_state = "biomech"
+	item_color = "biomech"
