@@ -144,7 +144,7 @@
 	flags = WHITELISTED
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
-/datum/language/unathi/get_random_name()
+/datum/language/Soghun/get_random_name()
 
 	var/new_name = ..()
 	while(findtextEx(new_name,"sss",1,null))
