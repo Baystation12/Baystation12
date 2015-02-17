@@ -723,13 +723,22 @@ proc/get_damage_icon_part(damage_state, body_part)
 		belt.screen_loc = ui_belt	//TODO
 		var/t_state = belt.item_state
 		if(!t_state)	t_state = belt.icon_state
+		var/image/standing	= image("icon_state" = "[t_state]")
 
 		if(belt.icon_override)
-			overlays_standing[BELT_LAYER] = image("icon" = belt.icon_override, "icon_state" = "[t_state]")
+			standing.icon = belt.icon_override
 		else if(belt.sprite_sheets && belt.sprite_sheets[species.name])
-			overlays_standing[BELT_LAYER] = image("icon" = belt.sprite_sheets[species.name], "icon_state" = "[t_state]")
+			standing.icon = belt.sprite_sheets[species.name]
 		else
-			overlays_standing[BELT_LAYER] = image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[t_state]")
+			standing.icon = 'icons/mob/belt.dmi'
+
+		if(belt.contents.len && istype(belt, /obj/item/weapon/storage/belt))
+			for(var/obj/item/i in belt.contents)
+				var/i_state = i.item_state
+				if(!i_state) i_state = i.icon_state
+				standing.overlays	+= image("icon" = 'icons/mob/belt.dmi', "icon_state" = "[i_state]")
+
+		overlays_standing[BELT_LAYER] = standing
 	else
 		overlays_standing[BELT_LAYER] = null
 	if(update_icons)   update_icons()
