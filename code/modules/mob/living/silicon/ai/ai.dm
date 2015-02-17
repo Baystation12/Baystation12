@@ -3,7 +3,6 @@
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
-	/mob/living/silicon/ai/proc/ai_alerts,
 	/mob/living/silicon/ai/proc/ai_announcement,
 	/mob/living/silicon/ai/proc/ai_call_shuttle,
 	// /mob/living/silicon/ai/proc/ai_recall_shuttle,
@@ -23,10 +22,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/sensor_mode,
 	/mob/living/silicon/ai/proc/show_laws_verb,
 	/mob/living/silicon/ai/proc/toggle_acceleration,
-	/mob/living/silicon/ai/proc/toggle_camera_light,
-	/mob/living/silicon/ai/proc/nano_rcon,
-	/mob/living/silicon/ai/proc/nano_crew_monitor,
-	/mob/living/silicon/ai/proc/nano_power_monitor
+	/mob/living/silicon/ai/proc/toggle_camera_light
 )
 
 //Not sure why this is necessary...
@@ -83,9 +79,11 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
+	src.verbs |= ai_verbs_subsystems
 
 /mob/living/silicon/ai/proc/remove_ai_verbs()
 	src.verbs -= ai_verbs_default
+	src.verbs -= ai_verbs_subsystems
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	announcement = new()
@@ -165,8 +163,6 @@ var/list/ai_verbs_default = list(
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
-
-	init_subsystems()
 
 	ai_list += src
 	..()
@@ -325,13 +321,6 @@ var/list/ai_verbs_default = list(
 	if(malf && malf.apcs >= 3)
 		stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/(malf.apcs/3), 0)] seconds")
 
-/mob/living/silicon/ai/proc/ai_alerts()
-	set category = "AI Commands"
-	set name = "Show Alerts"
-
-	//PsiFix
-	//nano_alarm.ui_interact(usr)
-
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
 	set category = "AI Commands"
@@ -428,7 +417,7 @@ var/list/ai_verbs_default = list(
 	if (href_list["switchcamera"])
 		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
 	if (href_list["showalerts"])
-		ai_alerts()
+		subsystem_alarm_monitor()
 	//Carn: holopad requests
 	if (href_list["jumptoholopad"])
 		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])

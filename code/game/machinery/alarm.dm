@@ -460,10 +460,12 @@
 
 	if(alert_level==2)
 		alert_signal.data["alert"] = "severe"
+		atmosphere_alarm.triggerAlarm(src.loc, src)
 	else if (alert_level==1)
 		alert_signal.data["alert"] = "minor"
 	else if (alert_level==0)
 		alert_signal.data["alert"] = "clear"
+		atmosphere_alarm.clearAlarm(src.loc, src)
 
 	frequency.post_signal(src, alert_signal)
 

@@ -22,6 +22,9 @@
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
+	// Subsystems
+	var/obj/nano_module/alarm_monitor = null
+
 	var/sensor_mode = 0 //Determines the current HUD.
 
 	#define SEC_HUD 1 //Security HUD mode
@@ -30,6 +33,7 @@
 /mob/living/silicon/New()
 	..()
 	add_language("Galactic Common")
+	init_subsystems()
 
 /mob/living/silicon/proc/SetName(pickedName as text)
 	real_name = pickedName
@@ -244,7 +248,8 @@
 	return 1
 
 /mob/living/silicon/Topic(href, href_list)
-	..()
+	if(..())
+		return 1
 
 	if (href_list["lawr"]) // Selects on which channel to state laws
 		var/list/channels = list(MAIN_CHANNEL)
@@ -283,3 +288,6 @@
 				adjustBruteLoss(30)
 
 	updatehealth()
+
+/mob/living/silicon/proc/init_subsystems()
+	alarm_monitor = new/obj/nano_module/alarm_monitor/borg(src)

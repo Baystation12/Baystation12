@@ -1,64 +1,82 @@
-#define ALARM_ORIGIN_LOST "Origin Lost"
+#define ALARM_RAISED 1
+#define ALARM_CLEARED 0
 
 /datum/alarm_handler
 	var/category = ""
-	var/list/datum/alarm/alarms = new			// All alarms, to handle cases when origin has been deleted with one or more active alarms
-	var/list/datum/alarm/alarms_assoc = new		// Associative list of alarms, to efficiently acquire them based on origin.
+	var/list/datum/alarm/alarms = new		// All alarms, to handle cases when an origin has been deleted with one or more active alarms
+	var/list/datum/alarm/alarms_assoc = new	// Associative list of alarms, to efficiently acquire them based on origin.
+	var/list/listeners = new				// A list of all objects interested in alarm changes.
 
 /datum/alarm_handler/proc/process()
-	/*
 	for(var/datum/alarm/A in alarms)
-		var/datum/alarm_source/AS = A.source
-		// Alarm owner has been deleted. Clean up in at most 15 seconds
-		if(!AS.owner && !AS.end_time)
-			AS.end_time = world.time + SecondsToTicks(15)
-		if(AS.duration || AS.end_time)
-			if(world.time > (AS.start_time + AS.duration) || world.time > AS.end_time)
-				//Somethingthing..
-	*/
+		A.process()
+		check_alarm_cleared(A)
 
 /datum/alarm_handler/proc/triggerAlarm(var/atom/origin, var/atom/source, var/duration = 0)
+	var/new_alarm
 	//Proper origin and source mandatory
 	if(!origin || !source)
 		return
 
+	new_alarm = 0
 	//see if there is already an alarm of this origin
-	var/alarm_key = origin.get_alarm_key()
-	var/datum/alarm/existing = alarms_assoc[alarm_key]
+	var/datum/alarm/existing = alarms_assoc[origin]
 	if(existing)
 		existing.set_duration(source, duration)
 	else
 		existing = new/datum/alarm(origin, source, duration)
+		new_alarm = 1
 
 	alarms |= existing
-	alarms_assoc[alarm_key] = existing
+	alarms_assoc[origin] = existing
+	if(new_alarm)
+		alarms = dd_sortedObjectList(alarms)
+		notify_listeners(existing, ALARM_RAISED)
 
-/datum/alarm_handler/proc/cancelAlarm(var/atom/origin, var/source)
+	return new_alarm
+
+/datum/alarm_handler/proc/clearAlarm(var/atom/origin, var/source)
 	//Proper origin and source mandatory
 	if(!origin || !source)
 		return
 
-	var/alarm_key = origin.get_alarm_key()
-
-	var/datum/alarm/existing = alarms_assoc[alarm_key]
+	var/datum/alarm/existing = alarms_assoc[origin]
 	if(existing)
 		existing.clear(source)
-		if (!existing.sources.len)
-			alarms -= existing
-			alarms_assoc -= alarm_key
+		return check_alarm_cleared(existing)
 
-/atom/proc/get_alarm_key()
-	return src
+/datum/alarm_handler/proc/check_alarm_cleared(var/datum/alarm/alarm)
+	if ((alarm.end_time && world.time > alarm.end_time) || !alarm.sources.len)
+		alarms -= alarm
+		alarms_assoc -= alarm.origin
+		notify_listeners(alarm, ALARM_CLEARED)
+		return 1
+	return 0
 
-/turf/get_alarm_key()
-	return get_area(src)
+/datum/alarm_handler/proc/register(var/object, var/procName)
+	listeners[object] = procName
 
+/datum/alarm_handler/proc/unregister(var/object)
+	listeners -= object
+
+/datum/alarm_handler/proc/notify_listeners(var/alarm, var/was_raised)
+	for(var/listener in listeners)
+		call(listener, listeners[listener])(src, alarm, was_raised)
+
+/********
+* DEBUG *
+********/
 /obj/item/device/alarm_debug
 	name = "An alarm debug tool - Self"
 	desc = "Alarm Up. Alarm Reset."
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "beacon"
 	item_state = "signaler"
+	var/obj/nano_module/alarm_monitor/ai/alarm_monitor
+
+/obj/item/device/alarm_debug/New()
+	..()
+	alarm_monitor = new(src)
 
 /obj/item/device/alarm_debug/loc
 	name = "An alarm debug tool - Loc"
@@ -67,46 +85,33 @@
 	set name = "Alarm"
 	set category = "Debug"
 	usr << "Raising alarm"
-	camera_alarm.triggerAlarm(src, src)
+	fire_alarm.triggerAlarm(src, src)
 
 /obj/item/device/alarm_debug/verb/reset()
 	set name = "Reset"
 	set category = "Debug"
-	usr << "Raising alarm"
-	camera_alarm.triggerAlarm(src, src)
-
-/obj/item/device/alarm_debug/verb/tell_me()
-	set name = "Tell"
-	set category = "Debug"
-	usr << "Telling about alarms"
-
-	var/list/datum/alarm/alarms = camera_alarm.alarms
-	var/list/datum/alarm/alarms_assoc = camera_alarm.alarms_assoc
-
-	world << "List"
-	for(var/datum/alarm/A in alarms)
-		world << "Origin: [A.origin ? A.origin : ALARM_ORIGIN_LOST]"
-		world << "Alarm area: [A.alarm_area()]"
-		for(var/source in A.sources)
-			world << "Source: [source]"
-
-	world << "Assoc"
-
-	for(var/atom/origin in alarms_assoc)
-		world << "Origin: [origin ? origin : ALARM_ORIGIN_LOST]"
-		var/datum/alarm/A = alarms_assoc[origin]
-		world << "Alarm area: [A.alarm_area()]"
-		for(var/source in A.sources)
-			world << "Source: [source]"
+	usr << "Clearing alarm"
+	fire_alarm.clearAlarm(src, src)
 
 /obj/item/device/alarm_debug/loc/alarm()
 	set name = "Alarm"
 	set category = "Debug"
 	usr << "Raising alarm"
-	camera_alarm.triggerAlarm(src.loc, src)
+	fire_alarm.triggerAlarm(src.loc, src)
 
 /obj/item/device/alarm_debug/loc/reset()
 	set name = "Reset"
 	set category = "Debug"
 	usr << "Clearing alarm"
-	camera_alarm.cancelAlarm(src.loc, src)
+	fire_alarm.clearAlarm(src.loc, src)
+
+/obj/item/device/alarm_debug/verb/nano()
+	set name = "Nano"
+	set category = "Debug"
+	alarm_monitor.ui_interact(usr)
+
+/obj/item/device/alarm_debug/attack_self(var/mob/user)
+	alarm_monitor.ui_interact(user)
+
+#undef ALARM_RAISED
+#undef ALARM_CLEARED

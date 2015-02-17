@@ -437,21 +437,11 @@ var/list/robot_verbs_default = list(
 		updatename()
 		updateicon()
 
-/mob/living/silicon/robot/verb/cmd_robot_alerts()
-	set category = "Robot Commands"
-	set name = "Show Alerts"
-	robot_alerts()
-
 // this verb lets cyborgs see the stations manifest
 /mob/living/silicon/robot/verb/cmd_station_manifest()
 	set category = "Robot Commands"
 	set name = "Show Crew Manifest"
 	show_station_manifest()
-
-
-/mob/living/silicon/robot/proc/robot_alerts()
-	//PsiFix
-	//nano_alarm.ui_interact(usr)
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -1004,30 +994,31 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 	if(usr != src)
-		return
+		return 1
 
 	if (href_list["showalerts"])
-		robot_alerts()
-		return
+		subsystem_alarm_monitor()
+		return 1
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
 		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
+		return 1
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
 		if (!istype(O))
-			return
+			return 1
 
 		if(!((O in src.module.modules) || (O == src.module.emag)))
-			return
+			return 1
 
 		if(activated(O))
 			src << "Already activated"
-			return
+			return 1
 		if(!module_state_1)
 			module_state_1 = O
 			O.layer = 20
@@ -1049,6 +1040,7 @@ var/list/robot_verbs_default = list(
 		else
 			src << "You need to disable a module first!"
 		installed_modules()
+		return 1
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
@@ -1067,6 +1059,7 @@ var/list/robot_verbs_default = list(
 		else
 			src << "Module isn't activated"
 		installed_modules()
+		return 1
 
 	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawc"])
@@ -1075,6 +1068,7 @@ var/list/robot_verbs_default = list(
 			if ("No") lawcheck[L+1] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
 		checklaws()
+		return 1
 
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawi"])
@@ -1083,9 +1077,11 @@ var/list/robot_verbs_default = list(
 			if ("No") ioncheck[L] = "Yes"
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
 		checklaws()
+		return 1
 
 	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
 		statelaws()
+		return 1
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
@@ -1218,9 +1214,11 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/proc/add_robot_verbs()
 	src.verbs |= robot_verbs_default
+	src.verbs |= robot_verbs_subsystems
 
 /mob/living/silicon/robot/proc/remove_robot_verbs()
 	src.verbs -= robot_verbs_default
+	src.verbs -= robot_verbs_subsystems
 
 // Uses power from cyborg's cell. Returns 1 on success or 0 on failure.
 // Properly converts using CELLRATE now! Amount is in Joules.

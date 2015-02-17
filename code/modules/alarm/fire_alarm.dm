@@ -1,2 +1,2 @@
-/datum/alarm_handler/fire_alarm
+/datum/alarm_handler/fire
 	category = "Fire"
