@@ -204,11 +204,13 @@
 	//the bullet passes through a dense object!
 	if(passthrough)
 		bumped = 0 //reset bumped variable!
-		if(istype(A, /turf))
-			loc = A
-		else
-			loc = A.loc
-		permutated.Add(A)
+		//move ourselves onto A so we don't Bump it again. If A was deleted then we don't need to worry.
+		if(A)
+			if(istype(A, /turf))
+				loc = A
+			else
+				loc = A.loc
+			permutated.Add(A)
 		return 0
 
 	//stop flying
