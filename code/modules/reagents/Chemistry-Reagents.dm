@@ -1827,10 +1827,10 @@ datum
 					if(15 to 49)
 						if(prob(50))
 							M.Weaken(2)
-						M.drowsyness  = max(M.drowsyness, 20)
+						M.drowsyness = max(M.drowsyness, 20)
 					if(50 to INFINITY)
-						M.Weaken(20)
-						M.drowsyness  = max(M.drowsyness, 30)
+						M.sleeping = max(M.sleeping, 20)
+						M.drowsyness = max(M.drowsyness, 60)
 				data++
 				..()
 				return
@@ -1854,10 +1854,11 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 199)
+					if(2 to 20)
 						M.Weaken(30)
-					if(200 to INFINITY)
-						M.sleeping += 1
+						M.eye_blurry = max(M.eye_blurry, 10)
+					if(20 to INFINITY)
+						M.sleeping = max(M.sleeping, 30)
 				..()
 				return
 
