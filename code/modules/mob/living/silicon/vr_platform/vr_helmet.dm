@@ -3,8 +3,8 @@
 	name = "virtual reality helmet"
 	desc = "Used to enter virtual reality simulations and uplinks. Has a built-in beta-wave sensor and neural clamp."
 
-	icon_state = "VR-helmet"
-	item_state = "VR-helmet"
+	icon_state = "virtualhelmet"
+	item_state = "virtualhelmet"
 	var/mob/living/user = null
 
 /obj/item/clothing/head/helmet/virtual/equipped(mob/M)
@@ -20,13 +20,13 @@
 
 	for( var/mob/living/silicon/platform/O in orange( src.mob, 3 )) // Finding suitable VR platforms in area
 		platforms_in_area += O
-		src << "Platform \"[O.name]\" found on [O.loc]"
+		usr << "Platform \"[O.name]\" found on [O.loc]"
 
 	if( platforms_in_area )
-		src << "<b>Attempting connection...</b>"
+		usr << "<b>Attempting connection...</b>"
 		var/mob/living/silicon/platform/P = input(src, "Which platform do you wish to connect to?") in null|platforms_in_area
 		if(isnull( P ))
-			src << "\red Connection aborted."
+			usr << "\red Connection aborted."
 			return
 
 		var/list/descriptive_text = list( "<b>Please hold still.</b>",
@@ -40,9 +40,9 @@
 										  "<b>Locked</b>." )
 
 		for( var/text in descriptive_text )
-			src << text
+			usr << text
 			sleep( rand( 10, 30 ))
 
-		P.activate( src.mob )
+		P.activate( usr )
 	else
-		src << "No suitable platform found within 3 meters of device."
+		usr << "No suitable platform found within 3 meters of device."

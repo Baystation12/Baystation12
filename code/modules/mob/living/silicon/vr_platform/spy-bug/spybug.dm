@@ -62,11 +62,8 @@
 	return
 
 
-
-//spybug MOVEMENT.
 /mob/living/silicon/platform/spybug/Process_Spaceslipping(var/prob_slip)
-	//TODO: Consider making a magboot item for spybugs to equip. ~Z
-	return 0
+	return 1 // Spybugs can't fly in space, now can they?
 
 
 //Reboot procs.
