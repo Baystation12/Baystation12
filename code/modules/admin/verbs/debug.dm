@@ -372,6 +372,26 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
 	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_admin_restrain(var/mob/M in mob_list)
+	set category = "Admin"
+	set name = "Restrain Mob"
+
+	if(!ticker)
+		alert("Wait until the game starts")
+		return
+
+	if(!istype(M, /mob/living/carbon/human))
+		return
+
+	if(M.captured == 1)
+		M.captured = 0
+
+		message_admins("[key_name_admin(src)] has lifted [key_name(M)]'s retraining order.")
+	else
+		M.captured = 1
+
+		message_admins("[key_name_admin(src)] has restrained [key_name(M)].")
+
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)
 	set category = "Admin"
 	set name = "Grant Full Access"

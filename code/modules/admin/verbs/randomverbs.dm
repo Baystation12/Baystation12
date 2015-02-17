@@ -940,3 +940,23 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		usr << "Random events disabled"
 		message_admins("Admin [key_name_admin(usr)] has disabled random events.", 1)
 	feedback_add_details("admin_verb","TRE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/locate_obj()
+	set category = "Admin"
+	set name = "Locate object"
+
+	set desc = "Locates a given object"
+	if(!check_rights(R_ADMIN)) return
+
+	var/type_text = input("Which type path? eg /obj/item/weapon/card/id/captains_spare","Path?") as text
+	if(!type_text) return
+
+	var/type_path = text2path(type_text)
+
+	for(var/atom/A in world)
+		if(istype(A,type_path))
+			src.Move(A)
+			switch(alert("Object found!","Would you like to keep searching?","No","Yes"))
+				if("Yes")	return
+
+	src << "\red No more instances of <b>[type_text]</b> exist on the current map"
