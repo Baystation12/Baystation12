@@ -16,8 +16,11 @@
 			entry = "<b>{<font color='#FF9933'>Dev</font>} ~ </b> [C.key]"
 		else if(is_donator(C))
 			entry = "<b>{<font color='#990099'>Donator</font>} ~ </b> [C.key]"
-		else if(is_event_staff(C))
-			entry = "<b>{<font color='#009933'>Event</font>} ~ </b> [C.key]"
+		else if(is_titled(C))
+			if(get_title(C) == 1)
+				entry = "<b>{<font color='#009933'>Event</font>} ~ </b> [C.key]"
+			else
+				entry = "<b>{<font color='#7A411A'>Spriter</font>} ~ </b> [C.key]"
 		else
 			entry = "<b>{<font color='#666666'>Player</font>} ~ </b> [C.key]"
 
@@ -40,6 +43,7 @@
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
+			entry += "(<A HREF='?_src_=holder;adminplayerobservejump=\ref[C.mob]'>JMP</A>)"
 		Lines += entry
 	/*else
 		for(var/client/C in clients)

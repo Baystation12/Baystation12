@@ -25,6 +25,9 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .developer			{color: #1b521f;}
 .ooc .admin				{color: #b82e00;}
 
+.ooc .donator				{color: #990099;}
+.ooc .spriter				{color: #7A411A;}
+
 /* Admin: Private Messages */
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
