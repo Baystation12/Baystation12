@@ -34,6 +34,21 @@
 		M << "You name the gun [input]. Say hello to your new friend."
 		return 1
 
+/obj/item/weapon/gun/projectile/sec
+	desc = "A Nanotrasen designed sidearm, found pretty much everywhere humans are. Uses less-than-lethal .45 rounds."
+	name = "\improper NT Mk58"
+	icon_state = "secguncomp"
+	magazine_type = /obj/item/ammo_magazine/c45m/rubber
+	caliber = ".45"
+	origin_tech = "combat=3;materials=2"
+	load_method = MAGAZINE
+
+
+/obj/item/weapon/gun/projectile/sec/wood
+	desc = "A Nanotrasen designed sidearm, this one has a sweet wooden grip. Uses less-than-lethal .45 rounds."
+	name = "\improper Custom NT Mk58"
+	icon_state = "secgundark"
+
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
