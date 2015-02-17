@@ -28,7 +28,7 @@
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
 	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
-	their native tongue is a heavy hissing laungage called Sinta'Soghun."
+	their native tongue is a heavy hissing laungage called Sinta'soghun."
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200

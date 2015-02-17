@@ -133,8 +133,8 @@
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
 	return (copytext(message, length(message)) == "!") ? 4 : 2
 
-/datum/language/Soghun
-	name = "Sinta'Soghun"
+/datum/language/soghun
+	name = "Sinta'soghun"
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Soghun."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
@@ -144,7 +144,7 @@
 	flags = WHITELISTED
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
-/datum/language/Soghun/get_random_name()
+/datum/language/soghun/get_random_name()
 
 	var/new_name = ..()
 	while(findtextEx(new_name,"sss",1,null))
