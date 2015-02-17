@@ -14,7 +14,7 @@
 		shake_camera(L, 3, 2)
 
 /obj/item/projectile/bullet/on_penetrate(var/atom/A)
-	if(!A) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
+	if(!A || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
 
 	if(istype(A, /obj/mecha))
 		return 1 //mecha have their own penetration handling
@@ -35,7 +35,7 @@
 	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
 		chance = 100 
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
-		chance = 15
+		chance = 25
 	
 	if(prob(chance))
 		if(A.opacity)

@@ -174,7 +174,7 @@
 		loc = A.loc
 		return 0 //cannot shoot yourself
 
-	if(bumped)
+	if(bumped || (A in permutated))
 		return 0
 
 	var/passthrough = 0 //if the projectile should continue flying
@@ -196,21 +196,21 @@
 				attack_mob(M, distance)
 
 	//penetrating projectiles can pass through things that otherwise would not let them
-	if(penetrating > 0)
+	if(!passthrough && penetrating > 0)
 		if(on_penetrate(A))
 			passthrough = 1
 		penetrating--
 
 	//the bullet passes through a dense object!
 	if(passthrough)
-		bumped = 0 //reset bumped variable!
-		//move ourselves onto A so we don't Bump it again. If A was deleted then we don't need to worry.
+		//move ourselves onto A so we can continue on our way.
 		if(A)
 			if(istype(A, /turf))
 				loc = A
 			else
 				loc = A.loc
 			permutated.Add(A)
+		bumped = 0 //reset bumped variable!
 		return 0
 
 	//stop flying
