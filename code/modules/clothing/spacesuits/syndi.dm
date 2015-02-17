@@ -148,3 +148,4 @@
 	name = "Black Engineering Space Suit"
 	icon_state = "syndicate-black-engie"
 	item_state = "syndicate-black"
+

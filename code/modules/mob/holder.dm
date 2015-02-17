@@ -85,3 +85,10 @@
 	desc = "It's a cute little bunny."
 	icon_state = "bunny"
 	origin_tech = null
+
+/obj/item/weapon/holder/spybug
+	name = "spy bug"
+	desc = "It's a small robot bug with a microscopic camera and microphone."
+	icon_state = "drone"
+	origin_tech = "engineering=5 illegal=2"
+

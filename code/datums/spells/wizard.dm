@@ -3,7 +3,7 @@
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
 
 	school = "evocation"
-	charge_max = 150
+	charge_max = 200
 	clothes_req = 1
 	invocation = "FORTI GY AMA"
 	invocation_type = "shout"
@@ -112,7 +112,7 @@
 	desc = "This spell teleports you to a type of area of your selection."
 
 	school = "abjuration"
-	charge_max = 600
+	charge_max = 1200
 	clothes_req = 1
 	invocation = "SCYAR NILA"
 	invocation_type = "shout"
@@ -205,7 +205,7 @@
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
 
 	school = "evocation"
-	charge_max = 100
+	charge_max = 300
 	clothes_req = 0
 	invocation = "ONI SOMA"
 	invocation_type = "shout"
@@ -219,12 +219,12 @@
 	proj_step_delay = 1
 
 /obj/effect/proc_holder/spell/turf/fireball/cast(var/turf/T)
-	explosion(T, -1, 1, 2, 3)
+	explosion(T, -1, -1, 2, 5)
 
 
 /obj/effect/proc_holder/spell/targeted/inflict_handler/fireball
-	amt_dam_brute = 20
-	amt_dam_fire = 25
+	amt_dam_brute = 15
+	amt_dam_fire = 15
 
 /obj/effect/proc_holder/spell/targeted/explosion/fireball
 	ex_severe = -1
@@ -316,12 +316,12 @@
 	desc = "This spell allows you to pass through walls"
 
 	school = "transmutation"
-	charge_max = 200
+	charge_max = 500
 	clothes_req = 0
 	invocation = "none"
 	invocation_type = "none"
 	range = -1
 	include_user = 1
 	phaseshift = 1
-	jaunt_duration = 50 //in deciseconds
+	jaunt_duration = 30 //in deciseconds
 	centcomm_cancast = 0 //Stop people from getting to centcomm
