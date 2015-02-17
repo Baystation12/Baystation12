@@ -7,11 +7,25 @@
 	check_armour = "bullet"
 	embed = 1
 	sharp = 1
+	var/mob_passthrough_check = 0
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
 		var/mob/living/L = target
 		shake_camera(L, 3, 2)
+
+/obj/item/projectile/bullet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
+	if(penetrating > 0 && damage > 20 && prob(damage))
+		mob_passthrough_check = 1
+	else
+		mob_passthrough_check = 0
+	..()
+
+/obj/item/projectile/bullet/can_embed()
+	//prevent embedding if the projectile is passing through the mob
+	if(mob_passthrough_check)
+		return 0
+	return ..()
 
 /obj/item/projectile/bullet/check_penetrate(var/atom/A)
 	if(!A || !A.density) return 1 //if whatever it was got destroyed when we hit it, then I guess we can just keep going
@@ -20,10 +34,10 @@
 		return 1 //mecha have their own penetration handling
 
 	if(ismob(A))
+		if (!mob_passthrough_check)
+			return 0
 		if(iscarbon(A))
-			//squishy mobs absorb KE
-			if(can_embed()) return 0
-			damage *= 0.7
+			damage *= 0.7 //squishy mobs absorb KE
 		return 1
 
 	var/chance = 0
