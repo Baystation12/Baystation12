@@ -4,45 +4,40 @@
 	icon_state = "holster"
 	item_color = "holster"
 	slot = "utility"
-	var/obj/item/weapon/gun/holstered = null
-
-//subtypes can override this to specify what can be holstered
-/obj/item/clothing/accessory/holster/proc/can_holster(obj/item/weapon/gun/W)
-	return W.isHandgun()
+	var/obj/item/holstered = null
 
 /obj/item/clothing/accessory/holster/proc/holster(obj/item/I, mob/user as mob)
 	if(holstered)
-		user << "<span class='warning'>There is already a [holstered] holstered here!</span>"
+		user << "<span class='warning'>There is already \a [holstered] holstered here!</span>"
 		return
 
-	if (!istype(I, /obj/item/weapon/gun))
-		user << "<span class='warning'>Only guns can be holstered!</span>"
+	if (!(I.slot_flags & SLOT_HOLSTER))
+		user << "<span class='warning'>[I] won't fit in [src]!</span>"
 		return
 
-	var/obj/item/weapon/gun/W = I
-	if (!can_holster(W))
-		user << "<span class='warning'>This [W] won't fit in the [src]!</span>"
-		return
-
-	holstered = W
+	holstered = I
 	user.drop_from_inventory(holstered)
 	holstered.loc = src
 	holstered.add_fingerprint(user)
-	user.visible_message("<span class='notice'>[user] holsters the [holstered].</span>", "<span class='notice'>You holster the [holstered].</span>")
+	user.visible_message("<span class='notice'>[user] holsters \the [holstered].</span>", "<span class='notice'>You holster \the [holstered].</span>")
 
 /obj/item/clothing/accessory/holster/proc/unholster(mob/user as mob)
 	if(!holstered)
 		return
 
 	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
-		user << "<span class='warning'>You need an empty hand to draw the [holstered]!</span>"
+		user << "<span class='warning'>You need an empty hand to draw \the [holstered]!</span>"
 	else
 		if(user.a_intent == "hurt")
-			usr.visible_message("\red [user] draws the [holstered], ready to shoot!</span>", \
-			"<span class='warning'>You draw the [holstered], ready to shoot!</span>")
+			usr.visible_message(
+				"\red [user] draws \the [holstered], ready to shoot!</span>", 
+				"<span class='warning'>You draw \the [holstered], ready to shoot!</span>"
+				)
 		else
-			user.visible_message("<span class='notice'>[user] draws the [holstered], pointing it at the ground.</span>", \
-			"<span class='notice'>You draw the [holstered], pointing it at the ground.</span>")
+			user.visible_message(
+				"<span class='notice'>[user] draws \the [holstered], pointing it at the ground.</span>", 
+				"<span class='notice'>You draw \the [holstered], pointing it at the ground.</span>"
+				)
 		user.put_in_hands(holstered)
 		holstered.add_fingerprint(user)
 		holstered = null
@@ -86,6 +81,7 @@
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
+	//can't we just use src here?
 	var/obj/item/clothing/accessory/holster/H = null
 	if (istype(src, /obj/item/clothing/accessory/holster))
 		H = src
@@ -98,10 +94,10 @@
 		usr << "<span class='warning'>Something is very wrong.</span>"
 
 	if(!H.holstered)
-		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
+		var/obj/item/W = usr.get_active_hand()
+		if(!istype(W, /obj/item))
 			usr << "<span class='warning'>You need your gun equiped to holster it.</span>"
 			return
-		var/obj/item/weapon/gun/W = usr.get_active_hand()
 		H.holster(W, usr)
 	else
 		H.unholster(usr)

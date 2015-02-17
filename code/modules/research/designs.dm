@@ -451,7 +451,7 @@ datum/design/circuit/tcom/server
 	name = "server mainframe"
 	id = "tcom-server"
 	build_path = /obj/item/weapon/circuitboard/telecomms/server
-	
+
 datum/design/circuit/tcom/processor
 	name = "processor unit"
 	id = "tcom-processor"
@@ -1312,7 +1312,7 @@ datum/design/item/weapon/rapidsyringe
 	id = "rapidsyringe"
 	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
 	materials = list("$metal" = 5000, "$glass" = 1000)
-	build_path = /obj/item/weapon/gun/syringe/rapidsyringe
+	build_path = /obj/item/weapon/gun/launcher/syringe/rapid
 /*
 datum/design/item/weapon/largecrossbow
 	name = "Energy Crossbow"
@@ -1567,7 +1567,7 @@ datum/design/item/mesons
 	req_tech = list("magnets" = 2, "engineering" = 2)
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
-	
+
 datum/design/item/binaryencrypt
 	name = "Binary encryption key"
 	desc = "Allows for deciphering the binary channel on-the-fly."

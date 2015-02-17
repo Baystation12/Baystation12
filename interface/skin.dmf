@@ -342,6 +342,14 @@ macro "hotkeymode"
 		command = "holster"
 		is-disabled = false
 	elem 
+		name = "J"
+		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
+		name = "CTRL+J"
+		command = "toggle-gun-mode"
+		is-disabled = false
+	elem 
 		name = "Q"
 		command = ".northwest"
 		is-disabled = false

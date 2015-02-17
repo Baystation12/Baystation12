@@ -1220,10 +1220,11 @@
 /mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
 	. = 1
 
-	if(!user)
-		target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
-	else if(!target_zone)
-		target_zone = user.zone_sel.selecting
+	if(!target_zone)
+		if(!user)
+			target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
+		else
+			target_zone = user.zone_sel.selecting
 
 	switch(target_zone)
 		if("head")

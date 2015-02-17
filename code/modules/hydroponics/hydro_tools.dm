@@ -112,7 +112,7 @@
 	else if(grown_seed.heat_tolerance < 10)
 		dat += "<br>It is very sensitive to temperature shifts."
 
-	dat += "<br>It thrives in a light level of [grown_seed.ideal_light] lumen[grown_seed.ideal_light == 1 ? "" : "s"]."
+	dat += "<br>It thrives in a light level of [grown_seed.ideal_light] lumen\s."
 
 	if(grown_seed.light_tolerance > 10)
 		dat += "<br>It is well adapted to a range of light levels."

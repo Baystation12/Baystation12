@@ -1,6 +1,6 @@
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/spikethrower
-	name = "Vox spike thrower"
+	name = "vox spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
 	var/last_regen = 0
@@ -24,7 +24,6 @@
 	..()
 
 /obj/item/weapon/gun/launcher/spikethrower/process()
-
 	if(spikes < max_spikes && world.time > last_regen + spike_gen_time)
 		spikes++
 		last_regen = world.time
@@ -32,35 +31,26 @@
 
 /obj/item/weapon/gun/launcher/spikethrower/examine(mob/user)
 	..(user)
-	user << "It has [spikes] [spikes == 1 ? "spike" : "spikes"] remaining."
+	user << "It has [spikes] spike\s remaining."
 
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
-
-/obj/item/weapon/gun/launcher/spikethrower/emp_act(severity)
-	return
 
 /obj/item/weapon/gun/launcher/spikethrower/special_check(user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species && H.species.name != "Vox" && H.species.name != "Vox Armalis")
-			user << "\red \The [src] does not respond to you!"
+			user << "<span class='warning'>\The [src] does not respond to you!</span>"
 			return 0
-	return 1
+	return ..()
 
 /obj/item/weapon/gun/launcher/spikethrower/update_release_force()
 	return
 
-/obj/item/weapon/gun/launcher/spikethrower/load_into_chamber()
-	if(in_chamber) return 1
-	if(spikes < 1) return 0
-
+/obj/item/weapon/gun/launcher/spikethrower/consume_next_projectile()
+	if(spikes < 1) return null
 	spikes--
-	in_chamber = new /obj/item/weapon/spike(src)
-	return 1
-
-/obj/item/weapon/gun/launcher/spikethrower/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
-	if(..()) update_icon()
+	return new /obj/item/weapon/spike(src)
 
 //This gun only functions for armalis. The on-sprite is too huge to render properly on other sprites.
 /obj/item/weapon/gun/energy/noisecannon
@@ -74,7 +64,7 @@
 
 	force = 10
 	projectile_type = /obj/item/projectile/energy/sonic
-	cell_type = "/obj/item/weapon/cell/super"
+	cell_type = /obj/item/weapon/cell/super
 	fire_delay = 40
 	fire_sound = 'sound/effects/basscannon.ogg'
 
@@ -91,12 +81,8 @@
 			if(H.species.name == "Vox Armalis")
 				..()
 				return
-		user << "\red \The [src] is far too large for you to pick up."
+		user << "<span class='warning'>\The [src] is far too large for you to pick up.</span>"
 		return
-
-/obj/item/weapon/gun/energy/noisecannon/load_into_chamber() //Does not have ammo.
-	in_chamber = new projectile_type(src)
-	return 1
 
 /obj/item/weapon/gun/energy/noisecannon/update_icon()
 	return
@@ -108,7 +94,7 @@
 	icon_state = "particle"
 	damage = 60
 	damage_type = BRUTE
-	flag = "bullet"
+	check_armour = "bullet"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 
 	embed = 0
