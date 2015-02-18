@@ -30,12 +30,12 @@
 	else
 		if(user.a_intent == "hurt")
 			usr.visible_message(
-				"\red [user] draws \the [holstered], ready to shoot!</span>", 
+				"\red [user] draws \the [holstered], ready to shoot!</span>",
 				"<span class='warning'>You draw \the [holstered], ready to shoot!</span>"
 				)
 		else
 			user.visible_message(
-				"<span class='notice'>[user] draws \the [holstered], pointing it at the ground.</span>", 
+				"<span class='notice'>[user] draws \the [holstered], pointing it at the ground.</span>",
 				"<span class='notice'>You draw \the [holstered], pointing it at the ground.</span>"
 				)
 		user.put_in_hands(holstered)
@@ -103,13 +103,19 @@
 		H.unholster(usr)
 
 /obj/item/clothing/accessory/holster/armpit
-	name = "shoulder holster"
+	name = "armpit holster"
 	desc = "A worn-out handgun holster. Perfect for concealed carry"
 	icon_state = "holster"
 	item_color = "holster"
 
 /obj/item/clothing/accessory/holster/waist
-	name = "shoulder holster"
+	name = "waist holster"
 	desc = "A handgun holster. Made of expensive leather."
 	icon_state = "holster"
 	item_color = "holster_low"
+
+/obj/item/clothing/accessory/holster/hip
+	name = "hip holster"
+	desc = "A handgun holster slung low on the hip, draw pardner!"
+	icon_state = "holster_hip"
+	item_color = "holster_hip"
