@@ -94,6 +94,11 @@
 	author = "Johnathan Falcian"
 	title = "Falcian's sketchbook"
 
+/obj/item/clothing/tie/medal/gold/fluff/byron_steward
+	name = "Comidation for Determination And Persistance"
+	desc = "Awarded for excellent service beyond an employee's training, set in splendid, shining gold. The name Byron Steward is engraved on rung, and there are slight indentations from how many times it's been turned over in hand."
+
+
 //////////////////////////////////
 ////////// Usable Items //////////
 //////////////////////////////////

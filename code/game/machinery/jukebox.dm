@@ -39,6 +39,14 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Exterminate", 'sound/music/courtneygears.ogg'),
 		new/datum/track("Rising Sun", 'sound/music/midis/houseoftherisingsun.mid'),
 		new/datum/track("Beyond the Sea", 'sound/music/midis/beyondthesea.mid'),
+		new/datum/track("Bleach", 'sound/music/midis/Bleach_Asterisk.mid'),
+		new/datum/track("Brown", 'sound/music/midis/cb-greatpumpkin.mid'),
+		new/datum/track("Jack", 'sound/music/midis/whatsthis.mid'),
+		new/datum/track("Keys", 'sound/music/midis/KH-Hikari.mid'),
+		new/datum/track("Athletic", 'sound/music/midis/athletic.mid'),
+		new/datum/track("Plumber", 'sound/music/midis/supermarioworld.mid'),
+		new/datum/track("Plumber Part 2", 'sound/music/midis/overworld.mid'),
+		new/datum/track("Cake", 'sound/music/midis/still_alive.mid'),
 	)
 
 /obj/machinery/media/jukebox/New()

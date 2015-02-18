@@ -21,6 +21,7 @@
 
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z in config.station_levels)
+			sleep(rand(1, 4 ))
 			C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
