@@ -62,10 +62,6 @@ var/global/datum/global_init/init = new ()
 	// due to this list not being instantiated.
 	populate_seed_list()
 
-	processScheduler = new
-	processScheduler.setup()
-	processScheduler.start()
-
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
 

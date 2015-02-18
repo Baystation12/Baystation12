@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\modules\clothing\suits\miscellaneous.dm;icons\obj\clothing\hats.dmi;icons\obj\clothing\uniforms.dmi;icons\obj\clothing\shoes.dmi;code\modules\clothing\under\miscellaneous.dm;code\modules\clothing\shoes\miscellaneous.dm;maps\apollo-7.dmm;maps\apollo-1.dmm;code\game\machinery\phoron_sheeter.dm;code\modules\power\singularity\particle_accelerator\particle_control.dm;code\modules\customitems\item_defines.dm;code\modules\clothing\under\ties.dm;code\modules\mob\living\simple_animal\friendly\farm_animals.dm;code\modules\admin\admin.dm;code\modules\admin\topic.dm;code\modules\events\electrical_storm.dm;code\modules\events\event_dynamic.dm;code\game\gamemodes\events.dm;code\modules\events\event_container.dm;code\modules\events\grid_check.dm;code\game\gamemodes\events\power_failure.dm;code\world.dm;baystation12.dme;code\game\machinery\jukebox.dm;code\game\verbs\ooc.dm;code\modules\whotitles.dm;code\__HELPERS\game.dm;code\controllers\configuration.dm;code\game\area\Space Station 13 areas.dm
+WINDOW: code\world.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\__HELPERS code\controllers code\datums code\FEA code\game code\game\area code\game\gamemodes code\game\gamemodes\changeling code\game\gamemodes\events code\game\gamemodes\nuclear code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\atmoalter code\game\machinery\computer code\game\machinery\doors code\game\verbs code\modules code\modules\admin code\modules\clothing code\modules\clothing\shoes code\modules\clothing\suits code\modules\clothing\under code\modules\customitems code\modules\events code\modules\mob code\modules\mob\living code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\power code\modules\power\singularity code\modules\power\singularity\particle_accelerator code\modules\supermatter icons icons\obj icons\obj\clothing maps 
-FILE: code\game\area\Space Station 13 areas.dm
-LAST_COMPILE_TIME: 1424285042
+DIR: core 
+FILE: code\world.dm
+LAST_COMPILE_TIME: 1424287105
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
