@@ -46,6 +46,7 @@
 			dish.info = r
 			dish.analysed = 1
 			dish.loc = src.loc
+			dish.name = "[dish.base_name] ([dish.virus2.name()])"
 			dish = null
 
 			icon_state = "analyser"
