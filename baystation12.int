@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\ATMOSPHERICS\components\binary_devices\pump.dm;code\ATMOSPHERICS\components\binary_devices\circulator.dm;code\modules\power\generator.dm;code\ATMOSPHERICS\components\unary\heat_exchanger.dm;code\ATMOSPHERICS\components\unary\vent_pump.dm;maps\exodus-1.dmm
-LAST_COMPILE_VERSION: 501.1217
-DIR: code code\ATMOSPHERICS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\binary_devices code\ATMOSPHERICS\components\unary code\game code\game\machinery\doors code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\power maps 
-FILE: maps\exodus-1.dmm
-LAST_COMPILE_TIME: 1424008581
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

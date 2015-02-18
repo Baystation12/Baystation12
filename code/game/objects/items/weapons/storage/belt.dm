@@ -7,6 +7,13 @@
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
 
+
+/obj/item/weapon/storage/update_icon()
+	if (ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_belt()
+
+
 /obj/item/weapon/storage/belt/utility
 	name = "tool-belt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
 	desc = "Can hold various tools."
@@ -84,7 +91,7 @@
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
-	item_state = "security"//Could likely use a better one.
+	item_state = "security"
 	storage_slots = 7
 	max_w_class = 3
 	max_combined_w_class = 21

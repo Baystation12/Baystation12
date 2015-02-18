@@ -42,13 +42,13 @@
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "c20r-[round(loaded.len,4)]"
+		icon_state = "c20r-[round(ammo_magazine.stored_ammo.len,4)]"
 	else
 		icon_state = "c20r"
 	return
 
 /obj/item/weapon/gun/projectile/automatic/sts35
-	name = "\improper STS-35 Automatic Rifle"
+	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of make popular on the frontier, despite it's bulk. Uses 7.62mm rounds. It is unmarked."
 	icon_state = "assltrifle"
 	item_state = "shotgun"
@@ -88,7 +88,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
-	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(loaded.len, 25) : "-empty"]"
+	icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
@@ -102,7 +102,7 @@
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user)
+/obj/item/weapon/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, var/allow_dump=1)
 	if(!cover_open)
 		return
 	..()
