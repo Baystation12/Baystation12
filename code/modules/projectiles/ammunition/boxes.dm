@@ -68,6 +68,22 @@
 /obj/item/ammo_magazine/c9mm/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/mc9mmt
+	name = "top mounted magazine (9mm)"
+	icon_state = "9mmt"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 20
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/mc9mmt/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/mc9mmt/rubber
+	name = "top mounted magazine (9mm rubber)"
+	ammo_type = /obj/item/ammo_casing/c9mmr
+
 /obj/item/ammo_magazine/c45
 	name = "ammunition Box (.45)"
 	icon_state = "9mm"
@@ -90,6 +106,19 @@
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a12mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/a556
+	name = "magazine (5.56)"
+	icon_state = "5.56"
+	origin_tech = "combat=2"
+	mag_type = MAGAZINE
+	caliber = "a556"
+	ammo_type = /obj/item/ammo_casing/a556
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a556/empty
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a50

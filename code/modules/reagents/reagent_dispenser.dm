@@ -238,3 +238,15 @@
 	New()
 		..()
 		reagents.add_reagent("virusfood", 1000)
+
+/obj/structure/reagent_dispensers/acid
+	name = "Sulphuric Acid Dispenser"
+	desc = "A dispenser of acid for industrial processes."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "acidtank"
+	amount_per_transfer_from_this = 10
+	anchored = 1
+
+	New()
+		..()
+		reagents.add_reagent("sacid", 1000)
