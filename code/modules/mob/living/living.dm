@@ -514,7 +514,7 @@
 			return
 
 	//resisting grabs (as if it helps anyone...)
-	if ((!( L.stat ) && L.canmove && !( L.restrained() )))
+	if ((!( L.stat ) && !( L.restrained() )))
 		var/resisting = 0
 		for(var/obj/O in L.requests)
 			L.requests.Remove(O)
@@ -522,23 +522,20 @@
 			resisting++
 		for(var/obj/item/weapon/grab/G in usr.grabbed_by)
 			resisting++
-			if (G.state == 1)
-				del(G)
-			else
-				if (G.state == 2)
-					if (prob(25))
-						for(var/mob/O in viewers(L, null))
-							O.show_message(text("\red [] has broken free of []'s grip!", L, G.assailant), 1)
+			switch(G.state)
+				if(GRAB_PASSIVE)
+					del(G)
+				if(GRAB_AGGRESSIVE)
+					if(prob(60)) //same chance of breaking the grab as disarm
+						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s grip!</span>")
 						del(G)
-				else
-					if (G.state == 3)
-						if (prob(5))
-							for(var/mob/O in viewers(usr, null))
-								O.show_message(text("\red [] has broken free of []'s headlock!", L, G.assailant), 1)
-							del(G)
+				if(GRAB_NECK)
+					//If the you move when grabbing someone then it's easier for them to break free. Same if the affected mob is immune to stun.
+					if (((world.time - G.assailant.l_move_time < 20 || !L.stunned) && prob(15)) || prob(3))
+						L.visible_message("<span class='warning'>[L] has broken free of [G.assailant]'s headlock!</span>")
+						del(G)
 		if(resisting)
-			for(var/mob/O in viewers(usr, null))
-				O.show_message(text("\red <B>[] resists!</B>", L), 1)
+			L.visible_message("<span class='danger'>[L] resists!</span>")
 
 
 	//unbuckling yourself
