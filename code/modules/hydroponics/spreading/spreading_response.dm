@@ -1,5 +1,5 @@
 /obj/effect/plant/HasProximity(var/atom/movable/AM)
-	wake_up()
+
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
@@ -11,11 +11,10 @@
 		entangle(M)
 
 /obj/effect/plant/attack_hand(mob/user as mob)
-	wake_up()
+	// Todo, cause damage.
 	manual_unbuckle(user)
 
 /obj/effect/plant/proc/trodden_on(var/mob/living/victim)
-	wake_up()
 	if(!is_mature())
 		return
 	var/mob/living/carbon/human/H = victim

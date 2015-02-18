@@ -1,8 +1,31 @@
+#define NEIGHBOR_REFRESH_TIME 100
+
+/obj/effect/plant/proc/update_neighbors()
+	// Update our list of valid neighboring turfs.
+	neighbors = list()
+	for(var/turf/simulated/floor/floor in range(1,src))
+		if(get_dist(parent, floor) > spread_distance)
+			continue
+		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) )
+			continue
+		if(floor.density)
+			if(!isnull(seed.chems["pacid"]))
+				spawn(rand(5,25)) floor.ex_act(3)
+			continue
+		else if(!floor.Enter(src))
+			continue
+		neighbors |= floor
+	// Update all of our friends.
+	var/turf/T = get_turf(src)
+	for(var/obj/effect/plant/neighbor in range(1,src))
+		neighbor.neighbors -= T
+
 /obj/effect/plant/process()
 
 	// Something is very wrong, kill ourselves.
 	if(!seed)
 		die_off()
+		return 0
 
 	// Handle life.
 	var/turf/simulated/T = get_turf(src)
@@ -10,26 +33,13 @@
 		health -= seed.handle_environment(T, T.return_air(),1)
 	if(health < max_health)
 		health += rand(3,5)
+		refresh_icon()
 		if(health > max_health)
 			health = max_health
-	refresh_icon()
-
-	if(buckled_mob)
-		seed.do_sting(buckled_mob,src)
-		if(seed.get_trait(TRAIT_CARNIVOROUS))
-			seed.do_thorns(buckled_mob,src)
-
-	var/list/possible_locs = list()
-	var/failed_turfs = 0
-
-	for(var/turf/simulated/floor/floor in range(1))
-		if((locate(/obj/effect/plant) in floor.contents) || (locate(/obj/effect/dead_plant) in floor.contents) || floor.density)
-			failed_turfs++
-		if(floor.Enter(src))
-			possible_locs |= floor
-
-	if(health == max_health && failed_turfs > 3 && !plant)
+	else if(health == max_health && !plant)
 		plant = new(T,seed)
+		plant.dir = src.dir
+		plant.transform = src.transform
 		plant.age = seed.get_trait(TRAIT_MATURATION)-1
 		plant.update_icon()
 		if(growth_type==0) //Vines do not become invisible.
@@ -37,42 +47,44 @@
 		else
 			plant.layer = layer + 0.1
 
-	if(possible_locs.len && prob(spread_chance))
+	if(buckled_mob)
+		seed.do_sting(buckled_mob,src)
+		if(seed.get_trait(TRAIT_CARNIVOROUS))
+			seed.do_thorns(buckled_mob,src)
+
+	if(world.time >= last_tick+NEIGHBOR_REFRESH_TIME)
+		last_tick = world.time
+		update_neighbors()
+
+	if(neighbors.len && prob(spread_chance))
+
 		for(var/i=1,i<=seed.get_trait(TRAIT_YIELD),i++)
-			if(!possible_locs.len)
-				break
-			if(prob(spread_into_adjacent))
-				var/turf/target_turf = pick(possible_locs)
-				possible_locs -= target_turf
-				var/obj/effect/plant/child = new(target_turf, seed)
-				child.parent = get_root()
-				child.parent.children |= child
+			if(prob(spread_chance))
+				sleep(rand(3,5))
+				if(!neighbors.len)
+					break
+				var/turf/target_turf = pick(neighbors)
+				var/obj/effect/plant/child = new(get_turf(src),seed,parent)
+				spawn(1) // This should do a little bit of animation.
+					child.loc = target_turf
+					child.update_icon()
+				// Update neighboring squares.
+				for(var/obj/effect/plant/neighbor in range(1,target_turf))
+					neighbor.neighbors -= target_turf
 
-	if(buckled_mob || health != max_health || possible_locs.len)
-		wake_up() // We still need to process!
-
-/obj/effect/plant/proc/wake_up()
-	if(plant_controller)
+	// We shouldn't have spawned if the controller doesn't exist.
+	check_health()
+	if(neighbors.len && health == max_health)
 		plant_controller.add_plant(src)
 
-/obj/effect/plant/proc/die_off(var/no_remains, var/no_del)
-	// Remove ourselves from our parent.
-	if(parent && parent.children)
-		parent.children -= src
-	// Kill off any of our children (and as an added bonus, other plants in this area)
-	for(var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant in get_turf(src))
-		plant.dead = 1
-		plant.update_icon()
-	// Cause the plants around us to update.
-	if(children && children.len)
-		for(var/obj/effect/plant/child in children)
-			child.die_off()
-	for(var/obj/effect/plant/neighbor in view(1,src))
-		neighbor.wake_up()
+/obj/effect/plant/proc/die_off()
+	// Kill off our plant.
+	if(plant) plant.die()
+	// This turf is clear now, let our buddies know.
+	var/turf/T = get_turf(src)
+	for(var/obj/effect/plant/neighbor in range(1,src))
+		neighbor.neighbors |= T
+		plant_controller.add_plant(neighbor)
+	spawn(1) if(src) del(src)
 
-	if(!no_remains && !(locate(/obj/effect/dead_plant) in get_turf(src)))
-		var/obj/effect/dead_plant/plant_remains = new(get_turf(src))
-		plant_remains.icon = src.icon
-		plant_remains.icon_state = src.icon_state
-	if(!no_del)
-		del(src)
+#undef NEIGHBOR_REFRESH_TIME

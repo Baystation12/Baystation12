@@ -443,6 +443,7 @@
 	name = "towercap"
 	seed_name = "tower cap"
 	display_name = "tower caps"
+	chems = list("woodpulp" = list(10,1))
 	mutants = null
 
 /datum/seed/mushroom/towercap/New()

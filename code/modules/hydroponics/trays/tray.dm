@@ -521,7 +521,7 @@
 			A.hydrotray_type = src.type
 			del(src)
 	else if(O.force && seed)
-		user.visible_message("<span class='danger'>\The [src] attacks the [seed.display_name] with \the [O]!</span>")
+		user.visible_message("<span class='danger'>\The [user] attacks the [seed.display_name] with \the [O]!</span>")
 		if(!dead)
 			health -= O.force
 			check_health()

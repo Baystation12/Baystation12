@@ -1,8 +1,8 @@
 // Attempts to offload processing for the spreading plants from the MC.
 // Processes vines/spreading plants.
 
-#define PLANTS_PER_TICK 5
-#define PLANT_TICK_TIME 10
+#define PLANTS_PER_TICK 100
+#define PLANT_TICK_TIME 50
 
 // Debug for testing seed genes.
 /client/proc/show_plant_genes()
@@ -25,9 +25,8 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 
 	var/plants_per_tick = PLANTS_PER_TICK
 	var/plant_tick_time = PLANT_TICK_TIME
-
 	var/list/product_descs = list()         // Stores generated fruit descs.
-	var/list/next_plants = list()           // All queued plants.
+	var/list/plant_queue = list()           // All queued plants.
 	var/list/seeds = list()                 // All seed data stored here.
 	var/list/gene_tag_masks = list()        // Gene obfuscation for delicious trial and error goodness.
 	var/list/plant_icon_cache = list()      // Stores images of growth, fruits and seeds.
@@ -107,6 +106,9 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		if(seed.consume_gasses)
 			seed.consume_gasses["phoron"] = null
 			seed.consume_gasses["carbon_dioxide"] = null
+		if(seed.chems && !isnull(seed.chems["pacid"]))
+			seed.chems["pacid"] = null // Eating through the hull will make these plants completely inviable, albeit very dangerous.
+			seed.chems -= null // Setting to null does not actually remove the entry, which is weird.
 		seed.set_trait(TRAIT_IDEAL_HEAT,293)
 		seed.set_trait(TRAIT_HEAT_TOLERANCE,20)
 		seed.set_trait(TRAIT_IDEAL_LIGHT,8)
@@ -125,19 +127,20 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 				sleep(plant_tick_time)
 			else
 				processed = 0
-				var/list/plants = next_plants
-				next_plants = list()
-				for(var/x=0;x<plants_per_tick;x++)
-					if(!plants.len)
-						break
-					sleep(-1)
-					var/obj/effect/plant/plant = pick(plants)
-					plants -= plant
-					plant.process()
-					processed++
-				if(plants.len)
-					next_plants |= plants
-				sleep(plant_tick_time - processed)
+				if(plant_queue.len)
+					var/target_to_process = min(plant_queue.len,PLANT_TICK_TIME)
+					for(var/x=0;x<target_to_process;x++)
+						if(!plant_queue.len)
+							break
+						var/obj/effect/plant/plant = pick(plant_queue)
+						if(!istype(plant))
+							world << "<span class='danger'>Null or non-plant entry in plant controller queue.</span>"
+							break
+						plant_queue -= plant
+						sleep(1) // Stagger processing out so previous tick can resolve (overlapping plant segments etc)
+						plant.process()
+						processed++
+				sleep(max(1,(plant_tick_time-processed)))
 
 /datum/controller/plants/proc/add_plant(var/obj/effect/plant/plant)
-	next_plants |= plant
+	plant_queue |= plant

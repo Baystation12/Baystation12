@@ -192,6 +192,13 @@ datum
 					M.resistances += self.data
 				return
 
+		woodpulp
+			name = "Wood Pulp"
+			id = "woodpulp"
+			description = "A mass of wood fibers."
+			reagent_state = LIQUID
+			color = "#B97A57"
+
 		#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"

@@ -47,10 +47,11 @@
 
 	for(var/rid in seed.chems)
 		var/list/reagent_data = seed.chems[rid]
-		var/rtotal = reagent_data[1]
-		if(reagent_data.len > 1 && potency > 0)
-			rtotal += round(potency/reagent_data[2])
-		reagents.add_reagent(rid,max(1,rtotal))
+		if(reagent_data && reagent_data.len)
+			var/rtotal = reagent_data[1]
+			if(reagent_data.len > 1 && potency > 0)
+				rtotal += round(potency/reagent_data[2])
+			reagents.add_reagent(rid,max(1,rtotal))
 	update_desc()
 	if(reagents.total_volume > 0)
 		bitesize = 1+round(reagents.total_volume / 2, 1)
@@ -119,7 +120,7 @@
 			desc += " mushroom"
 		else
 			desc += " fruit"
-		plant_controller.product_descs[seed.uid] = desc
+		plant_controller.product_descs["[seed.uid]"] = desc
 	desc += ". Delicious! Probably."
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
@@ -184,7 +185,7 @@
 				del(src)
 				return
 		else if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy))
-			if(seed.get_trait(TRAIT_PRODUCT_ICON) == "mushroom7")
+			if(seed.chems && !isnull(seed.chems["woodpulp"]))
 				user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
 				for(var/i=0,i<2,i++)
 					var/obj/item/stack/sheet/wood/NG = new (user.loc)

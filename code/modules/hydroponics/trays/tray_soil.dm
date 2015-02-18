@@ -19,7 +19,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/CanPass()
 	return 1
 
-// This is a hack pending a proper rewrite of the plant controller.
+// Holder for vine plants.
 // Icons for plants are generated as overlays, so setting it to invisible wouldn't work.
 // Hence using a blank icon.
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible
@@ -43,7 +43,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/harvest()
 	..()
-	if(!seed)
+	if(!seed) // Repeat harvests are a thing.
 		del(src)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/die()
@@ -62,5 +62,4 @@
 	for(var/obj/effect/plant/plant in get_turf(src))
 		if(plant.invisibility == INVISIBILITY_MAXIMUM)
 			plant.invisibility = initial(plant.invisibility)
-		plant.die_off()
 	..()

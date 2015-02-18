@@ -30,8 +30,8 @@
 
 /obj/effect/dead_plant/attackby()
 	..()
-	for(var/obj/effect/plant/neighbor in view(1,src))
-		neighbor.wake_up()
+	for(var/obj/effect/plant/neighbor in range(1))
+		neighbor.update_neighbors()
 	del(src)
 
 /obj/effect/plant
@@ -50,13 +50,12 @@
 	var/growth_type = 0
 	var/max_growth = 0
 
-	var/list/children = list()
+	var/list/neighbors = list()
 	var/obj/effect/plant/parent
 	var/datum/seed/seed
 	var/floor = 0
 	var/spread_chance = 40
 	var/spread_distance = 3
-	var/spread_into_adjacent = 60
 	var/evolve_chance = 2
 	var/last_tick = 0
 	var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/plant
@@ -64,8 +63,13 @@
 /obj/effect/plant/single
 	spread_chance = 0
 
-/obj/effect/plant/New(var/newloc, var/datum/seed/newseed)
+/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent)
 	..()
+
+	if(!newparent)
+		parent = src
+	else
+		parent = newparent
 
 	if(!plant_controller)
 		sleep(250) // ugly hack, should mean roundstart plants are fine.
@@ -102,22 +106,27 @@
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
 
-	spread_into_adjacent = round(seed.get_trait(TRAIT_POTENCY)/2)
-	spread_distance = ((growth_type>0) ? round(spread_into_adjacent/2) : round(spread_into_adjacent/15))
-	spread_chance = round(spread_into_adjacent/2)
+	spread_chance = seed.get_trait(TRAIT_POTENCY)
+	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 
 	set_dir(calc_dir())
 	update_icon()
-	wake_up()
-	last_tick = world.timeofday
+
+	spawn(1)
+		plant_controller.add_plant(src)
+		// Some plants eat through plating.
+		if(!isnull(seed.chems["pacid"]))
+			var/turf/T = get_turf(src)
+			T.ex_act(prob(80) ? 3 : 2)
 
 /obj/effect/plant/update_icon()
-
+	//TODO: should really be caching this.
 	refresh_icon()
 	if(growth_type == 0 && !floor)
 		src.transform = null
 		var/matrix/M = matrix()
-		M.Translate(0,-(rand(12,14))) // should make the plant flush against the wall it's meant to be growing from.
+		// should make the plant flush against the wall it's meant to be growing from.
+		M.Translate(0,-(rand(12,14)))
 		switch(dir)
 			if(WEST)
 				M.Turn(90)
@@ -141,7 +150,13 @@
 		SetLuminosity(0)
 
 /obj/effect/plant/proc/refresh_icon()
-	var/growth = min(max_growth,max(1,round(health/growth_threshold)))
+	var/growth = min(max_growth,round(health/growth_threshold))
+	var/at_fringe = get_dist(src,parent)
+	if(at_fringe >= (spread_distance-3))
+		max_growth--
+	if(at_fringe >= (spread_distance-2))
+		max_growth--
+	max_growth = max(1,max_growth)
 	if(growth_type > 0)
 		switch(growth_type)
 			if(1)
@@ -155,24 +170,14 @@
 	else
 		icon_state = "[seed.get_trait(TRAIT_PLANT_ICON)]-[growth]"
 
-	layer = (growth == max_growth ? 4 : 3)
-
-/obj/effect/plant/Del()
-	if(children && children.len)
-		die_off(null,1)
-	..()
-
-/obj/effect/plant/proc/get_dist_to_parent(var/current_count)
-	if(!parent)
-		return current_count
-	current_count++
-	return parent.get_dist_to_parent(current_count)
-
-/obj/effect/plant/proc/get_root()
-	if(parent)
-		return parent.get_root()
+	if(growth>2 && growth == max_growth)
+		layer = 5
+		opacity = 1
+		if(!isnull(seed.chems["woodpulp"]))
+			density = 1
 	else
-		return src
+		layer = 3
+		density = 0
 
 /obj/effect/plant/proc/calc_dir(turf/location = loc)
 	set background = 1
@@ -209,6 +214,8 @@
 
 /obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
 
+	plant_controller.add_plant(src)
+
 	if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 		if(!seed)
 			user << "There is nothing to take a sample from in \the [src]."
@@ -240,7 +247,7 @@
 
 /obj/effect/plant/proc/check_health()
 	if(health <= 0)
-		die_off(1)
+		die_off()
 
 /obj/effect/plant/proc/is_mature()
 	return (health < (max_health/3))
