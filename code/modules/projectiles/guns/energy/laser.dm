@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
-	desc = "A basic weapon designed to kill with concentrated energy bolts."
+	desc = "A common laser weapon, designed to kill with concentrated energy blasts."
 	icon_state = "laser"
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
@@ -10,6 +10,8 @@
 	matter = list("metal" = 2000)
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = /obj/item/projectile/beam
+	charge_cost = 75
+	fire_delay = 1
 
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1

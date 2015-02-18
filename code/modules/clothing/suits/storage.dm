@@ -49,3 +49,35 @@
 			usr << "You attempt to button-up the velcro on your [src], before promptly realising how silly you are."
 			return
 		update_clothing_icon()	//so our overlays update
+
+
+//New Vest 4 pocket storage and badge toggles, until suit accessories are a thing.
+/obj/item/clothing/suit/storage/vest/heavy/New()
+	..()
+	pockets = new/obj/item/weapon/storage/internal(src)
+	pockets.storage_slots = 4
+	pockets.max_w_class = 2
+	pockets.max_combined_w_class = 8
+
+
+/obj/item/clothing/suit/storage/vest
+	var/icon_badge
+	var/icon_nobadge
+	verb/toggle()
+		set name ="Adjust Badge"
+		set category = "Object"
+		set src in usr
+		if(!usr.canmove || usr.stat || usr.restrained())
+			return 0
+
+		if(icon_state == icon_badge)
+			icon_state = icon_nobadge
+			usr << "You unclip the badge from the vest."
+		else if(icon_state == icon_nobadge)
+			icon_state = icon_badge
+			usr << "You clip the badge to the vest."
+		else
+			usr << "You can't find a badge for [src]."
+			return
+		update_clothing_icon()
+

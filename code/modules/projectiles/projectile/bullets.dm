@@ -34,10 +34,10 @@
 		var/obj/machinery/door/D = A
 		chance = round(damage/D.maxhealth*100)
 	else if(istype(A, /obj/structure/girder) || istype(A, /obj/structure/cultgirder))
-		chance = 100 
+		chance = 100
 	else if(istype(A, /obj/machinery) || istype(A, /obj/structure))
 		chance = 25
-	
+
 	if(prob(chance))
 		if(A.opacity)
 			//display a message so that people on the other side aren't so confused
@@ -131,6 +131,10 @@
 	stun = 3
 	weaken = 3
 	penetrating = 5
+
+/obj/item/projectile/bullet/rifle/a556
+	damage = 50
+	penetrating = 1
 
 /* Miscellaneous */
 
