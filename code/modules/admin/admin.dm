@@ -56,7 +56,7 @@ var/global/floorIsLava = 0
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
 
-	/*var/icwl = icwl_isWhitelisted(M.ckey)
+	//var/icwl = icwl_isWhitelisted(M.ckey)
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -69,9 +69,8 @@ var/global/floorIsLava = 0
 		<A href='?_src_=holder;warn=[M.ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> |
 		<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> |
-		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A> |
-		<A href='?src=\ref[src];icwl=\ref[M]'><font color='[icwl?"blue":"red"]'>ICWL</font></A>
-	"}*/
+		<A href='?src=\ref[src];notes=show;mob=\ref[M]'>Notes</A>
+	"}
 
 	if(M.client)
 		var/iaa = M.iaa
