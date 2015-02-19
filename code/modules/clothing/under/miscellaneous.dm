@@ -470,14 +470,14 @@
 	item_color = "tan_suit"
 
 /obj/item/clothing/under/serviceoveralls
-	name = "Workman outfit"
+	name = "workman outfit"
 	desc = "The very image of a working man. Not that you're probably doing work."
 	icon_state = "mechanic_s"
 	item_state = "mechanic_s"
 	item_color = "mechanic_s"
 
 /obj/item/clothing/under/cheongsam
-	name = "White Cheongsam"
+	name = "white cheongsam"
 	desc = "It is a white cheongsam dress."
 	icon_state = "mai_yang"
 	item_state = "mai_yang"
@@ -485,7 +485,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/jester
-	name = "Jester Suit"
+	name = "jester Suit"
 	desc = "Only a fool would wear such a suit."
 	icon_state = "jester"
 	item_state = "jester"
@@ -500,21 +500,21 @@
 	min_cold_protection_temperature = T0C - 20
 
 /obj/item/clothing/under/roman
-	name = "Roman soldier's uniform"
+	name = "roman soldier's uniform"
 	desc = "A recreation of the ancient roman attire!"
 	icon_state = "roman"
 	item_state = "roman"
 	item_color = "roman"
 
 /obj/item/clothing/under/biomech
-	name = "Biomechanic jumpsuit"
+	name = "biomechanic jumpsuit"
 	desc = "Perfect for those creating monstrosities of man and machine."
 	icon_state = "biomech"
 	item_state = "biomech"
 	item_color = "biomech"
 
 /obj/item/clothing/under/entertainer
-	name = "Entertainer's jumpsuit"
+	name = "entertainer's jumpsuit"
 	desc = "An entertaining suit for an entertaining man."
 	icon_state = "entertainer"
 	item_state = "entertainer"

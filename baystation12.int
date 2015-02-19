@@ -1,9 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\world.dm;code\controllers\master_controller.dm
+WINDOW: code\world.dm;code\controllers\master_controller.dm;code\modules\clothing\under\miscellaneous.dm;icons\obj\machines\phoron_compressor.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: maps 
+DIR: code code\controllers code\game code\game\machinery code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\effects\decals\Cleanable code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\melee code\game\objects\items\weapons\storage code\modules code\modules\clothing code\modules\clothing\head code\modules\clothing\under code\ZAS icons icons\mob icons\obj icons\obj\machines maps 
+FILE: icons\obj\machines\phoron_compressor.dmi
 LAST_COMPILE_TIME: 1424357817
 AUTO_FILE_DIR: OFF
 */
