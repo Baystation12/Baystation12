@@ -36,7 +36,7 @@
 	var/tmp/message_title = new_title ? new_title : title
 	var/tmp/message_sound = new_sound ? sound(new_sound) : sound
 
-	message = html_encode(message)
+	message = trim_strip_html_properly(message)
 	message_title = html_encode(message_title)
 
 	Message(message, message_title)
