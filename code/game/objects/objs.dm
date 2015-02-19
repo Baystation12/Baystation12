@@ -16,7 +16,7 @@
 	var/damtype = "brute"
 	var/force = 0
 
-/obj/Topic(href, href_list, var/nowindow = 0, var/checkrange = 1)
+/obj/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/custom_state)
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(!nowindow && ..())
 		return 1
@@ -24,7 +24,7 @@
 	// In the far future no checks are made in an overriding Topic() beyond if(..()) return
 	// Instead any such checks are made in CanUseTopic()
 	var/obj/host = nano_host()
-	if(host.CanUseTopic(usr, checkrange) == STATUS_INTERACTIVE)
+	if(host.CanUseTopic(usr, href_list, custom_state) == STATUS_INTERACTIVE)
 		CouldUseTopic(usr)
 		return 0
 

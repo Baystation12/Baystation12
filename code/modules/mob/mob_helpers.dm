@@ -80,6 +80,12 @@
 		return 1
 	return 0
 
+/mob/proc/isSilicon()
+	return 0
+
+/mob/living/silicon/isSilicon()
+	return 1
+    
 /mob/proc/isAI()
 	return 0
 

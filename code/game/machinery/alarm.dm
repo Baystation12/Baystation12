@@ -479,22 +479,29 @@
 	ui_interact(user)
 	wires.Interact(user)
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, remote = 0)
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, var/master_ui = null, var/datum/topic_state/custom_state = null)
 	var/data[0]
-	var/is_locked = locked && !user.isAI()
+	var/remote_connection = 0
+	var/remote_access = 0
+	if(custom_state)
+		var/list/state = custom_state.href_list(user)
+		remote_connection = state["remote_connection"]	// Remote connection means we're non-adjacent/connecting from another computer
+		remote_access = state["remote_access"]			// Remote access means we also have the privilege to alter the air alarm.
 
-	data["locked"] = is_locked
+	data["locked"] = locked && !user.isSilicon()
+	data["remote_connection"] = remote_connection
+	data["remote_access"] = remote_access
 	data["rcon"] = rcon_setting
 	data["screen"] = screen
 
 	populate_status(data)
 
-	if(!is_locked)
+	if(!(locked && !remote_connection) || remote_access || user.isSilicon())
 		populate_controls(data)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "air_alarm.tmpl", src.name, 625, 625)
+		ui = new(user, src, ui_key, "air_alarm.tmpl", src.name, 625, 625, master_ui = master_ui, custom_state = custom_state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -619,7 +626,7 @@
 
 			data["thresholds"] = thresholds
 
-/obj/machinery/alarm/CanUseTopic(var/mob/user)
+/obj/machinery/alarm/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
 	if(buildstage != 2)
 		return STATUS_CLOSE
 
@@ -629,10 +636,18 @@
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
 
+	if(. == STATUS_INTERACTIVE)
+		var/extra_href = custom_state.href_list(usr)
+		// Prevent remote users from altering RCON settings unless they already have access (I realize the risks)
+		if(href_list["rcon"] && extra_href["remote_connection"] && !extra_href["remote_access"])
+			. = STATUS_UPDATE
+
+		//TODO: Move the rest of if(!locked || extra_href["remote_access"] || usr.isAI()) and hrefs here
+
 	return min(..(), .)
 
-/obj/machinery/alarm/Topic(href, href_list, var/nowindow = 0, var/remote = 0)
-	if(..(href, href_list, nowindow, !remote))
+/obj/machinery/alarm/Topic(href, href_list, var/nowindow = 0, var/datum/topic_state/custom_state)
+	if(..(href, href_list, nowindow, custom_state))
 		return 1
 
 	// hrefs that can always be called -walter0o
@@ -661,8 +676,8 @@
 		return 1
 
 	// hrefs that need the AA unlocked -walter0o
-	if(!locked || remote || istype(usr, /mob/living/silicon))
-
+	var/extra_href = custom_state.href_list(usr)
+	if(!(locked && !extra_href["remote_connection"]) || extra_href["remote_access"] || usr.isSilicon())
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])

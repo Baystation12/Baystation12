@@ -52,6 +52,11 @@ nanoui is used to open and update nano browser uis
 	// the current status/visibility of the ui
 	var/status = STATUS_INTERACTIVE
 
+	// Relationship between a master interface and its children. Used in update_status
+	var/datum/nanoui/master_ui
+	var/list/datum/nanoui/children = list()
+	var/datum/topic_state/custom_state = null
+
 	var/cached_data = null
 
  /**
@@ -68,17 +73,22 @@ nanoui is used to open and update nano browser uis
   *
   * @return /nanoui new nanoui object
   */
-/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
+/datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate_filename, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null, var/datum/nanoui/master_ui = null, var/datum/topic_state/custom_state = null)
 	user = nuser
 	src_object = nsrc_object
 	ui_key = nui_key
 	window_id = "[ui_key]\ref[src_object]"
 
+	src.master_ui = master_ui
+	if(master_ui)
+		master_ui.children += src
+	src.custom_state = custom_state ? custom_state : new/datum/topic_state()
+
 	// add the passed template filename as the "main" template, this is required
 	add_template("main", ntemplate_filename)
 
 	if (ntitle)
-		title = ntitle
+		title = sanitize(ntitle)
 	if (nwidth)
 		width = nwidth
 	if (nheight)
@@ -132,15 +142,14 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update_status(var/push_update = 0)
-	var/new_status = get_status()
+	var/atom/movable/host = src_object.nano_host()
+	var/new_status = host.CanUseTopic(user, list(), custom_state)
+	if(master_ui)
+		new_status = min(new_status, master_ui.status)
 	if(new_status == STATUS_CLOSE)
 		close()
 	else
 		set_status(new_status, push_update)
-
-/datum/nanoui/proc/get_status()
-	var/atom/movable/host = src_object.nano_host()
-	return host.CanUseTopic(user)
 
  /**
   * Set the ui to auto update (every master_controller tick)
@@ -383,10 +392,6 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/open()
-	var/new_status = get_status()
-	if(new_status == STATUS_CLOSE)
-		return
-
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
@@ -406,6 +411,8 @@ nanoui is used to open and update nano browser uis
 	is_auto_updating = 0
 	nanomanager.ui_closed(src)
 	user << browse(null, "window=[window_id]")
+	for(var/datum/nanoui/child in children)
+		child.close()
 
  /**
   * Set the UI window to call the nanoclose verb when the window is closed
@@ -470,7 +477,7 @@ nanoui is used to open and update nano browser uis
 		set_map_z_level(text2num(href_list["mapZLevel"]))
 		map_update = 1
 
-	if ((src_object && src_object.Topic(href, href_list)) || map_update)
+	if ((src_object && src_object.Topic(href, href_list, 0, custom_state)) || map_update)
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object
 
  /**
@@ -497,5 +504,4 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/update(var/force_open = 0)
-	src_object.ui_interact(user, ui_key, src, force_open)
-
+	src_object.ui_interact(user, ui_key, src, force_open, master_ui, custom_state)

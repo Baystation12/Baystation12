@@ -5,11 +5,11 @@
 	return loc
 
 
-/atom/movable/proc/CanUseTopic(var/mob/user, var/be_close)
-	return user.can_use_topic(nano_host(), be_close)
+/atom/movable/proc/CanUseTopic(var/mob/user, href_list, var/datum/topic_state/custom_state)
+	return user.can_use_topic(nano_host(), custom_state)
 
 
-/mob/proc/can_use_topic(var/src_object)
+/mob/proc/can_use_topic(var/mob/user, var/datum/topic_state/custom_state)
 	return STATUS_CLOSE // By default no mob can do anything with NanoUI
 
 /mob/dead/observer/can_use_topic()
@@ -23,12 +23,13 @@
 	else
 		return ..()
 
-/mob/living/silicon/robot/can_use_topic(var/src_object)
+/mob/living/silicon/robot/can_use_topic(var/src_object, var/datum/topic_state/custom_state)
 	if(stat || !client)
 		return STATUS_CLOSE
 	if(lockcharge || stunned || weakened)
 		return STATUS_DISABLED
-	if (src_object in view(src))	// robots can interact with things they can see within their view range
+	// robots can interact with things they can see within their view range
+	if(!(custom_state.flags & NANO_IGNORE_DISTANCE) && (src_object in view(src)))
 		return STATUS_INTERACTIVE	// interactive (green visibility)
 	return STATUS_DISABLED			// no updates, completely disabled (red visibility)
 
@@ -96,16 +97,22 @@
 		return STATUS_DISABLED 		// no updates, completely disabled (red visibility)
 	return STATUS_CLOSE
 
-/mob/living/can_use_topic(var/src_object, var/be_close = 1)
+/mob/living/can_use_topic(var/src_object, var/datum/topic_state/custom_state)
 	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE && be_close)
+	if(. == STATUS_INTERACTIVE && !(custom_state.flags & NANO_IGNORE_DISTANCE))
 		. = shared_living_nano_distance(src_object)
 	if(STATUS_INTERACTIVE)
 		return STATUS_UPDATE
 
-/mob/living/carbon/human/can_use_topic(var/src_object, var/be_close = 1)
+/mob/living/carbon/human/can_use_topic(var/src_object, var/datum/topic_state/custom_state)
 	. = shared_living_nano_interaction(src_object)
-	if(. == STATUS_INTERACTIVE && be_close)
+	if(. == STATUS_INTERACTIVE && !(custom_state.flags & NANO_IGNORE_DISTANCE))
 		. = shared_living_nano_distance(src_object)
 		if(. == STATUS_UPDATE && (TK in mutations))	// If we have telekinesis and remain close enough, allow interaction.
 			return STATUS_INTERACTIVE
+
+/datum/topic_state
+	var/flags = 0
+
+/datum/topic_state/proc/href_list(var/mob/user)
+	return list()

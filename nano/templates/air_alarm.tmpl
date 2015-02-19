@@ -60,9 +60,9 @@ Used In File(s): \code\game\machinery\alarm.dm
                     <td>
                         <div class="item">
                             <div class="itemContent" style="width: 100%;">	
-                                {{:helper.link('Off', null, { 'rcon' : 1}, null, data.rcon == 1 ? 'selected' : null)}}
-                                {{:helper.link('Auto', null, { 'rcon' : 2}, null, data.rcon == 2 ? 'selected' : null)}}
-                                {{:helper.link('On', null, { 'rcon' : 3}, null, data.rcon == 3 ? 'selected' : null)}}
+                                {{:helper.link('Off',	null, { 'rcon' : 1}, data.remote_connection && !data.remote_access ? (data.rcon == 1 ? 'yellowButton' : 'disabled') : null, data.rcon == 1 ? 'selected' : null)}}
+                                {{:helper.link('Auto',	null, { 'rcon' : 2}, data.remote_connection && !data.remote_access ? (data.rcon == 2 ? 'yellowButton' : 'disabled') : null, data.rcon == 2 ? 'selected' : null)}}
+                                {{:helper.link('On',	null, { 'rcon' : 3}, data.remote_connection && !data.remote_access ? (data.rcon == 3 ? 'yellowButton' : 'disabled') : null, data.rcon == 3 ? 'selected' : null)}}
                             </div>
                         </div>
                     </td>
@@ -74,8 +74,12 @@ Used In File(s): \code\game\machinery\alarm.dm
         </tr>
     </table>
 <HR>
-{{if data.locked}}
-    <span class='noticePlaceholder'>(Swipe ID card to unlock interface)</span>
+{{if data.locked || (data.remote_connection && ! data.remote_access)}}
+	{{if data.remote_connection}}
+		<span class='noticePlaceholder'>(Current remote control settings and alarm status restricts access.)</span>
+	{{else}}
+		<span class='noticePlaceholder'>(Swipe ID card to unlock interface.)</span>
+	{{/if}}
 {{else}}
     {{if data.screen != 1}}
         <div class="item">{{:helper.link('Main Menu', null, { 'screen' : 1})}}</div>
