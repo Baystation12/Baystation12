@@ -4,7 +4,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flashlight"
 	item_state = "flashlight"
-	l_color = "#050500"
+	l_color = null
 	w_class = 2
 	flags = CONDUCT
 	slot_flags = SLOT_BELT

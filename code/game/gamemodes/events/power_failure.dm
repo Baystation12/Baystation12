@@ -21,8 +21,8 @@
 
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z in config.station_levels)
-			sleep(rand(1, 4 ))
-			C.cell.charge = 0
+			spawn(1)
+				C.cell.charge = 0
 
 /proc/power_restore(var/announce = 1)
 	var/list/skipped_areas = list(/area/turret_protected/ai)

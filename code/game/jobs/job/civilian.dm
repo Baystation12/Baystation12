@@ -345,10 +345,10 @@
 		else
 			if(H.backbag == 2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
 			if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/burgundy(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/entertainer(H), slot_w_uniform)
 			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 			H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_belt)
-			H.equip_to_slot_or_del(new /obj/item/clothing/head/collectable/tophat(H), slot_head)
+			H.equip_to_slot_or_del(new /obj/item/clothing/head/entertainer(H), slot_head)
 			if(H.backbag == 1)
 				H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 			else

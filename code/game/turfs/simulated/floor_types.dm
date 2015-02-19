@@ -9,14 +9,14 @@
 		..()
 		name = "floor"
 
-/turf/simulated/floor/airless/ceiling
-	icon_state = "ceiling"
-	desc = "There's probably a room under this."
+/turf/simulated/floor/airless/hull
+	icon_state = "hull"
+	desc = "There's probably something under this."
 	lighting_lumcount = 2
 
 	New()
 		..()
-		name = "ceiling"
+		name = "hull"
 
 /turf/simulated/floor/light
 	name = "Light floor"

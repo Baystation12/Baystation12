@@ -1950,9 +1950,9 @@ var/list/ghostteleportlocs = list()
 	icon_state = "tcomsatcham"
 
 /area/turret_protected/tcomsat
-	name = "\improper Telecoms Satellite"
+	name = "\improper Abandoned Satellite"
 	icon_state = "tcomsatlob"
-	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+	ambience = list('sound/ambience/ambispace.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg','sound/ambience/ambispace1.ogg' )
 
 /area/turret_protected/tcomfoyer
 	name = "\improper Telecoms Foyer"

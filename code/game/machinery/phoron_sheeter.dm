@@ -4,8 +4,8 @@
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 0
-	delay = 60
 	var/ready = 0
+	var/active = 0
 
 	proc/report_ready()
 		return ready
@@ -18,6 +18,7 @@
 	var/datum/gas_mixture/air_contents = new
 	var/heating_power = 500000
 	active_power_usage = 500000
+	var/set_temperature = 100000
 
 	New()
 		..()
@@ -25,7 +26,7 @@
 		desc = "Gas goes into here to be superheated to prepare for crystalization."
 		icon_state = "Pumped"
 
-	Process()
+	process()
 		..()
 
 		air_contents.react()
@@ -34,10 +35,9 @@
 		if( active )
 			icon_state = "Pumping"
 			heat_gas()
-			idle_power_usage = heat_transfer
 
 	report_ready()
-		for( /obj/machinery/phoron_desublimer/M in orange(src) )
+		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
 			if( istype( M, /obj/machinery/phoron_desublimer/crystalizer ))
 				ready = 1
 
@@ -48,6 +48,7 @@
 
 		heat_transfer = min( heat_transfer , heating_power ) //limit by the power rating of the heater
 
+		idle_power_usage = heat_transfer
 		air_contents.add_thermal_energy(heat_transfer)
 
 
@@ -64,7 +65,7 @@
 		desc = "Superheated"
 		icon_state = "ProcessorEmpty"
 
-	Process()
+	process()
 		..()
 		if( active )
 			icon_state = "ProcessorFull"
@@ -81,7 +82,7 @@
 		var/gas_intake = 0
 		var/compressor = 0
 
-		for( /obj/machinery/phoron_desublimer/M in orange(src) )
+		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
 			if( istype( M, /obj/machinery/phoron_desublimer/gas_intake ))
 				gas_intake = 1
 			else if( istype( M, /obj/machinery/phoron_desublimer/compressor ))
@@ -104,7 +105,7 @@
 		desc = "Moulds the phoron crystal into a sheet."
 		icon_state = "Pressed"
 
-	Process()
+	process()
 		..()
 
 		if( active )
@@ -117,7 +118,7 @@
 		active = 0
 
 	report_ready()
-		for( /obj/machinery/phoron_desublimer/M in orange(src) )
+		for( var/obj/machinery/phoron_desublimer/M in orange(src) )
 			if( istype( M, /obj/machinery/phoron_desublimer/crystalizer ))
 				ready = 1
 
@@ -132,8 +133,7 @@
 
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength
-	construction_state = 0
-	active = 0
+	var/active = 0
 
 	var/list/obj/machinery/phoron_desublimer/connected_parts
 
@@ -143,14 +143,44 @@
 		desc = "Controls the phoron desublimation process."
 		icon_state = "Ready"
 
+
 	proc/find_parts()
 		for( var/obj/machinery/phoron_desublimer/PD in orange(src) )
 			if(istype(PD, type))
 				if(PD.report_ready())
-					src.connected_parts.Add(PA)
+					src.connected_parts.Add(PD)
+
+		return 1
 
 	proc/check_parts()
 		for( var/obj/machinery/phoron_desublimer/PD in orange(src) )
 			if(istype(PD, type))
 				if(PD.report_ready())
-					src.connected_parts.Add(PA)
+					src.connected_parts.Add(PD)
+
+	interact(mob/user)
+		var/assembled = 0
+
+		if(find_parts())
+			assembled = 1
+
+		if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
+			if(!istype(user, /mob/living/silicon))
+				user.unset_machine()
+				user << browse(null, "window=pacontrol")
+				return
+		user.set_machine(src)
+
+		var/dat = ""
+		dat += "Phoron Desublimer Controller<BR>"
+		dat += "<A href='?src=\ref[src];close=1'>Close</A><BR><BR>"
+		dat += "Status:<BR>"
+		if(!assembled)
+			dat += "Unable to detect all parts!<BR>"
+			dat += "<A href='?src=\ref[src];scan=1'>Run Scan</A><BR><BR>"
+		else
+			dat += "All parts in place.<BR><BR>"
+
+		user << browse(dat, "window=pdcontrol;size=420x500")
+		onclose(user, "pdcontrol")
+		return

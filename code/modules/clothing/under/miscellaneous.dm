@@ -512,3 +512,10 @@
 	icon_state = "biomech"
 	item_state = "biomech"
 	item_color = "biomech"
+
+/obj/item/clothing/under/entertainer
+	name = "Entertainer's jumpsuit"
+	desc = "An entertaining suit for an entertaining man."
+	icon_state = "entertainer"
+	item_state = "entertainer"
+	item_color = "entertainer"

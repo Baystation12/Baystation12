@@ -198,6 +198,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 /obj/fire/Del()
 	if (istype(loc, /turf/simulated))
 		SetLuminosity(0)
+		loc.l_color = null
 		l_color = null
 		loc = null
 	air_master.active_hotspots.Remove(src)
@@ -208,6 +209,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 /obj/fire/proc/RemoveFire()
 	if (istype(loc, /turf))
 		SetLuminosity(0)
+		loc.l_color = null
 		l_color = null
 		loc = null
 	air_master.active_hotspots.Remove(src)

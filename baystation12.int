@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\world.dm;code\controllers\master_controller.dm
+WINDOW: icons\obj\clothing\uniforms.dmi;icons\obj\clothing\shoes.dmi;code\modules\clothing\under\miscellaneous.dm;icons\obj\objects.dmi;icons\mob\uniform.dmi;code\modules\clothing\shoes\miscellaneous.dm;maps\apollo-1.dmm;code\game\machinery\phoron_sheeter.dm;icons\mob\head.dmi;code\modules\mob\new_player\preferences_setup.dm;code\game\jobs\jobs.dm;code\game\jobs\job\civilian.dm;code\modules\clothing\head\jobs.dm;icons\mob\items_lefthand.dmi;icons\mob\items_righthand.dmi;icons\obj\clothing\hats.dmi;icons\obj\machines\phoron_compressor.dmi
 LAST_COMPILE_VERSION: 506.1249
-DIR: code code\controllers 
-FILE: code\controllers\master_controller.dm
-LAST_COMPILE_TIME: 1424298094
+DIR: code code\game code\game\gamemodes\changeling code\game\gamemodes\events code\game\gamemodes\events\holidays code\game\jobs code\game\jobs\job code\game\machinery code\game\objects code\game\objects\items code\modules code\modules\clothing code\modules\clothing\head code\modules\clothing\shoes code\modules\clothing\under code\modules\clothing\under\jobs code\modules\mob code\modules\mob\new_player icons icons\mob icons\obj icons\obj\clothing icons\obj\machines maps 
+FILE: code\modules\mob\new_player\preferences_setup.dm
+LAST_COMPILE_TIME: 1424326309
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

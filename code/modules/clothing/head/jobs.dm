@@ -2,7 +2,6 @@
 //Bartender
 /obj/item/clothing/head/chefhat
 	name = "chef's hat"
-	desc = "It's a hat used by chefs to keep hair out of your food. Judging by the food in the mess, they don't work."
 	icon_state = "chefhat"
 	item_state = "chefhat"
 	desc = "The commander in chef's head wear."
@@ -105,3 +104,10 @@
 /obj/item/clothing/head/surgery/green
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is dark green."
 	icon_state = "surgcap_green"
+
+/obj/item/clothing/head/entertainer
+	name = "entertainer's hat"
+	desc = "Perhaps you could pull a rabbit out of this!"
+	icon_state = "entertainerhat"
+	item_state = "entertainerhat"
+	siemens_coefficient = 0.9
