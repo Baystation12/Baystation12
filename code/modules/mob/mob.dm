@@ -868,7 +868,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
-	else if( stunned )
+	else if(stunned)
 		canmove = 0
 	else if(captured)
 		anchored = 1
@@ -884,6 +884,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 		drop_r_hand()
 	else
 		density = 1
+
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.
