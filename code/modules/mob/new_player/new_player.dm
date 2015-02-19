@@ -280,7 +280,7 @@
 		if(!job)	return 0
 		if((job.current_positions >= job.total_positions) && job.total_positions != -1)	return 0
 		if(jobban_isbanned(src,rank))	return 0
-		if(!icwl_canHaveJob(src, rank))	return 0
+	//	if(!icwl_canHaveJob(src, rank))	return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
 
@@ -371,8 +371,8 @@
 					dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 		dat += "Choose from the following open positions:<br>"
-		if(!icwl_isWhitelisted(src.ckey))
-			dat += "Your account has not been added to the IC Whitelist so some jobs may not be avalible due to your age or species...<br><br>"
+		//if(!icwl_isWhitelisted(src.ckey))
+		//	dat += "Your account has not been added to the IC Whitelist so some jobs may not be avalible due to your age or species...<br><br>"
 
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))

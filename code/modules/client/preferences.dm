@@ -509,9 +509,9 @@ datum/preferences
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
-		if(!icwl_canHaveJob(user, rank))
+		/*if(!icwl_canHaveJob(user, rank))
 			HTML += "<del>[rank]</del></td><td><b> \[ICWL]</b></td></tr>"
-			continue
+			continue*/
 		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 			continue

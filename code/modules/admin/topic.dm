@@ -2991,7 +2991,7 @@
 				vsc.SetDefault(usr)
 
 	// Maxis
-	else if(href_list["icwl"])
+	/*else if(href_list["icwl"])
 		if(check_rights(R_MOD|R_ADMIN))
 
 			var/mob/M = locate(href_list["icwl"])
@@ -3006,7 +3006,7 @@
 				log_admin("[key_name_admin(usr)] has whitelisted [M.ckey]")
 
 			show_player_panel(M)
-
+*/
 	else if(href_list["iaa"])
 		if(check_rights(R_ADMIN))
 
