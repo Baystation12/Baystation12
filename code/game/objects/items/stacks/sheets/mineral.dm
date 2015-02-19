@@ -137,9 +137,10 @@ obj/item/stack/sheet/mineral/iron/New()
 	recipes = plastic_recipes
 
 /obj/item/stack/sheet/mineral/plastic/cyborg
-	name = "plastic sheets"
-	icon_state = "sheet-plastic"
-	perunit = 2000
+	name = "plastic sheets synthesizer"
+	gender = MALE
+	uses_charge = 1
+	charge_cost = 1000
 	stacktype = /obj/item/stack/sheet/mineral/plastic
 
 /obj/item/stack/sheet/mineral/gold

@@ -162,7 +162,7 @@
 		if(istype(occupant, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = occupant
 			if(R.module)
-				R.module.respawn_consumable(R)
+				R.module.respawn_consumable(R, charge_rate)
 			if(!R.cell)
 				return
 			if(!R.cell.fully_charged())

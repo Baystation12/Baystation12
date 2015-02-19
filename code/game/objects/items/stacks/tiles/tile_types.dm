@@ -1,9 +1,18 @@
 /* Diffrent misc types of tiles
  * Contains:
+ *		Prototype
  *		Grass
  *		Wood
  *		Carpet
  */
+ 
+/obj/item/stack/tile
+	name = "tile"
+	singular_name = "tile"
+	desc = "A non-descript floor tile"
+	w_class = 3
+	max_amount = 60
+	var/build_type = null
 
 /*
  * Grass
@@ -13,13 +22,11 @@
 	singular_name = "grass floor tile"
 	desc = "A patch of grass like they often use on golf courses."
 	icon_state = "tile_grass"
-	w_class = 3.0
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
 	flags = CONDUCT
-	max_amount = 60
 	origin_tech = "biotech=1"
 
 /*
@@ -30,13 +37,19 @@
 	singular_name = "wood floor tile"
 	desc = "An easy to fit wooden floor tile."
 	icon_state = "tile-wood"
-	w_class = 3.0
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
 	flags = CONDUCT
-	max_amount = 60
+
+/obj/item/stack/tile/wood/cyborg
+	name = "wood floor tile synthesizer"
+	desc = "A device that makes wood floor tiles."
+	uses_charge = 1
+	charge_cost = 250
+	stacktype = /obj/item/stack/tile/wood
+	build_type = /obj/item/stack/tile/wood
 
 /*
  * Carpets
@@ -46,10 +59,8 @@
 	singular_name = "carpet"
 	desc = "A piece of carpet. It is the same size as a normal floor tile!"
 	icon_state = "tile-carpet"
-	w_class = 3.0
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
 	flags = CONDUCT
-	max_amount = 60

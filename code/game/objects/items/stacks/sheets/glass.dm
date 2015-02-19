@@ -22,12 +22,13 @@
 	var/list/construction_options = list("One Direction", "Full Window")
 
 /obj/item/stack/sheet/glass/cyborg
-	name = "glass"
-	desc = "HOLY SHEET! That is a lot of glass."
-	singular_name = "glass sheet"
-	icon_state = "sheet-glass"
+	name = "glass synthesizer"
+	desc = "A device that makes glass."
+	gender = MALE
+	singular_name = "glass"
 	matter = null
-	created_window = /obj/structure/window/basic
+	uses_charge = 1
+	charge_cost = 1000
 	stacktype = /obj/item/stack/sheet/glass
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -69,7 +70,7 @@
 	if(!user.IsAdvancedToolUser())
 		return 0
 	var/title = "Sheet-[name]"
-	title += " ([src.amount] sheet\s left)"
+	title += " ([src.get_amount()] sheet\s left)"
 	switch(input(title, "What would you like to construct?") as null|anything in construction_options)
 		if("One Direction")
 			if(!src)	return 1
@@ -102,7 +103,7 @@
 		if("Full Window")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
-			if(src.amount < 4)
+			if(src.get_amount() < 4)
 				user << "\red You need more glass to do that."
 				return 1
 			if(locate(/obj/structure/window) in user.loc)
@@ -124,7 +125,7 @@
 				user << "\red There is already a windoor in that location."
 				return 1
 
-			if(src.amount < 5)
+			if(src.get_amount() < 5)
 				user << "\red You need more glass to do that."
 				return 1
 
@@ -151,10 +152,33 @@
 	construction_options = list("One Direction", "Full Window", "Windoor")
 
 /obj/item/stack/sheet/glass/reinforced/cyborg
-	name = "reinforced glass"
-	desc = "Glass which has been reinforced with metal rods."
+	name = "reinforced glass synthesizer"
+	desc = "A device that makes reinforced glass."
+	gender = MALE
+	matter = null
+	uses_charge = 1
+	charge_cost = 1000
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
+	var/datum/matter_synth/metal_synth
+	var/datum/matter_synth/glass_synth
+	var/metal_charge = 500
+	var/glass_charge = 1000
+
+/obj/item/stack/sheet/glass/reinforced/cyborg/get_amount()
+	return min(round(metal_synth.energy / metal_charge), round(glass_synth.energy / glass_charge))
+
+/obj/item/stack/sheet/glass/reinforced/cyborg/use(var/amount) // Requires special checks, because it uses two storages
+	if(get_amount() < amount)
+		return 0
+	metal_synth.use_charge(amount * metal_charge)
+	glass_synth.use_charge(amount * glass_charge)
+	return 1
+
+/obj/item/stack/sheet/glass/reinforced/cyborg/add(var/amount)
+	metal_synth.add_charge(amount * metal_charge)
+	glass_synth.add_charge(amount * glass_charge)
+	return
 
 /*
  * Phoron Glass sheets

@@ -7,9 +7,9 @@
 	flags = CONDUCT
 	var/channels = list()
 	var/list/modules = list()
+	var/list/datum/matter_synth/synths = list()
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
-	var/list/stacktypes
 
 /obj/item/weapon/robot_module/emp_act(severity)
 	if(modules)
@@ -17,40 +17,19 @@
 			O.emp_act(severity)
 	if(emag)
 		emag.emp_act(severity)
+	if(synths)
+		for(var/datum/synth/S in synths)
+			S.emp_act(severity)
 	..()
 	return
 
-/obj/item/weapon/robot_module/New()
-	..()
-	// Build initial inventory.
-	if(stacktypes && stacktypes.len)
-		for(var/stack_type in stacktypes)
-			var/obj/item/stack/new_stack = new stack_type (src)
-			new_stack.amount = stacktypes[stack_type]
-			modules |= new_stack
+/obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 
-/obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R)
+	if(!synths || !synths.len)
+		return
 
-	if(!stacktypes || !stacktypes.len) return
-
-	for(var/T in stacktypes)
-		var/obj/item/stack/S
-		for(var/obj/O in src.modules)
-			if(O.type == T)
-				S = O
-				break
-
-		if(!S)
-			src.modules -= null
-			S = new T(src)
-			src.modules |= S
-			S.amount = 1
-
-		if(!istype(S))
-			continue
-
-		if(S && S.amount < stacktypes[T])
-			S.amount++
+	for(var/datum/matter_synth/T in synths)
+		T.add_charge(amount * amount)
 
 /obj/item/weapon/robot_module/proc/rebuild()//Rebuilds the list so it's possible to add/remove items from the module
 	var/list/temp_list = modules
@@ -84,10 +63,6 @@
 
 /obj/item/weapon/robot_module/surgeon
 	name = "surgeon robot module"
-	stacktypes = list(
-		/obj/item/stack/medical/advanced/bruise_pack = 5,
-		/obj/item/stack/nanopaste = 5
-		)
 
 /obj/item/weapon/robot_module/surgeon/New()
 	..()
@@ -104,26 +79,34 @@
 	src.modules += new /obj/item/weapon/circular_saw(src)
 	src.modules += new /obj/item/weapon/surgicaldrill(src)
 	src.modules += new /obj/item/weapon/extinguisher/mini(src)
-	src.modules += new /obj/item/stack/medical/advanced/bruise_pack(src)
-	src.modules += new /obj/item/stack/nanopaste(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
+
+	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
+	synths += medicine
+
+	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
+	var/obj/item/stack/medical/advanced/bruise_pack/B = new /obj/item/stack/medical/advanced/bruise_pack(src)
+	N.uses_charge = 1
+	N.charge_cost = 1000
+	N.synth = medicine
+	B.uses_charge = 1
+	B.charge_cost = 1000
+	B.synth = medicine
+	src.modules += N
+	src.modules += B
+
 	return
 
-/obj/item/weapon/robot_module/surgeon/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2)
+		PS.reagents.add_reagent("pacid", 2 * amount)
 	..()
 
 /obj/item/weapon/robot_module/crisis
 	name = "crisis robot module"
-	stacktypes = list(
-		/obj/item/stack/medical/ointment = 5,
-		/obj/item/stack/medical/bruise_pack = 5,
-		/obj/item/stack/medical/splint = 5
-		)
 
 /obj/item/weapon/robot_module/crisis/New()
 	..()
@@ -132,9 +115,6 @@
 	src.modules += new /obj/item/device/healthanalyzer(src)
 	src.modules += new /obj/item/device/reagent_scanner/adv(src)
 	src.modules += new /obj/item/roller_holder(src)
-	src.modules += new /obj/item/stack/medical/ointment(src)
-	src.modules += new /obj/item/stack/medical/bruise_pack(src)
-	src.modules += new /obj/item/stack/medical/splint(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/crisis(src)
 	src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
@@ -143,9 +123,29 @@
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
 	src.emag.reagents.add_reagent("pacid", 250)
 	src.emag.name = "Polyacid spray"
+
+	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
+	synths += medicine
+
+	var/obj/item/stack/medical/ointment/O = new /obj/item/stack/medical/ointment(src)
+	var/obj/item/stack/medical/bruise_pack/B = new /obj/item/stack/medical/bruise_pack(src)
+	var/obj/item/stack/medical/splint/S = new /obj/item/stack/medical/splint(src)
+	O.uses_charge = 1
+	O.charge_cost = 1000
+	O.synth = medicine
+	B.uses_charge = 1
+	B.charge_cost = 1000
+	B.synth = medicine
+	S.uses_charge = 1
+	S.charge_cost = 1000
+	S.synth = medicine
+	src.modules += O
+	src.modules += B
+	src.modules += S
+
 	return
 
-/obj/item/weapon/robot_module/crisis/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/crisis/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 
 	var/obj/item/weapon/reagent_containers/syringe/S = locate() in src.modules
 	if(S.mode == 2)
@@ -156,19 +156,12 @@
 
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2)
+		PS.reagents.add_reagent("pacid", 2 * amount)
 
 	..()
 
 /obj/item/weapon/robot_module/construction
 	name = "construction robot module"
-
-	stacktypes = list(
-		/obj/item/stack/sheet/metal = 50,
-		/obj/item/stack/sheet/plasteel = 10,
-		/obj/item/stack/sheet/glass/reinforced = 50,
-		/obj/item/stack/rods = 50
-		)
 
 /obj/item/weapon/robot_module/construction/New()
 	..()
@@ -182,17 +175,32 @@
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
+	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass()
+	synths += metal
+	synths += plasteel
+	synths += glass
+
+	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
+	M.synth = metal
+	src.modules += M
+
+	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	R.synth = metal
+	src.modules += R
+
+	var/obj/item/stack/sheet/plasteel/cyborg/S = new /obj/item/stack/sheet/plasteel/cyborg(src)
+	S.synth = metal
+	src.modules += S
+
+	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
+	RG.metal_synth = metal
+	RG.glass_synth = glass
+	src.modules += R
+
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
-
-	stacktypes = list(
-		/obj/item/stack/sheet/metal = 50,
-		/obj/item/stack/sheet/glass = 50,
-		/obj/item/stack/sheet/glass/reinforced = 50,
-		/obj/item/stack/cable_coil/robot = 50,
-		/obj/item/stack/rods = 15,
-		/obj/item/stack/tile/plasteel = 15
-		)
 
 /obj/item/weapon/robot_module/engineering/New()
 	..()
@@ -212,6 +220,39 @@
 	src.modules += new /obj/item/weapon/matter_decompiler(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.emag = new /obj/item/borg/stun(src)
+
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(30000)
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(30000)
+	var/datum/matter_synth/wire = new /datum/matter_synth/wire()
+	synths += metal
+	synths += glass
+	synths += wire
+
+	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
+	M.synth = metal
+	src.modules += M
+
+	var/obj/item/stack/sheet/glass/cyborg/G = new /obj/item/stack/sheet/glass/cyborg(src)
+	G.synth = glass
+	src.modules += G
+
+	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	R.synth = metal
+	src.modules += R
+
+	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
+	C.synth = wire
+	src.modules += C
+
+	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	S.synth = metal
+	src.modules += S
+
+	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
+	RG.metal_synth = metal
+	RG.glass_synth = glass
+	src.modules += RG
+
 	return
 
 /obj/item/weapon/robot_module/security
@@ -228,7 +269,7 @@
 	src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 	return
 
-/obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/flash/F = locate() in src.modules
 	if(F.broken)
 		F.broken = 0
@@ -238,7 +279,7 @@
 		F.times_used--
 	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in src.modules
 	if(T.power_supply.charge < T.power_supply.maxcharge)
-		T.power_supply.give(T.charge_cost)
+		T.power_supply.give(T.charge_cost * amount)
 		T.update_icon()
 	else
 		T.charge_tick = 0
@@ -258,12 +299,12 @@
 	src.emag.name = "Lube spray"
 	return
 
-/obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
-	LR.Charge(R)
+	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent("lube", 2)
+		S.reagents.add_reagent("lube", 2 * amount)
 
 /obj/item/weapon/robot_module/butler
 	name = "service robot module"
@@ -327,12 +368,12 @@
 	R.add_language("Tradeband", 1)
 	R.add_language("Gutter", 1)
 
-/obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
-	E.reagents.add_reagent("enzyme", 2)
+	E.reagents.add_reagent("enzyme", 2 * amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/food/drinks/cans/beer/B = src.emag
-		B.reagents.add_reagent("beer2", 2)
+		B.reagents.add_reagent("beer2", 2 * amount)
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
@@ -392,17 +433,6 @@
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
-	stacktypes = list(
-		/obj/item/stack/sheet/wood = 1,
-		/obj/item/stack/sheet/mineral/plastic = 1,
-		/obj/item/stack/sheet/glass/reinforced = 5,
-		/obj/item/stack/tile/wood = 5,
-		/obj/item/stack/rods = 15,
-		/obj/item/stack/tile/plasteel = 15,
-		/obj/item/stack/sheet/metal = 20,
-		/obj/item/stack/sheet/glass = 20,
-		/obj/item/stack/cable_coil/robot = 30
-		)
 
 /obj/item/weapon/robot_module/drone/New()
 	..()
@@ -419,15 +449,63 @@
 	src.emag = new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.emag.name = "Plasma Cutter"
 
+	var/datum/matter_synth/metal = new /datum/matter_synth/metal(25000)
+	var/datum/matter_synth/glass = new /datum/matter_synth/glass(25000)
+	var/datum/matter_synth/wood = new /datum/matter_synth/wood(2000)
+	var/datum/matter_synth/plastic = new /datum/matter_synth/plastic(1000)
+	var/datum/matter_synth/wire = new /datum/matter_synth/wire(30)
+	synths += metal
+	synths += glass
+	synths += wood
+	synths += plastic
+	synths += wire
+
+	var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
+	M.synth = metal
+	src.modules += M
+
+	var/obj/item/stack/sheet/glass/cyborg/G = new /obj/item/stack/sheet/glass/cyborg(src)
+	G.synth = glass
+	src.modules += G
+
+	var/obj/item/stack/rods/cyborg/R = new /obj/item/stack/rods/cyborg(src)
+	R.synth = metal
+	src.modules += R
+
+	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
+	C.synth = wire
+	src.modules += C
+
+	var/obj/item/stack/tile/plasteel/cyborg/S = new /obj/item/stack/tile/plasteel/cyborg(src)
+	S.synth = metal
+	src.modules += S
+
+	var/obj/item/stack/sheet/glass/reinforced/cyborg/RG = new /obj/item/stack/sheet/glass/reinforced/cyborg(src)
+	RG.metal_synth = metal
+	RG.glass_synth = glass
+	src.modules += RG
+
+	var/obj/item/stack/tile/wood/cyborg/WT = new /obj/item/stack/tile/wood/cyborg(src)
+	WT.synth = wood
+	src.modules += WT
+
+	var/obj/item/stack/sheet/wood/cyborg/W = new /obj/item/stack/sheet/wood/cyborg(src)
+	W.synth = wood
+	src.modules += W
+
+	var/obj/item/stack/sheet/mineral/plastic/cyborg/P = new /obj/item/stack/sheet/mineral/plastic/cyborg(src)
+	P.synth = plastic
+	src.modules += P
+
 /obj/item/weapon/robot_module/drone/add_languages(var/mob/living/silicon/robot/R)
 	return	//not much ROM to spare in that tiny microprocessor!
 
-/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
+/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
-	C.reagents.add_reagent("cleaner", 3)
+	C.reagents.add_reagent("cleaner", 3 * amount)
 
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
-	LR.Charge(R)
+	LR.Charge(R, amount)
 
 	..()
 	return

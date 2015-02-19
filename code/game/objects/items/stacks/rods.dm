@@ -13,12 +13,21 @@
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
 
+/obj/item/stack/rods/cyborg
+	name = "metal rod synthesizer"
+	desc = "A device that makes metal rods."
+	gender = MALE
+	matter = null
+	uses_charge = 1
+	charge_cost = 500
+	stacktype = /obj/item/stack/rods
+
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 
-		if(amount < 2)
+		if(get_amount() < 2)
 			user << "\red You need at least two rods to do this."
 			return
 
@@ -54,7 +63,7 @@
 				return 1
 
 	else if(!in_use)
-		if(amount < 2)
+		if(get_amount() < 2)
 			user << "\blue You need at least two rods to do this."
 			return
 		usr << "\blue Assembling grille..."
