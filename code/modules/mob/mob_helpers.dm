@@ -80,6 +80,12 @@
 		return 1
 	return 0
 
+/mob/proc/isAI()
+	return 0
+
+/mob/living/silicon/ai/isAI()
+	return 1
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
