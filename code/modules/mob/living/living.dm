@@ -172,6 +172,12 @@
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
 
+/mob/living/get_descriptions_fluff()
+	if(flavor_text) //Get flavor text for the green text.
+		return flavor_text
+	else //No flavor text?  Try for hardcoded fluff instead.
+		return ..()
+
 /mob/proc/get_contents()
 
 

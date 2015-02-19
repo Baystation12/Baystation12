@@ -1239,7 +1239,7 @@
  		// Might need re-wording.
 		user << "<span class='alert'>There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into.</span>"
 
-/mob/living/carbon/human/print_flavor_text()
+/mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
 	var/head_exposed = 1
 	var/face_exposed = 1
@@ -1275,7 +1275,13 @@
 			if((T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
 				flavor_text += flavor_texts[T]
 				flavor_text += "\n\n"
-	return ..()
+	if(!shrink)
+		return flavor_text
+	else
+		return ..()
+
+/mob/living/carbon/human/get_descriptions_fluff()
+	return print_flavor_text(0)
 
 /mob/living/carbon/human/getDNA()
 	if(species.flags & NO_SCAN)
