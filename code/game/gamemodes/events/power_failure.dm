@@ -31,7 +31,8 @@
 		command_announcement.Announce("Station power will be restored at this time. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z in config.station_levels)
-			C.cell.charge = C.cell.maxcharge
+			spawn(1)
+				C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
 		var/area/current_area = get_area(S)
 		if(current_area.type in skipped_areas || isNotStationLevel(S.z))

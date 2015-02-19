@@ -158,12 +158,10 @@
 				if(PD.report_ready())
 					src.connected_parts.Add(PD)
 
+	attack_hand(mob/user as mob)
+		interact(user)
+
 	interact(mob/user)
-		var/assembled = 0
-
-		if(find_parts())
-			assembled = 1
-
 		if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
 			if(!istype(user, /mob/living/silicon))
 				user.unset_machine()
@@ -183,4 +181,23 @@
 
 		user << browse(dat, "window=pdcontrol;size=420x500")
 		onclose(user, "pdcontrol")
+		return
+
+	Topic(href, href_list)
+		..()
+		//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
+		if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
+			usr << browse(null, "window=pdcontrol")
+			usr.unset_machine()
+			return
+
+		if( href_list["close"] )
+			usr << browse(null, "window=pdcontrol")
+			usr.unset_machine()
+			return
+		else if(href_list["scan"])
+			src.check_parts()
+
+		src.updateDialog()
+		src.update_icon()
 		return

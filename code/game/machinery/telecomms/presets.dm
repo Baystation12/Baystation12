@@ -3,7 +3,7 @@
 //Relay
 
 /obj/machinery/telecomms/relay/preset
-	network = "tcommsat"
+	network = "tcomms"
 
 /obj/machinery/telecomms/relay/preset/station
 	id = "Station Relay"
@@ -38,14 +38,14 @@
 
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "science", "medical",
 	"supply", "service", "common", "command", "engineering", "security",
 	"receiverA", "receiverB", "broadcasterA", "broadcasterB")
 
 /obj/machinery/telecomms/hub/preset_cent
 	id = "CentComm Hub"
-	network = "tcommsat"
+	network = "tcomms"
 	produces_heat = 0
 	autolinkers = list("hub_cent", "c_relay", "s_relay", "m_relay", "r_relay",
 	 "centcomm", "receiverCent", "broadcasterCent")
@@ -56,7 +56,7 @@
 
 /obj/machinery/telecomms/receiver/preset_left
 	id = "Receiver A"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("receiverA") // link to relay
 	freq_listening = list(SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ) // science, medical, supply, service
 
@@ -65,7 +65,7 @@
 
 /obj/machinery/telecomms/receiver/preset_right
 	id = "Receiver B"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("receiverB") // link to relay
 	freq_listening = list(COMM_FREQ, ENG_FREQ, SEC_FREQ) //command, engineering, security
 
@@ -77,7 +77,7 @@
 
 /obj/machinery/telecomms/receiver/preset_cent
 	id = "CentComm Receiver"
-	network = "tcommsat"
+	network = "tcomms"
 	produces_heat = 0
 	autolinkers = list("receiverCent")
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
@@ -87,25 +87,25 @@
 
 /obj/machinery/telecomms/bus/preset_one
 	id = "Bus 1"
-	network = "tcommsat"
+	network = "tcomms"
 	freq_listening = list(SCI_FREQ, MED_FREQ)
 	autolinkers = list("processor1", "science", "medical")
 
 /obj/machinery/telecomms/bus/preset_two
 	id = "Bus 2"
-	network = "tcommsat"
+	network = "tcomms"
 	freq_listening = list(SUP_FREQ, SRV_FREQ)
 	autolinkers = list("processor2", "supply", "service")
 
 /obj/machinery/telecomms/bus/preset_three
 	id = "Bus 3"
-	network = "tcommsat"
+	network = "tcomms"
 	freq_listening = list(SEC_FREQ, COMM_FREQ)
 	autolinkers = list("processor3", "security", "command")
 
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
-	network = "tcommsat"
+	network = "tcomms"
 	freq_listening = list(ENG_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
 
@@ -116,7 +116,7 @@
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentComm Bus"
-	network = "tcommsat"
+	network = "tcomms"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
 	produces_heat = 0
 	autolinkers = list("processorCent", "centcomm")
@@ -125,27 +125,27 @@
 
 /obj/machinery/telecomms/processor/preset_one
 	id = "Processor 1"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("processor1") // processors are sort of isolated; they don't need backward links
 
 /obj/machinery/telecomms/processor/preset_two
 	id = "Processor 2"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("processor2")
 
 /obj/machinery/telecomms/processor/preset_three
 	id = "Processor 3"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("processor3")
 
 /obj/machinery/telecomms/processor/preset_four
 	id = "Processor 4"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("processor4")
 
 /obj/machinery/telecomms/processor/preset_cent
 	id = "CentComm Processor"
-	network = "tcommsat"
+	network = "tcomms"
 	produces_heat = 0
 	autolinkers = list("processorCent")
 
@@ -153,7 +153,7 @@
 
 /obj/machinery/telecomms/server/presets
 
-	network = "tcommsat"
+	network = "tcomms"
 
 /obj/machinery/telecomms/server/presets/science
 	id = "Science Server"
@@ -169,7 +169,7 @@
 	id = "Supply Server"
 	freq_listening = list(SUP_FREQ)
 	autolinkers = list("supply")
-	
+
 /obj/machinery/telecomms/server/presets/service
 	id = "Service Server"
 	freq_listening = list(SRV_FREQ)
@@ -215,18 +215,18 @@
 
 /obj/machinery/telecomms/broadcaster/preset_left
 	id = "Broadcaster A"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("broadcasterA")
 
 //--PRESET RIGHT--//
 
 /obj/machinery/telecomms/broadcaster/preset_right
 	id = "Broadcaster B"
-	network = "tcommsat"
+	network = "tcomms"
 	autolinkers = list("broadcasterB")
 
 /obj/machinery/telecomms/broadcaster/preset_cent
 	id = "CentComm Broadcaster"
-	network = "tcommsat"
+	network = "tcomms"
 	produces_heat = 0
 	autolinkers = list("broadcasterCent")

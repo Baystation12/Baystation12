@@ -451,7 +451,7 @@ datum/design/circuit/tcom/server
 	name = "server mainframe"
 	id = "tcom-server"
 	build_path = /obj/item/weapon/circuitboard/telecomms/server
-	
+
 datum/design/circuit/tcom/processor
 	name = "processor unit"
 	id = "tcom-processor"
@@ -861,7 +861,7 @@ datum/design/item/stock_part/super_matter_bin
 	build_path = /obj/item/weapon/stock_parts/matter_bin/super
 
 /////////////////////////////////////////
-//////////Tcommsat Stock Parts///////////
+//////////Tcomms Stock Parts///////////
 /////////////////////////////////////////
 
 datum/design/item/stock_part/subspace_ansible
@@ -1547,7 +1547,7 @@ datum/design/item/mesons
 	req_tech = list("magnets" = 2, "engineering" = 2)
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
-	
+
 datum/design/item/binaryencrypt
 	name = "Binary encryption key"
 	desc = "Allows for deciphering the binary channel on-the-fly."
