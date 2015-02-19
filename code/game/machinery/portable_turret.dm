@@ -733,7 +733,7 @@
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
 
-				if(istype(installation, /obj/item/weapon/gun/energy/laser/bluetag) || istype(installation, /obj/item/weapon/gun/energy/laser/redtag))
+				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
 					target_type = /obj/machinery/porta_turret/tag
 				else
 					target_type = /obj/machinery/porta_turret

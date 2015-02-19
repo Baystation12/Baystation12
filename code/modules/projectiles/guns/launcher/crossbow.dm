@@ -48,46 +48,43 @@
 /obj/item/weapon/gun/launcher/crossbow
 	name = "powered crossbow"
 	desc = "A 2557AD twist on an old classic. Pick up that can."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
-	ejectshell = 0                          // No spent shells.
-	mouthshoot = 1                          // No suiciding with this weapon, causes runtimes.
 	fire_sound_text = "a solid thunk"
 	fire_delay = 25
+	slot_flags = SLOT_BACK
 
+	var/obj/item/bolt
 	var/tension = 0                         // Current draw on the bow.
 	var/max_tension = 5                     // Highest possible tension.
 	var/release_speed = 5                   // Speed per unit of tension.
 	var/obj/item/weapon/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
 
-/obj/item/weapon/gun/launcher/crossbow/emp_act(severity)
-	if(cell && severity)
-		cell.use(100*severity)
-
-/obj/item/weapon/gun/launcher/crossbow/special_check(user)
-	if(tension <= 0)
-		user << "\red \The [src] is not drawn back!"
-		return 0
-	return 1
-
 /obj/item/weapon/gun/launcher/crossbow/update_release_force()
 	release_force = tension*release_speed
 
-/obj/item/weapon/gun/launcher/crossbow/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
+/obj/item/weapon/gun/launcher/crossbow/consume_next_projectile(mob/user=null)
+	if(tension <= 0)
+		user << "\red \The [src] is not drawn back!"
+		return null
+	return bolt
 
-	if(!..()) return //Only do this on a successful shot.
+/obj/item/weapon/gun/launcher/crossbow/handle_post_fire(mob/user, atom/target)
+	bolt = null
 	icon_state = "crossbow"
 	tension = 0
+	..()
 
 /obj/item/weapon/gun/launcher/crossbow/attack_self(mob/living/user as mob)
 	if(tension)
-		if(in_chamber && in_chamber.loc == src) //Just in case they click it the tick after firing.
-			user.visible_message("[user] relaxes the tension on [src]'s string and removes [in_chamber].","You relax the tension on [src]'s string and remove [in_chamber].")
-			in_chamber.loc = get_turf(src)
-			var/obj/item/weapon/arrow/A = in_chamber
-			in_chamber = null
+		if(bolt)
+			user.visible_message("[user] relaxes the tension on [src]'s string and removes [bolt].","You relax the tension on [src]'s string and remove [bolt].")
+			bolt.loc = get_turf(src)
+			var/obj/item/weapon/arrow/A = bolt
+			bolt = null
 			A.removed(user)
 		else
 			user.visible_message("[user] relaxes the tension on [src]'s string.","You relax the tension on [src]'s string.")
@@ -98,7 +95,7 @@
 
 /obj/item/weapon/gun/launcher/crossbow/proc/draw(var/mob/user as mob)
 
-	if(!in_chamber)
+	if(!bolt)
 		user << "You don't have anything nocked to [src]."
 		return
 
@@ -106,50 +103,57 @@
 		return
 
 	current_user = user
-	user.visible_message("[user] begins to draw back the string of [src].","You begin to draw back the string of [src].")
+	user.visible_message("[user] begins to draw back the string of [src].","<span class='notice'>You begin to draw back the string of [src].</span>")
 	tension = 1
-	spawn(25) increase_tension(user) //TODO: This needs to be changed to something less shit.
+	
+	while(bolt && tension && current_user == user)
+		if(!do_after(user, 25)) //crossbow strings don't just magically pull back on their own.
+			user.visible_message("[usr] stops drawing and relaxes the string of [src].","<span class='warning'>You stop drawing back and relax the string of [src].</span>")
+			tension = 0
+			icon_state = "crossbow"
+			return
+		
+		tension++
+		icon_state = "crossbow-drawn"
+
+		if(tension >= max_tension)
+			tension = max_tension
+			usr << "[src] clunks as you draw the string to its maximum tension!"
+			return
+		
+		user.visible_message("[usr] draws back the string of [src]!","<span class='notice'>You continue drawing back the string of [src]!</span>")
 
 /obj/item/weapon/gun/launcher/crossbow/proc/increase_tension(var/mob/user as mob)
 
-	if(!in_chamber || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
+	if(!bolt || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
 		return
 
-	tension++
-	icon_state = "crossbow-drawn"
-
-	if(tension>=max_tension)
-		tension = max_tension
-		usr << "[src] clunks as you draw the string to its maximum tension!"
-	else
-		user.visible_message("[usr] draws back the string of [src]!","You continue drawing back the string of [src]!")
-		spawn(25) increase_tension(user)
 
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W as obj, mob/user as mob)
-	if(!in_chamber)
+	if(!bolt)
 		if (istype(W,/obj/item/weapon/arrow))
 			user.drop_item()
-			in_chamber = W
-			in_chamber.loc = src
-			user.visible_message("[user] slides [in_chamber] into [src].","You slide [in_chamber] into [src].")
+			bolt = W
+			bolt.loc = src
+			user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
 			icon_state = "crossbow-nocked"
 			return
 		else if(istype(W,/obj/item/stack/rods))
 			var/obj/item/stack/rods/R = W
 			if (R.use(1))
-				in_chamber = new /obj/item/weapon/arrow/rod(src)
-				in_chamber.fingerprintslast = src.fingerprintslast
-				in_chamber.loc = src
+				bolt = new /obj/item/weapon/arrow/rod(src)
+				bolt.fingerprintslast = src.fingerprintslast
+				bolt.loc = src
 				icon_state = "crossbow-nocked"
-				user.visible_message("[user] jams [in_chamber] into [src].","You jam [in_chamber] into [src].")
+				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
 			return
 
 	if(istype(W, /obj/item/weapon/cell))
 		if(!cell)
 			user.drop_item()
-			W.loc = src
 			cell = W
+			cell.loc = src
 			user << "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>"
 			superheat_rod(user)
 		else
@@ -168,14 +172,14 @@
 		..()
 
 /obj/item/weapon/gun/launcher/crossbow/proc/superheat_rod(var/mob/user)
-	if(!user || !cell || !in_chamber) return
+	if(!user || !cell || !bolt) return
 	if(cell.charge < 500) return
-	if(in_chamber.throwforce >= 15) return
-	if(!istype(in_chamber,/obj/item/weapon/arrow/rod)) return
+	if(bolt.throwforce >= 15) return
+	if(!istype(bolt,/obj/item/weapon/arrow/rod)) return
 
-	user << "<span class='notice'>[in_chamber] plinks and crackles as it begins to glow red-hot.</span>"
-	in_chamber.throwforce = 15
-	in_chamber.icon_state = "metal-rod-superheated"
+	user << "<span class='notice'>[bolt] plinks and crackles as it begins to glow red-hot.</span>"
+	bolt.throwforce = 15
+	bolt.icon_state = "metal-rod-superheated"
 	cell.use(500)
 
 

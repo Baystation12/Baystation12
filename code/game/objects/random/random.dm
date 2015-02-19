@@ -114,6 +114,117 @@
 					prob(5);/obj/random/tool,\
 					prob(2);/obj/item/weapon/tape_roll)
 
+/obj/random/medical
+	name = "Random Medicine"
+	desc = "This is a random medical item."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "brutepack"
+	spawn_nothing_percentage = 25
+	item_to_spawn()
+		return pick(prob(4);/obj/item/stack/medical/bruise_pack,\
+					prob(4);/obj/item/stack/medical/ointment,\
+					prob(2);/obj/item/stack/medical/advanced/bruise_pack,\
+					prob(2);/obj/item/stack/medical/advanced/ointment,\
+					prob(1);/obj/item/stack/medical/splint,\
+					prob(2);/obj/item/bodybag,\
+					prob(1);/obj/item/bodybag/cryobag,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/kelotane,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/antitox,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/tramadol,\
+					prob(2);/obj/item/weapon/reagent_containers/syringe/antitoxin,\
+					prob(1);/obj/item/weapon/reagent_containers/syringe/antiviral,\
+					prob(2);/obj/item/weapon/reagent_containers/syringe/inaprovaline,\
+					prob(1);/obj/item/stack/nanopaste)
+
+
+/obj/random/firstaid
+	name = "Random First Aid Kit"
+	desc = "This is a random first aid kit."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "firstaid"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/storage/firstaid/regular,\
+					prob(2);/obj/item/weapon/storage/firstaid/toxin,\
+					prob(2);/obj/item/weapon/storage/firstaid/o2,\
+					prob(1);/obj/item/weapon/storage/firstaid/adv,\
+					prob(2);/obj/item/weapon/storage/firstaid/fire)
+
+
+/obj/random/contraband
+	name = "Random Illegal Item"
+	desc = "Hot Stuff."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "purplecomb"
+	spawn_nothing_percentage = 50
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/storage/pill_bottle/tramadol,\
+					prob(4);/obj/item/weapon/haircomb/fluff/cado_keppel_1,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/happy,\
+					prob(2);/obj/item/weapon/storage/pill_bottle/zoom,\
+					prob(5);/obj/item/weapon/contraband/poster,\
+					prob(2);/obj/item/weapon/butterfly,\
+					prob(3);/obj/item/butterflyblade,\
+					prob(3);/obj/item/butterflyhandle,\
+					prob(3);/obj/item/weapon/wirerod,\
+					prob(1);/obj/item/weapon/butterfly/switchblade,\
+					prob(1);/obj/item/weapon/reagent_containers/syringe/drugs)
+
+
+/obj/random/armory
+	name = "Random Armory Weapon"
+	desc = "This is a random security weapon."
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "energykill100"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/gun/projectile/shotgun/pump,\
+					prob(2);/obj/item/weapon/gun/energy/ionrifle,\
+					prob(2);/obj/item/weapon/gun/projectile/automatic/wt550,\
+					prob(1);/obj/item/weapon/gun/projectile/automatic/z8,\
+					prob(2);/obj/item/weapon/gun/energy/laser,\
+					prob(1);/obj/item/weapon/gun/energy/gun,\
+					prob(3);/obj/item/weapon/gun/projectile/sec,\
+					prob(2);/obj/item/weapon/gun/projectile/sec/wood,\
+					prob(3);/obj/item/weapon/gun/energy/taser,\
+					prob(1);/obj/item/weapon/gun/projectile/shotgun/pump/combat)
+
+
+/obj/random/ammo
+	name = "Random Ammunition"
+	desc = "This is random ammunition."
+	icon = 'icons/obj/ammo.dmi'
+	icon_state = "45-10"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/storage/box/beanbags,\
+					prob(1);/obj/item/weapon/storage/box/shotgunammo,\
+					prob(2);/obj/item/weapon/storage/box/shotgunshells,\
+					prob(2);/obj/item/weapon/storage/box/stunshells,\
+					prob(1);/obj/item/ammo_magazine/c45m,\
+					prob(2);/obj/item/ammo_magazine/c45m/rubber,\
+					prob(2);/obj/item/ammo_magazine/c45m/flash,\
+					prob(1);/obj/item/ammo_magazine/mc9mmt,\
+					prob(3);/obj/item/ammo_magazine/mc9mmt/rubber,\
+					prob(2);/obj/item/ammo_magazine/a556)
+
+
+
+/obj/random/armor
+	name = "Random Armor"
+	desc = "This is a random armor vest."
+	icon = 'icons/obj/clothing/suits.dmi'
+	icon_state = "kvest"
+	item_to_spawn()
+		return pick(prob(4);/obj/item/clothing/suit/storage/vest,\
+					prob(3);/obj/item/clothing/suit/storage/vest/officer,\
+					prob(3);/obj/item/clothing/suit/storage/vest/warden,\
+					prob(3);/obj/item/clothing/suit/storage/vest/hos,\
+					prob(2);/obj/item/clothing/suit/storage/vest/pcrc,\
+					prob(1);/obj/item/clothing/suit/storage/vest/detective,\
+					prob(2);/obj/item/clothing/suit/storage/vest/heavy,\
+					prob(2);/obj/item/clothing/suit/storage/vest/heavy/officer,\
+					prob(2);/obj/item/clothing/suit/storage/vest/heavy/warden,\
+					prob(2);/obj/item/clothing/suit/storage/vest/heavy/hos,\
+					prob(2);/obj/item/clothing/suit/storage/vest/heavy/pcrc)
+
 /obj/random/action_figure
 	name = "random action figure"
 	desc = "This is a random action figure."
@@ -173,3 +284,4 @@
 					/obj/item/toy/plushie/mouse,\
 					/obj/item/toy/plushie/kitten,\
 					/obj/item/toy/plushie/lizard)
+

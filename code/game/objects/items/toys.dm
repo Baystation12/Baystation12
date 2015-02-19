@@ -144,7 +144,7 @@
 	icon_state = "revolver"
 	item_state = "gun"
 	flags =  CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3.0
 
 	matter = list("glass" = 10,"metal" = 10)

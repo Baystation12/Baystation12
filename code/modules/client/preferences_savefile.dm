@@ -191,6 +191,11 @@
 
 	if(isnull(species) || !(species in playable_species))
 		species = "Human"
+	if(isnum(underwear))
+		var/list/undies = gender == MALE ? underwear_m : underwear_f
+		underwear = undies[undies[underwear]]
+	if(isnum(undershirt))
+		undershirt = undershirt_t[undershirt_t[undershirt]]
 
 	if(isnull(language)) language = "None"
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
