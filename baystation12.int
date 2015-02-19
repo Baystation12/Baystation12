@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\world.dm
+WINDOW: code\world.dm;code\controllers\master_controller.dm
 LAST_COMPILE_VERSION: 506.1249
-DIR: core 
-FILE: code\world.dm
-LAST_COMPILE_TIME: 1424287105
+DIR: code code\controllers 
+FILE: code\controllers\master_controller.dm
+LAST_COMPILE_TIME: 1424298094
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

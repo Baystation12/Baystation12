@@ -30,7 +30,6 @@ datum/controller/game_controller
 	var/total_cost		= 0
 
 	var/last_thing_processed
-	var/mob/list/expensive_mobs = list()
 
 	var/list/shuttle_list	                    // For debugging and VV
 	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
@@ -156,7 +155,8 @@ datum/controller/game_controller/proc/process()
 				if(!air_processing_killed)
 					timer = world.timeofday
 					last_thing_processed = air_master.type
-
+					air_master.Tick()
+					/*											Never seen this happen, would rather not bother checking every cycle
 					if(!air_master.Tick()) //Runtimed.
 						air_master.failed_ticks++
 						if(air_master.failed_ticks > 5)
@@ -166,6 +166,7 @@ datum/controller/game_controller/proc/process()
 							log_admin("ZASALERT: unable run zone/process() -- [air_master.tick_progress]")
 							air_processing_killed = 1
 							air_master.failed_ticks = 0
+					*/
 
 					air_cost = (world.timeofday - timer) / 10
 
@@ -251,30 +252,17 @@ datum/controller/game_controller/proc/process()
 				sleep(10)
 
 datum/controller/game_controller/proc/process_mobs()
-	var/i = 1
-	expensive_mobs.Cut()
-	while(i<=mob_list.len)
+	for(var/i = 1, i <= mob_list.len, i++)			//converted to for loop to speed up processing, removed "expensive mobs"
 		var/mob/M = mob_list[i]
-		if(M)
-			var/clock = world.timeofday
-			last_thing_processed = M.type
-			M.Life()
-			if((world.timeofday - clock) > 1)
-				expensive_mobs += M
-			i++
-			continue
+		last_thing_processed = M.type
+		M.Life()
+		continue
 		mob_list.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_diseases()
-	var/i = 1
-	while(i<=active_diseases.len)
-		var/datum/disease/Disease = active_diseases[i]
-		if(Disease)
-			last_thing_processed = Disease.type
-			Disease.process()
-			i++
-			continue
-		active_diseases.Cut(i,i+1)
+	for(var/datum/disease/Disease in active_diseases)
+		last_thing_processed = Disease.type
+		Disease.process()
 
 datum/controller/game_controller/proc/process_machines()
 	process_machines_sort()
@@ -287,38 +275,25 @@ datum/controller/game_controller/proc/process_machines_sort()
 		machines = dd_sortedObjectList(machines)
 
 datum/controller/game_controller/proc/process_machines_process()
-	for(var/obj/machinery/Machine in machines)
-		last_thing_processed = Machine.type
-		if(Machine.process() != PROCESS_KILL)
-			if(Machine)
-				Machine.power_change()
-				if(Machine.use_power)
-					Machine.auto_use_power()
-				continue
-		machines -= Machine
-
+	for(var/i = 1, i <= machines.len, i++)
+		var/obj/machinery/M = machines[i]
+		last_thing_processed = M.type
+		if(M.process() != PROCESS_KILL)
+			continue
+		machines.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_objects()
-	var/i = 1
-	while(i<=processing_objects.len)
+	for(var/i = 1, i <= processing_objects.len, i++)
 		var/obj/Object = processing_objects[i]
-		if(Object)
-			last_thing_processed = Object.type
-			Object.process()
-			i++
-			continue
+		last_thing_processed = Object.type
+		Object.process()
+		continue
 		processing_objects.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_pipenets()
 	last_thing_processed = /datum/pipe_network
-	var/i = 1
-	while(i<=pipe_networks.len)
-		var/datum/pipe_network/Network = pipe_networks[i]
-		if(Network)
-			Network.process()
-			i++
-			continue
-		pipe_networks.Cut(i,i+1)
+	for(var/datum/pipe_network/Network in pipe_networks)
+		Network.process()
 
 /datum/controller/game_controller/proc/process_powernets()
 	last_thing_processed = /datum/powernet
@@ -327,35 +302,24 @@ datum/controller/game_controller/proc/process_pipenets()
 
 datum/controller/game_controller/proc/process_nano()
 	last_thing_processed = /datum/nanoui
-	var/i = 1
-	while(i<=nanomanager.processing_uis.len)
-		var/datum/nanoui/ui = nanomanager.processing_uis[i]
-		if(ui)
-			ui.process()
-			i++
-			continue
-		nanomanager.processing_uis.Cut(i,i+1)
+	for(var/datum/nanoui/ui in nanomanager.processing_uis)
+		ui.process()
 
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event
 	event_manager.process()
 
 datum/controller/game_controller/proc/announcements()
-	var/announcement
-
 	if( controller_iteration % 300 == 0 )// Make an announcement every 10 minutes
-		announcement = pick("<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Come join our <a href='http://steamcommunity.com/groups/apcom'>steam group</a> for event notifications and for playing games outside of a space station!</font><br></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to check out our <a href='http://apollo-community.org/'>forums</a>. Many people post many important things there!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Be sure check out our <a href='https://github.com/stuicey/AS_Project/'>source repository</a>. We're always welcoming new developers, and we'd love you have you on board!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Got a little spare change jingling in your pockets? We'd love it if you <a href='http://apollo-community.org/viewtopic.php?f=29&t=34'>tossed it our way</a>!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Feel free to come and hop on our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a> and chat with us!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to read the <a href='http://apollo-community.org/viewtopic.php?f=4&t=6'>full rules</a>, otherwise you may get in trouble!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> We have community meetings every Saturday at 4 PM EST in our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a>. Got a problem? Bring it up there!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Enjoy the game, and have a great day!<br></font></b>",
-								"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Find a bug or exploit? Let us know on our <a href='https://github.com/stuicey/AS_Project/issues?q=is%3Aopen+is%3Aissue'>bugtracker</a>!<br></font></b>" )
-		world << "<br>"
-		world << announcement
-
+		world << pick(	"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Come join our <a href='http://steamcommunity.com/groups/apcom'>steam group</a> for event notifications and for playing games outside of a space station!</font><br></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to check out our <a href='http://apollo-community.org/'>forums</a>. Many people post many important things there!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Be sure check out our <a href='https://github.com/stuicey/AS_Project/'>source repository</a>. We're always welcoming new developers, and we'd love you have you on board!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Got a little spare change jingling in your pockets? We'd love it if you <a href='http://apollo-community.org/viewtopic.php?f=29&t=34'>tossed it our way</a>!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Feel free to come and hop on our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a> and chat with us!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Make sure to read the <a href='http://apollo-community.org/viewtopic.php?f=4&t=6'>full rules</a>, otherwise you may get in trouble!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> We have community meetings every Saturday at 4 PM EST in our <a href='http://apollo-community.org/viewforum.php?f=32'>teamspeak</a>. Got a problem? Bring it up there!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Enjoy the game, and have a great day!<br></font></b>",
+						"<font color='green'><big><img src=\ref['icons/misc/news.png']></img></big><b> Find a bug or exploit? Let us know on our <a href='https://github.com/stuicey/AS_Project/issues?q=is%3Aopen+is%3Aissue'>bugtracker</a>!<br></font></b>" )
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
