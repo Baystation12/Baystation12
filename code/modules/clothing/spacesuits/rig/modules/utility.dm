@@ -45,13 +45,13 @@
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit drill mount"
-	desc = "A very heavy diamond-tipped drill."
+	desc = "A very heavy mining drill."
 	interface_name = "mounted drill"
-	interface_desc = "A diamond-tipped industrial drill."
+	interface_desc = "An industrial mining drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
 
-	device_type = /obj/item/weapon/pickaxe/diamonddrill
+	/obj/item/weapon/pickaxe/drill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
