@@ -416,11 +416,25 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/armpit
-	display_name = "shoulder holster"
+	display_name = "holster, armpit"
 	path = /obj/item/clothing/accessory/holster/armpit
 	slot = slot_tie
 	cost = 2
-	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security")
+	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
+
+/datum/gear/hip
+	display_name = "holster, hip"
+	path = /obj/item/clothing/accessory/holster/hip
+	slot = slot_tie
+	cost = 2
+	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security", "Detective")
+
+/datum/gear/waist
+	display_name = "holster, waist"
+	path = /obj/item/clothing/accessory/holster/waist
+	slot = slot_tie
+	cost = 2
+	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security", "Detective")
 
 /datum/gear/tie_blue
 	display_name = "tie, blue"

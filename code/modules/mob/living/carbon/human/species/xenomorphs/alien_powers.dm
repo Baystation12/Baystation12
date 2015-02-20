@@ -209,5 +209,5 @@
 		if("resin membrane")
 			new /obj/effect/alien/resin/membrane(loc)
 		if("resin nest")
-			new /obj/structure/stool/bed/nest(loc)
+			new /obj/structure/bed/nest(loc)
 	return
