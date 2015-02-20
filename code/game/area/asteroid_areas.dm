@@ -115,6 +115,9 @@
 /area/outpost/research/isolation_c
 	name = "Research Outpost Isolation C"
 
+/area/outpost/research/isolation_monitoring
+	name = "Research Outpost Isolation Monitoring"
+
 /area/outpost/research/lab
 	name = "Research Outpost Laboratory"
 
